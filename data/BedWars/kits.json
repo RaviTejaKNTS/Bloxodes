@@ -1,0 +1,1668 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "BedWars",
+    "gameSlug": "bedwars",
+    "collection": "kits",
+    "route": "/wiki/bedwars/kits",
+    "catalogCode": "bedwars-kits",
+    "itemFields": [
+      "summary",
+      "price",
+      "specialItems"
+    ],
+    "columns": [
+      "summary",
+      "price",
+      "specialItems"
+    ],
+    "display": {
+      "groupLabel": "Kit class",
+      "sectionOrder": [
+        "Fighter",
+        "Ranged",
+        "Support",
+        "Economy",
+        "Defender",
+        "Destroyer",
+        "Tank",
+        "Other"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "price",
+        "specialItems"
+      ],
+      "tableFields": [
+        "price"
+      ],
+      "fieldPresentation": {
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "specialItems": {
+          "kind": "detail",
+          "label": "Special items",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Abaddon",
+        "summary": "Places Scarab Hives that periodically spawns scarabs to seek out and attack nearby enemies and beds.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "abaddon",
+        "section": "Fighter",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Adetunde",
+        "summary": "Start with a powerful Frost Hammer. Damaging people using the hammer has a chance to drop Frost Crystals which can be used to upgrade your hammer.",
+        "price": "399 Robux",
+        "specialItems": "Frosty Hammer Frost Crystal"
+      },
+      "system": {
+        "slug": "adetunde",
+        "section": "Fighter",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/adetunde.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aery",
+        "summary": "Killing enemies adds to your collection of spirit butterflies. Each spirit butterfly amplifies sword & projectile damage. Aery's base health is reduced by 10%.",
+        "price": null,
+        "specialItems": "Spirit Butterfly"
+      },
+      "system": {
+        "slug": "aery",
+        "section": "Fighter",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/aery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Agni",
+        "summary": "Throw cluster bombs at your enemies and watch them go flying! Blast off with your Rocket Boost ability.",
+        "price": "399 Robux",
+        "specialItems": "Cluster Bomb"
+      },
+      "system": {
+        "slug": "agni",
+        "section": "Fighter",
+        "sortOrder": 3,
+        "image": "/BedWars/Kits/agni.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barbarian",
+        "summary": "Build rage by damaging enemies. Instead of buying swords, your sword is upgraded upon reaching max rage. You lose half your rage upon death. Emerald Sword is replaced by the Rageblade.",
+        "price": "399 Robux",
+        "specialItems": "Rageblade"
+      },
+      "system": {
+        "slug": "barbarian",
+        "section": "Fighter",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/barbarian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Caitlyn",
+        "summary": "Fulfill assassination contracts to empower your attacks with a deadly decay.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "caitlyn",
+        "section": "Fighter",
+        "sortOrder": 5,
+        "image": "/BedWars/Kits/caitlyn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crocowolf",
+        "summary": "Being in the vicinity of damage dealt builds bloodlust. Activate Beast Form to temporarily give you enhanced damage, knockback, and movement speed. Dealing damage to non-player entities builds more bloodlust. When your bed breaks you will be given full bloodlust.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "crocowolf",
+        "section": "Fighter",
+        "sortOrder": 6,
+        "image": "/BedWars/Kits/crocowolf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crypt",
+        "summary": "Claim souls to build your undead army! Could be unlocked for FREE by completing Crypt's Trials during the Halloween 2022 event.",
+        "price": "399 Robux",
+        "specialItems": "Necromancer Staff Gravestone"
+      },
+      "system": {
+        "slug": "crypt",
+        "section": "Fighter",
+        "sortOrder": 7,
+        "image": "/BedWars/Kits/crypt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eldric",
+        "summary": "Drain health from enemies or sacrifice your health to heal allies. Could be unlocked for FREE by completing Crypt's Coven during the Halloween 2023 event.",
+        "price": "399 Robux",
+        "specialItems": "Warlock Staff"
+      },
+      "system": {
+        "slug": "eldric",
+        "section": "Fighter",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ember",
+        "summary": "Charge the Blade of Fire to ignite in a deadly spin! Striking enemies OR killing Lumen will upgrade your ability to a much more powerful spin.",
+        "price": "799 Robux",
+        "specialItems": "Infernal Saber"
+      },
+      "system": {
+        "slug": "ember",
+        "section": "Fighter",
+        "sortOrder": 9,
+        "image": "/BedWars/Kits/ember.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evelynn",
+        "summary": "Damage enemies to attract nearby spirits. Consume spirits to instantly teleport and gain an attack buff for a short duration.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "evelynn",
+        "section": "Fighter",
+        "sortOrder": 10,
+        "image": "/BedWars/Kits/evelynn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fortuna",
+        "summary": "Summon cards to attack players! Deal damage to enhance your cards with different effects.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "fortuna",
+        "section": "Fighter",
+        "sortOrder": 11,
+        "image": "/BedWars/Kits/fortuna.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Freiya",
+        "summary": "Dealing damage will apply stacks of Frost. At four stacks, Frost is consumed and applies Frostbite to the target, making them fragile. Emerald Sword is replaced by the Ice Sword, which applies two stacks per hit. Use your Frost Explosion ability to immediately deal damage to nearby targets with stacks of Frost.",
+        "price": "399 Robux",
+        "specialItems": "Ice Sword"
+      },
+      "system": {
+        "slug": "freiya",
+        "section": "Fighter",
+        "sortOrder": 12,
+        "image": "/BedWars/Kits/freiya.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grim Reaper",
+        "summary": "Consuming enemy souls grants health regen, movespeed and invulnerability for 2.5s. Combat is disabled while consuming.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "grim-reaper",
+        "section": "Fighter",
+        "sortOrder": 13,
+        "image": "/BedWars/Kits/grim-reaper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hannah",
+        "summary": "Activate your Execute ability to defeat a nearby enemy with low health! Hannah's base health is reduced by 10%.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "hannah",
+        "section": "Fighter",
+        "sortOrder": 14,
+        "image": "/BedWars/Kits/hannah.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Isabel",
+        "summary": "Upgrade her shield by purchasing better swords. Each upgraded shield will block more damage before breaking. The final upgrade, the Emerald Shield, will block all damage from the first hit. Shields reactivate after 30 [sic] seconds.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "isabel",
+        "section": "Fighter",
+        "sortOrder": 15,
+        "image": "/BedWars/Kits/isabel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kaida",
+        "summary": "Summon a powerful dragon's claw to swipe multiple enemies at once, or summon a dragon head through a rune below you to damage all surrounding enemies. Upgrade your claw and summon attack by damaging enemies with your summon spell.",
+        "price": "399 Robux",
+        "specialItems": "Summoner Claw"
+      },
+      "system": {
+        "slug": "kaida",
+        "section": "Fighter",
+        "sortOrder": 16,
+        "image": "/BedWars/Kits/kaida.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kaliyah",
+        "summary": "A fearsome warrior with a fiery punch!",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "kaliyah",
+        "section": "Fighter",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lassy",
+        "summary": "Wrangle enemies towards you using a lasso.",
+        "price": "399 Robux",
+        "specialItems": "Lasso"
+      },
+      "system": {
+        "slug": "lassy",
+        "section": "Fighter",
+        "sortOrder": 18,
+        "image": "/BedWars/Kits/lassy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lian",
+        "summary": "A mysterious warrior gifted by the dragon. Control swords to fight your enemy",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "lian",
+        "section": "Fighter",
+        "sortOrder": 19,
+        "image": "/BedWars/Kits/lian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lumen",
+        "summary": "Charge the Sword of Light to shoot powerful waves at enemies! Hitting light waves OR killing Ember will upgrade your ability to shoot many powerful beams at once.",
+        "price": "799 Robux",
+        "specialItems": "Light Sword"
+      },
+      "system": {
+        "slug": "lumen",
+        "section": "Fighter",
+        "sortOrder": 20,
+        "image": "/BedWars/Kits/lumen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nazar",
+        "summary": "Give up out-of-combat health regeneration to manipulate your life force and empower your attacks or heal. Gain life force by landing shots with life arrows and attacking.",
+        "price": "399 Robux",
+        "specialItems": "Life Headhunter Life Crossbow Life Bow"
+      },
+      "system": {
+        "slug": "nazar",
+        "section": "Fighter",
+        "sortOrder": 21,
+        "image": "/BedWars/Kits/nazar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nyx",
+        "summary": "Trigger the darkness of Midnight to deal ramping increased damage and armor pen.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "nyx",
+        "section": "Fighter",
+        "sortOrder": 22,
+        "image": "/BedWars/Kits/nyx.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pyro",
+        "summary": "Use your flamethrower to spray fire, making enemies brittle, and taking more damage from attacks. Killing brittle enemies rewards ember, which you can use to upgrade your flamethrower.",
+        "price": null,
+        "specialItems": "Flamethrower Ember"
+      },
+      "system": {
+        "slug": "pyro",
+        "section": "Fighter",
+        "sortOrder": 23,
+        "image": "/BedWars/Kits/pyro.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ramil",
+        "summary": "Create sandstorms to control the battlefield, move enemies, and protect allies.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "ramil",
+        "section": "Fighter",
+        "sortOrder": 24,
+        "image": "/BedWars/Kits/ramil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sheep Herder",
+        "summary": "Find and tame wild sheep around the map. Each tamed sheep amplifies your damage.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "sheep-herder",
+        "section": "Fighter",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sheila",
+        "summary": "Start the game with an egg on your shoulder. Get kills to hatch and evolve your Seahorse, increasing its damage and unlocking passive abilities. Part of the 2022 Holiday Bundle.",
+        "price": "1499 Robux",
+        "specialItems": "Seahorse"
+      },
+      "system": {
+        "slug": "sheila",
+        "section": "Fighter",
+        "sortOrder": 26,
+        "image": "/BedWars/Kits/sheila.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skoll",
+        "summary": "Summon your void wolf companion Fenrir to mark an enemy. Deal extra damage to your marked target, gain a speed boost when following their trail, and see them through walls. You can detonate the mark to end the effect and deal damage.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "skoll",
+        "section": "Fighter",
+        "sortOrder": 27,
+        "image": "/BedWars/Kits/skoll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Terra",
+        "summary": "Stomp the ground to gather protective blocks, then kick them at your enemies. Each successful hit permanently increases kick damage!",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "terra",
+        "section": "Fighter",
+        "sortOrder": 28,
+        "image": "/BedWars/Kits/terra.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trixie",
+        "summary": "Warp around and confuse your enemies with evasive combat. Every time you use Rift Warp you gain a buff that allows you to reduce Rift Warp's cooldown with melee attacks. You can also use Rift Rewind to teleport back to your last warp point.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "trixie",
+        "section": "Fighter",
+        "sortOrder": 29,
+        "image": "/BedWars/Kits/trixie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Knight",
+        "summary": "Feed your Void Corruption with resources and kills to upgrade your gear and unlock your abilities of Void Decay and Shielding. With enough resources, unlock the full power of the Void and become the Ascended Void Knight. Void Knight's base health is reduced by 10%.",
+        "price": "399 Robux",
+        "specialItems": "Noctium Gear"
+      },
+      "system": {
+        "slug": "void-knight",
+        "section": "Fighter",
+        "sortOrder": 30,
+        "image": "/BedWars/Kits/void-knight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whim",
+        "summary": "Master arcane secrets to unlock elemental powers! Spawn with a magic spellbook. Deal 20% reduced damage with swords and take 10% increased damage from all sources.",
+        "price": null,
+        "specialItems": "Mage Spellbook Tome of the Elements"
+      },
+      "system": {
+        "slug": "whim",
+        "section": "Fighter",
+        "sortOrder": 31,
+        "image": "/BedWars/Kits/whim.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Xu'rot",
+        "summary": "Transform into Dragon Form, unlocking a decaying dragon breath and the ability to fly. Items can't be used while in dragon form and damage scales with the highest tier sword obtained.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "xu-rot",
+        "section": "Fighter",
+        "sortOrder": 32,
+        "image": "/BedWars/Kits/xu-rot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zarrah",
+        "summary": "Wields a Cutlass and Blunderbuss. Ability fires the Blunderbuss, damaging and marking enemies ahead while knocking you back. Melee hits on marked foes reset cooldown, cause bleeding, and grant a speed boost.",
+        "price": "399 Robux",
+        "specialItems": "Cutlass & Blunderbuss"
+      },
+      "system": {
+        "slug": "zarrah",
+        "section": "Fighter",
+        "sortOrder": 33,
+        "image": "/BedWars/Kits/zarrah.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Archer",
+        "summary": "Can headshot with any projectile! Deal 12.5% more projectile damage and gain access to the Tactical Crossbow in the Item Shop.",
+        "price": "399 Robux",
+        "specialItems": "Tactical Crossbow Tactical Headhunter"
+      },
+      "system": {
+        "slug": "archer",
+        "section": "Ranged",
+        "sortOrder": 0,
+        "image": "/BedWars/Kits/archer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ares",
+        "summary": "A powerful ancient warrior that uses electric-charged throwing spears to destroy his enemies.",
+        "price": null,
+        "specialItems": "Spear"
+      },
+      "system": {
+        "slug": "ares",
+        "section": "Ranged",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/ares.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bekzat",
+        "summary": "Summon a mythical falcon to dominate an area. Work in tandem to critically strike your companion's target with your feather light bows",
+        "price": "399 Robux",
+        "specialItems": "Falcon Featherlight Headhunter Featherlight Crossbow Featherlight Bow"
+      },
+      "system": {
+        "slug": "bekzat",
+        "section": "Ranged",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/bekzat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frosty",
+        "summary": "Passively create Frosted Snowballs for free. Frosted Snowballs are faster and larger.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "frosty",
+        "section": "Ranged",
+        "sortOrder": 3,
+        "image": "/BedWars/Kits/frosty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gompy",
+        "summary": "Gompy the Ghost Hunter! Find ghosts around the map, vacuum them and fire them across the map.",
+        "price": null,
+        "specialItems": "Vacuum Ghost"
+      },
+      "system": {
+        "slug": "gompy",
+        "section": "Ranged",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/gompy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack",
+        "summary": "Lob bundles of poisonous pumpkin oil across the map.",
+        "price": "599 Robux",
+        "specialItems": "Oil Blob Fire Match"
+      },
+      "system": {
+        "slug": "jack",
+        "section": "Ranged",
+        "sortOrder": 5,
+        "image": "/BedWars/Kits/jack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lyla",
+        "summary": "Your bow is replaced with the Floral Bow! Shooting an enemy twice will bloom a flower on their head, attracting a swarm of bees!",
+        "price": "399 Robux",
+        "specialItems": "Floral Headhunter Floral Crossbow Floral Bow"
+      },
+      "system": {
+        "slug": "lyla",
+        "section": "Ranged",
+        "sortOrder": 6,
+        "image": "/BedWars/Kits/lyla.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven",
+        "summary": "Buy ravens and fly at enemies to deliver deadly doses of poison.",
+        "price": null,
+        "specialItems": "Ravens"
+      },
+      "system": {
+        "slug": "raven",
+        "section": "Ranged",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Catcher",
+        "summary": "Purchase spirits from the Item Shop and place them around the map. Spirits will chase down and explode nearby enemies.",
+        "price": null,
+        "specialItems": "Spirits"
+      },
+      "system": {
+        "slug": "spirit-catcher",
+        "section": "Ranged",
+        "sortOrder": 8,
+        "image": "/BedWars/Kits/spirit-catcher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uma",
+        "summary": "Summon creatures from the spirit world to assist you in combat, healing, and resource collecting!",
+        "price": "399 Robux",
+        "specialItems": "Summon Stone Spirit Staff"
+      },
+      "system": {
+        "slug": "uma",
+        "section": "Ranged",
+        "sortOrder": 9,
+        "image": "/BedWars/Kits/uma.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Umeko",
+        "summary": "Use chakrams to fight at mid-range. You can turn invisible and escape from battle if you get attacked by a melee attack.",
+        "price": null,
+        "specialItems": "Chakram"
+      },
+      "system": {
+        "slug": "umeko",
+        "section": "Ranged",
+        "sortOrder": 10,
+        "image": "/BedWars/Kits/umeko.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vanessa",
+        "summary": "Super charge your bow to perform a triple shot.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "vanessa",
+        "section": "Ranged",
+        "sortOrder": 11,
+        "image": "/BedWars/Kits/vanessa.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wizard",
+        "summary": "Use a magical staff to cast lightning strikes and electricity orbs.",
+        "price": "399 Robux",
+        "specialItems": "Wizard Staff"
+      },
+      "system": {
+        "slug": "wizard",
+        "section": "Ranged",
+        "sortOrder": 12,
+        "image": "/BedWars/Kits/wizard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zeno",
+        "summary": "Use a magical staff to cast lightning spells.",
+        "price": "399 Robux",
+        "specialItems": "Wizard Staff Magic Wand"
+      },
+      "system": {
+        "slug": "zeno",
+        "section": "Ranged",
+        "sortOrder": 13,
+        "image": "/BedWars/Kits/zeno.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alchemist",
+        "summary": "Use flasks to brew various potions with foraged ingredients.",
+        "price": null,
+        "specialItems": "Alchemist Flask Mushroom Thorn Flower Sleep Splash Potion Heal Potion Poison Potion Big Shield"
+      },
+      "system": {
+        "slug": "alchemist",
+        "section": "Support",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Axolotl Amy",
+        "summary": "Use your pet axolotls to empower yourself and nearby teammates with shields, increased attack damage, faster break speed and health regen.",
+        "price": "399 Robux",
+        "specialItems": "Axolotl"
+      },
+      "system": {
+        "slug": "axolotl-amy",
+        "section": "Support",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/axolotl-amy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Baker",
+        "summary": "Gain access to health-gain apples, speed-boost pies, and spawn with a knockback baguette!",
+        "price": "399 Robux",
+        "specialItems": "Health Apple Speed Pie Golden Apple Knockback Baguette"
+      },
+      "system": {
+        "slug": "baker",
+        "section": "Support",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/baker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Conqueror",
+        "summary": "Place banners to empower nearby allies.",
+        "price": null,
+        "specialItems": "Heal Banner Defense Banner Fire Banner"
+      },
+      "system": {
+        "slug": "conqueror",
+        "section": "Support",
+        "sortOrder": 3,
+        "image": "/BedWars/Kits/conqueror.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Man",
+        "summary": "Place gumdrops bounce pads for extreme movement. Using a gumdrop bounce pad negates all fall damage and grants a shield.",
+        "price": null,
+        "specialItems": "Gumdrop Bounce Pad"
+      },
+      "system": {
+        "slug": "gingerbread-man",
+        "section": "Support",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/gingerbread-man.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ignis",
+        "summary": "Use a spirit bridge to travel around the map healing your allies and providing them with armor buffs.",
+        "price": null,
+        "specialItems": "Spirit Bridge"
+      },
+      "system": {
+        "slug": "ignis",
+        "section": "Support",
+        "sortOrder": 5,
+        "image": "/BedWars/Kits/ignis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lani",
+        "summary": "An ascended healer, Lani can purchase the Scepter of Light. Use this Scepter to fly to your low health allies, providing healing and damage reduction!",
+        "price": null,
+        "specialItems": "Scepter of Light"
+      },
+      "system": {
+        "slug": "lani",
+        "section": "Support",
+        "sortOrder": 6,
+        "image": "/BedWars/Kits/lani.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Melody",
+        "summary": "Use a guitar and the power of music to heal nearby teammates. Heal yourself for 50% [sic] of the heal given.",
+        "price": "399 Robux",
+        "specialItems": "Guitar"
+      },
+      "system": {
+        "slug": "melody",
+        "section": "Support",
+        "sortOrder": 7,
+        "image": "/BedWars/Kits/melody.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nahla",
+        "summary": "Use water veil to temporally boost the health regen of nearby allies. Purchase upgrades for your oasis vessel to strengthen your healing and buffing abilities!",
+        "price": "399 Robux",
+        "specialItems": "[https://robloxbedwars.fandom.com/wiki/Oasis_Vessel Oasis Vessel]"
+      },
+      "system": {
+        "slug": "nahla",
+        "section": "Support",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Noelle",
+        "summary": "Tame slimes to befriend your team, providing your teammates with unique buffs that strengthen over time!",
+        "price": null,
+        "specialItems": "Slime Slime Flute"
+      },
+      "system": {
+        "slug": "noelle",
+        "section": "Support",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nyoka",
+        "summary": "Charge your Mending Canopy to shine healing light on your allies.",
+        "price": "399 Robux",
+        "specialItems": "Mending Canopy"
+      },
+      "system": {
+        "slug": "nyoka",
+        "section": "Support",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Silas",
+        "summary": "The leader of the citizens' rebellion, who encourages and buffs his allies with healing and damage auras!",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "silas",
+        "section": "Support",
+        "sortOrder": 11,
+        "image": "/BedWars/Kits/silas.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Collector Stella",
+        "summary": "Pick up floating stars around the map. Consume them while near teammates to share permanent Max Health and Critical Strike chance!",
+        "price": null,
+        "specialItems": "Vitality Star Crit Star"
+      },
+      "system": {
+        "slug": "star-collector-stella",
+        "section": "Support",
+        "sortOrder": 12,
+        "image": "/BedWars/Kits/star-collector-stella.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trinity",
+        "summary": "Ascend into an angelic form and switch freely between Light and Void. When you melee attack, Light form grants shield for you and allies, and Void form inflicts max health decay on your target.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "trinity",
+        "section": "Support",
+        "sortOrder": 13,
+        "image": "/BedWars/Kits/trinity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Umbra",
+        "summary": "Toss a hat onto other players to gain the ability to teleport to them from anywhere on the map. Ally players near the target destination are given boosted movement speed and several seconds of invulnerability while enemy players are knocked back and briefly slowed.",
+        "price": null,
+        "specialItems": "Teleport Hat"
+      },
+      "system": {
+        "slug": "umbra",
+        "section": "Support",
+        "sortOrder": 14,
+        "image": "/BedWars/Kits/umbra.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whisper",
+        "summary": "Control a Spirit Owl to support ally players. Unlocked at Player Level 10.",
+        "price": null,
+        "specialItems": "Spirit Owl"
+      },
+      "system": {
+        "slug": "whisper",
+        "section": "Support",
+        "sortOrder": 15,
+        "image": "/BedWars/Kits/whisper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zola",
+        "summary": "Connect enemies with soul links! Damage dealt to linked enemies incurs bonus damage to any other linked enemies. Allies can also be linked, allowing you to take damage in their place.",
+        "price": "479 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "zola",
+        "section": "Support",
+        "sortOrder": 16,
+        "image": "/BedWars/Kits/zola.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beekeeper Beatrix",
+        "summary": "Catch bees around the map to upgrade your Bee Hive. Upgrading your Bee Hive will return additional iron and emeralds.",
+        "price": "599 Robux",
+        "specialItems": "Bee Beehive Bee Net"
+      },
+      "system": {
+        "slug": "beekeeper-beatrix",
+        "section": "Economy",
+        "sortOrder": 0,
+        "image": "/BedWars/Kits/beekeeper-beatrix.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bounty Hunter",
+        "summary": "Get assigned bounties for killing certain players in the match. Completing a bounty rewards a random amount of resources.",
+        "price": "999 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "bounty-hunter",
+        "section": "Economy",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/bounty-hunter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cogsworth",
+        "summary": "Deploy robots that search for generators and collect resources!",
+        "price": null,
+        "specialItems": "Dimmy-X1 Emmy-Z2"
+      },
+      "system": {
+        "slug": "cogsworth",
+        "section": "Economy",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/cogsworth.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cyber",
+        "summary": "Deploy and control drones to pickup resources from around the map. Drones can also airdrop primed TNT.",
+        "price": "399 Robux",
+        "specialItems": "Drone"
+      },
+      "system": {
+        "slug": "cyber",
+        "section": "Economy",
+        "sortOrder": 3,
+        "image": "/BedWars/Kits/cyber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drill",
+        "summary": "Purchase Drills to deploy on Diamond and Emerald generators. Drills automatically harvest 2x gen resources. Control them to fight off attackers.",
+        "price": null,
+        "specialItems": "Drill"
+      },
+      "system": {
+        "slug": "drill",
+        "section": "Economy",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/drill.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Farmer Cletus",
+        "summary": "Invest your resources into crops that yield more diamonds and emeralds.",
+        "price": "399 Robux",
+        "specialItems": "Melon Seeds Carrot Seeds Pumpkin Seeds"
+      },
+      "system": {
+        "slug": "farmer-cletus",
+        "section": "Economy",
+        "sortOrder": 5,
+        "image": "/BedWars/Kits/farmer-cletus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisherman",
+        "summary": "Why fight when you can fish?",
+        "price": null,
+        "specialItems": "Fishing Rod Coral Block Charge Shield Rocket Launcher"
+      },
+      "system": {
+        "slug": "fisherman",
+        "section": "Economy",
+        "sortOrder": 6,
+        "image": "/BedWars/Kits/fisherman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grove",
+        "summary": "Purchase seeds and grow them into flowers that buff allies and enhance generator production. Keep your flowers alive by providing them with spirit energy gathered around the map to prevent them from withering.",
+        "price": "399 Robux",
+        "specialItems": "Crystalheart Seed Soulvine Seed Tearbloom Seed"
+      },
+      "system": {
+        "slug": "grove",
+        "section": "Economy",
+        "sortOrder": 7,
+        "image": "/BedWars/Kits/grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucía",
+        "summary": "Use the candy you get from damaging players to fill up your piñata. When you're ready, smash it for lots of loot!",
+        "price": null,
+        "specialItems": "Piñata Candy"
+      },
+      "system": {
+        "slug": "luc-a",
+        "section": "Economy",
+        "sortOrder": 8,
+        "image": "/BedWars/Kits/luc-a.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Merchant Marco",
+        "summary": "Get resources back on certain item shop purchases! This refund is randomized each game!",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "merchant-marco",
+        "section": "Economy",
+        "sortOrder": 9,
+        "image": "/BedWars/Kits/merchant-marco.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Metal Detector",
+        "summary": "Use a Metal Detector to find treasure around the map.",
+        "price": null,
+        "specialItems": "Metal Detector"
+      },
+      "system": {
+        "slug": "metal-detector",
+        "section": "Economy",
+        "sortOrder": 10,
+        "image": "/BedWars/Kits/metal-detector.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Milo",
+        "summary": "Disguise as a block and pickpocket from other players!",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "milo",
+        "section": "Economy",
+        "sortOrder": 11,
+        "image": "/BedWars/Kits/milo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Miner",
+        "summary": "Killing enemies turns them into stone. The Miner can break down the stone for valuables[sic] resources (scaled by the price of enemy's armor + sword). Unable to purchase Axes.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "miner",
+        "section": "Economy",
+        "sortOrder": 12,
+        "image": "/BedWars/Kits/miner.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Taliyah",
+        "summary": "Buy eggs & hatch them into chickens! Chickens can either be sold back to the merchant or deployed in combat!",
+        "price": null,
+        "specialItems": "Egg Chicken"
+      },
+      "system": {
+        "slug": "taliyah",
+        "section": "Economy",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wren",
+        "summary": "Summon a secret black market offering powerful potions and random deals. Earn a cut from every sale, and use shadow coins gathered from fallen players to upgrade your shop.",
+        "price": "399 Robux",
+        "specialItems": "Fury Potion Serpent's Touch Shadow Coin"
+      },
+      "system": {
+        "slug": "wren",
+        "section": "Economy",
+        "sortOrder": 14,
+        "image": "/BedWars/Kits/wren.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zenith",
+        "summary": "Deploy a satellite to disrupt enemy team economies. Enemy shop prices are increased and you get a cut of each purchase!",
+        "price": "399 Robux",
+        "specialItems": "Satellite Dish"
+      },
+      "system": {
+        "slug": "zenith",
+        "section": "Economy",
+        "sortOrder": 15,
+        "image": "/BedWars/Kits/zenith.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Builder",
+        "summary": "Fortify blocks with extra health and blast protection using the Builder's hammer. Purchase the Hammer from the Item Shop.",
+        "price": "399 Robux",
+        "specialItems": "Hammer Bridge Printer Block"
+      },
+      "system": {
+        "slug": "builder",
+        "section": "Defender",
+        "sortOrder": 0,
+        "image": "/BedWars/Kits/builder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marcel",
+        "summary": "Use your Defense Scanner to instantly purchase blocks in the Defense Schematic shown around your team's bed. Can place two Tesla Traps.",
+        "price": null,
+        "specialItems": "Defense Scanner"
+      },
+      "system": {
+        "slug": "marcel",
+        "section": "Defender",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/marcel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marina",
+        "summary": "Deploy jellyfish and electrify them with your Electric Pulse ability, causing them to zap nearby enemies. Connect jellyfish to increase the range and power of your ability.",
+        "price": "399 Robux",
+        "specialItems": "Jellyfish"
+      },
+      "system": {
+        "slug": "marina",
+        "section": "Defender",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/marina.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trapper",
+        "summary": "Place Snap Traps to stun unexpecting enemies, Damaging a recently trapped enemy will consume a mark dealing extra damage.",
+        "price": null,
+        "specialItems": "Snap Trap"
+      },
+      "system": {
+        "slug": "trapper",
+        "section": "Defender",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vulcan",
+        "summary": "Use a high tech tablet to control camera turrets across the map. While holding the tablet, mark enemies or link to your turrets' view.",
+        "price": "399 Robux",
+        "specialItems": "Tablet Camera Turret"
+      },
+      "system": {
+        "slug": "vulcan",
+        "section": "Defender",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/vulcan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Death Adder",
+        "summary": "Charge up explosive comets to rain destruction on your enemy's base. Collect alchemy crystals to unlock even stronger abilities!",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "death-adder",
+        "section": "Destroyer",
+        "sortOrder": 0,
+        "image": "/BedWars/Kits/death-adder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dino Tamer Dom",
+        "summary": "Can purchase a Dino mount. Charge into defenses to knock them down!",
+        "price": null,
+        "specialItems": "Dino"
+      },
+      "system": {
+        "slug": "dino-tamer-dom",
+        "section": "Destroyer",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/dino-tamer-dom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Davey",
+        "summary": "Use a TNT Cannon to bombard your enemies.",
+        "price": "399 Robux",
+        "specialItems": "Cannon"
+      },
+      "system": {
+        "slug": "pirate-davey",
+        "section": "Destroyer",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/pirate-davey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ragnar",
+        "summary": "Use your Berserker Rage ability to increase break speed, reduce incoming damage and prevent incoming knockback to rush in on an enemy's bed defense.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "ragnar",
+        "section": "Destroyer",
+        "sortOrder": 3,
+        "image": "/BedWars/Kits/ragnar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa",
+        "summary": "Play as Santa and call in high-explosive sleigh strafe runs!",
+        "price": null,
+        "specialItems": "Santa Strafe Santa Siege"
+      },
+      "system": {
+        "slug": "santa",
+        "section": "Destroyer",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/santa.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Smoke",
+        "summary": "A stealth-focused kit that uses smoke charges to grant invisibility.",
+        "price": null,
+        "specialItems": "Smoke Bomb Smoke Block"
+      },
+      "system": {
+        "slug": "smoke",
+        "section": "Destroyer",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Warden",
+        "summary": "Imprison the souls of recently killed enemies to increase their respawn time. For each actively imprisoned soul you gain Break Speed and Shield Regeneration.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "warden",
+        "section": "Destroyer",
+        "sortOrder": 6,
+        "image": "/BedWars/Kits/warden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yeti",
+        "summary": "Let out a Glacier Roar to temporarily freeze nearby blocks. Frozen blocks can be destroyed extremely fast.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "yeti",
+        "section": "Destroyer",
+        "sortOrder": 7,
+        "image": "/BedWars/Kits/yeti.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cobalt",
+        "summary": "Every time you take damage you have a chance of dropping a battery on the ground. Once the battery activates you can pick it up for a small shield. After collecting 3 batteries you will overload, gaining movement speed and damage!",
+        "price": null,
+        "specialItems": "Battery"
+      },
+      "system": {
+        "slug": "cobalt",
+        "section": "Tank",
+        "sortOrder": 0,
+        "image": "/BedWars/Kits/cobalt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eldertree",
+        "summary": "Collect tree orbs around the map to increase size and max HP. Cannot buy armor.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "eldertree",
+        "section": "Tank",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/eldertree.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hephaestus",
+        "summary": "Upgrade your Talos Mech to increase shield and damage! Activate Self-Destruct to deal massive damage.",
+        "price": "399 Robux",
+        "specialItems": "Mech Chainsaw Tinker's Wrench"
+      },
+      "system": {
+        "slug": "hephaestus",
+        "section": "Tank",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/hephaestus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infernal Shielder",
+        "summary": "Spawn with a massive shield. Gain energy while holding your shield, and raise your shield to deflect incoming projectiles.",
+        "price": "399 Robux",
+        "specialItems": "Infernal Shield"
+      },
+      "system": {
+        "slug": "infernal-shielder",
+        "section": "Tank",
+        "sortOrder": 3,
+        "image": "/BedWars/Kits/infernal-shielder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Martin",
+        "summary": "Absorb life essence from nearby enemies and convert it to max hp! Attack is slower but passively reflects damage for melee hits to the enemy.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "martin",
+        "section": "Tank",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/martin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Warrior",
+        "summary": "Gain grit in battle and can keep fighting after taken fatal damage.",
+        "price": "599 Robux",
+        "specialItems": "Warrior Armor"
+      },
+      "system": {
+        "slug": "warrior",
+        "section": "Tank",
+        "sortOrder": 5,
+        "image": "/BedWars/Kits/warrior.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arachne",
+        "summary": "The Spider Queen uses web bridges to traverse the map and can summon spiderlings from her webs to attack enemies. Enemies are slowed if they run into her webs.",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "arachne",
+        "section": "Other",
+        "sortOrder": 0,
+        "image": "/BedWars/Kits/arachne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elektra",
+        "summary": "Dash through players to deal electric damage! Hold up to two stacks of dashes and regain all stacks if you kill an enemy with your dash.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "elektra",
+        "section": "Other",
+        "sortOrder": 1,
+        "image": "/BedWars/Kits/elektra.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flora",
+        "summary": "Use explosive beehives to deal high damage to your enemies or throw them at yourself for a massive launch.",
+        "price": null,
+        "specialItems": "Beehive Grenade"
+      },
+      "system": {
+        "slug": "flora",
+        "section": "Other",
+        "sortOrder": 2,
+        "image": "/BedWars/Kits/flora.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Health",
+        "summary": null,
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "health",
+        "section": "Other",
+        "sortOrder": 3,
+        "image": "/BedWars/Kits/health.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jade",
+        "summary": "Launch into the air with a giant war hammer. Higher launches deal more slam damage, and the hammer can be upgraded throughout the match.",
+        "price": "999 Robux",
+        "specialItems": "Jade Hammer"
+      },
+      "system": {
+        "slug": "jade",
+        "section": "Other",
+        "sortOrder": 4,
+        "image": "/BedWars/Kits/jade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Krystal",
+        "summary": "Keep moving (especially on frozen blocks!) to increase your momentum and movement speed. At high momentum, trigger jumps to dodge. Part of the 2024 Holiday Bundle.",
+        "price": "1,499",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "krystal",
+        "section": "Other",
+        "sortOrder": 5,
+        "image": "/BedWars/Kits/krystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marrow",
+        "summary": "Defy death and hop around as a skull after taking mortal damage. Survive long enough in this form and you will revive! Use your ability to create poison clouds that damage and slow enemies (this ability also triggers while in skull form).",
+        "price": "399 Robux",
+        "specialItems": null
+      },
+      "system": {
+        "slug": "marrow",
+        "section": "Other",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sigrid",
+        "summary": "Summon your mount, charge at your enemies and send them flying! Cannot use weapons while riding the Elk. Part of the 2023 Holiday Bundle.",
+        "price": null,
+        "specialItems": "Elk"
+      },
+      "system": {
+        "slug": "sigrid",
+        "section": "Other",
+        "sortOrder": 7,
+        "image": "/BedWars/Kits/sigrid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sophia",
+        "summary": "Use a Frost Staff to slow and freeze enemies!",
+        "price": "1499 Robux",
+        "specialItems": "Frost Staff"
+      },
+      "system": {
+        "slug": "sophia",
+        "section": "Other",
+        "sortOrder": 8,
+        "image": "/BedWars/Kits/sophia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Styx",
+        "summary": "Connect your Confluence Portal to a slain enemy to teleport you and your allies to that location.",
+        "price": "399 Robux",
+        "specialItems": "Confluence Portal"
+      },
+      "system": {
+        "slug": "styx",
+        "section": "Other",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Triton",
+        "summary": "An agile warrior with a Trident! Hurl your trident towards a wall, or your opponents, to quickly travel and dominate the battlefield.",
+        "price": "399 Robux",
+        "specialItems": "Trident"
+      },
+      "system": {
+        "slug": "triton",
+        "section": "Other",
+        "sortOrder": 10,
+        "image": "/BedWars/Kits/triton.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Regent",
+        "summary": "Use a Void Axe to dash forward while slashing at enemies, healing for a portion of the damage dealt. (Part of the Holiday 2021 Bundle).",
+        "price": "1,499",
+        "specialItems": "Void Axe"
+      },
+      "system": {
+        "slug": "void-regent",
+        "section": "Other",
+        "sortOrder": 11,
+        "image": "/BedWars/Kits/void-regent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yamini",
+        "summary": "Climb and pounce with feline dexterity! Fall damage is reduced since you always land on your feet.",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "yamini",
+        "section": "Other",
+        "sortOrder": 12,
+        "image": "/BedWars/Kits/yamini.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yuzi",
+        "summary": "Swords are replaced by traditional Dao Swords. Hold attack to execute a forward dash AOE attack.",
+        "price": "399 Robux",
+        "specialItems": "Daos"
+      },
+      "system": {
+        "slug": "yuzi",
+        "section": "Other",
+        "sortOrder": 13,
+        "image": "/BedWars/Kits/yuzi.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zephyr",
+        "summary": "Killing enemies gives you a stack of wind, decaying a short while after. Each stack of wind gives you more speed and adds a second wind strike to your attack. At 5 stacks you can triple jump!",
+        "price": null,
+        "specialItems": null
+      },
+      "system": {
+        "slug": "zephyr",
+        "section": "Other",
+        "sortOrder": 14,
+        "image": "/BedWars/Kits/zephyr.png"
+      }
+    }
+  ]
+}

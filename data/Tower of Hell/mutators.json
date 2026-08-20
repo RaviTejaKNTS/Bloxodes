@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Tower of Hell",
+    "gameSlug": "tower-of-hell",
+    "collection": "mutators",
+    "route": "/wiki/tower-of-hell/mutators",
+    "catalogCode": "tower-of-hell-mutators",
+    "itemFields": [
+      "summary",
+      "effect",
+      "cost"
+    ],
+    "columns": [
+      "summary",
+      "effect",
+      "cost"
+    ],
+    "display": {
+      "groupLabel": "Currency",
+      "sectionOrder": [
+        "Coin Mutators",
+        "Robux Mutators"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "effect",
+        "cost"
+      ],
+      "tableFields": [
+        "effect",
+        "cost"
+      ],
+      "fieldPresentation": {
+        "effect": {
+          "kind": "highlight",
+          "label": "Effect",
+          "omitWhenEmpty": true
+        },
+        "cost": {
+          "kind": "detail",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Invincibility",
+        "summary": null,
+        "effect": "Can't die from the killparts",
+        "cost": "Noob Tower: 500 coins; Pro Tower: 860 coins; Tower of Hell RB: 600 coins"
+      },
+      "system": {
+        "slug": "invincibility",
+        "section": "Coin Mutators",
+        "sortOrder": 0,
+        "image": "/Tower of Hell/Mutators/invincibility.png"
+      }
+    },
+    {
+      "item": {
+        "name": "High Speed",
+        "summary": null,
+        "effect": "Increases everyone's speed by 25%",
+        "cost": "Noob Tower: 100 coins; Pro Tower: 160 coins; Tower of Hell RB: 200 coins"
+      },
+      "system": {
+        "slug": "high-speed",
+        "section": "Coin Mutators",
+        "sortOrder": 1,
+        "image": "/Tower of Hell/Mutators/high-speed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Low Gravity",
+        "summary": null,
+        "effect": "Reduces global gravity by 25%",
+        "cost": "Noob Tower: 130 coins; Pro Tower: 220 coins; Tower of Hell RB: 250 coins"
+      },
+      "system": {
+        "slug": "low-gravity",
+        "section": "Coin Mutators",
+        "sortOrder": 2,
+        "image": "/Tower of Hell/Mutators/low-gravity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Foggy",
+        "summary": null,
+        "effect": "Makes everything foggy",
+        "cost": "Noob Tower: 150 coins; Pro Tower: 210 coins; Tower of Hell RB: 700 coins"
+      },
+      "system": {
+        "slug": "foggy",
+        "section": "Coin Mutators",
+        "sortOrder": 3,
+        "image": "/Tower of Hell/Mutators/foggy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Negative",
+        "summary": null,
+        "effect": "Inverts colors",
+        "cost": "Noob Tower: 150 coins; Pro Tower: 210 coins; Tower of Hell RB: 350 coins"
+      },
+      "system": {
+        "slug": "negative",
+        "section": "Coin Mutators",
+        "sortOrder": 4,
+        "image": "/Tower of Hell/Mutators/negative.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lengthen",
+        "summary": null,
+        "effect": "Adds another section to the tower",
+        "cost": "Noob Tower: 150 coins; Pro Tower: 180 coins"
+      },
+      "system": {
+        "slug": "lengthen",
+        "section": "Coin Mutators",
+        "sortOrder": 5,
+        "image": "/Tower of Hell/Mutators/lengthen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Extra Time",
+        "summary": null,
+        "effect": "Adds another 2 minutes to the timer",
+        "cost": "Noob Tower: 50 coins; Pro Tower: 86 coins; Tower of Hell RB: 100 coins"
+      },
+      "system": {
+        "slug": "extra-time",
+        "section": "Coin Mutators",
+        "sortOrder": 6,
+        "image": "/Tower of Hell/Mutators/extra-time.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Invisibility",
+        "summary": null,
+        "effect": "Makes everyone invisible, including on the sidebar. Trails will still be visible regardless.",
+        "cost": "Standard: 9 Robux; With membership: 150 coins; Tower of Hell RB: 25 Robux"
+      },
+      "system": {
+        "slug": "invisibility",
+        "section": "Robux Mutators",
+        "sortOrder": 0,
+        "image": "/Tower of Hell/Mutators/invisibility.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Double Jump",
+        "summary": null,
+        "effect": "Lets everyone jump twice. If currently active, Double Jump can be triggered if you jump too far off of a platform, or if you jump off of a truss.",
+        "cost": "Standard: 15 Robux; With membership: 300 coins; Tower of Hell RB: 45 Robux"
+      },
+      "system": {
+        "slug": "double-jump",
+        "section": "Robux Mutators",
+        "sortOrder": 1,
+        "image": "/Tower of Hell/Mutators/double-jump.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Hop",
+        "summary": null,
+        "effect": "Makes everyone jump continuously If you are climbing, this action is interrupted unless if the player themselves jumps.",
+        "cost": "Standard: 20 Robux; With membership: 500 coins; Tower of Hell RB: 50 Robux"
+      },
+      "system": {
+        "slug": "bunny-hop",
+        "section": "Robux Mutators",
+        "sortOrder": 2,
+        "image": "/Tower of Hell/Mutators/bunny-hop.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Checkpoints",
+        "summary": null,
+        "effect": "Adds a checkpoint to every other section",
+        "cost": "Standard: 11 Robux; With membership: 400 coins; Tower of Hell RB: 1000 coins"
+      },
+      "system": {
+        "slug": "checkpoints",
+        "section": "Robux Mutators",
+        "sortOrder": 3,
+        "image": "/Tower of Hell/Mutators/checkpoints.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Double Coins",
+        "summary": null,
+        "effect": "Doubles everyone's coin reward. Example: Noob tower (6 sections) will now give 200 coins total rather than 100.",
+        "cost": "Standard: 11 Robux; With membership: 2000 coins"
+      },
+      "system": {
+        "slug": "double-coins",
+        "section": "Robux Mutators",
+        "sortOrder": 4,
+        "image": "/Tower of Hell/Mutators/double-coins.png"
+      }
+    }
+  ]
+}
