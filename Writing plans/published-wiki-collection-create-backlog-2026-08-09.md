@@ -293,13 +293,13 @@ Evidence: [full report](../tmp/game-collection-suggestions/dress-to-impress.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/driving-empire.md)
 
-- [ ] Vehicle Collections
-- [ ] Houses
-- [ ] Races
-- [ ] Customization Upgrades
-- [ ] Locations
-- [ ] Jobs
-- [ ] Trailers
+- [ ] Vehicle Collections — blocked 2026-08-20: no source documents in-game vehicle collection sets
+- [x] Houses
+- [ ] Races — blocked 2026-08-20: only 5 race venues exist and they are covered inside the locations page
+- [x] Customization Upgrades
+- [x] Locations
+- [ ] Jobs — blocked 2026-08-20: only 4 teams exist, below page floor
+- [ ] Trailers — blocked 2026-08-20: no trailer roster in any source
 
 ### Evade
 

@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Driving Empire",
+    "gameSlug": "driving-empire",
+    "collection": "customization-upgrades",
+    "route": "/wiki/driving-empire/customization-upgrades",
+    "catalogCode": "driving-empire-customization-upgrades",
+    "itemFields": [
+      "about"
+    ],
+    "columns": [
+      "about"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Appearance Customization",
+        "Performance Upgrades"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "about",
+      "cardDescriptionField": "about",
+      "cardFields": [
+        "about"
+      ],
+      "tableFields": [
+        "about"
+      ],
+      "fieldPresentation": {
+        "about": {
+          "kind": "detail",
+          "label": "What it changes"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Primary",
+        "about": "The Primary option allows players to paint their vehicle any color they so choose. Prior to December 4th, 2020, there were only a list of preset colors available, with a color wheel and reflectance slider added after this date. The reflectance values ranged from 0 to 1, in 0.05 increments. The color"
+      },
+      "system": {
+        "slug": "primary",
+        "section": "Appearance Customization",
+        "sortOrder": 1,
+        "image": "/Driving Empire/Customization Upgrades/primary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rims",
+        "about": "The Rims option allows players to customize their rims, whether it be to paint them or change them entirely. Upon choosing the Rims option, players are greeted with two sub-options: Paint Rims and Rim Type. Prior to December 23rd, 2021, there was no sub-option menu, and the only option was to paint "
+      },
+      "system": {
+        "slug": "rims",
+        "section": "Appearance Customization",
+        "sortOrder": 2,
+        "image": "/Driving Empire/Customization Upgrades/rims.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Body Kits",
+        "about": "The Body Kits option allows players to modify their car's body using preset packages. Some vehicles have multiple bodykits, while others may only have one. This option also has sub-options for custom spoilers and, in some cases, grilles. All options cost cash to apply."
+      },
+      "system": {
+        "slug": "body-kits",
+        "section": "Appearance Customization",
+        "sortOrder": 3,
+        "image": "/Driving Empire/Customization Upgrades/body-kits.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calipers",
+        "about": "The Calipers option allows players to paint the brake calipers of the vehicle and functions the same as Primary does. Players can change the color by using the color wheel, entering an RGB input, or picking a preset color from the list available. See the Primary section for more information regardin"
+      },
+      "system": {
+        "slug": "calipers",
+        "section": "Appearance Customization",
+        "sortOrder": 4,
+        "image": "/Driving Empire/Customization Upgrades/calipers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Secondary",
+        "about": "The Secondary option functions the same as Primary does. However, this option is usually reserved for painting accents, such as stripes. Players can change the color by using the color wheel, entering an RGB input, or picking a preset color from the list available. See the Primary section for more i"
+      },
+      "system": {
+        "slug": "secondary",
+        "section": "Appearance Customization",
+        "sortOrder": 5,
+        "image": "/Driving Empire/Customization Upgrades/secondary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chrome",
+        "about": "The Chrome option allows players to paint chrome parts such as exhausts and, in certain cases, trim pieces. Players can change the color by using the color wheel or picking a preset color from the list available, with RGB support added on April 10th, 2021, similar to the Primary option. However, the"
+      },
+      "system": {
+        "slug": "chrome",
+        "section": "Appearance Customization",
+        "sortOrder": 6,
+        "image": "/Driving Empire/Customization Upgrades/chrome.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Interior",
+        "about": "The Interior option allows players to paint the interior of the car, primarily the seats. Players can change the color by using the color wheel, entering an RGB input, or picking a preset color from the list available. See the Primary section for more information regarding the evolution of paint col"
+      },
+      "system": {
+        "slug": "interior",
+        "section": "Appearance Customization",
+        "sortOrder": 7,
+        "image": "/Driving Empire/Customization Upgrades/interior.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spoilers",
+        "about": "The Spoilers option allows players to alter or place a spoiler on the rear of the car. Most options cost cash to apply, with a couple exceptions."
+      },
+      "system": {
+        "slug": "spoilers",
+        "section": "Appearance Customization",
+        "sortOrder": 8,
+        "image": "/Driving Empire/Customization Upgrades/spoilers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wraps",
+        "about": "The Wraps option allows players to replace their primary color with a pattern instead. Note that the wrap can still be painted using the Primary color option. Most wraps cost cash to apply, with a couple exceptions."
+      },
+      "system": {
+        "slug": "wraps",
+        "section": "Appearance Customization",
+        "sortOrder": 9,
+        "image": "/Driving Empire/Customization Upgrades/wraps.png"
+      }
+    },
+    {
+      "item": {
+        "name": "License Plate",
+        "about": "The License Plate option allows players to change their license plate number. The license plate can hold up to seven characters and costs $1,000 cash to change."
+      },
+      "system": {
+        "slug": "license-plate",
+        "section": "Appearance Customization",
+        "sortOrder": 10,
+        "image": "/Driving Empire/Customization Upgrades/license-plate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Police Mode",
+        "about": "The Police Mode option allows players to add sirens to the top of their car, provided they have the Police Job gamepass. This costs $10,000 cash to apply."
+      },
+      "system": {
+        "slug": "police-mode",
+        "section": "Appearance Customization",
+        "sortOrder": 11,
+        "image": "/Driving Empire/Customization Upgrades/police-mode.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Suspension",
+        "about": "The Suspension option allows players to alter their vehicle's ride height, wheel camber, and wheel offset. The cost of these modifications scale with the change in one of the aforementioned settings, so the more the player changes the suspension, the more it costs."
+      },
+      "system": {
+        "slug": "suspension",
+        "section": "Performance Upgrades",
+        "sortOrder": 12,
+        "image": "/Driving Empire/Customization Upgrades/suspension.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Engine Upgrades",
+        "about": "The Engine Upgrades option allows players to upgrade the engine's performance, to make the car faster and accelerate quicker. When they were first introduced in December 4th, 2020, the modifications were a lot stronger, but have since been nerfed a couple times. This option is the only performance o"
+      },
+      "system": {
+        "slug": "engine-upgrades",
+        "section": "Performance Upgrades",
+        "sortOrder": 13,
+        "image": "/Driving Empire/Customization Upgrades/engine-upgrades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aspiration",
+        "about": "The Aspiration option allows players to change the type of aspiration the vehicle has, further increasing the vehicle's acceleration. It used to be appliable on electric cars but has since been removed, and is currently restriced to cars with internal combustion engines. Unlike most upgrade options,"
+      },
+      "system": {
+        "slug": "aspiration",
+        "section": "Performance Upgrades",
+        "sortOrder": 14,
+        "image": "/Driving Empire/Customization Upgrades/aspiration.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brakes",
+        "about": "The Brakes option allows players to improve their braking performance, allowing their vehicle to stop faster. These upgrades have strong cost scaling, but are one of the cheapest upgrades overall."
+      },
+      "system": {
+        "slug": "brakes",
+        "section": "Performance Upgrades",
+        "sortOrder": 15,
+        "image": "/Driving Empire/Customization Upgrades/brakes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tires",
+        "about": "The Tires option allows players to change the grip of their tires, either to increase grip or worsen it. The cost of these upgrades scale similarly to the Brakes option, but costs more overall."
+      },
+      "system": {
+        "slug": "tires",
+        "section": "Performance Upgrades",
+        "sortOrder": 16,
+        "image": "/Driving Empire/Customization Upgrades/tires.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drivetrain",
+        "about": "The Drivetrain option allows players to swap the drive type of their vehicle, to front-wheel drive, rear-wheel drive, or all-wheel drive. Drivetrain swaps come at a fixed cost and are one of the cheapest upgrades. Front-wheel drive and rear-wheel drive have a fixed cost of $15,000 cash, while all-wh"
+      },
+      "system": {
+        "slug": "drivetrain",
+        "section": "Performance Upgrades",
+        "sortOrder": 17,
+        "image": "/Driving Empire/Customization Upgrades/drivetrain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boost",
+        "about": "The Boost mechanic allows players to gain a temporary boost in acceleration and speed with the press of a button. This can be upgraded in the customization menu, where there are four available options. The cost of these upgrades has low scaling and has a maximum cost similar to the Tires option."
+      },
+      "system": {
+        "slug": "boost",
+        "section": "Performance Upgrades",
+        "sortOrder": 18,
+        "image": "/Driving Empire/Customization Upgrades/boost.png"
+      }
+    }
+  ]
+}

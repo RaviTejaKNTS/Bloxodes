@@ -6,5 +6,9 @@ export const drivingEmpireCollectionGroup = {
   universeId: 1202096104,
   dataDir: "Driving Empire",
   universeNames: ["Driving Empire", "Driving Empire Car Racing RP", "Driving Empire Car RacingRP"],
-  collections: ["vehicles"]
+  collections: ["vehicles",
+      "houses",
+      "locations",
+      "customization-upgrades"
+    ]
 } satisfies GameCollectionGroup;

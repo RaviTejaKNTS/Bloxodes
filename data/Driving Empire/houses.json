@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Driving Empire",
+    "gameSlug": "driving-empire",
+    "collection": "houses",
+    "route": "/wiki/driving-empire/houses",
+    "catalogCode": "driving-empire-houses",
+    "itemFields": [
+      "price",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "price",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Housing Blueprints"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "price",
+        "availability"
+      ],
+      "tableFields": [
+        "price",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "The Delaney",
+        "price": "$450,000",
+        "availability": "Available",
+        "cardSummary": "The entry blueprint: the cheapest way into the housing system and a garage of your own."
+      },
+      "system": {
+        "slug": "the-delaney",
+        "section": "Housing Blueprints",
+        "sortOrder": 1,
+        "image": "/Driving Empire/Houses/the-delaney.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Auburn",
+        "price": "$600,000",
+        "availability": "Available",
+        "cardSummary": "A step up from the starter with more floor space for the money."
+      },
+      "system": {
+        "slug": "the-auburn",
+        "section": "Housing Blueprints",
+        "sortOrder": 2,
+        "image": "/Driving Empire/Houses/the-auburn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Everett",
+        "price": "$650,000",
+        "availability": "Available",
+        "cardSummary": "A mid-entry family home in the affordable band."
+      },
+      "system": {
+        "slug": "the-everett",
+        "section": "Housing Blueprints",
+        "sortOrder": 3,
+        "image": "/Driving Empire/Houses/the-everett.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Apollo",
+        "price": "$750,000",
+        "availability": "Available",
+        "cardSummary": "The top of the starter tier before prices jump into villa territory."
+      },
+      "system": {
+        "slug": "the-apollo",
+        "section": "Housing Blueprints",
+        "sortOrder": 4,
+        "image": "/Driving Empire/Houses/the-apollo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stonehurst Villa",
+        "price": "$1,450,000",
+        "availability": "Available",
+        "cardSummary": "The first luxury step: over a million for villa square footage."
+      },
+      "system": {
+        "slug": "stonehurst-villa",
+        "section": "Housing Blueprints",
+        "sortOrder": 5,
+        "image": "/Driving Empire/Houses/stonehurst-villa.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Richford Barndominium",
+        "price": "$1,900,000",
+        "availability": "Available",
+        "cardSummary": "The distinctive barn-styled build in the upper-mid bracket."
+      },
+      "system": {
+        "slug": "richford-barndominium",
+        "section": "Housing Blueprints",
+        "sortOrder": 6,
+        "image": "/Driving Empire/Houses/richford-barndominium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cambridge Mansion",
+        "price": "$4,950,000",
+        "availability": "Available",
+        "cardSummary": "Nearly five million of mansion, the second-highest address in the game."
+      },
+      "system": {
+        "slug": "cambridge-mansion",
+        "section": "Housing Blueprints",
+        "sortOrder": 7,
+        "image": "/Driving Empire/Houses/cambridge-mansion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fiorenza Mansion",
+        "price": "$9,300,000",
+        "availability": "Available",
+        "cardSummary": "The 9.3 million flagship: the biggest plot, the most garage, and the address that says you finished the grind."
+      },
+      "system": {
+        "slug": "fiorenza-mansion",
+        "section": "Housing Blueprints",
+        "sortOrder": 8,
+        "image": "/Driving Empire/Houses/fiorenza-mansion.png"
+      }
+    }
+  ]
+}
