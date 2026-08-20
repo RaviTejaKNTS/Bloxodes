@@ -62,6 +62,9 @@ import { solsRngCollectionGroup } from "./sols-rng";
 import { deadRailsCollectionGroup } from "./dead-rails";
 import { dandysWorldCollectionGroup } from "./dandys-world";
 import { towerOfHellCollectionGroup } from "./tower-of-hell";
+import { bedwarsCollectionGroup } from "./bedwars";
+import { stealAnEggCollectionGroup } from "./steal-an-egg";
+import { growAChickenFighterCollectionGroup } from "./grow-a-chicken-fighter";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -128,5 +131,8 @@ export const GAME_COLLECTION_GROUPS = [
   solsRngCollectionGroup,
   deadRailsCollectionGroup,
   dandysWorldCollectionGroup,
-  towerOfHellCollectionGroup
+  towerOfHellCollectionGroup,
+  bedwarsCollectionGroup,
+  stealAnEggCollectionGroup,
+  growAChickenFighterCollectionGroup
 ] satisfies GameCollectionGroup[];

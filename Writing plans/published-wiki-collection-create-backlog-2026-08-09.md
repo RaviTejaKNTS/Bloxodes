@@ -636,15 +636,15 @@ New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs
 
 ### Steal an egg (10563114921)
 
-- [ ] Biomes
+- [x] Biomes
 
 ### Grow a Chicken Fighter (10338952197)
 
-- [ ] Eggs
+- [x] Eggs
 
 ### Anime Origins (8946565814)
 
-- [ ] Units
+- [ ] Units — blocked 2026-08-20: no complete roster source; Beebom and Sportskeeda tier lists cover only meta units above Mythic with no rarity or cost data, no fandom exists, remaining sites are AI farms
 
 ### BlockSpin (6765805766)
 
