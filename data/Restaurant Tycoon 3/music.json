@@ -1,0 +1,346 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Restaurant Tycoon 3",
+    "gameSlug": "restaurant-tycoon-3",
+    "collection": "music",
+    "route": "/wiki/restaurant-tycoon-3/music",
+    "catalogCode": "restaurant-tycoon-3-music",
+    "itemFields": [
+      "musicType",
+      "availability",
+      "cost",
+      "trackCount",
+      "obtainment",
+      "eventWindow",
+      "liveBand",
+      "cardSummary"
+    ],
+    "columns": [
+      "musicType",
+      "availability",
+      "cost",
+      "trackCount",
+      "obtainment",
+      "eventWindow",
+      "liveBand",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Main Music Discs",
+        "Event Music Discs",
+        "Live Music"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "cost",
+        "trackCount"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "musicType",
+        "availability",
+        "cost",
+        "trackCount",
+        "eventWindow",
+        "liveBand"
+      ],
+      "tableFields": [
+        "musicType",
+        "availability",
+        "cost",
+        "trackCount",
+        "obtainment",
+        "eventWindow",
+        "liveBand",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "musicType": {
+          "kind": "normal",
+          "label": "Type"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "trackCount": {
+          "kind": "chip",
+          "label": "Tracks"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How to unlock"
+        },
+        "eventWindow": {
+          "kind": "detail",
+          "label": "Event window"
+        },
+        "liveBand": {
+          "kind": "chip",
+          "label": "Live band"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Default Music",
+        "musicType": "Main disc",
+        "availability": "Free on join",
+        "cost": "Free",
+        "trackCount": "4 tracks",
+        "obtainment": "Unlocked in the music menu when you join the game.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "The starter restaurant playlist. It is free, always available, and counts toward playing music for atmosphere rating."
+      },
+      "system": {
+        "slug": "default-music",
+        "section": "Main Music Discs",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Restaurant Tycoon OST",
+        "musicType": "Main disc",
+        "availability": "Free on join",
+        "cost": "Free",
+        "trackCount": "5 tracks",
+        "obtainment": "Unlocked in the music menu when you join the game.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "The free official soundtrack disc. The wiki notes it was released on Spotify under the name Cooking Fever."
+      },
+      "system": {
+        "slug": "restaurant-tycoon-ost",
+        "section": "Main Music Discs",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Classical",
+        "musicType": "Main disc",
+        "availability": "Always available",
+        "cost": "20 Diamonds",
+        "trackCount": "6 tracks",
+        "obtainment": "Buy from the music menu with Diamonds. This main disc stays available after purchase.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "A Diamond main disc with 6 tracks. Buy it from the music menu whenever you want a classical restaurant playlist."
+      },
+      "system": {
+        "slug": "classical",
+        "section": "Main Music Discs",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Disco",
+        "musicType": "Main disc",
+        "availability": "Always available",
+        "cost": "20 Diamonds",
+        "trackCount": "10 tracks",
+        "obtainment": "Buy from the music menu with Diamonds. This main disc stays available after purchase.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "A Diamond main disc with 10 tracks. It is one of the larger always-available playlists in the music menu."
+      },
+      "system": {
+        "slug": "disco",
+        "section": "Main Music Discs",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Synthwave",
+        "musicType": "Main disc",
+        "availability": "Always available",
+        "cost": "20 Diamonds",
+        "trackCount": "7 tracks",
+        "obtainment": "Buy from the music menu with Diamonds. This main disc stays available after purchase.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "A Diamond main disc with 7 tracks. The official wiki lists it as Synthwave. Older menus and Fandom called the same slot Jazz."
+      },
+      "system": {
+        "slug": "synthwave",
+        "section": "Main Music Discs",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lo-Fi",
+        "musicType": "Main disc",
+        "availability": "Always available",
+        "cost": "20 Diamonds",
+        "trackCount": "10 tracks",
+        "obtainment": "Buy from the music menu with Diamonds. This main disc stays available after purchase.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "A Diamond main disc with 10 tracks. Use it when you want a longer always-available lo-fi playlist."
+      },
+      "system": {
+        "slug": "lo-fi",
+        "section": "Main Music Discs",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lounge",
+        "musicType": "Main disc",
+        "availability": "Always available",
+        "cost": "20 Diamonds",
+        "trackCount": "4 tracks",
+        "obtainment": "Buy from the music menu with Diamonds. This main disc stays available after purchase.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "A Diamond main disc with 4 tracks. It is a smaller always-available playlist next to the free Default Music disc."
+      },
+      "system": {
+        "slug": "lounge",
+        "section": "Main Music Discs",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Electronic",
+        "musicType": "Main disc",
+        "availability": "Always available",
+        "cost": "25 Diamonds",
+        "trackCount": "8 tracks",
+        "obtainment": "Buy from the music menu with Diamonds. This main disc stays available after purchase.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "A higher-cost Diamond main disc with 8 tracks. The shop table calls it Electronic. The wiki soundtrack table still labels the same playlist Electrical."
+      },
+      "system": {
+        "slug": "electronic",
+        "section": "Main Music Discs",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tobu",
+        "musicType": "Main disc",
+        "availability": "Always available",
+        "cost": "25 Diamonds",
+        "trackCount": "6 tracks",
+        "obtainment": "Buy from the music menu with Diamonds. This main disc stays available after purchase.",
+        "eventWindow": "",
+        "liveBand": "No",
+        "cardSummary": "A higher-cost Diamond main disc with 6 tracks. It is one of the two 25 Diamond always-available playlists."
+      },
+      "system": {
+        "slug": "tobu",
+        "section": "Main Music Discs",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween",
+        "musicType": "Event disc",
+        "availability": "Event-limited",
+        "cost": "20 Diamonds",
+        "trackCount": "8 tracks",
+        "obtainment": "Buy from the music menu with Diamonds while the matching Halloween event shop is open.",
+        "eventWindow": "Halloween 2025",
+        "liveBand": "No",
+        "cardSummary": "An event music disc with 8 tracks. It was offered during Halloween 2025 and is not a year-round Diamond shop item."
+      },
+      "system": {
+        "slug": "halloween",
+        "section": "Event Music Discs",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Jazz",
+        "musicType": "Event disc",
+        "availability": "Event-limited",
+        "cost": "20 Diamonds",
+        "trackCount": "8 tracks",
+        "obtainment": "Buy from the music menu with Diamonds while the matching Christmas event shop is open.",
+        "eventWindow": "Christmas 2025",
+        "liveBand": "No",
+        "cardSummary": "An event music disc with 8 tracks. Ultraw added the Christmas Jazz Music Pack in the December 2025 winter update."
+      },
+      "system": {
+        "slug": "christmas-jazz",
+        "section": "Event Music Discs",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tropical",
+        "musicType": "Event disc",
+        "availability": "Event-limited",
+        "cost": "20 Diamonds",
+        "trackCount": "9 tracks",
+        "obtainment": "Buy from the music menu with Diamonds while this event disc is offered.",
+        "eventWindow": "Announced May 15, 2026. Official wiki labeled Now as of July 18, 2026.",
+        "liveBand": "No",
+        "cardSummary": "An event music disc with 9 tracks. Ultraw announced the Tropical Music Pack on May 15, 2026. The official wiki still labeled it Now on July 18, 2026, without a later shop confirmation."
+      },
+      "system": {
+        "slug": "tropical",
+        "section": "Event Music Discs",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Classical Ensemble",
+        "musicType": "Live music",
+        "availability": "Always available",
+        "cost": "10,000 Cash",
+        "trackCount": "5 tracks",
+        "obtainment": "Buy from the music menu with Cash. Unlike Diamond discs, this live-music option also shows live bands.",
+        "eventWindow": "",
+        "liveBand": "Yes",
+        "cardSummary": "The Cash live-music option, with 5 tracks and on-plot live bands. Ultraw added Classical Ensemble in the July 17, 2026 Classical Music Update."
+      },
+      "system": {
+        "slug": "classical-ensemble",
+        "section": "Live Music",
+        "sortOrder": 13,
+        "image": null
+      }
+    }
+  ]
+}

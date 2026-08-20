@@ -481,11 +481,11 @@ Evidence: [full report](../tmp/game-collection-suggestions/practical-basketball.
 
 Evidence: [full report](../tmp/game-collection-suggestions/restaurant-tycoon-3.md)
 
-- [ ] Restaurant Templates
-- [ ] Franchise Levels
-- [ ] Rating Categories
-- [ ] Music
-- [ ] Objectives
+- [x] Restaurant Templates
+- [x] Franchise Levels
+- [x] Rating Categories
+- [x] Music
+- [x] Objectives
 
 ### RIVALS
 

@@ -15,6 +15,11 @@ export const restaurantTycoon3CollectionGroup = {
     "upgrades",
     "build-items",
     "milestones",
-    "locations"
+    "locations",
+    "franchise-levels",
+    "objectives",
+    "music",
+    "restaurant-templates",
+    "rating-categories"
   ]
 } satisfies GameCollectionGroup;

@@ -1,0 +1,236 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Restaurant Tycoon 3",
+    "gameSlug": "restaurant-tycoon-3",
+    "collection": "objectives",
+    "route": "/wiki/restaurant-tycoon-3/objectives",
+    "catalogCode": "restaurant-tycoon-3-objectives",
+    "itemFields": [
+      "activityType",
+      "task",
+      "howToComplete",
+      "reward",
+      "scales",
+      "notes",
+      "cardSummary"
+    ],
+    "columns": [
+      "activityType",
+      "task",
+      "howToComplete",
+      "reward",
+      "scales",
+      "notes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Service",
+        "Cooking",
+        "Cash",
+        "Building"
+      ],
+      "badgeField": "activityType",
+      "subtitleFields": [
+        "task"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "activityType",
+        "task",
+        "howToComplete",
+        "reward",
+        "scales",
+        "notes"
+      ],
+      "tableFields": [
+        "activityType",
+        "task",
+        "howToComplete",
+        "reward",
+        "scales",
+        "notes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "activityType": {
+          "kind": "highlight",
+          "label": "Activity"
+        },
+        "task": {
+          "kind": "normal",
+          "label": "Task"
+        },
+        "howToComplete": {
+          "kind": "detail",
+          "label": "How to complete"
+        },
+        "reward": {
+          "kind": "highlight",
+          "label": "Reward"
+        },
+        "scales": {
+          "kind": "chip",
+          "label": "Scaling"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Collect dishes",
+        "activityType": "Service",
+        "task": "Collect dishes X times",
+        "howToComplete": "After a table finishes its meals, click the plates when Collect Dishes appears.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "Can be completed in another player's restaurant.",
+        "cardSummary": "A repeating service objective. Clear finished plates after meals to fill the bar at the top of the screen."
+      },
+      "system": {
+        "slug": "collect-dishes",
+        "section": "Service",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Earn cash from tables",
+        "activityType": "Service",
+        "task": "Earn cash from X tables",
+        "howToComplete": "Collect the bill from a table after the group finishes its courses.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "Can be completed in another player's restaurant.",
+        "cardSummary": "A service objective that counts bills taken from finished tables, not every Cash source in the restaurant."
+      },
+      "system": {
+        "slug": "earn-cash-from-tables",
+        "section": "Service",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Serve dishes",
+        "activityType": "Service",
+        "task": "Serve X dishes",
+        "howToComplete": "Take a finished dish from the Order Counter and serve it to the matching customer.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "Can be completed in another player's restaurant.",
+        "cardSummary": "A service objective for handing cooked dishes to the matching customers from the Order Counter."
+      },
+      "system": {
+        "slug": "serve-dishes",
+        "section": "Service",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cook dishes",
+        "activityType": "Cooking",
+        "task": "Cook X dishes",
+        "howToComplete": "Take an order from the Order Counter and finish the dish on kitchen appliances.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "Can be completed in another player's restaurant.",
+        "cardSummary": "A cooking objective for finishing orders on kitchen appliances when the bar asks you to cook, not serve."
+      },
+      "system": {
+        "slug": "cook-dishes",
+        "section": "Cooking",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Earn cash",
+        "activityType": "Cash",
+        "task": "Earn X cash",
+        "howToComplete": "Earn Cash from restaurant play. Tips and food-critic pay count toward this objective.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "The auto-collect gamepass no longer blocks cash objectives.",
+        "cardSummary": "A cash objective for making money from restaurant play. Tips and food-critic pay count, unlike the table-bill objective."
+      },
+      "system": {
+        "slug": "earn-cash",
+        "section": "Cash",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spend cash on furniture",
+        "activityType": "Building",
+        "task": "Spend X cash on furniture",
+        "howToComplete": "Spend Cash placing furniture in Build Mode.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "Sandbox mode does not assign this objective.",
+        "cardSummary": "A building objective for spending Cash on furniture. Sandbox mode does not hand out this quest."
+      },
+      "system": {
+        "slug": "spend-cash-on-furniture",
+        "section": "Building",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Buy furniture items",
+        "activityType": "Building",
+        "task": "Buy X furniture items",
+        "howToComplete": "Buy furniture items in Build Mode.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "Counts furniture purchases rather than the Cash spent.",
+        "cardSummary": "A building objective that counts how many furniture items you buy, not how much Cash you spend on them."
+      },
+      "system": {
+        "slug": "buy-furniture-items",
+        "section": "Building",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seat customer groups",
+        "activityType": "Service",
+        "task": "Seat X customer groups",
+        "howToComplete": "Seat arriving customer groups at tables.",
+        "reward": "Can unlock a dish from 3 food options, or receive cash instead.",
+        "scales": "Scales up",
+        "notes": "Can be completed in another player's restaurant.",
+        "cardSummary": "A service objective for seating arriving groups at tables so the dining room keeps moving."
+      },
+      "system": {
+        "slug": "seat-customer-groups",
+        "section": "Service",
+        "sortOrder": 8,
+        "image": null
+      }
+    }
+  ]
+}

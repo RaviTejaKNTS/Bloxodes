@@ -1,0 +1,697 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Restaurant Tycoon 3",
+    "gameSlug": "restaurant-tycoon-3",
+    "collection": "rating-categories",
+    "route": "/wiki/restaurant-tycoon-3/rating-categories",
+    "catalogCode": "restaurant-tycoon-3-rating-categories",
+    "itemFields": [
+      "name",
+      "requirementType",
+      "categoryRating",
+      "totalRating",
+      "relatedSystem",
+      "howToComplete",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "requirementType",
+      "categoryRating",
+      "totalRating",
+      "relatedSystem",
+      "howToComplete",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Service",
+        "Food",
+        "Atmosphere",
+        "Expansions",
+        "Hygiene"
+      ],
+      "badgeField": "categoryRating",
+      "subtitleFields": [
+        "requirementType",
+        "totalRating"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "requirementType",
+        "categoryRating",
+        "totalRating",
+        "relatedSystem",
+        "howToComplete"
+      ],
+      "tableFields": [
+        "requirementType",
+        "categoryRating",
+        "totalRating",
+        "relatedSystem",
+        "howToComplete",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "requirementType": {
+          "kind": "highlight",
+          "label": "Type"
+        },
+        "categoryRating": {
+          "kind": "chip",
+          "label": "Category rating"
+        },
+        "totalRating": {
+          "kind": "chip",
+          "label": "Total rating"
+        },
+        "relatedSystem": {
+          "kind": "normal",
+          "label": "Related system"
+        },
+        "howToComplete": {
+          "kind": "detail",
+          "label": "How to complete"
+        },
+        "cardSummary": "detail"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Waiter Tray Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.25",
+        "totalRating": "0.05",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Waiter Tray upgrade.",
+        "cardSummary": "Waiter Tray is a small Service gain. It is one of the first upgrade purchases that feeds the Service bar."
+      },
+      "system": {
+        "slug": "waiter-tray-upgrade",
+        "section": "Service",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Waiter Cart Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.25",
+        "totalRating": "0.05",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Waiter Cart upgrade.",
+        "cardSummary": "Waiter Cart matches Waiter Tray as a small Service gain. Buy it after the tray if staff still cannot keep plates moving."
+      },
+      "system": {
+        "slug": "waiter-cart-upgrade",
+        "section": "Service",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Card Payments Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Card Payments upgrade.",
+        "cardSummary": "Card Payments is a mid-size Service requirement. It is an upgrade purchase, not a staffing or speed check."
+      },
+      "system": {
+        "slug": "card-payments-upgrade",
+        "section": "Service",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Customers Seated Quickly",
+        "requirementType": "Service speed",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Workers",
+        "howToComplete": "Seat arriving customers promptly. The official wiki does not list a time in seconds.",
+        "cardSummary": "This Service check is about seating speed, not a named upgrade. Enough servers and a clear path to tables help more than extra decor."
+      },
+      "system": {
+        "slug": "customers-seated-quickly",
+        "section": "Service",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Customer Orders taken Quickly",
+        "requirementType": "Service speed",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Workers",
+        "howToComplete": "Take customer orders promptly after they sit down. The official wiki does not list a time in seconds.",
+        "cardSummary": "Order speed is a Service-bar check. Staff who can greet and take orders without a pile-up are what this row is watching."
+      },
+      "system": {
+        "slug": "customer-orders-taken-quickly",
+        "section": "Service",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Food Given to Customers Quickly",
+        "requirementType": "Service speed",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Workers",
+        "howToComplete": "Get cooked food to tables promptly. The official wiki does not list a time in seconds.",
+        "cardSummary": "This Service check is about food reaching the table. Chefs, servers, and a short kitchen-to-seat path all support it."
+      },
+      "system": {
+        "slug": "food-given-to-customers-quickly",
+        "section": "Service",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Have 8 Chefs",
+        "requirementType": "Staff",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Workers",
+        "howToComplete": "Hire 8 chefs. That is the chef hiring cap.",
+        "cardSummary": "The Service bar wants a full kitchen staff of 8 chefs. This is a headcount check, not a chef level check."
+      },
+      "system": {
+        "slug": "have-8-chefs",
+        "section": "Service",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Have 8 Waiters",
+        "requirementType": "Staff",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Workers",
+        "howToComplete": "Hire 8 waiters. The Workers page calls this role Servers, with the same 8-person cap.",
+        "cardSummary": "The Service bar wants 8 waiters. The rating table uses Waiters, while the staff menu uses Servers for the same role."
+      },
+      "system": {
+        "slug": "have-8-waiters",
+        "section": "Service",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chef Average Level is 5",
+        "requirementType": "Staff",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Workers",
+        "howToComplete": "Raise chefs until their average level is 5. Worker levels cap at 5.",
+        "cardSummary": "This Service row looks at chef levels, not how many chefs you hired. Average level 5 means the kitchen staff is fully upgraded."
+      },
+      "system": {
+        "slug": "chef-average-level-is-5",
+        "section": "Service",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Server Average Level is 5",
+        "requirementType": "Staff",
+        "categoryRating": "1.0",
+        "totalRating": "0.2",
+        "relatedSystem": "Workers",
+        "howToComplete": "Raise servers until their average level is 5. Worker levels cap at 5.",
+        "cardSummary": "Server average level 5 is the largest Service-bar gain. It is worth more than the chef-level row and more than any single Service upgrade."
+      },
+      "system": {
+        "slug": "server-average-level-is-5",
+        "section": "Service",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Level 2 Kitchens Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Level 2 Kitchens upgrade.",
+        "cardSummary": "Level 2 Kitchens is a Food-bar upgrade. It is the first kitchen-tier purchase that feeds rating."
+      },
+      "system": {
+        "slug": "level-2-kitchens-upgrade",
+        "section": "Food",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Level 3 Kitchens Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Level 3 Kitchens upgrade.",
+        "cardSummary": "Level 3 Kitchens matches Level 2 as a Food-bar upgrade. Level 4 Kitchens exists as an upgrade, but it is not a Food rating row."
+      },
+      "system": {
+        "slug": "level-3-kitchens-upgrade",
+        "section": "Food",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unlock 200 Foods",
+        "requirementType": "Menu",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Food",
+        "howToComplete": "Unlock 200 food dishes. This is unlock progress, not the number of dishes currently on the menu.",
+        "cardSummary": "Unlocking 200 foods is a Food-bar milestone. It counts dishes you have unlocked, not the 10/20/10 live-menu checks."
+      },
+      "system": {
+        "slug": "unlock-200-foods",
+        "section": "Food",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "At least 10 Starters on Menu",
+        "requirementType": "Menu",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Food",
+        "howToComplete": "Keep at least 10 starter dishes on the current menu.",
+        "cardSummary": "The Food bar wants 10 starters available to order. Unlocked starters sitting off the menu do not count."
+      },
+      "system": {
+        "slug": "at-least-10-starters-on-menu",
+        "section": "Food",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "At least 10 Desserts on Menu",
+        "requirementType": "Menu",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Food",
+        "howToComplete": "Keep at least 10 dessert dishes on the current menu.",
+        "cardSummary": "The Food bar wants 10 desserts on the live menu. This is a course-count check, separate from unlocking 200 foods."
+      },
+      "system": {
+        "slug": "at-least-10-desserts-on-menu",
+        "section": "Food",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "At least 20 Mains on Menu",
+        "requirementType": "Menu",
+        "categoryRating": "1.0",
+        "totalRating": "0.2",
+        "relatedSystem": "Food",
+        "howToComplete": "Keep at least 20 main dishes on the current menu.",
+        "cardSummary": "Twenty mains on the menu is the bigger Food course check. It is worth twice as much total rating as the starter or dessert rows."
+      },
+      "system": {
+        "slug": "at-least-20-mains-on-menu",
+        "section": "Food",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "2 Order Counters, 6 Ovens and 6 Kitchen Counters on plot",
+        "requirementType": "Kitchen equipment",
+        "categoryRating": "1.5",
+        "totalRating": "0.3",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 2 order counters, 6 ovens, and 6 kitchen counters on the plot.",
+        "cardSummary": "This combined kitchen setup is the largest Food-bar gain. All three counts have to be on the plot at the same time."
+      },
+      "system": {
+        "slug": "2-order-counters-6-ovens-and-6-kitchen-counters-on-plot",
+        "section": "Food",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Music Playing in Restaurant",
+        "requirementType": "Music",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Music",
+        "howToComplete": "Play any music in the restaurant.",
+        "cardSummary": "Atmosphere starts with music actually playing. Owning extra genres is a separate row from having a track on."
+      },
+      "system": {
+        "slug": "music-playing-in-restaurant",
+        "section": "Atmosphere",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "5 Music Genres Owned",
+        "requirementType": "Music",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Music",
+        "howToComplete": "Own 5 music genres.",
+        "cardSummary": "This Atmosphere row counts owned music genres, not whether a track is currently playing. Two genres are already unlocked when you join."
+      },
+      "system": {
+        "slug": "5-music-genres-owned",
+        "section": "Atmosphere",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "5 Roofs",
+        "requirementType": "Build count",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 5 roof pieces on the plot.",
+        "cardSummary": "Five roofs is a small Atmosphere build check. It is a placed-item count, not a music or art requirement."
+      },
+      "system": {
+        "slug": "5-roofs",
+        "section": "Atmosphere",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "20 Art Items on Plot",
+        "requirementType": "Build count",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 20 Art category items on the plot.",
+        "cardSummary": "The Atmosphere bar wants 20 Art items placed. This is an Art-category count, not a general decoration total."
+      },
+      "system": {
+        "slug": "20-art-items-on-plot",
+        "section": "Atmosphere",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "15 Electronic Items on Plot",
+        "requirementType": "Build count",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 15 Electronic items on the plot. Build Mode lists this category as Electronics.",
+        "cardSummary": "Fifteen Electronic items fill another Atmosphere slot. The rating table says Electronic, and Build Mode files the same items under Electronics."
+      },
+      "system": {
+        "slug": "15-electronic-items-on-plot",
+        "section": "Atmosphere",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "15 Fun Items on Plot",
+        "requirementType": "Build count",
+        "categoryRating": "0.5",
+        "totalRating": "0.1",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 15 Fun category items on the plot.",
+        "cardSummary": "Fifteen Fun items is another Atmosphere placement check. It is separate from Art, Outdoor, and Nature counts."
+      },
+      "system": {
+        "slug": "15-fun-items-on-plot",
+        "section": "Atmosphere",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "15 Outdoor Items on Plot",
+        "requirementType": "Build count",
+        "categoryRating": "1.0",
+        "totalRating": "0.2",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 15 Outdoor category items on the plot.",
+        "cardSummary": "Outdoor items are worth more Atmosphere rating than Art, Fun, or Electronic counts. Fifteen Outdoor pieces add 1.0 to the category bar."
+      },
+      "system": {
+        "slug": "15-outdoor-items-on-plot",
+        "section": "Atmosphere",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "20 Nature Items on Plot",
+        "requirementType": "Build count",
+        "categoryRating": "1.5",
+        "totalRating": "0.3",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 20 Nature category items on the plot.",
+        "cardSummary": "Twenty Nature items is the largest Atmosphere gain. If the Atmosphere bar is the leftover gap, this is the highest-value placement row."
+      },
+      "system": {
+        "slug": "20-nature-items-on-plot",
+        "section": "Atmosphere",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic Advertising Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.25",
+        "totalRating": "0.05",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Basic Advertising upgrade.",
+        "cardSummary": "Basic Advertising is a small Expansions-bar upgrade. Advertising rows sit on Expansions even though they also affect customer flow."
+      },
+      "system": {
+        "slug": "basic-advertising-upgrade",
+        "section": "Expansions",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Print Advertising Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.25",
+        "totalRating": "0.05",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Print Advertising upgrade.",
+        "cardSummary": "Print Advertising is the second small advertising row on the Expansions bar. Buy it after Basic Advertising."
+      },
+      "system": {
+        "slug": "print-advertising-upgrade",
+        "section": "Expansions",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Billboard Advertising Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.25",
+        "totalRating": "0.05",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Billboard Advertising upgrade.",
+        "cardSummary": "Billboard Advertising is another 0.25 Expansions gain. It is one of four advertising upgrades on this bar."
+      },
+      "system": {
+        "slug": "billboard-advertising-upgrade",
+        "section": "Expansions",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Media Advertising Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.25",
+        "totalRating": "0.05",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Media Advertising upgrade.",
+        "cardSummary": "Media Advertising finishes the four advertising rows. Together they add 1.0 to the Expansions category."
+      },
+      "system": {
+        "slug": "media-advertising-upgrade",
+        "section": "Expansions",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Purchase all Restaurant Expansions",
+        "requirementType": "Upgrade",
+        "categoryRating": "2",
+        "totalRating": "0.5",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy every restaurant plot expansion. The Upgrades page lists eight expansion purchases.",
+        "cardSummary": "Buying every plot expansion is the largest Expansions-bar gain. Floor upgrades, advertising, value, and seats are separate rows."
+      },
+      "system": {
+        "slug": "purchase-all-restaurant-expansions",
+        "section": "Expansions",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Floor 2 Upgrade",
+        "requirementType": "Upgrade",
+        "categoryRating": "0.25",
+        "totalRating": "0.05",
+        "relatedSystem": "Upgrades",
+        "howToComplete": "Buy the Second Floor upgrade. Third Floor exists as an upgrade, but it is not an official rating row.",
+        "cardSummary": "Floor 2 is a small Expansions gain. The rating table names Floor 2, which matches the Second Floor upgrade."
+      },
+      "system": {
+        "slug": "floor-2-upgrade",
+        "section": "Expansions",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Restaurant Value is at least 200k",
+        "requirementType": "Restaurant progress",
+        "categoryRating": "1.0",
+        "totalRating": "0.2",
+        "relatedSystem": "Build items",
+        "howToComplete": "Raise restaurant value to at least 200k. The info sign shows restaurant value.",
+        "cardSummary": "A 200k restaurant value is a large Expansions check. Value comes from what you have built and bought, not from advertising alone."
+      },
+      "system": {
+        "slug": "restaurant-value-is-at-least-200k",
+        "section": "Expansions",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "100 Seats for Customers",
+        "requirementType": "Build count",
+        "categoryRating": "1.0",
+        "totalRating": "0.2",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place seating for at least 100 customers.",
+        "cardSummary": "One hundred seats is the other large Expansions progress check. Tables and chairs have to add up to that capacity."
+      },
+      "system": {
+        "slug": "100-seats-for-customers",
+        "section": "Expansions",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "12 Other Types of Bathroom items on Plot",
+        "requirementType": "Hygiene",
+        "categoryRating": "2.0",
+        "totalRating": "0.4",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 12 bathroom items that are not toilets or sinks. Bathroom pieces are decorative.",
+        "cardSummary": "Twelve extra bathroom items is one of the two biggest Hygiene gains. Toilets and sinks are counted on their own rows."
+      },
+      "system": {
+        "slug": "12-other-types-of-bathroom-items-on-plot",
+        "section": "Hygiene",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "3 Toilets on Plot",
+        "requirementType": "Hygiene",
+        "categoryRating": "2.0",
+        "totalRating": "0.4",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 3 toilets on the plot.",
+        "cardSummary": "Three toilets match the extra-bathroom row as a 2.0 Hygiene gain. Sinks are a separate count."
+      },
+      "system": {
+        "slug": "3-toilets-on-plot",
+        "section": "Hygiene",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "3 Sinks on Plot",
+        "requirementType": "Hygiene",
+        "categoryRating": "1.5",
+        "totalRating": "0.3",
+        "relatedSystem": "Build items",
+        "howToComplete": "Place 3 sinks on the plot.",
+        "cardSummary": "Three sinks finish the Hygiene bar. This row is a little smaller than the toilet and extra-bathroom checks, but it is still a large total-rating gain."
+      },
+      "system": {
+        "slug": "3-sinks-on-plot",
+        "section": "Hygiene",
+        "sortOrder": 36,
+        "image": null
+      }
+    }
+  ]
+}

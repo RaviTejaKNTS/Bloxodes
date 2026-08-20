@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Restaurant Tycoon 3",
+    "gameSlug": "restaurant-tycoon-3",
+    "collection": "franchise-levels",
+    "route": "/wiki/restaurant-tycoon-3/franchise-levels",
+    "catalogCode": "restaurant-tycoon-3-franchise-levels",
+    "itemFields": [
+      "name",
+      "requirement",
+      "restaurantsRequired",
+      "starRatingRequired",
+      "earningsPerHour",
+      "maxEarnings",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "requirement",
+      "restaurantsRequired",
+      "starRatingRequired",
+      "earningsPerHour",
+      "maxEarnings",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Early franchise",
+        "Growing franchise",
+        "Late franchise"
+      ],
+      "badgeField": "earningsPerHour",
+      "subtitleFields": [
+        "starRatingRequired",
+        "restaurantsRequired"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "requirement",
+        "starRatingRequired",
+        "earningsPerHour",
+        "maxEarnings"
+      ],
+      "tableFields": [
+        "requirement",
+        "restaurantsRequired",
+        "starRatingRequired",
+        "earningsPerHour",
+        "maxEarnings",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "requirement": {
+          "kind": "normal",
+          "label": "Requirement"
+        },
+        "restaurantsRequired": {
+          "kind": "chip",
+          "label": "Restaurants"
+        },
+        "starRatingRequired": {
+          "kind": "highlight",
+          "label": "Star rating"
+        },
+        "earningsPerHour": {
+          "kind": "chip",
+          "label": "Earnings"
+        },
+        "maxEarnings": {
+          "kind": "chip",
+          "label": "Max earnings"
+        },
+        "cardSummary": "detail"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Level 1",
+        "requirement": "Franchise Upgrade (1200 Cash)",
+        "restaurantsRequired": null,
+        "starRatingRequired": "None",
+        "earningsPerHour": "50 Cash/hr",
+        "maxEarnings": "250 Cash",
+        "cardSummary": "Level 1 starts offline franchise earnings after the 1200 Cash Franchise upgrade. It pays 50 Cash per hour until the 250 Cash cap."
+      },
+      "system": {
+        "slug": "level-1",
+        "section": "Early franchise",
+        "sortOrder": 1,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 2",
+        "requirement": "1 restaurant with 3 stars",
+        "restaurantsRequired": "1 restaurant",
+        "starRatingRequired": "3 stars",
+        "earningsPerHour": "65 Cash/hr",
+        "maxEarnings": "500 Cash",
+        "cardSummary": "Level 2 needs one 3-star restaurant in the franchise. Offline pay rises to 65 Cash per hour with a 500 Cash cap."
+      },
+      "system": {
+        "slug": "level-2",
+        "section": "Early franchise",
+        "sortOrder": 2,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 3",
+        "requirement": "2 restaurants with 3 stars",
+        "restaurantsRequired": "2 restaurants",
+        "starRatingRequired": "3 stars",
+        "earningsPerHour": "80 Cash/hr",
+        "maxEarnings": "750 Cash",
+        "cardSummary": "Level 3 needs two 3-star restaurants. It pays 80 Cash per hour until the 750 Cash cap."
+      },
+      "system": {
+        "slug": "level-3",
+        "section": "Early franchise",
+        "sortOrder": 3,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 4",
+        "requirement": "2 restaurants with 4 stars",
+        "restaurantsRequired": "2 restaurants",
+        "starRatingRequired": "4 stars",
+        "earningsPerHour": "100 Cash/hr",
+        "maxEarnings": "1250 Cash",
+        "cardSummary": "Level 4 is the first 4-star gate: two restaurants at 4 stars for 100 Cash per hour and a 1250 Cash cap."
+      },
+      "system": {
+        "slug": "level-4",
+        "section": "Growing franchise",
+        "sortOrder": 4,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 5",
+        "requirement": "4 restaurants with 3 stars",
+        "restaurantsRequired": "4 restaurants",
+        "starRatingRequired": "3 stars",
+        "earningsPerHour": "120 Cash/hr",
+        "maxEarnings": "1750 Cash",
+        "cardSummary": "Level 5 uses volume instead of a higher rating: four 3-star restaurants for 120 Cash per hour and a 1750 Cash cap."
+      },
+      "system": {
+        "slug": "level-5",
+        "section": "Growing franchise",
+        "sortOrder": 5,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 6",
+        "requirement": "3 restaurants with 4 stars",
+        "restaurantsRequired": "3 restaurants",
+        "starRatingRequired": "4 stars",
+        "earningsPerHour": "150 Cash/hr",
+        "maxEarnings": "2500 Cash",
+        "cardSummary": "Level 6 needs three 4-star restaurants. Offline pay is 150 Cash per hour with a 2500 Cash cap."
+      },
+      "system": {
+        "slug": "level-6",
+        "section": "Growing franchise",
+        "sortOrder": 6,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 7",
+        "requirement": "3 restaurants with 5 stars",
+        "restaurantsRequired": "3 restaurants",
+        "starRatingRequired": "5 stars",
+        "earningsPerHour": "175 Cash/hr",
+        "maxEarnings": "3250 Cash",
+        "cardSummary": "Level 7 is the first 5-star gate: three 5-star restaurants for 175 Cash per hour and a 3250 Cash cap."
+      },
+      "system": {
+        "slug": "level-7",
+        "section": "Late franchise",
+        "sortOrder": 7,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 8",
+        "requirement": "4 restaurants with 4 stars",
+        "restaurantsRequired": "4 restaurants",
+        "starRatingRequired": "4 stars",
+        "earningsPerHour": "200 Cash/hr",
+        "maxEarnings": "4500 Cash",
+        "cardSummary": "Level 8 needs four 4-star restaurants. It pays 200 Cash per hour until the 4500 Cash cap."
+      },
+      "system": {
+        "slug": "level-8",
+        "section": "Late franchise",
+        "sortOrder": 8,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 9",
+        "requirement": "4 restaurants with 5 stars",
+        "restaurantsRequired": "4 restaurants",
+        "starRatingRequired": "5 stars",
+        "earningsPerHour": "250 Cash/hr",
+        "maxEarnings": "6500 Cash",
+        "cardSummary": "Level 9 needs four 5-star restaurants. Offline pay is 250 Cash per hour with a 6500 Cash cap."
+      },
+      "system": {
+        "slug": "level-9",
+        "section": "Late franchise",
+        "sortOrder": 9,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Level 10",
+        "requirement": "5 restaurants with 5 stars",
+        "restaurantsRequired": "5 restaurants",
+        "starRatingRequired": "5 stars",
+        "earningsPerHour": "300 Cash/hr",
+        "maxEarnings": "10000 Cash",
+        "cardSummary": "Level 10 is the max franchise: five 5-star restaurants for 300 Cash per hour and a 10000 Cash cap."
+      },
+      "system": {
+        "slug": "level-10",
+        "section": "Late franchise",
+        "sortOrder": 10,
+        "image": "/Restaurant%20Tycoon%203/Franchise%20Levels/franchise.png"
+      }
+    }
+  ]
+}
