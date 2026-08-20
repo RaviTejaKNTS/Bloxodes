@@ -60,6 +60,8 @@ import { unboxAsmrCollectionGroup } from "./unbox-asmr";
 import { lineagePieceCollectionGroup } from "./lineage-piece";
 import { solsRngCollectionGroup } from "./sols-rng";
 import { deadRailsCollectionGroup } from "./dead-rails";
+import { dandysWorldCollectionGroup } from "./dandys-world";
+import { towerOfHellCollectionGroup } from "./tower-of-hell";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -124,5 +126,7 @@ export const GAME_COLLECTION_GROUPS = [
   unboxAsmrCollectionGroup,
   lineagePieceCollectionGroup,
   solsRngCollectionGroup,
-  deadRailsCollectionGroup
+  deadRailsCollectionGroup,
+  dandysWorldCollectionGroup,
+  towerOfHellCollectionGroup
 ] satisfies GameCollectionGroup[];

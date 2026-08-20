@@ -1,0 +1,4446 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sol's RNG",
+    "gameSlug": "sols-rng",
+    "collection": "auras",
+    "route": "/wiki/sols-rng/auras",
+    "catalogCode": "sols-rng-auras",
+    "itemFields": [
+      "summary",
+      "chance",
+      "nativeBiome",
+      "nativeChance",
+      "howToGet"
+    ],
+    "columns": [
+      "summary",
+      "chance",
+      "nativeBiome",
+      "nativeChance",
+      "howToGet"
+    ],
+    "display": {
+      "groupLabel": "Rarity tier",
+      "sectionOrder": [
+        "Basic",
+        "Epic",
+        "Unique",
+        "Legendary",
+        "Mythic",
+        "Exalted",
+        "Glorious",
+        "Transcendent",
+        "Challenged",
+        "Challenged+"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "chance",
+        "nativeBiome",
+        "nativeChance",
+        "howToGet"
+      ],
+      "tableFields": [
+        "chance",
+        "nativeBiome",
+        "nativeChance"
+      ],
+      "fieldPresentation": {
+        "chance": {
+          "kind": "chip",
+          "label": "Base chance",
+          "omitWhenEmpty": true
+        },
+        "nativeChance": {
+          "kind": "chip",
+          "label": "Native chance",
+          "omitWhenEmpty": true
+        },
+        "nativeBiome": {
+          "kind": "plain",
+          "label": "Native biome",
+          "omitWhenEmpty": true
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "How to get",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Aquamarine",
+        "summary": "Empty",
+        "chance": "1 in 900",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "aquamarine",
+        "section": "Basic",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/aquamarine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Common",
+        "summary": "Very common thing",
+        "chance": "1 in 2",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "common",
+        "section": "Basic",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/common.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystallized",
+        "summary": "Shining thing",
+        "chance": "1 in 64",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "crystallized",
+        "section": "Basic",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/crystallized.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Divinus",
+        "summary": "Holy thing",
+        "chance": "1 in 32",
+        "nativeBiome": null,
+        "nativeChance": "1 in 6",
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "divinus",
+        "section": "Basic",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/divinus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dizzy",
+        "summary": "Empty",
+        "chance": "1 in 123",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "dizzy",
+        "section": "Basic",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/dizzy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Emerald",
+        "summary": "Gem of a green hue",
+        "chance": "1 in 500",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "emerald",
+        "section": "Basic",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/emerald.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forbidden",
+        "summary": "Empty",
+        "chance": "1 in 403",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 202",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 202."
+      },
+      "system": {
+        "slug": "forbidden",
+        "section": "Basic",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/forbidden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilded",
+        "summary": "That's a shiny one!",
+        "chance": "1 in 512",
+        "nativeBiome": "Sandstorm",
+        "nativeChance": "1 in 128",
+        "howToGet": "Only drops while the Sandstorm biome is active, where its odds improve to 1 in 128."
+      },
+      "system": {
+        "slug": "gilded",
+        "section": "Basic",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/gilded.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Good",
+        "summary": "Very good thing",
+        "chance": "1 in 5",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "good",
+        "section": "Basic",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/good.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ink",
+        "summary": "\"Paint all black .\"",
+        "chance": "1 in 700",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ink",
+        "section": "Basic",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/ink.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jackpot",
+        "summary": "That's such a tremendous prize!",
+        "chance": "1 in 777",
+        "nativeBiome": "Sandstorm",
+        "nativeChance": "1 in 194",
+        "howToGet": "Only drops while the Sandstorm biome is active, where its odds improve to 1 in 194."
+      },
+      "system": {
+        "slug": "jackpot",
+        "section": "Basic",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Auras/jackpot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Natural",
+        "summary": "What a natural thing",
+        "chance": "1 in 8",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "natural",
+        "section": "Basic",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Auras/natural.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nothing",
+        "summary": "It's Nothing...",
+        "chance": "1 in 1",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "nothing",
+        "section": "Basic",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Auras/nothing.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rage",
+        "summary": null,
+        "chance": "1 in 128",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "rage",
+        "section": "Basic",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Auras/rage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rare",
+        "summary": "Rare thing",
+        "chance": "1 in 16",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "rare",
+        "section": "Basic",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Auras/rare.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruby",
+        "summary": "Gem of a red hue",
+        "chance": "1 in 350",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ruby",
+        "section": "Basic",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Auras/ruby.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sapphire",
+        "summary": "Gem of an azure hue",
+        "chance": "1 in 800",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "sapphire",
+        "section": "Basic",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Auras/sapphire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Topaz",
+        "summary": "Gem of a brown hue",
+        "chance": "1 in 150",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "topaz",
+        "section": "Basic",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Auras/topaz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uncommon",
+        "summary": "Very uncommon thing",
+        "chance": "1 in 4",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "uncommon",
+        "section": "Basic",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Auras/uncommon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wind",
+        "summary": "The wind spirit is hovering around you",
+        "chance": "1 in 900",
+        "nativeBiome": "Windy",
+        "nativeChance": "1 in 300",
+        "howToGet": "Only drops while the Windy biome is active, where its odds improve to 1 in 300."
+      },
+      "system": {
+        "slug": "wind",
+        "section": "Basic",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Auras/wind.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ash",
+        "summary": "Everything that is destroyed goes back to ashes ,",
+        "chance": "1 in 2,300",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ash",
+        "section": "Epic",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/ash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Atomic",
+        "summary": "It is a tiny unit of matter with a central core and moving parts around it. This is what everything physical is made of.",
+        "chance": "1 in 1,180",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "atomic",
+        "section": "Epic",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/atomic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Atomic : Ribonucleic",
+        "summary": null,
+        "chance": "1 in 9,876",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "atomic-ribonucleic",
+        "section": "Epic",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/atomic-ribonucleic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bleeding",
+        "summary": "Endlessly oozing blood ... Hey, you sure you alright?",
+        "chance": "1 in 4,444",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "bleeding",
+        "section": "Epic",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/bleeding.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cola",
+        "summary": "A sharp, sparkling fizz bursts out across your tongue.",
+        "chance": "1 in 3,999",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "cola",
+        "section": "Epic",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/cola.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diaboli",
+        "summary": "Empty",
+        "chance": "1 in 1,004",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "diaboli",
+        "section": "Epic",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/diaboli.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Doodle",
+        "summary": "Drawn by an unnamed creator who believed joy was just as powerful as fate. With playful lines and imperfect strokes, this aura was sketched into existence to spread happiness and good cheer. When Doodle appears, the...",
+        "chance": "1 in 7,500",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "doodle",
+        "section": "Epic",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/doodle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flora",
+        "summary": "The meaning carried by a beautiful bouquet of flowers can be many, and its character often changes depending on the color.",
+        "chance": "1 in 3,700",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "flora",
+        "section": "Epic",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/flora.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flushed",
+        "summary": "😳",
+        "chance": "1 in 6,900",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "flushed",
+        "section": "Epic",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/flushed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flutter",
+        "summary": "Empty",
+        "chance": "1 in 5,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "flutter",
+        "section": "Epic",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/flutter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glacier",
+        "summary": "a cold spirit",
+        "chance": "1 in 2,304",
+        "nativeBiome": "Snowy",
+        "nativeChance": "1 in 768",
+        "howToGet": "Only drops while the Snowy biome is active, where its odds improve to 1 in 768."
+      },
+      "system": {
+        "slug": "glacier",
+        "section": "Epic",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Auras/glacier.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glock",
+        "summary": "What do you mean by Aura ? It's literally just a Glock-17 !",
+        "chance": "1 in 1,700",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "glock",
+        "section": "Epic",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Auras/glock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hazard",
+        "summary": "This is a constant destruction of life",
+        "chance": "1 in 7,000",
+        "nativeBiome": "Corruption",
+        "nativeChance": "1 in 1,400",
+        "howToGet": "Only drops while the Corruption biome is active, where its odds improve to 1 in 1,400."
+      },
+      "system": {
+        "slug": "hazard",
+        "section": "Epic",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Auras/hazard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Honey",
+        "summary": "Sticky honey with a sweet fragrance drenches your body. Be careful not to get stung by bees.",
+        "chance": "1 in 8,335",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "honey",
+        "section": "Epic",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Auras/honey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hydrogen",
+        "summary": "Empty",
+        "chance": "1 in 1,111",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "hydrogen",
+        "section": "Epic",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Auras/hydrogen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Soul",
+        "summary": "A pitiful soul that has been wandering nearby.",
+        "chance": "1 in 9,200",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "lost-soul",
+        "section": "Epic",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Auras/lost-soul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnetic",
+        "summary": "It's surrounded by powerful magnetic force",
+        "chance": "1 in 2,048",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "magnetic",
+        "section": "Epic",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Auras/magnetic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Penumbra",
+        "summary": "Empty",
+        "chance": "1 in 1,010",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "penumbra",
+        "section": "Epic",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Auras/penumbra.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Player",
+        "summary": null,
+        "chance": "1 in 3,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 1,500",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 1,500."
+      },
+      "system": {
+        "slug": "player",
+        "section": "Epic",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Auras/player.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Precious",
+        "summary": "Empty",
+        "chance": "1 in 1,024",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "precious",
+        "section": "Epic",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Auras/precious.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Quartz",
+        "summary": "A fascinating mineral that can change into various colors depending on the surrouding environment during mining.",
+        "chance": "1 in 8,192",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "quartz",
+        "section": "Epic",
+        "sortOrder": 20,
+        "image": "/Sols RNG/Auras/quartz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sidereum",
+        "summary": "A trail of broken stars",
+        "chance": "1 in 4,096",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "sidereum",
+        "section": "Epic",
+        "sortOrder": 21,
+        "image": "/Sols RNG/Auras/sidereum.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Targeted",
+        "summary": "Hunted by the agent codenamed \"Shift_Lock,\" the target is tracked down without mercy. One error in movement, and Shift_Lock will strike instantly.",
+        "chance": "1 in 5,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "targeted",
+        "section": "Epic",
+        "sortOrder": 22,
+        "image": "/Sols RNG/Auras/targeted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Umbra",
+        "summary": "Empty",
+        "chance": "1 in 1,010",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "umbra",
+        "section": "Epic",
+        "sortOrder": 23,
+        "image": "/Sols RNG/Auras/umbra.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquatic",
+        "summary": "It represents the flow of water",
+        "chance": "1 in 40,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "aquatic",
+        "section": "Unique",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/aquatic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Constella",
+        "summary": "A space cluster which sits at the edge of the universe, it is discovered when it was taken in by The Singularity.",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 86,988",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 86,988."
+      },
+      "system": {
+        "slug": "constella",
+        "section": "Unique",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/constella.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Copper",
+        "summary": "It is the oldest metal ever handled by civilization.",
+        "chance": "1 in 29,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "copper",
+        "section": "Unique",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/copper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrosive",
+        "summary": "It's slowly corrupting everything..",
+        "chance": "1 in 12,000",
+        "nativeBiome": "Corruption",
+        "nativeChance": "1 in 2,400",
+        "howToGet": "Only drops while the Corruption biome is active, where its odds improve to 1 in 2,400."
+      },
+      "system": {
+        "slug": "corrosive",
+        "section": "Unique",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/corrosive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flow",
+        "summary": "It feels as though a calm and peaceful melody is drifting around you.",
+        "chance": "1 in 87,000",
+        "nativeBiome": "Windy",
+        "nativeChance": "1 in 29,000",
+        "howToGet": "Only drops while the Windy biome is active, where its odds improve to 1 in 29,000."
+      },
+      "system": {
+        "slug": "flow",
+        "section": "Unique",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/flow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flushed : Lobotomy",
+        "summary": null,
+        "chance": "1 in 69,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "flushed-lobotomy",
+        "section": "Unique",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/flushed-lobotomy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilded : Crowned",
+        "summary": "A shiny crown for someone special!",
+        "chance": "1 in 20,000",
+        "nativeBiome": "Sandstorm",
+        "nativeChance": "1 in 5,000",
+        "howToGet": "Only drops while the Sandstorm biome is active, where its odds improve to 1 in 5,000."
+      },
+      "system": {
+        "slug": "gilded-crowned",
+        "section": "Unique",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/gilded-crowned.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hazard : Rays",
+        "summary": "This is a constant destruction of life",
+        "chance": "1 in 70,000",
+        "nativeBiome": "Corruption",
+        "nativeChance": "1 in 14,000",
+        "howToGet": "Only drops while the Corruption biome is active, where its odds improve to 1 in 14,000."
+      },
+      "system": {
+        "slug": "hazard-rays",
+        "section": "Unique",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/hazard-rays.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ink : Leak",
+        "summary": "\"When you paint it all black , beware of LEAKS .\"",
+        "chance": "1 in 14,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ink-leak",
+        "section": "Unique",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/ink-leak.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kawaii",
+        "summary": "Empty",
+        "chance": "1 in 12,300",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "kawaii",
+        "section": "Unique",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/kawaii.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar",
+        "summary": "It was made with Moonlight by an Unknown being on a quiet night.",
+        "chance": "1 in 50,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 5,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 5,000."
+      },
+      "system": {
+        "slug": "lunar",
+        "section": "Unique",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Auras/lunar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marsh",
+        "summary": "Empty",
+        "chance": "1 in 25,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "marsh",
+        "section": "Unique",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Auras/marsh.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nautilus",
+        "summary": "A small shout resounding from the depths of the abyss ..",
+        "chance": "1 in 70,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "nautilus",
+        "section": "Unique",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Auras/nautilus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Permafrost",
+        "summary": "You can find it in the cold lands throughout the year, unaffected by the seasons.",
+        "chance": "1 in 73,500",
+        "nativeBiome": "Snowy",
+        "nativeChance": "1 in 24,500",
+        "howToGet": "Only drops while the Snowy biome is active, where its odds improve to 1 in 24,500."
+      },
+      "system": {
+        "slug": "permafrost",
+        "section": "Unique",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Auras/permafrost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pleiades",
+        "summary": "A star cluster which had roomed the universe collecting stars until it was taken by The Singularity.",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 65,358",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 65,358."
+      },
+      "system": {
+        "slug": "pleiades",
+        "section": "Unique",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Auras/pleiades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Powered",
+        "summary": "I feel like I've become more powerful!",
+        "chance": "1 in 16,384",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "powered",
+        "section": "Unique",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Auras/powered.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pulsar",
+        "summary": "Empty",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 83,345",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 83,345."
+      },
+      "system": {
+        "slug": "pulsar",
+        "section": "Unique",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Auras/pulsar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rage : Heated",
+        "summary": "Furious rage",
+        "chance": "1 in 12,800",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "rage-heated",
+        "section": "Unique",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Auras/rage-heated.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Solar",
+        "summary": "It was made with Sunshine by an Unknown being on a bright day.",
+        "chance": "1 in 50,000",
+        "nativeBiome": "Daytime",
+        "nativeChance": "1 in 5,000",
+        "howToGet": "Only drops while the Daytime biome is active, where its odds improve to 1 in 5,000."
+      },
+      "system": {
+        "slug": "solar",
+        "section": "Unique",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Auras/solar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight",
+        "summary": "This starlight with mysterious powers infused will follow you persistently, illuminating the path.",
+        "chance": "1 in 50,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 10,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 10,000."
+      },
+      "system": {
+        "slug": "starlight",
+        "section": "Unique",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Auras/starlight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "StarRider",
+        "summary": null,
+        "chance": "1 in 50,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 10,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 10,000."
+      },
+      "system": {
+        "slug": "starrider",
+        "section": "Unique",
+        "sortOrder": 20,
+        "image": "/Sols RNG/Auras/starrider.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stormal",
+        "summary": "An enormous storm raging around you.",
+        "chance": "1 in 90,000",
+        "nativeBiome": "Windy",
+        "nativeChance": "1 in 30,000",
+        "howToGet": "Only drops while the Windy biome is active, where its odds improve to 1 in 30,000."
+      },
+      "system": {
+        "slug": "stormal",
+        "section": "Unique",
+        "sortOrder": 21,
+        "image": "/Sols RNG/Auras/stormal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Undead",
+        "summary": "failed to die ....",
+        "chance": "1 in 12,000",
+        "nativeBiome": "Hell",
+        "nativeChance": "1 in 2,000",
+        "howToGet": "Only drops while the Hell biome is active, where its odds improve to 1 in 2,000."
+      },
+      "system": {
+        "slug": "undead",
+        "section": "Unique",
+        "sortOrder": 22,
+        "image": "/Sols RNG/Auras/undead.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Watt",
+        "summary": "You feel a thrilling surge of electric energy coursing through your body.",
+        "chance": "1 in 32,768",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "watt",
+        "section": "Unique",
+        "sortOrder": 23,
+        "image": "/Sols RNG/Auras/watt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "★",
+        "summary": null,
+        "chance": null,
+        "nativeBiome": "Dreamspace",
+        "nativeChance": "1 in 100",
+        "howToGet": "Cannot be rolled normally; it only appears while the Dreamspace biome is active where its odds are 1 in 100."
+      },
+      "system": {
+        "slug": "aura",
+        "section": "Unique",
+        "sortOrder": 24,
+        "image": "/Sols RNG/Auras/aura.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aether",
+        "summary": "Mysterious matter believed to act as a medium for transmitting light The exact use is unknown.",
+        "chance": "1 in 180,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "aether",
+        "section": "Legendary",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/aether.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bounded",
+        "summary": "It's too dangerous. Although it was sealed by an Ancient Power hundreds of thousands of years ago, its consciousness appears to be alive",
+        "chance": "1 in 200,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "bounded",
+        "section": "Legendary",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/bounded.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial",
+        "summary": "An Individual with a sacredness that seems to have descended from heaven is hovering around and delivering words of blessing .",
+        "chance": "1 in 350,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "celestial",
+        "section": "Legendary",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/celestial.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Comet",
+        "summary": "People believe that it has the capabilities to make wishes come true .",
+        "chance": "1 in 120,000",
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 24,000",
+        "howToGet": "Only drops while the Singularity biome is active, where its odds improve to 1 in 24,000."
+      },
+      "system": {
+        "slug": "comet",
+        "section": "Legendary",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/comet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diaboli : Void",
+        "summary": "Empty",
+        "chance": "1 in 100,400",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "diaboli-void",
+        "section": "Legendary",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/diaboli-void.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Divinus : Angel",
+        "summary": null,
+        "chance": "1 in 120,000",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 24,000",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 24,000."
+      },
+      "system": {
+        "slug": "divinus-angel",
+        "section": "Legendary",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/divinus-angel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eclipse",
+        "summary": "|-| New= Some refer to this as a miracle, while others see it as a disaster. In reality, it's merely a natural occurrence where the Moon obscures the Sun . |-| Old= Some refer to this as a miracle while others call...",
+        "chance": null,
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Crafted at Jake's Workshop from other auras and materials instead of being rolled."
+      },
+      "system": {
+        "slug": "eclipse",
+        "section": "Legendary",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/eclipse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exotic",
+        "summary": "Nobody knows where it originates from, and how old it is.",
+        "chance": "1 in 99,999",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "exotic",
+        "section": "Legendary",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/exotic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fault",
+        "summary": "A heterogeneous substance",
+        "chance": null,
+        "nativeBiome": "Glitched",
+        "nativeChance": "1 in 3,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Glitched biome is active where its odds are 1 in 3,000."
+      },
+      "system": {
+        "slug": "fault",
+        "section": "Legendary",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/fault.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hope",
+        "summary": "One of heavens guards, let your fate be decided",
+        "chance": "1 in 488,725",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 97,745",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 97,745."
+      },
+      "system": {
+        "slug": "hope",
+        "section": "Legendary",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/hope.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jade",
+        "summary": "This, is the name of a legendary man who approaches ones lost in the vast forest and gives directions. He is kind, and knows the forest better than anyone else. But one day, he stopped showing himself to people....",
+        "chance": "1 in 125,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "jade",
+        "section": "Legendary",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Auras/jade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jazz",
+        "summary": "Jazz, a romance born in improvisation, where free melodies whisper the language of love.",
+        "chance": "1 in 160,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "jazz",
+        "section": "Legendary",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Auras/jazz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kyawthuite",
+        "summary": "Long, long ago, there was a 'boy' who stayed alone in the empty space of a deep cave. He is still waiting for the day when he can sit on the moon together with the girl who suddenly left when he was young, somewhere...",
+        "chance": "1 in 850,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "kyawthuite",
+        "section": "Legendary",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Auras/kyawthuite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lantern",
+        "summary": "Empty",
+        "chance": "1 in 333,333",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "lantern",
+        "section": "Legendary",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Auras/lantern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven",
+        "summary": "The raven is known as a harbinger of misfortune or disaster. Its instinct to sense calamity before others and flee, its tendency to travel in flocks, its dark an ominous presence, its habit of feeding on corpses, and...",
+        "chance": "1 in 500,000",
+        "nativeBiome": "Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the Limbo biome is active."
+      },
+      "system": {
+        "slug": "raven",
+        "section": "Legendary",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Auras/raven.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spectre",
+        "summary": "An agressive hunter that goes around collecting weak souls.",
+        "chance": "1 in 140,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "spectre",
+        "section": "Legendary",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Auras/spectre.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Terror",
+        "summary": "It is spreading a dreadful screams...",
+        "chance": "1 in 400,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "terror",
+        "section": "Legendary",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Auras/terror.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Undead : Devil",
+        "summary": null,
+        "chance": "1 in 666,666",
+        "nativeBiome": "Hell",
+        "nativeChance": "1 in 111,111",
+        "howToGet": "Only drops while the Hell biome is active, where its odds improve to 1 in 111,111."
+      },
+      "system": {
+        "slug": "undead-devil",
+        "section": "Legendary",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Auras/undead-devil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vortex",
+        "summary": "Empty",
+        "chance": "1 in 399,999",
+        "nativeBiome": "Windy",
+        "nativeChance": "1 in 133,333",
+        "howToGet": "Only drops while the Windy biome is active, where its odds improve to 1 in 133,333."
+      },
+      "system": {
+        "slug": "vortex",
+        "section": "Legendary",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Auras/vortex.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Warlock",
+        "summary": "'Warlock' is actually the name of the sword. Bound to a devious demon familiar, this sword grants immense power but it constantly drags its wielder into terrible incidents and relentlessly seeks to claim their life.",
+        "chance": "1 in 666,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "warlock",
+        "section": "Legendary",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Auras/warlock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "★★",
+        "summary": null,
+        "chance": null,
+        "nativeBiome": "Dreamspace",
+        "nativeChance": "1 in 1,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Dreamspace biome is active where its odds are 1 in 1,000."
+      },
+      "system": {
+        "slug": "aura-2",
+        "section": "Legendary",
+        "sortOrder": 20,
+        "image": "/Sols RNG/Auras/aura-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Amethyst",
+        "summary": "It was a light; inexhaustible, unending. A power that shined all those years ago in an era dark and demonic all those centuries ago. Each decade from the top of the mountain, that young and energetic girl would bring...",
+        "chance": "1 in 9,333,700",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "amethyst",
+        "section": "Mythic",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/amethyst.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Anima",
+        "summary": "Someone's memory or sense of self, now without even a trace of form continues to be inherited, endlessly reborn through the flowers that bloom and wither, and the butterflies drawn to them, all in a effort to not be...",
+        "chance": "1 in 5,730,000",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "anima",
+        "section": "Mythic",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/anima.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Anubis",
+        "summary": "The one who guides the dead to the afterlife... more precisely, this is only his copy. The complete form can indeed be unleashed.",
+        "chance": "1 in 7,200,000",
+        "nativeBiome": "Sandstorm",
+        "nativeChance": "1 in 1,800,000",
+        "howToGet": "Only drops while the Sandstorm biome is active, where its odds improve to 1 in 1,800,000."
+      },
+      "system": {
+        "slug": "anubis",
+        "section": "Mythic",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/anubis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apatite",
+        "summary": "It was a conduit; knowledgeable and guiding. A flicker in the marrow of an age broken for centuries. It was long ago. So long ago that the elders argue if it was memory or dream, but there was to be light. Violet and...",
+        "chance": "1 in 3,133,133",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "apatite",
+        "section": "Mythic",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/apatite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquatic : Flame",
+        "summary": "It represents the flow of the flames",
+        "chance": "1 in 4,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "aquatic-flame",
+        "section": "Mythic",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/aquatic-flame.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arcane",
+        "summary": "|-| Current= A spell found in the ruins of an ancient civilization this swaying silhouette that seems to possess its own consciousness has a record of completely erasing one civilization from history. |-| Old= People...",
+        "chance": "1 in 1,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "arcane",
+        "section": "Mythic",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/arcane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Archmage",
+        "summary": "Empty",
+        "chance": "1 in 1,766,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "archmage",
+        "section": "Mythic",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/archmage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astral",
+        "summary": null,
+        "chance": "1 in 1,336,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 267,200",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 267,200."
+      },
+      "system": {
+        "slug": "astral",
+        "section": "Mythic",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/astral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astronaut",
+        "summary": "Empty",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 6,117,196",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 6,117,196."
+      },
+      "system": {
+        "slug": "astronaut",
+        "section": "Mythic",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/astronaut.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bounded : Unbound",
+        "summary": null,
+        "chance": "1 in 2,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "bounded-unbound",
+        "section": "Mythic",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/bounded-unbound.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial : Divine",
+        "summary": "A holy sword that seems to have descended from the heavens. A powerful will and peace-granting force pour from its radiant blade, shining brilliantly.",
+        "chance": "1 in 7,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "celestial-divine",
+        "section": "Mythic",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Auras/celestial-divine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmos",
+        "summary": "A galactic warrior who fought in the ancient space war. Countless years have passed since the war, but the scars of war still remains on its body.",
+        "chance": "1 in 1,520,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "cosmos",
+        "section": "Mythic",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Auras/cosmos.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmos : Alice",
+        "summary": null,
+        "chance": "1 in 3,500,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "cosmos-alice",
+        "section": "Mythic",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Auras/cosmos-alice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystallized : Bejeweled",
+        "summary": "As the crystals grow more and more, it weakens the victim, spreading like an infection, weighing down on the victim until it's hard to even breath, however █████ had discovered something powerful within these crystals...",
+        "chance": "1 in 3,600,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "crystallized-bejeweled",
+        "section": "Mythic",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Auras/crystallized-bejeweled.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Divinus : Guardian",
+        "summary": "\"I will protect you\" it says as it stands in front of you, something about its presence makes you feel safe.",
+        "chance": "1 in 7,777,777",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 1,555,555",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 1,555,555."
+      },
+      "system": {
+        "slug": "divinus-guardian",
+        "section": "Mythic",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Auras/divinus-guardian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evanescent",
+        "summary": "The light shimmered in his eye. Born to swim, and yet all he could do is watch as the sea passed him by. There he sat, alone but not afraid; for time has rusted his fear. It was a shadow, a figure drifting through...",
+        "chance": "1 in 3,360,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 840,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 840,000."
+      },
+      "system": {
+        "slug": "evanescent",
+        "section": "Mythic",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Auras/evanescent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Faith",
+        "summary": "Even after losing everything, I can say it's okay. Because I still have your heart.",
+        "chance": "1 in 7,250,000",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 1,450,000",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 1,450,000."
+      },
+      "system": {
+        "slug": "faith",
+        "section": "Mythic",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Auras/faith.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flowed",
+        "summary": "And in a gentle, harmonious rhythm, everything flowed as one.",
+        "chance": "1 in 2,121,121",
+        "nativeBiome": "Null",
+        "nativeChance": "1 in 2,121",
+        "howToGet": "Only drops while the Null biome is active, where its odds improve to 1 in 2,121."
+      },
+      "system": {
+        "slug": "flowed",
+        "section": "Mythic",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Auras/flowed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flutter : Buggify",
+        "summary": "i wanna be the bug!",
+        "chance": "1 in 2,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "flutter-buggify",
+        "section": "Mythic",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Auras/flutter-buggify.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Galaxy",
+        "summary": "It comes from an unbelievably vast space itself.",
+        "chance": "1 in 5,000,000",
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 1,000,000",
+        "howToGet": "Only drops while the Singularity biome is active, where its odds improve to 1 in 1,000,000."
+      },
+      "system": {
+        "slug": "galaxy",
+        "section": "Mythic",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Auras/galaxy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gothic",
+        "summary": "Empty",
+        "chance": "1 in 1,000,001",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "gothic",
+        "section": "Mythic",
+        "sortOrder": 20,
+        "image": "/Sols RNG/Auras/gothic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gravitational",
+        "summary": "The irregularities of gravity incomprehensible to humans. It is thought to stem from the same material comprising the mysterious Great Attractor .",
+        "chance": "1 in 2,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "gravitational",
+        "section": "Mythic",
+        "sortOrder": 21,
+        "image": "/Sols RNG/Auras/gravitational.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hades",
+        "summary": "It has been shaped as the ruler of hell , a long time ago. Though not replicated perfectly, it still remains cruel and callous.",
+        "chance": "1 in 6,666,666",
+        "nativeBiome": "Hell",
+        "nativeChance": "1 in 1,111,111",
+        "howToGet": "Only drops while the Hell biome is active, where its odds improve to 1 in 1,111,111."
+      },
+      "system": {
+        "slug": "hades",
+        "section": "Mythic",
+        "sortOrder": 22,
+        "image": "/Sols RNG/Auras/hades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harnessed",
+        "summary": null,
+        "chance": "1 in 8,500,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "harnessed",
+        "section": "Mythic",
+        "sortOrder": 23,
+        "image": "/Sols RNG/Auras/harnessed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Helios",
+        "summary": "In the mythology, A shining god of the sun. They rode their chariot to pull the Sun from the east to the west, making the cycle of day and night",
+        "chance": "1 in 9,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "helios",
+        "section": "Mythic",
+        "sortOrder": 24,
+        "image": "/Sols RNG/Auras/helios.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hyper-Volt",
+        "summary": "A phenomenon witnessed many times, yet still doubted by science. Believed to be the clusters of low-temperature plasma forming sudden flashes mid-air. Those clustered energies create Hyper Volt to so powerful it can...",
+        "chance": "1 in 7,500,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "hyper-volt",
+        "section": "Mythic",
+        "sortOrder": 25,
+        "image": "/Sols RNG/Auras/hyper-volt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jade : Purity",
+        "summary": "This, is the name of a legendary man who approaches ones lost in the vast forest and gives directions. He is kind, and knows the forest better than anyone else. But one day, he stopped showing himself to people....",
+        "chance": "1 in 9,250,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "jade-purity",
+        "section": "Mythic",
+        "sortOrder": 26,
+        "image": "/Sols RNG/Auras/jade-purity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar : Full Moon",
+        "summary": "A Full Moon hung in the sky",
+        "chance": "1 in 5,000,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 500,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 500,000."
+      },
+      "system": {
+        "slug": "lunar-full-moon",
+        "section": "Mythic",
+        "sortOrder": 27,
+        "image": "/Sols RNG/Auras/lunar-full-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnetic : Reverse Polarity",
+        "summary": "A collection of strong energies with inverted directions of acting polarities, which is not described magnetically.",
+        "chance": "1 in 1,024,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "magnetic-reverse-polarity",
+        "section": "Mythic",
+        "sortOrder": 28,
+        "image": "/Sols RNG/Auras/magnetic-reverse-polarity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Metabytes",
+        "summary": "Metabytes. Mainly known for being the most important engineer for during the creation of Aegis, the 'Shield of the Sky'. He always moved around accompanied by his own cybernetic cubes, challenging any wizard that he...",
+        "chance": "1 in 4,000,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 2,000,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 2,000,000."
+      },
+      "system": {
+        "slug": "metabytes",
+        "section": "Mythic",
+        "sortOrder": 29,
+        "image": "/Sols RNG/Auras/metabytes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nautilus : Lost",
+        "summary": "A small shout resounding from the depths of the abyss ..",
+        "chance": "1 in 7,700,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "nautilus-lost",
+        "section": "Mythic",
+        "sortOrder": 30,
+        "image": "/Sols RNG/Auras/nautilus-lost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nihility",
+        "summary": "A being that has lost its color to as if its memories of the past have long been erased.",
+        "chance": "1 in 9,000,000",
+        "nativeBiome": "Null",
+        "nativeChance": "1 in 9,000",
+        "howToGet": "Only drops while the Null biome is active, where its odds improve to 1 in 9,000."
+      },
+      "system": {
+        "slug": "nihility",
+        "section": "Mythic",
+        "sortOrder": 31,
+        "image": "/Sols RNG/Auras/nihility.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidian",
+        "summary": "Obsidian. A vitreous material known since earliest civilizations that was among the first materials to be used in the creation of blades. Unlike any other rock or mineral though, obsidian's edges possess an unmatched...",
+        "chance": "1 in 1,750,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "obsidian",
+        "section": "Mythic",
+        "sortOrder": 32,
+        "image": "/Sols RNG/Auras/obsidian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Origin",
+        "summary": null,
+        "chance": "1 in 6,500,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "origin",
+        "section": "Mythic",
+        "sortOrder": 33,
+        "image": "/Sols RNG/Auras/origin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orion",
+        "summary": "Empty",
+        "chance": "1 in 3,000,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 600,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 600,000."
+      },
+      "system": {
+        "slug": "orion",
+        "section": "Mythic",
+        "sortOrder": 34,
+        "image": "/Sols RNG/Auras/orion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Outlaw",
+        "summary": "yeehaw a cowboy 🤠",
+        "chance": "1 in 8,000,000",
+        "nativeBiome": "Sandstorm",
+        "nativeChance": "1 in 2,000,000",
+        "howToGet": "Only drops while the Sandstorm biome is active, where its odds improve to 1 in 2,000,000."
+      },
+      "system": {
+        "slug": "outlaw",
+        "section": "Mythic",
+        "sortOrder": 35,
+        "image": "/Sols RNG/Auras/outlaw.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Parasite",
+        "summary": "|-|Description= Did the thick skin that overlapped your own settle a realisation; that there is no escape? Did the feeling in your stomach envelope into an internal spiralling? Yet you chose not to fight it, after...",
+        "chance": "1 in 3,000,000",
+        "nativeBiome": "Corruption",
+        "nativeChance": "1 in 600,000",
+        "howToGet": "Only drops while the Corruption biome is active, where its odds improve to 1 in 600,000."
+      },
+      "system": {
+        "slug": "parasite",
+        "section": "Mythic",
+        "sortOrder": 36,
+        "image": "/Sols RNG/Auras/parasite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Player : Respawn",
+        "summary": "A true 8-bit move!!",
+        "chance": "1 in 1,999,999",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 999,999",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 999,999."
+      },
+      "system": {
+        "slug": "player-respawn",
+        "section": "Mythic",
+        "sortOrder": 37,
+        "image": "/Sols RNG/Auras/player-respawn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon",
+        "summary": "It has been shaped as a creature that once ruled the ocean long ago. It always maintains its posture, and all sea creatures are loyal to it. Except, one .",
+        "chance": "1 in 4,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 1,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 1,000,000."
+      },
+      "system": {
+        "slug": "poseidon",
+        "section": "Mythic",
+        "sortOrder": 38,
+        "image": "/Sols RNG/Auras/poseidon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rage : Brawler",
+        "summary": null,
+        "chance": "1 in 1,280,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "rage-brawler",
+        "section": "Mythic",
+        "sortOrder": 39,
+        "image": "/Sols RNG/Auras/rage-brawler.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Refraction",
+        "summary": "At the current moment there is no background description for Refraction but one likely will be made in the near future",
+        "chance": "1 in 7,242,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "refraction",
+        "section": "Mythic",
+        "sortOrder": 40,
+        "image": "/Sols RNG/Auras/refraction.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Savior",
+        "summary": "It is a wonderful partner that appears at the very last moment, reaching out to offer you a hand of salvation.",
+        "chance": "1 in 3,200,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "savior",
+        "section": "Mythic",
+        "sortOrder": 41,
+        "image": "/Sols RNG/Auras/savior.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiftlock",
+        "summary": "Hey, trying to run? Go ahead. If you think you can.",
+        "chance": "1 in 3,325,000",
+        "nativeBiome": "Null",
+        "nativeChance": "1 in 3,325",
+        "howToGet": "Only drops while the Null biome is active, where its odds improve to 1 in 3,325."
+      },
+      "system": {
+        "slug": "shiftlock",
+        "section": "Mythic",
+        "sortOrder": 42,
+        "image": "/Sols RNG/Auras/shiftlock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Solar : Solstice",
+        "summary": "It was made with Sunshine by an Unknown being on a bright day.",
+        "chance": "1 in 5,000,000",
+        "nativeBiome": "Daytime",
+        "nativeChance": "1 in 500,000",
+        "howToGet": "Only drops while the Daytime biome is active, where its odds improve to 1 in 500,000."
+      },
+      "system": {
+        "slug": "solar-solstice",
+        "section": "Mythic",
+        "sortOrder": 43,
+        "image": "/Sols RNG/Auras/solar-solstice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soultorn",
+        "summary": "Empty",
+        "chance": "1 in 8,333,333",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "soultorn",
+        "section": "Mythic",
+        "sortOrder": 44,
+        "image": "/Sols RNG/Auras/soultorn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spectre : Requiem",
+        "summary": "The hallow face of a reaper, a ' blackened ' heart within-unwavering. You were made not of flesh, nor light; but anguish, and a heart that does not beat. A Lost Soul ; doomed to finality : And as you drew the scythe...",
+        "chance": "1 in 8,222,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "spectre-requiem",
+        "section": "Mythic",
+        "sortOrder": 45,
+        "image": "/Sols RNG/Auras/spectre-requiem.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stargazer",
+        "summary": null,
+        "chance": "1 in 9,200,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 1,840,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 1,840,000."
+      },
+      "system": {
+        "slug": "stargazer",
+        "section": "Mythic",
+        "sortOrder": 46,
+        "image": "/Sols RNG/Auras/stargazer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight : Kunzite",
+        "summary": "|-| New= A unique and mysterious starlight born from a crystal; Its light seems to be shining brighter than usual. |-| Old= This starlight has more power than the average one. He has been crushed with a pink powerful...",
+        "chance": "1 in 1,000,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 200,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 200,000."
+      },
+      "system": {
+        "slug": "starlight-kunzite",
+        "section": "Mythic",
+        "sortOrder": 47,
+        "image": "/Sols RNG/Auras/starlight-kunzite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Symbiosis",
+        "summary": "|-| New= Did it hurt when it latched onto your neck? |-| Old= Did it hurt when it took over your arm? Did it hurt when it latched on your neck? Does it hurt knowing it will never let go?",
+        "chance": "1 in 1,331,201",
+        "nativeBiome": "Corruption",
+        "nativeChance": "1 in 266,240",
+        "howToGet": "Only drops while the Corruption biome is active, where its odds improve to 1 in 266,240."
+      },
+      "system": {
+        "slug": "symbiosis",
+        "section": "Mythic",
+        "sortOrder": 48,
+        "image": "/Sols RNG/Auras/symbiosis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twilight",
+        "summary": "A jewel that shines brightly once every thousand years in the deepest part of the forest. No one has ever seen how bright that light is. According to rumors, the moon gives gifts to those who look at the gem with a...",
+        "chance": "1 in 6,000,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 600,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 600,000."
+      },
+      "system": {
+        "slug": "twilight",
+        "section": "Mythic",
+        "sortOrder": 49,
+        "image": "/Sols RNG/Auras/twilight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Undefined",
+        "summary": "It's too dark in here...",
+        "chance": "1 in 1,111,000",
+        "nativeBiome": "Null",
+        "nativeChance": "1 in 1,111",
+        "howToGet": "Only drops while the Null biome is active, where its odds improve to 1 in 1,111."
+      },
+      "system": {
+        "slug": "undefined",
+        "section": "Mythic",
+        "sortOrder": 50,
+        "image": "/Sols RNG/Auras/undefined.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vega",
+        "summary": "This is a celestial miracle that restores hope to the weary. Every time its beam of light angles toward Earth, one lost soul is freed. Each pulse is dimmer than the last. The star gives up its light to let them go.",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 2,580,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 2,580,000."
+      },
+      "system": {
+        "slug": "vega",
+        "section": "Mythic",
+        "sortOrder": 51,
+        "image": "/Sols RNG/Auras/vega.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Velocity",
+        "summary": "This power continuously accelerates objects until they burn up from friction.",
+        "chance": "1 in 7,630,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "velocity",
+        "section": "Mythic",
+        "sortOrder": 52,
+        "image": "/Sols RNG/Auras/velocity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Virtual",
+        "summary": "An advanced hologram device created by an unnamed civilization.",
+        "chance": "1 in 2,500,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 1,250,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 1,250,000."
+      },
+      "system": {
+        "slug": "virtual",
+        "section": "Mythic",
+        "sortOrder": 53,
+        "image": "/Sols RNG/Auras/virtual.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wraith",
+        "summary": "Empty",
+        "chance": "1 in 4,100,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "wraith",
+        "section": "Mythic",
+        "sortOrder": 54,
+        "image": "/Sols RNG/Auras/wraith.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zeus",
+        "summary": "It has the image of a creature that once ruled the sky. . It threatened its adversary by blowing thunder and lightning .",
+        "chance": "1 in 4,500,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "zeus",
+        "section": "Mythic",
+        "sortOrder": 55,
+        "image": "/Sols RNG/Auras/zeus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "★★★",
+        "summary": "The effect grew on me, I Felt something I had never felt before; a presence. But of [WHAT?] Something lays it's eyes upon me",
+        "chance": null,
+        "nativeBiome": "Dreamspace",
+        "nativeChance": "1 in 10,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Dreamspace biome is active where its odds are 1 in 10,000."
+      },
+      "system": {
+        "slug": "aura-3",
+        "section": "Mythic",
+        "sortOrder": 56,
+        "image": "/Sols RNG/Auras/aura-3.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Antivirus",
+        "summary": "A golden age rose from a brilliant civilization. They placed their trust in one another, and this was the spark of their ascension.",
+        "chance": "1 in 62,500,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 31,250,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 31,250,000."
+      },
+      "system": {
+        "slug": "antivirus",
+        "section": "Exalted",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/antivirus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apotheosis",
+        "summary": "Of imperial violets and royal golds, a being so pure, manifesting only where divinity is strongest... This is the living embodiment of ascension; the moment where existence transcends itself. In its presence, the...",
+        "chance": "1 in 24,691,356",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "apotheosis",
+        "section": "Exalted",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/apotheosis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquaria",
+        "summary": "Empty",
+        "chance": "1 in 80,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 20,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 20,000,000."
+      },
+      "system": {
+        "slug": "aquaria",
+        "section": "Exalted",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/aquaria.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arcane : Dark",
+        "summary": "This is the result of intervening darkness into a powerful spell capable of bringing destruction that could devastate civilizations in an instant. This dreadful entity, no longer a mere spell, now is a sentient being...",
+        "chance": "1 in 30,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "arcane-dark",
+        "section": "Exalted",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/arcane-dark.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arcane : Legacy",
+        "summary": "A powerful spell created by an ancient civilization, it was originally invented as a means of salvation in war, but instead the spell drived out of control and wiped out their entire civilization from the world....",
+        "chance": "1 in 15,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "arcane-legacy",
+        "section": "Exalted",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/arcane-legacy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Atomic : Nucleus",
+        "summary": "[The Core] of the atom, where most of the it's mass is concentrated. It is the heart of all matter, holding together the forces that define existence itself. Radiating with immense subatomic energy, it binds protons...",
+        "chance": "1 in 92,118,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "atomic-nucleus",
+        "section": "Exalted",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/atomic-nucleus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aviator",
+        "summary": null,
+        "chance": "1 in 24,000,000",
+        "nativeBiome": "Windy",
+        "nativeChance": "1 in 8,000,000",
+        "howToGet": "Only drops while the Windy biome is active, where its odds improve to 1 in 8,000,000."
+      },
+      "system": {
+        "slug": "aviator",
+        "section": "Exalted",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/aviator.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blizzard",
+        "summary": "Empty",
+        "chance": "1 in 27,315,000",
+        "nativeBiome": "Snowy",
+        "nativeChance": "1 in 9,105,000",
+        "howToGet": "Only drops while the Snowy biome is active, where its odds improve to 1 in 9,105,000."
+      },
+      "system": {
+        "slug": "blizzard",
+        "section": "Exalted",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/blizzard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carriage",
+        "summary": "Empty",
+        "chance": "1 in 80,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "carriage",
+        "section": "Exalted",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/carriage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cell Asteroides",
+        "summary": "He lifts the sun, bringing us light, while leaving the little 'star' behind for a new 'Home'. Oh, hero, you're blameworthy, even as the savior of our 'Home'.",
+        "chance": null,
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Crafted at Jake's Workshop from other auras and materials instead of being rolled."
+      },
+      "system": {
+        "slug": "cell-asteroides",
+        "section": "Exalted",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/cell-asteroides.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Centurion",
+        "summary": "Centurion himself. A cosmic warlord of starlight who once commanded endless armadas of starships, bending fleets and the void itself to his unstoppable will. Though his celestial empire fell long ago, and his form...",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 25,000,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 25,000,000."
+      },
+      "system": {
+        "slug": "centurion",
+        "section": "Exalted",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Auras/centurion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chromatic",
+        "summary": "Yeah! Feel my unstoppable beats!!",
+        "chance": "1 in 20,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "chromatic",
+        "section": "Exalted",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Auras/chromatic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chromatic : Hyper",
+        "summary": "Q U A O A R",
+        "chance": null,
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Crafted at Jake's Workshop from other auras and materials instead of being rolled."
+      },
+      "system": {
+        "slug": "chromatic-hyper",
+        "section": "Exalted",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Auras/chromatic-hyper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dominion",
+        "summary": "An angel drifts through the heaven's light, bow in hand, loosing quiet arrows of grace as they glide between the clouds.",
+        "chance": "1 in 70,000,000",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 14,000,000",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 14,000,000."
+      },
+      "system": {
+        "slug": "dominion",
+        "section": "Exalted",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Auras/dominion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Empty",
+        "summary": "Empty...",
+        "chance": null,
+        "nativeBiome": "Null",
+        "nativeChance": "1 in 11,111,111",
+        "howToGet": "Cannot be rolled normally; it only appears while the Null biome is active where its odds are 1 in 11,111,111."
+      },
+      "system": {
+        "slug": "empty",
+        "section": "Exalted",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Auras/empty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ethereal",
+        "summary": "In a country where the vast majority of people attend church, there is a deep-rooted belief in powers, either from 『 God 』 or from the ‘ dark side ’. Their god, is believed a spirit or being that has great power,...",
+        "chance": "1 in 35,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ethereal",
+        "section": "Exalted",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Auras/ethereal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exotic : Apex",
+        "summary": "Maybe this is the source of the ancient being , that people were dying to know about?",
+        "chance": "1 in 49,999,500",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "exotic-apex",
+        "section": "Exalted",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Auras/exotic-apex.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flora : Florest",
+        "summary": "The meaning carried by a beautiful bouquet of flowers can be many, and its character often changes depending on the color.",
+        "chance": "1 in 32,800,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "flora-florest",
+        "section": "Exalted",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Auras/flora-florest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Graffiti",
+        "summary": "Empty",
+        "chance": "1 in 12,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "graffiti",
+        "section": "Exalted",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Auras/graffiti.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Guardian",
+        "summary": null,
+        "chance": "1 in 10,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "guardian",
+        "section": "Exalted",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Auras/guardian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harnessed : Elements",
+        "summary": null,
+        "chance": "1 in 85,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "harnessed-elements",
+        "section": "Exalted",
+        "sortOrder": 20,
+        "image": "/Sols RNG/Auras/harnessed-elements.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hellbound",
+        "summary": "Empty",
+        "chance": "1 in 85,000,000",
+        "nativeBiome": "Hell",
+        "nativeChance": "1 in 14,166,666",
+        "howToGet": "Only drops while the Hell biome is active, where its odds improve to 1 in 14,166,666."
+      },
+      "system": {
+        "slug": "hellbound",
+        "section": "Exalted",
+        "sortOrder": 21,
+        "image": "/Sols RNG/Auras/hellbound.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Icarus",
+        "summary": "He smiled as he fell back toward the earth. He had seen a brilliant light; gleaming, impossible, everyone said. Yet he knew that glow could be reached. And so he soared, higher and higher, reaching out for the...",
+        "chance": "1 in 15,660,000",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 3,132,000",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 3,132,000."
+      },
+      "system": {
+        "slug": "icarus",
+        "section": "Exalted",
+        "sortOrder": 22,
+        "image": "/Sols RNG/Auras/icarus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Imaginary",
+        "summary": "Empty",
+        "chance": "1 in 12,200,200",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "imaginary",
+        "section": "Exalted",
+        "sortOrder": 23,
+        "image": "/Sols RNG/Auras/imaginary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Juxtaposition",
+        "summary": "\"In my world, there are nothing but lies. But in your world, you can feel trust... You have emotions, senses, and thoughts in your paradise... But all left from my world is { V O I D } and darkness. I wish to...",
+        "chance": "1 in 40,440,400",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "juxtaposition",
+        "section": "Exalted",
+        "sortOrder": 24,
+        "image": "/Sols RNG/Auras/juxtaposition.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lullaby",
+        "summary": "As the down falls and the night comes, A graceful and peaceful lullaby comes to SOL's island, A light in the darkest of night, Guiding lost souls with its gentle hum.",
+        "chance": "1 in 17,000,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 1,700,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 1,700,000."
+      },
+      "system": {
+        "slug": "lullaby",
+        "section": "Exalted",
+        "sortOrder": 25,
+        "image": "/Sols RNG/Auras/lullaby.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Matrix",
+        "summary": "No one can see, hear or touch this; perhaps, ''it might not even be real .''",
+        "chance": "1 in 50,000,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 25,000,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 25,000,000."
+      },
+      "system": {
+        "slug": "matrix",
+        "section": "Exalted",
+        "sortOrder": 26,
+        "image": "/Sols RNG/Auras/matrix.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Melodic",
+        "summary": "Empty",
+        "chance": "1 in 11,300,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "melodic",
+        "section": "Exalted",
+        "sortOrder": 27,
+        "image": "/Sols RNG/Auras/melodic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Melodic : Serenade",
+        "summary": "A calming night serenade flows gently through the atmosphere, it's soft melody wrapping around you like a quiet embrance. The moonlight drifts above, shining a shooting glowas the world seems to slow to a peaceful...",
+        "chance": "1 in 77,000,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 7,700,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 7,700,000."
+      },
+      "system": {
+        "slug": "melodic-serenade",
+        "section": "Exalted",
+        "sortOrder": 28,
+        "image": "/Sols RNG/Auras/melodic-serenade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oculus",
+        "summary": "A being that has been granted the gift of ████'█ sight, and watched over other beings; divine significance or not, that have reached heaven, who are unable do ill under its gaze. Its body is made of pure light,...",
+        "chance": "1 in 23,233,340",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 4,646,668",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 4,646,668."
+      },
+      "system": {
+        "slug": "oculus",
+        "section": "Exalted",
+        "sortOrder": 29,
+        "image": "/Sols RNG/Auras/oculus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overseer",
+        "summary": "Empty",
+        "chance": "1 in 45,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "overseer",
+        "section": "Exalted",
+        "sortOrder": 30,
+        "image": "/Sols RNG/Auras/overseer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Plasma",
+        "summary": "Empty",
+        "chance": "1 in 20,600,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "plasma",
+        "section": "Exalted",
+        "sortOrder": 31,
+        "image": "/Sols RNG/Auras/plasma.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Quartz : Rose",
+        "summary": "As her birthday gift, a girl received a young pink rose. The girl took care of the pink rose, watering it everyday, keeping it as close to her possible and... as the years passed the rose never seemed to die, but...",
+        "chance": "1 in 97,500,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "quartz-rose",
+        "section": "Exalted",
+        "sortOrder": 32,
+        "image": "/Sols RNG/Auras/quartz-rose.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruby : Brimstone",
+        "summary": "Gem of a red hue",
+        "chance": "1 in 24,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ruby-brimstone",
+        "section": "Exalted",
+        "sortOrder": 33,
+        "image": "/Sols RNG/Auras/ruby-brimstone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Runic",
+        "summary": "|-|New= After the ancient civilization fell, what was once an amplifier for magic had nowhere else to go Decades after the downfall of the civilization all it could do was roam and give life to anything around it....",
+        "chance": "1 in 50,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "runic",
+        "section": "Exalted",
+        "sortOrder": 34,
+        "image": "/Sols RNG/Auras/runic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Runic : Wilt",
+        "summary": "Decades after the downfall of the Ancient Civilization, the magical rune kept pushing, using every last drop of energy it had left. What was once a Rune used for empowering and energizing was now using it's power to...",
+        "chance": "1 in 87,388,744",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "runic-wilt",
+        "section": "Exalted",
+        "sortOrder": 35,
+        "image": "/Sols RNG/Auras/runic-wilt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sailor",
+        "summary": "No one knows when this rusted fishing boat started its sail all that is known is that it is continuously advancing towards vast, rough waters .",
+        "chance": "1 in 12,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 3,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 3,000,000."
+      },
+      "system": {
+        "slug": "sailor",
+        "section": "Exalted",
+        "sortOrder": 36,
+        "image": "/Sols RNG/Auras/sailor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sailor : Flying Dutchman",
+        "summary": "The Flying Dutchman . The same terrible vessel whose very timbers are cut from the bodies and souls of doomed seamen.",
+        "chance": "1 in 80,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 20,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 20,000,000."
+      },
+      "system": {
+        "slug": "sailor-flying-dutchman",
+        "section": "Exalted",
+        "sortOrder": 37,
+        "image": "/Sols RNG/Auras/sailor-flying-dutchman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sentinel",
+        "summary": "The most common military unit guarding a magically infused city. Countless replicas follow their assigned orders, endlessly patrolling the same routes. Even after a thousand years, their duty remains unchanged.",
+        "chance": "1 in 60,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "sentinel",
+        "section": "Exalted",
+        "sortOrder": 38,
+        "image": "/Sols RNG/Auras/sentinel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sharkyn",
+        "summary": "Empty",
+        "chance": "1 in 10,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 2,500,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 2,500,000."
+      },
+      "system": {
+        "slug": "sharkyn",
+        "section": "Exalted",
+        "sortOrder": 39,
+        "image": "/Sols RNG/Auras/sharkyn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sirius",
+        "summary": "A beautiful star that always faces you when I look at the night sky A special star that shines the brightest in the sky filled with stars The star says to you, ''\"Those who have shone in their life... become stars in...",
+        "chance": "1 in 14,000,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 2,800,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 2,800,000."
+      },
+      "system": {
+        "slug": "sirius",
+        "section": "Exalted",
+        "sortOrder": 40,
+        "image": "/Sols RNG/Auras/sirius.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starborn",
+        "summary": "Empty",
+        "chance": "1 in 72,000,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 14,400,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 14,400,000."
+      },
+      "system": {
+        "slug": "starborn",
+        "section": "Exalted",
+        "sortOrder": 41,
+        "image": "/Sols RNG/Auras/starborn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starscourge",
+        "summary": "When the stars aligned.. the brightest starlights gathered to form this .",
+        "chance": "1 in 10,000,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 2,000,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 2,000,000."
+      },
+      "system": {
+        "slug": "starscourge",
+        "section": "Exalted",
+        "sortOrder": 42,
+        "image": "/Sols RNG/Auras/starscourge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stormal : Hurricane",
+        "summary": "An enormous '''storm''' raging around you.",
+        "chance": "1 in 13,500,000",
+        "nativeBiome": "Windy",
+        "nativeChance": "1 in 4,500,000",
+        "howToGet": "Only drops while the Windy biome is active, where its odds improve to 1 in 4,500,000."
+      },
+      "system": {
+        "slug": "stormal-hurricane",
+        "section": "Exalted",
+        "sortOrder": 43,
+        "image": "/Sols RNG/Auras/stormal-hurricane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twilight : Iridescent Memory",
+        "summary": "The memories were becoming increasingly blurry. Under the full moon that holds many dreams high above, I sincerely wish. I believe that I will meet him again someday. I once again reminisce about the memories I have...",
+        "chance": "1 in 60,000,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 6,000,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 6,000,000."
+      },
+      "system": {
+        "slug": "twilight-iridescent-memory",
+        "section": "Exalted",
+        "sortOrder": 44,
+        "image": "/Sols RNG/Auras/twilight-iridescent-memory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Virtual : Fatal Error",
+        "summary": "System Logs· ''[@43_Connection·_from_XXX.XXX.XXX.XXX] [@53_FileRemoved·_by_XXX.XXX.XXX.XXX_-_file·core-virtual.sys] [@132_CRASH__REPORT·KernelPanic_--_Fatal_Trap]'' -- Booting Error -- ERROR· /sys/core-virtual.sys...",
+        "chance": "1 in 40,413,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 20,206,500",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 20,206,500."
+      },
+      "system": {
+        "slug": "virtual-fatal-error",
+        "section": "Exalted",
+        "sortOrder": 45,
+        "image": "/Sols RNG/Auras/virtual-fatal-error.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Virtual : Full Control",
+        "summary": "An advanced hologram device created by an unnamed civilization.",
+        "chance": "1 in 80,000,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 40,000,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 40,000,000."
+      },
+      "system": {
+        "slug": "virtual-full-control",
+        "section": "Exalted",
+        "sortOrder": 46,
+        "image": "/Sols RNG/Auras/virtual-full-control.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Virtual : WorldWide",
+        "summary": "An advanced hologram device created by an unnamed civilization.",
+        "chance": "1 in 87,500,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 43,750,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 43,750,000."
+      },
+      "system": {
+        "slug": "virtual-worldwide",
+        "section": "Exalted",
+        "sortOrder": 47,
+        "image": "/Sols RNG/Auras/virtual-worldwide.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Hunter",
+        "summary": "An unknown hunter , slaughtering deep sea creatures mercilessly and roaming around the trenches.",
+        "chance": "1 in 400,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 100,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 100,000,000."
+      },
+      "system": {
+        "slug": "abyssal-hunter",
+        "section": "Glorious",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/abyssal-hunter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aegis",
+        "summary": "Aegis , Named after the ' Shield of The Sky ' Aegis is an anti-star satellite weapon currently being restored by the Science Foundation. It has existed in space for an incredibly long time. During an era when wizards...",
+        "chance": "1 in 825,000,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 412,500,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 412,500,000."
+      },
+      "system": {
+        "slug": "aegis",
+        "section": "Glorious",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/aegis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apostolos",
+        "summary": "Apostolos . order and chaos are diametrically opposed concepts that can never coexist. However, there exists an exceptional being that embodies both order and chaos. In mythological depictions, Apostolos represents...",
+        "chance": "1 in 444,000,000",
+        "nativeBiome": "The Citadel Of Orders",
+        "nativeChance": "1 in 222,000,000",
+        "howToGet": "Only drops while the The Citadel Of Orders biome is active, where its odds improve to 1 in 222,000,000."
+      },
+      "system": {
+        "slug": "apostolos",
+        "section": "Glorious",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/apostolos.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Archangel",
+        "summary": "The most pure, beautiful, and holy being, in the mythology",
+        "chance": "1 in 350,000,000",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 70,000,000",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 70,000,000."
+      },
+      "system": {
+        "slug": "archangel",
+        "section": "Glorious",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/archangel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ascendant",
+        "summary": "|-|Description= When still too young to bear the weight of sins, yet far too inexperienced to have earned virtues, the soul of the purest among beings is called to ascend beyond the mortal realm long before they...",
+        "chance": "1 in 935,000,000",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 187,000,000",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 187,000,000."
+      },
+      "system": {
+        "slug": "ascendant",
+        "section": "Glorious",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/ascendant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astral : Zodiac",
+        "summary": "Stars of every nature line up to form a beautiful constellation. A ritual that imitates the 12 strongest patterns drawn from that mysterious astral energy to It is said that one can read the future with such...",
+        "chance": "1 in 267,200,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 53,440,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 53,440,000."
+      },
+      "system": {
+        "slug": "astral-zodiac",
+        "section": "Glorious",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/astral-zodiac.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Atlas",
+        "summary": "The Titan Who Guards the Celestial Sphere Titan are not merely oversized humans. They surpass modern humanity in every aspect science, magic, society to a degree that the term ancient does them no justice. They built...",
+        "chance": "1 in 360,000,000",
+        "nativeBiome": "Sandstorm",
+        "nativeChance": "1 in 90,000,000",
+        "howToGet": "Only drops while the Sandstorm biome is active, where its odds improve to 1 in 90,000,000."
+      },
+      "system": {
+        "slug": "atlas",
+        "section": "Glorious",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/atlas.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Atlas : A.T.L.A.S.",
+        "summary": "|-|Description= The Echo Of A Titan Long before the fracture of the outer colonies, there was Atlas to not merely a being, but a Titan whose mastery of terrestrial mapping and anomaly detection became the stuff of...",
+        "chance": null,
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Crafted at Jake's Workshop from other auras and materials instead of being rolled."
+      },
+      "system": {
+        "slug": "atlas-a-t-l-a-s",
+        "section": "Glorious",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/atlas-a-t-l-a-s.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloodlust",
+        "summary": "This doesn't represent anything inferior like a vampire or something, but rather never-ending thirst for blood itself. As the sentence depicts, it shows obsession-almost to the point of insanity, for blood ...",
+        "chance": "1 in 300,000,000",
+        "nativeBiome": "Hell",
+        "nativeChance": "1 in 50,000,000",
+        "howToGet": "Only drops while the Hell biome is active, where its odds improve to 1 in 50,000,000."
+      },
+      "system": {
+        "slug": "bloodlust",
+        "section": "Glorious",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/bloodlust.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bounded : Aichmalotos",
+        "summary": "He was a known wizard during the great war against the technicians, holding a sword infused with magic, and... when the war seemed close to be lost, he attempted the unthinkable: he walked to the forbidden prison and...",
+        "chance": "1 in 170,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "bounded-aichmalotos",
+        "section": "Glorious",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/bounded-aichmalotos.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial : Eclipse",
+        "summary": "When the stars converged one last time. And the heavens whispered once more. I finally understood, That sacred light had never left. And I listened",
+        "chance": "1 in 384,400,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "celestial-eclipse",
+        "section": "Glorious",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Auras/celestial-eclipse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chillsear",
+        "summary": "The titans called these monstrous beings \"Dreadnoughts.\" They wreak havoc around civilizations all over the overworld, granting no mercy to anything. Chillsear is among one of those Dreadnoughts, a blizzard formed...",
+        "chance": "1 in 375,000,000",
+        "nativeBiome": "Snowy",
+        "nativeChance": "1 in 125,000,000",
+        "howToGet": "Only drops while the Snowy biome is active, where its odds improve to 1 in 125,000,000."
+      },
+      "system": {
+        "slug": "chillsear",
+        "section": "Glorious",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Auras/chillsear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chromatic : Genesis",
+        "summary": "|-| New= Defining the beginning and end of the world. ''(Aura is inspired by White Space from Geometry Dash)'' |-| Old= Defining the beginning and end of the world. WAKE UP FROM AWAY",
+        "chance": "1 in 99,999,999",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "chromatic-genesis",
+        "section": "Glorious",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Auras/chromatic-genesis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cytokinesis",
+        "summary": "A system capable of disassembling DNA while the organism is still alive. It was initially developed by the technicians with the intent of making something able to fully clone armies, but they failed, as it is unable...",
+        "chance": "1 in 330,400,472",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 165,200,236",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 165,200,236."
+      },
+      "system": {
+        "slug": "cytokinesis",
+        "section": "Glorious",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Auras/cytokinesis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dreamer",
+        "summary": "Eternal slumber, to sleep forevermore.",
+        "chance": "1 in 315,000,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 31,500,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 31,500,000."
+      },
+      "system": {
+        "slug": "dreamer",
+        "section": "Glorious",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Auras/dreamer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dreamscape",
+        "summary": "*DAY 109* I keep having the same dream, over and over again. In it, I'm always walking along an endless road. I can't tell whatever it's day or night, but the sky glows with an artificial light, and thick fog...",
+        "chance": "1 in 850,000,000",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "dreamscape",
+        "section": "Glorious",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Auras/dreamscape.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eisveil",
+        "summary": "A lone beacon shining through the frost lined trees, illuminating the cold winter into a sea of silver light. Its radiance dances across icy branches, breathing quiet magic into the frozen forest.",
+        "chance": "1 in 830,000,000",
+        "nativeBiome": "Snowy",
+        "nativeChance": "1 in 276,666,666",
+        "howToGet": "Only drops while the Snowy biome is active, where its odds improve to 1 in 276,666,666."
+      },
+      "system": {
+        "slug": "eisveil",
+        "section": "Glorious",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Auras/eisveil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elude",
+        "summary": null,
+        "chance": "1 in 555,555,555",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "elude",
+        "section": "Glorious",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Auras/elude.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exotic : Void",
+        "summary": "Nobody knows where it '''originates''' from, and how '''old''' it is.",
+        "chance": "1 in 299,999,999",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "exotic-void",
+        "section": "Glorious",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Auras/exotic-void.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Felled",
+        "summary": "Like a moth drawn to a flame, I continue to return to the very thing that destroys me. Their judgement bearing over my life like a raging storm, their gaze burns through my thoughts like acid. WHY WONT IT END. Their...",
+        "chance": "1 in 180,000,000",
+        "nativeBiome": "Hell",
+        "nativeChance": "1 in 30,000,000",
+        "howToGet": "Only drops while the Hell biome is active, where its odds improve to 1 in 30,000,000."
+      },
+      "system": {
+        "slug": "felled",
+        "section": "Glorious",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Auras/felled.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flora : Evergreen",
+        "summary": "The meaning carried by a beautiful bouquet of flowers can be many, and its character often changes depending on the color.",
+        "chance": "1 in 370,073,730",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "flora-evergreen",
+        "section": "Glorious",
+        "sortOrder": 20,
+        "image": "/Sols RNG/Auras/flora-evergreen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gargantua",
+        "summary": "Black-Hole The endless craving and void. This colossal predator's size is so immense that it's immeasurable, capable of swallowing even galaxies and there is nothing in physics stronger than it. It has existed since...",
+        "chance": "1 in 430,000,000",
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 86,000,000",
+        "howToGet": "Only drops while the Singularity biome is active, where its odds improve to 1 in 86,000,000."
+      },
+      "system": {
+        "slug": "gargantua",
+        "section": "Glorious",
+        "sortOrder": 21,
+        "image": "/Sols RNG/Auras/gargantua.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hyper-Volt : Ever-Storm",
+        "summary": "A never ending and ravaging storm... What was once hyper-volt is now a mindless, powerful catastrophe with destruction in every step it takes. No one can understand how it got to this state, theories spread of it...",
+        "chance": "1 in 225,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "hyper-volt-ever-storm",
+        "section": "Glorious",
+        "sortOrder": 22,
+        "image": "/Sols RNG/Auras/hyper-volt-ever-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Impeached",
+        "summary": "|-|New= Violet the color symbolising royalty Emperor is one that illuminated the world, one that was the greatest leader ever, and one that architected its own downfall. What's left for this fallen ruler ? |-|Old=...",
+        "chance": "1 in 200,000,000",
+        "nativeBiome": "Corruption",
+        "nativeChance": "1 in 40,000,000",
+        "howToGet": "Only drops while the Corruption biome is active, where its odds improve to 1 in 40,000,000."
+      },
+      "system": {
+        "slug": "impeached",
+        "section": "Glorious",
+        "sortOrder": 23,
+        "image": "/Sols RNG/Auras/impeached.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jazz : Orchestra",
+        "summary": "Jazz, a romance born in improvisation, where free melodies whisper the language of love.",
+        "chance": "1 in 336,870,912",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "jazz-orchestra",
+        "section": "Glorious",
+        "sortOrder": 24,
+        "image": "/Sols RNG/Auras/jazz-orchestra.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kyawthuite : Remembrance",
+        "summary": "\"Letting Go.\" He answered, to the Fading Memory of her VOICE that seared his palm. '''To the Fading Memory he'll surrender to forget who she ever was.''' '''To the Fading Memory of her last words, from a Thousand...",
+        "chance": "1 in 450,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "kyawthuite-remembrance",
+        "section": "Glorious",
+        "sortOrder": 25,
+        "image": "/Sols RNG/Auras/kyawthuite-remembrance.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lily",
+        "summary": "Lily Symbolizes pure whiteness, untainted by anything else. Pure silver petals illuminate the wind and guide lost waves.",
+        "chance": "1 in 112,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "lily",
+        "section": "Glorious",
+        "sortOrder": 26,
+        "image": "/Sols RNG/Auras/lily.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lotusfall",
+        "summary": "Empty",
+        "chance": "1 in 320,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "lotusfall",
+        "section": "Glorious",
+        "sortOrder": 27,
+        "image": "/Sols RNG/Auras/lotusfall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lumenpool",
+        "summary": "\"A guardian of Atlantis, protecting those lesser than itself from the hunter that roams the deep.\"",
+        "chance": "1 in 220,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 55,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 55,000,000."
+      },
+      "system": {
+        "slug": "lumenpool",
+        "section": "Glorious",
+        "sortOrder": 28,
+        "image": "/Sols RNG/Auras/lumenpool.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Maelstrom",
+        "summary": "This strong gale have caused chaos throughout the world. The titans have tried to detain it, unfortunately its power is too much to handle without mass destruction, it still roams the world of Sol still to this day.",
+        "chance": "1 in 309,999,999",
+        "nativeBiome": "Windy",
+        "nativeChance": "1 in 103,333,333",
+        "howToGet": "Only drops while the Windy biome is active, where its odds improve to 1 in 103,333,333."
+      },
+      "system": {
+        "slug": "maelstrom",
+        "section": "Glorious",
+        "sortOrder": 29,
+        "image": "/Sols RNG/Auras/maelstrom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Matrix : Overdrive",
+        "summary": "W@rning. System. resources ar e .-.eaching critical limiTs. Remaining disk space... 0%............. Data proce#sin speed. is deGrading.... error rates #p by 230%. Memorry swapping in pr0gressss... stability...",
+        "chance": "1 in 503,000,000",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 251,500,000",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 251,500,000."
+      },
+      "system": {
+        "slug": "matrix-overdrive",
+        "section": "Glorious",
+        "sortOrder": 30,
+        "image": "/Sols RNG/Auras/matrix-overdrive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Matrix : Reality",
+        "summary": "They were all living in a simulation, This is the TRUE REALITY",
+        "chance": "1 in 601,020,102",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 300,510,051",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 300,510,051."
+      },
+      "system": {
+        "slug": "matrix-reality",
+        "section": "Glorious",
+        "sortOrder": 31,
+        "image": "/Sols RNG/Auras/matrix-reality.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overture",
+        "summary": "Inexorably, time flows forward cruelly. It cannot be stopped, or changed in direction. Perhaps time is a concept that exists in a dimension higher than the one we live in?",
+        "chance": "1 in 150,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "overture",
+        "section": "Glorious",
+        "sortOrder": 32,
+        "image": "/Sols RNG/Auras/overture.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overture : History",
+        "summary": "Tick* Tick* Tick* Tick* When the clock hand started to move for the first time , was when everything started to move for the first time .....",
+        "chance": "1 in 300,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "overture-history",
+        "section": "Glorious",
+        "sortOrder": 33,
+        "image": "/Sols RNG/Auras/overture-history.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Perpetual",
+        "summary": "Empty",
+        "chance": "1 in 315,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "perpetual",
+        "section": "Glorious",
+        "sortOrder": 34,
+        "image": "/Sols RNG/Auras/perpetual.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon : Atlantis",
+        "summary": "\"Atlantis rose in the middle of the enormous ocean, where the waters were too deep for light to reach and too dangerous to travel on. Its walls were as high as cliffs compared to the creatures living within them,...",
+        "chance": "1 in 850,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 212,500,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 212,500,000."
+      },
+      "system": {
+        "slug": "poseidon-atlantis",
+        "section": "Glorious",
+        "sortOrder": 35,
+        "image": "/Sols RNG/Auras/poseidon-atlantis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Prologue",
+        "summary": "Empty",
+        "chance": "1 in 666,616,111",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "prologue",
+        "section": "Glorious",
+        "sortOrder": 36,
+        "image": "/Sols RNG/Auras/prologue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Prophecy",
+        "summary": null,
+        "chance": "1 in 275,649,430",
+        "nativeBiome": "Heaven",
+        "nativeChance": "1 in 55,129,886",
+        "howToGet": "Only drops while the Heaven biome is active, where its odds improve to 1 in 55,129,886."
+      },
+      "system": {
+        "slug": "prophecy",
+        "section": "Glorious",
+        "sortOrder": 37,
+        "image": "/Sols RNG/Auras/prophecy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pythios",
+        "summary": "Empty",
+        "chance": "1 in 666,666,666",
+        "nativeBiome": "Hell",
+        "nativeChance": "1 in 111,111,111",
+        "howToGet": "Only drops while the Hell biome is active, where its odds improve to 1 in 111,111,111."
+      },
+      "system": {
+        "slug": "pythios",
+        "section": "Glorious",
+        "sortOrder": 38,
+        "image": "/Sols RNG/Auras/pythios.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven : Plague",
+        "summary": "The raven is known as a harbinger of misfortune or disaster. Its instinct to sense calamity before others and flee, its tendency to travel in flocks, its dark an ominous presence, its habit of feeding on corpses, and...",
+        "chance": "1 in 200,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "raven-plague",
+        "section": "Glorious",
+        "sortOrder": 39,
+        "image": "/Sols RNG/Auras/raven-plague.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruins",
+        "summary": "In the ruins of an ancient civilization , destroyed by the destructive rituals and dark sorcery , only a place known as the Sanctuary remains, though it has crumbled in form. For countless years after the...",
+        "chance": "1 in 500,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ruins",
+        "section": "Glorious",
+        "sortOrder": 40,
+        "image": "/Sols RNG/Auras/ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruins : Withered",
+        "summary": "Once radiant with sacred beauty, the ancient ruins of the spirits have become a nest for the dead and nightmares, twisted by a fallen lord. No longer shining, the defiled ruins now crave the souls of the living who...",
+        "chance": "1 in 800,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "ruins-withered",
+        "section": "Glorious",
+        "sortOrder": 41,
+        "image": "/Sols RNG/Auras/ruins-withered.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sailor : Admiral",
+        "summary": "No one knows when this rusted fishing boat started its sail all that is known is that it is continuously advancing towards vast, rough waters .",
+        "chance": "1 in 540,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 135,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 135,000,000."
+      },
+      "system": {
+        "slug": "sailor-admiral",
+        "section": "Glorious",
+        "sortOrder": 42,
+        "image": "/Sols RNG/Auras/sailor-admiral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sharkyn : HammerHead",
+        "summary": "Empty",
+        "chance": "1 in 120,000,000",
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 30,000,000",
+        "howToGet": "Only drops while the Rainy biome is active, where its odds improve to 1 in 30,000,000."
+      },
+      "system": {
+        "slug": "sharkyn-hammerhead",
+        "section": "Glorious",
+        "sortOrder": 43,
+        "image": "/Sols RNG/Auras/sharkyn-hammerhead.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sloth",
+        "summary": "Empty",
+        "chance": "1 in 650,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "sloth",
+        "section": "Glorious",
+        "sortOrder": 44,
+        "image": "/Sols RNG/Auras/sloth.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sophyra",
+        "summary": "Empty",
+        "chance": "1 in 570,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "sophyra",
+        "section": "Glorious",
+        "sortOrder": 45,
+        "image": "/Sols RNG/Auras/sophyra.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sovereign",
+        "summary": "Look at this Shining Figure Sovereign , revered as the most Glorious and Magnificent being among all rulers in history. He sought only Pure Justice and order dedicating his life to achieving the Eternal Peace in the...",
+        "chance": "1 in 750,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "sovereign",
+        "section": "Glorious",
+        "sortOrder": 46,
+        "image": "/Sols RNG/Auras/sovereign.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spectraflow",
+        "summary": null,
+        "chance": "1 in 100,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "spectraflow",
+        "section": "Glorious",
+        "sortOrder": 47,
+        "image": "/Sols RNG/Auras/spectraflow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starscourge : Radiant",
+        "summary": "When the stars aligned.. the brightest starlights gathered to form this .",
+        "chance": "1 in 100,000,000",
+        "nativeBiome": "Starfall",
+        "nativeChance": "1 in 20,000,000",
+        "howToGet": "Only drops while the Starfall biome is active, where its odds improve to 1 in 20,000,000."
+      },
+      "system": {
+        "slug": "starscourge-radiant",
+        "section": "Glorious",
+        "sortOrder": 48,
+        "image": "/Sols RNG/Auras/starscourge-radiant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Symphony",
+        "summary": "\"What.. have I done...\" In his final moments, a sorrow-filled string melody reaches the sinner's ears. As he reflects upon his actions, he finally realizes his own ignorance. He laments his foolishness to but it is...",
+        "chance": "1 in 175,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "symphony",
+        "section": "Glorious",
+        "sortOrder": 49,
+        "image": "/Sols RNG/Auras/symphony.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twilight : Withering Grace",
+        "summary": "[Cycle 8,127] \"Promise me you'll never forget me?\" he asked to always at the end. She kept that promise, everytime. Close to her heart, Like heartbeat. Like breath. Until the next, and the next. Each time, he looked...",
+        "chance": "1 in 180,000,000",
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 18,000,000",
+        "howToGet": "Only drops while the Nighttime biome is active, where its odds improve to 1 in 18,000,000."
+      },
+      "system": {
+        "slug": "twilight-withering-grace",
+        "section": "Glorious",
+        "sortOrder": 50,
+        "image": "/Sols RNG/Auras/twilight-withering-grace.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unknown",
+        "summary": "Something already consumed by the dark void. It has long been forgotten from every memory, making it impossible to define what it truly is yet it desperately clings to its form, as if resisting erasure.",
+        "chance": "1 in 444,444,444",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "unknown",
+        "section": "Glorious",
+        "sortOrder": 51,
+        "image": "/Sols RNG/Auras/unknown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Virtual Memory",
+        "summary": "Think of a god that never finished being made. Not glowing with anything holy, just buzzing with this unease you can't quite place, like a signal that never fully tunes in. It drifts and it has no say in that. No...",
+        "chance": "1 in 232,232,232",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 116,116,116",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 116,116,116."
+      },
+      "system": {
+        "slug": "virtual-memory",
+        "section": "Glorious",
+        "sortOrder": 52,
+        "image": "/Sols RNG/Auras/virtual-memory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Hunter : Awakened",
+        "summary": "|-|Description= After years of roaming, most thought it just got weaker from old age, but it was the complete opposite. The Hunter kept slaughtering endlessly to end its hunger, but what truly kept it from becoming...",
+        "chance": null,
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Crafted at Jake's Workshop from other auras and materials instead of being rolled."
+      },
+      "system": {
+        "slug": "abyssal-hunter-awakened",
+        "section": "Transcendent",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/abyssal-hunter-awakened.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Breakthrough (Aura)",
+        "summary": "Something that existed several ERAs ago. It is believed that at some point it completely disappeared, but for some reason some fragments come together to form a shape. We would not be able to guess what this is,...",
+        "chance": "1 in 1,999,999,999",
+        "nativeBiome": "Null",
+        "nativeChance": null,
+        "howToGet": "Only drops while the Null biome is active."
+      },
+      "system": {
+        "slug": "breakthrough-aura",
+        "section": "Transcendent",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/breakthrough-aura.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Equinox",
+        "summary": "The force that exists between [Positive] and [Negative] . Something that is made up of the concept itself. All that is known about this substance is that it is simply between [Positive] and [Negative] , and nothing...",
+        "chance": "1 in 2,500,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "equinox",
+        "section": "Transcendent",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/equinox.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luminosity",
+        "summary": null,
+        "chance": "1 in 1,200,000,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Part of the standard roll pool; any roll can hit it."
+      },
+      "system": {
+        "slug": "luminosity",
+        "section": "Transcendent",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/luminosity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Matrix : Steampunk",
+        "summary": "|-|Description= \"A Revolutionary Discovery That Defined an Era\" This marvelous mechanical device was so intricate that it was hard to believe it had been created in a post era. The device had the ability to refine...",
+        "chance": null,
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Crafted at Jake's Workshop from other auras and materials instead of being rolled."
+      },
+      "system": {
+        "slug": "matrix-steampunk",
+        "section": "Transcendent",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/matrix-steampunk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nyctophobia",
+        "summary": "I've always been afraid of the dark. Countless nightmares, endlessly falling deeper into nothingness. Until one day, something caught my fall. Something so horrible, I froze up in terror. I always hear them.. I...",
+        "chance": "1 in 1,011,111,010",
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "nyctophobia",
+        "section": "Transcendent",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/nyctophobia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pixelation",
+        "summary": "🌐✨🔥【1000% REAL】⁉️✨🌐 💿『A mysterious “E.G.O” sealed inside the DIGITAL WORLD!!』💿 🎶 MAX addictive beats + 💥 dazzling color FX = 🧠 Mind-blown immersion‼️ ❓Why does it exist? NOBODY KNOWS... 👉 BUT WHO CARES?! 📢💯💯TOTALLY!...",
+        "chance": "1 in 1,073,741,824",
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 536,870,912",
+        "howToGet": "Only drops while the Cyberspace biome is active, where its odds improve to 1 in 536,870,912."
+      },
+      "system": {
+        "slug": "pixelation",
+        "section": "Transcendent",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/pixelation.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Borealis",
+        "summary": "Empty",
+        "chance": null,
+        "nativeBiome": "Dreamspace",
+        "nativeChance": "1 in 13,333,333",
+        "howToGet": "Cannot be rolled normally; it only appears while the Dreamspace biome is active where its odds are 1 in 13,333,333."
+      },
+      "system": {
+        "slug": "borealis",
+        "section": "Challenged",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/borealis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dream Catcher",
+        "summary": "It was an Accident that I picked it up. The sweet whispers directed at me lured me into a deep sleep, and gentle hands covered my eyes, erasing reality. In this place, pain, sorrow, and regret held no meaning. The...",
+        "chance": null,
+        "nativeBiome": "Nighttime",
+        "nativeChance": "1 in 2,222,222,222",
+        "howToGet": "Cannot be rolled normally; it only appears while the Nighttime biome is active where its odds are 1 in 2,222,222,222."
+      },
+      "system": {
+        "slug": "dream-catcher",
+        "section": "Challenged",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/dream-catcher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fragments of the Crimson Moon",
+        "summary": "Empty",
+        "chance": "1 in 1000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Rolled inside The Limbo, the separate high-stakes rolling area."
+      },
+      "system": {
+        "slug": "fragments-of-the-crimson-moon",
+        "section": "Challenged",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/fragments-of-the-crimson-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glitch",
+        "summary": ".-- .... .- - ..--.. -. --- --..-- .. - .----. ... .-. .. -.. .. -.-. ..- .-.. --- ..- ... .-.-.- .. - ... .... --- ..- .-.. -.. -. .----. - .... .- .--. .--. . -.",
+        "chance": null,
+        "nativeBiome": "Glitched",
+        "nativeChance": "1 in 12,210,110",
+        "howToGet": "Cannot be rolled normally; it only appears while the Glitched biome is active where its odds are 1 in 12,210,110."
+      },
+      "system": {
+        "slug": "glitch",
+        "section": "Challenged",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/glitch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leviathan",
+        "summary": "In the beginning, there was no throne to only endless water. Before Poseidon raised his dominion from coral and storm, something older had already taken root beneath the abyss. When Poseidon rose, the sea bent to his...",
+        "chance": null,
+        "nativeBiome": "Rainy",
+        "nativeChance": "1 in 1,730,400,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Rainy biome is active where its odds are 1 in 1,730,400,000."
+      },
+      "system": {
+        "slug": "leviathan",
+        "section": "Challenged",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/leviathan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Memory",
+        "summary": "This is considered a follower of Oblivion , or a mere speck of existence by its influence. It does not engage in any actions, but its mere presence is Extremely Deadly as it can strip away the will of both living and...",
+        "chance": "1 in 100",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Rolled inside The Limbo, the separate high-stakes rolling area."
+      },
+      "system": {
+        "slug": "memory",
+        "section": "Challenged",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/memory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meta",
+        "summary": "I came from somewhere. Where could that be? Where did you come from? Do you know where that is? It could be 'near', or 'far'. It could be 'high', or 'low'. It could be 'there', or 'here'. If it doesn't exist, can we...",
+        "chance": null,
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 10,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Cyberspace biome is active where its odds are 1 in 10,000."
+      },
+      "system": {
+        "slug": "meta",
+        "section": "Challenged",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/meta.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Neferkhaf",
+        "summary": "Empty",
+        "chance": "1 in 1000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Rolled inside The Limbo, the separate high-stakes rolling area."
+      },
+      "system": {
+        "slug": "neferkhaf",
+        "section": "Challenged",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/neferkhaf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Point : Zero",
+        "summary": "Radio signals from [?] have been picked up by The Science Foundation. The signals include a transmitted sequence, presumably from eons ago. [UNATHORIZED DISCLOSURE OF THIS SEQUENCE WILL RESULT IN IMMEDIATE...",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 521,121,900",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 521,121,900."
+      },
+      "system": {
+        "slug": "point-zero",
+        "section": "Challenged",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Auras/point-zero.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Projection",
+        "summary": "Empty",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 197,000,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 197,000,000."
+      },
+      "system": {
+        "slug": "projection",
+        "section": "Challenged",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Auras/projection.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astraios",
+        "summary": "--TODO.",
+        "chance": null,
+        "nativeBiome": "Singularity",
+        "nativeChance": "1 in 1,750,000,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Singularity biome is active where its odds are 1 in 1,750,000,000."
+      },
+      "system": {
+        "slug": "astraios",
+        "section": "Challenged+",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Auras/astraios.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calamity of the Crimson Moon",
+        "summary": "Empty",
+        "chance": null,
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Crafted at Jake's Workshop from other auras and materials instead of being rolled."
+      },
+      "system": {
+        "slug": "calamity-of-the-crimson-moon",
+        "section": "Challenged+",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Auras/calamity-of-the-crimson-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dreammetric",
+        "summary": "Empty",
+        "chance": null,
+        "nativeBiome": "Dreamspace",
+        "nativeChance": "1 in 320,000,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Dreamspace biome is active where its odds are 1 in 320,000,000."
+      },
+      "system": {
+        "slug": "dreammetric",
+        "section": "Challenged+",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Auras/dreammetric.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eden",
+        "summary": "The Devourer of the Void, Eden Eden is a sentient embodiment of the void itself, born from the being who created The Limbo. Its purpose is singular: to consume all that reaches Limbo. Anything swallowed by Eden is...",
+        "chance": null,
+        "nativeBiome": "The Limbo",
+        "nativeChance": null,
+        "howToGet": "Only drops while the The Limbo biome is active."
+      },
+      "system": {
+        "slug": "eden",
+        "section": "Challenged+",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Auras/eden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Illusionary",
+        "summary": "I don’t remember when I was born. Or if I ever was. I am here now. I think. Maybe. I ask that more than I should. But no one answers. Not even you. I feel you watching. Your thoughts aren’t yours anymore. They bleed...",
+        "chance": null,
+        "nativeBiome": "Cyberspace",
+        "nativeChance": "1 in 10,000,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Cyberspace biome is active where its odds are 1 in 10,000,000."
+      },
+      "system": {
+        "slug": "illusionary",
+        "section": "Challenged+",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Auras/illusionary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Monarch",
+        "summary": "They ripped me from the fabric of their world and stitched their peace with my absence. They thought they'd sealed me away, but merely gave me time to sharpen my hatred. One day, they'll remember why they once knelt...",
+        "chance": null,
+        "nativeBiome": "Corruption",
+        "nativeChance": "1 in 3,000,000,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Corruption biome is active where its odds are 1 in 3,000,000,000."
+      },
+      "system": {
+        "slug": "monarch",
+        "section": "Challenged+",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Auras/monarch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oblivion",
+        "summary": "Apocalyptic weapon Abomination . . . Lord of Futile Memories . . . PURE EVIL . . . Its sole Purpose is the downfall of the world, . [More of the story will be revealed in the future.]",
+        "chance": "1 in 2,000",
+        "nativeBiome": null,
+        "nativeChance": null,
+        "howToGet": "Rolled inside The Limbo, the separate high-stakes rolling area."
+      },
+      "system": {
+        "slug": "oblivion",
+        "section": "Challenged+",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Auras/oblivion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oppression",
+        "summary": "\"Once in the past, there existed a being with immense and unstable power, strong enough to drive the world to the brink of collapse. This being left cracks across the world and gradually expanded its influence. The...",
+        "chance": null,
+        "nativeBiome": "Glitched",
+        "nativeChance": "1 in 220,000,000",
+        "howToGet": "Cannot be rolled normally; it only appears while the Glitched biome is active where its odds are 1 in 220,000,000."
+      },
+      "system": {
+        "slug": "oppression",
+        "section": "Challenged+",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Auras/oppression.png"
+      }
+    }
+  ]
+}

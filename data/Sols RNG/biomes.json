@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sol's RNG",
+    "gameSlug": "sols-rng",
+    "collection": "biomes",
+    "route": "/wiki/sols-rng/biomes",
+    "catalogCode": "sols-rng-biomes",
+    "itemFields": [
+      "summary",
+      "chance",
+      "duration",
+      "howItAppears",
+      "nativeAuras"
+    ],
+    "columns": [
+      "summary",
+      "chance",
+      "duration",
+      "howItAppears",
+      "nativeAuras"
+    ],
+    "display": {
+      "groupLabel": "Biome tier",
+      "sectionOrder": [
+        "Standard Biomes",
+        "Rare Biomes"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "chance",
+        "duration",
+        "howItAppears",
+        "nativeAuras"
+      ],
+      "tableFields": [
+        "chance",
+        "duration"
+      ],
+      "fieldPresentation": {
+        "chance": {
+          "kind": "chip",
+          "label": "Spawn chance",
+          "omitWhenEmpty": true
+        },
+        "duration": {
+          "kind": "chip",
+          "label": "Duration",
+          "omitWhenEmpty": true
+        },
+        "howItAppears": {
+          "kind": "detail",
+          "label": "How it appears",
+          "omitWhenEmpty": true
+        },
+        "nativeAuras": {
+          "kind": "detail",
+          "label": "Native auras",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Normal",
+        "summary": "The default grassy island with no weather effects and no biome-locked auras.",
+        "chance": null,
+        "duration": null,
+        "howItAppears": "Active whenever no other biome is rolling; the biome system rerolls every second.",
+        "nativeAuras": null
+      },
+      "system": {
+        "slug": "normal",
+        "section": "Standard Biomes",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Windy",
+        "summary": "A cool wind sweeps the island while leaves whip off the trees.",
+        "chance": "1 in 500 per second",
+        "duration": "2 minutes",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Wind, Flow, Stormal, Vortex, Aviator, Stormal : Hurricane, Maelstrom"
+      },
+      "system": {
+        "slug": "windy",
+        "section": "Standard Biomes",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snowy",
+        "summary": "Snow and cold cover the map in white.",
+        "chance": "1 in 600 per second",
+        "duration": "2 minutes",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Glacier, Permafrost, Blizzard, Chillsear, Eisveil"
+      },
+      "system": {
+        "slug": "snowy",
+        "section": "Standard Biomes",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rainy",
+        "summary": "Showers and gray fog roll through, powering water auras.",
+        "chance": "1 in 750 per second",
+        "duration": "2 minutes",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Evanescent, Poseidon, Aquaria, Sailor, Sailor : Flying Dutchman, Sharkyn, Abyssal Hunter, Lumenpool, and more"
+      },
+      "system": {
+        "slug": "rainy",
+        "section": "Standard Biomes",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sandstorm",
+        "summary": "A harsh sandstorm blankets the map in dust.",
+        "chance": "1 in 3,000 per second",
+        "duration": "650 seconds",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Gilded, Jackpot, Gilded : Crowned, Anubis, Outlaw, Atlas"
+      },
+      "system": {
+        "slug": "sandstorm",
+        "section": "Standard Biomes",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hell",
+        "summary": "Chaotic red energy overtakes the world.",
+        "chance": "1 in 6,666 per second",
+        "duration": "666 seconds",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Undead, Undead : Devil, Hades, Hellbound, Bloodlust, Felled, Pythios"
+      },
+      "system": {
+        "slug": "hell",
+        "section": "Standard Biomes",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Starfall",
+        "summary": "A dark blue sky with stars pouring down.",
+        "chance": "1 in 7,500 per second",
+        "duration": "10 minutes",
+        "howItAppears": "Spawns naturally; each Starfall spawn also has a 1 in 100 chance to become Singularity instead.",
+        "nativeAuras": "Starlight, StarRider, Astral, Orion, Stargazer, Starlight : Kunzite, Sirius, Starborn, and more"
+      },
+      "system": {
+        "slug": "starfall",
+        "section": "Standard Biomes",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heaven",
+        "summary": "A divine golden sky opens above the island.",
+        "chance": "1 in 7,777 per second",
+        "duration": "240 seconds",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Divinus : Angel, Hope, Divinus : Guardian, Faith, Dominion, Icarus, Oculus, Archangel, and more"
+      },
+      "system": {
+        "slug": "heaven",
+        "section": "Standard Biomes",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corruption",
+        "summary": "Poisonous pollution spreads across the map.",
+        "chance": "1 in 9,000 per second",
+        "duration": "650 seconds",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Hazard, Corrosive, Hazard : Rays, Parasite, Symbiosis, Impeached, Monarch"
+      },
+      "system": {
+        "slug": "corruption",
+        "section": "Standard Biomes",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Null",
+        "summary": "The map fades to gray as mist blocks your vision.",
+        "chance": "1 in 10,100 per second",
+        "duration": "99 seconds",
+        "howItAppears": "Spawns naturally from the every-second biome roll.",
+        "nativeAuras": "Flowed, Nihility, Shiftlock, Undefined, Empty, Breakthrough (Aura)"
+      },
+      "system": {
+        "slug": "null",
+        "section": "Standard Biomes",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glitched",
+        "summary": "The world breaks into error textures and corrupted terrain.",
+        "chance": "1 in 30,000 per second",
+        "duration": "2 minutes",
+        "howItAppears": "Spawns naturally from the every-second biome roll; the rarest naturally rolling biome tier starts here.",
+        "nativeAuras": "Fault, Glitch, Oppression"
+      },
+      "system": {
+        "slug": "glitched",
+        "section": "Rare Biomes",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dreamspace",
+        "summary": "A sleepy pastel dream world takes over the island.",
+        "chance": "1 in 3,500,000 per second",
+        "duration": null,
+        "howItAppears": "The second rarest biome; it can also appear from biome items.",
+        "nativeAuras": "★, ★★, ★★★, Borealis, Dreammetric"
+      },
+      "system": {
+        "slug": "dreamspace",
+        "section": "Rare Biomes",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cyberspace",
+        "summary": "A digital grid world hosted by Jake, with a 2x breakthrough multiplier.",
+        "chance": "1 in 5,000 per item use",
+        "duration": "12 minutes",
+        "howItAppears": "Cannot spawn naturally; it has a 1 in 5,000 chance when using a Strange Controller or Biome Randomizer.",
+        "nativeAuras": "Forbidden, Player, Metabytes, Player : Respawn, Virtual, Antivirus, Matrix, Virtual : Fatal Error, and more"
+      },
+      "system": {
+        "slug": "cyberspace",
+        "section": "Rare Biomes",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Singularity",
+        "summary": "A collapsing void that pulls everything in, home of Limbo-grade auras.",
+        "chance": "1 in 100 per Starfall spawn",
+        "duration": "20 minutes",
+        "howItAppears": "Replaces Starfall 1 in 100 times whenever Starfall spawns, whether naturally or from biome items.",
+        "nativeAuras": "Constella, Pleiades, Pulsar, Comet, Astronaut, Galaxy, Vega, Centurion, and more"
+      },
+      "system": {
+        "slug": "singularity",
+        "section": "Rare Biomes",
+        "sortOrder": 3,
+        "image": null
+      }
+    }
+  ]
+}

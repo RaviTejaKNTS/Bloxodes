@@ -1,0 +1,601 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sol's RNG",
+    "gameSlug": "sols-rng",
+    "collection": "gears",
+    "route": "/wiki/sols-rng/gears",
+    "catalogCode": "sols-rng-gears",
+    "itemFields": [
+      "summary",
+      "boost",
+      "obtainment",
+      "recipe"
+    ],
+    "columns": [
+      "summary",
+      "boost",
+      "obtainment",
+      "recipe"
+    ],
+    "display": {
+      "groupLabel": "Slot",
+      "sectionOrder": [
+        "Left Gear",
+        "Right Gear"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "boost",
+        "obtainment",
+        "recipe"
+      ],
+      "tableFields": [
+        "boost",
+        "obtainment"
+      ],
+      "fieldPresentation": {
+        "boost": {
+          "kind": "highlight",
+          "label": "Boost",
+          "omitWhenEmpty": true
+        },
+        "obtainment": {
+          "kind": "plain",
+          "label": "Obtained from",
+          "omitWhenEmpty": true
+        },
+        "recipe": {
+          "kind": "detail",
+          "label": "Recipe",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Aqua Device",
+        "summary": "This device Slowly produces Pure Water . +10% Roll Speed or +100% Roll Speed during Rainy",
+        "boost": "+10% Roll Speed. Or +100% During Rainy",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Aquamarine; 1x Aquatic; 1x Nautilus"
+      },
+      "system": {
+        "slug": "aqua-device",
+        "section": "Right Gear",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Gears/aqua-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blessed Tide Gauntlet",
+        "summary": "Gauntlet with the true Glory of the Sea [Tide]: Bonus Roll allows you to roll Rainy Auras with Native Rarity Regardless of Current Biome 2 -> 3 Bonus Roll Multiply 10 -> 6 Bonus Roll Countdown",
+        "boost": "[Sea Blessing+]: Bonus Roll Countdown is moved from 10 rolls -> 6 rolls, Bonus Roll Multiplier is upgraded from 2x -> 3x. *[Tide]: The Bonus Roll allows you to roll Rainy Auras with Native Rarity regardless of current Biome.",
+        "obtainment": "Hidden Quest",
+        "recipe": "1x Poseidon (from Tide Gauntlet); 300,000 Rolls"
+      },
+      "system": {
+        "slug": "blessed-tide-gauntlet",
+        "section": "Left Gear",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Gears/blessed-tide-gauntlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Matter Device",
+        "summary": "This device Absorbs nearby Lights Each Bonus roll gives you a 0.1% chance to earn 1 Dark Points.",
+        "boost": "Each bonus roll gives you a 0.1% chance to earn 1 Dark Points.",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Ink; 1x Glock; 1x Ash"
+      },
+      "system": {
+        "slug": "dark-matter-device",
+        "section": "Left Gear",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Gears/dark-matter-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Darkshader",
+        "summary": "The darkness of the device attempts to swallow you up .",
+        "boost": "10 -> 5 Bonus Roll Cooldown *Next 10 Rolls grant x2.5 Luck (Every 20th Roll)",
+        "obtainment": "Jake's Workshop",
+        "recipe": null
+      },
+      "system": {
+        "slug": "darkshader",
+        "section": "Left Gear",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Gears/darkshader.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Desire Glove",
+        "summary": "Desire makes you stronger +40% Base Luck",
+        "boost": "+40% Luck Boost",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Rage; 1x Ruby; 1x Diaboli; 1x Bleedingeffect= DesireGlove"
+      },
+      "system": {
+        "slug": "desire-glove",
+        "section": "Right Gear",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Gears/desire-glove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eclipse Device",
+        "summary": "The faint Light of the Eclipse surrounds you. +50% Base Luck +15% Roll Speed",
+        "boost": "+50% Luck +15% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Lunar Device; 1x Solar Device; 1x Eclipse"
+      },
+      "system": {
+        "slug": "eclipse-device",
+        "section": "Right Gear",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Gears/eclipse-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exo Gauntlet",
+        "summary": "Exotic Power enhances you. +100% Base Luck +20% Roll Speed",
+        "boost": "+100% Luck Boost +20% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "3x Gilded; 2x Precious; 2x Magnetic; 1x Sidereum; 1x Undead; 1x Exotic"
+      },
+      "system": {
+        "slug": "exo-gauntlet",
+        "section": "Right Gear",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Gears/exo-gauntlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exoflex Device",
+        "summary": "A device that will make your Exotic Destiny even more Brilliant .. +340% Base Luck +35% Roll Speed",
+        "boost": "+340% Luck Boost +35% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "3x Arcane; 5x Jade; 50x Exotic; 37x Undead; 350x Sidereum; 80x Starlight; 1,000x Aquamarine; 2,000x Forbidden; 30,000x Rare; 1x Exo Gauntlet"
+      },
+      "system": {
+        "slug": "exoflex-device",
+        "section": "Right Gear",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Gears/exoflex-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flesh Device",
+        "summary": "A device that Came to Life due to a Curse . This device makes the Bonus Roll apply to Every Rolls . However, this also Reduces the Bonus Roll Multiplier to 1.3",
+        "boost": "x1.3 Bonus Roll Multiplier on Every Roll",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Astral; 30x Hazard; 15x Corrosive; 10x Undead; 6,000x Crystallized; 190x Ink; 30x Bleeding"
+      },
+      "system": {
+        "slug": "flesh-device",
+        "section": "Left Gear",
+        "sortOrder": 3,
+        "image": "/Sols RNG/Gears/flesh-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Gauntlet",
+        "summary": "This gauntlet is really cold ... +150% Base Luck -25% Roll Speed",
+        "boost": "+150% Luck Boost -25% Roll Speed.",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Glacier; 1x Permafrost"
+      },
+      "system": {
+        "slug": "frozen-gauntlet",
+        "section": "Right Gear",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Gears/frozen-gauntlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Galactic Device",
+        "summary": "This device is composed with the Power of Galaxy . +250% Base Luck +30% Roll Speed",
+        "boost": "+250% Luck +30% Roll speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Galaxy; 1x Eclipse Device; 100x Sapphire; 15x Solar; 62x Magnetic; 80x Diaboli; 3x Comet; 15x Lunar"
+      },
+      "system": {
+        "slug": "galactic-device",
+        "section": "Right Gear",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Gears/galactic-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gemstone Gauntlet",
+        "summary": "Controls the Power of the S i x G e m s t o n e s . Per 10 rolls, a random gem will glow, granting 0-30% Luck or Roll Speed for 10 rolls.",
+        "boost": "Granting 0-30% Luck or Roll Speed per minute",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Topaz; 1x Ruby; 1x Emerald; 1x Sapphire; 1x Aquamarine; 1x Quartz"
+      },
+      "system": {
+        "slug": "gemstone-gauntlet",
+        "section": "Left Gear",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Gears/gemstone-gauntlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Genesis Drive",
+        "summary": "An arcanic drive that records the Divine Sanctity of G ENESIS . +1200% Base Luck +100% Roll Speed",
+        "boost": "+1200% Luck +100% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Neuralyzer; 1x Chromatic : Genesis; 2x Matrix; 2x Chromatic; 10x Hyper-Volt; 10x Origin; 30x Virtual; 200x Bounded; 200x Aether; 400x Exotic; 2,400x Watt; 4,000x Powered"
+      },
+      "system": {
+        "slug": "genesis-drive",
+        "section": "Right Gear",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Gears/genesis-drive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gravitational Device",
+        "summary": "The device provides you with Unstable Gravity . 2 -> 6 Bonus Roll Multiply",
+        "boost": "Bonus Roll Luck is increased to 6x (Every 10th roll)",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Gravitational; 3x Bounded; 5x Exotic; 75x Magnetic; 152x Diaboli; 31x Sidereum; 5x Nautilus; 152x Precious"
+      },
+      "system": {
+        "slug": "gravitational-device",
+        "section": "Left Gear",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Gears/gravitational-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heavenly Device",
+        "summary": "A sacred relic that is given by an A NGEL . The angel will always be watching over you . +1,500% Base Luck +120% Roll Speed",
+        "boost": "+1,500% Base Luck +120% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Genesis Drive; 1x Archangel (1 in 70,000,000 in Heaven); 1x Prophecy (1 in 55,129,886 in Heaven); 10x Icarus (1 in 3,132,000 in Heaven); 15x Faith (1 in 1,450,000 in Heaven); 175x Hope (1 in 97,745 in Heaven); 500x Divinus : Angel (1 in 24,000 in Heaven)"
+      },
+      "system": {
+        "slug": "heavenly-device",
+        "section": "Right Gear",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Gears/heavenly-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hologrammer",
+        "summary": "High-spec Virtual Digital Output Device whose principles are unknown. +395% Base Luck +35% Roll Speed [Duplicate] : 15% chance to Duplicate an item when grabbing it [sic]",
+        "boost": "+395% Base Luck +35% Roll Speed *Duplicate: 15% chance to Duplicate an item when grabbing it.",
+        "obtainment": "Jake's Workshop",
+        "recipe": null
+      },
+      "system": {
+        "slug": "hologrammer",
+        "section": "Right Gear",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Gears/hologrammer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jackpot Gauntlet",
+        "summary": "Always bet on yourself. +77% Base Luck +7% Roll Speed [Jackpot] : +77 Cash when you hit the Jackpot .",
+        "boost": "+77% Luck *+7% Roll Speed *Get 77 Coins every time you roll Jackpot",
+        "obtainment": "Jake's Workshop",
+        "recipe": "777x Rare; 77x Gilded; 77x Jackpot"
+      },
+      "system": {
+        "slug": "jackpot-gauntlet",
+        "section": "Left Gear",
+        "sortOrder": 6,
+        "image": "/Sols RNG/Gears/jackpot-gauntlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luck Glove",
+        "summary": "A glove with a really simple structure. +25% Base Luck",
+        "boost": "+25% Luck Boost",
+        "obtainment": "Jake's Workshop",
+        "recipe": null
+      },
+      "system": {
+        "slug": "luck-glove",
+        "section": "Right Gear",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Gears/luck-glove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar Device",
+        "summary": "Stillness clears your mind. +15% Roll Speed",
+        "boost": "+15% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Rare; 1x Divinus; 1x Lunar"
+      },
+      "system": {
+        "slug": "lunar-device",
+        "section": "Right Gear",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Gears/lunar-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Neuralyzer",
+        "summary": "A Device that Co nt in uo us ly stimulates the brain nerves. +850% Base Luck +70% Roll Speed",
+        "boost": "+850% Luck Boost +70% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Hologrammer; 2x Chromatic; 7x Origin; 18x Virtual; 10x Twilight; 20x Bounded : Unbound; 400x Exotic; 250x Starlight; 2,000x :Flushed:; 2,500x Lost Soul"
+      },
+      "system": {
+        "slug": "neuralyzer",
+        "section": "Right Gear",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Gears/neuralyzer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ominous Coffin",
+        "summary": "A coffin where the unholy being rests. x1.35 Basic Luck Removes Bonus Roll +30% Roll Speed during Pumpkin Moon, Graveyard, Blood Rain",
+        "boost": "x1.35 Basic Luck *Removes Bonus Roll *+30% Roll Speed during Pumpkin Moon, Graveyard or Blood Rain",
+        "obtainment": "Reach Level 10 in the Season III Season Pass.",
+        "recipe": null
+      },
+      "system": {
+        "slug": "ominous-coffin",
+        "section": "Left Gear",
+        "sortOrder": 7,
+        "image": "/Sols RNG/Gears/ominous-coffin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pole Light Core Device",
+        "summary": "This device prevents Fear from growing on you with the mysterious Power of the Polaris [Aurora] : Every 30th Roll gives you 5 stacks of Polar Shift . +500% Base Luck",
+        "boost": "+500% Luck *Every 30th roll gives 5 stacks of Polar Shift .",
+        "obtainment": "Jake's quest and/or Jake's Workshop",
+        "recipe": "3x Sirius; 3x Blizzard; 4x Hyper-Volt; 5x Origin; 25x Magnetic : Reverse Polarity; 100x Jade; 300x Permafrost; 5000x Solar; 7250x Sidereum; 9000x Magnetic"
+      },
+      "system": {
+        "slug": "pole-light-core-device",
+        "section": "Left Gear",
+        "sortOrder": 8,
+        "image": "/Sols RNG/Gears/pole-light-core-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pump Punch",
+        "summary": "PUMP PUNCH!! gonna break you. +800% Base Luck -50% Roll Speed",
+        "boost": "+800% Luck *-50% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Pump King's Soul; 80x Pump King's Head; 2x Lunar : Full Moon; 8,000x Pump Token; 1x Lunar Device"
+      },
+      "system": {
+        "slug": "pump-punch",
+        "section": "Right Gear",
+        "sortOrder": 13,
+        "image": "/Sols RNG/Gears/pump-punch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ragnaröker",
+        "summary": "The once glorious land is losing its light... +455% Base Luck +40% Roll Speed [Disaster] : +45% Luck +5% Roll Speed when Windy , Rainy , Hell biome.",
+        "boost": "+455% Luck and +40% Roll Speed. *+45% Luck and +5% Roll Speed if current biome is Windy, Rainy or Hell.",
+        "obtainment": "Jake's Workshop",
+        "recipe": null
+      },
+      "system": {
+        "slug": "ragnar-ker",
+        "section": "Right Gear",
+        "sortOrder": 14,
+        "image": "/Sols RNG/Gears/ragnar-ker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shining Star",
+        "summary": "Twinkle twinkle little star . +50% Base Luck or +250% Base Luck during Starfall",
+        "boost": "+50% Luck Boost. Or +250% during Starfall",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Star Rider; 1x Starlight"
+      },
+      "system": {
+        "slug": "shining-star",
+        "section": "Right Gear",
+        "sortOrder": 15,
+        "image": "/Sols RNG/Gears/shining-star.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Singularity Gauntlet",
+        "summary": "The most unstable and powerful celestial body is stirring within. +2,200% Base Luck +200% Roll Speed",
+        "boost": "+2,200% Base Luck *+200% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1 Singularity Catalyst; 1 Starshaper; 1 Galactic Device; 1 Gravitational Device; 1 Solar Device; 1 Lunar Device; 1 Centurion; 1 Astronaut; 1 Vega; 10 Constella; 10 Pulsar; 15 Pleiades; 2 Starscourge : Radiant; 25 Starscourge; 50 Galaxy; 100 Orion; 6,000 Starlight; 12,900 Powered; 20,000 Solar; 20,000 Lunar"
+      },
+      "system": {
+        "slug": "singularity-gauntlet",
+        "section": "Right Gear",
+        "sortOrder": 16,
+        "image": "/Sols RNG/Gears/singularity-gauntlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Solar Device",
+        "summary": "The Heat straightens your spirit. +50% Base Luck",
+        "boost": "+50% luck",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Rare; 1x Divinus; 1x Solar"
+      },
+      "system": {
+        "slug": "solar-device",
+        "section": "Right Gear",
+        "sortOrder": 17,
+        "image": "/Sols RNG/Gears/solar-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starshaper",
+        "summary": "This device is powerful enough to crush stars . +700% Base Luck +50% Roll Speed",
+        "boost": "+700% Luck Boost +50% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Galactic Device; 1x Gravitational Device; 15x Solar Device; 15x Lunar Device; 2x Starscourge; 3x Hyper-Volt; 3x Galaxy; 6x Gravitational; 90x Comet; 200x StarRider; 1,500x Solar; 1,500x Lunar; 2,700x Sidereum; 5,600x Magnetic"
+      },
+      "system": {
+        "slug": "starshaper",
+        "section": "Right Gear",
+        "sortOrder": 18,
+        "image": "/Sols RNG/Gears/starshaper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Subzero Device",
+        "summary": "The device even Freezes your Spirit . +150% Base Luck +30% Roll Speed",
+        "boost": "+150% Luck +30% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "2x Permafrost; 600x Crystallized; 2x Aquatic; 80x Glacier; 10x Sidereum; 20x Magnetic; 40x Precious"
+      },
+      "system": {
+        "slug": "subzero-device",
+        "section": "Right Gear",
+        "sortOrder": 19,
+        "image": "/Sols RNG/Gears/subzero-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Thing",
+        "summary": "It is burrowing into your skin, creating grotesque screams... Makes the Bonus Roll 's luck multiply to 11 without any downsides.",
+        "boost": "2x -> 11x Bonus Roll Multiplier",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Flesh Device; 20x Parasite; 50x Symbiosis; 600x Hazard : Rays; 4,000x Ink : Leak; 6,000x Hazard; 10,000x Bleeding"
+      },
+      "system": {
+        "slug": "the-thing",
+        "section": "Left Gear",
+        "sortOrder": 9,
+        "image": "/Sols RNG/Gears/the-thing.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tide Gauntlet",
+        "summary": "I can feel the Coolness of the Waves from this gauntlet. [Tide]: Bonus Roll allows you to roll Rainy Auras with Native Rarity Regardless of Current Biome +50% Base Luck",
+        "boost": "Tide: The Bonus Roll allows you to roll Rainy Auras with Native Rarity regardless of current Biome *+50% Luck",
+        "obtainment": "Summer Quest",
+        "recipe": "3x Solar; 1x Rage : Heated"
+      },
+      "system": {
+        "slug": "tide-gauntlet",
+        "section": "Left Gear",
+        "sortOrder": 10,
+        "image": "/Sols RNG/Gears/tide-gauntlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unfathomable Ruins",
+        "summary": "The ancient relic that is wrapped around your arm may just be a miniature version of a real structure. The ruins will gradually accumulate your magical power and return it to you as great fortune .",
+        "boost": "Next 100 rolls grant x14 Basic Luck for every 1000th roll *Remove Bonus Roll",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Ruins; 3x Runic; 4x Ethereal; 10x Harnessed; 15x Origin; 50x Twilight; 50x Kyawthuite; 50x Jade; 2,000x Flow; 10,000x Flora"
+      },
+      "system": {
+        "slug": "unfathomable-ruins",
+        "section": "Left Gear",
+        "sortOrder": 11,
+        "image": "/Sols RNG/Gears/unfathomable-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Hunter",
+        "summary": "It's a gauntlet designed to fire stakes for slaying vampires. +240% Base Luck +30% Roll Speed Rarity of Halloween Auras are reduced by 20% during Halloween Biomes",
+        "boost": "+240% Luck *+30% Roll Speed *20% Rarity Decrease on Halloween Auras during Halloween Biomes and Glitched",
+        "obtainment": "Season III of RNG Pass.",
+        "recipe": null
+      },
+      "system": {
+        "slug": "vampire-hunter",
+        "section": "Right Gear",
+        "sortOrder": 20,
+        "image": "/Sols RNG/Gears/vampire-hunter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Volcanic Device",
+        "summary": "A device that simulates 100% of Hell's Heats . +290% Base Luck +35% Roll Speed",
+        "boost": "+290% Luck and +35% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "1x Hades; 10x Rage : Heated; 140x Diaboli; 1000x Rage; 55x Bleeding; 1x Solar Device; 1x Windstorm Device"
+      },
+      "system": {
+        "slug": "volcanic-device",
+        "section": "Right Gear",
+        "sortOrder": 21,
+        "image": "/Sols RNG/Gears/volcanic-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Windstorm Device",
+        "summary": "The Storm Winds around you. +115% Base Luck +25% Roll Speed",
+        "boost": "+115% Luck +30% Roll Speed",
+        "obtainment": "Jake's Workshop",
+        "recipe": "25x Wind; 1x Stormal; 1x Aquatic; 4x Sidereum; 12x Precious"
+      },
+      "system": {
+        "slug": "windstorm-device",
+        "section": "Right Gear",
+        "sortOrder": 22,
+        "image": "/Sols RNG/Gears/windstorm-device.png"
+      }
+    },
+    {
+      "item": {
+        "name": "X-mas Champion",
+        "summary": "YOU ARE THE CHAMPION!!!",
+        "boost": "4x Luck every 6th rolleffect= XmaxChampion recipe=N/Aimage=Xmaschampioningame.png",
+        "obtainment": "Rouletteboost=4x Luck every 6th rolleffect= XmaxChampion recipe=N/Aimage=Xmaschampioningame.png",
+        "recipe": null
+      },
+      "system": {
+        "slug": "x-mas-champion",
+        "section": "Left Gear",
+        "sortOrder": 12,
+        "image": "/Sols RNG/Gears/x-mas-champion.png"
+      }
+    }
+  ]
+}

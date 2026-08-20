@@ -1,0 +1,865 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dandy's World",
+    "gameSlug": "dandys-world",
+    "collection": "trinkets",
+    "route": "/wiki/dandys-world/trinkets",
+    "catalogCode": "dandys-world-trinkets",
+    "itemFields": [
+      "summary",
+      "effect",
+      "howToUnlock"
+    ],
+    "columns": [
+      "summary",
+      "effect",
+      "howToUnlock"
+    ],
+    "display": {
+      "groupLabel": "Source",
+      "sectionOrder": [
+        "Store Trinkets",
+        "Research Trinkets",
+        "Other Trinkets"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "effect",
+        "howToUnlock"
+      ],
+      "tableFields": [
+        "effect"
+      ],
+      "fieldPresentation": {
+        "effect": {
+          "kind": "highlight",
+          "label": "Effect",
+          "omitWhenEmpty": true
+        },
+        "howToUnlock": {
+          "kind": "detail",
+          "label": "How to unlock",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Alarm",
+        "summary": null,
+        "effect": "Increases both Walk and Run speed by 25% when Panic Mode activates for 10 seconds.",
+        "howToUnlock": "1000 Ichor; Survive 50 Floors"
+      },
+      "system": {
+        "slug": "alarm",
+        "section": "Store Trinkets",
+        "sortOrder": 0,
+        "image": "/Dandys World/Trinkets/alarm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Bandana",
+        "summary": null,
+        "effect": "Increases your Extraction Speed by 7.5%, but decreases Skill Check chance by 5%.",
+        "howToUnlock": "100% Research on Twisted Boxten"
+      },
+      "system": {
+        "slug": "blue-bandana",
+        "section": "Research Trinkets",
+        "sortOrder": 0,
+        "image": "/Dandys World/Trinkets/blue-bandana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blushy Bat",
+        "summary": null,
+        "effect": "Causes Twisteds who attacked you to receive an extra 3 second cooldown before being able to hit you again.",
+        "howToUnlock": "Joining the [https://www.roblox.com/groups/14576965/BlushCrunch-Studio#!/about BlushCrunch Studio group]"
+      },
+      "system": {
+        "slug": "blushy-bat",
+        "section": "Other Trinkets",
+        "sortOrder": 0,
+        "image": "/Dandys World/Trinkets/blushy-bat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bone",
+        "summary": null,
+        "effect": "Increases both Walk and Run Speed by 25% when picking up an Item for 4 seconds. Effect can stack but caps at 40 speed. (Does not include Capsules and name=true)",
+        "howToUnlock": "100% Research on Twisted Pebble"
+      },
+      "system": {
+        "slug": "bone",
+        "section": "Research Trinkets",
+        "sortOrder": 1,
+        "image": "/Dandys World/Trinkets/bone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bone Needle and Thread",
+        "summary": null,
+        "effect": "Highlights Pumpkins in your vicinity every 10 seconds during matches, making them easier to spot during events.",
+        "howToUnlock": "100% Research on Twisted Ribecca"
+      },
+      "system": {
+        "slug": "bone-needle-and-thread",
+        "section": "Research Trinkets",
+        "sortOrder": 2,
+        "image": "/Dandys World/Trinkets/bone-needle-and-thread.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brick",
+        "summary": null,
+        "effect": "Lowers both Walk and Run Speed by 10%. It's a brick, what did you expect?",
+        "howToUnlock": "100% Research on Twisted Shrimpo"
+      },
+      "system": {
+        "slug": "brick",
+        "section": "Research Trinkets",
+        "sortOrder": 3,
+        "image": "/Dandys World/Trinkets/brick.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cardboard 'Armor'",
+        "summary": null,
+        "effect": "Protects the user from long-ranged Twisted attacks. Limit of 1 activation per Floor.",
+        "howToUnlock": "2750 Ichor; 100% Research on Twisted Goob; 100% Research on Twisted Scraps"
+      },
+      "system": {
+        "slug": "cardboard-armor",
+        "section": "Research Trinkets",
+        "sortOrder": 4,
+        "image": "/Dandys World/Trinkets/cardboard-armor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cherished Blanket",
+        "summary": null,
+        "effect": "Increases the duration of Trails created by your Abilities by 4 seconds. Has no effect on Toons without a Trail Ability.",
+        "howToUnlock": "100% Research on Twisted Waxwell"
+      },
+      "system": {
+        "slug": "cherished-blanket",
+        "section": "Research Trinkets",
+        "sortOrder": 5,
+        "image": "/Dandys World/Trinkets/cherished-blanket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clown Horn",
+        "summary": null,
+        "effect": "Increases Walk and Run speed by 10% on odd-numbered floors.",
+        "howToUnlock": "100% Research on Twisted Looey"
+      },
+      "system": {
+        "slug": "clown-horn",
+        "section": "Research Trinkets",
+        "sortOrder": 6,
+        "image": "/Dandys World/Trinkets/clown-horn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal",
+        "summary": null,
+        "effect": "Decreases Stealth by 10% and Walk and Run Speed by 10%.",
+        "howToUnlock": "100% Research on Twisted Coal"
+      },
+      "system": {
+        "slug": "coal",
+        "section": "Research Trinkets",
+        "sortOrder": 7,
+        "image": "/Dandys World/Trinkets/coal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Purse",
+        "summary": null,
+        "effect": "Start with 30 extra Tapes.",
+        "howToUnlock": "200 Ichor"
+      },
+      "system": {
+        "slug": "coin-purse",
+        "section": "Store Trinkets",
+        "sortOrder": 1,
+        "image": "/Dandys World/Trinkets/coin-purse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cooler",
+        "summary": null,
+        "effect": "Grants the user 50 more Stamina, but lowers Movement Speed by 5%.",
+        "howToUnlock": "2250 Ichor; Travel 250000 Meters; Pick up 30 Rare or Higher Tier Items"
+      },
+      "system": {
+        "slug": "cooler",
+        "section": "Store Trinkets",
+        "sortOrder": 2,
+        "image": "/Dandys World/Trinkets/cooler.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crayon Set",
+        "summary": null,
+        "effect": "Grants a random item from the Uncommon Tier every new Floor (if user's Inventory has a slot open). Dandy's Shop exclusive items are included.",
+        "howToUnlock": "100% Research on Twisted Scraps"
+      },
+      "system": {
+        "slug": "crayon-set",
+        "section": "Research Trinkets",
+        "sortOrder": 8,
+        "image": "/Dandys World/Trinkets/crayon-set.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dandy Plush",
+        "summary": null,
+        "effect": "Grants the user a 50% discount on all Dandy's Shop Items.",
+        "howToUnlock": "100% Research on Twisted Dandy Twisted Dandy"
+      },
+      "system": {
+        "slug": "dandy-plush",
+        "section": "Research Trinkets",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diary",
+        "summary": null,
+        "effect": "Increases Stealth by 25%.",
+        "howToUnlock": "100% Research on Twisted Flutter"
+      },
+      "system": {
+        "slug": "diary",
+        "section": "Research Trinkets",
+        "sortOrder": 10,
+        "image": "/Dandys World/Trinkets/diary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dog Plush",
+        "summary": null,
+        "effect": "Increases Walk Speed by 10%.",
+        "howToUnlock": "100% Research on Twisted Toodles"
+      },
+      "system": {
+        "slug": "dog-plush",
+        "section": "Research Trinkets",
+        "sortOrder": 11,
+        "image": "/Dandys World/Trinkets/dog-plush.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Egg Radar",
+        "summary": null,
+        "effect": "Highlights Baskets in your vicinity every 10 seconds during matches, making them easier to spot during events.",
+        "howToUnlock": "100% Research on Twisted Eggson"
+      },
+      "system": {
+        "slug": "egg-radar",
+        "section": "Research Trinkets",
+        "sortOrder": 12,
+        "image": "/Dandys World/Trinkets/egg-radar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fancy Purse",
+        "summary": null,
+        "effect": "Start with 100 extra name=true.",
+        "howToUnlock": "100% Research on Twisted Teagan"
+      },
+      "system": {
+        "slug": "fancy-purse",
+        "section": "Research Trinkets",
+        "sortOrder": 13,
+        "image": "/Dandys World/Trinkets/fancy-purse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Feather Duster",
+        "summary": null,
+        "effect": "Restores 20 Stamina when picking up an item. (Does not include Capsules and Tapes).",
+        "howToUnlock": "100% Research on Twisted Tisha"
+      },
+      "system": {
+        "slug": "feather-duster",
+        "section": "Research Trinkets",
+        "sortOrder": 14,
+        "image": "/Dandys World/Trinkets/feather-duster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Lights",
+        "summary": null,
+        "effect": "Highlights Ornaments in your vicinity every 10 seconds during matches, making them easier to spot during events.",
+        "howToUnlock": "100% Research on Twisted Rudie"
+      },
+      "system": {
+        "slug": "festive-lights",
+        "section": "Research Trinkets",
+        "sortOrder": 15,
+        "image": "/Dandys World/Trinkets/festive-lights.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fishing Rod",
+        "summary": null,
+        "effect": "Highlights all Machine locations for the user when a new Floor arrives for 5 seconds",
+        "howToUnlock": "100% Research on Twisted Finn"
+      },
+      "system": {
+        "slug": "fishing-rod",
+        "section": "Research Trinkets",
+        "sortOrder": 16,
+        "image": "/Dandys World/Trinkets/fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Friendship Bracelet",
+        "summary": null,
+        "effect": "Gain 5 max Stamina for every alive Toon in the round. Maxes at 40 Stamina.",
+        "howToUnlock": "100% Research on Twisted Goob"
+      },
+      "system": {
+        "slug": "friendship-bracelet",
+        "section": "Research Trinkets",
+        "sortOrder": 17,
+        "image": "/Dandys World/Trinkets/friendship-bracelet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Snakes In A Can",
+        "summary": null,
+        "effect": "Reduces an Active Ability's cooldown by 5 Seconds. Has no effect on Toons without an Active Ability.",
+        "howToUnlock": "100% Research on Twisted Connie"
+      },
+      "system": {
+        "slug": "ghost-snakes-in-a-can",
+        "section": "Research Trinkets",
+        "sortOrder": 18,
+        "image": "/Dandys World/Trinkets/ghost-snakes-in-a-can.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glazed Fondant Bag",
+        "summary": null,
+        "effect": "Gives 4 extra seconds to candy Item effects.",
+        "howToUnlock": "100% Research on Twisted Cocoa"
+      },
+      "system": {
+        "slug": "glazed-fondant-bag",
+        "section": "Research Trinkets",
+        "sortOrder": 19,
+        "image": "/Dandys World/Trinkets/glazed-fondant-bag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Coin",
+        "summary": null,
+        "effect": "Boosts a random Stat by 12% once every Floor, rerolls at the start of each Floor.",
+        "howToUnlock": "100% Research on Twisted Gigi"
+      },
+      "system": {
+        "slug": "lucky-coin",
+        "section": "Research Trinkets",
+        "sortOrder": 20,
+        "image": "/Dandys World/Trinkets/lucky-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Machine Manual",
+        "summary": null,
+        "effect": "Increases your Extraction Speed by 5%.",
+        "howToUnlock": "350 Ichor"
+      },
+      "system": {
+        "slug": "machine-manual",
+        "section": "Store Trinkets",
+        "sortOrder": 3,
+        "image": "/Dandys World/Trinkets/machine-manual.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnifying Glass",
+        "summary": null,
+        "effect": "Adds slightly more completion when performing a successful Skill Check, but decreases Skill Check size by 33%.",
+        "howToUnlock": "100% Research on Twisted Rodger"
+      },
+      "system": {
+        "slug": "magnifying-glass",
+        "section": "Research Trinkets",
+        "sortOrder": 21,
+        "image": "/Dandys World/Trinkets/magnifying-glass.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Megaphone",
+        "summary": null,
+        "effect": "This Trinket grants the user one Air Horn every other Floor if the user has an inventory slot open.",
+        "howToUnlock": "1850 Ichor; Encounter 125 Twisteds; Reach Floor 20"
+      },
+      "system": {
+        "slug": "megaphone",
+        "section": "Store Trinkets",
+        "sortOrder": 4,
+        "image": "/Dandys World/Trinkets/megaphone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Memory Locket",
+        "summary": null,
+        "effect": "If user is not at full health, highlights all healing items currently on the Floor to the user until the user is healed.",
+        "howToUnlock": "100% Research on Twisted Gourdy"
+      },
+      "system": {
+        "slug": "memory-locket",
+        "section": "Research Trinkets",
+        "sortOrder": 22,
+        "image": "/Dandys World/Trinkets/memory-locket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mime Makeup",
+        "summary": null,
+        "effect": "When failing a skill check the user will not alert Twisteds to their location.",
+        "howToUnlock": "100% Research on Twisted Blot"
+      },
+      "system": {
+        "slug": "mime-makeup",
+        "section": "Research Trinkets",
+        "sortOrder": 23,
+        "image": "/Dandys World/Trinkets/mime-makeup.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Moon Pack Heirloom",
+        "summary": null,
+        "effect": "Highlights all other teammates' locations for 3 seconds for the user after any user completes a machine.",
+        "howToUnlock": "100% Research on Twisted Eclipse"
+      },
+      "system": {
+        "slug": "moon-pack-heirloom",
+        "section": "Research Trinkets",
+        "sortOrder": 24,
+        "image": "/Dandys World/Trinkets/moon-pack-heirloom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Night Cap",
+        "summary": null,
+        "effect": "Increases Stamina Regeneration by 40% while extracting from a Machine.",
+        "howToUnlock": "100% Research on Twisted Astro (No longer obtainable)"
+      },
+      "system": {
+        "slug": "night-cap",
+        "section": "Research Trinkets",
+        "sortOrder": 25,
+        "image": "/Dandys World/Trinkets/night-cap.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Paint Bucket",
+        "summary": null,
+        "effect": "Increases Skill Check Size and Chance by 10%. As Brusha, receive a +25% speed boost for 5 seconds after a successful machine buff",
+        "howToUnlock": "100% Research on Twisted Brusha"
+      },
+      "system": {
+        "slug": "paint-bucket",
+        "section": "Research Trinkets",
+        "sortOrder": 26,
+        "image": "/Dandys World/Trinkets/paint-bucket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Participation Award",
+        "summary": null,
+        "effect": "Increases Skill Check chance by 25%, but decreases Skill Check size by 10%.",
+        "howToUnlock": "100% Research on Twisted Shelly"
+      },
+      "system": {
+        "slug": "participation-award",
+        "section": "Research Trinkets",
+        "sortOrder": 27,
+        "image": "/Dandys World/Trinkets/participation-award.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Party Popper",
+        "summary": null,
+        "effect": "When starting to work on a Machine, Twisteds in the initial nearby radius are highlighted for 5 seconds.",
+        "howToUnlock": "100% Research on Twisted Yatta"
+      },
+      "system": {
+        "slug": "party-popper",
+        "section": "Research Trinkets",
+        "sortOrder": 28,
+        "image": "/Dandys World/Trinkets/party-popper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Icing",
+        "summary": null,
+        "effect": "Grants 30 stamina after using any active ability.",
+        "howToUnlock": "100% Research on Twisted Ginger"
+      },
+      "system": {
+        "slug": "peppermint-icing",
+        "section": "Research Trinkets",
+        "sortOrder": 29,
+        "image": "/Dandys World/Trinkets/peppermint-icing.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Bow",
+        "summary": null,
+        "effect": "Increases Run Speed by 7.5%.",
+        "howToUnlock": "100% Research on Twisted Poppy"
+      },
+      "system": {
+        "slug": "pink-bow",
+        "section": "Research Trinkets",
+        "sortOrder": 30,
+        "image": "/Dandys World/Trinkets/pink-bow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pop Pack",
+        "summary": null,
+        "effect": "Grants the 'Pop' Item every new Floor (If user's inventory has a slot open).",
+        "howToUnlock": "1500 Ichor; Buy 30 Items from Dandy's Elevator Shop; Pick up 75 Items"
+      },
+      "system": {
+        "slug": "pop-pack",
+        "section": "Store Trinkets",
+        "sortOrder": 5,
+        "image": "/Dandys World/Trinkets/pop-pack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pull Toy",
+        "summary": null,
+        "effect": "Increases both Walk and Run Speed by 25% when a new Floor arrives for 10 seconds.",
+        "howToUnlock": "1250 Ichor; Survive 30 Floors; 100% Research on any Twisted"
+      },
+      "system": {
+        "slug": "pull-toy",
+        "section": "Research Trinkets",
+        "sortOrder": 31,
+        "image": "/Dandys World/Trinkets/pull-toy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Research Map",
+        "summary": null,
+        "effect": "Highlights all Research Capsules every 10 seconds during matches.",
+        "howToUnlock": "200 Ichor"
+      },
+      "system": {
+        "slug": "research-map",
+        "section": "Store Trinkets",
+        "sortOrder": 6,
+        "image": "/Dandys World/Trinkets/research-map.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ribbon Spool",
+        "summary": null,
+        "effect": "Gain 10% more Walk and Run Speed on even-numbered Floors.",
+        "howToUnlock": "100% Research on Twisted Razzle & Dazzle"
+      },
+      "system": {
+        "slug": "ribbon-spool",
+        "section": "Research Trinkets",
+        "sortOrder": 32,
+        "image": "/Dandys World/Trinkets/ribbon-spool.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Savory Charm",
+        "summary": null,
+        "effect": "Saves the user from a fatal attack, granting them invincibility for 10 seconds. Can only activate once per round. Does not save the user from Lethal attacks.",
+        "howToUnlock": "100% Research on Twisted Sprout"
+      },
+      "system": {
+        "slug": "savory-charm",
+        "section": "Research Trinkets",
+        "sortOrder": 33,
+        "image": "/Dandys World/Trinkets/savory-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scrapbook",
+        "summary": null,
+        "effect": "Reduces your Stealth by 5%.",
+        "howToUnlock": "100% Research on Twisted Flyte"
+      },
+      "system": {
+        "slug": "scrapbook",
+        "section": "Research Trinkets",
+        "sortOrder": 34,
+        "image": "/Dandys World/Trinkets/scrapbook.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soul Sword",
+        "summary": null,
+        "effect": "When a Twisted damages the user, the Twisted receives a 15% speed debuff for 30 seconds. Does not stack.",
+        "howToUnlock": "100% Research on Twisted Soulvester"
+      },
+      "system": {
+        "slug": "soul-sword",
+        "section": "Research Trinkets",
+        "sortOrder": 35,
+        "image": "/Dandys World/Trinkets/soul-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spare Bulb",
+        "summary": null,
+        "effect": "Increases Blackout light radius by 25%. Also increases light radius for light-producing Toons.",
+        "howToUnlock": "100% Research on Twisted Brightney"
+      },
+      "system": {
+        "slug": "spare-bulb",
+        "section": "Research Trinkets",
+        "sortOrder": 36,
+        "image": "/Dandys World/Trinkets/spare-bulb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Speedometer",
+        "summary": null,
+        "effect": "Grants the user 15 more Stamina.",
+        "howToUnlock": "450 Ichor"
+      },
+      "system": {
+        "slug": "speedometer",
+        "section": "Store Trinkets",
+        "sortOrder": 7,
+        "image": "/Dandys World/Trinkets/speedometer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Speedy Shoes",
+        "summary": null,
+        "effect": "Increases both Walk and Run Speed by 5%.",
+        "howToUnlock": "400 Ichor"
+      },
+      "system": {
+        "slug": "speedy-shoes",
+        "section": "Store Trinkets",
+        "sortOrder": 8,
+        "image": "/Dandys World/Trinkets/speedy-shoes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Pillow",
+        "summary": null,
+        "effect": "Increases Stamina Regeneration by 100% while extracting from a Machine.",
+        "howToUnlock": "100% Research on Twisted Astro"
+      },
+      "system": {
+        "slug": "star-pillow",
+        "section": "Research Trinkets",
+        "sortOrder": 37,
+        "image": "/Dandys World/Trinkets/star-pillow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stress Ball",
+        "summary": null,
+        "effect": "Increases your Extraction Speed by 5% upon completion of a Skill Check. Effect lasts for 15 seconds and stacks.",
+        "howToUnlock": "100% Research on Twisted Squirm"
+      },
+      "system": {
+        "slug": "stress-ball",
+        "section": "Research Trinkets",
+        "sortOrder": 38,
+        "image": "/Dandys World/Trinkets/stress-ball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sweet Charm",
+        "summary": null,
+        "effect": "Decreases Active Ability Cooldown by 8%. Has no effect on Toons without an Active Ability.",
+        "howToUnlock": "100% research on Twisted Cosmo"
+      },
+      "system": {
+        "slug": "sweet-charm",
+        "section": "Research Trinkets",
+        "sortOrder": 39,
+        "image": "/Dandys World/Trinkets/sweet-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thermos",
+        "summary": null,
+        "effect": "Increases Stamina regeneration by 15%.",
+        "howToUnlock": "1250 Ichor; Survive 50 Floors; Pick up 50 Items"
+      },
+      "system": {
+        "slug": "thermos",
+        "section": "Store Trinkets",
+        "sortOrder": 9,
+        "image": "/Dandys World/Trinkets/thermos.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thinking Cap",
+        "summary": null,
+        "effect": "Increases Skill Check window size by 40 units.",
+        "howToUnlock": "750 Ichor; Finish 30 Machines"
+      },
+      "system": {
+        "slug": "thinking-cap",
+        "section": "Store Trinkets",
+        "sortOrder": 10,
+        "image": "/Dandys World/Trinkets/thinking-cap.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toy Kit",
+        "summary": null,
+        "effect": "If your Toon has a ring-based aura ability, increase the radius by 25%.",
+        "howToUnlock": "100% Research on Twisted Bobette"
+      },
+      "system": {
+        "slug": "toy-kit",
+        "section": "Research Trinkets",
+        "sortOrder": 40,
+        "image": "/Dandys World/Trinkets/toy-kit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Train Whistle",
+        "summary": null,
+        "effect": "Makes the user immune to the Slow Debuff.",
+        "howToUnlock": "100% Research on Twisted Dyle"
+      },
+      "system": {
+        "slug": "train-whistle",
+        "section": "Research Trinkets",
+        "sortOrder": 41,
+        "image": "/Dandys World/Trinkets/train-whistle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vanity Mirror",
+        "summary": null,
+        "effect": "Increases Run Speed by 30% during Panic Mode.",
+        "howToUnlock": "100% Research on Twisted GlistenTwisted Glisten"
+      },
+      "system": {
+        "slug": "vanity-mirror",
+        "section": "Research Trinkets",
+        "sortOrder": 42,
+        "image": "/Dandys World/Trinkets/vanity-mirror.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vee's Remote",
+        "summary": null,
+        "effect": "Instantly completes the first Machine you extract from on any Floor, but only if the number of Machines completed is below 50%. Limit of 1 activation per Floor.",
+        "howToUnlock": "100% Research on Twisted Vee"
+      },
+      "system": {
+        "slug": "vee-s-remote",
+        "section": "Research Trinkets",
+        "sortOrder": 43,
+        "image": "/Dandys World/Trinkets/vee-s-remote.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whispering Flower",
+        "summary": null,
+        "effect": "Increases Stamina Regeneration by 15% for every item in your inventory.",
+        "howToUnlock": "100% Research on Twisted Bassie"
+      },
+      "system": {
+        "slug": "whispering-flower",
+        "section": "Research Trinkets",
+        "sortOrder": 44,
+        "image": "/Dandys World/Trinkets/whispering-flower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wrench",
+        "summary": null,
+        "effect": "Instantly adds a large amount of completion to the first Machine you extract from on any Floor. Limit of 1 activation per Floor.",
+        "howToUnlock": "325 Ichor"
+      },
+      "system": {
+        "slug": "wrench",
+        "section": "Store Trinkets",
+        "sortOrder": 11,
+        "image": "/Dandys World/Trinkets/wrench.png"
+      }
+    }
+  ]
+}

@@ -604,10 +604,10 @@ New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs
 
 ### Sol's RNG (5361032378)
 
-- [ ] Auras
-- [ ] Gears
-- [ ] Potions
-- [ ] Biomes
+- [x] Auras
+- [x] Gears
+- [x] Potions
+- [x] Biomes
 
 ### Dead Rails (7018190066)
 
@@ -620,9 +620,9 @@ New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs
 
 ### Dandy's World (5569032992)
 
-- [ ] Toons
-- [ ] Twisteds
-- [ ] Trinkets
+- [x] Toons
+- [x] Twisteds
+- [x] Trinkets
 
 ### BedWars (2619619496)
 
