@@ -54,6 +54,8 @@ Ranked on August 19, 2026 from production `roblox_universes.playing` plus 7-day 
 
 ### Tier A — 100k+ players (7 games, 43 collections)
 
+Tier A run completed 2026-08-20 on branch `tier-a-collections` (local only, not published to production). 31 collections shipped and locally verified; 12 rows blocked with reasons on their lines (thin rosters or missing row-level sources). Per game: Murder Mystery 2 8/8, Steal a Brainrot 2/2, RIVALS 4/4, Grow a Garden 2 5/6, Jujutsu Shenanigans 1/1, Pet Simulator 99 10/15, Fish It 1/7.
+
 | Game | ~Players | Collections |
 | --- | --- | --- |
 | Murder Mystery 2 | 880k avg | 8 |
