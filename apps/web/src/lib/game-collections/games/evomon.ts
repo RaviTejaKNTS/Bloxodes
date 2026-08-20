@@ -12,6 +12,10 @@ export const evomonCollectionGroup = {
       "balls",
       "adventure-suits",
       "mutations",
-      "items"
+      "items",
+      "natures",
+      "equipment",
+      "traits",
+      "moves"
     ]
   } satisfies GameCollectionGroup;

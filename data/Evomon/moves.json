@@ -1,0 +1,4582 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evomon",
+    "gameSlug": "evomon",
+    "collection": "moves",
+    "route": "/wiki/evomon/moves",
+    "catalogCode": "evomon-moves",
+    "itemFields": [
+      "element",
+      "damageClass",
+      "power",
+      "cost",
+      "rank",
+      "howToGet",
+      "cardSummary"
+    ],
+    "columns": [
+      "element",
+      "damageClass",
+      "power",
+      "cost",
+      "rank",
+      "howToGet",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "element",
+      "sectionOrder": [
+        "Normal",
+        "Water",
+        "Grass",
+        "Fire",
+        "Electric",
+        "Ice",
+        "Flying",
+        "Ground",
+        "Rock",
+        "Fighting",
+        "Bug",
+        "Poison",
+        "Steel",
+        "Psychic",
+        "Light",
+        "Dark",
+        "Dragon"
+      ],
+      "badgeField": "damageClass",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "damageClass",
+        "power",
+        "cost",
+        "howToGet"
+      ],
+      "tableFields": [
+        "element",
+        "damageClass",
+        "power",
+        "cost",
+        "rank",
+        "howToGet",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "element": {
+          "kind": "highlight",
+          "label": "element"
+        },
+        "damageClass": {
+          "kind": "chip",
+          "label": "class"
+        },
+        "power": {
+          "kind": "chip",
+          "label": "power"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "cost"
+        },
+        "rank": {
+          "kind": "chip",
+          "label": "rank"
+        },
+        "howToGet": {
+          "kind": "plain",
+          "label": "how to get"
+        },
+        "cardSummary": {
+          "kind": "detail"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ram",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "40",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Ram is a Normal Physical skill. A Physical hit on one foe. Listed power is 40. It has 30 PP."
+      },
+      "system": {
+        "slug": "ram",
+        "section": "Normal",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tackle",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "40",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Tackle is a Normal Physical skill. A Physical hit on one foe. Listed power is 40. It has 30 PP."
+      },
+      "system": {
+        "slug": "tackle",
+        "section": "Normal",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Impact",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "40",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Impact is a Normal Physical skill. A Physical hit on one foe. Listed power is 40. It has 30 PP."
+      },
+      "system": {
+        "slug": "impact",
+        "section": "Normal",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scratch",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "40",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Scratch is a Normal Physical skill. A Physical hit on one foe. Listed power is 40. It has 30 PP."
+      },
+      "system": {
+        "slug": "scratch",
+        "section": "Normal",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flash Strike",
+        "element": "Normal",
+        "damageClass": "Special",
+        "power": "40",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Flash Strike is a Normal Special skill. A Special hit on one foe. Listed power is 40. It has 30 PP."
+      },
+      "system": {
+        "slug": "flash-strike",
+        "section": "Normal",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Restore",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Restore is a Normal Status skill. Clears your stat drops. It has 15 PP."
+      },
+      "system": {
+        "slug": "restore",
+        "section": "Normal",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rally",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Rally is a Normal Status skill. Raises Attack and Special Attack by 5. It has 15 PP."
+      },
+      "system": {
+        "slug": "rally",
+        "section": "Normal",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expose",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Expose is a Normal Status skill. Cuts the foe's Defense by 5. It has 15 PP."
+      },
+      "system": {
+        "slug": "expose",
+        "section": "Normal",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Encore",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Encore is a Normal Status skill. Locks the foe into repeating its last skill on the following turn. It has 5 PP."
+      },
+      "system": {
+        "slug": "encore",
+        "section": "Normal",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Absorb",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Energy Absorb is a Normal Status skill. Heals 20% of max HP and refunds 1 Ultimate Energy. It has 5 PP."
+      },
+      "system": {
+        "slug": "energy-absorb",
+        "section": "Normal",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Protect",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "3 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Protect is a Normal Status skill. Moves first and blocks damage this turn. A connecting hit also strips 1 PP and 2 Energy from the attacker. It has 3 PP."
+      },
+      "system": {
+        "slug": "protect",
+        "section": "Normal",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Block",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Block is a Normal Status skill. Cuts incoming damage by 100 this turn. It has 10 PP."
+      },
+      "system": {
+        "slug": "block",
+        "section": "Normal",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Confuse",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Confuse is a Normal Status skill. Has a 25% chance to inflict Confusion. It has 10 PP."
+      },
+      "system": {
+        "slug": "confuse",
+        "section": "Normal",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Torment",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Torment is a Normal Status skill. Stops the foe from using the same skill again next turn. It has 5 PP."
+      },
+      "system": {
+        "slug": "torment",
+        "section": "Normal",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rest",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Rest is a Normal Status skill. Heals 20% of max HP after each of the next 3 turns. It has 5 PP."
+      },
+      "system": {
+        "slug": "rest",
+        "section": "Normal",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Abolute Purity",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Abolute Purity is a Normal Status skill. Clears your stat drops and status conditions."
+      },
+      "system": {
+        "slug": "abolute-purity",
+        "section": "Normal",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tenacity",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Tenacity is a Normal Status skill. Raises Special Defense by 5. It has 15 PP."
+      },
+      "system": {
+        "slug": "tenacity",
+        "section": "Normal",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Battle Stance",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Battle Stance is a Normal Status skill. Raises Atk by 5 and Defense by 5. It has 10 PP."
+      },
+      "system": {
+        "slug": "battle-stance",
+        "section": "Normal",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slam",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "75",
+        "cost": "",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Slam is a Normal Physical skill. A Physical hit on one foe. Listed power is 75."
+      },
+      "system": {
+        "slug": "slam",
+        "section": "Normal",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "All-Out Attack",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up or Skill shop",
+        "cardSummary": "All-Out Attack is a Normal Physical skill. A Physical hit on one foe. Listed power is 100. It has 10 PP."
+      },
+      "system": {
+        "slug": "all-out-attack",
+        "section": "Normal",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gravity Crush",
+        "element": "Normal",
+        "damageClass": "Special",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Gravity Crush is a Normal Special skill. A Special hit on one foe that adds 25 extra flat damage. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "gravity-crush",
+        "section": "Normal",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Power Strike",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "75",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Power Strike is a Normal Physical skill. A Physical hit on one foe. Listed power is 75. It has 15 PP."
+      },
+      "system": {
+        "slug": "power-strike",
+        "section": "Normal",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Immolate",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "3 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Immolate is a Normal Status skill. Raises Attack and Special Attack by 8 while cutting Defense and Special Defense by 4. It has 3 PP."
+      },
+      "system": {
+        "slug": "immolate",
+        "section": "Normal",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shockwave",
+        "element": "Normal",
+        "damageClass": "Special",
+        "power": "90",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Shockwave is a Normal Special skill. A Special hit on one foe that drops the foe's Speed by 1. Listed power is 90. It has 5 PP."
+      },
+      "system": {
+        "slug": "shockwave",
+        "section": "Normal",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy Strike",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "40",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Heavy Strike is a Normal Physical skill. A Physical hit on one foe. Listed power is 40. It has 30 PP."
+      },
+      "system": {
+        "slug": "heavy-strike",
+        "section": "Normal",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Intimidate",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Intimidate is a Normal Status skill. Cuts the foe's Attack by 5. It has 15 PP."
+      },
+      "system": {
+        "slug": "intimidate",
+        "section": "Normal",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fighting Will 1",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Fighting Will 1 is a Normal Status skill. Raises Special Attack by 5. It has 15 PP."
+      },
+      "system": {
+        "slug": "fighting-will-1",
+        "section": "Normal",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fighting Will 2",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "2",
+        "howToGet": "Skill shop",
+        "cardSummary": "Fighting Will 2 is a Normal Status skill. Raises Special Attack by 8. It has 10 PP."
+      },
+      "system": {
+        "slug": "fighting-will-2",
+        "section": "Normal",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Iron Shell",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Iron Shell is a Normal Status skill. Raises Defense by 8. It has 10 PP."
+      },
+      "system": {
+        "slug": "iron-shell",
+        "section": "Normal",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Store Power",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Store Power is a Normal Status skill. Makes your hits crit for the next 2 turns. It has 10 PP."
+      },
+      "system": {
+        "slug": "store-power",
+        "section": "Normal",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Critical Focus",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Critical Focus is a Normal Status skill. Raises critical-hit rate by 20% for the remainder of the battle. It has 15 PP."
+      },
+      "system": {
+        "slug": "critical-focus",
+        "section": "Normal",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Rush",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Speed Rush is a Normal Status skill. Raises Speed by 3. It has 15 PP."
+      },
+      "system": {
+        "slug": "speed-rush",
+        "section": "Normal",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mega Ward",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Mega Ward is a Normal Status skill. Raises Special Defense by 8. It has 10 PP."
+      },
+      "system": {
+        "slug": "mega-ward",
+        "section": "Normal",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slow Down",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Slow Down is a Normal Status skill. Cuts the foe's Speed by 3. It has 15 PP."
+      },
+      "system": {
+        "slug": "slow-down",
+        "section": "Normal",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hone 1",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Hone 1 is a Normal Status skill. Raises Attack by 5. It has 15 PP."
+      },
+      "system": {
+        "slug": "hone-1",
+        "section": "Normal",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inversion",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Inversion is a Normal Status skill. Flips the foe's stat boosts and drops. It has 5 PP."
+      },
+      "system": {
+        "slug": "inversion",
+        "section": "Normal",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hone 2",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "2",
+        "howToGet": "Skill shop",
+        "cardSummary": "Hone 2 is a Normal Status skill. Raises Attack by 8. It has 10 PP."
+      },
+      "system": {
+        "slug": "hone-2",
+        "section": "Normal",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "All-Stats-Up 1",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "6 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "All-Stats-Up 1 is a Normal Status skill. Raises every stat by 3. It costs 6 Energy."
+      },
+      "system": {
+        "slug": "all-stats-up-1",
+        "section": "Normal",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Combat Spirit",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Combat Spirit is a Normal Status skill. Raises Attack and Special Attack by 8. It has 10 PP."
+      },
+      "system": {
+        "slug": "combat-spirit",
+        "section": "Normal",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Line Breaker",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Line Breaker is a Normal Status skill. Cuts the foe's Defense and Special Defense by 8. It has 5 PP."
+      },
+      "system": {
+        "slug": "line-breaker",
+        "section": "Normal",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Disarray",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Disarray is a Normal Status skill. Cuts the foe's Special Defense by 5. It has 15 PP."
+      },
+      "system": {
+        "slug": "disarray",
+        "section": "Normal",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Charged Strike",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Charged Strike is a Normal Status skill. Adds 50 extra flat damage to your attacks for 2 turns. It has 10 PP."
+      },
+      "system": {
+        "slug": "charged-strike",
+        "section": "Normal",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Flow",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Energy Flow is a Normal Status skill. Refunds 1 Ultimate Energy after each of the next 3 turns. It has 10 PP."
+      },
+      "system": {
+        "slug": "energy-flow",
+        "section": "Normal",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fatal Rebound",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Fatal Rebound is a Normal Physical skill. Acts last, then counters for 1.75 times the damage you just took. It has 5 PP."
+      },
+      "system": {
+        "slug": "fatal-rebound",
+        "section": "Normal",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Full Purify",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Full Purify is a Normal Status skill. Clears your stat drops and status conditions. It has 10 PP."
+      },
+      "system": {
+        "slug": "full-purify",
+        "section": "Normal",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy Slam",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Heavy Slam is a Normal Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "heavy-slam",
+        "section": "Normal",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Iron Fortress",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Iron Fortress is a Normal Status skill. Raises Defense and Special Defense by 5. It has 10 PP."
+      },
+      "system": {
+        "slug": "iron-fortress",
+        "section": "Normal",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mega Smash",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "40",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Mega Smash is a Normal Physical skill. A Physical hit on one foe. Listed power is 40. It has 30 PP."
+      },
+      "system": {
+        "slug": "mega-smash",
+        "section": "Normal",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Quick Strike",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "90",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Quick Strike is a Normal Physical skill. A Physical hit on one foe that gains +1 priority. Listed power is 90. It has 10 PP."
+      },
+      "system": {
+        "slug": "quick-strike",
+        "section": "Normal",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reckoning Strike",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "90",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Reckoning Strike is a Normal Physical skill. A Physical hit on one foe that strips the foe's stat boosts. Listed power is 90. It has 10 PP."
+      },
+      "system": {
+        "slug": "reckoning-strike",
+        "section": "Normal",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Savage Slam",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "75",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Savage Slam is a Normal Physical skill. A Physical hit on one foe. Listed power is 75. It has 15 PP."
+      },
+      "system": {
+        "slug": "savage-slam",
+        "section": "Normal",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Smoke Cover",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Smoke Cover is a Normal Status skill. Cuts the foe's Accuracy by 2. It has 15 PP."
+      },
+      "system": {
+        "slug": "smoke-cover",
+        "section": "Normal",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "True Hit",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "20",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "True Hit is a Normal Physical skill. A Physical hit on one foe that adds 80 extra flat damage. Listed power is 20. It has 10 PP."
+      },
+      "system": {
+        "slug": "true-hit",
+        "section": "Normal",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wild Ram",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "75",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Wild Ram is a Normal Physical skill. A Physical hit on one foe. Listed power is 75. It has 15 PP."
+      },
+      "system": {
+        "slug": "wild-ram",
+        "section": "Normal",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wound",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Wound is a Normal Status skill. Applies 4 Bleed stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "wound",
+        "section": "Normal",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Recover 2",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "2 PP",
+        "rank": "2",
+        "howToGet": "Level up",
+        "cardSummary": "Recover 2 is a Normal Status skill. Heals 60% of max HP. It has 2 PP."
+      },
+      "system": {
+        "slug": "recover-2",
+        "section": "Normal",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Focus Breath",
+        "element": "Normal",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Focus Breath is a Normal Status skill. Raises critical-hit rate by 20% for the remainder of the battle."
+      },
+      "system": {
+        "slug": "focus-breath",
+        "section": "Normal",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Moment Strike",
+        "element": "Normal",
+        "damageClass": "Physical",
+        "power": "90",
+        "cost": "",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Moment Strike is a Normal Physical skill. A Physical hit on one foe that strips the foe's stat boosts. Listed power is 90."
+      },
+      "system": {
+        "slug": "moment-strike",
+        "section": "Normal",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Aqua Splash",
+        "element": "Water",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Aqua Splash is a Water Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "aqua-splash",
+        "section": "Water",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water Gun",
+        "element": "Water",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Water Gun is a Water Special skill. A Special hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "water-gun",
+        "section": "Water",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mud Slide",
+        "element": "Water",
+        "damageClass": "Physical",
+        "power": "70",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Mud Slide is a Water Physical skill. A Physical hit on one foe that drops the foe's Speed by 1. Listed power is 70. It has 15 PP."
+      },
+      "system": {
+        "slug": "mud-slide",
+        "section": "Water",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tsunami Whirl",
+        "element": "Water",
+        "damageClass": "Special",
+        "power": "55",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Tsunami Whirl is a Water Special skill. A Special hit on one foe that gives you a Soak stack. Listed power is 55. It has 20 PP."
+      },
+      "system": {
+        "slug": "tsunami-whirl",
+        "section": "Water",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wave Strike",
+        "element": "Water",
+        "damageClass": "Physical",
+        "power": "85",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Wave Strike is a Water Physical skill. A Physical hit on one foe that has a 50% chance to add 50 extra flat damage. Listed power is 85. It has 5 PP."
+      },
+      "system": {
+        "slug": "wave-strike",
+        "section": "Water",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rain Dance",
+        "element": "Water",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Rain Dance is a Water Status skill. Sets the weather to Rain. It has 5 PP."
+      },
+      "system": {
+        "slug": "rain-dance",
+        "section": "Water",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bubble Slam",
+        "element": "Water",
+        "damageClass": "Special",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Bubble Slam is a Water Special skill. A Special hit on one foe that gives you a Soak stack. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "bubble-slam",
+        "section": "Water",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Aqua Rush",
+        "element": "Water",
+        "damageClass": "Special",
+        "power": "135",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Aqua Rush is a Water Special skill. A Special hit on one foe that also deals 25% of that damage back to you. Listed power is 135. It has 5 PP."
+      },
+      "system": {
+        "slug": "aqua-rush",
+        "section": "Water",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bubble Strike",
+        "element": "Water",
+        "damageClass": "Special",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Bubble Strike is a Water Special skill. A Special hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "bubble-strike",
+        "section": "Water",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tide Awakening 1",
+        "element": "Water",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "6 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Tide Awakening 1 is a Water Status skill. Raises Attack and Special Attack by 3, Speed by 2, and Defense and Special Defense by 1. It costs 6 Energy."
+      },
+      "system": {
+        "slug": "tide-awakening-1",
+        "section": "Water",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tide Awakening 2",
+        "element": "Water",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "6 Energy",
+        "rank": "2",
+        "howToGet": "Level up",
+        "cardSummary": "Tide Awakening 2 is a Water Status skill. Raises Attack and Special Attack by 4, Speed by 3, and Defense and Special Defense by 2. It costs 6 Energy."
+      },
+      "system": {
+        "slug": "tide-awakening-2",
+        "section": "Water",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tide Awakening 3",
+        "element": "Water",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "6 Energy",
+        "rank": "3",
+        "howToGet": "Level up",
+        "cardSummary": "Tide Awakening 3 is a Water Status skill. Raises Attack and Special Attack by 5, Speed by 4, and Defense and Special Defense by 3. It costs 6 Energy."
+      },
+      "system": {
+        "slug": "tide-awakening-3",
+        "section": "Water",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Aqua Heal 1",
+        "element": "Water",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "9 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Aqua Heal 1 is a Water Status skill. Heals 60% of max HP and clears your stat drops. It costs 9 Energy."
+      },
+      "system": {
+        "slug": "aqua-heal-1",
+        "section": "Water",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Damp",
+        "element": "Water",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Damp is a Water Status skill. Gives your Evomon 2 Soak stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "damp",
+        "section": "Water",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vortex",
+        "element": "Water",
+        "damageClass": "Special",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Vortex is a Water Special skill. Gains 40 extra power while you have Soak. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "vortex",
+        "section": "Water",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water Spout",
+        "element": "Water",
+        "damageClass": "Physical",
+        "power": "120",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Water Spout is a Water Physical skill. A Physical hit on one foe. Listed power is 120. It has 5 PP."
+      },
+      "system": {
+        "slug": "water-spout",
+        "section": "Water",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bubble Beam",
+        "element": "Water",
+        "damageClass": "Physical",
+        "power": "95",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Bubble Beam is a Water Physical skill. A Physical hit on one foe that clears your stat drops. Listed power is 95. It has 10 PP."
+      },
+      "system": {
+        "slug": "bubble-beam",
+        "section": "Water",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water Pulse",
+        "element": "Water",
+        "damageClass": "Special",
+        "power": "105",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Water Pulse is a Water Special skill. A Special hit on one foe that gains 15 power for each Water-type skill already used. Listed power is 105. It has 5 PP."
+      },
+      "system": {
+        "slug": "water-pulse",
+        "section": "Water",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Leaf Blade",
+        "element": "Grass",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Leaf Blade is a Grass Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "leaf-blade",
+        "section": "Grass",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vine Drain",
+        "element": "Grass",
+        "damageClass": "Special",
+        "power": "40",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Vine Drain is a Grass Special skill. A Special hit on one foe that heals you for half the damage. Listed power is 40. It has 20 PP."
+      },
+      "system": {
+        "slug": "vine-drain",
+        "section": "Grass",
+        "sortOrder": 78,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seed Bomb",
+        "element": "Grass",
+        "damageClass": "Special",
+        "power": "55",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Seed Bomb is a Grass Special skill. A Special hit on one foe that gives you a Growth stack. Listed power is 55. It has 20 PP."
+      },
+      "system": {
+        "slug": "seed-bomb",
+        "section": "Grass",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mega Drain",
+        "element": "Grass",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Mega Drain is a Grass Special skill. A Special hit on one foe that heals you for half the damage. Listed power is 60. It has 15 PP."
+      },
+      "system": {
+        "slug": "mega-drain",
+        "section": "Grass",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wrap Assault",
+        "element": "Grass",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up or Skill shop",
+        "cardSummary": "Wrap Assault is a Grass Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "wrap-assault",
+        "section": "Grass",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thorn Pierce",
+        "element": "Grass",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thorn Pierce is a Grass Physical skill. A Physical hit on one foe that gains +1 priority. Listed power is 60. It has 15 PP."
+      },
+      "system": {
+        "slug": "thorn-pierce",
+        "section": "Grass",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Leech Seed",
+        "element": "Grass",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Leech Seed is a Grass Status skill. Inflicts Leech on the foe. It has 10 PP."
+      },
+      "system": {
+        "slug": "leech-seed",
+        "section": "Grass",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Verdant Beam",
+        "element": "Grass",
+        "damageClass": "Special",
+        "power": "100",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Verdant Beam is a Grass Special skill. A Special hit on one foe. Listed power is 100. It has 10 PP."
+      },
+      "system": {
+        "slug": "verdant-beam",
+        "section": "Grass",
+        "sortOrder": 84,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thorn Dash",
+        "element": "Grass",
+        "damageClass": "Physical",
+        "power": "135",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thorn Dash is a Grass Physical skill. A Physical hit on one foe that also deals 25% of that damage back to you. Listed power is 135. It has 5 PP."
+      },
+      "system": {
+        "slug": "thorn-dash",
+        "section": "Grass",
+        "sortOrder": 85,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Giga Drain",
+        "element": "Grass",
+        "damageClass": "Special",
+        "power": "80",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Giga Drain is a Grass Special skill. A Special hit on one foe that heals you for half the damage. Listed power is 80. It has 10 PP."
+      },
+      "system": {
+        "slug": "giga-drain",
+        "section": "Grass",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Recover 1",
+        "element": "Grass",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Recover 1 is a Grass Status skill. Heals 40% of max HP. It has 5 PP."
+      },
+      "system": {
+        "slug": "recover-1",
+        "section": "Grass",
+        "sortOrder": 87,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blossom Strike",
+        "element": "Grass",
+        "damageClass": "Special",
+        "power": "105",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Blossom Strike is a Grass Special skill. A Special hit on one foe that gains 10 power for each other type skill already used. Listed power is 105. It has 5 PP."
+      },
+      "system": {
+        "slug": "blossom-strike",
+        "section": "Grass",
+        "sortOrder": 88,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Aurora Blade",
+        "element": "Grass",
+        "damageClass": "Special",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Aurora Blade is a Grass Special skill. A Special hit on one foe that gains 40 power against foes with Frostbite. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "aurora-blade",
+        "section": "Grass",
+        "sortOrder": 89,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sleep Powder 1",
+        "element": "Grass",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Sleep Powder 1 is a Grass Status skill. Has a 60% chance to inflict Sleep. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "sleep-powder-1",
+        "section": "Grass",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sleep Powder 2",
+        "element": "Grass",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "",
+        "rank": "2",
+        "howToGet": "Level up",
+        "cardSummary": "Sleep Powder 2 is a Grass Status skill. Has a 80% chance to inflict Sleep."
+      },
+      "system": {
+        "slug": "sleep-powder-2",
+        "section": "Grass",
+        "sortOrder": 91,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sleep Powder 3",
+        "element": "Grass",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "8 Energy",
+        "rank": "3",
+        "howToGet": "Level up",
+        "cardSummary": "Sleep Powder 3 is a Grass Status skill. Has a 100% chance to inflict Sleep. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "sleep-powder-3",
+        "section": "Grass",
+        "sortOrder": 92,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Leaf Razor",
+        "element": "Grass",
+        "damageClass": "Physical",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Leaf Razor is a Grass Physical skill. A Physical hit on one foe that strips the foe's stat boosts. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "leaf-razor",
+        "section": "Grass",
+        "sortOrder": 93,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Strike",
+        "element": "Fire",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Fire Strike is a Fire Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "fire-strike",
+        "section": "Fire",
+        "sortOrder": 94,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fireball Blast",
+        "element": "Fire",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up or Skill shop",
+        "cardSummary": "Fireball Blast is a Fire Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "fireball-blast",
+        "section": "Fire",
+        "sortOrder": 95,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Burn",
+        "element": "Fire",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Burn is a Fire Status skill. Applies 5 Burn stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "burn",
+        "section": "Fire",
+        "sortOrder": 96,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cinder",
+        "element": "Fire",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Cinder is a Fire Special skill. A Special hit on one foe. Listed power is 60. It has 20 PP."
+      },
+      "system": {
+        "slug": "cinder",
+        "section": "Fire",
+        "sortOrder": 97,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cremate",
+        "element": "Fire",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Cremate is a Fire Status skill. Doubles the foe's current Burn stacks. It has 5 PP."
+      },
+      "system": {
+        "slug": "cremate",
+        "section": "Fire",
+        "sortOrder": 98,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flamethrower",
+        "element": "Fire",
+        "damageClass": "Special",
+        "power": "90",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Flamethrower is a Fire Special skill. A Special hit on one foe that gains 5 power per Burn stack on the foe. Listed power is 90. It has 15 PP."
+      },
+      "system": {
+        "slug": "flamethrower",
+        "section": "Fire",
+        "sortOrder": 99,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Meltdown",
+        "element": "Fire",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Meltdown is a Fire Physical skill. A Physical hit on one foe that makes you immune to status for 2 turns. Listed power is 100. It has 10 PP."
+      },
+      "system": {
+        "slug": "meltdown",
+        "section": "Fire",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Soulburn Strike",
+        "element": "Fire",
+        "damageClass": "Special",
+        "power": "160",
+        "cost": "4 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Soulburn Strike is a Fire Special skill. A Special hit on one foe that also inflicts Fatigue on you. Listed power is 160. It has 4 PP."
+      },
+      "system": {
+        "slug": "soulburn-strike",
+        "section": "Fire",
+        "sortOrder": 101,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spark Strike",
+        "element": "Fire",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Spark Strike is a Fire Physical skill. A Physical hit on one foe that applies 2 Burn stacks. Listed power is 80. It has 10 PP."
+      },
+      "system": {
+        "slug": "spark-strike",
+        "section": "Fire",
+        "sortOrder": 102,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flame Tear",
+        "element": "Fire",
+        "damageClass": "Physical",
+        "power": "120",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Flame Tear is a Fire Physical skill. A Physical hit on one foe. Listed power is 120. It has 5 PP."
+      },
+      "system": {
+        "slug": "flame-tear",
+        "section": "Fire",
+        "sortOrder": 103,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Rain",
+        "element": "Fire",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "8 Energy",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Fire Rain is a Fire Physical skill. A Physical hit on one foe that applies 2 Burn stacks. Listed power is 100. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "fire-rain",
+        "section": "Fire",
+        "sortOrder": 104,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mirage",
+        "element": "Fire",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Mirage is a Fire Status skill. Sets the weather to Volcanic Eruption. It has 5 PP."
+      },
+      "system": {
+        "slug": "mirage",
+        "section": "Fire",
+        "sortOrder": 105,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flame Dance",
+        "element": "Fire",
+        "damageClass": "Special",
+        "power": "45",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Flame Dance is a Fire Special skill. A Special hit on one foe that applies 2 Burn stacks. Listed power is 45. It has 30 PP."
+      },
+      "system": {
+        "slug": "flame-dance",
+        "section": "Fire",
+        "sortOrder": 106,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wildfire",
+        "element": "Fire",
+        "damageClass": "Special",
+        "power": "80",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Wildfire is a Fire Special skill. A Special hit on one foe that gains 40 power against foes with Burn. Listed power is 80. It has 10 PP."
+      },
+      "system": {
+        "slug": "wildfire",
+        "section": "Fire",
+        "sortOrder": 107,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bolt Strike",
+        "element": "Electric",
+        "damageClass": "Physical",
+        "power": "15",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Bolt Strike is an Electric Physical skill. Hits one foe for 6x to 10x its listed power. Listed power is 15. It has 5 PP."
+      },
+      "system": {
+        "slug": "bolt-strike",
+        "section": "Electric",
+        "sortOrder": 108,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heaven's Thunder",
+        "element": "Electric",
+        "damageClass": "Special",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Heaven's Thunder is an Electric Special skill. A Special hit on one foe that applies 1 Paralysis stack. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "heavens-thunder",
+        "section": "Electric",
+        "sortOrder": 109,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thor Power",
+        "element": "Electric",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thor Power is an Electric Status skill. Doubles the power of the next Electric skill. It has 10 PP."
+      },
+      "system": {
+        "slug": "thor-power",
+        "section": "Electric",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Volt Tempest",
+        "element": "Electric",
+        "damageClass": "Special",
+        "power": "90",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Volt Tempest is an Electric Special skill. A Special hit on one foe that gains 40 power against foes with Paralysis. Listed power is 90. It has 10 PP."
+      },
+      "system": {
+        "slug": "volt-tempest",
+        "section": "Electric",
+        "sortOrder": 111,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thunderstorm",
+        "element": "Electric",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thunderstorm is an Electric Status skill. Sets the weather to Thunderstorm. It has 5 PP."
+      },
+      "system": {
+        "slug": "thunderstorm",
+        "section": "Electric",
+        "sortOrder": 112,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shock Strike",
+        "element": "Electric",
+        "damageClass": "Special",
+        "power": "80",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Shock Strike is an Electric Special skill. A Special hit on one foe. Listed power is 80. It has 30 PP."
+      },
+      "system": {
+        "slug": "shock-strike",
+        "section": "Electric",
+        "sortOrder": 113,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thunder Retribution",
+        "element": "Electric",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thunder Retribution is an Electric Physical skill. A Physical hit on one foe that adds 30 extra flat damage. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "thunder-retribution",
+        "section": "Electric",
+        "sortOrder": 114,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Surge",
+        "element": "Electric",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "8 Energy",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Lightning Surge is an Electric Physical skill. A Physical hit on one foe that gains 20 power for each Electric-type skill already used. Listed power is 80. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "lightning-surge",
+        "section": "Electric",
+        "sortOrder": 115,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Static Field",
+        "element": "Electric",
+        "damageClass": "Physical",
+        "power": "55",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Static Field is an Electric Physical skill. A Physical hit on one foe that clears your status conditions. Listed power is 55. It has 15 PP."
+      },
+      "system": {
+        "slug": "static-field",
+        "section": "Electric",
+        "sortOrder": 116,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Electrify",
+        "element": "Electric",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Electrify is an Electric Status skill. Applies 3 Paralysis stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "electrify",
+        "section": "Electric",
+        "sortOrder": 117,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chain Lightning",
+        "element": "Electric",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Chain Lightning is an Electric Special skill. A Special hit on every foe. Listed power is 50. It has 15 PP."
+      },
+      "system": {
+        "slug": "chain-lightning",
+        "section": "Electric",
+        "sortOrder": 118,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Shock",
+        "element": "Electric",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Lightning Shock is an Electric Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "lightning-shock",
+        "section": "Electric",
+        "sortOrder": 119,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Blitz",
+        "element": "Electric",
+        "damageClass": "Physical",
+        "power": "85",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Lightning Blitz is an Electric Physical skill. A Physical hit on one foe. Listed power is 85. It has 15 PP."
+      },
+      "system": {
+        "slug": "lightning-blitz",
+        "section": "Electric",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Storm",
+        "element": "Electric",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Lightning Storm is an Electric Special skill. A Special hit on every foe. Listed power is 60. It has 10 PP."
+      },
+      "system": {
+        "slug": "lightning-storm",
+        "section": "Electric",
+        "sortOrder": 121,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thunder Punch",
+        "element": "Electric",
+        "damageClass": "Physical",
+        "power": "55",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Thunder Punch is an Electric Physical skill. A Physical hit on one foe that applies 1 Paralysis stack. Listed power is 55. It has 20 PP."
+      },
+      "system": {
+        "slug": "thunder-punch",
+        "section": "Electric",
+        "sortOrder": 122,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Spike",
+        "element": "Ice",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Ice Spike is an Ice Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "ice-spike",
+        "section": "Ice",
+        "sortOrder": 123,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen",
+        "element": "Ice",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Frozen is an Ice Status skill. Has a 25% chance to inflict Freeze. It has 10 PP."
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Ice",
+        "sortOrder": 124,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbite",
+        "element": "Ice",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Frostbite is an Ice Status skill. Applies 4 Frostbite stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "frostbite",
+        "section": "Ice",
+        "sortOrder": 125,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Ball",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Ice Ball is an Ice Special skill. A Special hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "ice-ball",
+        "section": "Ice",
+        "sortOrder": 126,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snowfall",
+        "element": "Ice",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Snowfall is an Ice Status skill. Sets the weather to Snow. It has 5 PP."
+      },
+      "system": {
+        "slug": "snowfall",
+        "section": "Ice",
+        "sortOrder": 127,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hail",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "55",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Hail is an Ice Special skill. A Special hit on every foe that applies 1 Frostbite stack. Listed power is 55. It has 10 PP."
+      },
+      "system": {
+        "slug": "hail",
+        "section": "Ice",
+        "sortOrder": 128,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snow Lance",
+        "element": "Ice",
+        "damageClass": "Physical",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Snow Lance is an Ice Physical skill. A Physical hit on one foe that gains 20 power for each Ice-type skill already used. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "snow-lance",
+        "section": "Ice",
+        "sortOrder": 129,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Beam",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Ice Beam is an Ice Special skill. A Special hit on one foe that gains 40 power against foes with Frostbite. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "ice-beam",
+        "section": "Ice",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glacial",
+        "element": "Ice",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Glacial is an Ice Status skill. Doubles the power of the next Ice skill. It has 10 PP."
+      },
+      "system": {
+        "slug": "glacial",
+        "section": "Ice",
+        "sortOrder": 131,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snow Clear",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Snow Clear is an Ice Special skill. A Special hit on one foe that strips the foe's stat boosts. Listed power is 50. It has 20 PP."
+      },
+      "system": {
+        "slug": "snow-clear",
+        "section": "Ice",
+        "sortOrder": 132,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frost Strike",
+        "element": "Ice",
+        "damageClass": "Physical",
+        "power": "30",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Frost Strike is an Ice Physical skill. A Physical hit on one foe that gains 20 power per Frostbite stack on the foe. Listed power is 30. It has 15 PP."
+      },
+      "system": {
+        "slug": "frost-strike",
+        "section": "Ice",
+        "sortOrder": 133,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbite Sting",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Frostbite Sting is an Ice Special skill. A Special hit on one foe that applies 1 Frostbite stack. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "frostbite-sting",
+        "section": "Ice",
+        "sortOrder": 134,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Icy Wind",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Icy Wind is an Ice Special skill. A Special hit on one foe that applies 1 Frostbite stack. Listed power is 50. It has 20 PP."
+      },
+      "system": {
+        "slug": "icy-wind",
+        "section": "Ice",
+        "sortOrder": 135,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glacial Spike",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "45",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Glacial Spike is an Ice Special skill. A Special hit on every foe. Listed power is 45. It has 15 PP."
+      },
+      "system": {
+        "slug": "glacial-spike",
+        "section": "Ice",
+        "sortOrder": 136,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glacial Field",
+        "element": "Ice",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "8 Energy",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Glacial Field is an Ice Special skill. A Special hit on every foe that applies 1 Frostbite stack. Listed power is 60. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "glacial-field",
+        "section": "Ice",
+        "sortOrder": 137,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gust",
+        "element": "Flying",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Gust is a Flying Special skill. A Special hit on one foe that applies 1 Bleed stack. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "gust",
+        "section": "Flying",
+        "sortOrder": 138,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Multi Twister",
+        "element": "Flying",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Multi Twister is a Flying Special skill. A Special hit on every foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "multi-twister",
+        "section": "Flying",
+        "sortOrder": 139,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gale Thrust",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up or Skill shop",
+        "cardSummary": "Gale Thrust is a Flying Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "gale-thrust",
+        "section": "Flying",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Razor Wing",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Razor Wing is a Flying Physical skill. A Physical hit on one foe that applies 1 Bleed stack. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "razor-wing",
+        "section": "Flying",
+        "sortOrder": 141,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wing Combo",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Wing Combo is a Flying Physical skill. A Physical hit on one foe that applies 3 Bleed stacks. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "wing-combo",
+        "section": "Flying",
+        "sortOrder": 142,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thunderous Wind",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thunderous Wind is a Flying Physical skill. A Physical hit on one foe that strips the foe's stat boosts. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "thunderous-wind",
+        "section": "Flying",
+        "sortOrder": 143,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heaven Crash",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "115",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Heaven Crash is a Flying Physical skill. A Physical hit on one foe that raises your Speed by 1. Listed power is 115. It has 5 PP."
+      },
+      "system": {
+        "slug": "heaven-crash",
+        "section": "Flying",
+        "sortOrder": 144,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Air Slash",
+        "element": "Flying",
+        "damageClass": "Special",
+        "power": "90",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Air Slash is a Flying Special skill. A Special hit on one foe that scales with your Speed lead. Listed power is 90. It has 5 PP."
+      },
+      "system": {
+        "slug": "air-slash",
+        "section": "Flying",
+        "sortOrder": 145,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wing Smash",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "90",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Wing Smash is a Flying Physical skill. A Physical hit on one foe that doubles the foe's Bleed stacks. Listed power is 90. It has 10 PP."
+      },
+      "system": {
+        "slug": "wing-smash",
+        "section": "Flying",
+        "sortOrder": 146,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cyclone Spiral",
+        "element": "Flying",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up or Skill shop",
+        "cardSummary": "Cyclone Spiral is a Flying Special skill. A Special hit on every foe. Listed power is 60. It has 10 PP."
+      },
+      "system": {
+        "slug": "cyclone-spiral",
+        "section": "Flying",
+        "sortOrder": 147,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frenzy Slash 1",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "120",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Frenzy Slash 1 is a Flying Physical skill. A Physical hit on one foe. Listed power is 120. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "frenzy-slash-1",
+        "section": "Flying",
+        "sortOrder": 148,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frenzy Slash II",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "180",
+        "cost": "8 Energy",
+        "rank": "II",
+        "howToGet": "Level up after evolving",
+        "cardSummary": "Frenzy Slash II is a Flying Physical skill. A Physical hit on one foe. Listed power is 180. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "frenzy-slash-ii",
+        "section": "Flying",
+        "sortOrder": 149,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Air Cutter 1",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "110",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Air Cutter 1 is a Flying Physical skill. A Physical hit on one foe that gains 35 power against foes with Bleed. Listed power is 110. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "air-cutter-1",
+        "section": "Flying",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Air Cutter 2",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "165",
+        "cost": "8 Energy",
+        "rank": "2",
+        "howToGet": "Level up",
+        "cardSummary": "Air Cutter 2 is a Flying Physical skill. A Physical hit on one foe that gains 50 power against foes with Bleed. Listed power is 165. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "air-cutter-2",
+        "section": "Flying",
+        "sortOrder": 151,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Air Cutter 3",
+        "element": "Flying",
+        "damageClass": "Physical",
+        "power": "220",
+        "cost": "8 Energy",
+        "rank": "3",
+        "howToGet": "Level up",
+        "cardSummary": "Air Cutter 3 is a Flying Physical skill. A Physical hit on one foe that gains 65 power against foes with Bleed. Listed power is 220. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "air-cutter-3",
+        "section": "Flying",
+        "sortOrder": 152,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ambush",
+        "element": "Ground",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Ambush is a Ground Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "ambush",
+        "section": "Ground",
+        "sortOrder": 153,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mud Slap",
+        "element": "Ground",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Mud Slap is a Ground Special skill. A Special hit on one foe. Listed power is 60. It has 20 PP."
+      },
+      "system": {
+        "slug": "mud-slap",
+        "section": "Ground",
+        "sortOrder": 154,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shock",
+        "element": "Ground",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Shock is a Ground Special skill. A Special hit on every foe. Listed power is 50. It has 15 PP."
+      },
+      "system": {
+        "slug": "shock",
+        "section": "Ground",
+        "sortOrder": 155,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Earthquake",
+        "element": "Ground",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Earthquake is a Ground Special skill. A Special hit on every foe. Listed power is 60. It has 10 PP."
+      },
+      "system": {
+        "slug": "earthquake",
+        "section": "Ground",
+        "sortOrder": 156,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fissure",
+        "element": "Ground",
+        "damageClass": "Special",
+        "power": "115",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Fissure is a Ground Special skill. A Special hit on one foe that drops the foe's Speed by 1. Listed power is 115. It has 5 PP."
+      },
+      "system": {
+        "slug": "fissure",
+        "section": "Ground",
+        "sortOrder": 157,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Caltrop",
+        "element": "Ground",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Caltrop is a Ground Physical skill. A Physical hit on one foe that drops the foe's Defense by 1. Listed power is 100. It has 10 PP."
+      },
+      "system": {
+        "slug": "caltrop",
+        "section": "Ground",
+        "sortOrder": 158,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Quicksand",
+        "element": "Ground",
+        "damageClass": "Physical",
+        "power": "70",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Quicksand is a Ground Physical skill. A Physical hit on one foe that drops the foe's Defense by 2 each turn for 3 turns. Listed power is 70. It has 10 PP."
+      },
+      "system": {
+        "slug": "quicksand",
+        "section": "Ground",
+        "sortOrder": 159,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Earth Pulse",
+        "element": "Ground",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Earth Pulse is a Ground Status skill. Doubles the power of the next Ground skill. It has 10 PP."
+      },
+      "system": {
+        "slug": "earth-pulse",
+        "section": "Ground",
+        "sortOrder": 160,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ruthless Rush",
+        "element": "Ground",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Ruthless Rush is a Ground Physical skill. A Physical hit on one foe that gains 10 power per Defense stage lowered on the foe. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "ruthless-rush",
+        "section": "Ground",
+        "sortOrder": 161,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy Trample",
+        "element": "Ground",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Summoned Ruins Epic Skill Cache",
+        "cardSummary": "Heavy Trample is a Ground Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "heavy-trample",
+        "section": "Ground",
+        "sortOrder": 162,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Earth Fissure 1",
+        "element": "Ground",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Earth Fissure 1 is a Ground Physical skill. A Physical hit on one foe that gains +1 priority. Listed power is 100. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "earth-fissure-1",
+        "section": "Ground",
+        "sortOrder": 163,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Trap 1",
+        "element": "Ground",
+        "damageClass": "Special",
+        "power": "55",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Sand Trap 1 is a Ground Special skill. A Special hit on every foe that drops the foe's Defense and Special Defense by 1. Listed power is 55. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "sand-trap-1",
+        "section": "Ground",
+        "sortOrder": 164,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Trap 2",
+        "element": "Ground",
+        "damageClass": "Special",
+        "power": "90",
+        "cost": "8 Energy",
+        "rank": "2",
+        "howToGet": "Level up",
+        "cardSummary": "Sand Trap 2 is a Ground Special skill. A Special hit on every foe that drops the foe's Defense and Special Defense by 1. Listed power is 90. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "sand-trap-2",
+        "section": "Ground",
+        "sortOrder": 165,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Trap 3",
+        "element": "Ground",
+        "damageClass": "Special",
+        "power": "125",
+        "cost": "8 Energy",
+        "rank": "3",
+        "howToGet": "Level up",
+        "cardSummary": "Sand Trap 3 is a Ground Special skill. A Special hit on every foe that drops the foe's Defense and Special Defense by 1. Listed power is 125. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "sand-trap-3",
+        "section": "Ground",
+        "sortOrder": 166,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boulder Dash",
+        "element": "Rock",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Boulder Dash is a Rock Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "boulder-dash",
+        "section": "Rock",
+        "sortOrder": 167,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stone Edge",
+        "element": "Rock",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Stone Edge is a Rock Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "stone-edge",
+        "section": "Rock",
+        "sortOrder": 168,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient Power",
+        "element": "Rock",
+        "damageClass": "Physical",
+        "power": "75",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Ancient Power is a Rock Physical skill. A Physical hit on one foe that scales with your Defense lead. Listed power is 75. It has 10 PP."
+      },
+      "system": {
+        "slug": "ancient-power",
+        "section": "Rock",
+        "sortOrder": 169,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thrash",
+        "element": "Rock",
+        "damageClass": "Physical",
+        "power": "150",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thrash is a Rock Physical skill. A Physical hit on one foe that also inflicts Fatigue on you. Listed power is 150. It has 5 PP."
+      },
+      "system": {
+        "slug": "thrash",
+        "section": "Rock",
+        "sortOrder": 170,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rock Slide",
+        "element": "Rock",
+        "damageClass": "Special",
+        "power": "90",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Rock Slide is a Rock Special skill. A Special hit on one foe that clears your status conditions. Listed power is 90. It has 10 PP."
+      },
+      "system": {
+        "slug": "rock-slide",
+        "section": "Rock",
+        "sortOrder": 171,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Prism Fusion",
+        "element": "Rock",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Prism Fusion is a Rock Special skill. A Special hit on every foe. Listed power is 60. It has 10 PP."
+      },
+      "system": {
+        "slug": "prism-fusion",
+        "section": "Rock",
+        "sortOrder": 172,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rock Blast",
+        "element": "Rock",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Rock Blast is a Rock Special skill. A Special hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "rock-blast",
+        "section": "Rock",
+        "sortOrder": 173,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rock Throw",
+        "element": "Rock",
+        "damageClass": "Special",
+        "power": "55",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Rock Throw is a Rock Special skill. A Special hit on one foe that raises your Special Defense by 1. Listed power is 55. It has 20 PP."
+      },
+      "system": {
+        "slug": "rock-throw",
+        "section": "Rock",
+        "sortOrder": 174,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sandstorm",
+        "element": "Rock",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Sandstorm is a Rock Status skill. Sets the weather to Sandstorm. It has 5 PP."
+      },
+      "system": {
+        "slug": "sandstorm",
+        "section": "Rock",
+        "sortOrder": 175,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Attack",
+        "element": "Rock",
+        "damageClass": "Special",
+        "power": "25",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Sand Attack is a Rock Special skill. Hits one foe for 3x to 5x its listed power. Listed power is 25. It has 10 PP."
+      },
+      "system": {
+        "slug": "sand-attack",
+        "section": "Rock",
+        "sortOrder": 176,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Earth Power",
+        "element": "Rock",
+        "damageClass": "Special",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Earth Power is a Rock Special skill. A Special hit on one foe that raises your Defense and Special Defense by 1. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "earth-power",
+        "section": "Rock",
+        "sortOrder": 177,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rock Throw 1",
+        "element": "Rock",
+        "damageClass": "Physical",
+        "power": "120",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Rock Throw 1 is a Rock Physical skill. A Physical hit on one foe. Listed power is 120. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "rock-throw-1",
+        "section": "Rock",
+        "sortOrder": 178,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dust Cyclone",
+        "element": "Rock",
+        "damageClass": "Physical",
+        "power": "45",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Dust Cyclone is a Rock Physical skill. A Physical hit on every foe. Listed power is 45. It has 15 PP."
+      },
+      "system": {
+        "slug": "dust-cyclone",
+        "section": "Rock",
+        "sortOrder": 179,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sonic Punch",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Sonic Punch is a Fighting Physical skill. A Physical hit on one foe that gains +1 priority. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "sonic-punch",
+        "section": "Fighting",
+        "sortOrder": 180,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dash Punch",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Dash Punch is a Fighting Physical skill. A Physical hit on one foe. Listed power is 60. It has 20 PP."
+      },
+      "system": {
+        "slug": "dash-punch",
+        "section": "Fighting",
+        "sortOrder": 181,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elbow Smash",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "75",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Elbow Smash is a Fighting Physical skill. A Physical hit on one foe that gains 5 power per Attack stage raised on you. Listed power is 75. It has 15 PP."
+      },
+      "system": {
+        "slug": "elbow-smash",
+        "section": "Fighting",
+        "sortOrder": 182,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Multi Strike",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "105",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Multi Strike is a Fighting Physical skill. A Physical hit on one foe that strips the foe's stat boosts. Listed power is 105. It has 5 PP."
+      },
+      "system": {
+        "slug": "multi-strike",
+        "section": "Fighting",
+        "sortOrder": 183,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rider Kick",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Rider Kick is a Fighting Physical skill. A Physical hit on one foe that raises your Attack by 1. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "rider-kick",
+        "section": "Fighting",
+        "sortOrder": 184,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sharp Claw",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Sharp Claw is a Fighting Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "sharp-claw",
+        "section": "Fighting",
+        "sortOrder": 185,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy Blow",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Heavy Blow is a Fighting Physical skill. A Physical hit on one foe that gains 10 power per Defense stage raised on the foe. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "heavy-blow",
+        "section": "Fighting",
+        "sortOrder": 186,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mega Claw",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Mega Claw is a Fighting Physical skill. A Physical hit on one foe that raises your Attack by 1. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "mega-claw",
+        "section": "Fighting",
+        "sortOrder": 187,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Combo Punch",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "90",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Combo Punch is a Fighting Physical skill. A Physical hit on one foe that gains +1 priority if you use it again next turn. Listed power is 90. It has 10 PP."
+      },
+      "system": {
+        "slug": "combo-punch",
+        "section": "Fighting",
+        "sortOrder": 188,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ultimate Burst Fist",
+        "element": "Fighting",
+        "damageClass": "Physical",
+        "power": "110",
+        "cost": "8 Energy",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Ultimate Burst Fist is a Fighting Physical skill. A Physical hit on one foe that has a 10% chance to inflict Fatigue. Listed power is 110. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "ultimate-burst-fist",
+        "section": "Fighting",
+        "sortOrder": 189,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Insect Rush",
+        "element": "Bug",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Insect Rush is a Bug Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "insect-rush",
+        "section": "Bug",
+        "sortOrder": 190,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Silkburst",
+        "element": "Bug",
+        "damageClass": "Special",
+        "power": "110",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Silkburst is a Bug Special skill. A Special hit on one foe that drops the foe's Attack and Special Attack by 1. Listed power is 110. It has 5 PP."
+      },
+      "system": {
+        "slug": "silkburst",
+        "section": "Bug",
+        "sortOrder": 191,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Venom Chase",
+        "element": "Bug",
+        "damageClass": "Physical",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Venom Chase is a Bug Physical skill. A Physical hit on one foe that gains 40 power against foes whose stats are dropped. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "venom-chase",
+        "section": "Bug",
+        "sortOrder": 192,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wing Blade",
+        "element": "Bug",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Wing Blade is a Bug Physical skill. A Physical hit on one foe that gains 20 power each time it is used. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "wing-blade",
+        "section": "Bug",
+        "sortOrder": 193,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poison Spike",
+        "element": "Bug",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Poison Spike is a Bug Physical skill. A Physical hit on one foe that strips the foe's stat boosts. Listed power is 60. It has 10 PP."
+      },
+      "system": {
+        "slug": "poison-spike",
+        "section": "Bug",
+        "sortOrder": 194,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bug Drain",
+        "element": "Bug",
+        "damageClass": "Special",
+        "power": "40",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Bug Drain is a Bug Special skill. A Special hit on one foe that heals you for all of the damage. Listed power is 40. It has 15 PP."
+      },
+      "system": {
+        "slug": "bug-drain",
+        "section": "Bug",
+        "sortOrder": 195,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Swarm Assult 1",
+        "element": "Bug",
+        "damageClass": "Physical",
+        "power": "40",
+        "cost": "6 Energy",
+        "rank": "1",
+        "howToGet": "Level 30",
+        "cardSummary": "Swarm Assult 1 is a Bug Physical skill. A Physical hit on one foe that inflicts Confusion. Listed power is 40. It costs 6 Energy."
+      },
+      "system": {
+        "slug": "swarm-assult-1",
+        "section": "Bug",
+        "sortOrder": 196,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Insect Curse 1",
+        "element": "Bug",
+        "damageClass": "Special",
+        "power": "45",
+        "cost": "6 Energy",
+        "rank": "1",
+        "howToGet": "Level up",
+        "cardSummary": "Insect Curse 1 is a Bug Special skill. A Special hit on one foe that drops the foe's Attack and Special Attack by 5. Listed power is 45. It costs 6 Energy."
+      },
+      "system": {
+        "slug": "insect-curse-1",
+        "section": "Bug",
+        "sortOrder": 197,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Insect Sonic",
+        "element": "Bug",
+        "damageClass": "Special",
+        "power": "60",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Insect Sonic is a Bug Special skill. A Special hit on one foe that gains +1 priority. Listed power is 60. It has 15 PP."
+      },
+      "system": {
+        "slug": "insect-sonic",
+        "section": "Bug",
+        "sortOrder": 198,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Web Bind",
+        "element": "Bug",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up or Skill shop",
+        "cardSummary": "Web Bind is a Bug Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "web-bind",
+        "section": "Bug",
+        "sortOrder": 199,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Savage Bite",
+        "element": "Poison",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Savage Bite is a Poison Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "savage-bite",
+        "section": "Poison",
+        "sortOrder": 200,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Toxic Sting",
+        "element": "Poison",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Toxic Sting is a Poison Physical skill. A Physical hit on one foe. Listed power is 60. It has 20 PP."
+      },
+      "system": {
+        "slug": "toxic-sting",
+        "section": "Poison",
+        "sortOrder": 201,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poison",
+        "element": "Poison",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Poison is a Poison Status skill. Applies 5 Poison stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "poison",
+        "section": "Poison",
+        "sortOrder": 202,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Venom Spray",
+        "element": "Poison",
+        "damageClass": "Special",
+        "power": "90",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Venom Spray is a Poison Special skill. A Special hit on one foe that applies 3 Poison stacks. Listed power is 90. It has 10 PP."
+      },
+      "system": {
+        "slug": "venom-spray",
+        "section": "Poison",
+        "sortOrder": 203,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Venom Burst",
+        "element": "Poison",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Venom Burst is a Poison Physical skill. A Physical hit on one foe that gains 5 power per Poison stack on the foe. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "venom-burst",
+        "section": "Poison",
+        "sortOrder": 204,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spore Burst",
+        "element": "Poison",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Spore Burst is a Poison Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "spore-burst",
+        "section": "Poison",
+        "sortOrder": 205,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Deadly Toxin",
+        "element": "Poison",
+        "damageClass": "Special",
+        "power": "120",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Deadly Toxin is a Poison Special skill. A Special hit on one foe that gains 40 power against foes with Poison. Listed power is 120. It has 5 PP."
+      },
+      "system": {
+        "slug": "deadly-toxin",
+        "section": "Poison",
+        "sortOrder": 206,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poison Coat",
+        "element": "Poison",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Poison Coat is a Poison Physical skill. A Physical hit on one foe that applies 2 Poison stacks. Listed power is 60. It has 15 PP."
+      },
+      "system": {
+        "slug": "poison-coat",
+        "section": "Poison",
+        "sortOrder": 207,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poison Gas",
+        "element": "Poison",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Poison Gas is a Poison Physical skill. A Physical hit on every foe. Listed power is 60. It has 10 PP."
+      },
+      "system": {
+        "slug": "poison-gas",
+        "section": "Poison",
+        "sortOrder": 208,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corrosive Smoke",
+        "element": "Poison",
+        "damageClass": "Status",
+        "power": "90",
+        "cost": "8 Energy",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Corrosive Smoke is a Poison Status skill. A Special hit on one foe that gains 10 power per Poison stack on the foe. Listed power is 90. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "corrosive-smoke",
+        "section": "Poison",
+        "sortOrder": 209,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gear Grind",
+        "element": "Steel",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up or Skill shop",
+        "cardSummary": "Gear Grind is a Steel Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "gear-grind",
+        "section": "Steel",
+        "sortOrder": 210,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Kinetic Impact",
+        "element": "Steel",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Kinetic Impact is a Steel Physical skill. A Physical hit on one foe. Listed power is 100. It has 10 PP."
+      },
+      "system": {
+        "slug": "kinetic-impact",
+        "section": "Steel",
+        "sortOrder": 211,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thermal Ray",
+        "element": "Steel",
+        "damageClass": "Special",
+        "power": "105",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Thermal Ray is a Steel Special skill. A Special hit on one foe that deals 20 more damage for each Steel skill already used. Listed power is 105. It has 5 PP."
+      },
+      "system": {
+        "slug": "thermal-ray",
+        "section": "Steel",
+        "sortOrder": 212,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Neutron Pulse",
+        "element": "Steel",
+        "damageClass": "Special",
+        "power": "75",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Neutron Pulse is a Steel Special skill. A Special hit on one foe that permanently adds 30 damage to itself for this fight. Listed power is 75. It has 10 PP."
+      },
+      "system": {
+        "slug": "neutron-pulse",
+        "section": "Steel",
+        "sortOrder": 213,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piercing Strike",
+        "element": "Steel",
+        "damageClass": "Physical",
+        "power": "20",
+        "cost": "",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Piercing Strike is a Steel Physical skill. A Physical hit on one foe that adds 80 extra flat damage. Listed power is 20."
+      },
+      "system": {
+        "slug": "piercing-strike",
+        "section": "Steel",
+        "sortOrder": 214,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Magnetic Field",
+        "element": "Steel",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Magnetic Field is a Steel Physical skill. A Physical hit on one foe that drops the foe's Speed by 1. Listed power is 50. It has 20 PP."
+      },
+      "system": {
+        "slug": "magnetic-field",
+        "section": "Steel",
+        "sortOrder": 215,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Steel Resonance",
+        "element": "Steel",
+        "damageClass": "Special",
+        "power": "55",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Steel Resonance is a Steel Special skill. A Special hit on one foe that gives Steel skills +10 power for the rest of the fight. Listed power is 55. It has 15 PP."
+      },
+      "system": {
+        "slug": "steel-resonance",
+        "section": "Steel",
+        "sortOrder": 216,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Iron Impact",
+        "element": "Steel",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Iron Impact is a Steel Physical skill. A Physical hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "iron-impact",
+        "section": "Steel",
+        "sortOrder": 217,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Overload Smash",
+        "element": "Steel",
+        "damageClass": "Physical",
+        "power": "75",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Overload Smash is a Steel Physical skill. A Physical hit on one foe that adds 50 extra flat damage. Listed power is 75. It has 10 PP."
+      },
+      "system": {
+        "slug": "overload-smash",
+        "section": "Steel",
+        "sortOrder": 218,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mirage Beam",
+        "element": "Psychic",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Mirage Beam is a Psychic Special skill. A Special hit on one foe that applies 1 Psymark stack. Listed power is 50. It has 20 PP."
+      },
+      "system": {
+        "slug": "mirage-beam",
+        "section": "Psychic",
+        "sortOrder": 219,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hallucination",
+        "element": "Psychic",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Hallucination is a Psychic Status skill. Applies 3 Psymark stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "hallucination",
+        "section": "Psychic",
+        "sortOrder": 220,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mind Insight",
+        "element": "Psychic",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Mind Insight is a Psychic Status skill. Applies 5 Psymark stacks. It has 5 PP."
+      },
+      "system": {
+        "slug": "mind-insight",
+        "section": "Psychic",
+        "sortOrder": 221,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mind Disrupt",
+        "element": "Psychic",
+        "damageClass": "Special",
+        "power": "120",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Mind Disrupt is a Psychic Special skill. A Special hit on one foe. Listed power is 120. It has 5 PP."
+      },
+      "system": {
+        "slug": "mind-disrupt",
+        "section": "Psychic",
+        "sortOrder": 222,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shatter",
+        "element": "Psychic",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Shatter is a Psychic Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "shatter",
+        "section": "Psychic",
+        "sortOrder": 223,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Time Warp",
+        "element": "Psychic",
+        "damageClass": "Special",
+        "power": "80",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Time Warp is a Psychic Special skill. A Special hit on one foe that applies 2 Psymark stacks. Listed power is 80. It has 10 PP."
+      },
+      "system": {
+        "slug": "time-warp",
+        "section": "Psychic",
+        "sortOrder": 224,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Star Meteor",
+        "element": "Psychic",
+        "damageClass": "Special",
+        "power": "75",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Star Meteor is a Psychic Special skill. A Special hit on one foe that strips the foe's stat boosts. Listed power is 75. It has 15 PP."
+      },
+      "system": {
+        "slug": "star-meteor",
+        "section": "Psychic",
+        "sortOrder": 225,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Psychic Cast",
+        "element": "Psychic",
+        "damageClass": "Special",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Psychic Cast is a Psychic Special skill. A Special hit on one foe that gains 40 power against foes with Psymark. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "psychic-cast",
+        "section": "Psychic",
+        "sortOrder": 226,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Psychic Blast",
+        "element": "Psychic",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Psychic Blast is a Psychic Special skill. A Special hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "psychic-blast",
+        "section": "Psychic",
+        "sortOrder": 227,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Light Focus",
+        "element": "Light",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "",
+        "cardSummary": "Light Focus is a Light Special skill. A Special hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "light-focus",
+        "section": "Light",
+        "sortOrder": 228,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Radiance",
+        "element": "Light",
+        "damageClass": "Status",
+        "power": "",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Radiance is a Light Status skill. Gives your Evomon 4 Sun's Grace stacks. It has 10 PP."
+      },
+      "system": {
+        "slug": "radiance",
+        "section": "Light",
+        "sortOrder": 229,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Light Pulse",
+        "element": "Light",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level 40",
+        "cardSummary": "Light Pulse is a Light Special skill. A Special hit on one foe that refunds 1 Ultimate Energy if you have Sun's Grace. Listed power is 50. It has 20 PP."
+      },
+      "system": {
+        "slug": "light-pulse",
+        "section": "Light",
+        "sortOrder": 230,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Radiant Blade",
+        "element": "Light",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level 60",
+        "cardSummary": "Radiant Blade is a Light Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "radiant-blade",
+        "section": "Light",
+        "sortOrder": 231,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Purge Beam",
+        "element": "Light",
+        "damageClass": "Special",
+        "power": "75",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level 100",
+        "cardSummary": "Purge Beam is a Light Special skill. A Special hit on one foe that makes you immune to status for 2 turns, and clears your debuffs. Listed power is 75. It has 15 PP."
+      },
+      "system": {
+        "slug": "purge-beam",
+        "section": "Light",
+        "sortOrder": 232,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sacred Baptism 1",
+        "element": "Light",
+        "damageClass": "Special",
+        "power": "100",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level 30",
+        "cardSummary": "Sacred Baptism 1 is a Light Special skill. A Special hit on one foe that gives Light skills +10 power this fight and refunds 1 Ultimate Energy after each of the next 2 turns. Listed power is 100. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "sacred-baptism-1",
+        "section": "Light",
+        "sortOrder": 233,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Radiance Cannon",
+        "element": "Light",
+        "damageClass": "Special",
+        "power": "120",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level 140",
+        "cardSummary": "Radiance Cannon is a Light Special skill. A Special hit on one foe that refunds 1 Ultimate Energy if you have 4 or less. Listed power is 120. It has 5 PP."
+      },
+      "system": {
+        "slug": "radiance-cannon",
+        "section": "Light",
+        "sortOrder": 234,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Downstrike",
+        "element": "Light",
+        "damageClass": "Special",
+        "power": "85",
+        "cost": "",
+        "rank": "",
+        "howToGet": "Skill Cache at level 120",
+        "cardSummary": "Downstrike is a Light Special skill. A Special hit on one foe that gives you a Sun's Grace stack. Listed power is 85."
+      },
+      "system": {
+        "slug": "downstrike",
+        "section": "Light",
+        "sortOrder": 235,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dawnstrike",
+        "element": "Light",
+        "damageClass": "Special",
+        "power": "85",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Dawnstrike is a Light Special skill. A Special hit on one foe that gives you a Sun's Grace stack. Listed power is 85. It has 10 PP."
+      },
+      "system": {
+        "slug": "dawnstrike",
+        "section": "Light",
+        "sortOrder": 236,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Blast",
+        "element": "Dark",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level 10 on Dark King baby form",
+        "cardSummary": "Shadow Blast is a Dark Special skill. A Special hit on one foe. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "shadow-blast",
+        "section": "Dark",
+        "sortOrder": 237,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Siphon",
+        "element": "Dark",
+        "damageClass": "Special",
+        "power": "50",
+        "cost": "20 PP",
+        "rank": "",
+        "howToGet": "Level 40 on Dark King baby form",
+        "cardSummary": "Energy Siphon is a Dark Special skill. A Special hit on one foe that steals 1 Ultimate Energy from the foe. Listed power is 50. It has 20 PP."
+      },
+      "system": {
+        "slug": "energy-siphon",
+        "section": "Dark",
+        "sortOrder": 238,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Ambush",
+        "element": "Dark",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level 50 on Dark King baby form",
+        "cardSummary": "Shadow Ambush is a Dark Physical skill. A Physical hit on one foe that gains +1 priority. Listed power is 60. It has 15 PP."
+      },
+      "system": {
+        "slug": "shadow-ambush",
+        "section": "Dark",
+        "sortOrder": 239,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corrosion Fang",
+        "element": "Dark",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level 70 on Dark King baby form",
+        "cardSummary": "Corrosion Fang is a Dark Physical skill. A Physical hit on one foe that removes 1 Ultimate Energy from the foe. Listed power is 80. It has 5 PP."
+      },
+      "system": {
+        "slug": "corrosion-fang",
+        "section": "Dark",
+        "sortOrder": 240,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nightfall Slash",
+        "element": "Dark",
+        "damageClass": "Physical",
+        "power": "60",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Level 100",
+        "cardSummary": "Nightfall Slash is a Dark Physical skill. A Physical hit on every foe. Listed power is 60. It has 10 PP."
+      },
+      "system": {
+        "slug": "nightfall-slash",
+        "section": "Dark",
+        "sortOrder": 241,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Core Overdrive",
+        "element": "Dark",
+        "damageClass": "Physical",
+        "power": "120",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level 140",
+        "cardSummary": "Core Overdrive is a Dark Physical skill. A Physical hit on one foe that spends 1 Ultimate Energy for 20 extra power. Listed power is 120. It has 5 PP."
+      },
+      "system": {
+        "slug": "core-overdrive",
+        "section": "Dark",
+        "sortOrder": 242,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Reap 1",
+        "element": "Dark",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "8 Energy",
+        "rank": "1",
+        "howToGet": "Level 30",
+        "cardSummary": "Shadow Reap 1 is a Dark Physical skill. Spends 1 Ultimate Energy to land a Physical hit, and gains +50 power if the foe has 3 Ultimate Energy or less. Listed power is 100. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "shadow-reap-1",
+        "section": "Dark",
+        "sortOrder": 243,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Reap 2",
+        "element": "Dark",
+        "damageClass": "Physical",
+        "power": "150",
+        "cost": "8 Energy",
+        "rank": "2",
+        "howToGet": "Level up",
+        "cardSummary": "Shadow Reap 2 is a Dark Physical skill. Spends 1 Ultimate Energy to land a Physical hit, and gains +75 power if the foe has 3 Ultimate Energy or less. Listed power is 150. It costs 8 Energy."
+      },
+      "system": {
+        "slug": "shadow-reap-2",
+        "section": "Dark",
+        "sortOrder": 244,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Stab",
+        "element": "Dark",
+        "damageClass": "Physical",
+        "power": "85",
+        "cost": "",
+        "rank": "",
+        "howToGet": "Skill Cache at level 120",
+        "cardSummary": "Shadow Stab is a Dark Physical skill. A Physical hit on one foe that strips 1 Ultimate Energy from foes that have more than 4. Listed power is 85."
+      },
+      "system": {
+        "slug": "shadow-stab",
+        "section": "Dark",
+        "sortOrder": 245,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Claw",
+        "element": "Dragon",
+        "damageClass": "Physical",
+        "power": "50",
+        "cost": "30 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Dragon Claw is a Dragon Physical skill. A Physical hit on one foe that applies 1 Dragonmark stack. Listed power is 50. It has 30 PP."
+      },
+      "system": {
+        "slug": "dragon-claw",
+        "section": "Dragon",
+        "sortOrder": 246,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Horn Strike",
+        "element": "Dragon",
+        "damageClass": "Physical",
+        "power": "80",
+        "cost": "15 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Horn Strike is a Dragon Physical skill. A Physical hit on one foe. Listed power is 80. It has 15 PP."
+      },
+      "system": {
+        "slug": "horn-strike",
+        "section": "Dragon",
+        "sortOrder": 247,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Pursuit",
+        "element": "Dragon",
+        "damageClass": "Physical",
+        "power": "100",
+        "cost": "5 PP",
+        "rank": "",
+        "howToGet": "Level up",
+        "cardSummary": "Dragon Pursuit is a Dragon Physical skill. A Physical hit on one foe that gains 20 power each time it is used. Listed power is 100. It has 5 PP."
+      },
+      "system": {
+        "slug": "dragon-pursuit",
+        "section": "Dragon",
+        "sortOrder": 248,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Breath",
+        "element": "Dragon",
+        "damageClass": "Special",
+        "power": "75",
+        "cost": "10 PP",
+        "rank": "",
+        "howToGet": "Skill shop",
+        "cardSummary": "Dragon Breath is a Dragon Special skill. A Special hit on one foe that applies 2 Dragonmark stacks. Listed power is 75. It has 10 PP."
+      },
+      "system": {
+        "slug": "dragon-breath",
+        "section": "Dragon",
+        "sortOrder": 249,
+        "image": null
+      }
+    }
+  ]
+}

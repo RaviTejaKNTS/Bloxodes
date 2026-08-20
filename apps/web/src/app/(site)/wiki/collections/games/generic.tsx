@@ -636,6 +636,7 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "sols-rng-auras": 26_000,
   "tower-of-hell-sections": 26_000,
   "bedwars-items": 26_000,
+  "evomon-moves": 26_000,
   "bedwars-kits": 30_000,
   "driving-empire-vehicles": 30_000,
   "evomon-monsters": 30_000,

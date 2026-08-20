@@ -322,10 +322,10 @@ Evidence: [full report](../tmp/game-collection-suggestions/evade.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/evomon.md)
 
-- [ ] Equipment
-- [ ] Traits
-- [ ] Natures
-- [ ] Moves
+- [x] Equipment
+- [x] Traits
+- [x] Natures
+- [x] Moves
 
 ### Fisch
 
