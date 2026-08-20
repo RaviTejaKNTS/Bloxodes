@@ -238,9 +238,9 @@ Evidence: [full report](../tmp/game-collection-suggestions/catch-a-brainrot.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/catch-and-tame.md)
 
-- [ ] Fishing Gear
-- [ ] Enchantments
-- [ ] Island Keys
+- [x] Fishing Gear
+- [x] Enchantments
+- [x] Island Keys
 
 ### Clean the Library
 

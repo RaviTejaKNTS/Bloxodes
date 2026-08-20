@@ -1,0 +1,599 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Catch And Tame",
+    "gameSlug": "catch-and-tame",
+    "collection": "fishing-gear",
+    "route": "/wiki/catch-and-tame/fishing-gear",
+    "catalogCode": "catch-and-tame-fishing-gear",
+    "sourceItemCount": 24,
+    "itemFields": [
+      "type",
+      "rarity",
+      "price",
+      "shop",
+      "effect",
+      "source",
+      "availability",
+      "bestUse",
+      "cardSummary"
+    ],
+    "columns": [
+      "type",
+      "rarity",
+      "price",
+      "shop",
+      "effect",
+      "source",
+      "availability",
+      "bestUse",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Rods",
+        "Bobbers",
+        "Baits"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "price",
+        "shop",
+        "effect",
+        "availability",
+        "bestUse"
+      ],
+      "tableFields": [
+        "type",
+        "rarity",
+        "price",
+        "shop",
+        "effect",
+        "source",
+        "availability",
+        "bestUse",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "normal",
+          "label": "Type"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "shop": {
+          "kind": "normal",
+          "label": "Shop"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Stock"
+        },
+        "bestUse": {
+          "kind": "highlight",
+          "label": "Best use"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "24 Lost Docks fishing shop tools: 8 rods, 8 bobbers, and 8 baits. Excludes the Fishing Key, Lure I-IV, lassos, wolf Bone bait, totems, potions, chests, food-coded items, and the Fishing Luck gamepass.",
+      "sources": [
+        "https://bo3.gg/games/articles/catch-and-tame-lost-docks-guide",
+        "https://bo3.gg/games/articles/catch-and-tame-how-to-get-all-island-keys",
+        "https://www.game.guide/catch-and-tame-value-list",
+        "https://progameguides.com/roblox/how-to-get-all-divine-pets-in-catch-and-tame/"
+      ],
+      "checkedAt": "2026-08-20",
+      "sectionCounts": {
+        "Rods": 8,
+        "Bobbers": 8,
+        "Baits": 8
+      },
+      "imagePolicy": "Game.Guide isolated item PNGs for all 8 rods and 7/8 baits. Chicken Bait has no Game.Guide icon. All 8 bobbers have no isolated source art; Fandom/BloxInformer/shop screenshots were rejected."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Basic Rod",
+        "type": "Rod",
+        "rarity": "Common",
+        "price": "$1,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Stronger rods improve the chance of reeling in rarer pets.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Buy this first so you can fish Lost Docks ponds at all.",
+        "cardSummary": "Cheapest Chase rod and the entry tool for Lost Docks fishing."
+      },
+      "system": {
+        "slug": "basic-rod",
+        "section": "Rods",
+        "sortOrder": 1,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/basic-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Advanced Rod",
+        "type": "Rod",
+        "rarity": "Rare",
+        "price": "$50,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Stronger rods improve the chance of reeling in rarer pets.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "The first upgrade after Basic Rod when early ponds start feeling slow.",
+        "cardSummary": "Rare Chase rod that sits one step above the starter rod."
+      },
+      "system": {
+        "slug": "advanced-rod",
+        "section": "Rods",
+        "sortOrder": 2,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/advanced-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bamboo Rod",
+        "type": "Rod",
+        "rarity": "Epic",
+        "price": "$250,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Stronger rods improve the chance of reeling in rarer pets.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Use as the mid-Chase rod before spending millions on Spiked Rod.",
+        "cardSummary": "Epic Chase rod in the middle of the Lost Docks shop ladder."
+      },
+      "system": {
+        "slug": "bamboo-rod",
+        "section": "Rods",
+        "sortOrder": 3,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/bamboo-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spiked Rod",
+        "type": "Rod",
+        "rarity": "Epic",
+        "price": "$1.25 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Stronger rods improve the chance of reeling in rarer pets.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Buy when Epic fishing targets matter more than saving for Golden Rod.",
+        "cardSummary": "Second Epic Chase rod and the first million-coin fishing upgrade."
+      },
+      "system": {
+        "slug": "spiked-rod",
+        "section": "Rods",
+        "sortOrder": 4,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/spiked-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Rod",
+        "type": "Rod",
+        "rarity": "Legendary",
+        "price": "$125 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Stronger rods improve the chance of reeling in rarer pets.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Hold this until Shark Rod is realistic rather than staying on Spiked Rod.",
+        "cardSummary": "Legendary Chase rod that bridges the expensive late shop upgrades."
+      },
+      "system": {
+        "slug": "golden-rod",
+        "section": "Rods",
+        "sortOrder": 5,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/golden-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shark Rod",
+        "type": "Rod",
+        "rarity": "Mythical",
+        "price": "$1 billion",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Stronger rods improve the chance of reeling in rarer pets.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Chase-shop ceiling before unlocking Valerian's Dragon and Kraken rods.",
+        "cardSummary": "Mythical Chase rod and the strongest rod sold before the underground shop."
+      },
+      "system": {
+        "slug": "shark-rod",
+        "section": "Rods",
+        "sortOrder": 6,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/shark-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Rod",
+        "type": "Rod",
+        "rarity": "Boss",
+        "price": "$1.5 billion",
+        "shop": "Valerian Underground Merchant",
+        "effect": "Listed as a very powerful fishing rod.",
+        "source": "Buy from Valerian in the Lost Docks underground shop after using the Fishing Key",
+        "availability": "Restocks every 15 minutes",
+        "bestUse": "Buy after Shark Rod if Kraken Rod is still out of reach.",
+        "cardSummary": "Boss-tier Valerian rod that sits just under the strongest listed fishing rod."
+      },
+      "system": {
+        "slug": "dragon-rod",
+        "section": "Rods",
+        "sortOrder": 7,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/dragon-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kraken Rod",
+        "type": "Rod",
+        "rarity": "Divine",
+        "price": "$2.23 billion",
+        "shop": "Valerian Underground Merchant",
+        "effect": "Listed as the most powerful fishing rod.",
+        "source": "Buy from Valerian in the Lost Docks underground shop after using the Fishing Key",
+        "availability": "Restocks every 15 minutes",
+        "bestUse": "Pair with Starlight Bobber and Bacon Bait when chasing the rarest water pets.",
+        "cardSummary": "Divine Valerian rod and the strongest fishing rod on the Lost Docks shop lists."
+      },
+      "system": {
+        "slug": "kraken-rod",
+        "section": "Rods",
+        "sortOrder": 8,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/kraken-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Basic Bobber",
+        "type": "Bobber",
+        "rarity": "Common",
+        "price": "Free",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Get from Chase at the Lost Docks Shop",
+        "availability": "Free at Chase",
+        "bestUse": "Equip only until you can afford Lime or Mint Bobber.",
+        "cardSummary": "Free starter bobber from Chase with no extra listed bonus."
+      },
+      "system": {
+        "slug": "basic-bobber",
+        "section": "Bobbers",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lime Bobber",
+        "type": "Bobber",
+        "rarity": "Rare",
+        "price": "$75,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "First paid bobber when you want a mutation helper without waiting for Mint.",
+        "cardSummary": "Rare Chase bobber and the cheapest paid mutation helper."
+      },
+      "system": {
+        "slug": "lime-bobber",
+        "section": "Bobbers",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mint Bobber",
+        "type": "Bobber",
+        "rarity": "Rare",
+        "price": "$250,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "A cheap luck helper while saving for Stardust or Royal Bobber.",
+        "cardSummary": "Second Rare Chase bobber and a low-cost step above Lime."
+      },
+      "system": {
+        "slug": "mint-bobber",
+        "section": "Bobbers",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stardust Bobber",
+        "type": "Bobber",
+        "rarity": "Epic",
+        "price": "$3 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Buy when mutated water pets matter more than staying on Mint Bobber.",
+        "cardSummary": "Epic Chase bobber in the middle of the Lost Docks bobber ladder."
+      },
+      "system": {
+        "slug": "stardust-bobber",
+        "section": "Bobbers",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Royal Bobber",
+        "type": "Bobber",
+        "rarity": "Legendary",
+        "price": "$15 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Use as the late mid-game bobber before Chomber Bobber.",
+        "cardSummary": "Legendary Chase bobber that sits below the million-plus late upgrades."
+      },
+      "system": {
+        "slug": "royal-bobber",
+        "section": "Bobbers",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chomber Bobber",
+        "type": "Bobber",
+        "rarity": "Mythical",
+        "price": "$125 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Buy when you can skip Royal Bobber and start pushing toward Kraken Bobber.",
+        "cardSummary": "Mythical Chase bobber on the expensive late shop ladder."
+      },
+      "system": {
+        "slug": "chomber-bobber",
+        "section": "Bobbers",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Kraken Bobber",
+        "type": "Bobber",
+        "rarity": "Godly",
+        "price": "$500 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Use until Starlight Bobber is affordable for divine fishing routes.",
+        "cardSummary": "Godly Chase bobber and the last stop before Starlight."
+      },
+      "system": {
+        "slug": "kraken-bobber",
+        "section": "Bobbers",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight Bobber",
+        "type": "Bobber",
+        "rarity": "Divine",
+        "price": "$1.25 billion",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Bobbers are described as increasing the chance of catching mutated animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Listed at Chase",
+        "bestUse": "Equip with Kraken Rod and Bacon Bait for the strongest listed fishing setup.",
+        "cardSummary": "Divine Chase bobber and the highest bobber on the Lost Docks shop list."
+      },
+      "system": {
+        "slug": "starlight-bobber",
+        "section": "Bobbers",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Worm Bait",
+        "type": "Bait",
+        "rarity": "Common",
+        "price": "$25,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Baits increase fishing luck to attract rarer animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Restocks every 5 minutes",
+        "bestUse": "Spend on early Lost Docks fishing instead of skipping bait entirely.",
+        "cardSummary": "Common Chase bait and the cheapest luck spend for fishing."
+      },
+      "system": {
+        "slug": "worm-bait",
+        "section": "Baits",
+        "sortOrder": 17,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/worm-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shrimp Bait",
+        "type": "Bait",
+        "rarity": "Rare",
+        "price": "$50,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Baits increase fishing luck to attract rarer animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Restocks every 5 minutes",
+        "bestUse": "A cheap Rare bait when Worm Bait is not in stock.",
+        "cardSummary": "Rare Chase bait that sits just above Worm Bait."
+      },
+      "system": {
+        "slug": "shrimp-bait",
+        "section": "Baits",
+        "sortOrder": 18,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/shrimp-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apple Bait",
+        "type": "Bait",
+        "rarity": "Rare",
+        "price": "$125,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Baits increase fishing luck to attract rarer animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Restocks every 5 minutes",
+        "bestUse": "Use when you want a stronger Rare bait without jumping to Chicken Bait.",
+        "cardSummary": "Second Rare Chase bait and a mid-early luck option."
+      },
+      "system": {
+        "slug": "apple-bait",
+        "section": "Baits",
+        "sortOrder": 19,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/apple-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chicken Bait",
+        "type": "Bait",
+        "rarity": "Epic",
+        "price": "$200,000",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Baits increase fishing luck to attract rarer animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Restocks every 5 minutes",
+        "bestUse": "Buy for Epic fishing sessions before spending millions on Sardine or Bug Bait.",
+        "cardSummary": "Epic Chase bait in the middle of the Lost Docks bait ladder."
+      },
+      "system": {
+        "slug": "chicken-bait",
+        "section": "Baits",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sardine Bait",
+        "type": "Bait",
+        "rarity": "Legendary",
+        "price": "$1 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Baits increase fishing luck to attract rarer animals.",
+        "source": "Buy from Chase at the Lost Docks Shop",
+        "availability": "Restocks every 5 minutes",
+        "bestUse": "Save for Legendary fishing instead of burning it on common water pets.",
+        "cardSummary": "Legendary Chase bait and the first million-coin luck item."
+      },
+      "system": {
+        "slug": "sardine-bait",
+        "section": "Baits",
+        "sortOrder": 21,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/sardine-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bug Bait",
+        "type": "Bait",
+        "rarity": "Mythical",
+        "price": "$2.5 million",
+        "shop": "Chase Lost Docks Shop",
+        "effect": "Baits increase fishing luck to attract rarer animals.",
+        "source": "Buy from Chase at the Lost Docks Shop. Also listed on the Fishing Spin Wheel.",
+        "availability": "Restocks every 5 minutes",
+        "bestUse": "Chase-shop bait ceiling before unlocking Valerian Squid and Bacon Bait.",
+        "cardSummary": "Mythical Chase bait and the strongest bait sold before the underground shop."
+      },
+      "system": {
+        "slug": "bug-bait",
+        "section": "Baits",
+        "sortOrder": 22,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/bug-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Squid Bait",
+        "type": "Bait",
+        "rarity": "Godly",
+        "price": "$7.5 million",
+        "shop": "Valerian Underground Merchant",
+        "effect": "Provides x7.5 luck for one catch.",
+        "source": "Buy from Valerian in the Lost Docks underground shop after using the Fishing Key",
+        "availability": "Restocks every 15 minutes",
+        "bestUse": "Spend on a catch you already plan to keep rather than on filler water pets.",
+        "cardSummary": "Godly Valerian bait with a listed x7.5 luck bonus for a single catch."
+      },
+      "system": {
+        "slug": "squid-bait",
+        "section": "Baits",
+        "sortOrder": 23,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/squid-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bacon Bait",
+        "type": "Bait",
+        "rarity": "Divine",
+        "price": "$25 million",
+        "shop": "Valerian Underground Merchant",
+        "effect": "Provides x10 luck for one catch.",
+        "source": "Buy from Valerian in the Lost Docks underground shop after using the Fishing Key",
+        "availability": "Restocks every 15 minutes",
+        "bestUse": "Use with Kraken Rod and Starlight Bobber when hunting the rarest water pets.",
+        "cardSummary": "Divine Valerian bait with a listed x10 luck bonus for a single catch."
+      },
+      "system": {
+        "slug": "bacon-bait",
+        "section": "Baits",
+        "sortOrder": 24,
+        "image": "/Catch%20And%20Tame/Fishing%20Gear/bacon-bait.png"
+      }
+    }
+  ]
+}

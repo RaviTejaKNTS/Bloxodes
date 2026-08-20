@@ -6,5 +6,17 @@ export const catchAndTameCollectionGroup = {
     universeId: 9091133975,
     dataDir: "Catch And Tame",
     universeNames: ["Catch And Tame", "[🪏] Catch And Tame!"],
-    collections: ["mutations", "pets", "breeding-recipes", "weather-events", "traits", "biomes", "lassos", "items"]
+    collections: [
+      "mutations",
+      "pets",
+      "breeding-recipes",
+      "weather-events",
+      "traits",
+      "biomes",
+      "lassos",
+      "items",
+      "island-keys",
+      "fishing-gear",
+      "enchantments"
+    ]
   } satisfies GameCollectionGroup;
