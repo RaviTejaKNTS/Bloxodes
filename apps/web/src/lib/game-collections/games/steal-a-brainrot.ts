@@ -15,6 +15,8 @@ export const stealABrainrotCollectionGroup = {
       "traits",
       "lucky-blocks",
       "gears",
-      "machines"
+      "machines",
+      "base-skins",
+      "recipes"
     ]
   } satisfies GameCollectionGroup;

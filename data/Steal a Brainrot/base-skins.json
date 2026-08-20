@@ -1,0 +1,621 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Steal a Brainrot",
+    "gameSlug": "steal-a-brainrot",
+    "collection": "base-skins",
+    "route": "/wiki/steal-a-brainrot/base-skins",
+    "catalogCode": "steal-a-brainrot-base-skins",
+    "itemFields": [
+      "indexTarget",
+      "availability",
+      "unlock",
+      "cardSummary"
+    ],
+    "columns": [
+      "indexTarget",
+      "availability",
+      "unlock",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Family",
+      "sectionOrder": [
+        "Classic Skins",
+        "Mutation Skins",
+        "Seasonal Skins",
+        "OG Skins",
+        "Admin Skins"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "unlock",
+      "cardDescriptionField": "unlock",
+      "cardFields": [
+        "indexTarget",
+        "availability"
+      ],
+      "tableFields": [
+        "indexTarget",
+        "availability",
+        "unlock"
+      ],
+      "fieldPresentation": {
+        "indexTarget": {
+          "kind": "chip",
+          "label": "Index goal",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "unlock": {
+          "kind": "detail",
+          "label": "How to unlock"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Default",
+        "indexTarget": null,
+        "availability": "Default",
+        "unlock": "Given to every player from their first join.",
+        "cardSummary": "The starter base every account begins with. Its plain look is also the game's default index reward track: completing the no-mutation index grants a 0.5x cash multiplier instead of a new skin."
+      },
+      "system": {
+        "slug": "default",
+        "section": "Classic Skins",
+        "sortOrder": 1,
+        "image": "/Steal a Brainrot/Base Skins/default.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold",
+        "indexTarget": "75% Gold index",
+        "availability": "Obtainable",
+        "unlock": "Complete 75 percent of the Gold mutation index.",
+        "cardSummary": "A gilded base for Gold index hunters. Finishing the index also adds a 0.5x cash multiplier, so the shine comes with a payout."
+      },
+      "system": {
+        "slug": "gold",
+        "section": "Classic Skins",
+        "sortOrder": 2,
+        "image": "/Steal a Brainrot/Base Skins/gold.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "indexTarget": "75% Diamond index",
+        "availability": "Obtainable",
+        "unlock": "Complete 75 percent of the Diamond mutation index.",
+        "cardSummary": "The Diamond index reward, and like the other classic skins it stacks a 0.5x multiplier on top of the new look."
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Classic Skins",
+        "sortOrder": 3,
+        "image": "/Steal a Brainrot/Base Skins/diamond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "indexTarget": "75% Rainbow index",
+        "availability": "Obtainable",
+        "unlock": "Complete 75 percent of the Rainbow mutation index.",
+        "cardSummary": "An animated RGB base that cycles colors, earned from the Rainbow index along with a 0.5x multiplier. The flashiest of the classic four."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Classic Skins",
+        "sortOrder": 4,
+        "image": "/Steal a Brainrot/Base Skins/rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy",
+        "indexTarget": "100% Candy index",
+        "availability": "Obtainable",
+        "unlock": "Complete the Candy mutation index (brainrots added before July 25, 2025).",
+        "cardSummary": "The first mutation-season base. Its index demands every eligible Candy brainrot, which makes it a completionist badge more than a casual unlock."
+      },
+      "system": {
+        "slug": "candy",
+        "section": "Mutation Skins",
+        "sortOrder": 5,
+        "image": "/Steal a Brainrot/Base Skins/candy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava",
+        "indexTarget": "100% Lava index",
+        "availability": "Obtainable",
+        "unlock": "Complete the Lava mutation index (brainrots added before August 23, 2025).",
+        "cardSummary": "A molten-themed base from the Lava season, needing the full Lava index to unlock."
+      },
+      "system": {
+        "slug": "lava",
+        "section": "Mutation Skins",
+        "sortOrder": 6,
+        "image": "/Steal a Brainrot/Base Skins/lava.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Galaxy",
+        "indexTarget": "100% Galaxy index",
+        "availability": "Obtainable",
+        "unlock": "Complete the Galaxy mutation index (brainrots added before September 27, 2025).",
+        "cardSummary": "A starfield base from the Galaxy season, unlocked by finishing that season's full index."
+      },
+      "system": {
+        "slug": "galaxy",
+        "section": "Mutation Skins",
+        "sortOrder": 7,
+        "image": "/Steal a Brainrot/Base Skins/galaxy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yin-Yang",
+        "indexTarget": "75% Yin-Yang index",
+        "availability": "Obtainable",
+        "unlock": "Complete 75 percent of the Yin-Yang mutation index (brainrots added before November 15, 2025).",
+        "cardSummary": "The balance-themed season base, and the first mutation skin to drop its requirement from 100 to 75 percent."
+      },
+      "system": {
+        "slug": "yin-yang",
+        "section": "Mutation Skins",
+        "sortOrder": 8,
+        "image": "/Steal a Brainrot/Base Skins/yin-yang.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Radioactive",
+        "indexTarget": "75% Radioactive index",
+        "availability": "Obtainable",
+        "unlock": "Complete 75 percent of the Radioactive mutation index (brainrots added before January 3, 2026).",
+        "cardSummary": "A glowing hazard-green base from the Radioactive season."
+      },
+      "system": {
+        "slug": "radioactive",
+        "section": "Mutation Skins",
+        "sortOrder": 9,
+        "image": "/Steal a Brainrot/Base Skins/radioactive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed",
+        "indexTarget": "60% Cursed index",
+        "availability": "Obtainable",
+        "unlock": "Complete 60 percent of the Cursed mutation index (brainrots added before February 21, 2026).",
+        "cardSummary": "The Cursed season base, part of the friendlier 60 percent era of mutation indexes."
+      },
+      "system": {
+        "slug": "cursed",
+        "section": "Mutation Skins",
+        "sortOrder": 10,
+        "image": "/Steal a Brainrot/Base Skins/cursed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Divine",
+        "indexTarget": "60% Divine index",
+        "availability": "Obtainable",
+        "unlock": "Complete 60 percent of the Divine mutation index (brainrots added before April 18, 2026).",
+        "cardSummary": "A radiant base from the Divine season at the 60 percent index threshold."
+      },
+      "system": {
+        "slug": "divine",
+        "section": "Mutation Skins",
+        "sortOrder": 11,
+        "image": "/Steal a Brainrot/Base Skins/divine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cyber",
+        "indexTarget": "60% Cyber index",
+        "availability": "Obtainable",
+        "unlock": "Complete 60 percent of the Cyber mutation index (brainrots added before June 13, 2026).",
+        "cardSummary": "A neon tech base from the Cyber season."
+      },
+      "system": {
+        "slug": "cyber",
+        "section": "Mutation Skins",
+        "sortOrder": 12,
+        "image": "/Steal a Brainrot/Base Skins/cyber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom",
+        "indexTarget": "60% Phantom index",
+        "availability": "Obtainable",
+        "unlock": "Complete 60 percent of the Phantom mutation index (brainrots added from June 13, 2026).",
+        "cardSummary": "The ghostly Phantom season base at the 60 percent threshold."
+      },
+      "system": {
+        "slug": "phantom",
+        "section": "Mutation Skins",
+        "sortOrder": 13,
+        "image": "/Steal a Brainrot/Base Skins/phantom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystal",
+        "indexTarget": "60% Crystal index",
+        "availability": "Currently unobtainable",
+        "unlock": "Complete 60 percent of the Crystal mutation index (brainrots added from July 25, 2026).",
+        "cardSummary": "The newest mutation base, from the Crystal season. Listed as not yet earnable while its season index is still filling out."
+      },
+      "system": {
+        "slug": "crystal",
+        "section": "Mutation Skins",
+        "sortOrder": 14,
+        "image": "/Steal a Brainrot/Base Skins/crystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween",
+        "indexTarget": "75% Halloween index",
+        "availability": "Currently unobtainable",
+        "unlock": "Complete 75 percent of the Halloween event brainrot index during the event.",
+        "cardSummary": "The first seasonal base, from the 2025 Halloween event window."
+      },
+      "system": {
+        "slug": "halloween",
+        "section": "Seasonal Skins",
+        "sortOrder": 15,
+        "image": "/Steal a Brainrot/Base Skins/halloween.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquatic",
+        "indexTarget": "90% Aquatic index",
+        "availability": "Currently unobtainable",
+        "unlock": "Complete 90 percent of the Fishing Event's Aquatic index during the event.",
+        "cardSummary": "The Fishing Event reward base, one of the tougher seasonal indexes at 90 percent."
+      },
+      "system": {
+        "slug": "aquatic",
+        "section": "Seasonal Skins",
+        "sortOrder": 16,
+        "image": "/Steal a Brainrot/Base Skins/aquatic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas",
+        "indexTarget": "90% Christmas index",
+        "availability": "Currently unobtainable",
+        "unlock": "Complete 90 percent of the Christmas index during the event.",
+        "cardSummary": "The winter event base from the Christmas index."
+      },
+      "system": {
+        "slug": "christmas",
+        "section": "Seasonal Skins",
+        "sortOrder": 17,
+        "image": "/Steal a Brainrot/Base Skins/christmas.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread",
+        "indexTarget": null,
+        "availability": "Currently unobtainable",
+        "unlock": "Bought during the Christmas event; purchase included a Premium Festive Lucky Block.",
+        "cardSummary": "A purchasable Christmas base that bundled a Premium Festive Lucky Block, making it part skin, part loot deal."
+      },
+      "system": {
+        "slug": "gingerbread",
+        "section": "Seasonal Skins",
+        "sortOrder": 18,
+        "image": "/Steal a Brainrot/Base Skins/gingerbread.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Taco",
+        "indexTarget": "20/22 Taco brainrots",
+        "availability": "Currently unobtainable",
+        "unlock": "Index 20 of 22 Taco brainrots while the Taco base event is active.",
+        "cardSummary": "An oddball event base that the developer occasionally re-enables for short windows, tied to the Taco brainrot index."
+      },
+      "system": {
+        "slug": "taco",
+        "section": "Seasonal Skins",
+        "sortOrder": 19,
+        "image": "/Steal a Brainrot/Base Skins/taco.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine's",
+        "indexTarget": "8/12 Valentine's brainrots",
+        "availability": "Currently unobtainable",
+        "unlock": "Index 8 of 12 Valentine's brainrots during the event.",
+        "cardSummary": "The Valentine's event base, earned through that event's small brainrot index."
+      },
+      "system": {
+        "slug": "valentine-s",
+        "section": "Seasonal Skins",
+        "sortOrder": 20,
+        "image": "/Steal a Brainrot/Base Skins/valentine-s.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose",
+        "indexTarget": null,
+        "availability": "Currently unobtainable",
+        "unlock": "Bought during the Valentine's event; purchase included a Premium Heart Lucky Block.",
+        "cardSummary": "The purchasable half of the Valentine's pair, bundled with a Premium Heart Lucky Block."
+      },
+      "system": {
+        "slug": "rose",
+        "section": "Seasonal Skins",
+        "sortOrder": 21,
+        "image": "/Steal a Brainrot/Base Skins/rose.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pot of Gold",
+        "indexTarget": null,
+        "availability": "Currently unobtainable",
+        "unlock": "Bought during the St. Patrick's event; purchase included a Premium Leprechaun Lucky Block.",
+        "cardSummary": "The buyable St. Patrick's base, sold alongside a Premium Leprechaun Lucky Block."
+      },
+      "system": {
+        "slug": "pot-of-gold",
+        "section": "Seasonal Skins",
+        "sortOrder": 22,
+        "image": "/Steal a Brainrot/Base Skins/pot-of-gold.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky",
+        "indexTarget": "8/12 Lucky brainrots",
+        "availability": "Currently unobtainable",
+        "unlock": "Index 8 of 12 Lucky brainrots during the event.",
+        "cardSummary": "The earned half of the St. Patrick's pair, tied to the Lucky brainrot index."
+      },
+      "system": {
+        "slug": "lucky",
+        "section": "Seasonal Skins",
+        "sortOrder": 23,
+        "image": "/Steal a Brainrot/Base Skins/lucky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Basket",
+        "indexTarget": null,
+        "availability": "Currently unobtainable",
+        "unlock": "Bought during the Easter event; purchase included a Premium Egg Lucky Block.",
+        "cardSummary": "The purchasable Easter base, bundled with a Premium Egg Lucky Block."
+      },
+      "system": {
+        "slug": "bunny-basket",
+        "section": "Seasonal Skins",
+        "sortOrder": 24,
+        "image": "/Steal a Brainrot/Base Skins/bunny-basket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter",
+        "indexTarget": "10/13 Easter brainrots",
+        "availability": "Currently unobtainable",
+        "unlock": "Index 10 of 13 Easter brainrots during the event.",
+        "cardSummary": "The earned Easter base from that event's brainrot index."
+      },
+      "system": {
+        "slug": "easter",
+        "section": "Seasonal Skins",
+        "sortOrder": 25,
+        "image": "/Steal a Brainrot/Base Skins/easter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer",
+        "indexTarget": "18/20 Summer brainrots",
+        "availability": "Currently unobtainable",
+        "unlock": "Index 18 of 20 Summer brainrots during the event.",
+        "cardSummary": "The Summer event base, with one of the strictest seasonal ratios at 18 of 20."
+      },
+      "system": {
+        "slug": "summer",
+        "section": "Seasonal Skins",
+        "sortOrder": 26,
+        "image": "/Steal a Brainrot/Base Skins/summer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Octo",
+        "indexTarget": null,
+        "availability": "Currently unobtainable",
+        "unlock": "Bought during its event; purchase included a Premium Octo Lucky Block.",
+        "cardSummary": "A purchasable event base themed on the Octo brainrots, bundled with a Premium Octo Lucky Block."
+      },
+      "system": {
+        "slug": "red-octo",
+        "section": "Seasonal Skins",
+        "sortOrder": 27,
+        "image": "/Steal a Brainrot/Base Skins/red-octo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skibidi",
+        "indexTarget": null,
+        "availability": "Obtainable",
+        "unlock": "Have a Skibidi Toilet brainrot in your base.",
+        "cardSummary": "An OG base that activates simply by owning one of the rarest classic brainrots. The skin is easy; the Skibidi Toilet is the hard part."
+      },
+      "system": {
+        "slug": "skibidi",
+        "section": "OG Skins",
+        "sortOrder": 28,
+        "image": "/Steal a Brainrot/Base Skins/skibidi.png"
+      }
+    },
+    {
+      "item": {
+        "name": "John Pork",
+        "indexTarget": null,
+        "availability": "Obtainable",
+        "unlock": "Have a John Pork brainrot in your base.",
+        "cardSummary": "The John Pork owner's base, a status skin that advertises one of the most traded OG brainrots."
+      },
+      "system": {
+        "slug": "john-pork",
+        "section": "OG Skins",
+        "sortOrder": 29,
+        "image": "/Steal a Brainrot/Base Skins/john-pork.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headless Horseman",
+        "indexTarget": null,
+        "availability": "Obtainable",
+        "unlock": "Have a Headless Horseman brainrot in your base.",
+        "cardSummary": "The Halloween-flavored OG base, unlocked by housing the Headless Horseman."
+      },
+      "system": {
+        "slug": "headless-horseman",
+        "section": "OG Skins",
+        "sortOrder": 30,
+        "image": "/Steal a Brainrot/Base Skins/headless-horseman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meowl",
+        "indexTarget": null,
+        "availability": "Obtainable",
+        "unlock": "Have a Meowl brainrot in your base.",
+        "cardSummary": "The Meowl owner's base from the first OG skin wave."
+      },
+      "system": {
+        "slug": "meowl",
+        "section": "OG Skins",
+        "sortOrder": 31,
+        "image": "/Steal a Brainrot/Base Skins/meowl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry",
+        "indexTarget": null,
+        "availability": "Obtainable",
+        "unlock": "Have a Strawberry Elephant brainrot in your base.",
+        "cardSummary": "The Strawberry Elephant's matching base, from the first OG skin wave."
+      },
+      "system": {
+        "slug": "strawberry",
+        "section": "OG Skins",
+        "sortOrder": 32,
+        "image": "/Steal a Brainrot/Base Skins/strawberry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spyder",
+        "indexTarget": null,
+        "availability": "Obtainable",
+        "unlock": "Have a Spyder Elephant brainrot in your base.",
+        "cardSummary": "The newest OG base, tied to the Spyder Elephant."
+      },
+      "system": {
+        "slug": "spyder",
+        "section": "OG Skins",
+        "sortOrder": 33,
+        "image": "/Steal a Brainrot/Base Skins/spyder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "SpyderSammy's Base (New)",
+        "indexTarget": null,
+        "availability": "Admin only",
+        "unlock": "Appears only during admin abuse events run by the developer; not unlockable by players.",
+        "cardSummary": "The developer's current event base. During admin abuses it spawns on the map holding stealable secrets, but it never joins player inventories."
+      },
+      "system": {
+        "slug": "spydersammy-s-base-new",
+        "section": "Admin Skins",
+        "sortOrder": 34,
+        "image": "/Steal a Brainrot/Base Skins/spydersammy-s-base-new.png"
+      }
+    },
+    {
+      "item": {
+        "name": "SpyderSammy's Base (Old)",
+        "indexTarget": null,
+        "availability": "Admin only",
+        "unlock": "Retired version of the developer's event base, replaced by the newer design.",
+        "cardSummary": "The middle iteration of Sammy's admin base, kept here as history."
+      },
+      "system": {
+        "slug": "spydersammy-s-base-old",
+        "section": "Admin Skins",
+        "sortOrder": 35,
+        "image": "/Steal a Brainrot/Base Skins/spydersammy-s-base-old.png"
+      }
+    },
+    {
+      "item": {
+        "name": "SpyderSammy's Base (Legacy)",
+        "indexTarget": null,
+        "availability": "Admin only",
+        "unlock": "The original developer event base from the game's early admin abuses.",
+        "cardSummary": "The first version of Sammy's admin base, from the game's earliest admin abuse events."
+      },
+      "system": {
+        "slug": "spydersammy-s-base-legacy",
+        "section": "Admin Skins",
+        "sortOrder": 36,
+        "image": "/Steal a Brainrot/Base Skins/spydersammy-s-base-legacy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tralalero Base",
+        "indexTarget": null,
+        "availability": "Admin only",
+        "unlock": "Granted through codes handed out during admin abuse events.",
+        "cardSummary": "The first base modeled on an actual brainrot, distributed only through admin abuse codes."
+      },
+      "system": {
+        "slug": "tralalero-base",
+        "section": "Admin Skins",
+        "sortOrder": 37,
+        "image": "/Steal a Brainrot/Base Skins/tralalero-base.png"
+      }
+    }
+  ]
+}

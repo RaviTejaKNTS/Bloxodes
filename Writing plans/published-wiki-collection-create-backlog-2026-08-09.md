@@ -528,8 +528,8 @@ Evidence: [full report](../tmp/game-collection-suggestions/slime-rng.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/steal-a-brainrot.md)
 
-- [ ] Base Skins
-- [ ] Recipes
+- [x] Base Skins
+- [x] Recipes
 
 ### Storage Hunters: Open World
 
