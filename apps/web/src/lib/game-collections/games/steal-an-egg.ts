@@ -6,5 +6,8 @@ export const stealAnEggCollectionGroup = {
   universeId: 10563114921,
   dataDir: "Steal an Egg",
   universeNames: ["Steal an egg", "Steal An Egg"],
-  collections: ["biomes"]
+  collections: [
+    "biomes",
+    "pets"
+  ]
 } satisfies GameCollectionGroup;

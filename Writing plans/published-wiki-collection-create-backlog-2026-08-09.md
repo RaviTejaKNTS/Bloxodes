@@ -639,6 +639,7 @@ New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs
 ### Steal an egg (10563114921)
 
 - [x] Biomes
+- [x] Pets - prepared and verified in managed development from Beebom's all-eggs-and-pets roster; not published
 
 ### Grow a Chicken Fighter (10338952197)
 
