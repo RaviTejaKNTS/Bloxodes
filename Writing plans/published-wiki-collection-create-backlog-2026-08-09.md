@@ -417,7 +417,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/kick-a-lucky-block.md
 
 Evidence: [full report](../tmp/game-collection-suggestions/lifetogether-rp.md)
 
-- [ ] Locations
+- [ ] Locations — blocked 2026-08-20: no verifiable location roster; the fan wiki has 6 stub pages against 20+ in-game locations, and lifetogetherrp.com self-declares its map unverified
 
 ### Merge a Nuke
 
