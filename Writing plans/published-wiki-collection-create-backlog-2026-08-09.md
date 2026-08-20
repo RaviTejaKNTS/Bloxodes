@@ -539,12 +539,12 @@ Evidence: [full report](../tmp/game-collection-suggestions/steal-a-brainrot.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/storage-hunters-open-world.md)
 
-- [ ] Auction Items
-- [ ] Mutations
-- [ ] Lost Items
-- [ ] Vehicles
-- [ ] Fishing Items
-- [ ] Quests
+- [x] Auction Items
+- [x] Mutations
+- [x] Lost Items
+- [x] Vehicles
+- [x] Fishing Items
+- [ ] Quests — blocked 2026-08-20: Category:Quests has a single page; no quest roster exists
 
 ### Survive Zombie Arena
 

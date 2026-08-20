@@ -1,0 +1,465 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Storage Hunters: Open World",
+    "gameSlug": "storage-hunters-open-world",
+    "collection": "lost-items",
+    "route": "/wiki/storage-hunters-open-world/lost-items",
+    "catalogCode": "storage-hunters-open-world-lost-items",
+    "itemFields": [
+      "value",
+      "rarity",
+      "area"
+    ],
+    "columns": [
+      "value",
+      "rarity",
+      "area"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Lost Items"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "value",
+      "cardDescriptionField": "value",
+      "cardFields": [
+        "value",
+        "rarity",
+        "area"
+      ],
+      "tableFields": [
+        "value",
+        "rarity",
+        "area"
+      ],
+      "fieldPresentation": {
+        "value": {
+          "kind": "chip",
+          "label": "Value",
+          "omitWhenEmpty": true
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity",
+          "omitWhenEmpty": true
+        },
+        "area": {
+          "kind": "plain",
+          "label": "Area",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Book",
+        "value": "$6.30",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "book",
+        "section": "Lost Items",
+        "sortOrder": 1,
+        "image": "/Storage Hunters Open World/Lost Items/book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Key",
+        "value": "$0.38",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "key",
+        "section": "Lost Items",
+        "sortOrder": 2,
+        "image": "/Storage Hunters Open World/Lost Items/key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bluetooth Speaker",
+        "value": "$4.62",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "bluetooth-speaker",
+        "section": "Lost Items",
+        "sortOrder": 3,
+        "image": "/Storage Hunters Open World/Lost Items/bluetooth-speaker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Camera",
+        "value": "$5.77",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "camera",
+        "section": "Lost Items",
+        "sortOrder": 4,
+        "image": "/Storage Hunters Open World/Lost Items/camera.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Phone",
+        "value": "$7.69",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "classic-phone",
+        "section": "Lost Items",
+        "sortOrder": 5,
+        "image": "/Storage Hunters Open World/Lost Items/classic-phone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jade Bracelet",
+        "value": "$7.69",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "jade-bracelet",
+        "section": "Lost Items",
+        "sortOrder": 6,
+        "image": "/Storage Hunters Open World/Lost Items/jade-bracelet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leather Back Pack",
+        "value": "$6.92",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "leather-back-pack",
+        "section": "Lost Items",
+        "sortOrder": 7,
+        "image": "/Storage Hunters Open World/Lost Items/leather-back-pack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marble Vase",
+        "value": "$11.54",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "marble-vase",
+        "section": "Lost Items",
+        "sortOrder": 8,
+        "image": "/Storage Hunters Open World/Lost Items/marble-vase.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Painting",
+        "value": "$5.77",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "painting",
+        "section": "Lost Items",
+        "sortOrder": 9,
+        "image": "/Storage Hunters Open World/Lost Items/painting.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Professional Camera",
+        "value": "$55.77",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "professional-camera",
+        "section": "Lost Items",
+        "sortOrder": 10,
+        "image": "/Storage Hunters Open World/Lost Items/professional-camera.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Lamp",
+        "value": "$9.62",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "lava-lamp",
+        "section": "Lost Items",
+        "sortOrder": 11,
+        "image": "/Storage Hunters Open World/Lost Items/lava-lamp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Suitcase",
+        "value": "$4.62",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "suitcase",
+        "section": "Lost Items",
+        "sortOrder": 12,
+        "image": "/Storage Hunters Open World/Lost Items/suitcase.png"
+      }
+    },
+    {
+      "item": {
+        "name": "LED Flashlight",
+        "value": "$3.84",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "led-flashlight",
+        "section": "Lost Items",
+        "sortOrder": 13,
+        "image": "/Storage Hunters Open World/Lost Items/led-flashlight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Acoustic Guitar",
+        "value": "$34.61",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "acoustic-guitar",
+        "section": "Lost Items",
+        "sortOrder": 14,
+        "image": "/Storage Hunters Open World/Lost Items/acoustic-guitar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Circular Saw",
+        "value": "$21.15",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "circular-saw",
+        "section": "Lost Items",
+        "sortOrder": 15,
+        "image": "/Storage Hunters Open World/Lost Items/circular-saw.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flip Cellphone",
+        "value": "$5.77",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "flip-cellphone",
+        "section": "Lost Items",
+        "sortOrder": 16,
+        "image": "/Storage Hunters Open World/Lost Items/flip-cellphone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Typewriter",
+        "value": "$19.23",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "typewriter",
+        "section": "Lost Items",
+        "sortOrder": 17,
+        "image": "/Storage Hunters Open World/Lost Items/typewriter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Digital Alarm Clock",
+        "value": "$3.83",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "digital-alarm-clock",
+        "section": "Lost Items",
+        "sortOrder": 18,
+        "image": "/Storage Hunters Open World/Lost Items/digital-alarm-clock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bonsai",
+        "value": "$17.31",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "bonsai",
+        "section": "Lost Items",
+        "sortOrder": 19,
+        "image": "/Storage Hunters Open World/Lost Items/bonsai.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Watering Can",
+        "value": "$7.69",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "watering-can",
+        "section": "Lost Items",
+        "sortOrder": 20,
+        "image": "/Storage Hunters Open World/Lost Items/watering-can.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cow Milker",
+        "value": "$42.31",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "cow-milker",
+        "section": "Lost Items",
+        "sortOrder": 21,
+        "image": "/Storage Hunters Open World/Lost Items/cow-milker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Butter Churn",
+        "value": "$30.77",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "butter-churn",
+        "section": "Lost Items",
+        "sortOrder": 22,
+        "image": "/Storage Hunters Open World/Lost Items/butter-churn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Branding Iron",
+        "value": "$23.08",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "branding-iron",
+        "section": "Lost Items",
+        "sortOrder": 23,
+        "image": "/Storage Hunters Open World/Lost Items/branding-iron.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scythe",
+        "value": "$28.85",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "scythe",
+        "section": "Lost Items",
+        "sortOrder": 24,
+        "image": "/Storage Hunters Open World/Lost Items/scythe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cow Bell",
+        "value": "$6.92",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "cow-bell",
+        "section": "Lost Items",
+        "sortOrder": 25,
+        "image": "/Storage Hunters Open World/Lost Items/cow-bell.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beehive",
+        "value": "$42.31",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "beehive",
+        "section": "Lost Items",
+        "sortOrder": 26,
+        "image": "/Storage Hunters Open World/Lost Items/beehive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Saddle",
+        "value": "$100",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "saddle",
+        "section": "Lost Items",
+        "sortOrder": 27,
+        "image": "/Storage Hunters Open World/Lost Items/saddle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Horseshoe",
+        "value": "$5.38",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "horseshoe",
+        "section": "Lost Items",
+        "sortOrder": 28,
+        "image": "/Storage Hunters Open World/Lost Items/horseshoe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Needle",
+        "value": "$0.25",
+        "rarity": "Lost",
+        "area": "All Areas"
+      },
+      "system": {
+        "slug": "needle",
+        "section": "Lost Items",
+        "sortOrder": 29,
+        "image": "/Storage Hunters Open World/Lost Items/needle.png"
+      }
+    }
+  ]
+}

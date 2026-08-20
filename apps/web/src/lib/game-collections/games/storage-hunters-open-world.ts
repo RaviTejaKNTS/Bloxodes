@@ -11,6 +11,11 @@ export const storageHuntersOpenWorldCollectionGroup = {
     "shop-upgrades",
     "titles",
     "achievements",
-    "auction-zones"
+    "auction-zones",
+    "auction-items",
+    "lost-items",
+    "fishing-items",
+    "mutations",
+    "vehicles"
   ]
 } satisfies GameCollectionGroup;
