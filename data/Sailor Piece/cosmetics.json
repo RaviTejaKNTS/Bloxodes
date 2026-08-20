@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "cosmetics",
+    "route": "/wiki/sailor-piece/cosmetics",
+    "catalogCode": "sailor-piece-cosmetics",
+    "itemFields": [
+      "summary",
+      "stats",
+      "rarity",
+      "howToGet"
+    ],
+    "columns": [
+      "summary",
+      "stats",
+      "rarity",
+      "howToGet"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Cosmetics"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "stats",
+        "rarity",
+        "howToGet"
+      ],
+      "tableFields": [
+        "stats",
+        "rarity"
+      ],
+      "fieldPresentation": {
+        "stats": {
+          "kind": "highlight",
+          "label": "Stats",
+          "omitWhenEmpty": true
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity",
+          "omitWhenEmpty": true
+        },
+        "howToGet": {
+          "kind": "plain",
+          "label": "How to get",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Avenger Belt",
+        "summary": null,
+        "stats": "+5% Damage; +7.5% HP",
+        "rarity": "Common",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "avenger-belt",
+        "section": "Cosmetics",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thunder Cape",
+        "summary": null,
+        "stats": "+7.5% Damage; +10% HP",
+        "rarity": "Uncommon",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "thunder-cape",
+        "section": "Cosmetics",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Helmet",
+        "summary": null,
+        "stats": "+10% Damage; +12.5% HP",
+        "rarity": "Rare",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "crimson-helmet",
+        "section": "Cosmetics",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Eyepatch",
+        "summary": null,
+        "stats": "+12.5% Damage; +15% HP",
+        "rarity": "Epic",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "dark-eyepatch",
+        "section": "Cosmetics",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scarlet Reaper",
+        "summary": null,
+        "stats": "+12.5% Damage; +15% HP",
+        "rarity": "Epic",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "scarlet-reaper",
+        "section": "Cosmetics",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slime Mask",
+        "summary": null,
+        "stats": "+12.5% Damage; +15% HP",
+        "rarity": "Epic",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "slime-mask",
+        "section": "Cosmetics",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Commander Cape",
+        "summary": null,
+        "stats": "+15% Damage; +20% HP",
+        "rarity": "Legendary",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "commander-cape",
+        "section": "Cosmetics",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupted Wings",
+        "summary": null,
+        "stats": "+15% Damage; +20% HP",
+        "rarity": "Legendary",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "corrupted-wings",
+        "section": "Cosmetics",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heavenly Halo",
+        "summary": null,
+        "stats": "+15% Damage; +20% HP",
+        "rarity": "Legendary",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "heavenly-halo",
+        "section": "Cosmetics",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Royal Cape",
+        "summary": null,
+        "stats": "+15% Damage; +20% HP",
+        "rarity": "Legendary",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "royal-cape",
+        "section": "Cosmetics",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wandering Hat",
+        "summary": null,
+        "stats": "+15% Damage; +20% HP",
+        "rarity": "Legendary",
+        "howToGet": "Cosmetic Crate"
+      },
+      "system": {
+        "slug": "wandering-hat",
+        "section": "Cosmetics",
+        "sortOrder": 10,
+        "image": null
+      }
+    }
+  ]
+}

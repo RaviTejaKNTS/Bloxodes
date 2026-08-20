@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "ascensions",
+    "route": "/wiki/sailor-piece/ascensions",
+    "catalogCode": "sailor-piece-ascensions",
+    "itemFields": [
+      "summary",
+      "requirements",
+      "buffs"
+    ],
+    "columns": [
+      "summary",
+      "requirements",
+      "buffs"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Ascension Levels"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "buffs",
+        "requirements"
+      ],
+      "tableFields": [
+        "buffs"
+      ],
+      "fieldPresentation": {
+        "buffs": {
+          "kind": "highlight",
+          "label": "Buffs",
+          "omitWhenEmpty": true
+        },
+        "requirements": {
+          "kind": "detail",
+          "label": "Requirements",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ascension I",
+        "summary": null,
+        "requirements": "Reach Level 2500; Kill 125 NPCs; Kill 10 Bosses in Sailor Piece; Deal 10M Damage",
+        "buffs": "+10% Money, +10% Gems, +2% CDR, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-i",
+        "section": "Ascension Levels",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension II",
+        "summary": null,
+        "requirements": "Reach Level 5000; Kill 400 NPCs; Kill 25 Bosses; Deal 50M Damage; Abilities 150 times; 5 Void Fragment; 2 Limitless Ring",
+        "buffs": "+10% Money, +10% Gems, +2% CDR, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-ii",
+        "section": "Ascension Levels",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension III",
+        "summary": null,
+        "requirements": "Reach Level 6000; Kill 500 NPCs; Kill 50 Bosses; Use Abilities 500 times; Deal 250M Damage; Clear Shadow Dungeon (Easy) 10 times; 7 Dismantle Fang; 5 Dark Ring",
+        "buffs": "+10% Money, +10% Gems, +2% CDR, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-iii",
+        "section": "Ascension Levels",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension IV",
+        "summary": null,
+        "requirements": "Reach Level 7000; Kill 625 NPCs; Kill 50 Bosses; Use Abilities 500 times; Deal 1B Damage; Clear Shadow Dungeon (Medium) 10 times; 4 Reiatsu Core; 1 Blood Ring",
+        "buffs": "+10% Money, +10% Gems, +2% CDR, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-iv",
+        "section": "Ascension Levels",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension V",
+        "summary": null,
+        "requirements": "Reach Level 8000; Kill 750 NPCs; Kill 150 Bosses; Use Abilities 750 times; Deal 5B Damage; Clear Shadow Dungeon (Hard) 10 times; 2 Hog Fragment; 2 Atomic Core",
+        "buffs": "+10% Money, +10% Gems, +2% CDR, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-v",
+        "section": "Ascension Levels",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension VI",
+        "summary": null,
+        "requirements": "Reach Level 8500; Kill 850 NPCs; Kill 250 Bosses; Deal 20B Damage; Use Abilities 850 times; Clear Rune Dungeon (Medium) 10 times; Clear Shadow Dungeon (Medium) 5 times; 3 Blood Ring; 3 Soul Flame",
+        "buffs": "+10% Money, +10% Gems, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-vi",
+        "section": "Ascension Levels",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension VII",
+        "summary": null,
+        "requirements": "Reach Level 9000; Kill 1000 NPCs; Kill 350 Bosses; Deal 75B Damage; Use Abilities 1000 times; Clear Rune Dungeon (Hard) 10 times; Clear Shadow Dungeon (Hard) 10 times; 2 Cursed Flesh; 2 Infinity Essence",
+        "buffs": "+10% Money, +10% Gems, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-vii",
+        "section": "Ascension Levels",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension VIII",
+        "summary": null,
+        "requirements": "Reach Level 10000; Kill 1250 NPCs; Kill 500 Bosses; Deal 350B Damage; Use Abilities 1200 times; Clear Rune Dungeon (Hard) 10 times; Clear Shadow Dungeon (Hard) 10 times; 2 Phantasm Core; 3 Slime Core",
+        "buffs": "+10% Money, +10% Gems, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-viii",
+        "section": "Ascension Levels",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension IX",
+        "summary": null,
+        "requirements": "Reach Level 11500; Kill 1500 NPCs; Kill 700 Bosses; Deal 1000B Damage; Use Abilities 1500 times; Clear Rune Dungeon (Hard) 10 times; Clear Shadow Dungeon (Hard) 10 times; 2 Azure Heart; 2 Evolution Fragment; Clear 15 Medium+ Boss Rush",
+        "buffs": "+10% Money, +10% Gems, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-ix",
+        "section": "Ascension Levels",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascension X",
+        "summary": null,
+        "requirements": "Reach Level 13000; Kill 2000 NPCs; Kill 1000 Bosses; Deal 7500B Damage; Use Abilities 2000 times; Clear Rune Dungeon (Hard) 10 times; Clear Shadow Dungeon (Hard) 10 times; 2 Path Fragment; 3 Corrupt Crown; Reach Floor 75+ two times in Infinite Tower",
+        "buffs": "+10% Money, +10% Gems, +2% CDR, +5% Luck"
+      },
+      "system": {
+        "slug": "ascension-x",
+        "section": "Ascension Levels",
+        "sortOrder": 9,
+        "image": null
+      }
+    }
+  ]
+}

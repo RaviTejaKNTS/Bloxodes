@@ -1,0 +1,668 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "npcs",
+    "route": "/wiki/sailor-piece/npcs",
+    "catalogCode": "sailor-piece-npcs",
+    "itemFields": [
+      "summary",
+      "location",
+      "role"
+    ],
+    "columns": [
+      "summary",
+      "location",
+      "role"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "NPCs"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "role",
+        "location"
+      ],
+      "tableFields": [
+        "role",
+        "location"
+      ],
+      "fieldPresentation": {
+        "role": {
+          "kind": "highlight",
+          "label": "What they do",
+          "omitWhenEmpty": true
+        },
+        "location": {
+          "kind": "plain",
+          "label": "Location",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Artifacts Master",
+        "summary": null,
+        "location": "Snow Island and World Island Sea 2",
+        "role": "Obtain Artifacts"
+      },
+      "system": {
+        "slug": "artifacts-master",
+        "section": "NPCs",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Artifacts Milestones",
+        "summary": null,
+        "location": "Snow Island and World Island Sea 2",
+        "role": "Upgrades Artifacts Milestone"
+      },
+      "system": {
+        "slug": "artifacts-milestones",
+        "section": "NPCs",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascend Master",
+        "summary": null,
+        "location": "Sailor Island and World Island Sea 2",
+        "role": "Upgrading Ascensions"
+      },
+      "system": {
+        "slug": "ascend-master",
+        "section": "NPCs",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blessed Maiden Seller",
+        "summary": null,
+        "location": "Boss Island",
+        "role": "Sell the Blessed Maiden"
+      },
+      "system": {
+        "slug": "blessed-maiden-seller",
+        "section": "NPCs",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Exchanger",
+        "summary": null,
+        "location": "Boss Island",
+        "role": "Sells Melee or Sword"
+      },
+      "system": {
+        "slug": "boss-exchanger",
+        "section": "NPCs",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Dungeon",
+        "summary": null,
+        "location": "Dungeon Island",
+        "role": "Summon Dungeon Portal"
+      },
+      "system": {
+        "slug": "cid-dungeon",
+        "section": "NPCs",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Fruit Dealer",
+        "summary": null,
+        "location": "Sailor Island",
+        "role": "Sells Fruit"
+      },
+      "system": {
+        "slug": "coin-fruit-dealer",
+        "section": "NPCs",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmic Being Seller",
+        "summary": null,
+        "location": "Punch Island",
+        "role": "Sells Cosmic Being melee."
+      },
+      "system": {
+        "slug": "cosmic-being-seller",
+        "section": "NPCs",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Curse King Trainer",
+        "summary": null,
+        "location": "Shibuya Station",
+        "role": "Obtain Curse King melee"
+      },
+      "system": {
+        "slug": "curse-king-trainer",
+        "section": "NPCs",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Vessel Seller",
+        "summary": null,
+        "location": "Shibuya Station",
+        "role": "Sells Cursed Vessel (Melee)"
+      },
+      "system": {
+        "slug": "cursed-vessel-seller",
+        "section": "NPCs",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Blade Seller",
+        "summary": null,
+        "location": "Snow Island",
+        "role": "Sell Dark Blade (Sword)"
+      },
+      "system": {
+        "slug": "dark-blade-seller",
+        "section": "NPCs",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Defense Merchant",
+        "summary": null,
+        "location": "Punch Island",
+        "role": null
+      },
+      "system": {
+        "slug": "defense-merchant",
+        "section": "NPCs",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Demon King Seller",
+        "summary": null,
+        "location": null,
+        "role": null
+      },
+      "system": {
+        "slug": "demon-king-seller",
+        "section": "NPCs",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dungeon Master",
+        "summary": null,
+        "location": "Dungeon Island",
+        "role": "Summon Dungeon Portal"
+      },
+      "system": {
+        "slug": "dungeon-master",
+        "section": "NPCs",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dungeon Merchant",
+        "summary": null,
+        "location": "Dungeon Island",
+        "role": "Sell Items"
+      },
+      "system": {
+        "slug": "dungeon-merchant",
+        "section": "NPCs",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Empyrean Trainer",
+        "summary": null,
+        "location": "Blue Planet",
+        "role": "Obtain Spirit Warrior melee"
+      },
+      "system": {
+        "slug": "empyrean-trainer",
+        "section": "NPCs",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Enchanter",
+        "summary": null,
+        "location": "Shibuya Station and World Island Sea 2",
+        "role": "Upgrading Accessories"
+      },
+      "system": {
+        "slug": "enchanter",
+        "section": "NPCs",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gem Fruit Dealer",
+        "summary": null,
+        "location": "Sailor Island",
+        "role": "Purchasing Fruits"
+      },
+      "system": {
+        "slug": "gem-fruit-dealer",
+        "section": "NPCs",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gryphon Seller",
+        "summary": null,
+        "location": "Shibuya Station",
+        "role": "Sells Gryphon Sword"
+      },
+      "system": {
+        "slug": "gryphon-seller",
+        "section": "NPCs",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Haki Trainer",
+        "summary": null,
+        "location": "Snow Island",
+        "role": "Unlocking Haki"
+      },
+      "system": {
+        "slug": "haki-trainer",
+        "section": "NPCs",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Infinite Tower Portal",
+        "summary": null,
+        "location": "Tower Island",
+        "role": "Spawning Infinite Tower Portal"
+      },
+      "system": {
+        "slug": "infinite-tower-npc",
+        "section": "NPCs",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Katana Seller",
+        "summary": null,
+        "location": "Starter Island",
+        "role": "Sell Katana"
+      },
+      "system": {
+        "slug": "katana-seller",
+        "section": "NPCs",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "King Of Heroes Seller",
+        "summary": null,
+        "location": "Boss Island",
+        "role": "Obtaining King Of Heroes"
+      },
+      "system": {
+        "slug": "king-of-heroes-seller",
+        "section": "NPCs",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Limitless Sorcerer Trainer",
+        "summary": null,
+        "location": "Shibuya Station",
+        "role": "Obtain Limitless Sorcerer melee"
+      },
+      "system": {
+        "slug": "limitless-sorcerer-trainer",
+        "section": "NPCs",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Manipulator Trainer",
+        "summary": null,
+        "location": "Hollow Island",
+        "role": "To unlock Manipulator Sword"
+      },
+      "system": {
+        "slug": "manipulator-trainer",
+        "section": "NPCs",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Merchant",
+        "summary": null,
+        "location": "Sailor Island and World Island Sea 2",
+        "role": "Purchasing Items"
+      },
+      "system": {
+        "slug": "merchant",
+        "section": "NPCs",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Moon Slayer Seller",
+        "summary": null,
+        "location": "Boss Island",
+        "role": "Sells the Moon Slayer melee."
+      },
+      "system": {
+        "slug": "moon-slayer-seller",
+        "section": "NPCs",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Observation Master",
+        "summary": null,
+        "location": "Desert Island",
+        "role": "Unlock Observation Haki"
+      },
+      "system": {
+        "slug": "observation-master",
+        "section": "NPCs",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Passive Master",
+        "summary": null,
+        "location": "Judgement Island and World Island Sea 2",
+        "role": "Obtain Passives"
+      },
+      "system": {
+        "slug": "passive-master",
+        "section": "NPCs",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Power Master",
+        "summary": null,
+        "location": "Lawless Island and World Island Sea 2",
+        "role": "Obtain Powers"
+      },
+      "system": {
+        "slug": "power-master",
+        "section": "NPCs",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Qin Shi Seller",
+        "summary": null,
+        "location": "Boss Island",
+        "role": "Sell The Qin Shi"
+      },
+      "system": {
+        "slug": "qin-shi-seller",
+        "section": "NPCs",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skill Master",
+        "summary": null,
+        "location": "Slime Island and World Island Sea 2",
+        "role": "Upgrading Skills"
+      },
+      "system": {
+        "slug": "skill-master",
+        "section": "NPCs",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slime Seller",
+        "summary": null,
+        "location": "Slime Island",
+        "role": "Purchasing Slime Sword"
+      },
+      "system": {
+        "slug": "slime-seller",
+        "section": "NPCs",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slime Trainer",
+        "summary": null,
+        "location": "Slime Island",
+        "role": "Purchasing Slime Sword"
+      },
+      "system": {
+        "slug": "slime-trainer-npc",
+        "section": "NPCs",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Solo Hunter Trainer",
+        "summary": null,
+        "location": "Sailor Island",
+        "role": "Obtain Solo Hunter sword"
+      },
+      "system": {
+        "slug": "solo-hunter-trainer",
+        "section": "NPCs",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Soul Reaper Seller",
+        "summary": null,
+        "location": "Hollow Island",
+        "role": "Sells Soul Reaper Fighting Style"
+      },
+      "system": {
+        "slug": "soul-reaper-seller",
+        "section": "NPCs",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stat Master",
+        "summary": null,
+        "location": "Sailor Island and World Island Sea 2",
+        "role": "Rerolling Stats"
+      },
+      "system": {
+        "slug": "stat-master",
+        "section": "NPCs",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Storage Keeper",
+        "summary": null,
+        "location": "Sailor Island and World Island Sea 2",
+        "role": "Store Things"
+      },
+      "system": {
+        "slug": "storage-keeper",
+        "section": "NPCs",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strongest In History Seller",
+        "summary": null,
+        "location": "Shinjuku Island",
+        "role": "Purchasing Strongest In History Melee"
+      },
+      "system": {
+        "slug": "strongest-in-history-seller",
+        "section": "NPCs",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strongest Of Today Seller",
+        "summary": null,
+        "location": "Shinjuku Island",
+        "role": "Purchasing Strongest Of Today Melee"
+      },
+      "system": {
+        "slug": "strongest-of-today-seller",
+        "section": "NPCs",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sun God Seller",
+        "summary": null,
+        "location": "Slayer Island",
+        "role": "Sell Sun God Sword"
+      },
+      "system": {
+        "slug": "sun-god-seller",
+        "section": "NPCs",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The World Seller",
+        "summary": null,
+        "location": "Bizarre Island",
+        "role": null
+      },
+      "system": {
+        "slug": "the-world-seller",
+        "section": "NPCs",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Trait Master",
+        "summary": null,
+        "location": "Sailor Island and World Island Sea 2",
+        "role": "Obtain Powers"
+      },
+      "system": {
+        "slug": "trait-master",
+        "section": "NPCs",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire King Seller",
+        "summary": null,
+        "location": "Sailor Island",
+        "role": "Sell Vampire King Melee"
+      },
+      "system": {
+        "slug": "vampire-king-seller",
+        "section": "NPCs",
+        "sortOrder": 43,
+        "image": null
+      }
+    }
+  ]
+}

@@ -500,18 +500,18 @@ Evidence: [full report](../tmp/game-collection-suggestions/rivals.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/sailor-piece.md)
 
-- [ ] Materials
-- [ ] Artifacts
-- [ ] Auras
-- [ ] Cosmetics
-- [ ] Ascensions
-- [ ] Skill Tree
-- [ ] Spec Passives
-- [ ] Powers
-- [ ] Blessings
-- [ ] Accessory Enchantments
-- [ ] Mastery Milestones
-- [ ] NPCs
+- [x] Materials
+- [x] Artifacts
+- [x] Auras
+- [x] Cosmetics
+- [x] Ascensions
+- [ ] Skill Tree — blocked 2026-08-20: the fandom Skill Tree page is an empty stub
+- [x] Spec Passives
+- [x] Powers
+- [ ] Blessings — blocked 2026-08-20: no blessings page or roster exists on the fandom
+- [ ] Accessory Enchantments — blocked 2026-08-20: no enchant-level roster; the accessory roster itself is already the published accessories collection
+- [ ] Mastery Milestones — blocked 2026-08-20: the Mastery page reads TBA; only 3 per-weapon move-mastery stubs exist
+- [x] NPCs
 
 ### Sell Lemons
 

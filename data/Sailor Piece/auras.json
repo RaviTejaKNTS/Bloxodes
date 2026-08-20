@@ -1,0 +1,533 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "auras",
+    "route": "/wiki/sailor-piece/auras",
+    "catalogCode": "sailor-piece-auras",
+    "itemFields": [
+      "summary",
+      "stats",
+      "rarity",
+      "howToGet",
+      "availability"
+    ],
+    "columns": [
+      "summary",
+      "stats",
+      "rarity",
+      "howToGet",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Auras"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "stats",
+        "rarity",
+        "howToGet",
+        "availability"
+      ],
+      "tableFields": [
+        "stats",
+        "rarity",
+        "howToGet"
+      ],
+      "fieldPresentation": {
+        "stats": {
+          "kind": "highlight",
+          "label": "Stats",
+          "omitWhenEmpty": true
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity",
+          "omitWhenEmpty": true
+        },
+        "howToGet": {
+          "kind": "plain",
+          "label": "How to get",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "plain",
+          "label": "Obtainable",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Alter",
+        "summary": null,
+        "stats": "+5% Damage",
+        "rarity": "Common",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "alter",
+        "section": "Auras",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Petal",
+        "summary": null,
+        "stats": "+7.5% Damage",
+        "rarity": "Uncommon",
+        "howToGet": "Easter Bunny Quest",
+        "availability": "No (Seasonal)"
+      },
+      "system": {
+        "slug": "petal",
+        "section": "Auras",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rose",
+        "summary": null,
+        "stats": "+7.5% Damage",
+        "rarity": "Uncommon",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "rose",
+        "section": "Auras",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gambler",
+        "summary": null,
+        "stats": "+10% Damage",
+        "rarity": "Rare",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "gambler",
+        "section": "Auras",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Flare",
+        "summary": null,
+        "stats": "+10% Damage",
+        "rarity": "Rare",
+        "howToGet": "Tower Shop",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "purple-flare",
+        "section": "Auras",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Singer",
+        "summary": null,
+        "stats": "+10% Damage",
+        "rarity": "Rare",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "singer",
+        "section": "Auras",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine",
+        "summary": null,
+        "stats": "+10% Damage",
+        "rarity": "Rare",
+        "howToGet": "Valentine Merchant",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "valentine",
+        "section": "Auras",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Commander",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "commander",
+        "section": "Auras",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupted",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "corrupted",
+        "section": "Auras",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "crimson",
+        "section": "Auras",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Destroyer",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Defense Merchant",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "destroyer",
+        "section": "Auras",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glacier",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "glacier",
+        "section": "Auras",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Psycho",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "psycho",
+        "section": "Auras",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sacred Bloom",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Easter Merchant",
+        "availability": "No (Seasonal)"
+      },
+      "system": {
+        "slug": "sacred-bloom",
+        "section": "Auras",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tempest",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "tempest",
+        "section": "Auras",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ultra Instinct",
+        "summary": null,
+        "stats": "+12.5% Damage",
+        "rarity": "Epic",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "ultra-instinct",
+        "section": "Auras",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Angel",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "angel",
+        "section": "Auras",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Dropped by Minotaur raid boss, or exchanged from Raid Shop",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "celestial",
+        "section": "Auras",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupted Angel",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "corrupted-angel",
+        "section": "Auras",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crescent",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "crescent",
+        "section": "Auras",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Demonic",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "demonic",
+        "section": "Auras",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fallen",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "fallen",
+        "section": "Auras",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghoul",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Dropped by Black Reaper boss",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "ghoul",
+        "section": "Auras",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glitch",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "glitch",
+        "section": "Auras",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hellfire",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "hellfire",
+        "section": "Auras",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Monster",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "monster",
+        "section": "Auras",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Saiyan",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "saiyan",
+        "section": "Auras",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sun",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "sun",
+        "section": "Auras",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Winged",
+        "summary": null,
+        "stats": "+15% Damage",
+        "rarity": "Legendary",
+        "howToGet": "Aura Crate",
+        "availability": "Yes"
+      },
+      "system": {
+        "slug": "winged",
+        "section": "Auras",
+        "sortOrder": 28,
+        "image": null
+      }
+    }
+  ]
+}
