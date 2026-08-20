@@ -230,9 +230,9 @@ Evidence: [full report](../tmp/game-collection-suggestions/build-a-ring-farm.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/catch-a-brainrot.md)
 
-- [ ] Locations
-- [ ] Items
-- [ ] Rarities
+- [ ] Locations — blocked 2026-08-20: only 3 durable locations on the fandom (Home, Rot Center, Rot Lab); the rest are seasonal snow zones and shop pages; below roster floor
+- [ ] Items — blocked 2026-08-20: fandom item pages are half-empty stubs; after excluding boxes (covered by rotboxes) and seasonal snow/ice items, only 3-4 rows carry real fields
+- [ ] Rarities — blocked 2026-08-20: no rarity roster source exists, and rarity tiers already structure the published brainrots collection
 
 ### Catch and Tame
 
