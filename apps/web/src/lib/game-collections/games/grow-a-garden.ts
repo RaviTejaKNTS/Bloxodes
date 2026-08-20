@@ -260,8 +260,7 @@ export const GROW_GARDEN_COLLECTIONS: GrowGardenCollectionConfig[] = [
     hideImages: false,
     stats: [],
     maxStats: 0
-  }
-,
+  },
   {
     slug: "cosmetics",
     label: "Cosmetics",
@@ -274,8 +273,16 @@ export const GROW_GARDEN_COLLECTIONS: GrowGardenCollectionConfig[] = [
     descriptionKey: "flavor",
     cardDescriptionKey: "flavor",
     hideImages: false,
-    stats: [{ key: "price", label: "Price" }],
-    maxStats: 1
+    stats: [
+      { key: "price", label: "Price" },
+      { key: "dropChance", label: "Drop chance" }
+    ],
+    maxStats: 2,
+    fieldPresentation: {
+      price: { kind: "chip", label: "Price", omitWhenEmpty: true },
+      dropChance: { kind: "chip", label: "Drop chance", omitWhenEmpty: true },
+      flavor: { kind: "detail", label: "Description", omitWhenEmpty: true }
+    }
   },
   {
     slug: "cosmetic-crates",

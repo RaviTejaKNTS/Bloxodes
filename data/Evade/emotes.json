@@ -1010,19 +1010,6 @@
     },
     {
       "item": {
-        "name": "{{GoldText|<small>Limited-time In Daily shop</small>}}",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "goldtext-small-limited-time-in-daily-shop-small",
-        "section": "Emotes",
-        "sortOrder": 75,
-        "image": null
-      }
-    },
-    {
-      "item": {
         "name": "Gangnam Style",
         "price": "350 Robux",
         "flavor": "Oppa vietnam style. Scoreboard!"
@@ -1030,7 +1017,7 @@
       "system": {
         "slug": "gangnam-style",
         "section": "Emotes",
-        "sortOrder": 76,
+        "sortOrder": 75,
         "image": "/Evade/Emotes/gangnam-style.png"
       }
     },
@@ -1043,7 +1030,7 @@
       "system": {
         "slug": "l-dance",
         "section": "Emotes",
-        "sortOrder": 77,
+        "sortOrder": 76,
         "image": "/Evade/Emotes/l-dance.png"
       }
     },
@@ -1056,7 +1043,7 @@
       "system": {
         "slug": "macarena",
         "section": "Emotes",
-        "sortOrder": 78,
+        "sortOrder": 77,
         "image": "/Evade/Emotes/macarena.png"
       }
     },
@@ -1069,60 +1056,8 @@
       "system": {
         "slug": "griddy",
         "section": "Emotes",
-        "sortOrder": 79,
+        "sortOrder": 78,
         "image": "/Evade/Emotes/griddy.png"
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/1012853945/Emote-Pack Emote Pack]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-1012853945-emote-pack-emote-pack",
-        "section": "Emotes",
-        "sortOrder": 80,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/1012853945/Emote-Pack Emote Pack]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-1012853945-emote-pack-emote-pack-2",
-        "section": "Emotes",
-        "sortOrder": 81,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/1012853945/Emote-Pack Emote Pack]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-1012853945-emote-pack-emote-pack-3",
-        "section": "Emotes",
-        "sortOrder": 82,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/1012853945/Emote-Pack Emote Pack]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-1012853945-emote-pack-emote-pack-4",
-        "section": "Emotes",
-        "sortOrder": 83,
-        "image": null
       }
     },
     {
@@ -1134,21 +1069,8 @@
       "system": {
         "slug": "cat-party",
         "section": "Emotes",
-        "sortOrder": 84,
+        "sortOrder": 79,
         "image": "/Evade/Emotes/cat-party.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Cat Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "cat-set",
-        "section": "Emotes",
-        "sortOrder": 85,
-        "image": null
       }
     },
     {
@@ -1160,21 +1082,8 @@
       "system": {
         "slug": "hovering-crystal",
         "section": "Emotes",
-        "sortOrder": 86,
+        "sortOrder": 80,
         "image": "/Evade/Emotes/hovering-crystal.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Crystalline Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "crystalline-set",
-        "section": "Emotes",
-        "sortOrder": 87,
-        "image": null
       }
     },
     {
@@ -1186,7 +1095,7 @@
       "system": {
         "slug": "tank",
         "section": "Emotes",
-        "sortOrder": 88,
+        "sortOrder": 81,
         "image": "/Evade/Emotes/tank.png"
       }
     },
@@ -1199,34 +1108,8 @@
       "system": {
         "slug": "rocket",
         "section": "Emotes",
-        "sortOrder": 89,
+        "sortOrder": 82,
         "image": "/Evade/Emotes/rocket.png"
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/137578984/Military-Set Military Set]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-137578984-military-set-military-set",
-        "section": "Emotes",
-        "sortOrder": 90,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/137578984/Military-Set Military Set]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-137578984-military-set-military-set-2",
-        "section": "Emotes",
-        "sortOrder": 91,
-        "image": null
       }
     },
     {
@@ -1238,21 +1121,8 @@
       "system": {
         "slug": "march-showcase",
         "section": "Emotes",
-        "sortOrder": 92,
+        "sortOrder": 83,
         "image": "/Evade/Emotes/march-showcase.png"
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/150235413/St-Patricks-Day-Set St Patricks Day Set]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-150235413-st-patricks-day-set-st-patric",
-        "section": "Emotes",
-        "sortOrder": 93,
-        "image": null
       }
     },
     {
@@ -1264,7 +1134,7 @@
       "system": {
         "slug": "skateboard-stroll",
         "section": "Emotes",
-        "sortOrder": 94,
+        "sortOrder": 84,
         "image": "/Evade/Emotes/skateboard-stroll.png"
       }
     },
@@ -1277,34 +1147,8 @@
       "system": {
         "slug": "classic-jeep",
         "section": "Emotes",
-        "sortOrder": 95,
+        "sortOrder": 85,
         "image": "/Evade/Emotes/classic-jeep.png"
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/1128324493/Classic-Roblox-Set Classic Roblox Set]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-1128324493-classic-roblox-set-classic-r",
-        "section": "Emotes",
-        "sortOrder": 96,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "[https://www.roblox.com/game-pass/1128324493/Classic-Roblox-Set Classic Roblox Set]",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-1128324493-classic-roblox-set-classic-r-2",
-        "section": "Emotes",
-        "sortOrder": 97,
-        "image": null
       }
     },
     {
@@ -1316,7 +1160,7 @@
       "system": {
         "slug": "ducky-march",
         "section": "Emotes",
-        "sortOrder": 98,
+        "sortOrder": 86,
         "image": "/Evade/Emotes/ducky-march.png"
       }
     },
@@ -1329,7 +1173,7 @@
       "system": {
         "slug": "sleepybara",
         "section": "Emotes",
-        "sortOrder": 99,
+        "sortOrder": 87,
         "image": "/Evade/Emotes/sleepybara.png"
       }
     },
@@ -1342,47 +1186,8 @@
       "system": {
         "slug": "turtle-hobble",
         "section": "Emotes",
-        "sortOrder": 100,
+        "sortOrder": 88,
         "image": "/Evade/Emotes/turtle-hobble.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Animal Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "animal-set",
-        "section": "Emotes",
-        "sortOrder": 101,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Animal Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "animal-set-2",
-        "section": "Emotes",
-        "sortOrder": 102,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Animal Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "animal-set-3",
-        "section": "Emotes",
-        "sortOrder": 103,
-        "image": null
       }
     },
     {
@@ -1394,7 +1199,7 @@
       "system": {
         "slug": "solar-bike",
         "section": "Emotes",
-        "sortOrder": 104,
+        "sortOrder": 89,
         "image": "/Evade/Emotes/solar-bike.png"
       }
     },
@@ -1407,7 +1212,7 @@
       "system": {
         "slug": "solar-conqueror",
         "section": "Emotes",
-        "sortOrder": 105,
+        "sortOrder": 90,
         "image": "/Evade/Emotes/solar-conqueror.png"
       }
     },
@@ -1420,47 +1225,8 @@
       "system": {
         "slug": "solar-slayer",
         "section": "Emotes",
-        "sortOrder": 106,
+        "sortOrder": 91,
         "image": "/Evade/Emotes/solar-slayer.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Eclipse Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "eclipse-set",
-        "section": "Emotes",
-        "sortOrder": 107,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Eclipse Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "eclipse-set-2",
-        "section": "Emotes",
-        "sortOrder": 108,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Eclipse Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "eclipse-set-3",
-        "section": "Emotes",
-        "sortOrder": 109,
-        "image": null
       }
     },
     {
@@ -1472,7 +1238,7 @@
       "system": {
         "slug": "fresh-flop",
         "section": "Emotes",
-        "sortOrder": 110,
+        "sortOrder": 92,
         "image": "/Evade/Emotes/fresh-flop.png"
       }
     },
@@ -1485,34 +1251,8 @@
       "system": {
         "slug": "dog-party",
         "section": "Emotes",
-        "sortOrder": 111,
+        "sortOrder": 93,
         "image": "/Evade/Emotes/dog-party.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Dog Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "dog-set",
-        "section": "Emotes",
-        "sortOrder": 112,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Dog Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "dog-set-2",
-        "section": "Emotes",
-        "sortOrder": 113,
-        "image": null
       }
     },
     {
@@ -1524,21 +1264,8 @@
       "system": {
         "slug": "flying-fish",
         "section": "Emotes",
-        "sortOrder": 114,
+        "sortOrder": 94,
         "image": "/Evade/Emotes/flying-fish.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Lunar New Year Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "lunar-new-year-set",
-        "section": "Emotes",
-        "sortOrder": 115,
-        "image": null
       }
     },
     {
@@ -1550,7 +1277,7 @@
       "system": {
         "slug": "caffeinated",
         "section": "Emotes",
-        "sortOrder": 116,
+        "sortOrder": 95,
         "image": "/Evade/Emotes/caffeinated.png"
       }
     },
@@ -1563,7 +1290,7 @@
       "system": {
         "slug": "cat-dance",
         "section": "Emotes",
-        "sortOrder": 117,
+        "sortOrder": 96,
         "image": "/Evade/Emotes/cat-dance.png"
       }
     },
@@ -1576,7 +1303,7 @@
       "system": {
         "slug": "frolic",
         "section": "Emotes",
-        "sortOrder": 118,
+        "sortOrder": 97,
         "image": "/Evade/Emotes/frolic.png"
       }
     },
@@ -1589,60 +1316,8 @@
       "system": {
         "slug": "oiia-oiia",
         "section": "Emotes",
-        "sortOrder": 119,
+        "sortOrder": 98,
         "image": "/Evade/Emotes/oiia-oiia.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-1",
-        "section": "Emotes",
-        "sortOrder": 120,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-1-2",
-        "section": "Emotes",
-        "sortOrder": 121,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-1-3",
-        "section": "Emotes",
-        "sortOrder": 122,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-1-4",
-        "section": "Emotes",
-        "sortOrder": 123,
-        "image": null
       }
     },
     {
@@ -1654,21 +1329,8 @@
       "system": {
         "slug": "wess",
         "section": "Emotes",
-        "sortOrder": 124,
+        "sortOrder": 99,
         "image": "/Evade/Emotes/wess.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-1-5",
-        "section": "Emotes",
-        "sortOrder": 125,
-        "image": null
       }
     },
     {
@@ -1680,7 +1342,7 @@
       "system": {
         "slug": "banana-dance",
         "section": "Emotes",
-        "sortOrder": 126,
+        "sortOrder": 100,
         "image": "/Evade/Emotes/banana-dance.png"
       }
     },
@@ -1693,7 +1355,7 @@
       "system": {
         "slug": "crab-dance",
         "section": "Emotes",
-        "sortOrder": 127,
+        "sortOrder": 101,
         "image": "/Evade/Emotes/crab-dance.png"
       }
     },
@@ -1706,7 +1368,7 @@
       "system": {
         "slug": "hit-the-jackpot",
         "section": "Emotes",
-        "sortOrder": 128,
+        "sortOrder": 102,
         "image": "/Evade/Emotes/hit-the-jackpot.png"
       }
     },
@@ -1719,60 +1381,8 @@
       "system": {
         "slug": "cuddle-bear-sit",
         "section": "Emotes",
-        "sortOrder": 129,
+        "sortOrder": 103,
         "image": "/Evade/Emotes/cuddle-bear-sit.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 2",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-2",
-        "section": "Emotes",
-        "sortOrder": 130,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 2",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-2-2",
-        "section": "Emotes",
-        "sortOrder": 131,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 2",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-2-3",
-        "section": "Emotes",
-        "sortOrder": 132,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 2",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-2-4",
-        "section": "Emotes",
-        "sortOrder": 133,
-        "image": null
       }
     },
     {
@@ -1784,21 +1394,8 @@
       "system": {
         "slug": "astro-slide",
         "section": "Emotes",
-        "sortOrder": 134,
+        "sortOrder": 104,
         "image": "/Evade/Emotes/astro-slide.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Music Emotes Pack 2",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-emotes-pack-2-5",
-        "section": "Emotes",
-        "sortOrder": 135,
-        "image": null
       }
     },
     {
@@ -1810,7 +1407,7 @@
       "system": {
         "slug": "queens-appearance",
         "section": "Emotes",
-        "sortOrder": 136,
+        "sortOrder": 105,
         "image": "/Evade/Emotes/queens-appearance.png"
       }
     },
@@ -1823,7 +1420,7 @@
       "system": {
         "slug": "regal-walk",
         "section": "Emotes",
-        "sortOrder": 137,
+        "sortOrder": 106,
         "image": "/Evade/Emotes/regal-walk.png"
       }
     },
@@ -1836,47 +1433,8 @@
       "system": {
         "slug": "winged-royal-sit",
         "section": "Emotes",
-        "sortOrder": 138,
+        "sortOrder": 107,
         "image": "/Evade/Emotes/winged-royal-sit.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Bee Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "bee-set",
-        "section": "Emotes",
-        "sortOrder": 139,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Bee Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "bee-set-2",
-        "section": "Emotes",
-        "sortOrder": 140,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Bee Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "bee-set-3",
-        "section": "Emotes",
-        "sortOrder": 141,
-        "image": null
       }
     },
     {
@@ -1888,7 +1446,7 @@
       "system": {
         "slug": "mounted-seahorse",
         "section": "Emotes",
-        "sortOrder": 142,
+        "sortOrder": 108,
         "image": "/Evade/Emotes/mounted-seahorse.png"
       }
     },
@@ -1901,7 +1459,7 @@
       "system": {
         "slug": "neptunes-trone",
         "section": "Emotes",
-        "sortOrder": 143,
+        "sortOrder": 109,
         "image": "/Evade/Emotes/neptunes-trone.png"
       }
     },
@@ -1914,72 +1472,33 @@
       "system": {
         "slug": "shell-hermit",
         "section": "Emotes",
-        "sortOrder": 144,
+        "sortOrder": 110,
         "image": "/Evade/Emotes/shell-hermit.png"
       }
     },
     {
       "item": {
-        "name": "Poseidon Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "poseidon-set",
-        "section": "Emotes",
-        "sortOrder": 145,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Poseidon Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "poseidon-set-2",
-        "section": "Emotes",
-        "sortOrder": 146,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Poseidon Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "poseidon-set-3",
-        "section": "Emotes",
-        "sortOrder": 147,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "[[Werewolf Howl]]",
+        "name": "Werewolf Howl",
         "price": "30 Tickets",
         "flavor": "Let your inner furry out."
       },
       "system": {
         "slug": "werewolf-howl",
         "section": "Emotes",
-        "sortOrder": 148,
+        "sortOrder": 111,
         "image": "/Evade/Emotes/werewolf-howl.png"
       }
     },
     {
       "item": {
-        "name": "[[Pump It Up]]",
+        "name": "Pump It Up",
         "price": "40 Tickets",
         "flavor": "Do the same dance as that random pumpkin head guy!"
       },
       "system": {
         "slug": "pump-it-up",
         "section": "Emotes",
-        "sortOrder": 149,
+        "sortOrder": 112,
         "image": "/Evade/Emotes/pump-it-up.png"
       }
     },
@@ -1992,7 +1511,7 @@
       "system": {
         "slug": "thriller",
         "section": "Emotes",
-        "sortOrder": 150,
+        "sortOrder": 113,
         "image": "/Evade/Emotes/thriller.png"
       }
     },
@@ -2005,7 +1524,7 @@
       "system": {
         "slug": "broom-of-doom",
         "section": "Emotes",
-        "sortOrder": 151,
+        "sortOrder": 114,
         "image": "/Evade/Emotes/broom-of-doom.png"
       }
     },
@@ -2018,7 +1537,7 @@
       "system": {
         "slug": "fright-funk",
         "section": "Emotes",
-        "sortOrder": 152,
+        "sortOrder": 115,
         "image": "/Evade/Emotes/fright-funk.png"
       }
     },
@@ -2031,7 +1550,7 @@
       "system": {
         "slug": "reanimated",
         "section": "Emotes",
-        "sortOrder": 153,
+        "sortOrder": 116,
         "image": "/Evade/Emotes/reanimated.png"
       }
     },
@@ -2044,7 +1563,7 @@
       "system": {
         "slug": "cyber-broom",
         "section": "Emotes",
-        "sortOrder": 154,
+        "sortOrder": 117,
         "image": "/Evade/Emotes/cyber-broom.png"
       }
     },
@@ -2057,7 +1576,7 @@
       "system": {
         "slug": "ghastly-grimiore",
         "section": "Emotes",
-        "sortOrder": 155,
+        "sortOrder": 118,
         "image": "/Evade/Emotes/ghastly-grimiore.png"
       }
     },
@@ -2070,7 +1589,7 @@
       "system": {
         "slug": "dead-bone-stride",
         "section": "Emotes",
-        "sortOrder": 156,
+        "sortOrder": 119,
         "image": "/Evade/Emotes/dead-bone-stride.png"
       }
     },
@@ -2083,7 +1602,7 @@
       "system": {
         "slug": "headless-baller",
         "section": "Emotes",
-        "sortOrder": 157,
+        "sortOrder": 120,
         "image": "/Evade/Emotes/headless-baller.png"
       }
     },
@@ -2096,7 +1615,7 @@
       "system": {
         "slug": "zombie-stride",
         "section": "Emotes",
-        "sortOrder": 158,
+        "sortOrder": 121,
         "image": "/Evade/Emotes/zombie-stride.png"
       }
     },
@@ -2109,7 +1628,7 @@
       "system": {
         "slug": "xylobone",
         "section": "Emotes",
-        "sortOrder": 159,
+        "sortOrder": 122,
         "image": "/Evade/Emotes/xylobone.png"
       }
     },
@@ -2122,7 +1641,7 @@
       "system": {
         "slug": "ghoulish-galleon",
         "section": "Emotes",
-        "sortOrder": 160,
+        "sortOrder": 123,
         "image": "/Evade/Emotes/ghoulish-galleon.png"
       }
     },
@@ -2135,7 +1654,7 @@
       "system": {
         "slug": "cuerdas-del-alma",
         "section": "Emotes",
-        "sortOrder": 161,
+        "sortOrder": 124,
         "image": "/Evade/Emotes/cuerdas-del-alma.png"
       }
     },
@@ -2148,7 +1667,7 @@
       "system": {
         "slug": "grave-rider",
         "section": "Emotes",
-        "sortOrder": 162,
+        "sortOrder": 125,
         "image": "/Evade/Emotes/grave-rider.png"
       }
     },
@@ -2161,7 +1680,7 @@
       "system": {
         "slug": "mariachi-band",
         "section": "Emotes",
-        "sortOrder": 163,
+        "sortOrder": 126,
         "image": "/Evade/Emotes/mariachi-band.png"
       }
     },
@@ -2174,7 +1693,7 @@
       "system": {
         "slug": "spirited-away",
         "section": "Emotes",
-        "sortOrder": 164,
+        "sortOrder": 127,
         "image": "/Evade/Emotes/spirited-away.png"
       }
     },
@@ -2187,7 +1706,7 @@
       "system": {
         "slug": "scorched-earth",
         "section": "Emotes",
-        "sortOrder": 165,
+        "sortOrder": 128,
         "image": "/Evade/Emotes/scorched-earth.png"
       }
     },
@@ -2200,7 +1719,7 @@
       "system": {
         "slug": "headless-horseman",
         "section": "Emotes",
-        "sortOrder": 166,
+        "sortOrder": 129,
         "image": "/Evade/Emotes/headless-horseman.png"
       }
     },
@@ -2213,7 +1732,7 @@
       "system": {
         "slug": "christmas-boogie",
         "section": "Emotes",
-        "sortOrder": 167,
+        "sortOrder": 130,
         "image": "/Evade/Emotes/christmas-boogie.png"
       }
     },
@@ -2226,7 +1745,7 @@
       "system": {
         "slug": "nutcracker-dance",
         "section": "Emotes",
-        "sortOrder": 168,
+        "sortOrder": 131,
         "image": "/Evade/Emotes/nutcracker-dance.png"
       }
     },
@@ -2239,20 +1758,20 @@
       "system": {
         "slug": "wind-up-dance",
         "section": "Emotes",
-        "sortOrder": 169,
+        "sortOrder": 132,
         "image": "/Evade/Emotes/wind-up-dance.png"
       }
     },
     {
       "item": {
-        "name": "[[Campfire Doze]]",
+        "name": "Campfire Doze",
         "price": "60 Gifts",
         "flavor": "Endlessly cook a marshmallow instead of actually eating it."
       },
       "system": {
         "slug": "campfire-doze",
         "section": "Emotes",
-        "sortOrder": 170,
+        "sortOrder": 133,
         "image": "/Evade/Emotes/campfire-doze.png"
       }
     },
@@ -2265,7 +1784,7 @@
       "system": {
         "slug": "3-place-march",
         "section": "Emotes",
-        "sortOrder": 171,
+        "sortOrder": 134,
         "image": "/Evade/Emotes/3-place-march.png"
       }
     },
@@ -2278,7 +1797,7 @@
       "system": {
         "slug": "snowmobile-cruise",
         "section": "Emotes",
-        "sortOrder": 172,
+        "sortOrder": 135,
         "image": "/Evade/Emotes/snowmobile-cruise.png"
       }
     },
@@ -2291,7 +1810,7 @@
       "system": {
         "slug": "flying-sleigh",
         "section": "Emotes",
-        "sortOrder": 173,
+        "sortOrder": 136,
         "image": "/Evade/Emotes/flying-sleigh.png"
       }
     },
@@ -2304,7 +1823,7 @@
       "system": {
         "slug": "bobo-in-the-box",
         "section": "Emotes",
-        "sortOrder": 174,
+        "sortOrder": 137,
         "image": "/Evade/Emotes/bobo-in-the-box.png"
       }
     },
@@ -2317,7 +1836,7 @@
       "system": {
         "slug": "sled-drifting",
         "section": "Emotes",
-        "sortOrder": 175,
+        "sortOrder": 138,
         "image": "/Evade/Emotes/sled-drifting.png"
       }
     },
@@ -2330,7 +1849,7 @@
       "system": {
         "slug": "ice-fishing",
         "section": "Emotes",
-        "sortOrder": 176,
+        "sortOrder": 139,
         "image": "/Evade/Emotes/ice-fishing.png"
       }
     },
@@ -2343,7 +1862,7 @@
       "system": {
         "slug": "santa-mech",
         "section": "Emotes",
-        "sortOrder": 177,
+        "sortOrder": 140,
         "image": "/Evade/Emotes/santa-mech.png"
       }
     },
@@ -2356,7 +1875,7 @@
       "system": {
         "slug": "snowman-construction",
         "section": "Emotes",
-        "sortOrder": 178,
+        "sortOrder": 141,
         "image": "/Evade/Emotes/snowman-construction.png"
       }
     },
@@ -2369,7 +1888,7 @@
       "system": {
         "slug": "toy-train-ride",
         "section": "Emotes",
-        "sortOrder": 179,
+        "sortOrder": 142,
         "image": "/Evade/Emotes/toy-train-ride.png"
       }
     },
@@ -2382,7 +1901,7 @@
       "system": {
         "slug": "wind-up-pose",
         "section": "Emotes",
-        "sortOrder": 180,
+        "sortOrder": 143,
         "image": "/Evade/Emotes/wind-up-pose.png"
       }
     },
@@ -2395,7 +1914,7 @@
       "system": {
         "slug": "rudolph-mount",
         "section": "Emotes",
-        "sortOrder": 181,
+        "sortOrder": 144,
         "image": "/Evade/Emotes/rudolph-mount.png"
       }
     },
@@ -2408,7 +1927,7 @@
       "system": {
         "slug": "winter-ride",
         "section": "Emotes",
-        "sortOrder": 182,
+        "sortOrder": 145,
         "image": "/Evade/Emotes/winter-ride.png"
       }
     },
@@ -2421,7 +1940,7 @@
       "system": {
         "slug": "cozy-chair",
         "section": "Emotes",
-        "sortOrder": 183,
+        "sortOrder": 146,
         "image": "/Evade/Emotes/cozy-chair.png"
       }
     },
@@ -2434,7 +1953,7 @@
       "system": {
         "slug": "rocking-horse",
         "section": "Emotes",
-        "sortOrder": 184,
+        "sortOrder": 147,
         "image": "/Evade/Emotes/rocking-horse.png"
       }
     },
@@ -2447,7 +1966,7 @@
       "system": {
         "slug": "winter-melody",
         "section": "Emotes",
-        "sortOrder": 185,
+        "sortOrder": 148,
         "image": "/Evade/Emotes/winter-melody.png"
       }
     },
@@ -2460,7 +1979,7 @@
       "system": {
         "slug": "ski-spree",
         "section": "Emotes",
-        "sortOrder": 186,
+        "sortOrder": 149,
         "image": "/Evade/Emotes/ski-spree.png"
       }
     },
@@ -2473,7 +1992,7 @@
       "system": {
         "slug": "frost-drake",
         "section": "Emotes",
-        "sortOrder": 187,
+        "sortOrder": 150,
         "image": "/Evade/Emotes/frost-drake.png"
       }
     },
@@ -2486,7 +2005,7 @@
       "system": {
         "slug": "irish-jig",
         "section": "Emotes",
-        "sortOrder": 188,
+        "sortOrder": 151,
         "image": "/Evade/Emotes/irish-jig.png"
       }
     },
@@ -2499,7 +2018,7 @@
       "system": {
         "slug": "avarice-lounge",
         "section": "Emotes",
-        "sortOrder": 189,
+        "sortOrder": 152,
         "image": "/Evade/Emotes/avarice-lounge.png"
       }
     },
@@ -2512,7 +2031,7 @@
       "system": {
         "slug": "april-shower",
         "section": "Emotes",
-        "sortOrder": 190,
+        "sortOrder": 153,
         "image": "/Evade/Emotes/april-shower.png"
       }
     },
@@ -2525,7 +2044,7 @@
       "system": {
         "slug": "gold-ritual",
         "section": "Emotes",
-        "sortOrder": 191,
+        "sortOrder": 154,
         "image": "/Evade/Emotes/gold-ritual.png"
       }
     },
@@ -2538,7 +2057,7 @@
       "system": {
         "slug": "auspicious-well",
         "section": "Emotes",
-        "sortOrder": 192,
+        "sortOrder": 155,
         "image": "/Evade/Emotes/auspicious-well.png"
       }
     },
@@ -2551,7 +2070,7 @@
       "system": {
         "slug": "harp-recital",
         "section": "Emotes",
-        "sortOrder": 193,
+        "sortOrder": 156,
         "image": "/Evade/Emotes/harp-recital.png"
       }
     },
@@ -2564,7 +2083,7 @@
       "system": {
         "slug": "angelic-wings",
         "section": "Emotes",
-        "sortOrder": 194,
+        "sortOrder": 157,
         "image": "/Evade/Emotes/angelic-wings.png"
       }
     },
@@ -2577,7 +2096,7 @@
       "system": {
         "slug": "serene-perch",
         "section": "Emotes",
-        "sortOrder": 195,
+        "sortOrder": 158,
         "image": "/Evade/Emotes/serene-perch.png"
       }
     },
@@ -2590,7 +2109,7 @@
       "system": {
         "slug": "valentine-computer",
         "section": "Emotes",
-        "sortOrder": 196,
+        "sortOrder": 159,
         "image": "/Evade/Emotes/valentine-computer.png"
       }
     },
@@ -2603,7 +2122,7 @@
       "system": {
         "slug": "dreamy-cloud",
         "section": "Emotes",
-        "sortOrder": 197,
+        "sortOrder": 160,
         "image": "/Evade/Emotes/dreamy-cloud.png"
       }
     },
@@ -2616,20 +2135,20 @@
       "system": {
         "slug": "dynasty-drumming",
         "section": "Emotes",
-        "sortOrder": 198,
+        "sortOrder": 161,
         "image": "/Evade/Emotes/dynasty-drumming.png"
       }
     },
     {
       "item": {
-        "name": "[[Turkey]] Jockey",
+        "name": "Turkey Jockey",
         "price": "50 Points",
         "flavor": "TURKEYYY JOCKEYYY!!!!!!!!!!!"
       },
       "system": {
         "slug": "turkey-jockey",
         "section": "Emotes",
-        "sortOrder": 199,
+        "sortOrder": 162,
         "image": "/Evade/Emotes/turkey-jockey.png"
       }
     },
@@ -2642,7 +2161,7 @@
       "system": {
         "slug": "many-fans",
         "section": "Emotes",
-        "sortOrder": 200,
+        "sortOrder": 163,
         "image": "/Evade/Emotes/many-fans.png"
       }
     },
@@ -2655,7 +2174,7 @@
       "system": {
         "slug": "summer-days",
         "section": "Emotes",
-        "sortOrder": 201,
+        "sortOrder": 164,
         "image": "/Evade/Emotes/summer-days.png"
       }
     },
@@ -2668,7 +2187,7 @@
       "system": {
         "slug": "beach-chair-lounge",
         "section": "Emotes",
-        "sortOrder": 202,
+        "sortOrder": 165,
         "image": "/Evade/Emotes/beach-chair-lounge.png"
       }
     },
@@ -2681,7 +2200,7 @@
       "system": {
         "slug": "row-boat",
         "section": "Emotes",
-        "sortOrder": 203,
+        "sortOrder": 166,
         "image": "/Evade/Emotes/row-boat.png"
       }
     },
@@ -2694,7 +2213,7 @@
       "system": {
         "slug": "lemonade-stand",
         "section": "Emotes",
-        "sortOrder": 204,
+        "sortOrder": 167,
         "image": "/Evade/Emotes/lemonade-stand.png"
       }
     },
@@ -2707,7 +2226,7 @@
       "system": {
         "slug": "casual-surfing",
         "section": "Emotes",
-        "sortOrder": 205,
+        "sortOrder": 168,
         "image": "/Evade/Emotes/casual-surfing.png"
       }
     },
@@ -2720,7 +2239,7 @@
       "system": {
         "slug": "pool-time",
         "section": "Emotes",
-        "sortOrder": 206,
+        "sortOrder": 169,
         "image": "/Evade/Emotes/pool-time.png"
       }
     },
@@ -2733,7 +2252,7 @@
       "system": {
         "slug": "encapsluated-bubble",
         "section": "Emotes",
-        "sortOrder": 207,
+        "sortOrder": 170,
         "image": "/Evade/Emotes/encapsluated-bubble.png"
       }
     },
@@ -2746,7 +2265,7 @@
       "system": {
         "slug": "submarine-ride",
         "section": "Emotes",
-        "sortOrder": 208,
+        "sortOrder": 171,
         "image": "/Evade/Emotes/submarine-ride.png"
       }
     },
@@ -2759,7 +2278,7 @@
       "system": {
         "slug": "clam-clamor",
         "section": "Emotes",
-        "sortOrder": 209,
+        "sortOrder": 172,
         "image": "/Evade/Emotes/clam-clamor.png"
       }
     },
@@ -2772,7 +2291,7 @@
       "system": {
         "slug": "frutiger-floatie",
         "section": "Emotes",
-        "sortOrder": 210,
+        "sortOrder": 173,
         "image": "/Evade/Emotes/frutiger-floatie.png"
       }
     },
@@ -2785,7 +2304,7 @@
       "system": {
         "slug": "aquatic-daydreamer",
         "section": "Emotes",
-        "sortOrder": 211,
+        "sortOrder": 174,
         "image": "/Evade/Emotes/aquatic-daydreamer.png"
       }
     },
@@ -2798,7 +2317,7 @@
       "system": {
         "slug": "leaping-dolphin",
         "section": "Emotes",
-        "sortOrder": 212,
+        "sortOrder": 175,
         "image": "/Evade/Emotes/leaping-dolphin.png"
       }
     },
@@ -2811,7 +2330,7 @@
       "system": {
         "slug": "astral-manta-ray",
         "section": "Emotes",
-        "sortOrder": 213,
+        "sortOrder": 176,
         "image": "/Evade/Emotes/astral-manta-ray.png"
       }
     },
@@ -2824,7 +2343,7 @@
       "system": {
         "slug": "summer-lowrider",
         "section": "Emotes",
-        "sortOrder": 214,
+        "sortOrder": 177,
         "image": "/Evade/Emotes/summer-lowrider.png"
       }
     },
@@ -2837,7 +2356,7 @@
       "system": {
         "slug": "lotus-swing",
         "section": "Emotes",
-        "sortOrder": 215,
+        "sortOrder": 178,
         "image": "/Evade/Emotes/lotus-swing.png"
       }
     },
@@ -2850,7 +2369,7 @@
       "system": {
         "slug": "cocoon-rebirth",
         "section": "Emotes",
-        "sortOrder": 216,
+        "sortOrder": 179,
         "image": "/Evade/Emotes/cocoon-rebirth.png"
       }
     },
@@ -2863,7 +2382,7 @@
       "system": {
         "slug": "honey-pool",
         "section": "Emotes",
-        "sortOrder": 217,
+        "sortOrder": 180,
         "image": "/Evade/Emotes/honey-pool.png"
       }
     },
@@ -2876,7 +2395,7 @@
       "system": {
         "slug": "snail-mail",
         "section": "Emotes",
-        "sortOrder": 218,
+        "sortOrder": 181,
         "image": "/Evade/Emotes/snail-mail.png"
       }
     },
@@ -2889,7 +2408,7 @@
       "system": {
         "slug": "ladybug-flight",
         "section": "Emotes",
-        "sortOrder": 219,
+        "sortOrder": 182,
         "image": "/Evade/Emotes/ladybug-flight.png"
       }
     },
@@ -2902,7 +2421,7 @@
       "system": {
         "slug": "megafly-jet",
         "section": "Emotes",
-        "sortOrder": 220,
+        "sortOrder": 183,
         "image": "/Evade/Emotes/megafly-jet.png"
       }
     },
@@ -2915,7 +2434,7 @@
       "system": {
         "slug": "classic-stride",
         "section": "Emotes",
-        "sortOrder": 221,
+        "sortOrder": 184,
         "image": "/Evade/Emotes/classic-stride.png"
       }
     },
@@ -2928,7 +2447,7 @@
       "system": {
         "slug": "fast-food-delight",
         "section": "Emotes",
-        "sortOrder": 222,
+        "sortOrder": 185,
         "image": "/Evade/Emotes/fast-food-delight.png"
       }
     },
@@ -2941,7 +2460,7 @@
       "system": {
         "slug": "potion-mash",
         "section": "Emotes",
-        "sortOrder": 223,
+        "sortOrder": 186,
         "image": "/Evade/Emotes/potion-mash.png"
       }
     },
@@ -2954,33 +2473,33 @@
       "system": {
         "slug": "classic-dance",
         "section": "Emotes",
-        "sortOrder": 224,
+        "sortOrder": 187,
         "image": "/Evade/Emotes/classic-dance.png"
       }
     },
     {
       "item": {
-        "name": "[[M3GAN]] Dance",
+        "name": "M3GAN Dance",
         "price": "40 Points",
         "flavor": "show off those robotic moves!"
       },
       "system": {
         "slug": "m3gan-dance",
         "section": "Emotes",
-        "sortOrder": 225,
+        "sortOrder": 188,
         "image": "/Evade/Emotes/m3gan-dance.png"
       }
     },
     {
       "item": {
-        "name": "Robot [[M3GAN]]",
+        "name": "Robot M3GAN",
         "price": "40 Points",
         "flavor": "wow.. such a cool dance.. almost like you stole it from me."
       },
       "system": {
         "slug": "robot-m3gan",
         "section": "Emotes",
-        "sortOrder": 226,
+        "sortOrder": 189,
         "image": "/Evade/Emotes/robot-m3gan.png"
       }
     },
@@ -2993,7 +2512,7 @@
       "system": {
         "slug": "beg",
         "section": "Emotes",
-        "sortOrder": 227,
+        "sortOrder": 190,
         "image": "/Evade/Emotes/beg.png"
       }
     },
@@ -3006,7 +2525,7 @@
       "system": {
         "slug": "see-tinh",
         "section": "Emotes",
-        "sortOrder": 228,
+        "sortOrder": 191,
         "image": "/Evade/Emotes/see-tinh.png"
       }
     },
@@ -3019,7 +2538,7 @@
       "system": {
         "slug": "bhop",
         "section": "Emotes",
-        "sortOrder": 229,
+        "sortOrder": 192,
         "image": "/Evade/Emotes/bhop.png"
       }
     },
@@ -3032,7 +2551,7 @@
       "system": {
         "slug": "currently-uses-a-animation-from-maraca-time-emote",
         "section": "Emotes",
-        "sortOrder": 230,
+        "sortOrder": 193,
         "image": null
       }
     },
@@ -3045,7 +2564,7 @@
       "system": {
         "slug": "boo",
         "section": "Emotes",
-        "sortOrder": 231,
+        "sortOrder": 194,
         "image": "/Evade/Emotes/boo.png"
       }
     },
@@ -3058,21 +2577,8 @@
       "system": {
         "slug": "pumpkin-cravin",
         "section": "Emotes",
-        "sortOrder": 232,
+        "sortOrder": 195,
         "image": "/Evade/Emotes/pumpkin-cravin.png"
-      }
-    },
-    {
-      "item": {
-        "name": "<br>(",
-        "price": null,
-        "flavor": "Unknown."
-      },
-      "system": {
-        "slug": "br",
-        "section": "Emotes",
-        "sortOrder": 233,
-        "image": "/Evade/Emotes/br.png"
       }
     },
     {
@@ -3084,7 +2590,7 @@
       "system": {
         "slug": "dirtbike",
         "section": "Emotes",
-        "sortOrder": 234,
+        "sortOrder": 196,
         "image": "/Evade/Emotes/dirtbike.png"
       }
     },
@@ -3097,7 +2603,7 @@
       "system": {
         "slug": "summer-shades",
         "section": "Emotes",
-        "sortOrder": 235,
+        "sortOrder": 197,
         "image": "/Evade/Emotes/summer-shades.png"
       }
     },
@@ -3110,7 +2616,7 @@
       "system": {
         "slug": "npc-dance",
         "section": "Emotes",
-        "sortOrder": 236,
+        "sortOrder": 198,
         "image": "/Evade/Emotes/npc-dance.png"
       }
     }

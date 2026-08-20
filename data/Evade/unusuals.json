@@ -3134,19 +3134,6 @@
     },
     {
       "item": {
-        "name": "Unknown",
-        "price": null,
-        "source": null
-      },
-      "system": {
-        "slug": "unknown",
-        "section": "Other Unusuals",
-        "sortOrder": 238,
-        "image": "/Evade/Unusuals/unknown.png"
-      }
-    },
-    {
-      "item": {
         "name": "Hearhead",
         "price": null,
         "source": null
@@ -3154,7 +3141,7 @@
       "system": {
         "slug": "hearhead",
         "section": "Other Unusuals",
-        "sortOrder": 239,
+        "sortOrder": 238,
         "image": "/Evade/Unusuals/hearhead.png"
       }
     }

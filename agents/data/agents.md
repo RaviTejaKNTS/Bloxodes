@@ -187,18 +187,18 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use the `QuizData` shape with 10 easy, 10 medium, and 10 hard questions when possible.
   - Keep quiz questions tied to stable survival, crafting, rescue, class, taming, weapon, material, and route facts. Do not store active codes, live event statuses, temporary reward tracks, or unresolved disputed facts here.
 - `data/Sell Lemons/*.json`
-  - Local Sell Lemons game datasets for wiki/collection and quiz page work, including income sources, powers, secret unlocks, evolution stages, locations, and quiz content.
-  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; keep hard questions tied to stable progression and reset concepts, not unverified upgrade rows, unstable exact costs, or source-conflicted UFO/Purity/Sewer step sequences.
+  - Local Sell Lemons game datasets for wiki/collection and quiz page work, including income sources, active income methods, powers, secret unlocks, evolution stages, locations, orchard items, orchard mutations, tycoon upgrades, ascension rewards, companions, and quiz content.
+  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; keep hard questions tied to stable progression, reset concepts, and named plot upgrades, not unstable exact costs or source-conflicted UFO/Purity/Sewer step sequences.
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/collection page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
 - `data/Catch And Tame/*.json`
-  - Local Catch And Tame game datasets for wiki/collection page work, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, and items.
-  - Rows are source-backed to Catch And Tame wiki pages and stay text-only until clean local row images are collected.
+  - Local Catch And Tame game datasets for wiki/collection page work, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, items, island keys, enchantments, and fishing gear.
+  - Rows are source-backed to Catch And Tame wiki pages and stay text-only until clean local row images are collected. Island-key images are planned from Fandom inventory icons.
 - `data/Untitled Boxing Game/*.json`
-  - Local Untitled Boxing Game datasets for wiki/collection page work, including styles, gloves, emotes, knockout effects, and titles.
-  - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean item art exists. Emotes and titles stay text-only unless clean row-level captures are available.
-  - Keep UBG collections limited to durable style, cosmetic, and title systems. Do not store live trade values, manual active-code data, gamepasses, badges, servers, or current event reward tracks here.
+  - Local Untitled Boxing Game datasets for wiki/collection page work, including styles, gloves, emotes, knockout effects, titles, maps, and ranks.
+  - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean item art exists. Emotes, titles, and ranks stay text-only unless clean row-level captures are available. Map row icons belong under `apps/web/public/Untitled Boxing Game/Maps/` after the image pass.
+  - Keep UBG collections limited to durable style, cosmetic, title, and rank systems. Do not store live trade values, manual active-code data, gamepasses, badges, servers, or current event reward tracks here.
 - `data/Push Rock for Brainrots/*.json`
   - Local Push Rock for Brainrots datasets for wiki/collection page work, including Brainrots, rocks/gates, and upgrades.
   - Matching row or system images live under `apps/web/public/Push Rock for Brainrots/` by collection folder. Keep gamepasses, badges, developer products, and generic Hunter mentions out of the datasets unless the row-level facts are source-backed and useful to players.
@@ -207,7 +207,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - `takeovers.json` stores source-backed build takeover boosts by player role, including scoring, slashing, playmaking, and interior/rebounding utility sections. Requirements stay blank unless a source-backed unlock or attribute gate is found.
   - Keep each dataset limited to its source-backed Practical Basketball system. Do not mix Roblox achievement badges, takeovers, badges, animations, cosmetics, or invented thresholds into the wrong collection.
 - `data/Restaurant Tycoon 3/*.json`
-  - Local Restaurant Tycoon 3 datasets for wiki/collection page work, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, and locations.
+  - Local Restaurant Tycoon 3 datasets for wiki/collection page work, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, locations, objectives, music, restaurant templates, and rating categories.
   - Matching source-backed images live under `apps/web/public/Restaurant Tycoon 3/` by collection folder where useful row images are available.
 - `data/Storage Hunters Open World/*.json`
   - Local Storage Hunters: Open World datasets for wiki/collection page work, including accessories, shop upgrades, titles, achievements, and auction zones.

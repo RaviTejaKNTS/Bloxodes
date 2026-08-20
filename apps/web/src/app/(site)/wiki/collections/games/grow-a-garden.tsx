@@ -29,6 +29,10 @@ type GrowGardenDatasetMeta = {
   updatedAt?: string | null;
   sources?: GrowGardenDatasetSource[] | null;
   columns?: string[] | null;
+  display?: {
+    groupLabel?: string | null;
+    sectionOrder?: string[] | null;
+  } | null;
 };
 
 export type GrowGardenCollectionItem = {
@@ -277,8 +281,18 @@ function normalizeGrowGardenItem(slug: string, row: Record<string, unknown>): Gr
         collectionGroup: "Currencies",
         availability
       };
+    case "cosmetics":
+    case "cosmetic-crates":
+    case "ascension-upgrades":
+      return {
+        ...base,
+        collectionGroup: normalizeGroupLabel(row.collectionSection)
+      };
     default:
-      return base;
+      return {
+        ...base,
+        collectionGroup: normalizeGroupLabel(row.collectionSection ?? row.collectionGroup)
+      };
   }
 }
 
@@ -361,7 +375,11 @@ function groupSortWeight(value: string): number {
   return index >= 0 ? index : order.length + value.localeCompare("Other");
 }
 
-function buildGroupedSections(items: GrowGardenCollectionItem[], groupKey: string) {
+function buildGroupedSections(
+  items: GrowGardenCollectionItem[],
+  groupKey: string,
+  sectionOrder?: string[] | null
+) {
   const groups = new Map<string, { label: string; items: GrowGardenCollectionItem[] }>();
 
   items.forEach((item) => {
@@ -375,8 +393,19 @@ function buildGroupedSections(items: GrowGardenCollectionItem[], groupKey: strin
     groups.set(groupId, { label: rawLabel, items: [item] });
   });
 
+  const orderedSectionIndex = new Map(
+    (sectionOrder ?? []).map((label, index) => [label.toLowerCase(), index] as const)
+  );
+
   return Array.from(groups.values())
     .sort((left, right) => {
+      if (orderedSectionIndex.size) {
+        const leftRank = orderedSectionIndex.get(left.label.toLowerCase()) ?? orderedSectionIndex.size;
+        const rightRank = orderedSectionIndex.get(right.label.toLowerCase()) ?? orderedSectionIndex.size;
+        if (leftRank !== rightRank) return leftRank - rightRank;
+        if (leftRank === orderedSectionIndex.size) return left.label.localeCompare(right.label);
+        return 0;
+      }
       const weightDelta = groupSortWeight(left.label) - groupSortWeight(right.label);
       if (weightDelta !== 0) return weightDelta;
       return left.label.localeCompare(right.label);
@@ -425,7 +454,11 @@ function buildGrowGardenPreparedCollection(
   config: GrowGardenCollectionConfig,
   dataset: GrowGardenCollectionDataset
 ): GrowGardenPreparedCollection {
-  const groupedSections = buildGroupedSections(dataset.items, config.groupKey);
+  const groupedSections = buildGroupedSections(
+    dataset.items,
+    config.groupKey,
+    dataset.meta?.display?.sectionOrder ?? null
+  );
   const totalPages = buildCollectionPagination({
     sections: groupedSections,
     currentPage: 1,

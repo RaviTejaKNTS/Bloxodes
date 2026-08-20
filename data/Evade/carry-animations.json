@@ -295,19 +295,6 @@
     },
     {
       "item": {
-        "name": "Cat Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "cat-set",
-        "section": "Carry Animations",
-        "sortOrder": 20,
-        "image": null
-      }
-    },
-    {
-      "item": {
         "name": "Duck Carry",
         "price": "600 Robux",
         "flavor": "TBA"
@@ -315,21 +302,8 @@
       "system": {
         "slug": "duck-carry",
         "section": "Carry Animations",
-        "sortOrder": 21,
+        "sortOrder": 20,
         "image": "/Evade/Carry Animations/duck-carry.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Classic Roblox Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "classic-roblox-set",
-        "section": "Carry Animations",
-        "sortOrder": 22,
-        "image": null
       }
     },
     {
@@ -341,21 +315,8 @@
       "system": {
         "slug": "cpt-jaws-carry",
         "section": "Carry Animations",
-        "sortOrder": 23,
+        "sortOrder": 21,
         "image": "/Evade/Carry Animations/cpt-jaws-carry.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Animal Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "animal-set",
-        "section": "Carry Animations",
-        "sortOrder": 24,
-        "image": null
       }
     },
     {
@@ -367,21 +328,8 @@
       "system": {
         "slug": "lunar-scribe",
         "section": "Carry Animations",
-        "sortOrder": 25,
+        "sortOrder": 22,
         "image": "/Evade/Carry Animations/lunar-scribe.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Eclipse Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "eclipse-set",
-        "section": "Carry Animations",
-        "sortOrder": 26,
-        "image": null
       }
     },
     {
@@ -393,21 +341,8 @@
       "system": {
         "slug": "dog-sleigh",
         "section": "Carry Animations",
-        "sortOrder": 27,
+        "sortOrder": 23,
         "image": "/Evade/Carry Animations/dog-sleigh.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Dog Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "dog-set",
-        "section": "Carry Animations",
-        "sortOrder": 28,
-        "image": null
       }
     },
     {
@@ -419,21 +354,8 @@
       "system": {
         "slug": "flying-dragon",
         "section": "Carry Animations",
-        "sortOrder": 29,
+        "sortOrder": 24,
         "image": "/Evade/Carry Animations/flying-dragon.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Lunar New Year Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "lunar-new-year-set",
-        "section": "Carry Animations",
-        "sortOrder": 30,
-        "image": null
       }
     },
     {
@@ -445,21 +367,8 @@
       "system": {
         "slug": "honeymancer",
         "section": "Carry Animations",
-        "sortOrder": 31,
+        "sortOrder": 25,
         "image": "/Evade/Carry Animations/honeymancer.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Bee Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "bee-set",
-        "section": "Carry Animations",
-        "sortOrder": 32,
-        "image": null
       }
     },
     {
@@ -471,7 +380,7 @@
       "system": {
         "slug": "hype-train",
         "section": "Carry Animations",
-        "sortOrder": 33,
+        "sortOrder": 26,
         "image": "/Evade/Carry Animations/hype-train.png"
       }
     },
@@ -484,7 +393,7 @@
       "system": {
         "slug": "shadow-rider",
         "section": "Carry Animations",
-        "sortOrder": 34,
+        "sortOrder": 27,
         "image": "/Evade/Carry Animations/shadow-rider.png"
       }
     },
@@ -497,86 +406,8 @@
       "system": {
         "slug": "synthwave-surfer",
         "section": "Carry Animations",
-        "sortOrder": 35,
+        "sortOrder": 28,
         "image": "/Evade/Carry Animations/synthwave-surfer.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Music Carry Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-carry-pack-1",
-        "section": "Carry Animations",
-        "sortOrder": 36,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Carry Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-carry-pack-1-2",
-        "section": "Carry Animations",
-        "sortOrder": 37,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Music Carry Pack 1",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "music-carry-pack-1-3",
-        "section": "Carry Animations",
-        "sortOrder": 38,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "TBA",
-        "price": null,
-        "flavor": "TBA"
-      },
-      "system": {
-        "slug": "tba",
-        "section": "Carry Animations",
-        "sortOrder": 39,
-        "image": "/Evade/Carry Animations/tba.png"
-      }
-    },
-    {
-      "item": {
-        "name": "TBA",
-        "price": null,
-        "flavor": "TBA"
-      },
-      "system": {
-        "slug": "tba-2",
-        "section": "Carry Animations",
-        "sortOrder": 40,
-        "image": "/Evade/Carry Animations/tba-2.png"
-      }
-    },
-    {
-      "item": {
-        "name": "TBA",
-        "price": null,
-        "flavor": "TBA"
-      },
-      "system": {
-        "slug": "tba-3",
-        "section": "Carry Animations",
-        "sortOrder": 41,
-        "image": "/Evade/Carry Animations/tba-3.png"
       }
     },
     {
@@ -588,21 +419,8 @@
       "system": {
         "slug": "kraken-carry",
         "section": "Carry Animations",
-        "sortOrder": 42,
+        "sortOrder": 29,
         "image": "/Evade/Carry Animations/kraken-carry.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Poseidon Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "poseidon-set",
-        "section": "Carry Animations",
-        "sortOrder": 43,
-        "image": null
       }
     },
     {
@@ -614,7 +432,7 @@
       "system": {
         "slug": "love-dove-carry",
         "section": "Carry Animations",
-        "sortOrder": 44,
+        "sortOrder": 30,
         "image": "/Evade/Carry Animations/love-dove-carry.png"
       }
     },
@@ -627,7 +445,7 @@
       "system": {
         "slug": "celestial-carry",
         "section": "Carry Animations",
-        "sortOrder": 45,
+        "sortOrder": 31,
         "image": "/Evade/Carry Animations/celestial-carry.png"
       }
     },
@@ -640,7 +458,7 @@
       "system": {
         "slug": "love-balloon",
         "section": "Carry Animations",
-        "sortOrder": 46,
+        "sortOrder": 32,
         "image": "/Evade/Carry Animations/love-balloon.png"
       }
     },
@@ -653,7 +471,7 @@
       "system": {
         "slug": "caged-dove",
         "section": "Carry Animations",
-        "sortOrder": 47,
+        "sortOrder": 33,
         "image": "/Evade/Carry Animations/caged-dove.png"
       }
     },
@@ -666,7 +484,7 @@
       "system": {
         "slug": "green-flight",
         "section": "Carry Animations",
-        "sortOrder": 48,
+        "sortOrder": 34,
         "image": "/Evade/Carry Animations/green-flight.png"
       }
     },
@@ -679,7 +497,7 @@
       "system": {
         "slug": "horror-drag",
         "section": "Carry Animations",
-        "sortOrder": 49,
+        "sortOrder": 35,
         "image": "/Evade/Carry Animations/horror-drag.png"
       }
     },
@@ -692,7 +510,7 @@
       "system": {
         "slug": "puppeteer-carry",
         "section": "Carry Animations",
-        "sortOrder": 50,
+        "sortOrder": 36,
         "image": "/Evade/Carry Animations/puppeteer-carry.png"
       }
     },
@@ -705,7 +523,7 @@
       "system": {
         "slug": "pitchfork-carry",
         "section": "Carry Animations",
-        "sortOrder": 51,
+        "sortOrder": 37,
         "image": "/Evade/Carry Animations/pitchfork-carry.png"
       }
     },
@@ -718,7 +536,7 @@
       "system": {
         "slug": "pumpkin-bros",
         "section": "Carry Animations",
-        "sortOrder": 52,
+        "sortOrder": 38,
         "image": "/Evade/Carry Animations/pumpkin-bros.png"
       }
     },
@@ -731,7 +549,7 @@
       "system": {
         "slug": "iron-maiden-carry",
         "section": "Carry Animations",
-        "sortOrder": 53,
+        "sortOrder": 39,
         "image": "/Evade/Carry Animations/iron-maiden-carry.png"
       }
     },
@@ -744,7 +562,7 @@
       "system": {
         "slug": "necromancer-carry",
         "section": "Carry Animations",
-        "sortOrder": 54,
+        "sortOrder": 40,
         "image": "/Evade/Carry Animations/necromancer-carry.png"
       }
     },
@@ -757,7 +575,7 @@
       "system": {
         "slug": "dread-wings-carry",
         "section": "Carry Animations",
-        "sortOrder": 55,
+        "sortOrder": 41,
         "image": "/Evade/Carry Animations/dread-wings-carry.png"
       }
     },
@@ -770,7 +588,7 @@
       "system": {
         "slug": "sled-carry",
         "section": "Carry Animations",
-        "sortOrder": 56,
+        "sortOrder": 42,
         "image": "/Evade/Carry Animations/sled-carry.png"
       }
     },
@@ -783,7 +601,7 @@
       "system": {
         "slug": "gift-sack-carry",
         "section": "Carry Animations",
-        "sortOrder": 57,
+        "sortOrder": 43,
         "image": "/Evade/Carry Animations/gift-sack-carry.png"
       }
     },
@@ -796,7 +614,7 @@
       "system": {
         "slug": "krapmus-carry",
         "section": "Carry Animations",
-        "sortOrder": 58,
+        "sortOrder": 44,
         "image": "/Evade/Carry Animations/krapmus-carry.png"
       }
     },
@@ -809,7 +627,7 @@
       "system": {
         "slug": "frostborne-steed-carry",
         "section": "Carry Animations",
-        "sortOrder": 59,
+        "sortOrder": 45,
         "image": "/Evade/Carry Animations/frostborne-steed-carry.png"
       }
     },
@@ -822,7 +640,7 @@
       "system": {
         "slug": "minecart-carry",
         "section": "Carry Animations",
-        "sortOrder": 60,
+        "sortOrder": 46,
         "image": "/Evade/Carry Animations/minecart-carry.png"
       }
     },
@@ -835,7 +653,7 @@
       "system": {
         "slug": "easter-carry",
         "section": "Carry Animations",
-        "sortOrder": 61,
+        "sortOrder": 47,
         "image": "/Evade/Carry Animations/easter-carry.png"
       }
     },
@@ -848,7 +666,7 @@
       "system": {
         "slug": "crab-carry",
         "section": "Carry Animations",
-        "sortOrder": 62,
+        "sortOrder": 48,
         "image": "/Evade/Carry Animations/crab-carry.png"
       }
     },
@@ -861,7 +679,7 @@
       "system": {
         "slug": "surfer-bro-carry",
         "section": "Carry Animations",
-        "sortOrder": 63,
+        "sortOrder": 49,
         "image": "/Evade/Carry Animations/surfer-bro-carry.png"
       }
     },
@@ -874,7 +692,7 @@
       "system": {
         "slug": "flamingo-carry",
         "section": "Carry Animations",
-        "sortOrder": 64,
+        "sortOrder": 50,
         "image": "/Evade/Carry Animations/flamingo-carry.png"
       }
     },
@@ -887,7 +705,7 @@
       "system": {
         "slug": "vibrant-sailfish",
         "section": "Carry Animations",
-        "sortOrder": 65,
+        "sortOrder": 51,
         "image": "/Evade/Carry Animations/vibrant-sailfish.png"
       }
     },
@@ -900,7 +718,7 @@
       "system": {
         "slug": "jellyfish-entanglement",
         "section": "Carry Animations",
-        "sortOrder": 66,
+        "sortOrder": 52,
         "image": "/Evade/Carry Animations/jellyfish-entanglement.png"
       }
     },
@@ -913,7 +731,7 @@
       "system": {
         "slug": "gnome-carry",
         "section": "Carry Animations",
-        "sortOrder": 67,
+        "sortOrder": 53,
         "image": "/Evade/Carry Animations/gnome-carry.png"
       }
     },
@@ -926,7 +744,7 @@
       "system": {
         "slug": "dung-beetle-carry",
         "section": "Carry Animations",
-        "sortOrder": 68,
+        "sortOrder": 54,
         "image": "/Evade/Carry Animations/dung-beetle-carry.png"
       }
     },
@@ -939,7 +757,7 @@
       "system": {
         "slug": "ant-queen",
         "section": "Carry Animations",
-        "sortOrder": 69,
+        "sortOrder": 55,
         "image": "/Evade/Carry Animations/ant-queen.png"
       }
     },
@@ -952,7 +770,7 @@
       "system": {
         "slug": "beach-ball-carry",
         "section": "Carry Animations",
-        "sortOrder": 70,
+        "sortOrder": 56,
         "image": "/Evade/Carry Animations/beach-ball-carry.png"
       }
     },
@@ -965,7 +783,7 @@
       "system": {
         "slug": "side-arm-carry",
         "section": "Carry Animations",
-        "sortOrder": 71,
+        "sortOrder": 57,
         "image": "/Evade/Carry Animations/side-arm-carry.png"
       }
     }

@@ -438,7 +438,7 @@
     },
     {
       "item": {
-        "name": "[[Cat Jard]]",
+        "name": "Cat Jard",
         "price": "100 Points",
         "flavor": "cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard"
       },
@@ -477,19 +477,6 @@
     },
     {
       "item": {
-        "name": "[https://www.roblox.com/game-pass/1128324493/Classic-Roblox-Set",
-        "price": null,
-        "flavor": "TBA"
-      },
-      "system": {
-        "slug": "https-www-roblox-com-game-pass-1128324493-classic-roblox-set",
-        "section": "Nametags",
-        "sortOrder": 34,
-        "image": "/Evade/Nametags/https-www-roblox-com-game-pass-1128324493-classic-roblox-set.png"
-      }
-    },
-    {
-      "item": {
         "name": "Frog Tag",
         "price": "600 Robux",
         "flavor": "TBA"
@@ -497,7 +484,7 @@
       "system": {
         "slug": "frog-tag",
         "section": "Nametags",
-        "sortOrder": 35,
+        "sortOrder": 34,
         "image": "/Evade/Nametags/frog-tag.png"
       }
     },
@@ -510,7 +497,7 @@
       "system": {
         "slug": "capybara-tag",
         "section": "Nametags",
-        "sortOrder": 36,
+        "sortOrder": 35,
         "image": "/Evade/Nametags/capybara-tag.png"
       }
     },
@@ -523,47 +510,8 @@
       "system": {
         "slug": "axolotl-tag",
         "section": "Nametags",
-        "sortOrder": 37,
+        "sortOrder": 36,
         "image": "/Evade/Nametags/axolotl-tag.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Animal Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "animal-set",
-        "section": "Nametags",
-        "sortOrder": 38,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Animal Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "animal-set-2",
-        "section": "Nametags",
-        "sortOrder": 39,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Animal Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "animal-set-3",
-        "section": "Nametags",
-        "sortOrder": 40,
-        "image": null
       }
     },
     {
@@ -575,7 +523,7 @@
       "system": {
         "slug": "lunar-eclipse-tag",
         "section": "Nametags",
-        "sortOrder": 41,
+        "sortOrder": 37,
         "image": "/Evade/Nametags/lunar-eclipse-tag.png"
       }
     },
@@ -588,34 +536,8 @@
       "system": {
         "slug": "solar-eclipse-tag",
         "section": "Nametags",
-        "sortOrder": 42,
+        "sortOrder": 38,
         "image": "/Evade/Nametags/solar-eclipse-tag.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Eclipse Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "eclipse-set",
-        "section": "Nametags",
-        "sortOrder": 43,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Eclipse Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "eclipse-set-2",
-        "section": "Nametags",
-        "sortOrder": 44,
-        "image": null
       }
     },
     {
@@ -627,7 +549,7 @@
       "system": {
         "slug": "candy-doggo-tag",
         "section": "Nametags",
-        "sortOrder": 45,
+        "sortOrder": 39,
         "image": "/Evade/Nametags/candy-doggo-tag.png"
       }
     },
@@ -640,34 +562,8 @@
       "system": {
         "slug": "frosty-doggo-tag",
         "section": "Nametags",
-        "sortOrder": 46,
+        "sortOrder": 40,
         "image": "/Evade/Nametags/frosty-doggo-tag.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Dog Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "dog-set",
-        "section": "Nametags",
-        "sortOrder": 47,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Dog Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "dog-set-2",
-        "section": "Nametags",
-        "sortOrder": 48,
-        "image": null
       }
     },
     {
@@ -679,7 +575,7 @@
       "system": {
         "slug": "koi-tag",
         "section": "Nametags",
-        "sortOrder": 49,
+        "sortOrder": 41,
         "image": "/Evade/Nametags/koi-tag.png"
       }
     },
@@ -692,34 +588,8 @@
       "system": {
         "slug": "lantern-tag",
         "section": "Nametags",
-        "sortOrder": 50,
+        "sortOrder": 42,
         "image": "/Evade/Nametags/lantern-tag.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Lunar New Year Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "lunar-new-year-set",
-        "section": "Nametags",
-        "sortOrder": 51,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Lunar New Year Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "lunar-new-year-set-2",
-        "section": "Nametags",
-        "sortOrder": 52,
-        "image": null
       }
     },
     {
@@ -731,21 +601,8 @@
       "system": {
         "slug": "bee-tag",
         "section": "Nametags",
-        "sortOrder": 53,
+        "sortOrder": 43,
         "image": "/Evade/Nametags/bee-tag.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Bee Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "bee-set",
-        "section": "Nametags",
-        "sortOrder": 54,
-        "image": null
       }
     },
     {
@@ -757,21 +614,8 @@
       "system": {
         "slug": "poseidon-tag",
         "section": "Nametags",
-        "sortOrder": 55,
+        "sortOrder": 44,
         "image": "/Evade/Nametags/poseidon-tag.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Poseidon Set",
-        "price": null,
-        "flavor": null
-      },
-      "system": {
-        "slug": "poseidon-set",
-        "section": "Nametags",
-        "sortOrder": 56,
-        "image": null
       }
     },
     {
@@ -783,7 +627,7 @@
       "system": {
         "slug": "candy-cane-tag",
         "section": "Nametags",
-        "sortOrder": 57,
+        "sortOrder": 45,
         "image": "/Evade/Nametags/candy-cane-tag.png"
       }
     },
@@ -796,7 +640,7 @@
       "system": {
         "slug": "ornament-tag",
         "section": "Nametags",
-        "sortOrder": 58,
+        "sortOrder": 46,
         "image": "/Evade/Nametags/ornament-tag.png"
       }
     },
@@ -809,7 +653,7 @@
       "system": {
         "slug": "gingerbread-tag",
         "section": "Nametags",
-        "sortOrder": 59,
+        "sortOrder": 47,
         "image": "/Evade/Nametags/gingerbread-tag.png"
       }
     },
@@ -822,7 +666,7 @@
       "system": {
         "slug": "santa-bobo-tag",
         "section": "Nametags",
-        "sortOrder": 60,
+        "sortOrder": 48,
         "image": "/Evade/Nametags/santa-bobo-tag.png"
       }
     },
@@ -835,7 +679,7 @@
       "system": {
         "slug": "christmas-tree-tag",
         "section": "Nametags",
-        "sortOrder": 61,
+        "sortOrder": 49,
         "image": "/Evade/Nametags/christmas-tree-tag.png"
       }
     },
@@ -848,7 +692,7 @@
       "system": {
         "slug": "rose-tag",
         "section": "Nametags",
-        "sortOrder": 62,
+        "sortOrder": 50,
         "image": "/Evade/Nametags/rose-tag.png"
       }
     },
@@ -861,7 +705,7 @@
       "system": {
         "slug": "eclipse-love-tag",
         "section": "Nametags",
-        "sortOrder": 63,
+        "sortOrder": 51,
         "image": "/Evade/Nametags/eclipse-love-tag.png"
       }
     },
@@ -874,7 +718,7 @@
       "system": {
         "slug": "heart-tag",
         "section": "Nametags",
-        "sortOrder": 64,
+        "sortOrder": 52,
         "image": "/Evade/Nametags/heart-tag.png"
       }
     },
@@ -887,7 +731,7 @@
       "system": {
         "slug": "dark-rose-tag",
         "section": "Nametags",
-        "sortOrder": 65,
+        "sortOrder": 53,
         "image": "/Evade/Nametags/dark-rose-tag.png"
       }
     },
@@ -900,7 +744,7 @@
       "system": {
         "slug": "shamrock-stickers",
         "section": "Nametags",
-        "sortOrder": 66,
+        "sortOrder": 54,
         "image": "/Evade/Nametags/shamrock-stickers.png"
       }
     },
@@ -913,7 +757,7 @@
       "system": {
         "slug": "rainbow-shower",
         "section": "Nametags",
-        "sortOrder": 67,
+        "sortOrder": 55,
         "image": "/Evade/Nametags/rainbow-shower.png"
       }
     },
@@ -926,7 +770,7 @@
       "system": {
         "slug": "clover-nametag",
         "section": "Nametags",
-        "sortOrder": 68,
+        "sortOrder": 56,
         "image": "/Evade/Nametags/clover-nametag.png"
       }
     },
@@ -939,7 +783,7 @@
       "system": {
         "slug": "classic-bricks",
         "section": "Nametags",
-        "sortOrder": 69,
+        "sortOrder": 57,
         "image": "/Evade/Nametags/classic-bricks.png"
       }
     },
@@ -952,7 +796,7 @@
       "system": {
         "slug": "bunny-ears-tag",
         "section": "Nametags",
-        "sortOrder": 70,
+        "sortOrder": 58,
         "image": "/Evade/Nametags/bunny-ears-tag.png"
       }
     },
@@ -965,7 +809,7 @@
       "system": {
         "slug": "retro-easter-tag",
         "section": "Nametags",
-        "sortOrder": 71,
+        "sortOrder": 59,
         "image": "/Evade/Nametags/retro-easter-tag.png"
       }
     },
@@ -978,7 +822,7 @@
       "system": {
         "slug": "jolly-roger-tag",
         "section": "Nametags",
-        "sortOrder": 72,
+        "sortOrder": 60,
         "image": "/Evade/Nametags/jolly-roger-tag.png"
       }
     },
@@ -991,7 +835,7 @@
       "system": {
         "slug": "underwater-tag",
         "section": "Nametags",
-        "sortOrder": 73,
+        "sortOrder": 61,
         "image": "/Evade/Nametags/underwater-tag.png"
       }
     },
@@ -1004,7 +848,7 @@
       "system": {
         "slug": "popsicle-tag",
         "section": "Nametags",
-        "sortOrder": 74,
+        "sortOrder": 62,
         "image": "/Evade/Nametags/popsicle-tag.png"
       }
     },
@@ -1017,7 +861,7 @@
       "system": {
         "slug": "shark-tag",
         "section": "Nametags",
-        "sortOrder": 75,
+        "sortOrder": 63,
         "image": "/Evade/Nametags/shark-tag.png"
       }
     },
@@ -1030,7 +874,7 @@
       "system": {
         "slug": "retro-sunset-tag",
         "section": "Nametags",
-        "sortOrder": 76,
+        "sortOrder": 64,
         "image": "/Evade/Nametags/retro-sunset-tag.png"
       }
     },
@@ -1043,7 +887,7 @@
       "system": {
         "slug": "frutiger-blue-tag",
         "section": "Nametags",
-        "sortOrder": 77,
+        "sortOrder": 65,
         "image": "/Evade/Nametags/frutiger-blue-tag.png"
       }
     },
@@ -1056,7 +900,7 @@
       "system": {
         "slug": "frutiger-green-tag",
         "section": "Nametags",
-        "sortOrder": 78,
+        "sortOrder": 66,
         "image": "/Evade/Nametags/frutiger-green-tag.png"
       }
     },
@@ -1069,7 +913,7 @@
       "system": {
         "slug": "green-apple-tag",
         "section": "Nametags",
-        "sortOrder": 79,
+        "sortOrder": 67,
         "image": "/Evade/Nametags/green-apple-tag.png"
       }
     },
@@ -1082,33 +926,33 @@
       "system": {
         "slug": "red-apple-tag",
         "section": "Nametags",
-        "sortOrder": 80,
+        "sortOrder": 68,
         "image": "/Evade/Nametags/red-apple-tag.png"
       }
     },
     {
       "item": {
-        "name": "[[Gubby]] Tag",
+        "name": "Gubby Tag",
         "price": "45 Points",
         "flavor": "RELEASE THE GUBBBBBBBBIIESSSS!!!!!!"
       },
       "system": {
         "slug": "gubby-tag",
         "section": "Nametags",
-        "sortOrder": 81,
+        "sortOrder": 69,
         "image": "/Evade/Nametags/gubby-tag.png"
       }
     },
     {
       "item": {
-        "name": "[[Turkey]] Tag",
+        "name": "Turkey Tag",
         "price": "40 Points",
         "flavor": "gobble gobble"
       },
       "system": {
         "slug": "turkey-tag",
         "section": "Nametags",
-        "sortOrder": 82,
+        "sortOrder": 70,
         "image": "/Evade/Nametags/turkey-tag.png"
       }
     },
@@ -1121,7 +965,7 @@
       "system": {
         "slug": "blood-moon-tag",
         "section": "Nametags",
-        "sortOrder": 83,
+        "sortOrder": 71,
         "image": "/Evade/Nametags/blood-moon-tag.png"
       }
     },
@@ -1134,7 +978,7 @@
       "system": {
         "slug": "pumpkin-carvings-tag",
         "section": "Nametags",
-        "sortOrder": 84,
+        "sortOrder": 72,
         "image": "/Evade/Nametags/pumpkin-carvings-tag.png"
       }
     },
@@ -1147,7 +991,7 @@
       "system": {
         "slug": "cat-witch-tag",
         "section": "Nametags",
-        "sortOrder": 85,
+        "sortOrder": 73,
         "image": "/Evade/Nametags/cat-witch-tag.png"
       }
     },
@@ -1160,7 +1004,7 @@
       "system": {
         "slug": "animated-rainbow",
         "section": "Nametags",
-        "sortOrder": 86,
+        "sortOrder": 74,
         "image": "/Evade/Nametags/animated-rainbow.png"
       }
     },
@@ -1173,7 +1017,7 @@
       "system": {
         "slug": "glowing-haze-tag",
         "section": "Nametags",
-        "sortOrder": 87,
+        "sortOrder": 75,
         "image": "/Evade/Nametags/glowing-haze-tag.png"
       }
     },
@@ -1186,7 +1030,7 @@
       "system": {
         "slug": "lots-of-effects",
         "section": "Nametags",
-        "sortOrder": 88,
+        "sortOrder": 76,
         "image": "/Evade/Nametags/lots-of-effects.png"
       }
     },
@@ -1199,7 +1043,7 @@
       "system": {
         "slug": "strobe-light-tag",
         "section": "Nametags",
-        "sortOrder": 89,
+        "sortOrder": 77,
         "image": "/Evade/Nametags/strobe-light-tag.png"
       }
     },
@@ -1212,7 +1056,7 @@
       "system": {
         "slug": "chromatic-cresendo",
         "section": "Nametags",
-        "sortOrder": 90,
+        "sortOrder": 78,
         "image": "/Evade/Nametags/chromatic-cresendo.png"
       }
     },
@@ -1225,34 +1069,8 @@
       "system": {
         "slug": "bobo-tag",
         "section": "Nametags",
-        "sortOrder": 91,
+        "sortOrder": 79,
         "image": "/Evade/Nametags/bobo-tag.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Unknown",
-        "price": null,
-        "flavor": "TBA"
-      },
-      "system": {
-        "slug": "unknown",
-        "section": "Nametags",
-        "sortOrder": 92,
-        "image": "/Evade/Nametags/unknown.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Unknown",
-        "price": null,
-        "flavor": "TBA"
-      },
-      "system": {
-        "slug": "unknown-2",
-        "section": "Nametags",
-        "sortOrder": 93,
-        "image": "/Evade/Nametags/unknown-2.png"
       }
     }
   ]

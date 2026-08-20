@@ -542,7 +542,7 @@
     },
     {
       "item": {
-        "name": "[[Overhaul]] Hat",
+        "name": "Overhaul Hat",
         "price": null,
         "flavor": "Patient."
       },
@@ -724,7 +724,7 @@
     },
     {
       "item": {
-        "name": "[https://tower-blitz.fandom.com/wiki/Overlord Overlord] Set",
+        "name": "Overlord Set",
         "price": null,
         "flavor": "TBA"
       },
@@ -1270,7 +1270,7 @@
     },
     {
       "item": {
-        "name": "Headless Horeman<br>Headtaker",
+        "name": "Headless Horeman Headtaker",
         "price": "50 Candies",
         "flavor": "You fool, what have you done?!. Created by ElectroMeltdown"
       },

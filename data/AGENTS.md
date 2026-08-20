@@ -60,23 +60,23 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use `bloxodes-quiz-writing` when editing quiz content.
   - Keep quiz and catalog facts source-backed. Do not add active code names, live event statuses, temporary reward tracks, or disputed exact values such as unresolved item costs.
 - `data/Sell Lemons/*`
-  - Dataset-backed Sell Lemons wiki/collection and quiz content, including income sources, powers, secret unlocks, evolution stages, locations, and `quiz.json`.
-  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; use stable progression, power, secret, Evolution, and location facts rather than unverified upgrade rows or source-conflicted secret-step sequences.
+  - Dataset-backed Sell Lemons wiki/collection and quiz content, including income sources, active income methods, powers, secret unlocks, evolution stages, locations, orchard items, orchard mutations, tycoon upgrades, ascension rewards, companions, and `quiz.json`.
+  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; use stable progression, power, secret, Evolution, location, orchard-mutation, and named plot-upgrade facts rather than unstable exact upgrade costs or source-conflicted secret-step sequences.
 - `data/Kick a Lucky Block/*`
   - Dataset-backed Kick a Lucky Block wiki/collection content, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching item images live under `apps/web/public/Kick a Lucky Block/` for brainrots, weights, zones, and official Roblox page media. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
 - `data/Catch And Tame/*`
-  - Dataset-backed Catch And Tame wiki/collection content, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, and items.
-  - Keep rows source-backed to game-specific wiki pages. Mutation rows are currently text-only until clean local row icons are collected.
+  - Dataset-backed Catch And Tame wiki/collection content, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, items, island keys, enchantments, and fishing gear.
+  - Keep rows source-backed to game-specific wiki pages. Mutation rows are currently text-only until clean local row icons are collected. Island-key images are planned from Fandom inventory icons.
 - `data/Untitled Boxing Game/*`
-  - Dataset-backed Untitled Boxing Game wiki/collection content, including styles, gloves, emotes, knockout effects, and titles.
-  - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean row-level art exists. Emotes and titles stay text-only unless clean row-level captures are available.
-  - Keep collections focused on durable style/cosmetic/title systems. Do not add live trade values, manual active-code lists, gamepasses, badges, servers, or current event reward-track planning here.
+  - Dataset-backed Untitled Boxing Game wiki/collection content, including styles, gloves, emotes, knockout effects, titles, maps, and ranks.
+  - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean row-level art exists. Emotes, titles, and ranks stay text-only unless clean row-level captures are available. Map row icons belong under `apps/web/public/Untitled Boxing Game/Maps/` after the image pass.
+  - Keep collections focused on durable style/cosmetic/title/rank systems. Do not add live trade values, manual active-code lists, gamepasses, badges, servers, or current event reward-track planning here.
 - `data/Push Rock for Brainrots/*`
   - Dataset-backed Push Rock for Brainrots wiki/collection content, including Brainrots, rocks/gates, and upgrades.
   - Matching source-backed images live under `apps/web/public/Push Rock for Brainrots/` by collection folder. Keep gamepasses and generic Hunter mentions out of these datasets unless row-level, player-useful facts are available.
 - `data/Restaurant Tycoon 3/*`
-  - Dataset-backed Restaurant Tycoon 3 wiki/collection content, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, and locations.
+  - Dataset-backed Restaurant Tycoon 3 wiki/collection content, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, locations, objectives, music, restaurant templates, and rating categories.
   - Matching source-backed images live under `apps/web/public/Restaurant Tycoon 3/` by collection folder where useful row images are available.
 - `data/Storage Hunters Open World/*`
   - Dataset-backed Storage Hunters: Open World wiki/collection content, including accessories, shop upgrades, titles, achievements, and auction zones.

@@ -71,13 +71,13 @@
     },
     {
       "item": {
-        "name": "Bar Gold Bar",
+        "name": "Gold Bar",
         "worth": "1 Million Coins",
         "context": null,
         "cardSummary": "A rung on the world's million-to-one coin ladder."
       },
       "system": {
-        "slug": "bar-gold-bar",
+        "slug": "gold-bar",
         "section": "World Currencies",
         "sortOrder": 2,
         "image": null
@@ -99,13 +99,13 @@
     },
     {
       "item": {
-        "name": "Bar Platinum Bar",
+        "name": "Platinum Bar",
         "worth": "1 Million Platinum Coins",
         "context": null,
         "cardSummary": "A rung on the world's million-to-one coin ladder."
       },
       "system": {
-        "slug": "bar-platinum-bar",
+        "slug": "platinum-bar",
         "section": "World Currencies",
         "sortOrder": 4,
         "image": null
@@ -127,13 +127,13 @@
     },
     {
       "item": {
-        "name": "Bar Emerald Bar",
+        "name": "Emerald Bar",
         "worth": "1 Million Emerald Coins",
         "context": null,
         "cardSummary": "A rung on the world's million-to-one coin ladder."
       },
       "system": {
-        "slug": "bar-emerald-bar",
+        "slug": "emerald-bar",
         "section": "World Currencies",
         "sortOrder": 6,
         "image": null
