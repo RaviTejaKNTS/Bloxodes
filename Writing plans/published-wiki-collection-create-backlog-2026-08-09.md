@@ -68,6 +68,8 @@ Tier A run completed 2026-08-20 on branch `tier-a-collections` (local only, not 
 
 ### Tier B — 40k to 100k players (11 games, 52 collections)
 
+Tier B run completed 2026-08-20 on branch `tier-a-collections` (local only, not published to production). 32 collections shipped and locally verified; 20 rows blocked with reasons on their lines. Per game: Dress to Impress 3/6, Fisch 9/10, The Strongest Battlegrounds 1/2, Violence District 1/3, LifeTogether RP 0/1, Forsaken 3/4, Evade 8/8, Driving Empire 3/7, Fling Things and People 0/1, Kick a Lucky Block 1/2, Creatures of Sonaria 4/8.
+
 | Game | ~Players | Collections |
 | --- | --- | --- |
 | Dress to Impress | 78k avg | 6 |
