@@ -661,7 +661,14 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   // the release size ceiling; a lower target splits it safely.
   "murder-mystery-2-weapon-sets": 30_000,
   // JJS moves: 397 gameplay-screenshot cards; default packing leaves pages near the release ceiling.
-  "jujutsu-shenanigans-moves": 26_000
+  "jujutsu-shenanigans-moves": 26_000,
+  // Fisch mega-rosters: hundreds of image cards each; default packing exceeds the release ceiling.
+  "fisch-boats": 26_000,
+  "fisch-bobbers": 26_000,
+  "fisch-npcs": 26_000,
+  "fisch-rod-skins": 26_000,
+  "fisch-titles": 40_000,
+  "fisch-lanterns": 30_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -672,7 +679,14 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   // the release size ceiling; a lower target splits it safely.
   "murder-mystery-2-weapon-sets": 30_000,
   // JJS moves: 397 gameplay-screenshot cards; default packing leaves pages near the release ceiling.
-  "jujutsu-shenanigans-moves": 26_000
+  "jujutsu-shenanigans-moves": 26_000,
+  // Fisch mega-rosters: hundreds of image cards each; default packing exceeds the release ceiling.
+  "fisch-boats": 26_000,
+  "fisch-bobbers": 26_000,
+  "fisch-npcs": 26_000,
+  "fisch-rod-skins": 26_000,
+  "fisch-titles": 40_000,
+  "fisch-lanterns": 30_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

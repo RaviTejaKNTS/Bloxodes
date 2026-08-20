@@ -1,0 +1,4668 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Fisch",
+    "gameSlug": "fisch",
+    "collection": "bobbers",
+    "route": "/wiki/fisch/bobbers",
+    "catalogCode": "fisch-bobbers",
+    "itemFields": [
+      "source",
+      "notes"
+    ],
+    "columns": [
+      "source",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Obtainable Bobbers",
+        "Shop Bobbers",
+        "Limited-Time Bobbers",
+        "Unobtainable Bobbers"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "source",
+      "cardDescriptionField": "source",
+      "cardFields": [
+        "source",
+        "notes"
+      ],
+      "tableFields": [
+        "source",
+        "notes"
+      ],
+      "fieldPresentation": {
+        "source": {
+          "kind": "detail",
+          "label": "Source",
+          "omitWhenEmpty": true
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Frozen",
+        "source": "Snowcap Island Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 1,
+        "image": "/Fisch/Bobbers/frozen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stone Claymore",
+        "source": "Bellona's Frenzy of War Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "stone-claymore",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 2,
+        "image": "/Fisch/Bobbers/stone-claymore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Anchor",
+        "source": "Ocean Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "anchor",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 3,
+        "image": "/Fisch/Bobbers/anchor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cliff Peak",
+        "source": "Castaway Cliffs Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "cliff-peak",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 4,
+        "image": "/Fisch/Bobbers/cliff-peak.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coral Reef",
+        "source": "Grand Reef Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "coral-reef",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 5,
+        "image": "/Fisch/Bobbers/coral-reef.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fake Pufferfish",
+        "source": "Roslit Bay Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "fake-pufferfish",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 6,
+        "image": "/Fisch/Bobbers/fake-pufferfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Rubber Ducky",
+        "source": "Overgrowth Caves Bestiary",
+        "notes": "Emits sparkling particles."
+      },
+      "system": {
+        "slug": "frozen-rubber-ducky",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 7,
+        "image": "/Fisch/Bobbers/frozen-rubber-ducky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harp of Light",
+        "source": "Apollo's Song of Light Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "harp-of-light",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 8,
+        "image": "/Fisch/Bobbers/harp-of-light.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infested",
+        "source": "Desolate Deep Bestiary",
+        "notes": "Emits eye particles."
+      },
+      "system": {
+        "slug": "infested",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 9,
+        "image": "/Fisch/Bobbers/infested.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Large Leaf",
+        "source": "Living Garden Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "large-leaf",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 10,
+        "image": "/Fisch/Bobbers/large-leaf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Terrapin",
+        "source": "Terrapin Island Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "mini-terrapin",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 11,
+        "image": "/Fisch/Bobbers/mini-terrapin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mushroom",
+        "source": "Mushgrove Swamp Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "mushroom",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 12,
+        "image": "/Fisch/Bobbers/mushroom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oakling",
+        "source": "Everturn Forest Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "oakling",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 13,
+        "image": "/Fisch/Bobbers/oakling.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Wheel",
+        "source": "Forsaken Shores Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "pirate-wheel",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 14,
+        "image": "/Fisch/Bobbers/pirate-wheel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeleton",
+        "source": "Keepers Altar Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "skeleton",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 15,
+        "image": "/Fisch/Bobbers/skeleton.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toxic Lily Pad",
+        "source": "Toxic Grove Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "toxic-lily-pad",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 16,
+        "image": "/Fisch/Bobbers/toxic-lily-pad.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient Book",
+        "source": "Ancient Archives Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "ancient-book",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 17,
+        "image": "/Fisch/Bobbers/ancient-book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Atlantis Guardian",
+        "source": "Atlantis Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "atlantis-guardian",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 18,
+        "image": "/Fisch/Bobbers/atlantis-guardian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Baby Anglerfish",
+        "source": "Abyssal Zenith Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "baby-anglerfish",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 19,
+        "image": "/Fisch/Bobbers/baby-anglerfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxy Cola",
+        "source": "Crystal Cove Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "bloxy-cola",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 20,
+        "image": "/Fisch/Bobbers/bloxy-cola.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Moon",
+        "source": "Blue Moon Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "blue-moon",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 21,
+        "image": "/Fisch/Bobbers/blue-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bookshelf",
+        "source": "Sunken Reliquary Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "bookshelf",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 22,
+        "image": "/Fisch/Bobbers/bookshelf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brazier",
+        "source": "Collapsed Ruins Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "brazier",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 23,
+        "image": "/Fisch/Bobbers/brazier.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial Koi",
+        "source": "Sunken Depths Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "celestial-koi",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 24,
+        "image": "/Fisch/Bobbers/celestial-koi.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chilled Spikes",
+        "source": "Challenger's Deep Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "chilled-spikes",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 25,
+        "image": "/Fisch/Bobbers/chilled-spikes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Flower",
+        "source": "Crimson Cavern Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "crimson-flower",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 26,
+        "image": "/Fisch/Bobbers/crimson-flower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cryogenic Icicle",
+        "source": "Cryogenic Canal Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "cryogenic-icicle",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 27,
+        "image": "/Fisch/Bobbers/cryogenic-icicle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frigid Crystal",
+        "source": "Frigid Cavern Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "frigid-crystal",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 28,
+        "image": "/Fisch/Bobbers/frigid-crystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Diver",
+        "source": "Crowned Ruins Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "golden-diver",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 29,
+        "image": "/Fisch/Bobbers/golden-diver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Honey Comb",
+        "source": "Nectar Den Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "honey-comb",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 30,
+        "image": "/Fisch/Bobbers/honey-comb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jungle Flower",
+        "source": "Lost Jungle Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "jungle-flower",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 31,
+        "image": "/Fisch/Bobbers/jungle-flower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Keepers Energy",
+        "source": "Enchanted Crevice Bestiary",
+        "notes": "Plays a sound effect upon getting a bite from a fish."
+      },
+      "system": {
+        "slug": "keepers-energy",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 32,
+        "image": "/Fisch/Bobbers/keepers-energy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "King Jellyfish",
+        "source": "Ethereal Abyss Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "king-jellyfish",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 33,
+        "image": "/Fisch/Bobbers/king-jellyfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava",
+        "source": "Roslit Volcano Bestiary",
+        "notes": "Briefly emits lava popping particles."
+      },
+      "system": {
+        "slug": "lava",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 34,
+        "image": "/Fisch/Bobbers/lava.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Spout",
+        "source": "Volcanic Vents Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "lava-spout",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 35,
+        "image": "/Fisch/Bobbers/lava-spout.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luminescent Flower",
+        "source": "Luminescent Cavern Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "luminescent-flower",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 36,
+        "image": "/Fisch/Bobbers/luminescent-flower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pickaxe",
+        "source": "Mineshaft Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "pickaxe",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 37,
+        "image": "/Fisch/Bobbers/pickaxe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon's Pillar",
+        "source": "Poseidon's Storm of Floods Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "poseidon-s-pillar",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 38,
+        "image": "/Fisch/Bobbers/poseidon-s-pillar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Quiet Crystal",
+        "source": "Calm Zone Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "quiet-crystal",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 39,
+        "image": "/Fisch/Bobbers/quiet-crystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rubber Ducky",
+        "source": "Moosewood Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "rubber-ducky",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 40,
+        "image": "/Fisch/Bobbers/rubber-ducky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starfish",
+        "source": "Coral Bastion Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "starfish",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 41,
+        "image": "/Fisch/Bobbers/starfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sun",
+        "source": "Sunstone Island Bestiary",
+        "notes": "Glows very brightly with the color of the user's rod."
+      },
+      "system": {
+        "slug": "sun",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 42,
+        "image": "/Fisch/Bobbers/sun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tornado",
+        "source": "Atlantean Storm Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "tornado",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 43,
+        "image": "/Fisch/Bobbers/tornado.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Chest",
+        "source": "Treasure Island Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "treasure-chest",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 44,
+        "image": "/Fisch/Bobbers/treasure-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vertigo Rock",
+        "source": "Vertigo Bestiary",
+        "notes": "Glows with the color of the user's rod."
+      },
+      "system": {
+        "slug": "vertigo-rock",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 45,
+        "image": "/Fisch/Bobbers/vertigo-rock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zeus' Herald",
+        "source": "Zeus's Sanctuary Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "zeus-herald",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 46,
+        "image": "/Fisch/Bobbers/zeus-herald.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Devourer",
+        "source": "Kraken Lair Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "abyssal-devourer",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 47,
+        "image": "/Fisch/Bobbers/abyssal-devourer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Amber",
+        "source": "Ancient Isle Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "amber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 48,
+        "image": "/Fisch/Bobbers/amber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brine",
+        "source": "Brine Pool Bestiary",
+        "notes": "Changes with the color of the user's rod."
+      },
+      "system": {
+        "slug": "brine",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 49,
+        "image": "/Fisch/Bobbers/brine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot Friend",
+        "source": "Carrot Garden Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "carrot-friend",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 50,
+        "image": "/Fisch/Bobbers/carrot-friend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crag-Crabobber",
+        "source": "Scoria Reach Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "crag-crabobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 51,
+        "image": "/Fisch/Bobbers/crag-crabobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystal Cluster",
+        "source": "Glacial Grotto Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "crystal-cluster",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 52,
+        "image": "/Fisch/Bobbers/crystal-cluster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harpoon",
+        "source": "Veil of the Forsaken Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "harpoon",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 53,
+        "image": "/Fisch/Bobbers/harpoon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Master Relay",
+        "source": "The Deep Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "master-relay",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 54,
+        "image": "/Fisch/Bobbers/master-relay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nautilis Shell",
+        "source": "The Depths Bestiary",
+        "notes": "Emits particles upon getting a bite from a fish."
+      },
+      "system": {
+        "slug": "nautilis-shell",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 55,
+        "image": "/Fisch/Bobbers/nautilis-shell.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obelisk",
+        "source": "Tidefall Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "obelisk",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 56,
+        "image": "/Fisch/Bobbers/obelisk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Supercharged Battery",
+        "source": "Zeus's Thunder of Chaos Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "supercharged-battery",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 57,
+        "image": "/Fisch/Bobbers/supercharged-battery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aurora",
+        "source": "All Bestiaries",
+        "notes": "Emits a rainbow circle particle. Plays a sound effect upon getting a bite from a fish."
+      },
+      "system": {
+        "slug": "aurora",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 58,
+        "image": "/Fisch/Bobbers/aurora.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Tombstone",
+        "source": "Hades' Underworld of Indefinite Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "cursed-tombstone",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 59,
+        "image": "/Fisch/Bobbers/cursed-tombstone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Olympian Core",
+        "source": "Olympian Fissure Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "olympian-core",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 60,
+        "image": "/Fisch/Bobbers/olympian-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dusk Bobber",
+        "source": "Duskwire's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "dusk-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 61,
+        "image": "/Fisch/Bobbers/dusk-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostly Conch",
+        "source": "Abyssal Specter Rod's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "ghostly-conch",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 62,
+        "image": "/Fisch/Bobbers/ghostly-conch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Prismatic Gem",
+        "source": "Ethereal Prism Rod's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "prismatic-gem",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 63,
+        "image": "/Fisch/Bobbers/prismatic-gem.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Bobber",
+        "source": "Spiritbinder's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "spirit-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 64,
+        "image": "/Fisch/Bobbers/spirit-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO Of Glorp",
+        "source": "Blade Of Glorp's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "ufo-of-glorp",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 65,
+        "image": "/Fisch/Bobbers/ufo-of-glorp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astraeus Bobber",
+        "source": "Astraeus Serenade's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "astraeus-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 66,
+        "image": "/Fisch/Bobbers/astraeus-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ethereal Bobber",
+        "source": "Ruinous Oath's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "ethereal-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 67,
+        "image": "/Fisch/Bobbers/ethereal-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fabulous Bobber",
+        "source": "Fabulous Rod's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "fabulous-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 68,
+        "image": "/Fisch/Bobbers/fabulous-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Founders Rainbow",
+        "source": "Mythical Rod's Mastery",
+        "notes": "Glows and cycles through rainbow colors."
+      },
+      "system": {
+        "slug": "founders-rainbow",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 69,
+        "image": "/Fisch/Bobbers/founders-rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tryhard Bobber",
+        "source": "Tryhard's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "tryhard-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 70,
+        "image": "/Fisch/Bobbers/tryhard-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Floppy Bobber",
+        "source": "Onirifalx's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "floppy-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 71,
+        "image": "/Fisch/Bobbers/floppy-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare",
+        "source": "Dreambreaker's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "nightmare",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 72,
+        "image": "/Fisch/Bobbers/nightmare.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gemidium",
+        "source": "Castbound's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "gemidium",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 73,
+        "image": "/Fisch/Bobbers/gemidium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Banana",
+        "source": "Lemonade Serenade's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "banana",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 74,
+        "image": "/Fisch/Bobbers/banana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Berry",
+        "source": "Lemonade Serenade's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "berry",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 75,
+        "image": "/Fisch/Bobbers/berry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lemon",
+        "source": "Lemonade Serenade's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "lemon",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 76,
+        "image": "/Fisch/Bobbers/lemon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lime",
+        "source": "Lemonade Serenade's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "lime",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 77,
+        "image": "/Fisch/Bobbers/lime.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Moon",
+        "source": "Lullaby's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "moon",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 78,
+        "image": "/Fisch/Bobbers/moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Master Orb",
+        "source": "Masterline's Mastery",
+        "notes": null
+      },
+      "system": {
+        "slug": "master-orb",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 79,
+        "image": "/Fisch/Bobbers/master-orb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stock",
+        "source": "Starter",
+        "notes": null
+      },
+      "system": {
+        "slug": "stock",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 80,
+        "image": "/Fisch/Bobbers/stock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gem",
+        "source": "Meteors",
+        "notes": "11% drop chance."
+      },
+      "system": {
+        "slug": "gem",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 81,
+        "image": "/Fisch/Bobbers/gem.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Compass",
+        "source": "Treasure Chests",
+        "notes": "9.58% drop chance."
+      },
+      "system": {
+        "slug": "compass",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 82,
+        "image": "/Fisch/Bobbers/compass.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Coin",
+        "source": "Treasure Chests",
+        "notes": "4.79% drop chance."
+      },
+      "system": {
+        "slug": "gold-coin",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 83,
+        "image": "/Fisch/Bobbers/gold-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whaley",
+        "source": "Treasure Chests",
+        "notes": "4.79% drop chance."
+      },
+      "system": {
+        "slug": "whaley",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 84,
+        "image": "/Fisch/Bobbers/whaley.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteor Stone",
+        "source": "Treasure Chests",
+        "notes": "1.60% drop chance."
+      },
+      "system": {
+        "slug": "meteor-stone",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 85,
+        "image": "/Fisch/Bobbers/meteor-stone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drifter's Tale",
+        "source": "Reward from the Atlantean Storm Quest",
+        "notes": "Plays a paper sound effect upon getting a bite from a fish."
+      },
+      "system": {
+        "slug": "drifter-s-tale",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 86,
+        "image": "/Fisch/Bobbers/drifter-s-tale.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magic Ball",
+        "source": "Return two Shards to Merlin",
+        "notes": null
+      },
+      "system": {
+        "slug": "magic-ball",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 87,
+        "image": "/Fisch/Bobbers/magic-ball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barnacled Hook",
+        "source": "Obtained by talking to Diver during Todd's Quest",
+        "notes": null
+      },
+      "system": {
+        "slug": "barnacled-hook",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 88,
+        "image": "/Fisch/Bobbers/barnacled-hook.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Moby Bobber",
+        "source": "Return a Moby to Captain Ahab",
+        "notes": "Plays a blue particle effect upon getting a bite from a fish. Plays a sound effect upon getting a bite from a fish."
+      },
+      "system": {
+        "slug": "the-moby-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 89,
+        "image": "/Fisch/Bobbers/the-moby-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloop Bobber",
+        "source": "Bloop Cosmetic Crates",
+        "notes": "20% Chance to be obtained. Plays a sound effect when getting a bite from a fish."
+      },
+      "system": {
+        "slug": "bloop-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 90,
+        "image": "/Fisch/Bobbers/bloop-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chromatic Bobber",
+        "source": "Rewarded for reaching Level 1200",
+        "notes": "Emits small waves particles."
+      },
+      "system": {
+        "slug": "chromatic-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 91,
+        "image": "/Fisch/Bobbers/chromatic-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisch Bobber",
+        "source": "Rewarded for reaching Level 1600",
+        "notes": null
+      },
+      "system": {
+        "slug": "fisch-bobber",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 92,
+        "image": "/Fisch/Bobbers/fisch-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clownfish Cat Toy",
+        "source": "Rewarded for completing Crazy Cat Lady's third quest",
+        "notes": "Buffs the Nico's Yarncaster giving it a 30% chance for Nico's Nyantics (5×)."
+      },
+      "system": {
+        "slug": "clownfish-cat-toy",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 93,
+        "image": "/Fisch/Bobbers/clownfish-cat-toy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carbon",
+        "source": "Code - \"CARBON\"",
+        "notes": "Custom Creator Code & Bobber for Carbon Meister Plays."
+      },
+      "system": {
+        "slug": "carbon",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 94,
+        "image": "/Fisch/Bobbers/carbon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Miniature Bomb",
+        "source": "Purchased for 700,000C$ at the Black Market",
+        "notes": "Emits an explosion effect when getting a bite from a fish. Plays a sound effect when getting a bite from a fish."
+      },
+      "system": {
+        "slug": "miniature-bomb",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 95,
+        "image": "/Fisch/Bobbers/miniature-bomb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cataclysm Cranium",
+        "source": "Give the Divine Hunter a Cataclysm Carp.",
+        "notes": null
+      },
+      "system": {
+        "slug": "cataclysm-cranium",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 96,
+        "image": "/Fisch/Bobbers/cataclysm-cranium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Angler Lure",
+        "source": "Rewarded from Artisan Nix's first quest",
+        "notes": null
+      },
+      "system": {
+        "slug": "angler-lure",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 97,
+        "image": "/Fisch/Bobbers/angler-lure.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scrap-Gauge",
+        "source": "Rewarded from Artisan Nix's second quest",
+        "notes": null
+      },
+      "system": {
+        "slug": "scrap-gauge",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 98,
+        "image": "/Fisch/Bobbers/scrap-gauge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystal Prism",
+        "source": "Rewarded from Artisan Nix's third quest",
+        "notes": null
+      },
+      "system": {
+        "slug": "crystal-prism",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 99,
+        "image": "/Fisch/Bobbers/crystal-prism.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient Relic",
+        "source": "Rewarded from Curator Lyra's final quest",
+        "notes": null
+      },
+      "system": {
+        "slug": "ancient-relic",
+        "section": "Obtainable Bobbers",
+        "sortOrder": 100,
+        "image": "/Fisch/Bobbers/ancient-relic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lobster Pal",
+        "source": "Lobster Shores Bestiary",
+        "notes": "Bestiary removed temporarily in 1.47"
+      },
+      "system": {
+        "slug": "lobster-pal",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 101,
+        "image": "/Fisch/Bobbers/lobster-pal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fishing Net",
+        "source": "Netter's Haven Bestiary",
+        "notes": "Bestiary removed, obtained before Second Sea Removal"
+      },
+      "system": {
+        "slug": "fishing-net",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 102,
+        "image": "/Fisch/Bobbers/fishing-net.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Azure Flower",
+        "source": "Azure Lagoon Bestiary",
+        "notes": "Bestiaries removed, obtained before Second Sea Removal"
+      },
+      "system": {
+        "slug": "azure-flower",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 103,
+        "image": "/Fisch/Bobbers/azure-flower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cannon",
+        "source": "Gilded Arch Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "cannon",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 104,
+        "image": "/Fisch/Bobbers/cannon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ember Cluster",
+        "source": "Emberreach Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "ember-cluster",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 105,
+        "image": "/Fisch/Bobbers/ember-cluster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lighthouse",
+        "source": "Waveborne Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "lighthouse",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 106,
+        "image": "/Fisch/Bobbers/lighthouse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lush Tree",
+        "source": "Lushgrove Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "lush-tree",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 107,
+        "image": "/Fisch/Bobbers/lush-tree.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pine Tree",
+        "source": "Pine Shoal Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "pine-tree",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 108,
+        "image": "/Fisch/Bobbers/pine-tree.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spiritual Gem",
+        "source": "Isle of New Beginnings Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "spiritual-gem",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 109,
+        "image": "/Fisch/Bobbers/spiritual-gem.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oceanic Tunnel",
+        "source": "Open Ocean Bestiary",
+        "notes": "Bestiaries removed, obtained before Second Sea Removal"
+      },
+      "system": {
+        "slug": "oceanic-tunnel",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 110,
+        "image": "/Fisch/Bobbers/oceanic-tunnel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Whale",
+        "source": "Whale Interior Bestiary",
+        "notes": null
+      },
+      "system": {
+        "slug": "treasure-whale",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 111,
+        "image": "/Fisch/Bobbers/treasure-whale.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Dreamer",
+        "source": "The Cursed Shores Bestiary",
+        "notes": "Bestiary removed, obtained before Second Sea Removal"
+      },
+      "system": {
+        "slug": "cursed-dreamer",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 112,
+        "image": "/Fisch/Bobbers/cursed-dreamer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skull",
+        "source": "Complete the Forsaken Shores Bestiary (before change)",
+        "notes": "Forsaken Shores' Bestiary bobber was changed to \"Pirate Wheel\"."
+      },
+      "system": {
+        "slug": "skull",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 113,
+        "image": "/Fisch/Bobbers/skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystallized Ball",
+        "source": "Get 500xp in the Midnight Cruiser Quest",
+        "notes": "Quest was available from Jan 5, 2025, to Jan 18, 2025."
+      },
+      "system": {
+        "slug": "crystallized-ball",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 114,
+        "image": "/Fisch/Bobbers/crystallized-ball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Party Popper",
+        "source": "Code - \"1BVisits\" (expired)",
+        "notes": "Made in celebration for Fisch reaching 1 billion place visits. Plays sound effect upon getting a bite from a fish."
+      },
+      "system": {
+        "slug": "party-popper",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 115,
+        "image": "/Fisch/Bobbers/party-popper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunken Relic",
+        "source": "Awarded for Playing at the launch of the Mariana's Veil Update",
+        "notes": "Advertised as the final reward for the Mariana's Veil Countdown"
+      },
+      "system": {
+        "slug": "sunken-relic",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 116,
+        "image": "/Fisch/Bobbers/sunken-relic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunken Ship",
+        "source": "Awarded for Playing at the launch of the Atlantis Update, or from the \"THEKRAKEN\" Code",
+        "notes": "Advertised as the final reward for the Atlantis Event. Plays sound effect upon getting a bite from a fish."
+      },
+      "system": {
+        "slug": "sunken-ship",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 117,
+        "image": "/Fisch/Bobbers/sunken-ship.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Wiggly Worm",
+        "source": "Code - \"FRIENDXP\" (expired)",
+        "notes": "Code exclusive."
+      },
+      "system": {
+        "slug": "blue-wiggly-worm",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 118,
+        "image": "/Fisch/Bobbers/blue-wiggly-worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Wiggly Worm",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "green-wiggly-worm",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 119,
+        "image": "/Fisch/Bobbers/green-wiggly-worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Wiggly Worm",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "purple-wiggly-worm",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 120,
+        "image": "/Fisch/Bobbers/purple-wiggly-worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leaf",
+        "source": "Code - \"ROSES\" (expired)",
+        "notes": "Code Exclusive."
+      },
+      "system": {
+        "slug": "leaf",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 121,
+        "image": "/Fisch/Bobbers/leaf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunken Diver",
+        "source": "Awarded for Playing at the launch of the Tidefall",
+        "notes": "Advertised as the final reward for the Tidefall's Countdown"
+      },
+      "system": {
+        "slug": "sunken-diver",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 122,
+        "image": "/Fisch/Bobbers/sunken-diver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toxic Flower",
+        "source": "Awarded for Playing at the launch of the Jungle Expansion",
+        "notes": "Advertised as the final reward for the Jungle Expansion's Countdown It's shrouded in a purple mist."
+      },
+      "system": {
+        "slug": "toxic-flower",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 123,
+        "image": "/Fisch/Bobbers/toxic-flower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisch Coin",
+        "source": "Code - \"MermaidCove\" (expired)",
+        "notes": "Code Exclusive."
+      },
+      "system": {
+        "slug": "fisch-coin",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 124,
+        "image": "/Fisch/Bobbers/fisch-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "goober",
+        "source": "Opening Developer Gift",
+        "notes": "Available between August 15, 2026 and August 17, 2026."
+      },
+      "system": {
+        "slug": "goober",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 125,
+        "image": "/Fisch/Bobbers/goober.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Guitar Pick",
+        "source": "Complete Seraphel's A Celestial Tune quest",
+        "notes": "Venue Takeover"
+      },
+      "system": {
+        "slug": "guitar-pick",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 126,
+        "image": "/Fisch/Bobbers/guitar-pick.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Bunny",
+        "source": "Collect 10 eggs",
+        "notes": "Easter 2"
+      },
+      "system": {
+        "slug": "chocolate-bunny",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 127,
+        "image": "/Fisch/Bobbers/chocolate-bunny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Reef Guardian",
+        "source": "Makh's quest",
+        "notes": "April Fools (2026)"
+      },
+      "system": {
+        "slug": "mini-reef-guardian",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 128,
+        "image": "/Fisch/Bobbers/mini-reef-guardian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Redlip Batfish",
+        "source": "Migura's quest",
+        "notes": "April Fools (2026)"
+      },
+      "system": {
+        "slug": "redlip-batfish",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 129,
+        "image": "/Fisch/Bobbers/redlip-batfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Not-So-Largemouth Bass",
+        "source": "Tawou's quest",
+        "notes": "April Fools (2026)"
+      },
+      "system": {
+        "slug": "not-so-largemouth-bass",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 130,
+        "image": "/Fisch/Bobbers/not-so-largemouth-bass.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Coin",
+        "source": "Leprechaun Larry's quest",
+        "notes": "Shamrock Seas"
+      },
+      "system": {
+        "slug": "golden-coin",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 131,
+        "image": "/Fisch/Bobbers/golden-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Heart",
+        "source": "Awarded for placing Top 1 in Most Valentines Fish Caught Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "gold-heart",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 132,
+        "image": "/Fisch/Bobbers/gold-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Heart",
+        "source": "Awarded for placing #2-10 in Most Valentines Fish Caught Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "silver-heart",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 133,
+        "image": "/Fisch/Bobbers/silver-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bronze Heart",
+        "source": "Awarded for placing #11-100 in Most Valentines Fish Caught Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "bronze-heart",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 134,
+        "image": "/Fisch/Bobbers/bronze-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Heart-Lock",
+        "source": "Awarded for placing Top 1 in Most Duo Quests Completed Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "gold-heart-lock",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 135,
+        "image": "/Fisch/Bobbers/gold-heart-lock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Heart-Lock",
+        "source": "Awarded for placing #2-10 in Most Duo Quests Completed Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "silver-heart-lock",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 136,
+        "image": "/Fisch/Bobbers/silver-heart-lock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bronze Heart-Lock",
+        "source": "Awarded for placing #11-100 in Most Duo Quests Completed Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "bronze-heart-lock",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 137,
+        "image": "/Fisch/Bobbers/bronze-heart-lock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Chocolate",
+        "source": "Awarded for placing Top 1 in Most Chocolates Earned Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "gold-chocolate",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 138,
+        "image": "/Fisch/Bobbers/gold-chocolate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Chocolate",
+        "source": "Awarded for placing #2-10 in Most Chocolates Earned Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "silver-chocolate",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 139,
+        "image": "/Fisch/Bobbers/silver-chocolate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bronze Chocolate",
+        "source": "Awarded for placing #11-100 in Most Chocolates Earned Leaderboard",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "bronze-chocolate",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 140,
+        "image": "/Fisch/Bobbers/bronze-chocolate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid's Treat Box",
+        "source": "Valentine's Day Reward",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "cupid-s-treat-box",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 141,
+        "image": "/Fisch/Bobbers/cupid-s-treat-box.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate",
+        "source": "Purchased in Sweetheart Shores for 150 Chocolates",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "chocolate",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 142,
+        "image": "/Fisch/Bobbers/chocolate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Love Letter",
+        "source": "Complete Sweetheart Sam's Second Quest",
+        "notes": "Valentides 2"
+      },
+      "system": {
+        "slug": "love-letter",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 143,
+        "image": "/Fisch/Bobbers/love-letter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Party Hat Bobber",
+        "source": "Obtained a 30% chance from the New Years Exclusive Express",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "party-hat-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 144,
+        "image": "/Fisch/Bobbers/party-hat-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balloon Doggy Bobber",
+        "source": "Obtained at a 20% chance from the New Years Exclusive Express",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "balloon-doggy-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 145,
+        "image": "/Fisch/Bobbers/balloon-doggy-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Nessie Bobber",
+        "source": "Obtained a 30% chance from the Fischmas Exclusive Express",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "gingerbread-nessie-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 146,
+        "image": "/Fisch/Bobbers/gingerbread-nessie-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Melty Man Bobber",
+        "source": "Obtained at a 20% chance from the Fischmas Exclusive Express",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "melty-man-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 147,
+        "image": "/Fisch/Bobbers/melty-man-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostwhale",
+        "source": "Catch a Northstar Whale while using Rod Of The Exalted One",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "frostwhale",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 148,
+        "image": "/Fisch/Bobbers/frostwhale.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa's Hat",
+        "source": "Complete Santa's Second Quest",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "santa-s-hat",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 149,
+        "image": "/Fisch/Bobbers/santa-s-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Light-Wrapped Bobber",
+        "source": "Reward for day 2 of the Fischmas 2 Advent Calendar",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "light-wrapped-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 150,
+        "image": "/Fisch/Bobbers/light-wrapped-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ribbon",
+        "source": "Reward for day 9 of the Fischmas 2 Advent Calendar",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "ribbon",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 151,
+        "image": "/Fisch/Bobbers/ribbon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wreath",
+        "source": "Reward for day 15 of the Fischmas 2 Advent Calendar",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "wreath",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 152,
+        "image": "/Fisch/Bobbers/wreath.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chimney",
+        "source": "Reward for day 22 of the Fischmas 2 Advent Calendar",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "chimney",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 153,
+        "image": "/Fisch/Bobbers/chimney.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toy Train",
+        "source": "Reward for day 27 of the Fischmas 2 Advent Calendar",
+        "notes": "Fischmas 2"
+      },
+      "system": {
+        "slug": "toy-train",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 154,
+        "image": "/Fisch/Bobbers/toy-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Acorn",
+        "source": "Complete Pilgrim's Second Quest",
+        "notes": "Fischgiving 2"
+      },
+      "system": {
+        "slug": "acorn",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 155,
+        "image": "/Fisch/Bobbers/acorn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apple Pie Slice",
+        "source": "Complete Pilgrim's Fourth Quest",
+        "notes": "Fischgiving 2"
+      },
+      "system": {
+        "slug": "apple-pie-slice",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 156,
+        "image": "/Fisch/Bobbers/apple-pie-slice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mimic Spellbook",
+        "source": "Code - \"FISCHFRIGHT2025\" (expired)",
+        "notes": "FischFright 2"
+      },
+      "system": {
+        "slug": "mimic-spellbook",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 157,
+        "image": "/Fisch/Bobbers/mimic-spellbook.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eyeball",
+        "source": "Donate 1 Witches Ingredient to the Witch's Cauldron",
+        "notes": "FischFright 2"
+      },
+      "system": {
+        "slug": "eyeball",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 158,
+        "image": "/Fisch/Bobbers/eyeball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gravestone",
+        "source": "Donate 5 Witches Ingredient to the Witch's Cauldron",
+        "notes": "FischFright 2"
+      },
+      "system": {
+        "slug": "gravestone",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 159,
+        "image": "/Fisch/Bobbers/gravestone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost",
+        "source": "Donate 12 Witches Ingredient to the Witch's Cauldron",
+        "notes": "FischFright 2"
+      },
+      "system": {
+        "slug": "ghost",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 160,
+        "image": "/Fisch/Bobbers/ghost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spider",
+        "source": "Donate 40 Witches Ingredient to the Witch's Cauldron",
+        "notes": "FischFright 2"
+      },
+      "system": {
+        "slug": "spider",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 161,
+        "image": "/Fisch/Bobbers/spider.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lollipop",
+        "source": "Purchased from the Flying Dutchman (NPC) for 150 Candy",
+        "notes": "FischFright 2"
+      },
+      "system": {
+        "slug": "lollipop",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 162,
+        "image": "/Fisch/Bobbers/lollipop.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spearhead",
+        "source": "Complete the Jungle's Echo Bestiary",
+        "notes": "Jungle's Echo"
+      },
+      "system": {
+        "slug": "spearhead",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 163,
+        "image": "/Fisch/Bobbers/spearhead.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astro",
+        "source": "Exchanged for a Meteor Shard",
+        "notes": "Meteorologist"
+      },
+      "system": {
+        "slug": "astro",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 164,
+        "image": "/Fisch/Bobbers/astro.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Telescope",
+        "source": "Exchanged for a Meteor Shard",
+        "notes": "Meteorologist"
+      },
+      "system": {
+        "slug": "telescope",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 165,
+        "image": "/Fisch/Bobbers/telescope.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteor",
+        "source": "Exchanged for a Meteor Shard",
+        "notes": "Meteorologist"
+      },
+      "system": {
+        "slug": "meteor",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 166,
+        "image": "/Fisch/Bobbers/meteor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coconut",
+        "source": "Purchased from Shell Merchant for 450 Shells and from Beach Splash Bundle in the shop for 869 robux",
+        "notes": "Fischfest 1"
+      },
+      "system": {
+        "slug": "coconut",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 167,
+        "image": "/Fisch/Bobbers/coconut.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Smurf Bobber",
+        "source": "Return 5 Smurfs to Smurfette",
+        "notes": "Smurfs Movie Event"
+      },
+      "system": {
+        "slug": "smurf-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 168,
+        "image": "/Fisch/Bobbers/smurf-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Egg",
+        "source": "Collect 5 eggs during Easter 1",
+        "notes": "Easter 1"
+      },
+      "system": {
+        "slug": "easter-egg",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 169,
+        "image": "/Fisch/Bobbers/easter-egg.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruined Dreamer",
+        "source": "Interact with the altar in the Cults Curse Room",
+        "notes": "Cults Curse"
+      },
+      "system": {
+        "slug": "ruined-dreamer",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 170,
+        "image": "/Fisch/Bobbers/ruined-dreamer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clover",
+        "source": "Turn in 2 Event Fish to Clover McRich",
+        "notes": "Lucky Event"
+      },
+      "system": {
+        "slug": "clover",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 171,
+        "image": "/Fisch/Bobbers/clover.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Volcano Bobber",
+        "source": "Interact with the mysterious rock that flew out of the volcano",
+        "notes": "Ashfall"
+      },
+      "system": {
+        "slug": "volcano-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 172,
+        "image": "/Fisch/Bobbers/volcano-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Candy",
+        "source": "Reach the 50 Fish milestone in the Valentine's Quest",
+        "notes": "Valentine's Day"
+      },
+      "system": {
+        "slug": "heart-candy",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 173,
+        "image": "/Fisch/Bobbers/heart-candy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Rose",
+        "source": "Reach the 500 Fish milestone in the Valentine's Quest",
+        "notes": "Valentine's Day"
+      },
+      "system": {
+        "slug": "red-rose",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 174,
+        "image": "/Fisch/Bobbers/red-rose.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glimmer",
+        "source": "Turn in 2 Algae to Dr Glimmerfin's Golden Tide Quest",
+        "notes": "Golden Tide"
+      },
+      "system": {
+        "slug": "glimmer",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 175,
+        "image": "/Fisch/Bobbers/glimmer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Box",
+        "source": "Reward for day 2 of the Fischmas Advent Calendar (8 December)",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "gift-box",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 176,
+        "image": "/Fisch/Bobbers/gift-box.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jingle Bell",
+        "source": "Reward for day 10 of the Fischmas Advent Calendar (16 December)",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "jingle-bell",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 177,
+        "image": "/Fisch/Bobbers/jingle-bell.png"
+      }
+    },
+    {
+      "item": {
+        "name": "XMAS Ornament",
+        "source": "Reward for day 17 of the Fischmas Advent Calendar (22 December)",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "xmas-ornament",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 178,
+        "image": "/Fisch/Bobbers/xmas-ornament.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Festive Light",
+        "source": "Obtained from Festive Bait Crates",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "red-festive-light",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 179,
+        "image": "/Fisch/Bobbers/red-festive-light.png"
+      }
+    },
+    {
+      "item": {
+        "name": "White Festive Light",
+        "source": "Obtained from Festive Bait Crates",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "white-festive-light",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 180,
+        "image": "/Fisch/Bobbers/white-festive-light.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Festive Light",
+        "source": "Obtained from Festive Bait Crates",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "green-festive-light",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 181,
+        "image": "/Fisch/Bobbers/green-festive-light.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snow Globe",
+        "source": "Obtained from Santa's First Quest",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "snow-globe",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 182,
+        "image": "/Fisch/Bobbers/snow-globe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Crystal",
+        "source": "Obtained from Santa's Second Quest",
+        "notes": "Fischmas"
+      },
+      "system": {
+        "slug": "elite-crystal",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 183,
+        "image": "/Fisch/Bobbers/elite-crystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hour Glass",
+        "source": "Complete the Archaeologist Bestiary",
+        "notes": "Archaeological Hunt"
+      },
+      "system": {
+        "slug": "hour-glass",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 184,
+        "image": "/Fisch/Bobbers/hour-glass.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack-O-Bobber",
+        "source": "FischFright - Donate 1 Ingredient to the Witch's Cauldron.",
+        "notes": "FischFright"
+      },
+      "system": {
+        "slug": "jack-o-bobber",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 185,
+        "image": "/Fisch/Bobbers/jack-o-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Art Skull",
+        "source": "FischFright - Donate 2 Ingredients to the Witch's Cauldron.",
+        "notes": "FischFright"
+      },
+      "system": {
+        "slug": "dark-art-skull",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 186,
+        "image": "/Fisch/Bobbers/dark-art-skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bat",
+        "source": "FischFright - Donate 3 Ingredients to the Witch's Cauldron.",
+        "notes": "FischFright"
+      },
+      "system": {
+        "slug": "bat",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 187,
+        "image": "/Fisch/Bobbers/bat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Corn",
+        "source": "Code - \"FischFright2024\" (expired)",
+        "notes": "FischFright"
+      },
+      "system": {
+        "slug": "candy-corn",
+        "section": "Limited-Time Bobbers",
+        "sortOrder": 188,
+        "image": "/Fisch/Bobbers/candy-corn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart",
+        "source": "Bobber Pack Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "heart",
+        "section": "Shop Bobbers",
+        "sortOrder": 189,
+        "image": "/Fisch/Bobbers/heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat",
+        "source": "Bobber Pack Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "cat",
+        "section": "Shop Bobbers",
+        "sortOrder": 190,
+        "image": "/Fisch/Bobbers/cat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cube",
+        "source": "Bobber Pack Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "cube",
+        "section": "Shop Bobbers",
+        "sortOrder": 191,
+        "image": "/Fisch/Bobbers/cube.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge",
+        "source": "Bobber Pack Gamepass",
+        "notes": "Larger than other Bobbers."
+      },
+      "system": {
+        "slug": "huge",
+        "section": "Shop Bobbers",
+        "sortOrder": 192,
+        "image": "/Fisch/Bobbers/huge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wireframe",
+        "source": "Bobber Pack Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "wireframe",
+        "section": "Shop Bobbers",
+        "sortOrder": 193,
+        "image": "/Fisch/Bobbers/wireframe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Star",
+        "source": "Supporter Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "star",
+        "section": "Shop Bobbers",
+        "sortOrder": 194,
+        "image": "/Fisch/Bobbers/star.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Translucent",
+        "source": "Bobber Pack Gamepass",
+        "notes": "Transparent."
+      },
+      "system": {
+        "slug": "translucent",
+        "section": "Shop Bobbers",
+        "sortOrder": 195,
+        "image": "/Fisch/Bobbers/translucent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Income",
+        "source": "Bobber Pack Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "income",
+        "section": "Shop Bobbers",
+        "sortOrder": 196,
+        "image": "/Fisch/Bobbers/income.png"
+      }
+    },
+    {
+      "item": {
+        "name": "LED",
+        "source": "Bobber Pack Gamepass",
+        "notes": "Glows."
+      },
+      "system": {
+        "slug": "led",
+        "section": "Shop Bobbers",
+        "sortOrder": 197,
+        "image": "/Fisch/Bobbers/led.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning",
+        "source": "Bobber Pack Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "lightning",
+        "section": "Shop Bobbers",
+        "sortOrder": 198,
+        "image": "/Fisch/Bobbers/lightning.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evil Ducky",
+        "source": "Bobber Pack Gamepass",
+        "notes": null
+      },
+      "system": {
+        "slug": "evil-ducky",
+        "section": "Shop Bobbers",
+        "sortOrder": 199,
+        "image": "/Fisch/Bobbers/evil-ducky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cybernade",
+        "source": "Bobber Shop (Week 75-76)",
+        "notes": "Available from 14th Aug to 21st Aug, 2026."
+      },
+      "system": {
+        "slug": "cybernade",
+        "section": "Shop Bobbers",
+        "sortOrder": 200,
+        "image": "/Fisch/Bobbers/cybernade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cruciful",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "cruciful",
+        "section": "Shop Bobbers",
+        "sortOrder": 201,
+        "image": "/Fisch/Bobbers/cruciful.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sceptara",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "sceptara",
+        "section": "Shop Bobbers",
+        "sortOrder": 202,
+        "image": "/Fisch/Bobbers/sceptara.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ocean King",
+        "source": "Bobber Shop (Week 1)",
+        "notes": "Available from 9th Nov to 16th Nov, 2024."
+      },
+      "system": {
+        "slug": "ocean-king",
+        "section": "Shop Bobbers",
+        "sortOrder": 203,
+        "image": "/Fisch/Bobbers/ocean-king.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Hat",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "pirate-hat",
+        "section": "Shop Bobbers",
+        "sortOrder": 204,
+        "image": "/Fisch/Bobbers/pirate-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mermaid's Pearl",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "mermaid-s-pearl",
+        "section": "Shop Bobbers",
+        "sortOrder": 205,
+        "image": "/Fisch/Bobbers/mermaid-s-pearl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crown Of the Depths",
+        "source": "Bobber Shop (Week 2)",
+        "notes": "Available from 16th Nov to 23rd Nov, 2024."
+      },
+      "system": {
+        "slug": "crown-of-the-depths",
+        "section": "Shop Bobbers",
+        "sortOrder": 206,
+        "image": "/Fisch/Bobbers/crown-of-the-depths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Skull",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "abyssal-skull",
+        "section": "Shop Bobbers",
+        "sortOrder": 207,
+        "image": "/Fisch/Bobbers/abyssal-skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Key of the Depths",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "key-of-the-depths",
+        "section": "Shop Bobbers",
+        "sortOrder": 208,
+        "image": "/Fisch/Bobbers/key-of-the-depths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient Serpent Skull",
+        "source": "Bobber Shop (Week 3)",
+        "notes": "Available from 23rd Nov to 30th Nov, 2024."
+      },
+      "system": {
+        "slug": "ancient-serpent-skull",
+        "section": "Shop Bobbers",
+        "sortOrder": 209,
+        "image": "/Fisch/Bobbers/ancient-serpent-skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evil Totem",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "evil-totem",
+        "section": "Shop Bobbers",
+        "sortOrder": 210,
+        "image": "/Fisch/Bobbers/evil-totem.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fossil Fish",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "fossil-fish",
+        "section": "Shop Bobbers",
+        "sortOrder": 211,
+        "image": "/Fisch/Bobbers/fossil-fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune Meg Bobber",
+        "source": "Bobber Shop (Week 4)",
+        "notes": "Available from 30th Nov to 7th Dec, 2024."
+      },
+      "system": {
+        "slug": "rune-meg-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 212,
+        "image": "/Fisch/Bobbers/rune-meg-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jade Serpent Bobber",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "jade-serpent-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 213,
+        "image": "/Fisch/Bobbers/jade-serpent-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient Relic Bobber",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "ancient-relic-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 214,
+        "image": "/Fisch/Bobbers/ancient-relic-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman",
+        "source": "Bobber Shop (Week 5)",
+        "notes": "Available from 7th Dec to 14th Dec 2024."
+      },
+      "system": {
+        "slug": "snowman",
+        "section": "Shop Bobbers",
+        "sortOrder": 215,
+        "image": "/Fisch/Bobbers/snowman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf Hat",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "elf-hat",
+        "section": "Shop Bobbers",
+        "sortOrder": 216,
+        "image": "/Fisch/Bobbers/elf-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Crown",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "frozen-crown",
+        "section": "Shop Bobbers",
+        "sortOrder": 217,
+        "image": "/Fisch/Bobbers/frozen-crown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Hat",
+        "source": "Bobber Shop (Week 6)",
+        "notes": "Available from 14th Dec to 21st Dec, 2024."
+      },
+      "system": {
+        "slug": "santa-hat",
+        "section": "Shop Bobbers",
+        "sortOrder": 218,
+        "image": "/Fisch/Bobbers/santa-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflake Crystal",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "snowflake-crystal",
+        "section": "Shop Bobbers",
+        "sortOrder": 219,
+        "image": "/Fisch/Bobbers/snowflake-crystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Serpent",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "frozen-serpent",
+        "section": "Shop Bobbers",
+        "sortOrder": 220,
+        "image": "/Fisch/Bobbers/frozen-serpent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane",
+        "source": "Bobber Shop (Week 7)",
+        "notes": "Available from 21st Dec to 28th Dec, 2024."
+      },
+      "system": {
+        "slug": "candy-cane",
+        "section": "Shop Bobbers",
+        "sortOrder": 221,
+        "image": "/Fisch/Bobbers/candy-cane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evil Santa",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "evil-santa",
+        "section": "Shop Bobbers",
+        "sortOrder": 222,
+        "image": "/Fisch/Bobbers/evil-santa.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reindeer Antlers",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "reindeer-antlers",
+        "section": "Shop Bobbers",
+        "sortOrder": 223,
+        "image": "/Fisch/Bobbers/reindeer-antlers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework",
+        "source": "Bobber Shop (Week 8)",
+        "notes": "Available from 28th Dec 2024 to 4th Jan, 2025."
+      },
+      "system": {
+        "slug": "firework",
+        "section": "Shop Bobbers",
+        "sortOrder": 224,
+        "image": "/Fisch/Bobbers/firework.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Party Hat",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "festive-party-hat",
+        "section": "Shop Bobbers",
+        "sortOrder": 225,
+        "image": "/Fisch/Bobbers/festive-party-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Confetti Globe",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "confetti-globe",
+        "section": "Shop Bobbers",
+        "sortOrder": 226,
+        "image": "/Fisch/Bobbers/confetti-globe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mythic Sea Star",
+        "source": "Bobber Shop (Week 9)",
+        "notes": "Available from 4th Jan to 11th Jan, 2025."
+      },
+      "system": {
+        "slug": "mythic-sea-star",
+        "section": "Shop Bobbers",
+        "sortOrder": 227,
+        "image": "/Fisch/Bobbers/mythic-sea-star.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coral Crown",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "coral-crown",
+        "section": "Shop Bobbers",
+        "sortOrder": 228,
+        "image": "/Fisch/Bobbers/coral-crown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Trident",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "abyssal-trident",
+        "section": "Shop Bobbers",
+        "sortOrder": 229,
+        "image": "/Fisch/Bobbers/abyssal-trident.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firefin",
+        "source": "Bobber Shop (Weeks 10 & 11)",
+        "notes": "Available from 11th Jan to 25th Jan, 2025."
+      },
+      "system": {
+        "slug": "firefin",
+        "section": "Shop Bobbers",
+        "sortOrder": 230,
+        "image": "/Fisch/Bobbers/firefin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework Rocket",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "firework-rocket",
+        "section": "Shop Bobbers",
+        "sortOrder": 231,
+        "image": "/Fisch/Bobbers/firework-rocket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Koi",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "gold-koi",
+        "section": "Shop Bobbers",
+        "sortOrder": 232,
+        "image": "/Fisch/Bobbers/gold-koi.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Snake",
+        "source": "Bobber Shop (Week 12)",
+        "notes": "Available from 25th Jan to 1st Feb, 2025."
+      },
+      "system": {
+        "slug": "fire-snake",
+        "section": "Shop Bobbers",
+        "sortOrder": 233,
+        "image": "/Fisch/Bobbers/fire-snake.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kraken",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "kraken",
+        "section": "Shop Bobbers",
+        "sortOrder": 234,
+        "image": "/Fisch/Bobbers/kraken.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mermaid",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "mermaid",
+        "section": "Shop Bobbers",
+        "sortOrder": 235,
+        "image": "/Fisch/Bobbers/mermaid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fang Fish",
+        "source": "Bobber Shop (Week 13)",
+        "notes": "Available from 1st Feb to 8th Feb, 2025."
+      },
+      "system": {
+        "slug": "fang-fish",
+        "section": "Shop Bobbers",
+        "sortOrder": 236,
+        "image": "/Fisch/Bobbers/fang-fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firefly",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "firefly",
+        "section": "Shop Bobbers",
+        "sortOrder": 237,
+        "image": "/Fisch/Bobbers/firefly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cyber",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "cyber",
+        "section": "Shop Bobbers",
+        "sortOrder": 238,
+        "image": "/Fisch/Bobbers/cyber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Love Heart",
+        "source": "Bobber Shop (Week 14)",
+        "notes": "Available from 8th Feb to 15th Feb, 2025."
+      },
+      "system": {
+        "slug": "love-heart",
+        "section": "Shop Bobbers",
+        "sortOrder": 239,
+        "image": "/Fisch/Bobbers/love-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid's Arrow",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "cupid-s-arrow",
+        "section": "Shop Bobbers",
+        "sortOrder": 240,
+        "image": "/Fisch/Bobbers/cupid-s-arrow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Box O'Chocolate",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "box-o-chocolate",
+        "section": "Shop Bobbers",
+        "sortOrder": 241,
+        "image": "/Fisch/Bobbers/box-o-chocolate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeleton Anchor",
+        "source": "Bobber Shop (Week 15)",
+        "notes": "Available from 15th Feb to 22th Feb, 2025."
+      },
+      "system": {
+        "slug": "skeleton-anchor",
+        "section": "Shop Bobbers",
+        "sortOrder": 242,
+        "image": "/Fisch/Bobbers/skeleton-anchor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soulless Fish",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "soulless-fish",
+        "section": "Shop Bobbers",
+        "sortOrder": 243,
+        "image": "/Fisch/Bobbers/soulless-fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidian Lockheart",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "obsidian-lockheart",
+        "section": "Shop Bobbers",
+        "sortOrder": 244,
+        "image": "/Fisch/Bobbers/obsidian-lockheart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Midnight Medusa",
+        "source": "Bobber Shop (Week 16)",
+        "notes": "Available from 22nd Feb to 1st Mar, 2025."
+      },
+      "system": {
+        "slug": "midnight-medusa",
+        "section": "Shop Bobbers",
+        "sortOrder": 245,
+        "image": "/Fisch/Bobbers/midnight-medusa.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trenchmaw",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "trenchmaw",
+        "section": "Shop Bobbers",
+        "sortOrder": 246,
+        "image": "/Fisch/Bobbers/trenchmaw.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hadal Core",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "hadal-core",
+        "section": "Shop Bobbers",
+        "sortOrder": 247,
+        "image": "/Fisch/Bobbers/hadal-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barnacle Buoy",
+        "source": "Bobber Shop (Week 17)",
+        "notes": "Available from 1st Mar to 8th Mar, 2025."
+      },
+      "system": {
+        "slug": "barnacle-buoy",
+        "section": "Shop Bobbers",
+        "sortOrder": 248,
+        "image": "/Fisch/Bobbers/barnacle-buoy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Deep-Sea Diver Helmet",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "deep-sea-diver-helmet",
+        "section": "Shop Bobbers",
+        "sortOrder": 249,
+        "image": "/Fisch/Bobbers/deep-sea-diver-helmet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Whale Bobber",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "blue-whale-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 250,
+        "image": "/Fisch/Bobbers/blue-whale-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Quantum Anchor",
+        "source": "Bobber Shop (Week 18)",
+        "notes": "Available from 8th Mar to 15th Mar, 2025."
+      },
+      "system": {
+        "slug": "quantum-anchor",
+        "section": "Shop Bobbers",
+        "sortOrder": 251,
+        "image": "/Fisch/Bobbers/quantum-anchor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drone",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "drone",
+        "section": "Shop Bobbers",
+        "sortOrder": 252,
+        "image": "/Fisch/Bobbers/drone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jetstrike",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "jetstrike",
+        "section": "Shop Bobbers",
+        "sortOrder": 253,
+        "image": "/Fisch/Bobbers/jetstrike.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Shamrock",
+        "source": "Bobber Shop (Week 19)",
+        "notes": "Available from 15th Mar to 22nd Mar, 2025."
+      },
+      "system": {
+        "slug": "rainbow-shamrock",
+        "section": "Shop Bobbers",
+        "sortOrder": 254,
+        "image": "/Fisch/Bobbers/rainbow-shamrock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shamrock Stem",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "shamrock-stem",
+        "section": "Shop Bobbers",
+        "sortOrder": 255,
+        "image": "/Fisch/Bobbers/shamrock-stem.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pot o' Gold",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "pot-o-gold",
+        "section": "Shop Bobbers",
+        "sortOrder": 256,
+        "image": "/Fisch/Bobbers/pot-o-gold.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eldrich Eye",
+        "source": "Bobber Shop (Week 20)",
+        "notes": "Available from 22nd Mar to 29th Mar, 2025."
+      },
+      "system": {
+        "slug": "eldrich-eye",
+        "section": "Shop Bobbers",
+        "sortOrder": 257,
+        "image": "/Fisch/Bobbers/eldrich-eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tentacle Orb",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "tentacle-orb",
+        "section": "Shop Bobbers",
+        "sortOrder": 258,
+        "image": "/Fisch/Bobbers/tentacle-orb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunken Horror",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "sunken-horror",
+        "section": "Shop Bobbers",
+        "sortOrder": 259,
+        "image": "/Fisch/Bobbers/sunken-horror.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Heart",
+        "source": "Bobber Shop (Week 21)",
+        "notes": "Available from 29th Mar to 5th Apr, 2025."
+      },
+      "system": {
+        "slug": "abyssal-heart",
+        "section": "Shop Bobbers",
+        "sortOrder": 260,
+        "image": "/Fisch/Bobbers/abyssal-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Barnacle",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "cursed-barnacle",
+        "section": "Shop Bobbers",
+        "sortOrder": 261,
+        "image": "/Fisch/Bobbers/cursed-barnacle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forbidden Glyph",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "forbidden-glyph",
+        "section": "Shop Bobbers",
+        "sortOrder": 262,
+        "image": "/Fisch/Bobbers/forbidden-glyph.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Porky",
+        "source": "Bobber Shop (Week 22)",
+        "notes": "Available from 5th Apr to 12th Apr, 2025."
+      },
+      "system": {
+        "slug": "porky",
+        "section": "Shop Bobbers",
+        "sortOrder": 263,
+        "image": "/Fisch/Bobbers/porky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silverback Fury",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "silverback-fury",
+        "section": "Shop Bobbers",
+        "sortOrder": 264,
+        "image": "/Fisch/Bobbers/silverback-fury.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lion's Mane",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "lion-s-mane",
+        "section": "Shop Bobbers",
+        "sortOrder": 265,
+        "image": "/Fisch/Bobbers/lion-s-mane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Devil Head",
+        "source": "Bobber Shop (Week 23)",
+        "notes": "Available from 12th Apr to 19th Apr, 2025."
+      },
+      "system": {
+        "slug": "devil-head",
+        "section": "Shop Bobbers",
+        "sortOrder": 266,
+        "image": "/Fisch/Bobbers/devil-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Skull",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "golden-skull",
+        "section": "Shop Bobbers",
+        "sortOrder": 267,
+        "image": "/Fisch/Bobbers/golden-skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Man O War",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "man-o-war",
+        "section": "Shop Bobbers",
+        "sortOrder": 268,
+        "image": "/Fisch/Bobbers/man-o-war.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peep",
+        "source": "Bobber Shop (Week 24)",
+        "notes": "Available from 19th Apr to 26th Apr, 2025."
+      },
+      "system": {
+        "slug": "peep",
+        "section": "Shop Bobbers",
+        "sortOrder": 269,
+        "image": "/Fisch/Bobbers/peep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Basket",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "easter-basket",
+        "section": "Shop Bobbers",
+        "sortOrder": 270,
+        "image": "/Fisch/Bobbers/easter-basket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Bunny",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "easter-bunny",
+        "section": "Shop Bobbers",
+        "sortOrder": 271,
+        "image": "/Fisch/Bobbers/easter-bunny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cloud Castle",
+        "source": "Bobber Shop (Week 25)",
+        "notes": "Available from 26th Apr to 3rd May, 2025."
+      },
+      "system": {
+        "slug": "cloud-castle",
+        "section": "Shop Bobbers",
+        "sortOrder": 272,
+        "image": "/Fisch/Bobbers/cloud-castle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Odin's Journey",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "odin-s-journey",
+        "section": "Shop Bobbers",
+        "sortOrder": 273,
+        "image": "/Fisch/Bobbers/odin-s-journey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bobber Of Odin",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "bobber-of-odin",
+        "section": "Shop Bobbers",
+        "sortOrder": 274,
+        "image": "/Fisch/Bobbers/bobber-of-odin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crab Bobber",
+        "source": "Bobber Shop (Week 26)",
+        "notes": "Available from 3rd May to 10th May, 2025."
+      },
+      "system": {
+        "slug": "crab-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 275,
+        "image": "/Fisch/Bobbers/crab-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lobster Head",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "lobster-head",
+        "section": "Shop Bobbers",
+        "sortOrder": 276,
+        "image": "/Fisch/Bobbers/lobster-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Claw",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "blue-claw",
+        "section": "Shop Bobbers",
+        "sortOrder": 277,
+        "image": "/Fisch/Bobbers/blue-claw.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Coin",
+        "source": "Bobber Shop (Week 27)",
+        "notes": "Available from 10th May to 17th May, 2025."
+      },
+      "system": {
+        "slug": "cursed-coin",
+        "section": "Shop Bobbers",
+        "sortOrder": 278,
+        "image": "/Fisch/Bobbers/cursed-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Island",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "treasure-island",
+        "section": "Shop Bobbers",
+        "sortOrder": 279,
+        "image": "/Fisch/Bobbers/treasure-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hidden Treasure",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "hidden-treasure",
+        "section": "Shop Bobbers",
+        "sortOrder": 280,
+        "image": "/Fisch/Bobbers/hidden-treasure.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apex Skull",
+        "source": "Bobber Shop (Week 28)",
+        "notes": "Available from 17th May to 24th May, 2025."
+      },
+      "system": {
+        "slug": "apex-skull",
+        "section": "Shop Bobbers",
+        "sortOrder": 281,
+        "image": "/Fisch/Bobbers/apex-skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Inkling",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "inkling",
+        "section": "Shop Bobbers",
+        "sortOrder": 282,
+        "image": "/Fisch/Bobbers/inkling.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magma Serpent",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "magma-serpent",
+        "section": "Shop Bobbers",
+        "sortOrder": 283,
+        "image": "/Fisch/Bobbers/magma-serpent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Skull",
+        "source": "Bobber Shop (Week 29)",
+        "notes": "Available from 24th May to 31st May, 2025."
+      },
+      "system": {
+        "slug": "ice-skull",
+        "section": "Shop Bobbers",
+        "sortOrder": 284,
+        "image": "/Fisch/Bobbers/ice-skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Key of Obsidian",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "key-of-obsidian",
+        "section": "Shop Bobbers",
+        "sortOrder": 285,
+        "image": "/Fisch/Bobbers/key-of-obsidian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slimely",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "slimely",
+        "section": "Shop Bobbers",
+        "sortOrder": 286,
+        "image": "/Fisch/Bobbers/slimely.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Submarine",
+        "source": "Bobber Shop (Week 30)",
+        "notes": "Available from 31st May to 7th June, 2025."
+      },
+      "system": {
+        "slug": "submarine",
+        "section": "Shop Bobbers",
+        "sortOrder": 287,
+        "image": "/Fisch/Bobbers/submarine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystallized Relic",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "crystallized-relic",
+        "section": "Shop Bobbers",
+        "sortOrder": 288,
+        "image": "/Fisch/Bobbers/crystallized-relic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nessie",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "nessie",
+        "section": "Shop Bobbers",
+        "sortOrder": 289,
+        "image": "/Fisch/Bobbers/nessie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Prism Cube",
+        "source": "Bobber Shop (Week 31 & 32)",
+        "notes": "Available from 7th June to 21st June, 2025."
+      },
+      "system": {
+        "slug": "prism-cube",
+        "section": "Shop Bobbers",
+        "sortOrder": 290,
+        "image": "/Fisch/Bobbers/prism-cube.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Mirror",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "cursed-mirror",
+        "section": "Shop Bobbers",
+        "sortOrder": 291,
+        "image": "/Fisch/Bobbers/cursed-mirror.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom Dragon",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "phantom-dragon",
+        "section": "Shop Bobbers",
+        "sortOrder": 292,
+        "image": "/Fisch/Bobbers/phantom-dragon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Book of Dreams",
+        "source": "Bobber Shop (Week 33 & 34)",
+        "notes": "Available from 21st June to 5th July, 2025."
+      },
+      "system": {
+        "slug": "book-of-dreams",
+        "section": "Shop Bobbers",
+        "sortOrder": 293,
+        "image": "/Fisch/Bobbers/book-of-dreams.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dino Fang",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "dino-fang",
+        "section": "Shop Bobbers",
+        "sortOrder": 294,
+        "image": "/Fisch/Bobbers/dino-fang.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eye of Seraph",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "eye-of-seraph",
+        "section": "Shop Bobbers",
+        "sortOrder": 295,
+        "image": "/Fisch/Bobbers/eye-of-seraph.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cheezburger",
+        "source": "Bobber Shop (Week 35-48)",
+        "notes": "Available from 2nd Aug to 8th Nov, 2025."
+      },
+      "system": {
+        "slug": "cheezburger",
+        "section": "Shop Bobbers",
+        "sortOrder": 296,
+        "image": "/Fisch/Bobbers/cheezburger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Milk",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "chocolate-milk",
+        "section": "Shop Bobbers",
+        "sortOrder": 297,
+        "image": "/Fisch/Bobbers/chocolate-milk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxiade",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "bloxiade",
+        "section": "Shop Bobbers",
+        "sortOrder": 298,
+        "image": "/Fisch/Bobbers/bloxiade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Monkey Plush",
+        "source": "Bobber Shop (Week 49)",
+        "notes": "Available from 8th Nov to 15th Nov, 2025."
+      },
+      "system": {
+        "slug": "monkey-plush",
+        "section": "Shop Bobbers",
+        "sortOrder": 299,
+        "image": "/Fisch/Bobbers/monkey-plush.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tiger Plush",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "tiger-plush",
+        "section": "Shop Bobbers",
+        "sortOrder": 300,
+        "image": "/Fisch/Bobbers/tiger-plush.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Plush",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "dragon-plush",
+        "section": "Shop Bobbers",
+        "sortOrder": 301,
+        "image": "/Fisch/Bobbers/dragon-plush.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spikesplosion",
+        "source": "Bobber Shop (Week 50)",
+        "notes": "Available from 15th Nov to 22nd Nov, 2025."
+      },
+      "system": {
+        "slug": "spikesplosion",
+        "section": "Shop Bobbers",
+        "sortOrder": 302,
+        "image": "/Fisch/Bobbers/spikesplosion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fuse Bomb",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "fuse-bomb",
+        "section": "Shop Bobbers",
+        "sortOrder": 303,
+        "image": "/Fisch/Bobbers/fuse-bomb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bundle of TNT",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "bundle-of-tnt",
+        "section": "Shop Bobbers",
+        "sortOrder": 304,
+        "image": "/Fisch/Bobbers/bundle-of-tnt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Winterfluff",
+        "source": "Bobber Shop (Week 52-56)",
+        "notes": "Available from 31st Jan to 28th Feb, 2026."
+      },
+      "system": {
+        "slug": "winterfluff",
+        "section": "Shop Bobbers",
+        "sortOrder": 305,
+        "image": "/Fisch/Bobbers/winterfluff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frigid Lotus",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "frigid-lotus",
+        "section": "Shop Bobbers",
+        "sortOrder": 306,
+        "image": "/Fisch/Bobbers/frigid-lotus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glacial Shard",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "glacial-shard",
+        "section": "Shop Bobbers",
+        "sortOrder": 307,
+        "image": "/Fisch/Bobbers/glacial-shard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Starbun",
+        "source": "Bobber Shop (Week 56-57)",
+        "notes": "Available from 4th Apr to 11th Apr, 2026."
+      },
+      "system": {
+        "slug": "blue-starbun",
+        "section": "Shop Bobbers",
+        "sortOrder": 308,
+        "image": "/Fisch/Bobbers/blue-starbun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Starbun",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "green-starbun",
+        "section": "Shop Bobbers",
+        "sortOrder": 309,
+        "image": "/Fisch/Bobbers/green-starbun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Starbun",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "pink-starbun",
+        "section": "Shop Bobbers",
+        "sortOrder": 310,
+        "image": "/Fisch/Bobbers/pink-starbun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "North Star Bobber",
+        "source": "December 14th 2024 to December 21st 2024",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "north-star-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 311,
+        "image": "/Fisch/Bobbers/north-star-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dreadspire",
+        "source": "January 11th 2025 to January 25th 2025",
+        "notes": "Robux899"
+      },
+      "system": {
+        "slug": "dreadspire",
+        "section": "Shop Bobbers",
+        "sortOrder": 312,
+        "image": "/Fisch/Bobbers/dreadspire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar Serpent",
+        "source": "January 25th 2025 to February 1st 2025",
+        "notes": "Robux899"
+      },
+      "system": {
+        "slug": "lunar-serpent",
+        "section": "Shop Bobbers",
+        "sortOrder": 313,
+        "image": "/Fisch/Bobbers/lunar-serpent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seahorse",
+        "source": "January 25th 2025 to February 1st 2025",
+        "notes": "Robux899"
+      },
+      "system": {
+        "slug": "seahorse",
+        "section": "Shop Bobbers",
+        "sortOrder": 314,
+        "image": "/Fisch/Bobbers/seahorse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orca",
+        "source": "February 1st 2025 to February 8th 2025",
+        "notes": "Robux899"
+      },
+      "system": {
+        "slug": "orca",
+        "section": "Shop Bobbers",
+        "sortOrder": 315,
+        "image": "/Fisch/Bobbers/orca.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Faberge Egg",
+        "source": "April 19th 2025 to April 26th 2025",
+        "notes": "Robux1,299"
+      },
+      "system": {
+        "slug": "faberge-egg",
+        "section": "Shop Bobbers",
+        "sortOrder": 316,
+        "image": "/Fisch/Bobbers/faberge-egg.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Not-So-Colossal Squid",
+        "source": "July 12th 2025 to July 19th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "not-so-colossal-squid",
+        "section": "Shop Bobbers",
+        "sortOrder": 317,
+        "image": "/Fisch/Bobbers/not-so-colossal-squid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beachball",
+        "source": "July 19th 2025 to July 26th 2025",
+        "notes": "Robux869"
+      },
+      "system": {
+        "slug": "beachball",
+        "section": "Shop Bobbers",
+        "sortOrder": 318,
+        "image": "/Fisch/Bobbers/beachball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Little Mouse",
+        "source": "July 27th 2025 to August 2nd 2025",
+        "notes": "Robux869"
+      },
+      "system": {
+        "slug": "little-mouse",
+        "section": "Shop Bobbers",
+        "sortOrder": 319,
+        "image": "/Fisch/Bobbers/little-mouse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Taiyaki",
+        "source": "August 2nd 2025 to August 9th 2025",
+        "notes": "Robux869"
+      },
+      "system": {
+        "slug": "taiyaki",
+        "section": "Shop Bobbers",
+        "sortOrder": 320,
+        "image": "/Fisch/Bobbers/taiyaki.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dumbo Prize",
+        "source": "August 9th 2025 to August 16th 2025",
+        "notes": "Robux869"
+      },
+      "system": {
+        "slug": "dumbo-prize",
+        "section": "Shop Bobbers",
+        "sortOrder": 321,
+        "image": "/Fisch/Bobbers/dumbo-prize.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coconut",
+        "source": "August 16th 2025 to August 23th 2025",
+        "notes": "Robux869"
+      },
+      "system": {
+        "slug": "coconut-2",
+        "section": "Shop Bobbers",
+        "sortOrder": 322,
+        "image": "/Fisch/Bobbers/coconut-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Moss",
+        "source": "August 23th 2025 to August 30th 2025",
+        "notes": "Robux869"
+      },
+      "system": {
+        "slug": "moss",
+        "section": "Shop Bobbers",
+        "sortOrder": 323,
+        "image": "/Fisch/Bobbers/moss.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry",
+        "source": "August 30th 2025 to September 6th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "strawberry",
+        "section": "Shop Bobbers",
+        "sortOrder": 324,
+        "image": "/Fisch/Bobbers/strawberry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pilot Gear",
+        "source": "September 6th 2025 to September 13th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "pilot-gear",
+        "section": "Shop Bobbers",
+        "sortOrder": 325,
+        "image": "/Fisch/Bobbers/pilot-gear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitty Car Key",
+        "source": "September 13th 2025 to September 20th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "kitty-car-key",
+        "section": "Shop Bobbers",
+        "sortOrder": 326,
+        "image": "/Fisch/Bobbers/kitty-car-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Butter",
+        "source": "September 20th 2025 to September 27th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "butter",
+        "section": "Shop Bobbers",
+        "sortOrder": 327,
+        "image": "/Fisch/Bobbers/butter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rotund Seal",
+        "source": "September 27th 2025 to October 4th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "rotund-seal",
+        "section": "Shop Bobbers",
+        "sortOrder": 328,
+        "image": "/Fisch/Bobbers/rotund-seal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bee",
+        "source": "October 4th 2025 to October 11th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "bee",
+        "section": "Shop Bobbers",
+        "sortOrder": 329,
+        "image": "/Fisch/Bobbers/bee.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bears Got Your Fish",
+        "source": "October 11th 2025 to October 18th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "bears-got-your-fish",
+        "section": "Shop Bobbers",
+        "sortOrder": 330,
+        "image": "/Fisch/Bobbers/bears-got-your-fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Baby Ghoul",
+        "source": "October 18th 2025 to October 25th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "baby-ghoul",
+        "section": "Shop Bobbers",
+        "sortOrder": 331,
+        "image": "/Fisch/Bobbers/baby-ghoul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candypop",
+        "source": "October 25th 2025 to November 1st 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "candypop",
+        "section": "Shop Bobbers",
+        "sortOrder": 332,
+        "image": "/Fisch/Bobbers/candypop.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coffinpaw Bobber",
+        "source": "November 1st 2025 to November 8th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "coffinpaw-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 333,
+        "image": "/Fisch/Bobbers/coffinpaw-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hydrangea",
+        "source": "November 8th 2025 to November 15th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "hydrangea",
+        "section": "Shop Bobbers",
+        "sortOrder": 334,
+        "image": "/Fisch/Bobbers/hydrangea.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Axobobber",
+        "source": "November 15th 2025 to November 22nd 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "axobobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 335,
+        "image": "/Fisch/Bobbers/axobobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Baby Turkey",
+        "source": "November 22nd 2025 to November 29th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "baby-turkey",
+        "section": "Shop Bobbers",
+        "sortOrder": 336,
+        "image": "/Fisch/Bobbers/baby-turkey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowball",
+        "source": "November 29th 2025 to December 6th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "snowball",
+        "section": "Shop Bobbers",
+        "sortOrder": 337,
+        "image": "/Fisch/Bobbers/snowball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Polar Bear Bobber",
+        "source": "December 6th 2025 to December 13th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "polar-bear-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 338,
+        "image": "/Fisch/Bobbers/polar-bear-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nibbled Fish",
+        "source": "December 13th 2025 to December 20th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "nibbled-fish",
+        "section": "Shop Bobbers",
+        "sortOrder": 339,
+        "image": "/Fisch/Bobbers/nibbled-fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Present Bow Bobber",
+        "source": "December 20th 2025 to December 27th 2025",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "present-bow-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 340,
+        "image": "/Fisch/Bobbers/present-bow-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pinecone Bobber",
+        "source": "December 27th 2025 to January 3rd 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "pinecone-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 341,
+        "image": "/Fisch/Bobbers/pinecone-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Little Leaf",
+        "source": "January 3rd 2026 to January 10th 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "little-leaf",
+        "section": "Shop Bobbers",
+        "sortOrder": 342,
+        "image": "/Fisch/Bobbers/little-leaf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ketchup Bobber",
+        "source": "January 10th 2026 to January 17th 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "ketchup-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 343,
+        "image": "/Fisch/Bobbers/ketchup-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Evil Kitty",
+        "source": "January 17th 2026 to January 24th 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "mini-evil-kitty",
+        "section": "Shop Bobbers",
+        "sortOrder": 344,
+        "image": "/Fisch/Bobbers/mini-evil-kitty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Miffy Bunny",
+        "source": "January 24th 2026 to January 31st 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "miffy-bunny",
+        "section": "Shop Bobbers",
+        "sortOrder": 345,
+        "image": "/Fisch/Bobbers/miffy-bunny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clicky",
+        "source": "April 11th 2026 to April 18th 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "clicky",
+        "section": "Shop Bobbers",
+        "sortOrder": 346,
+        "image": "/Fisch/Bobbers/clicky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "FlipMini",
+        "source": "April 18th 2026 to April 25th 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "flipmini",
+        "section": "Shop Bobbers",
+        "sortOrder": 347,
+        "image": "/Fisch/Bobbers/flipmini.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Mothy",
+        "source": "May 16th 2026 to May 23rd 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "mini-mothy",
+        "section": "Shop Bobbers",
+        "sortOrder": 348,
+        "image": "/Fisch/Bobbers/mini-mothy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Joyous Dog",
+        "source": "August 8th 2026 to August 15th 2026",
+        "notes": "Robux799"
+      },
+      "system": {
+        "slug": "joyous-dog",
+        "section": "Shop Bobbers",
+        "sortOrder": 349,
+        "image": "/Fisch/Bobbers/joyous-dog.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glowfish Bobber",
+        "source": "Awarded alongside purchase of Squid Tee",
+        "notes": "Switches between two colors depending on the time of day."
+      },
+      "system": {
+        "slug": "glowfish-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 350,
+        "image": "/Fisch/Bobbers/glowfish-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Roslit Bay Bobber",
+        "source": "Awarded alongside purchase of Fisch Tee - Roslit (Black)",
+        "notes": null
+      },
+      "system": {
+        "slug": "roslit-bay-bobber",
+        "section": "Shop Bobbers",
+        "sortOrder": 351,
+        "image": "/Fisch/Bobbers/roslit-bay-bobber.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "source": "Appears exceptionally small compared to normal bobbers",
+        "notes": null
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Unobtainable Bobbers",
+        "sortOrder": 352,
+        "image": "/Fisch/Bobbers/diamond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shaped",
+        "source": "Appears exceptionally small compared to normal bobbers",
+        "notes": null
+      },
+      "system": {
+        "slug": "shaped",
+        "section": "Unobtainable Bobbers",
+        "sortOrder": 353,
+        "image": "/Fisch/Bobbers/shaped.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eye",
+        "source": null,
+        "notes": null
+      },
+      "system": {
+        "slug": "eye",
+        "section": "Unobtainable Bobbers",
+        "sortOrder": 354,
+        "image": "/Fisch/Bobbers/eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal",
+        "source": "Emits smoke particles when used",
+        "notes": null
+      },
+      "system": {
+        "slug": "coal",
+        "section": "Unobtainable Bobbers",
+        "sortOrder": 355,
+        "image": "/Fisch/Bobbers/coal.png"
+      }
+    }
+  ]
+}

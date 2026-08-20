@@ -1,0 +1,7162 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Fisch",
+    "gameSlug": "fisch",
+    "collection": "npcs",
+    "route": "/wiki/fisch/npcs",
+    "catalogCode": "fisch-npcs",
+    "itemFields": [
+      "location"
+    ],
+    "columns": [
+      "location"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Service NPCs",
+        "Quest NPCs",
+        "Core NPCs",
+        "Event NPCs",
+        "Event Quest NPCs",
+        "Removed NPCs"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "location",
+      "cardDescriptionField": "location",
+      "cardFields": [
+        "location"
+      ],
+      "tableFields": [
+        "location"
+      ],
+      "fieldPresentation": {
+        "location": {
+          "kind": "plain",
+          "label": "Location",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Crew Herald",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "crew-herald-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 1,
+        "image": "/Fisch/NPCs/crew-herald-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shady Appraiser",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "shady-appraiser-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 2,
+        "image": "/Fisch/NPCs/shady-appraiser-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Furnisher",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "furnisher-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 3,
+        "image": "/Fisch/NPCs/furnisher-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crew Architect",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "crew-architect-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 4,
+        "image": "/Fisch/NPCs/crew-architect-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "James",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "james-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 5,
+        "image": "/Fisch/NPCs/james-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calvin",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "calvin-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 6,
+        "image": "/Fisch/NPCs/calvin-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shady Alchemist",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "shady-alchemist-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 7,
+        "image": "/Fisch/NPCs/shady-alchemist-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shady Merchant",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "shady-merchant-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 8,
+        "image": "/Fisch/NPCs/shady-merchant-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Admin Relic Dealer",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "admin-relic-dealer-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 9,
+        "image": "/Fisch/NPCs/admin-relic-dealer-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scrip Vendor",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "scrip-vendor-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 10,
+        "image": "/Fisch/NPCs/scrip-vendor-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Goods Dealer",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "rare-goods-dealer-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 11,
+        "image": "/Fisch/NPCs/rare-goods-dealer-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bait Dealer",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "bait-dealer-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 12,
+        "image": "/Fisch/NPCs/bait-dealer-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Title Writer",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "title-writer-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 13,
+        "image": "/Fisch/NPCs/title-writer-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rod Dealer",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "rod-dealer-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 14,
+        "image": "/Fisch/NPCs/rod-dealer-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Companion Dealer",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "companion-dealer-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 15,
+        "image": "/Fisch/NPCs/companion-dealer-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bazaar Guard",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "bazaar-guard-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 16,
+        "image": "/Fisch/NPCs/bazaar-guard-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gianni",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "gianni-enchanted-crevice",
+        "section": "Service NPCs",
+        "sortOrder": 17,
+        "image": "/Fisch/NPCs/gianni-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "James",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "james-enchanted-crevice",
+        "section": "Service NPCs",
+        "sortOrder": 18,
+        "image": "/Fisch/NPCs/james-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Colton",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "colton-enchanted-crevice",
+        "section": "Service NPCs",
+        "sortOrder": 19,
+        "image": "/Fisch/NPCs/colton-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harper",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "harper-enchanted-crevice",
+        "section": "Service NPCs",
+        "sortOrder": 20,
+        "image": "/Fisch/NPCs/harper-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evelyn",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "evelyn-enchanted-crevice",
+        "section": "Service NPCs",
+        "sortOrder": 21,
+        "image": "/Fisch/NPCs/evelyn-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Caleb",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "caleb-enchanted-crevice",
+        "section": "Service NPCs",
+        "sortOrder": 22,
+        "image": "/Fisch/NPCs/caleb-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Asher",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "asher-enchanted-crevice",
+        "section": "Service NPCs",
+        "sortOrder": 23,
+        "image": "/Fisch/NPCs/asher-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Evil Guide",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "the-evil-guide-underground-music-venue",
+        "section": "Service NPCs",
+        "sortOrder": 24,
+        "image": "/Fisch/NPCs/the-evil-guide-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "???",
+        "location": "Olympian Fissure"
+      },
+      "system": {
+        "slug": "olympian-fissure",
+        "section": "Service NPCs",
+        "sortOrder": 25,
+        "image": "/Fisch/NPCs/olympian-fissure.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Spirit",
+        "location": "Hades' Underworld of Indefinite"
+      },
+      "system": {
+        "slug": "lost-spirit-hades-underworld-of-indefinite",
+        "section": "Service NPCs",
+        "sortOrder": 26,
+        "image": "/Fisch/NPCs/lost-spirit-hades-underworld-of-indefinite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hades' Overseer",
+        "location": "Hades' Underworld of Indefinite"
+      },
+      "system": {
+        "slug": "hades-overseer-hades-underworld-of-indefinite",
+        "section": "Service NPCs",
+        "sortOrder": 27,
+        "image": "/Fisch/NPCs/hades-overseer-hades-underworld-of-indefinite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zeus's Overseer",
+        "location": "Zeus's Thunder of Chaos"
+      },
+      "system": {
+        "slug": "zeus-s-overseer-zeus-s-thunder-of-chaos",
+        "section": "Service NPCs",
+        "sortOrder": 28,
+        "image": "/Fisch/NPCs/zeus-s-overseer-zeus-s-thunder-of-chaos.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calyra",
+        "location": "Mermaid Cove"
+      },
+      "system": {
+        "slug": "calyra-mermaid-cove",
+        "section": "Service NPCs",
+        "sortOrder": 29,
+        "image": "/Fisch/NPCs/calyra-mermaid-cove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon's Overseer",
+        "location": "Poseidon's Storm of Floods"
+      },
+      "system": {
+        "slug": "poseidon-s-overseer-poseidon-s-storm-of-floods",
+        "section": "Service NPCs",
+        "sortOrder": 30,
+        "image": "/Fisch/NPCs/poseidon-s-overseer-poseidon-s-storm-of-floods.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bellona's Overseer",
+        "location": "Bellona's Frenzy of War"
+      },
+      "system": {
+        "slug": "bellona-s-overseer-bellona-s-frenzy-of-war",
+        "section": "Service NPCs",
+        "sortOrder": 31,
+        "image": "/Fisch/NPCs/bellona-s-overseer-bellona-s-frenzy-of-war.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Guide",
+        "location": "Hades' Underworld of Indefinite"
+      },
+      "system": {
+        "slug": "spirit-guide-hades-underworld-of-indefinite",
+        "section": "Service NPCs",
+        "sortOrder": 32,
+        "image": "/Fisch/NPCs/spirit-guide-hades-underworld-of-indefinite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Ferryman",
+        "location": "Hades' Underworld of Indefinite"
+      },
+      "system": {
+        "slug": "the-ferryman-hades-underworld-of-indefinite",
+        "section": "Service NPCs",
+        "sortOrder": 33,
+        "image": "/Fisch/NPCs/the-ferryman-hades-underworld-of-indefinite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zane",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "zane-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 34,
+        "image": "/Fisch/NPCs/zane-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Old Man",
+        "location": "Personal Aquarium"
+      },
+      "system": {
+        "slug": "old-man-personal-aquarium",
+        "section": "Service NPCs",
+        "sortOrder": 35,
+        "image": "/Fisch/NPCs/old-man-personal-aquarium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Market Shopkeeper",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "black-market-shopkeeper-the-shady-bazaar",
+        "section": "Service NPCs",
+        "sortOrder": 36,
+        "image": "/Fisch/NPCs/black-market-shopkeeper-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ralph",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "ralph-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 37,
+        "image": "/Fisch/NPCs/ralph-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fritz",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "fritz-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 38,
+        "image": "/Fisch/NPCs/fritz-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wyatt",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "wyatt-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 39,
+        "image": "/Fisch/NPCs/wyatt-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jordan",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "jordan-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 40,
+        "image": "/Fisch/NPCs/jordan-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seth",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "seth-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 41,
+        "image": "/Fisch/NPCs/seth-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rory",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "rory-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 42,
+        "image": "/Fisch/NPCs/rory-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zen",
+        "location": "Scoria Reach"
+      },
+      "system": {
+        "slug": "zen-scoria-reach",
+        "section": "Service NPCs",
+        "sortOrder": 43,
+        "image": "/Fisch/NPCs/zen-scoria-reach.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zara",
+        "location": "Ashbrook Town"
+      },
+      "system": {
+        "slug": "zara-ashbrook-town",
+        "section": "Service NPCs",
+        "sortOrder": 44,
+        "image": "/Fisch/NPCs/zara-ashbrook-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zion",
+        "location": "Ashbrook Town"
+      },
+      "system": {
+        "slug": "zion-ashbrook-town",
+        "section": "Service NPCs",
+        "sortOrder": 45,
+        "image": "/Fisch/NPCs/zion-ashbrook-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zeke",
+        "location": "Ashbrook Town"
+      },
+      "system": {
+        "slug": "zeke-ashbrook-town",
+        "section": "Service NPCs",
+        "sortOrder": 46,
+        "image": "/Fisch/NPCs/zeke-ashbrook-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zoey",
+        "location": "Ashbrook Town"
+      },
+      "system": {
+        "slug": "zoey-ashbrook-town",
+        "section": "Service NPCs",
+        "sortOrder": 47,
+        "image": "/Fisch/NPCs/zoey-ashbrook-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zane",
+        "location": "Scoria Reach"
+      },
+      "system": {
+        "slug": "zane-scoria-reach",
+        "section": "Service NPCs",
+        "sortOrder": 48,
+        "image": "/Fisch/NPCs/zane-scoria-reach.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gardener",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "gardener-living-garden",
+        "section": "Service NPCs",
+        "sortOrder": 49,
+        "image": "/Fisch/NPCs/gardener-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Divine Hunter",
+        "location": "Ocean"
+      },
+      "system": {
+        "slug": "divine-hunter-ocean",
+        "section": "Service NPCs",
+        "sortOrder": 50,
+        "image": "/Fisch/NPCs/divine-hunter-ocean.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drowned Appraiser",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "drowned-appraiser-tidefall",
+        "section": "Service NPCs",
+        "sortOrder": 51,
+        "image": "/Fisch/NPCs/drowned-appraiser-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mella",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "mella-sunken-reliquary",
+        "section": "Service NPCs",
+        "sortOrder": 52,
+        "image": "/Fisch/NPCs/mella-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brasshook Benji",
+        "location": "Trade Plaza"
+      },
+      "system": {
+        "slug": "brasshook-benji-trade-plaza",
+        "section": "Service NPCs",
+        "sortOrder": 53,
+        "image": "/Fisch/NPCs/brasshook-benji-trade-plaza.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Keeper",
+        "location": "Trade Plaza"
+      },
+      "system": {
+        "slug": "red-keeper-trade-plaza",
+        "section": "Service NPCs",
+        "sortOrder": 54,
+        "image": "/Fisch/NPCs/red-keeper-trade-plaza.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abe",
+        "location": "Trade Plaza"
+      },
+      "system": {
+        "slug": "abe-trade-plaza",
+        "section": "Service NPCs",
+        "sortOrder": 55,
+        "image": "/Fisch/NPCs/abe-trade-plaza.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dan",
+        "location": "Trade Plaza"
+      },
+      "system": {
+        "slug": "dan-trade-plaza",
+        "section": "Service NPCs",
+        "sortOrder": 56,
+        "image": "/Fisch/NPCs/dan-trade-plaza.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Deep Diver",
+        "location": "Ocean"
+      },
+      "system": {
+        "slug": "deep-diver-ocean",
+        "section": "Service NPCs",
+        "sortOrder": 57,
+        "image": "/Fisch/NPCs/deep-diver-ocean.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lumberjack Pat",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "lumberjack-pat-boreal-pines",
+        "section": "Service NPCs",
+        "sortOrder": 58,
+        "image": "/Fisch/NPCs/lumberjack-pat-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lumberjack Alex",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "lumberjack-alex-boreal-pines",
+        "section": "Service NPCs",
+        "sortOrder": 59,
+        "image": "/Fisch/NPCs/lumberjack-alex-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corbin",
+        "location": "Crystal Fissure"
+      },
+      "system": {
+        "slug": "corbin-crystal-fissure",
+        "section": "Service NPCs",
+        "sortOrder": 60,
+        "image": "/Fisch/NPCs/corbin-crystal-fissure.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lumberjack Tim",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "lumberjack-tim-boreal-pines",
+        "section": "Service NPCs",
+        "sortOrder": 61,
+        "image": "/Fisch/NPCs/lumberjack-tim-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thomas",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "thomas-boreal-pines",
+        "section": "Service NPCs",
+        "sortOrder": 62,
+        "image": "/Fisch/NPCs/thomas-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Axel",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "axel-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 63,
+        "image": "/Fisch/NPCs/axel-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chloe",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "chloe-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 64,
+        "image": "/Fisch/NPCs/chloe-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Joseph",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "joseph-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 65,
+        "image": "/Fisch/NPCs/joseph-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thomas",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "thomas-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 66,
+        "image": "/Fisch/NPCs/thomas-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Totem Carver",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "totem-carver-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 67,
+        "image": "/Fisch/NPCs/totem-carver-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Construction Worker",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "construction-worker-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 68,
+        "image": "/Fisch/NPCs/construction-worker-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Disco Dan",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "disco-dan-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 69,
+        "image": "/Fisch/NPCs/disco-dan-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Construction Lead",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "construction-lead-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 70,
+        "image": "/Fisch/NPCs/construction-lead-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Amulet",
+        "location": "The Sanctum"
+      },
+      "system": {
+        "slug": "amulet-the-sanctum",
+        "section": "Service NPCs",
+        "sortOrder": 71,
+        "image": "/Fisch/NPCs/amulet-the-sanctum.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Talk",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "talk-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 72,
+        "image": "/Fisch/NPCs/talk-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Goggobite",
+        "location": "Ancient Isle"
+      },
+      "system": {
+        "slug": "goggobite-ancient-isle",
+        "section": "Service NPCs",
+        "sortOrder": 73,
+        "image": "/Fisch/NPCs/goggobite-ancient-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carl",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "carl-lost-jungle",
+        "section": "Service NPCs",
+        "sortOrder": 74,
+        "image": "/Fisch/NPCs/carl-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tyler",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "tyler-lost-jungle",
+        "section": "Service NPCs",
+        "sortOrder": 75,
+        "image": "/Fisch/NPCs/tyler-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zoe",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "zoe-lost-jungle",
+        "section": "Service NPCs",
+        "sortOrder": 76,
+        "image": "/Fisch/NPCs/zoe-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jim",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "jim-lost-jungle",
+        "section": "Service NPCs",
+        "sortOrder": 77,
+        "image": "/Fisch/NPCs/jim-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "John",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "john-lost-jungle",
+        "section": "Service NPCs",
+        "sortOrder": 78,
+        "image": "/Fisch/NPCs/john-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sarah",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "sarah-lost-jungle",
+        "section": "Service NPCs",
+        "sortOrder": 79,
+        "image": "/Fisch/NPCs/sarah-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jungle Adventurer",
+        "location": "Forgotten Temple"
+      },
+      "system": {
+        "slug": "jungle-adventurer-forgotten-temple",
+        "section": "Service NPCs",
+        "sortOrder": 80,
+        "image": "/Fisch/NPCs/jungle-adventurer-forgotten-temple.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cepo",
+        "location": "Crimson Cavern"
+      },
+      "system": {
+        "slug": "cepo-crimson-cavern",
+        "section": "Service NPCs",
+        "sortOrder": 81,
+        "image": "/Fisch/NPCs/cepo-crimson-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lepo",
+        "location": "Luminescent Cavern"
+      },
+      "system": {
+        "slug": "lepo-luminescent-cavern",
+        "section": "Service NPCs",
+        "sortOrder": 82,
+        "image": "/Fisch/NPCs/lepo-luminescent-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Joey",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "joey-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 83,
+        "image": "/Fisch/NPCs/joey-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hector",
+        "location": "Personal Aquarium"
+      },
+      "system": {
+        "slug": "hector-personal-aquarium",
+        "section": "Service NPCs",
+        "sortOrder": 84,
+        "image": "/Fisch/NPCs/hector-personal-aquarium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lars",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "lars-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 85,
+        "image": "/Fisch/NPCs/lars-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Shopkeeper",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "daily-shopkeeper-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 86,
+        "image": "/Fisch/NPCs/daily-shopkeeper-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drowned",
+        "location": "Crystal Cove"
+      },
+      "system": {
+        "slug": "drowned-crystal-cove",
+        "section": "Service NPCs",
+        "sortOrder": 87,
+        "image": "/Fisch/NPCs/drowned-crystal-cove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Factions",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "pirate-factions-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 88,
+        "image": "/Fisch/NPCs/pirate-factions-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trade Plaza Traveler",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "trade-plaza-traveler-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 89,
+        "image": "/Fisch/NPCs/trade-plaza-traveler-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fan Boy",
+        "location": "Trade Plaza"
+      },
+      "system": {
+        "slug": "fan-boy-trade-plaza",
+        "section": "Service NPCs",
+        "sortOrder": 90,
+        "image": "/Fisch/NPCs/fan-boy-trade-plaza.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquarium Guy",
+        "location": "Trade Plaza"
+      },
+      "system": {
+        "slug": "aquarium-guy-trade-plaza",
+        "section": "Service NPCs",
+        "sortOrder": 91,
+        "image": "/Fisch/NPCs/aquarium-guy-trade-plaza.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Greeter",
+        "location": "Trade Plaza"
+      },
+      "system": {
+        "slug": "greeter-trade-plaza",
+        "section": "Service NPCs",
+        "sortOrder": 92,
+        "image": "/Fisch/NPCs/greeter-trade-plaza.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marlon Friend",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "marlon-friend-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 93,
+        "image": "/Fisch/NPCs/marlon-friend-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Idle Fishing NPC",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "idle-fishing-npc-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 94,
+        "image": "/Fisch/NPCs/idle-fishing-npc-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Paul",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "paul-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 95,
+        "image": "/Fisch/NPCs/paul-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arnold",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "arnold-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 96,
+        "image": "/Fisch/NPCs/arnold-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Henry",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "henry-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 97,
+        "image": "/Fisch/NPCs/henry-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drew",
+        "location": "Sovereignty Mines"
+      },
+      "system": {
+        "slug": "drew-sovereignty-mines",
+        "section": "Service NPCs",
+        "sortOrder": 98,
+        "image": "/Fisch/NPCs/drew-sovereignty-mines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Claudia",
+        "location": "Sovereignty Mines"
+      },
+      "system": {
+        "slug": "claudia-sovereignty-mines",
+        "section": "Service NPCs",
+        "sortOrder": 99,
+        "image": "/Fisch/NPCs/claudia-sovereignty-mines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Man Working On Rowboat",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "man-working-on-rowboat-roslit-bay",
+        "section": "Service NPCs",
+        "sortOrder": 100,
+        "image": "/Fisch/NPCs/man-working-on-rowboat-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kenith",
+        "location": "Sunstone Cave"
+      },
+      "system": {
+        "slug": "kenith-sunstone-cave",
+        "section": "Service NPCs",
+        "sortOrder": 101,
+        "image": "/Fisch/NPCs/kenith-sunstone-cave.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sporeticus",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "sporeticus-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 102,
+        "image": "/Fisch/NPCs/sporeticus-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Appraiser",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "treasure-appraiser-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 103,
+        "image": "/Fisch/NPCs/treasure-appraiser-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sporey",
+        "location": "Personal Aquarium"
+      },
+      "system": {
+        "slug": "sporey-personal-aquarium",
+        "section": "Service NPCs",
+        "sortOrder": 104,
+        "image": "/Fisch/NPCs/sporey-personal-aquarium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sporey Mom",
+        "location": "Personal Aquarium"
+      },
+      "system": {
+        "slug": "sporey-mom-personal-aquarium",
+        "section": "Service NPCs",
+        "sortOrder": 105,
+        "image": "/Fisch/NPCs/sporey-mom-personal-aquarium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sea Traveler",
+        "location": "Terrapin Island"
+      },
+      "system": {
+        "slug": "sea-traveler-terrapin-island",
+        "section": "Service NPCs",
+        "sortOrder": 106,
+        "image": "/Fisch/NPCs/sea-traveler-terrapin-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Builder Archaeologist",
+        "location": "Ancient Isle"
+      },
+      "system": {
+        "slug": "builder-archaeologist-ancient-isle",
+        "section": "Service NPCs",
+        "sortOrder": 107,
+        "image": "/Fisch/NPCs/builder-archaeologist-ancient-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Submariner",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "submariner-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 108,
+        "image": "/Fisch/NPCs/submariner-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Construction Steel",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "construction-steel-the-laboratory",
+        "section": "Service NPCs",
+        "sortOrder": 109,
+        "image": "/Fisch/NPCs/construction-steel-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Architect Brickshell",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "architect-brickshell-the-laboratory",
+        "section": "Service NPCs",
+        "sortOrder": 110,
+        "image": "/Fisch/NPCs/architect-brickshell-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Construction Jim",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "construction-jim-the-laboratory",
+        "section": "Service NPCs",
+        "sortOrder": 111,
+        "image": "/Fisch/NPCs/construction-jim-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Construction Sam",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "construction-sam-the-laboratory",
+        "section": "Service NPCs",
+        "sortOrder": 112,
+        "image": "/Fisch/NPCs/construction-sam-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Minish",
+        "location": "Harvesters Spike"
+      },
+      "system": {
+        "slug": "minish-harvesters-spike",
+        "section": "Service NPCs",
+        "sortOrder": 113,
+        "image": "/Fisch/NPCs/minish-harvesters-spike.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Cronus",
+        "location": "Atlantis"
+      },
+      "system": {
+        "slug": "spirit-of-cronus-atlantis",
+        "section": "Service NPCs",
+        "sortOrder": 114,
+        "image": "/Fisch/NPCs/spirit-of-cronus-atlantis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Poseidon",
+        "location": "Poseidon Temple"
+      },
+      "system": {
+        "slug": "spirit-of-poseidon-poseidon-temple",
+        "section": "Service NPCs",
+        "sortOrder": 115,
+        "image": "/Fisch/NPCs/spirit-of-poseidon-poseidon-temple.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Hades",
+        "location": "Kraken Lair"
+      },
+      "system": {
+        "slug": "spirit-of-hades-kraken-lair",
+        "section": "Service NPCs",
+        "sortOrder": 116,
+        "image": "/Fisch/NPCs/spirit-of-hades-kraken-lair.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Zeus",
+        "location": "Atlantis"
+      },
+      "system": {
+        "slug": "spirit-of-zeus-atlantis",
+        "section": "Service NPCs",
+        "sortOrder": 117,
+        "image": "/Fisch/NPCs/spirit-of-zeus-atlantis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Nyx",
+        "location": "Atlantis"
+      },
+      "system": {
+        "slug": "spirit-of-nyx-atlantis",
+        "section": "Service NPCs",
+        "sortOrder": 118,
+        "image": "/Fisch/NPCs/spirit-of-nyx-atlantis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Ares",
+        "location": "Atlantis"
+      },
+      "system": {
+        "slug": "spirit-of-ares-atlantis",
+        "section": "Service NPCs",
+        "sortOrder": 119,
+        "image": "/Fisch/NPCs/spirit-of-ares-atlantis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Apollo",
+        "location": "Atlantis"
+      },
+      "system": {
+        "slug": "spirit-of-apollo-atlantis",
+        "section": "Service NPCs",
+        "sortOrder": 120,
+        "image": "/Fisch/NPCs/spirit-of-apollo-atlantis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Athena",
+        "location": "Atlantis"
+      },
+      "system": {
+        "slug": "spirit-of-athena-atlantis",
+        "section": "Service NPCs",
+        "sortOrder": 121,
+        "image": "/Fisch/NPCs/spirit-of-athena-atlantis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bubble Mermaid",
+        "location": "Grand Reef"
+      },
+      "system": {
+        "slug": "bubble-mermaid-grand-reef",
+        "section": "Service NPCs",
+        "sortOrder": 122,
+        "image": "/Fisch/NPCs/bubble-mermaid-grand-reef.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Neptune",
+        "location": "Grand Reef"
+      },
+      "system": {
+        "slug": "captain-neptune-grand-reef",
+        "section": "Service NPCs",
+        "sortOrder": 123,
+        "image": "/Fisch/NPCs/captain-neptune-grand-reef.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dr Glimmerfin",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "dr-glimmerfin-the-laboratory",
+        "section": "Service NPCs",
+        "sortOrder": 124,
+        "image": "/Fisch/NPCs/dr-glimmerfin-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "???",
+        "location": "Frigid Cavern"
+      },
+      "system": {
+        "slug": "frigid-cavern",
+        "section": "Service NPCs",
+        "sortOrder": 125,
+        "image": "/Fisch/NPCs/frigid-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hiker",
+        "location": "Northern Expedition"
+      },
+      "system": {
+        "slug": "hiker-northern-expedition",
+        "section": "Service NPCs",
+        "sortOrder": 126,
+        "image": "/Fisch/NPCs/hiker-northern-expedition.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skin Merchant",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "skin-merchant-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 127,
+        "image": "/Fisch/NPCs/skin-merchant-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate",
+        "location": "Ancient Isle"
+      },
+      "system": {
+        "slug": "pirate-ancient-isle",
+        "section": "Service NPCs",
+        "sortOrder": 128,
+        "image": "/Fisch/NPCs/pirate-ancient-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chiseler",
+        "location": "Ancient Isle"
+      },
+      "system": {
+        "slug": "chiseler-ancient-isle",
+        "section": "Service NPCs",
+        "sortOrder": 129,
+        "image": "/Fisch/NPCs/chiseler-ancient-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteoriticist",
+        "location": "Ancient Isle"
+      },
+      "system": {
+        "slug": "meteoriticist-ancient-isle",
+        "section": "Service NPCs",
+        "sortOrder": 130,
+        "image": "/Fisch/NPCs/meteoriticist-ancient-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shipwright",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "shipwright-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 131,
+        "image": "/Fisch/NPCs/shipwright-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "???",
+        "location": "Vertigo"
+      },
+      "system": {
+        "slug": "vertigo",
+        "section": "Service NPCs",
+        "sortOrder": 132,
+        "image": "/Fisch/NPCs/vertigo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tenebris",
+        "location": "The Depths"
+      },
+      "system": {
+        "slug": "tenebris-the-depths",
+        "section": "Service NPCs",
+        "sortOrder": 133,
+        "image": "/Fisch/NPCs/tenebris-the-depths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Occultus",
+        "location": "The Depths"
+      },
+      "system": {
+        "slug": "occultus-the-depths",
+        "section": "Service NPCs",
+        "sortOrder": 134,
+        "image": "/Fisch/NPCs/occultus-the-depths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aspicientis",
+        "location": "The Depths"
+      },
+      "system": {
+        "slug": "aspicientis-the-depths",
+        "section": "Service NPCs",
+        "sortOrder": 135,
+        "image": "/Fisch/NPCs/aspicientis-the-depths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Keeper",
+        "location": "Vertigo"
+      },
+      "system": {
+        "slug": "the-keeper-vertigo",
+        "section": "Service NPCs",
+        "sortOrder": 136,
+        "image": "/Fisch/NPCs/the-keeper-vertigo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack Marrow",
+        "location": "Forsaken Shores"
+      },
+      "system": {
+        "slug": "jack-marrow-forsaken-shores",
+        "section": "Service NPCs",
+        "sortOrder": 137,
+        "image": "/Fisch/NPCs/jack-marrow-forsaken-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lazy Worker",
+        "location": "Roslit Pond"
+      },
+      "system": {
+        "slug": "lazy-worker-roslit-pond",
+        "section": "Service NPCs",
+        "sortOrder": 138,
+        "image": "/Fisch/NPCs/lazy-worker-roslit-pond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clarence",
+        "location": "Desolate Deep"
+      },
+      "system": {
+        "slug": "clarence-desolate-deep",
+        "section": "Service NPCs",
+        "sortOrder": 139,
+        "image": "/Fisch/NPCs/clarence-desolate-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Roddy",
+        "location": "Desolate Deep"
+      },
+      "system": {
+        "slug": "roddy-desolate-deep",
+        "section": "Service NPCs",
+        "sortOrder": 140,
+        "image": "/Fisch/NPCs/roddy-desolate-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Guard",
+        "location": "Mushgrove Swamp"
+      },
+      "system": {
+        "slug": "guard-mushgrove-swamp",
+        "section": "Service NPCs",
+        "sortOrder": 141,
+        "image": "/Fisch/NPCs/guard-mushgrove-swamp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Agaric",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "agaric-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 142,
+        "image": "/Fisch/NPCs/agaric-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack",
+        "location": "Terrapin Island"
+      },
+      "system": {
+        "slug": "jack-terrapin-island",
+        "section": "Service NPCs",
+        "sortOrder": 143,
+        "image": "/Fisch/NPCs/jack-terrapin-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Daisy",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "daisy-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 144,
+        "image": "/Fisch/NPCs/daisy-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucas",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "lucas-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 145,
+        "image": "/Fisch/NPCs/lucas-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Perdido",
+        "location": "Vertigo"
+      },
+      "system": {
+        "slug": "perdido-vertigo",
+        "section": "Service NPCs",
+        "sortOrder": 146,
+        "image": "/Fisch/NPCs/perdido-vertigo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cole",
+        "location": "Statue of Sovereignty"
+      },
+      "system": {
+        "slug": "cole-statue-of-sovereignty",
+        "section": "Service NPCs",
+        "sortOrder": 147,
+        "image": "/Fisch/NPCs/cole-statue-of-sovereignty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marina",
+        "location": "Statue of Sovereignty"
+      },
+      "system": {
+        "slug": "marina-statue-of-sovereignty",
+        "section": "Service NPCs",
+        "sortOrder": 148,
+        "image": "/Fisch/NPCs/marina-statue-of-sovereignty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rhea",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "rhea-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 149,
+        "image": "/Fisch/NPCs/rhea-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Merlin",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "merlin-sunstone-island",
+        "section": "Service NPCs",
+        "sortOrder": 150,
+        "image": "/Fisch/NPCs/merlin-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wilson",
+        "location": "Snowcap Island"
+      },
+      "system": {
+        "slug": "wilson-snowcap-island",
+        "section": "Service NPCs",
+        "sortOrder": 151,
+        "image": "/Fisch/NPCs/wilson-snowcap-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alfie",
+        "location": "Roslit Hamlet"
+      },
+      "system": {
+        "slug": "alfie-roslit-hamlet",
+        "section": "Service NPCs",
+        "sortOrder": 152,
+        "image": "/Fisch/NPCs/alfie-roslit-hamlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ashe",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "ashe-roslit-bay",
+        "section": "Service NPCs",
+        "sortOrder": 153,
+        "image": "/Fisch/NPCs/ashe-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Caleia",
+        "location": "The Arch"
+      },
+      "system": {
+        "slug": "caleia-the-arch",
+        "section": "Service NPCs",
+        "sortOrder": 154,
+        "image": "/Fisch/NPCs/caleia-the-arch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Synth",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "synth-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 155,
+        "image": "/Fisch/NPCs/synth-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phineas",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "phineas-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 156,
+        "image": "/Fisch/NPCs/phineas-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lantern Keeper",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "lantern-keeper-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 157,
+        "image": "/Fisch/NPCs/lantern-keeper-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pierre",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "pierre-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 158,
+        "image": "/Fisch/NPCs/pierre-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orc",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "orc-roslit-bay",
+        "section": "Service NPCs",
+        "sortOrder": 159,
+        "image": "/Fisch/NPCs/orc-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Angler",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "angler-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 160,
+        "image": "/Fisch/NPCs/angler-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Merchant",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "merchant-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 161,
+        "image": "/Fisch/NPCs/merchant-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Inn Keeper",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "inn-keeper-multiple-locations",
+        "section": "Service NPCs",
+        "sortOrder": 162,
+        "image": "/Fisch/NPCs/inn-keeper-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Appraiser",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "appraiser-moosewood",
+        "section": "Service NPCs",
+        "sortOrder": 163,
+        "image": "/Fisch/NPCs/appraiser-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chief Engineer Nereus",
+        "location": "Deep City"
+      },
+      "system": {
+        "slug": "chief-engineer-nereus-deep-city",
+        "section": "Quest NPCs",
+        "sortOrder": 164,
+        "image": "/Fisch/NPCs/chief-engineer-nereus-deep-city.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tinkerer Orik",
+        "location": "Outer Deep"
+      },
+      "system": {
+        "slug": "tinkerer-orik-outer-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 165,
+        "image": "/Fisch/NPCs/tinkerer-orik-outer-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stylist Corin",
+        "location": "Deep City"
+      },
+      "system": {
+        "slug": "stylist-corin-deep-city",
+        "section": "Quest NPCs",
+        "sortOrder": 166,
+        "image": "/Fisch/NPCs/stylist-corin-deep-city.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forge Hand Marcus",
+        "location": "Deep City"
+      },
+      "system": {
+        "slug": "forge-hand-marcus-deep-city",
+        "section": "Quest NPCs",
+        "sortOrder": 167,
+        "image": "/Fisch/NPCs/forge-hand-marcus-deep-city.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Artisan Nix",
+        "location": "Deep City"
+      },
+      "system": {
+        "slug": "artisan-nix-deep-city",
+        "section": "Quest NPCs",
+        "sortOrder": 168,
+        "image": "/Fisch/NPCs/artisan-nix-deep-city.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shipwright Kael",
+        "location": "Deep City"
+      },
+      "system": {
+        "slug": "shipwright-kael-deep-city",
+        "section": "Quest NPCs",
+        "sortOrder": 169,
+        "image": "/Fisch/NPCs/shipwright-kael-deep-city.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Blind Oracle",
+        "location": "Outer Deep"
+      },
+      "system": {
+        "slug": "the-blind-oracle-outer-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 170,
+        "image": "/Fisch/NPCs/the-blind-oracle-outer-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dr. Vane",
+        "location": "Outer Deep"
+      },
+      "system": {
+        "slug": "dr-vane-outer-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 171,
+        "image": "/Fisch/NPCs/dr-vane-outer-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Curator Lyra",
+        "location": "Lower Deep"
+      },
+      "system": {
+        "slug": "curator-lyra-lower-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 172,
+        "image": "/Fisch/NPCs/curator-lyra-lower-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vesper of the Deep",
+        "location": "Lower Deep"
+      },
+      "system": {
+        "slug": "vesper-of-the-deep-lower-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 173,
+        "image": "/Fisch/NPCs/vesper-of-the-deep-lower-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bounty Tracker",
+        "location": "Deep City"
+      },
+      "system": {
+        "slug": "bounty-tracker-deep-city",
+        "section": "Quest NPCs",
+        "sortOrder": 174,
+        "image": "/Fisch/NPCs/bounty-tracker-deep-city.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sledge",
+        "location": "Outer Deep"
+      },
+      "system": {
+        "slug": "sledge-outer-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 175,
+        "image": "/Fisch/NPCs/sledge-outer-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hunter Dan",
+        "location": "Outer Deep"
+      },
+      "system": {
+        "slug": "hunter-dan-outer-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 176,
+        "image": "/Fisch/NPCs/hunter-dan-outer-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cadet Shimmerfin",
+        "location": "Ocean"
+      },
+      "system": {
+        "slug": "cadet-shimmerfin-ocean",
+        "section": "Quest NPCs",
+        "sortOrder": 177,
+        "image": "/Fisch/NPCs/cadet-shimmerfin-ocean.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Quartermaster Val",
+        "location": "Deep City"
+      },
+      "system": {
+        "slug": "quartermaster-val-deep-city",
+        "section": "Quest NPCs",
+        "sortOrder": 178,
+        "image": "/Fisch/NPCs/quartermaster-val-deep-city.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Cartographer",
+        "location": "Outer Deep"
+      },
+      "system": {
+        "slug": "the-cartographer-outer-deep",
+        "section": "Quest NPCs",
+        "sortOrder": 179,
+        "image": "/Fisch/NPCs/the-cartographer-outer-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nyx",
+        "location": "The Chapel"
+      },
+      "system": {
+        "slug": "nyx-the-chapel",
+        "section": "Quest NPCs",
+        "sortOrder": 180,
+        "image": "/Fisch/NPCs/nyx-the-chapel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Polyhistor",
+        "location": "The Chapel"
+      },
+      "system": {
+        "slug": "polyhistor-the-chapel",
+        "section": "Quest NPCs",
+        "sortOrder": 181,
+        "image": "/Fisch/NPCs/polyhistor-the-chapel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tempest",
+        "location": "The Chapel"
+      },
+      "system": {
+        "slug": "tempest-the-chapel",
+        "section": "Quest NPCs",
+        "sortOrder": 182,
+        "image": "/Fisch/NPCs/tempest-the-chapel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alexandria",
+        "location": "The Chapel"
+      },
+      "system": {
+        "slug": "alexandria-the-chapel",
+        "section": "Quest NPCs",
+        "sortOrder": 183,
+        "image": "/Fisch/NPCs/alexandria-the-chapel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scourge",
+        "location": "The Chapel"
+      },
+      "system": {
+        "slug": "scourge-the-chapel",
+        "section": "Quest NPCs",
+        "sortOrder": 184,
+        "image": "/Fisch/NPCs/scourge-the-chapel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Doug",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "doug-the-laboratory",
+        "section": "Quest NPCs",
+        "sortOrder": 185,
+        "image": "/Fisch/NPCs/doug-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Analyst Archaeologist",
+        "location": "Ancient Isle"
+      },
+      "system": {
+        "slug": "analyst-archaeologist-ancient-isle",
+        "section": "Quest NPCs",
+        "sortOrder": 186,
+        "image": "/Fisch/NPCs/analyst-archaeologist-ancient-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Paleontologist Petri",
+        "location": "Dunehaven"
+      },
+      "system": {
+        "slug": "paleontologist-petri-dunehaven",
+        "section": "Quest NPCs",
+        "sortOrder": 187,
+        "image": "/Fisch/NPCs/paleontologist-petri-dunehaven.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Awakened Witch",
+        "location": "Hades' Underworld of Indefinite"
+      },
+      "system": {
+        "slug": "awakened-witch-hades-underworld-of-indefinite",
+        "section": "Quest NPCs",
+        "sortOrder": 188,
+        "image": "/Fisch/NPCs/awakened-witch-hades-underworld-of-indefinite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Challenger",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "daily-challenger-moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 189,
+        "image": "/Fisch/NPCs/daily-challenger-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Weekly Challenger",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "weekly-challenger-moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 190,
+        "image": "/Fisch/NPCs/weekly-challenger-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hunting Angler",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "hunting-angler-the-shady-bazaar",
+        "section": "Quest NPCs",
+        "sortOrder": 191,
+        "image": "/Fisch/NPCs/hunting-angler-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shady Angler",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "shady-angler-the-shady-bazaar",
+        "section": "Quest NPCs",
+        "sortOrder": 192,
+        "image": "/Fisch/NPCs/shady-angler-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mysterious Shadow",
+        "location": "The Shady Bazaar"
+      },
+      "system": {
+        "slug": "mysterious-shadow-the-shady-bazaar",
+        "section": "Quest NPCs",
+        "sortOrder": 193,
+        "image": "/Fisch/NPCs/mysterious-shadow-the-shady-bazaar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "..?",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 194,
+        "image": "/Fisch/NPCs/moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "diver-moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 195,
+        "image": "/Fisch/NPCs/diver-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Watchman",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "watchman-moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 196,
+        "image": "/Fisch/NPCs/watchman-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisher",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "fisher-moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 197,
+        "image": "/Fisch/NPCs/fisher-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Todd",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "todd-moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 198,
+        "image": "/Fisch/NPCs/todd-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apprentice Archaeologist",
+        "location": "Ancient Isle"
+      },
+      "system": {
+        "slug": "apprentice-archaeologist-ancient-isle",
+        "section": "Quest NPCs",
+        "sortOrder": 199,
+        "image": "/Fisch/NPCs/apprentice-archaeologist-ancient-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Prized Shadow",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "prized-shadow-boreal-pines",
+        "section": "Quest NPCs",
+        "sortOrder": 200,
+        "image": "/Fisch/NPCs/prized-shadow-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Illusioned Shadow",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "illusioned-shadow-boreal-pines",
+        "section": "Quest NPCs",
+        "sortOrder": 201,
+        "image": "/Fisch/NPCs/illusioned-shadow-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Keeper Warden",
+        "location": "Enchanted Crevice"
+      },
+      "system": {
+        "slug": "keeper-warden-enchanted-crevice",
+        "section": "Quest NPCs",
+        "sortOrder": 202,
+        "image": "/Fisch/NPCs/keeper-warden-enchanted-crevice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apollo's Overseer",
+        "location": "Apollo's Song of Light"
+      },
+      "system": {
+        "slug": "apollo-s-overseer-apollo-s-song-of-light",
+        "section": "Quest NPCs",
+        "sortOrder": 203,
+        "image": "/Fisch/NPCs/apollo-s-overseer-apollo-s-song-of-light.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Royal Guard 3",
+        "location": "Bellona's Frenzy of War"
+      },
+      "system": {
+        "slug": "royal-guard-3-bellona-s-frenzy-of-war",
+        "section": "Quest NPCs",
+        "sortOrder": 204,
+        "image": "/Fisch/NPCs/royal-guard-3-bellona-s-frenzy-of-war.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Royal Guard 2",
+        "location": "Bellona's Frenzy of War"
+      },
+      "system": {
+        "slug": "royal-guard-2-bellona-s-frenzy-of-war",
+        "section": "Quest NPCs",
+        "sortOrder": 205,
+        "image": "/Fisch/NPCs/royal-guard-2-bellona-s-frenzy-of-war.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Royal Guard 1",
+        "location": "Bellona's Frenzy of War"
+      },
+      "system": {
+        "slug": "royal-guard-1-bellona-s-frenzy-of-war",
+        "section": "Quest NPCs",
+        "sortOrder": 206,
+        "image": "/Fisch/NPCs/royal-guard-1-bellona-s-frenzy-of-war.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thalor Virewood",
+        "location": "Everturn Forest"
+      },
+      "system": {
+        "slug": "thalor-virewood-everturn-forest",
+        "section": "Quest NPCs",
+        "sortOrder": 207,
+        "image": "/Fisch/NPCs/thalor-virewood-everturn-forest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brindle Oakshade",
+        "location": "Everturn Forest"
+      },
+      "system": {
+        "slug": "brindle-oakshade-everturn-forest",
+        "section": "Quest NPCs",
+        "sortOrder": 208,
+        "image": "/Fisch/NPCs/brindle-oakshade-everturn-forest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scoria Guard",
+        "location": "Scoria Reach"
+      },
+      "system": {
+        "slug": "scoria-guard-scoria-reach",
+        "section": "Quest NPCs",
+        "sortOrder": 209,
+        "image": "/Fisch/NPCs/scoria-guard-scoria-reach.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Felix",
+        "location": "Toxic Grove"
+      },
+      "system": {
+        "slug": "felix-toxic-grove",
+        "section": "Quest NPCs",
+        "sortOrder": 210,
+        "image": "/Fisch/NPCs/felix-toxic-grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mad Chemist",
+        "location": "Toxic Grove"
+      },
+      "system": {
+        "slug": "mad-chemist-toxic-grove",
+        "section": "Quest NPCs",
+        "sortOrder": 211,
+        "image": "/Fisch/NPCs/mad-chemist-toxic-grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Daisy",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "daisy-living-garden",
+        "section": "Quest NPCs",
+        "sortOrder": 212,
+        "image": "/Fisch/NPCs/daisy-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Joseph",
+        "location": "Toxic Grove"
+      },
+      "system": {
+        "slug": "joseph-toxic-grove",
+        "section": "Quest NPCs",
+        "sortOrder": 213,
+        "image": "/Fisch/NPCs/joseph-toxic-grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Plagued Reaper",
+        "location": "Toxic Grove"
+      },
+      "system": {
+        "slug": "plagued-reaper-toxic-grove",
+        "section": "Quest NPCs",
+        "sortOrder": 214,
+        "image": "/Fisch/NPCs/plagued-reaper-toxic-grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mike",
+        "location": "Living Garden"
+      },
+      "system": {
+        "slug": "mike-living-garden",
+        "section": "Quest NPCs",
+        "sortOrder": 215,
+        "image": "/Fisch/NPCs/mike-living-garden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elijah",
+        "location": "Toxic Grove"
+      },
+      "system": {
+        "slug": "elijah-toxic-grove",
+        "section": "Quest NPCs",
+        "sortOrder": 216,
+        "image": "/Fisch/NPCs/elijah-toxic-grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Caleb",
+        "location": "Toxic Grove"
+      },
+      "system": {
+        "slug": "caleb-toxic-grove",
+        "section": "Quest NPCs",
+        "sortOrder": 217,
+        "image": "/Fisch/NPCs/caleb-toxic-grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Olivia",
+        "location": "Toxic Grove"
+      },
+      "system": {
+        "slug": "olivia-toxic-grove",
+        "section": "Quest NPCs",
+        "sortOrder": 218,
+        "image": "/Fisch/NPCs/olivia-toxic-grove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oliver",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "oliver-lost-jungle",
+        "section": "Quest NPCs",
+        "sortOrder": 219,
+        "image": "/Fisch/NPCs/oliver-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprout",
+        "location": "Lost Jungle"
+      },
+      "system": {
+        "slug": "sprout-lost-jungle",
+        "section": "Quest NPCs",
+        "sortOrder": 220,
+        "image": "/Fisch/NPCs/sprout-lost-jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mysterious Songstress",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "mysterious-songstress-underground-music-venue",
+        "section": "Quest NPCs",
+        "sortOrder": 221,
+        "image": "/Fisch/NPCs/mysterious-songstress-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oddie",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "oddie-sunstone-island",
+        "section": "Quest NPCs",
+        "sortOrder": 222,
+        "image": "/Fisch/NPCs/oddie-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dave",
+        "location": "The Arch"
+      },
+      "system": {
+        "slug": "dave-the-arch",
+        "section": "Quest NPCs",
+        "sortOrder": 223,
+        "image": "/Fisch/NPCs/dave-the-arch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Teddy",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-teddy-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 224,
+        "image": "/Fisch/NPCs/diver-teddy-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Sonny",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "diver-sonny-coral-bastion",
+        "section": "Quest NPCs",
+        "sortOrder": 225,
+        "image": "/Fisch/NPCs/diver-sonny-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Ricky",
+        "location": "Crowned Ruins"
+      },
+      "system": {
+        "slug": "diver-ricky-crowned-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 226,
+        "image": "/Fisch/NPCs/diver-ricky-crowned-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Corey",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "diver-corey-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 227,
+        "image": "/Fisch/NPCs/diver-corey-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Henry",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-henry-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 228,
+        "image": "/Fisch/NPCs/diver-henry-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Sammy",
+        "location": "Collapsed Ruins"
+      },
+      "system": {
+        "slug": "diver-sammy-collapsed-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 229,
+        "image": "/Fisch/NPCs/diver-sammy-collapsed-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Johnny",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "diver-johnny-coral-bastion",
+        "section": "Quest NPCs",
+        "sortOrder": 230,
+        "image": "/Fisch/NPCs/diver-johnny-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Rudy",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-rudy-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 231,
+        "image": "/Fisch/NPCs/diver-rudy-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Eddie",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "diver-eddie-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 232,
+        "image": "/Fisch/NPCs/diver-eddie-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Larry",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-larry-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 233,
+        "image": "/Fisch/NPCs/diver-larry-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Timmy",
+        "location": "Collapsed Ruins"
+      },
+      "system": {
+        "slug": "diver-timmy-collapsed-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 234,
+        "image": "/Fisch/NPCs/diver-timmy-collapsed-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Manny",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "diver-manny-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 235,
+        "image": "/Fisch/NPCs/diver-manny-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Ronnie",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "diver-ronnie-coral-bastion",
+        "section": "Quest NPCs",
+        "sortOrder": 236,
+        "image": "/Fisch/NPCs/diver-ronnie-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Benny",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "diver-benny-coral-bastion",
+        "section": "Quest NPCs",
+        "sortOrder": 237,
+        "image": "/Fisch/NPCs/diver-benny-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Jimmy",
+        "location": "Collapsed Ruins"
+      },
+      "system": {
+        "slug": "diver-jimmy-collapsed-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 238,
+        "image": "/Fisch/NPCs/diver-jimmy-collapsed-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Kenny",
+        "location": "Crowned Ruins"
+      },
+      "system": {
+        "slug": "diver-kenny-crowned-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 239,
+        "image": "/Fisch/NPCs/diver-kenny-crowned-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Mikey",
+        "location": "Crowned Ruins"
+      },
+      "system": {
+        "slug": "diver-mikey-crowned-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 240,
+        "image": "/Fisch/NPCs/diver-mikey-crowned-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Gary",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-gary-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 241,
+        "image": "/Fisch/NPCs/diver-gary-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Billy",
+        "location": "Collapsed Ruins"
+      },
+      "system": {
+        "slug": "diver-billy-collapsed-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 242,
+        "image": "/Fisch/NPCs/diver-billy-collapsed-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Wesley",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-wesley-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 243,
+        "image": "/Fisch/NPCs/diver-wesley-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Joey",
+        "location": "Crowned Ruins"
+      },
+      "system": {
+        "slug": "diver-joey-crowned-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 244,
+        "image": "/Fisch/NPCs/diver-joey-crowned-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Jerry",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-jerry-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 245,
+        "image": "/Fisch/NPCs/diver-jerry-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Nicky",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "diver-nicky-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 246,
+        "image": "/Fisch/NPCs/diver-nicky-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Percy",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-percy-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 247,
+        "image": "/Fisch/NPCs/diver-percy-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Tommy",
+        "location": "Collapsed Ruins"
+      },
+      "system": {
+        "slug": "diver-tommy-collapsed-ruins",
+        "section": "Quest NPCs",
+        "sortOrder": 248,
+        "image": "/Fisch/NPCs/diver-tommy-collapsed-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Lenny",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "diver-lenny-coral-bastion",
+        "section": "Quest NPCs",
+        "sortOrder": 249,
+        "image": "/Fisch/NPCs/diver-lenny-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Buddy",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-buddy-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 250,
+        "image": "/Fisch/NPCs/diver-buddy-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Jim",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "diver-jim-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 251,
+        "image": "/Fisch/NPCs/diver-jim-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Frankie",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "diver-frankie-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 252,
+        "image": "/Fisch/NPCs/diver-frankie-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Tony",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "diver-tony-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 253,
+        "image": "/Fisch/NPCs/diver-tony-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Perry",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-perry-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 254,
+        "image": "/Fisch/NPCs/diver-perry-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Terry",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-terry-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 255,
+        "image": "/Fisch/NPCs/diver-terry-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Bobby",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "diver-bobby-coral-bastion",
+        "section": "Quest NPCs",
+        "sortOrder": 256,
+        "image": "/Fisch/NPCs/diver-bobby-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Barry",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-barry-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 257,
+        "image": "/Fisch/NPCs/diver-barry-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Danny",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "diver-danny-coral-bastion",
+        "section": "Quest NPCs",
+        "sortOrder": 258,
+        "image": "/Fisch/NPCs/diver-danny-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diver Freddie",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "diver-freddie-tidefall",
+        "section": "Quest NPCs",
+        "sortOrder": 259,
+        "image": "/Fisch/NPCs/diver-freddie-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magical Diver",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "magical-diver-sunken-reliquary",
+        "section": "Quest NPCs",
+        "sortOrder": 260,
+        "image": "/Fisch/NPCs/magical-diver-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marvin",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "marvin-boreal-pines",
+        "section": "Quest NPCs",
+        "sortOrder": 261,
+        "image": "/Fisch/NPCs/marvin-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carbon",
+        "location": "The Bunker"
+      },
+      "system": {
+        "slug": "carbon-the-bunker",
+        "section": "Quest NPCs",
+        "sortOrder": 262,
+        "image": "/Fisch/NPCs/carbon-the-bunker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glorp",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "glorp-roslit-bay",
+        "section": "Quest NPCs",
+        "sortOrder": 263,
+        "image": "/Fisch/NPCs/glorp-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tessael",
+        "location": "The Sanctum"
+      },
+      "system": {
+        "slug": "tessael-the-sanctum",
+        "section": "Quest NPCs",
+        "sortOrder": 264,
+        "image": "/Fisch/NPCs/tessael-the-sanctum.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Varn",
+        "location": "Passage of Oaths"
+      },
+      "system": {
+        "slug": "varn-passage-of-oaths",
+        "section": "Quest NPCs",
+        "sortOrder": 265,
+        "image": "/Fisch/NPCs/varn-passage-of-oaths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sythra",
+        "location": "Passage of Oaths"
+      },
+      "system": {
+        "slug": "sythra-passage-of-oaths",
+        "section": "Quest NPCs",
+        "sortOrder": 266,
+        "image": "/Fisch/NPCs/sythra-passage-of-oaths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kareth",
+        "location": "Hall of Whispers"
+      },
+      "system": {
+        "slug": "kareth-hall-of-whispers",
+        "section": "Quest NPCs",
+        "sortOrder": 267,
+        "image": "/Fisch/NPCs/kareth-hall-of-whispers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Restless One",
+        "location": "Cultist Lair"
+      },
+      "system": {
+        "slug": "the-restless-one-cultist-lair",
+        "section": "Quest NPCs",
+        "sortOrder": 268,
+        "image": "/Fisch/NPCs/the-restless-one-cultist-lair.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eldran",
+        "location": "Cultist Lair"
+      },
+      "system": {
+        "slug": "eldran-cultist-lair",
+        "section": "Quest NPCs",
+        "sortOrder": 269,
+        "image": "/Fisch/NPCs/eldran-cultist-lair.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Maelira",
+        "location": "Cultist Lair"
+      },
+      "system": {
+        "slug": "maelira-cultist-lair",
+        "section": "Quest NPCs",
+        "sortOrder": 270,
+        "image": "/Fisch/NPCs/maelira-cultist-lair.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fabulous Deity",
+        "location": "Calm Zone"
+      },
+      "system": {
+        "slug": "fabulous-deity-calm-zone",
+        "section": "Quest NPCs",
+        "sortOrder": 271,
+        "image": "/Fisch/NPCs/fabulous-deity-calm-zone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crazy Cat Lady",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "crazy-cat-lady-underground-music-venue",
+        "section": "Quest NPCs",
+        "sortOrder": 272,
+        "image": "/Fisch/NPCs/crazy-cat-lady-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wind Master",
+        "location": "Glacial Grotto"
+      },
+      "system": {
+        "slug": "wind-master-glacial-grotto",
+        "section": "Quest NPCs",
+        "sortOrder": 273,
+        "image": "/Fisch/NPCs/wind-master-glacial-grotto.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson King",
+        "location": "Crimson Cavern"
+      },
+      "system": {
+        "slug": "crimson-king-crimson-cavern",
+        "section": "Quest NPCs",
+        "sortOrder": 274,
+        "image": "/Fisch/NPCs/crimson-king-crimson-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wixie",
+        "location": "Crimson Cavern"
+      },
+      "system": {
+        "slug": "wixie-crimson-cavern",
+        "section": "Quest NPCs",
+        "sortOrder": 275,
+        "image": "/Fisch/NPCs/wixie-crimson-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rokko",
+        "location": "Luminescent Cavern"
+      },
+      "system": {
+        "slug": "rokko-luminescent-cavern",
+        "section": "Quest NPCs",
+        "sortOrder": 276,
+        "image": "/Fisch/NPCs/rokko-luminescent-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Guard",
+        "location": "Luminescent Cavern"
+      },
+      "system": {
+        "slug": "crimson-guard-luminescent-cavern",
+        "section": "Quest NPCs",
+        "sortOrder": 277,
+        "image": "/Fisch/NPCs/crimson-guard-luminescent-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tilli",
+        "location": "Crimson Cavern"
+      },
+      "system": {
+        "slug": "tilli-crimson-cavern",
+        "section": "Quest NPCs",
+        "sortOrder": 278,
+        "image": "/Fisch/NPCs/tilli-crimson-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vimble",
+        "location": "Luminescent Cavern"
+      },
+      "system": {
+        "slug": "vimble-luminescent-cavern",
+        "section": "Quest NPCs",
+        "sortOrder": 279,
+        "image": "/Fisch/NPCs/vimble-luminescent-cavern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "RoRed",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "rored-roslit-bay",
+        "section": "Quest NPCs",
+        "sortOrder": 280,
+        "image": "/Fisch/NPCs/rored-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hollow",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "hollow-underground-music-venue",
+        "section": "Quest NPCs",
+        "sortOrder": 281,
+        "image": "/Fisch/NPCs/hollow-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sno",
+        "location": "Snowcap Island"
+      },
+      "system": {
+        "slug": "sno-snowcap-island",
+        "section": "Quest NPCs",
+        "sortOrder": 282,
+        "image": "/Fisch/NPCs/sno-snowcap-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nick",
+        "location": "The Depths"
+      },
+      "system": {
+        "slug": "nick-the-depths",
+        "section": "Quest NPCs",
+        "sortOrder": 283,
+        "image": "/Fisch/NPCs/nick-the-depths.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dead Man Joe",
+        "location": "Forsaken Shores"
+      },
+      "system": {
+        "slug": "dead-man-joe-forsaken-shores",
+        "section": "Quest NPCs",
+        "sortOrder": 284,
+        "image": "/Fisch/NPCs/dead-man-joe-forsaken-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harris",
+        "location": "Grand Reef"
+      },
+      "system": {
+        "slug": "harris-grand-reef",
+        "section": "Quest NPCs",
+        "sortOrder": 285,
+        "image": "/Fisch/NPCs/harris-grand-reef.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Old Man",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "old-man-roslit-bay",
+        "section": "Quest NPCs",
+        "sortOrder": 286,
+        "image": "/Fisch/NPCs/old-man-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sporey",
+        "location": "Pine Shoals"
+      },
+      "system": {
+        "slug": "sporey-pine-shoals",
+        "section": "Quest NPCs",
+        "sortOrder": 287,
+        "image": "/Fisch/NPCs/sporey-pine-shoals.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sporey Mom",
+        "location": "Lushgrove"
+      },
+      "system": {
+        "slug": "sporey-mom-lushgrove",
+        "section": "Quest NPCs",
+        "sortOrder": 288,
+        "image": "/Fisch/NPCs/sporey-mom-lushgrove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Ahab",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "captain-ahab-moosewood",
+        "section": "Quest NPCs",
+        "sortOrder": 289,
+        "image": "/Fisch/NPCs/captain-ahab-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dr. Crookspine",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "dr-crookspine-the-laboratory",
+        "section": "Quest NPCs",
+        "sortOrder": 290,
+        "image": "/Fisch/NPCs/dr-crookspine-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Furnisher",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "furnisher-sunstone-island-2",
+        "section": "Core NPCs",
+        "sortOrder": 291,
+        "image": "/Fisch/NPCs/furnisher-sunstone-island-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drowned Appraiser",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "drowned-appraiser-tidefall-2",
+        "section": "Core NPCs",
+        "sortOrder": 292,
+        "image": "/Fisch/NPCs/drowned-appraiser-tidefall-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Totem Carver",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "totem-carver-sunstone-island-2",
+        "section": "Core NPCs",
+        "sortOrder": 293,
+        "image": "/Fisch/NPCs/totem-carver-sunstone-island-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Shopkeeper",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "daily-shopkeeper-moosewood-2",
+        "section": "Core NPCs",
+        "sortOrder": 294,
+        "image": "/Fisch/NPCs/daily-shopkeeper-moosewood-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Factions",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "pirate-factions-multiple-locations-2",
+        "section": "Core NPCs",
+        "sortOrder": 295,
+        "image": "/Fisch/NPCs/pirate-factions-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Appraiser",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "treasure-appraiser-multiple-locations-2",
+        "section": "Core NPCs",
+        "sortOrder": 296,
+        "image": "/Fisch/NPCs/treasure-appraiser-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Utility Shipwright",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "utility-shipwright-multiple-locations",
+        "section": "Core NPCs",
+        "sortOrder": 297,
+        "image": "/Fisch/NPCs/utility-shipwright-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hiker",
+        "location": "Northern Expedition"
+      },
+      "system": {
+        "slug": "hiker-northern-expedition-2",
+        "section": "Core NPCs",
+        "sortOrder": 298,
+        "image": "/Fisch/NPCs/hiker-northern-expedition-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skin Merchant",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "skin-merchant-multiple-locations-2",
+        "section": "Core NPCs",
+        "sortOrder": 299,
+        "image": "/Fisch/NPCs/skin-merchant-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shipwright",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "shipwright-multiple-locations-2",
+        "section": "Core NPCs",
+        "sortOrder": 300,
+        "image": "/Fisch/NPCs/shipwright-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Angler",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "angler-multiple-locations-2",
+        "section": "Core NPCs",
+        "sortOrder": 301,
+        "image": "/Fisch/NPCs/angler-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Merchant",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "merchant-multiple-locations-2",
+        "section": "Core NPCs",
+        "sortOrder": 302,
+        "image": "/Fisch/NPCs/merchant-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Inn Keeper",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "inn-keeper-multiple-locations-2",
+        "section": "Core NPCs",
+        "sortOrder": 303,
+        "image": "/Fisch/NPCs/inn-keeper-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Appraiser",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "appraiser-moosewood-2",
+        "section": "Core NPCs",
+        "sortOrder": 304,
+        "image": "/Fisch/NPCs/appraiser-moosewood-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Liberty Larry",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "liberty-larry-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 305,
+        "image": "/Fisch/NPCs/liberty-larry-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fischfest Merchant",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "fischfest-merchant-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 306,
+        "image": "/Fisch/NPCs/fischfest-merchant-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Volleyball Referee",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "beach-volleyball-referee-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 307,
+        "image": "/Fisch/NPCs/beach-volleyball-referee-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jetski Referee",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "jetski-referee-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 308,
+        "image": "/Fisch/NPCs/jetski-referee-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bonfire Blake",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "bonfire-blake-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 309,
+        "image": "/Fisch/NPCs/bonfire-blake-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Castle Referee",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "sand-castle-referee-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 310,
+        "image": "/Fisch/NPCs/sand-castle-referee-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drink Server",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "drink-server-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 311,
+        "image": "/Fisch/NPCs/drink-server-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunshell Merchant",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "sunshell-merchant-coconut-town",
+        "section": "Event NPCs",
+        "sortOrder": 312,
+        "image": "/Fisch/NPCs/sunshell-merchant-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tim",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "tim-coconut-town",
+        "section": "Event NPCs",
+        "sortOrder": 313,
+        "image": "/Fisch/NPCs/tim-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jim",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "jim-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 314,
+        "image": "/Fisch/NPCs/jim-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kim",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "kim-coconut-town",
+        "section": "Event NPCs",
+        "sortOrder": 315,
+        "image": "/Fisch/NPCs/kim-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloom Bunny",
+        "location": "Easter Cove"
+      },
+      "system": {
+        "slug": "bloom-bunny-easter-cove",
+        "section": "Event NPCs",
+        "sortOrder": 316,
+        "image": "/Fisch/NPCs/bloom-bunny-easter-cove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Appraiser",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "lucky-appraiser-shamrock-express",
+        "section": "Event NPCs",
+        "sortOrder": 317,
+        "image": "/Fisch/NPCs/lucky-appraiser-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Guide",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "leprechaun-guide-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 318,
+        "image": "/Fisch/NPCs/leprechaun-guide-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine's Merchant",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "valentine-s-merchant-sweetheart-shores",
+        "section": "Event NPCs",
+        "sortOrder": 319,
+        "image": "/Fisch/NPCs/valentine-s-merchant-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid Carl",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "cupid-carl-sweetheart-shores",
+        "section": "Event NPCs",
+        "sortOrder": 320,
+        "image": "/Fisch/NPCs/cupid-carl-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentides Shopkeeper Tim",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "valentides-shopkeeper-tim-sweetheart-shores",
+        "section": "Event NPCs",
+        "sortOrder": 321,
+        "image": "/Fisch/NPCs/valentides-shopkeeper-tim-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentides Shopkeeper Tom",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "valentides-shopkeeper-tom-sweetheart-shores",
+        "section": "Event NPCs",
+        "sortOrder": 322,
+        "image": "/Fisch/NPCs/valentides-shopkeeper-tom-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sweetheart Sarah",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "sweetheart-sarah-sweetheart-shores",
+        "section": "Event NPCs",
+        "sortOrder": 323,
+        "image": "/Fisch/NPCs/sweetheart-sarah-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cathy",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "cathy-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 324,
+        "image": "/Fisch/NPCs/cathy-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zach",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "zach-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 325,
+        "image": "/Fisch/NPCs/zach-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Andy",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "andy-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 326,
+        "image": "/Fisch/NPCs/andy-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Adam",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "adam-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 327,
+        "image": "/Fisch/NPCs/adam-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bella",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "bella-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 328,
+        "image": "/Fisch/NPCs/bella-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Randy Elf",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "randy-elf-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 329,
+        "image": "/Fisch/NPCs/randy-elf-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Penny Elf",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "penny-elf-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 330,
+        "image": "/Fisch/NPCs/penny-elf-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Taylor Elf",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "taylor-elf-northstar-village",
+        "section": "Event NPCs",
+        "sortOrder": 331,
+        "image": "/Fisch/NPCs/taylor-elf-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kate Elf",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "kate-elf-northstar-village",
+        "section": "Event NPCs",
+        "sortOrder": 332,
+        "image": "/Fisch/NPCs/kate-elf-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Greg Elf",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "greg-elf-northstar-village",
+        "section": "Event NPCs",
+        "sortOrder": 333,
+        "image": "/Fisch/NPCs/greg-elf-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf Gabriel",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "elf-gabriel-northstar-village",
+        "section": "Event NPCs",
+        "sortOrder": 334,
+        "image": "/Fisch/NPCs/elf-gabriel-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cooper Elf",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "cooper-elf-northstar-village",
+        "section": "Event NPCs",
+        "sortOrder": 335,
+        "image": "/Fisch/NPCs/cooper-elf-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman",
+        "location": "Glacial Ridge"
+      },
+      "system": {
+        "slug": "snowman-glacial-ridge",
+        "section": "Event NPCs",
+        "sortOrder": 336,
+        "image": "/Fisch/NPCs/snowman-glacial-ridge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cozy Clara",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "cozy-clara-northstar-village",
+        "section": "Event NPCs",
+        "sortOrder": 337,
+        "image": "/Fisch/NPCs/cozy-clara-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Callie",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "callie-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 338,
+        "image": "/Fisch/NPCs/callie-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cole",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "cole-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 339,
+        "image": "/Fisch/NPCs/cole-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisch Fright Fan",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "fisch-fright-fan-crook-s-hallow",
+        "section": "Event NPCs",
+        "sortOrder": 340,
+        "image": "/Fisch/NPCs/fisch-fright-fan-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flying Dutchman",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "flying-dutchman-crook-s-hallow",
+        "section": "Event NPCs",
+        "sortOrder": 341,
+        "image": "/Fisch/NPCs/flying-dutchman-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "goblin-multiple-locations",
+        "section": "Event NPCs",
+        "sortOrder": 342,
+        "image": "/Fisch/NPCs/goblin-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frankenstein",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "frankenstein-crook-s-hallow",
+        "section": "Event NPCs",
+        "sortOrder": 343,
+        "image": "/Fisch/NPCs/frankenstein-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chicken Suit",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "chicken-suit-crook-s-hallow",
+        "section": "Event NPCs",
+        "sortOrder": 344,
+        "image": "/Fisch/NPCs/chicken-suit-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jungle Adventurer",
+        "location": "Jungle's Echo"
+      },
+      "system": {
+        "slug": "jungle-adventurer-jungle-s-echo",
+        "section": "Event NPCs",
+        "sortOrder": 345,
+        "image": "/Fisch/NPCs/jungle-adventurer-jungle-s-echo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scuba Steve",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "scuba-steve-fischfest-1",
+        "section": "Event NPCs",
+        "sortOrder": 346,
+        "image": "/Fisch/NPCs/scuba-steve-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jett",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "jett-fischfest-1",
+        "section": "Event NPCs",
+        "sortOrder": 347,
+        "image": "/Fisch/NPCs/jett-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "red-fischfest-1",
+        "section": "Event NPCs",
+        "sortOrder": 348,
+        "image": "/Fisch/NPCs/red-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shawn",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "shawn-fischfest-1",
+        "section": "Event NPCs",
+        "sortOrder": 349,
+        "image": "/Fisch/NPCs/shawn-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thomas",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "thomas-fischfest-1",
+        "section": "Event NPCs",
+        "sortOrder": 350,
+        "image": "/Fisch/NPCs/thomas-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shell Merchant",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "shell-merchant-fischfest-1",
+        "section": "Event NPCs",
+        "sortOrder": 351,
+        "image": "/Fisch/NPCs/shell-merchant-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grouchy Smurf",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "grouchy-smurf-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 352,
+        "image": "/Fisch/NPCs/grouchy-smurf-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Papa Smurf",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "papa-smurf-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 353,
+        "image": "/Fisch/NPCs/papa-smurf-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vanity",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "vanity-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 354,
+        "image": "/Fisch/NPCs/vanity-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mama Poot",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "mama-poot-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 355,
+        "image": "/Fisch/NPCs/mama-poot-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brainy Smurf",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "brainy-smurf-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 356,
+        "image": "/Fisch/NPCs/brainy-smurf-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clumsy Smurf",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "clumsy-smurf-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 357,
+        "image": "/Fisch/NPCs/clumsy-smurf-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hefty",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "hefty-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 358,
+        "image": "/Fisch/NPCs/hefty-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Moxie",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "moxie-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 359,
+        "image": "/Fisch/NPCs/moxie-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "No Name",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "no-name-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 360,
+        "image": "/Fisch/NPCs/no-name-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ken",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "ken-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 361,
+        "image": "/Fisch/NPCs/ken-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sno",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "sno-fischfest-2",
+        "section": "Event NPCs",
+        "sortOrder": 362,
+        "image": "/Fisch/NPCs/sno-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Paleontologist",
+        "location": "Jurassic Island"
+      },
+      "system": {
+        "slug": "paleontologist-jurassic-island",
+        "section": "Event NPCs",
+        "sortOrder": 363,
+        "image": "/Fisch/NPCs/paleontologist-jurassic-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mission Specialist",
+        "location": "Jurassic Island"
+      },
+      "system": {
+        "slug": "mission-specialist-jurassic-island",
+        "section": "Event NPCs",
+        "sortOrder": 364,
+        "image": "/Fisch/NPCs/mission-specialist-jurassic-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fixer",
+        "location": "Jurassic Island"
+      },
+      "system": {
+        "slug": "fixer-jurassic-island",
+        "section": "Event NPCs",
+        "sortOrder": 365,
+        "image": "/Fisch/NPCs/fixer-jurassic-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harry Fischer",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "harry-fischer-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 366,
+        "image": "/Fisch/NPCs/harry-fischer-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dr. Blackfin",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "dr-blackfin-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 367,
+        "image": "/Fisch/NPCs/dr-blackfin-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brother Silas",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "brother-silas-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 368,
+        "image": "/Fisch/NPCs/brother-silas-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clover McRich",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "clover-mcrich-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 369,
+        "image": "/Fisch/NPCs/clover-mcrich-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Bunny",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "easter-bunny-sunstone-island",
+        "section": "Event NPCs",
+        "sortOrder": 370,
+        "image": "/Fisch/NPCs/easter-bunny-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine's Day",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "valentine-s-day-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 371,
+        "image": "/Fisch/NPCs/valentine-s-day-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dr Glimmerfin",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "dr-glimmerfin-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 372,
+        "image": "/Fisch/NPCs/dr-glimmerfin-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cole",
+        "location": "Winter Village"
+      },
+      "system": {
+        "slug": "cole-winter-village",
+        "section": "Event NPCs",
+        "sortOrder": 373,
+        "image": "/Fisch/NPCs/cole-winter-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ben Elf",
+        "location": "Northstar Station"
+      },
+      "system": {
+        "slug": "ben-elf-northstar-station",
+        "section": "Event NPCs",
+        "sortOrder": 374,
+        "image": "/Fisch/NPCs/ben-elf-northstar-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ben Elf",
+        "location": "Winter Village"
+      },
+      "system": {
+        "slug": "ben-elf-winter-village",
+        "section": "Event NPCs",
+        "sortOrder": 375,
+        "image": "/Fisch/NPCs/ben-elf-winter-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Autumn Elf",
+        "location": "Winter Village"
+      },
+      "system": {
+        "slug": "autumn-elf-winter-village",
+        "section": "Event NPCs",
+        "sortOrder": 376,
+        "image": "/Fisch/NPCs/autumn-elf-winter-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Town Mayor",
+        "location": "Winter Village"
+      },
+      "system": {
+        "slug": "town-mayor-winter-village",
+        "section": "Event NPCs",
+        "sortOrder": 377,
+        "image": "/Fisch/NPCs/town-mayor-winter-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tom Elf",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "tom-elf-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 378,
+        "image": "/Fisch/NPCs/tom-elf-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pilgrim",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "pilgrim-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 379,
+        "image": "/Fisch/NPCs/pilgrim-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dr. Finneus",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "dr-finneus-roslit-bay",
+        "section": "Event NPCs",
+        "sortOrder": 380,
+        "image": "/Fisch/NPCs/dr-finneus-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dr. Finneus",
+        "location": "Ocean"
+      },
+      "system": {
+        "slug": "dr-finneus-ocean",
+        "section": "Event NPCs",
+        "sortOrder": 381,
+        "image": "/Fisch/NPCs/dr-finneus-ocean.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Witch",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "witch-moosewood",
+        "section": "Event NPCs",
+        "sortOrder": 382,
+        "image": "/Fisch/NPCs/witch-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Witch",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "witch-crook-s-hallow",
+        "section": "Event NPCs",
+        "sortOrder": 383,
+        "image": "/Fisch/NPCs/witch-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Waterpark Wade",
+        "location": "Water Park"
+      },
+      "system": {
+        "slug": "waterpark-wade-water-park",
+        "section": "Event Quest NPCs",
+        "sortOrder": 384,
+        "image": "/Fisch/NPCs/waterpark-wade-water-park.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Milo",
+        "location": "Water Park"
+      },
+      "system": {
+        "slug": "milo-water-park",
+        "section": "Event Quest NPCs",
+        "sortOrder": 385,
+        "image": "/Fisch/NPCs/milo-water-park.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ryder",
+        "location": "Water Park"
+      },
+      "system": {
+        "slug": "ryder-water-park",
+        "section": "Event Quest NPCs",
+        "sortOrder": 386,
+        "image": "/Fisch/NPCs/ryder-water-park.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drew",
+        "location": "Water Park"
+      },
+      "system": {
+        "slug": "drew-water-park",
+        "section": "Event Quest NPCs",
+        "sortOrder": 387,
+        "image": "/Fisch/NPCs/drew-water-park.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wave",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "wave-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 388,
+        "image": "/Fisch/NPCs/wave-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Competitive Carter",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "competitive-carter-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 389,
+        "image": "/Fisch/NPCs/competitive-carter-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marina",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "marina-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 390,
+        "image": "/Fisch/NPCs/marina-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Conch",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "captain-conch-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 391,
+        "image": "/Fisch/NPCs/captain-conch-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Summersweet Sam",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "summersweet-sam-coconut-town",
+        "section": "Event Quest NPCs",
+        "sortOrder": 392,
+        "image": "/Fisch/NPCs/summersweet-sam-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tropical Troy",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "tropical-troy-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 393,
+        "image": "/Fisch/NPCs/tropical-troy-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lifeguard Lisa",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "lifeguard-lisa-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 394,
+        "image": "/Fisch/NPCs/lifeguard-lisa-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dylan Shore",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "dylan-shore-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 395,
+        "image": "/Fisch/NPCs/dylan-shore-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Foot",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "big-foot-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 396,
+        "image": "/Fisch/NPCs/big-foot-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sammy Hark",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "sammy-hark-coconut-town",
+        "section": "Event Quest NPCs",
+        "sortOrder": 397,
+        "image": "/Fisch/NPCs/sammy-hark-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Owen Drift",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "owen-drift-coconut-town",
+        "section": "Event Quest NPCs",
+        "sortOrder": 398,
+        "image": "/Fisch/NPCs/owen-drift-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nina",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "nina-coconut-town",
+        "section": "Event Quest NPCs",
+        "sortOrder": 399,
+        "image": "/Fisch/NPCs/nina-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Finn Carter",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "finn-carter-coconut-town",
+        "section": "Event Quest NPCs",
+        "sortOrder": 400,
+        "image": "/Fisch/NPCs/finn-carter-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skye Palmer",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "skye-palmer-coconut-town",
+        "section": "Event Quest NPCs",
+        "sortOrder": 401,
+        "image": "/Fisch/NPCs/skye-palmer-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peter Grillin",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "peter-grillin-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 402,
+        "image": "/Fisch/NPCs/peter-grillin-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jake",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "jake-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 403,
+        "image": "/Fisch/NPCs/jake-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ethan Brooks",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "ethan-brooks-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 404,
+        "image": "/Fisch/NPCs/ethan-brooks-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Groovin' Gavin",
+        "location": "Coconut Town"
+      },
+      "system": {
+        "slug": "groovin-gavin-coconut-town",
+        "section": "Event Quest NPCs",
+        "sortOrder": 405,
+        "image": "/Fisch/NPCs/groovin-gavin-coconut-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "guy that wants a really big lemonade",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "guy-that-wants-a-really-big-lemonade-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 406,
+        "image": "/Fisch/NPCs/guy-that-wants-a-really-big-lemonade-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hazel Moreno",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "hazel-moreno-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 407,
+        "image": "/Fisch/NPCs/hazel-moreno-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alice Sands",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "alice-sands-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 408,
+        "image": "/Fisch/NPCs/alice-sands-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sandy Scott",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "sandy-scott-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 409,
+        "image": "/Fisch/NPCs/sandy-scott-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coral Bennett",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "coral-bennett-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 410,
+        "image": "/Fisch/NPCs/coral-bennett-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Angler",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "lucky-angler-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 411,
+        "image": "/Fisch/NPCs/lucky-angler-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Landon",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-landon-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 412,
+        "image": "/Fisch/NPCs/leprechaun-landon-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Levi",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-levi-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 413,
+        "image": "/Fisch/NPCs/leprechaun-levi-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Logan",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-logan-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 414,
+        "image": "/Fisch/NPCs/leprechaun-logan-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Louis",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-louis-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 415,
+        "image": "/Fisch/NPCs/leprechaun-louis-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Sno",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "leprechaun-sno-boreal-pines",
+        "section": "Event Quest NPCs",
+        "sortOrder": 416,
+        "image": "/Fisch/NPCs/leprechaun-sno-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Clover",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "captain-clover-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 417,
+        "image": "/Fisch/NPCs/captain-clover-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Luke",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-luke-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 418,
+        "image": "/Fisch/NPCs/leprechaun-luke-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Leo",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-leo-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 419,
+        "image": "/Fisch/NPCs/leprechaun-leo-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Larry",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-larry-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 420,
+        "image": "/Fisch/NPCs/leprechaun-larry-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Lenny",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-lenny-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 421,
+        "image": "/Fisch/NPCs/leprechaun-lenny-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Lachlan",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-lachlan-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 422,
+        "image": "/Fisch/NPCs/leprechaun-lachlan-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Liam",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-liam-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 423,
+        "image": "/Fisch/NPCs/leprechaun-liam-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Lucas",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-lucas-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 424,
+        "image": "/Fisch/NPCs/leprechaun-lucas-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaun Lawrence",
+        "location": "Shamrock Express"
+      },
+      "system": {
+        "slug": "leprechaun-lawrence-shamrock-express",
+        "section": "Event Quest NPCs",
+        "sortOrder": 425,
+        "image": "/Fisch/NPCs/leprechaun-lawrence-shamrock-express.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Streamer",
+        "location": "Streamer Hideout"
+      },
+      "system": {
+        "slug": "streamer-streamer-hideout",
+        "section": "Event Quest NPCs",
+        "sortOrder": 426,
+        "image": "/Fisch/NPCs/streamer-streamer-hideout.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twitch Viewer",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "twitch-viewer-moosewood",
+        "section": "Event Quest NPCs",
+        "sortOrder": 427,
+        "image": "/Fisch/NPCs/twitch-viewer-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nurse May",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "nurse-may-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 428,
+        "image": "/Fisch/NPCs/nurse-may-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sweetheart Sam",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "sweetheart-sam-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 429,
+        "image": "/Fisch/NPCs/sweetheart-sam-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Penny",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "penny-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 430,
+        "image": "/Fisch/NPCs/penny-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valen",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "valen-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 431,
+        "image": "/Fisch/NPCs/valen-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dove",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "dove-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 432,
+        "image": "/Fisch/NPCs/dove-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Anna",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "anna-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 433,
+        "image": "/Fisch/NPCs/anna-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seraphine",
+        "location": "Behind Waterfall"
+      },
+      "system": {
+        "slug": "seraphine-behind-waterfall",
+        "section": "Event Quest NPCs",
+        "sortOrder": 434,
+        "image": "/Fisch/NPCs/seraphine-behind-waterfall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Amora",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "amora-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 435,
+        "image": "/Fisch/NPCs/amora-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ethan",
+        "location": "Sweetheart Shores"
+      },
+      "system": {
+        "slug": "ethan-sweetheart-shores",
+        "section": "Event Quest NPCs",
+        "sortOrder": 436,
+        "image": "/Fisch/NPCs/ethan-sweetheart-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ornament Ozzie",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "ornament-ozzie-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 437,
+        "image": "/Fisch/NPCs/ornament-ozzie-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holly Hannah",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "holly-hannah-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 438,
+        "image": "/Fisch/NPCs/holly-hannah-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Shark",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "santa-shark-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 439,
+        "image": "/Fisch/NPCs/santa-shark-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mistletoe Max",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "mistletoe-max-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 440,
+        "image": "/Fisch/NPCs/mistletoe-max-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fruitcake Frank",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "fruitcake-frank-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 441,
+        "image": "/Fisch/NPCs/fruitcake-frank-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bauble Bella",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "bauble-bella-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 442,
+        "image": "/Fisch/NPCs/bauble-bella-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stocking Steve",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "stocking-steve-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 443,
+        "image": "/Fisch/NPCs/stocking-steve-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elfred",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "elfred-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 444,
+        "image": "/Fisch/NPCs/elfred-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Present Piper",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "present-piper-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 445,
+        "image": "/Fisch/NPCs/present-piper-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Jorah",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "jolly-jorah-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 446,
+        "image": "/Fisch/NPCs/jolly-jorah-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lazy Elf",
+        "location": "Toy Factory"
+      },
+      "system": {
+        "slug": "lazy-elf-toy-factory",
+        "section": "Event Quest NPCs",
+        "sortOrder": 447,
+        "image": "/Fisch/NPCs/lazy-elf-toy-factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clumsy Elf",
+        "location": "Toy Factory"
+      },
+      "system": {
+        "slug": "clumsy-elf-toy-factory",
+        "section": "Event Quest NPCs",
+        "sortOrder": 448,
+        "image": "/Fisch/NPCs/clumsy-elf-toy-factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bald Elf",
+        "location": "Toy Factory"
+      },
+      "system": {
+        "slug": "bald-elf-toy-factory",
+        "section": "Event Quest NPCs",
+        "sortOrder": 449,
+        "image": "/Fisch/NPCs/bald-elf-toy-factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Short Elf",
+        "location": "Toy Factory"
+      },
+      "system": {
+        "slug": "short-elf-toy-factory",
+        "section": "Event Quest NPCs",
+        "sortOrder": 450,
+        "image": "/Fisch/NPCs/short-elf-toy-factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowball Sam",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "snowball-sam-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 451,
+        "image": "/Fisch/NPCs/snowball-sam-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eggnog Edna",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "eggnog-edna-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 452,
+        "image": "/Fisch/NPCs/eggnog-edna-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tinsel Tom",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "tinsel-tom-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 453,
+        "image": "/Fisch/NPCs/tinsel-tom-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blitzen Barry",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "blitzen-barry-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 454,
+        "image": "/Fisch/NPCs/blitzen-barry-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Patty",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "peppermint-patty-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 455,
+        "image": "/Fisch/NPCs/peppermint-patty-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Northwind Ned",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "northwind-ned-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 456,
+        "image": "/Fisch/NPCs/northwind-ned-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbite Fiona",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "frostbite-fiona-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 457,
+        "image": "/Fisch/NPCs/frostbite-fiona-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jingle Jim",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "jingle-jim-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 458,
+        "image": "/Fisch/NPCs/jingle-jim-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Caroling Carla",
+        "location": "Northstar Village"
+      },
+      "system": {
+        "slug": "caroling-carla-northstar-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 459,
+        "image": "/Fisch/NPCs/caroling-carla-northstar-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carbon",
+        "location": "Toy Factory"
+      },
+      "system": {
+        "slug": "carbon-toy-factory",
+        "section": "Event Quest NPCs",
+        "sortOrder": 460,
+        "image": "/Fisch/NPCs/carbon-toy-factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forager Frank",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "forager-frank-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 461,
+        "image": "/Fisch/NPCs/forager-frank-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marsh-Feast Mason",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "marsh-feast-mason-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 462,
+        "image": "/Fisch/NPCs/marsh-feast-mason-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reed-Roast Rachel",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "reed-roast-rachel-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 463,
+        "image": "/Fisch/NPCs/reed-roast-rachel-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chilly Hearth Hailey",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "chilly-hearth-hailey-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 464,
+        "image": "/Fisch/NPCs/chilly-hearth-hailey-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carver Caleb",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "carver-caleb-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 465,
+        "image": "/Fisch/NPCs/carver-caleb-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harvestman Hank",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "harvestman-hank-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 466,
+        "image": "/Fisch/NPCs/harvestman-hank-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cinderfeast Cooper",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "cinderfeast-cooper-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 467,
+        "image": "/Fisch/NPCs/cinderfeast-cooper-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reef-Scout Ryan",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "reef-scout-ryan-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 468,
+        "image": "/Fisch/NPCs/reef-scout-ryan-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mariner Mike",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "mariner-mike-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 469,
+        "image": "/Fisch/NPCs/mariner-mike-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunberry Mae",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "sunberry-mae-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 470,
+        "image": "/Fisch/NPCs/sunberry-mae-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Gatherer Sam",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "spirit-gatherer-sam-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 471,
+        "image": "/Fisch/NPCs/spirit-gatherer-sam-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Harvestbeard",
+        "location": "Maple Meadow"
+      },
+      "system": {
+        "slug": "captain-harvestbeard-maple-meadow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 472,
+        "image": "/Fisch/NPCs/captain-harvestbeard-maple-meadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tibion",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "tibion-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 473,
+        "image": "/Fisch/NPCs/tibion-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brianana",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "brianana-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 474,
+        "image": "/Fisch/NPCs/brianana-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dusekkar",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "dusekkar-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 475,
+        "image": "/Fisch/NPCs/dusekkar-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Patchen",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "patchen-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 476,
+        "image": "/Fisch/NPCs/patchen-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Edris",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "edris-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 477,
+        "image": "/Fisch/NPCs/edris-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vincent",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "vincent-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 478,
+        "image": "/Fisch/NPCs/vincent-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evil Clown",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "evil-clown-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 479,
+        "image": "/Fisch/NPCs/evil-clown-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin King",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "pumpkin-king-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 480,
+        "image": "/Fisch/NPCs/pumpkin-king-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pete",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "pete-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 481,
+        "image": "/Fisch/NPCs/pete-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jeremy",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "jeremy-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 482,
+        "image": "/Fisch/NPCs/jeremy-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "ghost-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 483,
+        "image": "/Fisch/NPCs/ghost-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Selene",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "selene-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 484,
+        "image": "/Fisch/NPCs/selene-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silas",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "silas-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 485,
+        "image": "/Fisch/NPCs/silas-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Paul",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "pumpkin-paul-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 486,
+        "image": "/Fisch/NPCs/pumpkin-paul-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack Skellington",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "jack-skellington-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 487,
+        "image": "/Fisch/NPCs/jack-skellington-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jasper",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "jasper-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 488,
+        "image": "/Fisch/NPCs/jasper-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Willow",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "willow-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 489,
+        "image": "/Fisch/NPCs/willow-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elara",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "elara-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 490,
+        "image": "/Fisch/NPCs/elara-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lilith",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "lilith-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 491,
+        "image": "/Fisch/NPCs/lilith-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headless Horseman",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "headless-horseman-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 492,
+        "image": "/Fisch/NPCs/headless-horseman-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vlad",
+        "location": "Crook's Hallow"
+      },
+      "system": {
+        "slug": "vlad-crook-s-hallow",
+        "section": "Event Quest NPCs",
+        "sortOrder": 493,
+        "image": "/Fisch/NPCs/vlad-crook-s-hallow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Takeover Challenger",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "takeover-challenger-moosewood",
+        "section": "Event Quest NPCs",
+        "sortOrder": 494,
+        "image": "/Fisch/NPCs/takeover-challenger-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tom",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "tom-fischfest-1",
+        "section": "Event Quest NPCs",
+        "sortOrder": 495,
+        "image": "/Fisch/NPCs/tom-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lily",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "lily-fischfest-1",
+        "section": "Event Quest NPCs",
+        "sortOrder": 496,
+        "image": "/Fisch/NPCs/lily-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Billy",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "billy-fischfest-1",
+        "section": "Event Quest NPCs",
+        "sortOrder": 497,
+        "image": "/Fisch/NPCs/billy-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coconut Carl",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "coconut-carl-fischfest-1",
+        "section": "Event Quest NPCs",
+        "sortOrder": 498,
+        "image": "/Fisch/NPCs/coconut-carl-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barnacle Bill",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "barnacle-bill-fischfest-1",
+        "section": "Event Quest NPCs",
+        "sortOrder": 499,
+        "image": "/Fisch/NPCs/barnacle-bill-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sandy Finn",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "sandy-finn-fischfest-1",
+        "section": "Event Quest NPCs",
+        "sortOrder": 500,
+        "image": "/Fisch/NPCs/sandy-finn-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sandy Finn",
+        "location": "Fischfest 2"
+      },
+      "system": {
+        "slug": "sandy-finn-fischfest-2",
+        "section": "Event Quest NPCs",
+        "sortOrder": 501,
+        "image": "/Fisch/NPCs/sandy-finn-fischfest-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Smurfette",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "smurfette-moosewood",
+        "section": "Event Quest NPCs",
+        "sortOrder": 502,
+        "image": "/Fisch/NPCs/smurfette-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sno",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "sno-fischfest-1",
+        "section": "Event Quest NPCs",
+        "sortOrder": 503,
+        "image": "/Fisch/NPCs/sno-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wren",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "wren-moosewood",
+        "section": "Event Quest NPCs",
+        "sortOrder": 504,
+        "image": "/Fisch/NPCs/wren-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brickford Masterson",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "brickford-masterson-moosewood",
+        "section": "Event Quest NPCs",
+        "sortOrder": 505,
+        "image": "/Fisch/NPCs/brickford-masterson-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Dreamers Eye",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "the-dreamers-eye-moosewood",
+        "section": "Event Quest NPCs",
+        "sortOrder": 506,
+        "image": "/Fisch/NPCs/the-dreamers-eye-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ringo",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "ringo-moosewood",
+        "section": "Event Quest NPCs",
+        "sortOrder": 507,
+        "image": "/Fisch/NPCs/ringo-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Runaway Elf",
+        "location": "Winter Village"
+      },
+      "system": {
+        "slug": "runaway-elf-winter-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 508,
+        "image": "/Fisch/NPCs/runaway-elf-winter-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa",
+        "location": "Winter Village"
+      },
+      "system": {
+        "slug": "santa-winter-village",
+        "section": "Event Quest NPCs",
+        "sortOrder": 509,
+        "image": "/Fisch/NPCs/santa-winter-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa",
+        "location": "Toy Factory"
+      },
+      "system": {
+        "slug": "santa-toy-factory",
+        "section": "Event Quest NPCs",
+        "sortOrder": 510,
+        "image": "/Fisch/NPCs/santa-toy-factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Some Shady Guy",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "some-shady-guy-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 511,
+        "image": "/Fisch/NPCs/some-shady-guy-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lulled Ghost",
+        "location": "Desolate Deep"
+      },
+      "system": {
+        "slug": "lulled-ghost-desolate-deep",
+        "section": "Removed NPCs",
+        "sortOrder": 512,
+        "image": "/Fisch/NPCs/lulled-ghost-desolate-deep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Soul",
+        "location": "Hades' Underworld of Indefinite"
+      },
+      "system": {
+        "slug": "lost-soul-hades-underworld-of-indefinite",
+        "section": "Removed NPCs",
+        "sortOrder": 513,
+        "image": "/Fisch/NPCs/lost-soul-hades-underworld-of-indefinite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calming Shadow",
+        "location": "Boreal Pines"
+      },
+      "system": {
+        "slug": "calming-shadow-boreal-pines",
+        "section": "Removed NPCs",
+        "sortOrder": 514,
+        "image": "/Fisch/NPCs/calming-shadow-boreal-pines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Simon",
+        "location": "Hawaii"
+      },
+      "system": {
+        "slug": "simon-hawaii",
+        "section": "Removed NPCs",
+        "sortOrder": 515,
+        "image": "/Fisch/NPCs/simon-hawaii.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seraphel",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "seraphel-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 516,
+        "image": "/Fisch/NPCs/seraphel-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rivet",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "rivet-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 517,
+        "image": "/Fisch/NPCs/rivet-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reaper",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "reaper-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 518,
+        "image": "/Fisch/NPCs/reaper-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "BasePart",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "basepart-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 519,
+        "image": "/Fisch/NPCs/basepart-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luneth",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "luneth-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 520,
+        "image": "/Fisch/NPCs/luneth-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Guide",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "the-guide-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 521,
+        "image": "/Fisch/NPCs/the-guide-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Axel",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "axel-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 522,
+        "image": "/Fisch/NPCs/axel-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Migura",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "migura-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 523,
+        "image": "/Fisch/NPCs/migura-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tawou",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "tawou-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 524,
+        "image": "/Fisch/NPCs/tawou-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Makh",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "makh-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 525,
+        "image": "/Fisch/NPCs/makh-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pepper",
+        "location": "The Bunker"
+      },
+      "system": {
+        "slug": "pepper-the-bunker",
+        "section": "Removed NPCs",
+        "sortOrder": 526,
+        "image": "/Fisch/NPCs/pepper-the-bunker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hayden",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "hayden-the-laboratory",
+        "section": "Removed NPCs",
+        "sortOrder": 527,
+        "image": "/Fisch/NPCs/hayden-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Paul",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "paul-the-laboratory",
+        "section": "Removed NPCs",
+        "sortOrder": 528,
+        "image": "/Fisch/NPCs/paul-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elias",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "elias-the-laboratory",
+        "section": "Removed NPCs",
+        "sortOrder": 529,
+        "image": "/Fisch/NPCs/elias-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Theo",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "theo-the-laboratory",
+        "section": "Removed NPCs",
+        "sortOrder": 530,
+        "image": "/Fisch/NPCs/theo-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Samuel",
+        "location": "The Laboratory"
+      },
+      "system": {
+        "slug": "samuel-the-laboratory",
+        "section": "Removed NPCs",
+        "sortOrder": 531,
+        "image": "/Fisch/NPCs/samuel-the-laboratory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruins Diver",
+        "location": "Collapsed Ruins"
+      },
+      "system": {
+        "slug": "ruins-diver-collapsed-ruins",
+        "section": "Removed NPCs",
+        "sortOrder": 532,
+        "image": "/Fisch/NPCs/ruins-diver-collapsed-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crowned Diver",
+        "location": "Crowned Ruins"
+      },
+      "system": {
+        "slug": "crowned-diver-crowned-ruins",
+        "section": "Removed NPCs",
+        "sortOrder": 533,
+        "image": "/Fisch/NPCs/crowned-diver-crowned-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reliquary Diver",
+        "location": "Sunken Reliquary"
+      },
+      "system": {
+        "slug": "reliquary-diver-sunken-reliquary",
+        "section": "Removed NPCs",
+        "sortOrder": 534,
+        "image": "/Fisch/NPCs/reliquary-diver-sunken-reliquary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coral Diver",
+        "location": "Coral Bastion"
+      },
+      "system": {
+        "slug": "coral-diver-coral-bastion",
+        "section": "Removed NPCs",
+        "sortOrder": 535,
+        "image": "/Fisch/NPCs/coral-diver-coral-bastion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tidefall Diver",
+        "location": "Tidefall"
+      },
+      "system": {
+        "slug": "tidefall-diver-tidefall",
+        "section": "Removed NPCs",
+        "sortOrder": 536,
+        "image": "/Fisch/NPCs/tidefall-diver-tidefall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Light",
+        "location": "Glacial Grotto"
+      },
+      "system": {
+        "slug": "spirit-of-light-glacial-grotto",
+        "section": "Removed NPCs",
+        "sortOrder": 537,
+        "image": "/Fisch/NPCs/spirit-of-light-glacial-grotto.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of Darkness",
+        "location": "Cursed Isle"
+      },
+      "system": {
+        "slug": "spirit-of-darkness-cursed-isle",
+        "section": "Removed NPCs",
+        "sortOrder": 538,
+        "image": "/Fisch/NPCs/spirit-of-darkness-cursed-isle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "New Years",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "new-years-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 539,
+        "image": "/Fisch/NPCs/new-years-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astraeus",
+        "location": "Astraeus' Void"
+      },
+      "system": {
+        "slug": "astraeus-astraeus-void",
+        "section": "Removed NPCs",
+        "sortOrder": 540,
+        "image": "/Fisch/NPCs/astraeus-astraeus-void.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silly Clown",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "silly-clown-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 541,
+        "image": "/Fisch/NPCs/silly-clown-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Owen",
+        "location": "Mushgrove Swamp"
+      },
+      "system": {
+        "slug": "owen-mushgrove-swamp",
+        "section": "Removed NPCs",
+        "sortOrder": 542,
+        "image": "/Fisch/NPCs/owen-mushgrove-swamp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Erika",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "erika-sunstone-island",
+        "section": "Removed NPCs",
+        "sortOrder": 543,
+        "image": "/Fisch/NPCs/erika-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Huang",
+        "location": "Forsaken Shores"
+      },
+      "system": {
+        "slug": "huang-forsaken-shores",
+        "section": "Removed NPCs",
+        "sortOrder": 544,
+        "image": "/Fisch/NPCs/huang-forsaken-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cam",
+        "location": "Roslit Bay"
+      },
+      "system": {
+        "slug": "cam-roslit-bay",
+        "section": "Removed NPCs",
+        "sortOrder": 545,
+        "image": "/Fisch/NPCs/cam-roslit-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Maryana",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "maryana-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 546,
+        "image": "/Fisch/NPCs/maryana-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteorologist",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "meteorologist-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 547,
+        "image": "/Fisch/NPCs/meteorologist-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucas",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "lucas-fischfest-1",
+        "section": "Removed NPCs",
+        "sortOrder": 548,
+        "image": "/Fisch/NPCs/lucas-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Axel",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "axel-fischfest-1",
+        "section": "Removed NPCs",
+        "sortOrder": 549,
+        "image": "/Fisch/NPCs/axel-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shopper Girl",
+        "location": "Fischfest 1"
+      },
+      "system": {
+        "slug": "shopper-girl-fischfest-1",
+        "section": "Removed NPCs",
+        "sortOrder": 550,
+        "image": "/Fisch/NPCs/shopper-girl-fischfest-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holladay",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "holladay-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 551,
+        "image": "/Fisch/NPCs/holladay-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Goth",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "goth-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 552,
+        "image": "/Fisch/NPCs/goth-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Buildaroo",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "buildaroo-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 553,
+        "image": "/Fisch/NPCs/buildaroo-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fayelie",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "fayelie-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 554,
+        "image": "/Fisch/NPCs/fayelie-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rick",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "rick-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 555,
+        "image": "/Fisch/NPCs/rick-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hex",
+        "location": "Underground Music Venue"
+      },
+      "system": {
+        "slug": "hex-underground-music-venue",
+        "section": "Removed NPCs",
+        "sortOrder": 556,
+        "image": "/Fisch/NPCs/hex-underground-music-venue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Challenges",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "challenges-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 557,
+        "image": "/Fisch/NPCs/challenges-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whale Merchant",
+        "location": "Whale Interior"
+      },
+      "system": {
+        "slug": "whale-merchant-whale-interior",
+        "section": "Removed NPCs",
+        "sortOrder": 558,
+        "image": "/Fisch/NPCs/whale-merchant-whale-interior.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crazy Man",
+        "location": "Isle of New Beginnings"
+      },
+      "system": {
+        "slug": "crazy-man-isle-of-new-beginnings",
+        "section": "Removed NPCs",
+        "sortOrder": 559,
+        "image": "/Fisch/NPCs/crazy-man-isle-of-new-beginnings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mike",
+        "location": "Waveborne"
+      },
+      "system": {
+        "slug": "mike-waveborne",
+        "section": "Removed NPCs",
+        "sortOrder": 560,
+        "image": "/Fisch/NPCs/mike-waveborne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lobster Cultist",
+        "location": "The Cursed Shores"
+      },
+      "system": {
+        "slug": "lobster-cultist-the-cursed-shores",
+        "section": "Removed NPCs",
+        "sortOrder": 561,
+        "image": "/Fisch/NPCs/lobster-cultist-the-cursed-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot Bany",
+        "location": "Lushgrove"
+      },
+      "system": {
+        "slug": "carrot-bany-lushgrove",
+        "section": "Removed NPCs",
+        "sortOrder": 562,
+        "image": "/Fisch/NPCs/carrot-bany-lushgrove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Utility Shipwright",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "utility-shipwright-multiple-locations-2",
+        "section": "Removed NPCs",
+        "sortOrder": 563,
+        "image": "/Fisch/NPCs/utility-shipwright-multiple-locations-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bubba",
+        "location": "Netter's Haven"
+      },
+      "system": {
+        "slug": "bubba-netter-s-haven",
+        "section": "Removed NPCs",
+        "sortOrder": 564,
+        "image": "/Fisch/NPCs/bubba-netter-s-haven.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chef Larry",
+        "location": "Lobster Shores"
+      },
+      "system": {
+        "slug": "chef-larry-lobster-shores",
+        "section": "Removed NPCs",
+        "sortOrder": 565,
+        "image": "/Fisch/NPCs/chef-larry-lobster-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kael",
+        "location": "The Cursed Shores"
+      },
+      "system": {
+        "slug": "kael-the-cursed-shores",
+        "section": "Removed NPCs",
+        "sortOrder": 566,
+        "image": "/Fisch/NPCs/kael-the-cursed-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luka",
+        "location": "Isle of New Beginnings"
+      },
+      "system": {
+        "slug": "luka-isle-of-new-beginnings",
+        "section": "Removed NPCs",
+        "sortOrder": 567,
+        "image": "/Fisch/NPCs/luka-isle-of-new-beginnings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Professor Gunk",
+        "location": "Lushgrove"
+      },
+      "system": {
+        "slug": "professor-gunk-lushgrove",
+        "section": "Removed NPCs",
+        "sortOrder": 568,
+        "image": "/Fisch/NPCs/professor-gunk-lushgrove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lorelei",
+        "location": "Isle of New Beginnings"
+      },
+      "system": {
+        "slug": "lorelei-isle-of-new-beginnings",
+        "section": "Removed NPCs",
+        "sortOrder": 569,
+        "image": "/Fisch/NPCs/lorelei-isle-of-new-beginnings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Vendor",
+        "location": "Sunstone Island"
+      },
+      "system": {
+        "slug": "beach-vendor-sunstone-island",
+        "section": "Removed NPCs",
+        "sortOrder": 570,
+        "image": "/Fisch/NPCs/beach-vendor-sunstone-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clark",
+        "location": "Waveborne"
+      },
+      "system": {
+        "slug": "clark-waveborne",
+        "section": "Removed NPCs",
+        "sortOrder": 571,
+        "image": "/Fisch/NPCs/clark-waveborne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jak",
+        "location": "Waveborne"
+      },
+      "system": {
+        "slug": "jak-waveborne",
+        "section": "Removed NPCs",
+        "sortOrder": 572,
+        "image": "/Fisch/NPCs/jak-waveborne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brother Gleem",
+        "location": "The Cursed Shores"
+      },
+      "system": {
+        "slug": "brother-gleem-the-cursed-shores",
+        "section": "Removed NPCs",
+        "sortOrder": 573,
+        "image": "/Fisch/NPCs/brother-gleem-the-cursed-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brother Murk",
+        "location": "The Cursed Shores"
+      },
+      "system": {
+        "slug": "brother-murk-the-cursed-shores",
+        "section": "Removed NPCs",
+        "sortOrder": 574,
+        "image": "/Fisch/NPCs/brother-murk-the-cursed-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brother Squib",
+        "location": "The Cursed Shores"
+      },
+      "system": {
+        "slug": "brother-squib-the-cursed-shores",
+        "section": "Removed NPCs",
+        "sortOrder": 575,
+        "image": "/Fisch/NPCs/brother-squib-the-cursed-shores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jeb",
+        "location": "Isle of New Beginnings"
+      },
+      "system": {
+        "slug": "jeb-isle-of-new-beginnings",
+        "section": "Removed NPCs",
+        "sortOrder": 576,
+        "image": "/Fisch/NPCs/jeb-isle-of-new-beginnings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Bloodfin",
+        "location": "Isle of New Beginnings"
+      },
+      "system": {
+        "slug": "captain-bloodfin-isle-of-new-beginnings",
+        "section": "Removed NPCs",
+        "sortOrder": 577,
+        "image": "/Fisch/NPCs/captain-bloodfin-isle-of-new-beginnings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Castaway Kev",
+        "location": "Isle of New Beginnings"
+      },
+      "system": {
+        "slug": "castaway-kev-isle-of-new-beginnings",
+        "section": "Removed NPCs",
+        "sortOrder": 578,
+        "image": "/Fisch/NPCs/castaway-kev-isle-of-new-beginnings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grint Wilder",
+        "location": "Lushgrove"
+      },
+      "system": {
+        "slug": "grint-wilder-lushgrove",
+        "section": "Removed NPCs",
+        "sortOrder": 579,
+        "image": "/Fisch/NPCs/grint-wilder-lushgrove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marla Fern",
+        "location": "Lushgrove"
+      },
+      "system": {
+        "slug": "marla-fern-lushgrove",
+        "section": "Removed NPCs",
+        "sortOrder": 580,
+        "image": "/Fisch/NPCs/marla-fern-lushgrove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tanktop Tony",
+        "location": "Lushgrove"
+      },
+      "system": {
+        "slug": "tanktop-tony-lushgrove",
+        "section": "Removed NPCs",
+        "sortOrder": 581,
+        "image": "/Fisch/NPCs/tanktop-tony-lushgrove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oscar IV",
+        "location": "Pine Shoals"
+      },
+      "system": {
+        "slug": "oscar-iv-pine-shoals",
+        "section": "Removed NPCs",
+        "sortOrder": 582,
+        "image": "/Fisch/NPCs/oscar-iv-pine-shoals.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lars Timberjaw",
+        "location": "Pine Shoals"
+      },
+      "system": {
+        "slug": "lars-timberjaw-pine-shoals",
+        "section": "Removed NPCs",
+        "sortOrder": 583,
+        "image": "/Fisch/NPCs/lars-timberjaw-pine-shoals.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Angus McBait",
+        "location": "Waveborne"
+      },
+      "system": {
+        "slug": "angus-mcbait-waveborne",
+        "section": "Removed NPCs",
+        "sortOrder": 584,
+        "image": "/Fisch/NPCs/angus-mcbait-waveborne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ryder Vex",
+        "location": "Waveborne"
+      },
+      "system": {
+        "slug": "ryder-vex-waveborne",
+        "section": "Removed NPCs",
+        "sortOrder": 585,
+        "image": "/Fisch/NPCs/ryder-vex-waveborne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boone Tiller",
+        "location": "Waveborne"
+      },
+      "system": {
+        "slug": "boone-tiller-waveborne",
+        "section": "Removed NPCs",
+        "sortOrder": 586,
+        "image": "/Fisch/NPCs/boone-tiller-waveborne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silas",
+        "location": "Terrapin Island"
+      },
+      "system": {
+        "slug": "silas-terrapin-island",
+        "section": "Removed NPCs",
+        "sortOrder": 587,
+        "image": "/Fisch/NPCs/silas-terrapin-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Egg Salesman",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "egg-salesman-multiple-locations",
+        "section": "Removed NPCs",
+        "sortOrder": 588,
+        "image": "/Fisch/NPCs/egg-salesman-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skin Seller",
+        "location": "Multiple locations"
+      },
+      "system": {
+        "slug": "skin-seller-multiple-locations",
+        "section": "Removed NPCs",
+        "sortOrder": 589,
+        "image": "/Fisch/NPCs/skin-seller-multiple-locations.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marley",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "marley-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 590,
+        "image": "/Fisch/NPCs/marley-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Willow",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "willow-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 591,
+        "image": "/Fisch/NPCs/willow-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sage",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "sage-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 592,
+        "image": "/Fisch/NPCs/sage-moosewood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bob",
+        "location": "Moosewood"
+      },
+      "system": {
+        "slug": "bob-moosewood",
+        "section": "Removed NPCs",
+        "sortOrder": 593,
+        "image": "/Fisch/NPCs/bob-moosewood.png"
+      }
+    }
+  ]
+}

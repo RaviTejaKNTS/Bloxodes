@@ -1,0 +1,3505 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Fisch",
+    "gameSlug": "fisch",
+    "collection": "titles",
+    "route": "/wiki/fisch/titles",
+    "catalogCode": "fisch-titles",
+    "itemFields": [
+      "howToObtain"
+    ],
+    "columns": [
+      "howToObtain"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Player Level Titles",
+        "Fish Caught Titles",
+        "Rod Mastery Titles",
+        "Pirate Faction Titles",
+        "Miscellaneous Titles",
+        "Limited Time Titles",
+        "Exclusive Titles",
+        "Retired Level Titles",
+        "Unobtainable Titles"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "howToObtain",
+      "cardDescriptionField": "howToObtain",
+      "cardFields": [
+        "howToObtain"
+      ],
+      "tableFields": [
+        "howToObtain"
+      ],
+      "fieldPresentation": {
+        "howToObtain": {
+          "kind": "detail",
+          "label": "How to obtain",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "The Clever",
+        "howToObtain": "Complete the Tutorial"
+      },
+      "system": {
+        "slug": "the-clever",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Enchanted",
+        "howToObtain": "Enchant a Fishing Rod in Keepers Altar"
+      },
+      "system": {
+        "slug": "enchanted",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Keeperbound",
+        "howToObtain": "Enchant a Fishing Rod with a Sovereign Relic in Keepers Altar"
+      },
+      "system": {
+        "slug": "keeperbound",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Hoarder",
+        "howToObtain": "Sell more than 20 Items at once"
+      },
+      "system": {
+        "slug": "the-hoarder",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Albino Vendor",
+        "howToObtain": "Sell an Albino Fish to Ashe at Roslit Bay"
+      },
+      "system": {
+        "slug": "albino-vendor",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Made in Heaven",
+        "howToObtain": "Use a Sundial Totem 5 times"
+      },
+      "system": {
+        "slug": "made-in-heaven",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Foolish",
+        "howToObtain": "Die 5 Times"
+      },
+      "system": {
+        "slug": "the-foolish",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Extinct",
+        "howToObtain": "Get killed by a Meteor"
+      },
+      "system": {
+        "slug": "extinct",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Natural Selection",
+        "howToObtain": "Get killed by a Meteor 3 times"
+      },
+      "system": {
+        "slug": "natural-selection",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chosen By Zeus",
+        "howToObtain": "Get Struck Down by a Zeus Storm Totem (50% chance after using the totem if you’re in the Zeus's Rod Room)"
+      },
+      "system": {
+        "slug": "chosen-by-zeus",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon's Blessing",
+        "howToObtain": "Catch a fish with the Wrath Mutation"
+      },
+      "system": {
+        "slug": "poseidon-s-blessing",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Drowned",
+        "howToObtain": "Enter the Hidden Whirlpool in Vertigo"
+      },
+      "system": {
+        "slug": "the-drowned",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Pupil",
+        "howToObtain": "Buy a Lantern from the Lantern Keeper"
+      },
+      "system": {
+        "slug": "the-pupil",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Holy",
+        "howToObtain": "2% chance to be awarded after buying a Lantern from the Lantern Keeper"
+      },
+      "system": {
+        "slug": "the-holy",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "C$ Collector",
+        "howToObtain": "Have over 15,000C$ at Once"
+      },
+      "system": {
+        "slug": "c-collector",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "C$ Loaded",
+        "howToObtain": "Have over 100,000C$ at Once"
+      },
+      "system": {
+        "slug": "c-loaded",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Hunter",
+        "howToObtain": "Catch a Legendary or Mythic Fish"
+      },
+      "system": {
+        "slug": "the-hunter",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shark Slayer",
+        "howToObtain": "Catch a Shark in a Shark Hunt server Event"
+      },
+      "system": {
+        "slug": "shark-slayer",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Terror of The Depths",
+        "howToObtain": "Catch any Megalodon three times and keep them in your inventory"
+      },
+      "system": {
+        "slug": "terror-of-the-depths",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare Conqueror",
+        "howToObtain": "Catch a Phantom Megalodon"
+      },
+      "system": {
+        "slug": "nightmare-conqueror",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Deep Sea Phenomenon",
+        "howToObtain": "Catch a Phantom Megalodon three times and keep them in your inventory"
+      },
+      "system": {
+        "slug": "deep-sea-phenomenon",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient's Chosen One",
+        "howToObtain": "Catch an Ancient Megalodon three times and keep them in your inventory"
+      },
+      "system": {
+        "slug": "ancient-s-chosen-one",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sea Whisperer",
+        "howToObtain": "Catch an Ancient Orca during an Albine Orca Migration"
+      },
+      "system": {
+        "slug": "sea-whisperer",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Master",
+        "howToObtain": "Obtained from Sunken Chests"
+      },
+      "system": {
+        "slug": "treasure-master",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bloopster",
+        "howToObtain": "Obtained from Bloop Cosmetic Crates (10% Chance)"
+      },
+      "system": {
+        "slug": "bloopster",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Roller",
+        "howToObtain": "Appraise a Fish and have it gain weight"
+      },
+      "system": {
+        "slug": "lucky-roller",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unlucky Better",
+        "howToObtain": "Appraise a Fish and have it lose weight"
+      },
+      "system": {
+        "slug": "unlucky-better",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "True Hakari",
+        "howToObtain": "Appraise a Fish and have it gain a Mutation, Shiny, or Sparkling"
+      },
+      "system": {
+        "slug": "true-hakari",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orcs Best Friend",
+        "howToObtain": "Complete Orc's quest at Roslit Bay and obtain the Magma Rod"
+      },
+      "system": {
+        "slug": "orcs-best-friend",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vigilante",
+        "howToObtain": "Complete Agaric's quest at Mushgrove Swamp and obtain the Fungal Rod"
+      },
+      "system": {
+        "slug": "vigilante",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Supporter",
+        "howToObtain": "Purchase the Supporter Gamepass (Robux169)"
+      },
+      "system": {
+        "slug": "supporter",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bobber Enthusiast",
+        "howToObtain": "Purchase the Bobber Pack Gamepass (Robux99)"
+      },
+      "system": {
+        "slug": "bobber-enthusiast",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🐟",
+        "howToObtain": "Catch a Secret 🐟 naturally outside of any Admin Event"
+      },
+      "system": {
+        "slug": "symbol-title-1",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦑",
+        "howToObtain": "Catch a Secret 🦑 naturally outside of any Admin Event"
+      },
+      "system": {
+        "slug": "-2",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🐡",
+        "howToObtain": "Catch a Secret 🐡 naturally outside of any Admin Event"
+      },
+      "system": {
+        "slug": "-3",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🐋",
+        "howToObtain": "Catch a Secret 🐋 naturally outside of any Admin Event"
+      },
+      "system": {
+        "slug": "-4",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦈",
+        "howToObtain": "Catch a Secret 🦈 naturally outside of any Admin Event"
+      },
+      "system": {
+        "slug": "-5",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Frozen",
+        "howToObtain": "Jump into the whirlpool in Snowburrow"
+      },
+      "system": {
+        "slug": "the-frozen",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lever Apprentice",
+        "howToObtain": "Flick the lever beneath the docks near the Daily Shopkeeper"
+      },
+      "system": {
+        "slug": "lever-apprentice",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mossjaw Conquerer [sic]",
+        "howToObtain": "Catch a Mossjaw"
+      },
+      "system": {
+        "slug": "mossjaw-conquerer-sic",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elder Slayer",
+        "howToObtain": "Catch an Elder Mossjaw"
+      },
+      "system": {
+        "slug": "elder-slayer",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Him",
+        "howToObtain": "Catch a Him"
+      },
+      "system": {
+        "slug": "him",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Careless",
+        "howToObtain": "Die to a puzzle in the Lost Jungle"
+      },
+      "system": {
+        "slug": "careless",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nico's Meowfia",
+        "howToObtain": "Complete Crazy Cat Lady's third quest"
+      },
+      "system": {
+        "slug": "nico-s-meowfia",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fabulous",
+        "howToObtain": "Complete Fabulous Deity's fourth quest"
+      },
+      "system": {
+        "slug": "fabulous",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🔮",
+        "howToObtain": "Give the first shard to Merlin"
+      },
+      "system": {
+        "slug": "-6",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gleebin'",
+        "howToObtain": "Complete Dr. Crookspine's quest"
+      },
+      "system": {
+        "slug": "gleebin",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tryhard",
+        "howToObtain": "Complete RoRed's quest"
+      },
+      "system": {
+        "slug": "tryhard",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "💵",
+        "howToObtain": "Purchase for 2,147,483,647C$ from the Black Market"
+      },
+      "system": {
+        "slug": "-7",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I Died To A Falling Dripstone",
+        "howToObtain": "Die to a falling dripstone during a Dripstone Collapse"
+      },
+      "system": {
+        "slug": "i-died-to-a-falling-dripstone",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I Died To One Hundred Falling Dripstones",
+        "howToObtain": "Die to 100 falling dripstones during Dripstone Collapse"
+      },
+      "system": {
+        "slug": "i-died-to-one-hundred-falling-dripstones",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I Found Anchovies In A Meteor And Got This Lousy Title",
+        "howToObtain": "Claim Anchovy ×2 from a Meteor"
+      },
+      "system": {
+        "slug": "i-found-anchovies-in-a-meteor-and-got-this-lousy-title",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Toasty",
+        "howToObtain": "Die to Lava 10 times."
+      },
+      "system": {
+        "slug": "toasty",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cooked",
+        "howToObtain": "Die to Fire 10 times."
+      },
+      "system": {
+        "slug": "cooked",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fish Food",
+        "howToObtain": "Die to the Abyssal Zenith's Anglerfish 3 times."
+      },
+      "system": {
+        "slug": "fish-food",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Aspiring Fish",
+        "howToObtain": "Die to Drowning 10 times."
+      },
+      "system": {
+        "slug": "aspiring-fish",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": ">:3",
+        "howToObtain": "Die to Nico 10 times."
+      },
+      "system": {
+        "slug": "3",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "⚡",
+        "howToObtain": "Die to Lightning 10 times."
+      },
+      "system": {
+        "slug": "-8",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shady",
+        "howToObtain": "Purchase for 1S$ from Title Writer at The Shady Bazaar"
+      },
+      "system": {
+        "slug": "shady",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🕵",
+        "howToObtain": "Purchase for 50S$ from Title Writer at The Shady Bazaar"
+      },
+      "system": {
+        "slug": "-9",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🐡💥",
+        "howToObtain": "Get shot by another player with a Puad Launcher"
+      },
+      "system": {
+        "slug": "-10",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hello, my name is {name} and for some reason, I died to Cacti 50 times. I am 4 IQ",
+        "howToObtain": "Die to a Cactus 50 times."
+      },
+      "system": {
+        "slug": "hello-my-name-is-name-and-for-some-reason-i-died-to-cacti-50-times-i-a",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Trench Marksman",
+        "howToObtain": "Complete Hunter Dan's second quest"
+      },
+      "system": {
+        "slug": "trench-marksman",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sightless Scholar",
+        "howToObtain": "Complete The Blind Oracle's first quest"
+      },
+      "system": {
+        "slug": "sightless-scholar",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "City Benefactor",
+        "howToObtain": "Complete Quartermaster Val's first quest"
+      },
+      "system": {
+        "slug": "city-benefactor",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Benthic Scrapper",
+        "howToObtain": "Complete Sludge's second quest"
+      },
+      "system": {
+        "slug": "benthic-scrapper",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fugu",
+        "howToObtain": "Complete Dr. Monty's sixth quest"
+      },
+      "system": {
+        "slug": "fugu",
+        "section": "Miscellaneous Titles",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Novice Fischer",
+        "howToObtain": "Catch 3 Fish"
+      },
+      "system": {
+        "slug": "novice-fischer",
+        "section": "Fish Caught Titles",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skilled Fischer",
+        "howToObtain": "Catch 25 Fish"
+      },
+      "system": {
+        "slug": "skilled-fischer",
+        "section": "Fish Caught Titles",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Junior Angler",
+        "howToObtain": "Catch 50 Fish"
+      },
+      "system": {
+        "slug": "junior-angler",
+        "section": "Fish Caught Titles",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Adept Angler",
+        "howToObtain": "Catch 75 Fish"
+      },
+      "system": {
+        "slug": "adept-angler",
+        "section": "Fish Caught Titles",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expert Angler",
+        "howToObtain": "Catch 100 Fish"
+      },
+      "system": {
+        "slug": "expert-angler",
+        "section": "Fish Caught Titles",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pro Fisherman",
+        "howToObtain": "Catch 150 Fish"
+      },
+      "system": {
+        "slug": "pro-fisherman",
+        "section": "Fish Caught Titles",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unstoppable Fischer",
+        "howToObtain": "Catch 200 Fish"
+      },
+      "system": {
+        "slug": "unstoppable-fischer",
+        "section": "Fish Caught Titles",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fisching Veteran",
+        "howToObtain": "Catch 320 Fish"
+      },
+      "system": {
+        "slug": "fisching-veteran",
+        "section": "Fish Caught Titles",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Master Angler",
+        "howToObtain": "Catch 400 Fish"
+      },
+      "system": {
+        "slug": "master-angler",
+        "section": "Fish Caught Titles",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Master Fischer",
+        "howToObtain": "Catch 500 Fish"
+      },
+      "system": {
+        "slug": "master-fischer",
+        "section": "Fish Caught Titles",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Fischer",
+        "howToObtain": "Catch 600 Fish"
+      },
+      "system": {
+        "slug": "legendary-fischer",
+        "section": "Fish Caught Titles",
+        "sortOrder": 78,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Famous Fischer",
+        "howToObtain": "Catch 840 Fish"
+      },
+      "system": {
+        "slug": "famous-fischer",
+        "section": "Fish Caught Titles",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lord Of The Sea",
+        "howToObtain": "Catch 1,000 Fish"
+      },
+      "system": {
+        "slug": "lord-of-the-sea",
+        "section": "Fish Caught Titles",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lady Of The Sea",
+        "howToObtain": "Catch 1,000 Fish"
+      },
+      "system": {
+        "slug": "lady-of-the-sea",
+        "section": "Fish Caught Titles",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Prophet Angler",
+        "howToObtain": "Catch 1,500 Fish"
+      },
+      "system": {
+        "slug": "the-prophet-angler",
+        "section": "Fish Caught Titles",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mythical Angler",
+        "howToObtain": "Catch 1,500 Fish"
+      },
+      "system": {
+        "slug": "mythical-angler",
+        "section": "Fish Caught Titles",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eternal Fischer",
+        "howToObtain": "Catch 2,500 Fish"
+      },
+      "system": {
+        "slug": "eternal-fischer",
+        "section": "Fish Caught Titles",
+        "sortOrder": 84,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "God Of The Seas",
+        "howToObtain": "Catch 5,000 Fish"
+      },
+      "system": {
+        "slug": "god-of-the-seas",
+        "section": "Fish Caught Titles",
+        "sortOrder": 85,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goddess Of The Seas",
+        "howToObtain": "Catch 5,000 Fish"
+      },
+      "system": {
+        "slug": "goddess-of-the-seas",
+        "section": "Fish Caught Titles",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fish Overlord",
+        "howToObtain": "Catch 10,000 Fish"
+      },
+      "system": {
+        "slug": "fish-overlord",
+        "section": "Fish Caught Titles",
+        "sortOrder": 87,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostly Trapper",
+        "howToObtain": "Abyssal Specter Rod's Mastery"
+      },
+      "system": {
+        "slug": "ghostly-trapper",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 88,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🌌",
+        "howToObtain": "Astraeus Serenade's Mastery"
+      },
+      "system": {
+        "slug": "-11",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 89,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glorply",
+        "howToObtain": "Blade Of Glorp's Mastery"
+      },
+      "system": {
+        "slug": "glorply",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seeker of Depths",
+        "howToObtain": "Depthseeker Rod's Mastery"
+      },
+      "system": {
+        "slug": "seeker-of-depths",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 91,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Destiny",
+        "howToObtain": "Destiny Rod's Mastery"
+      },
+      "system": {
+        "slug": "destiny",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 92,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Distraught",
+        "howToObtain": "Dreambreaker's Mastery"
+      },
+      "system": {
+        "slug": "distraught",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 93,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dusk",
+        "howToObtain": "Duskwire's Mastery"
+      },
+      "system": {
+        "slug": "dusk",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 94,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ethereal",
+        "howToObtain": "Ethereal Prism Rod's Mastery"
+      },
+      "system": {
+        "slug": "ethereal",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 95,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evil",
+        "howToObtain": "Evil Pitchfork's Mastery"
+      },
+      "system": {
+        "slug": "evil",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 96,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glistening",
+        "howToObtain": "Fabulous Rod's Mastery"
+      },
+      "system": {
+        "slug": "glistening",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 97,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heavenly Angler",
+        "howToObtain": "Heaven's Rod's Mastery"
+      },
+      "system": {
+        "slug": "heavenly-angler",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 98,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "King of the Seas",
+        "howToObtain": "Kings Rod's Mastery"
+      },
+      "system": {
+        "slug": "king-of-the-seas",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 99,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mesmerized",
+        "howToObtain": "MiguRod's Mastery"
+      },
+      "system": {
+        "slug": "mesmerized",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mesmerizer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "mesmerizer",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 101,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lifeless Merchant",
+        "howToObtain": "No-Life Rod's Mastery"
+      },
+      "system": {
+        "slug": "lifeless-merchant",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 102,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Greatest",
+        "howToObtain": "Onirifalx's Mastery"
+      },
+      "system": {
+        "slug": "the-greatest",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 103,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "❌🌿",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-12",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 104,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🕊️",
+        "howToObtain": "Pinion's Aria's Mastery"
+      },
+      "system": {
+        "slug": "-13",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 105,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🌊",
+        "howToObtain": "Poseidon Rod's Mastery"
+      },
+      "system": {
+        "slug": "-14",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 106,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Mourned",
+        "howToObtain": "Remembrance's Mastery"
+      },
+      "system": {
+        "slug": "the-mourned",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 107,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Fischer",
+        "howToObtain": "Rod Of The Depths's Mastery"
+      },
+      "system": {
+        "slug": "abyssal-fischer",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 108,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Exalted",
+        "howToObtain": "Rod Of The Exalted One's Mastery"
+      },
+      "system": {
+        "slug": "exalted",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 109,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Forgotten",
+        "howToObtain": "Rod Of The Forgotten Fang's Mastery"
+      },
+      "system": {
+        "slug": "forgotten",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wrath",
+        "howToObtain": "Rod Of The Zenith's Mastery"
+      },
+      "system": {
+        "slug": "wrath",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 111,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ruined",
+        "howToObtain": "Ruinous Oath's Mastery"
+      },
+      "system": {
+        "slug": "ruined",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 112,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blessing",
+        "howToObtain": "Seraphic Rod's Mastery"
+      },
+      "system": {
+        "slug": "blessing",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 113,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit",
+        "howToObtain": "Spiritbinder's Mastery"
+      },
+      "system": {
+        "slug": "spirit",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 114,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Steady Conqueror",
+        "howToObtain": "Steady Rod's Mastery"
+      },
+      "system": {
+        "slug": "steady-conqueror",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 115,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "⛰️",
+        "howToObtain": "Summit Rod's Mastery"
+      },
+      "system": {
+        "slug": "-15",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 116,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunken Sailor",
+        "howToObtain": "Sunken Rod's Mastery"
+      },
+      "system": {
+        "slug": "sunken-sailor",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 117,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tempest",
+        "howToObtain": "Tempest Rod's Mastery"
+      },
+      "system": {
+        "slug": "tempest",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 118,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boomer",
+        "howToObtain": "Trident Rod's Mastery"
+      },
+      "system": {
+        "slug": "boomer",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 119,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Avatar",
+        "howToObtain": "Wind Elemental's Mastery"
+      },
+      "system": {
+        "slug": "avatar",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Plague Doctor",
+        "howToObtain": "Plaguereaver's Mastery"
+      },
+      "system": {
+        "slug": "plague-doctor",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 121,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Ascended",
+        "howToObtain": "Masterline Rod's Mastery"
+      },
+      "system": {
+        "slug": "the-ascended",
+        "section": "Rod Mastery Titles",
+        "sortOrder": 122,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rookie",
+        "howToObtain": "Reach Level 2"
+      },
+      "system": {
+        "slug": "rookie",
+        "section": "Player Level Titles",
+        "sortOrder": 123,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Novice Explorer",
+        "howToObtain": "Reach Level 7"
+      },
+      "system": {
+        "slug": "novice-explorer",
+        "section": "Player Level Titles",
+        "sortOrder": 124,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Trusted Explorer",
+        "howToObtain": "Reach Level 12"
+      },
+      "system": {
+        "slug": "trusted-explorer",
+        "section": "Player Level Titles",
+        "sortOrder": 125,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sea Scout",
+        "howToObtain": "Reach Level 25"
+      },
+      "system": {
+        "slug": "sea-scout",
+        "section": "Player Level Titles",
+        "sortOrder": 126,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Renowned Navigator",
+        "howToObtain": "Reach Level 33"
+      },
+      "system": {
+        "slug": "renowned-navigator",
+        "section": "Player Level Titles",
+        "sortOrder": 127,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Famous Voyager",
+        "howToObtain": "Reach Level 40"
+      },
+      "system": {
+        "slug": "famous-voyager",
+        "section": "Player Level Titles",
+        "sortOrder": 128,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ocean Hero",
+        "howToObtain": "Reach Level 50"
+      },
+      "system": {
+        "slug": "ocean-hero",
+        "section": "Player Level Titles",
+        "sortOrder": 129,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Explorer",
+        "howToObtain": "Reach Level 60"
+      },
+      "system": {
+        "slug": "legendary-explorer",
+        "section": "Player Level Titles",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grand Pioneer",
+        "howToObtain": "Reach Level 70"
+      },
+      "system": {
+        "slug": "grand-pioneer",
+        "section": "Player Level Titles",
+        "sortOrder": 131,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mythical Seeker",
+        "howToObtain": "Reach Level 80"
+      },
+      "system": {
+        "slug": "mythical-seeker",
+        "section": "Player Level Titles",
+        "sortOrder": 132,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sea Sovereign",
+        "howToObtain": "Reach Level 90"
+      },
+      "system": {
+        "slug": "sea-sovereign",
+        "section": "Player Level Titles",
+        "sortOrder": 133,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eternal Voyager",
+        "howToObtain": "Reach Level 100"
+      },
+      "system": {
+        "slug": "eternal-voyager",
+        "section": "Player Level Titles",
+        "sortOrder": 134,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stormcaller",
+        "howToObtain": "Reach Level 200"
+      },
+      "system": {
+        "slug": "stormcaller",
+        "section": "Player Level Titles",
+        "sortOrder": 135,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seafarer",
+        "howToObtain": "Reach Level 250"
+      },
+      "system": {
+        "slug": "seafarer",
+        "section": "Player Level Titles",
+        "sortOrder": 136,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ocean's Champion",
+        "howToObtain": "Reach Level 300"
+      },
+      "system": {
+        "slug": "ocean-s-champion",
+        "section": "Player Level Titles",
+        "sortOrder": 137,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Scavenger",
+        "howToObtain": "Reach Level 400"
+      },
+      "system": {
+        "slug": "abyssal-scavenger",
+        "section": "Player Level Titles",
+        "sortOrder": 138,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wave Conqueror",
+        "howToObtain": "Reach Level 500"
+      },
+      "system": {
+        "slug": "wave-conqueror",
+        "section": "Player Level Titles",
+        "sortOrder": 139,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coral Sovereign",
+        "howToObtain": "Reach Level 600"
+      },
+      "system": {
+        "slug": "coral-sovereign",
+        "section": "Player Level Titles",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mythical Mariner",
+        "howToObtain": "Reach Level 700"
+      },
+      "system": {
+        "slug": "mythical-mariner",
+        "section": "Player Level Titles",
+        "sortOrder": 141,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Novice of the Waters",
+        "howToObtain": "Reach Level 750"
+      },
+      "system": {
+        "slug": "novice-of-the-waters",
+        "section": "Player Level Titles",
+        "sortOrder": 142,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Waveshaper",
+        "howToObtain": "Reach Level 800"
+      },
+      "system": {
+        "slug": "waveshaper",
+        "section": "Player Level Titles",
+        "sortOrder": 143,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient Ocean King",
+        "howToObtain": "Reach Level 900"
+      },
+      "system": {
+        "slug": "ancient-ocean-king",
+        "section": "Player Level Titles",
+        "sortOrder": 144,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Titan of the Waters",
+        "howToObtain": "Reach Level 1000"
+      },
+      "system": {
+        "slug": "titan-of-the-waters",
+        "section": "Player Level Titles",
+        "sortOrder": 145,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Abysswalker",
+        "howToObtain": "Reach Level 1250"
+      },
+      "system": {
+        "slug": "abysswalker",
+        "section": "Player Level Titles",
+        "sortOrder": 146,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thalassian",
+        "howToObtain": "Reach Level 1500"
+      },
+      "system": {
+        "slug": "thalassian",
+        "section": "Player Level Titles",
+        "sortOrder": 147,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sentinel of the Deep",
+        "howToObtain": "Reach Level 1750"
+      },
+      "system": {
+        "slug": "sentinel-of-the-deep",
+        "section": "Player Level Titles",
+        "sortOrder": 148,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Master of the Waters",
+        "howToObtain": "Reach Level 2000"
+      },
+      "system": {
+        "slug": "master-of-the-waters",
+        "section": "Player Level Titles",
+        "sortOrder": 149,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sovereign of the Seas",
+        "howToObtain": "Reach Level 2250"
+      },
+      "system": {
+        "slug": "sovereign-of-the-seas",
+        "section": "Retired Level Titles",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "👑Tidal Lord",
+        "howToObtain": "Reach Level 2500"
+      },
+      "system": {
+        "slug": "tidal-lord",
+        "section": "Retired Level Titles",
+        "sortOrder": 151,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Castaway",
+        "howToObtain": "Reaching the Castaway Rank in the Red Marlins Faction"
+      },
+      "system": {
+        "slug": "castaway",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 152,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seafarer",
+        "howToObtain": "Reaching the Seafarer Rank in the Red Marlins Faction"
+      },
+      "system": {
+        "slug": "seafarer-2",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 153,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Marauder",
+        "howToObtain": "Reaching the Marauder Rank in the Red Marlins Faction"
+      },
+      "system": {
+        "slug": "marauder",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 154,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ironhook",
+        "howToObtain": "Reaching the Ironhook Rank in the Red Marlins Faction"
+      },
+      "system": {
+        "slug": "ironhook",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 155,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mythwalker",
+        "howToObtain": "Reaching the Mythwalker Rank in the Red Marlins Faction"
+      },
+      "system": {
+        "slug": "mythwalker",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 156,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin-Bitten",
+        "howToObtain": "Reaching the Coin-Bitten Rank in the Midas' Mates Faction"
+      },
+      "system": {
+        "slug": "coin-bitten",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 157,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vaultbound",
+        "howToObtain": "Reaching the Vaultbound Rank in the Midas' Mates Faction"
+      },
+      "system": {
+        "slug": "vaultbound",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 158,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crownforged",
+        "howToObtain": "Reaching the Crownforged Rank in the Midas' Mates Faction"
+      },
+      "system": {
+        "slug": "crownforged",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 159,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gildwarden",
+        "howToObtain": "Reaching the Gildwarden Rank in the Midas' Mates Faction"
+      },
+      "system": {
+        "slug": "gildwarden",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 160,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vaultkeeper",
+        "howToObtain": "Reaching the Vaultkeeper Rank in the Midas' Mates Faction"
+      },
+      "system": {
+        "slug": "vaultkeeper",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 161,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Soul",
+        "howToObtain": "Reaching the Lost Soul Rank in the Ghosts Faction"
+      },
+      "system": {
+        "slug": "lost-soul",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 162,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Deckhand",
+        "howToObtain": "Reaching the Cursed Deckhand Rank in the Ghosts Faction"
+      },
+      "system": {
+        "slug": "cursed-deckhand",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 163,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom Corsair",
+        "howToObtain": "Reaching the Phantom Corsair Rank in the Ghosts Faction"
+      },
+      "system": {
+        "slug": "phantom-corsair",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 164,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dread Captain",
+        "howToObtain": "Reaching the Dread Captain Rank in the Ghosts Faction"
+      },
+      "system": {
+        "slug": "dread-captain",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 165,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eternal Reaver",
+        "howToObtain": "Reaching the Eternal Reaver Rank in the Ghosts Faction"
+      },
+      "system": {
+        "slug": "eternal-reaver",
+        "section": "Pirate Faction Titles",
+        "sortOrder": 166,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "♥",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-16",
+        "section": "Limited Time Titles",
+        "sortOrder": 167,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🎣",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-17",
+        "section": "Limited Time Titles",
+        "sortOrder": 168,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦦",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-18",
+        "section": "Limited Time Titles",
+        "sortOrder": 169,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "MERICAAA RAAHHH",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "mericaaa-raahhh",
+        "section": "Limited Time Titles",
+        "sortOrder": 170,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🏜️",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-19",
+        "section": "Limited Time Titles",
+        "sortOrder": 171,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Patriot",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "patriot",
+        "section": "Limited Time Titles",
+        "sortOrder": 172,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Waterpark Engineer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "waterpark-engineer",
+        "section": "Limited Time Titles",
+        "sortOrder": 173,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Volleyballer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "beach-volleyballer",
+        "section": "Limited Time Titles",
+        "sortOrder": 174,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "💥🏐 Beach Volleyball Professional",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "beach-volleyball-professional",
+        "section": "Limited Time Titles",
+        "sortOrder": 175,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦀The Crab Master🦀",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "the-crab-master",
+        "section": "Limited Time Titles",
+        "sortOrder": 176,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Castle Architect",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "sand-castle-architect",
+        "section": "Limited Time Titles",
+        "sortOrder": 177,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jetski Racer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "jetski-racer",
+        "section": "Limited Time Titles",
+        "sortOrder": 178,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jetski Champion",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "jetski-champion",
+        "section": "Limited Time Titles",
+        "sortOrder": 179,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🔥ON FIRE!🔥",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "on-fire",
+        "section": "Limited Time Titles",
+        "sortOrder": 180,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🔥 Bonfire Helper 🔥",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "bonfire-helper",
+        "section": "Limited Time Titles",
+        "sortOrder": 181,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I ♡ Fisch",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "i-fisch",
+        "section": "Limited Time Titles",
+        "sortOrder": 182,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "_–over:flow–_",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "over-flow",
+        "section": "Limited Time Titles",
+        "sortOrder": 183,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "$$$",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-20",
+        "section": "Limited Time Titles",
+        "sortOrder": 184,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "ミュージック:フィッシュ",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-21",
+        "section": "Limited Time Titles",
+        "sortOrder": 185,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascendance.",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "ascendance",
+        "section": "Limited Time Titles",
+        "sortOrder": 186,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Soul Snatcher",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "soul-snatcher",
+        "section": "Limited Time Titles",
+        "sortOrder": 187,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bound",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "bound",
+        "section": "Limited Time Titles",
+        "sortOrder": 188,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🥚",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-22",
+        "section": "Limited Time Titles",
+        "sortOrder": 189,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "ばかだな",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-23",
+        "section": "Limited Time Titles",
+        "sortOrder": 190,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rich",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "rich",
+        "section": "Limited Time Titles",
+        "sortOrder": 191,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Really Rich",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "really-rich",
+        "section": "Limited Time Titles",
+        "sortOrder": 192,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🍀",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-24",
+        "section": "Limited Time Titles",
+        "sortOrder": 193,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Luckiest Fischer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "luckiest-fischer",
+        "section": "Limited Time Titles",
+        "sortOrder": 194,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unluckiest Fischer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "unluckiest-fischer",
+        "section": "Limited Time Titles",
+        "sortOrder": 195,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Sailor",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "lucky-sailor",
+        "section": "Limited Time Titles",
+        "sortOrder": 196,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boulder Basher",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "boulder-basher",
+        "section": "Limited Time Titles",
+        "sortOrder": 197,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "lovely",
+        "section": "Limited Time Titles",
+        "sortOrder": 198,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wisher",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "wisher",
+        "section": "Limited Time Titles",
+        "sortOrder": 199,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lovestormer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "lovestormer",
+        "section": "Limited Time Titles",
+        "sortOrder": 200,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "No Sleep",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "no-sleep",
+        "section": "Limited Time Titles",
+        "sortOrder": 201,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Witnessed Santa",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "witnessed-santa",
+        "section": "Limited Time Titles",
+        "sortOrder": 202,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "On The Nice List",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "on-the-nice-list",
+        "section": "Limited Time Titles",
+        "sortOrder": 203,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🎄",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-25",
+        "section": "Limited Time Titles",
+        "sortOrder": 204,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "jolly",
+        "section": "Limited Time Titles",
+        "sortOrder": 205,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🔴Honked🔴",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "honked",
+        "section": "Limited Time Titles",
+        "sortOrder": 206,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🍁",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-26",
+        "section": "Limited Time Titles",
+        "sortOrder": 207,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🍂",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-27",
+        "section": "Limited Time Titles",
+        "sortOrder": 208,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦃",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-28",
+        "section": "Limited Time Titles",
+        "sortOrder": 209,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🥧",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-29",
+        "section": "Limited Time Titles",
+        "sortOrder": 210,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Gatherer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "pumpkin-gatherer",
+        "section": "Limited Time Titles",
+        "sortOrder": 211,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hollowmaker",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "hollowmaker",
+        "section": "Limited Time Titles",
+        "sortOrder": 212,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🤡",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-30",
+        "section": "Limited Time Titles",
+        "sortOrder": 213,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🧟",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-31",
+        "section": "Limited Time Titles",
+        "sortOrder": 214,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "👻",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-32",
+        "section": "Limited Time Titles",
+        "sortOrder": 215,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🧛‍♂️",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-33",
+        "section": "Limited Time Titles",
+        "sortOrder": 216,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🎃",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-34",
+        "section": "Limited Time Titles",
+        "sortOrder": 217,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "💀",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-35",
+        "section": "Limited Time Titles",
+        "sortOrder": 218,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🍬",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-36",
+        "section": "Limited Time Titles",
+        "sortOrder": 219,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frightful",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "frightful",
+        "section": "Limited Time Titles",
+        "sortOrder": 220,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spooky",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "spooky",
+        "section": "Limited Time Titles",
+        "sortOrder": 221,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eerie",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "eerie",
+        "section": "Limited Time Titles",
+        "sortOrder": 222,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🎁",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-37",
+        "section": "Limited Time Titles",
+        "sortOrder": 223,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🎂",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-38",
+        "section": "Limited Time Titles",
+        "sortOrder": 224,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🎈",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-39",
+        "section": "Limited Time Titles",
+        "sortOrder": 225,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🎉🦈",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-40",
+        "section": "Limited Time Titles",
+        "sortOrder": 226,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦴 Bone Prospector 🦴",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "bone-prospector",
+        "section": "Limited Time Titles",
+        "sortOrder": 227,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Meteorologist",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "meteorologist",
+        "section": "Limited Time Titles",
+        "sortOrder": 228,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Starborn",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "starborn",
+        "section": "Limited Time Titles",
+        "sortOrder": 229,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "✨",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-41",
+        "section": "Limited Time Titles",
+        "sortOrder": 230,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🌴Beached🌴",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "beached",
+        "section": "Limited Time Titles",
+        "sortOrder": 231,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦀 Beachy Crabber 🦀",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "beachy-crabber",
+        "section": "Limited Time Titles",
+        "sortOrder": 232,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🌴 Shoreline Scavenger",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "shoreline-scavenger",
+        "section": "Limited Time Titles",
+        "sortOrder": 233,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🥀",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-42",
+        "section": "Limited Time Titles",
+        "sortOrder": 234,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🌹",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-43",
+        "section": "Limited Time Titles",
+        "sortOrder": 235,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopkeeper",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "shopkeeper",
+        "section": "Limited Time Titles",
+        "sortOrder": 236,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🌙",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-44",
+        "section": "Limited Time Titles",
+        "sortOrder": 237,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Smurf Helper",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "smurf-helper",
+        "section": "Limited Time Titles",
+        "sortOrder": 238,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "😈",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-45",
+        "section": "Limited Time Titles",
+        "sortOrder": 239,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🦅",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "-46",
+        "section": "Limited Time Titles",
+        "sortOrder": 240,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Timely Fisherman",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "timely-fisherman",
+        "section": "Limited Time Titles",
+        "sortOrder": 241,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Clock Lobster",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "clock-lobster",
+        "section": "Limited Time Titles",
+        "sortOrder": 242,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reel Time Expert",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "reel-time-expert",
+        "section": "Limited Time Titles",
+        "sortOrder": 243,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Temporal Trawler",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "temporal-trawler",
+        "section": "Limited Time Titles",
+        "sortOrder": 244,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Temporal Tuna",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "temporal-tuna",
+        "section": "Limited Time Titles",
+        "sortOrder": 245,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hourglass Speedrunner",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "hourglass-speedrunner",
+        "section": "Limited Time Titles",
+        "sortOrder": 246,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Borrowed Time",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "borrowed-time",
+        "section": "Limited Time Titles",
+        "sortOrder": 247,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reel Late",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "reel-late",
+        "section": "Limited Time Titles",
+        "sortOrder": 248,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Time Keeper",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "time-keeper",
+        "section": "Limited Time Titles",
+        "sortOrder": 249,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Master of Time",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "master-of-time",
+        "section": "Limited Time Titles",
+        "sortOrder": 250,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "⏳The Final Fishness⏳",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "the-final-fishness",
+        "section": "Limited Time Titles",
+        "sortOrder": 251,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Master Fisher",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "master-fisher",
+        "section": "Limited Time Titles",
+        "sortOrder": 252,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gullible",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "gullible",
+        "section": "Limited Time Titles",
+        "sortOrder": 253,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dreamer Revolution",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "dreamer-revolution",
+        "section": "Limited Time Titles",
+        "sortOrder": 254,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Oceanborn",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "oceanborn",
+        "section": "Limited Time Titles",
+        "sortOrder": 255,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Savior",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "lucky-savior",
+        "section": "Limited Time Titles",
+        "sortOrder": 256,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Collector",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "lucky-collector",
+        "section": "Limited Time Titles",
+        "sortOrder": 257,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Volcanic Helper",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "volcanic-helper",
+        "section": "Limited Time Titles",
+        "sortOrder": 258,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Volcanic Explorer",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "volcanic-explorer",
+        "section": "Limited Time Titles",
+        "sortOrder": 259,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glimmerfin's Pupil",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "glimmerfin-s-pupil",
+        "section": "Limited Time Titles",
+        "sortOrder": 260,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tidal Master",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "tidal-master",
+        "section": "Limited Time Titles",
+        "sortOrder": 261,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Countdown Caster",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "countdown-caster",
+        "section": "Limited Time Titles",
+        "sortOrder": 262,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "1B",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "1b",
+        "section": "Limited Time Titles",
+        "sortOrder": 263,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Santa's Helper",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "santa-s-helper",
+        "section": "Limited Time Titles",
+        "sortOrder": 264,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Helper",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "elite-helper",
+        "section": "Limited Time Titles",
+        "sortOrder": 265,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "10Mil",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "10mil",
+        "section": "Limited Time Titles",
+        "sortOrder": 266,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostly Angler",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "ghostly-angler",
+        "section": "Limited Time Titles",
+        "sortOrder": 267,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Hallowed",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "the-hallowed",
+        "section": "Limited Time Titles",
+        "sortOrder": 268,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare Angler",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "nightmare-angler",
+        "section": "Limited Time Titles",
+        "sortOrder": 269,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Haunted",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "haunted",
+        "section": "Limited Time Titles",
+        "sortOrder": 270,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Initial Supporter",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "initial-supporter",
+        "section": "Limited Time Titles",
+        "sortOrder": 271,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Content Creator",
+        "howToObtain": "Given to users with the Content Creator rank in the Fisching Roblox Community"
+      },
+      "system": {
+        "slug": "content-creator",
+        "section": "Exclusive Titles",
+        "sortOrder": 272,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tester",
+        "howToObtain": "Given to users with the Tester rank in the Fisching Roblox Community"
+      },
+      "system": {
+        "slug": "tester",
+        "section": "Exclusive Titles",
+        "sortOrder": 273,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tester Lead",
+        "howToObtain": "Given to users in charge of the Testing Team"
+      },
+      "system": {
+        "slug": "tester-lead",
+        "section": "Exclusive Titles",
+        "sortOrder": 274,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Moderator",
+        "howToObtain": "Given to staff with the Moderator rank in the Fisching Roblox Community"
+      },
+      "system": {
+        "slug": "moderator",
+        "section": "Exclusive Titles",
+        "sortOrder": 275,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Manager",
+        "howToObtain": "Given to staff with the Admin rank in the Fisching Roblox Community"
+      },
+      "system": {
+        "slug": "manager",
+        "section": "Exclusive Titles",
+        "sortOrder": 276,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Developer",
+        "howToObtain": "Given to staff with the Developer rank in the Fisching Roblox Community"
+      },
+      "system": {
+        "slug": "developer",
+        "section": "Exclusive Titles",
+        "sortOrder": 277,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Feedback Team",
+        "howToObtain": "Given to users who are a part of the Feedback Team"
+      },
+      "system": {
+        "slug": "feedback-team",
+        "section": "Exclusive Titles",
+        "sortOrder": 278,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Balancing Team",
+        "howToObtain": "Given to users who are a part of the Balancing Team"
+      },
+      "system": {
+        "slug": "balancing-team",
+        "section": "Exclusive Titles",
+        "sortOrder": 279,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Contributor",
+        "howToObtain": "Given to users who contribute models or assets to Fisch"
+      },
+      "system": {
+        "slug": "contributor",
+        "section": "Exclusive Titles",
+        "sortOrder": 280,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wiki Helper",
+        "howToObtain": "Given to staff members of Fischipedia"
+      },
+      "system": {
+        "slug": "wiki-helper",
+        "section": "Exclusive Titles",
+        "sortOrder": 281,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Veteran",
+        "howToObtain": "Given to users who playtested Fisch before it released"
+      },
+      "system": {
+        "slug": "veteran",
+        "section": "Exclusive Titles",
+        "sortOrder": 282,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Muramasa",
+        "howToObtain": "Awarded as part of an event involving following the Roblox accounts of Fisch administrators"
+      },
+      "system": {
+        "slug": "muramasa",
+        "section": "Exclusive Titles",
+        "sortOrder": 283,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🕸",
+        "howToObtain": "Awarded to the winner of the 2024 Halloween Avatar Contest in the Fisch Discord"
+      },
+      "system": {
+        "slug": "-47",
+        "section": "Exclusive Titles",
+        "sortOrder": 284,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "🐳",
+        "howToObtain": "Awarded to the top 5 winners of the Fan Art Contest in the Fisch Discord"
+      },
+      "system": {
+        "slug": "-48",
+        "section": "Exclusive Titles",
+        "sortOrder": 285,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "💥🦐",
+        "howToObtain": "Given to people that die from a Shrimp Gun"
+      },
+      "system": {
+        "slug": "-49",
+        "section": "Exclusive Titles",
+        "sortOrder": 286,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Clumsy",
+        "howToObtain": "Used as one of the titles required for the Brick Rod puzzle, despite it being Unobtainable"
+      },
+      "system": {
+        "slug": "clumsy",
+        "section": "Unobtainable Titles",
+        "sortOrder": 287,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Angler",
+        "howToObtain": null
+      },
+      "system": {
+        "slug": "the-angler",
+        "section": "Unobtainable Titles",
+        "sortOrder": 288,
+        "image": null
+      }
+    }
+  ]
+}

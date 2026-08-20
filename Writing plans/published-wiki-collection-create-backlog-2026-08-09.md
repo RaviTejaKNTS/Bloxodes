@@ -327,16 +327,16 @@ Evidence: [full report](../tmp/game-collection-suggestions/evomon.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/fisch.md)
 
-- [ ] Boats
-- [ ] Tools
-- [ ] Spears
-- [ ] Companions
-- [ ] Relics
-- [ ] NPCs
-- [ ] Titles
-- [ ] Lanterns
-- [ ] Bobbers
-- [ ] Rod Skins
+- [x] Boats
+- [ ] Tools — blocked 2026-08-20: no tools roster exists (fischipedia "Tools" is a calculator redirect)
+- [x] Spears
+- [x] Companions
+- [x] Relics
+- [x] NPCs
+- [x] Titles
+- [x] Lanterns
+- [x] Bobbers
+- [x] Rod Skins
 
 ### Fish It
 
