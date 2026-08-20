@@ -528,7 +528,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/sell-lemons.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/slime-rng.md)
 
-- [ ] Upgrades
+- [x] Upgrades
 
 ### Steal a Brainrot
 
@@ -588,7 +588,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/violence-district.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/wizard-alchemy.md)
 
-- [ ] Pets
+- [ ] Pets — blocked 2026-08-20: the fandom has no Pets category or roster; its 68 articles cover potions, equipment, and rarities only
 
 ## No new source-ready collections
 
