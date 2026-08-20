@@ -6,5 +6,13 @@ export const untitledBoxingGameCollectionGroup = {
     universeId: 4730278139,
     dataDir: "Untitled Boxing Game",
     universeNames: ["Untitled Boxing Game", "untitled boxing game"],
-    collections: ["styles", "gloves", "emotes", "knockout-effects", "titles"]
+    collections: [
+      "styles",
+      "gloves",
+      "emotes",
+      "knockout-effects",
+      "titles",
+      "maps",
+      "ranks"
+    ]
   } satisfies GameCollectionGroup;
