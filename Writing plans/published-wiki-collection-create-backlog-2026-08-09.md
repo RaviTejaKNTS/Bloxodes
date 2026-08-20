@@ -644,7 +644,8 @@ New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs
 
 ### Anime Origins (8946565814)
 
-- [ ] Units — blocked 2026-08-20: no complete roster source; Beebom and Sportskeeda tier lists cover only meta units above Mythic with no rarity or cost data, no fandom exists, remaining sites are AI farms
+- [x] Units — unblocked and shipped 2026-08-20: BloxInformer's structured Anime Origins wiki (per-unit pages with type, element, cost, passives) plus PGG/Sportskeeda secret obtainment and evolution coverage supplied the roster the tier lists lacked
+- [x] Traits — shipped 2026-08-20 from the BloxInformer traits page alongside units
 
 ### BlockSpin (6765805766)
 
@@ -662,10 +663,10 @@ Shipped to managed development (hubs + collections seeded, verifiers + HTML size
 - BedWars: Kits (115), Items (459)
 - Steal an Egg: wiki hub + Biomes (9, imageless by design). Universe 10563114921 only; do not mix with the clone `Steal a Egg` 7861158392 used by some existing articles.
 - Grow a Chicken Fighter: wiki hub + Eggs (16, imageless by design)
+- Anime Origins: wiki hub + Units (46) + Traits (23), hub seeded and both routes verified 2026-08-20
 
 Blocked:
 
-- Anime Origins Units (2026-08-20): no complete roster source
 - BlockSpin Weapons (2026-08-20): no named roster on Deltia or fandom
 - BlockSpin Vehicles (2026-08-20): one-source fandom names only; crate prices disagree
 
