@@ -576,9 +576,9 @@ Evidence: [full report](../tmp/game-collection-suggestions/untitled-boxing-game.
 
 Evidence: [full report](../tmp/game-collection-suggestions/violence-district.md)
 
-- [ ] Maps
-- [ ] Emotes
-- [ ] Item Skins
+- [ ] Maps — blocked 2026-08-20: no maps roster exists in any source; live-rotation verification flag cannot be satisfied
+- [x] Emotes
+- [ ] Item Skins — blocked 2026-08-20: skins confirmed to exist but no roster is documented anywhere
 
 ### Wizard Alchemy
 
