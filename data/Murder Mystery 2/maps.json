@@ -1,0 +1,728 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murder Mystery 2",
+    "gameSlug": "murder-mystery-2",
+    "collection": "maps",
+    "route": "/wiki/murder-mystery-2/maps",
+    "catalogCode": "murder-mystery-2-maps",
+    "itemFields": [
+      "status",
+      "theme",
+      "released",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "status",
+      "theme",
+      "released",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Status",
+      "sectionOrder": [
+        "In rotation",
+        "Seasonal event maps",
+        "Removed maps"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "theme",
+        "released",
+        "availability"
+      ],
+      "tableFields": [
+        "status",
+        "theme",
+        "released",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "status": {
+          "kind": "chip",
+          "label": "Status"
+        },
+        "theme": {
+          "kind": "normal",
+          "label": "Theme"
+        },
+        "released": {
+          "kind": "chip",
+          "label": "Released"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Bank 2",
+        "status": "In rotation",
+        "theme": "Bank interior",
+        "released": "October 17, 2018",
+        "availability": "Standard map pool",
+        "cardSummary": "Two-part bank with a lobby, teller room, offices, meeting room, and air vents around a central vault. A metal detector between the teller room and the vault sounds an alarm when the Murderer, Sheriff, or Hero walks through, and it replaced the original Bank map."
+      },
+      "system": {
+        "slug": "bank-2",
+        "section": "In rotation",
+        "sortOrder": 1,
+        "image": "/Murder Mystery 2/Maps/bank-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bio Lab",
+        "status": "In rotation",
+        "theme": "Science laboratory",
+        "released": "October 15, 2015",
+        "availability": "Standard map pool",
+        "cardSummary": "One of the largest maps in the pool, built as a laboratory with a giant central tube, an office, a bio-tube room, a workshop, two storage rooms, and a vent system."
+      },
+      "system": {
+        "slug": "bio-lab",
+        "section": "In rotation",
+        "sortOrder": 2,
+        "image": "/Murder Mystery 2/Maps/bio-lab.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Factory",
+        "status": "In rotation",
+        "theme": "Industrial factory",
+        "released": "August 27, 2017",
+        "availability": "Standard map pool",
+        "cardSummary": "Fairly large industrial map with an outside area, parking room, office, box room, manufacturing floor, and a sewage system. Its open sightlines tend to favor the Sheriff over the Murderer."
+      },
+      "system": {
+        "slug": "factory",
+        "section": "In rotation",
+        "sortOrder": 3,
+        "image": "/Murder Mystery 2/Maps/factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hospital 3",
+        "status": "In rotation",
+        "theme": "Hospital",
+        "released": "May 25, 2019",
+        "availability": "Standard map pool",
+        "cardSummary": "Two-floor hospital added in the Season 1 update as the replacement for Hospital 2. It has a lobby, office area, recovery and X-ray rooms downstairs, an operation room and doctor's office upstairs, and two air vent systems."
+      },
+      "system": {
+        "slug": "hospital-3",
+        "section": "In rotation",
+        "sortOrder": 4,
+        "image": "/Murder Mystery 2/Maps/hospital-3.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hotel 2",
+        "status": "In rotation",
+        "theme": "Hotel",
+        "released": "May 25, 2019",
+        "availability": "Standard map pool",
+        "cardSummary": "Three-floor hotel with balconies around a central atrium, a cinema, guest rooms, a restaurant with a kitchen and freezer, and a broken elevator shaft in the stairwell. It replaced the original Hotel map in the Season 1 update."
+      },
+      "system": {
+        "slug": "hotel-2",
+        "section": "In rotation",
+        "sortOrder": 5,
+        "image": "/Murder Mystery 2/Maps/hotel-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "House 2",
+        "status": "In rotation",
+        "theme": "Suburban house",
+        "released": "January 23, 2016",
+        "availability": "Standard map pool",
+        "cardSummary": "Revamped version of the original House and one of the most voted maps in the game. The house has a living room, kitchen, bedroom, bathroom, dining room, garage, laundry room, a two-level basement, and a backyard."
+      },
+      "system": {
+        "slug": "house-2",
+        "section": "In rotation",
+        "sortOrder": 6,
+        "image": "/Murder Mystery 2/Maps/house-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mansion 2",
+        "status": "In rotation",
+        "theme": "Mansion",
+        "released": "April 15, 2017",
+        "availability": "Standard map pool",
+        "cardSummary": "Two-floor mansion with long corridors that players favor for one-on-one duels. Rooms include a kitchen, lounge with a fireplace, meeting room, garage, storage room, and an upstairs bedroom with a hidden passage down to the fireplace. It replaced the original Mansion."
+      },
+      "system": {
+        "slug": "mansion-2",
+        "section": "In rotation",
+        "sortOrder": 7,
+        "image": "/Murder Mystery 2/Maps/mansion-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mil-Base",
+        "status": "In rotation",
+        "theme": "Military base",
+        "released": "October 24, 2015",
+        "availability": "Standard map pool",
+        "cardSummary": "Fan-favorite military base with a large outdoor crate yard, tanks, and a two-floor building holding a control room, locker room, storage hall, and a meeting room connected by an air shaft."
+      },
+      "system": {
+        "slug": "mil-base",
+        "section": "In rotation",
+        "sortOrder": 8,
+        "image": "/Murder Mystery 2/Maps/mil-base.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Office 3",
+        "status": "In rotation",
+        "theme": "Office building",
+        "released": "January 23, 2016",
+        "availability": "Standard map pool",
+        "cardSummary": "Colorful revamp of Office 2 with a looping layout, a computer room, restroom vents with an elevator, and tight corridors. The extra rooms and loop make it friendlier to Innocents than its predecessor."
+      },
+      "system": {
+        "slug": "office-3",
+        "section": "In rotation",
+        "sortOrder": 9,
+        "image": "/Murder Mystery 2/Maps/office-3.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Police Station",
+        "status": "In rotation",
+        "theme": "Police station",
+        "released": "June 10, 2017",
+        "availability": "Standard map pool",
+        "cardSummary": "Large station with a main entrance hall, downstairs garage, two upstairs offices, an interrogation room, and a jail with two cells. A wide vent network connects many rooms, which helps players escape chases."
+      },
+      "system": {
+        "slug": "police-station",
+        "section": "In rotation",
+        "sortOrder": 10,
+        "image": "/Murder Mystery 2/Maps/police-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Research Facility",
+        "status": "In rotation",
+        "theme": "Research lab",
+        "released": "March 5, 2020",
+        "availability": "Standard map pool",
+        "cardSummary": "Interactive lab inspired by Bio Lab where players can pull levers to open the garage, trigger an emergency lockdown with red lights, and shut yellow doors by stabbing an electricity box. It is one of the most voted maps in the game."
+      },
+      "system": {
+        "slug": "research-facility",
+        "section": "In rotation",
+        "sortOrder": 11,
+        "image": "/Murder Mystery 2/Maps/research-facility.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Workplace",
+        "status": "In rotation",
+        "theme": "Office workplace",
+        "released": "December 27, 2014",
+        "availability": "Standard map pool",
+        "cardSummary": "The oldest map still playable, added two days after the game launched. It is a medium office with a kitchen, computer area, meeting room, storage area, and a long hallway with several dead ends, so hiding spots are scarce."
+      },
+      "system": {
+        "slug": "workplace",
+        "section": "In rotation",
+        "sortOrder": 12,
+        "image": "/Murder Mystery 2/Maps/workplace.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Resort",
+        "status": "Seasonal",
+        "theme": "Beach resort hotel",
+        "released": "July 5, 2024",
+        "availability": "Summer events",
+        "cardSummary": "Resort hotel on a beach that debuted in the Summer Event 2024 as the first summer event map. It has a reception and lobby, hotel room floors, a bar, an outdoor pool with a slide, and an indoor spa pool below the lobby."
+      },
+      "system": {
+        "slug": "beach-resort",
+        "section": "Seasonal event maps",
+        "sortOrder": 1,
+        "image": "/Murder Mystery 2/Maps/beach-resort.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pier",
+        "status": "Seasonal",
+        "theme": "Carnival pier",
+        "released": "July 23, 2026",
+        "availability": "Summer events",
+        "cardSummary": "Carnival pier from the Summer Event 2026 with a Ferris wheel, a walkable roller coaster, concession stands, and game booths. It is the most open map in the game, which makes rounds harder for the Murderer, and falling into the water is fatal."
+      },
+      "system": {
+        "slug": "pier",
+        "section": "Seasonal event maps",
+        "sortOrder": 2,
+        "image": "/Murder Mystery 2/Maps/pier.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yacht",
+        "status": "Seasonal",
+        "theme": "Luxury yacht",
+        "released": "July 18, 2025",
+        "availability": "Summer events",
+        "cardSummary": "Multi-deck yacht from the Summer Event 2025 with a pool and bar on the sun deck, an arcade and dining room on the main deck, a lower beach club with a hidden cabin vent, and a helicopter pad at the bow. Jumping into the ocean is fatal."
+      },
+      "system": {
+        "slug": "yacht",
+        "section": "Seasonal event maps",
+        "sortOrder": 3,
+        "image": "/Murder Mystery 2/Maps/yacht.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barn",
+        "status": "Seasonal",
+        "theme": "Halloween farm",
+        "released": "October 16, 2022",
+        "availability": "Halloween events",
+        "cardSummary": "Halloween remake of the original Barn built for the Infection game mode introduced in the Halloween Event 2022. It is a large open farm with a huge climbable barn, silos, gas tanks, a small house, and pumpkins scattered around."
+      },
+      "system": {
+        "slug": "barn",
+        "section": "Seasonal event maps",
+        "sortOrder": 4,
+        "image": "/Murder Mystery 2/Maps/barn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Farmhouse",
+        "status": "Seasonal",
+        "theme": "Abandoned farm",
+        "released": "October 23, 2021",
+        "availability": "Halloween events",
+        "cardSummary": "Halloween map added alongside Manor in the Halloween Event 2021. The fairly big grounds hold an abandoned mansion, a huge barn, a tractor, a pumpkin patch, and a small underground tunnel."
+      },
+      "system": {
+        "slug": "farmhouse",
+        "section": "Seasonal event maps",
+        "sortOrder": 5,
+        "image": "/Murder Mystery 2/Maps/farmhouse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Manor",
+        "status": "Seasonal",
+        "theme": "Haunted manor",
+        "released": "October 23, 2021",
+        "availability": "Halloween events",
+        "cardSummary": "Spooky haunted mansion from the Halloween Event 2021 that plays entirely indoors. It has a kitchen, study, two bedrooms, a bathroom, an attic, and a basement, with many vents and hiding spots."
+      },
+      "system": {
+        "slug": "manor",
+        "section": "Seasonal event maps",
+        "sortOrder": 6,
+        "image": "/Murder Mystery 2/Maps/manor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mineshaft 2",
+        "status": "Seasonal",
+        "theme": "Mine cave",
+        "released": "October 16, 2022",
+        "availability": "Halloween events",
+        "cardSummary": "Brighter remake of the removed Mineshaft map, added in the Halloween Event 2022. The cave has water, railways with minecarts, wall crystals, a small sewer tunnel, and a secret room behind a locker, and its Halloween decorations were stripped for its 2025 return."
+      },
+      "system": {
+        "slug": "mineshaft-2",
+        "section": "Seasonal event maps",
+        "sortOrder": 7,
+        "image": "/Murder Mystery 2/Maps/mineshaft-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spaceship",
+        "status": "Seasonal",
+        "theme": "Spaceship",
+        "released": "October 18, 2025",
+        "availability": "Halloween events",
+        "cardSummary": "Spaceship map from the Halloween Event 2025 set in outer space. Metallic corridors with long windows connect a cell room, storage room, cafeteria, kitchen, garden, and a control room with a giant window, with radioactive waste scattered around."
+      },
+      "system": {
+        "slug": "spaceship",
+        "section": "Seasonal event maps",
+        "sortOrder": 8,
+        "image": "/Murder Mystery 2/Maps/spaceship.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire's Castle",
+        "status": "Seasonal",
+        "theme": "Vampire castle",
+        "released": "October 16, 2024",
+        "availability": "Halloween events",
+        "cardSummary": "Big, fairly tight castle from the Halloween Event 2024 decorated with paintings of its vampire owner. It includes a library, garden, dining room, kitchen, graves, and a few secret passages."
+      },
+      "system": {
+        "slug": "vampire-s-castle",
+        "section": "Seasonal event maps",
+        "sortOrder": 9,
+        "image": "/Murder Mystery 2/Maps/vampire-s-castle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas In Italy",
+        "status": "Seasonal",
+        "theme": "Snowy Italian plaza",
+        "released": "December 20, 2024",
+        "availability": "Christmas events",
+        "cardSummary": "Christmas revamp of the old Murder Mystery map Italy, introduced in the Christmas Event 2024. The layout keeps the original plaza, colorful European buildings, and sewer, and adds a pizza place, Christmas decorations, and slippery ice."
+      },
+      "system": {
+        "slug": "christmas-in-italy",
+        "section": "Seasonal event maps",
+        "sortOrder": 10,
+        "image": "/Murder Mystery 2/Maps/christmas-in-italy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Castle",
+        "status": "Seasonal",
+        "theme": "Ice castle",
+        "released": "December 21, 2022",
+        "availability": "Christmas events",
+        "cardSummary": "Frosted medieval castle from the Christmas Event 2022 that also returned in later Christmas events. It has a snowy inner ward with a wishing well, a throne hall, bedrooms, a conference room, a dining room, balconies, and a dungeon basement."
+      },
+      "system": {
+        "slug": "ice-castle",
+        "section": "Seasonal event maps",
+        "sortOrder": 11,
+        "image": "/Murder Mystery 2/Maps/ice-castle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Log Cabin",
+        "status": "Seasonal",
+        "theme": "Winter cabin",
+        "released": "December 23, 2020",
+        "availability": "Christmas events",
+        "cardSummary": "Wooden cabin from the Christmas Event 2020 that has returned in later Christmas events. It has a basement with a gift storage room, a main floor with a kitchen, living room, and Christmas tree, an upstairs with bedrooms and bathrooms, and a snowy yard."
+      },
+      "system": {
+        "slug": "log-cabin",
+        "section": "Seasonal event maps",
+        "sortOrder": 12,
+        "image": "/Murder Mystery 2/Maps/log-cabin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ski Lodge",
+        "status": "Seasonal",
+        "theme": "Ski lodge",
+        "released": "December 21, 2023",
+        "availability": "Christmas events",
+        "cardSummary": "Enormous ski lodge introduced in the Christmas Event 2023, with a living room, a ski rental, Christmas trees, and piles of gifts. Players can go outside and sit in an idle zip-wire seat overlooking the slope."
+      },
+      "system": {
+        "slug": "ski-lodge",
+        "section": "Seasonal event maps",
+        "sortOrder": 13,
+        "image": "/Murder Mystery 2/Maps/ski-lodge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ski Village",
+        "status": "Seasonal",
+        "theme": "Ski village",
+        "released": "December 14, 2025",
+        "availability": "Christmas events",
+        "cardSummary": "Snowy village map introduced in the Christmas Event 2025, joining the Christmas lineup alongside maps like Workshop, Log Cabin, and Train Station."
+      },
+      "system": {
+        "slug": "ski-village",
+        "section": "Seasonal event maps",
+        "sortOrder": 14,
+        "image": "/Murder Mystery 2/Maps/ski-village.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Train Station",
+        "status": "Seasonal",
+        "theme": "Train station",
+        "released": "December 21, 2021",
+        "availability": "Christmas events",
+        "cardSummary": "Christmas map introduced in the Christmas Event 2021 that has returned in every Christmas event since. The station has a restaurant, a clothing store, restrooms, and a large outdoor boarding area with a two-car train on the tracks."
+      },
+      "system": {
+        "slug": "train-station",
+        "section": "Seasonal event maps",
+        "sortOrder": 15,
+        "image": "/Murder Mystery 2/Maps/train-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Workshop",
+        "status": "Seasonal",
+        "theme": "Toy workshop",
+        "released": "December 23, 2019",
+        "availability": "Christmas events",
+        "cardSummary": "The first seasonal map in the game, released with the Christmas Event 2019 as the toy workshop of Saint Nikilis and his elves. It has a gift wrapping station, an office, a storage area, a break room, tunnels, and a garage."
+      },
+      "system": {
+        "slug": "workshop",
+        "section": "Seasonal event maps",
+        "sortOrder": 16,
+        "image": "/Murder Mystery 2/Maps/workshop.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bank",
+        "status": "Removed",
+        "theme": "Bank interior",
+        "released": "February 9, 2016",
+        "availability": "Replaced by Bank 2",
+        "cardSummary": "Original bank map that introduced the metal detector alarm mechanic later kept in Bank 2. It featured a teller room and a vault only the Sheriff could open, and it left the game when Bank 2 arrived in October 2018."
+      },
+      "system": {
+        "slug": "bank",
+        "section": "Removed maps",
+        "sortOrder": 1,
+        "image": "/Murder Mystery 2/Maps/bank.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barn (original)",
+        "status": "Removed",
+        "theme": "Farm",
+        "released": null,
+        "availability": "Removed with Bonus Rounds",
+        "cardSummary": "Early farm map used only in the Wild West and Infection Bonus Rounds, with a climbable three-floor barn, gas tanks, and a distant house. It left the game when Bonus Rounds were discontinued in December 2015, and its layout later returned as the Halloween Barn remake."
+      },
+      "system": {
+        "slug": "barn-original",
+        "section": "Removed maps",
+        "sortOrder": 2,
+        "image": "/Murder Mystery 2/Maps/barn-original.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hospital",
+        "status": "Removed",
+        "theme": "Hospital",
+        "released": "January 7, 2015",
+        "availability": "Replaced by Hospital 2",
+        "cardSummary": "Detailed revamp of the Murder Mystery 1 hospital with a lobby, three patient rooms, a surgery room, and an office. Its small size and lack of hiding spots made it easy for the Murderer, and Hospital 2 replaced it in February 2017."
+      },
+      "system": {
+        "slug": "hospital",
+        "section": "Removed maps",
+        "sortOrder": 3,
+        "image": "/Murder Mystery 2/Maps/hospital.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hospital 2",
+        "status": "Removed",
+        "theme": "Hospital",
+        "released": "February 1, 2017",
+        "availability": "Replaced by Hospital 3",
+        "cardSummary": "Larger, calmer hospital with a muted color scheme, a lobby, office, patient rooms, a surgery room, and air vents. It was replaced by Hospital 3 in the Season 1 update."
+      },
+      "system": {
+        "slug": "hospital-2",
+        "section": "Removed maps",
+        "sortOrder": 4,
+        "image": "/Murder Mystery 2/Maps/hospital-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hotel",
+        "status": "Removed",
+        "theme": "Hotel",
+        "released": "May 2, 2015",
+        "availability": "Replaced by Hotel 2",
+        "cardSummary": "Three-floor hotel revamped from its Murder Mystery 1 predecessor, with a lobby and bar, a restaurant with a freezer, open guest rooms, and a cinema with a projector room. Hotel 2 replaced it in the Season 1 update."
+      },
+      "system": {
+        "slug": "hotel",
+        "section": "Removed maps",
+        "sortOrder": 5,
+        "image": "/Murder Mystery 2/Maps/hotel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "House",
+        "status": "Removed",
+        "theme": "Suburban house",
+        "released": "December 25, 2014",
+        "availability": "Removed from the game",
+        "cardSummary": "Small launch-day house map with a living room, kitchen, bedroom, garage, laundry room, and basement. It was revamped into House 2 in January 2016 and stayed in the pool until mid 2016 before being removed."
+      },
+      "system": {
+        "slug": "house",
+        "section": "Removed maps",
+        "sortOrder": 6,
+        "image": "/Murder Mystery 2/Maps/house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lab 2",
+        "status": "Removed",
+        "theme": "Laboratory",
+        "released": "December 25, 2014",
+        "availability": "Replaced by nSOffice",
+        "cardSummary": "Launch-day revamp of The Lab from Murder Mystery 1, known for its dull grey rooms and confusing layout. It was removed in the Season 1 update in May 2019, when nSOffice took its place."
+      },
+      "system": {
+        "slug": "lab-2",
+        "section": "Removed maps",
+        "sortOrder": 7,
+        "image": "/Murder Mystery 2/Maps/lab-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mansion",
+        "status": "Removed",
+        "theme": "Mansion",
+        "released": "December 25, 2014",
+        "availability": "Replaced by Mansion 2",
+        "cardSummary": "Launch-day mansion with a bathroom, a lounge with a large table, a closet, and a computer lab. It was a fairly small map with a normal amount of hiding spots, and Mansion 2 replaced it in April 2017."
+      },
+      "system": {
+        "slug": "mansion",
+        "section": "Removed maps",
+        "sortOrder": 8,
+        "image": "/Murder Mystery 2/Maps/mansion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mil-Base (original)",
+        "status": "Removed",
+        "theme": "Military base",
+        "released": "December 27, 2014",
+        "availability": "Replaced by Mil-Base",
+        "cardSummary": "Short-lived early base map added alongside Workplace and removed about ten days later after the Bonus Rounds update. It was rarely voted for, footage of it is hard to find, and the current Mil-Base replaced it in late 2015."
+      },
+      "system": {
+        "slug": "mil-base-original",
+        "section": "Removed maps",
+        "sortOrder": 9,
+        "image": "/Murder Mystery 2/Maps/mil-base-original.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mineshaft",
+        "status": "Removed",
+        "theme": "Mine cave",
+        "released": "February 1, 2016",
+        "availability": "Remade as Mineshaft 2",
+        "cardSummary": "Dark circular cave map with railways, minecarts, a red smoke room, and a secret office behind a locker. It was removed in 2018 due to R15 complications and later remade as Mineshaft 2 for the Halloween Event 2022."
+      },
+      "system": {
+        "slug": "mineshaft",
+        "section": "Removed maps",
+        "sortOrder": 10,
+        "image": "/Murder Mystery 2/Maps/mineshaft.png"
+      }
+    },
+    {
+      "item": {
+        "name": "nSOffice",
+        "status": "Removed",
+        "theme": "Modern office",
+        "released": "May 25, 2019",
+        "availability": "Removed from the game",
+        "cardSummary": "Modern office based on the nStudio group, with a lobby playground, meeting room, cafeteria, and an underground hard-drive storage basement. It replaced Lab 2 in the Season 1 update and was discontinued in April 2024, mainly over lag issues."
+      },
+      "system": {
+        "slug": "ns-office",
+        "section": "Removed maps",
+        "sortOrder": 11,
+        "image": "/Murder Mystery 2/Maps/ns-office.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Office 2",
+        "status": "Removed",
+        "theme": "Office building",
+        "released": "December 25, 2014",
+        "availability": "Removed from the game",
+        "cardSummary": "Launch-day revamp of the Murder Mystery 1 office, widely disliked for its tiny size, dead ends, and lack of hiding spots. Office 3 arrived as its updated version in 2016, and Office 2 itself was removed in the Halloween 2021 update."
+      },
+      "system": {
+        "slug": "office-2",
+        "section": "Removed maps",
+        "sortOrder": 12,
+        "image": "/Murder Mystery 2/Maps/office-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pond",
+        "status": "Removed",
+        "theme": "Outdoor pond",
+        "released": null,
+        "availability": "Removed with Bonus Rounds",
+        "cardSummary": "Early outdoor map used only in the Juggernaut, Massacre, and Hot Potato Bonus Rounds. Like Barn, it left the game when Bonus Rounds were removed in December 2015."
+      },
+      "system": {
+        "slug": "pond",
+        "section": "Removed maps",
+        "sortOrder": 13,
+        "image": "/Murder Mystery 2/Maps/pond.png"
+      }
+    }
+  ]
+}

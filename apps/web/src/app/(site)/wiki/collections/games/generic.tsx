@@ -656,13 +656,19 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "evade-maps": 22_000,
   // FTAP Toy Shop: large Furniture section + dual card/table + many portraits inflate RSC HTML
   // past the release size gate when packed at the default text-weight target.
-  "fling-things-and-people-shop-items": 32_000
+  "fling-things-and-people-shop-items": 32_000,
+  // MM2 weapon sets: 100 composite two-weapon images make the single default page brush
+  // the release size ceiling; a lower target splits it safely.
+  "murder-mystery-2-weapon-sets": 30_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
 // max section weight together with the target weight. Defaults stay unchanged for others.
 const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
-  "fling-things-and-people-shop-items": 32_000
+  "fling-things-and-people-shop-items": 32_000,
+  // MM2 weapon sets: 100 composite two-weapon images make the single default page brush
+  // the release size ceiling; a lower target splits it safely.
+  "murder-mystery-2-weapon-sets": 30_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

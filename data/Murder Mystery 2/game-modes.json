@@ -1,0 +1,250 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murder Mystery 2",
+    "gameSlug": "murder-mystery-2",
+    "collection": "game-modes",
+    "route": "/wiki/murder-mystery-2/game-modes",
+    "catalogCode": "murder-mystery-2-game-modes",
+    "itemFields": [
+      "type",
+      "formerName",
+      "rolesUsed",
+      "powers",
+      "petsAndRadios",
+      "weapon",
+      "howAssigned",
+      "goal",
+      "cardSummary"
+    ],
+    "columns": [
+      "type",
+      "formerName",
+      "rolesUsed",
+      "powers",
+      "petsAndRadios",
+      "weapon",
+      "howAssigned",
+      "goal",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Category",
+      "sectionOrder": [
+        "Game Modes",
+        "Round Roles"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "formerName",
+        "rolesUsed",
+        "powers",
+        "petsAndRadios",
+        "weapon",
+        "howAssigned",
+        "goal"
+      ],
+      "tableFields": [
+        "type",
+        "formerName",
+        "rolesUsed",
+        "powers",
+        "petsAndRadios",
+        "weapon",
+        "howAssigned",
+        "goal",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "formerName": {
+          "kind": "normal",
+          "label": "Former Name",
+          "omitWhenEmpty": true
+        },
+        "rolesUsed": {
+          "kind": "normal",
+          "label": "Roles Used",
+          "omitWhenEmpty": true
+        },
+        "powers": {
+          "kind": "chip",
+          "label": "Powers",
+          "omitWhenEmpty": true
+        },
+        "petsAndRadios": {
+          "kind": "chip",
+          "label": "Pets and Radios",
+          "omitWhenEmpty": true
+        },
+        "weapon": {
+          "kind": "chip",
+          "label": "Weapon",
+          "omitWhenEmpty": true
+        },
+        "howAssigned": {
+          "kind": "normal",
+          "label": "How You Get It",
+          "omitWhenEmpty": true
+        },
+        "goal": {
+          "kind": "detail",
+          "label": "Goal",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Standard",
+        "type": "Gamemode",
+        "formerName": "Casual",
+        "rolesUsed": "All four roles",
+        "powers": "Allowed",
+        "petsAndRadios": "Allowed",
+        "weapon": null,
+        "howAssigned": null,
+        "goal": null,
+        "cardSummary": "Standard is the default Murder Mystery 2 mode. Each round one player becomes the Murderer, one becomes the Sheriff, and everyone else plays as Innocents, with powers, pets, radios, and emotes all usable and a free third person camera."
+      },
+      "system": {
+        "slug": "standard",
+        "section": "Game Modes",
+        "sortOrder": 1,
+        "image": "/Murder Mystery 2/Game Modes/standard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Disguises",
+        "type": "Gamemode",
+        "formerName": "Hardcore",
+        "rolesUsed": "All four roles",
+        "powers": "Allowed",
+        "petsAndRadios": "Disabled",
+        "weapon": null,
+        "howAssigned": null,
+        "goal": null,
+        "cardSummary": "Disguises hides who is who. Every player gets a matching look and a NATO phonetic alphabet name for the round, while pets, radios, and Roblox emotes are turned off, so rounds come down to pure deduction. It is the oldest mode, carried over from the original Murder Mystery."
+      },
+      "system": {
+        "slug": "disguises",
+        "section": "Game Modes",
+        "sortOrder": 2,
+        "image": "/Murder Mystery 2/Game Modes/disguises.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Assassin",
+        "type": "Gamemode",
+        "formerName": null,
+        "rolesUsed": "Murderer only",
+        "powers": "Mostly disabled",
+        "petsAndRadios": "Allowed",
+        "weapon": null,
+        "howAssigned": null,
+        "goal": null,
+        "cardSummary": "Assassin gives every player a knife and a single target shown on screen. Eliminate your target to receive a new one, avoid the player hunting you, and win by being the last one standing. Stabbing anyone who is not your target or your assassin briefly disables your knife."
+      },
+      "system": {
+        "slug": "assassin",
+        "section": "Game Modes",
+        "sortOrder": 3,
+        "image": "/Murder Mystery 2/Game Modes/assassin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Innocent",
+        "type": "Round role",
+        "formerName": null,
+        "rolesUsed": null,
+        "powers": null,
+        "petsAndRadios": null,
+        "weapon": "No weapon",
+        "howAssigned": "Everyone not picked as Murderer or Sheriff",
+        "goal": "Survive the round, collect coins, and help expose the Murderer.",
+        "cardSummary": "Innocent is the most common role in Standard and Disguises rounds. Innocents win by staying alive until the round ends or the Murderer is stopped, and any Innocent can grab the fallen Sheriff's gun to become the Hero."
+      },
+      "system": {
+        "slug": "innocent",
+        "section": "Round Roles",
+        "sortOrder": 4,
+        "image": "/Murder Mystery 2/Game Modes/innocent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sheriff",
+        "type": "Round role",
+        "formerName": null,
+        "rolesUsed": null,
+        "powers": null,
+        "petsAndRadios": null,
+        "weapon": "Gun",
+        "howAssigned": "Random draw, one per round",
+        "goal": "Identify and shoot the Murderer without hitting an Innocent.",
+        "cardSummary": "The Sheriff is the one armed defender at round start. The gun reloads after every shot, and shooting an Innocent takes both players down, so a good Sheriff stays hidden and only fires on a confirmed Murderer."
+      },
+      "system": {
+        "slug": "sheriff",
+        "section": "Round Roles",
+        "sortOrder": 5,
+        "image": "/Murder Mystery 2/Game Modes/sheriff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Murderer",
+        "type": "Round role",
+        "formerName": null,
+        "rolesUsed": null,
+        "powers": null,
+        "petsAndRadios": null,
+        "weapon": "Knife",
+        "howAssigned": "Random draw, chance rises the longer you go without it",
+        "goal": "Eliminate every other player before being shot.",
+        "cardSummary": "The Murderer hunts the whole lobby with a knife that can stab up close or be thrown. The Murderer wins by eliminating everyone and loses the moment the Sheriff or a Hero lands a shot."
+      },
+      "system": {
+        "slug": "murderer",
+        "section": "Round Roles",
+        "sortOrder": 6,
+        "image": "/Murder Mystery 2/Game Modes/murderer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hero",
+        "type": "Round role",
+        "formerName": null,
+        "rolesUsed": null,
+        "powers": null,
+        "petsAndRadios": null,
+        "weapon": "Sheriff's dropped gun",
+        "howAssigned": "Earned by picking up the fallen Sheriff's gun",
+        "goal": "Use the recovered gun to shoot the Murderer before the round ends.",
+        "cardSummary": "Hero is earned, not assigned. When the Sheriff dies, any Innocent can pick up the dropped gun, become the Hero, and take over the job of stopping the Murderer. The Sheriff and the Hero are never in play at the same time."
+      },
+      "system": {
+        "slug": "hero",
+        "section": "Round Roles",
+        "sortOrder": 7,
+        "image": "/Murder Mystery 2/Game Modes/hero.png"
+      }
+    }
+  ]
+}

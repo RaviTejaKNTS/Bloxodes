@@ -1,0 +1,729 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murder Mystery 2",
+    "gameSlug": "murder-mystery-2",
+    "collection": "radios",
+    "route": "/wiki/murder-mystery-2/radios",
+    "catalogCode": "murder-mystery-2-radios",
+    "itemFields": [
+      "obtainGroup",
+      "source",
+      "rarity",
+      "cost",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "obtainGroup",
+      "source",
+      "rarity",
+      "cost",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Gamepass Radios",
+        "Coin Shop Radios",
+        "Gem Shop Radios",
+        "Halloween Event Radios",
+        "Christmas Event Radios",
+        "Other Event Radios"
+      ],
+      "badgeField": "obtainGroup",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "source",
+        "rarity",
+        "cost",
+        "availability"
+      ],
+      "tableFields": [
+        "obtainGroup",
+        "source",
+        "rarity",
+        "cost",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "obtainGroup": {
+          "kind": "chip",
+          "label": "Group"
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Default",
+        "obtainGroup": "Gamepass Radios",
+        "source": "Radio Gamepass",
+        "rarity": "Common",
+        "cost": "475 Robux (Radio Gamepass)",
+        "availability": "Available",
+        "cardSummary": "Default is the gray boombox every player receives, and it becomes usable once you own the Radio Gamepass."
+      },
+      "system": {
+        "slug": "default",
+        "section": "Gamepass Radios",
+        "sortOrder": 1,
+        "image": "/Murder Mystery 2/Radios/default.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite",
+        "obtainGroup": "Gamepass Radios",
+        "source": "Elite Gamepass",
+        "rarity": "Common",
+        "cost": "499 Robux (Elite Gamepass)",
+        "availability": "Available",
+        "cardSummary": "Elite is a sleek radio unlocked by buying the Elite Gamepass, which also grants its other Elite perks."
+      },
+      "system": {
+        "slug": "elite",
+        "section": "Gamepass Radios",
+        "sortOrder": 2,
+        "image": "/Murder Mystery 2/Radios/elite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dubstep",
+        "obtainGroup": "Coin Shop Radios",
+        "source": "Shop",
+        "rarity": "Common",
+        "cost": "1,200 Coins",
+        "availability": "Available",
+        "cardSummary": "Dubstep is the cheapest coin radio in the shop and an easy first upgrade over the Default model."
+      },
+      "system": {
+        "slug": "dubstep",
+        "section": "Coin Shop Radios",
+        "sortOrder": 3,
+        "image": "/Murder Mystery 2/Radios/dubstep.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Camo",
+        "obtainGroup": "Coin Shop Radios",
+        "source": "Shop",
+        "rarity": "Common",
+        "cost": "2,000 Coins",
+        "availability": "Available",
+        "cardSummary": "Camo is a shop radio wrapped in a military camouflage pattern and bought with coins."
+      },
+      "system": {
+        "slug": "camo",
+        "section": "Coin Shop Radios",
+        "sortOrder": 4,
+        "image": "/Murder Mystery 2/Radios/camo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bluesteel",
+        "obtainGroup": "Coin Shop Radios",
+        "source": "Shop",
+        "rarity": "Common",
+        "cost": "3,200 Coins",
+        "availability": "Available",
+        "cardSummary": "Bluesteel is a metallic blue shop radio in the mid range of the coin price ladder."
+      },
+      "system": {
+        "slug": "bluesteel",
+        "section": "Coin Shop Radios",
+        "sortOrder": 5,
+        "image": "/Murder Mystery 2/Radios/bluesteel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boombastic",
+        "obtainGroup": "Coin Shop Radios",
+        "source": "Shop",
+        "rarity": "Common",
+        "cost": "3,600 Coins",
+        "availability": "Available",
+        "cardSummary": "Boombastic is a chunky speaker-heavy shop radio and the second most expensive coin option."
+      },
+      "system": {
+        "slug": "boombastic",
+        "section": "Coin Shop Radios",
+        "sortOrder": 6,
+        "image": "/Murder Mystery 2/Radios/boombastic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden",
+        "obtainGroup": "Coin Shop Radios",
+        "source": "Shop",
+        "rarity": "Common",
+        "cost": "12,000 Coins",
+        "availability": "Available",
+        "cardSummary": "Golden is a gold-plated radio that sits at the top of the coin shop as a long-term coin sink."
+      },
+      "system": {
+        "slug": "golden",
+        "section": "Coin Shop Radios",
+        "sortOrder": 7,
+        "image": "/Murder Mystery 2/Radios/golden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Omega",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Uncommon",
+        "cost": "400 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Omega is one of the two entry-level diamond radios in the shop and shares its price with Fade."
+      },
+      "system": {
+        "slug": "omega",
+        "section": "Gem Shop Radios",
+        "sortOrder": 8,
+        "image": "/Murder Mystery 2/Radios/omega.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fade",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Uncommon",
+        "cost": "400 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Fade is a diamond shop radio with a smooth color fade finish at the lowest diamond price."
+      },
+      "system": {
+        "slug": "fade",
+        "section": "Gem Shop Radios",
+        "sortOrder": 9,
+        "image": "/Murder Mystery 2/Radios/fade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Rare",
+        "cost": "800 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Rainbow is a rare diamond shop radio covered in a bright multicolor finish."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Gem Shop Radios",
+        "sortOrder": 10,
+        "image": "/Murder Mystery 2/Radios/rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flaming",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Rare",
+        "cost": "900 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Flaming is a rare diamond shop radio with a fire themed look just under the Sparkletime price tier."
+      },
+      "system": {
+        "slug": "flaming",
+        "section": "Gem Shop Radios",
+        "sortOrder": 11,
+        "image": "/Murder Mystery 2/Radios/flaming.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Sparkletime",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Legendary",
+        "cost": "1,000 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Pink Sparkletime is one of four legendary Sparkletime radios, all sold in the shop at the same diamond price."
+      },
+      "system": {
+        "slug": "pink-sparkletime",
+        "section": "Gem Shop Radios",
+        "sortOrder": 12,
+        "image": "/Murder Mystery 2/Radios/pink-sparkletime.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Sparkletime",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Legendary",
+        "cost": "1,000 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Blue Sparkletime is the blue member of the legendary Sparkletime radio set sold for diamonds."
+      },
+      "system": {
+        "slug": "blue-sparkletime",
+        "section": "Gem Shop Radios",
+        "sortOrder": 13,
+        "image": "/Murder Mystery 2/Radios/blue-sparkletime.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Sparkletime",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Legendary",
+        "cost": "1,000 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Green Sparkletime is the green member of the legendary Sparkletime radio set sold for diamonds."
+      },
+      "system": {
+        "slug": "green-sparkletime",
+        "section": "Gem Shop Radios",
+        "sortOrder": 14,
+        "image": "/Murder Mystery 2/Radios/green-sparkletime.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Sparkletime",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Legendary",
+        "cost": "1,000 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Red Sparkletime is the red member of the legendary Sparkletime radio set sold for diamonds."
+      },
+      "system": {
+        "slug": "red-sparkletime",
+        "section": "Gem Shop Radios",
+        "sortOrder": 15,
+        "image": "/Murder Mystery 2/Radios/red-sparkletime.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop",
+        "rarity": "Legendary",
+        "cost": "2,500 Diamonds",
+        "availability": "Available",
+        "cardSummary": "Diamond is a legendary radio that looks carved from solid diamond and is the most expensive radio in the shop."
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Gem Shop Radios",
+        "sortOrder": 16,
+        "image": "/Murder Mystery 2/Radios/diamond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overseer",
+        "obtainGroup": "Gem Shop Radios",
+        "source": "Shop (retired)",
+        "rarity": "Uncommon",
+        "cost": "300 Diamonds (formerly)",
+        "availability": "Unobtainable",
+        "cardSummary": "Overseer matched the Overseer knife and gun theme and left the shop when Season 1 released, so it can no longer be bought."
+      },
+      "system": {
+        "slug": "overseer",
+        "section": "Gem Shop Radios",
+        "sortOrder": 17,
+        "image": "/Murder Mystery 2/Radios/overseer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy",
+        "obtainGroup": "Halloween Event Radios",
+        "source": "Halloween Event 2019",
+        "rarity": "Common",
+        "cost": "Battle pass tier 13",
+        "availability": "Unobtainable",
+        "cardSummary": "Candy was a tier reward radio from the 2019 Halloween Event battle pass and is no longer obtainable."
+      },
+      "system": {
+        "slug": "candy",
+        "section": "Halloween Event Radios",
+        "sortOrder": 18,
+        "image": "/Murder Mystery 2/Radios/candy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack-o-Radio",
+        "obtainGroup": "Halloween Event Radios",
+        "source": "Halloween Event 2019",
+        "rarity": "Common",
+        "cost": "Battle pass tier 21",
+        "availability": "Unobtainable",
+        "cardSummary": "Jack-o-Radio was a pumpkin themed tier reward from the 2019 Halloween Event battle pass and is no longer obtainable."
+      },
+      "system": {
+        "slug": "jack-o-radio",
+        "section": "Halloween Event Radios",
+        "sortOrder": 19,
+        "image": "/Murder Mystery 2/Radios/jack-o-radio.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elderwood",
+        "obtainGroup": "Halloween Event Radios",
+        "source": "Halloween Event 2019",
+        "rarity": "Common",
+        "cost": "5,000 Candies",
+        "availability": "Unobtainable",
+        "cardSummary": "Elderwood was offered for candies during the 2019 Halloween Event after a player had already claimed the Elderwood Scythe."
+      },
+      "system": {
+        "slug": "elderwood",
+        "section": "Halloween Event Radios",
+        "sortOrder": 20,
+        "image": "/Murder Mystery 2/Radios/elderwood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost",
+        "obtainGroup": "Halloween Event Radios",
+        "source": "Halloween Event 2020",
+        "rarity": "Common",
+        "cost": "Battle pass tier 20",
+        "availability": "Unobtainable",
+        "cardSummary": "Ghost was a tier reward radio from the 2020 Halloween Event battle pass and is no longer obtainable."
+      },
+      "system": {
+        "slug": "ghost",
+        "section": "Halloween Event Radios",
+        "sortOrder": 21,
+        "image": "/Murder Mystery 2/Radios/ghost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hallowradio",
+        "obtainGroup": "Halloween Event Radios",
+        "source": "Halloween Event 2020",
+        "rarity": "Common",
+        "cost": null,
+        "availability": "Unobtainable",
+        "cardSummary": "Hallowradio rewarded players who completed every Scary Mode challenge in the 2020 Halloween Event and matches the Hallowscythe design."
+      },
+      "system": {
+        "slug": "hallowradio",
+        "section": "Halloween Event Radios",
+        "sortOrder": 22,
+        "image": "/Murder Mystery 2/Radios/hallowradio.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reaver",
+        "obtainGroup": "Halloween Event Radios",
+        "source": "Halloween Event 2021",
+        "rarity": "Common",
+        "cost": "5,000 Candies",
+        "availability": "Unobtainable",
+        "cardSummary": "Reaver was offered for candies during the 2021 Halloween Event after a player had already claimed the Harvester."
+      },
+      "system": {
+        "slug": "reaver",
+        "section": "Halloween Event Radios",
+        "sortOrder": 23,
+        "image": "/Murder Mystery 2/Radios/reaver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire",
+        "obtainGroup": "Halloween Event Radios",
+        "source": "Halloween Event 2024",
+        "rarity": "Common",
+        "cost": "Battle pass tier 16",
+        "availability": "Unobtainable",
+        "cardSummary": "Vampire was a tier reward radio from the 2024 Halloween Event battle pass and is no longer obtainable."
+      },
+      "system": {
+        "slug": "vampire",
+        "section": "Halloween Event Radios",
+        "sortOrder": 24,
+        "image": "/Murder Mystery 2/Radios/vampire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2016",
+        "rarity": "Common",
+        "cost": "35 Blue Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Gingerbread was the cheapest token radio of the 2016 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "gingerbread",
+        "section": "Christmas Event Radios",
+        "sortOrder": 25,
+        "image": "/Murder Mystery 2/Radios/gingerbread.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2016",
+        "rarity": "Common",
+        "cost": "100 Blue Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Candy Cane was a striped token radio from the 2016 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "candy-cane",
+        "section": "Christmas Event Radios",
+        "sortOrder": 26,
+        "image": "/Murder Mystery 2/Radios/candy-cane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowy",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2016",
+        "rarity": "Common",
+        "cost": "300 Blue Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Snowy was the most expensive token radio of the 2016 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "snowy",
+        "section": "Christmas Event Radios",
+        "sortOrder": 27,
+        "image": "/Murder Mystery 2/Radios/snowy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2017",
+        "rarity": "Common",
+        "cost": "15 Snowflake Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Ice was the cheapest token radio of the 2017 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "ice",
+        "section": "Christmas Event Radios",
+        "sortOrder": 28,
+        "image": "/Murder Mystery 2/Radios/ice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2017",
+        "rarity": "Common",
+        "cost": "60 Snowflake Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Coal was a low cost token radio from the 2017 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "coal",
+        "section": "Christmas Event Radios",
+        "sortOrder": 29,
+        "image": "/Murder Mystery 2/Radios/coal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Candy Cane",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2017",
+        "rarity": "Common",
+        "cost": "300 Snowflake Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Green Candy Cane was a mid priced token radio from the 2017 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "green-candy-cane",
+        "section": "Christmas Event Radios",
+        "sortOrder": 30,
+        "image": "/Murder Mystery 2/Radios/green-candy-cane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Candy Cane",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2017",
+        "rarity": "Common",
+        "cost": "400 Snowflake Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Blue Candy Cane was the most expensive token radio of the 2017 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "blue-candy-cane",
+        "section": "Christmas Event Radios",
+        "sortOrder": 31,
+        "image": "/Murder Mystery 2/Radios/blue-candy-cane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tree",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2018",
+        "rarity": "Common",
+        "cost": "200 Snowflake Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Tree was a Christmas tree shaped token radio from the 2018 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "tree",
+        "section": "Christmas Event Radios",
+        "sortOrder": 32,
+        "image": "/Murder Mystery 2/Radios/tree.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane '18",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2018",
+        "rarity": "Common",
+        "cost": "1,000 Snowflake Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Candy Cane '18 was a premium token radio from the 2018 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "candy-cane-18",
+        "section": "Christmas Event Radios",
+        "sortOrder": 33,
+        "image": "/Murder Mystery 2/Radios/candy-cane-18.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Candy Cane '18",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2018",
+        "rarity": "Common",
+        "cost": "1,000 Snowflake Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Blue Candy Cane '18 was a premium token radio from the 2018 Christmas Event and is no longer obtainable."
+      },
+      "system": {
+        "slug": "blue-candy-cane-18",
+        "section": "Christmas Event Radios",
+        "sortOrder": 34,
+        "image": "/Murder Mystery 2/Radios/blue-candy-cane-18.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Minty",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2019",
+        "rarity": "Common",
+        "cost": "5,000 Snow Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Minty was offered for snow tokens during the 2019 Christmas Event after a player had already claimed the Logchopper."
+      },
+      "system": {
+        "slug": "minty",
+        "section": "Christmas Event Radios",
+        "sortOrder": 35,
+        "image": "/Murder Mystery 2/Radios/minty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Iceplayer",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2020",
+        "rarity": "Common",
+        "cost": "5,000 Snow Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Iceplayer was offered for snow tokens during the 2020 Christmas Event after a player had already claimed the Icebreaker."
+      },
+      "system": {
+        "slug": "iceplayer",
+        "section": "Christmas Event Radios",
+        "sortOrder": 36,
+        "image": "/Murder Mystery 2/Radios/iceplayer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Swirly",
+        "obtainGroup": "Christmas Event Radios",
+        "source": "Christmas Event 2021",
+        "rarity": "Common",
+        "cost": "5,000 Snow Tokens",
+        "availability": "Unobtainable",
+        "cardSummary": "Swirly was offered for snow tokens during the 2021 Christmas Event after a player had already claimed the Swirly Axe."
+      },
+      "system": {
+        "slug": "swirly",
+        "section": "Christmas Event Radios",
+        "sortOrder": 37,
+        "image": "/Murder Mystery 2/Radios/swirly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boombox",
+        "obtainGroup": "Other Event Radios",
+        "source": "Summer Event 2025",
+        "rarity": "Common",
+        "cost": "12,000 Beach Balls",
+        "availability": "Unobtainable",
+        "cardSummary": "Boombox was bought with beach balls at tier 15 of the 2025 Summer Event battle pass and is no longer obtainable."
+      },
+      "system": {
+        "slug": "boombox",
+        "section": "Other Event Radios",
+        "sortOrder": 38,
+        "image": "/Murder Mystery 2/Radios/boombox.png"
+      }
+    }
+  ]
+}

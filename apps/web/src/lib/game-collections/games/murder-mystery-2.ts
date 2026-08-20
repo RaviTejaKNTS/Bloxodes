@@ -6,5 +6,5 @@ export const murderMystery2CollectionGroup = {
   universeId: 66654135,
   dataDir: "Murder Mystery 2",
   universeNames: ["Murder Mystery 2"],
-  collections: ["powers", "guns", "pets", "knives"]
+  collections: ["powers", "guns", "pets", "knives", "radios", "maps", "emotes", "boxes", "crafting-recipes", "game-modes", "effects", "weapon-sets"]
 } satisfies GameCollectionGroup;

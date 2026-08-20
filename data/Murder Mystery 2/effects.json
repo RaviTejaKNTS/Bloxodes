@@ -1,0 +1,1933 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murder Mystery 2",
+    "gameSlug": "murder-mystery-2",
+    "collection": "effects",
+    "route": "/wiki/murder-mystery-2/effects",
+    "catalogCode": "murder-mystery-2-effects",
+    "itemFields": [
+      "cost",
+      "event",
+      "availability",
+      "obtainDetail",
+      "cardSummary"
+    ],
+    "columns": [
+      "cost",
+      "event",
+      "availability",
+      "obtainDetail",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Source",
+      "sectionOrder": [
+        "Shop",
+        "Gamepass and Bundle",
+        "Event Battle Pass",
+        "Event Prize and Quest",
+        "Crafting",
+        "Promo and Merch"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "cost",
+        "event",
+        "availability"
+      ],
+      "tableFields": [
+        "cost",
+        "event",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        },
+        "event": {
+          "kind": "plain",
+          "label": "Event",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "obtainDetail": {
+          "kind": "detail",
+          "label": "How to get",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Blue Flaming Knife",
+        "cost": "800 Diamonds",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchase in the Shop for 800 Diamonds",
+        "cardSummary": "Sets your blade alight with blue fire, the cool-toned sibling of the classic Flaming Knife. A straightforward Diamond buy from the shop."
+      },
+      "system": {
+        "slug": "blue-flaming-knife",
+        "section": "Shop",
+        "sortOrder": 1,
+        "image": "/Murder Mystery 2/Effects/blue-flaming-knife.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Doge",
+        "cost": "500 Coins",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the shop for 500 coins (Formerly)",
+        "cardSummary": "Small Doge heads drift off the knife, and victims turn into a Doge on death. A meme relic that left the shop with the Season 1 update, so only older accounts carry it."
+      },
+      "system": {
+        "slug": "doge",
+        "section": "Shop",
+        "sortOrder": 2,
+        "image": "/Murder Mystery 2/Effects/doge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dual Wield",
+        "cost": "900 Diamonds",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the shop for 900 Diamonds",
+        "cardSummary": "Puts a mirrored second knife in your off hand. Pure style, since only the real knife lands hits, but no other effect changes your silhouette this much."
+      },
+      "system": {
+        "slug": "dual-wield",
+        "section": "Shop",
+        "sortOrder": 3,
+        "image": "/Murder Mystery 2/Effects/dual-wield.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Electric Knife",
+        "cost": "1,000 Diamonds",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Buying for 1,000 Diamonds in the shop",
+        "cardSummary": "Wraps the blade in a ring of purple electricity. One of the pricier Diamond effects and easy to spot from across a map."
+      },
+      "system": {
+        "slug": "electric-knife",
+        "section": "Shop",
+        "sortOrder": 4,
+        "image": "/Murder Mystery 2/Effects/electric-knife.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flaming Knife",
+        "cost": "4,000 Coins",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the Shop for 4,000 Coins",
+        "cardSummary": "The classic fire effect: your knife simply burns. Cheap for Coins and still one of the most recognizable looks in the game."
+      },
+      "system": {
+        "slug": "flaming-knife",
+        "section": "Shop",
+        "sortOrder": 5,
+        "image": "/Murder Mystery 2/Effects/flaming-knife.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostify",
+        "cost": "2,000 Coins",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the Shop for 2,000 Coins or 200 Diamonds",
+        "cardSummary": "Turns the knife ghostly and translucent. One of the few effects sold for either Coins or Diamonds, so almost anyone can afford the spooky look."
+      },
+      "system": {
+        "slug": "ghostify",
+        "section": "Shop",
+        "sortOrder": 6,
+        "image": "/Murder Mystery 2/Effects/ghostify.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Flaming Knife",
+        "cost": "800 Diamonds",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the Shop for 800 Diamonds",
+        "cardSummary": "Burns the blade in green fire, the toxic-looking recolor of Flaming Knife at the same Diamond price as its blue and pink siblings."
+      },
+      "system": {
+        "slug": "green-flaming-knife",
+        "section": "Shop",
+        "sortOrder": 7,
+        "image": "/Murder Mystery 2/Effects/green-flaming-knife.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heartify",
+        "cost": "2,400 Coins",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the Shop for 2,400 Coins",
+        "cardSummary": "The knife sheds pink hearts, and anyone you take down ends up with a smiling heart-eyed face. The romance option, permanently in the shop."
+      },
+      "system": {
+        "slug": "heartify",
+        "section": "Shop",
+        "sortOrder": 8,
+        "image": "/Murder Mystery 2/Effects/heartify.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Knifeception",
+        "cost": "300 Diamonds",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the Shop for 300 Diamonds",
+        "cardSummary": "Your knife emits tiny copies of itself, a knife within a knife. The joke lands better the fancier the knife you pair it with."
+      },
+      "system": {
+        "slug": "knifeception",
+        "section": "Shop",
+        "sortOrder": 9,
+        "image": "/Murder Mystery 2/Effects/knifeception.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Monify",
+        "cost": "700 Coins",
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Buying from the Shop (Formerly)",
+        "cardSummary": "Rained money particles off the blade before it quietly left the shop in 2016. One of the rarest shop effects simply because so few bought it in time."
+      },
+      "system": {
+        "slug": "monify",
+        "section": "Shop",
+        "sortOrder": 10,
+        "image": "/Murder Mystery 2/Effects/monify.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Musical",
+        "cost": "2,000 Coins",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the Shop for 2,000 Coins",
+        "cardSummary": "Music notes float off the knife and stabs play a musical sting. One of the few effects you can hear as well as see."
+      },
+      "system": {
+        "slug": "musical",
+        "section": "Shop",
+        "sortOrder": 11,
+        "image": "/Murder Mystery 2/Effects/musical.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Flaming Knife",
+        "cost": "800 Diamonds",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchase in the Shop for 800 Diamonds",
+        "cardSummary": "Pink fire for the blade, the flashiest of the three colored flame recolors and the same Diamond price as the others."
+      },
+      "system": {
+        "slug": "pink-flaming-knife",
+        "section": "Shop",
+        "sortOrder": 12,
+        "image": "/Murder Mystery 2/Effects/pink-flaming-knife.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Radioactive",
+        "cost": "1,600 Coins",
+        "event": null,
+        "availability": "Available",
+        "obtainDetail": "Purchasing from the Shop for 1,600 Coins",
+        "cardSummary": "Coats the knife in green smoky particles and tints victims green, a budget Coins pick that still reads clearly in a dark map."
+      },
+      "system": {
+        "slug": "radioactive",
+        "section": "Shop",
+        "sortOrder": 13,
+        "image": "/Murder Mystery 2/Effects/radioactive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bats",
+        "cost": "1,299 Robux",
+        "event": "Halloween Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Halloween Item Pack (Offsale)",
+        "cardSummary": "A swarm of little bats circles the blade constantly. A Halloween pack effect that pairs naturally with the season's knives."
+      },
+      "system": {
+        "slug": "bats",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 14,
+        "image": "/Murder Mystery 2/Effects/bats.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bitsplosion",
+        "cost": null,
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Buying the 8-Bit Item Pack (Offsale)",
+        "cardSummary": "Confetti-like colored bits spray from the knife, and victims burst into rainbow pixels. One of the few effects whose icon shows no knife at all."
+      },
+      "system": {
+        "slug": "bitsplosion",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 15,
+        "image": "/Murder Mystery 2/Effects/bitsplosion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blizzard",
+        "cost": "1299 Robux",
+        "event": "Christmas Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Winter Item Pack (Offsale)",
+        "cardSummary": "Icicle particles spin around the blade. It came in the Winter Item Pack for 1299 Robux during the 2017 Christmas Event and left when the pack did."
+      },
+      "system": {
+        "slug": "blizzard",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 16,
+        "image": "/Murder Mystery 2/Effects/blizzard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Darkfire",
+        "cost": "1,299 Robux",
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Buying the Shadow Item Pack (Offsale)",
+        "cardSummary": "Engulfs the knife in black flame and burns victims with it. The Shadow Item Pack's signature effect and a longtime favorite for dark loadouts."
+      },
+      "system": {
+        "slug": "darkfire",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 17,
+        "image": "/Murder Mystery 2/Effects/darkfire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite-ify",
+        "cost": null,
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Buying the Elite Gamepass",
+        "cardSummary": "Dark elite skulls orbit the knife, and victims turn into black skeletons burning in red fire. One of the most aggressive death effects in the game."
+      },
+      "system": {
+        "slug": "elite-ify",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 18,
+        "image": "/Murder Mystery 2/Effects/elite-ify.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ethereal",
+        "cost": "1,700 Robux",
+        "event": "Halloween Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Ghostly Item Pack (Offsale)",
+        "cardSummary": "Light blue smoke drifts off the blade. It shipped in the Ghostly Item Pack for 1,700 Robux during the 2019 Halloween Event."
+      },
+      "system": {
+        "slug": "ethereal",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 19,
+        "image": "/Murder Mystery 2/Effects/ethereal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbite",
+        "cost": null,
+        "event": "Christmas Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Frostbite Item Pack (Offsale)",
+        "cardSummary": "An icy aura from the Frostbite Pack of the 2019 Christmas Event, gone since the pack was removed when the event closed."
+      },
+      "system": {
+        "slug": "frostbite",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 20,
+        "image": "/Murder Mystery 2/Effects/frostbite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gearstorm",
+        "cost": null,
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Buying the Clockwork Item Pack (Offsale)",
+        "cardSummary": "Gears spray from the knife and victims collapse into a pile of gears. The Clockwork Item Pack's effect, now offsale."
+      },
+      "system": {
+        "slug": "gearstorm",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 21,
+        "image": "/Murder Mystery 2/Effects/gearstorm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostly",
+        "cost": "3,399 Robux",
+        "event": "Halloween Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Ghost Bundle (Offsale)",
+        "cardSummary": "A teal and light green ghostly flare wraps the blade, spookier in motion than it sounds on paper."
+      },
+      "system": {
+        "slug": "ghostly",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 22,
+        "image": "/Murder Mystery 2/Effects/ghostly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Magic",
+        "cost": "3,399 Robux",
+        "event": "Christmas Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Ice Bundle (Offsale)",
+        "cardSummary": "A blue and purple icy shimmer with light pink flecks flowing around the blade. One of the more delicate winter looks."
+      },
+      "system": {
+        "slug": "ice-magic",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 23,
+        "image": "/Murder Mystery 2/Effects/ice-magic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Petals",
+        "cost": "3,399 Robux",
+        "event": "Valentines Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Sakura Bundle (Offsale)",
+        "cardSummary": "A pink haze of falling sakura petals surrounds the blade, the go-to pick for cherry-blossom loadouts."
+      },
+      "system": {
+        "slug": "petals",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 24,
+        "image": "/Murder Mystery 2/Effects/petals.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Plasma",
+        "cost": "3,399 Robux",
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Buying the Plasma Bundle (Offsale)",
+        "cardSummary": "Purple and blue plasma arcs spark across the blade under a white glow. One of the most electric-looking effects available."
+      },
+      "system": {
+        "slug": "plasma",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 25,
+        "image": "/Murder Mystery 2/Effects/plasma.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "cost": "3,399 Robux",
+        "event": "Easter Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Rainbow Bundle (Offsale)",
+        "cardSummary": "Radiant rainbow flames pour off the knife. The loudest of the flame effects and impossible to mistake for anything else."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 26,
+        "image": "/Murder Mystery 2/Effects/rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire",
+        "cost": "1,699 Robux",
+        "event": "Halloween Event",
+        "availability": "Retired",
+        "obtainDetail": "Buying the Vampire Item Pack (Offsale)",
+        "cardSummary": "A red smoky haze with blood particles seeps from the blade. It came in the Vampire Item Pack for 1,699 Robux during a Halloween event and left when the pack went offsale."
+      },
+      "system": {
+        "slug": "vampire",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 27,
+        "image": "/Murder Mystery 2/Effects/vampire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Darkswirl",
+        "cost": "3,399 Robux",
+        "event": "Halloween Event 2023",
+        "availability": "Retired",
+        "obtainDetail": "Halloween Event 2023 - Buying the Darkness Bundle",
+        "cardSummary": "A black aura coils around the blade and pours out of victims when they fall. The gloomiest of the pack effects."
+      },
+      "system": {
+        "slug": "darkswirl",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 28,
+        "image": "/Murder Mystery 2/Effects/darkswirl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flow",
+        "cost": "3,399 Robux",
+        "event": "Summer Event 2023",
+        "availability": "Retired",
+        "obtainDetail": "Summer Event 2023 - Buying the Ocean Bundle",
+        "cardSummary": "A flowing blue aura with pool-reflection light lines, and victims give off blue flames when downed. A clean look for water-themed knives."
+      },
+      "system": {
+        "slug": "flow",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 29,
+        "image": "/Murder Mystery 2/Effects/flow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aurora Lights",
+        "cost": "3,399 Robux",
+        "event": "Christmas Event 2024",
+        "availability": "Retired",
+        "obtainDetail": "Christmas Event 2024 - Buying the Australis & Borealis Bundle",
+        "cardSummary": "Blue and purple northern-light ribbons wrap the knife, and victims glow in the same aurora shades. A bundle effect built to match icy weapon skins."
+      },
+      "system": {
+        "slug": "aurora-lights",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 30,
+        "image": "/Murder Mystery 2/Effects/aurora-lights.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flowerwood",
+        "cost": "3,399 Robux",
+        "event": "Easter Event 2024",
+        "availability": "Retired",
+        "obtainDetail": "Easter Event 2024 - Buying the Flowerwood Bundle Trading",
+        "cardSummary": "Blue smoke and cyan particles tuned to the Flowerwood Bundle's palette. Made to complete that bundle's matching look."
+      },
+      "system": {
+        "slug": "flowerwood",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 31,
+        "image": "/Murder Mystery 2/Effects/flowerwood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glisten",
+        "cost": null,
+        "event": "Summer Event 2024",
+        "availability": "Retired",
+        "obtainDetail": "Summer Event 2024 - Purchasing the Pearls Bundle",
+        "cardSummary": "The blue and pink cousin of Sunbeams: the same beaming trail in cooler colors, with downed victims glowing in blue and pink sparkles."
+      },
+      "system": {
+        "slug": "glisten",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 32,
+        "image": "/Murder Mystery 2/Effects/glisten.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wraith",
+        "cost": "3,399 Robux",
+        "event": "Halloween Event 2024",
+        "availability": "Retired",
+        "obtainDetail": "Halloween Event 2024 - Buying the Spirit & Soul Bundle",
+        "cardSummary": "White and black smoke shrouds the weapon and trails behind you as you move, and victims vanish into thick white smoke."
+      },
+      "system": {
+        "slug": "wraith",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 33,
+        "image": "/Murder Mystery 2/Effects/wraith.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloom",
+        "cost": "3,399 Robux",
+        "event": "Easter Event 2025",
+        "availability": "Retired",
+        "obtainDetail": "Easter Event 2025 - Buying the Bloom Bundle",
+        "cardSummary": "A pastel pink aura with falling flowers and drifting petals that trail behind you as you move. One of the softest looks in the effect pool."
+      },
+      "system": {
+        "slug": "bloom",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 34,
+        "image": "/Murder Mystery 2/Effects/bloom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowstorm",
+        "cost": "3,399 Robux",
+        "event": "Christmas Event 2025",
+        "availability": "Retired",
+        "obtainDetail": "Christmas Event 2025 - Buying the Snowstorm Bundle",
+        "cardSummary": "A white and blue snowy aura with drifting flakes, and victims emit the same wintry swirl when downed."
+      },
+      "system": {
+        "slug": "snowstorm",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 35,
+        "image": "/Murder Mystery 2/Effects/snowstorm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Xeno",
+        "cost": "3,399 Robux",
+        "event": "Halloween Event 2025",
+        "availability": "Retired",
+        "obtainDetail": "Halloween Event 2025 - Buying the Xenotech Bundle",
+        "cardSummary": "A purple electrical aura crackles around the knife, and downed victims emit purple lightning. The alien-tech look."
+      },
+      "system": {
+        "slug": "xeno",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 36,
+        "image": "/Murder Mystery 2/Effects/xeno.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ocean",
+        "cost": "3,399 Robux",
+        "event": "Summer Event 2026",
+        "availability": "Retired",
+        "obtainDetail": "Summer Event 2026 - Buying the Beach Bundle",
+        "cardSummary": "Neon blue and cyan aura with sparkles and tiny starfish drifting around the knife. Came with the Summer Event 2026 Beach Bundle."
+      },
+      "system": {
+        "slug": "ocean",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 37,
+        "image": "/Murder Mystery 2/Effects/ocean.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pixie Dust",
+        "cost": "3,399 Robux",
+        "event": "Valentines Event 2026",
+        "availability": "Retired",
+        "obtainDetail": "Valentines Event 2026 - Buying the Sweet Bundle",
+        "cardSummary": "Pink and light yellow sparkles dust the knife, and victims shimmer with the same particles. Bought with the Valentines Event 2026 Sweet Bundle."
+      },
+      "system": {
+        "slug": "pixie-dust",
+        "section": "Gamepass and Bundle",
+        "sortOrder": 38,
+        "image": "/Murder Mystery 2/Effects/pixie-dust.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poison",
+        "cost": null,
+        "event": "Halloween Event 2019",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2019 - Tier Reward",
+        "cardSummary": "A dripping green haze seeps off the blade. A Halloween battle pass reward for players who like their knives toxic."
+      },
+      "system": {
+        "slug": "poison",
+        "section": "Event Battle Pass",
+        "sortOrder": 39,
+        "image": "/Murder Mystery 2/Effects/poison.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostfire",
+        "cost": null,
+        "event": "Christmas Event 2020",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2020 - Tier Reward",
+        "cardSummary": "Cold-burning flames from tier 17 of the 2020 Christmas Event battle pass, an early example of the icy fire look."
+      },
+      "system": {
+        "slug": "frostfire",
+        "section": "Event Battle Pass",
+        "sortOrder": 40,
+        "image": "/Murder Mystery 2/Effects/frostfire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghosts (2020)",
+        "cost": null,
+        "event": "Halloween Event 2020",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2020 - Tier Reward",
+        "cardSummary": "White smog and faint mini ghosts drift off the blade. The 2020 Halloween battle pass entry that started the yearly ghost effect series."
+      },
+      "system": {
+        "slug": "ghosts-2020",
+        "section": "Event Battle Pass",
+        "sortOrder": 41,
+        "image": "/Murder Mystery 2/Effects/ghosts-2020.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jingle",
+        "cost": null,
+        "event": "Christmas Event 2020",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2020 - Tier Reward",
+        "cardSummary": "A red and green aura with sparkles rings the blade. A Christmas battle pass reward."
+      },
+      "system": {
+        "slug": "jingle",
+        "section": "Event Battle Pass",
+        "sortOrder": 42,
+        "image": "/Murder Mystery 2/Effects/jingle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowfall",
+        "cost": null,
+        "event": "Christmas Event 2020",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2020 - Tier Reward",
+        "cardSummary": "Small snowflakes fall gently around the blade. The subtle option among the winter battle pass effects."
+      },
+      "system": {
+        "slug": "snowfall",
+        "section": "Event Battle Pass",
+        "sortOrder": 43,
+        "image": "/Murder Mystery 2/Effects/snowfall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aurora",
+        "cost": null,
+        "event": "Christmas Event 2021",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2021 - Tier Reward",
+        "cardSummary": "A pink and green aurora ripples around the knife. A Christmas battle pass reward for players who climbed the tiers."
+      },
+      "system": {
+        "slug": "aurora",
+        "section": "Event Battle Pass",
+        "sortOrder": 44,
+        "image": "/Murder Mystery 2/Effects/aurora.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom",
+        "cost": null,
+        "event": "Halloween Event 2021",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2021 - Tier Reward",
+        "cardSummary": "A smoky green ghoul haunts the knife. A Halloween battle pass reward with one of the most distinct silhouettes."
+      },
+      "system": {
+        "slug": "phantom",
+        "section": "Event Battle Pass",
+        "sortOrder": 45,
+        "image": "/Murder Mystery 2/Effects/phantom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflake",
+        "cost": null,
+        "event": "Christmas Event 2021",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2021 - Tier Reward",
+        "cardSummary": "The knife shimmers white while snowflakes drift down. A Christmas battle pass reward, softer than the token-shop snowflake effects."
+      },
+      "system": {
+        "slug": "snowflake",
+        "section": "Event Battle Pass",
+        "sortOrder": 46,
+        "image": "/Murder Mystery 2/Effects/snowflake.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starry",
+        "cost": null,
+        "event": "Christmas Event 2021",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2021 - Tiers Reward (Formerly)",
+        "cardSummary": "A yellow aura studded with stars wraps the knife. A battle pass reward that keeps things simple and bright."
+      },
+      "system": {
+        "slug": "starry",
+        "section": "Event Battle Pass",
+        "sortOrder": 47,
+        "image": "/Murder Mystery 2/Effects/starry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wraithfire",
+        "cost": null,
+        "event": "Halloween Event 2021",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2021 - Tier Reward",
+        "cardSummary": "A smoky purple aura coils around the blade. A Halloween battle pass reward darker than most of its year."
+      },
+      "system": {
+        "slug": "wraithfire",
+        "section": "Event Battle Pass",
+        "sortOrder": 48,
+        "image": "/Murder Mystery 2/Effects/wraithfire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arctic",
+        "cost": null,
+        "event": "Christmas Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2022 - Tier Reward (Formerly)",
+        "cardSummary": "Dark and light blue mist swirls around the blade like arctic wind. Tier 18 of the Christmas Event 2022 battle pass."
+      },
+      "system": {
+        "slug": "arctic",
+        "section": "Event Battle Pass",
+        "sortOrder": 49,
+        "image": "/Murder Mystery 2/Effects/arctic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candies (2022)",
+        "cost": null,
+        "event": "Halloween Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2022 - Tier Reward",
+        "cardSummary": "Candies fade in and out around the blade in a steady loop. The 2022 Halloween battle pass take on the candy effect."
+      },
+      "system": {
+        "slug": "candies-2022",
+        "section": "Event Battle Pass",
+        "sortOrder": 50,
+        "image": "/Murder Mystery 2/Effects/candies-2022.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chilly",
+        "cost": null,
+        "event": "Christmas Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2022 - Tier Reward (Formerly)",
+        "cardSummary": "Wispy white smoke curls off the blade like snow on the wind. A Christmas battle pass reward."
+      },
+      "system": {
+        "slug": "chilly",
+        "section": "Event Battle Pass",
+        "sortOrder": 51,
+        "image": "/Murder Mystery 2/Effects/chilly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Minty",
+        "cost": null,
+        "event": "Christmas Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2022 - Tier Reward (Formerly)",
+        "cardSummary": "A red and white aura like a candy cane dissolved around the blade. A Christmas battle pass reward."
+      },
+      "system": {
+        "slug": "minty",
+        "section": "Event Battle Pass",
+        "sortOrder": 52,
+        "image": "/Murder Mystery 2/Effects/minty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin (2022)",
+        "cost": null,
+        "event": "Halloween Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2022 - Tier Reward",
+        "cardSummary": "A glowing orange aura with flickering jack-o-lantern faces. The 2022 Halloween battle pass pumpkin."
+      },
+      "system": {
+        "slug": "pumpkin-2022",
+        "section": "Event Battle Pass",
+        "sortOrder": 53,
+        "image": "/Murder Mystery 2/Effects/pumpkin-2022.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stickers",
+        "cost": null,
+        "event": "Christmas Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2022 - Tier Reward (Formerly)",
+        "cardSummary": "Sticker versions of red and green baubles and peppermints ring the blade. A Christmas battle pass reward."
+      },
+      "system": {
+        "slug": "stickers",
+        "section": "Event Battle Pass",
+        "sortOrder": 54,
+        "image": "/Murder Mystery 2/Effects/stickers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toxic",
+        "cost": null,
+        "event": "Halloween Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2022 - Tier Reward",
+        "cardSummary": "A green aura with rising bubbles wraps the blade. A Halloween battle pass reward in classic hazard green."
+      },
+      "system": {
+        "slug": "toxic",
+        "section": "Event Battle Pass",
+        "sortOrder": 55,
+        "image": "/Murder Mystery 2/Effects/toxic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Versus",
+        "cost": null,
+        "event": "Halloween Event 2022",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2022 - Tier Reward (Formerly)",
+        "cardSummary": "Stickers of the Survivor and the Zombie King circle the knife, a souvenir of the event's two sides. A Halloween battle pass reward."
+      },
+      "system": {
+        "slug": "versus",
+        "section": "Event Battle Pass",
+        "sortOrder": 56,
+        "image": "/Murder Mystery 2/Effects/versus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candies (2023)",
+        "cost": null,
+        "event": "Halloween Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2023 - Tier Reward (Formerly)",
+        "cardSummary": "Differently colored candies orbit the knife on repeat. The 2023 Halloween battle pass version of the candy line."
+      },
+      "system": {
+        "slug": "candies-2023",
+        "section": "Event Battle Pass",
+        "sortOrder": 57,
+        "image": "/Murder Mystery 2/Effects/candies-2023.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fireworks",
+        "cost": null,
+        "event": "Christmas Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2023 - Tier Rewards (Formerly)",
+        "cardSummary": "Neon blue, red, green, and pink fireworks pop around the blade in varying shapes. A summer battle pass showstopper."
+      },
+      "system": {
+        "slug": "fireworks",
+        "section": "Event Battle Pass",
+        "sortOrder": 58,
+        "image": "/Murder Mystery 2/Effects/fireworks.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghosts (2023)",
+        "cost": null,
+        "event": "Halloween Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2023 - Tier Reward (Formerly)",
+        "cardSummary": "Small ghosts float out of the knife. The 2023 Halloween battle pass revision of the ghost line."
+      },
+      "system": {
+        "slug": "ghosts-2023",
+        "section": "Event Battle Pass",
+        "sortOrder": 59,
+        "image": "/Murder Mystery 2/Effects/ghosts-2023.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glowy",
+        "cost": null,
+        "event": "Halloween Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2023 - Tier Reward (Formerly)",
+        "cardSummary": "Three glowing pumpkins in cyan, magenta, and yellow orbit the knife, cycling through nine colors. A Halloween battle pass standout."
+      },
+      "system": {
+        "slug": "glowy",
+        "section": "Event Battle Pass",
+        "sortOrder": 60,
+        "image": "/Murder Mystery 2/Effects/glowy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stars",
+        "cost": null,
+        "event": "Christmas Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2023 - Tier Reward (Formerly)",
+        "cardSummary": "A faint yellow aura with neon star outlines around the blade. Sits next to Starry in the night-sky family with a sharper look."
+      },
+      "system": {
+        "slug": "stars",
+        "section": "Event Battle Pass",
+        "sortOrder": 61,
+        "image": "/Murder Mystery 2/Effects/stars.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Swirls",
+        "cost": null,
+        "event": "Christmas Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2023 - Tier Reward (Formerly)",
+        "cardSummary": "Red-white and green-white peppermint swirls circle the knife. A Christmas battle pass reward that doubles as a candy shop ad."
+      },
+      "system": {
+        "slug": "swirls",
+        "section": "Event Battle Pass",
+        "sortOrder": 62,
+        "image": "/Murder Mystery 2/Effects/swirls.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Traveler's Flame",
+        "cost": null,
+        "event": "Halloween Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2023 - Tier Reward (Formerly)",
+        "cardSummary": "A flowing orange flame aura, and downed victims burn with orange flames from the head. A Halloween battle pass reward with an oddly specific death effect."
+      },
+      "system": {
+        "slug": "traveler-s-flame",
+        "section": "Event Battle Pass",
+        "sortOrder": 63,
+        "image": "/Murder Mystery 2/Effects/traveler-s-flame.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial",
+        "cost": null,
+        "event": "Christmas Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2024 - Tier Reward Trading",
+        "cardSummary": "A deep blue cloud with floating yellow dots and stars drifts around the knife. A battle pass reward for the space-minded."
+      },
+      "system": {
+        "slug": "celestial",
+        "section": "Event Battle Pass",
+        "sortOrder": 64,
+        "image": "/Murder Mystery 2/Effects/celestial.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed",
+        "cost": null,
+        "event": "Halloween Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2024 - Tier Reward",
+        "cardSummary": "A fierce green flame-like aura built to match the Cursed Knife and Gun. A Halloween battle pass reward."
+      },
+      "system": {
+        "slug": "cursed",
+        "section": "Event Battle Pass",
+        "sortOrder": 65,
+        "image": "/Murder Mystery 2/Effects/cursed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flowers",
+        "cost": null,
+        "event": "Easter Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Easter Event 2024 - Tier Rewards (Formerly)",
+        "cardSummary": "A faint white aura with white daisies and petals. The quietest of the floral effects, from a spring battle pass."
+      },
+      "system": {
+        "slug": "flowers",
+        "section": "Event Battle Pass",
+        "sortOrder": 66,
+        "image": "/Murder Mystery 2/Effects/flowers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghosts (2024)",
+        "cost": null,
+        "event": "Halloween Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2024- Tier Reward",
+        "cardSummary": "Ghostly white smog with mini ghosts and no death effect. The 2024 entry in the yearly ghost series."
+      },
+      "system": {
+        "slug": "ghosts-2024",
+        "section": "Event Battle Pass",
+        "sortOrder": 67,
+        "image": "/Murder Mystery 2/Effects/ghosts-2024.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gifts",
+        "cost": null,
+        "event": "Christmas Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2024 - Tier Reward Trading",
+        "cardSummary": "Red and green presents tumble off the blade with no death effect. A Christmas battle pass reward."
+      },
+      "system": {
+        "slug": "gifts",
+        "section": "Event Battle Pass",
+        "sortOrder": 68,
+        "image": "/Murder Mystery 2/Effects/gifts.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowy",
+        "cost": null,
+        "event": "Christmas Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2024 - Tier Reward (Formerly)",
+        "cardSummary": "A white cloudy aura sheds snowflakes around the blade with no death effect. A Christmas battle pass reward."
+      },
+      "system": {
+        "slug": "snowy",
+        "section": "Event Battle Pass",
+        "sortOrder": 69,
+        "image": "/Murder Mystery 2/Effects/snowy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampiric",
+        "cost": null,
+        "event": "Halloween Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2024 - Battlepass Trading",
+        "cardSummary": "A red smoky aura gives the blade a gloomy blood-tinged look with no death effect. A Halloween battle pass reward."
+      },
+      "system": {
+        "slug": "vampiric",
+        "section": "Event Battle Pass",
+        "sortOrder": 70,
+        "image": "/Murder Mystery 2/Effects/vampiric.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abduction",
+        "cost": null,
+        "event": "Halloween Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2025 - Battlepass",
+        "cardSummary": "A pale green UFO glow wraps the blade, and victims rise inside green abduction rings. Tier 24 of the Halloween Event 2025 battle pass."
+      },
+      "system": {
+        "slug": "abduction",
+        "section": "Event Battle Pass",
+        "sortOrder": 71,
+        "image": "/Murder Mystery 2/Effects/abduction.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquatic",
+        "cost": null,
+        "event": "Summer Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2025 - Tier Reward",
+        "cardSummary": "A bright blue watery aura washes over the knife, with a matching splash on downed victims. A summer battle pass reward."
+      },
+      "system": {
+        "slug": "aquatic",
+        "section": "Event Battle Pass",
+        "sortOrder": 72,
+        "image": "/Murder Mystery 2/Effects/aquatic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat Eyes",
+        "cost": null,
+        "event": "Halloween Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2025 - Tier Reward",
+        "cardSummary": "Black fog with glowing yellow cat eyes surrounds the blade, no death effect needed to be unsettling. A Halloween battle pass reward."
+      },
+      "system": {
+        "slug": "cat-eyes",
+        "section": "Event Battle Pass",
+        "sortOrder": 73,
+        "image": "/Murder Mystery 2/Effects/cat-eyes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Confetti",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Battle Pass",
+        "cardSummary": "Pink and white streamers burst from the knife with no death effect. The most celebratory thing you can stab someone with."
+      },
+      "system": {
+        "slug": "confetti",
+        "section": "Event Battle Pass",
+        "sortOrder": 74,
+        "image": "/Murder Mystery 2/Effects/confetti.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flamingo",
+        "cost": null,
+        "event": "Summer Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2025 - Tier Reward",
+        "cardSummary": "Flamingos and pink feathers circle the knife with no death effect. The summer battle pass at its least serious."
+      },
+      "system": {
+        "slug": "flamingo",
+        "section": "Event Battle Pass",
+        "sortOrder": 75,
+        "image": "/Murder Mystery 2/Effects/flamingo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frost",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Battle Pass",
+        "cardSummary": "A gloomy cold sparkle wraps the blade, and a cold aura glows out of victims when they fall. An icy pick that stays readable in dark maps."
+      },
+      "system": {
+        "slug": "frost",
+        "section": "Event Battle Pass",
+        "sortOrder": 76,
+        "image": "/Murder Mystery 2/Effects/frost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heatwave",
+        "cost": null,
+        "event": "Summer Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2025 - Tier Reward",
+        "cardSummary": "A bold orange fiery aura that also washes victims in vibrant orange. A summer battle pass reward that lives up to its name."
+      },
+      "system": {
+        "slug": "heatwave",
+        "section": "Event Battle Pass",
+        "sortOrder": 77,
+        "image": "/Murder Mystery 2/Effects/heatwave.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Retro",
+        "cost": null,
+        "event": "Summer Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2025 - Tier Reward",
+        "cardSummary": "Funky neon shapes in green, red, yellow, and magenta bounce around the blade, and victims burst into the same shapes. A style statement from a summer battle pass."
+      },
+      "system": {
+        "slug": "retro",
+        "section": "Event Battle Pass",
+        "sortOrder": 78,
+        "image": "/Murder Mystery 2/Effects/retro.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowballs",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Battle Pass",
+        "cardSummary": "Sticker-style snowballs pop around the knife with no death effect. A playful Christmas battle pass reward."
+      },
+      "system": {
+        "slug": "snowballs",
+        "section": "Event Battle Pass",
+        "sortOrder": 79,
+        "image": "/Murder Mystery 2/Effects/snowballs.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Synthwave",
+        "cost": null,
+        "event": "Summer Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2025 - Tier Reward",
+        "cardSummary": "A neon aura of angular blue and purple shapes, with victims dissolving into a bluish-purple abstract glow. The retrowave pick of the battle pass effects."
+      },
+      "system": {
+        "slug": "synthwave",
+        "section": "Event Battle Pass",
+        "sortOrder": 80,
+        "image": "/Murder Mystery 2/Effects/synthwave.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Treats",
+        "cost": null,
+        "event": "Halloween Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2025 - Tier Reward",
+        "cardSummary": "Sticker-style candy wrappers, chocolate bars, gummy worms, and lollipops orbit the knife. A Halloween battle pass reward with no death effect."
+      },
+      "system": {
+        "slug": "treats",
+        "section": "Event Battle Pass",
+        "sortOrder": 81,
+        "image": "/Murder Mystery 2/Effects/treats.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFOs",
+        "cost": null,
+        "event": "Halloween Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2025 - Battlepass Trading",
+        "cardSummary": "Little UFOs spawn and buzz around the blade with no death effect. A Halloween battle pass reward."
+      },
+      "system": {
+        "slug": "ufos",
+        "section": "Event Battle Pass",
+        "sortOrder": 82,
+        "image": "/Murder Mystery 2/Effects/ufos.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bat Swarm",
+        "cost": null,
+        "event": "Vampire Hunt",
+        "availability": "Event reward",
+        "obtainDetail": "Vampire Hunt - Eliminating 25 Villagers",
+        "cardSummary": "Bats pour out of the blade in a steady stream. Earned in the Vampire Hunt minigame by eliminating 25 Villagers."
+      },
+      "system": {
+        "slug": "bat-swarm",
+        "section": "Event Prize and Quest",
+        "sortOrder": 83,
+        "image": "/Murder Mystery 2/Effects/bat-swarm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane",
+        "cost": null,
+        "event": "Christmas Event",
+        "availability": "Event reward",
+        "obtainDetail": "Purchasing it for 20 Snowflake Tokens during the 2017 Christmas Event (Formerly)",
+        "cardSummary": "Trails candy cane particles behind the blade. Bought with 20 Snowflake Tokens in the 2017 Christmas Event."
+      },
+      "system": {
+        "slug": "candy-cane",
+        "section": "Event Prize and Quest",
+        "sortOrder": 84,
+        "image": "/Murder Mystery 2/Effects/candy-cane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread",
+        "cost": null,
+        "event": "Christmas Event",
+        "availability": "Event reward",
+        "obtainDetail": "Purchasing it for 100 Snowflake Tokens during the 2017 Christmas Event (Formerly)",
+        "cardSummary": "Trails gingerbread men behind the knife. Cost 100 Snowflake Tokens in the 2017 Christmas Event, five times the price of Candy Cane."
+      },
+      "system": {
+        "slug": "gingerbread",
+        "section": "Event Prize and Quest",
+        "sortOrder": 85,
+        "image": "/Murder Mystery 2/Effects/gingerbread.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Knife Wrapper",
+        "cost": null,
+        "event": "Christmas Event",
+        "availability": "Event reward",
+        "obtainDetail": "Purchasing for 60 Snowflake Tokens during the 2017 Christmas Event (Formerly)",
+        "cardSummary": "Wraps the entire knife in green Christmas paper. The one effect that hides your skin instead of decorating it, which is its own kind of flex."
+      },
+      "system": {
+        "slug": "knife-wrapper",
+        "section": "Event Prize and Quest",
+        "sortOrder": 86,
+        "image": "/Murder Mystery 2/Effects/knife-wrapper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Northern Lights",
+        "cost": null,
+        "event": "Christmas Event",
+        "availability": "Event reward",
+        "obtainDetail": "Purchasing it for 2,000 Snowflake Tokens during the 2018 Christmas Event (Formerly)",
+        "cardSummary": "Blue, pink, and green aurora ribbons wrap the knife. An event reward that reads beautifully on dark maps."
+      },
+      "system": {
+        "slug": "northern-lights",
+        "section": "Event Prize and Quest",
+        "sortOrder": 87,
+        "image": "/Murder Mystery 2/Effects/northern-lights.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflakes",
+        "cost": null,
+        "event": "Christmas Event 2016",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2016 - Buying for 85 Blue Tokens (Formerly)",
+        "cardSummary": "Snowflake particles drift off the blade. Bought with 85 Blue Tokens at Santa's Workshop in the 2016 Christmas Event, making it one of the oldest event effects."
+      },
+      "system": {
+        "slug": "snowflakes",
+        "section": "Event Prize and Quest",
+        "sortOrder": 88,
+        "image": "/Murder Mystery 2/Effects/snowflakes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin (2017)",
+        "cost": null,
+        "event": "Halloween Event 2017",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2017 - Purchasing for 50 Coins (Formerly)",
+        "cardSummary": "Small pumpkins sprout on the blade. Sold for just 50 Coins in the Halloween Event 2017, one of the cheapest event effects ever."
+      },
+      "system": {
+        "slug": "pumpkin-2017",
+        "section": "Event Prize and Quest",
+        "sortOrder": 89,
+        "image": "/Murder Mystery 2/Effects/pumpkin-2017.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflakes 2017",
+        "cost": null,
+        "event": "Christmas Event 2017",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2017 - Buying for 10 Snowflake Tokens (Formerly)",
+        "cardSummary": "Trails of snowflake particles follow the knife. The 2017 rerun of the snowflake idea, distinct from the 2016 original."
+      },
+      "system": {
+        "slug": "snowflakes-2017",
+        "section": "Event Prize and Quest",
+        "sortOrder": 90,
+        "image": "/Murder Mystery 2/Effects/snowflakes-2017.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Common Ornament",
+        "cost": null,
+        "event": "Christmas Event 2018",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2018 - Purchasing for one Common Ornament (Formerly)",
+        "cardSummary": "The knife sheds white ornaments, the entry tier of the ornament trio handed out at Christmas."
+      },
+      "system": {
+        "slug": "common-ornament",
+        "section": "Event Prize and Quest",
+        "sortOrder": 91,
+        "image": "/Murder Mystery 2/Effects/common-ornament.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Ornament",
+        "cost": null,
+        "event": "Christmas Event 2018",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2018 - Purchasing for one Legendary Ornament (Formerly)",
+        "cardSummary": "The knife sheds red ornaments, the top tier of the Christmas ornament trio."
+      },
+      "system": {
+        "slug": "legendary-ornament",
+        "section": "Event Prize and Quest",
+        "sortOrder": 92,
+        "image": "/Murder Mystery 2/Effects/legendary-ornament.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Ornament",
+        "cost": null,
+        "event": "Christmas Event 2018",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2018 - Purchasing for one Rare Ornament (Formerly)",
+        "cardSummary": "The knife sheds green ornaments, the middle tier of the Christmas ornament trio."
+      },
+      "system": {
+        "slug": "rare-ornament",
+        "section": "Event Prize and Quest",
+        "sortOrder": 93,
+        "image": "/Murder Mystery 2/Effects/rare-ornament.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uncommon Ornament",
+        "cost": null,
+        "event": "Christmas Event 2018",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2018 - Purchasing for one Uncommon Ornament (Formerly)",
+        "cardSummary": "The knife sheds blue ornaments, the second step of the Christmas ornament trio."
+      },
+      "system": {
+        "slug": "uncommon-ornament",
+        "section": "Event Prize and Quest",
+        "sortOrder": 94,
+        "image": "/Murder Mystery 2/Effects/uncommon-ornament.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candies (2019)",
+        "cost": null,
+        "event": "Halloween Event 2019",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2019",
+        "cardSummary": "Candy particles spill from the knife. An early Halloween battle pass treat from 2019 that started the candy-effect tradition."
+      },
+      "system": {
+        "slug": "candies-2019",
+        "section": "Event Prize and Quest",
+        "sortOrder": 95,
+        "image": "/Murder Mystery 2/Effects/candies-2019.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Batswarm",
+        "cost": null,
+        "event": "Halloween Event 2020",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2020 - Scary Mode",
+        "cardSummary": "A swarm of bats circles the knife. An event reward that predates the similar Vampire Hunt effect, so the two often get mixed up."
+      },
+      "system": {
+        "slug": "batswarm",
+        "section": "Event Prize and Quest",
+        "sortOrder": 96,
+        "image": "/Murder Mystery 2/Effects/batswarm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hallow's Blaze",
+        "cost": null,
+        "event": "Halloween Event 2020",
+        "availability": "Event reward",
+        "obtainDetail": "Halloween Event 2020 - Scary Mode",
+        "cardSummary": "An orange misty haze smolders off the blade, tuned to jack-o-lantern orange for its Halloween event."
+      },
+      "system": {
+        "slug": "hallow-s-blaze",
+        "section": "Event Prize and Quest",
+        "sortOrder": 97,
+        "image": "/Murder Mystery 2/Effects/hallow-s-blaze.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Glow",
+        "cost": null,
+        "event": "Easter Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Easter Event 2023 - Collecting 4,000 Eggs",
+        "cardSummary": "A soft glow earned by collecting 4,000 Eggs in the 2023 Easter Event, the grind reward of that spring."
+      },
+      "system": {
+        "slug": "easter-glow",
+        "section": "Event Prize and Quest",
+        "sortOrder": 98,
+        "image": "/Murder Mystery 2/Effects/easter-glow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Floral",
+        "cost": null,
+        "event": "Summer Event 2023",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2023 - Collecting 10,700 Beach Balls",
+        "cardSummary": "Neon pink and cyan hibiscus flowers bloom around the blade. A summer event reward with the brightest floral palette in the pool."
+      },
+      "system": {
+        "slug": "floral",
+        "section": "Event Prize and Quest",
+        "sortOrder": 99,
+        "image": "/Murder Mystery 2/Effects/floral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jellyfish",
+        "cost": null,
+        "event": "Summer Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2024 - Collect 3,400 Beach Balls",
+        "cardSummary": "Jellyfish in purple, green, yellow, red, and blue drift lazily around the knife. A summer event reward and one of the most animated effects."
+      },
+      "system": {
+        "slug": "jellyfish",
+        "section": "Event Prize and Quest",
+        "sortOrder": 100,
+        "image": "/Murder Mystery 2/Effects/jellyfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Matrix",
+        "cost": null,
+        "event": "Easter Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Easter Event 2024 - Collecting 10 Rare Eggs (Formerly)",
+        "cardSummary": "A green spiky aura with lime rectangles raining like code. The closest MM2 gets to hacker aesthetics."
+      },
+      "system": {
+        "slug": "matrix",
+        "section": "Event Prize and Quest",
+        "sortOrder": 101,
+        "image": "/Murder Mystery 2/Effects/matrix.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunbeams",
+        "cost": null,
+        "event": "Summer Event 2024",
+        "availability": "Event reward",
+        "obtainDetail": "Collect 1200 Beach Balls - Summer Event 2024",
+        "cardSummary": "An intense golden light beams off the knife like caught sunlight. The warm original that Glisten later recolored."
+      },
+      "system": {
+        "slug": "sunbeams",
+        "section": "Event Prize and Quest",
+        "sortOrder": 102,
+        "image": "/Murder Mystery 2/Effects/sunbeams.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrots",
+        "cost": null,
+        "event": "Easter Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Easter Event 2025 - Collecting 3,000 eggs",
+        "cardSummary": "Little cartoon carrots hop off the weapon with no death effect. An Easter event reward that commits fully to the theme."
+      },
+      "system": {
+        "slug": "carrots",
+        "section": "Event Prize and Quest",
+        "sortOrder": 103,
+        "image": "/Murder Mystery 2/Effects/carrots.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Glow",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Completing 45 Daily Quests",
+        "cardSummary": "A red and green aura with matching particles, basically mistletoe for your knife. A Christmas event reward."
+      },
+      "system": {
+        "slug": "christmas-glow",
+        "section": "Event Prize and Quest",
+        "sortOrder": 104,
+        "image": "/Murder Mystery 2/Effects/christmas-glow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leaves",
+        "cost": "4,000 Coins",
+        "event": "Thanksgiving Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Thanksgiving Event 2025 - Purchasing for 4,000 Coins, or 400 Diamonds",
+        "cardSummary": "Yellow-orange maple leaves drift off the blade. Sold for 4,000 Coins or 400 Diamonds during the 2025 Thanksgiving event."
+      },
+      "system": {
+        "slug": "leaves",
+        "section": "Event Prize and Quest",
+        "sortOrder": 105,
+        "image": "/Murder Mystery 2/Effects/leaves.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbows (2025)",
+        "cost": null,
+        "event": "Easter Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Easter Event 2025 - Collecting 10 Rare Eggs",
+        "cardSummary": "Small rainbows arc around the blade with no death effect. Earned by collecting 10 Rare Eggs for the final Rare Egg reward tier in the Easter Event 2025."
+      },
+      "system": {
+        "slug": "rainbows-2025",
+        "section": "Event Prize and Quest",
+        "sortOrder": 106,
+        "image": "/Murder Mystery 2/Effects/rainbows-2025.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bubbly",
+        "cost": null,
+        "event": "Summer Event 2026",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2026 - Unboxing 6 Summer Box '26",
+        "cardSummary": "Bubbles of all sizes fizz around the blade. Unboxed from 6 Summer Boxes during the Summer Event 2026."
+      },
+      "system": {
+        "slug": "bubbly",
+        "section": "Event Prize and Quest",
+        "sortOrder": 107,
+        "image": "/Murder Mystery 2/Effects/bubbly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hearts",
+        "cost": null,
+        "event": "Valentines Event 2026",
+        "availability": "Event reward",
+        "obtainDetail": "Valentines Event 2026 - Completing 12 event quests",
+        "cardSummary": "A pink aura full of floating hearts. Earned by completing 12 event quests in the Valentines Event 2026."
+      },
+      "system": {
+        "slug": "hearts",
+        "section": "Event Prize and Quest",
+        "sortOrder": 108,
+        "image": "/Murder Mystery 2/Effects/hearts.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightlife",
+        "cost": null,
+        "event": "Summer Event 2026",
+        "availability": "Event reward",
+        "obtainDetail": "Summer Event 2026 - Unboxing 20 Summer Box '26",
+        "cardSummary": "Blue-to-magenta night-sky shades with stars and sparks around the blade. Unboxed from 20 Summer Boxes in the Summer Event 2026."
+      },
+      "system": {
+        "slug": "nightlife",
+        "section": "Event Prize and Quest",
+        "sortOrder": 109,
+        "image": "/Murder Mystery 2/Effects/nightlife.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberries",
+        "cost": null,
+        "event": "Valentines Event 2026",
+        "availability": "Event reward",
+        "obtainDetail": "Valentines Event 2026 - Completing 3 event quests",
+        "cardSummary": "Strawberry particles bounce off the blade with no death effect. Earned from 3 event quests in the Valentines Event 2026."
+      },
+      "system": {
+        "slug": "strawberries",
+        "section": "Event Prize and Quest",
+        "sortOrder": 110,
+        "image": "/Murder Mystery 2/Effects/strawberries.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bokeh",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Crafting",
+        "cardSummary": "Surrounds the blade with soft yellow translucent circles, like out-of-focus lights in a photo. Crafted in the Christmas Event 2025 crafting tab."
+      },
+      "system": {
+        "slug": "bokeh",
+        "section": "Crafting",
+        "sortOrder": 111,
+        "image": "/Murder Mystery 2/Effects/bokeh.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Crafting",
+        "cardSummary": "Chunks of coal tumble around the knife with no death effect. The naughty-list craft from the Christmas Event 2025 crafting tab."
+      },
+      "system": {
+        "slug": "coal",
+        "section": "Crafting",
+        "sortOrder": 112,
+        "image": "/Murder Mystery 2/Effects/coal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lights",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Crafting",
+        "cardSummary": "Strings multicolored Christmas lights around the blade. A cheerful Christmas Event 2025 craft with no death effect."
+      },
+      "system": {
+        "slug": "lights",
+        "section": "Crafting",
+        "sortOrder": 113,
+        "image": "/Murder Mystery 2/Effects/lights.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightsky",
+        "cost": null,
+        "event": "Christmas Event 2025",
+        "availability": "Event reward",
+        "obtainDetail": "Christmas Event 2025 - Crafting",
+        "cardSummary": "A dark purple aura speckled with stars turns the knife into a slice of night. The prettiest of the Christmas Event 2025 crafts."
+      },
+      "system": {
+        "slug": "nightsky",
+        "section": "Crafting",
+        "sortOrder": 114,
+        "image": "/Murder Mystery 2/Effects/nightsky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Fire",
+        "cost": "5000 Coins",
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Purchase anything from MM2's official shop during the promotion. (Formerly)Purchase it for 5000 Coins for a limited time (Formerly)",
+        "cardSummary": "Burns the knife in shifting rainbow flames. It came from buying real-world MM2 merchandise, so supply stopped when the promotion did."
+      },
+      "system": {
+        "slug": "rainbow-fire",
+        "section": "Promo and Merch",
+        "sortOrder": 115,
+        "image": "/Murder Mystery 2/Effects/rainbow-fire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void",
+        "cost": null,
+        "event": null,
+        "availability": "Retired",
+        "obtainDetail": "Collecting the rewards in Murder Mystery 2 after redeeming Roblox’s Murder Mystery Crown hat through Amazon Prime Gaming (Expired)",
+        "cardSummary": "A dark purple void aura earned by redeeming the Murder Mystery Crown from Amazon Prime Gaming. The promo expired, making this one of the scarcer effects."
+      },
+      "system": {
+        "slug": "void",
+        "section": "Promo and Merch",
+        "sortOrder": 116,
+        "image": "/Murder Mystery 2/Effects/void.png"
+      }
+    }
+  ]
+}

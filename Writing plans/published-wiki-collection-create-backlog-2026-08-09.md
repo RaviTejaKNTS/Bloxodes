@@ -48,6 +48,53 @@ This file is the implementation handoff and source of truth for continuation. Ea
 - Untitled Boxing Game — reconcile the stated 45 Maps against the subset currently displayed by the source.
 - Violence District — verify the exact live Maps rotation before locking the dataset.
 
+## Traffic tiers (2026-08-19)
+
+Ranked on August 19, 2026 from production `roblox_universes.playing` plus 7-day `roblox_universe_stats_hourly` averages where available. Purpose: focus the remaining backlog on games that can actually bring traffic. Work order is Tier A top to bottom, then Tier B, then optionally Tier C. Tier D stays in the backlog untouched unless a game trends up later. Re-check player counts before starting a new tier; games move between tiers over time.
+
+### Tier A — 100k+ players (7 games, 43 collections)
+
+| Game | ~Players | Collections |
+| --- | --- | --- |
+| Murder Mystery 2 | 880k avg | 8 |
+| Steal a Brainrot | 224k | 2 |
+| RIVALS | 208k avg | 4 |
+| Grow a Garden 2 | 150k | 6 |
+| Jujutsu Shenanigans | 148k avg | 1 |
+| Pet Simulator 99 | 143k avg | 15 |
+| Fish It | 122k | 7 |
+
+### Tier B — 40k to 100k players (11 games, 52 collections)
+
+| Game | ~Players | Collections |
+| --- | --- | --- |
+| Dress to Impress | 78k avg | 6 |
+| Fisch | 71k avg | 10 |
+| The Strongest Battlegrounds | 65k avg | 2 |
+| Violence District | 63k | 3 |
+| LifeTogether RP | 52k avg | 1 |
+| Forsaken | 51k | 4 |
+| Evade | 48k avg | 8 |
+| Driving Empire | 42k avg | 7 |
+| Fling Things and People | 41k avg | 1 |
+| Kick a Lucky Block | 40k | 2 |
+| Creatures of Sonaria | 38k avg | 8 |
+
+### Tier C — 20k to 40k players (4 games, 17 collections)
+
+| Game | ~Players | Collections |
+| --- | --- | --- |
+| Storage Hunters: Open World | 32k | 6 |
+| Grow a Garden | 29k | 3 |
+| Gakuran | 24k | 4 |
+| Merge a Nuke | 20k | 4 |
+
+### Tier D — below 20k players (19 games, deprioritized)
+
+Home Alone (17k), Survive Zombie Arena (15k), Restaurant Tycoon 3 (13k), Catch and Tame (13k), Untitled Boxing Game (13k), Sell Lemons (13k), Evomon (11k), Demonology (9k), Build a Base and Steal (7.5k), Clean the Library (4k), Catch a Brainrot (3k), Drain the Lake (3k), Sailor Piece (2k), Build a Ring Farm (1.6k), The Forge (1.5k), Slime RNG (1.1k), Paint and Seek (350), Wizard Alchemy (300), Practical Basketball (0, likely dead universe).
+
+Berry Avenue RP stays research-blocked regardless of tier.
+
 ## Create backlog
 
 ### +1 Speed Keyboard Escape
@@ -383,14 +430,14 @@ Evidence: [full report](../tmp/game-collection-suggestions/merge-a-nuke.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/murder-mystery-2.md)
 
-- [ ] Maps
-- [ ] Effects
-- [ ] Emotes
-- [ ] Radios
-- [ ] Boxes
-- [ ] Crafting Recipes
-- [ ] Weapon Sets
-- [ ] Game Modes
+- [x] Maps
+- [x] Effects
+- [x] Emotes
+- [x] Radios
+- [x] Boxes
+- [x] Crafting Recipes
+- [x] Weapon Sets
+- [x] Game Modes
 
 ### Paint and Seek
 
