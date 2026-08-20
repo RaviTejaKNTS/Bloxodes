@@ -249,14 +249,14 @@ Evidence: [full report](../tmp/game-collection-suggestions/clean-the-library.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/creatures-of-sonaria.md)
 
-- [ ] Gachas
-- [ ] Game Currencies
-- [ ] Shrines
-- [ ] NPCs
-- [ ] Den Buildables
-- [ ] Nest Resources
-- [ ] Death Rewards
-- [ ] Realms
+- [x] Gachas
+- [x] Game Currencies
+- [x] Shrines
+- [ ] NPCs — blocked 2026-08-20: no NPC roster page on the official wiki
+- [x] Den Buildables
+- [ ] Nest Resources — blocked 2026-08-20: nesting is a mechanics page, no resource roster exists
+- [ ] Death Rewards — blocked 2026-08-20: no death rewards roster in any source
+- [ ] Realms — blocked 2026-08-20: Realms redirects to locations; already covered by the prod biomes collection's realm fields
 
 ### Demonology
 

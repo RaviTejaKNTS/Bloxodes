@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Creatures of Sonaria",
+    "gameSlug": "creatures-of-sonaria",
+    "collection": "shrines",
+    "route": "/wiki/creatures-of-sonaria/shrines",
+    "catalogCode": "creatures-of-sonaria-shrines",
+    "itemFields": [
+      "about"
+    ],
+    "columns": [
+      "about"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Warden Shrines",
+        "Other Shrines",
+        "Shrine Boosts"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "about",
+      "cardDescriptionField": "about",
+      "cardFields": [
+        "about"
+      ],
+      "tableFields": [
+        "about"
+      ],
+      "fieldPresentation": {
+        "about": {
+          "kind": "detail",
+          "label": "About",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Angelic Warden's Shrine",
+        "about": "The Angelic Warden's shrine is found hidden [https://creatures-of-sonaria-official.fandom.com/wiki/Map:RecodeMainMap?marker=88 behind a false wall] within the Jungle. It costs 150 food units to complete a donation."
+      },
+      "system": {
+        "slug": "angelic-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 1,
+        "image": "/Creatures of Sonaria/Shrines/angelic-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ardor Warden's Shrine",
+        "about": "The Ardor Warden's shrine is found at [https://creatures-of-sonaria-official.fandom.com/wiki/Map:RecodeMainMap?marker=122 the back] of Swamp Hill. It costs 2,500 food units to complete a donation."
+      },
+      "system": {
+        "slug": "ardor-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 2,
+        "image": "/Creatures of Sonaria/Shrines/ardor-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boreal Warden's Shrine",
+        "about": "The Boreal Warden's shrine is found [https://creatures-of-sonaria-official.fandom.com/wiki/Map:RecodeMainMap?marker=639 inside of a cave system] within the Mountains. It costs 750 food units to complete a donation."
+      },
+      "system": {
+        "slug": "boreal-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 3,
+        "image": "/Creatures of Sonaria/Shrines/boreal-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eigion Warden's Shrine",
+        "about": "The Eigion Warden's shrine is found hidden beneath a false floor deep underwater within the Rocky Drop. Three more Eigion Warden Shrines can be found in the Aquatic Realm. It costs 1,000 food units to complete a donation."
+      },
+      "system": {
+        "slug": "eigion-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 4,
+        "image": "/Creatures of Sonaria/Shrines/eigion-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Garra Warden's Shrine",
+        "about": "The Garra Warden's shrine is found inside the [https://creatures-of-sonaria-official.fandom.com/wiki/Map:RecodeMainMap?marker=98 Volcano] chamber on Volcano Island. It costs 250 food units to complete a donation."
+      },
+      "system": {
+        "slug": "garra-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 5,
+        "image": "/Creatures of Sonaria/Shrines/garra-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hellion Warden's Shrine",
+        "about": "The Hellion Warden's shrine is found hidden [https://creatures-of-sonaria-official.fandom.com/wiki/Map:RecodeMainMap?marker=158 behind narrow tunnels] in between the Desert and Mesa. It costs 50 food units to complete a donation, being the cheapest shrine to donate to."
+      },
+      "system": {
+        "slug": "hellion-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 6,
+        "image": "/Creatures of Sonaria/Shrines/hellion-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Novus Warden's Shrine",
+        "about": "The Novus Warden's shrine is found at the very top of the [https://creatures-of-sonaria-official.fandom.com/wiki/Map:RecodeMainMap?marker=95 floating islands] above the Rocky Drop and Coral Reef. It costs 1,500 food units to complete a donation."
+      },
+      "system": {
+        "slug": "novus-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 7,
+        "image": "/Creatures of Sonaria/Shrines/novus-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Verdant Warden's Shrine",
+        "about": "The Verdant Warden's shrine is found near the [https://creatures-of-sonaria-official.fandom.com/wiki/Map:RecodeMainMap?marker=6 watering hole] in Flower Cove at southeastern side. It costs 500 food units to complete a donation."
+      },
+      "system": {
+        "slug": "verdant-warden-s-shrine",
+        "section": "Warden Shrines",
+        "sortOrder": 8,
+        "image": "/Creatures of Sonaria/Shrines/verdant-warden-s-shrine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Isle's Shrines",
+        "about": "The Shadow Isle's main Shrine is found at the center of the Shadow Isle at upper plateau. It costs 2500 food units to complete a donation. Its plaque says \"QHUALHUL\". Other types are instances of the same entity and share your progress anywhere. Any aquatics have their version accessible too in the rocky depths. Depend"
+      },
+      "system": {
+        "slug": "shadow-isle-s-shrines",
+        "section": "Other Shrines",
+        "sortOrder": 9,
+        "image": "/Creatures of Sonaria/Shrines/shadow-isle-s-shrines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Growth Boost",
+        "about": "The Growth Boost accelerates a creature's growth by 15%. This boost can also be acquired from a variety of different places, such as the Mythic season, the Warden's Nebula weather effect, and the Aerix plushie. These other ways of acquiring the growth boost may not provide the same acceleration rate as the one received"
+      },
+      "system": {
+        "slug": "growth-boost",
+        "section": "Shrine Boosts",
+        "sortOrder": 10,
+        "image": "/Creatures of Sonaria/Shrines/growth-boost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mutation Chance Boost",
+        "about": "The Mutation Chance Boost increases the chance of a mutation to appear when its specific parameters are met (i.e. When reaching age 67, there is a higher chance to receive a growth-related mutation). This boost applies to both nesting-related and growth-related mutations."
+      },
+      "system": {
+        "slug": "mutation-chance-boost",
+        "section": "Shrine Boosts",
+        "sortOrder": 11,
+        "image": "/Creatures of Sonaria/Shrines/mutation-chance-boost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Survival Boost",
+        "about": "The Survival Boost decreases both thirst and hunger drain by 20% each. This boost can also be acquired from death rewards."
+      },
+      "system": {
+        "slug": "survival-boost",
+        "section": "Shrine Boosts",
+        "sortOrder": 12,
+        "image": "/Creatures of Sonaria/Shrines/survival-boost.png"
+      }
+    }
+  ]
+}

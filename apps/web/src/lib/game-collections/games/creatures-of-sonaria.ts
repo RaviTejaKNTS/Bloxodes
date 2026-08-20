@@ -24,6 +24,10 @@ export const creaturesOfSonariaCollectionGroup = {
     "food-sources",
     "biomes",
     "environment",
-    "titles"
-  ]
+    "titles",
+      "game-currencies",
+      "shrines",
+      "gachas",
+      "den-buildables"
+    ]
 } satisfies GameCollectionGroup;
