@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "currencies",
+    "route": "/wiki/rivals/currencies",
+    "catalogCode": "rivals-currencies",
+    "itemFields": [
+      "currencyType",
+      "availability",
+      "usedFor",
+      "cardSummary"
+    ],
+    "columns": [
+      "currencyType",
+      "availability",
+      "usedFor",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Permanent Currencies",
+        "Event Currencies"
+      ],
+      "badgeField": "currencyType",
+      "subtitleFields": [],
+      "descriptionField": "usedFor",
+      "cardDescriptionField": "usedFor",
+      "cardFields": [
+        "currencyType",
+        "availability"
+      ],
+      "tableFields": [
+        "currencyType",
+        "availability",
+        "usedFor"
+      ],
+      "fieldPresentation": {
+        "currencyType": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "usedFor": {
+          "kind": "detail",
+          "label": "Used for"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Keys",
+        "currencyType": "Main currency",
+        "availability": "Permanent",
+        "usedFor": "Weapons, shop items, wrap boxes, capsules, packs, daily shop refreshes, winstreak recovery",
+        "cardSummary": "The everything-currency, earned from contracts, tasks, codes, and bundles. Most of your Keys should go to weapon unlocks first, since cosmetics come and go but the arsenal is forever."
+      },
+      "system": {
+        "slug": "keys",
+        "section": "Permanent Currencies",
+        "sortOrder": 1,
+        "image": "/RIVALS/Currencies/keys.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skin Tickets",
+        "currencyType": "Shop currency",
+        "availability": "Permanent",
+        "usedFor": "Skin Cases and certain daily shop skins",
+        "cardSummary": "The free route to weapon skins, earned mainly through the Season Pass. They let you open Skin Cases without touching Robux."
+      },
+      "system": {
+        "slug": "skin-tickets",
+        "section": "Permanent Currencies",
+        "sortOrder": 2,
+        "image": "/RIVALS/Currencies/skin-tickets.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glory",
+        "currencyType": "Ranked currency",
+        "availability": "Ranked seasons",
+        "usedFor": "Ranked Shop cosmetics and weapon reward tracks",
+        "cardSummary": "The competitive payout: earned from ranked season results based on ELO and wins, and spent on Glorious wraps, finishers, and skins that advertise your ladder record."
+      },
+      "system": {
+        "slug": "glory",
+        "section": "Permanent Currencies",
+        "sortOrder": 3,
+        "image": "/RIVALS/Currencies/glory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jump Shard",
+        "currencyType": "Collectible",
+        "availability": "Permanent",
+        "usedFor": "Unlocking the Jump Pad",
+        "cardSummary": "A one-purpose collectible: gather enough and the Jump Pad utility is yours."
+      },
+      "system": {
+        "slug": "jump-shard",
+        "section": "Permanent Currencies",
+        "sortOrder": 4,
+        "image": "/RIVALS/Currencies/jump-shard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy",
+        "currencyType": "Event currency",
+        "availability": "Spooky events",
+        "usedFor": "Haunted Chest and spooky event shop items",
+        "cardSummary": "The Halloween event currency. Earn it during spooky events and spend it before the event closes, because it retires with the season."
+      },
+      "system": {
+        "slug": "candy",
+        "section": "Event Currencies",
+        "sortOrder": 5,
+        "image": "/RIVALS/Currencies/candy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystals",
+        "currencyType": "Event currency",
+        "availability": "Festive events",
+        "usedFor": "Jolly Chest, Festive Wrap Boxes, and festive shop items",
+        "cardSummary": "The winter event currency, feeding the Jolly Chest and Festive Wrap Boxes during festive seasons."
+      },
+      "system": {
+        "slug": "crystals",
+        "section": "Event Currencies",
+        "sortOrder": 6,
+        "image": "/RIVALS/Currencies/crystals.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pearls",
+        "currencyType": "Event currency",
+        "availability": "Summer events",
+        "usedFor": "Tropical Chest and summer event shop items",
+        "cardSummary": "The summer event currency, spent on the Tropical Chest and beach-themed shop stock."
+      },
+      "system": {
+        "slug": "pearls",
+        "section": "Event Currencies",
+        "sortOrder": 7,
+        "image": "/RIVALS/Currencies/pearls.png"
+      }
+    }
+  ]
+}

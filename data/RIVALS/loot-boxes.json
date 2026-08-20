@@ -1,0 +1,336 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "loot-boxes",
+    "route": "/wiki/rivals/loot-boxes",
+    "catalogCode": "rivals-loot-boxes",
+    "itemFields": [
+      "contents",
+      "cost",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "contents",
+      "cost",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Family",
+      "sectionOrder": [
+        "Wrap Boxes",
+        "Skin Cases",
+        "Charm and Finisher Packs",
+        "Event Chests",
+        "Other Crates"
+      ],
+      "badgeField": "contents",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "contents",
+        "cost",
+        "availability"
+      ],
+      "tableFields": [
+        "contents",
+        "cost",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "contents": {
+          "kind": "chip",
+          "label": "Drops"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Wrap Box",
+        "contents": "Wraps",
+        "cost": "5 Keys",
+        "availability": "Permanent",
+        "cardSummary": "The original wrap gacha: five Keys per roll from the first wrap pool. Cheap enough to burn spare Keys on."
+      },
+      "system": {
+        "slug": "wrap-box",
+        "section": "Wrap Boxes",
+        "sortOrder": 1,
+        "image": "/RIVALS/Loot Boxes/wrap-box.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wrap Box 2",
+        "contents": "Wraps",
+        "cost": "5 Keys",
+        "availability": "Permanent",
+        "cardSummary": "The second wrap pool at the same five-Key price, added as the wrap catalog grew."
+      },
+      "system": {
+        "slug": "wrap-box-2",
+        "section": "Wrap Boxes",
+        "sortOrder": 2,
+        "image": "/RIVALS/Loot Boxes/wrap-box-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wrap Box 3",
+        "contents": "Wraps",
+        "cost": "5 Keys",
+        "availability": "Permanent",
+        "cardSummary": "The third wrap pool, keeping the five-Key formula with newer designs."
+      },
+      "system": {
+        "slug": "wrap-box-3",
+        "section": "Wrap Boxes",
+        "sortOrder": 3,
+        "image": "/RIVALS/Loot Boxes/wrap-box-3.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Wrap Box",
+        "contents": "Wraps",
+        "cost": "10 Crystals",
+        "availability": "Festive events",
+        "cardSummary": "A winter-event wrap box paid in Crystals instead of Keys, stocked with festive designs."
+      },
+      "system": {
+        "slug": "festive-wrap-box",
+        "section": "Wrap Boxes",
+        "sortOrder": 4,
+        "image": "/RIVALS/Loot Boxes/festive-wrap-box.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Wrap Box 2",
+        "contents": "Wraps",
+        "cost": "30 Crystals",
+        "availability": "Festive events",
+        "cardSummary": "The pricier second festive pool, three times the Crystal cost of the first."
+      },
+      "system": {
+        "slug": "festive-wrap-box-2",
+        "section": "Wrap Boxes",
+        "sortOrder": 5,
+        "image": "/RIVALS/Loot Boxes/festive-wrap-box-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Charm Capsule",
+        "contents": "Charms",
+        "cost": "3 Keys",
+        "availability": "Permanent",
+        "cardSummary": "The cheapest container in the game: three Keys for a random charm."
+      },
+      "system": {
+        "slug": "charm-capsule",
+        "section": "Charm and Finisher Packs",
+        "sortOrder": 6,
+        "image": "/RIVALS/Loot Boxes/charm-capsule.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Finisher Pack",
+        "contents": "Finishers",
+        "cost": "10 Keys",
+        "availability": "Permanent",
+        "cardSummary": "Ten Keys for a random finisher from the first pool."
+      },
+      "system": {
+        "slug": "finisher-pack",
+        "section": "Charm and Finisher Packs",
+        "sortOrder": 7,
+        "image": "/RIVALS/Loot Boxes/finisher-pack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Finisher Pack 2",
+        "contents": "Finishers",
+        "cost": "10 Keys",
+        "availability": "Permanent",
+        "cardSummary": "The second finisher pool at the same ten-Key price."
+      },
+      "system": {
+        "slug": "finisher-pack-2",
+        "section": "Charm and Finisher Packs",
+        "sortOrder": 8,
+        "image": "/RIVALS/Loot Boxes/finisher-pack-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skin Case",
+        "contents": "Weapon skins",
+        "cost": "249 Robux or Skin Tickets",
+        "availability": "Permanent",
+        "cardSummary": "The original weapon skin case. Robux buys it directly, but Skin Tickets from the Season Pass open the same case for free."
+      },
+      "system": {
+        "slug": "skin-case",
+        "section": "Skin Cases",
+        "sortOrder": 9,
+        "image": "/RIVALS/Loot Boxes/skin-case.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skin Case 2",
+        "contents": "Weapon skins",
+        "cost": "249 Robux or Skin Tickets",
+        "availability": "Permanent",
+        "cardSummary": "The second skin pool under the same pricing, added as the skin catalog expanded."
+      },
+      "system": {
+        "slug": "skin-case-2",
+        "section": "Skin Cases",
+        "sortOrder": 10,
+        "image": "/RIVALS/Loot Boxes/skin-case-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skin Case 3",
+        "contents": "Weapon skins",
+        "cost": "249 Robux or Skin Tickets",
+        "availability": "Permanent",
+        "cardSummary": "The third skin pool, same price, newest designs."
+      },
+      "system": {
+        "slug": "skin-case-3",
+        "section": "Skin Cases",
+        "sortOrder": 11,
+        "image": "/RIVALS/Loot Boxes/skin-case-3.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spooky Skin Case",
+        "contents": "Weapon skins",
+        "cost": "249 Robux",
+        "availability": "Spooky events",
+        "cardSummary": "The Halloween-season skin case with a horror-themed pool."
+      },
+      "system": {
+        "slug": "spooky-skin-case",
+        "section": "Skin Cases",
+        "sortOrder": 12,
+        "image": "/RIVALS/Loot Boxes/spooky-skin-case.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Skin Case",
+        "contents": "Weapon skins",
+        "cost": "249 Robux",
+        "availability": "Festive events",
+        "cardSummary": "The winter-season skin case, stocked with festive skins."
+      },
+      "system": {
+        "slug": "festive-skin-case",
+        "section": "Skin Cases",
+        "sortOrder": 13,
+        "image": "/RIVALS/Loot Boxes/festive-skin-case.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Skin Case",
+        "contents": "Weapon skins",
+        "cost": "249 Robux",
+        "availability": "Summer events",
+        "cardSummary": "The summer-season skin case with beach-flavored designs."
+      },
+      "system": {
+        "slug": "summer-skin-case",
+        "section": "Skin Cases",
+        "sortOrder": 14,
+        "image": "/RIVALS/Loot Boxes/summer-skin-case.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Haunted Chest",
+        "contents": "Mixed cosmetics",
+        "cost": "30 Candy",
+        "availability": "Spooky events",
+        "cardSummary": "The Halloween event chest, bought with Candy earned during spooky events and stocked with seasonal cosmetics."
+      },
+      "system": {
+        "slug": "haunted-chest",
+        "section": "Event Chests",
+        "sortOrder": 15,
+        "image": "/RIVALS/Loot Boxes/haunted-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Chest",
+        "contents": "Mixed cosmetics",
+        "cost": "30 Crystals",
+        "availability": "Festive events",
+        "cardSummary": "The winter event chest, paid in Crystals and filled with festive cosmetics."
+      },
+      "system": {
+        "slug": "jolly-chest",
+        "section": "Event Chests",
+        "sortOrder": 16,
+        "image": "/RIVALS/Loot Boxes/jolly-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tropical Chest",
+        "contents": "Mixed cosmetics",
+        "cost": "30 Pearls",
+        "availability": "Summer events",
+        "cardSummary": "The summer event chest: charms, wraps, finishers, and emotes in beach flavors, bought with Pearls."
+      },
+      "system": {
+        "slug": "tropical-chest",
+        "section": "Event Chests",
+        "sortOrder": 17,
+        "image": "/RIVALS/Loot Boxes/tropical-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Standard Weapon Crate",
+        "contents": "Weapons",
+        "cost": "Free",
+        "availability": "Advent calendar and inactivity gift",
+        "cardSummary": "A free crate that opens itself into a weapon unlock, handed out by the advent calendar or when you return after a long break."
+      },
+      "system": {
+        "slug": "standard-weapon-crate",
+        "section": "Other Crates",
+        "sortOrder": 18,
+        "image": "/RIVALS/Loot Boxes/standard-weapon-crate.png"
+      }
+    }
+  ]
+}

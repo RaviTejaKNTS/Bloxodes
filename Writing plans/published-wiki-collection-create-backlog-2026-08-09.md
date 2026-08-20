@@ -485,10 +485,10 @@ Evidence: [full report](../tmp/game-collection-suggestions/restaurant-tycoon-3.m
 
 Evidence: [full report](../tmp/game-collection-suggestions/rivals.md)
 
-- [ ] Gamemodes
-- [ ] Ranks
-- [ ] Currencies
-- [ ] Loot Boxes
+- [x] Gamemodes
+- [x] Ranks
+- [x] Currencies
+- [x] Loot Boxes
 
 ### Sailor Piece
 
