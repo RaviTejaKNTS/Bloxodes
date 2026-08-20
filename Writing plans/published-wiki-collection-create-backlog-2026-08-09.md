@@ -347,7 +347,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/fisch.md)
 Evidence: [full report](../tmp/game-collection-suggestions/fish-it.md)
 
 - [ ] Quests — blocked 2026-08-20: rotating unlimited task pool with one low-quality stub source; not durable rows
-- [x] Artifacts — blocked 2026-08-20: no artifact roster in any accessible source
+- [ ] Artifacts — blocked 2026-08-20: no artifact roster in any accessible source
 - [ ] Utility Items — blocked 2026-08-20: no defined roster; overlaps the potions and totems rows
 - [ ] Potions — blocked 2026-08-20: only 4 confirmed potions with conflicting details; revisit when the wiki matures
 - [ ] Totems — blocked 2026-08-20: only 4 confirmed totems with conflicting durations across sources; revisit later
@@ -552,7 +552,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/storage-hunters-open-
 
 Evidence: [full report](../tmp/game-collection-suggestions/survive-zombie-arena.md)
 
-- [ ] Artifacts
+- [x] Artifacts
 
 ### The Forge
 
