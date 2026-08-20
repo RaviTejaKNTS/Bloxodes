@@ -282,12 +282,12 @@ Evidence: [full report](../tmp/game-collection-suggestions/drain-the-lake.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/dress-to-impress.md)
 
-- [ ] Materials
-- [ ] Patterns
-- [ ] Poses
-- [ ] Game Modes
-- [ ] Style Showdown Challenges
-- [ ] Characters
+- [x] Materials
+- [ ] Patterns — blocked 2026-08-20: individual patterns are unnamed gallery swatches; pack layer already covered by prod pattern-packs
+- [ ] Poses — blocked 2026-08-20: no per-pose roster exists; covered by prod pose-packs
+- [ ] Game Modes — blocked 2026-08-20: no source page and only 2 modes
+- [x] Style Showdown Challenges
+- [x] Characters
 
 ### Driving Empire
 

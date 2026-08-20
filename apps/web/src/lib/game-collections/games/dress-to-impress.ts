@@ -21,6 +21,9 @@ export const dressToImpressCollectionGroup = {
       "nails",
       "reward-items",
       "robux-items",
-      "vip-items"
+      "vip-items",
+      "materials",
+      "style-showdown-challenges",
+      "characters"
     ]
   } satisfies GameCollectionGroup;

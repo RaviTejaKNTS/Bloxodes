@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "style-showdown-challenges",
+    "route": "/wiki/dress-to-impress/style-showdown-challenges",
+    "catalogCode": "dress-to-impress-style-showdown-challenges",
+    "itemFields": [
+      "status",
+      "cardSummary"
+    ],
+    "columns": [
+      "status",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Status",
+      "sectionOrder": [
+        "Current Challenges",
+        "Retired Challenges",
+        "Limited Collab Challenges"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "status"
+      ],
+      "tableFields": [
+        "status",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "status": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "What it does"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Vote Reveal",
+        "status": "Current",
+        "cardSummary": "Every player's votes are read out on stage in randomized order, turning the anonymous vote into public theater."
+      },
+      "system": {
+        "slug": "vote-reveal",
+        "section": "Current Challenges",
+        "sortOrder": 1,
+        "image": "/Dress To Impress/Style Showdown Challenges/vote-reveal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Round",
+        "status": "Current",
+        "cardSummary": "Cuts dressing time from three minutes to ninety seconds. Decisive stylists thrive; second-guessers get caught half-dressed."
+      },
+      "system": {
+        "slug": "speed-round",
+        "section": "Current Challenges",
+        "sortOrder": 2,
+        "image": "/Dress To Impress/Style Showdown Challenges/speed-round.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Double Elimination",
+        "status": "Current",
+        "cardSummary": "After the normal elimination, a second low-voted player goes home too. The bottom of the leaderboard gets very uncomfortable."
+      },
+      "system": {
+        "slug": "double-elimination",
+        "section": "Current Challenges",
+        "sortOrder": 3,
+        "image": "/Dress To Impress/Style Showdown Challenges/double-elimination.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Random Item",
+        "status": "Current",
+        "cardSummary": "Everyone is handed a random item that cannot be removed for the round, and the outfit has to be built around it."
+      },
+      "system": {
+        "slug": "random-item",
+        "section": "Current Challenges",
+        "sortOrder": 4,
+        "image": "/Dress To Impress/Style Showdown Challenges/random-item.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Item Lock",
+        "status": "Current",
+        "cardSummary": "Anything you equip stays on until the round ends. Try-ons become commitments."
+      },
+      "system": {
+        "slug": "item-lock",
+        "section": "Current Challenges",
+        "sortOrder": 5,
+        "image": "/Dress To Impress/Style Showdown Challenges/item-lock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pose Sync",
+        "status": "Current",
+        "cardSummary": "At the end of a late round, two low-voted players face off by matching poses to survive."
+      },
+      "system": {
+        "slug": "pose-sync",
+        "section": "Current Challenges",
+        "sortOrder": 6,
+        "image": "/Dress To Impress/Style Showdown Challenges/pose-sync.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mystery Theme",
+        "status": "Current",
+        "cardSummary": "The round theme appears with its letters scrambled, unscrambling as time passes. Early guessers get a head start on the look."
+      },
+      "system": {
+        "slug": "mystery-theme",
+        "section": "Current Challenges",
+        "sortOrder": 7,
+        "image": "/Dress To Impress/Style Showdown Challenges/mystery-theme.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Out for Lunch - Back Soon",
+        "status": "Current",
+        "cardSummary": "Lana steps out mid-round, leaving the show briefly unhosted as the round plays out."
+      },
+      "system": {
+        "slug": "out-for-lunch-back-soon",
+        "section": "Current Challenges",
+        "sortOrder": 8,
+        "image": "/Dress To Impress/Style Showdown Challenges/out-for-lunch-back-soon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Light Green Light",
+        "status": "Current",
+        "cardSummary": "Freeze when the screen turns red or face the consequences, layered on top of dressing up."
+      },
+      "system": {
+        "slug": "red-light-green-light",
+        "section": "Current Challenges",
+        "sortOrder": 9,
+        "image": "/Dress To Impress/Style Showdown Challenges/red-light-green-light.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lights Off",
+        "status": "Current",
+        "cardSummary": "The map goes dark for the round, and you style by whatever light is left."
+      },
+      "system": {
+        "slug": "lights-off",
+        "section": "Current Challenges",
+        "sortOrder": 10,
+        "image": "/Dress To Impress/Style Showdown Challenges/lights-off.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lock In",
+        "status": "Current",
+        "cardSummary": "A button appears on screen; press it and your outfit is final, banking confidence for whatever the reveal brings."
+      },
+      "system": {
+        "slug": "lock-in",
+        "section": "Current Challenges",
+        "sortOrder": 11,
+        "image": "/Dress To Impress/Style Showdown Challenges/lock-in.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Witches",
+        "status": "Current",
+        "cardSummary": "Everyone must wear the Witch Hat and Broomstick, so the fight is over what you build around them."
+      },
+      "system": {
+        "slug": "witches",
+        "section": "Current Challenges",
+        "sortOrder": 12,
+        "image": "/Dress To Impress/Style Showdown Challenges/witches.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mermaids",
+        "status": "Current",
+        "cardSummary": "Forces the Mermaid Queen Tail and Arms on every player for a fully aquatic round."
+      },
+      "system": {
+        "slug": "mermaids",
+        "section": "Current Challenges",
+        "sortOrder": 13,
+        "image": "/Dress To Impress/Style Showdown Challenges/mermaids.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Item Limit",
+        "status": "Retired",
+        "cardSummary": "Capped outfits at six to eight items for the round, rewarding restraint over maximalism."
+      },
+      "system": {
+        "slug": "item-limit",
+        "section": "Retired Challenges",
+        "sortOrder": 14,
+        "image": "/Dress To Impress/Style Showdown Challenges/item-limit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Desaturate",
+        "status": "Retired",
+        "cardSummary": "Drained the color from the map, palettes, and saved colors, forcing outfits to work in near-grayscale."
+      },
+      "system": {
+        "slug": "desaturate",
+        "section": "Retired Challenges",
+        "sortOrder": 15,
+        "image": "/Dress To Impress/Style Showdown Challenges/desaturate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbite",
+        "status": "Retired",
+        "cardSummary": "Iced the dressing room floor so players slid around while trying to dress. Removed from rotation."
+      },
+      "system": {
+        "slug": "frostbite",
+        "section": "Retired Challenges",
+        "sortOrder": 16,
+        "image": "/Dress To Impress/Style Showdown Challenges/frostbite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombieboy",
+        "status": "Limited Collab",
+        "cardSummary": "The Lady Gaga collab exclusive: the map went dark and grave-themed for the event's run."
+      },
+      "system": {
+        "slug": "zombieboy",
+        "section": "Limited Collab Challenges",
+        "sortOrder": 17,
+        "image": "/Dress To Impress/Style Showdown Challenges/zombieboy.png"
+      }
+    }
+  ]
+}

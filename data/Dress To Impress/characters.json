@@ -1,0 +1,546 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "characters",
+    "route": "/wiki/dress-to-impress/characters",
+    "catalogCode": "dress-to-impress-characters",
+    "itemFields": [
+      "species",
+      "status",
+      "debut",
+      "cardSummary"
+    ],
+    "columns": [
+      "species",
+      "status",
+      "debut",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Story Characters",
+        "Collab and Event Characters"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "species",
+        "status",
+        "debut"
+      ],
+      "tableFields": [
+        "species",
+        "status",
+        "debut"
+      ],
+      "fieldPresentation": {
+        "species": {
+          "kind": "chip",
+          "label": "Species",
+          "omitWhenEmpty": true
+        },
+        "status": {
+          "kind": "chip",
+          "label": "Status",
+          "omitWhenEmpty": true
+        },
+        "debut": {
+          "kind": "plain",
+          "label": "Debut",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Agamemnon",
+        "species": "Human / Demonic Entity",
+        "status": "Unknown (was born 3282 years ago)",
+        "debut": null,
+        "cardSummary": "An ancient human-turned-demonic-entity whose story stretches back thousands of years in the lore's mythology."
+      },
+      "system": {
+        "slug": "agamemnon",
+        "section": "Story Characters",
+        "sortOrder": 1,
+        "image": "/Dress To Impress/Characters/agamemnon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alatheia",
+        "species": "Human",
+        "status": "Deceased",
+        "debut": "May 4th 2024|",
+        "cardSummary": "A key figure of the Lana Lore's Greek mythology thread."
+      },
+      "system": {
+        "slug": "alatheia",
+        "section": "Story Characters",
+        "sortOrder": 2,
+        "image": "/Dress To Impress/Characters/alatheia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Antonio",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "April 25, 2026",
+        "cardSummary": "A limited-time character from the 2026 KATSEYE-era update."
+      },
+      "system": {
+        "slug": "antonio",
+        "section": "Story Characters",
+        "sortOrder": 3,
+        "image": "/Dress To Impress/Characters/antonio.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Callmehhaley",
+        "species": "Human",
+        "status": "Dead",
+        "debut": "October 19, 2024",
+        "cardSummary": "The creator cameo of the Halloween 2024 finale chapter."
+      },
+      "system": {
+        "slug": "callmehhaley",
+        "section": "Collab and Event Characters",
+        "sortOrder": 4,
+        "image": "/Dress To Impress/Characters/callmehhaley.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Scarlet",
+        "species": "Human",
+        "status": null,
+        "debut": "August 2, 2025",
+        "cardSummary": "Scarlet Fierce, the pirate captain of the 2025 summer storyline."
+      },
+      "system": {
+        "slug": "captain-scarlet",
+        "section": "Story Characters",
+        "sortOrder": 5,
+        "image": "/Dress To Impress/Characters/captain-scarlet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid",
+        "species": "Divine being",
+        "status": null,
+        "debut": "February 8, 2025",
+        "cardSummary": "The divine matchmaker of the Valentine's 2025 event."
+      },
+      "system": {
+        "slug": "cupid",
+        "section": "Collab and Event Characters",
+        "sortOrder": 6,
+        "image": "/Dress To Impress/Characters/cupid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harht",
+        "species": null,
+        "status": null,
+        "debut": null,
+        "cardSummary": "Michelle, one of the game's builders, written into the story as a cameo character."
+      },
+      "system": {
+        "slug": "harht",
+        "section": "Story Characters",
+        "sortOrder": 7,
+        "image": "/Dress To Impress/Characters/harht.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holly",
+        "species": "Elf",
+        "status": null,
+        "debut": "December 14, 2024",
+        "cardSummary": "The elf character of the Winter 2024 event."
+      },
+      "system": {
+        "slug": "holly",
+        "section": "Collab and Event Characters",
+        "sortOrder": 8,
+        "image": "/Dress To Impress/Characters/holly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Iphigenia",
+        "species": "Human",
+        "status": null,
+        "debut": "December 14, 2024",
+        "cardSummary": "The mystery character labeled ??? in the Greek mythology cutscenes before her identity was revealed."
+      },
+      "system": {
+        "slug": "iphigenia",
+        "section": "Story Characters",
+        "sortOrder": 9,
+        "image": "/Dress To Impress/Characters/iphigenia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jayla",
+        "species": null,
+        "status": "Dead",
+        "debut": null,
+        "cardSummary": "One of the dead coterie members whose stories seed the horror chapters."
+      },
+      "system": {
+        "slug": "jayla",
+        "section": "Story Characters",
+        "sortOrder": 10,
+        "image": "/Dress To Impress/Characters/jayla.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jisoo",
+        "species": null,
+        "status": "Dead",
+        "debut": null,
+        "cardSummary": "The BLACKPINK star's cameo appearance in the coterie storyline."
+      },
+      "system": {
+        "slug": "jisoo",
+        "section": "Collab and Event Characters",
+        "sortOrder": 11,
+        "image": "/Dress To Impress/Characters/jisoo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Julie",
+        "species": "Human (Possessed)",
+        "status": "Alive (Reincarnated)",
+        "debut": "Chapter 2 of Lana’s lore",
+        "cardSummary": "Nurse Julie, a possessed nurse who appears through the horror-leaning quest chapters."
+      },
+      "system": {
+        "slug": "julie",
+        "section": "Story Characters",
+        "sortOrder": 12,
+        "image": "/Dress To Impress/Characters/julie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "KATSEYE Daniela",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "April 25, 2026",
+        "cardSummary": "One of the five KATSEYE members added for the April 2026 collab event."
+      },
+      "system": {
+        "slug": "katseye-daniela",
+        "section": "Collab and Event Characters",
+        "sortOrder": 13,
+        "image": "/Dress To Impress/Characters/katseye-daniela.png"
+      }
+    },
+    {
+      "item": {
+        "name": "KATSEYE Lara",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "April 25, 2026",
+        "cardSummary": "One of the five KATSEYE members added for the April 2026 collab event."
+      },
+      "system": {
+        "slug": "katseye-lara",
+        "section": "Collab and Event Characters",
+        "sortOrder": 14,
+        "image": "/Dress To Impress/Characters/katseye-lara.png"
+      }
+    },
+    {
+      "item": {
+        "name": "KATSEYE Megan",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "April 25, 2026",
+        "cardSummary": "One of the five KATSEYE members added for the April 2026 collab event."
+      },
+      "system": {
+        "slug": "katseye-megan",
+        "section": "Collab and Event Characters",
+        "sortOrder": 15,
+        "image": "/Dress To Impress/Characters/katseye-megan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "KATSEYE Sophia",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "April 25, 2026",
+        "cardSummary": "One of the five KATSEYE members added for the April 2026 collab event."
+      },
+      "system": {
+        "slug": "katseye-sophia",
+        "section": "Collab and Event Characters",
+        "sortOrder": 16,
+        "image": "/Dress To Impress/Characters/katseye-sophia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "KATSEYE Yoonchae",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "April 25, 2026",
+        "cardSummary": "One of the five KATSEYE members added for the April 2026 collab event."
+      },
+      "system": {
+        "slug": "katseye-yoonchae",
+        "section": "Collab and Event Characters",
+        "sortOrder": 17,
+        "image": "/Dress To Impress/Characters/katseye-yoonchae.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lady Gaga",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "August 16, 2025",
+        "cardSummary": "The headline collab of August 2025, appearing in-game for the Lady Gaga X DTI event."
+      },
+      "system": {
+        "slug": "lady-gaga",
+        "section": "Collab and Event Characters",
+        "sortOrder": 18,
+        "image": "/Dress To Impress/Characters/lady-gaga.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lana",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "November 11th, 2023 (release)",
+        "cardSummary": "The nail tech who runs the salon and hosts Style Showdown, and the center of the game's entire lore arc. Five years behind the counter and one very complicated backstory."
+      },
+      "system": {
+        "slug": "lana",
+        "section": "Story Characters",
+        "sortOrder": 19,
+        "image": "/Dress To Impress/Characters/lana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lana's Doppelganger",
+        "species": "Doppelgänger",
+        "status": "Deceased (seemed to be killed)",
+        "debut": "April 20, 2024",
+        "cardSummary": "An antagonist copying Lana's face, one of the lore's recurring threats."
+      },
+      "system": {
+        "slug": "lana-s-doppelganger",
+        "section": "Story Characters",
+        "sortOrder": 20,
+        "image": "/Dress To Impress/Characters/lana-s-doppelganger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lana's Mother",
+        "species": "*Human (Originally) *Possessed (Current)",
+        "status": "Unknown",
+        "debut": "October 19, 2024",
+        "cardSummary": "A minor Halloween-chapter character, originally human and now possessed."
+      },
+      "system": {
+        "slug": "lana-s-mother",
+        "section": "Story Characters",
+        "sortOrder": 21,
+        "image": "/Dress To Impress/Characters/lana-s-mother.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leah Ashe",
+        "species": "Fairy",
+        "status": "Replaced",
+        "debut": "February 8, 2025 - February 7, 2026",
+        "cardSummary": "The fairy form of the Roblox creator, met in the Valentine's 2025 event chapters."
+      },
+      "system": {
+        "slug": "leah-ashe",
+        "section": "Collab and Event Characters",
+        "sortOrder": 22,
+        "image": "/Dress To Impress/Characters/leah-ashe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lina",
+        "species": "Human / Demon Entity",
+        "status": "Unknown (Last seen Halloween Quest 2025 post-ending scene)",
+        "debut": "August 2nd, 2024",
+        "cardSummary": "The secondary antagonist: Lana's dark mirror, part human and part demon entity, whose returns drive several lore chapters."
+      },
+      "system": {
+        "slug": "lina",
+        "section": "Story Characters",
+        "sortOrder": 23,
+        "image": "/Dress To Impress/Characters/lina.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nathan",
+        "species": "Human",
+        "status": null,
+        "debut": "*April 26th, 2024 (Lana Lore)",
+        "cardSummary": "A fierce escapee of the lore's coterie storyline, appearing across quest chapters since 2024."
+      },
+      "system": {
+        "slug": "nathan",
+        "section": "Story Characters",
+        "sortOrder": 24,
+        "image": "/Dress To Impress/Characters/nathan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nelly",
+        "species": "Human",
+        "status": null,
+        "debut": "*April 20th, 2024 (Lana Lore) *February ",
+        "cardSummary": "A recurring quest character first seen in the Valentine's storyline."
+      },
+      "system": {
+        "slug": "nelly",
+        "section": "Story Characters",
+        "sortOrder": 25,
+        "image": "/Dress To Impress/Characters/nelly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nicholas",
+        "species": null,
+        "status": "Dead",
+        "debut": null,
+        "cardSummary": "One of the dead coterie members from the lore's backstory."
+      },
+      "system": {
+        "slug": "nicholas",
+        "section": "Story Characters",
+        "sortOrder": 26,
+        "image": "/Dress To Impress/Characters/nicholas.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rudy",
+        "species": "Reindeer",
+        "status": null,
+        "debut": "December 14, 2024",
+        "cardSummary": "The reindeer companion from the Winter 2024 event chapters."
+      },
+      "system": {
+        "slug": "rudy",
+        "section": "Story Characters",
+        "sortOrder": 27,
+        "image": "/Dress To Impress/Characters/rudy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sadie",
+        "species": null,
+        "status": "Dead",
+        "debut": null,
+        "cardSummary": "One of the dead coterie members remembered through the lore."
+      },
+      "system": {
+        "slug": "sadie",
+        "section": "Story Characters",
+        "sortOrder": 28,
+        "image": "/Dress To Impress/Characters/sadie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Claus",
+        "species": null,
+        "status": null,
+        "debut": "December 14, 2024",
+        "cardSummary": "The Winter event's boss encounter, complete with a second phase after his first health bar breaks."
+      },
+      "system": {
+        "slug": "santa-claus",
+        "section": "Collab and Event Characters",
+        "sortOrder": 29,
+        "image": "/Dress To Impress/Characters/santa-claus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Serena",
+        "species": "Human",
+        "status": "Alive",
+        "debut": "October 19, 2024",
+        "cardSummary": "The newly hired clothing designer, one of the friendly faces of the agency's staff cast."
+      },
+      "system": {
+        "slug": "serena",
+        "section": "Story Characters",
+        "sortOrder": 30,
+        "image": "/Dress To Impress/Characters/serena.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Black Raveness",
+        "species": "Human",
+        "status": "Alive",
+        "debut": null,
+        "cardSummary": "A major lore figure known simply as Raveness, tied to the story's darker chapters."
+      },
+      "system": {
+        "slug": "the-black-raveness",
+        "section": "Story Characters",
+        "sortOrder": 31,
+        "image": "/Dress To Impress/Characters/the-black-raveness.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Mystery O",
+        "species": "Human",
+        "status": null,
+        "debut": "December 14, 2024",
+        "cardSummary": "Orestes, the ? of the mythology cutscenes and Iphigenia's counterpart."
+      },
+      "system": {
+        "slug": "the-mystery-o",
+        "section": "Story Characters",
+        "sortOrder": 32,
+        "image": "/Dress To Impress/Characters/the-mystery-o.png"
+      }
+    }
+  ]
+}
