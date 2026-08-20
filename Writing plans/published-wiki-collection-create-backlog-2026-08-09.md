@@ -97,6 +97,8 @@ Tier C run completed 2026-08-20 on branch `tier-a-collections` (local only, not 
 
 ### Tier D — below 20k players (19 games, deprioritized)
 
+Tier D run completed 2026-08-20 on branch `tier-a-collections` (local + managed dev only, not published). 48 collections shipped and locally verified; 21 rows blocked with dated reasons on their lines. Per game: Catch and Tame 3/3, Demonology 8/8, Evomon 4/4, Home Alone 2/2, Restaurant Tycoon 3 5/5, Sell Lemons 6/6, Survive Zombie Arena 1/1, Untitled Boxing Game 2/2, Build a Ring Farm 5/5, Slime RNG 1/1, Sailor Piece 8/12, Catch a Brainrot 0/3, The Forge 0/3, Wizard Alchemy 0/1, Paint and Seek 0/1, Clean the Library 0/2, Drain the Lake 0/2, Practical Basketball 0/1, Build a Base and Steal 0/1. Registry fixes: missing universeId added for survive-zombie-arena, slime-rng, and sailor-piece. With this, every row in the backlog is either done or blocked; the plan is fully closed.
+
 Home Alone (17k), Survive Zombie Arena (15k), Restaurant Tycoon 3 (13k), Catch and Tame (13k), Untitled Boxing Game (13k), Sell Lemons (13k), Evomon (11k), Demonology (9k), Build a Base and Steal (7.5k), Clean the Library (4k), Catch a Brainrot (3k), Drain the Lake (3k), Sailor Piece (2k), Build a Ring Farm (1.6k), The Forge (1.5k), Slime RNG (1.1k), Paint and Seek (350), Wizard Alchemy (300), Practical Basketball (0, likely dead universe).
 
 Berry Avenue RP stays research-blocked regardless of tier.
