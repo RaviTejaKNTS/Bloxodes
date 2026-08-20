@@ -1,0 +1,1385 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dead Rails",
+    "gameSlug": "dead-rails",
+    "collection": "items",
+    "route": "/wiki/dead-rails/items",
+    "catalogCode": "dead-rails-items",
+    "itemFields": [
+      "summary",
+      "use",
+      "sellPrice",
+      "sources"
+    ],
+    "columns": [
+      "summary",
+      "use",
+      "sellPrice",
+      "sources"
+    ],
+    "display": {
+      "groupLabel": "Item type",
+      "sectionOrder": [
+        "Healing & Consumables",
+        "Tools",
+        "Light Sources",
+        "Puzzle Items",
+        "Junk & Valuables",
+        "General Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "use",
+        "sellPrice",
+        "sources"
+      ],
+      "tableFields": [
+        "use",
+        "sellPrice"
+      ],
+      "fieldPresentation": {
+        "use": {
+          "kind": "highlight",
+          "label": "Effect",
+          "omitWhenEmpty": true
+        },
+        "sellPrice": {
+          "kind": "chip",
+          "label": "Value",
+          "omitWhenEmpty": true
+        },
+        "sources": {
+          "kind": "detail",
+          "label": "Found at",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ammunition",
+        "summary": "In Dead Rails, Ammunition is required to use Ranged Weapons and Turrets.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "ammunition",
+        "section": "General Items",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Items/ammunition.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Armor",
+        "summary": "The Armor is a unofficial name for a set of items in Dead Rails which reduce damage taken by enemies.",
+        "use": null,
+        "sellPrice": "$30 (Shoulder Armors) * $40 (Helmet) * $50 (Chestplate)",
+        "sources": "Sheriff's Office; Towns; Outlaw Camps; General Store; Ironclad; The Alamo"
+      },
+      "system": {
+        "slug": "armor",
+        "section": "General Items",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Items/armor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandage",
+        "summary": "The is a healing item in Dead Rails.",
+        "use": "35 HP, 100% of max HP when used to revive",
+        "sellPrice": "1 Bonds * $10",
+        "sources": "Castle; Doctor; Doctor's Office; Abandoned Buildings; Towns; Outlaw Camps"
+      },
+      "system": {
+        "slug": "bandage",
+        "section": "Tools",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Items/bandage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Banjo",
+        "summary": "The Banjo is a playable and a fairly rare Item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store; House; Musician; Outlaw Camps"
+      },
+      "system": {
+        "slug": "banjo",
+        "section": "Tools",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Items/banjo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bank Combo",
+        "summary": "The , also known as a Bank Note, is a Puzzle item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Banker Zombie Heavyweight Zombie"
+      },
+      "system": {
+        "slug": "bank-combo",
+        "section": "Puzzle Items",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Items/bank-combo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barbed Wire",
+        "summary": "The Barbed Wire is a defensive item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($20); Town; Abandoned Buildings; The Alamo"
+      },
+      "system": {
+        "slug": "barbed-wire",
+        "section": "Tools",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Items/barbed-wire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barrel",
+        "summary": "The Barrel is a Junk item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Abandoned Buildings; Sterling Mines; Towns"
+      },
+      "system": {
+        "slug": "barrel",
+        "section": "Junk & Valuables",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Items/barrel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bonds",
+        "summary": "Bonds, also known as Treasury Bonds or Bonuses, are one of currencies in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Bank (Town, Sterling and Lobby); Abandoned Buildings; Castle; Fort Constitution (Supply Depot); Outlaw's Town; Tesla Lab"
+      },
+      "system": {
+        "slug": "bonds",
+        "section": "General Items",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Items/bonds.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Book",
+        "summary": "The Book is a Junk item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Town; Buildings; Tesla Lab"
+      },
+      "system": {
+        "slug": "book",
+        "section": "Junk & Valuables",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Items/book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bounties",
+        "summary": "Bounties are a payment after capturing/killing a wanted person. The reward in question is money which can range from 35-150 currently. There are only 3 people which you can surrender them to the Sheriff's Office.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "bounties",
+        "section": "General Items",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Brain In Jar",
+        "summary": "The Brain in Jar is a unique and Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$250",
+        "sources": "Tesla Lab"
+      },
+      "system": {
+        "slug": "brain-in-jar",
+        "section": "Puzzle Items",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Items/brain-in-jar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bugs and Glitches/Patched Bugs",
+        "summary": "For all unpatched bugs visit Bugs and Glitches.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "bugs-and-glitches-patched-bugs",
+        "section": "General Items",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bundles",
+        "summary": "are purchasable sets of items in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "bundles",
+        "section": "General Items",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Items/bundles.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Camera",
+        "summary": "The is a Tool item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($35); Abandoned Buildings"
+      },
+      "system": {
+        "slug": "camera",
+        "section": "General Items",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Items/camera.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Campfire",
+        "summary": "The Campfire is a Tool in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Abandoned Buildings; Town; Outlaw Camps"
+      },
+      "system": {
+        "slug": "campfire",
+        "section": "Tools",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Items/campfire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Canteen",
+        "summary": "The Canteen is a Tool item in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "canteen",
+        "section": "General Items",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Items/canteen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chair",
+        "summary": "The Chair is a Junk item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Town; Buildings; Castle; Stillwater Prison; Tesla Lab"
+      },
+      "system": {
+        "slug": "chair",
+        "section": "Tools",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Items/chair.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chestplate",
+        "summary": "The Chestplate is a piece of body Armor.",
+        "use": null,
+        "sellPrice": "$50",
+        "sources": "General Store ($125); Outlaw Camps; Sheriff's Office"
+      },
+      "system": {
+        "slug": "chestplate",
+        "section": "General Items",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Items/chestplate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal",
+        "summary": "The is a Fuel item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($20); Mines; Abandoned Buildings; Ores; Headframe; Furniture"
+      },
+      "system": {
+        "slug": "coal",
+        "section": "General Items",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Items/coal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crate",
+        "summary": "The Crate, officially known as Openable Crate, is a unique Item in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "crate",
+        "section": "General Items",
+        "sortOrder": 10,
+        "image": "/Dead Rails/Items/crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Egg",
+        "summary": "File:Medium Egg.png|One of the egg variants.",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Buildings; Towns; Eggslinger; Altar"
+      },
+      "system": {
+        "slug": "easter-egg",
+        "section": "General Items",
+        "sortOrder": 11,
+        "image": "/Dead Rails/Items/easter-egg.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fool's Gold",
+        "summary": "Fool's Gold is a limited Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "1-100 *Fool's Key *More...",
+        "sources": "Buildings; Towns; Tesla Lab"
+      },
+      "system": {
+        "slug": "fool-s-gold",
+        "section": "General Items",
+        "sortOrder": 12,
+        "image": "/Dead Rails/Items/fool-s-gold.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fool's Key",
+        "summary": "The Fool's Key is an item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Fool's Gold"
+      },
+      "system": {
+        "slug": "fool-s-key",
+        "section": "Puzzle Items",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Items/fool-s-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gamepasses",
+        "summary": "In Dead Rails, players can purchase certain items for Robux to give themselves an extra edge. Currently, there are 11 purchasable items in total, with the possibility of more being added in the future.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "gamepasses",
+        "section": "General Items",
+        "sortOrder": 13,
+        "image": "/Dead Rails/Items/gamepasses.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Bar",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$50",
+        "sources": "House; Headframe; Furniture; General Store; Trading Post (first); Bank"
+      },
+      "system": {
+        "slug": "gold-bar",
+        "section": "General Items",
+        "sortOrder": 14,
+        "image": "/Dead Rails/Items/gold-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Cup",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$25",
+        "sources": "Bank; Barn; Furniture; General Store; Headframe; House"
+      },
+      "system": {
+        "slug": "gold-cup",
+        "section": "General Items",
+        "sortOrder": 15,
+        "image": "/Dead Rails/Items/gold-cup.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Nugget",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$25 to $80",
+        "sources": "Ores; Sterling Mines"
+      },
+      "system": {
+        "slug": "gold-nugget",
+        "section": "General Items",
+        "sortOrder": 16,
+        "image": "/Dead Rails/Items/gold-nugget.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Painting",
+        "summary": "The Gold Painting is a Valuable in Dead Rails.",
+        "use": null,
+        "sellPrice": "$35",
+        "sources": "Bank; Barn; Castle; Furniture; General Store; Headframe"
+      },
+      "system": {
+        "slug": "gold-painting",
+        "section": "General Items",
+        "sortOrder": 17,
+        "image": "/Dead Rails/Items/gold-painting.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Plate",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$20",
+        "sources": "Bank; Barn; Castle (Guaranteed); Furniture; General Store; Headframe"
+      },
+      "system": {
+        "slug": "gold-plate",
+        "section": "General Items",
+        "sortOrder": 18,
+        "image": "/Dead Rails/Items/gold-plate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Statue",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$45",
+        "sources": "Bank; Castle; Furniture; General Store; Headframe; House"
+      },
+      "system": {
+        "slug": "gold-statue",
+        "section": "General Items",
+        "sortOrder": 19,
+        "image": "/Dead Rails/Items/gold-statue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Trophy",
+        "summary": "The Gold Trophy is a unique item in Dead Rails, only appearing in the Office in the Boxing Gym. It is a trophy made of gold, presumably awarded to those who won first in matches in the boxing gym before the zombie virus of 1899.",
+        "use": null,
+        "sellPrice": "$25",
+        "sources": "Boxing Gym"
+      },
+      "system": {
+        "slug": "gold-trophy",
+        "section": "General Items",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Watch",
+        "summary": "The , officially known as Gold Pocket Watch, is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "gold-watch",
+        "section": "General Items",
+        "sortOrder": 21,
+        "image": "/Dead Rails/Items/gold-watch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Egg",
+        "summary": "Golden Eggs are an item that can be only collected and cannot spawn minions. There are only 6 golden eggs found in the map. They spawn around in these 4 structures exclusively:",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Castle (2); Fort Constitution (2); Tesla Lab (1); Sterling Mines (1)"
+      },
+      "system": {
+        "slug": "golden-egg",
+        "section": "Puzzle Items",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Items/golden-egg.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Helmet",
+        "summary": "The Helmet is a piece of body Armor in Dead Rails.",
+        "use": null,
+        "sellPrice": "$40",
+        "sources": "General Store (7 Bonds); Outlaw Camps; Sheriff's Office; The Alamo; Knight; Ironclad"
+      },
+      "system": {
+        "slug": "helmet",
+        "section": "General Items",
+        "sortOrder": 22,
+        "image": "/Dead Rails/Items/helmet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Horse Cart",
+        "summary": "The is a Tool item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Barn"
+      },
+      "system": {
+        "slug": "horse-cart",
+        "section": "Tools",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Items/horse-cart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack O'Lantern",
+        "summary": "The Jack O'Lantern is a collectable in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Abandoned Buildings; Towns"
+      },
+      "system": {
+        "slug": "jack-o-lantern",
+        "section": "General Items",
+        "sortOrder": 23,
+        "image": "/Dead Rails/Items/jack-o-lantern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jade Tablet",
+        "summary": "The is a Puzzle item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Sterling; Mines"
+      },
+      "system": {
+        "slug": "jade-tablet",
+        "section": "Puzzle Items",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Items/jade-tablet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Junk",
+        "summary": "Junk describes an Item type in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "junk",
+        "section": "General Items",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ladder",
+        "summary": "The Ladder is a Junk item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Town; Abandoned Buildings; Tesla Lab"
+      },
+      "system": {
+        "slug": "ladder",
+        "section": "Tools",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Items/ladder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lantern",
+        "summary": "The is a Tool item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($15); Town; Abandoned Buildings"
+      },
+      "system": {
+        "slug": "lantern",
+        "section": "Tools",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Items/lantern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Rod",
+        "summary": "The is a Tool in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($25); Town; Abandoned Buildings; Tesla Lab"
+      },
+      "system": {
+        "slug": "lightning-rod",
+        "section": "Tools",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Items/lightning-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lincoln's Ghost's Top Hat",
+        "summary": "Lincoln's Ghost Top Hat is an equippable Item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$40",
+        "sources": "Lincoln's Ghost (Hostile)"
+      },
+      "system": {
+        "slug": "lincoln-s-ghost-s-top-hat",
+        "section": "Tools",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Items/lincoln-s-ghost-s-top-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lincoln's Top Hat",
+        "summary": "Lincoln's Top Hat is an equippable item in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "lincoln-s-top-hat",
+        "section": "General Items",
+        "sortOrder": 25,
+        "image": "/Dead Rails/Items/lincoln-s-top-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Liquids",
+        "summary": "Liquids are a game mechanic in Dead Rails that was introduced in version 0.14.0.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "liquids",
+        "section": "General Items",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mining Helmet",
+        "summary": "The is an equippable, also a utility item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($30); Miner"
+      },
+      "system": {
+        "slug": "mining-helmet",
+        "section": "Tools",
+        "sortOrder": 10,
+        "image": "/Dead Rails/Items/mining-helmet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Money",
+        "summary": "Display $10000.png|Money Balance",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Trading Post; Sheriff's Office; Cemetery (75 for each revive); High Roller (gets 50% more); Starting a match (20)"
+      },
+      "system": {
+        "slug": "money",
+        "section": "General Items",
+        "sortOrder": 27,
+        "image": "/Dead Rails/Items/money.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Newspaper",
+        "summary": "Newspapers is a Fuel item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Daily News Booth; Buildings"
+      },
+      "system": {
+        "slug": "newspaper",
+        "section": "Junk & Valuables",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Items/newspaper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Notes",
+        "summary": "Notes are a series of items that can be found in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "notes",
+        "section": "General Items",
+        "sortOrder": 28,
+        "image": "/Dead Rails/Items/notes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ores",
+        "summary": "Alien Biome(Ray Ammo Ore)}}",
+        "use": null,
+        "sellPrice": "$12-$40 (Silver Nugget) *$25-$80 (Gold Nugget) * (Coal) * (Rock) * (Ray Ammo)",
+        "sources": "Wild Alien Biome(Ray Ammo Ore)"
+      },
+      "system": {
+        "slug": "ores",
+        "section": "General Items",
+        "sortOrder": 29,
+        "image": "/Dead Rails/Items/ores.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pauldrons",
+        "summary": null,
+        "use": null,
+        "sellPrice": "$30",
+        "sources": "General Store ($75); Outlaw Camps; Sheriff's Office; Ironclad; After Lyfe Biome"
+      },
+      "system": {
+        "slug": "pauldrons",
+        "section": "General Items",
+        "sortOrder": 30,
+        "image": "/Dead Rails/Items/pauldrons.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poster",
+        "summary": "The Poster is given to the player in the Starter Crate of the Yeat Event gamemode. It features the location of Yeat's Concert and some advertising phrases. The text reads:",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Starter Pack (Yeat Event)"
+      },
+      "system": {
+        "slug": "poster",
+        "section": "General Items",
+        "sortOrder": 31,
+        "image": "/Dead Rails/Items/poster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Present",
+        "summary": "The Present is a unique Item that can contain a variety of different randomized items. Players can open Presents by interacting with them, making its contents appear near its location in most cases. The Present can be spawned by fully filling the rear...",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Christmas Biome; Abandoned Buildings (Frost Bite); Christmas Train"
+      },
+      "system": {
+        "slug": "present",
+        "section": "General Items",
+        "sortOrder": 32,
+        "image": "/Dead Rails/Items/present.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Register",
+        "summary": "The Register is used to purchase Items in Fortified Towns' shops and Evil Churches. It is always present when the players are required to buy these Items before using.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store; Gunsmith; Doctor's Office; Evil Church"
+      },
+      "system": {
+        "slug": "register",
+        "section": "General Items",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Revive",
+        "summary": "background-color: rgba(0, 0, 0, 0.15)",
+        "use": "100% of max HP",
+        "sellPrice": "45 (Self) * 200 (Team) * 67 (Grave)",
+        "sources": "Gamepasses; Cemetery"
+      },
+      "system": {
+        "slug": "revive",
+        "section": "Healing & Consumables",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Items/revive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ripped Bank Note",
+        "summary": "The Ripped Bank Note (also referred to as Ripped Bank Combo) is a puzzle item in Dead Rails. It is found in Sterling.",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Sterling; Mines"
+      },
+      "system": {
+        "slug": "ripped-bank-note",
+        "section": "Puzzle Items",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Items/ripped-bank-note.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rock",
+        "summary": "The Rock is a Junk item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Ores"
+      },
+      "system": {
+        "slug": "rock",
+        "section": "Junk & Valuables",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Items/rock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rope",
+        "summary": "The is a Junk item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Town; Abandoned Buildings"
+      },
+      "system": {
+        "slug": "rope",
+        "section": "Junk & Valuables",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Items/rope.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sack",
+        "summary": "The Sack is a core Tool in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Starting a match; Gamepasses (+5 Storage)"
+      },
+      "system": {
+        "slug": "sack",
+        "section": "Tools",
+        "sortOrder": 11,
+        "image": "/Dead Rails/Items/sack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Saddle",
+        "summary": "The is a Tool item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($35); Barn; Town; Abandoned Buildings; Cowboy"
+      },
+      "system": {
+        "slug": "saddle",
+        "section": "Tools",
+        "sortOrder": 12,
+        "image": "/Dead Rails/Items/saddle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sheet Metal",
+        "summary": "Sheet Metal is a defensive item in Dead Rails.",
+        "use": "Can be welded to the Train for extra defense",
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($80); Abandoned Buildings; Town; Outlaw Camps; The Alamo"
+      },
+      "system": {
+        "slug": "sheet-metal",
+        "section": "Tools",
+        "sortOrder": 13,
+        "image": "/Dead Rails/Items/sheet-metal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Bar",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$25",
+        "sources": "Houses; Headframes; Furniture Stores; Banks; Barns; Outlaw Camps"
+      },
+      "system": {
+        "slug": "silver-bar",
+        "section": "General Items",
+        "sortOrder": 34,
+        "image": "/Dead Rails/Items/silver-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Cup",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$12",
+        "sources": "Bank; Barn; Furniture; General Store; Headframe; House"
+      },
+      "system": {
+        "slug": "silver-cup",
+        "section": "General Items",
+        "sortOrder": 35,
+        "image": "/Dead Rails/Items/silver-cup.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Nugget",
+        "summary": "Silverorenugget.png|Silver Nugget",
+        "use": null,
+        "sellPrice": "$12 to $40",
+        "sources": "Ores; Mines"
+      },
+      "system": {
+        "slug": "silver-nugget",
+        "section": "General Items",
+        "sortOrder": 36,
+        "image": "/Dead Rails/Items/silver-nugget.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Painting",
+        "summary": "The Silver Painting is a Valuable in Dead Rails.",
+        "use": null,
+        "sellPrice": "$12",
+        "sources": "Bank; Barn; Furniture; General Store; Headframe; House"
+      },
+      "system": {
+        "slug": "silver-painting",
+        "section": "General Items",
+        "sortOrder": 37,
+        "image": "/Dead Rails/Items/silver-painting.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Plate",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$10",
+        "sources": "Bank; Barn; Furniture; General Store; Headframe; House"
+      },
+      "system": {
+        "slug": "silver-plate",
+        "section": "General Items",
+        "sortOrder": 38,
+        "image": "/Dead Rails/Items/silver-plate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Statue",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$20",
+        "sources": "Bank; Castle; Outlaw Camps; Furniture; General Store; Headframe"
+      },
+      "system": {
+        "slug": "silver-statue",
+        "section": "General Items",
+        "sortOrder": 39,
+        "image": "/Dead Rails/Items/silver-statue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Trophy",
+        "summary": "The Silver Trophy is a unique item in Dead Rails, only appearing in the Office in the Boxing Gym. It is a trophy made of silver, presumably awarded to those who won first in matches in the boxing gym before the zombie virus of 1899.",
+        "use": null,
+        "sellPrice": "$12",
+        "sources": "Boxing Gym"
+      },
+      "system": {
+        "slug": "silver-trophy",
+        "section": "General Items",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Watch",
+        "summary": "The , officially known as Silver Pocket Watch, is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$7",
+        "sources": "Furniture; General Store; Headframe; House; Outlaw Camp"
+      },
+      "system": {
+        "slug": "silver-watch",
+        "section": "General Items",
+        "sortOrder": 41,
+        "image": "/Dead Rails/Items/silver-watch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeleton Key",
+        "summary": "The Skeleton Key is a puzzle item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Crafting"
+      },
+      "system": {
+        "slug": "skeleton-key",
+        "section": "Tools",
+        "sortOrder": 14,
+        "image": "/Dead Rails/Items/skeleton-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snake Oil",
+        "summary": "Snake Oil is a healing item in Dead Rails.",
+        "use": "~110 HP",
+        "sellPrice": "2 Bonds *$35",
+        "sources": "Doctor's Office ($35); Doctor (Class); Towns"
+      },
+      "system": {
+        "slug": "snake-oil",
+        "section": "Tools",
+        "sortOrder": 15,
+        "image": "/Dead Rails/Items/snake-oil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Points",
+        "summary": "Star Points are special collectables in Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": "Challenges"
+      },
+      "system": {
+        "slug": "star-points",
+        "section": "General Items",
+        "sortOrder": 42,
+        "image": "/Dead Rails/Items/star-points.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stone Statue",
+        "summary": "The is a Valuable item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Bank; Outlaw Camps; Furniture; General Store; Headframe; House"
+      },
+      "system": {
+        "slug": "stone-statue",
+        "section": "Junk & Valuables",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Items/stone-statue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strange Machine",
+        "summary": "The Strange Machine is an unique Item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Tesla Lab"
+      },
+      "system": {
+        "slug": "strange-machine",
+        "section": "Light Sources",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Items/strange-machine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strange Map",
+        "summary": "The Strange Map is a puzzle item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Sterling"
+      },
+      "system": {
+        "slug": "strange-map",
+        "section": "Puzzle Items",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Items/strange-map.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strange Mask",
+        "summary": "The Strange Mask is found exclusively in the Sterling mines, with only one spawning per run. It allows the player to reanimate dead Enemies to fight on their behalf to including powerful ones like Werewolves to offering a significant advantage in high-risk...",
+        "use": null,
+        "sellPrice": "$250",
+        "sources": "Mines"
+      },
+      "system": {
+        "slug": "strange-mask",
+        "section": "Tools",
+        "sortOrder": 16,
+        "image": "/Dead Rails/Items/strange-mask.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Supply Depot Key",
+        "summary": "The Supply Depot Key, also Vault Key or Fort Key, is a miscellaneous item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Captain Prescott"
+      },
+      "system": {
+        "slug": "supply-depot-key",
+        "section": "Tools",
+        "sortOrder": 17,
+        "image": "/Dead Rails/Items/supply-depot-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Teapot",
+        "summary": "The is a Junk Item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Town; Abandoned Buildings"
+      },
+      "system": {
+        "slug": "teapot",
+        "section": "Junk & Valuables",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Items/teapot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Torch",
+        "summary": "The Torch is a Tool item and a heat source in Dead Rails. It is very useful in Deep Freeze Mode.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "General Store ($10); Abandoned Buildings; Town; Outlaw Camps; Sterling; Mines"
+      },
+      "system": {
+        "slug": "torch",
+        "section": "Tools",
+        "sortOrder": 18,
+        "image": "/Dead Rails/Items/torch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Train",
+        "summary": "The Train is the main aspect of Dead Rails.",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "train",
+        "section": "General Items",
+        "sortOrder": 43,
+        "image": "/Dead Rails/Items/train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tumbleweed",
+        "summary": "The Tumbleweed was a Junk item that could previously be found in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable (formerly $50 as a bug)",
+        "sources": "Fortified Town (first, formerly)"
+      },
+      "system": {
+        "slug": "tumbleweed",
+        "section": "Junk & Valuables",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Items/tumbleweed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valuables",
+        "summary": "Valuables can be sold at the Trading Post for money (excluding Outlaws and Captain Prescott, which are sold at the Sheriff's office), with their price depending on rarity and worth. These rare items can be found along the train ride, especially in...",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "valuables",
+        "section": "General Items",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vase",
+        "summary": "The Vase is a Junk Item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Town; Abandoned Buildings; Mines"
+      },
+      "system": {
+        "slug": "vase",
+        "section": "Junk & Valuables",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Items/vase.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wanted Poster",
+        "summary": "The is a Fuel item in Dead Rails.",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Buildings"
+      },
+      "system": {
+        "slug": "wanted-poster",
+        "section": "General Items",
+        "sortOrder": 45,
+        "image": "/Dead Rails/Items/wanted-poster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Werewolf Limb",
+        "summary": "LeftWerewolfArm.png|Left Arm",
+        "use": null,
+        "sellPrice": "Unsellable",
+        "sources": "Tesla Lab"
+      },
+      "system": {
+        "slug": "werewolf-limb",
+        "section": "Puzzle Items",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Items/werewolf-limb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wheel",
+        "summary": "The is a Junk item in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Abandoned Buildings"
+      },
+      "system": {
+        "slug": "wheel",
+        "section": "Junk & Valuables",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Items/wheel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wooden Bucket",
+        "summary": "The Wooden Bucket, also rendered as Bucket in-game, is a storage item in Dead Rails. It functions like the Glass Bottle, but can store much larger amounts of liquid. Can be found in some buildings, the General Store of the Fortified Towns, but is also a...",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "wooden-bucket",
+        "section": "General Items",
+        "sortOrder": 46,
+        "image": "/Dead Rails/Items/wooden-bucket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wooden Painting",
+        "summary": "The Wooden Painting is a Valuable in Dead Rails.",
+        "use": null,
+        "sellPrice": "$5",
+        "sources": "Bank; Barn; Furniture; General Store; Headframe; House"
+      },
+      "system": {
+        "slug": "wooden-painting",
+        "section": "General Items",
+        "sortOrder": 47,
+        "image": "/Dead Rails/Items/wooden-painting.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombie Miner",
+        "summary": "DynamiteZombieRender.png|A render of",
+        "use": null,
+        "sellPrice": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "zombie-miner",
+        "section": "Light Sources",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Items/zombie-miner.png"
+      }
+    }
+  ]
+}

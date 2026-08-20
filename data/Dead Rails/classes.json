@@ -1,0 +1,496 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dead Rails",
+    "gameSlug": "dead-rails",
+    "collection": "classes",
+    "route": "/wiki/dead-rails/classes",
+    "catalogCode": "dead-rails-classes",
+    "itemFields": [
+      "summary",
+      "cost",
+      "startingItems",
+      "ability"
+    ],
+    "columns": [
+      "summary",
+      "cost",
+      "startingItems",
+      "ability"
+    ],
+    "display": {
+      "groupLabel": "Class type",
+      "sectionOrder": [
+        "Standard Classes",
+        "Ability Classes"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "cost",
+        "ability",
+        "startingItems"
+      ],
+      "tableFields": [
+        "cost",
+        "ability"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        },
+        "ability": {
+          "kind": "highlight",
+          "label": "Ability",
+          "omitWhenEmpty": true
+        },
+        "startingItems": {
+          "kind": "detail",
+          "label": "Starting items",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cowboy",
+        "summary": "A Western-themed class granting substantial starting equipment.",
+        "cost": "50 Bonds",
+        "startingItems": "x1 Shovel; x1 Saddle; x1 Revolver; x2 Revolver Ammo",
+        "ability": "Spawns a Horse at the start of the run."
+      },
+      "system": {
+        "slug": "cowboy",
+        "section": "Standard Classes",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Classes/cowboy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Knight",
+        "summary": "The Knight is an offensive Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1× Helmet; 1× Chestplate; 1× Sword; 1x Shovel",
+        "ability": null
+      },
+      "system": {
+        "slug": "knight",
+        "section": "Standard Classes",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Classes/knight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Miner",
+        "summary": "The Miner is a support Class in Dead Rails.",
+        "cost": "15 Bonds",
+        "startingItems": "2x Coal; 1x Mining Helmet; 1x Pickaxe",
+        "ability": null
+      },
+      "system": {
+        "slug": "miner",
+        "section": "Standard Classes",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Classes/miner.png"
+      }
+    },
+    {
+      "item": {
+        "name": "None",
+        "summary": "None class is a special Class in Dead Rails.",
+        "cost": "None",
+        "startingItems": "1x Shovel",
+        "ability": null
+      },
+      "system": {
+        "slug": "none",
+        "section": "Standard Classes",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Classes/none.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Alamo",
+        "summary": "The Alamo is a defensive Class in Dead Rails.",
+        "cost": "50 Bonds",
+        "startingItems": "1x Shovel; 3x Barbed Wire; 3x Metal Sheet; 1x Helmet",
+        "ability": null
+      },
+      "system": {
+        "slug": "the-alamo",
+        "section": "Standard Classes",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Classes/the-alamo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien",
+        "summary": "The Alien Class is a special class within Dead Rails.",
+        "cost": "Completing Alien Mode",
+        "startingItems": "1x Shovel 1x Ray Rifle 2x Ray Ammo",
+        "ability": "Spawns with 4 Alien Bodyguards (for some reason, this have been displayed as passive abilities instead of normal starting items). (UNLISTED) Spawns an Alien Biome in the run, where you can find Ray Ammo Ores."
+      },
+      "system": {
+        "slug": "alien",
+        "section": "Ability Classes",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Classes/alien.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arsonist",
+        "summary": "Brief Information regarding the Class, similar to leader sentence.",
+        "cost": "20 Bonds",
+        "startingItems": "1x Shovel; 4x Molotov",
+        "ability": "Immune to fire damage. * Double fire damage."
+      },
+      "system": {
+        "slug": "arsonist",
+        "section": "Ability Classes",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Classes/arsonist.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Conductor",
+        "summary": "The Conductor is a support Class in Dead Rails.",
+        "cost": "50 Bonds",
+        "startingItems": "2x Coal",
+        "ability": "Drives the Train at a 30% increased maximum speed."
+      },
+      "system": {
+        "slug": "conductor",
+        "section": "Ability Classes",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Classes/conductor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrosioneer",
+        "summary": "The Corrosioneer is an offensive Class in Dead Rails.",
+        "cost": "35 Bonds",
+        "startingItems": "x1 Shovel; x1 Acid Barrel; x1 Acid Mine",
+        "ability": "Immune to acid damage."
+      },
+      "system": {
+        "slug": "corrosioneer",
+        "section": "Ability Classes",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Classes/corrosioneer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed",
+        "summary": "The Cursed is an offensive Class in Dead Rails.",
+        "cost": "50 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Your health, damage, and speed increase every minute until they reach +15%. * -10% Health, Damage, and Speed at the start."
+      },
+      "system": {
+        "slug": "cursed",
+        "section": "Ability Classes",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Classes/cursed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demolitionist",
+        "summary": "The Demolitionist is an offensive Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Gunpowder Barrel; 1x Shovel; 4x Landmine",
+        "ability": "75% self explosion resistance. *150% damage with explosives."
+      },
+      "system": {
+        "slug": "demolitionist",
+        "section": "Ability Classes",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Classes/demolitionist.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Doctor",
+        "summary": "Starter Pack 149(Only new players who have been playing for 72 hours or less since their first game.)",
+        "cost": "15 Bonds Starter Pack 149(Only new players who have been playing for 72 hours or less since their first game.)",
+        "startingItems": "1x Shovel; 2x Bandage; 2x Snake Oil",
+        "ability": "Can revive other players by sacrificing 50% of their current health"
+      },
+      "system": {
+        "slug": "doctor",
+        "section": "Ability Classes",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Classes/doctor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frankenstein",
+        "summary": "The is a special Class in Dead Rails.",
+        "cost": "100 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Automatically revives the player upon death, once per game."
+      },
+      "system": {
+        "slug": "frankenstein",
+        "section": "Ability Classes",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Classes/frankenstein.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost",
+        "summary": "The is a defensive Class in Dead Rails.",
+        "cost": "100 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Less detectable by enemies. * All enemy ranged attacks have a 90% chance not to deal any damage. * Damage taken from melee attacks is increased."
+      },
+      "system": {
+        "slug": "ghost",
+        "section": "Ability Classes",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Classes/ghost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "High Roller",
+        "summary": "The High Roller is a support Class in Dead Rails.",
+        "cost": "50 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Collect Money Bags for 1.5x more money . * Has a 10x chance of getting struck by lightning in a Stormy Night ."
+      },
+      "system": {
+        "slug": "high-roller",
+        "section": "Ability Classes",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Classes/high-roller.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hunter",
+        "summary": "Spawn with a crossbow and bear traps, but all wild wolves will be werewolves.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Shovel; 1x Crossbow; 2x Bear Trap; 1x Arrows",
+        "ability": "All wild wolves will be werewolves ."
+      },
+      "system": {
+        "slug": "hunter",
+        "section": "Ability Classes",
+        "sortOrder": 10,
+        "image": "/Dead Rails/Classes/hunter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ironclad",
+        "summary": "The Ironclad is a defensive Class in Dead Rails.",
+        "cost": "100 Bonds",
+        "startingItems": "1x Helmet; 1x Chestplate; 1x Left Shoulder Armor; 1x Right Shoulder Armor; 1x Shovel",
+        "ability": null
+      },
+      "system": {
+        "slug": "ironclad",
+        "section": "Ability Classes",
+        "sortOrder": 11,
+        "image": "/Dead Rails/Classes/ironclad.png"
+      }
+    },
+    {
+      "item": {
+        "name": "King",
+        "summary": "The King is an offensive Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Gains more health and damage the more teammates play as a Knight."
+      },
+      "system": {
+        "slug": "king",
+        "section": "Ability Classes",
+        "sortOrder": 12,
+        "image": "/Dead Rails/Classes/king.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Milkman",
+        "summary": "The is an offensive Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1× Bottle of Milk; 1× Shovel",
+        "ability": "Your health, damage, speed and health regeneration speed increase based on the amount of milk on you."
+      },
+      "system": {
+        "slug": "milkman",
+        "section": "Ability Classes",
+        "sortOrder": 13,
+        "image": "/Dead Rails/Classes/milkman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Musician",
+        "summary": "Brief Information regarding the Class, similar to leader sentence.",
+        "cost": "15 Bonds",
+        "startingItems": "1x Banjo",
+        "ability": "Can heal other players by playing the Banjo. * Does not spawn with a melee weapon."
+      },
+      "system": {
+        "slug": "musician",
+        "section": "Ability Classes",
+        "sortOrder": 14,
+        "image": "/Dead Rails/Classes/musician.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Necromancer",
+        "summary": "The Necromancer is a support Class in Dead Rails.",
+        "cost": "35 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Enemies killed with a melee weapon has a 25% chance of being reincarnated * Reincarnating enemies makes you lose 10 hp."
+      },
+      "system": {
+        "slug": "necromancer",
+        "section": "Ability Classes",
+        "sortOrder": 15,
+        "image": "/Dead Rails/Classes/necromancer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Packmaster",
+        "summary": "The is a support Class in Dead Rails.",
+        "cost": "35 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Spawns with 3 tamed Wolves. Wolves that bite you are automatically tamed."
+      },
+      "system": {
+        "slug": "packmaster",
+        "section": "Ability Classes",
+        "sortOrder": 16,
+        "image": "/Dead Rails/Classes/packmaster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "President",
+        "summary": "The President is a support Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Spawns a powerful soldier after death. * Enemies can see you from 2x farther."
+      },
+      "system": {
+        "slug": "president",
+        "section": "Ability Classes",
+        "sortOrder": 17,
+        "image": "/Dead Rails/Classes/president.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Priest",
+        "summary": "The Priest is a support Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Shovel; 2x Crucifix; 2x Holy Water",
+        "ability": "Immune to lightning strikes."
+      },
+      "system": {
+        "slug": "priest",
+        "section": "Ability Classes",
+        "sortOrder": 18,
+        "image": "/Dead Rails/Classes/priest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Survivalist",
+        "summary": "The Survivalist is an offensive Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Shovel; 1x Tomahawk",
+        "ability": "Increase damage depending on health lost."
+      },
+      "system": {
+        "slug": "survivalist",
+        "section": "Ability Classes",
+        "sortOrder": 19,
+        "image": "/Dead Rails/Classes/survivalist.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tycoon",
+        "summary": "The Tycoon is an offensive Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Gains improved damage and max health depending on the player's money (capped at $2,000 )"
+      },
+      "system": {
+        "slug": "tycoon",
+        "section": "Ability Classes",
+        "sortOrder": 20,
+        "image": "/Dead Rails/Classes/tycoon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire",
+        "summary": "The Vampire is an offensive Class in Dead Rails.",
+        "cost": "75 75 Bonds *235 275 (Christmas Bundle)",
+        "startingItems": "1× Vampire Knife; 1× Shovel",
+        "ability": "2x movement speed. * 2x melee damage. * Heals when covered in normal Blood. * Takes damage when exposed to the sun"
+      },
+      "system": {
+        "slug": "vampire",
+        "section": "Ability Classes",
+        "sortOrder": 21,
+        "image": "/Dead Rails/Classes/vampire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Werewolf",
+        "summary": "The Werewolf Class is an offensive Class in Dead Rails.",
+        "cost": "50 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "2x damage, speed, and health during the night. * 0.9x damage, speed, and health during the day."
+      },
+      "system": {
+        "slug": "werewolf",
+        "section": "Ability Classes",
+        "sortOrder": 22,
+        "image": "/Dead Rails/Classes/werewolf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombie",
+        "summary": "The Zombie is a special Class in Dead Rails.",
+        "cost": "75 Bonds",
+        "startingItems": "1x Shovel",
+        "ability": "Can eat dead bodies to replenish health. * Less detected by enemies. * Heals when covered in Zombie Blood. * Cannot use Bandages or Snake Oils."
+      },
+      "system": {
+        "slug": "zombie",
+        "section": "Ability Classes",
+        "sortOrder": 23,
+        "image": "/Dead Rails/Classes/zombie.png"
+      }
+    }
+  ]
+}

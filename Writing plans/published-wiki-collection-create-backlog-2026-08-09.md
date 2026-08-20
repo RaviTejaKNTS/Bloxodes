@@ -597,3 +597,56 @@ Evidence: [full report](../tmp/game-collection-suggestions/wizard-alchemy.md)
 - Clean the Supermarket — Grocery Items and Upgrades need refreshes, but no distinct missing collection passed.
 - Murderers vs Sheriffs — Maps and Emotes still lack reliable current row-level evidence; detailed Fandom coverage belongs to a different universe.
 - Push Rock for Brainrots — existing Brainrots, Rocks, and Upgrades cover the durable documented systems.
+
+## Top-50 wiki-gap batch (added 2026-08-20)
+
+New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs a new wiki hub page plus the listed collections. Evidence: [full report](../tmp/game-collection-suggestions/top50-wiki-gaps-2026-08-20.md). Skipped games and rows are recorded in the report; notable revisits: Steal an egg Pets/Eggs and Anime Card Farm once real sources mature.
+
+### Sol's RNG (5361032378)
+
+- [ ] Auras
+- [ ] Gears
+- [ ] Potions
+- [ ] Biomes
+
+### Dead Rails (7018190066)
+
+- [x] Classes
+- [x] Weapons
+- [x] Items
+- [x] Entities
+- [x] Trains
+- [x] Locations
+
+### Dandy's World (5569032992)
+
+- [ ] Toons
+- [ ] Twisteds
+- [ ] Trinkets
+
+### BedWars (2619619496)
+
+- [ ] Kits
+- [ ] Items
+
+### Tower of Hell (703124385)
+
+- [ ] Sections
+- [ ] Mutators
+
+### Steal an egg (10563114921)
+
+- [ ] Biomes
+
+### Grow a Chicken Fighter (10338952197)
+
+- [ ] Eggs
+
+### Anime Origins (8946565814)
+
+- [ ] Units
+
+### BlockSpin (6765805766)
+
+- [ ] Weapons
+- [ ] Vehicles

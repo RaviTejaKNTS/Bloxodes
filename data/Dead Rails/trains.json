@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dead Rails",
+    "gameSlug": "dead-rails",
+    "collection": "trains",
+    "route": "/wiki/dead-rails/trains",
+    "catalogCode": "dead-rails-trains",
+    "itemFields": [
+      "summary",
+      "cost",
+      "baseSpeed",
+      "features"
+    ],
+    "columns": [
+      "summary",
+      "cost",
+      "baseSpeed",
+      "features"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Trains"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "cost",
+        "baseSpeed",
+        "features"
+      ],
+      "tableFields": [
+        "cost",
+        "baseSpeed"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        },
+        "baseSpeed": {
+          "kind": "chip",
+          "label": "Base speed",
+          "omitWhenEmpty": true
+        },
+        "features": {
+          "kind": "detail",
+          "label": "Features",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "80s Train",
+        "summary": "The 80s Train was a train created as part of a collaboration event between Dead Rails and Stranger Things '85.",
+        "cost": "Participated in the Stranger Things: '85 watch party.",
+        "baseSpeed": "75",
+        "features": "More max speed; Enclosed boxcar; Purple headlights; Shiny hull; Two pieces; Additional small car at the back"
+      },
+      "system": {
+        "slug": "80s-train",
+        "section": "Trains",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Trains/80s-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Armored Train",
+        "summary": "The Armored Train is an enclosed Train in Dead Rails.",
+        "cost": "275 Bonds",
+        "baseSpeed": "65",
+        "features": "Made entirely out of metal; Unclimbable sides; One piece; Comes with Maxim Guns"
+      },
+      "system": {
+        "slug": "armored-train",
+        "section": "Trains",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Trains/armored-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cattle Car",
+        "summary": "The Cattle Car is an enclosed Train in Dead Rails.",
+        "cost": "225 Bonds",
+        "baseSpeed": "65",
+        "features": "Enclosed boxcar; Easy roof access; Two pieces; No special abilities"
+      },
+      "system": {
+        "slug": "cattle-car",
+        "section": "Trains",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Trains/cattle-car.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Default Train",
+        "summary": "The Default Train is the standard train that all players start with when they first enter the game. It is the only Train available to new players until they can obtain another one (via having enough Bonds or gifting). Being the default option, it has no...",
+        "cost": "0 Bonds",
+        "baseSpeed": "65",
+        "features": "Open flatcar; Two pieces; No special abilities"
+      },
+      "system": {
+        "slug": "default-train",
+        "section": "Trains",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Trains/default-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dracula's Train",
+        "summary": "The Dracula's Train is an enclosed Train in Dead Rails.",
+        "cost": "300 Bonds",
+        "baseSpeed": "65",
+        "features": "Enclosed passenger car; Two pieces; Translucent roof; Emits light; Kills near the train heal players"
+      },
+      "system": {
+        "slug": "dracula-s-train",
+        "section": "Trains",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Trains/dracula-s-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frost Train",
+        "summary": "The Frost Train is an enclosed Train in Dead Rails.",
+        "cost": "290 Bonds",
+        "baseSpeed": "80",
+        "features": "Freezes nearby enemies; Made entirely out of metal; Unclimbable sides; Faster max speed; One piece"
+      },
+      "system": {
+        "slug": "frost-train",
+        "section": "Trains",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Trains/frost-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Train",
+        "summary": "The Ghost Train is an open Train in Dead Rails.",
+        "cost": "325 Bonds",
+        "baseSpeed": "65",
+        "features": "Open flatcar; Two pieces; Partially transparent; Emits light; Kills near the train summon temporary allies"
+      },
+      "system": {
+        "slug": "ghost-train",
+        "section": "Trains",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Trains/ghost-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Rush",
+        "summary": "Check Default Train for more information, since this is a reskin of it.",
+        "cost": null,
+        "baseSpeed": null,
+        "features": null
+      },
+      "system": {
+        "slug": "gold-rush",
+        "section": "Trains",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Trains/gold-rush.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Old Faithful",
+        "summary": "The Old Faithful is a unique open Train in Dead Rails.",
+        "cost": "350 Bonds",
+        "baseSpeed": "65",
+        "features": "Uses liquids as fuel, instead of the usual fuel items; Has a large variety of useful abilities; Starts with a Canteen full of Water; Unique horn sound"
+      },
+      "system": {
+        "slug": "old-faithful",
+        "section": "Trains",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Trains/old-faithful.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Passenger Train",
+        "summary": "The Passenger Train is an enclosed Train in Dead Rails.",
+        "cost": "250 Bonds",
+        "baseSpeed": "65",
+        "features": "Enclosed passenger car; Decorative seats; Two pieces; No special abilities"
+      },
+      "system": {
+        "slug": "passenger-train",
+        "section": "Trains",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Trains/passenger-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Presidential Train",
+        "summary": "The Presidential Train is an enclosed Train in Dead Rails.",
+        "cost": "250 Bonds",
+        "baseSpeed": "65",
+        "features": "Well protected; Interior lighting; One piece; Unclimbable by enemies (except zombies); Kills near the train summon a powerful ally"
+      },
+      "system": {
+        "slug": "presidential-train",
+        "section": "Trains",
+        "sortOrder": 10,
+        "image": "/Dead Rails/Trains/presidential-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wooden Train",
+        "summary": "The Wooden Train is an open Train in Dead Rails.",
+        "cost": "285 Bonds",
+        "baseSpeed": "75",
+        "features": "Entirely open; One piece; Faster max speed; Faster acceleration; Uses less fuel; Spawns with Ballista"
+      },
+      "system": {
+        "slug": "wooden-train",
+        "section": "Trains",
+        "sortOrder": 11,
+        "image": "/Dead Rails/Trains/wooden-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yeat's Train",
+        "summary": "Yeat's Train is an open Train in Dead Rails.",
+        "cost": "Completing Yeat Event",
+        "baseSpeed": "65 115 (Yeat Event exclusive)",
+        "features": "Open flatcar; Two pieces; Emits light; Kills near the train summon an Alligator"
+      },
+      "system": {
+        "slug": "yeat-s-train",
+        "section": "Trains",
+        "sortOrder": 12,
+        "image": "/Dead Rails/Trains/yeat-s-train.png"
+      }
+    }
+  ]
+}

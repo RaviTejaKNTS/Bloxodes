@@ -1,0 +1,875 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dead Rails",
+    "gameSlug": "dead-rails",
+    "collection": "weapons",
+    "route": "/wiki/dead-rails/weapons",
+    "catalogCode": "dead-rails-weapons",
+    "itemFields": [
+      "summary",
+      "damage",
+      "headshot",
+      "fireRate",
+      "sources"
+    ],
+    "columns": [
+      "summary",
+      "damage",
+      "headshot",
+      "fireRate",
+      "sources"
+    ],
+    "display": {
+      "groupLabel": "Weapon type",
+      "sectionOrder": [
+        "Melee",
+        "Pistols",
+        "Rifles",
+        "Other Ranged",
+        "Explosives",
+        "Utility",
+        "Welded",
+        "Unique"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "damage",
+        "headshot",
+        "fireRate",
+        "sources"
+      ],
+      "tableFields": [
+        "damage",
+        "headshot"
+      ],
+      "fieldPresentation": {
+        "damage": {
+          "kind": "chip",
+          "label": "Damage",
+          "omitWhenEmpty": true
+        },
+        "headshot": {
+          "kind": "chip",
+          "label": "Headshot",
+          "omitWhenEmpty": true
+        },
+        "fireRate": {
+          "kind": "chip",
+          "label": "Fire rate",
+          "omitWhenEmpty": true
+        },
+        "sources": {
+          "kind": "detail",
+          "label": "Found at",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Axe",
+        "summary": "The Axe used to be a Melee Weapon in Dead Rails.",
+        "damage": "25 (each hit) *41.6 (DPS)",
+        "headshot": null,
+        "fireRate": "0.6s cooldown",
+        "sources": "Starting a match (formerly)"
+      },
+      "system": {
+        "slug": "axe",
+        "section": "Melee",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/axe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cavalry Sword",
+        "summary": "The Cavalry Sword is a Melee Weapon in Dead Rails.",
+        "damage": "7.5 (uncharged) *45 (fully charged) *37.5-56.25 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "Abandoned buildings; General Store; Towns"
+      },
+      "system": {
+        "slug": "cavalry-sword",
+        "section": "Melee",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/cavalry-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hammer",
+        "summary": "The Hammer used to be a Melee Weapon in Dead Rails.",
+        "damage": "25 (each hit) *41,6 (DPS)",
+        "headshot": null,
+        "fireRate": "0.6s cooldown",
+        "sources": "Starting a match (formerly)"
+      },
+      "system": {
+        "slug": "hammer",
+        "section": "Melee",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/hammer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Wrench",
+        "summary": "The Holy Wrench is an admin-exclusive melee weapon in Dead Rails.",
+        "damage": "0",
+        "headshot": null,
+        "fireRate": "?",
+        "sources": "Admin commands"
+      },
+      "system": {
+        "slug": "holy-wrench",
+        "section": "Melee",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/holy-wrench.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pickaxe",
+        "summary": "The Pickaxe is a melee weapon in Dead Rails.",
+        "damage": "7.5 (uncharged) *45 (fully charged) *37.5 - 56.25 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "General Stores; Miner"
+      },
+      "system": {
+        "slug": "pickaxe",
+        "section": "Melee",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/pickaxe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shovel",
+        "summary": "The Shovel is a Melee Weapon in Dead Rails.",
+        "damage": "5 (uncharged) *30 (fully charged) *25-37.5 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "Musician; Miner; Conductor; Santa (Class); Krampus (Class)"
+      },
+      "system": {
+        "slug": "shovel",
+        "section": "Melee",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Weapons/shovel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spear",
+        "summary": "The Spear is a melee weapon in Dead Rails.",
+        "damage": "12.5 (uncharged) *75 (fully charged) *62.5-68.2 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.9s to fully charge",
+        "sources": "Outlaw Camps; House; Doctor's Office; Gunsmith; Sheriff's Office; Bank"
+      },
+      "system": {
+        "slug": "spear",
+        "section": "Melee",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Weapons/spear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sword",
+        "summary": "The Sword is a Melee Weapon in Dead Rails.",
+        "damage": "7.5 (uncharged) *45 (fully charged) *37.5-56.25 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "Knight"
+      },
+      "system": {
+        "slug": "sword",
+        "section": "Melee",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Weapons/sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tomahawk",
+        "summary": "The Tomahawk is a Melee Weapon in Dead Rails.",
+        "damage": "7.5 (uncharged) *45 (fully charged) *37.5-56.25 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "General Store; Abandoned Buildings; Towns; Outlaw Camps; Survivalist"
+      },
+      "system": {
+        "slug": "tomahawk",
+        "section": "Melee",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Weapons/tomahawk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework Gun",
+        "summary": "The Firework Gun is a ranged Weapon in Dead Rails.",
+        "damage": "60",
+        "headshot": "120",
+        "fireRate": "1s",
+        "sources": "Gunsmith; Sheriff's Office; Outlaw Camps; Outlaw's Town"
+      },
+      "system": {
+        "slug": "firework-gun",
+        "section": "Pistols",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/firework-gun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flintlock Pistol",
+        "summary": "The Flintlock Pistol is a Ranged Weapon in Dead Rails.",
+        "damage": "125",
+        "headshot": "225",
+        "fireRate": "0.7s",
+        "sources": "Outlaw Camps; Gunsmith (Destroyed); Sheriff's Office (Destroyed)"
+      },
+      "system": {
+        "slug": "flintlock-pistol",
+        "section": "Pistols",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/flintlock-pistol.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mauser",
+        "summary": "The Mauser C96, also called the C96 or just the Mauser for short, is a Ranged Weapon in Dead Rails.",
+        "damage": "34",
+        "headshot": "57.8",
+        "fireRate": "0.4s (hold fire)/0.065 (rapid fire)",
+        "sources": "Gunsmith; Outlaw Camp; Sheriff; Gamepasses"
+      },
+      "system": {
+        "slug": "mauser",
+        "section": "Pistols",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/mauser.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Navy Revolver",
+        "summary": "The Navy Revolver is a Ranged Weapon in Dead Rails.",
+        "damage": "50",
+        "headshot": "85",
+        "fireRate": "0.5s (hold fire)/0.065s (rapid fire)",
+        "sources": "Fort Constitution; Gunsmith; Outlaw Camp; Outlaw's Town; Sheriff"
+      },
+      "system": {
+        "slug": "navy-revolver",
+        "section": "Pistols",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/navy-revolver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ray Pistol",
+        "summary": "The Ray Pistol is a special weapon within Dead Rails.",
+        "damage": "65",
+        "headshot": null,
+        "fireRate": "0.35 seconds",
+        "sources": "Fortified Town (Alien Mode)"
+      },
+      "system": {
+        "slug": "ray-pistol",
+        "section": "Pistols",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/ray-pistol.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Revolver",
+        "summary": "The Revolver is a Ranged Weapon in Dead Rails.",
+        "damage": "30",
+        "headshot": "51",
+        "fireRate": "0.5s (hold fire)/0.065s (rapid fire)",
+        "sources": "Castle; Gunsmith; Outlaw Camp; Sheriff; Outlaw's Town; Cowboy"
+      },
+      "system": {
+        "slug": "revolver",
+        "section": "Pistols",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Weapons/revolver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bolt-Action Rifle",
+        "summary": "The Bolt-Action Rifle is a ranged Weapon in Dead Rails.",
+        "damage": "100",
+        "headshot": "200",
+        "fireRate": "1.1s",
+        "sources": "Fort Constitution; Gunsmith; Outlaw Camps; Outlaw's Town; Sheriff"
+      },
+      "system": {
+        "slug": "bolt-action-rifle",
+        "section": "Rifles",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/bolt-action-rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elephant Rifle",
+        "summary": "The Elephant Rifle is a Ranged Weapon in Dead Rails.",
+        "damage": "100",
+        "headshot": "160",
+        "fireRate": "0.55s (holding fire)/0.28s (rapid fire)",
+        "sources": "Outlaw's Town; Outlaw Camps; Sheriff's Office (Destroyed); Gunsmith (Destroyed)"
+      },
+      "system": {
+        "slug": "elephant-rifle",
+        "section": "Rifles",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/elephant-rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ray Rifle",
+        "summary": "The Ray Rifle is an exclusive weapon available only to the Alien (Class). This weapon fires three rounds of ammunition simultaneously with one shot.",
+        "damage": "40",
+        "headshot": "68",
+        "fireRate": "0.28 seconds",
+        "sources": "Alien (Class)"
+      },
+      "system": {
+        "slug": "ray-rifle",
+        "section": "Rifles",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/ray-rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Revolving Rifle",
+        "summary": "The Revolving Rifle is a Ranged Weapon in Dead Rails.",
+        "damage": "70",
+        "headshot": "112",
+        "fireRate": "0.55s",
+        "sources": "Sheriff's Office; Gunsmith; Outlaw Camps; Outlaw's Town"
+      },
+      "system": {
+        "slug": "revolving-rifle",
+        "section": "Rifles",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/revolving-rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rifle",
+        "summary": "The Rifle is a ranged Weapon in Dead Rails.",
+        "damage": "70",
+        "headshot": "112",
+        "fireRate": "0.55s",
+        "sources": "Castle; Gunsmith; Sheriff; Outlaw Camps; Outlaw's Town"
+      },
+      "system": {
+        "slug": "rifle",
+        "section": "Rifles",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Springfield Rifle",
+        "summary": "The Springfield Rifle is a Ranged Weapon in Dead Rails.",
+        "damage": "250",
+        "headshot": "500",
+        "fireRate": "0.7s",
+        "sources": "Outlaw Camps; Outlaw's Town; Sheriff's Office; Gunsmith"
+      },
+      "system": {
+        "slug": "springfield-rifle",
+        "section": "Rifles",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Weapons/springfield-rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blunderbuss",
+        "summary": "The Blunderbuss is a Ranged Weapon in Dead Rails.",
+        "damage": "35.7×7 (250 total)",
+        "headshot": "71.4×7 (500 total)",
+        "fireRate": "0.7s",
+        "sources": "General Store; Stillwater Prison; Sheriff's Office; Gunsmith; Outlaw Camps; Outlaw's Town"
+      },
+      "system": {
+        "slug": "blunderbuss",
+        "section": "Other Ranged",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/blunderbuss.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crossbow",
+        "summary": "The Crossbow is a Ranged Weapon in Dead Rails.",
+        "damage": "75",
+        "headshot": "150",
+        "fireRate": "1s",
+        "sources": "Stillwater Prison; General Store; Hunter"
+      },
+      "system": {
+        "slug": "crossbow",
+        "section": "Other Ranged",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/crossbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glass Bottle",
+        "summary": "The Glass Bottle is a Tool item in Dead Rails.",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "glass-bottle",
+        "section": "Other Ranged",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/glass-bottle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sawed-Off Shotgun",
+        "summary": "The Sawed-Off Shotgun is a Ranged Weapon in Dead Rails.",
+        "damage": "20×5 (100 total)",
+        "headshot": "40×5 (200 total)",
+        "fireRate": "0.2s",
+        "sources": "Castle (Guaranteed); Gunsmith (abandoned); Outlaw Camps; Sheriff's Office (abandoned); Outlaw's Town; Gamepass"
+      },
+      "system": {
+        "slug": "sawed-off-shotgun",
+        "section": "Other Ranged",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/sawed-off-shotgun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shotgun",
+        "summary": "The Shotgun is a close ranged Weapon in Dead Rails.",
+        "damage": "16.7×6 (100 total)",
+        "headshot": "33.4×6 (200 total)",
+        "fireRate": "1s",
+        "sources": "Castle; Fort Constitution; Gunsmith; Outlaw Camps; Outlaw Town; Sheriff's Office"
+      },
+      "system": {
+        "slug": "shotgun",
+        "section": "Other Ranged",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/shotgun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thompson",
+        "summary": "The Thompson, often referred to as the Tommy Gun, is a ranged Weapon in Dead Rails.",
+        "damage": "15",
+        "headshot": "22.5",
+        "fireRate": "0.1 seconds",
+        "sources": "Gamepasses; Fortified Town (Test Server); Abandoned Shieff office (3/1000 chance spawns)"
+      },
+      "system": {
+        "slug": "thompson",
+        "section": "Other Ranged",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Weapons/thompson.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Acid Barrel",
+        "summary": "The Acid Barrel is an explosive item in Dead Rails.",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "acid-barrel",
+        "section": "Explosives",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/acid-barrel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bottle Rocket Launcher",
+        "summary": "The is an explosive on Dead Rails.",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "bottle-rocket-launcher",
+        "section": "Explosives",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/bottle-rocket-launcher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dynamite",
+        "summary": "Dynamite is an explosive item in Dead Rails.",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "dynamite",
+        "section": "Explosives",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/dynamite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gunpowder Barrel",
+        "summary": "The spawns next to the General Store in the first Safe Zone. It can be purchased from the General Store for $50. It can be ignited with a Torch, the Train's firebox, or the Flamethrower, causing it to explode similiar to the Dynamite, but with higher...",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "gunpowder-barrel",
+        "section": "Explosives",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/gunpowder-barrel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeleton Grenade",
+        "summary": "The Skeleton Grenade is a special explosive weapon in Dead Rails",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "skeleton-grenade",
+        "section": "Explosives",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/skeleton-grenade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crucifix",
+        "summary": "The Crucifix, also called the Cross, is a utility Weapon in Dead Rails.",
+        "damage": "420",
+        "headshot": null,
+        "fireRate": null,
+        "sources": "Church; Priest Class"
+      },
+      "system": {
+        "slug": "crucifix",
+        "section": "Utility",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/crucifix.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frost Grenade",
+        "summary": "The Frost Grenade is a throwable exclusive to the Elf (Class).",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "frost-grenade",
+        "section": "Utility",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/frost-grenade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Hand Grenade",
+        "summary": "The Holy Hand Grenade is a special weapon that can be bought at an Evil Church.",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "holy-hand-grenade",
+        "section": "Utility",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/holy-hand-grenade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Water",
+        "summary": "Holy Water is a utility Weapon in Dead Rails.",
+        "damage": "See Liquids (Fire) *10-500 (Lightning)",
+        "headshot": null,
+        "fireRate": null,
+        "sources": "Church; Priest Class"
+      },
+      "system": {
+        "slug": "holy-water",
+        "section": "Utility",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/holy-water.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Molotov",
+        "summary": "The Molotov is a utility Weapon in Dead Rails.",
+        "damage": "100 - 200 (TBA)",
+        "headshot": null,
+        "fireRate": "1",
+        "sources": "Arsonist; Castle; General Store; Outlaw Camps; Crafting"
+      },
+      "system": {
+        "slug": "molotov",
+        "section": "Utility",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/molotov.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tesla Cannon",
+        "summary": "The Tesla Cannon is a special weapon that can be bought in Evil Church.",
+        "damage": "1650 (explosion) 150 DPS (aura)",
+        "headshot": null,
+        "fireRate": null,
+        "sources": "Evil Church; Lyfestyle Biome (when the Barricade is destroyed); Crafting"
+      },
+      "system": {
+        "slug": "tesla-cannon",
+        "section": "Utility",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Weapons/tesla-cannon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Acid Mine",
+        "summary": "The Acid Mine is an explosive in Dead Rails.",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "acid-mine",
+        "section": "Welded",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/acid-mine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ballista",
+        "summary": "The Ballista is a Turret in Dead Rails.",
+        "damage": "250 (42 DPS)",
+        "headshot": "500 (83 DPS)",
+        "fireRate": "3s",
+        "sources": "Town; Abandoned Buildings; Wooden Train; Stillwater Prison"
+      },
+      "system": {
+        "slug": "ballista",
+        "section": "Welded",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/ballista.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear Trap",
+        "summary": "The Bear Trap is an utility Weapon in Dead Rails.",
+        "damage": "0 to players 50 to werewolves 35 to 40 to all other mobs",
+        "headshot": null,
+        "fireRate": null,
+        "sources": "General Store; Abandoned Buildings; Hunter"
+      },
+      "system": {
+        "slug": "bear-trap",
+        "section": "Welded",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/bear-trap.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Landmine",
+        "summary": "The Landmine is an explosive in Dead Rails.",
+        "damage": null,
+        "headshot": null,
+        "fireRate": null,
+        "sources": null
+      },
+      "system": {
+        "slug": "landmine",
+        "section": "Welded",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/landmine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Maxim Gun",
+        "summary": "The Maxim Gun, also called the Maxim Turret or simply the Turret, is a turret weapon in Dead Rails.",
+        "damage": "75",
+        "headshot": "150",
+        "fireRate": "0.125s",
+        "sources": "Castle; Gunsmith; Outlaw Camps; Outlaw's Town; Sheriff; Headframe"
+      },
+      "system": {
+        "slug": "maxim-gun",
+        "section": "Welded",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/maxim-gun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cannon",
+        "summary": "The Cannon is a unique turret in Dead Rails.",
+        "damage": "500 (75 DPS)",
+        "headshot": "550 (82 DPS)",
+        "fireRate": "3s",
+        "sources": "Fort Constitution; Supply Depot; 2093 Biome"
+      },
+      "system": {
+        "slug": "cannon",
+        "section": "Unique",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Weapons/cannon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Electrocutioner",
+        "summary": "The Electrocutioner is a unique Ranged Weapon in Dead Rails.",
+        "damage": "500",
+        "headshot": null,
+        "fireRate": "1.5s",
+        "sources": "Tesla Lab; Fool's Gold"
+      },
+      "system": {
+        "slug": "electrocutioner",
+        "section": "Unique",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Weapons/electrocutioner.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Excalibur",
+        "summary": "The Excalibur is a unique melee Weapon in Dead Rails.",
+        "damage": "15 (uncharged) *90 (fully charged) *75-112.5 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "Stillwater Prison"
+      },
+      "system": {
+        "slug": "excalibur",
+        "section": "Unique",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Weapons/excalibur.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flamethrower",
+        "summary": "The Flamethower is a unique weapon in Dead Rails.",
+        "damage": "4",
+        "headshot": "6",
+        "fireRate": "0.075 seconds",
+        "sources": "Defeating Rockefeller at the Oil Refinery."
+      },
+      "system": {
+        "slug": "flamethrower",
+        "section": "Unique",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Weapons/flamethrower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jade Sword",
+        "summary": "The Jade Sword is a unique melee Weapon in Dead Rails.",
+        "damage": "7.5 (uncharged) *45 (charged) *37.5-56.25 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "Mines"
+      },
+      "system": {
+        "slug": "jade-sword",
+        "section": "Unique",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Weapons/jade-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spear of Longinus",
+        "summary": "The is a special weapon that can be bought at an Evil Church.",
+        "damage": "12.5 (uncharged) *75 (fully charged) *62.5-68.2 (DPS, weapon only)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.9s to fully charge",
+        "sources": "Evil Church"
+      },
+      "system": {
+        "slug": "spear-of-longinus",
+        "section": "Unique",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Weapons/spear-of-longinus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Knife",
+        "summary": "The Vampire Knife, also called the Vampire Blade, is a unique melee Weapon in Dead Rails.",
+        "damage": "7.5 (uncharged) *45 (fully charged) *37.5-56.25 (DPS)",
+        "headshot": null,
+        "fireRate": "0.2s cooldown *0.6s to fully charge",
+        "sources": "Castle (Coffin); Vampire (Class)"
+      },
+      "system": {
+        "slug": "vampire-knife",
+        "section": "Unique",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Weapons/vampire-knife.png"
+      }
+    }
+  ]
+}

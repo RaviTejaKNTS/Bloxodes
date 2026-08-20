@@ -1,0 +1,838 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dead Rails",
+    "gameSlug": "dead-rails",
+    "collection": "locations",
+    "route": "/wiki/dead-rails/locations",
+    "catalogCode": "dead-rails-locations",
+    "itemFields": [
+      "summary",
+      "whereOnLine",
+      "rarity",
+      "inhabitants",
+      "features"
+    ],
+    "columns": [
+      "summary",
+      "whereOnLine",
+      "rarity",
+      "inhabitants",
+      "features"
+    ],
+    "display": {
+      "groupLabel": "Location type",
+      "sectionOrder": [
+        "Biomes",
+        "Buildings & Stops",
+        "Unique Locations"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "whereOnLine",
+        "rarity",
+        "inhabitants",
+        "features"
+      ],
+      "tableFields": [
+        "whereOnLine",
+        "rarity"
+      ],
+      "fieldPresentation": {
+        "whereOnLine": {
+          "kind": "chip",
+          "label": "Track range",
+          "omitWhenEmpty": true
+        },
+        "rarity": {
+          "kind": "plain",
+          "label": "Spawn rarity",
+          "omitWhenEmpty": true
+        },
+        "inhabitants": {
+          "kind": "detail",
+          "label": "Inhabitants",
+          "omitWhenEmpty": true
+        },
+        "features": {
+          "kind": "detail",
+          "label": "Features",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Acid Desert",
+        "summary": "Acid Desert is a biome variant in Dead Rails.",
+        "whereOnLine": null,
+        "rarity": "Common",
+        "inhabitants": "Acid Skeletons",
+        "features": null
+      },
+      "system": {
+        "slug": "acid-desert",
+        "section": "Biomes",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Locations/acid-desert.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien Biome",
+        "summary": "Alien Biome, or Alien Desert, is a biome variant in Dead Rails, exclusive to the Edison's Revenge gamemode and the Alien (Class).",
+        "whereOnLine": null,
+        "rarity": "Guaranteed (Edison's Revenge or if there is an Alien (Class) user present)",
+        "inhabitants": "Alien",
+        "features": null
+      },
+      "system": {
+        "slug": "alien-biome",
+        "section": "Biomes",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Locations/alien-biome.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bank",
+        "summary": "Banks are Buildings found in Dead Rails.",
+        "whereOnLine": "Every 8km",
+        "rarity": "Common, Guaranteed (in Towns)",
+        "inhabitants": "Banker Zombie",
+        "features": null
+      },
+      "system": {
+        "slug": "bank",
+        "section": "Buildings & Stops",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Locations/bank.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barn",
+        "summary": "Barns are rare Buildings found in Dead Rails.",
+        "whereOnLine": "1-79km (Not guaranteed)",
+        "rarity": "Rare",
+        "inhabitants": "Normal Zombie; Runner Zombie; Horse",
+        "features": null
+      },
+      "system": {
+        "slug": "barn",
+        "section": "Buildings & Stops",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Locations/barn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blood Desert",
+        "summary": null,
+        "whereOnLine": "3-70km (Normal Modes) *10-20km (Edison's Revenge)",
+        "rarity": "Common, Guaranteed (Edison's Revenge)",
+        "inhabitants": "Vampires",
+        "features": "Red sands and sky, both cacti and rocks are crimson.; Vampires occasionally spawn here in a pack.; Blood rains at next day, alongside a Blood Moon Night that doesn't spawn Vampires; Ruin structures will spawn throughout the biome (Edison's Revenge)"
+      },
+      "system": {
+        "slug": "blood-desert",
+        "section": "Biomes",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Locations/blood-desert.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boxing Gym",
+        "summary": "The Boxing Gym is a unique Building in Dead Rails.",
+        "whereOnLine": "Around 10,000-20,000m, 30,000-40,000m 50,000-70,000m",
+        "rarity": "Guaranteed",
+        "inhabitants": "Basic Zombies; Runner Zombie; Heavyweight Zombie",
+        "features": "Gold Trophy; Silver Trophy; Gold Bar; Bonds; Dumbell; Flat Kettlebell"
+      },
+      "system": {
+        "slug": "boxing-gym",
+        "section": "Buildings & Stops",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Locations/boxing-gym.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Castle",
+        "summary": "The , officially known as Vampire Castle, is a unique Building in Dead Rails.",
+        "whereOnLine": "38km (18km for shorter modes)",
+        "rarity": "Guaranteed, Fixed",
+        "inhabitants": "Vampires; Werewolves",
+        "features": null
+      },
+      "system": {
+        "slug": "castle",
+        "section": "Unique Locations",
+        "sortOrder": 0,
+        "image": "/Dead Rails/Locations/castle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cemetery",
+        "summary": "Cemeteries are Buildings found in Fortified Towns.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "cemetery",
+        "section": "Buildings & Stops",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Locations/cemetery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Church",
+        "summary": "Churches are Buildings found in Dead Rails.",
+        "whereOnLine": "Every Town",
+        "rarity": "Guaranteed, Fixed",
+        "inhabitants": "None",
+        "features": "Crucifix; Holy Water; Jade Tablet (Sterling)"
+      },
+      "system": {
+        "slug": "church",
+        "section": "Unique Locations",
+        "sortOrder": 1,
+        "image": "/Dead Rails/Locations/church.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Doctor’s Office",
+        "summary": "Destroyed Doctor Offices are found throughout your journey, Doctors are extremely advised to loot, as they may contain free heals if you lack money or have none. Doctors spawn commonly and might usually be found inside Towns. However, they are not...",
+        "whereOnLine": "Every 10km",
+        "rarity": "Guaranteed, Fixed",
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "doctor-s-office",
+        "section": "Buildings & Stops",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Locations/doctor-s-office.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Evil Church",
+        "summary": "The Evil Church is a special shop that appears throughout The Wild.",
+        "whereOnLine": "1-79km (Not Guaranteed)",
+        "rarity": "Rare",
+        "inhabitants": "Normal Zombie; Runner Zombie; Sheriff Zombie; Dynamite Zombie; Ironclad Zombie",
+        "features": null
+      },
+      "system": {
+        "slug": "evil-church",
+        "section": "Buildings & Stops",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Locations/evil-church.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Desert",
+        "summary": "Fire Desert is a biome variant in Dead Rails.",
+        "whereOnLine": null,
+        "rarity": "Common",
+        "inhabitants": "Flaming Zombie; Zombie",
+        "features": "Orange sands and sky, flaming cacti, rocks are black.; Flaming Zombie spawns here as a variant.; Kerosene rains at next day."
+      },
+      "system": {
+        "slug": "fire-desert",
+        "section": "Biomes",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Locations/fire-desert.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fort Constitution",
+        "summary": "is an unique Building in Dead Rails.",
+        "whereOnLine": "9-75km",
+        "rarity": "Guaranteed",
+        "inhabitants": "Zombie Soldier; Captain Prescott; Horse",
+        "features": null
+      },
+      "system": {
+        "slug": "fort-constitution",
+        "section": "Unique Locations",
+        "sortOrder": 2,
+        "image": "/Dead Rails/Locations/fort-constitution.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fortified Town",
+        "summary": "The Cemetery is a graveyard with tombstones for each player dies. Not just for observing who died on a party, Revives can also be bought here at the gravestones. When a Revive is bought for the said player's gravestone here, it will disappear along with a...",
+        "whereOnLine": "0km, 9,5km, 19,5km, 29,5km, 39,5 km, 49,5 km, 59,5 km, 69,5 km (every ~10km)",
+        "rarity": "Fixed, Guaranteed",
+        "inhabitants": "Soldier",
+        "features": "Purchasable Items; Tumbleweed (only on the first, formerly); Gold Bar (only on the first); Newspapers (Daily News Booth); Train (only on the first); Maxim Gun"
+      },
+      "system": {
+        "slug": "fortified-town",
+        "section": "Buildings & Stops",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Locations/fortified-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Desert Biome",
+        "summary": "The Frozen Desert Biome is a biome exclusive to the Deep Freeze.",
+        "whereOnLine": "0-38km (Deep Freeze)",
+        "rarity": "Guaranteed (Deep Freeze)",
+        "inhabitants": null,
+        "features": "The desert is covered in snow; Ruined structures spawn throughout the biome; Freezes players who move away from heat sources."
+      },
+      "system": {
+        "slug": "frozen-desert-biome",
+        "section": "Biomes",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Locations/frozen-desert-biome.png"
+      }
+    },
+    {
+      "item": {
+        "name": "General Store",
+        "summary": "General Stores are Buildings found in Dead Rails.",
+        "whereOnLine": "Every 10km",
+        "rarity": "Guaranteed, Fixed",
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "general-store",
+        "section": "Buildings & Stops",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Locations/general-store.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Biome",
+        "summary": "Ghost Biome is a special biome in Dead Rails.",
+        "whereOnLine": null,
+        "rarity": "Guaranteed",
+        "inhabitants": "Ghost; Ghost Horse",
+        "features": "Black horizon; Ghosts spawns around the tracks in packs.; Ghost Horses sometimes replace wild Horses."
+      },
+      "system": {
+        "slug": "ghost-biome",
+        "section": "Biomes",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Locations/ghost-biome.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gunsmith",
+        "summary": "Gunsmiths are Buildings found in Dead Rails.",
+        "whereOnLine": "Every 10km",
+        "rarity": "Fixed, Guaranteed",
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "gunsmith",
+        "section": "Buildings & Stops",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Locations/gunsmith.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headframe",
+        "summary": "Headframes, officially named Abandoned Mines, are Buildings found in Dead Rails.",
+        "whereOnLine": "1km-79km (Not guaranteed)",
+        "rarity": "Rare",
+        "inhabitants": "Normal Zombie; Runner Zombie",
+        "features": null
+      },
+      "system": {
+        "slug": "headframe",
+        "section": "Buildings & Stops",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Locations/headframe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "House",
+        "summary": "Houses are the most common buildings found in Dead Rails.",
+        "whereOnLine": "0-80km",
+        "rarity": "Common, Guaranteed, Fixed",
+        "inhabitants": "Zombie; Runner Zombie; Ironclad Zombie; Dynamite Zombie; Sheriff Zombie",
+        "features": null
+      },
+      "system": {
+        "slug": "house",
+        "section": "Buildings & Stops",
+        "sortOrder": 10,
+        "image": "/Dead Rails/Locations/house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lincoln's Train",
+        "summary": "is an unique location in Dead Rails.",
+        "whereOnLine": "9-75km",
+        "rarity": "Guaranteed",
+        "inhabitants": "Skeleton (lying inside the casket)",
+        "features": "Barrels; Silver/Gold Plates; Silver Cups; Lincoln's Top Hat (Inside the casket)"
+      },
+      "system": {
+        "slug": "lincoln-s-train",
+        "section": "Unique Locations",
+        "sortOrder": 3,
+        "image": "/Dead Rails/Locations/lincoln-s-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Merchant's Wagon",
+        "summary": "The Merchant's Wagon is a location in Dead Rails that spawns at 5km, and every 10km after that.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "merchant-s-wagon",
+        "section": "Buildings & Stops",
+        "sortOrder": 11,
+        "image": "/Dead Rails/Locations/merchant-s-wagon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mixed Biome",
+        "summary": "Mixed Biome is a biome variant in Dead Rails, exclusive to the Edison's Revenge gamemode.",
+        "whereOnLine": null,
+        "rarity": "Guaranteed (Edison's Revenge)",
+        "inhabitants": "Skeleton (Acid form); Alien",
+        "features": null
+      },
+      "system": {
+        "slug": "mixed-biome",
+        "section": "Biomes",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Locations/mixed-biome.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Normal Desert",
+        "summary": "The is the primary biome in Dead Rails.",
+        "whereOnLine": "0-80km (Normal Modes)",
+        "rarity": "Guaranteed",
+        "inhabitants": null,
+        "features": "A plain desert with tumbleweeds, cacti, and rocks.; Water is more likely to rain here."
+      },
+      "system": {
+        "slug": "normal-desert",
+        "section": "Biomes",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Locations/normal-desert.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oasis",
+        "summary": "Oasis or formerly known as \"Water Puddles\" is an Unique Location for Refilling Bottles of Water for the Old Faithful Train. The Oasis appeares everywhere throughout the map, helping you for to refill the Old Faithful train at any times.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "oasis",
+        "section": "Buildings & Stops",
+        "sortOrder": 12,
+        "image": "/Dead Rails/Locations/oasis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oil Refinery",
+        "summary": "It appears as a barren piece of land, with multiple tents and 4 pumpjacks with one being destroyed and the others rusted. There is a singular large house in the middle of the plot. It is home to the miniboss Rockefeller and multiple Flaming Zombies,...",
+        "whereOnLine": null,
+        "rarity": "Guaranteed",
+        "inhabitants": "Flaming Zombie; Rockefeller; Fire variants of Zombies",
+        "features": "Gunpowder Barrel; Coal; Bottle of Kerosene; Flamethrower (Upon Dropped by Rockefeller)"
+      },
+      "system": {
+        "slug": "oil-refinery",
+        "section": "Unique Locations",
+        "sortOrder": 4,
+        "image": "/Dead Rails/Locations/oil-refinery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Outlaw Camps",
+        "summary": "Outlaws Camps are rare Buildings found in Dead Rails.",
+        "whereOnLine": "0-79km (Not guaranteed)",
+        "rarity": "Rare",
+        "inhabitants": "Outlaws (1-5)",
+        "features": null
+      },
+      "system": {
+        "slug": "outlaw-camps",
+        "section": "Buildings & Stops",
+        "sortOrder": 13,
+        "image": "/Dead Rails/Locations/outlaw-camps.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Outlaw Fort",
+        "summary": "Outlaws Fort is a location found in Endless mode.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "outlaw-fort",
+        "section": "Buildings & Stops",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Outlaw's Town",
+        "summary": "Outlaw's Town, commonly referred by players as Final Outpost, The End, The Bridge or The final battle is a key location in Dead Rails.",
+        "whereOnLine": "78.5km (78,500m) in Normal Modes *37.5km (37.500m) in Edison's Revenge and Bite-Sized Mode",
+        "rarity": "Guaranteed, Fixed",
+        "inhabitants": "Outlaws; Runner Zombie; Nikola Tesla; More...",
+        "features": null
+      },
+      "system": {
+        "slug": "outlaw-s-town",
+        "section": "Unique Locations",
+        "sortOrder": 5,
+        "image": "/Dead Rails/Locations/outlaw-s-town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sheriff’s Office",
+        "summary": "Sheriff's Offices are Buildings found in Dead Rails.",
+        "whereOnLine": "Every 10km",
+        "rarity": "Guaranteed (In Fortified Town)",
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "sheriff-s-office",
+        "section": "Buildings & Stops",
+        "sortOrder": 15,
+        "image": "/Dead Rails/Locations/sheriff-s-office.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sterling",
+        "summary": "Sterling (also called the Town of Sterling), is a unique location in Dead Rails.",
+        "whereOnLine": "9-75km",
+        "rarity": "Guaranteed",
+        "inhabitants": "None",
+        "features": null
+      },
+      "system": {
+        "slug": "sterling",
+        "section": "Unique Locations",
+        "sortOrder": 6,
+        "image": "/Dead Rails/Locations/sterling.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sterling Dungeon",
+        "summary": "The Sterling Dungeon is a special location in Dead Rails.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "sterling-dungeon",
+        "section": "Unique Locations",
+        "sortOrder": 7,
+        "image": "/Dead Rails/Locations/sterling-dungeon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sterling Mines",
+        "summary": "The Mines are a cave structure in Dead Rails.",
+        "whereOnLine": "9-75km (Sterling)",
+        "rarity": "Guaranteed",
+        "inhabitants": "Skeleton; Dynamite Zombie; Werewolf",
+        "features": null
+      },
+      "system": {
+        "slug": "sterling-mines",
+        "section": "Unique Locations",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Locations/sterling-mines.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stillwater Prison",
+        "summary": "StillwaterPrisonRender.png|Render",
+        "whereOnLine": "9km-75km",
+        "rarity": "Guaranteed",
+        "inhabitants": "Goliath; Covenant",
+        "features": null
+      },
+      "system": {
+        "slug": "stillwater-prison",
+        "section": "Unique Locations",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Locations/stillwater-prison.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strange Pyramid",
+        "summary": "The Strange Pyramid, also known as The Altar, was a special Building in Dead Rails.",
+        "whereOnLine": "70km",
+        "rarity": "Guaranteed",
+        "inhabitants": "None",
+        "features": "Easter Egg"
+      },
+      "system": {
+        "slug": "strange-pyramid",
+        "section": "Unique Locations",
+        "sortOrder": 10,
+        "image": "/Dead Rails/Locations/strange-pyramid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Supply Depot",
+        "summary": "The Supply Depot is a special building in Dead Rails.",
+        "whereOnLine": null,
+        "rarity": "Guaranteed",
+        "inhabitants": "None",
+        "features": "Cannon; Cannon Ammo; Bonds"
+      },
+      "system": {
+        "slug": "supply-depot",
+        "section": "Unique Locations",
+        "sortOrder": 11,
+        "image": "/Dead Rails/Locations/supply-depot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tailor",
+        "summary": "The Tailor is an utility building in Dead Rails that only appears in the Lobby.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "tailor",
+        "section": "Buildings & Stops",
+        "sortOrder": 16,
+        "image": "/Dead Rails/Locations/tailor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tesla Lab",
+        "summary": "The Tesla Lab is a unique Building in Dead Rails.",
+        "whereOnLine": "9-75km",
+        "rarity": "Guaranteed (not in bite size)",
+        "inhabitants": "Scientist Zombie; Nikola Tesla (body)",
+        "features": null
+      },
+      "system": {
+        "slug": "tesla-lab",
+        "section": "Unique Locations",
+        "sortOrder": 12,
+        "image": "/Dead Rails/Locations/tesla-lab.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Wild",
+        "summary": "The Wild is the main world of Dead Rails.",
+        "whereOnLine": "0-80km",
+        "rarity": null,
+        "inhabitants": "Wolves; Werewolves; Outlaws; Horses; More...",
+        "features": null
+      },
+      "system": {
+        "slug": "the-wild",
+        "section": "Unique Locations",
+        "sortOrder": 13,
+        "image": "/Dead Rails/Locations/the-wild.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Town",
+        "summary": "Towns are randomized groups of Buildings that can be found every 8km, starting at 7.5km.",
+        "whereOnLine": "Every 8km, starting at 7.5km (no longer spawns past 70km)",
+        "rarity": "Fixed, Guaranteed",
+        "inhabitants": "Normal Zombie; Runner Zombie; Dynamite Zombie; Ironclad Zombie; Banker Zombie; Sheriff Zombie",
+        "features": "Medium to High"
+      },
+      "system": {
+        "slug": "town",
+        "section": "Buildings & Stops",
+        "sortOrder": 17,
+        "image": "/Dead Rails/Locations/town.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trading Post",
+        "summary": "The Trading Post is one of the most crucial buildings in Dead Rails.",
+        "whereOnLine": "Every 10km",
+        "rarity": "Guaranteed (In fortified towns)",
+        "inhabitants": "Fool's Gold's enemies...",
+        "features": "Gold Bar (first); Fool's Gold's drops...; Purchasable Items (formerly)"
+      },
+      "system": {
+        "slug": "trading-post",
+        "section": "Buildings & Stops",
+        "sortOrder": 18,
+        "image": "/Dead Rails/Locations/trading-post.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Train Garage",
+        "summary": "The Train Garage is a building accessed by going into the Train Station in the Lobby. It contains an preview of the player's selected Train, with a board next to it showing Speed, Acceleration, and Fuel Consumption stats. The exact default bar values are...",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": "Conductor",
+        "features": null
+      },
+      "system": {
+        "slug": "train-garage",
+        "section": "Unique Locations",
+        "sortOrder": 14,
+        "image": "/Dead Rails/Locations/train-garage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Train Station",
+        "summary": "The Train Station is an utility building in Dead Rails that only appears in the Lobby.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "train-station",
+        "section": "Buildings & Stops",
+        "sortOrder": 19,
+        "image": "/Dead Rails/Locations/train-station.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tumbleweed Saloon",
+        "summary": "The Tumbleweed Saloon is a unique building in Dead Rails, only being available in the Free-for-All gamemode.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "tumbleweed-saloon",
+        "section": "Buildings & Stops",
+        "sortOrder": 20,
+        "image": "/Dead Rails/Locations/tumbleweed-saloon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unicorn Island",
+        "summary": "The Unicorn Island, officially Mysterious Island, is a secret location in Dead Rails.",
+        "whereOnLine": null,
+        "rarity": "Guaranteed",
+        "inhabitants": "Unicorn; Skeleton (Deceased)",
+        "features": null
+      },
+      "system": {
+        "slug": "unicorn-island",
+        "section": "Unique Locations",
+        "sortOrder": 15,
+        "image": "/Dead Rails/Locations/unicorn-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unicorn Island House",
+        "summary": "Check Buldings#Other Buildings for more information. This page is mainly for category sort and disambiguated.",
+        "whereOnLine": null,
+        "rarity": null,
+        "inhabitants": null,
+        "features": null
+      },
+      "system": {
+        "slug": "unicorn-island-house",
+        "section": "Unique Locations",
+        "sortOrder": 16,
+        "image": "/Dead Rails/Locations/unicorn-island-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unicorn Woods",
+        "summary": null,
+        "whereOnLine": null,
+        "rarity": "Rare",
+        "inhabitants": "Unicorns",
+        "features": "A dense forest that has a brighter green shade.; Rocks and cacti are replaced by pine trees and mushrooms.; Unicorns spawn here very often."
+      },
+      "system": {
+        "slug": "unicorn-woods",
+        "section": "Biomes",
+        "sortOrder": 8,
+        "image": "/Dead Rails/Locations/unicorn-woods.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Werewolf Woods",
+        "summary": "Werewolf Woods is a biome in Dead Rails.",
+        "whereOnLine": null,
+        "rarity": "Common",
+        "inhabitants": "Werewolves; Alpha Werewolf(Soon)",
+        "features": "A dense forest with a dark green grass shade; Rocks are blackened, cacti are replaced with pine trees; Werewolves spawn more frequently, often spawn in a pack.; An Alpha Werewolf miniboss can spawn anywhere in Werewolf packs(Soon)"
+      },
+      "system": {
+        "slug": "werewolf-woods",
+        "section": "Biomes",
+        "sortOrder": 9,
+        "image": "/Dead Rails/Locations/werewolf-woods.png"
+      }
+    }
+  ]
+}

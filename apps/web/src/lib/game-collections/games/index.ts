@@ -58,6 +58,8 @@ import { practicalBasketballCollectionGroup } from "./practical-basketball";
 import { capybarasVsPlantsCollectionGroup } from "./capybaras-vs-plants";
 import { unboxAsmrCollectionGroup } from "./unbox-asmr";
 import { lineagePieceCollectionGroup } from "./lineage-piece";
+import { solsRngCollectionGroup } from "./sols-rng";
+import { deadRailsCollectionGroup } from "./dead-rails";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -120,5 +122,7 @@ export const GAME_COLLECTION_GROUPS = [
   practicalBasketballCollectionGroup,
   capybarasVsPlantsCollectionGroup,
   unboxAsmrCollectionGroup,
-  lineagePieceCollectionGroup
+  lineagePieceCollectionGroup,
+  solsRngCollectionGroup,
+  deadRailsCollectionGroup
 ] satisfies GameCollectionGroup[];
