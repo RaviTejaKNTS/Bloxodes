@@ -6,5 +6,5 @@ export const buildARingFarmCollectionGroup = {
     universeId: 10039338037,
     dataDir: "Build A Ring Farm",
     universeNames: ["Build A Ring Farm", "Build a Ring Farm"],
-    collections: ["eggs", "mutations", "seeds", "pets"]
+    collections: ["eggs", "mutations", "seeds", "pets", "gear", "farm-skins", "pet-mutations", "titles", "skill-tree"]
   } satisfies GameCollectionGroup;

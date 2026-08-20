@@ -220,11 +220,11 @@ Evidence: [full report](../tmp/game-collection-suggestions/build-a-base-and-stea
 
 Evidence: [full report](../tmp/game-collection-suggestions/build-a-ring-farm.md)
 
-- [ ] Gear
-- [ ] Farm Skins
-- [ ] Pet Mutations
-- [ ] Titles
-- [ ] Skill Tree
+- [x] Gear
+- [x] Farm Skins
+- [x] Pet Mutations
+- [x] Titles
+- [x] Skill Tree
 
 ### Catch a Brainrot
 

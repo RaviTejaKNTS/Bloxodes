@@ -1,0 +1,420 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Build A Ring Farm",
+    "gameSlug": "build-a-ring-farm",
+    "collection": "farm-skins",
+    "route": "/wiki/build-a-ring-farm/farm-skins",
+    "catalogCode": "build-a-ring-farm-farm-skins",
+    "itemFields": [
+      "summary",
+      "bonus",
+      "cost",
+      "howToUnlock"
+    ],
+    "columns": [
+      "summary",
+      "bonus",
+      "cost",
+      "howToUnlock"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Farm Skins"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "bonus",
+        "cost",
+        "howToUnlock"
+      ],
+      "tableFields": [
+        "bonus",
+        "cost"
+      ],
+      "fieldPresentation": {
+        "bonus": {
+          "kind": "highlight",
+          "label": "Bonus",
+          "omitWhenEmpty": true
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        },
+        "howToUnlock": {
+          "kind": "detail",
+          "label": "How to unlock",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Starter Farm",
+        "summary": null,
+        "bonus": "None",
+        "cost": "Free",
+        "howToUnlock": "Unlocked by default"
+      },
+      "system": {
+        "slug": "starter-farm",
+        "section": "Farm Skins",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Greenhouse Farm",
+        "summary": null,
+        "bonus": "+2% Farm Earnings",
+        "cost": "Free",
+        "howToUnlock": "Unlock after Floor 3 upgrade"
+      },
+      "system": {
+        "slug": "greenhouse-farm",
+        "section": "Farm Skins",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Royal Farm",
+        "summary": null,
+        "bonus": "+3% Farm Earnings",
+        "cost": "Free",
+        "howToUnlock": "Unlock after Floor 4 upgrade"
+      },
+      "system": {
+        "slug": "royal-farm",
+        "section": "Farm Skins",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cyber Farm",
+        "summary": null,
+        "bonus": "+5% Cash",
+        "cost": "99 Robux",
+        "howToUnlock": "Purchase with Robux"
+      },
+      "system": {
+        "slug": "cyber-farm",
+        "section": "Farm Skins",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Overgrown Farm",
+        "summary": null,
+        "bonus": "+4% Cash",
+        "cost": "25T Cash",
+        "howToUnlock": "Purchase with in-game cash"
+      },
+      "system": {
+        "slug": "overgrown-farm",
+        "section": "Farm Skins",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunken Farm",
+        "summary": null,
+        "bonus": "+6% Cash",
+        "cost": "500T Cash",
+        "howToUnlock": "Purchase with in-game cash"
+      },
+      "system": {
+        "slug": "sunken-farm",
+        "section": "Farm Skins",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Steampunk Farm",
+        "summary": null,
+        "bonus": "+8% Cash",
+        "cost": "50Qd Cash",
+        "howToUnlock": "Purchase with in-game cash"
+      },
+      "system": {
+        "slug": "steampunk-farm",
+        "section": "Farm Skins",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Farm",
+        "summary": null,
+        "bonus": "+6% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase with Robux"
+      },
+      "system": {
+        "slug": "pirate-farm",
+        "section": "Farm Skins",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gummy Kingdom Farm",
+        "summary": null,
+        "bonus": "+8% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase with Robux"
+      },
+      "system": {
+        "slug": "gummy-kingdom-farm",
+        "section": "Farm Skins",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Disco Farm",
+        "summary": null,
+        "bonus": "+10% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase with Robux"
+      },
+      "system": {
+        "slug": "disco-farm",
+        "section": "Farm Skins",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Godspore Farm",
+        "summary": null,
+        "bonus": "+f30% Cash",
+        "cost": "-",
+        "howToUnlock": "Godspore Seed Collected"
+      },
+      "system": {
+        "slug": "godspore-farm",
+        "section": "Farm Skins",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Hive",
+        "summary": null,
+        "bonus": "+12% Cash",
+        "cost": "-",
+        "howToUnlock": "Bee Merchant Event"
+      },
+      "system": {
+        "slug": "bee-hive",
+        "section": "Farm Skins",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Garden",
+        "summary": null,
+        "bonus": "+32% Cash",
+        "cost": "Complete Plant Index",
+        "howToUnlock": "Complete Plant Index"
+      },
+      "system": {
+        "slug": "flower-garden",
+        "section": "Farm Skins",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Astral Observatory Farm",
+        "summary": null,
+        "bonus": "+6.5% Cash",
+        "cost": "499 Robux",
+        "howToUnlock": "Purchase with Robux"
+      },
+      "system": {
+        "slug": "astral-observatory-farm",
+        "section": "Farm Skins",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Garden Farm",
+        "summary": null,
+        "bonus": "+32% Cash",
+        "cost": "Free",
+        "howToUnlock": "Complete 100% Plant Index"
+      },
+      "system": {
+        "slug": "flower-garden-farm",
+        "section": "Farm Skins",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Twilight Garden Farm",
+        "summary": null,
+        "bonus": "+6.5% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase the Twilight Bundle with Robux"
+      },
+      "system": {
+        "slug": "twilight-garden-farm",
+        "section": "Farm Skins",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Temple Farm",
+        "summary": null,
+        "bonus": "+8.5% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase the Dragon Bundle with Robux"
+      },
+      "system": {
+        "slug": "dragon-temple-farm",
+        "section": "Farm Skins",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunflower Field",
+        "summary": null,
+        "bonus": "+7.5% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase the Summer Harvest Bundle with Robux"
+      },
+      "system": {
+        "slug": "sunflower-field",
+        "section": "Farm Skins",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jungle Ruins Farm Skin",
+        "summary": null,
+        "bonus": "+9.5% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase the Ancient Jungle Bundle with Robux"
+      },
+      "system": {
+        "slug": "jungle-ruins-farm-skin",
+        "section": "Farm Skins",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Abyssal Void Farm Skin",
+        "summary": null,
+        "bonus": "+14% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase the Void Leviathan Bundle with Robux"
+      },
+      "system": {
+        "slug": "abyssal-void-farm-skin",
+        "section": "Farm Skins",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wizard Tower Abracadabra",
+        "summary": null,
+        "bonus": "+13% Cash",
+        "cost": "16,000 Magic Dust",
+        "howToUnlock": "Purchase from the Wizard Merchant"
+      },
+      "system": {
+        "slug": "wizard-tower-abracadabra",
+        "section": "Farm Skins",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Primal Farm Skin",
+        "summary": null,
+        "bonus": "+12% Cash",
+        "cost": "1Sx Cash",
+        "howToUnlock": "Purchase with in-game cash"
+      },
+      "system": {
+        "slug": "primal-farm-skin",
+        "section": "Farm Skins",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frostfire Citadel",
+        "summary": null,
+        "bonus": "+9% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase with Robux"
+      },
+      "system": {
+        "slug": "frostfire-citadel",
+        "section": "Farm Skins",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ember Library",
+        "summary": null,
+        "bonus": "+7% Cash",
+        "cost": "Bundle",
+        "howToUnlock": "Purchase with Robux"
+      },
+      "system": {
+        "slug": "ember-library",
+        "section": "Farm Skins",
+        "sortOrder": 23,
+        "image": null
+      }
+    }
+  ]
+}

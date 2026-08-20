@@ -1,0 +1,331 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Build A Ring Farm",
+    "gameSlug": "build-a-ring-farm",
+    "collection": "gear",
+    "route": "/wiki/build-a-ring-farm/gear",
+    "catalogCode": "build-a-ring-farm-gear",
+    "itemFields": [
+      "summary",
+      "effect",
+      "price",
+      "robuxPrice"
+    ],
+    "columns": [
+      "summary",
+      "effect",
+      "price",
+      "robuxPrice"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Gears"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "summary",
+      "cardFields": [
+        "effect",
+        "price",
+        "robuxPrice"
+      ],
+      "tableFields": [
+        "effect",
+        "price",
+        "robuxPrice"
+      ],
+      "fieldPresentation": {
+        "effect": {
+          "kind": "highlight",
+          "label": "Effect",
+          "omitWhenEmpty": true
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "robuxPrice": {
+          "kind": "chip",
+          "label": "Robux",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Normal Fertilizer",
+        "summary": null,
+        "effect": "2x Growth Boost for 5 minutes",
+        "price": "$500K",
+        "robuxPrice": "29 Robux"
+      },
+      "system": {
+        "slug": "normal-fertilizer",
+        "section": "Gears",
+        "sortOrder": 0,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Acid Spray",
+        "summary": null,
+        "effect": "Removes mutation from a plant",
+        "price": "$1M",
+        "robuxPrice": "37 Robux"
+      },
+      "system": {
+        "slug": "acid-spray",
+        "section": "Gears",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Normal Pet Treat",
+        "summary": null,
+        "effect": "+10% Stat Boost for 3 minutes",
+        "price": "$1M",
+        "robuxPrice": "39 Robux"
+      },
+      "system": {
+        "slug": "normal-pet-treat",
+        "section": "Gears",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wet Spray",
+        "summary": null,
+        "effect": "Applies the Wet Mutation",
+        "price": "$10M",
+        "robuxPrice": "79 Robux"
+      },
+      "system": {
+        "slug": "wet-spray",
+        "section": "Gears",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strong Fertilizer",
+        "summary": null,
+        "effect": "4x Growth Boost for 10 minutes",
+        "price": "$50M",
+        "robuxPrice": "99 Robux"
+      },
+      "system": {
+        "slug": "strong-fertilizer",
+        "section": "Gears",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strong Pet Treat",
+        "summary": null,
+        "effect": "+20% Stat Boost for 5 minutes",
+        "price": "$75M",
+        "robuxPrice": "109 Robux"
+      },
+      "system": {
+        "slug": "strong-pet-treat",
+        "section": "Gears",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Spray",
+        "summary": null,
+        "effect": "Applies the Frozen Mutation",
+        "price": "$750M",
+        "robuxPrice": "149 Robux"
+      },
+      "system": {
+        "slug": "frozen-spray",
+        "section": "Gears",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Autumn Spray",
+        "summary": null,
+        "effect": "Applies the Autumn Mutation",
+        "price": "$1B",
+        "robuxPrice": "174 Robux"
+      },
+      "system": {
+        "slug": "autumn-spray",
+        "section": "Gears",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Void Spray",
+        "summary": null,
+        "effect": "Applies the Void Mutation",
+        "price": "$10B",
+        "robuxPrice": "199 Robux"
+      },
+      "system": {
+        "slug": "void-spray",
+        "section": "Gears",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Super Fertilizer",
+        "summary": null,
+        "effect": "6x Growth Boost for 15 minutes",
+        "price": "$15B",
+        "robuxPrice": "299 Robux"
+      },
+      "system": {
+        "slug": "super-fertilizer",
+        "section": "Gears",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Super Pet Treat",
+        "summary": null,
+        "effect": "+30% Stat Boost for 7 minutes",
+        "price": "$20B",
+        "robuxPrice": "349 Robux"
+      },
+      "system": {
+        "slug": "super-pet-treat",
+        "section": "Gears",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Radioactive Spray",
+        "summary": null,
+        "effect": "Applies the Radioactive Mutation",
+        "price": "$100B",
+        "robuxPrice": "399 Robux"
+      },
+      "system": {
+        "slug": "radioactive-spray",
+        "section": "Gears",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Spray",
+        "summary": null,
+        "effect": "Applies the Rainbow Mutation",
+        "price": "$1T",
+        "robuxPrice": "699 Robux"
+      },
+      "system": {
+        "slug": "rainbow-spray",
+        "section": "Gears",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Prismatic Fertilizer",
+        "summary": null,
+        "effect": "12x Growth Boost for 15 minutes",
+        "price": "$25T",
+        "robuxPrice": "799 Robux"
+      },
+      "system": {
+        "slug": "prismatic-fertilizer",
+        "section": "Gears",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmic Spray",
+        "summary": null,
+        "effect": "Applies the Cosmic Mutation",
+        "price": "$25T",
+        "robuxPrice": "849 Robux"
+      },
+      "system": {
+        "slug": "cosmic-spray",
+        "section": "Gears",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bubblegum Spray",
+        "summary": null,
+        "effect": "Applies the Bubblegum Mutation",
+        "price": "$250T",
+        "robuxPrice": "949 Robux"
+      },
+      "system": {
+        "slug": "bubblegum-spray",
+        "section": "Gears",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Spray",
+        "summary": null,
+        "effect": "Applies the Fire Mutation",
+        "price": "$1QD",
+        "robuxPrice": "1,099 Robux"
+      },
+      "system": {
+        "slug": "fire-spray",
+        "section": "Gears",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eclipse Spray",
+        "summary": null,
+        "effect": "Applies the Eclipse Mutation",
+        "price": "$50Qn",
+        "robuxPrice": "Gear Shop"
+      },
+      "system": {
+        "slug": "eclipse-spray",
+        "section": "Gears",
+        "sortOrder": 17,
+        "image": null
+      }
+    }
+  ]
+}
