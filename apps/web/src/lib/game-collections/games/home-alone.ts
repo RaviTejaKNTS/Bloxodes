@@ -10,5 +10,9 @@ export const homeAloneCollectionGroup = {
     "Home Alone (Anomaly)",
     "[NEW] Home Alone (Anomaly)"
   ],
-  collections: ["anomalies"]
+  collections: [
+    "anomalies",
+    "items",
+    "chores"
+  ]
 } satisfies GameCollectionGroup;

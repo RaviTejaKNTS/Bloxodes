@@ -401,8 +401,8 @@ Evidence: [full report](../tmp/game-collection-suggestions/grow-a-garden-2.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/home-alone.md)
 
-- [ ] Chores
-- [ ] Items
+- [x] Chores
+- [x] Items
 
 ### Jujutsu Shenanigans
 
