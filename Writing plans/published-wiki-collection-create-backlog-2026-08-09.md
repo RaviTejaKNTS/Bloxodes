@@ -410,8 +410,8 @@ Evidence: [full report](../tmp/game-collection-suggestions/jujutsu-shenanigans.m
 
 Evidence: [full report](../tmp/game-collection-suggestions/kick-a-lucky-block.md)
 
-- [ ] Kick Styles
-- [ ] Rebirth Levels
+- [ ] Kick Styles — blocked 2026-08-20: styles exist but no source publishes a complete roster with stats or prices
+- [x] Rebirth Levels
 
 ### LifeTogether RP
 
