@@ -10,6 +10,8 @@ export const gakuranCollectionGroup = {
     "ethnicities",
     "fighting-styles",
     "accessories",
-    "locations"
-  ]
+    "locations",
+      "phone-apps",
+      "songs"
+    ]
 } satisfies GameCollectionGroup;

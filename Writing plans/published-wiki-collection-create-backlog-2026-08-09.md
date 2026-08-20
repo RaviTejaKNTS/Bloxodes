@@ -371,10 +371,10 @@ Evidence: [full report](../tmp/game-collection-suggestions/forsaken.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/gakuran.md)
 
-- [ ] Phone Apps
-- [ ] Jobs
-- [ ] Instruments
-- [ ] Songs
+- [x] Phone Apps
+- [ ] Jobs — blocked 2026-08-20: no jobs roster; the Ramen Shop page is a "Coming soon" stub
+- [ ] Instruments — blocked 2026-08-20: only 4 instruments exist; covered contextually on the songs page
+- [x] Songs
 
 ### Grow a Garden
 
