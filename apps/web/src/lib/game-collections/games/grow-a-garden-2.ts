@@ -15,6 +15,11 @@ export const growAGarden2CollectionGroup = {
       "crates",
       "mutations",
       "shops",
-      "night-stealing"
+      "night-stealing",
+      "weather",
+      "seed-packs",
+      "eggs",
+      "npcs",
+      "plot-expansions"
     ]
   } satisfies GameCollectionGroup;

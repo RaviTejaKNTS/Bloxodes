@@ -384,12 +384,12 @@ Evidence: [full report](../tmp/game-collection-suggestions/grow-a-garden.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/grow-a-garden-2.md)
 
-- [ ] Weather
-- [ ] Seed Packs
-- [ ] Eggs
-- [ ] Pet Mutations
-- [ ] NPCs
-- [ ] Plot Expansions
+- [x] Weather
+- [x] Seed Packs
+- [x] Eggs
+- [ ] Pet Mutations — blocked 2026-08-20: game has only 2 pet mutations (Big, Huge) with unpublished odds; too thin for a page
+- [x] NPCs
+- [x] Plot Expansions
 
 ### Home Alone
 

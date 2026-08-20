@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Grow a Garden 2",
+    "gameSlug": "grow-a-garden-2",
+    "collection": "plot-expansions",
+    "route": "/wiki/grow-a-garden-2/plot-expansions",
+    "catalogCode": "grow-a-garden-2-plot-expansions",
+    "itemFields": [
+      "cost",
+      "adds",
+      "cardSummary"
+    ],
+    "columns": [
+      "cost",
+      "adds",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Plot Expansions"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "cost",
+        "adds"
+      ],
+      "tableFields": [
+        "cost",
+        "adds",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "adds": {
+          "kind": "chip",
+          "label": "Adds"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Expansion 1",
+        "cost": "500 Sheckles",
+        "adds": "2 fields",
+        "cardSummary": "The first expansion is pocket change, and the two extra fields roughly pay for themselves within a harvest."
+      },
+      "system": {
+        "slug": "expansion-1",
+        "section": "Plot Expansions",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expansion 2",
+        "cost": "40,000 Sheckles",
+        "adds": "2 fields",
+        "cardSummary": "The first real save-up. Two more fields at a price early sellers reach within a session or two."
+      },
+      "system": {
+        "slug": "expansion-2",
+        "section": "Plot Expansions",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expansion 3",
+        "cost": "1,000,000 Sheckles",
+        "adds": "2 fields",
+        "cardSummary": "The million-Sheckle step. From here, expansions are what your economy is building toward."
+      },
+      "system": {
+        "slug": "expansion-3",
+        "section": "Plot Expansions",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expansion 4",
+        "cost": "40,000,000 Sheckles",
+        "adds": "2 fields",
+        "cardSummary": "A forty-fold jump that usually lands mid-progression, when multi-harvest crops are doing the earning."
+      },
+      "system": {
+        "slug": "expansion-4",
+        "section": "Plot Expansions",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expansion 5",
+        "cost": "200,000,000 Sheckles",
+        "adds": "2 fields",
+        "cardSummary": "The second-to-last purchase, priced for established gardens with mutation income."
+      },
+      "system": {
+        "slug": "expansion-5",
+        "section": "Plot Expansions",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expansion 6",
+        "cost": "1,000,000,000 Sheckles",
+        "adds": "2 fields",
+        "cardSummary": "The billion-Sheckle finale that maxes your plot at its full field count."
+      },
+      "system": {
+        "slug": "expansion-6",
+        "section": "Plot Expansions",
+        "sortOrder": 6,
+        "image": null
+      }
+    }
+  ]
+}
