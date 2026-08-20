@@ -626,13 +626,13 @@ New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs
 
 ### BedWars (2619619496)
 
-- [ ] Kits
-- [ ] Items
+- [x] Kits
+- [x] Items
 
 ### Tower of Hell (703124385)
 
-- [ ] Sections
-- [ ] Mutators
+- [x] Sections
+- [x] Mutators
 
 ### Steal an egg (10563114921)
 
@@ -648,5 +648,25 @@ New games from the top-50-by-players sweep with no Bloxodes wiki hub. Each needs
 
 ### BlockSpin (6765805766)
 
-- [ ] Weapons
-- [ ] Vehicles
+- [ ] Weapons — blocked 2026-08-20: Deltia lists five crate prices and zero named weapons; fandom Weapons is an 181-byte stub (Dumpsters, Weapon Crates, Airdrops) with no names. No two-source roster.
+- [ ] Vehicles — blocked 2026-08-20: Deltia lists crate prices and zero names; fandom Cars has 13 names with no second independent roster; Elite crate price disagrees ($12,400 vs $16,500). Do not ship Fandom-only rows.
+
+### Batch results (2026-08-20, branch `tier-a-collections`, local + managed-dev only, not published)
+
+Shipped to managed development (hubs + collections seeded, verifiers + HTML size gates passed):
+
+- Sol's RNG: Auras, Gears, Potions, Biomes (earlier in batch)
+- Dead Rails: Classes, Weapons, Items, Entities, Trains, Locations (earlier in batch)
+- Dandy's World: Toons, Twisteds, Trinkets (earlier in batch)
+- Tower of Hell: Sections (364, empty Modded Sections removed from `sectionOrder` and copy), Mutators (12)
+- BedWars: Kits (115), Items (459)
+- Steal an Egg: wiki hub + Biomes (9, imageless by design). Universe 10563114921 only; do not mix with the clone `Steal a Egg` 7861158392 used by some existing articles.
+- Grow a Chicken Fighter: wiki hub + Eggs (16, imageless by design)
+
+Blocked:
+
+- Anime Origins Units (2026-08-20): no complete roster source
+- BlockSpin Weapons (2026-08-20): no named roster on Deltia or fandom
+- BlockSpin Vehicles (2026-08-20): one-source fandom names only; crate prices disagree
+
+Publication stays with the owner via `$bloxodes-release-e2e`. Do not seed production from this batch until that explicit release.
