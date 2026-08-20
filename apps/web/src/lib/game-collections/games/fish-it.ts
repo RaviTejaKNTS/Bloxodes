@@ -15,6 +15,7 @@ export const fishItCollectionGroup = {
     "bobbers",
     "pets",
     "rods",
-    "fish"
-  ]
+    "fish",
+      "weather"
+    ]
 } satisfies GameCollectionGroup;

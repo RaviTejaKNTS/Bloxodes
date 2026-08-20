@@ -340,13 +340,13 @@ Evidence: [full report](../tmp/game-collection-suggestions/fisch.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/fish-it.md)
 
-- [ ] Quests
-- [ ] Artifacts
-- [ ] Utility Items
-- [ ] Potions
-- [ ] Totems
-- [ ] Rod Skins
-- [ ] Weather
+- [ ] Quests — blocked 2026-08-20: rotating unlimited task pool with one low-quality stub source; not durable rows
+- [ ] Artifacts — blocked 2026-08-20: no artifact roster in any accessible source
+- [ ] Utility Items — blocked 2026-08-20: no defined roster; overlaps the potions and totems rows
+- [ ] Potions — blocked 2026-08-20: only 4 confirmed potions with conflicting details; revisit when the wiki matures
+- [ ] Totems — blocked 2026-08-20: only 4 confirmed totems with conflicting durations across sources; revisit later
+- [ ] Rod Skins — blocked 2026-08-20: Skin Crates confirm skins exist but no skin roster is published anywhere
+- [x] Weather
 
 ### Fling Things and People
 

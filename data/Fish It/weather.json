@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Fish It",
+    "gameSlug": "fish-it",
+    "collection": "weather",
+    "route": "/wiki/fish-it/weather",
+    "catalogCode": "fish-it-weather",
+    "itemFields": [
+      "cost",
+      "effect",
+      "cardSummary"
+    ],
+    "columns": [
+      "cost",
+      "effect",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Weather Machine Events"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "cost"
+      ],
+      "tableFields": [
+        "cost",
+        "effect"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Wind",
+        "cost": "10,000 Coins",
+        "effect": "Speeds up your fishing rod",
+        "cardSummary": "The cheapest weather and the pure grind pick: faster casts for everyone on the server while it lasts."
+      },
+      "system": {
+        "slug": "wind",
+        "section": "Weather Machine Events",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snow",
+        "cost": "15,000 Coins",
+        "effect": "Chance for caught fish to gain the Frozen mutation",
+        "cardSummary": "Coats catches with a shot at the Frozen mutation, a cheap way to add mutation value to a farming session."
+      },
+      "system": {
+        "slug": "snow",
+        "section": "Weather Machine Events",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cloudy",
+        "cost": "20,000 Coins",
+        "effect": "Boosts luck, especially for rare fish",
+        "cardSummary": "The straightforward luck buy: better odds at rare catches for the whole server."
+      },
+      "system": {
+        "slug": "cloudy",
+        "section": "Weather Machine Events",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Storm",
+        "cost": "35,000 Coins",
+        "effect": "Combines Wind and Cloudy: faster rods plus luck",
+        "cardSummary": "The efficiency pick, bundling the speed and luck weathers into one activation."
+      },
+      "system": {
+        "slug": "storm",
+        "section": "Weather Machine Events",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Radiant",
+        "cost": "50,000 Coins",
+        "effect": "Raises the chance of shiny variant fish",
+        "cardSummary": "The shiny hunter's weather, tilting catches toward the rarer, more valuable shiny variants."
+      },
+      "system": {
+        "slug": "radiant",
+        "section": "Weather Machine Events",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shark Hunt",
+        "cost": "300,000 Coins",
+        "effect": "Triggers the Shark Hunt event with the Ghost Shark catchable",
+        "cardSummary": "The premium event weather: while the hunt runs, the Ghost Shark swims in the affected waters."
+      },
+      "system": {
+        "slug": "shark-hunt",
+        "section": "Weather Machine Events",
+        "sortOrder": 6,
+        "image": null
+      }
+    }
+  ]
+}
