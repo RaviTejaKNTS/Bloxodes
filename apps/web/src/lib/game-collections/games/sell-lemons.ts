@@ -6,5 +6,17 @@ export const sellLemonsCollectionGroup = {
     universeId: 7395930870,
     dataDir: "Sell Lemons",
     universeNames: ["Sell Lemons"],
-    collections: ["income-sources", "powers", "secret-unlocks", "evolution-stages", "locations"]
+    collections: [
+      "income-sources",
+      "powers",
+      "secret-unlocks",
+      "evolution-stages",
+      "locations",
+      "ascension-rewards",
+      "tycoon-upgrades",
+      "orchard-mutations",
+      "active-income-methods",
+      "orchard-items",
+      "companions"
+    ]
   } satisfies GameCollectionGroup;

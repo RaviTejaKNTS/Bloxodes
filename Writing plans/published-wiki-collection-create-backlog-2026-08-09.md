@@ -517,12 +517,12 @@ Evidence: [full report](../tmp/game-collection-suggestions/sailor-piece.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/sell-lemons.md)
 
-- [ ] Companions
-- [ ] Orchard Mutations
-- [ ] Orchard Items
-- [ ] Tycoon Upgrades
-- [ ] Active Income Methods
-- [ ] Ascension Rewards
+- [x] Companions
+- [x] Orchard Mutations
+- [x] Orchard Items
+- [x] Tycoon Upgrades
+- [x] Active Income Methods
+- [x] Ascension Rewards
 
 ### Slime RNG
 

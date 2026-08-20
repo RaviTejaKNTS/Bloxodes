@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sell Lemons",
+    "gameSlug": "sell-lemons",
+    "collection": "ascension-rewards",
+    "route": "/wiki/sell-lemons/ascension-rewards",
+    "catalogCode": "sell-lemons-ascension-rewards",
+    "itemFields": [
+      "type",
+      "grantRule",
+      "effect",
+      "stacking",
+      "restrictionOrNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "type",
+      "grantRule",
+      "effect",
+      "stacking",
+      "restrictionOrNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Reward group",
+      "sectionOrder": [
+        "Every-ascension rewards",
+        "First-ascension unlock"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "type",
+        "grantRule",
+        "effect",
+        "stacking",
+        "restrictionOrNote"
+      ],
+      "tableFields": [
+        "type",
+        "grantRule",
+        "effect",
+        "stacking",
+        "restrictionOrNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "grantRule": {
+          "kind": "highlight",
+          "label": "Grant rule"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "stacking": {
+          "kind": "chip",
+          "label": "Stacking"
+        },
+        "restrictionOrNote": {
+          "kind": "detail",
+          "label": "Restriction / note"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Halo",
+        "type": "Cosmetic",
+        "grantRule": "Every Ascension",
+        "effect": "Adds a glowing avatar halo that displays your Ascension count.",
+        "stacking": "Max 5 visible",
+        "restrictionOrNote": "Only five Halos show on the avatar even when the Ascension count is higher. Owning every badge, including hidden ones, turns the Halos rainbow.",
+        "cardSummary": "Halo is the cosmetic you earn every Ascension. Your count can keep rising, but only five Halos show, and a full badge set turns them rainbow."
+      },
+      "system": {
+        "slug": "halo",
+        "section": "Every-ascension rewards",
+        "sortOrder": 1,
+        "image": "/Sell%20Lemons/Ascension%20Rewards/halo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forever Purchase",
+        "type": "Token",
+        "grantRule": "Every Ascension",
+        "effect": "Grants one token that permanently unlocks a single eligible tycoon button and turns that button gold.",
+        "stacking": "+1 token",
+        "restrictionOrNote": "Cannot be spent on Hill Expansion or The Staircase. Unused tokens sit beside the cash bar, and you can cancel if you click one by mistake. A Robux shop buy also exists, but listed prices conflict so this catalog does not pin a Robux cost. Community first-token target is Wormhole Development for a x42 global cash boost.",
+        "cardSummary": "Forever Purchase is the token that locks one eligible tycoon button through later resets. It cannot hit Staircase or Hill Expansion buttons, and unused tokens wait on the cash bar."
+      },
+      "system": {
+        "slug": "forever-purchase",
+        "section": "Every-ascension rewards",
+        "sortOrder": 2,
+        "image": "/Sell%20Lemons/Ascension%20Rewards/forever-purchase.png"
+      }
+    },
+    {
+      "item": {
+        "name": "x7.77 Cash",
+        "type": "Multiplier",
+        "grantRule": "Every Ascension",
+        "effect": "Applies a permanent x7.77 boost to future cash earnings.",
+        "stacking": "x7.77 multiplicative",
+        "restrictionOrNote": "Each extra Ascension multiplies this bonus again. Read it against the x3.33 price hike rather than as a raw x7.77 speed-up.",
+        "cardSummary": "x7.77 Cash is the permanent income boost from each Ascension. It stays after later resets and compounds with every extra loop."
+      },
+      "system": {
+        "slug": "x7-77-cash",
+        "section": "Every-ascension rewards",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "x3.33 Price",
+        "type": "Penalty",
+        "grantRule": "Every Ascension",
+        "effect": "Raises the cost of tycoon buttons by x3.33.",
+        "stacking": "x3.33 multiplicative",
+        "restrictionOrNote": "The hike applies to tycoon buttons, including Staircase purchases. Paired with the cash boost, net progression is about x2.33 faster per Ascension.",
+        "cardSummary": "x3.33 Price is the cost penalty that lands with every Ascension. Buttons get more expensive, but the cash boost still leaves a net speed-up of about x2.33."
+      },
+      "system": {
+        "slug": "x3-33-price",
+        "section": "Every-ascension rewards",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lounge Access",
+        "type": "Location",
+        "grantRule": "First Ascension",
+        "effect": "Unlocks the Ascended Lounge and its Ascension leaderboard.",
+        "stacking": "Unlocks once",
+        "restrictionOrNote": "Kept after later Ascensions. Teleport from the ground-floor road. The lounge has the leaderboard and four pillars with white Halos.",
+        "cardSummary": "Lounge Access is the one-time area unlock from your first Ascension. Later loops keep the lounge, and you can teleport there from the ground-floor road."
+      },
+      "system": {
+        "slug": "lounge-access",
+        "section": "First-ascension unlock",
+        "sortOrder": 5,
+        "image": "/Sell%20Lemons/Ascension%20Rewards/lounge-access.png"
+      }
+    }
+  ]
+}
