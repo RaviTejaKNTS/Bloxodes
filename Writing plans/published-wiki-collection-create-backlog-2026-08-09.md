@@ -214,7 +214,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/brookhaven-rp.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/build-a-base-and-steal.md)
 
-- [ ] Building Parts
+- [ ] Building Parts — blocked 2026-08-20: no fandom exists; building parts are named only in the game's store description and AI wiki farms; no per-item source
 
 ### Build a Ring Farm
 
@@ -246,8 +246,8 @@ Evidence: [full report](../tmp/game-collection-suggestions/catch-and-tame.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/clean-the-library.md)
 
-- [ ] Classes
-- [ ] Library Maps
+- [ ] Classes — blocked 2026-08-20: no reliable class/ability roster; only AI wiki farm domains mention abilities
+- [ ] Library Maps — blocked 2026-08-20: only 3 maps exist (PGG cheatsheet); below roster floor, and shelf-section data already powers the published book catalogs
 
 ### Creatures of Sonaria
 
@@ -279,8 +279,8 @@ Evidence: [full report](../tmp/game-collection-suggestions/demonology.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/drain-the-lake.md)
 
-- [ ] Classes
-- [ ] Endings
+- [ ] Classes — blocked 2026-08-20: no fandom; class roster only appears on AI wiki farm domains
+- [ ] Endings — blocked 2026-08-20: endings are confirmed to exist but only AI wiki farms enumerate them; no reliable roster
 
 ### Dress to Impress
 
@@ -449,7 +449,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/murder-mystery-2.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/paint-and-seek.md)
 
-- [ ] Crates
+- [ ] Crates — blocked 2026-08-20: no crate roster in any source; the earlier abilities research gate also returned DO NOT PROCEED for this game's item systems
 
 ### Pet Simulator 99
 
@@ -475,7 +475,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/pet-simulator-99.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/practical-basketball.md)
 
-- [ ] Moves
+- [ ] Moves — blocked 2026-08-20: universe reads ~0 players (likely dead) and no move roster source exists
 
 ### Restaurant Tycoon 3
 
@@ -558,9 +558,9 @@ Evidence: [full report](../tmp/game-collection-suggestions/survive-zombie-arena.
 
 Evidence: [full report](../tmp/game-collection-suggestions/the-forge.md)
 
-- [ ] Rocks
-- [ ] Utility Items
-- [ ] Ore Crafting Recipes
+- [ ] Rocks — blocked 2026-08-20: no rocks roster distinct from ores exists on the fandom; minable nodes are the published ores collection
+- [ ] Utility Items — blocked 2026-08-20: fandom Items category is 7 mixed index pages; utility gear already lives in the published potions, totems, and essences collections
+- [ ] Ore Crafting Recipes — blocked 2026-08-20: no recipes roster; Forging is a mechanics page and per-weapon recipes are already fields of the published weapons collection
 
 ### The Strongest Battlegrounds
 
