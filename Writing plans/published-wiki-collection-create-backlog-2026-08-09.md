@@ -380,9 +380,9 @@ Evidence: [full report](../tmp/game-collection-suggestions/gakuran.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/grow-a-garden.md)
 
-- [ ] Cosmetics
-- [ ] Cosmetic Crates
-- [ ] Ascension Upgrades
+- [x] Cosmetics
+- [x] Cosmetic Crates
+- [x] Ascension Upgrades
 
 ### Grow a Garden 2
 

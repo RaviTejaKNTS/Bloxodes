@@ -261,6 +261,59 @@ export const GROW_GARDEN_COLLECTIONS: GrowGardenCollectionConfig[] = [
     stats: [],
     maxStats: 0
   }
+,
+  {
+    slug: "cosmetics",
+    label: "Cosmetics",
+    file: "cosmetics.json",
+    navDescription: "Every cosmetic with price and source.",
+    description: "Browse every Grow a Garden cosmetic by source, from the cosmetics shop and crates to event, code, and achievement rewards.",
+    groupKey: "collectionGroup",
+    groupLabel: "Source",
+    subtitleKeys: [],
+    descriptionKey: "flavor",
+    cardDescriptionKey: "flavor",
+    hideImages: false,
+    stats: [{ key: "price", label: "Price" }],
+    maxStats: 1
+  },
+  {
+    slug: "cosmetic-crates",
+    label: "Cosmetic Crates",
+    file: "cosmetic-crates.json",
+    navDescription: "Crate prices, tiers, and drop pools.",
+    description: "Compare Grow a Garden cosmetic crates by price, tier, and what their drop pools contain.",
+    groupKey: "collectionGroup",
+    groupLabel: "Group",
+    badgeKey: "tier",
+    subtitleKeys: ["added"],
+    descriptionKey: "poolSample",
+    cardDescriptionKey: "poolSample",
+    hideImages: false,
+    stats: [
+      { key: "price", label: "Price" },
+      { key: "tier", label: "Tier" }
+    ],
+    maxStats: 2
+  },
+  {
+    slug: "ascension-upgrades",
+    label: "Ascension Upgrades",
+    file: "ascension-upgrades.json",
+    navDescription: "Garden Coin upgrades from the ascension shop.",
+    description: "See every Garden Ascension shop upgrade with its effect, purchase cap, and Garden Coin price.",
+    groupKey: "collectionGroup",
+    groupLabel: "Group",
+    subtitleKeys: ["maxPurchases"],
+    descriptionKey: "effect",
+    cardDescriptionKey: "effect",
+    hideImages: false,
+    stats: [
+      { key: "price", label: "Price" },
+      { key: "maxPurchases", label: "Max buys" }
+    ],
+    maxStats: 2
+  }
 ];
 
 export const growAGardenCollectionGroup = {
