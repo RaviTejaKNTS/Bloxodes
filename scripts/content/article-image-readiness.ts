@@ -232,7 +232,10 @@ export function checkArticleImageReadiness(params: {
     const publicUrl = hasText(entry.public_url) ? entry.public_url.trim() : "";
     const uploadedPath = hasText(entry.uploaded_path) ? entry.uploaded_path.trim() : "";
     const isRemotePublicUrl = isHttpUrl(publicUrl);
-    const isCanonicalLocalAsset = publicUrl.startsWith("/") && classifyArticleImageSrc(publicUrl, manifest.article_slug).ok;
+    const isCanonicalLocalAsset =
+      manifest.visual_type === "items" &&
+      publicUrl.startsWith("/") &&
+      classifyArticleImageSrc(publicUrl, manifest.article_slug).ok;
     if (!publicUrl || (!isRemotePublicUrl && !isCanonicalLocalAsset)) {
       errors.push(`${label}: verified visual has no valid Bloxodes public_url`);
     } else if (isRemotePublicUrl) {
