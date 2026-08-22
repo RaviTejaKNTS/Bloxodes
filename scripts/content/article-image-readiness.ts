@@ -231,16 +231,18 @@ export function checkArticleImageReadiness(params: {
 
     const publicUrl = hasText(entry.public_url) ? entry.public_url.trim() : "";
     const uploadedPath = hasText(entry.uploaded_path) ? entry.uploaded_path.trim() : "";
-    if (!publicUrl || !isHttpUrl(publicUrl)) {
-      errors.push(`${label}: verified visual has no hosted public_url`);
-    } else {
+    const isRemotePublicUrl = isHttpUrl(publicUrl);
+    const isCanonicalLocalAsset = publicUrl.startsWith("/") && classifyArticleImageSrc(publicUrl, manifest.article_slug).ok;
+    if (!publicUrl || (!isRemotePublicUrl && !isCanonicalLocalAsset)) {
+      errors.push(`${label}: verified visual has no valid Bloxodes public_url`);
+    } else if (isRemotePublicUrl) {
       uploaded += 1;
       const classified = classifyArticleImageSrc(publicUrl, manifest.article_slug);
       if (!classified.ok) errors.push(`${label}: public_url is not Bloxodes-hosted (${classified.reason})`);
       if (publicUrls.has(publicUrl)) errors.push(`${label}: public_url is reused by another visual`);
       publicUrls.add(publicUrl);
     }
-    if (!uploadedPath.startsWith(`articles/${manifest.article_slug}/sources/`) || !uploadedPath.endsWith(".webp")) {
+    if (isRemotePublicUrl && (!uploadedPath.startsWith(`articles/${manifest.article_slug}/sources/`) || !uploadedPath.endsWith(".webp"))) {
       errors.push(`${label}: uploaded_path must be articles/${manifest.article_slug}/sources/<name>.webp`);
     }
     if (!Number.isInteger(entry.width) || Number(entry.width) < 1) errors.push(`${label}: width is required`);

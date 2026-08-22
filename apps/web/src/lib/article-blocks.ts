@@ -29,12 +29,30 @@ const articleHrefSchema = z
 
 const linkedItemFields = {
   name: z.string().trim().min(1).max(80),
-  image: z.string().trim().min(1).max(500),
-  alt: z.string().trim().min(3).max(180),
+  image: z.string().trim().min(1).max(500).optional(),
+  alt: z.string().trim().min(3).max(180).optional(),
   href: articleHrefSchema.optional(),
 };
 
-const tierListItemSchema = z.object(linkedItemFields).strict();
+const tierListItemSchema = z
+  .object(linkedItemFields)
+  .strict()
+  .superRefine((value, context) => {
+    if (value.image && !value.alt) {
+      context.addIssue({
+        code: "custom",
+        path: ["alt"],
+        message: "alt is required when image is provided",
+      });
+    }
+    if (value.alt && !value.image) {
+      context.addIssue({
+        code: "custom",
+        path: ["image"],
+        message: "image is required when alt is provided",
+      });
+    }
+  });
 
 const collectionLinkSchema = z
   .object({
@@ -350,13 +368,17 @@ export function extractArticleBlockImageRefs(markdown: string): ArticleBlockImag
     }
     if (block.kind !== "tier-list") return [];
     return block.data.tiers.flatMap((tier) =>
-      tier.items.map((item) => ({
-        blockId: block.data.id,
-        itemName: item.name,
-        alt: item.alt,
-        src: item.image,
-        kind: "tier-list",
-      }))
+      tier.items.flatMap((item) =>
+        item.image && item.alt
+          ? [{
+              blockId: block.data.id,
+              itemName: item.name,
+              alt: item.alt,
+              src: item.image,
+              kind: "tier-list" as const,
+            }]
+          : []
+      )
     );
   });
 }
@@ -450,7 +472,7 @@ export function validateTierListArticleDetails(markdown: string): string[] {
       if (!tableLower.includes(item.name.toLowerCase())) {
         errors.push(`## ${tier.rank} Tier detail table is missing item name ${item.name}`);
       }
-      if (!table.includes(item.image)) {
+      if (item.image && !table.includes(item.image)) {
         errors.push(`## ${tier.rank} Tier detail table is missing image ${item.image} for ${item.name}`);
       }
     }

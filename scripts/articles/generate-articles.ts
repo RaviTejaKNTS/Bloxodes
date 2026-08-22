@@ -4,7 +4,6 @@ import { Readability } from "@mozilla/readability";
 import OpenAI from "openai";
 import { JSDOM } from "jsdom";
 import { createClient } from "@supabase/supabase-js";
-import sharp from "sharp";
 import { z } from "zod";
 
 import { slugify } from "@/lib/slug";
@@ -12,7 +11,7 @@ import {
   pickEligibleArticleAuthorId,
   type ArticleAuthorCandidate
 } from "../shared/article-author-selection";
-import { toMediaPublicUrl } from "../shared/storage-public-url";
+import { createEditedArticleCover, type ArticleCoverStorage } from "../shared/article-cover";
 import { firecrawlSearch } from "../shared/firecrawl";
 
 const GENERATOR_PROMPT_VERSION = "article-generator-v2-2026-09-03";
@@ -363,15 +362,6 @@ function cleanText(value: string | null | undefined): string | null {
 }
 
 
-function escapeForSvg(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
 function normalizeOverlayTitle(value: string | null | undefined, limit = 70): string | null {
   if (!value) return null;
   const cleaned = value.replace(/\s+/g, " ").trim();
@@ -379,66 +369,8 @@ function normalizeOverlayTitle(value: string | null | undefined, limit = 70): st
   return cleaned.length > limit ? `${cleaned.slice(0, limit - 1)}…` : cleaned;
 }
 
-function pickOverlayFontSize(lines: string[]): number {
-  const longest = lines.reduce((max, line) => Math.max(max, line.length), 0);
-  let base: number;
-  if (longest <= 10) base = 104;
-  else if (longest <= 16) base = 94;
-  else if (longest <= 22) base = 82;
-  else if (longest <= 28) base = 70;
-  else if (longest <= 34) base = 62;
-  else base = 52;
-
-  const linePenalty = Math.max(0, lines.length - 2) * 6;
-  return Math.max(44, base - linePenalty);
-}
-
-function wrapOverlayLines(text: string): string[] {
-  const cleaned = text.replace(/\s+/g, " ").trim();
-  if (!cleaned) return [];
-  const words = cleaned.split(" ");
-  const length = cleaned.length;
-  let maxLine = 16;
-  if (length > 80) maxLine = 24;
-  else if (length > 60) maxLine = 20;
-  else if (length > 40) maxLine = 18;
-
-  const lines: string[] = [];
-  let current = "";
-
-  for (const word of words) {
-    if (!current.length) {
-      current = word;
-      continue;
-    }
-
-    const next = `${current} ${word}`;
-    if (next.length <= maxLine) {
-      current = next;
-    } else {
-      lines.push(current);
-      current = word;
-    }
-  }
-
-  if (current.length) {
-    lines.push(current);
-  }
-
-  return lines;
-}
-
 function replaceEmDashes(value: string): string {
   return value.replace(/—\s*/g, ": ");
-}
-
-function injectCoverImageBeforeFirstH2(content: string, imageUrl: string, altText: string): string {
-  const imageLine = `![${altText}](${imageUrl})`;
-  const h2Index = content.search(/^## /m);
-  if (h2Index === -1) {
-    return `${content}\n\n${imageLine}`;
-  }
-  return `${content.slice(0, h2Index)}${imageLine}\n\n${content.slice(h2Index)}`;
 }
 
 function sanitizeInternalLinks(content: string, allowedUrls: Set<string>): string {
@@ -703,80 +635,15 @@ async function downloadResizeAndUploadCover(params: {
   fileBase?: string;
   overlayTitle?: string | null;
 }): Promise<string | null> {
-  if (!SUPABASE_MEDIA_BUCKET) {
-    console.log("⚠️ SUPABASE_MEDIA_BUCKET not configured. Skipping cover image upload.");
-    return null;
-  }
-
-  try {
-    const response = await fetch(params.imageUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        Accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
-      }
-    });
-
-    if (!response.ok) {
-      console.warn("⚠️ Failed to download universe thumbnail:", response.statusText);
-      return null;
-    }
-
-    const buffer = Buffer.from(await response.arrayBuffer());
-
-    const overlayText = normalizeOverlayTitle(params.overlayTitle ?? null);
-    const overlayLines = overlayText ? wrapOverlayLines(overlayText) : [];
-    const fontSize = overlayLines.length ? pickOverlayFontSize(overlayLines) : 0;
-    const lineHeight = fontSize ? Math.round(fontSize * 1.2) : 0;
-    const startY = fontSize ? Math.round(337.5 - ((overlayLines.length - 1) * lineHeight) / 2) : 0;
-
-    const textBlock =
-      overlayLines.length && fontSize
-        ? `<text x="600" y="${startY}" text-anchor="middle" fill="#f8f9fb" font-size="${fontSize}" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-style="italic" letter-spacing="1.2" dominant-baseline="hanging">
-            ${overlayLines
-              .map((line, idx) => `<tspan x="600" dy="${idx === 0 ? 0 : lineHeight}">${escapeForSvg(line)}</tspan>`)
-              .join("")}
-          </text>`
-        : "";
-
-    const svgOverlay = Buffer.from(
-      `<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" role="presentation">
-        <rect x="0" y="0" width="1200" height="675" fill="rgba(0,0,0,0.78)"/>
-        ${textBlock}
-      </svg>`.replace(/\s+/g, " ")
-    );
-
-    const resized = await sharp(buffer)
-      .resize(1200, 675, { fit: "cover", position: "attention" })
-      .composite([{ input: svgOverlay, blend: "over" }])
-      .webp({ quality: 90, effort: 4 })
-      .toBuffer();
-
-    const fileBase =
-      (params.fileBase ?? params.slug)
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/-{2,}/g, "-")
-        .replace(/(^-|-$)/g, "") || params.slug;
-
-    const path = `articles/${params.slug}/${fileBase}-cover.webp`;
-    const storageClient = supabase.storage.from(SUPABASE_MEDIA_BUCKET);
-
-    const { error } = await storageClient.upload(path, resized, {
-      contentType: "image/webp",
-      upsert: true
-    });
-
-    if (error) {
-      console.warn("⚠️ Failed to upload article cover image:", error.message);
-      return null;
-    }
-
-    const publicUrl = storageClient.getPublicUrl(path);
-    return toMediaPublicUrl(publicUrl.data.publicUrl);
-  } catch (error) {
-    console.warn("⚠️ Could not process cover image:", error instanceof Error ? error.message : String(error));
-    return null;
-  }
+  if (!SUPABASE_MEDIA_BUCKET) return null;
+  const storage = supabase.storage.from(SUPABASE_MEDIA_BUCKET) as unknown as ArticleCoverStorage;
+  return createEditedArticleCover({
+    imageUrl: params.imageUrl,
+    slug: params.slug,
+    fileBase: params.fileBase,
+    overlayTitle: params.overlayTitle,
+    storage,
+  });
 }
 
 async function uploadUniverseCoverImage(universeId: number, slug: string, overlayTitle?: string | null): Promise<string | null> {
@@ -2134,14 +2001,6 @@ async function main() {
     }
 
     currentDraft = finalizeDraftArticle(currentDraft);
-
-    // Inject cover image last — after all AI steps so it can't be stripped
-    if (coverImage) {
-      currentDraft = {
-        ...currentDraft,
-        content_md: injectCoverImageBeforeFirstH2(currentDraft.content_md, coverImage, currentDraft.title)
-      };
-    }
 
     // Single DB update for all post-insert changes
     const finalUpdated = await updateArticleContent(article.id, currentDraft);

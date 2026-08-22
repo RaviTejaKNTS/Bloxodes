@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { classifyArticleImageSrc } from "@/lib/article-media";
 import { readArticleImageManifest } from "./article-image-readiness";
 
 type CliOptions = {
@@ -48,7 +49,11 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   assertTargetAllowed(options);
   const manifest = await readArticleImageManifest(options.manifest);
-  const entries = manifest.entries.filter((entry) => entry.status === "verified");
+  const entries = manifest.entries.filter((entry) => {
+    if (entry.status !== "verified" || !entry.public_url) return false;
+    const publicUrl = entry.public_url.trim();
+    return !(publicUrl.startsWith("/") && classifyArticleImageSrc(publicUrl, manifest.article_slug).ok);
+  });
 
   for (const entry of entries) {
     if (

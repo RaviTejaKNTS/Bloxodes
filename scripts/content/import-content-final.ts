@@ -2,13 +2,17 @@ import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import sharp from "sharp";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import {
   pickEligibleArticleAuthorId,
   type ArticleAuthorCandidate
 } from "../shared/article-author-selection";
+import {
+  articleCoverPublicUrl,
+  createEditedArticleCover,
+  type ArticleCoverStorage
+} from "../shared/article-cover";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { assertCanonicalMediaUrls, toMediaPublicUrl } from "../shared/storage-public-url";
 
@@ -17,6 +21,7 @@ type CliOptions = {
   dryRun: boolean;
   allowProd: boolean;
   coverSourceFile: string | null;
+  regenerateCovers: boolean;
 };
 
 type ArticleFinal = {
@@ -84,7 +89,7 @@ type QuizFinal = {
 
 function printUsage() {
   console.log(
-    `Usage: npm run import:content-final -- --file <final.json> [--file <final.json>...] [--cover-source-file <image>] [--dry-run] [--allow-prod]`
+    `Usage: npm run import:content-final -- --file <final.json> [--file <final.json>...] [--cover-source-file <image>] [--regenerate-covers] [--dry-run] [--allow-prod]`
   );
 }
 
@@ -94,6 +99,7 @@ function parseArgs(argv: string[]): CliOptions {
     dryRun: false,
     allowProd: false,
     coverSourceFile: null,
+    regenerateCovers: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -123,6 +129,9 @@ function parseArgs(argv: string[]): CliOptions {
         i += 1;
         break;
       }
+      case "--regenerate-covers":
+        options.regenerateCovers = true;
+        break;
       default:
         throw new Error(`Unknown option: ${arg}`);
     }
@@ -260,6 +269,31 @@ function normalizeArticleCover(value: string | null | undefined): string | null 
   return normalized?.trim() || null;
 }
 
+function markdownImageUrl(line: string): string | null {
+  const match = line.trim().match(/^!\[[^\]]*\]\((<[^>]+>|[^)]+)\)$/);
+  if (!match?.[1]) return null;
+  return match[1].replace(/^<|>$/g, "").trim() || null;
+}
+
+function contentContainsImage(content: string, imageUrl: string | null): boolean {
+  if (!imageUrl) return false;
+  return content.split("\n").some((line) => markdownImageUrl(line) === imageUrl);
+}
+
+function removeImagesFromContent(content: string, imageUrls: Array<string | null | undefined>): string {
+  const targets = new Set(imageUrls.filter((value): value is string => Boolean(value)));
+  if (!targets.size) return content;
+  return content
+    .split("\n")
+    .filter((line) => {
+      const imageUrl = markdownImageUrl(line);
+      return !imageUrl || !targets.has(imageUrl);
+    })
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function assertProductionArticleMedia(params: {
   slug: string;
   coverImage: string | null;
@@ -306,6 +340,14 @@ function assertProductionArticleMedia(params: {
   if (coverUrl.protocol !== "https:") {
     throw new Error(`Refusing to publish article ${params.slug}: cover_image must use HTTPS`);
   }
+  if (coverUrl.origin !== PRODUCTION_MEDIA_ORIGIN) {
+    throw new Error(
+      `Refusing to publish article ${params.slug}: cover_image must use ${PRODUCTION_MEDIA_ORIGIN}`
+    );
+  }
+  if (contentContainsImage(params.contentMd, params.coverImage)) {
+    throw new Error(`Refusing to publish article ${params.slug}: cover_image is duplicated in content_md`);
+  }
 }
 
 async function verifyProductionArticleMedia(params: {
@@ -347,75 +389,12 @@ async function verifyProductionArticleMedia(params: {
   await response.body?.cancel();
 }
 
-async function uploadEditedArticleCover(params: {
-  imageUrl?: string;
-  sourceFile?: string | null;
-  slug: string;
-  title: string;
-  sb: SupabaseAdminClient;
-}): Promise<string | null> {
-  if (!SUPABASE_MEDIA_BUCKET) {
-    console.warn("SUPABASE_MEDIA_BUCKET is not configured; falling back to the raw universe thumbnail.");
-    return null;
-  }
-
-  try {
-    let source: Buffer;
-    if (params.sourceFile) {
-      source = await readFile(path.resolve(process.cwd(), params.sourceFile));
-    } else if (params.imageUrl) {
-      const response = await fetch(params.imageUrl, {
-        headers: {
-          "User-Agent": "Mozilla/5.0",
-          Accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
-        }
-      });
-
-      if (!response.ok) {
-        console.warn(`Unable to download universe thumbnail for ${params.slug}: ${response.statusText}`);
-        return null;
-      }
-
-      source = Buffer.from(await response.arrayBuffer());
-    } else {
-      throw new Error("No cover source URL or file was provided");
-    }
-
-    const cover = await sharp(source)
-      .resize(1200, 675, { fit: "cover", position: "attention" })
-      .webp({ quality: 90, effort: 4 })
-      .toBuffer();
-
-    const storagePath = `articles/${params.slug}/${params.slug}-cover.webp`;
-    const storage = params.sb.storage.from(SUPABASE_MEDIA_BUCKET);
-    const { error } = await storage.upload(storagePath, cover, {
-      contentType: "image/webp",
-      upsert: true,
-    });
-
-    if (error) {
-      console.warn(`Unable to upload edited cover for ${params.slug}: ${error.message}`);
-      return null;
-    }
-
-    return toMediaPublicUrl(storage.getPublicUrl(storagePath).data.publicUrl);
-  } catch (error) {
-    console.warn(`Unable to create edited cover for ${params.slug}: ${error instanceof Error ? error.message : String(error)}`);
-    return null;
-  }
-}
-
-function injectCoverImageBeforeFirstH2(content: string, imageUrl: string, altText: string): string {
-  const firstH2Index = content.search(/^## /m);
-  const beforeFirstH2 = firstH2Index === -1 ? content : content.slice(0, firstH2Index);
-  if (/!\[[^\]]*]\([^)]+\)/.test(beforeFirstH2)) return content;
-
-  const imageLine = `![${altText}](${imageUrl})`;
-  if (firstH2Index === -1) return `${content.trim()}\n\n${imageLine}`;
-  return `${content.slice(0, firstH2Index).trim()}\n\n${imageLine}\n\n${content.slice(firstH2Index).trimStart()}`;
-}
-
-async function importArticle(finalJson: ArticleFinal, dryRun: boolean, coverSourceFile: string | null) {
+async function importArticle(
+  finalJson: ArticleFinal,
+  dryRun: boolean,
+  coverSourceFile: string | null,
+  regenerateCovers: boolean,
+) {
   const sb = supabaseAdmin();
   const slug = finalJson.slug.trim().toLowerCase();
   const isPublished = finalJson.is_published ?? true;
@@ -433,63 +412,54 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean, coverSour
   const authorId =
     existingAuthorId ??
     (await pickAuthorId(sb, finalJson.author_id ?? process.env.ARTICLE_AUTHOR_ID ?? null));
-  const suppliedCover = normalizeArticleCover(finalJson.cover_image);
+  const rawSuppliedCover = normalizeArticleCover(finalJson.cover_image);
+  const suppliedCover = rawSuppliedCover && contentContainsImage(finalJson.content_md, rawSuppliedCover)
+    ? null
+    : rawSuppliedCover;
+  if (rawSuppliedCover && !suppliedCover) {
+    console.warn(`Ignoring duplicate supplied cover for ${slug}; the importer will use the automated cover path.`);
+  }
   const existingCover = normalizeArticleCover(
     ((existing as { cover_image?: string | null } | null)?.cover_image || null) ?? null
   );
   const universeCover = await pickUniverseCoverImage(sb, universeId);
   const forceEditedCover = process.env.ARTICLE_WRITER_REGENERATE_COVERS === "true";
+  const storage = SUPABASE_MEDIA_BUCKET
+    ? (sb.storage.from(SUPABASE_MEDIA_BUCKET) as unknown as ArticleCoverStorage)
+    : null;
+  const coverFileBase = regenerateCovers ? `${slug}-edited` : undefined;
+  const generatedCoverUrl = storage ? articleCoverPublicUrl(storage, slug, coverFileBase) : null;
+  const generateCover = async (sourceUrl: string | null, sourceFile: string | null): Promise<string | null> => {
+    if (!sourceUrl && !sourceFile) return null;
+    if (dryRun) return generatedCoverUrl;
+    return createEditedArticleCover({
+      imageUrl: sourceUrl,
+      sourceFile,
+      slug,
+      fileBase: coverFileBase,
+      overlayTitle: finalJson.title,
+      storage,
+    });
+  };
   let coverImage: string | null;
   if (coverSourceFile) {
-    if (dryRun) {
-      coverImage = suppliedCover ?? (isEditedArticleCover(existingCover, slug) ? existingCover : null) ?? universeCover;
-    } else {
-      coverImage = await uploadEditedArticleCover({
-        sourceFile: coverSourceFile,
-        slug,
-        title: finalJson.title,
-        sb,
-      });
-      if (!coverImage) {
-        throw new Error(`Article importer could not generate and upload the required edited cover for ${slug}.`);
-      }
+    coverImage = await generateCover(null, coverSourceFile);
+    if (!coverImage) throw new Error(`Article importer could not generate and upload the required edited cover for ${slug}.`);
+  } else if (forceEditedCover || regenerateCovers) {
+    if (!universeCover) {
+      throw new Error(`Article writer cannot regenerate an edited cover for ${slug}: no universe thumbnail is available.`);
     }
-  } else if (forceEditedCover) {
-    const coverSource = suppliedCover ?? universeCover ?? existingCover;
-    if (!coverSource) {
-      throw new Error(`Article writer cannot create an edited cover for ${slug}: no source image is available.`);
-    }
-    if (dryRun) {
-      coverImage = coverSource;
-    } else {
-      coverImage = await uploadEditedArticleCover({
-        imageUrl: coverSource,
-        slug,
-        title: finalJson.title,
-        sb,
-      });
-      if (!coverImage) {
-        throw new Error(`Article writer could not generate and upload the required edited cover for ${slug}.`);
-      }
-    }
+    coverImage = await generateCover(universeCover, null);
+    if (!coverImage) throw new Error(`Article writer could not generate and upload the required edited cover for ${slug}.`);
   } else {
     coverImage =
       suppliedCover ??
       (isEditedArticleCover(existingCover, slug) ? existingCover : null) ??
-      (!dryRun && universeCover
-        ? await uploadEditedArticleCover({
-            imageUrl: universeCover,
-            slug,
-            title: finalJson.title,
-            sb,
-          })
-        : null) ??
+      (universeCover ? await generateCover(universeCover, null) : null) ??
       existingCover ??
       universeCover;
   }
-  const contentMd = coverImage
-    ? injectCoverImageBeforeFirstH2(finalJson.content_md, coverImage, finalJson.title)
-    : finalJson.content_md;
+  const contentMd = removeImagesFromContent(finalJson.content_md, [rawSuppliedCover]);
 
   assertProductionArticleMedia({ slug, coverImage, contentMd, isPublished });
 
@@ -638,7 +608,7 @@ async function main() {
     const value = await readJson(file);
     assertCanonicalMediaUrls(value, file);
     if (isArticleFinal(value)) {
-      await importArticle(value, options.dryRun, options.coverSourceFile);
+      await importArticle(value, options.dryRun, options.coverSourceFile, options.regenerateCovers);
     } else if (isChecklistFinal(value) || isLegacyChecklistFinal(value)) {
       await importChecklist(value, options.dryRun);
     } else if (isQuizFinal(value)) {

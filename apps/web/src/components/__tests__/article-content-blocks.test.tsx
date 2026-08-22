@@ -34,6 +34,22 @@ describe("article content block components", () => {
     expect(html).toContain("General combat");
   });
 
+  it("renders accepted missing visuals as text tiles", () => {
+    const html = renderToStaticMarkup(
+      <ArticleTierList
+        data={{
+          schema: 1,
+          id: "evomon",
+          title: "Evomon ranked",
+          tiers: [{ rank: "A", items: [{ name: "Ignifist" }] }],
+        }}
+      />
+    );
+
+    expect(html).toContain('data-tier-list-text-item="true"');
+    expect(html).toContain('aria-label="Ignifist, image unavailable"');
+  });
+
   it("renders one derived collection link instead of per-item links", () => {
     const html = renderToStaticMarkup(
       <ArticleTierList

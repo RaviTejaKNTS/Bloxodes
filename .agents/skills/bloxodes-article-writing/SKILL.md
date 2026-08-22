@@ -124,7 +124,7 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 - Never put a localhost URL in production, point a production article at the retired managed Supabase project, or assume a local Storage upload was promoted automatically.
 - After the article row exists, upsert one `article_source_images` row per used image with `article_id`, source page URL and host, original image URL, object path, public URL, useful alt/context, and available dimensions. Do this in managed-dev Supabase for homelab verification and again in production during the approved production publish.
 - Verify the Storage object is readable and the `article_source_images` row matches it in each target environment. Only then place that environment's public URL in `content_md`. If upload, provenance write, or readback fails, omit the image rather than hotlinking or creating a repo fallback.
-- Keep `cover_image` null unless a cover already exists in Supabase Storage. Let the import flow generate and upload the normal cover when it is null.
+- Keep `cover_image` null unless a cover already exists in Supabase Storage. Let the import flow generate and upload the edited cover from the game's thumbnail when it is null. Never insert the cover URL into `content_md`; the feature image is stored in `cover_image` only.
 
 **How-to-fix and troubleshooting articles**
 - Give each fix its own `###` (H3) heading, grouped under one `##` (H2) like "How to fix it". This beats a long numbered list with nested sub-bullets, which gets hard to scan.

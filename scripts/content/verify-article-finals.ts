@@ -16,6 +16,7 @@ import {
   readArticleImageManifest,
   type ArticleImageManifest,
 } from "./article-image-readiness";
+import { classifyArticleImageSrc } from "@/lib/article-media";
 
 type ArticleFinal = {
   title: string;
@@ -206,6 +207,9 @@ function assertRowMatchesFinal(row: ArticleRow | null, finalJson: ArticleFinal) 
   if (!row.content_md || row.content_md.trim().length < finalJson.content_md.slice(0, 80).trim().length) {
     throw new Error(`Readback article ${finalJson.slug} has missing or very short content_md`);
   }
+  if (row.cover_image && row.content_md.includes(row.cover_image)) {
+    throw new Error(`Readback article ${finalJson.slug} repeats cover_image inside content_md`);
+  }
   if (finalJson.universe_id && row.universe_id !== finalJson.universe_id) {
     throw new Error(`Readback universe_id mismatch for ${finalJson.slug}`);
   }
@@ -293,9 +297,13 @@ async function syncImageProvenance(
     if (!article) throw new Error(`Cannot sync image provenance: article ${loaded.manifest.article_slug} was not imported`);
 
     for (const entry of loaded.manifest.entries) {
-      if (entry.status !== "verified" || !entry.original_image_url || !entry.public_url || !entry.uploaded_path) {
+      if (entry.status !== "verified" || !entry.original_image_url || !entry.public_url) {
         continue;
       }
+      const publicUrl = entry.public_url.trim();
+      const isCanonicalLocalAsset = publicUrl.startsWith("/") && classifyArticleImageSrc(publicUrl, loaded.manifest.article_slug).ok;
+      if (isCanonicalLocalAsset) continue;
+      if (!entry.uploaded_path) continue;
       const payload = {
         article_id: article.id,
         source_url: entry.source_page_url!,
@@ -303,7 +311,7 @@ async function syncImageProvenance(
         name: entry.label,
         original_url: entry.original_image_url,
         uploaded_path: entry.uploaded_path,
-        public_url: entry.public_url,
+        public_url: publicUrl,
         alt_text: entry.alt ?? null,
         caption: null,
         context: entry.match_evidence ?? entry.placement_heading,

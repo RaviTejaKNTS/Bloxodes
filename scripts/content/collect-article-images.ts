@@ -6,6 +6,7 @@ import path from "node:path";
 
 import sharp from "sharp";
 
+import { classifyArticleImageSrc } from "@/lib/article-media";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
 import {
@@ -178,14 +179,27 @@ async function main() {
     );
   }
 
-  const collectable = manifest.entries.filter((entry) => entry.status === "verified");
+  const isCanonicalLocalAsset = (entry: ArticleImageEntry) =>
+    Boolean(
+      entry.public_url?.startsWith("/") &&
+        classifyArticleImageSrc(entry.public_url, manifest.article_slug).ok,
+    );
+  const collectable = manifest.entries.filter(
+    (entry) => entry.status === "verified" && !isCanonicalLocalAsset(entry),
+  );
   for (const entry of collectable) assertCollectionReady(entry);
 
   console.log(
-    `Article image plan: type=${manifest.visual_type} expected=${manifest.expected_count} verified=${collectable.length}`
+    `Article image plan: type=${manifest.visual_type} expected=${manifest.expected_count} verified=${manifest.entries.filter((entry) => entry.status === "verified").length} promotable=${collectable.length}`
   );
   for (const entry of manifest.entries) {
-    const action = entry.status === "verified" ? (entry.public_url ? "reuse" : "upload") : "skip";
+    const action = entry.status !== "verified"
+      ? "skip"
+      : isCanonicalLocalAsset(entry)
+        ? "preserve-local"
+        : entry.public_url
+          ? "reuse"
+          : "upload";
     console.log(`- ${entry.label}: status=${entry.status} action=${action}`);
   }
 

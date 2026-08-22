@@ -34,7 +34,7 @@ Write Markdown in `content_md` in this order:
 
 1. Give the direct answer and top recommendations with any essential caveat.
 2. State the ranking scope and criteria briefly.
-3. When every ranked item has an exact verified image, add exactly one `tier-list` block containing only tier ranks, images, names, and optional links. Otherwise omit the block entirely and introduce the ranking with a concise Markdown summary table after every unresolved media target has been accepted missing.
+3. When every ranked item has an exact verified image, add exactly one `tier-list` block containing tier ranks, images, names, and optional links. When the parent has explicitly accepted missing visuals, the block may still include every ranked item with text-only tiles for those accepted omissions. Otherwise omit the block entirely and introduce the ranking with a concise Markdown summary table.
 4. Add one `## <rank> Tier` section for every tier, in best-to-worst ranking order.
 5. Begin each tier section with one Markdown detail table. In visual mode, repeat the exact item name and image path from the overview. In text/table-first mode, omit the image column and include every ranked item by exact name.
 6. Follow the table with useful tier-level analysis, exceptions, and player advice. Do not narrate every row again.
@@ -44,7 +44,7 @@ Use topic-specific detail columns. Examples include role, cost, stats, strengths
 
 ## Tier-List Block
 
-Use this block only in visual mode, when the image set is complete. Never insert placeholders, near matches, or hotlinks to force visual mode.
+Use this block in visual mode when the image set is complete. If the parent has explicitly accepted missing visuals, include those names without `image` or `alt` so the renderer can show an accessible text tile. Never insert placeholders, near matches, or hotlinks to force visual mode.
 
 ```yaml
 schema: 1
@@ -74,6 +74,7 @@ Block rules:
 - Use `schema: 1` and a unique lowercase hyphenated `id`.
 - Use each tier rank once and each item name once.
 - Include factual alt text for every image.
+- Omit `image` and `alt` together for an explicitly accepted missing visual; do not use placeholder URLs.
 - Use a verified site-relative public path or Bloxodes media URL. Never hotlink.
 - Add `collection` with the verified Bloxodes collection page when one exists; omit it otherwise. Do not add per-item `href` links; items render as plain images.
 - Ranks color from green downward: `S` renders as the recommended green tier and low ranks shade toward red, so order tiers best-first.
@@ -114,7 +115,7 @@ Before returning `final.json`:
 
 - Confirm the expected, ranked, and tabled item counts match. In visual mode, also confirm the imaged item count matches; in text/table-first mode, confirm there is no partial tier-list block or placeholder image.
 - Confirm each placement belongs to the stated scope and each table adds real detail.
-- In visual mode, confirm overview names and image paths exactly match the per-tier tables.
+- Confirm overview names and tier placements exactly match the per-tier tables. In visual mode, confirm image paths match; for accepted missing visuals, confirm the text-only item appears in the matching table without a placeholder image.
 - Parse-check JSON.
 - Run the normal article verifier against a local web server:
 

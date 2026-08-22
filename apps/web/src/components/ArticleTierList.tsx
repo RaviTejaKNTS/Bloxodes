@@ -67,16 +67,31 @@ function resolveCollectionLink(data: TierListBlockData): CollectionLink | null {
 function TierItemTile({ item, imageClassName }: { item: TierListItem; imageClassName: string }) {
   return (
     <li className="flex flex-none flex-col items-center">
-      <img
-        src={item.image}
-        alt={item.alt}
-        className={cn("w-auto rounded-lg object-cover", imageClassName)}
-        loading="lazy"
-        decoding="async"
-      />
-      <span className="line-clamp-2 w-0 min-w-full pt-1 text-center text-[10px] font-medium leading-[1.2] text-foreground">
-        {item.name}
-      </span>
+      {item.image && item.alt ? (
+        <img
+          src={item.image}
+          alt={item.alt}
+          className={cn("w-auto rounded-lg object-cover", imageClassName)}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <span
+          className={cn(
+            "flex items-center justify-center rounded-lg border border-dashed border-border/70 bg-background/70 px-2 text-center text-xs font-semibold text-muted-foreground",
+            imageClassName
+          )}
+          aria-label={`${item.name}, image unavailable`}
+          data-tier-list-text-item="true"
+        >
+          {item.name}
+        </span>
+      )}
+      {item.image && item.alt ? (
+        <span className="line-clamp-2 w-0 min-w-full pt-1 text-center text-[10px] font-medium leading-[1.2] text-foreground">
+          {item.name}
+        </span>
+      ) : null}
     </li>
   );
 }
