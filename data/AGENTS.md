@@ -84,6 +84,9 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - `data/Volleyball Legends/*`
   - Dataset-backed Volleyball Legends wiki/collection content for styles, abilities, and ball skins.
   - Matching row images live under `apps/web/public/Volleyball Legends/`. Ball skins use WebP files; Gamer Ball and Phonk Ball intentionally share the same source-backed image.
+- `data/DOORS/*`
+  - Dataset-backed DOORS wiki/collection content for released entities, permanent run items, released floors and subfloors, and fixed named locations.
+  - Matching optimized WebP images live under `apps/web/public/DOORS/` by collection folder. Keep upcoming floors, temporary modes, events, modifiers, achievements, and generic procedural rooms outside these datasets.
 - `data/Fisch/fish.json`
   - Fisch collection content.
 - `data/Color Codes/roblox-color-codes.json`

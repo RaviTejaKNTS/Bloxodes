@@ -1,0 +1,1199 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "DOORS",
+    "gameSlug": "doors",
+    "collection": "entities",
+    "route": "/wiki/doors/entities",
+    "catalogCode": "doors-entities",
+    "itemFields": [
+      "role",
+      "areas",
+      "encounter",
+      "tell",
+      "behavior",
+      "damage",
+      "counter",
+      "relatedItem",
+      "alias",
+      "cardSummary"
+    ],
+    "columns": [
+      "role",
+      "areas",
+      "encounter",
+      "tell",
+      "behavior",
+      "damage",
+      "counter",
+      "relatedItem",
+      "alias",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Encounter area",
+      "sectionOrder": [
+        "The Hotel",
+        "The Mines",
+        "The Backdoor",
+        "The Rooms",
+        "The Outdoors",
+        "Cross-floor & support",
+        "Glitch Fragment variants"
+      ],
+      "badgeField": "role",
+      "subtitleFields": [
+        "areas"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "role",
+        "encounter",
+        "tell",
+        "behavior",
+        "damage",
+        "counter",
+        "relatedItem",
+        "alias"
+      ],
+      "tableFields": [
+        "role",
+        "areas",
+        "encounter",
+        "tell",
+        "behavior",
+        "damage",
+        "counter",
+        "relatedItem",
+        "alias",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "role": {
+          "kind": "highlight",
+          "label": "Role"
+        },
+        "areas": {
+          "kind": "normal",
+          "label": "Areas"
+        },
+        "encounter": {
+          "kind": "detail",
+          "label": "Encounter"
+        },
+        "tell": {
+          "kind": "detail",
+          "label": "Warning tell"
+        },
+        "behavior": {
+          "kind": "detail",
+          "label": "Behavior"
+        },
+        "damage": {
+          "kind": "detail",
+          "label": "Damage or consequence",
+          "omitWhenEmpty": true
+        },
+        "counter": {
+          "kind": "detail",
+          "label": "Best counter"
+        },
+        "relatedItem": {
+          "kind": "normal",
+          "label": "Related item",
+          "omitWhenEmpty": true
+        },
+        "alias": {
+          "kind": "normal",
+          "label": "Also known as",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Figure",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "The Library at Door 50 and the Electrical Room at Door 100 in The Hotel; Figure rooms in The Mines.",
+        "tell": "Heavy footsteps and floor vibrations. Figure is blind.",
+        "behavior": "Patrols key rooms and follows sound.",
+        "damage": "Instant death on contact.",
+        "counter": "Crouch and move quietly. Hide if it gets close, then finish the room puzzle without making noise.",
+        "relatedItem": "Crucifix",
+        "alias": null,
+        "cardSummary": "A blind hunter that makes noise dangerous in the Library, the Electrical Room, and its Mines rooms."
+      },
+      "system": {
+        "slug": "figure",
+        "section": "The Hotel",
+        "sortOrder": 10,
+        "image": "/DOORS/entities/figure.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Seek",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "Guaranteed chase sequences in The Hotel, plus an altered chase and Dam encounter in The Mines.",
+        "tell": "Eyes appear on walls and black slime shows before the chase.",
+        "behavior": "Chases through marked rooms and changes form in The Mines.",
+        "damage": "Instant death if caught; chase obstacles can also hurt.",
+        "counter": "Follow the blue path, keep running, and crouch or slide under obstacles.",
+        "relatedItem": "Vitamins",
+        "alias": null,
+        "cardSummary": "A set-piece chase entity. The route matters more than fighting it, especially when the Mines change the chase."
+      },
+      "system": {
+        "slug": "seek",
+        "section": "The Hotel",
+        "sortOrder": 20,
+        "image": "/DOORS/entities/seek.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rush",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A random room event during normal progression.",
+        "tell": "Lights flicker, then a roar grows louder. Earthquakes can warn you in The Mines.",
+        "behavior": "Speeds through rooms and breaks the lights as it passes.",
+        "damage": "Instant death if it reaches you outside a hiding spot.",
+        "counter": "Hide in a closet, bed, or locker and wait until the sound has passed.",
+        "relatedItem": "Crucifix",
+        "alias": null,
+        "cardSummary": "The classic lights-flicker warning. Find a hiding spot before the roar reaches the room."
+      },
+      "system": {
+        "slug": "rush",
+        "section": "The Hotel",
+        "sortOrder": 30,
+        "image": "/DOORS/entities/rush.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ambush",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A random room event during normal progression.",
+        "tell": "The lights flicker and a loud warning sound approaches.",
+        "behavior": "Rushes through the rooms several times instead of making one pass.",
+        "damage": "Instant death if it reaches you outside a hiding spot.",
+        "counter": "Hide, leave the hiding spot after it passes, and re-enter when it comes back.",
+        "relatedItem": "Crucifix",
+        "alias": null,
+        "cardSummary": "Rush with extra passes. A closet is useful, but staying inside for every pass can trigger Hide."
+      },
+      "system": {
+        "slug": "ambush",
+        "section": "The Hotel",
+        "sortOrder": 40,
+        "image": "/DOORS/entities/ambush.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Screech",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "Dark rooms, especially when the room has little or no light.",
+        "tell": "A quiet “pst” comes from nearby.",
+        "behavior": "Latches onto the player and attacks if it is not found quickly.",
+        "damage": "Repeated damage if you fail to find it in time.",
+        "counter": "Turn toward the sound and find Screech before it bites.",
+        "relatedItem": "Flashlight or lighter",
+        "alias": null,
+        "cardSummary": "A dark-room check. Listen for the small “pst” and look around before the bite lands."
+      },
+      "system": {
+        "slug": "screech",
+        "section": "The Hotel",
+        "sortOrder": 50,
+        "image": "/DOORS/entities/screech.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Eyes",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A random appearance in a room or hallway.",
+        "tell": "A purple glow and a cluster of eyes appear ahead.",
+        "behavior": "Damages players who look directly at it.",
+        "damage": "10 damage when you look at it.",
+        "counter": "Look away and keep your view on the floor or the route ahead.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The answer is counterintuitive: the glowing eyes are safe when you refuse to stare at them."
+      },
+      "system": {
+        "slug": "eyes",
+        "section": "The Hotel",
+        "sortOrder": 60,
+        "image": "/DOORS/entities/eyes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Halt",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A dark hallway after a flicker event.",
+        "tell": "A blue-lit hallway and the “Turn Around” prompt signal the encounter.",
+        "behavior": "Forces a forward-and-back path while Halt appears behind you.",
+        "damage": "60 damage on contact.",
+        "counter": "Follow the Turn Around prompt and switch direction whenever it appears.",
+        "relatedItem": "Vitamins",
+        "alias": null,
+        "cardSummary": "A hallway puzzle with one instruction worth obeying: turn around when the game tells you to."
+      },
+      "system": {
+        "slug": "halt",
+        "section": "The Hotel",
+        "sortOrder": 70,
+        "image": "/DOORS/entities/halt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dupe",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A room with a duplicate numbered door.",
+        "tell": "Two doors show different numbers, and the sequence no longer feels right.",
+        "behavior": "Attacks when the player opens the wrong numbered door.",
+        "damage": "Health damage varies by run settings.",
+        "counter": "Check the last correct number and open only the next door in sequence.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A number-check trap. Slow down at a duplicate door instead of trusting the first label you see."
+      },
+      "system": {
+        "slug": "dupe",
+        "section": "The Hotel",
+        "sortOrder": 80,
+        "image": "/DOORS/entities/dupe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hide",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "After staying in a hiding spot too long.",
+        "tell": "A red screen, a “GET OUT” warning, and a heartbeat appear.",
+        "behavior": "Ejects the player and blocks the hiding spot for a short time.",
+        "damage": "The Hotel: 40 damage after staying too long. The Mines: failed heart checks can eject you and deal damage.",
+        "counter": "Leave and re-enter the hiding spot when the warning appears. In The Mines, follow the heart-check rhythm.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "Hiding is useful until it is not. Watch for the warning and do not let a closet become its own trap."
+      },
+      "system": {
+        "slug": "hide",
+        "section": "The Hotel",
+        "sortOrder": 90,
+        "image": "/DOORS/entities/hide.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dread",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A room that has taken too long to clear.",
+        "tell": "A clock or time-pressure cue warns that the room is no longer safe.",
+        "behavior": "Closes in while the player delays in the room.",
+        "damage": "Instant death if it catches you.",
+        "counter": "Keep the route moving and leave the room before the time pressure expires.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A punishment for dawdling. If the room starts feeling like a waiting room, it is time to leave."
+      },
+      "system": {
+        "slug": "dread",
+        "section": "The Hotel",
+        "sortOrder": 100,
+        "image": "/DOORS/entities/dread.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snare",
+        "role": "Hostile",
+        "areas": [
+          "The Hotel",
+          "The Outdoors"
+        ],
+        "encounter": "Greenhouse grass in The Hotel and grassy paths in The Outdoors.",
+        "tell": "Small holes or plant spots blend into the ground.",
+        "behavior": "Roots the player in place and interrupts movement.",
+        "damage": "Damage and a brief stun.",
+        "counter": "Watch the ground and use a light source to spot the holes before stepping on them.",
+        "relatedItem": "Flashlight",
+        "alias": null,
+        "cardSummary": "A floor hazard with a name. Scan the grass before sprinting, especially in the Greenhouse."
+      },
+      "system": {
+        "slug": "snare",
+        "section": "The Hotel",
+        "sortOrder": 110,
+        "image": "/DOORS/entities/snare.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sally",
+        "role": "Hostile",
+        "areas": [
+          "Lobby",
+          "The Hotel"
+        ],
+        "encounter": "A random appearance through Hotel windows.",
+        "tell": "A window breaks and a heartbeat warns that Sally is close.",
+        "behavior": "Chases the player and can steal an item before leaving.",
+        "damage": "Non-lethal health damage and a maximum-health reduction.",
+        "counter": "Give or drop an item when Sally demands one, or use a Crucifix if the chase becomes unsafe.",
+        "relatedItem": "Crucifix",
+        "alias": "Window",
+        "cardSummary": "The window visitor formerly called Window. Keep a spare item ready if you do not want to lose something important."
+      },
+      "system": {
+        "slug": "sally",
+        "section": "The Hotel",
+        "sortOrder": 120,
+        "image": "/DOORS/entities/sally.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack",
+        "role": "Neutral",
+        "areas": [
+          "The Hotel"
+        ],
+        "encounter": "Rarely appears in closets or behind numberless doors.",
+        "tell": "A sudden face fills the hiding spot or doorway.",
+        "behavior": "Creates a jumpscare but does not attack the player.",
+        "damage": null,
+        "counter": "Recover from the scare and continue the room.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A rare red face that wants your attention, not your health bar."
+      },
+      "system": {
+        "slug": "jack",
+        "section": "The Hotel",
+        "sortOrder": 130,
+        "image": "/DOORS/entities/jack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Timothy",
+        "role": "Neutral",
+        "areas": [
+          "Lobby",
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A rare drawer encounter.",
+        "tell": "A spider jumps out when a drawer is opened.",
+        "behavior": "Bites once, then disappears.",
+        "damage": "5 damage.",
+        "counter": "Close the drawer and keep searching.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The drawer spider. It is more startling than dangerous, but the bite still costs a little health."
+      },
+      "system": {
+        "slug": "timothy",
+        "section": "The Hotel",
+        "sortOrder": 140,
+        "image": "/DOORS/entities/timothy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow",
+        "role": "Neutral",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A rare appearance after a door or flicker event.",
+        "tell": "A dark shape and a sharp shriek appear for a moment.",
+        "behavior": "Shows up briefly and disappears without attacking.",
+        "damage": null,
+        "counter": "Let the jumpscare pass and keep moving.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A blink-and-you-miss-it scare. Shadow is dramatic, but not a threat to your run."
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "The Hotel",
+        "sortOrder": 150,
+        "image": "/DOORS/entities/shadow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jeff",
+        "role": "Friendly",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "Jeff Shop in The Hotel after the Library and the Jeff Shop in The Mines.",
+        "tell": "Glowing eyes and a stocked shop mark Jeff's counter.",
+        "behavior": "Sells supplies for Gold.",
+        "damage": null,
+        "counter": "Save Gold for the tool that fits the next section instead of spending it all at once.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "Your friendly shopkeeper in two released areas. Jeff turns spare Gold into a little more breathing room."
+      },
+      "system": {
+        "slug": "jeff",
+        "section": "The Hotel",
+        "sortOrder": 160,
+        "image": "/DOORS/entities/jeff.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "El Goblino",
+        "role": "Friendly",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "At Jeff Shop in The Hotel and The Mines.",
+        "tell": "El Goblino sits near the shop and starts a conversation.",
+        "behavior": "Provides friendly dialogue and harmless reactions.",
+        "damage": null,
+        "counter": "Interact if you want the dialogue, then return to the route.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The shop's chatty goblin. El Goblino is a lore stop, not another thing to hide from."
+      },
+      "system": {
+        "slug": "el-goblino",
+        "section": "The Hotel",
+        "sortOrder": 170,
+        "image": "/DOORS/entities/el-goblino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bob",
+        "role": "Friendly",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "At Jeff Shop in The Hotel and The Mines.",
+        "tell": "Bob is seated near the shop.",
+        "behavior": "Stays friendly and does not harm players.",
+        "damage": null,
+        "counter": "Interact if you want the dialogue, then continue shopping or exploring.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A quiet shop regular. Bob looks spooky, but this skeleton is on your side."
+      },
+      "system": {
+        "slug": "bob",
+        "section": "The Hotel",
+        "sortOrder": 180,
+        "image": "/DOORS/entities/bob.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grumble",
+        "role": "Hostile",
+        "areas": [
+          "The Mines"
+        ],
+        "encounter": "The Nest around Door 150 and nearby Mines routes.",
+        "tell": "A giant Giggle-like creature patrols the area and makes the route feel unsafe.",
+        "behavior": "Patrols, chases, and pressures players through narrow tunnels.",
+        "damage": "Lethal after repeated hits.",
+        "counter": "Use narrow tunnels, lockers, and a light-based distraction to break its route when needed.",
+        "relatedItem": "Glowstick or Bulklight",
+        "alias": null,
+        "cardSummary": "The Mines' large patrol threat. Keep the route tight and use light or cover to buy space."
+      },
+      "system": {
+        "slug": "grumble",
+        "section": "The Mines",
+        "sortOrder": 10,
+        "image": "/DOORS/entities/grumble.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Queen Grumble",
+        "role": "Hostile",
+        "areas": [
+          "The Mines"
+        ],
+        "encounter": "A late Mines chase through the Caverns, Nest, or Sewage Cells.",
+        "tell": "The larger Grumble appears as the chase route opens through the tunnels.",
+        "behavior": "Chases players through the late Mines route.",
+        "damage": "Instant death if caught during the chase.",
+        "counter": "Keep moving, use narrow safe routes, and do not stop to search during the chase.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The late-run Grumble chase. Treat it like a route test: movement and clean turns matter most."
+      },
+      "system": {
+        "slug": "queen-grumble",
+        "section": "The Mines",
+        "sortOrder": 20,
+        "image": "/DOORS/entities/queen-grumble.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giggle",
+        "role": "Hostile",
+        "areas": [
+          "The Mines"
+        ],
+        "encounter": "Ceilings and tunnels in The Mines.",
+        "tell": "A quiet laugh and a face cling to the ceiling above the route.",
+        "behavior": "Drops onto the player's face and bites until it is removed.",
+        "damage": "Damage continues while it clings.",
+        "counter": "Look up before walking under a ceiling with Giggle and dislodge it quickly if it lands.",
+        "relatedItem": "Glowstick",
+        "alias": null,
+        "cardSummary": "The ceiling check in The Mines. A quick glance upward can save a long chunk of health."
+      },
+      "system": {
+        "slug": "giggle",
+        "section": "The Mines",
+        "sortOrder": 30,
+        "image": "/DOORS/entities/giggle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gloombats",
+        "role": "Hostile",
+        "areas": [
+          "The Mines"
+        ],
+        "encounter": "Dark rooms and nests in The Mines.",
+        "tell": "A moth-like swarm gathers around a carried light.",
+        "behavior": "Attacks lights and repeatedly bites players who stay near the swarm.",
+        "damage": "10 damage per attack.",
+        "counter": "Turn off ordinary lights, use a Gloomstick or Laser Pointer, and move away from the swarm.",
+        "relatedItem": "Gloomstick or Laser Pointer",
+        "alias": null,
+        "cardSummary": "A lighting problem with wings. Put away the wrong light and keep moving through the dark."
+      },
+      "system": {
+        "slug": "gloombats",
+        "section": "The Mines",
+        "sortOrder": 40,
+        "image": "/DOORS/entities/gloombats.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Louie",
+        "role": "Friendly",
+        "areas": [
+          "The Mines"
+        ],
+        "encounter": "Holes in the walls of The Mines.",
+        "tell": "A rat-like face or hand appears in a wall hole.",
+        "behavior": "Barters a dropped item for another item of similar value.",
+        "damage": null,
+        "counter": "Drop only an item you are willing to trade, then check what Louie gives back.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A Mines barter encounter. Louie can help, but only if you are comfortable giving up the item you drop."
+      },
+      "system": {
+        "slug": "louie",
+        "section": "The Mines",
+        "sortOrder": 50,
+        "image": "/DOORS/entities/louie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blitz",
+        "role": "Hostile",
+        "areas": [
+          "The Backdoor"
+        ],
+        "encounter": "Random rooms in The Backdoor.",
+        "tell": "A warning sound signals a fast approach.",
+        "behavior": "Rushes through the rooms and can make more than one pass.",
+        "damage": "Instant death on contact.",
+        "counter": "Hide in a closet before it arrives and stay hidden until the attack is over.",
+        "relatedItem": "Crucifix",
+        "alias": null,
+        "cardSummary": "The Backdoor's fast pass threat. Find a closet early and do not assume one pass means the room is safe."
+      },
+      "system": {
+        "slug": "blitz",
+        "section": "The Backdoor",
+        "sortOrder": 10,
+        "image": "/DOORS/entities/blitz.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lookman",
+        "role": "Hostile",
+        "areas": [
+          "The Backdoor"
+        ],
+        "encounter": "Random rooms in The Backdoor.",
+        "tell": "A low rumble and glowing eyes signal its presence.",
+        "behavior": "Attacks when the player looks at its eyes, then teleports away after the hit.",
+        "damage": "20 damage.",
+        "counter": "Keep your view down and avoid eye contact while moving through the room.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The Backdoor version of the eye-contact test. Look at the floor and let it teleport away."
+      },
+      "system": {
+        "slug": "lookman",
+        "section": "The Backdoor",
+        "sortOrder": 20,
+        "image": "/DOORS/entities/lookman.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Haste",
+        "role": "Hostile",
+        "areas": [
+          "The Backdoor"
+        ],
+        "encounter": "The Backdoor timer when the player fails to keep it running.",
+        "tell": "The timer expires, a red haze appears, and Haste can be seen approaching through walls.",
+        "behavior": "Approaches from behind when the timer runs out.",
+        "damage": "Instant death when Haste catches the player.",
+        "counter": "Pull the Timer Lever before the timer expires and keep moving between levers.",
+        "relatedItem": "Timer Lever",
+        "alias": null,
+        "cardSummary": "The Backdoor's timer enforcer. The safest Haste counter is routine: find the next lever before the clock wins."
+      },
+      "system": {
+        "slug": "haste",
+        "section": "The Backdoor",
+        "sortOrder": 30,
+        "image": "/DOORS/entities/haste.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "A-60",
+        "role": "Hostile",
+        "areas": [
+          "The Rooms"
+        ],
+        "encounter": "After room A-060 in The Rooms.",
+        "tell": "Static, crackling, or a fast approaching sound warns of the attack.",
+        "behavior": "Charges through the rooms at high speed.",
+        "damage": "125 damage.",
+        "counter": "Get into a locker as soon as the warning starts and wait for the sound to pass.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A-60 is the Rooms sprint check. When the static starts, the locker matters more than one extra room."
+      },
+      "system": {
+        "slug": "a-60",
+        "section": "The Rooms",
+        "sortOrder": 10,
+        "image": "/DOORS/entities/a-60.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "A-90",
+        "role": "Hostile",
+        "areas": [
+          "The Rooms"
+        ],
+        "encounter": "After room A-090, sometimes alongside other Rooms entities.",
+        "tell": "A face or stop-sign-like warning appears on screen.",
+        "behavior": "Freezes active entities and punishes player movement during the stop window.",
+        "damage": "90 damage.",
+        "counter": "Stop all movement and input until the warning clears.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The Rooms' stop-input test. Do absolutely nothing until A-90 is finished doing it for you."
+      },
+      "system": {
+        "slug": "a-90",
+        "section": "The Rooms",
+        "sortOrder": 20,
+        "image": "/DOORS/entities/a-90.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "A-120",
+        "role": "Hostile",
+        "areas": [
+          "The Rooms"
+        ],
+        "encounter": "After room A-120 in The Rooms.",
+        "tell": "Static and a deep drumming sound approach from the route ahead.",
+        "behavior": "Charges through the room and can rebound from the far side.",
+        "damage": "Instant death if caught.",
+        "counter": "Hide in a locker after the cue and wait until the drumming ends.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A fast Rooms entity with a rebound trick. Wait for the sound to finish before leaving cover."
+      },
+      "system": {
+        "slug": "a-120",
+        "section": "The Rooms",
+        "sortOrder": 30,
+        "image": "/DOORS/entities/a-120.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bramble",
+        "role": "Hostile",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "The Hedge Maze in The Outdoors.",
+        "tell": "Its lamp turns on and off as it patrols the maze.",
+        "behavior": "Attacks players who move while its light is on and stops when the light is off.",
+        "damage": "Damage depends on the attack state.",
+        "counter": "Stop moving while Bramble's light is on and use a Lantern to read the maze when it is safe.",
+        "relatedItem": "Lantern",
+        "alias": null,
+        "cardSummary": "A light-and-movement puzzle in the Hedge Maze. Let Bramble's lamp decide when your feet move."
+      },
+      "system": {
+        "slug": "bramble",
+        "section": "The Outdoors",
+        "sortOrder": 10,
+        "image": "/DOORS/entities/bramble.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Eyestalk",
+        "role": "Hostile",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "The main chase route in The Outdoors.",
+        "tell": "Eyes appear on trees and a chase cutscene starts.",
+        "behavior": "Chases the player through an Outdoors route like a Seek sequence.",
+        "damage": "Instant death if caught.",
+        "counter": "Run the marked route, avoid Snares, and use a speed boost only when a turn or obstacle needs it.",
+        "relatedItem": "Vitamins",
+        "alias": null,
+        "cardSummary": "An Outdoors chase with tree eyes and familiar Seek-style pressure. Keep the route clean and keep running."
+      },
+      "system": {
+        "slug": "eyestalk",
+        "section": "The Outdoors",
+        "sortOrder": 20,
+        "image": "/DOORS/entities/eyestalk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Groundskeeper",
+        "role": "Neutral",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "Garden sheds and grass areas in The Outdoors.",
+        "tell": "A grass warning, grunt, and the Groundskeeper's tools signal danger.",
+        "behavior": "Protects the grass, attacks trespassers, and can kill hostile entities.",
+        "damage": "Fatal if you remain on the grass after the warning.",
+        "counter": "Step off the grass and use buildings or clear paths when the warning begins.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The garden's rule-enforcer. The grass is not a shortcut when the Groundskeeper tells you to leave it."
+      },
+      "system": {
+        "slug": "groundskeeper",
+        "section": "The Outdoors",
+        "sortOrder": 30,
+        "image": "/DOORS/entities/groundskeeper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mandrake",
+        "role": "Hostile",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "Holes and grass in The Outdoors.",
+        "tell": "A mandrake can be pulled from the ground, then screams and darkens the player's view.",
+        "behavior": "Keeps screaming near the player until it is replanted or carried away from danger.",
+        "damage": "Can kill you if you stay near it too long.",
+        "counter": "Replant it quickly or let the Groundskeeper deal with it, then move away from the scream.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "A useful plant with an unpleasant voice. Replant Mandrake before the scream becomes the whole run."
+      },
+      "system": {
+        "slug": "mandrake",
+        "section": "The Outdoors",
+        "sortOrder": 40,
+        "image": "/DOORS/entities/mandrake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Monument",
+        "role": "Hostile",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "Gardens and paths in The Outdoors.",
+        "tell": "A cracked, vine-covered monument is followed by footsteps when it moves.",
+        "behavior": "Moves when it is not being watched and closes in behind the player.",
+        "damage": "Instant death if it catches you.",
+        "counter": "Keep Monument in sight and look back before taking long turns away from it.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The statue that walks when you stop looking. Line of sight is the safest lock on Monument."
+      },
+      "system": {
+        "slug": "monument",
+        "section": "The Outdoors",
+        "sortOrder": 50,
+        "image": "/DOORS/entities/monument.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Surge",
+        "role": "Hostile",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "Open Outdoors areas during green lightning.",
+        "tell": "The sky turns green and lightning or a loud scream warns of the storm.",
+        "behavior": "Damages players who stay outside shelter during the storm.",
+        "damage": "Damage over time while exposed.",
+        "counter": "Get inside a closet, building, or other shelter before the storm reaches you.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "An outdoor weather check. Green skies mean the route is over for now; find a roof."
+      },
+      "system": {
+        "slug": "surge",
+        "section": "The Outdoors",
+        "sortOrder": 60,
+        "image": "/DOORS/entities/surge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Caws",
+        "role": "Neutral",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "Forest areas in The Outdoors.",
+        "tell": "Crows take off and call from nearby trees.",
+        "behavior": "Warns the player that another Outdoors threat is close.",
+        "damage": null,
+        "counter": "Watch where the flock moves and prepare for the threat it is pointing out.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The forest warning system. When the crows scatter, take the hint and check your surroundings."
+      },
+      "system": {
+        "slug": "caws",
+        "section": "The Outdoors",
+        "sortOrder": 70,
+        "image": "/DOORS/entities/caws.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grampy",
+        "role": "Friendly",
+        "areas": [
+          "The Outdoors"
+        ],
+        "encounter": "The Mill in The Outdoors.",
+        "tell": "Grampy waits with a basket for a petal trade.",
+        "behavior": "Trades eight Lotus Petals for a Lotus.",
+        "damage": null,
+        "counter": "Bring eight Lotus Petals before visiting The Mill.",
+        "relatedItem": "Lotus Petals",
+        "alias": null,
+        "cardSummary": "The Mill's friendly trader. Count your petals before making the trip."
+      },
+      "system": {
+        "slug": "grampy",
+        "section": "The Outdoors",
+        "sortOrder": 80,
+        "image": "/DOORS/entities/grampy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Guiding Light",
+        "role": "Support",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "Dark rooms, puzzles, chases, and death screens in the main floors.",
+        "tell": "A blue glow highlights useful doors, keys, paths, and puzzle objects.",
+        "behavior": "Guides the player and adds short tips to difficult moments.",
+        "damage": null,
+        "counter": "Follow the blue marks and check highlighted objects before guessing.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The blue helper for the main floors. If a key or route is easy to miss, Guiding Light usually points it out."
+      },
+      "system": {
+        "slug": "guiding-light",
+        "section": "Cross-floor & support",
+        "sortOrder": 10,
+        "image": "/DOORS/entities/guiding-light.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Curious Light",
+        "role": "Support",
+        "areas": [
+          "The Hotel",
+          "The Mines",
+          "The Backdoor",
+          "The Rooms",
+          "The Outdoors"
+        ],
+        "encounter": "Death screens, subfloor guidance, and rift-related moments.",
+        "tell": "A yellow star-like glow or rift appears during the explanation.",
+        "behavior": "Explains deaths, guides exits, and offers less direct help than Guiding Light.",
+        "damage": null,
+        "counter": "Use the highlighted exit or key and read the short guidance before trying the section again.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The wider guide across released floors and subfloors. Curious Light helps explain what just went wrong."
+      },
+      "system": {
+        "slug": "curious-light",
+        "section": "Cross-floor & support",
+        "sortOrder": 20,
+        "image": "/DOORS/entities/curious-light.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glitch",
+        "role": "Failsafe",
+        "areas": [
+          "The Hotel",
+          "The Mines",
+          "The Backdoor",
+          "The Rooms",
+          "The Outdoors"
+        ],
+        "encounter": "A room fails to load, the player goes out of bounds, or the player falls too far behind.",
+        "tell": "Screen glitches and purple cubes appear around the player.",
+        "behavior": "Teleports the player to a safe loaded room or back to the group.",
+        "damage": null,
+        "counter": "Stay on the loaded route and let the teleport finish if Glitch appears.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The emergency reset button of DOORS. Glitch usually means the level needs help, not that you should fight."
+      },
+      "system": {
+        "slug": "glitch",
+        "section": "Cross-floor & support",
+        "sortOrder": 30,
+        "image": "/DOORS/entities/glitch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Void",
+        "role": "Support",
+        "areas": [
+          "The Hotel",
+          "The Mines"
+        ],
+        "encounter": "A multiplayer run when one player falls too far behind the group.",
+        "tell": "The straggling player is pulled away as the group gets far ahead.",
+        "behavior": "Teleports the player back toward the rest of the team.",
+        "damage": null,
+        "counter": "Stay near the group so the teleport is not needed.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The team-distance failsafe for the main floors. Keep up and Void stays mostly theoretical."
+      },
+      "system": {
+        "slug": "void",
+        "section": "Cross-floor & support",
+        "sortOrder": 40,
+        "image": "/DOORS/entities/void.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "World Lotus",
+        "role": "Neutral",
+        "areas": [
+          "The Hotel",
+          "The Mines",
+          "The Rooms",
+          "The Outdoors"
+        ],
+        "encounter": "The Courtyard, Jeff Shop, Rooms rebirth moments, and the main Outdoors encounter.",
+        "tell": "A giant lotus and vine-covered form marks the encounter.",
+        "behavior": "Controls or mimics entities. It is passive in some areas and hostile in The Outdoors.",
+        "damage": "Does not directly damage players; controlled entities can.",
+        "counter": "Use the rules for the controlled entity and follow the area's route instead of approaching the lotus.",
+        "relatedItem": null,
+        "alias": null,
+        "cardSummary": "The strange lotus behind several entity rules. Its danger depends on the area and what it is controlling."
+      },
+      "system": {
+        "slug": "world-lotus",
+        "section": "Cross-floor & support",
+        "sortOrder": 50,
+        "image": "/DOORS/entities/world-lotus.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RNIUSHCg==",
+        "role": "Glitched variant",
+        "areas": [
+          "The Hotel",
+          "The Mines",
+          "The Backdoor",
+          "The Rooms",
+          "The Outdoors"
+        ],
+        "encounter": "After activating a Glitch Fragment.",
+        "tell": "The screen glitches and a familiar Rush-style cue begins.",
+        "behavior": "Uses a Rush-like charge with a possible rebound through the route.",
+        "damage": "100 damage.",
+        "counter": "Hide like you would for Rush and wait until the route is clear.",
+        "relatedItem": "Glitch Fragment",
+        "alias": "Glitched Rush",
+        "cardSummary": "The coded Rush variant. A Glitch Fragment is the trigger, so treat the first charge like Rush."
+      },
+      "system": {
+        "slug": "rniushcg",
+        "section": "Glitch Fragment variants",
+        "sortOrder": 10,
+        "image": "/DOORS/entities/rniushcg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "AR0xMBUSH",
+        "role": "Glitched variant",
+        "areas": [
+          "The Hotel",
+          "The Mines",
+          "The Backdoor",
+          "The Rooms",
+          "The Outdoors"
+        ],
+        "encounter": "After activating a Glitch Fragment.",
+        "tell": "The screen glitches and an Ambush-style warning begins.",
+        "behavior": "Uses a harder Ambush-like attack with repeated passes.",
+        "damage": null,
+        "counter": "Hide and re-enter your hiding spot like you would for Ambush, then wait for every pass.",
+        "relatedItem": "Glitch Fragment",
+        "alias": "Glitched Ambush",
+        "cardSummary": "The coded Ambush variant. Give it the same respect as Ambush, with extra caution around repeated passes."
+      },
+      "system": {
+        "slug": "ar0xmbush",
+        "section": "Glitch Fragment variants",
+        "sortOrder": 20,
+        "image": "/DOORS/entities/ar0xmbush.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "SCJVEREECH",
+        "role": "Glitched variant",
+        "areas": [
+          "The Hotel",
+          "The Mines",
+          "The Backdoor",
+          "The Rooms",
+          "The Outdoors"
+        ],
+        "encounter": "After activating a Glitch Fragment.",
+        "tell": "The screen glitches and multiple Screech-like cues can appear.",
+        "behavior": "Uses a Screech-like swarm with more targets to check.",
+        "damage": null,
+        "counter": "Turn toward each Screech cue and react quickly before the next bite.",
+        "relatedItem": "Glitch Fragment",
+        "alias": "Glitched Screech",
+        "cardSummary": "The coded Screech variant. Scan every “pst” instead of assuming the first one was the only target."
+      },
+      "system": {
+        "slug": "scjvereech",
+        "section": "Glitch Fragment variants",
+        "sortOrder": 30,
+        "image": "/DOORS/entities/scjvereech.webp"
+      }
+    }
+  ]
+}

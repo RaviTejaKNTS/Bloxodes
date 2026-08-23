@@ -215,6 +215,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Volleyball Legends/*.json`
   - Local Volleyball Legends datasets for wiki/collection page work, including styles, abilities, and ball skins.
   - Matching row images live under `apps/web/public/Volleyball Legends/`. Ball skins use WebP files; Gamer Ball and Phonk Ball intentionally share one source-backed image.
+- `data/DOORS/*.json`
+  - Local DOORS datasets for wiki/collection page work, including released entities, permanent run items, released floors and subfloors, and fixed named locations.
+  - Matching optimized WebP images live under `apps/web/public/DOORS/` by collection folder. Keep upcoming floors, temporary modes, events, modifiers, achievements, and generic procedural rooms outside these datasets.
 - `data/Wizard Alchemy/quiz.json`
   - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
   - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.

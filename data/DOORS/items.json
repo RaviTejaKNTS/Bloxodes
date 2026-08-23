@@ -1,0 +1,1142 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "DOORS",
+    "gameSlug": "doors",
+    "collection": "items",
+    "route": "/wiki/doors/items",
+    "catalogCode": "doors-items",
+    "itemFields": [
+      "category",
+      "effect",
+      "areas",
+      "whereToFind",
+      "usesOrDuration",
+      "price",
+      "requirement",
+      "helpsWith",
+      "limitation",
+      "alias",
+      "cardSummary"
+    ],
+    "columns": [
+      "category",
+      "effect",
+      "areas",
+      "whereToFind",
+      "usesOrDuration",
+      "price",
+      "requirement",
+      "helpsWith",
+      "limitation",
+      "alias",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Item function",
+      "sectionOrder": [
+        "Light and battery support",
+        "Healing, food, and boosts",
+        "Entity control and survival",
+        "Keys and puzzle progress",
+        "Outdoors and run utility"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [
+        "areas"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "category",
+        "effect",
+        "whereToFind",
+        "usesOrDuration",
+        "price",
+        "requirement",
+        "helpsWith",
+        "limitation",
+        "alias"
+      ],
+      "tableFields": [
+        "category",
+        "effect",
+        "areas",
+        "whereToFind",
+        "usesOrDuration",
+        "price",
+        "requirement",
+        "helpsWith",
+        "limitation",
+        "alias",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "category": {
+          "kind": "highlight",
+          "label": "Item type"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "areas": {
+          "kind": "normal",
+          "label": "Areas"
+        },
+        "whereToFind": {
+          "kind": "detail",
+          "label": "Where to find"
+        },
+        "usesOrDuration": {
+          "kind": "chip",
+          "label": "Uses or duration",
+          "omitWhenEmpty": true
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "requirement": {
+          "kind": "detail",
+          "label": "Requirement",
+          "omitWhenEmpty": true
+        },
+        "helpsWith": {
+          "kind": "normal",
+          "label": "Useful for",
+          "omitWhenEmpty": true
+        },
+        "limitation": {
+          "kind": "detail",
+          "label": "Limitation",
+          "omitWhenEmpty": true
+        },
+        "alias": {
+          "kind": "normal",
+          "label": "Also known as",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Candle",
+        "category": "Major",
+        "effect": "Lights the nearby area after it is lit.",
+        "areas": "Multiple released floors",
+        "whereToFind": "Tables, desks, and containers during a run.",
+        "usesOrDuration": "Limited fuel",
+        "price": null,
+        "requirement": "A Lighter is needed to ignite it.",
+        "helpsWith": "Dark rooms and entity warnings after its Rift transformation.",
+        "limitation": "It is weak until lit and uses an inventory slot.",
+        "alias": "Possessed Candle after a Rift transformation",
+        "cardSummary": "A small light source that becomes more useful when paired with a Lighter or a Rift."
+      },
+      "system": {
+        "slug": "candle",
+        "section": "Light and battery support",
+        "sortOrder": 10,
+        "image": "/DOORS/items/candle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flashlight",
+        "category": "Major",
+        "effect": "Provides rechargeable directional light for dark rooms.",
+        "areas": "The Hotel, The Mines, The Rooms, and The Outdoors",
+        "whereToFind": "Containers and shops during released floor runs.",
+        "usesOrDuration": "About 2 minutes per full charge",
+        "price": null,
+        "requirement": "Batteries are needed to recharge it.",
+        "helpsWith": "Dark rooms and spotting the route during chases.",
+        "limitation": "The charge drains while it is on and its flicker can attract Figure.",
+        "alias": null,
+        "cardSummary": "The dependable long-range light. Keep batteries nearby and switch it off when the room is bright."
+      },
+      "system": {
+        "slug": "flashlight",
+        "section": "Light and battery support",
+        "sortOrder": 20,
+        "image": "/DOORS/items/flashlight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lighter",
+        "category": "Major",
+        "effect": "Provides a small temporary light and can ignite Candles.",
+        "areas": "The Hotel and other released floors",
+        "whereToFind": "Containers, the Pre-Run Shop, and Jeff's Shop.",
+        "usesOrDuration": "About 60 seconds of fuel",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Dark rooms and lighting Candles.",
+        "limitation": "Its light radius and fuel are smaller than a Flashlight's.",
+        "alias": null,
+        "cardSummary": "A common backup light that also turns a plain Candle into a working light source."
+      },
+      "system": {
+        "slug": "lighter",
+        "section": "Light and battery support",
+        "sortOrder": 30,
+        "image": "/DOORS/items/lighter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Straplight",
+        "category": "Major",
+        "effect": "Provides a small directional light while another item is held.",
+        "areas": "The Mines and other released floors",
+        "whereToFind": "Containers and shops during runs.",
+        "usesOrDuration": "About 2 minutes of fuel",
+        "price": null,
+        "requirement": "Batteries are needed to recharge it.",
+        "helpsWith": "Dark rooms when you need to keep a key, tool, or consumable equipped.",
+        "limitation": "It has a short range and uses batteries.",
+        "alias": null,
+        "cardSummary": "A hands-free light for players who do not want to swap away from their useful item."
+      },
+      "system": {
+        "slug": "straplight",
+        "section": "Light and battery support",
+        "sortOrder": 40,
+        "image": "/DOORS/items/straplight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shakelight",
+        "category": "Major",
+        "effect": "Provides directional light and can be recharged by shaking it.",
+        "areas": "The Mines and other released floors",
+        "whereToFind": "Containers and Jeff's Shop.",
+        "usesOrDuration": "Short charge that refills when shaken",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Dark rooms when batteries are scarce.",
+        "limitation": "It loses charge quickly and has a small light cone.",
+        "alias": null,
+        "cardSummary": "A rechargeable light that trades range and fuel for a battery-free refill."
+      },
+      "system": {
+        "slug": "shakelight",
+        "section": "Light and battery support",
+        "sortOrder": 50,
+        "image": "/DOORS/items/shakelight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glowstick",
+        "category": "Major",
+        "effect": "Creates light where it is thrown and can hit Giggles.",
+        "areas": "The Mines and other released floors",
+        "whereToFind": "Lockers, drawers, and other containers.",
+        "usesOrDuration": "Infinite until its light is extinguished",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Small dark spaces and stunning Giggles.",
+        "limitation": "You must throw it to light an area, and Gloombats can put it out.",
+        "alias": null,
+        "cardSummary": "A throwable light that also doubles as a handy answer to a Giggle on your back."
+      },
+      "system": {
+        "slug": "glowstick",
+        "section": "Light and battery support",
+        "sortOrder": 60,
+        "image": "/DOORS/items/glowstick.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bulklight",
+        "category": "Major",
+        "effect": "Provides a wide directional light and can stun Giggles.",
+        "areas": "The Mines and The Hotel after being carried through a Rift",
+        "whereToFind": "Containers in The Mines, the Pre-Run Shop, and Jeff's Shop.",
+        "usesOrDuration": "About 2 minutes per full charge",
+        "price": null,
+        "requirement": "Batteries are needed to recharge it.",
+        "helpsWith": "Large dark rooms and Giggles.",
+        "limitation": "It takes an inventory slot and is mainly found in The Mines.",
+        "alias": "Spotlight",
+        "cardSummary": "A stronger Flashlight with a bigger cone, built for the wide spaces in The Mines."
+      },
+      "system": {
+        "slug": "bulklight",
+        "section": "Light and battery support",
+        "sortOrder": 70,
+        "image": "/DOORS/items/bulklight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laser Pointer",
+        "category": "Major",
+        "effect": "Creates a small light at the player's crosshair.",
+        "areas": "The Mines and other released floors",
+        "whereToFind": "Lockers, toolboxes, and drawers.",
+        "usesOrDuration": "About 1 minute 20 seconds of fuel",
+        "price": null,
+        "requirement": "Batteries are needed to recharge it.",
+        "helpsWith": "Dark rooms with Gloombats and precise close-range lighting.",
+        "limitation": "The lit area is very small.",
+        "alias": null,
+        "cardSummary": "A low-drain pointer light that is surprisingly useful when a broad beam would wake up trouble."
+      },
+      "system": {
+        "slug": "laser-pointer",
+        "section": "Light and battery support",
+        "sortOrder": 80,
+        "image": "/DOORS/items/laser-pointer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moonlight Candle",
+        "category": "Major",
+        "effect": "Provides a large blue light and detects certain entities.",
+        "areas": "The Hotel and The Mines after Rift creation",
+        "whereToFind": "Create it by placing a normal Candle in a Guiding Light Rift.",
+        "usesOrDuration": "Infinite fuel",
+        "price": null,
+        "requirement": "A Candle and a Guiding Light Rift.",
+        "helpsWith": "Dark rooms and warnings for approaching entities.",
+        "limitation": "It stops working in subfloors because it relies on Guiding Light.",
+        "alias": "Rift Candle; Possessed Candle",
+        "cardSummary": "The Rift version of Candle, with a brighter glow and an entity-warning effect."
+      },
+      "system": {
+        "slug": "moonlight-candle",
+        "section": "Light and battery support",
+        "sortOrder": 90,
+        "image": "/DOORS/items/moonlight-candle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lantern",
+        "category": "Major",
+        "effect": "Provides 360-degree light with more fuel than a Lighter.",
+        "areas": "The Outdoors",
+        "whereToFind": "The ground, tables, and vine-covered chests in The Outdoors. One is guaranteed before the Eyestalk chase.",
+        "usesOrDuration": "About 5 minutes or 8 uses",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "The Outdoors maze and the Eyestalk chase.",
+        "limitation": "It stops working in water and can cause problems in Firedamp rooms.",
+        "alias": null,
+        "cardSummary": "The Outdoors' wide-angle light. Grab one before the chase if your Flashlight is looking gloomy."
+      },
+      "system": {
+        "slug": "lantern",
+        "section": "Light and battery support",
+        "sortOrder": 100,
+        "image": "/DOORS/items/lantern.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Batteries",
+        "category": "Resource",
+        "effect": "Recharge compatible electronic light sources.",
+        "areas": "Multiple released floors",
+        "whereToFind": "Containers, drawers, tables, and other run loot.",
+        "usesOrDuration": "One recharge per battery",
+        "price": null,
+        "requirement": "A compatible light source or Battery Pack.",
+        "helpsWith": "Flashlight, Bulklight, Straplight, and Laser Pointer charge.",
+        "limitation": "They are consumed on use and cannot replace a missing light source.",
+        "alias": "Battery",
+        "cardSummary": "The small pickup that keeps electronic lights alive. Store extras in a Battery Pack when possible."
+      },
+      "system": {
+        "slug": "batteries",
+        "section": "Light and battery support",
+        "sortOrder": 110,
+        "image": "/DOORS/items/batteries.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Battery Pack",
+        "category": "Major",
+        "effect": "Stores batteries so they can be used later in the run.",
+        "areas": "The Mines and later released floors",
+        "whereToFind": "Containers and Jeff's Shop.",
+        "usesOrDuration": "Holds up to 4 batteries",
+        "price": null,
+        "requirement": "Batteries to fill it.",
+        "helpsWith": "Saving inventory space and keeping electronic lights charged.",
+        "limitation": "It stores batteries but does not create them.",
+        "alias": null,
+        "cardSummary": "A compact battery pouch that turns loose batteries into a much easier carry."
+      },
+      "system": {
+        "slug": "battery-pack",
+        "section": "Light and battery support",
+        "sortOrder": 120,
+        "image": "/DOORS/items/battery-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight Bottle",
+        "category": "Major",
+        "effect": "Heals 50% of maximum health, grants speed, and creates a short area of light.",
+        "areas": "The Backdoor and main-floor Rifts",
+        "whereToFind": "The final room of The Backdoor and its shop.",
+        "usesOrDuration": "About 10 seconds of light and speed",
+        "price": "100 Gold in The Backdoor",
+        "requirement": null,
+        "helpsWith": "Recovering health and gaining time during The Backdoor.",
+        "limitation": "It is consumed after one use and the bonus health fades quickly.",
+        "alias": "Bottle of Starlight",
+        "cardSummary": "A compact heal and speed boost from The Backdoor that can also create a temporary extra Rift."
+      },
+      "system": {
+        "slug": "starlight-bottle",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 10,
+        "image": "/DOORS/items/starlight-bottle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight Jug",
+        "category": "Major",
+        "effect": "Heals 100 HP, grants a long speed boost and Star Shield, and lights the area.",
+        "areas": "The Rooms and later floors",
+        "whereToFind": "Room A-1000 in The Rooms.",
+        "usesOrDuration": "4 uses; boost and glow last about 135 seconds",
+        "price": null,
+        "requirement": "Reach A-1000.",
+        "helpsWith": "Large health recovery, long chases, and carrying a strong run-saving item forward.",
+        "limitation": "It cannot solve instant-death encounters by itself and has a finite number of uses.",
+        "alias": "Barrel of Starlight; Jug of Starlight",
+        "cardSummary": "The big Starlight reward from A-1000. It is slow to earn but keeps helping long after one drink."
+      },
+      "system": {
+        "slug": "starlight-jug",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 20,
+        "image": "/DOORS/items/starlight-jug.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight Vial",
+        "category": "Major",
+        "effect": "Provides a short speed boost, light, and extra health.",
+        "areas": "The Backdoor",
+        "whereToFind": "Containers and loot in The Backdoor.",
+        "usesOrDuration": "About 5 seconds per use",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Recovering from Blitz and Lookman damage and moving quickly through The Backdoor.",
+        "limitation": "Its boost is brief and repeated uses cannot be stacked immediately.",
+        "alias": "Vial of Starlight",
+        "cardSummary": "A quick Backdoor recovery drink that trades lasting power for a fast emergency boost."
+      },
+      "system": {
+        "slug": "starlight-vial",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 30,
+        "image": "/DOORS/items/starlight-vial.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Smoothie",
+        "category": "Major",
+        "effect": "Immediately restores 35 health.",
+        "areas": "The Hotel",
+        "whereToFind": "Tables in Hotel basements, excluding the Courtyard basement.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Recovering small amounts of health during The Hotel.",
+        "limitation": "It does not need to be used at full health and takes an inventory slot.",
+        "alias": null,
+        "cardSummary": "A reliable basement heal and the ingredient for a stronger Moonlight Float."
+      },
+      "system": {
+        "slug": "smoothie",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 40,
+        "image": "/DOORS/items/smoothie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moonlight Float",
+        "category": "Major",
+        "effect": "Restores 100 HP, gives a short glow, and highlights important items and entities.",
+        "areas": "The Hotel and The Mines",
+        "whereToFind": "Create it by placing a Smoothie in a Guiding Light Rift.",
+        "usesOrDuration": "About 1 minute of glow and 5 minutes of highlights",
+        "price": null,
+        "requirement": "A Smoothie and a Guiding Light Rift.",
+        "helpsWith": "Finding Keys, Books, Fuses, Breaker Poles, Generators, and nearby entities.",
+        "limitation": "It stops working in subfloors and is consumed when used.",
+        "alias": "Rift Smoothie",
+        "cardSummary": "A Rift-made Smoothie that turns item hunting into a much less blurry scavenger hunt."
+      },
+      "system": {
+        "slug": "moonlight-float",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 50,
+        "image": "/DOORS/items/moonlight-float.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gween Soda",
+        "category": "Major",
+        "effect": "Regenerates 100 health and gives a fading speed boost.",
+        "areas": "The Mines",
+        "whereToFind": "Trade with or use a Crucifix on Louie.",
+        "usesOrDuration": "About 34 seconds of healing and about 28 seconds of speed",
+        "price": null,
+        "requirement": "A Louie trade or Crucifix interaction.",
+        "helpsWith": "Recovering from damage while moving through The Mines.",
+        "limitation": "It takes time to heal and is not found as ordinary container loot.",
+        "alias": null,
+        "cardSummary": "A slow but generous Mine heal that also gives you a little extra running room."
+      },
+      "system": {
+        "slug": "gween-soda",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 60,
+        "image": "/DOORS/items/gween-soda.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bread",
+        "category": "Major",
+        "effect": "Immediately restores 45 health.",
+        "areas": "The Mines and The Outdoors",
+        "whereToFind": "Louie trades in The Mines and rare vine-covered chests in The Outdoors.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Healing and feeding Caws to improve Lotus Petal chances.",
+        "limitation": "Mine access usually requires giving up another item or using a Crucifix.",
+        "alias": null,
+        "cardSummary": "A small heal with one extra trick: Bread can be fed to Caws in The Outdoors."
+      },
+      "system": {
+        "slug": "bread",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 70,
+        "image": "/DOORS/items/bread.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cheese",
+        "category": "Major",
+        "effect": "Immediately restores 45 health.",
+        "areas": "The Mines",
+        "whereToFind": "Trade with or use a Crucifix on Louie.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": "A Louie trade or Crucifix interaction.",
+        "helpsWith": "Recovering health during The Mines.",
+        "limitation": "It has no benefit beyond healing and is not ordinary container loot.",
+        "alias": null,
+        "cardSummary": "Bread's Mine-only cousin: same heal, different snack, same slightly odd trade route."
+      },
+      "system": {
+        "slug": "cheese",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 80,
+        "image": "/DOORS/items/cheese.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Donut",
+        "category": "Major",
+        "effect": "Immediately restores 80 health.",
+        "areas": "The Hotel",
+        "whereToFind": "The Café room in a Mid-Run Rift, opened with a Skeleton Key.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": "A Skeleton Key to enter the Café Rift room.",
+        "helpsWith": "Large emergency healing and certain Louie trades.",
+        "limitation": "The Café room is rare, so it is not a routine source of healing.",
+        "alias": null,
+        "cardSummary": "A rare Café find that heals a big chunk of health when the Hotel decides to be generous."
+      },
+      "system": {
+        "slug": "donut",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 90,
+        "image": "/DOORS/items/donut.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vitamins",
+        "category": "Major",
+        "effect": "Gives the player a temporary speed boost.",
+        "areas": "Multiple released floors",
+        "whereToFind": "Containers, the Pre-Run Shop, and Jeff's Shop.",
+        "usesOrDuration": "About 10 seconds per use",
+        "price": "100 Knobs for a full Pre-Run Shop stack",
+        "requirement": null,
+        "helpsWith": "Seek chases, Figure, Grumbles, and fast room transitions.",
+        "limitation": "It no longer heals and repeated uses need a short wait between them.",
+        "alias": null,
+        "cardSummary": "A pure speed item for chases and tight escapes. Save one when the hallway starts moving faster than you."
+      },
+      "system": {
+        "slug": "vitamins",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 100,
+        "image": "/DOORS/items/vitamins.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Aloe",
+        "category": "Major",
+        "effect": "Regenerates 100 health over a short period.",
+        "areas": "The Outdoors",
+        "whereToFind": "Rarely inside or on top of containers in The Outdoors.",
+        "usesOrDuration": "10 healing ticks over about 3 seconds",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Recovering from damage in The Outdoors.",
+        "limitation": "It is rare, cannot be stacked, and most Outdoors threats can still kill instantly.",
+        "alias": "Aloe Vera",
+        "cardSummary": "A full heal hidden around The Outdoors. Useful after damage, less useful against anything that skips the health bar."
+      },
+      "system": {
+        "slug": "aloe",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 110,
+        "image": "/DOORS/items/aloe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandages",
+        "category": "Resource",
+        "effect": "Instantly restores 15 health.",
+        "areas": "Multiple released floors except The Backdoor",
+        "whereToFind": "Commonly inside containers.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Small emergency heals after entity damage.",
+        "limitation": "They cannot be carried for later unless stored in a Bandage Pack.",
+        "alias": "Bandage",
+        "cardSummary": "A quick 15-HP pickup that is most valuable when you have already taken a hit."
+      },
+      "system": {
+        "slug": "bandages",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 120,
+        "image": "/DOORS/items/bandages.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandage Pack",
+        "category": "Major",
+        "effect": "Stores bandages that can be thrown out for later healing.",
+        "areas": "The Mines and later released floors",
+        "whereToFind": "Containers and Jeff's Shop in The Mines.",
+        "usesOrDuration": "Holds up to 10 bandages",
+        "price": null,
+        "requirement": "Bandages to fill it.",
+        "helpsWith": "Saving healing for later and sharing it with teammates.",
+        "limitation": "The pack itself does not heal until it has bandages inside.",
+        "alias": null,
+        "cardSummary": "A team-friendly health pouch that keeps loose Bandages from disappearing the moment you find them."
+      },
+      "system": {
+        "slug": "bandage-pack",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 130,
+        "image": "/DOORS/items/bandage-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Herb",
+        "category": "Resource",
+        "effect": "Regenerates 5 health each time a door is opened.",
+        "areas": "The Hotel",
+        "whereToFind": "The Infirmary behind the Skeleton Key door.",
+        "usesOrDuration": "Lasts until the run ends or an entity kills the player",
+        "price": null,
+        "requirement": "A Skeleton Key to open the Infirmary.",
+        "helpsWith": "Recovering from chip damage across a long run.",
+        "limitation": "It is a passive effect and does not prevent instant-death attacks.",
+        "alias": "Herb of Viridis",
+        "cardSummary": "The quiet sustain option. Find it once and let every opened door do a little healing."
+      },
+      "system": {
+        "slug": "green-herb",
+        "section": "Healing, food, and boosts",
+        "sortOrder": 140,
+        "image": "/DOORS/items/green-herb.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crucifix",
+        "category": "Major",
+        "effect": "Banishes and immobilizes one entity before breaking.",
+        "areas": "Multiple released floors",
+        "whereToFind": "Rare loot, Jeff's Shop, and certain trades.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Rush, Ambush, Figure, Seek, Eyes, Halt, Screech, Dupe, Giggle, Dread, Gloombats, and Grumble.",
+        "limitation": "It does not solve every entity encounter and is consumed after use.",
+        "alias": null,
+        "cardSummary": "The emergency entity tool. Keep it for the encounter that would otherwise end the run."
+      },
+      "system": {
+        "slug": "crucifix",
+        "section": "Entity control and survival",
+        "sortOrder": 10,
+        "image": "/DOORS/items/crucifix.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alarm Clock",
+        "category": "Major",
+        "effect": "Distracts Figure when wound and placed nearby.",
+        "areas": "The Hotel",
+        "whereToFind": "Guaranteed in the Door 49 reception area and another spot in the Door 50 Library.",
+        "usesOrDuration": "Activates after about 10 seconds",
+        "price": null,
+        "requirement": "Wind it before placing it.",
+        "helpsWith": "The Library puzzle and Figure's patrol route.",
+        "limitation": "It distracts Figure rather than defeating it.",
+        "alias": null,
+        "cardSummary": "A noisy little decoy for the Library. Wind it, place it, and let Figure investigate the wrong problem."
+      },
+      "system": {
+        "slug": "alarm-clock",
+        "section": "Entity control and survival",
+        "sortOrder": 20,
+        "image": "/DOORS/items/alarm-clock.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hotel Key",
+        "category": "Minor",
+        "effect": "Unlocks the next numbered Hotel door.",
+        "areas": "The Hotel",
+        "whereToFind": "Containers and room surfaces near locked doors.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": "Match the key's number to the locked door.",
+        "helpsWith": "Normal Hotel progression.",
+        "limitation": "A wrong numbered door or Dupe can punish a rushed choice.",
+        "alias": "Room Key; Key",
+        "cardSummary": "The basic progression key. Check its number, then check the door before opening it."
+      },
+      "system": {
+        "slug": "hotel-key",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 10,
+        "image": "/DOORS/items/hotel-key.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lockpick",
+        "category": "Major",
+        "effect": "Opens most locked doors and chests and can replace a Fuse in a generator.",
+        "areas": "Multiple released floors",
+        "whereToFind": "Containers, the Pre-Run Shop, Jeff's Shop, and some trades.",
+        "usesOrDuration": "One use per lock or generator",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Locked rooms, chests, The Electrical Room, and Mines generators.",
+        "limitation": "It does not open every special door and disappears after use.",
+        "alias": "Lockpicks",
+        "cardSummary": "The flexible key substitute. It saves searches, opens loot, and can sometimes stand in for a Fuse."
+      },
+      "system": {
+        "slug": "lockpick",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 20,
+        "image": "/DOORS/items/lockpick.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeleton Key",
+        "category": "Major",
+        "effect": "Opens Skull Locks, the Infirmary, The Rooms entrance, and The Outdoors entrance.",
+        "areas": "The Hotel and access routes to The Rooms and The Outdoors",
+        "whereToFind": "Jeff's Shop, rare loot, and certain trades.",
+        "usesOrDuration": "Up to 5 uses",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Green Herb, Mid-Run Rifts, The Rooms, The Outdoors, and locked treasure.",
+        "limitation": "It is rare, so spending it on a normal lock can waste a route-opening tool.",
+        "alias": null,
+        "cardSummary": "A rare multi-use key that opens the doors most normal keys cannot."
+      },
+      "system": {
+        "slug": "skeleton-key",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 30,
+        "image": "/DOORS/items/skeleton-key.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Electrical Room Key",
+        "category": "Minor",
+        "effect": "Opens the Electrical Room door at the end of The Hotel.",
+        "areas": "The Hotel Door 100",
+        "whereToFind": "A shelf on the upper floor of The Electrical Room.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Accessing the Circuit Breaker puzzle and the Mines elevator.",
+        "limitation": "Lockpicks or a Skeleton Key can replace it, and it cannot be stored in a Rift.",
+        "alias": null,
+        "cardSummary": "The last key hunt in the Hotel. Find it upstairs, then get ready for the breaker room."
+      },
+      "system": {
+        "slug": "electrical-room-key",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 40,
+        "image": "/DOORS/items/electrical-room-key.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Book",
+        "category": "Minor",
+        "effect": "Provides a number and shape clue for the Library lock code.",
+        "areas": "The Hotel Library at Door 50",
+        "whereToFind": "Shelves throughout The Library.",
+        "usesOrDuration": "Single puzzle use",
+        "price": null,
+        "requirement": "Collect it during the Library puzzle.",
+        "helpsWith": "Decoding the Door 51 padlock.",
+        "limitation": "Only some books contain useful digits and the book leaves the inventory after reading.",
+        "alias": "Library Book",
+        "cardSummary": "Find the marked books, record their numbers, and let the Paper tell you the order."
+      },
+      "system": {
+        "slug": "book",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 50,
+        "image": "/DOORS/items/book.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Paper",
+        "category": "Minor",
+        "effect": "Shows the shape order needed for the Library lock code.",
+        "areas": "The Hotel Library at Door 50",
+        "whereToFind": "The large desk in The Library.",
+        "usesOrDuration": "Single puzzle use",
+        "price": null,
+        "requirement": "Use it together with the numbered Books.",
+        "helpsWith": "Solving the Door 51 padlock.",
+        "limitation": "It disappears when the Library exit is opened.",
+        "alias": "Solution Paper; Library Paper",
+        "cardSummary": "The Library's cheat sheet, minus the cheating. Match its shapes to the numbers in the Books."
+      },
+      "system": {
+        "slug": "paper",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 60,
+        "image": "/DOORS/items/paper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Breaker Pole",
+        "category": "Minor",
+        "effect": "Activates the Circuit Breaker mini-game.",
+        "areas": "The Hotel Electrical Room at Door 100",
+        "whereToFind": "Labyrinth halls, storage rooms, and areas near the elevator.",
+        "usesOrDuration": "10 poles are required for the puzzle",
+        "price": null,
+        "requirement": "The Electrical Room must be opened first.",
+        "helpsWith": "Powering the elevator to The Mines.",
+        "limitation": "Each pole is single-use and Figure appears while the room is being searched.",
+        "alias": null,
+        "cardSummary": "Ten small switches stand between the Hotel and the Mines. The room is the dangerous part."
+      },
+      "system": {
+        "slug": "breaker-pole",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 70,
+        "image": "/DOORS/items/breaker-pole.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fuse",
+        "category": "Minor",
+        "effect": "Powers generators that open gated rooms in The Mines.",
+        "areas": "The Mines",
+        "whereToFind": "Lockers, tables, drawers, toolboxes, and sometimes the floor near a generator.",
+        "usesOrDuration": "Usually 1 to 3 per generator room",
+        "price": null,
+        "requirement": "Insert the needed number into the room's generator.",
+        "helpsWith": "Mines gate and generator progression.",
+        "limitation": "Only the room's required fuses spawn, and inserted fuses leave every player's inventory.",
+        "alias": "Generator Fuse",
+        "cardSummary": "The Mines' version of a key: find the right number of Fuses, power the generator, and open the gate."
+      },
+      "system": {
+        "slug": "fuse",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 80,
+        "image": "/DOORS/items/fuse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Backdoor Room Key",
+        "category": "Minor",
+        "effect": "Unlocks the next Backdoor door.",
+        "areas": "The Backdoor",
+        "whereToFind": "Rooms and containers during The Backdoor.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": "Match it to the next Backdoor door.",
+        "helpsWith": "Backdoor progression and reaching its final reward room.",
+        "limitation": "It only works for the Backdoor route.",
+        "alias": "Backdoor Key",
+        "cardSummary": "The Backdoor's numbered key. Keep moving before Haste makes the route even less forgiving."
+      },
+      "system": {
+        "slug": "backdoor-room-key",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 90,
+        "image": "/DOORS/items/backdoor-room-key.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iron Key",
+        "category": "Minor",
+        "effect": "Opens locked crypts containing Lotus Petals.",
+        "areas": "The Outdoors",
+        "whereToFind": "Inside or on top of containers near locked crypts.",
+        "usesOrDuration": "Up to 5 carried",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "Opening crypts and collecting Lotus Petals.",
+        "limitation": "It does not use an inventory slot and is removed when The Outdoors ends.",
+        "alias": null,
+        "cardSummary": "The brown key for Outdoors crypts. If you find a locked grave, check nearby containers."
+      },
+      "system": {
+        "slug": "iron-key",
+        "section": "Keys and puzzle progress",
+        "sortOrder": 100,
+        "image": "/DOORS/items/iron-key.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shears",
+        "category": "Major",
+        "effect": "Cuts vines from chests and shortcuts.",
+        "areas": "The Hotel, The Mines, and The Outdoors",
+        "whereToFind": "Vine-covered areas, closets, containers, and Jeff's Shop.",
+        "usesOrDuration": "About 5 cuts",
+        "price": "300 Gold at Jeff's Shop",
+        "requirement": null,
+        "helpsWith": "Vine-covered loot, secret routes, and Outdoors chests.",
+        "limitation": "They break after their available cuts are used.",
+        "alias": null,
+        "cardSummary": "A simple tool with excellent mileage: cut vines, open better loot, and do not waste the last snip."
+      },
+      "system": {
+        "slug": "shears",
+        "section": "Outdoors and run utility",
+        "sortOrder": 10,
+        "image": "/DOORS/items/shears.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Compass",
+        "category": "Major",
+        "effect": "Points toward the next progressive door.",
+        "areas": "The Outdoors",
+        "whereToFind": "Containers and cabins in The Outdoors.",
+        "usesOrDuration": "Reusable during the run",
+        "price": null,
+        "requirement": null,
+        "helpsWith": "The Outdoors route and Hedge Maze navigation.",
+        "limitation": "It is not useful during the Eyestalk chase and only naturally appears in The Outdoors.",
+        "alias": null,
+        "cardSummary": "The Outdoors navigation shortcut. Follow the arrow when the forest starts offering too many wrong turns."
+      },
+      "system": {
+        "slug": "compass",
+        "section": "Outdoors and run utility",
+        "sortOrder": 20,
+        "image": "/DOORS/items/compass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Multitool",
+        "category": "Major",
+        "effect": "Combines the functions of a Lockpick and Shears.",
+        "areas": "The Mines and later floors",
+        "whereToFind": "Jeff's Shop in The Mines and Louie trades.",
+        "usesOrDuration": "20 collective uses",
+        "price": "500 Gold at Jeff's Shop in The Mines",
+        "requirement": null,
+        "helpsWith": "Locked doors, locked chests, vine-covered chests, and Outdoors crypts.",
+        "limitation": "It cannot replace a Fuse in a generator and may arrive with some durability already spent.",
+        "alias": null,
+        "cardSummary": "A two-tools-in-one upgrade for players who would rather carry one useful gadget than two."
+      },
+      "system": {
+        "slug": "multitool",
+        "section": "Outdoors and run utility",
+        "sortOrder": 30,
+        "image": "/DOORS/items/multitool.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lotus Petal",
+        "category": "Minor",
+        "effect": "Combines into a Lotus when enough petals are brought to Grampy.",
+        "areas": "The Outdoors",
+        "whereToFind": "Containers, the ground, and locked crypts.",
+        "usesOrDuration": "8 needed for a Lotus; up to 20 carried",
+        "price": null,
+        "requirement": "Collect 8 and speak with Grampy.",
+        "helpsWith": "Creating the Lotus and its revival route.",
+        "limitation": "It is not a normal inventory-slot item and cannot be dropped.",
+        "alias": null,
+        "cardSummary": "Collect eight glowing petals in The Outdoors and Grampy turns them into a second chance."
+      },
+      "system": {
+        "slug": "lotus-petal",
+        "section": "Outdoors and run utility",
+        "sortOrder": 40,
+        "image": "/DOORS/items/lotus-petal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lotus",
+        "category": "Major",
+        "effect": "Creates a revival point near where it is planted in a floor.",
+        "areas": "The Outdoors and floors reached after it is created",
+        "whereToFind": "Grampy creates it after 8 Lotus Petals are collected.",
+        "usesOrDuration": "One planted revival point",
+        "price": null,
+        "requirement": "8 Lotus Petals and Grampy's interaction.",
+        "helpsWith": "Recovering from death and replaying a difficult floor section.",
+        "limitation": "It must be planted before death and does not make every encounter safe.",
+        "alias": "Lotus Flower",
+        "cardSummary": "The Outdoors reward that lets a run bend instead of completely breaking after a death."
+      },
+      "system": {
+        "slug": "lotus",
+        "section": "Outdoors and run utility",
+        "sortOrder": 50,
+        "image": "/DOORS/items/lotus.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rift Jar",
+        "category": "Major",
+        "effect": "Breaks on impact and opens a Rift where it lands.",
+        "areas": "Main floors and subfloors",
+        "whereToFind": "Create it by placing a Tip Jar in a Guiding Light Rift or receive it from Louie.",
+        "usesOrDuration": "Single use",
+        "price": null,
+        "requirement": "A Tip Jar and Guiding Light Rift, or a successful Louie trade.",
+        "helpsWith": "Saving a rare item during a dangerous middle section of a run.",
+        "limitation": "It is hard to obtain and only one can be carried.",
+        "alias": null,
+        "cardSummary": "A throwable emergency Rift for players who do not want to carry a rare item through danger."
+      },
+      "system": {
+        "slug": "rift-jar",
+        "section": "Outdoors and run utility",
+        "sortOrder": 60,
+        "image": "/DOORS/items/rift-jar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tip Jar",
+        "category": "Major",
+        "effect": "Transforms into a Rift Jar when placed in a Guiding Light Rift.",
+        "areas": "The Hotel Mid-Run Rifts",
+        "whereToFind": "The Abandoned Shop room in a Mid-Run Rift or a trade with Louie.",
+        "usesOrDuration": "Single transformation",
+        "price": null,
+        "requirement": "A Guiding Light Rift to turn it into a Rift Jar.",
+        "helpsWith": "Creating a portable Rift during a run.",
+        "limitation": "It is rare and is not normal drawer loot.",
+        "alias": null,
+        "cardSummary": "A released but rare jar from the Abandoned Shop or Louie. Its real job is becoming a Rift Jar."
+      },
+      "system": {
+        "slug": "tip-jar",
+        "section": "Outdoors and run utility",
+        "sortOrder": 70,
+        "image": "/DOORS/items/tip-jar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glitch Fragment",
+        "category": "Resource",
+        "effect": "Triggers a Glitched Entity encounter that can grant a random positive buff.",
+        "areas": "Most released floors",
+        "whereToFind": "Rarely inside or on top of containers, with better odds after Glitch encounters.",
+        "usesOrDuration": "One activation",
+        "price": null,
+        "requirement": "Interact with the Fragment and survive the encounter.",
+        "helpsWith": "Rare buffs, item refills, and unusual run recovery.",
+        "limitation": "It is extremely rare, disappears on interaction, and is not available in every special mode.",
+        "alias": null,
+        "cardSummary": "A risky mystery pickup: use it only after you have a hiding spot and a plan for the glitchy visitor."
+      },
+      "system": {
+        "slug": "glitch-fragment",
+        "section": "Outdoors and run utility",
+        "sortOrder": 80,
+        "image": "/DOORS/items/glitch-fragment.webp"
+      }
+    }
+  ]
+}

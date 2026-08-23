@@ -1,0 +1,662 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "DOORS",
+    "gameSlug": "doors",
+    "collection": "locations",
+    "route": "/wiki/doors/locations",
+    "catalogCode": "doors-locations",
+    "itemFields": [
+      "floor",
+      "locationType",
+      "route",
+      "accessCondition",
+      "purpose",
+      "puzzleOrLoot",
+      "hazardsOrEntities",
+      "survivalTip",
+      "relatedItems",
+      "cardSummary"
+    ],
+    "columns": [
+      "floor",
+      "locationType",
+      "route",
+      "accessCondition",
+      "purpose",
+      "puzzleOrLoot",
+      "hazardsOrEntities",
+      "survivalTip",
+      "relatedItems",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Route section",
+      "sectionOrder": [
+        "The Hotel",
+        "The Mines",
+        "The Backdoor",
+        "The Rooms",
+        "The Outdoors"
+      ],
+      "badgeField": "locationType",
+      "subtitleFields": [
+        "route"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "floor",
+        "locationType",
+        "accessCondition",
+        "purpose",
+        "puzzleOrLoot",
+        "hazardsOrEntities",
+        "survivalTip",
+        "relatedItems"
+      ],
+      "tableFields": [
+        "floor",
+        "locationType",
+        "route",
+        "accessCondition",
+        "purpose",
+        "puzzleOrLoot",
+        "hazardsOrEntities",
+        "survivalTip",
+        "relatedItems",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "floor": {
+          "kind": "normal",
+          "label": "Floor"
+        },
+        "locationType": {
+          "kind": "highlight",
+          "label": "Type"
+        },
+        "route": {
+          "kind": "normal",
+          "label": "Route"
+        },
+        "accessCondition": {
+          "kind": "detail",
+          "label": "Access"
+        },
+        "purpose": {
+          "kind": "detail",
+          "label": "Purpose"
+        },
+        "puzzleOrLoot": {
+          "kind": "detail",
+          "label": "Puzzle or loot"
+        },
+        "hazardsOrEntities": {
+          "kind": "detail",
+          "label": "Hazards or entities"
+        },
+        "survivalTip": {
+          "kind": "detail",
+          "label": "Survival tip"
+        },
+        "relatedItems": {
+          "kind": "normal",
+          "label": "Related items"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "The Reception",
+        "floor": "The Hotel",
+        "locationType": "Starting room",
+        "route": "Door 0",
+        "accessCondition": "The starting room of a Hotel run.",
+        "purpose": "Gives the run its first safe-looking stop before the numbered doors begin.",
+        "puzzleOrLoot": "Search the room's drawers and furniture for ordinary early-run supplies.",
+        "hazardsOrEntities": "No named set-piece encounter is tied to the starting room.",
+        "survivalTip": "Collect the first useful supplies, then move on instead of spending too long in the lobby.",
+        "relatedItems": "Drawers and ordinary run items",
+        "cardSummary": "The Hotel starting room. Grab early supplies here, then open Door 1 and begin the main route."
+      },
+      "system": {
+        "slug": "the-reception",
+        "section": "The Hotel",
+        "sortOrder": 10,
+        "image": "/DOORS/locations/the-reception.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Library",
+        "floor": "The Hotel",
+        "locationType": "Puzzle room",
+        "route": "Doors 50 and 51",
+        "accessCondition": "Reach the middle of the Hotel route and open the Library entrance.",
+        "purpose": "Solve the book puzzle and unlock the next door while Figure patrols the room.",
+        "puzzleOrLoot": "Find the books and solution information, then use their symbols to solve the lock.",
+        "hazardsOrEntities": "Figure is the main threat. Rush, Ambush, Dread, and other encounters can add pressure depending on the run.",
+        "survivalTip": "Crouch and keep your movement quiet. Use the room's furniture to route around Figure while you finish the code.",
+        "relatedItems": "Library books, solution paper, hiding spots, Crucifix",
+        "cardSummary": "The first major Hotel puzzle. Find the books, stay quiet around Figure, and use the symbols to open the lock."
+      },
+      "system": {
+        "slug": "the-library",
+        "section": "The Hotel",
+        "sortOrder": 20,
+        "image": "/DOORS/locations/the-library.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jeff Shop (The Hotel)",
+        "floor": "The Hotel",
+        "locationType": "Shop",
+        "route": "Shortly after The Library, commonly around Doors 53-59",
+        "accessCondition": "Continue past The Library during a Hotel run.",
+        "purpose": "A mid-run shop where Jeff sells utility items and accepts tips.",
+        "puzzleOrLoot": "Spend Gold on useful healing, light, and survival items before the late Hotel rooms.",
+        "hazardsOrEntities": "Jeff, El Goblino, and Bob are friendly shop residents. Normal run threats can still matter before or after the stop.",
+        "survivalTip": "Use the shop to cover the weakness in your current loadout instead of buying duplicates you already have.",
+        "relatedItems": "Gold, Flashlight, Lighter, Vitamins, Lockpick, Skeleton Key, Crucifix",
+        "cardSummary": "The Hotel's mid-run supply stop. Spend Gold on the one utility item your run is missing most."
+      },
+      "system": {
+        "slug": "jeff-shop-hotel",
+        "section": "The Hotel",
+        "sortOrder": 30,
+        "image": "/DOORS/locations/jeff-shop-the-hotel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Rooms Entrance",
+        "floor": "The Hotel",
+        "locationType": "Secret route",
+        "route": "Door 60 side route",
+        "accessCondition": "Find the Basement lever, then unlock the chained A-000 entrance with two Lockpicks and a Skeleton Key.",
+        "purpose": "Connects the Hotel to The Rooms subfloor.",
+        "puzzleOrLoot": "The Basement lever opens the gate, while Lockpicks and a Skeleton Key open the final entrance.",
+        "hazardsOrEntities": "The route passes through a dark Basement where time and navigation can become the real problem.",
+        "survivalTip": "Only commit when you have the required keys and enough light to search the Basement for its lever.",
+        "relatedItems": "Lockpick, Skeleton Key, Basement lever",
+        "cardSummary": "The hidden Door 60 route into The Rooms. Bring the keys first, then search the Basement for the lever."
+      },
+      "system": {
+        "slug": "the-rooms-entrance",
+        "section": "The Hotel",
+        "sortOrder": 40,
+        "image": "/DOORS/locations/the-rooms-entrance.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Infirmary",
+        "floor": "The Hotel",
+        "locationType": "Healing room",
+        "route": "Around Doors 65-70",
+        "accessCondition": "Reach the mid-to-late Hotel route, or return from a Rooms exit.",
+        "purpose": "Provides a named medical stop and an optional Skeleton Key side route.",
+        "puzzleOrLoot": "Check the room for healing supplies and the skull-locked route connected to the Herb of Viridis.",
+        "hazardsOrEntities": "The room is part of the active Hotel route, so passing entities can still make a slow search dangerous.",
+        "survivalTip": "Search with a purpose, then leave. Do not burn a Skeleton Key here unless the side-room reward fits the run.",
+        "relatedItems": "Skeleton Key, Herb of Viridis, healing items",
+        "cardSummary": "A useful Hotel checkpoint for healing and the skull-lock side route. Search quickly, then keep the run moving."
+      },
+      "system": {
+        "slug": "the-infirmary",
+        "section": "The Hotel",
+        "sortOrder": 50,
+        "image": "/DOORS/locations/the-infirmary.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Courtyard",
+        "floor": "The Hotel",
+        "locationType": "Route transition",
+        "route": "Late Hotel route before The Greenhouse",
+        "accessCondition": "Reach the late Hotel rooms and follow the route toward the garden section.",
+        "purpose": "Moves the run through an outdoor Hotel area and provides the useful Shears route.",
+        "puzzleOrLoot": "A small toolshed can provide Shears, which are useful for vine-covered chests and passages.",
+        "hazardsOrEntities": "Rain and the open layout make it easier to lose time while searching for the next entrance.",
+        "survivalTip": "If you plan to enter The Outdoors, check the Courtyard toolshed for Shears before moving on.",
+        "relatedItems": "Shears, Skeleton Key, Multitool",
+        "cardSummary": "The Hotel's outdoor transition. Check the toolshed for Shears before the route pushes you toward the Greenhouse."
+      },
+      "system": {
+        "slug": "the-courtyard",
+        "section": "The Hotel",
+        "sortOrder": 60,
+        "image": "/DOORS/locations/the-courtyard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Greenhouse",
+        "floor": "The Hotel",
+        "locationType": "Dark route section",
+        "route": "Doors 90-99",
+        "accessCondition": "Reach the final Hotel section through the Courtyard route.",
+        "purpose": "Carries the run through a dark garden section before the Electrical Room and the late-game routes.",
+        "puzzleOrLoot": "Advance through the numbered rooms while checking the dark garden for supplies and vine-covered paths.",
+        "hazardsOrEntities": "Rush, Snare, Eyes, Screech, Hide, and other threats are harder to read when the lights are out. Lightning can also mask audio cues.",
+        "survivalTip": "Carry a light source and listen carefully. In the dark rooms, Rush's approach sound matters more than a light flicker.",
+        "relatedItems": "Flashlight, Shears, Multitool, Crucifix",
+        "cardSummary": "The Hotel's dark garden stretch. Keep a light ready and listen for Rush when the usual warning flicker disappears."
+      },
+      "system": {
+        "slug": "the-greenhouse",
+        "section": "The Hotel",
+        "sortOrder": 70,
+        "image": "/DOORS/locations/the-greenhouse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Electrical Room",
+        "floor": "The Hotel",
+        "locationType": "Final puzzle room",
+        "route": "Door 100",
+        "accessCondition": "Reach the end of The Hotel and open the gated room with its lever and Electrical Room Key route.",
+        "purpose": "Solve the breaker puzzle, survive Figure's chase, and finish the Hotel.",
+        "puzzleOrLoot": "Find the breaker switches, restore power, and use the lower-floor Rift before taking the elevator out.",
+        "hazardsOrEntities": "Figure patrols the tall room while the gates and multiple levels make navigation slow.",
+        "survivalTip": "Search every level for switches and the Electrical Room Key, then leave as soon as the breaker puzzle is complete.",
+        "relatedItems": "Electrical Room Key, Rift, Lockpick, Crucifix",
+        "cardSummary": "The Hotel finale. Find the switches, finish the breaker puzzle, and escape Figure before taking the elevator."
+      },
+      "system": {
+        "slug": "the-electrical-room",
+        "section": "The Hotel",
+        "sortOrder": 80,
+        "image": "/DOORS/locations/the-electrical-room.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Adit",
+        "floor": "The Mines",
+        "locationType": "Starting transition",
+        "route": "Immediately after the Hotel elevator crash, around Door 100.5",
+        "accessCondition": "Enter The Mines from the Hotel elevator route.",
+        "purpose": "Introduces the Mines route and sends the run into its minecart and cave sections.",
+        "puzzleOrLoot": "Follow the entry path and collect early Mines supplies before the route opens into larger rooms.",
+        "hazardsOrEntities": "The Mines introduce darker rooms, water, minecart routes, and new encounter patterns.",
+        "survivalTip": "Treat the Adit as a resupply point. Keep a light source ready before the Mines rooms become harder to read.",
+        "relatedItems": "Flashlight, Bulklight, Batteries, Minecart lever",
+        "cardSummary": "The first named stop in The Mines. Use it to reset your bearings and prepare for the darker route ahead."
+      },
+      "system": {
+        "slug": "the-adit",
+        "section": "The Mines",
+        "sortOrder": 110,
+        "image": "/DOORS/locations/the-adit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Bridges",
+        "floor": "The Mines",
+        "locationType": "Halt set piece",
+        "route": "Mines mid-route, before The Caverns",
+        "accessCondition": "Progress through the ordinary Mines rooms until the bridge encounter appears.",
+        "purpose": "Cross three bridge sections while Halt and the broken paths pressure the player.",
+        "puzzleOrLoot": "Choose the one usable bridge in each section and reach the staircase at the far end.",
+        "hazardsOrEntities": "Halt, broken bridges, darkness, and falls into the lower area.",
+        "survivalTip": "Bring a light source. The correct bridge has a set of drawers on the right side of the walkway.",
+        "relatedItems": "Flashlight, Bulklight, item lockers",
+        "cardSummary": "A three-part bridge puzzle in The Mines. Keep a light on and check the drawers beside the safe path."
+      },
+      "system": {
+        "slug": "the-bridges",
+        "section": "The Mines",
+        "sortOrder": 120,
+        "image": "/DOORS/locations/the-bridges.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Caverns",
+        "floor": "The Mines",
+        "locationType": "Seek chase",
+        "route": "Doors 142-149",
+        "accessCondition": "Reach the first Mines Seek chase after the earlier cave rooms.",
+        "purpose": "Runs the player through broken bridges and a minecart chase into The Nest.",
+        "puzzleOrLoot": "Jump the broken bridges, then steer the minecart through the correct tracks and obstacles.",
+        "hazardsOrEntities": "Seek, falling boulders, Stalagmite pits, minecart barriers, and wrong-track dead ends.",
+        "survivalTip": "Follow Guiding Light's path. Steer only when the tracks split and crouch for low barriers.",
+        "relatedItems": "Guiding Light and the minecart route",
+        "cardSummary": "The first Mines Seek chase. Follow the blue route, clear the jumps, and steer the minecart into The Nest."
+      },
+      "system": {
+        "slug": "the-caverns",
+        "section": "The Mines",
+        "sortOrder": 130,
+        "image": "/DOORS/locations/the-caverns.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Nest",
+        "floor": "The Mines",
+        "locationType": "Boss puzzle room",
+        "route": "Doors 150 and 151",
+        "accessCondition": "Complete The Caverns and enter the Grumble nest.",
+        "purpose": "Power the Anchors and escape the nest while Grumbles patrol the tunnels.",
+        "puzzleOrLoot": "Find the Anchors, enter their number sequences, and open the exit before the room closes in.",
+        "hazardsOrEntities": "Grumble, Queen Grumble, darkness, and narrow routes around the nest.",
+        "survivalTip": "Learn the layout, keep a light ready, and use tight corners or hiding spots when a Grumble gets close.",
+        "relatedItems": "Anchors, Flashlight, Bulklight, Batteries",
+        "cardSummary": "The Mines' nest puzzle and chase. Find the Anchors quickly, then escape the Grumbles through the correct route."
+      },
+      "system": {
+        "slug": "the-nest",
+        "section": "The Mines",
+        "sortOrder": 140,
+        "image": "/DOORS/locations/the-nest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jeff Shop (The Mines)",
+        "floor": "The Mines",
+        "locationType": "Shop",
+        "route": "After The Nest, in the Sewers around the 152-162 range",
+        "accessCondition": "Continue through the early Sewers after escaping The Nest.",
+        "purpose": "Provides a second floor-specific shop stop for light, healing, and Mines utility items.",
+        "puzzleOrLoot": "Spend Gold on items that help with the dark Sewers, minecart puzzles, and later boss rooms.",
+        "hazardsOrEntities": "Jeff, El Goblino, and Bob are friendly. The surrounding Sewers still contain ordinary Mines hazards.",
+        "survivalTip": "Treat this as a loadout check. Buy light or healing support before committing to the long Sewer stretch.",
+        "relatedItems": "Gold, Bulklight, Bandage Pack, Battery Pack, Shears, Multitool, Crucifix",
+        "cardSummary": "The Mines' supply stop. Its route placement differs from the Hotel shop, so use the Mine-specific stock to prepare for the Sewers."
+      },
+      "system": {
+        "slug": "jeff-shop-mines",
+        "section": "The Mines",
+        "sortOrder": 150,
+        "image": "/DOORS/locations/jeff-shop-the-mines.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Railway Station",
+        "floor": "The Mines",
+        "locationType": "Minecart puzzle room",
+        "route": "The Sewers, commonly somewhere in the 153-199 range, but not guaranteed",
+        "accessCondition": "Encounter the named station room during the Sewer route.",
+        "purpose": "Uses minecarts and tracks to open the blocked exit from a two-level station.",
+        "puzzleOrLoot": "Move the carts, pull the distant lever, and use the cart to break the wooden barrier at the exit.",
+        "hazardsOrEntities": "Minecart timing, floods, and a possible Dupe door on the wrong platform.",
+        "survivalTip": "The real exit is behind the wooden barrier. Check the door number before entering a platform door.",
+        "relatedItems": "Minecarts, lever, item lockers",
+        "cardSummary": "A high-chance but non-guaranteed Sewer puzzle room. Move the minecarts carefully and use the barred exit as your landmark."
+      },
+      "system": {
+        "slug": "the-railway-station",
+        "section": "The Mines",
+        "sortOrder": 160,
+        "image": "/DOORS/locations/the-railway-station.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Sewage Pipes",
+        "floor": "The Mines",
+        "locationType": "Seek chase",
+        "route": "Around Doors 170-180",
+        "accessCondition": "Reach the second Mines Seek chase in the Sewers.",
+        "purpose": "Carries the run through flooded corridors, split paths, and grate tunnels toward The Dam.",
+        "puzzleOrLoot": "Follow Guiding Light and break through the grate doors to stay ahead of the chase.",
+        "hazardsOrEntities": "Seek, Queen Grumble, floods, boulders, and blocked sewer grates.",
+        "survivalTip": "Stay with the blue current and interact repeatedly at grate doors so the chase does not catch you.",
+        "relatedItems": "Guiding Light and light sources",
+        "cardSummary": "The second Mines Seek chase. Follow the blue current, break the grates, and do not stop in the flooded tunnels."
+      },
+      "system": {
+        "slug": "the-sewage-pipes",
+        "section": "The Mines",
+        "sortOrder": 170,
+        "image": "/DOORS/locations/the-sewage-pipes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Dam",
+        "floor": "The Mines",
+        "locationType": "Final boss room",
+        "route": "Door 200",
+        "accessCondition": "Reach the end of the Mines after the Sewer route.",
+        "purpose": "Defeat Dam Seek and open the route into The Woods.",
+        "puzzleOrLoot": "Turn the valves through three phases, lower the liquid, and activate the generator gate.",
+        "hazardsOrEntities": "Dam Seek, Seek Hands, Seek Sludge, Seek Worm, rising liquid, and exposed platforms.",
+        "survivalTip": "Stay on solid ground, turn valves between attacks, and never treat the black liquid as a shortcut.",
+        "relatedItems": "Valves, generator, Crucifix",
+        "cardSummary": "The Mines finale. Lower the reservoir in phases, avoid the Seek attacks, and open the gate to The Woods."
+      },
+      "system": {
+        "slug": "the-dam",
+        "section": "The Mines",
+        "sortOrder": 180,
+        "image": "/DOORS/locations/the-dam.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Woods",
+        "floor": "The Mines",
+        "locationType": "Ending transition",
+        "route": "After The Dam, around Door 200.5",
+        "accessCondition": "Complete The Dam and climb into the outdoor transition.",
+        "purpose": "Closes the current Mines run and leads to the castle door beyond the released route.",
+        "puzzleOrLoot": "Follow the path to the ending door and use the Rifts found along the transition when available.",
+        "hazardsOrEntities": "The ending sequence features Queen Grumble and Seek. The castle door beyond the woods is outside this collection.",
+        "survivalTip": "Keep moving along the path and treat the castle door as the current endpoint rather than a playable route in this collection.",
+        "relatedItems": "Moonlight Rift, Starlight Rift",
+        "cardSummary": "The released endpoint after The Dam. Walk the forest transition, then stop at the current route boundary."
+      },
+      "system": {
+        "slug": "the-woods",
+        "section": "The Mines",
+        "sortOrder": 190,
+        "image": "/DOORS/locations/the-woods.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Rear Entryway",
+        "floor": "The Backdoor",
+        "locationType": "Starting room",
+        "route": "Room -51",
+        "accessCondition": "Enter The Backdoor through its current Lobby route.",
+        "purpose": "Starts the Backdoor run and gives the player time to find the first key.",
+        "puzzleOrLoot": "Crouch behind the fenced corner and collect the Room Key that opens the path to Room -50.",
+        "hazardsOrEntities": "The timer does not start until the door to Room -50 opens, making this the calmest Backdoor search room.",
+        "survivalTip": "Search carefully before opening the next door. Use the free time to find the key and orient yourself.",
+        "relatedItems": "Room Key, drawers, closets",
+        "cardSummary": "The Backdoor starting room. Find the key behind the fence before the timer pressure begins."
+      },
+      "system": {
+        "slug": "the-rear-entryway",
+        "section": "The Backdoor",
+        "sortOrder": 210,
+        "image": "/DOORS/locations/the-rear-entryway.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Vestibule",
+        "floor": "The Backdoor",
+        "locationType": "Final room",
+        "route": "Room -01",
+        "accessCondition": "Reach the final Backdoor room before the exit.",
+        "purpose": "Provides the final timer lever, Starlight purchase, and exit route.",
+        "puzzleOrLoot": "Pull the Timer Lever when needed and use Gold to buy the Bottle of Starlight on its pedestal.",
+        "hazardsOrEntities": "The Backdoor timer and its Haste/Blitz pressure make the route outside the room time-sensitive.",
+        "survivalTip": "Handle the lever and exit without wandering. Buy Starlight only when it helps the next run or escape.",
+        "relatedItems": "Bottle of Starlight, Gold, Timer Lever",
+        "cardSummary": "The Backdoor finish line. Check the timer lever, collect what you need, and leave through the final door."
+      },
+      "system": {
+        "slug": "the-vestibule",
+        "section": "The Backdoor",
+        "sortOrder": 220,
+        "image": "/DOORS/locations/the-vestibule.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Waiting Room (A-000)",
+        "floor": "The Rooms",
+        "locationType": "Starting room",
+        "route": "A-000",
+        "accessCondition": "Unlock the A-000 entrance from The Hotel's Rooms Entrance.",
+        "purpose": "Begins the Rooms run and gives the player a light-source purchase before the dark office rooms.",
+        "puzzleOrLoot": "Buy a Shakelight from the dispenser for Gold, then enter the first numbered room.",
+        "hazardsOrEntities": "The main threat begins deeper in The Rooms, where visibility falls and the specialist entities appear.",
+        "survivalTip": "Buy the backup light before leaving. The Rooms becomes much less forgiving once the office rooms turn dark.",
+        "relatedItems": "Shakelight, Gold, Lockpick, Skeleton Key",
+        "cardSummary": "The Rooms entry room. Spend a little Gold on a Shakelight before the long dark run begins."
+      },
+      "system": {
+        "slug": "the-waiting-room-a-000",
+        "section": "The Rooms",
+        "sortOrder": 310,
+        "image": "/DOORS/locations/the-waiting-room-a-000.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Exit Rooms",
+        "floor": "The Rooms",
+        "locationType": "Optional exit room",
+        "route": "Begins appearing after A-200 at intervals through The Rooms",
+        "accessCondition": "Continue deep enough into The Rooms for an exit room to generate.",
+        "purpose": "Offers an optional return to The Hotel before A-1000.",
+        "puzzleOrLoot": "Find the EXIT door inside the room and hold it open to return to the Hotel Infirmary.",
+        "hazardsOrEntities": "A-60 and A-120 can appear even though an Exit Room may not have a locker.",
+        "survivalTip": "Use hiding spots in the previous room or a speed boost when an A-entity arrives. Leave if the run has already done its job.",
+        "relatedItems": "Vitamins, Starlight items, EXIT door",
+        "cardSummary": "The Rooms' optional escape hatch. It can save a run after A-200, but A-60 and A-120 may still pressure the exit."
+      },
+      "system": {
+        "slug": "exit-rooms",
+        "section": "The Rooms",
+        "sortOrder": 320,
+        "image": "/DOORS/locations/exit-rooms.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "A-1000",
+        "floor": "The Rooms",
+        "locationType": "Final room",
+        "route": "A-1000",
+        "accessCondition": "Reach the end of The Rooms instead of taking an earlier Exit Room.",
+        "purpose": "Completes the long Rooms route and returns the group to The Hotel with the Starlight Jug.",
+        "puzzleOrLoot": "Cross the Void Bridge, collect the Starlight Jug, and open the unlabelled exit door.",
+        "hazardsOrEntities": "A-90 and the darkness of the final Rooms route can make the bridge approach dangerous.",
+        "survivalTip": "Bring a reliable light and keep your inputs controlled when A-90 appears near the final stretch.",
+        "relatedItems": "Starlight Jug, exit door",
+        "cardSummary": "The true end of The Rooms. Cross the Void Bridge, take the Starlight Jug, and return to the Hotel."
+      },
+      "system": {
+        "slug": "a-1000",
+        "section": "The Rooms",
+        "sortOrder": 330,
+        "image": "/DOORS/locations/a-1000.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Small Courtyard",
+        "floor": "The Outdoors",
+        "locationType": "Starting area",
+        "route": "Outdoors start, tracked by meters and signs rather than numbered doors",
+        "accessCondition": "Enter The Outdoors through the released Hotel route and its locked, vine-covered entrance.",
+        "purpose": "Starts the Outdoors run and supplies the tools needed for the first gates and vines.",
+        "puzzleOrLoot": "Open the gate, check the toolshed for Shears, and search the fountain area for the route forward.",
+        "hazardsOrEntities": "Caws are associated with the fountain. Grass, vines, and open paths can expose the player to Outdoors hazards.",
+        "survivalTip": "Take the Shears if they appear and use the signs to track progress instead of looking for fake door numbers.",
+        "relatedItems": "Shears, Multitool, Lantern, Skeleton Key",
+        "cardSummary": "The Outdoors starting area. Grab the toolshed's Shears and use the signs to find the first gate."
+      },
+      "system": {
+        "slug": "the-small-courtyard",
+        "section": "The Outdoors",
+        "sortOrder": 410,
+        "image": "/DOORS/locations/the-small-courtyard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Clearing",
+        "floor": "The Outdoors",
+        "locationType": "Chase start",
+        "route": "Around the middle of The Outdoors, tracked by meters and signs",
+        "accessCondition": "Follow the gates and paths from The Small Courtyard.",
+        "purpose": "Starts the Eyestalk chase and changes the route from open garden exploration to a forced escape.",
+        "puzzleOrLoot": "Open the gate, follow the correct path through the clearing, and cross the outdoor obstacles.",
+        "hazardsOrEntities": "Eyestalk, Groundskeeper, Snare, rivers, bridges, and blocked paths.",
+        "survivalTip": "Keep a light ready and move decisively once Eyestalk forms. Use the route markers instead of stopping in open ground.",
+        "relatedItems": "Flashlight, Vitamins, Lantern, Compass",
+        "cardSummary": "The Outdoors chase trigger. Once Eyestalk forms, follow the route and keep moving through the trees and bridges."
+      },
+      "system": {
+        "slug": "the-clearing",
+        "section": "The Outdoors",
+        "sortOrder": 420,
+        "image": "/DOORS/locations/the-clearing.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Mill",
+        "floor": "The Outdoors",
+        "locationType": "Service stop",
+        "route": "Late Outdoors route, before The Hedge Maze",
+        "accessCondition": "Reach the late garden path after The Clearing and its chase sequence.",
+        "purpose": "Provides Grampy's Lotus service and another chance to collect tools before the final maze.",
+        "puzzleOrLoot": "Give Grampy eight Lotus Petals to create a Lotus, and check the mill and toolshed for useful supplies.",
+        "hazardsOrEntities": "The late Outdoors route can still include Monument, Surge, Snare, and other terrain hazards.",
+        "survivalTip": "Search the mill before leaving, but do not linger if the route is active. Keep enough light for the maze ahead.",
+        "relatedItems": "Lotus Petals, Lotus, Shears, Lantern, Compass",
+        "cardSummary": "The Outdoors' late service stop. Visit Grampy for a Lotus and stock up before the final maze."
+      },
+      "system": {
+        "slug": "the-mill",
+        "section": "The Outdoors",
+        "sortOrder": 430,
+        "image": "/DOORS/locations/the-mill.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Hedge Maze",
+        "floor": "The Outdoors",
+        "locationType": "Final puzzle area",
+        "route": "Last 250m of The Outdoors, tracked by meters and signs",
+        "accessCondition": "Reach the final Outdoors gate after The Mill.",
+        "purpose": "Ends The Outdoors with a maze, Bramble chase, and World Lotus root puzzle.",
+        "puzzleOrLoot": "Find and activate three guillotines to cut the roots blocking the exit.",
+        "hazardsOrEntities": "Bramble, World Lotus roots, Snare, and the maze's limited sightlines.",
+        "survivalTip": "Use the lamps and closets as landmarks. Stop moving when Bramble's light is on and keep a route back to safety.",
+        "relatedItems": "Compass, Lantern, Shears, guillotines",
+        "cardSummary": "The Outdoors finale. Find three guillotines, avoid Bramble, and cut through the World Lotus roots."
+      },
+      "system": {
+        "slug": "the-hedge-maze",
+        "section": "The Outdoors",
+        "sortOrder": 440,
+        "image": "/DOORS/locations/the-hedge-maze.webp"
+      }
+    }
+  ]
+}

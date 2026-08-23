@@ -67,6 +67,7 @@ import { stealAnEggCollectionGroup } from "./steal-an-egg";
 import { growAChickenFighterCollectionGroup } from "./grow-a-chicken-fighter";
 import { animeOriginsCollectionGroup } from "./anime-origins";
 import { volleyballLegendsCollectionGroup } from "./volleyball-legends";
+import { doorsCollectionGroup } from "./doors";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -138,5 +139,6 @@ export const GAME_COLLECTION_GROUPS = [
   stealAnEggCollectionGroup,
   growAChickenFighterCollectionGroup,
   animeOriginsCollectionGroup,
-  volleyballLegendsCollectionGroup
+  volleyballLegendsCollectionGroup,
+  doorsCollectionGroup
 ] satisfies GameCollectionGroup[];
