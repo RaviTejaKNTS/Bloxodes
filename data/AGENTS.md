@@ -81,6 +81,9 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - `data/Storage Hunters Open World/*`
   - Dataset-backed Storage Hunters: Open World wiki/collection content, including accessories, shop upgrades, titles, achievements, and auction zones.
   - Matching row images live under `apps/web/public/Storage Hunters Open World/` where clean item or achievement art exists. Titles and auction zones are currently text-only because no clean row-level images were found.
+- `data/Volleyball Legends/*`
+  - Dataset-backed Volleyball Legends wiki/collection content for styles, abilities, and ball skins.
+  - Matching row images live under `apps/web/public/Volleyball Legends/`. Ball skins use WebP files; Gamer Ball and Phonk Ball intentionally share the same source-backed image.
 - `data/Fisch/fish.json`
   - Fisch collection content.
 - `data/Color Codes/roblox-color-codes.json`

@@ -1,0 +1,1342 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Volleyball Legends",
+    "gameSlug": "volleyball-legends",
+    "collection": "styles",
+    "route": "/wiki/volleyball-legends/styles",
+    "catalogCode": "volleyball-legends-styles",
+    "itemFields": [
+      "rarity",
+      "role",
+      "availability",
+      "block",
+      "bump",
+      "dive",
+      "jump",
+      "serve",
+      "set",
+      "speed",
+      "spike",
+      "tilt",
+      "spin",
+      "wall",
+      "special",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "role",
+      "availability",
+      "block",
+      "bump",
+      "dive",
+      "jump",
+      "serve",
+      "set",
+      "speed",
+      "spike",
+      "tilt",
+      "spin",
+      "wall",
+      "special",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Rarity",
+      "sectionOrder": [
+        "Common Styles",
+        "Rare Styles",
+        "Legendary Styles",
+        "Godly Styles",
+        "Ultra Styles",
+        "Secret Styles",
+        "Evo Styles"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "role",
+        "availability"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "role",
+        "availability",
+        "block",
+        "bump",
+        "dive",
+        "jump",
+        "serve",
+        "set",
+        "speed",
+        "spike",
+        "tilt",
+        "spin",
+        "wall",
+        "special"
+      ],
+      "tableFields": [
+        "rarity",
+        "role",
+        "availability",
+        "block",
+        "bump",
+        "dive",
+        "jump",
+        "serve",
+        "set",
+        "speed",
+        "spike",
+        "tilt",
+        "spin",
+        "wall",
+        "special",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "role": {
+          "kind": "normal",
+          "label": "Role",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "block": {
+          "kind": "chip",
+          "label": "Block",
+          "omitWhenEmpty": true
+        },
+        "bump": {
+          "kind": "chip",
+          "label": "Bump",
+          "omitWhenEmpty": true
+        },
+        "dive": {
+          "kind": "chip",
+          "label": "Dive",
+          "omitWhenEmpty": true
+        },
+        "jump": {
+          "kind": "chip",
+          "label": "Jump",
+          "omitWhenEmpty": true
+        },
+        "serve": {
+          "kind": "chip",
+          "label": "Serve",
+          "omitWhenEmpty": true
+        },
+        "set": {
+          "kind": "chip",
+          "label": "Set",
+          "omitWhenEmpty": true
+        },
+        "speed": {
+          "kind": "chip",
+          "label": "Speed",
+          "omitWhenEmpty": true
+        },
+        "spike": {
+          "kind": "chip",
+          "label": "Spike",
+          "omitWhenEmpty": true
+        },
+        "tilt": {
+          "kind": "chip",
+          "label": "Tilt",
+          "omitWhenEmpty": true
+        },
+        "spin": {
+          "kind": "chip",
+          "label": "Spin",
+          "omitWhenEmpty": true
+        },
+        "wall": {
+          "kind": "chip",
+          "label": "Wall",
+          "omitWhenEmpty": true
+        },
+        "special": {
+          "kind": "detail",
+          "label": "Special",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Hinto",
+        "rarity": "Common",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "50%",
+        "dive": "50%",
+        "jump": "50%",
+        "serve": "50%",
+        "set": "50%",
+        "speed": "50%",
+        "spike": "50%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Common style from the standard style pool."
+      },
+      "system": {
+        "slug": "hinto",
+        "section": "Common Styles",
+        "sortOrder": 1,
+        "image": "/Volleyball Legends/Styles/hinto.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tonkura",
+        "rarity": "Common",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "30%",
+        "bump": "50%",
+        "dive": "40%",
+        "jump": "20%",
+        "serve": "30%",
+        "set": "30%",
+        "speed": "70%",
+        "spike": null,
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Common style from the standard style pool."
+      },
+      "system": {
+        "slug": "tonkura",
+        "section": "Common Styles",
+        "sortOrder": 2,
+        "image": "/Volleyball Legends/Styles/tonkura.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hakochi",
+        "rarity": "Common",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "60%",
+        "bump": "50%",
+        "dive": "45%",
+        "jump": "70%",
+        "serve": "10%",
+        "set": "50%",
+        "speed": "40%",
+        "spike": "30%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Common style from the standard style pool."
+      },
+      "system": {
+        "slug": "hakochi",
+        "section": "Common Styles",
+        "sortOrder": 3,
+        "image": "/Volleyball Legends/Styles/hakochi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kishoti",
+        "rarity": "Common",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "40%",
+        "bump": "70%",
+        "dive": "75%",
+        "jump": "40%",
+        "serve": "25%",
+        "set": "20%",
+        "speed": "70%",
+        "spike": "30%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Common style from the standard style pool."
+      },
+      "system": {
+        "slug": "kishoti",
+        "section": "Common Styles",
+        "sortOrder": 4,
+        "image": "/Volleyball Legends/Styles/kishoti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sagumi",
+        "rarity": "Common",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "45%",
+        "dive": "55%",
+        "jump": "50%",
+        "serve": "50%",
+        "set": "75%",
+        "speed": "45%",
+        "spike": "70%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Common style from the standard style pool."
+      },
+      "system": {
+        "slug": "sagumi",
+        "section": "Common Styles",
+        "sortOrder": 5,
+        "image": "/Volleyball Legends/Styles/sagumi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yachikusai",
+        "rarity": "Common",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "70%",
+        "dive": "50%",
+        "jump": "75%",
+        "serve": "75%",
+        "set": "30%",
+        "speed": "50%",
+        "spike": "40%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Common style from the standard style pool."
+      },
+      "system": {
+        "slug": "yachikusai",
+        "section": "Common Styles",
+        "sortOrder": 6,
+        "image": "/Volleyball Legends/Styles/yachikusai.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ninyoku",
+        "rarity": "Rare",
+        "role": "Libero",
+        "availability": "Permanent / standard pool",
+        "block": null,
+        "bump": null,
+        "dive": null,
+        "jump": null,
+        "serve": null,
+        "set": null,
+        "speed": null,
+        "spike": null,
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Rare libero style in the standard pool."
+      },
+      "system": {
+        "slug": "ninyoku",
+        "section": "Rare Styles",
+        "sortOrder": 7,
+        "image": "/Volleyball Legends/Styles/ninyoku.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tsuchiro",
+        "rarity": "Rare",
+        "role": "Setter / Blocker",
+        "availability": "Permanent / standard pool",
+        "block": null,
+        "bump": null,
+        "dive": null,
+        "jump": null,
+        "serve": null,
+        "set": null,
+        "speed": null,
+        "spike": null,
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Rare setter and blocker style in the standard pool."
+      },
+      "system": {
+        "slug": "tsuchiro",
+        "section": "Rare Styles",
+        "sortOrder": 8,
+        "image": "/Volleyball Legends/Styles/tsuchiro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Oyatsu",
+        "rarity": "Rare",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "70%",
+        "dive": "45%",
+        "jump": "75%",
+        "serve": "70%",
+        "set": "40%",
+        "speed": "50%",
+        "spike": "40%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Rare style from the standard style pool."
+      },
+      "system": {
+        "slug": "oyatsu",
+        "section": "Rare Styles",
+        "sortOrder": 9,
+        "image": "/Volleyball Legends/Styles/oyatsu.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Imaezi",
+        "rarity": "Rare",
+        "role": null,
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "40%",
+        "dive": "45%",
+        "jump": "75%",
+        "serve": "50%",
+        "set": "50%",
+        "speed": "40%",
+        "spike": "70%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Rare style from the standard style pool."
+      },
+      "system": {
+        "slug": "imaezi",
+        "section": "Rare Styles",
+        "sortOrder": 10,
+        "image": "/Volleyball Legends/Styles/imaezi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Uchikai",
+        "rarity": "Legendary",
+        "role": "Spiker",
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "40%",
+        "dive": "50%",
+        "jump": "70%",
+        "serve": "50%",
+        "set": "40%",
+        "speed": "50%",
+        "spike": "100%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Legendary spiker from the standard style pool."
+      },
+      "system": {
+        "slug": "uchikai",
+        "section": "Legendary Styles",
+        "sortOrder": 11,
+        "image": "/Volleyball Legends/Styles/uchikai.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kyoshin",
+        "rarity": "Legendary",
+        "role": "Setter",
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "65%",
+        "dive": "80%",
+        "jump": "70%",
+        "serve": "10%",
+        "set": "70%",
+        "speed": "50%",
+        "spike": "40%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Legendary setter from the standard style pool."
+      },
+      "system": {
+        "slug": "kyoshin",
+        "section": "Legendary Styles",
+        "sortOrder": 12,
+        "image": "/Volleyball Legends/Styles/kyoshin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sazuroku",
+        "rarity": "Legendary",
+        "role": "Receiver",
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "70%",
+        "dive": "80%",
+        "jump": "50%",
+        "serve": "10%",
+        "set": "75%",
+        "speed": "100%",
+        "spike": "40%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Legendary receiver with high speed and receive stats."
+      },
+      "system": {
+        "slug": "sazuroku",
+        "section": "Legendary Styles",
+        "sortOrder": 13,
+        "image": "/Volleyball Legends/Styles/sazuroku.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Azmei",
+        "rarity": "Legendary",
+        "role": "Spiker",
+        "availability": "Permanent / standard pool",
+        "block": "30%",
+        "bump": "50%",
+        "dive": "45%",
+        "jump": "70%",
+        "serve": "90%",
+        "set": "20%",
+        "speed": "35%",
+        "spike": "90%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Legendary spiker with strong serve and spike stats."
+      },
+      "system": {
+        "slug": "azmei",
+        "section": "Legendary Styles",
+        "sortOrder": 14,
+        "image": "/Volleyball Legends/Styles/azmei.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yokai",
+        "rarity": "Legendary",
+        "role": "Libero",
+        "availability": "Permanent / standard pool",
+        "block": "70%",
+        "bump": "85%",
+        "dive": "85%",
+        "jump": "100%",
+        "serve": "10%",
+        "set": "50%",
+        "speed": "100%",
+        "spike": "30%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Legendary libero with high speed, bump, and dive stats."
+      },
+      "system": {
+        "slug": "yokai",
+        "section": "Legendary Styles",
+        "sortOrder": 15,
+        "image": "/Volleyball Legends/Styles/yokai.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kozei",
+        "rarity": "Legendary",
+        "role": "All-rounder",
+        "availability": "Permanent / standard pool",
+        "block": "70%",
+        "bump": "70%",
+        "dive": "40%",
+        "jump": "100%",
+        "serve": "80%",
+        "set": "35%",
+        "speed": "10%",
+        "spike": "80%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Legendary all-rounder with strong jump, serve, and spike stats."
+      },
+      "system": {
+        "slug": "kozei",
+        "section": "Legendary Styles",
+        "sortOrder": 16,
+        "image": "/Volleyball Legends/Styles/kozei.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yomosuke",
+        "rarity": "Legendary",
+        "role": "Receiver",
+        "availability": "Permanent / standard pool",
+        "block": "50%",
+        "bump": "75%",
+        "dive": "80%",
+        "jump": "50%",
+        "serve": "25%",
+        "set": "35%",
+        "speed": "50%",
+        "spike": "70%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Legendary receiver with strong bump and dive stats."
+      },
+      "system": {
+        "slug": "yomosuke",
+        "section": "Legendary Styles",
+        "sortOrder": 17,
+        "image": "/Volleyball Legends/Styles/yomosuke.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kyamo",
+        "rarity": "Godly",
+        "role": "Setter / Server",
+        "availability": "Permanent / standard pool",
+        "block": "80%",
+        "bump": "45%",
+        "dive": "70%",
+        "jump": "80%",
+        "serve": "80%",
+        "set": "100%",
+        "speed": "70%",
+        "spike": "50%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Godly setter and server from the standard style pool."
+      },
+      "system": {
+        "slug": "kyamo",
+        "section": "Godly Styles",
+        "sortOrder": 18,
+        "image": "/Volleyball Legends/Styles/kyamo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bakuri",
+        "rarity": "Godly",
+        "role": "Spiker / Server",
+        "availability": "Permanent / standard pool",
+        "block": "65%",
+        "bump": "50%",
+        "dive": "45%",
+        "jump": "100%",
+        "serve": "80%",
+        "set": "30%",
+        "speed": "15%",
+        "spike": "100%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Godly spiker and server with max jump and spike stats."
+      },
+      "system": {
+        "slug": "bakuri",
+        "section": "Godly Styles",
+        "sortOrder": 19,
+        "image": "/Volleyball Legends/Styles/bakuri.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Okazu",
+        "rarity": "Godly",
+        "role": "Setter / Server",
+        "availability": "Permanent / standard pool",
+        "block": "90%",
+        "bump": "40%",
+        "dive": "45%",
+        "jump": "100%",
+        "serve": "100%",
+        "set": "90%",
+        "speed": "40%",
+        "spike": "50%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Godly setter and server with max jump and serve stats."
+      },
+      "system": {
+        "slug": "okazu",
+        "section": "Godly Styles",
+        "sortOrder": 20,
+        "image": "/Volleyball Legends/Styles/okazu.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hirakumi",
+        "rarity": "Godly",
+        "role": "Blocker",
+        "availability": "Permanent / standard pool",
+        "block": "100%",
+        "bump": "40%",
+        "dive": "45%",
+        "jump": "100%",
+        "serve": "90%",
+        "set": "50%",
+        "speed": "15%",
+        "spike": "50%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A Godly blocker with max block and jump stats."
+      },
+      "system": {
+        "slug": "hirakumi",
+        "section": "Godly Styles",
+        "sortOrder": 21,
+        "image": "/Volleyball Legends/Styles/hirakumi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hakka",
+        "rarity": "Ultra",
+        "role": "Setter",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "30%",
+        "dive": "40%",
+        "jump": "100%",
+        "serve": "60%",
+        "set": "100%",
+        "speed": "70%",
+        "spike": "70%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Creates a clone that can be controlled separately.",
+        "cardSummary": "A limited Ultra setter with a clone-based special."
+      },
+      "system": {
+        "slug": "hakka",
+        "section": "Ultra Styles",
+        "sortOrder": 22,
+        "image": "/Volleyball Legends/Styles/hakka.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Akari",
+        "rarity": "Ultra",
+        "role": "Spiker",
+        "availability": "Limited",
+        "block": "60%",
+        "bump": "40%",
+        "dive": "50%",
+        "jump": "100%",
+        "serve": "70%",
+        "set": "40%",
+        "speed": "90%",
+        "spike": "100%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Can dash forward for a quick attack.",
+        "cardSummary": "A limited Ultra spiker with a dash attack."
+      },
+      "system": {
+        "slug": "akari",
+        "section": "Ultra Styles",
+        "sortOrder": 23,
+        "image": "/Volleyball Legends/Styles/akari.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ronin",
+        "rarity": "Ultra",
+        "role": "Spiker",
+        "availability": "Limited",
+        "block": "40%",
+        "bump": "40%",
+        "dive": "40%",
+        "jump": "100%",
+        "serve": "80%",
+        "set": "40%",
+        "speed": "40%",
+        "spike": "100%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A limited Ultra spiker with max jump and spike stats."
+      },
+      "system": {
+        "slug": "ronin",
+        "section": "Ultra Styles",
+        "sortOrder": 24,
+        "image": "/Volleyball Legends/Styles/ronin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sanju",
+        "rarity": "Secret",
+        "role": "Spiker",
+        "availability": "Permanent Secret",
+        "block": "50%",
+        "bump": "50%",
+        "dive": "50%",
+        "jump": "100%",
+        "serve": "30%",
+        "set": "40%",
+        "speed": "30%",
+        "spike": "100%",
+        "tilt": "100%+",
+        "spin": null,
+        "wall": null,
+        "special": "Can change the ball's tilt from side to side.",
+        "cardSummary": "A permanent Secret spiker built around side-to-side tilt changes."
+      },
+      "system": {
+        "slug": "sanju",
+        "section": "Secret Styles",
+        "sortOrder": 25,
+        "image": "/Volleyball Legends/Styles/sanju.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kisuki",
+        "rarity": "Secret",
+        "role": "Receiver",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "100%",
+        "dive": "100%+",
+        "jump": "75%",
+        "serve": "75%",
+        "set": "100%",
+        "speed": "100%",
+        "spike": "30%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Has a larger charged dive than normal receivers.",
+        "cardSummary": "A limited Secret receiver with a larger charged dive."
+      },
+      "system": {
+        "slug": "kisuki",
+        "section": "Secret Styles",
+        "sortOrder": 26,
+        "image": "/Volleyball Legends/Styles/kisuki.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Timeskip Hinto",
+        "rarity": "Secret",
+        "role": "Power spiker",
+        "availability": "Limited",
+        "block": "50%",
+        "bump": "40%",
+        "dive": "50%",
+        "jump": "100%",
+        "serve": "90%",
+        "set": "40%",
+        "speed": "70%",
+        "spike": "90%-130%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A limited Secret power spiker with a strong jump and spike profile."
+      },
+      "system": {
+        "slug": "timeskip-hinto",
+        "section": "Secret Styles",
+        "sortOrder": 27,
+        "image": "/Volleyball Legends/Styles/timeskip-hinto.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Timeskip Kyamo",
+        "rarity": "Secret",
+        "role": "Setter",
+        "availability": "Limited",
+        "block": "50%",
+        "bump": "35%",
+        "dive": "60%",
+        "jump": "90%",
+        "serve": "100%",
+        "set": "100%",
+        "speed": "85%",
+        "spike": "30%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A limited Secret setter with max serve and set stats."
+      },
+      "system": {
+        "slug": "timeskip-kyamo",
+        "section": "Secret Styles",
+        "sortOrder": 28,
+        "image": "/Volleyball Legends/Styles/timeskip-kyamo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Timeskip Okazu",
+        "rarity": "Secret",
+        "role": "Setter",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "30%",
+        "dive": "40%",
+        "jump": "100%",
+        "serve": "100%",
+        "set": "100%",
+        "speed": "80%",
+        "spike": "60%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A limited Secret setter with max serve, set, and jump stats."
+      },
+      "system": {
+        "slug": "timeskip-okazu",
+        "section": "Secret Styles",
+        "sortOrder": 29,
+        "image": "/Volleyball Legends/Styles/timeskip-okazu.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Twins",
+        "rarity": "Secret",
+        "role": "Setter / Server",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "50%",
+        "dive": "70%",
+        "jump": "60%",
+        "serve": "100%",
+        "set": "100%",
+        "speed": "85%",
+        "spike": "35%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Can switch between setting and attacking modes.",
+        "cardSummary": "A limited Secret setter and server that can switch between setting and attacking."
+      },
+      "system": {
+        "slug": "the-twins",
+        "section": "Secret Styles",
+        "sortOrder": 30,
+        "image": "/Volleyball Legends/Styles/the-twins.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Taichou",
+        "rarity": "Secret",
+        "role": "Setter",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "35%",
+        "dive": "60%",
+        "jump": "100%",
+        "serve": "80%",
+        "set": "100%",
+        "speed": "90%",
+        "spike": "40%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "A charged set can boost the next attack.",
+        "cardSummary": "A limited Secret setter whose charged sets boost the next attack."
+      },
+      "system": {
+        "slug": "taichou",
+        "section": "Secret Styles",
+        "sortOrder": 31,
+        "image": "/Volleyball Legends/Styles/taichou.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kazana",
+        "rarity": "Secret",
+        "role": "Spiker",
+        "availability": "Limited",
+        "block": "25%",
+        "bump": "100%",
+        "dive": "70%",
+        "jump": "100%+",
+        "serve": "80%",
+        "set": "35%",
+        "speed": "65%",
+        "spike": "100%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Can charge a higher jump before attacking.",
+        "cardSummary": "A limited Secret spiker with a chargeable high jump."
+      },
+      "system": {
+        "slug": "kazana",
+        "section": "Secret Styles",
+        "sortOrder": 32,
+        "image": "/Volleyball Legends/Styles/kazana.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mikage",
+        "rarity": "Secret",
+        "role": "Blocker",
+        "availability": "Limited",
+        "block": "100%",
+        "bump": "20%",
+        "dive": "40%",
+        "jump": "100%",
+        "serve": "65%",
+        "set": "20%",
+        "speed": "30%",
+        "spike": "85%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Charges a larger ghost-arm block.",
+        "cardSummary": "A limited Secret blocker that charges a larger ghost-arm block."
+      },
+      "system": {
+        "slug": "mikage",
+        "section": "Secret Styles",
+        "sortOrder": 33,
+        "image": "/Volleyball Legends/Styles/mikage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jinko",
+        "rarity": "Secret",
+        "role": "Curve spiker",
+        "availability": "Limited",
+        "block": "50%",
+        "bump": "50%",
+        "dive": "50%",
+        "jump": "100%",
+        "serve": "100%+",
+        "set": "40%",
+        "speed": "30%",
+        "spike": "100%",
+        "tilt": null,
+        "spin": "100%+",
+        "wall": null,
+        "special": "Can curve attacks with spin.",
+        "cardSummary": "A limited Secret curve spiker that bends attacks with spin."
+      },
+      "system": {
+        "slug": "jinko",
+        "section": "Secret Styles",
+        "sortOrder": 34,
+        "image": "/Volleyball Legends/Styles/jinko.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hidari",
+        "rarity": "Secret",
+        "role": "Left-handed spiker",
+        "availability": "Limited",
+        "block": "50%",
+        "bump": "50%",
+        "dive": "50%",
+        "jump": "100%",
+        "serve": "30%-110%",
+        "set": "45%",
+        "speed": "35%",
+        "spike": "60%-110%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": null,
+        "cardSummary": "A limited Secret left-handed spiker with variable serve and spike ranges."
+      },
+      "system": {
+        "slug": "hidari",
+        "section": "Secret Styles",
+        "sortOrder": 35,
+        "image": "/Volleyball Legends/Styles/hidari.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feiko",
+        "rarity": "Secret",
+        "role": "Setter",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "30%",
+        "dive": "60%",
+        "jump": "100%",
+        "serve": "80%",
+        "set": "100%",
+        "speed": null,
+        "spike": "40%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Can turn a set into a sharp dump over the net.",
+        "cardSummary": "A limited Secret setter that can turn a set into a sharp dump."
+      },
+      "system": {
+        "slug": "feiko",
+        "section": "Secret Styles",
+        "sortOrder": 36,
+        "image": "/Volleyball Legends/Styles/feiko.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yogan",
+        "rarity": "Secret",
+        "role": "All-rounder",
+        "availability": "Limited",
+        "block": "50%",
+        "bump": "50%",
+        "dive": "50%",
+        "jump": "100%",
+        "serve": "50%",
+        "set": "50%",
+        "speed": "40%",
+        "spike": "80%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Builds Rage Mode through successful receives.",
+        "cardSummary": "A limited Secret all-rounder that builds Rage Mode through receives."
+      },
+      "system": {
+        "slug": "yogan",
+        "section": "Secret Styles",
+        "sortOrder": 37,
+        "image": "/Volleyball Legends/Styles/yogan.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kijo",
+        "rarity": "Secret",
+        "role": "Spiker",
+        "availability": "Limited",
+        "block": "0%",
+        "bump": null,
+        "dive": null,
+        "jump": null,
+        "serve": null,
+        "set": null,
+        "speed": null,
+        "spike": null,
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Charges a two-stage tilt for directional hits.",
+        "cardSummary": "A limited Secret spiker with a chargeable two-stage tilt."
+      },
+      "system": {
+        "slug": "kijo",
+        "section": "Secret Styles",
+        "sortOrder": 38,
+        "image": "/Volleyball Legends/Styles/kijo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ibara",
+        "rarity": "Secret",
+        "role": "All-rounder",
+        "availability": "Limited",
+        "block": "70%",
+        "bump": "30%",
+        "dive": "40%",
+        "jump": "100%",
+        "serve": "70%",
+        "set": "40%",
+        "speed": "30%",
+        "spike": "100%",
+        "tilt": "100%",
+        "spin": null,
+        "wall": "100%",
+        "special": "Creates vine walls that block and ricochet the ball.",
+        "cardSummary": "A limited Secret all-rounder with vine walls that block and ricochet the ball."
+      },
+      "system": {
+        "slug": "ibara",
+        "section": "Secret Styles",
+        "sortOrder": 39,
+        "image": "/Volleyball Legends/Styles/ibara.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kumo",
+        "rarity": "Secret",
+        "role": "Libero / Setter",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "100%",
+        "dive": "100%",
+        "jump": "80%",
+        "serve": "80%",
+        "set": "100%",
+        "speed": "100%",
+        "spike": "50%",
+        "tilt": "100%",
+        "spin": null,
+        "wall": "100%",
+        "special": "Uses Moonball bumps and can boost a teammate's next hit.",
+        "cardSummary": "A limited Secret libero and setter with Moonball bumps and a teammate boost."
+      },
+      "system": {
+        "slug": "kumo",
+        "section": "Secret Styles",
+        "sortOrder": 40,
+        "image": "/Volleyball Legends/Styles/kumo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Riku",
+        "rarity": "Secret",
+        "role": "Spiker / Support",
+        "availability": "Limited",
+        "block": "20%",
+        "bump": "65%",
+        "dive": "30%",
+        "jump": "100%",
+        "serve": "60%",
+        "set": "20%",
+        "speed": "30%",
+        "spike": "100%",
+        "tilt": "100%",
+        "spin": null,
+        "wall": "100%",
+        "special": "Creates holographic walls that redirect the ball.",
+        "cardSummary": "A limited Secret support style with holographic walls that redirect the ball."
+      },
+      "system": {
+        "slug": "riku",
+        "section": "Secret Styles",
+        "sortOrder": 41,
+        "image": "/Volleyball Legends/Styles/riku.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roketto",
+        "rarity": "Secret",
+        "role": "Offense / Support",
+        "availability": "Limited",
+        "block": "40%",
+        "bump": "40%",
+        "dive": "40%",
+        "jump": "100%",
+        "serve": "80%",
+        "set": "40%",
+        "speed": "40%",
+        "spike": "100%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Uses a jetpack to stall in the air before contacting the ball.",
+        "cardSummary": "A limited Secret offense and support style that uses a jetpack to stall in the air."
+      },
+      "system": {
+        "slug": "roketto",
+        "section": "Secret Styles",
+        "sortOrder": 42,
+        "image": "/Volleyball Legends/Styles/roketto.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Encho",
+        "rarity": "Evo",
+        "role": null,
+        "availability": "Limited",
+        "block": "60%",
+        "bump": "60%",
+        "dive": "65%",
+        "jump": "100%",
+        "serve": "80%",
+        "set": "60%",
+        "speed": "50%",
+        "spike": "90%",
+        "tilt": null,
+        "spin": null,
+        "wall": null,
+        "special": "Stretch has a six-level upgrade path.",
+        "cardSummary": "An Evo style with Stretch and a six-level upgrade path."
+      },
+      "system": {
+        "slug": "encho",
+        "section": "Evo Styles",
+        "sortOrder": 43,
+        "image": "/Volleyball Legends/Styles/encho.webp"
+      }
+    }
+  ]
+}

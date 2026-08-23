@@ -680,7 +680,13 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "evade-emotes": 26_000,
   "evade-cosmetics": 26_000,
   "evade-unusuals": 26_000,
-  "evade-nametags": 30_000
+  "evade-nametags": 30_000,
+  // Volleyball Legends styles combine 43 image cards with stat-heavy metadata;
+  // keep the initial page below the HTML warning threshold and exercise section pagination.
+  "volleyball-legends-styles": 30_000,
+  // Volleyball Legends ball skins combine 176 image cards with route and period fields;
+  // split rarity sections early enough to keep every rendered page below the HTML warning threshold.
+  "volleyball-legends-ball-skins": 30_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -704,7 +710,8 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "evade-emotes": 26_000,
   "evade-cosmetics": 26_000,
   "evade-unusuals": 26_000,
-  "evade-nametags": 30_000
+  "evade-nametags": 30_000,
+  "volleyball-legends-ball-skins": 30_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

@@ -212,6 +212,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Storage Hunters Open World/*.json`
   - Local Storage Hunters: Open World datasets for wiki/collection page work, including accessories, shop upgrades, titles, achievements, and auction zones.
   - Matching row images live under `apps/web/public/Storage Hunters Open World/` where clean item or achievement art exists. Titles and auction zones stay text-only until clean row-level images are available.
+- `data/Volleyball Legends/*.json`
+  - Local Volleyball Legends datasets for wiki/collection page work, including styles, abilities, and ball skins.
+  - Matching row images live under `apps/web/public/Volleyball Legends/`. Ball skins use WebP files; Gamer Ball and Phonk Ball intentionally share one source-backed image.
 - `data/Wizard Alchemy/quiz.json`
   - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
   - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.
