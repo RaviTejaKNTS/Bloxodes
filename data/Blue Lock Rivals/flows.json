@@ -1,0 +1,548 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blue Lock: Rivals",
+    "gameSlug": "blue-lock-rivals",
+    "collection": "flows",
+    "route": "/wiki/blue-lock-rivals/flows",
+    "catalogCode": "blue-lock-rivals-flows",
+    "itemFields": [
+      "rarity",
+      "linked_style",
+      "class",
+      "buffs",
+      "obtainment",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "linked_style",
+      "class",
+      "buffs",
+      "obtainment",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Rarity",
+      "sectionOrder": [
+        "Master flows",
+        "World Class flows",
+        "Mythic flows",
+        "Legendary flows",
+        "Epic flows",
+        "Rare flows"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "linked_style",
+        "class"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "linked_style",
+        "class",
+        "buffs",
+        "obtainment",
+        "availability",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "rarity",
+        "linked_style",
+        "class",
+        "buffs",
+        "obtainment",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "linked_style": {
+          "kind": "plain",
+          "label": "Linked style",
+          "omitWhenEmpty": true
+        },
+        "class": {
+          "kind": "highlight",
+          "label": "Role",
+          "omitWhenEmpty": true
+        },
+        "buffs": {
+          "kind": "detail",
+          "label": "Buffs"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How to get it"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Godspeed",
+        "rarity": "Master",
+        "linked_style": "Loki",
+        "class": "Hybrid",
+        "buffs": "Boosts velocity and stamina regeneration while reducing skill cooldown and stamina drain.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A flexible Flow for fast movement, stamina control, and quick steals on or off the ball."
+      },
+      "system": {
+        "slug": "godspeed",
+        "section": "Master flows",
+        "sortOrder": 1,
+        "image": "/Blue%20Lock%20Rivals/flows/godspeed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Dancer",
+        "rarity": "Master",
+        "linked_style": "Lavinho",
+        "class": "Hybrid",
+        "buffs": "Adds dribbles, cuts dribble cooldown, raises ankle-break stun, and boosts running speed with a small shot-power lift.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A dribble-first Master Flow for players who want extra touches and stronger space-making."
+      },
+      "system": {
+        "slug": "butterfly-dancer",
+        "section": "Master flows",
+        "sortOrder": 2,
+        "image": "/Blue%20Lock%20Rivals/flows/butterfly-dancer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Destructive Impulses",
+        "rarity": "World Class",
+        "linked_style": "Rin",
+        "class": "Offensive",
+        "buffs": "Strengthens shots, raises movement speed, and turns basic shots into curved shots.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "An attacking Flow for players who want faster movement and more dangerous curved shots."
+      },
+      "system": {
+        "slug": "destructive-impulses",
+        "section": "World Class flows",
+        "sortOrder": 3,
+        "image": "/Blue%20Lock%20Rivals/flows/destructive-impulses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Emperor",
+        "rarity": "World Class",
+        "linked_style": "Kaiser",
+        "class": "Offensive & Mobility",
+        "buffs": "Raises shot strength and speed while reducing cooldowns.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A direct scoring Flow that pairs shot power with the speed needed to create a finish."
+      },
+      "system": {
+        "slug": "emperor",
+        "section": "World Class flows",
+        "sortOrder": 4,
+        "image": "/Blue%20Lock%20Rivals/flows/emperor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Awakened Genius",
+        "rarity": "World Class",
+        "linked_style": "Sae",
+        "class": "Support & Offensive",
+        "buffs": "Adds dribbles, raises shot strength, and gives teammates extra Flow percentage.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A team-friendly World Class Flow that still gives its user extra dribbles and finishing power."
+      },
+      "system": {
+        "slug": "awakened-genius",
+        "section": "World Class flows",
+        "sortOrder": 5,
+        "image": "/Blue%20Lock%20Rivals/flows/awakened-genius.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ace Eater",
+        "rarity": "World Class",
+        "linked_style": "Don Lorenzo",
+        "class": "Offensive, Defensive & Mobility",
+        "buffs": "Reduces base-ability cooldowns, increases movement speed, and adds a header and a dribble.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A versatile Flow for switching between pressure, recovery, headers, and extra dribble options."
+      },
+      "system": {
+        "slug": "ace-eater",
+        "section": "World Class flows",
+        "sortOrder": 6,
+        "image": "/Blue%20Lock%20Rivals/flows/ace-eater.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Master of all Trades",
+        "rarity": "World Class",
+        "linked_style": "NEL Reo",
+        "class": "Hybrid",
+        "buffs": "Cuts Chameleon cooldown, improves movement and passing power, adds a dribble, and lowers tackle cooldown.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A broad hybrid Flow for NEL Reo players who want passing, movement, tackles, and one more dribble."
+      },
+      "system": {
+        "slug": "master-of-all-trades",
+        "section": "World Class flows",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Singularity",
+        "rarity": "World Class",
+        "linked_style": null,
+        "class": "Offensive & Mobility",
+        "buffs": "Adds ball-control time and a dribble, raises charge and volley power, increases speed, and cuts NEL Nagi's Trap cooldown.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A possession-and-finishing Flow that rewards players who can hold the ball, charge shots, and attack space."
+      },
+      "system": {
+        "slug": "singularity",
+        "section": "World Class flows",
+        "sortOrder": 8,
+        "image": "/Blue%20Lock%20Rivals/flows/singularity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon King",
+        "rarity": "World Class",
+        "linked_style": null,
+        "class": "Offensive, Mobility & Defensive",
+        "buffs": "Strengthens volleys and shots, adds a small speed boost, and extends tackle range.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A sturdy attacking Flow with enough speed and tackle range to stay useful during turnovers."
+      },
+      "system": {
+        "slug": "demon-king",
+        "section": "World Class flows",
+        "sortOrder": 9,
+        "image": "/Blue%20Lock%20Rivals/flows/demon-king.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "King's Authority",
+        "rarity": "Mythic",
+        "linked_style": "King",
+        "class": "Offensive",
+        "buffs": "Cuts tackle cooldown and stamina loss while increasing ankle-break ragdoll time and shot power.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "An aggressive Mythic Flow for turning tackles, ankle breaks, and shot power into pressure."
+      },
+      "system": {
+        "slug": "kings-authority",
+        "section": "Mythic flows",
+        "sortOrder": 10,
+        "image": "/Blue%20Lock%20Rivals/flows/kings-authority.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snake",
+        "rarity": "Mythic",
+        "linked_style": "Aiku",
+        "class": "Defensive",
+        "buffs": "Adds headers, raises header power and movement speed, and reduces tackle cooldown.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A defensive Mythic Flow for winning aerial balls and reaching the next tackle sooner."
+      },
+      "system": {
+        "slug": "snake",
+        "section": "Mythic flows",
+        "sortOrder": 11,
+        "image": "/Blue%20Lock%20Rivals/flows/snake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Freestyle",
+        "rarity": "Mythic",
+        "linked_style": "Bachira",
+        "class": "Offensive",
+        "buffs": "Adds dribbles, shortens dribble cooldown, increases movement speed, and makes ankle breaks stronger.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A dribble-heavy Mythic Flow for players who want to keep chaining pressure instead of giving the ball away."
+      },
+      "system": {
+        "slug": "bee-freestyle",
+        "section": "Mythic flows",
+        "sortOrder": 12,
+        "image": "/Blue%20Lock%20Rivals/flows/bee-freestyle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Contrarian",
+        "rarity": "Mythic",
+        "linked_style": null,
+        "class": "Anchor & Support",
+        "buffs": "Adds a small speed boost, auto-tracks high passes, gives teammates Flow percentage, and speeds up a teammate after a pass.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A support Mythic Flow for players who see passing and teammate timing as part of the attack."
+      },
+      "system": {
+        "slug": "contrarian",
+        "section": "Mythic flows",
+        "sortOrder": 13,
+        "image": "/Blue%20Lock%20Rivals/flows/contrarian.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crow",
+        "rarity": "Legendary",
+        "linked_style": "Karasu",
+        "class": "Hybrid",
+        "buffs": "Raises shot strength and tackle speed.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A simple hybrid Legendary Flow for players who want both stronger shots and quicker defensive pressure."
+      },
+      "system": {
+        "slug": "crow",
+        "section": "Legendary flows",
+        "sortOrder": 14,
+        "image": "/Blue%20Lock%20Rivals/flows/crow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Wings",
+        "rarity": "Legendary",
+        "linked_style": "Shidou",
+        "class": "Offensive & Mobility",
+        "buffs": "Raises shot speed and jump height while strengthening headers.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "Aerial-minded Legendary Flow for players who attack fast shots and headers."
+      },
+      "system": {
+        "slug": "demon-wings",
+        "section": "Legendary flows",
+        "sortOrder": 15,
+        "image": "/Blue%20Lock%20Rivals/flows/demon-wings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trap",
+        "rarity": "Legendary",
+        "linked_style": "Nagi",
+        "class": "Offensive",
+        "buffs": "Adds speed and shot power while receiving the ball and cuts cooldown on Nagi moves.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A receiving-and-finishing Flow that makes Nagi's first touch and follow-up moves more threatening."
+      },
+      "system": {
+        "slug": "trap",
+        "section": "Legendary flows",
+        "sortOrder": 16,
+        "image": "/Blue%20Lock%20Rivals/flows/trap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dribbler",
+        "rarity": "Legendary",
+        "linked_style": "Yukimiya",
+        "class": "Offensive",
+        "buffs": "Raises shot strength and movement speed with the ball while extending dribble duration.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A ball-carrying Legendary Flow for players who want to dribble farther before taking the shot."
+      },
+      "system": {
+        "slug": "dribbler",
+        "section": "Legendary flows",
+        "sortOrder": 17,
+        "image": "/Blue%20Lock%20Rivals/flows/dribbler.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wild Card",
+        "rarity": "Legendary",
+        "linked_style": "Kunigami",
+        "class": "Hybrid",
+        "buffs": "Raises shot power, lowers tackle cooldown, and improves stamina or movement speed.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A flexible Legendary Flow that helps Kunigami-style players attack without losing defensive options."
+      },
+      "system": {
+        "slug": "wild-card",
+        "section": "Legendary flows",
+        "sortOrder": 18,
+        "image": "/Blue%20Lock%20Rivals/flows/wild-card.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Magician Flow",
+        "rarity": "Legendary",
+        "linked_style": "Ness",
+        "class": "Support & Playmaking",
+        "buffs": "Adds a small speed boost, auto-tracks passes, speeds up the receiver, and raises shot power.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A playmaking Legendary Flow that turns accurate passes into faster attacks without giving up shot power."
+      },
+      "system": {
+        "slug": "magician-flow",
+        "section": "Legendary flows",
+        "sortOrder": 19,
+        "image": "/Blue%20Lock%20Rivals/flows/magician-flow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Genius",
+        "rarity": "Epic",
+        "linked_style": "Sae",
+        "class": "Support",
+        "buffs": "Gives teammates extra Flow percentage when activated.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A team-support Epic Flow for players who want the whole side reaching its power window sooner."
+      },
+      "system": {
+        "slug": "genius",
+        "section": "Epic flows",
+        "sortOrder": 20,
+        "image": "/Blue%20Lock%20Rivals/flows/genius.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Monster",
+        "rarity": "Epic",
+        "linked_style": "Bachira",
+        "class": "Offensive",
+        "buffs": "Shortens dribble cooldown and avoids the usual speed reduction while carrying the ball.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A comfortable Epic Flow for dribblers who want to keep their running speed while carrying possession."
+      },
+      "system": {
+        "slug": "monster",
+        "section": "Epic flows",
+        "sortOrder": 21,
+        "image": "/Blue%20Lock%20Rivals/flows/monster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice",
+        "rarity": "Epic",
+        "linked_style": "Hiori",
+        "class": "Support & Passing",
+        "buffs": "Strengthens passes, adds slight pass auto-tracking, and buffs the player who catches the pass.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A passing Epic Flow for keeping the ball moving and making the next receiver more dangerous."
+      },
+      "system": {
+        "slug": "ice",
+        "section": "Epic flows",
+        "sortOrder": 22,
+        "image": "/Blue%20Lock%20Rivals/flows/ice.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stealth",
+        "rarity": "Epic",
+        "linked_style": "Otoya",
+        "class": "Offensive & Mobility",
+        "buffs": "Raises stamina regeneration, shooting speed, movement speed, and shot power.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A mobile Epic Flow for players who want faster runs and quicker shots without running dry."
+      },
+      "system": {
+        "slug": "stealth",
+        "section": "Epic flows",
+        "sortOrder": 23,
+        "image": "/Blue%20Lock%20Rivals/flows/stealth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning",
+        "rarity": "Rare",
+        "linked_style": "Chigiri",
+        "class": "Offensive",
+        "buffs": "Raises shot power, stamina regeneration, shooting speed, and movement speed.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "A beginner-friendly Rare Flow that improves the basics of moving, shooting, and staying active."
+      },
+      "system": {
+        "slug": "lightning",
+        "section": "Rare flows",
+        "sortOrder": 24,
+        "image": "/Blue%20Lock%20Rivals/flows/lightning.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Puzzle",
+        "rarity": "Rare",
+        "linked_style": "Isagi",
+        "class": "Mobility",
+        "buffs": "Increases movement speed.",
+        "obtainment": "Flow Spins; each spin costs 2,000 Yen, with a Legendary Pity after 50 spins.",
+        "availability": "Current spin-pool flow",
+        "cardSummary": "The starter-friendly Rare Flow: a clean movement boost while you learn positioning and timing."
+      },
+      "system": {
+        "slug": "puzzle",
+        "section": "Rare flows",
+        "sortOrder": 25,
+        "image": "/Blue%20Lock%20Rivals/flows/puzzle.webp"
+      }
+    }
+  ]
+}

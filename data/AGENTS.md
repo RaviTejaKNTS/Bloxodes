@@ -35,6 +35,10 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Dataset-backed Brookhaven RP wiki/collection content, including vehicles, houses, jobs, gamepasses, inventory items, roleplay outfits, map themes, weather/disasters, props, emotes, secrets, locations, and game info.
 - `data/Adopt Me/*`
   - Dataset-backed Adopt Me wiki/collection content, including pets, eggs, vehicles, toys, strollers, food, potions, gifts, gift prizes, furniture, house surfaces, gamepasses, star rewards, accessory-shop entries, pet ages, and game info.
+- `data/Blue Lock Rivals/*`
+  - Dataset-backed Blue Lock: Rivals wiki/collection content for Styles and Flows.
+  - Matching local card images live under `apps/web/public/Blue Lock Rivals/` as WebP assets. Styles have complete image coverage; Flows intentionally leave `Master of all Trades` blank because its source page exposes only a generic placeholder.
+  - Keep the datasets focused on source-backed durable gameplay systems. Emotes and goal effects stay out until a reliable current full inventory is available.
 - `data/Blox Fruits/*`
   - Dataset-backed Blox Fruits wiki/collection content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
 - `data/Dress To Impress/*`

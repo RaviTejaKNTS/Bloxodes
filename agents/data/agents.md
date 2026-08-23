@@ -158,6 +158,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Adopt Me/*.json`
   - Local Adopt Me in-game datasets collected from the Adopt Me Wiki and Roblox public APIs for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Adopt Me/`.
+- `data/Blue Lock Rivals/*.json`
+  - Local Blue Lock: Rivals Styles and Flows datasets for wiki/collection page work.
+  - Matching card images live under `apps/web/public/Blue Lock Rivals/` as WebP assets. Styles have 46/46 image coverage; Flows have 24/25 because `Master of all Trades` exposes only a generic placeholder and remains intentionally blank.
+  - Animated Flow source files are represented by visually checked static WebP frames so the unoptimized collection cards do not ship multi-megabyte animations.
+  - Do not add Emotes or Goal Effects datasets until a reliable current full inventory and item-level availability evidence can be reconciled.
 - `data/Blox Fruits/*.json`
   - Local Blox Fruits in-game datasets collected from the Blox Fruits Wiki and Roblox public APIs for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Blox Fruits/`.
