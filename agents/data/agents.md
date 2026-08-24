@@ -149,6 +149,12 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Steal a Brainrot/*.json`
   - Local Steal a Brainrot in-game datasets collected from the Steal a Brainrot Wiki for wiki/collection page work.
   - Matching images live under `apps/web/public/Steal a Brainrot/`.
+- `data/Build A Boat For Treasure/blocks.json`
+  - Local Build A Boat For Treasure blocks dataset collected from the Build A Boat For Treasure Wiki for wiki/collection page work.
+  - Matching optimized WebP card images live under `apps/web/public/Build A Boat For Treasure/blocks/`; source/MIME/conversion evidence lives under the collection workspace.
+- `data/Build A Boat For Treasure/chests.json`
+  - Local Build A Boat For Treasure permanent shop chest-tier dataset collected from the post-Logic-Update structured chest loot module and generated tier pages. It contains exactly the five permanent shop tiers with current pull counts, grouped global rates, and separately labeled gambling-restricted fixed-loot variants. Winter/event chests and unobtainable chest blocks are excluded.
+  - Matching exact optimized WebP tier images live under `apps/web/public/Build A Boat For Treasure/chests/`; source URL/page, MIME, conversion, hash, and byte-budget evidence lives in `tmp/content-workspace/build-a-boat-for-treasure/collections/chests/images.json`.
 - `data/Sailor Piece/*.json`
   - Local Sailor Piece in-game datasets collected from SailorPiece.org for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Sailor Piece/`.

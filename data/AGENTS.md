@@ -29,6 +29,12 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Keep rows source-backed to Grow a Garden 2 specifically. Do not fill crop sell values, sprinkler prices, mutation multipliers, guild rewards, or egg rows from Grow a Garden 1 or unverified calculator assumptions.
 - `data/Steal a Brainrot/*`
   - Dataset-backed Steal a Brainrot wiki/collection content, including brainrots, rarities, mutations, traits, rebirths, gears, lucky blocks, rituals, machines, and fuse-machine entries.
+- `data/Build A Boat For Treasure/blocks.json`
+  - Dataset-backed Build A Boat For Treasure blocks collection with the reconciled 164 present/current-status entries and 36 removed historical entries; verified hitpoints and the five source-verified block weights are retained, while unsupported values remain null.
+  - Matching optimized WebP card images live under `apps/web/public/Build A Boat For Treasure/blocks/`; image source/MIME/conversion evidence lives under the collection workspace.
+- `data/Build A Boat For Treasure/chests.json`
+  - Dataset-backed Build A Boat For Treasure permanent shop chest tiers collection with five post-Logic-Update rows: Common, Uncommon, Rare, Epic, and Legendary. It stores current category pull counts, grouped global drop rates, and narrowly labeled gambling-restricted fixed-loot variants. Winter/event chests and unobtainable chest blocks are excluded.
+  - Matching exact optimized WebP tier card images live under `apps/web/public/Build A Boat For Treasure/chests/`; source URL/page, MIME, conversion, hash, and byte-budget evidence lives in `tmp/content-workspace/build-a-boat-for-treasure/collections/chests/images.json`.
 - `data/Sailor Piece/*`
   - Dataset-backed Sailor Piece wiki/collection content, including fruits, swords, races, bosses, islands, accessories, melee specs, traits, runes, relics, bloodlines, clans, Haki, titles, dungeons, and guilds.
 - `data/Brookhaven RP/*`

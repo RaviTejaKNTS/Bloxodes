@@ -1,0 +1,5026 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Build A Boat For Treasure",
+    "gameSlug": "build-a-boat-for-treasure",
+    "collection": "blocks",
+    "route": "/wiki/build-a-boat-for-treasure/blocks",
+    "catalogCode": "build-a-boat-for-treasure-blocks",
+    "itemFields": [
+      "cardSummary",
+      "category",
+      "role",
+      "hitpoints",
+      "weightBalloons",
+      "cost",
+      "quantity",
+      "currency",
+      "acquisition",
+      "availability"
+    ],
+    "columns": [
+      "name",
+      "category",
+      "role",
+      "hitpoints",
+      "weightBalloons",
+      "cost",
+      "quantity",
+      "currency",
+      "acquisition",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "Block role",
+      "sectionOrder": [
+        "Hull & structure",
+        "Movement & balance",
+        "Controls & logic",
+        "Weapons & defense",
+        "Decoration & utility",
+        "Chest & treasure blocks",
+        "Historical / unavailable"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "category",
+        "role"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "hitpoints",
+        "weightBalloons",
+        "cost",
+        "quantity",
+        "acquisition"
+      ],
+      "tableFields": [
+        "category",
+        "role",
+        "hitpoints",
+        "weightBalloons",
+        "cost",
+        "quantity",
+        "currency",
+        "acquisition",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "category": {
+          "kind": "chip",
+          "label": "Category"
+        },
+        "role": {
+          "kind": "normal",
+          "label": "Role"
+        },
+        "hitpoints": {
+          "kind": "chip",
+          "label": "Hitpoints"
+        },
+        "weightBalloons": {
+          "kind": "chip",
+          "label": "Verified weight (balloons)"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "quantity": {
+          "kind": "chip",
+          "label": "Quantity"
+        },
+        "currency": {
+          "kind": "normal",
+          "label": "Currency"
+        },
+        "acquisition": {
+          "kind": "detail",
+          "label": "Acquisition"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        }
+      }
+    },
+    "sources": [
+      "https://build-a-boat-for-treasure.fandom.com/wiki/Blocks",
+      "https://build-a-boat-for-treasure.fandom.com/wiki/Block_Comparison_Table",
+      "https://build-a-boat-for-treasure.fandom.com/wiki/Block_Weight"
+    ],
+    "sourceCheckedAt": "2026-08-24"
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Gold Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 9 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 9,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "gold-block",
+        "section": "Hull & structure",
+        "sortOrder": 1,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/gold-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidian Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 8 hitpoints. Listed cost: 425 Gold.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 8,
+        "weightBalloons": null,
+        "cost": "425 Gold",
+        "quantity": 50,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "obsidian-block",
+        "section": "Hull & structure",
+        "sortOrder": 2,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/obsidian-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Titanium Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 7 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 7,
+        "weightBalloons": 1.26,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "titanium-block",
+        "section": "Hull & structure",
+        "sortOrder": 3,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/titanium-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Titanium Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 7 hitpoints. Listed cost: 200 Gold.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 7,
+        "weightBalloons": null,
+        "cost": "200 Gold",
+        "quantity": 25,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "titanium-rod",
+        "section": "Hull & structure",
+        "sortOrder": 4,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/titanium-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Marble Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 6 hitpoints. Listed cost: 375 Gold.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 6,
+        "weightBalloons": null,
+        "cost": "375 Gold",
+        "quantity": 50,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "marble-block",
+        "section": "Hull & structure",
+        "sortOrder": 5,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/marble-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Marble Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 6 hitpoints. Listed cost: 187 Gold.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 6,
+        "weightBalloons": null,
+        "cost": "187 Gold",
+        "quantity": 25,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "marble-rod",
+        "section": "Hull & structure",
+        "sortOrder": 6,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/marble-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brick Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 5 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "brick-block",
+        "section": "Hull & structure",
+        "sortOrder": 7,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/brick-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 5 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "coal-block",
+        "section": "Hull & structure",
+        "sortOrder": 8,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/coal-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Concrete Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 5 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "concrete-block",
+        "section": "Hull & structure",
+        "sortOrder": 9,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/concrete-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Concrete Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 5 hitpoints. Listed cost: 175 Gold.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": "175 Gold",
+        "quantity": 25,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "concrete-rod",
+        "section": "Hull & structure",
+        "sortOrder": 10,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/concrete-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Neon Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 5 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Events",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "neon-block",
+        "section": "Hull & structure",
+        "sortOrder": 11,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/neon-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Metal Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 4 hitpoints. Listed cost: 325 Gold.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "325 Gold",
+        "quantity": 50,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "metal-block",
+        "section": "Hull & structure",
+        "sortOrder": 12,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/metal-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Metal Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 4 hitpoints. Listed cost: 162 Gold.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "162 Gold",
+        "quantity": 25,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "metal-rod",
+        "section": "Hull & structure",
+        "sortOrder": 13,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/metal-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bouncy Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 3 hitpoints. Listed cost: 300 Gold.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": "300 Gold",
+        "quantity": 50,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "bouncy-block",
+        "section": "Hull & structure",
+        "sortOrder": 14,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/bouncy-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 3 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "ice-block",
+        "section": "Hull & structure",
+        "sortOrder": 15,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/ice-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rusted Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 3 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "rusted-block",
+        "section": "Hull & structure",
+        "sortOrder": 16,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/rusted-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rusted Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 3 hitpoints.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "rusted-rod",
+        "section": "Hull & structure",
+        "sortOrder": 17,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/rusted-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 2 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "sand-block",
+        "section": "Hull & structure",
+        "sortOrder": 18,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/sand-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stone Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 2 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "stone-block",
+        "section": "Hull & structure",
+        "sortOrder": 19,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/stone-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stone Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 2 hitpoints. Listed cost: 135 Gold.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": "135 Gold",
+        "quantity": 25,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "stone-rod",
+        "section": "Hull & structure",
+        "sortOrder": 20,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/stone-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Corner Wedge",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints. Listed cost: 10 Gold.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "10 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "corner-wedge",
+        "section": "Hull & structure",
+        "sortOrder": 21,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/corner-wedge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fabric Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "fabric-block",
+        "section": "Hull & structure",
+        "sortOrder": 22,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/fabric-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glass Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "glass-block",
+        "section": "Hull & structure",
+        "sortOrder": 23,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/glass-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grass Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "grass-block",
+        "section": "Hull & structure",
+        "sortOrder": 24,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/grass-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plastic Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "plastic-block",
+        "section": "Hull & structure",
+        "sortOrder": 25,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/plastic-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Smooth Wood Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "smooth-wood-block",
+        "section": "Hull & structure",
+        "sortOrder": 26,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/smooth-wood-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Truss",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints. Listed cost: 125 Gold.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "125 Gold",
+        "quantity": 20,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "truss",
+        "section": "Hull & structure",
+        "sortOrder": 27,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/truss.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wedge",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints. Listed cost: 10 Gold.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "10 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "wedge",
+        "section": "Hull & structure",
+        "sortOrder": 28,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/wedge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wood Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": 0.06,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Events",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "wood-block",
+        "section": "Hull & structure",
+        "sortOrder": 29,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/wood-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wood Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints. Listed cost: 125 Gold.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "125 Gold",
+        "quantity": 25,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "wood-rod",
+        "section": "Hull & structure",
+        "sortOrder": 30,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/wood-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Toy Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "toy-block",
+        "section": "Hull & structure",
+        "sortOrder": 31,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/toy-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Block",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 5 hitpoints. The source marks it as unobtainable.",
+        "category": "Material",
+        "role": "Hull and structure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "candy-cane-block",
+        "section": "Hull & structure",
+        "sortOrder": 32,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/candy-cane-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Rod",
+        "cardSummary": "A structural part for shaping or reinforcing a boat. The comparison table lists 5 hitpoints. The source marks it as unobtainable.",
+        "category": "Rod",
+        "role": "Hull and structure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "candy-cane-rod",
+        "section": "Hull & structure",
+        "sortOrder": 33,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/candy-cane-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Back Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 40 hitpoints. Listed cost: 250 Robux.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 40,
+        "weightBalloons": null,
+        "cost": "250 Robux",
+        "quantity": 2,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "huge-back-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 34,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/huge-back-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Front Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 40 hitpoints. Listed cost: 250 Robux.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 40,
+        "weightBalloons": null,
+        "cost": "250 Robux",
+        "quantity": 2,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "huge-front-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 35,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/huge-front-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ultra Jetpack",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 20 hitpoints. Listed cost: 250 ROBUX.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 20,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 3,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "ultra-jetpack",
+        "section": "Movement & balance",
+        "sortOrder": 36,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/ultra-jetpack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ultra Thruster",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 20 hitpoints.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 20,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Events",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "ultra-thruster",
+        "section": "Movement & balance",
+        "sortOrder": 37,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/ultra-thruster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ultra Boat Motor",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 12 hitpoints. Listed cost: 250 ROBUX.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 12,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 3,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "ultra-boat-motor",
+        "section": "Movement & balance",
+        "sortOrder": 38,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/ultra-boat-motor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Back Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. Listed cost: 750 Gold.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": 33.26,
+        "cost": "750 Gold",
+        "quantity": 2,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "back-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 39,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/back-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Front Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. Listed cost: 750 Gold (2 ).",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": "750 Gold (2 )",
+        "quantity": null,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "front-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 40,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/front-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Portal",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. Listed cost: 250 ROBUX.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 8,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "portal",
+        "section": "Movement & balance",
+        "sortOrder": 41,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/portal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Steampunk Jetpack",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "steampunk-jetpack",
+        "section": "Movement & balance",
+        "sortOrder": 42,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/steampunk-jetpack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thruster",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Quests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "thruster",
+        "section": "Movement & balance",
+        "sortOrder": 43,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/thruster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jetpack",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 7 hitpoints. Listed cost: 350 Gold.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 7,
+        "weightBalloons": null,
+        "cost": "350 Gold",
+        "quantity": null,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "jetpack",
+        "section": "Movement & balance",
+        "sortOrder": 44,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/jetpack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boat Motor",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 5 hitpoints. Listed cost: 450 Gold.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": "450 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "boat-motor",
+        "section": "Movement & balance",
+        "sortOrder": 45,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/boat-motor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 5 hitpoints. Listed cost: 750 Gold.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": "750 Gold",
+        "quantity": 4,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Codes"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "wheel",
+        "section": "Movement & balance",
+        "sortOrder": 46,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Balloon Block",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 1 hitpoints.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "balloon-block",
+        "section": "Movement & balance",
+        "sortOrder": 47,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/balloon-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jet Turbine",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 1 hitpoints. Listed cost: 4000 Gold.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "4000 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "jet-turbine",
+        "section": "Movement & balance",
+        "sortOrder": 48,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/jet-turbine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sonic Jet Turbine",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 1 hitpoints. Listed cost: 500 ROBUX.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "500 ROBUX",
+        "quantity": 3,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "sonic-jet-turbine",
+        "section": "Movement & balance",
+        "sortOrder": 49,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/sonic-jet-turbine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Suspension",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 1 hitpoints. Listed cost: {{Flatlist|.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "{{Flatlist|",
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Quests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "suspension",
+        "section": "Movement & balance",
+        "sortOrder": 50,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/suspension.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cookie Back Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 25 hitpoints. Listed cost: 250 ROBUX. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 25,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 2,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Events",
+          "Robux"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "cookie-back-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 51,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/cookie-back-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cookie Front Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 25 hitpoints. Listed cost: 250 ROBUX. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 25,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 2,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Events",
+          "Robux"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "cookie-front-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 52,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/cookie-front-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Back Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. Listed cost: 750 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": "750 Gold",
+        "quantity": 2,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events",
+          "Robux"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "peppermint-back-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 53,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/peppermint-back-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Front Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. Listed cost: 750 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": "750 Gold",
+        "quantity": 2,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events",
+          "Robux"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "peppermint-front-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 54,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/peppermint-front-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Parachute Block",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 1 hitpoints. Listed cost: 45 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "45 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "parachute-block",
+        "section": "Movement & balance",
+        "sortOrder": 55,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/parachute-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Wheel",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 40 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 40,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "huge-wheel",
+        "section": "Movement & balance",
+        "sortOrder": 56,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/huge-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mega Thruster",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 20 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 20,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Robux"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "mega-thruster",
+        "section": "Movement & balance",
+        "sortOrder": 57,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mega-thruster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spooky Thruster",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Quests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "spooky-thruster",
+        "section": "Movement & balance",
+        "sortOrder": 58,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/spooky-thruster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Boat Motor",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "winter-boat-motor",
+        "section": "Movement & balance",
+        "sortOrder": 59,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/winter-boat-motor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Thruster",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 10 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "winter-thruster",
+        "section": "Movement & balance",
+        "sortOrder": 60,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/winter-thruster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Jetpack",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 7 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 7,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "easter-jetpack",
+        "section": "Movement & balance",
+        "sortOrder": 61,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/easter-jetpack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Jetpack",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 7 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 7,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "star-jetpack",
+        "section": "Movement & balance",
+        "sortOrder": 62,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/star-jetpack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Balloon Block",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "star-balloon-block",
+        "section": "Movement & balance",
+        "sortOrder": 63,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/star-balloon-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Jet Turbine",
+        "cardSummary": "A build part for lift, movement, balance, or propulsion. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Movement and balance",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "winter-jet-turbine",
+        "section": "Movement & balance",
+        "sortOrder": 64,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/winter-jet-turbine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Remote Controller",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 7 hitpoints. Listed cost: 150 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 7,
+        "weightBalloons": null,
+        "cost": "150 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "remote-controller",
+        "section": "Controls & logic",
+        "sortOrder": 65,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/remote-controller.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Servo",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 5 hitpoints. Listed cost: 750 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": "750 Gold",
+        "quantity": 2,
+        "currency": "Gold",
+        "acquisition": [
+          "Codes"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "servo",
+        "section": "Controls & logic",
+        "sortOrder": 66,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/servo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Car Seat",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 4 hitpoints.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "car-seat",
+        "section": "Controls & logic",
+        "sortOrder": 67,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/car-seat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pilot Seat",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 4 hitpoints.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "pilot-seat",
+        "section": "Controls & logic",
+        "sortOrder": 68,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/pilot-seat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Piston",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 4 hitpoints. Listed cost: 65 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "65 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "piston",
+        "section": "Controls & logic",
+        "sortOrder": 69,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/piston.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Button",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 2 hitpoints. Listed cost: 75 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": "75 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "button",
+        "section": "Controls & logic",
+        "sortOrder": 70,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/button.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Switch",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 2 hitpoints. Listed cost: 50 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": "50 Gold",
+        "quantity": null,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "switch",
+        "section": "Controls & logic",
+        "sortOrder": 71,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/switch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Display Block",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 96 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "96 Gold",
+        "quantity": 16,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "display-block",
+        "section": "Controls & logic",
+        "sortOrder": 72,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/display-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gate",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 64 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "64 Gold",
+        "quantity": 4,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "gate",
+        "section": "Controls & logic",
+        "sortOrder": 73,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/gate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glue",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 15 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "15 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "glue",
+        "section": "Controls & logic",
+        "sortOrder": 74,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/glue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hinge",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 45 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "45 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "hinge",
+        "section": "Controls & logic",
+        "sortOrder": 75,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/hinge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnet",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 125 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "125 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Codes"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "magnet",
+        "section": "Controls & logic",
+        "sortOrder": 76,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/magnet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rope",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 60 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "60 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "rope",
+        "section": "Controls & logic",
+        "sortOrder": 77,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/rope.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Seat",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 10 Gold.",
+        "category": "Decoration",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "10 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "seat",
+        "section": "Controls & logic",
+        "sortOrder": 78,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/seat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sensor Block",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 25 Gold.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "25 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "sensor-block",
+        "section": "Controls & logic",
+        "sortOrder": 79,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/sensor-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mystery Box",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 10 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 10,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Quests",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "mystery-box",
+        "section": "Controls & logic",
+        "sortOrder": 80,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mystery-box.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Camera",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 85 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "85 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "camera",
+        "section": "Controls & logic",
+        "sortOrder": 81,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/camera.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dome Camera",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. Listed cost: 85 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "85 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "dome-camera",
+        "section": "Controls & logic",
+        "sortOrder": 82,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/dome-camera.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Switch",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 2 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "big-switch",
+        "section": "Controls & logic",
+        "sortOrder": 83,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/big-switch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lever",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 2 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "lever",
+        "section": "Controls & logic",
+        "sortOrder": 84,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/lever.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gameboard",
+        "cardSummary": "A control or mechanism part for operating a build. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Controls and logic",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "gameboard",
+        "section": "Controls & logic",
+        "sortOrder": 85,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/gameboard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Harpoon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 12 hitpoints. Listed cost: 250 ROBUX.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 12,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 5,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "golden-harpoon",
+        "section": "Weapons & defense",
+        "sortOrder": 86,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/golden-harpoon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Harpoon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 12 hitpoints. Listed cost: 200 Gold.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 12,
+        "weightBalloons": null,
+        "cost": "200 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "harpoon",
+        "section": "Weapons & defense",
+        "sortOrder": 87,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/harpoon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Cannon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 4 hitpoints. Listed cost: 250 Gold.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "250 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "big-cannon",
+        "section": "Weapons & defense",
+        "sortOrder": 88,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/big-cannon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cannon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 4 hitpoints. Listed cost: 80 Gold.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "80 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "cannon",
+        "section": "Weapons & defense",
+        "sortOrder": 89,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/cannon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laser Launcher",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 4 hitpoints.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Codes"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "laser-launcher",
+        "section": "Weapons & defense",
+        "sortOrder": 90,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/laser-launcher.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Gun",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 4 hitpoints. Listed cost: 150 Gold.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "150 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mini-gun",
+        "section": "Weapons & defense",
+        "sortOrder": 91,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mini-gun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mounted Cannon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 2 hitpoints.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mounted-cannon",
+        "section": "Weapons & defense",
+        "sortOrder": 92,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mounted-cannon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dynamite",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 20 Gold.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "20 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "dynamite",
+        "section": "Weapons & defense",
+        "sortOrder": 93,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/dynamite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mounted Bow",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mounted-bow",
+        "section": "Weapons & defense",
+        "sortOrder": 94,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mounted-bow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mounted Flintlocks",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 50 Gold.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "50 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mounted-flintlocks",
+        "section": "Weapons & defense",
+        "sortOrder": 95,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mounted-flintlocks.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mounted Knight Sword",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mounted-knight-sword",
+        "section": "Weapons & defense",
+        "sortOrder": 96,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mounted-knight-sword.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mounted Swords",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 50 Gold.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "50 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mounted-swords",
+        "section": "Weapons & defense",
+        "sortOrder": 97,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mounted-swords.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mounted Wizard Staff",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mounted-wizard-staff",
+        "section": "Weapons & defense",
+        "sortOrder": 98,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mounted-wizard-staff.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "TNT",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "tnt",
+        "section": "Weapons & defense",
+        "sortOrder": 99,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/tnt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Harpoon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 12 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 12,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Events",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "dragon-harpoon",
+        "section": "Weapons & defense",
+        "sortOrder": 100,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/dragon-harpoon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dual Candy Cane Harpoon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 8 hitpoints. Listed cost: 250 ROBUX. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 8,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 5,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events",
+          "Treasure",
+          "Robux"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "dual-candy-cane-harpoon",
+        "section": "Weapons & defense",
+        "sortOrder": 101,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/dual-candy-cane-harpoon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowball Launcher",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 4 hitpoints. Listed cost: 400 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "400 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "snowball-launcher",
+        "section": "Weapons & defense",
+        "sortOrder": 102,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/snowball-launcher.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Firework",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 50 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "50 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "classic-firework",
+        "section": "Weapons & defense",
+        "sortOrder": 103,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/classic-firework.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework 1",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 100 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": 0.15,
+        "cost": "100 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "firework-1",
+        "section": "Weapons & defense",
+        "sortOrder": 104,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/firework-1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework 2",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 100 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": 0.17,
+        "cost": "100 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "firework-2",
+        "section": "Weapons & defense",
+        "sortOrder": 105,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/firework-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework 3",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 100 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "100 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "firework-3",
+        "section": "Weapons & defense",
+        "sortOrder": 106,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/firework-3.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework 4",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 100 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "100 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "firework-4",
+        "section": "Weapons & defense",
+        "sortOrder": 107,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/firework-4.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spike Trap",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. Listed cost: 25 Gold. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "25 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "spike-trap",
+        "section": "Weapons & defense",
+        "sortOrder": 108,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/spike-trap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Egg Cannon",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 4 hitpoints. Listed cost: 250 ROBUX. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "250 ROBUX",
+        "quantity": 3,
+        "currency": "Robux",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Events",
+          "Robux"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "egg-cannon",
+        "section": "Weapons & defense",
+        "sortOrder": 109,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/egg-cannon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boxing Glove",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "boxing-glove",
+        "section": "Weapons & defense",
+        "sortOrder": 110,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/boxing-glove.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mounted Candy Cane Sword",
+        "cardSummary": "A combat, hazard, or defensive part for a build. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Weapons and defense",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "mounted-candy-cane-sword",
+        "section": "Weapons & defense",
+        "sortOrder": 111,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mounted-candy-cane-sword.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shield Generator",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 20 hitpoints. Listed cost: 150 Gold.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 20,
+        "weightBalloons": null,
+        "cost": "150 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "shield-generator",
+        "section": "Decoration & utility",
+        "sortOrder": 112,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/shield-generator.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Throne",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 8 hitpoints. Listed cost: 100 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 8,
+        "weightBalloons": null,
+        "cost": "100 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "throne",
+        "section": "Decoration & utility",
+        "sortOrder": 113,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/throne.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cake",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 7 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 7,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "cake",
+        "section": "Decoration & utility",
+        "sortOrder": 114,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lamp",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 5 hitpoints. Listed cost: 20 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": "20 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "lamp",
+        "section": "Decoration & utility",
+        "sortOrder": 115,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/lamp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Locked Door",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 5 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "locked-door",
+        "section": "Decoration & utility",
+        "sortOrder": 116,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/locked-door.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Music Note",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 5 hitpoints. Listed cost: 40 Gold.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": "40 Gold",
+        "quantity": 2,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "music-note",
+        "section": "Decoration & utility",
+        "sortOrder": 117,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/music-note.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chair",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 4 hitpoints. Listed cost: 35 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "35 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "chair",
+        "section": "Decoration & utility",
+        "sortOrder": 118,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/chair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Door",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 4 hitpoints. Listed cost: 15 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "15 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "door",
+        "section": "Decoration & utility",
+        "sortOrder": 119,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/door.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hatch",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 4 hitpoints. Listed cost: 15 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "15 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "hatch",
+        "section": "Decoration & utility",
+        "sortOrder": 120,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/hatch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "I-Beam",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 4 hitpoints. Listed cost: 325 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "325 Gold",
+        "quantity": 50,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "i-beam",
+        "section": "Decoration & utility",
+        "sortOrder": 121,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/i-beam.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mast",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 4 hitpoints. Listed cost: 35 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": "35 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "mast",
+        "section": "Decoration & utility",
+        "sortOrder": 122,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/mast.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flag",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 2 hitpoints. Listed cost: 40 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": "40 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "flag",
+        "section": "Decoration & utility",
+        "sortOrder": 123,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/flag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bar",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 60 Gold.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "60 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "bar",
+        "section": "Decoration & utility",
+        "sortOrder": 124,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/bar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Delay Block",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 50 Gold.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "50 Gold",
+        "quantity": 2,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "delay-block",
+        "section": "Decoration & utility",
+        "sortOrder": 125,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/delay-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Helm",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 45 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "45 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "helm",
+        "section": "Decoration & utility",
+        "sortOrder": 126,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/helm.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Light Bulb",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 60 Gold.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "60 Gold",
+        "quantity": 3,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "light-bulb",
+        "section": "Decoration & utility",
+        "sortOrder": 127,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/light-bulb.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plushie 1",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Codes"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "plushie-1",
+        "section": "Decoration & utility",
+        "sortOrder": 128,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/plushie-1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plushie 2",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "plushie-2",
+        "section": "Decoration & utility",
+        "sortOrder": 129,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/plushie-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plushie 4",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": null,
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "plushie-4",
+        "section": "Decoration & utility",
+        "sortOrder": 130,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/plushie-4.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sign",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 45 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "45 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "sign",
+        "section": "Decoration & utility",
+        "sortOrder": 131,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/sign.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Step",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 50 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "50 Gold",
+        "quantity": 10,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "step",
+        "section": "Decoration & utility",
+        "sortOrder": 132,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/step.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Torch",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 10 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "10 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "torch",
+        "section": "Decoration & utility",
+        "sortOrder": 133,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/torch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Window",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Listed cost: 25 Gold.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": "25 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "window",
+        "section": "Decoration & utility",
+        "sortOrder": 134,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/window.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Master Builder Trophy",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 3 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "master-builder-trophy",
+        "section": "Decoration & utility",
+        "sortOrder": 135,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/master-builder-trophy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trophy 1st",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 3 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "trophy-1st",
+        "section": "Decoration & utility",
+        "sortOrder": 136,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/trophy-1st.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trophy 2nd",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 2 hitpoints.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "trophy-2nd",
+        "section": "Decoration & utility",
+        "sortOrder": 137,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/trophy-2nd.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trophy 3rd",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoint.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "trophy-3rd",
+        "section": "Decoration & utility",
+        "sortOrder": 138,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/trophy-3rd.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candle",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 3 hitpoints. Listed cost: 25 Gold. Its source category ties it to limited or event availability.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": "25 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Quests",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "candle",
+        "section": "Decoration & utility",
+        "sortOrder": 139,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/candle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Candy",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Quests",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "blue-candy",
+        "section": "Decoration & utility",
+        "sortOrder": 140,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/blue-candy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Candy",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Quests",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "orange-candy",
+        "section": "Decoration & utility",
+        "sortOrder": 141,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/orange-candy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Candy",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Quests",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "pink-candy",
+        "section": "Decoration & utility",
+        "sortOrder": 142,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/pink-candy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plushie 3",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "plushie-3",
+        "section": "Decoration & utility",
+        "sortOrder": 143,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/plushie-3.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "pumpkin",
+        "section": "Decoration & utility",
+        "sortOrder": 144,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/pumpkin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Candy",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Quests",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "purple-candy",
+        "section": "Decoration & utility",
+        "sortOrder": 145,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/purple-candy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Candy",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Quests",
+          "Events"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "red-candy",
+        "section": "Decoration & utility",
+        "sortOrder": 146,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/red-candy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Soccer Ball",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. Its source category ties it to limited or event availability.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Quests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Limited / event"
+      },
+      "system": {
+        "slug": "soccer-ball",
+        "section": "Decoration & utility",
+        "sortOrder": 147,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/soccer-ball.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Egg",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 7 hitpoints. The source marks it as unobtainable.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 7,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Quests",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "dragon-egg",
+        "section": "Decoration & utility",
+        "sortOrder": 148,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/dragon-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pine Tree",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 6 hitpoints. The source marks it as unobtainable.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 6,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "pine-tree",
+        "section": "Decoration & utility",
+        "sortOrder": 149,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/pine-tree.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Life Preserver",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 5 hitpoints. The source marks it as unobtainable.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "life-preserver",
+        "section": "Decoration & utility",
+        "sortOrder": 150,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/life-preserver.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin 1",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 3 hitpoints. Listed cost: 50 Gold. The source marks it as unobtainable.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": "50 Gold",
+        "quantity": 1,
+        "currency": "Gold",
+        "acquisition": [
+          "Shop",
+          "Quests",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "pumpkin-1",
+        "section": "Decoration & utility",
+        "sortOrder": 151,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/pumpkin-1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Star",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 2 hitpoints. The source marks it as unobtainable.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 2,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "star",
+        "section": "Decoration & utility",
+        "sortOrder": 152,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/star.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bread",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Quests",
+          "Codes",
+          "Events"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "bread",
+        "section": "Decoration & utility",
+        "sortOrder": 153,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/bread.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bundles of Potions",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Ability block",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "bundles-of-potions",
+        "section": "Decoration & utility",
+        "sortOrder": 154,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/bundles-of-potions.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart",
+        "cardSummary": "A decorative or utility part for customizing a build. The comparison table lists 1 hitpoints. The source marks it as unobtainable.",
+        "category": "Decoration",
+        "role": "Decoration and utility",
+        "hitpoints": 1,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "heart",
+        "section": "Decoration & utility",
+        "sortOrder": 155,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/heart.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Large Treasure",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 5 hitpoints.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "large-treasure",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 156,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/large-treasure.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Medium Treasure",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 4 hitpoints.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 4,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "medium-treasure",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 157,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/medium-treasure.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Small Treasure",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 3 hitpoints.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "small-treasure",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 158,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/small-treasure.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Chest",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 5 hitpoints. The source marks it as unobtainable.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 5,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Shop",
+          "Chests",
+          "Codes",
+          "Events",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "treasure-chest",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 159,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/treasure-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Common Chest Block",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 3 hitpoints. The source marks it as unobtainable.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Codes",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "common-chest-block",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 160,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/common-chest-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Epic Chest Block",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 3 hitpoints. The source marks it as unobtainable.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "epic-chest-block",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 161,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/epic-chest-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Chest Block",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 3 hitpoints. The source marks it as unobtainable.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "legendary-chest-block",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 162,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/legendary-chest-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Chest Block",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 3 hitpoints. The source marks it as unobtainable.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "rare-chest-block",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 163,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/rare-chest-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Uncommon Chest Block",
+        "cardSummary": "A chest or treasure-related block for collection and special rewards. The comparison table lists 3 hitpoints. The source marks it as unobtainable.",
+        "category": "Chest block",
+        "role": "Chest and treasure",
+        "hitpoints": 3,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Chests",
+          "Treasure"
+        ],
+        "availability": "Unobtainable"
+      },
+      "system": {
+        "slug": "uncommon-chest-block",
+        "section": "Chest & treasure blocks",
+        "sortOrder": 164,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/uncommon-chest-block.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beanstalk Egg",
+        "cardSummary": "Beanstalk Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "beanstalk-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 165,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/beanstalk-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Egg",
+        "cardSummary": "Blue Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "blue-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 166,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/blue-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Gift",
+        "cardSummary": "Blue Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "blue-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 167,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/blue-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Plastic Egg",
+        "cardSummary": "Blue Plastic Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "blue-plastic-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 168,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/blue-plastic-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Present",
+        "cardSummary": "Blue Present is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "blue-present",
+        "section": "Historical / unavailable",
+        "sortOrder": 169,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/blue-present.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Electric Egg",
+        "cardSummary": "Electric Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "electric-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 170,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/electric-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Galaxy Egg",
+        "cardSummary": "Galaxy Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "galaxy-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 171,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/galaxy-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Gift",
+        "cardSummary": "Gold Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "gold-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 172,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/gold-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Egg 2018",
+        "cardSummary": "Golden Egg 2018 is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "golden-egg-2018",
+        "section": "Historical / unavailable",
+        "sortOrder": 173,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/golden-egg-2018.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Egg 2019",
+        "cardSummary": "Golden Egg 2019 is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "golden-egg-2019",
+        "section": "Historical / unavailable",
+        "sortOrder": 174,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/golden-egg-2019.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Egg",
+        "cardSummary": "Green Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "green-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 175,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/green-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Gift",
+        "cardSummary": "Green Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "green-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 176,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/green-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Plastic Egg",
+        "cardSummary": "Green Plastic Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "green-plastic-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 177,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/green-plastic-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Present 2017",
+        "cardSummary": "Green Present 2017 is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "green-present-2017",
+        "section": "Historical / unavailable",
+        "sortOrder": 178,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/green-present-2017.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Present 2018",
+        "cardSummary": "Green Present 2018 is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "green-present-2018",
+        "section": "Historical / unavailable",
+        "sortOrder": 179,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/green-present-2018.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Present 2019",
+        "cardSummary": "Green Present 2019 is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "green-present-2019",
+        "section": "Historical / unavailable",
+        "sortOrder": 180,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/green-present-2019.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "King Egg",
+        "cardSummary": "King Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "king-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 181,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/king-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Egg",
+        "cardSummary": "Lava Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "lava-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 182,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/lava-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Light Blue Gift",
+        "cardSummary": "Light Blue Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "light-blue-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 183,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/light-blue-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Massive Present",
+        "cardSummary": "Massive Present is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "massive-present",
+        "section": "Historical / unavailable",
+        "sortOrder": 184,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/massive-present.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Gift",
+        "cardSummary": "Peppermint Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "peppermint-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 185,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/peppermint-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Egg",
+        "cardSummary": "Purple Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "purple-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 186,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/purple-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Gift",
+        "cardSummary": "Purple Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "purple-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 187,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/purple-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Plastic Egg",
+        "cardSummary": "Purple Plastic Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "purple-plastic-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 188,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/purple-plastic-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Present",
+        "cardSummary": "Purple Present is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "purple-present",
+        "section": "Historical / unavailable",
+        "sortOrder": 189,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/purple-present.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Egg",
+        "cardSummary": "Red Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "red-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 190,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/red-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Gift",
+        "cardSummary": "Red Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "red-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 191,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/red-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Present",
+        "cardSummary": "Red Present is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "red-present",
+        "section": "Historical / unavailable",
+        "sortOrder": 192,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/red-present.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rocket Egg",
+        "cardSummary": "Rocket Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "rocket-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 193,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/rocket-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spiky Ice Egg",
+        "cardSummary": "Spiky Ice Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "spiky-ice-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 194,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/spiky-ice-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Super Egg",
+        "cardSummary": "Super Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "super-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 195,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/super-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tall Present",
+        "cardSummary": "Tall Present is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "tall-present",
+        "section": "Historical / unavailable",
+        "sortOrder": 196,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/tall-present.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teacup Egg",
+        "cardSummary": "Teacup Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "teacup-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 197,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/teacup-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tic-Tac-Toe Egg",
+        "cardSummary": "Tic-Tac-Toe Egg is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "tic-tac-toe-egg",
+        "section": "Historical / unavailable",
+        "sortOrder": 198,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/tic-tac-toe-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yellow Gift",
+        "cardSummary": "Yellow Gift is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "yellow-gift",
+        "section": "Historical / unavailable",
+        "sortOrder": 199,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/yellow-gift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yellow Present",
+        "cardSummary": "Yellow Present is recorded as a removed historical block, not a current acquisition target.",
+        "category": "Event item",
+        "role": "Historical block",
+        "hitpoints": null,
+        "weightBalloons": null,
+        "cost": null,
+        "quantity": null,
+        "currency": null,
+        "acquisition": [
+          "Past event"
+        ],
+        "availability": "Removed"
+      },
+      "system": {
+        "slug": "yellow-present",
+        "section": "Historical / unavailable",
+        "sortOrder": 200,
+        "image": "/Build%20A%20Boat%20For%20Treasure/blocks/yellow-present.webp"
+      }
+    }
+  ]
+}

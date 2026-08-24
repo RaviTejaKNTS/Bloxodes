@@ -686,7 +686,10 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "volleyball-legends-styles": 30_000,
   // Volleyball Legends ball skins combine 176 image cards with route and period fields;
   // split rarity sections early enough to keep every rendered page below the HTML warning threshold.
-  "volleyball-legends-ball-skins": 30_000
+  "volleyball-legends-ball-skins": 30_000,
+  // Build A Boat For Treasure blocks combine 200 item icons with several comparison fields.
+  // Keep the initial and paginated HTML comfortably below the release-size ceiling.
+  "build-a-boat-for-treasure-blocks": 26_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -711,7 +714,8 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "evade-cosmetics": 26_000,
   "evade-unusuals": 26_000,
   "evade-nametags": 30_000,
-  "volleyball-legends-ball-skins": 30_000
+  "volleyball-legends-ball-skins": 30_000,
+  "build-a-boat-for-treasure-blocks": 26_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {
