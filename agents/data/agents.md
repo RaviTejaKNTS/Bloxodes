@@ -158,6 +158,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Sailor Piece/*.json`
   - Local Sailor Piece in-game datasets collected from SailorPiece.org for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Sailor Piece/`.
+- `data/Tower Defense Simulator/towers.json` and `data/Tower Defense Simulator/modes.json`
+  - Completed v2 Tower Defense Simulator datasets for the durable Towers and Modes wiki collections, registered under `tower-defense-simulator` and consumed by the generic game-collection renderer.
+  - Matching exact row-level WebP assets live under `apps/web/public/Tower Defense Simulator/Towers/` and `apps/web/public/Tower Defense Simulator/Modes/`; preserve the source image manifests and byte/MIME audits when refreshing them.
+  - Maps and enemies remain evidence-backed research blocks and are intentionally unregistered.
 - `data/Brookhaven RP/*.json`
   - Local Brookhaven RP in-game datasets collected from the Official Brookhaven Wiki for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Brookhaven RP/`.

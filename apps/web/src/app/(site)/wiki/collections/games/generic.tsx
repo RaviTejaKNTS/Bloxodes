@@ -689,7 +689,10 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "volleyball-legends-ball-skins": 30_000,
   // Build A Boat For Treasure blocks combine 200 item icons with several comparison fields.
   // Keep the initial and paginated HTML comfortably below the release-size ceiling.
-  "build-a-boat-for-treasure-blocks": 26_000
+  "build-a-boat-for-treasure-blocks": 26_000,
+  // Tower cards combine exact artwork with several comparison fields; split the
+  // image-dense roster before the rendered HTML size ceiling is reached.
+  "tower-defense-simulator-towers": 26_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -715,7 +718,8 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "evade-unusuals": 26_000,
   "evade-nametags": 30_000,
   "volleyball-legends-ball-skins": 30_000,
-  "build-a-boat-for-treasure-blocks": 26_000
+  "build-a-boat-for-treasure-blocks": 26_000,
+  "tower-defense-simulator-towers": 26_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

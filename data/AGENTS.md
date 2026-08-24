@@ -37,6 +37,10 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Matching exact optimized WebP tier card images live under `apps/web/public/Build A Boat For Treasure/chests/`; source URL/page, MIME, conversion, hash, and byte-budget evidence lives in `tmp/content-workspace/build-a-boat-for-treasure/collections/chests/images.json`.
 - `data/Sailor Piece/*`
   - Dataset-backed Sailor Piece wiki/collection content, including fruits, swords, races, bosses, islands, accessories, melee specs, traits, runes, relics, bloodlines, clans, Haki, titles, dungeons, and guilds.
+- `data/Tower Defense Simulator/towers.json` and `data/Tower Defense Simulator/modes.json`
+  - Completed v2 Tower Defense Simulator wiki collection datasets for durable towers and modes, consumed by the registered `/wiki/tower-defense-simulator/towers` and `/wiki/tower-defense-simulator/modes` routes.
+  - Exact row artwork is stored as optimized WebP under `apps/web/public/Tower Defense Simulator/Towers/` and `apps/web/public/Tower Defense Simulator/Modes/`; keep the image manifests and MIME/coverage checks with the content workspace when refreshing these datasets.
+  - The approved maps and enemies opportunities remain research-blocked and intentionally have no dataset or registry entry.
 - `data/Brookhaven RP/*`
   - Dataset-backed Brookhaven RP wiki/collection content, including vehicles, houses, jobs, gamepasses, inventory items, roleplay outfits, map themes, weather/disasters, props, emotes, secrets, locations, and game info.
 - `data/Adopt Me/*`

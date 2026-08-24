@@ -1,0 +1,509 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Tower Defense Simulator",
+    "gameSlug": "tower-defense-simulator",
+    "collection": "towers",
+    "route": "/wiki/tower-defense-simulator/towers",
+    "catalogCode": "tower-defense-simulator-towers",
+    "itemFields": [
+      "accessCategory",
+      "role",
+      "unlock",
+      "evolvesFrom",
+      "evolutionLevel",
+      "detection",
+      "placementLimit",
+      "baseCost",
+      "baseDamage",
+      "baseRange",
+      "baseCooldown",
+      "upgradeCap",
+      "specialMechanic",
+      "cardSummary"
+    ],
+    "columns": [
+      "accessCategory",
+      "role",
+      "unlock",
+      "evolvesFrom",
+      "evolutionLevel",
+      "detection",
+      "placementLimit",
+      "baseCost",
+      "baseDamage",
+      "baseRange",
+      "baseCooldown",
+      "upgradeCap",
+      "specialMechanic",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Access",
+      "sectionOrder": [
+    "Permanent and challenge unlocks",
+    "Hardcore and evolved towers",
+    "Event and exclusive towers"
+      ],
+      "badgeField": "accessCategory",
+      "subtitleFields": ["role"],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "unlock",
+        "evolvesFrom",
+        "evolutionLevel",
+        "detection",
+        "placementLimit",
+        "baseCost",
+        "baseDamage",
+        "baseRange",
+        "baseCooldown",
+        "upgradeCap",
+        "specialMechanic"
+      ],
+      "tableFields": [
+        "accessCategory",
+        "role",
+        "unlock",
+        "evolvesFrom",
+        "evolutionLevel",
+        "detection",
+        "placementLimit",
+        "baseCost",
+        "baseDamage",
+        "baseRange",
+        "baseCooldown",
+        "upgradeCap",
+        "specialMechanic",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "accessCategory": {"kind": "chip", "label": "Access"},
+        "role": {"kind": "chip", "label": "Role"},
+        "unlock": {"kind": "detail", "label": "Unlock"},
+        "evolvesFrom": {"kind": "chip", "label": "Evolves from"},
+        "evolutionLevel": {"kind": "chip", "label": "Evolution level"},
+        "detection": {"kind": "chip", "label": "Detection"},
+        "placementLimit": {"kind": "chip", "label": "Placement limit"},
+        "baseCost": {"kind": "chip", "label": "Base cost"},
+        "baseDamage": {"kind": "chip", "label": "Base damage"},
+        "baseRange": {"kind": "chip", "label": "Base range"},
+        "baseCooldown": {"kind": "chip", "label": "Base cooldown"},
+        "upgradeCap": {"kind": "chip", "label": "Upgrade cap"},
+        "specialMechanic": {"kind": "detail", "label": "Special mechanic"},
+        "cardSummary": {"kind": "detail", "label": "Summary"}
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Scout",
+        "accessCategory": "Starter",
+        "role": "DPS",
+        "unlock": "Free starter tower",
+        "detection": "Hidden",
+        "placementLimit": "Unlimited",
+        "baseCost": 125,
+        "baseDamage": 1,
+        "baseRange": 12,
+        "baseCooldown": 1,
+        "upgradeCap": "Level 4",
+        "specialMechanic": "Akimbo Handguns at max level",
+        "cardSummary": "Scout is a free starter damage tower with a low placement cost and an early Hidden-detection path."
+      },
+"system": {"slug": "scout", "section": "Permanent and challenge unlocks", "sortOrder": 10, "image": "/Tower%20Defense%20Simulator/Towers/scout.webp"}
+    },
+    {
+      "item": {
+        "name": "Sniper",
+        "accessCategory": "Starter",
+        "role": "DPS",
+        "unlock": "Free starter tower",
+        "detection": "Hidden, Flying, Lead",
+        "placementLimit": "Unlimited",
+        "baseCost": 450,
+        "baseDamage": 10,
+        "baseRange": 28,
+        "baseCooldown": 5,
+        "upgradeCap": "Level 4",
+        "specialMechanic": "Cliff-only placement",
+        "cardSummary": "Sniper is a free starter damage tower that trades a slow firing cycle for long-range cliff coverage."
+      },
+      "system": {"slug": "sniper", "section": "Permanent and challenge unlocks", "sortOrder": 20, "image": "/Tower%20Defense%20Simulator/Towers/sniper.webp"}
+    },
+    {
+      "item": {"name": "Paintballer", "accessCategory": "Coin store", "role": "DPS", "unlock": "100 Coins", "cardSummary": "Paintballer is an early coin-store damage tower with splash-oriented crowd coverage."},
+      "system": {"slug": "paintballer", "section": "Permanent and challenge unlocks", "sortOrder": 30, "image": "/Tower%20Defense%20Simulator/Towers/paintballer.webp"}
+    },
+    {
+      "item": {"name": "Demoman", "accessCategory": "Coin store", "role": "DPS", "unlock": "200 Coins", "cardSummary": "Demoman is a low-cost coin-store damage tower built for area damage against grouped enemies."},
+      "system": {"slug": "demoman", "section": "Permanent and challenge unlocks", "sortOrder": 40, "image": "/Tower%20Defense%20Simulator/Towers/demoman.webp"}
+    },
+    {
+      "item": {"name": "Slime Trooper", "accessCategory": "Coin store", "role": "DPS / support", "unlock": "300 Coins", "specialMechanic": "Slime attacks provide stalling pressure", "cardSummary": "Slime Trooper is a coin-store tower whose slime attacks add damage while helping slow the enemy push."},
+      "system": {"slug": "slime-trooper", "section": "Permanent and challenge unlocks", "sortOrder": 50, "image": "/Tower%20Defense%20Simulator/Towers/slime-trooper.webp"}
+    },
+    {
+      "item": {"name": "Soldier", "accessCategory": "Coin store", "role": "DPS", "unlock": "350 Coins", "cardSummary": "Soldier is a straightforward coin-store damage tower for building an early loadout."},
+      "system": {"slug": "soldier", "section": "Permanent and challenge unlocks", "sortOrder": 60, "image": "/Tower%20Defense%20Simulator/Towers/soldier.webp"}
+    },
+    {
+      "item": {"name": "Freezer", "accessCategory": "Coin store", "role": "DPS / support", "unlock": "650 Coins", "specialMechanic": "Freezing control", "cardSummary": "Freezer is a coin-store control tower that contributes damage while slowing the path with freeze effects."},
+      "system": {"slug": "freezer", "section": "Permanent and challenge unlocks", "sortOrder": 70, "image": "/Tower%20Defense%20Simulator/Towers/freezer.webp"}
+    },
+    {
+      "item": {"name": "Assassin", "accessCategory": "Coin store", "role": "DPS", "unlock": "800 Coins", "cardSummary": "Assassin is a coin-store damage tower for players building a fast offensive loadout."},
+      "system": {"slug": "assassin", "section": "Permanent and challenge unlocks", "sortOrder": 80, "image": "/Tower%20Defense%20Simulator/Towers/assassin.webp"}
+    },
+    {
+      "item": {"name": "Militant", "accessCategory": "Coin store", "role": "DPS", "unlock": "800 Coins", "cardSummary": "Militant is a coin-store sustained-damage tower that fits regular match progression."},
+      "system": {"slug": "militant", "section": "Permanent and challenge unlocks", "sortOrder": 90, "image": "/Tower%20Defense%20Simulator/Towers/militant.webp"}
+    },
+    {
+      "item": {"name": "Shotgunner", "accessCategory": "Coin store", "role": "DPS", "unlock": "850 Coins", "specialMechanic": "Spread shotgun", "cardSummary": "Shotgunner is a coin-store damage tower that fires a spread for close-to-mid-range crowd pressure."},
+      "system": {"slug": "shotgunner", "section": "Permanent and challenge unlocks", "sortOrder": 100, "image": "/Tower%20Defense%20Simulator/Towers/shotgunner.webp"}
+    },
+    {
+      "item": {"name": "Hunter", "accessCategory": "Coin store", "role": "DPS", "unlock": "1,000 Coins", "cardSummary": "Hunter is a coin-store damage tower that adds another early-to-mid-game offensive option."},
+      "system": {"slug": "hunter", "section": "Permanent and challenge unlocks", "sortOrder": 110, "image": "/Tower%20Defense%20Simulator/Towers/hunter.webp"}
+    },
+    {
+      "item": {"name": "Pyromancer", "accessCategory": "Coin store", "role": "DPS / support", "unlock": "1,250 Coins", "specialMechanic": "Fire damage and burn pressure", "cardSummary": "Pyromancer is a coin-store area tower whose fire attacks add damage-over-time pressure."},
+      "system": {"slug": "pyromancer", "section": "Permanent and challenge unlocks", "sortOrder": 120, "image": "/Tower%20Defense%20Simulator/Towers/pyromancer.webp"}
+    },
+    {
+      "item": {"name": "Ace Pilot", "accessCategory": "Coin store", "role": "DPS", "unlock": "1,500 Coins", "specialMechanic": "Aircraft pathing", "cardSummary": "Ace Pilot is a coin-store damage tower that attacks from an aircraft moving around the map."},
+      "system": {"slug": "ace-pilot", "section": "Permanent and challenge unlocks", "sortOrder": 130, "image": "/Tower%20Defense%20Simulator/Towers/ace-pilot.webp"}
+    },
+    {
+      "item": {"name": "Medic", "accessCategory": "Coin store", "role": "Support", "unlock": "2,000 Coins", "specialMechanic": "Team healing and support", "cardSummary": "Medic is a coin-store support tower for keeping defenses stable through healing and utility."},
+      "system": {"slug": "medic", "section": "Permanent and challenge unlocks", "sortOrder": 140, "image": "/Tower%20Defense%20Simulator/Towers/medic.webp"}
+    },
+    {
+      "item": {"name": "Farm", "accessCategory": "Coin store", "role": "Economy", "unlock": "2,000 Coins", "specialMechanic": "Generates match cash", "cardSummary": "Farm is the coin-store economy tower that converts placements into extra match cash for later upgrades."},
+      "system": {"slug": "farm", "section": "Permanent and challenge unlocks", "sortOrder": 150, "image": "/Tower%20Defense%20Simulator/Towers/farm.webp"}
+    },
+    {
+      "item": {"name": "Electroshocker", "accessCategory": "Coin store", "role": "DPS / support", "unlock": "2,500 Coins", "specialMechanic": "Electric crowd control", "cardSummary": "Electroshocker is a coin-store tower that combines damage with electric control against groups."},
+      "system": {"slug": "electroshocker", "section": "Permanent and challenge unlocks", "sortOrder": 160, "image": "/Tower%20Defense%20Simulator/Towers/electroshocker.webp"}
+    },
+    {
+      "item": {"name": "Rocketeer", "accessCategory": "Coin store", "role": "DPS", "unlock": "2,500 Coins", "specialMechanic": "Explosive area attacks", "cardSummary": "Rocketeer is a coin-store splash-damage tower for covering clustered enemies."},
+      "system": {"slug": "rocketeer", "section": "Permanent and challenge unlocks", "sortOrder": 170, "image": "/Tower%20Defense%20Simulator/Towers/rocketeer.webp"}
+    },
+    {
+      "item": {"name": "Trapper", "accessCategory": "Coin store", "role": "DPS / support", "unlock": "3,000 Coins", "specialMechanic": "Trap-based path control", "cardSummary": "Trapper is a coin-store control tower that uses traps to add damage and path pressure."},
+      "system": {"slug": "trapper", "section": "Permanent and challenge unlocks", "sortOrder": 180, "image": "/Tower%20Defense%20Simulator/Towers/trapper.webp"}
+    },
+    {
+      "item": {"name": "Military Base", "accessCategory": "Coin store", "role": "Support / DPS", "unlock": "4,000 Coins", "specialMechanic": "Deploys military vehicles; spawned vehicles are not separate rows", "cardSummary": "Military Base is a coin-store support tower that deploys vehicles to reinforce the defense."},
+      "system": {"slug": "military-base", "section": "Permanent and challenge unlocks", "sortOrder": 190, "image": "/Tower%20Defense%20Simulator/Towers/military-base.webp"}
+    },
+    {
+      "item": {
+        "name": "Crook Boss",
+        "accessCategory": "Level / gamepass",
+        "role": "DPS",
+        "unlock": "Account Level 30, or 300 Robux gamepass",
+        "detection": "Hidden, Flying, Lead",
+        "placementLimit": 5,
+        "baseCost": 2250,
+        "baseDamage": 12,
+        "baseRange": 16.5,
+        "baseCooldown": 0.9,
+        "upgradeCap": "Level 4",
+        "specialMechanic": "Spawns goons; spawned goons are not separate rows",
+        "cardSummary": "Crook Boss is a level-gated damage tower that combines its own attack with summoned goon support."
+      },
+      "system": {"slug": "crook-boss", "section": "Permanent and challenge unlocks", "sortOrder": 200, "image": "/Tower%20Defense%20Simulator/Towers/crook-boss.webp"}
+    },
+    {
+      "item": {"name": "Commander", "accessCategory": "Coin store", "role": "Support", "unlock": "4,000 Coins", "specialMechanic": "Firerate buffs and Call to Arms", "cardSummary": "Commander is a coin-store support tower whose buffs improve the damage output of nearby defenses."},
+      "system": {"slug": "commander", "section": "Permanent and challenge unlocks", "sortOrder": 210, "image": "/Tower%20Defense%20Simulator/Towers/commander.webp"}
+    },
+    {
+      "item": {"name": "Warden", "accessCategory": "Challenge / store", "role": "DPS", "unlock": "4,000 Coins after Pizza Party triumph, or 600 Robux gamepass", "specialMechanic": "Stun-oriented defense", "cardSummary": "Warden is a challenge-gated tower that adds damage and stun pressure after the Pizza Party route is completed."},
+      "system": {"slug": "warden", "section": "Permanent and challenge unlocks", "sortOrder": 220, "image": "/Tower%20Defense%20Simulator/Towers/warden.webp"}
+    },
+    {
+      "item": {"name": "Cowboy", "accessCategory": "Challenge / store", "role": "DPS / economy", "unlock": "4,000 Coins after Badlands II triumph", "specialMechanic": "Generates match cash while attacking", "cardSummary": "Cowboy is a challenge-gated hybrid that contributes damage while adding economy to a loadout."},
+      "system": {"slug": "cowboy", "section": "Permanent and challenge unlocks", "sortOrder": 230, "image": "/Tower%20Defense%20Simulator/Towers/cowboy.webp"}
+    },
+    {
+      "item": {"name": "DJ Booth", "accessCategory": "Coin store", "role": "Support", "unlock": "5,000 Coins", "specialMechanic": "Range, firerate, and cost buffs", "cardSummary": "DJ Booth is a coin-store support tower that improves nearby defenses with multiple aura effects."},
+      "system": {"slug": "dj-booth", "section": "Permanent and challenge unlocks", "sortOrder": 240, "image": "/Tower%20Defense%20Simulator/Towers/dj-booth.webp"}
+    },
+    {
+      "item": {"name": "Tesla", "accessCategory": "Coin store", "role": "DPS", "unlock": "6,000 Coins", "specialMechanic": "Chain lightning", "cardSummary": "Tesla is a coin-store damage tower whose electric attacks can spread across groups of enemies."},
+      "system": {"slug": "tesla", "section": "Permanent and challenge unlocks", "sortOrder": 250, "image": "/Tower%20Defense%20Simulator/Towers/tesla.webp"}
+    },
+    {
+      "item": {"name": "Saboteur", "accessCategory": "Challenge / store", "role": "DPS / support", "unlock": "7,500 Coins after Polluted Wasteland II triumph", "specialMechanic": "Poison, slow, and damage-over-time effects", "cardSummary": "Saboteur is a challenge-gated damage tower built around poison and slowing effects."},
+      "system": {"slug": "saboteur", "section": "Permanent and challenge unlocks", "sortOrder": 260, "image": "/Tower%20Defense%20Simulator/Towers/saboteur.webp"}
+    },
+    {
+      "item": {"name": "Minigunner", "accessCategory": "Coin store", "role": "DPS", "unlock": "8,000 Coins", "cardSummary": "Minigunner is a coin-store sustained-damage tower for reliable continuous fire."},
+      "system": {"slug": "minigunner", "section": "Permanent and challenge unlocks", "sortOrder": 270, "image": "/Tower%20Defense%20Simulator/Towers/minigunner.webp"}
+    },
+    {
+      "item": {"name": "Ranger", "accessCategory": "Coin store", "role": "DPS", "unlock": "12,000 Coins", "specialMechanic": "Long-range cliff damage", "cardSummary": "Ranger is a coin-store long-range damage tower suited to maps with useful cliff positions."},
+      "system": {"slug": "ranger", "section": "Permanent and challenge unlocks", "sortOrder": 280, "image": "/Tower%20Defense%20Simulator/Towers/ranger.webp"}
+    },
+    {
+      "item": {"name": "Pursuit", "accessCategory": "Coin store", "role": "DPS", "unlock": "15,000 Coins", "specialMechanic": "Aircraft attacks and missiles", "cardSummary": "Pursuit is a coin-store damage tower that attacks from an aircraft and adds missile pressure."},
+      "system": {"slug": "pursuit", "section": "Permanent and challenge unlocks", "sortOrder": 290, "image": "/Tower%20Defense%20Simulator/Towers/pursuit.webp"}
+    },
+    {
+      "item": {"name": "Gatling Gun", "accessCategory": "Coin store", "role": "DPS", "unlock": "35,000 Coins", "specialMechanic": "High-volume sustained fire", "cardSummary": "Gatling Gun is the highest-cost coin-store damage tower in this roster and focuses on sustained fire."},
+      "system": {"slug": "gatling-gun", "section": "Permanent and challenge unlocks", "sortOrder": 300, "image": "/Tower%20Defense%20Simulator/Towers/gatling-gun.webp"}
+    },
+    {
+      "item": {
+        "name": "Turret",
+        "accessCategory": "Level / gamepass",
+        "role": "DPS",
+        "unlock": "Account Level 50 and Store purchase, or 450 Robux gamepass",
+        "detection": "Hidden, Lead",
+        "placementLimit": 3,
+        "baseCost": 7750,
+        "baseDamage": 20,
+        "baseRange": 19,
+        "baseCooldown": 0.4,
+        "upgradeCap": "Level 5",
+        "specialMechanic": "High single-target damage",
+        "cardSummary": "Turret is a level-gated single-target damage tower with a small placement limit and a Robux shortcut."
+      },
+      "system": {"slug": "turret", "section": "Permanent and challenge unlocks", "sortOrder": 310, "image": "/Tower%20Defense%20Simulator/Towers/turret.webp"}
+    },
+    {
+      "item": {
+        "name": "Mortar",
+        "accessCategory": "Level / gamepass",
+        "role": "DPS",
+        "unlock": "Account Level 75 and Store purchase, or 395 Robux gamepass",
+        "detection": "Flying, Lead",
+        "placementLimit": 4,
+        "baseCost": 1000,
+        "baseDamage": 15,
+        "baseRange": 24,
+        "baseCooldown": 4,
+        "upgradeCap": "Level 5",
+        "specialMechanic": "Cliff-only splash artillery",
+        "cardSummary": "Mortar is a level-gated cliff artillery tower that uses slow explosive attacks for splash damage."
+      },
+      "system": {"slug": "mortar", "section": "Permanent and challenge unlocks", "sortOrder": 320, "image": "/Tower%20Defense%20Simulator/Towers/mortar.webp"}
+    },
+    {
+      "item": {
+        "name": "Mercenary Base",
+        "accessCategory": "Level / gamepass",
+        "role": "Support / DPS",
+        "unlock": "Account Level 150 and Store purchase, or 1,800 Robux gamepass",
+        "detection": "Hidden, Flying, Lead",
+        "placementLimit": 3,
+        "specialMechanic": "Deploys mercenaries and later buffs nearby towers; spawned units are not separate rows",
+        "cardSummary": "Mercenary Base is a high-level support tower that deploys mercenary units and later adds a nearby damage buff."
+      },
+      "system": {"slug": "mercenary-base", "section": "Permanent and challenge unlocks", "sortOrder": 330, "image": "/Tower%20Defense%20Simulator/Towers/mercenary-base.webp"}
+    },
+    {
+      "item": {
+        "name": "Boomerang",
+        "accessCategory": "Coin store",
+        "role": "DPS",
+        "unlock": "300 Coins",
+        "detection": "Flying",
+        "placementLimit": 12,
+        "baseCost": 550,
+        "baseDamage": 7,
+        "baseRange": 14,
+        "baseCooldown": 2.6,
+        "upgradeCap": "Level 4",
+        "specialMechanic": "Ricochet hits; a second boomerang appears from Level 3",
+        "cardSummary": "Boomerang is a low-cost coin-store tower whose throws can ricochet across multiple enemies."
+      },
+      "system": {"slug": "boomerang", "section": "Permanent and challenge unlocks", "sortOrder": 340, "image": "/Tower%20Defense%20Simulator/Towers/boomerang.webp"}
+    },
+    {
+      "item": {"name": "Brawler", "accessCategory": "Hardcore", "role": "DPS", "unlock": "1,250 Gems and account Level 50", "specialMechanic": "Melee damage", "cardSummary": "Brawler is a Hardcore progression damage tower bought with Gems after the Level 50 gate."},
+      "system": {"slug": "brawler", "section": "Hardcore and evolved towers", "sortOrder": 10, "image": "/Tower%20Defense%20Simulator/Towers/brawler.webp"}
+    },
+    {
+      "item": {"name": "Necromancer", "accessCategory": "Hardcore", "role": "DPS", "unlock": "2,250 Gems and account Level 50", "specialMechanic": "Spawns skeletons; spawned skeletons are not separate rows", "cardSummary": "Necromancer is a Hardcore progression tower that adds damage through its own attacks and summoned skeletons."},
+      "system": {"slug": "necromancer", "section": "Hardcore and evolved towers", "sortOrder": 20, "image": "/Tower%20Defense%20Simulator/Towers/necromancer.webp"}
+    },
+    {
+      "item": {
+        "name": "Accelerator",
+        "accessCategory": "Hardcore",
+        "role": "DPS",
+        "unlock": "2,500 Gems and account Level 50",
+        "detection": "Hidden, Lead",
+        "placementLimit": 5,
+        "baseCost": 7500,
+        "baseDamage": 12,
+        "baseRange": 19,
+        "baseCooldown": 0.25,
+        "upgradeCap": "Level 5",
+        "specialMechanic": "Overcharge burst cycle",
+        "cardSummary": "Accelerator is a Level 50 Hardcore purchase with a charge-and-burst damage cycle for late-game defense."
+      },
+      "system": {"slug": "accelerator", "section": "Hardcore and evolved towers", "sortOrder": 30, "image": "/Tower%20Defense%20Simulator/Towers/accelerator.webp"}
+    },
+    {
+      "item": {"name": "Engineer", "accessCategory": "Hardcore", "role": "DPS / support", "unlock": "4,500 Gems and account Level 50", "specialMechanic": "Sentries are spawned units and are not separate rows", "cardSummary": "Engineer is a Level 50 Hardcore tower that adds damage through its attacks and deployed sentries."},
+      "system": {"slug": "engineer", "section": "Hardcore and evolved towers", "sortOrder": 40, "image": "/Tower%20Defense%20Simulator/Towers/engineer.webp"}
+    },
+    {
+      "item": {"name": "Hacker", "accessCategory": "Hardcore", "role": "DPS / support", "unlock": "5,500 Gems and account Level 50", "specialMechanic": "Hacking and support utility", "cardSummary": "Hacker is a Level 50 Hardcore tower whose damage and utility reward a late-game loadout slot."},
+      "system": {"slug": "hacker", "section": "Hardcore and evolved towers", "sortOrder": 50, "image": "/Tower%20Defense%20Simulator/Towers/hacker.webp"}
+    },
+    {
+      "item": {
+        "name": "Operator",
+        "accessCategory": "Evolved",
+        "role": "DPS",
+        "unlock": "15,000 Coins + 4,500 Gems after the evolution requirement",
+        "evolvesFrom": "Scout",
+        "evolutionLevel": "20",
+        "detection": "Hidden, Flying",
+        "placementLimit": 16,
+        "baseCost": 300,
+        "baseDamage": 1,
+        "baseRange": 14,
+        "baseCooldown": 0.12,
+        "upgradeCap": "Level 6",
+        "specialMechanic": "Coordination and Shared Optics",
+        "cardSummary": "Operator is Scout's evolved damage tower, with a Level 20 evolution gate and a multi-Operator coordination mechanic."
+      },
+      "system": {"slug": "operator", "section": "Hardcore and evolved towers", "sortOrder": 60, "image": "/Tower%20Defense%20Simulator/Towers/operator.webp"}
+    },
+    {
+      "item": {
+        "name": "Juggernaut",
+        "accessCategory": "Evolved",
+        "role": "DPS",
+        "evolvesFrom": "Minigunner",
+        "evolutionLevel": "20",
+        "specialMechanic": "Evolved heavy-firepower route",
+        "cardSummary": "Juggernaut is Minigunner's evolved damage tower in the durable evolved roster."
+      },
+      "system": {"slug": "juggernaut", "section": "Hardcore and evolved towers", "sortOrder": 70, "image": "/Tower%20Defense%20Simulator/Towers/juggernaut.webp"}
+    },
+    {
+      "item": {
+        "name": "Kingpin",
+        "accessCategory": "Evolved",
+        "role": "DPS / economy",
+        "unlock": "Crook Boss evolution Level 20; 15,000 Coins + 5,500 Gems",
+        "evolvesFrom": "Crook Boss",
+        "evolutionLevel": "20",
+        "detection": "Hidden, Flying, Lead",
+        "baseCost": 3600,
+        "baseDamage": 24,
+        "baseRange": 17.5,
+        "baseCooldown": 1.1,
+        "upgradeCap": "Level 6; Top and Bottom paths",
+        "specialMechanic": "Top/Bottom paths with economy or combat focus; spawned units are not separate rows",
+        "cardSummary": "Kingpin is Crook Boss's evolved tower, with a Level 20 route and a choice between economy and combat paths."
+      },
+      "system": {"slug": "kingpin", "section": "Hardcore and evolved towers", "sortOrder": 80, "image": "/Tower%20Defense%20Simulator/Towers/kingpin.webp"}
+    },
+    {
+      "item": {
+        "name": "Enforcer",
+        "accessCategory": "Evolved",
+        "role": "DPS / support",
+        "unlock": "Shotgunner evolution Level 20; 15,000 Coins + 4,750 Gems",
+        "evolvesFrom": "Shotgunner",
+        "evolutionLevel": "20",
+        "placementLimit": 5,
+        "specialMechanic": "Flashbang, SWAT Van Support, and Helicopter Reposition; spawned vans are not separate rows",
+        "cardSummary": "Enforcer is Shotgunner's evolved tower, combining spread-shot damage with crowd control and repositioning utility."
+      },
+      "system": {"slug": "enforcer", "section": "Hardcore and evolved towers", "sortOrder": 90, "image": "/Tower%20Defense%20Simulator/Towers/enforcer.webp"}
+    },
+    {
+      "item": {"name": "Gladiator", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Reworked in Version 2.7.0; expanded War Cry supports nearby towers", "cardSummary": "Gladiator is an event-exclusive melee tower whose Version 2.7.0 rework adds updated upgrades and broader War Cry support."},
+      "system": {"slug": "gladiator", "section": "Event and exclusive towers", "sortOrder": 10, "image": "/Tower%20Defense%20Simulator/Towers/gladiator.webp"}
+    },
+    {
+      "item": {"name": "Commando", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "cardSummary": "Commando is an event-exclusive damage tower retained for players comparing limited loadout options."},
+      "system": {"slug": "commando", "section": "Event and exclusive towers", "sortOrder": 20, "image": "/Tower%20Defense%20Simulator/Towers/commando.webp"}
+    },
+    {
+      "item": {"name": "Slasher", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "cardSummary": "Slasher is an event-exclusive damage tower kept in the limited tower roster."},
+      "system": {"slug": "slasher", "section": "Event and exclusive towers", "sortOrder": 30, "image": "/Tower%20Defense%20Simulator/Towers/slasher.webp"}
+    },
+    {
+      "item": {"name": "Frost Blaster", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Freeze and slow control", "cardSummary": "Frost Blaster is an event-exclusive tower that combines damage with freeze-oriented control."},
+      "system": {"slug": "frost-blaster", "section": "Event and exclusive towers", "sortOrder": 40, "image": "/Tower%20Defense%20Simulator/Towers/frost-blaster.webp"}
+    },
+    {
+      "item": {"name": "Archer", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "cardSummary": "Archer is an event-exclusive damage tower retained for limited-loadout comparisons."},
+      "system": {"slug": "archer", "section": "Event and exclusive towers", "sortOrder": 50, "image": "/Tower%20Defense%20Simulator/Towers/archer.webp"}
+    },
+    {
+      "item": {"name": "Swarmer", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "specialMechanic": "Swarm-based damage pressure", "cardSummary": "Swarmer is an event-exclusive damage tower built around swarm-style pressure."},
+      "system": {"slug": "swarmer", "section": "Event and exclusive towers", "sortOrder": 60, "image": "/Tower%20Defense%20Simulator/Towers/swarmer.webp"}
+    },
+    {
+      "item": {"name": "Toxic Gunner", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Toxic damage and slowing", "cardSummary": "Toxic Gunner is an event-exclusive tower that adds toxic damage and slowing utility."},
+      "system": {"slug": "toxic-gunner", "section": "Event and exclusive towers", "sortOrder": 70, "image": "/Tower%20Defense%20Simulator/Towers/toxic-gunner.webp"}
+    },
+    {
+      "item": {"name": "Sledger", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Melee freeze control", "cardSummary": "Sledger is an event-exclusive melee tower that adds freeze control to its damage role."},
+      "system": {"slug": "sledger", "section": "Event and exclusive towers", "sortOrder": 80, "image": "/Tower%20Defense%20Simulator/Towers/sledger.webp"}
+    },
+    {
+      "item": {"name": "Executioner", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "specialMechanic": "Execution-style area damage", "cardSummary": "Executioner is an event-exclusive damage tower with a broad attack identity."},
+      "system": {"slug": "executioner", "section": "Event and exclusive towers", "sortOrder": 90, "image": "/Tower%20Defense%20Simulator/Towers/executioner.webp"}
+    },
+    {
+      "item": {"name": "Elf Camp", "accessCategory": "Event exclusive", "role": "Support / DPS", "unlock": "Event-exclusive", "specialMechanic": "Deploys elves; spawned elves are not separate rows", "cardSummary": "Elf Camp is an event-exclusive support tower that reinforces the path through deployed elves."},
+      "system": {"slug": "elf-camp", "section": "Event and exclusive towers", "sortOrder": 100, "image": "/Tower%20Defense%20Simulator/Towers/elf-camp.webp"}
+    },
+    {
+      "item": {"name": "Jester", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Randomized attack effects", "cardSummary": "Jester is an event-exclusive tower whose varied effects give it a flexible support-and-damage identity."},
+      "system": {"slug": "jester", "section": "Event and exclusive towers", "sortOrder": 110, "image": "/Tower%20Defense%20Simulator/Towers/jester.webp"}
+    },
+    {
+      "item": {"name": "Cryomancer", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Freeze control", "cardSummary": "Cryomancer is an event-exclusive control tower centered on freezing enemies while dealing damage."},
+      "system": {"slug": "cryomancer", "section": "Event and exclusive towers", "sortOrder": 120, "image": "/Tower%20Defense%20Simulator/Towers/cryomancer.webp"}
+    },
+    {
+      "item": {"name": "Hallow Punk", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "cardSummary": "Hallow Punk is an event-exclusive damage tower retained in the limited roster."},
+      "system": {"slug": "hallow-punk", "section": "Event and exclusive towers", "sortOrder": 130, "image": "/Tower%20Defense%20Simulator/Towers/hallow-punk.webp"}
+    },
+    {
+      "item": {"name": "Harvester", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "specialMechanic": "Seasonal harvesting theme", "cardSummary": "Harvester is an event-exclusive damage tower retained for seasonal loadout reference."},
+      "system": {"slug": "harvester", "section": "Event and exclusive towers", "sortOrder": 140, "image": "/Tower%20Defense%20Simulator/Towers/harvester.webp"}
+    },
+    {
+      "item": {"name": "Snowballer", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Snowball slowing", "cardSummary": "Snowballer is an event-exclusive tower that adds snowball damage and slowing pressure."},
+      "system": {"slug": "snowballer", "section": "Event and exclusive towers", "sortOrder": 150, "image": "/Tower%20Defense%20Simulator/Towers/snowballer.webp"}
+    },
+    {
+      "item": {"name": "Elementalist", "accessCategory": "Event exclusive", "role": "DPS / support", "unlock": "Event-exclusive", "specialMechanic": "Element-based attacks", "cardSummary": "Elementalist is an event-exclusive tower with an element-based damage and utility identity."},
+      "system": {"slug": "elementalist", "section": "Event and exclusive towers", "sortOrder": 160, "image": "/Tower%20Defense%20Simulator/Towers/elementalist.webp"}
+    },
+    {
+      "item": {"name": "Firework Technician", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "specialMechanic": "Firework area attacks", "cardSummary": "Firework Technician is an event-exclusive damage tower built around firework-themed area attacks."},
+      "system": {"slug": "firework-technician", "section": "Event and exclusive towers", "sortOrder": 170, "image": "/Tower%20Defense%20Simulator/Towers/firework-technician.webp"}
+    },
+    {
+      "item": {"name": "Biologist", "accessCategory": "Event exclusive", "role": "Support / DPS", "unlock": "Event-exclusive", "specialMechanic": "Support and damage utility", "cardSummary": "Biologist is an event-exclusive tower retained as a support-and-damage option in the limited roster."},
+      "system": {"slug": "biologist", "section": "Event and exclusive towers", "sortOrder": 180, "image": "/Tower%20Defense%20Simulator/Towers/biologist.webp"}
+    },
+    {
+      "item": {"name": "Warlock", "accessCategory": "Event exclusive", "role": "DPS", "unlock": "Event-exclusive", "specialMechanic": "Summoning and damage utility", "cardSummary": "Warlock is an event-exclusive damage tower with a summoning-themed mechanic."},
+      "system": {"slug": "warlock", "section": "Event and exclusive towers", "sortOrder": 190, "image": "/Tower%20Defense%20Simulator/Towers/warlock.webp"}
+    },
+    {
+      "item": {"name": "Spotlight Tech", "accessCategory": "Event exclusive", "role": "Support", "unlock": "Event-exclusive", "specialMechanic": "Spotlight support utility", "cardSummary": "Spotlight Tech is an event-exclusive support tower retained for detection and utility comparisons."},
+      "system": {"slug": "spotlight-tech", "section": "Event and exclusive towers", "sortOrder": 200, "image": "/Tower%20Defense%20Simulator/Towers/spotlight-tech.webp"}
+    }
+  ]
+}
