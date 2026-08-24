@@ -47,6 +47,11 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Hairstyles are intentionally not seeded until the available source rows have player-readable names or a cleaner visual-identification dataset.
 - `data/The Forge/*.json`
   - Structured collection and calculator data used by The Forge collection pages and Forge tools.
+- `data/Flee the Facility/*.json`
+  - Local Flee the Facility collection datasets for the approved maps and released Beast powers collections. Hammers and gemstones remain research-only because their completeness gates were not met.
+  - `beast-powers.json` contains exactly Runner, Stalker, and Seer in qualitative form; keep Hacker, numeric timing/balance claims, unsupported platform bindings, and unverified mechanics out of the dataset.
+- `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`
+  - Exact row-level collection images for the Flee the Facility maps and Beast powers datasets. Public card assets are extension-correct WebP files; source URLs, MIME checks, dimensions, bytes, and conversion details live in the per-collection manifests under `tmp/content-workspace/flee-the-facility/`.
 - `data/RIVALS/*`
   - Dataset-backed RIVALS wiki/collection content, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and `quiz.json`.
   - `quiz.json` is the local question pool for `/quizzes/rivals`; use `bloxodes-quiz-writing` when editing quiz content.

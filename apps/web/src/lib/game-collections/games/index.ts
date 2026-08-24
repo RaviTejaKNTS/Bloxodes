@@ -70,6 +70,7 @@ import { volleyballLegendsCollectionGroup } from "./volleyball-legends";
 import { doorsCollectionGroup } from "./doors";
 import { blueLockRivalsCollectionGroup } from "./blue-lock-rivals";
 import { slapBattlesCollectionGroup } from "./slap-battles";
+import { fleeTheFacilityCollectionGroup } from "./flee-the-facility";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -144,5 +145,6 @@ export const GAME_COLLECTION_GROUPS = [
   volleyballLegendsCollectionGroup,
   doorsCollectionGroup,
   blueLockRivalsCollectionGroup,
-  slapBattlesCollectionGroup
+  slapBattlesCollectionGroup,
+  fleeTheFacilityCollectionGroup
 ] satisfies GameCollectionGroup[];

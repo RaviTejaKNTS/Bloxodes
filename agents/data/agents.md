@@ -175,6 +175,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/The Forge/*.json`
   - The Forge collection and calculator datasets consumed by `src/lib/forge/*` and wiki collection routes.
   - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/wiki/collections/games/the-forge.tsx`.
+- `data/Flee the Facility/*.json`
+  - Local Flee the Facility collection datasets for the approved maps and Beast powers collections. Hammers and gemstones remain research-only because their completeness gates were not met.
+  - `beast-powers.json` is the approved three-row qualitative collection for Runner, Stalker, and Seer; Hacker and unsupported numeric or platform-specific mechanics stay excluded.
+- `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`
+  - Exact row-level WebP assets for the approved maps and Beast powers collections, with per-collection source, MIME, dimensions, byte-size, and conversion manifests under `tmp/content-workspace/flee-the-facility/`.
 - `data/RIVALS/*.json`
   - Local RIVALS game datasets for wiki/collection page work, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and quiz content.
   - `quiz.json` is the local question pool for `/quizzes/rivals`; use the `QuizData` shape with 10 easy, 10 medium, and 10 hard questions when possible.
