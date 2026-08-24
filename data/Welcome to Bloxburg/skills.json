@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Welcome to Bloxburg",
+    "gameSlug": "welcome-to-bloxburg",
+    "collection": "skills",
+    "route": "/wiki/welcome-to-bloxburg/skills",
+    "catalogCode": "welcome-to-bloxburg-skills",
+    "itemFields": [
+      "benefit",
+      "trainingMethod",
+      "levelCap",
+      "reward",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "benefit",
+      "trainingMethod",
+      "levelCap",
+      "reward",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Active skills"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "benefit"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "benefit",
+        "trainingMethod",
+        "levelCap",
+        "reward",
+        "availability"
+      ],
+      "tableFields": [
+        "benefit",
+        "trainingMethod",
+        "levelCap",
+        "reward",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "benefit": {
+          "kind": "normal",
+          "label": "Benefit"
+        },
+        "trainingMethod": {
+          "kind": "detail",
+          "label": "How to train"
+        },
+        "levelCap": {
+          "kind": "chip",
+          "label": "Maximum"
+        },
+        "reward": {
+          "kind": "normal",
+          "label": "Reward"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Athletic",
+        "benefit": "Can sprint faster and longer",
+        "trainingMethod": "Use Training items, the Bloxburg Gym, or Gym class at Bloxburg High School.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Athletic is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "athletic",
+        "section": "Active skills",
+        "sortOrder": 1,
+        "image": "/Welcome%20to%20Bloxburg/Skills/athletic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cooking",
+        "benefit": "Unlock and cook new meals",
+        "trainingMethod": "Cook meals with kitchen equipment or watch the cooking channel on TV.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Cooking is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "cooking",
+        "section": "Active skills",
+        "sortOrder": 2,
+        "image": "/Welcome%20to%20Bloxburg/Skills/cooking.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gaming",
+        "benefit": "Improves the Fun mood",
+        "trainingMethod": "Play games on electronics or use the ROTRIS Arcade Cabinet.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Gaming is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "gaming",
+        "section": "Active skills",
+        "sortOrder": 3,
+        "image": "/Welcome%20to%20Bloxburg/Skills/gaming.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gardening",
+        "benefit": "Unlock new plants",
+        "trainingMethod": "Plant and tend garden items.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Gardening is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "gardening",
+        "section": "Active skills",
+        "sortOrder": 4,
+        "image": "/Welcome%20to%20Bloxburg/Skills/gardening.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Intelligence",
+        "benefit": "No separate benefit listed",
+        "trainingMethod": "Use qualifying build-mode items or attend English and Science classes.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Intelligence is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "intelligence",
+        "section": "Active skills",
+        "sortOrder": 5,
+        "image": "/Welcome%20to%20Bloxburg/Skills/intelligence.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Music",
+        "benefit": "Unlock new songs",
+        "trainingMethod": "Play instruments or join Band Practice at Bloxburg High School.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Music is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "music",
+        "section": "Active skills",
+        "sortOrder": 6,
+        "image": "/Welcome%20to%20Bloxburg/Skills/music.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Art",
+        "benefit": "Improves the Fun mood",
+        "trainingMethod": "Paint at a Painting Stand or attend Art class at Bloxburg High School.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Art is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "art",
+        "section": "Active skills",
+        "sortOrder": 7,
+        "image": "/Welcome%20to%20Bloxburg/Skills/art.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Writing",
+        "benefit": "No separate benefit listed",
+        "trainingMethod": "Write a book on an electronic device.",
+        "levelCap": "Level 10",
+        "reward": "Skill trophy at the maximum level",
+        "availability": "Active skill",
+        "cardSummary": "Writing is an active Welcome to Bloxburg skill with a maximum level of 10."
+      },
+      "system": {
+        "slug": "writing",
+        "section": "Active skills",
+        "sortOrder": 8,
+        "image": "/Welcome%20to%20Bloxburg/Skills/writing.webp"
+      }
+    }
+  ]
+}

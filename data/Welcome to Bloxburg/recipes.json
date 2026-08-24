@@ -1,0 +1,2043 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Welcome to Bloxburg",
+    "gameSlug": "welcome-to-bloxburg",
+    "collection": "recipes",
+    "route": "/wiki/welcome-to-bloxburg/recipes",
+    "catalogCode": "welcome-to-bloxburg-recipes",
+    "itemFields": [
+      "recipeFamily",
+      "cookingLevel",
+      "steps",
+      "ingredientCost",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "recipeFamily",
+      "cookingLevel",
+      "steps",
+      "ingredientCost",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Level 0",
+        "Level 1",
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Level 5",
+        "Level 6",
+        "Level 7",
+        "Level 8",
+        "Level 9",
+        "Seasonal & event"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "recipeFamily"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "recipeFamily",
+        "cookingLevel",
+        "steps",
+        "ingredientCost",
+        "availability"
+      ],
+      "tableFields": [
+        "recipeFamily",
+        "cookingLevel",
+        "steps",
+        "ingredientCost",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "recipeFamily": {
+          "kind": "normal",
+          "label": "Type"
+        },
+        "cookingLevel": {
+          "kind": "chip",
+          "label": "Skill level"
+        },
+        "steps": {
+          "kind": "detail",
+          "label": "Steps",
+          "omitWhenEmpty": true
+        },
+        "ingredientCost": {
+          "kind": "chip",
+          "label": "Ingredient cost",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Baby Food",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Mix",
+        "ingredientCost": "$3",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "baby-food",
+        "section": "Level 0",
+        "sortOrder": 1,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/baby-food.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Garden Salad",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Cut, Mix",
+        "ingredientCost": "$4",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "garden-salad",
+        "section": "Level 0",
+        "sortOrder": 2,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/garden-salad.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hot Dogs",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Fry",
+        "ingredientCost": "$5",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "hot-dogs",
+        "section": "Level 0",
+        "sortOrder": 3,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/hot-dogs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fruit Salad",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Cut, Mix",
+        "ingredientCost": "$5",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "fruit-salad",
+        "section": "Level 1",
+        "sortOrder": 4,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/fruit-salad.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vegetable Soup",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Cut, Boil",
+        "ingredientCost": "$5",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "vegetable-soup",
+        "section": "Level 1",
+        "sortOrder": 5,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/vegetable-soup.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plate of Corn",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Boil, Garnish",
+        "ingredientCost": "$5",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "plate-of-corn",
+        "section": "Level 1",
+        "sortOrder": 6,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/plate-of-corn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Corndogs",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Bake",
+        "ingredientCost": "$6",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "mini-corndogs",
+        "section": "Level 0",
+        "sortOrder": 7,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/mini-corndogs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bacon and Eggs",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Fry",
+        "ingredientCost": "$6",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "bacon-and-eggs",
+        "section": "Level 1",
+        "sortOrder": 8,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/bacon-and-eggs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chicken Nuggets",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Bake",
+        "ingredientCost": "$7",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "chicken-nuggets",
+        "section": "Level 0",
+        "sortOrder": 9,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/chicken-nuggets.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fish Sticks",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Bake",
+        "ingredientCost": "$8",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "fish-sticks",
+        "section": "Level 0",
+        "sortOrder": 10,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/fish-sticks.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pancakes",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Stir, Fry",
+        "ingredientCost": "$8",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "pancakes",
+        "section": "Level 1",
+        "sortOrder": 11,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pancakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "French Fries",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Cut, Deep Fry, Garnish",
+        "ingredientCost": "$9",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "french-fries",
+        "section": "Level 1",
+        "sortOrder": 12,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/french-fries.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gelatin Cake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Mix",
+        "ingredientCost": "$10",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "gelatin-cake",
+        "section": "Level 0",
+        "sortOrder": 13,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/gelatin-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grilled Banana",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Bake",
+        "ingredientCost": "$10",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "grilled-banana",
+        "section": "Level 2",
+        "sortOrder": 14,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/grilled-banana.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plate of Langos",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Stir, Deep Fry, Garnish, Cut",
+        "ingredientCost": "$10",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "plate-of-langos",
+        "section": "Level 2",
+        "sortOrder": 15,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/plate-of-langos.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chili",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Cut, Fry, Boil",
+        "ingredientCost": "$10",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "chili",
+        "section": "Level 2",
+        "sortOrder": 16,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/chili.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Veggie Skewers",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Cut, Garnish Fry",
+        "ingredientCost": "$10",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "veggie-skewers",
+        "section": "Level 3",
+        "sortOrder": 17,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/veggie-skewers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Poke Bowl",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Boil, Cut, Assemble",
+        "ingredientCost": "$12",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "poke-bowl",
+        "section": "Level 2",
+        "sortOrder": 18,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/poke-bowl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tacos",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Cut, Fry",
+        "ingredientCost": "$12",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "tacos",
+        "section": "Level 2",
+        "sortOrder": 19,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/tacos.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cookies",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Stir, Form, Bake",
+        "ingredientCost": "$13",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "cookies",
+        "section": "Level 2",
+        "sortOrder": 20,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plate of Madeleine Cake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Stir, Mix, Bake Garnish",
+        "ingredientCost": "$13",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "plate-of-madeleine-cake",
+        "section": "Level 2",
+        "sortOrder": 21,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/plate-of-madeleine-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meat Skewers",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Cut, Garnish, Fry",
+        "ingredientCost": "$13",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "meat-skewers",
+        "section": "Level 3",
+        "sortOrder": 22,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/meat-skewers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Banana Split",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 0",
+        "steps": "Cut, Assemble, Garnish",
+        "ingredientCost": "$15",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 0."
+      },
+      "system": {
+        "slug": "banana-split",
+        "section": "Level 0",
+        "sortOrder": 23,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/banana-split.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jiaozi Dumplins",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Roll, Form, Fry",
+        "ingredientCost": "$15",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "jiaozi-dumplins",
+        "section": "Level 2",
+        "sortOrder": 24,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/jiaozi-dumplins.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serving of Churros",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Stir, Deep Fry, Garnish",
+        "ingredientCost": "$15",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "serving-of-churros",
+        "section": "Level 2",
+        "sortOrder": 25,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/serving-of-churros.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beef Stew",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Cut, Boil",
+        "ingredientCost": "$15",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "beef-stew",
+        "section": "Level 3",
+        "sortOrder": 26,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/beef-stew.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hamburgers",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Cut, Fry",
+        "ingredientCost": "$18",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "hamburgers",
+        "section": "Level 3",
+        "sortOrder": 27,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/hamburgers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rice Pudding",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Mix, Cook",
+        "ingredientCost": "$18",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "rice-pudding",
+        "section": "Level 3",
+        "sortOrder": 28,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/rice-pudding.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BBQ Ribs",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Garnish, Bake, Garnish",
+        "ingredientCost": "$19",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "bbq-ribs",
+        "section": "Level 4",
+        "sortOrder": 29,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/bbq-ribs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Loaf of Bread",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Stir, Bake, Cut",
+        "ingredientCost": "$20",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "loaf-of-bread",
+        "section": "Level 2",
+        "sortOrder": 30,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/loaf-of-bread.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mandazi",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Deep Fry, Garnish",
+        "ingredientCost": "$20",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "mandazi",
+        "section": "Level 2",
+        "sortOrder": 31,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/mandazi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pot of Tteokbokki",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Cut, Cook",
+        "ingredientCost": "$20",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "pot-of-tteokbokki",
+        "section": "Level 3",
+        "sortOrder": 32,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pot-of-tteokbokki.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baguette",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Form, Bake, Cut",
+        "ingredientCost": "$20",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "baguette",
+        "section": "Level 4",
+        "sortOrder": 33,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/baguette.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blueberry Muffins",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Bake",
+        "ingredientCost": "$20",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "blueberry-muffins",
+        "section": "Level 4",
+        "sortOrder": 34,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/blueberry-muffins.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Empanadas",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Bake, Garnish",
+        "ingredientCost": "$22",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "empanadas",
+        "section": "Level 5",
+        "sortOrder": 35,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/empanadas.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Roll, Garnish, Bake",
+        "ingredientCost": "$24",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "pizza",
+        "section": "Level 4",
+        "sortOrder": 36,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pizza.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vada Pav",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Fry, Cut, Garnish",
+        "ingredientCost": "$24",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "vada-pav",
+        "section": "Level 5",
+        "sortOrder": 37,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/vada-pav.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Cupcakes",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$25",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "chocolate-cupcakes",
+        "section": "Level 6",
+        "sortOrder": 38,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/chocolate-cupcakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spaghetti Pomodoro",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Boil, Mix",
+        "ingredientCost": "$26",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "spaghetti-pomodoro",
+        "section": "Level 4",
+        "sortOrder": 39,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/spaghetti-pomodoro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Caesar Salad",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Cut, Fry, Mix",
+        "ingredientCost": "$28",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "caesar-salad",
+        "section": "Level 4",
+        "sortOrder": 40,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/caesar-salad.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sugar Donuts",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Form, Deep Fry, Garnish",
+        "ingredientCost": "$28",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "sugar-donuts",
+        "section": "Level 6",
+        "sortOrder": 41,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/sugar-donuts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Velvet Cupcakes",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$28",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "red-velvet-cupcakes",
+        "section": "Level 6",
+        "sortOrder": 42,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/red-velvet-cupcakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Challah Bread",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Stir, Bake, Cut",
+        "ingredientCost": "$30",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "challah-bread",
+        "section": "Level 5",
+        "sortOrder": 43,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/challah-bread.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plain Cheesecake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Stir, Form, Mix, Bake",
+        "ingredientCost": "$30",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "plain-cheesecake",
+        "section": "Level 5",
+        "sortOrder": 44,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/plain-cheesecake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprinkle Donuts",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Form, Deep Fry, Garnish",
+        "ingredientCost": "$30",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "sprinkle-donuts",
+        "section": "Level 7",
+        "sortOrder": 45,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/sprinkle-donuts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spaghetti and Meatballs",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Form, Fry, Boil",
+        "ingredientCost": "$32",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "spaghetti-and-meatballs",
+        "section": "Level 5",
+        "sortOrder": 46,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/spaghetti-and-meatballs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serving of Baklava",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Roll, Bake, Garnish",
+        "ingredientCost": "$35",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "serving-of-baklava",
+        "section": "Level 7",
+        "sortOrder": 47,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/serving-of-baklava.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Porkchops",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Fry, Bake, Garnish",
+        "ingredientCost": "$36",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "porkchops",
+        "section": "Level 5",
+        "sortOrder": 48,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/porkchops.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Apple Pie",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Cut, Roll, Garnish, Bake",
+        "ingredientCost": "$38",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "apple-pie",
+        "section": "Level 6",
+        "sortOrder": 49,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/apple-pie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Birthday Cupcakes",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$40",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "birthday-cupcakes",
+        "section": "Level 2",
+        "sortOrder": 50,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/birthday-cupcakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot Cake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$40",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "carrot-cake",
+        "section": "Level 6",
+        "sortOrder": 51,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/carrot-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plate of Croissants",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Roll, Form, Bake",
+        "ingredientCost": "$40",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "plate-of-croissants",
+        "section": "Level 7",
+        "sortOrder": 52,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/plate-of-croissants.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pot of Curry",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Cut, Cook",
+        "ingredientCost": "$40",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "pot-of-curry",
+        "section": "Level 7",
+        "sortOrder": 53,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pot-of-curry.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pecan Pie",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Mix, Roll, Garnish, Bake",
+        "ingredientCost": "$42",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "pecan-pie",
+        "section": "Level 6",
+        "sortOrder": 54,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pecan-pie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rhubarb Crumble Pie",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Mix, Roll, Garnish, Bake",
+        "ingredientCost": "$42",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "rhubarb-crumble-pie",
+        "section": "Level 6",
+        "sortOrder": 55,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/rhubarb-crumble-pie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Pie",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Cut, Roll, Garnish, Bake",
+        "ingredientCost": "$42",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "pumpkin-pie",
+        "section": "Level 6",
+        "sortOrder": 56,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pumpkin-pie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fruit Cake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$44",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "fruit-cake",
+        "section": "Level 6",
+        "sortOrder": 57,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/fruit-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry Cream Cake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 8",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$44",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 8."
+      },
+      "system": {
+        "slug": "strawberry-cream-cake",
+        "section": "Level 8",
+        "sortOrder": 58,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/strawberry-cream-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mixed Berry Pie",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Cut, Roll, Garnish, Bake",
+        "ingredientCost": "$45",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "mixed-berry-pie",
+        "section": "Level 6",
+        "sortOrder": 59,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/mixed-berry-pie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Chow",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Bake",
+        "ingredientCost": "$45",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "bunny-chow",
+        "section": "Level 7",
+        "sortOrder": 60,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/bunny-chow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lasagna",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Fry, Garnish, Bake",
+        "ingredientCost": "$46",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "lasagna",
+        "section": "Level 6",
+        "sortOrder": 61,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lasagna.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Birthday Cake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$46",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "birthday-cake",
+        "section": "Level 6",
+        "sortOrder": 62,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/birthday-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cake",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$46",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "cake",
+        "section": "Level 7",
+        "sortOrder": 63,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Salmon",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Cut, Fry, Garnish",
+        "ingredientCost": "$48",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "salmon",
+        "section": "Level 7",
+        "sortOrder": 64,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/salmon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Turkey",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Cut, Bake, Garnish",
+        "ingredientCost": "$50",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "turkey",
+        "section": "Level 7",
+        "sortOrder": 65,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/turkey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meatloaf",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 8",
+        "steps": "Mix, Form, Bake, Garnish",
+        "ingredientCost": "$52",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 8."
+      },
+      "system": {
+        "slug": "meatloaf",
+        "section": "Level 8",
+        "sortOrder": 66,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/meatloaf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kimchi Grilled Cheese Sandwich",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 8",
+        "steps": "Cut, Garnish, Fry, Cut",
+        "ingredientCost": "$52",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 8."
+      },
+      "system": {
+        "slug": "kimchi-grilled-cheese-sandwich",
+        "section": "Level 8",
+        "sortOrder": 67,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/kimchi-grilled-cheese-sandwich.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Braised Ham",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Cut, Bake, Boil, Garnish",
+        "ingredientCost": "$60",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "braised-ham",
+        "section": "Level 7",
+        "sortOrder": 68,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/braised-ham.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sushi Rolls",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 8",
+        "steps": "Boil, Cut, Form, Cut",
+        "ingredientCost": "$62",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 8."
+      },
+      "system": {
+        "slug": "sushi-rolls",
+        "section": "Level 8",
+        "sortOrder": 69,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/sushi-rolls.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Steak",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 9",
+        "steps": "Boil, Mix, Fry, Garnish",
+        "ingredientCost": "$74",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 9."
+      },
+      "system": {
+        "slug": "steak",
+        "section": "Level 9",
+        "sortOrder": 70,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/steak.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lobster",
+        "recipeFamily": "Permanent cooked recipe",
+        "cookingLevel": "Level 9",
+        "steps": "Cut, Boil, Garnish",
+        "ingredientCost": "$80",
+        "availability": "Permanent cooked food",
+        "cardSummary": "A permanent cooked recipe unlocked at Cooking level 9."
+      },
+      "system": {
+        "slug": "lobster",
+        "section": "Level 9",
+        "sortOrder": 71,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lobster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "New Year's Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Garnish, Form, Garnish",
+        "ingredientCost": "$56",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "new-year-s-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 72,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/new-year-s-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely Bacon and Eggs",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Fry",
+        "ingredientCost": "$10",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "lovely-bacon-and-eggs",
+        "section": "Seasonal & event",
+        "sortOrder": 73,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lovely-bacon-and-eggs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Envelope Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Stir, Form, Bake, Garnish",
+        "ingredientCost": "$18",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "envelope-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 74,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/envelope-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely Chocolate Candy Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Stir, Form, Bake",
+        "ingredientCost": "$18",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "lovely-chocolate-candy-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 75,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lovely-chocolate-candy-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Stir, Form, Bake, Garnish",
+        "ingredientCost": "$18",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "heart-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 76,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/heart-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely Jam Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Form, Bake",
+        "ingredientCost": "$26",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "lovely-jam-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 77,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lovely-jam-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Macarons",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Form, Bake, Garnish",
+        "ingredientCost": "$27",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "heart-macarons",
+        "section": "Seasonal & event",
+        "sortOrder": 78,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/heart-macarons.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Cupcakes",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$29",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "heart-cupcakes",
+        "section": "Seasonal & event",
+        "sortOrder": 79,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/heart-cupcakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Shaped Pizza",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Roll, Garnish, Bake",
+        "ingredientCost": "$30",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "heart-shaped-pizza",
+        "section": "Seasonal & event",
+        "sortOrder": 80,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/heart-shaped-pizza.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely Donuts",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$30",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "lovely-donuts",
+        "section": "Seasonal & event",
+        "sortOrder": 81,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lovely-donuts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely Cake Pops",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$36",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "lovely-cake-pops",
+        "section": "Seasonal & event",
+        "sortOrder": 82,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lovely-cake-pops.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Cookie Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Roll, Bake, Garnish",
+        "ingredientCost": "$40",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "heart-cookie-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 83,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/heart-cookie-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry Swirl Cheesecake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Form, Mix, Bake",
+        "ingredientCost": "$45",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "strawberry-swirl-cheesecake",
+        "section": "Seasonal & event",
+        "sortOrder": 84,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/strawberry-swirl-cheesecake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentines Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Garnish, Form, Garnish",
+        "ingredientCost": "$48",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "valentines-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 85,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/valentines-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$59",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "heart-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 86,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/heart-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Meat Burger",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Cut, Fry, Garnish",
+        "ingredientCost": "$10",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "pumpkin-meat-burger",
+        "section": "Seasonal & event",
+        "sortOrder": 87,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pumpkin-meat-burger.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Veggie Burger",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 2",
+        "steps": "Cut, Fry, Garnish",
+        "ingredientCost": "$10",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 2."
+      },
+      "system": {
+        "slug": "pumpkin-veggie-burger",
+        "section": "Seasonal & event",
+        "sortOrder": 88,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pumpkin-veggie-burger.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Stir, Form, Bake",
+        "ingredientCost": "$15",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "pumpkin-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 89,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pumpkin-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Form, Bake, Garnish",
+        "ingredientCost": "$18",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "ghost-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 90,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/ghost-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Witch Hat Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Stir, Form, Bake",
+        "ingredientCost": "$20",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "witch-hat-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 91,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/witch-hat-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plate of Pumpkin Macarons",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Form, Bake, Garnish",
+        "ingredientCost": "$27",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "plate-of-pumpkin-macarons",
+        "section": "Seasonal & event",
+        "sortOrder": 92,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/plate-of-pumpkin-macarons.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Muffins",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Stir, Bake",
+        "ingredientCost": "$24",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "pumpkin-muffins",
+        "section": "Seasonal & event",
+        "sortOrder": 93,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pumpkin-muffins.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween Cupcakes",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$29",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "halloween-cupcakes",
+        "section": "Seasonal & event",
+        "sortOrder": 94,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/halloween-cupcakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Chocolate Chip Bread",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Cut",
+        "ingredientCost": "$35",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "pumpkin-chocolate-chip-bread",
+        "section": "Seasonal & event",
+        "sortOrder": 95,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pumpkin-chocolate-chip-bread.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spooky Cake Pops",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Bake, Cut",
+        "ingredientCost": "$35",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "spooky-cake-pops",
+        "section": "Seasonal & event",
+        "sortOrder": 96,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/spooky-cake-pops.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tombstone Brownies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$48",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "tombstone-brownies",
+        "section": "Seasonal & event",
+        "sortOrder": 97,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/tombstone-brownies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Garnish, Form, Garnish",
+        "ingredientCost": "$48",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "halloween-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 98,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/halloween-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Princess Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Garnish, Form, Garnish",
+        "ingredientCost": "$48",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "pumpkin-princess-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 99,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/pumpkin-princess-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Reindeer Pancakes",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Stir, Fry",
+        "ingredientCost": "$11",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "reindeer-pancakes",
+        "section": "Seasonal & event",
+        "sortOrder": 100,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/reindeer-pancakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Holiday Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 1",
+        "steps": "Stir, Form, Bake",
+        "ingredientCost": "$15",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 1."
+      },
+      "system": {
+        "slug": "holiday-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 101,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/holiday-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Roll, Form, Bake, Garnish",
+        "ingredientCost": "$20",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "gingerbread-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 102,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/gingerbread-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iced Holiday Cookies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Stir, Form, Bake, Garnish",
+        "ingredientCost": "$22",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "iced-holiday-cookies",
+        "section": "Seasonal & event",
+        "sortOrder": 103,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/iced-holiday-cookies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mince Pie",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Mix, Bake",
+        "ingredientCost": "$23",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "mince-pie",
+        "section": "Seasonal & event",
+        "sortOrder": 104,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/mince-pie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lussebuns",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Form, Bake",
+        "ingredientCost": "$25",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "lussebuns",
+        "section": "Seasonal & event",
+        "sortOrder": 105,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/lussebuns.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Cake Pops",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Mix, Form, Garnish",
+        "ingredientCost": "$36",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "festive-cake-pops",
+        "section": "Seasonal & event",
+        "sortOrder": 106,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/festive-cake-pops.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Holiday Pudding",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Mix, Bake, Garnish, Garnish",
+        "ingredientCost": "$40",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "holiday-pudding",
+        "section": "Seasonal & event",
+        "sortOrder": 107,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/holiday-pudding.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Fudge",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 3",
+        "steps": "Stir, Form, Garnish",
+        "ingredientCost": "$46",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 3."
+      },
+      "system": {
+        "slug": "festive-fudge",
+        "section": "Seasonal & event",
+        "sortOrder": 108,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/festive-fudge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yule Log Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Stir, Bake, Garnish, Form, Garnish",
+        "ingredientCost": "$48",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "yule-log-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 109,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/yule-log-cake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Outhouse",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Roll, Form, Bake, Form, Garnish",
+        "ingredientCost": "$50",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "gingerbread-outhouse",
+        "section": "Seasonal & event",
+        "sortOrder": 110,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/gingerbread-outhouse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Holiday Tree Brownies",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 4",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$52",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 4."
+      },
+      "system": {
+        "slug": "holiday-tree-brownies",
+        "section": "Seasonal & event",
+        "sortOrder": 111,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/holiday-tree-brownies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread House",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 5",
+        "steps": "Roll, Form, Bake, Form, Garnish",
+        "ingredientCost": "$68",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 5."
+      },
+      "system": {
+        "slug": "gingerbread-house",
+        "section": "Seasonal & event",
+        "sortOrder": 112,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/gingerbread-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Modern Gingerbread House",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 7",
+        "steps": "Roll, Form, Bake, Form, Garnish",
+        "ingredientCost": "$75",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 7."
+      },
+      "system": {
+        "slug": "modern-gingerbread-house",
+        "section": "Seasonal & event",
+        "sortOrder": 113,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/modern-gingerbread-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflake Cupcakes",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 6",
+        "steps": "Stir, Bake, Garnish",
+        "ingredientCost": "$29",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 6."
+      },
+      "system": {
+        "slug": "snowflake-cupcakes",
+        "section": "Seasonal & event",
+        "sortOrder": 114,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/snowflake-cupcakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Cake",
+        "recipeFamily": "Seasonal event recipe",
+        "cookingLevel": "Level 8",
+        "steps": "Stir, Bake, Garnish, Garnish",
+        "ingredientCost": "$55",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A seasonal or event-limited cooked recipe unlocked at Cooking level 8."
+      },
+      "system": {
+        "slug": "winter-cake",
+        "section": "Seasonal & event",
+        "sortOrder": 115,
+        "image": "/Welcome%20to%20Bloxburg/Recipes/winter-cake.webp"
+      }
+    }
+  ]
+}

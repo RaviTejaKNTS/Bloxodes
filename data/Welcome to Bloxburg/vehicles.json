@@ -1,0 +1,1328 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Welcome to Bloxburg",
+    "gameSlug": "welcome-to-bloxburg",
+    "collection": "vehicles",
+    "route": "/wiki/welcome-to-bloxburg/vehicles",
+    "catalogCode": "welcome-to-bloxburg-vehicles",
+    "itemFields": [
+      "vehicleType",
+      "price",
+      "currency",
+      "speed",
+      "seats",
+      "quality",
+      "fun",
+      "reliability",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "vehicleType",
+      "price",
+      "currency",
+      "speed",
+      "seats",
+      "quality",
+      "fun",
+      "reliability",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Cash vehicles",
+        "Blockbux vehicles",
+        "Seasonal & event"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "vehicleType"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "vehicleType",
+        "price",
+        "currency",
+        "speed",
+        "seats",
+        "quality",
+        "fun",
+        "reliability",
+        "availability"
+      ],
+      "tableFields": [
+        "vehicleType",
+        "price",
+        "currency",
+        "speed",
+        "seats",
+        "quality",
+        "fun",
+        "reliability",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "vehicleType": {
+          "kind": "normal",
+          "label": "Type"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "currency": {
+          "kind": "normal",
+          "label": "Currency"
+        },
+        "speed": {
+          "kind": "chip",
+          "label": "Speed"
+        },
+        "seats": {
+          "kind": "chip",
+          "label": "Seats"
+        },
+        "quality": {
+          "kind": "normal",
+          "label": "Quality"
+        },
+        "fun": {
+          "kind": "normal",
+          "label": "Fun"
+        },
+        "reliability": {
+          "kind": "normal",
+          "label": "Reliability"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Baby Walker",
+        "vehicleType": "Car or ride",
+        "price": "$300",
+        "currency": "Money",
+        "speed": "10",
+        "seats": "1",
+        "quality": "++",
+        "fun": "++++",
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Are you tired of your baby still not being able to walk? Who isn't! Thanks to the geniuses at baby product maker PramP, lazy babies are out of excuses not to pull themselves up by their bootstraps and start walking on their own."
+      },
+      "system": {
+        "slug": "baby-walker",
+        "section": "Cash vehicles",
+        "sortOrder": 1,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/baby-walker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LittleWheels Mega Cruisin' Trike",
+        "vehicleType": "Car or ride",
+        "price": "$2,200",
+        "currency": "Money",
+        "speed": "12",
+        "seats": "1",
+        "quality": "++",
+        "fun": "++++",
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Cruise around the sidewalks and be the envy of your friends with these hard to miss oversized wheels!"
+      },
+      "system": {
+        "slug": "littlewheels-mega-cruisin-trike",
+        "section": "Cash vehicles",
+        "sortOrder": 2,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/littlewheels-mega-cruisin-trike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kick Scooter",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$2,300",
+        "currency": "Money",
+        "speed": "20",
+        "seats": "1",
+        "quality": "++",
+        "fun": "++++",
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A kick scooter for kids."
+      },
+      "system": {
+        "slug": "kick-scooter",
+        "section": "Cash vehicles",
+        "sortOrder": 3,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/kick-scooter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LittleWheels PushPower Car",
+        "vehicleType": "Car or ride",
+        "price": "$2,400",
+        "currency": "Money",
+        "speed": "10",
+        "seats": "1",
+        "quality": "++",
+        "fun": "++++",
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Let your child kick those legs and push themselves into new adventures in this classic plastic car!"
+      },
+      "system": {
+        "slug": "littlewheels-pushpower-car",
+        "section": "Cash vehicles",
+        "sortOrder": 4,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/littlewheels-pushpower-car.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ride-On Locomotive",
+        "vehicleType": "Car or ride",
+        "price": "$2,500",
+        "currency": "Money",
+        "speed": "15",
+        "seats": "1",
+        "quality": "++",
+        "fun": "++++",
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A small yet drivable locomotive"
+      },
+      "system": {
+        "slug": "ride-on-locomotive",
+        "section": "Cash vehicles",
+        "sortOrder": 5,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/ride-on-locomotive.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "EasyWheels Training Bike",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$2,650",
+        "currency": "Money",
+        "speed": "19",
+        "seats": "1",
+        "quality": "+",
+        "fun": null,
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A bike with set of training wheels for better balance."
+      },
+      "system": {
+        "slug": "easywheels-training-bike",
+        "section": "Cash vehicles",
+        "sortOrder": 6,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/easywheels-training-bike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "EXO-Speed Mountain Bike",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$3,500",
+        "currency": "Money",
+        "speed": "21",
+        "seats": "1",
+        "quality": "++",
+        "fun": null,
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "This lightweight kids mountainbike fitted with EXO-grip TRAIL tires will allow you to go almost anywhere on rough terrain."
+      },
+      "system": {
+        "slug": "exo-speed-mountain-bike",
+        "section": "Cash vehicles",
+        "sortOrder": 7,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/exo-speed-mountain-bike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Manual Kids' Wheelchair",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$3,700",
+        "currency": "Money",
+        "speed": "13",
+        "seats": "1",
+        "quality": "+++",
+        "fun": "++",
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A wheelchair designed to keep up with your kid's active, spirited life! With its lightweight, metal frame and tear resistant fabric this chair is built to last."
+      },
+      "system": {
+        "slug": "manual-kids-wheelchair",
+        "section": "Cash vehicles",
+        "sortOrder": 8,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/manual-kids-wheelchair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LittleWheels Classic Moped",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$4,000",
+        "currency": "Money",
+        "speed": "25",
+        "seats": "1",
+        "quality": "++",
+        "fun": "++",
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "With this LittleWheels scooter you can finally cruise from cafe to cafe before even learning how to walk properly! Throw on some shades and enjoy the cool breeze of a hot day. Tomorrow a long day of kindergarten is waiting for you, but today... today you can ride."
+      },
+      "system": {
+        "slug": "littlewheels-classic-moped",
+        "section": "Cash vehicles",
+        "sortOrder": 9,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/littlewheels-classic-moped.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Duchess Blooming Bike",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$4,500",
+        "currency": "Money",
+        "speed": "28",
+        "seats": "1",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Cruise down the street with the wind on your face and your basket full of flowers. Hear the birds sing and leaves rustle on their branches as you go, and remember: it's the journey the matters, not the destination."
+      },
+      "system": {
+        "slug": "duchess-blooming-bike",
+        "section": "Cash vehicles",
+        "sortOrder": 10,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/duchess-blooming-bike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Manual Wheelchair",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$4,600",
+        "currency": "Money",
+        "speed": "13",
+        "seats": "1",
+        "quality": "+++",
+        "fun": "++",
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Roll down the streets with confidence in this sleek, lightweight and budget friendly wheelchair! Thanks to the aluminum rims and tear resistant fabric this chair is guaranteed to last you a long time."
+      },
+      "system": {
+        "slug": "manual-wheelchair",
+        "section": "Cash vehicles",
+        "sortOrder": 11,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/manual-wheelchair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "EXO-Xtreme Mountain Bike",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$4,800",
+        "currency": "Money",
+        "speed": "30",
+        "seats": "1",
+        "quality": "++",
+        "fun": null,
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "This lightweight mountainbike fitted with EXO-grip TRAIL tires will allow you to go almost anywhere on rough terrain."
+      },
+      "system": {
+        "slug": "exo-xtreme-mountain-bike",
+        "section": "Cash vehicles",
+        "sortOrder": 12,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/exo-xtreme-mountain-bike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LittleWheels Off-Road Crawler",
+        "vehicleType": "Car or ride",
+        "price": "$11,750",
+        "currency": "Money",
+        "speed": "26",
+        "seats": null,
+        "quality": "++",
+        "fun": "+++",
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A small off-roader for the young driver."
+      },
+      "system": {
+        "slug": "littlewheels-off-road-crawler",
+        "section": "Cash vehicles",
+        "sortOrder": 13,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/littlewheels-off-road-crawler.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moped",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$12,500",
+        "currency": "Money",
+        "speed": "40",
+        "seats": "1",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "This classic moped might not be the fastest of vehicles, but it sure looks pretty."
+      },
+      "system": {
+        "slug": "moped",
+        "section": "Cash vehicles",
+        "sortOrder": 14,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/moped.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "TurfTrooper Ride-On Mower",
+        "vehicleType": "Utility or large vehicle",
+        "price": "$14,000",
+        "currency": "Money",
+        "speed": "10",
+        "seats": "1",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A ride-on lawn mower."
+      },
+      "system": {
+        "slug": "turftrooper-ride-on-mower",
+        "section": "Cash vehicles",
+        "sortOrder": 15,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/turftrooper-ride-on-mower.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Moped",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$15,000",
+        "currency": "Money",
+        "speed": "40",
+        "seats": "1",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Feel the wind in your hair as you breeze through the winding city streets on this iconic scooter. Cruising has never felt - or looked - this good."
+      },
+      "system": {
+        "slug": "classic-moped",
+        "section": "Cash vehicles",
+        "sortOrder": 16,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/classic-moped.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LittleWheels Cruisin' Convertible",
+        "vehicleType": "Car or ride",
+        "price": "$16,500",
+        "currency": "Money",
+        "speed": "30",
+        "seats": null,
+        "quality": "+++",
+        "fun": "+++",
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A small convertible for the young driver."
+      },
+      "system": {
+        "slug": "littlewheels-cruisin-convertible",
+        "section": "Cash vehicles",
+        "sortOrder": 17,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/littlewheels-cruisin-convertible.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LittleWheels Mega Motorcycle",
+        "vehicleType": "Car or ride",
+        "price": "$18,000",
+        "currency": "Money",
+        "speed": "24",
+        "seats": null,
+        "quality": "+++",
+        "fun": "+++",
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A small motorcycle for the young driver."
+      },
+      "system": {
+        "slug": "littlewheels-mega-motorcycle",
+        "section": "Cash vehicles",
+        "sortOrder": 18,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/littlewheels-mega-motorcycle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roat 500",
+        "vehicleType": "Car or ride",
+        "price": "$18,000",
+        "currency": "Money",
+        "speed": "50",
+        "seats": "2",
+        "quality": "++",
+        "fun": null,
+        "reliability": "+",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A small car might not be the prettiest, but it sure works."
+      },
+      "system": {
+        "slug": "roat-500",
+        "section": "Cash vehicles",
+        "sortOrder": 19,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/roat-500.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxai Voyage",
+        "vehicleType": "Car or ride",
+        "price": "$25,000",
+        "currency": "Money",
+        "speed": "60",
+        "seats": "4",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "With its four seats and spacious design, this car is perfect for the family."
+      },
+      "system": {
+        "slug": "bloxai-voyage",
+        "section": "Cash vehicles",
+        "sortOrder": 20,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/bloxai-voyage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "TruFleet City Taxi",
+        "vehicleType": "Car or ride",
+        "price": "$42,500",
+        "currency": "Money",
+        "speed": "40",
+        "seats": "4",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A classic and reliable taxi that'll bring any customer as far as their money can get them. With the taxi parked directly in your driveway, you can start work the moment you leave home, or just take it for a joyride when you're off the clock!"
+      },
+      "system": {
+        "slug": "trufleet-city-taxi",
+        "section": "Cash vehicles",
+        "sortOrder": 21,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/trufleet-city-taxi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roto Minivan",
+        "vehicleType": "Utility or large vehicle",
+        "price": "$52,500",
+        "currency": "Money",
+        "speed": "60",
+        "seats": "6",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A large family minivan with 6 seats."
+      },
+      "system": {
+        "slug": "roto-minivan",
+        "section": "Cash vehicles",
+        "sortOrder": 22,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/roto-minivan.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golf Cart",
+        "vehicleType": "Utility or large vehicle",
+        "price": "$65,000",
+        "currency": "Money",
+        "speed": "54",
+        "seats": "4",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A fully electric golf cart."
+      },
+      "system": {
+        "slug": "golf-cart",
+        "section": "Cash vehicles",
+        "sortOrder": 23,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/golf-cart.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RB Breeze Hardtop",
+        "vehicleType": "Car or ride",
+        "price": "$76,000",
+        "currency": "Money",
+        "speed": "63",
+        "seats": "4",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "The RB Breeze, a true classic!"
+      },
+      "system": {
+        "slug": "rb-breeze-hardtop",
+        "section": "Cash vehicles",
+        "sortOrder": 24,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/rb-breeze-hardtop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxavor 4x4",
+        "vehicleType": "Car or ride",
+        "price": "$90,000",
+        "currency": "Money",
+        "speed": "65",
+        "seats": "4",
+        "quality": "+++",
+        "fun": "++++",
+        "reliability": "++++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "With this powerful offroad 4x4 from Bloxavor, you can drive absolutely anywhere."
+      },
+      "system": {
+        "slug": "bloxavor-4x4",
+        "section": "Cash vehicles",
+        "sortOrder": 25,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/bloxavor-4x4.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Terra TrekLite Pickup Truck",
+        "vehicleType": "Utility or large vehicle",
+        "price": "$130,000",
+        "currency": "Money",
+        "speed": "66",
+        "seats": "4",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "This 2-seat pickup is the perfect truck to drive around in during any season. The truck bed is easily accessible by opening the latch and just stepping in. It is not safe to sit in the truck bed while driving. Terra takes no responsibility for injuries sustained when occupying the truck bed in transit."
+      },
+      "system": {
+        "slug": "terra-treklite-pickup-truck",
+        "section": "Cash vehicles",
+        "sortOrder": 26,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/terra-treklite-pickup-truck.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moovers C400 Express Truck",
+        "vehicleType": "Utility or large vehicle",
+        "price": "$140,000",
+        "currency": "Money",
+        "speed": "60",
+        "seats": "2",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A commercial box truck for when you need to move your belongings from point A to point B, but a wheelbarrow isn't big enough, and a cargo ship is a bit too much."
+      },
+      "system": {
+        "slug": "moovers-c400-express-truck",
+        "section": "Cash vehicles",
+        "sortOrder": 27,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/moovers-c400-express-truck.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bord Summit XL",
+        "vehicleType": "Car or ride",
+        "price": "$160,000",
+        "currency": "Money",
+        "speed": "63",
+        "seats": "6",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A large SUV with 6 seats."
+      },
+      "system": {
+        "slug": "bord-summit-xl",
+        "section": "Cash vehicles",
+        "sortOrder": 28,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/bord-summit-xl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Noobus Superior",
+        "vehicleType": "Utility or large vehicle",
+        "price": "$170,000",
+        "currency": "Money",
+        "speed": "68",
+        "seats": "4",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "This luxurious sedan from Noobus is truly superior."
+      },
+      "system": {
+        "slug": "noobus-superior",
+        "section": "Cash vehicles",
+        "sortOrder": 29,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/noobus-superior.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RB Beach Buggy",
+        "vehicleType": "Car or ride",
+        "price": "$200,000",
+        "currency": "Money",
+        "speed": "72",
+        "seats": "2",
+        "quality": "++++",
+        "fun": "++++",
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "The RB Beach Buggy, perfect for driving around in the sand!"
+      },
+      "system": {
+        "slug": "rb-beach-buggy",
+        "section": "Cash vehicles",
+        "sortOrder": 30,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/rb-beach-buggy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxavor Centaur G40",
+        "vehicleType": "Car or ride",
+        "price": "$225,000",
+        "currency": "Money",
+        "speed": "70",
+        "seats": "4",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "When you need a car that's tough, a car that can defy nature, drive through storms and up mountains just as easily as down a paved road, you don't want a car that's just tough. You want the Centaur G40, a car that's Bloxavor Tough."
+      },
+      "system": {
+        "slug": "bloxavor-centaur-g40",
+        "section": "Cash vehicles",
+        "sortOrder": 31,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/bloxavor-centaur-g40.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skateboard",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "200 Blockbux",
+        "currency": "Blockbux",
+        "speed": "35",
+        "seats": "1",
+        "quality": "++",
+        "fun": "+++++",
+        "reliability": "+",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "An ordinary wooden skateboard, perfect for anyone wanting to do some sick tricks."
+      },
+      "system": {
+        "slug": "skateboard",
+        "section": "Blockbux vehicles",
+        "sortOrder": 32,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/skateboard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wheelie Wonder X16 Unicycle",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "300 Blockbux",
+        "currency": "Blockbux",
+        "speed": "25",
+        "seats": "1",
+        "quality": "++",
+        "fun": "+++++",
+        "reliability": "+",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Learning how to unicycle is actually easier than you think! Just make sure to wear a helmet and you'll be riding to work or school in style in no time!"
+      },
+      "system": {
+        "slug": "wheelie-wonder-x16-unicycle",
+        "section": "Blockbux vehicles",
+        "sortOrder": 33,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/wheelie-wonder-x16-unicycle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Longboard",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "350 Blockbux",
+        "currency": "Blockbux",
+        "speed": "40",
+        "seats": "1",
+        "quality": "+++",
+        "fun": "+++++",
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Unlike the more trick-focused skateboard this piece of wood on wheels is made to go long distance. An eye-catching and fun transportation method that will have you rolling through town like the cool person you are."
+      },
+      "system": {
+        "slug": "longboard",
+        "section": "Blockbux vehicles",
+        "sortOrder": 34,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/longboard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Motorcycle",
+        "vehicleType": "Car or ride",
+        "price": "800 Blockbux",
+        "currency": "Blockbux",
+        "speed": "60",
+        "seats": "1",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "This great motorcycle from Bloxy Davidsson is the real deal."
+      },
+      "system": {
+        "slug": "classic-motorcycle",
+        "section": "Blockbux vehicles",
+        "sortOrder": 35,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/classic-motorcycle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "MadMud Quad Bike",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "1,000 Blockbux",
+        "currency": "Blockbux",
+        "speed": "60",
+        "seats": "1",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "This all-terrain quad bike from MadMud is perfect for camping trips to the woods."
+      },
+      "system": {
+        "slug": "madmud-quad-bike",
+        "section": "Blockbux vehicles",
+        "sortOrder": 36,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/madmud-quad-bike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxster DLX2",
+        "vehicleType": "Car or ride",
+        "price": "1,600 Blockbux",
+        "currency": "Blockbux",
+        "speed": "70",
+        "seats": "1",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "With a high-performance engine, turbo-boosted acceleration and Goodblox tires, this extremely powerful motorcycle can reach lightning fast speeds."
+      },
+      "system": {
+        "slug": "bloxster-dlx2",
+        "section": "Blockbux vehicles",
+        "sortOrder": 37,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/bloxster-dlx2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "ComfortMaster S500",
+        "vehicleType": "Car or ride",
+        "price": "1,750 Blockbux",
+        "currency": "Blockbux",
+        "speed": "30",
+        "seats": "2",
+        "quality": "+++",
+        "fun": "+++++",
+        "reliability": "+++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "To show appreciation for our devoted players we have now created the ultimate comfort car. Cruise around the city of Bloxburg, literally from the comfort of your own couch!"
+      },
+      "system": {
+        "slug": "comfortmaster-s500",
+        "section": "Blockbux vehicles",
+        "sortOrder": 38,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/comfortmaster-s500.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "SteelThunder Sidekick Motorcycle",
+        "vehicleType": "Car or ride",
+        "price": "1,800 Blockbux",
+        "currency": "Blockbux",
+        "speed": "66",
+        "seats": null,
+        "quality": "++++",
+        "fun": "++++",
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A motorcycle with a sidecar, fits two people!"
+      },
+      "system": {
+        "slug": "steelthunder-sidekick-motorcycle",
+        "section": "Blockbux vehicles",
+        "sortOrder": 39,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/steelthunder-sidekick-motorcycle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bord Bullet",
+        "vehicleType": "Car or ride",
+        "price": "2,500 Blockbux",
+        "currency": "Blockbux",
+        "speed": "70",
+        "seats": "2",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "The new Bullet is the definition of a real muscle car with its powerful engine, shiny chrome details and matte paint job."
+      },
+      "system": {
+        "slug": "bord-bullet",
+        "section": "Blockbux vehicles",
+        "sortOrder": 40,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/bord-bullet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RB Breeze Convertible",
+        "vehicleType": "Car or ride",
+        "price": "2,700 Blockbux",
+        "currency": "Blockbux",
+        "speed": "66",
+        "seats": "4",
+        "quality": "+++++",
+        "fun": "++++",
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "The RB Breeze, a true classic! This special model also features a retractable fabric top."
+      },
+      "system": {
+        "slug": "rb-breeze-convertible",
+        "section": "Blockbux vehicles",
+        "sortOrder": 41,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/rb-breeze-convertible.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Opulent Astro x200",
+        "vehicleType": "Car or ride",
+        "price": "3,000 Blockbux",
+        "currency": "Blockbux",
+        "speed": "65",
+        "seats": "4",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Bring family or friends out on an adventure in this sporty but luxurious SUV model for 4 passengers, or simply take a ride around the neighborhood to show off that holiday bonus!"
+      },
+      "system": {
+        "slug": "opulent-astro-x200",
+        "section": "Blockbux vehicles",
+        "sortOrder": 42,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/opulent-astro-x200.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxus TS",
+        "vehicleType": "Car or ride",
+        "price": "3,250 Blockbux",
+        "currency": "Blockbux",
+        "speed": "76",
+        "seats": "2",
+        "quality": "+++++",
+        "fun": "++++",
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "The Bloxus TS convertible is the perfect summer car. Just open up the roof and drive down to the beach."
+      },
+      "system": {
+        "slug": "bloxus-ts",
+        "section": "Blockbux vehicles",
+        "sortOrder": 43,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/bloxus-ts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sterling Sunliner Convertible",
+        "vehicleType": "Car or ride",
+        "price": "3,300 Blockbux",
+        "currency": "Blockbux",
+        "speed": "68",
+        "seats": "4",
+        "quality": "++++",
+        "fun": "+++++",
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Close your eyes/ Picture yourself flying down the street in your brand new luxury convertible. Roof? Down. Sun? On your face. Onlookers? jealous. You? Without a care in the world. That dream could be reality, in the Sterling Sunliner Convertible"
+      },
+      "system": {
+        "slug": "sterling-sunliner-convertible",
+        "section": "Blockbux vehicles",
+        "sortOrder": 44,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/sterling-sunliner-convertible.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "TruFleet Luxe Limousine",
+        "vehicleType": "Utility or large vehicle",
+        "price": "4,000 Blockbux",
+        "currency": "Blockbux",
+        "speed": "63",
+        "seats": "6",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "In the TruFleet Luxe Limousine, you travel in style. With a spacious and comfortable interior and a sleek, elegant exterior, the TruFleet Luxe Limousine offers luxury at a price that's impossible to beat."
+      },
+      "system": {
+        "slug": "trufleet-luxe-limousine",
+        "section": "Blockbux vehicles",
+        "sortOrder": 45,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/trufleet-luxe-limousine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Noobus Limousine",
+        "vehicleType": "Utility or large vehicle",
+        "price": "8,000 Blockbux",
+        "currency": "Blockbux",
+        "speed": "63",
+        "seats": "8",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "A luxurious Noobus stretch limousine with room for up to 7 passengers."
+      },
+      "system": {
+        "slug": "noobus-limousine",
+        "section": "Blockbux vehicles",
+        "sortOrder": 46,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/noobus-limousine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Noobus H4 Limousine",
+        "vehicleType": "Utility or large vehicle",
+        "price": "9,500 Blockbux",
+        "currency": "Blockbux",
+        "speed": "63",
+        "seats": "10",
+        "quality": "+++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Available in the vehicle catalog",
+        "cardSummary": "Luxury has a new name. With its robust and powerful shape and grand, luxurious interior this car is a true statement piece. The backseat boasts accent lighting and seats for up to 8 people. If you want to be the envy of every person at any event this is the one and only car for you."
+      },
+      "system": {
+        "slug": "noobus-h4-limousine",
+        "section": "Blockbux vehicles",
+        "sortOrder": 47,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/noobus-h4-limousine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot Soapbox Car",
+        "vehicleType": "Car or ride",
+        "price": "$26,000",
+        "currency": "Money",
+        "speed": "28",
+        "seats": "1",
+        "quality": "+",
+        "fun": "+++++",
+        "reliability": "+",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "Drive around looking for Easter Eggs in a vehicle that would make the Easter Bunny's mouth water! This motorized carrot might no be the fastest or most stable car (and certainly isn't the most comfortable), but no other car comes even close where it really matters looking like a carrot.This item is only for sale during special events."
+      },
+      "system": {
+        "slug": "carrot-soapbox-car",
+        "section": "Seasonal & event",
+        "sortOrder": 48,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/carrot-soapbox-car.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "SpookySpokes Witch's Broomstick Bike",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "1,500 event tickets",
+        "currency": "Event tickets",
+        "speed": "25",
+        "seats": "1",
+        "quality": "++",
+        "fun": null,
+        "reliability": "++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "Hop on this pedal powered broomstick and dash into the night as you search for many tasty treats!"
+      },
+      "system": {
+        "slug": "spookyspokes-witch-s-broomstick-bike",
+        "section": "Seasonal & event",
+        "sortOrder": 49,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/spookyspokes-witch-s-broomstick-bike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RB Retro Gothic 26",
+        "vehicleType": "Car or ride",
+        "price": "6,500 event tickets",
+        "currency": "Event tickets",
+        "speed": "62",
+        "seats": "4",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A minute in this car and it's quite bizarre: 'RB just raised the bar!"
+      },
+      "system": {
+        "slug": "rb-retro-gothic-26",
+        "section": "Seasonal & event",
+        "sortOrder": 50,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/rb-retro-gothic-26.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Carriage",
+        "vehicleType": "Utility or large vehicle",
+        "price": "7,000 event tickets",
+        "currency": "Event tickets",
+        "speed": "60",
+        "seats": "6",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "Feel like royalty when going to the ball in this Pumpkin Carriage! A magical ride where the passengers can take it easy inside a warm, cozy, overgrown vegetable while the driver gets some fresh (but cold) air up on the driver's seat."
+      },
+      "system": {
+        "slug": "pumpkin-carriage",
+        "section": "Seasonal & event",
+        "sortOrder": 51,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/pumpkin-carriage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Holiday Pickup Truck",
+        "vehicleType": "Utility or large vehicle",
+        "price": "6,000 event tickets",
+        "currency": "Event tickets",
+        "speed": "50",
+        "seats": "2",
+        "quality": "+++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "Jingle down the street in this festive pickup truck! With a powerful four-wheel drive, a Christmas tree strapped to the back, and a festive wreath on the grill, you'll be ready for anything the season might throw at you."
+      },
+      "system": {
+        "slug": "holiday-pickup-truck",
+        "section": "Seasonal & event",
+        "sortOrder": 52,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/holiday-pickup-truck.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "T50 City Express",
+        "vehicleType": "Car or ride",
+        "price": "7,250 event tickets",
+        "currency": "Event tickets",
+        "speed": "45",
+        "seats": "8",
+        "quality": "+++",
+        "fun": "++++",
+        "reliability": "+++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "Experience a cozy and relaxing ride around the city this holiday season! This train and carriage may not be able to take you to the North Pole, but it can certainly take you and your passengers around Bloxburg."
+      },
+      "system": {
+        "slug": "t50-city-express",
+        "section": "Seasonal & event",
+        "sortOrder": 53,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/t50-city-express.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snow Scooter",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$2,800",
+        "currency": "Money",
+        "speed": "32",
+        "seats": "1",
+        "quality": "+",
+        "fun": "++++",
+        "reliability": "+",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "This strange looking kick scooter works great on snow."
+      },
+      "system": {
+        "slug": "snow-scooter",
+        "section": "Seasonal & event",
+        "sortOrder": 54,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/snow-scooter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kicksled",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$4,700",
+        "currency": "Money",
+        "speed": "30",
+        "seats": "1",
+        "quality": "++",
+        "fun": "++++",
+        "reliability": "++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "Get ahead this snowy season with a joyful kicksled! Whether you bring a friend or go by yourself, even travel can be fun now!"
+      },
+      "system": {
+        "slug": "kicksled",
+        "section": "Seasonal & event",
+        "sortOrder": 55,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/kicksled.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sno-Tek Snowmobile",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$70,000",
+        "currency": "Money",
+        "speed": "67",
+        "seats": "1",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "+++++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A fast winter vehicle for deep snow off-roading. (Not recommended for street use!)"
+      },
+      "system": {
+        "slug": "sno-tek-snowmobile",
+        "section": "Seasonal & event",
+        "sortOrder": 56,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/sno-tek-snowmobile.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sno-Tek LongTrak Snowmobile",
+        "vehicleType": "Two-wheel or mobility",
+        "price": "$80,000",
+        "currency": "Money",
+        "speed": "63",
+        "seats": "2",
+        "quality": "++++",
+        "fun": "++++",
+        "reliability": "+++++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "A fast 2-seater winter vehicle for deep snow off-roading. (Not recommended for street use!)"
+      },
+      "system": {
+        "slug": "sno-tek-longtrak-snowmobile",
+        "section": "Seasonal & event",
+        "sortOrder": 57,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/sno-tek-longtrak-snowmobile.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "KITTEN STL-45 Snowplow",
+        "vehicleType": "Car or ride",
+        "price": "2,800 Blockbux",
+        "currency": "Blockbux",
+        "speed": "40",
+        "seats": "2",
+        "quality": "++++",
+        "fun": null,
+        "reliability": "++++",
+        "availability": "Seasonal or event-limited",
+        "cardSummary": "Nobody likes shoveling snow, but with this massive snowplow it's never been more enjoyable! Whether you're running the city's snowplowing business or simply want to have some fun whilst helping out the neighbors, this truck is for you."
+      },
+      "system": {
+        "slug": "kitten-stl-45-snowplow",
+        "section": "Seasonal & event",
+        "sortOrder": 58,
+        "image": "/Welcome%20to%20Bloxburg/Vehicles/kitten-stl-45-snowplow.webp"
+      }
+    }
+  ]
+}

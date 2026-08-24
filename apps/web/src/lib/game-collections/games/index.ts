@@ -72,6 +72,7 @@ import { blueLockRivalsCollectionGroup } from "./blue-lock-rivals";
 import { slapBattlesCollectionGroup } from "./slap-battles";
 import { fleeTheFacilityCollectionGroup } from "./flee-the-facility";
 import { buildABoatForTreasureCollectionGroup } from "./build-a-boat-for-treasure";
+import { welcomeToBloxburgCollectionGroup } from "./welcome-to-bloxburg";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -148,5 +149,6 @@ export const GAME_COLLECTION_GROUPS = [
   blueLockRivalsCollectionGroup,
   slapBattlesCollectionGroup,
   fleeTheFacilityCollectionGroup,
-  buildABoatForTreasureCollectionGroup
+  buildABoatForTreasureCollectionGroup,
+  welcomeToBloxburgCollectionGroup
 ] satisfies GameCollectionGroup[];

@@ -1,0 +1,317 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Welcome to Bloxburg",
+    "gameSlug": "welcome-to-bloxburg",
+    "collection": "jobs",
+    "route": "/wiki/welcome-to-bloxburg/jobs",
+    "catalogCode": "welcome-to-bloxburg-jobs",
+    "itemFields": [
+      "jobFamily",
+      "workLocation",
+      "activity",
+      "payNote",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "jobFamily",
+      "workLocation",
+      "activity",
+      "payNote",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Food and retail jobs",
+        "School jobs",
+        "Outdoor jobs",
+        "Service jobs"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "jobFamily"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "jobFamily",
+        "workLocation",
+        "activity",
+        "payNote",
+        "availability"
+      ],
+      "tableFields": [
+        "jobFamily",
+        "workLocation",
+        "activity",
+        "payNote",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "jobFamily": {
+          "kind": "normal",
+          "label": "Job group"
+        },
+        "workLocation": {
+          "kind": "chip",
+          "label": "Location"
+        },
+        "activity": {
+          "kind": "detail",
+          "label": "Work"
+        },
+        "payNote": {
+          "kind": "detail",
+          "label": "Pay"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cashier (BFF)",
+        "jobFamily": "Food and retail jobs",
+        "workLocation": "Bloxburg Fresh Food",
+        "activity": "Cashier is one to the two jobs available at the BFF supermarket, the other job being the Stocker job. In this job, players scan NPCs’ groceries. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Cashier (BFF) is an active job at Bloxburg Fresh Food."
+      },
+      "system": {
+        "slug": "cashier-bff",
+        "section": "Food and retail jobs",
+        "sortOrder": 1,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/cashier-bff.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Delivery Person",
+        "jobFamily": "Food and retail jobs",
+        "workLocation": "Pizza Planet",
+        "activity": "Delivery Person is one to the two jobs available at Pizza Planet, the other job being the Pizza Baker job. In this job, players deliver pizzas to NPCs. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Delivery Person is an active job at Pizza Planet."
+      },
+      "system": {
+        "slug": "delivery-person",
+        "section": "Food and retail jobs",
+        "sortOrder": 2,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/delivery-person.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fast Food Worker",
+        "jobFamily": "Food and retail jobs",
+        "workLocation": "Blox Burgers",
+        "activity": "Fast Food Worker is a job that is available at Blox Burgers. In this job, players perform various tasks in the kitchen and at the counter. It is also one of fourteen jobs available in Welcome to Bloxburg. Working as a Fast Food Worker can help a player gain rewards such as commercial restaurant items in Build Mode, Money, and Blockbux. This job replaced the Cashier job at Bloxy Burgers in Version 0.11.9.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Fast Food Worker is an active job at Blox Burgers."
+      },
+      "system": {
+        "slug": "fast-food-worker",
+        "section": "Food and retail jobs",
+        "sortOrder": 3,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/fast-food-worker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisherman",
+        "jobFamily": "Outdoor jobs",
+        "workLocation": "The Fishing Hut",
+        "activity": "Fisherman is a job available at The Fishing Hut. In this job, players catch fish for money. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Fisherman is an active job at The Fishing Hut."
+      },
+      "system": {
+        "slug": "fisherman",
+        "section": "Outdoor jobs",
+        "sortOrder": 4,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/fisherman.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hairdresser",
+        "jobFamily": "Service jobs",
+        "workLocation": "Stylez Hair Studio",
+        "activity": "Hairdresser is a job available at Stylez Hair Studio. In this job, players act as a hairdresser, and customize the hairstyles of NPCs that come into the studio. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Hairdresser is an active job at Stylez Hair Studio."
+      },
+      "system": {
+        "slug": "hairdresser",
+        "section": "Service jobs",
+        "sortOrder": 5,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/hairdresser.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Janitor",
+        "jobFamily": "School jobs",
+        "workLocation": "Bloxburg High School",
+        "activity": "Janitor is one of the two jobs available at the Bloxburg High School, the other one being the Teacher job. In this job, players clean up messes and graffiti around the school. It is also one of fourteen jobs available in Welcome to Bloxburg. It was added in Version 0.5.6, along with the Woodcutter job.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Janitor is an active job at Bloxburg High School."
+      },
+      "system": {
+        "slug": "janitor",
+        "section": "School jobs",
+        "sortOrder": 6,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/janitor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mechanic",
+        "jobFamily": "Service jobs",
+        "workLocation": "Mike's Motors",
+        "activity": "Mechanic is a job available at Mike's Motors. In this job, players repair NPCs’ vehicles. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Mechanic is an active job at Mike's Motors."
+      },
+      "system": {
+        "slug": "mechanic",
+        "section": "Service jobs",
+        "sortOrder": 7,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/mechanic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Miner",
+        "jobFamily": "Outdoor jobs",
+        "workLocation": "The Bloxburg Cave",
+        "activity": "Miner is a job available in the cave at Peak Mountain. In this job, players mine for various ores. It is also one of fourteen jobs available in Welcome to Bloxburg. It was added in Version 0.7.1.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Miner is an active job at The Bloxburg Cave."
+      },
+      "system": {
+        "slug": "miner",
+        "section": "Outdoor jobs",
+        "sortOrder": 8,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/miner.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza Baker",
+        "jobFamily": "Food and retail jobs",
+        "workLocation": "Pizza Planet",
+        "activity": "Pizza Baker is one to the two jobs available at Pizza Planet, the other job being the Delivery Person job. In this job, players make pizzas. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Pizza Baker is an active job at Pizza Planet."
+      },
+      "system": {
+        "slug": "pizza-baker",
+        "section": "Food and retail jobs",
+        "sortOrder": 9,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/pizza-baker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Seller",
+        "jobFamily": "Food and retail jobs",
+        "workLocation": "Ben's Ice Cream",
+        "activity": "Seller is a job available at Ben’s Ice Cream. In this job, players serve ice cream to NPCs. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Seller is an active job at Ben's Ice Cream."
+      },
+      "system": {
+        "slug": "seller",
+        "section": "Food and retail jobs",
+        "sortOrder": 10,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/seller.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stocker",
+        "jobFamily": "Food and retail jobs",
+        "workLocation": "Bloxburg Fresh Food",
+        "activity": "Stocker is one of the two jobs available at the BFF supermarket, the other job being the Cashier job. In this job, players restock shelves in the store. It is also one of fourteen jobs available in Welcome to Bloxburg.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Stocker is an active job at Bloxburg Fresh Food."
+      },
+      "system": {
+        "slug": "stocker",
+        "section": "Food and retail jobs",
+        "sortOrder": 11,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/stocker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Woodcutter",
+        "jobFamily": "Outdoor jobs",
+        "workLocation": "Lovely Lumber",
+        "activity": "Woodcutter is a job available at Lovely Lumber. It was added in Version 0.5.6 along with the Janitor job, and is one of fourteen jobs in the game.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Woodcutter is an active job at Lovely Lumber."
+      },
+      "system": {
+        "slug": "woodcutter",
+        "section": "Outdoor jobs",
+        "sortOrder": 12,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/woodcutter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teacher",
+        "jobFamily": "School jobs",
+        "workLocation": "Bloxburg High School",
+        "activity": "Teacher is a job that is available at Bloxburg High School, which was added in Version 1.2.0. In this job, players perform various tasks in a classroom of NPC students. It is also one of fourteen jobs available in Welcome to Bloxburg. Working as a Teacher can help a player gain rewards such as school-related items in Build Mode, Money, and Blockbux.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Teacher is an active job at Bloxburg High School."
+      },
+      "system": {
+        "slug": "teacher",
+        "section": "School jobs",
+        "sortOrder": 13,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/teacher.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Taxi Driver",
+        "jobFamily": "Service jobs",
+        "workLocation": "Bloxburg Taxi",
+        "activity": "Taxi Driver is a job that is available at Bloxburg Taxi, which was added in Version 1.6.0. In this job, players pick up and drop off NPC passengers at various locations in Bloxburg. It is also one of fourteen jobs available in Welcome to Bloxburg. Working as a Taxi Driver can help a player gain rewards such as taxi-related items in Build Mode, Money, and Blockbux.",
+        "payNote": "Pay varies with total work experience, efficiency, and mood.",
+        "availability": "Active job",
+        "cardSummary": "Taxi Driver is an active job at Bloxburg Taxi."
+      },
+      "system": {
+        "slug": "taxi-driver",
+        "section": "Service jobs",
+        "sortOrder": 14,
+        "image": "/Welcome%20to%20Bloxburg/Jobs/taxi-driver.webp"
+      }
+    }
+  ]
+}

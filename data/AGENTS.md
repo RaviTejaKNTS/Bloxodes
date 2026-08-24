@@ -47,6 +47,10 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Keep the datasets focused on source-backed durable gameplay systems. Emotes and goal effects stay out until a reliable current full inventory is available.
 - `data/Blox Fruits/*`
   - Dataset-backed Blox Fruits wiki/collection content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
+- `data/Welcome to Bloxburg/*.json`
+  - Dataset-backed Welcome to Bloxburg wiki collections: 115 recipes, 58 vehicles, 14 jobs, 8 active skills, 71 plants, and 41 permanent locations. The Plants roster has one accepted missing-image gap for Evergreen Plant because the source supplies only `MissingImage.png`.
+  - The v2 datasets are registered by `apps/web/src/lib/game-collections/games/welcome-to-bloxburg.ts` and render under `/wiki/welcome-to-bloxburg/<collection>`. Matching source-backed WebP media lives under `apps/web/public/Welcome to Bloxburg/`.
+  - Seasonal/event recipe and vehicle rows retain explicit availability notes. Jobs and plants intentionally omit exact pay, growth, harvest, and sale values where the available source marks them incomplete or outdated. Gamepasses, currencies, badges, trophies, fishing catches, and removed or temporary location/skill rows remain out of scope.
 - `data/Dress To Impress/*`
   - Dataset-backed Dress To Impress wiki/collection and quiz content, including themes, free items, code items, currency items, pose packs, ranks, walk packs, runway effects, pattern packs, hairstyles, makeup, nails, reward items, Robux items, VIP items, and `quiz.json`.
   - Theme rows are intentionally text-only. Other collection rows use matching item, pack, salon, or unlock images under `apps/web/public/Dress To Impress/` when a clean source image exists; the free-items catalog has one documented image gap for Gingerbread Suit.

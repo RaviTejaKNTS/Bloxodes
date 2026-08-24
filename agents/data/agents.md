@@ -172,6 +172,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Blox Fruits/*.json`
   - Local Blox Fruits in-game datasets collected from the Blox Fruits Wiki and Roblox public APIs for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Blox Fruits/`.
+- `data/Welcome to Bloxburg/*.json`
+  - Local Welcome to Bloxburg v2 collection datasets for the recipes, vehicles, jobs, skills, plants, and locations pages under `/wiki/welcome-to-bloxburg/`.
+  - The completed source-backed inventory contains 115 recipes, 58 vehicles, 14 jobs, 8 active skills, 71 plants, and 41 permanent locations. Matching row media lives under `apps/web/public/Welcome to Bloxburg/` and is stored as verified WebP; Evergreen Plant is the one accepted missing-image gap because the source supplies only `MissingImage.png`.
+  - Keep seasonal availability explicit and leave disputed or incomplete job-pay and plant-value fields absent. Do not expand these datasets with gamepasses, currencies, badges, trophies, fishing catches, removed skills, or temporary/removed locations without a new source-backed review.
 - `data/Capybaras VS Plants/*.json`
   - Local Capybaras VS Plants datasets for wiki/collection page work, including the Plant Index and the Boss Summoner progression.
   - Keep Boss Summoner rows separate from ordinary plant drops: Pumpkin Tyrant is the sixth original boss, Carnivorous Plant is not a boss row, and Update 3 adds Conqueror Carrot after Pumpkin Tyrant.

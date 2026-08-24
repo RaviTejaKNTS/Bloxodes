@@ -1,0 +1,676 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Welcome to Bloxburg",
+    "gameSlug": "welcome-to-bloxburg",
+    "collection": "locations",
+    "route": "/wiki/welcome-to-bloxburg/locations",
+    "catalogCode": "welcome-to-bloxburg-locations",
+    "itemFields": [
+      "locationType",
+      "description",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "locationType",
+      "description",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Job locations",
+        "General locations"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "locationType"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "locationType",
+        "description",
+        "availability"
+      ],
+      "tableFields": [
+        "locationType",
+        "description",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "locationType": {
+          "kind": "normal",
+          "label": "Type"
+        },
+        "description": {
+          "kind": "detail",
+          "label": "What is there"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ben's Ice Cream",
+        "locationType": "Job location",
+        "description": "A small Ice Cream shop located on the pier by the beach. Players can buy ice cream and work as a Seller.",
+        "availability": "Permanent map location",
+        "cardSummary": "A small Ice Cream shop located on the pier by the beach. Players can buy ice cream and work as a Seller."
+      },
+      "system": {
+        "slug": "ben-s-ice-cream",
+        "section": "Job locations",
+        "sortOrder": 1,
+        "image": "/Welcome%20to%20Bloxburg/Locations/ben-s-ice-cream.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blox Burgers",
+        "locationType": "Job location",
+        "description": "A fast-food restaurant located in the town center. It serves burgers, drinks, and fries. Players can also work here as a Fast Food Worker.",
+        "availability": "Permanent map location",
+        "cardSummary": "A fast-food restaurant located in the town center. It serves burgers, drinks, and fries. Players can also work here as a Fast Food Worker."
+      },
+      "system": {
+        "slug": "blox-burgers",
+        "section": "Job locations",
+        "sortOrder": 2,
+        "image": "/Welcome%20to%20Bloxburg/Locations/blox-burgers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxburg Fresh Food",
+        "locationType": "Job location",
+        "description": "A supermarket located in the town center, next to the gym. Players can buy fruits, vegetables, drinks, and snacks to store in their refrigerator. They can work here as a Cashier or Stocker.",
+        "availability": "Permanent map location",
+        "cardSummary": "A supermarket located in the town center, next to the gym. Players can buy fruits, vegetables, drinks, and snacks to store in their refrigerator. They can work here as a Cashier or Stocker."
+      },
+      "system": {
+        "slug": "bloxburg-fresh-food",
+        "section": "Job locations",
+        "sortOrder": 3,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxburg-fresh-food.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxburg High School",
+        "locationType": "Job location",
+        "description": "A school located in the town center, behind the city hall. Players can attend classes to earn XP to level up their seniority, play musical instruments in the band, or roleplay in stage activities in the auditorium. They can also work at two jobs here, which are the Janitor and Teacher job.",
+        "availability": "Permanent map location",
+        "cardSummary": "A school located in the town center, behind the city hall. Players can attend classes to earn XP to level up their seniority, play musical instruments in the band, or roleplay in stage activities in the auditorium. They can also work at two jobs here, which are the Janitor and Teacher job."
+      },
+      "system": {
+        "slug": "bloxburg-high-school",
+        "section": "Job locations",
+        "sortOrder": 4,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxburg-high-school.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxburg Taxi",
+        "locationType": "Job location",
+        "description": "A transportation service located in the town center. Players can work here as a Taxi Driver.",
+        "availability": "Permanent map location",
+        "cardSummary": "A transportation service located in the town center. Players can work here as a Taxi Driver."
+      },
+      "system": {
+        "slug": "bloxburg-taxi",
+        "section": "Job locations",
+        "sortOrder": 5,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxburg-taxi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely Lumber",
+        "locationType": "Job location",
+        "description": "A woodcutting service located near Peak Mountain. Players can work here as a Woodcutter.",
+        "availability": "Permanent map location",
+        "cardSummary": "A woodcutting service located near Peak Mountain. Players can work here as a Woodcutter."
+      },
+      "system": {
+        "slug": "lovely-lumber",
+        "section": "Job locations",
+        "sortOrder": 6,
+        "image": "/Welcome%20to%20Bloxburg/Locations/lovely-lumber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mike's Motors",
+        "locationType": "Job location",
+        "description": "A vehicle dealership located in the town center, near Bloxburg City Hall. Players can buy vehicles here and work as a Mechanic by walking to the side of the shop to repair motorbikes.",
+        "availability": "Permanent map location",
+        "cardSummary": "A vehicle dealership located in the town center, near Bloxburg City Hall. Players can buy vehicles here and work as a Mechanic by walking to the side of the shop to repair motorbikes."
+      },
+      "system": {
+        "slug": "mike-s-motors",
+        "section": "Job locations",
+        "sortOrder": 7,
+        "image": "/Welcome%20to%20Bloxburg/Locations/mike-s-motors.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza Planet",
+        "locationType": "Job location",
+        "description": "A fast-food restaurant located in the town center, inspired by sci-fi movies, especially Toy Story. It is a popular place for players who are looking for a job or a hangout spot. Players can work here as a Pizza Baker or Delivery Person.",
+        "availability": "Permanent map location",
+        "cardSummary": "A fast-food restaurant located in the town center, inspired by sci-fi movies, especially Toy Story. It is a popular place for players who are looking for a job or a hangout spot. Players can work here as a Pizza Baker or Delivery Person."
+      },
+      "system": {
+        "slug": "pizza-planet",
+        "section": "Job locations",
+        "sortOrder": 8,
+        "image": "/Welcome%20to%20Bloxburg/Locations/pizza-planet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stylez Hair Studio",
+        "locationType": "Job location",
+        "description": "A hair salon located near the beach. Players can work here as a Hairdresser.",
+        "availability": "Permanent map location",
+        "cardSummary": "A hair salon located near the beach. Players can work here as a Hairdresser."
+      },
+      "system": {
+        "slug": "stylez-hair-studio",
+        "section": "Job locations",
+        "sortOrder": 9,
+        "image": "/Welcome%20to%20Bloxburg/Locations/stylez-hair-studio.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Bloxburg Cave",
+        "locationType": "Job location",
+        "description": "A cave located in Peak Mountain. Players can work here as a Miner.",
+        "availability": "Permanent map location",
+        "cardSummary": "A cave located in Peak Mountain. Players can work here as a Miner."
+      },
+      "system": {
+        "slug": "the-bloxburg-cave",
+        "section": "Job locations",
+        "sortOrder": 10,
+        "image": "/Welcome%20to%20Bloxburg/Locations/the-bloxburg-cave.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Fishing Hut",
+        "locationType": "Job location",
+        "description": "A small hut located on the pier, near Ben’s Ice Cream and the Ferris Wheel. Players can work here as a Fisherman.",
+        "availability": "Permanent map location",
+        "cardSummary": "A small hut located on the pier, near Ben’s Ice Cream and the Ferris Wheel. Players can work here as a Fisherman."
+      },
+      "system": {
+        "slug": "the-fishing-hut",
+        "section": "Job locations",
+        "sortOrder": 11,
+        "image": "/Welcome%20to%20Bloxburg/Locations/the-fishing-hut.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxburg Theater",
+        "locationType": "General location",
+        "description": "A movie theater, located in the town center, where players can watch community-made short films and purchase snacks.",
+        "availability": "Permanent map location",
+        "cardSummary": "A movie theater, located in the town center, where players can watch community-made short films and purchase snacks."
+      },
+      "system": {
+        "slug": "bloxburg-theater",
+        "section": "General locations",
+        "sortOrder": 12,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxburg-theater.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxburg Town Hall",
+        "locationType": "General location",
+        "description": "An aesthetic building in the town center. Currently, the building serves no gameplay purpose, but, it gives the town of Bloxburg a rather ravishing appearance.",
+        "availability": "Permanent map location",
+        "cardSummary": "An aesthetic building in the town center. Currently, the building serves no gameplay purpose, but, it gives the town of Bloxburg a rather ravishing appearance."
+      },
+      "system": {
+        "slug": "bloxburg-town-hall",
+        "section": "General locations",
+        "sortOrder": 13,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxburg-town-hall.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxburg Gym",
+        "locationType": "General location",
+        "description": "A gymnasium, located next to Bloxburg Fresh Food, where players can increase their Athletic skill.",
+        "availability": "Permanent map location",
+        "cardSummary": "A gymnasium, located next to Bloxburg Fresh Food, where players can increase their Athletic skill."
+      },
+      "system": {
+        "slug": "bloxburg-gym",
+        "section": "General locations",
+        "sortOrder": 14,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxburg-gym.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fancy Furniture",
+        "locationType": "General location",
+        "description": "A furniture store, located in the town center, where players can buy Build Mode furniture.",
+        "availability": "Permanent map location",
+        "cardSummary": "A furniture store, located in the town center, where players can buy Build Mode furniture."
+      },
+      "system": {
+        "slug": "fancy-furniture",
+        "section": "General locations",
+        "sortOrder": 15,
+        "image": "/Welcome%20to%20Bloxburg/Locations/fancy-furniture.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach",
+        "locationType": "General location",
+        "description": "A sandy beach, with a pier on which there is a Ferris Wheel, Ben's Ice Cream, and the Fishing Hut. Here, players can relax in lounge chairs or cabanas, build sandcastles, use the showers to increase their hygiene, or take a swim in the ocean.",
+        "availability": "Permanent map location",
+        "cardSummary": "A sandy beach, with a pier on which there is a Ferris Wheel, Ben's Ice Cream, and the Fishing Hut. Here, players can relax in lounge chairs or cabanas, build sandcastles, use the showers to increase their hygiene, or take a swim in the ocean."
+      },
+      "system": {
+        "slug": "beach",
+        "section": "General locations",
+        "sortOrder": 16,
+        "image": "/Welcome%20to%20Bloxburg/Locations/beach.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxburg Pier",
+        "locationType": "General location",
+        "description": "A wooden boardwalk that extends over the beach and overlooks the ocean. Here, players can ride the Ferris Wheel and Carousel, play the Strength Test activity, purchase food and Build Mode items, or relax at the picnic tables along the waterfront.",
+        "availability": "Permanent map location",
+        "cardSummary": "A wooden boardwalk that extends over the beach and overlooks the ocean. Here, players can ride the Ferris Wheel and Carousel, play the Strength Test activity, purchase food and Build Mode items, or relax at the picnic tables along the waterfront."
+      },
+      "system": {
+        "slug": "bloxburg-pier",
+        "section": "General locations",
+        "sortOrder": 17,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxburg-pier.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ferris Wheel",
+        "locationType": "General location",
+        "description": "An attraction located on the Bloxburg Pier at the beach. Here, players can use relax, watch the sky, and roleplay. Riding on it also increases the Fun and Energy moods.",
+        "availability": "Permanent map location",
+        "cardSummary": "An attraction located on the Bloxburg Pier at the beach. Here, players can use relax, watch the sky, and roleplay. Riding on it also increases the Fun and Energy moods."
+      },
+      "system": {
+        "slug": "ferris-wheel",
+        "section": "General locations",
+        "sortOrder": 18,
+        "image": "/Welcome%20to%20Bloxburg/Locations/ferris-wheel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carousel",
+        "locationType": "General location",
+        "description": "An attraction located on the Bloxburg Pier at the beach. Players can ride it for approximately 20 seconds before it stops and must be interacted with again.",
+        "availability": "Permanent map location",
+        "cardSummary": "An attraction located on the Bloxburg Pier at the beach. Players can ride it for approximately 20 seconds before it stops and must be interacted with again."
+      },
+      "system": {
+        "slug": "carousel",
+        "section": "General locations",
+        "sortOrder": 19,
+        "image": "/Welcome%20to%20Bloxburg/Locations/carousel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gazblox",
+        "locationType": "General location",
+        "description": "A gas station with a convenience store, located in the town center, where players can buy and stock up on snacks and drinks here.",
+        "availability": "Permanent map location",
+        "cardSummary": "A gas station with a convenience store, located in the town center, where players can buy and stock up on snacks and drinks here."
+      },
+      "system": {
+        "slug": "gazblox",
+        "section": "General locations",
+        "sortOrder": 20,
+        "image": "/Welcome%20to%20Bloxburg/Locations/gazblox.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fiona's Flowers",
+        "locationType": "General location",
+        "description": "A flower shop, located in the town center, where players can purchase all sorts of flowers.",
+        "availability": "Permanent map location",
+        "cardSummary": "A flower shop, located in the town center, where players can purchase all sorts of flowers."
+      },
+      "system": {
+        "slug": "fiona-s-flowers",
+        "section": "General locations",
+        "sortOrder": 21,
+        "image": "/Welcome%20to%20Bloxburg/Locations/fiona-s-flowers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snug as a Bug",
+        "locationType": "General location",
+        "description": "A baby store, located in the town center, where players can purchase all sorts of baby-themed items and furniture.",
+        "availability": "Permanent map location",
+        "cardSummary": "A baby store, located in the town center, where players can purchase all sorts of baby-themed items and furniture."
+      },
+      "system": {
+        "slug": "snug-as-a-bug",
+        "section": "General locations",
+        "sortOrder": 22,
+        "image": "/Welcome%20to%20Bloxburg/Locations/snug-as-a-bug.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Soak-n-Suds",
+        "locationType": "General location",
+        "description": "A laundromat, located in the town center, where players can wash and dry clothes in the many washers and dryers that it provides.",
+        "availability": "Permanent map location",
+        "cardSummary": "A laundromat, located in the town center, where players can wash and dry clothes in the many washers and dryers that it provides."
+      },
+      "system": {
+        "slug": "soak-n-suds",
+        "section": "General locations",
+        "sortOrder": 23,
+        "image": "/Welcome%20to%20Bloxburg/Locations/soak-n-suds.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tombelina's Dance Studio",
+        "locationType": "General location",
+        "description": "A dance studio, located in the town center, where players can practice ballet routines to increase their Athletic skill and participate in dance-themed roleplays.",
+        "availability": "Permanent map location",
+        "cardSummary": "A dance studio, located in the town center, where players can practice ballet routines to increase their Athletic skill and participate in dance-themed roleplays."
+      },
+      "system": {
+        "slug": "tombelina-s-dance-studio",
+        "section": "General locations",
+        "sortOrder": 24,
+        "image": "/Welcome%20to%20Bloxburg/Locations/tombelina-s-dance-studio.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Observatory",
+        "locationType": "General location",
+        "description": "An observatory, located on Peak Mountain, where players can relax, view the city, look at the different constellations, and wonder about space and the distant cosmos.",
+        "availability": "Permanent map location",
+        "cardSummary": "An observatory, located on Peak Mountain, where players can relax, view the city, look at the different constellations, and wonder about space and the distant cosmos."
+      },
+      "system": {
+        "slug": "observatory",
+        "section": "General locations",
+        "sortOrder": 25,
+        "image": "/Welcome%20to%20Bloxburg/Locations/observatory.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Riverside Park",
+        "locationType": "General location",
+        "description": "A large recreation area located near Riverside Estates, hence its name. It is a large public park that has a playground and picnic area, also serving as a music and entertainment venue.",
+        "availability": "Permanent map location",
+        "cardSummary": "A large recreation area located near Riverside Estates, hence its name. It is a large public park that has a playground and picnic area, also serving as a music and entertainment venue."
+      },
+      "system": {
+        "slug": "riverside-park",
+        "section": "General locations",
+        "sortOrder": 26,
+        "image": "/Welcome%20to%20Bloxburg/Locations/riverside-park.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxy Acres Pool",
+        "locationType": "General location",
+        "description": "A large community pool located near Bloxy Acres, hence its name.",
+        "availability": "Permanent map location",
+        "cardSummary": "A large community pool located near Bloxy Acres, hence its name."
+      },
+      "system": {
+        "slug": "bloxy-acres-pool",
+        "section": "General locations",
+        "sortOrder": 27,
+        "image": "/Welcome%20to%20Bloxburg/Locations/bloxy-acres-pool.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peak Camp",
+        "locationType": "General location",
+        "description": "A large campground that is located on Peak Mountain. Players can roast some marshmallows at the campfire, and sleep in one of the many tents.",
+        "availability": "Permanent map location",
+        "cardSummary": "A large campground that is located on Peak Mountain. Players can roast some marshmallows at the campfire, and sleep in one of the many tents."
+      },
+      "system": {
+        "slug": "peak-camp",
+        "section": "General locations",
+        "sortOrder": 28,
+        "image": "/Welcome%20to%20Bloxburg/Locations/peak-camp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meh-Meh Camp",
+        "locationType": "General location",
+        "description": "A small campsite that is located on the banks of the lake, near Lovely Lumber and Peak Mountain. Players can roast some marshmallows at the campfire, sleep in the tents, or relax on the beach.",
+        "availability": "Permanent map location",
+        "cardSummary": "A small campsite that is located on the banks of the lake, near Lovely Lumber and Peak Mountain. Players can roast some marshmallows at the campfire, sleep in the tents, or relax on the beach."
+      },
+      "system": {
+        "slug": "meh-meh-camp",
+        "section": "General locations",
+        "sortOrder": 29,
+        "image": "/Welcome%20to%20Bloxburg/Locations/meh-meh-camp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lighthouse",
+        "locationType": "General location",
+        "description": "An aesthetic structure located on Cape Beacon, which is near the Innerloop Highway and Riverside Estates.",
+        "availability": "Permanent map location",
+        "cardSummary": "An aesthetic structure located on Cape Beacon, which is near the Innerloop Highway and Riverside Estates."
+      },
+      "system": {
+        "slug": "lighthouse",
+        "section": "General locations",
+        "sortOrder": 30,
+        "image": "/Welcome%20to%20Bloxburg/Locations/lighthouse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Water Tower",
+        "locationType": "General location",
+        "description": "An aesthetic structure located on top of a hill in the Bloxy Acres neighborhood.",
+        "availability": "Permanent map location",
+        "cardSummary": "An aesthetic structure located on top of a hill in the Bloxy Acres neighborhood."
+      },
+      "system": {
+        "slug": "water-tower",
+        "section": "General locations",
+        "sortOrder": 31,
+        "image": "/Welcome%20to%20Bloxburg/Locations/water-tower.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Tunnels",
+        "locationType": "General location",
+        "description": "Two transit passageways in the city of Bloxburg. The Cliffside Tunnel is located on Innerloop Highway, while the Pinewood Bypass tunnel is located on Mountain Road.",
+        "availability": "Permanent map location",
+        "cardSummary": "Two transit passageways in the city of Bloxburg. The Cliffside Tunnel is located on Innerloop Highway, while the Pinewood Bypass tunnel is located on Mountain Road."
+      },
+      "system": {
+        "slug": "the-tunnels",
+        "section": "General locations",
+        "sortOrder": 32,
+        "image": "/Welcome%20to%20Bloxburg/Locations/the-tunnels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wind Turbines",
+        "locationType": "General location",
+        "description": "Five wind turbines located at the outskirts of Bloxburg. Three are near the Neighborhoods Tunnel, while two are in Greenfield Plains.",
+        "availability": "Permanent map location",
+        "cardSummary": "Five wind turbines located at the outskirts of Bloxburg. Three are near the Neighborhoods Tunnel, while two are in Greenfield Plains."
+      },
+      "system": {
+        "slug": "wind-turbines",
+        "section": "General locations",
+        "sortOrder": 33,
+        "image": "/Welcome%20to%20Bloxburg/Locations/wind-turbines.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Telecom. Masts",
+        "locationType": "General location",
+        "description": "Two telecommunications masts located in different regions of Bloxburg. One is near Riverside Estates, while the other is in Greenfield Plains.",
+        "availability": "Permanent map location",
+        "cardSummary": "Two telecommunications masts located in different regions of Bloxburg. One is near Riverside Estates, while the other is in Greenfield Plains."
+      },
+      "system": {
+        "slug": "telecom-masts",
+        "section": "General locations",
+        "sortOrder": 34,
+        "image": "/Welcome%20to%20Bloxburg/Locations/telecom-masts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House",
+        "locationType": "General location",
+        "description": "The player's houses/plot.",
+        "availability": "Permanent map location",
+        "cardSummary": "The player's houses/plot."
+      },
+      "system": {
+        "slug": "house",
+        "section": "General locations",
+        "sortOrder": 35,
+        "image": "/Welcome%20to%20Bloxburg/Locations/house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "River",
+        "locationType": "General location",
+        "description": "A river that players can swim within.",
+        "availability": "Permanent map location",
+        "cardSummary": "A river that players can swim within."
+      },
+      "system": {
+        "slug": "river",
+        "section": "General locations",
+        "sortOrder": 36,
+        "image": "/Welcome%20to%20Bloxburg/Locations/river.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peak Mountain",
+        "locationType": "General location",
+        "description": "A large, expansive mountain range located in the upper left corner of the map.",
+        "availability": "Permanent map location",
+        "cardSummary": "A large, expansive mountain range located in the upper left corner of the map."
+      },
+      "system": {
+        "slug": "peak-mountain",
+        "section": "General locations",
+        "sortOrder": 37,
+        "image": "/Welcome%20to%20Bloxburg/Locations/peak-mountain.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meh-Meh Falls",
+        "locationType": "General location",
+        "description": "A small waterfall located in Peak Mountain",
+        "availability": "Permanent map location",
+        "cardSummary": "A small waterfall located in Peak Mountain"
+      },
+      "system": {
+        "slug": "meh-meh-falls",
+        "section": "General locations",
+        "sortOrder": 38,
+        "image": "/Welcome%20to%20Bloxburg/Locations/meh-meh-falls.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Greenfield Plains",
+        "locationType": "General location",
+        "description": "A wide, grass-covered plains enclosed by fences along its borders. There are also three wind turbines and a telecommunications mast in this region.",
+        "availability": "Permanent map location",
+        "cardSummary": "A wide, grass-covered plains enclosed by fences along its borders. There are also three wind turbines and a telecommunications mast in this region."
+      },
+      "system": {
+        "slug": "greenfield-plains",
+        "section": "General locations",
+        "sortOrder": 39,
+        "image": "/Welcome%20to%20Bloxburg/Locations/greenfield-plains.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meh-Meh Lake",
+        "locationType": "General location",
+        "description": "A large body of water near Lakeview Heights sourced by the Meh-Meh Falls, and surrounded by the Peak Mountain and the Bloxburg Dam.",
+        "availability": "Permanent map location",
+        "cardSummary": "A large body of water near Lakeview Heights sourced by the Meh-Meh Falls, and surrounded by the Peak Mountain and the Bloxburg Dam."
+      },
+      "system": {
+        "slug": "meh-meh-lake",
+        "section": "General locations",
+        "sortOrder": 40,
+        "image": "/Welcome%20to%20Bloxburg/Locations/meh-meh-lake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Island",
+        "locationType": "General location",
+        "description": "A small island located far out in the ocean. Players can find the Giant Seashell near the island’s rocky shores and receive a trophy for finding it.",
+        "availability": "Permanent map location",
+        "cardSummary": "A small island located far out in the ocean. Players can find the Giant Seashell near the island’s rocky shores and receive a trophy for finding it."
+      },
+      "system": {
+        "slug": "the-island",
+        "section": "General locations",
+        "sortOrder": 41,
+        "image": "/Welcome%20to%20Bloxburg/Locations/the-island.webp"
+      }
+    }
+  ]
+}
