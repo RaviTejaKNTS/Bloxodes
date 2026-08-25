@@ -6,7 +6,6 @@ import path from "node:path";
 
 import sharp from "sharp";
 
-import { classifyArticleImageSrc } from "@/lib/article-media";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
 import {
@@ -179,14 +178,7 @@ async function main() {
     );
   }
 
-  const isCanonicalLocalAsset = (entry: ArticleImageEntry) =>
-    Boolean(
-      entry.public_url?.startsWith("/") &&
-        classifyArticleImageSrc(entry.public_url, manifest.article_slug).ok,
-    );
-  const collectable = manifest.entries.filter(
-    (entry) => entry.status === "verified" && !isCanonicalLocalAsset(entry),
-  );
+  const collectable = manifest.entries.filter((entry) => entry.status === "verified");
   for (const entry of collectable) assertCollectionReady(entry);
 
   console.log(
@@ -195,10 +187,10 @@ async function main() {
   for (const entry of manifest.entries) {
     const action = entry.status !== "verified"
       ? "skip"
-      : isCanonicalLocalAsset(entry)
-        ? "preserve-local"
+      : entry.public_url?.startsWith("http://") || entry.public_url?.startsWith("https://")
+        ? "reuse"
         : entry.public_url
-          ? "reuse"
+          ? "replace-unhosted"
           : "upload";
     console.log(`- ${entry.label}: status=${entry.status} action=${action}`);
   }
@@ -235,7 +227,10 @@ async function main() {
         throw new Error(`${entry.label}: final.json does not contain the managed-dev public URL`);
       }
     }
-    const converted = await prepareImage(entry, Boolean(previousPublicUrl));
+    const converted = await prepareImage(
+      entry,
+      Boolean(previousPublicUrl?.startsWith("http://") || previousPublicUrl?.startsWith("https://")),
+    );
     const result = await storage.upload(objectPath, converted.bytes, {
       contentType: "image/webp",
       upsert: true,

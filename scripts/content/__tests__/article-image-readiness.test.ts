@@ -225,3 +225,24 @@ test("rejects an entry that tries to opt out of the planned visual set", () => {
     /entries\[1\]\.required must be true/
   );
 });
+
+test("rejects root-relative collection assets that were not uploaded for the article", () => {
+  const localAssetManifest = structuredClone(manifest);
+  localAssetManifest.visual_type = "items";
+  for (const entry of localAssetManifest.entries) {
+    entry.public_url = `/Tower%20Defense%20Simulator/Towers/${entry.id}.webp`;
+    entry.uploaded_path = null;
+  }
+
+  const result = checkArticleImageReadiness({
+    manifest: localAssetManifest,
+    finalJson: {
+      slug: localAssetManifest.article_slug,
+      content_md: contentFor(localAssetManifest),
+    },
+  });
+
+  assert.equal(result.ready, false);
+  assert.match(result.errors.join("\n"), /verified visual has no hosted public_url/);
+  assert.match(result.errors.join("\n"), /uploaded_path must be articles\//);
+});

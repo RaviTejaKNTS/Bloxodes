@@ -1,8 +1,8 @@
 # Article Pipeline
 
 Status: Codex Luna Max research/review with isolated Pi Luna Max prose writing verified live
-Last verified: 2026-08-25
-Evidence: code and tests, production SHA `61e4176f6c713e9a97ebde21fdda81fdc2fabb73`, guarded homelab synchronization, live Codex/Pi readiness and canaries, full managed-development article verification, rendered Chrome preview, production copy audit, and Groq curation replay
+Last verified: 2026-08-26
+Evidence: code and tests, guarded production/homelab exact-SHA synchronization, live Codex/Pi readiness and canaries, full managed-development article verification including image-response readback, rendered browser preview, production copy audit, and Groq curation replay
 
 ## Stages
 
@@ -13,7 +13,7 @@ Evidence: code and tests, production SHA `61e4176f6c713e9a97ebde21fdda81fdc2fabb
 5. Approved final payloads and media publish through controlled production import/release flow.
 6. Production revalidation refreshes articles, feeds, sitemaps, related content, and cache tags.
 
-All approved articles require a separate nonzero image pass before writing, as defined by the article workflow skills and `scripts/content/check-article-image-readiness.ts`.
+All approved articles require a separate nonzero image pass before writing, as defined by the article workflow skills and `scripts/content/check-article-image-readiness.ts`. Every verified image must use an article-owned Supabase Storage URL with a matching `uploaded_path`; root-relative collection or repository paths do not satisfy article readiness. The final verifier downloads every unique body-image URL and requires a non-empty `image/*` response. Browser review scrolls through lazy-loaded sections and checks that every requested content image has nonzero rendered dimensions.
 
 Parent prompts and subagent handoffs are intentionally thin: the workflow skill path plus the article packet only. Writing rules live in the writing skills. Public prose must state verified numbers once, use tables for repeated fields, and use surrounding prose only for player decisions and consequences. Tier-list work creates an independent Bloxodes order from explicit gameplay criteria, always renders the tier-list component even without images, and uses cue → table → added analysis under each tier heading.
 

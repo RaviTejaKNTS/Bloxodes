@@ -16,7 +16,7 @@ import {
   readArticleImageManifest,
   type ArticleImageManifest,
 } from "./article-image-readiness";
-import { classifyArticleImageSrc } from "@/lib/article-media";
+import { verifyArticleImageUrls } from "./verify-article-image-urls";
 
 type ArticleFinal = {
   title: string;
@@ -78,7 +78,8 @@ function printUsage() {
       "  - import into managed Supabase development",
       "  - read back saved article rows",
       "  - request every /articles/<slug> route",
-      "  - confirm YouTube embeds and local images appear in HTML when present",
+      "  - confirm YouTube embeds and images appear in HTML when present",
+      "  - download every unique body image and require a non-empty image response",
     ].join("\n")
   );
 }
@@ -301,8 +302,6 @@ async function syncImageProvenance(
         continue;
       }
       const publicUrl = entry.public_url.trim();
-      const isCanonicalLocalAsset = publicUrl.startsWith("/") && classifyArticleImageSrc(publicUrl, loaded.manifest.article_slug).ok;
-      if (isCanonicalLocalAsset) continue;
       if (!entry.uploaded_path) continue;
       const payload = {
         article_id: article.id,
@@ -418,6 +417,16 @@ async function verifyRoute(url: string, title: string, finalJson: ArticleFinal) 
             throw new Error(`${url} is missing rendered image for ${image.src}`);
           }
         }
+      }
+
+      const verifiedImageUrls = await verifyArticleImageUrls({
+        articleUrl: url,
+        imageSources: images.map((image) => image.src),
+      });
+      if (verifiedImageUrls.length) {
+        console.log(
+          `Rendered image responses passed for ${verifiedImageUrls.length} unique image URL${verifiedImageUrls.length === 1 ? "" : "s"}.`,
+        );
       }
 
       const contentBlocks = parseArticleContentBlocks(finalJson.content_md);

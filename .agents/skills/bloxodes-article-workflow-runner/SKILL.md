@@ -112,6 +112,9 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 10. Start or reuse the local web server with `npm run dev:managed`.
 11. Run the batch verifier on reviewed final files. It requires sibling `media.json` for every article. Rerun Pi for copy failures, send source gaps to the research subagent, and send image coverage or mapping failures to the image subagent.
 12. Open each verified localhost article in an available real browser and inspect the rendered page.
+    - Scroll through every content section so lazy-loaded images are requested.
+    - Inspect the content image elements after scrolling. Every requested image must complete with a nonzero natural width and height; broken icons, empty tier cards, and unresolved placeholders fail the preview.
+    - Do not treat the presence of an image element or URL in HTML as proof that the image loaded.
 13. Immediately after an article passes both verification and rendered browser preview, mark its queue row `completed`:
 
 ```bash

@@ -95,6 +95,8 @@ Use this shape for an accepted omission:
 
 ## Host the verified set
 
+An existing Bloxodes image may be used as the approved source, but its site-relative path is not a hosted article image. Run it through the collector so `media.json.public_url` points to the article's Supabase Storage object and readback has passed. Do not mark `/Game/Collection/item.webp` or any other root-relative path ready.
+
 Dry-run the manifest first:
 
 ```bash
@@ -108,6 +110,8 @@ npm run collect:article-images -- --manifest <media.json> --apply
 ```
 
 The collector downloads, validates, converts to WebP, uploads to `articles/<article-slug>/sources/`, verifies public readback, and updates `media.json`. Do not save article-owned images in the repository and do not hotlink source hosts.
+
+Require every `verified` entry to have an HTTP `public_url`, an `uploaded_path` under `articles/<article-slug>/sources/`, dimensions, and successful public readback. A root-relative repository or collection asset does not satisfy readiness.
 
 Production publication promotes the exact approved managed-dev WebP bytes to the same object paths and rewrites the reviewed final to production URLs:
 
