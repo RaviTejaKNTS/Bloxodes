@@ -52,7 +52,7 @@ function parseArgs(argv: string[]): Options {
     queueId: "",
     status: "processing",
     apply: false,
-    worker: "grok-homelab",
+    worker: "codex-homelab",
     reason: null,
     resultPath: null,
     resultSlug: null,

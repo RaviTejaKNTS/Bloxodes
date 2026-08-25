@@ -163,7 +163,7 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 
 **Final pass**
 - Re-read as a reader, not the writer. Cut anything that doesn't earn its place. Confirm the article actually solves what the reader came for.
-- Run `npm run content:check-copy -- <final.json>`. A source, competitor, research-process, internal-note, or editorial-disclaimer finding blocks completion.
+- Apply the public-copy check mentally before saving. The Pi harness runs `npm run content:check-copy` and the image-readiness checker after Pi exits; any source, competitor, research-process, internal-note, or editorial-disclaimer finding blocks completion.
 - Compare every table with the prose around it. Delete repeated numbers and row summaries; keep only the added decision help.
 - If non-cover media is present, confirm it is useful. Each video must be a perfect match, and each hosted image path, placement, and alt text must help the reader. Remove media that does not help.
 

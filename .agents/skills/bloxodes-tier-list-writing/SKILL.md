@@ -143,10 +143,6 @@ Before returning `final.json`:
 - Compare the component, every table, and the surrounding prose. Delete repeated placements, row summaries, numbers, and labels. Keep only new decision value.
 - Confirm the final order was produced from the declared criteria and game evidence, not copied from another site.
 - Parse-check JSON.
-- Run the normal article verifier against a local web server:
-
-```bash
-npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
-```
+- The Pi harness runs deterministic copy and media checks after writing. The parent runs the normal article verifier against a local web server and reviews the rendered route.
 
 Do not call a visual article ready if the structured block or local image checks fail. For either shape, do not call it ready if the tier detail contract, import, or rendered route fails.

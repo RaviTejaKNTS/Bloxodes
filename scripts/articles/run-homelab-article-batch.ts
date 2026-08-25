@@ -17,12 +17,10 @@ import {
 } from "./article-queue-env";
 import {
   buildCodexExecArgs,
-  buildGrokExecArgs,
-  classifyCodexFallbackReason,
-  fallbackTargetCount,
   parseCodexReasoningEffort,
   type CodexReasoningEffort
 } from "./article-writer-provider";
+import { assertLunaMaxConfiguration } from "./pi-article-writer";
 
 type Options = {
   apply: boolean;
@@ -32,9 +30,6 @@ type Options = {
   codexBin: string;
   codexModel: string;
   codexReasoningEffort: CodexReasoningEffort;
-  grokFallback: boolean;
-  grokBin: string;
-  grokModel: string;
   maxAttempts: number;
 };
 
@@ -69,29 +64,18 @@ function printUsage() {
   console.log(`Usage: npm run articles:writer:batch -- [options]
 
 Options:
-  --apply                    Run Codex with a classified Grok fallback; dry-run by default
+  --apply                    Run the Luna Max parent workflow; dry-run by default
   --limit N                  Maximum queued articles, 1-6 (default: 6)
   --worktree PATH            Persistent Bloxodes worktree (default: current repo)
   --codex-bin PATH           Codex CLI path (default: ARTICLE_WRITER_CODEX_BIN or codex)
   --codex-model MODEL        Codex model (default: ARTICLE_WRITER_CODEX_MODEL or gpt-5.6-luna)
-  --codex-reasoning EFFORT   Codex reasoning effort (default: ARTICLE_WRITER_CODEX_REASONING_EFFORT or xhigh)
-  --no-grok-fallback         Disable the Grok provider fallback
-  --grok-bin PATH            Grok CLI path (default: ARTICLE_WRITER_GROK_BIN or grok)
-  --grok-model MODEL         Grok model (default: ARTICLE_WRITER_GROK_MODEL or grok-4.5)
+  --codex-reasoning EFFORT   Codex reasoning effort (fixed: max)
   --max-attempts N           Retry threshold for blocked rows, 1-10 (default: 3)
   --timeout-minutes N        Batch timeout, 30-330 (default: 300)
   --help                     Show this help
 
-The batch exits without invoking a writer when no curated pending queue rows exist.
-Grok runs only after a classified Codex provider/account failure.`);
-}
-
-function parseBoolean(value: string | undefined, fallback: boolean): boolean {
-  if (value === undefined || value.trim() === "") return fallback;
-  const normalized = value.trim().toLowerCase();
-  if (["1", "true", "yes", "on"].includes(normalized)) return true;
-  if (["0", "false", "no", "off"].includes(normalized)) return false;
-  throw new Error("ARTICLE_WRITER_GROK_FALLBACK must be true or false.");
+The batch exits without invoking the parent when no curated pending queue rows exist.
+Research, images, and review run through Codex Luna Max. Article prose runs only through Pi Luna Max.`);
 }
 
 function parseInteger(value: string | undefined, flag: string, minimum: number, maximum: number): number {
@@ -129,13 +113,8 @@ function parseArgs(argv: string[]): Options {
       executableDefault(path.join(os.homedir(), ".local", "bin", "codex"), "codex"),
     codexModel: process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna",
     codexReasoningEffort: parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "xhigh"
+      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
     ),
-    grokFallback: parseBoolean(process.env.ARTICLE_WRITER_GROK_FALLBACK, true),
-    grokBin:
-      process.env.ARTICLE_WRITER_GROK_BIN?.trim() ||
-      executableDefault(path.join(os.homedir(), ".grok", "bin", "grok"), "grok"),
-    grokModel: process.env.ARTICLE_WRITER_GROK_MODEL?.trim() || "grok-4.5",
     maxAttempts: parseInteger(process.env.ARTICLE_WRITER_MAX_ATTEMPTS ?? "3", "ARTICLE_WRITER_MAX_ATTEMPTS", 1, 10)
   };
 
@@ -171,18 +150,6 @@ function parseArgs(argv: string[]): Options {
       index += 1;
     } else if (arg.startsWith("--codex-reasoning=")) {
       options.codexReasoningEffort = parseCodexReasoningEffort(arg.slice("--codex-reasoning=".length).trim());
-    } else if (arg === "--no-grok-fallback") {
-      options.grokFallback = false;
-    } else if (arg === "--grok-bin") {
-      options.grokBin = requireValue(argv, index, arg);
-      index += 1;
-    } else if (arg.startsWith("--grok-bin=")) {
-      options.grokBin = arg.slice("--grok-bin=".length).trim();
-    } else if (arg === "--grok-model") {
-      options.grokModel = requireValue(argv, index, arg);
-      index += 1;
-    } else if (arg.startsWith("--grok-model=")) {
-      options.grokModel = arg.slice("--grok-model=".length).trim();
     } else if (arg === "--max-attempts") {
       options.maxAttempts = parseInteger(requireValue(argv, index, arg), arg, 1, 10);
       index += 1;
@@ -276,22 +243,6 @@ async function completedQueueCountSince(
   return count ?? 0;
 }
 
-async function queueActivityCountSince(
-  dev: { url: string; serviceRole: string },
-  startedAt: string
-): Promise<number> {
-  const supabase = createClient(dev.url, dev.serviceRole, {
-    auth: { autoRefreshToken: false, persistSession: false }
-  });
-  const { count, error } = await supabase
-    .from("article_generation_queue")
-    .select("id", { count: "exact", head: true })
-    .eq("workflow_mode", "agent_runner")
-    .gte("last_attempted_at", startedAt);
-  if (error) throw new Error(`Could not count article activity for the current batch: ${error.message}`);
-  return count ?? 0;
-}
-
 async function recoverStaleBatchClaims(
   dev: { url: string; serviceRole: string },
   maxAttempts: number,
@@ -374,12 +325,12 @@ async function requeueDueBlockedRows(
   return { requeued: data?.length ?? 0, failed: failedRows?.length ?? 0 };
 }
 
-function buildPrompt(targetCount: number, workerName: "codex-homelab" | "grok-homelab"): string {
+function buildPrompt(targetCount: number): string {
   return `Skill: .agents/skills/bloxodes-article-workflow-runner/SKILL.md
 Articles:
 - selection: newest pending Groq-curated agent_runner rows
 - maximum: ${targetCount}
-- worker: ${workerName}`;
+- worker: codex-homelab`;
 }
 
 function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
@@ -440,7 +391,7 @@ async function runCodex(options: Options, targetCount: number, dev: { url: strin
       worktree: options.worktree,
       model: options.codexModel,
       reasoningEffort: options.codexReasoningEffort,
-      prompt: buildPrompt(targetCount, "codex-homelab")
+      prompt: buildPrompt(targetCount)
     }),
     label: "Codex",
     options,
@@ -454,31 +405,10 @@ async function runCodex(options: Options, targetCount: number, dev: { url: strin
   }
 }
 
-async function runGrok(options: Options, targetCount: number, dev: { url: string; serviceRole: string }): Promise<void> {
-  const result = await runProviderProcess({
-    bin: options.grokBin,
-    args: buildGrokExecArgs({
-      worktree: options.worktree,
-      model: options.grokModel,
-      prompt: buildPrompt(targetCount, "grok-homelab"),
-      maxTurns: 400
-    }),
-    label: "Grok",
-    options,
-    dev
-  });
-  if (result.timedOut) {
-    throw new ProviderProcessError(`Grok batch exceeded ${options.timeoutMinutes} minutes.`, result.output, true);
-  }
-  if (result.exitCode !== 0) {
-    throw new ProviderProcessError(`Grok batch exited with code ${result.exitCode}.`, result.output, false);
-  }
-}
-
 async function main() {
   const options = parseArgs(process.argv.slice(2));
+  assertLunaMaxConfiguration(options.codexModel, options.codexReasoningEffort, "Codex article workflow");
   if (path.isAbsolute(options.codexBin)) await access(options.codexBin, fsConstants.X_OK);
-  if (path.isAbsolute(options.grokBin)) await access(options.grokBin, fsConstants.X_OK);
   const dev = resolveArticleDevCredentials();
   if (options.apply) {
     const staleClaims = await recoverStaleBatchClaims(dev, options.maxAttempts, options.timeoutMinutes + 30);
@@ -499,11 +429,6 @@ async function main() {
     console.log(
       `Dry run: would start Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
     );
-    console.log(
-      options.grokFallback
-        ? `Fallback: ${options.grokModel} after a classified Codex provider/account failure.`
-        : "Fallback: disabled."
-    );
     return;
   }
 
@@ -517,28 +442,7 @@ async function main() {
       `Starting Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
     );
     const batchStartedAt = new Date().toISOString();
-    try {
-      await runCodex(options, targetCount, dev);
-    } catch (error) {
-      const processError = error instanceof ProviderProcessError ? error : null;
-      const fallbackReason = processError && !processError.timedOut
-        ? classifyCodexFallbackReason(`${processError.message}\n${processError.output}`)
-        : null;
-      if (!options.grokFallback || !fallbackReason) throw error;
-
-      const activity = await queueActivityCountSince(dev, batchStartedAt);
-      const grokTarget = fallbackTargetCount(targetCount, activity);
-      if (grokTarget === 0) {
-        throw new Error(
-          `Codex failed because of ${fallbackReason}, but all ${targetCount} batch slot(s) already show queue activity; ` +
-            "Grok fallback was withheld to avoid overlapping partial work."
-        );
-      }
-      console.warn(
-        `Codex provider failure classified as ${fallbackReason}; starting one Grok fallback for up to ${grokTarget} untouched article(s).`
-      );
-      await runGrok(options, grokTarget, dev);
-    }
+    await runCodex(options, targetCount, dev);
     const completed = await completedQueueCountSince(dev, batchStartedAt);
     if (completed === 0) {
       throw new Error("DEGRADED ARTICLE WRITER: A non-empty provider batch completed zero managed-dev articles.");

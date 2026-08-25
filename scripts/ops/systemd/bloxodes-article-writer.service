@@ -1,5 +1,5 @@
 [Unit]
-Description=Bloxodes managed-dev Grok article batch writer
+Description=Bloxodes managed-dev Codex research and Pi article writer
 After=network-online.target bloxodes-article-discovery.service
 Wants=network-online.target
 
@@ -12,6 +12,7 @@ EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
 Environment=ARTICLE_WRITER_WORKTREE=/home/teja/projects/Bloxodes
 ExecStart=/usr/bin/npm run articles:homelab:check -- --component writer
+ExecStart=/usr/bin/npm run articles:writer:pi:canary -- --apply
 ExecStart=/usr/bin/npm run articles:writer:batch -- --apply --limit 6
 Nice=10
 CPUWeight=20

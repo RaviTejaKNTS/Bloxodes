@@ -1,6 +1,6 @@
 ---
 name: bloxodes-article-workflow-runner
-description: Run one or many Bloxodes article writing jobs with parent review. Use explicit topics from the user's message when present; otherwise select pending article_generation_queue leads. Use when the user asks to write articles, gives article ideas, wants subagents to research/write articles, or needs parent QA before final.json output.
+description: Run one or many Bloxodes article jobs with Codex research/image agents, isolated Pi Luna Max writing, and parent review. Use explicit topics from the user's message when present; otherwise select pending article_generation_queue leads.
 ---
 
 # Bloxodes Article Workflow Runner
@@ -32,22 +32,11 @@ values; the supported installation is `root:teja` with mode `0640`.
 
 An eligible `agent_runner` row in `article_generation_queue` has already passed the Groq topic-type, owned-page-family, source-grouping, and overlap filter. The parent still verifies that the sources support accurate research before writing. Preserve the queue ID and every grouped source URL throughout the job so the same skill can close the row when local work finishes.
 
-### Externally Claimed Homelab Writer Jobs
-
-When the current message explicitly says that `scripts/articles/run-local-article-writer.ts` has already claimed the queue item:
-
-- Treat the supplied title, type, queue reference, and source packet as the one explicit approved input.
-- Do not list, claim, or update `article_generation_queue`; the wrapper owns managed-dev queue state and Grok does not receive production database credentials.
-- Complete the same separate research, mandatory image, and writing-subagent workflow, with parent review at each gate, followed by the verifier, managed-dev Supabase import, and real-browser preview.
-- Check production overlap only with `npm run articles:inventory:production`; this GET-only path cannot mutate production.
-- Never publish or import the article to production. Normal `SUPABASE_*` variables intentionally point to managed dev in this mode.
-- End with the structured status requested by the wrapper. Report `completed` only when `final.json`, verification, managed-dev import, and rendered preview all passed. Otherwise return `skipped`, `blocked`, or `failed` with the actual reason.
-
-Use separate research, image, and writing subagents. Give each subagent one article only. The parent model orchestrates the work, approves briefs and image readiness, reviews finals, runs verification, and previews the rendered pages.
+Use separate Codex research and image subagents. Give each subagent one article only. The parent model orchestrates the work, approves briefs and image readiness, invokes the isolated Pi writer, reviews finals, runs verification, and previews the rendered pages. Every Codex model-driven stage must run with `gpt-5.6-luna` at `max` reasoning. Article prose must never be drafted by Codex or Grok.
 
 If there are more article ideas than available subagent slots, queue the extra articles. Do not write them from the parent role. Start the next article with a new subagent only after another subagent finishes or becomes available.
 
-The parent owns judgment but not article prose. It may make tiny non-content metadata or JSON fixes, such as correcting a slug, source URL, tag, `universe_id`, `author_id`, `cover_image`, missing/null field, or malformed JSON wrapper. Send changes to tone, structure, body copy, FAQ copy, or substantive claims back to the writing subagent.
+The parent owns judgment but not article prose. It may make tiny non-content metadata or JSON fixes, such as correcting a slug, source URL, tag, `universe_id`, `author_id`, `cover_image`, missing/null field, or malformed JSON wrapper. For changes to tone, structure, body copy, FAQ copy, or substantive claims, rerun the Pi writer with the same minimal packet.
 
 ## Research Subagent Handoff
 
@@ -58,9 +47,9 @@ Skill: .agents/skills/bloxodes-article-research/SKILL.md
 Article: <title, type, slug/workspace, queue ID when present, and supplied source URLs>
 ```
 
-## Writing Subagent Handoff
+## Pi Writing Handoff
 
-After the parent approves `brief.md`, always run the separate article-image pass. Start writing only after image readiness is approved. Do not reuse the research or image subagent for writing.
+After the parent approves `brief.md`, always run the separate article-image pass. Start writing only after image readiness is approved. Do not reuse the parent, research agent, or image agent for writing.
 
 ## Image Subagent Handoff
 
@@ -73,20 +62,21 @@ Article: <title, slug, and workspace path>
 
 The parent reviews expected count, exact matches, provenance, missing reasons, at least two distinct query variants and two checked source-page URLs for each proposed omission, uploaded URL readback, and readiness. Send search or mapping gaps back to the image subagent. Only the parent may accept a missing entry, and only after reliable, accurate, helpful images could not be found. An article may be image-free only when all planned targets are accepted missing.
 
-After image readiness passes, the separate writing subagent handoff contains only:
+After image readiness passes, choose the applicable writing skill and invoke the Pi harness:
 
-```text
-Skill: .agents/skills/bloxodes-article-writing/SKILL.md
-Article: <title, slug, type, and workspace path>
+```bash
+npm run articles:writer:pi -- \
+  --skill .agents/skills/bloxodes-article-writing/SKILL.md \
+  --title <title> --slug <slug> --type <type> --workspace <workspace-path> --apply
 ```
 
 For Roblox tech, platform, or troubleshooting articles, replace the writing skill with `/bloxodes-tech-article-writing` and apply its rules on top of the base article-writing rules.
 
 For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Run the same mandatory image pass first. Its tier-list component is required even when unresolved image targets were explicitly accepted missing; those entries render as text-only items.
 
-The article packet may include paths to `brief.md`, `media.json`, and `final.json`, plus the topic, slug, and article type. Never include parent approval notes, draft prose, preferred wording, source names, proposed placements, or editorial interpretation. When revision is needed, resume the same subagent with the same skill link and article packet; the subagent must inspect the files and rerun the required verifier itself.
+The Pi wrapper supplies exactly the skill link and an article packet containing title, slug, type, and workspace path. Never add parent approval notes, draft prose, preferred wording, source names, proposed placements, ranking direction, or editorial interpretation. When revision is needed, rerun the same Pi command with the same minimal packet; Pi must inspect the files again. The parent runs the full verifier after reviewing the result.
 
-If subagents are unavailable, report the article as blocked instead of silently taking over its research or writing.
+If research or image subagents are unavailable, report the article as blocked instead of silently taking over. If Pi or its ChatGPT `openai-codex` authentication is unavailable, report writing as blocked; never substitute Codex, Grok, or parent prose.
 
 ## Workspace
 
@@ -115,10 +105,10 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 5. Review each brief. Do not approve weak research just because the angle sounds good.
 6. Send research feedback to the same research subagent, or approve the brief.
 7. Start a new image subagent for every approved brief. Review and approve `media.json` and the updated image-readiness block before writing. If coverage is weak and the search is incomplete, return it to the image subagent or block the article.
-8. After research and image readiness are approved, start a new writing subagent with the normal, tech, or tier-list writing skill.
-9. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent using the same minimal handoff.
+8. After research and image readiness are approved, invoke `articles:writer:pi` with the normal, tech, or tier-list writing skill. The wrapper is hard-pinned to Pi `openai-codex/gpt-5.6-luna` at `max` reasoning and runs deterministic copy and media checks.
+9. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; for copy and content changes, rerun Pi using the same minimal handoff.
 10. Start or reuse the local web server with `npm run dev:managed`.
-11. Run the batch verifier on reviewed final files. It requires sibling `media.json` for every article. Send copy failures to the writing subagent, source gaps to the research subagent, and image coverage or mapping failures to the image subagent.
+11. Run the batch verifier on reviewed final files. It requires sibling `media.json` for every article. Rerun Pi for copy failures, send source gaps to the research subagent, and send image coverage or mapping failures to the image subagent.
 12. Open each verified localhost article in an available real browser and inspect the rendered page.
 13. Immediately after an article passes both verification and rendered browser preview, mark its queue row `completed`:
 
@@ -170,7 +160,7 @@ Check:
 
 If the brief is weak, ask for more research or mark the article blocked.
 
-Do not rewrite the article from the parent role. The parent may only make tiny non-content metadata or JSON repairs itself, such as slug, source URL, tag, ID, null field, or syntax fixes. Send writing, tone, body, FAQ, and content feedback to the writing subagent, and send research-gap feedback to the research subagent.
+Do not rewrite the article from the parent role. The parent may only make tiny non-content metadata or JSON repairs itself, such as slug, source URL, tag, ID, null field, or syntax fixes. Rerun Pi with the same minimal packet for writing, tone, body, FAQ, and content failures, and send research-gap feedback to the research subagent.
 
 ## Final Article Review
 
@@ -203,9 +193,9 @@ Check:
 - every article matches sibling `media.json`: expected, verified, uploaded, inserted, missing, and accepted-missing counts reconcile, with every image beneath its planned heading or in its row
 - body images are omitted only when all planned targets are accepted missing because no reliable, accurate, helpful image was found
 
-After this review, run the batch verifier on the files that look ready. Treat writing, copy, tone, body, and FAQ failures as feedback for the writing subagent, and research or accuracy gaps as feedback for the research subagent. The parent may directly fix verifier failures only when they are small non-content metadata or JSON issues, such as a wrong slug, malformed JSON, source URL typo, tag cleanup, missing `universe_id`, or an import-required null/default field.
+After this review, run the batch verifier on the files that look ready. Treat writing, copy, tone, body, and FAQ failures as reasons to rerun Pi, and research or accuracy gaps as feedback for the research subagent. The parent may directly fix verifier failures only when they are small non-content metadata or JSON issues, such as a wrong slug, malformed JSON, source URL typo, tag cleanup, missing `universe_id`, or an import-required null/default field.
 
-The parent never rewrites body copy and never supplies substitute copy or ranking direction in revision prompts. It sends the same skill link and article packet; the responsible subagent reads the failed files and reruns the skill's checks.
+The parent never rewrites body copy and never supplies substitute copy or ranking direction in revision prompts. It reruns Pi with the same skill link and article packet; Pi reads the failed files, while the parent reruns the full verifier.
 
 ## Local Preview
 
@@ -223,7 +213,7 @@ npm run verify:article-finals -- --base-url http://localhost:<port> --file <fina
 
 Use one `--file` for each approved article and the actual localhost port shown by the dev server.
 
-4. If the verifier fails, send writing, JSON, or copy output to the writing subagent. Send source or brief gaps to the research subagent.
+4. If the verifier fails, rerun Pi for writing or copy failures. Send source or brief gaps to the research subagent and make only tiny non-content JSON repairs directly.
 5. If the verifier passes, open every verified `/articles/<slug>` link in Chrome, Chromium, or another available real browser.
 6. Check the page title, article body, author/cover behavior, and obvious layout issues.
 7. Confirm embeds render as players instead of raw syntax and that body images load beside the correct content.

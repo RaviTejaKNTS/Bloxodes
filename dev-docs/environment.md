@@ -88,7 +88,7 @@ The homelab checkout mirrors the complete private `.envs/` profile tree for feat
 - Dokploy runtime: application secrets are configured on the deployed service.
 - VPS worker: `/home/codex-admin/bloxodes-stats-worker/env.stats-worker`, mode 600.
 - Homelab: `/etc/bloxodes/article-automation.env`, root-owned, group-readable by the service group, mode 640.
-- Homelab Codex authentication: the `teja` service account's protected Codex home (currently ChatGPT-managed authentication), never the article env file. Treat its auth material like a password; readiness calls only `codex login status` and never prints tokens. The article env owns only the Codex binary/model/reasoning settings and the Grok fallback controls.
+- Homelab model authentication: the `teja` service account's protected Codex home plus `/home/teja/.pi/agent/auth.json` for Pi's independent ChatGPT Plus/Pro login, never the article env file. Treat both as passwords and never copy them between hosts. The article env owns only binary paths, the hard-pinned Luna Max provider/model/reasoning settings, timeouts, and queue controls.
 - Self-hosted Supabase: `/home/codex-admin/bloxodes-supabase/.env`; do not copy this full vendor/runtime contract into the repository.
 
 ## Legacy Aliases
