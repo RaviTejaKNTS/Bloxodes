@@ -1,8 +1,8 @@
 # Article Pipeline
 
-Status: Codex Luna Max research/review with isolated Pi Luna Max prose writing prepared for release
+Status: Codex Luna Max research/review with isolated Pi Luna Max prose writing verified live
 Last verified: 2026-08-25
-Evidence: code, guarded homelab checkout synchronization, systemd units/timer/journal, managed-development readiness, production inventory, and production article count
+Evidence: code and tests, production SHA `61e4176f6c713e9a97ebde21fdda81fdc2fabb73`, guarded homelab synchronization, live Codex/Pi readiness and canaries, full managed-development article verification, rendered Chrome preview, production copy audit, and Groq curation replay
 
 ## Stages
 
@@ -37,6 +37,7 @@ Opinionated Roblox game-list articles remain ordinary `articles` rows. The reusa
 - The parent prompt contains only the workflow skill plus queue selection, maximum, and worker. Research/image handoffs contain only a skill and article packet. Pi receives only its writing skill plus title, slug, type, and workspace.
 - Pi runs with context-file, extension, discovered-skill, prompt-template, theme, and session loading disabled. Its tool allowlist is `read,write,edit,grep,find,ls`, and its working directory is the single article workspace.
 - The Pi wrapper requires `brief.md` and `media.json`, writes `final.json`, validates its slug/content, then runs the public-copy and image-readiness gates. The Codex parent still owns the full verifier and browser preview.
+- Groq curation keeps the selected candidate set intact when the provider reports an HTTP 413 token-cap rejection. It reduces the completion allowance from the reported limit/request delta plus a safety margin and retries the same request; the live 8,017-token failure completed at 7,679 tokens after this guard reduced `max_tokens` to 2,707.
 - A later batch recovers stale `codex-homelab` processing claims only after the configured provider timeout plus a 30-minute margin.
 - Writers leave `final.json.cover_image` null so managed-development import creates and uploads the edited cover from the game's thumbnail. Source-provided and pre-existing covers are not accepted as the final cover by the unattended batch prompt. A reviewed generated source may be passed explicitly to `import-content-final.ts --cover-source-file`; the importer still stores only its derived edited cover. The cover is a feature/metadata image only: it must not be injected into `content_md`, and production import rejects a cover URL repeated in body content. Use `--regenerate-covers` for an intentional edited-cover repair, which writes a fresh object path to avoid stale CDN bytes.
 
@@ -47,15 +48,17 @@ The writer service runs a tiny live Pi Luna Max exact-response canary after loca
 
 On the latest installed-production verification date:
 
-- discovery readiness and curation succeeded;
-- production inventory contained 3,265 published pages across page families;
-- managed-dev queue had work available;
-- writer readiness passed; and
-- the latest audited writer run succeeded, completing 6 of 6 claimed items.
+- production inventory contained 3,584 published pages across page families;
+- managed-development and production-inventory readiness passed;
+- Codex CLI reported `gpt-5.6-luna` at `max`;
+- Pi 0.84.3 reported `openai-codex/gpt-5.6-luna` at `max` with ChatGPT authentication;
+- the live Pi exact-response canary passed;
+- `grow-a-chicken-fighter-hot-egg-event-guide` completed through research, 2/2 image upload/insertion, Pi writing, managed-development import/readback, route verification, and real Chrome/Playwright preview; and
+- the production public-copy audit scanned 172 articles from the last 30 days with 0 affected articles and 0 findings. The Runaways tier-list article also had 0 findings in its exact-slug audit.
 
-That audited run used the preceding Grok-primary release. The new split workflow requires an authenticated Pi Luna Max access canary and one managed-development article canary after the released SHA and unit/env configuration reach the homelab.
+The article canary remains in managed development with queue status `completed`; it is not production-published until the separate human release-review workflow explicitly approves it.
 
-An earlier HTTP 402 balance failure is historical, not the current service state. The homelab checkout was fast-forwarded to the approved production SHA through the guarded synchronization command on 2026-08-14.
+An earlier HTTP 402 balance failure is historical, not the current service state. The homelab checkout was fast-forwarded to the approved production SHA through the guarded synchronization command on 2026-08-25.
 
 ## Production State
 
