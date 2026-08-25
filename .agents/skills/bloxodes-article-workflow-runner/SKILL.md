@@ -7,6 +7,8 @@ description: Run one or many Bloxodes article jobs with Codex research/image age
 
 Use this as the parent review workflow for one article or a list of articles.
 
+When `run-homelab-article-batch.ts` invokes this skill, execute the workflow below directly in the current parent turn. Never call `articles:writer:batch` from inside this skill: the outer batch already owns the single-writer lock and invoking it again only creates a self-blocking batch.
+
 ## Input Selection
 
 Choose inputs in this order:
