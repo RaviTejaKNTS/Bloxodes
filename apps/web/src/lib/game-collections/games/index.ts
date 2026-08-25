@@ -75,6 +75,7 @@ import { buildABoatForTreasureCollectionGroup } from "./build-a-boat-for-treasur
 import { welcomeToBloxburgCollectionGroup } from "./welcome-to-bloxburg";
 import { towerDefenseSimulatorCollectionGroup } from "./tower-defense-simulator";
 import { beeSwarmSimulatorCollectionGroup } from "./bee-swarm-simulator";
+import { bladeBallCollectionGroup } from "./blade-ball";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -154,5 +155,6 @@ export const GAME_COLLECTION_GROUPS = [
   buildABoatForTreasureCollectionGroup,
   welcomeToBloxburgCollectionGroup,
   towerDefenseSimulatorCollectionGroup,
-  beeSwarmSimulatorCollectionGroup
+  beeSwarmSimulatorCollectionGroup,
+  bladeBallCollectionGroup
 ] satisfies GameCollectionGroup[];

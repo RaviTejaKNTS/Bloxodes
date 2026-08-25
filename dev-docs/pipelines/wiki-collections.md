@@ -1,7 +1,7 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-08-24
+Last verified: 2026-08-25
 Evidence: wiki route/data contracts, workflow skills, game collection registry and v2 dataset rules, seed/verification scripts, and the latest production row-count sample
 
 ## Scope
@@ -22,6 +22,7 @@ These collections describe one game's durable systems and items—pets, weapons,
 - Collection codes use `<game-slug>-<collection-slug>`; `wiki_slug` must use the editorial game slug, never a stats/universe slug.
 - Roblox APIs may verify universe identity, metadata, and thumbnails. Collection item rows come from source research rather than assuming Roblox exposes a complete item endpoint.
 - Flee the Facility's approved local datasets are `data/Flee the Facility/maps.json` and `data/Flee the Facility/beast-powers.json`; their exact row-level WebP assets live in `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`. Hammers and gemstones remain research-only until a complete source-backed roster can be proven.
+- Blade Ball is a hub-only game group with zero registered collections (`collections: []`). Sword Skins, Explosion Skins, Emotes, and Maps are blocked because independent current-complete roster proof was unavailable after the 2026-08-23 Roblox experience update; Abilities is blocked because its roster conflict remains unresolved.
 
 ## Workflow
 
@@ -37,7 +38,7 @@ Use the matching wiki and game-collection workflow skills. For existing datasets
 
 ## Images and Renderer Readiness
 
-Collection image manifests and local public assets are part of the data contract. A collection is not ready merely because its copy exists: every item count, image path, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
+Collection image manifests and local public assets are part of the data contract. A collection is not ready merely because its copy exists: every item count, image path or documented text-only exception, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
 
 Text-only rows are acceptable only when clean row-level media is unavailable and the decision is recorded in the owning dataset/documentation. Do not substitute unrelated crops, edited art, or generic game thumbnails for missing item images.
 
