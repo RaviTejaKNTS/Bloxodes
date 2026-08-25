@@ -32,7 +32,7 @@ Always read sibling `media.json`. Start writing only after the parent approved i
 - Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
 - Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
 - Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
+- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and write from the player's next decision or action. Never invent a playtest, personal result, or first-person experience that the evidence does not establish.
 - Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
 - Open on the real thing: the change, action, problem, or answer. No mood-setting, no suspense, no warm-up lines, no "Welcome to" or "In this game".
 - Read the room. Keep the wit lighter, or drop it, when the reader is stressed: error fixes, "won't open", crashes, anything troubleshooting. Help first.
@@ -45,6 +45,13 @@ Always read sibling `media.json`. Start writing only after the parent approved i
 - Never restate something already said elsewhere in the article, even in different phrasing.
 - However, do not skip on any info. Do not asssume people already know something, make it clear for everyone to understand.
 - Before drafting, check the competing pages for the target topic and make a materially better page. One-up them with better SEO, SEO-friendly headings, more information that is actually useful, better readability, simpler explanations, and a clean flow readers can follow from start to finish. If useful information is missing, research and add it; do not add filler merely to make the article longer.
+
+**Precision and experience-led writing**
+- Write from the moment a player has to choose, move, spend, equip, fight, or troubleshoot. Explain the exact action, visible result, tradeoff, and failure case. Do not imitate first-hand experience with invented lines such as "I tested" or "in my runs."
+- Replace vague judgments with the concrete fact that earns them. Never write "strong," "fast," "expensive," "a lot," "better," "good damage," or "worth it" without the exact stat, comparison, condition, or player outcome that makes the word true.
+- Include every useful verified number, cost, chance, cooldown, duration, requirement, limit, count, reward, and version boundary. If a number cannot be verified, omit it or return the gap instead of softening it into vague copy.
+- Put a fact in one place only. Use a table when readers need to compare the same fields across several entries. Use prose when one fact needs explanation. Never repeat a table's numbers, labels, or row summary in the paragraph below it.
+- After a table, interpret the data: explain the choice it changes, when the apparent winner loses value, or what the player should do next. Do not narrate rows back in sentence form.
 
 **Readability and formatting**
 - This sits on top of the value rule: every sentence must add value, and every sentence must also be easy to read.
@@ -151,10 +158,13 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 
 **What never appears in copy**
 - No mentions of research, sources, competitors, databases, or internal notes.
+- No outlet names, source abbreviations, attribution phrases such as "according to," research narration, editorial disclaimers, consensus disclaimers, or wording about another site's ordering.
 - No self-referential words: "this article," "this guide," "this page," "this catalog," "this dataset," "this database." Just talk about the game.
 
 **Final pass**
 - Re-read as a reader, not the writer. Cut anything that doesn't earn its place. Confirm the article actually solves what the reader came for.
+- Run `npm run content:check-copy -- <final.json>`. A source, competitor, research-process, internal-note, or editorial-disclaimer finding blocks completion.
+- Compare every table with the prose around it. Delete repeated numbers and row summaries; keep only the added decision help.
 - If non-cover media is present, confirm it is useful. Each video must be a perfect match, and each hosted image path, placement, and alt text must help the reader. Remove media that does not help.
 
 ## Writing and Field Jobs

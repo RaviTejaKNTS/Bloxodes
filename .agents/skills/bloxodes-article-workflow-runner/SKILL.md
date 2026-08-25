@@ -51,14 +51,12 @@ The parent owns judgment but not article prose. It may make tiny non-content met
 
 ## Research Subagent Handoff
 
-Tell the research subagent:
+The handoff contains only the skill link and the article packet. Do not add prose instructions, writing advice, ranking suggestions, source interpretation, or approval notes. The skill owns the procedure.
 
-- You are the subagent for one article only.
-- Do not run `/bloxodes-article-workflow-runner`.
-- Do not create or call other subagents.
-- Start with `/bloxodes-article-research`.
-- Skill file: `.agents/skills/bloxodes-article-research/SKILL.md`.
-- Return `brief.md` only and wait for parent approval.
+```text
+Skill: .agents/skills/bloxodes-article-research/SKILL.md
+Article: <title, type, slug/workspace, queue ID when present, and supplied source URLs>
+```
 
 ## Writing Subagent Handoff
 
@@ -66,29 +64,27 @@ After the parent approves `brief.md`, always run the separate article-image pass
 
 ## Image Subagent Handoff
 
-For every approved brief, start a new image subagent before writing. Tell it:
+For every approved brief, start a new image subagent before writing. Its handoff contains only:
 
-- You are the image subagent for one article only.
-- Do not write `final.json` and do not call subagents.
-- Use `/bloxodes-article-images`.
-- Skill file: `.agents/skills/bloxodes-article-images/SKILL.md`.
-- Read the approved `brief.md`, define a nonzero expected set in `media.json`, search alternate wiki/official/guide sources for every unresolved target, host approved exact matches, update image readiness in `brief.md`, and stop for parent approval.
+```text
+Skill: .agents/skills/bloxodes-article-images/SKILL.md
+Article: <title, slug, and workspace path>
+```
 
 The parent reviews expected count, exact matches, provenance, missing reasons, at least two distinct query variants and two checked source-page URLs for each proposed omission, uploaded URL readback, and readiness. Send search or mapping gaps back to the image subagent. Only the parent may accept a missing entry, and only after reliable, accurate, helpful images could not be found. An article may be image-free only when all planned targets are accepted missing.
 
-After image readiness passes, tell the separate writing subagent for normal gameplay and general articles:
+After image readiness passes, the separate writing subagent handoff contains only:
 
-- Use `/bloxodes-article-writing`.
-- Skill file: `.agents/skills/bloxodes-article-writing/SKILL.md`.
-- Read the approved `brief.md`.
-- Write only the matching `final.json`.
-- Reopen the draft once and revise it for the skill's voice, clarity, usefulness, and valid JSON.
+```text
+Skill: .agents/skills/bloxodes-article-writing/SKILL.md
+Article: <title, slug, type, and workspace path>
+```
 
 For Roblox tech, platform, or troubleshooting articles, replace the writing skill with `/bloxodes-tech-article-writing` and apply its rules on top of the base article-writing rules.
 
-For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Run the same mandatory image pass first. Prefer its visual overview when a complete exact-match image set exists. Use its text/table-first tier-list shape only when the unresolved image targets were explicitly accepted missing after the source search.
+For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Run the same mandatory image pass first. Its tier-list component is required even when unresolved image targets were explicitly accepted missing; those entries render as text-only items.
 
-Pass the writing subagent the paths to `brief.md` and `final.json`, the topic and article slugs, whether the article is normal, tech, or tier-list content, and any parent approval notes. Resume that writing subagent when copy changes are needed so it retains the article context.
+The article packet may include paths to `brief.md`, `media.json`, and `final.json`, plus the topic, slug, and article type. Never include parent approval notes, draft prose, preferred wording, source names, proposed placements, or editorial interpretation. When revision is needed, resume the same subagent with the same skill link and article packet; the subagent must inspect the files and rerun the required verifier itself.
 
 If subagents are unavailable, report the article as blocked instead of silently taking over its research or writing.
 
@@ -120,7 +116,7 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 6. Send research feedback to the same research subagent, or approve the brief.
 7. Start a new image subagent for every approved brief. Review and approve `media.json` and the updated image-readiness block before writing. If coverage is weak and the search is incomplete, return it to the image subagent or block the article.
 8. After research and image readiness are approved, start a new writing subagent with the normal, tech, or tier-list writing skill.
-9. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent.
+9. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent using the same minimal handoff.
 10. Start or reuse the local web server with `npm run dev:managed`.
 11. Run the batch verifier on reviewed final files. It requires sibling `media.json` for every article. Send copy failures to the writing subagent, source gaps to the research subagent, and image coverage or mapping failures to the image subagent.
 12. Open each verified localhost article in an available real browser and inspect the rendered page.
@@ -130,7 +126,13 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 npm run articles:queue:update -- --queue-id <uuid> --status completed --result-path <final.json> --apply
 ```
 
-13. Return approved paths, localhost article links, queue outcomes, blocked articles, and remaining risks.
+14. Run the production article public-copy audit in read-only mode. Record any existing source, competitor, research-process, internal-note, or editorial-disclaimer findings for correction; the current final files must have zero findings before completion:
+
+```bash
+npm run articles:audit-copy:production -- --days 30
+```
+
+15. Return approved paths, localhost article links, queue outcomes, blocked articles, and remaining risks.
 
 Use `skipped` for a deliberate editorial rejection such as existing coverage or no useful/source-backed angle:
 
@@ -191,6 +193,9 @@ Check:
 - no repeated fixes, causes, or explanations across sections
 - facts are verified and accurate: no invented menu paths, no impossible actions, and never tells readers to play Roblox in a web browser (the in-browser player is discontinued)
 - no public copy mentions research workflow, source gathering, database checks, or internal notes
+- no public copy names a source or competitor, attributes a claim, describes another site's ordering, or adds an editorial/consensus disclaimer
+- every useful verified number and constraint appears clearly once, in either prose or a table
+- prose around a table interprets player choices and does not repeat the table's numbers or row summaries
 - no unsupported claims, vague wording, or page-type overlap
 - links are useful, not decorative
 - videos are perfect matches and use `{{ youtube: ... }}` rather than leftover raw links
@@ -199,6 +204,8 @@ Check:
 - body images are omitted only when all planned targets are accepted missing because no reliable, accurate, helpful image was found
 
 After this review, run the batch verifier on the files that look ready. Treat writing, copy, tone, body, and FAQ failures as feedback for the writing subagent, and research or accuracy gaps as feedback for the research subagent. The parent may directly fix verifier failures only when they are small non-content metadata or JSON issues, such as a wrong slug, malformed JSON, source URL typo, tag cleanup, missing `universe_id`, or an import-required null/default field.
+
+The parent never rewrites body copy and never supplies substitute copy or ranking direction in revision prompts. It sends the same skill link and article packet; the responsible subagent reads the failed files and reruns the skill's checks.
 
 ## Local Preview
 

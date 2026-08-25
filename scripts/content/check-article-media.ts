@@ -12,10 +12,12 @@ import {
 import {
   articleBlockErrors,
   extractArticleBlockImageRefs,
+  parseArticleContentBlocks,
   validateTierListArticleDetails,
 } from "@/lib/article-blocks";
 
 export type ArticleMediaInput = {
+  title?: string | null;
   slug: string;
   content_md: string;
   cover_image?: string | null;
@@ -86,6 +88,17 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
   const requireLocalFiles = input.requireLocalFiles !== false;
   const requireImageAlt = input.requireImageAlt !== false;
   const content = input.content_md ?? "";
+  const tierListArticle = /\btier[- ]list\b/i.test(`${input.title ?? ""} ${input.slug}`);
+  if (
+    tierListArticle &&
+    !parseArticleContentBlocks(content).some((block) => block.kind === "tier-list")
+  ) {
+    findings.push({
+      level: "error",
+      rule: "missing-tier-list-component",
+      message: `${label}: tier-list articles must include one tier-list component, including when every item is text-only.`,
+    });
+  }
 
   // YouTube directives: optional, but must be perfect when present.
   const youtube = findYouTubeDirectives(content);

@@ -153,20 +153,39 @@ describe("article content blocks", () => {
     const details = [
       tierListMarkdown,
       "",
+      "Pick from this tier when you need pressure without a setup turn.",
+      "",
       "| Image | Style | Details |",
       "|---|---|---|",
       "| ![Hakari fighting style icon](/Gakuran/Fighting%20Styles/hakari.png) | Hakari | Strong |",
       "",
+      "Hakari pays off most when you can stay close enough to keep the combo moving.",
+      "",
       "## A Tier",
+      "",
+      "Use this tier when consistency matters more than the highest ceiling.",
       "",
       "| Image | Style | Details |",
       "|---|---|---|",
       "| ![Boxing fighting style icon](/Gakuran/Fighting%20Styles/boxing.png) | Boxing | Reliable |",
+      "",
+      "Boxing leaves more room for mistakes because its useful actions do not depend on one narrow opener.",
     ].join("\n");
     expect(validateTierListArticleDetails(details)).toEqual([]);
-    expect(validateTierListArticleDetails(tierListMarkdown)).toContain("## S Tier must begin with a Markdown detail table");
+    expect(validateTierListArticleDetails(tierListMarkdown)).toContain("## S Tier is missing its Markdown detail table");
 
-    const lateTable = details.replace("## A Tier\n\n| Image", "## A Tier\n\nBoxing remains useful.\n\n| Image");
-    expect(validateTierListArticleDetails(lateTable)).toContain("## A Tier must begin with a Markdown detail table");
+    const missingCue = details.replace(
+      "## A Tier\n\nUse this tier when consistency matters more than the highest ceiling.\n\n| Image",
+      "## A Tier\n\n| Image"
+    );
+    expect(validateTierListArticleDetails(missingCue)).toContain("## A Tier needs a short cue before its detail table");
+
+    const missingAnalysis = details.replace(
+      "\n\nBoxing leaves more room for mistakes because its useful actions do not depend on one narrow opener.",
+      ""
+    );
+    expect(validateTierListArticleDetails(missingAnalysis)).toContain(
+      "## A Tier needs additional analysis after its detail table"
+    );
   });
 });

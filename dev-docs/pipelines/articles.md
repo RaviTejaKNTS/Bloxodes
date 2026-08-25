@@ -1,7 +1,7 @@
 # Article Pipeline
 
 Status: Codex-primary writer prepared locally; installed homelab remains on the last verified production release
-Last verified: 2026-08-14
+Last verified: 2026-08-25
 Evidence: code, guarded homelab checkout synchronization, systemd units/timer/journal, managed-development readiness, production inventory, and production article count
 
 ## Stages
@@ -14,6 +14,10 @@ Evidence: code, guarded homelab checkout synchronization, systemd units/timer/jo
 6. Production revalidation refreshes articles, feeds, sitemaps, related content, and cache tags.
 
 All approved articles require a separate nonzero image pass before writing, as defined by the article workflow skills and `scripts/content/check-article-image-readiness.ts`.
+
+Parent prompts and subagent handoffs are intentionally thin: the workflow skill path plus the article packet only. Writing rules live in the writing skills. Public prose must state verified numbers once, use tables for repeated fields, and use surrounding prose only for player decisions and consequences. Tier-list work creates an independent Bloxodes order from explicit gameplay criteria, always renders the tier-list component even without images, and uses cue → table → added analysis under each tier heading.
+
+`npm run articles:audit-copy:production -- --days 30` is the read-only production guard for source names, attribution, research/process narration, and editorial or consensus disclaimers. Use `--all` for the full published inventory. `content:check-copy` remains the required final-file gate before import.
 
 Opinionated Roblox game-list articles remain ordinary `articles` rows. The reusable `roblox-game-card` fenced block carries a stable universe ID, square game icon, Roblox URL, and optional Bloxodes stats URL; all recommendation detail stays in the surrounding Markdown prose. The repo-local best-games workflow is split into discovery, selection/order, per-game research, and writing skills so the candidate set is not capped at a hardcoded count.
 

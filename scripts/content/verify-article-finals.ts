@@ -461,6 +461,7 @@ async function verifyArticleMedia(finals: Array<ArticleFinal & { label?: string 
   for (let i = 0; i < finals.length; i += 1) {
     const finalJson = finals[i]!;
     const findings = await checkArticleMedia({
+      title: finalJson.title,
       slug: finalJson.slug,
       content_md: finalJson.content_md,
       cover_image: finalJson.cover_image,

@@ -375,11 +375,11 @@ async function requeueDueBlockedRows(
 }
 
 function buildPrompt(targetCount: number, workerName: "codex-homelab" | "grok-homelab"): string {
-  return `Use $bloxodes-article-workflow-runner for this unattended homelab batch.
-
-No explicit article topic is supplied. Load the newest pending Groq-curated agent_runner rows from article_generation_queue and process at most ${targetCount} accepted articles in this run. Mark processing rows with worker name ${workerName}. Use the runner's required research, image, and writing subagents, queueing work within this same parent run when available subagent slots are full. Continue until those accepted articles are completed, deliberately skipped, or terminally failed; do not stop after producing only a plan.
-
-Follow the complete workflow for every accepted row: processing status, research brief, parent review, separate image subagent with required media.json and at least one planned target, separate writing subagent, managed-dev import, verifier, real-browser localhost preview, and immediate final queue status. Never classify images as optional or set expected_count to zero. An article may have no body images only when the image pass searched reliable sources for every accurate, helpful target, recorded at least two distinct query variants and two checked source-page URLs per omitted target, and the parent explicitly marked every target accepted_missing. Keep final.json cover_image null and use the normal managed-dev import cover-editing process for every article; do not reuse a source-provided or pre-existing cover as the final cover. Do not invent substitute topics. Never publish to production. Production access is limited to the GET-only editorial inventory command.`;
+  return `Skill: .agents/skills/bloxodes-article-workflow-runner/SKILL.md
+Articles:
+- selection: newest pending Groq-curated agent_runner rows
+- maximum: ${targetCount}
+- worker: ${workerName}`;
 }
 
 function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {

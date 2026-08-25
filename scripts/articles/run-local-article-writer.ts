@@ -303,25 +303,13 @@ function buildGrokPrompt(row: QueueRow): string {
   const sourcePayload = Array.isArray(row.source_items) && row.source_items.length
     ? row.source_items
     : [{ source_name: row.source_name, source_url: row.source_url }];
-  return `Run exactly one Bloxodes article through $bloxodes-article-workflow-runner.
-
-This topic has already been Groq-curated and claimed by the homelab wrapper. Treat it as an explicit approved input. Do not list, claim, or update article_generation_queue; the wrapper owns queue state. You have no production database credentials.
-
-Article title: ${row.article_title}
-Article type: ${row.article_type}
-Queue reference: ${row.id}
-Curation reason: ${row.curation_reason ?? "Approved by automated curation."}
-Source material: ${JSON.stringify(sourcePayload)}
-
-Complete the normal research, parent review, separate image-subagent, writing-subagent, verification, managed-dev Supabase import, and real-browser localhost preview workflow. Every article requires media.json and at least one planned image target. Never classify images as optional or set expected_count to zero. An article may have no body images only when reliable sources were searched for every accurate, helpful target, at least two distinct query variants and two checked source-page URLs are recorded per omitted target, and the parent explicitly marked every target accepted_missing. Check existing production coverage only with npm run articles:inventory:production. All database and Storage writes must remain in managed dev Supabase. Never publish or import the article to production. Do not open, inspect, print, or modify any .env file; the wrapper has already provided the safe dev environment required by repository commands.
-
-At the end, return the required structured result:
-- completed: final.json exists, verification and browser preview passed, and the matching article row exists in managed dev Supabase
-- skipped: the topic should deliberately not be written (duplicate, unsupported, or no useful angle)
-- blocked: an operational or evidence blocker prevented completion
-- failed: an unrecoverable workflow failure
-
-For completed, include the repo-relative final.json path and its slug. For every other status, use null for final_path/result_slug and give a concise reason.`;
+  return `Skill: .agents/skills/bloxodes-article-workflow-runner/SKILL.md
+Article:
+- title: ${row.article_title}
+- type: ${row.article_type}
+- queue_id: ${row.id}
+- claim_owner: homelab wrapper
+- sources: ${JSON.stringify(sourcePayload)}`;
 }
 
 function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
