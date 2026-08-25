@@ -1,0 +1,426 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Bee Swarm Simulator",
+    "gameSlug": "bee-swarm-simulator",
+    "collection": "planters",
+    "route": "/wiki/bee-swarm-simulator/planters",
+    "catalogCode": "bee-swarm-simulator-planters",
+    "itemFields": [
+      "planterType",
+      "preferredFields",
+      "growthBehavior",
+      "growthTime",
+      "capacity",
+      "reuse",
+      "nectarOrDrops",
+      "source",
+      "cost",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "planterType",
+      "preferredFields",
+      "growthBehavior",
+      "growthTime",
+      "capacity",
+      "reuse",
+      "nectarOrDrops",
+      "source",
+      "cost",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Planters"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "planterType"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "planterType",
+        "preferredFields",
+        "growthBehavior",
+        "growthTime",
+        "reuse",
+        "nectarOrDrops",
+        "source",
+        "availability"
+      ],
+      "tableFields": [
+        "planterType",
+        "preferredFields",
+        "growthTime",
+        "capacity",
+        "reuse",
+        "nectarOrDrops",
+        "source",
+        "cost",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "planterType": {
+          "kind": "highlight",
+          "label": "Planter Type"
+        },
+        "preferredFields": {
+          "kind": "detail",
+          "label": "Preferred Fields"
+        },
+        "growthBehavior": {
+          "kind": "detail",
+          "label": "Growth Behavior"
+        },
+        "growthTime": {
+          "kind": "chip",
+          "label": "Growth Time"
+        },
+        "capacity": {
+          "kind": "chip",
+          "label": "Capacity"
+        },
+        "reuse": {
+          "kind": "plain",
+          "label": "Reuse"
+        },
+        "nectarOrDrops": {
+          "kind": "detail",
+          "label": "Nectar Or Drops"
+        },
+        "source": {
+          "kind": "detail",
+          "label": "Source"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "plain",
+          "label": "Card Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Blue Clay Planter",
+        "planterType": "Planter",
+        "preferredFields": "Blue-flower fields.",
+        "growthBehavior": "Grows in about 6 hours and stores 3,000,000 pollen. It grows faster in blue-flower fields.",
+        "growthTime": "~6 hours",
+        "capacity": "3,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Refreshing and Comforting Nectar, plus Blue Extract, Micro-Converters, and Honeysuckle. It adds +25% Blue Pollen and -25% Red Pollen.",
+        "source": "Purchased in the Blue HQ.",
+        "cost": "10,000,000 Honey, 5 Magic Beans, 15 Blue Extracts, 20 Soft Waxes.",
+        "availability": "Named planter",
+        "cardSummary": "Blue Clay Planter grows in about 6 hours and stores 3,000,000 pollen. It favors blue-flower fields and provides blue materials and nectar."
+      },
+      "system": {
+        "slug": "blue-clay-planter",
+        "section": "Planters",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Planters/blue-clay-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Planter",
+        "planterType": "Planter",
+        "preferredFields": "Strawberry Field, Pineapple Patch, and Coconut Field.",
+        "growthBehavior": "Grows in about 4 hours and stores 1,000,000 pollen. It grows faster in Strawberry Field, Pineapple Patch, and Coconut Field.",
+        "growthTime": "~4 hours",
+        "capacity": "1,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Motivating Nectar, Gumdrops, and Jelly Beans. It adds +10% White Pollen.",
+        "source": "Purchased from Dapper Bear's Shop.",
+        "cost": "5,000,000 Honey, 5 Magic Beans, 30 Gumdrops, 3 Jelly Beans, 5 Soft Waxes.",
+        "availability": "Named planter",
+        "cardSummary": "Candy Planter grows in about 4 hours and stores 1,000,000 pollen. It favors Strawberry Field, Pineapple Patch, and Coconut Field."
+      },
+      "system": {
+        "slug": "candy-planter",
+        "section": "Planters",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Planters/candy-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Planter",
+        "planterType": "Planter",
+        "preferredFields": null,
+        "growthBehavior": "Grows in about 4 hours of playtime and stores 250,000 pollen.",
+        "growthTime": "~4 hours",
+        "capacity": "250,000 Pollen",
+        "reuse": "No",
+        "nectarOrDrops": "Provides all five nectar types at x3 and can yield Gingerbread Bears, Eggs, or Night Bells.",
+        "source": "No current direct route is listed.",
+        "cost": null,
+        "availability": "Unobtainable or legacy planter",
+        "cardSummary": "Festive Planter grows in about 4 hours and stores 250,000 pollen. It provides x3 nectar and seasonal rewards."
+      },
+      "system": {
+        "slug": "festive-planter",
+        "section": "Planters",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Planters/festive-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heat-Treated Planter",
+        "planterType": "Planter",
+        "preferredFields": "Red-flower fields.",
+        "growthBehavior": "Grows in about 12 hours and stores 25,000,000,000 pollen. It grows faster in red-flower fields.",
+        "growthTime": "12 hours",
+        "capacity": "25,000,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Invigorating and Motivating Nectar, Red Extracts, and Enzymes. It adds +50% Red Pollen and -50% Blue Pollen.",
+        "source": "Purchased in the Red HQ.",
+        "cost": "750B Honey, 75 Magic Beans, 750 Red Extracts, 150 Hard Waxes, 25 Swirled Waxes, 1 Turpentine",
+        "availability": "Seasonal planter",
+        "cardSummary": "Heat-Treated Planter grows in about 12 hours and stores 25,000,000,000 pollen. It favors red-flower fields and boosts red pollen."
+      },
+      "system": {
+        "slug": "heat-treated-planter",
+        "section": "Planters",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Planters/heat-treated-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hydroponic Planter",
+        "planterType": "Planter",
+        "preferredFields": "Blue-flower fields.",
+        "growthBehavior": "Grows in about 12 hours and stores 10,000,000,000 pollen. It grows faster in blue-flower fields.",
+        "growthTime": "12 hours",
+        "capacity": "10,000,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Refreshing and Comforting Nectar, Blue Extract, and Oil. It adds +50% Blue Pollen and -50% Red Pollen.",
+        "source": "Purchased in the Blue HQ.",
+        "cost": "750,000,000,000 honey, 75 Magic Beans, 750 Blue Extracts, 500 Soft Waxes, 25 Caustic Waxes, 1 Turpentine",
+        "availability": "Seasonal planter",
+        "cardSummary": "Hydroponic Planter grows in about 12 hours and stores 10,000,000,000 pollen. It favors blue-flower fields and boosts blue pollen."
+      },
+      "system": {
+        "slug": "hydroponic-planter",
+        "section": "Planters",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Planters/hydroponic-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Paper Planter",
+        "planterType": "Planter",
+        "preferredFields": null,
+        "growthBehavior": "A biodegradable planter that grows in about 1 hour and stores 50,000 pollen.",
+        "growthTime": "~1 hour",
+        "capacity": "50,000 Pollen",
+        "reuse": "No",
+        "nectarOrDrops": "Provides each nectar type at x0.75.",
+        "source": null,
+        "cost": "25,000 Honey, 1 Sunflower Seed.",
+        "availability": "Seasonal planter",
+        "cardSummary": "Paper Planter grows in about 1 hour and stores 50,000 pollen. It provides a small amount of each nectar type."
+      },
+      "system": {
+        "slug": "paper-planter",
+        "section": "Planters",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Planters/paper-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pesticide Planter",
+        "planterType": "Planter",
+        "preferredFields": "The 5 Bee Zone.",
+        "growthBehavior": "Grows in about 10 hours of playtime and stores 200,000,000 pollen. It grows faster in the 5 Bee Zone.",
+        "growthTime": "~10 hours",
+        "capacity": "200,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Satisfying and Motivating Nectar, Bitterberries, and Neonberries. It adds +50% Pollen in the 5 Bee Zone.",
+        "source": "Purchased from Dapper Bear's Shop.",
+        "cost": "750,000,000 Honey, 25 Magic Beans, 25 Neonberries, 15 Glues, 3 Caustic Waxes, 10 Hard Waxes.",
+        "availability": "Named planter",
+        "cardSummary": "Pesticide Planter grows in about 10 hours and stores 200,000,000 pollen. It favors the 5 Bee Zone and provides berries."
+      },
+      "system": {
+        "slug": "pesticide-planter",
+        "section": "Planters",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Planters/pesticide-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Petal Planter",
+        "planterType": "Planter",
+        "preferredFields": "White-flower fields.",
+        "growthBehavior": "Grows in about 14 hours and stores about 100,000,000,000 pollen. It grows faster in white-flower fields.",
+        "growthTime": "~14 hours",
+        "capacity": "About 100,000,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Comforting and Satisfying Nectar, Jelly Beans, Dice, Glitter, and Star Jelly. It adds +50% White Pollen.",
+        "source": "Purchased from the Petal Shop.",
+        "cost": "5T Honey, 100 Magic Beans, 100 Glitters, 250 Soft Waxes, 50 Swirled Waxes, 25 Super Smoothies.",
+        "availability": "Named planter",
+        "cardSummary": "Petal Planter grows in about 14 hours and stores about 100,000,000,000 pollen. It favors white-flower fields and boosts white pollen."
+      },
+      "system": {
+        "slug": "petal-planter",
+        "section": "Planters",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Planters/petal-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plastic Planter",
+        "planterType": "Planter",
+        "preferredFields": null,
+        "growthBehavior": "Grows in about 2 hours and stores 250,000 pollen.",
+        "growthTime": "~2 hours",
+        "capacity": "250,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": null,
+        "source": null,
+        "cost": "750,000 Honey, 3 Magic Beans, 1 Soft Wax.",
+        "availability": "Named planter",
+        "cardSummary": "Plastic Planter grows in about 2 hours and stores 250,000 pollen."
+      },
+      "system": {
+        "slug": "plastic-planter",
+        "section": "Planters",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Planters/plastic-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Clay Planter",
+        "planterType": "Planter",
+        "preferredFields": "Red-flower fields.",
+        "growthBehavior": "Grows in about 6 hours and stores 3,000,000 pollen. It grows faster in red-flower fields.",
+        "growthTime": "~6 hours",
+        "capacity": "3,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Invigorating and Satisfying Nectar, Red Extract, and Waxes. It adds +50% Red Pollen and -50% Blue Pollen.",
+        "source": "Purchased in the Red HQ.",
+        "cost": "10,000,000 Honey, 5 Magic Beans, 15 Red Extract, 20 Soft Waxes.",
+        "availability": "Named planter",
+        "cardSummary": "Red Clay Planter grows in about 6 hours and stores 3,000,000 pollen. It favors red-flower fields and provides red materials."
+      },
+      "system": {
+        "slug": "red-clay-planter",
+        "section": "Planters",
+        "sortOrder": 10,
+        "image": "/Bee%20Swarm%20Simulator/Planters/red-clay-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sticker Planter",
+        "planterType": "Planter",
+        "preferredFields": null,
+        "growthBehavior": "Grows in about 3 hours of playtime and stores 200,000 pollen.",
+        "growthTime": "~3 hours",
+        "capacity": "200,000 Pollen",
+        "reuse": "No",
+        "nectarOrDrops": "Provides all five nectar types at x2, plus Stickers, and spawns a rare-or-better Puffshroom.",
+        "source": "Dropped by Sticker Sprouts.",
+        "cost": "100 Robux",
+        "availability": "Seasonal planter",
+        "cardSummary": "Sticker Planter grows in about 3 hours and stores 200,000 pollen. It provides Stickers and spawns a rare-or-better Puffshroom."
+      },
+      "system": {
+        "slug": "sticker-planter",
+        "section": "Planters",
+        "sortOrder": 11,
+        "image": "/Bee%20Swarm%20Simulator/Planters/sticker-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tacky Planter",
+        "planterType": "Planter",
+        "preferredFields": "The Starting Zone and fields near the hives.",
+        "growthBehavior": "Grows in about 8 hours and stores 15,000,000 pollen. It grows faster in the Starting Zone and near the hives.",
+        "growthTime": "~8 hours",
+        "capacity": "15,000,000 Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides Satisfying and Comforting Nectar, Field Dice, and Sunflower Seeds. It adds +100% Pollen in the Starting Zone.",
+        "source": "Purchased from Dapper Bear's Shop.",
+        "cost": "50,000,000 Honey, 10 Magic Beans, 1 Purple Potion, 5 Hard Waxes, and 20 Soft Waxes.",
+        "availability": "Named planter",
+        "cardSummary": "Tacky Planter grows in about 8 hours and stores 15,000,000 pollen. It favors the Starting Zone and supports satisfying and comforting nectar."
+      },
+      "system": {
+        "slug": "tacky-planter",
+        "section": "Planters",
+        "sortOrder": 12,
+        "image": "/Bee%20Swarm%20Simulator/Planters/tacky-planter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Planter Of Plenty",
+        "planterType": "Planter",
+        "preferredFields": "Pepper Patch, Stump Field, Coconut Field, and Mountain Top Field.",
+        "growthBehavior": "Grows in about 16 hours and stores 1 trillion pollen. It grows faster in Pepper Patch, Stump Field, Coconut Field, and Mountain Top Field.",
+        "growthTime": "16 hours",
+        "capacity": "1 Trillion Pollen",
+        "reuse": "Yes",
+        "nectarOrDrops": "Provides all five nectar types at +50%, plus Neonberries, Waxes, and Turpentine. It adds +33% Pollen in Mountain Top Field.",
+        "source": "Purchased from Dapper Bear's Shop.",
+        "cost": "100T Honey, 500 Magic Beans, 100 Super Smoothies, 100 Swirled Waxes, 100 Caustic Waxes, 25 Turpentine.",
+        "availability": "Named planter",
+        "cardSummary": "The Planter Of Plenty grows in about 16 hours and stores 1 trillion pollen. It favors four late fields and provides rare materials."
+      },
+      "system": {
+        "slug": "the-planter-of-plenty",
+        "section": "Planters",
+        "sortOrder": 13,
+        "image": "/Bee%20Swarm%20Simulator/Planters/the-planter-of-plenty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ticket Planter",
+        "planterType": "Planter",
+        "preferredFields": null,
+        "growthBehavior": "Grows in about 2 hours of playtime and stores 50,000 pollen.",
+        "growthTime": "~2 hours",
+        "capacity": "50,000 Pollen",
+        "reuse": "No",
+        "nectarOrDrops": "Provides all five nectar types at x2, plus Tickets, and spawns a Puffshroom.",
+        "source": "Dapper Bear can give three Ticket Planters on the first conversation.",
+        "cost": null,
+        "availability": "Seasonal planter",
+        "cardSummary": "Ticket Planter grows in about 2 hours and stores 50,000 pollen. It provides Tickets and spawns a Puffshroom."
+      },
+      "system": {
+        "slug": "ticket-planter",
+        "section": "Planters",
+        "sortOrder": 14,
+        "image": "/Bee%20Swarm%20Simulator/Planters/ticket-planter.webp"
+      }
+    }
+  ]
+}

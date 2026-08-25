@@ -1,0 +1,562 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Bee Swarm Simulator",
+    "gameSlug": "bee-swarm-simulator",
+    "collection": "fields",
+    "route": "/wiki/bee-swarm-simulator/fields",
+    "catalogCode": "bee-swarm-simulator-fields",
+    "itemFields": [
+      "pollenColor",
+      "flowerType",
+      "nectarType",
+      "flowerCount",
+      "accessRequirement",
+      "nearbyMobs",
+      "boostsOrWind",
+      "farmingRole",
+      "cardSummary"
+    ],
+    "columns": [
+      "pollenColor",
+      "flowerType",
+      "nectarType",
+      "flowerCount",
+      "accessRequirement",
+      "nearbyMobs",
+      "boostsOrWind",
+      "farmingRole",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Permanent Fields"
+      ],
+      "badgeField": "flowerType",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "pollenColor",
+        "flowerType",
+        "nectarType",
+        "accessRequirement",
+        "nearbyMobs",
+        "boostsOrWind",
+        "farmingRole"
+      ],
+      "tableFields": [
+        "pollenColor",
+        "flowerType",
+        "nectarType",
+        "flowerCount",
+        "accessRequirement",
+        "nearbyMobs",
+        "boostsOrWind",
+        "farmingRole",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "pollenColor": {
+          "kind": "highlight",
+          "label": "Pollen Color"
+        },
+        "flowerType": {
+          "kind": "highlight",
+          "label": "Flower Type"
+        },
+        "nectarType": {
+          "kind": "plain",
+          "label": "Nectar Type"
+        },
+        "flowerCount": {
+          "kind": "chip",
+          "label": "Flower Count"
+        },
+        "accessRequirement": {
+          "kind": "detail",
+          "label": "Access Requirement"
+        },
+        "nearbyMobs": {
+          "kind": "detail",
+          "label": "Nearby Mobs"
+        },
+        "boostsOrWind": {
+          "kind": "detail",
+          "label": "Boosts Or Wind"
+        },
+        "farmingRole": {
+          "kind": "detail",
+          "label": "Farming Role"
+        },
+        "cardSummary": {
+          "kind": "plain",
+          "label": "Card Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ant Field",
+        "pollenColor": "Assorted",
+        "flowerType": "white flowers 50%, red flowers 100%, blue flowers 100%; single 100%, double 0%, triple 0%",
+        "nectarType": "Invigorating",
+        "flowerCount": "384 flowers",
+        "accessRequirement": "20 bees required to enter or use this field.",
+        "nearbyMobs": "Ants appear during the Ant Challenge.",
+        "boostsOrWind": "Using an Ant Pass to start the Ant Challenge will give 100% Instant Ant Field Conversion. No separate pollen boost is listed for the Ant Field.",
+        "farmingRole": "Beyond the Ant Gate, Ant Field sits near the Top Ant Exterminators leaderboard. Planters grant Invigorating Nectar here.",
+        "cardSummary": "Ant Field is an assorted field with white flowers 50%, red flowers 100%, blue flowers 100%; single 100%, double 0%, triple 0%. Beyond the Ant Gate, Ant Field sits near the Top Ant Exterminators leaderboard. Planters grant Invigorating Nectar here."
+      },
+      "system": {
+        "slug": "ant-field",
+        "section": "Permanent Fields",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Fields/ant-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bamboo Field",
+        "pollenColor": "Blue",
+        "flowerType": "white flowers 25%, red flowers 0%, blue flowers 75%; single 20%, double 75%, triple 5%",
+        "nectarType": "Comforting",
+        "flowerCount": "702 flowers",
+        "accessRequirement": "5 bees required to enter or use this field.",
+        "nearbyMobs": "Two Rhino Beetles, at levels 2 and 3.",
+        "boostsOrWind": "The Blue Field Booster may grant a Bamboo Field Boost with +100% Bamboo Field pollen for 15 minutes. Glitter can add 100% Bamboo Field pollen to that boost for 15 minutes if it is not already maxed.",
+        "farmingRole": "Past the Basic Bee Gate, Bamboo Field is right of Spider Field and 2 fields from Strawberry Field. Planters grant Comforting Nectar here.",
+        "cardSummary": "Bamboo Field is a blue field with white flowers 25%, red flowers 0%, blue flowers 75%; single 20%, double 75%, triple 5%. Past the Basic Bee Gate, Bamboo Field is right of Spider Field and 2 fields from Strawberry Field. Planters grant Comforting Nectar here."
+      },
+      "system": {
+        "slug": "bamboo-field",
+        "section": "Permanent Fields",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Fields/bamboo-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Brick Field",
+        "pollenColor": "Blue",
+        "flowerType": "white flowers 15%, red flowers 0%, blue flowers 85%; single 25%, double 50%, triple 25%",
+        "nectarType": null,
+        "flowerCount": "361 flowers",
+        "accessRequirement": "10 bees required to enter or use this field.",
+        "nearbyMobs": null,
+        "boostsOrWind": "Glitter grants a 100% Blue Brick Field pollen boost for 15 minutes when used there.",
+        "farmingRole": "Blue Brick Field is one of the four fields in the Retro Swarm Challenge.",
+        "cardSummary": "Blue Brick Field is a blue field with white flowers 15%, red flowers 0%, blue flowers 85%; single 25%, double 50%, triple 25%. Blue Brick Field is one of the four fields in the Retro Swarm Challenge."
+      },
+      "system": {
+        "slug": "blue-brick-field",
+        "section": "Permanent Fields",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Fields/blue-brick-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Flower Field",
+        "pollenColor": "Blue",
+        "flowerType": "white flowers 30%, red flowers 0%, blue flowers 70%; single 90%, double 10%, triple 0%",
+        "nectarType": "Refreshing",
+        "flowerCount": "731 flowers",
+        "accessRequirement": "The Blue Flower Field is one of the five starting fields any player can visit upon starting the game.",
+        "nearbyMobs": "Level 1 Rhino Beetle.",
+        "boostsOrWind": "The Blue Field Booster may grant +300% Blue Flower Field pollen for 15 minutes. Glitter can add 100% Blue Flower Field pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Blue Flower Field is one of the five starting fields available from the start. Planters grant Refreshing Nectar here.",
+        "cardSummary": "Blue Flower Field is a blue field with white flowers 30%, red flowers 0%, blue flowers 70%; single 90%, double 10%, triple 0%. Blue Flower Field is one of the five starting fields available from the start. Planters grant Refreshing Nectar here."
+      },
+      "system": {
+        "slug": "blue-flower-field",
+        "section": "Permanent Fields",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Fields/blue-flower-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cactus Field",
+        "pollenColor": "Assorted",
+        "flowerType": "white flowers 5%, red flowers 33%, blue flowers 33%; single 0%, double 50%, triple 50%",
+        "nectarType": "Invigorating",
+        "flowerCount": "594 flowers",
+        "accessRequirement": "15 bees required to enter or use this field.",
+        "nearbyMobs": "Werewolf.",
+        "boostsOrWind": "Field dice, smooth dice, and loaded dice can add +100% to +300% Cactus Field pollen for 15 minutes.",
+        "farmingRole": "Past the Honey Bee Gate, Cactus Field sits beside Pumpkin Patch. Planters grant Invigorating Nectar here.",
+        "cardSummary": "Cactus Field is an assorted field with white flowers 5%, red flowers 33%, blue flowers 33%; single 0%, double 50%, triple 50%. Past the Honey Bee Gate, Cactus Field sits beside Pumpkin Patch. Planters grant Invigorating Nectar here."
+      },
+      "system": {
+        "slug": "cactus-field",
+        "section": "Permanent Fields",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Fields/cactus-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clover Field",
+        "pollenColor": "Assorted",
+        "flowerType": "white flowers 33%, red flowers 33%, blue flowers 33%; single 50%, double 50%, triple 0%",
+        "nectarType": "Invigorating",
+        "flowerCount": "754 flowers",
+        "accessRequirement": "The Clover Field is one of the five starting fields any player is able to visit upon starting the game.",
+        "nearbyMobs": "Ladybug and Rhino Beetle.",
+        "boostsOrWind": "The Field Booster may grant +200% Clover Field pollen for 15 minutes. Glitter can add 100% Clover Field pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Clover Field is one of the five starting fields available at the beginning. Planters grant Invigorating Nectar here.",
+        "cardSummary": "Clover Field is an assorted field with white flowers 33%, red flowers 33%, blue flowers 33%; single 50%, double 50%, triple 0%. Clover Field is one of the five starting fields available at the beginning. Planters grant Invigorating Nectar here."
+      },
+      "system": {
+        "slug": "clover-field",
+        "section": "Permanent Fields",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Fields/clover-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coconut Field",
+        "pollenColor": "White",
+        "flowerType": "white flowers 85%, red flowers 8%, blue flowers 4%; single 0%, double 0%, triple 100%",
+        "nectarType": "Refreshing",
+        "flowerCount": "630 flowers",
+        "accessRequirement": "35 bees required to enter or use this field.",
+        "nearbyMobs": "Coconut Crab.",
+        "boostsOrWind": "Glitter can add 100% Coconut Field pollen to the current boost for 15 minutes unless it is already maxed. Field dice, smooth dice, or loaded dice may add +100% to +300% Coconut Field pollen for 15 minutes, based on the die used, unless the boost is already maxed.",
+        "farmingRole": "Coconut Field was added in the September 28, 2019 update. It is past the Windy Bee Gate beside Spirit Bear, and planters grant Refreshing Nectar here.",
+        "cardSummary": "Coconut Field is a white field with white flowers 85%, red flowers 8%, blue flowers 4%; single 0%, double 0%, triple 100%. Coconut Field was added in the September 28, 2019 update. It is past the Windy Bee Gate beside Spirit Bear, and planters grant Refreshing Nectar here."
+      },
+      "system": {
+        "slug": "coconut-field",
+        "section": "Permanent Fields",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Fields/coconut-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dandelion Field",
+        "pollenColor": "White",
+        "flowerType": "white flowers 85%, red flowers 5%, blue flowers 10%; single 85%, double 15%, triple 0%",
+        "nectarType": "Comforting",
+        "flowerCount": "648 flowers",
+        "accessRequirement": "The Dandelion Field is one of the five starting fields any player is able to visit upon starting the game.",
+        "nearbyMobs": null,
+        "boostsOrWind": "The Field Booster may grant +300% Dandelion Field pollen for 15 minutes. Glitter can add 100% Dandelion Field pollen to the current boost unless it is already maxed.",
+        "farmingRole": "Dandelion Field is one of the five starting fields available at the start. Planters grant Comforting Nectar here.",
+        "cardSummary": "Dandelion Field is a white field with white flowers 85%, red flowers 5%, blue flowers 10%; single 85%, double 15%, triple 0%. Dandelion Field is one of the five starting fields available at the start. Planters grant Comforting Nectar here."
+      },
+      "system": {
+        "slug": "dandelion-field",
+        "section": "Permanent Fields",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Fields/dandelion-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hub Field",
+        "pollenColor": "Assorted",
+        "flowerType": "white flowers 33%, red flowers 33%, blue flowers 33%; single 25%, double 50%, triple 25%",
+        "nectarType": "Comforting",
+        "flowerCount": "697 flowers",
+        "accessRequirement": "20 bees required to enter or use this field.",
+        "nearbyMobs": null,
+        "boostsOrWind": "Glitter can add 100% Hub Field pollen for 15 minutes.",
+        "farmingRole": "Added in the 2024-01-12 update, Hub Field is in the trading portal beyond the Ant Gate inside the Hive Hub. Planters grant Comforting Nectar here.",
+        "cardSummary": "Hub Field is an assorted field with white flowers 33%, red flowers 33%, blue flowers 33%; single 25%, double 50%, triple 25%. Added in the 2024-01-12 update, Hub Field is in the trading portal beyond the Ant Gate inside the Hive Hub. Planters grant Comforting Nectar here."
+      },
+      "system": {
+        "slug": "hub-field",
+        "section": "Permanent Fields",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Fields/hub-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mixed Brick Field",
+        "pollenColor": "Assorted",
+        "flowerType": "white flowers 33%, red flowers 33%, blue flowers 33%; single 25%, double 50%, triple 25%",
+        "nectarType": null,
+        "flowerCount": "361 flowers",
+        "accessRequirement": "10 bees required to enter or use this field.",
+        "nearbyMobs": null,
+        "boostsOrWind": "Using Glitter grants a 100% Mixed Brick Field pollen boost for 15 minutes.",
+        "farmingRole": "Mixed Brick Field is one of the four fields in the Retro Swarm Challenge.",
+        "cardSummary": "Mixed Brick Field is an assorted field with white flowers 33%, red flowers 33%, blue flowers 33%; single 25%, double 50%, triple 25%. Mixed Brick Field is one of the four fields in the Retro Swarm Challenge."
+      },
+      "system": {
+        "slug": "mixed-brick-field",
+        "section": "Permanent Fields",
+        "sortOrder": 10,
+        "image": "/Bee%20Swarm%20Simulator/Fields/mixed-brick-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mountain Top Field",
+        "pollenColor": "Red/Blue",
+        "flowerType": "white flowers 0%, red flowers 33%, blue flowers 33%; single 0%, double 0%, triple 100%",
+        "nectarType": "Invigorating",
+        "flowerCount": "672 flowers",
+        "accessRequirement": "25 bees required to enter or use this field.",
+        "nearbyMobs": "Mondo Chick.",
+        "boostsOrWind": "Glitter can add 100% Mountain Top Field pollen to the current boost for 15 minutes unless it is maxed. Field Dice, Smooth Dice, or Loaded Dice may add +100% Mountain Top Field pollen for 15 minutes while the current boost is below its maximum.",
+        "farmingRole": "Past the Lion Bee Gate, Mountain Top Field is a field where planters grant Invigorating Nectar.",
+        "cardSummary": "Mountain Top Field is a red/blue field with white flowers 0%, red flowers 33%, blue flowers 33%; single 0%, double 0%, triple 100%. Past the Lion Bee Gate, Mountain Top Field is a field where planters grant Invigorating Nectar."
+      },
+      "system": {
+        "slug": "mountain-top-field",
+        "section": "Permanent Fields",
+        "sortOrder": 11,
+        "image": "/Bee%20Swarm%20Simulator/Fields/mountain-top-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mushroom Field",
+        "pollenColor": "Red",
+        "flowerType": "white flowers 30%, red flowers 70%, blue flowers 0%; single 90%, double 10%, triple 0%",
+        "nectarType": "Motivating",
+        "flowerCount": "736 flowers",
+        "accessRequirement": "The Mushroom Field is one of the five starting fields any player is able to visit upon starting the game.",
+        "nearbyMobs": "Level 1 Ladybug.",
+        "boostsOrWind": "The Red Field Booster may grant +300% Mushroom Field pollen for 15 minutes. Glitter can add 100% Mushroom Field pollen to the current boost unless it is already maxed.",
+        "farmingRole": "Mushroom Field is one of the five starting fields available at the start. Planters grant Motivating Nectar here.",
+        "cardSummary": "Mushroom Field is a red field with white flowers 30%, red flowers 70%, blue flowers 0%; single 90%, double 10%, triple 0%. Mushroom Field is one of the five starting fields available at the start. Planters grant Motivating Nectar here."
+      },
+      "system": {
+        "slug": "mushroom-field",
+        "section": "Permanent Fields",
+        "sortOrder": 12,
+        "image": "/Bee%20Swarm%20Simulator/Fields/mushroom-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pepper Patch",
+        "pollenColor": "Red",
+        "flowerType": "white flowers 15%, red flowers 85%, blue flowers 0%; single 0%, double 0%, triple 100%",
+        "nectarType": "Invigorating",
+        "flowerCount": "567 flowers",
+        "accessRequirement": "35 bees required to enter or use this field.",
+        "nearbyMobs": null,
+        "boostsOrWind": "The Red Field Booster may grant a Pepper Patch Boost only when the player has 35+ bees. It gives +100% Pepper Patch pollen for 15 minutes. Glitter can add 100% Pepper Patch pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Pepper Patch was added in the September 28, 2019 update. It is past the Windy Bee Gate, right of the Extreme Memory Match and left of the Wind Shrine. Planters grant Invigorating Nectar here.",
+        "cardSummary": "Pepper Patch is a red field with white flowers 15%, red flowers 85%, blue flowers 0%; single 0%, double 0%, triple 100%. Pepper Patch was added in the September 28, 2019 update. It is past the Windy Bee Gate, right of the Extreme Memory Match and left of the Wind Shrine. Planters grant Invigorating Nectar here."
+      },
+      "system": {
+        "slug": "pepper-patch",
+        "section": "Permanent Fields",
+        "sortOrder": 13,
+        "image": "/Bee%20Swarm%20Simulator/Fields/pepper-patch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pine Tree Forest",
+        "pollenColor": "Blue",
+        "flowerType": "white flowers 15%, red flowers 0%, blue flowers 85%; single 5%, double 45%, triple 50%",
+        "nectarType": "Comforting",
+        "flowerCount": "713 flowers",
+        "accessRequirement": "15 bees required to enter or use this field.",
+        "nearbyMobs": "Two Mantis and Werewolf.",
+        "boostsOrWind": "The Blue Field Booster may grant +100% Pine Tree Forest pollen for 15 minutes. Glitter can add 100% Pine Tree Forest pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Past the Honey Bee Gate and near the Badge Bearer's Guild, Pine Tree Forest is a field where planters grant Comforting Nectar.",
+        "cardSummary": "Pine Tree Forest is a blue field with white flowers 15%, red flowers 0%, blue flowers 85%; single 5%, double 45%, triple 50%. Past the Honey Bee Gate and near the Badge Bearer's Guild, Pine Tree Forest is a field where planters grant Comforting Nectar."
+      },
+      "system": {
+        "slug": "pine-tree-forest",
+        "section": "Permanent Fields",
+        "sortOrder": 14,
+        "image": "/Bee%20Swarm%20Simulator/Fields/pine-tree-forest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pineapple Patch",
+        "pollenColor": "White",
+        "flowerType": "white flowers 90%, red flowers 5%, blue flowers 5%; single 20%, double 50%, triple 30%",
+        "nectarType": "Satisfying",
+        "flowerCount": "759 flowers",
+        "accessRequirement": "10 bees required to enter or use this field.",
+        "nearbyMobs": "Level 4 Mantis and level 5 Rhino Beetle.",
+        "boostsOrWind": "The Field Booster may grant +200% Pineapple Patch pollen for 15 minutes. Glitter can add 100% Pineapple Patch pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Past the Brave Bee Gate and right of the Pro Shop, Pineapple Patch is a field where planters grant Satisfying Nectar.",
+        "cardSummary": "Pineapple Patch is a white field with white flowers 90%, red flowers 5%, blue flowers 5%; single 20%, double 50%, triple 30%. Past the Brave Bee Gate and right of the Pro Shop, Pineapple Patch is a field where planters grant Satisfying Nectar."
+      },
+      "system": {
+        "slug": "pineapple-patch",
+        "section": "Permanent Fields",
+        "sortOrder": 15,
+        "image": "/Bee%20Swarm%20Simulator/Fields/pineapple-patch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Patch",
+        "pollenColor": "Assorted",
+        "flowerType": "white flowers 60%, red flowers 20%, blue flowers 20%; single 0%, double 30%, triple 70%",
+        "nectarType": "Satisfying",
+        "flowerCount": "561 flowers",
+        "accessRequirement": "15 bees required to enter or use this field.",
+        "nearbyMobs": "Werewolf.",
+        "boostsOrWind": "The Field Booster may grant +200% Pumpkin Patch pollen for 15 minutes. Glitter can add 100% Pumpkin Patch pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Past the Honey Bee Gate beside Cactus Field, Pumpkin Patch is a field where planters grant Satisfying Nectar.",
+        "cardSummary": "Pumpkin Patch is an assorted field with white flowers 60%, red flowers 20%, blue flowers 20%; single 0%, double 30%, triple 70%. Past the Honey Bee Gate beside Cactus Field, Pumpkin Patch is a field where planters grant Satisfying Nectar."
+      },
+      "system": {
+        "slug": "pumpkin-patch",
+        "section": "Permanent Fields",
+        "sortOrder": 16,
+        "image": "/Bee%20Swarm%20Simulator/Fields/pumpkin-patch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Brick Field",
+        "pollenColor": "Red",
+        "flowerType": "white flowers 15%, red flowers 85%, blue flowers 0%; single 25%, double 50%, triple 25%",
+        "nectarType": null,
+        "flowerCount": "361 flowers",
+        "accessRequirement": "10 bees required to enter or use this field.",
+        "nearbyMobs": null,
+        "boostsOrWind": "Glitter grants a 100% Red Brick Field pollen boost for 15 minutes when used there.",
+        "farmingRole": "Red Brick Field is one of the four fields in the Retro Swarm Challenge.",
+        "cardSummary": "Red Brick Field is a red field with white flowers 15%, red flowers 85%, blue flowers 0%; single 25%, double 50%, triple 25%. Red Brick Field is one of the four fields in the Retro Swarm Challenge."
+      },
+      "system": {
+        "slug": "red-brick-field",
+        "section": "Permanent Fields",
+        "sortOrder": 17,
+        "image": "/Bee%20Swarm%20Simulator/Fields/red-brick-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Field",
+        "pollenColor": "Red",
+        "flowerType": "white flowers 15%, red flowers 85%, blue flowers 0%; single 5%, double 45%, triple 50%",
+        "nectarType": "Motivating",
+        "flowerCount": "620 flowers",
+        "accessRequirement": "15 bees required to enter or use this field.",
+        "nearbyMobs": "Two Scorpions, at levels 5 and 6.",
+        "boostsOrWind": "The Red Field Booster may grant +100% Rose Field pollen for 15 minutes. Glitter can add 100% Rose Field pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Rose Field is one of the four fields past the Honey Bee Gate. Planters grant Motivating Nectar here.",
+        "cardSummary": "Rose Field is a red field with white flowers 15%, red flowers 85%, blue flowers 0%; single 5%, double 45%, triple 50%. Rose Field is one of the four fields past the Honey Bee Gate. Planters grant Motivating Nectar here."
+      },
+      "system": {
+        "slug": "rose-field",
+        "section": "Permanent Fields",
+        "sortOrder": 18,
+        "image": "/Bee%20Swarm%20Simulator/Fields/rose-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spider Field",
+        "pollenColor": "White",
+        "flowerType": "white flowers 100%, red flowers 0%, blue flowers 0%; single 10%, double 80%, triple 10%",
+        "nectarType": "Motivating",
+        "flowerCount": "728 flowers",
+        "accessRequirement": "5 bees required to enter or use this field.",
+        "nearbyMobs": "Spider.",
+        "boostsOrWind": "The Field Booster may grant +200% Spider Field pollen for 15 minutes. Glitter can add 100% Spider Field pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Past the Basic Bee Gate, Spider Field lies between Strawberry Field and Bamboo Field. Planters grant Motivating Nectar here.",
+        "cardSummary": "Spider Field is a white field with white flowers 100%, red flowers 0%, blue flowers 0%; single 10%, double 80%, triple 10%. Past the Basic Bee Gate, Spider Field lies between Strawberry Field and Bamboo Field. Planters grant Motivating Nectar here."
+      },
+      "system": {
+        "slug": "spider-field",
+        "section": "Permanent Fields",
+        "sortOrder": 19,
+        "image": "/Bee%20Swarm%20Simulator/Fields/spider-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry Field",
+        "pollenColor": "Red",
+        "flowerType": "white flowers 25%, red flowers 75%, blue flowers 0%; single 20%, double 75%, triple 5%",
+        "nectarType": "Refreshing",
+        "flowerCount": "572 flowers",
+        "accessRequirement": "5 bees required to enter or use this field.",
+        "nearbyMobs": "Two Ladybugs, at levels 2 and 3.",
+        "boostsOrWind": "The Red Field Booster may grant a Strawberry Field Boost with +100% Strawberry Field pollen for 15 minutes. Glitter can add 100% Strawberry Field pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Past the Basic Bee Gate, Strawberry Field is left of Spider Field and beside the Vicious Bee Egg Claim. Planters grant Refreshing Nectar here.",
+        "cardSummary": "Strawberry Field is a red field with white flowers 25%, red flowers 75%, blue flowers 0%; single 20%, double 75%, triple 5%. Past the Basic Bee Gate, Strawberry Field is left of Spider Field and beside the Vicious Bee Egg Claim. Planters grant Refreshing Nectar here."
+      },
+      "system": {
+        "slug": "strawberry-field",
+        "section": "Permanent Fields",
+        "sortOrder": 20,
+        "image": "/Bee%20Swarm%20Simulator/Fields/strawberry-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stump Field",
+        "pollenColor": "Blue",
+        "flowerType": "white flowers 20%, red flowers 8%, blue flowers 85%; single 0%, double 0%, triple 100%",
+        "nectarType": "Motivating",
+        "flowerCount": "563 flowers",
+        "accessRequirement": "10 bees required to enter or use this field.",
+        "nearbyMobs": null,
+        "boostsOrWind": "If Stump Snail is on respawn cooldown, the Blue Field Booster may grant a Stump Field Boost. It gives +100% Stump Field pollen for 15 minutes. Glitter can add 100% Stump Field pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Added in the 2018-11-25 update, Stump Field is past the Brave Bee Gate next to Pineapple Patch. Planters grant Motivating Nectar here.",
+        "cardSummary": "Stump Field is a blue field with white flowers 20%, red flowers 8%, blue flowers 85%; single 0%, double 0%, triple 100%. Added in the 2018-11-25 update, Stump Field is past the Brave Bee Gate next to Pineapple Patch. Planters grant Motivating Nectar here."
+      },
+      "system": {
+        "slug": "stump-field",
+        "section": "Permanent Fields",
+        "sortOrder": 21,
+        "image": "/Bee%20Swarm%20Simulator/Fields/stump-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunflower Field",
+        "pollenColor": "White",
+        "flowerType": "white flowers 70%, red flowers 15%, blue flowers 15%; single 90%, double 10%, triple 0%",
+        "nectarType": "Satisfying",
+        "flowerCount": "660 flowers",
+        "accessRequirement": "The Sunflower Field is one of the five starting fields that any player can visit upon starting the game.",
+        "nearbyMobs": null,
+        "boostsOrWind": "The Field Booster may grant +300% Sunflower Field pollen for 15 minutes. Glitter can add 100% Sunflower Field pollen to the current boost for 15 minutes unless it is already maxed.",
+        "farmingRole": "Sunflower Field is one of the five starting fields available when the game begins. Planters grant Satisfying Nectar here.",
+        "cardSummary": "Sunflower Field is a white field with white flowers 70%, red flowers 15%, blue flowers 15%; single 90%, double 10%, triple 0%. Sunflower Field is one of the five starting fields available when the game begins. Planters grant Satisfying Nectar here."
+      },
+      "system": {
+        "slug": "sunflower-field",
+        "section": "Permanent Fields",
+        "sortOrder": 22,
+        "image": "/Bee%20Swarm%20Simulator/Fields/sunflower-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "White Brick Field",
+        "pollenColor": "White",
+        "flowerType": "white flowers 90%, red flowers 5%, blue flowers 5%; single 25%, double 50%, triple 25%",
+        "nectarType": null,
+        "flowerCount": "361 flowers",
+        "accessRequirement": "10 bees required to enter or use this field.",
+        "nearbyMobs": null,
+        "boostsOrWind": "Glitter grants a 100% White Brick Field pollen boost for 15 minutes when used there.",
+        "farmingRole": "White Brick Field is one of the four fields in the Retro Swarm Challenge.",
+        "cardSummary": "White Brick Field is a white field with white flowers 90%, red flowers 5%, blue flowers 5%; single 25%, double 50%, triple 25%. White Brick Field is one of the four fields in the Retro Swarm Challenge."
+      },
+      "system": {
+        "slug": "white-brick-field",
+        "section": "Permanent Fields",
+        "sortOrder": 23,
+        "image": "/Bee%20Swarm%20Simulator/Fields/white-brick-field.webp"
+      }
+    }
+  ]
+}

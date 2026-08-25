@@ -180,6 +180,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Local Welcome to Bloxburg v2 collection datasets for the recipes, vehicles, jobs, skills, plants, and locations pages under `/wiki/welcome-to-bloxburg/`.
   - The completed source-backed inventory contains 115 recipes, 58 vehicles, 14 jobs, 8 active skills, 71 plants, and 41 permanent locations. Matching row media lives under `apps/web/public/Welcome to Bloxburg/` and is stored as verified WebP; Evergreen Plant is the one accepted missing-image gap because the source supplies only `MissingImage.png`.
   - Keep seasonal availability explicit and leave disputed or incomplete job-pay and plant-value fields absent. Do not expand these datasets with gamepasses, currencies, badges, trophies, fishing catches, removed skills, or temporary/removed locations without a new source-backed review.
+- `data/Bee Swarm Simulator/*.json`
+  - Source-backed Bee Swarm Simulator game-collection datasets: bees (46), equipment (75), fields (23), planters (14), bears (13), mobs and bosses (28), materials (26), and beequips (41). The 2026-08-24 acceptance repair kept the eight accepted rosters and reconciled row-level comparison fields; `bees` was not rewritten.
+  - Matching optimized WebP media lives under `apps/web/public/Bee Swarm Simulator/` and is consumed by the generic registered game collection group. Keep live trading values, event tracks, gamepasses, badges, and other rejected or volatile systems out of these durable datasets.
 - `data/Capybaras VS Plants/*.json`
   - Local Capybaras VS Plants datasets for wiki/collection page work, including the Plant Index and the Boss Summoner progression.
   - Keep Boss Summoner rows separate from ordinary plant drops: Pumpkin Tyrant is the sixth original boss, Carnivorous Plant is not a boss row, and Update 3 adds Conqueror Carrot after Pumpkin Tyrant.

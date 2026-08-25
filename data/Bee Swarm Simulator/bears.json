@@ -1,0 +1,344 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Bee Swarm Simulator",
+    "gameSlug": "bee-swarm-simulator",
+    "collection": "bears",
+    "route": "/wiki/bee-swarm-simulator/bears",
+    "catalogCode": "bee-swarm-simulator-bears",
+    "itemFields": [
+      "npcType",
+      "location",
+      "unlockRequirement",
+      "questFocus",
+      "repeatability",
+      "rewardsOrShopRole",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "npcType",
+      "location",
+      "unlockRequirement",
+      "questFocus",
+      "repeatability",
+      "rewardsOrShopRole",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Quest Bears",
+        "Shop Bears",
+        "Other Permanent Bears"
+      ],
+      "badgeField": "npcType",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "npcType",
+        "location",
+        "unlockRequirement",
+        "questFocus",
+        "repeatability",
+        "rewardsOrShopRole",
+        "availability"
+      ],
+      "tableFields": [
+        "npcType",
+        "location",
+        "unlockRequirement",
+        "questFocus",
+        "repeatability",
+        "rewardsOrShopRole",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "npcType": {
+          "kind": "highlight",
+          "label": "Npc Type"
+        },
+        "location": {
+          "kind": "detail",
+          "label": "Location"
+        },
+        "unlockRequirement": {
+          "kind": "detail",
+          "label": "Unlock Requirement"
+        },
+        "questFocus": {
+          "kind": "detail",
+          "label": "Quest Focus"
+        },
+        "repeatability": {
+          "kind": "detail",
+          "label": "Repeatability"
+        },
+        "rewardsOrShopRole": {
+          "kind": "detail",
+          "label": "Rewards Or Shop Role"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "plain",
+          "label": "Card Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Black Bear",
+        "npcType": "Quest Bear",
+        "location": "Between the Red Cannon and Special Sprout Summoner.",
+        "unlockRequirement": "No bees are required.",
+        "questFocus": "Assigns repeatable quests after the Mythic Egg questline.",
+        "repeatability": "Repeatable after the Mythic Egg questline.",
+        "rewardsOrShopRole": "Quest giver near the start of the game.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Black Bear gives early quests between the Red Cannon and Special Sprout Summoner."
+      },
+      "system": {
+        "slug": "black-bear",
+        "section": "Quest Bears",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Bears/black-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mother Bear",
+        "npcType": "Quest Bear",
+        "location": "At the far end of Sunflower Field, under the tent by the Treat Shop.",
+        "unlockRequirement": "No bees are required.",
+        "questFocus": "Gives the Mother Bear quest line.",
+        "repeatability": null,
+        "rewardsOrShopRole": "Quest giver for early hive progression.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Mother Bear gives quests from her tent at the end of Sunflower Field."
+      },
+      "system": {
+        "slug": "mother-bear",
+        "section": "Quest Bears",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Bears/mother-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brown Bear",
+        "npcType": "Quest Bear",
+        "location": "Near Clover Field and the Wealth Clock.",
+        "unlockRequirement": "No bees are required.",
+        "questFocus": "Offers infinite quests.",
+        "repeatability": "Repeatable.",
+        "rewardsOrShopRole": "Repeatable quest rewards.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Brown Bear offers repeatable quests near Clover Field and the Wealth Clock."
+      },
+      "system": {
+        "slug": "brown-bear",
+        "section": "Quest Bears",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Bears/brown-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Panda Bear",
+        "npcType": "Quest Bear",
+        "location": "Beside Bamboo Field.",
+        "unlockRequirement": "5 bees are required.",
+        "questFocus": "Gives quests.",
+        "repeatability": null,
+        "rewardsOrShopRole": "Quest rewards.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Panda Bear gives quests beside Bamboo Field."
+      },
+      "system": {
+        "slug": "panda-bear",
+        "section": "Quest Bears",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Bears/panda-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Robo Bear",
+        "npcType": "Robot",
+        "location": "Between Red HQ and the Badge Bearer's Guild, behind Rose Field.",
+        "unlockRequirement": "15 or more bees to talk to Robo Bear; 30 or more bees for the Broken Drive route.",
+        "questFocus": "Assemble the Red, White, Blue, and Glitched Drives to unlock access.",
+        "repeatability": null,
+        "rewardsOrShopRole": "Opens Robo Bear Challenge progression.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Robo Bear starts the Drive assembly route behind Rose Field."
+      },
+      "system": {
+        "slug": "robo-bear",
+        "section": "Quest Bears",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Bears/robo-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Science Bear",
+        "npcType": "Quest Bear",
+        "location": "Next to the Yellow Cannon and below the Red Portal.",
+        "unlockRequirement": "10 or more bees are required.",
+        "questFocus": "Quests cover mobs, bees, pollen, goo, ability tokens, and badges.",
+        "repeatability": "Initial and Translator quest series.",
+        "rewardsOrShopRole": "Gives Honey and Science Enhancement for bee honey production.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Science Bear gives research-style quests beside the Yellow Cannon and Red Portal."
+      },
+      "system": {
+        "slug": "science-bear",
+        "section": "Quest Bears",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Bears/science-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dapper Bear",
+        "npcType": "Quest Bear",
+        "location": "Dapper Bear's Shop.",
+        "unlockRequirement": "10 bees are required.",
+        "questFocus": "Quests focus on nectar, planter tokens, Puffshrooms, and stickers.",
+        "repeatability": null,
+        "rewardsOrShopRole": "Some quest rewards add Beequip Case slots.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Dapper Bear gives planter and nectar quests from his shop."
+      },
+      "system": {
+        "slug": "dapper-bear",
+        "section": "Quest Bears",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Bears/dapper-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Polar Bear",
+        "npcType": "Quest Bear",
+        "location": "Near the 25 Bee Gate.",
+        "unlockRequirement": "15 or more bees are required.",
+        "questFocus": "Quests cover mobs, pollen, and petals.",
+        "repeatability": null,
+        "rewardsOrShopRole": "Rewards include Honey, Treats, Polar Power, and occasional crafting materials.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Polar Bear sends you after mobs, pollen, and petals near the 25 Bee Gate."
+      },
+      "system": {
+        "slug": "polar-bear",
+        "section": "Quest Bears",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Bears/polar-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Bear",
+        "npcType": "Quest Bear",
+        "location": "Between Coconut Field and Pepper Patch, in front of Extreme Memory Match.",
+        "unlockRequirement": "35 bees are required.",
+        "questFocus": "Gives Spirit Bear's late-game quest line.",
+        "repeatability": "Non-repeatable quest line.",
+        "rewardsOrShopRole": "Quest rewards for late-game progression.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Spirit Bear gives a late-game quest line between Coconut Field and Pepper Patch."
+      },
+      "system": {
+        "slug": "spirit-bear",
+        "section": "Quest Bears",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Bears/spirit-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Noob Bear",
+        "npcType": "Shop Bear",
+        "location": "Noob Shop.",
+        "unlockRequirement": "No bees are required.",
+        "questFocus": null,
+        "repeatability": null,
+        "rewardsOrShopRole": "The shop does not require interaction with Noob Bear.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Noob Bear stands at the Noob Shop, where the shop route starts."
+      },
+      "system": {
+        "slug": "noob-bear",
+        "section": "Shop Bears",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Bears/noob-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pro Bear",
+        "npcType": "Shop Bear",
+        "location": "Pro Shop.",
+        "unlockRequirement": "10 bees are required.",
+        "questFocus": null,
+        "repeatability": null,
+        "rewardsOrShopRole": "Shop bear for the Pro Shop.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Pro Bear marks the Pro Shop route after the early gates."
+      },
+      "system": {
+        "slug": "pro-bear",
+        "section": "Shop Bears",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Bears/pro-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Top Bear",
+        "npcType": "Shop Bear",
+        "location": "Mountain Top Shop.",
+        "unlockRequirement": "25 bees are required.",
+        "questFocus": null,
+        "repeatability": null,
+        "rewardsOrShopRole": "The shop does not require interaction with Top Bear.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Top Bear stands at the Mountain Top Shop."
+      },
+      "system": {
+        "slug": "top-bear",
+        "section": "Shop Bears",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Bears/top-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Bear",
+        "npcType": "Permanent Bear",
+        "location": "Inside the 30 Bee Area, under Onett's platform.",
+        "unlockRequirement": null,
+        "questFocus": null,
+        "repeatability": null,
+        "rewardsOrShopRole": "Permanent map interaction.",
+        "availability": "Permanent bear NPC",
+        "cardSummary": "Shadow Bear is a permanent NPC inside the 30 Bee Area, under Onett's platform."
+      },
+      "system": {
+        "slug": "shadow-bear",
+        "section": "Other Permanent Bears",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Bears/shadow-bear.webp"
+      }
+    }
+  ]
+}

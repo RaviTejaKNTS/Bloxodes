@@ -1,0 +1,1189 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Bee Swarm Simulator",
+    "gameSlug": "bee-swarm-simulator",
+    "collection": "bees",
+    "route": "/wiki/bee-swarm-simulator/bees",
+    "catalogCode": "bee-swarm-simulator-bees",
+    "itemFields": [
+      "rarity",
+      "color",
+      "energy",
+      "speed",
+      "attack",
+      "pollen",
+      "honey",
+      "favoriteTreat",
+      "abilities",
+      "giftedHiveBonus",
+      "obtainment",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "color",
+      "energy",
+      "speed",
+      "attack",
+      "pollen",
+      "honey",
+      "favoriteTreat",
+      "abilities",
+      "giftedHiveBonus",
+      "obtainment",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Starter Bee (Common)",
+        "Early Hatch Pool (Rare)",
+        "Midgame Hatch Pool (Epic)",
+        "Advanced Hatch Pool (Legendary)",
+        "Mythic Chase (Mythic)",
+        "Event and Special Unlocks (Event)"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "color"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "color",
+        "attack",
+        "speed",
+        "abilities",
+        "giftedHiveBonus",
+        "favoriteTreat",
+        "obtainment"
+      ],
+      "tableFields": [
+        "rarity",
+        "color",
+        "energy",
+        "speed",
+        "attack",
+        "pollen",
+        "honey",
+        "favoriteTreat",
+        "abilities",
+        "giftedHiveBonus",
+        "obtainment",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "color": {
+          "kind": "plain",
+          "label": "Color"
+        },
+        "energy": {
+          "kind": "chip",
+          "label": "Energy"
+        },
+        "speed": {
+          "kind": "chip",
+          "label": "Speed"
+        },
+        "attack": {
+          "kind": "chip",
+          "label": "Attack"
+        },
+        "pollen": {
+          "kind": "chip",
+          "label": "Pollen"
+        },
+        "honey": {
+          "kind": "chip",
+          "label": "Honey"
+        },
+        "favoriteTreat": {
+          "kind": "plain",
+          "label": "Favorite treat"
+        },
+        "abilities": {
+          "kind": "detail",
+          "label": "Abilities"
+        },
+        "giftedHiveBonus": {
+          "kind": "highlight",
+          "label": "Gifted bonus"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "Obtainment"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Role"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Basic Bee",
+        "rarity": "Common",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 14,
+        "attack": 1,
+        "pollen": "10 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "None",
+        "giftedHiveBonus": "x1.2 Pollen",
+        "obtainment": "Starter hive and Basic Eggs.",
+        "cardSummary": "The starter bee teaches the pollen-to-honey loop before stronger hatch results take over."
+      },
+      "system": {
+        "slug": "basic-bee",
+        "section": "Starter Bee (Common)",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Bees/basic-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bomber Bee",
+        "rarity": "Rare",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 15.4,
+        "attack": 2,
+        "pollen": "10 per 4s",
+        "honey": "120 per 4s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Buzz Bomb",
+        "giftedHiveBonus": "x1.1 Bomb Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Bomber Bee adds an early bomb token for clearing nearby flowers in a small burst."
+      },
+      "system": {
+        "slug": "bomber-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Bees/bomber-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brave Bee",
+        "rarity": "Rare",
+        "color": "Colorless",
+        "energy": 30,
+        "speed": 16.8,
+        "attack": 6,
+        "pollen": "10 per 4s",
+        "honey": "200 per 4s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "None",
+        "giftedHiveBonus": "+1 Bee Attack",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Brave Bee brings a high early attack value, which helps when your hive starts fighting tougher mobs."
+      },
+      "system": {
+        "slug": "brave-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Bees/brave-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bumble Bee",
+        "rarity": "Rare",
+        "color": "Blue",
+        "energy": 40,
+        "speed": 10.5,
+        "attack": 1,
+        "pollen": "18 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Bomb",
+        "giftedHiveBonus": "x1.1 Capacity",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Bumble Bee leans blue and carries extra energy, so it can keep working through longer field runs."
+      },
+      "system": {
+        "slug": "bumble-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Bees/bumble-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cool Bee",
+        "rarity": "Rare",
+        "color": "Blue",
+        "energy": 20,
+        "speed": 14,
+        "attack": 2,
+        "pollen": "10 per 3s",
+        "honey": "120 per 4s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Boost",
+        "giftedHiveBonus": "x1.1 Blue Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Cool Bee supplies a blue boost token, a handy lift while your early hive is still mixed."
+      },
+      "system": {
+        "slug": "cool-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Bees/cool-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hasty Bee",
+        "rarity": "Rare",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 19.6,
+        "attack": 1,
+        "pollen": "10 per 3s",
+        "honey": "80 per 3s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Haste",
+        "giftedHiveBonus": "+15% Player Movespeed",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Hasty Bee is the early speed pick, helping your player move between tokens and return to work faster."
+      },
+      "system": {
+        "slug": "hasty-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Bees/hasty-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Looker Bee",
+        "rarity": "Rare",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 14,
+        "attack": 1,
+        "pollen": "13 per 4s",
+        "honey": "160 per 4s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Focus",
+        "giftedHiveBonus": "+25% Critical Power",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Looker Bee builds Focus and points an early mixed hive toward stronger critical hits."
+      },
+      "system": {
+        "slug": "looker-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Bees/looker-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rad Bee",
+        "rarity": "Rare",
+        "color": "Red",
+        "energy": 20,
+        "speed": 14,
+        "attack": 1,
+        "pollen": "13 per 4s",
+        "honey": "80 per 3s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "Red Boost",
+        "giftedHiveBonus": "1.1x Red Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Rad Bee starts the red side of your hive with a simple boost token and steady early output."
+      },
+      "system": {
+        "slug": "rad-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Bees/rad-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rascal Bee",
+        "rarity": "Rare",
+        "color": "Red",
+        "energy": 20,
+        "speed": 16.1,
+        "attack": 3,
+        "pollen": "10 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "Red Bomb",
+        "giftedHiveBonus": "x1.25 Red Bomb Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Rascal Bee adds red bomb pollen and more attack than most of its early rarity peers."
+      },
+      "system": {
+        "slug": "rascal-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Bees/rascal-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stubborn Bee",
+        "rarity": "Rare",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 11.9,
+        "attack": 2,
+        "pollen": "10 per 4s",
+        "honey": "80 per 3s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "None",
+        "giftedHiveBonus": "+15% Ability Token Lifespan",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Stubborn Bee has no named ability token, but its gifted bonus keeps useful tokens around longer."
+      },
+      "system": {
+        "slug": "stubborn-bee",
+        "section": "Early Hatch Pool (Rare)",
+        "sortOrder": 10,
+        "image": "/Bee%20Swarm%20Simulator/Bees/stubborn-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bubble Bee",
+        "rarity": "Epic",
+        "color": "Blue",
+        "energy": 20,
+        "speed": 16.1,
+        "attack": 3,
+        "pollen": "10 per 4s",
+        "honey": "160 per 4s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Bomb",
+        "giftedHiveBonus": "x1.25 Bubble Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Bubble Bee starts the bubble-focused blue path with a Blue Bomb and strong blue-field utility."
+      },
+      "system": {
+        "slug": "bubble-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 11,
+        "image": "/Bee%20Swarm%20Simulator/Bees/bubble-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bucko Bee",
+        "rarity": "Epic",
+        "color": "Blue",
+        "energy": 30,
+        "speed": 15.4,
+        "attack": 5,
+        "pollen": "17 per 4s",
+        "honey": "80 per 3s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Boost",
+        "giftedHiveBonus": "+20% Blue Field Capacity",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Bucko Bee pairs a blue boost with better energy and attack for longer midgame field sessions."
+      },
+      "system": {
+        "slug": "bucko-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 12,
+        "image": "/Bee%20Swarm%20Simulator/Bees/bucko-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Commander Bee",
+        "rarity": "Epic",
+        "color": "Colorless",
+        "energy": 30,
+        "speed": 14,
+        "attack": 4,
+        "pollen": "15 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Focus, Buzz Bomb",
+        "giftedHiveBonus": "+3% Critical Chance",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Commander Bee supports a mixed hive with Focus, a bomb token, and a useful critical chance bonus when gifted."
+      },
+      "system": {
+        "slug": "commander-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 13,
+        "image": "/Bee%20Swarm%20Simulator/Bees/commander-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Demo Bee",
+        "rarity": "Epic",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 16.8,
+        "attack": 3,
+        "pollen": "10 per 4s",
+        "honey": "330 per 4s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Buzz Bomb+",
+        "giftedHiveBonus": "x1.25 Buzz Bomb Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Demo Bee turns its bomb token into a larger pollen sweep and converts honey at a strong base rate."
+      },
+      "system": {
+        "slug": "demo-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 14,
+        "image": "/Bee%20Swarm%20Simulator/Bees/demo-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Exhausted Bee",
+        "rarity": "Epic",
+        "color": "Colorless",
+        "energy": "Unlimited",
+        "speed": 10.5,
+        "attack": 2,
+        "pollen": "10 per 4.6s",
+        "honey": "240 per 4s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Buzz Bomb, Token Link",
+        "giftedHiveBonus": "+20% White Field Capacity",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Exhausted Bee never runs out of energy, trading speed for a reliable long-session support role."
+      },
+      "system": {
+        "slug": "exhausted-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 15,
+        "image": "/Bee%20Swarm%20Simulator/Bees/exhausted-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Bee",
+        "rarity": "Epic",
+        "color": "Red",
+        "energy": 25,
+        "speed": 11.2,
+        "attack": 4,
+        "pollen": "12 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Red Bomb+",
+        "giftedHiveBonus": "1.25x Flame Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Fire Bee is a red bomb specialist that becomes more valuable when gifted flame pollen is part of the plan."
+      },
+      "system": {
+        "slug": "fire-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 16,
+        "image": "/Bee%20Swarm%20Simulator/Bees/fire-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frosty Bee",
+        "rarity": "Epic",
+        "color": "Blue",
+        "energy": 25,
+        "speed": 11.2,
+        "attack": 1,
+        "pollen": "10 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Boost, Blue Bomb+",
+        "giftedHiveBonus": "x1.25 Blue Bomb Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Frosty Bee gives a blue hive both a boost and a larger bomb token for field clearing."
+      },
+      "system": {
+        "slug": "frosty-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 17,
+        "image": "/Bee%20Swarm%20Simulator/Bees/frosty-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Honey Bee",
+        "rarity": "Epic",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 14,
+        "attack": 2,
+        "pollen": "10 per 4s",
+        "honey": "360 per 2s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Honey Gift",
+        "giftedHiveBonus": "x1.5 Honey From Tokens",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Honey Bee focuses on conversion and makes its honey tokens more valuable when gifted."
+      },
+      "system": {
+        "slug": "honey-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 18,
+        "image": "/Bee%20Swarm%20Simulator/Bees/honey-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rage Bee",
+        "rarity": "Epic",
+        "color": "Red",
+        "energy": 20,
+        "speed": 15.4,
+        "attack": 5,
+        "pollen": "10 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "Rage, Token Link",
+        "giftedHiveBonus": "+10% Bee Attack",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Rage Bee brings a red attack buff that matters for both mob fights and red-focused hives."
+      },
+      "system": {
+        "slug": "rage-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 19,
+        "image": "/Bee%20Swarm%20Simulator/Bees/rage-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Riley Bee",
+        "rarity": "Epic",
+        "color": "Red",
+        "energy": 25,
+        "speed": 15.4,
+        "attack": 5,
+        "pollen": "10 per 2s",
+        "honey": "140 per 4s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "Red Boost",
+        "giftedHiveBonus": "+20% Red Field Capacity",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Riley Bee is a red boost source with quick pollen cycles and a useful capacity bonus when gifted."
+      },
+      "system": {
+        "slug": "riley-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 20,
+        "image": "/Bee%20Swarm%20Simulator/Bees/riley-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shocked Bee",
+        "rarity": "Epic",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 19.6,
+        "attack": 2,
+        "pollen": "10 per 4s",
+        "honey": "80 per 2s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Haste, Token Link",
+        "giftedHiveBonus": "1.1x White Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Shocked Bee mixes speed with Token Link, making it a flexible support bee for a growing hive."
+      },
+      "system": {
+        "slug": "shocked-bee",
+        "section": "Midgame Hatch Pool (Epic)",
+        "sortOrder": 21,
+        "image": "/Bee%20Swarm%20Simulator/Bees/shocked-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baby Bee",
+        "rarity": "Legendary",
+        "color": "Colorless",
+        "energy": 15,
+        "speed": 10.5,
+        "attack": 0,
+        "pollen": "10 per 5s",
+        "honey": "80 per 5s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "Baby Love",
+        "giftedHiveBonus": "+25% Loot Luck",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Baby Bee trades attack for Baby Love, a support buff that makes its presence felt across the hive."
+      },
+      "system": {
+        "slug": "baby-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 22,
+        "image": "/Bee%20Swarm%20Simulator/Bees/baby-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carpenter Bee",
+        "rarity": "Legendary",
+        "color": "Colorless",
+        "energy": 25,
+        "speed": 11.2,
+        "attack": 5,
+        "pollen": "10 per 3s",
+        "honey": "100 per 4s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Pollen Mark",
+        "giftedHiveBonus": "x1.25 Tool Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Carpenter Bee builds Pollen Marks and rewards players who keep working inside marked areas."
+      },
+      "system": {
+        "slug": "carpenter-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 23,
+        "image": "/Bee%20Swarm%20Simulator/Bees/carpenter-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Bee",
+        "rarity": "Legendary",
+        "color": "Red",
+        "energy": 20,
+        "speed": 10.5,
+        "attack": 8,
+        "pollen": "35 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Red Bomb",
+        "giftedHiveBonus": "+20% Instant Bomb Conversion",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Demon Bee hits hard and pushes red bomb conversion, though its slow speed asks for a little patience."
+      },
+      "system": {
+        "slug": "demon-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 24,
+        "image": "/Bee%20Swarm%20Simulator/Bees/demon-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Bee",
+        "rarity": "Legendary",
+        "color": "Blue",
+        "energy": 20,
+        "speed": 14,
+        "attack": 1,
+        "pollen": "10 per 4s",
+        "honey": "1,000 per 4s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Boost, Honey Gift+",
+        "giftedHiveBonus": "x1.2 Convert Rate",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Diamond Bee is a blue converter with an unusually high base honey rate and a useful conversion bonus."
+      },
+      "system": {
+        "slug": "diamond-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 25,
+        "image": "/Bee%20Swarm%20Simulator/Bees/diamond-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lion Bee",
+        "rarity": "Legendary",
+        "color": "Colorless",
+        "energy": 60,
+        "speed": 19.6,
+        "attack": 10,
+        "pollen": "20 per 4s",
+        "honey": "180 per 2s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Buzz Bomb+",
+        "giftedHiveBonus": "+5% Gifted Bee Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Lion Bee is a fast, high-attack legendary that also keeps working through long runs with deep energy."
+      },
+      "system": {
+        "slug": "lion-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 26,
+        "image": "/Bee%20Swarm%20Simulator/Bees/lion-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Music Bee",
+        "rarity": "Legendary",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 16.1,
+        "attack": 1,
+        "pollen": "16 per 4s",
+        "honey": "240 per 4s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Melody, Focus, Token Link",
+        "giftedHiveBonus": "+25% Bee Gather Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Music Bee is a support package: Melody, Focus, and Token Link give a mixed hive several reasons to keep it."
+      },
+      "system": {
+        "slug": "music-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 27,
+        "image": "/Bee%20Swarm%20Simulator/Bees/music-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ninja Bee",
+        "rarity": "Legendary",
+        "color": "Blue",
+        "energy": 20,
+        "speed": 21,
+        "attack": 4,
+        "pollen": "10 per 2s",
+        "honey": "80 per 2s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Haste, Blue Bomb+",
+        "giftedHiveBonus": "+5% Bee Movespeed",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Ninja Bee is the speed specialist of the legendary pool, with quick cycles and a stronger blue bomb."
+      },
+      "system": {
+        "slug": "ninja-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 28,
+        "image": "/Bee%20Swarm%20Simulator/Bees/ninja-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shy Bee",
+        "rarity": "Legendary",
+        "color": "Red",
+        "energy": 40,
+        "speed": 18.2,
+        "attack": 2,
+        "pollen": "10 per 2s",
+        "honey": "320 per 4s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "Red Boost, Red Bomb",
+        "giftedHiveBonus": "+5% Bee Ability Pollen",
+        "obtainment": "Royal Jelly and non-event eggs.",
+        "cardSummary": "Shy Bee gives red hives a quick boost and bomb pair without giving up much energy or conversion."
+      },
+      "system": {
+        "slug": "shy-bee",
+        "section": "Advanced Hatch Pool (Legendary)",
+        "sortOrder": 29,
+        "image": "/Bee%20Swarm%20Simulator/Bees/shy-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Buoyant Bee",
+        "rarity": "Mythic",
+        "color": "Blue",
+        "energy": 60,
+        "speed": 14,
+        "attack": 4,
+        "pollen": "15 per 5s",
+        "honey": "150 per 3s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Bomb, Inflate Balloons, Gifted Ability: Surprise Party",
+        "giftedHiveBonus": "x1.2 Capacity",
+        "obtainment": "Royal Jelly, Mythic Eggs, and rare reward routes.",
+        "cardSummary": "Buoyant Bee fills the blue balloon loop with Inflate Balloons and a deep energy pool for long farming sessions."
+      },
+      "system": {
+        "slug": "buoyant-bee",
+        "section": "Mythic Chase (Mythic)",
+        "sortOrder": 30,
+        "image": "/Bee%20Swarm%20Simulator/Bees/buoyant-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fuzzy Bee",
+        "rarity": "Mythic",
+        "color": "Colorless",
+        "energy": 50,
+        "speed": 11.9,
+        "attack": 3,
+        "pollen": "100 per 6s",
+        "honey": "40 per 6s",
+        "favoriteTreat": "Pineapple",
+        "abilities": "Fuzz Bombs, Buzz Bomb+, Gifted Ability: Pollen Haze",
+        "giftedHiveBonus": "x1.1 Bomb Power",
+        "obtainment": "Royal Jelly, Mythic Eggs, and rare reward routes.",
+        "cardSummary": "Fuzzy Bee spreads Fuzz Bombs and improves nearby flower output, making it a flexible support mythic."
+      },
+      "system": {
+        "slug": "fuzzy-bee",
+        "section": "Mythic Chase (Mythic)",
+        "sortOrder": 31,
+        "image": "/Bee%20Swarm%20Simulator/Bees/fuzzy-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Precise Bee",
+        "rarity": "Mythic",
+        "color": "Red",
+        "energy": 40,
+        "speed": 11.2,
+        "attack": 8,
+        "pollen": "20 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Target Practice",
+        "giftedHiveBonus": "+3% Super-Crit Chance",
+        "obtainment": "Royal Jelly, Mythic Eggs, and rare reward routes.",
+        "cardSummary": "Precise Bee builds Target Practice and brings high attack for players shaping a red or critical-hit hive."
+      },
+      "system": {
+        "slug": "precise-bee",
+        "section": "Mythic Chase (Mythic)",
+        "sortOrder": 32,
+        "image": "/Bee%20Swarm%20Simulator/Bees/precise-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spicy Bee",
+        "rarity": "Mythic",
+        "color": "Red",
+        "energy": 20,
+        "speed": 14,
+        "attack": 5,
+        "pollen": "14 per 4s",
+        "honey": "300 per 2s",
+        "favoriteTreat": "Strawberry",
+        "abilities": "Inferno, Rage",
+        "giftedHiveBonus": "+25% Flame Duration",
+        "obtainment": "Royal Jelly, Mythic Eggs, and rare reward routes.",
+        "cardSummary": "Spicy Bee centers the red flame loop with Inferno and Rage, so its value grows with attack-focused play."
+      },
+      "system": {
+        "slug": "spicy-bee",
+        "section": "Mythic Chase (Mythic)",
+        "sortOrder": 33,
+        "image": "/Bee%20Swarm%20Simulator/Bees/spicy-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tadpole Bee",
+        "rarity": "Mythic",
+        "color": "Blue",
+        "energy": 10,
+        "speed": 11.2,
+        "attack": 1,
+        "pollen": "10 per 6s",
+        "honey": "120 per 4s",
+        "favoriteTreat": "Blueberry",
+        "abilities": "Blue Boost, Summon Frog, Gifted Ability: Baby Love",
+        "giftedHiveBonus": "+25% Bubble Duration",
+        "obtainment": "Royal Jelly, Mythic Eggs, and rare reward routes.",
+        "cardSummary": "Tadpole Bee summons frogs and bubbles, giving blue hives a steady support engine despite low energy."
+      },
+      "system": {
+        "slug": "tadpole-bee",
+        "section": "Mythic Chase (Mythic)",
+        "sortOrder": 34,
+        "image": "/Bee%20Swarm%20Simulator/Bees/tadpole-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vector Bee",
+        "rarity": "Mythic",
+        "color": "Colorless",
+        "energy": 45.6,
+        "speed": 16.24,
+        "attack": 5,
+        "pollen": "18 per 4s",
+        "honey": "144 per 1s",
+        "favoriteTreat": "Sunflower Seed",
+        "abilities": "Pollen Mark+, Triangulate, Gifted Ability: Mark Surge",
+        "giftedHiveBonus": "+15% Mark Duration",
+        "obtainment": "Royal Jelly, Mythic Eggs, and rare reward routes.",
+        "cardSummary": "Vector Bee turns marks into a major part of the collection loop with Triangulate and Mark Surge."
+      },
+      "system": {
+        "slug": "vector-bee",
+        "section": "Mythic Chase (Mythic)",
+        "sortOrder": 35,
+        "image": "/Bee%20Swarm%20Simulator/Bees/vector-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear Bee",
+        "rarity": "Event",
+        "color": "Colorless",
+        "energy": 35,
+        "speed": 14,
+        "attack": 5,
+        "pollen": "15 per 2s",
+        "honey": "200 per 2s",
+        "favoriteTreat": null,
+        "abilities": "Bear Morph",
+        "giftedHiveBonus": "+10% Pollen, Enhanced Bear Morph",
+        "obtainment": "Bear Bee Egg and special reward routes.",
+        "cardSummary": "Bear Bee gives the hive a Bear Morph and is one of the event bees with no favorite treat."
+      },
+      "system": {
+        "slug": "bear-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 36,
+        "image": "/Bee%20Swarm%20Simulator/Bees/bear-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cobalt Bee",
+        "rarity": "Event",
+        "color": "Blue",
+        "energy": 35,
+        "speed": 18.2,
+        "attack": 7,
+        "pollen": "10 per 4s",
+        "honey": "140 per 3s",
+        "favoriteTreat": null,
+        "abilities": "Blue Pulse, Blue Bomb Sync",
+        "giftedHiveBonus": "+15% Instant Blue Conversion",
+        "obtainment": "Event-specific egg or ticket route.",
+        "cardSummary": "Cobalt Bee syncs blue bomb effects and adds a fast blue pulse to a color-focused hive."
+      },
+      "system": {
+        "slug": "cobalt-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 37,
+        "image": "/Bee%20Swarm%20Simulator/Bees/cobalt-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Bee",
+        "rarity": "Event",
+        "color": "Red",
+        "energy": 35,
+        "speed": 18.2,
+        "attack": 7,
+        "pollen": "10 per 4s",
+        "honey": "140 per 3s",
+        "favoriteTreat": null,
+        "abilities": "Red Pulse, Red Bomb Sync",
+        "giftedHiveBonus": "+15% Instant Red Conversion",
+        "obtainment": "Event-specific egg or ticket route.",
+        "cardSummary": "Crimson Bee is the red counterpart to Cobalt Bee, syncing red bomb effects with quick field work."
+      },
+      "system": {
+        "slug": "crimson-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 38,
+        "image": "/Bee%20Swarm%20Simulator/Bees/crimson-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Digital Bee",
+        "rarity": "Event",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 11.9,
+        "attack": 1,
+        "pollen": "10 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": null,
+        "abilities": "Glitch, Mind Hack, Gifted Ability: Map Corruption",
+        "giftedHiveBonus": "+1% Ability Duplication Chance",
+        "obtainment": "Digital Bee event or special purchase route.",
+        "cardSummary": "Digital Bee adds Glitch and Mind Hack effects, then becomes even more disruptive when its gifted ability appears."
+      },
+      "system": {
+        "slug": "digital-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 39,
+        "image": "/Bee%20Swarm%20Simulator/Bees/digital-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Bee",
+        "rarity": "Event",
+        "color": "Red",
+        "energy": 20,
+        "speed": 16.1,
+        "attack": 1,
+        "pollen": "40 per 4s",
+        "honey": "150 per 1s",
+        "favoriteTreat": null,
+        "abilities": "Festive Gift, Honey Mark, Red Bomb+",
+        "giftedHiveBonus": "1.25x Convert Rate At Hive, Enhanced Festive Gift",
+        "obtainment": "Ticket Tent and limited festive reward routes.",
+        "cardSummary": "Festive Bee hands out server gifts while adding Honey Mark and a red bomb to the field loop."
+      },
+      "system": {
+        "slug": "festive-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 40,
+        "image": "/Bee%20Swarm%20Simulator/Bees/festive-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gummy Bee",
+        "rarity": "Event",
+        "color": "Colorless",
+        "energy": 50,
+        "speed": 14,
+        "attack": 3,
+        "pollen": "10 per 4s",
+        "honey": "700 per 4s",
+        "favoriteTreat": null,
+        "abilities": "Gumdrop Barrage, Glob",
+        "giftedHiveBonus": "+5% Honey Per Pollen, Enhanced Glob",
+        "obtainment": "Gumdrop-based quest route and special event egg.",
+        "cardSummary": "Gummy Bee covers the field in goo with Gumdrop Barrage and Glob, then turns that goo into honey value."
+      },
+      "system": {
+        "slug": "gummy-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 41,
+        "image": "/Bee%20Swarm%20Simulator/Bees/gummy-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Photon Bee",
+        "rarity": "Event",
+        "color": "Colorless",
+        "energy": "Unlimited",
+        "speed": 21,
+        "attack": 4,
+        "pollen": "20 per 2s",
+        "honey": "240 per 2s",
+        "favoriteTreat": null,
+        "abilities": "Beamstorm, Haste",
+        "giftedHiveBonus": "+5% Instant Conversion, Enhanced Beamstorm",
+        "obtainment": "Ticket Tent and special event reward routes.",
+        "cardSummary": "Photon Bee fires Beamstorm while moving quickly, and its unlimited energy keeps the light show going."
+      },
+      "system": {
+        "slug": "photon-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 42,
+        "image": "/Bee%20Swarm%20Simulator/Bees/photon-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Puppy Bee",
+        "rarity": "Event",
+        "color": "Colorless",
+        "energy": 40,
+        "speed": 16.1,
+        "attack": 2,
+        "pollen": "25 per 4s",
+        "honey": "280 per 4s",
+        "favoriteTreat": null,
+        "abilities": "Fetch, Puppy Love",
+        "giftedHiveBonus": "+20% Bond From Treats",
+        "obtainment": "Ticket Tent and special event reward routes.",
+        "cardSummary": "Puppy Bee fetches treats and strengthens bond gains, making it a progression-focused event bee."
+      },
+      "system": {
+        "slug": "puppy-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 43,
+        "image": "/Bee%20Swarm%20Simulator/Bees/puppy-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tabby Bee",
+        "rarity": "Event",
+        "color": "Colorless",
+        "energy": 28,
+        "speed": 16.1,
+        "attack": 4,
+        "pollen": "10 per 4s",
+        "honey": "160 per 3s",
+        "favoriteTreat": null,
+        "abilities": "Scratch, Tabby Love",
+        "giftedHiveBonus": "+50% Critical Power, Enhanced Scratch and Tabby Blessing",
+        "obtainment": "Ticket Tent and special event reward routes.",
+        "cardSummary": "Tabby Bee grows stronger through Tabby Love while Scratch handles quick bursts of pollen and damage."
+      },
+      "system": {
+        "slug": "tabby-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 44,
+        "image": "/Bee%20Swarm%20Simulator/Bees/tabby-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vicious Bee",
+        "rarity": "Event",
+        "color": "Blue",
+        "energy": 50,
+        "speed": 17.5,
+        "attack": 9,
+        "pollen": "10 per 4s",
+        "honey": "80 per 4s",
+        "favoriteTreat": null,
+        "abilities": "Impale, Blue Bomb+",
+        "giftedHiveBonus": "-15% Monster Respawn Time, +1 Impale accuracy level",
+        "obtainment": "Stinger collection and special event route.",
+        "cardSummary": "Vicious Bee is the combat-first event bee, pairing Impale with high attack and a stronger blue bomb."
+      },
+      "system": {
+        "slug": "vicious-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 45,
+        "image": "/Bee%20Swarm%20Simulator/Bees/vicious-bee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Windy Bee",
+        "rarity": "Event",
+        "color": "Colorless",
+        "energy": 20,
+        "speed": 19.6,
+        "attack": 4,
+        "pollen": "10 per 3s",
+        "honey": "180 per 2s",
+        "favoriteTreat": null,
+        "abilities": "White Boost, Rain Cloud, Tornado",
+        "giftedHiveBonus": "+15% Instant White Conversion, x2 Boosts From Clouds",
+        "obtainment": "Wind Shrine and special event route.",
+        "cardSummary": "Windy Bee calls rain and tornadoes into the field, giving white hives a mobile boost-and-convert loop."
+      },
+      "system": {
+        "slug": "windy-bee",
+        "section": "Event and Special Unlocks (Event)",
+        "sortOrder": 46,
+        "image": "/Bee%20Swarm%20Simulator/Bees/windy-bee.webp"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1610 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Bee Swarm Simulator",
+    "gameSlug": "bee-swarm-simulator",
+    "collection": "equipment",
+    "route": "/wiki/bee-swarm-simulator/equipment",
+    "catalogCode": "bee-swarm-simulator-equipment",
+    "itemFields": [
+      "slot",
+      "category",
+      "availability",
+      "acquisition",
+      "cost",
+      "materials",
+      "effect",
+      "progressionNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "slot",
+      "category",
+      "availability",
+      "acquisition",
+      "cost",
+      "materials",
+      "effect",
+      "progressionNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Collectors and Tools",
+        "Bags",
+        "Masks and Hats",
+        "Belts",
+        "Boots",
+        "Guards",
+        "Amulets"
+      ],
+      "badgeField": "slot",
+      "subtitleFields": [
+        "category"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "slot",
+        "category",
+        "availability",
+        "acquisition",
+        "cost",
+        "materials",
+        "effect"
+      ],
+      "tableFields": [
+        "slot",
+        "category",
+        "availability",
+        "acquisition",
+        "cost",
+        "materials",
+        "effect",
+        "progressionNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "slot": {
+          "kind": "highlight",
+          "label": "Slot"
+        },
+        "category": {
+          "kind": "plain",
+          "label": "Category"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "acquisition": {
+          "kind": "plain",
+          "label": "Acquisition"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "materials": {
+          "kind": "plain",
+          "label": "Materials"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "progressionNote": {
+          "kind": "detail",
+          "label": "Progression Note"
+        },
+        "cardSummary": {
+          "kind": "plain",
+          "label": "Card Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Bubble Wand",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Bubble Wand is a tool that can be bought in the Blue HQ.",
+        "cost": "3,500,000 Honey",
+        "materials": null,
+        "effect": "Collects 6 pollen from 16 flower patches every 0.8 seconds in a ring pattern.",
+        "progressionNote": "The Bubble Wand is a tool that can be bought in the Blue HQ. Collects 6 pollen from 16 flower patches every 0.8 seconds in a ring pattern.",
+        "cardSummary": "Bubble Wand is a tool that collects 6 pollen from 16 flower patches every 0.8 seconds in a ring pattern."
+      },
+      "system": {
+        "slug": "bubble-wand",
+        "section": "Collectors and Tools",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/bubble-wand.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clippers",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "Available from Noob Shop.",
+        "cost": "2,200 Honey",
+        "materials": null,
+        "effect": "Collects 9 pollen from 1 flower patch every 0.6 seconds in a single pattern.",
+        "progressionNote": "Available from Noob Shop. Collects 9 pollen from 1 flower patch every 0.6 seconds in a single pattern.",
+        "cardSummary": "Clippers is a tool that collects 9 pollen from 1 flower patch every 0.6 seconds in a single pattern."
+      },
+      "system": {
+        "slug": "clippers",
+        "section": "Collectors and Tools",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/clippers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Scythe",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The player needs to have completed at least 250 Gifted Riley Bee quests to unlock it.",
+        "cost": "(Needs to have 250 Gifted Riley Bee quests complete) 1,500 Red Extracts, 150 Stingers, 100 Hard Waxes, 50 Caustic Waxes, 50 Super Smoothies, 3 Invigorating Vials, 2.5T Honey",
+        "materials": "(Needs to have 250 Gifted Riley Bee quests complete) 1,500 Red Extracts, 150 Stingers, 100 Hard Waxes, 50 Caustic Waxes, 50 Super Smoothies, 3 Invigorating Vials, 2.5T Honey",
+        "effect": "Collects 13 pollen from 31-36 flower patches every 0.5 seconds in a crescent pattern. The patch count varies with character orientation.",
+        "progressionNote": "The player needs to have completed at least 250 Gifted Riley Bee quests to unlock it. Collects 13 pollen from 31-36 flower patches every 0.5 seconds in a crescent pattern. The patch count varies with character orientation.",
+        "cardSummary": "Dark Scythe is a tool that collects 13 pollen from 31-36 flower patches every 0.5 seconds in a crescent pattern. The patch count varies with character orientation."
+      },
+      "system": {
+        "slug": "dark-scythe",
+        "section": "Collectors and Tools",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/dark-scythe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Electro-Magnet",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "It can be purchased in the Pro Shop.",
+        "cost": "300,000 Honey",
+        "materials": null,
+        "effect": "Collects 4 pollen from 9 flower patches every 0.5 seconds in a surround pattern.",
+        "progressionNote": "It can be purchased in the Pro Shop. Collects 4 pollen from 9 flower patches every 0.5 seconds in a surround pattern.",
+        "cardSummary": "Electro-Magnet is a tool that collects 4 pollen from 9 flower patches every 0.5 seconds in a surround pattern."
+      },
+      "system": {
+        "slug": "electro-magnet",
+        "section": "Collectors and Tools",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/electro-magnet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Rake",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "It can be purchased in the Mountain Top Shop.",
+        "cost": "20,000,000 Honey",
+        "materials": null,
+        "effect": "Collects 7 pollen from 26 flower patches every 0.75 seconds.",
+        "progressionNote": "It can be purchased in the Mountain Top Shop. Collects 7 pollen from 26 flower patches every 0.75 seconds.",
+        "cardSummary": "Golden Rake is a tool that collects 7 pollen from 26 flower patches every 0.75 seconds."
+      },
+      "system": {
+        "slug": "golden-rake",
+        "section": "Collectors and Tools",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/golden-rake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gummyballer",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Gummyball rewards the player with \"Gummyball Combo\", giving 2 stacks for hitting a wall, 1 per ability token, 3 per honey token, 8 per mark and 30 per precise mark for 8 seconds.",
+        "cost": "1,500 Glue, 2,000 Gumdrops, 50 Caustic Waxes, 50 Super Smoothies, 5 Turpentines, 3 Satisfying Vials, 10T Honey",
+        "materials": "1,500 Glue, 2,000 Gumdrops, 50 Caustic Waxes, 50 Super Smoothies, 5 Turpentines, 3 Satisfying Vials, 10T Honey",
+        "effect": "Collects 9 pollen from 29 flower patches every 1 second in a ball pattern.",
+        "progressionNote": "The Gummyball rewards the player with \"Gummyball Combo\", giving 2 stacks for hitting a wall, 1 per ability token, 3 per honey token, 8 per mark and 30 per precise mark for 8 seconds. Collects 9 pollen from 29 flower patches every 1 second in a ball pattern.",
+        "cardSummary": "Gummyballer is a tool that collects 9 pollen from 29 flower patches every 1 second in a ball pattern."
+      },
+      "system": {
+        "slug": "gummyballer",
+        "section": "Collectors and Tools",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/gummyballer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Honey Dipper",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Honey Dipper is a tool available to be bought in the Pro Shop.",
+        "cost": "1,500,000 Honey",
+        "materials": null,
+        "effect": "Collects 2 pollen from 49 flower patches every 0.9 seconds in a surround pattern.",
+        "progressionNote": "The Honey Dipper is a tool available to be bought in the Pro Shop. Collects 2 pollen from 49 flower patches every 0.9 seconds in a surround pattern.",
+        "cardSummary": "Honey Dipper is a tool that collects 2 pollen from 49 flower patches every 0.9 seconds in a surround pattern."
+      },
+      "system": {
+        "slug": "honey-dipper",
+        "section": "Collectors and Tools",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/honey-dipper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnet",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Magnet is a tool that can be purchased at the Noob Shop.",
+        "cost": "5,500 Honey",
+        "materials": null,
+        "effect": "Collects 2 pollen from 9 flower patches every 0.8 seconds in a surround pattern.",
+        "progressionNote": "The Magnet is a tool that can be purchased at the Noob Shop. Collects 2 pollen from 9 flower patches every 0.8 seconds in a surround pattern.",
+        "cardSummary": "Magnet is a tool that collects 2 pollen from 9 flower patches every 0.8 seconds in a surround pattern."
+      },
+      "system": {
+        "slug": "magnet",
+        "section": "Collectors and Tools",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/magnet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Petal Wand",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "Available in the Petal Shop.",
+        "cost": "1 Spirit Petal, 10 Star Jellies, 25 Glitter, 75 Enzymes, 1,500,000,000 Honey",
+        "materials": "1 Spirit Petal, 10 Star Jellies, 25 Glitter, 75 Enzymes, 1,500,000,000 Honey",
+        "effect": "Collects 6 pollen from 37 flower patches every 0.7 seconds in a flower pattern.",
+        "progressionNote": "Available in the Petal Shop. Collects 6 pollen from 37 flower patches every 0.7 seconds in a flower pattern.",
+        "cardSummary": "Petal Wand is a tool that collects 6 pollen from 37 flower patches every 0.7 seconds in a flower pattern."
+      },
+      "system": {
+        "slug": "petal-wand",
+        "section": "Collectors and Tools",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/petal-wand.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Porcelain Dipper",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "It can be purchased in the Mountain Top Shop.",
+        "cost": "150,000,000 Honey",
+        "materials": null,
+        "effect": "Collects 3 pollen from 49 flower patches every 0.7 seconds in a surround pattern.",
+        "progressionNote": "It can be purchased in the Mountain Top Shop. Collects 3 pollen from 49 flower patches every 0.7 seconds in a surround pattern.",
+        "cardSummary": "Porcelain Dipper is a tool that collects 3 pollen from 49 flower patches every 0.7 seconds in a surround pattern."
+      },
+      "system": {
+        "slug": "porcelain-dipper",
+        "section": "Collectors and Tools",
+        "sortOrder": 10,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/porcelain-dipper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pulsar",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Pulsar is a tool that can be purchased in the Pro Shop.",
+        "cost": "125,000 Honey",
+        "materials": null,
+        "effect": "Collects 2 pollen from 29 flower patches every 1 second in a surround pattern.",
+        "progressionNote": "The Pulsar is a tool that can be purchased in the Pro Shop. Collects 2 pollen from 29 flower patches every 1 second in a surround pattern.",
+        "cardSummary": "Pulsar is a tool that collects 2 pollen from 29 flower patches every 1 second in a surround pattern."
+      },
+      "system": {
+        "slug": "pulsar",
+        "section": "Collectors and Tools",
+        "sortOrder": 11,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/pulsar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rake",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Rake is a tool that can be purchased at the Noob Shop.",
+        "cost": "800 Honey",
+        "materials": null,
+        "effect": "Collects 2 pollen from 3 flower patches every 0.7 seconds in a line pattern.",
+        "progressionNote": "The Rake is a tool that can be purchased at the Noob Shop. Collects 2 pollen from 3 flower patches every 0.7 seconds in a line pattern.",
+        "cardSummary": "Rake is a tool that collects 2 pollen from 3 flower patches every 0.7 seconds in a line pattern."
+      },
+      "system": {
+        "slug": "rake",
+        "section": "Collectors and Tools",
+        "sortOrder": 12,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/rake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scissors",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Scissors are a tool that can be purchased at the Pro Shop.",
+        "cost": "850,000 Honey",
+        "materials": null,
+        "effect": "Collects 30 pollen from 1 flower patch every 0.5 seconds in a single pattern.",
+        "progressionNote": "The Scissors are a tool that can be purchased at the Pro Shop. Collects 30 pollen from 1 flower patch every 0.5 seconds in a single pattern.",
+        "cardSummary": "Scissors is a tool that collects 30 pollen from 1 flower patch every 0.5 seconds in a single pattern."
+      },
+      "system": {
+        "slug": "scissors",
+        "section": "Collectors and Tools",
+        "sortOrder": 13,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/scissors.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scooper",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "It can be purchased in the Pro Shop.",
+        "cost": "0 Honey",
+        "materials": null,
+        "effect": "Collects 2 pollen from 2 flower patches every 0.8 seconds in a line pattern.",
+        "progressionNote": "It can be purchased in the Pro Shop. Collects 2 pollen from 2 flower patches every 0.8 seconds in a line pattern.",
+        "cardSummary": "Scooper is a tool that collects 2 pollen from 2 flower patches every 0.8 seconds in a line pattern."
+      },
+      "system": {
+        "slug": "scooper",
+        "section": "Collectors and Tools",
+        "sortOrder": 14,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/scooper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scythe",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Scythe is a tool that can be purchased in the Red HQ.",
+        "cost": "3,500,000 Honey",
+        "materials": null,
+        "effect": "Collects 7 pollen from 7 flower patches every 0.47 seconds in a line pattern.",
+        "progressionNote": "The Scythe is a tool that can be purchased in the Red HQ. Collects 7 pollen from 7 flower patches every 0.47 seconds in a line pattern.",
+        "cardSummary": "Scythe is a tool that collects 7 pollen from 7 flower patches every 0.47 seconds in a line pattern."
+      },
+      "system": {
+        "slug": "scythe",
+        "section": "Collectors and Tools",
+        "sortOrder": 15,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/scythe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spark Staff",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "It can be bought in the Mountain Top Shop.",
+        "cost": "60,000,000 Honey",
+        "materials": null,
+        "effect": "Collects 30 pollen from 81 flower patches every 0.5 seconds.",
+        "progressionNote": "It can be bought in the Mountain Top Shop. Collects 30 pollen from 81 flower patches every 0.5 seconds.",
+        "cardSummary": "Spark Staff is a tool that collects 30 pollen from 81 flower patches every 0.5 seconds."
+      },
+      "system": {
+        "slug": "spark-staff",
+        "section": "Collectors and Tools",
+        "sortOrder": 16,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/spark-staff.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sticker-Seeker",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "Linked to the Sticker-Seeker Quest Machine.",
+        "cost": "1 Glue, 1 Oil, 5 Soft Wax, 5 Neonberries, 10 Micro-Converters, 7,000,000 Honey",
+        "materials": "1 Glue, 1 Oil, 5 Soft Wax, 5 Neonberries, 10 Micro-Converters, 7,000,000 Honey",
+        "effect": "Collects 10 pollen from 13 flower patches every 1 second and unlocks the Sticker-Seeker Quest Machine.",
+        "progressionNote": "Linked to the Sticker-Seeker Quest Machine. Collects 10 pollen from 13 flower patches every 1 second and unlocks the Sticker-Seeker Quest Machine.",
+        "cardSummary": "Sticker-Seeker is a tool that collects 10 pollen from 13 flower patches every 1 second and unlocks the Sticker-Seeker Quest Machine."
+      },
+      "system": {
+        "slug": "sticker-seeker",
+        "section": "Collectors and Tools",
+        "sortOrder": 17,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/sticker-seeker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Super-Scooper",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Super-Scooper is a tool that can be purchased in the Pro Shop.",
+        "cost": "40,000 Honey",
+        "materials": null,
+        "effect": "Collects 4 pollen from 5 flower patches every 0.5 seconds in a line pattern.",
+        "progressionNote": "The Super-Scooper is a tool that can be purchased in the Pro Shop. Collects 4 pollen from 5 flower patches every 0.5 seconds in a line pattern.",
+        "cardSummary": "Super-Scooper is a tool that collects 4 pollen from 5 flower patches every 0.5 seconds in a line pattern."
+      },
+      "system": {
+        "slug": "super-scooper",
+        "section": "Collectors and Tools",
+        "sortOrder": 18,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/super-scooper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tide Popper",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The player needs to have completed at least 250 Gifted Bucko Bee quests to unlock it.",
+        "cost": "(Needs to have 250 Gifted Bucko Bee quests completed) 1,500 Blue Extracts, 150 Stingers, 150 Tropical Drinks, 75 Swirled Waxes, 50 Super Smoothies, 3 Comforting Vials, 2.5T Honey",
+        "materials": "(Needs to have 250 Gifted Bucko Bee quests completed) 1,500 Blue Extracts, 150 Stingers, 150 Tropical Drinks, 75 Swirled Waxes, 50 Super Smoothies, 3 Comforting Vials, 2.5T Honey",
+        "effect": "Collects 5 pollen from 22 flower patches every 1 second in a spike pattern.",
+        "progressionNote": "The player needs to have completed at least 250 Gifted Bucko Bee quests to unlock it. Collects 5 pollen from 22 flower patches every 1 second in a spike pattern.",
+        "cardSummary": "Tide Popper is a tool that collects 5 pollen from 22 flower patches every 1 second in a spike pattern."
+      },
+      "system": {
+        "slug": "tide-popper",
+        "section": "Collectors and Tools",
+        "sortOrder": 19,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/tide-popper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vacuum",
+        "slot": "Tool",
+        "category": "Collectors and Tools",
+        "availability": "Named equipment",
+        "acquisition": "The Vacuum is a tool that can be purchased in the Noob Shop.",
+        "cost": "14,000 Honey",
+        "materials": null,
+        "effect": "Collects 2 pollen from 13 flower patches every 0.8 seconds in a surround pattern.",
+        "progressionNote": "The Vacuum is a tool that can be purchased in the Noob Shop. Collects 2 pollen from 13 flower patches every 0.8 seconds in a surround pattern.",
+        "cardSummary": "Vacuum is a tool that collects 2 pollen from 13 flower patches every 0.8 seconds in a surround pattern."
+      },
+      "system": {
+        "slug": "vacuum",
+        "section": "Collectors and Tools",
+        "sortOrder": 20,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/vacuum.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Backpack",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Backpack is a bag that can be purchased in the Noob Shop.",
+        "cost": "5,500 Honey",
+        "materials": null,
+        "effect": "+3,500 Pollen capacity.",
+        "progressionNote": "The Backpack is a bag that can be purchased in the Noob Shop. +3,500 Pollen capacity.",
+        "cardSummary": "Backpack is a bag with +3,500 Pollen capacity."
+      },
+      "system": {
+        "slug": "backpack",
+        "section": "Bags",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/backpack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Port-O-Hive",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Seasonal equipment",
+        "acquisition": "The Blue Port-O-Hive is a bag that was added in the 2019-04-05 Update and can be bought in the Blue HQ.",
+        "cost": "12,500,000 Honey, 2 Blue Extracts, 2 Soft Wax",
+        "materials": "12,500,000 Honey, 2 Blue Extracts, 2 Soft Wax",
+        "effect": "+150% Convert Rate; +10% Blue Bee Convert Rate; +10% Instant Blue Conversion; +10% Blue Pollen.",
+        "progressionNote": "The Blue Port-O-Hive is a bag that was added in the 2019-04-05 Update and can be bought in the Blue HQ. +150% Convert Rate; +10% Blue Bee Convert Rate; +10% Instant Blue Conversion; +10% Blue Pollen.",
+        "cardSummary": "Blue Port-O-Hive is a bag with +150% Convert Rate; +10% Blue Bee Convert Rate; +10% Instant Blue Conversion; +10% Blue Pollen."
+      },
+      "system": {
+        "slug": "blue-port-o-hive",
+        "section": "Bags",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/blue-port-o-hive.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Canister",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Canister is a Bag that can be purchased in the Noob Shop.",
+        "cost": "22,000 Honey",
+        "materials": null,
+        "effect": "+30% Convert Rate.",
+        "progressionNote": "The Canister is a Bag that can be purchased in the Noob Shop. +30% Convert Rate.",
+        "cardSummary": "Canister is a bag with +30% Convert Rate."
+      },
+      "system": {
+        "slug": "canister",
+        "section": "Bags",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/canister.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coconut Canister",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Coconut Canister is a bag that can be purchased in the Coconut Cave.",
+        "cost": "25,000,000,000 Honey, 150 Tropical Drinks, 250 Coconuts, 150 Red Extracts, 150 Blue Extracts and 2 Refreshing Vials.",
+        "materials": "25,000,000,000 Honey, 150 Tropical Drinks, 250 Coconuts, 150 Red Extracts, 150 Blue Extracts and 2 Refreshing Vials.",
+        "effect": "+400% Convert Rate; x1.5 Convert Rate At Hive; +10% Instant Conversion; +10% Instant White Conversion; +100% White Pollen; +Passive: Inspire Coconuts; +Passive: Emergency Coconut Shield.",
+        "progressionNote": "The Coconut Canister is a bag that can be purchased in the Coconut Cave. +400% Convert Rate; x1.5 Convert Rate At Hive; +10% Instant Conversion; +10% Instant White Conversion; +100% White Pollen; +Passive: Inspire Coconuts; +Passive: Emergency Coconut Shield.",
+        "cardSummary": "Coconut Canister is a bag with +400% Convert Rate; x1.5 Convert Rate At Hive; +10% Instant Conversion; +10% Instant White Conversion; +100% White Pollen; +Passive: Inspire Coconuts; +Passive: Emergency Coconut Shield."
+      },
+      "system": {
+        "slug": "coconut-canister",
+        "section": "Bags",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/coconut-canister.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Compressor",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Compressor is a bag that can be purchased from the Pro Shop.",
+        "cost": "160,000 Honey",
+        "materials": null,
+        "effect": "+55% Convert Rate.",
+        "progressionNote": "The Compressor is a bag that can be purchased from the Pro Shop. +55% Convert Rate.",
+        "cardSummary": "Compressor is a bag with +55% Convert Rate."
+      },
+      "system": {
+        "slug": "compressor",
+        "section": "Bags",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/compressor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Barrel",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Elite Barrel is a Bag that can be purchased in the Pro Shop.",
+        "cost": "650,000 Honey",
+        "materials": null,
+        "effect": "+70% Convert Rate.",
+        "progressionNote": "The Elite Barrel is a Bag that can be purchased in the Pro Shop. +70% Convert Rate.",
+        "cardSummary": "Elite Barrel is a bag with +70% Convert Rate."
+      },
+      "system": {
+        "slug": "elite-barrel",
+        "section": "Bags",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/elite-barrel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jar",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Jar is a Bag that can be purchased in the Noob Shop.",
+        "cost": "650 Honey",
+        "materials": null,
+        "effect": "+750 Pollen capacity.",
+        "progressionNote": "The Jar is a Bag that can be purchased in the Noob Shop. +750 Pollen capacity.",
+        "cardSummary": "Jar is a bag with +750 Pollen capacity."
+      },
+      "system": {
+        "slug": "jar",
+        "section": "Bags",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/jar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mega-Jug",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Mega-Jug is a bag that can be purchased in the Pro Shop.",
+        "cost": "50,000 Honey",
+        "materials": null,
+        "effect": "+40% Convert Rate.",
+        "progressionNote": "The Mega-Jug is a bag that can be purchased in the Pro Shop. +40% Convert Rate.",
+        "cardSummary": "Mega-Jug is a bag with +40% Convert Rate."
+      },
+      "system": {
+        "slug": "mega-jug",
+        "section": "Bags",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/mega-jug.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Porcelain Port-O-Hive",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Porcelain Port-O-Hive is a bag that can be purchased in the Mountain Top Shop which was added in the 2018-07-11 update.",
+        "cost": "250,000,000 Honey, 3 Glitter, 3 Soft Wax, 10 Moon Charms",
+        "materials": "250,000,000 Honey, 3 Glitter, 3 Soft Wax, 10 Moon Charms",
+        "effect": "+250% Convert Rate; x1.25 Convert Rate at Hive; +10% Instant Conversion; +50% White Pollen.",
+        "progressionNote": "The Porcelain Port-O-Hive is a bag that can be purchased in the Mountain Top Shop which was added in the 2018-07-11 update. +250% Convert Rate; x1.25 Convert Rate at Hive; +10% Instant Conversion; +50% White Pollen.",
+        "cardSummary": "Porcelain Port-O-Hive is a bag with +250% Convert Rate; x1.25 Convert Rate at Hive; +10% Instant Conversion; +50% White Pollen."
+      },
+      "system": {
+        "slug": "porcelain-port-o-hive",
+        "section": "Bags",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/porcelain-port-o-hive.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Port-O-Hive",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "The Port-O-Hive is a bag that can be purchased in the Pro Shop.",
+        "cost": "1,250,000 Honey",
+        "materials": null,
+        "effect": "+100% Convert Rate; +5% Instant Conversion.",
+        "progressionNote": "The Port-O-Hive is a bag that can be purchased in the Pro Shop. +100% Convert Rate; +5% Instant Conversion.",
+        "cardSummary": "Port-O-Hive is a bag with +100% Convert Rate; +5% Instant Conversion."
+      },
+      "system": {
+        "slug": "port-o-hive",
+        "section": "Bags",
+        "sortOrder": 10,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/port-o-hive.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pouch",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "Free",
+        "materials": "Free",
+        "effect": "+200 Pollen capacity.",
+        "progressionNote": "+200 Pollen capacity.",
+        "cardSummary": "Pouch is a bag with +200 Pollen capacity."
+      },
+      "system": {
+        "slug": "pouch",
+        "section": "Bags",
+        "sortOrder": 11,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/pouch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Port-O-Hive",
+        "slot": "Bag",
+        "category": "Bags",
+        "availability": "Named equipment",
+        "acquisition": "It can be purchased in the Red HQ.",
+        "cost": "12,500,000 Honey, 2 Red Extracts, 2 Soft Wax",
+        "materials": "12,500,000 Honey, 2 Red Extracts, 2 Soft Wax",
+        "effect": "+150% Convert Rate; +10% Red Bee Convert Rate; +10% Instant Red Conversion; +10% Red Pollen.",
+        "progressionNote": "It can be purchased in the Red HQ. +150% Convert Rate; +10% Red Bee Convert Rate; +10% Instant Red Conversion; +10% Red Pollen.",
+        "cardSummary": "Red Port-O-Hive is a bag with +150% Convert Rate; +10% Red Bee Convert Rate; +10% Instant Red Conversion; +10% Red Pollen."
+      },
+      "system": {
+        "slug": "red-port-o-hive",
+        "section": "Bags",
+        "sortOrder": 12,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/red-port-o-hive.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "B.B.M. Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Unobtainable or legacy equipment",
+        "acquisition": "Mask, or Bubble Bee Man Mask, is a mask that was obtainable by completing Bubble Bee Man's quest, \"Helping B.B.M.\" in Beesmas 2018.",
+        "cost": null,
+        "materials": null,
+        "effect": "+75,000 Capacity; +25 Convert Amount; +50% Honey From Tokens; +1 Blue Bee Attack.",
+        "progressionNote": "Mask, or Bubble Bee Man Mask, is a mask that was obtainable by completing Bubble Bee Man's quest, \"Helping B.B.M.\" in Beesmas 2018. +75,000 Capacity; +25 Convert Amount; +50% Honey From Tokens; +1 Blue Bee Attack.",
+        "cardSummary": "B.B.M. Mask is a mask with +75,000 Capacity; +25 Convert Amount; +50% Honey From Tokens; +1 Blue Bee Attack."
+      },
+      "system": {
+        "slug": "b-b-m-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/b-b-m-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beekeeper's Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Named equipment",
+        "acquisition": "The Beekeeper's Mask is a mask that can be purchased from the Mountain Top Shop.",
+        "cost": "20,000,000 Honey, 5 Enzymes, 3 Glue, and 1 Glitter.",
+        "materials": "20,000,000 Honey, 5 Enzymes, 3 Glue, and 1 Glitter.",
+        "effect": "+20% Pollen; +20% Bee Gather Pollen; +10% Bee Ability Rate; +25% Defense.",
+        "progressionNote": "The Beekeeper's Mask is a mask that can be purchased from the Mountain Top Shop. +20% Pollen; +20% Bee Gather Pollen; +10% Bee Ability Rate; +25% Defense.",
+        "cardSummary": "Beekeeper's Mask is a mask with +20% Pollen; +20% Bee Gather Pollen; +10% Bee Ability Rate; +25% Defense."
+      },
+      "system": {
+        "slug": "beekeeper-s-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/beekeeper-s-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bubble Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Named equipment",
+        "acquisition": "The Bubble Mask is a hat accessory that can be bought at the Blue HQ.",
+        "cost": "100,000,000 Honey, 500 Blueberries, 50 Blue Extracts, 25 Oil, and 15 Glitter.",
+        "materials": "100,000,000 Honey, 500 Blueberries, 50 Blue Extracts, 25 Oil, and 15 Glitter.",
+        "effect": "x1.5 Blue Pollen; x1.5 Capacity; x1.25 Blue Field Capacity; x1.25 Bubble Pollen; +30% Defense; +15% Bee Ability Rate; +Passive: Bubble Bombs.",
+        "progressionNote": "The Bubble Mask is a hat accessory that can be bought at the Blue HQ. x1.5 Blue Pollen; x1.5 Capacity; x1.25 Blue Field Capacity; x1.25 Bubble Pollen; +30% Defense; +15% Bee Ability Rate; +Passive: Bubble Bombs.",
+        "cardSummary": "Bubble Mask is a mask with x1.5 Blue Pollen; x1.5 Capacity; x1.25 Blue Field Capacity; x1.25 Bubble Pollen; +30% Defense; +15% Bee Ability Rate; +Passive: Bubble Bombs."
+      },
+      "system": {
+        "slug": "bubble-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/bubble-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Named equipment",
+        "acquisition": "Available from the Demon Mask shop.",
+        "cost": "5,000,000,000 Honey, 500 Stingers, 250 Red Extracts, 150 Enzymes, 100 Glue and 1 Invigorating Vial.",
+        "materials": "5,000,000,000 Honey, 500 Stingers, 250 Red Extracts, 150 Enzymes, 100 Glue and 1 Invigorating Vial.",
+        "effect": "x1.5 Red Pollen; +25% Pollen; x1.5 Capacity; x1.5 Red Field Capacity; +20% Instant Red Conversion; +50% Instant Flame Conversion; x1.25 Flame Pollen; +25% Bee Attack; +35% Defense; +20% Bee Ability Rate; +Passive: Ignite (Needs Fire Mask); +Passive: X-Flame.",
+        "progressionNote": "Available from the Demon Mask shop. x1.5 Red Pollen; +25% Pollen; x1.5 Capacity; x1.5 Red Field Capacity; +20% Instant Red Conversion; +50% Instant Flame Conversion; x1.25 Flame Pollen; +25% Bee Attack; +35% Defense; +20% Bee Ability Rate; +Passive: Ignite (Needs Fire Mask); +Passive: X-Flame.",
+        "cardSummary": "Demon Mask is a mask with x1.5 Red Pollen; +25% Pollen; x1.5 Capacity; x1.5 Red Field Capacity; +20% Instant Red Conversion; +50% Instant Flame Conversion; x1.25 Flame Pollen; +25% Bee Attack; +35% Defense; +20% Bee Ability Rate; +Passive: Ignite (Needs Fire Mask); +Passive: X-Flame."
+      },
+      "system": {
+        "slug": "demon-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/demon-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Named equipment",
+        "acquisition": "Available from the Diamond Mask shop.",
+        "cost": "5,000,000,000 Honey, 250 Blue Extracts, 150 Oil, 100 Glitter, 5 Diamond Eggs, 1 Comforting Vial.",
+        "materials": "5,000,000,000 Honey, 250 Blue Extracts, 150 Oil, 100 Glitter, 5 Diamond Eggs, 1 Comforting Vial.",
+        "effect": "x1.5 Blue Pollen; +15% Instant Blue Conversion; +25% Pollen; x3 Capacity; x1.5 Bubble Pollen; +35% Defense; +20% Bee Ability Rate; +Passive: Bubble Bombs (Needs Bubble Mask); +Passive: Diamond Drain.",
+        "progressionNote": "Available from the Diamond Mask shop. x1.5 Blue Pollen; +15% Instant Blue Conversion; +25% Pollen; x3 Capacity; x1.5 Bubble Pollen; +35% Defense; +20% Bee Ability Rate; +Passive: Bubble Bombs (Needs Bubble Mask); +Passive: Diamond Drain.",
+        "cardSummary": "Diamond Mask is a mask with x1.5 Blue Pollen; +15% Instant Blue Conversion; +25% Pollen; x3 Capacity; x1.5 Bubble Pollen; +35% Defense; +20% Bee Ability Rate; +Passive: Bubble Bombs (Needs Bubble Mask); +Passive: Diamond Drain."
+      },
+      "system": {
+        "slug": "diamond-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/diamond-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Named equipment",
+        "acquisition": "The Fire Mask is a mask that can be bought at the Red HQ.",
+        "cost": "100,000,000 Honey, 500 Strawberries, 50 Red Extracts, 25 Enzymes, and 15 Glue.",
+        "materials": "100,000,000 Honey, 500 Strawberries, 50 Red Extracts, 25 Enzymes, and 15 Glue.",
+        "effect": "x1.5 Red Pollen; +15% Instant Red Conversion; x1.5 Capacity; +50% Instant Flame Conversion; +15% Bee Attack; +35% Defense; +15% Bee Ability Rate; +Passive: Ignite.",
+        "progressionNote": "The Fire Mask is a mask that can be bought at the Red HQ. x1.5 Red Pollen; +15% Instant Red Conversion; x1.5 Capacity; +50% Instant Flame Conversion; +15% Bee Attack; +35% Defense; +15% Bee Ability Rate; +Passive: Ignite.",
+        "cardSummary": "Fire Mask is a mask with x1.5 Red Pollen; +15% Instant Red Conversion; x1.5 Capacity; +50% Instant Flame Conversion; +15% Bee Attack; +35% Defense; +15% Bee Ability Rate; +Passive: Ignite."
+      },
+      "system": {
+        "slug": "fire-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/fire-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gummy Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Seasonal equipment",
+        "acquisition": "It can be reached by touching the Gummy Bee model on the Gummy Bee Egg Claim and using gumdrops if the player has obtained the Goo Hotshot badge.",
+        "cost": "5,000,000,000 Honey, 250 Glue, 100 Enzymes, 100 Oil, 100 Glitter and 1 Satisfying Vial.",
+        "materials": "5,000,000,000 Honey, 250 Glue, 100 Enzymes, 100 Oil, 100 Glitter and 1 Satisfying Vial.",
+        "effect": "+75% Goo; +10% Goo Conversion; x1.25 White Pollen; +25% Pollen; x1.5 Capacity; x1.5 White Field Capacity; +30% Defense; +20% Bee Ability Rate; +Passive: Coin Scatter (Needs Honey Mask); +Passive: Gummy Morph.",
+        "progressionNote": "It can be reached by touching the Gummy Bee model on the Gummy Bee Egg Claim and using gumdrops if the player has obtained the Goo Hotshot badge. +75% Goo; +10% Goo Conversion; x1.25 White Pollen; +25% Pollen; x1.5 Capacity; x1.5 White Field Capacity; +30% Defense; +20% Bee Ability Rate; +Passive: Coin Scatter (Needs Honey Mask); +Passive: Gummy Morph.",
+        "cardSummary": "Gummy Mask is a mask with +75% Goo; +10% Goo Conversion; x1.25 White Pollen; +25% Pollen; x1.5 Capacity; x1.5 White Field Capacity; +30% Defense; +20% Bee Ability Rate; +Passive: Coin Scatter (Needs Honey Mask); +Passive: Gummy Morph."
+      },
+      "system": {
+        "slug": "gummy-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/gummy-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Helmet",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Named equipment",
+        "acquisition": "The Helmet is a hat accessory that can be bought from the Noob Shop.",
+        "cost": "30,000 Honey, 5 Pineapples, and 1 Moon Charm.",
+        "materials": "30,000 Honey, 5 Pineapples, and 1 Moon Charm.",
+        "effect": "+10% Pollen; +25% Defense.",
+        "progressionNote": "The Helmet is a hat accessory that can be bought from the Noob Shop. +10% Pollen; +25% Defense.",
+        "cardSummary": "Helmet is a mask with +10% Pollen; +25% Defense."
+      },
+      "system": {
+        "slug": "helmet",
+        "section": "Masks and Hats",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Honey Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Seasonal equipment",
+        "acquisition": "The Honey Mask is a hat accessory that can be purchased at the Ace Shop in the Badge Bearer's Guild.",
+        "cost": "100,000,000 Honey, 9999 Treats, 50 Oil, 25 Enzymes, and 5 Gold Eggs",
+        "materials": "100,000,000 Honey, 9999 Treats, 50 Oil, 25 Enzymes, and 5 Gold Eggs",
+        "effect": "+25% Pollen; +25% Bee Gather Pollen; x1.25 Capacity; +50% Honey From Tokens; +80 Convert Amount; +30% Defense; +15% Bee Ability Rate; +Passive: Coin Scatter.",
+        "progressionNote": "The Honey Mask is a hat accessory that can be purchased at the Ace Shop in the Badge Bearer's Guild. +25% Pollen; +25% Bee Gather Pollen; x1.25 Capacity; +50% Honey From Tokens; +80 Convert Amount; +30% Defense; +15% Bee Ability Rate; +Passive: Coin Scatter.",
+        "cardSummary": "Honey Mask is a mask with +25% Pollen; +25% Bee Gather Pollen; x1.25 Capacity; +50% Honey From Tokens; +80 Convert Amount; +30% Defense; +15% Bee Ability Rate; +Passive: Coin Scatter."
+      },
+      "system": {
+        "slug": "honey-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/honey-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mondo B.B.M. Mask",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Unobtainable or legacy equipment",
+        "acquisition": "Obtained by completing Bubble Bee Man's Quest.",
+        "cost": null,
+        "materials": null,
+        "effect": "+250,000 Capacity; +50 Convert Amount; +100% Honey From Tokens; +1 Bee Attack.",
+        "progressionNote": "Obtained by completing Bubble Bee Man's Quest. +250,000 Capacity; +50 Convert Amount; +100% Honey From Tokens; +1 Bee Attack.",
+        "cardSummary": "Mondo B.B.M. Mask is a mask with +250,000 Capacity; +50 Convert Amount; +100% Honey From Tokens; +1 Bee Attack."
+      },
+      "system": {
+        "slug": "mondo-b-b-m-mask",
+        "section": "Masks and Hats",
+        "sortOrder": 10,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/mondo-b-b-m-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Propeller Hat",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Named equipment",
+        "acquisition": "The Propeller Hat is a Hat Accessory that can be bought at the Pro Shop.",
+        "cost": "2,500,000 Honey, 25 Gumdrops, 100 Pineapples, and 5 Moon Charms.",
+        "materials": "2,500,000 Honey, 25 Gumdrops, 100 Pineapples, and 5 Moon Charms.",
+        "effect": "+15% Pollen; +5% Bee Ability Rate; +10% Defense; +10 Jump Power.",
+        "progressionNote": "The Propeller Hat is a Hat Accessory that can be bought at the Pro Shop. +15% Pollen; +5% Bee Ability Rate; +10% Defense; +10 Jump Power.",
+        "cardSummary": "Propeller Hat is a mask with +15% Pollen; +5% Bee Ability Rate; +10% Defense; +10 Jump Power."
+      },
+      "system": {
+        "slug": "propeller-hat",
+        "section": "Masks and Hats",
+        "sortOrder": 11,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/propeller-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strange Goggles",
+        "slot": "Mask",
+        "category": "Masks and Hats",
+        "availability": "Unobtainable or legacy equipment",
+        "acquisition": "It could be bought from the Noob Shop until it was taken out from the shop in the 2024-07-17 Update for being bugged.",
+        "cost": "77 Honey, 1 Micro-Converter, and 7 7-Pronged Cogs.",
+        "materials": ", 1 Micro-Converter, and 7 7-Pronged Cogs.",
+        "effect": "+77 Capacity; +7% Defense.",
+        "progressionNote": "It could be bought from the Noob Shop until it was taken out from the shop in the 2024-07-17 Update for being bugged. +77 Capacity; +7% Defense.",
+        "cardSummary": "Strange Goggles is a mask with +77 Capacity; +7% Defense."
+      },
+      "system": {
+        "slug": "strange-goggles",
+        "section": "Masks and Hats",
+        "sortOrder": 12,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/strange-goggles.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Belt Bag",
+        "slot": "Belt",
+        "category": "Belts",
+        "availability": "Named equipment",
+        "acquisition": "Given by Sun Bear on his first visit after the Snag a Belt Bag quest.",
+        "cost": "440,000 Honey, 50 Pineapples, 50 Sunflower Seeds, and 3 Stingers.",
+        "materials": "440,000 Honey, 50 Pineapples, 50 Sunflower Seeds, and 3 Stingers.",
+        "effect": "+25,000 Capacity; +20 Convert Amount; +50% Loot Luck.",
+        "progressionNote": "Given by Sun Bear on his first visit after the Snag a Belt Bag quest. +25,000 Capacity; +20 Convert Amount; +50% Loot Luck.",
+        "cardSummary": "Belt Bag is a belt with +25,000 Capacity; +20 Convert Amount; +50% Loot Luck."
+      },
+      "system": {
+        "slug": "belt-bag",
+        "section": "Belts",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/belt-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Belt Pocket",
+        "slot": "Belt",
+        "category": "Belts",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "14,000 Honey and 10 Sunflower Seeds.",
+        "materials": "14,000 Honey and 10 Sunflower Seeds.",
+        "effect": "+5,000 Capacity; +10 Convert Amount; +25% Loot Luck.",
+        "progressionNote": "+5,000 Capacity; +10 Convert Amount; +25% Loot Luck.",
+        "cardSummary": "Belt Pocket is a belt with +5,000 Capacity; +10 Convert Amount; +25% Loot Luck."
+      },
+      "system": {
+        "slug": "belt-pocket",
+        "section": "Belts",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/belt-pocket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coconut Belt",
+        "slot": "Belt",
+        "category": "Belts",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "7.5 Trillion Honey, 500 Coconuts, 1500 Tropical Drinks, 200 Purple Potions, 200 Hard Wax, 3 Turpentine, 3 Refreshing Vials",
+        "materials": ", 500 Coconuts, 1500 Tropical Drinks, 200 Purple Potions, 200 Hard Wax, 3 Turpentine, 3 Refreshing Vials",
+        "effect": "+350,000 Capacity; +75% Capacity; +120 Convert Amount; +102% Loot Luck; +100% Honey From Tokens; x1.1 Coconut Field Pollen; +10% Gifted Bee Pollen; +1 Bee Attack; +Passive: Petal Storm (Needs Petal Belt); +Passive: Combo Coconuts.",
+        "progressionNote": "+350,000 Capacity; +75% Capacity; +120 Convert Amount; +102% Loot Luck; +100% Honey From Tokens; x1.1 Coconut Field Pollen; +10% Gifted Bee Pollen; +1 Bee Attack; +Passive: Petal Storm (Needs Petal Belt); +Passive: Combo Coconuts.",
+        "cardSummary": "Coconut Belt is a belt with +350,000 Capacity; +75% Capacity; +120 Convert Amount; +102% Loot Luck; +100% Honey From Tokens; x1.1 Coconut Field Pollen; +10% Gifted Bee Pollen; +1 Bee Attack; +Passive: Petal Storm (Needs Petal Belt); +Passive: Combo Coconuts."
+      },
+      "system": {
+        "slug": "coconut-belt",
+        "section": "Belts",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/coconut-belt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Honeycomb Belt",
+        "slot": "Belt",
+        "category": "Belts",
+        "availability": "Named equipment",
+        "acquisition": "Available from the Honeycomb Belt shop.",
+        "cost": "75,000,000 Honey, 50 Enzymes, 50 Glue, and 25 Oil.",
+        "materials": "75,000,000 Honey, 50 Enzymes, 50 Glue, and 25 Oil.",
+        "effect": "+150,000 Capacity; +25% Capacity; +75 Convert Amount; +100% Loot Luck; +20% Buzz Bomb Pollen; +50% Honey From Tokens; +1 Colorless Bee Attack.",
+        "progressionNote": "Available from the Honeycomb Belt shop. +150,000 Capacity; +25% Capacity; +75 Convert Amount; +100% Loot Luck; +20% Buzz Bomb Pollen; +50% Honey From Tokens; +1 Colorless Bee Attack.",
+        "cardSummary": "Honeycomb Belt is a belt with +150,000 Capacity; +25% Capacity; +75 Convert Amount; +100% Loot Luck; +20% Buzz Bomb Pollen; +50% Honey From Tokens; +1 Colorless Bee Attack."
+      },
+      "system": {
+        "slug": "honeycomb-belt",
+        "section": "Belts",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/honeycomb-belt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mondo Belt Bag",
+        "slot": "Belt",
+        "category": "Belts",
+        "availability": "Named equipment",
+        "acquisition": "Before the 2018-11-25 update, the Mondo Belt Bag didn't require stingers, pineapples, or sunflower seeds to be purchased.",
+        "cost": "12,400,000 Honey, 1 Soft Wax, 150 Pineapples, 150 Sunflower Seeds, and 10 Stingers.",
+        "materials": "12,400,000 Honey, 1 Soft Wax, 150 Pineapples, 150 Sunflower Seeds, and 10 Stingers.",
+        "effect": "+100,000 Capacity; +50 Convert Amount; +75% Loot Luck.",
+        "progressionNote": "Before the 2018-11-25 update, the Mondo Belt Bag didn't require stingers, pineapples, or sunflower seeds to be purchased. +100,000 Capacity; +50 Convert Amount; +75% Loot Luck.",
+        "cardSummary": "Mondo Belt Bag is a belt with +100,000 Capacity; +50 Convert Amount; +75% Loot Luck."
+      },
+      "system": {
+        "slug": "mondo-belt-bag",
+        "section": "Belts",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/mondo-belt-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Petal Belt",
+        "slot": "Belt",
+        "category": "Belts",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "15,000,000,000 Honey, 1 Spirit Petal, 25 Star Jellies, 50 Glitter, and 100 Glue.",
+        "materials": "15,000,000,000 Honey, 1 Spirit Petal, 25 Star Jellies, 50 Glitter, and 100 Glue.",
+        "effect": "+250,000 Capacity; +50% Capacity; +100 Convert Amount; +101% Loot Luck; +75% Honey From Tokens; +30% Buzz Bomb Pollen; +1 Colorless Bee Attack; +Passive: Petal Storm.",
+        "progressionNote": "+250,000 Capacity; +50% Capacity; +100 Convert Amount; +101% Loot Luck; +75% Honey From Tokens; +30% Buzz Bomb Pollen; +1 Colorless Bee Attack; +Passive: Petal Storm.",
+        "cardSummary": "Petal Belt is a belt with +250,000 Capacity; +50% Capacity; +100 Convert Amount; +101% Loot Luck; +75% Honey From Tokens; +30% Buzz Bomb Pollen; +1 Colorless Bee Attack; +Passive: Petal Storm."
+      },
+      "system": {
+        "slug": "petal-belt",
+        "section": "Belts",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/petal-belt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Basic Boots",
+        "slot": "Boots",
+        "category": "Boots",
+        "availability": "Named equipment",
+        "acquisition": "Basic Boots can be bought from the Noob Shop.",
+        "cost": "4,400 Honey, 3 Sunflower Seeds, and 3 Blueberries.",
+        "materials": "4,400 Honey, 3 Sunflower Seeds, and 3 Blueberries.",
+        "effect": "+4 Player Movespeed; +2 Movement Collection.",
+        "progressionNote": "Basic Boots can be bought from the Noob Shop. +4 Player Movespeed; +2 Movement Collection.",
+        "cardSummary": "Basic Boots is a pair of boots with +4 Player Movespeed; +2 Movement Collection."
+      },
+      "system": {
+        "slug": "basic-boots",
+        "section": "Boots",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/basic-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beekeeper's Boots",
+        "slot": "Boots",
+        "category": "Boots",
+        "availability": "Named equipment",
+        "acquisition": "The Beekeeper's Boots can be bought at the Mountain Top Shop for 15 million honey.",
+        "cost": "15,000,000 Honey, 5 Oil, 3 Red Extracts, and 3 Blue Extracts.",
+        "materials": "15,000,000 Honey, 5 Oil, 3 Red Extracts, and 3 Blue Extracts.",
+        "effect": "+25% Bee Gather Pollen; +6 Player Movespeed; +20 Jump Power; +10 Movement Collection; +1 Bee Attack.",
+        "progressionNote": "The Beekeeper's Boots can be bought at the Mountain Top Shop for 15 million honey. +25% Bee Gather Pollen; +6 Player Movespeed; +20 Jump Power; +10 Movement Collection; +1 Bee Attack.",
+        "cardSummary": "Beekeeper's Boots is a pair of boots with +25% Bee Gather Pollen; +6 Player Movespeed; +20 Jump Power; +10 Movement Collection; +1 Bee Attack."
+      },
+      "system": {
+        "slug": "beekeeper-s-boots",
+        "section": "Boots",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/beekeeper-s-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coconut Clogs",
+        "slot": "Boots",
+        "category": "Boots",
+        "availability": "Named equipment",
+        "acquisition": "The Coconut Clogs are a pair of boots that can be purchased in the Coconut Cave.",
+        "cost": "10,000,000,000 Honey, 150 Coconuts, 50 Tropical Drinks, 100 Glue, 100 Oil and 1 Refreshing Vial.",
+        "materials": "10,000,000,000 Honey, 150 Coconuts, 50 Tropical Drinks, 100 Glue, 100 Oil and 1 Refreshing Vial.",
+        "effect": "+15% Pollen; x1.15 Coconut Field Pollen; +25% Honey From Tokens; +2 Bee Attack; +7 Player Movespeed; +22 Jump Power; +14 Movement Collection; +Passive: Coconut Haste.",
+        "progressionNote": "The Coconut Clogs are a pair of boots that can be purchased in the Coconut Cave. +15% Pollen; x1.15 Coconut Field Pollen; +25% Honey From Tokens; +2 Bee Attack; +7 Player Movespeed; +22 Jump Power; +14 Movement Collection; +Passive: Coconut Haste.",
+        "cardSummary": "Coconut Clogs is a pair of boots with +15% Pollen; x1.15 Coconut Field Pollen; +25% Honey From Tokens; +2 Bee Attack; +7 Player Movespeed; +22 Jump Power; +14 Movement Collection; +Passive: Coconut Haste."
+      },
+      "system": {
+        "slug": "coconut-clogs",
+        "section": "Boots",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/coconut-clogs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gummy Boots",
+        "slot": "Boots",
+        "category": "Boots",
+        "availability": "Seasonal equipment",
+        "acquisition": "These boots can be bought in the Gummy Bear's Lair.",
+        "cost": "100,000,000,000 Honey; \n500 Glue; \n250 Glitter; \n250 Red Extracts; \n250 Blue Extracts; \n1 Motivating Vial; \nand 1 Satisfying Vial",
+        "materials": "100,000,000,000 Honey; 500 Glue; 250 Glitter; 250 Red Extracts; 250 Blue Extracts; 1 Motivating Vial; and 1 Satisfying Vial",
+        "effect": "+25% Goo; +20% Pollen; +50% Honey From Tokens; +3 Bee Attack; +9 Player Movespeed; +22 Jump Power; +16 Movement Collection; +Passive: Coconut Haste; +Passive: Goo Trail.",
+        "progressionNote": "These boots can be bought in the Gummy Bear's Lair. +25% Goo; +20% Pollen; +50% Honey From Tokens; +3 Bee Attack; +9 Player Movespeed; +22 Jump Power; +16 Movement Collection; +Passive: Coconut Haste; +Passive: Goo Trail.",
+        "cardSummary": "Gummy Boots is a pair of boots with +25% Goo; +20% Pollen; +50% Honey From Tokens; +3 Bee Attack; +9 Player Movespeed; +22 Jump Power; +16 Movement Collection; +Passive: Coconut Haste; +Passive: Goo Trail."
+      },
+      "system": {
+        "slug": "gummy-boots",
+        "section": "Boots",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/gummy-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hiking Boots",
+        "slot": "Boots",
+        "category": "Boots",
+        "availability": "Named equipment",
+        "acquisition": "Hiking Boots can be bought from the Pro Shop.",
+        "cost": "2,200,000 Honey, 50 Strawberries, and 50 Blueberries.",
+        "materials": "2,200,000 Honey, 50 Strawberries, and 50 Blueberries.",
+        "effect": "+5 Player Movespeed; +10 Jump Power; +6 Movement Collection; +1 Bee Attack.",
+        "progressionNote": "Hiking Boots can be bought from the Pro Shop. +5 Player Movespeed; +10 Jump Power; +6 Movement Collection; +1 Bee Attack.",
+        "cardSummary": "Hiking Boots is a pair of boots with +5 Player Movespeed; +10 Jump Power; +6 Movement Collection; +1 Bee Attack."
+      },
+      "system": {
+        "slug": "hiking-boots",
+        "section": "Boots",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/hiking-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": "The source identifies it as the cheapest item in its shop.",
+        "cost": "1,000,000 Honey, 50 Blueberries, 1 Royal Jelly, and 3 Moon Charms.",
+        "materials": "1,000,000 Honey, 50 Blueberries, 1 Royal Jelly, and 3 Moon Charms.",
+        "effect": "+25,000 Capacity; +15% Blue Pollen; +5% Defense; +1 Blue Bee Attack.",
+        "progressionNote": "The source identifies it as the cheapest item in its shop. +25,000 Capacity; +15% Blue Pollen; +5% Defense; +1 Blue Bee Attack.",
+        "cardSummary": "Blue Guard is a guard with +25,000 Capacity; +15% Blue Pollen; +5% Defense; +1 Blue Bee Attack."
+      },
+      "system": {
+        "slug": "blue-guard",
+        "section": "Guards",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/blue-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bomber Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "300,000 Honey and 25 Sunflower Seeds.",
+        "materials": "300,000 Honey and 25 Sunflower Seeds.",
+        "effect": "+15,000 Capacity; +5% White Pollen; +15% Bomb Pollen.",
+        "progressionNote": "+15,000 Capacity; +5% White Pollen; +15% Bomb Pollen.",
+        "cardSummary": "Bomber Guard is a guard with +15,000 Capacity; +5% White Pollen; +15% Bomb Pollen."
+      },
+      "system": {
+        "slug": "bomber-guard",
+        "section": "Guards",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/bomber-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brave Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "300,000 Honey and 3 Stingers.",
+        "materials": "300,000 Honey and 3 Stingers.",
+        "effect": "+15,000 Capacity; +5% White Pollen; +1 Colorless Bee Attack.",
+        "progressionNote": "+15,000 Capacity; +5% White Pollen; +1 Colorless Bee Attack.",
+        "cardSummary": "Brave Guard is a guard with +15,000 Capacity; +5% White Pollen; +1 Colorless Bee Attack."
+      },
+      "system": {
+        "slug": "brave-guard",
+        "section": "Guards",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/brave-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bucko Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "30,000,000 Honey, 10 Blue Extracts, 100 Blueberries, 5 Glue, and 75 Moon Charms.",
+        "materials": "30,000,000 Honey, 10 Blue Extracts, 100 Blueberries, 5 Glue, and 75 Moon Charms.",
+        "effect": "+150,000 Capacity; +35% Blue Pollen; +10% Defense; +75% Critical Power; +2 Blue Bee Attack.",
+        "progressionNote": "+150,000 Capacity; +35% Blue Pollen; +10% Defense; +75% Critical Power; +2 Blue Bee Attack.",
+        "cardSummary": "Bucko Guard is a guard with +150,000 Capacity; +35% Blue Pollen; +10% Defense; +75% Critical Power; +2 Blue Bee Attack."
+      },
+      "system": {
+        "slug": "bucko-guard",
+        "section": "Guards",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/bucko-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cobalt Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "200,000,000 Honey, 100 Blue Extracts, 100 Stingers, 50 Enzymes, and 25 Glitter.",
+        "materials": "200,000,000 Honey, 100 Blue Extracts, 100 Stingers, 50 Enzymes, and 25 Glitter.",
+        "effect": "+250,000 Capacity; +50% Blue Pollen; +20% Blue Bomb Pollen; +3 Blue Bee Attack; +10% Defense; +100% Critical Power; +Passive: Haste Pulser.",
+        "progressionNote": "+250,000 Capacity; +50% Blue Pollen; +20% Blue Bomb Pollen; +3 Blue Bee Attack; +10% Defense; +100% Critical Power; +Passive: Haste Pulser.",
+        "cardSummary": "Cobalt Guard is a guard with +250,000 Capacity; +50% Blue Pollen; +20% Blue Bomb Pollen; +3 Blue Bee Attack; +10% Defense; +100% Critical Power; +Passive: Haste Pulser."
+      },
+      "system": {
+        "slug": "cobalt-guard",
+        "section": "Guards",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/cobalt-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": "Crimson Guard is the only red guard that cannot be purchased in the Red HQ.",
+        "cost": "200,000,000 Honey, 100 Red Extracts, 100 Stingers, 50 Oil, and 25 Glitter.",
+        "materials": "200,000,000 Honey, 100 Red Extracts, 100 Stingers, 50 Oil, and 25 Glitter.",
+        "effect": "+250,000 Capacity; +50% Red Pollen; +20% Red Bomb Pollen; +3 Red Bee Attack; +10% Defense; +10% Critical Chance; +Passive: Focus Pulser.",
+        "progressionNote": "Crimson Guard is the only red guard that cannot be purchased in the Red HQ. +250,000 Capacity; +50% Red Pollen; +20% Red Bomb Pollen; +3 Red Bee Attack; +10% Defense; +10% Critical Chance; +Passive: Focus Pulser.",
+        "cardSummary": "Crimson Guard is a guard with +250,000 Capacity; +50% Red Pollen; +20% Red Bomb Pollen; +3 Red Bee Attack; +10% Defense; +10% Critical Chance; +Passive: Focus Pulser."
+      },
+      "system": {
+        "slug": "crimson-guard",
+        "section": "Guards",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/crimson-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Blue Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": "Elite Blue Guard is one of three guards sold in the Blue HQ, alongside Blue Guard and Bucko Guard.",
+        "cost": "5,000,000 Honey, 3 Blue Extracts, 50 Blueberries, 5 Royal Jellies, and 15 Moon Charms.",
+        "materials": "5,000,000 Honey, 3 Blue Extracts, 50 Blueberries, 5 Royal Jellies, and 15 Moon Charms.",
+        "effect": "+75,000 Capacity; +25% Blue Pollen; +7% Defense; +50% Critical Power; +1 Blue Bee Attack.",
+        "progressionNote": "Elite Blue Guard is one of three guards sold in the Blue HQ, alongside Blue Guard and Bucko Guard. +75,000 Capacity; +25% Blue Pollen; +7% Defense; +50% Critical Power; +1 Blue Bee Attack.",
+        "cardSummary": "Elite Blue Guard is a guard with +75,000 Capacity; +25% Blue Pollen; +7% Defense; +50% Critical Power; +1 Blue Bee Attack."
+      },
+      "system": {
+        "slug": "elite-blue-guard",
+        "section": "Guards",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/elite-blue-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Red Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": "Elite Red Guard is one of three guards sold in the Red HQ, alongside Red Guard and Riley Guard.",
+        "cost": "5,000,000 Honey, 3 Red Extracts, 50 Strawberries, 5 Royal Jelly, and 5 Stingers.",
+        "materials": "5,000,000 Honey, 3 Red Extracts, 50 Strawberries, 5 Royal Jelly, and 5 Stingers.",
+        "effect": "+75,000 Capacity; +25% Red Pollen; +7% Defense; +5% Critical Chance; +1 Red Bee Attack.",
+        "progressionNote": "Elite Red Guard is one of three guards sold in the Red HQ, alongside Red Guard and Riley Guard. +75,000 Capacity; +25% Red Pollen; +7% Defense; +5% Critical Chance; +1 Red Bee Attack.",
+        "cardSummary": "Elite Red Guard is a guard with +75,000 Capacity; +25% Red Pollen; +7% Defense; +5% Critical Chance; +1 Red Bee Attack."
+      },
+      "system": {
+        "slug": "elite-red-guard",
+        "section": "Guards",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/elite-red-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hasty Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": null,
+        "cost": "300,000 Honey and 5 Moon Charms.",
+        "materials": "300,000 Honey and 5 Moon Charms.",
+        "effect": "+15,000 Capacity; +1% Bee Movespeed; x1.1 Player Movespeed.",
+        "progressionNote": "+15,000 Capacity; +1% Bee Movespeed; x1.1 Player Movespeed.",
+        "cardSummary": "Hasty Guard is a guard with +15,000 Capacity; +1% Bee Movespeed; x1.1 Player Movespeed."
+      },
+      "system": {
+        "slug": "hasty-guard",
+        "section": "Guards",
+        "sortOrder": 9,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/hasty-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Looker Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": "The Looker Guard is a guard that can be purchased in the Pro Shop.",
+        "cost": "300,000 Honey and 25 Sunflower Seeds.",
+        "materials": "300,000 Honey and 25 Sunflower Seeds.",
+        "effect": "+15,000 Capacity; +1% Critical Chance; +25% Critical Power.",
+        "progressionNote": "The Looker Guard is a guard that can be purchased in the Pro Shop. +15,000 Capacity; +1% Critical Chance; +25% Critical Power.",
+        "cardSummary": "Looker Guard is a guard with +15,000 Capacity; +1% Critical Chance; +25% Critical Power."
+      },
+      "system": {
+        "slug": "looker-guard",
+        "section": "Guards",
+        "sortOrder": 10,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/looker-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": "Red Guard is one of three guards sold in the Red HQ, alongside Elite Red Guard and Riley Guard.",
+        "cost": "750,000 Honey, 50 Strawberries, 1 Royal Jelly, and 1 Stinger.",
+        "materials": "750,000 Honey, 50 Strawberries, 1 Royal Jelly, and 1 Stinger.",
+        "effect": "+25,000 Capacity; +15% Red Pollen; +5% Defense; +1 Red Bee Attack.",
+        "progressionNote": "Red Guard is one of three guards sold in the Red HQ, alongside Elite Red Guard and Riley Guard. +25,000 Capacity; +15% Red Pollen; +5% Defense; +1 Red Bee Attack.",
+        "cardSummary": "Red Guard is a guard with +25,000 Capacity; +15% Red Pollen; +5% Defense; +1 Red Bee Attack."
+      },
+      "system": {
+        "slug": "red-guard",
+        "section": "Guards",
+        "sortOrder": 11,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/red-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Riley Guard",
+        "slot": "Guard",
+        "category": "Guards",
+        "availability": "Named equipment",
+        "acquisition": "Riley Guard is one of three guards sold in the Red HQ, alongside Elite Red Guard and Red Guard.",
+        "cost": "30,000,000 Honey, 10 Red Extracts, 100 Strawberries, 5 Glue, and 25 Stingers.",
+        "materials": "30,000,000 Honey, 10 Red Extracts, 100 Strawberries, 5 Glue, and 25 Stingers.",
+        "effect": "+150,000 Capacity; +35% Red Pollen; +10% Defense; +8% Critical Chance; +2 Red Bee Attack.",
+        "progressionNote": "Riley Guard is one of three guards sold in the Red HQ, alongside Elite Red Guard and Red Guard. +150,000 Capacity; +35% Red Pollen; +10% Defense; +8% Critical Chance; +2 Red Bee Attack.",
+        "cardSummary": "Riley Guard is a guard with +150,000 Capacity; +35% Red Pollen; +10% Defense; +8% Critical Chance; +2 Red Bee Attack."
+      },
+      "system": {
+        "slug": "riley-guard",
+        "section": "Guards",
+        "sortOrder": 12,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/riley-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Named equipment",
+        "acquisition": "Obtained by completing certain special challenges.",
+        "cost": null,
+        "materials": null,
+        "effect": "Grants buffs to the player or their bees.",
+        "progressionNote": null,
+        "cardSummary": "Amulets are obtained by completing certain special challenges and grant buffs to the player or their bees."
+      },
+      "system": {
+        "slug": "amulet",
+        "section": "Amulets",
+        "sortOrder": 1,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/amulet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ant Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Named equipment",
+        "acquisition": "Obtained by participating in the Ant Challenge.",
+        "cost": "Requirement(s); Amulet; 0-24 Points in the Ant Challenge",
+        "materials": "Requirement(s); Amulet; 0-24 Points in the Ant Challenge",
+        "effect": null,
+        "progressionNote": null,
+        "cardSummary": "Ant Amulet is obtained by participating in the Ant Challenge."
+      },
+      "system": {
+        "slug": "ant-amulet",
+        "section": "Amulets",
+        "sortOrder": 2,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/ant-amulet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cog Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Named equipment",
+        "acquisition": "Obtained from the Robo Bear Challenge.",
+        "cost": null,
+        "materials": null,
+        "effect": null,
+        "progressionNote": null,
+        "cardSummary": "Cog Amulet is obtained from the Robo Bear Challenge."
+      },
+      "system": {
+        "slug": "cog-amulet",
+        "section": "Amulets",
+        "sortOrder": 3,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/cog-amulet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "King Beetle Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Named equipment",
+        "acquisition": "Has a 1/7 chance to drop when King Beetle is defeated.",
+        "cost": null,
+        "materials": null,
+        "effect": null,
+        "progressionNote": null,
+        "cardSummary": "King Beetle Amulet has a 1/7 chance to drop when King Beetle is defeated."
+      },
+      "system": {
+        "slug": "king-beetle-amulet",
+        "section": "Amulets",
+        "sortOrder": 4,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/king-beetle-amulet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moon Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Named equipment",
+        "acquisition": "Created by spending 100 Moon Charms at the Moon Amulet Generator.",
+        "cost": null,
+        "materials": null,
+        "effect": "Its quality improves linearly as you generate Moon Amulets, up to 40 generated.",
+        "progressionNote": null,
+        "cardSummary": "Moon Amulet is created with 100 Moon Charms at the Moon Amulet Generator, and its quality improves as you generate more, up to 40."
+      },
+      "system": {
+        "slug": "moon-amulet",
+        "section": "Amulets",
+        "sortOrder": 5,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/moon-amulet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shell Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Named equipment",
+        "acquisition": "Awarded for defeating Stump Snail in Stump Field.",
+        "cost": null,
+        "materials": null,
+        "effect": null,
+        "progressionNote": null,
+        "cardSummary": "Shell Amulet is awarded for defeating Stump Snail in Stump Field."
+      },
+      "system": {
+        "slug": "shell-amulet",
+        "section": "Amulets",
+        "sortOrder": 6,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/shell-amulet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Seasonal equipment",
+        "acquisition": "Purchased in five different tiers from machines in the Star Hall.",
+        "cost": "Requirement(s); Amulet; 5 Gifted Bee types discovered, costs 25M honey",
+        "materials": "Requirement(s); Amulet; 5 Gifted Bee types discovered, costs 25M honey",
+        "effect": null,
+        "progressionNote": null,
+        "cardSummary": "Star Amulet can be purchased in five different tiers from machines in the Star Hall."
+      },
+      "system": {
+        "slug": "star-amulet",
+        "section": "Amulets",
+        "sortOrder": 7,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/star-amulet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stick Bug Amulet",
+        "slot": "Amulet",
+        "category": "Amulets",
+        "availability": "Named equipment",
+        "acquisition": "Obtained from the Stick Bug Challenge.",
+        "cost": null,
+        "materials": null,
+        "effect": null,
+        "progressionNote": null,
+        "cardSummary": "Stick Bug Amulet is obtained from the Stick Bug Challenge."
+      },
+      "system": {
+        "slug": "stick-bug-amulet",
+        "section": "Amulets",
+        "sortOrder": 8,
+        "image": "/Bee%20Swarm%20Simulator/Equipment/stick-bug-amulet.webp"
+      }
+    }
+  ]
+}
