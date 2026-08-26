@@ -1,8 +1,8 @@
 # Homelab
 
-Status: Full-capability checkout healthy; Codex/Pi Luna Max article automation verified live
-Last verified: 2026-08-25
-Evidence: guarded synchronization to production SHA `61e4176f6c713e9a97ebde21fdda81fdc2fabb73`, clean checkout, systemd timer/service state, Codex/Pi readiness, live Pi exact-response canary, one full managed-development article canary, and a live Groq curation retry
+Status: Full-capability checkout healthy; exact-ID post-model article release installed and ready
+Last verified: 2026-08-26
+Evidence: guarded synchronization of automation commit `05b52b9e954abe6e02f7eb8137ca64fb329e82b7`, clean checkout, unchanged systemd units, validated production release target, Codex/Pi Luna Max readiness, browser readiness, and the earlier live article/curation canaries
 
 ## Host
 
@@ -11,7 +11,7 @@ Evidence: guarded synchronization to production SHA `61e4176f6c713e9a97ebde21fdd
 - CPU: 4 logical CPUs.
 - Memory: 7.7 GiB; 2 GiB swap nearly full at check time.
 - Root disk: 117 GB, 41% used.
-- Repository: `/home/teja/projects/Bloxodes`, clean `production` synchronized to approved production SHA `61e4176f6c713e9a97ebde21fdda81fdc2fabb73` on 2026-08-25.
+- Repository: `/home/teja/projects/Bloxodes`, clean `production` synchronized through the guarded exact-SHA path on 2026-08-26.
 
 ## Services
 
@@ -31,7 +31,7 @@ The interactive homelab checkout also contains the complete ignored private `.en
 - Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. An explicit e2e/end-to-end release authorizes this guarded checkout synchronization for every release, including releases that do not change homelab-owned files.
 - `scripts/ops/install-homelab-article-automation.sh --apply <full-sha>` installs reviewed units only from an exact clean approved checkout and preserves the timer state.
 - `scripts/ops/install-homelab-pi-writer.sh --apply <full-sha>` installs the pinned Pi package into `/home/teja/.local` from an exact clean approved checkout without touching credentials.
-- The checkout synchronization command was applied and verified against `61e4176f6c713e9a97ebde21fdda81fdc2fabb73` on 2026-08-25. The discovery timer remained enabled and active; discovery and writer services were inactive with no failed marker after verification. The installer remains available for reviewed unit-file changes; do not run it when synchronization alone proves the installed units already match.
+- The checkout synchronization command was applied and full readiness passed after automation commit `05b52b9e954abe6e02f7eb8137ca64fb329e82b7` on 2026-08-26. The timer state was not changed, and the installed discovery/writer units matched the approved checkout. The installer remains available for reviewed unit-file changes; do not run it when synchronization alone proves the installed units already match.
 
 ## Live Article Canary
 

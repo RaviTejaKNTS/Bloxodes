@@ -2,7 +2,7 @@
 
 Status: Codex Luna Max research/review, isolated Pi Luna Max prose, and exact-row automated release implemented
 Last verified: 2026-08-26
-Evidence: code and tests, guarded production/homelab exact-SHA synchronization, live Codex/Pi readiness and canaries, full managed-development article verification including image-response readback, rendered browser preview, production copy audit, and Groq curation replay
+Evidence: code and 31 focused tests, exact-ID release dry run against a published queue row, healthy exact-SHA production deployment, guarded homelab synchronization and full readiness, plus the earlier Codex/Pi article, image-response, rendered-preview, copy-audit, and Groq curation canaries
 
 ## Stages
 

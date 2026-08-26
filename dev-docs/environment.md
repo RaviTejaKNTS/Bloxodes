@@ -1,8 +1,8 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-08-19
-Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on both the workstation and homelab on 2026-08-19
+Last verified: 2026-08-26
+Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, workstation `env:doctor`/`env:check`, and homelab validation of the managed-development runtime plus guarded production release target
 
 ## Storage Model
 
