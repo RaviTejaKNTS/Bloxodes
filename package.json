@@ -71,6 +71,7 @@
     "articles:queue:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-queue.ts",
     "articles:queue:update": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/update-article-queue-item.ts",
     "articles:review:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-release-review.ts",
+    "articles:release": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/release-completed-articles.ts",
     "test:article-queue": "node --import tsx --test scripts/articles/__tests__/*.test.ts",
     "articles:writer:batch": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-homelab-article-batch.ts",
     "articles:writer:pi": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-pi-article-writer.ts",

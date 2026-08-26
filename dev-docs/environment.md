@@ -68,6 +68,7 @@ For a workstation command that intentionally targets production, set both `BLOXO
 - Shared application contains cross-target web/auth settings, including the public GA measurement ID used by workstation builds. Public production analytics IDs are injected by GitHub/Dokploy. `ADMIN_API_TOKEN` also lives here: it enables `/api/admin/*` for the personal `apps/admin-extension`; leaving it unset disables those routes, and the production value is set only on the Dokploy runtime service.
 - Integrations contain content research/generation and distribution providers.
 - Pipelines contain workload-specific credentials and controls.
+- The article pipeline owns `ARTICLE_AUTO_PUBLISH` and the release polling/path controls. The path may point to ignored `.envs/targets/production.env`; its values remain target-owned and are parsed only by the post-model release parent.
 - Infrastructure contains operator access for one platform.
 - `operations/analytics.env` owns GA4 account/property, Search Console, Bing Webmaster, and Google OAuth operator values. It must contain neither Umami values nor duplicated `NEXT_PUBLIC_*` web configuration.
 - `operations/umami.env` exclusively owns the self-hosted Umami operator username, password, and canonical `UMAMI_WEBSITE_ID`. Production web builds receive the public `NEXT_PUBLIC_UMAMI_HOST_URL` and matching `NEXT_PUBLIC_UMAMI_WEBSITE_ID` from GitHub/Dokploy rather than loading operator credentials.
@@ -87,7 +88,7 @@ The homelab checkout mirrors the complete private `.envs/` profile tree for feat
 - Local Compose web build/runtime: the same production profile is assembled from shared application, content integrations, distribution integrations, and the production target. Build inputs use four BuildKit secret mounts because `.envs/` is excluded from the Docker context; runtime uses the same four `env_file` entries.
 - Dokploy runtime: application secrets are configured on the deployed service.
 - VPS worker: `/home/codex-admin/bloxodes-stats-worker/env.stats-worker`, mode 600.
-- Homelab: `/etc/bloxodes/article-automation.env`, root-owned, group-readable by the service group, mode 640.
+- Homelab: `/etc/bloxodes/article-automation.env`, root-owned, group-readable by the service group, mode 640. It contains managed-development writer values and release controls, but no production Supabase credential.
 - Homelab model authentication: the `teja` service account's protected Codex home plus `/home/teja/.pi/agent/auth.json` for Pi's independent ChatGPT Plus/Pro login, never the article env file. Treat both as passwords and never copy them between hosts. The article env owns only binary paths, the hard-pinned Luna Max provider/model/reasoning settings, timeouts, and queue controls.
 - Self-hosted Supabase: `/home/codex-admin/bloxodes-supabase/.env`; do not copy this full vendor/runtime contract into the repository.
 
@@ -102,4 +103,5 @@ The migration preserves these remaining old names: `HOSTINGER_Token` and `Northf
 - Never expose `SUPABASE_SERVICE_ROLE` or `sb_secret_*` to browser/mobile/extension code.
 - `NEXT_PUBLIC_*` and Expo public variables are client-visible.
 - Production-capable scripts must retain URL/host guards and explicit allow-production flags.
+- Automated article release must sanitize inherited managed-development variables before spawning production commands and must load the production target only after all model processes have exited.
 - A profile name is not authorization; command-specific write safeguards still apply.

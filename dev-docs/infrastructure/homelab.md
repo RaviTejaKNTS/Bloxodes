@@ -17,13 +17,13 @@ Evidence: guarded synchronization to production SHA `61e4176f6c713e9a97ebde21fdd
 
 - `bloxodes-article-discovery.timer`: enabled, active, runs at 00:00/06:00/12:00/18:00 local time with persistence.
 - `bloxodes-article-discovery.service`: runs readiness, discovery, and Groq curation. A 2026-08-25 scheduled run discovered two rows but Groq rejected its 8,017-token curation request against an 8,000-token cap. The released retry reduced `max_tokens` to 2,707, completed the same 12-candidate curation at 7,679 total tokens, and left the service ready for the next timer run.
-- `bloxodes-article-writer.service`: triggered after successful discovery; readiness requires authenticated Codex and Pi CLIs, both pinned to GPT-5.6 Luna at max reasoning, then a tiny live Pi exact-response canary must pass before the queue batch starts. Codex owns research/images/review, while Pi owns prose.
+- `bloxodes-article-writer.service`: triggered after successful discovery; readiness requires authenticated Codex and Pi CLIs, both pinned to GPT-5.6 Luna at max reasoning, then a tiny live Pi exact-response canary must pass before the queue batch starts. Codex owns research/images/review, while Pi owns prose. After the model process exits, the wrapper releases only the exact queue rows completed by that batch and treats any release failure as a failed service run.
 
 Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`, mode 640. It contains managed-dev Supabase, media, production inventory, Groq curation, Codex/Pi model settings, and writer controls. Codex and Pi authentication belong to protected homes under the `teja` account and never to the env file.
 
 Codex resolves from `/home/teja/.local/bin/codex`. Pi is installed at `/home/teja/.local/bin/pi` with `scripts/ops/install-homelab-pi-writer.sh`; version 0.84.3 is pinned as the first verified release with the required `max` thinking flag. Pi authentication is created interactively as `teja` with `/login` → ChatGPT Plus/Pro and stored in `/home/teja/.pi/agent/auth.json`. Credentials are never copied between hosts. The authenticated Pi Luna Max exact-response canary passed on 2026-08-25.
 
-The interactive homelab checkout also contains the complete ignored private `.envs/` profile tree: managed development and production targets, shared application values, content/distribution integrations, article/indexing pipelines, analytics/Umami operations, infrastructure operator profiles, and the Google indexing service-account file. All project-private files are mode 600 with mode-700 parent directories. The systemd writer remains constrained to managed-development queue/media credentials through `/etc/bloxodes/article-automation.env`.
+The interactive homelab checkout also contains the complete ignored private `.envs/` profile tree: managed development and production targets, shared application values, content/distribution integrations, article/indexing pipelines, analytics/Umami operations, infrastructure operator profiles, and the Google indexing service-account file. All project-private files are mode 600 with mode-700 parent directories. The systemd env and every Codex/Pi child environment remain constrained to managed-development queue/media credentials. The post-model parent alone parses `.envs/targets/production.env` for the exact-ID release.
 
 ## Synchronization
 
@@ -40,9 +40,9 @@ The managed-development canary `grow-a-chicken-fighter-hot-egg-event-guide` comp
 ## Safety Boundary
 
 - Article queue writes target the managed-dev Supabase project.
-- Production is read only through the public editorial inventory endpoint during automated discovery/writing.
-- Human review/import is required before production publication.
+- Production is read only through the public editorial inventory endpoint during automated discovery/writing. Production credentials are never injected into the Codex or Pi process environment.
+- After the model process exits, the guarded release parent may write only the exact queue IDs completed by that batch. It promotes verified media, imports the row, syncs provenance, and requires strict database and live-page checks before marking it published.
 - The active article workflow never falls back to Grok or another model. A model/provider failure leaves the item retryable rather than weakening the model contract.
 - Homelab operator access belongs in `.envs/infrastructure/homelab.env`; writer runtime values belong in `.envs/pipelines/articles.env` and the host env file.
-- Never copy the production Supabase target into the homelab writer env; queue and media staging remain managed development.
+- Never copy the production Supabase target into the homelab systemd writer env; queue and media staging remain managed development. The release parent reads the ignored target file directly and sanitizes child environments.
 - E2e checkout-sync authority does not include env changes, unit installation, stopping active discovery/writer jobs, service restarts, or unrelated host mutations. If the production delta changes installed units, a service is active, or preflight fails, leave the checkout unchanged and report synchronization pending.

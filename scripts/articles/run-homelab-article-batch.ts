@@ -24,6 +24,7 @@ import { assertLunaMaxConfiguration } from "./pi-article-writer";
 
 type Options = {
   apply: boolean;
+  releaseCompleted: boolean;
   limit: number;
   timeoutMinutes: number;
   worktree: string;
@@ -37,6 +38,10 @@ type ProviderProcessResult = {
   exitCode: number;
   output: string;
   timedOut: boolean;
+};
+
+type CompletedQueueRow = {
+  id: string;
 };
 
 class ProviderProcessError extends Error {
@@ -65,6 +70,8 @@ function printUsage() {
 
 Options:
   --apply                    Run the Luna Max parent workflow; dry-run by default
+  --release-completed        Publish and verify exact rows completed by this batch (default)
+  --skip-production-release  Leave completed rows in managed dev for manual review
   --limit N                  Maximum queued articles, 1-6 (default: 6)
   --worktree PATH            Persistent Bloxodes worktree (default: current repo)
   --codex-bin PATH           Codex CLI path (default: ARTICLE_WRITER_CODEX_BIN or codex)
@@ -76,6 +83,14 @@ Options:
 
 The batch exits without invoking the parent when no curated pending queue rows exist.
 Research, images, and review run through Codex Luna Max. Article prose runs only through Pi Luna Max.`);
+}
+
+function parseBoolean(value: string | undefined, fallback: boolean, label: string): boolean {
+  if (value === undefined || value.trim() === "") return fallback;
+  const normalized = value.trim().toLowerCase();
+  if (["1", "true", "yes", "on"].includes(normalized)) return true;
+  if (["0", "false", "no", "off"].includes(normalized)) return false;
+  throw new Error(`${label} must be true or false.`);
 }
 
 function parseInteger(value: string | undefined, flag: string, minimum: number, maximum: number): number {
@@ -95,6 +110,7 @@ function requireValue(argv: string[], index: number, flag: string): string {
 function parseArgs(argv: string[]): Options {
   const options: Options = {
     apply: false,
+    releaseCompleted: parseBoolean(process.env.ARTICLE_AUTO_PUBLISH, true, "ARTICLE_AUTO_PUBLISH"),
     limit: parseInteger(
       process.env.ARTICLE_WRITER_BATCH_SIZE ?? String(MAX_BATCH_SIZE),
       "ARTICLE_WRITER_BATCH_SIZE",
@@ -125,6 +141,10 @@ function parseArgs(argv: string[]): Options {
       process.exit(0);
     } else if (arg === "--apply") {
       options.apply = true;
+    } else if (arg === "--release-completed") {
+      options.releaseCompleted = true;
+    } else if (arg === "--skip-production-release") {
+      options.releaseCompleted = false;
     } else if (arg === "--limit") {
       options.limit = parseInteger(requireValue(argv, index, arg), arg, 1, MAX_BATCH_SIZE);
       index += 1;
@@ -212,35 +232,45 @@ async function acquireWriterLock(worktree: string): Promise<(() => Promise<void>
   throw new Error(`Could not acquire article writer lock at ${lockPath}.`);
 }
 
-async function pendingQueueCount(dev: { url: string; serviceRole: string }): Promise<number> {
+async function pendingQueueSelection(
+  dev: { url: string; serviceRole: string },
+  limit: number
+): Promise<{ total: number; rows: CompletedQueueRow[] }> {
   const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
-  const { count, error } = await supabase
+  const { data, count, error } = await supabase
     .from("article_generation_queue")
-    .select("id", { count: "exact", head: true })
+    .select("id", { count: "exact" })
     .eq("workflow_mode", "agent_runner")
     .eq("status", "pending")
-    .not("curated_at", "is", null);
-  if (error) throw new Error(`Could not count pending article queue rows: ${error.message}`);
-  return count ?? 0;
+    .not("curated_at", "is", null)
+    .order("source_published_at", { ascending: false, nullsFirst: false })
+    .order("created_at", { ascending: true })
+    .limit(limit);
+  if (error) throw new Error(`Could not select pending article queue rows: ${error.message}`);
+  return { total: count ?? 0, rows: (data ?? []) as CompletedQueueRow[] };
 }
 
-async function completedQueueCountSince(
+async function completedQueueRowsSince(
   dev: { url: string; serviceRole: string },
-  startedAt: string
-): Promise<number> {
+  startedAt: string,
+  selectedIds: string[]
+): Promise<CompletedQueueRow[]> {
+  if (!selectedIds.length) return [];
   const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
-  const { count, error } = await supabase
+  const { data, error } = await supabase
     .from("article_generation_queue")
-    .select("id", { count: "exact", head: true })
+    .select("id")
     .eq("workflow_mode", "agent_runner")
     .eq("status", "completed")
-    .gte("completed_at", startedAt);
-  if (error) throw new Error(`Could not count articles completed by the current batch: ${error.message}`);
-  return count ?? 0;
+    .in("id", selectedIds)
+    .gte("completed_at", startedAt)
+    .order("completed_at", { ascending: true });
+  if (error) throw new Error(`Could not list articles completed by the current batch: ${error.message}`);
+  return (data ?? []) as CompletedQueueRow[];
 }
 
 async function recoverStaleBatchClaims(
@@ -405,6 +435,26 @@ async function runCodex(options: Options, targetCount: number, dev: { url: strin
   }
 }
 
+async function releaseCompletedArticles(options: Options, rows: CompletedQueueRow[]): Promise<void> {
+  const args = ["run", "articles:release", "--"];
+  for (const row of rows) args.push("--queue-id", row.id);
+  args.push("--apply", "--allow-prod");
+
+  await new Promise<void>((resolve, reject) => {
+    const child = spawn("npm", args, {
+      cwd: options.worktree,
+      env: process.env,
+      shell: false,
+      stdio: "inherit"
+    });
+    child.on("error", reject);
+    child.on("exit", (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`Automated article release exited with code ${code ?? "unknown"}.`));
+    });
+  });
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   assertLunaMaxConfiguration(options.codexModel, options.codexReasoningEffort, "Codex article workflow");
@@ -417,9 +467,9 @@ async function main() {
     if (retryResult.requeued) console.log(`Returned ${retryResult.requeued} due blocked article row(s) to pending.`);
     if (retryResult.failed) console.log(`Closed ${retryResult.failed} blocked article row(s) after max attempts.`);
   }
-  const pending = await pendingQueueCount(dev);
-  const targetCount = Math.min(options.limit, pending);
-  console.log(`Managed dev queue: ${pending} pending at ${supabaseTarget(dev.url)}; batch target ${targetCount}.`);
+  const selection = await pendingQueueSelection(dev, options.limit);
+  const targetCount = selection.rows.length;
+  console.log(`Managed dev queue: ${selection.total} pending at ${supabaseTarget(dev.url)}; batch target ${targetCount}.`);
 
   if (targetCount === 0) {
     console.log("No curated pending article rows; no writer was started.");
@@ -427,7 +477,7 @@ async function main() {
   }
   if (!options.apply) {
     console.log(
-      `Dry run: would start Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
+      `Dry run: would start Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s); production release ${options.releaseCompleted ? "enabled" : "disabled"}.`
     );
     return;
   }
@@ -443,11 +493,21 @@ async function main() {
     );
     const batchStartedAt = new Date().toISOString();
     await runCodex(options, targetCount, dev);
-    const completed = await completedQueueCountSince(dev, batchStartedAt);
-    if (completed === 0) {
+    const completed = await completedQueueRowsSince(
+      dev,
+      batchStartedAt,
+      selection.rows.map((row) => row.id)
+    );
+    if (completed.length === 0) {
       throw new Error("DEGRADED ARTICLE WRITER: A non-empty provider batch completed zero managed-dev articles.");
     }
-    console.log(`Article writer completed ${completed} managed-dev article(s).`);
+    console.log(`Article writer completed ${completed.length} managed-dev article(s).`);
+    if (options.releaseCompleted) {
+      console.log(`Releasing ${completed.length} exact queue row(s) to production after the model process exited.`);
+      await releaseCompletedArticles(options, completed);
+    } else {
+      console.log("Production release is disabled; completed rows remain in managed dev for manual review.");
+    }
   } finally {
     await releaseLock();
   }

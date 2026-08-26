@@ -8,6 +8,7 @@ import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 import { resolveArticleDevCredentials, supabaseTarget } from "../articles/article-queue-env";
+import { readProductionCredentials } from "../articles/release-completed-articles";
 import { parseCodexReasoningEffort } from "../articles/article-writer-provider";
 import {
   PI_WRITER_MODEL,
@@ -19,6 +20,14 @@ import {
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
 
 type Component = "all" | "discovery" | "writer";
+
+function autoPublishEnabled(): boolean {
+  const value = process.env.ARTICLE_AUTO_PUBLISH?.trim().toLowerCase();
+  if (!value) return true;
+  if (["1", "true", "yes", "on"].includes(value)) return true;
+  if (["0", "false", "no", "off"].includes(value)) return false;
+  throw new Error("ARTICLE_AUTO_PUBLISH must be true or false.");
+}
 
 function parseComponent(argv: string[]): Component {
   let component: Component = "all";
@@ -83,6 +92,15 @@ async function main() {
 
   if (component !== "discovery") {
     if (!process.env.SUPABASE_MEDIA_BUCKET?.trim()) throw new Error("SUPABASE_MEDIA_BUCKET is required for article media.");
+    if (autoPublishEnabled()) {
+      const productionEnvFile = path.resolve(
+        process.env.ARTICLE_RELEASE_PRODUCTION_ENV_FILE?.trim() || ".envs/targets/production.env"
+      );
+      await readProductionCredentials(productionEnvFile);
+      console.log(`Production release target: ${productionEnvFile} (validated)`);
+    } else {
+      console.log("Production release: disabled for manual review");
+    }
     const codexConfigured = process.env.ARTICLE_WRITER_CODEX_BIN?.trim();
     const codex = findExecutable(
       [codexConfigured || "", `${process.env.HOME ?? ""}/.local/bin/codex`, "codex"].filter(Boolean)
