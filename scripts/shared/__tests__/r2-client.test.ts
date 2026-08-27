@@ -50,3 +50,35 @@ test("signs an R2 object upload without exposing the secret", async () => {
   assert.equal(headers["x-amz-meta-width"], "512");
   assert.doesNotMatch(headers.authorization, /example-secret/);
 });
+
+test("retries transient R2 failures before succeeding", async () => {
+  let attempts = 0;
+  const delays: number[] = [];
+  const client = new R2Client(
+    {
+      endpoint: "https://account.r2.cloudflarestorage.com",
+      accessKeyId: "example-access",
+      secretAccessKey: "example-secret",
+      bucket: "bloxodes-wiki"
+    },
+    async () => {
+      attempts += 1;
+      return attempts === 1
+        ? new Response("temporary", { status: 500 })
+        : new Response(null, { status: 200 });
+    },
+    () => new Date("2026-08-27T12:34:56Z"),
+    async (delayMs) => {
+      delays.push(delayMs);
+    }
+  );
+
+  await client.putObject({
+    key: "123/retry.webp",
+    body: utf8Bytes("image"),
+    contentType: "image/webp"
+  });
+
+  assert.equal(attempts, 2);
+  assert.deepEqual(delays, [250]);
+});

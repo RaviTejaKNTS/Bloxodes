@@ -56,7 +56,9 @@ export class R2Client {
   constructor(
     private readonly config: R2ClientConfig,
     private readonly fetchImpl: typeof fetch = fetch,
-    private readonly now: () => Date = () => new Date()
+    private readonly now: () => Date = () => new Date(),
+    private readonly sleep: (delayMs: number) => Promise<void> = (delayMs) =>
+      new Promise((resolve) => setTimeout(resolve, delayMs))
   ) {}
 
   async putObject(input: PutR2ObjectInput) {
@@ -91,38 +93,44 @@ export class R2Client {
     const url = new URL(endpoint.toString());
     url.pathname = canonicalPath;
 
-    const timestamp = this.now().toISOString().replace(/[:-]|\.\d{3}/g, "");
-    const date = timestamp.slice(0, 8);
     const payloadHash = sha256(body);
-    const headers: Record<string, string> = {
-      host: url.host,
-      "x-amz-content-sha256": payloadHash,
-      "x-amz-date": timestamp,
-      ...extraHeaders
-    };
-    const signedHeaderNames = Object.keys(headers).sort();
-    const canonicalHeaders = signedHeaderNames.map((name) => `${name}:${headers[name].trim()}\n`).join("");
-    const signedHeaders = signedHeaderNames.join(";");
-    const canonicalRequest = [method, canonicalPath, "", canonicalHeaders, signedHeaders, payloadHash].join("\n");
-    const scope = `${date}/auto/s3/aws4_request`;
-    const stringToSign = ["AWS4-HMAC-SHA256", timestamp, scope, sha256(canonicalRequest)].join("\n");
-    const dateKey = hmac(`AWS4${this.config.secretAccessKey}`, date);
-    const regionKey = hmac(dateKey, "auto");
-    const serviceKey = hmac(regionKey, "s3");
-    const signingKey = hmac(serviceKey, "aws4_request");
-    const signature = createHmac("sha256", signingKey).update(stringToSign).digest("hex");
-    headers.authorization = `AWS4-HMAC-SHA256 Credential=${this.config.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+    const maxAttempts = 5;
+    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+      const timestamp = this.now().toISOString().replace(/[:-]|\.\d{3}/g, "");
+      const date = timestamp.slice(0, 8);
+      const headers: Record<string, string> = {
+        host: url.host,
+        "x-amz-content-sha256": payloadHash,
+        "x-amz-date": timestamp,
+        ...extraHeaders
+      };
+      const signedHeaderNames = Object.keys(headers).sort();
+      const canonicalHeaders = signedHeaderNames.map((name) => `${name}:${headers[name].trim()}\n`).join("");
+      const signedHeaders = signedHeaderNames.join(";");
+      const canonicalRequest = [method, canonicalPath, "", canonicalHeaders, signedHeaders, payloadHash].join("\n");
+      const scope = `${date}/auto/s3/aws4_request`;
+      const stringToSign = ["AWS4-HMAC-SHA256", timestamp, scope, sha256(canonicalRequest)].join("\n");
+      const dateKey = hmac(`AWS4${this.config.secretAccessKey}`, date);
+      const regionKey = hmac(dateKey, "auto");
+      const serviceKey = hmac(regionKey, "s3");
+      const signingKey = hmac(serviceKey, "aws4_request");
+      const signature = createHmac("sha256", signingKey).update(stringToSign).digest("hex");
+      headers.authorization = `AWS4-HMAC-SHA256 Credential=${this.config.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
 
-    const response = await this.fetchImpl(url, {
-      method,
-      headers,
-      body: method === "HEAD" ? undefined : Buffer.from(body)
-    });
-    if (!response.ok && !acceptedStatuses.includes(response.status)) {
+      const response = await this.fetchImpl(url, {
+        method,
+        headers,
+        body: method === "HEAD" ? undefined : Buffer.from(body)
+      });
+      if (response.ok || acceptedStatuses.includes(response.status)) return response;
       const detail = method === "HEAD" ? "" : `: ${(await response.text()).slice(0, 500)}`;
-      throw new Error(`R2 ${method} ${key} failed with ${response.status}${detail}`);
+      const retryable = response.status === 408 || response.status === 425 || response.status === 429 || response.status >= 500;
+      if (!retryable || attempt === maxAttempts - 1) {
+        throw new Error(`R2 ${method} ${key} failed with ${response.status}${detail}`);
+      }
+      await this.sleep(Math.min(2_000, 250 * 2 ** attempt));
     }
-    return response;
+    throw new Error(`R2 ${method} ${key} exhausted retries.`);
   }
 }
 
