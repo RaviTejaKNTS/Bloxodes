@@ -67,17 +67,33 @@ function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
     "-X", "-v", "ON_ERROR_STOP=1"
   ];
   if (tuplesOnly) psql.push("-A", "-t");
-  const password = process.env.VPS_ADMIN_PASSWORD?.trim();
-  const askpassRoot = password ? fs.mkdtempSync(path.join(os.tmpdir(), "bloxodes-ssh-askpass-")) : null;
+  const identityComment = process.env.VPS_SSH_IDENTITY_COMMENT?.trim();
+  const password = identityComment ? undefined : process.env.VPS_ADMIN_PASSWORD?.trim();
+  const authRoot = identityComment || password
+    ? fs.mkdtempSync(path.join(os.tmpdir(), "bloxodes-ssh-auth-"))
+    : null;
   try {
-    const askpass = askpassRoot ? path.join(askpassRoot, "askpass.sh") : null;
+    const identityFile = identityComment && authRoot ? path.join(authRoot, "identity.pub") : null;
+    if (identityFile) {
+      const publicKeys = execFileSync("ssh-add", ["-L"], { encoding: "utf8" });
+      const publicKey = publicKeys
+        .split("\n")
+        .map((line) => line.trim())
+        .find((line) => line.endsWith(` ${identityComment}`));
+      if (!publicKey) throw new Error(`SSH agent identity not found: ${identityComment}`);
+      fs.writeFileSync(identityFile, `${publicKey}\n`, { mode: 0o600 });
+    }
+    const askpass = password && authRoot ? path.join(authRoot, "askpass.sh") : null;
     if (askpass) {
       fs.writeFileSync(askpass, '#!/bin/sh\nprintf "%s\\n" "$VPS_ADMIN_PASSWORD"\n', { mode: 0o700 });
     }
     const result = spawnSync("ssh", [
       "-o", password ? "BatchMode=no" : "BatchMode=yes",
       "-o", "ConnectTimeout=10",
-      ...(password ? [
+      ...(identityFile ? [
+        "-o", "IdentitiesOnly=yes",
+        "-i", identityFile
+      ] : password ? [
         "-o", "IdentitiesOnly=yes",
         "-o", "PubkeyAuthentication=no",
         "-o", "PreferredAuthentications=password,keyboard-interactive",
@@ -102,7 +118,7 @@ function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
     if (result.status !== 0) throw new Error(`Remote production psql exited with status ${result.status}.`);
     return result.stdout.trim();
   } finally {
-    if (askpassRoot) fs.rmSync(askpassRoot, { recursive: true, force: true });
+    if (authRoot) fs.rmSync(authRoot, { recursive: true, force: true });
   }
 }
 
