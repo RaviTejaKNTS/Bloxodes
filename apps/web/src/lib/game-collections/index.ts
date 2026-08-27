@@ -1,7 +1,13 @@
 import { GAME_COLLECTION_GROUPS } from "./games";
 import type { GameCollectionConfig, GameCollectionCopy, GameCollectionCopyInput } from "./types";
 export { GAME_COLLECTION_GROUPS } from "./games";
-export type { GameCollectionConfig, GameCollectionCopy, GameCollectionCopyInput, GameCollectionGroup } from "./types";
+export type {
+  GameCollectionConfig,
+  GameCollectionCopy,
+  GameCollectionCopyInput,
+  GameCollectionGroup,
+  GameCollectionRenderConfig
+} from "./types";
 
 const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
   "accessory-shop": "Accessory Shop Items",

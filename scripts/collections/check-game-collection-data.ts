@@ -20,6 +20,7 @@ type CliOptions = {
   collection: string | null;
   file: string | null;
   finalJson: string | null;
+  mediaRoot: string | null;
   sectionField: string | null;
   requireImages: boolean;
   requireCardSummary: boolean;
@@ -89,6 +90,7 @@ function printUsage() {
 Options:
   --file <dataset.json>       Check a dataset file that is not registered yet.
   --final-json <final.json>   Also check description_json keys against dataset sections.
+  --media-root <directory>    Resolve local item image paths from this directory instead of apps/web/public.
   --section-field <field>     Force the field used for rendered sections.
   --require-images            Fail when items are missing images.
   --require-card-summary      Fail when items are missing cardSummary.
@@ -103,6 +105,7 @@ function parseArgs(argv: string[]): CliOptions {
     collection: null,
     file: null,
     finalJson: null,
+    mediaRoot: null,
     sectionField: null,
     requireImages: false,
     requireCardSummary: false,
@@ -132,6 +135,9 @@ function parseArgs(argv: string[]): CliOptions {
       case "--final-json":
       case "--final":
         options.finalJson = requireValue(argv, ++i, arg);
+        break;
+      case "--media-root":
+        options.mediaRoot = requireValue(argv, ++i, arg);
         break;
       case "--section-field":
       case "--group-by":
@@ -293,14 +299,14 @@ function getCardFields(meta: Record<string, unknown> | null, columns: string[], 
   });
 }
 
-function imageLocalPath(value: string): string | null {
+function imageLocalPath(value: string, mediaRoot: string): string | null {
   if (/^https?:\/\//i.test(value)) return null;
   const withoutQuery = value.split("?")[0] ?? value;
   const decoded = decodeURIComponent(withoutQuery.replace(/^\/+/, ""));
-  return repoPath("apps", "web", "public", decoded);
+  return path.resolve(mediaRoot, decoded);
 }
 
-async function checkImages(rows: Record<string, unknown>[]) {
+async function checkImages(rows: Record<string, unknown>[], mediaRoot: string) {
   let present = 0;
   let missingLocal = 0;
   let remote = 0;
@@ -309,7 +315,7 @@ async function checkImages(rows: Record<string, unknown>[]) {
     const image = stringValue(row.image);
     if (!image) continue;
     present += 1;
-    const localPath = imageLocalPath(image);
+    const localPath = imageLocalPath(image, mediaRoot);
     if (!localPath) {
       remote += 1;
       continue;
@@ -421,14 +427,17 @@ async function main() {
     issues.push({ level: "warning", message: `${cardSummaryMissing} item(s) are missing cardSummary.` });
   }
 
-  const imageStats = await checkImages(rows);
+  const mediaRoot = options.mediaRoot
+    ? resolvePath(options.mediaRoot)
+    : repoPath("apps", "web", "public");
+  const imageStats = await checkImages(rows, mediaRoot);
   if (options.requireImages && imageStats.missing) {
     issues.push({ level: "error", message: `${imageStats.missing} item(s) are missing images.` });
   } else if (imageStats.missing === rows.length) {
     issues.push({ level: "warning", message: "No item images are present." });
   }
   if (imageStats.missingLocal) {
-    issues.push({ level: "error", message: `${imageStats.missingLocal} local image path(s) do not exist under apps/web/public.` });
+    issues.push({ level: "error", message: `${imageStats.missingLocal} local image path(s) do not exist under ${mediaRoot}.` });
   }
 
   let descriptionJsonKeys: string[] = [];

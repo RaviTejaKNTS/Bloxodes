@@ -14,6 +14,10 @@ import { buildCollectionPagination } from "@/components/game-collections/collect
 import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/games/grow-a-garden";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { toIsoContentDate } from "@/lib/content-dates";
+import {
+  getPublishedWikiCollectionRuntimeByCode,
+  shouldFallbackToLocalWikiCollectionData
+} from "@/lib/wiki-collection-runtime";
 import type { CollectionContentHtml } from "./the-forge";
 
 const FALLBACK_IMAGE = "/Bloxodes.png";
@@ -305,6 +309,16 @@ async function readGrowGardenDataset(
     | { meta?: GrowGardenDatasetMeta | null; items?: Record<string, unknown>[] | null }
     | Record<string, unknown>[];
 
+  return parseGrowGardenDataset(config, parsed);
+}
+
+function parseGrowGardenDataset(
+  config: GrowGardenCollectionConfig,
+  parsed:
+    | { meta?: GrowGardenDatasetMeta | null; items?: Record<string, unknown>[] | null }
+    | Record<string, unknown>[]
+): GrowGardenCollectionDataset {
+
   if (Array.isArray(parsed)) {
     return {
       meta: null,
@@ -433,6 +447,17 @@ export function getGrowGardenCollectionPageCount(config: GrowGardenCollectionCon
 }
 
 export async function loadGrowGardenCollectionDataset(config: GrowGardenCollectionConfig): Promise<GrowGardenCollectionDataset> {
+  const code = buildGrowGardenCollectionFlatCode(config.slug);
+  const runtime = await getPublishedWikiCollectionRuntimeByCode(code);
+  if (runtime) {
+    return parseGrowGardenDataset(
+      config,
+      runtime.document as { meta?: GrowGardenDatasetMeta | null; items?: Record<string, unknown>[] | null }
+    );
+  }
+  if (!shouldFallbackToLocalWikiCollectionData(code)) {
+    throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
+  }
   try {
     return await readGrowGardenDataset(config);
   } catch (error) {

@@ -6,6 +6,11 @@ import { publicContentCache } from "@/lib/public-content-cache";
 import { getGameCollectionConfigByCode } from "@/lib/game-collections";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { repoPath } from "@/lib/paths";
+import { getWikiCollectionPageByCode } from "@/lib/wiki-collections";
+import {
+  listPublishedWikiCollectionRuntimeImages,
+  shouldFallbackToLocalWikiCollectionData
+} from "@/lib/wiki-collection-runtime";
 
 type DatasetRow = Record<string, unknown>;
 
@@ -113,6 +118,11 @@ async function resolveDatasetLocation(code: string): Promise<DatasetLocation | n
 }
 
 async function readCollectionImageUrls(code: string, limit: number): Promise<string[]> {
+  const page = await getWikiCollectionPageByCode(code);
+  const runtimeImages = page ? await listPublishedWikiCollectionRuntimeImages(page, limit) : null;
+  if (runtimeImages !== null) return runtimeImages;
+  if (!shouldFallbackToLocalWikiCollectionData(code)) return [];
+
   const location = await resolveDatasetLocation(code);
   if (!location) return [];
 

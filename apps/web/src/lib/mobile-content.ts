@@ -23,7 +23,14 @@ import { getToolContentWithDevFallback, listPublishedToolsPage, type ToolListEnt
 import { resolveModifiedAt } from "@/lib/content-dates";
 import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
 import { getWikiPageBySlug, listPublishedWikiPages, loadWikiRelatedData, type WikiListEntry } from "@/lib/wiki";
-import { getWikiCollectionPageByCode } from "@/lib/wiki-collections";
+import {
+  getWikiCollectionPageByCode,
+  listPublishedWikiCollectionPagesByWikiSlug
+} from "@/lib/wiki-collections";
+import {
+  getPublishedWikiCollectionRuntime,
+  shouldFallbackToLocalWikiCollectionData
+} from "@/lib/wiki-collection-runtime";
 import { listUniverseEventTimeline } from "@/lib/events-summary";
 import { repoPath } from "@/lib/paths";
 import { GAME_COLLECTIONS, getFieldLabel, getGameCollectionConfigByCode } from "@/lib/game-collections";
@@ -830,7 +837,20 @@ function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[],
   });
 }
 
-function collectionNavItemsForCode(code: string): MobileContentDetailItem[] {
+async function collectionNavItemsForCode(code: string): Promise<MobileContentDetailItem[]> {
+  const page = await getWikiCollectionPageByCode(code);
+  if (page) {
+    const published = await listPublishedWikiCollectionPagesByWikiSlug(page.wiki_slug);
+    if (published.length) {
+      return published.map((entry) =>
+        detailItem(entry.code, entry.display_name?.trim() || entry.title, {
+          badge: entry.code === code ? "Current" : null,
+          subtitle: entry.wiki_slug
+        })
+      );
+    }
+  }
+
   const current = getGameCollectionConfigByCode(code);
   if (!current) return [];
   return GAME_COLLECTIONS.filter((entry) => entry.gameSlug === current.gameSlug).map((entry) =>
@@ -943,10 +963,17 @@ function mapWiki(row: WikiListEntry): MobileContentItem {
 }
 
 async function loadGameCollectionSections(code: string, searchParams?: URLSearchParams): Promise<MobileContentDetailSection[]> {
-  const config = getGameCollectionConfigByCode(code);
+  const page = await getWikiCollectionPageByCode(code);
+  const runtime = page ? await getPublishedWikiCollectionRuntime(page) : null;
+  const localConfig = getGameCollectionConfigByCode(code);
+  const config = runtime?.config ?? localConfig;
   if (!config) return [];
 
-  const payload = await readJsonFile(repoPath("data", config.dataDir, config.file));
+  const payload = runtime
+    ? runtime.document
+    : localConfig && shouldFallbackToLocalWikiCollectionData(code)
+      ? await readJsonFile(repoPath("data", localConfig.dataDir, localConfig.file))
+      : null;
   const rows = readRecordArrayPayload(payload);
   const normalized: Array<Record<string, unknown>> = rows
     .map((row): Record<string, unknown> => {
@@ -1272,9 +1299,7 @@ async function loadCatalogNativeSections(code: string, searchParams?: URLSearchP
   if (!datasetSections.length && normalized.startsWith("the-forge-")) {
     datasetSections.push(...(await loadForgeCatalogSections(normalized, searchParams)));
   }
-  if (!datasetSections.length && getGameCollectionConfigByCode(normalized)) {
-    datasetSections.push(...(await loadGameCollectionSections(normalized, searchParams)));
-  }
+  if (!datasetSections.length) datasetSections.push(...(await loadGameCollectionSections(normalized, searchParams)));
 
   const loaders: Array<() => Promise<MobileContentDetailSection[]>> = [];
 
@@ -1603,11 +1628,14 @@ export async function getMobileContentDetail(
       // codes, so serve them through the same catalog detail contract.
       const collection = await getWikiCollectionPageByCode(normalizedSlug);
       if (!collection || !collection.is_published) return null;
+      const collectionRuntime = await getPublishedWikiCollectionRuntime(collection);
+      const runtimeCoverImage = collectionRuntime?.document.items.find((item) => item.system.image)?.system.image;
       const collectionUpdatedAt =
         collection.content_updated_at || collection.updated_at || collection.published_at || collection.created_at || null;
+      const collectionNavItems = await collectionNavItemsForCode(normalizedSlug);
       const collectionSections = [
         section("collection-nav", `${collection.display_name ?? "Related"} collections`, {
-          items: collectionNavItemsForCode(normalizedSlug),
+          items: collectionNavItems,
           variant: "links"
         }),
         section("overview", "Overview", {
@@ -1639,7 +1667,7 @@ export async function getMobileContentDetail(
         title: collection.title,
         subtitle: collection.display_name ?? null,
         summary: collection.meta_description,
-        coverImage: absoluteAssetUrl(collection.thumb_url || "/Bloxodes.png"),
+        coverImage: absoluteAssetUrl(runtimeCoverImage || collection.thumb_url || "/Bloxodes.png"),
         updatedAt: collectionUpdatedAt,
         url: `${SITE_URL}/wiki/${collection.wiki_slug}/${collection.collection_slug}`,
         badge:

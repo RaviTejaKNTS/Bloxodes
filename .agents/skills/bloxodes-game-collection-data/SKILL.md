@@ -12,7 +12,7 @@ Use this after `brief.md` is approved. Prepare the local data for one game colle
 ## Work
 
 1. Read the approved `brief.md`.
-2. Inspect or create the local dataset under `data/<Game>/`.
+2. For new database-backed collections, create the dataset at `tmp/content-workspace/<game-slug>/collections/<collection-slug>/dataset.json`. Keep `data/<Game>/` only for an existing registered collection that is being refreshed during the compatibility migration.
 3. Check that item rows match the source-backed scope.
 4. Add useful fields players can compare. Do not add raw source clutter.
 5. Use the v2 wrapped dataset shape `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`. Do not create bare array datasets.
@@ -26,9 +26,9 @@ Use this after `brief.md` is approved. Prepare the local data for one game colle
 13. When adding descriptions, always use your own words. Do not directly copy from the sources. Make sure the description is accurate and matches the source information.
 14. Do not rewrite sourced stats or facts just to sound nicer. Keep factual values accurate.
 15. Decide whether the collection should have images. Images belong in `items[].system.image`, not in a public item field.
-16. Confirm `apps/web/src/lib/game-collections/index.ts` can render the collection, card fields, grouping, item count, and planned image field.
+16. Confirm the shared generic renderer can render the collection, card fields, grouping, item count, and planned image field. New database-backed collections do not need a game registry or code change.
 17. Confirm section labels are stable and useful enough for the shared renderer's section dropdown. Do not split, rename, or reorder sections only for page-size reasons; pagination is handled by the renderer.
-18. If the collection is missing from `apps/web/src/lib/game-collections/index.ts`, run:
+18. Do not register a new database-backed collection in application code. Registration is only a temporary compatibility step for an existing local collection being refreshed. In that compatibility case, run:
 
 ```bash
 npm run register:game-collection -- --game <game-slug> --collection <collection-slug> --dry-run
@@ -36,14 +36,14 @@ npm run register:game-collection -- --game <game-slug> --collection <collection-
 
 If the dry run looks right and the game group already exists, run it again without `--dry-run`.
 
-19. Audit and check the dataset:
+19. Audit and check the dataset. For a new database-backed collection, use the explicit file path:
 
 ```bash
 npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>
 npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug>
 ```
 
-Use `--file <dataset.json>` if the collection is not registered yet. Do not use `--require-images` here; the image skill owns that check.
+Use `--file <dataset.json> --media-root <collection-workspace>/media` if the collection is not registered yet. Do not use `--require-images` here; the image skill owns that check.
 
 20. Update `brief.md` with data status and gaps from the checker.
 

@@ -9,36 +9,45 @@ Evidence: wiki route/data contracts, workflow skills, game collection registry a
 Game wiki hubs and their game-specific collections are one editorial/data unit:
 
 - `/wiki/<game-slug>` is backed by `wiki_pages`.
-- `/wiki/<game-slug>/<collection-slug>` is backed by `wiki_collection_pages` plus a source-backed game dataset when the collection has item rows.
-- The latest verified production sample contained 57 wiki hubs and 439 wiki collection pages.
+- `/wiki/<game-slug>/<collection-slug>` is backed by `wiki_collection_pages`, an immutable published revision in `wiki_collection_datasets`, and normalized rows in `wiki_collection_items`.
+- The 2026-08-27 production migration inventory contains 622 published wiki collection pages backed by registered v2 datasets; five registered collections without approved published page rows remain intentionally excluded.
 
 These collections describe one game's durable systems and items—pets, weapons, crops, locations, NPCs, recipes, mutations, progression systems, and similar player-facing sets. They are not part of the global `/catalog` ingestion pipeline.
 
 ## Source and Data Ownership
 
-- Structured collection datasets live under `data/<Game>/...` and follow the separated v2 `{ meta, items: [{ item, system }] }` contract in `data/AGENTS.md`.
+- New collection work uses a task-local v2 `{ meta, items: [{ item, system }] }` dataset and `runtime-manifest.json`. The guarded sync normalizes that dataset into Supabase; the task files are migration inputs, not production runtime files.
+- Existing `data/<Game>/...` collections remain the `database-first` compatibility fallback during the initial bulk cutover. Removing those files is a separate database-only cleanup after production readback and consumer parity, not part of pointer publication.
+- Do not remove a compatibility dataset merely because its collection route has a published database revision. Grow a Garden crops, Grow a Garden 2 seeds/mutations, The Forge ores/weapons/armors, and Wizard Alchemy potions/materials/races also power public tools. Their typed loaders and the Grow a Garden/The Forge custom renderers are database-first and covered by database-shaped parity tests; local files remain deployed only as a temporary rollback fallback.
 - `wiki_pages` owns hub copy, controls, tips, metadata, and game identity.
-- `wiki_collection_pages` owns collection page copy, route identity, display configuration, and publication state.
+- `wiki_collection_pages` owns collection page copy, route identity, publication state, and the `published_dataset_id` pointer.
+- `wiki_collection_datasets` owns immutable content-addressed revisions and their validation/source manifests. `wiki_collection_items` owns normalized item rows and R2 object metadata. Only the service role can read or write these runtime tables; public routes load them on the server.
 - Collection codes use `<game-slug>-<collection-slug>`; `wiki_slug` must use the editorial game slug, never a stats/universe slug.
 - Roblox APIs may verify universe identity, metadata, and thumbnails. Collection item rows come from source research rather than assuming Roblox exposes a complete item endpoint.
 - Flee the Facility's approved local datasets are `data/Flee the Facility/maps.json` and `data/Flee the Facility/beast-powers.json`; their exact row-level WebP assets live in `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`. Hammers and gemstones remain research-only until a complete source-backed roster can be proven.
 - Blade Ball is a hub-only game group with zero registered collections (`collections: []`). Sword Skins, Explosion Skins, Emotes, and Maps are blocked because independent current-complete roster proof was unavailable after the 2026-08-23 Roblox experience update; Abilities is blocked because its roster conflict remains unresolved.
 
+### Managed-development database/R2 canary
+
+The 2026-08-27 canary began with Flee the Facility Beast Powers and The Forge Ores, then expanded to every published managed-development page: 184 published pointers and immutable revisions, 12,354 rows, and 9,225 R2 images. Representative generic, Grow-a-Garden-era, Forge, and recent collection routes passed in `database-only` mode while all collection and related-card media resolved through canonical `media.bloxodes.com/wiki/*` URLs. A required but unmigrated collection returned a hard 500 with local fallback disabled, confirming that the strict canary cannot silently read `data/`.
+
 ## Workflow
 
 1. Research and approve the wiki hub or collection opportunity, production overlap, game identity, sources, scope, and route.
-2. For a collection, gather the complete source-backed dataset and useful player fields.
+2. For a collection, gather the complete source-backed dataset and useful player fields in its content workspace.
 3. Audit the v2 dataset and approve its rows/sections before collecting and wiring images.
 4. Write the wiki or collection `final.json` only after the required research/data/image gates pass.
-5. Seed into managed development and run `verify-wiki-final` or `verify-game-collection-finals` against the local web preview.
-6. Review hub-to-collection navigation, item counts, cards/tables, images, metadata, structured data, search, sitemap, and revalidation behavior.
-7. Promote through a controlled idempotent seed/upsert or forward-only migration, then verify production.
+5. Build the collection runtime manifest. Dry-run `sync:game-collection-runtime`, then upload content-addressed media once to `bloxodes-wiki`, insert the immutable revision in managed development, verify every object/row, and publish the page pointer.
+6. Run `verify-wiki-final` or `verify-game-collection-finals` against the local web preview.
+7. Review hub-to-collection navigation, item counts, cards/tables, images, metadata, structured data, search, sitemap, and revalidation behavior.
+8. Before deleting any local compatibility file, inventory every web, mobile, tool, quiz, report, and script consumer. Migrate or explicitly retain each consumer and run output-parity checks against the published revision.
+9. After explicit approval, run the same manifest against production. Existing shared R2 objects are verified rather than uploaded again. Production row verification must pass before the single published pointer changes.
 
 Use the matching wiki and game-collection workflow skills. For existing datasets, `bloxodes-game-collection-refresh` is the maintenance path for one collection, one game, or the registered collection set.
 
 ## Images and Renderer Readiness
 
-Collection image manifests and local public assets are part of the data contract. A collection is not ready merely because its copy exists: every item count, image path or documented text-only exception, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
+Collection image manifests and task-local media are part of the authoring contract. Managed development and production share `bloxodes-wiki` and use `media.bloxodes.com/wiki/<object-key>` through the read-only Worker. Object keys are content-addressed by universe, collection, item slug, and SHA-256 prefix. Uploading an object does not publish its page. Each database controls publication through its own `published_dataset_id`. A collection is not ready merely because its copy exists: every item count, image key or documented text-only exception, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
 
 Text-only rows are acceptable only when clean row-level media is unavailable and the decision is recorded in the owning dataset/documentation. Do not substitute unrelated crops, edited art, or generic game thumbnails for missing item images.
 
@@ -46,6 +55,9 @@ Readable source-provided item names or labels baked into an otherwise valid row 
 
 ## Deployment Boundary
 
-- Committed dataset or image changes require a web image deployment.
-- `wiki_pages` and `wiki_collection_pages` copy can publish through controlled database writes plus revalidation.
+- New database/R2 collection content does not require a Git commit or web deployment.
+- The Worker, schema, server loader, and tooling are deployed infrastructure. Collection revisions publish through controlled R2/database writes plus the existing revalidation event.
+- `WIKI_COLLECTION_DATA_SOURCE=database-first` is the default rollback posture. `local-only` disables the database runtime; `database-only` is reserved for the final post-migration state. During staged migrations, `WIKI_COLLECTION_DATABASE_REQUIRED_CODES` can list exact collection codes that must load from the database and fail fast instead of using their local datasets.
+- Wiki hub and mobile preview images use the published revision's R2 keys when available, then fall back to local dataset images during migration.
+- `database-only` must not be enabled and local shared datasets must not be deleted until the tool-consumer parity gate above passes.
 - A wiki hub and its collections should be reviewed together when navigation, identity, collection registration, or shared game data changes.

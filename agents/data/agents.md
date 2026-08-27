@@ -28,6 +28,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `wiki_collection_pages`, `wiki_collection_pages_view`
   - Game-specific collection pages rendered under `/wiki/<game-slug>/<collection-slug>`, with stable `code` values kept for scripts, search, and old catalog URL redirects.
   - Use `display_name` for clean navigation labels such as `Domains` or `Characters`; keep `title`/`seo_title` as full page/SEO titles. Use `item_count` for collection navigation counts instead of parsing titles.
+- `wiki_collection_datasets`, `wiki_collection_items`
+  - Service-role-only immutable runtime revisions and normalized game collection rows. `wiki_collection_pages.published_dataset_id` selects the live revision. Item images use content-addressed keys in the shared `bloxodes-wiki` R2 bucket through canonical `media.bloxodes.com/wiki/*` URLs in both managed development and production.
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`
@@ -110,6 +112,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 ## Local Datasets
 
+- New game collection datasets and media are task-local publication inputs under `tmp/content-workspace`, not deployable runtime files. Existing registered datasets below remain compatibility fallback inputs until migrated to the database/R2 runtime.
+
 - Wiki/collection datasets should keep source-backed fields that players need for decisions, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability, instead of storing only easy-to-scrape labels.
 
 - `src/data/reports/roblox-june-2026.ts`
@@ -128,7 +132,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Local source-backed dictionary for `/catalog/roblox-dictionary`, with 251 searchable Roblox slang, acronym, platform, creator, and legacy entries and complete coverage of RobloxDen's 55-entry index plus the official Roblox Dictionary's 67 terms as audited on 2026-08-11.
   - Public definitions and examples are original. Per-item `sourceUrls`, `lastVerifiedAt`, and current/legacy status support later audits without exposing harmful bypass or exploit instructions.
 - `data/Grow a Garden/crops.json`
-  - Parsed by `src/lib/grow-a-garden/crops.ts`.
+  - Database-first input for the crop value calculator and specialized collection renderer. The local file is a rollback fallback; database-shaped parity tests cover both consumers.
 - `data/Grow a Garden/seeds.json`
 - `data/Grow a Garden/pets.json`
 - `data/Grow a Garden/eggs.json`
@@ -193,8 +197,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Local Dress To Impress game datasets for wiki/collection and quiz page work, including themes, free items, code items, currency items, pose packs, ranks, walk packs, runway effects, pattern packs, hairstyles, makeup, nails, reward items, Robux items, VIP items, and quiz content.
   - Matching source-provided images live under `apps/web/public/Dress To Impress/` where useful item, pack, salon, or unlock art exists. Themes stay text-only; the free-items collection has one documented image gap for Gingerbread Suit where no clean source image was available.
 - `data/The Forge/*.json`
-  - The Forge collection and calculator datasets consumed by `src/lib/forge/*` and wiki collection routes.
+  - Database-first Forge collection and calculator datasets consumed by `src/lib/forge/*` and wiki collection routes. Local files remain rollback fallbacks.
   - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/wiki/collections/games/the-forge.tsx`.
+- `data/Grow a Garden 2/seeds.json` and `data/Grow a Garden 2/mutations.json`
+  - Database-first inputs shared by Grow a Garden 2 collection routes and the crop mutation calculator through `src/lib/grow-a-garden-2/value-calculator.ts`. Local files remain rollback fallbacks; database-shaped parity tests cover both inputs.
 - `data/Flee the Facility/*.json`
   - Local Flee the Facility collection datasets for the approved maps and Beast powers collections. Hammers and gemstones remain research-only because their completeness gates were not met.
   - `beast-powers.json` is the approved three-row qualitative collection for Runner, Stalker, and Seer; Hacker and unsupported numeric or platform-specific mechanics stay excluded.
@@ -206,7 +212,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Keep RIVALS collection datasets limited to durable in-game item collections plus the official UGC exception. Do not store gamepasses, badges, servers, current event reward tracks, ranked-season reward lists, or manual active-code data here.
 - `data/Wizard Alchemy/*.json`
   - Local Wizard Alchemy game datasets for wiki/collection page work, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
-  - `potions.json`, `materials.json`, and `races.json` also power the Wizard Alchemy potion planner and race reroll calculator through `src/lib/wizard-alchemy/data.ts`.
+  - `potions.json`, `materials.json`, and `races.json` also power the database-first Wizard Alchemy potion planner and race reroll calculator through `src/lib/wizard-alchemy/data.ts`; local files remain rollback fallbacks covered by database-shaped parity tests.
   - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `code_pages` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
 - `data/Slime RNG/*.json`
   - Local Slime RNG game datasets for wiki/collection page work, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.

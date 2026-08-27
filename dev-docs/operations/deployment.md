@@ -1,8 +1,8 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-08-15
-Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
+Last verified: 2026-08-27
+Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, platform checks, and local wiki-media Worker compilation/smoke
 
 ## Normal Path
 
@@ -25,7 +25,9 @@ The public `/api/health?scope=deploy` response is the container/deploy gate. It 
 
 ## Data-Only Publication
 
-Database-backed content normally publishes through controlled scripts/migrations and revalidation rather than requiring a web image. Local datasets under `data/` or `apps/web/src/data/` require a code/image deploy.
+Database-backed content normally publishes through controlled scripts/migrations and revalidation rather than requiring a web image. New wiki collection revisions and their content-addressed R2 media are database/R2-only publications after the runtime infrastructure is live. Local compatibility datasets under `data/` or `apps/web/src/data/` still require a code/image deploy until migrated.
+
+The wiki-media Worker is a separate Cloudflare artifact under `workers/wiki-media`. Compile it locally with the pinned Wrangler command before any remote action. Its deployed route is exactly `media.bloxodes.com/wiki/*`, backed by the shared `bloxodes-wiki` bucket. Never replace the existing whole-host media origin. Managed development and production use the same canonical wiki media URL while retaining separate database publication pointers.
 
 Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` streams a transaction through SSH into the existing database container and rolls it back after proving the full plan. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It runs the checked-in object proof, repairs only policy-listed schema-present ledger gaps, applies only expected migrations, commits atomically, and verifies the ledger. Managed development must pass first; production remains a separate explicit approval.
 

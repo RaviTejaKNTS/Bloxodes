@@ -10,6 +10,7 @@ Most application behavior should flow through this folder before it reaches page
 - `public-content-cache.ts`: compatibility wrapper for former `unstable_cache` call sites. Public Supabase content should render fresh at the VPS and rely on Cloudflare for long-lived edge caching.
 - `public-cache-tags.ts`: Cloudflare `Cache-Tag` mapping for public route families and Supabase revalidation events.
 - `catalog.ts`, `tools.ts`, and `wiki.ts`: Supabase-backed content helpers, related-content aggregators, and index readers.
+- `wiki-collections.ts`, `wiki-collection-runtime.ts`, and `wiki-media.ts`: collection page copy, immutable database revision loading, compatibility fallback, and content-addressed R2 media URL resolution. Keep these reads server-only and never expose service credentials.
 - `seo.ts`, `site-config.ts`, `sitemap.ts`, `content-dates.ts`, `updated-label.ts`: metadata, canonical URLs, sitemap shaping, and freshness labels.
 - `auth/*`: session cookies, Roblox OAuth helpers, navigation safety, and current-user lookup.
 - `auth/extension-session.ts`: validated Chromium identity callback handling and short-lived, redirect-bound extension login handoffs.

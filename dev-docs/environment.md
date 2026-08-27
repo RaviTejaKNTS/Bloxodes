@@ -70,6 +70,7 @@ For a workstation command that intentionally targets production, set both `BLOXO
 - Pipelines contain workload-specific credentials and controls.
 - The article pipeline owns `ARTICLE_AUTO_PUBLISH` and the release polling/path controls. The path may point to ignored `.envs/targets/production.env`; its values remain target-owned and are parsed only by the post-model release parent.
 - Infrastructure contains operator access for one platform.
+- The `cloudflare` overlay contains the single bucket-scoped `WIKI_R2_*` credential set for `bloxodes-wiki`. Only the guarded publisher loads it. Managed development and production keep separate Supabase credentials and publication pointers while both use canonical `https://media.bloxodes.com/wiki/*` public media URLs.
 - `operations/analytics.env` owns GA4 account/property, Search Console, Bing Webmaster, and Google OAuth operator values. It must contain neither Umami values nor duplicated `NEXT_PUBLIC_*` web configuration.
 - `operations/umami.env` exclusively owns the self-hosted Umami operator username, password, and canonical `UMAMI_WEBSITE_ID`. Production web builds receive the public `NEXT_PUBLIC_UMAMI_HOST_URL` and matching `NEXT_PUBLIC_UMAMI_WEBSITE_ID` from GitHub/Dokploy rather than loading operator credentials.
 - Non-dotenv private material lives under `.envs/secrets/`.

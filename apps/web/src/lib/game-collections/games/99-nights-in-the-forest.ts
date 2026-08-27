@@ -3,6 +3,7 @@ import type { GameCollectionGroup } from "../types";
 export const nightsInTheForestCollectionGroup = {
     gameSlug: "99-nights-in-the-forest",
     gameName: "99 Nights in the Forest",
+    universeId: 7326934954,
     dataDir: "99 Nights in the Forest",
     universeNames: ["99 Nights in the Forest"],
     collections: [

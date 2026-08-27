@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "game": {
+    "slug": "example-game",
+    "name": "Example Game",
+    "universeId": 123456789
+  },
+  "collection": {
+    "slug": "items",
+    "label": "Items",
+    "sortOrder": 10
+  },
+  "dataset": "dataset.json",
+  "finalJson": "final.json",
+  "mediaRoot": "media",
+  "sourceUrls": [
+    "https://example.com/game/items"
+  ]
+}

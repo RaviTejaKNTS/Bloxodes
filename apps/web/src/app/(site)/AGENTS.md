@@ -39,7 +39,7 @@ Scoped route-family guides:
 ## Data Source Split
 
 - Codes, articles, stats, checklists, quizzes, wiki pages, authors, puzzles, and much of catalog/tools content come from Supabase.
-- Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`.
+- Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`. Wiki collection routes are database-first and may fall back to registered local v2 datasets during migration; new collections must not require a code registry entry.
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
 - Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `dev-docs/pipelines/catalog.md` and `dev-docs/pipelines/wiki-collections.md` respectively; a shared card/list renderer does not merge their data ownership.
 

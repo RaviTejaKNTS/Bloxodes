@@ -1,7 +1,8 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import { repoPath } from "@/lib/paths";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
+import {
+  getTheForgeCollectionConfig,
+  loadTheForgeCollectionDataset
+} from "@/app/(site)/wiki/collections/games/the-forge";
 import { WEAPON_CLASS_THRESHOLDS, type Weapon, type WeaponClass } from "./data";
 
 export type ForgeWeaponDataset = {
@@ -35,23 +36,10 @@ type ForgeWeaponJson = {
   items?: ForgeWeaponRow[] | null;
 };
 
-const WEAPON_JSON_PATH = repoPath("data", "The Forge", "weapons.json");
-
 async function readWeaponsJson(): Promise<ForgeWeaponJson> {
-  try {
-    const raw = await fs.readFile(WEAPON_JSON_PATH, "utf8");
-    const parsed = JSON.parse(raw) as ForgeWeaponJson | ForgeWeaponRow[];
-    if (Array.isArray(parsed)) {
-      return { items: parsed };
-    }
-    return parsed ?? {};
-  } catch (error) {
-    const err = error as NodeJS.ErrnoException;
-    if (err.code === "ENOENT") {
-      throw new Error(`Missing weapons data file. Expected: ${WEAPON_JSON_PATH}`);
-    }
-    throw err;
-  }
+  const config = getTheForgeCollectionConfig("weapons");
+  if (!config) throw new Error("The Forge weapons collection is not registered.");
+  return loadTheForgeCollectionDataset(config) as Promise<ForgeWeaponJson>;
 }
 
 function toSlug(value: string): string {

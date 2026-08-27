@@ -15,8 +15,8 @@ Use this after `brief.md` and data readiness are approved. Give images their own
 2. Confirm which items need images and which dataset field stores the image path.
 3. Find clear item images from useful sources. Prefer official/game wiki style images when available. Use Fandom, BloxInformer, Beebom, Game8, Pro Game Guides, and similar Roblox guide sites when they have better usable images.
 4. Do not use edited thumbnails, page screenshots, logos, or images that do not clearly show the item. A readable item name or other identifying text baked into an otherwise useful item image is acceptable; never reject an image solely because the item name appears on it.
-5. Save images under the expected public path for the game and collection.
-6. Update the dataset image field for each matched item.
+5. For new database-backed collections, save images under `tmp/content-workspace/<game-slug>/collections/<collection-slug>/media/`. Do not add them to `apps/web/public`; the guarded runtime sync uploads them to private R2. Existing registered collections may keep their current public paths until migrated.
+6. Update the dataset image field for each matched item. In a database-backed workspace, store a path relative to `media/`, such as `/runner.webp`; the runtime manifest owns the media root.
 7. If an image is missing, record the exact item and why it is missing.
 8. If you have an image manifest, collect images with:
 
@@ -32,7 +32,7 @@ If the dry run looks right, run it again without `--dry-run`.
 npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --require-images
 ```
 
-Use `--file <dataset.json>` if the collection is not registered yet.
+Use `--file <dataset.json> --media-root <collection-workspace>/media` if the collection is not registered yet.
 
 10. Update `brief.md` with image readiness. Record the source URL for accepted images even when the source artwork includes a readable item name. User- or parent-approved direct item images may be used when they clearly match the exact game item; keep licensing or reuse caveats in the brief rather than silently dropping otherwise useful coverage.
 
@@ -47,7 +47,7 @@ Image readiness:
 - Images found:
 - Images missing:
 - Image sources used:
-- Public image path:
+- Workspace media path:
 - Dataset image paths updated: yes/no
 - Checker command:
 - Checker result:

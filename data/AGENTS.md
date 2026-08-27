@@ -6,7 +6,9 @@ Environment boundaries and database-vs-dataset ownership are documented in `dev-
 
 When dataset ownership or a consuming pipeline changes, update that existing canonical file or the owning existing pipeline document in the same change. Do not create a replacement current-state doc.
 
-These files back tools, game collections, and broad catalog sections that are not fully modeled in Supabase.
+These files back tools, compatibility-era game collections, and broad catalog sections that are not fully modeled in Supabase. New game collections use the task-local runtime manifest and publish normalized revisions to `wiki_collection_datasets`/`wiki_collection_items`; do not add new long-lived collection datasets here solely to power a route.
+
+Never delete a local collection dataset after publishing its database revision without checking non-collection consumers. Grow a Garden crops, Grow a Garden 2 seeds/mutations, The Forge ores/weapons/armors, and Wizard Alchemy potions/materials/races also power public tools. Their typed loaders are database-first and have database-shaped parity tests; the local files remain a temporary rollback fallback until a separately reviewed database-only cleanup.
 
 When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
 
@@ -138,7 +140,7 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - In v2 game collection datasets, `items[].item` is public game data only. Do not put `collectionSection`, `section`, `sortOrder`, `slug`, `image`, source URLs, source pages, verification notes, raw text, image status, or workflow/debug fields there.
 - In v2 game collection datasets, `items[].system` may contain only `slug`, `section`, `sortOrder`, and `image`. Use these for Bloxodes routing, grouping, ordering, and image rendering without interfering with real game fields that may have similar names.
 - `meta.display` owns the public render contract for game collections: `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, optional badge/subtitle/description fields, and `fieldPresentation`. Every display field must exist in `meta.itemFields` and in public item data.
-- Run `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` before seeding or reviewing any game collection page.
+- Run `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` for registered compatibility data. For a new task-local collection, run `check:game-collection-data -- --file ... --media-root ...` and the runtime-manifest dry-run before managed-development publication.
 - For wiki/collection datasets, include source-backed fields players need, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability when those facts drive decisions.
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.

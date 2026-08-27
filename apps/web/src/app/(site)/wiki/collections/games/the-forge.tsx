@@ -14,6 +14,10 @@ import { buildCollectionPagination } from "@/components/game-collections/collect
 import { THE_FORGE_COLLECTIONS, type GameCollectionViewConfig } from "@/lib/game-collections/games/the-forge";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { toIsoContentDate } from "@/lib/content-dates";
+import {
+  getPublishedWikiCollectionRuntimeByCode,
+  shouldFallbackToLocalWikiCollectionData
+} from "@/lib/wiki-collection-runtime";
 
 const FALLBACK_IMAGE = "/Bloxodes.png";
 
@@ -206,6 +210,21 @@ function resolveDataUpdatedAt(meta: ForgeDatasetMeta | null): string | null {
 }
 
 export async function loadTheForgeCollectionDataset(config: GameCollectionViewConfig): Promise<TheForgeCollectionDataset> {
+  const code = buildTheForgeCollectionFlatCode(config.slug);
+  const runtime = await getPublishedWikiCollectionRuntimeByCode(code);
+  if (runtime) {
+    return {
+      meta: runtime.document.meta as ForgeDatasetMeta,
+      items: uniquifyForgeItemIds(
+        runtime.document.items
+          .map((row) => normalizeItem({ ...row.item, image: row.system.image }))
+          .filter(Boolean) as GameCollectionItem[]
+      )
+    };
+  }
+  if (!shouldFallbackToLocalWikiCollectionData(code)) {
+    throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
+  }
   try {
     return await readForgeDataset(config.file);
   } catch (error) {

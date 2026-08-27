@@ -27,7 +27,10 @@ The parent may fix tiny non-content metadata or JSON issues (slug, code, IDs, nu
 ```text
 tmp/content-workspace/<game-slug>/collections/<collection-slug>/
   brief.md
+  dataset.json
+  media/
   final.json
+  runtime-manifest.json
 ```
 
 ## Collection subagent handoff (research → data → images)
@@ -82,8 +85,17 @@ Also give the writing subagent:
 9. Review image coverage, quality, paths, dataset wiring, and checker result.
 10. Writing gate: spawn a writing subagent with `bloxodes-game-collection-writing`.
 11. Review `final.json`. Send copy/tone/structure/FAQ fixes to the writing subagent. Send data/image gaps back to the collection subagent.
-12. Start or reuse localhost with `npm run dev:managed`.
-13. Run:
+12. For a new database-backed collection, create `runtime-manifest.json` beside the approved artifacts. It must name schema version 1, exact game slug/name/universe ID, collection slug/label/sort order, relative `dataset`, `finalJson`, and `mediaRoot` paths, plus the approved HTTPS `sourceUrls`. Run the runtime dry-run, then upload immutable media to the shared R2 bucket and publish the revision only to managed development:
+
+```bash
+BLOXODES_ENV_OVERLAYS=cloudflare npm run sync:game-collection-runtime -- --manifest tmp/content-workspace/<game-slug>/collections/<collection-slug>/runtime-manifest.json
+BLOXODES_ENV_OVERLAYS=cloudflare npm run sync:game-collection-runtime -- --manifest tmp/content-workspace/<game-slug>/collections/<collection-slug>/runtime-manifest.json --apply --upload-media --publish
+```
+
+The command must verify every R2 object before it changes the published dataset pointer. Do not add a new collection dataset, item media, or registry entry to the deployable codebase.
+
+13. Start or reuse localhost with `npm run dev:managed`.
+14. Run:
 
 ```bash
 npm run verify:game-collection-finals -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --collection <collection-slug>
@@ -91,19 +103,19 @@ npm run verify:game-collection-finals -- --base-url http://localhost:<port> --ga
 
 Use one `--collection` for each approved collection.
 
-14. Run the HTML size gate against each verified collection URL:
+15. Run the HTML size gate against each verified collection URL:
 
 ```bash
 npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<collection-slug> --fail-on-limit
 ```
 
-15. If the verifier and size gate pass, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Browser (or fetch/preview the live local route when Browser is unavailable).
-16. For large collections with pagination, verify:
+16. If the verifier and size gate pass, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Browser (or fetch/preview the live local route when Browser is unavailable).
+17. For large collections with pagination, verify:
 - the section dropdown lists all real sections, not only the current page section
 - choosing a section on another page opens that page at the correct section anchor
 - `/wiki/<game-slug>/<collection-slug>/page/2` returns 200 and has `noindex, follow`
 - paginated collection URLs are not listed in `/sitemaps/wiki.xml`
-17. Return paths, localhost links, blocked collections, size-gate results, pagination checks, and remaining risks.
+18. Return paths, localhost links, managed-development revision hashes, blocked collections, size-gate results, pagination checks, and remaining risks.
 
 ## Research checks
 
