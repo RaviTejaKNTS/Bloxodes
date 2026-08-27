@@ -30,6 +30,7 @@
         "Abyss Ocean",
         "Prehistoric",
         "Cosmic",
+        "Cherry Blossom",
         "Brainrot"
       ],
       "badgeField": "rarity",
@@ -78,7 +79,7 @@
         "slug": "chicken",
         "section": "Forest",
         "sortOrder": 0,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/chicken.png"
       }
     },
     {
@@ -93,7 +94,7 @@
         "slug": "dog",
         "section": "Forest",
         "sortOrder": 1,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/dog.png"
       }
     },
     {
@@ -108,7 +109,7 @@
         "slug": "bird",
         "section": "Forest",
         "sortOrder": 2,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/bird.png"
       }
     },
     {
@@ -123,7 +124,7 @@
         "slug": "owl",
         "section": "Forest",
         "sortOrder": 3,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/owl.png"
       }
     },
     {
@@ -138,7 +139,22 @@
         "slug": "raccoon",
         "section": "Forest",
         "sortOrder": 4,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/raccoon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear",
+        "cardSummary": "Bear is listed in the Forest pool as an Epic pet earning $240 per second.",
+        "rarity": "Epic",
+        "biome": "Forest",
+        "incomePerSecond": "$240"
+      },
+      "system": {
+        "slug": "bear",
+        "section": "Forest",
+        "sortOrder": 4.5,
+        "image": "/Steal%20an%20Egg/Pets/bear.png"
       }
     },
     {
@@ -153,7 +169,7 @@
         "slug": "fox",
         "section": "Forest",
         "sortOrder": 5,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/fox.png"
       }
     },
     {
@@ -168,7 +184,7 @@
         "slug": "brr-brr-patapim",
         "section": "Forest",
         "sortOrder": 6,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/brr-brr-patapim.png"
       }
     },
     {
@@ -183,7 +199,7 @@
         "slug": "frog",
         "section": "Lake",
         "sortOrder": 7,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/frog.png"
       }
     },
     {
@@ -198,7 +214,7 @@
         "slug": "duckling",
         "section": "Lake",
         "sortOrder": 8,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/duckling.png"
       }
     },
     {
@@ -213,7 +229,7 @@
         "slug": "catfish",
         "section": "Lake",
         "sortOrder": 9,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/catfish.png"
       }
     },
     {
@@ -228,7 +244,7 @@
         "slug": "turtle",
         "section": "Lake",
         "sortOrder": 10,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/turtle.png"
       }
     },
     {
@@ -243,7 +259,7 @@
         "slug": "trulimero-trulicina",
         "section": "Lake",
         "sortOrder": 11,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/trulimero-trulicina.png"
       }
     },
     {
@@ -258,7 +274,7 @@
         "slug": "swan",
         "section": "Lake",
         "sortOrder": 12,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/swan.png"
       }
     },
     {
@@ -273,7 +289,7 @@
         "slug": "axolotl",
         "section": "Lake",
         "sortOrder": 13,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/axolotl.png"
       }
     },
     {
@@ -288,7 +304,7 @@
         "slug": "leviathan",
         "section": "Lake",
         "sortOrder": 14,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/leviathan.png"
       }
     },
     {
@@ -303,7 +319,7 @@
         "slug": "jerboa",
         "section": "Desert",
         "sortOrder": 15,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/jerboa.png"
       }
     },
     {
@@ -318,7 +334,7 @@
         "slug": "fennec",
         "section": "Desert",
         "sortOrder": 16,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/fennec.png"
       }
     },
     {
@@ -333,7 +349,7 @@
         "slug": "camel",
         "section": "Desert",
         "sortOrder": 17,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/camel.png"
       }
     },
     {
@@ -348,7 +364,7 @@
         "slug": "tob-tobi-tob-tob",
         "section": "Desert",
         "sortOrder": 18,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/tob-tobi-tob-tob.png"
       }
     },
     {
@@ -363,7 +379,7 @@
         "slug": "snake",
         "section": "Desert",
         "sortOrder": 19,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/snake.png"
       }
     },
     {
@@ -378,7 +394,7 @@
         "slug": "scorpion",
         "section": "Desert",
         "sortOrder": 20,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/scorpion.png"
       }
     },
     {
@@ -393,7 +409,7 @@
         "slug": "sand-spider",
         "section": "Desert",
         "sortOrder": 21,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/sand-spider.png"
       }
     },
     {
@@ -408,7 +424,7 @@
         "slug": "royal-sphinx",
         "section": "Desert",
         "sortOrder": 22,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/royal-sphinx.png"
       }
     },
     {
@@ -423,7 +439,7 @@
         "slug": "toucan",
         "section": "Jungle",
         "sortOrder": 23,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/toucan.png"
       }
     },
     {
@@ -438,7 +454,7 @@
         "slug": "chimpanzee",
         "section": "Jungle",
         "sortOrder": 24,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/chimpanzee.png"
       }
     },
     {
@@ -453,7 +469,7 @@
         "slug": "crocodile",
         "section": "Jungle",
         "sortOrder": 25,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/crocodile.png"
       }
     },
     {
@@ -468,7 +484,7 @@
         "slug": "gorilla",
         "section": "Jungle",
         "sortOrder": 26,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/gorilla.png"
       }
     },
     {
@@ -483,7 +499,7 @@
         "slug": "orangutini-ananassini",
         "section": "Jungle",
         "sortOrder": 27,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/orangutini-ananassini.png"
       }
     },
     {
@@ -498,7 +514,7 @@
         "slug": "spider",
         "section": "Jungle",
         "sortOrder": 28,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/spider.png"
       }
     },
     {
@@ -513,7 +529,7 @@
         "slug": "tiger",
         "section": "Jungle",
         "sortOrder": 29,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/tiger.png"
       }
     },
     {
@@ -528,7 +544,7 @@
         "slug": "king-snake",
         "section": "Jungle",
         "sortOrder": 30,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/king-snake.png"
       }
     },
     {
@@ -543,7 +559,7 @@
         "slug": "penguin",
         "section": "Snow",
         "sortOrder": 31,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/penguin.png"
       }
     },
     {
@@ -558,7 +574,7 @@
         "slug": "walrus",
         "section": "Snow",
         "sortOrder": 32,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/walrus.png"
       }
     },
     {
@@ -573,7 +589,7 @@
         "slug": "polar-bear",
         "section": "Snow",
         "sortOrder": 33,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/polar-bear.png"
       }
     },
     {
@@ -588,7 +604,7 @@
         "slug": "sabertooth-tiger",
         "section": "Snow",
         "sortOrder": 34,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/sabertooth-tiger.png"
       }
     },
     {
@@ -603,7 +619,7 @@
         "slug": "mammoth",
         "section": "Snow",
         "sortOrder": 35,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/mammoth.png"
       }
     },
     {
@@ -618,7 +634,7 @@
         "slug": "king-mammoth",
         "section": "Snow",
         "sortOrder": 36,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/king-mammoth.png"
       }
     },
     {
@@ -633,7 +649,7 @@
         "slug": "yeti",
         "section": "Snow",
         "sortOrder": 37,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/yeti.png"
       }
     },
     {
@@ -648,7 +664,7 @@
         "slug": "ice-dragon",
         "section": "Snow",
         "sortOrder": 38,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/ice-dragon.png"
       }
     },
     {
@@ -663,7 +679,7 @@
         "slug": "lava-gecko",
         "section": "Volcano",
         "sortOrder": 39,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/lava-gecko.png"
       }
     },
     {
@@ -678,7 +694,7 @@
         "slug": "lava-frog",
         "section": "Volcano",
         "sortOrder": 40,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/lava-frog.png"
       }
     },
     {
@@ -693,7 +709,7 @@
         "slug": "flaming-bull",
         "section": "Volcano",
         "sortOrder": 41,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/flaming-bull.png"
       }
     },
     {
@@ -708,7 +724,7 @@
         "slug": "lava-iguana",
         "section": "Volcano",
         "sortOrder": 42,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/lava-iguana.png"
       }
     },
     {
@@ -723,7 +739,7 @@
         "slug": "chillin-chilli",
         "section": "Volcano",
         "sortOrder": 43,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/chillin-chilli.png"
       }
     },
     {
@@ -738,7 +754,7 @@
         "slug": "cerberus",
         "section": "Volcano",
         "sortOrder": 44,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/cerberus.png"
       }
     },
     {
@@ -753,7 +769,7 @@
         "slug": "phoenix",
         "section": "Volcano",
         "sortOrder": 45,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/phoenix.png"
       }
     },
     {
@@ -768,7 +784,7 @@
         "slug": "lava-dragon",
         "section": "Volcano",
         "sortOrder": 46,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/lava-dragon.png"
       }
     },
     {
@@ -783,7 +799,7 @@
         "slug": "parrotfish",
         "section": "Abyss Ocean",
         "sortOrder": 47,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/parrotfish.png"
       }
     },
     {
@@ -798,7 +814,7 @@
         "slug": "swordfish",
         "section": "Abyss Ocean",
         "sortOrder": 48,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/swordfish.png"
       }
     },
     {
@@ -813,7 +829,7 @@
         "slug": "shark",
         "section": "Abyss Ocean",
         "sortOrder": 49,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/shark.png"
       }
     },
     {
@@ -828,7 +844,7 @@
         "slug": "orca",
         "section": "Abyss Ocean",
         "sortOrder": 50,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/orca.png"
       }
     },
     {
@@ -843,7 +859,7 @@
         "slug": "whale-shark",
         "section": "Abyss Ocean",
         "sortOrder": 51,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/whale-shark.png"
       }
     },
     {
@@ -858,7 +874,7 @@
         "slug": "beluga-whale",
         "section": "Abyss Ocean",
         "sortOrder": 52,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/beluga-whale.png"
       }
     },
     {
@@ -873,7 +889,7 @@
         "slug": "kraken",
         "section": "Abyss Ocean",
         "sortOrder": 53,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/kraken.png"
       }
     },
     {
@@ -888,7 +904,7 @@
         "slug": "el-maja",
         "section": "Abyss Ocean",
         "sortOrder": 54,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/el-maja.png"
       }
     },
     {
@@ -903,7 +919,7 @@
         "slug": "dodo",
         "section": "Prehistoric",
         "sortOrder": 55,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/dodo.png"
       }
     },
     {
@@ -918,7 +934,7 @@
         "slug": "pterodactyl",
         "section": "Prehistoric",
         "sortOrder": 56,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/pterodactyl.png"
       }
     },
     {
@@ -933,7 +949,7 @@
         "slug": "ankylosaurus",
         "section": "Prehistoric",
         "sortOrder": 57,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/ankylosaurus.png"
       }
     },
     {
@@ -948,7 +964,7 @@
         "slug": "triceratops",
         "section": "Prehistoric",
         "sortOrder": 58,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/triceratops.png"
       }
     },
     {
@@ -963,7 +979,7 @@
         "slug": "bronto",
         "section": "Prehistoric",
         "sortOrder": 59,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/bronto.png"
       }
     },
     {
@@ -978,7 +994,7 @@
         "slug": "tralaledon",
         "section": "Prehistoric",
         "sortOrder": 60,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/tralaledon.png"
       }
     },
     {
@@ -993,7 +1009,7 @@
         "slug": "trex",
         "section": "Prehistoric",
         "sortOrder": 61,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/trex.png"
       }
     },
     {
@@ -1008,7 +1024,7 @@
         "slug": "mosasaurus",
         "section": "Prehistoric",
         "sortOrder": 62,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/mosasaurus.png"
       }
     },
     {
@@ -1023,7 +1039,7 @@
         "slug": "centapede",
         "section": "Cosmic",
         "sortOrder": 63,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/centapede.png"
       }
     },
     {
@@ -1038,7 +1054,7 @@
         "slug": "cosmic-gecko",
         "section": "Cosmic",
         "sortOrder": 64,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/cosmic-gecko.png"
       }
     },
     {
@@ -1053,7 +1069,7 @@
         "slug": "cosmic-gorilla",
         "section": "Cosmic",
         "sortOrder": 65,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/cosmic-gorilla.png"
       }
     },
     {
@@ -1068,7 +1084,7 @@
         "slug": "la-vacca-saturno-saturnita",
         "section": "Cosmic",
         "sortOrder": 66,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/la-vacca-saturno-saturnita.png"
       }
     },
     {
@@ -1083,7 +1099,7 @@
         "slug": "cosmic-dragon",
         "section": "Cosmic",
         "sortOrder": 67,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/cosmic-dragon.png"
       }
     },
     {
@@ -1098,7 +1114,7 @@
         "slug": "cosmic-skeleton-boss",
         "section": "Cosmic",
         "sortOrder": 68,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/cosmic-skeleton-boss.png"
       }
     },
     {
@@ -1113,7 +1129,7 @@
         "slug": "eternal-lunar-dragon",
         "section": "Cosmic",
         "sortOrder": 69,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/eternal-lunar-dragon.png"
       }
     },
     {
@@ -1128,7 +1144,97 @@
         "slug": "unicorn",
         "section": "Cosmic",
         "sortOrder": 70,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/unicorn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crane",
+        "cardSummary": "Crane is listed in the Cherry Blossom pool as an Epic pet earning $4K per second.",
+        "rarity": "Epic",
+        "biome": "Cherry Blossom",
+        "incomePerSecond": "$4K"
+      },
+      "system": {
+        "slug": "crane",
+        "section": "Cherry Blossom",
+        "sortOrder": 77,
+        "image": "/Steal%20an%20Egg/Pets/crane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Salamander",
+        "cardSummary": "Salamander is listed in the Cherry Blossom pool as a Legendary pet earning $74K per second.",
+        "rarity": "Legendary",
+        "biome": "Cherry Blossom",
+        "incomePerSecond": "$74K"
+      },
+      "system": {
+        "slug": "salamander",
+        "section": "Cherry Blossom",
+        "sortOrder": 78,
+        "image": "/Steal%20an%20Egg/Pets/salamander.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Panda",
+        "cardSummary": "Red Panda is listed in the Cherry Blossom pool as a Mythic pet earning $450K per second.",
+        "rarity": "Mythic",
+        "biome": "Cherry Blossom",
+        "incomePerSecond": "$450K"
+      },
+      "system": {
+        "slug": "red-panda",
+        "section": "Cherry Blossom",
+        "sortOrder": 79,
+        "image": "/Steal%20an%20Egg/Pets/red-panda.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Koi",
+        "cardSummary": "Koi is listed in the Cherry Blossom pool as a Cosmic pet earning $12M per second.",
+        "rarity": "Cosmic",
+        "biome": "Cherry Blossom",
+        "incomePerSecond": "$12M"
+      },
+      "system": {
+        "slug": "koi",
+        "section": "Cherry Blossom",
+        "sortOrder": 80,
+        "image": "/Steal%20an%20Egg/Pets/koi.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowy Owl",
+        "cardSummary": "Snowy Owl is listed in the Cherry Blossom pool as a Cosmic pet earning $7.5M per second.",
+        "rarity": "Cosmic",
+        "biome": "Cherry Blossom",
+        "incomePerSecond": "$7.5M"
+      },
+      "system": {
+        "slug": "snowy-owl",
+        "section": "Cherry Blossom",
+        "sortOrder": 81,
+        "image": "/Steal%20an%20Egg/Pets/snowy-owl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stag",
+        "cardSummary": "Stag is listed in the Cherry Blossom pool as a Secret pet earning $145M per second.",
+        "rarity": "Secret",
+        "biome": "Cherry Blossom",
+        "incomePerSecond": "$145M"
+      },
+      "system": {
+        "slug": "stag",
+        "section": "Cherry Blossom",
+        "sortOrder": 82,
+        "image": "/Steal%20an%20Egg/Pets/stag.png"
       }
     },
     {
@@ -1143,7 +1249,7 @@
         "slug": "tung-tung-sahur",
         "section": "Brainrot",
         "sortOrder": 71,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/tung-tung-sahur.png"
       }
     },
     {
@@ -1158,7 +1264,7 @@
         "slug": "bananita-dolphinita",
         "section": "Brainrot",
         "sortOrder": 72,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/bananita-dolphinita.png"
       }
     },
     {
@@ -1173,7 +1279,7 @@
         "slug": "belula-beluga",
         "section": "Brainrot",
         "sortOrder": 73,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/belula-beluga.png"
       }
     },
     {
@@ -1188,7 +1294,7 @@
         "slug": "mangolini-parrochini",
         "section": "Brainrot",
         "sortOrder": 74,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/mangolini-parrochini.png"
       }
     },
     {
@@ -1203,7 +1309,7 @@
         "slug": "bomboclat-crocolat",
         "section": "Brainrot",
         "sortOrder": 75,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/bomboclat-crocolat.png"
       }
     },
     {
@@ -1218,7 +1324,7 @@
         "slug": "strawberry-elephant",
         "section": "Brainrot",
         "sortOrder": 76,
-        "image": null
+        "image": "/Steal%20an%20Egg/Pets/strawberry-elephant.png"
       }
     }
   ]

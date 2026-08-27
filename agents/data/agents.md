@@ -149,6 +149,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Steal a Brainrot/*.json`
   - Local Steal a Brainrot in-game datasets collected from the Steal a Brainrot Wiki for wiki/collection page work.
   - Matching images live under `apps/web/public/Steal a Brainrot/`.
+- `data/Steal an Egg/*.json`
+  - Local Steal an Egg in-game datasets collected from the approved Steal an Egg Roblox Wiki index for wiki/collection page work.
+  - Matching pet images live under `apps/web/public/Steal an Egg/Pets/`; readable item names baked into source artwork are accepted.
 - `data/Build A Boat For Treasure/blocks.json`
   - Local Build A Boat For Treasure blocks dataset collected from the Build A Boat For Treasure Wiki for wiki/collection page work.
   - Matching optimized WebP card images live under `apps/web/public/Build A Boat For Treasure/blocks/`; source/MIME/conversion evidence lives under the collection workspace.

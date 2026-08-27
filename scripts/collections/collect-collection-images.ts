@@ -153,21 +153,41 @@ function getDatasetRows(document: unknown): Record<string, unknown>[] {
   return record.items ?? record.data ?? [];
 }
 
+function isV2Dataset(document: unknown): boolean {
+  if (!document || typeof document !== "object" || Array.isArray(document)) return false;
+  const meta = (document as { meta?: unknown }).meta;
+  if (!meta || typeof meta !== "object" || Array.isArray(meta)) return false;
+  return (meta as { schemaVersion?: unknown }).schemaVersion === 2;
+}
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  return value as Record<string, unknown>;
+}
+
 async function updateDatasetImages(datasetPath: string, updates: Map<string, string>, dryRun: boolean) {
   const resolved = resolvePath(datasetPath);
   const document = await readJsonFile<unknown>(resolved);
   const rows = getDatasetRows(document);
+  const v2 = isV2Dataset(document);
   let changed = 0;
 
   for (const row of rows) {
-    const name = typeof row.name === "string" ? row.name : null;
+    const item = v2 ? asRecord(row.item) : row;
+    const system = v2 ? asRecord(row.system) : null;
+    const name = item && typeof item.name === "string" ? item.name : null;
     if (!name) continue;
     const nextImage = updates.get(name) ?? updates.get(slugify(name));
     if (!nextImage) continue;
-    if (row.image !== nextImage) {
+    if (v2) {
+      if (!system || system.image === nextImage) continue;
+      system.image = nextImage;
+    } else if (row.image !== nextImage) {
       row.image = nextImage;
-      changed += 1;
+    } else {
+      continue;
     }
+    changed += 1;
   }
 
   if (!dryRun && changed) {

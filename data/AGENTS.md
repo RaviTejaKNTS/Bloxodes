@@ -29,6 +29,8 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Keep rows source-backed to Grow a Garden 2 specifically. Do not fill crop sell values, sprinkler prices, mutation multipliers, guild rewards, or egg rows from Grow a Garden 1 or unverified calculator assumptions.
 - `data/Steal a Brainrot/*`
   - Dataset-backed Steal a Brainrot wiki/collection content, including brainrots, rarities, mutations, traits, rebirths, gears, lucky blocks, rituals, machines, and fuse-machine entries.
+- `data/Steal an Egg/*`
+  - Dataset-backed Steal an Egg wiki/collection content, including pets and biomes. Matching source-provided pet images live under `apps/web/public/Steal an Egg/Pets/` when available; readable item names baked into those source images are acceptable and should not be treated as an image gap.
 - `data/Build A Boat For Treasure/blocks.json`
   - Dataset-backed Build A Boat For Treasure blocks collection with the reconciled 164 present/current-status entries and 36 removed historical entries; verified hitpoints and the five source-verified block weights are retained, while unsupported values remain null.
   - Matching optimized WebP card images live under `apps/web/public/Build A Boat For Treasure/blocks/`; image source/MIME/conversion evidence lives under the collection workspace.

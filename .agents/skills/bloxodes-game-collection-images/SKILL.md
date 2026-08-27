@@ -13,8 +13,8 @@ Use this after `brief.md` and data readiness are approved. Give images their own
 
 1. Read the approved `brief.md` and dataset.
 2. Confirm which items need images and which dataset field stores the image path.
-3. Find clean item images from useful sources. Prefer official/game wiki style images when available. Use Fandom, BloxInformer, Beebom, Game8, Pro Game Guides, and similar Roblox guide sites when they have better usable images.
-4. Do not use edited thumbnails, page screenshots, logos, or images that do not clearly show the item.
+3. Find clear item images from useful sources. Prefer official/game wiki style images when available. Use Fandom, BloxInformer, Beebom, Game8, Pro Game Guides, and similar Roblox guide sites when they have better usable images.
+4. Do not use edited thumbnails, page screenshots, logos, or images that do not clearly show the item. A readable item name or other identifying text baked into an otherwise useful item image is acceptable; never reject an image solely because the item name appears on it.
 5. Save images under the expected public path for the game and collection.
 6. Update the dataset image field for each matched item.
 7. If an image is missing, record the exact item and why it is missing.
@@ -34,7 +34,7 @@ npm run check:game-collection-data -- --game <game-slug> --collection <collectio
 
 Use `--file <dataset.json>` if the collection is not registered yet.
 
-10. Update `brief.md` with image readiness.
+10. Update `brief.md` with image readiness. Record the source URL for accepted images even when the source artwork includes a readable item name. User- or parent-approved direct item images may be used when they clearly match the exact game item; keep licensing or reuse caveats in the brief rather than silently dropping otherwise useful coverage.
 
 ## Image Approval Notes
 

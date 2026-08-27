@@ -1,7 +1,7 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-08-25
+Last verified: 2026-08-27
 Evidence: wiki route/data contracts, workflow skills, game collection registry and v2 dataset rules, seed/verification scripts, and the latest production row-count sample
 
 ## Scope
@@ -41,6 +41,8 @@ Use the matching wiki and game-collection workflow skills. For existing datasets
 Collection image manifests and local public assets are part of the data contract. A collection is not ready merely because its copy exists: every item count, image path or documented text-only exception, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
 
 Text-only rows are acceptable only when clean row-level media is unavailable and the decision is recorded in the owning dataset/documentation. Do not substitute unrelated crops, edited art, or generic game thumbnails for missing item images.
+
+Readable source-provided item names or labels baked into an otherwise valid row image are acceptable. Do not reject an exact item image solely because the source includes the item name; provenance and reuse concerns should be recorded separately in the collection brief.
 
 ## Deployment Boundary
 
