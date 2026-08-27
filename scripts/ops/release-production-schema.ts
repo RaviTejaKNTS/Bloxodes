@@ -2,6 +2,7 @@ import "../shared/load-env";
 
 import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
@@ -66,21 +67,43 @@ function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
     "-X", "-v", "ON_ERROR_STOP=1"
   ];
   if (tuplesOnly) psql.push("-A", "-t");
-  const result = spawnSync("ssh", [
-    "-o", "BatchMode=yes",
-    "-o", "ConnectTimeout=10",
-    target,
-    psql.join(" ")
-  ], {
-    cwd: repoRoot,
-    input: sql,
-    encoding: "utf8",
-    maxBuffer: 20 * 1024 * 1024
-  });
-  if (result.error) throw result.error;
-  if (result.stderr) process.stderr.write(result.stderr);
-  if (result.status !== 0) throw new Error(`Remote production psql exited with status ${result.status}.`);
-  return result.stdout.trim();
+  const password = process.env.VPS_ADMIN_PASSWORD?.trim();
+  const askpassRoot = password ? fs.mkdtempSync(path.join(os.tmpdir(), "bloxodes-ssh-askpass-")) : null;
+  try {
+    const askpass = askpassRoot ? path.join(askpassRoot, "askpass.sh") : null;
+    if (askpass) {
+      fs.writeFileSync(askpass, '#!/bin/sh\nprintf "%s\\n" "$VPS_ADMIN_PASSWORD"\n', { mode: 0o700 });
+    }
+    const result = spawnSync("ssh", [
+      "-o", password ? "BatchMode=no" : "BatchMode=yes",
+      "-o", "ConnectTimeout=10",
+      ...(password ? [
+        "-o", "IdentitiesOnly=yes",
+        "-o", "PubkeyAuthentication=no",
+        "-o", "PreferredAuthentications=password,keyboard-interactive",
+        "-o", "NumberOfPasswordPrompts=1"
+      ] : []),
+      target,
+      psql.join(" ")
+    ], {
+      cwd: repoRoot,
+      input: sql,
+      encoding: "utf8",
+      maxBuffer: 20 * 1024 * 1024,
+      env: askpass ? {
+        ...process.env,
+        DISPLAY: process.env.DISPLAY || "bloxodes-ssh-askpass",
+        SSH_ASKPASS: askpass,
+        SSH_ASKPASS_REQUIRE: "force"
+      } : process.env
+    });
+    if (result.error) throw result.error;
+    if (result.stderr) process.stderr.write(result.stderr);
+    if (result.status !== 0) throw new Error(`Remote production psql exited with status ${result.status}.`);
+    return result.stdout.trim();
+  } finally {
+    if (askpassRoot) fs.rmSync(askpassRoot, { recursive: true, force: true });
+  }
 }
 
 function ledgerInsert(migration: Migration): string {
