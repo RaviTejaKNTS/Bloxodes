@@ -63,7 +63,7 @@ advance production health.
 4. Apply approved schema changes to managed development through the Supabase connector, then list migrations and run readiness/advisors.
 5. Obtain separate production permission before production schema, Edge Function, VPS, or homelab mutations other than the guarded checkout synchronization included in an explicit e2e release. That checkout-only authorization does not include env changes, unit installation, job interruption, or service control.
 6. After every explicit e2e release, execute the released `scripts/ops/sync-homelab-checkout.sh` on the homelab: dry-run and then apply it against the exact `origin/production` SHA. If the production delta changes installed units, article automation is active, or preflight fails, leave the checkout unchanged and report synchronization pending instead of forcing it. If apply fails after starting, stop and report the exact resulting remote state.
-7. Run the full read-only platform check after the synchronization attempt and report any remaining drift.
+7. Run the full read-only platform check after the synchronization attempt and report any remaining drift. It uses the same `VPS_SSH_IDENTITY_COMMENT` selector as the schema release on workstations with several agent keys.
 
 The check reports drift; it never fixes drift. Database/Storage backup work is intentionally outside this sequence for now.
 
