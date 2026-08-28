@@ -6,6 +6,11 @@ const INDEXABLE_PATHS = new Set([
   "/catalog/roblox-decal-ids"
 ]);
 
+function isIndexablePath(pathname: string): boolean {
+  if (INDEXABLE_PATHS.has(pathname)) return true;
+  return /^\/catalog\/roblox-(music|decal)-ids\/games\/[^/]+$/.test(pathname);
+}
+
 type PageSnapshot = {
   html: string;
   requestedPath: string;
@@ -66,7 +71,7 @@ function auditPage(snapshot: PageSnapshot) {
   const h1Count = $("main h1").length;
   const robots = $('head meta[name="robots"]').attr("content")?.toLowerCase() ?? "";
   const responsePathname = new URL(snapshot.responseUrl).pathname;
-  const shouldIndex = INDEXABLE_PATHS.has(responsePathname);
+  const shouldIndex = isIndexablePath(responsePathname);
   if (!title) failures.push("SEO title is missing");
   if (!description) failures.push("meta description is missing");
   if (shouldIndex && (canonical.length !== 1 || !canonical.attr("href"))) {
@@ -185,32 +190,44 @@ async function main() {
     "/catalog/roblox-music-ids/monthly/page/2",
     "/catalog/roblox-music-ids/yearly",
     "/catalog/roblox-music-ids/yearly/page/2",
+    "/catalog/roblox-music-ids/games",
     "/catalog/roblox-music-ids/genres",
     "/catalog/roblox-music-ids/artists",
     "/catalog/roblox-decal-ids",
     "/catalog/roblox-decal-ids/page/2",
     "/catalog/roblox-decal-ids/curated",
     "/catalog/roblox-decal-ids/curated/page/2",
-    "/catalog/roblox-decal-ids/categories"
+    "/catalog/roblox-decal-ids/categories",
+    "/catalog/roblox-decal-ids/games"
   ]);
 
   const genreHub = await fetchPage(baseUrl, "/catalog/roblox-music-ids/genres");
   const artistHub = await fetchPage(baseUrl, "/catalog/roblox-music-ids/artists");
   const decalCategoryHub = await fetchPage(baseUrl, "/catalog/roblox-decal-ids/categories");
+  const musicGamesHub = await fetchPage(baseUrl, "/catalog/roblox-music-ids/games");
+  const decalGamesHub = await fetchPage(baseUrl, "/catalog/roblox-decal-ids/games");
   const genrePaths = discoverDetailPaths(genreHub, "/catalog/roblox-music-ids/genres/");
   const artistPaths = discoverDetailPaths(artistHub, "/catalog/roblox-music-ids/artists/");
   const decalCategoryPaths = discoverDetailPaths(decalCategoryHub, "/catalog/roblox-decal-ids/categories/");
+  const musicGamePaths = discoverDetailPaths(musicGamesHub, "/catalog/roblox-music-ids/games/");
+  const decalGamePaths = discoverDetailPaths(decalGamesHub, "/catalog/roblox-decal-ids/games/");
   const genrePath = genrePaths[0]!;
   const artistPath = artistPaths[0]!;
   const decalCategoryPath = decalCategoryPaths[0]!;
+  const musicGamePath = musicGamePaths[0]!;
+  const decalGamePath = decalGamePaths[0]!;
   requestedPaths.add(genrePath);
   requestedPaths.add(artistPath);
   requestedPaths.add(decalCategoryPath);
+  requestedPaths.add(musicGamePath);
+  requestedPaths.add(decalGamePath);
 
   const paginatedDetailPaths = await Promise.all([
     discoverPaginatedDetail(baseUrl, genrePaths),
     discoverPaginatedDetail(baseUrl, artistPaths),
-    discoverPaginatedDetail(baseUrl, decalCategoryPaths)
+    discoverPaginatedDetail(baseUrl, decalCategoryPaths),
+    discoverPaginatedDetail(baseUrl, musicGamePaths),
+    discoverPaginatedDetail(baseUrl, decalGamePaths)
   ]);
   for (const pageTwo of paginatedDetailPaths) {
     if (pageTwo) requestedPaths.add(pageTwo);

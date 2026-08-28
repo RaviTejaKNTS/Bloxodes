@@ -64,19 +64,19 @@ export function renderDecalGamesHub({ contentHtml }: { contentHtml: PageContentH
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-8">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--options">
         {intro}
         <DecalCatalogNav active="games" />
-        <div className="grid gap-4 md:grid-cols-2">
-          {DECAL_GAME_ID_PAGES.map((game) => (
-            <Link key={game.slug} href={`${DECAL_GAMES_PATH}/${game.slug}`} className="block">
-              <article data-journey-item className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
+        {DECAL_GAME_ID_PAGES.map((game) => (
+          <div key={game.slug} data-journey-item className="h-full">
+            <Link href={`${DECAL_GAMES_PATH}/${game.slug}`} className="group block h-full">
+              <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
                 <h2 className="text-xl font-semibold leading-snug text-foreground">{game.title}</h2>
                 <p className="mt-2 text-sm leading-6 text-muted">{game.description}</p>
               </article>
             </Link>
-          ))}
-        </div>
+          </div>
+        ))}
       </section>
       {contentHtml?.id ? <CommentsSection entityType="catalog" entityId={contentHtml.id} /> : null}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
@@ -160,7 +160,7 @@ export function renderDecalGamePage({
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-8">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--decals">
         {introNodes}
         {currentPage === 1 ? <DecalCatalogNav active="games" /> : null}
         <DecalIdsBrowser

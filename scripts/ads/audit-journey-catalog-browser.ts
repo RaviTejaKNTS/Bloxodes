@@ -11,10 +11,14 @@ const ROUTES = [
   "/catalog/roblox-music-ids/charts/page/2?range=weekly",
   "/catalog/roblox-music-ids/genres",
   "/catalog/roblox-music-ids/artists",
+  "/catalog/roblox-music-ids/games",
+  "/catalog/roblox-music-ids/games/jujutsu-shenanigans",
   "/catalog/roblox-decal-ids",
   "/catalog/roblox-decal-ids/page/2",
   "/catalog/roblox-decal-ids/curated",
-  "/catalog/roblox-decal-ids/categories"
+  "/catalog/roblox-decal-ids/categories",
+  "/catalog/roblox-decal-ids/games",
+  "/catalog/roblox-decal-ids/games/da-hood"
 ] as const;
 
 const VIEWPORTS = [

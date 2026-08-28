@@ -266,7 +266,7 @@ function MusicIdsBrowserContent({
           No music IDs have been collected yet. Check back soon.
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2">
+        <>
           {songs.map((song) => {
             const durationLabel = formatDuration(song.duration_seconds);
             return (
@@ -357,7 +357,7 @@ function MusicIdsBrowserContent({
               </div>
             );
           })}
-        </div>
+        </>
       )}
 
       <PagePagination

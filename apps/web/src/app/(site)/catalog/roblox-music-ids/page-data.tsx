@@ -574,7 +574,7 @@ export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
     <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4" aria-label="Roblox music ID sections">
       {MUSIC_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
-        const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
+        const cardClasses = `group relative h-full overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
             ? "border-accent/60 bg-accent/10"
             : "border-border/70 bg-surface/80 hover:border-accent/55"
           }`;

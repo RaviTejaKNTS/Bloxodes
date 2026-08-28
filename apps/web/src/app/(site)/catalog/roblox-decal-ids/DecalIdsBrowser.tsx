@@ -369,7 +369,7 @@ function DecalIdsBrowserContent({
           No decal IDs have been collected yet. Check back soon.
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <>
           {decals.map((decal) => (
             <div key={decal.asset_id} data-journey-item className="h-full">
               <DecalCard
@@ -380,7 +380,7 @@ function DecalIdsBrowserContent({
               />
             </div>
           ))}
-        </div>
+        </>
       )}
 
       <PagePagination
