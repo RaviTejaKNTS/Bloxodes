@@ -3,12 +3,51 @@ import { load } from "cheerio";
 const DEFAULT_BASE_URL = "http://127.0.0.1:3000";
 const INDEXABLE_PATHS = new Set([
   "/catalog/roblox-music-ids",
-  "/catalog/roblox-decal-ids"
+  "/catalog/roblox-music-ids/trending",
+  "/catalog/roblox-decal-ids",
+  "/catalog/roblox-decal-ids/curated",
+  "/catalog/roblox-dictionary",
+  "/catalog/roblox-font-ids",
+  "/catalog/roblox-mesh-ids",
+  "/catalog/roblox-color-codes",
+  "/catalog/roblox-errors-and-fixes",
+  "/catalog/roblox-promo-codes",
+  "/catalog/free-roblox-items",
+  "/catalog/roblox-items-and-bundles",
+  "/catalog/roblox-items-and-bundles/roblox-accessories",
+  "/catalog/roblox-items-and-bundles/roblox-clothing",
+  "/catalog/roblox-items-and-bundles/roblox-body-parts",
+  "/catalog/roblox-items-and-bundles/roblox-emotes",
+  "/catalog/roblox-items-and-bundles/roblox-animations",
+  "/catalog/roblox-items-and-bundles/roblox-makeup",
+  "/catalog/admin-commands",
+  "/articles",
+  "/codes",
+  "/checklists",
+  "/quizzes",
+  "/tools",
+  "/events",
+  "/authors",
+  "/wiki",
+  "/catalog",
+  "/puzzles",
+  "/stats/reports"
 ]);
 
 function isIndexablePath(pathname: string): boolean {
   if (INDEXABLE_PATHS.has(pathname)) return true;
-  return /^\/catalog\/roblox-(music|decal)-ids\/games\/[^/]+$/.test(pathname);
+  return [
+    /^\/catalog\/roblox-(music|decal)-ids\/games\/[^/]+$/,
+    /^\/articles\/[^/]+$/,
+    /^\/articles\/games\/[^/]+$/,
+    /^\/wiki\/[^/]+$/,
+    /^\/wiki\/[^/]+\/[^/]+$/,
+    /^\/puzzles\/[^/]+$/,
+    /^\/authors\/[^/]+$/,
+    /^\/(?:codes|checklists|events|quizzes)\/[^/]+$/,
+    /^\/tools\/(?!page\/)[^/]+(?:\/[^/]+)*$/,
+    /^\/stats\/reports\/[^/]+$/
+  ].some((pattern) => pattern.test(pathname));
 }
 
 type PageSnapshot = {
@@ -24,6 +63,28 @@ function readArg(name: string): string | null {
 
 function normalizeBaseUrl(value: string): string {
   return value.endsWith("/") ? value : `${value}/`;
+}
+
+async function mapWithConcurrency<T, R>(
+  values: T[],
+  concurrency: number,
+  mapper: (value: T, index: number) => Promise<R>
+): Promise<R[]> {
+  const results = new Array<R>(values.length);
+  let nextIndex = 0;
+
+  async function worker() {
+    while (true) {
+      const index = nextIndex++;
+      if (index >= values.length) return;
+      results[index] = await mapper(values[index], index);
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: Math.min(Math.max(concurrency, 1), values.length) }, () => worker())
+  );
+  return results;
 }
 
 async function fetchPage(baseUrl: string, requestedPath: string): Promise<PageSnapshot> {
@@ -42,20 +103,46 @@ async function fetchPage(baseUrl: string, requestedPath: string): Promise<PageSn
   };
 }
 
+async function filterExistingPaths(baseUrl: string, paths: string[], label: string): Promise<string[]> {
+  const uniquePaths = [...new Set(paths)];
+  const checkedPaths = await mapWithConcurrency(uniquePaths, 4, async (path) => {
+    const url = new URL(path.replace(/^\//, ""), baseUrl);
+    const response = await fetch(url, {
+      headers: { "user-agent": "Bloxodes Journey DOM audit" },
+      redirect: "follow"
+    });
+    if (response.ok) return path;
+    if (response.status === 404) {
+      console.warn(`Skipped missing ${label} route: ${path}`);
+      return null;
+    }
+    throw new Error(`${path} returned ${response.status} while validating ${label} routes`);
+  });
+  return checkedPaths.filter((path): path is string => Boolean(path));
+}
+
 function auditPage(snapshot: PageSnapshot) {
   const $ = load(snapshot.html);
   const content = $("#article-body");
   const directItems = content.children("[data-journey-item]");
   const allItems = content.find("[data-journey-item]");
+  const hasEmptyState = content.is('[class*="border-dashed"]') || content.find('[class*="border-dashed"]').length > 0;
+  const isJourneyStream = content.hasClass("journey-content-stream");
+  const isStructuredStream =
+    content.hasClass("journey-content-stream--prose") ||
+    content.hasClass("journey-content-stream--interactive");
   const failures: string[] = [];
 
   if (content.length !== 1) {
     failures.push(`expected one #article-body, found ${content.length}`);
   }
-  if (content.children().length < 2) {
+  if (!isJourneyStream) {
+    failures.push("#article-body is missing the Journey content stream contract");
+  }
+  if (!isStructuredStream && content.children().length < 2 && directItems.length > 1 && !hasEmptyState) {
     failures.push(`expected multiple direct content blocks, found ${content.children().length}`);
   }
-  if (directItems.length < 1) {
+  if (!isStructuredStream && directItems.length < 1 && !hasEmptyState) {
     failures.push("expected at least one direct Journey item");
   }
   if (directItems.length !== allItems.length) {
@@ -133,6 +220,7 @@ function auditPage(snapshot: PageSnapshot) {
   return {
     directChildren: content.children().length,
     directItems: directItems.length,
+    emptyState: hasEmptyState,
     jsonLdScripts: jsonLdScripts.length,
     indexable: shouldIndex,
     requestedPath: snapshot.requestedPath,
@@ -148,9 +236,15 @@ function discoverDetailPaths(snapshot: PageSnapshot, prefix: string): string[] {
     .map((_, element) => $(element).attr("href"))
     .get()
     .filter((value): value is string => Boolean(value?.startsWith(prefix) && !value.includes("/page/")));
-  if (!hrefs.length) {
-    throw new Error(`${snapshot.requestedPath}: could not discover a detail URL under ${prefix}`);
-  }
+  return [...new Set(hrefs)];
+}
+
+function discoverArticleBodyPaths(snapshot: PageSnapshot, prefix: string): string[] {
+  const $ = load(snapshot.html);
+  const hrefs = $("#article-body a[href]")
+    .map((_, element) => $(element).attr("href"))
+    .get()
+    .filter((value): value is string => Boolean(value?.startsWith(prefix) && !value.includes("/page/")));
   return [...new Set(hrefs)];
 }
 
@@ -162,44 +256,96 @@ function discoverPageTwo(snapshot: PageSnapshot): string | null {
     .find((value): value is string => Boolean(value?.match(/\/page\/2(?:\?|$)/))) ?? null;
 }
 
-async function discoverPaginatedDetail(baseUrl: string, detailPaths: string[]): Promise<string | null> {
-  for (const detailPath of detailPaths) {
+async function discoverPaginatedDetails(baseUrl: string, detailPaths: string[]): Promise<string[]> {
+  const pageTwoPaths = new Set<string>();
+  const discovered = await mapWithConcurrency(detailPaths, 4, async (detailPath) => {
     const snapshot = await fetchPage(baseUrl, detailPath);
-    const pageTwo = discoverPageTwo(snapshot);
-    if (pageTwo) return pageTwo;
+    return discoverPageTwo(snapshot);
+  });
+  for (const pageTwo of discovered) {
+    if (pageTwo) pageTwoPaths.add(pageTwo);
   }
-  return null;
+  return [...pageTwoPaths];
 }
 
 async function main() {
   const baseUrl = normalizeBaseUrl(readArg("--base-url") ?? DEFAULT_BASE_URL);
   const requestedPaths = new Set<string>([
     "/catalog/roblox-music-ids",
-    "/catalog/roblox-music-ids/page/2",
     "/catalog/roblox-music-ids/trending",
-    "/catalog/roblox-music-ids/trending/page/2",
     "/catalog/roblox-music-ids/charts?range=weekly",
     "/catalog/roblox-music-ids/charts?range=monthly",
     "/catalog/roblox-music-ids/charts?range=yearly",
-    "/catalog/roblox-music-ids/charts/page/2?range=weekly",
     "/catalog/roblox-music-ids/daily-top-500",
-    "/catalog/roblox-music-ids/daily-top-500/page/2",
     "/catalog/roblox-music-ids/weekly",
-    "/catalog/roblox-music-ids/weekly/page/2",
     "/catalog/roblox-music-ids/monthly",
-    "/catalog/roblox-music-ids/monthly/page/2",
     "/catalog/roblox-music-ids/yearly",
-    "/catalog/roblox-music-ids/yearly/page/2",
     "/catalog/roblox-music-ids/games",
     "/catalog/roblox-music-ids/genres",
     "/catalog/roblox-music-ids/artists",
     "/catalog/roblox-decal-ids",
-    "/catalog/roblox-decal-ids/page/2",
     "/catalog/roblox-decal-ids/curated",
-    "/catalog/roblox-decal-ids/curated/page/2",
     "/catalog/roblox-decal-ids/categories",
-    "/catalog/roblox-decal-ids/games"
+    "/catalog/roblox-decal-ids/games",
+    "/catalog/roblox-dictionary",
+    "/catalog/roblox-font-ids",
+    "/catalog/roblox-mesh-ids",
+    "/catalog/roblox-color-codes",
+    "/catalog/roblox-errors-and-fixes",
+    "/catalog/roblox-promo-codes",
+    "/catalog/free-roblox-items",
+    "/catalog/roblox-items-and-bundles",
+    "/catalog/roblox-items-and-bundles/roblox-accessories",
+    "/catalog/roblox-items-and-bundles/roblox-clothing",
+    "/catalog/roblox-items-and-bundles/roblox-body-parts",
+    "/catalog/roblox-items-and-bundles/roblox-emotes",
+    "/catalog/roblox-items-and-bundles/roblox-animations",
+    "/catalog/roblox-items-and-bundles/roblox-makeup",
+    "/catalog/admin-commands",
+    "/articles",
+    "/codes",
+    "/checklists",
+    "/quizzes",
+    "/tools",
+    "/events",
+    "/authors",
+    "/wiki",
+    "/catalog",
+    "/puzzles",
+    "/stats/reports"
   ]);
+
+  const paginatedIndexRoots = [
+    "/catalog/roblox-music-ids",
+    "/catalog/roblox-music-ids/trending",
+    "/catalog/roblox-music-ids/charts?range=weekly",
+    "/catalog/roblox-music-ids/charts?range=monthly",
+    "/catalog/roblox-music-ids/charts?range=yearly",
+    "/catalog/roblox-music-ids/daily-top-500",
+    "/catalog/roblox-music-ids/weekly",
+    "/catalog/roblox-music-ids/monthly",
+    "/catalog/roblox-music-ids/yearly",
+    "/catalog/roblox-decal-ids",
+    "/catalog/roblox-decal-ids/curated",
+    "/articles",
+    "/codes",
+    "/checklists",
+    "/tools",
+    "/catalog/free-roblox-items",
+    "/catalog/roblox-items-and-bundles",
+    "/catalog/roblox-mesh-ids"
+  ];
+  const paginatedIndexPaths = await Promise.all(
+    paginatedIndexRoots.map(async (rootPath) => discoverPageTwo(await fetchPage(baseUrl, rootPath)))
+  );
+  const existingPaginatedIndexPaths = await filterExistingPaths(
+    baseUrl,
+    paginatedIndexPaths.filter((path): path is string => Boolean(path)),
+    "index pagination"
+  );
+  for (const pageTwo of existingPaginatedIndexPaths) {
+    if (pageTwo) requestedPaths.add(pageTwo);
+  }
 
   const genreHub = await fetchPage(baseUrl, "/catalog/roblox-music-ids/genres");
   const artistHub = await fetchPage(baseUrl, "/catalog/roblox-music-ids/artists");
@@ -208,39 +354,101 @@ async function main() {
   const decalGamesHub = await fetchPage(baseUrl, "/catalog/roblox-decal-ids/games");
   const genrePaths = discoverDetailPaths(genreHub, "/catalog/roblox-music-ids/genres/");
   const artistPaths = discoverDetailPaths(artistHub, "/catalog/roblox-music-ids/artists/");
-  const decalCategoryPaths = discoverDetailPaths(decalCategoryHub, "/catalog/roblox-decal-ids/categories/");
-  const musicGamePaths = discoverDetailPaths(musicGamesHub, "/catalog/roblox-music-ids/games/");
-  const decalGamePaths = discoverDetailPaths(decalGamesHub, "/catalog/roblox-decal-ids/games/");
-  const genrePath = genrePaths[0]!;
-  const artistPath = artistPaths[0]!;
-  const decalCategoryPath = decalCategoryPaths[0]!;
-  const musicGamePath = musicGamePaths[0]!;
-  const decalGamePath = decalGamePaths[0]!;
-  requestedPaths.add(genrePath);
-  requestedPaths.add(artistPath);
-  requestedPaths.add(decalCategoryPath);
-  requestedPaths.add(musicGamePath);
-  requestedPaths.add(decalGamePath);
+  const decalCategoryPaths = discoverArticleBodyPaths(decalCategoryHub, "/catalog/roblox-decal-ids/categories/");
+  const musicGamePaths = discoverArticleBodyPaths(musicGamesHub, "/catalog/roblox-music-ids/games/");
+  const decalGamePaths = discoverArticleBodyPaths(decalGamesHub, "/catalog/roblox-decal-ids/games/");
+  const freeItemPaths = discoverArticleBodyPaths(
+    await fetchPage(baseUrl, "/catalog/free-roblox-items"),
+    "/catalog/free-roblox-items/"
+  );
+  const avatarCatalogPaths = discoverArticleBodyPaths(
+    await fetchPage(baseUrl, "/catalog/roblox-items-and-bundles"),
+    "/catalog/roblox-items-and-bundles/"
+  );
+  const structuredDetailRoots = [
+    { root: "/articles", prefix: "/articles/" },
+    { root: "/wiki", prefix: "/wiki/" },
+    { root: "/puzzles", prefix: "/puzzles/" },
+    { root: "/tools", prefix: "/tools/" },
+    { root: "/authors", prefix: "/authors/" },
+    { root: "/stats/reports", prefix: "/stats/reports/" },
+    { root: "/codes", prefix: "/codes/" },
+    { root: "/checklists", prefix: "/checklists/" },
+    { root: "/events", prefix: "/events/" },
+    { root: "/quizzes", prefix: "/quizzes/" }
+  ] as const;
+  const structuredDetailPaths = new Set<string>();
+  const structuredRootDiscoveries = await mapWithConcurrency(structuredDetailRoots, 6, async ({ root, prefix }) => {
+    const snapshot = await fetchPage(baseUrl, root);
+    return discoverArticleBodyPaths(snapshot, prefix);
+  });
+  for (const detailPaths of structuredRootDiscoveries) {
+    for (const detailPath of detailPaths) structuredDetailPaths.add(detailPath);
+  }
+
+  // Wiki hubs link to their collection pages, while collection pages can also
+  // expose related collections. Follow a bounded number of passes so the audit
+  // covers the deeper route family without wandering through unrelated links.
+  for (let pass = 0; pass < 1; pass += 1) {
+    const wikiPaths = await filterExistingPaths(
+      baseUrl,
+      [...structuredDetailPaths].filter((path) => /^\/wiki\/[^/]+(?:\/[^/]+)?$/.test(path)),
+      "wiki discovery"
+    );
+    const wikiDiscoveries = await mapWithConcurrency(wikiPaths, 2, async (wikiPath) => {
+      const snapshot = await fetchPage(baseUrl, wikiPath);
+      return discoverArticleBodyPaths(snapshot, "/wiki/");
+    });
+    for (const detailPaths of wikiDiscoveries) {
+      for (const detailPath of detailPaths) structuredDetailPaths.add(detailPath);
+    }
+  }
+
+  const existingDetailPaths = await filterExistingPaths(
+    baseUrl,
+    [
+      ...genrePaths,
+      ...artistPaths,
+      ...decalCategoryPaths,
+      ...musicGamePaths,
+      ...decalGamePaths,
+      ...freeItemPaths,
+      ...avatarCatalogPaths,
+      ...structuredDetailPaths
+    ],
+    "discovered"
+  );
+  for (const detailPath of existingDetailPaths) {
+    requestedPaths.add(detailPath);
+  }
 
   const paginatedDetailPaths = await Promise.all([
-    discoverPaginatedDetail(baseUrl, genrePaths),
-    discoverPaginatedDetail(baseUrl, artistPaths),
-    discoverPaginatedDetail(baseUrl, decalCategoryPaths),
-    discoverPaginatedDetail(baseUrl, musicGamePaths),
-    discoverPaginatedDetail(baseUrl, decalGamePaths)
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => genrePaths.includes(path))),
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => artistPaths.includes(path))),
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => decalCategoryPaths.includes(path))),
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => musicGamePaths.includes(path))),
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => decalGamePaths.includes(path))),
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => freeItemPaths.includes(path))),
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => avatarCatalogPaths.includes(path))),
+    discoverPaginatedDetails(baseUrl, existingDetailPaths.filter((path) => structuredDetailPaths.has(path)))
   ]);
-  for (const pageTwo of paginatedDetailPaths) {
-    if (pageTwo) requestedPaths.add(pageTwo);
+  const existingPaginatedDetailPaths = await filterExistingPaths(
+    baseUrl,
+    paginatedDetailPaths.flat(),
+    "detail pagination"
+  );
+  for (const pageTwo of existingPaginatedDetailPaths) {
+    requestedPaths.add(pageTwo);
   }
 
-  const results = [];
-  for (const requestedPath of requestedPaths) {
+  console.log(`Auditing ${requestedPaths.size} server-rendered route variants.`);
+  const results = await mapWithConcurrency([...requestedPaths], 2, async (requestedPath) => {
     const snapshot = await fetchPage(baseUrl, requestedPath);
-    results.push(auditPage(snapshot));
-  }
+    return auditPage(snapshot);
+  });
 
   console.table(results);
-  console.log(`Journey DOM audit passed for ${results.length} Music IDs and Decal IDs route variants.`);
+  console.log(`Journey DOM audit passed for ${results.length} route variants.`);
 }
 
 main().catch((error) => {

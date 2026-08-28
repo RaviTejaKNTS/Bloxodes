@@ -74,12 +74,13 @@ function ToolsPageView({
         </header>
       )}
 
-      {tools.length ? (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {tools.map((tool, index) => (
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+        {tools.length ? (
+          tools.map((tool, index) => (
             <div
               key={tool.id ?? tool.code}
-              className="contents"
+              data-journey-item
+              className="h-full"
               data-analytics-event="select_item"
               data-analytics-item-list-name="tools_index"
               data-analytics-item-id={tool.code}
@@ -89,15 +90,15 @@ function ToolsPageView({
             >
               <ToolCard tool={tool} />
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-          No tools have been published yet. Check back soon.
-        </div>
-      )}
+          ))
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+            No tools have been published yet. Check back soon.
+          </div>
+        )}
 
-      <PagePagination basePath="/tools" currentPage={currentPage} totalPages={totalPages} />
+        <PagePagination basePath="/tools" currentPage={currentPage} totalPages={totalPages} />
+      </section>
 
       {showHero ? (
         <script

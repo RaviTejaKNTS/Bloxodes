@@ -13,19 +13,23 @@ export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-music-ids"];
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
+const FALLBACK_DESCRIPTION =
+  "Browse searchable Roblox music IDs for songs, artists, genres, radio games, and boombox experiences.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
   if (!catalog) {
     return {
       title: `Roblox Music IDs | ${SITE_NAME}`,
-      description: CATALOG_DESCRIPTION,
+      description: FALLBACK_DESCRIPTION,
       alternates: buildAlternates(CANONICAL)
     };
   }
 
   const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Music IDs | ${SITE_NAME}`;
-  const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
+  const description = catalog.meta_description?.trim() && catalog.meta_description.trim() !== CATALOG_DESCRIPTION
+    ? catalog.meta_description.trim()
+    : FALLBACK_DESCRIPTION;
   const image = catalog.thumb_url || FALLBACK_IMAGE;
 
   return {

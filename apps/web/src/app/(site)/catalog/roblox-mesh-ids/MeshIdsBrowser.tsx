@@ -50,7 +50,7 @@ function IdRow({ label, value, mesh }: { label: string; value: number; mesh: Rob
 
 function MeshCard({ mesh, eager = false }: { mesh: RobloxMeshId; eager?: boolean }) {
   return (
-    <article data-journey-item className="overflow-hidden rounded-md border border-border/60 bg-surface/20 p-3">
+    <article className="h-full overflow-hidden rounded-md border border-border/60 bg-surface/20 p-3">
       <div className="grid gap-4 sm:grid-cols-[10rem_minmax(0,1fr)]">
         <a
           href={mesh.creator_store_url}
@@ -193,8 +193,8 @@ function MeshIdsBrowserContent({
   }
 
   return (
-    <section aria-label="Roblox Mesh IDs" className="space-y-5" aria-busy={loading}>
-      <form onSubmit={submit} className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_13rem_auto]">
+    <>
+      <form onSubmit={submit} aria-busy={loading} className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_13rem_auto]">
         <label>
           <span className="sr-only">Search Roblox meshes</span>
           <input
@@ -231,9 +231,13 @@ function MeshIdsBrowserContent({
 
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
       {meshes.length ? (
-        <div className="grid gap-4 lg:grid-cols-2">
-          {meshes.map((mesh, index) => <MeshCard key={mesh.asset_id} mesh={mesh} eager={index < 4} />)}
-        </div>
+        <>
+          {meshes.map((mesh, index) => (
+            <div key={mesh.asset_id} data-journey-item className="h-full">
+              <MeshCard mesh={mesh} eager={index < 4} />
+            </div>
+          ))}
+        </>
       ) : (
         <p className="rounded-lg border border-dashed border-border/70 p-8 text-center text-muted">
           No Roblox meshes match that search.
@@ -246,6 +250,6 @@ function MeshIdsBrowserContent({
         totalPages={totalPages}
         query={queryString || undefined}
       />
-    </section>
+    </>
   );
 }

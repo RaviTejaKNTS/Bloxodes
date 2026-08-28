@@ -220,6 +220,7 @@ export function RobloxProfileCheckerClient() {
             type="text"
             value={input}
             onChange={(event) => setInput(event.target.value)}
+            aria-label="Roblox username"
             className="w-full rounded-full border border-border/60 bg-white/5 px-5 py-3 text-base text-foreground outline-none ring-2 ring-transparent transition focus:ring-accent/50 dark:bg-white/10"
             placeholder="Roblox username, for example builderman"
             autoComplete="off"

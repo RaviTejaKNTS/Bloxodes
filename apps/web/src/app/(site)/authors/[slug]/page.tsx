@@ -128,7 +128,7 @@ export default async function AuthorPage({ params }: Params) {
         </div>
       </header>
 
-      <section className="space-y-6">
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
         <div>
           <h2 className="text-2xl font-semibold text-foreground">Articles & Deep Dives</h2>
           <p className="text-sm text-muted">
@@ -136,15 +136,15 @@ export default async function AuthorPage({ params }: Params) {
           </p>
         </div>
         {articles.length ? (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {articles.map((article) => (
-              <ArticleCard key={article.id} article={article} />
-            ))}
-          </div>
+          articles.map((article) => (
+            <div key={article.id} data-journey-item className="h-full">
+              <ArticleCard article={article} />
+            </div>
+          ))
         ) : (
-          <p className="text-sm text-muted">
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-sm text-muted">
             {author.name} hasn't published any articles yet. Check back soon!
-          </p>
+          </div>
         )}
       </section>
 

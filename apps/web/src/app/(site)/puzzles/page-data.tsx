@@ -193,34 +193,41 @@ export async function renderPuzzlesIndex({ pages }: Awaited<ReturnType<typeof lo
         <p className="max-w-2xl text-base text-muted md:text-lg">{PUZZLES_DESCRIPTION}</p>
       </header>
 
-      <div className="grid grid-cols-3 gap-x-3 gap-y-8 min-[560px]:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-        {pages.map((page) => (
-          <Link
-            key={page.slug}
-            href={`/puzzles/${page.slug}`}
-            className="group flex min-w-0 flex-col items-center rounded-lg px-1 py-2 text-center outline-none transition focus-visible:ring-2 focus-visible:ring-accent/70"
-          >
-            <span className="flex aspect-square w-full max-w-[138px] items-center justify-center transition duration-200 group-hover:-translate-y-0.5 group-hover:scale-[1.03] min-[560px]:max-w-[146px] md:max-w-[158px]">
-              {page.icon_url ? (
-                <img
-                  src={page.icon_url}
-                  alt=""
-                  className="h-full w-full rounded-lg object-contain"
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : (
-                <span className="flex h-full w-full items-center justify-center rounded-lg border border-border/70 bg-card px-4 text-sm font-semibold text-muted">
-                  {puzzleCardName(page)}
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--puzzles">
+        {pages.length ? (
+          pages.map((page) => (
+            <div key={page.slug} data-journey-item className="h-full">
+              <Link
+                href={`/puzzles/${page.slug}`}
+                className="group flex min-w-0 flex-col items-center rounded-lg px-1 py-2 text-center outline-none transition focus-visible:ring-2 focus-visible:ring-accent/70"
+              >
+                <span className="flex aspect-square w-full max-w-[138px] items-center justify-center transition duration-200 group-hover:-translate-y-0.5 group-hover:scale-[1.03] min-[560px]:max-w-[146px] md:max-w-[158px]">
+                  {page.icon_url ? (
+                    <img
+                      src={page.icon_url}
+                      alt=""
+                      className="h-full w-full rounded-lg object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center rounded-lg border border-border/70 bg-card px-4 text-sm font-semibold text-muted">
+                      {puzzleCardName(page)}
+                    </span>
+                  )}
                 </span>
-              )}
-            </span>
-            <h2 className="mt-2.5 text-sm font-bold leading-tight text-foreground transition group-hover:text-accent md:text-base">
-              {puzzleCardName(page)}
-            </h2>
-          </Link>
-        ))}
-      </div>
+                <h2 className="mt-2.5 text-sm font-bold leading-tight text-foreground transition group-hover:text-accent md:text-base">
+                  {puzzleCardName(page)}
+                </h2>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-sm text-muted">
+            No puzzle pages have been published yet. Check back soon.
+          </div>
+        )}
+      </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
     </div>
@@ -277,7 +284,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
         ) : null}
       </header>
 
-      <section id="article-body" className="article-content md-copy-scope game-copy puzzle-copy">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope game-copy puzzle-copy journey-content-stream journey-content-stream--interactive">
         {intro}
         {answerIntro}
 
@@ -357,11 +364,13 @@ export async function renderPuzzleArchive(data: NonNullable<Awaited<ReturnType<t
         {description ? <p className="max-w-2xl text-base text-muted md:text-lg">{description}</p> : null}
       </header>
 
-      <AnswerShell title="Archived Answer" answer={answer}>{renderAnswerContent(page, answer)}</AnswerShell>
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--interactive">
+        <AnswerShell title="Archived Answer" answer={answer}>{renderAnswerContent(page, answer)}</AnswerShell>
 
-      <div className="rounded-lg border border-border/70 bg-surface/60 p-4 text-sm text-muted">
-        Looking for the newest answer? <Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}`}>Open the current {page.title} page</Link>.
-      </div>
+        <div className="rounded-lg border border-border/70 bg-surface/60 p-4 text-sm text-muted">
+          Looking for the newest answer? <Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}`}>Open the current {page.title} page</Link>.
+        </div>
+      </section>
     </article>
   );
 }

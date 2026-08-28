@@ -63,11 +63,13 @@ export default async function AuthorsIndexPage() {
         <p className="text-sm text-muted md:text-base">{description}</p>
       </header>
 
-      {authors.length === 0 ? (
-        <p className="text-sm text-muted">No authors found yet. Check back soon.</p>
-      ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {authors.map((author, index) => {
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+        {authors.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-sm text-muted">
+            No authors found yet. Check back soon.
+          </div>
+        ) : (
+          authors.map((author, index) => {
             const avatar = authorAvatarUrl(author, 96);
             const plainBio = author.bio_md
               ? author.bio_md
@@ -80,7 +82,8 @@ export default async function AuthorsIndexPage() {
             return (
               <div
                 key={author.id}
-                className="contents"
+                data-journey-item
+                className="h-full"
                 data-analytics-event="select_item"
                 data-analytics-item-list-name="authors_index"
                 data-analytics-item-id={author.slug ?? author.id}
@@ -88,7 +91,7 @@ export default async function AuthorsIndexPage() {
                 data-analytics-position={index + 1}
                 data-analytics-content-type="author"
               >
-                <article className="flex flex-col gap-4 rounded-[var(--radius-md)] border border-border/50 bg-surface px-5 py-6 shadow-soft transition hover:-translate-y-[2px] hover:border-accent/50 hover:shadow-lg">
+                <article className="flex h-full flex-col gap-4 rounded-[var(--radius-md)] border border-border/50 bg-surface px-5 py-6 shadow-soft transition hover:-translate-y-[2px] hover:border-accent/50 hover:shadow-lg">
                   <div className="flex items-start gap-4">
                     <img
                       src={avatar || "https://www.gravatar.com/avatar/?d=mp"}
@@ -133,9 +136,9 @@ export default async function AuthorsIndexPage() {
                 </article>
               </div>
             );
-          })}
-        </div>
-      )}
+          })
+        )}
+      </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
     </section>

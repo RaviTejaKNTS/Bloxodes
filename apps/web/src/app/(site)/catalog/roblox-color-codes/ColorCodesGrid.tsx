@@ -292,7 +292,7 @@ export function ColorCodesGrid({ items }: Props) {
   }
 
   return (
-    <section className="catalog-surface space-y-5">
+    <>
       <input
         type="text"
         value={query}
@@ -302,17 +302,17 @@ export function ColorCodesGrid({ items }: Props) {
         aria-label="Search Roblox color codes"
       />
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-        {filteredItems.map((item) => (
-          <ColorCodeCard key={item.number} item={item} />
-        ))}
-      </div>
+      {filteredItems.map((item) => (
+        <div key={item.number} data-journey-item className="h-full">
+          <ColorCodeCard item={item} />
+        </div>
+      ))}
 
       {trimmedQuery && !filteredItems.length ? (
         <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No Roblox colors matched that search.
         </div>
       ) : null}
-    </section>
+    </>
   );
 }

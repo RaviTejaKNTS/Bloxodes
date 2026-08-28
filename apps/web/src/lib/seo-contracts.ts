@@ -27,7 +27,15 @@ export const SEO_ROUTE_CONTRACTS: readonly SeoRouteContract[] = [
   {
     family: "main",
     sitemapPath: "/sitemaps/main.xml",
-    indexPaths: ["/", "/about", "/contact", "/privacy-policy", "/terms-of-service"],
+    indexPaths: [
+      "/",
+      "/about",
+      "/contact",
+      "/privacy-policy",
+      "/terms-of-service",
+      "/browser-extension",
+      "/account-deletion"
+    ],
     matches: (pathname) =>
       pathname === "/" ||
       [
@@ -35,6 +43,8 @@ export const SEO_ROUTE_CONTRACTS: readonly SeoRouteContract[] = [
         "/contact",
         "/privacy-policy",
         "/terms-of-service",
+        "/browser-extension",
+        "/account-deletion",
         "/editorial-guidelines",
         "/disclaimer",
         "/how-we-gather-and-verify-codes"

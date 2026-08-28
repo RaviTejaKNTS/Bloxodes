@@ -122,7 +122,11 @@ export default async function ChecklistPage({ params }: PageProps) {
   const boardContainerClass =
     "-mx-[calc((100vw-100%)/2)] overflow-x-auto px-[calc((100vw-100%)/2)] [scrollbar-color:theme(colors.border)_transparent] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
   const mainContent = (
-    <div className="flex flex-col gap-1 pb-2 md:gap-0 -mt-4 md:-mt-6">
+    <section
+      id="article-body"
+      itemProp="articleBody"
+      className="flex flex-col gap-1 pb-2 md:gap-0 -mt-4 md:-mt-6 journey-content-stream journey-content-stream--interactive"
+    >
       <header className="sticky top-0 z-30 flex flex-col gap-2 bg-background/95 py-5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 min-h-[32px]">
           <h1 className="text-xl font-black leading-tight sm:text-[26px] sm:whitespace-nowrap m-0">
@@ -150,7 +154,7 @@ export default async function ChecklistPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
-    </div>
+    </section>
   );
 
   return (

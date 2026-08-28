@@ -123,7 +123,7 @@ export function ErrorsBrowser({ items, sections }: Props) {
   }
 
   return (
-    <section className="catalog-surface space-y-6">
+    <>
       <div className="space-y-3">
         <input
           type="text"
@@ -164,25 +164,23 @@ export function ErrorsBrowser({ items, sections }: Props) {
         </div>
       </div>
 
-      {visibleSections.map((section) => (
-        <div key={section.surface} className="space-y-4">
-          <div className="space-y-1">
-            <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
-            <p className="text-sm text-muted">{section.blurb}</p>
+      {visibleSections.flatMap((section) => [
+        <div key={`${section.surface}-heading`} className="space-y-1">
+          <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
+          <p className="text-sm text-muted">{section.blurb}</p>
+        </div>,
+        ...section.items.map((item) => (
+          <div key={item.slug} data-journey-item className="h-full">
+            <RobloxErrorCard item={item} />
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {section.items.map((item) => (
-              <RobloxErrorCard key={item.slug} item={item} />
-            ))}
-          </div>
-        </div>
-      ))}
+        ))
+      ])}
 
       {!visibleSections.length ? (
         <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No Roblox errors matched that search.
         </div>
       ) : null}
-    </section>
+    </>
   );
 }

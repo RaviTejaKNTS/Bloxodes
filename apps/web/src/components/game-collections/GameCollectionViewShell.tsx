@@ -57,7 +57,8 @@ export function GameCollectionViewShell({
     <div className="catalog-surface space-y-8" data-game-collection-view={activeView}>
       <style>{`
         [data-game-collection-view="cards"] .game-collection-list-view { display: none; }
-        [data-game-collection-view="list"] .game-collection-cards-view { display: none; }
+        [data-game-collection-view="list"] .game-collection-cards-view,
+        [data-game-collection-view="list"] .game-collection-card-item { display: none; }
       `}</style>
       {toolbar || viewSwitcher ? (
         <div className="grid gap-4 md:grid-cols-3 md:items-end">

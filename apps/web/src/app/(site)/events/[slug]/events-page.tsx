@@ -954,7 +954,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
             </div>
           ) : null}
         </header>
-        <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope">
+        <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope journey-content-stream journey-content-stream--prose">
           {introNodes ? introNodes : null}
           {upcomingEvents.length > 0 ? (
             <p data-md-copy="true" className="md-copy-node md-copy-p mb-8">

@@ -150,7 +150,7 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
         <UpdatedTimestamp value={contentHtml.updatedAt} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6 journey-content-stream journey-content-stream--prose">
         {introNodes ? introNodes : null}
 
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}

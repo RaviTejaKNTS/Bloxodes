@@ -68,34 +68,35 @@ function CodesPageView({
         </header>
       )}
 
-      <section className="space-y-6">
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
         {games.length === 0 ? (
-          <p className="text-sm text-muted">We haven’t published any game code pages yet. Check back soon.</p>
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-sm text-muted">
+            We haven’t published any game code pages yet. Check back soon.
+          </div>
         ) : (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
-            {games.map((game, index) => (
-              <div
-                key={game.id}
-                className="contents"
+          games.map((game, index) => (
+            <div
+              key={game.id}
+              data-journey-item
+              className="h-full"
                 data-analytics-event="select_item"
                 data-analytics-item-list-name="codes_index"
                 data-analytics-item-id={game.slug}
                 data-analytics-item-name={game.name}
                 data-analytics-position={index + 1}
                 data-analytics-content-type="codes"
-              >
-                <GameCard
-                  game={game}
-                  priority={showHero && index < 2}
-                  articleUpdatedAt={game.content_updated_at ?? game.updated_at ?? null}
-                />
-              </div>
-            ))}
-          </div>
+            >
+              <GameCard
+                game={game}
+                priority={showHero && index < 2}
+                articleUpdatedAt={game.content_updated_at ?? game.updated_at ?? null}
+              />
+            </div>
+          ))
         )}
-      </section>
 
-      <PagePagination basePath="/codes" currentPage={currentPage} totalPages={totalPages} />
+        <PagePagination basePath="/codes" currentPage={currentPage} totalPages={totalPages} />
+      </section>
 
       {showHero ? (
         <script

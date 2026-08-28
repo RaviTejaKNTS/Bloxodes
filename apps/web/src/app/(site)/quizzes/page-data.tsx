@@ -81,12 +81,13 @@ function QuizzesPageView({ cards, total }: { cards: ReturnType<typeof mapRowToCa
         />
       </header>
 
-      {cards.length ? (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {cards.map((card, index) => (
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+        {cards.length ? (
+          cards.map((card, index) => (
             <div
               key={card.code}
-              className="contents"
+              data-journey-item
+              className="h-full"
               data-analytics-event="select_item"
               data-analytics-item-list-name="quizzes_index"
               data-analytics-item-id={card.code}
@@ -96,18 +97,18 @@ function QuizzesPageView({ cards, total }: { cards: ReturnType<typeof mapRowToCa
             >
               <QuizCard {...card} />
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-          No quizzes have been published yet. Check back soon.
-        </div>
-      )}
+          ))
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+            No quizzes have been published yet. Check back soon.
+          </div>
+        )}
 
-      <div className="rounded-xl border border-border/60 bg-surface/60 p-4 text-xs text-muted">
-        Want a quiz for another game? <Link href="/contact" className="text-accent underline-offset-4 hover:underline">Tell us</Link> which
-        experience you want next.
-      </div>
+        <div className="rounded-xl border border-border/60 bg-surface/60 p-4 text-xs text-muted">
+          Want a quiz for another game? <Link href="/contact" className="text-accent underline-offset-4 hover:underline">Tell us</Link> which
+          experience you want next.
+        </div>
+      </section>
 
       <script
         type="application/ld+json"

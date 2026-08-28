@@ -14,6 +14,13 @@ type CatalogSitemapRow = {
   content_updated_at?: string | null;
 };
 
+const CORE_CATALOG_PATHS = [
+  "/catalog/roblox-music-ids",
+  "/catalog/roblox-decal-ids",
+  "/catalog/free-roblox-items",
+  "/catalog/roblox-color-codes"
+] as const;
+
 export async function GET() {
   try {
     const sb = supabaseAdmin();
@@ -42,6 +49,14 @@ export async function GET() {
         changefreq: "weekly",
         priority: "0.9",
         lastmod: toIsoDate(updated)
+      });
+    }
+
+    for (const path of CORE_CATALOG_PATHS) {
+      pageMap.set(path, {
+        loc: withSiteUrl(path),
+        changefreq: "weekly",
+        priority: "0.9"
       });
     }
 

@@ -129,7 +129,7 @@ export default async function GrowGardenCropValueCalculatorPage() {
           <UpdatedTimestamp value={modifiedTime} />
         </header>
 
-        <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6">
+        <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6 journey-content-stream journey-content-stream--interactive">
           {introNodes ? introNodes : null}
           <ContentSlot
             slot={TOOL_AD_SLOT}

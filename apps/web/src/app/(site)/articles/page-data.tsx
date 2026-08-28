@@ -69,31 +69,32 @@ function ArticlesPageView({
         </header>
       )}
 
-      <section className="space-y-6">
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
         <h2 className="text-xl font-semibold text-foreground">Latest posts</h2>
         {articles.length === 0 ? (
-          <p className="text-sm text-muted">Articles will appear here after publication.</p>
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-sm text-muted">
+            Articles will appear here after publication.
+          </div>
         ) : (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {articles.map((article, index) => (
-              <div
-                key={article.id}
-                className="contents"
+          articles.map((article, index) => (
+            <div
+              key={article.id}
+              data-journey-item
+              className="h-full"
                 data-analytics-event="select_item"
                 data-analytics-item-list-name="articles_index"
                 data-analytics-item-id={article.slug}
                 data-analytics-item-name={article.title}
                 data-analytics-position={index + 1}
                 data-analytics-content-type="article"
-              >
-                <ArticleCard article={article} />
-              </div>
-            ))}
-          </div>
+            >
+              <ArticleCard article={article} />
+            </div>
+          ))
         )}
-      </section>
 
-      <PagePagination basePath="/articles" currentPage={currentPage} totalPages={totalPages} />
+        <PagePagination basePath="/articles" currentPage={currentPage} totalPages={totalPages} />
+      </section>
 
       {showHero ? (
         <script

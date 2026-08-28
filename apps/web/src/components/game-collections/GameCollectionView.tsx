@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { PagePagination } from "@/components/PagePagination";
 import type { CollectionPaginationInfo } from "./collection-pagination";
 import { CollectionImageLightbox } from "./CollectionImageLightbox";
@@ -887,71 +887,76 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
   const renderCards = totalItemCount <= 600;
   const renderList = true;
   const defaultView = renderCards ? "cards" : "list";
-  const cardGridClass = hasWideCardContent
-    ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-    : "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
 
   if (!hasItems) {
     return (
-      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-        No {config.label.toLowerCase()} data has been collected yet. Check back soon.
-      </div>
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--collection">
+        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+          No {config.label.toLowerCase()} data has been collected yet. Check back soon.
+        </div>
+      </section>
     );
   }
 
   return (
     <GameCollectionViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]} defaultView={defaultView} toolbar={toolbar}>
-      <CollectionImageLightbox containerId="game-collection-items" />
-      {pagination && pagination.totalPages > 1 ? (
-        <div className="space-y-3 border-b border-border/60 pb-6">
-          <p className="text-sm text-muted">
-            Showing {pagination.pageItemCount.toLocaleString("en-US")} of{" "}
-            {pagination.totalItems.toLocaleString("en-US")} items.
-          </p>
-          <PagePagination
-            basePath={pagination.basePath}
-            currentPage={pagination.currentPage}
-            totalPages={pagination.totalPages}
-          />
-        </div>
-      ) : null}
-      <div id="game-collection-items" className="space-y-12">
+      <CollectionImageLightbox containerId="article-body" />
+      <section
+        id="article-body"
+        itemProp="articleBody"
+        className={`journey-content-stream journey-content-stream--collection${hasWideCardContent ? " journey-content-stream--collection-wide" : ""}`}
+      >
+        {pagination && pagination.totalPages > 1 ? (
+          <div className="space-y-3 border-b border-border/60 pb-6">
+            <p className="text-sm text-muted">
+              Showing {pagination.pageItemCount.toLocaleString("en-US")} of{" "}
+              {pagination.totalItems.toLocaleString("en-US")} items.
+            </p>
+            <PagePagination
+              basePath={pagination.basePath}
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+            />
+          </div>
+        ) : null}
+
         {sectionPresentations.map(({ section, items }) => (
-          <section key={section.id} id={section.id} className="space-y-5 scroll-mt-28">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="space-y-1">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">{config.groupLabel}</p>
-                <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
-                {section.isContinuation ? (
-                  <p className="text-sm font-medium text-muted">Continued from previous page</p>
-                ) : null}
-              </div>
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                {(section.totalItemCount ?? section.items.length).toLocaleString("en-US")} items
-              </span>
-            </div>
-            {section.isContinuation ? (
-              <p className="text-sm text-muted">Showing {section.items.length.toLocaleString("en-US")} items on this page.</p>
-            ) : null}
-
-            {section.noteNodes?.length ? <div className="max-w-3xl">{section.noteNodes}</div> : null}
-
-            {!section.noteNodes?.length && section.noteHtml ? (
-              <div
-                className="md-copy-node md-copy-p max-w-3xl [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:underline [&_p]:m-0 [&_strong]:text-foreground"
-                dangerouslySetInnerHTML={{ __html: section.noteHtml }}
-              />
-            ) : null}
-
-            {renderCards ? (
-              <div className="game-collection-cards-view">
-                <div className={cardGridClass}>
-                  {items.map((presentation) => (
-                    <ForgeItemCard key={presentation.id} presentation={presentation} showImage={showImages} />
-                  ))}
+          <Fragment key={section.id}>
+            <div id={section.id} className="space-y-5 scroll-mt-28">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="space-y-1">
+                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">{config.groupLabel}</p>
+                  <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
+                  {section.isContinuation ? (
+                    <p className="text-sm font-medium text-muted">Continued from previous page</p>
+                  ) : null}
                 </div>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+                  {(section.totalItemCount ?? section.items.length).toLocaleString("en-US")} items
+                </span>
               </div>
-            ) : null}
+              {section.isContinuation ? (
+                <p className="text-sm text-muted">Showing {section.items.length.toLocaleString("en-US")} items on this page.</p>
+              ) : null}
+
+              {section.noteNodes?.length ? <div className="max-w-3xl">{section.noteNodes}</div> : null}
+
+              {!section.noteNodes?.length && section.noteHtml ? (
+                <div
+                  className="md-copy-node md-copy-p max-w-3xl [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:underline [&_p]:m-0 [&_strong]:text-foreground"
+                  dangerouslySetInnerHTML={{ __html: section.noteHtml }}
+                />
+              ) : null}
+            </div>
+
+            {renderCards
+              ? items.map((presentation) => (
+                  <div key={presentation.id} data-journey-item className="game-collection-card-item h-full">
+                    <ForgeItemCard presentation={presentation} showImage={showImages} />
+                  </div>
+                ))
+              : null}
+
             {renderList ? (
               <div className="game-collection-list-view">
                 <ForgeItemTable
@@ -962,17 +967,18 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
                 />
               </div>
             ) : null}
-          </section>
+          </Fragment>
         ))}
-      </div>
-      {pagination && pagination.totalPages > 1 ? (
-        <PagePagination
-          basePath={pagination.basePath}
-          currentPage={pagination.currentPage}
-          totalPages={pagination.totalPages}
-          className="flex flex-wrap items-center gap-2 border-t border-border/60 pt-6"
-        />
-      ) : null}
+
+        {pagination && pagination.totalPages > 1 ? (
+          <PagePagination
+            basePath={pagination.basePath}
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            className="flex flex-wrap items-center gap-2 border-t border-border/60 pt-6"
+          />
+        ) : null}
+      </section>
     </GameCollectionViewShell>
   );
 }

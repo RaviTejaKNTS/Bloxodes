@@ -688,7 +688,7 @@ export default async function GamePage({ params }: Params) {
           </div>
         </header>
 
-        <section id="article-body" className="article-content md-copy-scope">
+        <section id="article-body" className="article-content md-copy-scope journey-content-stream journey-content-stream--prose">
         {introNodes ? (
           introNodes
         ) : null}

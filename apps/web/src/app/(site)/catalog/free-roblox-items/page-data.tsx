@@ -473,11 +473,13 @@ function FreeItemsGrid({ items }: { items: FreeItem[] }) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <>
       {items.map((item) => (
-        <RobloxCatalogItemCard key={item.asset_id} item={item} categoryLabelMode="taxonomy" />
+        <div key={item.asset_id} data-journey-item className="h-full">
+          <RobloxCatalogItemCard item={item} categoryLabelMode="taxonomy" />
+        </div>
       ))}
-    </div>
+    </>
   );
 }
 
@@ -589,7 +591,7 @@ export async function renderRobloxFreeItemsPage({
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--catalog-items">
         {introNodes && showHero ? introNodes : null}
 
         <CatalogAdSlot />
@@ -629,7 +631,7 @@ export async function renderRobloxFreeItemsPage({
 
         <Suspense
           fallback={
-            <div className="catalog-surface space-y-6">
+            <>
               <FreeItemsFilterForm basePath={basePath} search={search} sort={sort} />
               <FreeItemsGrid items={items} />
               <PagePagination
@@ -638,7 +640,7 @@ export async function renderRobloxFreeItemsPage({
                 totalPages={totalPages}
                 query={searchQueryString || undefined}
               />
-            </div>
+            </>
           }
         >
           <FreeItemsBrowser

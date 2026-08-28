@@ -148,7 +148,11 @@ export default async function QuizPage({ params }: PageProps) {
   return (
     <div className="space-y-12">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
-      <div className="min-w-0">
+      <section
+        id="article-body"
+        itemProp="articleBody"
+        className="min-w-0 journey-content-stream journey-content-stream--interactive"
+      >
       <nav aria-label="Breadcrumb" className="mb-6 text-xs uppercase tracking-[0.25em] text-muted">
         <ol className="flex flex-wrap items-center gap-2">
           <li className="flex items-center gap-2">
@@ -194,7 +198,7 @@ export default async function QuizPage({ params }: PageProps) {
         heroAlt={heroAlt}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      </div>
+      </section>
       <aside className="space-y-4">
         <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="quiz" />
       </aside>

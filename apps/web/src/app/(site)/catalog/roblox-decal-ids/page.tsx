@@ -15,19 +15,23 @@ export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
+const FALLBACK_DESCRIPTION =
+    "Browse searchable Roblox decal IDs for images, artwork, game creations, and easy-to-copy asset codes.";
 
 export async function generateMetadata(): Promise<Metadata> {
     const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
     if (!catalog) {
         return {
             title: `${DECAL_SEO_TITLE} | ${SITE_NAME}`,
-            description: CATALOG_DESCRIPTION,
+            description: FALLBACK_DESCRIPTION,
             alternates: buildAlternates(CANONICAL)
         };
     }
 
     const title = resolveSeoTitle(catalog.seo_title) ?? DECAL_SEO_TITLE;
-    const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
+    const description = catalog.meta_description?.trim() && catalog.meta_description.trim() !== CATALOG_DESCRIPTION
+        ? catalog.meta_description.trim()
+        : FALLBACK_DESCRIPTION;
     const image = catalog.thumb_url || FALLBACK_IMAGE;
 
     return {

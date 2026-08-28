@@ -84,38 +84,33 @@ export default async function AdminCommandsHubPage() {
         <UpdatedTimestamp value={contentHtml?.updatedAt ?? null} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--options">
         {introNodes ? introNodes : null}
 
         {datasets.length ? (
-          <section className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {datasets.map((dataset) => (
-                <Link
-                  key={dataset.system.slug}
-                  href={`/catalog/admin-commands/${dataset.system.slug}`}
-                  aria-label={`${dataset.system.name} commands`}
-                  className="block h-full"
-                >
-                  <article className="group relative overflow-hidden rounded-lg border border-border/70 bg-surface/80 px-5 py-4 transition hover:border-accent/55">
-                    <span
-                      aria-hidden
-                      className="absolute inset-x-0 top-0 h-1 bg-accent/30 transition group-hover:bg-accent/60"
-                    />
-                    <div className="flex h-full flex-col gap-3">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <p className="text-lg font-semibold text-foreground">{dataset.system.name}</p>
-                      </div>
-                      <p className="text-sm text-muted">{dataset.system.cardDescription}</p>
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                        {dataset.commandCount.toLocaleString("en-US")} commands
-                      </p>
-                    </div>
-                  </article>
-                </Link>
-              ))}
+          datasets.map((dataset) => (
+            <div key={dataset.system.slug} data-journey-item className="h-full">
+              <Link
+                href={`/catalog/admin-commands/${dataset.system.slug}`}
+                aria-label={`${dataset.system.name} commands`}
+                className="group relative block h-full rounded-lg border border-border/70 bg-surface/80 px-5 py-4 transition hover:border-accent/55"
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-1 bg-accent/30 transition group-hover:bg-accent/60"
+                />
+                <div className="flex h-full flex-col gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-lg font-semibold text-foreground">{dataset.system.name}</p>
+                  </div>
+                  <p className="text-sm text-muted">{dataset.system.cardDescription}</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                    {dataset.commandCount.toLocaleString("en-US")} commands
+                  </p>
+                </div>
+              </Link>
             </div>
-          </section>
+          ))
         ) : null}
 
         {descriptionNodes.length ? descriptionNodes : null}

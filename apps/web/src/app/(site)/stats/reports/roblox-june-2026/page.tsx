@@ -113,7 +113,11 @@ export default function RobloxJune2026ReportPage() {
           { label: report.featureImage.month, href: null }
         ]}
       />
-      <article>
+      <article
+        id="article-body"
+        itemProp="articleBody"
+        className="journey-content-stream journey-content-stream--prose"
+      >
         <header className="space-y-3">
           <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{report.title}</h1>
           <p className="text-lg leading-8 text-muted">{report.subtitle}</p>

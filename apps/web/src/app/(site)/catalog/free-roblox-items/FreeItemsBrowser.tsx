@@ -155,7 +155,7 @@ export function FreeItemsBrowser({
   }
 
   return (
-    <div className="catalog-surface space-y-6">
+    <>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-end">
         <div className="flex-1 space-y-2">
           <label htmlFor="free-items-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
@@ -216,11 +216,13 @@ export function FreeItemsBrowser({
           No free items match those filters right now.
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <>
           {items.map((item) => (
-            <RobloxCatalogItemCard key={item.asset_id} item={item} categoryLabelMode="taxonomy" />
+            <div key={item.asset_id} data-journey-item className="h-full">
+              <RobloxCatalogItemCard item={item} categoryLabelMode="taxonomy" />
+            </div>
           ))}
-        </div>
+        </>
       )}
 
       <PagePagination
@@ -229,6 +231,6 @@ export function FreeItemsBrowser({
         totalPages={totalPages}
         query={searchQueryString || undefined}
       />
-    </div>
+    </>
   );
 }

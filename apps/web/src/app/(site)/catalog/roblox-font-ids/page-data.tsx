@@ -112,7 +112,7 @@ export function renderFontIdsPage({
       <section
         id="article-body"
         itemProp="articleBody"
-        className="article-content md-copy-scope copy-with-sidebar-space space-y-8"
+        className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--font"
       >
         {introNodes}
 

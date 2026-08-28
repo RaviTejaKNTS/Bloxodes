@@ -64,44 +64,46 @@ export default function StatsReportsPage() {
         </p>
       </header>
 
-      <div className="mt-10 border-t border-border">
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--reports mt-10 border-t border-border">
         {reports.map((report) => (
-          <article key={report.href} className="border-b border-border py-6">
-            <div className="grid gap-5 sm:grid-cols-[260px_minmax(0,1fr)] sm:items-start">
-              <Link
-                className="relative block aspect-[1200/630] overflow-hidden rounded-lg border border-border bg-surface-muted"
-                href={report.href}
-                aria-label={`Read ${report.title}`}
-              >
-                <Image
-                  src={report.image.src}
-                  alt={report.image.alt}
-                  fill
-                  priority
-                  sizes="(max-width: 639px) calc(100vw - 2rem), 260px"
-                  className="object-cover transition-transform duration-300 hover:scale-[1.01]"
-                />
-              </Link>
-              <div>
-                <p className="text-sm text-muted">{report.month}</p>
-                <h2 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
-                  <Link className="hover:text-accent hover:underline" href={report.href}>
-                    {report.title}
-                  </Link>
-                </h2>
-                <p className="mt-2 text-base leading-7 text-muted">{report.description}</p>
+          <div key={report.href} data-journey-item className="h-full">
+            <article className="border-b border-border py-6">
+              <div className="grid gap-5 sm:grid-cols-[260px_minmax(0,1fr)] sm:items-start">
                 <Link
-                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+                  className="relative block aspect-[1200/630] overflow-hidden rounded-lg border border-border bg-surface-muted"
                   href={report.href}
+                  aria-label={`Read ${report.title}`}
                 >
-                  Read the report
-                  <ArrowRight className="h-4 w-4" aria-hidden />
+                  <Image
+                    src={report.image.src}
+                    alt={report.image.alt}
+                    fill
+                    priority
+                    sizes="(max-width: 639px) calc(100vw - 2rem), 260px"
+                    className="object-cover transition-transform duration-300 hover:scale-[1.01]"
+                  />
                 </Link>
+                <div>
+                  <p className="text-sm text-muted">{report.month}</p>
+                  <h2 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
+                    <Link className="hover:text-accent hover:underline" href={report.href}>
+                      {report.title}
+                    </Link>
+                  </h2>
+                  <p className="mt-2 text-base leading-7 text-muted">{report.description}</p>
+                  <Link
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline"
+                    href={report.href}
+                  >
+                    Read the report
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </Link>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
         ))}
-      </div>
+      </section>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}

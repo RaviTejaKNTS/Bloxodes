@@ -197,6 +197,34 @@ body {
   }
 
   /*
+   * Prose and interactive detail pages use the same stable direct-child
+   * selector without turning their semantic blocks into a card grid.
+   */
+  .journey-content-stream--prose,
+  .journey-content-stream--interactive {
+    display: block;
+    grid-template-columns: none;
+    grid-auto-flow: initial;
+    gap: initial;
+  }
+
+  #article-body.journey-content-stream--prose > [data-md-copy],
+  #article-body.journey-content-stream--interactive > [data-md-copy] {
+    margin-block: revert !important;
+  }
+
+  /* Collection sections expose their card wrappers directly but keep each
+   * section heading and note full-width. Row flow preserves section order. */
+  .journey-content-stream--collection {
+    gap: 1.25rem;
+    grid-auto-flow: row;
+  }
+
+  .journey-content-stream--puzzles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /*
    * Markdown margins normally provide the article rhythm. Direct markdown
    * nodes in this grid already receive the stream gap, so reset those margins
    * and add back only the small text/heading offsets needed for the standard
@@ -226,6 +254,16 @@ body {
     .journey-content-stream--decals {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .journey-content-stream--color-codes {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 560px) {
+    .journey-content-stream--puzzles {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 640px) {
@@ -245,6 +283,10 @@ body {
   }
 
   @media (min-width: 1024px) {
+    .journey-content-stream--music {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
     .journey-content-stream--options {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -254,15 +296,86 @@ body {
     }
   }
 
-  @media (min-width: 1280px) {
-    .journey-content-stream--music {
+  @media (min-width: 1536px) {
+    .journey-content-stream--decals {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 640px) {
+    .journey-content-stream--index,
+    .journey-content-stream--catalog-items,
+    .journey-content-stream--promo {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--collection {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--color-codes {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
-  @media (min-width: 1536px) {
-    .journey-content-stream--decals {
+  @media (min-width: 768px) {
+    .journey-content-stream--dictionary,
+    .journey-content-stream--errors {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .journey-content-stream--index,
+    .journey-content-stream--catalog-items,
+    .journey-content-stream--promo,
+    .journey-content-stream--dictionary,
+    .journey-content-stream--errors {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--mesh,
+    .journey-content-stream--font {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--collection,
+    .journey-content-stream--collection-wide {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--puzzles {
       grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--color-codes {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .journey-content-stream--index,
+    .journey-content-stream--catalog-items,
+    .journey-content-stream--promo {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--color-codes {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--puzzles {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--collection:not(.journey-content-stream--collection-wide) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .journey-content-stream--font {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 

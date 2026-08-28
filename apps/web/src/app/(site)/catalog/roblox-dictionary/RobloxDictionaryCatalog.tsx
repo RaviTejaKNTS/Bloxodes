@@ -214,7 +214,7 @@ export function RobloxDictionaryDirectory({
   }
 
   return (
-    <section className="catalog-surface space-y-8" aria-label="Roblox dictionary terms">
+    <>
       <div className="space-y-5 rounded-lg border border-border/70 bg-surface/45 p-4 sm:p-5">
         <form action="/catalog/roblox-dictionary" method="get" className="flex flex-col gap-4 md:flex-row md:items-end">
           {filters.letter ? <input type="hidden" name="letter" value={filters.letter} /> : null}
@@ -317,35 +317,31 @@ export function RobloxDictionaryDirectory({
       </div>
 
       {visibleSections.length ? (
-        visibleSections.map((section) => (
-          <section key={section.key} className="space-y-4">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-              <div className="space-y-1">
-                <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
-                <p className="max-w-3xl text-sm text-muted">{section.blurb}</p>
-              </div>
-              <span className="rounded-md border border-border/60 bg-surface/60 px-2.5 py-1 text-xs font-semibold text-muted">
-                {section.items.length} {section.items.length === 1 ? "term" : "terms"}
-              </span>
+        visibleSections.flatMap((section) => [
+          <div key={`${section.key}-heading`} className="flex flex-wrap items-end justify-between gap-3">
+            <div className="space-y-1">
+              <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
+              <p className="max-w-3xl text-sm text-muted">{section.blurb}</p>
             </div>
-            <div className="journey-content-stream journey-content-stream--dictionary grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {section.items.map((item) => (
-                <div key={item.slug} data-journey-item className="h-full">
-                  <DictionaryTermCard
-                    item={item}
-                    categoryLabel={categoryByKey.get(item.category)?.shortLabel ?? item.category}
-                  />
-                </div>
-              ))}
+            <span className="rounded-md border border-border/60 bg-surface/60 px-2.5 py-1 text-xs font-semibold text-muted">
+              {section.items.length} {section.items.length === 1 ? "term" : "terms"}
+            </span>
+          </div>,
+          ...section.items.map((item) => (
+            <div key={item.slug} data-journey-item className="h-full">
+              <DictionaryTermCard
+                item={item}
+                categoryLabel={categoryByKey.get(item.category)?.shortLabel ?? item.category}
+              />
             </div>
-          </section>
-        ))
+          ))
+        ])
       ) : (
         <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center">
           <p className="font-semibold text-foreground">No dictionary terms matched those filters.</p>
           <p className="mt-2 text-sm text-muted">Try a shorter search, another first letter, or clear the active category.</p>
         </div>
       )}
-    </section>
+    </>
   );
 }

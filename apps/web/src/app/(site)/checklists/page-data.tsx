@@ -131,12 +131,13 @@ function ChecklistsPageView({
         </header>
       )}
 
-      {cards.length ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {cards.map((card, index) => (
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+        {cards.length ? (
+          cards.map((card, index) => (
             <div
               key={card.id}
-              className="contents"
+              data-journey-item
+              className="h-full"
               data-analytics-event="select_item"
               data-analytics-item-list-name="checklists_index"
               data-analytics-item-id={card.slug}
@@ -146,20 +147,20 @@ function ChecklistsPageView({
             >
               <ChecklistCard {...card} />
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-          No public checklists yet. Check back soon.
-        </div>
-      )}
+          ))
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+            No public checklists yet. Check back soon.
+          </div>
+        )}
 
-      <PagePagination basePath="/checklists" currentPage={currentPage} totalPages={totalPages} />
+        <PagePagination basePath="/checklists" currentPage={currentPage} totalPages={totalPages} />
 
-      <div className="rounded-xl border border-border/60 bg-surface/60 p-4 text-xs text-muted">
-        Want a checklist added? <Link href="/contact" className="text-accent underline-offset-4 hover:underline">Tell us</Link> which
-        game you want a guided rundown for.
-      </div>
+        <div className="rounded-xl border border-border/60 bg-surface/60 p-4 text-xs text-muted">
+          Want a checklist added? <Link href="/contact" className="text-accent underline-offset-4 hover:underline">Tell us</Link> which
+          game you want a guided rundown for.
+        </div>
+      </section>
 
       {showHero ? (
         <script

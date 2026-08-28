@@ -48,12 +48,13 @@ export default async function EventsIndexPage() {
         />
       </header>
 
-      {cards.length ? (
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {cards.map(({ id, ...card }, index) => (
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+        {cards.length ? (
+          cards.map(({ id, ...card }, index) => (
             <div
               key={id}
-              className="contents"
+              data-journey-item
+              className="h-full"
               data-analytics-event="select_item"
               data-analytics-item-list-name="events_index"
               data-analytics-item-id={card.slug}
@@ -63,13 +64,13 @@ export default async function EventsIndexPage() {
             >
               <EventsPageCard {...card} />
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-          No event hubs have been published yet. Check back soon.
-        </div>
-      )}
+          ))
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+            No event hubs have been published yet. Check back soon.
+          </div>
+        )}
+      </section>
 
       <script
         type="application/ld+json"

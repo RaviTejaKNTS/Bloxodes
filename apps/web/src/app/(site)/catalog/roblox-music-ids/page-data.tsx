@@ -807,14 +807,14 @@ export function MusicIdItems({ songs }: { songs: MusicRow[] }) {
 export function TrendingMusicList({ songs, startIndex = 0 }: { songs: MusicRow[]; startIndex?: number }) {
   if (!songs.length) {
     return (
-      <div id="article-body" itemProp="articleBody" className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--music rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No trending music IDs are available yet. Check back soon.
-      </div>
+      </section>
     );
   }
 
   return (
-    <section id="article-body" itemProp="articleBody" role="list" className="space-y-4">
+    <section id="article-body" itemProp="articleBody" role="list" className="journey-content-stream journey-content-stream--music">
       {songs.map((song, index) => {
         const durationLabel = formatDuration(song.duration_seconds);
         const rank = song.rank ?? startIndex + index + 1;

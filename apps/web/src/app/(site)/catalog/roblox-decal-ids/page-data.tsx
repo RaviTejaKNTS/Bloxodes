@@ -541,22 +541,28 @@ export function renderRobloxDecalCategoriesPage({
       >
         <DecalCatalogNav active="categories" />
 
-        {categories.map((category) => (
-          <div key={category.slug} data-journey-item className="h-full">
-            <a
-              href={buildDecalCategoryPath(category.slug)}
-              className="block h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/60"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <h2 className="text-xl font-semibold text-foreground">{category.label}</h2>
-                <span className="rounded-md border border-border/70 bg-background/60 px-2 py-1 text-xs font-semibold text-muted">
-                  {formatCount(category.count)}
-                </span>
-              </div>
-              <p className="mt-3 text-sm leading-6 text-muted">{category.description}</p>
-            </a>
+        {categories.length > 0 ? (
+          categories.map((category) => (
+            <div key={category.slug} data-journey-item className="h-full">
+              <a
+                href={buildDecalCategoryPath(category.slug)}
+                className="block h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/60"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <h2 className="text-xl font-semibold text-foreground">{category.label}</h2>
+                  <span className="rounded-md border border-border/70 bg-background/60 px-2 py-1 text-xs font-semibold text-muted">
+                    {formatCount(category.count)}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-6 text-muted">{category.description}</p>
+              </a>
+            </div>
+          ))
+        ) : (
+          <div className="rounded-lg border border-dashed border-border/70 bg-surface/50 p-6 text-sm text-muted">
+            No decal categories are available yet. Check back soon.
           </div>
-        ))}
+        )}
       </section>
 
       <MoreCatalogs excludeCode="roblox-decal-ids" />

@@ -465,7 +465,7 @@ export function renderTheForgeCollectionPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
         {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
 
         <CatalogAdSlot />

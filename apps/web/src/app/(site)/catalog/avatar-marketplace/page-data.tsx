@@ -552,11 +552,13 @@ function AvatarCatalogGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <>
       {items.map((item) => (
-        <RobloxCatalogItemCard key={`${item.item_type}-${item.asset_id}`} item={item} />
+        <div key={`${item.item_type}-${item.asset_id}`} data-journey-item className="h-full">
+          <RobloxCatalogItemCard item={item} />
+        </div>
       ))}
-    </div>
+    </>
   );
 }
 
@@ -693,7 +695,7 @@ export async function renderAvatarCatalogPage({
         {route.page > 1 ? <p className="text-sm text-muted">Page {route.page} of {totalPages}</p> : null}
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--catalog-items">
         {showHero ? (
           <p>
             Search {route.config.title.replace(/\s+on Roblox$/i, "")} by name, creator, or Roblox ID. Every result includes a copy-ready
@@ -708,16 +710,14 @@ export async function renderAvatarCatalogPage({
 
         <AvatarCatalogSubnav parent={secondaryNavParent} activeCode={route.config.code} />
 
-        <div className="catalog-surface space-y-6">
-          <AvatarCatalogFilterForm basePath={route.config.basePath} filters={filters} />
-          <AvatarCatalogGrid items={items} pageTitle={pageHeading} hasFilters={hasFilters} />
-          <PagePagination
-            basePath={route.config.basePath}
-            currentPage={route.page}
-            totalPages={totalPages}
-            query={queryString || undefined}
-          />
-        </div>
+        <AvatarCatalogFilterForm basePath={route.config.basePath} filters={filters} />
+        <AvatarCatalogGrid items={items} pageTitle={pageHeading} hasFilters={hasFilters} />
+        <PagePagination
+          basePath={route.config.basePath}
+          currentPage={route.page}
+          totalPages={totalPages}
+          query={queryString || undefined}
+        />
 
         <CatalogAdSlot />
 

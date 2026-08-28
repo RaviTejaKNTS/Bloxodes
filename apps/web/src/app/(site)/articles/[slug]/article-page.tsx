@@ -339,7 +339,7 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
         <section
           id="article-body"
           itemProp="articleBody"
-          className="article-content prose dark:prose-invert max-w-none game-copy"
+          className="article-content prose dark:prose-invert max-w-none game-copy journey-content-stream journey-content-stream--prose"
         >
           {articleBlocks.map((block, index) => {
             if (block.kind === "markdown") {

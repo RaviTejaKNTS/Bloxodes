@@ -411,7 +411,7 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
         <UpdatedTimestamp value={updatedDateValue} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--options">
       {introNodes ? (
         introNodes
       ) : null}
@@ -489,21 +489,16 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
         </section>
       ) : null}
 
-      <section className="space-y-8">
-        {sections.map((section) => (
-          <div key={section.id} id={section.id} className="space-y-4 scroll-mt-24">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-xl font-semibold text-foreground md:text-2xl">{section.title}</h3>
-              <span className="rounded-md bg-surface-muted px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-                {section.commands.length.toLocaleString("en-US")} commands
-              </span>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {section.commands.map((command) => (
-                <div
-                  key={command.id}
-                  className="rounded-lg border border-border/70 bg-surface/60 p-4"
-                >
+      {sections.flatMap((section) => [
+        <div key={`${section.id}-heading`} id={section.id} className="flex scroll-mt-24 flex-wrap items-center justify-between gap-3">
+          <h3 className="text-xl font-semibold text-foreground md:text-2xl">{section.title}</h3>
+          <span className="rounded-md bg-surface-muted px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            {section.commands.length.toLocaleString("en-US")} commands
+          </span>
+        </div>,
+        ...section.commands.map((command) => (
+          <div key={command.id} data-journey-item className="h-full">
+            <div className="rounded-lg border border-border/70 bg-surface/60 p-4">
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="min-w-0 break-words font-mono text-xl font-semibold leading-snug text-foreground md:text-2xl">
@@ -550,12 +545,10 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
                       ) : null}
                     </div>
                   ) : null}
-                </div>
-              ))}
             </div>
           </div>
-        ))}
-      </section>
+        ))
+      ])}
 
       {descriptionNodes.length ? descriptionNodes : null}
 

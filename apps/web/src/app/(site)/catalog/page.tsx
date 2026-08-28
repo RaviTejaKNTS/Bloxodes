@@ -17,21 +17,24 @@ import { formatUpdatedLabel } from "@/lib/updated-label";
 
 export const revalidate = 21600;
 
+const CATALOG_INDEX_DESCRIPTION =
+  "Browse Roblox music IDs, decals, free items, color codes, admin commands, and other searchable catalogs on Bloxodes.";
+
 export const metadata: Metadata = {
   title: `Roblox Catalogs | ${SITE_NAME}`,
-  description: CATALOG_DESCRIPTION,
+  description: CATALOG_INDEX_DESCRIPTION,
   alternates: buildAlternates(`${SITE_URL}/catalog`),
   openGraph: {
     type: "website",
     url: `${SITE_URL}/catalog`,
     title: `Roblox Catalogs | ${SITE_NAME}`,
-    description: CATALOG_DESCRIPTION,
+    description: CATALOG_INDEX_DESCRIPTION,
     siteName: SITE_NAME
   },
   twitter: {
     card: "summary_large_image",
     title: `Roblox Catalogs | ${SITE_NAME}`,
-    description: CATALOG_DESCRIPTION
+    description: CATALOG_INDEX_DESCRIPTION
   }
 };
 
@@ -239,26 +242,29 @@ export default async function CatalogIndexPage() {
         />
       </header>
 
-      {genericCards.length ? (
-        <section className="space-y-6">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {genericCards.map(({ id, updatedAt: _updatedAt, universeId: _universeId, universeName: _universeName, ...card }, index) => (
-              <div
-                key={id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="catalog_index"
-                data-analytics-item-id={id}
-                data-analytics-item-name={card.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="catalog"
-              >
-                <CatalogCard {...card} />
-              </div>
-            ))}
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+        {genericCards.length ? (
+          genericCards.map(({ id, updatedAt: _updatedAt, universeId: _universeId, universeName: _universeName, ...card }, index) => (
+            <div
+              key={id}
+              data-journey-item
+              className="h-full"
+              data-analytics-event="select_item"
+              data-analytics-item-list-name="catalog_index"
+              data-analytics-item-id={id}
+              data-analytics-item-name={card.title}
+              data-analytics-position={index + 1}
+              data-analytics-content-type="catalog"
+            >
+              <CatalogCard {...card} />
+            </div>
+          ))
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-sm text-muted">
+            No catalog pages have been published yet. Check back soon.
           </div>
-        </section>
-      ) : null}
+        )}
+      </section>
 
       {groupedCatalogs.length ? (
         <section className="space-y-10">

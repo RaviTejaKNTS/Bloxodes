@@ -148,104 +148,96 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
   const pastRewards = items.filter((item) => ["expired", "unavailable"].includes(item.status));
 
   return (
-    <div className="space-y-10">
-      <section aria-labelledby="available-promo-codes" className="catalog-surface space-y-4">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id="available-promo-codes" className="text-2xl font-semibold text-foreground">
-            Available Roblox promo codes
-          </h2>
-          <p className="text-sm text-muted">
-            {availablePromoCodes.length} {availablePromoCodes.length === 1 ? "item" : "items"}
-          </p>
+    <>
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 id="available-promo-codes" className="text-2xl font-semibold text-foreground">
+          Available Roblox promo codes
+        </h2>
+        <p className="text-sm text-muted">
+          {availablePromoCodes.length} {availablePromoCodes.length === 1 ? "item" : "items"}
+        </p>
+      </div>
+      {availablePromoCodes.length ? (
+        availablePromoCodes.map((item, index) => (
+          <div key={item.id} data-journey-item className="h-full">
+            <PromoRewardRow item={item} eager={index < 3} />
+          </div>
+        ))
+      ) : (
+        <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
+          There are no available website promo codes right now.
+        </p>
+      )}
+
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 id="in-game-codes" className="text-2xl font-semibold text-foreground">
+          Roblox codes redeemed in experiences
+        </h2>
+        <p className="text-sm text-muted">
+          {inGameCodes.length} {inGameCodes.length === 1 ? "item" : "items"}
+        </p>
+      </div>
+      <p>Enter these codes inside the named Roblox experience, not on the website redeem page.</p>
+
+      {islandOfMoveCodes.length ? (
+        <>
+          <div className="space-y-1">
+            <h3 className="text-xl font-semibold text-foreground">Island of Move codes</h3>
+            <p>Launch Island of Move, select Play It, then choose Redeem Code.</p>
+          </div>
+          {islandOfMoveCodes.map((item) => (
+            <div key={item.id} data-journey-item className="h-full">
+              <PromoRewardRow item={item} headingLevel="h4" />
+            </div>
+          ))}
+        </>
+      ) : null}
+
+      {mansionOfWonderCodes.length ? (
+        <>
+          <div className="space-y-1">
+            <h3 className="text-xl font-semibold text-foreground">Mansion of Wonder codes</h3>
+            <p>Launch Mansion of Wonder, open Get Swag at the Swag Booth, then choose Redeem Code.</p>
+          </div>
+          {mansionOfWonderCodes.map((item) => (
+            <div key={item.id} data-journey-item className="h-full">
+              <PromoRewardRow item={item} headingLevel="h4" />
+            </div>
+          ))}
+        </>
+      ) : null}
+
+      {otherInGameCodes.map((item) => (
+        <div key={item.id} data-journey-item className="h-full">
+          <PromoRewardRow item={item} headingLevel="h3" />
         </div>
-        {availablePromoCodes.length ? (
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {availablePromoCodes.map((item, index) => (
-              <PromoRewardRow key={item.id} item={item} eager={index < 3} />
-            ))}
+      ))}
+
+      {!inGameCodes.length ? (
+        <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
+          There are no available in-game codes right now.
+        </p>
+      ) : null}
+
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 id="expired-promo-codes" className="text-2xl font-semibold text-foreground">
+          Expired Roblox promo codes
+        </h2>
+        <p className="text-sm text-muted">
+          {pastRewards.length} {pastRewards.length === 1 ? "item" : "items"}
+        </p>
+      </div>
+      {pastRewards.length ? (
+        pastRewards.map((item) => (
+          <div key={item.id} data-journey-item className="h-full">
+            <PromoRewardRow item={item} />
           </div>
-        ) : (
-          <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
-            There are no available website promo codes right now.
-          </p>
-        )}
-      </section>
-
-      <section aria-labelledby="in-game-codes" className="catalog-surface space-y-7">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id="in-game-codes" className="text-2xl font-semibold text-foreground">
-            Roblox codes redeemed in experiences
-          </h2>
-          <p className="text-sm text-muted">
-            {inGameCodes.length} {inGameCodes.length === 1 ? "item" : "items"}
-          </p>
-        </div>
-        <p>Enter these codes inside the named Roblox experience, not on the website redeem page.</p>
-
-        {islandOfMoveCodes.length ? (
-          <div className="space-y-4">
-            <div className="space-y-1">
-              <h3 className="text-xl font-semibold text-foreground">Island of Move codes</h3>
-              <p>Launch Island of Move, select Play It, then choose Redeem Code.</p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {islandOfMoveCodes.map((item) => (
-                <PromoRewardRow key={item.id} item={item} headingLevel="h4" />
-              ))}
-            </div>
-          </div>
-        ) : null}
-
-        {mansionOfWonderCodes.length ? (
-          <div className="space-y-4">
-            <div className="space-y-1">
-              <h3 className="text-xl font-semibold text-foreground">Mansion of Wonder codes</h3>
-              <p>Launch Mansion of Wonder, open Get Swag at the Swag Booth, then choose Redeem Code.</p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {mansionOfWonderCodes.map((item) => (
-                <PromoRewardRow key={item.id} item={item} headingLevel="h4" />
-              ))}
-            </div>
-          </div>
-        ) : null}
-
-        {otherInGameCodes.length ? (
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {otherInGameCodes.map((item) => (
-              <PromoRewardRow key={item.id} item={item} headingLevel="h3" />
-            ))}
-          </div>
-        ) : null}
-
-        {!inGameCodes.length ? (
-          <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
-            There are no available in-game codes right now.
-          </p>
-        ) : null}
-      </section>
-
-      <section aria-labelledby="expired-promo-codes" className="catalog-surface space-y-4">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id="expired-promo-codes" className="text-2xl font-semibold text-foreground">
-            Expired Roblox promo codes
-          </h2>
-          <p className="text-sm text-muted">
-            {pastRewards.length} {pastRewards.length === 1 ? "item" : "items"}
-          </p>
-        </div>
-        {pastRewards.length ? (
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-            {pastRewards.map((item) => (
-              <PromoRewardRow key={item.id} item={item} />
-            ))}
-          </div>
-        ) : (
-          <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
-            There are no expired promo codes listed.
-          </p>
-        )}
-      </section>
-    </div>
+        ))
+      ) : (
+        <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
+          There are no expired promo codes listed.
+        </p>
+      )}
+    </>
   );
 }

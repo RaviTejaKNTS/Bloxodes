@@ -160,6 +160,8 @@ export function cacheTagsForPath(pathname: string) {
       "/contact",
       "/privacy-policy",
       "/terms-of-service",
+      "/browser-extension",
+      "/account-deletion",
       "/editorial-guidelines",
       "/disclaimer",
       "/how-we-gather-and-verify-codes",

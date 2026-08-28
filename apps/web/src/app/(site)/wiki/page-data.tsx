@@ -1332,15 +1332,19 @@ export function renderWikiIndexPage({ pages, total }: WikiIndexPageData) {
         />
       </header>
       {pages.length ? (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
           {pages.map((page) => (
-            <WikiCard key={page.id} page={page} />
+            <div key={page.id} data-journey-item className="h-full">
+              <WikiCard page={page} />
+            </div>
           ))}
-        </div>
+        </section>
       ) : (
-        <div className="rounded-xl border border-dashed border-border/60 bg-surface/40 p-8 text-center text-sm text-muted">
+        <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+          <div className="rounded-xl border border-dashed border-border/60 bg-surface/40 p-8 text-center text-sm text-muted">
           No wiki pages have been published yet.
-        </div>
+          </div>
+        </section>
       )}
       <script
         type="application/ld+json"
@@ -1503,7 +1507,11 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
       </header>
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
-        <article className="min-w-0 space-y-9">
+        <article
+          id="article-body"
+          itemProp="articleBody"
+          className="min-w-0 space-y-9 journey-content-stream journey-content-stream--prose"
+        >
           {descriptionNodes?.length || gameDetailItems.length || heroStats.length ? (
             <section className="space-y-4">
               {descriptionNodes?.length ? (
@@ -1560,35 +1568,30 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             nowMs={nowMs}
           />
 
-          {catalogBlocks.length ? (
-            <section className="min-w-0">
-              <div className="space-y-10">
-                {catalogBlocks.map(({ page: catalogPage, heading, nodes, imageUrls }) => (
-                  <section
-                    key={catalogPage.code}
-                    className="space-y-4"
-                    data-analytics-event="select_item"
-                    data-analytics-item-list-name="wiki_collection"
-                    data-analytics-item-id={catalogPage.code}
-                    data-analytics-item-name={catalogPage.title}
-                    data-analytics-content-type="catalog"
-                  >
-                    <h3 className="text-xl font-semibold leading-snug text-foreground">{heading}</h3>
-                    {nodes ? (
-                      <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
-                        {nodes}
-                      </div>
-                    ) : null}
-                    <WikiCollectionCta
-                      href={buildWikiCollectionPath(catalogPage.wiki_slug, catalogPage.collection_slug)}
-                      title={catalogPage.title}
-                      imageUrls={imageUrls}
-                    />
-                  </section>
-                ))}
-              </div>
+          {catalogBlocks.map(({ page: catalogPage, heading, nodes, imageUrls }) => (
+            <section
+              key={catalogPage.code}
+              className="space-y-4"
+              data-journey-item
+              data-analytics-event="select_item"
+              data-analytics-item-list-name="wiki_collection"
+              data-analytics-item-id={catalogPage.code}
+              data-analytics-item-name={catalogPage.title}
+              data-analytics-content-type="catalog"
+            >
+              <h3 className="text-xl font-semibold leading-snug text-foreground">{heading}</h3>
+              {nodes ? (
+                <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
+                  {nodes}
+                </div>
+              ) : null}
+              <WikiCollectionCta
+                href={buildWikiCollectionPath(catalogPage.wiki_slug, catalogPage.collection_slug)}
+                title={catalogPage.title}
+                imageUrls={imageUrls}
+              />
             </section>
-          ) : null}
+          ))}
 
           <WikiControlsTable columns={controlColumns} heading={`${universeLabel} Controls`} rows={controlRows} />
 

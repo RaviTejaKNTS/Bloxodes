@@ -16,7 +16,7 @@ export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = buildFreeItemCatalogCodeCandidates();
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
-const PAGE_DESCRIPTION = "Browse free Roblox items and bundles.";
+const PAGE_DESCRIPTION = "Browse free Roblox items and bundles with searchable categories and easy-to-copy asset IDs.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [{ total }, catalog] = await Promise.all([
@@ -27,14 +27,16 @@ export async function generateMetadata(): Promise<Metadata> {
     const title = appendItemCountToSeoTitle("Roblox Free Items and Bundles", total);
     return {
       title: `${title} | ${SITE_NAME}`,
-      description: CATALOG_DESCRIPTION,
+      description: PAGE_DESCRIPTION,
       alternates: buildAlternates(CANONICAL)
     };
   }
 
   const baseTitle = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? "Roblox Free Items";
   const title = appendItemCountToSeoTitle(baseTitle, total);
-  const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
+  const description = catalog.meta_description?.trim() && catalog.meta_description.trim() !== CATALOG_DESCRIPTION
+    ? catalog.meta_description.trim()
+    : PAGE_DESCRIPTION;
   const image = catalog.thumb_url || FALLBACK_IMAGE;
 
   return {

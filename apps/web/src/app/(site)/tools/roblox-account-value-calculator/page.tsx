@@ -108,7 +108,7 @@ export default async function RobloxAccountValueCalculatorPage() {
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
         <UpdatedTimestamp value={modifiedTime} />
       </header>
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6 journey-content-stream journey-content-stream--interactive">
         {introNodes}
         <div className="not-prose mt-8"><RobloxAccountValueCalculatorClient /></div>
         {howNodes}

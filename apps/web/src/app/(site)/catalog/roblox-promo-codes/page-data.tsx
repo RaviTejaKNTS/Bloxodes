@@ -214,7 +214,7 @@ export function renderPromoRewardsPage({
         <UpdatedTimestamp value={updatedAt} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--promo">
         {introNodes}
         <PromoRewardSections items={items} />
         <CatalogAdSlot />

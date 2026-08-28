@@ -19,7 +19,7 @@ function sortFonts(fonts: RobloxFontId[], sort: SortKey): RobloxFontId[] {
 
 function FontCard({ font, eager = false }: { font: RobloxFontId; eager?: boolean }) {
   return (
-    <article data-journey-item className="overflow-hidden rounded-md border border-border/60 bg-surface/20 p-3">
+    <article className="h-full overflow-hidden rounded-md border border-border/60 bg-surface/20 p-3">
       <div className="flex min-h-28 items-center justify-start rounded-sm bg-neutral-950 px-5 py-4">
         {font.thumbnail_url ? (
           <Image
@@ -78,7 +78,7 @@ export function FontIdsBrowser({ fonts }: { fonts: RobloxFontId[] }) {
   }, [fonts, query, sort]);
 
   return (
-    <section aria-label="Roblox Font IDs" className="space-y-5">
+    <>
       <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_12rem]">
         <label className="space-y-1 text-sm font-medium text-foreground">
           <span className="sr-only">Search Roblox fonts</span>
@@ -105,16 +105,18 @@ export function FontIdsBrowser({ fonts }: { fonts: RobloxFontId[] }) {
       </div>
 
       {filteredFonts.length ? (
-        <div className="grid gap-4">
+        <>
           {filteredFonts.map((font, index) => (
-            <FontCard key={font.asset_id} font={font} eager={index < 4} />
+            <div key={font.asset_id} data-journey-item className="h-full">
+              <FontCard font={font} eager={index < 4} />
+            </div>
           ))}
-        </div>
+        </>
       ) : (
         <p className="rounded-lg border border-dashed border-border/70 p-8 text-center text-muted">
           No official Roblox fonts match that search.
         </p>
       )}
-    </section>
+    </>
   );
 }

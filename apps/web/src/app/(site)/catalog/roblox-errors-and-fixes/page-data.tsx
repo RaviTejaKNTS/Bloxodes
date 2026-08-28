@@ -219,7 +219,7 @@ export function renderRobloxErrorsPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--errors">
         {introNodes ? introNodes : null}
 
         <CatalogAdSlot />

@@ -138,7 +138,7 @@ export function renderMeshIdsPage({
         <UpdatedTimestamp value={updatedAt} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-8">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--mesh">
         {introNodes}
         <MeshIdsBrowser
           initialMeshes={meshes}
