@@ -48,6 +48,7 @@ fi
 install -d -m 0700 -o "${MODEL_USER}" -g "${MODEL_USER}" "${MODEL_HOME}" "${MODEL_HOME}/.codex"
 chown root:"${MODEL_USER}" "${ENV_PATH}"
 chmod 0640 "${ENV_PATH}"
+setfacl -m "u:teja:r--" "${ENV_PATH}"
 setfacl -m "u:${MODEL_USER}:--x" /home/teja /home/teja/projects /home/teja/.local /home/teja/.local/bin
 setfacl -m "u:${MODEL_USER}:r-x" /home/teja/.local/bin/codex "${REPO_ROOT}"
 install -d -m 0770 -o "${MODEL_USER}" -g "${MODEL_USER}" "${REPO_ROOT}/tmp/wiki-automation" "${REPO_ROOT}/apps/web/.next/wiki-automation"
