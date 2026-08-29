@@ -391,6 +391,7 @@ function siblingWorkspaceSecretMaskArgs(): string[] {
 }
 
 async function runSandboxedCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string) {
+  const sandboxEnv = { ...env, NEXT_DIST_DIR: path.join(resultRoot, "next-dist") };
   const sandboxArgs = [
     "--die-with-parent",
     "--unshare-pid",
@@ -410,7 +411,8 @@ async function runSandboxedCodex(args: string[], env: NodeJS.ProcessEnv, resultR
     ...args
   ];
   await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
-  await runCommand(bwrapBin, sandboxArgs, env, timeoutMinutes * 60_000);
+  await mkdir(path.join(resultRoot, "next-dist"), { recursive: true });
+  await runCommand(bwrapBin, sandboxArgs, sandboxEnv, timeoutMinutes * 60_000);
 }
 
 async function assertPreviewPortFree(port: number) {
