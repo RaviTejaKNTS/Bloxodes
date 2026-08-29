@@ -225,7 +225,7 @@ body {
    * margins and add back only the small text/heading offsets needed for the
    * standard catalog spacing. Prose and interactive detail streams keep their
    * article-content.css margins.
-   * Keep this reset limited to card/grid streams so prose rhythm stays authored.
+   * Keep this reset limited to card/grid streams so prose rhythm remains authored.
    */
   #article-body.journey-content-stream:not(.journey-content-stream--prose):not(.journey-content-stream--interactive) > [data-md-copy] {
     margin-block: 0 !important;
