@@ -47,9 +47,11 @@ function siblingWorkspaceSecretMaskArgs(checkout: string): string[] {
     const root = path.join(parent, entry.name);
     return [path.join(root, ".envs"), path.join(root, ".env"), path.join(root, ".env.local"), path.join(root, ".env.production")]
       .filter((target) => existsSync(target) && target !== path.join(checkout, ".envs"))
-      .flatMap((target) => lstatSync(target).isDirectory()
-        ? ["--tmpfs", target]
-        : ["--ro-bind", "/dev/null", target]);
+      .flatMap((target) => {
+        const type = lstatSync(target);
+        if (type.isSymbolicLink()) return [];
+        return type.isDirectory() ? ["--tmpfs", target] : ["--ro-bind", "/dev/null", target];
+      });
   });
 }
 
