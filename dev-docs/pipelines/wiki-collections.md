@@ -45,6 +45,12 @@ The 2026-08-27 canary began with Flee the Facility Beast Powers and The Forge Or
 
 Use the matching wiki and game-collection workflow skills. For existing datasets, `bloxodes-game-collection-refresh` is the maintenance path for one collection, one game, or the registered collection set.
 
+### Homelab top-100 automation
+
+`wiki_generation_queue` is the managed-development control plane for unattended top-100 coverage. Every two-hour tick claims at most one universe with a renewable, token-bound lease. Selection uses the live production top-100 playing order and published editorial inventory; it does not use the older six-hour-growth scout or local progress Markdown. One permanent queue row per universe prevents repeated work, while evidence-blocked games remain terminal and let the next rank proceed.
+
+The Luna Max parent runs collection suggestions first, approves only evidence-complete `[create]` decisions, delegates each collection through research/data/images/writing, then runs the wiki hub workflow. New output stays task-local and publishes to managed-development database/R2 without registry, `data/`, or public-media changes. The outer runner validates exact identity and artifact containment, then—only after the model exits—publishes those exact manifests and hub final to production and verifies live routes. A failed production release remains resumable from `managed_dev_ready`; it does not rerun research.
+
 ## Images and Renderer Readiness
 
 Collection image manifests and task-local media are part of the authoring contract. Managed development and production share `bloxodes-wiki` and use `media.bloxodes.com/wiki/<object-key>` through the read-only Worker. Object keys are content-addressed by universe, collection, item slug, and SHA-256 prefix. Uploading an object does not publish its page. Each database controls publication through its own `published_dataset_id`. A collection is not ready merely because its copy exists: every item count, image key or documented text-only exception, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.

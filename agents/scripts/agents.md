@@ -18,6 +18,9 @@ This file is the quick reference for what exists today and how to invoke it.
 | --- | --- |
 | Fast source-only check | `npm run verify:deterministic` |
 | Verify one published or intentionally absent route | `npm run verify:published-url -- --path /wiki/<game>/<collection>` |
+| Run one two-hour top-100 wiki job | `scripts/wiki/run-homelab-wiki-automation.ts` | `npm run wiki:homelab:run -- --apply`; one game, renewable managed-dev queue lease, Luna Max skills, exact post-model production release |
+| Check wiki queue concurrency | `scripts/wiki/check-wiki-queue-contract.ts` | `npm run wiki:queue:check -- --apply`; managed-dev destructive canary that cleans its two test rows |
+| Publish an arbitrary wiki final | `scripts/collections/sync-game-wiki-runtime.ts` | `npm run sync:game-wiki-runtime -- --final-json <path>` dry-runs; add managed-dev `--apply`, or production `--apply --allow-prod` |
 | Manual local candidate crawl and Chromium verification | `npm run verify:predeploy` |
 | Manual live read-only audit | `TEST_BASE_URL=https://bloxodes.com EXPECTED_BUILD_SHA=<sha> npm run verify:postdeploy` |
 

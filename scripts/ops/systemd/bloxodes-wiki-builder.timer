@@ -1,0 +1,10 @@
+[Unit]
+Description=Start one Bloxodes wiki workflow every two hours
+
+[Timer]
+OnCalendar=*-*-* 01/2:00:00
+Persistent=true
+Unit=bloxodes-wiki-builder.service
+
+[Install]
+WantedBy=timers.target

@@ -107,6 +107,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Managed-dev raw publisher leads and the Groq/Llama batch decision audit. Candidate rows retain source name, reusable canonical source URL, headline/date, bounded headings/excerpt evidence, content hash, curation prompt version, rejection reason, model/confidence, and every promoted queue ID. Runs record repeated zero-approval degradation. Homelab automation owns these rows; production is checked through the GET-only editorial inventory endpoint.
 - `article_generation_queue`, `article_generation_artifacts`
   - Article draft generation queue state and per-run model/source/validation audit artifacts. Source-discovered `agent_runner` work is eligible only after Groq curation and retains all grouped publisher links/evidence in `source_urls` and `source_items`; one source may support several distinct topic keys. `blocked` is retryable, `skipped` is an editorial stop, `completed` means the local article passed QA and awaits human review, `published` records a verified production URL, and `rejected` records a human decision not to publish. Blocked, published, and rejected topic keys remain deduplicated.
+- `wiki_generation_queue`
+  - Service-role-only managed-development control plane for the homelab top-100 wiki workflow. One permanent row per universe stores the rank snapshot, renewable lease, approved/blocked collection decisions, task-local artifact paths, retry state, and exact managed-dev/production receipts. It is operational state, not public page content.
 - RPC `search_site`
   - Site-wide search aggregation.
 

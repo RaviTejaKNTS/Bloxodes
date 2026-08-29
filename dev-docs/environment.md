@@ -1,7 +1,7 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-08-26
+Last verified: 2026-08-29
 Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, workstation `env:doctor`/`env:check`, and homelab validation of the managed-development runtime plus guarded production release target
 
 ## Storage Model
@@ -23,7 +23,7 @@ env/                         # committed contracts only
   secrets/google-indexing-service-account.json
 ```
 
-Real secrets are never committed. `env/examples/` is the variable-name and safe-default contract. Deployed production values remain in GitHub Actions secrets/variables, Dokploy runtime/build configuration, the VPS worker env file, the Supabase self-hosted env, or `/etc/bloxodes/article-automation.env` on the homelab.
+Real secrets are never committed. `env/examples/` is the variable-name and safe-default contract. Deployed production values remain in GitHub Actions secrets/variables, Dokploy runtime/build configuration, the VPS worker env file, the Supabase self-hosted env, or protected `/etc/bloxodes/*-automation.env` files on the homelab.
 
 ## Profiles
 
@@ -69,6 +69,7 @@ For a workstation command that intentionally targets production, set both `BLOXO
 - Integrations contain content research/generation and distribution providers.
 - Pipelines contain workload-specific credentials and controls.
 - The article pipeline owns `ARTICLE_AUTO_PUBLISH` and the release polling/path controls. The path may point to ignored `.envs/targets/production.env`; its values remain target-owned and are parsed only by the post-model release parent.
+- The wiki pipeline owns `WIKI_DEV_SUPABASE_*`, fixed Luna Max controls, and the production target-file path. Its service env also contains only the bucket-scoped `WIKI_R2_*` keys for `bloxodes-wiki`; production database values stay in the target file and are removed from the model child environment.
 - Infrastructure contains operator access for one platform.
 - The `cloudflare` overlay contains the single bucket-scoped `WIKI_R2_*` credential set for `bloxodes-wiki`. Only the guarded publisher loads it. Managed development and production keep separate Supabase credentials and publication pointers while both use canonical `https://media.bloxodes.com/wiki/*` public media URLs.
 - `operations/analytics.env` owns GA4 account/property, Search Console, Bing Webmaster, and Google OAuth operator values. It must contain neither Umami values nor duplicated `NEXT_PUBLIC_*` web configuration.
@@ -89,7 +90,7 @@ The homelab checkout mirrors the complete private `.envs/` profile tree for feat
 - Local Compose web build/runtime: the same production profile is assembled from shared application, content integrations, distribution integrations, and the production target. Build inputs use four BuildKit secret mounts because `.envs/` is excluded from the Docker context; runtime uses the same four `env_file` entries.
 - Dokploy runtime: application secrets are configured on the deployed service.
 - VPS worker: `/home/codex-admin/bloxodes-stats-worker/env.stats-worker`, mode 600.
-- Homelab: `/etc/bloxodes/article-automation.env`, root-owned, group-readable by the service group, mode 640. It contains managed-development writer values and release controls, but no production Supabase credential.
+- Homelab: `/etc/bloxodes/article-automation.env` and `/etc/bloxodes/wiki-automation.env`, root-owned, group-readable by `teja`, mode 640. They contain managed-development worker values and release controls, but no production Supabase credential values.
 - Homelab model authentication: the `teja` service account's protected Codex home plus `/home/teja/.pi/agent/auth.json` for Pi's independent ChatGPT Plus/Pro login, never the article env file. Treat both as passwords and never copy them between hosts. The article env owns only binary paths, the hard-pinned Luna Max provider/model/reasoning settings, timeouts, and queue controls.
 - Self-hosted Supabase: `/home/codex-admin/bloxodes-supabase/.env`; do not copy this full vendor/runtime contract into the repository.
 

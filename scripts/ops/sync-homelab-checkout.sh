@@ -5,6 +5,7 @@ apply=false
 expected_sha=""
 repo_root="${HOMELAB_REPO_ROOT:-/home/teja/projects/Bloxodes}"
 env_path="${HOMELAB_ENV_PATH:-/etc/bloxodes/article-automation.env}"
+wiki_env_path="${HOMELAB_WIKI_ENV_PATH:-/etc/bloxodes/wiki-automation.env}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -46,6 +47,12 @@ for service in bloxodes-article-discovery.service bloxodes-article-writer.servic
     exit 1
   fi
 done
+if systemctl list-unit-files bloxodes-wiki-builder.service --no-legend 2>/dev/null | grep -q '^bloxodes-wiki-builder.service'; then
+  if systemctl is-active --quiet bloxodes-wiki-builder.service; then
+    echo "bloxodes-wiki-builder.service is active; retry after the current wiki run finishes." >&2
+    exit 1
+  fi
+fi
 
 remote_sha="$(git -C "$repo_root" ls-remote origin refs/heads/production | awk '{print $1}')"
 if [[ "$remote_sha" != "$expected_sha" ]]; then
@@ -79,6 +86,25 @@ for unit in bloxodes-article-discovery.service bloxodes-article-writer.service; 
     exit 1
   fi
 done
+
+if systemctl list-unit-files bloxodes-wiki-builder.service --no-legend 2>/dev/null | grep -q '^bloxodes-wiki-builder.service'; then
+  if [[ ! -r "$wiki_env_path" ]]; then
+    echo "Installed wiki automation is missing readable env at $wiki_env_path." >&2
+    exit 1
+  fi
+  for unit in bloxodes-wiki-builder.service bloxodes-wiki-builder.timer; do
+    if ! cmp -s "$repo_root/scripts/ops/systemd/$unit" "/etc/systemd/system/$unit"; then
+      echo "Installed $unit differs from the approved checkout." >&2
+      echo "Run scripts/ops/install-homelab-wiki-automation.sh as root with the same approved SHA." >&2
+      exit 1
+    fi
+  done
+  (
+    cd "$repo_root"
+    NODE_ENV=development node --env-file="$wiki_env_path" --import tsx \
+      scripts/ops/check-homelab-wiki-automation.ts
+  )
+fi
 
 (
   cd "$repo_root"

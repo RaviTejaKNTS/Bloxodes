@@ -2,10 +2,9 @@ import "../shared/load-env";
 
 import { spawn } from "node:child_process";
 import { accessSync, constants as fsConstants } from "node:fs";
-import { access, mkdir, open, readFile, unlink } from "node:fs/promises";
+import { access } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
 
 import { createClient } from "@supabase/supabase-js";
 
@@ -21,6 +20,7 @@ import {
   type CodexReasoningEffort
 } from "./article-writer-provider";
 import { assertLunaMaxConfiguration } from "./pi-article-writer";
+import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 
 type Options = {
   apply: boolean;
@@ -185,51 +185,6 @@ function parseArgs(argv: string[]): Options {
     }
   }
   return options;
-}
-
-function isProcessAlive(pid: number): boolean {
-  if (!Number.isInteger(pid) || pid <= 0) return false;
-  try {
-    process.kill(pid, 0);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-async function acquireWriterLock(worktree: string): Promise<(() => Promise<void>) | null> {
-  const lockDir = path.join(worktree, "tmp", "article-writer");
-  const lockPath = path.join(lockDir, "writer.lock");
-  const token = randomUUID();
-  await mkdir(lockDir, { recursive: true });
-
-  for (let attempt = 0; attempt < 2; attempt += 1) {
-    try {
-      const handle = await open(lockPath, "wx");
-      await handle.writeFile(JSON.stringify({ pid: process.pid, token, started_at: new Date().toISOString(), mode: "batch" }));
-      await handle.close();
-      return async () => {
-        try {
-          const current = JSON.parse(await readFile(lockPath, "utf8")) as { token?: unknown };
-          if (current.token === token) await unlink(lockPath);
-        } catch (error) {
-          if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
-        }
-      };
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
-      try {
-        const current = JSON.parse(await readFile(lockPath, "utf8")) as { pid?: unknown };
-        if (typeof current.pid === "number" && isProcessAlive(current.pid)) return null;
-      } catch {
-        // A malformed or incomplete stale lock is safe to replace once.
-      }
-      await unlink(lockPath).catch((unlinkError) => {
-        if ((unlinkError as NodeJS.ErrnoException).code !== "ENOENT") throw unlinkError;
-      });
-    }
-  }
-  throw new Error(`Could not acquire article writer lock at ${lockPath}.`);
 }
 
 async function pendingQueueSelection(
@@ -482,7 +437,7 @@ async function main() {
     return;
   }
 
-  const releaseLock = await acquireWriterLock(options.worktree);
+  const releaseLock = await acquireAgentWorkLock(options.worktree, "article-writer");
   if (!releaseLock) {
     console.log(`Another article writer is active on ${os.hostname()}; this batch was skipped without overlap.`);
     return;

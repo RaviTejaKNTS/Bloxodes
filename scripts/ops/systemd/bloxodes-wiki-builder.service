@@ -1,0 +1,27 @@
+[Unit]
+Description=Bloxodes one-at-a-time wiki hub and collection automation
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=teja
+Group=teja
+WorkingDirectory=/home/teja/projects/Bloxodes
+EnvironmentFile=/etc/bloxodes/wiki-automation.env
+Environment=NODE_ENV=development
+Environment=BLOXODES_ENV_PROFILE=managed-dev
+Environment=BLOXODES_ENV_OVERLAYS=
+Environment=WIKI_AUTOMATION_WORKTREE=/home/teja/projects/Bloxodes
+ExecStart=/usr/bin/npm run wiki:homelab:check
+ExecStart=/usr/bin/npm run wiki:homelab:run -- --apply
+Nice=10
+CPUWeight=20
+MemoryHigh=5G
+MemoryMax=6G
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+TimeoutStartSec=11h30min
+
+[Install]
+WantedBy=multi-user.target

@@ -103,13 +103,14 @@ if (!localOnly) {
     homelabTarget,
     `printf '%s|' "$(git -C ${homelabRoot} rev-parse HEAD)"; ` +
       `printf '%s|' "$(git -C ${homelabRoot} status --porcelain | wc -l | tr -d ' ')"; ` +
-      `systemctl is-active bloxodes-article-discovery.timer`
+      `printf '%s|' "$(systemctl is-active bloxodes-article-discovery.timer)"; ` +
+      `systemctl is-active bloxodes-wiki-builder.timer`
   ]);
-  const [homelabSha, homelabDirty, timer] = homelabRaw.split("|");
+  const [homelabSha, homelabDirty, timer, wikiTimer] = homelabRaw.split("|");
   add(
     "homelab",
-    homelabSha === originProduction && homelabDirty === "0" && timer === "active",
-    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} timer=${timer}`
+    homelabSha === originProduction && homelabDirty === "0" && timer === "active" && wikiTimer === "active",
+    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} article_timer=${timer} wiki_timer=${wikiTimer}`
   );
 
   const vpsTarget = safeSshTarget(

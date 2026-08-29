@@ -13,7 +13,9 @@
     "20260918000008",
     "20260919000005"
   ],
-  "production_pending_before_convergence": [],
+  "production_pending_before_convergence": [
+    "20260829100729"
+  ],
   "production_applied_pre_convergence": [
     "20260628000100",
     "20260920000004",
