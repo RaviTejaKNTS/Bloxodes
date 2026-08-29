@@ -59,6 +59,14 @@ export const MUSIC_GAME_ID_PAGES: MusicGameIdPage[] = [
     datasetPreset: "music",
     idLabel: "Music ID",
     seoCountLabel: "Jukebox Songs"
+  },
+  {
+    slug: "brookhaven-rp",
+    title: "Brookhaven RP Music IDs",
+    description: "Browse Roblox music IDs associated with Brookhaven RP and learn how its speaker and music search controls work.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Speaker Songs"
   }
 ];
 

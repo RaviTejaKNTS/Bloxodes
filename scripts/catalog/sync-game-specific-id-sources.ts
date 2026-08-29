@@ -1,11 +1,12 @@
 import "../shared/load-env";
 
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import * as cheerio from "cheerio";
 
 type MusicUsage = {
   game_slug: string;
+  universe_id?: number | null;
   asset_id: number;
   use_type: string;
   display_name: string;
@@ -94,10 +95,35 @@ const EXPERIENCE_SONG_SOURCES: ExperienceSongSource[] = [
     category: "Top Songs in Jujutsu Shenanigans",
     tags: ["boombox", "top experience song"],
     minimumRows: 70
+  },
+  {
+    gameSlug: "brookhaven-rp",
+    universeId: 1686885941,
+    useType: "speaker_catalog_song",
+    category: "Songs associated with Brookhaven RP",
+    tags: ["speaker", "music unlocked", "experience song"],
+    minimumRows: 75
   }
 ];
 
 const OUTPUT = path.resolve(process.cwd(), "data/game-specific-ids/source-backed.json");
+
+type CliOptions = {
+  onlyMusicGame: string | null;
+};
+
+function parseArgs(argv: string[]): CliOptions {
+  let onlyMusicGame: string | null = null;
+  for (let index = 0; index < argv.length; index += 1) {
+    if (argv[index] === "--only-music-game") {
+      onlyMusicGame = argv[index + 1] ?? null;
+      index += 1;
+      continue;
+    }
+    throw new Error(`Unknown option: ${argv[index]}`);
+  }
+  return { onlyMusicGame };
+}
 
 async function fetchHtml(url: string) {
   const response = await fetch(url, {
@@ -547,6 +573,7 @@ async function collectExperienceSongs(source: ExperienceSongSource): Promise<Mus
     if (!Number.isSafeInteger(assetId) || assetId <= 0 || !name) return [];
     return [{
       game_slug: source.gameSlug,
+      universe_id: source.universeId,
       asset_id: assetId,
       use_type: source.useType,
       display_name: name,
@@ -568,7 +595,32 @@ async function collectExperienceSongs(source: ExperienceSongSource): Promise<Mus
   return mapped;
 }
 
+async function refreshOneMusicGame(gameSlug: string) {
+  const source = EXPERIENCE_SONG_SOURCES.find((candidate) => candidate.gameSlug === gameSlug);
+  if (!source) {
+    throw new Error(`No experience-song source configured for ${gameSlug}`);
+  }
+  const existing = JSON.parse(await readFile(OUTPUT, "utf8")) as {
+    generated_at?: string;
+    music?: MusicUsage[];
+    decals?: DecalUsage[];
+  };
+  const music = (existing.music ?? []).filter((row) => row.game_slug !== gameSlug);
+  music.push(...await collectExperienceSongs(source));
+  await writeFile(OUTPUT, `${JSON.stringify({
+    generated_at: checkedAt(),
+    music,
+    decals: existing.decals ?? []
+  }, null, 2)}\n`, "utf8");
+  console.log(`Refreshed ${music.filter((row) => row.game_slug === gameSlug).length} ${gameSlug} music mappings in ${path.relative(process.cwd(), OUTPUT)}.`);
+}
+
 async function main() {
+  const options = parseArgs(process.argv.slice(2));
+  if (options.onlyMusicGame) {
+    await refreshOneMusicGame(options.onlyMusicGame);
+    return;
+  }
   const [
     jjsHtml,
     daHoodHtml,
