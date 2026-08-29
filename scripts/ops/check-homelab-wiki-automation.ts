@@ -49,8 +49,11 @@ async function main() {
   if (!operatorCheck && spawnSync("/usr/bin/test", ["-r", path.join(checkout, ".envs")]).status === 0) {
     throw new Error("Restricted model user can read the checkout .envs directory.");
   }
-  const codexEnv = { ...process.env, HOME: modelHome, CODEX_HOME: path.join(modelHome, ".codex") };
-  for (const args of [["--version"], ["login", "status"]]) {
+  const codexEnv = operatorCheck
+    ? process.env
+    : { ...process.env, HOME: modelHome, CODEX_HOME: path.join(modelHome, ".codex") };
+  const codexChecks = operatorCheck ? [["--version"]] : [["--version"], ["login", "status"]];
+  for (const args of codexChecks) {
     const result = spawnSync(codex, args, { encoding: "utf8", env: codexEnv });
     if (result.status !== 0) throw new Error(`Codex ${args.join(" ")} failed: ${result.stderr || result.stdout}`);
   }
