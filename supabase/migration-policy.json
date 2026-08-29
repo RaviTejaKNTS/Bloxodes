@@ -14,7 +14,8 @@
     "20260919000005"
   ],
   "production_pending_before_convergence": [
-    "20260829100729"
+    "20260829100729",
+    "20260829154018"
   ],
   "production_applied_pre_convergence": [
     "20260628000100",
@@ -26,8 +27,7 @@
     "20260920000003",
     "20260920000009",
     "20260920000010",
-    "20260920000011",
-    "20260920000017"
+    "20260920000011"
   ],
-  "notes": "Managed development and production were converged through 20260920000013 on 2026-08-14. Managed development retains connector-remapped entries for the listed repository migrations, including the verified two-slot wiki queue migration applied on 2026-08-29; production history-only repairs and genuinely applied pre-convergence versions are recorded above. Both environments must contain every migration at or after convergence_version unless its managed-development connector remap is explicitly listed here."
+  "notes": "Managed development and production were converged through 20260920000013 on 2026-08-14. Production history-only repairs, genuinely applied pre-convergence versions, and the two pending pre-convergence wiki queue migrations are recorded above. Managed development records both wiki queue versions exactly, including 20260829154018 verified through the live connector ledger on 2026-08-29. Both environments must contain every migration at or after convergence_version."
 }

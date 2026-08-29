@@ -390,14 +390,17 @@ function siblingWorkspaceSecretMaskArgs(): string[] {
   });
 }
 
-async function runSandboxedCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string) {
-  const sandboxEnv = { ...env, NEXT_DIST_DIR: path.join(resultRoot, "next-dist") };
+async function runSandboxedCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string, previewPort: number) {
+  const sandboxEnv = { ...env, PORT: String(previewPort) };
+  const nextDist = path.join(resultRoot, "next-dist");
+  const appNextDist = path.join(worktree, "apps", "web", ".next");
   const sandboxArgs = [
     "--die-with-parent",
     "--unshare-pid",
     "--new-session",
     "--ro-bind", "/", "/",
     "--bind", resultRoot, resultRoot,
+    "--bind", nextDist, appNextDist,
     "--tmpfs", path.join(worktree, ".envs"),
     "--tmpfs", "/etc/bloxodes",
     ...credentialMaskArgs(),
@@ -411,7 +414,8 @@ async function runSandboxedCodex(args: string[], env: NodeJS.ProcessEnv, resultR
     ...args
   ];
   await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
-  await mkdir(path.join(resultRoot, "next-dist"), { recursive: true });
+  await mkdir(nextDist, { recursive: true });
+  await mkdir(appNextDist, { recursive: true });
   await runCommand(bwrapBin, sandboxArgs, sandboxEnv, timeoutMinutes * 60_000);
 }
 
@@ -626,7 +630,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     let result: WorkflowResult;
     try {
       const args = buildCodexExecArgs({ worktree, model: "gpt-5.6-luna", reasoningEffort: "max", prompt: promptFor(row, resultRoot) });
-      await runSandboxedCodex(args, modelEnvironment(devCredentials), resultRoot);
+      await runSandboxedCodex(args, modelEnvironment(devCredentials), resultRoot, 3240 + (row.processing_slot || lane));
       await assertPreviewPortFree(3240 + (row.processing_slot || lane));
       assertCleanCheckout(`post-agent verification for lane ${lane}`);
       result = await readWorkflowResult(row, resultRoot);
