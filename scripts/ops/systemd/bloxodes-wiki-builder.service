@@ -14,6 +14,7 @@ Environment=BLOXODES_ENV_PROFILE=managed-dev
 Environment=BLOXODES_ENV_OVERLAYS=
 Environment=WIKI_AUTOMATION_WORKTREE=/home/teja/projects/Bloxodes
 ReadWritePaths=/var/lib/bloxodes/wiki-model
+ReadWritePaths=/home/teja/projects/Bloxodes/tmp/agent-work
 ReadWritePaths=/home/teja/projects/Bloxodes/tmp/wiki-automation
 ReadWritePaths=/home/teja/projects/Bloxodes/apps/web/.next/wiki-automation
 ProtectSystem=strict

@@ -20,6 +20,7 @@ function executable(candidates: string[]): string | null {
 }
 
 async function main() {
+  const operatorCheck = process.argv.includes("--operator-check");
   const dev = resolveWikiDevCredentials();
   const sb = createClient(dev.url, dev.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
   const table = await sb.from("wiki_generation_queue").select("id,processing_slot", { head: true, count: "exact" }).limit(1);
@@ -45,7 +46,7 @@ async function main() {
   const codex = executable([process.env.WIKI_AUTOMATION_CODEX_BIN || "", "/home/teja/.local/bin/codex", "codex"].filter(Boolean));
   if (!codex) throw new Error("Codex CLI is not installed.");
   const checkout = path.resolve(process.env.WIKI_AUTOMATION_WORKTREE || process.cwd());
-  if (spawnSync("/usr/bin/test", ["-r", path.join(checkout, ".envs")]).status === 0) {
+  if (!operatorCheck && spawnSync("/usr/bin/test", ["-r", path.join(checkout, ".envs")]).status === 0) {
     throw new Error("Restricted model user can read the checkout .envs directory.");
   }
   const codexEnv = { ...process.env, HOME: modelHome, CODEX_HOME: path.join(modelHome, ".codex") };

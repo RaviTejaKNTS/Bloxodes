@@ -102,7 +102,7 @@ if systemctl list-unit-files bloxodes-wiki-builder.service --no-legend 2>/dev/nu
   (
     cd "$repo_root"
     NODE_ENV=development node --env-file="$wiki_env_path" --import tsx \
-      scripts/ops/check-homelab-wiki-automation.ts
+      scripts/ops/check-homelab-wiki-automation.ts --operator-check
   )
 fi
 
