@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { access, mkdir, readFile, realpath } from "node:fs/promises";
-import { constants as fsConstants, readFileSync } from "node:fs";
+import { constants as fsConstants, existsSync, lstatSync, readFileSync, readdirSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import net from "node:net";
@@ -359,15 +359,48 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
   });
 }
 
+function credentialMaskArgs(): string[] {
+  const home = os.homedir();
+  const candidates = [
+    ".ssh", ".aws", ".azure", ".kube", ".docker", ".wrangler",
+    ".config/gh", ".config/gcloud", ".config/rclone", ".config/cloudflared",
+    ".config/supabase", ".config/op", ".local/share/keyrings",
+    ".npmrc", ".git-credentials", ".netrc", ".pypirc"
+  ];
+  return candidates.flatMap((candidate) => {
+    const target = path.join(home, candidate);
+    if (!existsSync(target)) return [];
+    return lstatSync(target).isDirectory()
+      ? ["--tmpfs", target]
+      : ["--ro-bind", "/dev/null", target];
+  });
+}
+
+function siblingWorkspaceSecretMaskArgs(): string[] {
+  const parent = path.dirname(worktree);
+  if (!existsSync(parent)) return [];
+  return readdirSync(parent, { withFileTypes: true }).flatMap((entry) => {
+    if (!entry.isDirectory()) return [];
+    const root = path.join(parent, entry.name);
+    return [path.join(root, ".envs"), path.join(root, ".env"), path.join(root, ".env.local"), path.join(root, ".env.production")]
+      .filter((target) => existsSync(target) && target !== path.join(worktree, ".envs"))
+      .flatMap((target) => lstatSync(target).isDirectory()
+        ? ["--tmpfs", target]
+        : ["--ro-bind", "/dev/null", target]);
+  });
+}
+
 async function runSandboxedCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string) {
   const sandboxArgs = [
     "--die-with-parent",
     "--unshare-pid",
     "--new-session",
     "--ro-bind", "/", "/",
-    "--bind", path.join(worktree, "tmp"), path.join(worktree, "tmp"),
+    "--bind", resultRoot, resultRoot,
     "--tmpfs", path.join(worktree, ".envs"),
     "--tmpfs", "/etc/bloxodes",
+    ...credentialMaskArgs(),
+    ...siblingWorkspaceSecretMaskArgs(),
     "--tmpfs", "/tmp",
     "--proc", "/proc",
     "--dev", "/dev",
@@ -522,12 +555,6 @@ async function release(result: WorkflowResult) {
   return expectedPages.map((page) => page.url);
 }
 
-function stringArray(value: unknown): string[] {
-  return Array.isArray(value)
-    ? value.filter((entry): entry is string => typeof entry === "string" && Boolean(entry.trim()))
-    : [];
-}
-
 async function releaseManagedDevReady(dev: SupabaseClient): Promise<boolean> {
   if (skipProduction) return false;
   const query = await dev.from("wiki_generation_queue").select("*")
@@ -537,29 +564,10 @@ async function releaseManagedDevReady(dev: SupabaseClient): Promise<boolean> {
     .maybeSingle();
   if (query.error) throw new Error(`Could not inspect pending wiki releases: ${query.error.message}`);
   if (!query.data) return false;
-  const row = query.data as QueueRow & {
-    approved_collections?: unknown;
-    blocked_collections?: unknown;
-    suggestions_path?: string | null;
-  };
+  const row = query.data as QueueRow;
   if (!row.result_root || !row.wiki_final_path) throw new Error(`Managed-dev-ready row ${row.id} has incomplete artifact paths.`);
-  const manifests = stringArray(row.collection_manifests);
-  const approved = stringArray(row.approved_collections);
-  if (!manifests.length || !approved.length) throw new Error(`Managed-dev-ready row ${row.id} has no collection artifacts.`);
-  await readWorkflowResult(row, row.result_root);
-  const result: WorkflowResult = {
-    queueId: row.id,
-    universeId: row.universe_id,
-    wikiSlug: row.wiki_slug,
-    outcome: "ready",
-    suggestionsPath: row.suggestions_path || "",
-    wikiFinalPath: row.wiki_final_path,
-    approvedCollections: approved,
-    blockedCollections: Array.isArray(row.blocked_collections)
-      ? row.blocked_collections as Array<{ slug: string; reason: string }>
-      : [],
-    collectionManifests: manifests
-  };
+  const result = await readWorkflowResult(row, row.result_root);
+  if (result.outcome !== "ready") throw new Error(`Managed-dev-ready row ${row.id} has a non-ready workflow result.`);
   const urls = await release(result);
   const update = await dev.from("wiki_generation_queue").update({
     status: "published",
@@ -609,7 +617,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       return true;
     }
 
-    const resultRoot = path.join(worktree, "tmp", "wiki-automation", row.id);
+    const resultRoot = path.join(worktree, "tmp", "wiki-automation", row.id, `attempt-${row.attempts}`);
     await mkdir(resultRoot, { recursive: true });
     const heartbeatTimer = setInterval(() => void heartbeat(dev, row).catch((error) => console.error(error)), 5 * 60_000);
     heartbeatTimer.unref();

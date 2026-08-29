@@ -1,6 +1,6 @@
 import "../shared/load-env";
 
-import { accessSync, constants as fsConstants, readFileSync } from "node:fs";
+import { accessSync, constants as fsConstants, existsSync, lstatSync, readFileSync, readdirSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import os from "node:os";
 import path from "node:path";
@@ -20,6 +20,37 @@ function executable(candidates: string[]): string | null {
     if (found.status === 0 && found.stdout.trim()) return found.stdout.trim();
   }
   return null;
+}
+
+function credentialMaskArgs(): string[] {
+  const home = os.homedir();
+  const candidates = [
+    ".ssh", ".aws", ".azure", ".kube", ".docker", ".wrangler",
+    ".config/gh", ".config/gcloud", ".config/rclone", ".config/cloudflared",
+    ".config/supabase", ".config/op", ".local/share/keyrings",
+    ".npmrc", ".git-credentials", ".netrc", ".pypirc"
+  ];
+  return candidates.flatMap((candidate) => {
+    const target = path.join(home, candidate);
+    if (!existsSync(target)) return [];
+    return lstatSync(target).isDirectory()
+      ? ["--tmpfs", target]
+      : ["--ro-bind", "/dev/null", target];
+  });
+}
+
+function siblingWorkspaceSecretMaskArgs(checkout: string): string[] {
+  const parent = path.dirname(checkout);
+  if (!existsSync(parent)) return [];
+  return readdirSync(parent, { withFileTypes: true }).flatMap((entry) => {
+    if (!entry.isDirectory()) return [];
+    const root = path.join(parent, entry.name);
+    return [path.join(root, ".envs"), path.join(root, ".env"), path.join(root, ".env.local"), path.join(root, ".env.production")]
+      .filter((target) => existsSync(target) && target !== path.join(checkout, ".envs"))
+      .flatMap((target) => lstatSync(target).isDirectory()
+        ? ["--tmpfs", target]
+        : ["--ro-bind", "/dev/null", target]);
+  });
 }
 
 async function main() {
@@ -49,15 +80,27 @@ async function main() {
   const bwrap = executable([process.env.WIKI_AUTOMATION_BWRAP_BIN || "", "/usr/bin/bwrap"].filter(Boolean));
   if (!bwrap) throw new Error("Bubblewrap is required to isolate model processes from production credentials.");
   const checkout = path.resolve(process.env.WIKI_AUTOMATION_WORKTREE || process.cwd());
+  const hiddenCredentialChecks = [path.join(os.homedir(), ".ssh"), path.join(os.homedir(), ".config", "gh")]
+    .filter(existsSync)
+    .map((target) => `test ! -e ${JSON.stringify(`${target}/id_rsa`)} && test ! -e ${JSON.stringify(`${target}/hosts.yml`)}`);
+  const gitCredentials = path.join(os.homedir(), ".git-credentials");
+  if (existsSync(gitCredentials)) hiddenCredentialChecks.push(`test ! -s ${JSON.stringify(gitCredentials)}`);
   const isolation = spawnSync(bwrap, [
     "--die-with-parent",
     "--unshare-pid",
     "--ro-bind", "/", "/",
     "--tmpfs", path.join(checkout, ".envs"),
     "--tmpfs", "/etc/bloxodes",
+    ...credentialMaskArgs(),
+    ...siblingWorkspaceSecretMaskArgs(checkout),
     "--proc", "/proc",
     "/bin/sh", "-c",
-    `test ! -e ${JSON.stringify(path.join(checkout, ".envs", "targets", "production.env"))} && test ! -e /etc/bloxodes/wiki-automation.env`
+    [
+      `test ! -e ${JSON.stringify(path.join(checkout, ".envs", "targets", "production.env"))}`,
+      "test ! -e /etc/bloxodes/wiki-automation.env",
+      `test -r ${JSON.stringify(path.join(checkout, "package.json"))}`,
+      ...hiddenCredentialChecks
+    ].join(" && ")
   ], { encoding: "utf8" });
   if (isolation.status !== 0) {
     throw new Error(`Bubblewrap credential-isolation canary failed: ${isolation.stderr || isolation.stdout}`);
