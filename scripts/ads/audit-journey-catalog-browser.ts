@@ -439,8 +439,28 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
       if (!next || !element.matches("p[data-md-copy]") || !next.matches("p[data-md-copy]")) return [];
       return [Math.round(next.getBoundingClientRect().top - element.getBoundingClientRect().bottom)];
     });
-    if (isCardGrid && paragraphGaps.some((gap) => gap < 26 || gap > 30)) {
-      throw new Error(`direct paragraph gap is ${paragraphGaps.join(", ")}px instead of about 28px`);
+    const isProseStream = content.classList.contains("journey-content-stream--prose");
+    const proseFlowSelector =
+      "p[data-md-copy], h1[data-md-copy], h2[data-md-copy], h3[data-md-copy], h4[data-md-copy], ul[data-md-copy], ol[data-md-copy]";
+    const proseFlowGaps = directChildren.flatMap((element, index) => {
+      const next = directChildren[index + 1];
+      if (!next || !element.matches(proseFlowSelector) || !next.matches(proseFlowSelector)) return [];
+      return [Math.round(next.getBoundingClientRect().top - element.getBoundingClientRect().bottom)];
+    });
+    const hasInvalidCardGridParagraphGap = isCardGrid && paragraphGaps.some((gap) => gap < 26 || gap > 30);
+    const hasInvalidProseFlowGap = isProseStream && proseFlowGaps.some((gap) => gap < 26 || gap > 30);
+    if (hasInvalidCardGridParagraphGap || hasInvalidProseFlowGap) {
+      const gaps = isProseStream ? proseFlowGaps : paragraphGaps;
+      throw new Error(`prose flow gap is ${gaps.join(", ")}px instead of about 28px`);
+    }
+    if (isProseStream) {
+      const collapsedHeadingMargins = directChildren.filter((element) => {
+        if (!element.matches("h1[data-md-copy], h2[data-md-copy], h3[data-md-copy], h4[data-md-copy]")) return false;
+        return Number.parseFloat(getComputedStyle(element).marginBottom) <= 0;
+      });
+      if (collapsedHeadingMargins.length) {
+        throw new Error(`${collapsedHeadingMargins.length} prose headings have no bottom margin`);
+      }
     }
 
     document.querySelector("[data-journey-audit-ad]")?.remove();

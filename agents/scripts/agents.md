@@ -195,8 +195,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Purpose | File | Preferred command |
 | --- | --- | --- |
 | Update `ads.txt` | `scripts/ads/update-ads-txt.ts` | `npm run ads:update` |
-| Audit Journey catalog DOM | `scripts/ads/audit-journey-catalog-dom.ts` | Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; read-only guard for one `#article-body`, direct Music/Decal item children, redirects, pagination, charts, and no manual content hints |
-| Audit hydrated Journey catalog DOM | `scripts/ads/audit-journey-catalog-browser.ts` | Run `npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>` against a local build; checks desktop/mobile hydration and a synthetic full-width in-content placement |
+| Audit Journey-compatible DOM | `scripts/ads/audit-journey-catalog-dom.ts` | Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; read-only guard for catalog/index card and list streams, pagination, redirects, discoverable nested Music/Decal routes, and no manual content hints |
+| Audit hydrated Journey-compatible DOM | `scripts/ads/audit-journey-catalog-browser.ts` | Run `npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>` against a local build; discovers safe nested routes, checks desktop/mobile/breakpoint hydration, prose flow gaps, and heading margins, and proves synthetic full-width in-content placement |
 | IndexNow bootstrap | `scripts/automation/indexnow-bootstrap.ts` | `npm run indexnow:bootstrap` |
 | Google Indexing API submitter | `scripts/automation/google-indexing-submit.ts` | `npm run indexing:google -- --dry-run`, live only with `--apply` and `GOOGLE_INDEXING_API_ENABLED=true` |
 | Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; default deploy mode warms main/index/legal URLs, all wiki/catalog/tool URLs, sitemap files, and a recent slice from DB-backed detail sitemaps; use `CACHE_WARM_MODE=full` only for intentional full-site warming |
