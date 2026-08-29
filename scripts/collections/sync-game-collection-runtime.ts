@@ -622,6 +622,22 @@ async function applyPlan(plan: CollectionPlan) {
     .eq("collection_slug", plan.config.slug)
     .maybeSingle();
   if (pageError) throw pageError;
+  const codeOwner = await sb
+    .from("wiki_collection_pages")
+    .select("id, universe_id, wiki_slug, collection_slug, code")
+    .eq("code", plan.config.code)
+    .maybeSingle();
+  if (codeOwner.error) throw codeOwner.error;
+  if (
+    codeOwner.data &&
+    (
+      Number(codeOwner.data.universe_id) !== plan.universeId ||
+      codeOwner.data.wiki_slug !== plan.config.gameSlug ||
+      codeOwner.data.collection_slug !== plan.config.slug
+    )
+  ) {
+    throw new Error(`${plan.config.code} code is already owned by a different collection identity.`);
+  }
   const pageCopy = pageCopyFromFinal(plan);
   if (!page && pageCopy) {
     const wikiPageLookup = await sb.from("wiki_pages").select("id").eq("slug", plan.config.gameSlug).maybeSingle();
@@ -648,6 +664,13 @@ async function applyPlan(plan: CollectionPlan) {
   }
   if (Number(page.universe_id) !== plan.universeId) {
     throw new Error(`${plan.config.code} universe mismatch: page=${page.universe_id} local=${plan.universeId}.`);
+  }
+  if (
+    page.wiki_slug !== plan.config.gameSlug ||
+    page.collection_slug !== plan.config.slug ||
+    page.code !== plan.config.code
+  ) {
+    throw new Error(`${plan.config.code} page identity does not match its runtime manifest.`);
   }
 
   let { data: dataset, error: datasetError } = await sb

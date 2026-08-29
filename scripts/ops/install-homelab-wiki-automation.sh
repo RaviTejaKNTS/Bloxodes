@@ -42,5 +42,5 @@ install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.service"
 install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.timer" /etc/systemd/system/bloxodes-wiki-builder.timer
 systemctl daemon-reload
 systemctl enable --now bloxodes-wiki-builder.timer
-echo "Installed and enabled the two-hour Bloxodes wiki timer from ${APPROVED_SHA}."
-echo "Run: systemctl start bloxodes-wiki-builder.service"
+echo "Installed the continuous two-lane Bloxodes wiki service and its two-hour recovery timer from ${APPROVED_SHA}."
+echo "Run once: systemctl start bloxodes-wiki-builder.service"

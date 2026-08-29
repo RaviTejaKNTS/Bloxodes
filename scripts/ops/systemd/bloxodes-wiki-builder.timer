@@ -1,5 +1,5 @@
 [Unit]
-Description=Start one Bloxodes wiki workflow every two hours
+Description=Recovery trigger for continuous Bloxodes wiki processing
 
 [Timer]
 OnCalendar=*-*-* 01/2:00:00

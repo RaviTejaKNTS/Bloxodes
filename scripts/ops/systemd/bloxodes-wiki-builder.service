@@ -1,5 +1,5 @@
 [Unit]
-Description=Bloxodes one-at-a-time wiki hub and collection automation
+Description=Bloxodes continuous two-lane wiki hub and collection automation
 After=network-online.target
 Wants=network-online.target
 
@@ -21,7 +21,9 @@ MemoryHigh=5G
 MemoryMax=6G
 IOSchedulingClass=best-effort
 IOSchedulingPriority=7
-TimeoutStartSec=11h30min
+TimeoutStartSec=infinity
+TimeoutStopSec=5min
+KillMode=control-group
 
 [Install]
 WantedBy=multi-user.target

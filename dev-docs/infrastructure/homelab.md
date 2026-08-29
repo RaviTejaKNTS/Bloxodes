@@ -1,8 +1,8 @@
 # Homelab
 
-Status: Article automation active; one-at-a-time two-hour wiki automation implemented and awaiting exact-SHA installation
+Status: Article automation active; continuous two-lane wiki automation implemented for temporary top-100 coverage
 Last verified: 2026-08-29
-Evidence: managed-dev wiki queue migration and concurrency canary, Luna Max runner/readiness code, shared article/wiki lock, reviewed systemd timer, and guarded exact-game post-model publication path
+Evidence: managed-dev two-slot queue migration and concurrency canary, Luna Max runner/readiness code, shared article/wiki lock, reviewed continuous systemd service, recovery timer, and guarded exact-game post-model publication path
 
 ## Host
 
@@ -18,12 +18,16 @@ Evidence: managed-dev wiki queue migration and concurrency canary, Luna Max runn
 - `bloxodes-article-discovery.timer`: enabled, active, runs at 00:00/06:00/12:00/18:00 local time with persistence.
 - `bloxodes-article-discovery.service`: runs readiness, discovery, and Groq curation. A 2026-08-25 scheduled run discovered two rows but Groq rejected its 8,017-token curation request against an 8,000-token cap. The released retry reduced `max_tokens` to 2,707, completed the same 12-candidate curation at 7,679 total tokens, and left the service ready for the next timer run.
 - `bloxodes-article-writer.service`: triggered after successful discovery; readiness requires authenticated Codex and Pi CLIs, both pinned to GPT-5.6 Luna at max reasoning, then a tiny live Pi exact-response canary must pass before the queue batch starts. Codex owns research/images/review, while Pi owns prose. After the model process exits, the wrapper releases only the exact queue rows completed by that batch and treats any release failure as a failed service run.
-- `bloxodes-wiki-builder.timer`: scheduled every two hours at odd hours (`01:00`, `03:00`, …, `23:00`) with persistence. Each tick starts at most one game; an active oneshot or the shared article/wiki agent lock skips overlap without killing the running job.
-- `bloxodes-wiki-builder.service`: selects the highest-ranked current top-100 game without a production wiki or durable queue row, runs collection suggestions, approved collection workflows, and the wiki workflow with Codex Luna Max, then releases the exact verified hub and successful collection manifests after the model exits. Evidence-blocked games become terminal queue rows so they cannot starve later ranks.
+- `bloxodes-wiki-builder.timer`: remains scheduled every two hours at odd hours (`01:00`, `03:00`, …, `23:00`) as a persistent recovery trigger. It cannot start another instance while the continuous service is active.
+- `bloxodes-wiki-builder.service`: holds the shared article/wiki lock, waits without interrupting an already-running article or wiki model, then runs two top-100 game lanes. Each lane immediately claims the next highest-ranked game after publishing or recording an evidence block. The service exits only when every current top-100 universe already has a production wiki or durable queue result. Each game runs collection suggestions, approved collection workflows, and the wiki workflow with Codex Luna Max before exact production release.
+
+This is a temporary top-100 drain mode requested for 2026-08-29. It lets an already-running article workflow finish, then deliberately holds the shared model lock until the wiki queue is exhausted or an operator stops the service. Scheduled article writer ticks therefore skip during the drain instead of competing for the 4-CPU/7.7-GiB host. Returning to the normal daily one-lane mode requires setting `WIKI_AUTOMATION_CONCURRENCY=1`, restoring a daily timer, and restarting only after the active drain stops cleanly.
 
 Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`, mode 640. It contains managed-dev Supabase, media, production inventory, Groq curation, Codex/Pi model settings, and writer controls. Codex and Pi authentication belong to protected homes under the `teja` account and never to the env file.
 
 Wiki runtime env is `/etc/bloxodes/wiki-automation.env`, also root-owned, group `teja`, mode 640. It contains managed-dev Supabase, the bucket-scoped shared `bloxodes-wiki` R2 credential, fixed Luna Max settings, and the production target-file path. The model child receives managed-dev and R2 values only; the outer parent parses the production target after the model exits.
+
+Every wiki Codex child runs inside Bubblewrap with a private PID namespace, read-only host filesystem, writable repository `tmp/` only, and empty mounts over the checkout `.envs` tree and `/etc/bloxodes`. A readiness canary proves the production target and systemd env are invisible before the service starts. The outer parent stays outside that sandbox, validates exact queue and manifest identities, stages every production collection revision before publishing pointers, publishes the hub last, and performs live URL checks.
 
 Codex resolves from `/home/teja/.local/bin/codex`. Pi is installed at `/home/teja/.local/bin/pi` with `scripts/ops/install-homelab-pi-writer.sh`; version 0.84.3 is pinned as the first verified release with the required `max` thinking flag. Pi authentication is created interactively as `teja` with `/login` → ChatGPT Plus/Pro and stored in `/home/teja/.pi/agent/auth.json`. Credentials are never copied between hosts. The authenticated Pi Luna Max exact-response canary passed on 2026-08-25.
 
@@ -34,7 +38,7 @@ The interactive homelab checkout also contains the complete ignored private `.en
 - Execute the released `scripts/ops/sync-homelab-checkout.sh --expected-sha <full-sha>` on the homelab through configured operator access. It performs a read-only preflight by default and requires the clean `production` branch, stopped services, and an exact remote SHA before apply.
 - Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. An explicit e2e/end-to-end release authorizes this guarded checkout synchronization for every release, including releases that do not change homelab-owned files.
 - `scripts/ops/install-homelab-article-automation.sh --apply <full-sha>` installs reviewed units only from an exact clean approved checkout and preserves the timer state.
-- `scripts/ops/install-homelab-wiki-automation.sh --apply <full-sha>` installs and enables the reviewed two-hour wiki units from an exact clean approved checkout. Start the first service explicitly after readiness rather than waiting for the first odd-hour tick.
+- `scripts/ops/install-homelab-wiki-automation.sh --apply <full-sha>` installs the reviewed continuous wiki service and two-hour recovery timer from an exact clean approved checkout. Start the service explicitly after readiness.
 - `scripts/ops/install-homelab-pi-writer.sh --apply <full-sha>` installs the pinned Pi package into `/home/teja/.local` from an exact clean approved checkout without touching credentials.
 - The checkout synchronization command was applied and full readiness passed after automation commit `05b52b9e954abe6e02f7eb8137ca64fb329e82b7` on 2026-08-26. The timer state was not changed, and the installed discovery/writer units matched the approved checkout. The installer remains available for reviewed unit-file changes; do not run it when synchronization alone proves the installed units already match.
 

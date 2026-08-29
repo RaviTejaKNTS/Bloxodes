@@ -25,8 +25,18 @@ function executable(candidates: string[]): string | null {
 async function main() {
   const dev = resolveWikiDevCredentials();
   const sb = createClient(dev.url, dev.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
-  const table = await sb.from("wiki_generation_queue").select("id", { head: true, count: "exact" }).limit(1);
+  const table = await sb.from("wiki_generation_queue").select("id,processing_slot", { head: true, count: "exact" }).limit(1);
   if (table.error) throw new Error(`Managed-dev wiki queue is not ready: ${table.error.message}`);
+  const concurrency = await sb.rpc("wiki_generation_queue_concurrency_contract");
+  const contract = concurrency.data as { max_processing?: unknown; slot_index?: unknown; slot_constraint?: unknown } | null;
+  if (
+    concurrency.error ||
+    contract?.max_processing !== 2 ||
+    contract.slot_index !== true ||
+    contract.slot_constraint !== true
+  ) {
+    throw new Error(`Managed-dev two-slot queue contract is not ready: ${concurrency.error?.message || JSON.stringify(contract)}.`);
+  }
   const rpc = await sb.rpc("heartbeat_wiki_generation_queue_item", {
     p_id: "00000000-0000-0000-0000-000000000000",
     p_lease_token: "00000000-0000-0000-0000-000000000000",
@@ -36,6 +46,22 @@ async function main() {
 
   const codex = executable([process.env.WIKI_AUTOMATION_CODEX_BIN || "", path.join(os.homedir(), ".local", "bin", "codex"), "codex"].filter(Boolean));
   if (!codex) throw new Error("Codex CLI is not installed.");
+  const bwrap = executable([process.env.WIKI_AUTOMATION_BWRAP_BIN || "", "/usr/bin/bwrap"].filter(Boolean));
+  if (!bwrap) throw new Error("Bubblewrap is required to isolate model processes from production credentials.");
+  const checkout = path.resolve(process.env.WIKI_AUTOMATION_WORKTREE || process.cwd());
+  const isolation = spawnSync(bwrap, [
+    "--die-with-parent",
+    "--unshare-pid",
+    "--ro-bind", "/", "/",
+    "--tmpfs", path.join(checkout, ".envs"),
+    "--tmpfs", "/etc/bloxodes",
+    "--proc", "/proc",
+    "/bin/sh", "-c",
+    `test ! -e ${JSON.stringify(path.join(checkout, ".envs", "targets", "production.env"))} && test ! -e /etc/bloxodes/wiki-automation.env`
+  ], { encoding: "utf8" });
+  if (isolation.status !== 0) {
+    throw new Error(`Bubblewrap credential-isolation canary failed: ${isolation.stderr || isolation.stdout}`);
+  }
   for (const args of [["--version"], ["login", "status"]]) {
     const result = spawnSync(codex, args, { encoding: "utf8" });
     if (result.status !== 0) throw new Error(`Codex ${args.join(" ")} failed: ${result.stderr || result.stdout}`);
@@ -58,7 +84,7 @@ async function main() {
     fetch("https://bloxodes.com/api/articles/editorial-inventory", { signal: AbortSignal.timeout(30_000) })
   ]);
   if (!stats.ok || !inventory.ok) throw new Error(`Public readiness failed: stats=${stats.status}, inventory=${inventory.status}.`);
-  console.log(`Homelab wiki automation readiness passed: ${new URL(dev.url).hostname}, ${r2Config.bucket}, ${browser}.`);
+  console.log(`Homelab wiki automation readiness passed: ${new URL(dev.url).hostname}, two queue slots, ${r2Config.bucket}, ${browser}, ${bwrap}.`);
 }
 
 main().catch((error) => {
