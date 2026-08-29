@@ -52,6 +52,8 @@ setfacl -m "u:${MODEL_USER}:--x" /home/teja /home/teja/projects /home/teja/.loca
 setfacl -m "u:${MODEL_USER}:r-x" /home/teja/.local/bin/codex "${REPO_ROOT}"
 install -d -m 0770 -o "${MODEL_USER}" -g "${MODEL_USER}" "${REPO_ROOT}/tmp/wiki-automation" "${REPO_ROOT}/apps/web/.next/wiki-automation"
 chown -R "${MODEL_USER}":"${MODEL_USER}" "${REPO_ROOT}/tmp/wiki-automation" "${REPO_ROOT}/apps/web/.next/wiki-automation"
+install -d -m 0750 -o teja -g teja "${REPO_ROOT}/tmp/agent-work"
+setfacl -m "u:${MODEL_USER}:rwx" "${REPO_ROOT}/tmp/agent-work"
 runuser --user "${MODEL_USER}" -- git config --global --replace-all safe.directory "${REPO_ROOT}"
 install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.service" /etc/systemd/system/bloxodes-wiki-builder.service
 install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.timer" /etc/systemd/system/bloxodes-wiki-builder.timer
