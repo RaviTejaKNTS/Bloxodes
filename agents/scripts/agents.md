@@ -18,7 +18,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | --- | --- |
 | Fast source-only check | `npm run verify:deterministic` |
 | Verify one published or intentionally absent route | `npm run verify:published-url -- --path /wiki/<game>/<collection>` |
-| Run continuous top-100 wiki coverage | `scripts/wiki/run-homelab-wiki-automation.ts` | `npm run wiki:homelab:run -- --apply`; two renewable managed-dev queue slots by default, Luna Max skills, immediate next-game refill, exact post-model production release, and exit only after every current top-100 universe has a durable result |
+| Run continuous top-100 wiki coverage | `scripts/wiki/run-homelab-wiki-automation.ts` | `npm run wiki:homelab:run -- --apply --skip-production-release`; two renewable managed-dev queue slots, direct Luna Max under the restricted model account, immediate next-game refill, and exit only after every current top-100 universe has a durable result |
 | Check wiki queue concurrency | `scripts/wiki/check-wiki-queue-contract.ts` | `npm run wiki:queue:check -- --apply`; managed-dev destructive canary that cleans its two test rows |
 | Publish an arbitrary wiki final | `scripts/collections/sync-game-wiki-runtime.ts` | `npm run sync:game-wiki-runtime -- --final-json <path>` dry-runs; add managed-dev `--apply`, or production `--apply --allow-prod` |
 | Manual local candidate crawl and Chromium verification | `npm run verify:predeploy` |

@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { access, mkdir, readFile, realpath } from "node:fs/promises";
-import { constants as fsConstants, existsSync, lstatSync, readFileSync, readdirSync } from "node:fs";
+import { constants as fsConstants, readFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import net from "node:net";
@@ -78,8 +78,8 @@ const worktree = path.resolve(process.env.WIKI_AUTOMATION_WORKTREE?.trim() || pr
 const timeoutMinutes = Number(process.env.WIKI_AUTOMATION_TIMEOUT_MINUTES || "660");
 const workerCount = Number(process.env.WIKI_AUTOMATION_CONCURRENCY || "2");
 const leaseMinutes = Math.min(720, Math.max(30, timeoutMinutes + 30));
-const codexBin = process.env.WIKI_AUTOMATION_CODEX_BIN?.trim() || path.join(os.homedir(), ".local", "bin", "codex");
-const bwrapBin = process.env.WIKI_AUTOMATION_BWRAP_BIN?.trim() || "/usr/bin/bwrap";
+const modelHome = process.env.WIKI_AUTOMATION_MODEL_HOME?.trim() || "/var/lib/bloxodes/wiki-model";
+const codexBin = process.env.WIKI_AUTOMATION_CODEX_BIN?.trim() || "/home/teja/.local/bin/codex";
 const productionEnvFile = path.resolve(process.env.WIKI_RELEASE_PRODUCTION_ENV_FILE?.trim() || ".envs/targets/production.env");
 const apply = process.argv.includes("--apply");
 const skipProduction = process.argv.includes("--skip-production-release");
@@ -283,6 +283,8 @@ function modelEnvironment(dev: { url: string; serviceRole: string }): NodeJS.Pro
   env.SUPABASE_SERVICE_ROLE = dev.serviceRole;
   env.WIKI_DEV_SUPABASE_URL = dev.url;
   env.WIKI_DEV_SUPABASE_SERVICE_ROLE = dev.serviceRole;
+  env.HOME = modelHome;
+  env.CODEX_HOME = path.join(modelHome, ".codex");
   return env;
 }
 
@@ -359,66 +361,15 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
   });
 }
 
-function credentialMaskArgs(): string[] {
-  const home = os.homedir();
-  const candidates = [
-    ".ssh", ".aws", ".azure", ".kube", ".docker", ".wrangler",
-    ".config/gh", ".config/gcloud", ".config/rclone", ".config/cloudflared",
-    ".config/supabase", ".config/op", ".local/share/keyrings",
-    ".npmrc", ".git-credentials", ".netrc", ".pypirc"
-  ];
-  return candidates.flatMap((candidate) => {
-    const target = path.join(home, candidate);
-    if (!existsSync(target)) return [];
-    return lstatSync(target).isDirectory()
-      ? ["--tmpfs", target]
-      : ["--ro-bind", "/dev/null", target];
-  });
-}
-
-function siblingWorkspaceSecretMaskArgs(): string[] {
-  const parent = path.dirname(worktree);
-  if (!existsSync(parent)) return [];
-  return readdirSync(parent, { withFileTypes: true }).flatMap((entry) => {
-    if (!entry.isDirectory()) return [];
-    const root = path.join(parent, entry.name);
-    return [path.join(root, ".envs"), path.join(root, ".env"), path.join(root, ".env.local"), path.join(root, ".env.production")]
-      .filter((target) => existsSync(target) && target !== path.join(worktree, ".envs"))
-      .flatMap((target) => {
-        const type = lstatSync(target);
-        if (type.isSymbolicLink()) return [];
-        return type.isDirectory() ? ["--tmpfs", target] : ["--ro-bind", "/dev/null", target];
-      });
-  });
-}
-
-async function runSandboxedCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string, previewPort: number) {
-  const sandboxEnv = { ...env, PORT: String(previewPort) };
-  const nextDist = path.join(resultRoot, "next-dist");
-  const appNextDist = path.join(worktree, "apps", "web", ".next");
-  const sandboxArgs = [
-    "--die-with-parent",
-    "--unshare-pid",
-    "--new-session",
-    "--ro-bind", "/", "/",
-    "--bind", resultRoot, resultRoot,
-    "--bind", nextDist, appNextDist,
-    "--tmpfs", path.join(worktree, ".envs"),
-    "--tmpfs", "/etc/bloxodes",
-    ...credentialMaskArgs(),
-    ...siblingWorkspaceSecretMaskArgs(),
-    "--tmpfs", "/tmp",
-    "--proc", "/proc",
-    "--dev", "/dev",
-    "--setenv", "TMPDIR", path.join(resultRoot, "tmp"),
-    "--chdir", worktree,
-    codexBin,
-    ...args
-  ];
+async function runDirectCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string, previewPort: number) {
+  const relativeAttempt = path.relative(path.join(worktree, "tmp", "wiki-automation"), resultRoot);
+  const directEnv = {
+    ...env,
+    PORT: String(previewPort),
+    NEXT_DIST_DIR: path.join(".next", "wiki-automation", relativeAttempt)
+  };
   await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
-  await mkdir(nextDist, { recursive: true });
-  await mkdir(appNextDist, { recursive: true });
-  await runCommand(bwrapBin, sandboxArgs, sandboxEnv, timeoutMinutes * 60_000);
+  await runCommand(codexBin, args, directEnv, timeoutMinutes * 60_000);
 }
 
 async function assertPreviewPortFree(port: number) {
@@ -632,7 +583,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     let result: WorkflowResult;
     try {
       const args = buildCodexExecArgs({ worktree, model: "gpt-5.6-luna", reasoningEffort: "max", prompt: promptFor(row, resultRoot) });
-      await runSandboxedCodex(args, modelEnvironment(devCredentials), resultRoot, 3240 + (row.processing_slot || lane));
+      await runDirectCodex(args, modelEnvironment(devCredentials), resultRoot, 3240 + (row.processing_slot || lane));
       await assertPreviewPortFree(3240 + (row.processing_slot || lane));
       assertCleanCheckout(`post-agent verification for lane ${lane}`);
       result = await readWorkflowResult(row, resultRoot);
@@ -722,7 +673,6 @@ async function main() {
   assertOptions();
   assertCleanCheckout("startup");
   await access(codexBin, fsConstants.X_OK);
-  if (apply) await access(bwrapBin, fsConstants.X_OK);
   const devCredentials = resolveWikiDevCredentials();
   const dev = createClient(devCredentials.url, devCredentials.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
   if (!apply) {

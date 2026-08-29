@@ -90,7 +90,7 @@ The homelab checkout mirrors the complete private `.envs/` profile tree for feat
 - Local Compose web build/runtime: the same production profile is assembled from shared application, content integrations, distribution integrations, and the production target. Build inputs use four BuildKit secret mounts because `.envs/` is excluded from the Docker context; runtime uses the same four `env_file` entries.
 - Dokploy runtime: application secrets are configured on the deployed service.
 - VPS worker: `/home/codex-admin/bloxodes-stats-worker/env.stats-worker`, mode 600.
-- Homelab: `/etc/bloxodes/article-automation.env` and `/etc/bloxodes/wiki-automation.env`, root-owned, group-readable by `teja`, mode 640. They contain managed-development worker values and release controls, but no production Supabase credential values.
+- Homelab: `/etc/bloxodes/article-automation.env` remains root-owned and group-readable by `teja`. `/etc/bloxodes/wiki-automation.env` is root-owned and readable only by the dedicated `bloxodes-wiki-model` group. Both use mode 640 and contain managed-development worker values, not production Supabase credential values.
 - Homelab model authentication: the `teja` service account's protected Codex home plus `/home/teja/.pi/agent/auth.json` for Pi's independent ChatGPT Plus/Pro login, never the article env file. Treat both as passwords and never copy them between hosts. The article env owns only binary paths, the hard-pinned Luna Max provider/model/reasoning settings, timeouts, and queue controls.
 - Self-hosted Supabase: `/home/codex-admin/bloxodes-supabase/.env`; do not copy this full vendor/runtime contract into the repository.
 

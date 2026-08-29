@@ -14,6 +14,8 @@ fi
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 ENV_DIR="/etc/bloxodes"
 ENV_PATH="${ENV_DIR}/wiki-automation.env"
+MODEL_USER="bloxodes-wiki-model"
+MODEL_HOME="/var/lib/bloxodes/wiki-model"
 if [[ "${REPO_ROOT}" != "/home/teja/projects/Bloxodes" ]]; then
   echo "Expected /home/teja/projects/Bloxodes; found ${REPO_ROOT}." >&2
   exit 1
@@ -31,13 +33,26 @@ if systemctl is-active --quiet bloxodes-wiki-builder.service; then
   exit 1
 fi
 
-install -d -m 0750 -o root -g teja "${ENV_DIR}"
+if ! command -v setfacl >/dev/null 2>&1; then
+  echo "setfacl is required for the read-only model checkout." >&2
+  exit 1
+fi
+if ! id "${MODEL_USER}" >/dev/null 2>&1; then
+  useradd --system --home-dir "${MODEL_HOME}" --create-home --shell /usr/sbin/nologin "${MODEL_USER}"
+fi
+install -d -m 0751 -o root -g root "${ENV_DIR}"
 if [[ ! -e "${ENV_PATH}" ]]; then
-  install -m 0640 -o root -g teja "${REPO_ROOT}/env/examples/pipelines/wiki-automation.env.example" "${ENV_PATH}"
+  install -m 0640 -o root -g "${MODEL_USER}" "${REPO_ROOT}/env/examples/pipelines/wiki-automation.env.example" "${ENV_PATH}"
   echo "Created ${ENV_PATH}; populate its placeholders before starting the service."
 fi
-chown root:teja "${ENV_PATH}"
+install -d -m 0700 -o "${MODEL_USER}" -g "${MODEL_USER}" "${MODEL_HOME}" "${MODEL_HOME}/.codex"
+chown root:"${MODEL_USER}" "${ENV_PATH}"
 chmod 0640 "${ENV_PATH}"
+setfacl -m "u:${MODEL_USER}:--x" /home/teja /home/teja/projects /home/teja/.local /home/teja/.local/bin
+setfacl -m "u:${MODEL_USER}:r-x" /home/teja/.local/bin/codex "${REPO_ROOT}"
+install -d -m 0770 -o "${MODEL_USER}" -g "${MODEL_USER}" "${REPO_ROOT}/tmp/wiki-automation" "${REPO_ROOT}/apps/web/.next/wiki-automation"
+chown -R "${MODEL_USER}":"${MODEL_USER}" "${REPO_ROOT}/tmp/wiki-automation" "${REPO_ROOT}/apps/web/.next/wiki-automation"
+runuser --user "${MODEL_USER}" -- git config --global --replace-all safe.directory "${REPO_ROOT}"
 install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.service" /etc/systemd/system/bloxodes-wiki-builder.service
 install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.timer" /etc/systemd/system/bloxodes-wiki-builder.timer
 systemctl daemon-reload
