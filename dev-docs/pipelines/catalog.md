@@ -21,7 +21,7 @@ It does not own game-specific wiki collections. Those are children of a game wik
 
 - Global catalog discovery and enrichment live under `scripts/catalog/`.
 - Music-ID collection, verification, ranking, and thumbnails live under `scripts/music/`.
-- Game-specific Music ID and Decal ID associations are refreshed by `scripts/catalog/sync-game-specific-id-sources.ts` and seeded into the dedicated game-usage tables. The source file supports `--only-music-game <slug>` for a bounded experience-song refresh when another source is unavailable; source association and in-game compatibility remain separate evidence levels.
+- Game-specific Music ID and Decal ID associations are refreshed by `scripts/catalog/sync-game-specific-id-sources.ts` and seeded into the dedicated game-usage tables. Music refreshes combine official Roblox Music Discovery associations with dedicated game-wiki parsers for 3008, Retail Tycoon 2, and Nico's Nextbots where the official feed is sparse or empty. The source file supports `--only-music-game <slug>` for a bounded experience-song refresh when another source is unavailable; source association and in-game compatibility remain separate evidence levels.
 - Decal-ID collection, candidate import, verification, ranking, and page seeding live under `scripts/decal-ids/`.
 - Marketplace item statistics live under `scripts/items/` and share the public stats health model described in `stats.md`; they are not game collection content.
 - VPS schedules run the production refreshes. Roblox-facing jobs share the `roblox-api` lock so catalog, item, music, decal, and related collectors do not create avoidable cross-pipeline throttling.

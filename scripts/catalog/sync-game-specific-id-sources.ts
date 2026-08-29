@@ -103,6 +103,142 @@ const EXPERIENCE_SONG_SOURCES: ExperienceSongSource[] = [
     category: "Songs associated with Brookhaven RP",
     tags: ["speaker", "music unlocked", "experience song"],
     minimumRows: 75
+  },
+  {
+    gameSlug: "fisch",
+    universeId: 5750914919,
+    useType: "radio_catalog_song",
+    category: "Songs associated with Fisch",
+    tags: ["radio", "radio pass", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "driving-empire",
+    universeId: 1202096104,
+    useType: "radio_catalog_song",
+    category: "Songs associated with Driving Empire",
+    tags: ["radio", "custom music", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "evade",
+    universeId: 3647333358,
+    useType: "boombox_catalog_song",
+    category: "Songs associated with Evade",
+    tags: ["boombox", "custom music", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "3008",
+    universeId: 1000233041,
+    useType: "music_menu_song",
+    category: "Songs associated with 3008",
+    tags: ["music menu", "custom music", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "a-dusty-trip",
+    universeId: 5650396773,
+    useType: "vehicle_radio_song",
+    category: "Songs associated with A Dusty Trip",
+    tags: ["vehicle radio", "radio", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "work-at-a-pizza-place",
+    universeId: 47545,
+    useType: "radio_catalog_song",
+    category: "Songs associated with Work at a Pizza Place",
+    tags: ["radio", "radio pass", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "basketball-zero",
+    universeId: 7028566528,
+    useType: "boombox_catalog_song",
+    category: "Songs associated with Basketball Zero",
+    tags: ["boombox", "lobby", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "grand-piece-online",
+    universeId: 648454481,
+    useType: "music_snail_song",
+    category: "Songs associated with Grand Piece Online",
+    tags: ["music snail", "gamepass", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "da-hood",
+    universeId: 1008451066,
+    useType: "boombox_catalog_song",
+    category: "Songs associated with Da Hood",
+    tags: ["boombox", "custom music", "experience song"],
+    minimumRows: 1
+  },
+  {
+    gameSlug: "retail-tycoon-2",
+    universeId: 2908591351,
+    useType: "playlist_catalog_song",
+    category: "Songs associated with Retail Tycoon 2",
+    tags: ["playlist", "custom radio", "experience song"],
+    minimumRows: 0
+  },
+  {
+    gameSlug: "nicos-nextbots",
+    universeId: 3717264063,
+    useType: "boombox_catalog_song",
+    category: "Songs associated with Nico's Nextbots",
+    tags: ["boombox", "soundtrack", "experience song"],
+    minimumRows: 1
+  }
+];
+
+type WikiMusicSource = {
+  gameSlug: string;
+  universeId: number;
+  sourceUrl: string;
+  apiUrl: string;
+  useType: string;
+  category: string;
+  tags: string[];
+  parser: "asset-links" | "retail-table" | "nico-table";
+  minimumRows: number;
+};
+
+const WIKI_MUSIC_SOURCES: WikiMusicSource[] = [
+  {
+    gameSlug: "3008",
+    universeId: 1000233041,
+    sourceUrl: "https://roblox-3008-wiki.fandom.com/wiki/Music/Soundtrack/AssetIDs",
+    apiUrl: "https://roblox-3008-wiki.fandom.com/api.php?action=parse&page=Music%2FSoundtrack%2FAssetIDs&prop=wikitext&format=json",
+    useType: "soundtrack_song",
+    category: "3008 soundtrack and music menu",
+    tags: ["music menu", "soundtrack", "custom music"],
+    parser: "asset-links",
+    minimumRows: 20
+  },
+  {
+    gameSlug: "retail-tycoon-2",
+    universeId: 2908591351,
+    sourceUrl: "https://roblox-retail-tycoon-2.fandom.com/wiki/Music",
+    apiUrl: "https://roblox-retail-tycoon-2.fandom.com/api.php?action=parse&page=Music&prop=wikitext&format=json",
+    useType: "playlist_song",
+    category: "Retail Tycoon 2 playlist",
+    tags: ["playlist", "custom radio", "soundtrack"],
+    parser: "retail-table",
+    minimumRows: 70
+  },
+  {
+    gameSlug: "nicos-nextbots",
+    universeId: 3717264063,
+    sourceUrl: "https://nicos-nextbots.fandom.com/wiki/Music",
+    apiUrl: "https://nicos-nextbots.fandom.com/api.php?action=parse&page=Music&prop=wikitext&format=json",
+    useType: "soundtrack_song",
+    category: "Nico's Nextbots soundtrack",
+    tags: ["soundtrack", "boombox", "game music"],
+    parser: "nico-table",
+    minimumRows: 30
   }
 ];
 
@@ -595,9 +731,134 @@ async function collectExperienceSongs(source: ExperienceSongSource): Promise<Mus
   return mapped;
 }
 
+function cleanWikiText(value: string) {
+  return value
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g, "$2")
+    .replace(/\[\[([^\]]+)\]\]/g, "$1")
+    .replace(/\{\{[^}]+\}\}/g, " ")
+    .replace(/\[[^\s\]]+\s+([^\]]+)\]/g, "$1")
+    .replace(/'{2,}/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildWikiMusicRow(
+  source: WikiMusicSource,
+  assetId: number,
+  displayName: string,
+  sortOrder: number,
+  category = source.category
+): MusicUsage {
+  return {
+    game_slug: source.gameSlug,
+    universe_id: source.universeId,
+    asset_id: assetId,
+    use_type: source.useType,
+    display_name: displayName,
+    source_artist: null,
+    source_album: null,
+    source_duration_seconds: null,
+    source_album_art_asset_id: null,
+    category,
+    tags: source.tags,
+    source_url: source.sourceUrl,
+    source_checked_at: checkedAt(),
+    compatibility_status: "community_reported",
+    sort_order: sortOrder
+  };
+}
+
+async function fetchWikiText(source: WikiMusicSource) {
+  const response = await fetch(source.apiUrl, {
+    headers: { "user-agent": "Bloxodes source refresh (+https://bloxodes.com)" },
+    signal: AbortSignal.timeout(30_000)
+  });
+  if (!response.ok) throw new Error(`${source.apiUrl} returned ${response.status}`);
+  const payload = await response.json() as {
+    parse?: { wikitext?: { "*"?: string } };
+  };
+  const text = payload.parse?.wikitext?.["*"];
+  if (!text) throw new Error(`${source.gameSlug} wiki source returned no wikitext`);
+  return text;
+}
+
+function parseAssetLinkWikiMusic(source: WikiMusicSource, wikitext: string): MusicUsage[] {
+  const rows = wikitext.split(/\r?\n/).flatMap((line, index) => {
+    const match = line.match(/create\.roblox\.com\/store\/asset\/(\d+)(?:\s+([^\]]+))?\]\s*\((\d+)\)/i);
+    if (!match || match[1] !== match[3]) return [];
+    const assetId = Number(match[1]);
+    const name = cleanWikiText(match[2] || `Asset ${assetId}`);
+    if (!Number.isSafeInteger(assetId) || assetId <= 0 || !name) return [];
+    return [buildWikiMusicRow(source, assetId, name, index + 1)];
+  });
+  return Array.from(new Map(rows.map((row) => [row.asset_id, row])).values())
+    .map((row, index) => ({ ...row, sort_order: index + 1 }));
+}
+
+function parseRetailTycoonWikiMusic(source: WikiMusicSource, wikitext: string): MusicUsage[] {
+  let playlist = "Soundtrack";
+  let lastTrack = "Retail Tycoon 2 track";
+  const rows: MusicUsage[] = [];
+
+  for (const [index, block] of wikitext.split(/\n\|-\s*\n/).entries()) {
+    const heading = block.match(/^==+\s*(Pop|Rock|Jazz|Dance)\s*==+/m);
+    if (heading) playlist = heading[1];
+
+    const trackMatch = block.match(/''+([^'\n]+)''+/);
+    if (trackMatch?.[1]) lastTrack = cleanWikiText(trackMatch[1]);
+
+    const assetIds = Array.from(block.matchAll(/create\.roblox\.com\/store\/asset\/(\d+)/gi))
+      .map((match) => Number(match[1]))
+      .filter((assetId) => Number.isSafeInteger(assetId) && assetId > 0);
+    for (const assetId of assetIds) {
+      rows.push(buildWikiMusicRow(source, assetId, lastTrack, index + 1, `${playlist} playlist`));
+    }
+  }
+
+  return Array.from(new Map(rows.map((row) => [row.asset_id, row])).values())
+    .map((row, index) => ({ ...row, sort_order: index + 1 }));
+}
+
+function parseNicoWikiMusic(source: WikiMusicSource, wikitext: string): MusicUsage[] {
+  const rows: MusicUsage[] = [];
+  for (const [index, block] of wikitext.split(/\n\|-\s*\n/).entries()) {
+    const titleMatch = block.match(/'''([^'\n]+)'''/);
+    const title = cleanWikiText(titleMatch?.[1] || "");
+    const assetIds = Array.from(new Set(block.match(/\b\d{7,}\b/g) ?? []))
+      .map(Number)
+      .filter((assetId) => Number.isSafeInteger(assetId) && assetId > 0);
+    for (const assetId of assetIds) {
+      rows.push(buildWikiMusicRow(source, assetId, title || `Nico's Nextbots track ${assetId}`, index + 1));
+    }
+  }
+
+  return Array.from(new Map(rows.map((row) => [row.asset_id, row])).values())
+    .map((row, index) => ({ ...row, sort_order: index + 1 }));
+}
+
+async function collectWikiMusicRows(source: WikiMusicSource): Promise<MusicUsage[]> {
+  const wikitext = await fetchWikiText(source);
+  const rows = source.parser === "asset-links"
+    ? parseAssetLinkWikiMusic(source, wikitext)
+    : source.parser === "retail-table"
+      ? parseRetailTycoonWikiMusic(source, wikitext)
+      : parseNicoWikiMusic(source, wikitext);
+  if (rows.length < source.minimumRows) {
+    throw new Error(`${source.gameSlug} wiki source returned only ${rows.length} music rows`);
+  }
+  return rows;
+}
+
+async function collectCommunityMusicRows(gameSlug: string): Promise<MusicUsage[]> {
+  const source = WIKI_MUSIC_SOURCES.find((candidate) => candidate.gameSlug === gameSlug);
+  return source ? collectWikiMusicRows(source) : [];
+}
+
 async function refreshOneMusicGame(gameSlug: string) {
   const source = EXPERIENCE_SONG_SOURCES.find((candidate) => candidate.gameSlug === gameSlug);
-  if (!source) {
+  const wikiSource = WIKI_MUSIC_SOURCES.find((candidate) => candidate.gameSlug === gameSlug);
+  if (!source && !wikiSource) {
     throw new Error(`No experience-song source configured for ${gameSlug}`);
   }
   const existing = JSON.parse(await readFile(OUTPUT, "utf8")) as {
@@ -605,14 +866,18 @@ async function refreshOneMusicGame(gameSlug: string) {
     music?: MusicUsage[];
     decals?: DecalUsage[];
   };
+  const experienceRows = source ? await collectExperienceSongs(source) : [];
+  const wikiRows = wikiSource ? await collectWikiMusicRows(wikiSource) : [];
+  const refreshedRows = Array.from(new Map([...wikiRows, ...experienceRows].map((row) => [row.asset_id, row])).values())
+    .map((row, index) => ({ ...row, sort_order: index + 1 }));
   const music = (existing.music ?? []).filter((row) => row.game_slug !== gameSlug);
-  music.push(...await collectExperienceSongs(source));
+  music.push(...refreshedRows);
   await writeFile(OUTPUT, `${JSON.stringify({
     generated_at: checkedAt(),
     music,
     decals: existing.decals ?? []
   }, null, 2)}\n`, "utf8");
-  console.log(`Refreshed ${music.filter((row) => row.game_slug === gameSlug).length} ${gameSlug} music mappings in ${path.relative(process.cwd(), OUTPUT)}.`);
+  console.log(`Refreshed ${refreshedRows.length} ${gameSlug} music mappings in ${path.relative(process.cwd(), OUTPUT)}.`);
 }
 
 async function main() {
@@ -630,7 +895,8 @@ async function main() {
     berryRugsHtml,
     shindoEyesHtml,
     shindoFacesHtml,
-    experienceSongGroups
+    experienceSongGroups,
+    wikiMusicGroups
   ] = await Promise.all([
     fetchHtml(SOURCES.jjs),
     fetchHtml(SOURCES.daHood),
@@ -640,13 +906,15 @@ async function main() {
     fetchHtml(SOURCES.berryRugs),
     fetchHtml(SOURCES.shindoEyes),
     fetchHtml(SOURCES.shindoFaces),
-    Promise.all(EXPERIENCE_SONG_SOURCES.map(collectExperienceSongs))
+    Promise.all(EXPERIENCE_SONG_SOURCES.map(collectExperienceSongs)),
+    Promise.all(WIKI_MUSIC_SOURCES.map(collectWikiMusicRows))
   ]);
   const music = [
     ...parseJjsKillSounds(jjsHtml),
     ...parseForsakenHitSounds(forsakenHtml),
     ...buildTsbSourceSeed(),
-    ...experienceSongGroups.flat()
+    ...experienceSongGroups.flat(),
+    ...wikiMusicGroups.flat()
   ];
   const [bloxstrikeDecals, jjsCreatorStoreGroups, bloxburgCandidates] = await Promise.all([
     collectCreatorStoreDecals({

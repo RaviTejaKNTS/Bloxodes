@@ -2,19 +2,20 @@
 
 Checked: 2026-08-29
 
-This is the working inventory for game-specific Roblox Music ID pages. It combines the five pages already configured in Bloxodes, the Brookhaven RP page completed in this task, and the source-backed candidates reviewed for the next batches.
+This is the working inventory for game-specific Roblox Music ID pages. It combines the five pages that predated this work, the completed Brookhaven RP page, the 11 locally completed Wave 1 pages, and the source-backed candidates reviewed for the next batches.
 
 The scope is deliberately narrower than “every Roblox game with a radio.” A game belongs here when it has a distinct music, radio, boombox, speaker, vehicle-radio, or custom-sound control and enough game-specific evidence to make a useful page. A generic Boombox list copied across unrelated games does not count.
 
 ## Status summary
 
-- 5 existing game-specific pages: live in the route configuration.
-- 1 page completed in this task: Brookhaven RP.
-- 21 ready candidates: strong enough to research and build in the next two waves.
+- 5 pre-existing game-specific pages: live in the route configuration before this work.
+- 1 page completed in the prior task: Brookhaven RP.
+- 11 Wave 1 pages completed locally in this batch.
+- 10 ready candidates remain for Wave 2: strong enough to research and build after this batch.
 - 7 conditional candidates: keep them in the queue, but verify the current control or source list before committing a page.
 - 15 holds or exclusions: demand alone is not enough, or the game's music control is unavailable, fixed, removed, or not genuinely game-specific.
 
-That gives 34 games in the active inventory, including existing and completed pages. The 28 rows after Brookhaven are the remaining work queue.
+That gives 34 games in the active inventory, including existing and completed pages. The 17 rows after Wave 1 are the remaining work queue: 10 Wave 2 candidates and 7 conditional candidates.
 
 ## Existing pages
 
@@ -34,23 +35,23 @@ That gives 34 games in the active inventory, including existing and completed pa
 
 Route: `/catalog/roblox-music-ids/games/brookhaven-rp`
 
-## Wave 1: build next
+## Wave 1: completed locally
 
-These have a clear radio, boombox, vehicle, or custom-audio mechanic plus a substantial current guide or Roblox association source.
+These have a clear radio, boombox, vehicle, or custom-audio mechanic plus a substantial current guide or Roblox association source. The committed source-backed dataset contains 564 music associations for this batch; 3008, Retail Tycoon 2, and Nico's Nextbots use dedicated game-wiki rows where Roblox Music Discovery was sparse or empty.
 
-| Priority | Game | Suggested slug | Main control | Evidence to carry into research |
+| Priority | Game | Suggested slug | Main control | Local result and source coverage |
 | ---: | --- | --- | --- | --- |
-| 1 | Fisch | `fisch` | Radio Pass | Current song-ID guide and Roblox Music Discovery association list. |
-| 2 | Driving Empire | `driving-empire` | Radio / custom music player | Current radio guide, pass details, and Roblox Music Discovery association list. |
-| 3 | Evade | `evade` | Boombox | Current boombox guide and Roblox Music Discovery association list. |
-| 4 | 3008 | `3008` | Free music menu | Current song-ID guide and Roblox Music Discovery association. |
-| 5 | A Dusty Trip | `a-dusty-trip` | Vehicle radio | Current radio guide and Roblox Music Discovery association. |
-| 6 | Work at a Pizza Place | `work-at-a-pizza-place` | Radio pass | Official experience, radio pass, and current player-facing control evidence. |
-| 7 | Basketball Zero | `basketball-zero` | Lobby Boombox | Current Boombox guide and Roblox Music Discovery association list. |
-| 8 | Grand Piece Online | `grand-piece-online` | Music Snail | Current song-ID guide, gamepass evidence, and Roblox Music Discovery association list. |
-| 9 | Da Hood | `da-hood` | Boombox | Current Boombox evidence and Roblox Music Discovery association list. |
-| 10 | Retail Tycoon 2 | `retail-tycoon-2` | Custom music playlists | Current pass listing and Roblox Music Discovery association list. |
-| 11 | Nico's Nextbots | `nicos-nextbots` | Boombox | Current Boombox documentation, pass evidence, and Roblox Music Discovery association list. |
+| 1 | Fisch | `fisch` | Radio Pass | 85 rows; official Music Discovery plus a current song-ID guide. |
+| 2 | Driving Empire | `driving-empire` | Radio / custom music player | 67 rows; official Music Discovery plus a current radio guide. |
+| 3 | Evade | `evade` | Boombox | 70 rows; official Music Discovery plus current boombox documentation. |
+| 4 | 3008 | `3008` | Free music menu | 32 rows; dedicated 3008 soundtrack wiki plus a current song-ID guide. |
+| 5 | A Dusty Trip | `a-dusty-trip` | Vehicle radio | 3 rows; official Music Discovery plus a current radio guide. |
+| 6 | Work at a Pizza Place | `work-at-a-pizza-place` | Radio pass | 2 rows; official experience association plus radio documentation. |
+| 7 | Basketball Zero | `basketball-zero` | Lobby Boombox | 64 rows; official Music Discovery plus a current Boombox guide. |
+| 8 | Grand Piece Online | `grand-piece-online` | Music Snail | 72 rows; official Music Discovery plus current Music Snail/song-ID references. |
+| 9 | Da Hood | `da-hood` | Boombox | 28 rows; official Music Discovery plus current Boombox references. |
+| 10 | Retail Tycoon 2 | `retail-tycoon-2` | Custom music playlists | 88 rows; dedicated Retail Tycoon 2 music table because Music Discovery returned no rows. |
+| 11 | Nico's Nextbots | `nicos-nextbots` | Boombox | 53 rows; official Music Discovery plus dedicated Boombox/music documentation. |
 
 ## Wave 2: build after Wave 1
 
@@ -114,4 +115,16 @@ These are intentionally outside the next build queue until the evidence changes.
 - Brookhaven music feature reference: <https://official-brookhaven.fandom.com/wiki/Music_Feature>
 - Roblox Music Discovery endpoint used for Brookhaven: <https://apis.roblox.com/music-discovery/v1/experience-songs?universeId=1686885941&limit=50>
 - Brookhaven music-system change summary: <https://www.dexerto.com/roblox/roblox-brookhaven-music-codes-free-music-songs-1826300/>
+- Wave 1 Roblox Music Discovery sources use the official endpoint pattern `https://apis.roblox.com/music-discovery/v1/experience-songs?universeId=<universe-id>&limit=50`; the exact universe IDs and checked source URLs are retained in `data/game-specific-ids/source-backed.json`.
+- Fisch song-ID guide: <https://progameguides.com/roblox/roblox-fisch-song-id-codes-radio-pass/>
+- Driving Empire radio guide: <https://progameguides.com/roblox/roblox-driving-empire-song-radio-id-codes/>
+- Evade Boombox reference: <https://evade.fandom.com/wiki/Boombox>
+- 3008 soundtrack asset list: <https://roblox-3008-wiki.fandom.com/wiki/Music/Soundtrack/AssetIDs>
+- A Dusty Trip radio guide: <https://www.escapistmagazine.com/a-dusty-trip-song-id-codes/>
+- Work at a Pizza Place radio reference: <https://workatapizzaplace.fandom.com/wiki/Radio>
+- Basketball Zero Boombox guide: <https://progameguides.com/roblox/basketball-zero-boombox-music-id-codes-roblox/>
+- Grand Piece Online song-ID guide and Music Snail reference: <https://progameguides.com/roblox/roblox-grand-piece-online-gpo-song-id-codes/> and <https://grand-piece-online.fandom.com/wiki/Music_Snail>
+- Da Hood Boombox guide: <https://allthings.how/roblox-da-hood-music-codes/>
+- Retail Tycoon 2 music table: <https://roblox-retail-tycoon-2.fandom.com/wiki/Music>
+- Nico's Nextbots music and Boombox references: <https://nicos-nextbots.fandom.com/wiki/Music> and <https://nicos-nextbots.fandom.com/wiki/Boombox>
 - Local demand report reviewed for generic and game-specific opportunities: `docs/analytics/reports/2026-08-05-bing-music-ids-traffic-data.json`

@@ -67,6 +67,94 @@ export const MUSIC_GAME_ID_PAGES: MusicGameIdPage[] = [
     datasetPreset: "music",
     idLabel: "Music ID",
     seoCountLabel: "Speaker Songs"
+  },
+  {
+    slug: "fisch",
+    title: "Fisch Music IDs",
+    description: "Browse Roblox music IDs for Fisch's Radio Pass and find songs to play while you fish.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Radio Songs"
+  },
+  {
+    slug: "driving-empire",
+    title: "Driving Empire Music IDs",
+    description: "Find Roblox music IDs for Driving Empire's radio and custom music player while you drive.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Radio Songs"
+  },
+  {
+    slug: "evade",
+    title: "Evade Music IDs",
+    description: "Browse Roblox music IDs for Evade's Boombox and soundtrack-friendly runs.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Boombox Songs"
+  },
+  {
+    slug: "3008",
+    title: "3008 Music IDs",
+    description: "Find Roblox music IDs for the 3008 music menu, daily themes, and custom soundtrack slots.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Music Menu Songs"
+  },
+  {
+    slug: "a-dusty-trip",
+    title: "A Dusty Trip Music IDs",
+    description: "Browse Roblox music IDs for A Dusty Trip's car radio and long desert drives.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Radio Songs"
+  },
+  {
+    slug: "work-at-a-pizza-place",
+    title: "Work at a Pizza Place Music IDs",
+    description: "Find Roblox music IDs for Work at a Pizza Place's car radio and Radio pass.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Radio Songs"
+  },
+  {
+    slug: "basketball-zero",
+    title: "Basketball Zero Music IDs",
+    description: "Browse Roblox music IDs for Basketball Zero's lobby Boombox and custom song controls.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Boombox Songs"
+  },
+  {
+    slug: "grand-piece-online",
+    title: "Grand Piece Online Music IDs",
+    description: "Find Roblox music IDs for Grand Piece Online's Music Snail and your next voyage.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Music Snail Songs"
+  },
+  {
+    slug: "da-hood",
+    title: "Da Hood Music IDs",
+    description: "Browse Roblox music IDs for Da Hood's Boombox and custom music controls.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Boombox Songs"
+  },
+  {
+    slug: "retail-tycoon-2",
+    title: "Retail Tycoon 2 Music IDs",
+    description: "Browse Retail Tycoon 2 playlist and custom-radio music IDs, with track names and copy-ready numbers.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Playlist Songs"
+  },
+  {
+    slug: "nicos-nextbots",
+    title: "Nico's Nextbots Music IDs",
+    description: "Find Roblox music IDs for Nico's Nextbots soundtrack references and Boombox controls.",
+    datasetPreset: "music",
+    idLabel: "Music ID",
+    seoCountLabel: "Boombox Songs"
   }
 ];
 
