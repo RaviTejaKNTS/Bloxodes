@@ -5,6 +5,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { parseQuizData, type QuizData } from "@/lib/quiz-types";
 
 type ChecklistFinal = {
   page: {
@@ -30,7 +31,7 @@ type QuizFinal = {
 
 type FinalEntry =
   | { kind: "checklist"; file: string; slug: string; title: string; universeId: number; itemCount: number }
-  | { kind: "quiz"; file: string; code: string; title: string; universeId: number | null };
+  | { kind: "quiz"; file: string; code: string; title: string; universeId: number | null; quizData: QuizData };
 
 type CliOptions = {
   baseUrl: string;
@@ -108,6 +109,7 @@ async function readFinal(file: string): Promise<FinalEntry> {
       code: parsed.page.code.trim().toLowerCase(),
       title: parsed.page.title.trim(),
       universeId: typeof parsed.page.universe_id === "number" ? parsed.page.universe_id : null,
+      quizData: parseQuizData(parsed.quizData, `${file}.quizData`),
     };
   }
 
@@ -154,15 +156,30 @@ async function verifyReadback(entries: FinalEntry[]) {
     } else {
       const { data, error } = await sb
         .from("quiz_pages")
-        .select("code, title, universe_id, is_published")
+        .select("code, title, universe_id, is_published, quiz_data")
         .eq("code", entry.code)
         .maybeSingle();
       if (error) throw new Error(`Failed to read quiz ${entry.code}: ${error.message}`);
       if (!data) throw new Error(`No quiz_pages row found for ${entry.code}`);
       if ((data as { title?: string }).title !== entry.title) throw new Error(`Quiz title mismatch for ${entry.code}`);
       if (!(data as { is_published?: boolean }).is_published) throw new Error(`Quiz ${entry.code} is not published`);
+      const savedQuizData = parseQuizData((data as { quiz_data?: unknown }).quiz_data, `quiz_pages.${entry.code}.quiz_data`);
+      if (stableJson(savedQuizData) !== stableJson(entry.quizData)) {
+        throw new Error(`Quiz data mismatch for ${entry.code}`);
+      }
     }
   }
+}
+
+function stableJson(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.entries(value as Record<string, unknown>)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, entry]) => `${JSON.stringify(key)}:${stableJson(entry)}`)
+      .join(",")}}`;
+  }
+  return JSON.stringify(value) ?? "null";
 }
 
 async function fetchWithTimeout(url: string, timeoutMs = 20000): Promise<Response> {
