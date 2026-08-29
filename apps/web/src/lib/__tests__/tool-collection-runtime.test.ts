@@ -30,20 +30,30 @@ import {
   loadWizardAlchemyRaceRerollData
 } from "@/lib/wizard-alchemy/data";
 
-const FIXTURES: Record<string, string> = {
+const LOCAL_FIXTURES: Record<string, string> = {
   "grow-a-garden-2-mutations": "data/Grow a Garden 2/mutations.json",
-  "grow-a-garden-2-seeds": "data/Grow a Garden 2/seeds.json",
-  "grow-a-garden-crops": "data/Grow a Garden/crops.json",
-  "the-forge-armors": "data/The Forge/armors.json",
-  "the-forge-ores": "data/The Forge/ores.json",
-  "the-forge-weapons": "data/The Forge/weapons.json",
-  "wizard-alchemy-materials": "data/Wizard Alchemy/materials.json",
-  "wizard-alchemy-potions": "data/Wizard Alchemy/potions.json",
-  "wizard-alchemy-races": "data/Wizard Alchemy/races.json"
+  "grow-a-garden-2-seeds": "data/Grow a Garden 2/seeds.json"
 };
 
+function runtimeDocument(item: Record<string, unknown>, section = "Items") {
+  const name = String(item.name);
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return {
+    meta: { schemaVersion: 2 },
+    items: [{
+      item,
+      system: {
+        slug,
+        section,
+        sortOrder: 1,
+        image: `https://media.bloxodes.com/wiki/test/${slug}.webp`
+      }
+    }]
+  };
+}
+
 beforeAll(async () => {
-  for (const [code, relativePath] of Object.entries(FIXTURES)) {
+  for (const [code, relativePath] of Object.entries(LOCAL_FIXTURES)) {
     const document = JSON.parse(
       await fs.readFile(path.resolve(process.cwd(), "../..", relativePath), "utf8")
     ) as { items?: Array<{ system?: { image?: string | null } }> };
@@ -54,6 +64,73 @@ beforeAll(async () => {
     }
     runtimeState.documents.set(code, document as Record<string, unknown>);
   }
+
+  runtimeState.documents.set("grow-a-garden-crops", runtimeDocument({
+    name: "Carrot",
+    tier: "Common",
+    averageValue: "20",
+    averageWeight: "0.24 kg",
+    priceFloorValue: "18",
+    priceFloorWeight: "0.24 kg",
+    minimumWeight: "0.20 kg",
+    hugeChance: "0.5%",
+    stock: "Common",
+    obtainable: "Yes"
+  }, "Common"));
+  runtimeState.documents.set("the-forge-ores", runtimeDocument({
+    name: "Stone",
+    region: "Stone Wakes Cross",
+    rarity: "Common",
+    multiplier: "0.2x",
+    trait: "None",
+    rocks: "Pebble",
+    description: "A common ore.",
+    dropChance: "1/1",
+    sellPrice: "$3"
+  }, "Common"));
+  runtimeState.documents.set("the-forge-weapons", runtimeDocument({
+    name: "Dagger",
+    class: "Daggers",
+    baseDamage: "4.3",
+    attackSpeed: "0.35",
+    range: "6",
+    sellPrice: "$68",
+    chance: "1/1"
+  }));
+  runtimeState.documents.set("the-forge-armors", runtimeDocument({
+    name: "Light Helmet",
+    class: "Light",
+    slot: "Helmet",
+    baseHealth: "3.75%",
+    sellPrice: "$65",
+    chance: "1/1"
+  }, "Helmet"));
+  runtimeState.documents.set("wizard-alchemy-potions", runtimeDocument({
+    name: "Wind Blade Potion",
+    category: "Departure Isle potions",
+    minMagic: 6,
+    power: 24,
+    effect: "Starter wind attack.",
+    recommendedShard: "Wind Shard"
+  }, "Departure Isle potions"));
+  runtimeState.documents.set("wizard-alchemy-materials", runtimeDocument({
+    name: "Blueberry",
+    rarity: "Common",
+    materialRole: "Magic ingredient",
+    magicPower: 3,
+    source: "Blueberry Bushes"
+  }, "Departure Isle materials"));
+  runtimeState.documents.set("wizard-alchemy-races", runtimeDocument({
+    name: "Human",
+    rarity: "Common",
+    rollChance: "25%",
+    rollRoute: "Starter race",
+    bestFor: "Starting only",
+    coreBonus: "No passive bonuses",
+    mainLimit: "No bonuses",
+    elementSynergy: "None",
+    keepPriority: "Reroll when ready"
+  }, "Common races"));
 });
 
 describe("tool datasets use published collection runtimes", () => {

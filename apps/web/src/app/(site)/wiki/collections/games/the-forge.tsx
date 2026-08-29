@@ -1,5 +1,3 @@
-import fs from "node:fs/promises";
-import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
@@ -12,12 +10,8 @@ import { ContentFaq } from "@/components/ContentFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { THE_FORGE_COLLECTIONS, type GameCollectionViewConfig } from "@/lib/game-collections/games/the-forge";
-import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { toIsoContentDate } from "@/lib/content-dates";
-import {
-  getPublishedWikiCollectionRuntimeByCode,
-  shouldFallbackToLocalWikiCollectionData
-} from "@/lib/wiki-collection-runtime";
+import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
 
 const FALLBACK_IMAGE = "/Bloxodes.png";
 
@@ -77,21 +71,6 @@ export type TheForgeCollectionDataset = {
   meta: ForgeDatasetMeta | null;
   items: GameCollectionItem[];
 };
-
-async function readForgeDataset(file: string): Promise<{ meta: ForgeDatasetMeta | null; items: GameCollectionItem[] }> {
-  const datasetPath = repoPath("data", "The Forge", file);
-  const raw = await fs.readFile(datasetPath, "utf8");
-  const parsed = JSON.parse(raw) as
-    | { meta?: ForgeDatasetMeta | null; items?: Record<string, unknown>[] | null }
-    | Record<string, unknown>[];
-
-  if (Array.isArray(parsed)) {
-    return { meta: null, items: uniquifyForgeItemIds(parsed.map(normalizeItem).filter(Boolean) as GameCollectionItem[]) };
-  }
-
-  const items = uniquifyForgeItemIds(unwrapDatasetItems(parsed).map(normalizeItem).filter(Boolean) as GameCollectionItem[]);
-  return { meta: parsed.meta ?? null, items };
-}
 
 function uniquifyForgeItemIds(items: GameCollectionItem[]): GameCollectionItem[] {
   const seen = new Map<string, number>();
@@ -222,15 +201,7 @@ export async function loadTheForgeCollectionDataset(config: GameCollectionViewCo
       )
     };
   }
-  if (!shouldFallbackToLocalWikiCollectionData(code)) {
-    throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
-  }
-  try {
-    return await readForgeDataset(config.file);
-  } catch (error) {
-    console.error("Failed to load The Forge collection dataset", error);
-    return { meta: null, items: [] };
-  }
+  throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
 }
 
 type TheForgePreparedCollection = {

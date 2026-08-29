@@ -3,6 +3,7 @@ import path from "node:path";
 
 import { GAME_COLLECTIONS } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
+import { isDatabaseOnlyGameCollectionGame } from "@/lib/game-collections/database-only";
 
 type Options = {
   json: boolean;
@@ -325,8 +326,12 @@ function auditDataset(code: string, datasetPath: string, document: DatasetDocume
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
+  if (options.game && isDatabaseOnlyGameCollectionGame(options.game)) {
+    throw new Error(`${options.game} is database-only. Audit its task-local refresh dataset with check:game-collection-data --file.`);
+  }
   const issues: Issue[] = [];
   const configs = GAME_COLLECTIONS.filter((config) => {
+    if (isDatabaseOnlyGameCollectionGame(config.gameSlug)) return false;
     if (options.game && config.gameSlug !== options.game) return false;
     if (options.collection && config.slug !== options.collection) return false;
     return true;

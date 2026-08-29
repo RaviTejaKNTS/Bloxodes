@@ -7,6 +7,7 @@ import {
   type GameCollectionConfig
 } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
+import { isDatabaseOnlyGameCollectionGame } from "@/lib/game-collections/database-only";
 
 type Options = {
   apply: boolean;
@@ -607,6 +608,7 @@ async function migrateConfig(config: GameCollectionConfig, options: Options): Pr
 
 function filterConfigs(options: Options) {
   return GAME_COLLECTIONS.filter((config) => {
+    if (isDatabaseOnlyGameCollectionGame(config.gameSlug)) return false;
     if (options.game && config.gameSlug !== options.game) return false;
     if (options.collection && config.slug !== options.collection) return false;
     return true;
@@ -615,6 +617,9 @@ function filterConfigs(options: Options) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
+  if (options.game && isDatabaseOnlyGameCollectionGame(options.game)) {
+    throw new Error(`${options.game} is database-only and has no compatibility dataset to migrate.`);
+  }
   const configs = filterConfigs(options);
   if (!configs.length) throw new Error("No registered game collections matched the filters.");
 

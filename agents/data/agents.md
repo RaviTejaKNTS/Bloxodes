@@ -20,7 +20,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `checklist_pages`, `checklist_pages_view`, `checklist_items`
   - Checklist detail and checklist index content.
 - `quiz_pages`, `quiz_pages_view`
-  - Quiz detail and quiz index metadata. Quiz detail rendering does not use `about_md`; keep quiz value in the intro copy and question pool. Use `bloxodes-quiz-writing` for page shape and validation.
+  - Quiz detail/index metadata plus validated easy/medium/hard question pools in `quiz_pages.quiz_data`. Runtime loaders are database-only and list queries omit the payload. Quiz detail rendering does not use `about_md`; use `bloxodes-quiz-writing` and the guarded importer for page shape and validation.
 - `puzzle_pages`, `puzzle_pages_view`, `puzzle_answers`, `puzzle_sync_runs`
   - Daily puzzle answer pages under `/puzzles`. `puzzle_pages` stores durable page copy and SEO; `puzzle_answers` stores one row per puzzle/date with `answer_summary` and raw `payload`; dated archive pages are noindex and excluded from the puzzles sitemap.
 - `wiki_pages`, `wiki_pages_view`
@@ -112,6 +112,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 ## Local Datasets
 
+- The former game folders for `1-speed-keyboard-escape`, `99-nights-in-the-forest`, `brookhaven-rp`, `dress-to-impress`, `grow-a-garden`, `jujutsu-shenanigans`, `murderers-vs-sheriffs`, `rivals`, `sell-lemons`, `slime-rng`, `survive-zombie-arena`, `the-forge`, and `wizard-alchemy` are database-only and no longer exist under `data/`. Their quiz pools live in `quiz_pages.quiz_data`; their 152 collection revisions live in `wiki_collection_datasets`/`wiki_collection_items`, with images in R2.
+
 - New game collection datasets and media are task-local publication inputs under `tmp/content-workspace`, not deployable runtime files. Existing registered datasets below remain compatibility fallback inputs until migrated to the database/R2 runtime.
 
 - Wiki/collection datasets should keep source-backed fields that players need for decisions, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability, instead of storing only easy-to-scrape labels.
@@ -131,25 +133,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/roblox-dictionary/roblox-dictionary.json`
   - Local source-backed dictionary for `/catalog/roblox-dictionary`, with 251 searchable Roblox slang, acronym, platform, creator, and legacy entries and complete coverage of RobloxDen's 55-entry index plus the official Roblox Dictionary's 67 terms as audited on 2026-08-11.
   - Public definitions and examples are original. Per-item `sourceUrls`, `lastVerifiedAt`, and current/legacy status support later audits without exposing harmful bypass or exploit instructions.
-- `data/Grow a Garden/crops.json`
-  - Database-first input for the crop value calculator and specialized collection renderer. The local file is a rollback fallback; database-shaped parity tests cover both consumers.
-- `data/Grow a Garden/seeds.json`
-- `data/Grow a Garden/pets.json`
-- `data/Grow a Garden/eggs.json`
-- `data/Grow a Garden/gears.json`
-- `data/Grow a Garden/crop-mutations.json`
-- `data/Grow a Garden/pet-mutations.json`
-- `data/Grow a Garden/weather.json`
-- `data/Grow a Garden/merchants.json`
-- `data/Grow a Garden/npcs.json`
-- `data/Grow a Garden/shops.json`
-- `data/Grow a Garden/seed-packs.json`
-- `data/Grow a Garden/crafting-recipes.json`
-- `data/Grow a Garden/food.json`
-- `data/Grow a Garden/currencies.json`
-  - Local Grow a Garden collection datasets collected from multiple external sources and intended for wiki/collection page work.
-- `data/Grow a Garden/quiz.json`
-  - Local Grow a Garden quiz question pool for `/quizzes/grow-a-garden`.
 - `data/Steal a Brainrot/*.json`
   - Local Steal a Brainrot in-game datasets collected from the Steal a Brainrot Wiki for wiki/collection page work.
   - Matching images live under `apps/web/public/Steal a Brainrot/`.
@@ -169,9 +152,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Completed v2 Tower Defense Simulator datasets for the durable Towers and Modes wiki collections, registered under `tower-defense-simulator` and consumed by the generic game-collection renderer.
   - Matching exact row-level WebP assets live under `apps/web/public/Tower Defense Simulator/Towers/` and `apps/web/public/Tower Defense Simulator/Modes/`; preserve the source image manifests and byte/MIME audits when refreshing them.
   - Maps and enemies remain evidence-backed research blocks and are intentionally unregistered.
-- `data/Brookhaven RP/*.json`
-  - Local Brookhaven RP in-game datasets collected from the Official Brookhaven Wiki for wiki/collection page work.
-  - Matching source-provided images live under `apps/web/public/Brookhaven RP/`.
 - `data/Adopt Me/*.json`
   - Local Adopt Me in-game datasets collected from the Adopt Me Wiki and Roblox public APIs for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Adopt Me/`.
@@ -193,12 +173,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Capybaras VS Plants/*.json`
   - Local Capybaras VS Plants datasets for wiki/collection page work, including the Plant Index and the Boss Summoner progression.
   - Keep Boss Summoner rows separate from ordinary plant drops: Pumpkin Tyrant is the sixth original boss, Carnivorous Plant is not a boss row, and Update 3 adds Conqueror Carrot after Pumpkin Tyrant.
-- `data/Dress To Impress/*.json`
-  - Local Dress To Impress game datasets for wiki/collection and quiz page work, including themes, free items, code items, currency items, pose packs, ranks, walk packs, runway effects, pattern packs, hairstyles, makeup, nails, reward items, Robux items, VIP items, and quiz content.
-  - Matching source-provided images live under `apps/web/public/Dress To Impress/` where useful item, pack, salon, or unlock art exists. Themes stay text-only; the free-items collection has one documented image gap for Gingerbread Suit where no clean source image was available.
-- `data/The Forge/*.json`
-  - Database-first Forge collection and calculator datasets consumed by `src/lib/forge/*` and wiki collection routes. Local files remain rollback fallbacks.
-  - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/wiki/collections/games/the-forge.tsx`.
 - `data/Grow a Garden 2/seeds.json` and `data/Grow a Garden 2/mutations.json`
   - Database-first inputs shared by Grow a Garden 2 collection routes and the crop mutation calculator through `src/lib/grow-a-garden-2/value-calculator.ts`. Local files remain rollback fallbacks; database-shaped parity tests cover both inputs.
 - `data/Flee the Facility/*.json`
@@ -206,25 +180,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - `beast-powers.json` is the approved three-row qualitative collection for Runner, Stalker, and Seer; Hacker and unsupported numeric or platform-specific mechanics stay excluded.
 - `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`
   - Exact row-level WebP assets for the approved maps and Beast powers collections, with per-collection source, MIME, dimensions, byte-size, and conversion manifests under `tmp/content-workspace/flee-the-facility/`.
-- `data/RIVALS/*.json`
-  - Local RIVALS game datasets for wiki/collection page work, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and quiz content.
-  - `quiz.json` is the local question pool for `/quizzes/rivals`; use the `QuizData` shape with 10 easy, 10 medium, and 10 hard questions when possible.
-  - Keep RIVALS collection datasets limited to durable in-game item collections plus the official UGC exception. Do not store gamepasses, badges, servers, current event reward tracks, ranked-season reward lists, or manual active-code data here.
-- `data/Wizard Alchemy/*.json`
-  - Local Wizard Alchemy game datasets for wiki/collection page work, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
-  - `potions.json`, `materials.json`, and `races.json` also power the database-first Wizard Alchemy potion planner and race reroll calculator through `src/lib/wizard-alchemy/data.ts`; local files remain rollback fallbacks covered by database-shaped parity tests.
-  - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `code_pages` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
-- `data/Slime RNG/*.json`
-  - Local Slime RNG game datasets for wiki/collection page work, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
-  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; use `bloxodes-quiz-writing` when editing it.
-  - Matching source-provided images live under `apps/web/public/Slime RNG/`. Rebirth and index reward rows are text-only because the source data is milestone-based rather than item-image based.
-- `data/99 Nights in the Forest/*.json`
-  - Local 99 Nights in the Forest game datasets for wiki/collection page work, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and quiz content.
-  - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use the `QuizData` shape with 10 easy, 10 medium, and 10 hard questions when possible.
-  - Keep quiz questions tied to stable survival, crafting, rescue, class, taming, weapon, material, and route facts. Do not store active codes, live event statuses, temporary reward tracks, or unresolved disputed facts here.
-- `data/Sell Lemons/*.json`
-  - Local Sell Lemons game datasets for wiki/collection and quiz page work, including income sources, active income methods, powers, secret unlocks, evolution stages, locations, orchard items, orchard mutations, tycoon upgrades, ascension rewards, companions, and quiz content.
-  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; keep hard questions tied to stable progression, reset concepts, and named plot upgrades, not unstable exact costs or source-conflicted UFO/Purity/Sewer step sequences.
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/collection page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
@@ -254,9 +209,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/DOORS/*.json`
   - Local DOORS datasets for wiki/collection page work, including released entities, permanent run items, released floors and subfloors, and fixed named locations.
   - Matching optimized WebP images live under `apps/web/public/DOORS/` by collection folder. Keep upcoming floors, temporary modes, events, modifiers, achievements, and generic procedural rooms outside these datasets.
-- `data/Wizard Alchemy/quiz.json`
-  - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
-  - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.
 - `data/Fisch/fish.json`
   - Fisch collection content.
 - `data/Color Codes/roblox-color-codes.json`

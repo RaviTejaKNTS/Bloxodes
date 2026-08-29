@@ -8,6 +8,7 @@ import {
   type GameCollectionConfig
 } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
+import { isDatabaseOnlyGameCollectionGame } from "@/lib/game-collections/database-only";
 
 type DatasetDocument = {
   meta?: Record<string, unknown> | null;
@@ -335,6 +336,9 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const issues: CheckIssue[] = [];
   const config = getGameCollectionConfigByWikiPath(options.game!, options.collection!);
+  if (!options.file && config && isDatabaseOnlyGameCollectionGame(config.gameSlug)) {
+    throw new Error(`${config.gameSlug} is database-only. Pass the task-local refresh dataset with --file and --media-root.`);
+  }
   if (!config && !options.file) {
     throw new Error(
       `No registered collection config for ${options.game}/${options.collection}. Run register:game-collection or pass --file.`

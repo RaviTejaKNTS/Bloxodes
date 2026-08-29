@@ -5,6 +5,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { getWikiCollectionPageByCode, type WikiCollectionPageContent } from "@/lib/wiki-collections";
 import { resolveWikiMediaUrl } from "@/lib/wiki-media";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections/types";
+import { isDatabaseOnlyGameCollectionCode } from "@/lib/game-collections/database-only";
 
 const ITEM_PAGE_SIZE = 1000;
 
@@ -87,6 +88,7 @@ export function wikiCollectionDatabaseRequiredCodes(): Set<string> {
 
 export function requiresWikiCollectionDatabase(code: string): boolean {
   return wikiCollectionRuntimeMode() === "database-only" ||
+    isDatabaseOnlyGameCollectionCode(code) ||
     wikiCollectionDatabaseRequiredCodes().has(code.trim().toLowerCase());
 }
 

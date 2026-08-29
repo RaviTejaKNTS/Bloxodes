@@ -136,6 +136,7 @@ async function resolveContext(wikiSlug: string, collectionSlug: string): Promise
   }
 
   const config = getGameCollectionConfigByWikiPath(normalizedWikiSlug, normalizedCollectionSlug);
+  if (!page && !config) return null;
   const expectedCode = page?.code ?? config?.code ?? `${normalizedWikiSlug}-${normalizedCollectionSlug}`;
   if (!shouldFallbackToLocalWikiCollectionData(expectedCode)) {
     throw new Error(`Required database runtime for ${expectedCode} did not load. Local fallback is disabled.`);
@@ -204,6 +205,14 @@ export async function generateWikiCollectionMetadata({
     const code = page?.code ?? localConfig?.code ?? `${wikiSlug}-${collectionSlug}`;
     const localAvailable = Boolean(localConfig && shouldFallbackToLocalWikiCollectionData(code));
     if (!page || (!databaseHeader && !localAvailable)) {
+      if (!page && !localConfig) {
+        return {
+          title: `Roblox Wiki | ${SITE_NAME}`,
+          description: WIKI_DESCRIPTION,
+          alternates: buildAlternates(canonical),
+          robots: { index: false, follow: false }
+        };
+      }
       if (requiresWikiCollectionDatabase(code)) {
         throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
       }

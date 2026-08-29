@@ -10,7 +10,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `apps/mobile/AGENTS.md`: Expo React Native app scope, API contract, and local testing workflow.
 - `apps/web/src/app/AGENTS.md`: App Router structure, feeds, sitemaps, auth routes, and route conventions.
 - `apps/web/src/app/(site)/AGENTS.md`: public route families, page-data patterns, SEO, and publishable content rules.
-- `apps/web/src/app/(site)/quizzes/AGENTS.md`: quiz route behavior, local question pool rules, and preview checks.
+- `apps/web/src/app/(site)/quizzes/AGENTS.md`: database-backed quiz question pools, route behavior, and preview checks.
 - `apps/web/src/app/api/AGENTS.md`: JSON endpoint conventions, mutation safety, extension/mobile APIs, and cache invalidation.
 - `apps/web/src/lib/AGENTS.md`: shared data access, caching, auth, SEO, client payload helpers, and domain modules.
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.

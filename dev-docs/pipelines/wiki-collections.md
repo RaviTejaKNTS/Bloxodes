@@ -1,7 +1,7 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-08-27
+Last verified: 2026-08-29
 Evidence: wiki route/data contracts, workflow skills, game collection registry and v2 dataset rules, seed/verification scripts, and the latest production row-count sample
 
 ## Scope
@@ -17,8 +17,8 @@ These collections describe one game's durable systems and items—pets, weapons,
 ## Source and Data Ownership
 
 - New collection work uses a task-local v2 `{ meta, items: [{ item, system }] }` dataset and `runtime-manifest.json`. The guarded sync normalizes that dataset into Supabase; the task files are migration inputs, not production runtime files.
-- Existing `data/<Game>/...` collections remain the `database-first` compatibility fallback during the initial bulk cutover. Removing those files is a separate database-only cleanup after production readback and consumer parity, not part of pointer publication.
-- Do not remove a compatibility dataset merely because its collection route has a published database revision. Grow a Garden crops, Grow a Garden 2 seeds/mutations, The Forge ores/weapons/armors, and Wizard Alchemy potions/materials/races also power public tools. Their typed loaders and the Grow a Garden/The Forge custom renderers are database-first and covered by database-shaped parity tests; local files remain deployed only as a temporary rollback fallback.
+- Compatibility files remain only for games not yet cleared through the database-only gate. The first completed cleanup covers 152 collections and 10,574 rows across `1-speed-keyboard-escape`, `99-nights-in-the-forest`, `brookhaven-rp`, `dress-to-impress`, `grow-a-garden`, `jujutsu-shenanigans`, `murderers-vs-sheriffs`, `rivals`, `sell-lemons`, `slime-rng`, `survive-zombie-arena`, `the-forge`, and `wizard-alchemy`.
+- Those 13 groups are hard-coded database-only. Their generic, specialized, mobile, image, Forge, Grow a Garden, and Wizard Alchemy tool consumers fail fast when a published revision is unavailable. Refreshes use task-local datasets and runtime manifests; they do not recreate `data/<Game>/`.
 - `wiki_pages` owns hub copy, controls, tips, metadata, and game identity.
 - `wiki_collection_pages` owns collection page copy, route identity, publication state, and the `published_dataset_id` pointer.
 - `wiki_collection_datasets` owns immutable content-addressed revisions and their validation/source manifests. `wiki_collection_items` owns normalized item rows and R2 object metadata. Only the service role can read or write these runtime tables; public routes load them on the server.
@@ -57,7 +57,7 @@ Readable source-provided item names or labels baked into an otherwise valid row 
 
 - New database/R2 collection content does not require a Git commit or web deployment.
 - The Worker, schema, server loader, and tooling are deployed infrastructure. Collection revisions publish through controlled R2/database writes plus the existing revalidation event.
-- `WIKI_COLLECTION_DATA_SOURCE=database-first` is the default rollback posture. `local-only` disables the database runtime; `database-only` is reserved for the final post-migration state. During staged migrations, `WIKI_COLLECTION_DATABASE_REQUIRED_CODES` can list exact collection codes that must load from the database and fail fast instead of using their local datasets.
+- `WIKI_COLLECTION_DATA_SOURCE=database-first` remains the compatibility posture for unmigrated groups. Built-in database-only groups and exact codes in `WIKI_COLLECTION_DATABASE_REQUIRED_CODES` always fail fast instead of using local datasets; global `database-only` disables every compatibility fallback.
 - Wiki hub and mobile preview images use the published revision's R2 keys when available, then fall back to local dataset images during migration.
 - `database-only` must not be enabled and local shared datasets must not be deleted until the tool-consumer parity gate above passes.
 - A wiki hub and its collections should be reviewed together when navigation, identity, collection registration, or shared game data changes.

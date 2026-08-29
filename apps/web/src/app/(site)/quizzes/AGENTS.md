@@ -2,14 +2,14 @@
 
 Scope: `apps/web/src/app/(site)/quizzes`.
 
-This folder renders the public quizzes index and quiz detail pages. Quiz page copy lives in Supabase `quiz_pages`; question pools live in local JSON and are loaded through `apps/web/src/lib/quizzes.ts`.
+This folder renders the public quizzes index and quiz detail pages. Quiz page copy and validated question pools live in Supabase `quiz_pages`; `apps/web/src/lib/quizzes.ts` reads `quiz_data` directly and has no local fallback.
 
 ## Route Shape
 
 - `/quizzes`: index page for published quizzes.
 - `/quizzes/[slug]`: detail page with a 15-question interactive run.
 
-Shared route-family data belongs in `page-data.tsx`. Quiz detail rendering should stay server-first and pass the local question pool into `QuizRunner`.
+Shared route-family data belongs in `page-data.tsx`. Quiz detail rendering should stay server-first and pass the database question pool into `QuizRunner`.
 
 ## Content Workflow
 
@@ -18,7 +18,7 @@ Use:
 - `$bloxodes-quiz-writing`
 - `agents/content-writing/agents.md`
 
-For a new game quiz, create or update a `quiz_pages` row and a local `data/<Game>/quiz.json` pool. The quiz code should be the game slug, such as `wizard-alchemy`, because the route already supplies `/quizzes/`.
+For a new game quiz, import the approved `final.json`; the importer stores its `quizData` in `quiz_pages.quiz_data`. The quiz code should be the game slug, such as `wizard-alchemy`, because the route already supplies `/quizzes/`.
 
 ## Page Copy Rules
 
@@ -46,7 +46,7 @@ Answer choices should be balanced within each question. The correct option must 
 
 Before calling a quiz route update complete:
 
-1. Validate the local JSON parses.
+1. Validate `final.json.quizData` parses and is stored in `quiz_pages.quiz_data`.
 2. Confirm each difficulty pool has the intended count.
 3. Confirm every question has four options.
 4. Confirm every `correctOptionId` matches an option in the same question.
@@ -55,4 +55,4 @@ Before calling a quiz route update complete:
 7. Preview `/quizzes` when metadata, index card text, image, or publish state changed.
 8. Run `npm run typecheck:web` when route or shared TypeScript changed.
 
-If the dev page shows old questions after editing JSON, restart the local dev server or clear the relevant Next cache before judging the page.
+If a published row has no valid `quiz_data`, the loader must fail rather than silently reading a repository file.

@@ -15,6 +15,7 @@ import {
 } from "@/lib/game-collections";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
+import { isDatabaseOnlyGameCollectionGame } from "@/lib/game-collections/database-only";
 
 type DatasetDocument = {
   meta?: Record<string, unknown>;
@@ -330,8 +331,15 @@ async function targetSources(): Promise<CollectionSource[]> {
     }));
   }
 
+  const databaseOnlyFilters = gameFilters.filter(isDatabaseOnlyGameCollectionGame);
+  if (databaseOnlyFilters.length) {
+    throw new Error(
+      `${databaseOnlyFilters.join(", ")} no longer has registered local runtime files. Use a task-local --manifest for refresh work.`
+    );
+  }
   let sources = GAME_COLLECTIONS.filter(
     (config) =>
+      !isDatabaseOnlyGameCollectionGame(config.gameSlug) &&
       (!gameFilters.length || gameFilters.includes(config.gameSlug)) &&
       (!collectionFilters.length || collectionFilters.includes(config.slug))
   ).map((config) => {
