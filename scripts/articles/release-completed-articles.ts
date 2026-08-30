@@ -443,6 +443,10 @@ function normalizedSet(values: string[]): string[] {
   return [...new Set(values)].sort();
 }
 
+function normalizedArticleContent(value: string): string {
+  return value.replace(/\r\n/g, "\n").trim();
+}
+
 function assertSameValues(actual: string[], expected: string[], label: string): void {
   const normalizedActual = normalizedSet(actual);
   const normalizedExpected = normalizedSet(expected);
@@ -463,8 +467,8 @@ export function assertProductionSnapshot(params: {
   if (article.slug !== finalJson.slug || article.title !== finalJson.title || article.is_published !== true) {
     throw new Error(`${finalJson.slug}: production article identity or publication state does not match final.json.`);
   }
-  if (article.content_md !== finalJson.content_md) {
-    throw new Error(`${finalJson.slug}: production content_md does not exactly match the promoted final.json.`);
+  if (normalizedArticleContent(article.content_md ?? "") !== normalizedArticleContent(finalJson.content_md)) {
+    throw new Error(`${finalJson.slug}: production content_md does not match the normalized promoted final.json.`);
   }
   if (!article.cover_image || new URL(article.cover_image).origin !== CANONICAL_MEDIA_ORIGIN) {
     throw new Error(`${finalJson.slug}: production cover_image is missing or not hosted on ${CANONICAL_MEDIA_ORIGIN}.`);

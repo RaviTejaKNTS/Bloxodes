@@ -115,7 +115,7 @@ test("production snapshot requires exact content, body images, and provenance", 
   assert.doesNotThrow(() => assertProductionSnapshot(input));
   assert.throws(
     () => assertProductionSnapshot({ ...input, article: { ...input.article, content_md: `${content}\nchanged` } }),
-    /does not exactly match/,
+    /does not match the normalized/,
   );
   assert.throws(
     () => assertProductionSnapshot({ ...input, provenance: [] }),
@@ -217,6 +217,29 @@ test("production snapshot keeps distinct images when their source URL is shared"
           original_url: sharedManifest.entries[1]!.original_image_url!,
         },
       ],
+    });
+  });
+});
+
+test("production snapshot tolerates importer-only Markdown line-ending normalization", () => {
+  const finalJson = {
+    title: "Whitespace normalization test",
+    slug: "whitespace-normalization-test",
+    content_md: "## Guide\n\nKeep the first unlock practical.\n",
+  };
+  assert.doesNotThrow(() => {
+    assertProductionSnapshot({
+      finalJson,
+      manifest: { schema: 1, article_slug: finalJson.slug, visual_type: "other", required: true, expected_count: 0, entries: [] },
+      article: {
+        id: "article-id",
+        slug: finalJson.slug,
+        title: finalJson.title,
+        cover_image: "https://media.bloxodes.com/storage/v1/object/public/media/covers/whitespace-normalization-test.webp",
+        content_md: finalJson.content_md.trim(),
+        is_published: true,
+      },
+      provenance: [],
     });
   });
 });
