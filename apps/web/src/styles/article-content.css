@@ -687,8 +687,8 @@
   scrollbar-width: none;
 }
 
-/* Flat markdown rendering for codes page: content nodes are direct children tagged with data-md-copy */
-#article-body > [data-md-copy] + [data-md-copy] {
+/* Flat markdown rendering for codes page: paragraphs keep the shared text rhythm. */
+#article-body > [data-md-copy] + p[data-md-copy] {
   margin-top: 1.75rem;
 }
 
@@ -775,8 +775,8 @@
   border: 0;
 }
 
-/* Class-based fallback for flat markdown nodes */
-#article-body > .md-copy-node + .md-copy-node {
+/* Class-based fallback for flat markdown paragraphs */
+#article-body > .md-copy-node + .md-copy-p {
   margin-top: 1.75rem;
 }
 
@@ -1080,7 +1080,7 @@
 }
 
 /* Clean scoped markdown styles: applies only to parsed Supabase nodes */
-.md-copy-scope > [data-md-copy] + [data-md-copy] {
+.md-copy-scope > [data-md-copy] + p[data-md-copy] {
   margin-top: 1.75rem !important;
 }
 
@@ -1351,13 +1351,21 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-/* Class-based hard fallback to guarantee styles on parsed markdown nodes */
-.md-copy-scope > .md-copy-node + .md-copy-node { margin-top: 1.75rem !important; }
+/* Class-based hard fallback to guarantee paragraph rhythm on parsed markdown nodes */
+.md-copy-scope > .md-copy-node + .md-copy-p { margin-top: 1.75rem !important; }
 .md-copy-scope .md-copy-heading { color: rgb(var(--color-foreground)) !important; font-weight: 600 !important; }
 .md-copy-scope .md-copy-h1 { font-size: 2.5rem !important; line-height: 1.1 !important; margin: 0 0 1.5rem !important; }
 .md-copy-scope .md-copy-h2 { font-size: 2.35rem !important; line-height: 1.12 !important; margin: 2.5rem 0 1rem !important; }
 .md-copy-scope .md-copy-h3 { font-size: 1.6rem !important; line-height: 1.2 !important; margin: 2rem 0 0.75rem !important; }
 .md-copy-scope .md-copy-h4 { font-size: 1.35rem !important; line-height: 1.25 !important; margin: 1.75rem 0 0.5rem !important; }
+#article-body > .md-spacer,
+.md-copy-scope > .md-spacer[data-md-copy] { margin-block: 0 !important; }
+#article-body > .md-copy-p + .md-spacer,
+#article-body > .md-spacer + .md-copy-p,
+.md-copy-scope > .md-copy-p + .md-spacer,
+.md-copy-scope > p[data-md-copy] + .md-spacer[data-md-copy],
+.md-copy-scope > .md-spacer + .md-copy-p,
+.md-copy-scope > .md-spacer[data-md-copy] + p[data-md-copy] { margin-top: 0 !important; }
 .md-copy-scope .md-copy-p { color: rgba(var(--color-foreground), 0.9) !important; font-size: 1.08rem !important; line-height: 1.85 !important; letter-spacing: 0.012em !important; }
 .md-copy-scope .md-copy-list { margin: 1.5rem 0 !important; padding-left: 1.75rem !important; }
 .md-copy-scope .md-copy-ul { list-style-type: disc !important; }

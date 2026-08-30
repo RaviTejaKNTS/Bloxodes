@@ -405,6 +405,69 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
       throw new Error(`application CLS reached ${clsBeforeSynthetic.toFixed(4)} before ad simulation`);
     }
 
+    const paragraphGaps = directChildren.flatMap((element, index) => {
+      const next = directChildren[index + 1];
+      if (!next || !element.matches("p[data-md-copy]") || !next.matches("p[data-md-copy]")) return [];
+      return [Math.round(next.getBoundingClientRect().top - element.getBoundingClientRect().bottom)];
+    });
+    const isProseStream = content.classList.contains("journey-content-stream--prose");
+    const proseFlowSelector =
+      "p[data-md-copy], h1[data-md-copy], h2[data-md-copy], h3[data-md-copy], h4[data-md-copy], ul[data-md-copy], ol[data-md-copy]";
+    const proseFlowNodes = directChildren
+      .map((element, index) => ({ element, index }))
+      .filter(({ element }) => element.matches(proseFlowSelector));
+    const expectedTopMargin = (element: HTMLElement, index: number) => {
+      if (element.matches(".md-spacer")) return 0;
+      if (element.matches("h1[data-md-copy]")) return 0;
+      if (element.matches("h2[data-md-copy]")) return 40;
+      if (element.matches("h3[data-md-copy]")) return 32;
+      if (element.matches("h4[data-md-copy]")) return 28;
+      if (element.matches("ul[data-md-copy], ol[data-md-copy]")) return 24;
+      const previous = directChildren[index - 1];
+      if (previous?.matches(".md-spacer")) return 0;
+      const hasSharedProseMargins = content.classList.contains("prose") || content.classList.contains("game-copy");
+      return previous?.matches("[data-md-copy], .md-copy-node") || hasSharedProseMargins ? 28 : 0;
+    };
+    const expectedBottomMargin = (element: HTMLElement) => {
+      if (element.matches("h1[data-md-copy]")) return 24;
+      if (element.matches("h2[data-md-copy]")) return 16;
+      if (element.matches("h3[data-md-copy]")) return 12;
+      if (element.matches("h4[data-md-copy]")) return 8;
+      if (element.matches("ul[data-md-copy], ol[data-md-copy]")) return 24;
+      return 0;
+    };
+    const proseSpacingFailures = isProseStream
+      ? proseFlowNodes.flatMap(({ element, index }) => {
+          const style = getComputedStyle(element);
+          const expectedTop = expectedTopMargin(element, index);
+          const expectedBottom = expectedBottomMargin(element);
+          const failures = [];
+          if (Math.abs(Number.parseFloat(style.marginTop) - expectedTop) > 1) {
+            failures.push(`${element.tagName.toLowerCase()} margin-top ${style.marginTop} (expected ${expectedTop}px)`);
+          }
+          if (Math.abs(Number.parseFloat(style.marginBottom) - expectedBottom) > 1) {
+            failures.push(`${element.tagName.toLowerCase()} margin-bottom ${style.marginBottom} (expected ${expectedBottom}px)`);
+          }
+          return failures;
+        })
+      : [];
+    const proseFlowGaps = isProseStream
+      ? proseFlowNodes.flatMap(({ element, index }, nodeIndex) => {
+          const nextNode = proseFlowNodes[nodeIndex + 1];
+          if (!nextNode || nextNode.index !== index + 1) return [];
+          const actualGap = Math.round(
+            nextNode.element.getBoundingClientRect().top - element.getBoundingClientRect().bottom
+          );
+          const expectedGap = Math.max(expectedBottomMargin(element), expectedTopMargin(nextNode.element, nextNode.index));
+          return Math.abs(actualGap - expectedGap) > 1
+            ? [`${element.tagName.toLowerCase()}→${nextNode.element.tagName.toLowerCase()} gap ${actualGap}px (expected ${expectedGap}px)`]
+            : [];
+        })
+      : [];
+    if (proseSpacingFailures.length || proseFlowGaps.length) {
+      throw new Error(`markdown spacing mismatch: ${[...proseSpacingFailures, ...proseFlowGaps].join(", ")}`);
+    }
+
     if (!directItems.length) {
       if (!isStructuredStream && !hasEmptyState) {
         throw new Error("no direct Journey items or explicit empty state found after hydration");
@@ -434,33 +497,9 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
     });
     if (flexItems.length) throw new Error(`${flexItems.length} direct Journey items render as flex containers`);
 
-    const paragraphGaps = directChildren.flatMap((element, index) => {
-      const next = directChildren[index + 1];
-      if (!next || !element.matches("p[data-md-copy]") || !next.matches("p[data-md-copy]")) return [];
-      return [Math.round(next.getBoundingClientRect().top - element.getBoundingClientRect().bottom)];
-    });
-    const isProseStream = content.classList.contains("journey-content-stream--prose");
-    const proseFlowSelector =
-      "p[data-md-copy], h1[data-md-copy], h2[data-md-copy], h3[data-md-copy], h4[data-md-copy], ul[data-md-copy], ol[data-md-copy]";
-    const proseFlowGaps = directChildren.flatMap((element, index) => {
-      const next = directChildren[index + 1];
-      if (!next || !element.matches(proseFlowSelector) || !next.matches(proseFlowSelector)) return [];
-      return [Math.round(next.getBoundingClientRect().top - element.getBoundingClientRect().bottom)];
-    });
     const hasInvalidCardGridParagraphGap = isCardGrid && paragraphGaps.some((gap) => gap < 26 || gap > 30);
-    const hasInvalidProseFlowGap = isProseStream && proseFlowGaps.some((gap) => gap < 26 || gap > 30);
-    if (hasInvalidCardGridParagraphGap || hasInvalidProseFlowGap) {
-      const gaps = isProseStream ? proseFlowGaps : paragraphGaps;
-      throw new Error(`prose flow gap is ${gaps.join(", ")}px instead of about 28px`);
-    }
-    if (isProseStream) {
-      const collapsedHeadingMargins = directChildren.filter((element) => {
-        if (!element.matches("h1[data-md-copy], h2[data-md-copy], h3[data-md-copy], h4[data-md-copy]")) return false;
-        return Number.parseFloat(getComputedStyle(element).marginBottom) <= 0;
-      });
-      if (collapsedHeadingMargins.length) {
-        throw new Error(`${collapsedHeadingMargins.length} prose headings have no bottom margin`);
-      }
+    if (hasInvalidCardGridParagraphGap) {
+      throw new Error(`direct paragraph gap is ${paragraphGaps.join(", ")}px instead of about 28px`);
     }
 
     document.querySelector("[data-journey-audit-ad]")?.remove();
