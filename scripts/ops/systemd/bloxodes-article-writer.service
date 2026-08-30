@@ -11,6 +11,7 @@ WorkingDirectory=/home/teja/projects/Bloxodes
 EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
 Environment=ARTICLE_WRITER_WORKTREE=/home/teja/projects/Bloxodes
+Environment=ARTICLE_AUTO_PUBLISH=true
 ExecStart=/usr/bin/npm run articles:homelab:check -- --component writer
 ExecStart=/usr/bin/npm run articles:writer:pi:canary -- --apply
 ExecStart=/usr/bin/npm run articles:writer:batch -- --apply --limit 6

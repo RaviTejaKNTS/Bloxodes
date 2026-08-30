@@ -325,7 +325,7 @@ async function syncImageProvenance(
         .from("article_source_images")
         .select("id")
         .eq("article_id", article.id)
-        .eq("original_url", entry.original_image_url)
+        .eq("uploaded_path", entry.uploaded_path)
         .limit(1)
         .maybeSingle();
       if (lookupError) throw new Error(`Failed to read image provenance for ${entry.label}: ${lookupError.message}`);

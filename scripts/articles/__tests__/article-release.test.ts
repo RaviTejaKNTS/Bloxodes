@@ -153,3 +153,70 @@ test("production credentials accept only the canonical production target", async
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("production snapshot keeps distinct images when their source URL is shared", () => {
+  const sharedManifest: ArticleImageManifest = {
+    schema: 1,
+    article_slug: "shared-source-image-test",
+    visual_type: "other",
+    required: true,
+    expected_count: 2,
+    entries: [
+      {
+        id: "one",
+        label: "First image",
+        required: true,
+        placement_heading: "First image",
+        status: "verified",
+        source_page_url: "https://example.com/first",
+        original_image_url: "https://cdn.example.com/shared.png",
+        uploaded_path: "articles/shared-source-image-test/sources/one.webp",
+        public_url: "https://media.bloxodes.com/storage/v1/object/public/media/articles/shared-source-image-test/sources/one.webp",
+        alt: "First image",
+      },
+      {
+        id: "two",
+        label: "Second image",
+        required: true,
+        placement_heading: "Second image",
+        status: "verified",
+        source_page_url: "https://example.com/second",
+        original_image_url: "https://cdn.example.com/shared.png",
+        uploaded_path: "articles/shared-source-image-test/sources/two.webp",
+        public_url: "https://media.bloxodes.com/storage/v1/object/public/media/articles/shared-source-image-test/sources/two.webp",
+        alt: "Second image",
+      },
+    ],
+  };
+  const contentMd = [
+    `![First image](${sharedManifest.entries[0]!.public_url})`,
+    `![Second image](${sharedManifest.entries[1]!.public_url})`,
+  ].join("\n\n");
+
+  assert.doesNotThrow(() => {
+    assertProductionSnapshot({
+      finalJson: { title: "Shared source image test", slug: sharedManifest.article_slug, content_md: contentMd },
+      manifest: sharedManifest,
+      article: {
+        id: "article-id",
+        slug: sharedManifest.article_slug,
+        title: "Shared source image test",
+        cover_image: "https://media.bloxodes.com/storage/v1/object/public/media/covers/shared-source-image-test.webp",
+        content_md: contentMd,
+        is_published: true,
+      },
+      provenance: [
+        {
+          public_url: sharedManifest.entries[0]!.public_url!,
+          uploaded_path: sharedManifest.entries[0]!.uploaded_path!,
+          original_url: sharedManifest.entries[0]!.original_image_url!,
+        },
+        {
+          public_url: sharedManifest.entries[1]!.public_url!,
+          uploaded_path: sharedManifest.entries[1]!.uploaded_path!,
+          original_url: sharedManifest.entries[1]!.original_image_url!,
+        },
+      ],
+    });
+  });
+});
