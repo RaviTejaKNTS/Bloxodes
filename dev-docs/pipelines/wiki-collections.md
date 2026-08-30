@@ -1,7 +1,7 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-08-29
+Last verified: 2026-08-31
 Evidence: wiki route/data contracts, workflow skills, game collection registry and v2 dataset rules, seed/verification scripts, and the latest production row-count sample
 
 ## Scope
@@ -10,21 +10,21 @@ Game wiki hubs and their game-specific collections are one editorial/data unit:
 
 - `/wiki/<game-slug>` is backed by `wiki_pages`.
 - `/wiki/<game-slug>/<collection-slug>` is backed by `wiki_collection_pages`, an immutable published revision in `wiki_collection_datasets`, and normalized rows in `wiki_collection_items`.
-- The 2026-08-27 production migration inventory contains 622 published wiki collection pages backed by registered v2 datasets; five registered collections without approved published page rows remain intentionally excluded.
+- The 2026-08-31 production inventory contains 632 published wiki collection pages backed by registered v2 datasets; five registered collections without approved published page rows remain intentionally excluded.
 
 These collections describe one game's durable systems and items—pets, weapons, crops, locations, NPCs, recipes, mutations, progression systems, and similar player-facing sets. They are not part of the global `/catalog` ingestion pipeline.
 
 ## Source and Data Ownership
 
 - New collection work uses a task-local v2 `{ meta, items: [{ item, system }] }` dataset and `runtime-manifest.json`. The guarded sync normalizes that dataset into Supabase; the task files are migration inputs, not production runtime files.
-- Compatibility files remain only for games not yet cleared through the database-only gate. The first completed cleanup covers 152 collections and 10,574 rows across `1-speed-keyboard-escape`, `99-nights-in-the-forest`, `brookhaven-rp`, `dress-to-impress`, `grow-a-garden`, `jujutsu-shenanigans`, `murderers-vs-sheriffs`, `rivals`, `sell-lemons`, `slime-rng`, `survive-zombie-arena`, `the-forge`, and `wizard-alchemy`.
-- Those 13 groups are hard-coded database-only. Their generic, specialized, mobile, image, Forge, Grow a Garden, and Wizard Alchemy tool consumers fail fast when a published revision is unavailable. Refreshes use task-local datasets and runtime manifests; they do not recreate `data/<Game>/`.
+- Compatibility files remain only for games not yet cleared through the database-only gate. The completed cleanup covers 181 collections and 11,885 rows across the 21 database-only groups registered in `apps/web/src/lib/game-collections/database-only.ts`.
+- Those 21 groups are hard-coded database-only. Their generic, specialized, mobile, image, Forge, Grow a Garden, and Wizard Alchemy tool consumers fail fast when a published revision is unavailable. Refreshes use task-local datasets and runtime manifests; they do not recreate `data/<Game>/`.
 - `wiki_pages` owns hub copy, controls, tips, metadata, and game identity.
 - `wiki_collection_pages` owns collection page copy, route identity, publication state, and the `published_dataset_id` pointer.
 - `wiki_collection_datasets` owns immutable content-addressed revisions and their validation/source manifests. `wiki_collection_items` owns normalized item rows and R2 object metadata. Only the service role can read or write these runtime tables; public routes load them on the server.
 - Collection codes use `<game-slug>-<collection-slug>`; `wiki_slug` must use the editorial game slug, never a stats/universe slug.
 - Roblox APIs may verify universe identity, metadata, and thumbnails. Collection item rows come from source research rather than assuming Roblox exposes a complete item endpoint.
-- Flee the Facility's approved local datasets are `data/Flee the Facility/maps.json` and `data/Flee the Facility/beast-powers.json`; their exact row-level WebP assets live in `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`. Hammers and gemstones remain research-only until a complete source-backed roster can be proven.
+- Flee the Facility's approved Maps and Beast Powers revisions are stored in `wiki_collection_datasets` and `wiki_collection_items`; Hammers and gemstones remain research-only until a complete source-backed roster can be proven.
 - Blade Ball is a hub-only game group with zero registered collections (`collections: []`). Sword Skins, Explosion Skins, Emotes, and Maps are blocked because independent current-complete roster proof was unavailable after the 2026-08-23 Roblox experience update; Abilities is blocked because its roster conflict remains unresolved.
 
 ### Managed-development database/R2 canary
@@ -64,6 +64,6 @@ Readable source-provided item names or labels baked into an otherwise valid row 
 - New database/R2 collection content does not require a Git commit or web deployment.
 - The Worker, schema, server loader, and tooling are deployed infrastructure. Collection revisions publish through controlled R2/database writes plus the existing revalidation event.
 - `WIKI_COLLECTION_DATA_SOURCE=database-first` remains the compatibility posture for unmigrated groups. Built-in database-only groups and exact codes in `WIKI_COLLECTION_DATABASE_REQUIRED_CODES` always fail fast instead of using local datasets; global `database-only` disables every compatibility fallback.
-- Wiki hub and mobile preview images use the published revision's R2 keys when available, then fall back to local dataset images during migration.
-- `database-only` must not be enabled and local shared datasets must not be deleted until the tool-consumer parity gate above passes.
+- Wiki hubs and mobile preview images use the published revision's R2 keys. Database-only groups have no local image fallback.
+- Local shared datasets may be deleted only after the tool-consumer parity gate above passes. The 21 groups listed in `database-only.ts` have passed that gate.
 - A wiki hub and its collections should be reviewed together when navigation, identity, collection registration, or shared game data changes.

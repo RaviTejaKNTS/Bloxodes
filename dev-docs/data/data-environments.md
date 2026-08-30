@@ -1,7 +1,7 @@
 # Data Environments
 
 Status: Active
-Last verified: 2026-08-29
+Last verified: 2026-08-31
 Evidence: env target inspection, managed-development URL/readiness guard, migration ledgers, production readback/health, and platform synchronization checks
 
 ## Workstation Development
@@ -31,7 +31,7 @@ Evidence: env target inspection, managed-development URL/readiness guard, migrat
 
 ## Local Datasets
 
-`data/` and `apps/web/src/data/` are committed application data, not env targets. They retain catalog, report, and compatibility datasets that have not passed a database-only cleanup. Quiz pools now live in `quiz_pages.quiz_data`; the 13 cleared game collection groups load normalized database revisions and R2 media without repository fallback. Follow `data/AGENTS.md` for remaining local ownership.
+`data/` and `apps/web/src/data/` are committed application data, not env targets. They retain catalog, report, and compatibility datasets that have not passed a database-only cleanup. Quiz pools now live in `quiz_pages.quiz_data`; the 21 cleared game collection groups load normalized database revisions and R2 media without repository fallback. Follow `data/AGENTS.md` for remaining local ownership.
 
 Machine-consumed inputs should live under `data/` or a pipeline-specific input folder. Do not add new executable inputs to rough `docs/` notes.
 

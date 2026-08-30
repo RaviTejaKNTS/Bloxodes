@@ -13,7 +13,15 @@ export const DATABASE_ONLY_GAME_COLLECTION_SLUGS = new Set([
   "slime-rng",
   "survive-zombie-arena",
   "the-forge",
-  "wizard-alchemy"
+  "wizard-alchemy",
+  "bee-swarm-simulator",
+  "blue-lock-rivals",
+  "build-a-boat-for-treasure",
+  "doors",
+  "flee-the-facility",
+  "tower-defense-simulator",
+  "volleyball-legends",
+  "welcome-to-bloxburg"
 ]);
 
 const DATABASE_ONLY_GAME_COLLECTION_CODES = new Set(

@@ -115,7 +115,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 ## Local Datasets
 
-- The former game folders for `1-speed-keyboard-escape`, `99-nights-in-the-forest`, `brookhaven-rp`, `dress-to-impress`, `grow-a-garden`, `jujutsu-shenanigans`, `murderers-vs-sheriffs`, `rivals`, `sell-lemons`, `slime-rng`, `survive-zombie-arena`, `the-forge`, and `wizard-alchemy` are database-only and no longer exist under `data/`. Their quiz pools live in `quiz_pages.quiz_data`; their 152 collection revisions live in `wiki_collection_datasets`/`wiki_collection_items`, with images in R2.
+- The former game folders for the 21 groups listed in `apps/web/src/lib/game-collections/database-only.ts` are database-only and no longer exist under `data/`. Their quiz pools live in `quiz_pages.quiz_data`; their 181 collection revisions live in `wiki_collection_datasets`/`wiki_collection_items`, with images in R2.
 
 - New game collection datasets and media are task-local publication inputs under `tmp/content-workspace`, not deployable runtime files. Existing registered datasets below remain compatibility fallback inputs until migrated to the database/R2 runtime.
 
@@ -142,47 +142,20 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Steal an Egg/*.json`
   - Local Steal an Egg in-game datasets collected from the approved Steal an Egg Roblox Wiki index for wiki/collection page work.
   - Matching pet images live under `apps/web/public/Steal an Egg/Pets/`; readable item names baked into source artwork are accepted.
-- `data/Build A Boat For Treasure/blocks.json`
-  - Local Build A Boat For Treasure blocks dataset collected from the Build A Boat For Treasure Wiki for wiki/collection page work.
-  - Matching optimized WebP card images live under `apps/web/public/Build A Boat For Treasure/blocks/`; source/MIME/conversion evidence lives under the collection workspace.
-- `data/Build A Boat For Treasure/chests.json`
-  - Local Build A Boat For Treasure permanent shop chest-tier dataset collected from the post-Logic-Update structured chest loot module and generated tier pages. It contains exactly the five permanent shop tiers with current pull counts, grouped global rates, and separately labeled gambling-restricted fixed-loot variants. Winter/event chests and unobtainable chest blocks are excluded.
-  - Matching exact optimized WebP tier images live under `apps/web/public/Build A Boat For Treasure/chests/`; source URL/page, MIME, conversion, hash, and byte-budget evidence lives in `tmp/content-workspace/build-a-boat-for-treasure/collections/chests/images.json`.
 - `data/Sailor Piece/*.json`
   - Local Sailor Piece in-game datasets collected from SailorPiece.org for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Sailor Piece/`.
-- `data/Tower Defense Simulator/towers.json` and `data/Tower Defense Simulator/modes.json`
-  - Completed v2 Tower Defense Simulator datasets for the durable Towers and Modes wiki collections, registered under `tower-defense-simulator` and consumed by the generic game-collection renderer.
-  - Matching exact row-level WebP assets live under `apps/web/public/Tower Defense Simulator/Towers/` and `apps/web/public/Tower Defense Simulator/Modes/`; preserve the source image manifests and byte/MIME audits when refreshing them.
-  - Maps and enemies remain evidence-backed research blocks and are intentionally unregistered.
 - `data/Adopt Me/*.json`
   - Local Adopt Me in-game datasets collected from the Adopt Me Wiki and Roblox public APIs for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Adopt Me/`.
-- `data/Blue Lock Rivals/*.json`
-  - Local Blue Lock: Rivals Styles and Flows datasets for wiki/collection page work.
-  - Matching card images live under `apps/web/public/Blue Lock Rivals/` as WebP assets. Styles have 46/46 image coverage; Flows have 24/25 because `Master of all Trades` exposes only a generic placeholder and remains intentionally blank.
-  - Animated Flow source files are represented by visually checked static WebP frames so the unoptimized collection cards do not ship multi-megabyte animations.
-  - Do not add Emotes or Goal Effects datasets until a reliable current full inventory and item-level availability evidence can be reconciled.
 - `data/Blox Fruits/*.json`
   - Local Blox Fruits in-game datasets collected from the Blox Fruits Wiki and Roblox public APIs for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Blox Fruits/`.
-- `data/Welcome to Bloxburg/*.json`
-  - Local Welcome to Bloxburg v2 collection datasets for the recipes, vehicles, jobs, skills, plants, and locations pages under `/wiki/welcome-to-bloxburg/`.
-  - The completed source-backed inventory contains 115 recipes, 58 vehicles, 14 jobs, 8 active skills, 71 plants, and 41 permanent locations. Matching row media lives under `apps/web/public/Welcome to Bloxburg/` and is stored as verified WebP; Evergreen Plant is the one accepted missing-image gap because the source supplies only `MissingImage.png`.
-  - Keep seasonal availability explicit and leave disputed or incomplete job-pay and plant-value fields absent. Do not expand these datasets with gamepasses, currencies, badges, trophies, fishing catches, removed skills, or temporary/removed locations without a new source-backed review.
-- `data/Bee Swarm Simulator/*.json`
-  - Source-backed Bee Swarm Simulator game-collection datasets: bees (46), equipment (75), fields (23), planters (14), bears (13), mobs and bosses (28), materials (26), and beequips (41). The 2026-08-24 acceptance repair kept the eight accepted rosters and reconciled row-level comparison fields; `bees` was not rewritten.
-  - Matching optimized WebP media lives under `apps/web/public/Bee Swarm Simulator/` and is consumed by the generic registered game collection group. Keep live trading values, event tracks, gamepasses, badges, and other rejected or volatile systems out of these durable datasets.
 - `data/Capybaras VS Plants/*.json`
   - Local Capybaras VS Plants datasets for wiki/collection page work, including the Plant Index and the Boss Summoner progression.
   - Keep Boss Summoner rows separate from ordinary plant drops: Pumpkin Tyrant is the sixth original boss, Carnivorous Plant is not a boss row, and Update 3 adds Conqueror Carrot after Pumpkin Tyrant.
 - `data/Grow a Garden 2/seeds.json` and `data/Grow a Garden 2/mutations.json`
   - Database-first inputs shared by Grow a Garden 2 collection routes and the crop mutation calculator through `src/lib/grow-a-garden-2/value-calculator.ts`. Local files remain rollback fallbacks; database-shaped parity tests cover both inputs.
-- `data/Flee the Facility/*.json`
-  - Local Flee the Facility collection datasets for the approved maps and Beast powers collections. Hammers and gemstones remain research-only because their completeness gates were not met.
-  - `beast-powers.json` is the approved three-row qualitative collection for Runner, Stalker, and Seer; Hacker and unsupported numeric or platform-specific mechanics stay excluded.
-- `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`
-  - Exact row-level WebP assets for the approved maps and Beast powers collections, with per-collection source, MIME, dimensions, byte-size, and conversion manifests under `tmp/content-workspace/flee-the-facility/`.
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/collection page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
@@ -206,12 +179,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Storage Hunters Open World/*.json`
   - Local Storage Hunters: Open World datasets for wiki/collection page work, including accessories, shop upgrades, titles, achievements, and auction zones.
   - Matching row images live under `apps/web/public/Storage Hunters Open World/` where clean item or achievement art exists. Titles and auction zones stay text-only until clean row-level images are available.
-- `data/Volleyball Legends/*.json`
-  - Local Volleyball Legends datasets for wiki/collection page work, including styles, abilities, and ball skins.
-  - Matching row images live under `apps/web/public/Volleyball Legends/`. Ball skins use WebP files; Gamer Ball and Phonk Ball intentionally share one source-backed image.
-- `data/DOORS/*.json`
-  - Local DOORS datasets for wiki/collection page work, including released entities, permanent run items, released floors and subfloors, and fixed named locations.
-  - Matching optimized WebP images live under `apps/web/public/DOORS/` by collection folder. Keep upcoming floors, temporary modes, events, modifiers, achievements, and generic procedural rooms outside these datasets.
 - `data/Fisch/fish.json`
   - Fisch collection content.
 - `data/Color Codes/roblox-color-codes.json`

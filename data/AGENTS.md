@@ -8,7 +8,7 @@ When dataset ownership or a consuming pipeline changes, update that existing can
 
 These files back remaining compatibility-era game collections, broad catalog sections, reports, and other static consumers that are not fully modeled in Supabase. New game collections use a task-local runtime manifest and publish normalized revisions to `wiki_collection_datasets`/`wiki_collection_items`; do not add new long-lived collection datasets here solely to power a route.
 
-The 13 game groups listed in `apps/web/src/lib/game-collections/database-only.ts` have no repository fallback. Their collection pages and tools read published database revisions, their images resolve through R2, and their quizzes read `quiz_pages.quiz_data`. Refresh them from a task-local workspace; never recreate their former `data/<Game>/` folders.
+The 21 game groups listed in `apps/web/src/lib/game-collections/database-only.ts` have no repository fallback. Their collection pages and tools read published database revisions, their images resolve through R2, and their quizzes read `quiz_pages.quiz_data`. Refresh them from a task-local workspace; never recreate their former `data/<Game>/` folders.
 
 When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
 
@@ -31,38 +31,12 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Dataset-backed Steal a Brainrot wiki/collection content, including brainrots, rarities, mutations, traits, rebirths, gears, lucky blocks, rituals, machines, and fuse-machine entries.
 - `data/Steal an Egg/*`
   - Dataset-backed Steal an Egg wiki/collection content, including pets and biomes. Matching source-provided pet images live under `apps/web/public/Steal an Egg/Pets/` when available; readable item names baked into those source images are acceptable and should not be treated as an image gap.
-- `data/Build A Boat For Treasure/blocks.json`
-  - Dataset-backed Build A Boat For Treasure blocks collection with the reconciled 164 present/current-status entries and 36 removed historical entries; verified hitpoints and the five source-verified block weights are retained, while unsupported values remain null.
-  - Matching optimized WebP card images live under `apps/web/public/Build A Boat For Treasure/blocks/`; image source/MIME/conversion evidence lives under the collection workspace.
-- `data/Build A Boat For Treasure/chests.json`
-  - Dataset-backed Build A Boat For Treasure permanent shop chest tiers collection with five post-Logic-Update rows: Common, Uncommon, Rare, Epic, and Legendary. It stores current category pull counts, grouped global drop rates, and narrowly labeled gambling-restricted fixed-loot variants. Winter/event chests and unobtainable chest blocks are excluded.
-  - Matching exact optimized WebP tier card images live under `apps/web/public/Build A Boat For Treasure/chests/`; source URL/page, MIME, conversion, hash, and byte-budget evidence lives in `tmp/content-workspace/build-a-boat-for-treasure/collections/chests/images.json`.
 - `data/Sailor Piece/*`
   - Dataset-backed Sailor Piece wiki/collection content, including fruits, swords, races, bosses, islands, accessories, melee specs, traits, runes, relics, bloodlines, clans, Haki, titles, dungeons, and guilds.
-- `data/Tower Defense Simulator/towers.json` and `data/Tower Defense Simulator/modes.json`
-  - Completed v2 Tower Defense Simulator wiki collection datasets for durable towers and modes, consumed by the registered `/wiki/tower-defense-simulator/towers` and `/wiki/tower-defense-simulator/modes` routes.
-  - Exact row artwork is stored as optimized WebP under `apps/web/public/Tower Defense Simulator/Towers/` and `apps/web/public/Tower Defense Simulator/Modes/`; keep the image manifests and MIME/coverage checks with the content workspace when refreshing these datasets.
-  - The approved maps and enemies opportunities remain research-blocked and intentionally have no dataset or registry entry.
 - `data/Adopt Me/*`
   - Dataset-backed Adopt Me wiki/collection content, including pets, eggs, vehicles, toys, strollers, food, potions, gifts, gift prizes, furniture, house surfaces, gamepasses, star rewards, accessory-shop entries, pet ages, and game info.
-- `data/Blue Lock Rivals/*`
-  - Dataset-backed Blue Lock: Rivals wiki/collection content for Styles and Flows.
-  - Matching local card images live under `apps/web/public/Blue Lock Rivals/` as WebP assets. Styles have complete image coverage; Flows intentionally leave `Master of all Trades` blank because its source page exposes only a generic placeholder.
-  - Keep the datasets focused on source-backed durable gameplay systems. Emotes and goal effects stay out until a reliable current full inventory is available.
 - `data/Blox Fruits/*`
   - Dataset-backed Blox Fruits wiki/collection content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
-- `data/Welcome to Bloxburg/*.json`
-  - Dataset-backed Welcome to Bloxburg wiki collections: 115 recipes, 58 vehicles, 14 jobs, 8 active skills, 71 plants, and 41 permanent locations. The Plants roster has one accepted missing-image gap for Evergreen Plant because the source supplies only `MissingImage.png`.
-  - The v2 datasets are registered by `apps/web/src/lib/game-collections/games/welcome-to-bloxburg.ts` and render under `/wiki/welcome-to-bloxburg/<collection>`. Matching source-backed WebP media lives under `apps/web/public/Welcome to Bloxburg/`.
-  - Seasonal/event recipe and vehicle rows retain explicit availability notes. Jobs and plants intentionally omit exact pay, growth, harvest, and sale values where the available source marks them incomplete or outdated. Gamepasses, currencies, badges, trophies, fishing catches, and removed or temporary location/skill rows remain out of scope.
-- `data/Bee Swarm Simulator/*`
-  - Source-backed v2 Bee Swarm Simulator collection datasets for the published game wiki routes: `bees.json` (46), `equipment.json` (75), `fields.json` (23), `planters.json` (14), `bears.json` (13), `mobs-and-bosses.json` (28), `materials.json` (26), and `beequips.json` (41). The 2026-08-24 acceptance repair reconciled item-level cost, effect, field, planter, bear, encounter, material, beequip stat, compatibility, and acquisition fields; it did not change the accepted bee roster.
-  - The generic game-collection renderer consumes these files through `apps/web/src/lib/game-collections/games/bee-swarm-simulator.ts`; matching source-backed WebP card media lives under `apps/web/public/Bee Swarm Simulator/`. The scope keeps durable rosters separate from live values, event tracks, gamepasses, badges, and other volatile or rejected systems.
-- `data/Flee the Facility/*.json`
-  - Local Flee the Facility collection datasets for the approved maps and released Beast powers collections. Hammers and gemstones remain research-only because their completeness gates were not met.
-  - `beast-powers.json` contains exactly Runner, Stalker, and Seer in qualitative form; keep Hacker, numeric timing/balance claims, unsupported platform bindings, and unverified mechanics out of the dataset.
-- `apps/web/public/Flee the Facility/Maps/` and `apps/web/public/Flee the Facility/Beast Powers/`
-  - Exact row-level collection images for the Flee the Facility maps and Beast powers datasets. Public card assets are extension-correct WebP files; source URLs, MIME checks, dimensions, bytes, and conversion details live in the per-collection manifests under `tmp/content-workspace/flee-the-facility/`.
 - `data/Kick a Lucky Block/*`
   - Dataset-backed Kick a Lucky Block wiki/collection content, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching item images live under `apps/web/public/Kick a Lucky Block/` for brainrots, weights, zones, and official Roblox page media. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
@@ -82,12 +56,6 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - `data/Storage Hunters Open World/*`
   - Dataset-backed Storage Hunters: Open World wiki/collection content, including accessories, shop upgrades, titles, achievements, and auction zones.
   - Matching row images live under `apps/web/public/Storage Hunters Open World/` where clean item or achievement art exists. Titles and auction zones are currently text-only because no clean row-level images were found.
-- `data/Volleyball Legends/*`
-  - Dataset-backed Volleyball Legends wiki/collection content for styles, abilities, and ball skins.
-  - Matching row images live under `apps/web/public/Volleyball Legends/`. Ball skins use WebP files; Gamer Ball and Phonk Ball intentionally share the same source-backed image.
-- `data/DOORS/*`
-  - Dataset-backed DOORS wiki/collection content for released entities, permanent run items, released floors and subfloors, and fixed named locations.
-  - Matching optimized WebP images live under `apps/web/public/DOORS/` by collection folder. Keep upcoming floors, temporary modes, events, modifiers, achievements, and generic procedural rooms outside these datasets.
 - `data/Fisch/fish.json`
   - Fisch collection content.
 - `data/Color Codes/roblox-color-codes.json`

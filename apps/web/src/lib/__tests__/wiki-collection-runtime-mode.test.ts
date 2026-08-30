@@ -31,7 +31,7 @@ describe("wiki collection runtime source policy", () => {
     expect(shouldFallbackToLocalWikiCollectionData("the-forge-ores")).toBe(false);
     expect(shouldFallbackToLocalWikiCollectionData("the-forge-weapons")).toBe(false);
     expect(shouldFallbackToLocalWikiCollectionData("flee-the-facility-beast-powers")).toBe(false);
-    expect(shouldFallbackToLocalWikiCollectionData("flee-the-facility-maps")).toBe(true);
+    expect(shouldFallbackToLocalWikiCollectionData("flee-the-facility-maps")).toBe(false);
   });
 
   it("requires database runtime for every migrated game group", async () => {
@@ -50,7 +50,15 @@ describe("wiki collection runtime source policy", () => {
       "slime-rng-slimes",
       "survive-zombie-arena-classes",
       "the-forge-ores",
-      "wizard-alchemy-potions"
+      "wizard-alchemy-potions",
+      "bee-swarm-simulator-bees",
+      "blue-lock-rivals-styles",
+      "build-a-boat-for-treasure-blocks",
+      "doors-entities",
+      "flee-the-facility-maps",
+      "tower-defense-simulator-towers",
+      "volleyball-legends-styles",
+      "welcome-to-bloxburg-recipes"
     ];
 
     for (const code of codes) {
