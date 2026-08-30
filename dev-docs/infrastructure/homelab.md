@@ -1,8 +1,8 @@
 # Homelab
 
-Status: Article automation active; continuous two-lane wiki automation implemented for temporary top-100 coverage
-Last verified: 2026-08-29
-Evidence: managed-dev two-slot queue migration and concurrency canary, Luna Max runner/readiness code, shared article/wiki lock, reviewed continuous systemd service, recovery timer, and guarded exact-game post-model publication path
+Status: Article automation active; wiki automation limited to one complete game per day
+Last verified: 2026-08-30
+Evidence: managed-dev queue and concurrency canary, Luna Max runner/readiness code, shared article/wiki lock, one-game daily systemd service, and guarded exact-game post-model publication path
 
 ## Host
 
@@ -18,10 +18,10 @@ Evidence: managed-dev two-slot queue migration and concurrency canary, Luna Max 
 - `bloxodes-article-discovery.timer`: enabled, active, runs at 00:00/06:00/12:00/18:00 local time with persistence.
 - `bloxodes-article-discovery.service`: runs readiness, discovery, and Groq curation. A 2026-08-25 scheduled run discovered two rows but Groq rejected its 8,017-token curation request against an 8,000-token cap. The released retry reduced `max_tokens` to 2,707, completed the same 12-candidate curation at 7,679 total tokens, and left the service ready for the next timer run.
 - `bloxodes-article-writer.service`: triggered after successful discovery; readiness requires authenticated Codex and Pi CLIs, both pinned to GPT-5.6 Luna at max reasoning, then a tiny live Pi exact-response canary must pass before the queue batch starts. Codex owns research/images/review, while Pi owns prose. After the model process exits, the wrapper releases only the exact queue rows completed by that batch and treats any release failure as a failed service run.
-- `bloxodes-wiki-builder.timer`: remains scheduled every two hours at odd hours (`01:00`, `03:00`, …, `23:00`) as a persistent recovery trigger. It cannot start another instance while the continuous service is active.
-- `bloxodes-wiki-builder.service`: holds the shared article/wiki lock, waits without interrupting an already-running article or wiki model, then runs two top-100 game lanes. Each lane immediately claims the next highest-ranked game after recording a managed-development-ready result or an evidence block. The service exits only when every current top-100 universe already has a production wiki or durable queue result. Each game runs collection suggestions, approved collection workflows, and the wiki workflow with Codex Luna Max.
+- `bloxodes-wiki-builder.timer`: runs daily at `01:00` local time with persistence. The oneshot service prevents overlap when a prior run is still active.
+- `bloxodes-wiki-builder.service`: holds the shared article/wiki lock, waits without interrupting an already-running article or wiki model, then claims one highest-ranked eligible top-100 game. It runs collection suggestions, approved collection workflows, and the wiki workflow with Codex Luna Max. The service exits after that game reaches managed-development-ready, blocked, or retry state.
 
-This is a temporary top-100 drain mode requested for 2026-08-29. It lets an already-running article workflow finish, then deliberately holds the shared model lock until the wiki queue is exhausted or an operator stops the service. Scheduled article writer ticks therefore skip during the drain instead of competing for the 4-CPU/7.7-GiB host. Returning to the normal daily one-lane mode requires setting `WIKI_AUTOMATION_CONCURRENCY=1`, restoring a daily timer, and restarting only after the active drain stops cleanly.
+The temporary two-lane drain ended on 2026-08-30. The installed unit forces `WIKI_AUTOMATION_CONCURRENCY=1` and `WIKI_AUTOMATION_MAX_GAMES_PER_RUN=1`, so an older host env value cannot restore continuous processing. Production publication stays separate through `--release-only`; that mode drains only managed-development-ready rows and never claims a new game.
 
 Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`, mode 640. It contains managed-dev Supabase, media, production inventory, Groq curation, Codex/Pi model settings, and writer controls. Codex and Pi authentication belong to protected homes under the `teja` account and never to the env file.
 
@@ -38,7 +38,7 @@ The interactive homelab checkout also contains the complete ignored private `.en
 - Execute the released `scripts/ops/sync-homelab-checkout.sh --expected-sha <full-sha>` on the homelab through configured operator access. It performs a read-only preflight by default and requires the clean `production` branch, stopped services, and an exact remote SHA before apply.
 - Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. An explicit e2e/end-to-end release authorizes this guarded checkout synchronization for every release, including releases that do not change homelab-owned files.
 - `scripts/ops/install-homelab-article-automation.sh --apply <full-sha>` installs reviewed units only from an exact clean approved checkout and preserves the timer state.
-- `scripts/ops/install-homelab-wiki-automation.sh --apply <full-sha>` installs the reviewed continuous wiki service and two-hour recovery timer from an exact clean approved checkout. Start the service explicitly after readiness.
+- `scripts/ops/install-homelab-wiki-automation.sh --apply <full-sha>` installs the reviewed one-game daily wiki service and timer from an exact clean approved checkout. The timer owns normal starts.
 - `scripts/ops/install-homelab-pi-writer.sh --apply <full-sha>` installs the pinned Pi package into `/home/teja/.local` from an exact clean approved checkout without touching credentials.
 - The checkout synchronization command was applied and full readiness passed after automation commit `05b52b9e954abe6e02f7eb8137ca64fb329e82b7` on 2026-08-26. The timer state was not changed, and the installed discovery/writer units matched the approved checkout. The installer remains available for reviewed unit-file changes; do not run it when synchronization alone proves the installed units already match.
 

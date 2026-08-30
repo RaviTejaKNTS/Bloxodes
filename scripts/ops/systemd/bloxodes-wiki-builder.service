@@ -1,5 +1,5 @@
 [Unit]
-Description=Bloxodes continuous two-lane wiki hub and collection automation
+Description=Bloxodes daily wiki hub and collection automation
 After=network-online.target
 Wants=network-online.target
 
@@ -13,6 +13,8 @@ Environment=NODE_ENV=development
 Environment=BLOXODES_ENV_PROFILE=managed-dev
 Environment=BLOXODES_ENV_OVERLAYS=
 Environment=WIKI_AUTOMATION_WORKTREE=/home/teja/projects/Bloxodes
+Environment=WIKI_AUTOMATION_CONCURRENCY=1
+Environment=WIKI_AUTOMATION_MAX_GAMES_PER_RUN=1
 ReadWritePaths=/var/lib/bloxodes/wiki-model
 ReadWritePaths=/home/teja/projects/Bloxodes/tmp/agent-work
 ReadWritePaths=/home/teja/projects/Bloxodes/tmp/wiki-automation

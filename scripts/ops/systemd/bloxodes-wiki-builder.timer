@@ -1,8 +1,8 @@
 [Unit]
-Description=Recovery trigger for continuous Bloxodes wiki processing
+Description=Daily trigger for one Bloxodes wiki game
 
 [Timer]
-OnCalendar=*-*-* 01/2:00:00
+OnCalendar=*-*-* 01:00:00
 Persistent=true
 Unit=bloxodes-wiki-builder.service
 

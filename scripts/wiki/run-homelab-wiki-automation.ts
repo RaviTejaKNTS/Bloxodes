@@ -77,12 +77,14 @@ type RuntimeManifestIdentity = {
 const worktree = path.resolve(process.env.WIKI_AUTOMATION_WORKTREE?.trim() || process.cwd());
 const timeoutMinutes = Number(process.env.WIKI_AUTOMATION_TIMEOUT_MINUTES || "660");
 const workerCount = Number(process.env.WIKI_AUTOMATION_CONCURRENCY || "2");
+const maxGamesPerRun = Number(process.env.WIKI_AUTOMATION_MAX_GAMES_PER_RUN || "0");
 const leaseMinutes = Math.min(720, Math.max(30, timeoutMinutes + 30));
 const modelHome = process.env.WIKI_AUTOMATION_MODEL_HOME?.trim() || "/var/lib/bloxodes/wiki-model";
 const codexBin = process.env.WIKI_AUTOMATION_CODEX_BIN?.trim() || "/home/teja/.local/bin/codex";
 const productionEnvFile = path.resolve(process.env.WIKI_RELEASE_PRODUCTION_ENV_FILE?.trim() || ".envs/targets/production.env");
 const apply = process.argv.includes("--apply");
 const skipProduction = process.argv.includes("--skip-production-release");
+const releaseOnly = process.argv.includes("--release-only");
 const activeChildren = new Set<ChildProcess>();
 let stopRequested = false;
 
@@ -111,6 +113,15 @@ function assertOptions() {
   }
   if (!Number.isInteger(workerCount) || workerCount < 1 || workerCount > 2) {
     throw new Error("WIKI_AUTOMATION_CONCURRENCY must be 1 or 2.");
+  }
+  if (!Number.isInteger(maxGamesPerRun) || maxGamesPerRun < 0 || maxGamesPerRun > 100) {
+    throw new Error("WIKI_AUTOMATION_MAX_GAMES_PER_RUN must be an integer from 0 to 100.");
+  }
+  if (maxGamesPerRun > 0 && workerCount !== 1) {
+    throw new Error("A capped wiki run requires WIKI_AUTOMATION_CONCURRENCY=1.");
+  }
+  if (releaseOnly && (!apply || skipProduction)) {
+    throw new Error("--release-only requires --apply and cannot be combined with --skip-production-release.");
   }
   if (process.env.WIKI_AUTOMATION_CODEX_MODEL && process.env.WIKI_AUTOMATION_CODEX_MODEL !== "gpt-5.6-luna") {
     throw new Error("Wiki automation is fixed to gpt-5.6-luna.");
@@ -611,9 +622,9 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     }
 
     const devEnv = modelEnvironment(devCredentials);
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", row.wiki_slug, "--universe-id", String(row.universe_id)], devEnv);
+    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", row.wiki_slug, "--universe-id", String(row.universe_id), "--apply"], devEnv);
     for (const manifest of result.collectionManifests) {
-      await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--manifest", manifest], devEnv);
+      await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--manifest", manifest, "--apply", "--upload-media", "--publish"], devEnv);
     }
     await transition(dev, row, {
       status: "managed_dev_ready",
@@ -672,7 +683,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
 async function main() {
   assertOptions();
   assertCleanCheckout("startup");
-  await access(codexBin, fsConstants.X_OK);
+  if (!releaseOnly) await access(codexBin, fsConstants.X_OK);
   const devCredentials = resolveWikiDevCredentials();
   const dev = createClient(devCredentials.url, devCredentials.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
   if (!apply) {
@@ -690,11 +701,23 @@ async function main() {
     while (await releaseManagedDevReady(dev)) {
       // Drain verified release backlog before spending model tokens on new games.
     }
+    if (releaseOnly) {
+      console.log("Release-only run complete; no new wiki game was claimed.");
+      return;
+    }
     const workers = Array.from({ length: workerCount }, (_, index) => (async () => {
       const lane = index + 1;
+      let completedGames = 0;
       while (!stopRequested) {
         const worked = await runOne(dev, devCredentials, lane);
-        if (worked) continue;
+        if (worked) {
+          completedGames += 1;
+          if (maxGamesPerRun > 0 && completedGames >= maxGamesPerRun) {
+            console.log(`[lane ${lane}] Reached the configured ${maxGamesPerRun}-game run limit.`);
+            return;
+          }
+          continue;
+        }
         const delay = await retryDelay(dev);
         if (delay === null) {
           console.log(`[lane ${lane}] No top-100 game without a durable wiki queue result remains.`);
@@ -712,7 +735,9 @@ async function main() {
     const settled = await Promise.allSettled(workers);
     const failure = settled.find((entry): entry is PromiseRejectedResult => entry.status === "rejected");
     if (failure) throw failure.reason;
-    console.log("Continuous wiki processing stopped because every current top-100 game has a durable queue result.");
+    console.log(maxGamesPerRun > 0
+      ? `Wiki processing stopped after the configured ${maxGamesPerRun}-game limit.`
+      : "Continuous wiki processing stopped because every current top-100 game has a durable queue result.");
   } finally {
     await lock();
   }
