@@ -3,7 +3,7 @@ Description=Daily trigger for one Bloxodes wiki game
 
 [Timer]
 OnCalendar=*-*-* 01:00:00
-Persistent=true
+Persistent=false
 Unit=bloxodes-wiki-builder.service
 
 [Install]
