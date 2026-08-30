@@ -1,7 +1,7 @@
 # Homelab
 
 Status: Article automation active; wiki automation limited to one complete game per day
-Last verified: 2026-08-30
+Last verified: 2026-08-31
 Evidence: managed-dev queue and concurrency canary, Luna Max runner/readiness code, shared article/wiki lock, one-game daily systemd service, and guarded exact-game post-model publication path
 
 ## Host
@@ -22,6 +22,8 @@ Evidence: managed-dev queue and concurrency canary, Luna Max runner/readiness co
 - `bloxodes-wiki-builder.service`: holds the shared article/wiki lock, waits without interrupting an already-running article or wiki model, then claims one highest-ranked eligible top-100 game. It runs collection suggestions, approved collection workflows, and the wiki workflow with Codex Luna Max. The service exits after that game reaches managed-development-ready, blocked, or retry state.
 
 The temporary two-lane drain ended on 2026-08-30. The installed unit forces `WIKI_AUTOMATION_CONCURRENCY=1` and `WIKI_AUTOMATION_MAX_GAMES_PER_RUN=1`, so an older host env value cannot restore continuous processing. Production publication stays separate through `--release-only`; that mode drains only managed-development-ready rows and never claims a new game.
+
+For an explicitly approved short burst, the runner supports two lanes with one shared positive `WIKI_AUTOMATION_MAX_GAMES_PER_RUN` cap. This limits the total games claimed across both lanes. The installed daily unit remains one lane and one game after the temporary run exits.
 
 Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`, mode 640. It contains managed-dev Supabase, media, production inventory, Groq curation, Codex/Pi model settings, and writer controls. Codex and Pi authentication belong to protected homes under the `teja` account and never to the env file.
 

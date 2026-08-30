@@ -117,9 +117,6 @@ function assertOptions() {
   if (!Number.isInteger(maxGamesPerRun) || maxGamesPerRun < 0 || maxGamesPerRun > 100) {
     throw new Error("WIKI_AUTOMATION_MAX_GAMES_PER_RUN must be an integer from 0 to 100.");
   }
-  if (maxGamesPerRun > 0 && workerCount !== 1) {
-    throw new Error("A capped wiki run requires WIKI_AUTOMATION_CONCURRENCY=1.");
-  }
   if (releaseOnly && (!apply || skipProduction)) {
     throw new Error("--release-only requires --apply and cannot be combined with --skip-production-release.");
   }
@@ -705,19 +702,26 @@ async function main() {
       console.log("Release-only run complete; no new wiki game was claimed.");
       return;
     }
+    let claimedGames = 0;
+    const reserveClaim = () => {
+      if (maxGamesPerRun === 0) return true;
+      if (claimedGames >= maxGamesPerRun) return false;
+      claimedGames += 1;
+      return true;
+    };
+    const releaseUnusedClaim = () => {
+      if (maxGamesPerRun > 0) claimedGames -= 1;
+    };
     const workers = Array.from({ length: workerCount }, (_, index) => (async () => {
       const lane = index + 1;
-      let completedGames = 0;
       while (!stopRequested) {
-        const worked = await runOne(dev, devCredentials, lane);
-        if (worked) {
-          completedGames += 1;
-          if (maxGamesPerRun > 0 && completedGames >= maxGamesPerRun) {
-            console.log(`[lane ${lane}] Reached the configured ${maxGamesPerRun}-game run limit.`);
-            return;
-          }
-          continue;
+        if (!reserveClaim()) {
+          console.log(`[lane ${lane}] Shared ${maxGamesPerRun}-game run limit reached.`);
+          return;
         }
+        const worked = await runOne(dev, devCredentials, lane);
+        if (worked) continue;
+        releaseUnusedClaim();
         const delay = await retryDelay(dev);
         if (delay === null) {
           console.log(`[lane ${lane}] No top-100 game without a durable wiki queue result remains.`);
