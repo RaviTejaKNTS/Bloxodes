@@ -6,7 +6,7 @@ Environment boundaries and database-vs-dataset ownership are documented in `dev-
 
 When dataset ownership or a consuming pipeline changes, update that existing canonical file or the owning existing pipeline document in the same change. Do not create a replacement current-state doc.
 
-These files back tools, game collections, and broad catalog sections that are not fully modeled in Supabase.
+These files back the explicitly documented file-driven tools and catalog sections that are not fully modeled in Supabase. Game-collection JSON and `quiz.json` files are retained temporarily as authoring/migration inputs only. Public wiki collections, collection-backed tools, mobile collection APIs, sitemaps, and quizzes must read Supabase and must not fall back to these files.
 
 When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
 
@@ -47,23 +47,23 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Structured collection and calculator data used by The Forge collection pages and Forge tools.
 - `data/RIVALS/*`
   - Dataset-backed RIVALS wiki/collection content, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and `quiz.json`.
-  - `quiz.json` is the local question pool for `/quizzes/rivals`; use `bloxodes-quiz-writing` when editing quiz content.
+  - `quiz.json` is a retained migration/archive copy for `/quizzes/rivals`; runtime questions live in `quiz_pages.quiz_data`.
   - Keep RIVALS collections focused on durable in-game item collections. Do not add gamepasses, badges, servers, current event reward tracks, or ranked-season reward lists as collection datasets.
 - `data/Wizard Alchemy/*`
   - Dataset-backed Wizard Alchemy wiki/collection content, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
-  - `quiz.json` is the local question pool for `/quizzes/wizard-alchemy`; use `bloxodes-quiz-writing` when editing quiz content.
+  - `quiz.json` is a retained migration/archive copy for `/quizzes/wizard-alchemy`; runtime questions live in `quiz_pages.quiz_data`.
   - Code pages must not keep manual code seed payloads. For Wizard Alchemy or any other game, update the `code_pages` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then let `scripts/codes/update-codes.ts` populate `codes`.
 - `data/Slime RNG/*`
   - Dataset-backed Slime RNG wiki/collection content, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
-  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; use `bloxodes-quiz-writing` when editing quiz content.
+  - `quiz.json` is a retained migration/archive copy for `/quizzes/slime-rng`; runtime questions live in `quiz_pages.quiz_data`.
   - Matching source-provided images live under `apps/web/public/Slime RNG/` when the source file exists. Rebirths and index rewards are intentionally text-only catalogs.
 - `data/99 Nights in the Forest/*`
   - Dataset-backed 99 Nights in the Forest wiki/collection content, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and `quiz.json`.
-  - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use `bloxodes-quiz-writing` when editing quiz content.
+  - `quiz.json` is a retained migration/archive copy for `/quizzes/99-nights-in-the-forest`; runtime questions live in `quiz_pages.quiz_data`.
   - Keep quiz and catalog facts source-backed. Do not add active code names, live event statuses, temporary reward tracks, or disputed exact values such as unresolved item costs.
 - `data/Sell Lemons/*`
   - Dataset-backed Sell Lemons wiki/collection and quiz content, including income sources, active income methods, powers, secret unlocks, evolution stages, locations, orchard items, orchard mutations, tycoon upgrades, ascension rewards, companions, and `quiz.json`.
-  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; use stable progression, power, secret, Evolution, location, orchard-mutation, and named plot-upgrade facts rather than unstable exact upgrade costs or source-conflicted secret-step sequences.
+  - `quiz.json` is a retained migration/archive copy for `/quizzes/sell-lemons`; runtime questions live in `quiz_pages.quiz_data`. Keep stable progression, power, secret, Evolution, location, orchard-mutation, and named plot-upgrade facts rather than unstable exact upgrade costs or source-conflicted secret-step sequences.
 - `data/Kick a Lucky Block/*`
   - Dataset-backed Kick a Lucky Block wiki/collection content, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching item images live under `apps/web/public/Kick a Lucky Block/` for brainrots, weights, zones, and official Roblox page media. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
@@ -110,6 +110,6 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - For wiki/collection datasets, include source-backed fields players need, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability when those facts drive decisions.
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.
-- If a `quiz.json` file powers a public quiz route, validate the `QuizData` shape, difficulty counts, option IDs, answer IDs, and rendered `/quizzes/<slug>` page after editing.
+- Before importing quiz data, validate the `QuizData` shape, difficulty counts, option IDs, and answer IDs. Then verify the saved `quiz_pages.quiz_data` readback and rendered `/quizzes/<slug>` page.
 - If a new dataset becomes long-lived, document it in `agents/data/agents.md`.
 - Do not store manual active-code lists, expired-code lists, code dates, or code rewards in `data/`. Code data belongs to the source-driven codes refresh workflow.

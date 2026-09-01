@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
-import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
+import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, WIKI_DESCRIPTION } from "@/lib/seo";
 import { buildPageContentHtml } from "@/lib/page-content";
 import {
   buildWikiCollectionPath,
   getWikiCollectionPageByPath,
-  listPublishedWikiCollectionPaths
+  type WikiCollectionPageContent
 } from "@/lib/wiki-collections";
+import { getPublishedWikiCollectionRuntime } from "@/lib/wiki-collection-runtime";
 import {
-  getPreparedGameCollectionPageCount,
-  loadPreparedGameCollection,
+  prepareGameCollectionDocument,
   renderGameCollectionPage
 } from "@/app/(site)/wiki/collections/games/generic";
+import type { GameDatasetPreparedCollection } from "@/app/(site)/wiki/collections/games/generic";
 import {
   getGrowGardenCollectionConfig,
   getPreparedGrowGardenCollectionPageCount,
@@ -39,7 +40,9 @@ type WikiCollectionContext =
       wikiSlug: string;
       collectionSlug: string;
       code: string;
-      config: NonNullable<ReturnType<typeof getGameCollectionConfigByWikiPath>>;
+      config: GameCollectionRenderConfig;
+      page: WikiCollectionPageContent;
+      prepared: GameDatasetPreparedCollection;
     }
   | {
       kind: "grow-a-garden";
@@ -47,6 +50,7 @@ type WikiCollectionContext =
       collectionSlug: string;
       code: string;
       config: NonNullable<ReturnType<typeof getGrowGardenCollectionConfig>>;
+      page: WikiCollectionPageContent | null;
     }
   | {
       kind: "the-forge";
@@ -54,53 +58,62 @@ type WikiCollectionContext =
       collectionSlug: string;
       code: string;
       config: NonNullable<ReturnType<typeof getTheForgeCollectionConfig>>;
+      page: WikiCollectionPageContent | null;
     };
 
 function normalizeSlug(value: string): string {
   return value.trim().toLowerCase();
 }
 
-function resolveContext(wikiSlug: string, collectionSlug: string): WikiCollectionContext | null {
+async function resolveContext(wikiSlug: string, collectionSlug: string): Promise<WikiCollectionContext | null> {
   const normalizedWikiSlug = normalizeSlug(wikiSlug);
   const normalizedCollectionSlug = normalizeSlug(collectionSlug);
   if (!normalizedWikiSlug || !normalizedCollectionSlug) return null;
 
+  const page = await getWikiCollectionPageByPath(normalizedWikiSlug, normalizedCollectionSlug);
+  if (!page) return null;
+
   if (normalizedWikiSlug === "grow-a-garden") {
     const config = getGrowGardenCollectionConfig(normalizedCollectionSlug);
-    return config
-      ? {
-          kind: "grow-a-garden",
-          wikiSlug: normalizedWikiSlug,
-          collectionSlug: normalizedCollectionSlug,
-          code: `grow-a-garden-${normalizedCollectionSlug}`,
-          config
-        }
-      : null;
+    if (config) {
+      return {
+        kind: "grow-a-garden",
+        wikiSlug: normalizedWikiSlug,
+        collectionSlug: normalizedCollectionSlug,
+        code: `grow-a-garden-${normalizedCollectionSlug}`,
+        config,
+        page
+      };
+    }
   }
 
   if (normalizedWikiSlug === "the-forge") {
     const config = getTheForgeCollectionConfig(normalizedCollectionSlug);
-    return config
-      ? {
-          kind: "the-forge",
-          wikiSlug: normalizedWikiSlug,
-          collectionSlug: normalizedCollectionSlug,
-          code: `the-forge-${normalizedCollectionSlug}`,
-          config
-        }
-      : null;
-  }
-
-  const config = getGameCollectionConfigByWikiPath(normalizedWikiSlug, normalizedCollectionSlug);
-  return config
-    ? {
-        kind: "generic",
+    if (config) {
+      return {
+        kind: "the-forge",
         wikiSlug: normalizedWikiSlug,
         collectionSlug: normalizedCollectionSlug,
-        code: config.code,
-        config
-      }
-    : null;
+        code: `the-forge-${normalizedCollectionSlug}`,
+        config,
+        page
+      };
+    }
+  }
+
+  const runtime = await getPublishedWikiCollectionRuntime(page);
+  if (!runtime) {
+    throw new Error(`Required database runtime for ${page.code} did not load. Local fallback is disabled.`);
+  }
+  return {
+    kind: "generic",
+    wikiSlug: normalizedWikiSlug,
+    collectionSlug: normalizedCollectionSlug,
+    code: page.code,
+    config: runtime.config,
+    page,
+    prepared: prepareGameCollectionDocument(runtime.config, runtime.document)
+  };
 }
 
 export async function generateStaticParams() {
@@ -121,41 +134,46 @@ export async function generateWikiCollectionMetadata({
   collection: string;
   currentPage: number;
 }): Promise<Metadata> {
-  const context = resolveContext(slug, collection);
-  const basePath = buildWikiCollectionPath(slug, collection);
+  const wikiSlug = normalizeSlug(slug);
+  const collectionSlug = normalizeSlug(collection);
+  const page = await getWikiCollectionPageByPath(wikiSlug, collectionSlug);
+  const basePath = buildWikiCollectionPath(wikiSlug, collectionSlug);
   const canonicalPath = currentPage <= 1 ? basePath : `${basePath}/page/${currentPage}`;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
+  let fallbackTitle = page?.title ?? `${collectionSlug} Wiki Collection`;
+  let fallbackDescription = page?.meta_description ?? WIKI_DESCRIPTION;
+  const databaseRuntime = page ? await getPublishedWikiCollectionRuntime(page) : null;
+  const databaseImage = databaseRuntime?.document.items.find((item) => item.system.image)?.system.image;
+  const image = databaseImage ?? page?.thumb_url ?? `${SITE_URL}/Bloxodes.png`;
 
-  if (!context) {
+  const growGardenConfig = wikiSlug === "grow-a-garden"
+    ? getGrowGardenCollectionConfig(collectionSlug)
+    : null;
+  const forgeConfig = wikiSlug === "the-forge"
+    ? getTheForgeCollectionConfig(collectionSlug)
+    : null;
+
+  if (!page) {
     return {
       title: `Roblox Wiki | ${SITE_NAME}`,
       description: WIKI_DESCRIPTION,
-      alternates: buildAlternates(canonical)
+      alternates: buildAlternates(canonical),
+      robots: { index: false, follow: false }
     };
   }
 
-  const page = await getWikiCollectionPageByPath(context.wikiSlug, context.collectionSlug);
-  let fallbackTitle = page?.title ?? `${context.collectionSlug} Wiki Collection`;
-  let fallbackDescription = page?.meta_description ?? WIKI_DESCRIPTION;
-  let image = page?.thumb_url ?? `${SITE_URL}/Bloxodes.png`;
-
-  if (context.kind === "generic") {
-    if (!page) {
-      return {
-        title: `Roblox Wiki | ${SITE_NAME}`,
-        description: WIKI_DESCRIPTION,
-        alternates: buildAlternates(canonical),
-        robots: { index: false, follow: false }
-      };
-    }
-  } else if (context.kind === "grow-a-garden") {
-    const prepared = await loadPreparedGrowGardenCollection(context.config);
-    fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${context.config.label} in Grow a Garden`;
-    fallbackDescription = context.config.description;
+  if (growGardenConfig) {
+    const prepared = await loadPreparedGrowGardenCollection(growGardenConfig);
+    fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${growGardenConfig.label} in Grow a Garden`;
+    fallbackDescription = growGardenConfig.description;
+  } else if (forgeConfig) {
+    const prepared = await loadPreparedTheForgeCollection(forgeConfig);
+    fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${forgeConfig.label} in The Forge`;
+    fallbackDescription = forgeConfig.description;
   } else {
-    const prepared = await loadPreparedTheForgeCollection(context.config);
-    fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${context.config.label} in The Forge`;
-    fallbackDescription = context.config.description;
+    if (!databaseRuntime) {
+      throw new Error(`Required database runtime for ${page.code} did not load. Local fallback is disabled.`);
+    }
   }
 
   const baseTitle = resolveSeoTitle(page?.seo_title) ?? page?.title ?? fallbackTitle;
@@ -199,18 +217,18 @@ export async function renderWikiCollectionPage({
   collection: string;
   currentPage: number;
 }) {
-  const context = resolveContext(slug, collection);
+  const context = await resolveContext(slug, collection);
   if (!context) {
     notFound();
   }
 
-  const page = await getWikiCollectionPageByPath(context.wikiSlug, context.collectionSlug);
+  const page = context.page;
 
   if (context.kind === "generic") {
     if (!page) {
       notFound();
     }
-    const prepared = await loadPreparedGameCollection(context.config);
+    const prepared = context.prepared;
     if (currentPage > prepared.totalPages) {
       notFound();
     }
@@ -254,11 +272,11 @@ export async function renderWikiCollectionPage({
 }
 
 export async function getWikiCollectionPageCount(wikiSlug: string, collectionSlug: string): Promise<number> {
-  const context = resolveContext(wikiSlug, collectionSlug);
+  const context = await resolveContext(wikiSlug, collectionSlug);
   if (!context) return 1;
 
   if (context.kind === "generic") {
-    return getPreparedGameCollectionPageCount(context.config);
+    return context.prepared.totalPages;
   }
 
   if (context.kind === "grow-a-garden") {

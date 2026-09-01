@@ -21,11 +21,11 @@ Do not publish collection-only work. Require the actual wiki `final.json` and at
 1. Use the games named by the user. If the user asks for all completed games, discover candidates from `tmp/content-workspace/*/wiki/*/final.json` and matching collection finals.
 2. Check production rows to avoid republishing an already-live game unless the user explicitly asks to update or recheck it.
 3. Never create or edit a planning-tracker row merely to make a game eligible.
-4. For each eligible game, confirm the release allowlist from:
+4. For each eligible game, confirm the reviewed authoring inputs and runtime code from:
 - `tmp/content-workspace/<game-slug>/wiki/<game-slug>/final.json`
 - `tmp/content-workspace/<game-slug>/collections/*/final.json`
-- `data/<Game Data Dir>/`
-- `apps/web/public/<Game Name>/`
+- `data/<Game Data Dir>/` (authoring input; never a runtime deploy dependency)
+- `apps/web/public/<Game Name>/` (media staging input; never a runtime deploy dependency)
 - `apps/web/src/lib/game-collections/games/<game-slug>.ts`
 - shared renderer/config files changed for that game
 5. Treat the user's explicit per-game release approval as confirmation that the normal verifier, dataset validation, HTML-size gate, pagination checks when applicable, and Browser preview already passed. Do not search for separate proof or tracker state.
@@ -45,14 +45,14 @@ If approval is partial, release only the approved games. Leave every non-approve
 
 ## Release Scope
 
-Before staging, build an allowlist for each approved game:
+Before staging, build a code-only deployment allowlist for each approved game:
 
-- `data/<Game Data Dir>/`
-- `apps/web/public/<Game Name>/`
 - `apps/web/src/lib/game-collections/games/<game-slug>.ts`
 - approved hunks in `apps/web/src/lib/game-collections/games/index.ts`
 - approved game-specific renderer/config changes, if any
 - seed-script changes only when they are required for the approved game and already reviewed
+
+Do not stage collection JSON or collection item images merely to make runtime work. The production route reads immutable Supabase revisions and R2 media keys only. Keep authoring files in the task worktree for the database publication step unless the user separately approves committing or deleting them.
 
 Never stage:
 
@@ -106,8 +106,14 @@ BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-wi
 BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-collection-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --allow-prod
 ```
 
-7. Read back production collection rows.
-8. Verify live URLs:
+7. Publish the immutable collection data and media runtime revision:
+
+```bash
+BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=cloudflare NODE_ENV=production npm run sync:game-collection-runtime -- --game <game-slug> --normalize-legacy-media --upload-media --apply --publish --allow-prod
+```
+
+8. Read back every production collection row, `published_dataset_id`, dataset hash/count, actual item count, and representative R2 media object.
+9. Verify live URLs:
 - `/wiki/<game-slug>`
 - every `/wiki/<game-slug>/<collection-slug>`
 - representative images/assets

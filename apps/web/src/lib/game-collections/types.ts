@@ -19,6 +19,11 @@ export type GameCollectionConfig = {
   universeNames: string[];
 };
 
+export type GameCollectionRenderConfig = Pick<
+  GameCollectionConfig,
+  "code" | "gameSlug" | "gameName" | "slug" | "label" | "sortOrder"
+>;
+
 export type GameCollectionCopyInput = {
   config: GameCollectionConfig;
   itemCount: number;

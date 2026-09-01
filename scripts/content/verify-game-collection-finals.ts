@@ -131,7 +131,7 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("wiki_collection_pages")
-    .select("wiki_slug,collection_slug,code,title,display_name,universe_id,item_count,is_published,meta_description")
+    .select("wiki_slug,collection_slug,code,title,display_name,universe_id,item_count,is_published,meta_description,published_dataset_id")
     .eq("wiki_slug", game)
     .eq("collection_slug", collection)
     .maybeSingle();
@@ -145,9 +145,26 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
     universe_id?: number | null;
     item_count?: number | null;
     is_published?: boolean;
+    published_dataset_id?: string | null;
   };
   if (!row.is_published) throw new Error(`Collection ${game}/${collection} is not published`);
   if (!row.item_count || row.item_count < 1) throw new Error(`Collection ${game}/${collection} has no item_count`);
+  if (!row.published_dataset_id) throw new Error(`Collection ${game}/${collection} has no published dataset pointer`);
+  const { data: dataset, error: datasetError } = await sb
+    .from("wiki_collection_datasets")
+    .select("item_count")
+    .eq("id", row.published_dataset_id)
+    .maybeSingle();
+  if (datasetError) throw new Error(`Failed to read collection dataset ${game}/${collection}: ${datasetError.message}`);
+  if (!dataset) throw new Error(`Published dataset is missing for ${game}/${collection}`);
+  const { count: actualItemCount, error: countError } = await sb
+    .from("wiki_collection_items")
+    .select("id", { count: "exact", head: true })
+    .eq("dataset_id", row.published_dataset_id);
+  if (countError) throw new Error(`Failed to count collection items ${game}/${collection}: ${countError.message}`);
+  if (Number(dataset.item_count) !== row.item_count || actualItemCount !== row.item_count) {
+    throw new Error(`Published dataset item count mismatch for ${game}/${collection}`);
+  }
   const expectedTitle = finalJson.title ? resolveItemCountToken(finalJson.title, row.item_count) : null;
   const expectedDisplayName = finalJson.display_name?.trim();
   if (expectedTitle && row.title !== expectedTitle) throw new Error(`Collection title mismatch for ${game}/${collection}`);
@@ -207,6 +224,20 @@ async function main() {
     ...collections.flatMap((collection) => ["--collection", collection]),
     "--final-json-root",
     options.finalJsonRoot,
+  ]);
+  await runCommand("env", [
+    "BLOXODES_ENV_OVERLAYS=cloudflare",
+    "npm",
+    "run",
+    "sync:game-collection-runtime",
+    "--",
+    "--game",
+    options.game,
+    ...collections.flatMap((collection) => ["--collection", collection]),
+    "--normalize-legacy-media",
+    "--upload-media",
+    "--apply",
+    "--publish",
   ]);
 
   const urls: string[] = [];

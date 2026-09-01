@@ -1,8 +1,8 @@
 # Architecture
 
 Status: Active; production has documented degraded components
-Last verified: 2026-08-14
-Evidence: repository architecture/configuration, exact-SHA public health, managed-development/production migration readback, VPS Docker/Swarm and Edge Function checks, and homelab synchronization checks
+Last verified: 2026-09-01
+Evidence: repository architecture/configuration, database-only wiki/quiz runtime audit, managed-development/production content readback, and existing VPS/homelab platform checks
 
 ## Product Surfaces
 
@@ -41,10 +41,10 @@ The primary production store is self-hosted Supabase on the same VPS:
 - Media: `media.bloxodes.com`.
 - Legacy `bloxodesdb.ravitejaknts.com` and `bloxodesstudio.ravitejaknts.com` still respond and should be treated as compatibility aliases, not preferred docs URLs.
 
-Current scale sampled read-only on 2026-08-13:
+Current content scale refreshed read-only on 2026-09-01 (infrastructure figures above remain from the prior host audit):
 
 - 4,024 code pages and 58,633 code rows.
-- 419 articles, 57 wiki hubs, and 439 wiki collection pages.
+- 419 articles, 57 wiki hubs, and 658 published wiki collection pages with immutable dataset pointers.
 - 63 global catalog pages, 13 tools, 22 events pages, 14 checklists, and 13 quizzes.
 - 100,082 tracked universes, 69,370 catalog items, 59,436 music IDs, and 38,430 decal IDs.
 

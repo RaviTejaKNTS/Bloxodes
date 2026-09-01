@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { parseQuizData } from "@/lib/quiz-types";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import {
   pickEligibleArticleAuthorId,
@@ -207,6 +208,17 @@ function normalizeChecklistFinal(finalJson: ChecklistFinal | LegacyChecklistFina
 function isQuizFinal(value: unknown): value is QuizFinal {
   const candidate = value as Partial<QuizFinal>;
   return Boolean(candidate?.page?.code && candidate?.page?.title && "quizData" in candidate);
+}
+
+function stableJson(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stableJson).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.entries(value as Record<string, unknown>)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([key, entry]) => `${JSON.stringify(key)}:${stableJson(entry)}`)
+      .join(",")}}`;
+  }
+  return JSON.stringify(value) ?? "null";
 }
 
 function normalizeThumbnailUrls(value: unknown): string[] {
@@ -564,6 +576,7 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
   const sb = supabaseAdmin();
   const page = finalJson.page;
   const code = page.code.trim().toLowerCase();
+  const quizData = parseQuizData(finalJson.quizData, `${code}.quizData`);
   assertEditorialSlug(code, "quiz_pages.code", page.universe_id ?? null);
   const isPublished = page.is_published ?? true;
   const payload = {
@@ -573,6 +586,7 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
     description_md: page.description_md ?? null,
     seo_title: page.seo_title ?? null,
     seo_description: page.seo_description ?? null,
+    quiz_data: quizData,
     is_published: isPublished,
     published_at: isPublished ? new Date().toISOString() : null,
   };
@@ -592,8 +606,20 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
   const query = existing
     ? sb.from("quiz_pages").update(payload).eq("id", existing.id)
     : sb.from("quiz_pages").insert(payload);
-  const { error } = await query;
+  const { data: saved, error } = await query
+    .select("code,title,is_published,quiz_data")
+    .single();
   if (error) throw new Error(`Failed to save quiz ${code}: ${error.message}`);
+  if (!saved) throw new Error(`Failed to read back quiz ${code}.`);
+  const savedQuizData = parseQuizData(saved.quiz_data, `quiz_pages.${code}.quiz_data`);
+  if (
+    saved.code !== code ||
+    saved.title !== payload.title ||
+    saved.is_published !== payload.is_published ||
+    stableJson(savedQuizData) !== stableJson(quizData)
+  ) {
+    throw new Error(`Quiz readback mismatch for ${code}.`);
+  }
   console.log(existing ? `Updated quiz ${code}` : `Created quiz ${code}`);
 }
 

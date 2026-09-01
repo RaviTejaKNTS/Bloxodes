@@ -42,7 +42,7 @@ Use this file for route-level work. For public content route specifics, also rea
 
 - Route families such as codes, events, tools, catalog/free-items, puzzles, stats, and quizzes use sidecar helpers instead of pushing all logic into page files.
 - Account and session state are split between `(secure)` UI, `api/*/session`, and `apps/web/src/lib/auth/*`.
-- Several public pages combine Supabase content with local datasets or API-driven clients. Keep that split obvious.
+- Several public pages combine Supabase content with explicitly documented local datasets or API-driven clients. Wiki collections and quizzes are database-only; do not add filesystem fallback to their routes or APIs.
 
 ## When Adding or Changing Routes
 

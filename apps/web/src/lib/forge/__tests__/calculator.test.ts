@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   aggregateOreSelections,
   calculateArmorPieceProbabilities,
@@ -6,7 +6,6 @@ import {
   calculateTraitActivations,
   calculateWeaponClassProbabilities
 } from "../calculator";
-import { loadForgeOreDataset } from "../ores";
 import type { Ore } from "../data";
 
 function expectWithin(actual: number, expected: number, tolerance = 0.005) {
@@ -14,15 +13,47 @@ function expectWithin(actual: number, expected: number, tolerance = 0.005) {
 }
 
 describe("forge calculator", () => {
-  let oresById: Record<string, Ore> = {};
-
-  beforeAll(async () => {
-    const dataset = await loadForgeOreDataset();
-    oresById = dataset.ores.reduce<Record<string, Ore>>((acc, ore) => {
-      acc[ore.id] = ore;
-      return acc;
-    }, {});
-  });
+  const oresById: Record<string, Ore> = {
+    stone: {
+      id: "stone",
+      name: "Stone",
+      rarity: "Common",
+      areaGroup: "Stonewake",
+      dropChanceRatio: 1,
+      multiplier: 0.2,
+      sellPrice: 3,
+      hasTrait: false,
+      traitName: null,
+      traitEffectShort: null,
+      traitType: null
+    },
+    iron: {
+      id: "iron",
+      name: "Iron",
+      rarity: "Common",
+      areaGroup: "Stonewake",
+      dropChanceRatio: 5,
+      multiplier: 0.35,
+      sellPrice: 5.25,
+      hasTrait: false,
+      traitName: null,
+      traitEffectShort: null,
+      traitType: null
+    },
+    poopite: {
+      id: "poopite",
+      name: "Poopite",
+      rarity: "Rare",
+      areaGroup: "Stonewake",
+      dropChanceRatio: 0,
+      multiplier: 1,
+      sellPrice: null,
+      hasTrait: true,
+      traitName: "Poopite",
+      traitEffectShort: "Test trait",
+      traitType: "both"
+    }
+  };
 
   it("calculates weighted multiplier by ore count", () => {
     const { usages, totalCount } = aggregateOreSelections(

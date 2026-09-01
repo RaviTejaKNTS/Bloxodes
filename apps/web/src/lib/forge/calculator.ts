@@ -1,8 +1,6 @@
 import {
-  ARMOR_PIECES,
   ARMOR_PIECE_ANCHORS,
   WEAPON_CLASS_ANCHORS,
-  WEAPONS,
   type ArmorPiece,
   type ArmorSlot,
   type ArmorPieceAnchorKey,
@@ -510,8 +508,8 @@ function normalizeInternalWeights<T extends { chanceRatio: number }>(items: T[])
 export function calculateWeaponOutcomes(
   totalCount: number,
   multiplier: number,
-  qualityMultiplier = 1,
-  weapons: Weapon[] = WEAPONS
+  qualityMultiplier: number,
+  weapons: Weapon[]
 ): { classProbabilities: WeaponClassProbability[]; weapons: WeaponOutcome[] } {
   const classProbabilities = calculateWeaponClassProbabilities(totalCount);
   const outcomes: WeaponOutcome[] = [];
@@ -539,8 +537,8 @@ export function calculateWeaponOutcomes(
 export function calculateArmorOutcomes(
   totalCount: number,
   multiplier: number,
-  qualityMultiplier = 1,
-  armorPieces: ArmorPiece[] = ARMOR_PIECES
+  qualityMultiplier: number,
+  armorPieces: ArmorPiece[]
 ): { pieceProbabilities: ArmorPieceProbability[]; armor: ArmorOutcome[] } {
   const pieceProbabilities = calculateArmorPieceProbabilities(totalCount);
   const armor: ArmorOutcome[] = [];

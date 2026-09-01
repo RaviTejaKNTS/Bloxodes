@@ -1,7 +1,5 @@
-import fs from "node:fs/promises";
-
 import { unwrapDatasetItems } from "@/lib/local-datasets";
-import { repoPath } from "@/lib/paths";
+import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
 
 export type GrowGarden2Crop = {
   id: string;
@@ -57,9 +55,6 @@ type DatasetJson<T> = {
   items?: Array<T | { item?: T; system?: Record<string, unknown> }> | null;
 };
 
-const SEEDS_PATH = repoPath("data", "Grow a Garden 2", "seeds.json");
-const MUTATIONS_PATH = repoPath("data", "Grow a Garden 2", "mutations.json");
-
 function parseMultiplier(value: string | null | undefined): number | null {
   if (!value) return null;
   const normalized = value.replace(/x/gi, "").replace(/,/g, "").trim();
@@ -77,15 +72,18 @@ function normalizeSources(rows: SourceRow[] | null | undefined) {
     .filter((source) => source.label && source.url);
 }
 
-async function readJson<T>(filePath: string): Promise<DatasetJson<T>> {
-  const raw = await fs.readFile(filePath, "utf8");
-  return JSON.parse(raw) as DatasetJson<T>;
+async function readJson<T>(code: string): Promise<DatasetJson<T>> {
+  const runtime = await getPublishedWikiCollectionRuntimeByCode(code);
+  if (!runtime) {
+    throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
+  }
+  return runtime.document as DatasetJson<T>;
 }
 
 export async function loadGrowGarden2ValueDataset(): Promise<GrowGarden2ValueDataset> {
   const [seedJson, mutationJson] = await Promise.all([
-    readJson<CropRow>(SEEDS_PATH),
-    readJson<MutationRow>(MUTATIONS_PATH)
+    readJson<CropRow>("grow-a-garden-2-seeds"),
+    readJson<MutationRow>("grow-a-garden-2-mutations")
   ]);
 
   const crops = unwrapDatasetItems(seedJson)
@@ -109,7 +107,7 @@ export async function loadGrowGarden2ValueDataset(): Promise<GrowGarden2ValueDat
   const mutations = unwrapDatasetItems(mutationJson)
     .map((row): GrowGarden2Mutation | null => {
       const name = row.name?.trim();
-      const id = row.id?.trim();
+      const id = row.id?.trim() ?? row.slug?.trim();
       if (!name || !id) return null;
       const multiplierLabel = row.multiplier?.trim() || "Unknown";
       return {

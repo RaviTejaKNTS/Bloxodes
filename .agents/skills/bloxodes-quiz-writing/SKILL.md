@@ -18,7 +18,7 @@ tmp/content-workspace/<game-slug>/quizzes/<quiz-code>/
   final.json
 ```
 
-3. Write page metadata and quiz data in `final.json`.
+3. Write page metadata and quiz data in `final.json`. The approved importer stores both in `quiz_pages`, including `quiz_data`; do not create or update a runtime `quiz.json` file.
 4. Parse JSON and validate the quiz shape.
 
 ## Voice & Tone
@@ -70,7 +70,11 @@ Bloxodes house voice for the page copy (`description_md`, intro, explanations): 
     "is_published": true
   },
   "quizData": {
-    "questions": []
+    "easy": [],
+    "medium": [],
+    "hard": []
   }
 }
 ```
+
+Each difficulty must be a non-empty array. Every question needs a globally unique ID, exactly four options with unique IDs, and a `correctOptionId` present in that question's options.

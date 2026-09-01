@@ -7,7 +7,7 @@ description: Prepare source-backed data for one approved Bloxodes game collectio
 
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Write and edit all files directly using the Write and Edit tools.**
 
-Use this after `brief.md` is approved. Prepare the local data for one game collection. Do not gather images here; plan the image field and leave image collection for `bloxodes-game-collection-images`.
+Use this after `brief.md` is approved. Prepare the local authoring/migration data for one game collection. The public application never reads this file; the parent verifier must publish an immutable database revision before preview. Do not gather images here; plan the image field and leave image collection for `bloxodes-game-collection-images`.
 
 ## Work
 

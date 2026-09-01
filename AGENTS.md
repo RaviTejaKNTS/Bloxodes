@@ -85,9 +85,9 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 1. Use the matching `.agents/skills/bloxodes-*` skill directly. For new pages, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`. For source-backed maintenance of existing local collection datasets and their wiki pages, use `bloxodes-game-collection-refresh`.
 2. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
 3. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
-4. Seed and preview `wiki_pages` and `wiki_collection_pages` in managed development before production.
+4. Seed page copy and publish the immutable collection dataset/media revision in managed development before preview or production.
 5. Keep collection codes in `<game-slug>-<collection-slug>` format.
-6. Verify local dataset images, item counts, useful card fields, metadata, sitemaps, search, and revalidation before publishing.
+6. Verify authoring data/media, database pointer and item-count readback, useful card fields, metadata, sitemaps, search, and revalidation before publishing. Runtime must not depend on local collection files.
 7. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
 
 ### Codes pages

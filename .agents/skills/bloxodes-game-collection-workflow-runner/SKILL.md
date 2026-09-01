@@ -83,7 +83,7 @@ Also give the writing subagent:
 10. Writing gate: spawn a writing subagent with `bloxodes-game-collection-writing`.
 11. Review `final.json`. Send copy/tone/structure/FAQ fixes to the writing subagent. Send data/image gaps back to the collection subagent.
 12. Start or reuse localhost with `npm run dev:managed`.
-13. Run:
+13. Run the managed-development verifier. It checks the authoring dataset, seeds page copy, creates and publishes the immutable database/R2 runtime revision, validates the saved dataset pointer and item count, and only then checks the route:
 
 ```bash
 npm run verify:game-collection-finals -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --collection <collection-slug>

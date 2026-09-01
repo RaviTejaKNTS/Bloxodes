@@ -7,7 +7,7 @@ description: Gather, save, wire, and verify images for one approved Bloxodes gam
 
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Download images and edit dataset files directly using Bash and the Edit/Write tools.**
 
-Use this after `brief.md` and data readiness are approved. Give images their own pass before writing.
+Use this after `brief.md` and data readiness are approved. Give images their own authoring pass before writing. Local public paths are staging inputs only; the parent verifier uploads and verifies immutable R2 media keys before the database-backed route can render them.
 
 ## Work
 

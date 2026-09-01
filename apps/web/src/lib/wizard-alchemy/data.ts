@@ -1,8 +1,7 @@
 import "server-only";
-import fs from "node:fs/promises";
 import { publicContentCache } from "@/lib/public-content-cache";
-import { repoPath } from "@/lib/paths";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
+import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
 
 export type WizardAlchemyPotion = {
   name: string;
@@ -41,21 +40,23 @@ export type WizardAlchemyRace = {
   keepPriority: string;
 };
 
-async function readDataset<T>(fileName: string): Promise<T[]> {
-  const raw = await fs.readFile(repoPath("data", "Wizard Alchemy", fileName), "utf8");
-  return unwrapDatasetItems(JSON.parse(raw)) as T[];
+async function readDataset<T extends Record<string, unknown>>(collectionSlug: string): Promise<T[]> {
+  const code = `wizard-alchemy-${collectionSlug}`;
+  const runtime = await getPublishedWikiCollectionRuntimeByCode(code);
+  if (runtime) return unwrapDatasetItems(runtime.document) as T[];
+  throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
 }
 
 async function readPotionPlannerData() {
   const [potions, materials] = await Promise.all([
-    readDataset<WizardAlchemyPotion>("potions.json"),
-    readDataset<WizardAlchemyMaterial>("materials.json")
+    readDataset<WizardAlchemyPotion>("potions"),
+    readDataset<WizardAlchemyMaterial>("materials")
   ]);
   return { potions, materials };
 }
 
 async function readRaceRerollData() {
-  const races = await readDataset<WizardAlchemyRace>("races.json");
+  const races = await readDataset<WizardAlchemyRace>("races");
   return { races };
 }
 

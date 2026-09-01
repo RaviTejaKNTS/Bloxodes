@@ -1,8 +1,8 @@
 # Data Environments
 
 Status: Active
-Last verified: 2026-08-14
-Evidence: env target inspection, managed-development URL/readiness guard, migration ledgers, production readback/health, and platform synchronization checks
+Last verified: 2026-09-01
+Evidence: env target inspection, database-only wiki/quiz runtime audit, managed-development convergence, production readback, migration checks, and platform synchronization guards
 
 ## Workstation Development
 
@@ -31,7 +31,7 @@ Evidence: env target inspection, managed-development URL/readiness guard, migrat
 
 ## Local Datasets
 
-`data/` and `apps/web/src/data/` are committed application data, not env targets. They power game collections, catalog/tool datasets, error/dictionary data, and other structured content. Follow `data/AGENTS.md` for schema/renderer ownership.
+`data/` and `apps/web/src/data/` are committed source files, not env targets. Some still power explicitly documented catalog/tool/error/dictionary routes. Game-collection JSON and `quiz.json` files are retained migration/authoring inputs only: all public wiki collection and quiz runtimes read Supabase, and collection media resolves from immutable R2 keys. Follow `data/AGENTS.md` for the remaining file ownership.
 
 Machine-consumed inputs should live under `data/` or a pipeline-specific input folder. Do not add new executable inputs to rough `docs/` notes.
 
@@ -41,4 +41,5 @@ Machine-consumed inputs should live under `data/` or a pipeline-specific input f
 - Article production inventory is a read-only public projection at `/api/articles/editorial-inventory`; the writer queue itself stays in managed development.
 - Production storage URLs must use `media.bloxodes.com`, including when jobs connect to Supabase through the VPS-private Kong network.
 - Database schema flows forward as a reviewed migration: repository integrity check, managed-development plan/apply/readiness/advisors, explicit production approval, production plan/apply/readback/health/advisors. Database rows are not synchronized by cloning one environment over another.
+- The bounded `sync:production-collection-runtime:managed-dev` job is an exception for immutable collection revisions: it reads published production revisions and copies only missing exact revisions into managed development. It never writes production, never deletes target history, and preserves target environment IDs.
 - Managed development and production were converged through repository migration `20260920000013` on 2026-08-14. Future migration files must repeat the same forward-only sequence; do not infer schema parity from application health alone.

@@ -32,7 +32,7 @@ After the parent approves the brief, send the same subagent:
 4. Ask the same subagent to use `/bloxodes-quiz-writing` and create `final.json`.
 5. Review that questions are fair, stable, and useful.
 6. Start or reuse localhost with `npm run dev:managed`.
-7. Run:
+7. Run the managed-development verifier. It validates and imports both page copy and `final.json.quizData` into `quiz_pages`, reads the exact saved payload back, and only then checks the route:
 
 ```bash
 npm run verify:engagement-finals -- --base-url http://localhost:<port> --file <final.json>

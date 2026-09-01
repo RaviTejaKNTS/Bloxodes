@@ -52,6 +52,7 @@ const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
 const allowGeneratedCopy = args.has("--allow-generated-copy");
+const missingOnly = args.has("--missing-only");
 const targetGameSlugs = collectArgValues(rawArgs, ["--game", "--game-slug", "--wiki-slug"]);
 const targetCollections = collectArgValues(rawArgs, ["--collection", "--collection-slug"]);
 const finalJsonRoot = collectSingleArgValue(rawArgs, ["--final-json-root", "--final-json-dir"]);
@@ -280,10 +281,10 @@ function resolveItemCountToken(value: string, itemCount: number): string {
   return value.replace(/\{\{\s*(?:count|item_count)\s*\}\}|\{\s*(?:count|item_count)\s*\}/gi, countLabel);
 }
 
-async function loadExistingPublishedAt() {
+async function loadExistingPublishedAt(configs: GameCollectionConfig[]) {
   if (dryRun) return new Map<string, string | null>();
   const sb = supabaseAdmin();
-  const codes = getTargetCollections().map((config) => config.code);
+  const codes = configs.map((config) => config.code);
   const { data, error } = await sb.from("wiki_collection_pages").select("code, published_at").in("code", codes);
   if (error) throw error;
   return new Map(
@@ -294,13 +295,13 @@ async function loadExistingPublishedAt() {
   );
 }
 
-async function loadWikiPageIdsBySlug() {
+async function loadWikiPageIdsBySlug(configs: GameCollectionConfig[]) {
   if (dryRun) {
-    return new Map(getTargetGroups(getTargetCollections()).map((group) => [group.gameSlug, null]));
+    return new Map(getTargetGroups(configs).map((group) => [group.gameSlug, null]));
   }
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, string | null>();
   const sb = supabaseAdmin();
-  const targetGroups = getTargetGroups(getTargetCollections());
+  const targetGroups = getTargetGroups(configs);
   const slugs = targetGroups.map((group) => group.gameSlug);
   const { data, error } = await sb.from("wiki_pages").select("id, slug").in("slug", slugs);
   if (error) throw error;
@@ -312,16 +313,16 @@ async function loadWikiPageIdsBySlug() {
   );
 }
 
-async function loadUniverseIdsByGameSlug() {
+async function loadUniverseIdsByGameSlug(configs: GameCollectionConfig[]) {
   if (dryRun) {
-    return new Map(getTargetGroups(getTargetCollections()).map((group) => [group.gameSlug, group.universeId ?? null]));
+    return new Map(getTargetGroups(configs).map((group) => [group.gameSlug, group.universeId ?? null]));
   }
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, number | null>();
   const rows = await loadRobloxUniverseLookupRows();
   const existingUniverseIds = new Set(rows.map((row) => row.universe_id));
 
   return new Map(
-    getTargetGroups(getTargetCollections()).map((group) => {
+    getTargetGroups(configs).map((group) => {
       if (group.universeId && existingUniverseIds.has(group.universeId)) return [group.gameSlug, group.universeId];
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
@@ -373,22 +374,40 @@ async function main() {
     throw new Error("Refusing to write outside managed development. Use --allow-prod only after managed-dev review is clean.");
   }
 
-  const [existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug] = await Promise.all([
-    loadExistingPublishedAt(),
-    loadUniverseIdsByGameSlug(),
-    loadWikiPageIdsBySlug()
-  ]);
-  const targetCollections = getTargetCollections();
-  const rows = await buildRows(existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug, targetCollections);
-
-  if (targetCollections.length === 0) {
-    throw new Error("No game collection pages matched the provided filters.");
+  let selectedCollections = getTargetCollections();
+  if (missingOnly) {
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
+      throw new Error("--missing-only requires a configured Supabase target.");
+    }
+    const existingCodes = new Set<string>();
+    const codes = selectedCollections.map((config) => config.code);
+    for (let index = 0; index < codes.length; index += 100) {
+      const { data, error } = await supabaseAdmin()
+        .from("wiki_collection_pages")
+        .select("code")
+        .in("code", codes.slice(index, index + 100));
+      if (error) throw error;
+      for (const row of data ?? []) existingCodes.add(String(row.code));
+    }
+    selectedCollections = selectedCollections.filter((config) => !existingCodes.has(config.code));
   }
+
+  if (selectedCollections.length === 0) {
+    console.log("No missing game collection pages matched the provided filters.");
+    return;
+  }
+
+  const [existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug] = await Promise.all([
+    loadExistingPublishedAt(selectedCollections),
+    loadUniverseIdsByGameSlug(selectedCollections),
+    loadWikiPageIdsBySlug(selectedCollections)
+  ]);
+  const rows = await buildRows(existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug, selectedCollections);
 
   if (dryRun) {
     console.log(`Prepared ${rows.length} wiki collection page rows.`);
     for (const [index, row] of rows.entries()) {
-      const config = targetCollections[index];
+      const config = selectedCollections[index];
       const dataset = config ? await readDataset(config) : null;
       console.log(`${row.wiki_slug}/${row.collection_slug} | ${row.code} | ${row.title} | items=${dataset?.rows.length ?? "unknown"}`);
     }

@@ -30,6 +30,7 @@ export type WikiCollectionPageContent = {
   created_at?: string;
   updated_at?: string;
   content_updated_at?: string | null;
+  published_dataset_id?: string | null;
 };
 
 export type WikiCollectionListEntry = Pick<
@@ -51,13 +52,16 @@ export type WikiCollectionListEntry = Pick<
   | "created_at"
   | "updated_at"
   | "content_updated_at"
+  | "published_dataset_id"
 >;
 
 const WIKI_COLLECTION_REVALIDATE_SECONDS = 86400;
 const WIKI_COLLECTION_SELECT_FIELDS =
+  "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at, published_dataset_id";
+const WIKI_COLLECTION_SELECT_FIELDS_LEGACY =
   "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
 const WIKI_COLLECTION_LIST_FIELDS =
-  "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, meta_description, thumb_url, wiki_md, wiki_sort_order, published_at, created_at, updated_at, content_updated_at";
+  "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, meta_description, thumb_url, wiki_md, wiki_sort_order, published_at, created_at, updated_at, content_updated_at, published_dataset_id";
 const WIKI_COLLECTION_PAGE_TABLE = "wiki_collection_pages";
 const WIKI_COLLECTION_PAGE_VIEW = "wiki_collection_pages_view";
 const LEGACY_WIKI_COLLECTION_PAGE_TABLE = "wiki_catalog_pages";
@@ -90,25 +94,37 @@ function isMissingRelationError(error: unknown): boolean {
   return code === "PGRST205" || message?.includes("Could not find the table") === true;
 }
 
+function isMissingPublishedDatasetColumnError(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const { code, message } = error as SupabaseErrorLike;
+  return code === "42703" || code === "PGRST204" || message?.includes("published_dataset_id") === true;
+}
+
 async function fetchWikiCollectionPageByPath(
   supabase: SupabaseClient,
   viewName: string,
   wikiSlug: string,
-  collectionSlug: string
+  collectionSlug: string,
+  fields = WIKI_COLLECTION_SELECT_FIELDS
 ) {
   return supabase
     .from(viewName)
-    .select(WIKI_COLLECTION_SELECT_FIELDS)
+    .select(fields)
     .eq("wiki_slug", wikiSlug)
     .eq("collection_slug", collectionSlug)
     .eq("is_published", true)
     .maybeSingle();
 }
 
-async function fetchWikiCollectionPageByCode(supabase: SupabaseClient, viewName: string, code: string) {
+async function fetchWikiCollectionPageByCode(
+  supabase: SupabaseClient,
+  viewName: string,
+  code: string,
+  fields = WIKI_COLLECTION_SELECT_FIELDS
+) {
   return supabase
     .from(viewName)
-    .select(WIKI_COLLECTION_SELECT_FIELDS)
+    .select(fields)
     .eq("code", code)
     .eq("is_published", true)
     .maybeSingle();
@@ -119,6 +135,7 @@ async function fetchPublishedWikiCollectionPaths(supabase: SupabaseClient, table
     .from(tableName)
     .select("wiki_slug, collection_slug")
     .eq("is_published", true)
+    .not("published_dataset_id", "is", null)
     .not("wiki_slug", "is", null)
     .not("collection_slug", "is", null);
 }
@@ -127,7 +144,8 @@ function buildWikiCollectionListQuery(supabase: SupabaseClient, viewName: string
   return supabase
     .from(viewName)
     .select(WIKI_COLLECTION_LIST_FIELDS)
-    .eq("is_published", true);
+    .eq("is_published", true)
+    .not("published_dataset_id", "is", null);
 }
 
 export function buildWikiCollectionPath(wikiSlug: string, collectionSlug: string): string {
@@ -151,12 +169,25 @@ export async function getWikiCollectionPageByPath(
       normalizedCollectionSlug
     );
 
+    if (isMissingPublishedDatasetColumnError(error)) {
+      const compatible = await fetchWikiCollectionPageByPath(
+        supabase,
+        WIKI_COLLECTION_PAGE_VIEW,
+        normalizedWikiSlug,
+        normalizedCollectionSlug,
+        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
+      );
+      data = compatible.data;
+      error = compatible.error;
+    }
+
     if (isMissingRelationError(error)) {
       const fallback = await fetchWikiCollectionPageByPath(
         supabase,
         LEGACY_WIKI_COLLECTION_PAGE_VIEW,
         normalizedWikiSlug,
-        normalizedCollectionSlug
+        normalizedCollectionSlug,
+        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
       );
       data = fallback.data;
       error = fallback.error;
@@ -192,8 +223,24 @@ export async function getWikiCollectionPageByCode(code: string): Promise<WikiCol
     const supabase = supabaseAdmin();
     let { data, error } = await fetchWikiCollectionPageByCode(supabase, WIKI_COLLECTION_PAGE_VIEW, normalizedCode);
 
+    if (isMissingPublishedDatasetColumnError(error)) {
+      const compatible = await fetchWikiCollectionPageByCode(
+        supabase,
+        WIKI_COLLECTION_PAGE_VIEW,
+        normalizedCode,
+        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
+      );
+      data = compatible.data;
+      error = compatible.error;
+    }
+
     if (isMissingRelationError(error)) {
-      const fallback = await fetchWikiCollectionPageByCode(supabase, LEGACY_WIKI_COLLECTION_PAGE_VIEW, normalizedCode);
+      const fallback = await fetchWikiCollectionPageByCode(
+        supabase,
+        LEGACY_WIKI_COLLECTION_PAGE_VIEW,
+        normalizedCode,
+        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
+      );
       data = fallback.data;
       error = fallback.error;
     }
@@ -223,13 +270,7 @@ export async function getWikiCollectionPageByCode(code: string): Promise<WikiCol
 export async function listPublishedWikiCollectionPaths(): Promise<Array<{ wiki_slug: string; collection_slug: string }>> {
   const fetchPaths = async () => {
     const supabase = supabaseAdmin();
-    let { data, error } = await fetchPublishedWikiCollectionPaths(supabase, WIKI_COLLECTION_PAGE_TABLE);
-
-    if (isMissingRelationError(error)) {
-      const fallback = await fetchPublishedWikiCollectionPaths(supabase, LEGACY_WIKI_COLLECTION_PAGE_TABLE);
-      data = fallback.data;
-      error = fallback.error;
-    }
+    const { data, error } = await fetchPublishedWikiCollectionPaths(supabase, WIKI_COLLECTION_PAGE_TABLE);
 
     if (error) throw error;
     return (data ?? []) as Array<{ wiki_slug: string; collection_slug: string }>;
@@ -280,6 +321,25 @@ export async function listPublishedWikiCollectionPagesByUniverseId(
   }
 
   return (data ?? []) as WikiCollectionListEntry[];
+}
+
+export async function listPublishedWikiCollectionPages(): Promise<WikiCollectionListEntry[]> {
+  const fetchPages = async () => {
+    const { data, error } = await buildWikiCollectionListQuery(supabaseAdmin(), WIKI_COLLECTION_PAGE_VIEW)
+      .order("wiki_slug", { ascending: true })
+      .order("wiki_sort_order", { ascending: true, nullsFirst: false })
+      .order("title", { ascending: true });
+    if (error) throw error;
+    return (data ?? []) as WikiCollectionListEntry[];
+  };
+
+  if (BYPASS_WIKI_COLLECTION_CACHE) return fetchPages();
+
+  const cached = publicContentCache(fetchPages, ["published-wiki-collection-pages-v1"], {
+    revalidate: WIKI_COLLECTION_REVALIDATE_SECONDS,
+    tags: ["wiki-collection-index"]
+  });
+  return cached();
 }
 
 export async function listPublishedWikiCollectionPagesByWikiSlug(
