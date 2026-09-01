@@ -18,6 +18,7 @@ import {
   assertPiVersion
 } from "../articles/pi-article-writer";
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
+import { runArticleBrowserSmokeTest } from "../content/article-browser";
 
 type Component = "all" | "discovery" | "writer";
 
@@ -114,9 +115,8 @@ async function main() {
     }
     const codexModel = process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna";
     const codexReasoning = parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
+      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "xhigh"
     );
-    assertLunaMaxConfiguration(codexModel, codexReasoning, "Codex article workflow");
     console.log(`Codex CLI: ${codexVersion.stdout.trim()} (${codexModel}, ${codexReasoning})`);
 
     const piConfigured = process.env.ARTICLE_WRITER_PI_BIN?.trim();
@@ -144,9 +144,8 @@ async function main() {
     }
     console.log(`Pi CLI: ${parsedPiVersion} (${piProvider}/${piModel}, ${piReasoning}; ChatGPT auth present)`);
 
-    const browser = findExecutable(["google-chrome", "chromium", "chromium-browser"]);
-    if (!browser) throw new Error("Google Chrome or Chromium is required for rendered article verification.");
-    console.log(`Browser: ${browser}`);
+    const browser = await runArticleBrowserSmokeTest();
+    console.log(`Headless browser: ${browser} (Playwright smoke test passed)`);
   }
 
   console.log(`Homelab article automation readiness passed (${component}).`);

@@ -8,7 +8,7 @@ Evidence: code and 31 focused tests, exact-ID release dry run against a publishe
 
 1. Homelab discovery gathers source candidates.
 2. Groq curation rejects unsupported/overlapping/event/collection topics and queues approved article ideas in managed development.
-3. Codex runs research, image collection, parent review, import, verification, and rendered preview with `gpt-5.6-luna` at `max` reasoning. After brief and image approval, the parent invokes Pi for prose only, also using `openai-codex/gpt-5.6-luna` at `max` reasoning with ChatGPT authentication and a two-line non-coding system prompt.
+3. Codex runs research, image collection, parent review, import, verification, and rendered preview with `gpt-5.6-luna` at `xhigh` reasoning. After brief and image approval, the parent invokes Pi for prose only, using `openai-codex/gpt-5.6-luna` at `max` reasoning with ChatGPT authentication and a two-line non-coding system prompt. Rendered preview uses the installed headless Chrome/Chromium executable through `verify:article-browser`, not the optional desktop browser bridge.
 4. Before the model starts, the batch wrapper captures the exact newest pending queue-ID selection. After the model exits, it intersects that selection with rows completed after the batch start and passes only those IDs to the guarded release orchestrator.
 5. The orchestrator promotes the approved media bytes, imports each exact article row with a deterministic edited cover, syncs provenance, reads production back, and polls the live URL and expected H1 before closing the queue row as `published`.
 6. Production revalidation refreshes articles, feeds, sitemaps, related content, and cache tags.
@@ -46,6 +46,7 @@ Opinionated Roblox game-list articles remain ordinary `articles` rows. The reusa
 - Article image provenance upserts use the article-owned uploaded object path as the idempotent key; two distinct manifest entries may share a source URL without collapsing into one production row.
 - Groq curation keeps the selected candidate set intact when the provider reports an HTTP 413 token-cap rejection. It reduces the completion allowance from the reported limit/request delta plus a safety margin and retries the same request; the live 8,017-token failure completed at 7,679 tokens after this guard reduced `max_tokens` to 2,707.
 - A later batch recovers stale `codex-homelab` processing claims only after the configured provider timeout plus a 30-minute margin.
+- The wrapper cleans up unfinished selected claims immediately on provider, browser, verifier, or release failure by clearing the lock and setting a retryable `blocked` state with a 180-minute backoff.
 - Writers leave `final.json.cover_image` null so managed-development import creates and uploads the edited cover from the game's thumbnail. Source-provided and pre-existing covers are not accepted as the final cover by the unattended batch prompt. A reviewed generated source may be passed explicitly to `import-content-final.ts --cover-source-file`; the importer still stores only its derived edited cover. The cover is a feature/metadata image only: it must not be injected into `content_md`, and production import rejects a cover URL repeated in body content. Use `--regenerate-covers` for an intentional edited-cover repair, which writes a fresh object path to avoid stale CDN bytes.
 
 ## Schedule and Health

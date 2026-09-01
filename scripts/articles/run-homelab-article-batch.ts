@@ -19,7 +19,6 @@ import {
   parseCodexReasoningEffort,
   type CodexReasoningEffort
 } from "./article-writer-provider";
-import { assertLunaMaxConfiguration } from "./pi-article-writer";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 
 type Options = {
@@ -55,6 +54,7 @@ class ProviderProcessError extends Error {
 }
 
 const MAX_BATCH_SIZE = 6;
+const BATCH_RETRY_AFTER_MINUTES = 180;
 
 function executableDefault(userLocalPath: string, command: string): string {
   try {
@@ -76,13 +76,17 @@ Options:
   --worktree PATH            Persistent Bloxodes worktree (default: current repo)
   --codex-bin PATH           Codex CLI path (default: ARTICLE_WRITER_CODEX_BIN or codex)
   --codex-model MODEL        Codex model (default: ARTICLE_WRITER_CODEX_MODEL or gpt-5.6-luna)
-  --codex-reasoning EFFORT   Codex reasoning effort (fixed: max)
+  --codex-reasoning EFFORT   Codex reasoning effort (default: ARTICLE_WRITER_CODEX_REASONING_EFFORT or xhigh)
   --max-attempts N           Retry threshold for blocked rows, 1-10 (default: 3)
   --timeout-minutes N        Batch timeout, 30-330 (default: 300)
   --help                     Show this help
 
 The batch exits without invoking the parent when no curated pending queue rows exist.
 Research, images, and review run through Codex Luna Max. Article prose runs only through Pi Luna Max.`);
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
 }
 
 function parseBoolean(value: string | undefined, fallback: boolean, label: string): boolean {
@@ -129,7 +133,7 @@ function parseArgs(argv: string[]): Options {
       executableDefault(path.join(os.homedir(), ".local", "bin", "codex"), "codex"),
     codexModel: process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna",
     codexReasoningEffort: parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
+      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "xhigh"
     ),
     maxAttempts: parseInteger(process.env.ARTICLE_WRITER_MAX_ATTEMPTS ?? "3", "ARTICLE_WRITER_MAX_ATTEMPTS", 1, 10)
   };
@@ -228,6 +232,39 @@ async function completedQueueRowsSince(
   return (data ?? []) as CompletedQueueRow[];
 }
 
+async function releaseUnfinishedBatchClaims(
+  dev: { url: string; serviceRole: string },
+  selectedIds: string[],
+  reason: string
+): Promise<number> {
+  if (!selectedIds.length) return 0;
+  const supabase = createClient(dev.url, dev.serviceRole, {
+    auth: { autoRefreshToken: false, persistSession: false }
+  });
+  const nextAttemptAt = new Date(Date.now() + BATCH_RETRY_AFTER_MINUTES * 60_000).toISOString();
+  const { data, error } = await supabase
+    .from("article_generation_queue")
+    .update({
+      status: "blocked",
+      last_error: reason,
+      outcome_reason: reason,
+      locked_at: null,
+      locked_by: null,
+      next_attempt_at: nextAttemptAt,
+      completed_at: null,
+      published_at: null,
+      rejected_at: null,
+      production_url: null
+    })
+    .eq("workflow_mode", "agent_runner")
+    .eq("status", "processing")
+    .in("id", selectedIds)
+    .like("locked_by", "%-homelab")
+    .select("id");
+  if (error) throw new Error(`Could not release unfinished homelab batch claims: ${error.message}`);
+  return data?.length ?? 0;
+}
+
 async function recoverStaleBatchClaims(
   dev: { url: string; serviceRole: string },
   maxAttempts: number,
@@ -315,7 +352,11 @@ function buildPrompt(targetCount: number): string {
 Articles:
 - selection: newest pending Groq-curated agent_runner rows
 - maximum: ${targetCount}
-- worker: codex-homelab`;
+- worker: codex-homelab
+
+This is already running inside run-homelab-article-batch.ts. Do not invoke npm run articles:writer:batch or any other outer batch/writer wrapper, and do not try to acquire another article-writer lock. The outer wrapper owns the selected queue IDs, the lock, and production release.
+
+For rendered browser QA, first run npm run verify:article-browser -- --base-url http://localhost:<port> --file <final.json> for every reviewed final. That command uses the installed headless Chrome/Chromium executable, scrolls the real route, and checks rendered article images. An empty product/browser-agent list is not a blocker in unattended homelab mode; use this Playwright command instead. Mark a row completed only after both verify:article-finals and verify:article-browser pass.`;
 }
 
 function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
@@ -328,6 +369,7 @@ function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.Pro
   childEnv.SUPABASE_SERVICE_ROLE = dev.serviceRole;
   childEnv.ARTICLE_WRITER_DEV_ONLY = "true";
   childEnv.ARTICLE_WRITER_REGENERATE_COVERS = "true";
+  childEnv.ARTICLE_WRITER_BATCH_CONTEXT = "1";
   return childEnv;
 }
 
@@ -411,8 +453,11 @@ async function releaseCompletedArticles(options: Options, rows: CompletedQueueRo
 }
 
 async function main() {
+  if (process.env.ARTICLE_WRITER_BATCH_CONTEXT === "1") {
+    console.log("Nested article writer batch invocation ignored; the outer homelab batch already owns this run.");
+    return;
+  }
   const options = parseArgs(process.argv.slice(2));
-  assertLunaMaxConfiguration(options.codexModel, options.codexReasoningEffort, "Codex article workflow");
   if (path.isAbsolute(options.codexBin)) await access(options.codexBin, fsConstants.X_OK);
   const dev = resolveArticleDevCredentials();
   if (options.apply) {
@@ -447,21 +492,35 @@ async function main() {
       `Starting Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
     );
     const batchStartedAt = new Date().toISOString();
-    await runCodex(options, targetCount, dev);
-    const completed = await completedQueueRowsSince(
-      dev,
-      batchStartedAt,
-      selection.rows.map((row) => row.id)
-    );
-    if (completed.length === 0) {
-      throw new Error("DEGRADED ARTICLE WRITER: A non-empty provider batch completed zero managed-dev articles.");
-    }
-    console.log(`Article writer completed ${completed.length} managed-dev article(s).`);
-    if (options.releaseCompleted) {
-      console.log(`Releasing ${completed.length} exact queue row(s) to production after the model process exited.`);
-      await releaseCompletedArticles(options, completed);
-    } else {
-      console.log("Production release is disabled; completed rows remain in managed dev for manual review.");
+    try {
+      await runCodex(options, targetCount, dev);
+      const completed = await completedQueueRowsSince(
+        dev,
+        batchStartedAt,
+        selection.rows.map((row) => row.id)
+      );
+      if (completed.length === 0) {
+        throw new Error("DEGRADED ARTICLE WRITER: A non-empty provider batch completed zero managed-dev articles.");
+      }
+      console.log(`Article writer completed ${completed.length} managed-dev article(s).`);
+      if (options.releaseCompleted) {
+        console.log(`Releasing ${completed.length} exact queue row(s) to production after the model process exited.`);
+        await releaseCompletedArticles(options, completed);
+      } else {
+        console.log("Production release is disabled; completed rows remain in managed dev for manual review.");
+      }
+    } catch (error) {
+      const selectedIds = selection.rows.map((row) => row.id);
+      const reason = `Homelab article batch did not finish: ${errorMessage(error)}`.slice(0, 1_000);
+      try {
+        const released = await releaseUnfinishedBatchClaims(dev, selectedIds, reason);
+        if (released) {
+          console.warn(`Returned ${released} unfinished article claim(s) to blocked with a ${BATCH_RETRY_AFTER_MINUTES}-minute retry window.`);
+        }
+      } catch (cleanupError) {
+        console.error(`Queue cleanup failed: ${errorMessage(cleanupError)}`);
+      }
+      throw error;
     }
   } finally {
     await releaseLock();

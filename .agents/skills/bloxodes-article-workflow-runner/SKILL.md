@@ -111,10 +111,15 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 9. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; for copy and content changes, rerun Pi using the same minimal handoff.
 10. Start or reuse the local web server with `npm run dev:managed`.
 11. Run the batch verifier on reviewed final files. It requires sibling `media.json` for every article. Rerun Pi for copy failures, send source gaps to the research subagent, and send image coverage or mapping failures to the image subagent.
-12. Open each verified localhost article in an available real browser and inspect the rendered page.
-    - Scroll through every content section so lazy-loaded images are requested.
-    - Inspect the content image elements after scrolling. Every requested image must complete with a nonzero natural width and height; broken icons, empty tier cards, and unresolved placeholders fail the preview.
-    - Do not treat the presence of an image element or URL in HTML as proof that the image loaded.
+12. Run the deterministic rendered-browser check for every verified final:
+
+```bash
+npm run verify:article-browser -- --base-url http://localhost:<port> --file <final.json> --file <final.json>
+```
+
+    - This command launches the installed headless Chrome/Chromium executable, opens the real localhost route, scrolls the article to trigger lazy media, and requires every article-body image to finish with nonzero dimensions.
+    - In unattended homelab runs, an empty product/browser-agent list is expected when the desktop browser bridge is not attached. Do not block solely for that reason; use `verify:article-browser` and report its actual result.
+    - Do not treat an HTML fetch, image URL, or browser-agent availability as proof of rendered-page verification.
 13. Immediately after an article passes both verification and rendered browser preview, mark its queue row `completed`:
 
 ```bash
@@ -224,7 +229,7 @@ Use one `--file` for each approved article and the actual localhost port shown b
 7. Confirm embeds render as players instead of raw syntax and that body images load beside the correct content.
 8. Return the localhost links for every completed article.
 
-If no real browser can be controlled, or an article cannot be imported or previewed, mark it blocked with the reason. Do not claim browser verification from an HTML fetch alone.
+If the deterministic browser check fails, mark the affected row blocked with the command's actual reason. Do not claim browser verification from an HTML fetch alone.
 
 ## Final Output
 

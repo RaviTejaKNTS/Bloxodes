@@ -98,6 +98,7 @@
     "sync:quiz-data": "tsx scripts/quizzes/sync-quiz-data.ts",
     "import:tool-finals": "tsx scripts/content/import-tool-finals.ts",
     "verify:article-finals": "tsx scripts/content/verify-article-finals.ts",
+    "verify:article-browser": "tsx scripts/content/verify-article-browser.ts",
     "test:article-image-readiness": "node --import tsx --test scripts/content/__tests__/article-image-readiness.test.ts",
     "test:article-content-rules": "node --import tsx --test scripts/content/__tests__/*rules.test.ts",
     "verify:catalog-finals": "tsx scripts/content/verify-catalog-finals.ts",
