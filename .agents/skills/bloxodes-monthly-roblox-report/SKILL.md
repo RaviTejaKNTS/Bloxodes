@@ -1,6 +1,6 @@
 ---
 name: bloxodes-monthly-roblox-report
-description: Research, write, implement, and locally verify one Bloxodes monthly Roblox editorial report from a supplied month and year. Use when the user asks for a dated `/stats/reports/roblox-month-year` page combining Bloxodes historical player data, genre and game trends, Roblox events, major news, community context, real data-backed charts, and a reusable non-AI feature image for archive and social previews, including workflows that hand the approved evidence dossier to Claude Code for the writing pass.
+description: Research, write, implement, and locally verify one Bloxodes monthly Roblox editorial report from a supplied month and year. Use when the user asks for a dated `/stats/reports/roblox-month-year` page combining Bloxodes historical player data, genre and game trends, Roblox events, major news, community context, real data-backed charts, and a reusable non-AI feature image for archive and social previews.
 ---
 
 # Bloxodes Monthly Roblox Report
@@ -28,7 +28,7 @@ Read:
 
 - `references/editorial-standard.md` before selecting stories or charts.
 - `references/dossier-template.md` before writing `brief.md`.
-- `references/claude-handoff.md` before invoking Claude Code.
+- `references/local-writing.md` before writing or implementing the report.
 
 Use `scripts/analyze-month.mjs` after producing the raw export.
 
@@ -119,32 +119,11 @@ Write `brief.md` from `references/dossier-template.md`. It must contain:
 
 The dossier is the factual contract for the writing pass. Review it against `analysis.json` and primary sources before any page writing.
 
-### 6. Invoke Claude for writing and implementation
+### 6. Write and implement the report locally
 
-Use Claude only after the dossier is complete.
+Work in the current task workspace after the dossier is complete. Read `references/local-writing.md`, then write the prose and implement the route, data module, charts, focused tests, and feature-image configuration directly. Keep the edit allowlist narrow: new report route files, report data and chart files, the generated feature image, focused tests, and directly affected inventory documentation.
 
-Before transmitting repository files or production-derived data, require explicit user approval unless the current request already explicitly approves sending those exact materials to Claude Code. Use this confirmation when needed:
-
-> I approve sending the monthly-report research dossier, report datasets, and report code to Claude Code for rewriting.
-
-Check `claude auth status`; if logged out, run `claude auth login` and let the user complete sign-in. Never expose or store credentials.
-
-Build the assignment from `references/claude-handoff.md`. Allow Claude to read the dossier, raw/analysis data, project guides, and previous report implementation. Give it a narrow edit allowlist for the new report route, report data/components, focused tests, and directly affected inventory docs.
-
-Use a non-interactive writing pass such as:
-
-```bash
-claude -p \
-  --model sonnet \
-  --effort high \
-  --permission-mode acceptEdits \
-  --allowedTools "Read,Edit,Write,Glob,Grep,Bash" \
-  "Read <workspace>/claude-assignment.md completely, then carry out the assignment."
-```
-
-Inspect `claude --help` first if the installed CLI differs. Do not give Claude permission to browse, publish, deploy, commit, stage, or edit unrelated files.
-
-Claude owns the prose pass; the parent agent owns evidence, scope, final judgment, and QA.
+The agent doing the implementation owns both the prose pass and the code pass. Preserve the frozen evidence contract, review every public claim against the dossier and source datasets, and do not browse beyond the research pass or publish anything as part of this step.
 
 ### 7. Generate the report feature image
 
@@ -156,7 +135,7 @@ Define `featureImage` in the frozen report data module with:
 - one Bloxodes accent color;
 - the final public path `/images/reports/roblox-<month>-<year>.png`.
 
-Use the lead observation already approved in the dossier. Do not add a random statistic merely to fill the image. Generate a restrained 1200×630 PNG from the real series:
+Use the lead observation already approved in the dossier. Do not add a random statistic merely to fill the image. Generate and verify a restrained 1200×630 PNG from the real series:
 
 ```bash
 npx tsx .agents/skills/bloxodes-monthly-roblox-report/scripts/generate-feature-image.mts \
@@ -169,7 +148,7 @@ Keep the image exceptionally minimal: one plain `Roblox <Month> Stats Report` co
 
 ### 8. Review the result independently
 
-Do not accept Claude's output automatically. Check every public claim against `brief.md` and every chart array against `analysis.json` or `raw.json`.
+Review the implementation as a separate pass. Check every public claim against `brief.md` and every chart array against `analysis.json` or `raw.json`.
 
 Remove:
 
@@ -220,4 +199,4 @@ Return:
 - confirmation that the page remains internal and unpublished;
 - any unresolved source or data limitations.
 
-Do not claim completion if the dossier, Claude pass, evidence review, or rendered-page QA is missing.
+Do not claim completion if the dossier, implementation, evidence review, or rendered-page QA is missing.

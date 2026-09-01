@@ -131,6 +131,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - The route is indexed and included in the reports archive, Stats navigation, Stats sitemap, RSS feed, and report-aware stats revalidation.
   - `featureImage` selects the dossier-approved headline, lead metric, accessible description, and real Murder Mystery 2 chart series used to generate `public/images/reports/roblox-july-2026.png` for the archive and social metadata.
   - Keep this module immutable except for explicit corrections, and never edit the June module or route while working on July.
+- `src/data/reports/roblox-august-2026.ts`
+  - Frozen editorial snapshot for the internal noindex `/stats/reports/roblox-august-2026` preview, sourced from the dossier-approved analysis in `tmp/content-workspace/roblox/reports/2026-08/`. Chart UI lives in `src/components/reports/RobloxAugust2026ReportCharts.tsx`.
+  - The route is intentionally absent from the reports archive, Stats navigation, Stats sitemap, RSS feed, and report-aware stats revalidation until separately approved for publication.
+  - `featureImage` selects the dossier-approved headline, lead metric, accessible description, and real Adopt Me! chart series used to generate `public/images/reports/roblox-august-2026.png` for a later archive row and social metadata.
+  - Keep this module immutable except for explicit corrections, and never edit the June or July modules or routes while working on August.
 - `data/Admin commands/*.md`
   - Parsed by `src/lib/admin-commands.ts`.
 - `data/roblox-dictionary/roblox-dictionary.json`
