@@ -22,6 +22,14 @@ type CollectionFinal = {
   collection_slug?: string;
 };
 
+type RuntimeManifest = {
+  schemaVersion?: number;
+  game?: { slug?: string };
+  collection?: { slug?: string };
+  dataset?: string;
+  finalJson?: string;
+};
+
 function printUsage() {
   console.log(
     "Usage: npm run verify:game-collection-finals -- --base-url http://localhost:3000 --game <game-slug> --final-json-root <collections-root> [--collection <slug> ...]"
@@ -87,21 +95,44 @@ async function discoverCollections(root: string): Promise<string[]> {
   const collections: string[] = [];
   for (const entry of entries) {
     if (!entry.isDirectory()) continue;
-    const finalPath = path.join(root, entry.name, "final.json");
-    if (await pathExists(finalPath)) collections.push(entry.name);
+    const manifestPath = path.join(root, entry.name, "runtime-manifest.json");
+    if (await pathExists(manifestPath)) collections.push(entry.name);
   }
   return collections.sort();
 }
 
-async function findFinalFile(root: string, collection: string, game: string) {
+async function findManifestFile(root: string, collection: string, game: string) {
   const candidates = [
-    path.join(root, collection, "final.json"),
-    path.join(root, `${game}-${collection}`, "final.json"),
+    path.join(root, collection, "runtime-manifest.json"),
+    path.join(root, `${game}-${collection}`, "runtime-manifest.json"),
   ];
   for (const candidate of candidates) {
     if (await pathExists(candidate)) return candidate;
   }
-  throw new Error(`Missing collection final.json for ${collection}. Checked: ${candidates.join(", ")}`);
+  throw new Error(`Missing runtime-manifest.json for ${collection}. Checked: ${candidates.join(", ")}`);
+}
+
+async function readManifest(file: string, game: string, collection: string) {
+  const parsed = JSON.parse(await readFile(file, "utf8")) as RuntimeManifest;
+  if (parsed.schemaVersion !== 1 || parsed.game?.slug !== game || parsed.collection?.slug !== collection) {
+    throw new Error(`${file} does not match ${game}/${collection}.`);
+  }
+  if (!parsed.dataset || !parsed.finalJson) throw new Error(`${file} must include dataset and finalJson.`);
+  const root = path.dirname(file);
+  const resolveInside = (value: string) => {
+    const resolved = path.resolve(root, value);
+    const relative = path.relative(root, resolved);
+    if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+      throw new Error(`${file} contains a path outside its workspace.`);
+    }
+    return resolved;
+  };
+  const datasetFile = resolveInside(parsed.dataset);
+  const finalFile = resolveInside(parsed.finalJson);
+  if (!(await pathExists(datasetFile)) || !(await pathExists(finalFile))) {
+    throw new Error(`${file} references a missing dataset or final JSON file.`);
+  }
+  return { datasetFile, finalFile };
 }
 
 async function readFinal(file: string): Promise<CollectionFinal> {
@@ -196,13 +227,26 @@ async function main() {
     ? options.finalJsonRoot
     : path.resolve(process.cwd(), options.finalJsonRoot);
   const collections = options.collections.length ? options.collections : await discoverCollections(root);
-  if (!collections.length) throw new Error(`No collection final.json files found under ${root}`);
+  if (!collections.length) throw new Error(`No collection runtime manifests found under ${root}`);
 
-  const finalFiles = await Promise.all(collections.map((collection) => findFinalFile(root, collection, options.game)));
+  const manifestFiles = await Promise.all(collections.map((collection) => findManifestFile(root, collection, options.game)));
+  const workspaces = await Promise.all(manifestFiles.map((file, index) => readManifest(file, options.game, collections[index])));
+  const finalFiles = workspaces.map((workspace) => workspace.finalFile);
   const finals = await Promise.all(finalFiles.map(readFinal));
 
   await runCommand("npm", ["run", "content:check-copy", "--", ...finalFiles]);
   for (let index = 0; index < collections.length; index += 1) {
+    await runCommand("npm", [
+      "run",
+      "audit:game-collection-datasets:v2",
+      "--",
+      "--game",
+      options.game,
+      "--collection",
+      collections[index],
+      "--file",
+      workspaces[index].datasetFile,
+    ]);
     await runCommand("npm", [
       "run",
       "check:game-collection-data",
@@ -211,29 +255,19 @@ async function main() {
       options.game,
       "--collection",
       collections[index],
+      "--file",
+      workspaces[index].datasetFile,
       "--final-json",
       finalFiles[index],
     ]);
   }
-  await runCommand("npm", [
-    "run",
-    "seed:game-collection-pages",
-    "--",
-    "--game",
-    options.game,
-    ...collections.flatMap((collection) => ["--collection", collection]),
-    "--final-json-root",
-    options.finalJsonRoot,
-  ]);
   await runCommand("env", [
     "BLOXODES_ENV_OVERLAYS=cloudflare",
     "npm",
     "run",
     "sync:game-collection-runtime",
     "--",
-    "--game",
-    options.game,
-    ...collections.flatMap((collection) => ["--collection", collection]),
+    ...manifestFiles.flatMap((manifest) => ["--manifest", manifest]),
     "--normalize-legacy-media",
     "--upload-media",
     "--apply",

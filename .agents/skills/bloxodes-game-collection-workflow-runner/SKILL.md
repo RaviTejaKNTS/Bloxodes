@@ -83,7 +83,7 @@ Also give the writing subagent:
 10. Writing gate: spawn a writing subagent with `bloxodes-game-collection-writing`.
 11. Review `final.json`. Send copy/tone/structure/FAQ fixes to the writing subagent. Send data/image gaps back to the collection subagent.
 12. Start or reuse localhost with `npm run dev:managed`.
-13. Run the managed-development verifier. It checks the authoring dataset, seeds page copy, creates and publishes the immutable database/R2 runtime revision, validates the saved dataset pointer and item count, and only then checks the route:
+13. Confirm each collection folder contains `brief.md`, `dataset.json`, `media/`, `final.json`, and `runtime-manifest.json`. Run the managed-development verifier. It checks the workspace dataset, creates and publishes the immutable database/R2 runtime revision and page copy from the manifest, validates the saved dataset pointer and item count, and only then checks the route:
 
 ```bash
 npm run verify:game-collection-finals -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --collection <collection-slug>
@@ -137,7 +137,7 @@ Once the data subagent updates the brief, check that:
 - Hidden/source/dev fields are absent from public item data and not exposed as card fields.
 - Image need and image field are recorded for the next step.
 - The route renderer/config can show the sections, fields, planned image field, and item count.
-- `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` reports no blocking metadata issue.
+- `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json` reports no blocking metadata issue.
 - If the data is not ready, send it back to the subagent for fixes.
 
 ## Image checks

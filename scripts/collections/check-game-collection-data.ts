@@ -3,11 +3,7 @@ import "../shared/load-env";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import {
-  getGameCollectionConfigByWikiPath,
-  type GameCollectionConfig
-} from "@/lib/game-collections";
-import { repoPath } from "@/lib/paths";
+import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
 
 type DatasetDocument = {
   meta?: Record<string, unknown> | null;
@@ -87,7 +83,7 @@ function printUsage() {
   npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> [options]
 
 Options:
-  --file <dataset.json>       Check a dataset file that is not registered yet.
+  --file <dataset.json>       Check an explicit content-workspace dataset (required).
   --final-json <final.json>   Also check description_json keys against dataset sections.
   --section-field <field>     Force the field used for rendered sections.
   --require-images            Fail when items are missing images.
@@ -153,6 +149,7 @@ function parseArgs(argv: string[]): CliOptions {
 
   if (!options.game) throw new Error("--game is required");
   if (!options.collection) throw new Error("--collection is required");
+  if (!options.file) throw new Error("--file is required; repository collection datasets are retired.");
   return options;
 }
 
@@ -293,14 +290,18 @@ function getCardFields(meta: Record<string, unknown> | null, columns: string[], 
   });
 }
 
-function imageLocalPath(value: string): string | null {
+function imageLocalPath(value: string, datasetPath: string): string | null {
   if (/^https?:\/\//i.test(value)) return null;
   const withoutQuery = value.split("?")[0] ?? value;
   const decoded = decodeURIComponent(withoutQuery.replace(/^\/+/, ""));
-  return repoPath("apps", "web", "public", decoded);
+  const mediaRoot = path.resolve(path.dirname(datasetPath), "media");
+  const resolved = path.resolve(mediaRoot, decoded);
+  const relative = path.relative(mediaRoot, resolved);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) return null;
+  return resolved;
 }
 
-async function checkImages(rows: Record<string, unknown>[]) {
+async function checkImages(rows: Record<string, unknown>[], datasetPath: string) {
   let present = 0;
   let missingLocal = 0;
   let remote = 0;
@@ -309,7 +310,7 @@ async function checkImages(rows: Record<string, unknown>[]) {
     const image = stringValue(row.image);
     if (!image) continue;
     present += 1;
-    const localPath = imageLocalPath(image);
+    const localPath = imageLocalPath(image, datasetPath);
     if (!localPath) {
       remote += 1;
       continue;
@@ -329,15 +330,7 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const issues: CheckIssue[] = [];
   const config = getGameCollectionConfigByWikiPath(options.game!, options.collection!);
-  if (!config && !options.file) {
-    throw new Error(
-      `No registered collection config for ${options.game}/${options.collection}. Run register:game-collection or pass --file.`
-    );
-  }
-
-  const datasetPath = options.file
-    ? resolvePath(options.file)
-    : repoPath("data", (config as GameCollectionConfig).dataDir, (config as GameCollectionConfig).file);
+  const datasetPath = resolvePath(options.file!);
 
   if (!(await pathExists(datasetPath))) {
     throw new Error(`Dataset file not found: ${datasetPath}`);
@@ -421,14 +414,14 @@ async function main() {
     issues.push({ level: "warning", message: `${cardSummaryMissing} item(s) are missing cardSummary.` });
   }
 
-  const imageStats = await checkImages(rows);
+  const imageStats = await checkImages(rows, datasetPath);
   if (options.requireImages && imageStats.missing) {
     issues.push({ level: "error", message: `${imageStats.missing} item(s) are missing images.` });
   } else if (imageStats.missing === rows.length) {
     issues.push({ level: "warning", message: "No item images are present." });
   }
   if (imageStats.missingLocal) {
-    issues.push({ level: "error", message: `${imageStats.missingLocal} local image path(s) do not exist under apps/web/public.` });
+    issues.push({ level: "error", message: `${imageStats.missingLocal} local image path(s) do not exist under the workspace media directory.` });
   }
 
   let descriptionJsonKeys: string[] = [];

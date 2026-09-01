@@ -15,6 +15,7 @@ type CliOptions = {
   allowRemoteRead: boolean;
   force: boolean;
   dryRun: boolean;
+  workspace: boolean;
 };
 
 type CollectionPageRow = {
@@ -34,6 +35,27 @@ type CollectionPageRow = {
   wiki_md?: string | null;
   is_published?: boolean | null;
   item_count?: number | null;
+  published_dataset_id?: string | null;
+  schema_ld_json?: Record<string, unknown> | null;
+  thumb_url?: string | null;
+  wiki_sort_order?: number | null;
+};
+
+type CollectionDatasetRow = {
+  id: string;
+  schema_version?: number | null;
+  item_count?: number | null;
+  meta_json?: Record<string, unknown> | null;
+  source_manifest_json?: Record<string, unknown> | null;
+};
+
+type CollectionItemRow = {
+  item_slug: string;
+  item_name: string;
+  section: string;
+  sort_order: number;
+  image_key?: string | null;
+  fields_json?: Record<string, unknown> | null;
 };
 
 function printUsage() {
@@ -42,6 +64,7 @@ function printUsage() {
 
 Options:
   --allow-remote-read   Allow an intentional read-only export outside managed development.
+  --workspace           Export dataset.json, media/, final.json, and runtime-manifest.json.
   --force               Replace an existing final.json.
   --dry-run             Print the final JSON without writing a file.
   -h, --help            Show this help.
@@ -57,7 +80,8 @@ function parseArgs(argv: string[]): CliOptions {
     outputRoot: null,
     allowRemoteRead: false,
     force: false,
-    dryRun: false
+    dryRun: false,
+    workspace: false
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -86,6 +110,9 @@ function parseArgs(argv: string[]): CliOptions {
         break;
       case "--dry-run":
         options.dryRun = true;
+        break;
+      case "--workspace":
+        options.workspace = true;
         break;
       default:
         throw new Error(`Unknown option: ${arg}`);
@@ -128,6 +155,40 @@ async function pathExists(target: string) {
   }
 }
 
+function sourceUrlsFrom(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return Array.from(new Set(value.flatMap((entry) => {
+    const candidate = typeof entry === "string"
+      ? entry
+      : entry && typeof entry === "object" && typeof (entry as { url?: unknown }).url === "string"
+        ? String((entry as { url: string }).url)
+        : "";
+    try {
+      const url = new URL(candidate);
+      return url.protocol === "https:" ? [url.toString()] : [];
+    } catch {
+      return [];
+    }
+  })));
+}
+
+function imageFilename(key: string) {
+  const filename = key.split("/").pop()?.trim();
+  if (!filename || filename === "." || filename === "..") throw new Error(`Invalid database image key: ${key}`);
+  return filename;
+}
+
+async function mapWithConcurrency<T>(values: T[], concurrency: number, work: (value: T) => Promise<void>) {
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(concurrency, values.length) }, async () => {
+    while (true) {
+      const index = next++;
+      if (index >= values.length) return;
+      await work(values[index]);
+    }
+  }));
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const config = getGameCollectionConfigByWikiPath(options.game!, options.collection!);
@@ -144,7 +205,7 @@ async function main() {
   const { data, error } = await sb
     .from("wiki_collection_pages")
     .select(
-      "universe_id,wiki_slug,collection_slug,code,display_name,title,seo_title,meta_description,intro_md,description_md,how_it_works_md,description_json,faq_json,wiki_md,is_published,item_count"
+      "universe_id,wiki_slug,collection_slug,code,display_name,title,seo_title,meta_description,intro_md,description_md,how_it_works_md,description_json,faq_json,wiki_md,is_published,item_count,published_dataset_id,schema_ld_json,thumb_url,wiki_sort_order"
     )
     .eq("wiki_slug", options.game!)
     .eq("collection_slug", options.collection!)
@@ -168,26 +229,128 @@ async function main() {
     description_json: row.description_json ?? {},
     faq_json: row.faq_json ?? [],
     wiki_md: row.wiki_md ?? "",
+    wiki_sort_order: row.wiki_sort_order ?? config.sortOrder,
+    schema_ld_json: row.schema_ld_json ?? null,
+    thumb_url: row.thumb_url ?? null,
     is_published: row.is_published ?? true
   };
   const serialized = `${JSON.stringify(finalJson, null, 2)}\n`;
 
-  if (options.dryRun) {
+  if (options.dryRun && !options.workspace) {
     process.stdout.write(serialized);
     return;
   }
 
   const root = path.isAbsolute(options.outputRoot!) ? options.outputRoot! : repoPath(options.outputRoot!);
-  const target = path.join(root, options.collection!, "final.json");
-  if ((await pathExists(target)) && !options.force) {
-    throw new Error(`Refusing to overwrite existing file: ${target}. Pass --force only after reviewing it.`);
+  const workspace = path.join(root, options.collection!);
+  const target = path.join(workspace, "final.json");
+  if (!options.workspace) {
+    if ((await pathExists(target)) && !options.force) {
+      throw new Error(`Refusing to overwrite existing file: ${target}. Pass --force only after reviewing it.`);
+    }
+    await fs.mkdir(path.dirname(target), { recursive: true });
+    await fs.writeFile(target, serialized);
+    console.log(`Exported read-only page snapshot: ${target}`);
+    if (row.item_count && !finalJson.title.includes("{count}")) {
+      console.log("Warning: title did not contain the stored item count; review the title token before verification.");
+    }
+    return;
   }
-  await fs.mkdir(path.dirname(target), { recursive: true });
-  await fs.writeFile(target, serialized);
-  console.log(`Exported read-only page snapshot: ${target}`);
-  if (row.item_count && !finalJson.title.includes("{count}")) {
-    console.log("Warning: title did not contain the stored item count; review the title token before verification.");
+
+  if (!row.published_dataset_id) throw new Error(`${row.code} has no published dataset pointer.`);
+  const universeId = Number(row.universe_id);
+  if (!Number.isSafeInteger(universeId) || universeId <= 0) {
+    throw new Error(`${row.code} has an invalid universe_id.`);
   }
+  const { data: datasetData, error: datasetError } = await sb
+    .from("wiki_collection_datasets")
+    .select("id,schema_version,item_count,meta_json,source_manifest_json")
+    .eq("id", row.published_dataset_id)
+    .maybeSingle();
+  if (datasetError) throw new Error(`Failed to read collection dataset: ${datasetError.message}`);
+  if (!datasetData) throw new Error(`Published dataset ${row.published_dataset_id} is missing.`);
+  const dataset = datasetData as CollectionDatasetRow;
+  const { data: itemData, error: itemError } = await sb
+    .from("wiki_collection_items")
+    .select("item_slug,item_name,section,sort_order,image_key,fields_json")
+    .eq("dataset_id", dataset.id)
+    .order("sort_order")
+    .order("item_slug");
+  if (itemError) throw new Error(`Failed to read collection items: ${itemError.message}`);
+  const items = (itemData ?? []) as CollectionItemRow[];
+  if (items.length !== Number(dataset.item_count) || items.length !== Number(row.item_count)) {
+    throw new Error(`${row.code} item count mismatch: page=${row.item_count} dataset=${dataset.item_count} rows=${items.length}.`);
+  }
+
+  const sourceManifest = dataset.source_manifest_json ?? {};
+  const meta = dataset.meta_json ?? {};
+  const sourceUrls = Array.from(new Set([
+    ...sourceUrlsFrom(sourceManifest.sourceUrls),
+    ...sourceUrlsFrom(meta.sources),
+    ...sourceUrlsFrom(meta.sourceUrls)
+  ]));
+  if (!sourceUrls.length) {
+    console.error(`Warning: ${row.code} has no HTTPS source URLs in its published revision. Add verified sourceUrls to runtime-manifest.json before publishing a refresh.`);
+  }
+
+  const filenameOwners = new Map<string, string>();
+  const imageKeys = Array.from(new Set(items.flatMap((item) => item.image_key ? [item.image_key] : [])));
+  for (const key of imageKeys) {
+    const filename = imageFilename(key);
+    const owner = filenameOwners.get(filename);
+    if (owner && owner !== key) throw new Error(`Image filename collision in ${row.code}: ${owner} and ${key}`);
+    filenameOwners.set(filename, key);
+  }
+  const datasetDocument = {
+    meta: {
+      ...meta,
+      schemaVersion: dataset.schema_version ?? 2,
+      sources: sourceUrls
+    },
+    items: items.map((item) => ({
+      item: { name: item.item_name, ...(item.fields_json ?? {}) },
+      system: {
+        slug: item.item_slug,
+        section: item.section,
+        sortOrder: item.sort_order,
+        image: item.image_key ? imageFilename(item.image_key) : null
+      }
+    }))
+  };
+  const manifest = {
+    schemaVersion: 1,
+    game: { slug: row.wiki_slug, name: config.gameName, universeId },
+    collection: { slug: row.collection_slug, label: row.display_name ?? config.label, sortOrder: row.wiki_sort_order ?? config.sortOrder },
+    dataset: "dataset.json",
+    finalJson: "final.json",
+    mediaRoot: "media",
+    sourceUrls
+  };
+  const outputs = [target, path.join(workspace, "dataset.json"), path.join(workspace, "runtime-manifest.json")];
+  if (!options.force) {
+    const existing = [] as string[];
+    for (const output of outputs) if (await pathExists(output)) existing.push(output);
+    if (existing.length) throw new Error(`Refusing to overwrite existing workspace files: ${existing.join(", ")}. Pass --force after review.`);
+  }
+  if (options.dryRun) {
+    console.log(JSON.stringify({ code: row.code, itemCount: items.length, imageCount: imageKeys.length, sourceUrls, output: workspace }, null, 2));
+    return;
+  }
+
+  const mediaRoot = path.join(workspace, "media");
+  await fs.mkdir(mediaRoot, { recursive: true });
+  await mapWithConcurrency(imageKeys, 16, async (key) => {
+    const response = await fetch(`https://media.bloxodes.com/wiki/${key}`, { signal: AbortSignal.timeout(20_000) });
+    if (!response.ok) throw new Error(`Failed to export ${key}: HTTP ${response.status}`);
+    await fs.writeFile(path.join(mediaRoot, imageFilename(key)), Buffer.from(await response.arrayBuffer()));
+  });
+  await Promise.all([
+    fs.writeFile(target, serialized),
+    fs.writeFile(path.join(workspace, "dataset.json"), `${JSON.stringify(datasetDocument, null, 2)}\n`),
+    fs.writeFile(path.join(workspace, "runtime-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`)
+  ]);
+  console.log(`Exported database-backed authoring workspace: ${workspace}`);
+  console.log(`Rows: ${items.length}; media: ${imageKeys.length}; sources: ${sourceUrls.length}`);
 }
 
 main().catch((error) => {

@@ -1,18 +1,10 @@
 import "../shared/load-env";
-import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { promisify } from "node:util";
 import sharp from "sharp";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { repoPath } from "@/lib/paths";
-import {
-  GAME_COLLECTION_GROUPS,
-  GAME_COLLECTIONS,
-  type GameCollectionConfig,
-  type GameCollectionGroup
-} from "@/lib/game-collections";
+import { type GameCollectionConfig } from "@/lib/game-collections";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
 
@@ -90,17 +82,12 @@ const apply = flags.has("--apply");
 const publish = flags.has("--publish");
 const uploadMedia = flags.has("--upload-media");
 const allowProd = flags.has("--allow-prod");
-const existingPublishedPagesOnly = flags.has("--existing-published-pages-only");
 const normalizeLegacyMedia = flags.has("--normalize-legacy-media");
-const gameFilters = collectValues("--game");
-const collectionFilters = collectValues("--collection");
-const publicRoot = path.resolve(collectValue("--public-root") || repoPath("apps", "web", "public"));
 const outputPath = collectValue("--output");
 const manifestPaths = collectValues("--manifest", false).map((value) => path.resolve(value));
 const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const MAX_IMAGE_BYTES = 1_000_000;
 const MAX_IMAGE_DIMENSION = 960;
-const execFileAsync = promisify(execFile);
 
 function collectValues(name: string, normalize = true) {
   const values: string[] = [];
@@ -207,13 +194,7 @@ async function readSourceBytes(source: {
   source_url: string | null;
 }) {
   if (source.source_path) return fs.readFile(source.source_path);
-  if (source.source_git_path) {
-    const result = await execFileAsync("git", ["show", `HEAD:${source.source_git_path}`], {
-      encoding: "buffer",
-      maxBuffer: 20_000_000
-    });
-    return Buffer.from(result.stdout);
-  }
+  if (source.source_git_path) throw new Error("Repository image fallback is retired; use workspace media.");
   if (source.source_url) {
     const response = await fetch(source.source_url, { redirect: "follow" });
     if (!response.ok) throw new Error(`Could not fetch collection image ${source.source_url}: ${response.status}`);
@@ -268,8 +249,10 @@ async function prepareImageBytes(original: Buffer) {
 }
 
 async function targetSources(): Promise<CollectionSource[]> {
-  if (manifestPaths.length) {
-    return Promise.all(manifestPaths.map(async (manifestPath) => {
+  if (!manifestPaths.length) {
+    throw new Error("Repository collection datasets are retired. Pass one or more --manifest paths from a content workspace.");
+  }
+  return Promise.all(manifestPaths.map(async (manifestPath) => {
       const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8")) as RuntimeManifest;
       if (manifest.schemaVersion !== 1 || !manifest.game?.slug || !manifest.collection?.slug) {
         throw new Error(`Invalid wiki collection runtime manifest: ${manifestPath}`);
@@ -328,68 +311,6 @@ async function targetSources(): Promise<CollectionSource[]> {
         allowRemoteImages: false
       };
     }));
-  }
-
-  const selectedConfigs = GAME_COLLECTIONS.filter(
-    (config) =>
-      (!gameFilters.length || gameFilters.includes(config.gameSlug)) &&
-      (!collectionFilters.length || collectionFilters.includes(config.slug))
-  );
-  const universeIdsByCode = new Map<string, number>();
-  const codesNeedingLookup = selectedConfigs
-    .filter((config) => !GAME_COLLECTION_GROUPS.find((group) => group.gameSlug === config.gameSlug)?.universeId)
-    .map((config) => config.code);
-  for (let index = 0; index < codesNeedingLookup.length; index += 100) {
-    const pages = await supabaseAdmin()
-      .from("wiki_collection_pages")
-      .select("code, universe_id")
-      .in("code", codesNeedingLookup.slice(index, index + 100));
-    if (pages.error) throw pages.error;
-    for (const page of pages.data ?? []) {
-      const universeId = Number(page.universe_id);
-      if (Number.isSafeInteger(universeId) && universeId > 0) {
-        universeIdsByCode.set(String(page.code), universeId);
-      }
-    }
-  }
-
-  let sources = selectedConfigs.map((config) => {
-    const group = GAME_COLLECTION_GROUPS.find(
-      (candidate) => candidate.gameSlug === config.gameSlug
-    ) as GameCollectionGroup | undefined;
-    const universeId = group?.universeId ?? universeIdsByCode.get(config.code);
-    if (!universeId) {
-      throw new Error(`${config.code} has no universeId in its collection group or target database page.`);
-    }
-    return {
-      config,
-      universeId,
-      datasetPath: repoPath("data", config.dataDir, config.file),
-      mediaRoot: publicRoot,
-      finalJsonPath: null,
-      manifestPath: null,
-      sourceUrls: [],
-      allowGitFallback: true,
-      allowRemoteImages: true
-    };
-  });
-  if (existingPublishedPagesOnly) {
-    if (manifestPaths.length) throw new Error("--existing-published-pages-only cannot be combined with --manifest.");
-    const pages = await supabaseAdmin()
-      .from("wiki_collection_pages")
-      .select("code")
-      .eq("is_published", true);
-    if (pages.error) throw pages.error;
-    const codes = new Set((pages.data || []).map((page) => String(page.code)));
-    const skipped = sources.filter((source) => !codes.has(source.config.code)).map((source) => source.config.code);
-    sources = sources.filter((source) => codes.has(source.config.code));
-    if (skipped.length) {
-      const sample = skipped.slice(0, 20).join(", ");
-      const remainder = skipped.length > 20 ? `, and ${skipped.length - 20} more` : "";
-      console.error(`Skipping ${skipped.length} registered collections without published target rows: ${sample}${remainder}`);
-    }
-  }
-  return sources;
 }
 
 async function planCollection(source: CollectionSource): Promise<CollectionPlan> {

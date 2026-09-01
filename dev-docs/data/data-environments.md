@@ -31,7 +31,7 @@ Evidence: env target inspection, database-only wiki/quiz runtime audit, managed-
 
 ## Local Datasets
 
-`data/` and `apps/web/src/data/` are committed source files, not env targets. Some still power explicitly documented catalog/tool/error/dictionary routes. Game-collection JSON and `quiz.json` files are retained migration/authoring inputs only: all public wiki collection and quiz runtimes read Supabase, and collection media resolves from immutable R2 keys. Follow `data/AGENTS.md` for the remaining file ownership.
+`data/` and `apps/web/src/data/` are committed source files, not env targets. They power only the explicitly documented catalog/tool/error/dictionary routes. Existing game-collection JSON and `quiz.json` files are inert archives pending explicit deletion approval: all wiki collection and quiz runtime data lives in Supabase, collection media resolves from immutable R2 keys, and temporary collection authoring happens under ignored `tmp/content-workspace/`. Follow `data/AGENTS.md` for the remaining file ownership.
 
 Machine-consumed inputs should live under `data/` or a pipeline-specific input folder. Do not add new executable inputs to rough `docs/` notes.
 

@@ -1,7 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { GAME_COLLECTIONS } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
 
 type Options = {
@@ -9,6 +8,7 @@ type Options = {
   requireNoLegacyOverrides: boolean;
   game: string | null;
   collection: string | null;
+  file: string | null;
 };
 
 type DatasetDocument = {
@@ -95,11 +95,12 @@ const FORBIDDEN_RENDER_LABELS = [
 
 function usage() {
   console.log(`Usage:
-  npm run audit:game-collection-datasets:v2
+  npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <slug> --file <dataset.json>
 
 Options:
-  --game <game-slug>       Limit to one registered game.
-  --collection <slug>      Limit to one collection slug. Requires --game.
+  --game <game-slug>       Workspace game slug (required).
+  --collection <slug>      Workspace collection slug (required).
+  --file <dataset.json>    Explicit content-workspace dataset (required).
   --allow-legacy-overrides Do not fail when the old generic override map is still present.
   --json                   Print machine-readable output.
   -h, --help               Show this help.
@@ -111,7 +112,8 @@ function parseArgs(argv: string[]): Options {
     json: false,
     requireNoLegacyOverrides: true,
     game: null,
-    collection: null
+    collection: null,
+    file: null
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -135,13 +137,17 @@ function parseArgs(argv: string[]): Options {
       case "--collection-slug":
         options.collection = requireValue(argv, ++i, arg).toLowerCase();
         break;
+      case "--file":
+      case "--dataset":
+        options.file = requireValue(argv, ++i, arg);
+        break;
       default:
         throw new Error(`Unknown option: ${arg}`);
     }
   }
 
-  if (options.collection && !options.game) {
-    throw new Error("--collection requires --game.");
+  if (!options.game || !options.collection || !options.file) {
+    throw new Error("--game, --collection, and --file are required; repository collection datasets are retired.");
   }
 
   return options;
@@ -326,31 +332,22 @@ function auditDataset(code: string, datasetPath: string, document: DatasetDocume
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const issues: Issue[] = [];
-  const configs = GAME_COLLECTIONS.filter((config) => {
-    if (options.game && config.gameSlug !== options.game) return false;
-    if (options.collection && config.slug !== options.collection) return false;
-    return true;
-  });
-
-  if (!configs.length) throw new Error("No registered game collections matched the filters.");
-
-  for (const config of configs) {
-    const datasetPath = repoPath("data", config.dataDir, config.file);
-    try {
-      const document = await readDataset(datasetPath);
-      auditDataset(config.code, datasetPath, document, issues);
-    } catch (error) {
-      addIssue(issues, config.code, datasetPath, error instanceof Error ? error.message : String(error));
-    }
+  const code = `${options.game}-${options.collection}`;
+  const datasetPath = path.resolve(options.file!);
+  try {
+    const document = await readDataset(datasetPath);
+    auditDataset(code, datasetPath, document, issues);
+  } catch (error) {
+    addIssue(issues, code, datasetPath, error instanceof Error ? error.message : String(error));
   }
 
   await auditLegacyOverrideMap(issues, options);
 
   if (options.json) {
-    console.log(JSON.stringify({ checked: configs.length, issues }, null, 2));
+    console.log(JSON.stringify({ checked: 1, issues }, null, 2));
   } else {
     console.log("Game collection v2 audit");
-    console.log(`Checked ${configs.length} registered collection dataset(s).`);
+    console.log("Checked 1 content-workspace collection dataset.");
     console.log(`Issues: ${issues.length}`);
     for (const issue of issues) {
       console.log(`${issue.level === "error" ? "ERROR" : "WARN"} ${issue.code} (${path.relative(process.cwd(), issue.datasetPath)}): ${issue.message}`);

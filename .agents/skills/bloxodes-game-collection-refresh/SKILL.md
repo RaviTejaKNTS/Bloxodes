@@ -20,10 +20,10 @@ Run a bounded maintenance pass on collections that already exist. The normal suc
 Work only on registered, existing game collections and their existing `/wiki/<game-slug>/<collection-slug>` pages.
 
 - Use `GAME_COLLECTIONS` in `apps/web/src/lib/game-collections` as the inventory.
-- A collection is eligible only when its registered dataset already exists. If its page or dataset is missing, report it as blocked; do not create a page or register a new collection.
+- A collection is eligible only when its published database dataset exists. Export that revision to an ignored content workspace before comparing sources. If its page or dataset pointer is missing, report it as blocked; do not create a page or register a new collection.
 - A collection selector resolves one registered collection. A game selector checks that game's registered collections. With no selector, check all registered collections using the same quick gate.
 - Do not scan unregistered files, classify collection candidates, run `bloxodes-game-collection-suggestions`, or return new collection recommendations.
-- If `plan:game-collection-refresh` is used for selector resolution or a resumable run, process only records with `registered: true` and discard candidate records. Do not make a manifest a prerequisite for a small targeted refresh.
+- Use `GAME_COLLECTIONS` only to resolve registered routes. The explicit workspace runtime manifest is required for every refresh that changes data.
 - Keep editorial slugs separate from `roblox_universes.slug`.
 - Never publish, push, seed production, or invoke a release skill.
 
@@ -31,7 +31,7 @@ Work only on registered, existing game collections and their existing `/wiki/<ga
 
 For each selected collection, do this before starting any data, image, or writing pass:
 
-1. Read the local v2 dataset and record a small baseline: dataset path, item count, stable item names/slugs, sections, public fields, image coverage, and the existing page path/row when available.
+1. Export the current database revision with `npm run export:game-collection-workspace -- --game <game-slug> --collection <collection-slug> --output-root tmp/content-workspace/<game-slug>/collections`, then record its item count, stable item names/slugs, sections, public fields, image coverage, and page identity.
 2. Check the strongest existing or known source for that exact collection and its recent update signal. Use the existing collection brief or source links first. This is a bounded source check, not broad web research or competitor analysis.
 3. Compare the source roster and player-facing fields with the local dataset by stable slug/name. Treat only source-backed additions, removals, renames, changed values/mechanics, section/order changes, or a newly verified exact item image as a real delta.
 4. Do not treat a changed source timestamp, rewritten source wording, a different URL, or a weak/unconfirmed claim as a delta.
@@ -59,18 +59,18 @@ When the quick check is positive:
 
 Use `bloxodes-game-collection-images` only for new/changed rows or existing image gaps. Do not recollect a complete image set when current images are already acceptable.
 
-- Save exact item images under the expected public path and wire them to `items[].system.image`.
+- Save exact item images under `<workspace>/media/` and wire their filenames to `items[].system.image`.
 - Do not use logos, page screenshots, edited thumbnails, generic game art, or unrelated substitutes.
 - A missing image is acceptable only when the image pass records the exact item, source attempts, and reason.
 - Run the image-required checker when the collection requires images or image fields changed:
 
 ```bash
-npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --require-images
+npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json --require-images
 ```
 
 ## Page handling
 
-The local dataset is what the collection route renders. For a data/image-only refresh:
+The exported workspace is an authoring snapshot; the collection route continues to render only the published database revision. For a data/image-only refresh:
 
 - Do not rewrite `final.json`, page prose, FAQs, headings, or `description_json` by default.
 - If a verified change makes existing page copy inaccurate, stop and report the exact field or passage for a separate writing pass; do not expand this quick workflow into full page writing.
@@ -82,8 +82,8 @@ The local dataset is what the collection route renders. For a data/image-only re
 Run the narrowest applicable checks only for collections that changed:
 
 ```bash
-npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>
-npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug>
+npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
+npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
 ```
 
 Add `--require-images` when the collection requires complete image coverage. For an unchanged collection, record the quick-check evidence and do not run the full write/seed/preview workflow.

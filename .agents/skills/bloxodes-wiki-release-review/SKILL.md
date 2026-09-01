@@ -24,8 +24,7 @@ Do not publish collection-only work. Require the actual wiki `final.json` and at
 4. For each eligible game, confirm the reviewed authoring inputs and runtime code from:
 - `tmp/content-workspace/<game-slug>/wiki/<game-slug>/final.json`
 - `tmp/content-workspace/<game-slug>/collections/*/final.json`
-- `data/<Game Data Dir>/` (authoring input; never a runtime deploy dependency)
-- `apps/web/public/<Game Name>/` (media staging input; never a runtime deploy dependency)
+- `tmp/content-workspace/<game-slug>/collections/*/{dataset.json,media,runtime-manifest.json}` (ignored authoring input; never a runtime deploy dependency)
 - `apps/web/src/lib/game-collections/games/<game-slug>.ts`
 - shared renderer/config files changed for that game
 5. Treat the user's explicit per-game release approval as confirmation that the normal verifier, dataset validation, HTML-size gate, pagination checks when applicable, and Browser preview already passed. Do not search for separate proof or tracker state.
@@ -90,7 +89,7 @@ After deploy is live, publish approved games one game at a time.
 
 ```bash
 BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>
-BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-collection-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections
+BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=cloudflare NODE_ENV=production npm run sync:game-collection-runtime -- --manifest tmp/content-workspace/<game-slug>/collections/<collection-slug>/runtime-manifest.json
 ```
 
 4. Seed production in order:
@@ -100,20 +99,14 @@ BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-wi
 ```
 
 5. Read back the production wiki row.
-6. Seed collections:
+6. Publish each approved collection page, immutable dataset, and media from its exact workspace manifest:
 
 ```bash
-BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-collection-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --allow-prod
+BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=cloudflare NODE_ENV=production npm run sync:game-collection-runtime -- --manifest tmp/content-workspace/<game-slug>/collections/<collection-slug>/runtime-manifest.json --upload-media --apply --publish --allow-prod
 ```
 
-7. Publish the immutable collection data and media runtime revision:
-
-```bash
-BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=cloudflare NODE_ENV=production npm run sync:game-collection-runtime -- --game <game-slug> --normalize-legacy-media --upload-media --apply --publish --allow-prod
-```
-
-8. Read back every production collection row, `published_dataset_id`, dataset hash/count, actual item count, and representative R2 media object.
-9. Verify live URLs:
+7. Read back every production collection row, `published_dataset_id`, dataset hash/count, actual item count, and representative R2 media object.
+8. Verify live URLs:
 - `/wiki/<game-slug>`
 - every `/wiki/<game-slug>/<collection-slug>`
 - representative images/assets

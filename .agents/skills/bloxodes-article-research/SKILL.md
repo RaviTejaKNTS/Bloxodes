@@ -98,7 +98,7 @@ When the approved idea is a tier-list article, add a dedicated readiness pass:
 1. Define one ranking scope and the criteria that matter inside it. Do not mix PvP, PvE, beginner value, and endgame value without explaining how they are weighted.
 2. Build the complete expected item inventory before assigning tiers.
 3. Record placement evidence, disagreements, update/version boundaries, and uncertain items. A community consensus may inform a placement but does not replace exact game facts.
-4. Check `data/<Game>/` and `apps/web/public/<Game>/` for canonical existing item rows and images. Record the exact public image path for every expected item, then plan source-image searches for gaps.
+4. Check the published collection database pages and existing hosted/public media for canonical item rows and images. Export an ignored collection workspace when row-level inspection is needed; do not read repository game datasets. Record the exact usable image URL for every expected item, then plan source-image searches for gaps.
 5. Mark the brief blocked if important item coverage or placement evidence is weak. Image gaps continue into the mandatory image pass; text/table fallback is allowed only after the parent accepts those targets as missing.
 
 Add this to `brief.md` for tier-list work:

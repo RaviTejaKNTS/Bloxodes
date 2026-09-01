@@ -1,18 +1,18 @@
 ---
 name: bloxodes-game-collection-data
-description: Prepare source-backed data for one approved Bloxodes game collection after brief approval. Use for local dataset rows, item counts, useful card fields, section grouping, missing item checks, image field planning, and route assumptions before the image pass and collection writing. Do not write final.json.
+description: Prepare source-backed data for one approved Bloxodes game collection in an ignored content workspace after brief approval. Use for dataset rows, item counts, useful card fields, section grouping, missing item checks, image field planning, and route assumptions before the image pass and collection writing. Do not write final.json.
 ---
 
 # Bloxodes Game Collection Data
 
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Write and edit all files directly using the Write and Edit tools.**
 
-Use this after `brief.md` is approved. Prepare the local authoring/migration data for one game collection. The public application never reads this file; the parent verifier must publish an immutable database revision before preview. Do not gather images here; plan the image field and leave image collection for `bloxodes-game-collection-images`.
+Use this after `brief.md` is approved. Prepare one game collection under `tmp/content-workspace/<game-slug>/collections/<collection-slug>/`. Repository collection datasets are retired; the parent verifier publishes the workspace as an immutable database revision before preview. Do not gather images here; plan the image field and leave image collection for `bloxodes-game-collection-images`.
 
 ## Work
 
 1. Read the approved `brief.md`.
-2. Inspect or create the local dataset under `data/<Game>/`.
+2. Inspect or create `dataset.json` beside `brief.md` in the collection workspace. For an existing collection, first export its current database revision with `npm run export:game-collection-workspace -- --game <game-slug> --collection <collection-slug> --output-root tmp/content-workspace/<game-slug>/collections`.
 3. Check that item rows match the source-backed scope.
 4. Add useful fields players can compare. Do not add raw source clutter.
 5. Use the v2 wrapped dataset shape `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`. Do not create bare array datasets.
@@ -39,11 +39,11 @@ If the dry run looks right and the game group already exists, run it again witho
 19. Audit and check the dataset:
 
 ```bash
-npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>
-npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug>
+npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
+npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
 ```
 
-Use `--file <dataset.json>` if the collection is not registered yet. Do not use `--require-images` here; the image skill owns that check.
+Every collection workspace must also contain `runtime-manifest.json`; never move the dataset into `data/`. Do not use `--require-images` here; the image skill owns that check.
 
 20. Update `brief.md` with data status and gaps from the checker.
 
