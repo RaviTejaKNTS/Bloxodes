@@ -40,7 +40,7 @@ if [[ -n "$(git -C "$repo_root" status --porcelain)" ]]; then
   echo "Homelab checkout is dirty; refusing to synchronize." >&2
   exit 1
 fi
-for service in bloxodes-article-discovery.service bloxodes-article-writer.service; do
+for service in bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-wiki-builder.service; do
   if systemctl is-active --quiet "$service"; then
     echo "$service is active; retry after the current article run finishes." >&2
     exit 1
@@ -72,10 +72,10 @@ if [[ "$old_lock_hash" != "$new_lock_hash" ]]; then
   npm --prefix "$repo_root" ci
 fi
 
-for unit in bloxodes-article-discovery.service bloxodes-article-writer.service; do
+for unit in bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-wiki-builder.service bloxodes-wiki-builder.timer; do
   if ! cmp -s "$repo_root/scripts/ops/systemd/$unit" "/etc/systemd/system/$unit"; then
     echo "Installed $unit differs from the approved checkout." >&2
-    echo "Run scripts/ops/install-homelab-article-automation.sh as root with the same approved SHA." >&2
+    echo "Run the matching homelab automation installer as root with the same approved SHA." >&2
     exit 1
   fi
 done

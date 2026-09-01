@@ -23,7 +23,7 @@ env/                         # committed contracts only
   secrets/google-indexing-service-account.json
 ```
 
-Real secrets are never committed. `env/examples/` is the variable-name and safe-default contract. Deployed production values remain in GitHub Actions secrets/variables, Dokploy runtime/build configuration, the VPS worker env file, the Supabase self-hosted env, or `/etc/bloxodes/article-automation.env` on the homelab.
+Real secrets are never committed. `env/examples/` is the variable-name and safe-default contract. Deployed production values remain in GitHub Actions secrets/variables, Dokploy runtime/build configuration, the VPS worker env file, the Supabase self-hosted env, or the protected article/wiki automation env files under `/etc/bloxodes/` on the homelab.
 
 ## Profiles
 
@@ -79,7 +79,7 @@ Do not create a pipeline env file merely for symmetry. Codes, catalog, stats, an
 
 The Codex template runs `scripts/dev/setup-worktree.sh`. New worktrees link the single ignored `.envs/` directory from the main checkout rather than linking many ambiguous root `.env*` files. Existing files are never overwritten. The `.envs` path itself and its contents are both ignored so a worktree symlink cannot appear in a commit.
 
-The homelab checkout mirrors the complete private `.envs/` profile tree for feature, content, and operator work. Host-specific executable paths may differ between the Mac and Linux checkouts; the homelab systemd jobs continue to use the separate protected `/etc/bloxodes/article-automation.env` runtime file.
+The homelab checkout mirrors the complete private `.envs/` profile tree for feature, content, and operator work. Host-specific executable paths may differ between the Mac and Linux checkouts; systemd jobs use separate protected `/etc/bloxodes/article-automation.env` and `/etc/bloxodes/wiki-automation.env` runtime files. The wiki model child receives only managed-development and shared-media values.
 
 ## External Runtime Contracts
 

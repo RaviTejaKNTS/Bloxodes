@@ -35,6 +35,14 @@ These collections describe one game's durable systems and items—pets, weapons,
 
 Use the matching wiki and game-collection workflow skills. For existing datasets, `bloxodes-game-collection-refresh` is the maintenance path for one collection, one game, or the registered collection set.
 
+## Scheduled Top-100 Automation
+
+- The homelab daily runner reads the exact production top 100 from `/api/stats/games`, excludes production wiki coverage and every durable queue result, and enqueues the highest-ranked remaining universe in managed development.
+- One restricted Codex process runs collection suggestions, parent approval, each approved collection workflow, and the wiki workflow. It must produce a verified hub and at least one source-complete collection; otherwise the queue row is recorded as blocked rather than padded with guessed data.
+- All authoring artifacts stay under ignored `tmp/wiki-automation/<queue-id>/`. Runtime publication uses explicit manifests with `sync-game-collection-runtime.ts` and `sync-game-wiki-runtime.ts`; no collection dataset or quiz payload is registered in code.
+- The scheduled service uploads shared R2 media and publishes only to managed development, then records `managed_dev_ready`. Production release remains a separate reviewed operation.
+- The wiki and article agents share one host lock. The daily wiki timer is persistent, and readiness retries transient managed-development, R2, and public API failures before failing the unit.
+
 ## Images and Renderer Readiness
 
 Collection image manifests are authoring inputs. Runtime item media is stored by immutable R2 object key in `wiki_collection_items` and served through the wiki-media worker. A collection is not ready merely because its copy exists: every item count, media key, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.

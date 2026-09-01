@@ -2,10 +2,9 @@ import "../shared/load-env";
 
 import { spawn } from "node:child_process";
 import { constants as fsConstants } from "node:fs";
-import { access, mkdir, open, readFile, unlink, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { randomUUID } from "node:crypto";
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
@@ -15,6 +14,7 @@ import {
   resolveArticleDevCredentials,
   supabaseTarget
 } from "./article-queue-env";
+import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 
 type Options = {
   apply: boolean;
@@ -165,51 +165,10 @@ function parseArgs(argv: string[]): Options {
   return options;
 }
 
-function isProcessAlive(pid: number): boolean {
-  if (!Number.isInteger(pid) || pid <= 0) return false;
-  try {
-    process.kill(pid, 0);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 async function acquireWriterLock(worktree: string): Promise<() => Promise<void>> {
-  const lockDir = path.join(worktree, "tmp", "article-writer");
-  const lockPath = path.join(lockDir, "writer.lock");
-  const token = randomUUID();
-  await mkdir(lockDir, { recursive: true });
-
-  for (let attempt = 0; attempt < 2; attempt += 1) {
-    try {
-      const handle = await open(lockPath, "wx");
-      await handle.writeFile(JSON.stringify({ pid: process.pid, token, started_at: new Date().toISOString() }));
-      await handle.close();
-      return async () => {
-        try {
-          const current = JSON.parse(await readFile(lockPath, "utf8")) as { token?: unknown };
-          if (current.token === token) await unlink(lockPath);
-        } catch (error) {
-          if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
-        }
-      };
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
-      let existingPid = 0;
-      try {
-        const existing = JSON.parse(await readFile(lockPath, "utf8")) as { pid?: unknown };
-        existingPid = typeof existing.pid === "number" ? existing.pid : 0;
-      } catch {
-        // A malformed lock is stale unless another live PID can be established.
-      }
-      if (isProcessAlive(existingPid)) {
-        throw new Error(`Another homelab article writer is already running with PID ${existingPid}.`);
-      }
-      await unlink(lockPath);
-    }
-  }
-  throw new Error("Could not acquire the homelab article writer lock.");
+  const release = await acquireAgentWorkLock(worktree, "article-single");
+  if (!release) throw new Error("Another article or wiki agent workflow is already running.");
+  return release;
 }
 
 async function assertDevWorkspace(options: Options): Promise<{ url: string; serviceRole: string }> {
