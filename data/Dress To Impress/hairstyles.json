@@ -1,0 +1,4307 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "hairstyles",
+    "route": "/wiki/dress-to-impress/hairstyles",
+    "catalogCode": "dress-to-impress-hairstyles",
+    "itemFields": [
+      "category",
+      "hairArea",
+      "unlockRoute",
+      "toggles",
+      "availability",
+      "price",
+      "bodyFit",
+      "sourceUpdate"
+    ],
+    "columns": [
+      "category",
+      "hairArea",
+      "unlockRoute",
+      "toggles",
+      "availability",
+      "price",
+      "bodyFit",
+      "sourceUpdate"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Feminine salon hairstyles",
+        "Masculine salon hairstyles",
+        "Bangs",
+        "Reward hairstyles",
+        "Shop and paid set hairstyles",
+        "Code-origin hairstyles"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "hairArea",
+        "unlockRoute",
+        "toggles",
+        "availability",
+        "price"
+      ],
+      "tableFields": [
+        "category",
+        "hairArea",
+        "unlockRoute",
+        "toggles",
+        "availability",
+        "price",
+        "bodyFit",
+        "sourceUpdate"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Feminine Hair 001",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Metals",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-001",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 1,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-001.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 002",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-002",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 2,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-002.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 003",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-003",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 3,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-003.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 004",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x KATSEYE"
+      },
+      "system": {
+        "slug": "feminine-hair-004",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 4,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-004.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 005",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x KATSEYE"
+      },
+      "system": {
+        "slug": "feminine-hair-005",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 5,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-005.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 006",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x KATSEYE"
+      },
+      "system": {
+        "slug": "feminine-hair-006",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 6,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-006.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 007",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x KATSEYE"
+      },
+      "system": {
+        "slug": "feminine-hair-007",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 7,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-007.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 008",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x KATSEYE"
+      },
+      "system": {
+        "slug": "feminine-hair-008",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 8,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-008.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 009",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x KATSEYE"
+      },
+      "system": {
+        "slug": "feminine-hair-009",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 9,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-009.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 010",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-010",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 10,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-010.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 011",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Buns; Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-011",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 11,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-011.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 012",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-012",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 12,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-012.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 013",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-013",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 13,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-013.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 014",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Front",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-014",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 14,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-014.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 015",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-015",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 15,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-015.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 016",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-016",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 16,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-016.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 017",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Only Bangs; Bangs (Less Strands)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-017",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 17,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-017.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 018",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-018",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 18,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-018.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 019",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-019",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 19,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-019.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 020",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2026 (Trip to Tokyo)"
+      },
+      "system": {
+        "slug": "feminine-hair-020",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 20,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-020.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 021",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Front Strands; No Animation; No Back; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Lunar New Year 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-021",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 21,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-021.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 022",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Animation; No Back; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Lunar New Year 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-022",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 22,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-022.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 023",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Flowers",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-023",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 23,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-023.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 024",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-024",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 24,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-024.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 025",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Smaller; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-025",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 25,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-025.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 026",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-026",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 26,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-026.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 027",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Long; Short",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-027",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 27,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-027.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 028",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Only Cap",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-028",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 28,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-028.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 029",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-029",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 29,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-029.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 030",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Black History Month 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-030",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 30,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-030.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 031",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Animated",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-031",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 31,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-031.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 032",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Front Piece; Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-032",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 32,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-032.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 033",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-033",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 33,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-033.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 034",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-034",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 34,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-034.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 035",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-035",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 35,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-035.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 036",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (Left); 2 (Right)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-036",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 36,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-036.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 037",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-037",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 37,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-037.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 038",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during New Year's 2026"
+      },
+      "system": {
+        "slug": "feminine-hair-038",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 38,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-038.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 039",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (Default); 2 (Only Buns)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-039",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 39,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-039.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 040",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (Default); 2 (Only Braids)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-040",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 40,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-040.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 041",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (Default); 2 (Only Braids)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-041",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 41,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-041.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 042",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-042",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 42,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-042.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 043",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-043",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 43,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-043.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 044",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-044",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 44,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-044.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 045",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-045",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 45,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-045.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 046",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-046",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 46,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-046.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 047",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-047",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 47,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-047.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 048",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-048",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 48,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-048.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 049",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-049",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 49,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-049.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 050",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-050",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 50,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-050.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 051",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-051",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 51,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-051.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 052",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-052",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 52,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-052.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 053",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-053",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 53,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-053.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 054",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Left Bangs; Right Bangs; Side Front Piece; Only Bangs; Only Left Bangs; Only Right Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-054",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 54,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-054.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 055",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Swept; Loose",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Wicked: For Good"
+      },
+      "system": {
+        "slug": "feminine-hair-055",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 55,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-055.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 056",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-056",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 56,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-056.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 057",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Side Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-057",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 57,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-057.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 058",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Horns; Bangs; Only Horns & Bangs; Only Bangs; Only Horns",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-058",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 58,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-058.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 059",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; Less Braids; Edges",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-059",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 59,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-059.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 060",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-060",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 60,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-060.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 061",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-061",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 61,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-061.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 062",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-062",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 62,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-062.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 063",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Messy; Bangs; Tidy; Messy Bangs; Tidy Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-063",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 63,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-063.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 064",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-064",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 64,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-064.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 065",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-065",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 65,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-065.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 066",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-066",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 66,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-066.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 067",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-067",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 67,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-067.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 068",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Runway Chaos"
+      },
+      "system": {
+        "slug": "feminine-hair-068",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 68,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-068.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 069",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (Tight Strands); 2 (Loose Strands)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-069",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 69,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-069.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 070",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-070",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 70,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-070.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 071",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Hat; Only Hat",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-071",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 71,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-071.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 072",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-072",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 72,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-072.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 073",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-073",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 73,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-073.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 074",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-074",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 74,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-074.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 075",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "Default; No Meat; Only Meat",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-075",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 75,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-075.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 076",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-076",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 76,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-076.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 077",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-077",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 77,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-077.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 078",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Lady Gaga"
+      },
+      "system": {
+        "slug": "feminine-hair-078",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 78,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-078.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 079",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-079",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 79,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-079.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 080",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-080",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 80,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-080.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 081",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-081",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 81,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-081.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 082",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-082",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 82,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-082.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 083",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-083",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 83,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-083.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 084",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-084",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 84,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-084.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 085",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-085",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 85,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-085.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 086",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-086",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 86,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-086.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 087",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-087",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 87,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-087.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 088",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-088",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 88,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-088.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 089",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-089",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 89,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-089.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 090",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-090",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 90,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-090.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 091",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-091",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 91,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-091.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 092",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-092",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 92,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-092.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 093",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during World Day for Cultural Diversity 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-093",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 93,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-093.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 094",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-094",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 94,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-094.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 095",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-095",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 95,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-095.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 096",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-096",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 96,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-096.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 097",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-097",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 97,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-097.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 098",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-098",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 98,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-098.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 099",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-099",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 99,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-099.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 100",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-100",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 100,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-100.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 101",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-101",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 101,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-101.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 102",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-102",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 102,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-102.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 103",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-103",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 103,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-103.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 104",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-104",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 104,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-104.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 105",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2025 (Petal Update)"
+      },
+      "system": {
+        "slug": "feminine-hair-105",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 105,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-105.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 106",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-106",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 106,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-106.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 107",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-107",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 107,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-107.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 108",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-108",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 108,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-108.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 109",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-109",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 109,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-109.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 110",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-110",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 110,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-110.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 111",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-111",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 111,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-111.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 112",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-112",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 112,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-112.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 113",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-113",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 113,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-113.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 114",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-114",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 114,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-114.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 115",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-115",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 115,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-115.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 116",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-116",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 116,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-116.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 117",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "feminine-hair-117",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 117,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-117.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 118",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-118",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 118,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-118.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 119",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-119",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 119,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-119.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 120",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-120",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 120,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-120.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 121",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-121",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 121,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-121.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 122",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-122",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 122,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-122.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 123",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-123",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 123,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-123.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 124",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-124",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 124,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-124.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 125",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-125",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 125,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-125.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 126",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-126",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 126,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-126.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 127",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-127",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 127,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-127.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 128",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-128",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 128,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-128.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 129",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-129",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 129,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-129.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 130",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-130",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 130,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-130.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 131",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-131",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 131,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-131.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 132",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-132",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 132,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-132.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 133",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-133",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 133,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-133.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 134",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-134",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 134,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-134.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 135",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-135",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 135,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-135.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 136",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-136",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 136,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-136.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 137",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-137",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 137,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-137.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 138",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-138",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 138,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-138.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 139",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-139",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 139,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-139.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 140",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-140",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 140,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-140.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 141",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-141",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 141,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-141.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 142",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-142",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 142,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-142.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 143",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-143",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 143,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-143.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 144",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-144",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 144,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-144.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 145",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-145",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 145,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-145.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 146",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-146",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 146,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-146.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 147",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-147",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 147,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-147.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 148",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-148",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 148,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-148.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 149",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-149",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 149,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-149.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 150",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-150",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 150,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-150.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 151",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-151",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 151,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-151.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 152",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-152",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 152,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-152.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 153",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-153",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 153,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-153.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 154",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-154",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 154,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-154.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 155",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-155",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 155,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-155.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 156",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-156",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 156,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-156.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 157",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-157",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 157,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-157.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 158",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-158",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 158,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-158.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 159",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-159",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 159,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-159.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 160",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-160",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 160,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-160.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 161",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-161",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 161,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-161.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 162",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-162",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 162,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-162.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 163",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-163",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 163,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-163.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 164",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-164",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 164,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-164.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 165",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-165",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 165,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-165.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 166",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-166",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 166,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-166.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 167",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-167",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 167,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-167.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 168",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-168",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 168,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-168.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 169",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during DTI x Brat"
+      },
+      "system": {
+        "slug": "feminine-hair-169",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 169,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-169.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 170",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-170",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 170,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-170.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 171",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-171",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 171,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-171.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 172",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-172",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 172,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-172.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 173",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-173",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 173,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-173.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 174",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-174",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 174,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-174.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 175",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-175",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 175,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-175.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 176",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-176",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 176,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-176.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 177",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-177",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 177,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-177.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 178",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-178",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 178,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-178.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 179",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-179",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 179,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-179.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 180",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-180",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 180,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-180.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 181",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-181",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 181,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-181.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 182",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-182",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 182,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-182.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 183",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-183",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 183,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-183.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 184",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-184",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 184,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-184.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 185",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-185",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 185,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-185.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 186",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-186",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 186,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-186.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 187",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-187",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 187,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-187.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 188",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-188",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 188,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-188.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 189",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-189",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 189,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-189.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 190",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2024"
+      },
+      "system": {
+        "slug": "feminine-hair-190",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 190,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-190.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 191",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-191",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 191,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-191.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 192",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-192",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 192,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-192.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 193",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-193",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 193,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-193.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 194",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-194",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 194,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-194.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 195",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-195",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 195,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-195.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 196",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab; Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-196",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 196,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-196.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 197",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-197",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 197,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-197.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 198",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-198",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 198,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-198.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 199",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-199",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 199,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-199.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 200",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-200",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 200,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-200.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 201",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-201",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 201,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-201.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 202",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-202",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 202,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-202.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 203",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-203",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 203,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-203.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 204",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-204",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 204,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-204.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 205",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-205",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 205,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-205.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feminine Hair 206",
+        "category": "Salon hairstyle",
+        "hairArea": "Feminine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "feminine-hair-206",
+        "section": "Feminine salon hairstyles",
+        "sortOrder": 206,
+        "image": "/Dress%20To%20Impress/hairstyles/feminine-hair-206.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 001",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2026"
+      },
+      "system": {
+        "slug": "masculine-hair-001",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 207,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-001.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 002",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "masculine-hair-002",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 208,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-002.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 003",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "masculine-hair-003",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 209,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-003.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 004",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (High); 2 (Low)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "masculine-hair-004",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 210,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-004.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 005",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (High); 2 (Low)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "masculine-hair-005",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 211,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-005.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 006",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (High); 2 (Low)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Valentine's 2025"
+      },
+      "system": {
+        "slug": "masculine-hair-006",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 212,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-006.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 007",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Winter 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-007",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 213,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-007.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 008",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-008",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 214,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-008.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 009",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-009",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 215,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-009.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 010",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-010",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 216,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-010.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 011",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-011",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 217,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-011.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 012",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "1 (Tidy); 2 (Messy)",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-012",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 218,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-012.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 013",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-013",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 219,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-013.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 014",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-014",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 220,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-014.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 015",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-015",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 221,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-015.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 016",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-016",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 222,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-016.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 017",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Summer 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-017",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 223,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-017.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 018",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Added during Spring 2024"
+      },
+      "system": {
+        "slug": "masculine-hair-018",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 224,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-018.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 019",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "masculine-hair-019",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 225,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-019.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Hair 020",
+        "category": "Salon hairstyle",
+        "hairArea": "Masculine tab",
+        "unlockRoute": "Hair Station",
+        "toggles": "None listed",
+        "availability": "Normal salon option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "masculine-hair-020",
+        "section": "Masculine salon hairstyles",
+        "sortOrder": 226,
+        "image": "/Dress%20To%20Impress/hairstyles/masculine-hair-020.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 001",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "bangs-001",
+        "section": "Bangs",
+        "sortOrder": 227,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-001.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 002",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "bangs-002",
+        "section": "Bangs",
+        "sortOrder": 228,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-002.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 003",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "bangs-003",
+        "section": "Bangs",
+        "sortOrder": 229,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-003.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 004",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "1 (Default); 1 (Lower)",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "bangs-004",
+        "section": "Bangs",
+        "sortOrder": 230,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-004.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 005",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Added during Halloween 2024"
+      },
+      "system": {
+        "slug": "bangs-005",
+        "section": "Bangs",
+        "sortOrder": 231,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-005.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 006",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-006",
+        "section": "Bangs",
+        "sortOrder": 232,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-006.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 007",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-007",
+        "section": "Bangs",
+        "sortOrder": 233,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-007.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 008",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-008",
+        "section": "Bangs",
+        "sortOrder": 234,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-008.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 009",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "Default; Lower; Higher",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-009",
+        "section": "Bangs",
+        "sortOrder": 235,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-009.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 010",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "Default; Lower; Higher",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-010",
+        "section": "Bangs",
+        "sortOrder": 236,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-010.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 011",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "Default; Lower; Higher",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-011",
+        "section": "Bangs",
+        "sortOrder": 237,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-011.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 012",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "Default; Lower; Higher",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-012",
+        "section": "Bangs",
+        "sortOrder": 238,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-012.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 013",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-013",
+        "section": "Bangs",
+        "sortOrder": 239,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-013.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 014",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-014",
+        "section": "Bangs",
+        "sortOrder": 240,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-014.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 015",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-015",
+        "section": "Bangs",
+        "sortOrder": 241,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-015.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 016",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-016",
+        "section": "Bangs",
+        "sortOrder": 242,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-016.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangs 017",
+        "category": "Bangs row",
+        "hairArea": "Bangs tab",
+        "unlockRoute": "Hair Station bangs tab",
+        "toggles": "None listed",
+        "availability": "Normal salon bangs option",
+        "sourceUpdate": "Source row has no update listed"
+      },
+      "system": {
+        "slug": "bangs-017",
+        "section": "Bangs",
+        "sortOrder": 243,
+        "image": "/Dress%20To%20Impress/hairstyles/bangs-017.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Tree Hair",
+        "category": "Reward hairstyle",
+        "hairArea": "Closet unlockable hair",
+        "unlockRoute": "2025 Advent Calendar Day 1",
+        "toggles": "Default; No Bangs; Only Bangs; Details off; Star off",
+        "availability": "Unobtainable reward route",
+        "bodyFit": "Unisex",
+        "sourceUpdate": "Released during Winter 2025"
+      },
+      "system": {
+        "slug": "christmas-tree-hair",
+        "section": "Reward hairstyles",
+        "sortOrder": 244,
+        "image": "/Dress%20To%20Impress/hairstyles/christmas-tree-hair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scarlett Fierce Hair",
+        "category": "Reward hairstyle",
+        "hairArea": "Closet unlockable hair",
+        "unlockRoute": "Scarlett's Treasure Hunt chest",
+        "toggles": "None listed",
+        "availability": "Unobtainable reward route",
+        "bodyFit": "Unisex",
+        "sourceUpdate": "Released during Summer 2025"
+      },
+      "system": {
+        "slug": "scarlett-fierce-hair",
+        "section": "Reward hairstyles",
+        "sortOrder": 245,
+        "image": "/Dress%20To%20Impress/hairstyles/scarlett-fierce-hair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wind Hair",
+        "category": "Reward hairstyle",
+        "hairArea": "Closet unlockable hair",
+        "unlockRoute": "2024 Advent Calendar Day 15",
+        "toggles": "None listed",
+        "availability": "Seasonal/off-sale reward route",
+        "bodyFit": "Unisex",
+        "sourceUpdate": "Released during Winter 2024"
+      },
+      "system": {
+        "slug": "wind-hair",
+        "section": "Reward hairstyles",
+        "sortOrder": 246,
+        "image": "/Dress%20To%20Impress/hairstyles/wind-hair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Haunting Beauty Hair",
+        "category": "Paid set hairstyle",
+        "hairArea": "Closet unlockable hair",
+        "unlockRoute": "Haunting Beauty Set paid route",
+        "toggles": "Default; No Bangs; Only Bangs",
+        "availability": "Permanent paid set route",
+        "price": "259 Robux",
+        "bodyFit": "Female",
+        "sourceUpdate": "Released during Halloween 2025"
+      },
+      "system": {
+        "slug": "haunting-beauty-hair",
+        "section": "Shop and paid set hairstyles",
+        "sortOrder": 247,
+        "image": "/Dress%20To%20Impress/hairstyles/haunting-beauty-hair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Magic Girl Hair",
+        "category": "Shop hairstyle",
+        "hairArea": "Closet unlockable hair",
+        "unlockRoute": "Shop",
+        "toggles": "Back Wind; Back Wind (Bangs On/Off); Back Wind (Bows On/Off); Light Side Wind; Light Side Wind (Bangs On/Off); Light Side Wind (Bows On/Off); Stiff; Stiff (Bangs On/Off); Stiff (Bows On/Off); Only Bangs",
+        "availability": "Permanent shop item",
+        "price": "3,000 Cash",
+        "bodyFit": "Unisex",
+        "sourceUpdate": "Released during New Year's 2025"
+      },
+      "system": {
+        "slug": "magic-girl-hair",
+        "section": "Shop and paid set hairstyles",
+        "sortOrder": 248,
+        "image": "/Dress%20To%20Impress/hairstyles/magic-girl-hair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "IBella's Hair",
+        "category": "Code-origin hairstyle",
+        "hairArea": "Closet unlockable hair",
+        "unlockRoute": "Code-origin item route",
+        "toggles": "4 toggle images listed",
+        "availability": "Code-origin item",
+        "bodyFit": "Unisex",
+        "sourceUpdate": "Code-origin route listed"
+      },
+      "system": {
+        "slug": "ibella-s-hair",
+        "section": "Code-origin hairstyles",
+        "sortOrder": 249,
+        "image": "/Dress%20To%20Impress/hairstyles/ibella-s-hair.webp"
+      }
+    }
+  ]
+}

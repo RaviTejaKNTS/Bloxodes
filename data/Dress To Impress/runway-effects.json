@@ -1,0 +1,405 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "runway-effects",
+    "route": "/wiki/dress-to-impress/runway-effects",
+    "catalogCode": "dress-to-impress-runway-effects",
+    "itemFields": [
+      "category",
+      "sourceRoute",
+      "price",
+      "currency",
+      "status",
+      "availability",
+      "effectBehavior",
+      "target",
+      "useStage",
+      "uses",
+      "chargesOrUseCount",
+      "permanentBehavior",
+      "updateContext",
+      "isRemoved",
+      "removedDate"
+    ],
+    "columns": [
+      "category",
+      "sourceRoute",
+      "price",
+      "currency",
+      "status",
+      "availability",
+      "effectBehavior",
+      "target",
+      "useStage",
+      "uses",
+      "chargesOrUseCount",
+      "permanentBehavior",
+      "updateContext",
+      "isRemoved",
+      "removedDate"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Standard Shop effects",
+        "Spring seasonal effects",
+        "Winter seasonal effects",
+        "Halloween seasonal effects",
+        "Removed effects"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "sourceRoute",
+        "price",
+        "currency",
+        "status",
+        "availability"
+      ],
+      "tableFields": [
+        "category",
+        "sourceRoute",
+        "price",
+        "currency",
+        "status",
+        "availability",
+        "effectBehavior",
+        "target"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Runway Tomato Pack",
+        "category": "Standard Shop effects",
+        "sourceRoute": "Shop > Packs > Runway Effect Packs",
+        "price": "59",
+        "currency": "Robux",
+        "status": "Available year-round",
+        "availability": "Standard Shop purchase listed as available year-round.",
+        "effectBehavior": "Throws tomatoes at the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Not verified as an unlimited permanent unlock. Treat as charges unless a later in-game check proves otherwise.",
+        "updateContext": "Released with Runway Chaos on September 27, 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-tomato-pack",
+        "section": "Standard Shop effects",
+        "sortOrder": 10,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-tomato-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Explode Pack",
+        "category": "Standard Shop effects",
+        "sourceRoute": "Shop > Packs > Runway Effect Packs",
+        "price": "89",
+        "currency": "Robux",
+        "status": "Available year-round",
+        "availability": "Standard Shop purchase listed as available year-round.",
+        "effectBehavior": "Adds an explosion effect to the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Not verified as an unlimited permanent unlock. Treat as charges unless a later in-game check proves otherwise.",
+        "updateContext": "Released with Runway Chaos on September 27, 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-explode-pack",
+        "section": "Standard Shop effects",
+        "sortOrder": 20,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-explode-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Roses Pack",
+        "category": "Standard Shop effects",
+        "sourceRoute": "Shop > Packs > Runway Effect Packs",
+        "price": "29",
+        "currency": "Robux",
+        "status": "Available year-round",
+        "availability": "Standard Shop purchase listed as available year-round.",
+        "effectBehavior": "Throws roses on the runway.",
+        "target": "Runway scene",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Not verified as an unlimited permanent unlock. Treat as charges unless a later in-game check proves otherwise.",
+        "updateContext": "Released with Runway Chaos on September 27, 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-roses-pack",
+        "section": "Standard Shop effects",
+        "sortOrder": 30,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-roses-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Hearts Pack",
+        "category": "Standard Shop effects",
+        "sourceRoute": "Shop > Packs > Runway Effect Packs",
+        "price": "29",
+        "currency": "Robux",
+        "status": "Available year-round",
+        "availability": "Standard Shop purchase listed as available year-round.",
+        "effectBehavior": "Throws hearts and gives a heart effect to the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Not verified as an unlimited permanent unlock. Treat as charges unless a later in-game check proves otherwise.",
+        "updateContext": "Released with Runway Chaos on September 27, 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-hearts-pack",
+        "section": "Standard Shop effects",
+        "sortOrder": 40,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-hearts-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spotlight Pack",
+        "category": "Standard Shop effects",
+        "sourceRoute": "Shop > Packs > Runway Effect Packs",
+        "price": "29",
+        "currency": "Robux",
+        "status": "Available year-round",
+        "availability": "Standard Shop purchase listed as available year-round.",
+        "effectBehavior": "Adds a spotlight to the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Not verified as an unlimited permanent unlock. Treat as charges unless a later in-game check proves otherwise.",
+        "updateContext": "Released with Runway Chaos on September 27, 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "spotlight-pack",
+        "section": "Standard Shop effects",
+        "sortOrder": 50,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/spotlight-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Flower Pack",
+        "category": "Spring seasonal effects",
+        "sourceRoute": "Spring 2026 seasonal update; seasonal currency shop and Spring Baddie Pass rewards",
+        "price": "50",
+        "currency": "Taiyaki",
+        "status": "Seasonal",
+        "availability": "Seasonal Spring 2026 route. The checked source lists the Spring Collection ending on June 4, 2026, so final publish should recheck current obtainability.",
+        "effectBehavior": "Spawns flowers around the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Spring Baddie Pass lists +3 Flower Runway Effect rewards at tiers 10 and 16. Shop purchase quantity is not listed.",
+        "permanentBehavior": "Owned seasonal effect charges stay usable after the event ends, according to the Runway Effects trivia note. This does not prove an unlimited permanent unlock.",
+        "updateContext": "Added during Spring 2026 / Trip to Tokyo.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-flower-pack",
+        "section": "Spring seasonal effects",
+        "sortOrder": 60,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-flower-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Snowball Pack",
+        "category": "Winter seasonal effects",
+        "sourceRoute": "Winter 2025 seasonal update; seasonal currency shop",
+        "price": "45",
+        "currency": "Snowflakes",
+        "status": "Seasonal",
+        "availability": "Winter 2025 seasonal route. Owned seasonal charges are noted as still usable after the event ends.",
+        "effectBehavior": "Throws snowballs at the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Owned seasonal effect charges stay usable after the event ends, according to the Runway Effects trivia note. This does not prove an unlimited permanent unlock.",
+        "updateContext": "Added during Winter 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-snowball-pack",
+        "section": "Winter seasonal effects",
+        "sortOrder": 70,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-snowball-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Snowman Pack",
+        "category": "Winter seasonal effects",
+        "sourceRoute": "Winter 2025 seasonal update; seasonal currency shop",
+        "price": "45",
+        "currency": "Snowflakes",
+        "status": "Seasonal",
+        "availability": "Winter 2025 seasonal route. Owned seasonal charges are noted as still usable after the event ends.",
+        "effectBehavior": "Spawns two snowmen on the left and right side of all players in-game.",
+        "target": "All players in-game",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Owned seasonal effect charges stay usable after the event ends, according to the Runway Effects trivia note. This does not prove an unlimited permanent unlock.",
+        "updateContext": "Added during Winter 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-snowman-pack",
+        "section": "Winter seasonal effects",
+        "sortOrder": 80,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-snowman-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Presents Pack",
+        "category": "Winter seasonal effects",
+        "sourceRoute": "Winter 2025 seasonal update; seasonal currency shop",
+        "price": "45",
+        "currency": "Snowflakes",
+        "status": "Seasonal",
+        "availability": "Winter 2025 seasonal route. Owned seasonal charges are noted as still usable after the event ends.",
+        "effectBehavior": "Spawns presents around the player currently on the runway; the presents open to reveal toys.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Owned seasonal effect charges stay usable after the event ends, according to the Runway Effects trivia note. This does not prove an unlimited permanent unlock.",
+        "updateContext": "Added during Winter 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-presents-pack",
+        "section": "Winter seasonal effects",
+        "sortOrder": 90,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-presents-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Bats Pack",
+        "category": "Halloween seasonal effects",
+        "sourceRoute": "Halloween 2025 seasonal update; seasonal currency shop",
+        "price": "60",
+        "currency": "Candy",
+        "status": "Seasonal",
+        "availability": "Halloween 2025 seasonal route. Owned seasonal charges are noted as still usable after the event ends.",
+        "effectBehavior": "Emits bat particles around the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Owned seasonal effect charges stay usable after the event ends, according to the Runway Effects trivia note. This does not prove an unlimited permanent unlock.",
+        "updateContext": "Added during Halloween 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-bats-pack",
+        "section": "Halloween seasonal effects",
+        "sortOrder": 100,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-bats-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Shock Pack",
+        "category": "Halloween seasonal effects",
+        "sourceRoute": "Halloween 2025 seasonal update; seasonal currency shop",
+        "price": "50",
+        "currency": "Candy",
+        "status": "Seasonal",
+        "availability": "Halloween 2025 seasonal route. Owned seasonal charges are noted as still usable after the event ends.",
+        "effectBehavior": "Shocks the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Owned seasonal effect charges stay usable after the event ends, according to the Runway Effects trivia note. This does not prove an unlimited permanent unlock.",
+        "updateContext": "Added during Halloween 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-shock-pack",
+        "section": "Halloween seasonal effects",
+        "sortOrder": 110,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-shock-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Lantern Pack",
+        "category": "Halloween seasonal effects",
+        "sourceRoute": "Halloween 2025 seasonal update; seasonal currency shop",
+        "price": "80",
+        "currency": "Candy",
+        "status": "Seasonal",
+        "availability": "Halloween 2025 seasonal route. Owned seasonal charges are noted as still usable after the event ends.",
+        "effectBehavior": "Places lanterns around the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Consumable runway effect charges",
+        "chargesOrUseCount": "Count-based uses. The menu shows total number remaining; exact uses granted by this purchase are not listed.",
+        "permanentBehavior": "Owned seasonal effect charges stay usable after the event ends, according to the Runway Effects trivia note. This does not prove an unlimited permanent unlock.",
+        "updateContext": "Added during Halloween 2025.",
+        "isRemoved": false
+      },
+      "system": {
+        "slug": "runway-lantern-pack",
+        "section": "Halloween seasonal effects",
+        "sortOrder": 120,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-lantern-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Runway Poop Pack",
+        "category": "Removed effects",
+        "sourceRoute": "Former Runway Effect Pack row",
+        "price": "129",
+        "currency": "Robux",
+        "status": "Removed",
+        "availability": "Removed on November 8, 2025. Historical row only; do not present as obtainable.",
+        "effectBehavior": "Spawns poop behind the player currently on the runway.",
+        "target": "Current runway player",
+        "useStage": "Final Runway/Voting stage",
+        "uses": "Removed historical effect",
+        "chargesOrUseCount": "Removed row. Old source does not list purchase quantity or remaining-use behavior.",
+        "permanentBehavior": "Removed from the current effect list. Keep only as retired context unless parent decides to hide historical rows.",
+        "updateContext": "Released with Runway Chaos, then removed November 8, 2025.",
+        "isRemoved": true,
+        "removedDate": "2025-11-08"
+      },
+      "system": {
+        "slug": "runway-poop-pack",
+        "section": "Removed effects",
+        "sortOrder": 130,
+        "image": "/Dress%20To%20Impress/Runway%20Effects/runway-poop-pack.webp"
+      }
+    }
+  ]
+}

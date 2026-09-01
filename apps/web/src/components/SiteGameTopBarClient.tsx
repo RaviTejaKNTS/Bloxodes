@@ -6,7 +6,6 @@ import { AccountSheetButton } from "@/components/AccountSheetButton";
 import { SiteTopNav } from "@/components/SiteTopNav";
 import type { CatalogTopNavContext, GameTopNavContext } from "@/lib/game-top-nav-types";
 import type { SidebarAccount } from "@/lib/site-navigation";
-import { cn } from "@/lib/utils";
 
 type SiteGameTopBarClientProps = {
   account: SidebarAccount;
@@ -71,15 +70,8 @@ export function SiteGameTopBarClient({
     };
   }, [initialCatalogNav, initialGameNav, initialPathname, pathname]);
 
-  const hasTopNav = Boolean(gameNav || catalogNav);
-
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-30 border-b border-border/60 bg-background/95 backdrop-blur",
-        !hasTopNav ? "hidden xl:block" : ""
-      )}
-    >
+    <header className="sticky top-0 z-30 hidden border-b border-border/60 bg-background/95 backdrop-blur xl:block">
       <div className="container flex min-h-14 items-center gap-3 py-2">
         <SiteTopNav gameNav={gameNav} catalogNav={catalogNav} />
         <AccountSheetButton account={account} className="ml-auto hidden shrink-0 xl:inline-flex" />

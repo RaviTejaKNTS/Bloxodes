@@ -23,12 +23,12 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
-- `.agents/skills/bloxodes-article-release-review/SKILL.md`: manual fallback for listing completed automated articles, serving managed-dev previews, and publishing or rejecting explicit human selections when automatic exact-ID release is disabled or fails.
+- `.agents/skills/bloxodes-article-release-review/SKILL.md`: list completed automated articles, serve managed-dev previews, and publish or reject only explicit human selections.
 - `.agents/skills/bloxodes-article-images/SKILL.md`: run a separate collection-style image pass for location guides, routes, NPCs, puzzle steps, collectibles, and other visually dependent articles before writing.
 - `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
 - `.agents/skills/bloxodes-game-collection-data/SKILL.md`: game collection dataset, fields, sections, and renderer readiness.
 - `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
-- `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: refresh one collection dataset, one game's collection datasets, or all registered game collections, with affected wiki page review and collection suggestions for wider scopes.
+- `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: quickly check existing collection datasets for verified data changes and missing item images, then update only affected collections.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
@@ -60,7 +60,6 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Treat `docs/`, `Writing plans/`, and legacy `agents/` narratives as notes, plans, reports, or historical evidence that can be outdated or unimplemented. Current architecture belongs in the existing owning `dev-docs/` file with a `Last verified` date.
 - Store real workstation env values only in ignored `.envs/`; committed contracts live in `env/examples/`. Development defaults to managed Supabase development, production/test use process-only, and production preview is explicit. See `dev-docs/environment.md`.
 - Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
-- The unattended homelab article batch may publish only the exact queue-ID selection captured before its model run and completed during that run. Production credentials must never be injected into a model process environment; the post-model release parent must promote approved media, perform strict production readback and live-page verification, and leave any failed row `completed` for narrow retry or manual review.
 - Invoke `bloxodes-release-e2e` only when the user explicitly names `$bloxodes-release-e2e` or asks for an `e2e`/`end-to-end` production release. Treat that invocation as confirmation that final checks passed. Publish the explicit allowlist directly to `production` without force; use a PR only when the user explicitly requests one. Never include another branch/worktree's changes. After every release, synchronize local `production` and use the guarded script to synchronize the homelab checkout to the exact production SHA, but do not change homelab env, install units, interrupt jobs, or control services under that authorization. Keep the current task worktree and branch for immediate follow-up until the user asks for cleanup.
 
 ## Design Direction

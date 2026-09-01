@@ -1,0 +1,296 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "races",
+    "route": "/wiki/the-forge/races",
+    "catalogCode": "the-forge-races",
+    "itemFields": [
+      "rarity",
+      "rollChance",
+      "damage",
+      "health",
+      "speed",
+      "tier",
+      "link"
+    ],
+    "columns": [
+      "rarity",
+      "rollChance",
+      "damage",
+      "health",
+      "speed",
+      "tier",
+      "link"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Epic",
+        "Legendary"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "rollChance",
+        "damage",
+        "health",
+        "speed",
+        "tier"
+      ],
+      "tableFields": [
+        "rarity",
+        "rollChance",
+        "damage",
+        "health",
+        "speed",
+        "tier",
+        "link"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Human",
+        "rarity": "Common",
+        "rollChance": "25%",
+        "damage": "+0%",
+        "health": "+0%",
+        "speed": "+0%",
+        "tier": "D",
+        "link": "/races/human-race.html"
+      },
+      "system": {
+        "slug": "human",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/The%20Forge/Races/human-race.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf",
+        "rarity": "Uncommon",
+        "rollChance": "15%",
+        "damage": "+0%",
+        "health": "+0%",
+        "speed": "+5%",
+        "tier": "C",
+        "link": "/races/elf-race.html"
+      },
+      "system": {
+        "slug": "elf",
+        "section": "Uncommon",
+        "sortOrder": 2,
+        "image": "/The%20Forge/Races/elf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dwarf",
+        "rarity": "Uncommon",
+        "rollChance": "15%",
+        "damage": "+0%",
+        "health": "+10%",
+        "speed": "-5%",
+        "tier": "B",
+        "link": "/races/dwarf-race.html"
+      },
+      "system": {
+        "slug": "dwarf",
+        "section": "Uncommon",
+        "sortOrder": 3,
+        "image": "/The%20Forge/Races/dwarf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orc",
+        "rarity": "Uncommon",
+        "rollChance": "12%",
+        "damage": "+10%",
+        "health": "+5%",
+        "speed": "-5%",
+        "tier": "B",
+        "link": "/races/orc-race.html"
+      },
+      "system": {
+        "slug": "orc",
+        "section": "Uncommon",
+        "sortOrder": 4,
+        "image": "/The%20Forge/Races/orc.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin",
+        "rarity": "Uncommon",
+        "rollChance": "10%",
+        "damage": "+5%",
+        "health": "-10%",
+        "speed": "+10%",
+        "tier": "C",
+        "link": "/races/goblin-race.html"
+      },
+      "system": {
+        "slug": "goblin",
+        "section": "Uncommon",
+        "sortOrder": 5,
+        "image": "/The%20Forge/Races/goblin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Undead",
+        "rarity": "Rare",
+        "rollChance": "8%",
+        "damage": "+5%",
+        "health": "+15%",
+        "speed": "-10%",
+        "tier": "B",
+        "link": "/races/undead-race.html"
+      },
+      "system": {
+        "slug": "undead",
+        "section": "Rare",
+        "sortOrder": 6,
+        "image": "/The%20Forge/Races/undead-race.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombie",
+        "rarity": "Rare",
+        "rollChance": "7%",
+        "damage": "+10%",
+        "health": "+10%",
+        "speed": "-15%",
+        "tier": "B",
+        "link": "/races/zombie-race.html"
+      },
+      "system": {
+        "slug": "zombie",
+        "section": "Rare",
+        "sortOrder": 7,
+        "image": "/The%20Forge/Races/zombie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golem",
+        "rarity": "Rare",
+        "rollChance": "6%",
+        "damage": "+5%",
+        "health": "+25%",
+        "speed": "-20%",
+        "tier": "A",
+        "link": "/races/golem-race.html"
+      },
+      "system": {
+        "slug": "golem",
+        "section": "Rare",
+        "sortOrder": 8,
+        "image": "/The%20Forge/Races/golem.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow",
+        "rarity": "Epic",
+        "rollChance": "4%",
+        "damage": "+15%",
+        "health": "-5%",
+        "speed": "+15%",
+        "tier": "A",
+        "link": "/races/shadow-race.html"
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "Epic",
+        "sortOrder": 9,
+        "image": "/The%20Forge/Races/shadow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Minotaur",
+        "rarity": "Epic",
+        "rollChance": "3%",
+        "damage": "+20%",
+        "health": "+10%",
+        "speed": "-10%",
+        "tier": "A",
+        "link": "/races/minotaur-race.html"
+      },
+      "system": {
+        "slug": "minotaur",
+        "section": "Epic",
+        "sortOrder": 10,
+        "image": "/The%20Forge/Races/minotaur.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragonborn",
+        "rarity": "Epic",
+        "rollChance": "2%",
+        "damage": "+15%",
+        "health": "+15%",
+        "speed": "+5%",
+        "tier": "S",
+        "link": "/races/dragonborn-race.html"
+      },
+      "system": {
+        "slug": "dragonborn",
+        "section": "Epic",
+        "sortOrder": 11,
+        "image": "/The%20Forge/Races/dragonborn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Angel",
+        "rarity": "Legendary",
+        "rollChance": "1%",
+        "damage": "+10%",
+        "health": "+20%",
+        "speed": "+10%",
+        "tier": "S",
+        "link": "/races/angel-race.html"
+      },
+      "system": {
+        "slug": "angel",
+        "section": "Legendary",
+        "sortOrder": 12,
+        "image": "/The%20Forge/Races/angel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon",
+        "rarity": "Legendary",
+        "rollChance": "1%",
+        "damage": "+25%",
+        "health": "+5%",
+        "speed": "+10%",
+        "tier": "S",
+        "link": "/races/demon-race.html"
+      },
+      "system": {
+        "slug": "demon",
+        "section": "Legendary",
+        "sortOrder": 13,
+        "image": "/The%20Forge/Races/demon.webp"
+      }
+    }
+  ]
+}

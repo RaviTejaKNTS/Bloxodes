@@ -11,7 +11,6 @@ import {
   type GameCollectionConfig
 } from "@/lib/game-collections";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
-import { isDatabaseOnlyGameCollectionGame } from "@/lib/game-collections/database-only";
 
 type DatasetMeta = {
   schemaVersion?: number | null;
@@ -101,7 +100,6 @@ function collectSingleArgValue(argv: string[], names: string[]): string | null {
 
 function getTargetCollections() {
   return GAME_COLLECTIONS.filter((config) => {
-    if (isDatabaseOnlyGameCollectionGame(config.gameSlug)) return false;
     const matchesGame = !targetGameSlugs.length || targetGameSlugs.includes(config.gameSlug);
     const matchesCollection = !targetCollections.length || targetCollections.includes(config.slug);
     return matchesGame && matchesCollection;
@@ -368,12 +366,6 @@ function normalizeLookup(value: string | null | undefined): string {
 }
 
 async function main() {
-  const databaseOnlyFilters = targetGameSlugs.filter(isDatabaseOnlyGameCollectionGame);
-  if (databaseOnlyFilters.length) {
-    throw new Error(
-      `${databaseOnlyFilters.join(", ")} is database-only. Publish refreshed collections with a task-local runtime manifest.`
-    );
-  }
   if (!dryRun && (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE)) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE. Use --dry-run to preview without writing.");
   }

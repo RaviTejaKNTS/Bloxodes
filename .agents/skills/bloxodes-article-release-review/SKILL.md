@@ -44,7 +44,7 @@ Use the actual port reported by the server.
 npm run articles:review:list -- --base-url http://127.0.0.1:<port> --limit 100 --json --dev-env-file <managed-dev-env>
 ```
 
-3. Confirm each row has `result_slug`, `result_path`, and a matching managed-dev `articles` row. Check that each localhost URL returns the expected article. In a real browser, scroll through the article so lazy-loaded content images are requested, then require every content image element to complete with nonzero natural width and height. A rendered tag, alt text, or URL alone does not pass. Do not rerun the writing workflow or production release checks.
+3. Confirm each row has `result_slug`, `result_path`, and a matching managed-dev `articles` row. Check that each localhost URL returns the expected article. Do not rerun the writing workflow or production release checks.
 4. Return a compact list containing title, queue ID, localhost link, source links, and any missing-artifact blocker.
 5. Ask the user to publish or reject exact titles/slugs. Stop without changing queue state.
 

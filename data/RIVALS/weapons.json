@@ -1,0 +1,1283 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "weapons",
+    "route": "/wiki/rivals/weapons",
+    "catalogCode": "rivals-weapons",
+    "itemFields": [
+      "slot",
+      "type",
+      "unlockRoute",
+      "costSummary",
+      "defaultState",
+      "modeExclusiveNote",
+      "modeNote",
+      "useNote",
+      "contractNote",
+      "modeExclusive",
+      "isDefault",
+      "contractFamilies"
+    ],
+    "columns": [
+      "slot",
+      "type",
+      "unlockRoute",
+      "costSummary",
+      "defaultState",
+      "modeExclusiveNote",
+      "modeNote",
+      "useNote",
+      "contractNote",
+      "modeExclusive",
+      "isDefault",
+      "contractFamilies"
+    ],
+    "display": {
+      "groupLabel": "type",
+      "sectionOrder": [
+        "Contraband",
+        "Prime",
+        "Standard"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "slot",
+        "type",
+        "unlockRoute",
+        "costSummary",
+        "defaultState",
+        "modeExclusiveNote"
+      ],
+      "tableFields": [
+        "slot",
+        "type",
+        "unlockRoute",
+        "costSummary",
+        "defaultState",
+        "modeExclusiveNote",
+        "modeNote",
+        "useNote"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Distortion",
+        "slot": "Primary",
+        "type": "Contraband",
+        "unlockRoute": "Keys",
+        "costSummary": "700 Keys",
+        "useNote": "Contraband primary that creates a pull-in vortex for area control and combo pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "distortion",
+        "section": "Contraband",
+        "sortOrder": 1,
+        "image": "/RIVALS/Weapons/distortion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Permafrost",
+        "slot": "Primary",
+        "type": "Contraband",
+        "unlockRoute": "Keys",
+        "costSummary": "600 Keys",
+        "useNote": "Contraband primary built around slowing or freezing enemies during ranged fights.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "permafrost",
+        "section": "Contraband",
+        "sortOrder": 2,
+        "image": "/RIVALS/Weapons/permafrost.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Rifle",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "425 Keys; 1299 Robux (Energy Bundle)",
+        "useNote": "Prime energy primary for steady ranged damage without normal ammo pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "energy-rifle",
+        "section": "Prime",
+        "sortOrder": 3,
+        "image": "/RIVALS/Weapons/energy-rifle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flamethrower",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "400 Keys; 1899 Robux (Heavy Duty Bundle)",
+        "useNote": "Prime close-range primary that pressures groups with sustained fire.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "flamethrower",
+        "section": "Prime",
+        "sortOrder": 4,
+        "image": "/RIVALS/Weapons/flamethrower.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grenade Launcher",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "425 Keys; 1899 Robux (Heavy Duty Bundle)",
+        "useNote": "Prime explosive primary for arcing splash damage around cover.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "grenade-launcher",
+        "section": "Prime",
+        "sortOrder": 5,
+        "image": "/RIVALS/Weapons/grenade-launcher.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Minigun",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "450 Keys; 1899 Robux (Heavy Duty Bundle)",
+        "useNote": "Prime heavy primary for sustained fire, balanced by slower movement.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "minigun",
+        "section": "Prime",
+        "sortOrder": 6,
+        "image": "/RIVALS/Weapons/minigun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Paintball Gun",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "475 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime rifle-style primary that uses fast paint shots for sustained pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "paintball-gun",
+        "section": "Prime",
+        "sortOrder": 7,
+        "image": "/RIVALS/Weapons/paintball-gun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Assault Rifle",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default automatic primary for steady mid-range fights.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "assault-rifle",
+        "section": "Standard",
+        "sortOrder": 8,
+        "image": "/RIVALS/Weapons/assault-rifle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bow",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "15 Keys",
+        "useNote": "Standard projectile primary for aimed charged shots and burst picks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "bow",
+        "section": "Standard",
+        "sortOrder": 9,
+        "image": "/RIVALS/Weapons/bow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Burst Rifle",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "25 Keys",
+        "useNote": "Standard burst primary for controlled mid-range damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "burst-rifle",
+        "section": "Standard",
+        "sortOrder": 10,
+        "image": "/RIVALS/Weapons/burst-rifle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crossbow",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "35 Keys",
+        "useNote": "Standard single-shot projectile primary for accurate picks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "crossbow",
+        "section": "Standard",
+        "sortOrder": 11,
+        "image": "/RIVALS/Weapons/crossbow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gunblade",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard hybrid primary that mixes ranged shots with blade pressure.",
+        "contractNote": "Contracts track kills and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Kills",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "gunblade",
+        "section": "Standard",
+        "sortOrder": 12,
+        "image": "/RIVALS/Weapons/gunblade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RPG",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "25 Keys; 124 Robux (RPG Bundle)",
+        "useNote": "Standard explosive launcher for splash damage and rocket-mobility plays.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "rpg",
+        "section": "Standard",
+        "sortOrder": 13,
+        "image": "/RIVALS/Weapons/rpg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shotgun",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "20 Keys",
+        "useNote": "Standard close-range primary for heavy burst damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "shotgun",
+        "section": "Standard",
+        "sortOrder": 14,
+        "image": "/RIVALS/Weapons/shotgun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sniper",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "75 Keys",
+        "useNote": "Standard long-range primary for precision picks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "sniper",
+        "section": "Standard",
+        "sortOrder": 15,
+        "image": "/RIVALS/Weapons/sniper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scepter",
+        "slot": "Primary",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG only",
+        "modeExclusiveNote": "RIVALS RNG only",
+        "modeNote": "RIVALS RNG only",
+        "useNote": "Mode-exclusive magic-orb primary for RIVALS RNG rounds.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "scepter",
+        "section": "Contraband",
+        "sortOrder": 16,
+        "image": "/RIVALS/Weapons/scepter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warper",
+        "slot": "Secondary",
+        "type": "Contraband",
+        "unlockRoute": "Keys",
+        "costSummary": "650 Keys",
+        "useNote": "Contraband secondary that creates portals for repositioning and tricky angles.",
+        "contractNote": "Contracts track portals spawned and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Portals Spawned",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "warper",
+        "section": "Contraband",
+        "sortOrder": 17,
+        "image": "/RIVALS/Weapons/warper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Pistols",
+        "slot": "Secondary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "400 Keys; 1299 Robux (Energy Bundle)",
+        "useNote": "Prime dual-pistol secondary for quick backup energy damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "energy-pistols",
+        "section": "Prime",
+        "sortOrder": 18,
+        "image": "/RIVALS/Weapons/energy-pistols.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Exogun",
+        "slot": "Secondary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "350 Keys; 649 Robux (Exogun Bundle)",
+        "useNote": "Prime projectile secondary for special burst pressure from the backup slot.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "exogun",
+        "section": "Prime",
+        "sortOrder": 19,
+        "image": "/RIVALS/Weapons/exogun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Slingshot",
+        "slot": "Secondary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "300 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime projectile secondary that favors fast shots and mobility.",
+        "contractNote": "Contracts track playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "slingshot",
+        "section": "Prime",
+        "sortOrder": 20,
+        "image": "/RIVALS/Weapons/slingshot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Daggers",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "30 Keys",
+        "useNote": "Standard thrown-blade secondary for quick burst attacks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "daggers",
+        "section": "Standard",
+        "sortOrder": 21,
+        "image": "/RIVALS/Weapons/daggers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flare Gun",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "10 Keys",
+        "useNote": "Standard flare secondary for damage-over-time pressure and utility.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "flare-gun",
+        "section": "Standard",
+        "sortOrder": 22,
+        "image": "/RIVALS/Weapons/flare-gun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Handgun",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default sidearm for reliable backup damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "handgun",
+        "section": "Standard",
+        "sortOrder": 23,
+        "image": "/RIVALS/Weapons/handgun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Revolver",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "25 Keys",
+        "useNote": "Standard precision sidearm with a burst fan-shot ability.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "revolver",
+        "section": "Standard",
+        "sortOrder": 24,
+        "image": "/RIVALS/Weapons/revolver.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shorty",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "20 Keys; 49 Robux (Starter Bundle)",
+        "useNote": "Standard close-range sidearm that acts like a compact shotgun.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "shorty",
+        "section": "Standard",
+        "sortOrder": 25,
+        "image": "/RIVALS/Weapons/shorty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spray",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "5 Keys",
+        "useNote": "Standard automatic secondary for short-range backup pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "spray",
+        "section": "Standard",
+        "sortOrder": 26,
+        "image": "/RIVALS/Weapons/spray.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Uzi",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "20 Keys",
+        "useNote": "Standard automatic sidearm for fast close-to-mid-range damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "uzi",
+        "section": "Standard",
+        "sortOrder": 27,
+        "image": "/RIVALS/Weapons/uzi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glass Cannon",
+        "slot": "Secondary",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG and Gun Game only",
+        "modeExclusiveNote": "RIVALS RNG and Gun Game only",
+        "modeNote": "RIVALS RNG and Gun Game only",
+        "useNote": "Mode-exclusive high-risk secondary for RIVALS RNG and Gun Game.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "glass-cannon",
+        "section": "Contraband",
+        "sortOrder": 28,
+        "image": "/RIVALS/Weapons/glass-cannon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Maul",
+        "slot": "Melee",
+        "type": "Prime",
+        "unlockRoute": "Keys",
+        "costSummary": "550 Keys",
+        "useNote": "Prime heavy melee for slow, hard-hitting close-range swings.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "maul",
+        "section": "Prime",
+        "sortOrder": 29,
+        "image": "/RIVALS/Weapons/maul.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spear",
+        "slot": "Melee",
+        "type": "Prime",
+        "unlockRoute": "Season Pass or keys",
+        "costSummary": "Key cost not listed; free from Season Pass source",
+        "useNote": "Prime melee with pokes, throws, and wall-stuck mobility utility.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "spear",
+        "section": "Prime",
+        "sortOrder": 30,
+        "image": "/RIVALS/Weapons/spear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trowel",
+        "slot": "Melee",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "200 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime melee that can build cover while filling the close-range slot.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "trowel",
+        "section": "Prime",
+        "sortOrder": 31,
+        "image": "/RIVALS/Weapons/trowel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Battle Axe",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "50 Keys",
+        "useNote": "Standard heavy melee for strong close-range hits.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "battle-axe",
+        "section": "Standard",
+        "sortOrder": 32,
+        "image": "/RIVALS/Weapons/battle-axe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chainsaw",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "15 Keys",
+        "useNote": "Standard pressure melee with sustained close-range damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "chainsaw",
+        "section": "Standard",
+        "sortOrder": 33,
+        "image": "/RIVALS/Weapons/chainsaw.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fists",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default melee for quick close-range hits and starter movement.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "fists",
+        "section": "Standard",
+        "sortOrder": 34,
+        "image": "/RIVALS/Weapons/fists.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Katana",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard sword melee for direct slashes and close pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "katana",
+        "section": "Standard",
+        "sortOrder": 35,
+        "image": "/RIVALS/Weapons/katana.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Knife",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "20 Keys",
+        "useNote": "Standard light melee for quick close-range attacks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "knife",
+        "section": "Standard",
+        "sortOrder": 36,
+        "image": "/RIVALS/Weapons/knife.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Riot Shield",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard defensive melee that can absorb incoming damage.",
+        "contractNote": "Contracts track damage absorbed and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Absorbed",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "riot-shield",
+        "section": "Standard",
+        "sortOrder": 37,
+        "image": "/RIVALS/Weapons/riot-shield.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scythe",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "40 Keys",
+        "useNote": "Standard melee for sweeping close-range pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "scythe",
+        "section": "Standard",
+        "sortOrder": 38,
+        "image": "/RIVALS/Weapons/scythe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glast Shard",
+        "slot": "Melee",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG and Gun Game only",
+        "modeExclusiveNote": "RIVALS RNG and Gun Game only",
+        "modeNote": "RIVALS RNG and Gun Game only",
+        "useNote": "Mode-exclusive knife-like melee for RIVALS RNG and Gun Game.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "glast-shard",
+        "section": "Contraband",
+        "sortOrder": 39,
+        "image": "/RIVALS/Weapons/glast-shard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grappler",
+        "slot": "Utility",
+        "type": "Contraband",
+        "unlockRoute": "Robux bundle",
+        "costSummary": "Key cost not listed; 599 Robux Prime Bundle; 999 Robux Contraband Bundle",
+        "useNote": "Contraband utility for pulling yourself to walls or pulling enemies toward you.",
+        "contractNote": "Contracts track enemies hooked and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies hooked",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "grappler",
+        "section": "Contraband",
+        "sortOrder": 40,
+        "image": "/RIVALS/Weapons/grappler.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Medkit",
+        "slot": "Utility",
+        "type": "Prime",
+        "unlockRoute": "Keys",
+        "costSummary": "300 Keys",
+        "useNote": "Prime utility for healing during longer fights.",
+        "contractNote": "Contracts track heals given and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Heals Given",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "medkit",
+        "section": "Prime",
+        "sortOrder": 41,
+        "image": "/RIVALS/Weapons/medkit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Subspace Tripmine",
+        "slot": "Utility",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "250 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime trap utility for area denial and punish setups.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "subspace-tripmine",
+        "section": "Prime",
+        "sortOrder": 42,
+        "image": "/RIVALS/Weapons/subspace-tripmine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warpstone",
+        "slot": "Utility",
+        "type": "Prime",
+        "unlockRoute": "Keys",
+        "costSummary": "400 Keys",
+        "useNote": "Prime utility for teleporting out of danger or into a new angle.",
+        "contractNote": "Contracts track warps and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Warps",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "warpstone",
+        "section": "Prime",
+        "sortOrder": 43,
+        "image": "/RIVALS/Weapons/warpstone.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flashbang",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "15 Keys",
+        "useNote": "Standard utility that blinds enemies before a push.",
+        "contractNote": "Contracts track enemies blinded and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies Blinded",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "flashbang",
+        "section": "Standard",
+        "sortOrder": 44,
+        "image": "/RIVALS/Weapons/flashbang.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Freeze Ray",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard utility that freezes enemies to set up follow-up damage.",
+        "contractNote": "Contracts track enemies frozen and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies Frozen",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "freeze-ray",
+        "section": "Standard",
+        "sortOrder": 45,
+        "image": "/RIVALS/Weapons/freeze-ray.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grenade",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default explosive utility for splash damage and pressure around cover.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "grenade",
+        "section": "Standard",
+        "sortOrder": 46,
+        "image": "/RIVALS/Weapons/grenade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jump Pad",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Jump Shards",
+        "costSummary": "9 Jump Shards",
+        "useNote": "Standard utility that launches players and unlocks through Jump Shards.",
+        "contractNote": "Contracts track players bounced and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Players Bounced",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "jump-pad",
+        "section": "Standard",
+        "sortOrder": 47,
+        "image": "/RIVALS/Weapons/jump-pad.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Molotov",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "25 Keys",
+        "useNote": "Standard fire utility for area denial and damage-over-time pressure.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "molotov",
+        "section": "Standard",
+        "sortOrder": 48,
+        "image": "/RIVALS/Weapons/molotov.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Satchel",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "35 Keys",
+        "useNote": "Standard remote explosive utility for burst damage and movement tricks.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "satchel",
+        "section": "Standard",
+        "sortOrder": 49,
+        "image": "/RIVALS/Weapons/satchel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Smoke Grenade",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "10 Keys",
+        "useNote": "Standard utility that creates smoke cover and blocks sightlines.",
+        "contractNote": "Contracts track enemies smoked and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies smoked",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "smoke-grenade",
+        "section": "Standard",
+        "sortOrder": 50,
+        "image": "/RIVALS/Weapons/smoke-grenade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "War Horn",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "30 Keys",
+        "useNote": "Standard support utility that empowers teammates or a push.",
+        "contractNote": "Contracts track players empowered and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Players Empowered",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "war-horn",
+        "section": "Standard",
+        "sortOrder": 51,
+        "image": "/RIVALS/Weapons/war-horn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elixir",
+        "slot": "Utility",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG only",
+        "modeExclusiveNote": "RIVALS RNG only",
+        "modeNote": "RIVALS RNG only",
+        "useNote": "Mode-exclusive throwable utility that can damage enemies or heal allies in RIVALS RNG.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "elixir",
+        "section": "Contraband",
+        "sortOrder": 52,
+        "image": "/RIVALS/Weapons/elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RNG Dice",
+        "slot": "Utility",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG only",
+        "modeExclusiveNote": "RIVALS RNG only",
+        "modeNote": "RIVALS RNG only",
+        "useNote": "Mode-exclusive RIVALS RNG utility that rolls other weapon behavior.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "rng-dice",
+        "section": "Contraband",
+        "sortOrder": 53,
+        "image": "/RIVALS/Weapons/rng-dice.webp"
+      }
+    }
+  ]
+}

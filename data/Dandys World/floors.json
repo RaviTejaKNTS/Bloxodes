@@ -1,0 +1,478 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dandy's World",
+    "gameSlug": "dandys-world",
+    "collection": "floors",
+    "route": "/wiki/dandys-world/floors",
+    "catalogCode": "dandys-world-floors",
+    "itemFields": [
+      "summary",
+      "category",
+      "variants",
+      "floorRequirement",
+      "spawnTrigger",
+      "availability",
+      "landmarks",
+      "machineNotes",
+      "twistedNotes",
+      "specialReward",
+      "cardSummary",
+      "aliases"
+    ],
+    "columns": [
+      "summary",
+      "category",
+      "variants",
+      "floorRequirement",
+      "spawnTrigger",
+      "availability",
+      "landmarks",
+      "machineNotes",
+      "twistedNotes",
+      "specialReward",
+      "cardSummary",
+      "aliases"
+    ],
+    "display": {
+      "groupLabel": "Floor category",
+      "sectionOrder": [
+        "Early Standard Floors",
+        "Late Standard Floors",
+        "Main Character Floors",
+        "Optional Special Floors"
+      ],
+      "badgeField": null,
+      "subtitleFields": ["category"],
+      "descriptionField": "summary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "category",
+        "variants",
+        "floorRequirement",
+        "spawnTrigger",
+        "availability",
+        "landmarks",
+        "machineNotes",
+        "twistedNotes",
+        "specialReward"
+      ],
+      "tableFields": [
+        "category",
+        "variants",
+        "floorRequirement",
+        "spawnTrigger",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "summary": {
+          "kind": "detail",
+          "label": "Overview",
+          "omitWhenEmpty": true
+        },
+        "category": {
+          "kind": "plain",
+          "label": "Category",
+          "omitWhenEmpty": true
+        },
+        "variants": {
+          "kind": "chip",
+          "label": "Variants",
+          "omitWhenEmpty": true
+        },
+        "floorRequirement": {
+          "kind": "chip",
+          "label": "Appears from",
+          "omitWhenEmpty": true
+        },
+        "spawnTrigger": {
+          "kind": "detail",
+          "label": "Spawn trigger",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability",
+          "omitWhenEmpty": true
+        },
+        "landmarks": {
+          "kind": "detail",
+          "label": "Landmarks",
+          "omitWhenEmpty": true
+        },
+        "machineNotes": {
+          "kind": "detail",
+          "label": "Machines",
+          "omitWhenEmpty": true
+        },
+        "twistedNotes": {
+          "kind": "detail",
+          "label": "Twisteds",
+          "omitWhenEmpty": true
+        },
+        "specialReward": {
+          "kind": "highlight",
+          "label": "Special reward",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary",
+          "omitWhenEmpty": true
+        },
+        "aliases": {
+          "kind": "plain",
+          "label": "Also known as",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Rainbow Rooms",
+        "summary": "A colorful early-run floor family built around the recurring Rainbow Room layouts.",
+        "category": "Standard floor",
+        "variants": 7,
+        "floorRequirement": "Floor 1+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Colorful room clusters and recurring routes around the floor's elevator and Machines.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "The seven-variant early floor family most often used to learn the run's basic routes.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "rainbow-rooms",
+        "section": "Early Standard Floors",
+        "sortOrder": 0,
+        "image": "/Dandys World/Floors/rainbow-rooms.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Artist",
+        "summary": "An animation-studio floor with drawing-room and production-themed spaces.",
+        "category": "Standard floor",
+        "variants": 3,
+        "floorRequirement": "Floor 1+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Studio rooms, episode posters, desks, storyboards, and animation reference material.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "A three-variant early floor whose studio landmarks make its route shape easy to recognize.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "artist",
+        "section": "Early Standard Floors",
+        "sortOrder": 1,
+        "image": "/Dandys World/Floors/artist.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Art Floor",
+        "summary": "A museum-style floor with yellow gallery halls, paintings, displays, and a central Dandy statue.",
+        "category": "Standard floor",
+        "variants": 1,
+        "floorRequirement": "Floor 1+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Yellow museum halls, art displays, paintings, and the central Dandy statue.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "The single-variant museum floor; sources also call it Art Gallery, which is kept as an alias.",
+        "aliases": ["Art Gallery"]
+      },
+      "system": {
+        "slug": "art-floor",
+        "section": "Early Standard Floors",
+        "sortOrder": 2,
+        "image": "/Dandys World/Floors/art-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquatic Floor",
+        "summary": "An aquatic-themed standard floor with a distinct map layout and its own route choices.",
+        "category": "Standard floor",
+        "variants": 1,
+        "floorRequirement": "Floor 1+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Aquatic-themed rooms and the floor's elevator and Machine routes.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "A one-variant early floor with an aquatic theme and a separate layout to learn.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "aquatic-floor",
+        "section": "Early Standard Floors",
+        "sortOrder": 3,
+        "image": "/Dandys World/Floors/aquatic-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Greenhouse",
+        "summary": "A greenhouse-like floor where plant-filled scenery shapes the available paths and sightlines.",
+        "category": "Standard floor",
+        "variants": 2,
+        "floorRequirement": "Floor 1+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Plant-filled rooms and nature-inspired spaces, including greenhouse-style cover.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "A two-variant early floor where plant scenery changes the shape of routes and sightlines.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "greenhouse",
+        "section": "Early Standard Floors",
+        "sortOrder": 4,
+        "image": "/Dandys World/Floors/greenhouse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Library Floor",
+        "summary": "A library-themed floor with shelf-lined spaces and room-to-room routes.",
+        "category": "Standard floor",
+        "variants": 1,
+        "floorRequirement": "Floor 1+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Bookshelves, reading spaces, and the library's connected room routes.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "The single-variant library floor, kept separate from older source terminology about projector layouts.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "library-floor",
+        "section": "Early Standard Floors",
+        "sortOrder": 5,
+        "image": "/Dandys World/Floors/library-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diner",
+        "summary": "A diner floor divided between dining areas and a kitchen, with three variants.",
+        "category": "Standard floor",
+        "variants": 3,
+        "floorRequirement": "Floor 1+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Dining spaces, kitchen routes, and the floor's distinct restaurant sections.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "A three-variant restaurant floor with separate dining and kitchen spaces to navigate.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "diner",
+        "section": "Early Standard Floors",
+        "sortOrder": 6,
+        "image": "/Dandys World/Floors/diner.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warehouse",
+        "summary": "A large warehouse floor with concrete-and-metal spaces, storage areas, and exposed routes.",
+        "category": "Standard floor",
+        "variants": 3,
+        "floorRequirement": "Floor 6+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Fenced areas, storage rooms, industrial walls, and broad machine approaches.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "A three-variant later floor with large industrial spaces and longer exposed approaches.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "warehouse",
+        "section": "Late Standard Floors",
+        "sortOrder": 7,
+        "image": "/Dandys World/Floors/warehouse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Shop",
+        "summary": "A late-run retail floor whose aisles and display shelving shape movement.",
+        "category": "Standard floor",
+        "variants": 1,
+        "floorRequirement": "Floor 6+",
+        "spawnTrigger": "Eligible through normal floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Retail aisles, display shelving, and shop-floor sightlines.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "The single-variant late standard floor built around shop aisles and display cover.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "gift-shop",
+        "section": "Late Standard Floors",
+        "sortOrder": 8,
+        "image": "/Dandys World/Floors/gift-shop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Astro's Floor",
+        "summary": "A space-themed floor with planetarium or museum-style exhibits and broad open sections.",
+        "category": "Main character floor",
+        "variants": 1,
+        "floorRequirement": "Floor 6+",
+        "spawnTrigger": "Eligible through main-character floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Planetarium-style exhibits, space displays, and open floor sections.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "Astro's one-variant main-character floor, identified by its space and planetarium-style exhibits.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "astros-floor",
+        "section": "Main Character Floors",
+        "sortOrder": 9,
+        "image": "/Dandys World/Floors/astros-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shelly's Floor",
+        "summary": "A dinosaur-museum floor with fossil displays, dig-site areas, and narrow corridors.",
+        "category": "Main character floor",
+        "variants": 1,
+        "floorRequirement": "Floor 6+",
+        "spawnTrigger": "Eligible through main-character floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Fossil exhibits, dinosaur displays, dig-site sandboxes, and tight passageways.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "Shelly's one-variant museum floor, built around dinosaur exhibits and a dig-site landmark.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "shellys-floor",
+        "section": "Main Character Floors",
+        "sortOrder": 10,
+        "image": "/Dandys World/Floors/shellys-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprout's Floor",
+        "summary": "A kitchen-and-dining floor that opens into a bright outdoor-like area.",
+        "category": "Main character floor",
+        "variants": 1,
+        "floorRequirement": "Floor 6+",
+        "spawnTrigger": "Eligible through main-character floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Kitchen and dining spaces connected to a bright outdoor-like section.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "Sprout's one-variant floor, combining kitchen and dining routes with an outdoor-like area.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "sprouts-floor",
+        "section": "Main Character Floors",
+        "sortOrder": 11,
+        "image": "/Dandys World/Floors/sprouts-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vee's Floor",
+        "summary": "A game-show and vintage-technology floor with arcade displays and separated cover.",
+        "category": "Main character floor",
+        "variants": 1,
+        "floorRequirement": "Floor 6+",
+        "spawnTrigger": "Eligible through main-character floor generation.",
+        "availability": "Core run pool",
+        "landmarks": "Game-show spaces, arcade displays, vintage technology, and separated cover islands.",
+        "machineNotes": null,
+        "twistedNotes": null,
+        "specialReward": null,
+        "cardSummary": "Vee's one-variant floor, recognizable by its game-show setting and arcade-style displays.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "vees-floor",
+        "section": "Main Character Floors",
+        "sortOrder": 12,
+        "image": "/Dandys World/Floors/vees-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dyle's Floor",
+        "summary": "An optional challenge floor built around a fixed machine clear and a dangerous Twisted encounter.",
+        "category": "Optional challenge floor",
+        "variants": 1,
+        "floorRequirement": "Odd-numbered Floor 9+",
+        "spawnTrigger": "Choose the TIME'S UP Card on an odd-numbered floor.",
+        "availability": "Optional card route",
+        "landmarks": "A challenge layout centered on its fixed Machine objective and Dyle encounter.",
+        "machineNotes": "Always has 25 Machines.",
+        "twistedNotes": "Four Twisteds spawn, including Twisted Dyle.",
+        "specialReward": "+50 maximum Stamina for the rest of the run.",
+        "cardSummary": "The one-variant TIME'S UP challenge: clear 25 Machines, survive four Twisteds, and gain maximum Stamina afterward.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "dyles-floor",
+        "section": "Optional Special Floors",
+        "sortOrder": 13,
+        "image": "/Dandys World/Floors/dyles-floor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Break Room",
+        "summary": "A safe sub-floor used as a rest stop between long-run milestones.",
+        "category": "Milestone sub-floor",
+        "variants": 1,
+        "floorRequirement": "After every 25th floor",
+        "spawnTrigger": "Appears after every 25th floor is cleared.",
+        "availability": "Guaranteed milestone",
+        "landmarks": "A compact rest-room layout with preset Machine locations.",
+        "machineNotes": "Two Machines appear in preset locations.",
+        "twistedNotes": "No Twisteds spawn.",
+        "specialReward": null,
+        "cardSummary": "The one-variant safe milestone floor: complete its two preset Machines before continuing the run.",
+        "aliases": []
+      },
+      "system": {
+        "slug": "break-room",
+        "section": "Optional Special Floors",
+        "sortOrder": 14,
+        "image": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,1578 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "99 Nights in the Forest",
+    "gameSlug": "99-nights-in-the-forest",
+    "collection": "crafting",
+    "route": "/wiki/99-nights-in-the-forest/crafting",
+    "catalogCode": "99-nights-in-the-forest-crafting",
+    "itemFields": [
+      "station",
+      "tier",
+      "availability",
+      "costSummary",
+      "ingredients",
+      "effect",
+      "useCase",
+      "limit",
+      "unlockRequirement"
+    ],
+    "columns": [
+      "station",
+      "tier",
+      "availability",
+      "costSummary",
+      "ingredients",
+      "effect",
+      "useCase",
+      "limit",
+      "unlockRequirement"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Crafting Bench Tier 1",
+        "Crafting Bench Tier 2",
+        "Crafting Bench Tier 3",
+        "Crafting Bench Tier 4",
+        "Crafting Bench Tier 5",
+        "Removed and event-only craftables",
+        "Tool Workshop Anvil",
+        "Meteor Anvil"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "station",
+        "tier",
+        "availability",
+        "costSummary",
+        "ingredients",
+        "effect"
+      ],
+      "tableFields": [
+        "station",
+        "tier",
+        "availability",
+        "costSummary",
+        "ingredients",
+        "effect",
+        "useCase",
+        "limit"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Map",
+        "station": "Crafting Bench",
+        "tier": "Tier 1",
+        "availability": "Current",
+        "costSummary": "3 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 3,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Shows a map with forest information and can be opened with M on PC or the map icon on mobile.",
+        "useCase": "Navigation",
+        "unlockRequirement": "Crafting Bench Tier 1"
+      },
+      "system": {
+        "slug": "map",
+        "section": "Crafting Bench Tier 1",
+        "sortOrder": 1,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/map.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Supply Crate",
+        "station": "Crafting Bench",
+        "tier": "Tier 1",
+        "availability": "Current",
+        "costSummary": "3 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 3,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Lets players use flames and furniture in-game instead of setting them only from the lobby.",
+        "useCase": "Run modifiers and furniture access",
+        "unlockRequirement": "Crafting Bench Tier 1"
+      },
+      "system": {
+        "slug": "supply-crate",
+        "section": "Crafting Bench Tier 1",
+        "sortOrder": 2,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/supply-crate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Old Bed",
+        "station": "Crafting Bench",
+        "tier": "Tier 1",
+        "availability": "Current",
+        "costSummary": "20 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 20,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Makes the day counter increase by +1.",
+        "useCase": "Day progression",
+        "unlockRequirement": "Crafting Bench Tier 1"
+      },
+      "system": {
+        "slug": "old-bed",
+        "section": "Crafting Bench Tier 1",
+        "sortOrder": 3,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/old-bed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Trap",
+        "station": "Crafting Bench",
+        "tier": "Tier 1",
+        "availability": "Current",
+        "costSummary": "5 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 5,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Can be placed near a bunny burrow to catch food, and can give 4 morsels if it uses a carrot.",
+        "useCase": "Food farming and early trapping",
+        "limit": "Can be crafted up to 10 times.",
+        "unlockRequirement": "Crafting Bench Tier 1"
+      },
+      "system": {
+        "slug": "bunny-trap",
+        "section": "Crafting Bench Tier 1",
+        "sortOrder": 4,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/bunny-trap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crafting Bench 2",
+        "station": "Crafting Bench",
+        "tier": "Tier 1",
+        "availability": "Current",
+        "costSummary": "5 Wood, 1 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 5,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 1,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Unlocks Tier 2 of the Crafting Bench.",
+        "useCase": "Bench upgrade",
+        "unlockRequirement": "Crafting Bench Tier 1"
+      },
+      "system": {
+        "slug": "crafting-bench-2",
+        "section": "Crafting Bench Tier 1",
+        "sortOrder": 5,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/crafting-bench-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sun Dial",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "5 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 5,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Shows how much time is left until day or night in the top-right screen area.",
+        "useCase": "Day and night timing",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "sun-dial",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 6,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/sun-dial.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Regular Bed",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "5 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 5,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Makes the day counter increase by +1.",
+        "useCase": "Day progression",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "regular-bed",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 7,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/regular-bed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Compass",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "3 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 3,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Shows the direction of the Fairy, missing children, and the direction the player is facing.",
+        "useCase": "Navigation and rescue routing",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "compass",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 8,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/compass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Farm Plot",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "20 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 20,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Grows crops automatically every two days.",
+        "useCase": "Food production",
+        "limit": "Can be crafted up to 20 times.",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "farm-plot",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 9,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/farm-plot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wood Rain Storage",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "5 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 5,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Keeps stored wood dry when it is placed inside.",
+        "useCase": "Wood storage and rain protection",
+        "limit": "Can be placed more than once.",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "wood-rain-storage",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 10,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/wood-rain-storage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shelf",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "2 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 2,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Stores other items neatly at camp.",
+        "useCase": "Camp storage",
+        "limit": "Can be placed more than once.",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "shelf",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 11,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/shelf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Log Wall",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "20 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 20,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Fortifies and protects the base with tall logs.",
+        "useCase": "Base defense",
+        "limit": "Can be placed more than once.",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "log-wall",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 12,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/log-wall.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Log Gate",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "20 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 20,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Creates an openable entry point for a log-wall base defense.",
+        "useCase": "Base defense entrance",
+        "limit": "Can be placed more than once.",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "log-gate",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 13,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/log-gate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear Trap",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "3 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 3,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Can trap enemies and deal damage, and can also damage players.",
+        "useCase": "Trapping and defense",
+        "limit": "Can be crafted up to 8 times.",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "bear-trap",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 14,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/bear-trap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crafting Bench 3",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Current",
+        "costSummary": "15 Wood, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 15,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Unlocks Tier 3 of the Crafting Bench.",
+        "useCase": "Bench upgrade",
+        "unlockRequirement": "Crafting Bench Tier 2"
+      },
+      "system": {
+        "slug": "crafting-bench-3",
+        "section": "Crafting Bench Tier 2",
+        "sortOrder": 15,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/crafting-bench-3.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crock Pot",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "15 Wood, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 15,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Combines food into Stew. Berries cannot be put inside a Crock Pot.",
+        "useCase": "Cooking and hunger support",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "crock-pot",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 16,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/crock-pot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Radar",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "15 Wood, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 15,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Detects key places in the forest by using Scrap.",
+        "useCase": "Location scanning",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "radar",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 17,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/radar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boost Pad",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "15 Wood, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 15,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Gives a speed boost once activated and used.",
+        "useCase": "Movement utility",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "boost-pad",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 18,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/boost-pad.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Biofuel Processor",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "12 Wood, 12 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 12,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 12,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Turns logs, pelts, and some food into Biofuel.",
+        "useCase": "Fuel production",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "biofuel-processor",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 19,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/biofuel-processor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Torch",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "6 Wood, 6 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 6,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 6,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Expands the safe zone by a small amount.",
+        "useCase": "Safe-zone expansion",
+        "limit": "Can be placed up to 10 times.",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "torch",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 20,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/torch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Good Bed",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "10 Wood, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 10,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Makes the day counter increase by +1.",
+        "useCase": "Day progression",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "good-bed",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 21,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/good-bed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Rod",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "8 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 8,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Attracts lightning so it does not strike the player.",
+        "useCase": "Storm protection",
+        "limit": "Can be placed more than once.",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "lightning-rod",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 22,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/lightning-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flag",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "6 Wood, 2 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 6,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 2,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Marks important locations for navigation.",
+        "useCase": "Map marking and navigation",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "flag",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 23,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crafting Bench Tier 4",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Current",
+        "costSummary": "30 Wood, 20 Scrap, 2 Cultist Gems",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 30,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 20,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Cultist Gem",
+            "amount": 2,
+            "unit": "Cultist Gems"
+          }
+        ],
+        "effect": "Unlocks Tier 4 of the Crafting Bench.",
+        "useCase": "Bench upgrade",
+        "unlockRequirement": "Crafting Bench Tier 3"
+      },
+      "system": {
+        "slug": "crafting-bench-tier-4",
+        "section": "Crafting Bench Tier 3",
+        "sortOrder": 24,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/crafting-bench-tier-4.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ammo Crate",
+        "station": "Crafting Bench",
+        "tier": "Tier 4",
+        "availability": "Current",
+        "costSummary": "20 Wood, 30 Scrap, 1 Cultist Gem",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 20,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 30,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Cultist Gem",
+            "amount": 1,
+            "unit": "Cultist Gem"
+          }
+        ],
+        "effect": "Allows players to buy ammo with Scrap.",
+        "useCase": "Ammo supply",
+        "unlockRequirement": "Crafting Bench Tier 4"
+      },
+      "system": {
+        "slug": "ammo-crate",
+        "section": "Crafting Bench Tier 4",
+        "sortOrder": 25,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/ammo-crate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Oil Drill",
+        "station": "Crafting Bench",
+        "tier": "Tier 4",
+        "availability": "Current",
+        "costSummary": "25 Wood, 35 Scrap, 1 Cultist Gem",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 25,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 35,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Cultist Gem",
+            "amount": 1,
+            "unit": "Cultist Gem"
+          }
+        ],
+        "effect": "Drills for oil barrels periodically.",
+        "useCase": "Fuel production",
+        "unlockRequirement": "Crafting Bench Tier 4"
+      },
+      "system": {
+        "slug": "oil-drill",
+        "section": "Crafting Bench Tier 4",
+        "sortOrder": 26,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/oil-drill.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Bed",
+        "station": "Crafting Bench",
+        "tier": "Tier 4",
+        "availability": "Current",
+        "costSummary": "20 Wood, 30 Scrap, 1 Cultist Gem",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 20,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 30,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Cultist Gem",
+            "amount": 1,
+            "unit": "Cultist Gem"
+          }
+        ],
+        "effect": "Makes the day counter increase by +1.",
+        "useCase": "Day progression",
+        "unlockRequirement": "Crafting Bench Tier 4"
+      },
+      "system": {
+        "slug": "giant-bed",
+        "section": "Crafting Bench Tier 4",
+        "sortOrder": 27,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/giant-bed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teleporter",
+        "station": "Crafting Bench",
+        "tier": "Tier 4",
+        "availability": "Current",
+        "costSummary": "15 Wood, 25 Scrap, 1 Cultist Gem",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 15,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 25,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Cultist Gem",
+            "amount": 1,
+            "unit": "Cultist Gem"
+          }
+        ],
+        "effect": "Allows teleporting to anywhere on the map when two or more Teleporters are placed.",
+        "useCase": "Map travel",
+        "limit": "Requires two or more Teleporters to work. Can be placed more than once.",
+        "unlockRequirement": "Crafting Bench Tier 4"
+      },
+      "system": {
+        "slug": "teleporter",
+        "section": "Crafting Bench Tier 4",
+        "sortOrder": 28,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/teleporter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crafting Bench Tier 5",
+        "station": "Crafting Bench",
+        "tier": "Tier 4",
+        "availability": "Current",
+        "costSummary": "50 Wood, 50 Scrap, 1 Gem of the Forest",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 50,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 50,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Gem of the Forest",
+            "amount": 1,
+            "unit": "Gem of the Forest"
+          }
+        ],
+        "effect": "Unlocks Tier 5 of the Crafting Bench.",
+        "useCase": "Bench upgrade",
+        "unlockRequirement": "Crafting Bench Tier 4"
+      },
+      "system": {
+        "slug": "crafting-bench-tier-5",
+        "section": "Crafting Bench Tier 4",
+        "sortOrder": 29,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/crafting-bench-tier-5.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Respawn Capsule",
+        "station": "Crafting Bench",
+        "tier": "Tier 5",
+        "availability": "Current",
+        "costSummary": "40 Wood, 40 Scrap, 1 Gem of the Forest",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 40,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 40,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Gem of the Forest",
+            "amount": 1,
+            "unit": "Gem of the Forest"
+          }
+        ],
+        "effect": "After charging, automatically respawns the most recent dead player inside it.",
+        "useCase": "Respawn support",
+        "unlockRequirement": "Crafting Bench Tier 5"
+      },
+      "system": {
+        "slug": "respawn-capsule",
+        "section": "Crafting Bench Tier 5",
+        "sortOrder": 30,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/respawn-capsule.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Temporal Accelerometer",
+        "station": "Crafting Bench",
+        "tier": "Tier 5",
+        "availability": "Current",
+        "costSummary": "40 Wood, 40 Scrap, 1 Gem of the Forest",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 40,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 40,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Gem of the Forest",
+            "amount": 1,
+            "unit": "Gem of the Forest"
+          }
+        ],
+        "effect": "Skips the next night once charged.",
+        "useCase": "Night skipping",
+        "unlockRequirement": "Crafting Bench Tier 5"
+      },
+      "system": {
+        "slug": "temporal-accelerometer",
+        "section": "Crafting Bench Tier 5",
+        "sortOrder": 31,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/temporal-accelerometer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Weather Machine",
+        "station": "Crafting Bench",
+        "tier": "Tier 5",
+        "availability": "Current",
+        "costSummary": "40 Wood, 40 Scrap, 1 Gem of the Forest",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 40,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 40,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Gem of the Forest",
+            "amount": 1,
+            "unit": "Gem of the Forest"
+          }
+        ],
+        "effect": "After charging, stops rain and thunderstorms for the next three days.",
+        "useCase": "Weather control",
+        "unlockRequirement": "Crafting Bench Tier 5"
+      },
+      "system": {
+        "slug": "weather-machine",
+        "section": "Crafting Bench Tier 5",
+        "sortOrder": 32,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/weather-machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Recycler",
+        "station": "Crafting Bench",
+        "tier": "Tier 5",
+        "availability": "Current",
+        "costSummary": "40 Wood, 40 Scrap, 1 Gem of the Forest",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 40,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 40,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Gem of the Forest",
+            "amount": 1,
+            "unit": "Gem of the Forest"
+          }
+        ],
+        "effect": "Converts Gem of the Forest into Cultist Gems and Cultist Gems into Scrap.",
+        "useCase": "Resource conversion",
+        "unlockRequirement": "Crafting Bench Tier 5"
+      },
+      "system": {
+        "slug": "recycler",
+        "section": "Crafting Bench Tier 5",
+        "sortOrder": 33,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/recycler.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Freezer",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Removed",
+        "costSummary": "4 Scrap",
+        "ingredients": [
+          {
+            "name": "Scrap",
+            "amount": 4,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Stored food cleanly when it was available.",
+        "useCase": "Removed food storage",
+        "unlockRequirement": "Removed row; Fandom lists Bench T2 as the old requirement."
+      },
+      "system": {
+        "slug": "freezer",
+        "section": "Removed and event-only craftables",
+        "sortOrder": 34,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/freezer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Pot",
+        "station": "Crafting Bench",
+        "tier": "Tier 2",
+        "availability": "Event-only",
+        "costSummary": "3 Wood",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 3,
+            "unit": "Wood"
+          }
+        ],
+        "effect": "Holds one Valentine flower at camp, giving the team a permanent campsite buff from that flower.",
+        "useCase": "Event buff station",
+        "unlockRequirement": "Valentines event craftable; Fandom lists Bench T2."
+      },
+      "system": {
+        "slug": "flower-pot",
+        "section": "Removed and event-only craftables",
+        "sortOrder": 35,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/flower-pot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spooky Crockpot",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Event-only",
+        "costSummary": "15 Wood, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 15,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Works like the normal Crock Pot and also cooks Halloween foods during the event.",
+        "useCase": "Halloween event cooking",
+        "unlockRequirement": "Halloween event craftable."
+      },
+      "system": {
+        "slug": "spooky-crockpot",
+        "section": "Removed and event-only craftables",
+        "sortOrder": 36,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/spooky-crockpot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thanksgiving Crock Pot",
+        "station": "Crafting Bench",
+        "tier": "Tier 3",
+        "availability": "Event-only",
+        "costSummary": "15 Wood, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 15,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Works like the normal Crock Pot and also cooks Thanksgiving foods during the event.",
+        "useCase": "Thanksgiving event cooking",
+        "unlockRequirement": "Thanksgiving event craftable."
+      },
+      "system": {
+        "slug": "thanksgiving-crock-pot",
+        "section": "Removed and event-only craftables",
+        "sortOrder": 37,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/thanksgiving-crock-pot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hammer",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Current - guaranteed workshop recipe",
+        "costSummary": "5 Wood, 5 Scrap",
+        "ingredients": [
+          {
+            "name": "Wood",
+            "amount": 5,
+            "unit": "Wood"
+          },
+          {
+            "name": "Scrap",
+            "amount": 5,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Moves structures that are normally unmovable.",
+        "useCase": "Base layout and structure moving",
+        "limit": "The Hammer price does not increase no matter how many are made.",
+        "unlockRequirement": "Assemble the Tool Workshop anvil."
+      },
+      "system": {
+        "slug": "hammer",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 38,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/hammer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandage",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Current - guaranteed workshop recipe",
+        "costSummary": "2 Bunny Feet, 2 Wolf Pelts",
+        "ingredients": [
+          {
+            "name": "Bunny Foot",
+            "amount": 2,
+            "unit": "Bunny Feet"
+          },
+          {
+            "name": "Wolf Pelt",
+            "amount": 2,
+            "unit": "Wolf Pelts"
+          }
+        ],
+        "effect": "Heals the player and revives dead players.",
+        "useCase": "Healing and revives",
+        "limit": "Each Bandage craft increases the cost of each ingredient by 1. Maximum scaling is not listed.",
+        "unlockRequirement": "Assemble the Tool Workshop anvil."
+      },
+      "system": {
+        "slug": "bandage",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 39,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/bandage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mammoth Helmet",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Conditional - Snow Biome workshop recipe",
+        "costSummary": "2 Mammoth Tusks, 2 Wolf Pelts",
+        "ingredients": [
+          {
+            "name": "Mammoth Tusk",
+            "amount": 2,
+            "unit": "Mammoth Tusks"
+          },
+          {
+            "name": "Wolf Pelt",
+            "amount": 2,
+            "unit": "Wolf Pelts"
+          }
+        ],
+        "effect": "Reduces damage taken and keeps the player warm.",
+        "useCase": "Cold protection and armor",
+        "unlockRequirement": "Assemble the Tool Workshop anvil when the Snow Biome version is available."
+      },
+      "system": {
+        "slug": "mammoth-helmet",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 40,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/mammoth-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Infernal Helmet",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Conditional - Volcanic Biome workshop recipe",
+        "costSummary": "1 Cultist King Antler, 6 Scorpion Shells",
+        "ingredients": [
+          {
+            "name": "Cultist King Antler",
+            "amount": 1,
+            "unit": "Cultist King Antler"
+          },
+          {
+            "name": "Scorpion Shell",
+            "amount": 6,
+            "unit": "Scorpion Shells"
+          }
+        ],
+        "effect": "Reduces damage taken and grants immunity to regular burning or lava effects according to available listings.",
+        "useCase": "Volcanic protection and armor",
+        "unlockRequirement": "Assemble the Tool Workshop anvil when the Volcanic Biome version is available."
+      },
+      "system": {
+        "slug": "infernal-helmet",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 41,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/infernal-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chainsaw",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Current - random workshop recipe",
+        "costSummary": "4 Cultist Gems, 4 Bear Pelts, 2 Alpha Wolf Pelts, 10 Scrap, 6 Bunny Feet",
+        "ingredients": [
+          {
+            "name": "Cultist Gem",
+            "amount": 4,
+            "unit": "Cultist Gems"
+          },
+          {
+            "name": "Bear Pelt",
+            "amount": 4,
+            "unit": "Bear Pelts"
+          },
+          {
+            "name": "Alpha Wolf Pelt",
+            "amount": 2,
+            "unit": "Alpha Wolf Pelts"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          },
+          {
+            "name": "Bunny Foot",
+            "amount": 6,
+            "unit": "Bunny Feet"
+          }
+        ],
+        "effect": "Cuts down trees and can damage entities.",
+        "useCase": "Wood farming and utility damage",
+        "unlockRequirement": "Assemble the Tool Workshop anvil; appears as one possible random recipe."
+      },
+      "system": {
+        "slug": "chainsaw",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 42,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/chainsaw.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Riot Shield",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Current - random workshop recipe",
+        "costSummary": "4 Cultist Gems, 4 Bear Pelts, 6 Wolf Pelts, 6 Bunny Feet, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Cultist Gem",
+            "amount": 4,
+            "unit": "Cultist Gems"
+          },
+          {
+            "name": "Bear Pelt",
+            "amount": 4,
+            "unit": "Bear Pelts"
+          },
+          {
+            "name": "Wolf Pelt",
+            "amount": 6,
+            "unit": "Wolf Pelts"
+          },
+          {
+            "name": "Bunny Foot",
+            "amount": 6,
+            "unit": "Bunny Feet"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Heavily reduces enemy damage when held.",
+        "useCase": "Held defense",
+        "limit": "Each Riot Shield craft increases Bear Pelt cost by 1 and Scrap cost by 15. Maximum scaling is not listed.",
+        "unlockRequirement": "Assemble the Tool Workshop anvil; appears as one possible random recipe."
+      },
+      "system": {
+        "slug": "riot-shield",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 43,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/riot-shield.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tactical Shotgun",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Current - random workshop recipe",
+        "costSummary": "4 Cultist Gems, 4 Bear Pelts, 2 Alpha Wolf Pelts, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Cultist Gem",
+            "amount": 4,
+            "unit": "Cultist Gems"
+          },
+          {
+            "name": "Bear Pelt",
+            "amount": 4,
+            "unit": "Bear Pelts"
+          },
+          {
+            "name": "Alpha Wolf Pelt",
+            "amount": 2,
+            "unit": "Alpha Wolf Pelts"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Damages entities from a distance with close-range shotgun pellets.",
+        "useCase": "Ranged combat",
+        "unlockRequirement": "Assemble the Tool Workshop anvil; appears as one possible random recipe."
+      },
+      "system": {
+        "slug": "tactical-shotgun",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 44,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/tactical-shotgun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thorn Body",
+        "station": "Tool Workshop Anvil",
+        "tier": "Workshop",
+        "availability": "Current - random workshop recipe",
+        "costSummary": "4 Cultist Gems, 4 Bear Pelts, 2 Alpha Wolf Pelts, 10 Scrap",
+        "ingredients": [
+          {
+            "name": "Cultist Gem",
+            "amount": 4,
+            "unit": "Cultist Gems"
+          },
+          {
+            "name": "Bear Pelt",
+            "amount": 4,
+            "unit": "Bear Pelts"
+          },
+          {
+            "name": "Alpha Wolf Pelt",
+            "amount": 2,
+            "unit": "Alpha Wolf Pelts"
+          },
+          {
+            "name": "Scrap",
+            "amount": 10,
+            "unit": "Scrap"
+          }
+        ],
+        "effect": "Reduces damage taken and damages entities when they hit the user.",
+        "useCase": "Armor and contact damage",
+        "unlockRequirement": "Assemble the Tool Workshop anvil; appears as one possible random recipe."
+      },
+      "system": {
+        "slug": "thorn-body",
+        "section": "Tool Workshop Anvil",
+        "sortOrder": 45,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/thorn-body.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Axe Trim Kit",
+        "station": "Meteor Anvil",
+        "tier": "Meteor",
+        "availability": "Current - Meteor Anvil recipe",
+        "costSummary": "10 Meteor Shards, 3 Gold Shards",
+        "ingredients": [
+          {
+            "name": "Meteor Shard",
+            "amount": 10,
+            "unit": "Meteor Shards"
+          },
+          {
+            "name": "Gold Shard",
+            "amount": 3,
+            "unit": "Gold Shards"
+          }
+        ],
+        "effect": "Upgrades an axe damage and gives it a golden trim.",
+        "useCase": "Axe upgrade",
+        "unlockRequirement": "Meteor Shower transforms the Tool Workshop into a Meteor Tool Workshop; assemble the Meteor Anvil."
+      },
+      "system": {
+        "slug": "axe-trim-kit",
+        "section": "Meteor Anvil",
+        "sortOrder": 46,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/axe-trim-kit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Armor Trim Kit",
+        "station": "Meteor Anvil",
+        "tier": "Meteor",
+        "availability": "Current - Meteor Anvil recipe",
+        "costSummary": "10 Meteor Shards, 5 Gold Shards",
+        "ingredients": [
+          {
+            "name": "Meteor Shard",
+            "amount": 10,
+            "unit": "Meteor Shards"
+          },
+          {
+            "name": "Gold Shard",
+            "amount": 5,
+            "unit": "Gold Shards"
+          }
+        ],
+        "effect": "Upgrades armor damage resistance and gives it a golden trim.",
+        "useCase": "Armor upgrade",
+        "unlockRequirement": "Meteor Shower transforms the Tool Workshop into a Meteor Tool Workshop; assemble the Meteor Anvil."
+      },
+      "system": {
+        "slug": "armor-trim-kit",
+        "section": "Meteor Anvil",
+        "sortOrder": 47,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/armor-trim-kit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidiron Boots",
+        "station": "Meteor Anvil",
+        "tier": "Meteor",
+        "availability": "Current - Meteor Anvil recipe, secondary effect source",
+        "costSummary": "10 Meteor Shards, 1 Obsidiron Ingot",
+        "ingredients": [
+          {
+            "name": "Meteor Shard",
+            "amount": 10,
+            "unit": "Meteor Shards"
+          },
+          {
+            "name": "Obsidiron Ingot",
+            "amount": 1,
+            "unit": "Obsidiron Ingot"
+          }
+        ],
+        "effect": "Wearable Obsidiron armor piece. Secondary item index says it increases sprint speed and belongs to the Obsidiron set.",
+        "useCase": "Armor and movement",
+        "unlockRequirement": "Meteor Shower transforms the Tool Workshop into a Meteor Tool Workshop; assemble the Meteor Anvil."
+      },
+      "system": {
+        "slug": "obsidiron-boots",
+        "section": "Meteor Anvil",
+        "sortOrder": 48,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/obsidiron-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidiron Chest Blueprint",
+        "station": "Meteor Anvil",
+        "tier": "Meteor",
+        "availability": "Current - Meteor Anvil recipe, secondary effect source",
+        "costSummary": "10 Meteor Shards, 5 Gold Shards, 3 Obsidiron Ingots",
+        "ingredients": [
+          {
+            "name": "Meteor Shard",
+            "amount": 10,
+            "unit": "Meteor Shards"
+          },
+          {
+            "name": "Gold Shard",
+            "amount": 5,
+            "unit": "Gold Shards"
+          },
+          {
+            "name": "Obsidiron Ingot",
+            "amount": 3,
+            "unit": "Obsidiron Ingots"
+          }
+        ],
+        "effect": "Blueprint for placing an Obsidiron Chest at camp.",
+        "useCase": "Chest placement and meteor rewards",
+        "unlockRequirement": "Meteor Shower transforms the Tool Workshop into a Meteor Tool Workshop; assemble the Meteor Anvil."
+      },
+      "system": {
+        "slug": "obsidiron-chest-blueprint",
+        "section": "Meteor Anvil",
+        "sortOrder": 49,
+        "image": "/99%20Nights%20in%20the%20Forest/Crafting/obsidiron-chest-blueprint.webp"
+      }
+    }
+  ]
+}

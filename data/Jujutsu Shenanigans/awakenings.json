@@ -1,0 +1,556 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "awakenings",
+    "route": "/wiki/jujutsu-shenanigans/awakenings",
+    "catalogCode": "jujutsu-shenanigans-awakenings",
+    "itemFields": [
+      "awakeningName",
+      "character",
+      "stateType",
+      "availability",
+      "activationOrRequirement",
+      "moveSummary",
+      "followUpOrDomain",
+      "versionAdded",
+      "versionFinished",
+      "cardSummary"
+    ],
+    "columns": [
+      "awakeningName",
+      "character",
+      "stateType",
+      "availability",
+      "activationOrRequirement",
+      "moveSummary",
+      "followUpOrDomain",
+      "versionAdded",
+      "versionFinished",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "State type",
+      "sectionOrder": [
+        "Full awakenings",
+        "Secondary and super awakenings",
+        "Base-only awakening specials"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "character"
+      ],
+      "descriptionField": "moveSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "stateType",
+        "availability",
+        "activationOrRequirement",
+        "followUpOrDomain",
+        "versionAdded",
+        "versionFinished"
+      ],
+      "tableFields": [
+        "character",
+        "stateType",
+        "availability",
+        "activationOrRequirement",
+        "moveSummary",
+        "followUpOrDomain",
+        "versionAdded",
+        "versionFinished"
+      ],
+      "fieldPresentation": {
+        "awakeningName": {
+          "kind": "normal",
+          "label": "Awakening"
+        },
+        "character": {
+          "kind": "normal",
+          "label": "Parent character"
+        },
+        "stateType": {
+          "kind": "chip",
+          "label": "State type"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability",
+          "tone": "positive",
+          "omitWhenEmpty": true
+        },
+        "activationOrRequirement": {
+          "kind": "detail",
+          "label": "Activation or requirement",
+          "omitWhenEmpty": true
+        },
+        "moveSummary": {
+          "kind": "detail",
+          "label": "Awakened effect",
+          "omitWhenEmpty": true
+        },
+        "followUpOrDomain": {
+          "kind": "detail",
+          "label": "Follow-up or domain",
+          "omitWhenEmpty": true
+        },
+        "versionAdded": {
+          "kind": "chip",
+          "label": "Added"
+        },
+        "versionFinished": {
+          "kind": "chip",
+          "label": "Finished"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Six Eyes",
+        "awakeningName": "Six Eyes",
+        "character": "Honored One",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and press G on PC to open the Six Eyes sequence.",
+        "moveSummary": "Replaces Honored One's base tools with powered-up Blue and Red variants, Hollow Purple, Limitless, and Infinite Void pressure.",
+        "followUpOrDomain": "Infinite Void and the alternate 0.2 Domain",
+        "versionAdded": "V1.00",
+        "versionFinished": "V1.00",
+        "cardSummary": "Honored One's meter activation opens the Six Eyes kit and its upgraded Limitless tools."
+      },
+      "system": {
+        "slug": "honored-one-six-eyes",
+        "section": "Full awakenings",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "King of Curses",
+        "awakeningName": "King of Curses",
+        "character": "Vessel",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and press G on PC to let the Vessel sequence switch into Sukuna's kit.",
+        "moveSummary": "Replaces Vessel's kit with Dismantle, Open, Rush, Cleave, World Cutting Slash, and Malevolent Shrine pressure.",
+        "followUpOrDomain": "Malevolent Shrine",
+        "versionAdded": "V1.00",
+        "versionFinished": "V1.00",
+        "cardSummary": "The Vessel awakening hands control to Sukuna and replaces the base kit with his cursed techniques."
+      },
+      "system": {
+        "slug": "vessel-king-of-curses",
+        "section": "Full awakenings",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Idle Death Gamble",
+        "awakeningName": "Idle Death Gamble",
+        "character": "Restless Gambler",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Restless Gambler's awakening to open the pachinko domain.",
+        "moveSummary": "Opens the pachinko domain and supplies the lucky attacks, Energy Surge, and Rhythm route around its Jackpot roll.",
+        "followUpOrDomain": "Idle Death Gamble and its Jackpot outcome",
+        "versionAdded": "V1.00",
+        "versionFinished": "V1.15",
+        "cardSummary": "Restless Gambler's awakening opens Idle Death Gamble and starts the roll toward Jackpot."
+      },
+      "system": {
+        "slug": "restless-gambler-idle-death-gamble",
+        "section": "Full awakenings",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Insanity",
+        "awakeningName": "Insanity",
+        "character": "Ten Shadows",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Ten Shadows' awakening; the later Mahoraga route uses the separate Ritual path.",
+        "moveSummary": "Unlocks Max Elephant, Great Serpent, Shadow Swarm, Lurking Shadow, and Switch before the Mahoraga route becomes available.",
+        "followUpOrDomain": "Mahoraga path through Ritual and the Chimera Shadow Garden interaction",
+        "versionAdded": "V1.15",
+        "versionFinished": "V1.29",
+        "cardSummary": "Ten Shadows enters Insanity first, with a separate Mahoraga ritual path available afterward."
+      },
+      "system": {
+        "slug": "ten-shadows-insanity",
+        "section": "Full awakenings",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Essence of the Soul",
+        "awakeningName": "Essence of the Soul",
+        "character": "Perfection",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Perfection's awakening; landing Awakening Black Flash twice can open the super state.",
+        "moveSummary": "Adds Idle Transfiguration, Body Disfigure, Spike Wrath, Embodiment of Self Perfection, and Awakening Black Flash to Perfection's kit.",
+        "followUpOrDomain": "Embodiment of Self Perfection and Instant Spirit Body of Distorted Killing",
+        "versionAdded": "V1.23",
+        "versionFinished": "V1.40",
+        "cardSummary": "Essence of the Soul is Perfection's full awakening, with Awakening Black Flash leading toward its super state."
+      },
+      "system": {
+        "slug": "perfection-essence-of-the-soul",
+        "section": "Full awakenings",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Duty as a Brother",
+        "awakeningName": "Duty as a Brother",
+        "character": "Blood Manipulator",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Blood Manipulator's awakening to open the blood technique sequence.",
+        "moveSummary": "Opens the blood-based kit with Slicing Exorcism, Wing King, Blood Rain, Plasma Wave, and Convergence.",
+        "followUpOrDomain": "No full domain listed",
+        "versionAdded": "V1.39",
+        "versionFinished": "V1.42",
+        "cardSummary": "Blood Manipulator's awakening opens the Duty as a Brother blood technique kit."
+      },
+      "system": {
+        "slug": "blood-manipulator-duty-as-a-brother",
+        "section": "Full awakenings",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "False Memories",
+        "awakeningName": "False Memories",
+        "character": "Switcher",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Switcher's awakening to start the brother-and-idol sequence.",
+        "moveSummary": "Brings the brother-and-idol sequence into play through Idol's Debut, Climax Jumping, Dreams, Brothers, and Boogie Woogie.",
+        "followUpOrDomain": "No full domain listed",
+        "versionAdded": "V1.42",
+        "versionFinished": "V1.49",
+        "cardSummary": "False Memories activates Switcher's brother-and-idol awakening sequence."
+      },
+      "system": {
+        "slug": "switcher-false-memories",
+        "section": "Full awakenings",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Deadly Sentencing",
+        "awakeningName": "Deadly Sentencing",
+        "character": "Defense Attorney",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Defense Attorney's awakening to expand the trial domain.",
+        "moveSummary": "Turns the awakening into a courtroom trial with Execution, Final Judgement, Verdict, Triple Sentence, and Domain Amplification.",
+        "followUpOrDomain": "Deadly Sentencing trial and Death Penalty after a qualifying verdict",
+        "versionAdded": "V1.50",
+        "versionFinished": "V1.57.1",
+        "cardSummary": "Deadly Sentencing turns Defense Attorney's awakening into an invulnerable courtroom trial."
+      },
+      "system": {
+        "slug": "defense-attorney-deadly-sentencing",
+        "section": "Full awakenings",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "True Love",
+        "awakeningName": "True Love",
+        "character": "Cursed Partners",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate the sequence by tearing the necklace and putting on its ring.",
+        "moveSummary": "Fully manifests Rika and adds Elbow Rush, Copy, Energy Ripple, and the Authentic Mutual Love route.",
+        "followUpOrDomain": "Authentic Mutual Love and Copy Wheel",
+        "versionAdded": "V1.58",
+        "versionFinished": "V1.63",
+        "cardSummary": "True Love fully manifests Rika and unlocks Cursed Partners' copied-technique route."
+      },
+      "system": {
+        "slug": "cursed-partners-true-love",
+        "section": "Full awakenings",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Absolute",
+        "awakeningName": "Absolute",
+        "character": "Puppet Master",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Puppet Master's awakening to switch into the mech form.",
+        "moveSummary": "Replaces the puppet with a giant mech and its Miracle Cannon, Pigeon Viola, Absolute Destruction, Technique Charge, and Energy Output tools.",
+        "followUpOrDomain": "No full domain listed",
+        "versionAdded": "V1.63",
+        "versionFinished": "V1.72",
+        "cardSummary": "Absolute turns Puppet Master into a giant mech with a separate powered attack kit."
+      },
+      "system": {
+        "slug": "puppet-master-absolute",
+        "section": "Full awakenings",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vengeance",
+        "awakeningName": "Vengeance",
+        "character": "Head of the Hei",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Head of the Hei's awakening through the slowed Bleedout sequence.",
+        "moveSummary": "Transforms the user for Top Speed, Flash Freezing, Tendril Grab, Time Cell Moon Palace, and Acceleration pressure.",
+        "followUpOrDomain": "Time Cell Moon Palace",
+        "versionAdded": "V1.65",
+        "versionFinished": "V1.69",
+        "cardSummary": "Vengeance starts Head of the Hei's reincarnated awakening form and its speed-focused kit."
+      },
+      "system": {
+        "slug": "head-of-the-hei-vengeance",
+        "section": "Full awakenings",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Overtime",
+        "awakeningName": "Overtime",
+        "character": "Salaryman",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate Salaryman's awakening to enter the cleaver-based overtime form.",
+        "moveSummary": "Adds Ratio Breaker, Sharpen, Interrogate, Collapse, and Ratio Point while Salaryman fights in the overtime form.",
+        "followUpOrDomain": "No full domain listed",
+        "versionAdded": "V1.69",
+        "versionFinished": "V1.73",
+        "cardSummary": "Overtime gives Salaryman a cleaver-based awakening built around Ratio pressure."
+      },
+      "system": {
+        "slug": "salaryman-overtime",
+        "section": "Full awakenings",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Every Last Drop.",
+        "awakeningName": "Every Last Drop.",
+        "character": "True Cannon",
+        "stateType": "Full awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Fill the Awakening meter and activate True Cannon's awakening to commit its cursed energy to the cannon route.",
+        "moveSummary": "Charges the cannon's strongest blast and supplies What are you after?, I had no idea..., This is what dessert is like!, You weren't invited., and Restyle.",
+        "followUpOrDomain": "No full domain listed",
+        "versionAdded": "V1.75",
+        "versionFinished": "V1.76",
+        "cardSummary": "Every Last Drop. commits True Cannon's energy to its strongest awakened blast."
+      },
+      "system": {
+        "slug": "true-cannon-every-last-drop",
+        "section": "Full awakenings",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ritual",
+        "awakeningName": "Ritual",
+        "character": "Ten Shadows",
+        "stateType": "Secondary and super awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "Use Ten Shadows' Mahoraga path and perform the Ritual against an enemy within 60 studs.",
+        "moveSummary": "Provides the Mahoraga route, including the ritual summon and the adaptation states that follow it.",
+        "followUpOrDomain": "Mahoraga and its adaptation or alternate modes",
+        "versionAdded": "V1.15",
+        "versionFinished": "V1.29",
+        "cardSummary": "Ritual is Ten Shadows' secondary Mahoraga route rather than a duplicate character entry."
+      },
+      "system": {
+        "slug": "ten-shadows-ritual",
+        "section": "Secondary and super awakenings",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Instant Spirit Body of Distorted Killing",
+        "awakeningName": "Instant Spirit Body of Distorted Killing",
+        "character": "Perfection",
+        "stateType": "Secondary and super awakenings",
+        "availability": "Free public character",
+        "activationOrRequirement": "During Essence of the Soul, land Awakening Black Flash twice to fill the rainbow bar and unlock the super awakening.",
+        "moveSummary": "Swaps Perfection into the super state with Widespread Strikes, Face Blitz, Crushing Rushdown, and Head Splitter.",
+        "followUpOrDomain": "Perfection's secondary state with no separate domain listed",
+        "versionAdded": "V1.23",
+        "versionFinished": "V1.40",
+        "cardSummary": "Perfection's super awakening is reached by landing Awakening Black Flash twice and filling the rainbow bar."
+      },
+      "system": {
+        "slug": "perfection-instant-spirit-body-of-distorted-killing",
+        "section": "Secondary and super awakenings",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Directed Poison",
+        "awakeningName": "Directed Poison",
+        "character": "Locust Guy",
+        "stateType": "Base-only awakening specials",
+        "availability": "Free public base-only character",
+        "activationOrRequirement": "Use Locust Guy's awakening input; this character has a named special instead of a full awakened kit.",
+        "moveSummary": "Uses the insect abdomen for a sting that applies poison, with no full awakened moveset listed.",
+        "followUpOrDomain": "No full domain listed because this is a base-only replacement",
+        "versionAdded": "V1.49",
+        "versionFinished": "Base Only",
+        "cardSummary": "Directed Poison is Locust Guy's base-only awakening replacement rather than a complete new kit."
+      },
+      "system": {
+        "slug": "locust-guy-directed-poison",
+        "section": "Base-only awakening specials",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unrestricted Density",
+        "awakeningName": "Unrestricted Density",
+        "character": "Star Rage",
+        "stateType": "Base-only awakening specials",
+        "availability": "Free public base-only character",
+        "activationOrRequirement": "Use Star Rage's awakening input; this character has a named special instead of a full awakened kit.",
+        "moveSummary": "Pushes the Mass technique past its normal limit so Star Rage can hurl their body onto a target, with no full awakened moveset listed.",
+        "followUpOrDomain": "No full domain listed because this is a base-only replacement",
+        "versionAdded": "V1.56",
+        "versionFinished": "Base Only",
+        "cardSummary": "Unrestricted Density is Star Rage's base-only awakening special and its Mass-limit payoff."
+      },
+      "system": {
+        "slug": "star-rage-unrestricted-density",
+        "section": "Base-only awakening specials",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Foresight",
+        "awakeningName": "Foresight",
+        "character": "Aspiring Mangaka",
+        "stateType": "Base-only awakening specials",
+        "availability": "Free public base-only character",
+        "activationOrRequirement": "Use the Foresight counter when a melee attack comes in; its execution can trigger against an attacker at 40 HP or less.",
+        "moveSummary": "Guards against a melee hit and knocks the attacker away, with a low-health execution variant instead of a full awakened moveset.",
+        "followUpOrDomain": "No full domain listed because this is a base-only replacement",
+        "versionAdded": "V1.58",
+        "versionFinished": "Base Only",
+        "cardSummary": "Foresight is Aspiring Mangaka's base-only awakening counter, including a low-health execution route."
+      },
+      "system": {
+        "slug": "aspiring-mangaka-foresight",
+        "section": "Base-only awakening specials",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jawbreaker",
+        "awakeningName": "Jawbreaker",
+        "character": "Lucky Coward",
+        "stateType": "Base-only awakening specials",
+        "availability": "Free public base-only character",
+        "activationOrRequirement": "Use the awakening special while unarmed; Jawbreaker can still be used during stun.",
+        "moveSummary": "Slides the Hand Sword back and throws it at the target as a single awakening special, with no full awakened moveset listed.",
+        "followUpOrDomain": "No full domain listed because this is a base-only replacement",
+        "versionAdded": "V1.73",
+        "versionFinished": "Base Only",
+        "cardSummary": "Jawbreaker is Lucky Coward's unarmed base-only awakening special and can work during stun."
+      },
+      "system": {
+        "slug": "lucky-coward-jawbreaker",
+        "section": "Base-only awakening specials",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bird Strike",
+        "awakeningName": "Bird Strike",
+        "character": "Crow Charmer",
+        "stateType": "Base-only awakening specials",
+        "availability": "Free public base-only character",
+        "activationOrRequirement": "Use the awakening special, guide the crow toward a target, and land a direct impact for the detonation.",
+        "moveSummary": "Lets Crow Charmer control a crow and detonate it on a direct target impact instead of switching to a full awakened moveset.",
+        "followUpOrDomain": "No full domain listed because this is a base-only replacement",
+        "versionAdded": "V1.74",
+        "versionFinished": "Base Only",
+        "cardSummary": "Bird Strike is Crow Charmer's base-only awakening special: guide the crow, then land its impact."
+      },
+      "system": {
+        "slug": "crow-charmer-bird-strike",
+        "section": "Base-only awakening specials",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Parthenogenesis",
+        "awakeningName": "Parthenogenesis",
+        "character": "Black Death",
+        "stateType": "Base-only awakening specials",
+        "availability": "Free public base-only character",
+        "activationOrRequirement": "Use the awakening ability to spend Black Death's cursed energy and split the character in two.",
+        "moveSummary": "Uses all cursed energy to create the split with invulnerability during the transition, with no full awakened moveset listed.",
+        "followUpOrDomain": "Infestation interaction and no full domain listed",
+        "versionAdded": "V1.76",
+        "versionFinished": "Base Only",
+        "cardSummary": "Parthenogenesis is Black Death's base-only awakening ability and spends cursed energy on the split."
+      },
+      "system": {
+        "slug": "black-death-parthenogenesis",
+        "section": "Base-only awakening specials",
+        "sortOrder": 21,
+        "image": null
+      }
+    }
+  ]
+}

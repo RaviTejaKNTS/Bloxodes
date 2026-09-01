@@ -2,10 +2,6 @@ import fs from "node:fs/promises";
 
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { repoPath } from "@/lib/paths";
-import {
-  getPublishedWikiCollectionRuntimeByCode,
-  shouldFallbackToLocalWikiCollectionData
-} from "@/lib/wiki-collection-runtime";
 
 export type GrowGarden2Crop = {
   id: string;
@@ -81,20 +77,15 @@ function normalizeSources(rows: SourceRow[] | null | undefined) {
     .filter((source) => source.label && source.url);
 }
 
-async function readJson<T>(code: string, filePath: string): Promise<DatasetJson<T>> {
-  const runtime = await getPublishedWikiCollectionRuntimeByCode(code);
-  if (runtime) return runtime.document as DatasetJson<T>;
-  if (!shouldFallbackToLocalWikiCollectionData(code)) {
-    throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
-  }
+async function readJson<T>(filePath: string): Promise<DatasetJson<T>> {
   const raw = await fs.readFile(filePath, "utf8");
   return JSON.parse(raw) as DatasetJson<T>;
 }
 
 export async function loadGrowGarden2ValueDataset(): Promise<GrowGarden2ValueDataset> {
   const [seedJson, mutationJson] = await Promise.all([
-    readJson<CropRow>("grow-a-garden-2-seeds", SEEDS_PATH),
-    readJson<MutationRow>("grow-a-garden-2-mutations", MUTATIONS_PATH)
+    readJson<CropRow>(SEEDS_PATH),
+    readJson<MutationRow>(MUTATIONS_PATH)
   ]);
 
   const crops = unwrapDatasetItems(seedJson)
@@ -118,7 +109,7 @@ export async function loadGrowGarden2ValueDataset(): Promise<GrowGarden2ValueDat
   const mutations = unwrapDatasetItems(mutationJson)
     .map((row): GrowGarden2Mutation | null => {
       const name = row.name?.trim();
-      const id = row.id?.trim() ?? row.slug?.trim();
+      const id = row.id?.trim();
       if (!name || !id) return null;
       const multiplierLabel = row.multiplier?.trim() || "Unknown";
       return {

@@ -18,6 +18,7 @@ export const daysAtSeaCollectionGroup = {
     "food",
     "npcs-and-mobs",
     "structures",
-    "night-raids"
+    "night-raids",
+    "materials"
   ]
 } satisfies GameCollectionGroup;

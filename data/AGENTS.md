@@ -6,9 +6,7 @@ Environment boundaries and database-vs-dataset ownership are documented in `dev-
 
 When dataset ownership or a consuming pipeline changes, update that existing canonical file or the owning existing pipeline document in the same change. Do not create a replacement current-state doc.
 
-These files back remaining compatibility-era game collections, broad catalog sections, reports, and other static consumers that are not fully modeled in Supabase. New game collections use a task-local runtime manifest and publish normalized revisions to `wiki_collection_datasets`/`wiki_collection_items`; do not add new long-lived collection datasets here solely to power a route.
-
-The 21 game groups listed in `apps/web/src/lib/game-collections/database-only.ts` have no repository fallback. Their collection pages and tools read published database revisions, their images resolve through R2, and their quizzes read `quiz_pages.quiz_data`. Refresh them from a task-local workspace; never recreate their former `data/<Game>/` folders.
+These files back tools, game collections, and broad catalog sections that are not fully modeled in Supabase.
 
 When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
 
@@ -24,6 +22,8 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - `data/game-specific-ids/source-backed.json`
   - Generated audio and decal associations used to seed the game-specific Music IDs and Decal IDs pages. Music associations use official Roblox Music Discovery where available and dedicated game-wiki parsers for 3008, Retail Tycoon 2, and Nico's Nextbots where that feed is sparse or empty. Refresh through `npm run sync:game-specific-id-sources`, review the diff, then dry-run and run `npm run seed:game-specific-id-usage -- --replace-source-rows` against managed Supabase development so stale rows from the same source are removed. Use `npm run sync:game-specific-id-sources -- --only-music-game <slug>` for a bounded experience-song refresh that preserves other generated groups when an unrelated source is unavailable.
   - Preserve source URL, checked time, use type, and compatibility status. A source-listed row is not an in-game verification result.
+- `data/Grow a Garden/*`
+  - Dataset-backed Grow a Garden collection content, including crops, seeds, pets, eggs, gears, mutations, weather, merchants, NPCs, shops, seed packs, crafting recipes, food, currencies, and `quiz.json`.
 - `data/Grow a Garden 2/*`
   - Dataset-backed Grow a Garden 2 wiki/collection content, including seeds, crops, pets, gears, sprinklers, crates, mutations, shops, and night-stealing tools.
   - Keep rows source-backed to Grow a Garden 2 specifically. Do not fill crop sell values, sprinkler prices, mutation multipliers, guild rewards, or egg rows from Grow a Garden 1 or unverified calculator assumptions.
@@ -33,10 +33,37 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Dataset-backed Steal an Egg wiki/collection content, including pets and biomes. Matching source-provided pet images live under `apps/web/public/Steal an Egg/Pets/` when available; readable item names baked into those source images are acceptable and should not be treated as an image gap.
 - `data/Sailor Piece/*`
   - Dataset-backed Sailor Piece wiki/collection content, including fruits, swords, races, bosses, islands, accessories, melee specs, traits, runes, relics, bloodlines, clans, Haki, titles, dungeons, and guilds.
+- `data/Brookhaven RP/*`
+  - Dataset-backed Brookhaven RP wiki/collection content, including vehicles, houses, jobs, gamepasses, inventory items, roleplay outfits, map themes, weather/disasters, props, emotes, secrets, locations, and game info.
 - `data/Adopt Me/*`
   - Dataset-backed Adopt Me wiki/collection content, including pets, eggs, vehicles, toys, strollers, food, potions, gifts, gift prizes, furniture, house surfaces, gamepasses, star rewards, accessory-shop entries, pet ages, and game info.
 - `data/Blox Fruits/*`
   - Dataset-backed Blox Fruits wiki/collection content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
+- `data/Dress To Impress/*`
+  - Dataset-backed Dress To Impress wiki/collection and quiz content, including themes, free items, code items, currency items, pose packs, ranks, walk packs, runway effects, pattern packs, hairstyles, makeup, nails, reward items, Robux items, VIP items, and `quiz.json`.
+  - Theme rows are intentionally text-only. Other collection rows use matching item, pack, salon, or unlock images under `apps/web/public/Dress To Impress/` when a clean source image exists; the free-items catalog has one documented image gap for Gingerbread Suit.
+  - Hairstyles are intentionally not seeded until the available source rows have player-readable names or a cleaner visual-identification dataset.
+- `data/The Forge/*.json`
+  - Structured collection and calculator data used by The Forge collection pages and Forge tools.
+- `data/RIVALS/*`
+  - Dataset-backed RIVALS wiki/collection content, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and `quiz.json`.
+  - `quiz.json` is the local question pool for `/quizzes/rivals`; use `bloxodes-quiz-writing` when editing quiz content.
+  - Keep RIVALS collections focused on durable in-game item collections. Do not add gamepasses, badges, servers, current event reward tracks, or ranked-season reward lists as collection datasets.
+- `data/Wizard Alchemy/*`
+  - Dataset-backed Wizard Alchemy wiki/collection content, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
+  - `quiz.json` is the local question pool for `/quizzes/wizard-alchemy`; use `bloxodes-quiz-writing` when editing quiz content.
+  - Code pages must not keep manual code seed payloads. For Wizard Alchemy or any other game, update the `code_pages` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then let `scripts/codes/update-codes.ts` populate `codes`.
+- `data/Slime RNG/*`
+  - Dataset-backed Slime RNG wiki/collection content, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
+  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; use `bloxodes-quiz-writing` when editing quiz content.
+  - Matching source-provided images live under `apps/web/public/Slime RNG/` when the source file exists. Rebirths and index rewards are intentionally text-only catalogs.
+- `data/99 Nights in the Forest/*`
+  - Dataset-backed 99 Nights in the Forest wiki/collection content, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and `quiz.json`.
+  - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use `bloxodes-quiz-writing` when editing quiz content.
+  - Keep quiz and catalog facts source-backed. Do not add active code names, live event statuses, temporary reward tracks, or disputed exact values such as unresolved item costs.
+- `data/Sell Lemons/*`
+  - Dataset-backed Sell Lemons wiki/collection and quiz content, including income sources, active income methods, powers, secret unlocks, evolution stages, locations, orchard items, orchard mutations, tycoon upgrades, ascension rewards, companions, and `quiz.json`.
+  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; use stable progression, power, secret, Evolution, location, orchard-mutation, and named plot-upgrade facts rather than unstable exact upgrade costs or source-conflicted secret-step sequences.
 - `data/Kick a Lucky Block/*`
   - Dataset-backed Kick a Lucky Block wiki/collection content, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching item images live under `apps/web/public/Kick a Lucky Block/` for brainrots, weights, zones, and official Roblox page media. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
@@ -74,15 +101,15 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 ## Rules
 
 - Treat local data files as content sources, not ad hoc dumps. Keep filenames and object shapes stable once routes depend on them.
-- Collection refresh scope is defined by registered game collection config plus unregistered v2 collection-shaped files in that registered game's data directory. Non-collection files are outside the collection refresh workflow.
+- Routine collection refresh scope is limited to registered game collection config and datasets that already exist. Unregistered v2-shaped files are outside this fast refresh and require an explicit collection-creation or discovery workflow. Non-collection files are outside the collection refresh workflow.
 - Game wiki collection datasets must use the v2 separated shape: `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`.
 - In v2 game collection datasets, `items[].item` is public game data only. Do not put `collectionSection`, `section`, `sortOrder`, `slug`, `image`, source URLs, source pages, verification notes, raw text, image status, or workflow/debug fields there.
 - In v2 game collection datasets, `items[].system` may contain only `slug`, `section`, `sortOrder`, and `image`. Use these for Bloxodes routing, grouping, ordering, and image rendering without interfering with real game fields that may have similar names.
 - `meta.display` owns the public render contract for game collections: `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, optional badge/subtitle/description fields, and `fieldPresentation`. Every display field must exist in `meta.itemFields` and in public item data.
-- Run `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` for registered compatibility data. For a new task-local collection, run `check:game-collection-data -- --file ... --media-root ...` and the runtime-manifest dry-run before managed-development publication.
+- Run `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` before seeding or reviewing any game collection page.
 - For wiki/collection datasets, include source-backed fields players need, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability when those facts drive decisions.
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.
-- Quiz question pools do not belong in `data/`. Import approved `final.json.quizData` into `quiz_pages.quiz_data`, then verify the database readback and rendered `/quizzes/<slug>` page.
+- If a `quiz.json` file powers a public quiz route, validate the `QuizData` shape, difficulty counts, option IDs, answer IDs, and rendered `/quizzes/<slug>` page after editing.
 - If a new dataset becomes long-lived, document it in `agents/data/agents.md`.
 - Do not store manual active-code lists, expired-code lists, code dates, or code rewards in `data/`. Code data belongs to the source-driven codes refresh workflow.

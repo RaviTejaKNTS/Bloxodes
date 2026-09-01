@@ -1,0 +1,532 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "items",
+    "route": "/wiki/jujutsu-shenanigans/items",
+    "catalogCode": "jujutsu-shenanigans-items",
+    "itemFields": [
+      "type",
+      "source",
+      "price",
+      "effect",
+      "damageHeal",
+      "usesBreakRule",
+      "storageDropDespawn",
+      "availability",
+      "modeServerLimitation",
+      "location"
+    ],
+    "columns": [
+      "type",
+      "source",
+      "price",
+      "effect",
+      "damageHeal",
+      "usesBreakRule",
+      "storageDropDespawn",
+      "availability",
+      "modeServerLimitation",
+      "location"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Public shop, spawn, and map items",
+        "Character-created and secret items",
+        "Private-server Item Block items"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [
+        "location",
+        "availability"
+      ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "type",
+        "source",
+        "price",
+        "effect",
+        "damageHeal",
+        "usesBreakRule"
+      ],
+      "tableFields": [
+        "type",
+        "source",
+        "price",
+        "effect",
+        "damageHeal",
+        "usesBreakRule",
+        "storageDropDespawn",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Soda",
+        "type": "Healing consumable",
+        "source": "Vending machines or separate shop Soda purchase",
+        "price": "$5 from vending machines or the shop Soda purchase",
+        "effect": "Drinks Soda to restore HP and evasion; under 25 HP, the user crushes the can and can throw it with M1.",
+        "damageHeal": "Restores HP and evasion to full over a few seconds; regeneration stops if the user is attacked.",
+        "usesBreakRule": "Consumed after drinking; the low-HP thrown can can be picked up and thrown repeatedly until it despawns.",
+        "storageDropDespawn": "Can be carried or stored by Ten Shadows before use; thrown cans follow pickup and despawn behavior.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Vending machines and shop Soda purchase route"
+      },
+      "system": {
+        "slug": "soda",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 1,
+        "image": "/Jujutsu%20Shenanigans/items/soda.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jet Black",
+        "type": "Melee weapon",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Replaces M1 attacks with dagger slashes and knocks enemies back on the final slash.",
+        "damageHeal": "Regular M1 string damage; final slash adds knockback",
+        "usesBreakRule": "Reusable while held",
+        "storageDropDespawn": "Can be stored by Ten Shadows; drops when the holder is hit and despawns if left unclaimed.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "jet-black",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 2,
+        "image": "/Jujutsu%20Shenanigans/items/jet-black.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coin",
+        "type": "Projectile counter",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Deflects incoming projectiles toward the nearest target.",
+        "damageHeal": "No direct damage listed",
+        "usesBreakRule": "Breaks after 3 projectile deflects",
+        "storageDropDespawn": "Can be stored by Ten Shadows; normal dropped-item despawn rules apply.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "coin",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 3,
+        "image": "/Jujutsu%20Shenanigans/items/coin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gun",
+        "type": "Ranged weapon",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Shoots bullets quickly until the magazine is empty.",
+        "damageHeal": "10 damage per bullet",
+        "usesBreakRule": "6 bullets; breaks after all shots are fired",
+        "storageDropDespawn": "Can be stored by Ten Shadows; normal dropped-item despawn rules apply.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "gun",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 4,
+        "image": "/Jujutsu%20Shenanigans/items/gun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Playful Cloud",
+        "type": "Melee weapon",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Replaces M1 attacks with a 5-hit Playful Cloud combo that scales higher when the user's HP is low.",
+        "damageHeal": "18 damage full combo; scales up to +115% at low HP; broken pieces deal 8 damage each.",
+        "usesBreakRule": "Drops only after ragdoll; breaks after 15 M1 sets or by M1 while blocking, splitting into two throwable pieces.",
+        "storageDropDespawn": "Can be stored by Ten Shadows; drops when the holder is hit and despawns if left unclaimed.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "playful-cloud",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 5,
+        "image": "/Jujutsu%20Shenanigans/items/playful-cloud.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Transfigured Flesh",
+        "type": "Character-created wall",
+        "source": "Created by Perfection's Stockpile after a Soul Fire finisher",
+        "price": "No Cash cost",
+        "effect": "Creates a flesh wall that blocks players from passing through.",
+        "damageHeal": "No direct damage listed",
+        "usesBreakRule": "Wall lasts 10 seconds",
+        "storageDropDespawn": "Can be stored by Ten Shadows before use.",
+        "availability": "Current public-server item mechanic",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Created through Perfection's item route"
+      },
+      "system": {
+        "slug": "transfigured-flesh",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 6,
+        "image": "/Jujutsu%20Shenanigans/items/transfigured-flesh.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Voice Recorder",
+        "type": "Command utility",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Cycles command effects that freeze, slam, or launch a target.",
+        "damageHeal": "Freeze command holds for 3 seconds; slam command deals 14 damage; launch command deals 20 damage",
+        "usesBreakRule": "Reusable with a 30-second recharge between commands",
+        "storageDropDespawn": "Can be stored by Ten Shadows; normal dropped-item despawn rules apply.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "voice-recorder",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 7,
+        "image": "/Jujutsu%20Shenanigans/items/voice-recorder.gif"
+      }
+    },
+    {
+      "item": {
+        "name": "Hazenoki's Eye",
+        "type": "Throwable explosive",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Throws an explosive eye projectile.",
+        "damageHeal": "15 damage",
+        "usesBreakRule": "One-use item",
+        "storageDropDespawn": "Can be stored by Ten Shadows before use; disappears after being thrown.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "hazenokis-eye",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 8,
+        "image": "/Jujutsu%20Shenanigans/items/hazenokis-eye.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sniper",
+        "type": "Ranged weapon",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Fires long-range shots that are unblockable and recoil the user on the last shot.",
+        "damageHeal": "30 damage per shot",
+        "usesBreakRule": "3 shots; breaks after the third shot",
+        "storageDropDespawn": "Can be stored by Ten Shadows; normal dropped-item despawn rules apply.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "sniper",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 9,
+        "image": "/Jujutsu%20Shenanigans/items/sniper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Transfigured Human",
+        "type": "Character-created summon",
+        "source": "Created by Perfection's base Focus Strike finisher",
+        "price": "No Cash cost",
+        "effect": "Throws a Transfigured Human that morphs into a random-sized NPC and fights nearby targets.",
+        "damageHeal": "Damage value not listed; moveset depends on the Transfigured Human's size.",
+        "usesBreakRule": "Disappears if no target is nearby; can target dummies, players, and other Transfigured Humans.",
+        "storageDropDespawn": "Can be stored by Perfection with special while held, puked out with block plus M1, or used as a Soul Fire bullet with a chance to summon on miss.",
+        "availability": "Current public-server item mechanic",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Created through Perfection's Focus Strike finisher route"
+      },
+      "system": {
+        "slug": "transfigured-human",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tinted Glasses",
+        "type": "Information utility",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Reveals cooldowns and Awakening Bar progress for nearby players.",
+        "damageHeal": "No damage or healing",
+        "usesBreakRule": "No normal durability; falls off after the user is ragdolled 11 times.",
+        "storageDropDespawn": "Cannot be stored by Ten Shadows; falls off after 11 ragdolls, then normal dropped-item despawn rules apply.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "tinted-glasses",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 11,
+        "image": "/Jujutsu%20Shenanigans/items/tinted-glasses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "TNT",
+        "type": "Throwable explosive",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Primes and throws an area explosive that can be picked up before detonation.",
+        "damageHeal": "20 damage in the blast",
+        "usesBreakRule": "Explodes after priming; can be picked up before it detonates",
+        "storageDropDespawn": "Can be stored by Ten Shadows before use; explodes instead of remaining as a long-term pickup after priming.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "tnt",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 12,
+        "image": "/Jujutsu%20Shenanigans/items/tnt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Banana Peel",
+        "type": "Trap",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Places a peel that trips players who step on it.",
+        "damageHeal": "No damage listed",
+        "usesBreakRule": "Trap lasts up to 25 seconds; cannot be picked back up after placement",
+        "storageDropDespawn": "Can be stored by Ten Shadows before placement; placed peel stays active on the floor until triggered or expired.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "banana-peel",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 13,
+        "image": "/Jujutsu%20Shenanigans/items/banana-peel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Naginata",
+        "type": "Melee weapon",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Replaces M1s with Naginata swings and adds a special combo.",
+        "damageHeal": "M1s deal 4, 5, and 5 damage; front dash deals 4 damage; special hits for 4 plus 4 damage",
+        "usesBreakRule": "Reusable while held; special has a 12-second cooldown",
+        "storageDropDespawn": "Drops when the holder is hit while ragdolled and despawns if left unclaimed; cannot be stored by Ten Shadows.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "naginata",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 14,
+        "image": "/Jujutsu%20Shenanigans/items/naginata.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bowling Ball",
+        "type": "Map throwable",
+        "source": "Bowling Alley pickup",
+        "price": "Free map pickup",
+        "effect": "Throws a ball that damages a target and can retarget after rolling.",
+        "damageHeal": "20 damage",
+        "usesBreakRule": "One throw before it behaves as a rolling object",
+        "storageDropDespawn": "Can be picked up from the bowling alley; source does not list Ten Shadows storage.",
+        "availability": "Current public-server map item",
+        "modeServerLimitation": "Public servers at the Bowling Alley; private servers only if a bowling ball spawns on top of the shoe cubbies",
+        "location": "Shenanigans Ball Bowling Alley"
+      },
+      "system": {
+        "slug": "bowling-ball",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 15,
+        "image": "/Jujutsu%20Shenanigans/items/bowling-ball.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowball",
+        "type": "Throwable",
+        "source": "Shop item delivery or ground spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Throws an unblockable snowball that can hit ragdolled players.",
+        "damageHeal": "5 damage",
+        "usesBreakRule": "One-use item",
+        "storageDropDespawn": "Can be stored by Ten Shadows before use; disappears after being thrown.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Ground spawns and shop item delivery route"
+      },
+      "system": {
+        "slug": "snowball",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 16,
+        "image": "/Jujutsu%20Shenanigans/items/snowball.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crowbar",
+        "type": "Melee utility",
+        "source": "Shop item delivery or timed map spawns",
+        "price": "$10 through shop item delivery when available",
+        "effect": "Swings a heavy crowbar attack that disables a target's run and jump, with block breaks adding bleed pressure.",
+        "damageHeal": "Damage value not listed; block break adds a bleed stack, and a second block break triggers Hemorrhage.",
+        "usesBreakRule": "Reusable while held; becomes unusable for a few seconds after M1, even if the sweep misses.",
+        "storageDropDespawn": "Source does not list Ten Shadows storage; normal held-item drop/despawn rules should be treated as the fallback.",
+        "availability": "Current public-server item",
+        "modeServerLimitation": "Public and private servers",
+        "location": "Shop item delivery pool and map item spawns"
+      },
+      "system": {
+        "slug": "crowbar",
+        "section": "Public shop, spawn, and map items",
+        "sortOrder": 17,
+        "image": "/Jujutsu%20Shenanigans/items/crowbar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nepcard",
+        "type": "Secret item",
+        "source": "Secret route involving radio and Feline Finder",
+        "price": "No Cash cost listed",
+        "effect": "A hidden item with a special drop behavior.",
+        "damageHeal": "No damage or healing listed",
+        "usesBreakRule": "No break rule listed",
+        "storageDropDespawn": "Source describes special dropping behavior rather than normal shop-item storage.",
+        "availability": "Current secret item",
+        "modeServerLimitation": "Public and private servers when the secret route is available",
+        "location": "Secret route, not a normal shop pool item"
+      },
+      "system": {
+        "slug": "nepcard",
+        "section": "Character-created and secret items",
+        "sortOrder": 18,
+        "image": "/Jujutsu%20Shenanigans/items/nepcard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Broom",
+        "type": "Movement utility",
+        "source": "Private-server Item Block",
+        "price": "No Cash cost listed",
+        "effect": "Lets the user fly on a broom for a limited time.",
+        "damageHeal": "No damage or healing",
+        "usesBreakRule": "Flight lasts up to 8 seconds before the meter empties and recharges",
+        "storageDropDespawn": "Private-server item behavior; source does not describe normal public drop/spawn rules.",
+        "availability": "Private-server-only",
+        "modeServerLimitation": "Private servers only through Item Blocks",
+        "location": "Item Block"
+      },
+      "system": {
+        "slug": "broom",
+        "section": "Private-server Item Block items",
+        "sortOrder": 19,
+        "image": "/Jujutsu%20Shenanigans/items/broom.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flashlight",
+        "type": "Light utility",
+        "source": "Private-server Item Block",
+        "price": "No Cash cost listed",
+        "effect": "Turns a light on or off and can be dropped with its special.",
+        "damageHeal": "No damage or healing",
+        "usesBreakRule": "Reusable toggle while held",
+        "storageDropDespawn": "Private-server item behavior; special drops the flashlight.",
+        "availability": "Private-server-only",
+        "modeServerLimitation": "Private servers only through Item Blocks",
+        "location": "Item Block"
+      },
+      "system": {
+        "slug": "flashlight",
+        "section": "Private-server Item Block items",
+        "sortOrder": 20,
+        "image": "/Jujutsu%20Shenanigans/items/flashlight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tiantui Star's Blade",
+        "type": "Private-server weapon",
+        "source": "Private-server Item Block",
+        "price": "No Cash cost listed",
+        "effect": "Adds a sword moveset with M1 slashes and a special that reloads bullets for stronger follow-up hits.",
+        "damageHeal": "M1 hits deal 10 damage each; special can double the next hit's damage after reload",
+        "usesBreakRule": "Reusable while held; special reloads 6 bullets when used",
+        "storageDropDespawn": "Private-server item behavior; source does not describe normal public drop/spawn rules.",
+        "availability": "Private-server-only",
+        "modeServerLimitation": "Private servers only through Item Blocks",
+        "location": "Item Block"
+      },
+      "system": {
+        "slug": "tiantui-stars-blade",
+        "section": "Private-server Item Block items",
+        "sortOrder": 21,
+        "image": "/Jujutsu%20Shenanigans/items/tiantui-stars-blade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arayashiki",
+        "type": "Private-server weapon",
+        "source": "Private-server Item Block",
+        "price": "No Cash cost listed",
+        "effect": "Adds a private-server-only sword moveset with unblockable slashes and a special tied to a server-kick effect.",
+        "damageHeal": "Damage value not listed",
+        "usesBreakRule": "Reusable while held; source lists a special effect rather than ammo",
+        "storageDropDespawn": "Private-server item behavior; source does not describe normal public drop/spawn rules.",
+        "availability": "Private-server-only",
+        "modeServerLimitation": "Private servers only through Item Blocks",
+        "location": "Item Block"
+      },
+      "system": {
+        "slug": "arayashiki",
+        "section": "Private-server Item Block items",
+        "sortOrder": 22,
+        "image": "/Jujutsu%20Shenanigans/items/arayashiki.webp"
+      }
+    }
+  ]
+}

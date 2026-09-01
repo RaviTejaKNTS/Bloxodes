@@ -1,8 +1,8 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-08-29
-Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, workstation `env:doctor`/`env:check`, and homelab validation of the managed-development runtime plus guarded production release target
+Last verified: 2026-08-19
+Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on both the workstation and homelab on 2026-08-19
 
 ## Storage Model
 
@@ -23,7 +23,7 @@ env/                         # committed contracts only
   secrets/google-indexing-service-account.json
 ```
 
-Real secrets are never committed. `env/examples/` is the variable-name and safe-default contract. Deployed production values remain in GitHub Actions secrets/variables, Dokploy runtime/build configuration, the VPS worker env file, the Supabase self-hosted env, or protected `/etc/bloxodes/*-automation.env` files on the homelab.
+Real secrets are never committed. `env/examples/` is the variable-name and safe-default contract. Deployed production values remain in GitHub Actions secrets/variables, Dokploy runtime/build configuration, the VPS worker env file, the Supabase self-hosted env, or `/etc/bloxodes/article-automation.env` on the homelab.
 
 ## Profiles
 
@@ -68,10 +68,7 @@ For a workstation command that intentionally targets production, set both `BLOXO
 - Shared application contains cross-target web/auth settings, including the public GA measurement ID used by workstation builds. Public production analytics IDs are injected by GitHub/Dokploy. `ADMIN_API_TOKEN` also lives here: it enables `/api/admin/*` for the personal `apps/admin-extension`; leaving it unset disables those routes, and the production value is set only on the Dokploy runtime service.
 - Integrations contain content research/generation and distribution providers.
 - Pipelines contain workload-specific credentials and controls.
-- The article pipeline owns `ARTICLE_AUTO_PUBLISH` and the release polling/path controls. The path may point to ignored `.envs/targets/production.env`; its values remain target-owned and are parsed only by the post-model release parent.
-- The wiki pipeline owns `WIKI_DEV_SUPABASE_*`, fixed Luna Max controls, and the production target-file path. Its service env also contains only the bucket-scoped `WIKI_R2_*` keys for `bloxodes-wiki`; production database values stay in the target file and are removed from the model child environment.
 - Infrastructure contains operator access for one platform.
-- The `cloudflare` overlay contains the single bucket-scoped `WIKI_R2_*` credential set for `bloxodes-wiki`. Only the guarded publisher loads it. Managed development and production keep separate Supabase credentials and publication pointers while both use canonical `https://media.bloxodes.com/wiki/*` public media URLs.
 - `operations/analytics.env` owns GA4 account/property, Search Console, Bing Webmaster, and Google OAuth operator values. It must contain neither Umami values nor duplicated `NEXT_PUBLIC_*` web configuration.
 - `operations/umami.env` exclusively owns the self-hosted Umami operator username, password, and canonical `UMAMI_WEBSITE_ID`. Production web builds receive the public `NEXT_PUBLIC_UMAMI_HOST_URL` and matching `NEXT_PUBLIC_UMAMI_WEBSITE_ID` from GitHub/Dokploy rather than loading operator credentials.
 - Non-dotenv private material lives under `.envs/secrets/`.
@@ -90,13 +87,15 @@ The homelab checkout mirrors the complete private `.envs/` profile tree for feat
 - Local Compose web build/runtime: the same production profile is assembled from shared application, content integrations, distribution integrations, and the production target. Build inputs use four BuildKit secret mounts because `.envs/` is excluded from the Docker context; runtime uses the same four `env_file` entries.
 - Dokploy runtime: application secrets are configured on the deployed service.
 - VPS worker: `/home/codex-admin/bloxodes-stats-worker/env.stats-worker`, mode 600.
-- Homelab: `/etc/bloxodes/article-automation.env` remains root-owned and group-readable by `teja`. `/etc/bloxodes/wiki-automation.env` is root-owned and readable only by the dedicated `bloxodes-wiki-model` group. Both use mode 640 and contain managed-development worker values, not production Supabase credential values.
-- Homelab model authentication: the `teja` service account's protected Codex home plus `/home/teja/.pi/agent/auth.json` for Pi's independent ChatGPT Plus/Pro login, never the article env file. Treat both as passwords and never copy them between hosts. The article env owns only binary paths, the hard-pinned Luna Max provider/model/reasoning settings, timeouts, and queue controls.
+- Homelab: `/etc/bloxodes/article-automation.env`, root-owned, group-readable by the service group, mode 640.
+- Homelab Codex authentication: the `teja` service account's protected Codex home (currently ChatGPT-managed authentication), never the article env file. Treat its auth material like a password; readiness calls only `codex login status` and never prints tokens. The article env owns only the Codex binary/model/reasoning settings and the Grok fallback controls.
 - Self-hosted Supabase: `/home/codex-admin/bloxodes-supabase/.env`; do not copy this full vendor/runtime contract into the repository.
 
 ## Legacy Aliases
 
 The migration preserves these remaining old names: `HOSTINGER_Token` and `Northflank_API_Token`. Committed examples label them as legacy. Normalize them only together with all consumers and external stores. The former `Umami_website_id` alias was normalized to `UMAMI_WEBSITE_ID` on 2026-08-14 and must not be reintroduced.
+
+`env/examples/retired.env.example` records retired variable names that remain in protected operator profiles. Current loaders do not consume them. Keeping the blank name contract lets operators remove private values separately without deleting or exposing those values during a repository release.
 
 ## Safety
 
@@ -105,5 +104,4 @@ The migration preserves these remaining old names: `HOSTINGER_Token` and `Northf
 - Never expose `SUPABASE_SERVICE_ROLE` or `sb_secret_*` to browser/mobile/extension code.
 - `NEXT_PUBLIC_*` and Expo public variables are client-visible.
 - Production-capable scripts must retain URL/host guards and explicit allow-production flags.
-- Automated article release must sanitize inherited managed-development variables before spawning production commands and must load the production target only after all model processes have exited.
 - A profile name is not authorization; command-specific write safeguards still apply.

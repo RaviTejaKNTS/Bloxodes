@@ -66,16 +66,6 @@ import { bedwarsCollectionGroup } from "./bedwars";
 import { stealAnEggCollectionGroup } from "./steal-an-egg";
 import { growAChickenFighterCollectionGroup } from "./grow-a-chicken-fighter";
 import { animeOriginsCollectionGroup } from "./anime-origins";
-import { volleyballLegendsCollectionGroup } from "./volleyball-legends";
-import { doorsCollectionGroup } from "./doors";
-import { blueLockRivalsCollectionGroup } from "./blue-lock-rivals";
-import { slapBattlesCollectionGroup } from "./slap-battles";
-import { fleeTheFacilityCollectionGroup } from "./flee-the-facility";
-import { buildABoatForTreasureCollectionGroup } from "./build-a-boat-for-treasure";
-import { welcomeToBloxburgCollectionGroup } from "./welcome-to-bloxburg";
-import { towerDefenseSimulatorCollectionGroup } from "./tower-defense-simulator";
-import { beeSwarmSimulatorCollectionGroup } from "./bee-swarm-simulator";
-import { bladeBallCollectionGroup } from "./blade-ball";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -146,15 +136,5 @@ export const GAME_COLLECTION_GROUPS = [
   bedwarsCollectionGroup,
   stealAnEggCollectionGroup,
   growAChickenFighterCollectionGroup,
-  animeOriginsCollectionGroup,
-  volleyballLegendsCollectionGroup,
-  doorsCollectionGroup,
-  blueLockRivalsCollectionGroup,
-  slapBattlesCollectionGroup,
-  fleeTheFacilityCollectionGroup,
-  buildABoatForTreasureCollectionGroup,
-  welcomeToBloxburgCollectionGroup,
-  towerDefenseSimulatorCollectionGroup,
-  beeSwarmSimulatorCollectionGroup,
-  bladeBallCollectionGroup
+  animeOriginsCollectionGroup
 ] satisfies GameCollectionGroup[];

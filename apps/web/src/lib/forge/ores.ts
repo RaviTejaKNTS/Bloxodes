@@ -1,8 +1,7 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { repoPath } from "@/lib/paths";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
-import {
-  getTheForgeCollectionConfig,
-  loadTheForgeCollectionDataset
-} from "@/app/(site)/wiki/collections/games/the-forge";
 import type { Ore, TraitType } from "./data";
 
 export type ForgeOreDataset = {
@@ -38,6 +37,7 @@ type ForgeOreJson = {
   items?: ForgeOreRow[] | null;
 };
 
+const ORE_JSON_PATH = repoPath("data", "The Forge", "ores.json");
 const RARITY_VALUES: Ore["rarity"][] = [
   "Common",
   "Uncommon",
@@ -51,9 +51,20 @@ const RARITY_VALUES: Ore["rarity"][] = [
 ];
 
 async function readOresJson(): Promise<ForgeOreJson> {
-  const config = getTheForgeCollectionConfig("ores");
-  if (!config) throw new Error("The Forge ores collection is not registered.");
-  return loadTheForgeCollectionDataset(config) as Promise<ForgeOreJson>;
+  try {
+    const raw = await fs.readFile(ORE_JSON_PATH, "utf8");
+    const parsed = JSON.parse(raw) as ForgeOreJson | ForgeOreRow[];
+    if (Array.isArray(parsed)) {
+      return { items: parsed };
+    }
+    return parsed ?? {};
+  } catch (error) {
+    const err = error as NodeJS.ErrnoException;
+    if (err.code === "ENOENT") {
+      throw new Error(`Missing ores data file. Expected: ${ORE_JSON_PATH}`);
+    }
+    throw err;
+  }
 }
 
 function toSlug(value: string): string {

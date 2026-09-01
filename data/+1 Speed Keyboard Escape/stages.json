@@ -1,0 +1,442 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "+1 Speed Keyboard Escape",
+    "gameSlug": "1-speed-keyboard-escape",
+    "collection": "stages",
+    "route": "/wiki/1-speed-keyboard-escape/stages",
+    "catalogCode": "1-speed-keyboard-escape-stages",
+    "itemFields": [
+      "world",
+      "stageNumber",
+      "routeOrder",
+      "stageName",
+      "recommendedSpeed",
+      "recommendedLevel",
+      "difficulty",
+      "mainObstacles",
+      "winsReward",
+      "teleportCost",
+      "routeTip"
+    ],
+    "columns": [
+      "world",
+      "stageNumber",
+      "routeOrder",
+      "stageName",
+      "recommendedSpeed",
+      "recommendedLevel",
+      "difficulty",
+      "mainObstacles",
+      "winsReward",
+      "teleportCost",
+      "routeTip"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "World 1 stages",
+        "World 2 stages"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "world",
+        "stageNumber",
+        "routeOrder",
+        "stageName",
+        "recommendedSpeed",
+        "recommendedLevel"
+      ],
+      "tableFields": [
+        "world",
+        "stageNumber",
+        "routeOrder",
+        "stageName",
+        "recommendedSpeed",
+        "recommendedLevel",
+        "difficulty",
+        "mainObstacles"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Gummy Gateway",
+        "world": "World 1",
+        "stageNumber": 1,
+        "routeOrder": 1,
+        "stageName": "Gummy Gateway",
+        "recommendedSpeed": "Low",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Easy",
+        "mainObstacles": "Wide starter platforms and basic pathing",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Use this checkpoint to learn how your Speed changes movement before spending Wins on teleports."
+      },
+      "system": {
+        "slug": "gummy-gateway",
+        "section": "World 1 stages",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Walk",
+        "world": "World 1",
+        "stageNumber": 2,
+        "routeOrder": 2,
+        "stageName": "Candy Cane Walk",
+        "recommendedSpeed": "Low",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Easy",
+        "mainObstacles": "Narrow candy-cane bridge sections",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Stay centered and use short taps if your Speed makes the bridges feel slippery."
+      },
+      "system": {
+        "slug": "candy-cane-walk",
+        "section": "World 1 stages",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Creek",
+        "world": "World 1",
+        "stageNumber": 3,
+        "routeOrder": 3,
+        "stageName": "Chocolate Creek",
+        "recommendedSpeed": "Medium",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Easy-Medium",
+        "mainObstacles": "Chocolate-river gaps and jump-pad timing",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Line up jumps before touching pads, because extra Speed can throw you past the landing."
+      },
+      "system": {
+        "slug": "chocolate-creek",
+        "section": "World 1 stages",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Marshmallow Maze",
+        "world": "World 1",
+        "stageNumber": 4,
+        "routeOrder": 4,
+        "stageName": "Marshmallow Maze",
+        "recommendedSpeed": "Medium",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Medium",
+        "mainObstacles": "Maze walls, wrong turns, and dead ends",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Slow down enough to read turns. Memorizing the route saves more time than sprinting blind."
+      },
+      "system": {
+        "slug": "marshmallow-maze",
+        "section": "World 1 stages",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Caramel Canyon",
+        "world": "World 1",
+        "stageNumber": 5,
+        "routeOrder": 5,
+        "stageName": "Caramel Canyon",
+        "recommendedSpeed": "Medium-High",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Medium",
+        "mainObstacles": "Steep drops, speed ramps, and gap momentum",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Use ramp momentum for gaps, but reset your angle before the next platform."
+      },
+      "system": {
+        "slug": "caramel-canyon",
+        "section": "World 1 stages",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lollipop Ledge",
+        "world": "World 1",
+        "stageNumber": 6,
+        "routeOrder": 6,
+        "stageName": "Lollipop Ledge",
+        "recommendedSpeed": "High",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Medium",
+        "mainObstacles": "Thin ledges and rotating platforms",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Tap movement instead of holding a direction when ledges become narrow."
+      },
+      "system": {
+        "slug": "lollipop-ledge",
+        "section": "World 1 stages",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fudge Falls",
+        "world": "World 1",
+        "stageNumber": 7,
+        "routeOrder": 7,
+        "stageName": "Fudge Falls",
+        "recommendedSpeed": "High",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Medium-Hard",
+        "mainObstacles": "Waterfall gaps and timed platforms",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Watch one platform cycle before committing if your Speed makes recovery difficult."
+      },
+      "system": {
+        "slug": "fudge-falls",
+        "section": "World 1 stages",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sprinkle Sprint",
+        "world": "World 1",
+        "stageNumber": 8,
+        "routeOrder": 8,
+        "stageName": "Sprinkle Sprint",
+        "recommendedSpeed": "Very High",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Hard",
+        "mainObstacles": "Disappearing platforms and faster sprint sections",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Keep a steady rhythm over disappearing platforms instead of stopping on each one."
+      },
+      "system": {
+        "slug": "sprinkle-sprint",
+        "section": "World 1 stages",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Truffle Tunnel",
+        "world": "World 1",
+        "stageNumber": 9,
+        "routeOrder": 9,
+        "stageName": "Truffle Tunnel",
+        "recommendedSpeed": "Very High",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Hard",
+        "mainObstacles": "Dark tunnel turns and sudden direction changes",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Learn the tunnel path at a controllable pace before trying full-speed clears."
+      },
+      "system": {
+        "slug": "truffle-tunnel",
+        "section": "World 1 stages",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Brainrot Boulevard",
+        "world": "World 1",
+        "stageNumber": 10,
+        "routeOrder": 10,
+        "stageName": "Brainrot Boulevard",
+        "recommendedSpeed": "Extreme",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Hard",
+        "mainObstacles": "Chasers and tight corridors",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Watch the chaser path and keep your turns calm instead of overcorrecting at high Speed."
+      },
+      "system": {
+        "slug": "brainrot-boulevard",
+        "section": "World 1 stages",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Waffle Warp",
+        "world": "World 1",
+        "stageNumber": 11,
+        "routeOrder": 11,
+        "stageName": "Waffle Warp",
+        "recommendedSpeed": "Extreme",
+        "recommendedLevel": "Not verified",
+        "difficulty": "Very Hard",
+        "mainObstacles": "Warp zones and direction changes",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Face the next lane before entering a warp so the exit does not send you sideways."
+      },
+      "system": {
+        "slug": "waffle-warp",
+        "section": "World 1 stages",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sugar Rush",
+        "world": "World 1",
+        "stageNumber": 12,
+        "routeOrder": 12,
+        "stageName": "Sugar Rush",
+        "recommendedSpeed": "Maximum",
+        "recommendedLevel": "Around level 100 to 120 for late World 1 sections",
+        "difficulty": "Very Hard",
+        "mainObstacles": "Full-speed sections, precision jumps, and late-route maze pressure",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Zoom out for maze visibility and farm here only when you can clear it without repeated resets."
+      },
+      "system": {
+        "slug": "sugar-rush",
+        "section": "World 1 stages",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cocoa Crown",
+        "world": "World 1",
+        "stageNumber": 13,
+        "routeOrder": 13,
+        "stageName": "Cocoa Crown",
+        "recommendedSpeed": "Maximum",
+        "recommendedLevel": "Around level 100 to 120 for late World 1 sections",
+        "difficulty": "Extreme",
+        "mainObstacles": "Combined late-route obstacles and strict speed control",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Treat this as a control check. More Speed helps only if you can still steer through the final route."
+      },
+      "system": {
+        "slug": "cocoa-crown",
+        "section": "World 1 stages",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "World 2 Stage 1",
+        "world": "World 2",
+        "stageNumber": 1,
+        "routeOrder": 14,
+        "stageName": "World 2 Stage 1",
+        "recommendedSpeed": "Not verified",
+        "recommendedLevel": "140",
+        "difficulty": "World 2",
+        "mainObstacles": "Not verified",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "World 2 starts above the unlock level, so grind before entering if the first recommendation is still out of reach."
+      },
+      "system": {
+        "slug": "world-2-stage-1",
+        "section": "World 2 stages",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "World 2 Stage 2",
+        "world": "World 2",
+        "stageNumber": 2,
+        "routeOrder": 15,
+        "stageName": "World 2 Stage 2",
+        "recommendedSpeed": "Not verified",
+        "recommendedLevel": "160",
+        "difficulty": "World 2",
+        "mainObstacles": "Not verified",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Use treadmill time, rebirths, and multipliers before repeating this route if clears take too long."
+      },
+      "system": {
+        "slug": "world-2-stage-2",
+        "section": "World 2 stages",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "World 2 Stage 3",
+        "world": "World 2",
+        "stageNumber": 3,
+        "routeOrder": 16,
+        "stageName": "World 2 Stage 3",
+        "recommendedSpeed": "Not verified",
+        "recommendedLevel": "180",
+        "difficulty": "World 2",
+        "mainObstacles": "Not verified",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Attempt this only after earlier World 2 clears feel consistent, because the route asks for another level jump."
+      },
+      "system": {
+        "slug": "world-2-stage-3",
+        "section": "World 2 stages",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "World 2 Stage 4",
+        "world": "World 2",
+        "stageNumber": 4,
+        "routeOrder": 17,
+        "stageName": "World 2 Stage 4",
+        "recommendedSpeed": "Not verified",
+        "recommendedLevel": "200+",
+        "difficulty": "World 2",
+        "mainObstacles": "Not verified",
+        "winsReward": "Not verified",
+        "teleportCost": "Not verified",
+        "routeTip": "Treat this as the current verified World 2 endpoint until stage names and rewards are checked in-game."
+      },
+      "system": {
+        "slug": "world-2-stage-4",
+        "section": "World 2 stages",
+        "sortOrder": 17,
+        "image": null
+      }
+    }
+  ]
+}

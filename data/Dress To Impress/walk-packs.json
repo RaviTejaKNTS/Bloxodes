@@ -1,0 +1,411 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "walk-packs",
+    "route": "/wiki/dress-to-impress/walk-packs",
+    "catalogCode": "dress-to-impress-walk-packs",
+    "itemFields": [
+      "sourceRoute",
+      "price",
+      "currency",
+      "availability",
+      "motion",
+      "packNote",
+      "updateContext"
+    ],
+    "columns": [
+      "sourceRoute",
+      "price",
+      "currency",
+      "availability",
+      "motion",
+      "packNote",
+      "updateContext"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Cash shop walk packs",
+        "Seasonal currency walk packs",
+        "Baddie Pass reward walk packs",
+        "Advent and special gift walk packs"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "sourceRoute",
+        "price",
+        "currency",
+        "availability",
+        "motion",
+        "packNote"
+      ],
+      "tableFields": [
+        "sourceRoute",
+        "price",
+        "currency",
+        "availability",
+        "motion",
+        "packNote",
+        "updateContext"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Attitude Walk Pack",
+        "sourceRoute": "Shop",
+        "price": "9,000 Cash",
+        "currency": "Cash",
+        "availability": "Permanent shop pack",
+        "motion": "Walk and idle",
+        "packNote": "High-cost Cash walk pack with a confident runway feel.",
+        "updateContext": "Spring 2025"
+      },
+      "system": {
+        "slug": "attitude-walk-pack",
+        "section": "Cash shop walk packs",
+        "sortOrder": 1,
+        "image": "/Dress%20To%20Impress/walk-packs/attitude-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cutesy Walk Pack",
+        "sourceRoute": "Shop",
+        "price": "5,500 Cash",
+        "currency": "Cash",
+        "availability": "Permanent shop pack",
+        "motion": "Walk and idle",
+        "packNote": "Cash walk pack for softer or cute runway presentation.",
+        "updateContext": "Spring 2025"
+      },
+      "system": {
+        "slug": "cutesy-walk-pack",
+        "section": "Cash shop walk packs",
+        "sortOrder": 2,
+        "image": "/Dress%20To%20Impress/walk-packs/cutesy-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diva Walk Pack",
+        "sourceRoute": "Shop",
+        "price": "8,000 Cash",
+        "currency": "Cash",
+        "availability": "Permanent shop pack",
+        "motion": "Walk and idle",
+        "packNote": "Cash walk pack for dramatic runway presentation.",
+        "updateContext": "Spring 2025"
+      },
+      "system": {
+        "slug": "diva-walk-pack",
+        "section": "Cash shop walk packs",
+        "sortOrder": 3,
+        "image": "/Dress%20To%20Impress/walk-packs/diva-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elegant Walk Pack",
+        "sourceRoute": "Shop",
+        "price": "4,500 Cash",
+        "currency": "Cash",
+        "availability": "Permanent shop pack",
+        "motion": "Walk and idle",
+        "packNote": "Lower-cost Cash walk pack for polished formal looks.",
+        "updateContext": "Spring 2025"
+      },
+      "system": {
+        "slug": "elegant-walk-pack",
+        "section": "Cash shop walk packs",
+        "sortOrder": 4,
+        "image": "/Dress%20To%20Impress/walk-packs/elegant-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Icy Walk Pack",
+        "sourceRoute": "Shop",
+        "price": "5,000 Cash",
+        "currency": "Cash",
+        "availability": "Permanent shop pack",
+        "motion": "Walk and idle",
+        "packNote": "Cash walk pack with cooler presentation theming.",
+        "updateContext": "Spring 2025"
+      },
+      "system": {
+        "slug": "icy-walk-pack",
+        "section": "Cash shop walk packs",
+        "sortOrder": 5,
+        "image": "/Dress%20To%20Impress/walk-packs/icy-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peace Walk Pack",
+        "sourceRoute": "Shop",
+        "price": "8,500 Cash",
+        "currency": "Cash",
+        "availability": "Permanent shop pack",
+        "motion": "Walk and idle",
+        "packNote": "Cash walk pack with a calmer runway identity.",
+        "updateContext": "Spring 2025"
+      },
+      "system": {
+        "slug": "peace-walk-pack",
+        "section": "Cash shop walk packs",
+        "sortOrder": 6,
+        "image": "/Dress%20To%20Impress/walk-packs/peace-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ballet Walk Pack",
+        "sourceRoute": "Valentine's 2026 Shop",
+        "price": "1,000 Candy Hearts",
+        "currency": "Candy Hearts",
+        "availability": "Limited-time seasonal shop route",
+        "motion": "Walk and idle",
+        "packNote": "Seasonal walk pack from the Valentine's 2026 shop.",
+        "updateContext": "Valentine's 2026"
+      },
+      "system": {
+        "slug": "ballet-walk-pack",
+        "section": "Seasonal currency walk packs",
+        "sortOrder": 7,
+        "image": "/Dress%20To%20Impress/walk-packs/ballet-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ivy League Walk Pack",
+        "sourceRoute": "Summer 2025 Shop",
+        "price": "1,400 Seashells",
+        "currency": "Seashells",
+        "availability": "Limited-time seasonal shop route",
+        "motion": "Walk and idle",
+        "packNote": "Seasonal shop walk pack from Summer 2025.",
+        "updateContext": "Summer 2025"
+      },
+      "system": {
+        "slug": "ivy-league-walk-pack",
+        "section": "Seasonal currency walk packs",
+        "sortOrder": 8,
+        "image": "/Dress%20To%20Impress/walk-packs/ivy-league-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovestruck Walk Pack",
+        "sourceRoute": "Valentine's 2026 Shop",
+        "price": "950 Candy Hearts",
+        "currency": "Candy Hearts",
+        "availability": "Limited-time seasonal shop route",
+        "motion": "Walk and idle",
+        "packNote": "Seasonal walk pack from the Valentine's 2026 shop.",
+        "updateContext": "Valentine's 2026"
+      },
+      "system": {
+        "slug": "lovestruck-walk-pack",
+        "section": "Seasonal currency walk packs",
+        "sortOrder": 9,
+        "image": "/Dress%20To%20Impress/walk-packs/lovestruck-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sassy Walk Pack",
+        "sourceRoute": "Winter 2025 Shop",
+        "price": "650 Snowflakes",
+        "currency": "Snowflakes",
+        "availability": "Limited-time seasonal shop route",
+        "motion": "Walk and idle",
+        "packNote": "Seasonal walk pack from the Winter 2025 shop.",
+        "updateContext": "Winter 2025"
+      },
+      "system": {
+        "slug": "sassy-walk-pack",
+        "section": "Seasonal currency walk packs",
+        "sortOrder": 10,
+        "image": "/Dress%20To%20Impress/walk-packs/sassy-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragged Out Walk Pack",
+        "sourceRoute": "Summer Baddie Pass",
+        "price": "Free reward",
+        "availability": "Old limited-time pass route",
+        "motion": "Walk and idle",
+        "packNote": "Summer Collection Baddie Pass reward.",
+        "updateContext": "Summer 2025"
+      },
+      "system": {
+        "slug": "dragged-out-walk-pack",
+        "section": "Baddie Pass reward walk packs",
+        "sortOrder": 11,
+        "image": "/Dress%20To%20Impress/walk-packs/dragged-out-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fresh Walk Pack",
+        "sourceRoute": "Summer Baddie Pass tier 14",
+        "price": "Free reward",
+        "availability": "Old limited-time pass route",
+        "motion": "Walk and idle",
+        "packNote": "Summer Collection Baddie Pass tier reward.",
+        "updateContext": "Summer 2025"
+      },
+      "system": {
+        "slug": "fresh-walk-pack",
+        "section": "Baddie Pass reward walk packs",
+        "sortOrder": 12,
+        "image": "/Dress%20To%20Impress/walk-packs/fresh-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Walk Pack",
+        "sourceRoute": "Halloween Baddie Pass tier 14",
+        "price": "Free reward",
+        "availability": "Limited-time pass route",
+        "motion": "Walk and idle",
+        "packNote": "Halloween Collection Baddie Pass reward.",
+        "updateContext": "Halloween 2025"
+      },
+      "system": {
+        "slug": "ghost-walk-pack",
+        "section": "Baddie Pass reward walk packs",
+        "sortOrder": 13,
+        "image": "/Dress%20To%20Impress/walk-packs/ghost-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare Walk Pack",
+        "sourceRoute": "Halloween Baddie Pass tier 26 Diamond Pass",
+        "price": "Free reward",
+        "availability": "Limited-time pass route",
+        "motion": "Walk and idle",
+        "packNote": "Halloween Collection Diamond Pass tier reward.",
+        "updateContext": "Halloween 2025"
+      },
+      "system": {
+        "slug": "nightmare-walk-pack",
+        "section": "Baddie Pass reward walk packs",
+        "sortOrder": 14,
+        "image": "/Dress%20To%20Impress/walk-packs/nightmare-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Possessed Walk Pack",
+        "sourceRoute": "Halloween Baddie Pass tier 20",
+        "price": "Free reward",
+        "availability": "Limited-time pass route",
+        "motion": "Walk and idle",
+        "packNote": "Halloween Collection Baddie Pass reward.",
+        "updateContext": "Halloween 2025"
+      },
+      "system": {
+        "slug": "possessed-walk-pack",
+        "section": "Baddie Pass reward walk packs",
+        "sortOrder": 15,
+        "image": "/Dress%20To%20Impress/walk-packs/possessed-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Superhero Walk Pack",
+        "sourceRoute": "Summer Baddie Pass",
+        "price": "Free reward",
+        "availability": "Old limited-time pass route",
+        "motion": "Walk and idle",
+        "packNote": "Summer Collection Baddie Pass reward; source notes it was originally named Magnetic Walk Pack.",
+        "updateContext": "Summer 2025"
+      },
+      "system": {
+        "slug": "superhero-walk-pack",
+        "section": "Baddie Pass reward walk packs",
+        "sortOrder": 16,
+        "image": "/Dress%20To%20Impress/walk-packs/superhero-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Superstar Walk Pack",
+        "sourceRoute": "Spring Collection Baddie Pass tier 23",
+        "price": "Free reward",
+        "availability": "Limited-time pass route; final live check needed",
+        "motion": "Walk and idle",
+        "packNote": "Trip to Tokyo Spring Collection Baddie Pass reward.",
+        "updateContext": "Trip to Tokyo"
+      },
+      "system": {
+        "slug": "superstar-walk-pack",
+        "section": "Baddie Pass reward walk packs",
+        "sortOrder": 17,
+        "image": "/Dress%20To%20Impress/walk-packs/superstar-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Freezing Walk Pack",
+        "sourceRoute": "Winter Advent Calendar 2025 day 10",
+        "price": "Free reward",
+        "availability": "Old limited-time advent route",
+        "motion": "Walk and idle",
+        "packNote": "Winter 2025 Advent Calendar reward.",
+        "updateContext": "Winter 2025"
+      },
+      "system": {
+        "slug": "freezing-walk-pack",
+        "section": "Advent and special gift walk packs",
+        "sortOrder": 18,
+        "image": "/Dress%20To%20Impress/walk-packs/freezing-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Skating Walk Pack",
+        "sourceRoute": "Winter Advent Calendar 2025 day 3",
+        "price": "Free reward",
+        "availability": "Old limited-time advent route",
+        "motion": "Walk and idle",
+        "packNote": "Winter 2025 Advent Calendar reward.",
+        "updateContext": "Winter 2025"
+      },
+      "system": {
+        "slug": "ice-skating-walk-pack",
+        "section": "Advent and special gift walk packs",
+        "sortOrder": 19,
+        "image": "/Dress%20To%20Impress/walk-packs/ice-skating-walk-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Baby Walk Pack",
+        "sourceRoute": "Summer 2025 apology gift / Meat Room route",
+        "price": "Free reward",
+        "availability": "Old limited-time special route",
+        "motion": "Walk and idle",
+        "packNote": "Source text describes both an apology gift and a Meat Room route, so keep the route note broad.",
+        "updateContext": "Summer 2025 Part 2"
+      },
+      "system": {
+        "slug": "star-baby-walk-pack",
+        "section": "Advent and special gift walk packs",
+        "sortOrder": 20,
+        "image": "/Dress%20To%20Impress/walk-packs/star-baby-walk-pack.webp"
+      }
+    }
+  ]
+}

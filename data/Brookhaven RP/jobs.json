@@ -1,0 +1,1266 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "jobs",
+    "route": "/wiki/brookhaven-rp/jobs",
+    "catalogCode": "brookhaven-rp-jobs",
+    "itemFields": [
+      "number",
+      "category",
+      "requirements",
+      "notes"
+    ],
+    "columns": [
+      "number",
+      "category",
+      "requirements",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Service",
+        "Family",
+        "Shop",
+        "Arts",
+        "Outside"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": "notes",
+      "cardDescriptionField": "notes",
+      "cardFields": [
+        "number",
+        "category",
+        "requirements",
+        "notes"
+      ],
+      "tableFields": [
+        "number",
+        "category",
+        "requirements",
+        "notes"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Police",
+        "number": "1",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Law enforcement role, commonly interpreted as a Police Officer."
+      },
+      "system": {
+        "slug": "police",
+        "section": "Service",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Jobs/police.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hospital",
+        "number": "2",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Medical role, commonly interpreted as a Doctor."
+      },
+      "system": {
+        "slug": "hospital",
+        "section": "Service",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Jobs/hospital.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire House",
+        "number": "3",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Emergency response role, commonly interpreted as a Firefighter."
+      },
+      "system": {
+        "slug": "fire-house",
+        "section": "Service",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Jobs/fire-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bank",
+        "number": "4",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Financial role, commonly interpreted as a Bank Worker."
+      },
+      "system": {
+        "slug": "bank",
+        "section": "Service",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Jobs/bank.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "S.W.A.T",
+        "number": "5",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Tactical law enforcement role, commonly interpreted as a S.W.A.T Officer."
+      },
+      "system": {
+        "slug": "s-w-a-t",
+        "section": "Service",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Jobs/s-w-a-t.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Driver",
+        "number": "6",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Transportation role involving driving vehicles."
+      },
+      "system": {
+        "slug": "driver",
+        "section": "Service",
+        "sortOrder": 6,
+        "image": "/Brookhaven%20RP/Jobs/driver.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Repairman",
+        "number": "7",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Maintenance role involving repairs and technical work."
+      },
+      "system": {
+        "slug": "repairman",
+        "section": "Service",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Jobs/repairman.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sheriff",
+        "number": "8",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Law enforcement role representing a county sheriff."
+      },
+      "system": {
+        "slug": "sheriff",
+        "section": "Service",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Jobs/sheriff.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Criminal",
+        "number": "9",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Role representing unlawful or criminal character behavior."
+      },
+      "system": {
+        "slug": "criminal",
+        "section": "Service",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Jobs/criminal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Detective",
+        "number": "10",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Investigative law enforcement role."
+      },
+      "system": {
+        "slug": "detective",
+        "section": "Service",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Jobs/detective.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mayor",
+        "number": "11",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Government leadership role representing the city mayor."
+      },
+      "system": {
+        "slug": "mayor",
+        "section": "Service",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Jobs/mayor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bodyguard",
+        "number": "12",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Protective role assigned to guard individuals."
+      },
+      "system": {
+        "slug": "bodyguard",
+        "section": "Service",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Jobs/bodyguard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Military Police",
+        "number": "13",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Military law enforcement role."
+      },
+      "system": {
+        "slug": "military-police",
+        "section": "Service",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Jobs/military-police.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flight Attendant",
+        "number": "14",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Airline service role assisting passengers."
+      },
+      "system": {
+        "slug": "flight-attendant",
+        "section": "Service",
+        "sortOrder": 14,
+        "image": "/Brookhaven%20RP/Jobs/flight-attendant.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pilot",
+        "number": "15",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Aviation role responsible for flying aircraft."
+      },
+      "system": {
+        "slug": "pilot",
+        "section": "Service",
+        "sortOrder": 15,
+        "image": "/Brookhaven%20RP/Jobs/pilot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Security",
+        "number": "16",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Security personnel role responsible for protection and surveillance."
+      },
+      "system": {
+        "slug": "security",
+        "section": "Service",
+        "sortOrder": 16,
+        "image": "/Brookhaven%20RP/Jobs/security.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spy",
+        "number": "17",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Intelligence role focused on secrecy and information gathering."
+      },
+      "system": {
+        "slug": "spy",
+        "section": "Service",
+        "sortOrder": 17,
+        "image": "/Brookhaven%20RP/Jobs/spy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Office Worker",
+        "number": "18",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Business role involving office-based work."
+      },
+      "system": {
+        "slug": "office-worker",
+        "section": "Service",
+        "sortOrder": 18,
+        "image": "/Brookhaven%20RP/Jobs/office-worker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Taxi Driver",
+        "number": "19",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Transportation role providing taxi services."
+      },
+      "system": {
+        "slug": "taxi-driver",
+        "section": "Service",
+        "sortOrder": 19,
+        "image": "/Brookhaven%20RP/Jobs/taxi-driver.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sell Houses",
+        "number": "20",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Real estate role, commonly interpreted as a Real Estate Agent."
+      },
+      "system": {
+        "slug": "sell-houses",
+        "section": "Service",
+        "sortOrder": 20,
+        "image": "/Brookhaven%20RP/Jobs/sell-houses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Military",
+        "number": "21",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Armed forces role representing military personnel."
+      },
+      "system": {
+        "slug": "military",
+        "section": "Service",
+        "sortOrder": 21,
+        "image": "/Brookhaven%20RP/Jobs/military.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Postal Worker",
+        "number": "22",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Delivery role involving mail and package distribution."
+      },
+      "system": {
+        "slug": "postal-worker",
+        "section": "Service",
+        "sortOrder": 22,
+        "image": "/Brookhaven%20RP/Jobs/postal-worker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dentist",
+        "number": "23",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Medical role focused on dental care."
+      },
+      "system": {
+        "slug": "dentist",
+        "section": "Service",
+        "sortOrder": 23,
+        "image": "/Brookhaven%20RP/Jobs/dentist.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Patient",
+        "number": "24",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Hospital role representing a medical patient."
+      },
+      "system": {
+        "slug": "patient",
+        "section": "Service",
+        "sortOrder": 24,
+        "image": "/Brookhaven%20RP/Jobs/patient.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Janitor",
+        "number": "25",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Maintenance role responsible for cleaning facilities."
+      },
+      "system": {
+        "slug": "janitor",
+        "section": "Service",
+        "sortOrder": 25,
+        "image": "/Brookhaven%20RP/Jobs/janitor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tow Truck Driver",
+        "number": "26",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Vehicle recovery and towing role."
+      },
+      "system": {
+        "slug": "tow-truck-driver",
+        "section": "Service",
+        "sortOrder": 26,
+        "image": "/Brookhaven%20RP/Jobs/tow-truck-driver.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Volunteer Worker",
+        "number": "27",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Community assistance and support role."
+      },
+      "system": {
+        "slug": "volunteer-worker",
+        "section": "Service",
+        "sortOrder": 27,
+        "image": "/Brookhaven%20RP/Jobs/volunteer-worker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "State Trooper",
+        "number": "28",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Highway and state-level law enforcement role."
+      },
+      "system": {
+        "slug": "state-trooper",
+        "section": "Service",
+        "sortOrder": 28,
+        "image": "/Brookhaven%20RP/Jobs/state-trooper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Car Wash",
+        "number": "29",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Service role involving vehicle cleaning."
+      },
+      "system": {
+        "slug": "car-wash",
+        "section": "Service",
+        "sortOrder": 29,
+        "image": "/Brookhaven%20RP/Jobs/car-wash.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Business Person",
+        "number": "30",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Corporate or entrepreneurial role."
+      },
+      "system": {
+        "slug": "business-person",
+        "section": "Service",
+        "sortOrder": 30,
+        "image": "/Brookhaven%20RP/Jobs/business-person.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Agency",
+        "number": "31",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Professional agency role, often associated with management or services."
+      },
+      "system": {
+        "slug": "agency",
+        "section": "Service",
+        "sortOrder": 31,
+        "image": "/Brookhaven%20RP/Jobs/agency.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lawyer",
+        "number": "32",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Legal profession role representing attorneys."
+      },
+      "system": {
+        "slug": "lawyer",
+        "section": "Service",
+        "sortOrder": 32,
+        "image": "/Brookhaven%20RP/Jobs/lawyer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Judge",
+        "number": "33",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Judicial role responsible for court proceedings."
+      },
+      "system": {
+        "slug": "judge",
+        "section": "Service",
+        "sortOrder": 33,
+        "image": "/Brookhaven%20RP/Jobs/judge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Garbage",
+        "number": "34",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Sanitation role, commonly interpreted as a Garbage Collector."
+      },
+      "system": {
+        "slug": "garbage",
+        "section": "Service",
+        "sortOrder": 34,
+        "image": "/Brookhaven%20RP/Jobs/garbage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Construction",
+        "number": "35",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Building and infrastructure role, commonly interpreted as a Construction Worker."
+      },
+      "system": {
+        "slug": "construction",
+        "section": "Service",
+        "sortOrder": 35,
+        "image": "/Brookhaven%20RP/Jobs/construction.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Veteranian",
+        "number": "36",
+        "category": "Service",
+        "requirements": "Free",
+        "notes": "Medical role focused on animal care, commonly interpreted as a Veterinarian."
+      },
+      "system": {
+        "slug": "veteranian",
+        "section": "Service",
+        "sortOrder": 36,
+        "image": "/Brookhaven%20RP/Jobs/veteranian.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teacher",
+        "number": "1",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Education role responsible for teaching students."
+      },
+      "system": {
+        "slug": "teacher",
+        "section": "Family",
+        "sortOrder": 37,
+        "image": "/Brookhaven%20RP/Jobs/teacher.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Student",
+        "number": "2",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "School role representing a student attending classes."
+      },
+      "system": {
+        "slug": "student",
+        "section": "Family",
+        "sortOrder": 38,
+        "image": "/Brookhaven%20RP/Jobs/student.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Babysitter",
+        "number": "3",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Childcare role responsible for looking after children."
+      },
+      "system": {
+        "slug": "babysitter",
+        "section": "Family",
+        "sortOrder": 39,
+        "image": "/Brookhaven%20RP/Jobs/babysitter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Principal",
+        "number": "4",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "School administration role representing the head of a school."
+      },
+      "system": {
+        "slug": "principal",
+        "section": "Family",
+        "sortOrder": 40,
+        "image": "/Brookhaven%20RP/Jobs/principal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Day Care",
+        "number": "5",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Childcare role, commonly interpreted as a Daycare Worker."
+      },
+      "system": {
+        "slug": "day-care",
+        "section": "Family",
+        "sortOrder": 41,
+        "image": "/Brookhaven%20RP/Jobs/day-care.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Maid",
+        "number": "6",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Household service role focused on cleaning and maintenance."
+      },
+      "system": {
+        "slug": "maid",
+        "section": "Family",
+        "sortOrder": 42,
+        "image": "/Brookhaven%20RP/Jobs/maid.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "At home dad",
+        "number": "7",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Family role representing a stay-at-home father."
+      },
+      "system": {
+        "slug": "at-home-dad",
+        "section": "Family",
+        "sortOrder": 43,
+        "image": "/Brookhaven%20RP/Jobs/at-home-dad.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "At home mom",
+        "number": "8",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Family role representing a stay-at-home mother."
+      },
+      "system": {
+        "slug": "at-home-mom",
+        "section": "Family",
+        "sortOrder": 44,
+        "image": "/Brookhaven%20RP/Jobs/at-home-mom.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Church",
+        "number": "9",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Religious role, commonly interpreted as a Church Worker or Clergy member."
+      },
+      "system": {
+        "slug": "church",
+        "section": "Family",
+        "sortOrder": 45,
+        "image": "/Brookhaven%20RP/Jobs/church.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Adoption Worker",
+        "number": "10",
+        "category": "Family",
+        "requirements": "Free",
+        "notes": "Social services role associated with adoption-related activities."
+      },
+      "system": {
+        "slug": "adoption-worker",
+        "section": "Family",
+        "sortOrder": 46,
+        "image": "/Brookhaven%20RP/Jobs/adoption-worker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grocery Store",
+        "number": "1",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Retail role, commonly interpreted as a Grocery Store Worker or Cashier."
+      },
+      "system": {
+        "slug": "grocery-store",
+        "section": "Shop",
+        "sortOrder": 47,
+        "image": "/Brookhaven%20RP/Jobs/grocery-store.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hair & Nails",
+        "number": "2",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Beauty service role, commonly interpreted as a Hairdresser or Nail Technician."
+      },
+      "system": {
+        "slug": "hair-and-nails",
+        "section": "Shop",
+        "sortOrder": 48,
+        "image": "/Brookhaven%20RP/Jobs/hair-and-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chef",
+        "number": "3",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Food service role responsible for preparing meals."
+      },
+      "system": {
+        "slug": "chef",
+        "section": "Shop",
+        "sortOrder": 49,
+        "image": "/Brookhaven%20RP/Jobs/chef.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Cream",
+        "number": "4",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Food service role, commonly interpreted as an Ice Cream Shop Worker."
+      },
+      "system": {
+        "slug": "ice-cream",
+        "section": "Shop",
+        "sortOrder": 50,
+        "image": "/Brookhaven%20RP/Jobs/ice-cream.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clothing",
+        "number": "5",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Retail role, commonly interpreted as a Clothing Store Worker."
+      },
+      "system": {
+        "slug": "clothing",
+        "section": "Shop",
+        "sortOrder": 51,
+        "image": "/Brookhaven%20RP/Jobs/clothing.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mo's Pizza",
+        "number": "6",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Restaurant role associated with working at Mo's Pizza."
+      },
+      "system": {
+        "slug": "mo-s-pizza",
+        "section": "Shop",
+        "sortOrder": 52,
+        "image": "/Brookhaven%20RP/Jobs/mo-s-pizza.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Burger Barn",
+        "number": "7",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Restaurant role associated with working at Burger Barn."
+      },
+      "system": {
+        "slug": "burger-barn",
+        "section": "Shop",
+        "sortOrder": 53,
+        "image": "/Brookhaven%20RP/Jobs/burger-barn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starbrooks",
+        "number": "8",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Café role associated with working at Starbrooks."
+      },
+      "system": {
+        "slug": "starbrooks",
+        "section": "Shop",
+        "sortOrder": 54,
+        "image": "/Brookhaven%20RP/Jobs/starbrooks.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pastry Chef",
+        "number": "9",
+        "category": "Shop",
+        "requirements": "Free",
+        "notes": "Food service role specializing in baked goods and desserts."
+      },
+      "system": {
+        "slug": "pastry-chef",
+        "section": "Shop",
+        "sortOrder": 55,
+        "image": "/Brookhaven%20RP/Jobs/pastry-chef.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dancer",
+        "number": "1",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Performance role focused on dance and entertainment."
+      },
+      "system": {
+        "slug": "dancer",
+        "section": "Arts",
+        "sortOrder": 56,
+        "image": "/Brookhaven%20RP/Jobs/dancer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Actor",
+        "number": "2",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Performance role representing film or stage acting."
+      },
+      "system": {
+        "slug": "actor",
+        "section": "Arts",
+        "sortOrder": 57,
+        "image": "/Brookhaven%20RP/Jobs/actor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Club Brooks",
+        "number": "3",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Entertainment venue role, commonly interpreted as a Club Performer or Staff member."
+      },
+      "system": {
+        "slug": "club-brooks",
+        "section": "Arts",
+        "sortOrder": 58,
+        "image": "/Brookhaven%20RP/Jobs/club-brooks.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Model",
+        "number": "4",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Fashion and media role representing a model."
+      },
+      "system": {
+        "slug": "model",
+        "section": "Arts",
+        "sortOrder": 59,
+        "image": "/Brookhaven%20RP/Jobs/model.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Singer",
+        "number": "5",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Music performance role focused on singing."
+      },
+      "system": {
+        "slug": "singer",
+        "section": "Arts",
+        "sortOrder": 60,
+        "image": "/Brookhaven%20RP/Jobs/singer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Musician",
+        "number": "6",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Music role involving instrument performance."
+      },
+      "system": {
+        "slug": "musician",
+        "section": "Arts",
+        "sortOrder": 61,
+        "image": "/Brookhaven%20RP/Jobs/musician.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "News",
+        "number": "7",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Media role, commonly interpreted as a News Reporter or Broadcaster."
+      },
+      "system": {
+        "slug": "news",
+        "section": "Arts",
+        "sortOrder": 62,
+        "image": "/Brookhaven%20RP/Jobs/news.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "UTuber",
+        "number": "8",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Online content creator role focused on video creation."
+      },
+      "system": {
+        "slug": "utuber",
+        "section": "Arts",
+        "sortOrder": 63,
+        "image": "/Brookhaven%20RP/Jobs/utuber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gamer",
+        "number": "9",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Entertainment role representing a video game player."
+      },
+      "system": {
+        "slug": "gamer",
+        "section": "Arts",
+        "sortOrder": 64,
+        "image": "/Brookhaven%20RP/Jobs/gamer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "VIP",
+        "number": "10",
+        "category": "Arts",
+        "requirements": "VIP",
+        "notes": "Special badge role available to VIP Pack owners."
+      },
+      "system": {
+        "slug": "vip",
+        "section": "Arts",
+        "sortOrder": 65,
+        "image": "/Brookhaven%20RP/Jobs/vip.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Writer",
+        "number": "11",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Creative role focused on writing and storytelling."
+      },
+      "system": {
+        "slug": "writer",
+        "section": "Arts",
+        "sortOrder": 66,
+        "image": "/Brookhaven%20RP/Jobs/writer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Librarian",
+        "number": "12",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Library role responsible for managing books and resources."
+      },
+      "system": {
+        "slug": "librarian",
+        "section": "Arts",
+        "sortOrder": 67,
+        "image": "/Brookhaven%20RP/Jobs/librarian.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Movies",
+        "number": "13",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Film-related role, commonly interpreted as a Movie Staff or Cinema Worker."
+      },
+      "system": {
+        "slug": "movies",
+        "section": "Arts",
+        "sortOrder": 68,
+        "image": "/Brookhaven%20RP/Jobs/movies.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Photographer",
+        "number": "14",
+        "category": "Arts",
+        "requirements": "Free",
+        "notes": "Media role focused on photography and image capture."
+      },
+      "system": {
+        "slug": "photographer",
+        "section": "Arts",
+        "sortOrder": 69,
+        "image": "/Brookhaven%20RP/Jobs/photographer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Athlete",
+        "number": "1",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Sports role focused on athletic activities and competition."
+      },
+      "system": {
+        "slug": "athlete",
+        "section": "Outside",
+        "sortOrder": 70,
+        "image": "/Brookhaven%20RP/Jobs/athlete.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Life Guard",
+        "number": "2",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Safety role responsible for monitoring swimming areas and assisting swimmers."
+      },
+      "system": {
+        "slug": "life-guard",
+        "section": "Outside",
+        "sortOrder": 71,
+        "image": "/Brookhaven%20RP/Jobs/life-guard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stables",
+        "number": "3",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Animal care role, commonly interpreted as a Stable Worker or Horse Caretaker."
+      },
+      "system": {
+        "slug": "stables",
+        "section": "Outside",
+        "sortOrder": 72,
+        "image": "/Brookhaven%20RP/Jobs/stables.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Park Ranger",
+        "number": "4",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Outdoor service role responsible for maintaining parks and natural areas."
+      },
+      "system": {
+        "slug": "park-ranger",
+        "section": "Outside",
+        "sortOrder": 73,
+        "image": "/Brookhaven%20RP/Jobs/park-ranger.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Referee",
+        "number": "5",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Sports official role responsible for overseeing games and matches."
+      },
+      "system": {
+        "slug": "referee",
+        "section": "Outside",
+        "sortOrder": 74,
+        "image": "/Brookhaven%20RP/Jobs/referee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Race Car Driver",
+        "number": "6",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Motorsports role focused on competitive racing."
+      },
+      "system": {
+        "slug": "race-car-driver",
+        "section": "Outside",
+        "sortOrder": 75,
+        "image": "/Brookhaven%20RP/Jobs/race-car-driver.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Paranormal Hunter",
+        "number": "7",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Investigation role focused on supernatural or unexplained activities."
+      },
+      "system": {
+        "slug": "paranormal-hunter",
+        "section": "Outside",
+        "sortOrder": 76,
+        "image": "/Brookhaven%20RP/Jobs/paranormal-hunter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Farmer",
+        "number": "8",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Agricultural role involving crop growing and farm work."
+      },
+      "system": {
+        "slug": "farmer",
+        "section": "Outside",
+        "sortOrder": 77,
+        "image": "/Brookhaven%20RP/Jobs/farmer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Astronaut",
+        "number": "9",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Space exploration role representing astronauts."
+      },
+      "system": {
+        "slug": "astronaut",
+        "section": "Outside",
+        "sortOrder": 78,
+        "image": "/Brookhaven%20RP/Jobs/astronaut.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gardener",
+        "number": "10",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Outdoor maintenance role focused on plant care and landscaping."
+      },
+      "system": {
+        "slug": "gardener",
+        "section": "Outside",
+        "sortOrder": 79,
+        "image": "/Brookhaven%20RP/Jobs/gardener.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisherman",
+        "number": "11",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Fishing role involving catching fish and aquatic activities."
+      },
+      "system": {
+        "slug": "fisherman",
+        "section": "Outside",
+        "sortOrder": 80,
+        "image": "/Brookhaven%20RP/Jobs/fisherman.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Animal Rescue",
+        "number": "12",
+        "category": "Outside",
+        "requirements": "Free",
+        "notes": "Animal care role focused on rescuing and helping animals."
+      },
+      "system": {
+        "slug": "animal-rescue",
+        "section": "Outside",
+        "sortOrder": 81,
+        "image": "/Brookhaven%20RP/Jobs/animal-rescue.webp"
+      }
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murderers VS Sheriffs",
+    "gameSlug": "murderers-vs-sheriffs",
+    "collection": "modes",
+    "route": "/wiki/murderers-vs-sheriffs/modes",
+    "catalogCode": "murderers-vs-sheriffs-modes",
+    "itemFields": [
+      "teamSize",
+      "queuePlace",
+      "placeId",
+      "availability",
+      "accessRequirement",
+      "bestFor",
+      "difficulty",
+      "rewardNotes",
+      "partyFriendSupport",
+      "notes"
+    ],
+    "columns": [
+      "teamSize",
+      "queuePlace",
+      "placeId",
+      "availability",
+      "accessRequirement",
+      "bestFor",
+      "difficulty",
+      "rewardNotes",
+      "partyFriendSupport",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Solo practice",
+        "Team queues",
+        "Pro access"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "bestFor",
+      "cardDescriptionField": "bestFor",
+      "cardFields": [
+        "teamSize",
+        "queuePlace",
+        "placeId",
+        "availability",
+        "accessRequirement",
+        "bestFor"
+      ],
+      "tableFields": [
+        "teamSize",
+        "queuePlace",
+        "placeId",
+        "availability",
+        "accessRequirement",
+        "bestFor",
+        "difficulty",
+        "rewardNotes"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "1v1",
+        "teamSize": "1 per side",
+        "queuePlace": "[DUELS] 1v1",
+        "placeId": 124848751642883,
+        "availability": "Public queue",
+        "accessRequirement": "None listed",
+        "bestFor": "Solo aim practice and round timing",
+        "difficulty": "Cleanest practice because teammate noise is removed",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Best for solo play or dueling one friend",
+        "notes": "Pick 1v1 when you want quick feedback on aim, dodging, and role timing."
+      },
+      "system": {
+        "slug": "1v1",
+        "section": "Solo practice",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "2v2",
+        "teamSize": "2 per side",
+        "queuePlace": "[DUELS] 2v2",
+        "placeId": 92876937625630,
+        "availability": "Public queue",
+        "accessRequirement": "None listed",
+        "bestFor": "Playing with one friend and learning trades",
+        "difficulty": "More coordination than 1v1, but still readable",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Good fit for a duo",
+        "notes": "Pick 2v2 when you want teammate pressure without the round becoming too crowded."
+      },
+      "system": {
+        "slug": "2v2",
+        "section": "Team queues",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "3v3",
+        "teamSize": "3 per side",
+        "queuePlace": "[DUELS] 3v3",
+        "placeId": 101617670515690,
+        "availability": "Public queue",
+        "accessRequirement": "None listed",
+        "bestFor": "Small team fights and crossfire practice",
+        "difficulty": "Crowded enough that positioning and target choice matter more",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Best when you have multiple friends or want busier rounds",
+        "notes": "Pick 3v3 after you understand 1v1 timing and want to practice spacing around teammates."
+      },
+      "system": {
+        "slug": "3v3",
+        "section": "Team queues",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pro Servers",
+        "teamSize": "Not listed",
+        "queuePlace": "[DUELS] Pro Servers",
+        "placeId": 74084441161738,
+        "availability": "Pass-gated place",
+        "accessRequirement": "Pro Servers Pass, 99 Robux",
+        "bestFor": "Players who already have Pro Servers access",
+        "difficulty": "Gameplay difference beyond access is not verified",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Party behavior not verified",
+        "notes": "Official data confirms the Pro Servers place and pass access, but not special rewards or matchmaking rules."
+      },
+      "system": {
+        "slug": "pro-servers",
+        "section": "Pro access",
+        "sortOrder": 4,
+        "image": null
+      }
+    }
+  ]
+}

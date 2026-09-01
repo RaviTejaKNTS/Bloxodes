@@ -1,23 +1,16 @@
 import "../shared/load-env";
 
-import { accessSync, constants as fsConstants, readFileSync } from "node:fs";
+import { accessSync, constants as fsConstants } from "node:fs";
 import { spawnSync } from "node:child_process";
-import os from "node:os";
 import path from "node:path";
 
 import { createClient } from "@supabase/supabase-js";
 
 import { resolveArticleDevCredentials, supabaseTarget } from "../articles/article-queue-env";
-import { readProductionCredentials } from "../articles/release-completed-articles";
 import { parseCodexReasoningEffort } from "../articles/article-writer-provider";
-import {
-  PI_WRITER_MODEL,
-  PI_WRITER_PROVIDER,
-  PI_WRITER_REASONING,
-  assertLunaMaxConfiguration,
-  assertPiVersion
-} from "../articles/pi-article-writer";
+import { readProductionCredentials } from "../articles/release-completed-articles";
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
+import { runArticleBrowserSmokeTest } from "../content/article-browser";
 
 type Component = "all" | "discovery" | "writer";
 
@@ -114,39 +107,19 @@ async function main() {
     }
     const codexModel = process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna";
     const codexReasoning = parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
+      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "xhigh"
     );
-    assertLunaMaxConfiguration(codexModel, codexReasoning, "Codex article workflow");
     console.log(`Codex CLI: ${codexVersion.stdout.trim()} (${codexModel}, ${codexReasoning})`);
 
-    const piConfigured = process.env.ARTICLE_WRITER_PI_BIN?.trim();
-    const pi = findExecutable([piConfigured || "", path.join(os.homedir(), ".local", "bin", "pi"), "pi"].filter(Boolean));
-    if (!pi) throw new Error("Pi CLI is not installed or ARTICLE_WRITER_PI_BIN is incorrect.");
-    const piVersion = spawnSync(pi, ["--version"], { encoding: "utf8" });
-    if (piVersion.status !== 0) throw new Error(`Pi CLI failed its version check: ${piVersion.stderr.trim()}`);
-    const parsedPiVersion = assertPiVersion(piVersion.stdout);
-    const piProvider = process.env.ARTICLE_WRITER_PI_PROVIDER?.trim() || PI_WRITER_PROVIDER;
-    const piModel = process.env.ARTICLE_WRITER_PI_MODEL?.trim() || PI_WRITER_MODEL;
-    const piReasoning = process.env.ARTICLE_WRITER_PI_REASONING_EFFORT?.trim() || PI_WRITER_REASONING;
-    if (piProvider !== PI_WRITER_PROVIDER) {
-      throw new Error(`Pi article writing must use provider ${PI_WRITER_PROVIDER}; received ${piProvider}.`);
-    }
-    assertLunaMaxConfiguration(piModel, piReasoning, "Pi article writing");
-    const piAuthPath = path.join(os.homedir(), ".pi", "agent", "auth.json");
-    let piAuth: unknown;
-    try {
-      piAuth = JSON.parse(readFileSync(piAuthPath, "utf8"));
-    } catch {
-      throw new Error(`Pi ChatGPT authentication is not ready at ${piAuthPath}; run /login and choose ChatGPT Plus/Pro.`);
-    }
-    if (!piAuth || typeof piAuth !== "object" || !(PI_WRITER_PROVIDER in piAuth)) {
-      throw new Error(`Pi auth.json has no ${PI_WRITER_PROVIDER} login; run /login and choose ChatGPT Plus/Pro.`);
-    }
-    console.log(`Pi CLI: ${parsedPiVersion} (${piProvider}/${piModel}, ${piReasoning}; ChatGPT auth present)`);
+    const grokConfigured = process.env.ARTICLE_WRITER_GROK_BIN?.trim();
+    const grok = findExecutable([grokConfigured || "", `${process.env.HOME ?? ""}/.grok/bin/grok`, "grok"].filter(Boolean));
+    if (!grok) throw new Error("Grok CLI is not installed or ARTICLE_WRITER_GROK_BIN is incorrect.");
+    const grokVersion = spawnSync(grok, ["--version"], { encoding: "utf8" });
+    if (grokVersion.status !== 0) throw new Error(`Grok CLI failed its version check: ${grokVersion.stderr.trim()}`);
+    console.log(`Grok CLI: ${grokVersion.stdout.trim()}`);
 
-    const browser = findExecutable(["google-chrome", "chromium", "chromium-browser"]);
-    if (!browser) throw new Error("Google Chrome or Chromium is required for rendered article verification.");
-    console.log(`Browser: ${browser}`);
+    const browser = await runArticleBrowserSmokeTest();
+    console.log(`Headless browser: ${browser} (Playwright smoke test passed)`);
   }
 
   console.log(`Homelab article automation readiness passed (${component}).`);

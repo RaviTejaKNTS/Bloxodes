@@ -1,0 +1,317 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "blueprints",
+    "route": "/wiki/the-forge/blueprints",
+    "catalogCode": "the-forge-blueprints",
+    "itemFields": [
+      "itemType",
+      "source",
+      "howToGet",
+      "availability"
+    ],
+    "columns": [
+      "itemType",
+      "source",
+      "howToGet",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "itemType",
+        "source",
+        "howToGet",
+        "availability"
+      ],
+      "tableFields": [
+        "itemType",
+        "source",
+        "howToGet",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Executioner's Greataxe",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "executioner-s-greataxe",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shark's Fangs",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "shark-s-fangs",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crystalized Broadsword",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "crystalized-broadsword",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Anchored Straight Blade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "anchored-straight-blade",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Spear",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "knight-spear",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Colossal Gemblade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "colossal-gemblade",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Anchored Greatsword",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "anchored-greatsword",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Colossal Terrorblade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "colossal-terrorblade",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hook Blade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "hook-blade",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Knight's Gauntlets",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "dark-knight-s-gauntlets",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Straight Edge Katana",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "straight-edge-katana",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Compass Spear",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "compass-spear",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hell Slayer",
+        "itemType": "Weapon",
+        "source": "Christmas Event",
+        "howToGet": "Previously available at the Christmas Event Shop",
+        "availability": "Unavailable"
+      },
+      "system": {
+        "slug": "hell-slayer",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/The%20Forge/Weapons/hell-slayer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane",
+        "itemType": "Weapon",
+        "source": "Christmas Event",
+        "howToGet": "Previously available at the Christmas Event Shop",
+        "availability": "Unavailable"
+      },
+      "system": {
+        "slug": "candy-cane",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/The%20Forge/Weapons/candy-cane.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin's Crown",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Complete Goblin Lord's Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "goblin-s-crown",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/The%20Forge/Armor/goblin-s-crown.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven's Helmet",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Progress through the Raven Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "raven-s-helmet",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/The%20Forge/Armor/raven-s-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven's Chestplate",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Progress through the Raven Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "raven-s-chestplate",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/The%20Forge/Armor/raven-s-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven's Leggings",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Progress through the Raven Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "raven-s-leggings",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/The%20Forge/Armor/raven-s-leggings.webp"
+      }
+    }
+  ]
+}

@@ -1,0 +1,368 @@
+{
+  "easy": [
+    {
+      "id": "SL-E01",
+      "question": "What is the first income source a new Sell Lemons run starts with?",
+      "options": [
+        { "id": "A", "text": "Lemon Stand" },
+        { "id": "B", "text": "Lemon Labs" },
+        { "id": "C", "text": "Lemon Republic" },
+        { "id": "D", "text": "Orange X" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-E02",
+      "question": "Which Sell Lemons source is built around delivery-style burst income?",
+      "options": [
+        { "id": "A", "text": "Lemon Trading" },
+        { "id": "B", "text": "LemonDash" },
+        { "id": "C", "text": "Lemon Robotics" },
+        { "id": "D", "text": "First Tier" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SL-E03",
+      "question": "What do managers and automators mainly reduce in Sell Lemons?",
+      "options": [
+        { "id": "A", "text": "Manual clicking and walking back to sources" },
+        { "id": "B", "text": "The number of fruit stages in the game" },
+        { "id": "C", "text": "The need to unlock any income source" },
+        { "id": "D", "text": "The hidden sewer route from the map" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-E04",
+      "question": "Which power mainly helps your character move around the map faster?",
+      "options": [
+        { "id": "A", "text": "Stack Upgrades" },
+        { "id": "B", "text": "Forever Purchase" },
+        { "id": "C", "text": "Run Faster" },
+        { "id": "D", "text": "Remote Buy" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SL-E05",
+      "question": "What kind of place is the Sewer Maze in Sell Lemons?",
+      "options": [
+        { "id": "A", "text": "A normal starting shop" },
+        { "id": "B", "text": "A hidden secret route" },
+        { "id": "C", "text": "A cosmetic-only lobby" },
+        { "id": "D", "text": "A public codes menu" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SL-E06",
+      "question": "Which fruit theme is the starting Evolution stage?",
+      "options": [
+        { "id": "A", "text": "Lime" },
+        { "id": "B", "text": "Orange" },
+        { "id": "C", "text": "Burst" },
+        { "id": "D", "text": "Lemon" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "SL-E07",
+      "question": "Which power makes one selected purchase permanent across major reset loops?",
+      "options": [
+        { "id": "A", "text": "Forever Purchase" },
+        { "id": "B", "text": "Expert Picker" },
+        { "id": "C", "text": "Run Faster" },
+        { "id": "D", "text": "Speed Up Time" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-E08",
+      "question": "What is Lemon Trading best described as?",
+      "options": [
+        { "id": "A", "text": "A risk-free idle source" },
+        { "id": "B", "text": "A market-timing mini-game" },
+        { "id": "C", "text": "A starting movement power" },
+        { "id": "D", "text": "A locked future fruit stage" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SL-E09",
+      "question": "Which location acts as the route anchor at the start of the game?",
+      "options": [
+        { "id": "A", "text": "UFO / Alien route" },
+        { "id": "B", "text": "First Tier Staircase" },
+        { "id": "C", "text": "Main plot / Lemon Stand" },
+        { "id": "D", "text": "Sewer Maze" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SL-E10",
+      "question": "Which late source is also known by the alternate name LemonX in the local Sell Lemons plan?",
+      "options": [
+        { "id": "A", "text": "Lemon Depot" },
+        { "id": "B", "text": "Orange X" },
+        { "id": "C", "text": "Lemon Stand" },
+        { "id": "D", "text": "Lemon Labs" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    }
+  ],
+  "medium": [
+    {
+      "id": "SL-M01",
+      "question": "Which pair belongs to the early active setup stage of the Sell Lemons income ladder?",
+      "options": [
+        { "id": "A", "text": "Lemon Stand and LemonDash" },
+        { "id": "B", "text": "Lemon Labs and Lemon Robotics" },
+        { "id": "C", "text": "Lemon Republic and Orange X" },
+        { "id": "D", "text": "Sewer Key and Purity Fruit" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-M02",
+      "question": "Pick the income source whose role is wholesale bulk income.",
+      "options": [
+        { "id": "A", "text": "Lemon Trading" },
+        { "id": "B", "text": "Lemon Depot" },
+        { "id": "C", "text": "Lemon Robotics" },
+        { "id": "D", "text": "Orange X" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SL-M03",
+      "question": "Why should players re-check an area after buying building or decoration pieces?",
+      "options": [
+        { "id": "A", "text": "They can turn every badge into a power" },
+        { "id": "B", "text": "They can remove the need for managers" },
+        { "id": "C", "text": "They can reveal hidden functional buttons" },
+        { "id": "D", "text": "They can skip every Evolution stage" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SL-M04",
+      "question": "Which power is earlier remote source control, while Remote Buy is deeper endgame purchasing?",
+      "options": [
+        { "id": "A", "text": "Manage" },
+        { "id": "B", "text": "Expert Picker" },
+        { "id": "C", "text": "Speed Up Time" },
+        { "id": "D", "text": "Stack Upgrades" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-M05",
+      "question": "Which two powers are grouped as scaling and automation powers?",
+      "options": [
+        { "id": "A", "text": "Manage and Run Faster" },
+        { "id": "B", "text": "Stack Upgrades and Speed Up Time" },
+        { "id": "C", "text": "Expert Picker and Forever Purchase" },
+        { "id": "D", "text": "Remote Buy and Manage" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SL-M06",
+      "question": "What is the main Evolution timing trade-off in Sell Lemons?",
+      "options": [
+        { "id": "A", "text": "Evolution changes badges but leaves the fruit theme alone" },
+        { "id": "B", "text": "Evolution unlocks Trading but blocks managers afterward" },
+        { "id": "C", "text": "Evolution gives a stage jump but resets Investor count" },
+        { "id": "D", "text": "Evolution opens codes but removes offline income" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SL-M07",
+      "question": "Which three rows make up the approved secret-unlocks scope?",
+      "options": [
+        { "id": "A", "text": "Sewer Key, UFO Key, and Purity Fruit" },
+        { "id": "B", "text": "Run Faster, Manage, and Remote Buy" },
+        { "id": "C", "text": "Lemon Stand, LemonDash, and Depot" },
+        { "id": "D", "text": "Lemon, Orange, and Lime" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-M08",
+      "question": "Which location opens the vertical late-game route toward Labs, Robotics, and Republic progress?",
+      "options": [
+        { "id": "A", "text": "Main plot / Lemon Stand" },
+        { "id": "B", "text": "Lemon Depot / Trading edge" },
+        { "id": "C", "text": "Hill Expansion" },
+        { "id": "D", "text": "Sewer Maze" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SL-M09",
+      "question": "Which statement best explains Expert Picker?",
+      "options": [
+        { "id": "A", "text": "It raises the value of fruit and money-bag pickups" },
+        { "id": "B", "text": "It preserves one purchase through major resets" },
+        { "id": "C", "text": "It unlocks the first income source at spawn" },
+        { "id": "D", "text": "It turns Burst Tier into a released stage" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-M10",
+      "question": "Where does First Tier Staircase belong in the Sell Lemons route plan?",
+      "options": [
+        { "id": "A", "text": "As a starting-area tutorial route" },
+        { "id": "B", "text": "As an endgame route near Republic progress" },
+        { "id": "C", "text": "As a normal LemonDash delivery stop" },
+        { "id": "D", "text": "As a separate codes page reward" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    }
+  ],
+  "hard": [
+    {
+      "id": "SL-H01",
+      "question": "A player has just funded a source but its yield is still weak. What is the smarter manager timing?",
+      "options": [
+        { "id": "A", "text": "Hire after the source has meaningful yield upgrades" },
+        { "id": "B", "text": "Hire before unlocking the source's first income button" },
+        { "id": "C", "text": "Skip managers because Evolution removes all automation" },
+        { "id": "D", "text": "Wait until the source is no longer part of the run" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-H02",
+      "question": "You are using Lemon Trading right before a planned reset. Which mistake should the quiz punish?",
+      "options": [
+        { "id": "A", "text": "Treating Trading as risky supplemental income" },
+        { "id": "B", "text": "Automating Trading after learning its rhythm" },
+        { "id": "C", "text": "Putting too much run cash into risky trades" },
+        { "id": "D", "text": "Pairing Trading with mid-game Depot progress" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SL-H03",
+      "question": "Before a long reset route, which Labs-related idea is safest to ask about?",
+      "options": [
+        { "id": "A", "text": "Prioritizing permanent Labs upgrades for future rebuilds" },
+        { "id": "B", "text": "Memorizing every unverified Labs button cost" },
+        { "id": "C", "text": "Using Labs as the first source before Lemon Stand" },
+        { "id": "D", "text": "Replacing Evolution stages with Labs badges" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-H04",
+      "question": "Why should Burst Tier stay out of a normal Evolution-stage answer?",
+      "options": [
+        { "id": "A", "text": "It is treated as locked or future context, not a playable row" },
+        { "id": "B", "text": "It is the starting fruit theme before Lemon" },
+        { "id": "C", "text": "It replaces Orange and Lime in the local data" },
+        { "id": "D", "text": "It is a manager that automates LemonDash" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-H05",
+      "question": "Which choice best explains why Forever Purchase is strategically different from most powers?",
+      "options": [
+        { "id": "A", "text": "It improves map pickup value during normal walking" },
+        { "id": "B", "text": "It preserves one selected purchase through reset loops" },
+        { "id": "C", "text": "It makes Lemon Trading safe before every reset" },
+        { "id": "D", "text": "It changes the starter source from Stand to Depot" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SL-H06",
+      "question": "Good Samaritan and Cosmic Farmer should mainly appear in quiz questions as what?",
+      "options": [
+        { "id": "A", "text": "Badges or evidence tied to secret prerequisites" },
+        { "id": "B", "text": "Separate powers beside Manage and Remote Buy" },
+        { "id": "C", "text": "Released fruit stages after Lime and Burst" },
+        { "id": "D", "text": "Normal income sources between Depot and Labs" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-H07",
+      "question": "Which secret-route ordering is safest for a durable question?",
+      "options": [
+        { "id": "A", "text": "Purity first, then starting Stand, then Depot" },
+        { "id": "B", "text": "Lime first, then Orange, then Lemon" },
+        { "id": "C", "text": "Sewer first, UFO second, Purity last" },
+        { "id": "D", "text": "Remote Buy first, then Juicer, then codes" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SL-H08",
+      "question": "Which detail should stay out of a hard question until parent verifies it directly?",
+      "options": [
+        { "id": "A", "text": "The exact UFO Key or Purity Fruit step sequence" },
+        { "id": "B", "text": "The fact that Lemon Stand starts the run" },
+        { "id": "C", "text": "The role of Trading as a risky source" },
+        { "id": "D", "text": "The three local Evolution stage names" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-H09",
+      "question": "Why should Orange X and LemonX be handled calmly as naming context?",
+      "options": [
+        { "id": "A", "text": "They are treated as alternate naming for final income-source context" },
+        { "id": "B", "text": "They are two separate early sources before LemonDash" },
+        { "id": "C", "text": "They are badges that replace the powers catalog" },
+        { "id": "D", "text": "They are the same as the First Tier Staircase row" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SL-H10",
+      "question": "A player wants a pro-level answer about Evolution without unstable threshold math. Which question angle is fairest?",
+      "options": [
+        { "id": "A", "text": "Whether Evolution's stage gain is worth resetting Investors" },
+        { "id": "B", "text": "The exact unverified cost of every late upgrade button" },
+        { "id": "C", "text": "The live count of players who own a secret badge" },
+        { "id": "D", "text": "The full source-conflicted order of UFO quest steps" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    }
+  ]
+}

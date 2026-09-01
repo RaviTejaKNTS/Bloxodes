@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "ranks",
+    "route": "/wiki/rivals/ranks",
+    "catalogCode": "rivals-ranks",
+    "itemFields": [
+      "eloRange",
+      "subTiers",
+      "cardSummary"
+    ],
+    "columns": [
+      "eloRange",
+      "subTiers",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Rank Tiers"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "eloRange",
+        "subTiers"
+      ],
+      "tableFields": [
+        "eloRange",
+        "subTiers",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "eloRange": {
+          "kind": "chip",
+          "label": "ELO"
+        },
+        "subTiers": {
+          "kind": "plain",
+          "label": "Sub-tiers"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Unranked",
+        "eloRange": "Below 0 ELO",
+        "subTiers": "None",
+        "cardSummary": "Where everyone sits before finishing 10 placement matches. Your previous season's rank weighs into where placements drop you."
+      },
+      "system": {
+        "slug": "unranked",
+        "section": "Rank Tiers",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bronze",
+        "eloRange": "0 to 599 ELO",
+        "subTiers": "III, II, I",
+        "cardSummary": "The floor of the ladder in three steps of 200 ELO. Wins against higher ranks pay outsized ELO here, so climbing out can be quick."
+      },
+      "system": {
+        "slug": "bronze",
+        "section": "Rank Tiers",
+        "sortOrder": 2,
+        "image": "/RIVALS/Ranks/bronze.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver",
+        "eloRange": "600 to 1,199 ELO",
+        "subTiers": "III, II, I",
+        "cardSummary": "The second bracket, where placement matches commonly land newer competitive players."
+      },
+      "system": {
+        "slug": "silver",
+        "section": "Rank Tiers",
+        "sortOrder": 3,
+        "image": "/RIVALS/Ranks/silver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold",
+        "eloRange": "1,200 to 1,799 ELO",
+        "subTiers": "III, II, I",
+        "cardSummary": "Mid-ladder. Map bans and weapon bans start deciding matches as much as aim does around here."
+      },
+      "system": {
+        "slug": "gold",
+        "section": "Rank Tiers",
+        "sortOrder": 4,
+        "image": "/RIVALS/Ranks/gold.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Platinum",
+        "eloRange": "1,800 to 2,399 ELO",
+        "subTiers": "III, II, I",
+        "cardSummary": "The bracket where daily ELO Shields stop: from Platinum I upward, every loss counts with no free protection."
+      },
+      "system": {
+        "slug": "platinum",
+        "section": "Rank Tiers",
+        "sortOrder": 5,
+        "image": "/RIVALS/Ranks/platinum.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "eloRange": "2,400 to 2,999 ELO",
+        "subTiers": "III, II, I",
+        "cardSummary": "High ladder, and the placement ceiling that strong previous-season finishes tend to seed into."
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Rank Tiers",
+        "sortOrder": 6,
+        "image": "/RIVALS/Ranks/diamond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Onyx",
+        "eloRange": "3,000 to 3,599 ELO",
+        "subTiers": "III, II, I",
+        "cardSummary": "The decay bracket: from Onyx I up, seven days of inactivity starts draining 100 ELO per day until you return or fall back to 3,000."
+      },
+      "system": {
+        "slug": "onyx",
+        "section": "Rank Tiers",
+        "sortOrder": 7,
+        "image": "/RIVALS/Ranks/onyx.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nemesis",
+        "eloRange": "3,600+ ELO",
+        "subTiers": "Single tier",
+        "cardSummary": "The top open tier: everyone above 3,600 ELO who has not cracked the leaderboard."
+      },
+      "system": {
+        "slug": "nemesis",
+        "section": "Rank Tiers",
+        "sortOrder": 8,
+        "image": "/RIVALS/Ranks/nemesis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Archnemesis",
+        "eloRange": "Top 200 players",
+        "subTiers": "Single tier",
+        "cardSummary": "The leaderboard itself: the top 200 ranked players. Each season's Archnemesis finishers earn the exclusive Mythical Arch weapon skin, like the Arch Katana of Season 0."
+      },
+      "system": {
+        "slug": "archnemesis",
+        "section": "Rank Tiers",
+        "sortOrder": 9,
+        "image": "/RIVALS/Ranks/archnemesis.png"
+      }
+    }
+  ]
+}

@@ -19,6 +19,7 @@ export const jujutsuShenanigansCollectionGroup = {
       "achievements",
       "build-blocks",
       "skill-builder-nodes",
-      "moves"
+      "moves",
+      "awakenings"
     ]
   } satisfies GameCollectionGroup;

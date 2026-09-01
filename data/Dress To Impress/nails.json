@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "nails",
+    "route": "/wiki/dress-to-impress/nails",
+    "catalogCode": "dress-to-impress-nails",
+    "itemFields": [
+      "status",
+      "sourceRoute",
+      "location",
+      "wearableBy",
+      "toggles",
+      "customization"
+    ],
+    "columns": [
+      "status",
+      "sourceRoute",
+      "location",
+      "wearableBy",
+      "toggles",
+      "customization"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Standard nails",
+        "Reward nails",
+        "Rank nails",
+        "Code-origin nails",
+        "Retired nails"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "status",
+        "sourceRoute",
+        "location",
+        "wearableBy",
+        "toggles",
+        "customization"
+      ],
+      "tableFields": [
+        "status",
+        "sourceRoute",
+        "location",
+        "wearableBy",
+        "toggles",
+        "customization"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Default Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "default-nails",
+        "section": "Standard nails",
+        "sortOrder": 1,
+        "image": "/Dress%20To%20Impress/nails/default-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Short Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "short-nails",
+        "section": "Standard nails",
+        "sortOrder": 2,
+        "image": "/Dress%20To%20Impress/nails/short-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Box Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "box-nails",
+        "section": "Standard nails",
+        "sortOrder": 3,
+        "image": "/Dress%20To%20Impress/nails/box-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Long Box Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "long-box-nails",
+        "section": "Standard nails",
+        "sortOrder": 4,
+        "image": "/Dress%20To%20Impress/nails/long-box-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coffin Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "coffin-nails",
+        "section": "Standard nails",
+        "sortOrder": 5,
+        "image": "/Dress%20To%20Impress/nails/coffin-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Duck Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "duck-nails",
+        "section": "Standard nails",
+        "sortOrder": 6,
+        "image": "/Dress%20To%20Impress/nails/duck-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Claws",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "claws",
+        "section": "Standard nails",
+        "sortOrder": 7,
+        "image": "/Dress%20To%20Impress/nails/claws.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Curved Claws",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "curved-claws",
+        "section": "Standard nails",
+        "sortOrder": 8,
+        "image": "/Dress%20To%20Impress/nails/curved-claws.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baddie Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "baddie-nails",
+        "section": "Standard nails",
+        "sortOrder": 9,
+        "image": "/Dress%20To%20Impress/nails/baddie-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Long Baddie Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "long-baddie-nails",
+        "section": "Standard nails",
+        "sortOrder": 10,
+        "image": "/Dress%20To%20Impress/nails/long-baddie-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Curved Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "curved-nails",
+        "section": "Standard nails",
+        "sortOrder": 11,
+        "image": "/Dress%20To%20Impress/nails/curved-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nails With Charms",
+        "status": "No longer obtainable",
+        "sourceRoute": "Summer 2025 Baddie Pass tier 12",
+        "location": "Dressing Booth or Achievement Collection if owned",
+        "wearableBy": "Unisex",
+        "toggles": "Default; Long",
+        "customization": "4 color options"
+      },
+      "system": {
+        "slug": "nails-with-charms",
+        "section": "Reward nails",
+        "sortOrder": 12,
+        "image": "/Dress%20To%20Impress/nails/nails-with-charms.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fashion Maven Nails",
+        "status": "Rank unlock",
+        "sourceRoute": "Reach Fashion Maven rank",
+        "location": "Dressing Booth or Achievement Collection after reaching the rank",
+        "wearableBy": "Unisex",
+        "toggles": "None listed",
+        "customization": "Not listed"
+      },
+      "system": {
+        "slug": "fashion-maven-nails",
+        "section": "Rank nails",
+        "sortOrder": 13,
+        "image": "/Dress%20To%20Impress/nails/fashion-maven-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "KATSEYE Charm Nails",
+        "status": "Code-origin item",
+        "sourceRoute": "Code collection",
+        "location": "Dressing Booth or Code Collection if redeemed",
+        "wearableBy": "Unisex",
+        "toggles": "Default; No Nails Details; No Bracelet; No Nails Charms",
+        "customization": "Customization details not listed"
+      },
+      "system": {
+        "slug": "katseye-charm-nails",
+        "section": "Code-origin nails",
+        "sortOrder": 14,
+        "image": "/Dress%20To%20Impress/nails/katseye-charm-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baddie Nails",
+        "status": "Retired",
+        "sourceRoute": "Retired nail option",
+        "location": "No current standard location listed",
+        "customization": "Not listed"
+      },
+      "system": {
+        "slug": "retired-baddie-nails",
+        "section": "Retired nails",
+        "sortOrder": 15,
+        "image": "/Dress%20To%20Impress/nails/retired-baddie-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baddie Toenails",
+        "status": "Retired",
+        "sourceRoute": "Retired nail option",
+        "location": "No current standard location listed",
+        "customization": "Not listed"
+      },
+      "system": {
+        "slug": "baddie-toenails",
+        "section": "Retired nails",
+        "sortOrder": 16,
+        "image": "/Dress%20To%20Impress/nails/baddie-toenails.webp"
+      }
+    }
+  ]
+}

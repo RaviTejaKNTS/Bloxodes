@@ -56,8 +56,6 @@ type QueueSourceItem = {
 
 const DEFAULT_MODEL = "llama-3.3-70b-versatile";
 const GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions";
-const GROQ_MIN_COMPLETION_TOKENS = 800;
-const GROQ_TOKEN_LIMIT_SAFETY_MARGIN = 256;
 
 const ReasonCodeSchema = z.enum([
   "approved",
@@ -146,17 +144,6 @@ function requireValue(value: string | undefined, flag: string): string {
   const trimmed = value?.trim();
   if (!trimmed) throw new Error(`${flag} requires a value.`);
   return trimmed;
-}
-
-export function reduceGroqCompletionBudget(currentMaxTokens: number, errorText: string): number | null {
-  const match = errorText.match(/Limit\s+(\d+),\s*Requested\s+(\d+)/i);
-  if (!match) return null;
-  const limit = Number(match[1]);
-  const requested = Number(match[2]);
-  if (!Number.isFinite(limit) || !Number.isFinite(requested) || requested <= limit) return null;
-  const reduced = currentMaxTokens - (requested - limit) - GROQ_TOKEN_LIMIT_SAFETY_MARGIN;
-  if (reduced >= currentMaxTokens) return null;
-  return Math.max(GROQ_MIN_COMPLETION_TOKENS, reduced);
 }
 
 function loadGroqApiKey(): string {
@@ -378,7 +365,6 @@ async function curateWithGroq(
 ): Promise<{ decisions: CurationDecision[]; raw: Record<string, unknown> }> {
   const attempts: Record<string, unknown>[] = [];
   let validationFeedback: string | undefined;
-  let maxTokens = Math.min(3200, Math.max(1200, 700 + candidates.length * 190));
   for (let attempt = 1; attempt <= 3; attempt += 1) {
     let response: Response | null = null;
     for (let requestAttempt = 1; requestAttempt <= 3; requestAttempt += 1) {
@@ -390,18 +376,12 @@ async function curateWithGroq(
           messages: [{ role: "user", content: buildPrompt(candidates, inventory, validationFeedback) }],
           response_format: { type: "json_object" },
           temperature: 0,
-          max_tokens: maxTokens
+          max_tokens: Math.min(3200, Math.max(1200, 700 + candidates.length * 190))
         }),
         signal: AbortSignal.timeout(90_000)
       });
       if (response.ok) break;
       const errorText = await response.text();
-      const reducedMaxTokens = reduceGroqCompletionBudget(maxTokens, errorText);
-      if (response.status === 413 && reducedMaxTokens !== null && reducedMaxTokens < maxTokens) {
-        maxTokens = reducedMaxTokens;
-        console.warn(`Groq request exceeded its token budget; retrying with max_tokens=${maxTokens}.`);
-        continue;
-      }
       if (response.status !== 429 || requestAttempt === 3) {
         throw new Error(`Groq curation failed (${response.status}): ${errorText.slice(0, 500)}`);
       }

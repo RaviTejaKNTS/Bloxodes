@@ -8,7 +8,6 @@ import {
 } from "@/lib/game-collections";
 import type { GameCollectionGroup } from "@/lib/game-collections/types";
 import { repoPath } from "@/lib/paths";
-import { isDatabaseOnlyGameCollectionGame } from "@/lib/game-collections/database-only";
 
 const REGISTERED_GROUPS: readonly GameCollectionGroup[] = GAME_COLLECTION_GROUPS;
 
@@ -308,11 +307,7 @@ function matchesCollection(record: CollectionRecord, selector: string): boolean 
 }
 
 async function buildManifest(options: CliOptions): Promise<RefreshManifest> {
-  if (options.game && isDatabaseOnlyGameCollectionGame(options.game)) {
-    throw new Error(`${options.game} is database-only. Start refresh work from a task-local runtime manifest.`);
-  }
-  const selectedGroups = (options.game ? [resolveGame(options.game)] : [...REGISTERED_GROUPS])
-    .filter((group) => !isDatabaseOnlyGameCollectionGame(group.gameSlug));
+  const selectedGroups = options.game ? [resolveGame(options.game)] : [...REGISTERED_GROUPS];
   const gameRecords = await Promise.all(
     selectedGroups.map(async (group) => ({ group, records: await collectGameRecords(group) }))
   );

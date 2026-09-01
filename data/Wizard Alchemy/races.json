@@ -1,0 +1,277 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Wizard Alchemy",
+    "gameSlug": "wizard-alchemy",
+    "collection": "races",
+    "route": "/wiki/wizard-alchemy/races",
+    "catalogCode": "wizard-alchemy-races",
+    "itemFields": [
+      "rarity",
+      "rollChance",
+      "rollRoute",
+      "bestFor",
+      "coreBonus",
+      "passive",
+      "mainLimit",
+      "elementSynergy",
+      "keepPriority",
+      "notes",
+      "alternateName"
+    ],
+    "columns": [
+      "rarity",
+      "rollChance",
+      "rollRoute",
+      "bestFor",
+      "coreBonus",
+      "passive",
+      "mainLimit",
+      "elementSynergy",
+      "keepPriority",
+      "notes",
+      "alternateName"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Common races",
+        "Uncommon races",
+        "Rare races",
+        "Epic races",
+        "Legendary races"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "bestFor",
+      "cardDescriptionField": "bestFor",
+      "cardFields": [
+        "rarity",
+        "rollChance",
+        "rollRoute",
+        "bestFor",
+        "coreBonus",
+        "passive"
+      ],
+      "tableFields": [
+        "rarity",
+        "rollChance",
+        "rollRoute",
+        "bestFor",
+        "coreBonus",
+        "passive",
+        "mainLimit",
+        "elementSynergy"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Human",
+        "rarity": "Common",
+        "rollChance": "25%",
+        "rollRoute": "Default starter race or race reroll result",
+        "bestFor": "Starting only",
+        "coreBonus": "No passive bonuses",
+        "mainLimit": "No damage, movement, sustain, or defensive bonuses",
+        "elementSynergy": "None",
+        "keepPriority": "Reroll as soon as you can",
+        "notes": "Human is the default race and mostly exists as the result players try to replace with free or paid rerolls."
+      },
+      "system": {
+        "slug": "human",
+        "section": "Common races",
+        "sortOrder": 1,
+        "image": "/Wizard%20Alchemy/Races/human.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Tree Spirit",
+        "rarity": "Uncommon",
+        "rollChance": "15%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Early passive sustain",
+        "coreBonus": "Life Regeneration x2 and +5% Maximum Health",
+        "passive": "Doubled HP regeneration",
+        "mainLimit": "-2 Base Movement Speed and no offensive bonus",
+        "elementSynergy": "None",
+        "keepPriority": "Temporary early roll",
+        "notes": "Tree Spirit can smooth out early fights when healing feels slow, but the movement penalty makes it easy to outgrow."
+      },
+      "system": {
+        "slug": "tree-spirit",
+        "section": "Uncommon races",
+        "sortOrder": 2,
+        "image": "/Wizard%20Alchemy/Races/tree-spirit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf",
+        "rarity": "Uncommon",
+        "rollChance": "15%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Exploration and early movement",
+        "coreBonus": "+3 Base Movement Speed and +10 Jump Height",
+        "mainLimit": "No combat, sustain, or element bonus",
+        "elementSynergy": "None",
+        "keepPriority": "Reroll later",
+        "notes": "Elf makes movement feel better, especially while exploring, but it does not help damage or survival once enemies get tougher."
+      },
+      "system": {
+        "slug": "elf",
+        "section": "Uncommon races",
+        "sortOrder": 3,
+        "image": "/Wizard%20Alchemy/Races/elf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Werewolf",
+        "rarity": "Rare",
+        "rollChance": "10%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Beginner combat upgrade",
+        "coreBonus": "+10% Maximum Health, +5 Attack Power, +1 Base Movement Speed, +10 Jump Height",
+        "mainLimit": "No element synergy or special passive",
+        "elementSynergy": "None",
+        "keepPriority": "Good early hold",
+        "notes": "Werewolf is a practical first upgrade because it gives a little HP, damage, speed, and jump without adding a painful drawback."
+      },
+      "system": {
+        "slug": "werewolf",
+        "section": "Rare races",
+        "sortOrder": 4,
+        "image": "/Wizard%20Alchemy/Races/werewolf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Death Eater",
+        "rarity": "Rare",
+        "rollChance": "10%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Solo farming and kill chains",
+        "coreBonus": "+10% Attack Power and 5% Max HP restored on kill",
+        "passive": "HP restoration after defeating an enemy",
+        "mainLimit": "Reduced HP regeneration between kills",
+        "elementSynergy": "Works with any element",
+        "keepPriority": "Strong farming hold",
+        "notes": "Death Eater is useful when you are killing enemies quickly because the heal triggers on kills instead of slow passive recovery."
+      },
+      "system": {
+        "slug": "death-eater",
+        "section": "Rare races",
+        "sortOrder": 5,
+        "image": "/Wizard%20Alchemy/Races/death-eater.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Undead",
+        "rarity": "Rare",
+        "rollChance": "10%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Surviving fatal hits",
+        "coreBonus": "+10 Skill Speed and a fatal-hit survival passive",
+        "passive": "Keeps 1 HP after fatal damage, enters invincible recovery, and restores 30% HP with a 180 second cooldown",
+        "mainLimit": "-30% Maximum Health",
+        "elementSynergy": "None",
+        "keepPriority": "Situational survival hold",
+        "notes": "Undead can save a run when a hard enemy would kill you, but the lower Max HP makes normal mistakes more dangerous."
+      },
+      "system": {
+        "slug": "undead",
+        "section": "Rare races",
+        "sortOrder": 6,
+        "image": "/Wizard%20Alchemy/Races/undead.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Crystal",
+        "rarity": "Epic",
+        "rollChance": "5%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Ice spell builds",
+        "coreBonus": "+20% Ice Elemental Damage and +10% Maximum Health",
+        "mainLimit": "-2 Base Movement Speed",
+        "elementSynergy": "Ice",
+        "keepPriority": "Keep for Ice builds",
+        "notes": "Ice Crystal is strongest when your spell setup is built around Ice damage, especially if the extra HP helps offset slower movement."
+      },
+      "system": {
+        "slug": "ice-crystal",
+        "section": "Epic races",
+        "sortOrder": 7,
+        "image": "/Wizard%20Alchemy/Races/ice-crystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fiendish Demon",
+        "rarity": "Epic",
+        "rollChance": "5%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Fire spell builds",
+        "coreBonus": "+20% Fire Elemental Damage and +2 Base Movement Speed",
+        "mainLimit": "-10% Maximum Health",
+        "elementSynergy": "Fire",
+        "keepPriority": "Keep for Fire builds",
+        "notes": "Fiendish Demon is the clean Fire build race. The movement bonus feels good, but the Max HP loss punishes sloppy fights."
+      },
+      "system": {
+        "slug": "fiendish-demon",
+        "section": "Epic races",
+        "sortOrder": 8,
+        "image": "/Wizard%20Alchemy/Races/fiendish-demon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stellar Ambassador",
+        "rarity": "Epic",
+        "rollChance": "4%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Hybrid spell builds and kiting",
+        "coreBonus": "+10% Attack Power and +20 Skill Speed",
+        "passive": "Movement speed burst after landing hits",
+        "mainLimit": "No single-element damage boost",
+        "elementSynergy": "Any element",
+        "keepPriority": "Keep",
+        "notes": "Stellar Ambassador is a strong all-around roll because its Attack Power and Skill Speed help no matter which element you are using."
+      },
+      "system": {
+        "slug": "stellar-ambassador",
+        "section": "Epic races",
+        "sortOrder": 9,
+        "image": "/Wizard%20Alchemy/Races/stellar-ambassador.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Night Knight",
+        "rarity": "Legendary",
+        "rollChance": "1%",
+        "rollRoute": "Race reroll",
+        "bestFor": "Dark DPS builds and late-game damage",
+        "coreBonus": "+20% Dark Elemental Damage, +10% Attack Power, +3% Base Movement Speed, +30% Jump Height, +30 Skill Speed",
+        "passive": "Applies Disaster status on hit",
+        "mainLimit": "Very low roll chance",
+        "elementSynergy": "Dark",
+        "keepPriority": "Top target",
+        "notes": "Night Knight is the 1% dark race. The dark damage bonus, Disaster status, Attack Power, and Skill Speed make it the clearest top roll if the name is confirmed.",
+        "alternateName": "Thestrals"
+      },
+      "system": {
+        "slug": "night-knight",
+        "section": "Legendary races",
+        "sortOrder": 10,
+        "image": "/Wizard%20Alchemy/Races/night-knight.jpg"
+      }
+    }
+  ]
+}

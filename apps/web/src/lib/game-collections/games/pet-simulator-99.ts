@@ -28,6 +28,7 @@ export const petSimulator99CollectionGroup = {
       "fruits",
       "flags",
       "fishing-rods",
-      "keys"
+      "keys",
+      "ranks"
     ]
   } satisfies GameCollectionGroup;

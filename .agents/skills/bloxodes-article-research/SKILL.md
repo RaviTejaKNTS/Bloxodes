@@ -97,11 +97,9 @@ When the approved idea is a tier-list article, add a dedicated readiness pass:
 
 1. Define one ranking scope and the criteria that matter inside it. Do not mix PvP, PvE, beginner value, and endgame value without explaining how they are weighted.
 2. Build the complete expected item inventory before assigning tiers.
-3. Turn the scope into independent player-outcome criteria, then rank from verified stats, mechanics, costs, requirements, and repeatable gameplay consequences. Record the evidence and the condition that could move each item.
-4. Treat competitor rankings only as candidate discovery and a final disagreement check. Never use another site's order as the proposed tiers, ranking lens, scoring input, or fallback. If the proposed order exactly matches one competitor, re-evaluate and independently justify every placement or block the brief.
-5. Record disagreements, update/version boundaries, mode-dependent placements, and uncertain items. Do not use consensus as placement evidence.
-6. Check `data/<Game>/` and `apps/web/public/<Game>/` for canonical existing item rows and images. Record the exact public image path for every expected item, then plan source-image searches for gaps.
-7. Mark the brief blocked if important item coverage or placement evidence is weak. Image gaps continue into the mandatory image pass; the final tier-list component uses text-only items after the parent accepts those targets as missing.
+3. Record placement evidence, disagreements, update/version boundaries, and uncertain items. A community consensus may inform a placement but does not replace exact game facts.
+4. Check `data/<Game>/` and `apps/web/public/<Game>/` for canonical existing item rows and images. Record the exact public image path for every expected item, then plan source-image searches for gaps.
+5. Mark the brief blocked if important item coverage or placement evidence is weak. Image gaps continue into the mandatory image pass; text/table fallback is allowed only after the parent accepts those targets as missing.
 
 Add this to `brief.md` for tier-list work:
 
@@ -110,9 +108,7 @@ Tier-list readiness:
 - Ranking scope:
 - Ranking criteria:
 - Expected items and count:
-- Independent scoring notes and player outcomes:
-- Proposed Bloxodes tiers and placement evidence:
-- Competitor-order comparison performed only after ranking:
+- Proposed tiers and placement evidence:
 - Disagreements or mode-dependent placements:
 - Existing local dataset:
 - Existing public image paths:

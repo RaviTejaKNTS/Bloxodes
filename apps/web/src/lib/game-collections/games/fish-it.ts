@@ -16,6 +16,8 @@ export const fishItCollectionGroup = {
     "pets",
     "rods",
     "fish",
-      "weather"
+      "weather",
+    "potions",
+    "passive-abilities"
     ]
 } satisfies GameCollectionGroup;

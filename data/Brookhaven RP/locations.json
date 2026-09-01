@@ -1,0 +1,646 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "locations",
+    "route": "/wiki/brookhaven-rp/locations",
+    "catalogCode": "brookhaven-rp-locations",
+    "itemFields": [
+      "description"
+    ],
+    "columns": [
+      "description"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "description"
+      ],
+      "tableFields": [
+        "description"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Airport",
+        "description": "The Brookhaven Airport is the airport/aerodrome of Brookhaven. It is located next to the Motel and near Burger Barn. It is still small but much bigger than it was when first added. It includes Check In, Departure Gate, Baggage Claim, Air Traffic Control Tower and a Vertical Hangar with VIP and Premium Air Vehicles that you can spawn."
+      },
+      "system": {
+        "slug": "airport",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Locations/airport.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Animal Rescue",
+        "description": "The Brookhaven Animal Rescue is a building in Brookhaven from where players can adopt pets.It is swappable with Brookhaven Shelter and Veterinary Hospital."
+      },
+      "system": {
+        "slug": "animal-rescue",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Locations/animal-rescue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Apartments Building",
+        "description": "The Brookhaven Apartment Building is a residential structure located above the Grocery Store in Brookhaven. It was introduced in a building update released in July 2021, replacing the under‑construction area that previously stood in the same location."
+      },
+      "system": {
+        "slug": "apartments-building",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Locations/apartments-building.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arcade",
+        "description": "The Arcade is a building in Brookhaven that is located next to the Ice Cream Shop."
+      },
+      "system": {
+        "slug": "arcade",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Locations/arcade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Auto Mall",
+        "description": "The Auto Mall is a autoshop in Brookhaven. It is used as a vehicle repair and to preview vehicles. It's located next to Rotten Robbie and the Oaks Community."
+      },
+      "system": {
+        "slug": "auto-mall",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Locations/auto-mall.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bank Lower Level",
+        "description": "You can go there from the Brookhaven Bank"
+      },
+      "system": {
+        "slug": "bank-lower-level",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Breakfast Republic",
+        "description": "Breakfast Republic Is An Restaurant Named Breakfast Republic In Brookhaven Where You Can Get Breakfast."
+      },
+      "system": {
+        "slug": "breakfast-republic",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Locations/breakfast-republic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brook's Diner",
+        "description": "Brooks Diner was a diner in Brookhaven located where the Burger Barn is right now, by the airport and motels. It was removed in the Christmas 2024 Update which brought back the Burger Barn in its place and remodeled it. The diner had a few seats, a bar, small kitchen, and small bathroom. It was a very small restaurant."
+      },
+      "system": {
+        "slug": "brook-s-diner",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Locations/brook-s-diner.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven Bank",
+        "description": "The Brookhaven Bank is the bank of Brookhaven that is usually being used for robbing roleplays. The player can check their account and work at the bank. It is next to Rockstar where players can buy clothing. When the player is done robbing the bank, they can escape the bank, they can jump onto the plant, and then walk until they're at the edge of the vent. Then, they can enter the Criminal Base."
+      },
+      "system": {
+        "slug": "brookhaven-bank",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-bank.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven Cemetery",
+        "description": "The Brookhaven Cemetery is the cemetery/graveyard in Brookhaven. It is next to the Hospital."
+      },
+      "system": {
+        "slug": "brookhaven-cemetery",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-cemetery.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven Electric",
+        "description": "Brookhaven Electric is a small green building found on the outside parts of Brookhaven."
+      },
+      "system": {
+        "slug": "brookhaven-electric",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-electric.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven Ocean",
+        "description": "The Brookhaven Ocean Was Added In The Christmas 2023."
+      },
+      "system": {
+        "slug": "brookhaven-ocean",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-ocean.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven School",
+        "description": "The Brookhaven School is a High School in Brookhaven. It Has 2 Floors, 3 Classrooms, a Principal's Office, a Cafeteria, a Teacher's Lounge, an Art Class, a Music Class, a Detention/Study Hall, Janitors closet, a Gym (You Can Change It To:Basketball,Dance,Metting,Gymnastic,and Pool),Bathrooms For Boys And Girls, an auditorium, and a Soccer/Football Field."
+      },
+      "system": {
+        "slug": "brookhaven-school",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-school.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven Shelter",
+        "description": "The Brookhaven Shelter is a building in Brookhaven that the player can stay in.It is located above the Starbrooks Coffee and swappable with the Veterinary Hospital and the Animal Rescue."
+      },
+      "system": {
+        "slug": "brookhaven-shelter",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-shelter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven Stables",
+        "description": "Brookhaven Stables is a stable to either take care of animals or have horses to be kept in."
+      },
+      "system": {
+        "slug": "brookhaven-stables",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-stables.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brookhaven Subway",
+        "description": "The Subway is a mode of transport in Brookhaven, it is used to travel around the town, There are 4 stations in the game in 4 locations, which are Lake Madison, Downtown, Crown Pointe, Blackhawk Community."
+      },
+      "system": {
+        "slug": "brookhaven-subway",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Brookhaven%20RP/Locations/brookhaven-subway.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Burger Barn",
+        "description": "The Burger Barn was one of the oldest buildings in Brookhaven. It was removed in October 2020 and came back in the Christmas 2024 Update"
+      },
+      "system": {
+        "slug": "burger-barn",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Brookhaven%20RP/Locations/burger-barn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bus Stations",
+        "description": "The Bus Stations are an station with ads feature in brookhaven.There are 6 Bus Stations located around the map."
+      },
+      "system": {
+        "slug": "bus-stations",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Brookhaven%20RP/Locations/bus-stations.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Campsite",
+        "description": "The campsite has some pine trees, 3 tables, 6 benches and 2 campfires."
+      },
+      "system": {
+        "slug": "campsite",
+        "section": "Items",
+        "sortOrder": 19,
+        "image": "/Brookhaven%20RP/Locations/campsite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Church",
+        "description": "The Church is a building in Brookhaven. It is primarily used for role-play purposes and is located within The Oaks Community, rather than in the main town area."
+      },
+      "system": {
+        "slug": "church",
+        "section": "Items",
+        "sortOrder": 20,
+        "image": "/Brookhaven%20RP/Locations/church.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cleaners",
+        "description": "The Cleaners was a building in Brookhaven that was shut down. It used to be associated with cleaning before it got shut down and then be replaced. Due to that, it's unlikely to see people visiting it."
+      },
+      "system": {
+        "slug": "cleaners",
+        "section": "Items",
+        "sortOrder": 21,
+        "image": "/Brookhaven%20RP/Locations/cleaners.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Club Brooks",
+        "description": "Club Brooks is the only nightclub in Brookhaven. It has existed in the game since 2020 and was first added in the Entertainment Center, but was later removed and moved to where it is today. It is located beside the Hair and Nails Salon and the Ice Cream Shop. Since its introduction, the club has remained largely unchanged, with only minor visual updates made to the exterior signage."
+      },
+      "system": {
+        "slug": "club-brooks",
+        "section": "Items",
+        "sortOrder": 22,
+        "image": "/Brookhaven%20RP/Locations/club-brooks.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Criminal Base",
+        "description": "The Criminal Base is a location used by criminals and robbers. It provides access to weapons, security cameras, and a bomb that can be used for robbing the Bank or Houses."
+      },
+      "system": {
+        "slug": "criminal-base",
+        "section": "Items",
+        "sortOrder": 23,
+        "image": "/Brookhaven%20RP/Locations/criminal-base.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Daycare & Adoption Center",
+        "description": "Not to be confused with Daycare (Job), a job that has a similar name."
+      },
+      "system": {
+        "slug": "daycare-and-adoption-center",
+        "section": "Items",
+        "sortOrder": 24,
+        "image": "/Brookhaven%20RP/Locations/daycare-and-adoption-center.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dentist",
+        "description": "The Dentist is the name of the dental clinic in Brookhaven. It's located above the Rockstar."
+      },
+      "system": {
+        "slug": "dentist",
+        "section": "Items",
+        "sortOrder": 25,
+        "image": "/Brookhaven%20RP/Locations/dentist.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Station",
+        "description": "The Fire Station is a formal service building in Brookhaven. It is located next to the Town Hall and across from the Brookhaven Cemetery. The building serves as the main location for firefighter roleplay, emergency response, and fire-related activities."
+      },
+      "system": {
+        "slug": "fire-station",
+        "section": "Items",
+        "sortOrder": 26,
+        "image": "/Brookhaven%20RP/Locations/fire-station.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grocery Store",
+        "description": "The Brookhaven Grocery is the grocery store in the town. It is next to the Hair and Nails shop."
+      },
+      "system": {
+        "slug": "grocery-store",
+        "section": "Items",
+        "sortOrder": 27,
+        "image": "/Brookhaven%20RP/Locations/grocery-store.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hair and Nails",
+        "description": "The Brookhaven Hair and Nails shop is a Manicure and Salon next to the Grocery store and Club Brooks."
+      },
+      "system": {
+        "slug": "hair-and-nails",
+        "section": "Items",
+        "sortOrder": 28,
+        "image": "/Brookhaven%20RP/Locations/hair-and-nails.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Haven Plaza",
+        "description": "Haven Plaza (commonly known as the Haven Mall) is a large commercial and social building located on the northeastern side of Brookhaven, on the eastern edge of The Oaks, next to the Rotten Robbie. It functions as one of the main indoor roleplay hubs in the game, featuring shopping, restaurants, entertainment venues, and multiple job locations."
+      },
+      "system": {
+        "slug": "haven-plaza",
+        "section": "Items",
+        "sortOrder": 29,
+        "image": "/Brookhaven%20RP/Locations/haven-plaza.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Cream Shop",
+        "description": "The Ice Cream store is a typical store associated with ice cream. There's a sign of the store named on the outside, which displays \"Ice Cream\". Inside, there's a counter on the left side of the store where the player can get ice cream and \"pay\". Above the counter, there are the following flavors of Ice Cream: Chocolate, Vanilla, Birthday Cake, and Bubblegum. On the right side, there are chairs and tables where the player can eat."
+      },
+      "system": {
+        "slug": "ice-cream-shop",
+        "section": "Items",
+        "sortOrder": 30,
+        "image": "/Brookhaven%20RP/Locations/ice-cream-shop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lake Madison",
+        "description": "Lake Madison has a red sign stating its name, behind there's land surrounded by water, since it's a lake. On the land, there's a few mats on it that are stripe-colored. Across from that, there's the Land Unlocked icon. If you click it, it gives you an option to buy the gamepass if you haven't already. If you already have it, then it should let you pick the house you want it to spawn as it loads when you make sure you want to spawn that house. Inside the lake also have the cruise ship, Paraside falls and Brookhaven hot springs."
+      },
+      "system": {
+        "slug": "lake-madison",
+        "section": "Items",
+        "sortOrder": 31,
+        "image": "/Brookhaven%20RP/Locations/lake-madison.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laundromat",
+        "description": "From Inside It Has Many Washing Machines , Clothes And Some Waiting Chairs"
+      },
+      "system": {
+        "slug": "laundromat",
+        "section": "Items",
+        "sortOrder": 32,
+        "image": "/Brookhaven%20RP/Locations/laundromat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Library & Books",
+        "description": "The Library & Books is a small building in Brookhaven, the media center with books you can buy and read, but eventually would have to return, like any other normal Library."
+      },
+      "system": {
+        "slug": "library-and-books",
+        "section": "Items",
+        "sortOrder": 33,
+        "image": "/Brookhaven%20RP/Locations/library-and-books.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Los Panchos",
+        "description": "From Outside It's Yellow With A Big Red Text :LOS PANCHOS Restaurant"
+      },
+      "system": {
+        "slug": "los-panchos",
+        "section": "Items",
+        "sortOrder": 34,
+        "image": "/Brookhaven%20RP/Locations/los-panchos.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mo's Pizza",
+        "description": "Mo's Pizza is a pizza place in Brookhaven, it is located in the Haven Plaza (Mall) and recently added in the Soccer Stadium (Estate)."
+      },
+      "system": {
+        "slug": "mo-s-pizza",
+        "section": "Items",
+        "sortOrder": 35,
+        "image": "/Brookhaven%20RP/Locations/mo-s-pizza.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Motel Building",
+        "description": "The Brookhaven Motel is a resort‑style lodging building in Brookhaven located near the Airport and Burger Barn. It features multiple interior rooms that players can choose from via the Motel UI."
+      },
+      "system": {
+        "slug": "motel-building",
+        "section": "Items",
+        "sortOrder": 36,
+        "image": "/Brookhaven%20RP/Locations/motel-building.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Movie theater",
+        "description": "The cinema is a movie theater in Brookhaven. It is located in the mall and did not get updated in the mall remodel. However, it got moved and shrunken when the Carnival took the malls place. There are some secrets in the cinema. Like the codes and the wall glitch. The movie codes are codes that are scattered around the map. One code is by the left side of the Arch near Eagle View House Plot. Memorize it, then type in the code on the projector and it plays a secret movie."
+      },
+      "system": {
+        "slug": "movie-theater",
+        "section": "Items",
+        "sortOrder": 37,
+        "image": "/Brookhaven%20RP/Locations/movie-theater.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Museum",
+        "description": "It has many paintings with the agency and old brookhaven full of mystery and some photos with the Mr. Brookhaven And Mrs. Brookhaven but we don't forget about the secret items shown in the Museum."
+      },
+      "system": {
+        "slug": "museum",
+        "section": "Items",
+        "sortOrder": 38,
+        "image": "/Brookhaven%20RP/Locations/museum.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Office Workspace",
+        "description": "The Law Office, Modeling Agency and Party Planner are parts of an office building in Brookhaven. They are next to Club Brooks."
+      },
+      "system": {
+        "slug": "office-workspace",
+        "section": "Items",
+        "sortOrder": 39,
+        "image": "/Brookhaven%20RP/Locations/office-workspace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Party Room",
+        "description": "The Birthday Party Place it's a Party Room in Brookhaven where you can have your birthday party."
+      },
+      "system": {
+        "slug": "party-room",
+        "section": "Items",
+        "sortOrder": 40,
+        "image": "/Brookhaven%20RP/Locations/party-room.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Police Station",
+        "description": "The Police Station is one of the main buildings in Brookhaven, located next to the spawn area. It serves as a hub for law enforcement roleplay and contains multiple interactive areas for players."
+      },
+      "system": {
+        "slug": "police-station",
+        "section": "Items",
+        "sortOrder": 41,
+        "image": "/Brookhaven%20RP/Locations/police-station.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pool",
+        "description": "The Pool is a swimming pool for you to swim in. You can go on the slide or just sit on the towel or blanket on the ground. It's an averagely visited place because it's located behind the spawn."
+      },
+      "system": {
+        "slug": "pool",
+        "section": "Items",
+        "sortOrder": 42,
+        "image": "/Brookhaven%20RP/Locations/pool.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Post Office",
+        "description": "Mail & Packages is the Brookhaven Post Office, located under the Museum."
+      },
+      "system": {
+        "slug": "post-office",
+        "section": "Items",
+        "sortOrder": 43,
+        "image": "/Brookhaven%20RP/Locations/post-office.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Power Plant",
+        "description": "Power Plant is a landmark building in Brookhaven. Players can own the building, but ownership does not allow banning other players from entering. It is known for its interactive features, including the ability to trigger a full reactor meltdown."
+      },
+      "system": {
+        "slug": "power-plant",
+        "section": "Items",
+        "sortOrder": 44,
+        "image": "/Brookhaven%20RP/Locations/power-plant.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "School"
+      },
+      "system": {
+        "slug": "school",
+        "section": "Items",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "St. Lukes Hospital",
+        "description": "St. Lukes Hospital is the Medical Hospital in Brookhaven."
+      },
+      "system": {
+        "slug": "st-lukes-hospital",
+        "section": "Items",
+        "sortOrder": 46,
+        "image": "/Brookhaven%20RP/Locations/st-lukes-hospital.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starbrooks Coffee",
+        "description": "Starbrooks Coffee is the café building in Brookhaven, and one of the buildings to be released while it was to be fully built."
+      },
+      "system": {
+        "slug": "starbrooks-coffee",
+        "section": "Items",
+        "sortOrder": 47,
+        "image": "/Brookhaven%20RP/Locations/starbrooks-coffee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Camp",
+        "description": "It also has Slides which only available in Summer Event."
+      },
+      "system": {
+        "slug": "summer-camp",
+        "section": "Items",
+        "sortOrder": 48,
+        "image": "/Brookhaven%20RP/Locations/summer-camp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Town Hall",
+        "description": "The Town Hall is a building in Brookhaven, it is next to the Fire station and opposite the St. Lukes Hospital."
+      },
+      "system": {
+        "slug": "town-hall",
+        "section": "Items",
+        "sortOrder": 49,
+        "image": "/Brookhaven%20RP/Locations/town-hall.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Veterinary Hospital",
+        "description": "It's a Veterinary in Brookhaven and it's swappable with the Brookhaven Shelter and Brookhaven Animal Rescue.When you enter ,on the right there is a counter with a monitor and some shelfs ,on the left there's a waiting bench and above it's from where you can switch the place.In front there is a room with on the left 2 white windows and a counter with a sink and doctor stuff ,on the right there's the room where your pet is treated ,in there are some medical stuff and more roleplay stuff ,in the front there is a small room where the pets stay in a comfortable place overnight or until they get adopted."
+      },
+      "system": {
+        "slug": "veterinary-hospital",
+        "section": "Items",
+        "sortOrder": 50,
+        "image": "/Brookhaven%20RP/Locations/veterinary-hospital.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zerizon",
+        "description": "Zerizon is a phone store in Brookhaven where you can buy phones or repair your phone."
+      },
+      "system": {
+        "slug": "zerizon",
+        "section": "Items",
+        "sortOrder": 51,
+        "image": "/Brookhaven%20RP/Locations/zerizon.webp"
+      }
+    }
+  ]
+}

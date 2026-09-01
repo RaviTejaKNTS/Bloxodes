@@ -1,0 +1,1477 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "finishers",
+    "route": "/wiki/rivals/finishers",
+    "catalogCode": "rivals-finishers",
+    "itemFields": [
+      "rarity",
+      "sourceType",
+      "source",
+      "availability"
+    ],
+    "columns": [
+      "rarity",
+      "sourceType",
+      "source",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Event Chest Sources",
+        "Season and Ranked Sources",
+        "Finisher Pack Sources",
+        "Contract, UGC, and Milestone Sources",
+        "Bundle and Shop Sources",
+        "Default and Unobtainable"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "sourceType",
+        "source",
+        "availability"
+      ],
+      "tableFields": [
+        "rarity",
+        "sourceType",
+        "source",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Batsplosion",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "batsplosion",
+        "section": "Event Chest Sources",
+        "sortOrder": 1,
+        "image": "/RIVALS/Finishers/batsplosion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bite",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "bite",
+        "section": "Event Chest Sources",
+        "sortOrder": 2,
+        "image": "/RIVALS/Finishers/bite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blip",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "blip",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 3,
+        "image": "/RIVALS/Finishers/blip.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chalked",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "chalked",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 4,
+        "image": "/RIVALS/Finishers/chalked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chill Out",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "chill-out",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 5,
+        "image": "/RIVALS/Finishers/chill-out.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coalify",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "coalify",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 6,
+        "image": "/RIVALS/Finishers/coalify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Confetti",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "confetti",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 7,
+        "image": "/RIVALS/Finishers/confetti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Delete",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "delete",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 8,
+        "image": "/RIVALS/Finishers/delete.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Digitize",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "digitize",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 9,
+        "image": "/RIVALS/Finishers/digitize.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Faceplant",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "faceplant",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 10,
+        "image": "/RIVALS/Finishers/faceplant.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Confetti",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "festive-confetti",
+        "section": "Event Chest Sources",
+        "sortOrder": 11,
+        "image": "/RIVALS/Finishers/festive-confetti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flop",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "flop",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 12,
+        "image": "/RIVALS/Finishers/flop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Folded",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "folded",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 13,
+        "image": "/RIVALS/Finishers/folded.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "For Glory",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Shop",
+        "availability": "Ranked shop source"
+      },
+      "system": {
+        "slug": "for-glory",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 14,
+        "image": "/RIVALS/Finishers/for-glory.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hacked",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "hacked",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 15,
+        "image": "/RIVALS/Finishers/hacked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Northern Light Show",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Season 2",
+        "availability": "Ranked season source"
+      },
+      "system": {
+        "slug": "northern-light-show",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 16,
+        "image": "/RIVALS/Finishers/northern-light-show.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Petrify",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "petrify",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 17,
+        "image": "/RIVALS/Finishers/petrify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spooky Confetti",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "spooky-confetti",
+        "section": "Event Chest Sources",
+        "sortOrder": 18,
+        "image": "/RIVALS/Finishers/spooky-confetti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Squawk",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "squawk",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 19,
+        "image": "/RIVALS/Finishers/squawk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Toot",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "toot",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 20,
+        "image": "/RIVALS/Finishers/toot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Very Tragic Banana Peel Accident",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "very-tragic-banana-peel-accident",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 21,
+        "image": "/RIVALS/Finishers/very-tragic-banana-peel-accident.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warped Away",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Season 1",
+        "availability": "Ranked season source"
+      },
+      "system": {
+        "slug": "warped-away",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 22,
+        "image": "/RIVALS/Finishers/warped-away.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wrapped",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "wrapped",
+        "section": "Event Chest Sources",
+        "sortOrder": 23,
+        "image": "/RIVALS/Finishers/wrapped.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yoink",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "yoink",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 24,
+        "image": "/RIVALS/Finishers/yoink.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ascend",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "ascend",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 25,
+        "image": "/RIVALS/Finishers/ascend.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bad Mood",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "bad-mood",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 26,
+        "image": "/RIVALS/Finishers/bad-mood.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bogey",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "bogey",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 27,
+        "image": "/RIVALS/Finishers/bogey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bonesplosion",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "bonesplosion",
+        "section": "Event Chest Sources",
+        "sortOrder": 28,
+        "image": "/RIVALS/Finishers/bonesplosion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Collapse",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "collapse",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 29,
+        "image": "/RIVALS/Finishers/collapse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Decorated Player",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "decorated-player",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 30,
+        "image": "/RIVALS/Finishers/decorated-player.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flick",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "flick",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 31,
+        "image": "/RIVALS/Finishers/flick.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Freeze",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "freeze",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 32,
+        "image": "/RIVALS/Finishers/freeze.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Event Chest Sources",
+        "sortOrder": 33,
+        "image": "/RIVALS/Finishers/frozen.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbreadify",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "gingerbreadify",
+        "section": "Event Chest Sources",
+        "sortOrder": 34,
+        "image": "/RIVALS/Finishers/gingerbreadify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy Head",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "heavy-head",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 35,
+        "image": "/RIVALS/Finishers/heavy-head.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "High Gravity",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "high-gravity",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 36,
+        "image": "/RIVALS/Finishers/high-gravity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hooked",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "hooked",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 37,
+        "image": "/RIVALS/Finishers/hooked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Soul",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "lost-soul",
+        "section": "Event Chest Sources",
+        "sortOrder": 38,
+        "image": "/RIVALS/Finishers/lost-soul.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Midas Touch",
+        "rarity": "Rare",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "Contracts",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "midas-touch",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 39,
+        "image": "/RIVALS/Finishers/midas-touch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Reaper",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "reaper",
+        "section": "Event Chest Sources",
+        "sortOrder": 40,
+        "image": "/RIVALS/Finishers/reaper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roadrunner",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "roadrunner",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 41,
+        "image": "/RIVALS/Finishers/roadrunner.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rush",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "rush",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 42,
+        "image": "/RIVALS/Finishers/rush.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowmanify",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "snowmanify",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 43,
+        "image": "/RIVALS/Finishers/snowmanify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Splatter",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "splatter",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 44,
+        "image": "/RIVALS/Finishers/splatter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tremble",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "tremble",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 45,
+        "image": "/RIVALS/Finishers/tremble.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warp Sickness",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "warp-sickness",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 46,
+        "image": "/RIVALS/Finishers/warp-sickness.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Balloons",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "balloons",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 47,
+        "image": "/RIVALS/Finishers/balloons.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beacon",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Energy Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "beacon",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 48,
+        "image": "/RIVALS/Finishers/beacon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BONK!",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "bonk",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 49,
+        "image": "/RIVALS/Finishers/bonk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boogie",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Standard Weapons Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "boogie",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 50,
+        "image": "/RIVALS/Finishers/boogie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Broom Ride",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "broom-ride",
+        "section": "Event Chest Sources",
+        "sortOrder": 51,
+        "image": "/RIVALS/Finishers/broom-ride.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chark Attack",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "chark-attack",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 52,
+        "image": "/RIVALS/Finishers/chark-attack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clapped",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "clapped",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 53,
+        "image": "/RIVALS/Finishers/clapped.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crushed",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "crushed",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 54,
+        "image": "/RIVALS/Finishers/crushed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Darkheart",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "darkheart",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 55,
+        "image": "/RIVALS/Finishers/darkheart.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "David",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "david",
+        "section": "Event Chest Sources",
+        "sortOrder": 56,
+        "image": "/RIVALS/Finishers/david.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dematerialize",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Nostalgia Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "dematerialize",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Hands",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "Contracts",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "diamond-hands",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 58,
+        "image": "/RIVALS/Finishers/diamond-hands.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Disintegrate",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "disintegrate",
+        "section": "Event Chest Sources",
+        "sortOrder": 59,
+        "image": "/RIVALS/Finishers/disintegrate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "DRIP",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Candy bundles",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "drip",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 60,
+        "image": "/RIVALS/Finishers/drip.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Electrocute",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "electrocute",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 61,
+        "image": "/RIVALS/Finishers/electrocute.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Enlightened",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "enlightened",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 62,
+        "image": "/RIVALS/Finishers/enlightened.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Erased",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "RPG Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "erased",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 63,
+        "image": "/RIVALS/Finishers/erased.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Falling Icicles",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop",
+        "availability": "Shop purchase"
+      },
+      "system": {
+        "slug": "falling-icicles",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 64,
+        "image": "/RIVALS/Finishers/falling-icicles.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework Show",
+        "rarity": "Legendary",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "firework-show",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 65,
+        "image": "/RIVALS/Finishers/firework-show.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Ice Spike",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Crystal bundles",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "giant-ice-spike",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 66,
+        "image": "/RIVALS/Finishers/giant-ice-spike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Snowball",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Contraband Bundle from Season 2",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "giant-snowball",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 67,
+        "image": "/RIVALS/Finishers/giant-snowball.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "GOOAAALLLL",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "gooaaallll",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 68,
+        "image": "/RIVALS/Finishers/gooaaallll.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heartbeat",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Medkit Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "heartbeat",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 69,
+        "image": "/RIVALS/Finishers/heartbeat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ignite",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Heavy Duty Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "ignite",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 70,
+        "image": "/RIVALS/Finishers/ignite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Impaled",
+        "rarity": "Legendary",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Shop",
+        "availability": "Ranked shop source"
+      },
+      "system": {
+        "slug": "impaled",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 71,
+        "image": "/RIVALS/Finishers/impaled.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inflate",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Balloon Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "inflate",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Instability",
+        "rarity": "Legendary",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass from Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "instability",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaunify",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Lucky Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "leprechaunify",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Low Gravity",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Exogun Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "low-gravity",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 75,
+        "image": "/RIVALS/Finishers/low-gravity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "OOF",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Classic Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "oof",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 76,
+        "image": "/RIVALS/Finishers/oof.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Opulent",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Key Bundles",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "opulent",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 77,
+        "image": "/RIVALS/Finishers/opulent.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orbital Strike",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "orbital-strike",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 78,
+        "image": "/RIVALS/Finishers/orbital-strike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pixel Coins",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Pixel Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "pixel-coins",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 79,
+        "image": "/RIVALS/Finishers/pixel-coins.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plushify",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "UGC Items milestone",
+        "availability": "UGC milestone"
+      },
+      "system": {
+        "slug": "plushify",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poof",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Lovely Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "poof",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Barf",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "rainbow-barf",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 82,
+        "image": "/RIVALS/Finishers/rainbow-barf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RIP",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop",
+        "availability": "Shop purchase"
+      },
+      "system": {
+        "slug": "rip",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 83,
+        "image": "/RIVALS/Finishers/rip.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sleigh Away",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop",
+        "availability": "Shop purchase"
+      },
+      "system": {
+        "slug": "sleigh-away",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 84,
+        "image": "/RIVALS/Finishers/sleigh-away.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowballed",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "snowballed",
+        "section": "Event Chest Sources",
+        "sortOrder": 85,
+        "image": "/RIVALS/Finishers/snowballed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spaghettified",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Contraband Bundle from Season 1",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "spaghettified",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 86,
+        "image": "/RIVALS/Finishers/spaghettified.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stiff",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Starter Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "stiff",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 87,
+        "image": "/RIVALS/Finishers/stiff.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Those Who Know",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop (retired)",
+        "availability": "Retired shop source"
+      },
+      "system": {
+        "slug": "those-who-know",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 88,
+        "image": "/RIVALS/Finishers/those-who-know.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tough Crowd",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "tough-crowd",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 89,
+        "image": "/RIVALS/Finishers/tough-crowd.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombified",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "zombified",
+        "section": "Event Chest Sources",
+        "sortOrder": 90,
+        "image": "/RIVALS/Finishers/zombified.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "5B Visits",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "5B Visits milestone",
+        "availability": "Visit milestone"
+      },
+      "system": {
+        "slug": "5b-visits",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 91,
+        "image": "/RIVALS/Finishers/5b-visits.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Director's Cut",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop video ad",
+        "availability": "Shop video reward"
+      },
+      "system": {
+        "slug": "director-s-cut",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 92,
+        "image": "/RIVALS/Finishers/director-s-cut.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elfify",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "2025 Advent Calendar",
+        "availability": "Advent reward"
+      },
+      "system": {
+        "slug": "elfify",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 93,
+        "image": "/RIVALS/Finishers/elfify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Judgement",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "2024 Advent Calendar",
+        "availability": "Advent reward"
+      },
+      "system": {
+        "slug": "jolly-judgement",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 94,
+        "image": "/RIVALS/Finishers/jolly-judgement.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ragdoll",
+        "rarity": "Unobtainable",
+        "sourceType": "Default or unobtainable",
+        "source": "No finisher equipped",
+        "availability": "Default fallback"
+      },
+      "system": {
+        "slug": "ragdoll",
+        "section": "Default and Unobtainable",
+        "sortOrder": 95,
+        "image": "/RIVALS/Finishers/ragdoll.webp"
+      }
+    }
+  ]
+}

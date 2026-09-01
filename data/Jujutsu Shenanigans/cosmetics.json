@@ -1,0 +1,964 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "cosmetics",
+    "route": "/wiki/jujutsu-shenanigans/cosmetics",
+    "catalogCode": "jujutsu-shenanigans-cosmetics",
+    "itemFields": [
+      "category",
+      "type",
+      "unlockRoute",
+      "cost",
+      "currency",
+      "availability",
+      "status",
+      "equipUseContext",
+      "achievementRequirement",
+      "audioStatus"
+    ],
+    "columns": [
+      "category",
+      "type",
+      "unlockRoute",
+      "cost",
+      "currency",
+      "availability",
+      "status",
+      "equipUseContext",
+      "achievementRequirement",
+      "audioStatus"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Victory Flashes",
+        "Taunts",
+        "Removed and unavailable taunts"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [
+        "status"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "type",
+        "unlockRoute",
+        "cost",
+        "currency",
+        "availability"
+      ],
+      "tableFields": [
+        "category",
+        "type",
+        "unlockRoute",
+        "cost",
+        "currency",
+        "availability",
+        "status",
+        "equipUseContext"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "King of Curses",
+        "category": "Victory Flashes",
+        "type": "Victory Flash",
+        "unlockRoute": "Default",
+        "cost": "Free",
+        "currency": "None",
+        "availability": "Available",
+        "status": "Default",
+        "equipUseContext": "Inventory Victories tab; plays after Duel or Roulette wins."
+      },
+      "system": {
+        "slug": "king-of-curses",
+        "section": "Victory Flashes",
+        "sortOrder": 1,
+        "image": "/Jujutsu%20Shenanigans/cosmetics/king-of-curses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stand Proud",
+        "category": "Victory Flashes",
+        "type": "Victory Flash",
+        "unlockRoute": "Shop",
+        "cost": "$1,000 or 100 Robux",
+        "currency": "Cash or Robux",
+        "availability": "Available",
+        "status": "Shop",
+        "equipUseContext": "Inventory Victories tab; plays after Duel or Roulette wins."
+      },
+      "system": {
+        "slug": "stand-proud",
+        "section": "Victory Flashes",
+        "sortOrder": 2,
+        "image": "/Jujutsu%20Shenanigans/cosmetics/stand-proud.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Domain Invasion",
+        "category": "Victory Flashes",
+        "type": "Victory Flash",
+        "unlockRoute": "Shop",
+        "cost": "$1,000 or 100 Robux",
+        "currency": "Cash or Robux",
+        "availability": "Available",
+        "status": "Shop",
+        "equipUseContext": "Inventory Victories tab; plays after Duel or Roulette wins."
+      },
+      "system": {
+        "slug": "domain-invasion",
+        "section": "Victory Flashes",
+        "sortOrder": 3,
+        "image": "/Jujutsu%20Shenanigans/cosmetics/domain-invasion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Watch Your Head",
+        "category": "Victory Flashes",
+        "type": "Victory Flash",
+        "unlockRoute": "Shop",
+        "cost": "$1,000 or 100 Robux",
+        "currency": "Cash or Robux",
+        "availability": "Available",
+        "status": "Shop",
+        "equipUseContext": "Inventory Victories tab; plays after Duel or Roulette wins."
+      },
+      "system": {
+        "slug": "watch-your-head",
+        "section": "Victory Flashes",
+        "sortOrder": 4,
+        "image": "/Jujutsu%20Shenanigans/cosmetics/watch-your-head.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Phenomenal",
+        "category": "Victory Flashes",
+        "type": "Victory Flash",
+        "unlockRoute": "Achievement",
+        "cost": "Achievement reward",
+        "currency": "None",
+        "availability": "Available",
+        "status": "Achievement",
+        "equipUseContext": "Inventory Victories tab; plays after Duel or Roulette wins.",
+        "achievementRequirement": "The strongest of history"
+      },
+      "system": {
+        "slug": "phenomenal",
+        "section": "Victory Flashes",
+        "sortOrder": 5,
+        "image": "/Jujutsu%20Shenanigans/cosmetics/phenomenal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meditation",
+        "category": "Victory Flashes",
+        "type": "Victory Flash",
+        "unlockRoute": "Shop",
+        "cost": "$1,000 or 100 Robux",
+        "currency": "Cash or Robux",
+        "availability": "Available",
+        "status": "Shop",
+        "equipUseContext": "Inventory Victories tab; plays after Duel or Roulette wins."
+      },
+      "system": {
+        "slug": "meditation",
+        "section": "Victory Flashes",
+        "sortOrder": 6,
+        "image": "/Jujutsu%20Shenanigans/cosmetics/meditation.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "mahito itadori",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "mahito-itadori",
+        "section": "Taunts",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "waste of time",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "waste-of-time",
+        "section": "Taunts",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "ganbare ganbare",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "ganbare-ganbare",
+        "section": "Taunts",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "heavenly ramble",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "heavenly-ramble",
+        "section": "Taunts",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "satoru gojo!!!",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "satoru-gojo",
+        "section": "Taunts",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "huh",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "huh",
+        "section": "Taunts",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "don",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "don",
+        "section": "Taunts",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "sorry nanami",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "sorry-nanami",
+        "section": "Taunts",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "mambo",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "mambo",
+        "section": "Taunts",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "what are you mahito",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "what-are-you-mahito",
+        "section": "Taunts",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "idk this guy",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "idk-this-guy",
+        "section": "Taunts",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "yowai mo",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "yowai-mo",
+        "section": "Taunts",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "you did it",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "you-did-it",
+        "section": "Taunts",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BEST FRIEND",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "best-friend-upper",
+        "section": "Taunts",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "best friend",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "best-friend-lower",
+        "section": "Taunts",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "where are you going",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "where-are-you-going",
+        "section": "Taunts",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "convergence",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "convergence",
+        "section": "Taunts",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "next",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "next",
+        "section": "Taunts",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "toji fushiguro",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "toji-fushiguro",
+        "section": "Taunts",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "apologize",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "apologize",
+        "section": "Taunts",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "disrespectful rush",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "disrespectful-rush",
+        "section": "Taunts",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "hidoi na",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "hidoi-na",
+        "section": "Taunts",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "nanami sigh",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "nanami-sigh",
+        "section": "Taunts",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "you cryin",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "you-cryin",
+        "section": "Taunts",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "laugh",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "laugh",
+        "section": "Taunts",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "words are unnecessary",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "words-are-unnecessary",
+        "section": "Taunts",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "JACKPOT",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "jackpot",
+        "section": "Taunts",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "sata andagi",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "sata-andagi",
+        "section": "Taunts",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "for real (Toji)",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "for-real-toji",
+        "section": "Taunts",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "you are strong",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "you-are-strong",
+        "section": "Taunts",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "angry",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "angry",
+        "section": "Taunts",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "vibraslap",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "vibraslap",
+        "section": "Taunts",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "for real (Mahito)",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "for-real-mahito",
+        "section": "Taunts",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "something's off",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "somethings-off",
+        "section": "Taunts",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "yujiii",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "yujiii",
+        "section": "Taunts",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "yo it's been a while",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "yo-its-been-a-while",
+        "section": "Taunts",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "oi",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "oi",
+        "section": "Taunts",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Baka",
+        "category": "Taunts",
+        "type": "Taunt",
+        "unlockRoute": "Top-right taunt list",
+        "cost": "No cost listed",
+        "currency": "None listed",
+        "availability": "Available",
+        "status": "Menu accessible",
+        "equipUseContext": "Top-right taunt list; plays audio and shows an icon over the user.",
+        "audioStatus": "Audio TBA"
+      },
+      "system": {
+        "slug": "baka",
+        "section": "Taunts",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "filthy monkey",
+        "category": "Removed and unavailable taunts",
+        "type": "Taunt",
+        "unlockRoute": "Removed",
+        "cost": "Unavailable",
+        "currency": "None",
+        "availability": "Removed",
+        "status": "Removed",
+        "equipUseContext": "Removed taunt; not treated as a current menu option.",
+        "audioStatus": "Audio file listed"
+      },
+      "system": {
+        "slug": "filthy-monkey",
+        "section": "Removed and unavailable taunts",
+        "sortOrder": 45,
+        "image": null
+      }
+    }
+  ]
+}

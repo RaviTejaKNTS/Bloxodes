@@ -1,0 +1,228 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "weather-and-disasters",
+    "route": "/wiki/brookhaven-rp/weather-and-disasters",
+    "catalogCode": "brookhaven-rp-weather-and-disasters",
+    "itemFields": [
+      "number",
+      "category",
+      "description"
+    ],
+    "columns": [
+      "number",
+      "category",
+      "description"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Overview",
+        "Natural Disasters",
+        "Sky Effects",
+        "Lighting"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "number",
+        "category",
+        "description"
+      ],
+      "tableFields": [
+        "number",
+        "category",
+        "description"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Rain",
+        "number": "1",
+        "category": "Overview",
+        "description": "Rain occurs occasionally at random times. If the player is under a building or roof, they will not see the rain. Rain consists of Roblox particles spread across the map. During rain, the sky turns gray and appears darker than usual."
+      },
+      "system": {
+        "slug": "rain",
+        "section": "Overview",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/rain.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flood",
+        "number": "2",
+        "category": "Overview",
+        "description": "Occasionally, rain may cause floods. Floods are similar to rain but feature non-collidable, dirty, mud-colored water. Players may hear ambient thunder or lightning sounds. The sky turns gray and appears darker than usual during a flood."
+      },
+      "system": {
+        "slug": "flood",
+        "section": "Overview",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/flood.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snow",
+        "number": "3",
+        "category": "Overview",
+        "description": "Snow typically appears in winter but was discontinued in early 2025 due to extended duration. In December 2025, snow was updated: previously resembling white rain particles in a specific direction, it became smaller and less visible, likely due to Roblox scaling. The snow texture changed from smooth plastic to a custom texture that did not fit the map, and was later removed in early 2026. The new snow also enters buildings, unlike the older version. Snow on the ground appears, and vacant plots change grass color accordingly. The sky turns gray and appears darker than usual."
+      },
+      "system": {
+        "slug": "snow",
+        "section": "Overview",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/snow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snow on Ground",
+        "number": "4",
+        "category": "Overview",
+        "description": "Snow on the ground replaces dirty flood water with white snow. Unlike snow, there is no snowfall during snow-on-ground events. This effect was discontinued in May 2025 due to extended duration. The sky turns gray but does not darken like other weather effects. Roads and green grass are covered with snow, and vacant plots adjust grass color accordingly."
+      },
+      "system": {
+        "slug": "snow-on-ground",
+        "section": "Overview",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/snow-on-ground.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shop Fires",
+        "number": "1",
+        "category": "Natural Disasters",
+        "description": "Occasionally, small buildings catch fire. Players can use fire extinguishers or fire trucks to put out the flames. This is a rare but real event."
+      },
+      "system": {
+        "slug": "shop-fires",
+        "section": "Natural Disasters",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/shop-fires.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Earthquakes",
+        "number": "2",
+        "category": "Natural Disasters",
+        "description": "Very rarely, earthquakes occur with varying intensity. The player's screen shakes according to the earthquake's magnitude. A warning appears in the right corner of the screen, detailing the earthquake and its size. Some particles may appear if the player owns the Disaster Pack pass."
+      },
+      "system": {
+        "slug": "earthquakes",
+        "section": "Natural Disasters",
+        "sortOrder": 6,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/earthquakes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cloudy",
+        "number": "1",
+        "category": "Sky Effects",
+        "description": "A gray, basic skybox similar to weather skies but without darkening. At 6 a.m., the sky is a faded pinkish color resembling sunrise; at 6 p.m., it becomes reddish-orange focused on one side of the map (sunset)."
+      },
+      "system": {
+        "slug": "cloudy",
+        "section": "Sky Effects",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/cloudy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sky Clouds",
+        "number": "2",
+        "category": "Sky Effects",
+        "description": "A realistic skybox with clouds. Sunlight creates rays that do not affect the map but provide realistic visuals. At 6 a.m., the sky is purple-ish, turning light blue during the day. At 6 p.m., it becomes red-ish; by 7 p.m., it turns black with a visible purple horizon. The moon does not appear."
+      },
+      "system": {
+        "slug": "sky-clouds",
+        "section": "Sky Effects",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/sky-clouds.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Skybox",
+        "number": "3",
+        "category": "Sky Effects",
+        "description": "The sky is orange at all times, remaining orange until 7–9 p.m., when darkness sets in."
+      },
+      "system": {
+        "slug": "orange-skybox",
+        "section": "Sky Effects",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/orange-skybox.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Skybox",
+        "number": "4",
+        "category": "Sky Effects",
+        "description": "Similar to the orange skybox but green, creating an apocalyptic vibe."
+      },
+      "system": {
+        "slug": "green-skybox",
+        "section": "Sky Effects",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/green-skybox.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Normal",
+        "number": "1",
+        "category": "Lighting",
+        "description": "Standard lighting for the map."
+      },
+      "system": {
+        "slug": "normal",
+        "section": "Lighting",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/normal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Darkness",
+        "number": "2",
+        "category": "Lighting",
+        "description": "Surroundings turn dark for everyone in the server, ideal for horror roleplay. Players can see only a small area around them. The light moves with the player and camera."
+      },
+      "system": {
+        "slug": "darkness",
+        "section": "Lighting",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/darkness.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Foggy",
+        "number": "3",
+        "category": "Lighting",
+        "description": "A fog surrounds the map, limiting distant visibility. Players can still see buildings in the horizon, though blurred like drawings. At night, fog is more noticeable, while during the day, distant objects are less visible."
+      },
+      "system": {
+        "slug": "foggy",
+        "section": "Lighting",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/foggy.webp"
+      }
+    }
+  ]
+}

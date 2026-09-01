@@ -5,15 +5,7 @@ import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { listPublishedTools } from "@/lib/tools";
 import { listPublishedQuizzes } from "@/lib/quizzes";
 import { listPublishedPuzzlePages } from "@/lib/puzzles";
-import {
-  buildWikiCollectionPath,
-  getWikiCollectionPageByCode,
-  listPublishedWikiCollectionPagesByWikiSlug
-} from "@/lib/wiki-collections";
-import {
-  listPublishedWikiCollectionRuntimeImages,
-  shouldFallbackToLocalWikiCollectionData
-} from "@/lib/wiki-collection-runtime";
+import { buildWikiCollectionPath, listPublishedWikiCollectionPagesByWikiSlug } from "@/lib/wiki-collections";
 import { resolveCatalogCardMeta } from "@/lib/catalog-card-meta";
 import {
   AVATAR_CATALOG_FAMILY_CODES,
@@ -285,32 +277,23 @@ export async function MoreWikiCollections({
 }) {
   const catalogs = await listPublishedWikiCollectionPagesByWikiSlug(wikiSlug);
   const normalizedCurrent = excludeCollectionSlug.trim().toLowerCase();
-  const candidates = catalogs
+  const items = catalogs
     .filter((catalog) => catalog.collection_slug !== normalizedCurrent)
     .map((catalog) => ({ catalog, label: catalog.display_name?.trim() ?? "" }))
     .filter((entry) => entry.label)
     .slice(0, 8);
-  const items = await Promise.all(
-    candidates.map(async ({ catalog, label }) => {
-      const page = await getWikiCollectionPageByCode(catalog.code);
-      const runtimeImages = page ? await listPublishedWikiCollectionRuntimeImages(page, 1) : null;
-      const thumbUrl = runtimeImages?.[0] ??
-        (shouldFallbackToLocalWikiCollectionData(catalog.code) ? catalog.thumb_url ?? null : null);
-      return { catalog, label, thumbUrl };
-    })
-  );
   if (!items.length) return null;
 
   return (
     <MoreSection title={`Check out other catalogs from ${gameName}`} viewAllHref={`/wiki/${wikiSlug}`}>
-      {items.map(({ catalog, label, thumbUrl }) => (
+      {items.map(({ catalog, label }) => (
         <Link
           key={catalog.id ?? catalog.code}
           href={buildWikiCollectionPath(catalog.wiki_slug, catalog.collection_slug)}
           className="group flex items-center gap-3 rounded-lg border border-border/70 bg-card p-3 transition-colors hover:border-border"
         >
           <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-surface-muted">
-            <CardImage src={thumbUrl} alt={label} />
+            <CardImage src={catalog.thumb_url ?? null} alt={label} />
           </span>
           <span className="min-w-0">
             <span className="block line-clamp-2 text-sm font-semibold text-foreground">

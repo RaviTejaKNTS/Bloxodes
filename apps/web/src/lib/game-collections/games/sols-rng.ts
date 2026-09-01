@@ -6,5 +6,12 @@ export const solsRngCollectionGroup = {
   universeId: 5361032378,
   dataDir: "Sols RNG",
   universeNames: ["Sol's RNG", "Sol's RNG [ Summer Event ]"],
-  collections: ["auras", "gears", "potions", "biomes"]
+  collections: [
+    "auras",
+    "gears",
+    "potions",
+    "biomes",
+    "runes",
+    "lanterns"
+  ]
 } satisfies GameCollectionGroup;

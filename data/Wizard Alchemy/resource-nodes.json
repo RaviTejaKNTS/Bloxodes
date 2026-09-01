@@ -1,0 +1,213 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Wizard Alchemy",
+    "gameSlug": "wizard-alchemy",
+    "collection": "resource-nodes",
+    "route": "/wiki/wizard-alchemy/resource-nodes",
+    "catalogCode": "wizard-alchemy-resource-nodes",
+    "itemFields": [
+      "area",
+      "nodeType",
+      "materials",
+      "routeUse",
+      "difficultyStage",
+      "respawnOrRepeatNote"
+    ],
+    "columns": [
+      "area",
+      "nodeType",
+      "materials",
+      "routeUse",
+      "difficultyStage",
+      "respawnOrRepeatNote"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Departure Isle gathering nodes",
+        "Sea of Oblivion gathering nodes",
+        "Shared pickup sources",
+        "Enchanted Stone sources"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "area",
+        "nodeType",
+        "materials",
+        "routeUse",
+        "difficultyStage",
+        "respawnOrRepeatNote"
+      ],
+      "tableFields": [
+        "area",
+        "nodeType",
+        "materials",
+        "routeUse",
+        "difficultyStage",
+        "respawnOrRepeatNote"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Blueberry Bush",
+        "area": "Departure Isle",
+        "nodeType": "Safe gathering node",
+        "materials": [
+          "Blueberry"
+        ],
+        "routeUse": "Fast starter Magic ingredient for low-Magic potion attempts and early material quests.",
+        "difficultyStage": "Starter gathering",
+        "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources."
+      },
+      "system": {
+        "slug": "blueberry-bush",
+        "section": "Departure Isle gathering nodes",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mushroom Cluster",
+        "area": "Departure Isle",
+        "nodeType": "Safe gathering node",
+        "materials": [
+          "Withered Mushroom"
+        ],
+        "routeUse": "Common starter ingredient with slightly more Magic Power than Blueberry.",
+        "difficultyStage": "Starter gathering",
+        "respawnOrRepeatNote": "Repeatable world pickup; Pro Game Guides notes clusters are found around the world, mostly near water."
+      },
+      "system": {
+        "slug": "mushroom-cluster",
+        "section": "Departure Isle gathering nodes",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bird Nest",
+        "area": "Departure Isle",
+        "nodeType": "Safe gathering node",
+        "materials": [
+          "Seagull Egg"
+        ],
+        "routeUse": "Highest Magic Power starter-node ingredient before enemy farming starts.",
+        "difficultyStage": "Starter gathering",
+        "respawnOrRepeatNote": "Repeatable world pickup; Pro Game Guides notes nests appear in higher places such as trees and cliffs."
+      },
+      "system": {
+        "slug": "bird-nest",
+        "section": "Departure Isle gathering nodes",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fern Bush",
+        "area": "Sea of Oblivion",
+        "nodeType": "Safe gathering node",
+        "materials": [
+          "Fern"
+        ],
+        "routeUse": "Starter New Mainland gathering material for Sea of Oblivion potion attempts.",
+        "difficultyStage": "New Mainland gathering",
+        "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources."
+      },
+      "system": {
+        "slug": "fern-bush",
+        "section": "Sea of Oblivion gathering nodes",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sulphur Lumps",
+        "area": "Sea of Oblivion",
+        "nodeType": "Safe gathering node",
+        "materials": [
+          "Sulphur Lumps"
+        ],
+        "routeUse": "New Mainland node material with more Magic Power than the first-island starter pickups.",
+        "difficultyStage": "New Mainland gathering",
+        "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources."
+      },
+      "system": {
+        "slug": "sulphur-lumps-node",
+        "section": "Sea of Oblivion gathering nodes",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Volcanic Rock",
+        "area": "Sea of Oblivion",
+        "nodeType": "Safe gathering node",
+        "materials": [
+          "Volcanic Rock"
+        ],
+        "routeUse": "New Mainland node material that reaches early enemy-drop Magic Power values without a fight.",
+        "difficultyStage": "New Mainland gathering",
+        "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources."
+      },
+      "system": {
+        "slug": "volcanic-rock-node",
+        "section": "Sea of Oblivion gathering nodes",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chests",
+        "area": "Departure Isle and material routes",
+        "nodeType": "Fixed pickup source",
+        "materials": [
+          "Common materials",
+          "selected New Mainland materials",
+          "elemental shards",
+          "Gold or resource rewards"
+        ],
+        "routeUse": "Broad pickup loop for materials and shards when you want resources without fighting every enemy on the path.",
+        "difficultyStage": "Any stage, route dependent",
+        "respawnOrRepeatNote": "GAMES.GG lists fixed chest spots with a one-hour respawn timer; exact per-chest reward tables are not clearly listed."
+      },
+      "system": {
+        "slug": "chests",
+        "section": "Shared pickup sources",
+        "sortOrder": 7,
+        "image": "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Enchanted Sword Ferns",
+        "area": "Sea of Oblivion lava island",
+        "nodeType": "Enemy-like destructible source",
+        "materials": [
+          "Enchanted Stone"
+        ],
+        "routeUse": "Repeatable Enchanted Stone farming for wand enchantment rolls.",
+        "difficultyStage": "Sea of Oblivion combat farming",
+        "respawnOrRepeatNote": "GAMES.GG describes them as respawning sources but does not list an exact timer."
+      },
+      "system": {
+        "slug": "enchanted-sword-ferns",
+        "section": "Enchanted Stone sources",
+        "sortOrder": 8,
+        "image": "/Wizard%20Alchemy/Resource%20Nodes/enchanted-sword-ferns.jpg"
+      }
+    }
+  ]
+}

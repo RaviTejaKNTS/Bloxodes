@@ -1,0 +1,709 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Slime RNG",
+    "gameSlug": "slime-rng",
+    "collection": "zones",
+    "route": "/wiki/slime-rng/zones",
+    "catalogCode": "slime-rng-zones",
+    "itemFields": [
+      "zoneName",
+      "zoneNumber",
+      "stage",
+      "cost",
+      "totalZoneLuck",
+      "enemyHealth",
+      "goopPerKill",
+      "machineUnlocks"
+    ],
+    "columns": [
+      "zoneName",
+      "zoneNumber",
+      "stage",
+      "cost",
+      "totalZoneLuck",
+      "enemyHealth",
+      "goopPerKill",
+      "machineUnlocks"
+    ],
+    "display": {
+      "groupLabel": "Stage",
+      "sectionOrder": [
+        "Earlygame",
+        "Midgame",
+        "Lategame",
+        "Endgame"
+      ],
+      "badgeField": "cost",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "zoneName",
+        "zoneNumber",
+        "stage",
+        "cost",
+        "totalZoneLuck",
+        "enemyHealth"
+      ],
+      "tableFields": [
+        "zoneName",
+        "zoneNumber",
+        "stage",
+        "cost",
+        "totalZoneLuck",
+        "enemyHealth",
+        "goopPerKill",
+        "machineUnlocks"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Zone 1: Grasslands",
+        "zoneName": "Grasslands",
+        "zoneNumber": 1,
+        "stage": "Earlygame",
+        "cost": "Free",
+        "totalZoneLuck": "+1",
+        "enemyHealth": "20",
+        "goopPerKill": "1"
+      },
+      "system": {
+        "slug": "zone-1-grasslands",
+        "section": "Earlygame",
+        "sortOrder": 1,
+        "image": "/Slime%20RNG/Zones/grasslands.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 2: Desert",
+        "zoneName": "Desert",
+        "zoneNumber": 2,
+        "stage": "Earlygame",
+        "cost": "400 Coins",
+        "totalZoneLuck": "+2",
+        "enemyHealth": "100",
+        "goopPerKill": "1"
+      },
+      "system": {
+        "slug": "zone-2-desert",
+        "section": "Earlygame",
+        "sortOrder": 2,
+        "image": "/Slime%20RNG/Zones/desert.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 3: Polar",
+        "zoneName": "Polar",
+        "zoneNumber": 3,
+        "stage": "Earlygame",
+        "cost": "5k Coins",
+        "totalZoneLuck": "+3",
+        "enemyHealth": "200",
+        "goopPerKill": "1"
+      },
+      "system": {
+        "slug": "zone-3-polar",
+        "section": "Earlygame",
+        "sortOrder": 3,
+        "image": "/Slime%20RNG/Zones/polar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 4: Volcano",
+        "zoneName": "Volcano",
+        "zoneNumber": 4,
+        "stage": "Earlygame",
+        "cost": "50k Coins",
+        "totalZoneLuck": "+4",
+        "enemyHealth": "350",
+        "goopPerKill": "2"
+      },
+      "system": {
+        "slug": "zone-4-volcano",
+        "section": "Earlygame",
+        "sortOrder": 4,
+        "image": "/Slime%20RNG/Zones/volcano.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 5: Islands",
+        "zoneName": "Islands",
+        "zoneNumber": 5,
+        "stage": "Earlygame",
+        "cost": "400k Coins",
+        "totalZoneLuck": "+5",
+        "enemyHealth": "500",
+        "goopPerKill": "3"
+      },
+      "system": {
+        "slug": "zone-5-islands",
+        "section": "Earlygame",
+        "sortOrder": 5,
+        "image": "/Slime%20RNG/Zones/islands.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 6: Cave",
+        "zoneName": "Cave",
+        "zoneNumber": 6,
+        "stage": "Earlygame",
+        "cost": "2m Coins",
+        "totalZoneLuck": "+6",
+        "enemyHealth": "750",
+        "goopPerKill": "4"
+      },
+      "system": {
+        "slug": "zone-6-cave",
+        "section": "Earlygame",
+        "sortOrder": 6,
+        "image": "/Slime%20RNG/Zones/cave.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 7: Heaven",
+        "zoneName": "Heaven",
+        "zoneNumber": 7,
+        "stage": "Earlygame",
+        "cost": "12m Coins",
+        "totalZoneLuck": "+7",
+        "enemyHealth": "1.2k",
+        "goopPerKill": "7",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-7-heaven",
+        "section": "Earlygame",
+        "sortOrder": 7,
+        "image": "/Slime%20RNG/Zones/heaven.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 8: Jungle",
+        "zoneName": "Jungle",
+        "zoneNumber": 8,
+        "stage": "Earlygame",
+        "cost": "54m Coins",
+        "totalZoneLuck": "+8",
+        "enemyHealth": "1.8k",
+        "goopPerKill": "9"
+      },
+      "system": {
+        "slug": "zone-8-jungle",
+        "section": "Earlygame",
+        "sortOrder": 8,
+        "image": "/Slime%20RNG/Zones/jungle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 9: Canyon",
+        "zoneName": "Canyon",
+        "zoneNumber": 9,
+        "stage": "Midgame",
+        "cost": "216m Coins",
+        "totalZoneLuck": "+9",
+        "enemyHealth": "2.9k",
+        "goopPerKill": "11",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-9-canyon",
+        "section": "Midgame",
+        "sortOrder": 9,
+        "image": "/Slime%20RNG/Zones/canyon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 10: Mushroom Forest",
+        "zoneName": "Mushroom Forest",
+        "zoneNumber": 10,
+        "stage": "Midgame",
+        "cost": "936m Coins",
+        "totalZoneLuck": "+10",
+        "enemyHealth": "4.6k",
+        "goopPerKill": "13"
+      },
+      "system": {
+        "slug": "zone-10-mushroom-forest",
+        "section": "Midgame",
+        "sortOrder": 10,
+        "image": "/Slime%20RNG/Zones/mushroom-forest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 11: Moon",
+        "zoneName": "Moon",
+        "zoneNumber": 11,
+        "stage": "Midgame",
+        "cost": "3.8b Coins",
+        "totalZoneLuck": "+11",
+        "enemyHealth": "7.4k",
+        "goopPerKill": "16",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-11-moon",
+        "section": "Midgame",
+        "sortOrder": 11,
+        "image": "/Slime%20RNG/Zones/moon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 12: Redwood Forest",
+        "zoneName": "Redwood Forest",
+        "zoneNumber": 12,
+        "stage": "Midgame",
+        "cost": "15.6b Coins",
+        "totalZoneLuck": "+12",
+        "enemyHealth": "11.8k",
+        "goopPerKill": "20"
+      },
+      "system": {
+        "slug": "zone-12-redwood-forest",
+        "section": "Midgame",
+        "sortOrder": 12,
+        "image": "/Slime%20RNG/Zones/redwood-forest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 13: Meteor",
+        "zoneName": "Meteor",
+        "zoneNumber": 13,
+        "stage": "Midgame",
+        "cost": "75b Coins",
+        "totalZoneLuck": "+13",
+        "enemyHealth": "18.9k",
+        "goopPerKill": "27",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-13-meteor",
+        "section": "Midgame",
+        "sortOrder": 13,
+        "image": "/Slime%20RNG/Zones/meteor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 14: Candyland",
+        "zoneName": "Candyland",
+        "zoneNumber": 14,
+        "stage": "Midgame",
+        "cost": "250b Coins",
+        "totalZoneLuck": "+14",
+        "enemyHealth": "28.3k",
+        "goopPerKill": "38",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-14-candyland",
+        "section": "Midgame",
+        "sortOrder": 14,
+        "image": "/Slime%20RNG/Zones/candyland.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 15: Cherry Grove",
+        "zoneName": "Cherry Grove",
+        "zoneNumber": 15,
+        "stage": "Midgame",
+        "cost": "1t Coins",
+        "totalZoneLuck": "+15",
+        "enemyHealth": "42.5k",
+        "goopPerKill": "53",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-15-cherry-grove",
+        "section": "Midgame",
+        "sortOrder": 15,
+        "image": "/Slime%20RNG/Zones/cherry-grove.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 16: Crystal Cavern",
+        "zoneName": "Crystal Cavern",
+        "zoneNumber": 16,
+        "stage": "Lategame",
+        "cost": "3.5t Coins",
+        "totalZoneLuck": "+16",
+        "enemyHealth": "64k",
+        "goopPerKill": "74"
+      },
+      "system": {
+        "slug": "zone-16-crystal-cavern",
+        "section": "Lategame",
+        "sortOrder": 16,
+        "image": "/Slime%20RNG/Zones/crystal-cavern.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 17: Pumpkin Patch",
+        "zoneName": "Pumpkin Patch",
+        "zoneNumber": 17,
+        "stage": "Lategame",
+        "cost": "11t Coins",
+        "totalZoneLuck": "+17",
+        "enemyHealth": "96k",
+        "goopPerKill": "104",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-17-pumpkin-patch",
+        "section": "Lategame",
+        "sortOrder": 17,
+        "image": "/Slime%20RNG/Zones/pumpkin-patch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 18: Atlantis",
+        "zoneName": "Atlantis",
+        "zoneNumber": 18,
+        "stage": "Lategame",
+        "cost": "31t Coins",
+        "totalZoneLuck": "+18",
+        "enemyHealth": "144k",
+        "goopPerKill": "145",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-18-atlantis",
+        "section": "Lategame",
+        "sortOrder": 18,
+        "image": "/Slime%20RNG/Zones/atlantis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 19: River",
+        "zoneName": "River",
+        "zoneNumber": 19,
+        "stage": "Lategame",
+        "cost": "94t Coins",
+        "totalZoneLuck": "+19",
+        "enemyHealth": "216k",
+        "goopPerKill": "203"
+      },
+      "system": {
+        "slug": "zone-19-river",
+        "section": "Lategame",
+        "sortOrder": 19,
+        "image": "/Slime%20RNG/Zones/river.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 20: Pyramid",
+        "zoneName": "Pyramid",
+        "zoneNumber": 20,
+        "stage": "Lategame",
+        "cost": "282t Coins",
+        "totalZoneLuck": "+20",
+        "enemyHealth": "324k",
+        "goopPerKill": "285",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-20-pyramid",
+        "section": "Lategame",
+        "sortOrder": 20,
+        "image": "/Slime%20RNG/Zones/pyramid.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 21: Graveyard",
+        "zoneName": "Graveyard",
+        "zoneNumber": 21,
+        "stage": "Endgame",
+        "cost": "846t Coins",
+        "totalZoneLuck": "+21",
+        "enemyHealth": "486k",
+        "goopPerKill": "398",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-21-graveyard",
+        "section": "Endgame",
+        "sortOrder": 21,
+        "image": "/Slime%20RNG/Zones/graveyard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 22: Hot Springs",
+        "zoneName": "Hot Springs",
+        "zoneNumber": 22,
+        "stage": "Endgame",
+        "cost": "2.5Qd Coins",
+        "totalZoneLuck": "+22",
+        "enemyHealth": "729k",
+        "goopPerKill": "558",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-22-hot-springs",
+        "section": "Endgame",
+        "sortOrder": 22,
+        "image": "/Slime%20RNG/Zones/hot-springs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 23: Tribe",
+        "zoneName": "Tribe",
+        "zoneNumber": 23,
+        "stage": "Endgame",
+        "cost": "8Qd Coins",
+        "totalZoneLuck": "+23",
+        "enemyHealth": "1.09M",
+        "goopPerKill": "781"
+      },
+      "system": {
+        "slug": "zone-23-tribe",
+        "section": "Endgame",
+        "sortOrder": 23,
+        "image": "/Slime%20RNG/Zones/tribe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 24: Toxic Wasteland",
+        "zoneName": "Toxic Wasteland",
+        "zoneNumber": 24,
+        "stage": "Endgame",
+        "cost": "26Qd Coins",
+        "totalZoneLuck": "+24",
+        "enemyHealth": "1.63M",
+        "goopPerKill": "1,093",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-24-toxic-wasteland",
+        "section": "Endgame",
+        "sortOrder": 24,
+        "image": "/Slime%20RNG/Zones/toxic-wasteland.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 25: Steampunk",
+        "zoneName": "Steampunk",
+        "zoneNumber": 25,
+        "stage": "Endgame",
+        "cost": "80Qd Coins",
+        "totalZoneLuck": "+25",
+        "enemyHealth": "2.44M",
+        "goopPerKill": "1,531",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-25-steampunk",
+        "section": "Endgame",
+        "sortOrder": 25,
+        "image": "/Slime%20RNG/Zones/steampunk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 26: Winter Wonderland",
+        "zoneName": "Winter Wonderland",
+        "zoneNumber": 26,
+        "stage": "Endgame",
+        "cost": "300Qd Coins",
+        "totalZoneLuck": "+26",
+        "enemyHealth": "3.66M",
+        "goopPerKill": "2,143",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-26-winter-wonderland",
+        "section": "Endgame",
+        "sortOrder": 26,
+        "image": "/Slime%20RNG/Zones/winter-wonderland.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 27: Farm",
+        "zoneName": "Farm",
+        "zoneNumber": 27,
+        "stage": "Endgame",
+        "cost": "1Qn Coins",
+        "totalZoneLuck": "+27",
+        "enemyHealth": "5.49M",
+        "goopPerKill": "3,000",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-27-farm",
+        "section": "Endgame",
+        "sortOrder": 27,
+        "image": "/Slime%20RNG/Zones/farm.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 28: Jungle Temple",
+        "zoneName": "Jungle Temple",
+        "zoneNumber": 28,
+        "stage": "Endgame",
+        "cost": "3.5Qn Coins",
+        "totalZoneLuck": "+28",
+        "enemyHealth": "8.23M",
+        "goopPerKill": "4,200"
+      },
+      "system": {
+        "slug": "zone-28-jungle-temple",
+        "section": "Endgame",
+        "sortOrder": 28,
+        "image": "/Slime%20RNG/Zones/jungle-temple.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 29: Underworld",
+        "zoneName": "Underworld",
+        "zoneNumber": 29,
+        "stage": "Endgame",
+        "cost": "10Qn Coins",
+        "totalZoneLuck": "+29",
+        "enemyHealth": "12.4M",
+        "goopPerKill": "5,880"
+      },
+      "system": {
+        "slug": "zone-29-underworld",
+        "section": "Endgame",
+        "sortOrder": 29,
+        "image": "/Slime%20RNG/Zones/underworld.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 30: Swamp",
+        "zoneName": "Swamp",
+        "zoneNumber": 30,
+        "stage": "Endgame",
+        "cost": "60Qn Coins",
+        "totalZoneLuck": "+30",
+        "enemyHealth": "18.6M",
+        "goopPerKill": "8,233"
+      },
+      "system": {
+        "slug": "zone-30-swamp",
+        "section": "Endgame",
+        "sortOrder": 30,
+        "image": "/Slime%20RNG/Zones/swamp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 31: Mushroom Village",
+        "zoneName": "Mushroom Village",
+        "zoneNumber": 31,
+        "stage": "Endgame",
+        "cost": "250Qn Coins",
+        "totalZoneLuck": "+31",
+        "enemyHealth": "27.9M",
+        "goopPerKill": "11,526"
+      },
+      "system": {
+        "slug": "zone-31-mushroom-village",
+        "section": "Endgame",
+        "sortOrder": 31,
+        "image": "/Slime%20RNG/Zones/mushroom-village.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 32: The Void",
+        "zoneName": "The Void",
+        "zoneNumber": 32,
+        "stage": "Endgame",
+        "cost": "1Sx Coins",
+        "totalZoneLuck": "+32",
+        "enemyHealth": "41.8M",
+        "goopPerKill": "16,136",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-32-the-void",
+        "section": "Endgame",
+        "sortOrder": 32,
+        "image": "/Slime%20RNG/Zones/the-void.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zone 33: Honeycomb",
+        "zoneName": "Honeycomb",
+        "zoneNumber": 33,
+        "stage": "Endgame",
+        "cost": "4Sx Coins",
+        "totalZoneLuck": "+33",
+        "enemyHealth": "62.7M",
+        "goopPerKill": "22,590",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-33-honeycomb",
+        "section": "Endgame",
+        "sortOrder": 33,
+        "image": "/Slime%20RNG/Zones/honeycomb.webp"
+      }
+    }
+  ]
+}

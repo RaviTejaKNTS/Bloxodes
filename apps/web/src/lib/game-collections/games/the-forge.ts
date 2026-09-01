@@ -259,7 +259,6 @@ export const THE_FORGE_COLLECTIONS: GameCollectionViewConfig[] = [
 export const theForgeCollectionGroup = {
   gameSlug: "the-forge",
   gameName: "The Forge",
-  universeId: 7671049560,
   dataDir: "The Forge",
   universeNames: ["The Forge"],
   collections: THE_FORGE_COLLECTIONS.map(({ slug }) => slug)

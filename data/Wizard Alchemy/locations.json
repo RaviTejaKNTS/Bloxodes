@@ -1,0 +1,421 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Wizard Alchemy",
+    "gameSlug": "wizard-alchemy",
+    "collection": "locations",
+    "route": "/wiki/wizard-alchemy/locations",
+    "catalogCode": "wizard-alchemy-locations",
+    "itemFields": [
+      "area",
+      "locationType",
+      "landmark",
+      "keyNpcs",
+      "keyContent",
+      "relatedFarms",
+      "travelTip"
+    ],
+    "columns": [
+      "area",
+      "locationType",
+      "landmark",
+      "keyNpcs",
+      "keyContent",
+      "relatedFarms",
+      "travelTip"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Departure Isle spawn and services",
+        "Forest, river, and mine routes",
+        "Beach, boss, and high routes",
+        "Sea of Oblivion routes"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "area",
+        "locationType",
+        "landmark",
+        "keyNpcs",
+        "keyContent",
+        "relatedFarms"
+      ],
+      "tableFields": [
+        "area",
+        "locationType",
+        "landmark",
+        "keyNpcs",
+        "keyContent",
+        "relatedFarms",
+        "travelTip"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Spawn Village and Leaderboard Shoreline",
+        "area": "Departure Isle",
+        "locationType": "Spawn hub",
+        "landmark": "Spawn point, Top Potions List, three leaderboards, Lombart, and Lemin",
+        "keyNpcs": "Lombart, Lemin",
+        "keyContent": "Starting village services, material selling, leaderboards, and a nearby shoreline chest",
+        "relatedFarms": "Starter chest route, inventory cleanup, early upgrade planning",
+        "travelTip": "Use the leaderboard platform as the anchor before leaving spawn for the river, bridge, or shop routes."
+      },
+      "system": {
+        "slug": "spawn-village-leaderboard-shoreline",
+        "section": "Departure Isle spawn and services",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Alchemy Table and Refine Machine",
+        "area": "Departure Isle",
+        "locationType": "Crafting station",
+        "landmark": "Alchemy table behind or near the spawn point",
+        "keyNpcs": "Not listed",
+        "keyContent": "Potion brewing, material selection, spell unlocks, and potion refinement",
+        "relatedFarms": "All material routes feed back into this station",
+        "travelTip": "Return here after a material loop so you can brew before selling rare ingredients by mistake."
+      },
+      "system": {
+        "slug": "alchemy-table-refine-machine",
+        "section": "Departure Isle spawn and services",
+        "sortOrder": 2,
+        "image": "/Wizard%20Alchemy/Locations/alchemy-table-refine-machine.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Roger's Equipment Shop",
+        "area": "Departure Isle",
+        "locationType": "Shop",
+        "landmark": "Roger shop menu with wand, wizard hat, and robe tabs",
+        "keyNpcs": "Roger",
+        "keyContent": "Wands, wizard hats, robes, early Attack upgrades, and HP gear",
+        "relatedFarms": "Gold farming, boss prep, gear upgrades",
+        "travelTip": "Check wand upgrades before forcing harder enemy routes, because better damage often saves more time than a risky farm."
+      },
+      "system": {
+        "slug": "rogers-equipment-shop",
+        "section": "Departure Isle spawn and services",
+        "sortOrder": 3,
+        "image": "/Wizard%20Alchemy/Locations/rogers-equipment-shop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Harryint Wanted Board",
+        "area": "Departure Isle",
+        "locationType": "Quest board",
+        "landmark": "Wanted board on the right side of spawn",
+        "keyNpcs": "Harryint",
+        "keyContent": "Repeatable quests for gold and material rewards",
+        "relatedFarms": "Beginner gold farming, monster quests, material gathering",
+        "travelTip": "Pick a quest before starting a combat route so enemy kills also move your gold and material goals."
+      },
+      "system": {
+        "slug": "harryint-wanted-board",
+        "section": "Departure Isle spawn and services",
+        "sortOrder": 4,
+        "image": "/Wizard%20Alchemy/Locations/harryint-wanted-board.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "First River Farming Path",
+        "area": "Departure Isle forest",
+        "locationType": "Starter farm route",
+        "landmark": "River, big rock, tree, and first farming stretch",
+        "keyNpcs": "Not listed",
+        "keyContent": "Pickaxe Dwarfs, early gathering route, and river rocks chest",
+        "relatedFarms": "Dwarf Emblem, Golden Tooth, early Gold, chest materials",
+        "travelTip": "Run straight from spawn and avoid nearby Pickaxe Dwarfs if you only want the chest or gathering nodes."
+      },
+      "system": {
+        "slug": "first-river-farming-path",
+        "section": "Forest, river, and mine routes",
+        "sortOrder": 5,
+        "image": "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Traveler Camp and Cauldron",
+        "area": "Bridge and forest camp",
+        "locationType": "Route landmark",
+        "landmark": "Traveler NPC, Cauldron, tent, bridge, and nearby enemies",
+        "keyNpcs": "Traveler",
+        "keyContent": "Bridge route, tent chest, route split toward beach and mine-side paths",
+        "relatedFarms": "Knife Goblins, Warhammer Dwarfs, chest materials",
+        "travelTip": "Use the Traveler and Cauldron as the reference point before turning toward the lighthouse, treehouse, or mine cluster."
+      },
+      "system": {
+        "slug": "traveler-camp-cauldron",
+        "section": "Forest, river, and mine routes",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mine Entrance and Optimistic Miner",
+        "area": "Mine entrance",
+        "locationType": "Cave route",
+        "landmark": "Optimistic Miner, wooden boards, plants, and mine entrance",
+        "keyNpcs": "Optimistic Miner",
+        "keyContent": "Mine chest, miner hint, cave route, and nearby Pickaxe Dwarfs",
+        "relatedFarms": "Chest materials, early dwarf route, mine cluster sweep",
+        "travelTip": "Enter from the boarded mine entrance after the first Pickaxe Dwarf platform instead of trying to force the thorny upper path."
+      },
+      "system": {
+        "slug": "mine-entrance-optimistic-miner",
+        "section": "Forest, river, and mine routes",
+        "sortOrder": 7,
+        "image": "/Wizard%20Alchemy/Chests/miner-cave.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Secret Mine Cave",
+        "area": "Mine illusion wall",
+        "locationType": "Hidden cave",
+        "landmark": "Right side of the back wall inside the mine",
+        "keyNpcs": "Not listed",
+        "keyContent": "Hidden cave extension and secret chest",
+        "relatedFarms": "Chest materials, hidden-route checking",
+        "travelTip": "Open this immediately after the normal mine chest so you do not backtrack into the mine later."
+      },
+      "system": {
+        "slug": "secret-mine-cave",
+        "section": "Forest, river, and mine routes",
+        "sortOrder": 8,
+        "image": "/Wizard%20Alchemy/Chests/secret-mine-cave.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Mine Mountain Top",
+        "area": "Mine mountain",
+        "locationType": "Climb route",
+        "landmark": "Rocks, thorny vines, and upper mine platform",
+        "keyNpcs": "Not listed",
+        "keyContent": "Top-of-mine chest and high route practice",
+        "relatedFarms": "Chest materials, movement practice",
+        "travelTip": "Use the rocks on the left side of the mine entrance, then follow the thorny vines to the upper platform."
+      },
+      "system": {
+        "slug": "mine-mountain-top",
+        "section": "Forest, river, and mine routes",
+        "sortOrder": 9,
+        "image": "/Wizard%20Alchemy/Chests/mine-mountain-top.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Camp Hidden Platform",
+        "area": "Bridge-side goblin camp",
+        "locationType": "Hidden platform",
+        "landmark": "Bridge rocks, brown pine trees, Knife Goblins, campfire, and rear platform",
+        "keyNpcs": "Not listed",
+        "keyContent": "Hidden platform chest and bridge-side goblin route",
+        "relatedFarms": "Knife Goblins, chest materials, early hidden-route sweep",
+        "travelTip": "Check the rocks on the right side of the bridge before crossing all the way to the Traveler camp."
+      },
+      "system": {
+        "slug": "goblin-camp-hidden-platform",
+        "section": "Forest, river, and mine routes",
+        "sortOrder": 10,
+        "image": "/Wizard%20Alchemy/Chests/goblin-camp-hidden-platform.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Departure Isle Beach and Portal",
+        "area": "Departure Isle beach",
+        "locationType": "Beach route",
+        "landmark": "Beach route, sea edge, portal area, and Apprentice Broom spot",
+        "keyNpcs": "Not listed",
+        "keyContent": "Apprentice Broom purchase spot, Warhammer Dwarf and Archer Goblin routes, path toward lighthouse",
+        "relatedFarms": "Flame Crest, Copper Earring, Goblin Finger, Goblin Bone, Dwarf Emblem",
+        "travelTip": "Treat the beach as a connector between mid enemy farming, the lighthouse route, and later travel upgrades."
+      },
+      "system": {
+        "slug": "departure-isle-beach-portal",
+        "section": "Beach, boss, and high routes",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lighthouse Island",
+        "area": "Lighthouse island",
+        "locationType": "Island landmark",
+        "landmark": "Lighthouse, sea, small island, and mountain behind the island",
+        "keyNpcs": "Not listed",
+        "keyContent": "Lighthouse chest, beach navigation, route anchor for Dwarf King and treehouse checks",
+        "relatedFarms": "Chest materials, Archer Goblins, Warhammer Dwarfs, boss-route travel",
+        "travelTip": "Use the Traveler and Cauldron as a starting reference, then run left past Archer Goblins and Warhammer Dwarfs until the sea opens up."
+      },
+      "system": {
+        "slug": "lighthouse-island",
+        "section": "Beach, boss, and high routes",
+        "sortOrder": 12,
+        "image": "/Wizard%20Alchemy/Chests/lighthouse-island.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Dwarf King Cave and Throne",
+        "area": "Dwarf King Cave",
+        "locationType": "Boss route",
+        "landmark": "Dwarf King spawn, hammer wall, chained stone, and cave area",
+        "keyNpcs": "Dwarf King",
+        "keyContent": "Boss farming, throne-area chest, Furnace Core route, Flame Crest and Copper Earring drops",
+        "relatedFarms": "Gold, Flame Crest, Copper Earring, Furnace Core",
+        "travelTip": "Farm Dwarf King only after your wand, HP gear, potions, and movement are steady enough for repeat clears."
+      },
+      "system": {
+        "slug": "dwarf-king-cave-throne",
+        "section": "Beach, boss, and high routes",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Treehouse Branch and Platform",
+        "area": "Treehouse route",
+        "locationType": "High path",
+        "landmark": "Huge tree, rope climb, treehouse door, railing, and charred branch",
+        "keyNpcs": "Not listed",
+        "keyContent": "Treehouse chest and Ember Staff Wand purchase route",
+        "relatedFarms": "Chest materials, late Departure Isle wand upgrade",
+        "travelTip": "Tilt the camera upward near the lighthouse route to spot the huge tree before climbing."
+      },
+      "system": {
+        "slug": "treehouse-branch-platform",
+        "section": "Beach, boss, and high routes",
+        "sortOrder": 14,
+        "image": "/Wizard%20Alchemy/Chests/treehouse-platform.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Starting Village Waterfall Cave",
+        "area": "Waterfall near starting village",
+        "locationType": "Hidden shop route",
+        "landmark": "Waterfall cave near the starting village",
+        "keyNpcs": "Hidden wand seller",
+        "keyContent": "Ice Star Wand purchase spot",
+        "relatedFarms": "Gold saving, cooldown-focused wand upgrade",
+        "travelTip": "Save the waterfall route for when 20,000 Gold is realistic, because the Ice Star Wand is a late Departure Isle purchase."
+      },
+      "system": {
+        "slug": "starting-village-waterfall-cave",
+        "section": "Beach, boss, and high routes",
+        "sortOrder": 15,
+        "image": "/Wizard%20Alchemy/Locations/starting-village-waterfall-cave.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Main Sea of Oblivion Base",
+        "area": "Sea of Oblivion",
+        "locationType": "New Mainland hub",
+        "landmark": "Main Sea of Oblivion area, Alchemy station, and Lava Broom spot",
+        "keyNpcs": "Not listed",
+        "keyContent": "New Mainland hub, Lava Broom purchase spot, Sea of Oblivion material route start",
+        "relatedFarms": "Fern, Sulphur Lumps, Volcanic Rock, orc materials, New Mainland potion targets",
+        "travelTip": "Use the Sea of Oblivion base as the reset point before branching to the enchanting table, lava island, volcano, or lava waterfall."
+      },
+      "system": {
+        "slug": "main-sea-of-oblivion-base",
+        "section": "Sea of Oblivion routes",
+        "sortOrder": 16,
+        "image": "/Wizard%20Alchemy/Locations/main-sea-of-oblivion-base.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Enchanting Table Island",
+        "area": "Sea of Oblivion island",
+        "locationType": "Enchanting station",
+        "landmark": "Small island near the main Sea of Oblivion",
+        "keyNpcs": "Not listed",
+        "keyContent": "Wand enchantment table and Enchanted Stone spending",
+        "relatedFarms": "Enchanted Stones, wand enchantment rolls, Sea of Oblivion power upgrades",
+        "travelTip": "Farm a stack of Enchanted Stones before interacting, because each enchantment roll consumes one stone and the result is random."
+      },
+      "system": {
+        "slug": "enchanting-table-island",
+        "section": "Sea of Oblivion routes",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Island and Enchanted Sword Ferns",
+        "area": "Sea of Oblivion lava island",
+        "locationType": "Material and enchantment farm",
+        "landmark": "Lava island with Enchanted Sword Ferns",
+        "keyNpcs": "Not listed",
+        "keyContent": "Enchanted Stone farming and lava-island material route",
+        "relatedFarms": "Enchanted Stones, Fern, Volcanic Rock, Sulphur Lumps",
+        "travelTip": "Check whether your build can handle the tougher fern enemies before turning this into a long loop."
+      },
+      "system": {
+        "slug": "lava-island-enchanted-sword-ferns",
+        "section": "Sea of Oblivion routes",
+        "sortOrder": 18,
+        "image": "/Wizard%20Alchemy/Locations/lava-island-enchanted-sword-ferns.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Volcano Summit",
+        "area": "Sea of Oblivion volcano",
+        "locationType": "Late shop route",
+        "landmark": "Top of the Volcano",
+        "keyNpcs": "Not listed",
+        "keyContent": "Ember Wand purchase spot",
+        "relatedFarms": "50,000 Gold saving, Sea of Oblivion wand progression",
+        "travelTip": "Treat the volcano route as a late upgrade stop, not an early detour, because Ember Wand costs far more than Departure Isle shop wands."
+      },
+      "system": {
+        "slug": "volcano-summit",
+        "section": "Sea of Oblivion routes",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Waterfall Base",
+        "area": "Sea of Oblivion lava waterfall",
+        "locationType": "Gear pickup route",
+        "landmark": "Fiery lava waterfall next to the Sea of Oblivion base",
+        "keyNpcs": "Not listed",
+        "keyContent": "Lava Wizard Hat purchase or pickup route",
+        "relatedFarms": "10,000 Gold saving, lava resistance, New Mainland survival",
+        "travelTip": "Check this route when lava resistance matters, because the Lava Wizard Hat is the only currently tracked hat with that utility."
+      },
+      "system": {
+        "slug": "lava-waterfall-base",
+        "section": "Sea of Oblivion routes",
+        "sortOrder": 20,
+        "image": "/Wizard%20Alchemy/Locations/lava-waterfall-base.jpg"
+      }
+    }
+  ]
+}

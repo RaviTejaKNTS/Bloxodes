@@ -16,7 +16,7 @@ import {
   readArticleImageManifest,
   type ArticleImageManifest,
 } from "./article-image-readiness";
-import { verifyArticleImageUrls } from "./verify-article-image-urls";
+import { classifyArticleImageSrc } from "@/lib/article-media";
 
 type ArticleFinal = {
   title: string;
@@ -78,8 +78,7 @@ function printUsage() {
       "  - import into managed Supabase development",
       "  - read back saved article rows",
       "  - request every /articles/<slug> route",
-      "  - confirm YouTube embeds and images appear in HTML when present",
-      "  - download every unique body image and require a non-empty image response",
+      "  - confirm YouTube embeds and local images appear in HTML when present",
     ].join("\n")
   );
 }
@@ -302,6 +301,8 @@ async function syncImageProvenance(
         continue;
       }
       const publicUrl = entry.public_url.trim();
+      const isCanonicalLocalAsset = publicUrl.startsWith("/") && classifyArticleImageSrc(publicUrl, loaded.manifest.article_slug).ok;
+      if (isCanonicalLocalAsset) continue;
       if (!entry.uploaded_path) continue;
       const payload = {
         article_id: article.id,
@@ -419,16 +420,6 @@ async function verifyRoute(url: string, title: string, finalJson: ArticleFinal) 
         }
       }
 
-      const verifiedImageUrls = await verifyArticleImageUrls({
-        articleUrl: url,
-        imageSources: images.map((image) => image.src),
-      });
-      if (verifiedImageUrls.length) {
-        console.log(
-          `Rendered image responses passed for ${verifiedImageUrls.length} unique image URL${verifiedImageUrls.length === 1 ? "" : "s"}.`,
-        );
-      }
-
       const contentBlocks = parseArticleContentBlocks(finalJson.content_md);
       if (contentBlocks.some((block) => block.kind === "tier-list") && !body.includes('data-article-block="tier-list"')) {
         throw new Error(`${url} is missing the rendered tier-list component`);
@@ -470,7 +461,6 @@ async function verifyArticleMedia(finals: Array<ArticleFinal & { label?: string 
   for (let i = 0; i < finals.length; i += 1) {
     const finalJson = finals[i]!;
     const findings = await checkArticleMedia({
-      title: finalJson.title,
       slug: finalJson.slug,
       content_md: finalJson.content_md,
       cover_image: finalJson.cover_image,

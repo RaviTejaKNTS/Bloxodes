@@ -6,5 +6,5 @@ export const bedwarsCollectionGroup = {
   universeId: 2619619496,
   dataDir: "BedWars",
   universeNames: ["BedWars", "BedWars 🛏️"],
-  collections: ["kits", "items"]
+  collections: ["kits", "items", "enchantments"]
 } satisfies GameCollectionGroup;

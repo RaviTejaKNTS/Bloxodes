@@ -1,23 +1,12 @@
 # Cloudflare
 
 Status: Active
-Last verified: 2026-08-27
-Evidence: public DNS/headers, app health features, deployment workflow, cache code, VPS firewall, shared R2 bucket setup, and the local wiki-media Worker contract/tests
+Last verified: 2026-08-13
+Evidence: public DNS/headers, app health features, deployment workflow, cache code, and VPS firewall
 
 ## Role
 
 Cloudflare proxies public web, database, Studio, and media hostnames. It is the long-lived public HTML cache and supports tag-based invalidation.
-
-The existing `media.bloxodes.com` Supabase media origin remains unchanged outside `/wiki/*`. The exact path-scoped Worker route `media.bloxodes.com/wiki/*` serves the shared `bloxodes-wiki` R2 bucket. Managed development and production store the same canonical wiki media URLs; their separate database publication pointers decide which revisions are visible.
-
-## Wiki R2 Media
-
-- `bloxodes-wiki` is the only wiki collection media bucket. Only the guarded publisher has its bucket-scoped S3 credential. Web and mobile runtimes receive public URLs, never R2 credentials.
-- `workers/wiki-media` exposes GET, HEAD, and OPTIONS only. PUT/DELETE are rejected; uploads happen only through the guarded server-side sync script.
-- R2 keys are immutable and content-addressed. Responses use exact MIME metadata, `nosniff`, CORS, ETag, and one-year immutable caching.
-- The Worker caches successful GET responses and returns uncached 404s. The database page pointer is updated only after the publisher verifies every referenced object.
-- The deployed route is exactly `media.bloxodes.com/wiki/*`; never route the whole production media hostname to this Worker. Existing Supabase Storage paths such as `/storage/*` remain on the original media origin.
-- The 2026-08-27 managed-development migration stored and served 9,225 collection objects across 184 published revisions. Representative canonical objects returned the declared MIME type with immutable caching; missing objects returned 404 and public PUT was rejected.
 
 Verified public home response:
 

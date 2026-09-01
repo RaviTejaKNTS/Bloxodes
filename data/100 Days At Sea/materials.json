@@ -1,0 +1,196 @@
+{
+  "itemCount": 3,
+  "meta": {
+    "schemaVersion": 2,
+    "game": "100 Days At Sea",
+    "gameSlug": "100-days-at-sea",
+    "collection": "materials",
+    "route": "/wiki/100-days-at-sea/materials",
+    "catalogCode": "100-days-at-sea-materials",
+    "sourceItemCount": 3,
+    "itemFields": [
+      "name",
+      "category",
+      "aliases",
+      "sourceType",
+      "howToGet",
+      "farmingMethod",
+      "primaryUses",
+      "productionMethod",
+      "availability",
+      "notes",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "category",
+      "aliases",
+      "sourceType",
+      "howToGet",
+      "farmingMethod",
+      "primaryUses",
+      "productionMethod",
+      "availability",
+      "notes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Category",
+      "sectionOrder": [
+        "Core crafting materials"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "sourceType"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "category",
+        "aliases",
+        "sourceType",
+        "howToGet",
+        "farmingMethod",
+        "productionMethod",
+        "primaryUses",
+        "availability"
+      ],
+      "tableFields": [
+        "category",
+        "aliases",
+        "sourceType",
+        "howToGet",
+        "farmingMethod",
+        "productionMethod",
+        "primaryUses",
+        "availability",
+        "notes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "category": {
+          "kind": "plain",
+          "label": "Category"
+        },
+        "aliases": {
+          "kind": "plain",
+          "label": "Also known as"
+        },
+        "sourceType": {
+          "kind": "plain",
+          "label": "Source type"
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "farmingMethod": {
+          "kind": "detail",
+          "label": "Farming method"
+        },
+        "primaryUses": {
+          "kind": "detail",
+          "label": "Main uses"
+        },
+        "productionMethod": {
+          "kind": "plain",
+          "label": "Production method"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "Confirmed craft-table resources only. Glue aliases Goo, Goop, and Green Gum. Excludes debris names and unverified broader community material claims.",
+      "sources": [
+        "https://games.roblox.com/v1/games?universeIds=9167377564",
+        "https://techwiser.com/100-days-at-sea-crafting-items/",
+        "https://progameguides.com/roblox/complete-100-days-at-sea-beginners-guide/",
+        "https://allthings.how/100-days-at-sea-beginner-guide-early-build-order-food-and-survival/",
+        "https://bloxodes.com/articles/100-days-at-sea-crafting-guide",
+        "https://techwiser.com/100-days-at-sea-farming-guide/"
+      ],
+      "sourceChecked": "2026-08-31",
+      "normalization": "Wood, Metal, and Glue are the canonical rows. Green Gum, Goo, and Goop are aliases of Glue and must not become separate rows. Plastic, Rope, Gunpowder, Obsidian, Ice Crystals, Thatch, Complex Scrap, Titanium, Advanced Fuel, and other unverified names are held out.",
+      "imagePolicy": "Image pass completed. No compliant stable row-level art was found for Wood, Metal, or Glue. Text-only rows are accepted; leave all system.image values null.",
+      "imageAcceptedMissing": true,
+      "imageAcceptedMissingReason": "Checked sources exposed screenshots, generic or unrelated art, or unavailable item pages rather than stable exact-game material icons. The compact three-row materials page remains readable without icons.",
+      "knownGap": "Exact drop rates, yield rates, respawn timers, and a complete biome-specific roster are not source-backed. Wider community material names require later reconciliation."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Wood",
+        "category": "Core crafting material",
+        "aliases": null,
+        "sourceType": "Ocean debris and raft production",
+        "howToGet": "Harpoon wooden debris or furniture from the sea; later use Sawmills on the raft.",
+        "farmingMethod": "Keep the harpoon loop running during travel, then use Sawmills after Bonfire Level 3.",
+        "primaryUses": "Shared craft-table input for raft, structure, and equipment recipes.",
+        "productionMethod": "Sawmill (Bonfire Level 3)",
+        "availability": "Core resource",
+        "notes": "The craft-table resource is called Wood; do not create separate rows for named debris objects.",
+        "cardSummary": "Wood is an early raft-building resource gathered from floating debris and later produced by Sawmills."
+      },
+      "system": {
+        "slug": "wood",
+        "section": "Core crafting materials",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Metal",
+        "category": "Core crafting material",
+        "aliases": null,
+        "sourceType": "Ocean debris and island loot",
+        "howToGet": "Harpoon metal debris or collect metal from islands; later use Magnets on the raft.",
+        "farmingMethod": "Collect floating metal and island loot, then use Magnets after Bonfire Level 4.",
+        "primaryUses": "Shared craft-table input for raft, structure, and equipment recipes.",
+        "productionMethod": "Magnet (Bonfire Level 4)",
+        "availability": "Core resource",
+        "notes": "Guides may describe the pickup as metal scrap or metal debris; keep the canonical resource label as Metal until the live UI proves a separate item.",
+        "cardSummary": "Metal is a core crafting resource gathered from debris and islands before Magnets provide a passive supply."
+      },
+      "system": {
+        "slug": "metal",
+        "section": "Core crafting materials",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glue",
+        "category": "Core crafting material",
+        "aliases": "Goo, Goop, Green Gum",
+        "sourceType": "Combat-sourced material",
+        "howToGet": "Put Pirate or Ghost Pirate corpses into the crafting machine.",
+        "farmingMethod": "Collect Pirate or Ghost Pirate corpses after fights and process them in the crafting machine.",
+        "primaryUses": "Craft-table input for recipes that require Glue, including higher-tier structures and equipment.",
+        "productionMethod": "Crafting machine corpse processing",
+        "availability": "Core resource",
+        "notes": "Some guides and menus call this resource Goo, Goop, or Green Gum. Keep one Glue row and expose those terms as aliases.",
+        "cardSummary": "Glue is the combat-sourced craft material made by processing Pirate or Ghost Pirate corpses; it may also appear as Goo, Goop, or Green Gum."
+      },
+      "system": {
+        "slug": "glue",
+        "section": "Core crafting materials",
+        "sortOrder": 3,
+        "image": null
+      }
+    }
+  ]
+}

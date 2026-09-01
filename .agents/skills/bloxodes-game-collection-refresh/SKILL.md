@@ -1,134 +1,102 @@
 ---
 name: bloxodes-game-collection-refresh
-description: Refresh Bloxodes local Roblox game collection datasets and their related game wiki collection pages. Use when the user names one collection dataset, names one game and wants all of its collection data checked, or invokes the skill without a selector to refresh every registered game collection. Research source-backed changes, update affected data, images, renderer configuration, and page copy, validate locally, and run collection suggestions only for game-wide or all-games scopes. Do not publish production changes.
+description: Quickly maintain existing Bloxodes Roblox game collection datasets and their existing wiki collection pages. Use when checking for verified new or changed collection data or filling missing item images. Supports one collection, one game, or all registered collections. Stop without editing when no factual or image delta exists. Never discover, suggest, create, or publish new collections.
 ---
 
 # Bloxodes Game Collection Refresh
 
-Act as the parent reviewer for collection maintenance. Reuse the focused collection skills instead of restating or weakening their contracts.
+Run a bounded maintenance pass on collections that already exist. The normal successful result is `unchanged`: do not manufacture edits just because a source was checked or a refresh was requested.
 
-## Read First
+## Read first
 
-1. Read the repository `AGENTS.md` and the closest path-scoped instructions for every file changed.
-2. Read these skills completely:
-   - `.agents/skills/bloxodes-game-collection-research/SKILL.md`
+1. Read the repository `AGENTS.md` and the closest path-scoped instructions for every file that may change.
+2. Read these skills completely before editing a dataset or image:
    - `.agents/skills/bloxodes-game-collection-data/SKILL.md`
    - `.agents/skills/bloxodes-game-collection-images/SKILL.md`
-   - `.agents/skills/bloxodes-game-collection-writing/SKILL.md`
-   - `.agents/skills/bloxodes-game-collection-workflow-runner/SKILL.md`
-3. For game-wide or all-games scope, also read `.agents/skills/bloxodes-game-collection-suggestions/SKILL.md`.
+3. Read `.agents/skills/bloxodes-game-collection-research/SKILL.md` only when the quick check finds a possible delta that needs deeper source confirmation or the sources disagree. Do not run its broad competitor/discovery work for a routine refresh.
 
 ## Scope
 
-Work only on local v2 game collection datasets and their `/wiki/<game-slug>/<collection-slug>` pages.
+Work only on registered, existing game collections and their existing `/wiki/<game-slug>/<collection-slug>` pages.
 
-- Treat `GAME_COLLECTION_GROUPS` and `GAME_COLLECTIONS` in `apps/web/src/lib/game-collections` as the registered collection inventory.
-- Treat an unregistered local file as a collection candidate only when it uses the v2 `{ meta, items[].item, items[].system }` contract and belongs to a registered game's data directory.
-- Ignore every non-collection file. Do not classify, refresh, report, or hand it to another workflow.
+- Use `GAME_COLLECTIONS` in `apps/web/src/lib/game-collections` as the inventory.
+- A collection is eligible only when its registered dataset already exists. If its page or dataset is missing, report it as blocked; do not create a page or register a new collection.
+- A collection selector resolves one registered collection. A game selector checks that game's registered collections. With no selector, check all registered collections using the same quick gate.
+- Do not scan unregistered files, classify collection candidates, run `bloxodes-game-collection-suggestions`, or return new collection recommendations.
+- If `plan:game-collection-refresh` is used for selector resolution or a resumable run, process only records with `registered: true` and discard candidate records. Do not make a manifest a prerequisite for a small targeted refresh.
 - Keep editorial slugs separate from `roblox_universes.slug`.
-- Never publish, push, seed production, or invoke a release skill. Prepare and verify local work, then report the release scope.
+- Never publish, push, seed production, or invoke a release skill.
 
-## Resolve The Mode
+## Quick-check gate
 
-Run the deterministic planner before research. Give `--output` a run-specific ignored path so the work is resumable.
+For each selected collection, do this before starting any data, image, or writing pass:
 
-```bash
-npm run plan:game-collection-refresh -- --game <game-name-or-slug> --collection <collection-slug-or-file> --output tmp/content-workspace/game-collection-refresh/<run-id>/manifest.json
-npm run plan:game-collection-refresh -- --game <game-name-or-slug> --output tmp/content-workspace/game-collection-refresh/<run-id>/manifest.json
-npm run plan:game-collection-refresh -- --output tmp/content-workspace/game-collection-refresh/<run-id>/manifest.json
-```
+1. Read the local v2 dataset and record a small baseline: dataset path, item count, stable item names/slugs, sections, public fields, image coverage, and the existing page path/row when available.
+2. Check the strongest existing or known source for that exact collection and its recent update signal. Use the existing collection brief or source links first. This is a bounded source check, not broad web research or competitor analysis.
+3. Compare the source roster and player-facing fields with the local dataset by stable slug/name. Treat only source-backed additions, removals, renames, changed values/mechanics, section/order changes, or a newly verified exact item image as a real delta.
+4. Do not treat a changed source timestamp, rewritten source wording, a different URL, or a weak/unconfirmed claim as a delta.
 
-Apply these mode rules:
+Make the decision immediately:
 
-- **One collection:** Refresh exactly one resolved dataset and its related page when needed. Do not inspect sibling datasets. Do not run suggestions.
-- **One game:** Refresh every registered or v2 collection dataset for the resolved game. Run suggestions once after existing collection work is complete.
-- **No selector:** Refresh all registered game groups and all of their registered or v2 collection datasets. Run suggestions once per game. Process a resumable queue and checkpoint after each game.
+- **Unchanged:** no verified data delta and all required/accepted item images are present. Stop. Do not create `brief.md`, `final.json`, replacement copy, or worker tasks.
+- **Data update:** a verified data delta exists. Apply only that delta, then check images for the affected new or changed items.
+- **Image update:** data is unchanged but existing items are missing images or have a clearly better exact item image available. Run only the image pass.
+- **Blocked:** evidence is weak, sources conflict, or the dataset/page is missing. Leave files unchanged and report the exact blocker. Use the focused research skill only if resolving it is necessary and in scope.
 
-If a collection selector is ambiguous, stop and require a game selector. If a registered dataset is missing or not v2, record it as blocked instead of silently skipping it.
+For a game-wide or all-registered run, perform these quick checks in parallel where practical, then spend the detailed passes only on collections with a positive data or image delta.
 
-## Parent Workflow
+## Applying a confirmed data delta
 
-For one-collection mode, process the single manifest entry. For wider scopes, keep at most three collection workers active alongside the parent and give each worker one collection only. Queue the rest.
+When the quick check is positive:
 
-For each collection:
+1. Read and follow `bloxodes-game-collection-data` for the v2 contract. If no approved collection brief exists, create a short maintenance note in the collection workspace containing the sources checked, previous/current counts, exact added/removed/changed rows, image impact, and accepted gaps. Do not redo a full collection-discovery brief.
+2. Update only source-backed rows and fields. Preserve unrelated rows, ordering, sections, descriptions, and metadata unless the evidence requires a change. Do not rewrite the dataset for formatting alone.
+3. Keep the v2 shape `{ meta, items: [{ item, system }] }`: public game fields stay in `items[].item`; `items[].system` contains only `slug`, `section`, `sortOrder`, and `image`.
+4. Update `meta.itemFields`, `meta.columns`, `meta.display`, section order, and sort order only when the confirmed data change requires it. Keep display fields consistent across rows and leave unverified values empty/null rather than guessing.
+5. Run the v2 audit and data checker after the edit. If the check exposes an unrelated pre-existing issue, record it separately instead of broadening the refresh.
 
-1. Record the baseline dataset path, registered state, item count, sections, public fields, image coverage, and current page state.
-2. Run the targeted v2 audit before editing.
-3. Use `bloxodes-game-collection-research` to research current sources. Extend `brief.md` with a maintenance delta:
-   - previous item count and source item count
-   - added, removed, renamed, and changed items
-   - changed player-facing fields or mechanics
-   - section, ordering, and image changes
-   - disputed facts and accepted gaps
-   - whether page copy is affected, with exact fields
-4. Approve, refine, or block the evidence before editing data.
-5. Use `bloxodes-game-collection-data` to apply only source-backed changes and update data-readiness notes.
-6. Review v2 shape, field consistency, sections, ordering, descriptions, presentation kinds, and renderer support.
-7. Use `bloxodes-game-collection-images` only when new, removed, renamed, or better-supported images require an image pass.
-8. Decide whether page copy needs a writing pass using the page-impact rules below.
-9. Run targeted dataset, copy, route, size, pagination, and Browser checks in proportion to the change.
-10. Update the manifest entry with completed gates, changed files, blockers, and page impact before moving on.
+## Adding or replacing images
 
-If subagents are unavailable, run the same gates yourself in order. Keep research, data, images, and writing as separate passes.
+Use `bloxodes-game-collection-images` only for new/changed rows or existing image gaps. Do not recollect a complete image set when current images are already acceptable.
 
-## Page Impact Rules
-
-Export the current page row into the content workspace before editing existing copy when no approved `final.json` is available:
+- Save exact item images under the expected public path and wire them to `items[].system.image`.
+- Do not use logos, page screenshots, edited thumbnails, generic game art, or unrelated substitutes.
+- A missing image is acceptable only when the image pass records the exact item, source attempts, and reason.
+- Run the image-required checker when the collection requires images or image fields changed:
 
 ```bash
-npm run export:game-collection-final -- --game <game-slug> --collection <collection-slug> --output-root tmp/content-workspace/<game-slug>/collections
+npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --require-images
 ```
 
-Pass `--allow-remote-read` only for an intentional read-only snapshot from production or another non-default target. The export helper never writes to the database.
+## Page handling
 
-Use `bloxodes-game-collection-writing` to update `final.json` when any of these are true:
+The local dataset is what the collection route renders. For a data/image-only refresh:
 
-- collection scope, identity, or display name changed
-- a mechanic changed enough to invalidate intro, guide, FAQ, or `wiki_md`
-- rendered section labels changed and `description_json` may be stale
-- item count changed and the page row/title metadata must be synchronized
-- representative thumbnail or other stored page metadata changed
-- an approved unregistered dataset is becoming a new collection page
-
-Preserve the existing page copy, headings, and structure by default. Change only passages made inaccurate or outdated by verified collection changes; do not rewrite unaffected copy merely because a value changed, an image was replaced, fields were completed, or items were reordered. Still record whether the database `item_count` or stored thumbnail needs synchronization.
-
-Send factual/data/image problems back to the collection worker. Send tone, structure, FAQ, or public-copy problems to a separate writing worker as required by the collection workflow runner.
-
-## Suggestions
-
-After all existing collection work for a game passes:
-
-1. Run `bloxodes-game-collection-suggestions` once for that game.
-2. Compare recommendations against registered collections and unregistered v2 candidates already found by the planner.
-3. Report `[create]`, `[we already have a page]`, `[skip]`, or `[source discovery incomplete]` with source proof.
-4. Do not create a recommended dataset or page without later user approval.
-
-Do not run suggestions in one-collection mode.
+- Do not rewrite `final.json`, page prose, FAQs, headings, or `description_json` by default.
+- If a verified change makes existing page copy inaccurate, stop and report the exact field or passage for a separate writing pass; do not expand this quick workflow into full page writing.
+- If item count, title/SEO count, stored thumbnail, or another database page field is now stale, report the exact synchronization needed. Do not generate replacement copy just to update a count.
+- Verify the targeted local route after changed files are ready. Run full final-copy, pagination, size, or Browser checks only when page copy, renderer configuration, or route behavior changed, or when the user asks for them.
 
 ## Verification
 
-Run the narrowest applicable checks for every changed collection:
+Run the narrowest applicable checks only for collections that changed:
 
 ```bash
 npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>
 npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug>
 ```
 
-When images are required, add `--require-images`. When `final.json` changed, follow the complete verification and preview sequence in `bloxodes-game-collection-workflow-runner`, including copy checks, managed-development seeding/readback, local route verification, HTML-size audit, pagination checks when applicable, and Browser preview.
-
-For a data-only change with unaffected page copy, verify the targeted local route still renders the updated item count, sections, fields, and images. Do not generate replacement prose just to satisfy a verifier that expects `final.json`.
+Add `--require-images` when the collection requires complete image coverage. For an unchanged collection, record the quick-check evidence and do not run the full write/seed/preview workflow.
 
 ## Finish
 
-Return one consolidated report containing:
+Return one concise report containing:
 
-- requested mode and resolved scope
+- requested and resolved scope
 - checked, changed, unchanged, and blocked collections
-- source-backed item/field/image deltas
-- page-copy and database-row synchronization needs
-- verifier, size, pagination, and preview results
-- changed-file allowlist
-- new collection recommendations for game-wide or all-games scope
-- exact remaining risks and release work
+- verified data deltas and image deltas
+- any page metadata or copy follow-up that was intentionally not performed
+- checks and targeted route results
+- changed-file allowlist and remaining risks
 
-Do not call the refresh complete while a selected collection remains unprocessed. Preserve the manifest so an interrupted game-wide or all-games run can resume.
+State explicitly that no new collection discovery or suggestions were run. Do not call the refresh complete while a selected existing collection is still unprocessed.

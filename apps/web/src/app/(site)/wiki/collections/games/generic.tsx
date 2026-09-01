@@ -14,16 +14,12 @@ import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { toIsoContentDate } from "@/lib/content-dates";
 import {
+  buildGameCollectionPath,
   GAME_COLLECTIONS,
   getFieldLabel,
   getGameCollectionConfigByCode,
-  type GameCollectionConfig,
-  type GameCollectionRenderConfig
+  type GameCollectionConfig
 } from "@/lib/game-collections";
-import {
-  buildWikiCollectionPath,
-  listPublishedWikiCollectionPagesByWikiSlug
-} from "@/lib/wiki-collections";
 
 const FALLBACK_IMAGE = "/Bloxodes.png";
 
@@ -180,30 +176,20 @@ export function getGameCollectionConfig(collectionCode: string): GameCollectionC
 
 async function readDataset(
   config: GameCollectionConfig
-): Promise<
-  | { meta?: GameDatasetMeta | null; items?: Record<string, unknown>[] | null; data?: Record<string, unknown>[] | null }
-  | Record<string, unknown>[]
-> {
+): Promise<{ meta: GameDatasetMeta | null; rows: Record<string, unknown>[] }> {
   const datasetPath = repoPath("data", config.dataDir, config.file);
   const raw = await fs.readFile(datasetPath, "utf8");
-  return JSON.parse(raw) as
+  const parsed = JSON.parse(raw) as
     | { meta?: GameDatasetMeta | null; items?: Record<string, unknown>[] | null; data?: Record<string, unknown>[] | null }
     | Record<string, unknown>[];
-}
 
-export function parseGameCollectionDatasetDocument(
-  parsed:
-    | { meta?: GameDatasetMeta | null; items?: Record<string, unknown>[] | null; data?: Record<string, unknown>[] | null }
-    | Record<string, unknown>[]
-): GameCollectionDataset {
-  const meta = Array.isArray(parsed) ? null : parsed.meta ?? null;
-  const rows = Array.isArray(parsed) ? parsed : parsed.items ?? parsed.data ?? [];
-  const items = uniquifyIds(rows.map(normalizeItem).filter(Boolean) as GameCollectionItem[]);
+  if (Array.isArray(parsed)) {
+    return { meta: null, rows: parsed };
+  }
 
   return {
-    meta,
-    columns: resolveColumns(meta, rows, items),
-    items
+    meta: parsed.meta ?? null,
+    rows: parsed.items ?? parsed.data ?? []
   };
 }
 
@@ -211,7 +197,13 @@ export async function loadGameCollectionDataset(
   config: GameCollectionConfig
 ): Promise<GameCollectionDataset> {
   try {
-    return parseGameCollectionDatasetDocument(await readDataset(config));
+    const { meta, rows } = await readDataset(config);
+    const items = uniquifyIds(rows.map(normalizeItem).filter(Boolean) as GameCollectionItem[]);
+    return {
+      meta,
+      columns: resolveColumns(meta, rows, items),
+      items
+    };
   } catch (error) {
     console.error(`Failed to load ${config.code} collection dataset`, error);
     return { meta: null, columns: [], items: [] };
@@ -416,7 +408,7 @@ function resolveColumns(
 }
 
 function buildViewConfig(
-  config: GameCollectionRenderConfig,
+  config: GameCollectionConfig,
   dataset: GameCollectionDataset
 ): GenericViewConfig {
   if (dataset.meta?.schemaVersion === 2 && dataset.meta.display) {
@@ -508,7 +500,7 @@ function sanitizeDisplayField(value: string | null | undefined, dataset: GameCol
   return value;
 }
 
-function buildExplicitViewConfig(config: GameCollectionRenderConfig, dataset: GameCollectionDataset): GenericViewConfig {
+function buildExplicitViewConfig(config: GameCollectionConfig, dataset: GameCollectionDataset): GenericViewConfig {
   const display = dataset.meta?.display;
   const tableFields = sanitizeDisplayFieldList(display?.tableFields, dataset);
   const badgeKey = sanitizeDisplayField(display?.badgeField, dataset);
@@ -625,7 +617,7 @@ function buildGroupedSections(
     }));
 }
 
-export type GameDatasetPreparedCollection = {
+type GameDatasetPreparedCollection = {
   dataset: GameCollectionDataset;
   viewConfig: GenericViewConfig;
   groupedSections: ReturnType<typeof buildGroupedSections>;
@@ -688,19 +680,7 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "evade-emotes": 26_000,
   "evade-cosmetics": 26_000,
   "evade-unusuals": 26_000,
-  "evade-nametags": 30_000,
-  // Volleyball Legends styles combine 43 image cards with stat-heavy metadata;
-  // keep the initial page below the HTML warning threshold and exercise section pagination.
-  "volleyball-legends-styles": 30_000,
-  // Volleyball Legends ball skins combine 176 image cards with route and period fields;
-  // split rarity sections early enough to keep every rendered page below the HTML warning threshold.
-  "volleyball-legends-ball-skins": 30_000,
-  // Build A Boat For Treasure blocks combine 200 item icons with several comparison fields.
-  // Keep the initial and paginated HTML comfortably below the release-size ceiling.
-  "build-a-boat-for-treasure-blocks": 26_000,
-  // Tower cards combine exact artwork with several comparison fields; split the
-  // image-dense roster before the rendered HTML size ceiling is reached.
-  "tower-defense-simulator-towers": 26_000
+  "evade-nametags": 30_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -724,10 +704,7 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "evade-emotes": 26_000,
   "evade-cosmetics": 26_000,
   "evade-unusuals": 26_000,
-  "evade-nametags": 30_000,
-  "volleyball-legends-ball-skins": 30_000,
-  "build-a-boat-for-treasure-blocks": 26_000,
-  "tower-defense-simulator-towers": 26_000
+  "evade-nametags": 30_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {
@@ -739,7 +716,7 @@ function resolvePaginationMaxSectionWeight(code: string): number | undefined {
 }
 
 function buildGameDatasetPreparedCollection(
-  config: GameCollectionRenderConfig,
+  config: GameCollectionConfig,
   dataset: GameCollectionDataset
 ): GameDatasetPreparedCollection {
   const viewConfig = buildViewConfig(config, dataset);
@@ -751,7 +728,7 @@ function buildGameDatasetPreparedCollection(
   const totalPages = buildCollectionPagination({
     sections: groupedSections,
     currentPage: 1,
-    basePath: buildWikiCollectionPath(config.gameSlug, config.slug),
+    basePath: buildGameCollectionPath(config.code),
     targetWeight: resolvePaginationTargetWeight(config.code),
     maxSectionWeight: resolvePaginationMaxSectionWeight(config.code)
   }).info.totalPages;
@@ -776,19 +753,12 @@ export async function loadPreparedGameCollection(
   return next;
 }
 
-export function prepareGameCollectionDocument(
-  config: GameCollectionRenderConfig,
-  document: Parameters<typeof parseGameCollectionDatasetDocument>[0]
-): GameDatasetPreparedCollection {
-  return buildGameDatasetPreparedCollection(config, parseGameCollectionDatasetDocument(document));
-}
-
 export async function getPreparedGameCollectionPageCount(config: GameCollectionConfig) {
   return (await loadPreparedGameCollection(config)).totalPages;
 }
 
 export function buildGameCollectionSidebarSections(
-  config: GameCollectionRenderConfig,
+  config: GameCollectionConfig,
   dataset: GameCollectionDataset
 ): Array<{ id: string; label: string; count: number }> {
   const prepared = buildGameDatasetPreparedCollection(config, dataset);
@@ -799,7 +769,7 @@ export function buildGameCollectionSidebarSections(
   }));
 }
 
-export function getGameCollectionPageCount(config: GameCollectionRenderConfig, dataset: GameCollectionDataset) {
+export function getGameCollectionPageCount(config: GameCollectionConfig, dataset: GameCollectionDataset) {
   return buildGameDatasetPreparedCollection(config, dataset).totalPages;
 }
 
@@ -874,25 +844,18 @@ function buildItemListSchema({
   });
 }
 
-async function DatasetCollectionNav({
+function DatasetCollectionNav({
   config,
   className
 }: {
-  config: GameCollectionRenderConfig;
+  config: GameCollectionConfig;
   className?: string;
 }) {
-  const published = await listPublishedWikiCollectionPagesByWikiSlug(config.gameSlug);
-  const options = published.length
-    ? published.map((entry) => ({
-        value: entry.code,
-        label: entry.display_name?.trim() || entry.title,
-        href: buildWikiCollectionPath(entry.wiki_slug, entry.collection_slug)
-      }))
-    : GAME_COLLECTIONS.filter((entry) => entry.gameSlug === config.gameSlug).map((entry) => ({
-        value: entry.code,
-        label: entry.label,
-        href: buildWikiCollectionPath(entry.gameSlug, entry.slug)
-      }));
+  const options = GAME_COLLECTIONS.filter((entry) => entry.gameSlug === config.gameSlug).map((entry) => ({
+    value: entry.code,
+    label: entry.label,
+    href: buildGameCollectionPath(entry.code)
+  }));
 
   return <CatalogSelectNav label={`${config.gameName} collection`} value={config.code} className={className} options={options} />;
 }
@@ -928,7 +891,7 @@ export function renderGameCollectionPage({
   currentPage = 1,
   prepared
 }: {
-  config: GameCollectionRenderConfig;
+  config: GameCollectionConfig;
   dataset: GameCollectionDataset;
   contentHtml?: GameCollectionContentHtml | null;
   currentPage?: number;
@@ -949,7 +912,7 @@ export function renderGameCollectionPage({
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
   const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
-  const basePath = buildWikiCollectionPath(config.gameSlug, config.slug);
+  const basePath = buildGameCollectionPath(config.code);
   const updatedIso = updatedDate?.toISOString() ?? null;
   const publishedIso = toIsoContentDate(contentHtml?.publishedAt) ?? updatedIso;
   const pagination = buildCollectionPagination({

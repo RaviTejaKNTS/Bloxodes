@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sell Lemons",
+    "gameSlug": "sell-lemons",
+    "collection": "powers",
+    "route": "/wiki/sell-lemons/powers",
+    "catalogCode": "sell-lemons-powers",
+    "itemFields": [
+      "phase",
+      "order",
+      "effect",
+      "unlock",
+      "bestUse",
+      "resetNote",
+      "priority",
+      "cardSummary"
+    ],
+    "columns": [
+      "phase",
+      "order",
+      "effect",
+      "unlock",
+      "bestUse",
+      "resetNote",
+      "priority",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Early and midgame utility",
+        "Scaling and automation",
+        "Deep reset and endgame"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "phase",
+        "order",
+        "effect",
+        "unlock",
+        "bestUse",
+        "resetNote"
+      ],
+      "tableFields": [
+        "phase",
+        "order",
+        "effect",
+        "unlock",
+        "bestUse",
+        "resetNote",
+        "priority",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Manage",
+        "phase": "Early and midgame utility",
+        "order": 1,
+        "effect": "Opens remote management for income sources so you do not have to walk back to every building.",
+        "unlock": "Power menu progression",
+        "bestUse": "Use it when the tycoon spreads across multiple sources and walking between buildings starts slowing upgrades.",
+        "resetNote": "Check power availability after major resets before routing around it.",
+        "priority": "Utility",
+        "cardSummary": "Manage is the remote-control power. It matters once your run has enough active sources that walking back to each one wastes time."
+      },
+      "system": {
+        "slug": "manage",
+        "section": "Early and midgame utility",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Run Faster",
+        "phase": "Early and midgame utility",
+        "order": 2,
+        "effect": "Increases character movement speed across the map.",
+        "unlock": "Power menu progression",
+        "bestUse": "Use it for travel between distant income sources, phone offers, map pickups, and newly unlocked zones.",
+        "resetNote": "Check power availability after major resets before routing around it.",
+        "priority": "Utility",
+        "cardSummary": "Run Faster is a travel power. It does not change income math directly, but it saves time whenever the run asks you to move."
+      },
+      "system": {
+        "slug": "run-faster",
+        "section": "Early and midgame utility",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expert Picker",
+        "phase": "Early and midgame utility",
+        "order": 3,
+        "effect": "Raises the value of fruit and money-bag pickups around the map.",
+        "unlock": "Power menu progression",
+        "bestUse": "Use it when you are already collecting map pickups during travel or waiting for time-based income.",
+        "resetNote": "Check power availability after major resets before routing around it.",
+        "priority": "Utility",
+        "cardSummary": "Expert Picker makes scattered pickups more meaningful. It is best when map movement is already part of your run."
+      },
+      "system": {
+        "slug": "expert-picker",
+        "section": "Early and midgame utility",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stack Upgrades",
+        "phase": "Scaling and automation",
+        "order": 4,
+        "effect": "Lets upgrade effects stack together instead of only replacing the previous effect.",
+        "unlock": "Scaling power progression",
+        "bestUse": "Use it once repeat upgrades and global multipliers are doing more for the run than one-off purchases.",
+        "resetNote": "Use it for upgrade effects during the current rebuild, then recheck after major resets.",
+        "priority": "Scaling",
+        "cardSummary": "Stack Upgrades is the compounding power. It matters when repeated upgrades and multiplier layers are driving the run."
+      },
+      "system": {
+        "slug": "stack-upgrades",
+        "section": "Scaling and automation",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Up Time",
+        "phase": "Scaling and automation",
+        "order": 5,
+        "effect": "Speeds up time-based mechanics.",
+        "unlock": "Scaling power progression",
+        "bestUse": "Use it when timers, managers, or delayed payouts are already producing enough value to be worth accelerating.",
+        "resetNote": "Best checked after timers and managers are already worth accelerating.",
+        "priority": "Scaling",
+        "cardSummary": "Speed Up Time is the timer power. It is strongest when your active systems already have meaningful timed output."
+      },
+      "system": {
+        "slug": "speed-up-time",
+        "section": "Scaling and automation",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Remote Buy",
+        "phase": "Deep reset and endgame",
+        "order": 6,
+        "effect": "Lets you purchase upgrades remotely without visiting each building.",
+        "unlock": "Deep Evolution and investor progress",
+        "bestUse": "Treat it as deep endgame convenience after Evolution and investor scaling make map-wide rebuilding the main chore.",
+        "resetNote": "Built for late rebuilds where walking to every purchase is the bottleneck.",
+        "priority": "Endgame",
+        "cardSummary": "Remote Buy is the endgame buying shortcut. It should not distract early or midgame players because it belongs to very deep progression."
+      },
+      "system": {
+        "slug": "remote-buy",
+        "section": "Deep reset and endgame",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Forever Purchase",
+        "phase": "Deep reset and endgame",
+        "order": 7,
+        "effect": "Makes one selected purchase permanent across major reset loops.",
+        "unlock": "Deep reset progression",
+        "bestUse": "Save it for a purchase that keeps helping every rebuild, such as a strong global multiplier target.",
+        "resetNote": "Preserves one selected item across major reset loops; extra slots are tied to Ascension progress.",
+        "priority": "Reset priority",
+        "cardSummary": "Forever Purchase is the reset-routing power. Its value comes from choosing one purchase that keeps paying off after the run resets."
+      },
+      "system": {
+        "slug": "forever-purchase",
+        "section": "Deep reset and endgame",
+        "sortOrder": 7,
+        "image": null
+      }
+    }
+  ]
+}

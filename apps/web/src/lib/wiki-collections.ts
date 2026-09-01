@@ -30,7 +30,6 @@ export type WikiCollectionPageContent = {
   created_at?: string;
   updated_at?: string;
   content_updated_at?: string | null;
-  published_dataset_id?: string | null;
 };
 
 export type WikiCollectionListEntry = Pick<
@@ -56,8 +55,6 @@ export type WikiCollectionListEntry = Pick<
 
 const WIKI_COLLECTION_REVALIDATE_SECONDS = 86400;
 const WIKI_COLLECTION_SELECT_FIELDS =
-  "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at, published_dataset_id";
-const WIKI_COLLECTION_SELECT_FIELDS_LEGACY =
   "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
 const WIKI_COLLECTION_LIST_FIELDS =
   "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, meta_description, thumb_url, wiki_md, wiki_sort_order, published_at, created_at, updated_at, content_updated_at";
@@ -93,37 +90,25 @@ function isMissingRelationError(error: unknown): boolean {
   return code === "PGRST205" || message?.includes("Could not find the table") === true;
 }
 
-function isMissingPublishedDatasetColumnError(error: unknown): boolean {
-  if (!error || typeof error !== "object") return false;
-  const { code, message } = error as SupabaseErrorLike;
-  return code === "42703" || code === "PGRST204" || message?.includes("published_dataset_id") === true;
-}
-
 async function fetchWikiCollectionPageByPath(
   supabase: SupabaseClient,
   viewName: string,
   wikiSlug: string,
-  collectionSlug: string,
-  fields = WIKI_COLLECTION_SELECT_FIELDS
+  collectionSlug: string
 ) {
   return supabase
     .from(viewName)
-    .select(fields)
+    .select(WIKI_COLLECTION_SELECT_FIELDS)
     .eq("wiki_slug", wikiSlug)
     .eq("collection_slug", collectionSlug)
     .eq("is_published", true)
     .maybeSingle();
 }
 
-async function fetchWikiCollectionPageByCode(
-  supabase: SupabaseClient,
-  viewName: string,
-  code: string,
-  fields = WIKI_COLLECTION_SELECT_FIELDS
-) {
+async function fetchWikiCollectionPageByCode(supabase: SupabaseClient, viewName: string, code: string) {
   return supabase
     .from(viewName)
-    .select(fields)
+    .select(WIKI_COLLECTION_SELECT_FIELDS)
     .eq("code", code)
     .eq("is_published", true)
     .maybeSingle();
@@ -166,25 +151,12 @@ export async function getWikiCollectionPageByPath(
       normalizedCollectionSlug
     );
 
-    if (isMissingPublishedDatasetColumnError(error)) {
-      const compatible = await fetchWikiCollectionPageByPath(
-        supabase,
-        WIKI_COLLECTION_PAGE_VIEW,
-        normalizedWikiSlug,
-        normalizedCollectionSlug,
-        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
-      );
-      data = compatible.data;
-      error = compatible.error;
-    }
-
     if (isMissingRelationError(error)) {
       const fallback = await fetchWikiCollectionPageByPath(
         supabase,
         LEGACY_WIKI_COLLECTION_PAGE_VIEW,
         normalizedWikiSlug,
-        normalizedCollectionSlug,
-        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
+        normalizedCollectionSlug
       );
       data = fallback.data;
       error = fallback.error;
@@ -220,24 +192,8 @@ export async function getWikiCollectionPageByCode(code: string): Promise<WikiCol
     const supabase = supabaseAdmin();
     let { data, error } = await fetchWikiCollectionPageByCode(supabase, WIKI_COLLECTION_PAGE_VIEW, normalizedCode);
 
-    if (isMissingPublishedDatasetColumnError(error)) {
-      const compatible = await fetchWikiCollectionPageByCode(
-        supabase,
-        WIKI_COLLECTION_PAGE_VIEW,
-        normalizedCode,
-        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
-      );
-      data = compatible.data;
-      error = compatible.error;
-    }
-
     if (isMissingRelationError(error)) {
-      const fallback = await fetchWikiCollectionPageByCode(
-        supabase,
-        LEGACY_WIKI_COLLECTION_PAGE_VIEW,
-        normalizedCode,
-        WIKI_COLLECTION_SELECT_FIELDS_LEGACY
-      );
+      const fallback = await fetchWikiCollectionPageByCode(supabase, LEGACY_WIKI_COLLECTION_PAGE_VIEW, normalizedCode);
       data = fallback.data;
       error = fallback.error;
     }

@@ -6,5 +6,5 @@ export const towerOfHellCollectionGroup = {
   universeId: 703124385,
   dataDir: "Tower of Hell",
   universeNames: ["Tower of Hell"],
-  collections: ["sections", "mutators"]
+  collections: ["sections", "mutators", "gears"]
 } satisfies GameCollectionGroup;

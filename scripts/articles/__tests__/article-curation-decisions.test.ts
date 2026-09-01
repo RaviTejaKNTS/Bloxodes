@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { reduceGroqCompletionBudget, validateDecisions } from "../curate-article-topics";
+import { validateDecisions } from "../curate-article-topics";
 
 const candidates = [{
   id: "candidate-1",
@@ -64,19 +64,4 @@ test("rejects a candidate that is both approved and rejected", () => {
       reason_code: "thin_topic" as const, reason: "Not supported.", confidence: 0.7
     }
   ] }, candidates), /both approved and rejected/);
-});
-
-test("reduces Groq completion tokens when the request exceeds the provider token cap", () => {
-  assert.equal(
-    reduceGroqCompletionBudget(
-      2980,
-      "Request too large for model on tokens per minute (TPM): Limit 8000, Requested 8017"
-    ),
-    2707
-  );
-});
-
-test("ignores Groq errors that do not include an exceeded request token cap", () => {
-  assert.equal(reduceGroqCompletionBudget(2980, "temporary upstream failure"), null);
-  assert.equal(reduceGroqCompletionBudget(2980, "Limit 8000, Requested 7999"), null);
 });

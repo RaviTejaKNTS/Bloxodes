@@ -1,0 +1,368 @@
+{
+  "easy": [
+    {
+      "id": "WA-E1",
+      "question": "What are materials mainly used for in Wizard Alchemy?",
+      "options": [
+        { "id": "A", "text": "Decorate a house" },
+        { "id": "B", "text": "Brew potion spells" },
+        { "id": "C", "text": "Trade pets" },
+        { "id": "D", "text": "Build vehicles" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "WA-E2",
+      "question": "Who handles wands, wizard hats, and wizard robes near spawn?",
+      "options": [
+        { "id": "A", "text": "Roger" },
+        { "id": "B", "text": "Traveler" },
+        { "id": "C", "text": "Optimistic Miner" },
+        { "id": "D", "text": "Fugitive Orc" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-E3",
+      "question": "Break a Blueberry Bush during early farming. Name the ingredient that should hit your inventory.",
+      "options": [
+        { "id": "A", "text": "Furnace Core" },
+        { "id": "B", "text": "Scepter Gem" },
+        { "id": "C", "text": "Blueberry" },
+        { "id": "D", "text": "Golem Core" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-E4",
+      "question": "Which potion is first available at 6 Magic?",
+      "options": [
+        { "id": "A", "text": "Solar Flare Potion" },
+        { "id": "B", "text": "Night Wraith Potion" },
+        { "id": "C", "text": "Molten Core Potion" },
+        { "id": "D", "text": "Wind Blade Potion" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "WA-E5",
+      "question": "What race starts with no passive bonuses?",
+      "options": [
+        { "id": "A", "text": "Human" },
+        { "id": "B", "text": "Night Knight" },
+        { "id": "C", "text": "Ice Crystal" },
+        { "id": "D", "text": "Death Eater" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-E6",
+      "question": "Unlocking a broom before deeper routes mainly fixes one practical problem. Pick it.",
+      "options": [
+        { "id": "A", "text": "Potion selling" },
+        { "id": "B", "text": "Changing server size" },
+        { "id": "C", "text": "Map travel" },
+        { "id": "D", "text": "Race rerolls" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-E7",
+      "question": "Which early enemy family drops Dwarf Emblem and Golden Tooth?",
+      "options": [
+        { "id": "A", "text": "Dwarf enemy route" },
+        { "id": "B", "text": "Bird Nest route" },
+        { "id": "C", "text": "Lava Behemoth route" },
+        { "id": "D", "text": "Orc Priest route" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-E8",
+      "question": "Where do you go for the enchanting table and Lava Behemoth route?",
+      "options": [
+        { "id": "A", "text": "Adoption Island" },
+        { "id": "B", "text": "Bounty Bay" },
+        { "id": "C", "text": "Sea of Oblivion" },
+        { "id": "D", "text": "Stonewake's Cross" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-E9",
+      "question": "When you add an elemental shard to a brew, choose the part of the potion you are trying to steer.",
+      "options": [
+        { "id": "A", "text": "Broom color" },
+        { "id": "B", "text": "Element" },
+        { "id": "C", "text": "Server player count" },
+        { "id": "D", "text": "Shop discount" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "WA-E10",
+      "question": "Which catalog bucket includes Twisted Wand, Wingbird Wand, and Ember Staff Wand?",
+      "options": [
+        { "id": "A", "text": "Chest list" },
+        { "id": "B", "text": "Robe list" },
+        { "id": "C", "text": "Resource node list" },
+        { "id": "D", "text": "Wand list" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    }
+  ],
+  "medium": [
+    {
+      "id": "WA-M1",
+      "question": "What material has the highest listed normal Magic Power?",
+      "options": [
+        { "id": "A", "text": "Blueberry" },
+        { "id": "B", "text": "Dwarf Emblem" },
+        { "id": "C", "text": "Lava Behemoth Remains" },
+        { "id": "D", "text": "Seagull Egg" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-M2",
+      "question": "Reaching 130 Magic on Departure Isle, a player wants the strongest Power row there. Point them to the right potion.",
+      "options": [
+        { "id": "A", "text": "Night Wraith Potion" },
+        { "id": "B", "text": "Lithe Potion" },
+        { "id": "C", "text": "Earth Shield Potion" },
+        { "id": "D", "text": "Wind Blade Potion" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-M3",
+      "question": "Which race best supports an Ice spell build?",
+      "options": [
+        { "id": "A", "text": "Human" },
+        { "id": "B", "text": "Elf" },
+        { "id": "C", "text": "Ice Crystal" },
+        { "id": "D", "text": "Tree Spirit" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-M4",
+      "question": "Which race is the late-game target for Dark DPS?",
+      "options": [
+        { "id": "A", "text": "Werewolf" },
+        { "id": "B", "text": "Night Knight" },
+        { "id": "C", "text": "Human" },
+        { "id": "D", "text": "Elf" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "WA-M5",
+      "question": "Where do Wingbird Wand, Azure Wand, and Demon Trident Wand come from?",
+      "options": [
+        { "id": "A", "text": "The Lava waterfall base" },
+        { "id": "B", "text": "The Dwarf King throne" },
+        { "id": "C", "text": "Traveler's tent" },
+        { "id": "D", "text": "Roger's wand shop at spawn" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "WA-M6",
+      "question": "The mine wall is fake and there is a chest behind it. What chest route did you find?",
+      "options": [
+        { "id": "A", "text": "Top Potions List Island Chest" },
+        { "id": "B", "text": "Secret Mine Cave Chest" },
+        { "id": "C", "text": "Traveler's Tent Chest" },
+        { "id": "D", "text": "Lighthouse Island Chest" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "WA-M7",
+      "question": "Broken Arrow drops narrow your farming route to what enemy?",
+      "options": [
+        { "id": "A", "text": "Pickaxe Dwarf" },
+        { "id": "B", "text": "Knife Goblin" },
+        { "id": "C", "text": "Blueberry Bush" },
+        { "id": "D", "text": "Bow Orc" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "WA-M8",
+      "question": "What enchantment improves Alchemy Luck?",
+      "options": [
+        { "id": "A", "text": "Luck" },
+        { "id": "B", "text": "Swift" },
+        { "id": "C", "text": "Fatal" },
+        { "id": "D", "text": "Staying Calm" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-M9",
+      "question": "Who explains the mine entrance route and why the chest is useful?",
+      "options": [
+        { "id": "A", "text": "Roger" },
+        { "id": "B", "text": "Optimistic Miner" },
+        { "id": "C", "text": "Lombart" },
+        { "id": "D", "text": "Lemin" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "WA-M10",
+      "question": "Which potion sits at the 245 Magic and 160 Power ceiling?",
+      "options": [
+        { "id": "A", "text": "Wood Splinter Potion" },
+        { "id": "B", "text": "Rock Blast Potion" },
+        { "id": "C", "text": "Solar Flare Potion" },
+        { "id": "D", "text": "Ice Spike Potion" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    }
+  ],
+  "hard": [
+    {
+      "id": "WA-H1",
+      "question": "Do the brew math: 2 Golem Cores, 2 Scepter Gems, and 1 Furnace Core. Select the highest listed threshold reached.",
+      "options": [
+        { "id": "A", "text": "Incendies Potion at 160 Magic" },
+        { "id": "B", "text": "Thunder Revenge Potion at 150 Magic" },
+        { "id": "C", "text": "Molten Core Potion at 230 Magic" },
+        { "id": "D", "text": "Solar Flare Potion at 245 Magic" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-H2",
+      "question": "Which 105-Magic potion is the Light attack with 89 Power?",
+      "options": [
+        { "id": "A", "text": "Wood Thorn Potion" },
+        { "id": "B", "text": "Radiant Sword Potion" },
+        { "id": "C", "text": "Thunder Ball Potion" },
+        { "id": "D", "text": "Bolide Potion" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "WA-H3",
+      "question": "The Undead passive saves a fatal hit and heals after invincibility. Choose the penalty that makes the race risky.",
+      "options": [
+        { "id": "A", "text": "-30% Maximum Health" },
+        { "id": "B", "text": "-2 Base Movement Speed" },
+        { "id": "C", "text": "-10% Attack Power" },
+        { "id": "D", "text": "No Skill Speed bonus" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-H4",
+      "question": "Which exact enemy pair can drop both Dark Shard and Light Shard at 50%?",
+      "options": [
+        { "id": "A", "text": "Bow Orc and Axe Orc" },
+        { "id": "B", "text": "Pickaxe Dwarf and Warhammer Dwarf" },
+        { "id": "C", "text": "Mutant Warhammer Dwarf and Mutant Goblin Archer" },
+        { "id": "D", "text": "Dwarf King and Lava Behemoth" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-H5",
+      "question": "What enchantment reaches 50% Cooling Shrinkage at tier V?",
+      "options": [
+        { "id": "A", "text": "Fatal" },
+        { "id": "B", "text": "Staying Calm" },
+        { "id": "C", "text": "Blazing Fire" },
+        { "id": "D", "text": "Swift" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "WA-H6",
+      "question": "Compare Mutant Axe Orc with Mutant Orc Priest. Choose the drop line that belongs to both of them.",
+      "options": [
+        { "id": "A", "text": "Iron Armour 60%, Golem Core 30%, Lava Behemoth Remains 10%, Enchanted Stone 100%" },
+        { "id": "B", "text": "Dwarf Emblem 75%, Golden Tooth 25%, Flame Crest 13%, Enchanted Stone 100%" },
+        { "id": "C", "text": "Goblin Finger 50%, Goblin Bone 38%, Copper Earring 13%, Wind Shard 50%" },
+        { "id": "D", "text": "Orc Ears 50%, Orc Teeth 50%, Broken Arrow 40%, Light Shard 50%" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "WA-H7",
+      "question": "Molten Core Potion is 12 Magic out of reach. Pick the lowest normal-material pickup that clears the deficit.",
+      "options": [
+        { "id": "A", "text": "Blueberry" },
+        { "id": "B", "text": "Seagull Egg" },
+        { "id": "C", "text": "Dwarf Emblem or Volcanic Rock" },
+        { "id": "D", "text": "Furnace Core" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-H8",
+      "question": "Fatal and Critical Hit use matching tier numbers, but not the same stat. Match them correctly.",
+      "options": [
+        { "id": "A", "text": "Fatal boosts Crit Rate; Critical Hit boosts Cooling Shrinkage" },
+        { "id": "B", "text": "Fatal boosts Attack Boost; Critical Hit boosts Movement Speed" },
+        { "id": "C", "text": "Fatal boosts Fire Damage; Critical Hit boosts Dark Damage" },
+        { "id": "D", "text": "Fatal boosts Critical Damage; Critical Hit boosts Crit Rate" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "WA-H9",
+      "question": "The 75-Magic brew with no Power number buffs damage by 30%. Name the brew.",
+      "options": [
+        { "id": "A", "text": "Rock Blast Potion" },
+        { "id": "B", "text": "Dragon Breath Potion" },
+        { "id": "C", "text": "Twin Currents Potion" },
+        { "id": "D", "text": "Wind Blade Potion" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "WA-H10",
+      "question": "After 100 independent rerolls at a 1% race chance, pick the closest calculator result.",
+      "options": [
+        { "id": "A", "text": "100%, because 100 rolls cancels the 1% chance" },
+        { "id": "B", "text": "About 63%, because misses can still chain together" },
+        { "id": "C", "text": "Exactly 50%, because it is a coin flip after 100 rolls" },
+        { "id": "D", "text": "About 10%, because only every tenth roll counts" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    }
+  ]
+}

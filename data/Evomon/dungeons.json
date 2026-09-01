@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evomon",
+    "gameSlug": "evomon",
+    "collection": "dungeons",
+    "route": "/wiki/evomon/dungeons",
+    "catalogCode": "evomon-dungeons",
+    "itemFields": [
+      "progressionRole",
+      "unlockRequirement",
+      "accessLocation",
+      "entryTicket",
+      "mapCount",
+      "mapStructure",
+      "rewardTypes",
+      "queueMode",
+      "difficultyNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "progressionRole",
+      "unlockRequirement",
+      "accessLocation",
+      "entryTicket",
+      "mapCount",
+      "mapStructure",
+      "rewardTypes",
+      "queueMode",
+      "difficultyNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Purpose",
+      "sectionOrder": [
+        "EXP progression",
+        "Equipment progression"
+      ],
+      "badgeField": "progressionRole",
+      "subtitleFields": [
+        "unlockRequirement"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "unlockRequirement",
+        "accessLocation",
+        "entryTicket",
+        "mapCount",
+        "mapStructure",
+        "rewardTypes",
+        "queueMode",
+        "difficultyNote"
+      ],
+      "tableFields": [
+        "progressionRole",
+        "unlockRequirement",
+        "accessLocation",
+        "entryTicket",
+        "mapCount",
+        "mapStructure",
+        "rewardTypes",
+        "queueMode",
+        "difficultyNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "progressionRole": {
+          "kind": "highlight",
+          "label": "Purpose"
+        },
+        "unlockRequirement": {
+          "kind": "chip",
+          "label": "Unlocks at"
+        },
+        "accessLocation": {
+          "kind": "plain",
+          "label": "Access"
+        },
+        "entryTicket": {
+          "kind": "plain",
+          "label": "Entry ticket"
+        },
+        "mapCount": {
+          "kind": "chip",
+          "label": "Maps"
+        },
+        "mapStructure": {
+          "kind": "detail",
+          "label": "Map structure"
+        },
+        "rewardTypes": {
+          "kind": "detail",
+          "label": "Rewards"
+        },
+        "queueMode": {
+          "kind": "plain",
+          "label": "Queue"
+        },
+        "difficultyNote": {
+          "kind": "detail",
+          "label": "Difficulty"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "EXP Dungeon",
+        "progressionRole": "EXP progression",
+        "unlockRequirement": "Player level 10",
+        "accessLocation": "Petal Pond or the Main City Daily Challenge hub",
+        "entryTicket": "EXP Challenge Ticket",
+        "mapCount": 11,
+        "mapStructure": "11 numbered EXP Challenge maps",
+        "rewardTypes": "EXP Fruits, Coins, and Player EXP",
+        "queueMode": "Solo or party",
+        "difficultyNote": "Later maps require higher player levels and use tougher encounters.",
+        "cardSummary": "The leveling-focused dungeon. Unlock it at player level 10, spend an EXP Challenge Ticket to enter, and choose from 11 maps that pay out leveling resources and Player EXP."
+      },
+      "system": {
+        "slug": "exp-dungeon",
+        "section": "EXP progression",
+        "sortOrder": 1,
+        "image": "/Evomon/Dungeons/daily-challenge-hub.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Equipment Dungeon",
+        "progressionRole": "Equipment progression",
+        "unlockRequirement": "Player level 40",
+        "accessLocation": "Silent Sands or the Main City Daily Challenge hub",
+        "entryTicket": "Multidrop Ticket",
+        "mapCount": 6,
+        "mapStructure": "6 numbered Equipment Challenge maps, each with Zones 1-3",
+        "rewardTypes": "Equipment Sets, Refine Stones, Enhance Stones, and Player EXP",
+        "queueMode": "Solo or party",
+        "difficultyNote": "Higher maps unlock behind higher player levels and offer stronger equipment rarity pools.",
+        "cardSummary": "The gear-focused dungeon. Unlock it at player level 40, spend a Multidrop Ticket to enter, and pick from six maps with three zones each for equipment and upgrade materials."
+      },
+      "system": {
+        "slug": "equipment-dungeon",
+        "section": "Equipment progression",
+        "sortOrder": 2,
+        "image": "/Evomon/Dungeons/daily-challenge-hub.webp"
+      }
+    }
+  ]
+}

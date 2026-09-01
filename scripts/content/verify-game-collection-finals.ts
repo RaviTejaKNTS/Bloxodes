@@ -104,20 +104,6 @@ async function findFinalFile(root: string, collection: string, game: string) {
   throw new Error(`Missing collection final.json for ${collection}. Checked: ${candidates.join(", ")}`);
 }
 
-async function findRuntimeManifest(root: string, collection: string) {
-  const candidate = path.join(root, collection, "runtime-manifest.json");
-  return (await pathExists(candidate)) ? candidate : null;
-}
-
-async function inputsFromRuntimeManifest(manifestPath: string) {
-  const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as { dataset?: string; mediaRoot?: string };
-  if (!manifest.dataset || !manifest.mediaRoot) throw new Error(`${manifestPath} is missing dataset or mediaRoot.`);
-  return {
-    dataset: path.resolve(path.dirname(manifestPath), manifest.dataset),
-    mediaRoot: path.resolve(path.dirname(manifestPath), manifest.mediaRoot)
-  };
-}
-
 async function readFinal(file: string): Promise<CollectionFinal> {
   const parsed = JSON.parse(await readFile(file, "utf8")) as CollectionFinal;
   if (typeof parsed.display_name !== "string" || !parsed.display_name.trim()) {
@@ -136,17 +122,16 @@ function runCommand(command: string, args: string[]) {
     });
     child.on("error", reject);
     child.on("exit", (code) => {
-      if (code === 0) resolve();
-      else reject(new Error(`${command} ${args.join(" ")} exited with code ${code ?? "unknown"}`));
+      code === 0 ? resolve() : reject(new Error(`${command} ${args.join(" ")} exited with code ${code ?? "unknown"}`));
     });
   });
 }
 
-async function verifyReadback(game: string, collection: string, finalJson: CollectionFinal, runtimeExpected: boolean) {
+async function verifyReadback(game: string, collection: string, finalJson: CollectionFinal) {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("wiki_collection_pages")
-    .select("wiki_slug,collection_slug,code,title,display_name,universe_id,item_count,is_published,meta_description,published_dataset_id")
+    .select("wiki_slug,collection_slug,code,title,display_name,universe_id,item_count,is_published,meta_description")
     .eq("wiki_slug", game)
     .eq("collection_slug", collection)
     .maybeSingle();
@@ -160,7 +145,6 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
     universe_id?: number | null;
     item_count?: number | null;
     is_published?: boolean;
-    published_dataset_id?: string | null;
   };
   if (!row.is_published) throw new Error(`Collection ${game}/${collection} is not published`);
   if (!row.item_count || row.item_count < 1) throw new Error(`Collection ${game}/${collection} has no item_count`);
@@ -171,20 +155,6 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
   if (finalJson.code && row.code !== finalJson.code) throw new Error(`Collection code mismatch for ${game}/${collection}`);
   if (typeof finalJson.universe_id === "number" && row.universe_id !== finalJson.universe_id) {
     throw new Error(`Collection universe_id mismatch for ${game}/${collection}`);
-  }
-  if (runtimeExpected && !row.published_dataset_id) {
-    throw new Error(`Collection ${game}/${collection} has no published runtime revision`);
-  }
-  if (row.published_dataset_id) {
-    const { data: dataset, error: datasetError } = await sb
-      .from("wiki_collection_datasets")
-      .select("id,item_count,content_hash")
-      .eq("id", row.published_dataset_id)
-      .maybeSingle();
-    if (datasetError) throw new Error(`Failed to read runtime revision for ${game}/${collection}: ${datasetError.message}`);
-    if (!dataset || dataset.item_count !== row.item_count) {
-      throw new Error(`Runtime revision count mismatch for ${game}/${collection}`);
-    }
   }
   return { title: expectedTitle ?? row.title ?? undefined };
 }
@@ -212,51 +182,38 @@ async function main() {
   if (!collections.length) throw new Error(`No collection final.json files found under ${root}`);
 
   const finalFiles = await Promise.all(collections.map((collection) => findFinalFile(root, collection, options.game)));
-  const runtimeManifests = await Promise.all(collections.map((collection) => findRuntimeManifest(root, collection)));
   const finals = await Promise.all(finalFiles.map(readFinal));
 
   await runCommand("npm", ["run", "content:check-copy", "--", ...finalFiles]);
   for (let index = 0; index < collections.length; index += 1) {
-    const manifest = runtimeManifests[index];
-    const runtimeInputs = manifest ? await inputsFromRuntimeManifest(manifest) : null;
-    const dataArgs = runtimeInputs
-      ? [
-          "--game", options.game,
-          "--collection", collections[index],
-          "--file", runtimeInputs.dataset,
-          "--media-root", runtimeInputs.mediaRoot,
-          "--final-json", finalFiles[index]
-        ]
-      : ["--game", options.game, "--collection", collections[index], "--final-json", finalFiles[index]];
     await runCommand("npm", [
       "run",
       "check:game-collection-data",
       "--",
-      ...dataArgs,
-    ]);
-    if (manifest) {
-      await runCommand("npm", ["run", "sync:game-collection-runtime", "--", "--manifest", manifest]);
-    }
-  }
-  const legacyCollections = collections.filter((_, index) => !runtimeManifests[index]);
-  if (legacyCollections.length) {
-    await runCommand("npm", [
-      "run",
-      "seed:game-collection-pages",
-      "--",
       "--game",
       options.game,
-      ...legacyCollections.flatMap((collection) => ["--collection", collection]),
-      "--final-json-root",
-      options.finalJsonRoot,
+      "--collection",
+      collections[index],
+      "--final-json",
+      finalFiles[index],
     ]);
   }
+  await runCommand("npm", [
+    "run",
+    "seed:game-collection-pages",
+    "--",
+    "--game",
+    options.game,
+    ...collections.flatMap((collection) => ["--collection", collection]),
+    "--final-json-root",
+    options.finalJsonRoot,
+  ]);
 
   const urls: string[] = [];
   for (let index = 0; index < collections.length; index += 1) {
     const collection = collections[index];
     const finalJson = finals[index];
-    const readback = await verifyReadback(options.game, collection, finalJson, Boolean(runtimeManifests[index]));
+    const readback = await verifyReadback(options.game, collection, finalJson);
     const url = `${options.baseUrl}/wiki/${options.game}/${collection}`;
     await verifyRoute(url, readback.title);
     console.log(`Route passed: ${url}`);

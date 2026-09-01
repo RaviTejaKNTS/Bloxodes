@@ -320,13 +320,39 @@ export const GROW_GARDEN_COLLECTIONS: GrowGardenCollectionConfig[] = [
       { key: "maxPurchases", label: "Max buys" }
     ],
     maxStats: 2
+  },
+  {
+    slug: "plot-expansions",
+    label: "Plot Expansions",
+    file: "plot-expansions.json",
+    navDescription: "Costs, prerequisites, and waiting periods.",
+    description: "Compare the permanent Grow a Garden plot expansions by position, cost, unlock order, and wait time.",
+    groupKey: "collectionGroup",
+    groupLabel: "Upgrade type",
+    subtitleKeys: [],
+    descriptionKey: "effect",
+    cardDescriptionKey: "cardSummary",
+    hideImages: true,
+    stats: [
+      { key: "cost", label: "Cost" },
+      { key: "waitTime", label: "Wait" },
+      { key: "timerSkipRobux", label: "Timer skip" }
+    ],
+    maxStats: 3,
+    fieldPresentation: {
+      cost: { kind: "chip", label: "Cost", omitWhenEmpty: true },
+      waitTime: { kind: "chip", label: "Wait", omitWhenEmpty: true },
+      timerSkipRobux: { kind: "chip", label: "Timer skip", omitWhenEmpty: true },
+      availability: { kind: "highlight", label: "Availability", tone: "positive", omitWhenEmpty: true },
+      effect: { kind: "detail", label: "Effect", omitWhenEmpty: true },
+      cardSummary: { kind: "detail", label: "Summary", omitWhenEmpty: true }
+    }
   }
 ];
 
 export const growAGardenCollectionGroup = {
   gameSlug: "grow-a-garden",
   gameName: "Grow a Garden",
-  universeId: 7436755782,
   dataDir: "Grow a Garden",
   universeNames: ["Grow a Garden"],
   collections: GROW_GARDEN_COLLECTIONS.map(({ slug }) => slug)

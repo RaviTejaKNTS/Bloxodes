@@ -1,0 +1,6944 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Slime RNG",
+    "gameSlug": "slime-rng",
+    "collection": "slimes",
+    "route": "/wiki/slime-rng/slimes",
+    "catalogCode": "slime-rng-slimes",
+    "itemFields": [
+      "family",
+      "variant",
+      "rarity",
+      "odds",
+      "power",
+      "health"
+    ],
+    "columns": [
+      "family",
+      "variant",
+      "rarity",
+      "odds",
+      "power",
+      "health"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Base",
+        "Big",
+        "Huge",
+        "Shiny",
+        "Inverted"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "family",
+        "variant",
+        "rarity",
+        "odds",
+        "power",
+        "health"
+      ],
+      "tableFields": [
+        "family",
+        "variant",
+        "rarity",
+        "odds",
+        "power",
+        "health"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Goopy",
+        "family": "Goopy",
+        "variant": "Base",
+        "rarity": "Basic",
+        "odds": "1 / 3",
+        "power": "4",
+        "health": "10"
+      },
+      "system": {
+        "slug": "goopy",
+        "section": "Base",
+        "sortOrder": 1,
+        "image": "/Slime%20RNG/Slimes/goopy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Goopy",
+        "family": "Goopy",
+        "variant": "Big",
+        "rarity": "Rare",
+        "odds": "1 / 216",
+        "power": "16",
+        "health": "40"
+      },
+      "system": {
+        "slug": "big-goopy",
+        "section": "Big",
+        "sortOrder": 2,
+        "image": "/Slime%20RNG/Slimes/goopy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Goopy",
+        "family": "Goopy",
+        "variant": "Huge",
+        "rarity": "Epic",
+        "odds": "1 / 2.15K",
+        "power": "40",
+        "health": "100"
+      },
+      "system": {
+        "slug": "huge-goopy",
+        "section": "Huge",
+        "sortOrder": 3,
+        "image": "/Slime%20RNG/Slimes/goopy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Goopy",
+        "family": "Goopy",
+        "variant": "Shiny",
+        "rarity": "Epic",
+        "odds": "1 / 539",
+        "power": "24",
+        "health": "60"
+      },
+      "system": {
+        "slug": "shiny-goopy",
+        "section": "Shiny",
+        "sortOrder": 4,
+        "image": "/Slime%20RNG/Slimes/shiny-goopy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Goopy",
+        "family": "Goopy",
+        "variant": "Inverted",
+        "rarity": "Legendary",
+        "odds": "1 / 5.38K",
+        "power": "52",
+        "health": "130"
+      },
+      "system": {
+        "slug": "inverted-goopy",
+        "section": "Inverted",
+        "sortOrder": 5,
+        "image": "/Slime%20RNG/Slimes/goopy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunset",
+        "family": "Sunset",
+        "variant": "Base",
+        "rarity": "Basic",
+        "odds": "1 / 5",
+        "power": "5",
+        "health": "15"
+      },
+      "system": {
+        "slug": "sunset",
+        "section": "Base",
+        "sortOrder": 6,
+        "image": "/Slime%20RNG/Slimes/sunset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Sunset",
+        "family": "Sunset",
+        "variant": "Big",
+        "rarity": "Rare",
+        "odds": "1 / 431",
+        "power": "20",
+        "health": "60"
+      },
+      "system": {
+        "slug": "big-sunset",
+        "section": "Big",
+        "sortOrder": 7,
+        "image": "/Slime%20RNG/Slimes/sunset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Sunset",
+        "family": "Sunset",
+        "variant": "Huge",
+        "rarity": "Legendary",
+        "odds": "1 / 4.31K",
+        "power": "50",
+        "health": "150"
+      },
+      "system": {
+        "slug": "huge-sunset",
+        "section": "Huge",
+        "sortOrder": 8,
+        "image": "/Slime%20RNG/Slimes/sunset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sunset",
+        "family": "Sunset",
+        "variant": "Shiny",
+        "rarity": "Epic",
+        "odds": "1 / 1.07K",
+        "power": "30",
+        "health": "90"
+      },
+      "system": {
+        "slug": "shiny-sunset",
+        "section": "Shiny",
+        "sortOrder": 9,
+        "image": "/Slime%20RNG/Slimes/shiny-sunset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Sunset",
+        "family": "Sunset",
+        "variant": "Inverted",
+        "rarity": "Legendary",
+        "odds": "1 / 10.7K",
+        "power": "65",
+        "health": "195"
+      },
+      "system": {
+        "slug": "inverted-sunset",
+        "section": "Inverted",
+        "sortOrder": 10,
+        "image": "/Slime%20RNG/Slimes/sunset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fin",
+        "family": "Fin",
+        "variant": "Base",
+        "rarity": "Common",
+        "odds": "1 / 8",
+        "power": "6",
+        "health": "20"
+      },
+      "system": {
+        "slug": "fin",
+        "section": "Base",
+        "sortOrder": 11,
+        "image": "/Slime%20RNG/Slimes/fin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Fin",
+        "family": "Fin",
+        "variant": "Big",
+        "rarity": "Epic",
+        "odds": "1 / 719",
+        "power": "24",
+        "health": "80"
+      },
+      "system": {
+        "slug": "big-fin",
+        "section": "Big",
+        "sortOrder": 12,
+        "image": "/Slime%20RNG/Slimes/fin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Fin",
+        "family": "Fin",
+        "variant": "Huge",
+        "rarity": "Legendary",
+        "odds": "1 / 7.18K",
+        "power": "60",
+        "health": "200"
+      },
+      "system": {
+        "slug": "huge-fin",
+        "section": "Huge",
+        "sortOrder": 13,
+        "image": "/Slime%20RNG/Slimes/fin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Fin",
+        "family": "Fin",
+        "variant": "Shiny",
+        "rarity": "Epic",
+        "odds": "1 / 1.79K",
+        "power": "36",
+        "health": "120"
+      },
+      "system": {
+        "slug": "shiny-fin",
+        "section": "Shiny",
+        "sortOrder": 14,
+        "image": "/Slime%20RNG/Slimes/shiny-fin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Fin",
+        "family": "Fin",
+        "variant": "Inverted",
+        "rarity": "Mythic",
+        "odds": "1 / 17.8K",
+        "power": "78",
+        "health": "260"
+      },
+      "system": {
+        "slug": "inverted-fin",
+        "section": "Inverted",
+        "sortOrder": 15,
+        "image": "/Slime%20RNG/Slimes/fin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Leafy",
+        "family": "Leafy",
+        "variant": "Base",
+        "rarity": "Common",
+        "odds": "1 / 11",
+        "power": "7",
+        "health": "22"
+      },
+      "system": {
+        "slug": "leafy",
+        "section": "Base",
+        "sortOrder": 16,
+        "image": "/Slime%20RNG/Slimes/leafy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Leafy",
+        "family": "Leafy",
+        "variant": "Big",
+        "rarity": "Epic",
+        "odds": "1 / 1.07K",
+        "power": "28",
+        "health": "88"
+      },
+      "system": {
+        "slug": "big-leafy",
+        "section": "Big",
+        "sortOrder": 17,
+        "image": "/Slime%20RNG/Slimes/leafy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Leafy",
+        "family": "Leafy",
+        "variant": "Huge",
+        "rarity": "Legendary",
+        "odds": "1 / 10.7K",
+        "power": "70",
+        "health": "220"
+      },
+      "system": {
+        "slug": "huge-leafy",
+        "section": "Huge",
+        "sortOrder": 18,
+        "image": "/Slime%20RNG/Slimes/leafy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Leafy",
+        "family": "Leafy",
+        "variant": "Shiny",
+        "rarity": "Legendary",
+        "odds": "1 / 2.69K",
+        "power": "42",
+        "health": "132"
+      },
+      "system": {
+        "slug": "shiny-leafy",
+        "section": "Shiny",
+        "sortOrder": 19,
+        "image": "/Slime%20RNG/Slimes/shiny-leafy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Leafy",
+        "family": "Leafy",
+        "variant": "Inverted",
+        "rarity": "Mythic",
+        "odds": "1 / 26.9K",
+        "power": "91",
+        "health": "286"
+      },
+      "system": {
+        "slug": "inverted-leafy",
+        "section": "Inverted",
+        "sortOrder": 20,
+        "image": "/Slime%20RNG/Slimes/leafy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meow",
+        "family": "Meow",
+        "variant": "Base",
+        "rarity": "Uncommon",
+        "odds": "1 / 35",
+        "power": "8",
+        "health": "27"
+      },
+      "system": {
+        "slug": "meow",
+        "section": "Base",
+        "sortOrder": 21,
+        "image": "/Slime%20RNG/Slimes/meow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Meow",
+        "family": "Meow",
+        "variant": "Big",
+        "rarity": "Legendary",
+        "odds": "1 / 3.47K",
+        "power": "32",
+        "health": "108"
+      },
+      "system": {
+        "slug": "big-meow",
+        "section": "Big",
+        "sortOrder": 22,
+        "image": "/Slime%20RNG/Slimes/meow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Meow",
+        "family": "Meow",
+        "variant": "Huge",
+        "rarity": "Mythic",
+        "odds": "1 / 34.7K",
+        "power": "80",
+        "health": "270"
+      },
+      "system": {
+        "slug": "huge-meow",
+        "section": "Huge",
+        "sortOrder": 23,
+        "image": "/Slime%20RNG/Slimes/meow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Meow",
+        "family": "Meow",
+        "variant": "Shiny",
+        "rarity": "Legendary",
+        "odds": "1 / 8.68K",
+        "power": "48",
+        "health": "162"
+      },
+      "system": {
+        "slug": "shiny-meow",
+        "section": "Shiny",
+        "sortOrder": 24,
+        "image": "/Slime%20RNG/Slimes/shiny-meow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Meow",
+        "family": "Meow",
+        "variant": "Inverted",
+        "rarity": "Divine",
+        "odds": "1 / 86.8K",
+        "power": "104",
+        "health": "351"
+      },
+      "system": {
+        "slug": "inverted-meow",
+        "section": "Inverted",
+        "sortOrder": 25,
+        "image": "/Slime%20RNG/Slimes/meow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glo",
+        "family": "Glo",
+        "variant": "Base",
+        "rarity": "Uncommon",
+        "odds": "1 / 57",
+        "power": "10",
+        "health": "30"
+      },
+      "system": {
+        "slug": "glo",
+        "section": "Base",
+        "sortOrder": 26,
+        "image": "/Slime%20RNG/Slimes/glo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Glo",
+        "family": "Glo",
+        "variant": "Big",
+        "rarity": "Legendary",
+        "odds": "1 / 5.67K",
+        "power": "40",
+        "health": "120"
+      },
+      "system": {
+        "slug": "big-glo",
+        "section": "Big",
+        "sortOrder": 27,
+        "image": "/Slime%20RNG/Slimes/glo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Glo",
+        "family": "Glo",
+        "variant": "Huge",
+        "rarity": "Mythic",
+        "odds": "1 / 56.7K",
+        "power": "100",
+        "health": "300"
+      },
+      "system": {
+        "slug": "huge-glo",
+        "section": "Huge",
+        "sortOrder": 28,
+        "image": "/Slime%20RNG/Slimes/glo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Glo",
+        "family": "Glo",
+        "variant": "Shiny",
+        "rarity": "Legendary",
+        "odds": "1 / 14.1K",
+        "power": "60",
+        "health": "180"
+      },
+      "system": {
+        "slug": "shiny-glo",
+        "section": "Shiny",
+        "sortOrder": 29,
+        "image": "/Slime%20RNG/Slimes/shiny-glo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Glo",
+        "family": "Glo",
+        "variant": "Inverted",
+        "rarity": "Divine",
+        "odds": "1 / 141K",
+        "power": "130",
+        "health": "390"
+      },
+      "system": {
+        "slug": "inverted-glo",
+        "section": "Inverted",
+        "sortOrder": 30,
+        "image": "/Slime%20RNG/Slimes/glo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Buggy",
+        "family": "Buggy",
+        "variant": "Base",
+        "rarity": "Rare",
+        "odds": "1 / 103",
+        "power": "13",
+        "health": "36"
+      },
+      "system": {
+        "slug": "buggy",
+        "section": "Base",
+        "sortOrder": 31,
+        "image": "/Slime%20RNG/Slimes/buggy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Buggy",
+        "family": "Buggy",
+        "variant": "Big",
+        "rarity": "Legendary",
+        "odds": "1 / 10.2K",
+        "power": "52",
+        "health": "144"
+      },
+      "system": {
+        "slug": "big-buggy",
+        "section": "Big",
+        "sortOrder": 32,
+        "image": "/Slime%20RNG/Slimes/buggy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Buggy",
+        "family": "Buggy",
+        "variant": "Huge",
+        "rarity": "Divine",
+        "odds": "1 / 102K",
+        "power": "130",
+        "health": "360"
+      },
+      "system": {
+        "slug": "huge-buggy",
+        "section": "Huge",
+        "sortOrder": 33,
+        "image": "/Slime%20RNG/Slimes/buggy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Buggy",
+        "family": "Buggy",
+        "variant": "Shiny",
+        "rarity": "Mythic",
+        "odds": "1 / 25.6K",
+        "power": "78",
+        "health": "216"
+      },
+      "system": {
+        "slug": "shiny-buggy",
+        "section": "Shiny",
+        "sortOrder": 34,
+        "image": "/Slime%20RNG/Slimes/shiny-buggy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Buggy",
+        "family": "Buggy",
+        "variant": "Inverted",
+        "rarity": "Divine",
+        "odds": "1 / 256K",
+        "power": "169",
+        "health": "468"
+      },
+      "system": {
+        "slug": "inverted-buggy",
+        "section": "Inverted",
+        "sortOrder": 35,
+        "image": "/Slime%20RNG/Slimes/buggy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scorchy",
+        "family": "Scorchy",
+        "variant": "Base",
+        "rarity": "Rare",
+        "odds": "1 / 160",
+        "power": "15",
+        "health": "43"
+      },
+      "system": {
+        "slug": "scorchy",
+        "section": "Base",
+        "sortOrder": 36,
+        "image": "/Slime%20RNG/Slimes/scorchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Scorchy",
+        "family": "Scorchy",
+        "variant": "Big",
+        "rarity": "Mythic",
+        "odds": "1 / 15.9K",
+        "power": "60",
+        "health": "172"
+      },
+      "system": {
+        "slug": "big-scorchy",
+        "section": "Big",
+        "sortOrder": 37,
+        "image": "/Slime%20RNG/Slimes/scorchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Scorchy",
+        "family": "Scorchy",
+        "variant": "Huge",
+        "rarity": "Divine",
+        "odds": "1 / 159K",
+        "power": "150",
+        "health": "430"
+      },
+      "system": {
+        "slug": "huge-scorchy",
+        "section": "Huge",
+        "sortOrder": 38,
+        "image": "/Slime%20RNG/Slimes/scorchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Scorchy",
+        "family": "Scorchy",
+        "variant": "Shiny",
+        "rarity": "Mythic",
+        "odds": "1 / 39.9K",
+        "power": "90",
+        "health": "258"
+      },
+      "system": {
+        "slug": "shiny-scorchy",
+        "section": "Shiny",
+        "sortOrder": 39,
+        "image": "/Slime%20RNG/Slimes/shiny-scorchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Scorchy",
+        "family": "Scorchy",
+        "variant": "Inverted",
+        "rarity": "Divine",
+        "odds": "1 / 399K",
+        "power": "195",
+        "health": "559"
+      },
+      "system": {
+        "slug": "inverted-scorchy",
+        "section": "Inverted",
+        "sortOrder": 40,
+        "image": "/Slime%20RNG/Slimes/scorchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brutis",
+        "family": "Brutis",
+        "variant": "Base",
+        "rarity": "Rare",
+        "odds": "1 / 263",
+        "power": "18",
+        "health": "50"
+      },
+      "system": {
+        "slug": "brutis",
+        "section": "Base",
+        "sortOrder": 41,
+        "image": "/Slime%20RNG/Slimes/brutis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Brutis",
+        "family": "Brutis",
+        "variant": "Big",
+        "rarity": "Mythic",
+        "odds": "1 / 26.2K",
+        "power": "72",
+        "health": "200"
+      },
+      "system": {
+        "slug": "big-brutis",
+        "section": "Big",
+        "sortOrder": 42,
+        "image": "/Slime%20RNG/Slimes/brutis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Brutis",
+        "family": "Brutis",
+        "variant": "Huge",
+        "rarity": "Divine",
+        "odds": "1 / 262K",
+        "power": "180",
+        "health": "500"
+      },
+      "system": {
+        "slug": "huge-brutis",
+        "section": "Huge",
+        "sortOrder": 43,
+        "image": "/Slime%20RNG/Slimes/brutis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Brutis",
+        "family": "Brutis",
+        "variant": "Shiny",
+        "rarity": "Divine",
+        "odds": "1 / 65.6K",
+        "power": "108",
+        "health": "300"
+      },
+      "system": {
+        "slug": "shiny-brutis",
+        "section": "Shiny",
+        "sortOrder": 44,
+        "image": "/Slime%20RNG/Slimes/shiny-brutis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Brutis",
+        "family": "Brutis",
+        "variant": "Inverted",
+        "rarity": "Prismatic",
+        "odds": "1 / 656K",
+        "power": "234",
+        "health": "650"
+      },
+      "system": {
+        "slug": "inverted-brutis",
+        "section": "Inverted",
+        "sortOrder": 45,
+        "image": "/Slime%20RNG/Slimes/brutis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frankenslime",
+        "family": "Frankenslime",
+        "variant": "Base",
+        "rarity": "Rare",
+        "odds": "1 / 415",
+        "power": "20",
+        "health": "60"
+      },
+      "system": {
+        "slug": "frankenslime",
+        "section": "Base",
+        "sortOrder": 46,
+        "image": "/Slime%20RNG/Slimes/frankenslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Frankenslime",
+        "family": "Frankenslime",
+        "variant": "Big",
+        "rarity": "Mythic",
+        "odds": "1 / 41.4K",
+        "power": "80",
+        "health": "240"
+      },
+      "system": {
+        "slug": "big-frankenslime",
+        "section": "Big",
+        "sortOrder": 47,
+        "image": "/Slime%20RNG/Slimes/frankenslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Frankenslime",
+        "family": "Frankenslime",
+        "variant": "Huge",
+        "rarity": "Divine",
+        "odds": "1 / 414K",
+        "power": "200",
+        "health": "600"
+      },
+      "system": {
+        "slug": "huge-frankenslime",
+        "section": "Huge",
+        "sortOrder": 48,
+        "image": "/Slime%20RNG/Slimes/frankenslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Frankenslime",
+        "family": "Frankenslime",
+        "variant": "Shiny",
+        "rarity": "Divine",
+        "odds": "1 / 103K",
+        "power": "120",
+        "health": "360"
+      },
+      "system": {
+        "slug": "shiny-frankenslime",
+        "section": "Shiny",
+        "sortOrder": 49,
+        "image": "/Slime%20RNG/Slimes/shiny-frankenslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Frankenslime",
+        "family": "Frankenslime",
+        "variant": "Inverted",
+        "rarity": "Prismatic",
+        "odds": "1 / 1.03M",
+        "power": "260",
+        "health": "780"
+      },
+      "system": {
+        "slug": "inverted-frankenslime",
+        "section": "Inverted",
+        "sortOrder": 50,
+        "image": "/Slime%20RNG/Slimes/frankenslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orca",
+        "family": "Orca",
+        "variant": "Base",
+        "rarity": "Epic",
+        "odds": "1 / 719",
+        "power": "25",
+        "health": "72"
+      },
+      "system": {
+        "slug": "orca",
+        "section": "Base",
+        "sortOrder": 51,
+        "image": "/Slime%20RNG/Slimes/orca.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Orca",
+        "family": "Orca",
+        "variant": "Big",
+        "rarity": "Divine",
+        "odds": "1 / 71.8K",
+        "power": "100",
+        "health": "288"
+      },
+      "system": {
+        "slug": "big-orca",
+        "section": "Big",
+        "sortOrder": 52,
+        "image": "/Slime%20RNG/Slimes/orca.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Orca",
+        "family": "Orca",
+        "variant": "Huge",
+        "rarity": "Prismatic",
+        "odds": "1 / 718K",
+        "power": "250",
+        "health": "720"
+      },
+      "system": {
+        "slug": "huge-orca",
+        "section": "Huge",
+        "sortOrder": 53,
+        "image": "/Slime%20RNG/Slimes/orca.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Orca",
+        "family": "Orca",
+        "variant": "Shiny",
+        "rarity": "Divine",
+        "odds": "1 / 179K",
+        "power": "150",
+        "health": "432"
+      },
+      "system": {
+        "slug": "shiny-orca",
+        "section": "Shiny",
+        "sortOrder": 54,
+        "image": "/Slime%20RNG/Slimes/shiny-orca.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Orca",
+        "family": "Orca",
+        "variant": "Inverted",
+        "rarity": "Prismatic",
+        "odds": "1 / 1.79M",
+        "power": "325",
+        "health": "936"
+      },
+      "system": {
+        "slug": "inverted-orca",
+        "section": "Inverted",
+        "sortOrder": 55,
+        "image": "/Slime%20RNG/Slimes/orca.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spike",
+        "family": "Spike",
+        "variant": "Base",
+        "rarity": "Epic",
+        "odds": "1 / 1.26K",
+        "power": "29",
+        "health": "88"
+      },
+      "system": {
+        "slug": "spike",
+        "section": "Base",
+        "sortOrder": 56,
+        "image": "/Slime%20RNG/Slimes/spike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Spike",
+        "family": "Spike",
+        "variant": "Big",
+        "rarity": "Divine",
+        "odds": "1 / 126K",
+        "power": "116",
+        "health": "352"
+      },
+      "system": {
+        "slug": "big-spike",
+        "section": "Big",
+        "sortOrder": 57,
+        "image": "/Slime%20RNG/Slimes/spike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Spike",
+        "family": "Spike",
+        "variant": "Huge",
+        "rarity": "Prismatic",
+        "odds": "1 / 1.26M",
+        "power": "290",
+        "health": "880"
+      },
+      "system": {
+        "slug": "huge-spike",
+        "section": "Huge",
+        "sortOrder": 58,
+        "image": "/Slime%20RNG/Slimes/spike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Spike",
+        "family": "Spike",
+        "variant": "Shiny",
+        "rarity": "Divine",
+        "odds": "1 / 316K",
+        "power": "174",
+        "health": "528"
+      },
+      "system": {
+        "slug": "shiny-spike",
+        "section": "Shiny",
+        "sortOrder": 59,
+        "image": "/Slime%20RNG/Slimes/shiny-spike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Spike",
+        "family": "Spike",
+        "variant": "Inverted",
+        "rarity": "Prismatic",
+        "odds": "1 / 3.16M",
+        "power": "377",
+        "health": "1.14K"
+      },
+      "system": {
+        "slug": "inverted-spike",
+        "section": "Inverted",
+        "sortOrder": 60,
+        "image": "/Slime%20RNG/Slimes/spike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Axolotl",
+        "family": "Axolotl",
+        "variant": "Base",
+        "rarity": "Epic",
+        "odds": "1 / 2.39K",
+        "power": "36",
+        "health": "105"
+      },
+      "system": {
+        "slug": "axolotl",
+        "section": "Base",
+        "sortOrder": 61,
+        "image": "/Slime%20RNG/Slimes/axolotl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Axolotl",
+        "family": "Axolotl",
+        "variant": "Big",
+        "rarity": "Divine",
+        "odds": "1 / 329K",
+        "power": "144",
+        "health": "420"
+      },
+      "system": {
+        "slug": "big-axolotl",
+        "section": "Big",
+        "sortOrder": 62,
+        "image": "/Slime%20RNG/Slimes/axolotl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Axolotl",
+        "family": "Axolotl",
+        "variant": "Huge",
+        "rarity": "Prismatic",
+        "odds": "1 / 2.39M",
+        "power": "360",
+        "health": "1.05K"
+      },
+      "system": {
+        "slug": "huge-axolotl",
+        "section": "Huge",
+        "sortOrder": 63,
+        "image": "/Slime%20RNG/Slimes/axolotl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Axolotl",
+        "family": "Axolotl",
+        "variant": "Shiny",
+        "rarity": "Prismatic",
+        "odds": "1 / 598K",
+        "power": "216",
+        "health": "630"
+      },
+      "system": {
+        "slug": "shiny-axolotl",
+        "section": "Shiny",
+        "sortOrder": 64,
+        "image": "/Slime%20RNG/Slimes/shiny-axolotl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Axolotl",
+        "family": "Axolotl",
+        "variant": "Inverted",
+        "rarity": "Transcendent",
+        "odds": "1 / 5.98M",
+        "power": "468",
+        "health": "1.36K"
+      },
+      "system": {
+        "slug": "inverted-axolotl",
+        "section": "Inverted",
+        "sortOrder": 65,
+        "image": "/Slime%20RNG/Slimes/axolotl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spidey",
+        "family": "Spidey",
+        "variant": "Base",
+        "rarity": "Legendary",
+        "odds": "1 / 4.27K",
+        "power": "43",
+        "health": "121"
+      },
+      "system": {
+        "slug": "spidey",
+        "section": "Base",
+        "sortOrder": 66,
+        "image": "/Slime%20RNG/Slimes/spidey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Spidey",
+        "family": "Spidey",
+        "variant": "Big",
+        "rarity": "Divine",
+        "odds": "1 / 427K",
+        "power": "172",
+        "health": "484"
+      },
+      "system": {
+        "slug": "big-spidey",
+        "section": "Big",
+        "sortOrder": 67,
+        "image": "/Slime%20RNG/Slimes/spidey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Spidey",
+        "family": "Spidey",
+        "variant": "Huge",
+        "rarity": "Transcendent",
+        "odds": "1 / 4.27M",
+        "power": "430",
+        "health": "1.21K"
+      },
+      "system": {
+        "slug": "huge-spidey",
+        "section": "Huge",
+        "sortOrder": 68,
+        "image": "/Slime%20RNG/Slimes/spidey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Spidey",
+        "family": "Spidey",
+        "variant": "Shiny",
+        "rarity": "Prismatic",
+        "odds": "1 / 1.06M",
+        "power": "258",
+        "health": "726"
+      },
+      "system": {
+        "slug": "shiny-spidey",
+        "section": "Shiny",
+        "sortOrder": 69,
+        "image": "/Slime%20RNG/Slimes/shiny-spidey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Spidey",
+        "family": "Spidey",
+        "variant": "Inverted",
+        "rarity": "Transcendent",
+        "odds": "1 / 10.6M",
+        "power": "559",
+        "health": "1.57K"
+      },
+      "system": {
+        "slug": "inverted-spidey",
+        "section": "Inverted",
+        "sortOrder": 70,
+        "image": "/Slime%20RNG/Slimes/spidey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mushy",
+        "family": "Mushy",
+        "variant": "Base",
+        "rarity": "Legendary",
+        "odds": "1 / 7.77K",
+        "power": "50",
+        "health": "148"
+      },
+      "system": {
+        "slug": "mushy",
+        "section": "Base",
+        "sortOrder": 71,
+        "image": "/Slime%20RNG/Slimes/mushy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Mushy",
+        "family": "Mushy",
+        "variant": "Big",
+        "rarity": "Prismatic",
+        "odds": "1 / 777K",
+        "power": "200",
+        "health": "592"
+      },
+      "system": {
+        "slug": "big-mushy",
+        "section": "Big",
+        "sortOrder": 72,
+        "image": "/Slime%20RNG/Slimes/mushy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Mushy",
+        "family": "Mushy",
+        "variant": "Huge",
+        "rarity": "Transcendent",
+        "odds": "1 / 7.77M",
+        "power": "500",
+        "health": "1.48K"
+      },
+      "system": {
+        "slug": "huge-mushy",
+        "section": "Huge",
+        "sortOrder": 73,
+        "image": "/Slime%20RNG/Slimes/mushy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Mushy",
+        "family": "Mushy",
+        "variant": "Shiny",
+        "rarity": "Prismatic",
+        "odds": "1 / 1.94M",
+        "power": "300",
+        "health": "888"
+      },
+      "system": {
+        "slug": "shiny-mushy",
+        "section": "Shiny",
+        "sortOrder": 74,
+        "image": "/Slime%20RNG/Slimes/shiny-mushy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Mushy",
+        "family": "Mushy",
+        "variant": "Inverted",
+        "rarity": "Transcendent",
+        "odds": "1 / 19.4M",
+        "power": "650",
+        "health": "1.92K"
+      },
+      "system": {
+        "slug": "inverted-mushy",
+        "section": "Inverted",
+        "sortOrder": 75,
+        "image": "/Slime%20RNG/Slimes/mushy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rocky",
+        "family": "Rocky",
+        "variant": "Base",
+        "rarity": "Legendary",
+        "odds": "1 / 13.9K",
+        "power": "58",
+        "health": "176"
+      },
+      "system": {
+        "slug": "rocky",
+        "section": "Base",
+        "sortOrder": 76,
+        "image": "/Slime%20RNG/Slimes/rocky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Rocky",
+        "family": "Rocky",
+        "variant": "Big",
+        "rarity": "Prismatic",
+        "odds": "1 / 1.39M",
+        "power": "232",
+        "health": "704"
+      },
+      "system": {
+        "slug": "big-rocky",
+        "section": "Big",
+        "sortOrder": 77,
+        "image": "/Slime%20RNG/Slimes/rocky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Rocky",
+        "family": "Rocky",
+        "variant": "Huge",
+        "rarity": "Transcendent",
+        "odds": "1 / 13.9M",
+        "power": "580",
+        "health": "1.76K"
+      },
+      "system": {
+        "slug": "huge-rocky",
+        "section": "Huge",
+        "sortOrder": 78,
+        "image": "/Slime%20RNG/Slimes/rocky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rocky",
+        "family": "Rocky",
+        "variant": "Shiny",
+        "rarity": "Prismatic",
+        "odds": "1 / 3.47M",
+        "power": "348",
+        "health": "1.06K"
+      },
+      "system": {
+        "slug": "shiny-rocky",
+        "section": "Shiny",
+        "sortOrder": 79,
+        "image": "/Slime%20RNG/Slimes/shiny-rocky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Rocky",
+        "family": "Rocky",
+        "variant": "Inverted",
+        "rarity": "Ethereal",
+        "odds": "1 / 34.7M",
+        "power": "754",
+        "health": "2.29K"
+      },
+      "system": {
+        "slug": "inverted-rocky",
+        "section": "Inverted",
+        "sortOrder": 80,
+        "image": "/Slime%20RNG/Slimes/rocky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky",
+        "family": "Lucky",
+        "variant": "Base",
+        "rarity": "Mythic",
+        "odds": "1 / 21.5K",
+        "power": "67",
+        "health": "200"
+      },
+      "system": {
+        "slug": "lucky",
+        "section": "Base",
+        "sortOrder": 81,
+        "image": "/Slime%20RNG/Slimes/lucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Lucky",
+        "family": "Lucky",
+        "variant": "Big",
+        "rarity": "Prismatic",
+        "odds": "1 / 2.15M",
+        "power": "268",
+        "health": "800"
+      },
+      "system": {
+        "slug": "big-lucky",
+        "section": "Big",
+        "sortOrder": 82,
+        "image": "/Slime%20RNG/Slimes/lucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Lucky",
+        "family": "Lucky",
+        "variant": "Huge",
+        "rarity": "Transcendent",
+        "odds": "1 / 21.5M",
+        "power": "670",
+        "health": "2K"
+      },
+      "system": {
+        "slug": "huge-lucky",
+        "section": "Huge",
+        "sortOrder": 83,
+        "image": "/Slime%20RNG/Slimes/lucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Lucky",
+        "family": "Lucky",
+        "variant": "Shiny",
+        "rarity": "Transcendent",
+        "odds": "1 / 5.38M",
+        "power": "402",
+        "health": "1.2K"
+      },
+      "system": {
+        "slug": "shiny-lucky",
+        "section": "Shiny",
+        "sortOrder": 84,
+        "image": "/Slime%20RNG/Slimes/shiny-lucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Lucky",
+        "family": "Lucky",
+        "variant": "Inverted",
+        "rarity": "Ethereal",
+        "odds": "1 / 53.8M",
+        "power": "871",
+        "health": "2.6K"
+      },
+      "system": {
+        "slug": "inverted-lucky",
+        "section": "Inverted",
+        "sortOrder": 85,
+        "image": "/Slime%20RNG/Slimes/lucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stump",
+        "family": "Stump",
+        "variant": "Base",
+        "rarity": "Mythic",
+        "odds": "1 / 35.9K",
+        "power": "75",
+        "health": "232"
+      },
+      "system": {
+        "slug": "stump",
+        "section": "Base",
+        "sortOrder": 86,
+        "image": "/Slime%20RNG/Slimes/stump.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Stump",
+        "family": "Stump",
+        "variant": "Big",
+        "rarity": "Prismatic",
+        "odds": "1 / 3.59M",
+        "power": "300",
+        "health": "928"
+      },
+      "system": {
+        "slug": "big-stump",
+        "section": "Big",
+        "sortOrder": 87,
+        "image": "/Slime%20RNG/Slimes/stump.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Stump",
+        "family": "Stump",
+        "variant": "Huge",
+        "rarity": "Ethereal",
+        "odds": "1 / 35.9M",
+        "power": "750",
+        "health": "2.32K"
+      },
+      "system": {
+        "slug": "huge-stump",
+        "section": "Huge",
+        "sortOrder": 88,
+        "image": "/Slime%20RNG/Slimes/stump.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Stump",
+        "family": "Stump",
+        "variant": "Shiny",
+        "rarity": "Transcendent",
+        "odds": "1 / 8.97M",
+        "power": "450",
+        "health": "1.39K"
+      },
+      "system": {
+        "slug": "shiny-stump",
+        "section": "Shiny",
+        "sortOrder": 89,
+        "image": "/Slime%20RNG/Slimes/shiny-stump.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Stump",
+        "family": "Stump",
+        "variant": "Inverted",
+        "rarity": "Ethereal",
+        "odds": "1 / 89.7M",
+        "power": "975",
+        "health": "3.02K"
+      },
+      "system": {
+        "slug": "inverted-stump",
+        "section": "Inverted",
+        "sortOrder": 90,
+        "image": "/Slime%20RNG/Slimes/stump.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pondy",
+        "family": "Pondy",
+        "variant": "Base",
+        "rarity": "Mythic",
+        "odds": "1 / 53.8K",
+        "power": "85",
+        "health": "256"
+      },
+      "system": {
+        "slug": "pondy",
+        "section": "Base",
+        "sortOrder": 91,
+        "image": "/Slime%20RNG/Slimes/pondy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Pondy",
+        "family": "Pondy",
+        "variant": "Big",
+        "rarity": "Transcendent",
+        "odds": "1 / 5.38M",
+        "power": "340",
+        "health": "1.02K"
+      },
+      "system": {
+        "slug": "big-pondy",
+        "section": "Big",
+        "sortOrder": 92,
+        "image": "/Slime%20RNG/Slimes/pondy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Pondy",
+        "family": "Pondy",
+        "variant": "Huge",
+        "rarity": "Ethereal",
+        "odds": "1 / 53.8M",
+        "power": "850",
+        "health": "2.56K"
+      },
+      "system": {
+        "slug": "huge-pondy",
+        "section": "Huge",
+        "sortOrder": 93,
+        "image": "/Slime%20RNG/Slimes/pondy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Pondy",
+        "family": "Pondy",
+        "variant": "Shiny",
+        "rarity": "Transcendent",
+        "odds": "1 / 13.4M",
+        "power": "510",
+        "health": "1.53K"
+      },
+      "system": {
+        "slug": "shiny-pondy",
+        "section": "Shiny",
+        "sortOrder": 94,
+        "image": "/Slime%20RNG/Slimes/shiny-pondy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Pondy",
+        "family": "Pondy",
+        "variant": "Inverted",
+        "rarity": "Ethereal",
+        "odds": "1 / 134M",
+        "power": "1.1K",
+        "health": "3.33K"
+      },
+      "system": {
+        "slug": "inverted-pondy",
+        "section": "Inverted",
+        "sortOrder": 95,
+        "image": "/Slime%20RNG/Slimes/pondy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crafty",
+        "family": "Crafty",
+        "variant": "Base",
+        "rarity": "Mythic",
+        "odds": "1 / 57.4K",
+        "power": "90",
+        "health": "270"
+      },
+      "system": {
+        "slug": "crafty",
+        "section": "Base",
+        "sortOrder": 96,
+        "image": "/Slime%20RNG/Slimes/crafty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Crafty",
+        "family": "Crafty",
+        "variant": "Big",
+        "rarity": "Transcendent",
+        "odds": "1 / 5.74M",
+        "power": "360",
+        "health": "1.08K"
+      },
+      "system": {
+        "slug": "big-crafty",
+        "section": "Big",
+        "sortOrder": 97,
+        "image": "/Slime%20RNG/Slimes/crafty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Crafty",
+        "family": "Crafty",
+        "variant": "Huge",
+        "rarity": "Ethereal",
+        "odds": "1 / 57.4M",
+        "power": "900",
+        "health": "2.7K"
+      },
+      "system": {
+        "slug": "huge-crafty",
+        "section": "Huge",
+        "sortOrder": 98,
+        "image": "/Slime%20RNG/Slimes/crafty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Crafty",
+        "family": "Crafty",
+        "variant": "Shiny",
+        "rarity": "Transcendent",
+        "odds": "1 / 14.3M",
+        "power": "540",
+        "health": "1.62K"
+      },
+      "system": {
+        "slug": "shiny-crafty",
+        "section": "Shiny",
+        "sortOrder": 99,
+        "image": "/Slime%20RNG/Slimes/shiny-crafty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Crafty",
+        "family": "Crafty",
+        "variant": "Inverted",
+        "rarity": "Ethereal",
+        "odds": "1 / 108M",
+        "power": "1.17K",
+        "health": "3.51K"
+      },
+      "system": {
+        "slug": "inverted-crafty",
+        "section": "Inverted",
+        "sortOrder": 100,
+        "image": "/Slime%20RNG/Slimes/crafty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Icy",
+        "family": "Icy",
+        "variant": "Base",
+        "rarity": "Divine",
+        "odds": "1 / 86.1K",
+        "power": "96",
+        "health": "290"
+      },
+      "system": {
+        "slug": "icy",
+        "section": "Base",
+        "sortOrder": 101,
+        "image": "/Slime%20RNG/Slimes/icy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Icy",
+        "family": "Icy",
+        "variant": "Big",
+        "rarity": "Transcendent",
+        "odds": "1 / 8.61M",
+        "power": "384",
+        "health": "1.16K"
+      },
+      "system": {
+        "slug": "big-icy",
+        "section": "Big",
+        "sortOrder": 102,
+        "image": "/Slime%20RNG/Slimes/icy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Icy",
+        "family": "Icy",
+        "variant": "Huge",
+        "rarity": "Ethereal",
+        "odds": "1 / 86.1M",
+        "power": "960",
+        "health": "2.9K"
+      },
+      "system": {
+        "slug": "huge-icy",
+        "section": "Huge",
+        "sortOrder": 103,
+        "image": "/Slime%20RNG/Slimes/icy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Icy",
+        "family": "Icy",
+        "variant": "Shiny",
+        "rarity": "Transcendent",
+        "odds": "1 / 21.5M",
+        "power": "576",
+        "health": "1.74K"
+      },
+      "system": {
+        "slug": "shiny-icy",
+        "section": "Shiny",
+        "sortOrder": 104,
+        "image": "/Slime%20RNG/Slimes/shiny-icy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Icy",
+        "family": "Icy",
+        "variant": "Inverted",
+        "rarity": "Ethereal",
+        "odds": "1 / 215M",
+        "power": "1.25K",
+        "health": "3.77K"
+      },
+      "system": {
+        "slug": "inverted-icy",
+        "section": "Inverted",
+        "sortOrder": 105,
+        "image": "/Slime%20RNG/Slimes/icy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orbit",
+        "family": "Orbit",
+        "variant": "Base",
+        "rarity": "Divine",
+        "odds": "1 / 126K",
+        "power": "115",
+        "health": "344"
+      },
+      "system": {
+        "slug": "orbit",
+        "section": "Base",
+        "sortOrder": 106,
+        "image": "/Slime%20RNG/Slimes/orbit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Orbit",
+        "family": "Orbit",
+        "variant": "Big",
+        "rarity": "Transcendent",
+        "odds": "1 / 12.6M",
+        "power": "460",
+        "health": "1.38K"
+      },
+      "system": {
+        "slug": "big-orbit",
+        "section": "Big",
+        "sortOrder": 107,
+        "image": "/Slime%20RNG/Slimes/orbit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Orbit",
+        "family": "Orbit",
+        "variant": "Huge",
+        "rarity": "Ethereal",
+        "odds": "1 / 126M",
+        "power": "1.15K",
+        "health": "3.44K"
+      },
+      "system": {
+        "slug": "huge-orbit",
+        "section": "Huge",
+        "sortOrder": 108,
+        "image": "/Slime%20RNG/Slimes/orbit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Orbit",
+        "family": "Orbit",
+        "variant": "Shiny",
+        "rarity": "Ethereal",
+        "odds": "1 / 31.6M",
+        "power": "690",
+        "health": "2.06K"
+      },
+      "system": {
+        "slug": "shiny-orbit",
+        "section": "Shiny",
+        "sortOrder": 109,
+        "image": "/Slime%20RNG/Slimes/shiny-orbit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Orbit",
+        "family": "Orbit",
+        "variant": "Inverted",
+        "rarity": "Secret",
+        "odds": "1 / 316M",
+        "power": "1.5K",
+        "health": "4.47K"
+      },
+      "system": {
+        "slug": "inverted-orbit",
+        "section": "Inverted",
+        "sortOrder": 110,
+        "image": "/Slime%20RNG/Slimes/orbit.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Aegis",
+        "family": "Aegis",
+        "variant": "Base",
+        "rarity": "Divine",
+        "odds": "1 / 215K",
+        "power": "138",
+        "health": "414"
+      },
+      "system": {
+        "slug": "aegis",
+        "section": "Base",
+        "sortOrder": 111,
+        "image": "/Slime%20RNG/Slimes/aegis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Aegis",
+        "family": "Aegis",
+        "variant": "Big",
+        "rarity": "Transcendent",
+        "odds": "1 / 21.5M",
+        "power": "552",
+        "health": "1.66K"
+      },
+      "system": {
+        "slug": "big-aegis",
+        "section": "Big",
+        "sortOrder": 112,
+        "image": "/Slime%20RNG/Slimes/aegis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Aegis",
+        "family": "Aegis",
+        "variant": "Huge",
+        "rarity": "Ethereal",
+        "odds": "1 / 215M",
+        "power": "1.38K",
+        "health": "4.14K"
+      },
+      "system": {
+        "slug": "huge-aegis",
+        "section": "Huge",
+        "sortOrder": 113,
+        "image": "/Slime%20RNG/Slimes/aegis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Aegis",
+        "family": "Aegis",
+        "variant": "Shiny",
+        "rarity": "Ethereal",
+        "odds": "1 / 53.8M",
+        "power": "828",
+        "health": "2.48K"
+      },
+      "system": {
+        "slug": "shiny-aegis",
+        "section": "Shiny",
+        "sortOrder": 114,
+        "image": "/Slime%20RNG/Slimes/shiny-aegis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Aegis",
+        "family": "Aegis",
+        "variant": "Inverted",
+        "rarity": "Secret",
+        "odds": "1 / 538M",
+        "power": "1.79K",
+        "health": "5.38K"
+      },
+      "system": {
+        "slug": "inverted-aegis",
+        "section": "Inverted",
+        "sortOrder": 115,
+        "image": "/Slime%20RNG/Slimes/aegis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wicked",
+        "family": "Wicked",
+        "variant": "Base",
+        "rarity": "Divine",
+        "odds": "1 / 326K",
+        "power": "166",
+        "health": "496"
+      },
+      "system": {
+        "slug": "wicked",
+        "section": "Base",
+        "sortOrder": 116,
+        "image": "/Slime%20RNG/Slimes/wicked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Wicked",
+        "family": "Wicked",
+        "variant": "Big",
+        "rarity": "Ethereal",
+        "odds": "1 / 32.6M",
+        "power": "664",
+        "health": "1.98K"
+      },
+      "system": {
+        "slug": "big-wicked",
+        "section": "Big",
+        "sortOrder": 117,
+        "image": "/Slime%20RNG/Slimes/wicked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Wicked",
+        "family": "Wicked",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 326M",
+        "power": "1.66K",
+        "health": "4.96K"
+      },
+      "system": {
+        "slug": "huge-wicked",
+        "section": "Huge",
+        "sortOrder": 118,
+        "image": "/Slime%20RNG/Slimes/wicked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Wicked",
+        "family": "Wicked",
+        "variant": "Shiny",
+        "rarity": "Ethereal",
+        "odds": "1 / 81.6M",
+        "power": "996",
+        "health": "2.97K"
+      },
+      "system": {
+        "slug": "shiny-wicked",
+        "section": "Shiny",
+        "sortOrder": 119,
+        "image": "/Slime%20RNG/Slimes/shiny-wicked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Wicked",
+        "family": "Wicked",
+        "variant": "Inverted",
+        "rarity": "Secret",
+        "odds": "1 / 816M",
+        "power": "2.16K",
+        "health": "6.45K"
+      },
+      "system": {
+        "slug": "inverted-wicked",
+        "section": "Inverted",
+        "sortOrder": 120,
+        "image": "/Slime%20RNG/Slimes/wicked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thorn",
+        "family": "Thorn",
+        "variant": "Base",
+        "rarity": "Divine",
+        "odds": "1 / 330K",
+        "power": "167",
+        "health": "500"
+      },
+      "system": {
+        "slug": "thorn",
+        "section": "Base",
+        "sortOrder": 121,
+        "image": "/Slime%20RNG/Slimes/thorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Thorn",
+        "family": "Thorn",
+        "variant": "Big",
+        "rarity": "Ethereal",
+        "odds": "1 / 33.0M",
+        "power": "668",
+        "health": "2K"
+      },
+      "system": {
+        "slug": "big-thorn",
+        "section": "Big",
+        "sortOrder": 122,
+        "image": "/Slime%20RNG/Slimes/thorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Thorn",
+        "family": "Thorn",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 330M",
+        "power": "1.67K",
+        "health": "5.00K"
+      },
+      "system": {
+        "slug": "huge-thorn",
+        "section": "Huge",
+        "sortOrder": 123,
+        "image": "/Slime%20RNG/Slimes/thorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Thorn",
+        "family": "Thorn",
+        "variant": "Shiny",
+        "rarity": "Ethereal",
+        "odds": "1 / 82.7M",
+        "power": "1K",
+        "health": "3K"
+      },
+      "system": {
+        "slug": "shiny-thorn",
+        "section": "Shiny",
+        "sortOrder": 124,
+        "image": "/Slime%20RNG/Slimes/shiny-thorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Thorn",
+        "family": "Thorn",
+        "variant": "Inverted",
+        "rarity": "Secret",
+        "odds": "1 / 622M",
+        "power": "2.17K",
+        "health": "6.5K"
+      },
+      "system": {
+        "slug": "inverted-thorn",
+        "section": "Inverted",
+        "sortOrder": 125,
+        "image": "/Slime%20RNG/Slimes/thorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "King",
+        "family": "King",
+        "variant": "Base",
+        "rarity": "Prismatic",
+        "odds": "1 / 538K",
+        "power": "189",
+        "health": "567"
+      },
+      "system": {
+        "slug": "king",
+        "section": "Base",
+        "sortOrder": 126,
+        "image": "/Slime%20RNG/Slimes/king.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big King",
+        "family": "King",
+        "variant": "Big",
+        "rarity": "Ethereal",
+        "odds": "1 / 53.8M",
+        "power": "756",
+        "health": "2.27K"
+      },
+      "system": {
+        "slug": "big-king",
+        "section": "Big",
+        "sortOrder": 127,
+        "image": "/Slime%20RNG/Slimes/king.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge King",
+        "family": "King",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 538M",
+        "power": "1.89K",
+        "health": "5.67K"
+      },
+      "system": {
+        "slug": "huge-king",
+        "section": "Huge",
+        "sortOrder": 128,
+        "image": "/Slime%20RNG/Slimes/king.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny King",
+        "family": "King",
+        "variant": "Shiny",
+        "rarity": "Ethereal",
+        "odds": "1 / 134M",
+        "power": "1.13K",
+        "health": "3.4K"
+      },
+      "system": {
+        "slug": "shiny-king",
+        "section": "Shiny",
+        "sortOrder": 129,
+        "image": "/Slime%20RNG/Slimes/shiny-king.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted King",
+        "family": "King",
+        "variant": "Inverted",
+        "rarity": "Secret",
+        "odds": "1 / 1.34B",
+        "power": "2.46K",
+        "health": "7.37K"
+      },
+      "system": {
+        "slug": "inverted-king",
+        "section": "Inverted",
+        "sortOrder": 130,
+        "image": "/Slime%20RNG/Slimes/king.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Guest",
+        "family": "Guest",
+        "variant": "Base",
+        "rarity": "Prismatic",
+        "odds": "1 / 861K",
+        "power": "208",
+        "health": "624"
+      },
+      "system": {
+        "slug": "guest",
+        "section": "Base",
+        "sortOrder": 131,
+        "image": "/Slime%20RNG/Slimes/guest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Guest",
+        "family": "Guest",
+        "variant": "Big",
+        "rarity": "Ethereal",
+        "odds": "1 / 86.1M",
+        "power": "832",
+        "health": "2.5K"
+      },
+      "system": {
+        "slug": "big-guest",
+        "section": "Big",
+        "sortOrder": 132,
+        "image": "/Slime%20RNG/Slimes/guest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Guest",
+        "family": "Guest",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 861M",
+        "power": "2.08K",
+        "health": "6.24K"
+      },
+      "system": {
+        "slug": "huge-guest",
+        "section": "Huge",
+        "sortOrder": 133,
+        "image": "/Slime%20RNG/Slimes/guest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Guest",
+        "family": "Guest",
+        "variant": "Shiny",
+        "rarity": "Ethereal",
+        "odds": "1 / 215M",
+        "power": "1.25K",
+        "health": "3.74K"
+      },
+      "system": {
+        "slug": "shiny-guest",
+        "section": "Shiny",
+        "sortOrder": 134,
+        "image": "/Slime%20RNG/Slimes/shiny-guest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Guest",
+        "family": "Guest",
+        "variant": "Inverted",
+        "rarity": "Secret",
+        "odds": "1 / 2.15B",
+        "power": "2.7K",
+        "health": "8.11K"
+      },
+      "system": {
+        "slug": "inverted-guest",
+        "section": "Inverted",
+        "sortOrder": 135,
+        "image": "/Slime%20RNG/Slimes/guest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ninja",
+        "family": "Ninja",
+        "variant": "Base",
+        "rarity": "Prismatic",
+        "odds": "1 / 1.26M",
+        "power": "230",
+        "health": "690"
+      },
+      "system": {
+        "slug": "ninja",
+        "section": "Base",
+        "sortOrder": 136,
+        "image": "/Slime%20RNG/Slimes/ninja.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Ninja",
+        "family": "Ninja",
+        "variant": "Big",
+        "rarity": "Ethereal",
+        "odds": "1 / 126M",
+        "power": "920",
+        "health": "2.76K"
+      },
+      "system": {
+        "slug": "big-ninja",
+        "section": "Big",
+        "sortOrder": 137,
+        "image": "/Slime%20RNG/Slimes/ninja.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Ninja",
+        "family": "Ninja",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 1.26B",
+        "power": "2.3K",
+        "health": "6.9K"
+      },
+      "system": {
+        "slug": "huge-ninja",
+        "section": "Huge",
+        "sortOrder": 138,
+        "image": "/Slime%20RNG/Slimes/ninja.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ninja",
+        "family": "Ninja",
+        "variant": "Shiny",
+        "rarity": "Secret",
+        "odds": "1 / 316M",
+        "power": "1.38K",
+        "health": "4.14K"
+      },
+      "system": {
+        "slug": "shiny-ninja",
+        "section": "Shiny",
+        "sortOrder": 139,
+        "image": "/Slime%20RNG/Slimes/shiny-ninja.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Ninja",
+        "family": "Ninja",
+        "variant": "Inverted",
+        "rarity": "Secret",
+        "odds": "1 / 3.16B",
+        "power": "2.99K",
+        "health": "8.97K"
+      },
+      "system": {
+        "slug": "inverted-ninja",
+        "section": "Inverted",
+        "sortOrder": 140,
+        "image": "/Slime%20RNG/Slimes/ninja.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Buzz",
+        "family": "Buzz",
+        "variant": "Base",
+        "rarity": "Prismatic",
+        "odds": "1 / 2.15M",
+        "power": "270",
+        "health": "810"
+      },
+      "system": {
+        "slug": "buzz",
+        "section": "Base",
+        "sortOrder": 141,
+        "image": "/Slime%20RNG/Slimes/buzz.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Buzz",
+        "family": "Buzz",
+        "variant": "Big",
+        "rarity": "Ethereal",
+        "odds": "1 / 215M",
+        "power": "1.08K",
+        "health": "3.24K"
+      },
+      "system": {
+        "slug": "big-buzz",
+        "section": "Big",
+        "sortOrder": 142,
+        "image": "/Slime%20RNG/Slimes/buzz.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Buzz",
+        "family": "Buzz",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 2.15B",
+        "power": "2.7K",
+        "health": "8.1K"
+      },
+      "system": {
+        "slug": "huge-buzz",
+        "section": "Huge",
+        "sortOrder": 143,
+        "image": "/Slime%20RNG/Slimes/buzz.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Buzz",
+        "family": "Buzz",
+        "variant": "Shiny",
+        "rarity": "Secret",
+        "odds": "1 / 538M",
+        "power": "1.62K",
+        "health": "4.86K"
+      },
+      "system": {
+        "slug": "shiny-buzz",
+        "section": "Shiny",
+        "sortOrder": 144,
+        "image": "/Slime%20RNG/Slimes/shiny-buzz.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Buzz",
+        "family": "Buzz",
+        "variant": "Inverted",
+        "rarity": "Celestial",
+        "odds": "1 / 5.38B",
+        "power": "3.51K",
+        "health": "10.5K"
+      },
+      "system": {
+        "slug": "inverted-buzz",
+        "section": "Inverted",
+        "sortOrder": 145,
+        "image": "/Slime%20RNG/Slimes/buzz.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stormy",
+        "family": "Stormy",
+        "variant": "Base",
+        "rarity": "Prismatic",
+        "odds": "1 / 3.07M",
+        "power": "291",
+        "health": "870"
+      },
+      "system": {
+        "slug": "stormy",
+        "section": "Base",
+        "sortOrder": 146,
+        "image": "/Slime%20RNG/Slimes/stormy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Stormy",
+        "family": "Stormy",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 307M",
+        "power": "1.16K",
+        "health": "3.48K"
+      },
+      "system": {
+        "slug": "big-stormy",
+        "section": "Big",
+        "sortOrder": 147,
+        "image": "/Slime%20RNG/Slimes/stormy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Stormy",
+        "family": "Stormy",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 3.07B",
+        "power": "2.91K",
+        "health": "8.7K"
+      },
+      "system": {
+        "slug": "huge-stormy",
+        "section": "Huge",
+        "sortOrder": 148,
+        "image": "/Slime%20RNG/Slimes/stormy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Stormy",
+        "family": "Stormy",
+        "variant": "Shiny",
+        "rarity": "Secret",
+        "odds": "1 / 769M",
+        "power": "1.75K",
+        "health": "5.22K"
+      },
+      "system": {
+        "slug": "shiny-stormy",
+        "section": "Shiny",
+        "sortOrder": 149,
+        "image": "/Slime%20RNG/Slimes/shiny-stormy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Stormy",
+        "family": "Stormy",
+        "variant": "Inverted",
+        "rarity": "Celestial",
+        "odds": "1 / 7.69B",
+        "power": "3.78K",
+        "health": "11.3K"
+      },
+      "system": {
+        "slug": "inverted-stormy",
+        "section": "Inverted",
+        "sortOrder": 150,
+        "image": "/Slime%20RNG/Slimes/stormy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Geode",
+        "family": "Geode",
+        "variant": "Base",
+        "rarity": "Prismatic",
+        "odds": "1 / 3.11M",
+        "power": "300",
+        "health": "900"
+      },
+      "system": {
+        "slug": "geode",
+        "section": "Base",
+        "sortOrder": 151,
+        "image": "/Slime%20RNG/Slimes/geode.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Geode",
+        "family": "Geode",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 311M",
+        "power": "1.20K",
+        "health": "3.60K"
+      },
+      "system": {
+        "slug": "big-geode",
+        "section": "Big",
+        "sortOrder": 152,
+        "image": "/Slime%20RNG/Slimes/geode.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Geode",
+        "family": "Geode",
+        "variant": "Huge",
+        "rarity": "Secret",
+        "odds": "1 / 3.11B",
+        "power": "3K",
+        "health": "9K"
+      },
+      "system": {
+        "slug": "huge-geode",
+        "section": "Huge",
+        "sortOrder": 153,
+        "image": "/Slime%20RNG/Slimes/geode.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Geode",
+        "family": "Geode",
+        "variant": "Shiny",
+        "rarity": "Secret",
+        "odds": "1 / 779M",
+        "power": "1.8K",
+        "health": "5.40K"
+      },
+      "system": {
+        "slug": "shiny-geode",
+        "section": "Shiny",
+        "sortOrder": 154,
+        "image": "/Slime%20RNG/Slimes/shiny-geode.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Geode",
+        "family": "Geode",
+        "variant": "Inverted",
+        "rarity": "Celestial",
+        "odds": "1 / 5.86B",
+        "power": "3.9K",
+        "health": "11.7K"
+      },
+      "system": {
+        "slug": "inverted-geode",
+        "section": "Inverted",
+        "sortOrder": 155,
+        "image": "/Slime%20RNG/Slimes/geode.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bucky",
+        "family": "Bucky",
+        "variant": "Base",
+        "rarity": "Transcendent",
+        "odds": "1 / 4.78M",
+        "power": "333",
+        "health": "999"
+      },
+      "system": {
+        "slug": "bucky",
+        "section": "Base",
+        "sortOrder": 156,
+        "image": "/Slime%20RNG/Slimes/bucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Bucky",
+        "family": "Bucky",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 478M",
+        "power": "1.33K",
+        "health": "4K"
+      },
+      "system": {
+        "slug": "big-bucky",
+        "section": "Big",
+        "sortOrder": 157,
+        "image": "/Slime%20RNG/Slimes/bucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Bucky",
+        "family": "Bucky",
+        "variant": "Huge",
+        "rarity": "Celestial",
+        "odds": "1 / 4.78B",
+        "power": "3.33K",
+        "health": "9.99K"
+      },
+      "system": {
+        "slug": "huge-bucky",
+        "section": "Huge",
+        "sortOrder": 158,
+        "image": "/Slime%20RNG/Slimes/bucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Bucky",
+        "family": "Bucky",
+        "variant": "Shiny",
+        "rarity": "Secret",
+        "odds": "1 / 1.19B",
+        "power": "2K",
+        "health": "5.99K"
+      },
+      "system": {
+        "slug": "shiny-bucky",
+        "section": "Shiny",
+        "sortOrder": 159,
+        "image": "/Slime%20RNG/Slimes/shiny-bucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Bucky",
+        "family": "Bucky",
+        "variant": "Inverted",
+        "rarity": "Celestial",
+        "odds": "1 / 11.9B",
+        "power": "4.33K",
+        "health": "13K"
+      },
+      "system": {
+        "slug": "inverted-bucky",
+        "section": "Inverted",
+        "sortOrder": 160,
+        "image": "/Slime%20RNG/Slimes/bucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pokey",
+        "family": "Pokey",
+        "variant": "Base",
+        "rarity": "Transcendent",
+        "odds": "1 / 7.18M",
+        "power": "371",
+        "health": "1.11K"
+      },
+      "system": {
+        "slug": "pokey",
+        "section": "Base",
+        "sortOrder": 161,
+        "image": "/Slime%20RNG/Slimes/pokey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Pokey",
+        "family": "Pokey",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 718M",
+        "power": "1.48K",
+        "health": "4.44K"
+      },
+      "system": {
+        "slug": "big-pokey",
+        "section": "Big",
+        "sortOrder": 162,
+        "image": "/Slime%20RNG/Slimes/pokey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Pokey",
+        "family": "Pokey",
+        "variant": "Huge",
+        "rarity": "Celestial",
+        "odds": "1 / 7.18B",
+        "power": "3.71K",
+        "health": "11.1K"
+      },
+      "system": {
+        "slug": "huge-pokey",
+        "section": "Huge",
+        "sortOrder": 163,
+        "image": "/Slime%20RNG/Slimes/pokey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Pokey",
+        "family": "Pokey",
+        "variant": "Shiny",
+        "rarity": "Secret",
+        "odds": "1 / 1.79B",
+        "power": "2.23K",
+        "health": "6.66K"
+      },
+      "system": {
+        "slug": "shiny-pokey",
+        "section": "Shiny",
+        "sortOrder": 164,
+        "image": "/Slime%20RNG/Slimes/shiny-pokey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Pokey",
+        "family": "Pokey",
+        "variant": "Inverted",
+        "rarity": "Celestial",
+        "odds": "1 / 17.9B",
+        "power": "4.82K",
+        "health": "14.4K"
+      },
+      "system": {
+        "slug": "inverted-pokey",
+        "section": "Inverted",
+        "sortOrder": 165,
+        "image": "/Slime%20RNG/Slimes/pokey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "SlimeSlime",
+        "family": "SlimeSlime",
+        "variant": "Base",
+        "rarity": "Transcendent",
+        "odds": "1 / 10.7M",
+        "power": "419",
+        "health": "1.25K"
+      },
+      "system": {
+        "slug": "slimeslime",
+        "section": "Base",
+        "sortOrder": 166,
+        "image": "/Slime%20RNG/Slimes/slimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big SlimeSlime",
+        "family": "SlimeSlime",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 1.07B",
+        "power": "1.68K",
+        "health": "5K"
+      },
+      "system": {
+        "slug": "big-slimeslime",
+        "section": "Big",
+        "sortOrder": 167,
+        "image": "/Slime%20RNG/Slimes/slimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge SlimeSlime",
+        "family": "SlimeSlime",
+        "variant": "Huge",
+        "rarity": "Celestial",
+        "odds": "1 / 10.7B",
+        "power": "4.19K",
+        "health": "12.5K"
+      },
+      "system": {
+        "slug": "huge-slimeslime",
+        "section": "Huge",
+        "sortOrder": 168,
+        "image": "/Slime%20RNG/Slimes/slimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny SlimeSlime",
+        "family": "SlimeSlime",
+        "variant": "Shiny",
+        "rarity": "Secret",
+        "odds": "1 / 2.69B",
+        "power": "2.51K",
+        "health": "7.5K"
+      },
+      "system": {
+        "slug": "shiny-slimeslime",
+        "section": "Shiny",
+        "sortOrder": 169,
+        "image": "/Slime%20RNG/Slimes/shiny-ss.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted SlimeSlime",
+        "family": "SlimeSlime",
+        "variant": "Inverted",
+        "rarity": "Celestial",
+        "odds": "1 / 26.9B",
+        "power": "5.45K",
+        "health": "16.2K"
+      },
+      "system": {
+        "slug": "inverted-slimeslime",
+        "section": "Inverted",
+        "sortOrder": 170,
+        "image": "/Slime%20RNG/Slimes/slimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Unicorn",
+        "family": "Unicorn",
+        "variant": "Base",
+        "rarity": "Transcendent",
+        "odds": "1 / 17.9M",
+        "power": "508",
+        "health": "1.52K"
+      },
+      "system": {
+        "slug": "unicorn",
+        "section": "Base",
+        "sortOrder": 171,
+        "image": "/Slime%20RNG/Slimes/unicorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Unicorn",
+        "family": "Unicorn",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 1.79B",
+        "power": "2.03K",
+        "health": "6.08K"
+      },
+      "system": {
+        "slug": "big-unicorn",
+        "section": "Big",
+        "sortOrder": 172,
+        "image": "/Slime%20RNG/Slimes/unicorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Unicorn",
+        "family": "Unicorn",
+        "variant": "Huge",
+        "rarity": "Celestial",
+        "odds": "1 / 17.9B",
+        "power": "5.08K",
+        "health": "15.2K"
+      },
+      "system": {
+        "slug": "huge-unicorn",
+        "section": "Huge",
+        "sortOrder": 173,
+        "image": "/Slime%20RNG/Slimes/unicorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Unicorn",
+        "family": "Unicorn",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 4.48B",
+        "power": "3.05K",
+        "health": "9.12K"
+      },
+      "system": {
+        "slug": "shiny-unicorn",
+        "section": "Shiny",
+        "sortOrder": 174,
+        "image": "/Slime%20RNG/Slimes/shiny-unicorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Unicorn",
+        "family": "Unicorn",
+        "variant": "Inverted",
+        "rarity": "Celestial",
+        "odds": "1 / 44.8B",
+        "power": "6.6K",
+        "health": "19.8K"
+      },
+      "system": {
+        "slug": "inverted-unicorn",
+        "section": "Inverted",
+        "sortOrder": 175,
+        "image": "/Slime%20RNG/Slimes/unicorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wizzy",
+        "family": "Wizzy",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 26.9M",
+        "power": "612",
+        "health": "1.83K"
+      },
+      "system": {
+        "slug": "wizzy",
+        "section": "Base",
+        "sortOrder": 176,
+        "image": "/Slime%20RNG/Slimes/wizzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Wizzy",
+        "family": "Wizzy",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 2.69B",
+        "power": "2.45K",
+        "health": "7.32K"
+      },
+      "system": {
+        "slug": "big-wizzy",
+        "section": "Big",
+        "sortOrder": 177,
+        "image": "/Slime%20RNG/Slimes/wizzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Wizzy",
+        "family": "Wizzy",
+        "variant": "Huge",
+        "rarity": "Celestial",
+        "odds": "1 / 26.9B",
+        "power": "6.12K",
+        "health": "18.3K"
+      },
+      "system": {
+        "slug": "huge-wizzy",
+        "section": "Huge",
+        "sortOrder": 178,
+        "image": "/Slime%20RNG/Slimes/wizzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Wizzy",
+        "family": "Wizzy",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 6.73B",
+        "power": "3.67K",
+        "health": "11K"
+      },
+      "system": {
+        "slug": "shiny-wizzy",
+        "section": "Shiny",
+        "sortOrder": 179,
+        "image": "/Slime%20RNG/Slimes/shiny-wizzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Wizzy",
+        "family": "Wizzy",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 67.3B",
+        "power": "7.96K",
+        "health": "23.8K"
+      },
+      "system": {
+        "slug": "inverted-wizzy",
+        "section": "Inverted",
+        "sortOrder": 180,
+        "image": "/Slime%20RNG/Slimes/wizzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Petal",
+        "family": "Petal",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 39.1M",
+        "power": "734",
+        "health": "2.30K"
+      },
+      "system": {
+        "slug": "petal",
+        "section": "Base",
+        "sortOrder": 181,
+        "image": "/Slime%20RNG/Slimes/petal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Petal",
+        "family": "Petal",
+        "variant": "Big",
+        "rarity": "Secret",
+        "odds": "1 / 3.91B",
+        "power": "2.94K",
+        "health": "9.2K"
+      },
+      "system": {
+        "slug": "big-petal",
+        "section": "Big",
+        "sortOrder": 182,
+        "image": "/Slime%20RNG/Slimes/petal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Petal",
+        "family": "Petal",
+        "variant": "Huge",
+        "rarity": "Celestial",
+        "odds": "1 / 39.1B",
+        "power": "7.34K",
+        "health": "23K"
+      },
+      "system": {
+        "slug": "huge-petal",
+        "section": "Huge",
+        "sortOrder": 183,
+        "image": "/Slime%20RNG/Slimes/petal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Petal",
+        "family": "Petal",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 9.79B",
+        "power": "4.4K",
+        "health": "13.8K"
+      },
+      "system": {
+        "slug": "shiny-petal",
+        "section": "Shiny",
+        "sortOrder": 184,
+        "image": "/Slime%20RNG/Slimes/shiny-petal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Petal",
+        "family": "Petal",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 97.9B",
+        "power": "9.54K",
+        "health": "29.9K"
+      },
+      "system": {
+        "slug": "inverted-petal",
+        "section": "Inverted",
+        "sortOrder": 185,
+        "image": "/Slime%20RNG/Slimes/petal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "SlimeSlimeSlime",
+        "family": "SlimeSlimeSlime",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 42.9M",
+        "power": "676",
+        "health": "2.02K"
+      },
+      "system": {
+        "slug": "slimeslimeslime",
+        "section": "Base",
+        "sortOrder": 186,
+        "image": "/Slime%20RNG/Slimes/slimeslimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big SlimeSlimeSlime",
+        "family": "SlimeSlimeSlime",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 4.29B",
+        "power": "2.70K",
+        "health": "8.11K"
+      },
+      "system": {
+        "slug": "big-slimeslimeslime",
+        "section": "Big",
+        "sortOrder": 187,
+        "image": "/Slime%20RNG/Slimes/slimeslimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge SlimeSlimeSlime",
+        "family": "SlimeSlimeSlime",
+        "variant": "Huge",
+        "rarity": "Celestial",
+        "odds": "1 / 42.9B",
+        "power": "6.76K",
+        "health": "20.2K"
+      },
+      "system": {
+        "slug": "huge-slimeslimeslime",
+        "section": "Huge",
+        "sortOrder": 188,
+        "image": "/Slime%20RNG/Slimes/slimeslimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny SlimeSlimeSlime",
+        "family": "SlimeSlimeSlime",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 10.7B",
+        "power": "4.06K",
+        "health": "12.1K"
+      },
+      "system": {
+        "slug": "shiny-slimeslimeslime",
+        "section": "Shiny",
+        "sortOrder": 189,
+        "image": "/Slime%20RNG/Slimes/shiny-sss.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted SlimeSlimeSlime",
+        "family": "SlimeSlimeSlime",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 80.8B",
+        "power": "8.79K",
+        "health": "26.3K"
+      },
+      "system": {
+        "slug": "inverted-slimeslimeslime",
+        "section": "Inverted",
+        "sortOrder": 190,
+        "image": "/Slime%20RNG/Slimes/slimeslimeslime.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shelly",
+        "family": "Shelly",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 61.5M",
+        "power": "880",
+        "health": "2.64K"
+      },
+      "system": {
+        "slug": "shelly",
+        "section": "Base",
+        "sortOrder": 191,
+        "image": "/Slime%20RNG/Slimes/shelly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Shelly",
+        "family": "Shelly",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 6.15B",
+        "power": "3.52K",
+        "health": "10.6K"
+      },
+      "system": {
+        "slug": "big-shelly",
+        "section": "Big",
+        "sortOrder": 192,
+        "image": "/Slime%20RNG/Slimes/shelly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Shelly",
+        "family": "Shelly",
+        "variant": "Huge",
+        "rarity": "Astral",
+        "odds": "1 / 61.5B",
+        "power": "8.8K",
+        "health": "26.4K"
+      },
+      "system": {
+        "slug": "huge-shelly",
+        "section": "Huge",
+        "sortOrder": 193,
+        "image": "/Slime%20RNG/Slimes/shelly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Shelly",
+        "family": "Shelly",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 15.3B",
+        "power": "5.28K",
+        "health": "15.8K"
+      },
+      "system": {
+        "slug": "shiny-shelly",
+        "section": "Shiny",
+        "sortOrder": 194,
+        "image": "/Slime%20RNG/Slimes/shiny-shelly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Shelly",
+        "family": "Shelly",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 153B",
+        "power": "11.4K",
+        "health": "34.3K"
+      },
+      "system": {
+        "slug": "inverted-shelly",
+        "section": "Inverted",
+        "sortOrder": 195,
+        "image": "/Slime%20RNG/Slimes/shelly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Derpy",
+        "family": "Derpy",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 89.7M",
+        "power": "1.05K",
+        "health": "3.15K"
+      },
+      "system": {
+        "slug": "derpy",
+        "section": "Base",
+        "sortOrder": 196,
+        "image": "/Slime%20RNG/Slimes/derpy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Derpy",
+        "family": "Derpy",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 8.97B",
+        "power": "4.2K",
+        "health": "12.6K"
+      },
+      "system": {
+        "slug": "big-derpy",
+        "section": "Big",
+        "sortOrder": 197,
+        "image": "/Slime%20RNG/Slimes/derpy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Derpy",
+        "family": "Derpy",
+        "variant": "Huge",
+        "rarity": "Astral",
+        "odds": "1 / 89.7B",
+        "power": "10.5K",
+        "health": "31.5K"
+      },
+      "system": {
+        "slug": "huge-derpy",
+        "section": "Huge",
+        "sortOrder": 198,
+        "image": "/Slime%20RNG/Slimes/derpy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Derpy",
+        "family": "Derpy",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 22.4B",
+        "power": "6.3K",
+        "health": "18.9K"
+      },
+      "system": {
+        "slug": "shiny-derpy",
+        "section": "Shiny",
+        "sortOrder": 199,
+        "image": "/Slime%20RNG/Slimes/shiny-derpy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Derpy",
+        "family": "Derpy",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 224B",
+        "power": "13.7K",
+        "health": "41K"
+      },
+      "system": {
+        "slug": "inverted-derpy",
+        "section": "Inverted",
+        "sortOrder": 200,
+        "image": "/Slime%20RNG/Slimes/derpy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Octo",
+        "family": "Octo",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 134M",
+        "power": "1.26K",
+        "health": "3.78K"
+      },
+      "system": {
+        "slug": "octo",
+        "section": "Base",
+        "sortOrder": 201,
+        "image": "/Slime%20RNG/Slimes/octo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Octo",
+        "family": "Octo",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 13.4B",
+        "power": "5.04K",
+        "health": "15.1K"
+      },
+      "system": {
+        "slug": "big-octo",
+        "section": "Big",
+        "sortOrder": 202,
+        "image": "/Slime%20RNG/Slimes/octo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Octo",
+        "family": "Octo",
+        "variant": "Huge",
+        "rarity": "Astral",
+        "odds": "1 / 134B",
+        "power": "12.6K",
+        "health": "37.8K"
+      },
+      "system": {
+        "slug": "huge-octo",
+        "section": "Huge",
+        "sortOrder": 203,
+        "image": "/Slime%20RNG/Slimes/octo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Octo",
+        "family": "Octo",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 33.6B",
+        "power": "7.56K",
+        "health": "22.7K"
+      },
+      "system": {
+        "slug": "shiny-octo",
+        "section": "Shiny",
+        "sortOrder": 204,
+        "image": "/Slime%20RNG/Slimes/shiny-octo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Octo",
+        "family": "Octo",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 336B",
+        "power": "16.4K",
+        "health": "49.1K"
+      },
+      "system": {
+        "slug": "inverted-octo",
+        "section": "Inverted",
+        "sortOrder": 205,
+        "image": "/Slime%20RNG/Slimes/octo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Puffy",
+        "family": "Puffy",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 195M",
+        "power": "1.40K",
+        "health": "4.20K"
+      },
+      "system": {
+        "slug": "puffy",
+        "section": "Base",
+        "sortOrder": 206,
+        "image": "/Slime%20RNG/Slimes/puffy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Puffy",
+        "family": "Puffy",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 14.6B",
+        "power": "5.6K",
+        "health": "16.8K"
+      },
+      "system": {
+        "slug": "big-puffy",
+        "section": "Big",
+        "sortOrder": 207,
+        "image": "/Slime%20RNG/Slimes/puffy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Puffy",
+        "family": "Puffy",
+        "variant": "Huge",
+        "rarity": "Astral",
+        "odds": "1 / 146B",
+        "power": "14K",
+        "health": "42K"
+      },
+      "system": {
+        "slug": "huge-puffy",
+        "section": "Huge",
+        "sortOrder": 208,
+        "image": "/Slime%20RNG/Slimes/puffy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Puffy",
+        "family": "Puffy",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 36.7B",
+        "power": "8.4K",
+        "health": "25.2K"
+      },
+      "system": {
+        "slug": "shiny-puffy",
+        "section": "Shiny",
+        "sortOrder": 209,
+        "image": "/Slime%20RNG/Slimes/shiny-puffy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Puffy",
+        "family": "Puffy",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 367B",
+        "power": "18.2K",
+        "health": "54.6K"
+      },
+      "system": {
+        "slug": "inverted-puffy",
+        "section": "Inverted",
+        "sortOrder": 210,
+        "image": "/Slime%20RNG/Slimes/puffy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Halo",
+        "family": "Halo",
+        "variant": "Base",
+        "rarity": "Ethereal",
+        "odds": "1 / 195M",
+        "power": "1.51K",
+        "health": "4.50K"
+      },
+      "system": {
+        "slug": "halo",
+        "section": "Base",
+        "sortOrder": 211,
+        "image": "/Slime%20RNG/Slimes/halo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Halo",
+        "family": "Halo",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 19.5B",
+        "power": "6.04K",
+        "health": "18K"
+      },
+      "system": {
+        "slug": "big-halo",
+        "section": "Big",
+        "sortOrder": 212,
+        "image": "/Slime%20RNG/Slimes/halo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Halo",
+        "family": "Halo",
+        "variant": "Huge",
+        "rarity": "Astral",
+        "odds": "1 / 195B",
+        "power": "15.1K",
+        "health": "45K"
+      },
+      "system": {
+        "slug": "huge-halo",
+        "section": "Huge",
+        "sortOrder": 213,
+        "image": "/Slime%20RNG/Slimes/halo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Halo",
+        "family": "Halo",
+        "variant": "Shiny",
+        "rarity": "Celestial",
+        "odds": "1 / 48.9B",
+        "power": "9.06K",
+        "health": "27K"
+      },
+      "system": {
+        "slug": "shiny-halo",
+        "section": "Shiny",
+        "sortOrder": 214,
+        "image": "/Slime%20RNG/Slimes/shiny-halo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Halo",
+        "family": "Halo",
+        "variant": "Inverted",
+        "rarity": "Astral",
+        "odds": "1 / 489B",
+        "power": "19.6K",
+        "health": "58.5K"
+      },
+      "system": {
+        "slug": "inverted-halo",
+        "section": "Inverted",
+        "sortOrder": 215,
+        "image": "/Slime%20RNG/Slimes/halo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bomber",
+        "family": "Bomber",
+        "variant": "Base",
+        "rarity": "Secret",
+        "odds": "1 / 307M",
+        "power": "1.81K",
+        "health": "5.43K"
+      },
+      "system": {
+        "slug": "bomber",
+        "section": "Base",
+        "sortOrder": 216,
+        "image": "/Slime%20RNG/Slimes/bomber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Bomber",
+        "family": "Bomber",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 30.7B",
+        "power": "7.24K",
+        "health": "21.7K"
+      },
+      "system": {
+        "slug": "big-bomber",
+        "section": "Big",
+        "sortOrder": 217,
+        "image": "/Slime%20RNG/Slimes/bomber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Bomber",
+        "family": "Bomber",
+        "variant": "Huge",
+        "rarity": "Astral",
+        "odds": "1 / 307B",
+        "power": "18.1K",
+        "health": "54.3K"
+      },
+      "system": {
+        "slug": "huge-bomber",
+        "section": "Huge",
+        "sortOrder": 218,
+        "image": "/Slime%20RNG/Slimes/bomber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Bomber",
+        "family": "Bomber",
+        "variant": "Shiny",
+        "rarity": "Astral",
+        "odds": "1 / 76.9B",
+        "power": "10.9K",
+        "health": "32.6K"
+      },
+      "system": {
+        "slug": "shiny-bomber",
+        "section": "Shiny",
+        "sortOrder": 219,
+        "image": "/Slime%20RNG/Slimes/shiny-bomber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Bomber",
+        "family": "Bomber",
+        "variant": "Inverted",
+        "rarity": "Nova",
+        "odds": "1 / 769B",
+        "power": "23.5K",
+        "health": "70.6K"
+      },
+      "system": {
+        "slug": "inverted-bomber",
+        "section": "Inverted",
+        "sortOrder": 220,
+        "image": "/Slime%20RNG/Slimes/bomber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO",
+        "family": "UFO",
+        "variant": "Base",
+        "rarity": "Secret",
+        "odds": "1 / 478M",
+        "power": "2.17K",
+        "health": "6.51K"
+      },
+      "system": {
+        "slug": "ufo",
+        "section": "Base",
+        "sortOrder": 221,
+        "image": "/Slime%20RNG/Slimes/ufo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big UFO",
+        "family": "UFO",
+        "variant": "Big",
+        "rarity": "Celestial",
+        "odds": "1 / 47.8B",
+        "power": "8.68K",
+        "health": "26K"
+      },
+      "system": {
+        "slug": "big-ufo",
+        "section": "Big",
+        "sortOrder": 222,
+        "image": "/Slime%20RNG/Slimes/ufo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge UFO",
+        "family": "UFO",
+        "variant": "Huge",
+        "rarity": "Astral",
+        "odds": "1 / 478B",
+        "power": "21.7K",
+        "health": "65.1K"
+      },
+      "system": {
+        "slug": "huge-ufo",
+        "section": "Huge",
+        "sortOrder": 223,
+        "image": "/Slime%20RNG/Slimes/ufo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny UFO",
+        "family": "UFO",
+        "variant": "Shiny",
+        "rarity": "Astral",
+        "odds": "1 / 119B",
+        "power": "13K",
+        "health": "39.1K"
+      },
+      "system": {
+        "slug": "shiny-ufo",
+        "section": "Shiny",
+        "sortOrder": 224,
+        "image": "/Slime%20RNG/Slimes/shiny-ufo-1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted UFO",
+        "family": "UFO",
+        "variant": "Inverted",
+        "rarity": "Nova",
+        "odds": "1 / 1.19T",
+        "power": "28.2K",
+        "health": "84.6K"
+      },
+      "system": {
+        "slug": "inverted-ufo",
+        "section": "Inverted",
+        "sortOrder": 225,
+        "image": "/Slime%20RNG/Slimes/ufo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Witchy",
+        "family": "Witchy",
+        "variant": "Base",
+        "rarity": "Secret",
+        "odds": "1 / 718M",
+        "power": "2.60K",
+        "health": "7.80K"
+      },
+      "system": {
+        "slug": "witchy",
+        "section": "Base",
+        "sortOrder": 226,
+        "image": "/Slime%20RNG/Slimes/witchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Witchy",
+        "family": "Witchy",
+        "variant": "Big",
+        "rarity": "Astral",
+        "odds": "1 / 71.8B",
+        "power": "10.4K",
+        "health": "31.2K"
+      },
+      "system": {
+        "slug": "big-witchy",
+        "section": "Big",
+        "sortOrder": 227,
+        "image": "/Slime%20RNG/Slimes/witchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Witchy",
+        "family": "Witchy",
+        "variant": "Huge",
+        "rarity": "Nova",
+        "odds": "1 / 718B",
+        "power": "26K",
+        "health": "78K"
+      },
+      "system": {
+        "slug": "huge-witchy",
+        "section": "Huge",
+        "sortOrder": 228,
+        "image": "/Slime%20RNG/Slimes/witchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Witchy",
+        "family": "Witchy",
+        "variant": "Shiny",
+        "rarity": "Astral",
+        "odds": "1 / 179B",
+        "power": "15.6K",
+        "health": "46.8K"
+      },
+      "system": {
+        "slug": "shiny-witchy",
+        "section": "Shiny",
+        "sortOrder": 229,
+        "image": "/Slime%20RNG/Slimes/shiny-witchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Witchy",
+        "family": "Witchy",
+        "variant": "Inverted",
+        "rarity": "Nova",
+        "odds": "1 / 1.79T",
+        "power": "33.8K",
+        "health": "101K"
+      },
+      "system": {
+        "slug": "inverted-witchy",
+        "section": "Inverted",
+        "sortOrder": 230,
+        "image": "/Slime%20RNG/Slimes/witchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blackhole",
+        "family": "Blackhole",
+        "variant": "Base",
+        "rarity": "Secret",
+        "odds": "1 / 1.07B",
+        "power": "3.12K",
+        "health": "9.36K"
+      },
+      "system": {
+        "slug": "blackhole",
+        "section": "Base",
+        "sortOrder": 231,
+        "image": "/Slime%20RNG/Slimes/blackhole.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Blackhole",
+        "family": "Blackhole",
+        "variant": "Big",
+        "rarity": "Astral",
+        "odds": "1 / 107B",
+        "power": "12.5K",
+        "health": "37.4K"
+      },
+      "system": {
+        "slug": "big-blackhole",
+        "section": "Big",
+        "sortOrder": 232,
+        "image": "/Slime%20RNG/Slimes/blackhole.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Blackhole",
+        "family": "Blackhole",
+        "variant": "Huge",
+        "rarity": "Nova",
+        "odds": "1 / 1.07T",
+        "power": "31.2K",
+        "health": "93.6K"
+      },
+      "system": {
+        "slug": "huge-blackhole",
+        "section": "Huge",
+        "sortOrder": 233,
+        "image": "/Slime%20RNG/Slimes/blackhole.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Blackhole",
+        "family": "Blackhole",
+        "variant": "Shiny",
+        "rarity": "Astral",
+        "odds": "1 / 269B",
+        "power": "18.7K",
+        "health": "56.2K"
+      },
+      "system": {
+        "slug": "shiny-blackhole",
+        "section": "Shiny",
+        "sortOrder": 234,
+        "image": "/Slime%20RNG/Slimes/shiny-blackhole.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Blackhole",
+        "family": "Blackhole",
+        "variant": "Inverted",
+        "rarity": "Nova",
+        "odds": "1 / 2.69T",
+        "power": "40.6K",
+        "health": "122K"
+      },
+      "system": {
+        "slug": "inverted-blackhole",
+        "section": "Inverted",
+        "sortOrder": 235,
+        "image": "/Slime%20RNG/Slimes/blackhole.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ember",
+        "family": "Ember",
+        "variant": "Base",
+        "rarity": "Secret",
+        "odds": "1 / 1.72B",
+        "power": "3.74K",
+        "health": "11.2K"
+      },
+      "system": {
+        "slug": "ember",
+        "section": "Base",
+        "sortOrder": 236,
+        "image": "/Slime%20RNG/Slimes/ember.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Ember",
+        "family": "Ember",
+        "variant": "Big",
+        "rarity": "Astral",
+        "odds": "1 / 172B",
+        "power": "15K",
+        "health": "44.8K"
+      },
+      "system": {
+        "slug": "big-ember",
+        "section": "Big",
+        "sortOrder": 237,
+        "image": "/Slime%20RNG/Slimes/ember.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Ember",
+        "family": "Ember",
+        "variant": "Huge",
+        "rarity": "Nova",
+        "odds": "1 / 1.72T",
+        "power": "37.4K",
+        "health": "112K"
+      },
+      "system": {
+        "slug": "huge-ember",
+        "section": "Huge",
+        "sortOrder": 238,
+        "image": "/Slime%20RNG/Slimes/ember.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ember",
+        "family": "Ember",
+        "variant": "Shiny",
+        "rarity": "Astral",
+        "odds": "1 / 430B",
+        "power": "22.4K",
+        "health": "67.2K"
+      },
+      "system": {
+        "slug": "shiny-ember",
+        "section": "Shiny",
+        "sortOrder": 239,
+        "image": "/Slime%20RNG/Slimes/shiny-ember.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Ember",
+        "family": "Ember",
+        "variant": "Inverted",
+        "rarity": "Nova",
+        "odds": "1 / 4.30T",
+        "power": "48.6K",
+        "health": "146K"
+      },
+      "system": {
+        "slug": "inverted-ember",
+        "section": "Inverted",
+        "sortOrder": 240,
+        "image": "/Slime%20RNG/Slimes/ember.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Astro",
+        "family": "Astro",
+        "variant": "Base",
+        "rarity": "Secret",
+        "odds": "1 / 2.47B",
+        "power": "4.10K",
+        "health": "12.3K"
+      },
+      "system": {
+        "slug": "astro",
+        "section": "Base",
+        "sortOrder": 241,
+        "image": "/Slime%20RNG/Slimes/astro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Astro",
+        "family": "Astro",
+        "variant": "Big",
+        "rarity": "Astral",
+        "odds": "1 / 186B",
+        "power": "16.4K",
+        "health": "49.2K"
+      },
+      "system": {
+        "slug": "big-astro",
+        "section": "Big",
+        "sortOrder": 242,
+        "image": "/Slime%20RNG/Slimes/astro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Astro",
+        "family": "Astro",
+        "variant": "Huge",
+        "rarity": "Nova",
+        "odds": "1 / 1.86T",
+        "power": "41K",
+        "health": "123K"
+      },
+      "system": {
+        "slug": "huge-astro",
+        "section": "Huge",
+        "sortOrder": 243,
+        "image": "/Slime%20RNG/Slimes/astro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Astro",
+        "family": "Astro",
+        "variant": "Shiny",
+        "rarity": "Astral",
+        "odds": "1 / 465B",
+        "power": "24.6K",
+        "health": "73.8K"
+      },
+      "system": {
+        "slug": "shiny-astro",
+        "section": "Shiny",
+        "sortOrder": 244,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Astro",
+        "family": "Astro",
+        "variant": "Inverted",
+        "rarity": "Nova",
+        "odds": "1 / 4.65T",
+        "power": "53.3K",
+        "health": "160K"
+      },
+      "system": {
+        "slug": "inverted-astro",
+        "section": "Inverted",
+        "sortOrder": 245,
+        "image": "/Slime%20RNG/Slimes/astro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin",
+        "family": "Pumpkin",
+        "variant": "Base",
+        "rarity": "Secret",
+        "odds": "1 / 2.77B",
+        "power": "4.49K",
+        "health": "13.5K"
+      },
+      "system": {
+        "slug": "pumpkin",
+        "section": "Base",
+        "sortOrder": 246,
+        "image": "/Slime%20RNG/Slimes/pumpkin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Pumpkin",
+        "family": "Pumpkin",
+        "variant": "Big",
+        "rarity": "Astral",
+        "odds": "1 / 277B",
+        "power": "18K",
+        "health": "54K"
+      },
+      "system": {
+        "slug": "big-pumpkin",
+        "section": "Big",
+        "sortOrder": 247,
+        "image": "/Slime%20RNG/Slimes/pumpkin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Pumpkin",
+        "family": "Pumpkin",
+        "variant": "Huge",
+        "rarity": "Nova",
+        "odds": "1 / 2.77T",
+        "power": "44.9K",
+        "health": "135K"
+      },
+      "system": {
+        "slug": "huge-pumpkin",
+        "section": "Huge",
+        "sortOrder": 248,
+        "image": "/Slime%20RNG/Slimes/pumpkin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Pumpkin",
+        "family": "Pumpkin",
+        "variant": "Shiny",
+        "rarity": "Nova",
+        "odds": "1 / 693B",
+        "power": "26.9K",
+        "health": "81K"
+      },
+      "system": {
+        "slug": "shiny-pumpkin",
+        "section": "Shiny",
+        "sortOrder": 249,
+        "image": "/Slime%20RNG/Slimes/shiny-pumpkin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Pumpkin",
+        "family": "Pumpkin",
+        "variant": "Inverted",
+        "rarity": "Nova",
+        "odds": "1 / 6.93T",
+        "power": "58.4K",
+        "health": "176K"
+      },
+      "system": {
+        "slug": "inverted-pumpkin",
+        "section": "Inverted",
+        "sortOrder": 250,
+        "image": "/Slime%20RNG/Slimes/pumpkin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ouchy",
+        "family": "Ouchy",
+        "variant": "Base",
+        "rarity": "Celestial",
+        "odds": "1 / 4.39B",
+        "power": "5.40K",
+        "health": "16.2K"
+      },
+      "system": {
+        "slug": "ouchy",
+        "section": "Base",
+        "sortOrder": 251,
+        "image": "/Slime%20RNG/Slimes/ouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Ouchy",
+        "family": "Ouchy",
+        "variant": "Big",
+        "rarity": "Astral",
+        "odds": "1 / 439B",
+        "power": "21.6K",
+        "health": "64.8K"
+      },
+      "system": {
+        "slug": "big-ouchy",
+        "section": "Big",
+        "sortOrder": 252,
+        "image": "/Slime%20RNG/Slimes/ouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Ouchy",
+        "family": "Ouchy",
+        "variant": "Huge",
+        "rarity": "Nova",
+        "odds": "1 / 4.39T",
+        "power": "54K",
+        "health": "162K"
+      },
+      "system": {
+        "slug": "huge-ouchy",
+        "section": "Huge",
+        "sortOrder": 253,
+        "image": "/Slime%20RNG/Slimes/ouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ouchy",
+        "family": "Ouchy",
+        "variant": "Shiny",
+        "rarity": "Nova",
+        "odds": "1 / 1.09T",
+        "power": "32.4K",
+        "health": "97.2K"
+      },
+      "system": {
+        "slug": "shiny-ouchy",
+        "section": "Shiny",
+        "sortOrder": 254,
+        "image": "/Slime%20RNG/Slimes/shiny-ouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Ouchy",
+        "family": "Ouchy",
+        "variant": "Inverted",
+        "rarity": "Solar",
+        "odds": "1 / 10.9T",
+        "power": "70.2K",
+        "health": "211K"
+      },
+      "system": {
+        "slug": "inverted-ouchy",
+        "section": "Inverted",
+        "sortOrder": 255,
+        "image": "/Slime%20RNG/Slimes/ouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sharky",
+        "family": "Sharky",
+        "variant": "Base",
+        "rarity": "Celestial",
+        "odds": "1 / 6.47B",
+        "power": "6.5K",
+        "health": "19.4K"
+      },
+      "system": {
+        "slug": "sharky",
+        "section": "Base",
+        "sortOrder": 256,
+        "image": "/Slime%20RNG/Slimes/sharky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Sharky",
+        "family": "Sharky",
+        "variant": "Big",
+        "rarity": "Nova",
+        "odds": "1 / 647B",
+        "power": "26K",
+        "health": "77.6K"
+      },
+      "system": {
+        "slug": "big-sharky",
+        "section": "Big",
+        "sortOrder": 257,
+        "image": "/Slime%20RNG/Slimes/sharky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Sharky",
+        "family": "Sharky",
+        "variant": "Huge",
+        "rarity": "Nova",
+        "odds": "1 / 6.47T",
+        "power": "65K",
+        "health": "194K"
+      },
+      "system": {
+        "slug": "huge-sharky",
+        "section": "Huge",
+        "sortOrder": 258,
+        "image": "/Slime%20RNG/Slimes/sharky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sharky",
+        "family": "Sharky",
+        "variant": "Shiny",
+        "rarity": "Nova",
+        "odds": "1 / 1.61T",
+        "power": "39K",
+        "health": "116K"
+      },
+      "system": {
+        "slug": "shiny-sharky",
+        "section": "Shiny",
+        "sortOrder": 259,
+        "image": "/Slime%20RNG/Slimes/shiny-sharky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Sharky",
+        "family": "Sharky",
+        "variant": "Inverted",
+        "rarity": "Solar",
+        "odds": "1 / 16.1T",
+        "power": "84.5K",
+        "health": "252K"
+      },
+      "system": {
+        "slug": "inverted-sharky",
+        "section": "Inverted",
+        "sortOrder": 260,
+        "image": "/Slime%20RNG/Slimes/sharky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dino",
+        "family": "Dino",
+        "variant": "Base",
+        "rarity": "Celestial",
+        "odds": "1 / 10.1B",
+        "power": "7.80K",
+        "health": "23.4K"
+      },
+      "system": {
+        "slug": "dino",
+        "section": "Base",
+        "sortOrder": 261,
+        "image": "/Slime%20RNG/Slimes/dino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Dino",
+        "family": "Dino",
+        "variant": "Big",
+        "rarity": "Nova",
+        "odds": "1 / 1.01T",
+        "power": "31.2K",
+        "health": "93.6K"
+      },
+      "system": {
+        "slug": "big-dino",
+        "section": "Big",
+        "sortOrder": 262,
+        "image": "/Slime%20RNG/Slimes/dino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Dino",
+        "family": "Dino",
+        "variant": "Huge",
+        "rarity": "Solar",
+        "odds": "1 / 10.1T",
+        "power": "78K",
+        "health": "234K"
+      },
+      "system": {
+        "slug": "huge-dino",
+        "section": "Huge",
+        "sortOrder": 263,
+        "image": "/Slime%20RNG/Slimes/dino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Dino",
+        "family": "Dino",
+        "variant": "Shiny",
+        "rarity": "Nova",
+        "odds": "1 / 2.54T",
+        "power": "46.8K",
+        "health": "140K"
+      },
+      "system": {
+        "slug": "shiny-dino",
+        "section": "Shiny",
+        "sortOrder": 264,
+        "image": "/Slime%20RNG/Slimes/shiny-dino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Dino",
+        "family": "Dino",
+        "variant": "Inverted",
+        "rarity": "Solar",
+        "odds": "1 / 25.4T",
+        "power": "101K",
+        "health": "304K"
+      },
+      "system": {
+        "slug": "inverted-dino",
+        "section": "Inverted",
+        "sortOrder": 265,
+        "image": "/Slime%20RNG/Slimes/dino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunny",
+        "family": "Sunny",
+        "variant": "Base",
+        "rarity": "Celestial",
+        "odds": "1 / 11.8B",
+        "power": "8.10K",
+        "health": "24.3K"
+      },
+      "system": {
+        "slug": "sunny",
+        "section": "Base",
+        "sortOrder": 266,
+        "image": "/Slime%20RNG/Slimes/sunny.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Sunny",
+        "family": "Sunny",
+        "variant": "Big",
+        "rarity": "Nova",
+        "odds": "1 / 1.18T",
+        "power": "32.4K",
+        "health": "97.2K"
+      },
+      "system": {
+        "slug": "big-sunny",
+        "section": "Big",
+        "sortOrder": 267,
+        "image": "/Slime%20RNG/Slimes/sunny.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Sunny",
+        "family": "Sunny",
+        "variant": "Huge",
+        "rarity": "Solar",
+        "odds": "1 / 11.8T",
+        "power": "81K",
+        "health": "243K"
+      },
+      "system": {
+        "slug": "huge-sunny",
+        "section": "Huge",
+        "sortOrder": 268,
+        "image": "/Slime%20RNG/Slimes/sunny.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sunny",
+        "family": "Sunny",
+        "variant": "Shiny",
+        "rarity": "Nova",
+        "odds": "1 / 2.95T",
+        "power": "48.6K",
+        "health": "145K"
+      },
+      "system": {
+        "slug": "shiny-sunny",
+        "section": "Shiny",
+        "sortOrder": 269,
+        "image": "/Slime%20RNG/Slimes/shiny-sunny.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Sunny",
+        "family": "Sunny",
+        "variant": "Inverted",
+        "rarity": "Solar",
+        "odds": "1 / 22.2T",
+        "power": "105K",
+        "health": "316K"
+      },
+      "system": {
+        "slug": "inverted-sunny",
+        "section": "Inverted",
+        "sortOrder": 270,
+        "image": "/Slime%20RNG/Slimes/sunny.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Monke",
+        "family": "Monke",
+        "variant": "Base",
+        "rarity": "Celestial",
+        "odds": "1 / 15.3B",
+        "power": "9.36K",
+        "health": "28.0K"
+      },
+      "system": {
+        "slug": "monke",
+        "section": "Base",
+        "sortOrder": 271,
+        "image": "/Slime%20RNG/Slimes/monke.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Monke",
+        "family": "Monke",
+        "variant": "Big",
+        "rarity": "Nova",
+        "odds": "1 / 1.53T",
+        "power": "37.4K",
+        "health": "112K"
+      },
+      "system": {
+        "slug": "big-monke",
+        "section": "Big",
+        "sortOrder": 272,
+        "image": "/Slime%20RNG/Slimes/monke.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Monke",
+        "family": "Monke",
+        "variant": "Huge",
+        "rarity": "Solar",
+        "odds": "1 / 15.3T",
+        "power": "93.6K",
+        "health": "280K"
+      },
+      "system": {
+        "slug": "huge-monke",
+        "section": "Huge",
+        "sortOrder": 273,
+        "image": "/Slime%20RNG/Slimes/monke.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Monke",
+        "family": "Monke",
+        "variant": "Shiny",
+        "rarity": "Nova",
+        "odds": "1 / 3.84T",
+        "power": "56.2K",
+        "health": "168K"
+      },
+      "system": {
+        "slug": "shiny-monke",
+        "section": "Shiny",
+        "sortOrder": 274,
+        "image": "/Slime%20RNG/Slimes/shiny-monke.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Monke",
+        "family": "Monke",
+        "variant": "Inverted",
+        "rarity": "Solar",
+        "odds": "1 / 38.4T",
+        "power": "122K",
+        "health": "364K"
+      },
+      "system": {
+        "slug": "inverted-monke",
+        "section": "Inverted",
+        "sortOrder": 275,
+        "image": "/Slime%20RNG/Slimes/monke.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Prickly",
+        "family": "Prickly",
+        "variant": "Base",
+        "rarity": "Celestial",
+        "odds": "1 / 23.9B",
+        "power": "11.2K",
+        "health": "33.7K"
+      },
+      "system": {
+        "slug": "prickly",
+        "section": "Base",
+        "sortOrder": 276,
+        "image": "/Slime%20RNG/Slimes/prickly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Prickly",
+        "family": "Prickly",
+        "variant": "Big",
+        "rarity": "Nova",
+        "odds": "1 / 2.39T",
+        "power": "44.8K",
+        "health": "135K"
+      },
+      "system": {
+        "slug": "big-prickly",
+        "section": "Big",
+        "sortOrder": 277,
+        "image": "/Slime%20RNG/Slimes/prickly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Prickly",
+        "family": "Prickly",
+        "variant": "Huge",
+        "rarity": "Solar",
+        "odds": "1 / 23.9T",
+        "power": "112K",
+        "health": "337K"
+      },
+      "system": {
+        "slug": "huge-prickly",
+        "section": "Huge",
+        "sortOrder": 278,
+        "image": "/Slime%20RNG/Slimes/prickly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Prickly",
+        "family": "Prickly",
+        "variant": "Shiny",
+        "rarity": "Nova",
+        "odds": "1 / 5.98T",
+        "power": "67.2K",
+        "health": "202K"
+      },
+      "system": {
+        "slug": "shiny-prickly",
+        "section": "Shiny",
+        "sortOrder": 279,
+        "image": "/Slime%20RNG/Slimes/shiny-prickly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Prickly",
+        "family": "Prickly",
+        "variant": "Inverted",
+        "rarity": "Solar",
+        "odds": "1 / 59.8T",
+        "power": "146K",
+        "health": "438K"
+      },
+      "system": {
+        "slug": "inverted-prickly",
+        "section": "Inverted",
+        "sortOrder": 280,
+        "image": "/Slime%20RNG/Slimes/prickly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zoomy",
+        "family": "Zoomy",
+        "variant": "Base",
+        "rarity": "Celestial",
+        "odds": "1 / 34.2B",
+        "power": "13.4K",
+        "health": "40.3K"
+      },
+      "system": {
+        "slug": "zoomy",
+        "section": "Base",
+        "sortOrder": 281,
+        "image": "/Slime%20RNG/Slimes/zoomy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Zoomy",
+        "family": "Zoomy",
+        "variant": "Big",
+        "rarity": "Nova",
+        "odds": "1 / 3.42T",
+        "power": "53.6K",
+        "health": "161K"
+      },
+      "system": {
+        "slug": "big-zoomy",
+        "section": "Big",
+        "sortOrder": 282,
+        "image": "/Slime%20RNG/Slimes/zoomy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Zoomy",
+        "family": "Zoomy",
+        "variant": "Huge",
+        "rarity": "Solar",
+        "odds": "1 / 34.2T",
+        "power": "134K",
+        "health": "403K"
+      },
+      "system": {
+        "slug": "huge-zoomy",
+        "section": "Huge",
+        "sortOrder": 283,
+        "image": "/Slime%20RNG/Slimes/zoomy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Zoomy",
+        "family": "Zoomy",
+        "variant": "Shiny",
+        "rarity": "Solar",
+        "odds": "1 / 8.55T",
+        "power": "80.4K",
+        "health": "242K"
+      },
+      "system": {
+        "slug": "shiny-zoomy",
+        "section": "Shiny",
+        "sortOrder": 284,
+        "image": "/Slime%20RNG/Slimes/shiny-zoomy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Zoomy",
+        "family": "Zoomy",
+        "variant": "Inverted",
+        "rarity": "Lunar",
+        "odds": "1 / 85.5T",
+        "power": "174K",
+        "health": "524K"
+      },
+      "system": {
+        "slug": "inverted-zoomy",
+        "section": "Inverted",
+        "sortOrder": 285,
+        "image": "/Slime%20RNG/Slimes/zoomy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Waxie",
+        "family": "Waxie",
+        "variant": "Base",
+        "rarity": "Astral",
+        "odds": "1 / 50.1B",
+        "power": "16.1K",
+        "health": "48.2K"
+      },
+      "system": {
+        "slug": "waxie",
+        "section": "Base",
+        "sortOrder": 286,
+        "image": "/Slime%20RNG/Slimes/waxie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Waxie",
+        "family": "Waxie",
+        "variant": "Big",
+        "rarity": "Nova",
+        "odds": "1 / 5.01T",
+        "power": "64.4K",
+        "health": "193K"
+      },
+      "system": {
+        "slug": "big-waxie",
+        "section": "Big",
+        "sortOrder": 287,
+        "image": "/Slime%20RNG/Slimes/waxie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Waxie",
+        "family": "Waxie",
+        "variant": "Huge",
+        "rarity": "Solar",
+        "odds": "1 / 50.1T",
+        "power": "161K",
+        "health": "482K"
+      },
+      "system": {
+        "slug": "huge-waxie",
+        "section": "Huge",
+        "sortOrder": 288,
+        "image": "/Slime%20RNG/Slimes/waxie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Waxie",
+        "family": "Waxie",
+        "variant": "Shiny",
+        "rarity": "Solar",
+        "odds": "1 / 12.5T",
+        "power": "96.6K",
+        "health": "289K"
+      },
+      "system": {
+        "slug": "shiny-waxie",
+        "section": "Shiny",
+        "sortOrder": 289,
+        "image": "/Slime%20RNG/Slimes/shiny-waxie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Waxie",
+        "family": "Waxie",
+        "variant": "Inverted",
+        "rarity": "Lunar",
+        "odds": "1 / 125T",
+        "power": "209K",
+        "health": "627K"
+      },
+      "system": {
+        "slug": "inverted-waxie",
+        "section": "Inverted",
+        "sortOrder": 290,
+        "image": "/Slime%20RNG/Slimes/waxie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Drakey",
+        "family": "Drakey",
+        "variant": "Base",
+        "rarity": "Astral",
+        "odds": "1 / 74.3B",
+        "power": "19.3K",
+        "health": "58.0K"
+      },
+      "system": {
+        "slug": "drakey",
+        "section": "Base",
+        "sortOrder": 291,
+        "image": "/Slime%20RNG/Slimes/drakey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Drakey",
+        "family": "Drakey",
+        "variant": "Big",
+        "rarity": "Solar",
+        "odds": "1 / 7.43T",
+        "power": "77.2K",
+        "health": "232K"
+      },
+      "system": {
+        "slug": "big-drakey",
+        "section": "Big",
+        "sortOrder": 292,
+        "image": "/Slime%20RNG/Slimes/drakey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Drakey",
+        "family": "Drakey",
+        "variant": "Huge",
+        "rarity": "Solar",
+        "odds": "1 / 74.3T",
+        "power": "193K",
+        "health": "580K"
+      },
+      "system": {
+        "slug": "huge-drakey",
+        "section": "Huge",
+        "sortOrder": 293,
+        "image": "/Slime%20RNG/Slimes/drakey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Drakey",
+        "family": "Drakey",
+        "variant": "Shiny",
+        "rarity": "Solar",
+        "odds": "1 / 18.5T",
+        "power": "116K",
+        "health": "348K"
+      },
+      "system": {
+        "slug": "shiny-drakey",
+        "section": "Shiny",
+        "sortOrder": 294,
+        "image": "/Slime%20RNG/Slimes/shiny-drakey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Drakey",
+        "family": "Drakey",
+        "variant": "Inverted",
+        "rarity": "Lunar",
+        "odds": "1 / 185T",
+        "power": "251K",
+        "health": "754K"
+      },
+      "system": {
+        "slug": "inverted-drakey",
+        "section": "Inverted",
+        "sortOrder": 295,
+        "image": "/Slime%20RNG/Slimes/drakey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Germy",
+        "family": "Germy",
+        "variant": "Base",
+        "rarity": "Astral",
+        "odds": "1 / 133B",
+        "power": "23.1K",
+        "health": "70.0K"
+      },
+      "system": {
+        "slug": "germy",
+        "section": "Base",
+        "sortOrder": 296,
+        "image": "/Slime%20RNG/Slimes/germy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Germy",
+        "family": "Germy",
+        "variant": "Big",
+        "rarity": "Solar",
+        "odds": "1 / 11.3T",
+        "power": "92.4K",
+        "health": "280K"
+      },
+      "system": {
+        "slug": "big-germy",
+        "section": "Big",
+        "sortOrder": 297,
+        "image": "/Slime%20RNG/Slimes/germy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Germy",
+        "family": "Germy",
+        "variant": "Huge",
+        "rarity": "Lunar",
+        "odds": "1 / 113T",
+        "power": "231K",
+        "health": "700K"
+      },
+      "system": {
+        "slug": "huge-germy",
+        "section": "Huge",
+        "sortOrder": 298,
+        "image": "/Slime%20RNG/Slimes/germy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Germy",
+        "family": "Germy",
+        "variant": "Shiny",
+        "rarity": "Solar",
+        "odds": "1 / 28.3T",
+        "power": "139K",
+        "health": "420K"
+      },
+      "system": {
+        "slug": "shiny-germy",
+        "section": "Shiny",
+        "sortOrder": 299,
+        "image": "/Slime%20RNG/Slimes/shiny-germy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Germy",
+        "family": "Germy",
+        "variant": "Inverted",
+        "rarity": "Lunar",
+        "odds": "1 / 283T",
+        "power": "300K",
+        "health": "910K"
+      },
+      "system": {
+        "slug": "inverted-germy",
+        "section": "Inverted",
+        "sortOrder": 300,
+        "image": "/Slime%20RNG/Slimes/germy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Palmy",
+        "family": "Palmy",
+        "variant": "Base",
+        "rarity": "Astral",
+        "odds": "1 / 172B",
+        "power": "27.7K",
+        "health": "83.0K"
+      },
+      "system": {
+        "slug": "palmy",
+        "section": "Base",
+        "sortOrder": 301,
+        "image": "/Slime%20RNG/Slimes/palmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Palmy",
+        "family": "Palmy",
+        "variant": "Big",
+        "rarity": "Solar",
+        "odds": "1 / 17.2T",
+        "power": "111K",
+        "health": "332K"
+      },
+      "system": {
+        "slug": "big-palmy",
+        "section": "Big",
+        "sortOrder": 302,
+        "image": "/Slime%20RNG/Slimes/palmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Palmy",
+        "family": "Palmy",
+        "variant": "Huge",
+        "rarity": "Lunar",
+        "odds": "1 / 172T",
+        "power": "277K",
+        "health": "830K"
+      },
+      "system": {
+        "slug": "huge-palmy",
+        "section": "Huge",
+        "sortOrder": 303,
+        "image": "/Slime%20RNG/Slimes/palmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Palmy",
+        "family": "Palmy",
+        "variant": "Shiny",
+        "rarity": "Solar",
+        "odds": "1 / 43.0T",
+        "power": "166K",
+        "health": "498K"
+      },
+      "system": {
+        "slug": "shiny-palmy",
+        "section": "Shiny",
+        "sortOrder": 304,
+        "image": "/Slime%20RNG/Slimes/shiny-palmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Palmy",
+        "family": "Palmy",
+        "variant": "Inverted",
+        "rarity": "Lunar",
+        "odds": "1 / 430T",
+        "power": "360K",
+        "health": "1.08M"
+      },
+      "system": {
+        "slug": "inverted-palmy",
+        "section": "Inverted",
+        "sortOrder": 305,
+        "image": "/Slime%20RNG/Slimes/palmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Melly",
+        "family": "Melly",
+        "variant": "Base",
+        "rarity": "Astral",
+        "odds": "1 / 237B",
+        "power": "31.0K",
+        "health": "93.0K"
+      },
+      "system": {
+        "slug": "melly",
+        "section": "Base",
+        "sortOrder": 306,
+        "image": "/Slime%20RNG/Slimes/melly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Melly",
+        "family": "Melly",
+        "variant": "Big",
+        "rarity": "Solar",
+        "odds": "1 / 23.7T",
+        "power": "124K",
+        "health": "372K"
+      },
+      "system": {
+        "slug": "big-melly",
+        "section": "Big",
+        "sortOrder": 307,
+        "image": "/Slime%20RNG/Slimes/melly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Melly",
+        "family": "Melly",
+        "variant": "Huge",
+        "rarity": "Lunar",
+        "odds": "1 / 237T",
+        "power": "310K",
+        "health": "930K"
+      },
+      "system": {
+        "slug": "huge-melly",
+        "section": "Huge",
+        "sortOrder": 308,
+        "image": "/Slime%20RNG/Slimes/melly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Melly",
+        "family": "Melly",
+        "variant": "Shiny",
+        "rarity": "Solar",
+        "odds": "1 / 59.4T",
+        "power": "186K",
+        "health": "558K"
+      },
+      "system": {
+        "slug": "shiny-melly",
+        "section": "Shiny",
+        "sortOrder": 309,
+        "image": "/Slime%20RNG/Slimes/shiny-melly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Melly",
+        "family": "Melly",
+        "variant": "Inverted",
+        "rarity": "Lunar",
+        "odds": "1 / 594T",
+        "power": "403K",
+        "health": "1.21M"
+      },
+      "system": {
+        "slug": "inverted-melly",
+        "section": "Inverted",
+        "sortOrder": 310,
+        "image": "/Slime%20RNG/Slimes/melly.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snazzy",
+        "family": "Snazzy",
+        "variant": "Base",
+        "rarity": "Astral",
+        "odds": "1 / 269B",
+        "power": "33.2K",
+        "health": "100K"
+      },
+      "system": {
+        "slug": "snazzy",
+        "section": "Base",
+        "sortOrder": 311,
+        "image": "/Slime%20RNG/Slimes/snazzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Snazzy",
+        "family": "Snazzy",
+        "variant": "Big",
+        "rarity": "Solar",
+        "odds": "1 / 26.9T",
+        "power": "133K",
+        "health": "400K"
+      },
+      "system": {
+        "slug": "big-snazzy",
+        "section": "Big",
+        "sortOrder": 312,
+        "image": "/Slime%20RNG/Slimes/snazzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Snazzy",
+        "family": "Snazzy",
+        "variant": "Huge",
+        "rarity": "Lunar",
+        "odds": "1 / 269T",
+        "power": "332K",
+        "health": "1M"
+      },
+      "system": {
+        "slug": "huge-snazzy",
+        "section": "Huge",
+        "sortOrder": 313,
+        "image": "/Slime%20RNG/Slimes/snazzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Snazzy",
+        "family": "Snazzy",
+        "variant": "Shiny",
+        "rarity": "Solar",
+        "odds": "1 / 67.3T",
+        "power": "199K",
+        "health": "600K"
+      },
+      "system": {
+        "slug": "shiny-snazzy",
+        "section": "Shiny",
+        "sortOrder": 314,
+        "image": "/Slime%20RNG/Slimes/shiny-snazzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Snazzy",
+        "family": "Snazzy",
+        "variant": "Inverted",
+        "rarity": "Lunar",
+        "odds": "1 / 673T",
+        "power": "432K",
+        "health": "1.3M"
+      },
+      "system": {
+        "slug": "inverted-snazzy",
+        "section": "Inverted",
+        "sortOrder": 315,
+        "image": "/Slime%20RNG/Slimes/snazzy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bemmy",
+        "family": "Bemmy",
+        "variant": "Base",
+        "rarity": "Astral",
+        "odds": "1 / 414B",
+        "power": "40.0K",
+        "health": "120K"
+      },
+      "system": {
+        "slug": "bemmy",
+        "section": "Base",
+        "sortOrder": 316,
+        "image": "/Slime%20RNG/Slimes/bemmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Bemmy",
+        "family": "Bemmy",
+        "variant": "Big",
+        "rarity": "Solar",
+        "odds": "1 / 41.4T",
+        "power": "160K",
+        "health": "480K"
+      },
+      "system": {
+        "slug": "big-bemmy",
+        "section": "Big",
+        "sortOrder": 317,
+        "image": "/Slime%20RNG/Slimes/bemmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Bemmy",
+        "family": "Bemmy",
+        "variant": "Huge",
+        "rarity": "Lunar",
+        "odds": "1 / 414T",
+        "power": "400K",
+        "health": "1.2M"
+      },
+      "system": {
+        "slug": "huge-bemmy",
+        "section": "Huge",
+        "sortOrder": 318,
+        "image": "/Slime%20RNG/Slimes/bemmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Bemmy",
+        "family": "Bemmy",
+        "variant": "Shiny",
+        "rarity": "Lunar",
+        "odds": "1 / 103T",
+        "power": "240K",
+        "health": "720K"
+      },
+      "system": {
+        "slug": "shiny-bemmy",
+        "section": "Shiny",
+        "sortOrder": 319,
+        "image": "/Slime%20RNG/Slimes/shiny-bemmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Bemmy",
+        "family": "Bemmy",
+        "variant": "Inverted",
+        "rarity": "Galactic",
+        "odds": "1 / 1.03Qd",
+        "power": "520K",
+        "health": "1.56M"
+      },
+      "system": {
+        "slug": "inverted-bemmy",
+        "section": "Inverted",
+        "sortOrder": 320,
+        "image": "/Slime%20RNG/Slimes/bemmy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mato",
+        "family": "Mato",
+        "variant": "Base",
+        "rarity": "Nova",
+        "odds": "1 / 673B",
+        "power": "48.0K",
+        "health": "144K"
+      },
+      "system": {
+        "slug": "mato",
+        "section": "Base",
+        "sortOrder": 321,
+        "image": "/Slime%20RNG/Slimes/mato.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Mato",
+        "family": "Mato",
+        "variant": "Big",
+        "rarity": "Solar",
+        "odds": "1 / 67.3T",
+        "power": "192K",
+        "health": "576K"
+      },
+      "system": {
+        "slug": "big-mato",
+        "section": "Big",
+        "sortOrder": 322,
+        "image": "/Slime%20RNG/Slimes/mato.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Mato",
+        "family": "Mato",
+        "variant": "Huge",
+        "rarity": "Lunar",
+        "odds": "1 / 673T",
+        "power": "480K",
+        "health": "1.44M"
+      },
+      "system": {
+        "slug": "huge-mato",
+        "section": "Huge",
+        "sortOrder": 323,
+        "image": "/Slime%20RNG/Slimes/mato.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Mato",
+        "family": "Mato",
+        "variant": "Shiny",
+        "rarity": "Lunar",
+        "odds": "1 / 168T",
+        "power": "288K",
+        "health": "864K"
+      },
+      "system": {
+        "slug": "shiny-mato",
+        "section": "Shiny",
+        "sortOrder": 324,
+        "image": "/Slime%20RNG/Slimes/shiny-mato.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Mato",
+        "family": "Mato",
+        "variant": "Inverted",
+        "rarity": "Galactic",
+        "odds": "1 / 1.68Qd",
+        "power": "624K",
+        "health": "1.87M"
+      },
+      "system": {
+        "slug": "inverted-mato",
+        "section": "Inverted",
+        "sortOrder": 325,
+        "image": "/Slime%20RNG/Slimes/mato.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frosty",
+        "family": "Frosty",
+        "variant": "Base",
+        "rarity": "Nova",
+        "odds": "1 / 1.07T",
+        "power": "57.6K",
+        "health": "172K"
+      },
+      "system": {
+        "slug": "frosty",
+        "section": "Base",
+        "sortOrder": 326,
+        "image": "/Slime%20RNG/Slimes/frosty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Frosty",
+        "family": "Frosty",
+        "variant": "Big",
+        "rarity": "Lunar",
+        "odds": "1 / 107T",
+        "power": "230K",
+        "health": "688K"
+      },
+      "system": {
+        "slug": "big-frosty",
+        "section": "Big",
+        "sortOrder": 327,
+        "image": "/Slime%20RNG/Slimes/frosty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Frosty",
+        "family": "Frosty",
+        "variant": "Huge",
+        "rarity": "Galactic",
+        "odds": "1 / 1.07Qd",
+        "power": "576K",
+        "health": "1.72M"
+      },
+      "system": {
+        "slug": "huge-frosty",
+        "section": "Huge",
+        "sortOrder": 328,
+        "image": "/Slime%20RNG/Slimes/frosty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Frosty",
+        "family": "Frosty",
+        "variant": "Shiny",
+        "rarity": "Lunar",
+        "odds": "1 / 269T",
+        "power": "346K",
+        "health": "1.03M"
+      },
+      "system": {
+        "slug": "shiny-frosty",
+        "section": "Shiny",
+        "sortOrder": 329,
+        "image": "/Slime%20RNG/Slimes/shiny-frosty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Frosty",
+        "family": "Frosty",
+        "variant": "Inverted",
+        "rarity": "Galactic",
+        "odds": "1 / 2.69Qd",
+        "power": "749K",
+        "health": "2.24M"
+      },
+      "system": {
+        "slug": "inverted-frosty",
+        "section": "Inverted",
+        "sortOrder": 330,
+        "image": "/Slime%20RNG/Slimes/frosty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pouchy",
+        "family": "Pouchy",
+        "variant": "Base",
+        "rarity": "Nova",
+        "odds": "1 / 1.72T",
+        "power": "70.0K",
+        "health": "210K"
+      },
+      "system": {
+        "slug": "pouchy",
+        "section": "Base",
+        "sortOrder": 331,
+        "image": "/Slime%20RNG/Slimes/pouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Pouchy",
+        "family": "Pouchy",
+        "variant": "Big",
+        "rarity": "Lunar",
+        "odds": "1 / 172T",
+        "power": "280K",
+        "health": "840K"
+      },
+      "system": {
+        "slug": "big-pouchy",
+        "section": "Big",
+        "sortOrder": 332,
+        "image": "/Slime%20RNG/Slimes/pouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Pouchy",
+        "family": "Pouchy",
+        "variant": "Huge",
+        "rarity": "Galactic",
+        "odds": "1 / 1.72Qd",
+        "power": "700K",
+        "health": "2.10M"
+      },
+      "system": {
+        "slug": "huge-pouchy",
+        "section": "Huge",
+        "sortOrder": 333,
+        "image": "/Slime%20RNG/Slimes/pouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Pouchy",
+        "family": "Pouchy",
+        "variant": "Shiny",
+        "rarity": "Lunar",
+        "odds": "1 / 430T",
+        "power": "420K",
+        "health": "1.26M"
+      },
+      "system": {
+        "slug": "shiny-pouchy",
+        "section": "Shiny",
+        "sortOrder": 334,
+        "image": "/Slime%20RNG/Slimes/shiny-pouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Pouchy",
+        "family": "Pouchy",
+        "variant": "Inverted",
+        "rarity": "Galactic",
+        "odds": "1 / 4.30Qd",
+        "power": "910K",
+        "health": "2.73M"
+      },
+      "system": {
+        "slug": "inverted-pouchy",
+        "section": "Inverted",
+        "sortOrder": 335,
+        "image": "/Slime%20RNG/Slimes/pouchy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hoppity",
+        "family": "Hoppity",
+        "variant": "Base",
+        "rarity": "Nova",
+        "odds": "1 / 2.69T",
+        "power": "84.0K",
+        "health": "252K"
+      },
+      "system": {
+        "slug": "hoppity",
+        "section": "Base",
+        "sortOrder": 336,
+        "image": "/Slime%20RNG/Slimes/hoppity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Hoppity",
+        "family": "Hoppity",
+        "variant": "Big",
+        "rarity": "Lunar",
+        "odds": "1 / 269T",
+        "power": "336K",
+        "health": "1.01M"
+      },
+      "system": {
+        "slug": "big-hoppity",
+        "section": "Big",
+        "sortOrder": 337,
+        "image": "/Slime%20RNG/Slimes/hoppity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Hoppity",
+        "family": "Hoppity",
+        "variant": "Huge",
+        "rarity": "Galactic",
+        "odds": "1 / 2.69Qd",
+        "power": "840K",
+        "health": "2.52M"
+      },
+      "system": {
+        "slug": "huge-hoppity",
+        "section": "Huge",
+        "sortOrder": 338,
+        "image": "/Slime%20RNG/Slimes/hoppity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Hoppity",
+        "family": "Hoppity",
+        "variant": "Shiny",
+        "rarity": "Lunar",
+        "odds": "1 / 673T",
+        "power": "504K",
+        "health": "1.51M"
+      },
+      "system": {
+        "slug": "shiny-hoppity",
+        "section": "Shiny",
+        "sortOrder": 339,
+        "image": "/Slime%20RNG/Slimes/shiny-hoppity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Hoppity",
+        "family": "Hoppity",
+        "variant": "Inverted",
+        "rarity": "Galactic",
+        "odds": "1 / 6.73Qd",
+        "power": "1.09M",
+        "health": "3.28M"
+      },
+      "system": {
+        "slug": "inverted-hoppity",
+        "section": "Inverted",
+        "sortOrder": 340,
+        "image": "/Slime%20RNG/Slimes/hoppity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sweetie",
+        "family": "Sweetie",
+        "variant": "Base",
+        "rarity": "Nova",
+        "odds": "1 / 3.50T",
+        "power": "93.0K",
+        "health": "279K"
+      },
+      "system": {
+        "slug": "sweetie",
+        "section": "Base",
+        "sortOrder": 341,
+        "image": "/Slime%20RNG/Slimes/sweetie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Sweetie",
+        "family": "Sweetie",
+        "variant": "Big",
+        "rarity": "Lunar",
+        "odds": "1 / 350T",
+        "power": "372K",
+        "health": "1.12M"
+      },
+      "system": {
+        "slug": "big-sweetie",
+        "section": "Big",
+        "sortOrder": 342,
+        "image": "/Slime%20RNG/Slimes/sweetie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Sweetie",
+        "family": "Sweetie",
+        "variant": "Huge",
+        "rarity": "Galactic",
+        "odds": "1 / 3.50Qd",
+        "power": "930K",
+        "health": "2.79M"
+      },
+      "system": {
+        "slug": "huge-sweetie",
+        "section": "Huge",
+        "sortOrder": 343,
+        "image": "/Slime%20RNG/Slimes/sweetie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sweetie",
+        "family": "Sweetie",
+        "variant": "Shiny",
+        "rarity": "Galactic",
+        "odds": "1 / 876T",
+        "power": "558K",
+        "health": "1.67M"
+      },
+      "system": {
+        "slug": "shiny-sweetie",
+        "section": "Shiny",
+        "sortOrder": 344,
+        "image": "/Slime%20RNG/Slimes/shiny-sweetie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Sweetie",
+        "family": "Sweetie",
+        "variant": "Inverted",
+        "rarity": "Galactic",
+        "odds": "1 / 8.76Qd",
+        "power": "1.21M",
+        "health": "3.63M"
+      },
+      "system": {
+        "slug": "inverted-sweetie",
+        "section": "Inverted",
+        "sortOrder": 345,
+        "image": "/Slime%20RNG/Slimes/sweetie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shady",
+        "family": "Shady",
+        "variant": "Base",
+        "rarity": "Nova",
+        "odds": "1 / 3.99T",
+        "power": "100K",
+        "health": "300K"
+      },
+      "system": {
+        "slug": "shady",
+        "section": "Base",
+        "sortOrder": 346,
+        "image": "/Slime%20RNG/Slimes/shady.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Shady",
+        "family": "Shady",
+        "variant": "Big",
+        "rarity": "Lunar",
+        "odds": "1 / 399T",
+        "power": "400K",
+        "health": "1.2M"
+      },
+      "system": {
+        "slug": "big-shady",
+        "section": "Big",
+        "sortOrder": 347,
+        "image": "/Slime%20RNG/Slimes/shady.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Shady",
+        "family": "Shady",
+        "variant": "Huge",
+        "rarity": "Galactic",
+        "odds": "1 / 3.99Qd",
+        "power": "1.00M",
+        "health": "3.00M"
+      },
+      "system": {
+        "slug": "huge-shady",
+        "section": "Huge",
+        "sortOrder": 348,
+        "image": "/Slime%20RNG/Slimes/shady.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Shady",
+        "family": "Shady",
+        "variant": "Shiny",
+        "rarity": "Galactic",
+        "odds": "1 / 997T",
+        "power": "600K",
+        "health": "1.80M"
+      },
+      "system": {
+        "slug": "shiny-shady",
+        "section": "Shiny",
+        "sortOrder": 349,
+        "image": "/Slime%20RNG/Slimes/shiny-shady.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Shady",
+        "family": "Shady",
+        "variant": "Inverted",
+        "rarity": "Galactic",
+        "odds": "1 / 9.97Qd",
+        "power": "1.30M",
+        "health": "3.90M"
+      },
+      "system": {
+        "slug": "inverted-shady",
+        "section": "Inverted",
+        "sortOrder": 350,
+        "image": "/Slime%20RNG/Slimes/shady.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Galaxy",
+        "family": "Galaxy",
+        "variant": "Base",
+        "rarity": "Nova",
+        "odds": "1 / 6.95T",
+        "power": "120K",
+        "health": "360K"
+      },
+      "system": {
+        "slug": "galaxy",
+        "section": "Base",
+        "sortOrder": 351,
+        "image": "/Slime%20RNG/Slimes/galaxy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Galaxy",
+        "family": "Galaxy",
+        "variant": "Big",
+        "rarity": "Lunar",
+        "odds": "1 / 695T",
+        "power": "480K",
+        "health": "1.44M"
+      },
+      "system": {
+        "slug": "big-galaxy",
+        "section": "Big",
+        "sortOrder": 352,
+        "image": "/Slime%20RNG/Slimes/galaxy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Galaxy",
+        "family": "Galaxy",
+        "variant": "Huge",
+        "rarity": "Galactic",
+        "odds": "1 / 6.95Qd",
+        "power": "1.20M",
+        "health": "3.60M"
+      },
+      "system": {
+        "slug": "huge-galaxy",
+        "section": "Huge",
+        "sortOrder": 353,
+        "image": "/Slime%20RNG/Slimes/galaxy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Galaxy",
+        "family": "Galaxy",
+        "variant": "Shiny",
+        "rarity": "Galactic",
+        "odds": "1 / 1.73Qd",
+        "power": "720K",
+        "health": "2.16M"
+      },
+      "system": {
+        "slug": "shiny-galaxy",
+        "section": "Shiny",
+        "sortOrder": 354,
+        "image": "/Slime%20RNG/Slimes/shiny-galaxy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Galaxy",
+        "family": "Galaxy",
+        "variant": "Inverted",
+        "rarity": "Stellar",
+        "odds": "1 / 17.3Qd",
+        "power": "1.56M",
+        "health": "4.68M"
+      },
+      "system": {
+        "slug": "inverted-galaxy",
+        "section": "Inverted",
+        "sortOrder": 355,
+        "image": "/Slime%20RNG/Slimes/galaxy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Painty",
+        "family": "Painty",
+        "variant": "Base",
+        "rarity": "Solar",
+        "odds": "1 / 11.3T",
+        "power": "145K",
+        "health": "435K"
+      },
+      "system": {
+        "slug": "painty",
+        "section": "Base",
+        "sortOrder": 356,
+        "image": "/Slime%20RNG/Slimes/painty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Painty",
+        "family": "Painty",
+        "variant": "Big",
+        "rarity": "Galactic",
+        "odds": "1 / 1.13Qd",
+        "power": "580K",
+        "health": "1.74M"
+      },
+      "system": {
+        "slug": "big-painty",
+        "section": "Big",
+        "sortOrder": 357,
+        "image": "/Slime%20RNG/Slimes/painty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Painty",
+        "family": "Painty",
+        "variant": "Huge",
+        "rarity": "Stellar",
+        "odds": "1 / 11.3Qd",
+        "power": "1.45M",
+        "health": "4.35M"
+      },
+      "system": {
+        "slug": "huge-painty",
+        "section": "Huge",
+        "sortOrder": 358,
+        "image": "/Slime%20RNG/Slimes/painty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Painty",
+        "family": "Painty",
+        "variant": "Shiny",
+        "rarity": "Galactic",
+        "odds": "1 / 2.83Qd",
+        "power": "870K",
+        "health": "2.61M"
+      },
+      "system": {
+        "slug": "shiny-painty",
+        "section": "Shiny",
+        "sortOrder": 359,
+        "image": "/Slime%20RNG/Slimes/shiny-painty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Painty",
+        "family": "Painty",
+        "variant": "Inverted",
+        "rarity": "Stellar",
+        "odds": "1 / 28.3Qd",
+        "power": "1.89M",
+        "health": "5.66M"
+      },
+      "system": {
+        "slug": "inverted-painty",
+        "section": "Inverted",
+        "sortOrder": 360,
+        "image": "/Slime%20RNG/Slimes/painty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Patty",
+        "family": "Patty",
+        "variant": "Base",
+        "rarity": "Solar",
+        "odds": "1 / 18.7T",
+        "power": "174K",
+        "health": "522K"
+      },
+      "system": {
+        "slug": "patty",
+        "section": "Base",
+        "sortOrder": 361,
+        "image": "/Slime%20RNG/Slimes/patty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Patty",
+        "family": "Patty",
+        "variant": "Big",
+        "rarity": "Galactic",
+        "odds": "1 / 1.87Qd",
+        "power": "696K",
+        "health": "2.08M"
+      },
+      "system": {
+        "slug": "big-patty",
+        "section": "Big",
+        "sortOrder": 362,
+        "image": "/Slime%20RNG/Slimes/patty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Patty",
+        "family": "Patty",
+        "variant": "Huge",
+        "rarity": "Stellar",
+        "odds": "1 / 18.7Qd",
+        "power": "1.74M",
+        "health": "5.22M"
+      },
+      "system": {
+        "slug": "huge-patty",
+        "section": "Huge",
+        "sortOrder": 363,
+        "image": "/Slime%20RNG/Slimes/patty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Patty",
+        "family": "Patty",
+        "variant": "Shiny",
+        "rarity": "Galactic",
+        "odds": "1 / 4.68Qd",
+        "power": "1.04M",
+        "health": "3.13M"
+      },
+      "system": {
+        "slug": "shiny-patty",
+        "section": "Shiny",
+        "sortOrder": 364,
+        "image": "/Slime%20RNG/Slimes/shiny-patty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Patty",
+        "family": "Patty",
+        "variant": "Inverted",
+        "rarity": "Stellar",
+        "odds": "1 / 46.8Qd",
+        "power": "2.26M",
+        "health": "6.79M"
+      },
+      "system": {
+        "slug": "inverted-patty",
+        "section": "Inverted",
+        "sortOrder": 365,
+        "image": "/Slime%20RNG/Slimes/patty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Broclee",
+        "family": "Broclee",
+        "variant": "Base",
+        "rarity": "Solar",
+        "odds": "1 / 28.7T",
+        "power": "210K",
+        "health": "630K"
+      },
+      "system": {
+        "slug": "broclee",
+        "section": "Base",
+        "sortOrder": 366,
+        "image": "/Slime%20RNG/Slimes/broclee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Broclee",
+        "family": "Broclee",
+        "variant": "Big",
+        "rarity": "Galactic",
+        "odds": "1 / 2.87Qd",
+        "power": "849K",
+        "health": "2.52M"
+      },
+      "system": {
+        "slug": "big-broclee",
+        "section": "Big",
+        "sortOrder": 367,
+        "image": "/Slime%20RNG/Slimes/broclee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Broclee",
+        "family": "Broclee",
+        "variant": "Huge",
+        "rarity": "Stellar",
+        "odds": "1 / 28.7Qd",
+        "power": "2.1M",
+        "health": "6.3M"
+      },
+      "system": {
+        "slug": "huge-broclee",
+        "section": "Huge",
+        "sortOrder": 368,
+        "image": "/Slime%20RNG/Slimes/broclee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Broclee",
+        "family": "Broclee",
+        "variant": "Shiny",
+        "rarity": "Galactic",
+        "odds": "1 / 7.18Qd",
+        "power": "1.26M",
+        "health": "3.78M"
+      },
+      "system": {
+        "slug": "shiny-broclee",
+        "section": "Shiny",
+        "sortOrder": 369,
+        "image": "/Slime%20RNG/Slimes/shiny-broclee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Broclee",
+        "family": "Broclee",
+        "variant": "Inverted",
+        "rarity": "Stellar",
+        "odds": "1 / 71.8Qd",
+        "power": "2.73M",
+        "health": "8.19M"
+      },
+      "system": {
+        "slug": "inverted-broclee",
+        "section": "Inverted",
+        "sortOrder": 370,
+        "image": "/Slime%20RNG/Slimes/broclee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meaty",
+        "family": "Meaty",
+        "variant": "Base",
+        "rarity": "Solar",
+        "odds": "1 / 43T",
+        "power": "256K",
+        "health": "777K"
+      },
+      "system": {
+        "slug": "meaty",
+        "section": "Base",
+        "sortOrder": 371,
+        "image": "/Slime%20RNG/Slimes/meaty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Meaty",
+        "family": "Meaty",
+        "variant": "Big",
+        "rarity": "Galactic",
+        "odds": "1 / 4.30Qd",
+        "power": "1.02M",
+        "health": "3.10M"
+      },
+      "system": {
+        "slug": "big-meaty",
+        "section": "Big",
+        "sortOrder": 372,
+        "image": "/Slime%20RNG/Slimes/meaty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Meaty",
+        "family": "Meaty",
+        "variant": "Huge",
+        "rarity": "Stellar",
+        "odds": "1 / 43.0Qd",
+        "power": "2.56M",
+        "health": "7.77M"
+      },
+      "system": {
+        "slug": "huge-meaty",
+        "section": "Huge",
+        "sortOrder": 373,
+        "image": "/Slime%20RNG/Slimes/meaty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Meaty",
+        "family": "Meaty",
+        "variant": "Shiny",
+        "rarity": "Stellar",
+        "odds": "1 / 10.7Qd",
+        "power": "1.54M",
+        "health": "4.66M"
+      },
+      "system": {
+        "slug": "shiny-meaty",
+        "section": "Shiny",
+        "sortOrder": 374,
+        "image": "/Slime%20RNG/Slimes/shiny-meaty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Meaty",
+        "family": "Meaty",
+        "variant": "Inverted",
+        "rarity": "Nebula",
+        "odds": "1 / 71.8Qd",
+        "power": "3.33M",
+        "health": "10.1M"
+      },
+      "system": {
+        "slug": "inverted-meaty",
+        "section": "Inverted",
+        "sortOrder": 375,
+        "image": "/Slime%20RNG/Slimes/meaty.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zappy",
+        "family": "Zappy",
+        "variant": "Base",
+        "rarity": "Solar",
+        "odds": "1 / 67.3T",
+        "power": "308K",
+        "health": "924K"
+      },
+      "system": {
+        "slug": "zappy",
+        "section": "Base",
+        "sortOrder": 376,
+        "image": "/Slime%20RNG/Slimes/zappy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Zappy",
+        "family": "Zappy",
+        "variant": "Big",
+        "rarity": "Galactic",
+        "odds": "1 / 6.73Qd",
+        "power": "1.23M",
+        "health": "3.69M"
+      },
+      "system": {
+        "slug": "big-zappy",
+        "section": "Big",
+        "sortOrder": 377,
+        "image": "/Slime%20RNG/Slimes/zappy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Zappy",
+        "family": "Zappy",
+        "variant": "Huge",
+        "rarity": "Stellar",
+        "odds": "1 / 67.3Qd",
+        "power": "3.08M",
+        "health": "9.24M"
+      },
+      "system": {
+        "slug": "huge-zappy",
+        "section": "Huge",
+        "sortOrder": 378,
+        "image": "/Slime%20RNG/Slimes/zappy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Zappy",
+        "family": "Zappy",
+        "variant": "Shiny",
+        "rarity": "Stellar",
+        "odds": "1 / 16.8Qd",
+        "power": "1.84M",
+        "health": "5.56M"
+      },
+      "system": {
+        "slug": "shiny-zappy",
+        "section": "Shiny",
+        "sortOrder": 379,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Zappy",
+        "family": "Zappy",
+        "variant": "Inverted",
+        "rarity": "Nebula",
+        "odds": "1 / 71.8Qd",
+        "power": "4.00M",
+        "health": "12.0M"
+      },
+      "system": {
+        "slug": "inverted-zappy",
+        "section": "Inverted",
+        "sortOrder": 380,
+        "image": "/Slime%20RNG/Slimes/zappy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bacon Hair",
+        "family": "Bacon Hair",
+        "variant": "Base",
+        "rarity": "Lunar",
+        "odds": "1 / 107T",
+        "power": "370K",
+        "health": "1.11M"
+      },
+      "system": {
+        "slug": "bacon-hair",
+        "section": "Base",
+        "sortOrder": 381,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Bacon Hair",
+        "family": "Bacon Hair",
+        "variant": "Big",
+        "rarity": "Stellar",
+        "odds": "1 / 10.7Qd",
+        "power": "1.48M",
+        "health": "4.44M"
+      },
+      "system": {
+        "slug": "big-bacon-hair",
+        "section": "Big",
+        "sortOrder": 382,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Bacon Hair",
+        "family": "Bacon Hair",
+        "variant": "Huge",
+        "rarity": "Nebula",
+        "odds": "1 / 107Qd",
+        "power": "3.7M",
+        "health": "11.1M"
+      },
+      "system": {
+        "slug": "huge-bacon-hair",
+        "section": "Huge",
+        "sortOrder": 383,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Bacon Hair",
+        "family": "Bacon Hair",
+        "variant": "Shiny",
+        "rarity": "Stellar",
+        "odds": "1 / 26.75Qd",
+        "power": "2.22M",
+        "health": "6.66M"
+      },
+      "system": {
+        "slug": "shiny-bacon-hair",
+        "section": "Shiny",
+        "sortOrder": 384,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Bacon Hair",
+        "family": "Bacon Hair",
+        "variant": "Inverted",
+        "rarity": "Nebula",
+        "odds": "1 / 267.5Qd",
+        "power": "4.81M",
+        "health": "14.43M"
+      },
+      "system": {
+        "slug": "inverted-bacon-hair",
+        "section": "Inverted",
+        "sortOrder": 385,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cow",
+        "family": "Cow",
+        "variant": "Base",
+        "rarity": "Lunar",
+        "odds": "1 / 168T",
+        "power": "444K",
+        "health": "1.33M"
+      },
+      "system": {
+        "slug": "cow",
+        "section": "Base",
+        "sortOrder": 386,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Cow",
+        "family": "Cow",
+        "variant": "Big",
+        "rarity": "Stellar",
+        "odds": "1 / 16.8Qd",
+        "power": "1.77M",
+        "health": "5.2M"
+      },
+      "system": {
+        "slug": "big-cow",
+        "section": "Big",
+        "sortOrder": 387,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Cow",
+        "family": "Cow",
+        "variant": "Huge",
+        "rarity": "Nebula",
+        "odds": "1 / 168Qd",
+        "power": "4.44M",
+        "health": "13.3M"
+      },
+      "system": {
+        "slug": "huge-cow",
+        "section": "Huge",
+        "sortOrder": 388,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Cow",
+        "family": "Cow",
+        "variant": "Shiny",
+        "rarity": "Stellar",
+        "odds": "1 / 26.75Qd",
+        "power": "2.66M",
+        "health": "7.98M"
+      },
+      "system": {
+        "slug": "shiny-cow",
+        "section": "Shiny",
+        "sortOrder": 389,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Cow",
+        "family": "Cow",
+        "variant": "Inverted",
+        "rarity": "Nebula",
+        "odds": "1 / 267.5Qd",
+        "power": "5.77M",
+        "health": "17.29M"
+      },
+      "system": {
+        "slug": "inverted-cow",
+        "section": "Inverted",
+        "sortOrder": 390,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cowboy",
+        "family": "Cowboy",
+        "variant": "Base",
+        "rarity": "Lunar",
+        "odds": "1 / 269T",
+        "power": "533K",
+        "health": "1.6M"
+      },
+      "system": {
+        "slug": "cowboy",
+        "section": "Base",
+        "sortOrder": 391,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Cowboy",
+        "family": "Cowboy",
+        "variant": "Big",
+        "rarity": "Stellar",
+        "odds": "1 / 26.9Qd",
+        "power": "2.13M",
+        "health": "6.4M"
+      },
+      "system": {
+        "slug": "big-cowboy",
+        "section": "Big",
+        "sortOrder": 392,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Cowboy",
+        "family": "Cowboy",
+        "variant": "Huge",
+        "rarity": "Nebula",
+        "odds": "1 / 269Qd",
+        "power": "5.33M",
+        "health": "16M"
+      },
+      "system": {
+        "slug": "huge-cowboy",
+        "section": "Huge",
+        "sortOrder": 393,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Cowboy",
+        "family": "Cowboy",
+        "variant": "Shiny",
+        "rarity": "Stellar",
+        "odds": "1 / 67.25Qd",
+        "power": "3.2M",
+        "health": "9.6M"
+      },
+      "system": {
+        "slug": "shiny-cowboy",
+        "section": "Shiny",
+        "sortOrder": 394,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Cowboy",
+        "family": "Cowboy",
+        "variant": "Inverted",
+        "rarity": "Nebula",
+        "odds": "1 / 672.5Qd",
+        "power": "6.93M",
+        "health": "20.8M"
+      },
+      "system": {
+        "slug": "inverted-cowboy",
+        "section": "Inverted",
+        "sortOrder": 395,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cyber",
+        "family": "Cyber",
+        "variant": "Base",
+        "rarity": "Lunar",
+        "odds": "1 / 420T",
+        "power": "640K",
+        "health": "1.92M"
+      },
+      "system": {
+        "slug": "cyber",
+        "section": "Base",
+        "sortOrder": 396,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Cyber",
+        "family": "Cyber",
+        "variant": "Big",
+        "rarity": "Stellar",
+        "odds": "1 / 42Qd",
+        "power": "2.56M",
+        "health": "7.68M"
+      },
+      "system": {
+        "slug": "big-cyber",
+        "section": "Big",
+        "sortOrder": 397,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Cyber",
+        "family": "Cyber",
+        "variant": "Huge",
+        "rarity": "Nebula",
+        "odds": "1 / 420Qd",
+        "power": "6.4M",
+        "health": "19.2M"
+      },
+      "system": {
+        "slug": "huge-cyber",
+        "section": "Huge",
+        "sortOrder": 398,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Cyber",
+        "family": "Cyber",
+        "variant": "Shiny",
+        "rarity": "Nebula",
+        "odds": "1 / 105Qd",
+        "power": "3.84M",
+        "health": "11.52M"
+      },
+      "system": {
+        "slug": "shiny-cyber",
+        "section": "Shiny",
+        "sortOrder": 399,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Cyber",
+        "family": "Cyber",
+        "variant": "Inverted",
+        "rarity": "Quantum",
+        "odds": "1 / 1.05Qn",
+        "power": "8.32M",
+        "health": "24.96M"
+      },
+      "system": {
+        "slug": "inverted-cyber",
+        "section": "Inverted",
+        "sortOrder": 400,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mossy",
+        "family": "Mossy",
+        "variant": "Base",
+        "rarity": "Galactic",
+        "odds": "1 / 1.14Qd",
+        "power": "1M",
+        "health": "3M"
+      },
+      "system": {
+        "slug": "mossy",
+        "section": "Base",
+        "sortOrder": 401,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Mossy",
+        "family": "Mossy",
+        "variant": "Big",
+        "rarity": "Nebula",
+        "odds": "1 / 114Qd",
+        "power": "4M",
+        "health": "12M"
+      },
+      "system": {
+        "slug": "big-mossy",
+        "section": "Big",
+        "sortOrder": 402,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Mossy",
+        "family": "Mossy",
+        "variant": "Huge",
+        "rarity": "Quantum",
+        "odds": "1 / 1.14Qn",
+        "power": "10M",
+        "health": "30M"
+      },
+      "system": {
+        "slug": "huge-mossy",
+        "section": "Huge",
+        "sortOrder": 403,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Mossy",
+        "family": "Mossy",
+        "variant": "Shiny",
+        "rarity": "Nebula",
+        "odds": "1 / 285Qd",
+        "power": "6M",
+        "health": "18M"
+      },
+      "system": {
+        "slug": "shiny-mossy",
+        "section": "Shiny",
+        "sortOrder": 404,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted Mossy",
+        "family": "Mossy",
+        "variant": "Inverted",
+        "rarity": "Quantum",
+        "odds": "1 / 2.85Qn",
+        "power": "13M",
+        "health": "39M"
+      },
+      "system": {
+        "slug": "inverted-mossy",
+        "section": "Inverted",
+        "sortOrder": 405,
+        "image": null
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: bloxodes-release-e2e
-description: Quickly publish already-completed and user-approved Bloxodes work from the current task worktree directly to production, wait only for the required deployment or database publication, verify the exact live result, synchronize local production and the homelab checkout to the exact production SHA, and leave the task worktree open for immediate follow-up changes. Use only when the user explicitly invokes `$bloxodes-release-e2e` or asks for an e2e/end-to-end production release.
+description: Quickly publish already-completed and user-approved Bloxodes work from the current task worktree directly to production, wait only for the required deployment or database publication, verify the exact live result, synchronize local production, and conditionally synchronize the homelab when article automation is affected or explicitly requested. Use only when the user explicitly invokes `$bloxodes-release-e2e` or asks for an e2e/end-to-end production release.
 ---
 
 # Bloxodes Release E2E
@@ -16,12 +16,12 @@ An explicit invocation means:
 - publish only the current task's intended files;
 - use a direct non-force push to `production` by default;
 - deploy or publish the prepared database change when applicable;
-- synchronize the homelab repository checkout to the exact released `origin/production` SHA with the guarded sync script; and
+- synchronize the homelab repository checkout only when the release touches homelab-owned article automation or the user explicitly requests homelab synchronization; and
 - keep the task worktree and branch after release for immediate fixes.
 
 Do not search for tracker rows, old logs, approval files, or ignored/temp output. Do not open a PR unless the user explicitly asks for one.
 
-The e2e invocation authorizes only the guarded homelab checkout synchronization performed by `scripts/ops/sync-homelab-checkout.sh`, including its dry-run and exact-SHA apply. It does not authorize changing homelab env values, installing systemd units, stopping or killing active article jobs, restarting services, or making unrelated VPS/homelab mutations.
+The e2e invocation authorizes only the guarded homelab checkout synchronization performed by `scripts/ops/sync-homelab-checkout.sh`, including its dry-run and exact-SHA apply, when homelab synchronization is in scope. It does not authorize changing homelab env values, installing systemd units, stopping or killing active article jobs, restarting services, or making unrelated VPS/homelab mutations.
 
 ## 1. Confirm Scope
 
@@ -91,11 +91,11 @@ Do not publish unrelated drafts or queued content.
 
 1. Fast-forward the main local `production` worktree to `origin/production` without touching unrelated work.
 2. Verify both resolve to the same SHA.
-3. Use that exact `origin/production` SHA for homelab synchronization after every e2e release, including docs-only, scripts-only, and database-only releases.
-4. Execute the released `scripts/ops/sync-homelab-checkout.sh --expected-sha <full-sha>` on the homelab through the configured operator access. If its read-only preflight passes, run the same released script with `--apply`.
-5. If the production delta changes installed systemd unit files, do not apply the checkout synchronization until unit reconciliation receives separate approval. Never stop or interrupt an active discovery or writer service to make synchronization pass. If automation is active, the homelab is unreachable, or preflight fails, leave it unchanged and report the production release as complete with homelab synchronization pending and the exact blocker. If apply fails after starting, stop and report the exact resulting remote state; do not make additional mutations to hide or work around it.
-6. After apply, require a clean homelab `production` checkout at the exact SHA, the timer in its prior state, and readiness success. The guarded script owns these checks.
-7. Run the full read-only `npm run platform:sync:check` after synchronization; report any remaining drift instead of hiding it.
+3. Decide whether homelab synchronization is in scope. It is required when the user explicitly asks to sync/update the homelab, or when the allowlist changes homelab-owned article automation: `scripts/articles/**`, `scripts/ops/systemd/**`, `scripts/ops/check-homelab-article-automation.ts`, `scripts/ops/install-homelab-article-automation.sh`, or `scripts/ops/sync-homelab-checkout.sh`. It is skipped for ordinary web/data releases, collection pages, database-only editorial publication, docs, skills, and unrelated scripts.
+4. When in scope, use that exact `origin/production` SHA for homelab synchronization. Execute the released `scripts/ops/sync-homelab-checkout.sh --expected-sha <full-sha>` on the homelab through configured operator access. If its read-only preflight passes, run the same released script with `--apply`.
+5. If the production delta changes installed systemd unit files, do not apply checkout synchronization until unit reconciliation receives separate approval. Never stop or interrupt an active discovery or writer service to make synchronization pass. If automation is active, the homelab is unreachable, or preflight fails, leave it unchanged and report the production release as complete with homelab synchronization pending and the exact blocker. If apply fails after starting, stop and report the exact resulting remote state; do not make additional mutations to hide or work around it.
+6. After an in-scope apply, require a clean homelab `production` checkout at the exact SHA, the timer in its prior state, and readiness success. The guarded script owns these checks.
+7. Run the full read-only `npm run platform:sync:check` only when homelab synchronization is in scope or when the user explicitly requests a full platform check. For ordinary releases, run only the local-only check and report homelab/VPS platform state as out of scope.
 8. Keep the current task worktree and local task branch intact, even when clean and fully published.
 9. Return the task to the user for immediate follow-up changes in the same chat and worktree.
 
@@ -109,6 +109,6 @@ Report only:
 - whether deployment was skipped or the deployed SHA/health;
 - database rows and exact URLs when applicable;
 - local production synchronization SHA;
-- homelab checkout SHA and synchronization status, or its exact pending blocker;
+- homelab checkout SHA and synchronization status, or that synchronization was skipped by scope;
 - current task worktree/branch retained for follow-up; and
 - any real blocker.

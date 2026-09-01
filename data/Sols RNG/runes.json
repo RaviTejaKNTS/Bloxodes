@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sol's RNG",
+    "gameSlug": "sols-rng",
+    "collection": "runes",
+    "route": "/wiki/sols-rng/runes",
+    "catalogCode": "sols-rng-runes",
+    "itemFields": [
+      "summary",
+      "cardSummary",
+      "rarity",
+      "targetBiome",
+      "effect",
+      "duration",
+      "obtainment",
+      "exceptions"
+    ],
+    "columns": [
+      "summary",
+      "cardSummary",
+      "rarity",
+      "targetBiome",
+      "effect",
+      "duration",
+      "obtainment",
+      "exceptions"
+    ],
+    "display": {
+      "groupLabel": "Target pool",
+      "sectionOrder": [
+        "Weather Biomes",
+        "Special Biomes",
+        "Time and Universal"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "targetBiome"
+      ],
+      "descriptionField": "summary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "targetBiome",
+        "effect",
+        "duration",
+        "obtainment",
+        "exceptions"
+      ],
+      "tableFields": [
+        "rarity",
+        "targetBiome",
+        "duration",
+        "effect",
+        "obtainment"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Chest chance or status",
+          "omitWhenEmpty": true
+        },
+        "targetBiome": {
+          "kind": "plain",
+          "label": "Target pool",
+          "omitWhenEmpty": true
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect",
+          "omitWhenEmpty": true
+        },
+        "duration": {
+          "kind": "chip",
+          "label": "Duration",
+          "omitWhenEmpty": true
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "Obtainment",
+          "omitWhenEmpty": true
+        },
+        "exceptions": {
+          "kind": "detail",
+          "label": "Exceptions",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Rune of Wind",
+        "summary": "A consumable that makes eligible WINDY-native auras roll at native rarity without requiring WINDY to be active.",
+        "cardSummary": "Targets the WINDY aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "WINDY",
+        "effect": "Allows eligible WINDY-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": null
+      },
+      "system": {
+        "slug": "rune-of-wind",
+        "section": "Weather Biomes",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Runes/rune-of-wind.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Frost",
+        "summary": "A consumable that makes eligible SNOWY-native auras roll at native rarity without requiring SNOWY to be active.",
+        "cardSummary": "Targets the SNOWY aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "SNOWY",
+        "effect": "Allows eligible SNOWY-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": null
+      },
+      "system": {
+        "slug": "rune-of-frost",
+        "section": "Weather Biomes",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Runes/rune-of-frost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Rainstorm",
+        "summary": "A consumable that makes eligible RAINY-native auras roll at native rarity without requiring RAINY to be active.",
+        "cardSummary": "Targets the RAINY aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "RAINY",
+        "effect": "Allows eligible RAINY-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": "The current atwiki item table notes that Leviathan is excluded from this native-rarity effect."
+      },
+      "system": {
+        "slug": "rune-of-rainstorm",
+        "section": "Weather Biomes",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Runes/rune-of-rainstorm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Dust",
+        "summary": "A consumable that makes eligible SANDSTORM-native auras roll at native rarity without requiring SANDSTORM to be active.",
+        "cardSummary": "Targets the SANDSTORM aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "SANDSTORM",
+        "effect": "Allows eligible SANDSTORM-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": null
+      },
+      "system": {
+        "slug": "rune-of-dust",
+        "section": "Special Biomes",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Runes/rune-of-dust.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Hell",
+        "summary": "A consumable that makes eligible HELL-native auras roll at native rarity without requiring HELL to be active.",
+        "cardSummary": "Targets the HELL aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "HELL",
+        "effect": "Allows eligible HELL-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": null
+      },
+      "system": {
+        "slug": "rune-of-hell",
+        "section": "Special Biomes",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Runes/rune-of-hell.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Galaxy",
+        "summary": "A consumable that makes eligible STARFALL-native auras roll at native rarity without requiring STARFALL to be active.",
+        "cardSummary": "Targets the STARFALL aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "STARFALL",
+        "effect": "Allows eligible STARFALL-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": null
+      },
+      "system": {
+        "slug": "rune-of-galaxy",
+        "section": "Special Biomes",
+        "sortOrder": 2,
+        "image": "/Sols RNG/Runes/rune-of-galaxy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Heaven",
+        "summary": "A consumable that makes eligible HEAVEN-native auras roll at native rarity without requiring HEAVEN to be active.",
+        "cardSummary": "Targets the HEAVEN aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "HEAVEN",
+        "effect": "Allows eligible HEAVEN-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, Random Rune Chests, Memory Match, and shop listings.",
+        "exceptions": null
+      },
+      "system": {
+        "slug": "rune-of-heaven",
+        "section": "Special Biomes",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Corruption",
+        "summary": "A consumable that makes eligible CORRUPTION-native auras roll at native rarity without requiring CORRUPTION to be active.",
+        "cardSummary": "Targets the CORRUPTION aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "CORRUPTION",
+        "effect": "Allows eligible CORRUPTION-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": null
+      },
+      "system": {
+        "slug": "rune-of-corruption",
+        "section": "Special Biomes",
+        "sortOrder": 4,
+        "image": "/Sols RNG/Runes/rune-of-corruption.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Nothing",
+        "summary": "A consumable that makes eligible NULL-native auras roll at native rarity without requiring NULL to be active.",
+        "cardSummary": "Targets the NULL aura pool for ten minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "NULL",
+        "effect": "Allows eligible NULL-native auras to roll at their native rarity regardless of the current biome.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": "The current atwiki item table notes that Entity is excluded from this native-rarity effect."
+      },
+      "system": {
+        "slug": "rune-of-nothing",
+        "section": "Special Biomes",
+        "sortOrder": 5,
+        "image": "/Sols RNG/Runes/rune-of-nothing.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Eclipse",
+        "summary": "A consumable that makes eligible daytime and nighttime auras roll at native rarity regardless of the current time.",
+        "cardSummary": "Targets daytime and nighttime aura pools for ten minutes.",
+        "rarity": "Not in Random Rune Chest",
+        "targetBiome": "DAYTIME / NIGHTTIME",
+        "effect": "Allows eligible daytime and nighttime auras to roll at their native rarity regardless of the current time.",
+        "duration": "10 minutes",
+        "obtainment": "Achievements, Memory Match, and daily shop listings.",
+        "exceptions": "The current atwiki item table notes that Dreamcatcher is excluded from this effect."
+      },
+      "system": {
+        "slug": "rune-of-eclipse",
+        "section": "Time and Universal",
+        "sortOrder": 0,
+        "image": "/Sols RNG/Runes/rune-of-eclipse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rune of Everything",
+        "summary": "A powerful consumable that combines supported biome-native aura access for a shorter activation window.",
+        "cardSummary": "Targets all supported biome pools for five minutes.",
+        "rarity": "10% chest chance",
+        "targetBiome": "All supported biomes",
+        "effect": "Allows eligible aura pools from supported biomes to roll at native rarity during the activation.",
+        "duration": "5 minutes",
+        "obtainment": "Achievements, quests, Random Rune Chests, Memory Match, and merchant shops.",
+        "exceptions": "The current atwiki item table excludes Singularity, Glitched, Cyberspace, and Dreamspace, along with aura-specific rune exclusions."
+      },
+      "system": {
+        "slug": "rune-of-everything",
+        "section": "Time and Universal",
+        "sortOrder": 1,
+        "image": "/Sols RNG/Runes/rune-of-everything.png"
+      }
+    }
+  ]
+}

@@ -15,7 +15,6 @@ import {
 } from "../shared/article-cover";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { assertCanonicalMediaUrls, toMediaPublicUrl } from "../shared/storage-public-url";
-import { parseQuizData } from "@/lib/quiz-types";
 
 type CliOptions = {
   files: string[];
@@ -567,7 +566,6 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
   const code = page.code.trim().toLowerCase();
   assertEditorialSlug(code, "quiz_pages.code", page.universe_id ?? null);
   const isPublished = page.is_published ?? true;
-  const quizData = parseQuizData(finalJson.quizData, `quiz ${code}`);
   const payload = {
     universe_id: page.universe_id ?? null,
     code,
@@ -575,7 +573,6 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
     description_md: page.description_md ?? null,
     seo_title: page.seo_title ?? null,
     seo_description: page.seo_description ?? null,
-    quiz_data: quizData,
     is_published: isPublished,
     published_at: isPublished ? new Date().toISOString() : null,
   };
@@ -589,7 +586,6 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
 
   if (dryRun) {
     console.log(existing ? `Would update quiz ${code}` : `Would create quiz ${code}`);
-    console.log(`Would store ${quizData.easy.length + quizData.medium.length + quizData.hard.length} questions.`);
     return;
   }
 

@@ -174,22 +174,8 @@ jobs:
           if [ "${{ github.event_name }}" = "push" ]; then
             current_sha="$(git ls-remote origin refs/heads/production | awk '{print $1}')"
             if [ "$current_sha" != "$GITHUB_SHA" ]; then
-              git fetch --no-tags origin "$current_sha" --quiet
-              newer_runtime=false
-              while IFS= read -r -d '' file; do
-                case "$file" in
-                  data/*|apps/web/src/data/*|apps/web/public/*|apps/web/*|Dockerfile|package.json|package-lock.json)
-                    newer_runtime=true
-                    break
-                    ;;
-                esac
-              done < <(git diff --name-only -z "$GITHUB_SHA" "$current_sha")
-              if [ "$newer_runtime" = "true" ]; then
-                echo "Skipping superseded SHA $GITHUB_SHA; newer runtime changes are present through $current_sha"
-                fresh=false
-              else
-                echo "Continuing SHA $GITHUB_SHA; newer production commits are non-runtime through $current_sha"
-              fi
+              echo "Skipping superseded SHA $GITHUB_SHA; production now points to $current_sha"
+              fresh=false
             fi
           fi
           echo "fresh=$fresh" >> "$GITHUB_OUTPUT"

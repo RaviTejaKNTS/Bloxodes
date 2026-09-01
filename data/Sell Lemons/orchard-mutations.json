@@ -1,0 +1,509 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Sell Lemons",
+    "gameSlug": "sell-lemons",
+    "collection": "orchard-mutations",
+    "route": "/wiki/sell-lemons/orchard-mutations",
+    "catalogCode": "sell-lemons-orchard-mutations",
+    "itemFields": [
+      "polarity",
+      "affectedStat",
+      "displayedMultiplier",
+      "additiveEffect",
+      "stackingRule",
+      "whenItApplies",
+      "obtainment",
+      "bestUse",
+      "cardSummary"
+    ],
+    "columns": [
+      "polarity",
+      "affectedStat",
+      "displayedMultiplier",
+      "additiveEffect",
+      "stackingRule",
+      "whenItApplies",
+      "obtainment",
+      "bestUse",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Stat",
+      "sectionOrder": [
+        "Cash",
+        "Income speed",
+        "Orchard growth",
+        "Mutation luck",
+        "Body, movement, and event"
+      ],
+      "badgeField": "polarity",
+      "subtitleFields": [
+        "displayedMultiplier"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "polarity",
+        "affectedStat",
+        "displayedMultiplier",
+        "additiveEffect",
+        "stackingRule",
+        "whenItApplies",
+        "obtainment",
+        "bestUse"
+      ],
+      "tableFields": [
+        "polarity",
+        "affectedStat",
+        "displayedMultiplier",
+        "additiveEffect",
+        "stackingRule",
+        "whenItApplies",
+        "obtainment",
+        "bestUse",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "polarity": {
+          "kind": "chip",
+          "label": "Polarity"
+        },
+        "affectedStat": {
+          "kind": "normal",
+          "label": "Stat"
+        },
+        "displayedMultiplier": {
+          "kind": "chip",
+          "label": "Displayed"
+        },
+        "additiveEffect": {
+          "kind": "chip",
+          "label": "Source value"
+        },
+        "stackingRule": {
+          "kind": "normal",
+          "label": "Stacking"
+        },
+        "whenItApplies": {
+          "kind": "normal",
+          "label": "When it applies"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How you get it"
+        },
+        "bestUse": {
+          "kind": "highlight",
+          "label": "Keep or replace"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Perfect",
+        "polarity": "Positive",
+        "affectedStat": "Cash",
+        "displayedMultiplier": "8.77x Cash",
+        "additiveEffect": "+7.77x Cash",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep",
+        "cardSummary": "Perfect is the strongest cash mutation on the official list. One stack adds 7.77x on the 1x base, so the fruit shows 8.77x Cash."
+      },
+      "system": {
+        "slug": "perfect",
+        "section": "Cash",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Exotic",
+        "polarity": "Positive",
+        "affectedStat": "Cash",
+        "displayedMultiplier": "4x Cash",
+        "additiveEffect": "+3x Cash",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep",
+        "cardSummary": "Exotic is the second-strongest cash mutation. One stack adds 3x on the 1x base, so the fruit shows 4x Cash."
+      },
+      "system": {
+        "slug": "exotic",
+        "section": "Cash",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Juicy",
+        "polarity": "Positive",
+        "affectedStat": "Cash",
+        "displayedMultiplier": "2x Cash",
+        "additiveEffect": "+1x Cash",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep",
+        "cardSummary": "Juicy is the realistic strong cash keep. One stack adds 1x on the 1x base, so the fruit shows 2x Cash."
+      },
+      "system": {
+        "slug": "juicy",
+        "section": "Cash",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tasty",
+        "polarity": "Positive",
+        "affectedStat": "Cash",
+        "displayedMultiplier": "1.5x Cash",
+        "additiveEffect": "+0.5x Cash",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep until a stronger cash roll",
+        "cardSummary": "Tasty is a smaller cash keep until a bigger cash mutation lands. One stack adds 0.5x on the 1x base, so the fruit shows 1.5x Cash."
+      },
+      "system": {
+        "slug": "tasty",
+        "section": "Cash",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draining",
+        "polarity": "Negative",
+        "affectedStat": "Cash",
+        "displayedMultiplier": "0.8x Cash",
+        "additiveEffect": "0.8x Cash",
+        "stackingRule": "Multiplicative",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Replace",
+        "cardSummary": "Draining is a cash downside. It multiplies Cash by 0.8x, and extra copies multiply again instead of adding."
+      },
+      "system": {
+        "slug": "draining",
+        "section": "Cash",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lazy",
+        "polarity": "Negative",
+        "affectedStat": "Cash",
+        "displayedMultiplier": "0.7x Cash",
+        "additiveEffect": "0.7x Cash",
+        "stackingRule": "Multiplicative",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Replace",
+        "cardSummary": "Lazy is the worse cash downside. The official table lists 0.7x Cash, and extra copies multiply instead of adding."
+      },
+      "system": {
+        "slug": "lazy",
+        "section": "Cash",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blessed",
+        "polarity": "Positive",
+        "affectedStat": "Income speed",
+        "displayedMultiplier": "8.77x Income speed",
+        "additiveEffect": "+7.77x Income speed",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep",
+        "cardSummary": "Blessed is the strongest income-speed mutation on the official list. One stack adds 7.77x on the 1x base, so the fruit shows 8.77x Income speed."
+      },
+      "system": {
+        "slug": "blessed",
+        "section": "Income speed",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wild",
+        "polarity": "Positive",
+        "affectedStat": "Income speed",
+        "displayedMultiplier": "4x Income speed",
+        "additiveEffect": "+3x Income speed",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep",
+        "cardSummary": "Wild is a strong income-speed keep. One stack adds 3x on the 1x base, so the fruit shows 4x Income speed."
+      },
+      "system": {
+        "slug": "wild",
+        "section": "Income speed",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zesty",
+        "polarity": "Positive",
+        "affectedStat": "Income speed",
+        "displayedMultiplier": "2x Income speed",
+        "additiveEffect": "+1x Income speed",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep",
+        "cardSummary": "Zesty is a mid income-speed keep. One stack adds 1x on the 1x base, so the fruit shows 2x Income speed."
+      },
+      "system": {
+        "slug": "zesty",
+        "section": "Income speed",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tart",
+        "polarity": "Positive",
+        "affectedStat": "Income speed",
+        "displayedMultiplier": "1.5x Income speed",
+        "additiveEffect": "+0.5x Income speed",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep until a stronger speed roll",
+        "cardSummary": "Tart is a smaller income-speed keep until a bigger speed mutation lands. One stack adds 0.5x on the 1x base, so the fruit shows 1.5x Income speed."
+      },
+      "system": {
+        "slug": "tart",
+        "section": "Income speed",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy",
+        "polarity": "Negative",
+        "affectedStat": "Income speed",
+        "displayedMultiplier": "0.8x Income speed",
+        "additiveEffect": "0.8x Income speed",
+        "stackingRule": "Multiplicative",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Replace",
+        "cardSummary": "Heavy is an income-speed downside. It multiplies Income speed by 0.8x, and extra copies multiply again instead of adding."
+      },
+      "system": {
+        "slug": "heavy",
+        "section": "Income speed",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dense",
+        "polarity": "Negative",
+        "affectedStat": "Income speed",
+        "displayedMultiplier": "0.7x Income speed",
+        "additiveEffect": "0.7x Income speed",
+        "stackingRule": "Multiplicative",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Replace",
+        "cardSummary": "Dense is the worse income-speed downside. The official table lists 0.7x Income speed, and extra copies multiply instead of adding."
+      },
+      "system": {
+        "slug": "dense",
+        "section": "Income speed",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fast",
+        "polarity": "Positive",
+        "affectedStat": "Growth speed",
+        "displayedMultiplier": "2x Growth speed",
+        "additiveEffect": "+1x Growth speed",
+        "stackingRule": "Additive",
+        "whenItApplies": "While the planted tree grows",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Keep",
+        "cardSummary": "Fast is the orchard growth keep. One stack adds 1x on the 1x base, so planted trees grow at 2x speed."
+      },
+      "system": {
+        "slug": "fast",
+        "section": "Orchard growth",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slow",
+        "polarity": "Negative",
+        "affectedStat": "Growth speed",
+        "displayedMultiplier": "0.5x Growth speed",
+        "additiveEffect": "0.5x Growth speed",
+        "stackingRule": "Multiplicative",
+        "whenItApplies": "While the planted tree grows",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Replace",
+        "cardSummary": "Slow is the orchard growth downside. It multiplies tree growth speed by 0.5x, so harvests take much longer."
+      },
+      "system": {
+        "slug": "slow",
+        "section": "Orchard growth",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pure",
+        "polarity": "Positive",
+        "affectedStat": "Mutation luck",
+        "displayedMultiplier": "1.25x Mutation luck",
+        "additiveEffect": "+0.25x Mutation luck",
+        "stackingRule": "Additive",
+        "whenItApplies": "While the planted tree grows",
+        "obtainment": "Only on each Evolution fruit. There is no other way to get Pure.",
+        "bestUse": "Keep",
+        "cardSummary": "Pure is Evolution-only mutation luck. Each Evolution fruit adds one Pure, and one stack adds 0.25x on the 1x base for 1.25x Mutation luck."
+      },
+      "system": {
+        "slug": "pure",
+        "section": "Mutation luck",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky",
+        "polarity": "Positive",
+        "affectedStat": "Mutation luck",
+        "displayedMultiplier": "3x Luck spread",
+        "additiveEffect": "+2x Luck spread",
+        "stackingRule": "Additive",
+        "whenItApplies": "While the planted tree and its plus-shape neighbors grow",
+        "obtainment": "Random roll when an orchard tree finishes growing. Once on a tree, it also raises luck for the four neighboring plots in a plus shape.",
+        "bestUse": "Situational",
+        "cardSummary": "Lucky spreads mutation luck to the tree and the four plots in a plus shape. One stack adds 2x on the 1x base, so it shows 3x Luck spread."
+      },
+      "system": {
+        "slug": "lucky",
+        "section": "Mutation luck",
+        "sortOrder": 160,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stimulating",
+        "polarity": "Positive",
+        "affectedStat": "Walk speed",
+        "displayedMultiplier": "2x Walk speed",
+        "additiveEffect": "+1x Walk speed",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Situational",
+        "cardSummary": "Stimulating raises walk speed. The first stack takes walk speed to 2x, later stacks add another 1x, and it also stacks with the Run Faster power."
+      },
+      "system": {
+        "slug": "stimulating",
+        "section": "Body, movement, and event",
+        "sortOrder": 170,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Voided",
+        "polarity": "Positive",
+        "affectedStat": "Void synergy",
+        "displayedMultiplier": "3x Void synergy",
+        "additiveEffect": "+2x Void synergy",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff during Void Events",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Situational",
+        "cardSummary": "Voided only matters during Void Events. One stack adds 2x Void synergy on the 1x base, so it shows 3x Income speed while a Void Event is active."
+      },
+      "system": {
+        "slug": "voided",
+        "section": "Body, movement, and event",
+        "sortOrder": 180,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Giant",
+        "polarity": "Positive",
+        "affectedStat": "Size",
+        "displayedMultiplier": "1.5x Size",
+        "additiveEffect": "+0.5x Size",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Situational",
+        "cardSummary": "Giant is a size mutation. One stack adds 0.5x on the 1x base, so the player shows 1.5x size. It does not raise Cash or Income speed."
+      },
+      "system": {
+        "slug": "giant",
+        "section": "Body, movement, and event",
+        "sortOrder": 190,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slimy",
+        "polarity": "Positive",
+        "affectedStat": "Appearance",
+        "displayedMultiplier": "2x Extraterrestrial",
+        "additiveEffect": "+1x Extraterrestrial",
+        "stackingRule": "Additive",
+        "whenItApplies": "60-second eat buff",
+        "obtainment": "Random roll when an orchard tree finishes growing.",
+        "bestUse": "Situational",
+        "cardSummary": "Slimy is an appearance mutation. Eating it replaces the head and arms with alien parts. The official table lists +1x Extraterrestrial, which displays as 2x."
+      },
+      "system": {
+        "slug": "slimy",
+        "section": "Body, movement, and event",
+        "sortOrder": 200,
+        "image": null
+      }
+    }
+  ]
+}

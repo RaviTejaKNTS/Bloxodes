@@ -1,8 +1,8 @@
 # Architecture
 
 Status: Active; production has documented degraded components
-Last verified: 2026-08-27
-Evidence: repository architecture/configuration, exact-SHA public health, managed-development/production migration readback, VPS Docker/Swarm and Edge Function checks, homelab synchronization checks, and local wiki database/R2 runtime tests
+Last verified: 2026-08-14
+Evidence: repository architecture/configuration, exact-SHA public health, managed-development/production migration readback, VPS Docker/Swarm and Edge Function checks, and homelab synchronization checks
 
 ## Product Surfaces
 
@@ -21,8 +21,6 @@ Evidence: repository architecture/configuration, exact-SHA public health, manage
 4. The healthy web container serves Next.js on internal port 3000.
 5. Server-side reads and mutations use self-hosted Supabase through `https://database.bloxodes.com`.
 6. Public storage URLs use `https://media.bloxodes.com`.
-
-The wiki-collection runtime uses the shared private `bloxodes-wiki` R2 bucket through the exact path-scoped `media.bloxodes.com/wiki/*` Worker. All other production media paths continue to use the Supabase media origin. Managed development and production store the same canonical immutable media URLs while using separate database publication pointers.
 
 Verified live on 2026-08-14:
 
@@ -57,14 +55,6 @@ Current scale sampled read-only on 2026-08-13:
 - Managed Supabase development owns all workstation/non-production database work; homelab systemd owns article discovery/curation and managed-dev article writing.
 - GitHub Actions owns immutable web image build/deploy and retains manual fallback workflows for several scheduled pipelines.
 - Production database events flow through `revalidation_events` and `cache_warm_events`; VPS minute cron invokes the two Edge Function workers.
-
-## Wiki Collection Data Plane
-
-- `wiki_collection_pages.published_dataset_id` selects one immutable `wiki_collection_datasets` revision; normalized item rows live in `wiki_collection_items`.
-- Public web and mobile responses read collection runtime rows server-side with the service role. The new tables have no anonymous/authenticated grants.
-- Content-addressed item media lives in one shared R2 bucket. Managed development and production use the same GET/HEAD/OPTIONS Worker URLs; separate database pointers control publication.
-- The publisher verifies local data/media, every R2 object, inserted item count, and revision ownership before it changes the page pointer. New content publication is therefore database/R2-only and does not require a web build.
-- `database-first` retains the registered local datasets as a migration fallback. Production activation requires managed-development schema/route verification first and separate production approvals for schema, Worker routing, and content publication.
 
 ## Caching
 

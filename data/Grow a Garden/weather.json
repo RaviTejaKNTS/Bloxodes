@@ -1,0 +1,1983 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Grow a Garden",
+    "gameSlug": "grow-a-garden",
+    "collection": "weather",
+    "route": "/wiki/grow-a-garden/weather",
+    "catalogCode": "grow-a-garden-weather",
+    "itemFields": [
+      "category",
+      "effects",
+      "details"
+    ],
+    "columns": [
+      "category",
+      "effects",
+      "details"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Standard",
+        "Event",
+        "Admin",
+        "Unreleased"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "effects",
+        "details"
+      ],
+      "tableFields": [
+        "category",
+        "effects",
+        "details"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Rain",
+        "category": "Standard",
+        "effects": "Increases growth speed by 50%. 50% chance to trigger the Wet mutation.",
+        "details": "You hear constant rainfall layered over the background music. Grey clouds spread across the skybox."
+      },
+      "system": {
+        "slug": "rain",
+        "section": "Standard",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden/Weather/rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frost",
+        "category": "Standard",
+        "effects": "Increases growth speed by 50%. Chance to apply Chilled or Frozen. Triggers shivering animation for players, along with a shivering sound effect.",
+        "details": "25% chance to replace Rain. It was made unavailable during the Summer Update, but was made available again in a soft update before the Zen Update (9pm EST)"
+      },
+      "system": {
+        "slug": "frost",
+        "section": "Standard",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden/Weather/frost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thunderstorm",
+        "category": "Standard",
+        "effects": "Increases growth speed by 50%. 50% chance to trigger Wet. Crops struck by lightning obtain the Shocked mutation.",
+        "details": "Placing a Lightning Rod attracts lightning strikes within the rod's range three times before deletion. During the events of 8/2/2025-8/3/2025, Thunderstorm occurred multiple times throughout local day and night. It is unknown as to why specific weather events may be \"favorited\" by natural RNG causes or Admins, although it is believed that multiple weathers were just \"favorited\" (Frost, Thunderstorm, Acid Rain, Tropical Rain, etc.) because of the overriding tiny after-effects of the Admin Abuse of the Cooking Event. This is not entirely true though and shall be perceived as an identified rumor throughout the community. 10% chance to replace Rain."
+      },
+      "system": {
+        "slug": "thunderstorm",
+        "section": "Standard",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden/Weather/thunderstorm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Night",
+        "category": "Standard",
+        "effects": "Chance to apply Moonlit. Six crops become Moonlit per night (once every 40 seconds over 4 minutes). Sky-box turns a dark purple, and the moon and stars appear in the sky.",
+        "details": "Placing a Night Staff will increase Moonlit crop yield by the amount of charges it has. Appears 30 minutes after every cosmetic restock, six times each day (00:30, 04:30, 08:30, 12:30, 16:30, and 20:30 GMT). Lasts 10 minutes. Soundtrack: Clair De Lune and Gymnopédie No. 1 by Eric Satie During the Lunar Glow Event, the Twilight Shop appeared during Night."
+      },
+      "system": {
+        "slug": "night",
+        "section": "Standard",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden/Weather/night.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blood Moon",
+        "category": "Standard",
+        "effects": "Chance to apply the Bloodlit mutation. The Sky-box turns red.",
+        "details": "Default: Six crops become Bloodlit per cycle (once every 40 seconds over 4 minutes). Placing a Night Staff increases Bloodlit crop yield based on the number of charges it has. 1 in 3 chance to replace Night for that cycle. Lasts 10 minutes. During the Lunar Glow Event, Blood Moon lasted for 15 minutes. Both the sky and the moon turn red. During the Lunar Glow Event, the Blood Moon Shop appeared during Blood Night. Soundtrack: Same as Night"
+      },
+      "system": {
+        "slug": "blood-moon",
+        "section": "Standard",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden/Weather/blood-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteor Shower",
+        "category": "Standard",
+        "effects": "Meteors fall from the sky. Crops hit by meteors obtain the Celestial mutation.",
+        "details": "Placing a Star Caller directs meteors to crops within its range three times before it is deleted. Duration: 3 minutes. Only appears during Blood Moon or Night."
+      },
+      "system": {
+        "slug": "meteor-shower",
+        "section": "Standard",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden/Weather/meteor-shower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystal Beams",
+        "category": "Standard",
+        "effects": "Once all crystals have been activated, crops have a chance to get a few mutations (Known: Celestial, Aurora, Shocked).",
+        "details": "Spawns 8 crystals around the map, players can click each one 5 times to apply various mutations. Crystal Beams used to be an admin weather yet was changed to happen within the normal weather cycle in the Prehistoric Event."
+      },
+      "system": {
+        "slug": "crystal-beams",
+        "section": "Standard",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden/Weather/crystal-beams.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Windy",
+        "category": "Standard",
+        "effects": "Chance to apply the Windstruck mutation.",
+        "details": "Applies a white tint to the player's camera. Will make wind particle effects fly around the map."
+      },
+      "system": {
+        "slug": "windy",
+        "section": "Standard",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden/Weather/windy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gale",
+        "category": "Standard",
+        "effects": "Rare version of Windy. High chance to trigger the Windstruck mutation. Players will be blown by strong wind currents, slowly moving them towards the gear shop area.",
+        "details": "Applies a white tint to the player's camera. Makes large wind particle effects fly around the map. Makes the player's camera shake slowly."
+      },
+      "system": {
+        "slug": "gale",
+        "section": "Standard",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden/Weather/gale.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tornado",
+        "category": "Standard",
+        "effects": "The sky turns cloudy, and tornadoes spawn around the map. Crops struck by a tornado will obtain Twisted mutation.",
+        "details": "Multiple tornadoes may spawn in simultaneously."
+      },
+      "system": {
+        "slug": "tornado",
+        "section": "Standard",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden/Weather/tornado.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sandstorm",
+        "category": "Standard",
+        "effects": "Sand particles fly around the map, adding a yellow-tinted fog and making the ground a sandy-yellow. Chance to apply the Sandy mutation.",
+        "details": "Makes the player's camera shake slowly."
+      },
+      "system": {
+        "slug": "sandstorm",
+        "section": "Standard",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden/Weather/sandstorm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heat Wave",
+        "category": "Standard",
+        "effects": "Crops hit by sun rays obtain the Sundried mutation.",
+        "details": "Placing a Tanning Mirror redirects sun rays to crops 10 times before it is deleted. Accompanied by a sound similar to the buzzing of cicadas."
+      },
+      "system": {
+        "slug": "heat-wave",
+        "section": "Standard",
+        "sortOrder": 12,
+        "image": "/Grow%20a%20Garden/Weather/heat-wave.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Acid Rain",
+        "category": "Standard",
+        "effects": "Chance to apply Acidic mutation. Functions the same as normal rain.",
+        "details": "Skybox turns green and a dark green fog engulfs the map, making visibility shorten by 50 studs. Acid Rain used to be an admin weather yet was changed to happen within the normal weather cycle in the Cooking Event."
+      },
+      "system": {
+        "slug": "acid-rain",
+        "section": "Standard",
+        "sortOrder": 13,
+        "image": "/Grow%20a%20Garden/Weather/acid-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sun God",
+        "category": "Standard",
+        "effects": "Applies the Dawnbound mutation to four or more sunflowers when presented in front of the Sun God. A golden Jandel spreading his arms will appear behind the egg, cosmetics, and gear shops with a golden, god-like aura."
+      },
+      "system": {
+        "slug": "sun-god",
+        "section": "Standard",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden/Weather/sun-god.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tropical Rain",
+        "category": "Standard",
+        "effects": "Increases growth speed by 50%. Chance to apply the Drenched mutation. The sky turns sea green and rain particles fall from the sky.",
+        "details": "Whenever a player walks, a water splash effect can be seen on the ground. The ground is lightly flooded by water. Soundtrack: Tropical Breeze -- The Puahia Street Players"
+      },
+      "system": {
+        "slug": "tropical-rain",
+        "section": "Standard",
+        "sortOrder": 15,
+        "image": "/Grow%20a%20Garden/Weather/tropical-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aurora Borealis",
+        "category": "Standard",
+        "effects": "+50% Grow speed. Chance to apply Aurora.",
+        "details": "Neon purple, pink, and blue waves stretch out from the sky. May appear every around few hours The skybox is pale-blueish. Looks and resembles Night."
+      },
+      "system": {
+        "slug": "aurora-borealis",
+        "section": "Standard",
+        "sortOrder": 16,
+        "image": "/Grow%20a%20Garden/Weather/aurora-borealis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Solar Eclipse",
+        "category": "Standard",
+        "effects": "Chance to apply Eclipse mutation to crops.",
+        "details": "The Skybox turns completely dark. The sun turns black from the center."
+      },
+      "system": {
+        "slug": "solar-eclipse",
+        "section": "Standard",
+        "sortOrder": 17,
+        "image": "/Grow%20a%20Garden/Weather/solar-eclipse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Earthquake",
+        "category": "Standard",
+        "effects": "Chance to apply Cracked mutation to crops.",
+        "details": "Cracks form on the map. Second event that effects the map, the first is Sliced."
+      },
+      "system": {
+        "slug": "earthquake",
+        "section": "Standard",
+        "sortOrder": 18,
+        "image": "/Grow%20a%20Garden/Weather/earthquake.png"
+      }
+    },
+    {
+      "item": {
+        "name": "NPC Birthday",
+        "category": "Standard",
+        "effects": "Feed the NPC to get something from their shop. Players cannot feed the NPC 2 times."
+      },
+      "system": {
+        "slug": "npc-birthday",
+        "section": "Standard",
+        "sortOrder": 19,
+        "image": "/Grow%20a%20Garden/Weather/npc-birthday.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gentle Drizzle",
+        "category": "Standard",
+        "effects": "Chance to apply the Moist mutation.",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "gentle-drizzle",
+        "section": "Standard",
+        "sortOrder": 20,
+        "image": "/Grow%20a%20Garden/Weather/gentle-drizzle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitchen Storm",
+        "category": "Event",
+        "effects": "Doubled Cooking Time Chance to get Aromatic mutation random crop. Increased chances of food carrying over crop mutations.",
+        "details": "Kitchen utensils and pans can be seen flying around It looks like a storm with high wind speed, chaos, etc."
+      },
+      "system": {
+        "slug": "kitchen-storm",
+        "section": "Event",
+        "sortOrder": 21,
+        "image": "/Grow%20a%20Garden/Weather/kitchen-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zen Aura",
+        "category": "Event",
+        "effects": "Pixel particles and leaves revolve around the skybox. Once every 30 seconds of the Zen event the Zen Channeller summons an orb that applies the Tranquil mutation to a random crop.",
+        "details": "Activates every hour. Players can see when the next Zen Aura will occur, which is shown above the Zen Tree."
+      },
+      "system": {
+        "slug": "zen-aura",
+        "section": "Event",
+        "sortOrder": 22,
+        "image": "/Grow%20a%20Garden/Weather/zen-aura.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupted Aura",
+        "category": "Event",
+        "effects": "Pixel particles and leaves revolve around the skybox like Zen Aura but red. Once every 30 seconds of the Corrupted Zen event the Zen Channeller summons an orb that applies the Corrupt mutation to a random crop.",
+        "details": "Have a chance to replace Zen Aura Players can see when the next Zen Aura will occur, which is shown above the Zen Tree."
+      },
+      "system": {
+        "slug": "corrupted-aura",
+        "section": "Event",
+        "sortOrder": 23,
+        "image": "/Grow%20a%20Garden/Weather/corrupted-aura.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Swarm",
+        "category": "Event",
+        "effects": "A bee visits a player's garden. Applies the Pollinated mutation to a random crop.",
+        "details": "Duration: ~10 minutes Soundtrack: Hungarian Dance No. 5 — Johannes Brahms and Trumpet Concerto — Joseph Haydn."
+      },
+      "system": {
+        "slug": "bee-swarm",
+        "section": "Event",
+        "sortOrder": 24,
+        "image": "/Grow%20a%20Garden/Weather/bee-swarm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Working Bee Swarm",
+        "category": "Event",
+        "effects": "Multiple worker bees visit each player's garden. Applies the Pollinated mutation to random crops at a greater speed than in a standard Bee Swarm. x10 craft speed.",
+        "details": "Duration: ~10 minutes Soundtrack: Same as Bee Swarm"
+      },
+      "system": {
+        "slug": "working-bee-swarm",
+        "section": "Event",
+        "sortOrder": 25,
+        "image": "/Grow%20a%20Garden/Weather/working-bee-swarm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Harvest",
+        "category": "Event",
+        "effects": "Put Summer Fruits in the cart, wait and claim prizes",
+        "details": "Lasts 10 minutes"
+      },
+      "system": {
+        "slug": "summer-harvest",
+        "section": "Event",
+        "sortOrder": 26,
+        "image": "/Grow%20a%20Garden/Weather/summer-harvest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mega Summer Harvest",
+        "category": "Event",
+        "effects": "Grants players 2× Harvest Points and growth speed.",
+        "details": "Duration: 10 minutes Soundtrack: Identical to a standard Summer Harvest, but sped up and slightly toned down in volume."
+      },
+      "system": {
+        "slug": "mega-summer-harvest",
+        "section": "Event",
+        "sortOrder": 27,
+        "image": "/Grow%20a%20Garden/Weather/mega-summer-harvest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fairies",
+        "category": "Event",
+        "effects": "Fairies visits the players' gardens. Applies the Glimmering mutation to a random crop.",
+        "details": "Lasts 10 minutes, but it can be Fairy Event#Fairy Upgrades upgraded to last longer. The sky turns into a purple haze with sparkles drifting around."
+      },
+      "system": {
+        "slug": "fairies",
+        "section": "Event",
+        "sortOrder": 28,
+        "image": "/Grow%20a%20Garden/Weather/fairies.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fall Bloom",
+        "category": "Event",
+        "effects": "Applies the Fall mutation to a random crop. Restocks the Fall Market.",
+        "details": "The sky turns into an orange sunset, and leaves are falling."
+      },
+      "system": {
+        "slug": "fall-bloom",
+        "section": "Event",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nutty Fever",
+        "category": "Event",
+        "effects": "The player who activated the event will have their Chubby Chipmunk's cooldown reduced to 30 seconds.",
+        "details": "Several acorns can be seen floating in the sky. This event is client-based, so it doesn't affect other players' Chubby Chipmunk."
+      },
+      "system": {
+        "slug": "nutty-fever",
+        "section": "Event",
+        "sortOrder": 30,
+        "image": "/Grow%20a%20Garden/Weather/nutty-fever.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bat Attack",
+        "category": "Event",
+        "effects": "Chance to apply Vamp mutation.",
+        "details": "Bats appear and visits the players' gardens. Chance to appear after filling up the witch's cauldron"
+      },
+      "system": {
+        "slug": "bat-attack",
+        "section": "Event",
+        "sortOrder": 31,
+        "image": "/Grow%20a%20Garden/Weather/bat-attack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Full Moon",
+        "category": "Event",
+        "effects": "Slightly higher chance of the Bloodlit mutation.",
+        "details": "The Sky-box turns orange and a full moon comes up, similar to the Night and Blood Moon weather. Added during the Ghoul Garden update. First event to feature an emoji in it's description, it being the 👻 (Ghost) emoji. Chance to appear after filling up the witch's cauldron"
+      },
+      "system": {
+        "slug": "full-moon",
+        "section": "Event",
+        "sortOrder": 32,
+        "image": "/Grow%20a%20Garden/Weather/full-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween Night",
+        "category": "Event",
+        "effects": "Opens the Halloween Market and makes the Ancient Jack O Lantern appear.",
+        "details": "This is the moment when the spirit world collides with the living world. Turns the sky into an orange and red gradient with stars."
+      },
+      "system": {
+        "slug": "halloween-night",
+        "section": "Event",
+        "sortOrder": 33,
+        "image": "/Grow%20a%20Garden/Weather/halloween-night.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Rain",
+        "category": "Event",
+        "effects": "Increased Wet Fruit Chance",
+        "details": "Rain falls from above. The ground turns desaturated and yellow, with small patches of grass."
+      },
+      "system": {
+        "slug": "safari-rain",
+        "section": "Event",
+        "sortOrder": 34,
+        "image": "/Grow%20a%20Garden/Weather/safari-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Night",
+        "category": "Event",
+        "effects": "Increased Nocturnal Fruit Chance",
+        "details": "Sky-box turns a dark purple, and a pixelated moon appears in the sky. The ground turns desaturated and yellow, with small patches of grass."
+      },
+      "system": {
+        "slug": "safari-night",
+        "section": "Event",
+        "sortOrder": 35,
+        "image": "/Grow%20a%20Garden/Weather/safari-night.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Drought",
+        "category": "Event",
+        "effects": "Increased Arid Fruit Chance",
+        "details": "The ground turns desaturated and yellow, with small patches of grass."
+      },
+      "system": {
+        "slug": "safari-drought",
+        "section": "Event",
+        "sortOrder": 36,
+        "image": "/Grow%20a%20Garden/Weather/safari-drought.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Oasis",
+        "category": "Event",
+        "effects": "Increased Mirage Fruit Chance 5x Crafting speed.",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "safari-oasis",
+        "section": "Event",
+        "sortOrder": 37,
+        "image": "/Grow%20a%20Garden/Weather/safari-oasis.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wet",
+        "category": "Event",
+        "effects": "Chance to apply Wet mutation.",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "wet",
+        "section": "Event",
+        "sortOrder": 38,
+        "image": "/Grow%20a%20Garden/Weather/wet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Stampede",
+        "category": "Event",
+        "effects": "Increased Stampede Fruit Chance Pet cooldowns advance 2x faster.",
+        "details": "Safari animals can be seen running in a straight line. If the player touches one of the [[Safari Egg#Pets|animals], the player gets flinged. The ground turns desaturated and yellow, with small patches of grass."
+      },
+      "system": {
+        "slug": "safari-stampede",
+        "section": "Event",
+        "sortOrder": 39,
+        "image": "/Grow%20a%20Garden/Weather/safari-stampede.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Dusk",
+        "category": "Event",
+        "effects": "Chance to apply Twilight mutation.",
+        "details": "The sky turns dark purple and foggy."
+      },
+      "system": {
+        "slug": "safari-dusk",
+        "section": "Event",
+        "sortOrder": 40,
+        "image": "/Grow%20a%20Garden/Weather/safari-dusk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Storm",
+        "category": "Event",
+        "effects": "Chance to apply Typhoon mutation.",
+        "details": "Lighting strikes all over the map."
+      },
+      "system": {
+        "slug": "safari-storm",
+        "section": "Event",
+        "sortOrder": 41,
+        "image": "/Grow%20a%20Garden/Weather/safari-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Typhoon",
+        "category": "Event",
+        "effects": "Chance to apply Monsoon mutation.",
+        "details": "This weather also has a mutation that goes by the same name."
+      },
+      "system": {
+        "slug": "safari-typhoon",
+        "section": "Event",
+        "sortOrder": 42,
+        "image": "/Grow%20a%20Garden/Weather/safari-typhoon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Hunt",
+        "category": "Event",
+        "effects": "Increased chance to trigger Arid and Mirage mutations.",
+        "details": "Gray clouds fill up the sky, and red eyes can be seen everywhere."
+      },
+      "system": {
+        "slug": "safari-hunt",
+        "section": "Event",
+        "sortOrder": 43,
+        "image": "/Grow%20a%20Garden/Weather/safari-hunt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Tour",
+        "category": "Event",
+        "effects": "Rewards every player in the server at each stop. The rewards are Levelup Lollipop, Safari Seed Pack, Safari Crate, and Safari Seed Pack.",
+        "details": "A jeep appears on the event island. It circles the map, stopping at each location for the players to take a look. The stops are the Lions, Hyenas, Crocodiles, and the waterfall, before the jeep returns to the event island. The ground turns desaturated and yellow, with small patches of grass."
+      },
+      "system": {
+        "slug": "safari-tour",
+        "section": "Event",
+        "sortOrder": 44,
+        "image": "/Grow%20a%20Garden/Weather/safari-tour.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mega Safari Harvest",
+        "category": "Event",
+        "effects": "Safari Joe Arrives! 2x points from submitting! Players can submit pets to Safari Joe for a random reward."
+      },
+      "system": {
+        "slug": "mega-safari-harvest",
+        "section": "Event",
+        "sortOrder": 45,
+        "image": "/Grow%20a%20Garden/Weather/mega-safari-harvest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Smithing Storm",
+        "category": "Event",
+        "effects": "5x Crafting speed",
+        "details": "Hammers, shields, anvils, and smithing tools can be seen spinning and flying around."
+      },
+      "system": {
+        "slug": "smithing-storm",
+        "section": "Event",
+        "sortOrder": 46,
+        "image": "/Grow%20a%20Garden/Weather/smithing-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Smithing Fever",
+        "category": "Event",
+        "effects": "Chance to apply Tempered mutation.",
+        "details": "Hammers are flying around."
+      },
+      "system": {
+        "slug": "smithing-fever",
+        "section": "Event",
+        "sortOrder": 47,
+        "image": "/Grow%20a%20Garden/Weather/smithing-fever.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Dinner",
+        "category": "Event",
+        "effects": "2x Cooking speed Christmas Food return double",
+        "details": "4 tables appear on the map, with each containing candles, plates, and Christmas-themed [[Food#Food List|food]."
+      },
+      "system": {
+        "slug": "christmas-dinner",
+        "section": "Event",
+        "sortOrder": 48,
+        "image": "/Grow%20a%20Garden/Weather/christmas-dinner.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Night",
+        "category": "Event",
+        "effects": "Chance to apply Ornamented mutation.",
+        "details": "Gifts and lights appear in the ground while it snows."
+      },
+      "system": {
+        "slug": "festive-night",
+        "section": "Event",
+        "sortOrder": 49,
+        "image": "/Grow%20a%20Garden/Weather/festive-night.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silent Night",
+        "category": "Event",
+        "effects": "When the bells ring, gives all players a random boost for 45 seconds. The boosts are: 3x Movement Speed, Snowy Mutation chance, TBA",
+        "details": "The sky turns dark, it snows, and bells can be heard."
+      },
+      "system": {
+        "slug": "silent-night",
+        "section": "Event",
+        "sortOrder": 50,
+        "image": "/Grow%20a%20Garden/Weather/silent-night.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Milk And Cookies",
+        "category": "Event",
+        "effects": "Increased Pet XP gain Reduced [[Pets|Pet] ability cooldown",
+        "details": "The sky rains milk, while cookies fall."
+      },
+      "system": {
+        "slug": "milk-and-cookies",
+        "section": "Event",
+        "sortOrder": 51,
+        "image": "/Grow%20a%20Garden/Weather/milk-and-cookies.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snow Day",
+        "category": "Event",
+        "effects": "Chance to apply Chilled mutation.",
+        "details": "A Snow Fort appears near the Gear Shop Snowballs appear on the map, and players can collect them."
+      },
+      "system": {
+        "slug": "snow-day",
+        "section": "Event",
+        "sortOrder": 52,
+        "image": "/Grow%20a%20Garden/Weather/snow-day.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowfall",
+        "category": "Event",
+        "effects": "Chance to apply Snowy mutation.",
+        "details": "Snow falls from above. Very common in the Christmas Harvest Event."
+      },
+      "system": {
+        "slug": "snowfall",
+        "section": "Event",
+        "sortOrder": 53,
+        "image": "/Grow%20a%20Garden/Weather/snowfall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowball Fight",
+        "category": "Event",
+        "effects": "Chance to apply Snowtouched mutation. TBA",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "snowball-fight",
+        "section": "Event",
+        "sortOrder": 54,
+        "image": "/Grow%20a%20Garden/Weather/snowball-fight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yeti Night",
+        "category": "Event",
+        "effects": "Spawns dead trees around the map. By approaching the dead trees, the player can interact with it to chop the tree down, giving three snow-related mutations to crops in the players garden!",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "yeti-night",
+        "section": "Event",
+        "sortOrder": 55,
+        "image": "/Grow%20a%20Garden/Weather/yeti-night.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Disco",
+        "category": "Admin",
+        "effects": "Chance to apply Disco mutation. Forces players to dance with one of three default Roblox dances.",
+        "details": "Duration: 1–2 minutes (the duration of the song). Soundtrack: Raining Tacos by Parry Gripp & Boone The song is a nostalgic Roblox song For a short period of time, the song was changed before it was switched back to the original"
+      },
+      "system": {
+        "slug": "disco",
+        "section": "Admin",
+        "sortOrder": 56,
+        "image": "/Grow%20a%20Garden/Weather/disco.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jandel Storm",
+        "category": "Admin",
+        "effects": "Spawns lightning strikes at 4 strikes/second. A gigantic Jandel entity appears behind the Gear Shop.",
+        "details": "Duration: ~1 minute Soundtrack: Beethoven's \"Ode to Joy\". Soundtrack is a symphony music by Ludwig Van Beethoven Only activated by Jandel."
+      },
+      "system": {
+        "slug": "jandel-storm",
+        "section": "Admin",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sheckle Rain",
+        "category": "Admin",
+        "effects": "Turns the sky yellowish-golden. Sheckles fall from the sky and can be collected.",
+        "details": "No Crop Mutations are applied to crops. Duration: 1-3 minutes Avg.: 30 sheckles"
+      },
+      "system": {
+        "slug": "sheckle-rain",
+        "section": "Admin",
+        "sortOrder": 58,
+        "image": "/Grow%20a%20Garden/Weather/sheckle-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Rain",
+        "category": "Admin",
+        "effects": "Chocolate clouds appear in the sky. Chance to apply Choc mutation.",
+        "details": "The most recent Chocolate Rain was hosted in the admin abuse of the Fall Market Event update on September 13st, 2025, a grateful expression from Jandel from a recent admin abuse on August, 16, 2025. Duration: Matches standard Rain unless manually altered."
+      },
+      "system": {
+        "slug": "chocolate-rain",
+        "section": "Admin",
+        "sortOrder": 59,
+        "image": "/Grow%20a%20Garden/Weather/chocolate-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jandel Laser",
+        "category": "Admin",
+        "effects": "Crops hit by laser beams obtain Plasma mutation. A giant Jandel NPC spawns and has laser eyes that shoot beams at random parts of the map.",
+        "details": "Leaves temporary marks where the laser beams hit on the map's surface. Only activated twice by Jandel."
+      },
+      "system": {
+        "slug": "jandel-laser",
+        "section": "Admin",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Monster Mash",
+        "category": "Admin",
+        "effects": "DJ Jhai appears behind the Pet Eggs and Gear Shop with a DJ booth.",
+        "details": "Forces players to dance to the \"Monster Mash\" emote. Everyone in the \"Monster Mash\" was rewarded with the Monster Mash Potion Trophy. No Crop Mutations are applied to crops."
+      },
+      "system": {
+        "slug": "monster-mash",
+        "section": "Admin",
+        "sortOrder": 61,
+        "image": "/Grow%20a%20Garden/Weather/monster-mash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "DJ Sam",
+        "category": "Admin",
+        "effects": "Crops can get the Disco mutation.",
+        "details": "DJ Sam appears behind the Pet Eggs and Gear Shop with a DJ booth. In the spawning command, it says \"DJ Sandstorm\", but the weather is called \"DJ Sam\""
+      },
+      "system": {
+        "slug": "dj-sam",
+        "section": "Admin",
+        "sortOrder": 62,
+        "image": "/Grow%20a%20Garden/Weather/dj-sam.png"
+      }
+    },
+    {
+      "item": {
+        "name": "DJ Onett",
+        "category": "Admin",
+        "effects": "Can (maybe) give the Disco mutation, but its not confirmed.",
+        "details": "DJ Onett spawns behind the Gear Shop with a timer counting down to the Bizzy Bee event. Only spawned once (exclusive to the Bizzy Bee event). The soundtrack is a reference to \"Bee Swarm Simulator\", an old popular roblox game."
+      },
+      "system": {
+        "slug": "dj-onett",
+        "section": "Admin",
+        "sortOrder": 63,
+        "image": "/Grow%20a%20Garden/Weather/dj-onett.png"
+      }
+    },
+    {
+      "item": {
+        "name": "DJ Zombiehours",
+        "category": "Admin",
+        "effects": "Can (maybe) give the Disco mutation, but its not confirmed.",
+        "details": "DJ Zombiehours spawns behind the Gear Shop with a timer counting down to the Summer Harvest event. Only spawned once (exclusive to the Summer Harvest event)."
+      },
+      "system": {
+        "slug": "dj-zombiehours",
+        "section": "Admin",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Black Hole",
+        "category": "Admin",
+        "effects": "Chance to apply Void Touched mutation. A giant black hole spawns in the middle of the sky and gives the sky-box purple effects.",
+        "details": "Lowers gravity and gives players a jump boost. Pulls out crop effects from the center of the map."
+      },
+      "system": {
+        "slug": "black-hole",
+        "section": "Admin",
+        "sortOrder": 65,
+        "image": "/Grow%20a%20Garden/Weather/black-hole.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beenado",
+        "category": "Admin",
+        "effects": "Chance to apply Pollinated mutation.",
+        "details": "If Tornado is activated during Bee Swarm, Beenado is activated. Can be activated by admins."
+      },
+      "system": {
+        "slug": "beenado",
+        "section": "Admin",
+        "sortOrder": 66,
+        "image": "/Grow%20a%20Garden/Weather/beenado.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Storm",
+        "category": "Admin",
+        "effects": "Applies the Honeyglazed mutation",
+        "details": "The sky turns orange, and it rains honey."
+      },
+      "system": {
+        "slug": "bee-storm",
+        "section": "Admin",
+        "sortOrder": 67,
+        "image": "/Grow%20a%20Garden/Weather/bee-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luck",
+        "category": "Admin",
+        "effects": "Currently, Luck Event is only a visual as its feature is capped by developers.",
+        "details": "This is the first weather where the sky or the entire map is left untouched, the second being NPC Birthday."
+      },
+      "system": {
+        "slug": "luck",
+        "section": "Admin",
+        "sortOrder": 68,
+        "image": "/Grow%20a%20Garden/Weather/luck.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Floating Jandel",
+        "category": "Admin",
+        "effects": "Chance to apply Heavenly mutation.",
+        "details": "This weather was not made by Jandel."
+      },
+      "system": {
+        "slug": "floating-jandel",
+        "section": "Admin",
+        "sortOrder": 69,
+        "image": "/Grow%20a%20Garden/Weather/floating-jandel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Volcano",
+        "category": "Admin",
+        "effects": "Chance to apply Molten mutation. Can also be applied to crops struck by lava blocks.",
+        "details": "Only able to be spawned by admins. Gives a warning to all players when it begins. Based on the volcano from Natural Disaster Survival."
+      },
+      "system": {
+        "slug": "volcano",
+        "section": "Admin",
+        "sortOrder": 70,
+        "image": "/Grow%20a%20Garden/Weather/volcano.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Airhead",
+        "category": "Admin",
+        "effects": "Makes the player have low gravity, similar to the Blackhole, Space Travel etc.",
+        "details": "Makes the player's head giant Gives no crop mutations Jandel said he might start adding more \"pointless goofy\" events like the Airhead weather."
+      },
+      "system": {
+        "slug": "airhead",
+        "section": "Admin",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Storm",
+        "category": "Admin",
+        "effects": "Chance to apply Blitzshock mutation.",
+        "details": "Sky becomes same as Space Travel weather. Cyan footballs fall from the sky and explode. Was ran during Celebrity Guest Event, and before the Chubby Chipmunk Event. May not happen anymore"
+      },
+      "system": {
+        "slug": "lightning-storm",
+        "section": "Admin",
+        "sortOrder": 72,
+        "image": "/Grow%20a%20Garden/Weather/lightning-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Post Dunk",
+        "category": "Admin",
+        "effects": "Chance to apply Touchdown mutation.",
+        "details": "Sky becomes dark. Giant yellow touchdown post appears with Travis Kelce holding onto it. Was ran during Celebrity Guest Event, and before Chubby Chipmunk Event. May not happen anymore"
+      },
+      "system": {
+        "slug": "post-dunk",
+        "section": "Admin",
+        "sortOrder": 73,
+        "image": "/Grow%20a%20Garden/Weather/post-dunk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Route Runner",
+        "category": "Admin",
+        "effects": "Chance to apply Subzero mutation.",
+        "details": "Sky and ground become cyan. Snow falls from the sky. Blue tornados go around the map. Travis Kelce is running around the map. Was ran during Celebrity Guest Event, and before Chubby Chipmunk Event. May not happen anymore."
+      },
+      "system": {
+        "slug": "route-runner",
+        "section": "Admin",
+        "sortOrder": 74,
+        "image": "/Grow%20a%20Garden/Weather/route-runner.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Money Rain",
+        "category": "Admin",
+        "effects": "Chance to apply Jackpot mutation.",
+        "details": "Jandel throws out robux and they fall from the sky. Was ran during Celebrity Guest Event, before the Chubby Chipmunk Event and before the Ghoul Garden update."
+      },
+      "system": {
+        "slug": "money-rain",
+        "section": "Admin",
+        "sortOrder": 75,
+        "image": "/Grow%20a%20Garden/Weather/money-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Space Travel",
+        "category": "Admin",
+        "effects": "Asteroids spawn above the map. Increases growth speed by 75%. Chance to apply the Galactic mutation. It is said there's an easter egg in this weather. The hint is \"space\"",
+        "details": "Lower gravity. 2 rockets spawn on either side of the map, carrying the map through space. Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "space-travel",
+        "section": "Admin",
+        "sortOrder": 76,
+        "image": "/Grow%20a%20Garden/Weather/space-travel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien Invasion",
+        "category": "Admin",
+        "effects": "Chance to apply the Alienlike mutation. Sky-box turns light-blue, and aliens spawn throughout the map.",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "alien-invasion",
+        "section": "Admin",
+        "sortOrder": 77,
+        "image": "/Grow%20a%20Garden/Weather/alien-invasion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Under The Sea",
+        "category": "Admin",
+        "effects": "Chance to apply the Wet mutation. Sky-box turns light-blue and flower-like shapes appear above, similar to Bikini Bottom from Spongebob Squarepants. Players can \"swim\" around the map by jumping.",
+        "details": "This weather is only able to be spawned by admins. There is a limit to how high and how far the players can swim. At the start of the event, water will suddenly flood the map."
+      },
+      "system": {
+        "slug": "under-the-sea",
+        "section": "Admin",
+        "sortOrder": 78,
+        "image": "/Grow%20a%20Garden/Weather/under-the-sea.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Solar Flare",
+        "category": "Admin",
+        "effects": "Chance to apply Sundried and Verdant mutations.",
+        "details": "Only able to be spawned by admins. The screen turns completely white for a few seconds before Sundried or Verdant mutations are applied to crops."
+      },
+      "system": {
+        "slug": "solar-flare",
+        "section": "Admin",
+        "sortOrder": 79,
+        "image": "/Grow%20a%20Garden/Weather/solar-flare.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fried Chicken",
+        "category": "Admin",
+        "effects": "Chance to apply the Fried mutation. The Cooked Owl pet dances behind the Gear & Pet Shop. Sky-box turns yellow-orange. Chicken wing particles fall towards the ground.",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "fried-chicken",
+        "section": "Admin",
+        "sortOrder": 80,
+        "image": "/Grow%20a%20Garden/Weather/fried-chicken.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pool Party",
+        "category": "Admin",
+        "effects": "All players receive a free Duck float cosmetics.",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "pool-party",
+        "section": "Admin",
+        "sortOrder": 81,
+        "image": "/Grow%20a%20Garden/Weather/pool-party.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brains",
+        "category": "Admin",
+        "effects": "Chance to apply Infected mutation. Multiple zombies spawn around the map. If a player touches them, their arms will be extended outwards like a zombie. The player will then be able to \"infect\" other players by touching them.",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "brains",
+        "section": "Admin",
+        "sortOrder": 82,
+        "image": "/Grow%20a%20Garden/Weather/brains.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strobe Party",
+        "category": "Admin",
+        "effects": "Can give the Disco mutation. Previously, the player had to click all the buttons that spawn on the map to get the Disco mutation, but now they don't have to.",
+        "details": "The Sky-box turns black and strobe lights start flashing around the map, similar to Fireworks."
+      },
+      "system": {
+        "slug": "strobe-party",
+        "section": "Admin",
+        "sortOrder": 83,
+        "image": "/Grow%20a%20Garden/Weather/strobe-party.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Text Collect",
+        "category": "Admin",
+        "effects": "Once all letters have been collected, crops have a chance to obtain Disco mutation.",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "text-collect",
+        "section": "Admin",
+        "sortOrder": 84,
+        "image": "/Grow%20a%20Garden/Weather/text-collect.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obby",
+        "category": "Admin",
+        "effects": "An obby appears. If the player completes the obby, they will receive a special jump pad cosmetic that gives players a jump boost when walked on.",
+        "details": "Only able to be spawned by admins. The obby goes as follow: First, the player jumps up high onto a platform with three killparts. Touching them sends them back to their garden After that, they advance to the next level where there are 3 platforms, each having 2 pads. Only one pad is correct. After completing, they will go through a conveyor belt with laser poles with a killpart at the end. They must avoid them Finally, they jump over three platforms and complete the obby, winning a Jump Pad cosmetic Failure to avoid the killparts sends the player back to their garden plot"
+      },
+      "system": {
+        "slug": "obby",
+        "section": "Admin",
+        "sortOrder": 85,
+        "image": "/Grow%20a%20Garden/Weather/obby.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pyramid Obby",
+        "category": "Admin",
+        "effects": "Similar to Obby, but different The player gets a pyramid-style cosmetic upon completion",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "pyramid-obby",
+        "section": "Admin",
+        "sortOrder": 86,
+        "image": "/Grow%20a%20Garden/Weather/pyramid-obby.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Carrot",
+        "category": "Admin",
+        "effects": "A huge carrot rocket spawns in the map. Launching the Carrot Rocket gives a chance for crops to obtain Radioactive mutation.",
+        "details": "This weather is only able to be spawned by admins. During The Carrot, players must submit fruits from the Seed Shop to the Carrot Rocket. Once the set amount of fuel is reached, the rocket launches, having a chance of Radioactive mutation. The more worth the crop, the more the rocket gets filled. Players standing near the carrot when its launching will get flung"
+      },
+      "system": {
+        "slug": "the-carrot",
+        "section": "Admin",
+        "sortOrder": 87,
+        "image": "/Grow%20a%20Garden/Weather/the-carrot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Armageddon",
+        "category": "Admin",
+        "effects": "Chance to apply Molten and Burnt mutation. Cause all players' skin to turn black and black smoke on players.",
+        "details": "A meteor strikes the map, signalled by a warning. An explosion happens when the meteor hit the map. Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "armageddon",
+        "section": "Admin",
+        "sortOrder": 88,
+        "image": "/Grow%20a%20Garden/Weather/armageddon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jandel Katana",
+        "category": "Admin",
+        "effects": "Chance to apply Sliced mutation.",
+        "details": "A giant Jandel appears behind the Gear Shop area and slices through the map with a knife, briefly splitting it in half. A message then notifies the player that certain crops have been granted the Sliced mutation. This weather is only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "jandel-katana",
+        "section": "Admin",
+        "sortOrder": 89,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stock Hammer",
+        "category": "Admin",
+        "effects": "Stocks a seed in the Seed Shop or a gear in the Gear Shop.",
+        "details": "A giant Jandel appears behind the gear shop with a hammer in his hand. When the hammer slams on ground, the stock comes."
+      },
+      "system": {
+        "slug": "stock-hammer",
+        "section": "Admin",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "JUNKBOT RAID",
+        "category": "Admin",
+        "effects": "Chance to apply Junkshock mutation.",
+        "details": "Multiple Junkbots spawn from the sky and begin releasing green thunderbolts on the map, as green spaceships float above the map. This is the only weather that has its name on all capital letters."
+      },
+      "system": {
+        "slug": "junkbot-raid",
+        "section": "Admin",
+        "sortOrder": 91,
+        "image": "/Grow%20a%20Garden/Weather/junkbot-raid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boil Rain",
+        "category": "Admin",
+        "effects": "Chance to apply Boil mutation.",
+        "details": "Similar effect to Rain, except the particles are colored white."
+      },
+      "system": {
+        "slug": "boil-rain",
+        "section": "Admin",
+        "sortOrder": 92,
+        "image": "/Grow%20a%20Garden/Weather/boil-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oil Rain",
+        "category": "Admin",
+        "effects": "Chance to apply Oil mutation.",
+        "details": "Similar effect to Rain, except the particles are colored black."
+      },
+      "system": {
+        "slug": "oil-rain",
+        "section": "Admin",
+        "sortOrder": 93,
+        "image": "/Grow%20a%20Garden/Weather/oil-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Floating Flamingo",
+        "category": "Admin",
+        "effects": "Chance to apply Heavenly mutation.",
+        "details": "Causes Flamingo's Roblox avatar to start floating near the Gear shop and Pet Egg shop. This is has the same effect as Floating Jandel Weather. This was part of Flamingo's ( also called MrFlimFlam ) celebrity host admin abuse. Will not happen anymore"
+      },
+      "system": {
+        "slug": "floating-flamingo",
+        "section": "Admin",
+        "sortOrder": 94,
+        "image": "/Grow%20a%20Garden/Weather/floating-flamingo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Falling Flamingo",
+        "category": "Admin",
+        "effects": "Used to restock items.",
+        "details": "Causes Flamingo's Roblox avatar to start falling near the Gear shop and Pet Egg shop. Flings the players camera towards the falling flamingo. This was part of Flamingo's ( also called MrFlimFlam ) celebrity host admin abuse. Will not happen anymore"
+      },
+      "system": {
+        "slug": "falling-flamingo",
+        "section": "Admin",
+        "sortOrder": 95,
+        "image": "/Grow%20a%20Garden/Weather/falling-flamingo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stoplight",
+        "category": "Admin",
+        "effects": "Starts a game of red light, green light. Winner gets the stoplight cosmetic. Small chance to trigger the Lightcycle mutation.",
+        "details": "During the Stoplight weather, players must walk to the other side without being caught moving by the giant blood owl. The player will be sent back to the beginning if they are caught moving during a red light. Admins (usually jhailatte) restock Prismatics at the Gear Shop (Grandmaster Sprinkler and Levelup Lollipop), which can only be obtained by winning the game. This game disables all teleporting buttons and Recall Wrench."
+      },
+      "system": {
+        "slug": "stoplight",
+        "section": "Admin",
+        "sortOrder": 96,
+        "image": "/Grow%20a%20Garden/Weather/stoplight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beanaura",
+        "category": "Admin",
+        "effects": "Causes Jandel to appear If 4 people are holding a beanstalk, they will get the Beanbound mutation. Some crops also have a chance to get the Beanbound mutation. The sky turns green during this weather event.",
+        "details": "Before the Admin Abuse War, players doing the required task gets a special seed."
+      },
+      "system": {
+        "slug": "beanaura",
+        "section": "Admin",
+        "sortOrder": 97,
+        "image": "/Grow%20a%20Garden/Weather/beanaura.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drought",
+        "category": "Admin",
+        "effects": "Chance to apply the Wiltproof mutation.*",
+        "details": "Only to be spawned by admins.* This event has never been spawned by Jandel*"
+      },
+      "system": {
+        "slug": "drought",
+        "section": "Admin",
+        "sortOrder": 98,
+        "image": "/Grow%20a%20Garden/Weather/drought.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brainrot Portal",
+        "category": "Admin",
+        "effects": "Gives the Brainrot mutation.",
+        "details": "2 Portals spawn behind the Seed Shop and the Sell Shop. Brainrots start spawning from those portals, walking in a straight line to the Gear Shop, then dissapearing."
+      },
+      "system": {
+        "slug": "brainrot-portal",
+        "section": "Admin",
+        "sortOrder": 99,
+        "image": "/Grow%20a%20Garden/Weather/brainrot-portal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brainrot Stampede",
+        "category": "Admin",
+        "effects": "Gives the Warped mutation.",
+        "details": "Similar to the Brainrot Portal weather, but brainrots rush instead of walking. If the player touches one of the brainrots, the player gets flinged. If a Blackhole activates during the Brainrot Stampede, the brainrots will start getting sucked into the black hole."
+      },
+      "system": {
+        "slug": "brainrot-stampede",
+        "section": "Admin",
+        "sortOrder": 100,
+        "image": "/Grow%20a%20Garden/Weather/brainrot-stampede.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boombox Party",
+        "category": "Admin",
+        "effects": "Chance to apply Disco mutation.",
+        "details": "Boomboxes spawn on the map. Only to be spawned by admins. A replacement for the Disco"
+      },
+      "system": {
+        "slug": "boombox-party",
+        "section": "Admin",
+        "sortOrder": 101,
+        "image": "/Grow%20a%20Garden/Weather/boombox-party.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dissonant...",
+        "category": "Admin",
+        "effects": "Chance to apply Glitched mutation.",
+        "details": "Only to be spawned by admins."
+      },
+      "system": {
+        "slug": "dissonant",
+        "section": "Admin",
+        "sortOrder": 102,
+        "image": "/Grow%20a%20Garden/Weather/dissonant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Find the Pet",
+        "category": "Admin",
+        "details": "Many pets spawn around the map. There will be a missing pet indicated by a sign. Finding the pet rewards the player with a random egg. Only to be spawned by admins. Soundtrack: Farm Music."
+      },
+      "system": {
+        "slug": "find-the-pet",
+        "section": "Admin",
+        "sortOrder": 103,
+        "image": "/Grow%20a%20Garden/Weather/find-the-pet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Watering Your Gardens",
+        "category": "Admin",
+        "effects": "Players can water their gardens and make their plants Wet. Players have a small chance to make their plants Drenched. This is the first weather with something that spawns at players' gardens."
+      },
+      "system": {
+        "slug": "watering-your-gardens",
+        "section": "Admin",
+        "sortOrder": 104,
+        "image": "/Grow%20a%20Garden/Weather/watering-your-gardens.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rain Dance",
+        "category": "Admin",
+        "effects": "Chance to apply Drenched and Wet mutation.",
+        "details": "Only to be spawned by admins. When holding out a crop while /e dancing will apply Disco mutation."
+      },
+      "system": {
+        "slug": "rain-dance",
+        "section": "Admin",
+        "sortOrder": 105,
+        "image": "/Grow%20a%20Garden/Weather/rain-dance.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "category": "Admin",
+        "effects": "Chance to apply Rainbow variant.",
+        "details": "Rainbow appears behind gear shop. This weather was created in April Only to be spawned by admins. Jandel didn't know what this did, probably as of being too long of not being used."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Admin",
+        "sortOrder": 106,
+        "image": "/Grow%20a%20Garden/Weather/rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice King",
+        "category": "Admin",
+        "effects": "Chance to apply Subzero mutation.",
+        "details": "5 podiums spawn near the event hub. The player has to submit 5 divine, prismatic or transcendent crops. Doing so will be called Sacrificing them. Once all five podiums have crops, players get the Frostspike seed."
+      },
+      "system": {
+        "slug": "ice-king",
+        "section": "Admin",
+        "sortOrder": 107,
+        "image": "/Grow%20a%20Garden/Weather/ice-king.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Midas Rain",
+        "category": "Admin",
+        "effects": "Chance to apply Gilded mutation.",
+        "details": "Gold particles fall from the sky. Only to be spawned by admins."
+      },
+      "system": {
+        "slug": "midas-rain",
+        "section": "Admin",
+        "sortOrder": 108,
+        "image": "/Grow%20a%20Garden/Weather/midas-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jandel UFO",
+        "category": "Admin",
+        "effects": "Chance to apply Alienlike mutation.",
+        "details": "Jandel's avatar flies around in a spaceship similar to the Alien Invasion weather. Only to be spawned by admins."
+      },
+      "system": {
+        "slug": "jandel-ufo",
+        "section": "Admin",
+        "sortOrder": 109,
+        "image": "/Grow%20a%20Garden/Weather/jandel-ufo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tsunami",
+        "category": "Admin",
+        "effects": "Chance to apply the Drenched mutation.",
+        "details": "Only able to be spawned by admins. A tsunami will flood the entire map, allowing the player to swim anywhere."
+      },
+      "system": {
+        "slug": "tsunami",
+        "section": "Admin",
+        "sortOrder": 110,
+        "image": "/Grow%20a%20Garden/Weather/tsunami.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Enchantment",
+        "category": "Admin",
+        "effects": "Chance to apply Enchanted mutation.",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "enchantment",
+        "section": "Admin",
+        "sortOrder": 111,
+        "image": "/Grow%20a%20Garden/Weather/enchantment.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Offering",
+        "category": "Admin",
+        "effects": "A pillar will appear outside the player's garden. If the player offer it a blueberry, a beam will rise, giving a chance to trigger the Severed mutation to the player's plants.",
+        "details": "Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "offering",
+        "section": "Admin",
+        "sortOrder": 112,
+        "image": "/Grow%20a%20Garden/Weather/offering.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soccer Event",
+        "category": "Admin",
+        "effects": "A soccer ball will spawn in the center of the map. Players must move the ball to their net to score points. The first team to reach 3 points will win a Football Goal. Chance to apply Windstruck mutation.",
+        "details": "Two nets are located at the front and back of the map. Lasts more than 2 minutes. Only able to be spawned by admins."
+      },
+      "system": {
+        "slug": "soccer-event",
+        "section": "Admin",
+        "sortOrder": 113,
+        "image": "/Grow%20a%20Garden/Weather/soccer-event.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fireworks",
+        "category": "Admin",
+        "details": "Fireworks start launching around the map. The skybox turns black."
+      },
+      "system": {
+        "slug": "fireworks",
+        "section": "Admin",
+        "sortOrder": 114,
+        "image": "/Grow%20a%20Garden/Weather/fireworks.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunset",
+        "category": "Admin",
+        "effects": "Can give the Verdant mutation.",
+        "details": "A sunset comes up."
+      },
+      "system": {
+        "slug": "sunset",
+        "section": "Admin",
+        "sortOrder": 115,
+        "image": "/Grow%20a%20Garden/Weather/sunset.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Supernova",
+        "category": "Admin",
+        "effects": "Can give the Galactic mutation.",
+        "details": "At the start of the weather event, a supernova appears"
+      },
+      "system": {
+        "slug": "supernova",
+        "section": "Admin",
+        "sortOrder": 116,
+        "image": "/Grow%20a%20Garden/Weather/supernova.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Travis Kelce Restock",
+        "category": "Admin",
+        "effects": "Restocks around 4 seeds in the Seed Shop"
+      },
+      "system": {
+        "slug": "travis-kelce-restock",
+        "section": "Admin",
+        "sortOrder": 117,
+        "image": "/Grow%20a%20Garden/Weather/travis-kelce-restock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vote",
+        "category": "Admin",
+        "effects": "Players choose between different weather.",
+        "details": "There are 4 variations of votes that have ever been spawned, them being: Yes or no (Jandel asked a question) Jandel or Jhai (who has better admin abuse) Choosing between weather Choosing between weather or restocks"
+      },
+      "system": {
+        "slug": "vote",
+        "section": "Admin",
+        "sortOrder": 118,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Albert Laser",
+        "category": "Admin",
+        "effects": "Can give the Plasma mutation if the laser hits player's fruits.",
+        "details": "Similar to the Jandel Laser, but Flamingo's avatar replaces Jandel's, and the laser is blue instead of red."
+      },
+      "system": {
+        "slug": "albert-laser",
+        "section": "Admin",
+        "sortOrder": 119,
+        "image": "/Grow%20a%20Garden/Weather/albert-laser.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seed Rain",
+        "category": "Admin",
+        "effects": "TBA",
+        "details": "Seeds fall from the sky. Players can collect seeds."
+      },
+      "system": {
+        "slug": "seed-rain",
+        "section": "Admin",
+        "sortOrder": 120,
+        "image": "/Grow%20a%20Garden/Weather/seed-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shooting Stars",
+        "category": "Admin",
+        "effects": "Can give the Moonlit mutation.",
+        "details": "Shooting stars fall from the sky, as the name of the weather suggests."
+      },
+      "system": {
+        "slug": "shooting-stars",
+        "section": "Admin",
+        "sortOrder": 121,
+        "image": "/Grow%20a%20Garden/Weather/shooting-stars.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteor Strike",
+        "category": "Admin",
+        "effects": "Gives the Meteoric mutation.",
+        "details": "The sky turns orange as meteors strike the ground."
+      },
+      "system": {
+        "slug": "meteor-strike",
+        "section": "Admin",
+        "sortOrder": 122,
+        "image": "/Grow%20a%20Garden/Weather/meteor-strike.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Super Storm",
+        "category": "Admin",
+        "effects": "TBA",
+        "details": "Lots of admin weathers at once. Gives lots of admin mutations. Mostly happens on Sundays."
+      },
+      "system": {
+        "slug": "super-storm",
+        "section": "Admin",
+        "sortOrder": 123,
+        "image": "/Grow%20a%20Garden/Weather/super-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marrow Moon",
+        "category": "Admin",
+        "effects": "Higher Moonbled Fruit Chance.",
+        "details": "The moon can be seen high up in the dark sky. Marrow Moon is a way to describe the moon in autumn, when harvests are ready."
+      },
+      "system": {
+        "slug": "marrow-moon",
+        "section": "Admin",
+        "sortOrder": 124,
+        "image": "/Grow%20a%20Garden/Weather/marrow-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "ReaperScythe",
+        "category": "Admin",
+        "effects": "Increased Blackout Fruit Chance.",
+        "details": "A few sentences appear on the player's s screen. Then screen turns dark, and spikes show up in a straight line across the map. A Reaper can be seen at the gear shop, holding a scythe."
+      },
+      "system": {
+        "slug": "reaperscythe",
+        "section": "Admin",
+        "sortOrder": 125,
+        "image": "/Grow%20a%20Garden/Weather/reaperscythe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fruit Bat Attack",
+        "category": "Admin",
+        "effects": "Increased Batty Fruit Chance And Seed Reward The player turns into a bat",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "fruit-bat-attack",
+        "section": "Admin",
+        "sortOrder": 126,
+        "image": "/Grow%20a%20Garden/Weather/fruit-bat-attack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Bat Thirst",
+        "category": "Admin",
+        "effects": "Increased Leeched Fruit Chance And Seed Reward The player turns into a bat",
+        "details": "Vampire bats fly around the map."
+      },
+      "system": {
+        "slug": "vampire-bat-thirst",
+        "section": "Admin",
+        "sortOrder": 127,
+        "image": "/Grow%20a%20Garden/Weather/vampire-bat-thirst.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glass Animals Concert",
+        "category": "Admin",
+        "effects": "Join Glass Animals as they perform their newest hit",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "glass-animals-concert",
+        "section": "Admin",
+        "sortOrder": 128,
+        "image": "/Grow%20a%20Garden/Weather/glass-animals-concert.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raining Glass Animals",
+        "category": "Admin",
+        "effects": "Increased Glossy Fruit Chance",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "raining-glass-animals",
+        "section": "Admin",
+        "sortOrder": 129,
+        "image": "/Grow%20a%20Garden/Weather/raining-glass-animals.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Cauldron",
+        "category": "Admin",
+        "effects": "Gives the Brewed mutation.",
+        "details": "A massive cauldron spawns in a random location on the map. The player must submit fruits to tip over the cauldron, and higher tier fruits fill the cauldron up more. Once the cauldron is filled, the event's effects begin."
+      },
+      "system": {
+        "slug": "giant-cauldron",
+        "section": "Admin",
+        "sortOrder": 130,
+        "image": "/Grow%20a%20Garden/Weather/giant-cauldron.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Restock Fever",
+        "category": "Admin",
+        "effects": "Lucky Restocks!",
+        "details": "Various seeds fly around in the sky, and the Seed Shop GUI has an animated rainbow outline around it."
+      },
+      "system": {
+        "slug": "restock-fever",
+        "section": "Admin",
+        "sortOrder": 131,
+        "image": "/Grow%20a%20Garden/Weather/restock-fever.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blizzard",
+        "category": "Admin",
+        "effects": "Higher chance of Frozen and Chilled mutations.",
+        "details": "A storm, but snowy."
+      },
+      "system": {
+        "slug": "blizzard",
+        "section": "Admin",
+        "sortOrder": 132,
+        "image": "/Grow%20a%20Garden/Weather/blizzard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Candy Cane Rain",
+        "category": "Admin",
+        "effects": "Candy canes fall from the sky, and crops struck by it obtain the Peppermint mutation.",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "giant-candy-cane-rain",
+        "section": "Admin",
+        "sortOrder": 133,
+        "image": "/Grow%20a%20Garden/Weather/giant-candy-cane-rain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Rink",
+        "category": "Admin",
+        "effects": "The player automatically wears skating boots when the event starts. Hoops appear around the map. Skate through all of them for a random gift!",
+        "details": "The floor turns icy and slippery."
+      },
+      "system": {
+        "slug": "ice-rink",
+        "section": "Admin",
+        "sortOrder": 134,
+        "image": "/Grow%20a%20Garden/Weather/ice-rink.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Is Here",
+        "category": "Admin",
+        "effects": "Santa flies around the map, dropping random gifts the player can collect!",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "santa-is-here",
+        "section": "Admin",
+        "sortOrder": 135,
+        "image": "/Grow%20a%20Garden/Weather/santa-is-here.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Snowball Dodge",
+        "category": "Admin",
+        "effects": "A ramp appears at the seed shop. Huge snowballs fall from there. Reach the end of the ramp, while avoiding the snowballs to get a Gold Gift! If a player gets hit by a snowball, the player will be teleported to the start.",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "giant-snowball-dodge",
+        "section": "Admin",
+        "sortOrder": 136,
+        "image": "/Grow%20a%20Garden/Weather/giant-snowball-dodge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "White Elephant",
+        "category": "Admin",
+        "effects": "Groups of 3 presents appear on the map. A player can open more than one present from the group for a random item or mutation!",
+        "details": "A White Elephant can be seen walking near the Gear Shop."
+      },
+      "system": {
+        "slug": "white-elephant",
+        "section": "Admin",
+        "sortOrder": 137,
+        "image": "/Grow%20a%20Garden/Weather/white-elephant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Crackers",
+        "category": "Admin",
+        "effects": "Christmas Crackers appear on the map. A players must hold and pull a Christmas Cracker on each side. Once both players pull, the Christmas Cracker will break, revealing a random gift.",
+        "details": "TBA"
+      },
+      "system": {
+        "slug": "christmas-crackers",
+        "section": "Admin",
+        "sortOrder": 138,
+        "image": "/Grow%20a%20Garden/Weather/christmas-crackers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Transcendent Seed Rain",
+        "category": "Unreleased"
+      },
+      "system": {
+        "slug": "transcendent-seed-rain",
+        "section": "Unreleased",
+        "sortOrder": 139,
+        "image": "/Grow%20a%20Garden/Weather/transcendent-seed-rain.png"
+      }
+    }
+  ]
+}

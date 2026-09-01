@@ -1,3 +1,5 @@
+import fs from "node:fs/promises";
+import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
@@ -12,7 +14,6 @@ import { buildCollectionPagination } from "@/components/game-collections/collect
 import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/games/grow-a-garden";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { toIsoContentDate } from "@/lib/content-dates";
-import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
 import type { CollectionContentHtml } from "./the-forge";
 
 const FALLBACK_IMAGE = "/Bloxodes.png";
@@ -295,12 +296,14 @@ function normalizeGrowGardenItem(slug: string, row: Record<string, unknown>): Gr
   }
 }
 
-function parseGrowGardenDataset(
-  config: GrowGardenCollectionConfig,
-  parsed:
+async function readGrowGardenDataset(
+  config: GrowGardenCollectionConfig
+): Promise<{ meta: GrowGardenDatasetMeta | null; items: GrowGardenCollectionItem[] }> {
+  const datasetPath = repoPath("data", "Grow a Garden", config.file);
+  const raw = await fs.readFile(datasetPath, "utf8");
+  const parsed = JSON.parse(raw) as
     | { meta?: GrowGardenDatasetMeta | null; items?: Record<string, unknown>[] | null }
-    | Record<string, unknown>[]
-): GrowGardenCollectionDataset {
+    | Record<string, unknown>[];
 
   if (Array.isArray(parsed)) {
     return {
@@ -430,15 +433,12 @@ export function getGrowGardenCollectionPageCount(config: GrowGardenCollectionCon
 }
 
 export async function loadGrowGardenCollectionDataset(config: GrowGardenCollectionConfig): Promise<GrowGardenCollectionDataset> {
-  const code = buildGrowGardenCollectionFlatCode(config.slug);
-  const runtime = await getPublishedWikiCollectionRuntimeByCode(code);
-  if (runtime) {
-    return parseGrowGardenDataset(
-      config,
-      runtime.document as { meta?: GrowGardenDatasetMeta | null; items?: Record<string, unknown>[] | null }
-    );
+  try {
+    return await readGrowGardenDataset(config);
+  } catch (error) {
+    console.error("Failed to load Grow a Garden collection dataset", error);
+    return { meta: null, items: [] };
   }
-  throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
 }
 
 type GrowGardenPreparedCollection = {

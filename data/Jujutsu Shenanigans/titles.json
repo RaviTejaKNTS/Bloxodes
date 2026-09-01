@@ -1,0 +1,341 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "titles",
+    "route": "/wiki/jujutsu-shenanigans/titles",
+    "catalogCode": "jujutsu-shenanigans-titles",
+    "itemFields": [
+      "titleType",
+      "requirement",
+      "availability",
+      "whoCanUse",
+      "displayBehavior"
+    ],
+    "columns": [
+      "titleType",
+      "requirement",
+      "availability",
+      "whoCanUse",
+      "displayBehavior"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Leaderboard kill titles",
+        "Staff and team titles",
+        "Custom and creator titles"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "titleType",
+        "requirement",
+        "availability",
+        "whoCanUse",
+        "displayBehavior"
+      ],
+      "tableFields": [
+        "titleType",
+        "requirement",
+        "availability",
+        "whoCanUse",
+        "displayBehavior"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "THE STRONGEST OF HISTORY",
+        "titleType": "Highest Kills leaderboard title",
+        "requirement": "Hold the #1 spot on the Highest Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current #1 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "the-strongest-of-history",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "THE STRONGEST OF TODAY",
+        "titleType": "Highest Kills leaderboard title",
+        "requirement": "Hold the #2 spot on the Highest Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current #2 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "the-strongest-of-today",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "THE STRONGEST AVAILABLE",
+        "titleType": "Highest Kills leaderboard title",
+        "requirement": "Hold the #3 spot on the Highest Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current #3 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "the-strongest-available",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "SPECIAL GRADE",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #1 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #1 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "special-grade",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "GRADE 1",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #2 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #2 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "grade-1",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "SEMI-GRADE 1",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #3 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #3 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "semi-grade-1",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "GRADE 2",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #4 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #4 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "grade-2",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "SEMI-GRADE 2",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #5 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #5 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "semi-grade-2",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "GRADE 3",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #6 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #6 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "grade-3",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I AM NOT TZE",
+        "titleType": "Owner title",
+        "requirement": "Reserved to Tze.",
+        "availability": "Reserved role",
+        "whoCanUse": "Tze only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "i-am-not-tze",
+        "section": "Staff and team titles",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "HEAD MODERATOR",
+        "titleType": "Head moderator title",
+        "requirement": "Reserved to the game's head moderators.",
+        "availability": "Reserved role",
+        "whoCanUse": "Head moderators only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "head-moderator",
+        "section": "Staff and team titles",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "DEVELOPER",
+        "titleType": "Developer title",
+        "requirement": "Reserved to the game's developers.",
+        "availability": "Reserved role",
+        "whoCanUse": "Developers only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "developer",
+        "section": "Staff and team titles",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "MODERATOR",
+        "titleType": "Moderator title",
+        "requirement": "Reserved to the game's moderators.",
+        "availability": "Reserved role",
+        "whoCanUse": "Moderators only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "moderator",
+        "section": "Staff and team titles",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "CONTRIBUTOR",
+        "titleType": "Contributor title",
+        "requirement": "Reserved to the game's contributors.",
+        "availability": "Reserved role",
+        "whoCanUse": "Contributors only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "contributor",
+        "section": "Staff and team titles",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "TESTER",
+        "titleType": "Tester and balancer title",
+        "requirement": "Reserved to the game's testers and balancers.",
+        "availability": "Reserved role",
+        "whoCanUse": "Testers and balancers only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "tester",
+        "section": "Staff and team titles",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "OVERCOOKER",
+        "titleType": "Speculated custom title",
+        "requirement": "Speculated to be a custom title for Frost, one of the game's head moderators.",
+        "availability": "Custom or account-specific",
+        "whoCanUse": "No normal player route is listed.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "overcooker",
+        "section": "Custom and creator titles",
+        "sortOrder": 160,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "GAMBLER",
+        "titleType": "Account-specific custom title",
+        "requirement": "Granted to moderator Alserex after beating Tze in Twenty One.",
+        "availability": "Custom or account-specific",
+        "whoCanUse": "No normal player route is listed.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "gambler",
+        "section": "Custom and creator titles",
+        "sortOrder": 170,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "CONTENT CREATOR",
+        "titleType": "Creator eligibility title",
+        "requirement": "Reach 15k YouTube subscribers or 25k TikTok followers, post at least 5 Jujutsu Shenanigans videos, then contact a game moderator on Discord.",
+        "availability": "Creator approval",
+        "whoCanUse": "Eligible content creators after moderator approval.",
+        "displayBehavior": "Equips from the Titles inventory tab, appears as a chat prefix plus an overhead bracket title, and source notes it grants public-server Free Cam."
+      },
+      "system": {
+        "slug": "content-creator",
+        "section": "Custom and creator titles",
+        "sortOrder": 180,
+        "image": null
+      }
+    }
+  ]
+}

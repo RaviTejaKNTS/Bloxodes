@@ -1,8 +1,7 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { repoPath } from "@/lib/paths";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
-import {
-  getTheForgeCollectionConfig,
-  loadTheForgeCollectionDataset
-} from "@/app/(site)/wiki/collections/games/the-forge";
 import type { ArmorPiece, ArmorSlot, ArmorWeightClass, ArmorWeightGroup } from "./data";
 
 export type ForgeArmorDataset = {
@@ -35,10 +34,23 @@ type ForgeArmorJson = {
   items?: ForgeArmorRow[] | null;
 };
 
+const ARMOR_JSON_PATH = repoPath("data", "The Forge", "armors.json");
+
 async function readArmorJson(): Promise<ForgeArmorJson> {
-  const config = getTheForgeCollectionConfig("armors");
-  if (!config) throw new Error("The Forge armors collection is not registered.");
-  return loadTheForgeCollectionDataset(config) as Promise<ForgeArmorJson>;
+  try {
+    const raw = await fs.readFile(ARMOR_JSON_PATH, "utf8");
+    const parsed = JSON.parse(raw) as ForgeArmorJson | ForgeArmorRow[];
+    if (Array.isArray(parsed)) {
+      return { items: parsed };
+    }
+    return parsed ?? {};
+  } catch (error) {
+    const err = error as NodeJS.ErrnoException;
+    if (err.code === "ENOENT") {
+      throw new Error(`Missing armor data file. Expected: ${ARMOR_JSON_PATH}`);
+    }
+    throw err;
+  }
 }
 
 function toSlug(value: string): string {

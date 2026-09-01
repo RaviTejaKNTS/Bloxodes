@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Wizard Alchemy",
+    "gameSlug": "wizard-alchemy",
+    "collection": "robes",
+    "route": "/wiki/wizard-alchemy/robes",
+    "catalogCode": "wizard-alchemy-robes",
+    "itemFields": [
+      "rarity",
+      "tier",
+      "displayCost",
+      "priceGold",
+      "hpBonus",
+      "sourceLocation",
+      "progressionUse",
+      "availability"
+    ],
+    "columns": [
+      "rarity",
+      "tier",
+      "displayCost",
+      "priceGold",
+      "hpBonus",
+      "sourceLocation",
+      "progressionUse",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Starter robe",
+        "Early robe upgrade",
+        "Late robe upgrade"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "tier",
+        "displayCost",
+        "priceGold",
+        "hpBonus",
+        "sourceLocation"
+      ],
+      "tableFields": [
+        "rarity",
+        "tier",
+        "displayCost",
+        "priceGold",
+        "hpBonus",
+        "sourceLocation",
+        "progressionUse",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Starmoon Robe",
+        "rarity": "Rare",
+        "tier": "B",
+        "displayCost": "100 Gold",
+        "priceGold": 100,
+        "hpBonus": "+30 HP",
+        "sourceLocation": "Roger's shop, Wizard Robe section",
+        "progressionUse": "First HP robe for early survivability before saving for 60 HP gear.",
+        "availability": "Current Roger shop listing"
+      },
+      "system": {
+        "slug": "starmoon-robe",
+        "section": "Starter robe",
+        "sortOrder": 1,
+        "image": "/Wizard%20Alchemy/Robes/starmoon-robe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Reverie Robe",
+        "rarity": "Epic",
+        "tier": "A",
+        "displayCost": "500 Gold",
+        "priceGold": 500,
+        "hpBonus": "+60 HP",
+        "sourceLocation": "Roger's shop, Wizard Robe section",
+        "progressionUse": "Lower listed-cost +60 HP robe once stronger enemies punish a small health pool.",
+        "availability": "Current Roger shop listing"
+      },
+      "system": {
+        "slug": "golden-reverie-robe",
+        "section": "Early robe upgrade",
+        "sortOrder": 2,
+        "image": "/Wizard%20Alchemy/Robes/golden-reverie-robe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight Robe",
+        "rarity": "Epic",
+        "tier": "S",
+        "displayCost": "5,000 Gold",
+        "priceGold": 5000,
+        "hpBonus": "+60 HP",
+        "sourceLocation": "Roger's shop, Wizard Robe section",
+        "progressionUse": "High-cost late robe target for boss and tougher farming loops; same listed HP as Golden Reverie.",
+        "availability": "Current Roger shop listing"
+      },
+      "system": {
+        "slug": "starlight-robe",
+        "section": "Late robe upgrade",
+        "sortOrder": 3,
+        "image": "/Wizard%20Alchemy/Robes/starlight-robe.png"
+      }
+    }
+  ]
+}

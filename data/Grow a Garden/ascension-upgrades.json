@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Grow a Garden",
+    "gameSlug": "grow-a-garden",
+    "collection": "ascension-upgrades",
+    "route": "/wiki/grow-a-garden/ascension-upgrades",
+    "catalogCode": "grow-a-garden-ascension-upgrades",
+    "itemFields": [
+      "effect",
+      "maxPurchases",
+      "price"
+    ],
+    "columns": [
+      "effect",
+      "maxPurchases",
+      "price"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Ascension Shop"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "effect",
+        "maxPurchases",
+        "price"
+      ],
+      "tableFields": [
+        "effect",
+        "maxPurchases",
+        "price"
+      ],
+      "fieldPresentation": {
+        "effect": {
+          "kind": "detail",
+          "label": "Effect",
+          "omitWhenEmpty": true
+        },
+        "maxPurchases": {
+          "kind": "chip",
+          "label": "Max buys",
+          "omitWhenEmpty": true
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Save Slot Upgrade",
+        "effect": "Unlock 1 additional slot for your plot!",
+        "maxPurchases": "1",
+        "price": "100 Garden Coins"
+      },
+      "system": {
+        "slug": "save-slot-upgrade",
+        "section": "Ascension Shop",
+        "sortOrder": 2,
+        "image": "/Grow a Garden/Ascension Upgrades/save-slot-upgrade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Egg Capacity Upgrade",
+        "effect": "Unlock 1 additional egg slot for your farm!",
+        "maxPurchases": "5",
+        "price": "40 Garden Coins"
+      },
+      "system": {
+        "slug": "egg-capacity-upgrade",
+        "section": "Ascension Shop",
+        "sortOrder": 3,
+        "image": "/Grow a Garden/Ascension Upgrades/egg-capacity-upgrade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Inventory Capacity Upgrade",
+        "effect": "Unlock 10 additional slots for your pet inventory!",
+        "maxPurchases": "5",
+        "price": "40 Garden Coins"
+      },
+      "system": {
+        "slug": "pet-inventory-capacity-upgrade",
+        "section": "Ascension Shop",
+        "sortOrder": 4,
+        "image": "/Grow a Garden/Ascension Upgrades/pet-inventory-capacity-upgrade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Inventory Capacity Upgrade +",
+        "effect": "Unlock 10 additional slots for your pet inventory!",
+        "maxPurchases": "5",
+        "price": "40 Garden Coins"
+      },
+      "system": {
+        "slug": "pet-inventory-capacity-upgrade-2",
+        "section": "Ascension Shop",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Inventory Capacity Upgrade ++",
+        "effect": "Unlock 10 additional slots for your pet inventory!",
+        "maxPurchases": "5",
+        "price": "40 Garden Coins"
+      },
+      "system": {
+        "slug": "pet-inventory-capacity-upgrade-3",
+        "section": "Ascension Shop",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Inventory Capacity Upgrade Deluxe",
+        "effect": "Unlock 5 additional slots for your pet inventory!",
+        "maxPurchases": "5",
+        "price": "60 Garden Coins"
+      },
+      "system": {
+        "slug": "pet-inventory-capacity-upgrade-deluxe",
+        "section": "Ascension Shop",
+        "sortOrder": 7,
+        "image": "/Grow a Garden/Ascension Upgrades/pet-inventory-capacity-upgrade-deluxe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmetic Inventory Capacity Upgrade",
+        "effect": "Unlock 10 additional slots for your cosmetic inventory!",
+        "maxPurchases": "5",
+        "price": "20 Garden Coins"
+      },
+      "system": {
+        "slug": "cosmetic-inventory-capacity-upgrade",
+        "section": "Ascension Shop",
+        "sortOrder": 8,
+        "image": "/Grow a Garden/Ascension Upgrades/cosmetic-inventory-capacity-upgrade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmetic Inventory Capacity Upgrade +",
+        "effect": "Unlock 10 additional slots for your cosmetic inventory!",
+        "maxPurchases": "5",
+        "price": "20 Garden Coins"
+      },
+      "system": {
+        "slug": "cosmetic-inventory-capacity-upgrade-2",
+        "section": "Ascension Shop",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmetic Inventory Capacity Upgrade ++",
+        "effect": "Unlock 10 additional slots for your cosmetic inventory!",
+        "maxPurchases": "5",
+        "price": "20 Garden Coins"
+      },
+      "system": {
+        "slug": "cosmetic-inventory-capacity-upgrade-3",
+        "section": "Ascension Shop",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Plant Inventory Capacity Upgrade",
+        "effect": "Unlock 10 additional slots for your plant inventory!",
+        "maxPurchases": "5",
+        "price": "40 Garden Coins"
+      },
+      "system": {
+        "slug": "plant-inventory-capacity-upgrade",
+        "section": "Ascension Shop",
+        "sortOrder": 11,
+        "image": "/Grow a Garden/Ascension Upgrades/plant-inventory-capacity-upgrade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Laser Fence",
+        "effect": "Glowing beams that look super secure.",
+        "maxPurchases": "1",
+        "price": "10 Garden Coins"
+      },
+      "system": {
+        "slug": "laser-fence",
+        "section": "Ascension Shop",
+        "sortOrder": 12,
+        "image": "/Grow a Garden/Ascension Upgrades/laser-fence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Greek Fence",
+        "effect": "A timeless design inspired by ancient Greek architecture.",
+        "maxPurchases": "1",
+        "price": "10 Garden Coins"
+      },
+      "system": {
+        "slug": "greek-fence",
+        "section": "Ascension Shop",
+        "sortOrder": 13,
+        "image": "/Grow a Garden/Ascension Upgrades/greek-fence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ascended Fence",
+        "effect": "A divine power has blessed this fence with protection.",
+        "maxPurchases": "1",
+        "price": "10 Garden Coins"
+      },
+      "system": {
+        "slug": "ascended-fence",
+        "section": "Ascension Shop",
+        "sortOrder": 14,
+        "image": "/Grow a Garden/Ascension Upgrades/ascended-fence.png"
+      }
+    }
+  ]
+}

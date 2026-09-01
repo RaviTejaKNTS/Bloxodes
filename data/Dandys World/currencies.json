@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dandy's World",
+    "gameSlug": "dandys-world",
+    "collection": "currencies",
+    "route": "/wiki/dandys-world/currencies",
+    "catalogCode": "dandys-world-currencies",
+    "itemFields": [
+      "currencyType",
+      "summary",
+      "usedFor",
+      "howToEarn",
+      "resetBehavior",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "currencyType",
+      "summary",
+      "usedFor",
+      "howToEarn",
+      "resetBehavior",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Currency scope",
+      "sectionOrder": [
+        "Account & Progression",
+        "In-Run"
+      ],
+      "badgeField": "currencyType",
+      "subtitleFields": [],
+      "descriptionField": "summary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "usedFor",
+        "howToEarn",
+        "resetBehavior",
+        "availability"
+      ],
+      "tableFields": [
+        "currencyType",
+        "usedFor",
+        "howToEarn",
+        "resetBehavior",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "currencyType": {
+          "kind": "chip",
+          "label": "Type",
+          "omitWhenEmpty": true
+        },
+        "summary": {
+          "kind": "detail",
+          "label": "Overview",
+          "omitWhenEmpty": true
+        },
+        "usedFor": {
+          "kind": "detail",
+          "label": "Used for",
+          "omitWhenEmpty": true
+        },
+        "howToEarn": {
+          "kind": "detail",
+          "label": "How to earn",
+          "omitWhenEmpty": true
+        },
+        "resetBehavior": {
+          "kind": "highlight",
+          "label": "Reset behavior",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ichor",
+        "currencyType": "Account currency",
+        "summary": "The main persistent currency used for long-term Toon and store progression.",
+        "usedFor": "Buy Toons and Trinkets from Dandy's Store, and buy Skins and Stickers from Dyle's Store.",
+        "howToEarn": "Earn Ichor from completing Machines, collecting Research Capsules, and using a Toon's non-Passive Ability for the first time on a Floor. Sources also document purchase and code reward routes.",
+        "resetBehavior": "Persists between runs.",
+        "availability": "Core, non-seasonal currency.",
+        "cardSummary": "Use Ichor for persistent unlocks and store purchases between runs."
+      },
+      "system": {
+        "slug": "ichor",
+        "section": "Account & Progression",
+        "sortOrder": 0,
+        "image": "/Dandys World/Currencies/ichor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Research",
+        "currencyType": "Progress currency",
+        "summary": "A persistent research currency tied to studying Twisteds and unlocking research-based progression.",
+        "usedFor": "Track Twisted research and support research-based Toon and Trinket progression, including Twisted descriptions and Research Trinkets.",
+        "howToEarn": "Earn Research by collecting Research Capsules and encountering Twisteds during runs.",
+        "resetBehavior": "Persists between runs.",
+        "availability": "Core, non-seasonal currency.",
+        "cardSummary": "Build Research by investigating Twisteds and collecting their Capsules."
+      },
+      "system": {
+        "slug": "research",
+        "section": "Account & Progression",
+        "sortOrder": 1,
+        "image": "/Dandys World/Currencies/research.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tapes",
+        "currencyType": "In-run currency",
+        "summary": "The temporary currency collected and spent during an active run.",
+        "usedFor": "Buy Items at Dandy's Shop in the Elevator and activate certain Toon Abilities.",
+        "howToEarn": "Earn Tapes from floor pickups, Machines, surviving Floors, using Toon Abilities, encountering Twisteds, and using Items.",
+        "resetBehavior": "Resets when the run ends and does not carry between runs.",
+        "availability": "Core run currency; not seasonal.",
+        "cardSummary": "Budget Tapes during a run for shop Items and tape-cost abilities."
+      },
+      "system": {
+        "slug": "tapes",
+        "section": "In-Run",
+        "sortOrder": 2,
+        "image": "/Dandys World/Currencies/tapes.webp"
+      }
+    }
+  ]
+}

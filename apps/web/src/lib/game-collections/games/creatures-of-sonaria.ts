@@ -28,6 +28,7 @@ export const creaturesOfSonariaCollectionGroup = {
       "game-currencies",
       "shrines",
       "gachas",
-      "den-buildables"
+      "den-buildables",
+      "mission-creature-unlocks"
     ]
 } satisfies GameCollectionGroup;

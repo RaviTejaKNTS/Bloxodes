@@ -1,0 +1,674 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "maps",
+    "route": "/wiki/jujutsu-shenanigans/maps",
+    "catalogCode": "jujutsu-shenanigans-maps",
+    "itemFields": [
+      "status",
+      "modeAccess",
+      "arenaType",
+      "bestFor",
+      "landmarks",
+      "itemSpawns",
+      "hazards",
+      "specialRules"
+    ],
+    "columns": [
+      "status",
+      "modeAccess",
+      "arenaType",
+      "bestFor",
+      "landmarks",
+      "itemSpawns",
+      "hazards",
+      "specialRules"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Main public map",
+        "Main map landmarks",
+        "Duels arenas",
+        "Roulette large maps",
+        "Roulette small maps",
+        "Old and retired maps"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [],
+      "descriptionField": "bestFor",
+      "cardDescriptionField": "bestFor",
+      "cardFields": [
+        "status",
+        "modeAccess",
+        "arenaType",
+        "bestFor",
+        "landmarks",
+        "itemSpawns"
+      ],
+      "tableFields": [
+        "status",
+        "modeAccess",
+        "arenaType",
+        "bestFor",
+        "landmarks",
+        "itemSpawns",
+        "hazards",
+        "specialRules"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Main Map",
+        "status": "Current public map",
+        "modeAccess": "Public Servers",
+        "arenaType": "Large destructible city map",
+        "bestFor": "Open public fights, item spawns, movement practice, and landmark routes",
+        "landmarks": "Shinjuku Station, Towers, Cafe, Mall, Sewers, stores, and smaller fight buildings",
+        "itemSpawns": "Public items spawn around the map every 10 minutes, with surface and underground spawn dots shown on the Items page.",
+        "hazards": "Most parts are destructible; the train station has a callable train hazard.",
+        "specialRules": "Default public-server fighting area since V1.03."
+      },
+      "system": {
+        "slug": "main-map",
+        "section": "Main public map",
+        "sortOrder": 10,
+        "image": "/Jujutsu%20Shenanigans/maps/main-map.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Towers",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Tall twin-building landmark",
+        "bestFor": "Roof access, vertical fights, billboard panels, and vending-machine routes",
+        "landmarks": "Two 11-floor towers connected by a ninth-floor bridge, roof ladders, billboards, and editing panels on the fourth floors.",
+        "itemSpawns": "Fire extinguishers on the roof and vending machines on the second-to-last floors.",
+        "hazards": "Destroyed ladder sections can collapse the remaining handholds.",
+        "specialRules": "Billboards were added to the towers in V1.44."
+      },
+      "system": {
+        "slug": "towers",
+        "section": "Main map landmarks",
+        "sortOrder": 20,
+        "image": "/Jujutsu%20Shenanigans/maps/towers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shinjuku Station",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Station and subway hazard area",
+        "bestFor": "Item pickup routes, train hazard plays, center-map travel, and underground movement",
+        "landmarks": "Primary and secondary entrances, rails, bathrooms, control room, leaderboards, and underground station paths.",
+        "itemSpawns": "Trash cans, fire extinguishers, vending machines, and nearby underground item-spawn context.",
+        "hazards": "Control panel can call a speeding train that heavily damages players on the rails.",
+        "specialRules": "One control-panel button broadcasts through the station, while the other calls the train."
+      },
+      "system": {
+        "slug": "shinjuku-station",
+        "section": "Main map landmarks",
+        "sortOrder": 30,
+        "image": "/Jujutsu%20Shenanigans/maps/shinjuku-station.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Graveyard",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Small outdoor landmark",
+        "bestFor": "Small-area fights and throwable gravestone routes near the arcade side of the map",
+        "landmarks": "Cemetery on the left side of the arcade with bare trees and marked gravestones.",
+        "itemSpawns": "Throwable gravestones.",
+        "hazards": "No special source-backed hazard beyond normal destructible objects.",
+        "specialRules": "Includes the Rika Throw gravestone added after V1.76."
+      },
+      "system": {
+        "slug": "graveyard",
+        "section": "Main map landmarks",
+        "sortOrder": 40,
+        "image": "/Jujutsu%20Shenanigans/maps/graveyard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mansion",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Two-floor building",
+        "bestFor": "Indoor fights, garage movement, and destructible building routes",
+        "landmarks": "Two floors, side garage, small second-floor bedroom, staircase, shelves, and green-screen setup.",
+        "itemSpawns": "Trash can by the bottom of the stairs.",
+        "hazards": "Garage is easy to break in and out of during fights.",
+        "specialRules": "No special mode rule listed."
+      },
+      "system": {
+        "slug": "mansion",
+        "section": "Main map landmarks",
+        "sortOrder": 50,
+        "image": "/Jujutsu%20Shenanigans/maps/mansion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cafe",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Central two-floor cafe",
+        "bestFor": "Central fights, dummy practice, vending-machine use, and throwable-chair routes",
+        "landmarks": "Open cafe near the middle plaza with a kitchen, second floor, counters, tables, and tall windows.",
+        "itemSpawns": "Vending machine in the corner, fire extinguisher near the dummy, and throwable chairs.",
+        "hazards": "No special source-backed hazard beyond destructible cafe objects.",
+        "specialRules": "Dummy always spawns near the entrance."
+      },
+      "system": {
+        "slug": "cafe",
+        "section": "Main map landmarks",
+        "sortOrder": 60,
+        "image": "/Jujutsu%20Shenanigans/maps/cafe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Unlicensed Studios",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Arcade and studio building",
+        "bestFor": "Arcade machines, NEP card pickup, and routes between graveyard and mansion",
+        "landmarks": "Building between the graveyard and mansion with arcade cabinets and a counter area.",
+        "itemSpawns": "Garbage can, NEP card, and vending machine.",
+        "hazards": "No special source-backed hazard listed.",
+        "specialRules": "Arcade cabinets include Catch and Flight as playable machines."
+      },
+      "system": {
+        "slug": "unlicensed-studios",
+        "section": "Main map landmarks",
+        "sortOrder": 70,
+        "image": "/Jujutsu%20Shenanigans/maps/unlicensed-studios.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tze's",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Restaurant building",
+        "bestFor": "Throwable-heavy indoor fights and routes between Shinjuku Station and Towers",
+        "landmarks": "Restaurant between Shinjuku Station and the Towers with an interior menu board.",
+        "itemSpawns": "One trash can, one fire extinguisher, 16 chairs, a vending machine, and a Nep behind the menu board.",
+        "hazards": "No special source-backed hazard beyond destructible restaurant objects.",
+        "specialRules": "No special mode rule listed."
+      },
+      "system": {
+        "slug": "tzes",
+        "section": "Main map landmarks",
+        "sortOrder": 80,
+        "image": "/Jujutsu%20Shenanigans/maps/tzes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jail",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Three-story house and cell",
+        "bestFor": "Small-building fights and quick fire-extinguisher pickup",
+        "landmarks": "Light-purple three-story house with a metal-bar jail cell, toilet, and bunk bed.",
+        "itemSpawns": "Fire extinguisher outside the cell.",
+        "hazards": "No special source-backed hazard beyond normal destructible objects.",
+        "specialRules": "No special mode rule listed."
+      },
+      "system": {
+        "slug": "jail",
+        "section": "Main map landmarks",
+        "sortOrder": 90,
+        "image": "/Jujutsu%20Shenanigans/maps/jail.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Convenience Store",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Small store",
+        "bestFor": "Soda-machine routes, throwables, and quick indoor scrambles",
+        "landmarks": "Small store with front and side glass double doors, stocked shelves, boxes, and a counter.",
+        "itemSpawns": "Fire extinguisher, trash can, and soda machine near the entrance.",
+        "hazards": "Destroying shelves can cause a small lag spike.",
+        "specialRules": "No special mode rule listed."
+      },
+      "system": {
+        "slug": "convenience-store",
+        "section": "Main map landmarks",
+        "sortOrder": 100,
+        "image": "/Jujutsu%20Shenanigans/maps/convenience-store.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Comedy Club",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Small stage building",
+        "bestFor": "Voice-chat microphone interactions and tight indoor fights",
+        "landmarks": "Single-floor stage house with microphone, speakers, and an interactable piano.",
+        "itemSpawns": "Nep behind the speaker near the exit.",
+        "hazards": "No special source-backed hazard listed.",
+        "specialRules": "Usable microphone requires voice chat access."
+      },
+      "system": {
+        "slug": "comedy-club",
+        "section": "Main map landmarks",
+        "sortOrder": 110,
+        "image": "/Jujutsu%20Shenanigans/maps/comedy-club.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Court",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Small courthouse",
+        "bestFor": "Voice-chat speaker interactions and small-room fights",
+        "landmarks": "Small white courthouse with microphones and speakers.",
+        "itemSpawns": "No source-backed item spawn listed.",
+        "hazards": "No special source-backed hazard listed.",
+        "specialRules": "Voice-chat access is needed to use the microphones."
+      },
+      "system": {
+        "slug": "court",
+        "section": "Main map landmarks",
+        "sortOrder": 120,
+        "image": "/Jujutsu%20Shenanigans/maps/court.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shenanigans Ball",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Mall and store cluster",
+        "bestFor": "Store-to-store routes, escalators, sewer access, and fighting through the mall",
+        "landmarks": "Mall beside Shinjuku Station with escalators, graffiti, JJS Book Store, Sorcerer Appliances, SorceWay, Joyful Jolly Sweets, and nearby sewer access.",
+        "itemSpawns": "Some mall stores include small objects and hidden details, but no separate source-backed item route was strong enough for standalone rows.",
+        "hazards": "No special source-backed hazard beyond normal destructible interiors.",
+        "specialRules": "Minor stores are merged into this parent row because they are too thin as standalone map entries."
+      },
+      "system": {
+        "slug": "shenanigans-ball",
+        "section": "Main map landmarks",
+        "sortOrder": 130,
+        "image": "/Jujutsu%20Shenanigans/maps/shenanigans-mall.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bowling Alley",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Mall activity room",
+        "bestFor": "Void-edge awareness and bowling-ball landmark routes inside the mall",
+        "landmarks": "Bowling lanes, shoe shelves, counter, scoreboards, and imed balls.",
+        "itemSpawns": "No source-backed item spawn listed.",
+        "hazards": "All lanes end with a gap to the void.",
+        "specialRules": "Kept separate from the mall because the lane gap is a clear hazard."
+      },
+      "system": {
+        "slug": "bowling-alley",
+        "section": "Main map landmarks",
+        "sortOrder": 140,
+        "image": "/Jujutsu%20Shenanigans/maps/bowling-alley.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Sewers",
+        "status": "Current landmark",
+        "modeAccess": "Main public map",
+        "arenaType": "Underground route",
+        "bestFor": "Underground travel, item-spawn context, and fights with bridges, pillars, and pipes",
+        "landmarks": "Access through the mall store hole or a Shinjuku Station wall route, plus hallways, stairs, bridges, pillars, bars, and a radio.",
+        "itemSpawns": "Items page separates surface and underground spawns, making the sewers important for blue-dot underground routes.",
+        "hazards": "No direct damage hazard listed; tight underground routes can trap movement.",
+        "specialRules": "Do not touch the cheese is source flavor, not treated as a gameplay rule."
+      },
+      "system": {
+        "slug": "the-sewers",
+        "section": "Main map landmarks",
+        "sortOrder": 150,
+        "image": "/Jujutsu%20Shenanigans/maps/sewers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Space",
+        "status": "Current secret location",
+        "modeAccess": "Main public map",
+        "arenaType": "High-altitude secret area",
+        "bestFor": "Secret exploration and height-limit curiosity",
+        "landmarks": "Pitch-black space view with stars and Earth visible below.",
+        "itemSpawns": "No source-backed item spawn listed.",
+        "hazards": "No source-backed combat hazard listed.",
+        "specialRules": "Reached by getting to a certain height; going higher only changes the Earth model's apparent size."
+      },
+      "system": {
+        "slug": "space",
+        "section": "Main map landmarks",
+        "sortOrder": 160,
+        "image": "/Jujutsu%20Shenanigans/maps/space.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tombs of the Star",
+        "status": "Current Duels arena",
+        "modeAccess": "Duels",
+        "arenaType": "Small void island arena",
+        "bestFor": "Duel practice where spacing matters more than public-map routes",
+        "landmarks": "Small brown island in a white void with one tree.",
+        "itemSpawns": "No public item spawns listed for Duels.",
+        "hazards": "Void-edge awareness; no source-backed public item or train hazard.",
+        "specialRules": "Duels can queue Casual or Ranked, then teleport teams into randomized arenas."
+      },
+      "system": {
+        "slug": "tombs-of-the-star",
+        "section": "Duels arenas",
+        "sortOrder": 170,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sewers",
+        "status": "Current Duels arena",
+        "modeAccess": "Duels",
+        "arenaType": "Underground duel room",
+        "bestFor": "Duel practice in a tighter underground arena",
+        "landmarks": "Large underground room with pipes, water, and sewer theming.",
+        "itemSpawns": "No public item spawns listed for Duels.",
+        "hazards": "No source-backed special hazard listed.",
+        "specialRules": "Separate from the main-map sewers landmark."
+      },
+      "system": {
+        "slug": "duels-sewers",
+        "section": "Duels arenas",
+        "sortOrder": 180,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gym",
+        "status": "Current Duels arena",
+        "modeAccess": "Duels",
+        "arenaType": "Basketball gym duel arena",
+        "bestFor": "Duel practice in a cleaner indoor arena",
+        "landmarks": "Basketball gym.",
+        "itemSpawns": "No public item spawns listed for Duels.",
+        "hazards": "No source-backed special hazard listed.",
+        "specialRules": "Current Map page says it is likely based on Megumi Fushiguro versus Reggie Star."
+      },
+      "system": {
+        "slug": "gym",
+        "section": "Duels arenas",
+        "sortOrder": 190,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grass Field",
+        "status": "Current Duels arena",
+        "modeAccess": "Duels",
+        "arenaType": "Simple baseplate arena",
+        "bestFor": "Straight duel practice with minimal landmark clutter",
+        "landmarks": "Grass-textured baseplate above the void.",
+        "itemSpawns": "No public item spawns listed for Duels.",
+        "hazards": "Void around the baseplate.",
+        "specialRules": "Listed as the original Duels map."
+      },
+      "system": {
+        "slug": "grass-field",
+        "section": "Duels arenas",
+        "sortOrder": 200,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Detention Center",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette large-map minigames",
+        "arenaType": "Large vertical hall",
+        "bestFor": "Large-map Roulette rounds with high/low platform pressure",
+        "landmarks": "Old hall with a giant hole, raised platforms, lower water-covered area, and ladders back up.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "Large drop from platforms into the lower water area.",
+        "specialRules": "Gamemodes page says SWP, SRC, FTT, FSD, EOJ, AMS, and SSP use large maps after the V1.76 FTT change."
+      },
+      "system": {
+        "slug": "detention-center",
+        "section": "Roulette large maps",
+        "sortOrder": 210,
+        "image": "/Jujutsu%20Shenanigans/maps/detention-center.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shipping Yard",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette large-map minigames",
+        "arenaType": "Large open yard",
+        "bestFor": "Large-map Roulette rounds with container cover and open sightlines",
+        "landmarks": "Stacked containers, cranes, trucks, forklifts, and a broad open yard.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "Source notes performance issues when heavy destruction occurs.",
+        "specialRules": "Update log V1.70 to V1.61 says the Shipping Yard map was remade."
+      },
+      "system": {
+        "slug": "shipping-yard",
+        "section": "Roulette large maps",
+        "sortOrder": 220,
+        "image": "/Jujutsu%20Shenanigans/maps/shipping-yard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roadside",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette large-map minigames",
+        "arenaType": "Large road and valley map",
+        "bestFor": "Large-map Roulette rounds with long approach routes",
+        "landmarks": "Road between tunnel entrances, broad off-road valley, trees, and a paved loop path.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "No special source-backed hazard listed beyond open-map exposure.",
+        "specialRules": "An older update temporarily removed Roadside, but the current Map page lists it as a Roulette map."
+      },
+      "system": {
+        "slug": "roadside",
+        "section": "Roulette large maps",
+        "sortOrder": 230,
+        "image": "/Jujutsu%20Shenanigans/maps/roadside.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shibuya Station (2)",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette large-map minigames",
+        "arenaType": "Large underground station map",
+        "bestFor": "Large-map Roulette rounds with broken station cover and platform movement",
+        "landmarks": "Underground subway station split between clean and damaged sections.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "Broken floors and walls shape movement, but no special damage hazard is listed.",
+        "specialRules": "Separate from Shibuya Station (1), which is a small-map entry."
+      },
+      "system": {
+        "slug": "shibuya-station-2",
+        "section": "Roulette large maps",
+        "sortOrder": 240,
+        "image": "/Jujutsu%20Shenanigans/maps/shibuya-station-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shibuya Crossing",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette large-map minigames",
+        "arenaType": "Large city crossing map",
+        "bestFor": "Large-map Roulette rounds that need more open city space",
+        "landmarks": "Map page lists the row but does not provide a current description.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "No source-backed hazard listed.",
+        "specialRules": "Update Log V1.50 says Shibuya Crossing was added as a large Roulette map."
+      },
+      "system": {
+        "slug": "shibuya-crossing",
+        "section": "Roulette large maps",
+        "sortOrder": 250,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zenin HQ",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette large-map minigames",
+        "arenaType": "Large compound map",
+        "bestFor": "Large-map Roulette rounds with compound-style borders",
+        "landmarks": "Map page lists the row but does not provide a current description.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "No source-backed hazard listed.",
+        "specialRules": "Update Log V1.50 says Zenin HQ was added as a large Roulette map, and V1.70 to V1.61 says its invisible borders were remade."
+      },
+      "system": {
+        "slug": "zenin-hq",
+        "section": "Roulette large maps",
+        "sortOrder": 260,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shinjuku's Fallout",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette small-map minigames",
+        "arenaType": "Small ruined-city map",
+        "bestFor": "Small-map Roulette rounds with ruined-building cover",
+        "landmarks": "Destroyed city battlefield with low ruined buildings, road barriers, and small skyscraper easter eggs.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "No special source-backed hazard listed beyond ruined cover.",
+        "specialRules": "Update Log V1.50 to V1.41 says Shinjuku's Fallout was added as a small Roulette map."
+      },
+      "system": {
+        "slug": "shinjukus-fallout",
+        "section": "Roulette small maps",
+        "sortOrder": 270,
+        "image": "/Jujutsu%20Shenanigans/maps/shinjukus-fallout.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shibuya Station (1)",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette small-map minigames",
+        "arenaType": "Small station-floor map",
+        "bestFor": "Small-map Roulette rounds with escalator and platform transitions",
+        "landmarks": "Station floor connected to elevated platforms with escalators and stairs.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "No special source-backed hazard listed.",
+        "specialRules": "Separate from Shibuya Station (2), which is a large-map entry."
+      },
+      "system": {
+        "slug": "shibuya-station-1",
+        "section": "Roulette small maps",
+        "sortOrder": 280,
+        "image": "/Jujutsu%20Shenanigans/maps/shibuya-station-1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Theater",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette small-map minigames",
+        "arenaType": "Theater map",
+        "bestFor": "Small-map Roulette rounds in a stage-focused space",
+        "landmarks": "Regular theater with a stage.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "No source-backed hazard listed.",
+        "specialRules": "Added to Roulette with Construction Site before later large/small source labels were consistent."
+      },
+      "system": {
+        "slug": "theater",
+        "section": "Roulette small maps",
+        "sortOrder": 290,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Construction Site",
+        "status": "Current Roulette map",
+        "modeAccess": "Roulette small-map minigames",
+        "arenaType": "Construction site map",
+        "bestFor": "Small-map Roulette rounds with construction-site cover",
+        "landmarks": "Map page lists the row but does not provide a current description.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "No source-backed hazard listed.",
+        "specialRules": "Update Log V1.50 to V1.41 calls Construction Site a small Roulette map."
+      },
+      "system": {
+        "slug": "construction-site",
+        "section": "Roulette small maps",
+        "sortOrder": 300,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Old Map",
+        "status": "Retired public map",
+        "modeAccess": "Former public map before V1.03",
+        "arenaType": "Old Apocalypse Rising-inspired public map",
+        "bestFor": "Understanding old guides and screenshots that do not match the current Shinjuku map",
+        "landmarks": "Center camp, church, barn, police/fire stations, tower, cabins, hospital, and extra buildings.",
+        "itemSpawns": "Old source notes mention dummies, vending machines, fire extinguishers, and building objects, but this is not current public-map routing.",
+        "hazards": "Lacked barriers on map edges before it was replaced.",
+        "specialRules": "Retired when the current main map replaced it in V1.03."
+      },
+      "system": {
+        "slug": "old-map",
+        "section": "Old and retired maps",
+        "sortOrder": 310,
+        "image": "/Jujutsu%20Shenanigans/maps/old-map.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Icy Landmass",
+        "status": "Retired Roulette map",
+        "modeAccess": "Former PFC-only Roulette map",
+        "arenaType": "Small ice block map",
+        "bestFor": "Understanding older PFC references after the minigame was removed",
+        "landmarks": "Floating ice block.",
+        "itemSpawns": "Roulette map, not a normal public item-spawn route.",
+        "hazards": "Slippery floor.",
+        "specialRules": "Exclusive to PFC, which the V1.76 update log says was removed."
+      },
+      "system": {
+        "slug": "icy-landmass",
+        "section": "Old and retired maps",
+        "sortOrder": 320,
+        "image": null
+      }
+    }
+  ]
+}

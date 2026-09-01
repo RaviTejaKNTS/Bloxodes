@@ -40,6 +40,7 @@ export const bloxFruitsCollectionGroup = {
       "raids",
       "crafting-recipes",
       "currencies",
-      "stats"
+      "stats",
+      "quest-items"
     ]
   } satisfies GameCollectionGroup;

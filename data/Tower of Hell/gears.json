@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Tower of Hell",
+    "gameSlug": "tower-of-hell",
+    "collection": "gears",
+    "route": "/wiki/tower-of-hell/gears",
+    "catalogCode": "tower-of-hell-gears",
+    "itemFields": [
+      "effect",
+      "practicalUse",
+      "availability",
+      "costNoobCoins",
+      "costProCoins",
+      "costRobux",
+      "duration",
+      "restrictions",
+      "cardSummary"
+    ],
+    "columns": [
+      "effect",
+      "practicalUse",
+      "availability",
+      "costNoobCoins",
+      "costProCoins",
+      "costRobux",
+      "duration",
+      "restrictions",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Gear role",
+      "sectionOrder": [
+        "Movement Gears",
+        "Route Tools",
+        "Timing Control"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "availability",
+        "effect",
+        "practicalUse",
+        "costNoobCoins",
+        "costProCoins",
+        "costRobux",
+        "duration",
+        "restrictions"
+      ],
+      "tableFields": [
+        "availability",
+        "effect",
+        "practicalUse",
+        "costNoobCoins",
+        "costProCoins",
+        "costRobux",
+        "duration",
+        "restrictions"
+      ],
+      "fieldPresentation": {
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability",
+          "omitWhenEmpty": true
+        },
+        "effect": {
+          "kind": "highlight",
+          "label": "Effect",
+          "omitWhenEmpty": true
+        },
+        "practicalUse": {
+          "kind": "plain",
+          "label": "Best use",
+          "omitWhenEmpty": true
+        },
+        "costNoobCoins": {
+          "kind": "chip",
+          "label": "Noob Tower",
+          "omitWhenEmpty": true
+        },
+        "costProCoins": {
+          "kind": "chip",
+          "label": "Pro Tower",
+          "omitWhenEmpty": true
+        },
+        "costRobux": {
+          "kind": "chip",
+          "label": "Robux",
+          "omitWhenEmpty": true
+        },
+        "duration": {
+          "kind": "chip",
+          "label": "Duration",
+          "omitWhenEmpty": true
+        },
+        "restrictions": {
+          "kind": "detail",
+          "label": "Notes",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Gravity Coil",
+        "effect": "Makes the player jump higher and descend more slowly.",
+        "practicalUse": "Provides extra airtime for long gaps and vertical jumps.",
+        "availability": "Shop purchase",
+        "costNoobCoins": "80 coins",
+        "costProCoins": "152 coins",
+        "costRobux": "224 Robux",
+        "duration": "1 round",
+        "restrictions": null,
+        "cardSummary": "A movement coil for higher jumps and slower falls."
+      },
+      "system": {
+        "slug": "gravity-coil",
+        "section": "Movement Gears",
+        "sortOrder": 0,
+        "image": "/Tower of Hell/Gears/gravity-coil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Coil",
+        "effect": "Increases the player's movement speed.",
+        "practicalUse": "Helps with open routes and sections where faster travel is safe.",
+        "availability": "Shop purchase",
+        "costNoobCoins": "60 coins",
+        "costProCoins": "120 coins",
+        "costRobux": "180 Robux",
+        "duration": "1 round",
+        "restrictions": null,
+        "cardSummary": "A movement coil that makes the player run faster."
+      },
+      "system": {
+        "slug": "speed-coil",
+        "section": "Movement Gears",
+        "sortOrder": 1,
+        "image": "/Tower of Hell/Gears/speed-coil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fusion Coil",
+        "effect": "Combines higher jumps with faster movement.",
+        "practicalUse": "Covers routes that need both extra reach and quicker movement.",
+        "availability": "Shop purchase",
+        "costNoobCoins": "90 coins",
+        "costProCoins": "150 coins",
+        "costRobux": "210 Robux",
+        "duration": "1 round",
+        "restrictions": null,
+        "cardSummary": "A combined movement coil for jump height and speed."
+      },
+      "system": {
+        "slug": "fusion-coil",
+        "section": "Movement Gears",
+        "sortOrder": 2,
+        "image": "/Tower of Hell/Gears/fusion-coil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trowel",
+        "effect": "Places temporary paths that can be used as extra platforms.",
+        "practicalUse": "Creates a short route aid around a difficult jump.",
+        "availability": "Shop purchase",
+        "costNoobCoins": "40 coins",
+        "costProCoins": "70 coins",
+        "costRobux": "100 Robux",
+        "duration": "1 round",
+        "restrictions": "Placed paths last about 5 seconds and the gear has an 8-second cooldown.",
+        "cardSummary": "A route tool that places temporary paths in the tower."
+      },
+      "system": {
+        "slug": "trowel",
+        "section": "Route Tools",
+        "sortOrder": 0,
+        "image": "/Tower of Hell/Gears/trowel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hook",
+        "effect": "Hooks onto a reachable platform or player so the user can swing or arrest a fall.",
+        "practicalUse": "Supports recovery and route traversal when a target is within reach.",
+        "availability": "Shop purchase",
+        "costNoobCoins": "80 coins",
+        "costProCoins": "152 coins",
+        "costRobux": "224 Robux",
+        "duration": "1 round",
+        "restrictions": "The rope can snap when stretched too far, and climbing is unavailable while the Hook is in use.",
+        "cardSummary": "A recovery tool for swinging toward reachable targets."
+      },
+      "system": {
+        "slug": "hook",
+        "section": "Route Tools",
+        "sortOrder": 1,
+        "image": "/Tower of Hell/Gears/hook.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hourglass",
+        "effect": "Freezes moving parts in the current section, including conveyors, until toggled off.",
+        "practicalUse": "Stops timed hazards so a moving route can be crossed safely.",
+        "availability": "Shop purchase",
+        "costNoobCoins": "90 coins",
+        "costProCoins": "180 coins",
+        "costRobux": "270 Robux",
+        "duration": "1 round",
+        "restrictions": "Can be toggled on and off during the round.",
+        "cardSummary": "A timing tool that pauses moving hazards such as conveyors."
+      },
+      "system": {
+        "slug": "hourglass",
+        "section": "Timing Control",
+        "sortOrder": 0,
+        "image": "/Tower of Hell/Gears/hourglass.png"
+      }
+    }
+  ]
+}

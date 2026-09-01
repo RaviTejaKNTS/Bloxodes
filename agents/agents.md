@@ -10,7 +10,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `apps/mobile/AGENTS.md`: Expo React Native app scope, API contract, and local testing workflow.
 - `apps/web/src/app/AGENTS.md`: App Router structure, feeds, sitemaps, auth routes, and route conventions.
 - `apps/web/src/app/(site)/AGENTS.md`: public route families, page-data patterns, SEO, and publishable content rules.
-- `apps/web/src/app/(site)/quizzes/AGENTS.md`: database-backed quiz question pools, route behavior, and preview checks.
+- `apps/web/src/app/(site)/quizzes/AGENTS.md`: quiz route behavior, local question pool rules, and preview checks.
 - `apps/web/src/app/api/AGENTS.md`: JSON endpoint conventions, mutation safety, extension/mobile APIs, and cache invalidation.
 - `apps/web/src/lib/AGENTS.md`: shared data access, caching, auth, SEO, client payload helpers, and domain modules.
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.
@@ -18,7 +18,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `data/AGENTS.md`: local datasets and their consumers.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
 - `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
-- `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: collection-only maintenance for one dataset, one game, or all registered games, including affected wiki collection page review and wider-scope suggestions.
+- `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: fast maintenance for existing collection data and item images across one dataset, one game, or all registered collections; no new-collection discovery or suggestions.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: flat direct-child DOM workflow and local/live verification for Journey automatic in-content ads.

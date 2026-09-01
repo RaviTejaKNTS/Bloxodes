@@ -1,0 +1,399 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "+1 Speed Keyboard Escape",
+    "gameSlug": "1-speed-keyboard-escape",
+    "collection": "items",
+    "route": "/wiki/1-speed-keyboard-escape/items",
+    "catalogCode": "1-speed-keyboard-escape-items",
+    "itemFields": [
+      "rarity",
+      "speedBonus",
+      "trophyPrice",
+      "robuxPrice",
+      "obtainment",
+      "effectScope",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "speedBonus",
+      "trophyPrice",
+      "robuxPrice",
+      "obtainment",
+      "effectScope",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Rarity",
+      "sectionOrder": [
+        "Common Items",
+        "Uncommon Items",
+        "Rare Items",
+        "Epic Items",
+        "Legendary Items"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "speedBonus"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "speedBonus",
+        "trophyPrice",
+        "robuxPrice",
+        "obtainment",
+        "effectScope"
+      ],
+      "tableFields": [
+        "rarity",
+        "speedBonus",
+        "trophyPrice",
+        "robuxPrice",
+        "obtainment",
+        "effectScope",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "speedBonus": {
+          "kind": "chip",
+          "label": "Speed bonus"
+        },
+        "trophyPrice": {
+          "kind": "chip",
+          "label": "Trophy price"
+        },
+        "robuxPrice": {
+          "kind": "chip",
+          "label": "Robux price"
+        },
+        "obtainment": {
+          "kind": "normal",
+          "label": "How to get"
+        },
+        "effectScope": {
+          "kind": "normal",
+          "label": "Effect"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Chocolate Pretzel",
+        "rarity": "Common",
+        "speedBonus": "3%",
+        "trophyPrice": "3K Trophies",
+        "robuxPrice": "49 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Common shop Item that adds 3% to raw movement Speed."
+      },
+      "system": {
+        "slug": "chocolate-pretzel",
+        "section": "Common Items",
+        "sortOrder": 1,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/chocolate-pretzel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Caramel Bow",
+        "rarity": "Common",
+        "speedBonus": "3%",
+        "trophyPrice": "3K Trophies",
+        "robuxPrice": "49 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Common shop Item that adds 3% to raw movement Speed."
+      },
+      "system": {
+        "slug": "caramel-bow",
+        "section": "Common Items",
+        "sortOrder": 2,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/caramel-bow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry Donut",
+        "rarity": "Common",
+        "speedBonus": "3%",
+        "trophyPrice": "3K Trophies",
+        "robuxPrice": "49 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Common shop Item that adds 3% to raw movement Speed."
+      },
+      "system": {
+        "slug": "strawberry-donut",
+        "section": "Common Items",
+        "sortOrder": 3,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/strawberry-donut.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Choco Bar",
+        "rarity": "Common",
+        "speedBonus": "3%",
+        "trophyPrice": "3K Trophies",
+        "robuxPrice": "49 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Common shop Item that adds 3% to raw movement Speed."
+      },
+      "system": {
+        "slug": "choco-bar",
+        "section": "Common Items",
+        "sortOrder": 4,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/choco-bar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Muffin Hat",
+        "rarity": "Uncommon",
+        "speedBonus": "5%",
+        "trophyPrice": "25K Trophies",
+        "robuxPrice": "89 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Uncommon shop Item that adds 5% to raw movement Speed."
+      },
+      "system": {
+        "slug": "muffin-hat",
+        "section": "Uncommon Items",
+        "sortOrder": 5,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/muffin-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Glasses",
+        "rarity": "Uncommon",
+        "speedBonus": "5%",
+        "trophyPrice": "25K Trophies",
+        "robuxPrice": "89 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Uncommon shop Item that adds 5% to raw movement Speed."
+      },
+      "system": {
+        "slug": "candy-glasses",
+        "section": "Uncommon Items",
+        "sortOrder": 6,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/candy-glasses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupcake Mic",
+        "rarity": "Uncommon",
+        "speedBonus": "5%",
+        "trophyPrice": "25K Trophies",
+        "robuxPrice": "89 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Uncommon shop Item that adds 5% to raw movement Speed."
+      },
+      "system": {
+        "slug": "cupcake-mic",
+        "section": "Uncommon Items",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Heart Lollipop",
+        "rarity": "Uncommon",
+        "speedBonus": "5%",
+        "trophyPrice": "25K Trophies",
+        "robuxPrice": "89 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Uncommon shop Item that adds 5% to raw movement Speed."
+      },
+      "system": {
+        "slug": "pink-heart-lollipop",
+        "section": "Uncommon Items",
+        "sortOrder": 8,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/pink-heart-lollipop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Gummy Bear",
+        "rarity": "Rare",
+        "speedBonus": "10%",
+        "trophyPrice": "250K Trophies",
+        "robuxPrice": "179 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Rare shop Item that adds 10% to raw movement Speed."
+      },
+      "system": {
+        "slug": "pink-gummy-bear",
+        "section": "Rare Items",
+        "sortOrder": 9,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/pink-gummy-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cookie Bag",
+        "rarity": "Rare",
+        "speedBonus": "10%",
+        "trophyPrice": "250K Trophies",
+        "robuxPrice": "179 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Rare shop Item that adds 10% to raw movement Speed."
+      },
+      "system": {
+        "slug": "cookie-bag",
+        "section": "Rare Items",
+        "sortOrder": 10,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/cookie-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Marshmallow Helmet",
+        "rarity": "Rare",
+        "speedBonus": "10%",
+        "trophyPrice": "250K Trophies",
+        "robuxPrice": "179 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Rare shop Item that adds 10% to raw movement Speed."
+      },
+      "system": {
+        "slug": "marshmallow-helmet",
+        "section": "Rare Items",
+        "sortOrder": 11,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/marshmallow-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "White Chocolate Ice Cream",
+        "rarity": "Epic",
+        "speedBonus": "15%",
+        "trophyPrice": "3.5M Trophies",
+        "robuxPrice": "489 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Epic shop Item that adds 15% to raw movement Speed."
+      },
+      "system": {
+        "slug": "white-chocolate-ice-cream",
+        "section": "Epic Items",
+        "sortOrder": 12,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/white-chocolate-ice-cream.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Donut Shield",
+        "rarity": "Epic",
+        "speedBonus": "15%",
+        "trophyPrice": "3.5M Trophies",
+        "robuxPrice": "489 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Epic shop Item that adds 15% to raw movement Speed."
+      },
+      "system": {
+        "slug": "donut-shield",
+        "section": "Epic Items",
+        "sortOrder": 13,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/donut-shield.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Guitar",
+        "rarity": "Epic",
+        "speedBonus": "15%",
+        "trophyPrice": "3.5M Trophies",
+        "robuxPrice": "489 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Epic shop Item that adds 15% to raw movement Speed."
+      },
+      "system": {
+        "slug": "chocolate-guitar",
+        "section": "Epic Items",
+        "sortOrder": 14,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/chocolate-guitar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Caramel Scooter",
+        "rarity": "Epic",
+        "speedBonus": "15%",
+        "trophyPrice": "3.5M Trophies",
+        "robuxPrice": "489 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "An Epic shop Item that adds 15% to raw movement Speed."
+      },
+      "system": {
+        "slug": "caramel-scooter",
+        "section": "Epic Items",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Sword",
+        "rarity": "Legendary",
+        "speedBonus": "25%",
+        "trophyPrice": "40M Trophies",
+        "robuxPrice": "689 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Legendary shop Item that adds 25% to raw movement Speed."
+      },
+      "system": {
+        "slug": "candy-cane-sword",
+        "section": "Legendary Items",
+        "sortOrder": 16,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/candy-cane-sword.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Kart",
+        "rarity": "Legendary",
+        "speedBonus": "25%",
+        "trophyPrice": "40M Trophies",
+        "robuxPrice": "689 Robux",
+        "obtainment": "Buy with Trophies or Robux",
+        "effectScope": "Raw movement Speed",
+        "cardSummary": "A Legendary shop Item that adds 25% to raw movement Speed."
+      },
+      "system": {
+        "slug": "chocolate-kart",
+        "section": "Legendary Items",
+        "sortOrder": 17,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Items/chocolate-kart.webp"
+      }
+    }
+  ]
+}

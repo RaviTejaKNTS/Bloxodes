@@ -1,0 +1,5470 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "wraps",
+    "route": "/wiki/rivals/wraps",
+    "catalogCode": "rivals-wraps",
+    "itemFields": [
+      "rarity",
+      "source",
+      "sourceType",
+      "appliesTo",
+      "sourceWeapon",
+      "availability",
+      "motion",
+      "specialNote"
+    ],
+    "columns": [
+      "rarity",
+      "source",
+      "sourceType",
+      "appliesTo",
+      "sourceWeapon",
+      "availability",
+      "motion",
+      "specialNote"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Weapon contract and milestone wraps",
+        "Box and chest roll wraps",
+        "Limited-source cosmetic wraps",
+        "Shop and bundle purchase wraps",
+        "Special grant and unobtainable wraps"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "source",
+        "sourceType",
+        "appliesTo",
+        "sourceWeapon",
+        "availability"
+      ],
+      "tableFields": [
+        "rarity",
+        "source",
+        "sourceType",
+        "appliesTo",
+        "sourceWeapon",
+        "availability",
+        "motion",
+        "specialNote"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Beige",
+        "rarity": "Common",
+        "source": "Grenade contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Grenade",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "beige",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 1,
+        "image": "/RIVALS/Wraps/beige.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue",
+        "rarity": "Common",
+        "source": "Assault Rifle contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Assault Rifle",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "blue",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 2,
+        "image": "/RIVALS/Wraps/blue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bluesteel",
+        "rarity": "Common",
+        "source": "Riot Shield contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Riot Shield",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "bluesteel",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 3,
+        "image": "/RIVALS/Wraps/bluesteel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blush",
+        "rarity": "Common",
+        "source": "Sniper contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Sniper",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "blush",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 4,
+        "image": "/RIVALS/Wraps/blush.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brown",
+        "rarity": "Common",
+        "source": "Smoke Grenade contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Smoke Grenade",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "brown",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 5,
+        "image": "/RIVALS/Wraps/brown.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cheese",
+        "rarity": "Common",
+        "source": "Satchel contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Satchel",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "cheese",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 6,
+        "image": "/RIVALS/Wraps/cheese.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cool",
+        "rarity": "Common",
+        "source": "Freeze Ray contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Freeze Ray",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "cool",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 7,
+        "image": "/RIVALS/Wraps/cool.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Copper",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "copper",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 8,
+        "image": "/RIVALS/Wraps/copper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson",
+        "rarity": "Common",
+        "source": "Katana contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Katana",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "crimson",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 9,
+        "image": "/RIVALS/Wraps/crimson.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed",
+        "rarity": "Common",
+        "source": "Unboxed from the Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "cursed",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 10,
+        "image": "/RIVALS/Wraps/cursed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frigid",
+        "rarity": "Common",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "frigid",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 11,
+        "image": "/RIVALS/Wraps/frigid.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glorious",
+        "rarity": "Common",
+        "source": "Purchased from the Ranked Shop",
+        "sourceType": "ranked source",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "glorious",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 12,
+        "image": "/RIVALS/Wraps/glorious.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green",
+        "rarity": "Common",
+        "source": "Flare Gun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Flare Gun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "green",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 13,
+        "image": "/RIVALS/Wraps/green.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gunmetal",
+        "rarity": "Common",
+        "source": "Gunblade contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Gunblade",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "gunmetal",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 14,
+        "image": "/RIVALS/Wraps/gunmetal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Haunted",
+        "rarity": "Common",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "haunted",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 15,
+        "image": "/RIVALS/Wraps/haunted.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Highlighter",
+        "rarity": "Common",
+        "source": "Knife contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Knife",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "highlighter",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 16,
+        "image": "/RIVALS/Wraps/highlighter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hot Cocoa",
+        "rarity": "Common",
+        "source": "Earned from the Season Pass during Season 2",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "hot-cocoa",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 17,
+        "image": "/RIVALS/Wraps/hot-cocoa.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jean",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "jean",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 18,
+        "image": "/RIVALS/Wraps/jean.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lapis",
+        "rarity": "Common",
+        "source": "Earned from the Season Pass during Season 1",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "lapis",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 19,
+        "image": "/RIVALS/Wraps/lapis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lavish Crystal",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "lavish-crystal",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 20,
+        "image": "/RIVALS/Wraps/lavish-crystal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lemon",
+        "rarity": "Common",
+        "source": "Uzi contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Uzi",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "lemon",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 21,
+        "image": "/RIVALS/Wraps/lemon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lumber",
+        "rarity": "Common",
+        "source": "Crossbow contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Crossbow",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "lumber",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 22,
+        "image": "/RIVALS/Wraps/lumber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Machine",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "machine",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 23,
+        "image": "/RIVALS/Wraps/machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "MaGGenta",
+        "rarity": "Common",
+        "source": "Battle Axe contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Battle Axe",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "maggenta",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 24,
+        "image": "/RIVALS/Wraps/maggenta.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Maroon",
+        "rarity": "Common",
+        "source": "Flashbang contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Flashbang",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "maroon",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 25,
+        "image": "/RIVALS/Wraps/maroon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Midnight",
+        "rarity": "Common",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "midnight",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 26,
+        "image": "/RIVALS/Wraps/midnight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mint",
+        "rarity": "Common",
+        "source": "Revolver contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Revolver",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "mint",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 27,
+        "image": "/RIVALS/Wraps/mint.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mustard",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "mustard",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 28,
+        "image": "/RIVALS/Wraps/mustard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Navy",
+        "rarity": "Common",
+        "source": "Scythe contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Scythe",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "navy",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 29,
+        "image": "/RIVALS/Wraps/navy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Noir",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "noir",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 30,
+        "image": "/RIVALS/Wraps/noir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Normal",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "normal",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 31,
+        "image": "/RIVALS/Wraps/normal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Olive",
+        "rarity": "Common",
+        "source": "Chainsaw contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Chainsaw",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "olive",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 32,
+        "image": "/RIVALS/Wraps/olive.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Olo",
+        "rarity": "Common",
+        "source": "Jump Pad contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Jump Pad",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "olo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 33,
+        "image": "/RIVALS/Wraps/olo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange",
+        "rarity": "Common",
+        "source": "Burst Rifle contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Burst Rifle",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "orange",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 34,
+        "image": "/RIVALS/Wraps/orange.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ornate",
+        "rarity": "Common",
+        "source": "War Horn contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "War Horn",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "ornate",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 35,
+        "image": "/RIVALS/Wraps/ornate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink",
+        "rarity": "Common",
+        "source": "Molotov contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Molotov",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "pink",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 36,
+        "image": "/RIVALS/Wraps/pink.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Lemonade",
+        "rarity": "Common",
+        "source": "Earned from the Season Pass during Season 1",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "pink-lemonade",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 37,
+        "image": "/RIVALS/Wraps/pink-lemonade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Playful",
+        "rarity": "Common",
+        "source": "Earned from the Season Pass during Season 1",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "playful",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 38,
+        "image": "/RIVALS/Wraps/playful.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple",
+        "rarity": "Common",
+        "source": "Shotgun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Shotgun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "purple",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 39,
+        "image": "/RIVALS/Wraps/purple.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red",
+        "rarity": "Common",
+        "source": "Bow contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Bow",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "red",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 40,
+        "image": "/RIVALS/Wraps/red.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rust",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "rust",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 41,
+        "image": "/RIVALS/Wraps/rust.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Salmon",
+        "rarity": "Common",
+        "source": "Fists contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Fists",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "salmon",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 42,
+        "image": "/RIVALS/Wraps/salmon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sky",
+        "rarity": "Common",
+        "source": "Shorty contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Shorty",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "sky",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 43,
+        "image": "/RIVALS/Wraps/sky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sleet",
+        "rarity": "Common",
+        "source": "Earned from the Season Pass during Season 2",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "sleet",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 44,
+        "image": "/RIVALS/Wraps/sleet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Slush",
+        "rarity": "Common",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "slush",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 45,
+        "image": "/RIVALS/Wraps/slush.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spiral",
+        "rarity": "Common",
+        "source": "Weapon contract reward",
+        "sourceType": "ranked source",
+        "appliesTo": "Weapon contract reward",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "spiral",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 46,
+        "image": "/RIVALS/Wraps/spiral.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stained",
+        "rarity": "Common",
+        "source": "Spray contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Spray",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "stained",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 47,
+        "image": "/RIVALS/Wraps/stained.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tawny",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "tawny",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 48,
+        "image": "/RIVALS/Wraps/tawny.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teal",
+        "rarity": "Common",
+        "source": "RPG contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "RPG",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "teal",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 49,
+        "image": "/RIVALS/Wraps/teal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Titanium",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "titanium",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 50,
+        "image": "/RIVALS/Wraps/titanium.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tungsten",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "tungsten",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 51,
+        "image": "/RIVALS/Wraps/tungsten.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tusky",
+        "rarity": "Common",
+        "source": "Weapon contract reward",
+        "sourceType": "ranked source",
+        "appliesTo": "Weapon contract reward",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "tusky",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Venom",
+        "rarity": "Common",
+        "source": "Daggers contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Daggers",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "venom",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 53,
+        "image": "/RIVALS/Wraps/venom.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vexed",
+        "rarity": "Common",
+        "source": "Unboxed from the Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "vexed",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 54,
+        "image": "/RIVALS/Wraps/vexed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Violet",
+        "rarity": "Common",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "violet",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 55,
+        "image": "/RIVALS/Wraps/violet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yellow",
+        "rarity": "Common",
+        "source": "Handgun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Handgun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "yellow",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 56,
+        "image": "/RIVALS/Wraps/yellow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombie",
+        "rarity": "Common",
+        "source": "Earned by escaping the Zombie Tower alive",
+        "sourceType": "source",
+        "availability": "Needs verification"
+      },
+      "system": {
+        "slug": "zombie",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "ancient",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 58,
+        "image": "/RIVALS/Wraps/ancient.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Antimatter",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "antimatter",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Arbiter",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "arbiter",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 60,
+        "image": "/RIVALS/Wraps/arbiter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arctic Camo",
+        "rarity": "Rare",
+        "source": "Burst Rifle contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Burst Rifle",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "arctic-camo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Black",
+        "rarity": "Rare",
+        "source": "Earned by reaching Level 99 on a weapon",
+        "sourceType": "milestone",
+        "appliesTo": "Source weapon",
+        "availability": "Milestone reward"
+      },
+      "system": {
+        "slug": "black",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 62,
+        "image": "/RIVALS/Wraps/black.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Granite",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "black-granite",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 63,
+        "image": "/RIVALS/Wraps/black-granite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bliss",
+        "rarity": "Rare",
+        "source": "Warpstone contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Warpstone",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "bliss",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 64,
+        "image": "/RIVALS/Wraps/bliss.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blush Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "blush-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Brain",
+        "rarity": "Rare",
+        "source": "Grenade contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Grenade",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "brain",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 66,
+        "image": "/RIVALS/Wraps/brain.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunsen",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "bunsen",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 67,
+        "image": "/RIVALS/Wraps/bunsen.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Caned Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "caned-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Carbon Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "carbon-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 69,
+        "image": "/RIVALS/Wraps/carbon-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carmine",
+        "rarity": "Rare",
+        "source": "Battle Axe contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Battle Axe",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "carmine",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 70,
+        "image": "/RIVALS/Wraps/carmine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carpet",
+        "rarity": "Rare",
+        "source": "Flashbang contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Flashbang",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "carpet",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cashmere Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "cashmere-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Celtic",
+        "rarity": "Rare",
+        "source": "Gunblade contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Gunblade",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "celtic",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 73,
+        "image": "/RIVALS/Wraps/celtic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cerulean",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "cerulean",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 74,
+        "image": "/RIVALS/Wraps/cerulean.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chilled Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "chilled-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 75,
+        "image": "/RIVALS/Wraps/chilled-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chrome Webs",
+        "rarity": "Rare",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "chrome-webs",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 76,
+        "image": "/RIVALS/Wraps/chrome-webs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Circuit",
+        "rarity": "Rare",
+        "source": "Chainsaw contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Chainsaw",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "circuit",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Clamshell",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "clamshell",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 78,
+        "image": "/RIVALS/Wraps/clamshell.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clouds",
+        "rarity": "Rare",
+        "source": "Katana contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Katana",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "clouds",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cold Metal",
+        "rarity": "Rare",
+        "source": "Maul contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Maul",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "cold-metal",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 80,
+        "image": "/RIVALS/Wraps/cold-metal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cool Crochet",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "cool-crochet",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 81,
+        "image": "/RIVALS/Wraps/cool-crochet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cork",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "cork",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 82,
+        "image": "/RIVALS/Wraps/cork.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Creme Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "creme-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Art",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "crimson-art",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 84,
+        "image": "/RIVALS/Wraps/crimson-art.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crossed",
+        "rarity": "Rare",
+        "source": "Freeze Ray contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Freeze Ray",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "crossed",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 85,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dawn",
+        "rarity": "Rare",
+        "source": "Jump Pad contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Jump Pad",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "dawn",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Desert Camo",
+        "rarity": "Rare",
+        "source": "Assault Rifle contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Assault Rifle",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "desert-camo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 87,
+        "image": "/RIVALS/Wraps/desert-camo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Digital Camo",
+        "rarity": "Rare",
+        "source": "Handgun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Handgun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "digital-camo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 88,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dunes",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "dunes",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 89,
+        "image": "/RIVALS/Wraps/dunes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dusky Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "dusky-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 90,
+        "image": "/RIVALS/Wraps/dusky-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Eco",
+        "rarity": "Rare",
+        "source": "Energy Pistols contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Energy Pistols",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "eco",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 91,
+        "image": "/RIVALS/Wraps/eco.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Evergreen Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "evergreen-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 92,
+        "image": "/RIVALS/Wraps/evergreen-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Experience",
+        "rarity": "Rare",
+        "source": "Earned every 10 career levels",
+        "sourceType": "milestone",
+        "appliesTo": "Account milestone",
+        "availability": "Milestone reward"
+      },
+      "system": {
+        "slug": "experience",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 93,
+        "image": "/RIVALS/Wraps/experience.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Facility",
+        "rarity": "Rare",
+        "source": "Earned from the Season Pass during Season 1",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "facility",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 94,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fiery",
+        "rarity": "Rare",
+        "source": "Daggers contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Daggers",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "fiery",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 95,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire",
+        "rarity": "Rare",
+        "source": "Earned by winning 10 duels in a row",
+        "sourceType": "source",
+        "availability": "Needs verification"
+      },
+      "system": {
+        "slug": "fire",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 96,
+        "image": "/RIVALS/Wraps/fire.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Forest Camo",
+        "rarity": "Rare",
+        "source": "Bow contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Bow",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "forest-camo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 97,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Forest Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "forest-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 98,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fortune Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "fortune-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 99,
+        "image": "/RIVALS/Wraps/fortune-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frosted",
+        "rarity": "Rare",
+        "source": "Scythe contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Scythe",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "frosted",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frosty Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "frosty-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 101,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glisten",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "glisten",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 102,
+        "image": "/RIVALS/Wraps/glisten.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glossy",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "glossy",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 103,
+        "image": "/RIVALS/Wraps/glossy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold",
+        "rarity": "Rare",
+        "source": "Weapon contract reward",
+        "sourceType": "weapon contract",
+        "appliesTo": "Weapon contract reward",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "gold",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 104,
+        "image": "/RIVALS/Wraps/gold.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grass",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "grass",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 105,
+        "image": "/RIVALS/Wraps/grass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Goo",
+        "rarity": "Rare",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "green-goo",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 106,
+        "image": "/RIVALS/Wraps/green-goo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hammered Copper",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "hammered-copper",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 107,
+        "image": "/RIVALS/Wraps/hammered-copper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Holly Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "holly-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 108,
+        "image": "/RIVALS/Wraps/holly-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Honeycomb",
+        "rarity": "Rare",
+        "source": "Smoke Grenade contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Smoke Grenade",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "honeycomb",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 109,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hypnotic",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "hypnotic",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 110,
+        "image": "/RIVALS/Wraps/hypnotic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Igneous",
+        "rarity": "Rare",
+        "source": "Spray contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Spray",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "igneous",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 111,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Indigo Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "indigo-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 112,
+        "image": "/RIVALS/Wraps/indigo-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inlets",
+        "rarity": "Rare",
+        "source": "Trowel contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Trowel",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "inlets",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 113,
+        "image": "/RIVALS/Wraps/inlets.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "jolly-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 114,
+        "image": "/RIVALS/Wraps/jolly-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Leafy Grass",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "leafy-grass",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 115,
+        "image": "/RIVALS/Wraps/leafy-grass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Liquid Chrome",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "liquid-chrome",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 116,
+        "image": "/RIVALS/Wraps/liquid-chrome.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lovely Leopard",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "lovely-leopard",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 117,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Luxury Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "luxury-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 118,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mahogany",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "mahogany",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 119,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mainframe",
+        "rarity": "Rare",
+        "source": "Molotov contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Molotov",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "mainframe",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 120,
+        "image": "/RIVALS/Wraps/mainframe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Maize",
+        "rarity": "Rare",
+        "source": "Flamethrower contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Flamethrower",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "maize",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 121,
+        "image": "/RIVALS/Wraps/maize.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Medium stone grey",
+        "rarity": "Rare",
+        "source": "Paintball Gun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Paintball Gun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "medium-stone-grey",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 122,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Merlot Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "merlot-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 123,
+        "image": "/RIVALS/Wraps/merlot-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mintbread",
+        "rarity": "Rare",
+        "source": "Earned from the Season Pass during Season 2",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "mintbread",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 124,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Minty Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "minty-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 125,
+        "image": "/RIVALS/Wraps/minty-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mocha Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "mocha-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 126,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Model",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "model",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 127,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Money",
+        "rarity": "Rare",
+        "source": "Satchel contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Satchel",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "money",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 128,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mousse Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "mousse-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 129,
+        "image": "/RIVALS/Wraps/mousse-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Neo",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "neo",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 130,
+        "image": "/RIVALS/Wraps/neo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nova",
+        "rarity": "Rare",
+        "source": "5% chance to be obtained from a Daily Task",
+        "sourceType": "task reward",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "nova",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 131,
+        "image": "/RIVALS/Wraps/nova.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidian",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "obsidian",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 132,
+        "image": "/RIVALS/Wraps/obsidian.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ocean Camo",
+        "rarity": "Rare",
+        "source": "Uzi contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Uzi",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "ocean-camo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 133,
+        "image": "/RIVALS/Wraps/ocean-camo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "OranGG",
+        "rarity": "Rare",
+        "source": "Medkit contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Medkit",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "orangg",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 134,
+        "image": "/RIVALS/Wraps/orangg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Patriot",
+        "rarity": "Rare",
+        "source": "Sniper contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Sniper",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "patriot",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 135,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "PB & J",
+        "rarity": "Rare",
+        "source": "Flare Gun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Flare Gun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "pb-and-j",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 136,
+        "image": "/RIVALS/Wraps/pb-and-j.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pearly Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "pearly-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 137,
+        "image": "/RIVALS/Wraps/pearly-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "peppermint-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 138,
+        "image": "/RIVALS/Wraps/peppermint-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Periwinkle Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "periwinkle-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 139,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Crochet",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "pink-crochet",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 140,
+        "image": "/RIVALS/Wraps/pink-crochet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Glitter",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "pink-glitter",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 141,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Plasma",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "plasma",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 142,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Polar Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "polar-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 143,
+        "image": "/RIVALS/Wraps/polar-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Portal",
+        "rarity": "Rare",
+        "source": "Riot Shield contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Riot Shield",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "portal",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 144,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Goo",
+        "rarity": "Rare",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "purple-goo",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 145,
+        "image": "/RIVALS/Wraps/purple-goo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purpleize",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "purpleize",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 146,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rage",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "rage",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 147,
+        "image": "/RIVALS/Wraps/rage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Regal",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "regal",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 148,
+        "image": "/RIVALS/Wraps/regal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Regal Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "regal-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 149,
+        "image": "/RIVALS/Wraps/regal-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Reptile",
+        "rarity": "Rare",
+        "source": "Shotgun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Shotgun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "reptile",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rug",
+        "rarity": "Rare",
+        "source": "Fists contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Fists",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "rug",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 151,
+        "image": "/RIVALS/Wraps/rug.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rustic",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "rustic",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 152,
+        "image": "/RIVALS/Wraps/rustic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scales",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "scales",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 153,
+        "image": "/RIVALS/Wraps/scales.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sentinel",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "sentinel",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 154,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snowfall",
+        "rarity": "Rare",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "snowfall",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 155,
+        "image": "/RIVALS/Wraps/snowfall.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spartan",
+        "rarity": "Rare",
+        "source": "Minigun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Minigun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "spartan",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 156,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spellslinger",
+        "rarity": "Rare",
+        "source": "Crossbow contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Crossbow",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "spellslinger",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 157,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Steel",
+        "rarity": "Rare",
+        "source": "Shorty contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Shorty",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "steel",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 158,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Storm",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "storm",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 159,
+        "image": "/RIVALS/Wraps/storm.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Street Camo",
+        "rarity": "Rare",
+        "source": "Revolver contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Revolver",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "street-camo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 160,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strobe",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "strobe",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 161,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Studded",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "studded",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 162,
+        "image": "/RIVALS/Wraps/studded.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Studs",
+        "rarity": "Rare",
+        "source": "Slingshot contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Slingshot",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "studs",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 163,
+        "image": "/RIVALS/Wraps/studs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Surge",
+        "rarity": "Rare",
+        "source": "Grenade Launcher contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Grenade Launcher",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "surge",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 164,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Swirls",
+        "rarity": "Rare",
+        "source": "RPG contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "RPG",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "swirls",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 165,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tealur",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "tealur",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 166,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tempest",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "tempest",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 167,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Termination",
+        "rarity": "Rare",
+        "source": "Energy Rifle contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Energy Rifle",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "termination",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 168,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "TIX",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "tix",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 169,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Toy",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "toy",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 170,
+        "image": "/RIVALS/Wraps/toy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trophy",
+        "rarity": "Rare",
+        "source": "Earned by winning 25 duels",
+        "sourceType": "source",
+        "availability": "Needs verification"
+      },
+      "system": {
+        "slug": "trophy",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 171,
+        "image": "/RIVALS/Wraps/trophy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ugly Sweater",
+        "rarity": "Rare",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "ugly-sweater",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 172,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Universal",
+        "rarity": "Rare",
+        "source": "Subspace Tripmine contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Subspace Tripmine",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "universal",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 173,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Urban Camo",
+        "rarity": "Rare",
+        "source": "Knife contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Knife",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "urban-camo",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 174,
+        "image": "/RIVALS/Wraps/urban-camo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vigor",
+        "rarity": "Rare",
+        "source": "Earned from the Season Pass during Season 1",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "vigor",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 175,
+        "image": "/RIVALS/Wraps/vigor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vile",
+        "rarity": "Rare",
+        "source": "Exogun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Exogun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "vile",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 176,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Voltaic",
+        "rarity": "Rare",
+        "source": "War Horn contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "War Horn",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "voltaic",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 177,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Waste",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "waste",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 178,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Well Done",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "well-done",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 179,
+        "image": "/RIVALS/Wraps/well-done.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Werewolf Fur",
+        "rarity": "Rare",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "werewolf-fur",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 180,
+        "image": "/RIVALS/Wraps/werewolf-fur.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "White",
+        "rarity": "Rare",
+        "source": "Earned by reaching Level 50 on a weapon",
+        "sourceType": "milestone",
+        "appliesTo": "Source weapon",
+        "availability": "Milestone reward"
+      },
+      "system": {
+        "slug": "white",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 181,
+        "image": "/RIVALS/Wraps/white.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Solstice",
+        "rarity": "Rare",
+        "source": "Earned from the Season Pass during Season 2",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "winter-solstice",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 182,
+        "image": "/RIVALS/Wraps/winter-solstice.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Wrapping",
+        "rarity": "Rare",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "winter-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 183,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Yang",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "yang",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 184,
+        "image": "/RIVALS/Wraps/yang.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yin",
+        "rarity": "Rare",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "yin",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 185,
+        "image": "/RIVALS/Wraps/yin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": ".dll",
+        "rarity": "Legendary",
+        "source": "Included in the Energy Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "dll",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 186,
+        "image": "/RIVALS/Wraps/dll.webp"
+      }
+    },
+    {
+      "item": {
+        "name": ".exe",
+        "rarity": "Legendary",
+        "source": "Energy Rifle contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Energy Rifle",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "exe",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 187,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "2025 Wrapping",
+        "rarity": "Legendary",
+        "source": "Unboxed from Festive Wrap Box",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "2025-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 188,
+        "image": "/RIVALS/Wraps/2025-wrapping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "2026 Wrapping",
+        "rarity": "Legendary",
+        "source": "Unboxed from Festive Wrap Box 2",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "2026-wrapping",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 189,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "A5",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "a5",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 190,
+        "image": "/RIVALS/Wraps/a5.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Amber",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "amber",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 191,
+        "image": "/RIVALS/Wraps/amber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arabesque",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "arabesque",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 192,
+        "image": "/RIVALS/Wraps/arabesque.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arena",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop (Update 10+)",
+        "sourceType": "shop",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "arena",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 193,
+        "image": "/RIVALS/Wraps/arena.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Aurora",
+        "rarity": "Legendary",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "aurora",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 194,
+        "image": "/RIVALS/Wraps/aurora.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Aurum",
+        "rarity": "Legendary",
+        "source": "Included in the Medkit Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "aurum",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 195,
+        "image": "/RIVALS/Wraps/aurum.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 3-4)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "beach",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 196,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bee",
+        "rarity": "Legendary",
+        "source": "Distortion contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Distortion",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "bee",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 197,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Birthday Wrapping",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop during the RIVALS Birthday Party",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "birthday-wrapping",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 198,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Black Damascus",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 5-6)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "black-damascus",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 199,
+        "image": "/RIVALS/Wraps/black-damascus.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Glass",
+        "rarity": "Legendary",
+        "source": "Purchased from the Ranked Shop",
+        "sourceType": "ranked source",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "black-glass",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 200,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Black Opal",
+        "rarity": "Legendary",
+        "source": "Subspace Tripmine contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Subspace Tripmine",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "black-opal",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 201,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blaze",
+        "rarity": "Legendary",
+        "source": "Earned by winning 100 duels in a row",
+        "sourceType": "source",
+        "availability": "Needs verification"
+      },
+      "system": {
+        "slug": "blaze",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 202,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bombastic",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "bombastic",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 203,
+        "image": "/RIVALS/Wraps/bombastic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bright",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "bright",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 204,
+        "image": "/RIVALS/Wraps/bright.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bubbles",
+        "rarity": "Legendary",
+        "source": "Earned by gifting other players",
+        "sourceType": "source",
+        "availability": "Needs verification"
+      },
+      "system": {
+        "slug": "bubbles",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 205,
+        "image": "/RIVALS/Wraps/bubbles.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candlelight",
+        "rarity": "Legendary",
+        "source": "Earned from the Season Pass during Season 2",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "candlelight",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 206,
+        "image": "/RIVALS/Wraps/candlelight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Apple",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "candy-apple",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 207,
+        "image": "/RIVALS/Wraps/candy-apple.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carbon Fiber",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "carbon-fiber",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 208,
+        "image": "/RIVALS/Wraps/carbon-fiber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cardboard",
+        "rarity": "Legendary",
+        "source": "Included in the RPG Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "cardboard",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 209,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cardinal",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "cardinal",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 210,
+        "image": "/RIVALS/Wraps/cardinal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chrome",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "chrome",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 211,
+        "image": "/RIVALS/Wraps/chrome.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic",
+        "rarity": "Legendary",
+        "source": "Included in the Classic Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "classic",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 212,
+        "image": "/RIVALS/Wraps/classic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clovers",
+        "rarity": "Legendary",
+        "source": "Included in the Lucky Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "clovers",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 213,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crystallized",
+        "rarity": "Legendary",
+        "source": "Included in Crystal Bundles",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "crystallized",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 214,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Damascus",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 5-6)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "damascus",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 215,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "dark",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 216,
+        "image": "/RIVALS/Wraps/dark.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Arena",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "dark-arena",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 217,
+        "image": "/RIVALS/Wraps/dark-arena.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Devourer",
+        "rarity": "Legendary",
+        "source": "Warpstone contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Warpstone",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "devourer",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 218,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "rarity": "Legendary",
+        "source": "Weapon contract reward",
+        "sourceType": "weapon contract",
+        "appliesTo": "Weapon contract reward",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 219,
+        "image": "/RIVALS/Wraps/diamond.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Disco",
+        "rarity": "Legendary",
+        "source": "Included in the Standard Weapons Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "disco",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 220,
+        "image": "/RIVALS/Wraps/disco.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Empress",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 7-9)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "empress",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 221,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Encrypt",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "encrypt",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 222,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Horse",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 18)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "fire-horse",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 223,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frankenstein",
+        "rarity": "Legendary",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "frankenstein",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 224,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbite",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 17)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "frostbite",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 225,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Geometric",
+        "rarity": "Legendary",
+        "source": "Included in the Pixel Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "geometric",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 226,
+        "image": "/RIVALS/Wraps/geometric.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread",
+        "rarity": "Legendary",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "gingerbread",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 227,
+        "image": "/RIVALS/Wraps/gingerbread.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glass",
+        "rarity": "Legendary",
+        "source": "Grenade Launcher contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Grenade Launcher",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "glass",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 228,
+        "image": "/RIVALS/Wraps/glass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Sparkle",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "green-sparkle",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 229,
+        "image": "/RIVALS/Wraps/green-sparkle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Greenflame",
+        "rarity": "Legendary",
+        "source": "Included in Candy Bundles",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "greenflame",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 230,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Groove",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 1-2)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "groove",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 231,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hallow",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop during the 2024 Spooky Event",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "hallow",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 232,
+        "image": "/RIVALS/Wraps/hallow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heirloom",
+        "rarity": "Legendary",
+        "source": "Earned from purchasing 10 UGC items",
+        "sourceType": "limited source",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "heirloom",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 233,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hesper",
+        "rarity": "Legendary",
+        "source": "Slingshot contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Slingshot",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "hesper",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 234,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hologram",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "hologram",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 235,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hologram Arena",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 15-16)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "hologram-arena",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 236,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Honey",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 15-16)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "honey",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 237,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hyperdrive",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "hyperdrive",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 238,
+        "image": "/RIVALS/Wraps/hyperdrive.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Indigo Sparkle",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "indigo-sparkle",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 239,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Insidious",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "insidious",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 240,
+        "image": "/RIVALS/Wraps/insidious.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Insignia",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "insignia",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 241,
+        "image": "/RIVALS/Wraps/insignia.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iridescent",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "iridescent",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 242,
+        "image": "/RIVALS/Wraps/iridescent.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ladybug",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop (Update 19)",
+        "sourceType": "shop",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "ladybug",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 243,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "lightning",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 244,
+        "image": "/RIVALS/Wraps/lightning.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Liquid Gold",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "liquid-gold",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 245,
+        "image": "/RIVALS/Wraps/liquid-gold.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucre",
+        "rarity": "Legendary",
+        "source": "Used to be included in Key Bundles",
+        "sourceType": "bundle",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "lucre",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 246,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Luxe",
+        "rarity": "Legendary",
+        "source": "Permafrost contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Permafrost",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "luxe",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 247,
+        "image": "/RIVALS/Wraps/luxe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Luxurious",
+        "rarity": "Legendary",
+        "source": "Included in Key Bundles",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "luxurious",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 248,
+        "image": "/RIVALS/Wraps/luxurious.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Magma",
+        "rarity": "Legendary",
+        "source": "Included in the Heavy Duty Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "magma",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 249,
+        "image": "/RIVALS/Wraps/magma.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnetite",
+        "rarity": "Legendary",
+        "source": "Earned from the Season Pass during Season 1",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "magnetite",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 250,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Malachite",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "malachite",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 251,
+        "image": "/RIVALS/Wraps/malachite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Malevolent",
+        "rarity": "Legendary",
+        "source": "Minigun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Minigun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "malevolent",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 252,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mesh",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "mesh",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 253,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Messis",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 12-13)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "messis",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 254,
+        "image": "/RIVALS/Wraps/messis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mint Choco Chip",
+        "rarity": "Legendary",
+        "source": "Warper contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Warper",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "mint-choco-chip",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 255,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mischief",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "mischief",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 256,
+        "image": "/RIVALS/Wraps/mischief.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moonstone",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "moonstone",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 257,
+        "image": "/RIVALS/Wraps/moonstone.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mummy",
+        "rarity": "Legendary",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "mummy",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 258,
+        "image": "/RIVALS/Wraps/mummy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nebula",
+        "rarity": "Legendary",
+        "source": "Included in the Exogun Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "nebula",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 259,
+        "image": "/RIVALS/Wraps/nebula.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Necromancer",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop during the 2025 Spooky Event",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "necromancer",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 260,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Omnisand",
+        "rarity": "Legendary",
+        "source": "Paintball Gun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Paintball Gun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "omnisand",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 261,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ornamented",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 17)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "ornamented",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 262,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Paint",
+        "rarity": "Legendary",
+        "source": "Included in the Starter Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "paint",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 263,
+        "image": "/RIVALS/Wraps/paint.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint",
+        "rarity": "Legendary",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "peppermint",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 264,
+        "image": "/RIVALS/Wraps/peppermint.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peril",
+        "rarity": "Legendary",
+        "source": "Earned from the Season Pass during Season 1",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "peril",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 265,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pixel Blight",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 7-9)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "pixel-blight",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 266,
+        "image": "/RIVALS/Wraps/pixel-blight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plaid Pajama",
+        "rarity": "Legendary",
+        "source": "Maul contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Maul",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "plaid-pajama",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 267,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Plastic",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "plastic",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 268,
+        "image": "/RIVALS/Wraps/plastic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Quasar",
+        "rarity": "Legendary",
+        "source": "Exogun contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Exogun",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "quasar",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 269,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Red Rubber",
+        "rarity": "Legendary",
+        "source": "Included in the Balloon Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "red-rubber",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 270,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Resolute",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "resolute",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 271,
+        "image": "/RIVALS/Wraps/resolute.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rift",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "rift",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 272,
+        "image": "/RIVALS/Wraps/rift.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RIVALS Wrapping",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop during the RIVALS Birthday Party",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "rivals-wrapping",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 273,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scorched",
+        "rarity": "Legendary",
+        "source": "Flamethrower contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Flamethrower",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "scorched",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 274,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scourge",
+        "rarity": "Legendary",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll"
+      },
+      "system": {
+        "slug": "scourge",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 275,
+        "image": "/RIVALS/Wraps/scourge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serenity",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 18)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "serenity",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 276,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Ink",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 14)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "shadow-ink",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 277,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Simulation",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 10-11)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "simulation",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 278,
+        "image": "/RIVALS/Wraps/simulation.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Slime",
+        "rarity": "Legendary",
+        "source": "Trowel contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Trowel",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "slime",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 279,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spectral",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "spectral",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 280,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Starblaze",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "starblaze",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 281,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Starfall",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "starfall",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 282,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stocking Fur",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop during the 2025 Festive Event",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "stocking-fur",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 283,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunset",
+        "rarity": "Legendary",
+        "source": "Energy Pistols contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Energy Pistols",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "sunset",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 284,
+        "image": "/RIVALS/Wraps/sunset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunset Sparkle",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 12-13)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "sunset-sparkle",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 285,
+        "image": "/RIVALS/Wraps/sunset-sparkle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Supernova",
+        "rarity": "Legendary",
+        "source": "1% chance to be obtained from a Daily Task",
+        "sourceType": "task reward",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "supernova",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 286,
+        "image": "/RIVALS/Wraps/supernova.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thunderburst",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "thunderburst",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 287,
+        "image": "/RIVALS/Wraps/thunderburst.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tiger",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "tiger",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 288,
+        "image": "/RIVALS/Wraps/tiger.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Triplaser",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 14)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "triplaser",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 289,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water",
+        "rarity": "Legendary",
+        "source": "Medkit contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Medkit",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "water",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 290,
+        "image": "/RIVALS/Wraps/water.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Watermelon",
+        "rarity": "Legendary",
+        "source": "Used to be purchased from the Shop (Update 3-4)",
+        "sourceType": "shop",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "watermelon",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 291,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wealth",
+        "rarity": "Legendary",
+        "source": "Used to be included in Currency Bundles",
+        "sourceType": "bundle",
+        "availability": "Retired or limited shop/bundle source"
+      },
+      "system": {
+        "slug": "wealth",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 292,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Webbed",
+        "rarity": "Legendary",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll"
+      },
+      "system": {
+        "slug": "webbed",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 293,
+        "image": "/RIVALS/Wraps/webbed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wintergreen",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop during the 2024 Festive Event",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "wintergreen",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 294,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wintry",
+        "rarity": "Legendary",
+        "source": "Earned from the Season Pass during Season 2",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "wintry",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 295,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Woven",
+        "rarity": "Legendary",
+        "source": "Purchased from the Shop (Update 19)",
+        "sourceType": "shop",
+        "availability": "Shop or bundle source"
+      },
+      "system": {
+        "slug": "woven",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 296,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Aegis",
+        "rarity": "Mythical",
+        "source": "Distortion contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Distortion",
+        "availability": "Contraband or high-tier contract reward",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "aegis",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 297,
+        "image": "/RIVALS/Wraps/aegis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blizzard",
+        "rarity": "Mythical",
+        "source": "Permafrost contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Permafrost",
+        "availability": "Contraband or high-tier contract reward",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "blizzard",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 298,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Borealis",
+        "rarity": "Mythical",
+        "source": "Earned from the Season Pass during Season 2",
+        "sourceType": "ranked source",
+        "availability": "Limited or retired source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "borealis",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 299,
+        "image": "/RIVALS/Wraps/borealis.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial",
+        "rarity": "Mythical",
+        "source": "Earned by completing Daily Tasks with a 7 day Task Streak",
+        "sourceType": "task reward",
+        "availability": "Limited or special source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "celestial",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 300,
+        "image": "/RIVALS/Wraps/celestial.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crime Scene",
+        "rarity": "Mythical",
+        "source": "Included in the Contraband Bundle from Season 3",
+        "sourceType": "ranked source",
+        "availability": "Limited or retired source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "crime-scene",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 301,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Matter",
+        "rarity": "Mythical",
+        "source": "Weapon contract reward",
+        "sourceType": "weapon contract",
+        "appliesTo": "Weapon contract reward",
+        "availability": "Contraband or high-tier contract reward",
+        "motion": "Animated",
+        "specialNote": "Source trivia calls this one of the hardest wraps because it comes from the last tier of weapon contracts."
+      },
+      "system": {
+        "slug": "dark-matter",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 302,
+        "image": "/RIVALS/Wraps/dark-matter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Encroached",
+        "rarity": "Mythical",
+        "source": "Included in the Contraband Bundle from Season 1",
+        "sourceType": "ranked source",
+        "availability": "Limited or retired source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "encroached",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 303,
+        "image": "/RIVALS/Wraps/encroached.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Lights",
+        "rarity": "Mythical",
+        "source": "Unboxed from Jolly Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "festive-lights",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 304,
+        "image": "/RIVALS/Wraps/festive-lights.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fracture",
+        "rarity": "Mythical",
+        "source": "Warper contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Warper",
+        "availability": "Contraband or high-tier contract reward",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "fracture",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 305,
+        "image": "/RIVALS/Wraps/fracture.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heartfelt",
+        "rarity": "Mythical",
+        "source": "Included in the Lovely Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "heartfelt",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 306,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Queen",
+        "rarity": "Mythical",
+        "source": "Included in the Contraband Bundle from Season 2",
+        "sourceType": "ranked source",
+        "availability": "Limited or retired source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "ice-queen",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 307,
+        "image": "/RIVALS/Wraps/ice-queen.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Neon Lights",
+        "rarity": "Mythical",
+        "source": "Unboxed from Wrap Box 3",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "neon-lights",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 308,
+        "image": "/RIVALS/Wraps/neon-lights.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orichalcum",
+        "rarity": "Mythical",
+        "source": "Grappler contract",
+        "sourceType": "weapon contract",
+        "appliesTo": "Source weapon",
+        "sourceWeapon": "Grappler",
+        "availability": "Contraband or high-tier contract reward",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "orichalcum",
+        "section": "Weapon contract and milestone wraps",
+        "sortOrder": 309,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Paparazzi",
+        "rarity": "Mythical",
+        "source": "Earned from the Season Pass during Season 3",
+        "sourceType": "ranked source",
+        "availability": "Limited or retired source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "paparazzi",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 310,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Polaris",
+        "rarity": "Mythical",
+        "source": "Included in the 2025 Festive Flash Sale",
+        "sourceType": "bundle",
+        "availability": "Retired or limited shop/bundle source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "polaris",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 311,
+        "image": "/RIVALS/Wraps/polaris.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Solar",
+        "rarity": "Mythical",
+        "source": "Unboxed from Wrap Box 1",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "solar",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 312,
+        "image": "/RIVALS/Wraps/solar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Soulscourge",
+        "rarity": "Mythical",
+        "source": "Unboxed from Haunted Chest",
+        "sourceType": "chest roll",
+        "appliesTo": "Random weapon",
+        "availability": "Limited or seasonal chest roll",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "soulscourge",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 313,
+        "image": "/RIVALS/Wraps/soulscourge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Speed",
+        "rarity": "Mythical",
+        "source": "Unboxed from Wrap Box 2",
+        "sourceType": "wrap box",
+        "appliesTo": "Random weapon",
+        "availability": "Repeatable box roll",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "speed",
+        "section": "Box and chest roll wraps",
+        "sortOrder": 314,
+        "image": "/RIVALS/Wraps/speed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Heights",
+        "rarity": "Mythical",
+        "source": "Included in the Nostalgia Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "the-heights",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 315,
+        "image": "/RIVALS/Wraps/the-heights.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "TV Error",
+        "rarity": "Mythical",
+        "source": "Included in the Prop Bundle",
+        "sourceType": "bundle",
+        "availability": "Shop or bundle source",
+        "motion": "Animated"
+      },
+      "system": {
+        "slug": "tv-error",
+        "section": "Shop and bundle purchase wraps",
+        "sortOrder": 316,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "1B Visits",
+        "rarity": "Unique",
+        "source": "Old code reward",
+        "sourceType": "old code reward",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "1b-visits",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 317,
+        "image": "/RIVALS/Wraps/1b-visits.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beggar",
+        "rarity": "Unique",
+        "source": "Special source not clearly listed",
+        "sourceType": "unclear special source",
+        "availability": "Needs verification",
+        "specialNote": "Source description does not list a normal obtainment route."
+      },
+      "system": {
+        "slug": "beggar",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 318,
+        "image": "/RIVALS/Wraps/beggar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brimstone",
+        "rarity": "Unique",
+        "source": "Earned by watching a quick video ad in the hub.",
+        "sourceType": "ad reward",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "brimstone",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 319,
+        "image": "/RIVALS/Wraps/brimstone.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cream",
+        "rarity": "Unique",
+        "source": "Earned by inviting friends to the game",
+        "sourceType": "invite reward",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "cream",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 320,
+        "image": "/RIVALS/Wraps/cream.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Community",
+        "rarity": "Unique",
+        "source": "Code reward",
+        "sourceType": "old code reward",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "community",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 321,
+        "image": "/RIVALS/Wraps/community.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Danger",
+        "rarity": "Unique",
+        "source": "Earned by getting 100 kills in FFA during the Winter Spotlight event",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "danger",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 322,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glamour",
+        "rarity": "Unique",
+        "source": "Earned by watching a quick video ad in shop.",
+        "sourceType": "ad reward",
+        "availability": "Limited or special source"
+      },
+      "system": {
+        "slug": "glamour",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 323,
+        "image": "/RIVALS/Wraps/glamour.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glacier",
+        "rarity": "Unique",
+        "source": "Earned from the 2024 Festive Event Advent Calendar",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "glacier",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 324,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pine",
+        "rarity": "Unique",
+        "source": "Earned from the 2024 Festive Event Advent Calendar",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "pine",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 325,
+        "image": "/RIVALS/Wraps/pine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowy Night",
+        "rarity": "Unique",
+        "source": "Earned from the 2025 Festive Event Advent Calendar",
+        "sourceType": "limited source",
+        "availability": "Limited or retired source"
+      },
+      "system": {
+        "slug": "snowy-night",
+        "section": "Limited-source cosmetic wraps",
+        "sortOrder": 326,
+        "image": "/RIVALS/Wraps/snowy-night.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boomore",
+        "rarity": "Unique",
+        "source": "Earned by winning with or against with @GreatGuyBoom",
+        "sourceType": "special grant",
+        "appliesTo": "Special player grant",
+        "availability": "Special grant"
+      },
+      "system": {
+        "slug": "boomore",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 327,
+        "image": "/RIVALS/Wraps/boomore.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brianore",
+        "rarity": "Unique",
+        "source": "Earned by winning with or against with @Brian1KB",
+        "sourceType": "special grant",
+        "appliesTo": "Special player grant",
+        "availability": "Special grant"
+      },
+      "system": {
+        "slug": "brianore",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 328,
+        "image": "/RIVALS/Wraps/brianore.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nekore",
+        "rarity": "Unique",
+        "source": "Earned by winning with or against with @nekoanims",
+        "sourceType": "special grant",
+        "appliesTo": "Special player grant",
+        "availability": "Special grant"
+      },
+      "system": {
+        "slug": "nekore",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 329,
+        "image": "/RIVALS/Wraps/nekore.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nosnite",
+        "rarity": "Unique",
+        "source": "Earned by winning with or against with @Nosniy",
+        "sourceType": "special grant",
+        "appliesTo": "Special player grant",
+        "availability": "Special grant"
+      },
+      "system": {
+        "slug": "nosnite",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 330,
+        "image": "/RIVALS/Wraps/nosnite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sensite",
+        "rarity": "Unique",
+        "source": "Earned by winning with or against with @SenseiWarrior",
+        "sourceType": "special grant",
+        "appliesTo": "Special player grant",
+        "availability": "Special grant"
+      },
+      "system": {
+        "slug": "sensite",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 331,
+        "image": "/RIVALS/Wraps/sensite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadore",
+        "rarity": "Unique",
+        "source": "Earned by winning with or against with @ShadowTrojan",
+        "sourceType": "special grant",
+        "appliesTo": "Special player grant",
+        "availability": "Special grant"
+      },
+      "system": {
+        "slug": "shadore",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 332,
+        "image": "/RIVALS/Wraps/shadore.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scribble",
+        "rarity": "Unobtainable",
+        "source": "Obtained by submitting a concept that makes it into the game",
+        "sourceType": "unobtainable grant",
+        "appliesTo": "Special player grant",
+        "availability": "Unobtainable or developer-given"
+      },
+      "system": {
+        "slug": "scribble",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 333,
+        "image": "/RIVALS/Wraps/scribble.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Net",
+        "rarity": "Unobtainable",
+        "source": "Given to bug hunters, thank you for helping us improve the game",
+        "sourceType": "unobtainable grant",
+        "appliesTo": "Special player grant",
+        "availability": "Unobtainable or developer-given"
+      },
+      "system": {
+        "slug": "net",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 334,
+        "image": "/RIVALS/Wraps/net.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rivalry",
+        "rarity": "Unobtainable",
+        "source": "Given to team members of the group (Nosniy Games)",
+        "sourceType": "unobtainable grant",
+        "appliesTo": "Special player grant",
+        "availability": "Unobtainable or developer-given"
+      },
+      "system": {
+        "slug": "rivalry",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 335,
+        "image": "/RIVALS/Wraps/rivalry.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Only Six",
+        "rarity": "Unobtainable",
+        "source": "Given to the winners of the tournament in the Ready, Set, Roblox Korea Event",
+        "sourceType": "unobtainable grant",
+        "appliesTo": "Special player grant",
+        "availability": "Unobtainable or developer-given"
+      },
+      "system": {
+        "slug": "only-six",
+        "section": "Special grant and unobtainable wraps",
+        "sortOrder": 336,
+        "image": "/RIVALS/Wraps/only-six.webp"
+      }
+    }
+  ]
+}

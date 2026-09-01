@@ -431,32 +431,20 @@ function tierDetailSection(markdown: string, rank: string): string | null {
   return lines.slice(start, end).join("\n");
 }
 
-type TierSectionTable = {
-  before: string;
-  table: string;
-  after: string;
-};
-
-function tierSectionTable(markdown: string): TierSectionTable | null {
+function leadingMarkdownTable(markdown: string): string | null {
   const lines = markdown.split(/\r?\n/);
-  let start = -1;
-  for (let index = 0; index < lines.length - 1; index += 1) {
-    const header = lines[index] ?? "";
-    const separator = lines[index + 1] ?? "";
-    if (header.includes("|") && /^\s*\|?\s*:?-{3,}/.test(separator) && separator.includes("|")) {
-      start = index;
-      break;
-    }
+  let start = 0;
+  while (start < lines.length && !(lines[start] ?? "").trim()) start += 1;
+
+  const header = lines[start] ?? "";
+  const separator = lines[start + 1] ?? "";
+  if (!header.includes("|") || !/^\s*\|?\s*:?-{3,}/.test(separator) || !separator.includes("|")) {
+    return null;
   }
-  if (start < 0) return null;
 
   let end = start + 2;
   while (end < lines.length && (lines[end] ?? "").includes("|")) end += 1;
-  return {
-    before: lines.slice(0, start).join("\n").trim(),
-    table: lines.slice(start, end).join("\n"),
-    after: lines.slice(end).join("\n").trim(),
-  };
+  return lines.slice(start, end).join("\n");
 }
 
 /** Enforce the overview → one detailed table per tier article contract. */
@@ -474,18 +462,11 @@ export function validateTierListArticleDetails(markdown: string): string[] {
       errors.push(`Missing ## ${tier.rank} Tier detail section`);
       continue;
     }
-    const sectionTable = tierSectionTable(section);
-    if (sectionTable === null) {
-      errors.push(`## ${tier.rank} Tier is missing its Markdown detail table`);
+    const table = leadingMarkdownTable(section);
+    if (table === null) {
+      errors.push(`## ${tier.rank} Tier must begin with a Markdown detail table`);
       continue;
     }
-    if (!sectionTable.before) {
-      errors.push(`## ${tier.rank} Tier needs a short cue before its detail table`);
-    }
-    if (!sectionTable.after) {
-      errors.push(`## ${tier.rank} Tier needs additional analysis after its detail table`);
-    }
-    const table = sectionTable.table;
     const tableLower = table.toLowerCase();
     for (const item of tier.items) {
       if (!tableLower.includes(item.name.toLowerCase())) {

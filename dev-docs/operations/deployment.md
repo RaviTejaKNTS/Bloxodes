@@ -1,8 +1,8 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-08-27
-Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, platform checks, and local wiki-media Worker compilation/smoke
+Last verified: 2026-08-15
+Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
 ## Normal Path
 
@@ -25,11 +25,9 @@ The public `/api/health?scope=deploy` response is the container/deploy gate. It 
 
 ## Data-Only Publication
 
-Database-backed content normally publishes through controlled scripts/migrations and revalidation rather than requiring a web image. New wiki collection revisions and their content-addressed R2 media are database/R2-only publications after the runtime infrastructure is live. Local compatibility datasets under `data/` or `apps/web/src/data/` still require a code/image deploy until migrated.
+Database-backed content normally publishes through controlled scripts/migrations and revalidation rather than requiring a web image. Local datasets under `data/` or `apps/web/src/data/` require a code/image deploy.
 
-The wiki-media Worker is a separate Cloudflare artifact under `workers/wiki-media`. Compile it locally with the pinned Wrangler command before any remote action. Its deployed route is exactly `media.bloxodes.com/wiki/*`, backed by the shared `bloxodes-wiki` bucket. Never replace the existing whole-host media origin. Managed development and production use the same canonical wiki media URL while retaining separate database publication pointers.
-
-Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` streams a transaction through SSH into the existing database container and rolls it back after proving the full plan. Workstations with several agent keys set `VPS_SSH_IDENTITY_COMMENT` so the command offers only the configured VPS identity; password auth remains the fallback when no identity comment is configured. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It runs the checked-in object proof, repairs only policy-listed schema-present ledger gaps, applies only expected migrations, commits atomically, and verifies the ledger. Managed development must pass first; production remains a separate explicit approval.
+Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` streams a transaction through SSH into the existing database container and rolls it back after proving the full plan. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It runs the checked-in object proof, repairs only policy-listed schema-present ledger gaps, applies only expected migrations, commits atomically, and verifies the ledger. Managed development must pass first; production remains a separate explicit approval.
 
 Production Edge Functions use the same immutable-SHA boundary. `npm run supabase:production:function:release -- --function <name> --approved-sha <full-sha>` compares local and deployed checksums without mutation. Apply requires `--apply --confirm "APPLY <name>"`, preserves the host file ownership/mode, restarts only Edge Runtime, performs an authenticated smoke request, and restores the previous function on failure.
 
@@ -62,8 +60,8 @@ advance production health.
 3. After an approved repository release, require the public deploy health SHA and database health to match.
 4. Apply approved schema changes to managed development through the Supabase connector, then list migrations and run readiness/advisors.
 5. Obtain separate production permission before production schema, Edge Function, VPS, or homelab mutations other than the guarded checkout synchronization included in an explicit e2e release. That checkout-only authorization does not include env changes, unit installation, job interruption, or service control.
-6. After every explicit e2e release, execute the released `scripts/ops/sync-homelab-checkout.sh` on the homelab: dry-run and then apply it against the exact `origin/production` SHA. If the production delta changes installed units, article automation is active, or preflight fails, leave the checkout unchanged and report synchronization pending instead of forcing it. If apply fails after starting, stop and report the exact resulting remote state.
-7. Run the full read-only platform check after the synchronization attempt and report any remaining drift. It uses the same `VPS_SSH_IDENTITY_COMMENT` selector as the schema release on workstations with several agent keys.
+6. After an explicit e2e release, synchronize the homelab only when the release changes homelab-owned article automation (`scripts/articles/**`, the article systemd units/checks/installers, or the guarded sync script) or the user explicitly requests it. Use the released `scripts/ops/sync-homelab-checkout.sh` dry-run and then apply against the exact `origin/production` SHA. If the production delta changes installed units, article automation is active, or preflight fails, leave the checkout unchanged and report synchronization pending instead of forcing it. If apply fails after starting, stop and report the exact resulting remote state.
+7. Run the full read-only platform check only for an in-scope homelab synchronization or an explicit platform-check request. Ordinary web/data/editorial releases use the local-only check and do not perform remote homelab/VPS inspection.
 
 The check reports drift; it never fixes drift. Database/Storage backup work is intentionally outside this sequence for now.
 

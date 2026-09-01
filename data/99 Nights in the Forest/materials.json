@@ -1,0 +1,1189 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "99 Nights in the Forest",
+    "gameSlug": "99-nights-in-the-forest",
+    "collection": "materials",
+    "route": "/wiki/99-nights-in-the-forest/materials",
+    "catalogCode": "99-nights-in-the-forest-materials",
+    "itemFields": [
+      "type",
+      "source",
+      "location",
+      "craftingUses",
+      "farmingTip",
+      "risk",
+      "rarityOrValue",
+      "availability"
+    ],
+    "columns": [
+      "type",
+      "source",
+      "location",
+      "craftingUses",
+      "farmingTip",
+      "risk",
+      "rarityOrValue",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Fuel and camp resources",
+        "Scrap sources",
+        "Core and trade resources",
+        "Pelts and entity drops",
+        "Potion ingredients",
+        "Meteor and Obsidiron materials"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "type",
+        "source",
+        "location",
+        "craftingUses",
+        "farmingTip",
+        "risk"
+      ],
+      "tableFields": [
+        "type",
+        "source",
+        "location",
+        "craftingUses",
+        "farmingTip",
+        "risk",
+        "rarityOrValue",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Log",
+        "type": "Fuel resource",
+        "source": "Throughout the map, trees, and Large Cabin",
+        "location": "Forest routes and cabins",
+        "craftingUses": "Fuel the Campfire or grind into 1 Wood",
+        "farmingTip": "Use logs for fire when you are safe on Wood; grind them when crafting is the bottleneck.",
+        "risk": "Safe early resource",
+        "rarityOrValue": "1 fuel; 1 Wood when ground",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "log",
+        "section": "Fuel and camp resources",
+        "sortOrder": 1,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/log.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chair",
+        "type": "Fuel resource",
+        "source": "Medium Cabin and Large Cabin",
+        "location": "Cabins",
+        "craftingUses": "Fuel the Campfire or grind into 5 Wood",
+        "farmingTip": "Chairs are better Wood pickups than logs when you need crafting resources quickly.",
+        "risk": "Structure looting",
+        "rarityOrValue": "1 fuel; 5 Wood when ground",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "chair",
+        "section": "Fuel and camp resources",
+        "sortOrder": 2,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/chair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Biofuel",
+        "type": "Fuel resource",
+        "source": "Biofuel Processor",
+        "location": "Crafting Bench Tier 3 route",
+        "craftingUses": "Fuel the Campfire",
+        "farmingTip": "Turn extra eligible drops into Biofuel only after checking whether a recipe or trader route needs them.",
+        "risk": "Crafted resource",
+        "rarityOrValue": "1 fuel",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "biofuel",
+        "section": "Fuel and camp resources",
+        "sortOrder": 3,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/biofuel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal",
+        "type": "Fuel resource",
+        "source": "Structures",
+        "location": "Lootable structures",
+        "craftingUses": "Fuel the Campfire",
+        "farmingTip": "Coal is a better fire pickup than basic logs when night is close.",
+        "risk": "Structure looting",
+        "rarityOrValue": "2 fuel",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "coal",
+        "section": "Fuel and camp resources",
+        "sortOrder": 4,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/coal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Fur Tuft",
+        "type": "Quest fuel resource",
+        "source": "Bat Cave and Grove",
+        "location": "Grove and Bat Cave route",
+        "craftingUses": "Give to The Deer during the hurt-deer route; unused tufts can fuel the Campfire after the Bat Cave unlock",
+        "farmingTip": "Treat this as a Deer route item first and fuel only after the unlock use is handled.",
+        "risk": "Special route",
+        "rarityOrValue": "2 fuel after unlock use",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "purple-fur-tuft",
+        "section": "Fuel and camp resources",
+        "sortOrder": 5,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/purple-fur-tuft.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fuel Canister",
+        "type": "Fuel resource",
+        "source": "Throughout the map, Chests, and Structures",
+        "location": "Map loot, chests, and structures",
+        "craftingUses": "Fuel the Campfire and Flamethrower",
+        "farmingTip": "Save Fuel Canisters if you are using Flamethrower routes; otherwise they are strong Campfire fuel.",
+        "risk": "Loot route",
+        "rarityOrValue": "3 fuel",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "fuel-canister",
+        "section": "Fuel and camp resources",
+        "sortOrder": 6,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/fuel-canister.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Oil Barrel",
+        "type": "Fuel resource",
+        "source": "Throughout the map, Legendary Chests, Gold Chests, Structures, and Oil Drill",
+        "location": "Map loot, high-value chests, structures, and Oil Drill",
+        "craftingUses": "Fuel the Campfire and Flamethrower",
+        "farmingTip": "Oil Barrels are high-value fuel, so carry them when a late night or Flamethrower route is coming.",
+        "risk": "Loot route",
+        "rarityOrValue": "4 fuel",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "oil-barrel",
+        "section": "Fuel and camp resources",
+        "sortOrder": 7,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/oil-barrel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist Corpse",
+        "type": "Corpse fuel",
+        "source": "Killing Cultists",
+        "location": "Cultist encounters",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano for 1 charge",
+        "farmingTip": "Use cultist corpses as short-term fire or Volcano charge value after combat.",
+        "risk": "Combat drop",
+        "rarityOrValue": "1 fuel; 1 Volcano charge",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "cultist-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 8,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/cultist-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crossbow Cultist Corpse",
+        "type": "Corpse fuel",
+        "source": "Killing Crossbow Cultists",
+        "location": "Cultist encounters",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano for 1 charge",
+        "farmingTip": "Do not route for this alone; treat it as extra value after clearing cultist threats.",
+        "risk": "Combat drop",
+        "rarityOrValue": "1 fuel; 1 Volcano charge",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "crossbow-cultist-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 9,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/crossbow-cultist-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Juggernaut Cultist Corpse",
+        "type": "Corpse fuel",
+        "source": "Killing Juggernaut Cultists",
+        "location": "High-risk cultist encounters",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano for 1 charge",
+        "farmingTip": "Only count this as bonus value after you can handle stronger cultist fights.",
+        "risk": "Late combat drop",
+        "rarityOrValue": "1 fuel; 1 Volcano charge",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "juggernaut-cultist-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 10,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/juggernaut-cultist-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist King Corpse",
+        "type": "Boss corpse fuel",
+        "source": "Killing Cultist King",
+        "location": "Cultist King encounter",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano for 2 charges",
+        "farmingTip": "This is boss-route value, not an early fuel plan.",
+        "risk": "Boss drop",
+        "rarityOrValue": "1 fuel; 2 Volcano charges",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "cultist-king-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 11,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/cultist-king-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien Corpse",
+        "type": "Corpse fuel",
+        "source": "Killing Aliens",
+        "location": "Destroyed UFO and Mothership routes",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano",
+        "farmingTip": "Treat alien corpses as event-route fuel after a UFO crash, not a normal forest pickup.",
+        "risk": "Alien event combat",
+        "rarityOrValue": "1 fuel; Volcano sacrifice item",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "alien-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 12,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/alien-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Alien Corpse",
+        "type": "Corpse fuel",
+        "source": "Killing Elite Aliens",
+        "location": "Mothership route",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano",
+        "farmingTip": "Only chase this when you are already clearing the Mothership route.",
+        "risk": "Alien event combat",
+        "rarityOrValue": "1 fuel; Volcano sacrifice item",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "elite-alien-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 13,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/elite-alien-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf Corpse",
+        "type": "Corpse fuel",
+        "source": "Structures",
+        "location": "Structures",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano",
+        "farmingTip": "Use it as route fuel when a structure already has one nearby.",
+        "risk": "Structure looting",
+        "rarityOrValue": "2 fuel; Volcano sacrifice item",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "wolf-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 14,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/wolf-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alpha Wolf Corpse",
+        "type": "Corpse fuel",
+        "source": "Structures",
+        "location": "Structures",
+        "craftingUses": "Fuel the Campfire or sacrifice to the Volcano",
+        "farmingTip": "Pick it up when structure routing gives safe carry space.",
+        "risk": "Structure looting",
+        "rarityOrValue": "2 fuel; Volcano sacrifice item",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "alpha-wolf-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 15,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/alpha-wolf-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear Corpse",
+        "type": "Corpse fuel",
+        "source": "Structures",
+        "location": "Structures",
+        "craftingUses": "Fuel the Campfire",
+        "farmingTip": "Carry it back when you need stronger fuel and have enough bag space.",
+        "risk": "Structure looting",
+        "rarityOrValue": "2 fuel",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "bear-corpse",
+        "section": "Fuel and camp resources",
+        "sortOrder": 16,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/bear-corpse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bolt",
+        "type": "Scrap item",
+        "source": "Throughout the map, Structures, and Fishing",
+        "location": "Map loot, structures, and fishing",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Pick up small scrap items early because they convert straight into recipe progress.",
+        "risk": "Safe loot",
+        "rarityOrValue": "1 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "bolt",
+        "section": "Scrap sources",
+        "sortOrder": 17,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/bolt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sheet Metal",
+        "type": "Scrap item",
+        "source": "Throughout the map, Structures, and Fishing",
+        "location": "Map loot, structures, and fishing",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Treat it as a simple low-value scrap pickup.",
+        "risk": "Safe loot",
+        "rarityOrValue": "1 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "sheet-metal",
+        "section": "Scrap sources",
+        "sortOrder": 18,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/sheet-metal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO Junk",
+        "type": "Alien scrap item",
+        "source": "Broken UFOs and Mothership UFOs",
+        "location": "Alien crash and Mothership routes",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Collect it while clearing alien routes instead of routing there only for one Scrap.",
+        "risk": "Alien event route",
+        "rarityOrValue": "1 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "ufo-junk",
+        "section": "Scrap sources",
+        "sortOrder": 19,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/ufo-junk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO Component",
+        "type": "Alien scrap item",
+        "source": "Broken UFOs and Mothership UFOs",
+        "location": "Alien crash and Mothership routes",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Worth carrying over 1-Scrap junk when bag space is tight.",
+        "risk": "Alien event route",
+        "rarityOrValue": "2 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "ufo-component",
+        "section": "Scrap sources",
+        "sortOrder": 20,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/ufo-component.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Broken Fan",
+        "type": "Scrap item",
+        "source": "Throughout the map, Structures, and Fishing",
+        "location": "Map loot, structures, and fishing",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "A good early pickup when you need medium scrap without combat.",
+        "risk": "Safe loot",
+        "rarityOrValue": "2 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "broken-fan",
+        "section": "Scrap sources",
+        "sortOrder": 21,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/broken-fan.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Old Radio",
+        "type": "Scrap item",
+        "source": "Throughout the map, Structures, Fishing, and Trick-or-Treating",
+        "location": "Map loot, structures, fishing, and event route",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Use current map, structure, or fishing routes; Trick-or-Treating is only an event source.",
+        "risk": "Safe loot",
+        "rarityOrValue": "2 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "old-radio",
+        "section": "Scrap sources",
+        "sortOrder": 22,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/old-radio.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Broken Microwave",
+        "type": "Scrap item",
+        "source": "Throughout the map, Structures, Fishing, and Trick-or-Treating",
+        "location": "Map loot, structures, fishing, and event route",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "High enough value to keep when you need Scrap for several recipes.",
+        "risk": "Safe loot",
+        "rarityOrValue": "3 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "broken-microwave",
+        "section": "Scrap sources",
+        "sortOrder": 23,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/broken-microwave.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tire",
+        "type": "Scrap item",
+        "source": "Throughout the map, Structures, and Fishing",
+        "location": "Map loot, structures, and fishing",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Carry tires when you need 3-Scrap pickups and have room.",
+        "risk": "Safe loot",
+        "rarityOrValue": "3 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "tire",
+        "section": "Scrap sources",
+        "sortOrder": 24,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/tire.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Metal Chair",
+        "type": "Scrap item",
+        "source": "Clinic",
+        "location": "Clinic",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Useful clinic pickup when you are already looting for healing and resources.",
+        "risk": "Structure looting",
+        "rarityOrValue": "3 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "metal-chair",
+        "section": "Scrap sources",
+        "sortOrder": 25,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/metal-chair.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Old Car Engine",
+        "type": "Scrap item",
+        "source": "Throughout the map, Structures, and Fishing",
+        "location": "Map loot, structures, and fishing",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Prioritize it over low-value junk when your sack is close to full.",
+        "risk": "Loot route",
+        "rarityOrValue": "4 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "old-car-engine",
+        "section": "Scrap sources",
+        "sortOrder": 26,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/old-car-engine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Washing Machine",
+        "type": "Scrap item",
+        "source": "Throughout the map and Structures",
+        "location": "Map loot and structures",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "A strong scrap pickup if you can carry it back safely.",
+        "risk": "Loot route",
+        "rarityOrValue": "4 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "washing-machine",
+        "section": "Scrap sources",
+        "sortOrder": 27,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/washing-machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist Experiment",
+        "type": "Cultist scrap item",
+        "source": "Completing Cultist Stronghold and Polar Bear Cave",
+        "location": "Cultist Stronghold and Polar Bear Cave",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Treat it as late-route scrap because its sources are much riskier than basic structures.",
+        "risk": "Late structure reward",
+        "rarityOrValue": "4 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "cultist-experiment",
+        "section": "Scrap sources",
+        "sortOrder": 28,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/cultist-experiment.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist Prototype",
+        "type": "Cultist scrap item",
+        "source": "Completing Cultist Stronghold and Polar Bear Cave",
+        "location": "Cultist Stronghold and Polar Bear Cave",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Use it as bonus Scrap from dangerous objectives rather than a normal early farm.",
+        "risk": "Late structure reward",
+        "rarityOrValue": "4 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "cultist-prototype",
+        "section": "Scrap sources",
+        "sortOrder": 29,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/cultist-prototype.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO Scrap",
+        "type": "Alien scrap item",
+        "source": "Broken UFOs and Mothership UFOs",
+        "location": "Alien crash and Mothership routes",
+        "craftingUses": "Grind into Scrap",
+        "farmingTip": "Best gathered while clearing UFO content because it is valuable but route-gated.",
+        "risk": "Alien event route",
+        "rarityOrValue": "4 Scrap",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "ufo-scrap",
+        "section": "Scrap sources",
+        "sortOrder": 30,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/ufo-scrap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wood",
+        "type": "Core crafting resource",
+        "source": "Grinding Logs and Chairs",
+        "location": "Crafting/grinding route",
+        "craftingUses": "Crafting Bench recipes and core camp progression",
+        "farmingTip": "Do not burn every Log if your next Bench upgrade or defense needs Wood.",
+        "risk": "Safe early resource",
+        "rarityOrValue": "Core crafting resource",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "wood",
+        "section": "Core and trade resources",
+        "sortOrder": 31,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/wood.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scrap",
+        "type": "Core crafting resource",
+        "source": "Grinding scrap items",
+        "location": "Crafting/grinding route",
+        "craftingUses": "Crafting Bench, Tool Workshop, ammo and utility recipes",
+        "farmingTip": "Use higher-value scrap items first when recipe costs climb.",
+        "risk": "Safe to late loot, depending on source item",
+        "rarityOrValue": "Core crafting resource",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "scrap",
+        "section": "Core and trade resources",
+        "sortOrder": 32,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/scrap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist Gem",
+        "type": "Late crafting resource",
+        "source": "Last-standing Cultists, Cultist Stronghold, Ice Temple, and Fishing",
+        "location": "Cultist routes, Ice Temple, and fishing",
+        "craftingUses": "Crafting Bench recipes, Tool Workshop recipes, and summoning Cultist King with 4 gems in the Volcanic Biome",
+        "farmingTip": "Save four gems if your next goal is the Cultist King summon; otherwise spend only when a recipe is worth the route.",
+        "risk": "Combat and late structure route",
+        "rarityOrValue": "4 needed for Cultist King summon",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "cultist-gem",
+        "section": "Core and trade resources",
+        "sortOrder": 33,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/cultist-gem.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Forest Gem Fragment",
+        "type": "Top-tier crafting fragment",
+        "source": "Cultist Stronghold, Ice Temple, Ruby Chests, Gold Chests, 100+ day Cultist raids, and Fishing",
+        "location": "Cultist Stronghold, Ice Temple, high-value chests, late raids, and fishing",
+        "craftingUses": "Merge 4 fragments into a Forest Gem",
+        "farmingTip": "Count fragments as progress toward one full Forest Gem before spending top-tier crafting plans.",
+        "risk": "Late route",
+        "rarityOrValue": "4 fragments make 1 Forest Gem",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "forest-gem-fragment",
+        "section": "Core and trade resources",
+        "sortOrder": 34,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/forest-gem-fragment.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Forest Gem",
+        "type": "Top-tier crafting resource",
+        "source": "Merge 4 Forest Gem Fragments",
+        "location": "Inventory merge",
+        "craftingUses": "Crafting Bench Tier 5 and top-tier structures such as Weather Machine, Temporal Accelerometer, and Respawn Capsule",
+        "farmingTip": "Do not plan tier 5 crafting until you have enough fragments for the full gem.",
+        "risk": "Late route result",
+        "rarityOrValue": "Made from 4 Forest Gem Fragments",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "forest-gem",
+        "section": "Core and trade resources",
+        "sortOrder": 35,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/forest-gem.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mossy Coin",
+        "type": "Trade resource",
+        "source": "Throughout the map, killing Cultists, and Trick-or-Treating",
+        "location": "Map routes and cultist routes",
+        "craftingUses": "Purchase Furniture from the Furniture Trader",
+        "farmingTip": "Use current map and Cultist routes first; Trick-or-Treating is event-dependent.",
+        "risk": "Safe to combat route",
+        "rarityOrValue": "Furniture Trader currency",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "mossy-coin",
+        "section": "Core and trade resources",
+        "sortOrder": 36,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/mossy-coin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flower",
+        "type": "Trade resource",
+        "source": "Throughout the map, Fairy garden, and Fairy Rings",
+        "location": "Map routes and Fairy areas",
+        "craftingUses": "Purchase seeds from the Fairy",
+        "farmingTip": "Flower color is cosmetic in checked sources, so prioritize quantity for seed purchases.",
+        "risk": "Safe gathering",
+        "rarityOrValue": "Seed purchase resource",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "flower",
+        "section": "Core and trade resources",
+        "sortOrder": 37,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/flower.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sapling",
+        "type": "Tree resource",
+        "source": "Trees",
+        "location": "Forest routes",
+        "craftingUses": "Plant to grow a normal tree after one in-game day",
+        "farmingTip": "Use Saplings to keep future Wood routes alive instead of treating every tree as a one-time pickup.",
+        "risk": "Safe gathering",
+        "rarityOrValue": "Chance from normal trees; guaranteed 4 from big trees",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "sapling",
+        "section": "Core and trade resources",
+        "sortOrder": 38,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/sapling.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sacrifice Totem",
+        "type": "Sacrifice resource",
+        "source": "Hot Chests",
+        "location": "Volcanic route",
+        "craftingUses": "Sacrifice to the Volcano for 2 charges",
+        "farmingTip": "Save it for Volcano charge progress instead of treating it like normal camp loot.",
+        "risk": "Late biome chest",
+        "rarityOrValue": "2 Volcano charges",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "sacrifice-totem",
+        "section": "Core and trade resources",
+        "sortOrder": 39,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/sacrifice-totem.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Foot",
+        "type": "Pelt/drop",
+        "source": "Bunny",
+        "location": "Forest routes",
+        "craftingUses": "Pelt Trader trades, Biofuel, Tool Workshop, Warm Clothing Shop, and Bandage crafting",
+        "farmingTip": "Save Bunny Foot for Bandages or early trader value before turning extras into Biofuel.",
+        "risk": "Early animal drop",
+        "rarityOrValue": "Rare pelt/drop",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "bunny-foot",
+        "section": "Pelts and entity drops",
+        "sortOrder": 40,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/bunny-foot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf Pelt",
+        "type": "Pelt/drop",
+        "source": "Wolf and Guard Wolf",
+        "location": "Wolf and guard routes",
+        "craftingUses": "Pelt Trader trades, Biofuel, Tool Workshop, and Bandage crafting",
+        "farmingTip": "Keep early Wolf Pelts because Bandages and workshop recipes can need them quickly.",
+        "risk": "Early combat drop",
+        "rarityOrValue": "Rare pelt/drop",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "wolf-pelt",
+        "section": "Pelts and entity drops",
+        "sortOrder": 41,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/wolf-pelt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alpha Wolf Pelt",
+        "type": "Pelt/drop",
+        "source": "Alpha Wolf and Guard Alpha Wolf",
+        "location": "Alpha Wolf and guard routes",
+        "craftingUses": "Pelt Trader trades, Biofuel, and Tool Workshop recipes",
+        "farmingTip": "Save these for higher workshop recipes before converting extras to Biofuel.",
+        "risk": "Combat drop",
+        "rarityOrValue": "Rare pelt/drop",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "alpha-wolf-pelt",
+        "section": "Pelts and entity drops",
+        "sortOrder": 42,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/alpha-wolf-pelt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear Pelt",
+        "type": "Pelt/drop",
+        "source": "Bear and Guard Bear",
+        "location": "Bear and guard routes",
+        "craftingUses": "Pelt Trader trades, Biofuel, and Tool Workshop recipes",
+        "farmingTip": "Bear Pelts feed more expensive workshop choices, so avoid wasting early copies.",
+        "risk": "Mid combat drop",
+        "rarityOrValue": "Rare pelt/drop",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "bear-pelt",
+        "section": "Pelts and entity drops",
+        "sortOrder": 43,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/bear-pelt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arctic Fox Pelt",
+        "type": "Cold biome pelt",
+        "source": "Arctic Fox",
+        "location": "Snow Biome routes",
+        "craftingUses": "Warm Clothing crafting",
+        "farmingTip": "Save it for cold protection because checked sources say it cannot be turned into Biofuel.",
+        "risk": "Cold biome drop",
+        "rarityOrValue": "Warm Clothing pelt",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "arctic-fox-pelt",
+        "section": "Pelts and entity drops",
+        "sortOrder": 44,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/arctic-fox-pelt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Polar Bear Pelt",
+        "type": "Cold biome pelt",
+        "source": "Polar Bear",
+        "location": "Snow Biome routes",
+        "craftingUses": "Polar Bear Hat crafting",
+        "farmingTip": "Treat it as warm-clothing progress rather than Biofuel.",
+        "risk": "Cold biome combat drop",
+        "rarityOrValue": "Warm Clothing pelt",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "polar-bear-pelt",
+        "section": "Pelts and entity drops",
+        "sortOrder": 45,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/polar-bear-pelt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mammoth Tusk",
+        "type": "Cold biome drop",
+        "source": "Mammoth and Hellephant",
+        "location": "Snow and hard encounter routes",
+        "craftingUses": "Mammoth Helmet crafting",
+        "farmingTip": "Only chase tusks once your team can survive large cold-biome threats.",
+        "risk": "Late combat drop",
+        "rarityOrValue": "Warm Clothing material",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "mammoth-tusk",
+        "section": "Pelts and entity drops",
+        "sortOrder": 46,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/mammoth-tusk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scorpion Shell",
+        "type": "Volcanic drop",
+        "source": "Scorpion",
+        "location": "Volcanic Biome routes",
+        "craftingUses": "Infernal Helmet crafting",
+        "farmingTip": "Save shells for Infernal Helmet attempts; they are not Biofuel items.",
+        "risk": "Volcanic combat drop",
+        "rarityOrValue": "Infernal Helmet material",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "scorpion-shell",
+        "section": "Pelts and entity drops",
+        "sortOrder": 47,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/scorpion-shell.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist King Antler",
+        "type": "Boss drop",
+        "source": "Cultist King",
+        "location": "Cultist King encounter",
+        "craftingUses": "Infernal Helmet crafting",
+        "farmingTip": "Plan around this only after the Cultist King route is realistic for your run.",
+        "risk": "Boss drop",
+        "rarityOrValue": "Infernal Helmet material",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "cultist-king-antler",
+        "section": "Pelts and entity drops",
+        "sortOrder": 48,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/cultist-king-antler.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dripleaf",
+        "type": "Potion ingredient",
+        "source": "Near Ponds",
+        "location": "Pond routes",
+        "craftingUses": "Potion brewing",
+        "farmingTip": "Check pond routes when potion crafting is the goal.",
+        "risk": "Safe gathering",
+        "rarityOrValue": "Potion ingredient",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "dripleaf",
+        "section": "Potion ingredients",
+        "sortOrder": 49,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/dripleaf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moonflower Bulb",
+        "type": "Potion ingredient",
+        "source": "Throughout the map at night",
+        "location": "Night gathering routes",
+        "craftingUses": "Potion brewing",
+        "farmingTip": "Harvest it at night only, so plan the route before morning breaks the loop.",
+        "risk": "Night gathering",
+        "rarityOrValue": "Potion ingredient",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "moonflower-bulb",
+        "section": "Potion ingredients",
+        "sortOrder": 50,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/moonflower-bulb.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stareweed Petal",
+        "type": "Potion ingredient",
+        "source": "Throughout the map; shine a Flashlight on Stareweed to harvest",
+        "location": "Map gathering routes",
+        "craftingUses": "Potion brewing",
+        "farmingTip": "Bring a Flashlight before routing for Stareweed Petals.",
+        "risk": "Tool-gated gathering",
+        "rarityOrValue": "Potion ingredient",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "stareweed-petal",
+        "section": "Potion ingredients",
+        "sortOrder": 51,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/stareweed-petal.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cave Vine Flower",
+        "type": "Potion ingredient",
+        "source": "Locked Caves and Mineshafts",
+        "location": "Locked caves and mineshafts",
+        "craftingUses": "Potion brewing",
+        "farmingTip": "Route for it when you are already entering caves or mineshafts.",
+        "risk": "Cave route",
+        "rarityOrValue": "Potion ingredient",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "cave-vine-flower",
+        "section": "Potion ingredients",
+        "sortOrder": 52,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/cave-vine-flower.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mandrake",
+        "type": "Event-origin potion ingredient",
+        "source": "Trick-or-Treat houses",
+        "location": "Halloween event route",
+        "craftingUses": "Potion brewing",
+        "farmingTip": "Do not plan a normal run around Mandrake unless the Trick-or-Treat route is available.",
+        "risk": "Event-origin route",
+        "rarityOrValue": "Potion ingredient",
+        "availability": "Event-origin"
+      },
+      "system": {
+        "slug": "mandrake",
+        "section": "Potion ingredients",
+        "sortOrder": 53,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/mandrake.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteor Shard",
+        "type": "Meteor material",
+        "source": "Meteor Crabs, Meteor Crystals, and Obsidiron Crystals",
+        "location": "Meteor Shower and Meteor Workshop routes",
+        "craftingUses": "Meteor Anvil recipes",
+        "farmingTip": "Save shards for Meteor Anvil crafts because every listed Meteor Anvil recipe spends them.",
+        "risk": "Meteor event route",
+        "rarityOrValue": "Meteor Anvil material",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "meteor-shard",
+        "section": "Meteor and Obsidiron materials",
+        "sortOrder": 54,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/meteor-shard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Shard",
+        "type": "Meteor material",
+        "source": "Meteor Crystals and Obsidiron Crystals",
+        "location": "Meteor Shower and Meteor Workshop routes",
+        "craftingUses": "Meteor Anvil trim kits and Obsidiron Chest Blueprint",
+        "farmingTip": "Keep Gold Shards for trim kits or blueprint crafting instead of treating them as generic loot.",
+        "risk": "Meteor event route",
+        "rarityOrValue": "Meteor Anvil material",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "gold-shard",
+        "section": "Meteor and Obsidiron materials",
+        "sortOrder": 55,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/gold-shard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raw Obsidiron Ore",
+        "type": "Obsidiron material",
+        "source": "Mine an Obsidiron Crystal with an Axe",
+        "location": "Meteor/Volcanic route",
+        "craftingUses": "Process into Raw Obsidiron Ore (Shard), then Scalding Obsidiron Ingot, then Obsidiron Ingot",
+        "farmingTip": "This is the first step of the Obsidiron Ingot chain, not the final crafting ingredient.",
+        "risk": "Meteor/Volcanic processing route",
+        "rarityOrValue": "Obsidiron chain step 1",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "raw-obsidiron-ore",
+        "section": "Meteor and Obsidiron materials",
+        "sortOrder": 56,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/raw-obsidiron-ore.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raw Obsidiron Ore (Shard)",
+        "type": "Obsidiron material",
+        "source": "Smash Raw Obsidiron Ore against the ground",
+        "location": "Meteor/Volcanic processing route",
+        "craftingUses": "Process into Scalding Obsidiron Ingot",
+        "farmingTip": "Do not stop here; the shard still needs the lava and water steps before it becomes a usable ingot.",
+        "risk": "Meteor/Volcanic processing route",
+        "rarityOrValue": "Obsidiron chain step 2",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "raw-obsidiron-ore-shard",
+        "section": "Meteor and Obsidiron materials",
+        "sortOrder": 57,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/raw-obsidiron-ore-shard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scalding Obsidiron Ingot",
+        "type": "Obsidiron material",
+        "source": "Dip Raw Obsidiron Ore (Shard) in lava",
+        "location": "Lava processing route",
+        "craftingUses": "Process into Obsidiron Ingot by dipping it in water",
+        "farmingTip": "Keep going to the water step; Scalding Obsidiron Ingot is an intermediate state.",
+        "risk": "Volcanic processing route",
+        "rarityOrValue": "Obsidiron chain step 3",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "scalding-obsidiron-ingot",
+        "section": "Meteor and Obsidiron materials",
+        "sortOrder": 58,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/scalding-obsidiron-ingot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidiron Ingot",
+        "type": "Obsidiron material",
+        "source": "Dip Scalding Obsidiron Ingot in water",
+        "location": "Water processing route after lava step",
+        "craftingUses": "Meteor Anvil recipes, including Obsidiron Boots and Obsidiron Chest Blueprint",
+        "farmingTip": "This is the final chain item and the one Meteor Anvil recipes actually spend.",
+        "risk": "Volcanic processing route",
+        "rarityOrValue": "Final Obsidiron material",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "obsidiron-ingot",
+        "section": "Meteor and Obsidiron materials",
+        "sortOrder": 59,
+        "image": "/99%20Nights%20in%20the%20Forest/Materials/obsidiron-ingot.webp"
+      }
+    }
+  ]
+}

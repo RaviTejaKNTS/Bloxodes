@@ -18,8 +18,8 @@ tmp/content-workspace/<game-slug>/quizzes/<quiz-code>/
   final.json
 ```
 
-3. Write page metadata and the complete easy, medium, and hard question pools in `final.json`.
-4. Parse JSON and validate the quiz shape. Do not create `data/<Game>/quiz.json`; the guarded importer stores `quizData` in `quiz_pages.quiz_data`.
+3. Write page metadata and quiz data in `final.json`.
+4. Parse JSON and validate the quiz shape.
 
 ## Voice & Tone
 
@@ -70,50 +70,7 @@ Bloxodes house voice for the page copy (`description_md`, intro, explanations): 
     "is_published": true
   },
   "quizData": {
-    "easy": [
-      {
-        "id": "",
-        "question": "",
-        "options": [
-          { "id": "a", "text": "" },
-          { "id": "b", "text": "" },
-          { "id": "c", "text": "" },
-          { "id": "d", "text": "" }
-        ],
-        "correctOptionId": "a",
-        "image": null
-      }
-    ],
-    "medium": [
-      {
-        "id": "",
-        "question": "",
-        "options": [
-          { "id": "a", "text": "" },
-          { "id": "b", "text": "" },
-          { "id": "c", "text": "" },
-          { "id": "d", "text": "" }
-        ],
-        "correctOptionId": "a",
-        "image": null
-      }
-    ],
-    "hard": [
-      {
-        "id": "",
-        "question": "",
-        "options": [
-          { "id": "a", "text": "" },
-          { "id": "b", "text": "" },
-          { "id": "c", "text": "" },
-          { "id": "d", "text": "" }
-        ],
-        "correctOptionId": "a",
-        "image": null
-      }
-    ]
+    "questions": []
   }
 }
 ```
-
-The example is structural. Every difficulty array must be non-empty, every question ID must be unique across the full quiz, and each question must contain exactly four uniquely keyed options.

@@ -1,0 +1,697 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Vanguards",
+    "gameSlug": "anime-vanguards",
+    "collection": "gamemodes",
+    "route": "/wiki/anime-vanguards/gamemodes",
+    "catalogCode": "anime-vanguards-gamemodes",
+    "universeId": 5578556129,
+    "sourceItemCount": 16,
+    "itemFields": [
+      "name",
+      "cardSummary",
+      "modeGroup",
+      "modeType",
+      "purpose",
+      "accessLocation",
+      "unlockRequirement",
+      "partySize",
+      "stagesOrVariants",
+      "wavesOrFloors",
+      "difficulty",
+      "restrictions",
+      "specialRules",
+      "rewards",
+      "rotationOrReset",
+      "availability"
+    ],
+    "columns": [
+      "name",
+      "modeGroup",
+      "modeType",
+      "purpose",
+      "accessLocation",
+      "unlockRequirement",
+      "partySize",
+      "stagesOrVariants",
+      "wavesOrFloors",
+      "difficulty",
+      "restrictions",
+      "specialRules",
+      "rewards",
+      "rotationOrReset",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "modeGroup",
+      "sectionOrder": [
+        "Core progression",
+        "Specialized and endurance",
+        "Competitive"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "modeType",
+        "unlockRequirement"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "modeType",
+        "unlockRequirement",
+        "partySize",
+        "wavesOrFloors",
+        "rewards",
+        "rotationOrReset",
+        "availability"
+      ],
+      "tableFields": [
+        "modeGroup",
+        "modeType",
+        "purpose",
+        "accessLocation",
+        "unlockRequirement",
+        "partySize",
+        "stagesOrVariants",
+        "wavesOrFloors",
+        "difficulty",
+        "restrictions",
+        "specialRules",
+        "rewards",
+        "rotationOrReset",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "modeGroup": {
+          "kind": "chip",
+          "label": "Group"
+        },
+        "modeType": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "purpose": {
+          "kind": "detail",
+          "label": "Purpose"
+        },
+        "accessLocation": {
+          "kind": "plain",
+          "label": "Access"
+        },
+        "unlockRequirement": {
+          "kind": "chip",
+          "label": "Unlock"
+        },
+        "partySize": {
+          "kind": "chip",
+          "label": "Players"
+        },
+        "stagesOrVariants": {
+          "kind": "plain",
+          "label": "Variants"
+        },
+        "wavesOrFloors": {
+          "kind": "chip",
+          "label": "Structure"
+        },
+        "difficulty": {
+          "kind": "chip",
+          "label": "Difficulty"
+        },
+        "restrictions": {
+          "kind": "detail",
+          "label": "Restrictions"
+        },
+        "specialRules": {
+          "kind": "detail",
+          "label": "Special rules"
+        },
+        "rewards": {
+          "kind": "plain",
+          "label": "Rewards"
+        },
+        "rotationOrReset": {
+          "kind": "plain",
+          "label": "Rotation/reset"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Story Mode",
+        "cardSummary": "The main campaign route for clearing themed stages, earning basic resources, and preparing a team for harder modes.",
+        "modeGroup": "Core progression",
+        "modeType": "Campaign",
+        "purpose": "Main campaign progression",
+        "accessLocation": "Select Story Mode from the lobby stage selector.",
+        "unlockRequirement": "No separate mode gate listed",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Themed stages",
+          "Six acts",
+          "Normal",
+          "Nightmare"
+        ],
+        "wavesOrFloors": "Act-based wave runs",
+        "difficulty": "Normal and Nightmare",
+        "restrictions": "Uses the selected stage's map and enemy roster.",
+        "specialRules": "Each stage has its own map and rewards; later progression follows campaign clears.",
+        "rewards": [
+          "Gems",
+          "Gold",
+          "Stage drops",
+          "Account progression"
+        ],
+        "rotationOrReset": "Permanent mode; stage content changes with game updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "story-mode",
+        "section": "Core progression",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Legend Stages",
+        "cardSummary": "Harder versions of selected campaign stages that add stronger enemies, modifiers, and exclusive progression rewards.",
+        "modeGroup": "Core progression",
+        "modeType": "Advanced campaign",
+        "purpose": "Advanced campaign farming and challenge progression",
+        "accessLocation": "Open Legend Stages from the stage selector after the relevant Story progression.",
+        "unlockRequirement": "Story progression required",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Selected Story stages",
+          "Harder variants",
+          "Stage modifiers"
+        ],
+        "wavesOrFloors": "Act-based wave runs",
+        "difficulty": "Harder than Story",
+        "restrictions": "Stronger enemies and stage modifiers can change the normal campaign approach.",
+        "specialRules": "Legend variants use exclusive reward paths and increase the value of advanced farming.",
+        "rewards": [
+          "Evolution materials",
+          "Rare stage drops",
+          "Progression rewards"
+        ],
+        "rotationOrReset": "Permanent mode; available stages follow game updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "legend-stages",
+        "section": "Core progression",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Challenge Mode",
+        "cardSummary": "Rotating Story and Legend runs with extra modifiers for repeatable challenge rewards on regular, daily, and weekly schedules.",
+        "modeGroup": "Specialized and endurance",
+        "modeType": "Rotating challenge",
+        "purpose": "Modifier-based farming and repeatable challenge rewards",
+        "accessLocation": "Open Challenge Mode from the lobby stage area.",
+        "unlockRequirement": "No separate account gate listed",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Regular challenges",
+          "Daily challenges",
+          "Weekly challenges",
+          "Story or Legend stages"
+        ],
+        "wavesOrFloors": "Story or Legend stages with added modifiers",
+        "difficulty": "Variable by challenge",
+        "restrictions": "Challenge modifiers can restrict units or alter enemies.",
+        "specialRules": "Regular, daily, and weekly slots use different refresh cadences; a completion cap can apply.",
+        "rewards": [
+          "Trait Rerolls",
+          "Challenge materials",
+          "Gems",
+          "Other slot-specific rewards"
+        ],
+        "rotationOrReset": "Regular slots refresh every 30 minutes; daily slots every 24 hours; weekly slots every 7 days.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "challenge-mode",
+        "section": "Specialized and endurance",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Raids",
+        "cardSummary": "Endgame co-op encounters built around multi-wave clears, raid currencies, and exclusive upgrade materials.",
+        "modeGroup": "Core progression",
+        "modeType": "Co-op progression",
+        "purpose": "Endgame co-op farming and upgrade progression",
+        "accessLocation": "Enter Raids from the Raid area in the lobby.",
+        "unlockRequirement": "Endgame access; exact account gate varies by implementation",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Named raid stages",
+          "Boss encounters"
+        ],
+        "wavesOrFloors": "20 waves",
+        "difficulty": "Endgame",
+        "restrictions": "Harder waves and boss encounters require a developed team.",
+        "specialRules": "Raid currencies can be exchanged for evolution materials, trait rerolls, and other upgrade resources.",
+        "rewards": [
+          "Raid currencies",
+          "Evolution materials",
+          "Trait rerolls",
+          "Exclusive drops"
+        ],
+        "rotationOrReset": "Stage pool and reward focus can change with game updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "raids",
+        "section": "Core progression",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dungeons",
+        "cardSummary": "Multi-wave dungeon runs that use modifier cards to change combat and offer specialized drops beyond standard stages.",
+        "modeGroup": "Core progression",
+        "modeType": "Multi-wave challenge",
+        "purpose": "Modifier-driven farming and specialized dungeon rewards",
+        "accessLocation": "Enter Dungeons from the Dungeon area in the lobby.",
+        "unlockRequirement": "Endgame access; exact gate varies by dungeon",
+        "partySize": "Up to 4 players",
+        "stagesOrVariants": [
+          "Base Dungeon",
+          "Named dungeon variants",
+          "Modifier-card runs"
+        ],
+        "wavesOrFloors": "30 waves for the documented base Dungeon; named variants can use floors.",
+        "difficulty": "Scaling",
+        "restrictions": "Modifier cards can buff units, strengthen enemies, or otherwise change the run.",
+        "specialRules": "Run modifiers alter the combat route, so team planning depends on the selected cards.",
+        "rewards": [
+          "Secret units",
+          "Evolution materials",
+          "Dungeon resources"
+        ],
+        "rotationOrReset": "Named dungeon content and reward tables may be update-specific.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "dungeons",
+        "section": "Core progression",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Rush / Boss Events",
+        "cardSummary": "Rotating boss encounters that turn weekly clears into a focused source of tokens, trophies, and boss-specific rewards.",
+        "modeGroup": "Core progression",
+        "modeType": "Boss challenge",
+        "purpose": "Boss farming and rotating event progression",
+        "accessLocation": "Open the active Boss Rush or Boss Event from the lobby.",
+        "unlockRequirement": "Endgame or event access, depending on the active boss",
+        "partySize": "Solo or multiplayer",
+        "stagesOrVariants": [
+          "Rotating boss encounters",
+          "Boss Rush variants"
+        ],
+        "wavesOrFloors": "Boss-heavy waves; documented runs use 30 waves.",
+        "difficulty": "High",
+        "restrictions": "Traits can be disabled in Boss Rush variants.",
+        "specialRules": "The boss roster and reward shop rotate separately from the durable mode family.",
+        "rewards": [
+          "Boss tokens",
+          "Trophies",
+          "Unit drops",
+          "Cosmetics",
+          "Progression resources"
+        ],
+        "rotationOrReset": "Weekly boss rotation",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "boss-rush-boss-events",
+        "section": "Core progression",
+        "sortOrder": 60,
+        "image": "/Anime%20Vanguards/gamemodes/boss-events.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Portals",
+        "cardSummary": "Tiered encounters with element-themed enemy pools, escalating difficulty, and exclusive drops for coordinated teams.",
+        "modeGroup": "Core progression",
+        "modeType": "Tiered encounter",
+        "purpose": "Tiered farming for exclusive drops and materials",
+        "accessLocation": "Enter Portals from the Portals area in the lobby.",
+        "unlockRequirement": "Portal access after progression; exact gate varies by portal",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Tiered portals",
+          "Element-themed portals"
+        ],
+        "wavesOrFloors": "20 waves",
+        "difficulty": "Tier-scaled",
+        "restrictions": "Enemy elements and portal-specific rules can shape the required team.",
+        "specialRules": "Higher tiers increase challenge and change the quality of the reward pool.",
+        "rewards": [
+          "Exclusive drops",
+          "Familiars",
+          "Materials"
+        ],
+        "rotationOrReset": "Portal pool and reward focus can change with game updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "portals",
+        "section": "Core progression",
+        "sortOrder": 70,
+        "image": "/Anime%20Vanguards/gamemodes/portals.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sandbox",
+        "cardSummary": "A testing space for experimenting with units, enemies, stats, and money without normal campaign pressure.",
+        "modeGroup": "Specialized and endurance",
+        "modeType": "Testing",
+        "purpose": "Team testing and strategy experimentation",
+        "accessLocation": "Choose Sandbox from the stage selector.",
+        "unlockRequirement": "No separate progression gate listed",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Story maps",
+          "Configurable test setups"
+        ],
+        "wavesOrFloors": "Configurable waves and enemy spawns",
+        "difficulty": "Custom",
+        "restrictions": "Sandbox runs do not provide normal account progression rewards.",
+        "specialRules": "Players can use units, spawn enemies, adjust stats, and use unlimited in-run money to test setups.",
+        "rewards": [
+          "No normal progression rewards"
+        ],
+        "rotationOrReset": "Permanent utility mode; testing controls may change with updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "sandbox",
+        "section": "Specialized and endurance",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rifts",
+        "cardSummary": "Co-op encounters centered on global tasks, rare rewards, and a larger party format than ordinary stage runs.",
+        "modeGroup": "Core progression",
+        "modeType": "Co-op encounter",
+        "purpose": "Co-op rare-drop farming and update progression",
+        "accessLocation": "Enter Rifts from the Rift area in the lobby.",
+        "unlockRequirement": "Progression access; exact gate varies by Rift",
+        "partySize": "Up to 6 players",
+        "stagesOrVariants": [
+          "Rift encounters",
+          "Update-specific Rift stages"
+        ],
+        "wavesOrFloors": "Encounter waves; exact count varies by Rift.",
+        "difficulty": "High",
+        "restrictions": "Rift-specific enemies and reward windows can change the team plan.",
+        "specialRules": "Global tasks can affect how quickly Rifts appear and how the encounter is pursued.",
+        "rewards": [
+          "Rift shards",
+          "Rare units",
+          "Materials",
+          "Update rewards"
+        ],
+        "rotationOrReset": "Encounter pool and reward focus rotate with updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "rifts",
+        "section": "Core progression",
+        "sortOrder": 90,
+        "image": "/Anime%20Vanguards/gamemodes/rifts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Odyssey",
+        "cardSummary": "An escalating run mode with route choices, cards, powers, and mastery goals that reward adapting between encounters.",
+        "modeGroup": "Specialized and endurance",
+        "modeType": "Roguelike progression",
+        "purpose": "Long-form run progression and mastery objectives",
+        "accessLocation": "Open Odyssey from the lobby mode selector.",
+        "unlockRequirement": "Endgame progression",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Mode-specific routes",
+          "Run choices",
+          "Mastery objectives"
+        ],
+        "wavesOrFloors": "Room-based escalating run",
+        "difficulty": "Scaling",
+        "restrictions": "Run-specific powers, cards, and modifiers change what a team can do.",
+        "specialRules": "Reworked routes use longer challenge paths, card storage or loadouts, and modifier choices between encounters.",
+        "rewards": [
+          "Trait Rerolls",
+          "Memoria Shards",
+          "Mode resources"
+        ],
+        "rotationOrReset": "Some objectives and rewards can change with updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "odyssey",
+        "section": "Specialized and endurance",
+        "sortOrder": 100,
+        "image": "/Anime%20Vanguards/gamemodes/odyssey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Infinite Mode",
+        "cardSummary": "An endless version of an unlocked stage where surviving more waves increases the endurance challenge and reward potential.",
+        "modeGroup": "Specialized and endurance",
+        "modeType": "Endurance",
+        "purpose": "Endless survival, score chasing, and wave-scaled farming",
+        "accessLocation": "Choose the Infinite option for an unlocked stage.",
+        "unlockRequirement": "Complete every Normal act for the relevant Story stage",
+        "partySize": null,
+        "stagesOrVariants": [
+          "Stage-specific Infinite versions",
+          "Endless runs"
+        ],
+        "wavesOrFloors": "Endless waves",
+        "difficulty": "Scaling enemy difficulty",
+        "restrictions": "There is no fixed final wave; the run continues until the defense fails or the player stops.",
+        "specialRules": "Reward and challenge progress scale with the waves reached.",
+        "rewards": [
+          "Gems",
+          "Gold",
+          "Experience",
+          "Mode-specific drops"
+        ],
+        "rotationOrReset": "Stage availability follows unlocked Story stages.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "infinite-mode",
+        "section": "Specialized and endurance",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elemental Towers",
+        "cardSummary": "Permanent element-locked towers where matching units climb floors for repeatable rewards and a distinct team-building challenge.",
+        "modeGroup": "Specialized and endurance",
+        "modeType": "Element-restricted endurance",
+        "purpose": "Element-focused endurance progression and reward farming",
+        "accessLocation": "Enter from the Elemental Towers area near the Dungeon in the Raid area.",
+        "unlockRequirement": "Player Level 30",
+        "partySize": null,
+        "stagesOrVariants": [
+          "One tower per element",
+          "Omni Tower exception"
+        ],
+        "wavesOrFloors": "20 waves per floor; reward loop noted after Floor 50",
+        "difficulty": "Endurance with element restrictions",
+        "restrictions": "Only matching-element units can be placed; farm units are exempt and the Omni Tower is unrestricted.",
+        "specialRules": "Each tower has its own reward path, and co-op does not increase enemy scaling.",
+        "rewards": [
+          "Gems",
+          "Trait Rerolls",
+          "Stat Chips",
+          "Element-specific materials"
+        ],
+        "rotationOrReset": "Permanent mode; reward depth and tower details can change with updates.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "elemental-towers",
+        "section": "Specialized and endurance",
+        "sortOrder": 120,
+        "image": "/Anime%20Vanguards/gamemodes/elemental-towers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "PvP",
+        "cardSummary": "The competitive wave mode family with Assault, Defense, and Ranked variants plus trait and modifier choices.",
+        "modeGroup": "Competitive",
+        "modeType": "Competitive",
+        "purpose": "Player-versus-player defense and ranking",
+        "accessLocation": "Open PvP from the lobby competitive area.",
+        "unlockRequirement": "No separate account gate listed",
+        "partySize": "Varies by submode",
+        "stagesOrVariants": [
+          "Assault",
+          "Defense",
+          "Ranked",
+          "Traited",
+          "Traitless"
+        ],
+        "wavesOrFloors": "Wave-based competitive rounds",
+        "difficulty": "Competitive",
+        "restrictions": "Traited and traitless variants change the available build options; a modifier is applied every five waves.",
+        "specialRules": "Players must outlast the opposing player while adapting to the shared wave modifiers.",
+        "rewards": [
+          "PvP rewards",
+          "Competitive shop currency"
+        ],
+        "rotationOrReset": "Ranked and seasonal reward rules can change.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "pvp",
+        "section": "Competitive",
+        "sortOrder": 130,
+        "image": "/Anime%20Vanguards/gamemodes/pvp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gauntlets",
+        "cardSummary": "A bracket PvP mode where players advance on score, with standard eight-player brackets and configurable custom lobbies.",
+        "modeGroup": "Competitive",
+        "modeType": "Bracket PvP",
+        "purpose": "Bracket placement and competitive score chasing",
+        "accessLocation": "Open Gauntlets from the PvP or competitive area.",
+        "unlockRequirement": "Current Update 14.5 mode",
+        "partySize": "8-player standard bracket; custom brackets support 2 to 64 players",
+        "stagesOrVariants": [
+          "Standard Gauntlets",
+          "Custom Gauntlets"
+        ],
+        "wavesOrFloors": "Round-based scoring; a standard round lasts 24 hours.",
+        "difficulty": "Competitive",
+        "restrictions": "Standard brackets give three tries per round; the highest score advances.",
+        "specialRules": "Up to five standard brackets can run at once. Custom hosts can set maps, modifiers, mutators, banned or buffed units, and elements.",
+        "rewards": [
+          "Trait Rerolls",
+          "Memoria Shards",
+          "Placement rewards"
+        ],
+        "rotationOrReset": "Standard bracket timing is round-based; the reward pool can rotate weekly.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "gauntlets",
+        "section": "Competitive",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Worldlines",
+        "cardSummary": "A solo floor climb that moves from Worlds Collide into Infinite Convergence as the run passes the initial milestone floors.",
+        "modeGroup": "Competitive",
+        "modeType": "Floor climb",
+        "purpose": "Solo endurance progression and leaderboard competition",
+        "accessLocation": "Open Worldlines from the competitive area.",
+        "unlockRequirement": "Worldlines progression; exact account gate not listed",
+        "partySize": "Singleplayer",
+        "stagesOrVariants": [
+          "Worlds Collide, Floors 1-50",
+          "Infinite Convergence, Floor 51 and higher"
+        ],
+        "wavesOrFloors": "Endless floor progression",
+        "difficulty": "Scaling",
+        "restrictions": "Floor-specific stage challenges and reward resets shape the climb.",
+        "specialRules": "Milestone rewards arrive during the floor climb; later floors use Infinite Convergence rules.",
+        "rewards": [
+          "Trait Rerolls",
+          "Stat Chips",
+          "Memoria resources",
+          "Floor rewards"
+        ],
+        "rotationOrReset": "Reward path resets by season or update.",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "worldlines",
+        "section": "Competitive",
+        "sortOrder": 150,
+        "image": "/Anime%20Vanguards/gamemodes/worldlines.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tournaments",
+        "cardSummary": "A weekly solo competition built around damage and kill objectives, resettable placement, and rotating rewards.",
+        "modeGroup": "Competitive",
+        "modeType": "Weekly competition",
+        "purpose": "Weekly score competition and leaderboard placement",
+        "accessLocation": "Open Tournaments from the competitive area.",
+        "unlockRequirement": "No separate account gate listed",
+        "partySize": "Singleplayer",
+        "stagesOrVariants": [
+          "Damage objective",
+          "Enemy-kill objective"
+        ],
+        "wavesOrFloors": "Timed scoring objective",
+        "difficulty": "Competitive",
+        "restrictions": "Stage and element rules can change with the tournament.",
+        "specialRules": "Players compete for placement on leaderboards that reset on the tournament schedule.",
+        "rewards": [
+          "Trait Rerolls",
+          "Crowns or shop rewards",
+          "Rotating cosmetics or units where listed"
+        ],
+        "rotationOrReset": "Weekly reset",
+        "availability": "Current"
+      },
+      "system": {
+        "slug": "tournaments",
+        "section": "Competitive",
+        "sortOrder": 160,
+        "image": null
+      }
+    }
+  ]
+}

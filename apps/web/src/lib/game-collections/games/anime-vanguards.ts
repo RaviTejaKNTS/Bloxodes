@@ -23,6 +23,8 @@ export const animeVanguardsCollectionGroup = {
       "emotes",
       "profile-customization",
       "stat-ranks",
-      "crafting-recipes"
+      "crafting-recipes",
+      "banners",
+      "gamemodes"
     ]
   } satisfies GameCollectionGroup;

@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "domains",
+    "route": "/wiki/jujutsu-shenanigans/domains",
+    "catalogCode": "jujutsu-shenanigans-domains",
+    "itemFields": [
+      "character",
+      "domainType",
+      "trigger",
+      "duration",
+      "effect",
+      "counterplay",
+      "clashInvasionRule",
+      "availability",
+      "notes"
+    ],
+    "columns": [
+      "character",
+      "domainType",
+      "trigger",
+      "duration",
+      "effect",
+      "counterplay",
+      "clashInvasionRule",
+      "availability",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Full combat domains",
+        "Non-lethal and awakening domains",
+        "Alternate and invasion mechanics",
+        "Restricted and special domains"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "character",
+        "domainType",
+        "trigger",
+        "duration",
+        "effect",
+        "counterplay"
+      ],
+      "tableFields": [
+        "character",
+        "domainType",
+        "trigger",
+        "duration",
+        "effect",
+        "counterplay",
+        "clashInvasionRule",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Infinite Void",
+        "character": "Honored One",
+        "domainType": "Full Domain Expansion",
+        "trigger": "Use the Infinite Void domain move during Six Eyes.",
+        "duration": "14s",
+        "effect": "Caught enemies are unable to act for the full duration, though actions already started before the effect can continue.",
+        "counterplay": "Cancel Honored One during windup, break the domain from outside, or kill the caster if trapped inside.",
+        "clashInvasionRule": "Can clash with simultaneous domains. Chimera Shadow Garden can invade the border and disable the stun while the portal is active.",
+        "availability": "Free public character",
+        "notes": "Normal domain windup rules apply. One of the sure-hit effects explicitly disabled by Chimera Shadow Garden."
+      },
+      "system": {
+        "slug": "infinite-void",
+        "section": "Full combat domains",
+        "sortOrder": 1,
+        "image": "/Jujutsu%20Shenanigans/domains/infinite-void.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Malevolent Shrine",
+        "character": "Vessel",
+        "domainType": "Full Domain Expansion",
+        "trigger": "Use Malevolent Shrine during King of Curses.",
+        "duration": "18s",
+        "effect": "Constant slashes hit everyone inside for 2 HP per slash, or 0.5 HP while blocking, for up to 218 HP over the domain.",
+        "counterplay": "Blocking reduces slash damage and prevents slash executions, but the caster can still pressure block. Outside players can break the domain; trapped players need to kill the caster.",
+        "clashInvasionRule": "Can clash with simultaneous domains. Chimera Shadow Garden can invade and disable the slash sure-hit while active.",
+        "availability": "Free public character",
+        "notes": "The individual Vessel page confirms the 18s duration, 120s cooldown, and slash values."
+      },
+      "system": {
+        "slug": "malevolent-shrine",
+        "section": "Full combat domains",
+        "sortOrder": 2,
+        "image": "/Jujutsu%20Shenanigans/domains/malevolent-shrine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Embodiment of Self Perfection",
+        "character": "Perfection",
+        "domainType": "Full Domain Expansion",
+        "trigger": "Use Embodiment of Self Perfection during Essence of the Soul.",
+        "duration": "14s",
+        "effect": "Targets get a transfiguration meter that drains faster near the caster or when the caster damages them. Emptying the meter kills through transfiguration.",
+        "counterplay": "Cancel the longer windup, break the domain from outside, or kill the caster if trapped. Domain Amplification can nullify the transfiguration, but the meter drain still matters.",
+        "clashInvasionRule": "Can clash with simultaneous domains. Chimera Shadow Garden can invade and disable the transfiguration meter drain while active.",
+        "availability": "Free public character",
+        "notes": "You may also see this written as Self-Embodiment of Perfection."
+      },
+      "system": {
+        "slug": "embodiment-of-self-perfection",
+        "section": "Full combat domains",
+        "sortOrder": 3,
+        "image": "/Jujutsu%20Shenanigans/domains/embodiment-of-self-perfection.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Authentic Mutual Love",
+        "character": "Cursed Partners",
+        "domainType": "Full Domain Expansion",
+        "trigger": "Use Authentic Mutual Love during True Love.",
+        "duration": "45s",
+        "effect": "Katanas fall inside the domain. Picking one up lets the caster swing a copied technique; landing four katanas unlocks Jacob's Ladder.",
+        "counterplay": "Cancel the longer windup, avoid or punish katana swings, and note that the domain breaks immediately if it catches no enemies.",
+        "clashInvasionRule": "It has no special clash reward. Chimera Shadow Garden does not disable it because there is no sure-hit effect to turn off.",
+        "availability": "Free public character",
+        "notes": "Jacob's Ladder can be used once per domain after four landed katana swings and drains health plus awakening progress."
+      },
+      "system": {
+        "slug": "authentic-mutual-love",
+        "section": "Full combat domains",
+        "sortOrder": 4,
+        "image": "/Jujutsu%20Shenanigans/domains/authentic-mutual-love.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Time Cell Moon Palace",
+        "character": "Head of the Hei",
+        "domainType": "Full Domain Expansion",
+        "trigger": "Use Time Cell Moon Palace during Vengeance.",
+        "duration": "25s",
+        "effect": "Opponents must follow the 24 FPS rule. Acting other than blocking freezes and shatters their cells, with damage based on movement speed.",
+        "counterplay": "Cancel the windup, stop acting inside except to block, break the domain from outside, or kill the caster if trapped.",
+        "clashInvasionRule": "Can clash with simultaneous domains. Chimera Shadow Garden can invade and disable the frame-shatter sure-hit while active.",
+        "availability": "Free public character",
+        "notes": "Casting ends the awakening route and returns the user to their base moveset."
+      },
+      "system": {
+        "slug": "time-cell-moon-palace",
+        "section": "Full combat domains",
+        "sortOrder": 5,
+        "image": "/Jujutsu%20Shenanigans/domains/time-cell-moon-palace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Idle Death Gamble",
+        "character": "Restless Gambler",
+        "domainType": "Awakening domain",
+        "trigger": "Activating Restless Gambler's awakening casts the domain.",
+        "duration": "80s, breaks after 4 scenarios",
+        "effect": "The caster uses visual moves to trigger Richii scenarios and roll for Jackpot. A normal Jackpot lasts 100s; pity Jackpot lasts 50s.",
+        "counterplay": "The windup is uninterruptible, but anti-team burst can negate the startup stun. The domain can fail if scenarios do not hit Jackpot before it breaks.",
+        "clashInvasionRule": "Winning a domain clash skips the first Richii scenario and immediately grants a 100s Jackpot. Chimera Shadow Garden does not disable it.",
+        "availability": "Free public character",
+        "notes": "The important fight timer is the 80s scenario window. Jackpot itself lasts 100s, or 50s if it is the pity Jackpot."
+      },
+      "system": {
+        "slug": "idle-death-gamble",
+        "section": "Non-lethal and awakening domains",
+        "sortOrder": 6,
+        "image": "/Jujutsu%20Shenanigans/domains/idle-death-gamble.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Deadly Sentencing",
+        "character": "Defense Attorney",
+        "domainType": "Awakening trial domain",
+        "trigger": "Activating Defense Attorney's awakening expands the domain.",
+        "duration": "300s, breaks after 6 wrong guesses",
+        "effect": "Everyone inside becomes invulnerable for a trial minigame. Outcomes can return awakening, confiscate moves or held items, unlock Death Penalty, or do both.",
+        "counterplay": "The windup is uninterruptible. Defendants answer the trial choices; six opposing choices immediately end the trial.",
+        "clashInvasionRule": "Winning a domain clash starts Deadly Sentencing with one Judgement Bar segment prefilled. Chimera Shadow Garden does not disable it.",
+        "availability": "Free public character",
+        "notes": "Confiscation can remove moves for 90s and items permanently. The domain breaks if no target is caught."
+      },
+      "system": {
+        "slug": "deadly-sentencing",
+        "section": "Non-lethal and awakening domains",
+        "sortOrder": 7,
+        "image": "/Jujutsu%20Shenanigans/domains/deadly-sentencing.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "0.2 Domain",
+        "character": "Honored One",
+        "domainType": "Alternate awakening domain",
+        "trigger": "Use the special during the Six Eyes awakening sequence.",
+        "duration": "7s",
+        "effect": "Expands Infinite Void over double the normal range for half the normal exposure, then turns into a three-phase rush.",
+        "counterplay": "Can be canceled during windup and sometimes during the rush when i-frames drop. The horizontal rush can be punished after it ends.",
+        "clashInvasionRule": "It has no special clash reward. Chimera Shadow Garden does not disable 0.2 Domain.",
+        "availability": "Free public character",
+        "notes": "The Honored One page says the full rush can total 220 damage if every phase connects, then burns the user back to base cooldowns."
+      },
+      "system": {
+        "slug": "zero-point-two-domain",
+        "section": "Alternate and invasion mechanics",
+        "sortOrder": 8,
+        "image": "/Jujutsu%20Shenanigans/domains/zero-point-two-domain.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chimera Shadow Garden",
+        "character": "Ten Shadows",
+        "domainType": "Domain invasion variant",
+        "trigger": "Use Shadow Swarm against a domain border.",
+        "duration": "Depends on caster HP",
+        "effect": "Creates a shadow tunnel through a domain wall, letting everyone except the Ten Shadows user enter or leave while selected sure-hit effects are disabled.",
+        "counterplay": "Hit Ten Shadows, wait out the HP drain, or force them to close the portal. Maintaining the invasion drains 4 HP per second.",
+        "clashInvasionRule": "Disables Infinite Void, Malevolent Shrine, Embodiment of Self Perfection, and Time Cell Moon Palace while active.",
+        "availability": "Free public character",
+        "notes": "Does not affect 0.2 Domain, Idle Death Gamble, Deadly Sentencing, Authentic Mutual Love, or Incomplete Shrine."
+      },
+      "system": {
+        "slug": "chimera-shadow-garden",
+        "section": "Alternate and invasion mechanics",
+        "sortOrder": 9,
+        "image": "/Jujutsu%20Shenanigans/domains/chimera-shadow-garden.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Incomplete Shrine",
+        "character": "Strongest Of History",
+        "domainType": "Restricted domain awakening",
+        "trigger": "Use Strongest Of History's awakening.",
+        "duration": "20s",
+        "effect": "A borderless shrine targets the map with relentless slashes. Each slash deals 3 HP, or 0.5 HP while blocked.",
+        "counterplay": "Strongest Of History is restricted to Roulette, game admin, FSD, or private-server access. The domain lacks a normal border, so outside-wall break counterplay does not apply.",
+        "clashInvasionRule": "Destroys other active domains inside its destruction range. Chimera Shadow Garden does not affect it because it lacks a normal border.",
+        "availability": "Roulette, Game Admin, FSD, and Private Server exclusive",
+        "notes": "Label as restricted/special. It has extreme range, but preparation is required because it can be canceled."
+      },
+      "system": {
+        "slug": "incomplete-shrine",
+        "section": "Restricted and special domains",
+        "sortOrder": 10,
+        "image": "/Jujutsu%20Shenanigans/domains/incomplete-shrine.webp"
+      }
+    }
+  ]
+}

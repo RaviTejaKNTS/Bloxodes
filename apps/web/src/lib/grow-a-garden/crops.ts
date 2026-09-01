@@ -1,5 +1,7 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { repoPath } from "@/lib/paths";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
-import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
 
 export type CropRecord = {
   name: string;
@@ -58,11 +60,23 @@ type CropJson = {
   items?: CropRow[] | null;
 };
 
+const CROPS_JSON_PATH = repoPath("data", "Grow a Garden", "crops.json");
+
 async function readCropsJson(): Promise<CropJson> {
-  const code = "grow-a-garden-crops";
-  const runtime = await getPublishedWikiCollectionRuntimeByCode(code);
-  if (runtime) return runtime.document as CropJson;
-  throw new Error(`Required database runtime for ${code} did not load. Local fallback is disabled.`);
+  try {
+    const raw = await fs.readFile(CROPS_JSON_PATH, "utf8");
+    const parsed = JSON.parse(raw) as CropJson | CropRow[];
+    if (Array.isArray(parsed)) {
+      return { items: parsed };
+    }
+    return parsed ?? {};
+  } catch (error) {
+    const err = error as NodeJS.ErrnoException;
+    if (err.code === "ENOENT") {
+      throw new Error(`Missing crops data file. Expected: ${CROPS_JSON_PATH}`);
+    }
+    throw err;
+  }
 }
 
 function parseNumber(value: string): number | null {

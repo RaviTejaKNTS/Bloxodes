@@ -1,0 +1,718 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "99 Nights in the Forest",
+    "gameSlug": "99-nights-in-the-forest",
+    "collection": "tameable-animals",
+    "route": "/wiki/99-nights-in-the-forest/tameable-animals",
+    "catalogCode": "99-nights-in-the-forest-tameable-animals",
+    "itemFields": [
+      "fluteLevel",
+      "stageCount",
+      "food",
+      "foodPerStage",
+      "totalFood",
+      "tamingRequirement",
+      "steps",
+      "location",
+      "biome",
+      "spawnNotes",
+      "behavior",
+      "hp",
+      "damage",
+      "role",
+      "benefit",
+      "limit",
+      "risk",
+      "availability",
+      "aliases",
+      "variantNotes"
+    ],
+    "columns": [
+      "fluteLevel",
+      "stageCount",
+      "food",
+      "foodPerStage",
+      "totalFood",
+      "tamingRequirement",
+      "steps",
+      "location",
+      "biome",
+      "spawnNotes",
+      "behavior",
+      "hp",
+      "damage",
+      "role",
+      "benefit",
+      "limit",
+      "risk",
+      "availability",
+      "aliases",
+      "variantNotes"
+    ],
+    "display": {
+      "groupLabel": "flute level",
+      "sectionOrder": [
+        "Old Taming Flute",
+        "Good Taming Flute",
+        "Strong Taming Flute"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "role",
+        "location"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "fluteLevel",
+        "stageCount",
+        "food",
+        "foodPerStage",
+        "totalFood",
+        "tamingRequirement"
+      ],
+      "tableFields": [
+        "fluteLevel",
+        "stageCount",
+        "food",
+        "foodPerStage",
+        "totalFood",
+        "tamingRequirement",
+        "steps",
+        "location"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Bunny",
+        "fluteLevel": "Old Taming Flute",
+        "stageCount": 1,
+        "food": "Carrot x1",
+        "foodPerStage": [
+          {
+            "item": "Carrot",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Carrot",
+            "quantity": 1
+          }
+        ],
+        "tamingRequirement": "Old Taming Flute or better; complete the minigame once and feed 1 Carrot.",
+        "steps": "Complete 1 taming minigame, then feed 1 Carrot.",
+        "location": "The Forest, Farm, Bunny Burrow",
+        "biome": "The Forest",
+        "spawnNotes": "Fandom lists The Forest level 0-3 campfire, plus Farm and Bunny Burrow spawns.",
+        "behavior": "Passive",
+        "hp": "50",
+        "damage": "None listed",
+        "role": "Starter companion",
+        "benefit": "Lowest-cost tame and the safest early way to practice the minigame.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Runs away when damaged or approached; keep other tamed animals from hitting it while taming.",
+        "availability": "Normal"
+      },
+      "system": {
+        "slug": "bunny",
+        "section": "Old Taming Flute",
+        "sortOrder": 1,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/bunny.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kiwi",
+        "fluteLevel": "Old Taming Flute",
+        "stageCount": 1,
+        "food": "Berry x1",
+        "foodPerStage": [
+          {
+            "item": "Berry",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Berry",
+            "quantity": 1
+          }
+        ],
+        "tamingRequirement": "Old Taming Flute or better; complete the minigame once and feed 1 Berry.",
+        "steps": "Complete 1 taming minigame, then feed 1 Berry.",
+        "location": "Kiwi Burrow near Campfire Level 6 areas",
+        "biome": "The Forest",
+        "spawnNotes": "Fandom lists Campfire Level 6 - Kiwi Burrow; PC Gamer describes Kiwi as rare and not available in every match.",
+        "behavior": "Passive",
+        "hp": "Infinity",
+        "damage": "None listed",
+        "role": "Rare Old Flute target",
+        "benefit": "A low-food tame that is mainly valuable because it is rare and helps with taming completion/XP goals.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Rare spawn; do not plan a run around finding it unless the burrow appears.",
+        "availability": "Rare normal spawn"
+      },
+      "system": {
+        "slug": "kiwi",
+        "section": "Old Taming Flute",
+        "sortOrder": 2,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/kiwi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Frog",
+        "fluteLevel": "Old Taming Flute",
+        "stageCount": 2,
+        "food": "Mackerel x2",
+        "foodPerStage": [
+          {
+            "item": "Mackerel",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Mackerel",
+            "quantity": 2
+          }
+        ],
+        "tamingRequirement": "Old Taming Flute or better; complete the minigame twice and feed 1 Mackerel after each success.",
+        "steps": "Repeat 2 times: complete the taming minigame, then feed 1 Mackerel.",
+        "location": "Ponds and Frog Cave",
+        "biome": "The Forest, Jungle Biome",
+        "spawnNotes": "Fandom lists The Forest and Jungle Biome, with ponds and Frog Cave as locations. Older source copy ties frogs to pond emergence after a run timer.",
+        "behavior": "Hostile",
+        "hp": "70? / TBA in source",
+        "damage": "5 plus poison listed as TBA",
+        "role": "Pond-event companion",
+        "benefit": "An Old Flute tame tied to pond/frog routing, useful when the run gives frog access.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Frogs can poison players and may not appear in every run.",
+        "availability": "Biome/location gated",
+        "aliases": [
+          "Frog"
+        ]
+      },
+      "system": {
+        "slug": "green-frog",
+        "section": "Old Taming Flute",
+        "sortOrder": 3,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/green-frog.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scorpion",
+        "fluteLevel": "Old Taming Flute",
+        "stageCount": 2,
+        "food": "Steak x2, Morsel x2",
+        "foodPerStage": [
+          {
+            "item": "Steak",
+            "quantity": 1
+          },
+          {
+            "item": "Morsel",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Steak",
+            "quantity": 2
+          },
+          {
+            "item": "Morsel",
+            "quantity": 2
+          }
+        ],
+        "tamingRequirement": "Old Taming Flute or better; complete the minigame twice and feed 1 Steak plus 1 Morsel after each success.",
+        "steps": "Repeat 2 times: complete the taming minigame, then feed 1 Steak and 1 Morsel.",
+        "location": "Scorpion Nest, Scorpion Pit",
+        "biome": "Volcanic Biome",
+        "spawnNotes": "Fandom lists Volcanic Biome level 2+ campfire, with Scorpion Nest and Scorpion Pit locations.",
+        "behavior": "Hostile",
+        "hp": "50",
+        "damage": "20 plus poison tick damage",
+        "role": "Volcanic Old Flute companion",
+        "benefit": "A stronger Old Flute target for volcanic routes once the player can handle poison risk.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Hostile and poison-capable; clear nearby threats before starting the minigame.",
+        "availability": "Volcanic Biome"
+      },
+      "system": {
+        "slug": "scorpion",
+        "section": "Old Taming Flute",
+        "sortOrder": 4,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/scorpion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf",
+        "fluteLevel": "Old Taming Flute",
+        "stageCount": 3,
+        "food": "Steak x3, Morsel x3",
+        "foodPerStage": [
+          {
+            "item": "Steak",
+            "quantity": 1
+          },
+          {
+            "item": "Morsel",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Steak",
+            "quantity": 3
+          },
+          {
+            "item": "Morsel",
+            "quantity": 3
+          }
+        ],
+        "tamingRequirement": "Old Taming Flute or better; complete the minigame three times and feed 1 Steak plus 1 Morsel after each success.",
+        "steps": "Repeat 3 times: complete the taming minigame, then feed 1 Steak and 1 Morsel.",
+        "location": "The Forest, night biomes, Locked Cave #1, Large Cabin",
+        "biome": "The Forest; Snow/Volcanic at night",
+        "spawnNotes": "Fandom lists The Forest level 2+ campfire and any other biome at night. Guard and night-spawned variants need caution.",
+        "behavior": "Hostile",
+        "hp": "75",
+        "damage": "20",
+        "role": "Early combat companion",
+        "benefit": "The first practical combat-style tame most players can plan around with Old Flute.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Chosen wolf must not have taken damage; guard/night-spawned variants can be unsuitable or untameable.",
+        "availability": "Normal, with Hard Mode variant note",
+        "variantNotes": [
+          "Corrupted Wolf is a Hard Mode/Rift variant with the same Old Flute, 3-stage, Steak x3 and Morsel x3 requirement. Parent direction keeps it as a note, not a separate row."
+        ]
+      },
+      "system": {
+        "slug": "wolf",
+        "section": "Old Taming Flute",
+        "sortOrder": 5,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/wolf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boar",
+        "fluteLevel": "Old Taming Flute",
+        "stageCount": 2,
+        "food": "Morsel x2 total, Corn x2 total",
+        "foodPerStage": [
+          {
+            "item": "Morsel",
+            "quantity": 1
+          },
+          {
+            "item": "Corn",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Morsel",
+            "quantity": 2,
+            "status": "calculated from two source-listed stages"
+          },
+          {
+            "item": "Corn",
+            "quantity": 2,
+            "status": "calculated from two source-listed stages"
+          }
+        ],
+        "tamingRequirement": "Old Taming Flute or better; complete the minigame two times and feed 1 Morsel plus 1 Corn after each success.",
+        "steps": "Repeat 2 times: complete the taming minigame, then feed 1 Morsel and 1 Corn.",
+        "location": "The Jungle",
+        "biome": "Jungle Biome",
+        "spawnNotes": "Fandom lists Jungle Biome and no specific locations.",
+        "behavior": "Hostile",
+        "hp": "125? in source",
+        "damage": "TBA",
+        "role": "Jungle Old Flute companion",
+        "benefit": "A newer Old Flute target for Jungle routes, useful if players need a tame while exploring that biome.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Hostile Jungle animal with incomplete source stats; tame only if it has not taken damage.",
+        "availability": "Jungle Biome"
+      },
+      "system": {
+        "slug": "boar",
+        "section": "Old Taming Flute",
+        "sortOrder": 6,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/boar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arctic Fox",
+        "fluteLevel": "Good Taming Flute",
+        "stageCount": 3,
+        "food": "Steak x3, Chili x3",
+        "foodPerStage": [
+          {
+            "item": "Steak",
+            "quantity": 1
+          },
+          {
+            "item": "Chili",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Steak",
+            "quantity": 3
+          },
+          {
+            "item": "Chili",
+            "quantity": 3
+          }
+        ],
+        "tamingRequirement": "Good Taming Flute or better; complete the minigame three times and feed 1 Steak plus 1 Chili after each success.",
+        "steps": "Repeat 3 times: complete the taming minigame, then feed 1 Steak and 1 Chili.",
+        "location": "Snow Biome",
+        "biome": "Snow Biome",
+        "spawnNotes": "Fandom lists Snow Biome level 2+ campfire and says it can spawn alone or in groups.",
+        "behavior": "Hostile",
+        "hp": "80",
+        "damage": "12",
+        "role": "Snow Biome mid-tier companion",
+        "benefit": "A Good Flute target for snow routes, with lower listed damage than Alpha Wolf but easier biome identity.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Often appears in packs, so clear or separate nearby foxes before taming.",
+        "availability": "Snow Biome",
+        "aliases": [
+          "Snow Fox"
+        ]
+      },
+      "system": {
+        "slug": "arctic-fox",
+        "section": "Good Taming Flute",
+        "sortOrder": 7,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/arctic-fox.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alpha Wolf",
+        "fluteLevel": "Good Taming Flute",
+        "stageCount": 4,
+        "food": "Steak x4, Mackerel x4, Salmon x4",
+        "foodPerStage": [
+          {
+            "item": "Steak",
+            "quantity": 1
+          },
+          {
+            "item": "Mackerel",
+            "quantity": 1
+          },
+          {
+            "item": "Salmon",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Steak",
+            "quantity": 4
+          },
+          {
+            "item": "Mackerel",
+            "quantity": 4
+          },
+          {
+            "item": "Salmon",
+            "quantity": 4
+          }
+        ],
+        "tamingRequirement": "Good Taming Flute or better; complete the minigame four times and feed 1 Steak, 1 Mackerel, and 1 Salmon after each success.",
+        "steps": "Repeat 4 times: complete the taming minigame, then feed 1 Steak, 1 Mackerel, and 1 Salmon.",
+        "location": "The Forest, night biomes, Locked Cave #2, Cultist Hunter Camp",
+        "biome": "The Forest; any biome at night",
+        "spawnNotes": "Fandom lists The Forest level 3+ campfire and any other biome at level 3+ campfire during night.",
+        "behavior": "Hostile",
+        "hp": "125",
+        "damage": "25",
+        "role": "Mid-tier combat companion",
+        "benefit": "A stronger wolf-style tame with higher listed HP, damage, speed, and detection range than Wolf.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Needs fish plus steak over four stages; night-spawned alpha wolves can be unsuitable or untameable.",
+        "availability": "Normal, with Hard Mode variant note",
+        "variantNotes": [
+          "Corrupted Alpha Wolf is a Hard Mode/Rift variant with the same Good Flute, 4-stage, Steak x4, Mackerel x4, and Salmon x4 requirement. Parent direction keeps it as a note, not a separate row."
+        ]
+      },
+      "system": {
+        "slug": "alpha-wolf",
+        "section": "Good Taming Flute",
+        "sortOrder": 8,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/alpha-wolf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear",
+        "fluteLevel": "Strong Taming Flute",
+        "stageCount": 5,
+        "food": "Steak x5, Pumpkin x5, Salmon x5",
+        "foodPerStage": [
+          {
+            "item": "Steak",
+            "quantity": 1
+          },
+          {
+            "item": "Pumpkin",
+            "quantity": 1
+          },
+          {
+            "item": "Salmon",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Steak",
+            "quantity": 5
+          },
+          {
+            "item": "Pumpkin",
+            "quantity": 5
+          },
+          {
+            "item": "Salmon",
+            "quantity": 5
+          }
+        ],
+        "tamingRequirement": "Strong Taming Flute or better; complete the minigame five times and feed 1 Steak, 1 Pumpkin, and 1 Salmon after each success.",
+        "steps": "Repeat 5 times: complete the taming minigame, then feed 1 Steak, 1 Pumpkin, and 1 Salmon.",
+        "location": "The Forest level 5-6, Cultist Hunter Camp, Locked Caves",
+        "biome": "The Forest",
+        "spawnNotes": "Fandom lists Forest level 5 and 6 campfire, plus Cultist Hunter Camp and Locked Caves.",
+        "behavior": "Hostile",
+        "hp": "350",
+        "damage": "40",
+        "role": "Strong Flute tank/combat companion",
+        "benefit": "A high-HP, high-damage forest tame for players who have upgraded past Good Flute.",
+        "limit": "Counts toward the normal tamed-animal limit. Zookeeper class at max level may reduce repeats per Fandom note.",
+        "risk": "Expensive five-stage tame; prepare all food before starting.",
+        "availability": "Normal late-forest"
+      },
+      "system": {
+        "slug": "bear",
+        "section": "Strong Taming Flute",
+        "sortOrder": 9,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Polar Bear",
+        "fluteLevel": "Strong Taming Flute",
+        "stageCount": 5,
+        "food": "Rib x5, Stew x5, Swordfish x5",
+        "foodPerStage": [
+          {
+            "item": "Rib",
+            "quantity": 1
+          },
+          {
+            "item": "Stew",
+            "quantity": 1
+          },
+          {
+            "item": "Swordfish",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Rib",
+            "quantity": 5
+          },
+          {
+            "item": "Stew",
+            "quantity": 5
+          },
+          {
+            "item": "Swordfish",
+            "quantity": 5
+          }
+        ],
+        "tamingRequirement": "Strong Taming Flute or better; complete the minigame five times and feed 1 Rib, 1 Stew, and 1 Swordfish after each success.",
+        "steps": "Repeat 5 times: complete the taming minigame, then feed 1 Rib, 1 Stew, and 1 Swordfish.",
+        "location": "Snow Biome, Polar Bear Cave",
+        "biome": "Snow Biome",
+        "spawnNotes": "Fandom lists Snow Biome and Polar Bear Cave; older Forest/Snowy Patch locations are marked formerly.",
+        "behavior": "Hostile",
+        "hp": "500",
+        "damage": "50",
+        "role": "Snow Biome heavy combat companion",
+        "benefit": "A high-damage Strong Flute target for snow routing.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "One of the most expensive rows because it needs fish plus cooked food over five stages.",
+        "availability": "Snow Biome"
+      },
+      "system": {
+        "slug": "polar-bear",
+        "section": "Strong Taming Flute",
+        "sortOrder": 10,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/polar-bear.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mammoth",
+        "fluteLevel": "Strong Taming Flute",
+        "stageCount": 5,
+        "food": "Pumpkin x10, Cake x5",
+        "foodPerStage": [
+          {
+            "item": "Pumpkin",
+            "quantity": 2
+          },
+          {
+            "item": "Cake",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Pumpkin",
+            "quantity": 10
+          },
+          {
+            "item": "Cake",
+            "quantity": 5
+          }
+        ],
+        "tamingRequirement": "Strong Taming Flute or better; complete the minigame five times and feed 2 Pumpkins plus 1 Cake after each success.",
+        "steps": "Repeat 5 times: complete the taming minigame, then feed 2 Pumpkins and 1 Cake.",
+        "location": "Snow Biome",
+        "biome": "Snow Biome",
+        "spawnNotes": "Fandom lists Snow Biome; PC Gamer also lists Snow.",
+        "behavior": "Neutral",
+        "hp": "800",
+        "damage": "30",
+        "role": "High-HP neutral companion",
+        "benefit": "A very tanky Strong Flute target with knockback behavior once provoked.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Requires a large pumpkin and cake stockpile; neutral until attacked, so do not let pets start the fight while setting up.",
+        "availability": "Snow Biome"
+      },
+      "system": {
+        "slug": "mammoth",
+        "section": "Strong Taming Flute",
+        "sortOrder": 11,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/mammoth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hellephant",
+        "fluteLevel": "Strong Taming Flute",
+        "stageCount": 5,
+        "food": "Pumpkin x10, Cake x5",
+        "foodPerStage": [
+          {
+            "item": "Pumpkin",
+            "quantity": 2
+          },
+          {
+            "item": "Cake",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Pumpkin",
+            "quantity": 10
+          },
+          {
+            "item": "Cake",
+            "quantity": 5
+          }
+        ],
+        "tamingRequirement": "Strong Taming Flute or better; complete the minigame five times and feed 2 Pumpkins plus 1 Cake after each success.",
+        "steps": "Repeat 5 times: complete the taming minigame, then feed 2 Pumpkins and 1 Cake.",
+        "location": "Volcanic Biome, Hellephant Ritual Circle",
+        "biome": "Volcanic Biome",
+        "spawnNotes": "Fandom lists Volcanic Biome and Hellephant Ritual Circle, guarded by cultists.",
+        "behavior": "Hostile",
+        "hp": "800",
+        "damage": "30",
+        "role": "Volcanic high-HP companion",
+        "benefit": "A mammoth-style Strong Flute target for Volcanic Biome routes.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "Guarded volcanic route and expensive five-stage pumpkin/cake requirement.",
+        "availability": "Volcanic Biome",
+        "aliases": [
+          "Lava Mammoth"
+        ]
+      },
+      "system": {
+        "slug": "hellephant",
+        "section": "Strong Taming Flute",
+        "sortOrder": 12,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/hellephant.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mossy Mammoth",
+        "fluteLevel": "Strong Taming Flute",
+        "stageCount": 5,
+        "food": "Pumpkin x10, Cake x5",
+        "foodPerStage": [
+          {
+            "item": "Pumpkin",
+            "quantity": 2
+          },
+          {
+            "item": "Cake",
+            "quantity": 1
+          }
+        ],
+        "totalFood": [
+          {
+            "item": "Pumpkin",
+            "quantity": 10
+          },
+          {
+            "item": "Cake",
+            "quantity": 5
+          }
+        ],
+        "tamingRequirement": "Strong Taming Flute or better; complete the minigame five times and feed 2 Pumpkins plus 1 Cake after each success.",
+        "steps": "Repeat 5 times: complete the taming minigame, then feed 2 Pumpkins and 1 Cake.",
+        "location": "Jungle Biome",
+        "biome": "Jungle Biome",
+        "spawnNotes": "Fandom lists Jungle Biome level 4+ campfire.",
+        "behavior": "Neutral",
+        "hp": "800",
+        "damage": "30",
+        "role": "Jungle high-HP companion",
+        "benefit": "A Jungle variant of the mammoth-style Strong Flute target with the same pumpkin/cake planning burden.",
+        "limit": "Counts toward the normal tamed-animal limit.",
+        "risk": "High-food Strong Flute target in the Jungle Biome; source text is typo-heavy, so keep copy tied to the verified flute, food, stage, HP, damage, and biome facts.",
+        "availability": "Jungle Biome"
+      },
+      "system": {
+        "slug": "mossy-mammoth",
+        "section": "Strong Taming Flute",
+        "sortOrder": 13,
+        "image": "/99%20Nights%20in%20the%20Forest/Tameable%20Animals/mossy-mammoth.webp"
+      }
+    }
+  ]
+}

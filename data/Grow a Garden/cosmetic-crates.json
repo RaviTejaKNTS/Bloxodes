@@ -1,0 +1,848 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Grow a Garden",
+    "gameSlug": "grow-a-garden",
+    "collection": "cosmetic-crates",
+    "route": "/wiki/grow-a-garden/cosmetic-crates",
+    "catalogCode": "grow-a-garden-cosmetic-crates",
+    "itemFields": [
+      "price",
+      "tier",
+      "added",
+      "poolSample"
+    ],
+    "columns": [
+      "price",
+      "tier",
+      "added",
+      "poolSample"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Cosmetic Crates"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [],
+      "descriptionField": "poolSample",
+      "cardDescriptionField": "poolSample",
+      "cardFields": [
+        "price",
+        "tier",
+        "added",
+        "poolSample"
+      ],
+      "tableFields": [
+        "price",
+        "tier",
+        "added",
+        "poolSample"
+      ],
+      "fieldPresentation": {
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "tier": {
+          "kind": "chip",
+          "label": "Tier",
+          "omitWhenEmpty": true
+        },
+        "added": {
+          "kind": "plain",
+          "label": "Added",
+          "omitWhenEmpty": true
+        },
+        "poolSample": {
+          "kind": "detail",
+          "label": "Pool includes",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Archaeologist Crate",
+        "price": "5,500,000 Sheckles; 179 Robux",
+        "tier": null,
+        "added": "July 12th, 2025",
+        "poolSample": "Dino Lamp, Dino Bone Case, Dino Trophy, Dino Slayer Statue, Archeology Tool Rack"
+      },
+      "system": {
+        "slug": "archaeologist-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 1,
+        "image": "/Grow a Garden/Cosmetic Crates/archaeologist-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Crate",
+        "price": "88,000,000 Sheckles; 179 Robux",
+        "tier": "Legendary",
+        "added": "June 21, 2025",
+        "poolSample": "Blue Beach Ball, Pink Beach Ball, Red Beach Ball, Yellow Beach Ball, Blue Beach Umbrella"
+      },
+      "system": {
+        "slug": "beach-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 2,
+        "image": "/Grow a Garden/Cosmetic Crates/beach-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Crate",
+        "price": "179 Robux",
+        "tier": "Legendary",
+        "added": "May 31, 2025",
+        "poolSample": "Honey Pot, Bee Hive, Honey Barrel, Honey Pillar, Bee Podium"
+      },
+      "system": {
+        "slug": "bee-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 3,
+        "image": "/Grow a Garden/Cosmetic Crates/bee-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloodmoon Crate",
+        "price": "120,000,000 Sheckles; 179 Robux",
+        "tier": "Legendary",
+        "added": "May 24, 2025",
+        "poolSample": "Blood Fence, Blood Bench, Blood Firepit, Blood Lamp, Blood Chain"
+      },
+      "system": {
+        "slug": "bloodmoon-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 4,
+        "image": "/Grow a Garden/Cosmetic Crates/bloodmoon-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Campfire Crate",
+        "price": "20,000,000 Sheckles",
+        "tier": null,
+        "added": "June 6, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "campfire-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 5,
+        "image": "/Grow a Garden/Cosmetic Crates/campfire-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carnival Crate",
+        "price": null,
+        "tier": null,
+        "added": "January 3, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "carnival-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 6,
+        "image": "/Grow a Garden/Cosmetic Crates/carnival-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Crate",
+        "price": "100,000,000 Sheckles; 179 Robux",
+        "tier": "Rare",
+        "added": "December 6th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "christmas-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 7,
+        "image": "/Grow a Garden/Cosmetic Crates/christmas-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Gnome Crate",
+        "price": "113,000,000 Sheckles; 199 Robux",
+        "tier": "Rare",
+        "added": null,
+        "poolSample": "Bacon Gnome, Builderman Gnome, Zombie Gnome, Noob Gnome, Gold Gnome"
+      },
+      "system": {
+        "slug": "classic-gnome-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 8,
+        "image": "/Grow a Garden/Cosmetic Crates/classic-gnome-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coastal Crate",
+        "price": null,
+        "tier": null,
+        "added": "July 4, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "coastal-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 9,
+        "image": "/Grow a Garden/Cosmetic Crates/coastal-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Common Gnome Crate",
+        "price": "56,000,000 Sheckles; 149 Robux",
+        "tier": null,
+        "added": null,
+        "poolSample": "Sleepy Gnome, Crazy Gnome, Grumpy Gnome, Silly Gnome, Fearless Gnome"
+      },
+      "system": {
+        "slug": "common-gnome-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 10,
+        "image": "/Grow a Garden/Cosmetic Crates/common-gnome-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupted Zen Crate",
+        "price": null,
+        "tier": "Legendary",
+        "added": "July 26th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "corrupted-zen-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 11,
+        "image": "/Grow a Garden/Cosmetic Crates/corrupted-zen-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Digging Crate",
+        "price": null,
+        "tier": null,
+        "added": "November 15th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "digging-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 12,
+        "image": "/Grow a Garden/Cosmetic Crates/digging-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dino Crate",
+        "price": "5,500,000 Sheckles; 179 Robux",
+        "tier": null,
+        "added": "July 5th, 2025",
+        "poolSample": "Dinosaur Footprints, Bone, Spine Fence, Dino Proof Fence, Rock Car"
+      },
+      "system": {
+        "slug": "dino-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 13,
+        "image": "/Grow a Garden/Cosmetic Crates/dino-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Crate",
+        "price": null,
+        "tier": null,
+        "added": "April 4, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "easter-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 14,
+        "image": "/Grow a Garden/Cosmetic Crates/easter-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Enchanted Crate",
+        "price": "499 Robux",
+        "tier": null,
+        "added": "August 30th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "enchanted-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 15,
+        "image": "/Grow a Garden/Cosmetic Crates/enchanted-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exclusive Cosmetic Crate",
+        "price": "199 Robux",
+        "tier": null,
+        "added": "May 24th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "exclusive-cosmetic-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 16,
+        "image": "/Grow a Garden/Cosmetic Crates/exclusive-cosmetic-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fall Crate",
+        "price": "50,000,000 Sheckles; 179 Robux",
+        "tier": "Legendary",
+        "added": "September 13th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "fall-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 17,
+        "image": "/Grow a Garden/Cosmetic Crates/fall-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Farmers Gnome Crate",
+        "price": "88,000,000 Sheckles; 179 Robux",
+        "tier": null,
+        "added": null,
+        "poolSample": null
+      },
+      "system": {
+        "slug": "farmers-gnome-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 18,
+        "image": "/Grow a Garden/Cosmetic Crates/farmers-gnome-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Food Crate",
+        "price": null,
+        "tier": null,
+        "added": null,
+        "poolSample": null
+      },
+      "system": {
+        "slug": "food-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 19,
+        "image": "/Grow a Garden/Cosmetic Crates/food-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fun Crate",
+        "price": "88,000,000 Sheckles; 179 Robux",
+        "tier": "Legendary",
+        "added": "June 21, 2025",
+        "poolSample": "Blue Flag, Red Flag, Seesaw, Swing Set, Roundabout"
+      },
+      "system": {
+        "slug": "fun-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 20,
+        "image": "/Grow a Garden/Cosmetic Crates/fun-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gardener Crate",
+        "price": null,
+        "tier": null,
+        "added": null,
+        "poolSample": null
+      },
+      "system": {
+        "slug": "gardener-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 21,
+        "image": "/Grow a Garden/Cosmetic Crates/gardener-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glimmering Crate",
+        "price": "179 Robux",
+        "tier": null,
+        "added": "September 6th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "glimmering-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 22,
+        "image": "/Grow a Garden/Cosmetic Crates/glimmering-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harvest Crate",
+        "price": "179 Robux",
+        "tier": null,
+        "added": "August 8, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "harvest-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 23,
+        "image": "/Grow a Garden/Cosmetic Crates/harvest-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hive Crate",
+        "price": "179 Robux",
+        "tier": null,
+        "added": "May 9, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "hive-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 24,
+        "image": "/Grow a Garden/Cosmetic Crates/hive-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holiday Crate",
+        "price": null,
+        "tier": null,
+        "added": "December 6th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "holiday-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 25,
+        "image": "/Grow a Garden/Cosmetic Crates/holiday-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Honey Crafters Crate",
+        "price": "179 Robux",
+        "tier": null,
+        "added": "June 7, 2025",
+        "poolSample": "Bee Painting, Bee Stinger, Queen Bee, Bee Mailbox, Bee Flag"
+      },
+      "system": {
+        "slug": "honey-crafters-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 26,
+        "image": "/Grow a Garden/Cosmetic Crates/honey-crafters-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Iconic Gnome Crate",
+        "price": "155,000,000 Sheckles; 199 Robux",
+        "tier": "Mythical_",
+        "added": "June 28th, 2025",
+        "poolSample": "Candy Blossom Gnome, Guest Gnome, Bloxy Cola Gnome, Shedletsky Gnome"
+      },
+      "system": {
+        "slug": "iconic-gnome-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 27,
+        "image": "/Grow a Garden/Cosmetic Crates/iconic-gnome-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Independence Crate",
+        "price": null,
+        "tier": null,
+        "added": "July 4, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "independence-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 28,
+        "image": "/Grow a Garden/Cosmetic Crates/independence-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "July 4th Crate",
+        "price": "7,400,000 Sheckles; 179 Robux",
+        "tier": "Legendary",
+        "added": "July 4th, 2025",
+        "poolSample": "America Flag Badge, Bald Eagle Statue, America Banner, July 4th Toy, American Flag"
+      },
+      "system": {
+        "slug": "july-4th-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 29,
+        "image": "/Grow a Garden/Cosmetic Crates/july-4th-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitchen Crate",
+        "price": null,
+        "tier": null,
+        "added": "August 9th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "kitchen-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 30,
+        "image": "/Grow a Garden/Cosmetic Crates/kitchen-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Maple Crate",
+        "price": null,
+        "tier": null,
+        "added": "September 20th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "maple-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 31,
+        "image": "/Grow a Garden/Cosmetic Crates/maple-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Moon Crate",
+        "price": "179 Robux",
+        "tier": null,
+        "added": "August 1, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "moon-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 32,
+        "image": "/Grow a Garden/Cosmetic Crates/moon-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mysterious Crate",
+        "price": "10,000,000 Sheckles; 149 Robux",
+        "tier": "Legendary",
+        "added": null,
+        "poolSample": null
+      },
+      "system": {
+        "slug": "mysterious-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Oasis Crate",
+        "price": "179 Robux",
+        "tier": "Legendary",
+        "added": "June 28, 2025",
+        "poolSample": "Boat Painting, Palm Tree Painting, Sun Painting, Sun Carpet, Sun Throne"
+      },
+      "system": {
+        "slug": "oasis-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 34,
+        "image": "/Grow a Garden/Cosmetic Crates/oasis-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Outdoors Crate",
+        "price": null,
+        "tier": null,
+        "added": "November 22, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "outdoors-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 35,
+        "image": "/Grow a Garden/Cosmetic Crates/outdoors-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Prime Crate",
+        "price": "179 Robux",
+        "tier": "Common",
+        "added": "September 27, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "prime-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 36,
+        "image": "/Grow a Garden/Cosmetic Crates/prime-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Crate",
+        "price": "179 Robux",
+        "tier": "Rare",
+        "added": "October 11, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "pumpkin-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 37,
+        "image": "/Grow a Garden/Cosmetic Crates/pumpkin-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Crate",
+        "price": "15,000,000 Sheckles; 179 Robux",
+        "tier": "Rare",
+        "added": "November 1st 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "safari-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 38,
+        "image": "/Grow a Garden/Cosmetic Crates/safari-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Savannah Crate",
+        "price": null,
+        "tier": null,
+        "added": "November 8th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "savannah-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 39,
+        "image": "/Grow a Garden/Cosmetic Crates/savannah-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Season 4 Crate",
+        "price": null,
+        "tier": null,
+        "added": "April 4, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "season-4-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 40,
+        "image": "/Grow a Garden/Cosmetic Crates/season-4-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Season 5 Crate",
+        "price": null,
+        "tier": null,
+        "added": "May 23, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "season-5-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 41,
+        "image": "/Grow a Garden/Cosmetic Crates/season-5-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Season 6 Crate",
+        "price": null,
+        "tier": null,
+        "added": "June 27, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "season-6-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 42,
+        "image": "/Grow a Garden/Cosmetic Crates/season-6-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Season 7 Crate",
+        "price": null,
+        "tier": null,
+        "added": "August 8, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "season-7-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 43,
+        "image": "/Grow a Garden/Cosmetic Crates/season-7-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sign Crate",
+        "price": "55,000,000 Sheckles; 149 Robux",
+        "tier": "Rare",
+        "added": "May 24, 2025",
+        "poolSample": "Keep Out Sign, No Trespassing Sign, Beware Of Dog Sign, Smile On Cam Sign, Mean Gardener Sign"
+      },
+      "system": {
+        "slug": "sign-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 44,
+        "image": "/Grow a Garden/Cosmetic Crates/sign-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprout Crate",
+        "price": "12,000,000 Sheckles; 179 Robux",
+        "tier": "Legendary",
+        "added": "August 16th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "sprout-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 45,
+        "image": "/Grow a Garden/Cosmetic Crates/sprout-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Statue Crate",
+        "price": "199 Robux",
+        "tier": null,
+        "added": null,
+        "poolSample": "Female Scarecrow, Male Scarecrow, Mossy Stone Blossom Statue, Stone Mango Statue, Stone Candy Blossom Statue"
+      },
+      "system": {
+        "slug": "statue-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 46,
+        "image": "/Grow a Garden/Cosmetic Crates/statue-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Fun Crate",
+        "price": "88,000,000 Sheckles; 179 Robux",
+        "tier": "Legendary",
+        "added": "June 21, 2025",
+        "poolSample": "Red Popsicle, Pink Popsicle, Blue Popsicle, Bean Bag Toss Blue, Bean Bag Toss Red"
+      },
+      "system": {
+        "slug": "summer-fun-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 47,
+        "image": "/Grow a Garden/Cosmetic Crates/summer-fun-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tidal Crate",
+        "price": "169 Robux",
+        "tier": null,
+        "added": "July 11, 2026",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "tidal-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 48,
+        "image": "/Grow a Garden/Cosmetic Crates/tidal-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twilight Crate",
+        "price": "120,000,000 Sheckles; 149 Robux",
+        "tier": "Legendary",
+        "added": null,
+        "poolSample": "Twilight Chalice, Owl Statue, Twilight Pillar, Twilight Arch, Twilight Fence"
+      },
+      "system": {
+        "slug": "twilight-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 49,
+        "image": "/Grow a Garden/Cosmetic Crates/twilight-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zen Crate",
+        "price": "179 Robux",
+        "tier": "Legendary",
+        "added": "July 19th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "zen-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 50,
+        "image": "/Grow a Garden/Cosmetic Crates/zen-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zen Gnome Crate",
+        "price": "159 Robux",
+        "tier": null,
+        "added": "July 19th, 2025",
+        "poolSample": null
+      },
+      "system": {
+        "slug": "zen-gnome-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 51,
+        "image": "/Grow a Garden/Cosmetic Crates/zen-gnome-crate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zenith Crate",
+        "price": null,
+        "tier": null,
+        "added": null,
+        "poolSample": null
+      },
+      "system": {
+        "slug": "zenith-crate",
+        "section": "Cosmetic Crates",
+        "sortOrder": 52,
+        "image": "/Grow a Garden/Cosmetic Crates/zenith-crate.png"
+      }
+    }
+  ]
+}

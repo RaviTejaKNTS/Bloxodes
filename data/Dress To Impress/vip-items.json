@@ -1,0 +1,3178 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "vip-items",
+    "route": "/wiki/dress-to-impress/vip-items",
+    "catalogCode": "dress-to-impress-vip-items",
+    "itemFields": [
+      "itemType",
+      "roomSection",
+      "bodyBase",
+      "toggles",
+      "toggleCount",
+      "colorOptions",
+      "availability",
+      "setOrFamily",
+      "sourceRoute"
+    ],
+    "columns": [
+      "itemType",
+      "roomSection",
+      "bodyBase",
+      "toggles",
+      "toggleCount",
+      "colorOptions",
+      "availability",
+      "setOrFamily",
+      "sourceRoute"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Dresses",
+        "Tops",
+        "Bottoms",
+        "Shoes",
+        "Bags",
+        "Accessories",
+        "Jewelry"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "itemType",
+        "roomSection",
+        "bodyBase",
+        "toggles",
+        "toggleCount",
+        "colorOptions"
+      ],
+      "tableFields": [
+        "itemType",
+        "roomSection",
+        "bodyBase",
+        "toggles",
+        "toggleCount",
+        "colorOptions",
+        "availability",
+        "setOrFamily"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Angelic Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "Purchasing VIP"
+      },
+      "system": {
+        "slug": "angelic-dress",
+        "section": "Dresses",
+        "sortOrder": 1,
+        "image": "/Dress%20To%20Impress/vip-items/angelic-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Caged Heart Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "caged-heart-dress",
+        "section": "Dresses",
+        "sortOrder": 2,
+        "image": "/Dress%20To%20Impress/vip-items/caged-heart-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chain Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "chain-dress",
+        "section": "Dresses",
+        "sortOrder": 3,
+        "image": "/Dress%20To%20Impress/vip-items/chain-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coquette Bows Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "coquette-bows-dress",
+        "section": "Dresses",
+        "sortOrder": 4,
+        "image": "/Dress%20To%20Impress/vip-items/coquette-bows-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elegant Lace Gown",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "6 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "elegant-lace-gown",
+        "section": "Dresses",
+        "sortOrder": 5,
+        "image": "/Dress%20To%20Impress/vip-items/elegant-lace-gown.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kimono",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "7 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Kimono Set",
+        "sourceRoute": "Baddie Pass"
+      },
+      "system": {
+        "slug": "kimono",
+        "section": "Dresses",
+        "sortOrder": 6,
+        "image": "/Dress%20To%20Impress/vip-items/kimono.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Layered Winter Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "layered-winter-dress",
+        "section": "Dresses",
+        "sortOrder": 7,
+        "image": "/Dress%20To%20Impress/vip-items/layered-winter-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Long Plain Strapless Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "long-plain-strapless-dress",
+        "section": "Dresses",
+        "sortOrder": 8,
+        "image": "/Dress%20To%20Impress/vip-items/long-plain-strapless-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roaring 20's Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Roaring 20's Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "roaring-20s-dress",
+        "section": "Dresses",
+        "sortOrder": 9,
+        "image": "/Dress%20To%20Impress/vip-items/roaring-20s-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Satin Sleepwear Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Playing during Valentine's '26"
+      },
+      "system": {
+        "slug": "satin-sleepwear-dress",
+        "section": "Dresses",
+        "sortOrder": 10,
+        "image": "/Dress%20To%20Impress/vip-items/satin-sleepwear-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Satin Sleepwear Robe",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "1 listed toggle image",
+        "toggleCount": 1,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Playing during Valentine's '26"
+      },
+      "system": {
+        "slug": "satin-sleepwear-robe",
+        "section": "Dresses",
+        "sortOrder": 11,
+        "image": "/Dress%20To%20Impress/vip-items/satin-sleepwear-robe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tube Denim Buckle Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "tube-denim-buckle-dress",
+        "section": "Dresses",
+        "sortOrder": 12,
+        "image": "/Dress%20To%20Impress/vip-items/tube-denim-buckle-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zip-Up Denim Dress",
+        "itemType": "Dress",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "zip-up-denim-dress",
+        "section": "Dresses",
+        "sortOrder": 13,
+        "image": "/Dress%20To%20Impress/vip-items/zip-up-denim-dress.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Angelic Warrior Corset",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Angelic Warrior Set",
+        "sourceRoute": "VIP Dressing Room; Own VIP Pass"
+      },
+      "system": {
+        "slug": "angelic-warrior-corset",
+        "section": "Tops",
+        "sortOrder": 1014,
+        "image": "/Dress%20To%20Impress/vip-items/angelic-warrior-corset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beaded Petal Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "beaded-petal-top",
+        "section": "Tops",
+        "sortOrder": 1015,
+        "image": "/Dress%20To%20Impress/vip-items/beaded-petal-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Belt Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Belt Set",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "belt-top",
+        "section": "Tops",
+        "sortOrder": 1016,
+        "image": "/Dress%20To%20Impress/vip-items/belt-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Business Jacket",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "business-jacket",
+        "section": "Tops",
+        "sortOrder": 1017,
+        "image": "/Dress%20To%20Impress/vip-items/business-jacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room; Playing during Spring '25 Update"
+      },
+      "system": {
+        "slug": "butterfly-top",
+        "section": "Tops",
+        "sortOrder": 1018,
+        "image": "/Dress%20To%20Impress/vip-items/butterfly-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cheerleader Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "cheerleader-top",
+        "section": "Tops",
+        "sortOrder": 1019,
+        "image": "/Dress%20To%20Impress/vip-items/cheerleader-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cropped Leather Vest",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "cropped-leather-vest",
+        "section": "Tops",
+        "sortOrder": 1020,
+        "image": "/Dress%20To%20Impress/vip-items/cropped-leather-vest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cross Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "cross-top",
+        "section": "Tops",
+        "sortOrder": 1021,
+        "image": "/Dress%20To%20Impress/vip-items/cross-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Trim Corset",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fur-trim-corset",
+        "section": "Tops",
+        "sortOrder": 1022,
+        "image": "/Dress%20To%20Impress/vip-items/fur-trim-corset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Wrap Jacket",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fur-wrap-jacket",
+        "section": "Tops",
+        "sortOrder": 1023,
+        "image": "/Dress%20To%20Impress/vip-items/fur-wrap-jacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gyaru Hoodie",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "gyaru-hoodie",
+        "section": "Tops",
+        "sortOrder": 1024,
+        "image": "/Dress%20To%20Impress/vip-items/gyaru-hoodie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Himekaji Jacket",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "himekaji-jacket",
+        "section": "Tops",
+        "sortOrder": 1025,
+        "image": "/Dress%20To%20Impress/vip-items/himekaji-jacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Himekaji Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "himekaji-top",
+        "section": "Tops",
+        "sortOrder": 1026,
+        "image": "/Dress%20To%20Impress/vip-items/himekaji-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack of Hearts Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "5 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Jack of Hearts Set",
+        "sourceRoute": "Closet; Playing during Valentine's '25"
+      },
+      "system": {
+        "slug": "jack-of-hearts-top",
+        "section": "Tops",
+        "sortOrder": 1027,
+        "image": "/Dress%20To%20Impress/vip-items/jack-of-hearts-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laced Jacket",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Laced Allure Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "laced-jacket",
+        "section": "Tops",
+        "sortOrder": 1028,
+        "image": "/Dress%20To%20Impress/vip-items/laced-jacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laced Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Laced Allure Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "laced-top",
+        "section": "Tops",
+        "sortOrder": 1029,
+        "image": "/Dress%20To%20Impress/vip-items/laced-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Layered Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "layered-top",
+        "section": "Tops",
+        "sortOrder": 1030,
+        "image": "/Dress%20To%20Impress/vip-items/layered-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moth Jacket",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "moth-jacket",
+        "section": "Tops",
+        "sortOrder": 1031,
+        "image": "/Dress%20To%20Impress/vip-items/moth-jacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ribbon Set - Corset Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "6 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Ribbon Set",
+        "sourceRoute": "Closet; Playing during Valentine's '25 or '26"
+      },
+      "system": {
+        "slug": "ribbon-set-corset-top",
+        "section": "Tops",
+        "sortOrder": 1032,
+        "image": "/Dress%20To%20Impress/vip-items/ribbon-set-corset-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Corset",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '25 or '26"
+      },
+      "system": {
+        "slug": "rose-corset",
+        "section": "Tops",
+        "sortOrder": 1033,
+        "image": "/Dress%20To%20Impress/vip-items/rose-corset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruffle Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Ruffle Set",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "ruffle-top",
+        "section": "Tops",
+        "sortOrder": 1034,
+        "image": "/Dress%20To%20Impress/vip-items/ruffle-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Silk Bodice",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "silk-bodice",
+        "section": "Tops",
+        "sortOrder": 1035,
+        "image": "/Dress%20To%20Impress/vip-items/silk-bodice.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tassel Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Summer Collection",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "tassel-top",
+        "section": "Tops",
+        "sortOrder": 1036,
+        "image": "/Dress%20To%20Impress/vip-items/tassel-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Uniform Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Halloween Collection",
+        "sourceRoute": "Playing during Halloween '25 Update"
+      },
+      "system": {
+        "slug": "uniform-top",
+        "section": "Tops",
+        "sortOrder": 1037,
+        "image": "/Dress%20To%20Impress/vip-items/uniform-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Corset",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Halloween Collection",
+        "sourceRoute": "Playing during Halloween '25 Update"
+      },
+      "system": {
+        "slug": "vampire-corset",
+        "section": "Tops",
+        "sortOrder": 1038,
+        "image": "/Dress%20To%20Impress/vip-items/vampire-corset.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 Boho Sweater",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-boho-sweater",
+        "section": "Tops",
+        "sortOrder": 1039,
+        "image": "/Dress%20To%20Impress/vip-items/w25-boho-sweater.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 FW Jacket",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-fw-jacket",
+        "section": "Tops",
+        "sortOrder": 1040,
+        "image": "/Dress%20To%20Impress/vip-items/w25-fw-jacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 FW Sweater",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-fw-sweater",
+        "section": "Tops",
+        "sortOrder": 1041,
+        "image": "/Dress%20To%20Impress/vip-items/w25-fw-sweater.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wonderland Top",
+        "itemType": "Top",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "7 listed toggle images",
+        "toggleCount": 7,
+        "colorOptions": "6 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Halloween Collection",
+        "sourceRoute": "Playing during Halloween '25 Update"
+      },
+      "system": {
+        "slug": "wonderland-top",
+        "section": "Tops",
+        "sortOrder": 1042,
+        "image": "/Dress%20To%20Impress/vip-items/wonderland-top.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Belt Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Belt Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "belt-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2043,
+        "image": "/Dress%20To%20Impress/vip-items/belt-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room; Playing during Spring '25 Update"
+      },
+      "system": {
+        "slug": "butterfly-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2044,
+        "image": "/Dress%20To%20Impress/vip-items/butterfly-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cheerleader Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "cheerleader-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2045,
+        "image": "/Dress%20To%20Impress/vip-items/cheerleader-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Denim Mini Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "denim-mini-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2046,
+        "image": "/Dress%20To%20Impress/vip-items/denim-mini-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Trim Shorts",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fur-trim-shorts",
+        "section": "Bottoms",
+        "sortOrder": 2047,
+        "image": "/Dress%20To%20Impress/vip-items/fur-trim-shorts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gyaru Pants",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "gyaru-pants",
+        "section": "Bottoms",
+        "sortOrder": 2048,
+        "image": "/Dress%20To%20Impress/vip-items/gyaru-pants.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Harajuku Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "4 listed toggle images",
+        "toggleCount": 4,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Harajuku Set",
+        "sourceRoute": "Baddie Pass"
+      },
+      "system": {
+        "slug": "harajuku-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2049,
+        "image": "/Dress%20To%20Impress/vip-items/harajuku-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Himekaji Shorts",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "himekaji-shorts",
+        "section": "Bottoms",
+        "sortOrder": 2050,
+        "image": "/Dress%20To%20Impress/vip-items/himekaji-shorts.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack of Hearts Pants",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Jack of Hearts Set",
+        "sourceRoute": "Playing during Valentine's '25"
+      },
+      "system": {
+        "slug": "jack-of-hearts-pants",
+        "section": "Bottoms",
+        "sortOrder": 2051,
+        "image": "/Dress%20To%20Impress/vip-items/jack-of-hearts-pants.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lace-up Flared Jeans",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "lace-up-flared-jeans",
+        "section": "Bottoms",
+        "sortOrder": 2052,
+        "image": "/Dress%20To%20Impress/vip-items/lace-up-flared-jeans.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laced Pants",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Laced Allure Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "laced-pants",
+        "section": "Bottoms",
+        "sortOrder": 2053,
+        "image": "/Dress%20To%20Impress/vip-items/laced-pants.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Layered Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room; Playing during Spring '25 Update"
+      },
+      "system": {
+        "slug": "layered-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2054,
+        "image": "/Dress%20To%20Impress/vip-items/layered-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moth Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "moth-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2055,
+        "image": "/Dress%20To%20Impress/vip-items/moth-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ribbon Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '25 or '26"
+      },
+      "system": {
+        "slug": "ribbon-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2056,
+        "image": "/Dress%20To%20Impress/vip-items/ribbon-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Robot Legs",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "robot-legs",
+        "section": "Bottoms",
+        "sortOrder": 2057,
+        "image": "/Dress%20To%20Impress/vip-items/robot-legs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruffle Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "ruffle-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2058,
+        "image": "/Dress%20To%20Impress/vip-items/ruffle-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Silk Draped Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "silk-draped-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2059,
+        "image": "/Dress%20To%20Impress/vip-items/silk-draped-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tassel Sarong",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Summer Collection",
+        "sourceRoute": "Playing during Summer '25 Update"
+      },
+      "system": {
+        "slug": "tassel-sarong",
+        "section": "Bottoms",
+        "sortOrder": 2060,
+        "image": "/Dress%20To%20Impress/vip-items/tassel-sarong.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tiered Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "tiered-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2061,
+        "image": "/Dress%20To%20Impress/vip-items/tiered-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Uniform Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Halloween Collection",
+        "sourceRoute": "Playing during Halloween '25 Update"
+      },
+      "system": {
+        "slug": "uniform-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2062,
+        "image": "/Dress%20To%20Impress/vip-items/uniform-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 Boho Pants",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-boho-pants",
+        "section": "Bottoms",
+        "sortOrder": 2063,
+        "image": "/Dress%20To%20Impress/vip-items/w25-boho-pants.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 FW Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-fw-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2064,
+        "image": "/Dress%20To%20Impress/vip-items/w25-fw-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wonderland Skirt",
+        "itemType": "Bottom",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "6 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Halloween Collection",
+        "sourceRoute": "Playing during Halloween '25 Update"
+      },
+      "system": {
+        "slug": "wonderland-skirt",
+        "section": "Bottoms",
+        "sortOrder": 2065,
+        "image": "/Dress%20To%20Impress/vip-items/wonderland-skirt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Angelic Warrior Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Angelic Warrior Set",
+        "sourceRoute": "VIP Dressing Room; Purchasing VIP"
+      },
+      "system": {
+        "slug": "angelic-warrior-boots",
+        "section": "Shoes",
+        "sortOrder": 3066,
+        "image": "/Dress%20To%20Impress/vip-items/angelic-warrior-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ankle Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "ankle-boots",
+        "section": "Shoes",
+        "sortOrder": 3067,
+        "image": "/Dress%20To%20Impress/vip-items/ankle-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Babydoll Shoes",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Achievement Collection",
+        "sourceRoute": "Closet"
+      },
+      "system": {
+        "slug": "babydoll-shoes",
+        "section": "Shoes",
+        "sortOrder": 3068,
+        "image": "/Dress%20To%20Impress/vip-items/babydoll-shoes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Belt Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "belt-boots",
+        "section": "Shoes",
+        "sortOrder": 3069,
+        "image": "/Dress%20To%20Impress/vip-items/belt-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Block Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "block-heels",
+        "section": "Shoes",
+        "sortOrder": 3070,
+        "image": "/Dress%20To%20Impress/vip-items/block-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Buckle Pumps",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "buckle-pumps",
+        "section": "Shoes",
+        "sortOrder": 3071,
+        "image": "/Dress%20To%20Impress/vip-items/buckle-pumps.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Business Flats",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "business-flats",
+        "section": "Shoes",
+        "sortOrder": 3072,
+        "image": "/Dress%20To%20Impress/vip-items/business-flats.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Kiss Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Achievement Collection",
+        "sourceRoute": "Closet; Baddie Pass"
+      },
+      "system": {
+        "slug": "butterfly-kiss-heels",
+        "section": "Shoes",
+        "sortOrder": 3073,
+        "image": "/Dress%20To%20Impress/vip-items/butterfly-kiss-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Shoes",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room, Closet; Playing during Spring '25 Update"
+      },
+      "system": {
+        "slug": "butterfly-shoes",
+        "section": "Shoes",
+        "sortOrder": 3074,
+        "image": "/Dress%20To%20Impress/vip-items/butterfly-shoes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cozy Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "cozy-boots",
+        "section": "Shoes",
+        "sortOrder": 3075,
+        "image": "/Dress%20To%20Impress/vip-items/cozy-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Floral Platform Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "floral-platform-heels",
+        "section": "Shoes",
+        "sortOrder": 3076,
+        "image": "/Dress%20To%20Impress/vip-items/floral-platform-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fold-Over Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fold-over-boots",
+        "section": "Shoes",
+        "sortOrder": 3077,
+        "image": "/Dress%20To%20Impress/vip-items/fold-over-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Cuffed Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fur-cuffed-boots",
+        "section": "Shoes",
+        "sortOrder": 3078,
+        "image": "/Dress%20To%20Impress/vip-items/fur-cuffed-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Strap Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fur-strap-boots",
+        "section": "Shoes",
+        "sortOrder": 3079,
+        "image": "/Dress%20To%20Impress/vip-items/fur-strap-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Trim Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fur-trim-boots",
+        "section": "Shoes",
+        "sortOrder": 3080,
+        "image": "/Dress%20To%20Impress/vip-items/fur-trim-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "High-Top Sneakers",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "high-top-sneakers",
+        "section": "Shoes",
+        "sortOrder": 3081,
+        "image": "/Dress%20To%20Impress/vip-items/high-top-sneakers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Himekaji Shoes",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "himekaji-shoes",
+        "section": "Shoes",
+        "sortOrder": 3082,
+        "image": "/Dress%20To%20Impress/vip-items/himekaji-shoes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Idol Leg Warmers",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "5 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Idol Set",
+        "sourceRoute": "Closet; Baddie Pass"
+      },
+      "system": {
+        "slug": "idol-leg-warmers",
+        "section": "Shoes",
+        "sortOrder": 3083,
+        "image": "/Dress%20To%20Impress/vip-items/idol-leg-warmers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack of Hearts Shoes",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Jack of Hearts Set",
+        "sourceRoute": "Closet; Playing during Valentine's '25"
+      },
+      "system": {
+        "slug": "jack-of-hearts-shoes",
+        "section": "Shoes",
+        "sortOrder": 3084,
+        "image": "/Dress%20To%20Impress/vip-items/jack-of-hearts-shoes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lace-Up Platform Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "lace-up-platform-boots",
+        "section": "Shoes",
+        "sortOrder": 3085,
+        "image": "/Dress%20To%20Impress/vip-items/lace-up-platform-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moth Legwarmers",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Closet; Playing during Winter 2025 Update"
+      },
+      "system": {
+        "slug": "moth-legwarmers",
+        "section": "Shoes",
+        "sortOrder": 3086,
+        "image": "/Dress%20To%20Impress/vip-items/moth-legwarmers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roaring 20's Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Roaring 20's Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "roaring-20s-heels",
+        "section": "Shoes",
+        "sortOrder": 3087,
+        "image": "/Dress%20To%20Impress/vip-items/roaring-20s-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruffle Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "ruffle-heels",
+        "section": "Shoes",
+        "sortOrder": 3088,
+        "image": "/Dress%20To%20Impress/vip-items/ruffle-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Satin Sleepwear Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '26"
+      },
+      "system": {
+        "slug": "satin-sleepwear-heels",
+        "section": "Shoes",
+        "sortOrder": 3089,
+        "image": "/Dress%20To%20Impress/vip-items/satin-sleepwear-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strappy High Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "strappy-high-heels",
+        "section": "Shoes",
+        "sortOrder": 3090,
+        "image": "/Dress%20To%20Impress/vip-items/strappy-high-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 FW Boots",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Closet; Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-fw-boots",
+        "section": "Shoes",
+        "sortOrder": 3091,
+        "image": "/Dress%20To%20Impress/vip-items/w25-fw-boots.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wonderland Heels",
+        "itemType": "Shoe",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "5 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Halloween Collection",
+        "sourceRoute": "Closet; Playing during Halloween '25"
+      },
+      "system": {
+        "slug": "wonderland-heels",
+        "section": "Shoes",
+        "sortOrder": 3092,
+        "image": "/Dress%20To%20Impress/vip-items/wonderland-heels.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Business Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "business-bag",
+        "section": "Bags",
+        "sortOrder": 4093,
+        "image": "/Dress%20To%20Impress/vip-items/business-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Denim Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "denim-bag",
+        "section": "Bags",
+        "sortOrder": 4094,
+        "image": "/Dress%20To%20Impress/vip-items/denim-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Basket",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "9 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP Pass"
+      },
+      "system": {
+        "slug": "flower-basket",
+        "section": "Bags",
+        "sortOrder": 4095,
+        "image": "/Dress%20To%20Impress/vip-items/flower-basket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Trim Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "fur-trim-bag",
+        "section": "Bags",
+        "sortOrder": 4096,
+        "image": "/Dress%20To%20Impress/vip-items/fur-trim-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "heart-bag",
+        "section": "Bags",
+        "sortOrder": 4097,
+        "image": "/Dress%20To%20Impress/vip-items/heart-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Hands Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Own VIP Pass"
+      },
+      "system": {
+        "slug": "heart-hands-bag",
+        "section": "Bags",
+        "sortOrder": 4098,
+        "image": "/Dress%20To%20Impress/vip-items/heart-hands-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Micro Purse",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "micro-purse",
+        "section": "Bags",
+        "sortOrder": 4099,
+        "image": "/Dress%20To%20Impress/vip-items/micro-purse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Quilted Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "quilted-bag",
+        "section": "Bags",
+        "sortOrder": 4100,
+        "image": "/Dress%20To%20Impress/vip-items/quilted-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruffle Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP Pass"
+      },
+      "system": {
+        "slug": "ruffle-bag",
+        "section": "Bags",
+        "sortOrder": 4101,
+        "image": "/Dress%20To%20Impress/vip-items/ruffle-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shell Purse",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Purchasing VIP"
+      },
+      "system": {
+        "slug": "shell-purse",
+        "section": "Bags",
+        "sortOrder": 4102,
+        "image": "/Dress%20To%20Impress/vip-items/shell-purse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Bag",
+        "itemType": "Bag",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "shopping-bag",
+        "section": "Bags",
+        "sortOrder": 4103,
+        "image": "/Dress%20To%20Impress/vip-items/shopping-bag.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Angelic Warrior Sleeves",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Angelic Warrior Set",
+        "sourceRoute": "VIP Dressing Room; Own VIP Pass"
+      },
+      "system": {
+        "slug": "angelic-warrior-sleeves",
+        "section": "Accessories",
+        "sortOrder": 5104,
+        "image": "/Dress%20To%20Impress/vip-items/angelic-warrior-sleeves.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Antlers",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "antlers",
+        "section": "Accessories",
+        "sortOrder": 5105,
+        "image": "/Dress%20To%20Impress/vip-items/antlers.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baggy Sleeve Shrug",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "baggy-sleeve-shrug",
+        "section": "Accessories",
+        "sortOrder": 5106,
+        "image": "/Dress%20To%20Impress/vip-items/baggy-sleeve-shrug.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Balloons",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "balloons",
+        "section": "Accessories",
+        "sortOrder": 5107,
+        "image": "/Dress%20To%20Impress/vip-items/balloons.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bow and Arrow",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "4 listed toggle images",
+        "toggleCount": 4,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '25 Update"
+      },
+      "system": {
+        "slug": "bow-and-arrow",
+        "section": "Accessories",
+        "sortOrder": 5108,
+        "image": "/Dress%20To%20Impress/vip-items/bow-and-arrow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bowl",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "6 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "Closet, VIP Dressing Room; Playing during Spring '25 Update"
+      },
+      "system": {
+        "slug": "bowl",
+        "section": "Accessories",
+        "sortOrder": 5109,
+        "image": "/Dress%20To%20Impress/vip-items/bowl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Broomstick",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "broomstick",
+        "section": "Accessories",
+        "sortOrder": 5110,
+        "image": "/Dress%20To%20Impress/vip-items/broomstick.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Business Hat",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "business-hat",
+        "section": "Accessories",
+        "sortOrder": 5111,
+        "image": "/Dress%20To%20Impress/vip-items/business-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Sleeves",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room; Playing during Spring '25 Update"
+      },
+      "system": {
+        "slug": "butterfly-sleeves",
+        "section": "Accessories",
+        "sortOrder": 5112,
+        "image": "/Dress%20To%20Impress/vip-items/butterfly-sleeves.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Wings",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "butterfly-wings",
+        "section": "Accessories",
+        "sortOrder": 5113,
+        "image": "/Dress%20To%20Impress/vip-items/butterfly-wings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cape & Collar",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "cape-and-collar",
+        "section": "Accessories",
+        "sortOrder": 5114,
+        "image": "/Dress%20To%20Impress/vip-items/cape-and-collar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial Glasses",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "celestial-glasses",
+        "section": "Accessories",
+        "sortOrder": 5115,
+        "image": "/Dress%20To%20Impress/vip-items/celestial-glasses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Compact",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "compact",
+        "section": "Accessories",
+        "sortOrder": 5116,
+        "image": "/Dress%20To%20Impress/vip-items/compact.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cuffed Gloves",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "cuffed-gloves",
+        "section": "Accessories",
+        "sortOrder": 5117,
+        "image": "/Dress%20To%20Impress/vip-items/cuffed-gloves.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cute Hairclips",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "cute-hairclips",
+        "section": "Accessories",
+        "sortOrder": 5118,
+        "image": "/Dress%20To%20Impress/vip-items/cute-hairclips.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Decora Hairclips",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "decora-hairclips",
+        "section": "Accessories",
+        "sortOrder": 5119,
+        "image": "/Dress%20To%20Impress/vip-items/decora-hairclips.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Electric Guitar",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; Own VIP"
+      },
+      "system": {
+        "slug": "electric-guitar",
+        "section": "Accessories",
+        "sortOrder": 5120,
+        "image": "/Dress%20To%20Impress/vip-items/electric-guitar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elegant Lace Gloves",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "elegant-lace-gloves",
+        "section": "Accessories",
+        "sortOrder": 5121,
+        "image": "/Dress%20To%20Impress/vip-items/elegant-lace-gloves.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fingerless Gloves",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "fingerless-gloves",
+        "section": "Accessories",
+        "sortOrder": 5122,
+        "image": "/Dress%20To%20Impress/vip-items/fingerless-gloves.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Earrings",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "flower-earrings",
+        "section": "Accessories",
+        "sortOrder": 5123,
+        "image": "/Dress%20To%20Impress/vip-items/flower-earrings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Cuffs",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "fur-cuffs",
+        "section": "Accessories",
+        "sortOrder": 5124,
+        "image": "/Dress%20To%20Impress/vip-items/fur-cuffs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fur Stole",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "fur-stole",
+        "section": "Accessories",
+        "sortOrder": 5125,
+        "image": "/Dress%20To%20Impress/vip-items/fur-stole.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hand Fan",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "hand-fan",
+        "section": "Accessories",
+        "sortOrder": 5126,
+        "image": "/Dress%20To%20Impress/vip-items/hand-fan.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Harp",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet"
+      },
+      "system": {
+        "slug": "harp",
+        "section": "Accessories",
+        "sortOrder": 5127,
+        "image": "/Dress%20To%20Impress/vip-items/harp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Eyepatch",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "heart-eyepatch",
+        "section": "Accessories",
+        "sortOrder": 5128,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jack of Hearts Cane",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Playing during Valentine's '25"
+      },
+      "system": {
+        "slug": "jack-of-hearts-cane",
+        "section": "Accessories",
+        "sortOrder": 5129,
+        "image": "/Dress%20To%20Impress/vip-items/jack-of-hearts-cane.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kimono Headpiece",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Kimono Set",
+        "sourceRoute": "Closet; Baddie Pass"
+      },
+      "system": {
+        "slug": "kimono-headpiece",
+        "section": "Accessories",
+        "sortOrder": 5130,
+        "image": "/Dress%20To%20Impress/vip-items/kimono-headpiece.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitty Tail",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "kitty-tail",
+        "section": "Accessories",
+        "sortOrder": 5131,
+        "image": "/Dress%20To%20Impress/vip-items/kitty-tail.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laptop",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "laptop",
+        "section": "Accessories",
+        "sortOrder": 5132,
+        "image": "/Dress%20To%20Impress/vip-items/laptop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lip Gloss",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "lip-gloss",
+        "section": "Accessories",
+        "sortOrder": 5133,
+        "image": "/Dress%20To%20Impress/vip-items/lip-gloss.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lipstick",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "lipstick",
+        "section": "Accessories",
+        "sortOrder": 5134,
+        "image": "/Dress%20To%20Impress/vip-items/lipstick.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mascara",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "mascara",
+        "section": "Accessories",
+        "sortOrder": 5135,
+        "image": "/Dress%20To%20Impress/vip-items/mascara.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mesh Fascinator",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "mesh-fascinator",
+        "section": "Accessories",
+        "sortOrder": 5136,
+        "image": "/Dress%20To%20Impress/vip-items/mesh-fascinator.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moth Wings",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "moth-wings",
+        "section": "Accessories",
+        "sortOrder": 5137,
+        "image": "/Dress%20To%20Impress/vip-items/moth-wings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Moths on Head",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "W25 Moth Set",
+        "sourceRoute": "Closet; Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "moths-on-head",
+        "section": "Accessories",
+        "sortOrder": 5138,
+        "image": "/Dress%20To%20Impress/vip-items/moths-on-head.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Oval Earrings",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "oval-earrings",
+        "section": "Accessories",
+        "sortOrder": 5139,
+        "image": "/Dress%20To%20Impress/vip-items/oval-earrings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Parasol",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "parasol",
+        "section": "Accessories",
+        "sortOrder": 5140,
+        "image": "/Dress%20To%20Impress/vip-items/parasol.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Hat",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "pirate-hat",
+        "section": "Accessories",
+        "sortOrder": 5141,
+        "image": "/Dress%20To%20Impress/vip-items/pirate-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rani Haar Earrings",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "rani-haar-earrings",
+        "section": "Accessories",
+        "sortOrder": 5142,
+        "image": "/Dress%20To%20Impress/vip-items/rani-haar-earrings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ribbon Arm Puffs",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '25 or '26"
+      },
+      "system": {
+        "slug": "ribbon-arm-puffs",
+        "section": "Accessories",
+        "sortOrder": 5143,
+        "image": "/Dress%20To%20Impress/vip-items/ribbon-arm-puffs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ribbon Leg Wraps",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '25 or '26"
+      },
+      "system": {
+        "slug": "ribbon-leg-wraps",
+        "section": "Accessories",
+        "sortOrder": 5144,
+        "image": "/Dress%20To%20Impress/vip-items/ribbon-leg-wraps.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roaring 20's Headpiece",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Roaring 20's Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "roaring-20s-headpiece",
+        "section": "Accessories",
+        "sortOrder": 5145,
+        "image": "/Dress%20To%20Impress/vip-items/roaring-20s-headpiece.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roaring 20's Shawl",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Roaring 20's Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "roaring-20s-shawl",
+        "section": "Accessories",
+        "sortOrder": 5146,
+        "image": "/Dress%20To%20Impress/vip-items/roaring-20s-shawl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Robot Arms",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "robot-arms",
+        "section": "Accessories",
+        "sortOrder": 5147,
+        "image": "/Dress%20To%20Impress/vip-items/robot-arms.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Robot Torso",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Petal Collection",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "robot-torso",
+        "section": "Accessories",
+        "sortOrder": 5148,
+        "image": "/Dress%20To%20Impress/vip-items/robot-torso.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Headpiece",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "rose-headpiece",
+        "section": "Accessories",
+        "sortOrder": 5149,
+        "image": "/Dress%20To%20Impress/vip-items/rose-headpiece.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Sleeves",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Rose Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '25 or '26"
+      },
+      "system": {
+        "slug": "rose-sleeves",
+        "section": "Accessories",
+        "sortOrder": 5150,
+        "image": "/Dress%20To%20Impress/vip-items/rose-sleeves.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruffle Hat",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "ruffle-hat",
+        "section": "Accessories",
+        "sortOrder": 5151,
+        "image": "/Dress%20To%20Impress/vip-items/ruffle-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruffled Gloves",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "ruffled-gloves",
+        "section": "Accessories",
+        "sortOrder": 5152,
+        "image": "/Dress%20To%20Impress/vip-items/ruffled-gloves.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shell Waist Chains",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "shell-waist-chains",
+        "section": "Accessories",
+        "sortOrder": 5153,
+        "image": "/Dress%20To%20Impress/vip-items/shell-waist-chains.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Smartphone",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "smartphone",
+        "section": "Accessories",
+        "sortOrder": 5154,
+        "image": "/Dress%20To%20Impress/vip-items/smartphone.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spiked Bracelets",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "spiked-bracelets",
+        "section": "Accessories",
+        "sortOrder": 5155,
+        "image": "/Dress%20To%20Impress/vip-items/spiked-bracelets.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sword",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "Yes, count not listed",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room; VIP Pass"
+      },
+      "system": {
+        "slug": "sword",
+        "section": "Accessories",
+        "sortOrder": 5156,
+        "image": "/Dress%20To%20Impress/vip-items/sword.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tailored Set",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "tailored-set",
+        "section": "Accessories",
+        "sortOrder": 5157,
+        "image": "/Dress%20To%20Impress/vip-items/tailored-set.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teardrop Lace Headband",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "teardrop-lace-headband",
+        "section": "Accessories",
+        "sortOrder": 5158,
+        "image": "/Dress%20To%20Impress/vip-items/teardrop-lace-headband.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Unicorn Horn",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "unicorn-horn",
+        "section": "Accessories",
+        "sortOrder": 5159,
+        "image": "/Dress%20To%20Impress/vip-items/unicorn-horn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Utility Belt",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "utility-belt",
+        "section": "Accessories",
+        "sortOrder": 5160,
+        "image": "/Dress%20To%20Impress/vip-items/utility-belt.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 Boho Headband",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Boho Set",
+        "sourceRoute": "Closet; Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-boho-headband",
+        "section": "Accessories",
+        "sortOrder": 5161,
+        "image": "/Dress%20To%20Impress/vip-items/w25-boho-headband.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 Shawl",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "3 listed toggle images",
+        "toggleCount": 3,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-shawl",
+        "section": "Accessories",
+        "sortOrder": 5162,
+        "image": "/Dress%20To%20Impress/vip-items/w25-shawl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wicked Horns",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "wicked-horns",
+        "section": "Accessories",
+        "sortOrder": 5163,
+        "image": "/Dress%20To%20Impress/vip-items/wicked-horns.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Tiara",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "winter-tiara",
+        "section": "Accessories",
+        "sortOrder": 5164,
+        "image": "/Dress%20To%20Impress/vip-items/winter-tiara.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wonderland Cuffs",
+        "itemType": "Accessory",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "4 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Wonderland Set",
+        "sourceRoute": "Playing during Halloween '25 Update"
+      },
+      "system": {
+        "slug": "wonderland-cuffs",
+        "section": "Accessories",
+        "sortOrder": 5165,
+        "image": "/Dress%20To%20Impress/vip-items/wonderland-cuffs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bracelet Cluster",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "availability": "Requires VIP access",
+        "setOrFamily": "Summer Collection",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "bracelet-cluster",
+        "section": "Jewelry",
+        "sortOrder": 6166,
+        "image": "/Dress%20To%20Impress/vip-items/bracelet-cluster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Decora Necklace",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "decora-necklace",
+        "section": "Jewelry",
+        "sortOrder": 6167,
+        "image": "/Dress%20To%20Impress/vip-items/decora-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Himekaji Necklace",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "himekaji-necklace",
+        "section": "Jewelry",
+        "sortOrder": 6168,
+        "image": "/Dress%20To%20Impress/vip-items/himekaji-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Industrial Piercing",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "industrial-piercing",
+        "section": "Jewelry",
+        "sortOrder": 6169,
+        "image": "/Dress%20To%20Impress/vip-items/industrial-piercing.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack of Hearts Choker",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "3 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Jack of Hearts Set",
+        "sourceRoute": "Playing during Valentine's '25"
+      },
+      "system": {
+        "slug": "jack-of-hearts-choker",
+        "section": "Jewelry",
+        "sortOrder": 6170,
+        "image": "/Dress%20To%20Impress/vip-items/jack-of-hearts-choker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Key Necklace",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "key-necklace",
+        "section": "Jewelry",
+        "sortOrder": 6171,
+        "image": "/Dress%20To%20Impress/vip-items/key-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rani Haar Necklace",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "rani-haar-necklace",
+        "section": "Jewelry",
+        "sortOrder": 6172,
+        "image": "/Dress%20To%20Impress/vip-items/rani-haar-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roaring 20's Necklace",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "2 listed toggle images",
+        "toggleCount": 2,
+        "colorOptions": "1 color customization option",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Roaring 20's Set",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "roaring-20s-necklace",
+        "section": "Jewelry",
+        "sortOrder": 6173,
+        "image": "/Dress%20To%20Impress/vip-items/roaring-20s-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Necklace",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Valentine's Collection",
+        "sourceRoute": "Closet; Playing during Valentine's '25 or '26"
+      },
+      "system": {
+        "slug": "rose-necklace",
+        "section": "Jewelry",
+        "sortOrder": 6174,
+        "image": "/Dress%20To%20Impress/vip-items/rose-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spiked Choker",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "availability": "Requires VIP access",
+        "sourceRoute": "VIP Dressing Room"
+      },
+      "system": {
+        "slug": "spiked-choker",
+        "section": "Jewelry",
+        "sortOrder": 6175,
+        "image": "/Dress%20To%20Impress/vip-items/spiked-choker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "W25 Boho Choker",
+        "itemType": "Jewelry",
+        "roomSection": "VIP Dressing Room",
+        "bodyBase": "Male/Female",
+        "toggles": "No toggles",
+        "toggleCount": 0,
+        "colorOptions": "2 color customization options",
+        "availability": "Requires VIP access",
+        "setOrFamily": "Winter Collection",
+        "sourceRoute": "Playing during Winter '25 Update"
+      },
+      "system": {
+        "slug": "w25-boho-choker",
+        "section": "Jewelry",
+        "sortOrder": 6176,
+        "image": "/Dress%20To%20Impress/vip-items/w25-boho-choker.webp"
+      }
+    }
+  ]
+}

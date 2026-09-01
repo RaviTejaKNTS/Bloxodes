@@ -1,0 +1,267 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "BedWars",
+    "gameSlug": "bedwars",
+    "collection": "enchantments",
+    "route": "/wiki/bedwars/enchantments",
+    "catalogCode": "bedwars-enchantments",
+    "itemFields": [
+      "summary",
+      "cardSummary",
+      "effect_type",
+      "trigger",
+      "effect",
+      "effect_details",
+      "cost",
+      "rarity",
+      "requirements",
+      "availability",
+      "duration",
+      "restrictions"
+    ],
+    "columns": [
+      "summary",
+      "cardSummary",
+      "effect_type",
+      "trigger",
+      "effect",
+      "effect_details",
+      "cost",
+      "rarity",
+      "requirements",
+      "availability",
+      "duration",
+      "restrictions"
+    ],
+    "display": {
+      "groupLabel": "Effect class",
+      "sectionOrder": [
+        "Offense and control",
+        "Sustain and scaling"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "effect_type"
+      ],
+      "descriptionField": "summary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "effect_type",
+        "cost",
+        "requirements",
+        "effect_details",
+        "duration"
+      ],
+      "tableFields": [
+        "effect_type",
+        "trigger",
+        "cost",
+        "rarity",
+        "requirements",
+        "effect_details",
+        "duration"
+      ],
+      "fieldPresentation": {
+        "effect_type": {
+          "kind": "plain",
+          "label": "Effect class",
+          "omitWhenEmpty": true
+        },
+        "trigger": {
+          "kind": "plain",
+          "label": "Trigger",
+          "omitWhenEmpty": true
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        },
+        "rarity": {
+          "kind": "highlight",
+          "label": "Pool",
+          "omitWhenEmpty": true
+        },
+        "requirements": {
+          "kind": "detail",
+          "label": "Requirements",
+          "omitWhenEmpty": true
+        },
+        "effect_details": {
+          "kind": "detail",
+          "label": "Effect details",
+          "omitWhenEmpty": true
+        },
+        "duration": {
+          "kind": "detail",
+          "label": "Duration",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Berserker",
+        "summary": "A low-health combat enchant that increases damage and can heal you when you are near defeat.",
+        "cardSummary": "Trade health for stronger attacks, then recover health at the low-health trigger.",
+        "effect_type": "Low-health offense",
+        "trigger": "Attacking while missing health",
+        "effect": "Damage increases as your health falls, and attacks restore health once you reach the low-health trigger.",
+        "effect_details": null,
+        "cost": "2 Emeralds per roll",
+        "rarity": "Regular pool",
+        "requirements": "Repair the broken Enchant Table with 8 Diamonds, then spend 2 Emeralds to roll.",
+        "availability": "Current regular pool",
+        "duration": "Until death or replacement",
+        "restrictions": "The Enchant Table is absent in SkyWars, Gun Game, Infected, Lasso Wars, Block Hunt, Arena Duels, and One in the Chamber."
+      },
+      "system": {
+        "slug": "berserker",
+        "section": "Sustain and scaling",
+        "sortOrder": 5,
+        "image": "/BedWars/Enchantments/berserker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Critical Strike",
+        "summary": "A damage enchant that gives attacks a chance to land a stronger critical hit.",
+        "cardSummary": "Increase burst damage through chance-based critical hits.",
+        "effect_type": "Critical damage",
+        "trigger": "Attacking an enemy",
+        "effect": "Attacks have a chance to deal extra critical damage.",
+        "effect_details": "The current effect reference describes 20% to 45% extra damage on a critical hit.",
+        "cost": "2 Emeralds per roll",
+        "rarity": "Regular pool",
+        "requirements": "Repair the broken Enchant Table with 8 Diamonds, then spend 2 Emeralds to roll.",
+        "availability": "Current regular pool",
+        "duration": "Until death or replacement",
+        "restrictions": "The Enchant Table is absent in SkyWars, Gun Game, Infected, Lasso Wars, Block Hunt, Arena Duels, and One in the Chamber."
+      },
+      "system": {
+        "slug": "critical-strike",
+        "section": "Offense and control",
+        "sortOrder": 0,
+        "image": "/BedWars/Enchantments/critical-strike.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Execute",
+        "summary": "A finishing enchant that makes weakened enemies vulnerable to an instant-kill effect.",
+        "cardSummary": "Build the execute threshold through attacks and finish low-health enemies.",
+        "effect_type": "Finisher",
+        "trigger": "Repeatedly attacking an enemy",
+        "effect": "Hits raise the target's execute threshold; an attack that leaves the target below that threshold can finish them immediately.",
+        "effect_details": "The current effect reference describes a 12% base threshold, 2% increases per stack, and an 18% maximum threshold.",
+        "cost": "2 Emeralds per roll",
+        "rarity": "Regular pool",
+        "requirements": "Repair the broken Enchant Table with 8 Diamonds, then spend 2 Emeralds to roll.",
+        "availability": "Current regular pool",
+        "duration": "Until death or replacement",
+        "restrictions": "The Enchant Table is absent in SkyWars, Gun Game, Infected, Lasso Wars, Block Hunt, Arena Duels, and One in the Chamber."
+      },
+      "system": {
+        "slug": "execute",
+        "section": "Offense and control",
+        "sortOrder": 1,
+        "image": "/BedWars/Enchantments/execute.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire",
+        "summary": "A damage-over-time enchant that burns enemies after they are hit.",
+        "cardSummary": "Keep pressure on enemies with burn damage that can build through repeated hits.",
+        "effect_type": "Damage over time",
+        "trigger": "Hitting an enemy",
+        "effect": "Attacks apply a burn effect that continues dealing damage after the hit.",
+        "effect_details": "Repeated attacks can build the burn effect up to four stacks.",
+        "cost": "2 Emeralds per roll",
+        "rarity": "Regular pool",
+        "requirements": "Repair the broken Enchant Table with 8 Diamonds, then spend 2 Emeralds to roll.",
+        "availability": "Current regular pool",
+        "duration": "Until death or replacement",
+        "restrictions": "The Enchant Table is absent in SkyWars, Gun Game, Infected, Lasso Wars, Block Hunt, Arena Duels, and One in the Chamber."
+      },
+      "system": {
+        "slug": "fire",
+        "section": "Offense and control",
+        "sortOrder": 2,
+        "image": "/BedWars/Enchantments/fire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forest",
+        "summary": "A sustain enchant that marks enemies and turns attacks into healing and maximum-health growth.",
+        "cardSummary": "Mark enemies, harvest seedlings, and build health while fighting.",
+        "effect_type": "Health scaling",
+        "trigger": "Damaging a marked enemy",
+        "effect": "Marked enemies grow visible seedlings; damaging them restores health and increases your maximum health.",
+        "effect_details": "Seedlings regrow after 45 seconds, and ranged damage reduces the health gained from the effect.",
+        "cost": "2 Emeralds per roll",
+        "rarity": "Regular pool",
+        "requirements": "Repair the broken Enchant Table with 8 Diamonds, then spend 2 Emeralds to roll.",
+        "availability": "Current regular pool",
+        "duration": "Until death or replacement",
+        "restrictions": "The Enchant Table is absent in SkyWars, Gun Game, Infected, Lasso Wars, Block Hunt, Arena Duels, and One in the Chamber."
+      },
+      "system": {
+        "slug": "forest",
+        "section": "Sustain and scaling",
+        "sortOrder": 6,
+        "image": "/BedWars/Enchantments/forest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soul Reaver",
+        "summary": "A kill-streak enchant that summons a damaging aura after you eliminate an enemy.",
+        "cardSummary": "Turn eliminations into a stacking aura that punishes nearby enemies.",
+        "effect_type": "Kill-streak offense",
+        "trigger": "Killing an enemy",
+        "effect": "An aura appears after a kill and deals damage nearby; further stacks increase its size and damage.",
+        "effect_details": "The 2025 patch record increased the aura duration to 7 seconds.",
+        "cost": "2 Emeralds per roll",
+        "rarity": "Regular pool",
+        "requirements": "Repair the broken Enchant Table with 8 Diamonds, then spend 2 Emeralds to roll.",
+        "availability": "Current regular pool",
+        "duration": "Until death or replacement; the aura lasts 7 seconds after a kill.",
+        "restrictions": "The Enchant Table is absent in SkyWars, Gun Game, Infected, Lasso Wars, Block Hunt, Arena Duels, and One in the Chamber."
+      },
+      "system": {
+        "slug": "soul-reaver",
+        "section": "Offense and control",
+        "sortOrder": 3,
+        "image": "/BedWars/Enchantments/soul-reaver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Static",
+        "summary": "A chain-damage enchant that shocks nearby enemies and weakens their healing.",
+        "cardSummary": "Use chained shock damage and Static Charges to pressure grouped or healing enemies.",
+        "effect_type": "Chain damage and control",
+        "trigger": "Attacking an enemy near other enemies",
+        "effect": "Attacks deal extra static damage, can chain to nearby enemies, apply Zapped, and build Static Charge with melee hits.",
+        "effect_details": "Three Static Charges trigger extra lightning; the current effect reference lists an 8-damage bonus, a 2-second cooldown, and a 6-block radius.",
+        "cost": "2 Emeralds per roll",
+        "rarity": "Regular pool",
+        "requirements": "Repair the broken Enchant Table with 8 Diamonds, then spend 2 Emeralds to roll.",
+        "availability": "Current regular pool",
+        "duration": "Until death or replacement",
+        "restrictions": "The Enchant Table is absent in SkyWars, Gun Game, Infected, Lasso Wars, Block Hunt, Arena Duels, and One in the Chamber."
+      },
+      "system": {
+        "slug": "static",
+        "section": "Offense and control",
+        "sortOrder": 4,
+        "image": "/BedWars/Enchantments/static.png"
+      }
+    }
+  ]
+}

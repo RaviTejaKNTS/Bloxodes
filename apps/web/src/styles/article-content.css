@@ -687,7 +687,7 @@
   scrollbar-width: none;
 }
 
-/* Flat markdown rendering for Journey prose: paragraphs keep the shared text rhythm. */
+/* Flat markdown rendering for codes page: paragraphs keep the shared text rhythm. */
 #article-body > [data-md-copy] + p[data-md-copy] {
   margin-top: 1.75rem;
 }

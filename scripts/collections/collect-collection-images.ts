@@ -179,6 +179,7 @@ async function updateDatasetImages(datasetPath: string, updates: Map<string, str
     if (!name) continue;
     const nextImage = updates.get(name) ?? updates.get(slugify(name));
     if (!nextImage) continue;
+
     if (v2) {
       if (!system || system.image === nextImage) continue;
       system.image = nextImage;
@@ -187,7 +188,10 @@ async function updateDatasetImages(datasetPath: string, updates: Map<string, str
     } else {
       continue;
     }
-    changed += 1;
+
+    if (v2 || row.image === nextImage) {
+      changed += 1;
+    }
   }
 
   if (!dryRun && changed) {

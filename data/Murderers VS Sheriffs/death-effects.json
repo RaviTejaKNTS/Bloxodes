@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murderers VS Sheriffs",
+    "gameSlug": "murderers-vs-sheriffs",
+    "collection": "death-effects",
+    "route": "/wiki/murderers-vs-sheriffs/death-effects",
+    "catalogCode": "murderers-vs-sheriffs-death-effects",
+    "itemFields": [
+      "effectType",
+      "source",
+      "sourceType",
+      "price",
+      "unlockRoute",
+      "availability",
+      "bundleFamily"
+    ],
+    "columns": [
+      "effectType",
+      "source",
+      "sourceType",
+      "price",
+      "unlockRoute",
+      "availability",
+      "bundleFamily"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Direct Robux effects",
+        "Bundle effects"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "effectType",
+        "source",
+        "sourceType",
+        "price",
+        "unlockRoute",
+        "availability"
+      ],
+      "tableFields": [
+        "effectType",
+        "source",
+        "sourceType",
+        "price",
+        "unlockRoute",
+        "availability",
+        "bundleFamily"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Hexa Kill",
+        "effectType": "Kill effect",
+        "source": "Hexa Kill [Effect]",
+        "sourceType": "Direct Robux product",
+        "price": "199 Robux",
+        "unlockRoute": "Buy the standalone Hexa Kill effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Hexa"
+      },
+      "system": {
+        "slug": "hexa-kill",
+        "section": "Direct Robux effects",
+        "sortOrder": 10,
+        "image": "/Murderers%20VS%20Sheriffs/death-effects/hexa-kill.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eggsplosion",
+        "effectType": "Death effect",
+        "source": "Eggsplosion [Effect]",
+        "sourceType": "Direct Robux product",
+        "price": "99 Robux",
+        "unlockRoute": "Buy the standalone Eggsplosion effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Easter"
+      },
+      "system": {
+        "slug": "eggsplosion",
+        "section": "Direct Robux effects",
+        "sortOrder": 20,
+        "image": "/Murderers%20VS%20Sheriffs/death-effects/eggsplosion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Egged",
+        "effectType": "Death effect",
+        "source": "Egged [Effect]",
+        "sourceType": "Direct Robux product",
+        "price": "199 Robux",
+        "unlockRoute": "Buy the standalone Egged effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Easter"
+      },
+      "system": {
+        "slug": "egged",
+        "section": "Direct Robux effects",
+        "sortOrder": 30,
+        "image": "/Murderers%20VS%20Sheriffs/death-effects/egged.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Boys",
+        "effectType": "Death effect",
+        "source": "Bunny Boys [Effect]",
+        "sourceType": "Direct Robux product",
+        "price": "149 Robux",
+        "unlockRoute": "Buy the standalone Bunny Boys effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Easter"
+      },
+      "system": {
+        "slug": "bunny-boys",
+        "section": "Direct Robux effects",
+        "sortOrder": 40,
+        "image": "/Murderers%20VS%20Sheriffs/death-effects/bunny-boys.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sakura Kill Effect",
+        "effectType": "Kill effect",
+        "source": "Sakura Kill Effect",
+        "sourceType": "Direct Robux product",
+        "price": "199 Robux",
+        "unlockRoute": "Buy the standalone Sakura Kill Effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Sakura"
+      },
+      "system": {
+        "slug": "sakura-kill-effect",
+        "section": "Direct Robux effects",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jelly Death Effect",
+        "effectType": "Death effect",
+        "source": "Jelly Death Effect",
+        "sourceType": "Direct Robux product",
+        "price": "249 Robux",
+        "unlockRoute": "Buy the standalone Jelly Death Effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Jelly"
+      },
+      "system": {
+        "slug": "jelly-death-effect",
+        "section": "Direct Robux effects",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lime Jelly Death Effect",
+        "effectType": "Death effect",
+        "source": "Lime Jelly Death Effect",
+        "sourceType": "Direct Robux product",
+        "price": "249 Robux",
+        "unlockRoute": "Buy the standalone Lime Jelly Death Effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Jelly"
+      },
+      "system": {
+        "slug": "lime-jelly-death-effect",
+        "section": "Direct Robux effects",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grape Jelly Death Effect",
+        "effectType": "Death effect",
+        "source": "Grape Jelly Death Effect",
+        "sourceType": "Direct Robux product",
+        "price": "249 Robux",
+        "unlockRoute": "Buy the standalone Grape Jelly Death Effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Jelly"
+      },
+      "system": {
+        "slug": "grape-jelly-death-effect",
+        "section": "Direct Robux effects",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry Jelly Death Effect",
+        "effectType": "Death effect",
+        "source": "Strawberry Jelly Death Effect",
+        "sourceType": "Direct Robux product",
+        "price": "249 Robux",
+        "unlockRoute": "Buy the standalone Strawberry Jelly Death Effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Jelly"
+      },
+      "system": {
+        "slug": "strawberry-jelly-death-effect",
+        "section": "Direct Robux effects",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blueberry Jelly Death Effect",
+        "effectType": "Death effect",
+        "source": "Blueberry Jelly Death Effect",
+        "sourceType": "Direct Robux product",
+        "price": "249 Robux",
+        "unlockRoute": "Buy the standalone Blueberry Jelly Death Effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Jelly"
+      },
+      "system": {
+        "slug": "blueberry-jelly-death-effect",
+        "section": "Direct Robux effects",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Duskveil Effect",
+        "effectType": "Death effect",
+        "source": "Duskveil Effect",
+        "sourceType": "Direct Robux product",
+        "price": "199 Robux",
+        "unlockRoute": "Buy the standalone Duskveil Effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Duskveil"
+      },
+      "system": {
+        "slug": "duskveil-effect",
+        "section": "Direct Robux effects",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman",
+        "effectType": "Death effect",
+        "source": "[Effect] Snowman",
+        "sourceType": "Direct Robux product",
+        "price": "79 Robux",
+        "unlockRoute": "Buy the standalone Snowman effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Winter"
+      },
+      "system": {
+        "slug": "snowman",
+        "section": "Direct Robux effects",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Santa",
+        "effectType": "Death effect",
+        "source": "[Effect] Santa",
+        "sourceType": "Direct Robux product",
+        "price": "79 Robux",
+        "unlockRoute": "Buy the standalone Santa effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Winter"
+      },
+      "system": {
+        "slug": "santa",
+        "section": "Direct Robux effects",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gifted",
+        "effectType": "Death effect",
+        "source": "[Effect] Gifted",
+        "sourceType": "Direct Robux product",
+        "price": "129 Robux",
+        "unlockRoute": "Buy the standalone Gifted effect product.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Winter"
+      },
+      "system": {
+        "slug": "gifted",
+        "section": "Direct Robux effects",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Omen Bundle Effect",
+        "effectType": "Death effect",
+        "source": "Spirit Omen Bundle [Effect]",
+        "sourceType": "Bundle component product",
+        "price": "299 Robux",
+        "unlockRoute": "Buy the Spirit Omen effect product from the bundle family.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Spirit Omen"
+      },
+      "system": {
+        "slug": "spirit-omen-bundle-effect",
+        "section": "Bundle effects",
+        "sortOrder": 210,
+        "image": "/Murderers%20VS%20Sheriffs/death-effects/spirit-omen-bundle-effect.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid Bundle Effect",
+        "effectType": "Death effect",
+        "source": "Cupid Bundle [Effect]",
+        "sourceType": "Bundle component product",
+        "price": "149 Robux",
+        "unlockRoute": "Buy the Cupid effect product from the bundle family.",
+        "availability": "For sale in the official developer-products API.",
+        "bundleFamily": "Cupid"
+      },
+      "system": {
+        "slug": "cupid-bundle-effect",
+        "section": "Bundle effects",
+        "sortOrder": 220,
+        "image": "/Murderers%20VS%20Sheriffs/death-effects/cupid-bundle-effect.png"
+      }
+    }
+  ]
+}

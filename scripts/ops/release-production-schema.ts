@@ -2,7 +2,6 @@ import "../shared/load-env";
 
 import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
@@ -67,59 +66,21 @@ function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
     "-X", "-v", "ON_ERROR_STOP=1"
   ];
   if (tuplesOnly) psql.push("-A", "-t");
-  const identityComment = process.env.VPS_SSH_IDENTITY_COMMENT?.trim();
-  const password = identityComment ? undefined : process.env.VPS_ADMIN_PASSWORD?.trim();
-  const authRoot = identityComment || password
-    ? fs.mkdtempSync(path.join(os.tmpdir(), "bloxodes-ssh-auth-"))
-    : null;
-  try {
-    const identityFile = identityComment && authRoot ? path.join(authRoot, "identity.pub") : null;
-    if (identityFile) {
-      const publicKeys = execFileSync("ssh-add", ["-L"], { encoding: "utf8" });
-      const publicKey = publicKeys
-        .split("\n")
-        .map((line) => line.trim())
-        .find((line) => line.endsWith(` ${identityComment}`));
-      if (!publicKey) throw new Error(`SSH agent identity not found: ${identityComment}`);
-      fs.writeFileSync(identityFile, `${publicKey}\n`, { mode: 0o600 });
-    }
-    const askpass = password && authRoot ? path.join(authRoot, "askpass.sh") : null;
-    if (askpass) {
-      fs.writeFileSync(askpass, '#!/bin/sh\nprintf "%s\\n" "$VPS_ADMIN_PASSWORD"\n', { mode: 0o700 });
-    }
-    const result = spawnSync("ssh", [
-      "-o", password ? "BatchMode=no" : "BatchMode=yes",
-      "-o", "ConnectTimeout=10",
-      ...(identityFile ? [
-        "-o", "IdentitiesOnly=yes",
-        "-i", identityFile
-      ] : password ? [
-        "-o", "IdentitiesOnly=yes",
-        "-o", "PubkeyAuthentication=no",
-        "-o", "PreferredAuthentications=password,keyboard-interactive",
-        "-o", "NumberOfPasswordPrompts=1"
-      ] : []),
-      target,
-      psql.join(" ")
-    ], {
-      cwd: repoRoot,
-      input: sql,
-      encoding: "utf8",
-      maxBuffer: 20 * 1024 * 1024,
-      env: askpass ? {
-        ...process.env,
-        DISPLAY: process.env.DISPLAY || "bloxodes-ssh-askpass",
-        SSH_ASKPASS: askpass,
-        SSH_ASKPASS_REQUIRE: "force"
-      } : process.env
-    });
-    if (result.error) throw result.error;
-    if (result.stderr) process.stderr.write(result.stderr);
-    if (result.status !== 0) throw new Error(`Remote production psql exited with status ${result.status}.`);
-    return result.stdout.trim();
-  } finally {
-    if (authRoot) fs.rmSync(authRoot, { recursive: true, force: true });
-  }
+  const result = spawnSync("ssh", [
+    "-o", "BatchMode=yes",
+    "-o", "ConnectTimeout=10",
+    target,
+    psql.join(" ")
+  ], {
+    cwd: repoRoot,
+    input: sql,
+    encoding: "utf8",
+    maxBuffer: 20 * 1024 * 1024
+  });
+  if (result.error) throw result.error;
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.status !== 0) throw new Error(`Remote production psql exited with status ${result.status}.`);
+  return result.stdout.trim();
 }
 
 function ledgerInsert(migration: Migration): string {

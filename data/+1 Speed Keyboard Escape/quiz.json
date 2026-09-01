@@ -1,0 +1,368 @@
+{
+  "easy": [
+    {
+      "id": "SKE-E1",
+      "question": "What is the main stat you build by moving in +1 Speed Keyboard Escape?",
+      "options": [
+        { "id": "A", "text": "Speed" },
+        { "id": "B", "text": "Pets" },
+        { "id": "C", "text": "Blocks" },
+        { "id": "D", "text": "Coins" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-E2",
+      "question": "What do players try to clear after building enough Speed?",
+      "options": [
+        { "id": "A", "text": "Restaurant shifts" },
+        { "id": "B", "text": "Stage routes" },
+        { "id": "C", "text": "Pet nurseries" },
+        { "id": "D", "text": "Tycoon floors" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SKE-E3",
+      "question": "What do safe-zone pads award after a stage section is cleared?",
+      "options": [
+        { "id": "A", "text": "Badges" },
+        { "id": "B", "text": "Wins" },
+        { "id": "C", "text": "Eggs" },
+        { "id": "D", "text": "Houses" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SKE-E4",
+      "question": "Which system is used for passive Speed training in the spawn area?",
+      "options": [
+        { "id": "A", "text": "Treadmills" },
+        { "id": "B", "text": "Fishing ponds" },
+        { "id": "C", "text": "Trading booths" },
+        { "id": "D", "text": "House plots" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-E5",
+      "question": "What kind of upgrade category are Trails in this game?",
+      "options": [
+        { "id": "A", "text": "Route checkpoints" },
+        { "id": "B", "text": "Visual progression upgrades" },
+        { "id": "C", "text": "Food recipes" },
+        { "id": "D", "text": "Private servers" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SKE-E6",
+      "question": "Auras are best understood as which kind of progression item?",
+      "options": [
+        { "id": "A", "text": "Passive speed-upgrade items" },
+        { "id": "B", "text": "Stage reward pads" },
+        { "id": "C", "text": "Keyboard skins" },
+        { "id": "D", "text": "Boss drops" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-E7",
+      "question": "What does Rebirth usually help with in the long-term loop?",
+      "options": [
+        { "id": "A", "text": "Building a permanent progress multiplier" },
+        { "id": "B", "text": "Deleting all future Wins rewards" },
+        { "id": "C", "text": "Changing the Roblox username" },
+        { "id": "D", "text": "Skipping every stage forever" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-E8",
+      "question": "Which reward source can help progress without clearing a stage route?",
+      "options": [
+        { "id": "A", "text": "Gifts and codes" },
+        { "id": "B", "text": "Stage wall colors" },
+        { "id": "C", "text": "Map border lines" },
+        { "id": "D", "text": "Lobby name tags" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-E9",
+      "question": "What is a beginner trying to balance while running stages?",
+      "options": [
+        { "id": "A", "text": "Speed and control" },
+        { "id": "B", "text": "Pets and houses" },
+        { "id": "C", "text": "Crops and weather" },
+        { "id": "D", "text": "Ammo and armor" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-E10",
+      "question": "Which game theme matches the listed stage routes?",
+      "options": [
+        { "id": "A", "text": "Candy and chocolate" },
+        { "id": "B", "text": "Pirates and ships" },
+        { "id": "C", "text": "Desert racing" },
+        { "id": "D", "text": "City roleplay" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    }
+  ],
+  "medium": [
+    {
+      "id": "SKE-M1",
+      "question": "Why is too much Speed risky on narrow stage sections?",
+      "options": [
+        { "id": "A", "text": "It can make turning and landing harder to control" },
+        { "id": "B", "text": "It removes the safe-zone pads from the route" },
+        { "id": "C", "text": "It converts all Wins into Robux purchases" },
+        { "id": "D", "text": "It locks the treadmill area until rebirth" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-M2",
+      "question": "When does treadmill time make the most sense?",
+      "options": [
+        { "id": "A", "text": "When you need passive Speed before trying harder stages" },
+        { "id": "B", "text": "When you want to rename every World 1 stage" },
+        { "id": "C", "text": "When you are farming exact Aura effects" },
+        { "id": "D", "text": "When you want to remove trail icons" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-M3",
+      "question": "Which treadmill is the free/default trainer?",
+      "options": [
+        { "id": "A", "text": "Gold Treadmill" },
+        { "id": "B", "text": "Chocolate Treadmill" },
+        { "id": "C", "text": "Candy Treadmill" },
+        { "id": "D", "text": "ADMIN Treadmill" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "SKE-M4",
+      "question": "Which pair names two Aura upgrades?",
+      "options": [
+        { "id": "A", "text": "Glow Aura and Wind Aura" },
+        { "id": "B", "text": "Gummy Aura and Waffle Aura" },
+        { "id": "C", "text": "Cocoa Aura and Sprint Aura" },
+        { "id": "D", "text": "Easter Aura and Void Aura" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-M5",
+      "question": "What should you avoid assuming from the Trail entries?",
+      "options": [
+        { "id": "A", "text": "Exact Trail multipliers are confirmed" },
+        { "id": "B", "text": "Trail names appear as upgrade entries" },
+        { "id": "C", "text": "Trail icons can show their colors" },
+        { "id": "D", "text": "Trail prices can be compared" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-M6",
+      "question": "Which stage appears first in the World 1 route list?",
+      "options": [
+        { "id": "A", "text": "Candy Cane Walk" },
+        { "id": "B", "text": "Chocolate Creek" },
+        { "id": "C", "text": "Gummy Gateway" },
+        { "id": "D", "text": "Marshmallow Maze" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SKE-M7",
+      "question": "Which stage is listed as a maze with wrong turns and dead ends?",
+      "options": [
+        { "id": "A", "text": "Marshmallow Maze" },
+        { "id": "B", "text": "Caramel Canyon" },
+        { "id": "C", "text": "Fudge Falls" },
+        { "id": "D", "text": "Waffle Warp" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-M8",
+      "question": "Which group describes the stage list split?",
+      "options": [
+        { "id": "A", "text": "World 1 stages and World 2 stages" },
+        { "id": "B", "text": "Easy pets and hard pets" },
+        { "id": "C", "text": "Shop eggs and event eggs" },
+        { "id": "D", "text": "PvP maps and ranked maps" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-M9",
+      "question": "Which Trail is treated as retired or event-linked unless a return route is confirmed?",
+      "options": [
+        { "id": "A", "text": "Golden Easter Trail" },
+        { "id": "B", "text": "Green Trail" },
+        { "id": "C", "text": "Rainbow Trail" },
+        { "id": "D", "text": "Galaxy Trail" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-M10",
+      "question": "Which system should you treat carefully because its exact per-item effects are not confirmed?",
+      "options": [
+        { "id": "A", "text": "Aura effects" },
+        { "id": "B", "text": "Stage names" },
+        { "id": "C", "text": "Treadmill names" },
+        { "id": "D", "text": "Trail images" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    }
+  ],
+  "hard": [
+    {
+      "id": "SKE-H1",
+      "question": "How many stage entries are listed across World 1 and World 2?",
+      "options": [
+        { "id": "A", "text": "13 rows" },
+        { "id": "B", "text": "15 rows" },
+        { "id": "C", "text": "17 rows" },
+        { "id": "D", "text": "20 rows" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SKE-H2",
+      "question": "What is the split between named World 1 stages and World 2 stage slots?",
+      "options": [
+        { "id": "A", "text": "11 World 1 rows and 6 World 2 rows" },
+        { "id": "B", "text": "12 World 1 rows and 5 World 2 rows" },
+        { "id": "C", "text": "13 World 1 rows and 4 World 2 rows" },
+        { "id": "D", "text": "14 World 1 rows and 3 World 2 rows" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "SKE-H3",
+      "question": "Which order correctly follows the first four World 1 stages?",
+      "options": [
+        { "id": "A", "text": "Gummy Gateway, Candy Cane Walk, Chocolate Creek, Marshmallow Maze" },
+        { "id": "B", "text": "Candy Cane Walk, Gummy Gateway, Marshmallow Maze, Chocolate Creek" },
+        { "id": "C", "text": "Chocolate Creek, Candy Cane Walk, Gummy Gateway, Caramel Canyon" },
+        { "id": "D", "text": "Gummy Gateway, Chocolate Creek, Candy Cane Walk, Lollipop Ledge" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-H4",
+      "question": "Which World 1 stage is listed with warp zones and direction changes?",
+      "options": [
+        { "id": "A", "text": "Sprinkle Sprint" },
+        { "id": "B", "text": "Truffle Tunnel" },
+        { "id": "C", "text": "Brainrot Boulevard" },
+        { "id": "D", "text": "Waffle Warp" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "SKE-H5",
+      "question": "Which stage is listed with chasers and tight corridors?",
+      "options": [
+        { "id": "A", "text": "Brainrot Boulevard" },
+        { "id": "B", "text": "Sugar Rush" },
+        { "id": "C", "text": "Cocoa Crown" },
+        { "id": "D", "text": "Fudge Falls" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-H6",
+      "question": "Which treadmill has the highest reported training rate?",
+      "options": [
+        { "id": "A", "text": "Gold Treadmill at x9 reported" },
+        { "id": "B", "text": "Diamond Treadmill at x9 reported" },
+        { "id": "C", "text": "Candy Treadmill at rate not confirmed" },
+        { "id": "D", "text": "ADMIN Treadmill at x100 reported" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "SKE-H7",
+      "question": "Which treadmill pair shares the same reported rate?",
+      "options": [
+        { "id": "A", "text": "Gold Treadmill and Diamond Treadmill" },
+        { "id": "B", "text": "Chocolate Treadmill and Candy Treadmill" },
+        { "id": "C", "text": "Candy Treadmill and ADMIN Treadmill" },
+        { "id": "D", "text": "Chocolate Treadmill and Gold Treadmill" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-H8",
+      "question": "Which Aura cost order is correct from lowest to highest?",
+      "options": [
+        { "id": "A", "text": "Glow 59, Wind 249, Water 489, Fire 649 Robux" },
+        { "id": "B", "text": "Wind 59, Glow 249, Fire 489, Water 649 Robux" },
+        { "id": "C", "text": "Glow 59, Water 249, Wind 489, Fire 649 Robux" },
+        { "id": "D", "text": "Fire 59, Water 249, Wind 489, Glow 649 Robux" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-H9",
+      "question": "Which Trail cost comparison matches the Trail list?",
+      "options": [
+        { "id": "A", "text": "Green Trail costs 19 Robux and Infinity Trail costs 2,999 Robux" },
+        { "id": "B", "text": "Blue Trail costs 19 Robux and Godlike Trail costs 2,999 Robux" },
+        { "id": "C", "text": "Purple Trail costs 19 Robux and Void Trail costs 2,999 Robux" },
+        { "id": "D", "text": "Red Trail costs 19 Robux and Supernova Trail costs 2,999 Robux" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "SKE-H10",
+      "question": "Which statement is safest when comparing upgrade details?",
+      "options": [
+        { "id": "A", "text": "Trail pass prices can be compared, but exact Trail multipliers should not be treated as confirmed" },
+        { "id": "B", "text": "World 2 stage names can be ranked, but World 1 stage names should be ignored" },
+        { "id": "C", "text": "Candy Treadmill rate can be ranked, but ADMIN Treadmill rate should be ignored" },
+        { "id": "D", "text": "Aura effects can be ranked, but Aura pass prices should not be compared" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    }
+  ]
+}

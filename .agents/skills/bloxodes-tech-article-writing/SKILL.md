@@ -71,4 +71,4 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 
 ## Output
 
-Write `final.json` only, in the same shape and to the same field rules as `bloxodes-article-writing`. Parse-check the JSON. `universe_id` is usually `null` for platform pieces. The Pi harness runs deterministic copy and media checks after writing; the parent runs `npm run verify:article-finals` and the rendered preview.
+Write `final.json` only, in the same shape and to the same field rules as `bloxodes-article-writing`. Parse-check the JSON. `universe_id` is usually `null` for platform pieces. Then verify with `npm run verify:article-finals` like any other article final.

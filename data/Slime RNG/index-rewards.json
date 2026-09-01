@@ -1,0 +1,1241 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Slime RNG",
+    "gameSlug": "slime-rng",
+    "collection": "index-rewards",
+    "route": "/wiki/slime-rng/index-rewards",
+    "catalogCode": "slime-rng-index-rewards",
+    "itemFields": [
+      "mutationType",
+      "slimesNeeded",
+      "rewardOne",
+      "rewardTwo",
+      "rewardThree",
+      "rewardSummary"
+    ],
+    "columns": [
+      "mutationType",
+      "slimesNeeded",
+      "rewardOne",
+      "rewardTwo",
+      "rewardThree",
+      "rewardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Basic",
+        "Big",
+        "Huge",
+        "Shiny",
+        "Inverted"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "mutationType",
+        "slimesNeeded",
+        "rewardOne",
+        "rewardTwo",
+        "rewardThree",
+        "rewardSummary"
+      ],
+      "tableFields": [
+        "mutationType",
+        "slimesNeeded",
+        "rewardOne",
+        "rewardTwo",
+        "rewardThree",
+        "rewardSummary"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Basic 10 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 10,
+        "rewardOne": "Luck Boost",
+        "rewardTwo": "Coins x10k",
+        "rewardThree": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Boost; Coins x10k; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-10-slimes",
+        "section": "Basic",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 15 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 15,
+        "rewardOne": "Ultra Luck Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Ultra Luck Boost; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-15-slimes",
+        "section": "Basic",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 20 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 20,
+        "rewardOne": "Roll Speed Boost",
+        "rewardTwo": "Luck multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Roll Speed Boost; Luck multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-20-slimes",
+        "section": "Basic",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 25 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 25,
+        "rewardOne": "Cheese x6",
+        "rewardTwo": "Currency Boost",
+        "rewardThree": "⭐ Luck flat +1",
+        "rewardSummary": "Cheese x6; Currency Boost; ⭐ Luck flat +1"
+      },
+      "system": {
+        "slug": "basic-25-slimes",
+        "section": "Basic",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 30 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 30,
+        "rewardOne": "Goop x4k",
+        "rewardTwo": "Luck multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Goop x4k; Luck multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-30-slimes",
+        "section": "Basic",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 35 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 35,
+        "rewardOne": "Coins x100M",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Coins x100M; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-35-slimes",
+        "section": "Basic",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 40 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 40,
+        "rewardOne": "Pizza x10",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Pizza x10; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-40-slimes",
+        "section": "Basic",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 45 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 45,
+        "rewardOne": "Ultra Luck Boost",
+        "rewardTwo": "⭐ Luck flat +1",
+        "rewardSummary": "Ultra Luck Boost; ⭐ Luck flat +1"
+      },
+      "system": {
+        "slug": "basic-45-slimes",
+        "section": "Basic",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 50 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 50,
+        "rewardOne": "Drumstick x12",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Drumstick x12; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-50-slimes",
+        "section": "Basic",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 55 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 55,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-55-slimes",
+        "section": "Basic",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 60 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 60,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-60-slimes",
+        "section": "Basic",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 65 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 65,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-65-slimes",
+        "section": "Basic",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 70 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 70,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-70-slimes",
+        "section": "Basic",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basic 75 slimes",
+        "mutationType": "Basic",
+        "slimesNeeded": 75,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "basic-75-slimes",
+        "section": "Basic",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 5 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 5,
+        "rewardOne": "Big Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Big Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-5-slimes",
+        "section": "Big",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 10 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 10,
+        "rewardOne": "Roll Speed Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Roll Speed Boost; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-10-slimes",
+        "section": "Big",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 20 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 20,
+        "rewardOne": "Big Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Big Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-20-slimes",
+        "section": "Big",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 25 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 25,
+        "rewardOne": "Pizza x5",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Pizza x5; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-25-slimes",
+        "section": "Big",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 30 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 30,
+        "rewardOne": "Jackpot Spin",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardThree": "Luck Multiplier +5%",
+        "rewardSummary": "Jackpot Spin; Coin Multiplier +5%; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-30-slimes",
+        "section": "Big",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 35 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 35,
+        "rewardOne": "Currency Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Currency Boost; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-35-slimes",
+        "section": "Big",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 40 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 40,
+        "rewardOne": "Roll Speed Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Roll Speed Boost; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-40-slimes",
+        "section": "Big",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 45 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 45,
+        "rewardOne": "Big Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Big Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-45-slimes",
+        "section": "Big",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 50 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 50,
+        "rewardOne": "Coin Multiplier +5%",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Coin Multiplier +5%; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-50-slimes",
+        "section": "Big",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 55 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 55,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-55-slimes",
+        "section": "Big",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 60 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 60,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-60-slimes",
+        "section": "Big",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 65 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 65,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-65-slimes",
+        "section": "Big",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 70 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 70,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-70-slimes",
+        "section": "Big",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big 75 slimes",
+        "mutationType": "Big",
+        "slimesNeeded": 75,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "big-75-slimes",
+        "section": "Big",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 5 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 5,
+        "rewardOne": "Huge Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Huge Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-5-slimes",
+        "section": "Huge",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 10 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 10,
+        "rewardOne": "Luck Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Boost; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-10-slimes",
+        "section": "Huge",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 15 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 15,
+        "rewardOne": "Pizza x5",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Pizza x5; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-15-slimes",
+        "section": "Huge",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 20 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 20,
+        "rewardOne": "Ultra Luck Boost",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardThree": "Luck Multiplier +5%",
+        "rewardSummary": "Ultra Luck Boost; Coin Multiplier +5%; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-20-slimes",
+        "section": "Huge",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 25 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 25,
+        "rewardOne": "Cheese x15",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Cheese x15; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-25-slimes",
+        "section": "Huge",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 30 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 30,
+        "rewardOne": "Roll Speed Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Roll Speed Boost; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-30-slimes",
+        "section": "Huge",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 35 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 35,
+        "rewardOne": "Currency Boost",
+        "rewardTwo": "⭐ Luck flat +0.5",
+        "rewardSummary": "Currency Boost; ⭐ Luck flat +0.5"
+      },
+      "system": {
+        "slug": "huge-35-slimes",
+        "section": "Huge",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 40 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 40,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-40-slimes",
+        "section": "Huge",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 45 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 45,
+        "rewardOne": "Huge Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Huge Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-45-slimes",
+        "section": "Huge",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 50 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 50,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-50-slimes",
+        "section": "Huge",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 55 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 55,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-55-slimes",
+        "section": "Huge",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 60 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 60,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-60-slimes",
+        "section": "Huge",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 65 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 65,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-65-slimes",
+        "section": "Huge",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 70 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 70,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-70-slimes",
+        "section": "Huge",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge 75 slimes",
+        "mutationType": "Huge",
+        "slimesNeeded": 75,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "huge-75-slimes",
+        "section": "Huge",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 5 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 5,
+        "rewardOne": "Shiny Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Shiny Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-5-slimes",
+        "section": "Shiny",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 10 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 10,
+        "rewardOne": "Ultra Luck Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Ultra Luck Boost; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-10-slimes",
+        "section": "Shiny",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 15 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 15,
+        "rewardOne": "Cheese x10",
+        "rewardTwo": "Tacos x8",
+        "rewardThree": "Luck Multiplier +5%",
+        "rewardSummary": "Cheese x10; Tacos x8; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-15-slimes",
+        "section": "Shiny",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 20 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 20,
+        "rewardOne": "⭐ Luck flat +1",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "⭐ Luck flat +1; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-20-slimes",
+        "section": "Shiny",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 25 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 25,
+        "rewardOne": "Roll Speed Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Roll Speed Boost; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-25-slimes",
+        "section": "Shiny",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 30 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 30,
+        "rewardOne": "Jackpot Spin",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Jackpot Spin; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-30-slimes",
+        "section": "Shiny",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 35 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 35,
+        "rewardOne": "Currency Boost",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardThree": "Luck Multiplier +5%",
+        "rewardSummary": "Currency Boost; Coin Multiplier +5%; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-35-slimes",
+        "section": "Shiny",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 40 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 40,
+        "rewardOne": "Ultra Luck Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Ultra Luck Boost; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-40-slimes",
+        "section": "Shiny",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 45 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 45,
+        "rewardOne": "Shiny Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Shiny Dice; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-45-slimes",
+        "section": "Shiny",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 50 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 50,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-50-slimes",
+        "section": "Shiny",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 55 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 55,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-55-slimes",
+        "section": "Shiny",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 60 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 60,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-60-slimes",
+        "section": "Shiny",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 65 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 65,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-65-slimes",
+        "section": "Shiny",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 70 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 70,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-70-slimes",
+        "section": "Shiny",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny 75 slimes",
+        "mutationType": "Shiny",
+        "slimesNeeded": 75,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "shiny-75-slimes",
+        "section": "Shiny",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 5 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 5,
+        "rewardOne": "Inverted Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Inverted Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-5-slimes",
+        "section": "Inverted",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 10 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 10,
+        "rewardOne": "Ultra Luck Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Ultra Luck Boost; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-10-slimes",
+        "section": "Inverted",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 15 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 15,
+        "rewardOne": "Tacos x10",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Tacos x10; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-15-slimes",
+        "section": "Inverted",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 20 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 20,
+        "rewardOne": "Roll Speed Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardThree": "Coin Multiplier +5%",
+        "rewardSummary": "Roll Speed Boost; Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-20-slimes",
+        "section": "Inverted",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 25 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 25,
+        "rewardOne": "Pizza x5",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Pizza x5; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-25-slimes",
+        "section": "Inverted",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 30 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 30,
+        "rewardOne": "Inverted Dice",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Inverted Dice; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-30-slimes",
+        "section": "Inverted",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 35 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 35,
+        "rewardOne": "Currency Boost",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardThree": "Luck Multiplier +5%",
+        "rewardSummary": "Currency Boost; Coin Multiplier +5%; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-35-slimes",
+        "section": "Inverted",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 40 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 40,
+        "rewardOne": "Roll Speed Boost",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Roll Speed Boost; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-40-slimes",
+        "section": "Inverted",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 45 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 45,
+        "rewardOne": "Jackpot Spin",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Jackpot Spin; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-45-slimes",
+        "section": "Inverted",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 50 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 50,
+        "rewardOne": "Coin Multiplier +5%",
+        "rewardTwo": "Luck Multiplier +5%",
+        "rewardSummary": "Coin Multiplier +5%; Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-50-slimes",
+        "section": "Inverted",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 55 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 55,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-55-slimes",
+        "section": "Inverted",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 60 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 60,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-60-slimes",
+        "section": "Inverted",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 65 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 65,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-65-slimes",
+        "section": "Inverted",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 70 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 70,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-70-slimes",
+        "section": "Inverted",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted 75 slimes",
+        "mutationType": "Inverted",
+        "slimesNeeded": 75,
+        "rewardOne": "Luck Multiplier +5%",
+        "rewardTwo": "Coin Multiplier +5%",
+        "rewardSummary": "Luck Multiplier +5%; Coin Multiplier +5%"
+      },
+      "system": {
+        "slug": "inverted-75-slimes",
+        "section": "Inverted",
+        "sortOrder": 73,
+        "image": null
+      }
+    }
+  ]
+}

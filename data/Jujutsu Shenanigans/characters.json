@@ -1,0 +1,533 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "characters",
+    "route": "/wiki/jujutsu-shenanigans/characters",
+    "catalogCode": "jujutsu-shenanigans-characters",
+    "itemFields": [
+      "status",
+      "availability",
+      "cost",
+      "hp",
+      "baseMoves",
+      "awakeningOrSpecial",
+      "domain",
+      "role",
+      "strength",
+      "limit",
+      "versionAdded",
+      "versionFinished"
+    ],
+    "columns": [
+      "status",
+      "availability",
+      "cost",
+      "hp",
+      "baseMoves",
+      "awakeningOrSpecial",
+      "domain",
+      "role",
+      "strength",
+      "limit",
+      "versionAdded",
+      "versionFinished"
+    ],
+    "display": {
+      "groupLabel": "status",
+      "sectionOrder": [
+        "Complete",
+        "Early Access",
+        "Base Only"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [
+        "role"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "status",
+        "availability",
+        "cost",
+        "hp",
+        "baseMoves",
+        "awakeningOrSpecial"
+      ],
+      "tableFields": [
+        "status",
+        "availability",
+        "cost",
+        "hp",
+        "baseMoves",
+        "awakeningOrSpecial",
+        "domain",
+        "role"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Honored One",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Lapse Blue; 2: Reversal Red; 3: Rapid Punches; 4: Twofold Kick; R: Limitless",
+        "awakeningOrSpecial": "Six Eyes: Lapse Blue MAX, Reversal Red MAX, Hollow Purple, Infinite Void, Limitless, Unlimited Purple, 0.2 Domain",
+        "domain": "Infinite Void; 0.2 Domain variant",
+        "role": "Ranged pressure and domain control",
+        "strength": "Blue, Red, Purple, and Infinite Void give clear ranged and domain pressure.",
+        "limit": "Strong tools still need clean spacing because predictable ranged pressure can be blocked, baited, or interrupted.",
+        "versionAdded": "V1.00",
+        "versionFinished": "V1.00"
+      },
+      "system": {
+        "slug": "honored-one",
+        "section": "Complete",
+        "sortOrder": 1,
+        "image": "/Jujutsu%20Shenanigans/characters/honored-one.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vessel",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "85",
+        "baseMoves": "1: Cursed Strikes; 2: Crushing Blow; 3: Divergent Fist; 4: Manji Kick; R: Combat Instincts",
+        "awakeningOrSpecial": "King of Curses: Dismantle, Open, Rush, Malevolent Shrine, Cleave, World Cutting Slash",
+        "domain": "Malevolent Shrine",
+        "role": "Close-range combo pressure",
+        "strength": "Cleave, Dismantle, and Malevolent Shrine turn a close-range confirm into heavy awakening pressure.",
+        "limit": "85 HP and mostly melee base tools make bad entries expensive.",
+        "versionAdded": "V1.00",
+        "versionFinished": "V1.00"
+      },
+      "system": {
+        "slug": "vessel",
+        "section": "Complete",
+        "sortOrder": 2,
+        "image": "/Jujutsu%20Shenanigans/characters/vessel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Restless Gambler",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Reserve Balls; 2: Shutter Doors; 3: Rough Energy; 4: Fever Breaker; R: Door Guard",
+        "awakeningOrSpecial": "Idle Death Gamble: Lucky Volley, Lucky Rushdown, Overwhelming Luck, Energy Surge, Rhythm",
+        "domain": "Idle Death Gamble",
+        "role": "Jackpot sustain and rushdown",
+        "strength": "Idle Death Gamble and the lucky awakening tools reward momentum after a clean setup.",
+        "limit": "Base pressure needs confirms before the domain and luck tools take over.",
+        "versionAdded": "V1.00",
+        "versionFinished": "V1.15"
+      },
+      "system": {
+        "slug": "restless-gambler",
+        "section": "Complete",
+        "sortOrder": 3,
+        "image": "/Jujutsu%20Shenanigans/characters/restless-gambler.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ten Shadows",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "85",
+        "baseMoves": "1: Rabbit Escape; 2: Nue; 3: Toad; 4: Divine Dog: Totality; R: Lurking Shadow",
+        "awakeningOrSpecial": "Insanity: Max Elephant, Great Serpent, Shadow Swarm, Mahoraga, Lurking Shadow, Switch; Mahoraga mode: Divine Pummel, Ground Pitch, Earthquake, Takedown / Adaptation / World Slash, Adaptation Wheel",
+        "domain": "Chimera Shadow Garden interaction on domain border",
+        "role": "Summons and form control",
+        "strength": "Shikigami tools cover space, and Mahoraga adds a second mode after awakening.",
+        "limit": "85 HP and a busier kit make it harder to learn before simpler complete characters.",
+        "versionAdded": "V1.15",
+        "versionFinished": "V1.29"
+      },
+      "system": {
+        "slug": "ten-shadows",
+        "section": "Complete",
+        "sortOrder": 4,
+        "image": "/Jujutsu%20Shenanigans/characters/ten-shadows.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Perfection",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Stockpile; 2: Soul Fire; 3: Focus Strike; 4: Body Repel; R: Self-Transfiguration",
+        "awakeningOrSpecial": "Essence of the Soul: Idle Transfiguration, Body Disfigure, Spike Wrath, Embodiment of Self Perfection, Awakening Black Flash; Instant Spirit Body: Widespread Strikes, Face Blitz, Crushing Rushdown, Head Splitter",
+        "domain": "Embodiment of Self Perfection",
+        "role": "Transformation pressure",
+        "strength": "Transfiguration tools and the second form give layered offense after awakening.",
+        "limit": "Form changes and domain timing add more to manage than a simple starter pick.",
+        "versionAdded": "V1.23",
+        "versionFinished": "V1.40"
+      },
+      "system": {
+        "slug": "perfection",
+        "section": "Complete",
+        "sortOrder": 5,
+        "image": "/Jujutsu%20Shenanigans/characters/perfection.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blood Manipulator",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Piercing Blood; 2: Flowing Red Scale; 3: Supernova; 4: Blood Edge; R: Convergence",
+        "awakeningOrSpecial": "Duty As A Brother: Slicing Exorcism, Wing King, Blood Rain, Plasma Wave, Convergence",
+        "domain": "No full domain listed",
+        "role": "Mid-range blood pressure",
+        "strength": "Piercing Blood, Supernova, Blood Rain, and Plasma Wave give clear projectile and area pressure.",
+        "limit": "Needs spacing and timing because rushed setups can be interrupted up close.",
+        "versionAdded": "V1.39",
+        "versionFinished": "V1.42"
+      },
+      "system": {
+        "slug": "blood-manipulator",
+        "section": "Complete",
+        "sortOrder": 6,
+        "image": "/Jujutsu%20Shenanigans/characters/blood-manipulator.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Switcher",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Swift Kick; 2: Brute Force; 3: Pebble Throw; 4: Elbow Drop; R: Boogie Woogie",
+        "awakeningOrSpecial": "False Memories: Idol's Debut, Climax Jumping, Dreams, Brothers, Boogie Woogie",
+        "domain": "No full domain listed",
+        "role": "Position swaps and melee disruption",
+        "strength": "Boogie Woogie changes positions and makes enemy habits easier to punish.",
+        "limit": "Timing matters more than raw move names, so it can feel unclear for a first moveset.",
+        "versionAdded": "V1.42",
+        "versionFinished": "V1.49"
+      },
+      "system": {
+        "slug": "switcher",
+        "section": "Complete",
+        "sortOrder": 7,
+        "image": "/Jujutsu%20Shenanigans/characters/switcher.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Defense Attorney",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "90",
+        "baseMoves": "1: Extended Swings; 2: Justice Served; 3: Judgement's Reach; 4: Pressing Charges; R: No Escape",
+        "awakeningOrSpecial": "Deadly Sentencing: Execution, Final Judgement, Verdict, Triple Sentence, Domain Amplification",
+        "domain": "Deadly Sentencing",
+        "role": "Judgement and counter-control",
+        "strength": "No Escape, Verdict, and Deadly Sentencing punish enemy action after a setup.",
+        "limit": "90 HP and judgement tools reward setup knowledge more than button-mashing.",
+        "versionAdded": "V1.50",
+        "versionFinished": "V1.57.1"
+      },
+      "system": {
+        "slug": "defense-attorney",
+        "section": "Complete",
+        "sortOrder": 8,
+        "image": "/Jujutsu%20Shenanigans/characters/defense-attorney.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Partners",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "90",
+        "baseMoves": "1: Severing Path; 2: Resolute Slash; 3: Outburst; 4: Second Wind; R: Rika plus Rika follow-ups",
+        "awakeningOrSpecial": "True Love: Elbow Rush, Copy, Energy Ripple, Authentic Mutual Love, Rika follow-ups, Copy Wheel",
+        "domain": "Authentic Mutual Love",
+        "role": "Partner pressure and copy utility",
+        "strength": "Rika follow-ups and Copy Wheel add extra options around the normal four-skill kit.",
+        "limit": "90 HP and partner follow-ups can overwhelm players who are still learning basic confirms.",
+        "versionAdded": "V1.58",
+        "versionFinished": "V1.63"
+      },
+      "system": {
+        "slug": "cursed-partners",
+        "section": "Complete",
+        "sortOrder": 9,
+        "image": "/Jujutsu%20Shenanigans/characters/cursed-partners.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Puppet Master",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "85; 117 in Awakening",
+        "baseMoves": "1: Ultra Spin; 2: Boost On; 3: Ultra Cannon; 4: Heat Emission; R: Offload",
+        "awakeningOrSpecial": "Absolute: Miracle Cannon, Pigeon Viola, Absolute Destruction, Technique Charge, Energy Output",
+        "domain": "No full domain listed",
+        "role": "Cannon pressure and resource control",
+        "strength": "Ultra Cannon, Heat Emission, and Absolute moves give strong projectile pressure.",
+        "limit": "85 base HP means the stronger awakening health does not save poor neutral before G is ready.",
+        "versionAdded": "V1.63",
+        "versionFinished": "V1.72"
+      },
+      "system": {
+        "slug": "puppet-master",
+        "section": "Complete",
+        "sortOrder": 10,
+        "image": "/Jujutsu%20Shenanigans/characters/puppet-master.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Head of the Hei",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "90; 75 in Awakening",
+        "baseMoves": "1: Projection Breaker; 2: Bleedout; 3: Decisive Strike; 4: Cursory Impact; R: Projection Sorcery",
+        "awakeningOrSpecial": "Vengeance: Top Speed, Flash Freezing, Tendril Grab, Time Cell Moon Palace, Acceleration",
+        "domain": "Time Cell Moon Palace",
+        "role": "Speed and projection pressure",
+        "strength": "Projection Sorcery, Top Speed, and Acceleration reward chase timing and fast punishment.",
+        "limit": "Awakening HP drops to 75, so missed pressure becomes more dangerous after transforming.",
+        "versionAdded": "V1.65",
+        "versionFinished": "V1.69"
+      },
+      "system": {
+        "slug": "head-of-the-hei",
+        "section": "Complete",
+        "sortOrder": 11,
+        "image": "/Jujutsu%20Shenanigans/characters/head-of-the-hei.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Salaryman",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Cleaving Whirlwind; 2: Severance Kick; 3: Blunt Cut; 4: Stabilize; R: Ratio Point",
+        "awakeningOrSpecial": "Overtime: Ratio Breaker, Sharpen, Interrogate, Collapse, Ratio Point",
+        "domain": "No full domain listed",
+        "role": "Stable melee fundamentals",
+        "strength": "Ratio Point, Stabilize, and Overtime reward clean confirms without a separate domain layer.",
+        "limit": "No full domain is listed, so wins depend more on neutral and consistent confirms.",
+        "versionAdded": "V1.69",
+        "versionFinished": "V1.73"
+      },
+      "system": {
+        "slug": "salaryman",
+        "section": "Complete",
+        "sortOrder": 12,
+        "image": "/Jujutsu%20Shenanigans/characters/salaryman.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "True Cannon",
+        "status": "Complete",
+        "availability": "Free public character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Granite Blast; 2: Unsatisfied; 3: Second Helping; 4: Appetizer; R: Restyle",
+        "awakeningOrSpecial": "Every Last Drop: What are you after?, I had no idea..., This is what dessert is like!, You weren't invited., Restyle",
+        "domain": "No full domain listed",
+        "role": "Projectile and combo pressure",
+        "strength": "Granite Blast, Restyle, and the finished awakening give ranged pressure plus a complete G route.",
+        "limit": "The quoted awakening move names are less readable at a glance, so players should learn the base confirms first.",
+        "versionAdded": "V1.75",
+        "versionFinished": "V1.76"
+      },
+      "system": {
+        "slug": "true-cannon",
+        "section": "Complete",
+        "sortOrder": 13,
+        "image": "/Jujutsu%20Shenanigans/characters/true-cannon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Disaster Plants",
+        "status": "Early Access",
+        "availability": "Early Access gamepass while unfinished",
+        "cost": "300 Robux Early Access gamepass",
+        "hp": "100",
+        "baseMoves": "1: Root Swam; 2: Surging Thorns; 3: Bud Shot; 4: Defense Response; R: Flower Field",
+        "awakeningOrSpecial": "Unwrap: awakening moves are listed as TBA; Flower Field is the current base special",
+        "domain": "No full domain listed",
+        "role": "Plant zone control",
+        "strength": "Roots, thorns, and Flower Field point toward space control before the full awakening is finished.",
+        "limit": "Early Access and TBA awakening moves mean the row can change more than completed characters.",
+        "versionAdded": "V1.74",
+        "versionFinished": "Unfinished"
+      },
+      "system": {
+        "slug": "disaster-plants",
+        "section": "Early Access",
+        "sortOrder": 14,
+        "image": "/Jujutsu%20Shenanigans/characters/disaster-plants.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Locust Guy",
+        "status": "Base Only",
+        "availability": "Free public base-only character",
+        "cost": "Free",
+        "hp": "90",
+        "baseMoves": "1: Clever; 2: Black Mucus; 3: Crushing Jaws; 4: Wing Throw; R: Fluttering Pounce",
+        "awakeningOrSpecial": "Directed Poison special on awakening; no full awakened moveset listed",
+        "domain": "No full domain listed; base-only special instead",
+        "role": "Hit-and-run pressure",
+        "strength": "Fluttering Pounce and the wing tools support quick engage and disengage windows.",
+        "limit": "Base-only status means there is no full awakened kit to compare against complete characters.",
+        "versionAdded": "V1.49",
+        "versionFinished": "Base Only"
+      },
+      "system": {
+        "slug": "locust-guy",
+        "section": "Base Only",
+        "sortOrder": 15,
+        "image": "/Jujutsu%20Shenanigans/characters/locust-guy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Star Rage",
+        "status": "Base Only",
+        "availability": "Free public base-only character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Garuda Rebound; 2: Rising Rage; 3: Mass Breaker; 4: Garuda Stab; R: Mass Buildup",
+        "awakeningOrSpecial": "Unrestricted Density special on awakening; no full awakened moveset listed",
+        "domain": "No full domain listed; base-only special instead",
+        "role": "Heavy close-range burst",
+        "strength": "Garuda and mass tools give a simple heavy-hit identity for base-only play.",
+        "limit": "No full awakened move list, so the comparison is mostly base moves plus one special.",
+        "versionAdded": "V1.56",
+        "versionFinished": "Base Only"
+      },
+      "system": {
+        "slug": "star-rage",
+        "section": "Base Only",
+        "sortOrder": 16,
+        "image": "/Jujutsu%20Shenanigans/characters/star-rage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Aspiring Mangaka",
+        "status": "Base Only",
+        "availability": "Free public base-only character",
+        "cost": "Free",
+        "hp": "85",
+        "baseMoves": "1: Despair; 2: Shut Up!; 3: Eye Catching; 4: Sacrilege; R: Clairvoyance",
+        "awakeningOrSpecial": "Foresight awakening counter; no full awakened moveset listed",
+        "domain": "No full domain listed; base-only special instead",
+        "role": "Counter and read-based defense",
+        "strength": "Clairvoyance, Oracle, and counter moves reward reads, perfect blocks, and forced movement.",
+        "limit": "85 HP and counter reliance make it technical for players still learning neutral.",
+        "versionAdded": "V1.58",
+        "versionFinished": "Base Only"
+      },
+      "system": {
+        "slug": "aspiring-mangaka",
+        "section": "Base Only",
+        "sortOrder": 17,
+        "image": "/Jujutsu%20Shenanigans/characters/aspiring-mangaka.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Coward",
+        "status": "Base Only",
+        "availability": "Free public base-only character",
+        "cost": "Free",
+        "hp": "70",
+        "baseMoves": "1: Ambush; 2: Backstab; 3: Trip; 4: Cheap Shot; R: Helping Hand plus follow-ups",
+        "awakeningOrSpecial": "Jawbreaker special on awakening; no full awakened moveset listed",
+        "domain": "No full domain listed; base-only special instead",
+        "role": "Low-HP ambush mix-up",
+        "strength": "Ambush, Backstab, and Helping Hand branches reward surprise openings and follow-up choices.",
+        "limit": "70 HP leaves very little room for missed confirms or bad trades.",
+        "versionAdded": "V1.73",
+        "versionFinished": "Base Only"
+      },
+      "system": {
+        "slug": "lucky-coward",
+        "section": "Base Only",
+        "sortOrder": 18,
+        "image": "/Jujutsu%20Shenanigans/characters/lucky-coward.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crow Charmer",
+        "status": "Base Only",
+        "availability": "Free public base-only character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Impetus Updraft; 2: Circling; 3: Gliding Flight; 4: Bird Control; R: Flock",
+        "awakeningOrSpecial": "Bird Strike special on awakening; no full awakened moveset listed",
+        "domain": "No full domain listed; base-only special instead",
+        "role": "Air movement and bird control",
+        "strength": "Gliding Flight, Flock, and Bird Control make movement and aerial pressure the main identity.",
+        "limit": "Base-only status and aerial setup mean timing matters more than a simple full-awakening plan.",
+        "versionAdded": "V1.74",
+        "versionFinished": "Base Only"
+      },
+      "system": {
+        "slug": "crow-charmer",
+        "section": "Base Only",
+        "sortOrder": 19,
+        "image": "/Jujutsu%20Shenanigans/characters/crow-charmer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Death",
+        "status": "Base Only",
+        "availability": "Free public base-only character",
+        "cost": "Free",
+        "hp": "100",
+        "baseMoves": "1: Festering Strikes; 2: Detach; 3: Chokehold; 4: Roach Swarm; R: Earthen Insect Trance",
+        "awakeningOrSpecial": "Parthenogenesis special with Bugnado and Infestation domain interaction",
+        "domain": "Infestation interaction on domain; no full domain listed",
+        "role": "Insect disruption and domain interaction",
+        "strength": "Roach Swarm, Earthen Insect Trance, Bugnado, and Infestation give disruptive base-only utility.",
+        "limit": "Newer base-only row should be rechecked after updates because its special interactions may change.",
+        "versionAdded": "V1.76",
+        "versionFinished": "Base Only"
+      },
+      "system": {
+        "slug": "black-death",
+        "section": "Base Only",
+        "sortOrder": 20,
+        "image": "/Jujutsu%20Shenanigans/characters/black-death.webp"
+      }
+    }
+  ]
+}

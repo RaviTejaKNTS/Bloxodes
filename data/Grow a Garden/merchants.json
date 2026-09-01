@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Grow a Garden",
+    "gameSlug": "grow-a-garden",
+    "collection": "merchants",
+    "route": "/wiki/grow-a-garden/merchants",
+    "catalogCode": "grow-a-garden-merchants",
+    "itemFields": [
+      "category",
+      "function"
+    ],
+    "columns": [
+      "category",
+      "function"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "function"
+      ],
+      "tableFields": [
+        "category",
+        "function"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "4th of July Merchant",
+        "category": "Merchant",
+        "function": "Appears only on 4th of July, and stays for 24 hours. It sold 5 shop items: x5 Liberty Lily x15 Firework Flower x30 Firework x1 Bald Eagle x7 July 4th Crate"
+      },
+      "system": {
+        "slug": "4th-of-july-merchant",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden/Merchants/4th-of-july-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fall Merchant",
+        "category": "Merchant",
+        "function": "Offers seeds, gears, and pets from the Fall Market Event: Fall Seed Pack Kniphofia Maple Resin Fall Egg Chipmunk Space Squirrel Red Panda Bonfire Harvest Basket Super Leaf Blower Rake Fall Crate Maple Crate Fall Fountain The Sheckles purchase amounts matched the Fall Market Event."
+      },
+      "system": {
+        "slug": "fall-merchant",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden/Merchants/fall-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gnome Merchant",
+        "category": "Merchant",
+        "function": "It offers 5 shop items: Common, Classic, Farmers, Iconic Gnome Crates Gnome Pet"
+      },
+      "system": {
+        "slug": "gnome-merchant",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden/Merchants/gnome-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween Merchant",
+        "category": "Merchant",
+        "function": "Appears only on the 31st of October, and stays for 24 hours. It sold 8 shop items: x6 Spider Vine x3 Monster Flower x35 Frightwork x10 Vampire Fang x1 Specter x1 Lich Statue x1 Skull Fence x1 Cemetery Fence"
+      },
+      "system": {
+        "slug": "halloween-merchant",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden/Merchants/halloween-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Honey Merchant",
+        "category": "Merchant",
+        "function": "Offers: Bee Egg Honey Sprinkler Flower Seed Pack Bee Crate Honey Crafters Crate for Honey."
+      },
+      "system": {
+        "slug": "honey-merchant",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden/Merchants/honey-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mutation Spray Merchant",
+        "category": "Merchant",
+        "function": "Sold follwing Mutation Sprays: Mutation Spray Wet Mutation Spray Windstruck Mutation Spray Verdant) Used to sell the Mutation Spray Disco which got removed a few hours later. They could all be purchased for 50,000,000 each. However, it was later removed on Update 1.24.0."
+      },
+      "system": {
+        "slug": "mutation-spray-merchant",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden/Merchants/mutation-spray-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Cosmetics Merchant",
+        "category": "Merchant",
+        "function": "Offers: Cooking Pot Hot Spring Spell Book Wisp Well Hex Circle Sarcophagus"
+      },
+      "system": {
+        "slug": "rare-cosmetics-merchant",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden/Merchants/rare-cosmetics-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Merchant",
+        "category": "Merchant",
+        "function": "Can only be spawned in after the Safari Harvest Event if globally 95,000,000,000 points were to be culminated during the event. This milestone was reached, so it now has a chance to spawn in every hour, same as the other merchants. Sells: Orange Delight Explorer's Compass Safari Crate Zebra Whistle Protea Lush Sprinkler Mini Shipping Container Baobab Pet Mutation Shard Jumbo Savannah Crate Gecko, Hyena Cape Buffalo Hippo Ancestral Horn Crocodile Lion"
+      },
+      "system": {
+        "slug": "safari-merchant",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden/Merchants/safari-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sky Merchant",
+        "category": "Merchant",
+        "function": "It offers 3 shop items: Night Staff Star Caller Cloudtouched Spray They respectively cost 12,000,000, 15,000,000, and 50,000,000 sheckles each."
+      },
+      "system": {
+        "slug": "sky-merchant",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden/Merchants/sky-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprinkler Merchant",
+        "category": "Merchant",
+        "function": "Offers sprinklers: Tropical Mist Sprinkler Flower Froster Sprinkler Spice Spritzer Sprinkler Stalk Sprout Sprinkler Sweet Soaker Sprinkler They all cost 50,000,000 each."
+      },
+      "system": {
+        "slug": "sprinkler-merchant",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden/Merchants/sprinkler-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Seed Merchant",
+        "category": "Merchant",
+        "function": "Offers the Summer Seeds: Cauliflower Rafflesia Green Apple Avocado Banana Pineapple Kiwi (Crop) Bell Pepper Prickly Pear Loquat Feijoa Pitcher Plant Common Summer Egg Rare Summer Egg Paradise Egg"
+      },
+      "system": {
+        "slug": "summer-seed-merchant",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden/Merchants/summer-seed-merchant.png"
+      }
+    }
+  ]
+}

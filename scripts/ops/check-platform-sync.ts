@@ -3,7 +3,6 @@ import "../shared/load-env";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 
 type MigrationPolicy = {
@@ -103,14 +102,13 @@ if (!localOnly) {
     homelabTarget,
     `printf '%s|' "$(git -C ${homelabRoot} rev-parse HEAD)"; ` +
       `printf '%s|' "$(git -C ${homelabRoot} status --porcelain | wc -l | tr -d ' ')"; ` +
-      `printf '%s|' "$(systemctl is-active bloxodes-article-discovery.timer)"; ` +
-      `systemctl is-active bloxodes-wiki-builder.timer`
+      `systemctl is-active bloxodes-article-discovery.timer`
   ]);
-  const [homelabSha, homelabDirty, timer, wikiTimer] = homelabRaw.split("|");
+  const [homelabSha, homelabDirty, timer] = homelabRaw.split("|");
   add(
     "homelab",
-    homelabSha === originProduction && homelabDirty === "0" && timer === "active" && wikiTimer === "active",
-    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} article_timer=${timer} wiki_timer=${wikiTimer}`
+    homelabSha === originProduction && homelabDirty === "0" && timer === "active",
+    `sha=${homelabSha?.slice(0, 12)} dirty_paths=${homelabDirty} timer=${timer}`
   );
 
   const vpsTarget = safeSshTarget(
@@ -119,31 +117,14 @@ if (!localOnly) {
       : undefined,
     "VPS target"
   );
-  const identityComment = process.env.VPS_SSH_IDENTITY_COMMENT?.trim();
-  const authRoot = identityComment ? fs.mkdtempSync(path.join(os.tmpdir(), "bloxodes-platform-ssh-")) : null;
-  let vpsRaw: string;
-  try {
-    const identityFile = authRoot ? path.join(authRoot, "identity.pub") : null;
-    if (identityFile) {
-      const publicKey = run("ssh-add", ["-L"])
-        .split("\n")
-        .map((line) => line.trim())
-        .find((line) => line.endsWith(` ${identityComment}`));
-      if (!publicKey) throw new Error(`SSH agent identity not found: ${identityComment}`);
-      fs.writeFileSync(identityFile, `${publicKey}\n`, { mode: 0o600 });
-    }
-    vpsRaw = run("ssh", [
-      "-o", "BatchMode=yes",
-      "-o", "ConnectTimeout=10",
-      ...(identityFile ? ["-o", "IdentitiesOnly=yes", "-i", identityFile] : []),
-      vpsTarget,
-      "printf '%s|' \"$(docker ps --filter name=bloxodes-web --format '{{.Image}}' | head -n1)\"; " +
-        "printf '%s|' \"$(sha256sum /home/codex-admin/bloxodes-supabase/volumes/functions/revalidate/index.ts | awk '{print $1}')\"; " +
-        "docker exec supabase-db psql -U postgres -d postgres -Atc \"select version from supabase_migrations.schema_migrations order by version;\""
-    ]);
-  } finally {
-    if (authRoot) fs.rmSync(authRoot, { recursive: true, force: true });
-  }
+  const vpsRaw = run("ssh", [
+    "-o", "BatchMode=yes",
+    "-o", "ConnectTimeout=10",
+    vpsTarget,
+    "printf '%s|' \"$(docker ps --filter name=bloxodes-web --format '{{.Image}}' | head -n1)\"; " +
+      "printf '%s|' \"$(sha256sum /home/codex-admin/bloxodes-supabase/volumes/functions/revalidate/index.ts | awk '{print $1}')\"; " +
+      "docker exec supabase-db psql -U postgres -d postgres -Atc \"select version from supabase_migrations.schema_migrations order by version;\""
+  ]);
   const [image = "", deployedRevalidateSha = "", ...versionParts] = vpsRaw.split("|");
   const imageSha = image.match(/:([0-9a-f]{40})$/)?.[1] ?? "unknown";
   const productionVersions = new Set(versionParts.join("|").split(/\s+/).filter(Boolean));

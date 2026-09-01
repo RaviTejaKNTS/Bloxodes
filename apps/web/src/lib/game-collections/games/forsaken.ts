@@ -14,6 +14,7 @@ export const forsakenCollectionGroup = {
       "skins",
       "items",
       "status-effects",
-      "npcs"
+      "npcs",
+      "milestones"
     ]
   } satisfies GameCollectionGroup;

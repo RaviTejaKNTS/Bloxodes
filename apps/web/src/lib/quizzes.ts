@@ -1,7 +1,9 @@
 import "server-only";
+import fs from "node:fs/promises";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
-import { parseQuizData, type QuizData, type QuizQuestion } from "@/lib/quiz-types";
+import { repoPath } from "@/lib/paths";
+import type { QuizData, QuizQuestion } from "@/lib/quiz-types";
 
 export type { QuizData, QuizOption, QuizQuestion } from "@/lib/quiz-types";
 
@@ -42,33 +44,50 @@ const QUIZ_SELECT_FIELDS_VIEW =
 const QUIZ_SELECT_FIELDS_BASE =
   "id, universe_id, code, title, description_md, seo_title, seo_description, is_published, published_at, created_at, updated_at";
 
+const QUIZ_DATA_MAP: Record<string, string> = {
+  "wizard-alchemy": repoPath("data", "Wizard Alchemy", "quiz.json"),
+  "jujutsu-shenanigans": repoPath("data", "Jujutsu Shenanigans", "quiz.json"),
+  "the-forge": repoPath("data", "The Forge", "quiz.json"),
+  "grow-a-garden": repoPath("data", "Grow a Garden", "quiz.json"),
+  "slime-rng": repoPath("data", "Slime RNG", "quiz.json"),
+  "dress-to-impress": repoPath("data", "Dress To Impress", "quiz.json"),
+  "rivals": repoPath("data", "RIVALS", "quiz.json"),
+  "survive-zombie-arena": repoPath("data", "Survive Zombie Arena", "quiz.json"),
+  "murderers-vs-sheriffs": repoPath("data", "Murderers VS Sheriffs", "quiz.json"),
+  "1-speed-keyboard-escape": repoPath("data", "+1 Speed Keyboard Escape", "quiz.json"),
+  "99-nights-in-the-forest": repoPath("data", "99 Nights in the Forest", "quiz.json"),
+  "sell-lemons": repoPath("data", "Sell Lemons", "quiz.json"),
+  "brookhaven-rp": repoPath("data", "Brookhaven RP", "quiz.json")
+};
+
 function normalizeCode(value: string): string {
   return value.trim().toLowerCase();
 }
 
-const cachedLoadQuizData = publicContentCache(
-  async (code: string): Promise<QuizData | null> => {
-    const { data, error } = await supabaseAdmin()
-      .from("quiz_pages")
-      .select("quiz_data")
-      .eq("code", code)
-      .eq("is_published", true)
-      .maybeSingle();
-
-    if (error) throw new Error(`Failed to load quiz data for ${code}: ${error.message}`);
-    if (!data) return null;
-    const quizData = (data as { quiz_data?: unknown }).quiz_data;
-    if (quizData == null) throw new Error(`Published quiz ${code} has no quiz_data payload.`);
-    return parseQuizData(quizData, `quiz_pages.${code}.quiz_data`);
-  },
-  ["quiz-data"],
-  { revalidate: 21600, tags: ["quizzes-index"] }
-);
+async function readQuizData(code: string): Promise<QuizData | null> {
+  const normalized = normalizeCode(code);
+  const filePath = QUIZ_DATA_MAP[normalized];
+  if (!filePath) return null;
+  const raw = await fs.readFile(filePath, "utf8");
+  const parsed = JSON.parse(raw) as QuizData;
+  return parsed;
+}
 
 export async function loadQuizData(code: string): Promise<QuizData | null> {
   const normalized = normalizeCode(code);
   if (!normalized) return null;
-  return cachedLoadQuizData(normalized);
+
+  if (process.env.NODE_ENV === "development") {
+    return readQuizData(normalized);
+  }
+
+  const cached = publicContentCache(
+    async (slug: string) => readQuizData(slug),
+    ["quiz-data", normalized],
+    { revalidate: 21600 }
+  );
+
+  return cached(normalized);
 }
 
 export async function getQuizPageByCode(code: string): Promise<QuizPage | null> {

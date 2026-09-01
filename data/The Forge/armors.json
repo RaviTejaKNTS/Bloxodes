@@ -1,0 +1,453 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "armors",
+    "route": "/wiki/the-forge/armors",
+    "catalogCode": "the-forge-armors",
+    "itemFields": [
+      "class",
+      "slot",
+      "baseHealth",
+      "sellPrice",
+      "chance"
+    ],
+    "columns": [
+      "class",
+      "slot",
+      "baseHealth",
+      "sellPrice",
+      "chance"
+    ],
+    "display": {
+      "groupLabel": "slot",
+      "sectionOrder": [
+        "Helmet",
+        "Leggings",
+        "Chestplate"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "class",
+        "slot",
+        "baseHealth",
+        "sellPrice",
+        "chance"
+      ],
+      "tableFields": [
+        "class",
+        "slot",
+        "baseHealth",
+        "sellPrice",
+        "chance"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Light Helmet",
+        "class": "Light",
+        "slot": "Helmet",
+        "baseHealth": "3.75%",
+        "sellPrice": "$65",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "light-helmet",
+        "section": "Helmet",
+        "sortOrder": 1,
+        "image": "/The%20Forge/Armor/light-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Light Leggings",
+        "class": "Light",
+        "slot": "Leggings",
+        "baseHealth": "4.375%",
+        "sellPrice": "$112.5",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "light-leggings",
+        "section": "Leggings",
+        "sortOrder": 2,
+        "image": "/The%20Forge/Armor/light-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Light Chestplate",
+        "class": "Light",
+        "slot": "Chestplate",
+        "baseHealth": "5%",
+        "sellPrice": "$225",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "light-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 3,
+        "image": "/The%20Forge/Armor/light-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Medium Helmet",
+        "class": "Medium",
+        "slot": "Helmet",
+        "baseHealth": "6.25%",
+        "sellPrice": "$335",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "medium-helmet",
+        "section": "Helmet",
+        "sortOrder": 4,
+        "image": "/The%20Forge/Armor/medium-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Medium Leggings",
+        "class": "Medium",
+        "slot": "Leggings",
+        "baseHealth": "7.5%",
+        "sellPrice": "$485",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "medium-leggings",
+        "section": "Leggings",
+        "sortOrder": 5,
+        "image": "/The%20Forge/Armor/medium-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Samurai Helmet",
+        "class": "Medium",
+        "slot": "Helmet",
+        "baseHealth": "8%",
+        "sellPrice": "$335",
+        "chance": "1/2"
+      },
+      "system": {
+        "slug": "samurai-helmet",
+        "section": "Helmet",
+        "sortOrder": 6,
+        "image": "/The%20Forge/Armor/samurai-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Medium Chestplate",
+        "class": "Medium",
+        "slot": "Chestplate",
+        "baseHealth": "8.75%",
+        "sellPrice": "$850",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "medium-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 7,
+        "image": "/The%20Forge/Armor/medium-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Samurai Leggings",
+        "class": "Medium",
+        "slot": "Leggings",
+        "baseHealth": "9%",
+        "sellPrice": "$485",
+        "chance": "1/2"
+      },
+      "system": {
+        "slug": "samurai-leggings",
+        "section": "Leggings",
+        "sortOrder": 8,
+        "image": "/The%20Forge/Armor/samurai-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Viking Helmet",
+        "class": "Medium",
+        "slot": "Helmet",
+        "baseHealth": "10.5%",
+        "sellPrice": "$335",
+        "chance": "1/4"
+      },
+      "system": {
+        "slug": "viking-helmet",
+        "section": "Helmet",
+        "sortOrder": 9,
+        "image": "/The%20Forge/Armor/viking-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Viking Leggings",
+        "class": "Medium",
+        "slot": "Leggings",
+        "baseHealth": "11%",
+        "sellPrice": "$485",
+        "chance": "1/4"
+      },
+      "system": {
+        "slug": "viking-leggings",
+        "section": "Leggings",
+        "sortOrder": 10,
+        "image": "/The%20Forge/Armor/viking-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Helmet",
+        "class": "Heavy",
+        "slot": "Helmet",
+        "baseHealth": "12.5%",
+        "sellPrice": "$1020",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "knight-helmet",
+        "section": "Helmet",
+        "sortOrder": 11,
+        "image": "/The%20Forge/Armor/knight-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Samurai Chestplate",
+        "class": "Medium",
+        "slot": "Chestplate",
+        "baseHealth": "12.75%",
+        "sellPrice": "$850",
+        "chance": "1/2"
+      },
+      "system": {
+        "slug": "samurai-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 12,
+        "image": "/The%20Forge/Armor/samurai-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Leggings",
+        "class": "Heavy",
+        "slot": "Leggings",
+        "baseHealth": "13.75%",
+        "sellPrice": "$1200",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "knight-leggings",
+        "section": "Leggings",
+        "sortOrder": 13,
+        "image": "/The%20Forge/Armor/knight-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Viking Chestplate",
+        "class": "Medium",
+        "slot": "Chestplate",
+        "baseHealth": "15%",
+        "sellPrice": "$850",
+        "chance": "1/4"
+      },
+      "system": {
+        "slug": "viking-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 14,
+        "image": "/The%20Forge/Armor/viking-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Chestplate",
+        "class": "Heavy",
+        "slot": "Chestplate",
+        "baseHealth": "16.25%",
+        "sellPrice": "$1355",
+        "chance": "1/1"
+      },
+      "system": {
+        "slug": "knight-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 15,
+        "image": "/The%20Forge/Armor/knight-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Knight Helmet",
+        "class": "Heavy",
+        "slot": "Helmet",
+        "baseHealth": "18.75%",
+        "sellPrice": "$1020",
+        "chance": "1/2"
+      },
+      "system": {
+        "slug": "dark-knight-helmet",
+        "section": "Helmet",
+        "sortOrder": 16,
+        "image": "/The%20Forge/Armor/dark-knight-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Knight Leggings",
+        "class": "Heavy",
+        "slot": "Leggings",
+        "baseHealth": "21.875%",
+        "sellPrice": "$1200",
+        "chance": "1/2"
+      },
+      "system": {
+        "slug": "dark-knight-leggings",
+        "section": "Leggings",
+        "sortOrder": 17,
+        "image": "/The%20Forge/Armor/dark-knight-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Knight Chestplate",
+        "class": "Heavy",
+        "slot": "Chestplate",
+        "baseHealth": "25%",
+        "sellPrice": "$1355",
+        "chance": "1/2"
+      },
+      "system": {
+        "slug": "dark-knight-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 18,
+        "image": "/The%20Forge/Armor/dark-knight-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf Helmet",
+        "class": "Heavy",
+        "slot": "Helmet",
+        "baseHealth": "25%",
+        "sellPrice": "$1020",
+        "chance": "1/4"
+      },
+      "system": {
+        "slug": "wolf-helmet",
+        "section": "Helmet",
+        "sortOrder": 19,
+        "image": "/The%20Forge/Armor/wolf-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin's Crown",
+        "class": "Heavy",
+        "slot": "Helmet",
+        "baseHealth": "26%",
+        "sellPrice": "$1020",
+        "chance": "1/6"
+      },
+      "system": {
+        "slug": "goblin-s-crown",
+        "section": "Helmet",
+        "sortOrder": 20,
+        "image": "/The%20Forge/Armor/goblin-s-crown.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven's Helmet",
+        "class": "Heavy",
+        "slot": "Helmet",
+        "baseHealth": "26.5%",
+        "sellPrice": "$1020",
+        "chance": "1/8"
+      },
+      "system": {
+        "slug": "raven-s-helmet",
+        "section": "Helmet",
+        "sortOrder": 21,
+        "image": "/The%20Forge/Armor/raven-s-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf Leggings",
+        "class": "Heavy",
+        "slot": "Leggings",
+        "baseHealth": "28%",
+        "sellPrice": "$1200",
+        "chance": "1/4"
+      },
+      "system": {
+        "slug": "wolf-leggings",
+        "section": "Leggings",
+        "sortOrder": 22,
+        "image": "/The%20Forge/Armor/wolf-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven's Leggings",
+        "class": "Heavy",
+        "slot": "Leggings",
+        "baseHealth": "29.25%",
+        "sellPrice": "$1200",
+        "chance": "1/8"
+      },
+      "system": {
+        "slug": "raven-s-leggings",
+        "section": "Leggings",
+        "sortOrder": 23,
+        "image": "/The%20Forge/Armor/raven-s-leggings.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf Chestplate",
+        "class": "Heavy",
+        "slot": "Chestplate",
+        "baseHealth": "35%",
+        "sellPrice": "$1355",
+        "chance": "1/4"
+      },
+      "system": {
+        "slug": "wolf-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 24,
+        "image": "/The%20Forge/Armor/wolf-chestplate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Raven's Chestplate",
+        "class": "Heavy",
+        "slot": "Chestplate",
+        "baseHealth": "37%",
+        "sellPrice": "$1355",
+        "chance": "1/8"
+      },
+      "system": {
+        "slug": "raven-s-chestplate",
+        "section": "Chestplate",
+        "sortOrder": 25,
+        "image": "/The%20Forge/Armor/raven-s-chestplate.webp"
+      }
+    }
+  ]
+}

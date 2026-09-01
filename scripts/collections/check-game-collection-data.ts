@@ -8,7 +8,6 @@ import {
   type GameCollectionConfig
 } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
-import { isDatabaseOnlyGameCollectionGame } from "@/lib/game-collections/database-only";
 
 type DatasetDocument = {
   meta?: Record<string, unknown> | null;
@@ -21,7 +20,6 @@ type CliOptions = {
   collection: string | null;
   file: string | null;
   finalJson: string | null;
-  mediaRoot: string | null;
   sectionField: string | null;
   requireImages: boolean;
   requireCardSummary: boolean;
@@ -91,7 +89,6 @@ function printUsage() {
 Options:
   --file <dataset.json>       Check a dataset file that is not registered yet.
   --final-json <final.json>   Also check description_json keys against dataset sections.
-  --media-root <directory>    Resolve local item image paths from this directory instead of apps/web/public.
   --section-field <field>     Force the field used for rendered sections.
   --require-images            Fail when items are missing images.
   --require-card-summary      Fail when items are missing cardSummary.
@@ -106,7 +103,6 @@ function parseArgs(argv: string[]): CliOptions {
     collection: null,
     file: null,
     finalJson: null,
-    mediaRoot: null,
     sectionField: null,
     requireImages: false,
     requireCardSummary: false,
@@ -136,9 +132,6 @@ function parseArgs(argv: string[]): CliOptions {
       case "--final-json":
       case "--final":
         options.finalJson = requireValue(argv, ++i, arg);
-        break;
-      case "--media-root":
-        options.mediaRoot = requireValue(argv, ++i, arg);
         break;
       case "--section-field":
       case "--group-by":
@@ -300,14 +293,14 @@ function getCardFields(meta: Record<string, unknown> | null, columns: string[], 
   });
 }
 
-function imageLocalPath(value: string, mediaRoot: string): string | null {
+function imageLocalPath(value: string): string | null {
   if (/^https?:\/\//i.test(value)) return null;
   const withoutQuery = value.split("?")[0] ?? value;
   const decoded = decodeURIComponent(withoutQuery.replace(/^\/+/, ""));
-  return path.resolve(mediaRoot, decoded);
+  return repoPath("apps", "web", "public", decoded);
 }
 
-async function checkImages(rows: Record<string, unknown>[], mediaRoot: string) {
+async function checkImages(rows: Record<string, unknown>[]) {
   let present = 0;
   let missingLocal = 0;
   let remote = 0;
@@ -316,7 +309,7 @@ async function checkImages(rows: Record<string, unknown>[], mediaRoot: string) {
     const image = stringValue(row.image);
     if (!image) continue;
     present += 1;
-    const localPath = imageLocalPath(image, mediaRoot);
+    const localPath = imageLocalPath(image);
     if (!localPath) {
       remote += 1;
       continue;
@@ -336,9 +329,6 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const issues: CheckIssue[] = [];
   const config = getGameCollectionConfigByWikiPath(options.game!, options.collection!);
-  if (!options.file && config && isDatabaseOnlyGameCollectionGame(config.gameSlug)) {
-    throw new Error(`${config.gameSlug} is database-only. Pass the task-local refresh dataset with --file and --media-root.`);
-  }
   if (!config && !options.file) {
     throw new Error(
       `No registered collection config for ${options.game}/${options.collection}. Run register:game-collection or pass --file.`
@@ -431,17 +421,14 @@ async function main() {
     issues.push({ level: "warning", message: `${cardSummaryMissing} item(s) are missing cardSummary.` });
   }
 
-  const mediaRoot = options.mediaRoot
-    ? resolvePath(options.mediaRoot)
-    : repoPath("apps", "web", "public");
-  const imageStats = await checkImages(rows, mediaRoot);
+  const imageStats = await checkImages(rows);
   if (options.requireImages && imageStats.missing) {
     issues.push({ level: "error", message: `${imageStats.missing} item(s) are missing images.` });
   } else if (imageStats.missing === rows.length) {
     issues.push({ level: "warning", message: "No item images are present." });
   }
   if (imageStats.missingLocal) {
-    issues.push({ level: "error", message: `${imageStats.missingLocal} local image path(s) do not exist under ${mediaRoot}.` });
+    issues.push({ level: "error", message: `${imageStats.missingLocal} local image path(s) do not exist under apps/web/public.` });
   }
 
   let descriptionJsonKeys: string[] = [];

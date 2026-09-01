@@ -1,7 +1,7 @@
 # Content and Engagement Pipelines
 
 Status: Active
-Last verified: 2026-08-29
+Last verified: 2026-08-14
 Evidence: page tables/counts, workflow skills, final validators/importers, routes, sitemap/feed/revalidation code, and explicit wiki/collection ownership separation
 
 ## Page Families
@@ -25,8 +25,6 @@ Game wiki hubs and game-specific collections are a separate cohesive pipeline ow
 7. Revalidate public paths/tags and verify the published URL.
 
 Content routes are server-first. Shared typed reads belong in `apps/web/src/lib/*`; page-family loaders belong in `page-data.tsx` where appropriate.
-
-Quiz page metadata and all easy/medium/hard question pools live together in `quiz_pages`; `quiz_data` is a validated JSONB payload. Web and mobile query that column directly and fail fast when a published quiz has no valid payload. `import-content-final` and `verify-engagement-finals` validate and read back the full pool, while `sync:quiz-data` owns guarded backfill manifests. Quiz list queries deliberately exclude `quiz_data`.
 
 ## Events and Puzzles
 

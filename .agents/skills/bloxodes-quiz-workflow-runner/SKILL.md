@@ -31,16 +31,15 @@ After the parent approves the brief, send the same subagent:
 3. Review source proof, topic coverage, difficulty plan, and facts to avoid.
 4. Ask the same subagent to use `/bloxodes-quiz-writing` and create `final.json`.
 5. Review that questions are fair, stable, and useful.
-6. Import the approved `final.json` into managed development. The importer must write both page fields and `quiz_pages.quiz_data`; there is no repository question-pool fallback.
-7. Start or reuse localhost with `npm run dev:managed`.
-8. Run:
+6. Start or reuse localhost with `npm run dev:managed`.
+7. Run:
 
 ```bash
 npm run verify:engagement-finals -- --base-url http://localhost:<port> --file <final.json>
 ```
 
-9. If the verifier passes, open the verified `/quizzes/<code>` link in the Codex Browser.
-10. Return paths, localhost link, blocked reason if any, and remaining risks.
+8. If the verifier passes, open the verified `/quizzes/<code>` link in the Codex Browser.
+9. Return paths, localhost link, blocked reason if any, and remaining risks.
 
 ## Parent Checks
 
@@ -51,4 +50,3 @@ npm run verify:engagement-finals -- --base-url http://localhost:<port> --file <f
 - explanations teach the fact briefly
 - page copy (intro/description) reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words; questions and options stay plain and exact
 - verifier and Browser preview pass
-- managed-development readback contains the validated `quiz_data` payload and the route fails if that payload is absent

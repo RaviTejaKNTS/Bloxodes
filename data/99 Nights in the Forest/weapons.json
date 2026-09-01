@@ -1,0 +1,738 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "99 Nights in the Forest",
+    "gameSlug": "99-nights-in-the-forest",
+    "collection": "weapons",
+    "route": "/wiki/99-nights-in-the-forest/weapons",
+    "catalogCode": "99-nights-in-the-forest-weapons",
+    "itemFields": [
+      "category",
+      "damage",
+      "ammoOrUses",
+      "effect",
+      "rateOrReload",
+      "source",
+      "craftingRequirement",
+      "location",
+      "classRestriction",
+      "bestFor",
+      "availability"
+    ],
+    "columns": [
+      "category",
+      "damage",
+      "ammoOrUses",
+      "effect",
+      "rateOrReload",
+      "source",
+      "craftingRequirement",
+      "location",
+      "classRestriction",
+      "bestFor",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Melee weapons",
+        "Ranged weapons",
+        "Throwables and limited-use weapons",
+        "Special combat items",
+        "Defensive combat gear",
+        "Unavailable and admin-only weapons"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [
+        "location",
+        "availability"
+      ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "category",
+        "damage",
+        "ammoOrUses",
+        "effect",
+        "rateOrReload",
+        "source"
+      ],
+      "tableFields": [
+        "category",
+        "damage",
+        "ammoOrUses",
+        "effect",
+        "rateOrReload",
+        "source",
+        "craftingRequirement",
+        "location"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Spear",
+        "category": "Melee weapons",
+        "damage": "25; 32.5 with Brawler; 40 with fully boosted Berserker",
+        "ammoOrUses": "No ammo",
+        "effect": "Longer melee reach than basic tools",
+        "rateOrReload": "0.5 second swing rate",
+        "source": "Common Chest, Good Chest, Iron Chest, Pelt Trader second trade",
+        "bestFor": "Early and mid-run melee damage when ammo should be saved.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "spear",
+        "section": "Melee weapons",
+        "sortOrder": 1,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/spear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Morningstar",
+        "category": "Melee weapons",
+        "damage": "70; 91 with Brawler; 112 with fully boosted Berserker",
+        "ammoOrUses": "No ammo",
+        "effect": "High melee hit damage",
+        "rateOrReload": "1 second swing rate",
+        "source": "Gold Chest",
+        "bestFor": "Heavy melee hits when the player can handle the slower swing.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "morningstar",
+        "section": "Melee weapons",
+        "sortOrder": 2,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/morningstar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Katana",
+        "category": "Melee weapons",
+        "damage": "25; 32.5 with Brawler; 40 with fully boosted Berserker",
+        "ammoOrUses": "No ammo",
+        "effect": "Faster Spear-style class melee",
+        "rateOrReload": "0.45 second swing rate",
+        "source": "Assassin Class",
+        "classRestriction": "Assassin Class only",
+        "bestFor": "Assassin melee runs that want Spear-style damage with a faster swing.",
+        "availability": "Class-only"
+      },
+      "system": {
+        "slug": "katana",
+        "section": "Melee weapons",
+        "sortOrder": 3,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/katana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Laser Sword",
+        "category": "Melee weapons",
+        "damage": "25; 30 at full charge; 2 during Alien Tech overheat; 32.5 with Brawler; 39 with Berserker full charge",
+        "ammoOrUses": "Uses Alien Tech Energy",
+        "effect": "Full-charge AoE hit; weak damage while overheated",
+        "rateOrReload": "0.5 second swing rate; Alien Tech recharge",
+        "source": "Alien Chest, Broken UFOs, Mothership UFOs",
+        "location": "Broken UFOs, Mothership UFOs",
+        "bestFor": "Alien-tech melee and small crowd hits when the charge bar is managed.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "laser-sword",
+        "section": "Melee weapons",
+        "sortOrder": 4,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/laser-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Sword",
+        "category": "Melee weapons",
+        "damage": "35; 45.5 with Brawler; 56 with fully boosted Berserker",
+        "ammoOrUses": "No ammo",
+        "effect": "Frost effect slows enemies",
+        "rateOrReload": "0.5 second swing rate",
+        "source": "Ice Chest",
+        "location": "Polar Bear Cave, Ice Temple",
+        "bestFor": "Melee control against fast enemies and snow-biome fights.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "ice-sword",
+        "section": "Melee weapons",
+        "sortOrder": 5,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/ice-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trident",
+        "category": "Melee weapons",
+        "damage": "37.5; 48.75 with Brawler; 61.8 with fully boosted Berserker",
+        "ammoOrUses": "No ammo",
+        "effect": "High-damage fishing weapon",
+        "rateOrReload": "0.6 second swing rate",
+        "source": "Fishing; gold presents from the 2025 Christmas event",
+        "location": "Lakes, Bone Pond",
+        "bestFor": "Rare melee upgrade from fishing, especially with melee-damage classes.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "trident",
+        "section": "Melee weapons",
+        "sortOrder": 6,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/trident.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poison Claws",
+        "category": "Melee weapons",
+        "damage": "30",
+        "ammoOrUses": "No ammo",
+        "effect": "Poison effect on hit; short range",
+        "rateOrReload": "0.2 second swing rate",
+        "source": "Jungle Chest",
+        "location": "Mother Temple bottom floor, Jungle Biome",
+        "bestFor": "Fast close-range poison damage when the player can handle short range.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "poison-claws",
+        "section": "Melee weapons",
+        "sortOrder": 7,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/poison-claws.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poison Spear",
+        "category": "Melee weapons",
+        "damage": "25; 32.5 with Brawler; 40 with fully boosted Berserker",
+        "ammoOrUses": "No ammo",
+        "effect": "Poison effect on hit",
+        "rateOrReload": "0.5 second swing rate",
+        "source": "Frog Chest; Frog Pond dock; gold presents",
+        "location": "Frog Pond",
+        "bestFor": "Spear-style kiting with poison chip damage.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "poison-spear",
+        "section": "Melee weapons",
+        "sortOrder": 8,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/poison-spear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infernal Sword",
+        "category": "Melee weapons",
+        "damage": "40 plus 10 burn damage per second",
+        "ammoOrUses": "No ammo",
+        "effect": "Burning effect; cooks meat drops when it gets the kill",
+        "rateOrReload": "0.5 second swing rate",
+        "source": "Red-spiked chest, Cultist King drop, Volcano sacrifice reward",
+        "location": "Volcanic Biome, Volcano",
+        "bestFor": "Volcanic-biome melee, burn utility, and food safety from cooked drops.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "infernal-sword",
+        "section": "Melee weapons",
+        "sortOrder": 9,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/infernal-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidiron Hammer",
+        "category": "Melee weapons",
+        "damage": "70; 91 with Brawler; 112 with fully boosted Berserker; about 60 explosion damage when charged",
+        "ammoOrUses": "No ammo",
+        "effect": "Hit meter triggers an explosion when full",
+        "rateOrReload": "0.9 second swing rate",
+        "source": "Obsidiron Chest; event/reward routes noted by source",
+        "bestFor": "Heavy melee hits with occasional area burst once the meter fills.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "obsidiron-hammer",
+        "section": "Melee weapons",
+        "sortOrder": 10,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/obsidiron-hammer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scythe",
+        "category": "Melee weapons",
+        "damage": "60; 78 with Brawler",
+        "ammoOrUses": "No ammo",
+        "effect": "Life-steal style health regeneration after enough hits",
+        "rateOrReload": "0.7 second swing rate",
+        "source": "Vampire Chest; Thanksgiving Table",
+        "location": "The Hedge Maze",
+        "bestFor": "Sustained melee combat where health regeneration can keep the run alive.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "scythe",
+        "section": "Melee weapons",
+        "sortOrder": 11,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/scythe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Scythe",
+        "category": "Melee weapons",
+        "damage": "45",
+        "ammoOrUses": "No ammo",
+        "effect": "Blood meter shared with Vampire Cloak; heals when filled",
+        "rateOrReload": "0.7 second swing rate",
+        "source": "Vampire Class",
+        "classRestriction": "Vampire Class only",
+        "bestFor": "Vampire class melee sustain and Cultist Stronghold-style fights.",
+        "availability": "Class-only"
+      },
+      "system": {
+        "slug": "vampire-scythe",
+        "section": "Melee weapons",
+        "sortOrder": 12,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/vampire-scythe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Revolver",
+        "category": "Ranged weapons",
+        "damage": "25; 37.5 headshot",
+        "ammoOrUses": "Revolver Ammo; 6-shot cylinder",
+        "effect": "Single-target ranged damage",
+        "rateOrReload": "2 second fire rate; 5 second reload",
+        "source": "Armory, Good Chest, Iron Chest, Pelt Trader second trade, Ranger Class",
+        "location": "Gunsmith Shed",
+        "classRestriction": "Ranger Class starts with one",
+        "bestFor": "Early ranged damage and pulling enemies before stronger headshot weapons.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "revolver",
+        "section": "Ranged weapons",
+        "sortOrder": 20,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/revolver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rifle",
+        "category": "Ranged weapons",
+        "damage": "60; 90 headshot",
+        "ammoOrUses": "Rifle Ammo; 1 shot per reload",
+        "effect": "High single-shot ranged damage",
+        "rateOrReload": "5 second reload",
+        "source": "Gunsmith Shed, Iron Chest, Legendary Chest, Pelt Trader third trade",
+        "location": "Gunsmith Shed",
+        "bestFor": "Headshot damage on wolves, alpha wolves, bears, and other dangerous targets.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "rifle",
+        "section": "Ranged weapons",
+        "sortOrder": 21,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tactical Shotgun",
+        "category": "Ranged weapons",
+        "damage": "8 pellets per shot; 10 per pellet; 20 per pellet on headshot; 80 or 160 potential per shot; 256 with max Berserker",
+        "ammoOrUses": "Shotgun Ammo; 3-shot magazine; starts with 43 shells when first picked up",
+        "effect": "Pellet spread burst damage",
+        "rateOrReload": "2 second fire rate; 5 second reload",
+        "source": "Ruby Chest; chance as a Workshop crafting recipe",
+        "craftingRequirement": "Crafting recipe can appear at the Workshop; exact recipe not listed in available listings",
+        "location": "Workshop",
+        "bestFor": "Close-range burst against groups and high-pressure fights.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "tactical-shotgun",
+        "section": "Ranged weapons",
+        "sortOrder": 22,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/tactical-shotgun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Air Rifle",
+        "category": "Ranged weapons",
+        "damage": "1",
+        "ammoOrUses": "Infinite ammo; 8 bullets per shot",
+        "effect": "Very low damage; shooting-gallery utility",
+        "rateOrReload": "Not listed",
+        "source": "Third Carnival Game / Shooting Gallery minigame",
+        "location": "Carnival",
+        "bestFor": "Carnival shooting game, enemy aggro, or health testing rather than real damage.",
+        "availability": "Event/minigame route"
+      },
+      "system": {
+        "slug": "air-rifle",
+        "section": "Ranged weapons",
+        "sortOrder": 23,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/air-rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raygun",
+        "category": "Ranged weapons",
+        "damage": "10; 15 headshot",
+        "ammoOrUses": "Alien Tech Energy; about 13 shots before overheat at maximum fire rate",
+        "effect": "Hitscan alien weapon; overheats at zero Alien Tech Energy",
+        "rateOrReload": "Alien Tech Energy recharge; full overheat recharge about 9.5 seconds",
+        "source": "Broken UFOs, Mothership UFOs, Alien Chest, Alien Class",
+        "location": "Broken UFOs, Mothership UFOs",
+        "classRestriction": "Alien Class starts with one",
+        "bestFor": "Safe repeated ranged damage when ammo conservation matters.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "raygun",
+        "section": "Ranged weapons",
+        "sortOrder": 24,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/raygun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Laser Cannon",
+        "category": "Ranged weapons",
+        "damage": "70; 87.5 with Level 2 Cyborg Class",
+        "ammoOrUses": "Alien Tech Energy; infinite ammo but heavy charge use",
+        "effect": "AoE ranged blast; does not get headshot damage",
+        "rateOrReload": "7-8 second recharge/reload",
+        "source": "Broken UFOs, Mothership UFOs, Alien Chest, Cyborg Class, some event reward routes",
+        "location": "Broken UFOs, Mothership UFOs",
+        "classRestriction": "Cyborg Class starts with one",
+        "bestFor": "Crowd control and burst damage when the long recharge is worth it.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "laser-cannon",
+        "section": "Ranged weapons",
+        "sortOrder": 25,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/laser-cannon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flamethrower",
+        "category": "Ranged weapons",
+        "damage": "8.18 per tick; 163.6 DPS listed",
+        "ammoOrUses": "Fuel Canisters and Oil Barrels; 150 capacity",
+        "effect": "Burning effect; cooks meat drops when it gets the kill",
+        "rateOrReload": "0.05 second fire rate; no normal reload listed",
+        "source": "Pyromaniac Class",
+        "classRestriction": "Pyromaniac Class only",
+        "bestFor": "Short-range crowd control, rescues, and cooked food from animal kills.",
+        "availability": "Class-only"
+      },
+      "system": {
+        "slug": "flamethrower",
+        "section": "Ranged weapons",
+        "sortOrder": 26,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/flamethrower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blowpipe",
+        "category": "Ranged weapons",
+        "damage": "Not listed",
+        "ammoOrUses": "Unlimited reserve ammo; 3-shot magazine",
+        "effect": "Poison effect on hit",
+        "rateOrReload": "Slow reload; exact time not listed",
+        "source": "Frog Chest, fishing at Frog Pond, Poison Master Class, Vine Chest",
+        "location": "Frog Pond, Jungle Biome",
+        "classRestriction": "Poison Master Class can provide it",
+        "bestFor": "Poison ranged pressure when exact damage is less important than effect and uptime.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "blowpipe",
+        "section": "Ranged weapons",
+        "sortOrder": 27,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/blowpipe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crossbow",
+        "category": "Ranged weapons",
+        "damage": "~30-40",
+        "ammoOrUses": "Infinite reserve ammo; 1 shot loaded",
+        "effect": "Ballistic arc projectile",
+        "rateOrReload": "Fire rate 1; about 3 second reload",
+        "source": "Hot Chest",
+        "location": "Volcanic Biome",
+        "bestFor": "Volcanic-biome ranged poke between stronger weapon reloads.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "crossbow",
+        "section": "Ranged weapons",
+        "sortOrder": 28,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/crossbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infernal Crossbow",
+        "category": "Ranged weapons",
+        "damage": "55 plus 10 burn damage per second",
+        "ammoOrUses": "Infinite ammo; 1 shot before reload",
+        "effect": "Burning effect; cooks meat drops when it gets the kill",
+        "rateOrReload": "Slightly faster reload than Crossbow; exact time not listed",
+        "source": "Red-spiked chest, Cultist King drop, Volcano sacrifice reward, Fire Bandit Class",
+        "location": "Volcanic Biome, Volcano",
+        "classRestriction": "Fire Bandit Class can provide it",
+        "bestFor": "Burning ranged damage with infinite ammo in volcanic routes.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "infernal-crossbow",
+        "section": "Ranged weapons",
+        "sortOrder": 29,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/infernal-crossbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowball",
+        "category": "Throwables and limited-use weapons",
+        "damage": "Low damage; exact value not listed",
+        "ammoOrUses": "40-infinite listed by source; some Christmas shovel snowballs had 5 uses",
+        "effect": "Frost effect slows enemies",
+        "rateOrReload": "Throwable; reload not listed",
+        "source": "Snow Chest; Gambler Class rare occasions",
+        "location": "Snow Biome, medium snow cabins, large snow cabins, North Pole biome during Christmas event",
+        "classRestriction": "Gambler Class rare occasions listed",
+        "bestFor": "Slowing enemies while escaping or setting up stronger damage.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "snowball",
+        "section": "Throwables and limited-use weapons",
+        "sortOrder": 40,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/snowball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Shuriken",
+        "category": "Throwables and limited-use weapons",
+        "damage": "Lower than Kunai; exact value not listed",
+        "ammoOrUses": "70-infinite listed by source",
+        "effect": "Frost effect slows enemies",
+        "rateOrReload": "Throwable; reload not listed",
+        "source": "Ice Chest",
+        "location": "Ice Temple, Polar Bear Cave",
+        "bestFor": "Slowing hordes and fast enemies before finishing with stronger damage.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "frozen-shuriken",
+        "section": "Throwables and limited-use weapons",
+        "sortOrder": 41,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/frozen-shuriken.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kunai",
+        "category": "Throwables and limited-use weapons",
+        "damage": "35",
+        "ammoOrUses": "100 capacity; 120 with Assassin Class; disappears from inventory when out of ammo",
+        "effect": "Non-reloading thrown ranged weapon",
+        "rateOrReload": "Fire rate around Raygun; no reload",
+        "source": "Ruby Chest; Assassin Class; Assassin chest spawn chance",
+        "classRestriction": "Assassin Class can provide it and improve capacity",
+        "bestFor": "Fast ranged damage in raids or dangerous rooms before the stack runs out.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "kunai",
+        "section": "Throwables and limited-use weapons",
+        "sortOrder": 42,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/kunai.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wildfire",
+        "category": "Throwables and limited-use weapons",
+        "damage": "Tick damage from fire puddles; exact value not listed",
+        "ammoOrUses": "One-time-use throwable; stacks in one slot",
+        "effect": "Fire puddles apply burning effect",
+        "rateOrReload": "Throwable; one use per Wildfire",
+        "source": "Hot Chest, Cultist King, Fire Bandit Class",
+        "location": "Volcanic Biome",
+        "classRestriction": "Fire Bandit Class can provide it",
+        "bestFor": "Area denial and crowd damage against clustered enemies or tanky threats.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "wildfire",
+        "section": "Throwables and limited-use weapons",
+        "sortOrder": 43,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/wildfire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Witch Potion",
+        "category": "Throwables and limited-use weapons",
+        "damage": "TBA / not listed",
+        "ammoOrUses": "Infinite uses; 6 second cooldown per throw",
+        "effect": "Damage, knockback, burning, poison, and teammate healing at Witch level 2",
+        "rateOrReload": "6 second cooldown",
+        "source": "Witch Class",
+        "classRestriction": "Witch Class only",
+        "bestFor": "Class-only support damage, poison/burn effects, and teammate healing.",
+        "availability": "Class-only"
+      },
+      "system": {
+        "slug": "witch-potion",
+        "section": "Throwables and limited-use weapons",
+        "sortOrder": 44,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/witch-potion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bouncing Blade",
+        "category": "Throwables and limited-use weapons",
+        "damage": "Not listed",
+        "ammoOrUses": "Limited; exact stack/use count not listed",
+        "effect": "Bounces from first target to nearby target; builds life-steal energy",
+        "rateOrReload": "Throwable; exact cooldown not listed",
+        "source": "Vampire Chest",
+        "bestFor": "Chain-hit utility when enemies are grouped and life-steal energy matters.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "bouncing-blade",
+        "section": "Throwables and limited-use weapons",
+        "sortOrder": 45,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/bouncing-blade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist Staff",
+        "category": "Special combat items",
+        "damage": "Not listed",
+        "ammoOrUses": "3 souls to summon a normal dead cultist; 10 souls for Cultist King",
+        "effect": "Summons cultists from defeated cultists using souls",
+        "rateOrReload": "Not listed",
+        "source": "Necromancer Class",
+        "classRestriction": "Necromancer Class only",
+        "bestFor": "Necromancer summon play, not direct weapon damage.",
+        "availability": "Class-only"
+      },
+      "system": {
+        "slug": "cultist-staff",
+        "section": "Special combat items",
+        "sortOrder": 50,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/cultist-staff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Riot Shield",
+        "category": "Defensive combat gear",
+        "damage": "No attack damage",
+        "ammoOrUses": "Held defensive item",
+        "effect": "Reduces damage when held; blocks arrows",
+        "rateOrReload": "No reload",
+        "source": "Ruby Chest, Tool Workshop",
+        "craftingRequirement": "Tool Workshop source listed; exact recipe not listed in available listings",
+        "location": "Tool Workshop",
+        "bestFor": "Blocking unavoidable damage or arrows before switching back to a weapon.",
+        "availability": "Obtainable"
+      },
+      "system": {
+        "slug": "riot-shield",
+        "section": "Defensive combat gear",
+        "sortOrder": 60,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/riot-shield.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Admin Gun",
+        "category": "Unavailable and admin-only weapons",
+        "damage": "75",
+        "ammoOrUses": "Infinite ammo listed",
+        "effect": "Very fast admin-only gun",
+        "rateOrReload": "0.01 fire rate; 0.01 reload time",
+        "source": "Admin / Update Party only",
+        "bestFor": "Historical reference only; not a normal run goal.",
+        "availability": "Admin-only / unavailable"
+      },
+      "system": {
+        "slug": "admin-gun",
+        "section": "Unavailable and admin-only weapons",
+        "sortOrder": 70,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/admin-gun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Friendly Gun",
+        "category": "Unavailable and admin-only weapons",
+        "damage": "Not listed",
+        "ammoOrUses": "Not listed",
+        "effect": "Unavailable gun with Raygun model; source says it can kill teammates",
+        "rateOrReload": "Very fast fire rate and no recharge time per Items table; exact values not listed",
+        "source": "Update Party only",
+        "bestFor": "Historical reference only; not a normal run goal.",
+        "availability": "Unavailable"
+      },
+      "system": {
+        "slug": "friendly-gun",
+        "section": "Unavailable and admin-only weapons",
+        "sortOrder": 71,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/friendly-gun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cultist King Mace",
+        "category": "Unavailable and admin-only weapons",
+        "damage": "Not listed",
+        "ammoOrUses": "No ammo",
+        "effect": "Admin-only melee mace",
+        "rateOrReload": "Not listed",
+        "source": "Admin-only",
+        "location": "Cultist King Palace reference",
+        "bestFor": "Stale-guide clarity around false drop rumors.",
+        "availability": "Admin-only / unobtainable"
+      },
+      "system": {
+        "slug": "cultist-king-mace",
+        "section": "Unavailable and admin-only weapons",
+        "sortOrder": 72,
+        "image": "/99%20Nights%20in%20the%20Forest/Weapons/cultist-king-mace.png"
+      }
+    }
+  ]
+}

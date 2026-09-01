@@ -1,0 +1,858 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Dress To Impress",
+    "gameSlug": "dress-to-impress",
+    "collection": "pose-packs",
+    "route": "/wiki/dress-to-impress/pose-packs",
+    "catalogCode": "dress-to-impress-pose-packs",
+    "itemFields": [
+      "sourceRoute",
+      "source",
+      "price",
+      "currency",
+      "poseCount",
+      "poseCountStatus",
+      "availability",
+      "duoNote",
+      "packNote",
+      "updateContext"
+    ],
+    "columns": [
+      "sourceRoute",
+      "source",
+      "price",
+      "currency",
+      "poseCount",
+      "poseCountStatus",
+      "availability",
+      "duoNote",
+      "packNote",
+      "updateContext"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Starter pose packs",
+        "Standard shop pose packs",
+        "Seasonal pose packs",
+        "Reward pose packs",
+        "Collaboration pose packs",
+        "Retired pose packs"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "sourceRoute",
+        "source",
+        "price",
+        "currency",
+        "poseCount",
+        "poseCountStatus"
+      ],
+      "tableFields": [
+        "sourceRoute",
+        "source",
+        "price",
+        "currency",
+        "poseCount",
+        "poseCountStatus",
+        "availability",
+        "duoNote"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Starter Solo Pose Pack",
+        "sourceRoute": "Included for all players",
+        "source": "Included for all players",
+        "price": "Free",
+        "poseCount": 22,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent starter pack",
+        "packNote": "Solo starter poses included at the start."
+      },
+      "system": {
+        "slug": "starter-solo-pose-pack",
+        "section": "Starter pose packs",
+        "sortOrder": 1,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/starter-solo-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starter Duo Pose Pack",
+        "sourceRoute": "Included for all players",
+        "source": "Included for all players",
+        "price": "Free",
+        "poseCount": 29,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent starter pack",
+        "duoNote": "Starter duo poses for two-player presentation."
+      },
+      "system": {
+        "slug": "starter-duo-pose-pack",
+        "section": "Starter pose packs",
+        "sortOrder": 2,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/starter-duo-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Editorial Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "2,500 Cash",
+        "currency": "Cash",
+        "poseCount": 7,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Editorial and magazine-style runway poses.",
+        "updateContext": "[[Summer/2024, released August 1, 2024"
+      },
+      "system": {
+        "slug": "editorial-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 3,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/editorial-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Duo Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "3,000 Cash",
+        "currency": "Cash",
+        "poseCount": 11,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "duoNote": "Duo-focused shop pack for posing with another player.",
+        "updateContext": "[[Halloween/2025, released October 18, 2025"
+      },
+      "system": {
+        "slug": "duo-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 4,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/duo-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Messy Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "4,000 Cash",
+        "currency": "Cash",
+        "poseCountStatus": "unverified; pose table count 8 differs from listed count 7",
+        "availability": "Permanent shop pack",
+        "packNote": "Messy or chaotic presentation style.",
+        "updateContext": "Runway Chaos, released September 27, 2025"
+      },
+      "system": {
+        "slug": "messy-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 5,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/messy-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Emote Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "4,000 Cash",
+        "currency": "Cash",
+        "poseCount": 13,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Emote-style poses for expressive runway moments.",
+        "updateContext": "[[Winter/2024, released December 14, 2024"
+      },
+      "system": {
+        "slug": "emote-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 6,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/emote-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Troll Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "2,900 Cash",
+        "currency": "Cash",
+        "poseCount": 6,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Meme and joke-style poses.",
+        "updateContext": "[[Halloween/2024, released October 19, 2024"
+      },
+      "system": {
+        "slug": "troll-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 7,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/troll-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hand Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "4,500 Cash",
+        "currency": "Cash",
+        "poseCountStatus": "unverified; pose table count 9 differs from listed count 8",
+        "availability": "Permanent shop pack",
+        "packNote": "Hand-focused presentation poses.",
+        "updateContext": "[[Halloween/2024, released October 19, 2024"
+      },
+      "system": {
+        "slug": "hand-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 8,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/hand-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fairy Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "3,200 Cash",
+        "currency": "Cash",
+        "poseCount": 4,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Fairy and soft fantasy pose style.",
+        "updateContext": "[[Halloween/2024, released October 19, 2024"
+      },
+      "system": {
+        "slug": "fairy-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 9,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/fairy-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dance Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "2,000 Cash",
+        "currency": "Cash",
+        "poseCount": 3,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Dance-themed poses.",
+        "updateContext": "[[Halloween/2024, released October 19, 2024"
+      },
+      "system": {
+        "slug": "dance-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 10,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/dance-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Masculine Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "2,000 Cash",
+        "currency": "Cash",
+        "poseCount": 7,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Masculine runway stance options.",
+        "updateContext": "[[Summer/2024, released August 1, 2024"
+      },
+      "system": {
+        "slug": "masculine-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 11,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/masculine-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mermaid Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "3,500 Cash",
+        "currency": "Cash",
+        "poseCount": 10,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Mermaid and sea-fantasy presentation style.",
+        "updateContext": "[[Summer/2024, released June 29, 2024"
+      },
+      "system": {
+        "slug": "mermaid-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 12,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/mermaid-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Goddess Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "3,000 Cash",
+        "currency": "Cash",
+        "poseCount": 8,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Elegant goddess-themed runway poses.",
+        "updateContext": "[[Summer/2024, released June 29, 2024"
+      },
+      "system": {
+        "slug": "goddess-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 13,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/goddess-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baddies Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "4,000 Cash",
+        "currency": "Cash",
+        "poseCount": 4,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Bold baddie-style poses.",
+        "updateContext": "[[Summer/2024, released June 29, 2024"
+      },
+      "system": {
+        "slug": "baddies-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 14,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/baddies-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gala Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "5,000 Cash",
+        "currency": "Cash",
+        "poseCount": 10,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Formal gala presentation poses.",
+        "updateContext": "[[Summer/2024, released June 29, 2024"
+      },
+      "system": {
+        "slug": "gala-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 15,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/gala-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "K-Pop Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "4,500 Cash",
+        "currency": "Cash",
+        "poseCount": 15,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "K-pop idol and performance-style poses."
+      },
+      "system": {
+        "slug": "k-pop-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 16,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/k-pop-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crazy Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "2,000 Cash",
+        "currency": "Cash",
+        "poseCount": 8,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Exaggerated and chaotic pose style."
+      },
+      "system": {
+        "slug": "crazy-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 17,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/crazy-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pop Culture Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "1,800 Cash",
+        "currency": "Cash",
+        "poseCount": 7,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Pop-culture-inspired poses."
+      },
+      "system": {
+        "slug": "pop-culture-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 18,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/pop-culture-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Supermodel Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "3,200 Cash",
+        "currency": "Cash",
+        "poseCount": 11,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Permanent shop pack",
+        "packNote": "Classic supermodel runway poses."
+      },
+      "system": {
+        "slug": "supermodel-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 19,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/supermodel-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kawaii Pose Pack",
+        "sourceRoute": "Shop",
+        "source": "Shop",
+        "price": "4,000 Cash",
+        "currency": "Cash",
+        "poseCountStatus": "unverified; pose table count 18 differs from listed count 14",
+        "availability": "Permanent shop pack",
+        "packNote": "Cute and bubbly pose style."
+      },
+      "system": {
+        "slug": "kawaii-pose-pack",
+        "section": "Standard shop pose packs",
+        "sortOrder": 20,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/kawaii-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LOVE! Pose Pack",
+        "sourceRoute": "Shop during Valentine's updates",
+        "source": "Shop during Valentine's updates",
+        "price": "1,200 Candy Hearts",
+        "currency": "Candy Hearts",
+        "poseCount": 8,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Seasonal Valentine's pack",
+        "packNote": "Valentine-themed pose pack.",
+        "updateContext": "Valentine's 2026, released February 7, 2026"
+      },
+      "system": {
+        "slug": "love-pose-pack",
+        "section": "Seasonal pose packs",
+        "sortOrder": 21,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/love-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Petal Pose Pack",
+        "sourceRoute": "Shop during Spring updates",
+        "source": "Shop during Spring updates",
+        "price": "6,000 Cash",
+        "currency": "Cash",
+        "poseCountStatus": "unverified; infobox/prose disagree (13 vs 12)",
+        "availability": "Seasonal Spring pack",
+        "packNote": "Spring and floral-themed pose style.",
+        "updateContext": "[[Spring/2025, released April 26, 2025"
+      },
+      "system": {
+        "slug": "petal-pose-pack",
+        "section": "Seasonal pose packs",
+        "sortOrder": 22,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/petal-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine's Pose Pack",
+        "sourceRoute": "Shop during Valentine's updates",
+        "source": "Shop during Valentine's updates",
+        "price": "6,000 Cash",
+        "currency": "Cash",
+        "poseCount": 14,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Seasonal Valentine's pack",
+        "packNote": "Valentine-themed pose pack.",
+        "updateContext": "Valentine's 2025, released February 8, 2025"
+      },
+      "system": {
+        "slug": "valentine-s-pose-pack",
+        "section": "Seasonal pose packs",
+        "sortOrder": 23,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/valentine-s-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Pose Pack",
+        "sourceRoute": "Shop during Winter updates",
+        "source": "Shop during Winter updates",
+        "price": "7,000 Cash",
+        "currency": "Cash",
+        "poseCount": 15,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Seasonal Winter pack",
+        "packNote": "Winter-themed poses; notes some VFX poses.",
+        "updateContext": "Winter 2024, released December 14, 2024"
+      },
+      "system": {
+        "slug": "winter-pose-pack",
+        "section": "Seasonal pose packs",
+        "sortOrder": 24,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/winter-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween Pose Pack",
+        "sourceRoute": "Shop during Halloween updates",
+        "source": "Shop during Halloween updates",
+        "price": "4,600 Cash",
+        "currency": "Cash",
+        "poseCount": 8,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Seasonal Halloween pack",
+        "packNote": "Halloween-themed poses.",
+        "updateContext": "Halloween 2024, released October 19, 2024"
+      },
+      "system": {
+        "slug": "halloween-pose-pack",
+        "section": "Seasonal pose packs",
+        "sortOrder": 25,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/halloween-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Pose Pack",
+        "sourceRoute": "Shop during Summer updates",
+        "source": "Shop during Summer updates",
+        "price": "4,300 Cash",
+        "currency": "Cash",
+        "poseCount": 10,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Seasonal Summer pack",
+        "packNote": "Summer-themed poses.",
+        "updateContext": "[[Summer/2024, released June 29, 2024"
+      },
+      "system": {
+        "slug": "summer-pose-pack",
+        "section": "Seasonal pose packs",
+        "sortOrder": 26,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/summer-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Idol Pose Pack",
+        "sourceRoute": "Reached Tier 18 of the Spring 2026 Baddie Pass",
+        "source": "Reached Tier 18 of the Spring 2026 Baddie Pass",
+        "price": "Free",
+        "poseCountStatus": "unverified; listing says (?) poses",
+        "availability": "Limited-time reward",
+        "packNote": "Idol-themed reward pack.",
+        "updateContext": "Trip to Tokyo, released April 4, 2026"
+      },
+      "system": {
+        "slug": "idol-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 27,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/idol-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cosplay Pose Pack",
+        "sourceRoute": "Reached Tier 16 of the Halloween 2025 Diamond Baddie Pass",
+        "source": "Reached Tier 16 of the Halloween 2025 Diamond Baddie Pass",
+        "price": "Free",
+        "poseCount": 6,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Limited-time reward",
+        "packNote": "Cosplay-themed reward pack.",
+        "updateContext": "Halloween 2025, released October 18, 2025"
+      },
+      "system": {
+        "slug": "cosplay-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 28,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/cosplay-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "VFX Pose Pack",
+        "sourceRoute": "Reached Tier 16 of the Halloween 2025 Baddie Pass",
+        "source": "Reached Tier 16 of the Halloween 2025 Baddie Pass",
+        "price": "Free",
+        "poseCount": 7,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Limited-time reward",
+        "packNote": "VFX pose pack with effect-styled poses.",
+        "updateContext": "Halloween 2025, released October 18, 2025"
+      },
+      "system": {
+        "slug": "vfx-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 29,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/vfx-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sun-Kissed Pose Pack",
+        "sourceRoute": "Reached Tier 21 of the Summer 2025 Baddie Pass",
+        "source": "Reached Tier 21 of the Summer 2025 Baddie Pass",
+        "price": "Free",
+        "poseCount": 7,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Limited-time reward",
+        "packNote": "Sun and summer-themed reward poses.",
+        "updateContext": "Summer 2025, released June 28, 2025"
+      },
+      "system": {
+        "slug": "sun-kissed-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 30,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/sun-kissed-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquamarine Pose Pack",
+        "sourceRoute": "Watched the Cutscene Live Event cutscene",
+        "source": "Watched the Cutscene Live Event cutscene",
+        "price": "Free",
+        "poseCount": 2,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Limited-time reward",
+        "packNote": "Cutscene live-event reward pack.",
+        "updateContext": "[[Cutscene_Live_Event, released June 7, 2025"
+      },
+      "system": {
+        "slug": "aquamarine-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 31,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/aquamarine-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Egg Hunt 2025 Pose",
+        "sourceRoute": "Completed the Easter 2025 Egg Hunt",
+        "source": "Completed the Easter 2025 Egg Hunt",
+        "price": "Free",
+        "poseCountStatus": "unverified; no clear count found",
+        "availability": "Seasonal reward",
+        "packNote": "Single-pose Easter reward pack; listing says it returned in Easter 2026.",
+        "updateContext": "Easter 2025, released April 19, 2025"
+      },
+      "system": {
+        "slug": "easter-egg-hunt-2025-pose",
+        "section": "Reward pose packs",
+        "sortOrder": 32,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/easter-egg-hunt-2025-pose.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Skating Pose Pack",
+        "sourceRoute": "Day 5 reward from the 2024 Advent Calendar",
+        "source": "Day 5 reward from the 2024 Advent Calendar",
+        "price": "Free",
+        "poseCount": 4,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Limited-time reward",
+        "packNote": "Ice-skating themed advent reward pack.",
+        "updateContext": "Winter 2024, released December 18, 2024"
+      },
+      "system": {
+        "slug": "ice-skating-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 33,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/ice-skating-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "One Billion Pose Pack",
+        "sourceRoute": "Clicked the 1B balloon during Summer 2024",
+        "source": "Clicked the 1B balloon during Summer 2024",
+        "price": "Free",
+        "poseCount": 2,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Limited-time reward",
+        "packNote": "Celebration reward for the one-billion-visits event."
+      },
+      "system": {
+        "slug": "one-billion-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 34,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/one-billion-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roblox Classic Pose Pack",
+        "sourceRoute": "Completed the Roblox The Classic quest",
+        "source": "Completed the Roblox The Classic quest",
+        "price": "Free",
+        "poseCountStatus": "unverified; pose table count 2 differs from listed count 1",
+        "availability": "Limited-time reward",
+        "packNote": "Roblox Classic event reward pack."
+      },
+      "system": {
+        "slug": "roblox-classic-pose-pack",
+        "section": "Reward pose packs",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "KATSEYE Dance Pack",
+        "sourceRoute": "Played during the DTI x KATSEYE update",
+        "source": "Played during the DTI x KATSEYE update",
+        "price": "Free",
+        "poseCount": 5,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Collaboration grant",
+        "packNote": "KATSEYE dance collaboration pack.",
+        "updateContext": "DTI x KATSEYE, released April 18, 2026"
+      },
+      "system": {
+        "slug": "katseye-dance-pack",
+        "section": "Collaboration pose packs",
+        "sortOrder": 36,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/katseye-dance-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wicked Pose Pack",
+        "sourceRoute": "Played during the DTI x Wicked: For Good update",
+        "source": "Played during the DTI x Wicked: For Good update",
+        "price": "Free",
+        "poseCountStatus": "unverified; pose table count 12 differs from listed count 9",
+        "availability": "Collaboration grant",
+        "packNote": "Wicked collaboration pose pack.",
+        "updateContext": "DTI x Wicked: For Good, released November 8, 2025"
+      },
+      "system": {
+        "slug": "wicked-pose-pack",
+        "section": "Collaboration pose packs",
+        "sortOrder": 37,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/wicked-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lady Gaga Pose Pack",
+        "sourceRoute": "Played during the DTI x Lady Gaga update",
+        "source": "Played during the DTI x Lady Gaga update",
+        "price": "Free",
+        "poseCountStatus": "unverified; pose table count 10 differs from listed count 7",
+        "availability": "Collaboration grant",
+        "duoNote": "available listing includes Lady Gaga collaboration poses and has a pose-count conflict with its table.",
+        "packNote": "Lady Gaga collaboration pose pack.",
+        "updateContext": "DTI x Lady Gaga, released August 16, 2025"
+      },
+      "system": {
+        "slug": "lady-gaga-pose-pack",
+        "section": "Collaboration pose packs",
+        "sortOrder": 38,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/lady-gaga-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brat Pose Pack",
+        "sourceRoute": "Played during the DTI x BRAT update",
+        "source": "Played during the DTI x BRAT update",
+        "price": "Free",
+        "poseCount": 8,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Collaboration grant",
+        "packNote": "BRAT collaboration pose pack.",
+        "updateContext": "DTI x Brat, released August 17, 2024"
+      },
+      "system": {
+        "slug": "brat-pose-pack",
+        "section": "Collaboration pose packs",
+        "sortOrder": 39,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/brat-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sci-Fi Pose Pack",
+        "sourceRoute": "Removed from the shop on November 23, 2024",
+        "source": "Removed from the shop on November 23, 2024",
+        "price": "2,000 Cash",
+        "currency": "Cash",
+        "poseCount": 10,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Retired",
+        "packNote": "Former Sci-Fi shop pack."
+      },
+      "system": {
+        "slug": "sci-fi-pose-pack",
+        "section": "Retired pose packs",
+        "sortOrder": 40,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/sci-fi-pose-pack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fantasy Pose Pack",
+        "sourceRoute": "Removed from the shop on November 23, 2024",
+        "source": "Removed from the shop on November 23, 2024",
+        "price": "1,000 Cash",
+        "currency": "Cash",
+        "poseCount": 4,
+        "poseCountStatus": "verified from individual page",
+        "availability": "Retired",
+        "packNote": "Former fantasy shop pack."
+      },
+      "system": {
+        "slug": "fantasy-pose-pack",
+        "section": "Retired pose packs",
+        "sortOrder": 41,
+        "image": "/Dress%20To%20Impress/Pose%20Packs/fantasy-pose-pack.webp"
+      }
+    }
+  ]
+}

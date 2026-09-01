@@ -1,0 +1,973 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "props",
+    "route": "/wiki/brookhaven-rp/props",
+    "catalogCode": "brookhaven-rp-props",
+    "itemFields": [
+      "category"
+    ],
+    "columns": [
+      "category"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Lights Props (WIP)",
+        "Make-up Props (WIP)",
+        "Military Related Props (WIP)",
+        "Signs Props (WIP)",
+        "Buildings and Outside Props (WIP)",
+        "Animals Props (WIP)",
+        "Road Signs",
+        "House Props",
+        "Money Props",
+        "Food Props",
+        "Fences & Wood Props",
+        "Auto Parts Props",
+        "Baby & Toys Props",
+        "Nature Props",
+        "Electronics Props",
+        "Repair Props",
+        "Fire Props",
+        "Birthday Props",
+        "Skeleton & Coffin Props",
+        "Clothes Props",
+        "Cases Props",
+        "Trash Props",
+        "Caution Props",
+        "Horses Props",
+        "Small vehicles Props",
+        "Halloween Props",
+        "Christmas Props"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category"
+      ],
+      "tableFields": [
+        "category"
+      ],
+      "fieldPresentation": null
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Lighting props Icon",
+        "category": "Lights Props (WIP)"
+      },
+      "system": {
+        "slug": "lights-props-wip-lighting-props-icon",
+        "section": "Lights Props (WIP)",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Props/lights-props-wip-lighting-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-PROPS-LIGHTS1.png",
+        "category": "Lights Props (WIP)"
+      },
+      "system": {
+        "slug": "lights-props-wip-bh-props-lights1-png",
+        "section": "Lights Props (WIP)",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Props/lights-props-wip-bh-props-lights1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-PROPS-LIGHTS2.png",
+        "category": "Lights Props (WIP)"
+      },
+      "system": {
+        "slug": "lights-props-wip-bh-props-lights2-png",
+        "section": "Lights Props (WIP)",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Props/lights-props-wip-bh-props-lights2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Make-up props Icon",
+        "category": "Make-up Props (WIP)"
+      },
+      "system": {
+        "slug": "make-up-props-wip-make-up-props-icon",
+        "section": "Make-up Props (WIP)",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Props/make-up-props-wip-make-up-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-MAKE-UP-PROPS1.png",
+        "category": "Make-up Props (WIP)"
+      },
+      "system": {
+        "slug": "make-up-props-wip-bh-make-up-props1-png",
+        "section": "Make-up Props (WIP)",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Props/make-up-props-wip-bh-make-up-props1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-MAKE-UP-PROPS2.png",
+        "category": "Make-up Props (WIP)"
+      },
+      "system": {
+        "slug": "make-up-props-wip-bh-make-up-props2-png",
+        "section": "Make-up Props (WIP)",
+        "sortOrder": 6,
+        "image": "/Brookhaven%20RP/Props/make-up-props-wip-bh-make-up-props2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-MAKE-UP-PROPS3.png",
+        "category": "Make-up Props (WIP)"
+      },
+      "system": {
+        "slug": "make-up-props-wip-bh-make-up-props3-png",
+        "section": "Make-up Props (WIP)",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Props/make-up-props-wip-bh-make-up-props3-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Military props icon",
+        "category": "Military Related Props (WIP)"
+      },
+      "system": {
+        "slug": "military-related-props-wip-military-props-icon",
+        "section": "Military Related Props (WIP)",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Props/military-related-props-wip-military-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-MILITARY-ICONS1.png",
+        "category": "Military Related Props (WIP)"
+      },
+      "system": {
+        "slug": "military-related-props-wip-bh-military-icons1-png",
+        "section": "Military Related Props (WIP)",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Props/military-related-props-wip-bh-military-icons1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-MILITARY-ICONS2.png",
+        "category": "Military Related Props (WIP)"
+      },
+      "system": {
+        "slug": "military-related-props-wip-bh-military-icons2-png",
+        "section": "Military Related Props (WIP)",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Props/military-related-props-wip-bh-military-icons2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-MILITARY-ICONS3.png",
+        "category": "Military Related Props (WIP)"
+      },
+      "system": {
+        "slug": "military-related-props-wip-bh-military-icons3-png",
+        "section": "Military Related Props (WIP)",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Props/military-related-props-wip-bh-military-icons3-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Signs props icon",
+        "category": "Signs Props (WIP)"
+      },
+      "system": {
+        "slug": "signs-props-wip-signs-props-icon",
+        "section": "Signs Props (WIP)",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Props/signs-props-wip-signs-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-SIGNS-ICON1.png",
+        "category": "Signs Props (WIP)"
+      },
+      "system": {
+        "slug": "signs-props-wip-bh-signs-icon1-png",
+        "section": "Signs Props (WIP)",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Props/signs-props-wip-bh-signs-icon1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-SIGNS-ICON2.png",
+        "category": "Signs Props (WIP)"
+      },
+      "system": {
+        "slug": "signs-props-wip-bh-signs-icon2-png",
+        "section": "Signs Props (WIP)",
+        "sortOrder": 14,
+        "image": "/Brookhaven%20RP/Props/signs-props-wip-bh-signs-icon2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-SIGNS-ICON3.png",
+        "category": "Signs Props (WIP)"
+      },
+      "system": {
+        "slug": "signs-props-wip-bh-signs-icon3-png",
+        "section": "Signs Props (WIP)",
+        "sortOrder": 15,
+        "image": "/Brookhaven%20RP/Props/signs-props-wip-bh-signs-icon3-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-SIGNS-ICON4.png",
+        "category": "Signs Props (WIP)"
+      },
+      "system": {
+        "slug": "signs-props-wip-bh-signs-icon4-png",
+        "section": "Signs Props (WIP)",
+        "sortOrder": 16,
+        "image": "/Brookhaven%20RP/Props/signs-props-wip-bh-signs-icon4-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Playground props icon",
+        "category": "Buildings and Outside Props (WIP)"
+      },
+      "system": {
+        "slug": "buildings-and-outside-props-wip-playground-props-icon",
+        "section": "Buildings and Outside Props (WIP)",
+        "sortOrder": 17,
+        "image": "/Brookhaven%20RP/Props/buildings-and-outside-props-wip-playground-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-PROPS-ICONSSS1.png",
+        "category": "Buildings and Outside Props (WIP)"
+      },
+      "system": {
+        "slug": "buildings-and-outside-props-wip-bh-props-iconsss1-png",
+        "section": "Buildings and Outside Props (WIP)",
+        "sortOrder": 18,
+        "image": "/Brookhaven%20RP/Props/buildings-and-outside-props-wip-bh-props-iconsss1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-PROPS-ICONSSS2.png",
+        "category": "Buildings and Outside Props (WIP)"
+      },
+      "system": {
+        "slug": "buildings-and-outside-props-wip-bh-props-iconsss2-png",
+        "section": "Buildings and Outside Props (WIP)",
+        "sortOrder": 19,
+        "image": "/Brookhaven%20RP/Props/buildings-and-outside-props-wip-bh-props-iconsss2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Animal props Icon",
+        "category": "Animals Props (WIP)"
+      },
+      "system": {
+        "slug": "animals-props-wip-animal-props-icon",
+        "section": "Animals Props (WIP)",
+        "sortOrder": 20,
+        "image": "/Brookhaven%20RP/Props/animals-props-wip-animal-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-CATS-PROPS1.png",
+        "category": "Animals Props (WIP)"
+      },
+      "system": {
+        "slug": "animals-props-wip-bh-cats-props1-png",
+        "section": "Animals Props (WIP)",
+        "sortOrder": 21,
+        "image": "/Brookhaven%20RP/Props/animals-props-wip-bh-cats-props1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-CATS-PROPS2.png",
+        "category": "Animals Props (WIP)"
+      },
+      "system": {
+        "slug": "animals-props-wip-bh-cats-props2-png",
+        "section": "Animals Props (WIP)",
+        "sortOrder": 22,
+        "image": "/Brookhaven%20RP/Props/animals-props-wip-bh-cats-props2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-CATS-PROPS3.png",
+        "category": "Animals Props (WIP)"
+      },
+      "system": {
+        "slug": "animals-props-wip-bh-cats-props3-png",
+        "section": "Animals Props (WIP)",
+        "sortOrder": 23,
+        "image": "/Brookhaven%20RP/Props/animals-props-wip-bh-cats-props3-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Road signs props icon",
+        "category": "Road Signs"
+      },
+      "system": {
+        "slug": "road-signs-road-signs-props-icon",
+        "section": "Road Signs",
+        "sortOrder": 24,
+        "image": "/Brookhaven%20RP/Props/road-signs-road-signs-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-CONSTRUCTION.png",
+        "category": "Road Signs"
+      },
+      "system": {
+        "slug": "road-signs-bh-construction-png",
+        "section": "Road Signs",
+        "sortOrder": 25,
+        "image": "/Brookhaven%20RP/Props/road-signs-bh-construction-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House props Icon",
+        "category": "House Props"
+      },
+      "system": {
+        "slug": "house-props-house-props-icon",
+        "section": "House Props",
+        "sortOrder": 26,
+        "image": "/Brookhaven%20RP/Props/house-props-house-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-BED1.png",
+        "category": "House Props"
+      },
+      "system": {
+        "slug": "house-props-bh-bed1-png",
+        "section": "House Props",
+        "sortOrder": 27,
+        "image": "/Brookhaven%20RP/Props/house-props-bh-bed1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-BEDS1.png",
+        "category": "House Props"
+      },
+      "system": {
+        "slug": "house-props-bh-beds1-png",
+        "section": "House Props",
+        "sortOrder": 28,
+        "image": "/Brookhaven%20RP/Props/house-props-bh-beds1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-BEDDDS.png",
+        "category": "House Props"
+      },
+      "system": {
+        "slug": "house-props-bh-beddds-png",
+        "section": "House Props",
+        "sortOrder": 29,
+        "image": "/Brookhaven%20RP/Props/house-props-bh-beddds-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "ImageBH BEDS123.png",
+        "category": "House Props"
+      },
+      "system": {
+        "slug": "house-props-imagebh-beds123-png",
+        "section": "House Props",
+        "sortOrder": 30,
+        "image": "/Brookhaven%20RP/Props/house-props-imagebh-beds123-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Money props Icon",
+        "category": "Money Props"
+      },
+      "system": {
+        "slug": "money-props-money-props-icon",
+        "section": "Money Props",
+        "sortOrder": 31,
+        "image": "/Brookhaven%20RP/Props/money-props-money-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-MONEY`1.png",
+        "category": "Money Props"
+      },
+      "system": {
+        "slug": "money-props-bh-money-1-png",
+        "section": "Money Props",
+        "sortOrder": 32,
+        "image": "/Brookhaven%20RP/Props/money-props-bh-money-1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Food props icon",
+        "category": "Food Props"
+      },
+      "system": {
+        "slug": "food-props-food-props-icon",
+        "section": "Food Props",
+        "sortOrder": 33,
+        "image": "/Brookhaven%20RP/Props/food-props-food-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-FOOODS.png",
+        "category": "Food Props"
+      },
+      "system": {
+        "slug": "food-props-bh-fooods-png",
+        "section": "Food Props",
+        "sortOrder": 34,
+        "image": "/Brookhaven%20RP/Props/food-props-bh-fooods-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-FOFODS.png",
+        "category": "Food Props"
+      },
+      "system": {
+        "slug": "food-props-bh-fofods-png",
+        "section": "Food Props",
+        "sortOrder": 35,
+        "image": "/Brookhaven%20RP/Props/food-props-bh-fofods-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-FFODSS.png",
+        "category": "Food Props"
+      },
+      "system": {
+        "slug": "food-props-bh-ffodss-png",
+        "section": "Food Props",
+        "sortOrder": 36,
+        "image": "/Brookhaven%20RP/Props/food-props-bh-ffodss-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-FFOODDSS.png",
+        "category": "Food Props"
+      },
+      "system": {
+        "slug": "food-props-bh-ffooddss-png",
+        "section": "Food Props",
+        "sortOrder": 37,
+        "image": "/Brookhaven%20RP/Props/food-props-bh-ffooddss-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-ODDS.png",
+        "category": "Food Props"
+      },
+      "system": {
+        "slug": "food-props-bh-odds-png",
+        "section": "Food Props",
+        "sortOrder": 38,
+        "image": "/Brookhaven%20RP/Props/food-props-bh-odds-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Icon",
+        "category": "Fences & Wood Props"
+      },
+      "system": {
+        "slug": "fences-and-wood-props-the-icon",
+        "section": "Fences & Wood Props",
+        "sortOrder": 39,
+        "image": "/Brookhaven%20RP/Props/fences-and-wood-props-the-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-FENCES1.png",
+        "category": "Fences & Wood Props"
+      },
+      "system": {
+        "slug": "fences-and-wood-props-bh-fences1-png",
+        "section": "Fences & Wood Props",
+        "sortOrder": 40,
+        "image": "/Brookhaven%20RP/Props/fences-and-wood-props-bh-fences1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-FENCES2.png",
+        "category": "Fences & Wood Props"
+      },
+      "system": {
+        "slug": "fences-and-wood-props-bh-fences2-png",
+        "section": "Fences & Wood Props",
+        "sortOrder": 41,
+        "image": "/Brookhaven%20RP/Props/fences-and-wood-props-bh-fences2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The icon",
+        "category": "Auto Parts Props"
+      },
+      "system": {
+        "slug": "auto-parts-props-the-icon",
+        "section": "Auto Parts Props",
+        "sortOrder": 42,
+        "image": "/Brookhaven%20RP/Props/auto-parts-props-the-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Auto1.png",
+        "category": "Auto Parts Props"
+      },
+      "system": {
+        "slug": "auto-parts-props-auto1-png",
+        "section": "Auto Parts Props",
+        "sortOrder": 43,
+        "image": "/Brookhaven%20RP/Props/auto-parts-props-auto1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Auto123.png",
+        "category": "Auto Parts Props"
+      },
+      "system": {
+        "slug": "auto-parts-props-auto123-png",
+        "section": "Auto Parts Props",
+        "sortOrder": 44,
+        "image": "/Brookhaven%20RP/Props/auto-parts-props-auto123-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Autos.png",
+        "category": "Auto Parts Props"
+      },
+      "system": {
+        "slug": "auto-parts-props-autos-png",
+        "section": "Auto Parts Props",
+        "sortOrder": 45,
+        "image": "/Brookhaven%20RP/Props/auto-parts-props-autos-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Baby props Icon",
+        "category": "Baby & Toys Props"
+      },
+      "system": {
+        "slug": "baby-and-toys-props-baby-props-icon",
+        "section": "Baby & Toys Props",
+        "sortOrder": 46,
+        "image": "/Brookhaven%20RP/Props/baby-and-toys-props-baby-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH babies.png",
+        "category": "Baby & Toys Props"
+      },
+      "system": {
+        "slug": "baby-and-toys-props-bh-babies-png",
+        "section": "Baby & Toys Props",
+        "sortOrder": 47,
+        "image": "/Brookhaven%20RP/Props/baby-and-toys-props-bh-babies-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH babiess.png",
+        "category": "Baby & Toys Props"
+      },
+      "system": {
+        "slug": "baby-and-toys-props-bh-babiess-png",
+        "section": "Baby & Toys Props",
+        "sortOrder": 48,
+        "image": "/Brookhaven%20RP/Props/baby-and-toys-props-bh-babiess-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Icon",
+        "category": "Nature Props"
+      },
+      "system": {
+        "slug": "nature-props-icon",
+        "section": "Nature Props",
+        "sortOrder": 49,
+        "image": "/Brookhaven%20RP/Props/nature-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nature1.png",
+        "category": "Nature Props"
+      },
+      "system": {
+        "slug": "nature-props-nature1-png",
+        "section": "Nature Props",
+        "sortOrder": 50,
+        "image": "/Brookhaven%20RP/Props/nature-props-nature1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nature12.png",
+        "category": "Nature Props"
+      },
+      "system": {
+        "slug": "nature-props-nature12-png",
+        "section": "Nature Props",
+        "sortOrder": 51,
+        "image": "/Brookhaven%20RP/Props/nature-props-nature12-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nature1233.png",
+        "category": "Nature Props"
+      },
+      "system": {
+        "slug": "nature-props-nature1233-png",
+        "section": "Nature Props",
+        "sortOrder": 52,
+        "image": "/Brookhaven%20RP/Props/nature-props-nature1233-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-ELECTRICS.png",
+        "category": "Electronics Props"
+      },
+      "system": {
+        "slug": "electronics-props-bh-electrics-png",
+        "section": "Electronics Props",
+        "sortOrder": 53,
+        "image": "/Brookhaven%20RP/Props/electronics-props-bh-electrics-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "ImageBH-0.png",
+        "category": "Repair Props"
+      },
+      "system": {
+        "slug": "repair-props-imagebh-0-png",
+        "section": "Repair Props",
+        "sortOrder": 54,
+        "image": "/Brookhaven%20RP/Props/repair-props-imagebh-0-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "ImageBH-1.png",
+        "category": "Repair Props"
+      },
+      "system": {
+        "slug": "repair-props-imagebh-1-png",
+        "section": "Repair Props",
+        "sortOrder": 55,
+        "image": "/Brookhaven%20RP/Props/repair-props-imagebh-1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "ImageBH-2.png",
+        "category": "Repair Props"
+      },
+      "system": {
+        "slug": "repair-props-imagebh-2-png",
+        "section": "Repair Props",
+        "sortOrder": 56,
+        "image": "/Brookhaven%20RP/Props/repair-props-imagebh-2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Icon",
+        "category": "Fire Props"
+      },
+      "system": {
+        "slug": "fire-props-icon",
+        "section": "Fire Props",
+        "sortOrder": 57,
+        "image": "/Brookhaven%20RP/Props/fire-props-icon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-FIRE1.png",
+        "category": "Fire Props"
+      },
+      "system": {
+        "slug": "fire-props-bh-fire1-png",
+        "section": "Fire Props",
+        "sortOrder": 58,
+        "image": "/Brookhaven%20RP/Props/fire-props-bh-fire1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-BH-ICON.png",
+        "category": "Birthday Props"
+      },
+      "system": {
+        "slug": "birthday-props-bh-bh-icon-png",
+        "section": "Birthday Props",
+        "sortOrder": 59,
+        "image": "/Brookhaven%20RP/Props/birthday-props-bh-bh-icon-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BHBHBH.png",
+        "category": "Birthday Props"
+      },
+      "system": {
+        "slug": "birthday-props-bhbhbh-png",
+        "section": "Birthday Props",
+        "sortOrder": 60,
+        "image": "/Brookhaven%20RP/Props/birthday-props-bhbhbh-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeleton1.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-skeleton1-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 61,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-skeleton1-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeletons4.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-skeletons4-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 62,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-skeletons4-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeletons3.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-skeletons3-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 63,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-skeletons3-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeletons2.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-skeletons2-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 64,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-skeletons2-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Body.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-body-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 65,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-body-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wooden coffin.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-wooden-coffin-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 66,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-wooden-coffin-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Opened coffin.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-opened-coffin-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 67,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-opened-coffin-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coffin.png",
+        "category": "Skeleton & Coffin Props"
+      },
+      "system": {
+        "slug": "skeleton-and-coffin-props-coffin-png",
+        "section": "Skeleton & Coffin Props",
+        "sortOrder": 68,
+        "image": "/Brookhaven%20RP/Props/skeleton-and-coffin-props-coffin-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chlothes.png",
+        "category": "Clothes Props"
+      },
+      "system": {
+        "slug": "clothes-props-chlothes-png",
+        "section": "Clothes Props",
+        "sortOrder": 69,
+        "image": "/Brookhaven%20RP/Props/clothes-props-chlothes-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-cases.png",
+        "category": "Cases Props"
+      },
+      "system": {
+        "slug": "cases-props-bh-cases-png",
+        "section": "Cases Props",
+        "sortOrder": 70,
+        "image": "/Brookhaven%20RP/Props/cases-props-bh-cases-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-trash.png",
+        "category": "Trash Props"
+      },
+      "system": {
+        "slug": "trash-props-bh-trash-png",
+        "section": "Trash Props",
+        "sortOrder": 71,
+        "image": "/Brookhaven%20RP/Props/trash-props-bh-trash-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-CAUTION.png",
+        "category": "Caution Props"
+      },
+      "system": {
+        "slug": "caution-props-bh-caution-png",
+        "section": "Caution Props",
+        "sortOrder": 72,
+        "image": "/Brookhaven%20RP/Props/caution-props-bh-caution-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-Horses.png",
+        "category": "Horses Props"
+      },
+      "system": {
+        "slug": "horses-props-bh-horses-png",
+        "section": "Horses Props",
+        "sortOrder": 73,
+        "image": "/Brookhaven%20RP/Props/horses-props-bh-horses-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-SAMLL .png",
+        "category": "Small vehicles Props"
+      },
+      "system": {
+        "slug": "small-vehicles-props-bh-samll-png",
+        "section": "Small vehicles Props",
+        "sortOrder": 74,
+        "image": "/Brookhaven%20RP/Props/small-vehicles-props-bh-samll-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-HALLOWEEN.png",
+        "category": "Halloween Props"
+      },
+      "system": {
+        "slug": "halloween-props-bh-halloween-png",
+        "section": "Halloween Props",
+        "sortOrder": 75,
+        "image": "/Brookhaven%20RP/Props/halloween-props-bh-halloween-png.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BH-XMASX.png",
+        "category": "Christmas Props"
+      },
+      "system": {
+        "slug": "christmas-props-bh-xmasx-png",
+        "section": "Christmas Props",
+        "sortOrder": 76,
+        "image": "/Brookhaven%20RP/Props/christmas-props-bh-xmasx-png.webp"
+      }
+    }
+  ]
+}
