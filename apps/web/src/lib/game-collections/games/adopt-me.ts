@@ -4,7 +4,6 @@ export const adoptMeCollectionGroup = {
     gameSlug: "adopt-me",
     gameName: "Adopt Me",
     universeId: 383310974,
-    dataDir: "Adopt Me",
     universeNames: ["Adopt Me", "Adopt Me!"],
     collections: [
       "accessory-shop",

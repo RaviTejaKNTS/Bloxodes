@@ -2,7 +2,7 @@
 
 Status: Active
 Last verified: 2026-09-02
-Evidence: database-only web/mobile/tool loaders, immutable collection runtime tables, sync/readback scripts, managed-development and production parity audit, route tests, and production row counts
+Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive 36,068-key R2 byte/readability audit, live route/image checks, route tests, and production row counts
 
 ## Scope
 
@@ -17,7 +17,7 @@ These collections describe one game's durable systems and items—pets, weapons,
 ## Source and Data Ownership
 
 - Supabase is the only runtime source for collection page copy, display metadata, immutable dataset revisions, item rows, and media keys. Web, mobile, tools, sitemaps, and related-content loaders do not read collection JSON from the repository.
-- Repository game-collection and quiz datasets are retired. Existing collection work starts by exporting the published database revision to `tmp/content-workspace/<game-slug>/collections/<collection-slug>/`; new work creates the same ignored workspace contract. Each collection workspace owns `dataset.json`, `media/`, `final.json`, and `runtime-manifest.json` until an immutable database/R2 revision is published.
+- Repository game-collection and quiz datasets have been removed. Existing collection work starts by exporting the published database revision to `tmp/content-workspace/<game-slug>/collections/<collection-slug>/`; new work creates the same ignored workspace contract. Each collection workspace owns `dataset.json`, `media/`, `final.json`, and `runtime-manifest.json` until an immutable database/R2 revision is published.
 - `wiki_pages` owns hub copy, controls, tips, metadata, and game identity.
 - `wiki_collection_pages` owns collection page copy, route identity, display configuration, and publication state.
 - Collection codes use `<game-slug>-<collection-slug>`; `wiki_slug` must use the editorial game slug, never a stats/universe slug.
@@ -48,6 +48,10 @@ Use the matching wiki and game-collection workflow skills. For existing datasets
 Collection image manifests are authoring inputs. Runtime item media is stored by immutable R2 object key in `wiki_collection_items` and served through the wiki-media worker. A collection is not ready merely because its copy exists: every item count, media key, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
 
 Wiki hub images have separate roles. `/wiki` cards and social previews use the first official 768x432 universe thumbnail. The square artwork beside a wiki title uses the current official 512x512 universe icon. Universe linking fetches missing official media immediately, rotating enrichment replaces the active fields and primary rows with Roblox's current media while retaining prior URLs as history, and `sync-game-wiki-runtime.ts` refuses publication unless both roles exist. Wiki finals must leave `cover_image` null; a reviewed exception requires the explicit `--allow-cover-override` flag.
+
+The legacy public game-image migration completed on 2026-09-02. Managed development and production now have zero local image paths in published articles, wiki covers, or collection thumbnails. The final pass replaced 386 collection thumbnails and the remaining 29 older thumbnails with exact published item R2 objects, moved affected article image/source references, repaired the two missing Fisch rod-skin images, and restored three exact wiki covers from Git history into immutable R2 keys. The complete managed-development set contains 36,068 unique R2 keys; production's 36,065-key set is a strict subset, and every key passed live `HEAD` plus expected-byte validation.
+
+The 57 legacy game directories were removed from `apps/web/public/` on 2026-09-02 after the database/R2 readback and live-object checks passed. That removed 34,369 files (3,176,044 KiB, about 3.03 GiB); the public tree is now about 6.4 MiB and retains only the protected `article-covers`, `articles`, `browser-extension`, and `images` directories plus root site assets. Brand assets, report images, article media, and browser-extension assets remain in the repository.
 
 Readable source-provided item names or labels baked into an otherwise valid row image are acceptable. Do not reject an exact item image solely because the source includes the item name; provenance and reuse concerns should be recorded separately in the collection brief.
 

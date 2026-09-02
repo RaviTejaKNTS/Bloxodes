@@ -4,7 +4,6 @@ export const creaturesOfSonariaCollectionGroup = {
   gameSlug: "creatures-of-sonaria",
   gameName: "Creatures of Sonaria",
   universeId: 1831550657,
-  dataDir: "Creatures of Sonaria",
   universeNames: [
     "Creatures of Sonaria Survive Kaiju Animals",
     "💜 Creatures of Sonaria ✨ Survive Kaiju Animals",

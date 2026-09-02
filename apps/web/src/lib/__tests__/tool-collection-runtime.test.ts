@@ -1,5 +1,3 @@
-import fs from "node:fs/promises";
-import path from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 
 const runtimeState = vi.hoisted(() => ({
@@ -30,11 +28,6 @@ import {
   loadWizardAlchemyRaceRerollData
 } from "@/lib/wizard-alchemy/data";
 
-const LOCAL_FIXTURES: Record<string, string> = {
-  "grow-a-garden-2-mutations": "data/Grow a Garden 2/mutations.json",
-  "grow-a-garden-2-seeds": "data/Grow a Garden 2/seeds.json"
-};
-
 function runtimeDocument(item: Record<string, unknown>, section = "Items") {
   const name = String(item.name);
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -52,19 +45,21 @@ function runtimeDocument(item: Record<string, unknown>, section = "Items") {
   };
 }
 
-beforeAll(async () => {
-  for (const [code, relativePath] of Object.entries(LOCAL_FIXTURES)) {
-    const document = JSON.parse(
-      await fs.readFile(path.resolve(process.cwd(), "../..", relativePath), "utf8")
-    ) as { items?: Array<{ system?: { image?: string | null } }> };
-    for (const row of document.items ?? []) {
-      if (row.system?.image) {
-        row.system.image = `https://media.bloxodes.com/wiki/test/${code}/${path.basename(row.system.image)}`;
-      }
-    }
-    runtimeState.documents.set(code, document as Record<string, unknown>);
-  }
-
+beforeAll(() => {
+  runtimeState.documents.set("grow-a-garden-2-seeds", runtimeDocument({
+    name: "Carrot",
+    price: "$10",
+    rarity: "Common",
+    harvestType: "Single harvest",
+    availability: "Available",
+    whereToGet: "Seed Shop"
+  }, "Common"));
+  runtimeState.documents.set("grow-a-garden-2-mutations", runtimeDocument({
+    name: "Wet",
+    multiplier: "2x",
+    whereToGet: "Rain weather",
+    bestUse: "Stacking crop value"
+  }, "Weather mutations"));
   runtimeState.documents.set("grow-a-garden-crops", runtimeDocument({
     name: "Carrot",
     tier: "Common",

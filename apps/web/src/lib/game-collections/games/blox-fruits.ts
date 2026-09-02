@@ -4,7 +4,6 @@ export const bloxFruitsCollectionGroup = {
     gameSlug: "blox-fruits",
     gameName: "Blox Fruits",
     universeId: 994732206,
-    dataDir: "Blox Fruits",
     universeNames: ["Blox Fruits"],
     collections: [
       "abilities",

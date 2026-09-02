@@ -4,7 +4,6 @@ export const animeVanguardsCollectionGroup = {
     gameSlug: "anime-vanguards",
     gameName: "Anime Vanguards",
     universeId: 5578556129,
-    dataDir: "Anime Vanguards",
     universeNames: ["Anime Vanguards", "Anime Vanguards: Eternal Adversaries"],
     collections: [
       "units",

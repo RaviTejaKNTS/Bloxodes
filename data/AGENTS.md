@@ -6,7 +6,7 @@ Environment boundaries and database-vs-dataset ownership are documented in `dev-
 
 When dataset ownership or a consuming pipeline changes, update that existing canonical file or the owning existing pipeline document in the same change. Do not create a replacement current-state doc.
 
-The documented files below back only file-driven tools and catalog sections that are not modeled in Supabase. Existing game-collection JSON and `quiz.json` files are inert archives pending explicit deletion approval; they are not authoring or runtime inputs. Public wiki collections, collection-backed tools, mobile collection APIs, sitemaps, and quizzes read Supabase only; temporary collection authoring belongs under ignored `tmp/content-workspace/`.
+The documented files below back only file-driven tools and catalog sections that are not modeled in Supabase. Game-collection JSON and `quiz.json` archives have been removed. Public wiki collections, collection-backed tools, mobile collection APIs, sitemaps, and quizzes read Supabase only; temporary collection authoring belongs under ignored `tmp/content-workspace/`.
 
 When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
 
@@ -38,8 +38,8 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 ## Rules
 
 - Treat local data files as content sources, not ad hoc dumps. Keep filenames and object shapes stable once routes depend on them.
-- Routine collection refresh scope is limited to registered game collection config and datasets that already exist. Unregistered v2-shaped files are outside this fast refresh and require an explicit collection-creation or discovery workflow. Non-collection files are outside the collection refresh workflow.
-- Game wiki collection datasets must use the v2 separated shape: `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`.
+- Routine collection refresh starts by exporting a published database revision to an ignored workspace. New collections require an explicit collection-creation or discovery workflow.
+- Game wiki collection workspace datasets must use the v2 separated shape: `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`.
 - In v2 game collection datasets, `items[].item` is public game data only. Do not put `collectionSection`, `section`, `sortOrder`, `slug`, `image`, source URLs, source pages, verification notes, raw text, image status, or workflow/debug fields there.
 - In v2 game collection datasets, `items[].system` may contain only `slug`, `section`, `sortOrder`, and `image`. Use these for Bloxodes routing, grouping, ordering, and image rendering without interfering with real game fields that may have similar names.
 - `meta.display` owns the public render contract for game collections: `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, optional badge/subtitle/description fields, and `fieldPresentation`. Every display field must exist in `meta.itemFields` and in public item data.

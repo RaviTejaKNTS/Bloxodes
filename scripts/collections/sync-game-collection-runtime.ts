@@ -292,8 +292,6 @@ async function targetSources(): Promise<CollectionSource[]> {
         code: `${manifest.game.slug}-${manifest.collection.slug}`,
         gameSlug: manifest.game.slug,
         gameName: manifest.game.name,
-        dataDir: "",
-        file: path.basename(manifest.dataset),
         slug: manifest.collection.slug,
         label: manifest.collection.label,
         sortOrder: manifest.collection.sortOrder ?? 0,

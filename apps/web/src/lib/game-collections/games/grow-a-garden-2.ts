@@ -4,7 +4,6 @@ export const growAGarden2CollectionGroup = {
     gameSlug: "grow-a-garden-2",
     gameName: "Grow a Garden 2",
     universeId: 10200395747,
-    dataDir: "Grow a Garden 2",
     universeNames: ["Grow a Garden 2"],
     collections: [
       "seeds",

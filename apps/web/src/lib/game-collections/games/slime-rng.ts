@@ -4,7 +4,6 @@ export const slimeRngCollectionGroup = {
     gameSlug: "slime-rng",
     gameName: "Slime RNG",
     universeId: 9792947201,
-    dataDir: "Slime RNG",
     universeNames: ["Slime RNG"],
     collections: [
       "slimes",

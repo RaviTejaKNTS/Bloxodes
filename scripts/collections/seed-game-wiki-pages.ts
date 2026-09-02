@@ -702,7 +702,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
   "99-nights-in-the-forest": {
     metaDescription:
       "99 Nights in the Forest wiki with survival tips, classes, crafting, materials, weapons, tools, food, locations, entities, and animals.",
-    coverImage: "/99%20Nights%20in%20the%20Forest/Entities/the-deer.webp",
+    coverImage: "https://media.bloxodes.com/wiki/7326934954/entities/the-deer-b1a7f19e539c2b95.webp",
     descriptionMd:
       "99 Nights in the Forest is a co-op survival game about keeping a camp alive while the forest gets more dangerous at night. A normal run moves between fueling the Campfire, gathering food and materials, crafting upgrades, rescuing missing children, and choosing when to push into cultist, cave, snow, or volcano routes. Classes, tools, weapons, food, tameable animals, entities, and locations all change how safely you can leave camp and return before hunger, darkness, raids, or major threats punish an overextended trip.",
     tipsMd: `- Fuel the Campfire and plan a safe return before long routes. A good loot run can fall apart if the team comes back hungry, underarmed, or too late at night.

@@ -177,7 +177,6 @@ export const ${exportName} = {
     gameSlug: "${gameSlug}",
     gameName: "TODO Game Name",
     universeId: 0,
-    dataDir: "TODO Game Name",
     universeNames: ["TODO Game Name"],
     collections: ["${collection}"]
   } satisfies GameCollectionGroup;
@@ -258,7 +257,7 @@ async function registerNewGame(filePath: string, options: CliOptions): Promise<v
   await fs.writeFile(GAMES_INDEX_PATH, addGroupToIndex(indexSource, options.game!, exportName));
 
   console.log(`Created ${relFile} and registered ${exportName} in ${relIndex}.`);
-  console.log(`Fill in the TODO fields in ${relFile}: gameName, universeId, dataDir, universeNames.`);
+  console.log(`Fill in the TODO fields in ${relFile}: gameName, universeId, universeNames.`);
 }
 
 async function main() {

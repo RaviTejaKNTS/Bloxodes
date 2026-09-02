@@ -4,7 +4,6 @@ export const gakuranCollectionGroup = {
   gameSlug: "gakuran",
   gameName: "Gakuran",
   universeId: 9199655655,
-  dataDir: "Gakuran",
   universeNames: ["(学乱) Gakuran", "Gakuran"],
   collections: [
     "ethnicities",

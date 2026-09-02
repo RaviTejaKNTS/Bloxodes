@@ -4,7 +4,6 @@ export const fishItCollectionGroup = {
   gameSlug: "fish-it",
   gameName: "Fish It",
   universeId: 6701277882,
-  dataDir: "Fish It",
   universeNames: ["Fish It", "Fish It!", "[☄️UPD] Fish It! 🐟"],
   collections: [
     "locations",

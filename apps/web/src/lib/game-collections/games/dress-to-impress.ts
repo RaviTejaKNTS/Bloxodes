@@ -4,7 +4,6 @@ export const dressToImpressCollectionGroup = {
     gameSlug: "dress-to-impress",
     gameName: "Dress To Impress",
     universeId: 5203828273,
-    dataDir: "Dress To Impress",
     universeNames: ["Dress To Impress", "Dress To Impress⭐", "Dress to Impress"],
     collections: [
       "themes",

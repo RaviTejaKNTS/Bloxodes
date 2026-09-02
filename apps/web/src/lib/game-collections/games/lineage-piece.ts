@@ -4,7 +4,6 @@ export const lineagePieceCollectionGroup = {
   gameSlug: "lineage-piece",
   gameName: "Lineage Piece",
   universeId: 9382839773,
-  dataDir: "Lineage Piece",
   universeNames: ["Lineage Piece"],
   collections: [
     "accessories",

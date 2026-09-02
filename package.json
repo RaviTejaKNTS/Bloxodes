@@ -148,7 +148,6 @@
     "collect:clothing-items": "tsx scripts/catalog/collect-roblox-clothing-items.ts",
     "collect:avatar-animation-items": "tsx scripts/catalog/collect-roblox-avatar-animation-items.ts",
     "collect:makeup-items": "tsx scripts/catalog/collect-roblox-makeup-items.ts",
-    "collect:grow-a-garden-images": "tsx scripts/collections/collect-grow-a-garden-images.ts",
     "collect:collection-images": "tsx scripts/collections/collect-collection-images.ts",
     "export:game-collection-final": "node --import tsx scripts/collections/export-game-collection-final.ts",
     "export:game-collection-workspace": "node --import tsx scripts/collections/export-game-collection-final.ts --workspace",

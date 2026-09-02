@@ -4,7 +4,6 @@ export const restaurantTycoon3CollectionGroup = {
   gameSlug: "restaurant-tycoon-3",
   gameName: "Restaurant Tycoon 3",
   universeId: 7094518649,
-  dataDir: "Restaurant Tycoon 3",
   universeNames: ["Restaurant Tycoon 3", "[💫] Restaurant Tycoon 3"],
   collections: [
     "food",

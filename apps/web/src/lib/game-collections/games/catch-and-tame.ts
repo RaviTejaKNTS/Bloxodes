@@ -4,7 +4,6 @@ export const catchAndTameCollectionGroup = {
     gameSlug: "catch-and-tame",
     gameName: "Catch And Tame",
     universeId: 9091133975,
-    dataDir: "Catch And Tame",
     universeNames: ["Catch And Tame", "[🪏] Catch And Tame!"],
     collections: [
       "mutations",

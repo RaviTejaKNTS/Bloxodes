@@ -3,7 +3,6 @@ import type { GameCollectionGroup } from "../types";
 export const brookhavenRpCollectionGroup = {
     gameSlug: "brookhaven-rp",
     gameName: "Brookhaven RP",
-    dataDir: "Brookhaven RP",
     universeNames: ["Brookhaven RP", "Brookhaven"],
     collections: [
       "locations",

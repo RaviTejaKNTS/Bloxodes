@@ -4,7 +4,6 @@ export const sailorPieceCollectionGroup = {
     gameSlug: "sailor-piece",
     gameName: "Sailor Piece",
     universeId: 9186719164,
-    dataDir: "Sailor Piece",
     universeNames: ["Sailor Piece"],
     collections: [
       "fruits",

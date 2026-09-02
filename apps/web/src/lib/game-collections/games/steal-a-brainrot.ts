@@ -3,7 +3,6 @@ import type { GameCollectionGroup } from "../types";
 export const stealABrainrotCollectionGroup = {
     gameSlug: "steal-a-brainrot",
     gameName: "Steal a Brainrot",
-    dataDir: "Steal a Brainrot",
     universeNames: ["Steal a Brainrot"],
     collections: [
       "brainrots",

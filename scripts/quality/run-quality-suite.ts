@@ -57,7 +57,7 @@ if (suite === "deterministic") {
 } else if (suite === "build") {
   [
     ...deterministic,
-    npmRun("audit:game-collection-datasets", "Game-collection dataset contracts"),
+    npmRun("test:wiki-runtime", "Database-only wiki runtime contracts"),
     npmRun("validate:published-content", "Published-content validation"),
     npmRun("build:web", "Next.js production build")
   ].forEach(run);

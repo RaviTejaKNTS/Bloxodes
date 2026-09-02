@@ -873,8 +873,6 @@ export const GAME_COLLECTIONS: GameCollectionConfig[] = GAME_COLLECTION_GROUPS.f
       code: buildGameCollectionCode(group.gameSlug, collection),
       gameSlug: group.gameSlug,
       gameName: group.gameName,
-      dataDir: group.dataDir,
-      file: `${collection}.json`,
       slug: collection,
       label: getCollectionLabel(collection),
       sortOrder: (GAME_COLLECTION_GROUPS.indexOf(group) + 1) * 1000 + (index + 1) * 10,
@@ -1055,7 +1053,7 @@ function buildGameCollectionCopyOverride({
         "Potions are Wizard Alchemy's spell ladder. Materials decide which Magic thresholds you can reach, while refinement, shards, and New Mainland potion targets shape which spells are worth saving, upgrading, or selling.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Potions/wind-blade-potion.png"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/potions/wind-blade-potion-0abc79f1fc3af25a.png"
     };
   }
 
@@ -1118,7 +1116,7 @@ function buildGameCollectionCopyOverride({
         "Races are Wizard Alchemy's reroll traits. Human has no bonuses, early races help movement or sustain, Rare rolls start supporting combat, and Epic or Legendary rolls can shape Fire, Ice, Dark, farming, or all-around spell builds.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Races/night-knight.jpg"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/races/night-knight-ed87a9bb04dad331.jpg"
     };
   }
 
@@ -1175,7 +1173,7 @@ function buildGameCollectionCopyOverride({
         "Wands set the combat baseline in Wizard Alchemy. The route starts with Twisted Wand, moves through Roger's shop upgrades, branches into hidden Departure Isle picks like Ice Star and Ember Staff, then reaches the Sea of Oblivion Ember Wand for late bonus stacking.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Wands/ember-staff-wand.webp"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/wands/ember-staff-wand-8a88160fc1619f46.webp"
     };
   }
 
@@ -1226,7 +1224,7 @@ function buildGameCollectionCopyOverride({
         "Brooms are Wizard Alchemy's travel items. Apprentice Broom gives players an early movement option on Departure Isle, while Lava Broom is the faster Sea of Oblivion upgrade once saving 50K Coins is realistic.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Brooms/lava-broom.png"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/brooms/lava-broom-cf1f87c0217f3b0a.png"
     };
   }
 
@@ -1281,7 +1279,7 @@ function buildGameCollectionCopyOverride({
         "Robes are Wizard Alchemy's HP gear slot. Starmoon gives the first +30 HP bump, while Golden Reverie and Starlight are +60 HP upgrades from Roger's Wizard Robe shop; exact Gold costs should be checked in-game because current price lists disagree.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Robes/starlight-robe.png"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/robes/starlight-robe-ad30f3e959336db3.png"
     };
   }
 
@@ -1334,7 +1332,7 @@ function buildGameCollectionCopyOverride({
         "Wizard hats are Wizard Alchemy's head-slot survival gear. Starmoon, Golden Reverie, and Starlight cover the Roger shop HP route, while Lava Wizard Hat adds Sea of Oblivion lava resistance for players moving into New Mainland content.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Wizard%20Hats/lava-wizard-hat.webp"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/wizard-hats/lava-wizard-hat-1c879812ad7b9f98.webp"
     };
   }
 
@@ -1391,7 +1389,7 @@ function buildGameCollectionCopyOverride({
         "Enemies are the combat side of Wizard Alchemy's material grind. Dwarfs and goblins cover early Departure Isle farming, mutants and Dwarf King handle Furnace Core and shard routes, and Sea of Oblivion adds orc, priest, and Lava Behemoth material targets for New Mainland progression.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Enemies/dwarf-king.png"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/enemies/dwarf-king-c3ad8ea66b10b52b.png"
     };
   }
 
@@ -1450,7 +1448,7 @@ function buildGameCollectionCopyOverride({
         "Chests are fixed material pickups across Wizard Alchemy's first-island route. The tracked set covers 10 spawn, mine, lighthouse, boss-route, treehouse, and hidden-platform locations, with reward details kept cautious because exact chest-specific pools are not listed.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/chests/spawn-river-rocks-0e9f3d0b0bab64c8.webp"
     };
   }
 
@@ -1570,7 +1568,7 @@ function buildGameCollectionCopyOverride({
         "Locations are the route anchors for Wizard Alchemy progression. Spawn services handle brewing, selling, quests, and gear, while forest, mine, beach, boss, hidden-shop, and Sea of Oblivion landmarks shape the material, chest, enchantment, and New Mainland upgrade loops.",
       wiki_sort_order: config.sortOrder,
       wiki_item_count: itemCount,
-      thumb_url: "/Wizard%20Alchemy/Locations/alchemy-table-refine-machine.jpg"
+      thumb_url: "https://media.bloxodes.com/wiki/10006104044/locations/alchemy-table-refine-machine-76cd63db3dd35ca3.webp"
     };
   }
 

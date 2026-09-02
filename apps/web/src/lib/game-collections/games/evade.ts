@@ -4,7 +4,6 @@ export const evadeCollectionGroup = {
     gameSlug: "evade",
     gameName: "Evade",
     universeId: 3647333358,
-    dataDir: "Evade",
     universeNames: ["Evade", "Evade [💀]"],
     collections: [
       "utilities",

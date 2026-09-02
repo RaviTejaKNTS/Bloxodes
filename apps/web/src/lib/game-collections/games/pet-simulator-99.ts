@@ -4,7 +4,6 @@ export const petSimulator99CollectionGroup = {
     gameSlug: "pet-simulator-99",
     gameName: "Pet Simulator 99",
     universeId: 3317771874,
-    dataDir: "Pet Simulator 99",
     universeNames: ["Pet Simulator 99"],
     collections: [
       "pets",

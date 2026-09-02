@@ -353,7 +353,6 @@ export const GROW_GARDEN_COLLECTIONS: GrowGardenCollectionConfig[] = [
 export const growAGardenCollectionGroup = {
   gameSlug: "grow-a-garden",
   gameName: "Grow a Garden",
-  dataDir: "Grow a Garden",
   universeNames: ["Grow a Garden"],
   collections: GROW_GARDEN_COLLECTIONS.map(({ slug }) => slug)
 } satisfies GameCollectionGroup;

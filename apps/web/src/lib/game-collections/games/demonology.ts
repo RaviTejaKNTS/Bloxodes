@@ -4,7 +4,6 @@ export const demonologyCollectionGroup = {
     gameSlug: "demonology",
     gameName: "Demonology",
     universeId: 6170143659,
-    dataDir: "Demonology",
     universeNames: ["Demonology", "[UPD] Demonology🕯️", "Demonology🕯️"],
     collections: [
       "ghosts",

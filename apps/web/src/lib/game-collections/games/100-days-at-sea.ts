@@ -4,7 +4,6 @@ export const daysAtSeaCollectionGroup = {
   gameSlug: "100-days-at-sea",
   gameName: "100 Days At Sea",
   universeId: 9167377564,
-  dataDir: "100 Days At Sea",
   universeNames: ["100 Days At Sea", "100 Days at Sea"],
   collections: [
     "bosses",
