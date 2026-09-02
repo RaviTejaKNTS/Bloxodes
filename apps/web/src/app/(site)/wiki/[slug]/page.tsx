@@ -4,6 +4,7 @@ import "@/styles/article-content.css";
 import { markdownToPlainText } from "@/lib/markdown";
 import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, WIKI_DESCRIPTION } from "@/lib/seo";
 import { getWikiPageBySlug, listPublishedWikiSlugs } from "@/lib/wiki";
+import { resolveWikiMetadataImage } from "@/lib/wiki-images";
 import { loadWikiDetailPageData, renderWikiDetailPage } from "../page-data";
 
 export const revalidate = 21600;
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     normalizeDescription(page.meta_description) ??
     normalizeDescription(page.description_md) ??
     WIKI_DESCRIPTION;
-  const image = normalizeMetadataImage(page.cover_image ?? page.icon_url);
+  const image = normalizeMetadataImage(resolveWikiMetadataImage(page));
   const publishedAt = page.published_at ?? page.created_at ?? null;
   const modifiedAt = page.content_updated_at ?? page.updated_at ?? publishedAt;
   const publishedTime = publishedAt ? new Date(publishedAt).toISOString() : undefined;

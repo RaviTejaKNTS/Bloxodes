@@ -56,6 +56,7 @@ import { buildWikiCollectionPath } from "@/lib/wiki-collections";
 import { statsUniverseSlug } from "@/lib/slug";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { formatUpdatedLabel } from "@/lib/updated-label";
+import { resolveWikiHeaderImage } from "@/lib/wiki-images";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
@@ -272,8 +273,7 @@ function getDescriptionMarkdown(page: WikiPageContent): string | null {
 }
 
 function getHeroImage(page: WikiPageContent, related: WikiRelatedData): string | null {
-  const mediaImage = related.media.find((item) => item.is_primary && item.image_url)?.image_url ?? related.media.find((item) => item.image_url)?.image_url;
-  return normalizeImageSrc(page.cover_image) ?? normalizeImageSrc(mediaImage) ?? pickThumbnail(page.thumbnail_urls) ?? normalizeImageSrc(page.icon_url);
+  return resolveWikiHeaderImage(page, related.media);
 }
 
 function compactMeta(items: Array<string | null | undefined>): string | null {
