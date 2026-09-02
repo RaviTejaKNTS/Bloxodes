@@ -4,6 +4,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { ensureOfficialUniverseMedia, hasOfficialUniverseMedia } from "@/lib/roblox/universe-media";
+import { normalizeWikiCoverOverride } from "@/lib/wiki-images";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 
@@ -23,6 +25,7 @@ type WikiFinal = {
 const argv = process.argv.slice(2);
 const apply = argv.includes("--apply");
 const allowProd = argv.includes("--allow-prod");
+const allowCoverOverride = argv.includes("--allow-cover-override");
 
 function value(name: string): string | null {
   const inline = argv.find((entry) => entry.startsWith(`${name}=`));
@@ -56,7 +59,7 @@ async function readFinal(file: string): Promise<WikiFinal> {
     description_md: requiredString(parsed.description_md, "description_md", 200),
     tips_md: requiredString(parsed.tips_md, "tips_md", 80),
     controls_json: controls,
-    cover_image: typeof parsed.cover_image === "string" ? parsed.cover_image.trim() || null : null,
+    cover_image: normalizeWikiCoverOverride(parsed.cover_image, allowCoverOverride),
     is_published: parsed.is_published !== false
   };
 }
@@ -87,11 +90,18 @@ async function main() {
   const sb = supabaseAdmin();
   const { data: universe, error: universeError } = await sb
     .from("roblox_universes")
-    .select("universe_id")
+    .select("universe_id,icon_url,thumbnail_urls")
     .eq("universe_id", final.universe_id)
     .maybeSingle();
   if (universeError) throw new Error(`Universe identity read failed: ${universeError.message}`);
   if (!universe) throw new Error(`Universe ${final.universe_id} is missing from the target database.`);
+  const mediaResult = hasOfficialUniverseMedia(universe)
+    ? { status: "existing" as const }
+    : await ensureOfficialUniverseMedia(sb, final.universe_id, {
+        apply,
+        required: true
+      });
+  console.log(`Official universe media: ${mediaResult.status}.`);
 
   const { data: conflicts, error: conflictError } = await sb
     .from("wiki_pages")
@@ -116,7 +126,7 @@ async function main() {
     universe_id: final.universe_id,
     controls_json: final.controls_json,
     tips_md: final.tips_md,
-    cover_image: final.cover_image ?? null,
+    cover_image: allowCoverOverride ? final.cover_image ?? null : null,
     is_published: final.is_published !== false
   };
   const existing = (conflicts ?? [])[0] as { id?: string } | undefined;
@@ -127,7 +137,7 @@ async function main() {
   if (upsertError) throw new Error(`Wiki write failed: ${upsertError.message}`);
   const { data: readback, error: readbackError } = await sb
     .from("wiki_pages")
-    .select("slug,title,universe_id,is_published,description_md,tips_md")
+    .select("slug,title,universe_id,is_published,description_md,tips_md,cover_image")
     .eq("slug", final.slug)
     .single();
   if (readbackError) throw new Error(`Wiki readback failed: ${readbackError.message}`);
@@ -136,6 +146,7 @@ async function main() {
     readback.title !== final.title ||
     readback.description_md !== final.description_md ||
     readback.tips_md !== final.tips_md ||
+    readback.cover_image !== payload.cover_image ||
     readback.is_published !== payload.is_published
   ) {
     throw new Error(`Wiki readback mismatch for ${final.slug}.`);

@@ -47,7 +47,7 @@ Use the matching wiki and game-collection workflow skills. For existing datasets
 
 Collection image manifests are authoring inputs. Runtime item media is stored by immutable R2 object key in `wiki_collection_items` and served through the wiki-media worker. A collection is not ready merely because its copy exists: every item count, media key, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
 
-Wiki hub images have separate roles. `/wiki` cards and social previews use the first landscape universe thumbnail. The square artwork beside a wiki title uses the newest approved `roblox_universe_media` icon, then `roblox_universes.icon_url` as its fallback. A `wiki_pages.cover_image` value is only a final fallback and must not make the list card and square title artwork reuse the same article cover.
+Wiki hub images have separate roles. `/wiki` cards and social previews use the first official 768x432 universe thumbnail. The square artwork beside a wiki title uses the current official 512x512 universe icon. Universe linking fetches missing official media immediately, rotating enrichment replaces the active fields and primary rows with Roblox's current media while retaining prior URLs as history, and `sync-game-wiki-runtime.ts` refuses publication unless both roles exist. Wiki finals must leave `cover_image` null; a reviewed exception requires the explicit `--allow-cover-override` flag.
 
 Readable source-provided item names or labels baked into an otherwise valid row image are acceptable. Do not reject an exact item image solely because the source includes the item name; provenance and reuse concerns should be recorded separately in the collection brief.
 

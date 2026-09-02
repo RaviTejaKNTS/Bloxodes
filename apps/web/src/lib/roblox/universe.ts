@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { slugify } from "@/lib/slug";
 import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
 import { extractPlaceId, scrapeRobloxGameMetadata, type RobloxGameMetadata } from "@/lib/roblox/game-metadata";
+import { ensureOfficialUniverseMedia, hasOfficialUniverseMedia } from "@/lib/roblox/universe-media";
 
 const USER_AGENT =
   process.env.ROBLOX_SCRAPER_UA ??
@@ -135,7 +136,7 @@ export async function ensureUniverseForRobloxLink(
 
   const { data: existing, error } = await supabase
     .from("roblox_universes")
-    .select("universe_id, root_place_id")
+    .select("universe_id, root_place_id, icon_url, thumbnail_urls")
     .eq("universe_id", universeId)
     .maybeSingle();
 
@@ -144,6 +145,9 @@ export async function ensureUniverseForRobloxLink(
   }
 
   if (existing?.universe_id) {
+    if (!hasOfficialUniverseMedia(existing)) {
+      await ensureOfficialUniverseMedia(supabase, universeId, { apply: true });
+    }
     const fallbackRoot =
       (existing.root_place_id as number | null) ??
       placeDetails?.rootPlaceId ??
@@ -226,6 +230,8 @@ export async function ensureUniverseForRobloxLink(
   if (insertError) {
     throw new Error(`Failed to insert universe ${universeId}: ${insertError.message}`);
   }
+
+  await ensureOfficialUniverseMedia(supabase, universeId, { apply: true });
 
   return {
     universeId,

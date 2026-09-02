@@ -58,7 +58,7 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 - `description_md`: Write 1-2 short, link-free paragraphs focused only on what the player does in the game and how the core loop works. Do not promise what the wiki covers, do not add links, and do not turn this into a long guide.
 - `tips_md`: Write 3-4 concrete gameplay tips that help a new or returning player.
 - `controls_json`: Use `[]` when no controls are verified. Otherwise write an array of rows shaped like `{ "action": "Jump", "desktop": "Space" }`, using only verified device keys: `desktop`, `mobile`, `tablet`, `console`, and `vr`. Do not use generic `controls`, `keys`, `value`, or `description` fields.
-- `cover_image`: Use `null` for normal wiki hubs. The runtime uses the newest official universe icon for the square title artwork and a landscape universe thumbnail for `/wiki` cards and social previews. Set an override only when the user explicitly requests one and the replacement has been reviewed for that exact role.
+- `cover_image`: Use `null` for normal wiki hubs. The runtime uses the current official universe icon for the square title artwork and the first official landscape universe thumbnail for `/wiki` cards and social previews. `sync-game-wiki-runtime.ts` rejects non-null values unless a user-requested, reviewed exception is published with `--allow-cover-override`.
 
 ## Output Shape
 

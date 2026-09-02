@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveWikiCardImage, resolveWikiHeaderImage, resolveWikiMetadataImage } from "@/lib/wiki-images";
+import {
+  normalizeWikiCoverOverride,
+  resolveWikiCardImage,
+  resolveWikiHeaderImage,
+  resolveWikiMetadataImage,
+} from "@/lib/wiki-images";
 
 const page = {
   cover_image: "https://media.example/article-cover.webp",
@@ -35,5 +40,15 @@ describe("wiki image roles", () => {
     expect(resolveWikiCardImage(fallbackPage)).toBe("/wiki/fallback.webp");
     expect(resolveWikiHeaderImage(fallbackPage, [])).toBe("/wiki/fallback.webp");
     expect(resolveWikiMetadataImage(fallbackPage)).toBe("/wiki/fallback.webp");
+  });
+
+  it("rejects agent-selected wiki covers unless a human enables the override", () => {
+    expect(() => normalizeWikiCoverOverride("https://media.example/article.webp", false)).toThrow(
+      "wiki final cover_image must be null"
+    );
+    expect(normalizeWikiCoverOverride("https://media.example/reviewed.webp", true)).toBe(
+      "https://media.example/reviewed.webp"
+    );
+    expect(normalizeWikiCoverOverride(null, false)).toBeNull();
   });
 });

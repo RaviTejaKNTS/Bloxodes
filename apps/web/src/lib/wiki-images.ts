@@ -60,3 +60,13 @@ export function resolveWikiHeaderImage(page: WikiImageFields, media: WikiMediaIm
 export function resolveWikiMetadataImage(page: WikiImageFields): string | null {
   return pickWikiThumbnail(page.thumbnail_urls) ?? normalizeImage(page.cover_image) ?? normalizeImage(page.icon_url);
 }
+
+export function normalizeWikiCoverOverride(value: unknown, allowOverride: boolean): string | null {
+  const normalized = typeof value === "string" ? value.trim() || null : null;
+  if (normalized && !allowOverride) {
+    throw new Error(
+      "wiki final cover_image must be null; official universe media owns wiki cards, social previews, and title artwork"
+    );
+  }
+  return normalized;
+}

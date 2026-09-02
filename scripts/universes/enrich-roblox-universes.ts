@@ -1121,6 +1121,30 @@ async function upsertMedia(
   }
 
   if (mediaRows.length) {
+    const currentIconUniverseIds = Array.from(
+      new Set(mediaRows.filter((row) => row.media_type === "icon").map((row) => row.universe_id))
+    );
+    const currentScreenshotUniverseIds = Array.from(
+      new Set(mediaRows.filter((row) => row.media_type === "screenshot").map((row) => row.universe_id))
+    );
+    if (currentIconUniverseIds.length) {
+      const { error } = await supabase
+        .from("roblox_universe_media")
+        .update({ is_primary: false })
+        .in("universe_id", currentIconUniverseIds)
+        .eq("media_type", "icon")
+        .eq("is_primary", true);
+      if (error) throw error;
+    }
+    if (currentScreenshotUniverseIds.length) {
+      const { error } = await supabase
+        .from("roblox_universe_media")
+        .update({ is_primary: false })
+        .in("universe_id", currentScreenshotUniverseIds)
+        .eq("media_type", "screenshot")
+        .eq("is_primary", true);
+      if (error) throw error;
+    }
     const { data: existingMedia, error: existingError } = await supabase
       .from("roblox_universe_media")
       .select("universe_id, media_type, image_url")
@@ -1136,6 +1160,7 @@ async function upsertMedia(
       .filter((row) => !existingKeys.has(`${row.universe_id}:${row.media_type}:${row.image_url}`))
       .map((row) => ({
         ...row,
+        approved: true,
         source: "roblox_thumbnails",
         first_seen_at: seenAt,
         last_seen_at: seenAt,
@@ -1151,6 +1176,9 @@ async function upsertMedia(
       const { error } = await supabase
         .from("roblox_universe_media")
         .update({
+          is_primary: row.is_primary,
+          approved: true,
+          source: "roblox_thumbnails",
           last_seen_at: seenAt,
           fetched_at: seenAt,
           extra: row.extra
@@ -1163,33 +1191,14 @@ async function upsertMedia(
   }
 
   if (gameUpdates.length) {
-    const { data: existingGames, error: existingGamesError } = await supabase
-      .from("roblox_universes")
-      .select("universe_id, icon_url, thumbnail_urls")
-      .in(
-        "universe_id",
-        gameUpdates.map((update) => update.universe_id)
-      );
-    if (existingGamesError) throw existingGamesError;
-    const existingById = new Map(
-      ((existingGames ?? []) as Array<{ universe_id: number; icon_url: string | null; thumbnail_urls: unknown }>).map(
-        (row) => [row.universe_id, row]
-      )
-    );
-
     await promisePool(gameUpdates, ATTACHMENT_CONCURRENCY, async (update) => {
-      const existing = existingById.get(update.universe_id);
-      const existingThumbs = normalizeStoredThumbnails(existing?.thumbnail_urls);
       const incomingThumbs = normalizeStoredThumbnails(update.thumbnail_urls);
-      const mergedThumbs = Array.from(
-        new Map([...existingThumbs, ...incomingThumbs].map((thumb) => [thumb.url, thumb])).values()
-      );
       const updatePayload: Record<string, unknown> = {};
-      if (!existing?.icon_url && update.icon_url) {
+      if (update.icon_url) {
         updatePayload.icon_url = update.icon_url;
       }
       if (incomingThumbs.length) {
-        updatePayload.thumbnail_urls = mergedThumbs;
+        updatePayload.thumbnail_urls = incomingThumbs;
       }
       if (!Object.keys(updatePayload).length) return;
       const { error } = await supabase.from("roblox_universes").update(updatePayload).eq("universe_id", update.universe_id);
