@@ -1,7 +1,7 @@
 # Supabase
 
-Status: Active; managed development and production converged through migration 20260920000014
-Last verified: 2026-08-15
+Status: Active; production converged through migration 20260920000014; managed development also contains the pending GTA platform schema
+Last verified: 2026-09-02
 Evidence: official Supabase documentation, managed-development migration/readiness/advisor checks, production transactional release/readback, VPS container/process inspection, Edge Function checksum/smoke, and public health
 
 ## Managed Development
@@ -61,6 +61,7 @@ Official changelog items relevant to this self-hosted installation:
 - Keep RLS on exposed tables and never expose service-role keys to clients.
 - Views exposed to anon/authenticated roles need security-invoker behavior or explicit privilege review.
 - Revalidation/cache queues are part of runtime freshness; schema changes affecting public content must update their event mapping.
+- The GTA vertical is intentionally separate from Roblox data: `gta_games`, `gta_wiki_pages`, `gta_wiki_collection_pages`, and immutable `gta_wiki_collection_datasets`/`gta_wiki_collection_items`. Public web reads remain server-side through the service role; base-table grants are revoked from `anon` and `authenticated`, RLS stays enabled, and read views use security-invoker behavior. Managed development has the schema, GTA 5/GTA 6 hub rows, and the GTA 5 weapons collection; production has not received these migrations or rows. No GTA tools table or route is present until there is a real tool to publish.
 
 ## Backups
 

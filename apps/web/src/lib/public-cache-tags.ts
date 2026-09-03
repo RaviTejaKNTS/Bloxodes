@@ -13,6 +13,9 @@ export type PublicCacheEventType =
   | "puzzle"
   | "wiki"
   | "wiki_collection"
+  | "gta_game"
+  | "gta_wiki"
+  | "gta_wiki_collection"
   | "stats";
 
 export type PublicCacheEvent = {
@@ -148,6 +151,27 @@ export function cacheTagsForPath(pathname: string) {
 
   if (pathnameOnly === "/") {
     return unique([...tags, "home"]);
+  }
+
+  if (first === "games") {
+    return unique([...tags, "games-index"]);
+  }
+
+  if (first === "gta") {
+    if (!second) return unique([...tags, "gta-home"]);
+    if (second === "wiki") {
+      if (!third || third === "page") return unique([...tags, "gta-wiki-index"]);
+      if (fourth && fourth !== "page") {
+        return unique([
+          ...tags,
+          "gta-wiki-collection-index",
+          slugTag("gta-wiki", third),
+          slugTag("gta-wiki-collection", `${third}/${fourth}`)
+        ]);
+      }
+      return unique([...tags, "gta-wiki", slugTag("gta-wiki", third)]);
+    }
+    return unique(tags);
   }
 
   if (pathnameOnly === "/feed.xml") {
@@ -349,6 +373,23 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "sitemap",
         "sitemap:stats"
       ]);
+    case "gta_game":
+      return unique([...base, slugTag("gta-game", normalized), "gta-home", "gta-wiki-index", "games-index", "sitemap", "sitemap:gta"]);
+    case "gta_wiki":
+      return unique([...base, slugTag("gta-wiki", normalized), "gta-home", "gta-wiki-index", "sitemap", "sitemap:gta"]);
+    case "gta_wiki_collection": {
+      const [wikiSlug, collectionSlug] = normalized.split("/");
+      return unique([
+        ...base,
+        wikiSlug ? slugTag("gta-wiki", wikiSlug) : "",
+        wikiSlug && collectionSlug ? slugTag("gta-wiki-collection", `${wikiSlug}/${collectionSlug}`) : "",
+        "gta-home",
+        "gta-wiki-index",
+        "gta-wiki-collection-index",
+        "sitemap",
+        "sitemap:gta"
+      ]);
+    }
     case "wiki_collection": {
       const [wikiSlug, collectionSlug] = normalized.split("/");
       const flatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";

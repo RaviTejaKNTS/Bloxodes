@@ -61,6 +61,9 @@ Automatic daily workflows use fast code/build/dataset checks and tiny targeted s
 | Article media checks (YouTube + images) | `scripts/content/check-article-media.ts` | used by `npm run verify:article-finals` |
 | Article final writing | `.agents/skills/bloxodes-article-workflow-runner` | Research subagent → brief approval → mandatory article-image subagent with nonzero target set → image readiness approval → writing subagent → `verify:article-finals` (sibling `media.json` required) |
 | Game collection final writing | `.agents/skills/bloxodes-game-collection-workflow-runner` | Collection subagent (research → data → images) → writing subagent (`bloxodes-game-collection-writing`) → `verify:game-collection-finals` |
+| Verify one GTA wiki hub | `scripts/gta/verify-gta-wiki-final.ts` | `npm run verify:gta-wiki-final -- --base-url http://localhost:3000 --game <game-slug> --workspace tmp/content-workspace/gta/<game-slug>/wiki/<game-slug>`; managed-development upsert, DB readback, and route verification |
+| Sync one GTA collection revision | `scripts/gta/sync-gta-collection-runtime.ts` | `npm run sync:gta-collection-runtime -- --manifest <runtime-manifest.json>` for a dry plan; add `--apply --upload-media --publish` only after final approval in managed development |
+| Verify one GTA collection end to end | `scripts/gta/verify-gta-collection-final.ts` | `npm run verify:gta-collection-final -- --base-url http://localhost:3000 --game <game-slug> --collection <collection-slug> --workspace <workspace>`; managed-development-only copy/data/image checks, R2/database publication, readback, and route verification |
 | Import reviewed tool final JSON into Supabase | `scripts/content/import-tool-finals.ts` | `npm run import:tool-finals -- --file tmp/content-workspace/<topic-slug>/tools/<tool-code>/final.json --dry-run`; production writes require `NODE_ENV=production` plus `--allow-prod` and verify the saved `tools` row |
 ### Code Page Workflow Hard Rules
 

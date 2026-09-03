@@ -17,7 +17,7 @@ import { SidebarSearch } from "@/components/SidebarSearch";
 import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import { SiteLogo } from "@/components/SiteLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { isNavLinkActive, siteNavLinks, type SidebarAccount } from "@/lib/site-navigation";
+import { isNavLinkActive, siteNavLinksForPath, type SidebarAccount } from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
 type MobileSiteHeaderProps = {
@@ -28,6 +28,7 @@ type MobileSiteHeaderProps = {
 export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() ?? initialPathname;
+  const links = siteNavLinksForPath(pathname);
   const closeMenu = () => setOpen(false);
 
   useEffect(() => {
@@ -88,7 +89,7 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
                   Browse
                 </div>
                 <ul className="space-y-1">
-                  {siteNavLinks.map((link) => {
+                  {links.map((link) => {
                     const active = isNavLinkActive(pathname, link.href);
                     return (
                       <li key={link.href}>

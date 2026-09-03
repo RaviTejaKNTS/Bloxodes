@@ -29,6 +29,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-game-collection-data/SKILL.md`: game collection dataset, fields, sections, and renderer readiness.
 - `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
 - `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: quickly check existing collection datasets for verified data changes and missing item images, then update only affected collections.
+- `.agents/skills/bloxodes-gta-wiki-*/SKILL.md`: GTA-specific wiki suggestion, research, writing, and parent workflow rules for `/gta/wiki/<game-slug>`.
+- `.agents/skills/bloxodes-gta-game-collection-*/SKILL.md`: GTA-specific collection suggestion, research, data, image, writing, workflow, and refresh rules for `/gta/wiki/<game-slug>/<collection-slug>`; never substitute the Roblox collection skills.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
@@ -83,12 +85,13 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 ### Game wiki and collection pages
 
 1. Use the matching `.agents/skills/bloxodes-*` skill directly. For new pages, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`. For source-backed maintenance of existing local collection datasets and their wiki pages, use `bloxodes-game-collection-refresh`.
-2. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
-3. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
-4. Seed page copy and publish the immutable collection dataset/media revision in managed development before preview or production.
-5. Keep collection codes in `<game-slug>-<collection-slug>` format.
-6. Verify authoring data/media, database pointer and item-count readback, useful card fields, metadata, sitemaps, search, and revalidation before publishing. Runtime must not depend on local collection files.
-7. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
+2. For GTA pages, use the corresponding `bloxodes-gta-wiki-*` or `bloxodes-gta-game-collection-*` skill. GTA skills own the separate GTA tables, workspace, routes, scripts, mode boundaries, and managed-development safety rules; do not use Roblox universe IDs or Roblox publication commands.
+3. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
+4. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
+5. Seed page copy and publish the immutable collection dataset/media revision in managed development before preview or production.
+6. Keep collection codes in `<game-slug>-<collection-slug>` format.
+7. Verify authoring data/media, database pointer and item-count readback, useful card fields, metadata, sitemaps, search, and revalidation before publishing. Runtime must not depend on local collection files.
+8. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
 
 ### Codes pages
 

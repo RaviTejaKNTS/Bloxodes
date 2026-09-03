@@ -1,8 +1,8 @@
 # Architecture
 
 Status: Active; production has documented degraded components
-Last verified: 2026-09-01
-Evidence: repository architecture/configuration, database-only wiki/quiz runtime audit, managed-development/production content readback, and existing VPS/homelab platform checks
+Last verified: 2026-09-02
+Evidence: repository architecture/configuration, database-only wiki/quiz runtime audit, managed-development GTA schema/content/route readback, managed-development/production content readback, and existing VPS/homelab platform checks
 
 ## Product Surfaces
 
@@ -12,6 +12,7 @@ Evidence: repository architecture/configuration, database-only wiki/quiz runtime
 - Mobile: Expo Router in `apps/mobile`; it calls `/api/mobile/*`, uses optional bearer authentication, and does not connect directly to Supabase.
 - Data/content jobs: root `scripts/` grouped by pipeline, with stable npm aliases in `package.json`.
 - Database functions: migrations and Edge Functions under `supabase/`.
+- Game namespaces: the established Roblox routes remain at `/wiki`, `/tools`, and the other root content families. GTA is isolated under `/gta`, with its own sidebar/search scope, wiki routes, and platform-owned Supabase tables while reusing the public shell and collection renderer. `/games` is the platform chooser. GTA tools are intentionally absent until a real tool is ready to ship.
 
 ## Production Request Path
 

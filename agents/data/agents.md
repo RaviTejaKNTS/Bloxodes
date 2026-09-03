@@ -29,6 +29,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Game-specific collection pages rendered under `/wiki/<game-slug>/<collection-slug>`, with stable `code` values kept for scripts, search, and old catalog URL redirects.
   - Use `display_name` for clean navigation labels such as `Domains` or `Characters`; keep `title`/`seo_title` as full page/SEO titles. Use `item_count` for collection navigation counts instead of parsing titles.
   - `published_dataset_id` selects one immutable dataset revision. Web, mobile, tools, sitemaps, and media loaders use these database rows and R2 keys only.
+- `gta_games`, `gta_wiki_pages`, `gta_wiki_pages_view`
+  - GTA game identity and wiki hub copy for `/gta/wiki/<game-slug>`, intentionally separate from `roblox_universes` and Roblox editorial tables.
+- `gta_wiki_collection_pages`, `gta_wiki_collection_pages_view`, `gta_wiki_collection_datasets`, `gta_wiki_collection_items`
+  - GTA collection page copy plus immutable published revisions and generic item fields for `/gta/wiki/<game-slug>/<collection-slug>`; media uses the shared wiki R2 worker with `gta/...` keys.
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`

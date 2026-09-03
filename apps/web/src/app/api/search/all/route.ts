@@ -55,6 +55,9 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   music_artist: "music",
   wiki: "wiki",
   wiki_collection: "wiki",
+  gta_game: "wiki",
+  gta_wiki: "wiki",
+  gta_wiki_collection: "wiki",
   stats_game: "stats"
 };
 
@@ -70,7 +73,8 @@ const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
   events: ["event"],
   authors: ["author"],
   music: ["music_hub", "music_genre", "music_artist"],
-  wiki: ["wiki", "wiki_collection"]
+  wiki: ["wiki", "wiki_collection"],
+  gta: ["gta_wiki", "gta_wiki_collection"]
 };
 
 const DEFAULT_LIMIT = 120;

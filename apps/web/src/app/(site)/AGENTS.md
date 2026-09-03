@@ -13,6 +13,7 @@ Scoped route-family guides:
 ## Route Families
 
 - Core content: home, codes, articles, stats, checklists, events, quizzes, wiki pages, puzzles, authors.
+- Game-platform entry: `/games`; GTA routes live under `/gta` and `/gta/wiki` with GTA-specific navigation while retaining the shared Bloxodes shell and components. Do not expose a GTA tools route until a real tool is ready to publish.
 - Catalog: music IDs, free Roblox items, admin commands, color codes, decal IDs, The Forge, and generic catalog fallback routes.
 - Tools: Roblox ID extractor, Robux/USD, DevEx, The Forge calculators, Grow a Garden calculator, and generic tool fallback routes.
 - Static pages: about, contact, policies, disclaimer, editorial, cookie settings.
@@ -42,6 +43,7 @@ Scoped route-family guides:
 - Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`.
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
 - Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `dev-docs/pipelines/catalog.md` and `dev-docs/pipelines/wiki-collections.md` respectively; a shared card/list renderer does not merge their data ownership.
+- GTA wiki and collection pages reuse the same renderer contract but load only from the `gta_*` tables through `apps/web/src/lib/gta.ts`; never attach GTA rows to Roblox universe or wiki tables.
 
 ## Public Route Checklists
 

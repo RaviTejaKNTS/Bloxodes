@@ -96,3 +96,4 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/sitemaps/stats.xml` | `GET` | `src/app/sitemaps/stats.xml/route.ts` | Sole sitemap owner for stats routes, with real index-refresh `lastmod` values, the approved games-list SEO matrix, and the top 1,000 eligible individual game pages. |
 | `/sitemaps/tools.xml` | `GET` | `src/app/sitemaps/tools.xml/route.ts` | Tools sitemap. |
 | `/sitemaps/wiki.xml` | `GET` | `src/app/sitemaps/wiki.xml/route.ts` | Wiki sitemap. |
+| `/sitemaps/gta.xml` | `GET` | `src/app/sitemaps/gta.xml/route.ts` | GTA landing, wiki hub/collection, and tool sitemap. |

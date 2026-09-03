@@ -22,6 +22,9 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "puzzle",
   "wiki",
   "wiki_collection",
+  "gta_game",
+  "gta_wiki",
+  "gta_wiki_collection",
   "stats"
 ]);
 
@@ -56,6 +59,7 @@ const PUZZLES_SITEMAP_PATH = "/sitemaps/puzzles.xml";
 const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
+const GTA_SITEMAP_PATH = "/sitemaps/gta.xml";
 const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
@@ -211,6 +215,43 @@ function revalidateForWiki(slug: string) {
   return applyRevalidation(
     ["/wiki", `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
     [`wiki:${slug}`, "wiki-index", "home"]
+  );
+}
+
+function revalidateForGtaGame(slug: string) {
+  return applyRevalidation(
+    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
+    ["games-index", "gta-home", "gta-games-index", "gta-wiki-index", `gta-game:${slug}`]
+  );
+}
+
+function revalidateForGtaWiki(slug: string) {
+  return applyRevalidation(
+    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
+    ["games-index", "gta-home", "gta-wiki-index", `gta-wiki:${slug}`]
+  );
+}
+
+function revalidateForGtaWikiCollection(slug: string) {
+  const [wikiSlug, collectionSlug] = slug.split("/");
+  const basePath = wikiSlug && collectionSlug ? `/gta/wiki/${wikiSlug}/${collectionSlug}` : "";
+  return applyRevalidation(
+    [
+      "/gta",
+      "/gta/wiki",
+      wikiSlug ? `/gta/wiki/${wikiSlug}` : "",
+      basePath,
+      ...(basePath ? Array.from({ length: 39 }, (_, index) => `${basePath}/page/${index + 2}`) : []),
+      SITEMAP_INDEX_PATH,
+      GTA_SITEMAP_PATH
+    ].filter(Boolean) as string[],
+    [
+      "gta-home",
+      "gta-wiki-index",
+      "gta-wiki-collection-index",
+      wikiSlug ? `gta-wiki:${wikiSlug}` : "",
+      wikiSlug && collectionSlug ? `gta-wiki-collection:${wikiSlug}/${collectionSlug}` : ""
+    ]
   );
 }
 
@@ -817,6 +858,15 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       break;
     case "wiki_collection":
       purgePaths = revalidateForWikiCollection(slug);
+      break;
+    case "gta_game":
+      purgePaths = revalidateForGtaGame(slug);
+      break;
+    case "gta_wiki":
+      purgePaths = revalidateForGtaWiki(slug);
+      break;
+    case "gta_wiki_collection":
+      purgePaths = revalidateForGtaWikiCollection(slug);
       break;
     case "tool":
       purgePaths = revalidateForTools(slug);

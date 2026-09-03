@@ -1,10 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SidebarActiveState } from "@/components/SidebarActiveState";
 import { SidebarSearch } from "@/components/SidebarSearch";
 import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import { SiteLogo } from "@/components/SiteLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { isNavLinkActive, siteNavLinks } from "@/lib/site-navigation";
+import { isNavLinkActive, siteNavLinksForPath } from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
 type SiteSidebarProps = {
@@ -14,6 +17,8 @@ type SiteSidebarProps = {
 const DESKTOP_NAV_ID = "site-sidebar-primary-nav";
 
 export function SiteSidebar({ pathname }: SiteSidebarProps) {
+  const currentPathname = usePathname() ?? pathname;
+  const links = siteNavLinksForPath(currentPathname);
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[15.5rem] flex-col border-r border-sidebar-border/80 bg-sidebar text-sidebar-foreground shadow-none xl:flex">
       <div className="px-3 pb-2 pt-5">
@@ -23,15 +28,15 @@ export function SiteSidebar({ pathname }: SiteSidebarProps) {
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-2 pb-3">
-        <SidebarSearch className="px-1 pb-3" initialPathname={pathname} />
+        <SidebarSearch className="px-1 pb-3" initialPathname={currentPathname} />
 
         <nav id={DESKTOP_NAV_ID} className="px-1" aria-label="Primary">
           <div className="h-6 px-2 text-[11px] font-medium uppercase leading-6 tracking-[0.12em] text-sidebar-foreground/40">
             Browse
           </div>
           <ul className="space-y-1">
-            {siteNavLinks.map((link) => {
-              const active = isNavLinkActive(pathname, link.href);
+            {links.map((link) => {
+              const active = isNavLinkActive(currentPathname, link.href);
               return (
                 <li key={link.href}>
                   <Link

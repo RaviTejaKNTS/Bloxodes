@@ -1,7 +1,7 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-09-02
+Last verified: 2026-09-03
 Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive 36,068-key R2 byte/readability audit, live route/image checks, route tests, and production row counts
 
 ## Scope
@@ -10,6 +10,7 @@ Game wiki hubs and their game-specific collections are one editorial/data unit:
 
 - `/wiki/<game-slug>` is backed by `wiki_pages`.
 - `/wiki/<game-slug>/<collection-slug>` is backed by `wiki_collection_pages`, its `published_dataset_id`, `wiki_collection_datasets`, and `wiki_collection_items`.
+- GTA follows the same hub/collection pattern under its own platform namespace: `/gta/wiki/<game-slug>` uses `gta_games` plus `gta_wiki_pages`, while `/gta/wiki/<game-slug>/<collection-slug>` uses `gta_wiki_collection_pages`, its `published_dataset_id`, `gta_wiki_collection_datasets`, and `gta_wiki_collection_items`.
 - The verified production database contains 663 published collection pages with valid dataset pointers and 46,732 published item rows.
 
 These collections describe one game's durable systems and items—pets, weapons, crops, locations, NPCs, recipes, mutations, progression systems, and similar player-facing sets. They are not part of the global `/catalog` ingestion pipeline.
@@ -22,6 +23,8 @@ These collections describe one game's durable systems and items—pets, weapons,
 - `wiki_collection_pages` owns collection page copy, route identity, display configuration, and publication state.
 - Collection codes use `<game-slug>-<collection-slug>`; `wiki_slug` must use the editorial game slug, never a stats/universe slug.
 - Roblox APIs may verify universe identity, metadata, and thumbnails. Collection item rows come from source research rather than assuming Roblox exposes a complete item endpoint.
+- GTA uses the same v2 workspace dataset shape and shared collection renderer, but it does not require a `roblox_universes` row or registered Roblox collection config. Its ignored authoring workspace lives under `tmp/content-workspace/gta/<game-slug>/` and immutable media keys use `gta/<game-slug>/<collection-slug>/...` in the shared wiki R2 bucket.
+- Managed development currently has 15 published GTA 5 collection pages, including the completed Animals, Hobbies & Pastimes, Random Events, and Strangers & Freaks datasets; production remains intentionally unchanged until an explicit release.
 
 ## Workflow
 
@@ -32,6 +35,10 @@ These collections describe one game's durable systems and items—pets, weapons,
 5. Synchronize the approved page and immutable dataset revision from its explicit runtime manifest into managed development, publish its dataset pointer there, then run `verify-wiki-final` or `verify-game-collection-finals` against the managed-development web preview.
 6. Review hub-to-collection navigation, item counts, cards/tables, images, metadata, structured data, search, sitemap, and revalidation behavior.
 7. Promote through a controlled idempotent seed/upsert or forward-only migration, then verify production.
+
+For GTA, use `verify:gta-wiki-final`, `sync:gta-collection-runtime`, and `verify:gta-collection-final`. These commands default to managed development; GTA production promotion is deliberately outside the initial vertical slice.
+
+Use `.agents/skills/bloxodes-gta-wiki-*/SKILL.md` for GTA hub work and `.agents/skills/bloxodes-gta-game-collection-*/SKILL.md` for GTA collection discovery, research, data, images, writing, managed-development verification, and later refreshes. The Roblox wiki and collection skills are not interchangeable with these because they assume Roblox universe identity, tables, routes, and publication commands.
 
 Use the matching wiki and game-collection workflow skills. For existing datasets, `bloxodes-game-collection-refresh` is the maintenance path for one collection, one game, or the registered collection set.
 

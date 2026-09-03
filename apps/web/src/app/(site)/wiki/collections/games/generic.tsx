@@ -666,7 +666,19 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "build-a-boat-for-treasure-blocks": 26_000,
   // Tower cards combine exact artwork with several comparison fields; split the
   // image-dense roster before the rendered HTML size ceiling is reached.
-  "tower-defense-simulator-towers": 26_000
+  "tower-defense-simulator-towers": 26_000,
+  // GTA 5 Story Mode vehicles: 321 image cards with manufacturer, price, storage,
+  // ownership, and Rockstar stat bars. Default packing leaves four pages above
+  // the HTML release-size ceiling.
+  "gta-5-vehicles": 18_000,
+  "gta-5-characters": 18_000,
+  "gta-5-story-missions": 18_000,
+  // GTA 5 Story Mode collection cards carry full stills plus source-backed
+  // comparison fields. Keep the larger new collections on two balanced pages
+  // so their server-rendered HTML stays below the release-size ceiling.
+  "gta-5-hobbies-and-pastimes": 60_000,
+  "gta-5-random-events": 60_000,
+  "gta-5-strangers-and-freaks": 60_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -693,7 +705,10 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "evade-nametags": 30_000,
   "volleyball-legends-ball-skins": 30_000,
   "build-a-boat-for-treasure-blocks": 26_000,
-  "tower-defense-simulator-towers": 26_000
+  "tower-defense-simulator-towers": 26_000,
+  "gta-5-vehicles": 18_000,
+  "gta-5-characters": 18_000,
+  "gta-5-story-missions": 18_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {
@@ -877,13 +892,23 @@ export function renderGameCollectionPage({
   dataset,
   contentHtml,
   currentPage = 1,
-  prepared
+  prepared,
+  routeBase = "/wiki",
+  wikiLabel = "Wiki",
+  collectionOptions,
+  commentsEntityType = "wiki_collection",
+  showMoreCollections = true
 }: {
   config: GameCollectionRenderConfig;
   dataset: GameCollectionDataset;
   contentHtml?: GameCollectionContentHtml | null;
   currentPage?: number;
   prepared?: GameDatasetPreparedCollection;
+  routeBase?: string;
+  wikiLabel?: string;
+  collectionOptions?: Array<{ value: string; label: string; href: string }>;
+  commentsEntityType?: "wiki_collection" | "gta_wiki_collection";
+  showMoreCollections?: boolean;
 }) {
   const preparedCollection = prepared ?? buildGameDatasetPreparedCollection(config, dataset);
   const displayDataset = preparedCollection.dataset;
@@ -900,7 +925,8 @@ export function renderGameCollectionPage({
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
   const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
-  const basePath = buildWikiCollectionPath(config.gameSlug, config.slug);
+  const normalizedRouteBase = routeBase === "/" ? "" : routeBase.replace(/\/+$/, "");
+  const basePath = `${normalizedRouteBase}/${config.gameSlug}/${config.slug}`;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const publishedIso = toIsoContentDate(contentHtml?.publishedAt) ?? updatedIso;
   const pagination = buildCollectionPagination({
@@ -950,8 +976,8 @@ export function renderGameCollectionPage({
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: "Wiki", href: "/wiki" },
-    { label: config.gameName, href: `/wiki/${config.gameSlug}` },
+    { label: wikiLabel, href: normalizedRouteBase },
+    { label: config.gameName, href: `${normalizedRouteBase}/${config.gameSlug}` },
     {
       label: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`,
       href: null
@@ -970,8 +996,8 @@ export function renderGameCollectionPage({
   const breadcrumbSchema = JSON.stringify(
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
-      { name: "Wiki", url: `${SITE_URL.replace(/\/$/, "")}/wiki` },
-      { name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}/wiki/${config.gameSlug}` },
+      { name: wikiLabel, url: `${SITE_URL.replace(/\/$/, "")}${normalizedRouteBase}` },
+      { name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}${normalizedRouteBase}/${config.gameSlug}` },
       { name: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`, url: canonicalUrl }
     ])
   );
@@ -1017,7 +1043,16 @@ export function renderGameCollectionPage({
           pagination={pagination.info}
           toolbar={
             <>
-              <DatasetCollectionNav config={config} className="max-w-none" />
+              {collectionOptions ? (
+                <CatalogSelectNav
+                  label={`${config.gameName} collection`}
+                  value={config.code}
+                  className="max-w-none"
+                  options={collectionOptions}
+                />
+              ) : (
+                <DatasetCollectionNav config={config} className="max-w-none" />
+              )}
               {sectionNav.length > 1 ? <SectionNav sections={sectionNav} className="max-w-none" /> : null}
             </>
           }
@@ -1044,10 +1079,12 @@ export function renderGameCollectionPage({
         <>
           {contentHtml?.id ? (
             <div className="mt-10">
-              <CommentsSection entityType="wiki_collection" entityId={contentHtml.id} />
+              <CommentsSection entityType={commentsEntityType} entityId={contentHtml.id} />
             </div>
           ) : null}
-          <MoreWikiCollections wikiSlug={config.gameSlug} excludeCollectionSlug={config.slug} gameName={config.gameName} />
+          {showMoreCollections ? (
+            <MoreWikiCollections wikiSlug={config.gameSlug} excludeCollectionSlug={config.slug} gameName={config.gameName} />
+          ) : null}
         </>
       ) : null}
 

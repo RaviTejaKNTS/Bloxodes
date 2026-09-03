@@ -5,6 +5,7 @@ import {
   BookOpen,
   Calendar,
   FileText,
+  Gamepad2,
   Home,
   KeyRound,
   LayoutGrid,
@@ -43,6 +44,7 @@ export type SidebarAccount = {
 
 export const siteNavLinks: SiteNavLink[] = [
   { href: "/", label: "Home", icon: Home },
+  { href: "/games", label: "Games", icon: Gamepad2 },
   { href: "/codes", label: "Codes", icon: KeyRound },
   { href: "/stats", label: "Stats", icon: BarChart3 },
   { href: "/wiki", label: "Wiki", icon: BookOpen },
@@ -54,6 +56,16 @@ export const siteNavLinks: SiteNavLink[] = [
   { href: "/puzzles", label: "Puzzles", icon: Puzzle },
   { href: "/quizzes", label: "Quizzes", icon: Award }
 ];
+
+export const gtaNavLinks: SiteNavLink[] = [
+  { href: "/gta", label: "GTA Home", icon: Home },
+  { href: "/gta/wiki", label: "GTA Wiki", icon: BookOpen },
+  { href: "/games", label: "All Games", icon: Gamepad2 }
+];
+
+export function siteNavLinksForPath(pathname: string | null | undefined): SiteNavLink[] {
+  return (pathname ?? "").startsWith("/gta") ? gtaNavLinks : siteNavLinks;
+}
 
 export const topNavLinks: SiteNavLink[] = [
   { href: "/wiki", label: "Wiki", icon: BookOpen },
@@ -72,11 +84,13 @@ export const signedOutSidebarAccount: SidebarAccount = {
 
 export function isNavLinkActive(pathname: string | null | undefined, href: string) {
   const path = pathname ?? "/";
+  if (href === "/gta") return path === href;
   return path === href || (href !== "/" && path.startsWith(`${href}/`));
 }
 
 export function resolveSearchScope(pathname: string | null | undefined): SearchScope {
   const path = pathname ?? "/";
+  if (path.startsWith("/gta")) return { scope: "gta", label: "GTA" };
   if (
     path === "/" ||
     path.startsWith("/about") ||
