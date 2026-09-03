@@ -27,6 +27,7 @@ tmp/content-workspace/gta/<game-slug>/collections/<collection-slug>/brief.md
 8. Plan stable sections that help players. Do not mirror a source table when a clearer game-native grouping exists.
 9. Plan one exact image per item when images help identification. Record source, licensing or access caveats, and expected gaps.
 10. Check search intent and strong competitor coverage to make sure the collection answers the questions players actually ask. Do not copy competitor wording.
+11. Classify the page as `database` or `checklist`. Use `checklist` for finite Story Mode or Online goals players complete, especially location-heavy collectibles. Use `database` for reference rosters players browse and compare. This is a renderer choice on the existing collection row, not a new GTA table.
 
 ## Source rules
 
@@ -75,6 +76,7 @@ Data plan:
 - Known gaps or conflicts:
 
 Page layout plan:
+- Page type: `database` or `checklist`:
 - Section field:
 - Section order and labels:
 - Card title field:
@@ -86,6 +88,7 @@ Page layout plan:
 - Section note needs:
 - Pagination expectation:
 - Renderer changes needed, yes/no:
+- Checklist route/progress rationale: (required only for `checklist`)
 
 Research approval:
 - Roster source-backed, yes/no:

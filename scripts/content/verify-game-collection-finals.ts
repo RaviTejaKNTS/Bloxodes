@@ -25,7 +25,7 @@ type CollectionFinal = {
 type RuntimeManifest = {
   schemaVersion?: number;
   game?: { slug?: string };
-  collection?: { slug?: string };
+  collection?: { slug?: string; pageType?: "database" | "checklist" };
   dataset?: string;
   finalJson?: string;
 };
@@ -132,7 +132,8 @@ async function readManifest(file: string, game: string, collection: string) {
   if (!(await pathExists(datasetFile)) || !(await pathExists(finalFile))) {
     throw new Error(`${file} references a missing dataset or final JSON file.`);
   }
-  return { datasetFile, finalFile };
+  const pageType = parsed.collection?.pageType === "checklist" ? "checklist" : "database";
+  return { datasetFile, finalFile, pageType };
 }
 
 async function readFinal(file: string): Promise<CollectionFinal> {
@@ -158,11 +159,11 @@ function runCommand(command: string, args: string[]) {
   });
 }
 
-async function verifyReadback(game: string, collection: string, finalJson: CollectionFinal) {
+async function verifyReadback(game: string, collection: string, finalJson: CollectionFinal, pageType: "database" | "checklist") {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("wiki_collection_pages")
-    .select("wiki_slug,collection_slug,code,title,display_name,universe_id,item_count,is_published,meta_description,published_dataset_id")
+    .select("wiki_slug,collection_slug,code,page_type,title,display_name,universe_id,item_count,is_published,meta_description,published_dataset_id")
     .eq("wiki_slug", game)
     .eq("collection_slug", collection)
     .maybeSingle();
@@ -171,6 +172,7 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
   if (!data) throw new Error(`No wiki_collection_pages row found for ${game}/${collection}`);
   const row = data as {
     code?: string | null;
+    page_type?: string | null;
     title?: string | null;
     display_name?: string | null;
     universe_id?: number | null;
@@ -179,6 +181,7 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
     published_dataset_id?: string | null;
   };
   if (!row.is_published) throw new Error(`Collection ${game}/${collection} is not published`);
+  if (row.page_type !== pageType) throw new Error(`Collection ${game}/${collection} page type mismatch: ${row.page_type ?? "missing"} != ${pageType}`);
   if (!row.item_count || row.item_count < 1) throw new Error(`Collection ${game}/${collection} has no item_count`);
   if (!row.published_dataset_id) throw new Error(`Collection ${game}/${collection} has no published dataset pointer`);
   const { data: dataset, error: datasetError } = await sb
@@ -204,7 +207,7 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
   if (typeof finalJson.universe_id === "number" && row.universe_id !== finalJson.universe_id) {
     throw new Error(`Collection universe_id mismatch for ${game}/${collection}`);
   }
-  return { title: expectedTitle ?? row.title ?? undefined };
+  return { title: expectedTitle ?? row.title ?? undefined, pageType };
 }
 
 function resolveItemCountToken(value: string, itemCount: number): string {
@@ -219,6 +222,11 @@ async function verifyRoute(url: string, title?: string) {
   if (title && !body.includes(title) && !body.includes(title.replace(/&/g, "&amp;"))) {
     throw new Error(`${url} returned 200 but did not include the collection title`);
   }
+}
+
+async function verifyChecklistPagination(url: string) {
+  const response = await fetch(`${url}/page/2`, { redirect: "manual" });
+  if (response.status !== 404) throw new Error(`${url}/page/2 should return 404 for a checklist, received ${response.status}`);
 }
 
 async function main() {
@@ -278,9 +286,10 @@ async function main() {
   for (let index = 0; index < collections.length; index += 1) {
     const collection = collections[index];
     const finalJson = finals[index];
-    const readback = await verifyReadback(options.game, collection, finalJson);
+    const readback = await verifyReadback(options.game, collection, finalJson, workspaces[index].pageType);
     const url = `${options.baseUrl}/wiki/${options.game}/${collection}`;
     await verifyRoute(url, readback.title);
+    if (readback.pageType === "checklist") await verifyChecklistPagination(url);
     console.log(`Route passed: ${url}`);
     urls.push(url);
   }

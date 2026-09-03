@@ -34,6 +34,8 @@ These routes back interactive site features, search, tool data, session/progress
 - User/session state:
   - `codes/session`, `codes/progress`
   - `checklists/session`, `checklists/progress`
+  - `wiki/collections/progress`
+  - `gta/collections/progress`
   - `quizzes/session`, `quizzes/progress`
   - `account/avatar`
 - Community and preferences:
@@ -91,6 +93,8 @@ These routes back interactive site features, search, tool data, session/progress
 - `/api/mobile/content/[kind]/[slug]` returns mobile detail sections and passes query/page controls through to native catalog sections. For `kind=catalog`, codes that match a published `wiki_collection_pages` row fall back to that collection so game wiki collections render natively.
 - `/api/mobile/quizzes/[code]/play` returns the full `QuizData` (questions, options, correct option ids) for the native quiz player.
 - `/api/mobile/stats/games` and its `[universeId]` + `[universeId]/chart` children wrap `apps/web/src/lib/stats.ts` with CORS headers for the app; the web `/api/stats/*` routes are unchanged.
+- `/api/gta/collections/progress` is a session-scoped GET/PUT endpoint for GTA collection checklist rows. It validates that the requested GTA collection is a published `checklist` page, stores checked item slugs in `user_gta_collection_progress` for signed-in users, and returns 401 to anonymous API callers; the browser checklist keeps a local-first copy when signed out.
+- `/api/wiki/collections/progress` is the Roblox wiki collection counterpart. It validates a published `wiki_collection_pages` row with `page_type = checklist`, stores namespaced progress in the existing `user_checklist_progress` table, and keeps the same signed-in account contract while the shared browser renderer uses local-first progress when signed out. It must not be used for global `/checklists` rows.
 - Mobile auth: the app opens `/api/mobile/auth/complete` in an auth browser session; after web Roblox login it redirects to `bloxodes://auth?code=<short-lived signed code>`. `/api/mobile/auth/exchange` swaps that code for an `app_sessions` bearer token. `/api/mobile/auth/session` and `/api/mobile/auth/logout` accept `Authorization: Bearer`.
 - Mobile progress routes (`mobile/codes/progress`, `mobile/checklists/progress`, `mobile/quizzes/progress`) accept bearer tokens with a cookie fallback via `apps/web/src/lib/auth/mobile-session.ts`; they write the same `user_*_progress` tables as the web routes.
 - Shared payload and state logic lives in `apps/web/src/lib/extension-codes.ts`, `apps/web/src/lib/extension-stats.ts`, `apps/web/src/lib/code-progress.ts`, `apps/web/src/lib/mobile-codes.ts`, and `apps/web/src/lib/mobile-content.ts`.

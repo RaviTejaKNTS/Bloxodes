@@ -15,6 +15,8 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/admin/codes` | `GET`, `PATCH` | `src/app/api/admin/codes/route.ts` | Personal admin API for `apps/admin-extension`: read or partially patch a codes page's editorial columns (name, universe ID, SEO fields, cover image, links, positional sources, markdown sections). Requires bearer `ADMIN_API_TOKEN`; 404 when the variable is unset. |
 | `/api/account/avatar` | `GET` | `src/app/api/account/avatar/route.ts` | Signed-in avatar/display-name payload for account UI. |
 | `/api/checklists/progress` | `GET`, `PUT` | `src/app/api/checklists/progress/route.ts` | Per-user checklist progress read/write. |
+| `/api/wiki/collections/progress` | `GET`, `PUT` | `apps/web/src/app/api/wiki/collections/progress/route.ts` | Per-user progress for published Roblox wiki collection checklist pages; namespaced in the existing checklist progress table and local-first when signed out. |
+| `/api/gta/collections/progress` | `GET`, `PUT` | `apps/web/src/app/api/gta/collections/progress/route.ts` | Per-user progress for published GTA collection checklist pages; signed-out UI state remains local-first. |
 | `/api/checklists/session` | `GET` | `src/app/api/checklists/session/route.ts` | Session snapshot for checklist UI. |
 | `/api/codes/progress` | `GET`, `PUT`, `PATCH` | `src/app/api/codes/progress/route.ts` | Per-user used-code progress read/write; PATCH applies one used/restored action without overwriting concurrent progress. |
 | `/api/codes/session` | `GET` | `src/app/api/codes/session/route.ts` | Session snapshot for code pages. |

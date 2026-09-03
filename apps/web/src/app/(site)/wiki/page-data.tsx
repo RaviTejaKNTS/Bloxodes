@@ -950,6 +950,7 @@ async function buildWikiCollectionBlocks(related: WikiRelatedData) {
 
       return {
         page,
+        pageType: page.page_type,
         heading: getWikiCollectionBlockHeading(page),
         nodes,
         imageUrls
@@ -1325,6 +1326,10 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
     ? "article-content md-copy-scope game-copy min-w-0"
     : "article-content md-copy-scope game-copy min-w-0";
   const catalogBlocks = await buildWikiCollectionBlocks(related);
+  const catalogGroups = [
+    { heading: "Game data", blocks: catalogBlocks.filter((block) => block.pageType !== "checklist") },
+    { heading: "Checklists", blocks: catalogBlocks.filter((block) => block.pageType === "checklist") }
+  ].filter((group) => group.blocks.length > 0);
   const creatorUrl = buildCreatorUrl(page);
   const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";
   const socialLinks = buildSocialLinkButtons(extractSocialLinks(page.social_links), creatorLabel);
@@ -1517,28 +1522,35 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             nowMs={nowMs}
           />
 
-          {catalogBlocks.map(({ page: catalogPage, heading, nodes, imageUrls }) => (
-            <section
-              key={catalogPage.code}
-              className="space-y-4"
-              data-journey-item
-              data-analytics-event="select_item"
-              data-analytics-item-list-name="wiki_collection"
-              data-analytics-item-id={catalogPage.code}
-              data-analytics-item-name={catalogPage.title}
-              data-analytics-content-type="catalog"
-            >
-              <h3 className="text-xl font-semibold leading-snug text-foreground">{heading}</h3>
-              {nodes ? (
-                <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
-                  {nodes}
-                </div>
-              ) : null}
-              <WikiCollectionCta
-                href={buildWikiCollectionPath(catalogPage.wiki_slug, catalogPage.collection_slug)}
-                title={catalogPage.title}
-                imageUrls={imageUrls}
-              />
+          {catalogGroups.map((group) => (
+            <section key={group.heading} className="space-y-5">
+              <h2 className="text-2xl font-semibold leading-tight text-foreground md:text-3xl">{group.heading}</h2>
+              <div className="space-y-8">
+                {group.blocks.map(({ page: catalogPage, heading, nodes, imageUrls }) => (
+                  <section
+                    key={catalogPage.code}
+                    className="space-y-4"
+                    data-journey-item
+                    data-analytics-event="select_item"
+                    data-analytics-item-list-name="wiki_collection"
+                    data-analytics-item-id={catalogPage.code}
+                    data-analytics-item-name={catalogPage.title}
+                    data-analytics-content-type="catalog"
+                  >
+                    <h3 className="text-xl font-semibold leading-snug text-foreground">{heading}</h3>
+                    {nodes ? (
+                      <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
+                        {nodes}
+                      </div>
+                    ) : null}
+                    <WikiCollectionCta
+                      href={buildWikiCollectionPath(catalogPage.wiki_slug, catalogPage.collection_slug)}
+                      title={catalogPage.title}
+                      imageUrls={imageUrls}
+                    />
+                  </section>
+                ))}
+              </div>
             </section>
           ))}
 

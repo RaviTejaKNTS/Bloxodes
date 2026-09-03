@@ -1,6 +1,6 @@
 ---
 name: bloxodes-game-collection-research
-description: Research one approved Bloxodes game collection before data or writing. Use for /wiki/<game>/<collection> source proof, production overlap, collection scope, item-system understanding, useful card fields, section layout, image/source gaps, and whether the collection should proceed. Do not write final.json.
+description: Research one approved Bloxodes game collection before data or writing. Use for /wiki/game-slug/collection-slug source proof, production overlap, collection scope, item-system understanding, useful card fields, section layout, image/source gaps, and whether the collection should proceed. Do not write final.json.
 ---
 
 # Bloxodes Game Collection Research
@@ -25,6 +25,7 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/brief.md
 6. Decide whether the collection is durable, useful, and source-backed.
 7. Identify the item fields players need, such as source, location, price, rarity, chance, requirement, damage, role, availability, or effect. These are examples; pick fields based on that game and collection.
 8. Decide how the collection should be divided into sections before data work starts. Use sections that help players compare items, not sections that only mirror source tables.
+9. Classify the page as `database` or `checklist` before data work starts. Use `checklist` for finite, player-completed goals such as collectibles, locations, quests, badges, or route steps. Use `database` for reference rosters players browse and compare. This is a page presentation choice, not a new table or route family.
 
 ## Gather Sources
 
@@ -48,6 +49,7 @@ Sources to use:
 - etc.
 
 Data plan:
+- Page type: `database` or `checklist`:
 - Item count expected:
 - Useful fields:
 - Grouping:
@@ -67,6 +69,7 @@ Page layout plan:
 - Sort order:
 - Section note needs:
 - Renderer/config changes needed: yes/no
+- Checklist rationale and progress key: (required only for `checklist`)
 ```
 
 If source proof is weak, say what is missing and stop.

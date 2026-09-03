@@ -87,7 +87,8 @@ Create:
   "collection": {
     "slug": "<collection-slug>",
     "label": "<Collection label>",
-    "sortOrder": 100
+    "sortOrder": 100,
+    "pageType": "database"
   },
   "route": "/gta/wiki/<game-slug>/<collection-slug>",
   "dataset": "dataset.json",
@@ -97,6 +98,7 @@ Create:
 ```
 
 Use code `<game-slug>-<collection-slug>` in later page copy. Add all material data and image sources to `sourceUrls`. Do not add search result URLs.
+Set `collection.pageType` to `checklist` for a finite player-completed goal and to `database` for a reference roster. The existing GTA table and v2 dataset are used for both types.
 
 ## Checks
 
@@ -127,6 +129,7 @@ Append to `brief.md`:
 Data readiness:
 - Dataset path:
 - Runtime manifest path:
+- Page type and manifest declaration:
 - Dataset shape and schema version:
 - Dataset count:
 - Source roster count:

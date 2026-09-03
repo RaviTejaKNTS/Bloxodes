@@ -9,6 +9,8 @@ description: Write one Bloxodes game-specific collection final.json after collec
 
 Use this after `brief.md`, data readiness, and image readiness are approved. Use it for one durable item or system collection inside one Roblox game.
 
+The approved `brief.md` owns the page type. `database` copy can focus on browsing and comparing the roster. `checklist` copy should explain the route, unlocks, order, or completion rules that help a player finish the goal. Do not add a new final JSON shape or a page-specific table: `collection.pageType` stays in `runtime-manifest.json` and the shared renderer selects the presentation.
+
 ## Workflow
 
 1. Read the approved `brief.md`.

@@ -43,6 +43,8 @@ async function main() {
   const dataset = path.join(options.workspace, "dataset.json");
   const finalJson = path.join(options.workspace, "final.json");
   const final = JSON.parse(await readFile(finalJson, "utf8")) as { title?: string; display_name?: string };
+  const manifestDocument = JSON.parse(await readFile(manifest, "utf8")) as { collection?: { pageType?: string } };
+  const expectedPageType = manifestDocument.collection?.pageType === "checklist" ? "checklist" : "database";
   await run("npm", ["run", "content:check-copy", "--", finalJson]);
   await run("npm", ["run", "audit:game-collection-datasets:v2", "--", "--game", options.game, "--collection", options.collection, "--file", dataset]);
   const checkArgs = ["run", "check:game-collection-data", "--", "--game", options.game, "--collection", options.collection, "--file", dataset, "--final-json", finalJson];
@@ -55,9 +57,10 @@ async function main() {
     { BLOXODES_ENV_OVERLAYS: "cloudflare" }
   );
   const sb = supabaseAdmin();
-  const page = await sb.from("gta_wiki_collection_pages").select("id, title, display_name, item_count, published_dataset_id, is_published").eq("wiki_slug", options.game).eq("collection_slug", options.collection).single();
+  const page = await sb.from("gta_wiki_collection_pages").select("id, title, display_name, item_count, published_dataset_id, is_published, page_type").eq("wiki_slug", options.game).eq("collection_slug", options.collection).single();
   if (page.error) throw page.error;
   if (!page.data.is_published || !page.data.published_dataset_id || page.data.item_count < 1) throw new Error("GTA collection page readback failed.");
+  if (page.data.page_type !== expectedPageType) throw new Error(`GTA collection page type mismatch: ${page.data.page_type ?? "missing"} != ${expectedPageType}.`);
   const items = await sb.from("gta_wiki_collection_items").select("id", { count: "exact", head: true }).eq("dataset_id", page.data.published_dataset_id);
   if (items.error) throw items.error;
   if (items.count !== page.data.item_count) throw new Error("GTA collection item readback count does not match the page.");
@@ -68,6 +71,10 @@ async function main() {
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   if (response.status !== 200 || (expectedTitle && !html.includes(expectedTitle))) throw new Error(`${url} failed route verification (HTTP ${response.status}).`);
+  if (expectedPageType === "checklist") {
+    const pageTwo = await fetch(`${url}/page/2`, { redirect: "manual" });
+    if (pageTwo.status !== 404) throw new Error(`${url}/page/2 should return 404 for a checklist.`);
+  }
   console.log(`Verified GTA collection: ${url}`);
 }
 

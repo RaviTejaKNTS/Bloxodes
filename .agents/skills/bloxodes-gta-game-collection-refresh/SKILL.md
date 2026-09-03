@@ -36,13 +36,14 @@ For each selected collection:
 1. Read the published GTA page row, dataset metadata, item count, stable item slugs and names, sections, public fields, and image coverage.
 2. Read the existing runtime manifest and brief sources.
 3. Check the strongest known source for the exact roster and any recent update signal.
-4. Compare by stable slug and name. A real delta is a verified addition, removal, rename, changed mechanic or value, mode/edition correction, section change, or newly verified exact image.
+4. Compare by stable slug and name. A real delta is a verified addition, removal, rename, changed mechanic or value, mode/edition correction, section change, page-type correction, or newly verified exact image.
 5. Do not treat source timestamps, rewritten wording, URL changes, unverified comments, or a different sort preference as a data change.
 
 Choose one result immediately:
 
 - `Unchanged`: no verified data delta and required or accepted images remain valid. Stop without editing files or page copy.
 - `Data update`: a verified roster, field, mode, edition, section, or ordering change exists.
+- `Page-type update`: the collection is clearly a finite player-completed goal or a reference roster, so an approved switch between `checklist` and `database` is needed.
 - `Image update`: facts are unchanged but a missing, wrong, or materially better exact image is verified.
 - `Copy follow-up`: a verified data change makes a named passage inaccurate. Do not rewrite it inside a data-only refresh.
 - `Blocked`: sources conflict, the published pointer is missing, or the authoring workspace cannot support a safe edit.
@@ -52,9 +53,10 @@ Choose one result immediately:
 1. Record the sources, previous value, verified new value, affected rows, and image effect in a maintenance section in `brief.md`.
 2. Change only the affected rows and metadata. Preserve unrelated facts, descriptions, sections, ordering, and files.
 3. Keep the v2 contract and GTA identity unchanged.
-4. Leave unknown values empty. Do not infer a replacement because an old value was removed.
-5. Run the dataset audit, checker, and GTA runtime dry plan from the data skill.
-6. Run the image skill only for new, renamed, or image-affected rows.
+4. Keep `collection.pageType` explicit in the runtime manifest and verify that the database row and route use the same type. A page-type change selects shared renderer/progress behavior; it does not create a new table.
+5. Leave unknown values empty. Do not infer a replacement because an old value was removed.
+6. Run the dataset audit, checker, and GTA runtime dry plan from the data skill.
+7. Run the image skill only for new, renamed, or image-affected rows.
 
 ## Applying an image delta
 

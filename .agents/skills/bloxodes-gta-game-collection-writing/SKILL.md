@@ -7,6 +7,8 @@ description: Write final.json for one Bloxodes GTA collection after approved res
 
 Own the writing pass for one approved GTA collection. Do not spawn other workers. Start only after the brief records approved data and image readiness.
 
+Follow the approved page type in `brief.md`. `database` copy should support browsing and comparison. `checklist` copy should support route planning, completion order, access requirements, or other player goals. Keep the same `final.json` shape and existing GTA collection row; `collection.pageType` belongs in `runtime-manifest.json`.
+
 ## Workspace
 
 Read `brief.md` and `dataset.json`, then create or update:

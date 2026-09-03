@@ -34,6 +34,8 @@ Never place authoring images in `data/` or `apps/web/public/`. The GTA verifier 
 9. A missing image is acceptable only when the parent approves the exact gap after the attempted sources are recorded.
 10. Visually inspect uncertain or easily confused images before approving them.
 
+For `checklist` collections, prefer exact location, route, mission-step, or collectible images that help players recognize a goal. Record any text-only exception item by item and obtain parent approval; the page type does not justify generic or mismatched art.
+
 The existing generic image collector may be used when the manifest format fits:
 
 ```bash
@@ -66,6 +68,7 @@ Append to `brief.md`:
 ```text
 Image readiness:
 - Image target:
+- Page type (`database` or `checklist`):
 - Images found:
 - Exact-match coverage:
 - Images missing or accepted gaps:

@@ -44,6 +44,7 @@ Scoped route-family guides:
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
 - Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `dev-docs/pipelines/catalog.md` and `dev-docs/pipelines/wiki-collections.md` respectively; a shared card/list renderer does not merge their data ownership.
 - GTA wiki and collection pages reuse the same renderer contract but load only from the `gta_*` tables through `apps/web/src/lib/gta.ts`; never attach GTA rows to Roblox universe or wiki tables.
+- Roblox wiki collections use the same `wiki_collection_pages` row with an explicit `page_type`: `database` keeps the existing paginated table/card renderer, while `checklist` uses the shared checklist renderer and local-first/account-synced progress. Keep the page-type decision in the runtime manifest and page row rather than creating a new table.
 
 ## Public Route Checklists
 

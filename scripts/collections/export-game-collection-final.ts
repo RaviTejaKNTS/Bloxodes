@@ -23,6 +23,7 @@ type CollectionPageRow = {
   wiki_slug: string;
   collection_slug: string;
   code: string;
+  page_type?: "database" | "checklist" | null;
   display_name?: string | null;
   title?: string | null;
   seo_title?: string | null;
@@ -205,7 +206,7 @@ async function main() {
   const { data, error } = await sb
     .from("wiki_collection_pages")
     .select(
-      "universe_id,wiki_slug,collection_slug,code,display_name,title,seo_title,meta_description,intro_md,description_md,how_it_works_md,description_json,faq_json,wiki_md,is_published,item_count,published_dataset_id,schema_ld_json,thumb_url,wiki_sort_order"
+      "universe_id,wiki_slug,collection_slug,code,page_type,display_name,title,seo_title,meta_description,intro_md,description_md,how_it_works_md,description_json,faq_json,wiki_md,is_published,item_count,published_dataset_id,schema_ld_json,thumb_url,wiki_sort_order"
     )
     .eq("wiki_slug", options.game!)
     .eq("collection_slug", options.collection!)
@@ -320,7 +321,7 @@ async function main() {
   const manifest = {
     schemaVersion: 1,
     game: { slug: row.wiki_slug, name: config.gameName, universeId },
-    collection: { slug: row.collection_slug, label: row.display_name ?? config.label, sortOrder: row.wiki_sort_order ?? config.sortOrder },
+    collection: { slug: row.collection_slug, label: row.display_name ?? config.label, sortOrder: row.wiki_sort_order ?? config.sortOrder, pageType: row.page_type === "checklist" ? "checklist" : "database" },
     dataset: "dataset.json",
     finalJson: "final.json",
     mediaRoot: "media",

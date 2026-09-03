@@ -11,7 +11,7 @@ import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../sha
 type Manifest = {
   schemaVersion: 1;
   game: { slug: string; name: string };
-  collection: { slug: string; label: string; sortOrder?: number };
+  collection: { slug: string; label: string; sortOrder?: number; pageType?: "database" | "checklist" };
   route?: string;
   dataset: string;
   finalJson?: string;
@@ -43,6 +43,7 @@ type Plan = {
   manifest: Manifest;
   manifestPath: string;
   code: string;
+  pageType: "database" | "checklist";
   datasetPath: string;
   contentHash: string;
   metaJson: Record<string, unknown>;
@@ -136,6 +137,8 @@ async function planManifest(manifestPath: string): Promise<Plan> {
   const collectionSlug = manifest.collection?.slug?.trim().toLowerCase();
   if (!SAFE_SLUG.test(gameSlug) || !SAFE_SLUG.test(collectionSlug)) throw new Error(`${manifestPath} has invalid GTA slugs.`);
   if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) throw new Error(`${manifestPath} needs game and collection labels.`);
+  const pageType = manifest.collection.pageType ?? "database";
+  if (pageType !== "database" && pageType !== "checklist") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
   if (manifest.route && manifest.route !== `/gta/wiki/${gameSlug}/${collectionSlug}`) throw new Error(`${manifestPath} route does not match its slugs.`);
   const datasetPath = resolveInside(root, manifest.dataset, "dataset");
   const mediaRoot = resolveInside(root, manifest.mediaRoot, "mediaRoot");
@@ -200,7 +203,12 @@ async function planManifest(manifestPath: string): Promise<Plan> {
   }
   const metaJson = {
     ...document.meta,
-    runtime: { gameName: manifest.game.name.trim(), label: manifest.collection.label.trim(), source: "gta_wiki_collection_datasets" }
+    runtime: {
+      gameName: manifest.game.name.trim(),
+      label: manifest.collection.label.trim(),
+      pageType,
+      source: "gta_wiki_collection_datasets"
+    }
   };
   const hashDocument = {
     meta: metaJson,
@@ -212,7 +220,7 @@ async function planManifest(manifestPath: string): Promise<Plan> {
   } catch (error) {
     if (publish || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }
-  return { manifest, manifestPath, code, datasetPath, contentHash: sha256(JSON.stringify(stableValue(hashDocument))), metaJson, items, finalJson };
+  return { manifest, manifestPath, code, pageType, datasetPath, contentHash: sha256(JSON.stringify(stableValue(hashDocument))), metaJson, items, finalJson };
 }
 
 function resolveCountTokens<T>(value: T, count: number): T {
@@ -282,7 +290,7 @@ async function applyPlan(plan: Plan) {
   const copy = pageCopy(plan);
   let pageQuery = await sb
     .from("gta_wiki_collection_pages")
-    .select("id, game_id, wiki_page_id, wiki_slug, collection_slug, code, is_published, published_dataset_id")
+    .select("id, game_id, wiki_page_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
     .eq("wiki_slug", plan.manifest.game.slug)
     .eq("collection_slug", plan.manifest.collection.slug)
     .maybeSingle();
@@ -297,9 +305,10 @@ async function applyPlan(plan: Plan) {
       wiki_slug: plan.manifest.game.slug,
       collection_slug: plan.manifest.collection.slug,
       code: plan.code,
+      page_type: plan.pageType,
       item_count: plan.items.length,
       is_published: false
-    }).select("id, game_id, wiki_page_id, wiki_slug, collection_slug, code, is_published, published_dataset_id").single();
+    }).select("id, game_id, wiki_page_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id").single();
     if (inserted.error) throw inserted.error;
     page = inserted.data;
   }
@@ -347,6 +356,7 @@ async function applyPlan(plan: Plan) {
     if (!copy) throw new Error(`${plan.code} cannot publish without final.json.`);
     const updated = await sb.from("gta_wiki_collection_pages").update({
       ...copy,
+      page_type: plan.pageType,
       item_count: plan.items.length,
       published_dataset_id: dataset.data.id,
       is_published: true

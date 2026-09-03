@@ -86,6 +86,10 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
     ]);
     return { collection, copyHtml, imageUrls };
   }));
+  const collectionGroups = [
+    { key: "database" as const, label: "Game data", entries: collectionBlocks.filter(({ collection }) => collection.page_type !== "checklist") },
+    { key: "checklist" as const, label: "Collectibles", entries: collectionBlocks.filter(({ collection }) => collection.page_type === "checklist") }
+  ].filter((group) => group.entries.length);
   const structuredData = [
     webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image, author: null, publishedAt: page.published_at, updatedAt }),
     breadcrumbJsonLd([
@@ -142,19 +146,26 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
             </section>
           ) : null}
 
-          {collectionBlocks.map(({ collection, copyHtml, imageUrls }) => (
-            <section key={collection.id} className="space-y-4" data-journey-item>
-              <h3 className="text-xl font-semibold leading-snug text-foreground">{collection.display_name}:</h3>
-              {copyHtml ? (
-                <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
-                  {renderPageContentNodes(copyHtml, `${collection.code}-wiki-copy`)}
-                </div>
-              ) : null}
-              <WikiCollectionCta
-                href={buildGtaCollectionPath(collection.wiki_slug, collection.collection_slug)}
-                title={collection.title}
-                imageUrls={imageUrls}
-              />
+          {collectionGroups.map((group) => (
+            <section key={group.key} className="space-y-6" aria-labelledby={`gta-${group.key}-heading`}>
+              <h2 id={`gta-${group.key}-heading`} className="text-2xl font-semibold leading-tight text-foreground">{group.label}</h2>
+              <div className="space-y-6">
+                {group.entries.map(({ collection, copyHtml, imageUrls }) => (
+                  <section key={collection.id} className="space-y-4" data-journey-item>
+                    <h3 className="text-xl font-semibold leading-snug text-foreground">{collection.display_name}</h3>
+                    {copyHtml ? (
+                      <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
+                        {renderPageContentNodes(copyHtml, `${collection.code}-wiki-copy`)}
+                      </div>
+                    ) : null}
+                    <WikiCollectionCta
+                      href={buildGtaCollectionPath(collection.wiki_slug, collection.collection_slug)}
+                      title={collection.title}
+                      imageUrls={imageUrls}
+                    />
+                  </section>
+                ))}
+              </div>
             </section>
           ))}
 

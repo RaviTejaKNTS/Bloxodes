@@ -33,7 +33,7 @@ For each selected collection, do this before starting any data, image, or writin
 
 1. Export the current database revision with `npm run export:game-collection-workspace -- --game <game-slug> --collection <collection-slug> --output-root tmp/content-workspace/<game-slug>/collections`, then record its item count, stable item names/slugs, sections, public fields, image coverage, and page identity.
 2. Check the strongest existing or known source for that exact collection and its recent update signal. Use the existing collection brief or source links first. This is a bounded source check, not broad web research or competitor analysis.
-3. Compare the source roster and player-facing fields with the local dataset by stable slug/name. Treat only source-backed additions, removals, renames, changed values/mechanics, section/order changes, or a newly verified exact item image as a real delta.
+3. Compare the source roster and player-facing fields with the local dataset by stable slug/name. Treat only source-backed additions, removals, renames, changed values/mechanics, section/order changes, page-type corrections, or a newly verified exact item image as a real delta.
 4. Do not treat a changed source timestamp, rewritten source wording, a different URL, or a weak/unconfirmed claim as a delta.
 
 Make the decision immediately:
@@ -41,6 +41,7 @@ Make the decision immediately:
 - **Unchanged:** no verified data delta and all required/accepted item images are present. Stop. Do not create `brief.md`, `final.json`, replacement copy, or worker tasks.
 - **Data update:** a verified data delta exists. Apply only that delta, then check images for the affected new or changed items.
 - **Image update:** data is unchanged but existing items are missing images or have a clearly better exact item image available. Run only the image pass.
+- **Page-type update:** the collection is now clearly a finite player-completed goal or a reference roster, so an approved switch between `checklist` and `database` is needed.
 - **Blocked:** evidence is weak, sources conflict, or the dataset/page is missing. Leave files unchanged and report the exact blocker. Use the focused research skill only if resolving it is necessary and in scope.
 
 For a game-wide or all-registered run, perform these quick checks in parallel where practical, then spend the detailed passes only on collections with a positive data or image delta.
@@ -52,8 +53,9 @@ When the quick check is positive:
 1. Read and follow `bloxodes-game-collection-data` for the v2 contract. If no approved collection brief exists, create a short maintenance note in the collection workspace containing the sources checked, previous/current counts, exact added/removed/changed rows, image impact, and accepted gaps. Do not redo a full collection-discovery brief.
 2. Update only source-backed rows and fields. Preserve unrelated rows, ordering, sections, descriptions, and metadata unless the evidence requires a change. Do not rewrite the dataset for formatting alone.
 3. Keep the v2 shape `{ meta, items: [{ item, system }] }`: public game fields stay in `items[].item`; `items[].system` contains only `slug`, `section`, `sortOrder`, and `image`.
-4. Update `meta.itemFields`, `meta.columns`, `meta.display`, section order, and sort order only when the confirmed data change requires it. Keep display fields consistent across rows and leave unverified values empty/null rather than guessing.
-5. Run the v2 audit and data checker after the edit. If the check exposes an unrelated pre-existing issue, record it separately instead of broadening the refresh.
+4. Keep `collection.pageType` explicit in the runtime manifest and verify that the database row and route use the same type. A page-type change selects the shared renderer/progress behavior; it does not create a new table.
+5. Update `meta.itemFields`, `meta.columns`, `meta.display`, section order, and sort order only when the confirmed data change requires it. Keep display fields consistent across rows and leave unverified values empty/null rather than guessing.
+6. Run the v2 audit and data checker after the edit. If the check exposes an unrelated pre-existing issue, record it separately instead of broadening the refresh.
 
 ## Adding or replacing images
 

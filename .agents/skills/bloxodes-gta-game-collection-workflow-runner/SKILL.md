@@ -57,10 +57,10 @@ Writing worker after image approval:
 2. Record the explicit collection allowlist. Do not add adjacent ideas.
 3. Check managed development and production for exact collection duplicates or route conflicts.
 4. Run the research gate for each collection.
-5. Review roster proof, cross-checks, exclusions, game-mode and edition boundaries, useful fields, sections, pagination expectation, and image feasibility.
+5. Review roster proof, cross-checks, exclusions, game-mode and edition boundaries, useful fields, sections, the explicit `database` versus `checklist` page-type decision, pagination expectation, and image feasibility.
 6. Approve, return for specific fixes, narrow with an explicit note, or block.
 7. Run the data gate.
-8. Review dataset count against sources, v2 shape, identity, public/system separation, sections, field consistency, display metadata, source URLs, runtime manifest, audits, and GTA dry plan.
+8. Review dataset count against sources, v2 shape, identity, public/system separation, sections, field consistency, display metadata, source URLs, runtime manifest including `collection.pageType`, audits, and GTA dry plan.
 9. Run the image gate.
 10. Review exact-match coverage, file quality, source records, dataset wiring, missing-image decisions, and the image-required checker.
 11. Run the writing gate with a fresh writer.
@@ -85,8 +85,9 @@ npm run audit:html-size -- \
 ```
 
 16. Open the route in the Browser at desktop and mobile widths.
-17. Check the wiki hub after publication. Its collection copy must appear before the shared image CTA, and the CTA must use real collection images.
-18. Record the finished state in the approved roadmap or handoff document.
+17. For `database` collections, verify pagination, list/card switching, and section navigation. For `checklist` collections, verify the shared checklist cards, search/filter/reset behavior, local-first anonymous progress, account-saved progress, and that `/page/2` is 404 with the base URL canonical.
+18. Check the wiki hub after publication. Its collection copy must appear before the shared image CTA, and the CTA must use real collection images.
+19. Record the finished state in the approved roadmap or handoff document.
 
 ## Research gate
 
@@ -96,6 +97,7 @@ Approve only when:
 - One source supports the complete roster and another source cross-checks it.
 - Disputed or soft facts are marked and excluded from hard fields.
 - The collection is durable and useful in the shared renderer.
+- The page type is explicit and matches the player task: finite completion goals use `checklist`, reference rosters use `database`.
 - The proposed fields answer real lookup or comparison needs.
 - Sections use game-native categories.
 - Image collection is feasible or a text-only exception is justified.
@@ -113,6 +115,7 @@ Approve only when:
 - `meta.itemFields`, columns, display fields, section order, card/table fields, and field presentation agree.
 - The generic audit and checker pass.
 - `sync:gta-collection-runtime` dry plan passes without an apply flag.
+- The runtime manifest, page row, and route agree on `collection.pageType`.
 
 ## Image gate
 
@@ -151,6 +154,7 @@ Check:
 - Search, section dropdown, and card/list switch work.
 - Every source-backed public field appears in both card and list views as intended.
 - Pagination page 2 returns 200 when required and uses `noindex, follow`.
+- Checklist page 2 returns 404, uses the base canonical, and exposes account/local progress through the shared checklist adapter.
 - Section navigation can reach a section that starts on another page.
 - Paginated URLs stay out of `/sitemaps/gta.xml`.
 - Canonical, metadata, JSON-LD, and base collection route are correct.

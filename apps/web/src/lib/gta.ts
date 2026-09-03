@@ -94,6 +94,7 @@ export type GtaWikiCollectionPage = {
   wiki_slug: string;
   collection_slug: string;
   code: string;
+  page_type: "database" | "checklist";
   title: string;
   display_name: string;
   item_count: number;

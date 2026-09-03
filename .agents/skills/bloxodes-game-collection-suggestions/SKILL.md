@@ -37,7 +37,7 @@ Recommend only useful, durable in-game collection pages:
 
 Skip events, temporary reward tracks, gamepasses, badges, developer products, servers, broad update summaries, and raw Roblox media.
 
-Only mark `[create]` when there is at least one decent public source and enough detail to make a useful page.
+Only mark `[create]` when there is at least one decent public source and enough detail to make a useful page. For each `[create]`, recommend `page type: checklist` when the player completes finite goals (collectibles, locations, quests, badges, or route steps); otherwise recommend `page type: database`. Both types use the existing collection table and runtime manifest.
 
 ### Item count is not a blocker
 

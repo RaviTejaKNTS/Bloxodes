@@ -25,8 +25,9 @@ Production was not touched. All publication is managed development only.
 | Achievements & Trophies | `.../achievements-and-trophies/` | 51 Enhanced base | 51/51 | Verified 2026-09-02. HTML size 1.435 MB (under fail limit). Single page, GTA sidebar is GTA Home / GTA Wiki / All Games | http://127.0.0.1:3000/gta/wiki/gta-5/achievements-and-trophies | Online trophies in their own section; later DLC lists excluded; A New Perspective is Enhanced-only |
 | Gangs & Factions | `.../gangs-and-factions/` | 15 | 15/15 | Verified 2026-09-02. GTA sidebar is GTA Home / GTA Wiki / All Games | http://127.0.0.1:3000/gta/wiki/gta-5/gangs-and-factions | Thin named-member rows for Vagos/Marabunta |
 | Animals | `.../animals/` | 29; Chop excluded (stays on Characters) | 29/29 | Verified 2026-09-03. HTML size 0.726 MB. Desktop/mobile: no overflow, all item images load, GTA sidebar is GTA Home / GTA Wiki / All Games | http://127.0.0.1:3000/gta/wiki/gta-5/animals | Online peyote bleed; Pigeon is peyote-only |
+| Letter Scraps | `tmp/content-workspace/gta/gta-5/collections/letter-scraps/` | 50 Story Mode locations | 50/50 | Verified 2026-09-03. Checklist renderer, managed-development dataset/media readback, desktop/mobile interaction QA, and `/page/2` 404 guard passed | http://127.0.0.1:3000/gta/wiki/gta-5/letter-scraps | Fandom numbering and route order differ; Enhanced Story Mode captures are used; Repossession unlock wording is source-dependent; no dedicated map image |
 
-Collectibles have not been started.
+Letter Scraps is complete in managed development. The remaining approved collectible queue is not started.
 
 ## Goal
 
@@ -38,6 +39,8 @@ The existing GTA 5 Weapons collection is the reference implementation:
 - Workspace: `tmp/content-workspace/gta/gta-5/collections/weapons/`
 - Tables: `gta_games`, `gta_wiki_pages`, `gta_wiki_collection_pages`, `gta_wiki_collection_datasets`, and `gta_wiki_collection_items`
 - Verification: `npm run verify:gta-collection-final`
+
+GTA collection pages now support a `page_type` discriminator (`database` by default or `checklist` for location-heavy progress pages). Checklist pages keep the same route, database/runtime contract, and visual shell while adding local-first progress through `user_gta_collection_progress` and `/api/gta/collections/progress`.
 
 Do not use `wiki_collection_pages`, `roblox_universes`, Roblox APIs, Roblox collection registration, `/wiki/<game>/<collection>`, or `verify:game-collection-finals` for GTA work.
 

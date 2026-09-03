@@ -67,6 +67,7 @@ function pageCopy(
     wiki_slug: source.wiki_slug,
     collection_slug: source.collection_slug,
     code: source.code,
+    page_type: source.page_type === "checklist" ? "checklist" : "database",
     title: source.title,
     display_name: source.display_name,
     item_count: source.item_count,
@@ -146,7 +147,7 @@ async function main() {
     fetchAll(
       source,
       "wiki_collection_pages",
-      "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, published_dataset_id",
+      "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, page_type, title, display_name, item_count, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, published_dataset_id",
       (query) => query.eq("is_published", true).not("published_dataset_id", "is", null).order("code")
     ),
     fetchAll(target, "wiki_collection_pages", "id, code, wiki_page_id, universe_id, published_dataset_id"),

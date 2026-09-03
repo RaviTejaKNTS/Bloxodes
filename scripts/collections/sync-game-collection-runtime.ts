@@ -43,6 +43,7 @@ type PlannedItem = {
 
 type CollectionPlan = {
   config: GameCollectionConfig;
+  pageType: "database" | "checklist";
   universeId: number;
   datasetPath: string;
   schemaVersion: number;
@@ -57,7 +58,7 @@ type CollectionPlan = {
 type RuntimeManifest = {
   schemaVersion: 1;
   game: { slug: string; name: string; universeId: number };
-  collection: { slug: string; label: string; sortOrder?: number };
+  collection: { slug: string; label: string; sortOrder?: number; pageType?: "database" | "checklist" };
   dataset: string;
   finalJson?: string;
   mediaRoot: string;
@@ -66,6 +67,7 @@ type RuntimeManifest = {
 
 type CollectionSource = {
   config: GameCollectionConfig;
+  pageType: "database" | "checklist";
   universeId: number;
   datasetPath: string;
   mediaRoot: string;
@@ -266,6 +268,10 @@ async function targetSources(): Promise<CollectionSource[]> {
       if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) {
         throw new Error(`Missing game name or collection label in ${manifestPath}.`);
       }
+      const pageType = manifest.collection.pageType ?? "database";
+      if (pageType !== "database" && pageType !== "checklist") {
+        throw new Error(`Invalid collection pageType in ${manifestPath}.`);
+      }
       if (!Array.isArray(manifest.sourceUrls) || !manifest.sourceUrls.length) {
         throw new Error(`At least one sourceUrls entry is required in ${manifestPath}.`);
       }
@@ -299,6 +305,7 @@ async function targetSources(): Promise<CollectionSource[]> {
       };
       return {
         config,
+        pageType,
         universeId: manifest.game.universeId,
         datasetPath: await resolveInput(manifest.dataset, "dataset"),
         mediaRoot: await resolveInput(manifest.mediaRoot, "mediaRoot"),
@@ -420,6 +427,7 @@ async function planCollection(source: CollectionSource): Promise<CollectionPlan>
     runtime: {
       gameName: config.gameName,
       label: config.label,
+      pageType: source.pageType,
       source: "wiki_collection_datasets"
     }
   };
@@ -430,6 +438,7 @@ async function planCollection(source: CollectionSource): Promise<CollectionPlan>
   const contentHash = sha256(stableJson(hashInput));
   return {
     config,
+    pageType: source.pageType,
     universeId: source.universeId,
     datasetPath,
     schemaVersion: 2,
@@ -550,7 +559,7 @@ async function applyPlan(plan: CollectionPlan) {
   const sb = supabaseAdmin();
   let { data: page, error: pageError } = await sb
     .from("wiki_collection_pages")
-    .select("id, universe_id, wiki_slug, collection_slug, code, is_published, published_dataset_id")
+    .select("id, universe_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
     .eq("wiki_slug", plan.config.gameSlug)
     .eq("collection_slug", plan.config.slug)
     .maybeSingle();
@@ -584,10 +593,11 @@ async function applyPlan(plan: CollectionPlan) {
         wiki_slug: plan.config.gameSlug,
         collection_slug: plan.config.slug,
         code: plan.config.code,
+        page_type: plan.pageType,
         item_count: plan.items.length,
         is_published: false
       })
-      .select("id, universe_id, wiki_slug, collection_slug, code, is_published, published_dataset_id")
+      .select("id, universe_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
       .single();
     if (insertedPage.error) throw insertedPage.error;
     page = insertedPage.data;
@@ -606,13 +616,16 @@ async function applyPlan(plan: CollectionPlan) {
       })
       .eq("id", page.id)
       .is("universe_id", null)
-      .select("id, universe_id, wiki_slug, collection_slug, code, is_published, published_dataset_id")
+      .select("id, universe_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
       .single();
     if (linkedPage.error) throw linkedPage.error;
     page = linkedPage.data;
   }
   if (Number(page.universe_id) !== plan.universeId) {
     throw new Error(`${plan.config.code} universe mismatch: page=${page.universe_id} local=${plan.universeId}.`);
+  }
+  if (page.page_type !== plan.pageType) {
+    throw new Error(`${plan.config.code} page type mismatch: page=${page.page_type || "(missing)"} manifest=${plan.pageType}.`);
   }
   if (
     page.wiki_slug !== plan.config.gameSlug ||
@@ -696,6 +709,7 @@ async function applyPlan(plan: CollectionPlan) {
       .from("wiki_collection_pages")
       .update({
         ...(pageCopy || {}),
+        page_type: plan.pageType,
         published_dataset_id: dataset.id,
         item_count: plan.items.length,
         is_published: true
@@ -735,6 +749,7 @@ async function main() {
     normalizedImageCount: plan.items.filter((item) => item.media_was_normalized).length,
     remoteImageCount: plan.items.filter((item) => item.source_url).length,
     repairedSlugCount: Number(plan.validationJson.repairedSlugCount || 0),
+    pageType: plan.pageType,
     totalImageBytes: plan.items.reduce((sum, item) => sum + (item.image_bytes || 0), 0),
     universeId: plan.universeId
   }));

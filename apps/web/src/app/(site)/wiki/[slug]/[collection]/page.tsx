@@ -7,6 +7,7 @@ import { buildPageContentHtml } from "@/lib/page-content";
 import {
   buildWikiCollectionPath,
   getWikiCollectionPageByPath,
+  listPublishedWikiCollectionPagesByWikiSlug,
   type WikiCollectionPageContent
 } from "@/lib/wiki-collections";
 import { getPublishedWikiCollectionRuntime } from "@/lib/wiki-collection-runtime";
@@ -15,6 +16,7 @@ import {
   renderGameCollectionPage
 } from "@/app/(site)/wiki/collections/games/generic";
 import type { GameDatasetPreparedCollection } from "@/app/(site)/wiki/collections/games/generic";
+import { renderRobloxCollectionChecklistPage } from "@/components/wiki/RobloxCollectionChecklistPage";
 import {
   getGrowGardenCollectionConfig,
   getPreparedGrowGardenCollectionPageCount,
@@ -138,7 +140,8 @@ export async function generateWikiCollectionMetadata({
   const collectionSlug = normalizeSlug(collection);
   const page = await getWikiCollectionPageByPath(wikiSlug, collectionSlug);
   const basePath = buildWikiCollectionPath(wikiSlug, collectionSlug);
-  const canonicalPath = currentPage <= 1 ? basePath : `${basePath}/page/${currentPage}`;
+  const checklistPage = page?.page_type === "checklist";
+  const canonicalPath = checklistPage || currentPage <= 1 ? basePath : `${basePath}/page/${currentPage}`;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   let fallbackTitle = page?.title ?? `${collectionSlug} Wiki Collection`;
   let fallbackDescription = page?.meta_description ?? WIKI_DESCRIPTION;
@@ -178,8 +181,8 @@ export async function generateWikiCollectionMetadata({
 
   const baseTitle = resolveSeoTitle(page?.seo_title) ?? page?.title ?? fallbackTitle;
   const baseDescription = page?.meta_description ?? fallbackDescription;
-  const title = currentPage <= 1 ? baseTitle : `${baseTitle} - Page ${currentPage}`;
-  const description = currentPage <= 1 ? baseDescription : `${baseDescription} Page ${currentPage}.`;
+  const title = checklistPage || currentPage <= 1 ? baseTitle : `${baseTitle} - Page ${currentPage}`;
+  const description = checklistPage || currentPage <= 1 ? baseDescription : `${baseDescription} Page ${currentPage}.`;
 
   return {
     title,
@@ -229,6 +232,23 @@ export async function renderWikiCollectionPage({
       notFound();
     }
     const prepared = context.prepared;
+    if (page.page_type === "checklist") {
+      if (currentPage > 1) notFound();
+      const contentHtml = await buildPageContentHtml(page);
+      const collectionOptions = (await listPublishedWikiCollectionPagesByWikiSlug(context.wikiSlug)).map((entry) => ({
+        value: entry.code,
+        label: entry.display_name?.trim() || entry.title,
+        href: buildWikiCollectionPath(entry.wiki_slug, entry.collection_slug)
+      }));
+      return renderRobloxCollectionChecklistPage({
+        page,
+        config: context.config,
+        dataset: prepared.dataset,
+        groupedSections: prepared.groupedSections,
+        contentHtml,
+        collectionOptions
+      });
+    }
     if (currentPage > prepared.totalPages) {
       notFound();
     }
@@ -276,6 +296,7 @@ export async function getWikiCollectionPageCount(wikiSlug: string, collectionSlu
   if (!context) return 1;
 
   if (context.kind === "generic") {
+    if (context.page.page_type === "checklist") return 1;
     return context.prepared.totalPages;
   }
 

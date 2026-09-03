@@ -40,7 +40,7 @@ Skip:
 - Collections that cannot be kept separate by game, mode, edition, or platform.
 - Broad pages whose rows would have no useful comparison or lookup fields.
 
-Prefer separate routes for location-heavy collectible families. A single collectibles index may link to those routes later, but it should not duplicate every row.
+Prefer separate routes for location-heavy collectible families. Recommend `page type: checklist` for finite player-completed routes and `page type: database` for reference rosters. Both types use the existing GTA collection table and runtime manifest. A single collectibles index may link to those routes later, but it should not duplicate every row.
 
 ## Output
 
@@ -66,7 +66,7 @@ If a line was not checked, return `[source discovery incomplete]` and name the g
 
 Then return only collection decisions:
 
-- `[create]` with a short reason, proposed slug, mode scope, useful fields, and source proof.
+- `[create]` with a short reason, proposed slug, mode scope, `page type`, useful fields, and source proof.
 - `[we already have a page]` with the existing route.
 - `[skip]` with the concrete reason.
 - `[source discovery incomplete]` when the evidence does not support a decision.

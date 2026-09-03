@@ -1,6 +1,6 @@
 ---
 name: bloxodes-game-collection-workflow-runner
-description: Run one or many approved Bloxodes game collection pages with parent review. Use when the user gives approved game collection ideas, asks to create multiple /wiki/<game>/<collection> pages, wants subagents for collection research, data, images, and writing, or needs local verification before Browser preview.
+description: Run one or many approved Bloxodes game collection pages with parent review. Use when the user gives approved game collection ideas, asks to create multiple /wiki/game-slug/collection-slug pages, wants subagents for collection research, data, images, and writing, or needs local verification before Browser preview.
 ---
 
 # Bloxodes Game Collection Workflow Runner
@@ -74,10 +74,10 @@ Also give the writing subagent:
 1. Confirm the approved game, universe ID, and collection list.
 2. Give each collection subagent exactly one collection.
 3. Research gate: subagent returns `brief.md`.
-4. Review source proof, scope, coverage, and whether the collection is worth publishing.
+4. Review source proof, scope, coverage, whether the collection is worth publishing, and the approved `database` versus `checklist` page-type decision.
 5. Approve, refine, or block.
 6. Data gate: same subagent prepares the dataset and updates brief notes.
-7. Review item count, missing items, v2 shape, sections, fields, image planning, and route assumptions.
+7. Review item count, missing items, v2 shape, sections, fields, image planning, route assumptions, and `runtime-manifest.json` `collection.pageType`.
 8. Image gate: same subagent gathers and wires images, then updates brief notes.
 9. Review image coverage, quality, paths, dataset wiring, and checker result.
 10. Writing gate: spawn a writing subagent with `bloxodes-game-collection-writing`.
@@ -98,12 +98,13 @@ npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<colle
 ```
 
 15. If the verifier and size gate pass, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Browser (or fetch/preview the live local route when Browser is unavailable).
-16. For large collections with pagination, verify:
+16. For `database` collections with pagination, verify:
 - the section dropdown lists all real sections, not only the current page section
 - choosing a section on another page opens that page at the correct section anchor
 - `/wiki/<game-slug>/<collection-slug>/page/2` returns 200 and has `noindex, follow`
 - paginated collection URLs are not listed in `/sitemaps/wiki.xml`
-17. Return paths, localhost links, blocked collections, size-gate results, pagination checks, and remaining risks.
+17. For `checklist` collections, verify the clean checklist renderer, local-first progress for signed-out users, account-saved progress for signed-in users, search/filter/reset behavior, and that `/page/2` returns 404 with the base URL as canonical. Checklist collections must not receive database pagination or the card/list switch.
+18. Return paths, localhost links, blocked collections, page-type decisions, size-gate results, pagination/checklist checks, and remaining risks.
 
 ## Research checks
 
@@ -114,6 +115,7 @@ Once the research subagent returns `brief.md`, check that:
 - item fields are useful for players to compare items
 - section plan is clear and useful for players
 - section labels are not source-table noise
+- page type is explicit: finite player-completed goals use `checklist`; reference rosters use `database`
 
 ## Data checks
 
@@ -137,6 +139,7 @@ Once the data subagent updates the brief, check that:
 - Hidden/source/dev fields are absent from public item data and not exposed as card fields.
 - Image need and image field are recorded for the next step.
 - The route renderer/config can show the sections, fields, planned image field, and item count.
+- `runtime-manifest.json` declares the approved `collection.pageType`, or an existing manifest is explicitly treated as the `database` default.
 - `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json` reports no blocking metadata issue.
 - If the data is not ready, send it back to the subagent for fixes.
 
@@ -170,10 +173,12 @@ Before approving any `final.json`, make sure:
 - paragraphs add context beyond the cards
 - `final.json` parses
 - verifier, HTML size gate, pagination checks, and Browser preview look good before calling it done
+- for `checklist`, account/local progress and no-pagination route checks pass instead of database pagination checks
 
 ## Parent checks
 
 - production duplicate check is recorded
+- page type is recorded and matches the manifest, page row, and route renderer
 - source proof supports the collection and important fields
 - item count and title count agree
 - `display_name` is present and uses the clean reusable collection label
