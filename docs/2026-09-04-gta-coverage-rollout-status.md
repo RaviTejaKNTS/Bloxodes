@@ -4,9 +4,9 @@ Last verified: 2026-09-04
 
 Scope: the approved GTA coverage batch from Grand Theft Auto IV through Grand Theft Auto Online. The retained public set contains 16 GTA hubs; GTA VI is intentionally unpublished and excluded until the game is released.
 
-Safety boundary: managed-development Supabase and local preview only. Production has not been touched.
+Release status: application commit `c5a282bc1869efd2cbaeeca5ca3cc80448ace734` is live in production. All 16 retained GTA hubs and their 32 distinct wide/square R2 images are published and verified. The 158 reviewed collection promotions remain in managed development because the guarded production schema release cannot currently authenticate to the VPS over SSH; production still has the 15 pre-existing GTA 5 collections.
 
-Hub media: every retained hub now has a source-checked wide cover plus separate square-friendly title thumbnail, both served from Bloxodes-hosted wiki media. GTA VI source rows remain preserved but unpublished.
+Hub media: every retained hub now has a source-checked wide cover plus separate square-friendly title thumbnail, both served from Bloxodes-hosted wiki media in managed development and production. GTA VI source rows remain preserved but unpublished.
 
 Homelab preview access: use `http://teja-homelab.tail13b5bd.ts.net:3000` from a Tailscale-connected device, with `http://100.86.117.125:3000` as the direct-IP fallback. Append any route below to this base; `localhost` links are only for the homelab itself.
 
@@ -116,11 +116,13 @@ Homelab preview access: use `http://teja-homelab.tail13b5bd.ts.net:3000` from a 
 - Collections: Vehicles (896 source-listed entries), Weapons (111), Heists (11), Properties (27 named property types), Signal Jammers (50), Playing Cards (54), Action Figures (100), Movie Props (10), Media Sticks (13), and Peyote Plants (76).
 - Media: 1,348 row images mapped and published through immutable collection revisions; 1,337 are exact source images plus 11 explicitly recorded contextual/reused images for five drift/base vehicle variants and two property-category rows.
 - Scope boundary: fixed, durable Online systems and collectible routes are covered. Rotating daily activities, seasonal sets, live bounty/cache/shipwreck-style activities, broad mission/race/award catalogs, and LD Organics remain excluded because they need a separate maintenance workflow or do not expose a stable finite item roster.
-- Verification: the hub and all ten collection pages passed managed-development copy, v2 audit, image-required checks, dry sync, publication, and database readback. The six checklist `/page/2` routes return 404. Vehicles serves eleven database pages and Weapons serves four; every paginated page has a canonical URL and `noindex, follow`. All 24 valid hub/base/pagination routes passed the formal HTML-size audit with zero over-limit routes; the largest was 1.702 MB. Custom QA passed all 11 primary routes, local dataset/media counts, checklist boundaries, database pagination, sitemap coverage, and scoped search. Browser backend was unavailable, so route QA used local HTTP fetches with the webpack preview after a Turbopack large-page writer failure. Production remains untouched.
+- Verification: the hub and all ten collection pages passed managed-development copy, v2 audit, image-required checks, dry sync, publication, and database readback. The six checklist `/page/2` routes return 404. Vehicles serves eleven database pages and Weapons serves four; every paginated page has a canonical URL and `noindex, follow`. All 24 valid hub/base/pagination routes passed the formal HTML-size audit with zero over-limit routes; the largest was 1.702 MB. Custom QA passed all 11 primary routes, local dataset/media counts, checklist boundaries, database pagination, sitemap coverage, and scoped search. Browser backend was unavailable, so route QA used local HTTP fetches with the webpack preview after a Turbopack large-page writer failure. The hub and its distinct R2 cover/thumbnail are live in production; the ten collection promotions remain pending behind the production schema gate.
 
 ## In progress
 
-- None.
+- Restore public-key SSH access for the guarded production schema release command.
+- Apply the approved `page_type` schema migration from the exact production SHA.
+- Promote the 158 reviewed GTA collection manifests and the exact 19 approved Roblox collection `page_type` conversions, then complete production URL/readback verification.
 
 ## Queued
 
