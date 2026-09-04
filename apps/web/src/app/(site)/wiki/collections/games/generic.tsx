@@ -673,6 +673,16 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "gta-5-vehicles": 18_000,
   "gta-5-characters": 18_000,
   "gta-5-story-missions": 18_000,
+  // GTA Online weapons combine a large image roster with availability and
+  // comparison fields; split the arsenal before the base route reaches the
+  // HTML release-size ceiling.
+  "gta-online-weapons": 18_000,
+  // GTA 2 mission rows include platform names, objectives, rewards, and route notes;
+  // district-sized pages keep the long-form mission table below the HTML release limit.
+  "gta-2-story-missions": 18_000,
+  // Original GTA mission rows carry long objectives, rewards, and unlock notes;
+  // chapter-sized pages keep the six-city-section route below the HTML release limit.
+  "gta-story-missions": 18_000,
   // GTA 5 Story Mode collection cards carry full stills plus source-backed
   // comparison fields. Keep the larger new collections on two balanced pages
   // so their server-rendered HTML stays below the release-size ceiling.
@@ -708,7 +718,12 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "tower-defense-simulator-towers": 26_000,
   "gta-5-vehicles": 18_000,
   "gta-5-characters": 18_000,
-  "gta-5-story-missions": 18_000
+  "gta-5-story-missions": 18_000,
+  // GTA 2's three mission districts are each just above the normal target; keep them
+  // as separate district-sized pages so the long-form rows stay below the HTML limit.
+  "gta-2-story-missions": 34_000,
+  // Original GTA chapter sections have similarly long mission fields.
+  "gta-story-missions": 34_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

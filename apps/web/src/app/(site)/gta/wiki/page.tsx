@@ -3,7 +3,7 @@ import { ContentCard } from "@/components/ContentCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { listPublishedGtaWikiPages } from "@/lib/gta";
+import { listPublishedGtaWikiPages, resolveGtaWikiCoverImage } from "@/lib/gta";
 
 const description = "Browse Bloxodes wiki hubs and structured collections for Grand Theft Auto games.";
 
@@ -34,7 +34,7 @@ export default async function GtaWikiIndexPage() {
               variant="overlay"
               href={`/gta/wiki/${page.slug}`}
               title={page.title}
-              image={{ src: page.cover_image || page.game_hero_image || page.game_cover_image || "/Bloxodes.png", alt: page.title, ratio: "1200/675" }}
+              image={{ src: resolveGtaWikiCoverImage(page), alt: page.title, ratio: "1200/675" }}
             />
           </div>
         )) : (

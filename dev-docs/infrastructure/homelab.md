@@ -1,8 +1,8 @@
 # Homelab
 
 Status: Article automation active; top-100 wiki automation restored for managed-development review
-Last verified: 2026-09-01
-Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, and the 18:00 timer schedule
+Last verified: 2026-09-04
+Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
 ## Host
 
@@ -12,6 +12,26 @@ Evidence: managed-dev readiness, real headless Chrome smoke and six-article rend
 - Memory: 7.7 GiB; 2 GiB swap nearly full at check time.
 - Root disk: 117 GB, 41% used.
 - Repository: `/home/teja/projects/Bloxodes`, `production` synchronized through the guarded exact-SHA release flow on 2026-09-01.
+
+## Tailscale and managed-development preview
+
+- Current Tailscale hostname: `teja-homelab.tail13b5bd.ts.net`.
+- Current Tailscale IPv4 fallback: `100.86.117.125`.
+- User-facing preview base: `http://teja-homelab.tail13b5bd.ts.net:3000`.
+- Direct-IP fallback: `http://100.86.117.125:3000`.
+- Append the route to either base, for example `/gta/wiki/gta-online`; do not hand off `localhost` or `127.0.0.1` when the reviewer is on another tailnet device. The route's public canonical URL remains `https://bloxodes.com/...`.
+
+For a remotely reviewable managed-development preview, use the homelab wiki env without printing it and bind Next to the Tailscale-reachable interface:
+
+```bash
+cd /home/teja/projects/Bloxodes/apps/web
+set -a
+source /etc/bloxodes/wiki-automation.env
+set +a
+BLOXODES_ENV_PROFILE=managed-dev BLOXODES_ENV_OVERLAYS=cloudflare ../../node_modules/.bin/next dev --webpack --hostname 0.0.0.0 --port 3000
+```
+
+Use the webpack preview for very large GTA collection pages. If the development Turbopack cache panics while writing a large response, stop the preview, move only the generated `apps/web/.next/dev` directory to `/tmp`, and restart; never remove source, workspace, database, or media files. Verify reachability with a bounded `curl` through both the Tailscale hostname and IP before sharing links.
 
 ## Services
 

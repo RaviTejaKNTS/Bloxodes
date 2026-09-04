@@ -32,6 +32,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - `published_dataset_id` selects one immutable dataset revision. Web, mobile, tools, sitemaps, and media loaders use these database rows and R2 keys only.
 - `gta_games`, `gta_wiki_pages`, `gta_wiki_pages_view`
   - GTA game identity and wiki hub copy for `/gta/wiki/<game-slug>`, intentionally separate from `roblox_universes` and Roblox editorial tables.
+  - `gta_games.cover_image` is the wide card/social artwork and `gta_games.hero_image` is the separate square-friendly artwork beside the wiki title; published hubs require both, they must not be duplicate URLs, and both should point to `https://media.bloxodes.com/wiki/...` objects. GTA VI is retained as unpublished source data until release.
 - `gta_wiki_collection_pages`, `gta_wiki_collection_pages_view`, `gta_wiki_collection_datasets`, `gta_wiki_collection_items`
   - GTA collection page copy plus immutable published revisions and generic item fields for `/gta/wiki/<game-slug>/<collection-slug>`; media uses the shared wiki R2 worker with `gta/...` keys.
   - `gta_wiki_collection_pages.page_type` is `database` by default and `checklist` for location/progress pages; both types use the same immutable dataset and route contract.

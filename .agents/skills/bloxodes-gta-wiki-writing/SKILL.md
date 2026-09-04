@@ -42,6 +42,8 @@ Write like a player who knows the game and can explain it without performing for
 - A non-empty control row uses `{ "action": "", "desktop": "", "mobile": "", "tablet": "", "console": "" }` and includes only device keys supported by evidence. Do not use generic `controls`, `keys`, `value`, or `description` fields.
 - Link collections through runtime data and the hub renderer. Do not hard-code future collection promises into `description_md`.
 - Use `cover_image: null` in `final.json` unless the approved brief documents a reviewed exception. Game artwork belongs in `game.json`.
+- Give `game.json` two distinct source-backed image roles: `cover_image` is wide artwork for cards and social previews, while `hero_image` is square-friendly artwork beside the wiki title.
+- Stage both roles through `npm run sync:gta-wiki-media` so published values use `https://media.bloxodes.com/wiki/...`; never leave browser-facing Wikia or Rockstar hotlinks in a released hub.
 
 ## game.json
 
@@ -54,8 +56,8 @@ Write like a player who knows the game and can explain it without performing for
   "developer": "",
   "publisher": "Rockstar Games",
   "description_md": "",
-  "cover_image": null,
-  "hero_image": null,
+  "cover_image": "https://media.bloxodes.com/wiki/gta/<game-slug>/hub-cover-<hash>.webp",
+  "hero_image": "https://media.bloxodes.com/wiki/gta/<game-slug>/hub-thumbnail-<hash>.webp",
   "official_url": "",
   "release_dates_json": {},
   "platforms_json": [],

@@ -1,8 +1,8 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-09-03
-Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive 36,068-key R2 byte/readability audit, live route/image checks, route tests, and production row counts
+Last verified: 2026-09-04
+Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive 36,068-key R2 byte/readability audit, live route/image checks, route tests, production row counts, and Tailscale-reachable GTA preview checks
 
 ## Scope
 
@@ -12,7 +12,7 @@ Game wiki hubs and their game-specific collections are one editorial/data unit:
 - `/wiki/<game-slug>/<collection-slug>` is backed by `wiki_collection_pages`, its `published_dataset_id`, `wiki_collection_datasets`, and `wiki_collection_items`.
 - Roblox collection rows use `page_type` (`database` by default, or `checklist` for finite player-completed goals). Both types keep the same v2 dataset and URL; the shared checklist renderer adds search/filter/reset and account/local progress only when the page type is `checklist`.
 - Roblox checklist progress uses the existing `user_checklist_progress` table with the `wiki-collection:<code>` namespace and `/api/wiki/collections/progress`. Global `/checklists` progress remains on its original slug contract.
-- GTA follows the same hub/collection pattern under its own platform namespace: `/gta/wiki/<game-slug>` uses `gta_games` plus `gta_wiki_pages`, while `/gta/wiki/<game-slug>/<collection-slug>` uses `gta_wiki_collection_pages`, its `published_dataset_id`, `gta_wiki_collection_datasets`, and `gta_wiki_collection_items`.
+- GTA follows the same hub/collection pattern under its own platform namespace: `/gta/wiki/<game-slug>` uses `gta_games` plus `gta_wiki_pages`, while `/gta/wiki/<game-slug>/<collection-slug>` uses `gta_wiki_collection_pages`, its `published_dataset_id`, `gta_wiki_collection_datasets`, and `gta_wiki_collection_items`. The reviewed managed-development set contains 16 released hubs from Grand Theft Auto through Grand Theft Auto Online; GTA VI rows are retained as unpublished source data until release.
 - GTA collection page rows use `page_type` (`database` by default, or `checklist` for progress-oriented location collections). Checklist progress is account-scoped in `user_gta_collection_progress` and exposed by `/api/gta/collections/progress`, with the browser retaining local progress for signed-out visitors.
 - The Roblox and GTA checklist pages share the same client renderer and manifest decision (`collection.pageType`), while their server routes, content tables, and progress endpoints stay platform-specific.
 - The verified production database contains 663 published collection pages with valid dataset pointers and 46,732 published item rows.
@@ -28,7 +28,7 @@ These collections describe one game's durable systems and items—pets, weapons,
 - Collection codes use `<game-slug>-<collection-slug>`; `wiki_slug` must use the editorial game slug, never a stats/universe slug.
 - Roblox APIs may verify universe identity, metadata, and thumbnails. Collection item rows come from source research rather than assuming Roblox exposes a complete item endpoint.
 - GTA uses the same v2 workspace dataset shape and shared collection renderer, but it does not require a `roblox_universes` row or registered Roblox collection config. Its ignored authoring workspace lives under `tmp/content-workspace/gta/<game-slug>/` and immutable media keys use `gta/<game-slug>/<collection-slug>/...` in the shared wiki R2 bucket.
-- Managed development currently has 16 published GTA 5 collection pages, including the completed Animals, Hobbies & Pastimes, Random Events, Strangers & Freaks, and Letter Scraps datasets; production remains intentionally unchanged until an explicit release.
+- Managed development currently has 173 published GTA collections across 16 hubs, including 80 database pages and 93 checklist pages. GTA 5 contains 26 published collections, including 11 checklist collections: Letter Scraps, Spaceship Parts, Submarine Pieces, Nuclear Waste, Epsilon Tracts, Peyote Plants, Monkey Mosaics, Hidden Packages, Stunt Jumps, Under the Bridge, and Knife Flights.
 
 ## Workflow
 
@@ -40,7 +40,11 @@ These collections describe one game's durable systems and items—pets, weapons,
 6. Review hub-to-collection navigation, item counts, cards/tables, images, metadata, structured data, search, sitemap, and revalidation behavior.
 7. Promote through a controlled idempotent seed/upsert or forward-only migration, then verify production.
 
-For GTA, use `verify:gta-wiki-final`, `sync:gta-collection-runtime`, and `verify:gta-collection-final`. These commands default to managed development; GTA production promotion is deliberately outside the initial vertical slice.
+For GTA authoring, use `verify:gta-wiki-final`, `sync:gta-collection-runtime`, and `verify:gta-collection-final`. The verifiers remain managed-development-only. Reviewed production promotion uses `sync:gta-wiki-runtime`, `sync:gta-wiki-media`, and `sync:gta-collection-runtime`; each command is dry-run-first and requires `--apply --allow-prod` against the recognized production target.
+
+### Homelab preview handoff
+
+When the agent is running on `teja-homelab`, bind the managed-development preview to `0.0.0.0` and share routes beneath `http://teja-homelab.tail13b5bd.ts.net:3000`; use `http://100.86.117.125:3000` if MagicDNS is unavailable. Never hand off `localhost` or `127.0.0.1` when the reviewer is on another tailnet device. Keep `https://bloxodes.com/...` as the canonical URL and keep production credentials and publication out of preview QA. The exact command and large-page webpack recovery procedure live in `dev-docs/infrastructure/homelab.md`.
 
 Use `.agents/skills/bloxodes-gta-wiki-*/SKILL.md` for GTA hub work and `.agents/skills/bloxodes-gta-game-collection-*/SKILL.md` for GTA collection discovery, research, data, images, writing, managed-development verification, and later refreshes. The Roblox wiki and collection skills are not interchangeable with these because they assume Roblox universe identity, tables, routes, and publication commands.
 
@@ -58,7 +62,7 @@ Use the matching wiki and game-collection workflow skills. For existing datasets
 
 Collection image manifests are authoring inputs. Runtime item media is stored by immutable R2 object key in `wiki_collection_items` and served through the wiki-media worker. A collection is not ready merely because its copy exists: every item count, media key, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
 
-Wiki hub images have separate roles. `/wiki` cards and social previews use the first official 768x432 universe thumbnail. The square artwork beside a wiki title uses the current official 512x512 universe icon. Universe linking fetches missing official media immediately, rotating enrichment replaces the active fields and primary rows with Roblox's current media while retaining prior URLs as history, and `sync-game-wiki-runtime.ts` refuses publication unless both roles exist. Wiki finals must leave `cover_image` null; a reviewed exception requires the explicit `--allow-cover-override` flag.
+Wiki hub images have separate roles. For Roblox, `/wiki` cards and social previews use the first official 768x432 universe thumbnail, while the square artwork beside a wiki title uses the current official 512x512 universe icon. GTA uses the same UI contract through `gta_games.cover_image` for wide cards/social previews and `gta_games.hero_image` for separate square-friendly title artwork. `sync:gta-wiki-media` source-checks, optimizes, and uploads the reviewed GTA assets to the shared `bloxodes-wiki` R2 bucket, then stores only `https://media.bloxodes.com/wiki/...` URLs; runtime must not depend on direct Wikia/Rockstar hotlinks. Universe linking fetches missing official media immediately, rotating enrichment replaces the active fields and primary rows with Roblox's current media while retaining prior URLs as history, and `sync-game-wiki-runtime.ts` refuses publication unless both roles exist. Wiki finals must leave `cover_image` null; a reviewed exception requires the explicit `--allow-cover-override` flag.
 
 The legacy public game-image migration completed on 2026-09-02. Managed development and production now have zero local image paths in published articles, wiki covers, or collection thumbnails. The final pass replaced 386 collection thumbnails and the remaining 29 older thumbnails with exact published item R2 objects, moved affected article image/source references, repaired the two missing Fisch rod-skin images, and restored three exact wiki covers from Git history into immutable R2 keys. The complete managed-development set contains 36,068 unique R2 keys; production's 36,065-key set is a strict subset, and every key passed live `HEAD` plus expected-byte validation.
 

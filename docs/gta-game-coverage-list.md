@@ -1,0 +1,15 @@
+- Grand Theft Auto IV
+- Grand Theft Auto: San Andreas
+- Grand Theft Auto: Vice City
+- Grand Theft Auto III
+- Grand Theft Auto IV: The Lost and Damned
+- Grand Theft Auto: The Ballad of Gay Tony
+- Grand Theft Auto: Liberty City Stories
+- Grand Theft Auto: Vice City Stories
+- Grand Theft Auto: Chinatown Wars
+- Grand Theft Auto Advance
+- Grand Theft Auto 2
+- Grand Theft Auto
+- Grand Theft Auto: London 1969
+- Grand Theft Auto: London 1961
+- Grand Theft Auto Online

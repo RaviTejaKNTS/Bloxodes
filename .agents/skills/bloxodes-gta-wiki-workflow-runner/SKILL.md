@@ -49,7 +49,7 @@ npm run verify:gta-wiki-final -- \
 ```
 
 9. Open `/gta/wiki/<game-slug>` in the Browser at desktop and mobile widths.
-10. Check title hierarchy, normal Bloxodes margins, no eyebrow text, readable body width, GTA-only sidebar links, collection CTA layout, overflow, broken images, metadata, canonical URL, and structured data.
+10. Check title hierarchy, normal Bloxodes margins, no eyebrow text, readable body width, GTA-only sidebar links, collection CTA layout, overflow, broken images, metadata, canonical URL, and structured data. Confirm the wide cover is used for cards/social metadata and a distinct square-friendly R2 image is used beside the title.
 11. Return the workspace paths, localhost URL, verifier result, browser result, blocked facts, and remaining risks.
 
 ## Parent checks
@@ -60,6 +60,7 @@ npm run verify:gta-wiki-final -- \
 - Unreleased-game copy contains no rumor or trailer inference stated as fact.
 - Controls are verified or `[]`.
 - Public copy does not mention workflow, sources, databases, or planned pages.
+- `game.json` has distinct, source-backed `cover_image` and `hero_image` values served from `https://media.bloxodes.com/wiki/...`.
 - The page follows the existing Bloxodes wiki design with no GTA theme or eyebrow.
 - The managed-development verifier and desktop/mobile review pass.
 

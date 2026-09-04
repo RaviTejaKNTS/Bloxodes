@@ -151,6 +151,22 @@ export function buildGtaCollectionPath(wikiSlug: string, collectionSlug: string)
   return `${buildGtaWikiPath(wikiSlug)}/${normalizeSlug(collectionSlug)}`;
 }
 
+type GtaWikiImageFields = {
+  cover_image?: string | null;
+  game_cover_image?: string | null;
+  game_hero_image?: string | null;
+};
+
+/** The wide artwork used for GTA cards, metadata, and structured data. */
+export function resolveGtaWikiCoverImage(page: GtaWikiImageFields): string {
+  return page.cover_image?.trim() || page.game_cover_image?.trim() || page.game_hero_image?.trim() || "/Bloxodes.png";
+}
+
+/** The separate square-friendly artwork shown beside a GTA wiki title. */
+export function resolveGtaWikiThumbnailImage(page: GtaWikiImageFields): string {
+  return page.game_hero_image?.trim() || page.cover_image?.trim() || page.game_cover_image?.trim() || "/Bloxodes.png";
+}
+
 export async function listPublishedGtaGames(): Promise<GtaGame[]> {
   return withCache(["gta-games-index-v1"], ["gta-games-index"], async () => {
     const { data, error } = await supabaseAdmin()

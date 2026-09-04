@@ -13,6 +13,8 @@ import {
   getGtaWikiPageBySlug,
   listPublishedGtaWikiCollectionImageUrls,
   listPublishedGtaWikiCollectionsByWikiSlug,
+  resolveGtaWikiCoverImage,
+  resolveGtaWikiThumbnailImage,
   type GtaWikiPage
 } from "@/lib/gta";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
@@ -53,7 +55,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!page) return { alternates: buildAlternates(canonical) };
   const title = resolveSeoTitle(page.seo_title) ?? page.title;
   const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);
-  const image = page.cover_image || page.game_hero_image || page.game_cover_image || `${SITE_URL}/Bloxodes.png`;
+  const image = resolveGtaWikiCoverImage(page);
   return {
     title,
     description,
@@ -72,7 +74,8 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
     page.description_md ? renderMarkdown(page.description_md) : Promise.resolve(""),
     page.tips_md ? renderMarkdown(page.tips_md) : Promise.resolve("")
   ]);
-  const image = page.cover_image || page.game_hero_image || page.game_cover_image || "/Bloxodes.png";
+  const coverImage = resolveGtaWikiCoverImage(page);
+  const thumbnailImage = resolveGtaWikiThumbnailImage(page);
   const platforms = stringList(page.game_platforms_json);
   const releases = releaseLabels(page.game_release_dates_json);
   const canonicalPath = `/gta/wiki/${page.slug}`;
@@ -91,7 +94,7 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
     { key: "checklist" as const, label: "Collectibles", entries: collectionBlocks.filter(({ collection }) => collection.page_type === "checklist") }
   ].filter((group) => group.entries.length);
   const structuredData = [
-    webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image, author: null, publishedAt: page.published_at, updatedAt }),
+    webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image: coverImage, author: null, publishedAt: page.published_at, updatedAt }),
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
       { name: "GTA", url: `${SITE_URL}/gta` },
@@ -108,7 +111,7 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start">
             <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-border/70 bg-surface-muted shadow-soft sm:h-28 sm:w-28">
-              <Image src={image} alt={`${page.game_title} artwork`} fill className="object-cover" sizes="112px" priority />
+              <Image src={thumbnailImage} alt={`${page.game_title} thumbnail artwork`} fill className="object-cover" sizes="112px" priority />
             </div>
             <div className="min-w-0 max-w-3xl space-y-3">
               <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
