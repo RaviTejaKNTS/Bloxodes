@@ -75,7 +75,14 @@ function applySecurityHeaders(res: NextResponse, pathname: string, hostname: str
 
 function isLocalHostname(hostname: string) {
   const normalized = hostname.trim().toLowerCase();
-  return normalized === "localhost" || normalized === "127.0.0.1" || normalized === "::1" || normalized === "[::1]";
+  return normalized === "localhost" || normalized === "127.0.0.1" || normalized === "::1" || normalized === "[::1]" || isDevelopmentTailscaleHostname(normalized);
+}
+
+function isDevelopmentTailscaleHostname(hostname: string) {
+  if (process.env.NODE_ENV === "production") return false;
+  if (hostname.endsWith(".ts.net")) return true;
+  const octets = hostname.split(".").map(Number);
+  return octets.length === 4 && octets[0] === 100 && octets[1] >= 64 && octets[1] <= 127 && octets.every((octet) => Number.isInteger(octet) && octet >= 0 && octet <= 255);
 }
 
 function normalizeSlugSegment(value: string) {
@@ -133,9 +140,7 @@ function redirectWithStatus(url: URL, status: 301 | 302 | 307 | 308 = 307) {
 
 function shouldRedirectToCanonicalHost(hostname: string) {
   if (hostname === CANONICAL_HOST) return false;
-  if (hostname === "localhost") return false;
-  if (hostname === "127.0.0.1") return false;
-  if (hostname === "[::1]") return false;
+  if (isLocalHostname(hostname)) return false;
   if (hostname.endsWith(".localhost")) return false;
   return true;
 }

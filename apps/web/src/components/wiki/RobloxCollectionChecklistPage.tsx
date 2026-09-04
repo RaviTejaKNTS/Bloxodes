@@ -1,5 +1,4 @@
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
-import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentFaq } from "@/components/ContentFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -124,16 +123,13 @@ export function renderRobloxCollectionChecklistPage({
       <article id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--interactive space-y-8">
         {introNodes.length ? <section className="max-w-3xl space-y-4">{introNodes}</section> : null}
         <CatalogAdSlot />
-        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <CatalogSelectNav label={`${config.gameName} collection`} value={config.code} options={collectionOptions} className="max-w-none" />
-          <p className="text-sm text-muted">Use the checkboxes to track your route.</p>
-        </div>
         <RobloxCollectionChecklist
           code={config.code}
           gameName={config.gameName}
           collectionLabel={config.label}
           sections={sections}
           cardFields={dataset.meta?.display?.cardFields ?? null}
+          collectionOptions={collectionOptions}
         />
         <CatalogAdSlot />
         {howNodes.length ? <section className="max-w-3xl space-y-3">{howNodes}</section> : null}

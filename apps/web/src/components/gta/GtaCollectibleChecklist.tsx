@@ -1,5 +1,6 @@
 "use client";
 
+import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import {
   CollectionChecklist,
   type CollectionChecklistItem,
@@ -22,13 +23,15 @@ export function GtaCollectibleChecklist({
   gameName,
   collectionLabel,
   sections,
-  cardFields
+  cardFields,
+  collectionOptions
 }: {
   code: string;
   gameName: string;
   collectionLabel: string;
   sections: GtaCollectibleSection[];
   cardFields?: string[] | null;
+  collectionOptions: Array<{ value: string; label: string; href: string; pageType?: "database" | "checklist" }>;
 }) {
   return (
     <CollectionChecklist
@@ -37,6 +40,14 @@ export function GtaCollectibleChecklist({
       collectionLabel={collectionLabel}
       sections={sections}
       cardFields={cardFields}
+      toolbar={
+        <CatalogSelectNav
+          label={`${gameName} collection`}
+          value={code}
+          options={collectionOptions}
+          className="max-w-none"
+        />
+      }
       progressOptions={{ ...GTA_PROGRESS_OPTIONS, code }}
     />
   );

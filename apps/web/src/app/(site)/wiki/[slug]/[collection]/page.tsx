@@ -75,6 +75,22 @@ async function resolveContext(wikiSlug: string, collectionSlug: string): Promise
   const page = await getWikiCollectionPageByPath(normalizedWikiSlug, normalizedCollectionSlug);
   if (!page) return null;
 
+  if (page.page_type === "checklist") {
+    const runtime = await getPublishedWikiCollectionRuntime(page);
+    if (!runtime) {
+      throw new Error("Required database runtime for " + page.code + " did not load. Local fallback is disabled.");
+    }
+    return {
+      kind: "generic",
+      wikiSlug: normalizedWikiSlug,
+      collectionSlug: normalizedCollectionSlug,
+      code: page.code,
+      config: runtime.config,
+      page,
+      prepared: prepareGameCollectionDocument(runtime.config, runtime.document)
+    };
+  }
+
   if (normalizedWikiSlug === "grow-a-garden") {
     const config = getGrowGardenCollectionConfig(normalizedCollectionSlug);
     if (config) {
@@ -165,11 +181,11 @@ export async function generateWikiCollectionMetadata({
     };
   }
 
-  if (growGardenConfig) {
+  if (!checklistPage && growGardenConfig) {
     const prepared = await loadPreparedGrowGardenCollection(growGardenConfig);
     fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${growGardenConfig.label} in Grow a Garden`;
     fallbackDescription = growGardenConfig.description;
-  } else if (forgeConfig) {
+  } else if (!checklistPage && forgeConfig) {
     const prepared = await loadPreparedTheForgeCollection(forgeConfig);
     fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${forgeConfig.label} in The Forge`;
     fallbackDescription = forgeConfig.description;

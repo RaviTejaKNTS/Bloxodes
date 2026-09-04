@@ -1,9 +1,9 @@
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
+import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentFaq } from "@/components/ContentFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { GtaCollectionSelect } from "@/components/gta/GtaCollectionSelect";
 import { GtaCollectibleChecklist, type GtaCollectibleSection } from "@/components/gta/GtaCollectibleChecklist";
 import type { GameCollectionDataset } from "@/app/(site)/wiki/collections/games/generic";
 import type { GtaWikiCollectionPage } from "@/lib/gta";
@@ -125,16 +125,13 @@ export function renderGtaCollectibleCollectionPage({
       <article id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--interactive space-y-8">
         {introNodes.length ? <section className="max-w-3xl space-y-4">{introNodes}</section> : null}
         <CatalogAdSlot />
-        <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <GtaCollectionSelect value={config.code} options={collectionOptions} />
-          <p className="text-sm text-muted">Use the checkboxes to track your route.</p>
-        </div>
         <GtaCollectibleChecklist
           code={config.code}
           gameName={config.gameName}
           collectionLabel={config.label}
           sections={sections}
           cardFields={dataset.meta?.display?.cardFields ?? null}
+          collectionOptions={collectionOptions}
         />
         <CatalogAdSlot />
         {howNodes.length ? <section className="max-w-3xl space-y-3">{howNodes}</section> : null}
