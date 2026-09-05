@@ -108,6 +108,22 @@ function extensionForMime(mime: string): string {
   return mime === "image/jpeg" ? "jpg" : mime.replace("image/", "");
 }
 
+async function mapConcurrent<T>(values: T[], concurrency: number, task: (value: T) => Promise<void>) {
+  let next = 0;
+  const workers = Array.from({ length: Math.min(concurrency, values.length) }, async () => {
+    while (next < values.length) {
+      const index = next++;
+      await task(values[index]);
+    }
+  });
+  await Promise.all(workers);
+}
+
+function transientFailure(error: unknown): boolean {
+  const text = error instanceof Error ? `${error.name}: ${error.message}` : JSON.stringify(error);
+  return /(?:fetch failed|connection timed out|\b5(?:00|02|03|04|22)\b|ECONNRESET|ETIMEDOUT|UND_ERR)/i.test(text);
+}
+
 async function prepareImage(file: string) {
   const original = await fs.readFile(file);
   const metadata = await sharp(original, { animated: true }).metadata();
@@ -261,21 +277,37 @@ function pageCopy(plan: Plan) {
 }
 
 async function uploadImages(plan: Plan, r2: R2Client) {
-  for (const item of plan.items) {
-    if (!item.image_key || !item.image_mime || !item.image_sha256 || !item.prepared_image) continue;
-    if (await r2.hasObject(item.image_key)) continue;
+  await mapConcurrent(plan.items, 12, async (item) => {
+    if (!item.image_key || !item.image_mime || !item.image_sha256 || !item.prepared_image) return;
+    if (await r2.hasObject(item.image_key)) return;
     await r2.putObject({
       key: item.image_key,
       body: item.prepared_image,
       contentType: item.image_mime,
       metadata: { width: item.image_width ?? 0, height: item.image_height ?? 0, sha256: item.image_sha256 }
     });
-  }
+  });
 }
 
 async function verifyImages(plan: Plan, r2: R2Client) {
-  for (const item of plan.items) {
+  await mapConcurrent(plan.items, 12, async (item) => {
     if (item.image_key && !(await r2.hasObject(item.image_key))) throw new Error(`Missing R2 image for ${plan.code}/${item.item_slug}.`);
+  });
+}
+
+async function publishPlan(plan: Plan, r2: R2Client | null) {
+  for (let attempt = 1; attempt <= 5; attempt += 1) {
+    try {
+      if (uploadMedia && r2) await uploadImages(plan, r2);
+      if (publish && r2) await verifyImages(plan, r2);
+      await applyPlan(plan);
+      return;
+    } catch (error) {
+      if (attempt === 5 || !transientFailure(error)) throw error;
+      const delayMs = 2_000 * 2 ** (attempt - 1);
+      console.warn(`${plan.code} hit a transient production failure; retrying attempt ${attempt + 1}/5 in ${delayMs / 1000}s.`);
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
   }
 }
 
@@ -382,9 +414,7 @@ async function main() {
   if (r2Config && r2Config.bucket !== "bloxodes-wiki") throw new Error(`Expected shared R2 bucket bloxodes-wiki, received ${r2Config.bucket}.`);
   const r2 = r2Config ? new R2Client(r2Config) : null;
   for (const plan of plans) {
-    if (uploadMedia && r2) await uploadImages(plan, r2);
-    if (publish && r2) await verifyImages(plan, r2);
-    await applyPlan(plan);
+    await publishPlan(plan, r2);
   }
 }
 
