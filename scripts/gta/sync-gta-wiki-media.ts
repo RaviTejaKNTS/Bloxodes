@@ -156,13 +156,20 @@ async function prepareHostedMedia(slug: string, role: "cover" | "thumbnail", sou
   const response = await fetch(sourceUrl, { redirect: "follow", signal: AbortSignal.timeout(30_000) });
   if (!response.ok) throw new Error(`${sourceUrl} returned HTTP ${response.status}.`);
   const source = Buffer.from(await response.arrayBuffer());
+  const sourceMetadata = await sharp(source, { animated: true }).rotate().metadata();
+  const thumbnailSize = Math.min(960, sourceMetadata.width ?? 960, sourceMetadata.height ?? 960);
   const body = await sharp(source, { animated: true })
     .rotate()
-    .resize({ width: 1600, height: 1600, fit: "inside", withoutEnlargement: true })
+    .resize(role === "thumbnail"
+      ? { width: thumbnailSize, height: thumbnailSize, fit: "cover", position: "attention" }
+      : { width: 1600, height: 1600, fit: "inside", withoutEnlargement: true })
     .webp({ quality: 86 })
     .toBuffer();
   const metadata = await sharp(body).metadata();
   if (!metadata.width || !metadata.height) throw new Error(`Could not read dimensions for ${sourceUrl}.`);
+  if (role === "thumbnail" && metadata.width !== metadata.height) {
+    throw new Error(`Thumbnail for ${slug} must be square; received ${metadata.width}x${metadata.height}.`);
+  }
   const digest = sha256(body);
   const key = `gta/${slug}/hub-${role}-${digest.slice(0, 16)}.webp`;
   return {
