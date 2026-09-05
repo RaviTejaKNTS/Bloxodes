@@ -20,6 +20,8 @@ export type SiteNavLink = {
   icon: LucideIcon;
 };
 
+export type GtaWikiNavLink = Pick<SiteNavLink, "href" | "label">;
+
 export type SearchItem = {
   id: string;
   title: string;
@@ -62,6 +64,31 @@ export const gtaNavLinks: SiteNavLink[] = [
   { href: "/gta/wiki", label: "GTA Wiki", icon: BookOpen },
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
+
+// Keep released GTA hubs in a stable, newest-first order for fast sidebar access.
+// GTA VI stays out of navigation until its wiki is approved for publication.
+export const gtaWikiNavLinks: GtaWikiNavLink[] = [
+  { href: "/gta/wiki/gta-online", label: "GTA Online" },
+  { href: "/gta/wiki/gta-5", label: "GTA V" },
+  { href: "/gta/wiki/gta-4-tbogt", label: "The Ballad of Gay Tony" },
+  { href: "/gta/wiki/gta-chinatown-wars", label: "Chinatown Wars" },
+  { href: "/gta/wiki/gta-4-tlad", label: "The Lost and Damned" },
+  { href: "/gta/wiki/gta-4", label: "GTA IV" },
+  { href: "/gta/wiki/gta-vice-city-stories", label: "Vice City Stories" },
+  { href: "/gta/wiki/gta-liberty-city-stories", label: "Liberty City Stories" },
+  { href: "/gta/wiki/gta-san-andreas", label: "San Andreas" },
+  { href: "/gta/wiki/gta-advance", label: "GTA Advance" },
+  { href: "/gta/wiki/gta-vice-city", label: "Vice City" },
+  { href: "/gta/wiki/gta-iii", label: "GTA III" },
+  { href: "/gta/wiki/gta-2", label: "GTA 2" },
+  { href: "/gta/wiki/gta-london-1961", label: "London 1961" },
+  { href: "/gta/wiki/gta-london-1969", label: "London 1969" },
+  { href: "/gta/wiki/gta", label: "Grand Theft Auto" }
+];
+
+export function isGtaWikiNavLinkActive(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export function siteNavLinksForPath(pathname: string | null | undefined): SiteNavLink[] {
   return (pathname ?? "").startsWith("/gta") ? gtaNavLinks : siteNavLinks;

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { AccountSheetButton } from "@/components/AccountSheetButton";
+import { GtaWikiSidebarLinks } from "@/components/GtaWikiSidebarLinks";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -111,6 +112,10 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
                   })}
                 </ul>
               </nav>
+
+              {pathname.startsWith("/gta") ? (
+                <GtaWikiSidebarLinks pathname={pathname} onNavigate={closeMenu} />
+              ) : null}
 
               <div className="mx-3 my-2 h-px bg-sidebar-border" />
 
