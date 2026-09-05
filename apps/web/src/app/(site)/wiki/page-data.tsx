@@ -29,11 +29,9 @@ import { formatAgeRating } from "@/lib/age-rating";
 import {
   EMPTY_WIKI_RELATED_DATA,
   getWikiPageBySlug,
-  listPublishedWikiPages,
   loadWikiRelatedData,
   type WikiBadgeItem,
   type WikiGamePassItem,
-  type WikiListEntry,
   type WikiMediaItem,
   type WikiPageContent,
   type WikiRelatedData,
@@ -46,8 +44,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChecklistCard } from "@/components/ChecklistCard";
 import { QuizCard } from "@/components/QuizCard";
 import { ToolCard } from "@/components/ToolCard";
-import { WikiCard } from "@/components/WikiCard";
-import { IndexPageStats } from "@/components/IndexPageStats";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
@@ -71,11 +67,6 @@ const ptDateTimeFormatter = new Intl.DateTimeFormat("en-US", {
   minute: "2-digit",
   timeZone: PT_TIME_ZONE
 });
-
-export type WikiIndexPageData = {
-  pages: WikiListEntry[];
-  total: number;
-};
 
 export type WikiDetailPageData = {
   page: WikiPageContent;
@@ -1244,72 +1235,11 @@ function DeveloperGameCards({
   );
 }
 
-export async function loadWikiIndexPageData(): Promise<WikiIndexPageData> {
-  const pages = await listPublishedWikiPages();
-  return { pages, total: pages.length };
-}
-
 export async function loadWikiDetailPageData(slug: string): Promise<WikiDetailPageData | null> {
   const page = await getWikiPageBySlug(slug);
   if (!page) return null;
   const related = await loadWikiRelatedData(page);
   return { page, related };
-}
-
-export function renderWikiIndexPage({ pages, total }: WikiIndexPageData) {
-  const latest = pages.reduce<Date | null>((latestDate, page) => {
-    const candidate = page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at;
-    if (!candidate) return latestDate;
-    const candidateDate = new Date(candidate);
-    if (Number.isNaN(candidateDate.getTime())) return latestDate;
-    if (!latestDate || candidateDate > latestDate) return candidateDate;
-    return latestDate;
-  }, null);
-  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
-
-  return (
-    <div className="space-y-10">
-      <header className="space-y-4">
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-          Roblox wiki hubs built from live universe data
-        </h1>
-        <p className="max-w-2xl text-base text-muted md:text-lg">{WIKI_DESCRIPTION}</p>
-        <IndexPageStats
-          items={[
-            { label: `${total.toLocaleString("en-US")} wiki${total === 1 ? "" : "s"}`, icon: "wiki", tone: "accent" },
-            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
-          ]}
-        />
-      </header>
-      {pages.length ? (
-        <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
-          {pages.map((page) => (
-            <div key={page.id} data-journey-item className="h-full">
-              <WikiCard page={page} />
-            </div>
-          ))}
-        </section>
-      ) : (
-        <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
-          <div className="rounded-xl border border-dashed border-border/60 bg-surface/40 p-8 text-center text-sm text-muted">
-          No wiki pages have been published yet.
-          </div>
-        </section>
-      )}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: "Roblox Wiki",
-            description: WIKI_DESCRIPTION,
-            url: `${SITE_URL}/wiki`
-          })
-        }}
-      />
-    </div>
-  );
 }
 
 export async function renderWikiDetailPage({ page, related }: WikiDetailPageData) {

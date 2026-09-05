@@ -57,6 +57,7 @@ For a workstation command that intentionally targets production, set both `BLOXO
 - `npm run env:doctor`: verify the full workstation layout, private modes, committed example coverage, target host/key consistency, profile order, ignored Git boundary, and absence of retired root/local-Supabase files without printing values.
 - `npm run env:check`: ensure every real stored variable name has a committed example and secret files are not group/world readable.
 - `npm run dev` or `npm run dev:managed`: start the workstation Next.js app against managed development and refuse anything outside HTTPS `*.supabase.co`.
+- The homelab preview uses `http://teja-homelab.tail13b5bd.ts.net:3000` (direct-IP fallback `http://100.86.117.125:3000`). `apps/web/next.config.js` explicitly allows those development origins plus `127.0.0.1`; Next's default origin guard otherwise blocks the development WebSocket and can leave client components unhydrated. This setting applies only to development, with production host/security rules unchanged. Verified during wiki preview QA on 2026-09-05.
 - `npm run dev:prod`: use the explicit production target for a read-only operator preview.
 - `npm run supabase:migrations:check`: validate the committed migration chain and convergence policy without a database connection.
 - `npm run supabase:managed-dev:check`: run guarded, read-only managed-development schema/API readiness checks.

@@ -66,6 +66,8 @@ Catalog item tiers drive NEW/HOT/WARM/COLD refreshes, resale history, current in
 
 Web/API readers use current index tables through `apps/web/src/lib/stats.ts` and route helpers. Health reports the latest stats index and fresh/stale player-value counts. During recovery, compare the source freshness and `stats_game_current_index` timestamp after each serialized rebuild; index membership alone does not make a player observation younger than the public 24-hour cutoff.
 
+The Roblox `/wiki` overview also consumes `getStatsPlatformPage()` and the shared platform chart endpoint (local implementation verified 2026-09-05; publication separate). The reader exposes `totalsComplete` so this consumer can omit aggregate player headlines if the platform summary RPC fails rather than present the top-games fallback sum as a platform total. Wiki index pages carry the `stats` edge tag; stats revalidation also refreshes `/wiki`.
+
 ## August 14 Worker Packaging Incident
 
 The August 13 environment-profile refactor made `env/config.json` a module-load

@@ -170,7 +170,7 @@ function revalidateForAuthor(slug: string) {
 
 function revalidateForEvents(slug: string) {
   return applyRevalidation(
-    ["/events", `/events/${slug}`, "/", FEED_PATH, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH],
+    ["/events", `/events/${slug}`, "/wiki", "/", FEED_PATH, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH],
     ["events-pages", "home"]
   );
 }
@@ -213,7 +213,7 @@ function revalidateForPuzzle(slug: string) {
 
 function revalidateForWiki(slug: string) {
   return applyRevalidation(
-    ["/wiki", `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
+    [...paginatedIndexPaths("/wiki"), `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
     [`wiki:${slug}`, "wiki-index", "home"]
   );
 }
@@ -276,7 +276,7 @@ function revalidateForStats(slug: string) {
             : ["/stats", "/stats/roblox-platform", "/stats/games", "/stats/creators", "/stats/items"];
   const detailSlug = normalized.startsWith("games/") ? normalized.replace(/^games\//, "") : null;
   return applyRevalidation(
-    [...scopedPaths, "/api/stats/platform/chart", "/api/stats/visit-share", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    [...scopedPaths, "/wiki", "/api/stats/platform/chart", "/api/stats/visit-share", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
     [
       "stats",
       "stats-home",

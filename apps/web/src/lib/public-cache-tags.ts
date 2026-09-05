@@ -257,7 +257,7 @@ export function cacheTagsForPath(pathname: string) {
   }
 
   if (first === "wiki") {
-    if (!second || second === "page") return unique([...tags, "wiki-index"]);
+    if (!second || second === "page") return unique([...tags, "wiki-index", "stats", "events"]);
     if (third && third !== "page") {
       return unique([
         ...tags,

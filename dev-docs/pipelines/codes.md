@@ -11,6 +11,12 @@ Evidence: code/schema rules, installed VPS cron, production read-only counts, an
 - Public routes: `/codes` and `/codes/<game-slug>`.
 - Refresh implementation: `scripts/codes/update-codes.ts`, stable alias `npm run refresh:codes`.
 
+## Codes landing page
+
+Local implementation checked 2026-09-05; production publication is separate. `/codes` combines its existing 20-game card directory with a short introduction, section navigation, and server-rendered guidance about redemption, failed codes, platform promo codes, and source-based updates. Copy and index metadata live in `apps/web/src/app/(site)/codes/index-content.tsx`; layout and list structured data live in `page-data.tsx`. This editorial copy ships with the web application and does not write code rows.
+
+The full guide appears only on `/codes`. Continuation pages use their own canonical and social URLs, inherit the environment's indexing policy, and link back to the landing page. `/codes/page/1` redirects permanently to `/codes`; invalid and out-of-range page numbers return not-found. The main sitemap already includes `/codes`, the codes sitemap retains detail URLs, and RSS remains a feed of content updates rather than index copy. Existing codes index revalidation covers the directory.
+
 ## Source Contract
 
 - `code_pages.slug` is the editorial game slug; never append `-codes` and never copy the stats universe slug.

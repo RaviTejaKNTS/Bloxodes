@@ -30,6 +30,16 @@ These collections describe one game's durable systems and items—pets, weapons,
 - GTA uses the same v2 workspace dataset shape and shared collection renderer, but it does not require a `roblox_universes` row or registered Roblox collection config. Its ignored authoring workspace lives under `tmp/content-workspace/gta/<game-slug>/` and immutable media keys use `gta/<game-slug>/<collection-slug>/...` in the shared wiki R2 bucket.
 - Managed development currently has 173 published GTA collections across 16 hubs, including 80 database pages and 93 checklist pages. GTA 5 contains 26 published collections, including 11 checklist collections: Letter Scraps, Spaceship Parts, Submarine Pieces, Nuclear Waste, Epsilon Tracts, Peyote Plants, Monkey Mosaics, Hidden Packages, Stunt Jumps, Under the Bridge, and Knife Flights.
 
+## Roblox wiki landing page
+
+Local implementation checked 2026-09-05; production publication is separate. `/wiki` is a Roblox gaming reference hub with a Roblox fact panel, topic navigation, platform activity, a searchable game directory, published item collections, and reference tables for experiences, genres, controls, servers, progression, avatars, purchases, and creators. The overview uses the existing Bloxodes game cards, collection CTA, and interactive stats chart components. The landing page starts with a short index introduction and searchable cards; collections and player activity follow the cards and pagination so game discovery stays near the top on desktop and mobile.
+
+`apps/web/src/lib/wiki-index.ts` loads published wikis, optional overview data, collection artwork from published revisions, and scheduled virtual events. `wiki-index-options.ts` owns bounded query normalization, name/genre filtering, and stable sorting by editorial update, name, or fresh player count. The directory retains 20 cards per page and direct Journey card siblings within `#article-body`.
+
+The full overview appears only on unfiltered page one. Search and filter requests (`q`, `genre`, `sort`) use server-rendered GET navigation, preserve normalized query through pagination, and set `noindex, follow`. `/wiki/page/<number>` has a self-referencing canonical and social URL; `/wiki/page/1` permanently redirects to `/wiki` while retaining meaningful filters. CollectionPage/ItemList structured data describes the visible games on each page. The main sitemap includes `/wiki`, while the wiki sitemap lists every published game and collection independently of pagination.
+
+Wiki publication revalidates paginated index paths. The index carries `wiki-index`, `stats`, and `events` Cloudflare tags so content, activity, and event purges cover it. The activity module describes tracked-game concurrent observations, never daily active users; its aggregate player headline is hidden when `getStatsPlatformPage().totalsComplete` is false. The shared platform chart endpoint owns chart range and resolution requests.
+
 ## Workflow
 
 1. Research and approve the wiki hub or collection opportunity, production overlap, game identity, sources, scope, and route.

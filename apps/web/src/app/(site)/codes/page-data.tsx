@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
-import { notFound } from "next/navigation";
 import { listCodePagesWithActiveCountsPage, type CodePageWithCounts } from "@/lib/db";
-import { CODES_DESCRIPTION, SITE_URL, buildAlternates } from "@/lib/seo";
+import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { GameCard } from "@/components/GameCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
+import { IndexGuide, IndexGuideLinks } from "../index-guide";
+import { CODES_INDEX_DESCRIPTION, codesGuideSections } from "./index-content";
 
 export const CODES_PAGE_SIZE = 20;
 
@@ -45,30 +47,28 @@ function CodesPageView({
       {showHero ? (
         <header className="space-y-4">
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-            Fresh Roblox game codes, updated as soon as they drop
+            Roblox Game Codes
           </h1>
           <p className="max-w-2xl text-base text-muted md:text-lg">
-            Find the latest Roblox codes for all your favorite games in one place. Updated daily with active promo codes, rewards, and
-            freebies to help you unlock items, boosts, and more.
+            Find codes for the Roblox games you play, with reward lists and instructions for claiming them.
+            Search for a game or choose a card below, then check its codes page for the rewards and redemption steps.
           </p>
           <IndexPageStats
             items={[
               { label: `${totalGames} games tracked`, icon: "codes", tone: "accent" },
-              ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
             ]}
           />
+          <IndexGuideLinks sections={codesGuideSections} />
         </header>
       ) : (
         <header className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/80">Roblox Codes</p>
+          <Link href="/codes" className="text-sm text-muted underline underline-offset-4 hover:text-accent">Roblox game codes guide</Link>
           <h1 className="text-3xl font-semibold text-foreground">Roblox game codes</h1>
-          {refreshedLabel ? (
-            <p className="text-sm text-muted">Updated {refreshedLabel} · Page {currentPage} of {totalPages}</p>
-          ) : null}
+          <p className="text-sm text-muted">Page {currentPage} of {totalPages}{refreshedLabel ? ` · Game pages updated ${refreshedLabel}` : ""}</p>
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+      <section id="article-body" aria-label="Game codes directory and guide" className="journey-content-stream journey-content-stream--index">
         {games.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-sm text-muted">
             We haven’t published any game code pages yet. Check back soon.
@@ -79,12 +79,12 @@ function CodesPageView({
               key={game.id}
               data-journey-item
               className="h-full"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="codes_index"
-                data-analytics-item-id={game.slug}
-                data-analytics-item-name={game.name}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="codes"
+              data-analytics-event="select_item"
+              data-analytics-item-list-name="codes_index"
+              data-analytics-item-id={game.slug}
+              data-analytics-item-name={game.name}
+              data-analytics-position={index + 1}
+              data-analytics-content-type="codes"
             >
               <GameCard
                 game={game}
@@ -96,22 +96,32 @@ function CodesPageView({
         )}
 
         <PagePagination basePath="/codes" currentPage={currentPage} totalPages={totalPages} />
+        {showHero ? <IndexGuide sections={codesGuideSections} /> : null}
       </section>
 
-      {showHero ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "CollectionPage",
-              name: "Roblox Game Codes",
-              description: CODES_DESCRIPTION,
-              url: `${SITE_URL}/codes`
-            })
-          }}
-        />
-      ) : null}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: showHero ? "Roblox Game Codes" : `Roblox Game Codes - Page ${currentPage}`,
+            description: CODES_INDEX_DESCRIPTION,
+            url: `${SITE_URL}${showHero ? "/codes" : `/codes/page/${currentPage}`}`,
+            inLanguage: "en-US",
+            isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+            mainEntity: {
+              "@type": "ItemList",
+              itemListElement: games.map((game, index) => ({
+                "@type": "ListItem",
+                position: (currentPage - 1) * CODES_PAGE_SIZE + index + 1,
+                name: `${game.name} Codes`,
+                url: `${SITE_URL}/codes/${game.slug}`
+              }))
+            }
+          }).replace(/</g, "\\u003c")
+        }}
+      />
     </div>
   );
 }
@@ -122,6 +132,20 @@ export function renderCodesPage(props: Parameters<typeof CodesPageView>[0]) {
 
 export const codesMetadata: Metadata = {
   title: "Roblox Game Codes",
-  description: CODES_DESCRIPTION,
-  alternates: buildAlternates(`${SITE_URL}/codes`)
+  description: CODES_INDEX_DESCRIPTION,
+  alternates: buildAlternates(`${SITE_URL}/codes`),
+  openGraph: {
+    type: "website",
+    title: "Roblox Game Codes",
+    description: CODES_INDEX_DESCRIPTION,
+    url: `${SITE_URL}/codes`,
+    siteName: SITE_NAME,
+    images: [`${SITE_URL}/Bloxodes.png`]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Roblox Game Codes",
+    description: CODES_INDEX_DESCRIPTION,
+    images: [`${SITE_URL}/Bloxodes.png`]
+  }
 };
