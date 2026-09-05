@@ -21,7 +21,7 @@
     "ios": "npm run ios -w @bloxodes/mobile",
     "supabase:migrations:check": "node --import tsx scripts/dev/check-migration-integrity.ts",
     "supabase:managed-dev:check": "node --import tsx scripts/dev/check-managed-dev-readiness.ts",
-    "supabase:production:release": "BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=vps node --import tsx scripts/ops/release-production-schema.ts",
+    "supabase:production:release": "BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=vps,dokploy node --import tsx scripts/ops/release-production-schema.ts",
     "supabase:production:function:release": "BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=vps node --import tsx scripts/ops/release-production-edge-function.ts",
     "platform:sync:check": "BLOXODES_ENV_OVERLAYS=homelab,vps node --import tsx scripts/ops/check-platform-sync.ts",
     "ads:update": "tsx scripts/ads/update-ads-txt.ts",
@@ -275,6 +275,7 @@
     "sanitize-html": "^2.17.0",
     "sharp": "^0.33.5",
     "tailwind-merge": "^3.3.1",
+    "ws": "8.21.0",
     "yaml": "^2.6.1",
     "zod": "^4.1.11"
   },
