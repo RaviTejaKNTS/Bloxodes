@@ -26,9 +26,10 @@ const beginMarker = "__BLOXODES_PSQL_BEGIN__";
 const endMarker = "__BLOXODES_PSQL_END__";
 const psqlFlags = tuplesOnly ? "-A -t" : "";
 const encodedSql = Buffer.from(sql, "utf8").toString("base64");
+const encodedChunks = encodedSql.match(/.{1,2048}/g) ?? [];
 const command = [
   `printf '\\n${beginMarker}\\n'`,
-  `printf '%s' '${encodedSql}' | base64 -d | psql -U postgres -d postgres -X -v ON_ERROR_STOP=1 ${psqlFlags}`,
+  `base64 -d | psql -U postgres -d postgres -X -v ON_ERROR_STOP=1 ${psqlFlags}`,
   "code=$?",
   `printf '\\n${endMarker}%s\\n' "$code"`,
   "exit",
@@ -63,13 +64,19 @@ const finish = (error) => {
   if (status !== 0) process.exitCode = status;
 };
 
-const timeout = setTimeout(() => finish(new Error("Dokploy psql transport timed out.")), 120000);
+const timeout = setTimeout(() => finish(new Error("Dokploy psql transport timed out.")), 300000);
 ws.on("open", () => {
   setTimeout(() => {
     if (ws.readyState !== WebSocket.OPEN) return;
     ws.send("stty -echo\n");
     setTimeout(() => {
-      if (ws.readyState === WebSocket.OPEN) ws.send(`${command}\n`);
+      if (ws.readyState !== WebSocket.OPEN) return;
+      ws.send(`${command}\n`);
+      setTimeout(() => {
+        if (ws.readyState !== WebSocket.OPEN) return;
+        for (const chunk of encodedChunks) ws.send(`${chunk}\n`);
+        ws.send("\u0004");
+      }, 400);
     }, 400);
   }, 1200);
 });

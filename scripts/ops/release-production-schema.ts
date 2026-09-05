@@ -19,6 +19,14 @@ type Migration = {
   sql: string;
 };
 
+function transactionBody(sql: string): string {
+  return sql
+    .trim()
+    .replace(/^begin;\s*/i, "")
+    .replace(/\s*commit;\s*$/i, "")
+    .trim();
+}
+
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const migrationRoot = path.join(repoRoot, "supabase/migrations");
 const argv = process.argv.slice(2);
@@ -55,7 +63,7 @@ function readMigrations(): Migration[] {
         version: match[1]!,
         name: match[2]!,
         file,
-        sql: fs.readFileSync(path.join(migrationRoot, file), "utf8").trim()
+        sql: transactionBody(fs.readFileSync(path.join(migrationRoot, file), "utf8"))
       };
     });
 }
