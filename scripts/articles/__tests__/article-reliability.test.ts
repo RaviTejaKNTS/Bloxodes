@@ -93,3 +93,21 @@ test("persistent stage workspaces outside Git retain the same model sandbox", as
   assert.ok(args.includes("--skip-git-repo-check"));
   assert.equal(args[args.indexOf("--sandbox") + 1], "read-only");
 });
+
+test("persistent-state symlinks preserve approval checks and reject changed artifacts", async () => {
+  const { mkdir, symlink, writeFile } = await import("node:fs/promises");
+  const { artifactHashes } = await import("../article-pipeline");
+  const { resolveReleaseArtifactPath } = await import("../release-completed-articles");
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-release-root-"));
+  const stateRoot = await mkdtemp(path.join(os.tmpdir(), "article-release-state-"));
+  await symlink(stateRoot, path.join(root, "tmp"));
+  const run = path.join(stateRoot, "article-pipeline", ids[0]);
+  const content = path.join(run, "content"); await mkdir(content, { recursive: true });
+  for (const file of ["brief.md", "media.json", "final.json"]) await writeFile(path.join(content, file), "approved");
+  await saveJson(path.join(run, "state.json"), { status: "completed", stage: "done", job: { id: ids[0], slug: "test" }, artifacts: await artifactHashes(content), history: ["copy_check", "image_check", "import_verify", "browser_verify"].map(stage => ({ stage, decision: { status: "completed" } })) });
+  await saveJson(path.join(run, "editorial_review.json"), { status: "completed" });
+  const logical = path.join(root, "tmp/article-pipeline", ids[0], "content/final.json");
+  assert.equal(await resolveReleaseArtifactPath(logical, ids[0], "test", root), path.join(content, "final.json"));
+  await writeFile(path.join(content, "final.json"), "changed");
+  await assert.rejects(resolveReleaseArtifactPath(logical, ids[0], "test", root), /approval no longer matches/);
+});

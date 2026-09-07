@@ -34,12 +34,33 @@ fi
 [[ "$(cat "${RUNTIME_ROOT}/prepared-sha")" == "${APPROVED_SHA}" ]] || { echo "Prepare and check this runtime first." >&2; exit 1; }
 [[ "$(git -C "${RELEASE_DIR}" rev-parse HEAD)" == "${APPROVED_SHA}" ]]
 [[ -z "$(git -C "${RELEASE_DIR}" status --porcelain)" ]]
+# Stop triggers, not jobs, while reconciling state and switching units. Restore on failure.
+DISCOVERY_WAS_ACTIVE=false
+PUBLICATION_WAS_ACTIVE=false
+systemctl is-active --quiet bloxodes-article-discovery.timer && DISCOVERY_WAS_ACTIVE=true
+systemctl is-active --quiet bloxodes-article-publication.timer && PUBLICATION_WAS_ACTIVE=true
+restore_timers() {
+  if [[ "${DISCOVERY_WAS_ACTIVE}" == true ]]; then systemctl start bloxodes-article-discovery.timer; fi
+  if [[ "${PUBLICATION_WAS_ACTIVE}" == true ]]; then systemctl start bloxodes-article-publication.timer; fi
+}
+trap restore_timers EXIT
+systemctl stop bloxodes-article-discovery.timer
+if [[ "${PUBLICATION_WAS_ACTIVE}" == true ]]; then systemctl stop bloxodes-article-publication.timer; fi
 for service in bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service; do
   if systemctl is-active --quiet "${service}"; then
     echo "${service} is active; retry after it finishes." >&2
     exit 1
   fi
 done
+
+# First activation reconciles work completed since preparation. Keep newer runtime receipts.
+if [[ ! -e "${RUNTIME_ROOT}/current" ]]; then
+  for directory in article-pipeline content-workspace article-publication; do
+    if [[ -d "${REPO_ROOT}/tmp/${directory}" ]]; then
+      rsync -au "${REPO_ROOT}/tmp/${directory}/" "${RUNTIME_ROOT}/state/${directory}/"
+    fi
+  done
+fi
 
 install -d -m 0750 -o root -g teja "${ENV_DIR}"
 if [[ ! -e "${ENV_PATH}" ]]; then
