@@ -86,7 +86,8 @@ export async function runStageCommand(options: CommandOptions): Promise<{ code: 
 export function stageCodexArgs(options: StageRuntimeOptions, stage: Stage, prompt: string, attemptDir: string) {
   const args = buildCodexExecArgs({ worktree: path.join(options.runDir, "content"), model: options.model, reasoningEffort: options.reasoning, prompt });
   if (isReviewStage(stage)) args.splice(args.indexOf("--approve-for-me"), 1);
-  args.splice(args.length - 1, 0,
+  // Persistent article workspaces intentionally live outside the immutable release checkout.
+  args.splice(args.length - 1, 0, "--skip-git-repo-check",
     "--config", "features.multi_agent=false", "--config", "features.multi_agent_v2=false",
     "--config", "features.apps=false", "--config", 'web_search="live"',
     ...(isReviewStage(stage) ? ["--sandbox", "read-only", "--config", 'approval_policy="never"'] : []),

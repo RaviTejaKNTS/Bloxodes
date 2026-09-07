@@ -86,3 +86,10 @@ test("image bytes retry transient failures but do not retry a 404 or invalid ima
   await assert.rejects(fetchImageBytes("https://example.com/image", {}, async () => { attempts++; return new Response(null, { status: 404 }); }, async () => {}), /404/);
   assert.equal(attempts, 1);
 });
+
+test("persistent stage workspaces outside Git retain the same model sandbox", async () => {
+  const { stageCodexArgs } = await import("../article-stage-runtime");
+  const args = stageCodexArgs({ runDir: "/state/article", model: "gpt-5.6-luna", reasoning: "max" } as any, "editorial_review", "review", "/state/attempt");
+  assert.ok(args.includes("--skip-git-repo-check"));
+  assert.equal(args[args.indexOf("--sandbox") + 1], "read-only");
+});
