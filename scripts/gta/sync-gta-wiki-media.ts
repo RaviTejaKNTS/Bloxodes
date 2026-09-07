@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import sharp from "sharp";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
-import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
+import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 
 type GtaWikiMedia = {
   slug: string;
@@ -113,17 +113,18 @@ export const GTA_WIKI_MEDIA: readonly GtaWikiMedia[] = [
 const GTA_VI_SLUG = "gta-6";
 const args = new Set(process.argv.slice(2));
 const apply = args.has("--apply");
+const allowProd = args.has("--allow-prod");
 const skipSourceCheck = args.has("--skip-source-check");
 const PUBLIC_WIKI_MEDIA_BASE_URL = "https://media.bloxodes.com/wiki";
 
 function printHelp() {
-  console.log("Usage: npm run sync:gta-wiki-media [--apply] [--skip-source-check]");
-  console.log("Defaults to a read-only plan. --apply downloads, hosts, and points GTA hub media at Bloxodes wiki media; it is restricted to managed development.");
+  console.log("Usage: npm run sync:gta-wiki-media [--apply] [--allow-prod] [--skip-source-check]");
+  console.log("Defaults to a read-only plan. Production apply requires --allow-prod and the recognized production target.");
 }
 
 function assertNoUnknownArgs() {
   for (const arg of args) {
-    if (!["--apply", "--skip-source-check", "--help", "-h"].includes(arg)) {
+    if (!["--apply", "--allow-prod", "--skip-source-check", "--help", "-h"].includes(arg)) {
       throw new Error(`Unknown option: ${arg}`);
     }
   }
@@ -155,13 +156,20 @@ async function prepareHostedMedia(slug: string, role: "cover" | "thumbnail", sou
   const response = await fetch(sourceUrl, { redirect: "follow", signal: AbortSignal.timeout(30_000) });
   if (!response.ok) throw new Error(`${sourceUrl} returned HTTP ${response.status}.`);
   const source = Buffer.from(await response.arrayBuffer());
+  const sourceMetadata = await sharp(source, { animated: true }).rotate().metadata();
+  const thumbnailSize = Math.min(960, sourceMetadata.width ?? 960, sourceMetadata.height ?? 960);
   const body = await sharp(source, { animated: true })
     .rotate()
-    .resize({ width: 1600, height: 1600, fit: "inside", withoutEnlargement: true })
+    .resize(role === "thumbnail"
+      ? { width: thumbnailSize, height: thumbnailSize, fit: "cover", position: "attention" }
+      : { width: 1600, height: 1600, fit: "inside", withoutEnlargement: true })
     .webp({ quality: 86 })
     .toBuffer();
   const metadata = await sharp(body).metadata();
   if (!metadata.width || !metadata.height) throw new Error(`Could not read dimensions for ${sourceUrl}.`);
+  if (role === "thumbnail" && metadata.width !== metadata.height) {
+    throw new Error(`Thumbnail for ${slug} must be square; received ${metadata.width}x${metadata.height}.`);
+  }
   const digest = sha256(body);
   const key = `gta/${slug}/hub-${role}-${digest.slice(0, 16)}.webp`;
   return {
@@ -338,9 +346,11 @@ async function main() {
     console.log(`Dry run only: ${GTA_WIKI_MEDIA.length} retained GTA hubs would receive media roles, and GTA VI would be unpublished.`);
     return;
   }
-  if (!isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to write GTA wiki media outside managed development.");
-  }
+  const managed = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);
+  const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
+  if (!managed && !production) throw new Error("Unrecognized Supabase target.");
+  if (allowProd && (!apply || !production)) throw new Error("--allow-prod requires --apply and the recognized production target.");
+  if (apply && production && !allowProd) throw new Error("Production GTA wiki media writes require --allow-prod.");
   const r2 = new R2Client(loadR2ClientConfig(process.env));
   const prepared = await prepareAllHostedMedia();
   await uploadHostedMedia(prepared, r2);

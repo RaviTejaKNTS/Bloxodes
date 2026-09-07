@@ -19,10 +19,19 @@ type Migration = {
   sql: string;
 };
 
+function transactionBody(sql: string): string {
+  return sql
+    .trim()
+    .replace(/^begin;\s*/i, "")
+    .replace(/\s*commit;\s*$/i, "")
+    .trim();
+}
+
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const migrationRoot = path.join(repoRoot, "supabase/migrations");
 const argv = process.argv.slice(2);
 const apply = argv.includes("--apply");
+const transport = value("--transport") ?? "ssh";
 
 function value(flag: string): string | undefined {
   const index = argv.indexOf(flag);
@@ -54,12 +63,26 @@ function readMigrations(): Migration[] {
         version: match[1]!,
         name: match[2]!,
         file,
-        sql: fs.readFileSync(path.join(migrationRoot, file), "utf8").trim()
+        sql: transactionBody(fs.readFileSync(path.join(migrationRoot, file), "utf8"))
       };
     });
 }
 
 function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
+  if (transport === "dokploy") {
+    const helper = path.join(repoRoot, "scripts/ops/dokploy-container-psql.mjs");
+    const result = spawnSync(process.execPath, [helper, ...(tuplesOnly ? ["--tuples-only"] : [])], {
+      cwd: repoRoot,
+      input: sql,
+      encoding: "utf8",
+      env: process.env,
+      maxBuffer: 20 * 1024 * 1024
+    });
+    if (result.error) throw result.error;
+    if (result.stderr) process.stderr.write(result.stderr);
+    if (result.status !== 0) throw new Error(`Dokploy production psql exited with status ${result.status}.`);
+    return result.stdout.trim();
+  }
   const psql = [
     "docker", "exec", "-i", "supabase-db",
     "psql", "-U", "postgres", "-d", "postgres",
@@ -89,6 +112,9 @@ function ledgerInsert(migration: Migration): string {
 }
 
 async function main() {
+  if (transport !== "ssh" && transport !== "dokploy") {
+    throw new Error("--transport must be ssh or dokploy.");
+  }
   const approvedSha = required("--approved-sha", value("--approved-sha"));
   if (!/^[0-9a-f]{40}$/.test(approvedSha)) throw new Error("--approved-sha must be a full 40-character Git SHA.");
   if (git("rev-parse", "HEAD") !== approvedSha) throw new Error("The current checkout does not match --approved-sha.");

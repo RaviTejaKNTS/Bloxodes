@@ -144,19 +144,10 @@ async function retryOperation<T>(label: string, operation: () => Promise<T>): Pr
   throw lastError;
 }
 
-function reportCheckoutState(context: string) {
+function assertCleanCheckout(context: string) {
   const result = spawnSync("git", ["status", "--porcelain"], { cwd: worktree, encoding: "utf8" });
-  if (result.status !== 0) {
-    console.warn(`Could not inspect git status during ${context}: ${result.stderr.trim()}`);
-    return;
-  }
-  const changedPaths = result.stdout.trim().split("\n").filter(Boolean).length;
-  if (changedPaths) {
-    console.warn(
-      `Wiki automation is continuing with ${changedPaths} pre-existing checkout change(s) during ${context}; ` +
-      "the scheduled model process can write only to its ignored artifact and preview directories."
-    );
-  }
+  if (result.status !== 0) throw new Error(`Could not inspect git status during ${context}: ${result.stderr.trim()}`);
+  if (result.stdout.trim()) throw new Error(`Wiki automation requires a clean checkout during ${context}.`);
 }
 
 async function fetchTop100(): Promise<StatsGame[]> {
@@ -622,7 +613,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       const args = buildCodexExecArgs({ worktree, model: codexModel, reasoningEffort: codexReasoning, prompt: promptFor(row, resultRoot) });
       await runDirectCodex(args, modelEnvironment(devCredentials), resultRoot, 3240 + (row.processing_slot || lane));
       await assertPreviewPortFree(3240 + (row.processing_slot || lane));
-      reportCheckoutState(`post-agent verification for lane ${lane}`);
+      assertCleanCheckout(`post-agent verification for lane ${lane}`);
       result = await readWorkflowResult(row, resultRoot);
     } finally {
       clearInterval(heartbeatTimer);
@@ -712,7 +703,7 @@ async function main() {
     return;
   }
   assertOptions();
-  reportCheckoutState("startup");
+  assertCleanCheckout("startup");
   if (!releaseOnly) await access(codexBin, fsConstants.X_OK);
   const devCredentials = resolveWikiDevCredentials();
   const dev = createClient(devCredentials.url, devCredentials.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });

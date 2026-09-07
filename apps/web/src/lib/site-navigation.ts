@@ -71,7 +71,6 @@ export const redDeadWikiNavLinks: Pick<SiteNavLink, "href" | "label">[] = [
   { href: "/red-dead/wiki/red-dead-redemption", label: "Red Dead Redemption" },
   { href: "/red-dead/wiki/red-dead-revolver", label: "Red Dead Revolver" }
 ];
-
 export const redDeadNavLinks: SiteNavLink[] = [
   { href: "/red-dead", label: "Red Dead Home", icon: Home },
   { href: "/red-dead/wiki", label: "Red Dead Wiki", icon: BookOpen },

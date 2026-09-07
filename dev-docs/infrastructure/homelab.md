@@ -33,6 +33,26 @@ BLOXODES_ENV_PROFILE=managed-dev BLOXODES_ENV_OVERLAYS=cloudflare ../../node_mod
 
 Use the webpack preview for very large GTA collection pages. If the development Turbopack cache panics while writing a large response, stop the preview, move only the generated `apps/web/.next/dev` directory to `/tmp`, and restart; never remove source, workspace, database, or media files. Verify reachability with a bounded `curl` through both the Tailscale hostname and IP before sharing links.
 
+## Tailscale and managed-development preview
+
+- Current Tailscale hostname: `teja-homelab.tail13b5bd.ts.net`.
+- Current Tailscale IPv4 fallback: `100.86.117.125`.
+- User-facing preview base: `http://teja-homelab.tail13b5bd.ts.net:3000`.
+- Direct-IP fallback: `http://100.86.117.125:3000`.
+- Append the route to either base, for example `/gta/wiki/gta-online`; do not hand off `localhost` or `127.0.0.1` when the reviewer is on another tailnet device. The route's public canonical URL remains `https://bloxodes.com/...`.
+
+For a remotely reviewable managed-development preview, use the homelab wiki env without printing it and bind Next to the Tailscale-reachable interface:
+
+```bash
+cd /home/teja/projects/Bloxodes/apps/web
+set -a
+source /etc/bloxodes/wiki-automation.env
+set +a
+BLOXODES_ENV_PROFILE=managed-dev BLOXODES_ENV_OVERLAYS=cloudflare ../../node_modules/.bin/next dev --webpack --hostname 0.0.0.0 --port 3000
+```
+
+Use the webpack preview for very large GTA collection pages. If the development Turbopack cache panics while writing a large response, stop the preview, move only the generated `apps/web/.next/dev` directory to `/tmp`, and restart; never remove source, workspace, database, or media files. Verify reachability with a bounded `curl` through both the Tailscale hostname and IP before sharing links.
+
 ## Services
 
 - `bloxodes-article-discovery.timer`: enabled, active, runs at 00:00/06:00/12:00/18:00 local time with persistence.
@@ -68,7 +88,7 @@ The interactive homelab checkout also contains the complete ignored private `.en
 - The batch sets an explicit nested-run guard so a provider cannot invoke another outer batch or self-lock. Browser, provider, verifier, and release failures clear selected processing claims immediately and apply a 180-minute retry backoff.
 - Article and wiki agents share `tmp/article-writer/writer.lock`. Cross-user permission errors count as a live process, so the restricted wiki account cannot delete an active article lock. The wiki runner waits rather than overlapping.
 - Scheduled wiki runs process at most one top-100 game, require a verified hub plus at least one evidence-backed collection, and stop at managed-development review. Production publication remains explicit.
-- Pre-existing checkout changes do not block the scheduled wiki job. The service reports them for visibility, while its systemd filesystem sandbox keeps tracked source read-only and permits writes only in the ignored wiki artifact and preview-cache directories.
+- Scheduled wiki jobs require a clean checkout at startup and after the model returns. Artifact directories remain ignored; source changes must be reviewed and committed before a scheduled run proceeds.
 - Homelab operator access belongs in `.envs/infrastructure/homelab.env`; writer runtime values belong in `.envs/pipelines/articles.env` and the host env file.
 - Never copy the production Supabase target into either scheduled homelab env; queue and media staging remain managed development.
 - E2e checkout-sync authority does not include env changes, unit installation, stopping active discovery/writer jobs, service restarts, or unrelated host mutations. For an in-scope remote synchronization, installed-unit changes, active services, or a failed preflight leave that remote checkout unchanged with synchronization pending. A release already running on this primary workspace skips that synchronization entirely.
