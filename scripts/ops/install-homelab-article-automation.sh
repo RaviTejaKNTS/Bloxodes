@@ -77,6 +77,7 @@ for unit in \
   bloxodes-article-discovery.timer \
   bloxodes-article-writer.service \
   bloxodes-article-publication.service \
+  bloxodes-article-audit.service \
   bloxodes-article-publication.timer; do
   install -m 0644 "${UNIT_SOURCE}/${unit}" "/etc/systemd/system/${unit}"
 done

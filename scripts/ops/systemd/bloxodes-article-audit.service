@@ -1,9 +1,7 @@
 [Unit]
-Description=Retry authorized verified Bloxodes article publications
+Description=Report Bloxodes article queue and schedule health
 After=network-online.target
 Wants=network-online.target
-OnSuccess=bloxodes-article-audit.service
-OnFailure=bloxodes-article-audit.service
 
 [Service]
 Type=oneshot
@@ -12,7 +10,6 @@ Group=teja
 WorkingDirectory=/home/teja/.local/share/bloxodes-article-runtime/current
 EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
-ExecStart=/usr/bin/npm run articles:publication:drain -- --apply
+ExecStart=/usr/bin/npm run articles:automation:audit
 Nice=10
-CPUWeight=20
-TimeoutStartSec=45min
+TimeoutStartSec=2min
