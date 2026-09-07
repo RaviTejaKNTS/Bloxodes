@@ -107,16 +107,22 @@ async function main() {
     }
     const codexModel = process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna";
     const codexReasoning = parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "xhigh"
+      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
     );
     console.log(`Codex CLI: ${codexVersion.stdout.trim()} (${codexModel}, ${codexReasoning})`);
+    const features = spawnSync(codex, ["--config", "features.multi_agent=false", "--config", "features.multi_agent_v2=false", "features", "list"], { encoding: "utf8" });
+    if (features.status !== 0 || !/^multi_agent\s+\S+\s+false$/m.test(features.stdout)) throw new Error("Codex cannot confirm disabled worker-management tools for article stages.");
+    for (const file of ["scripts/articles/article-pipeline.ts", "scripts/articles/article-stage-runtime.ts", ".agents/skills/bloxodes-article-workflow-runner/references/code-controlled-stages.md"]) accessSync(path.resolve(file), fsConstants.R_OK);
+    console.log("Article execution: code-controlled stages; native multi-agent tools disabled");
 
     const grokConfigured = process.env.ARTICLE_WRITER_GROK_BIN?.trim();
     const grok = findExecutable([grokConfigured || "", `${process.env.HOME ?? ""}/.grok/bin/grok`, "grok"].filter(Boolean));
-    if (!grok) throw new Error("Grok CLI is not installed or ARTICLE_WRITER_GROK_BIN is incorrect.");
-    const grokVersion = spawnSync(grok, ["--version"], { encoding: "utf8" });
-    if (grokVersion.status !== 0) throw new Error(`Grok CLI failed its version check: ${grokVersion.stderr.trim()}`);
-    console.log(`Grok CLI: ${grokVersion.stdout.trim()}`);
+    if (!/^(false|0|no|off)$/i.test(process.env.ARTICLE_WRITER_GROK_FALLBACK ?? "true")) {
+      if (!grok) throw new Error("Grok CLI is not installed or ARTICLE_WRITER_GROK_BIN is incorrect.");
+      const grokHelp = spawnSync(grok, ["--help"], { encoding: "utf8" });
+      if (grokHelp.status !== 0 || !grokHelp.stdout.includes("--no-subagents") || !grokHelp.stdout.includes("--json-schema")) throw new Error("Grok fallback requires --no-subagents and structured stage results.");
+      console.log("Grok fallback: single-stage, subagent spawning disabled");
+    }
 
     const browser = await runArticleBrowserSmokeTest();
     console.log(`Headless browser: ${browser} (Playwright smoke test passed)`);

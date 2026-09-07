@@ -1,7 +1,7 @@
 import "../shared/load-env";
 
 import { randomUUID } from "node:crypto";
-import { access, mkdir, mkdtemp, open, readFile, realpath, rm, unlink, writeFile } from "node:fs/promises";
+import { access, copyFile, mkdir, mkdtemp, open, readFile, realpath, rm, unlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -20,6 +20,8 @@ import {
   type ArticleImageManifest,
 } from "../content/article-image-readiness";
 import { CANONICAL_MEDIA_ORIGIN } from "../shared/storage-public-url";
+import { fetchWithTransientRetries, TransientHttpError } from "../shared/transient-http";
+import { artifactHashes, type PipelineState } from "./article-pipeline";
 import {
   ARTICLE_DEV_ENV_KEYS,
   ARTICLE_QUEUE_ENV_KEYS,
@@ -405,11 +407,30 @@ function isArticleFinal(value: unknown): value is ArticleFinal {
   );
 }
 
-async function assertInsideContentWorkspace(filePath: string): Promise<string> {
-  const workspace = await realpath(path.join(process.cwd(), "tmp", "content-workspace"));
+export async function resolveReleaseArtifactPath(filePath: string, queueId: string, slug: string, worktree = process.cwd()): Promise<string> {
+  const root = await realpath(worktree);
   const actual = await realpath(filePath);
-  if (!actual.startsWith(`${workspace}${path.sep}`)) {
-    throw new Error(`${filePath} resolves outside tmp/content-workspace.`);
+  const legacy = path.join(root, "tmp", "content-workspace");
+  if (actual.startsWith(`${legacy}${path.sep}`)) return actual;
+  const pipeline = path.join(root, "tmp", "article-pipeline");
+  if (!actual.startsWith(`${pipeline}${path.sep}`) || path.basename(path.dirname(actual)) !== "content") {
+    throw new Error(`${filePath} resolves outside an approved article workspace.`);
+  }
+  const runDir = path.dirname(path.dirname(actual));
+  if (path.dirname(runDir) !== pipeline) throw new Error("Invalid pipeline run path.");
+  const state = JSON.parse(await readFile(path.join(runDir, "state.json"), "utf8")) as PipelineState;
+  const review = JSON.parse(await readFile(path.join(runDir, "editorial_review.json"), "utf8"));
+  const hashes = await artifactHashes(path.dirname(actual));
+  if (state.status !== "completed" || state.stage !== "done" || state.job.id !== queueId || state.job.slug !== slug || review.status !== "completed") {
+    throw new Error("Pipeline article has no matching completed approval.");
+  }
+  for (const name of ["brief.md", "media.json", "final.json"]) {
+    if (!hashes[name] || hashes[name] !== state.artifacts[name]) throw new Error(`Pipeline approval no longer matches ${name}.`);
+  }
+  for (const stage of ["copy_check", "image_check", "import_verify", "browser_verify"] as const) {
+    if (state.history.filter(entry => entry.stage === stage).at(-1)?.decision.status !== "completed") {
+      throw new Error(`Pipeline article is missing ${stage} verification.`);
+    }
   }
   return actual;
 }
@@ -418,8 +439,9 @@ async function readReleaseArtifact(row: QueueRow): Promise<ReleaseArtifact> {
   if (!row.result_path || path.isAbsolute(row.result_path) || path.basename(row.result_path) !== "final.json") {
     throw new Error(`Queue row ${row.id} has an unsafe result_path.`);
   }
-  const finalPath = await assertInsideContentWorkspace(path.resolve(process.cwd(), row.result_path));
-  const mediaPath = await assertInsideContentWorkspace(path.join(path.dirname(finalPath), "media.json"));
+  const finalPath = await resolveReleaseArtifactPath(path.resolve(process.cwd(), row.result_path), row.id, row.result_slug!);
+  const mediaPath = await realpath(path.join(path.dirname(finalPath), "media.json"));
+  if (path.dirname(mediaPath) !== path.dirname(finalPath)) throw new Error("Article media manifest escapes its workspace.");
   await access(finalPath);
   await access(mediaPath);
 
@@ -535,11 +557,19 @@ async function downloadCoverSource(
 ): Promise<string | null> {
   const entry = pickCoverSourceEntry(artifact.manifest);
   if (!entry?.public_url) return null;
-  const response = await fetch(entry.public_url, {
-    redirect: "follow",
-    headers: { "user-agent": "Bloxodes automated article release" },
-  });
-  if (!response.ok) throw new Error(`${entry.label}: cover source returned HTTP ${response.status}.`);
+  let response: Response;
+  try {
+    response = await fetchWithTransientRetries(entry.public_url, {
+      redirect: "follow",
+      headers: { "user-agent": "Bloxodes automated article release" },
+    });
+  } catch (error) {
+    if (error instanceof TransientHttpError) {
+      console.warn(`${entry.label}: cover source is temporarily unavailable; using the normal article cover fallback.`);
+      return null;
+    }
+    throw error;
+  }
   const contentType = response.headers.get("content-type") ?? "";
   if (!contentType.startsWith("image/")) {
     throw new Error(`${entry.label}: cover source returned ${contentType || "an unknown content type"}.`);
@@ -660,7 +690,14 @@ async function releaseOne(params: {
     if (params.artifact.row.production_url !== productionUrl) {
       throw new Error(`${params.artifact.row.id}: published queue URL does not match ${productionUrl}.`);
     }
-    await verifyProductionReadback(params.artifact, params.production);
+    const expected = structuredClone(params.artifact);
+    for (const entry of expected.manifest.entries) {
+      if (entry.status !== "verified" || !entry.public_url || !entry.uploaded_path || entry.public_url.startsWith("/")) continue;
+      const publicUrl = `${CANONICAL_MEDIA_ORIGIN}/storage/v1/object/public/${params.productionEnv.SUPABASE_MEDIA_BUCKET}/${entry.uploaded_path}`;
+      expected.finalJson.content_md = expected.finalJson.content_md.split(entry.public_url).join(publicUrl);
+      entry.public_url = publicUrl;
+    }
+    await verifyProductionReadback(expected, params.production);
     await verifyLiveRelease(params.artifact, params.options, params.productionEnv);
     return {
       queueId: params.artifact.row.id,
@@ -670,7 +707,14 @@ async function releaseOne(params: {
     };
   }
 
-  const promoted = await promoteAndImport(params.artifact, params.productionEnv, params.coverDir);
+  // Promotion rewrites URLs. Preserve the original files and their pipeline approval hashes.
+  const stagingRoot = path.join(process.cwd(), "tmp", "content-workspace");
+  await mkdir(stagingRoot, { recursive: true });
+  const stagingDir = await mkdtemp(path.join(stagingRoot, ".article-release-"));
+  await copyFile(params.artifact.finalPath, path.join(stagingDir, "final.json"));
+  await copyFile(params.artifact.mediaPath, path.join(stagingDir, "media.json"));
+  const staged = await readReleaseArtifact({ ...params.artifact.row, result_path: path.relative(process.cwd(), path.join(stagingDir, "final.json")) });
+  const promoted = await promoteAndImport(staged, params.productionEnv, params.coverDir);
   await verifyProductionReadback(promoted, params.production);
   await verifyLiveRelease(promoted, params.options, params.productionEnv);
   await closeQueueRow(promoted, productionUrl, params.dev);

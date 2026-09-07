@@ -106,3 +106,11 @@ The migration preserves these remaining old names: `HOSTINGER_Token` and `Northf
 - `NEXT_PUBLIC_*` and Expo public variables are client-visible.
 - Production-capable scripts must retain URL/host guards and explicit allow-production flags.
 - A profile name is not authorization; command-specific write safeguards still apply.
+
+## Article stage environment ownership (September 6, 2026)
+
+The code-controlled article runtime gives model tasks only tool/user paths, locale/network settings, a read-only inventory URL and ARTICLE_PIPELINE_STAGE. It forces process-only loading and excludes database, queue and publication credentials. The code-owned media/import/verification stages receive managed-development credentials; publication keeps its existing explicit runtime owner. This is environment minimization, not a claim that the CLI shell cannot read any other host file.
+
+Optional pipeline controls are ARTICLE_PIPELINE_STAGE_TIMEOUT_MINUTES (45), ARTICLE_PIPELINE_PREVIEW_PORT (3100), and ARTICLE_PIPELINE_PREVIEW_BASE_URL (an existing managed-dev localhost/Tailscale URL). Defaults are in code and committed examples; no protected env values were changed. Host env:doctor passed on September 6 after this change.
+
+The September 6 manual article run verified that deterministic article upload/import/QA stages must use NODE_ENV=development while retaining BLOXODES_ENV_PROFILE=process-only and the validated managed-development credentials. Model stages retain their minimized process-only environment. The import production guard remains unchanged; managed runs do not use --allow-prod.

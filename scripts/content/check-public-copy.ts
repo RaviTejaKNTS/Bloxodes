@@ -59,11 +59,15 @@ function excerpt(value: string, index: number): string {
   return value.slice(start, end).replace(/\s+/g, " ").trim();
 }
 
-function scanString(value: string, file: string, field: string): Finding[] {
+function scanString(value: string, file: string, field: string, article: boolean): Finding[] {
   const findings: Finding[] = [];
 
   for (const rule of HARD_PATTERNS) {
-    const match = rule.pattern.exec(value);
+    // Article orientation is allowed; retain the stricter catalog/page contract.
+    const pattern = article && rule.rule === "self-referential page/catalog wording"
+      ? /\bthis\s+(catalog|dataset|database)\b/i
+      : rule.pattern;
+    const match = pattern.exec(value);
     if (!match) continue;
     findings.push({
       file,
@@ -208,12 +212,26 @@ async function readJson(file: string): Promise<unknown> {
 async function scanFile(file: string): Promise<Finding[]> {
   const absolute = path.resolve(file);
   const parsed = await readJson(absolute);
+  const article = isRecord(parsed) && typeof parsed.content_md === "string" &&
+    typeof parsed.title === "string" && typeof parsed.slug === "string";
   const strings = collectPublicStrings(parsed);
   return [
-    ...strings.flatMap((entry) => scanString(entry.value, file, entry.field)),
+    ...strings.flatMap((entry) => scanString(entry.value, file, entry.field, article)),
     ...scanRepeatedStarts(strings, file),
+    ...(article ? scanArticleFaqPlacement(parsed, file) : []),
     ...scanQuizOptionBalance(parsed, file)
   ];
+}
+
+function scanArticleFaqPlacement(value: Record<string, unknown>, file: string): Finding[] {
+  const body = String(value.content_md);
+  const headings = [...body.matchAll(/^#{1,6}\s+(.+)$/gm)].map(m => m[1].replace(/[*_`]/g, "").trim());
+  const faqs = Array.isArray(value.faq_json) ? value.faq_json.filter(isRecord) : [];
+  const normalize = (text: string) => text.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  const duplicate = headings.find(h => /\bfaqs?\b|frequently asked questions/i.test(h) || faqs.some(f => typeof f.q === "string" && normalize(h) === normalize(f.q)));
+  if (!duplicate) return [];
+  return [{ file, field: "content_md / faq_json", rule: "article FAQ placement",
+    excerpt: `Body heading "${duplicate}" duplicates or embeds an FAQ. faq_json renders visibly after the body and is the sole FAQ location. Remove redundant questions; retain only genuinely additional answers in faq_json.` }];
 }
 
 async function main() {

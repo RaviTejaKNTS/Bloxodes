@@ -172,7 +172,12 @@ async function main() {
 
   const row = data as QueueRow;
   assertTransition(row, options.status);
-  if (row.status === options.status && options.status !== "processing") {
+  const replacesCompletedOutput = row.status === "completed" && options.status === "completed" && completedOutput &&
+    (row.result_path !== completedOutput.resultPath || row.result_slug !== completedOutput.resultSlug);
+  if (replacesCompletedOutput && row.result_slug && row.result_slug !== completedOutput.resultSlug) {
+    throw new Error("A completed article revision must preserve its existing slug.");
+  }
+  if (row.status === options.status && options.status !== "processing" && !replacesCompletedOutput) {
     if (options.status === "published") {
       const productionUrl = verifyProductionUrl(options.productionUrl!, row.result_slug);
       if (row.production_url !== productionUrl) {
@@ -262,12 +267,14 @@ async function main() {
     });
   }
 
-  const { data: updatedRows, error: updateError } = await supabase
+  let updateQuery = supabase
     .from("article_generation_queue")
     .update(update)
     .eq("id", row.id)
     .eq("status", row.status)
     .select("id");
+  if (replacesCompletedOutput) updateQuery = row.result_path === null ? updateQuery.is("result_path", null) : updateQuery.eq("result_path", row.result_path);
+  const { data: updatedRows, error: updateError } = await updateQuery;
   if (updateError) throw new Error(`Could not update queue item ${row.id}: ${updateError.message}`);
   if (!updatedRows?.length) throw new Error(`Queue item ${row.id} changed while this update was running; retry from fresh state.`);
   console.log(`${row.article_title ?? row.id}: ${row.status} -> ${options.status}`);

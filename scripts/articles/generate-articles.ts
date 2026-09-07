@@ -1,3 +1,4 @@
+import { ARTICLE_EDITORIAL_STANDARD } from "../shared/article-editorial-standard";
 import "../shared/load-env";
 
 import { Readability } from "@mozilla/readability";
@@ -14,7 +15,7 @@ import {
 import { createEditedArticleCover, type ArticleCoverStorage } from "../shared/article-cover";
 import { firecrawlSearch } from "../shared/firecrawl";
 
-const GENERATOR_PROMPT_VERSION = "article-generator-v2-2026-09-03";
+const GENERATOR_PROMPT_VERSION = "article-generator-v4-2026-09-06";
 const MODEL = process.env.ARTICLE_GENERATION_MODEL ?? "gpt-5-mini";
 
 type QueueRow = {
@@ -1116,54 +1117,20 @@ function buildArticlePrompt(
   return `
 Use the research below to write a Roblox article.
 
-Write an article in simple English that is easy for anyone to understand. Use a conversational tone like a professional Indian Roblox gaming writer sharing their Roblox knowledge/experience in US English. The article should feel like a friend talking to a friend while still being factual, helpful, and engaging.
+${ARTICLE_EDITORIAL_STANDARD}
 
-Start with an intro that directly gets into the core topic of the article. No fluff, no generic statements, no clichéd phrases, no templates. Just get to the point and write in a way that is easy to understand and engaging.
- - The start of the article should be very engaging and hook the audience into reading the entire article.
- - Instead of just a generic question or statement like If you play the game. Get directly into the explaining or bringing the pain point of the core topic if possible.
- - Think about what type of intro serves the article best and use that.
- - No gnereic statements even if they are accurate. Instead you can bring out a interesting point, raise a question, tell an experience, highlight the pain point, break the misconception, put an bold opinion. (Should be accurate to the sources)
- - Keep it short, consise and easy to understand.
- - Stay strictly on the topic "${topic}". Do not broaden scope of article. If a related item appears in sources, only use it to clarify confusion and keep the focus on the topic.
- - Title must stay strictly about the topic (no extra targets like "X and Y").
-Right after the intro, give the main answer upfront with no heading. Can start with something like "first things first" or "Here's a quick answer" or anything that flows naturally according to the topic. This should be just a small para only covering the most important aspect like in 2-3 lines long. You can also use 2-3 bullet points here if you think that will make it easier to scan. Keep this section conversational and easy to understand.
+Stay strictly on the topic "${topic}" and fulfill its reader promise. Use only supported facts from the research. Write independently; never invent personal experience. Use a specific, readable title that names the subject accurately.
 
-After that, start with a H2 heading and then write the main content following these rules:
- - The article should flow like a story from the start to the end. Every section should be connected and tell a clean explaination of the said topic.
- - Keep the article information dense, and communicate it in a way that is easy to understand.
- - Adjust depth based on the topic. If something is simple, keep it short. If something needs more explanation, expand it properly.
- - Use headings only when they are really important and drive the topic forward. Keep the structure simple to scan through. No headings for "Tips", "Why this matters", "Outro" or any other generic sections.
- - Headings should be conversational like a casual sentence talking to the user. Use Sentence case for all headings, capitalize the first letter of the first word only and for proper nouns.
- - Random tips can be said with small "Note:" or "Tip:" or anything that works instead of giving a full headings.
- - Use H2 headings for main sections and H3 headings for sub-sections. (As mentioned, only when really needed)
- - Do not include why this matters or is it worth it kind of headings, weave the info into other sections of the article.
- - Write in-depth and make sure everything is covered, but write in as less words as possible.
- - Use full sentences and explain things clearly without any repetations or useless information.
- - whereever possible and can be factually accurate, use personal anecdotes, opinionated language and show emotional variation according to the info. (Use this subtly)
- - Use tables and bullet points when it makes information easier to scan. Prefer paras to communitate tips, information, etc.
- - Use numbered steps when explaining a process.
- - When mentioning rewards, items or any list or table, include each and every item. Do not skip on anything. This has to be one stop guide that everything that user needs to know.
- - Before any tables, bullet points, or steps, write a short paragraph that sets the context. This helps the article to flow like a story.
- - Conclude the article with a short friendly takeaway that leaves the reader feeling guided and confident. No need for any cringe ending words like "Happy fishing and defending out there!". Just keep it real and helpful.
-
-
- Most importantly: Do not add emojis, sources, or new URLs. Keep any existing links/URLs exactly as they are (including internal links and YouTube embeds). No emdashes anywhere. (Never mention these anywhere in your output)
- Additional writing rules:
- - Keep any existing Markdown tables and image URLs exactly as they are. Do not remove or reorder them.
- - Keep any existing Markdown links/URLs exactly as they are. Do not remove or rewrite them.
- - Do not add new links or URLs. Keep any existing links unchanged.
- - Do not copy or quote sentences from the research. Paraphrase everything in fresh wording.
- - Never mention sources, research, URLs, or citations.
- - Never include bracketed citations like [1] or [2], or any references section.
+Preserve supplied image URLs, embed syntax, and verified link destinations. You may regroup material and media beside the relevant explanation. Only add URLs supplied in the research or context; never invent destinations. Do not add numbered research citations such as [1] or a references section to content_md. Useful developer attribution is allowed.
 
 ${contextBlock}${coverageBlock}
 
-Research (do not cite or mention):
+Research evidence (keep gathering notes private):
 ${sourceBlock}
 
 Return JSON:
 {
-  "title": "A small simple title that's easy to scan and understand. Keep it short and on-point and no key:value pairs",
+  "title": "A specific, readable title naming the game and topic",
   "meta_description": "Simple, specific summary with keywords (under 160 characters, no generic phrasing)",
   "content_md": "Full Markdown article"
   }
@@ -1191,6 +1158,10 @@ async function buildArticleContext(
 
   const prompt = `
 Create a planning brief for a Roblox article. Use only the research below. Stay strictly on the topic.
+
+${ARTICLE_EDITORIAL_STANDARD}
+
+Prioritize the reader's practical questions and the follow-up details needed to answer them. The checklist is a planning aid, not a limit on useful coverage.
 
 Topic: "${topic}"
 
@@ -1244,7 +1215,7 @@ async function draftArticle(prompt: string): Promise<DraftArticle> {
   const { title, content_md, meta_description } = await requestJsonWithSchema({
     step: "article_draft",
     system:
-      "You are an expert Roblox writer. Always return valid JSON with title, content_md, and meta_description. Title must be very short, on-point, and include relevant keywords. Keep the title strictly about the given topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Never mention sources or citations, never include bracketed references like [1], and do not quote the research; paraphrase it in your own words.",
+      "You are an expert Roblox writer. Always return valid JSON with title, content_md, and meta_description. Title must clearly name the game, exact subject, and useful search intent without keyword stuffing. Keep the title strictly about the given topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Keep research-process notes private; useful developer attribution is allowed. Do not include numbered references like [1] or copy the research prose.",
     prompt,
     schema: draftArticleSchema,
     maxTokens: 4000,
@@ -1405,7 +1376,9 @@ async function reviseArticleWithFeedback(
   const prompt = `
 Revise the Roblox article based on the ${label} below. Apply only the flagged changes — keep everything else identical, including voice and structure. Do not invent new information; use only the research provided. Stay strictly on "${topic}".
 
-Rules: No sources/citations/brackets ([1]). No new URLs. Keep existing links unchanged. Paraphrase any new text.
+${ARTICLE_EDITORIAL_STANDARD}
+
+Keep research-process notes private; useful developer attribution is allowed. No numbered citations ([1]) or new URLs. Preserve verified destinations and write any new text independently.
 
 Topic: "${topic}"
 
@@ -1425,14 +1398,14 @@ Return JSON:
 {
   "title": "Keep close to original unless feedback requires correction — short and scannable",
   "meta_description": "Specific summary with keywords, under 160 characters",
-  "content_md": "Revised article with only the necessary changes applied"
+  "content_md": "Revised article with the requested changes applied"
   }
 `.trim();
 
   const { title, content_md, meta_description } = await requestJsonWithSchema({
     step: `article_revision_${label.replace(/[^a-z0-9]+/gi, "_").toLowerCase()}`,
     system:
-      "You are an expert Roblox writer. Return valid JSON with title, content_md, and meta_description. Apply only the feedback changes. Never mention sources or citations. Never add bracketed references. Keep existing links unchanged.",
+      "You are an expert Roblox writer. Return valid JSON with title, content_md, and meta_description. Apply the feedback using the shared editorial standard. Keep research-process notes private; useful developer attribution is allowed. Never add numbered references. Preserve verified link destinations.",
     prompt,
     schema: draftArticleSchema,
     maxTokens: 4000,
@@ -1722,21 +1695,14 @@ async function insertRelatedLinksSection(params: {
   const prompt = `
 You are adding internal links to an existing Roblox article. Your goal is to genuinely help the reader — not to stuff links in wherever possible.
 
+${ARTICLE_EDITORIAL_STANDARD}
+
 How to decide where to link:
-- Read the article fully. For each related page, judge whether the article is already discussing something that page is directly relevant to. Use the page title, description, and type context to make that call.
-- If there is a clear match, add one short sentence at that point in the article body that leads the reader to the page naturally. Write the sentence yourself — it should fit the surrounding text, sound like the same author, and make it obvious what the reader will find there.
-- The link MUST be written as a proper Markdown link: [descriptive anchor text](URL from the page list). Use the exact URL as provided — it will be a relative path like /articles/slug or /codes/slug. Do NOT convert it to a full URL with a domain. Do NOT write https://bloxodes.com/... or https://roblox.com/... — just use the path as-is. The anchor text should describe what the reader will find, not the page title verbatim.
-- Do NOT wrap existing words into links. The link must live inside a new sentence you write.
-- Spread links through the article — never cluster them together or put them all near the top.
-
-Fallback — if a page has no matching spot in the body but is still genuinely useful to someone reading this article:
-- Add it as a standalone sentence at the very end, after the final paragraph. Write it naturally with a proper Markdown link [anchor text](url). Skip any page that is not relevant enough to deserve a mention even at the end.
-
-Limits:
-- 2–4 links total across body and fallback combined.
-- No heading or list for the links.
-- Every single link must be formatted as [anchor text](url) — plain text mentions with no link are not acceptable.
-- Stay strictly on topic: "${topic}".
+- Link only when a supplied page supports the mechanic, requirement, choice, or next action at that point in the article.
+- Prefer wrapping suitable existing words in a descriptive Markdown link. Add a short sentence only if it contributes useful context.
+- Use the exact supplied site-relative destination; never prepend a domain or invent a URL.
+- There is no minimum count. Skip weak matches, and do not append a fallback link block at the end.
+- Preserve the article's facts and scope: "${topic}".
 
 Related pages:
 ${pageBlock}
@@ -1757,7 +1723,7 @@ Return JSON:
   const { content_md } = await requestJsonWithSchema({
     step: "related_links",
     system:
-      "You add contextual internal links to Roblox articles. Every link must be a Markdown link [anchor text](url) using the exact URL from the page list — these are relative paths like /articles/slug or /codes/slug. NEVER prepend a domain — do not write https://bloxodes.com/... or https://roblox.com/... or any other domain. Use the path exactly as given. Never write plain text mentions without a link. Never wrap existing words as links. Never force a link where context does not exist. Return valid JSON with title, content_md, meta_description.",
+      "You add contextual internal links to Roblox articles. Every link must be a Markdown link [anchor text](url) using the exact URL from the page list — these are relative paths like /articles/slug or /codes/slug. NEVER prepend a domain — do not write https://bloxodes.com/... or https://roblox.com/... or any other domain. Use the path exactly as given. Never write plain text mentions without a link. Prefer linking relevant existing words. There is no quota; omit links without useful context. Return valid JSON with title, content_md, meta_description.",
     prompt,
     schema: draftArticleSchema,
     maxTokens: 4500,
@@ -1773,19 +1739,11 @@ Return JSON:
 
 async function finalPolishArticle(topic: string, article: DraftArticle): Promise<DraftArticle> {
   const prompt = `
-Give this Roblox article a final polish before publishing. Your job is light editing only — do not rewrite, restructure, or change the voice. Keep every sentence as close to the original as possible.
+Review this Roblox article for editorial quality before publishing. Correct the opening, headings, grouping, awkward prose, and redundant caveats when they prevent a clear explanation. Keep accurate useful details; do not invent facts, personal testing, or new URLs.
 
-What to check and fix:
-- Intro: make sure it hooks immediately with no generic openers, clichéd phrases, or filler. It should get straight into the topic.
-- Quick answer: should be right after the intro with no heading, just a seamless transition sentence into quick answer, 2–3 lines covering the core answer. If it's missing, do not add it — flag it only. 
-- Headings: sentence case only (capitalize first word and proper nouns only). No "Tips", "Why this matters", "Outro", or other generic section headers. Headings should read like a casual sentence to the reader.
-- Internal links: every link must be a proper Markdown link [anchor text](url) — never a bare URL or plain text mention. Make sure every existing link has clear context around it so the reader knows exactly what they will find before clicking. If any link feels random or has no surrounding context, either tighten the sentence around it or remove the link entirely. Do not add new links. Do not modify any existing URLs.
-- No em-dashes anywhere — replace any with a colon or restructure the sentence.
-- No emojis, no bracketed citations like [1], no mention of sources or research.
-- No new external URLs. Keep all existing Markdown links, image URLs, and tables exactly as they are.
-- The outro should leave the reader feeling confident and guided. No catchphrases or cringe sign-offs.
-- Clean up any obvious repetition or awkward phrasing, but only where it reads poorly — do not rewrite for the sake of it.
-- MOST Importantly: The article should feel like one clean story from top to bottom.
+${ARTICLE_EDITORIAL_STANDARD}
+
+Preserve verified URL destinations, image URLs, and embed syntax. Move content or media to the section it belongs to when needed. Keep complete useful tables, and remove redundant recaps or decorative links. Do not add numbered research citations. A separate conclusion section is optional; substantial articles should still end naturally with useful guidance.
 
 Topic: "${topic}"
 
@@ -1799,14 +1757,14 @@ Return JSON:
 {
   "title": "Keep the original title unless it clearly violates the topic rule — short, scannable, on-point",
   "meta_description": "Specific summary with keywords, under 160 characters, no generic phrasing",
-  "content_md": "Polished article — minimal changes, same voice"
+  "content_md": "Reviewed article with clear structure and natural prose"
 }
 `.trim();
 
   const { title, content_md, meta_description } = await requestJsonWithSchema({
     step: "final_polish",
     system:
-      "You are a copy editor for a Roblox gaming site. Your job is light final polish only — fix formatting issues, clean up links, remove em-dashes, tighten the intro and outro. Do not rewrite or restructure. Keep the original voice. Return valid JSON with title, content_md, meta_description.",
+      "You are a copy editor for a Roblox gaming site. Apply the shared editorial standard. Fix unclear openings, headings, grouping, and prose while preserving supported facts and verified media/link destinations. Return valid JSON with title, content_md, meta_description.",
     prompt,
     schema: draftArticleSchema,
     maxTokens: 4500,

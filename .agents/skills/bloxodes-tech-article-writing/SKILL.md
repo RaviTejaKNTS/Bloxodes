@@ -6,6 +6,10 @@ description: >-
 
 # Bloxodes Tech Article Writing
 
+## Code-controlled execution
+
+When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+
 Use this for one Roblox **tech / platform / troubleshooting** article only, after `brief.md` is approved.
 
 This is a thin add-on. It does not replace `bloxodes-article-writing`; it sits on top of it.
@@ -29,10 +33,10 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 
 ## What this skill adds
 
-**Depth profile: detailed, yet small and easy to consume**
+**Depth profile: complete and easy to follow**
 - Go deeper than a normal article: cover causes, every realistic fix or step, and the fallback when nothing works. Do not leave a gap a competitor covers.
-- Keep it small at the same time. Depth comes from covering more distinct points, never from longer paragraphs or padding. Short blocks, lots of white space.
-- The whole piece should read as one clean story: problem → why it happens (brief) → fixes/steps in order → what to do if it still fails → FAQ. Each section hands off to the next; nothing is re-explained.
+- Give each fix enough room to explain when it applies, the exact action, the result to check, and the next option if it fails. Keep paragraphs comfortable without a sentence-count ceiling. Remove padding, not useful explanation.
+- The whole piece should read as one clean story: problem → relevant cause → fixes/steps → useful fallback. FAQs are optional; the scan table may summarize facts explained in the fixes.
 
 **Quick-scan table at the top (when it helps)**
 - When the article has several ordered fixes, steps, or options, add a compact scan table right after the intro, before the first `##` section.
@@ -41,18 +45,17 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 
 **Numbered headings and numbered steps**
 - Number the fix/step `###` headings (`### 1. Clear the Roblox cache`, `### 2. Run as administrator`) so the order is obvious and matches the scan table.
-- Under each heading: one short lead sentence on what it does, then the actual procedure as a **numbered list** when it has ordered steps. One action per step, with the exact path or click.
+- Under each heading, explain when the fix helps, then give the procedure as a **numbered list** when it has ordered steps. Use one action per step with the exact path or click, and explain how to check the result afterward.
 - Keep the `bloxodes-article-writing` troubleshooting rule: each fix gets its own `###` under one `##`; no deep bullet-in-bullet hierarchies; order easiest-first.
 
 **Headings**
-- Headings must be SEO-friendly and read like a short sentence that reveals the info ("How to fix it", "If Roblox still crashes"), not clickbait teasers.
+- Use concise action labels or natural reader questions that identify the actual error, setting, or fix. Do not force sentence-like headings.
 - Lead with the words a player would actually search or scan for.
 
 **Links: internal**
-- Add a good number of internal links to other Bloxodes pages, woven naturally mid-sentence (never "click here" call-outs).
-- Target a **minimum of 2**, and **6+ is fine when they fit naturally**. Quality over quota: only link where it genuinely helps the reader, never to pad the count.
+- Add verified internal links where they support a fix, explanation, or next action. Prefer suitable existing words; there is no minimum count.
 - Good targets: the error-codes pillar page, sibling fix articles, and any related wiki / tool / catalog / checklist page on the site.
-- If a planned target page does not exist yet, leave a clearly-marked placeholder (e.g. an HTML comment) for the parent to wire later. Never invent a live URL for a page that is not published.
+- Omit unpublished targets and keep any missing-link note in the brief, never in public copy.
 
 **Links: external official sources**
 - Link to the official source when it helps the reader act: Roblox download (`roblox.com/download`), Roblox Support (`roblox.com/support`), the Roblox status/help pages, or the relevant vendor page (GPU driver download, Windows update, etc.).
@@ -71,4 +74,4 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 
 ## Output
 
-Write `final.json` only, in the same shape and to the same field rules as `bloxodes-article-writing`. Parse-check the JSON. `universe_id` is usually `null` for platform pieces. Then verify with `npm run verify:article-finals` like any other article final.
+Apply the base skill's draft, parent feedback, and one-revision procedure before final verification. Keep its local review note outside public JSON. Write `final.json` in the same shape and to the same field rules as `bloxodes-article-writing`. Parse-check the JSON. `universe_id` is usually `null` for platform pieces. Then verify with `npm run verify:article-finals` like any other article final.

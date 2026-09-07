@@ -75,6 +75,8 @@
     "articles:writer:local": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:homelab": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:batch": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-homelab-article-batch.ts",
+    "articles:pipeline": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/run-article-pipeline.ts",
+    "test:article-pipeline": "NODE_ENV=test node --import tsx --test scripts/articles/__tests__/article-pipeline*.test.ts",
     "articles:homelab:check": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/ops/check-homelab-article-automation.ts",
     "articles:update": "tsx scripts/articles/update-articles.ts",
     "refresh:codes": "tsx scripts/codes/update-codes.ts",

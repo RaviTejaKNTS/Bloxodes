@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -11,12 +11,42 @@ import {
   pickCoverSourceEntry,
   productionChildEnvironment,
   readProductionCredentials,
+  resolveReleaseArtifactPath,
   type ProductionCredentials,
 } from "../release-completed-articles";
+import { artifactHashes } from "../article-pipeline";
 
 const QUEUE_ID = "123e4567-e89b-42d3-a456-426614174000";
 const SLUG = "tested-article";
 const IMAGE_URL = `https://media.bloxodes.com/articles/${SLUG}/sources/first.webp`;
+
+test("pipeline release requires matching approval, technical checks and unchanged artifacts", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-release-path-"));
+  const run = path.join(root, "tmp/article-pipeline/run");
+  const content = path.join(run, "content");
+  const file = path.join(content, "final.json");
+  try {
+    await mkdir(content, { recursive: true });
+    for (const name of ["brief.md", "media.json", "final.json"]) await writeFile(path.join(content, name), "approved");
+    const state = { status: "completed", stage: "done", job: { id: QUEUE_ID, slug: SLUG }, artifacts: await artifactHashes(content),
+      history: ["copy_check", "image_check", "import_verify", "browser_verify"].map(stage => ({ stage, decision: { status: "completed" } })) };
+    const saveState = () => writeFile(path.join(run, "state.json"), JSON.stringify(state));
+    await saveState();
+    await writeFile(path.join(run, "editorial_review.json"), JSON.stringify({ status: "completed" }));
+    assert.equal(await resolveReleaseArtifactPath(file, QUEUE_ID, SLUG, root), file);
+    await assert.rejects(resolveReleaseArtifactPath(file, "wrong-id", SLUG, root), /matching completed approval/);
+    state.status = "blocked"; await saveState();
+    await assert.rejects(resolveReleaseArtifactPath(file, QUEUE_ID, SLUG, root), /matching completed approval/);
+    state.status = "completed"; state.history.pop(); await saveState();
+    await assert.rejects(resolveReleaseArtifactPath(file, QUEUE_ID, SLUG, root), /missing browser_verify/);
+    await writeFile(file, "unreviewed change");
+    await assert.rejects(resolveReleaseArtifactPath(file, QUEUE_ID, SLUG, root), /no longer matches final.json/);
+    const legacy = path.join(root, "tmp/content-workspace/article"); await mkdir(legacy, { recursive: true });
+    await writeFile(path.join(root, "outside.json"), "outside");
+    await symlink(path.join(root, "outside.json"), path.join(legacy, "final.json"));
+    await assert.rejects(resolveReleaseArtifactPath(path.join(legacy, "final.json"), QUEUE_ID, SLUG, root), /outside an approved/);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
 
 function manifest(): ArticleImageManifest {
   return {

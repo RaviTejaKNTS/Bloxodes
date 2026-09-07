@@ -1,3 +1,4 @@
+import { ARTICLE_EDITORIAL_STANDARD } from "../shared/article-editorial-standard";
 import "../shared/load-env";
 
 import OpenAI from "openai";
@@ -1132,12 +1133,16 @@ ${article.content_md}
 
 async function applyUpdatesWithOpenAI(article: ArticleRow, updateNotes: string): Promise<UpdatedArticle> {
   const prompt = `
-You are editing an existing Roblox article with minimal changes.
+You are applying a focused factual refresh to an existing Roblox article.
+
+${ARTICLE_EDITORIAL_STANDARD}
+
+Apply the standard to changed copy; this maintenance pass does not authorize an unrelated whole-article rewrite.
 
 Rules:
 - Keep the article as close to the original as possible.
 - Only apply the specific updates listed below.
-- Preserve Markdown structure and tone.
+- Keep existing useful structure; ensure changed copy follows the US audience, clear-heading, and evidence rules.
 - Only update meta_description if an update requires it; otherwise set meta_description to UNCHANGED.
 - Do not rewrite, re-order, or trim sections. Avoid adding new sections unless explicitly required by the update notes.
 
