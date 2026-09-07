@@ -1,10 +1,12 @@
 # Supabase
 
-Status: Active; production and managed development include the GTA and Roblox collection page-type schema
-Last verified: 2026-09-05
+Status: Active; production and managed development include Red Dead and the shared collectible page type
+Last verified: 2026-09-07
 Evidence: official Supabase documentation, managed-development migration/readiness/advisor checks, production transactional release/readback, VPS container/process inspection, Edge Function checksum/smoke, and public health
 
 ## Managed Development
+
+Production verified on 2026-09-07 at web SHA `bf7ea6ad71a9d6646f83077ceb373d2912ccf997`: five Red Dead hubs and six collections (271 items) are live with ten hosted hub images, sitemap/search coverage, and 100% Completion excluded. Production migrations `20260920000023` and `20260920000024` are applied. The 19 Roblox and 93 GTA legacy wiki checklist rows now use `collectible`; Red Dead has two collectible and four database collections. Saved-progress rows and storage keys were preserved. Standalone checklist pages are unchanged.
 
 All workstation web development, content imports, script writes, migration validation, and article queue/writer work use the managed HTTPS `*.supabase.co` development project. Its private credentials live only in `.envs/targets/managed-dev.env` and workload-specific private overlays. Shared guards reject localhost and production when a development-only command runs.
 

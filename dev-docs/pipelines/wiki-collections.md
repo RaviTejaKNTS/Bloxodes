@@ -1,10 +1,12 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-09-05
+Last verified: 2026-09-07
 Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive R2 audits, live route/image checks, route tests, exact production row/pointer counts, 209-route production crawl, and Tailscale-reachable GTA preview checks
 
 ## Scope
+
+Production verified on 2026-09-07 at web SHA `bf7ea6ad71a9d6646f83077ceb373d2912ccf997`: five Red Dead hubs and six collections (271 items) are live with ten hosted hub images, sitemap/search coverage, and 100% Completion excluded. Production migrations `20260920000023` and `20260920000024` are applied. The 19 Roblox and 93 GTA legacy wiki checklist rows now use `collectible`; Red Dead has two collectible and four database collections. Saved-progress rows and storage keys were preserved. Standalone checklist pages are unchanged.
 
 Game wiki hubs and their game-specific collections are one editorial/data unit:
 
