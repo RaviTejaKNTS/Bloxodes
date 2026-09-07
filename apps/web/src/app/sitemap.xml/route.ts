@@ -15,6 +15,7 @@ const SITEMAP_PATHS = [
   "/sitemaps/puzzles.xml",
   "/sitemaps/wiki.xml",
   "/sitemaps/gta.xml",
+  "/sitemaps/red-dead.xml",
   "/sitemaps/events.xml",
   "/sitemaps/authors.xml",
   "/sitemaps/catalog.xml",

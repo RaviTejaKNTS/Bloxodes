@@ -25,7 +25,7 @@ type CollectionFinal = {
 type RuntimeManifest = {
   schemaVersion?: number;
   game?: { slug?: string };
-  collection?: { slug?: string; pageType?: "database" | "checklist" };
+  collection?: { slug?: string; pageType?: "database" | "collectible" };
   dataset?: string;
   finalJson?: string;
 };
@@ -132,7 +132,7 @@ async function readManifest(file: string, game: string, collection: string) {
   if (!(await pathExists(datasetFile)) || !(await pathExists(finalFile))) {
     throw new Error(`${file} references a missing dataset or final JSON file.`);
   }
-  const pageType = parsed.collection?.pageType === "checklist" ? "checklist" : "database";
+  const pageType = ["collectible", "checklist"].includes(String(parsed.collection?.pageType)) ? "collectible" : "database";
   return { datasetFile, finalFile, pageType };
 }
 
@@ -154,12 +154,13 @@ function runCommand(command: string, args: string[]) {
     });
     child.on("error", reject);
     child.on("exit", (code) => {
-      code === 0 ? resolve() : reject(new Error(`${command} ${args.join(" ")} exited with code ${code ?? "unknown"}`));
+      if (code === 0) resolve();
+      else reject(new Error(`${command} ${args.join(" ")} exited with code ${code ?? "unknown"}`));
     });
   });
 }
 
-async function verifyReadback(game: string, collection: string, finalJson: CollectionFinal, pageType: "database" | "checklist") {
+async function verifyReadback(game: string, collection: string, finalJson: CollectionFinal, pageType: "database" | "collectible") {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("wiki_collection_pages")
@@ -289,7 +290,7 @@ async function main() {
     const readback = await verifyReadback(options.game, collection, finalJson, workspaces[index].pageType);
     const url = `${options.baseUrl}/wiki/${options.game}/${collection}`;
     await verifyRoute(url, readback.title);
-    if (readback.pageType === "checklist") await verifyChecklistPagination(url);
+    if (readback.pageType === "collectible") await verifyChecklistPagination(url);
     console.log(`Route passed: ${url}`);
     urls.push(url);
   }

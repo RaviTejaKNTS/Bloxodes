@@ -63,8 +63,17 @@ export const gtaNavLinks: SiteNavLink[] = [
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
 
+export const redDeadNavLinks: SiteNavLink[] = [
+  { href: "/red-dead", label: "Red Dead Home", icon: Home },
+  { href: "/red-dead/wiki", label: "Red Dead Wiki", icon: BookOpen },
+  { href: "/games", label: "All Games", icon: Gamepad2 }
+];
+
 export function siteNavLinksForPath(pathname: string | null | undefined): SiteNavLink[] {
-  return (pathname ?? "").startsWith("/gta") ? gtaNavLinks : siteNavLinks;
+  const path = pathname ?? "";
+  if (path.startsWith("/gta")) return gtaNavLinks;
+  if (path.startsWith("/red-dead")) return redDeadNavLinks;
+  return siteNavLinks;
 }
 
 export const topNavLinks: SiteNavLink[] = [
@@ -84,13 +93,14 @@ export const signedOutSidebarAccount: SidebarAccount = {
 
 export function isNavLinkActive(pathname: string | null | undefined, href: string) {
   const path = pathname ?? "/";
-  if (href === "/gta") return path === href;
+  if (href === "/gta" || href === "/red-dead") return path === href;
   return path === href || (href !== "/" && path.startsWith(`${href}/`));
 }
 
 export function resolveSearchScope(pathname: string | null | undefined): SearchScope {
   const path = pathname ?? "/";
   if (path.startsWith("/gta")) return { scope: "gta", label: "GTA" };
+  if (path.startsWith("/red-dead")) return { scope: "red-dead", label: "Red Dead" };
   if (
     path === "/" ||
     path.startsWith("/about") ||

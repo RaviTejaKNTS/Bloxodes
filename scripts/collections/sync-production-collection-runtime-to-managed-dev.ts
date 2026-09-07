@@ -67,7 +67,7 @@ function pageCopy(
     wiki_slug: source.wiki_slug,
     collection_slug: source.collection_slug,
     code: source.code,
-    page_type: source.page_type === "checklist" ? "checklist" : "database",
+    page_type: ["collectible", "checklist"].includes(String(source.page_type)) ? "collectible" : "database",
     title: source.title,
     display_name: source.display_name,
     item_count: source.item_count,

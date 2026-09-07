@@ -75,7 +75,7 @@ async function resolveContext(wikiSlug: string, collectionSlug: string): Promise
   const page = await getWikiCollectionPageByPath(normalizedWikiSlug, normalizedCollectionSlug);
   if (!page) return null;
 
-  if (page.page_type === "checklist") {
+  if (page.page_type === "collectible") {
     const runtime = await getPublishedWikiCollectionRuntime(page);
     if (!runtime) {
       throw new Error("Required database runtime for " + page.code + " did not load. Local fallback is disabled.");
@@ -156,7 +156,7 @@ export async function generateWikiCollectionMetadata({
   const collectionSlug = normalizeSlug(collection);
   const page = await getWikiCollectionPageByPath(wikiSlug, collectionSlug);
   const basePath = buildWikiCollectionPath(wikiSlug, collectionSlug);
-  const checklistPage = page?.page_type === "checklist";
+  const checklistPage = page?.page_type === "collectible";
   const canonicalPath = checklistPage || currentPage <= 1 ? basePath : `${basePath}/page/${currentPage}`;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   let fallbackTitle = page?.title ?? `${collectionSlug} Wiki Collection`;
@@ -248,7 +248,7 @@ export async function renderWikiCollectionPage({
       notFound();
     }
     const prepared = context.prepared;
-    if (page.page_type === "checklist") {
+    if (page.page_type === "collectible") {
       if (currentPage > 1) notFound();
       const contentHtml = await buildPageContentHtml(page);
       const collectionOptions = (await listPublishedWikiCollectionPagesByWikiSlug(context.wikiSlug)).map((entry) => ({
@@ -312,7 +312,7 @@ export async function getWikiCollectionPageCount(wikiSlug: string, collectionSlu
   if (!context) return 1;
 
   if (context.kind === "generic") {
-    if (context.page.page_type === "checklist") return 1;
+    if (context.page.page_type === "collectible") return 1;
     return context.prepared.totalPages;
   }
 

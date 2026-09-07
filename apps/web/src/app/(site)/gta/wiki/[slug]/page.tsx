@@ -90,8 +90,8 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
     return { collection, copyHtml, imageUrls };
   }));
   const collectionGroups = [
-    { key: "database" as const, label: "Game data", entries: collectionBlocks.filter(({ collection }) => collection.page_type !== "checklist") },
-    { key: "checklist" as const, label: "Collectibles", entries: collectionBlocks.filter(({ collection }) => collection.page_type === "checklist") }
+    { key: "database" as const, label: "Game data", entries: collectionBlocks.filter(({ collection }) => collection.page_type !== "collectible") },
+    { key: "collectible" as const, label: "Collectibles", entries: collectionBlocks.filter(({ collection }) => collection.page_type === "collectible") }
   ].filter((group) => group.entries.length);
   const structuredData = [
     webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image: coverImage, author: null, publishedAt: page.published_at, updatedAt }),

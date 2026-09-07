@@ -11,7 +11,7 @@ Most application behavior should flow through this folder before it reaches page
 - `public-cache-tags.ts`: Cloudflare `Cache-Tag` mapping for public route families and Supabase revalidation events.
 - `catalog.ts`, `tools.ts`, and `wiki.ts`: Supabase-backed content helpers, related-content aggregators, and index readers.
 - `gta.ts`: server-only GTA game, wiki, and collection-runtime readers for the `/gta` namespace. Keep this separate from Roblox universe/editorial slug ownership.
-- `wiki-collections.ts`: shared Roblox collection page/list reads, including the explicit `database` or `checklist` page type and compatibility fallbacks for older schemas.
+- `wiki-collections.ts`: shared Roblox collection page/list reads, including the explicit `database` or `collectible` page type and compatibility fallbacks for older schemas.
 - `collection-checklist-progress-client.ts` and `wiki-collection-progress.ts`: shared local-first/account-synced checklist progress behavior for Roblox collection pages. The GTA adapter uses the same client renderer with its own endpoint and GTA progress namespace.
 - `seo.ts`, `site-config.ts`, `sitemap.ts`, `content-dates.ts`, `updated-label.ts`: metadata, canonical URLs, sitemap shaping, and freshness labels.
 - `auth/*`: session cookies, Roblox OAuth helpers, navigation safety, and current-user lookup.
@@ -61,3 +61,9 @@ Most application behavior should flow through this folder before it reaches page
 2. Keep route files and UI components thin.
 3. If content is publishable, expose tags that `/api/revalidate` can target.
 4. Update the relevant doc in `agents/data/agents.md` or `agents/routes/agents.md`.
+
+## Red Dead and collectible rollout (2026-09-07)
+
+Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+
+Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.

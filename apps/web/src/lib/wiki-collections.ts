@@ -1,9 +1,10 @@
 import "server-only";
+import { normalizeCollectionPageType } from "./wiki-collection-page-type";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type WikiCollectionFaqEntry = { q: string; a: string };
-export type WikiCollectionPageType = "database" | "checklist";
+export type WikiCollectionPageType = "database" | "collectible";
 
 export type WikiCollectionPageContent = {
   id?: string;
@@ -116,7 +117,7 @@ function isMissingPageTypeColumnError(error: unknown): boolean {
 }
 
 function normalizePageType(value: unknown): WikiCollectionPageType {
-  return value === "checklist" ? "checklist" : "database";
+  return normalizeCollectionPageType(value);
 }
 
 function normalizePage(value: unknown): WikiCollectionPageContent | null {

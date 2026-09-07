@@ -2,7 +2,18 @@ import { getApprovedComments } from "@/lib/comments";
 import { CommentsClient } from "./CommentsClient";
 
 type CommentsSectionProps = {
-  entityType: "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_collection" | "gta_wiki" | "gta_wiki_collection";
+  entityType:
+    | "code"
+    | "article"
+    | "catalog"
+    | "event"
+    | "tool"
+    | "wiki"
+    | "wiki_collection"
+    | "gta_wiki"
+    | "gta_wiki_collection"
+    | "red_dead_wiki"
+    | "red_dead_wiki_collection";
   entityId: string;
 };
 

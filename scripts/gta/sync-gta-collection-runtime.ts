@@ -11,7 +11,7 @@ import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../sha
 type Manifest = {
   schemaVersion: 1;
   game: { slug: string; name: string };
-  collection: { slug: string; label: string; sortOrder?: number; pageType?: "database" | "checklist" };
+  collection: { slug: string; label: string; sortOrder?: number; pageType?: "database" | "collectible" };
   route?: string;
   dataset: string;
   finalJson?: string;
@@ -43,7 +43,7 @@ type Plan = {
   manifest: Manifest;
   manifestPath: string;
   code: string;
-  pageType: "database" | "checklist";
+  pageType: "database" | "collectible";
   datasetPath: string;
   contentHash: string;
   metaJson: Record<string, unknown>;
@@ -153,8 +153,8 @@ async function planManifest(manifestPath: string): Promise<Plan> {
   const collectionSlug = manifest.collection?.slug?.trim().toLowerCase();
   if (!SAFE_SLUG.test(gameSlug) || !SAFE_SLUG.test(collectionSlug)) throw new Error(`${manifestPath} has invalid GTA slugs.`);
   if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) throw new Error(`${manifestPath} needs game and collection labels.`);
-  const pageType = manifest.collection.pageType ?? "database";
-  if (pageType !== "database" && pageType !== "checklist") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
+  const pageType = String(manifest.collection.pageType) === "checklist" ? "collectible" : manifest.collection.pageType ?? "database";
+  if (pageType !== "database" && pageType !== "collectible") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
   if (manifest.route && manifest.route !== `/gta/wiki/${gameSlug}/${collectionSlug}`) throw new Error(`${manifestPath} route does not match its slugs.`);
   const datasetPath = resolveInside(root, manifest.dataset, "dataset");
   const mediaRoot = resolveInside(root, manifest.mediaRoot, "mediaRoot");

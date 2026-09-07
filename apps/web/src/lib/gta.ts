@@ -1,3 +1,4 @@
+import { normalizeCollectionPageType } from "./wiki-collection-page-type";
 import "server-only";
 
 import { cache } from "react";
@@ -94,7 +95,7 @@ export type GtaWikiCollectionPage = {
   wiki_slug: string;
   collection_slug: string;
   code: string;
-  page_type: "database" | "checklist";
+  page_type: "database" | "collectible";
   title: string;
   display_name: string;
   item_count: number;
@@ -256,7 +257,7 @@ export async function getGtaWikiCollectionPageByPath(
         console.error("Error fetching GTA wiki collection", error);
         return null;
       }
-      return (data as GtaWikiCollectionPage | null) ?? null;
+      return data ? { ...data, page_type: normalizeCollectionPageType(data.page_type) } as GtaWikiCollectionPage : null;
     }
   );
 }
@@ -282,7 +283,7 @@ export async function listPublishedGtaWikiCollectionsByWikiSlug(
         console.error("Error fetching GTA wiki collections", error);
         return [];
       }
-      return (data ?? []) as GtaWikiCollectionPage[];
+      return (data ?? []).map((row) => ({ ...row, page_type: normalizeCollectionPageType(row.page_type) })) as GtaWikiCollectionPage[];
     }
   );
 }
@@ -299,7 +300,7 @@ export async function listPublishedGtaWikiCollections(): Promise<GtaWikiCollecti
       console.error("Error fetching GTA wiki collections index", error);
       return [];
     }
-    return (data ?? []) as GtaWikiCollectionPage[];
+    return (data ?? []).map((row) => ({ ...row, page_type: normalizeCollectionPageType(row.page_type) })) as GtaWikiCollectionPage[];
   });
 }
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Wiki Runner"
+  short_description: "Run franchise wiki research and QA"
+  default_prompt: "Use $bloxodes-franchise-wiki-workflow-runner for approved non-Roblox franchise hubs. Delegate one title per worker, gate research before writing, verify managed development, preview desktop and mobile routes, and stop before production."

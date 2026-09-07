@@ -1257,8 +1257,8 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
     : "article-content md-copy-scope game-copy min-w-0";
   const catalogBlocks = await buildWikiCollectionBlocks(related);
   const catalogGroups = [
-    { heading: "Game data", blocks: catalogBlocks.filter((block) => block.pageType !== "checklist") },
-    { heading: "Checklists", blocks: catalogBlocks.filter((block) => block.pageType === "checklist") }
+    { heading: "Game data", blocks: catalogBlocks.filter((block) => block.pageType !== "collectible") },
+    { heading: "Collectibles", blocks: catalogBlocks.filter((block) => block.pageType === "collectible") }
   ].filter((group) => group.blocks.length > 0);
   const creatorUrl = buildCreatorUrl(page);
   const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";

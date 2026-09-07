@@ -25,6 +25,9 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "gta_game",
   "gta_wiki",
   "gta_wiki_collection",
+  "red_dead_game",
+  "red_dead_wiki",
+  "red_dead_wiki_collection",
   "stats"
 ]);
 
@@ -60,6 +63,7 @@ const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
 const GTA_SITEMAP_PATH = "/sitemaps/gta.xml";
+const RED_DEAD_SITEMAP_PATH = "/sitemaps/red-dead.xml";
 const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
@@ -251,6 +255,43 @@ function revalidateForGtaWikiCollection(slug: string) {
       "gta-wiki-collection-index",
       wikiSlug ? `gta-wiki:${wikiSlug}` : "",
       wikiSlug && collectionSlug ? `gta-wiki-collection:${wikiSlug}/${collectionSlug}` : ""
+    ]
+  );
+}
+
+function revalidateForRedDeadGame(slug: string) {
+  return applyRevalidation(
+    ["/games", "/red-dead", "/red-dead/wiki", `/red-dead/wiki/${slug}`, SITEMAP_INDEX_PATH, RED_DEAD_SITEMAP_PATH],
+    ["games-index", "red-dead-home", "red-dead-games-index", "red-dead-wiki-index", `red-dead-game:${slug}`]
+  );
+}
+
+function revalidateForRedDeadWiki(slug: string) {
+  return applyRevalidation(
+    ["/games", "/red-dead", "/red-dead/wiki", `/red-dead/wiki/${slug}`, SITEMAP_INDEX_PATH, RED_DEAD_SITEMAP_PATH],
+    ["games-index", "red-dead-home", "red-dead-wiki-index", `red-dead-wiki:${slug}`]
+  );
+}
+
+function revalidateForRedDeadWikiCollection(slug: string) {
+  const [wikiSlug, collectionSlug] = slug.split("/");
+  const basePath = wikiSlug && collectionSlug ? `/red-dead/wiki/${wikiSlug}/${collectionSlug}` : "";
+  return applyRevalidation(
+    [
+      "/red-dead",
+      "/red-dead/wiki",
+      wikiSlug ? `/red-dead/wiki/${wikiSlug}` : "",
+      basePath,
+      ...(basePath ? Array.from({ length: 39 }, (_, index) => `${basePath}/page/${index + 2}`) : []),
+      SITEMAP_INDEX_PATH,
+      RED_DEAD_SITEMAP_PATH
+    ].filter(Boolean) as string[],
+    [
+      "red-dead-home",
+      "red-dead-wiki-index",
+      "red-dead-wiki-collection-index",
+      wikiSlug ? `red-dead-wiki:${wikiSlug}` : "",
+      wikiSlug && collectionSlug ? `red-dead-wiki-collection:${wikiSlug}/${collectionSlug}` : ""
     ]
   );
 }
@@ -867,6 +908,15 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       break;
     case "gta_wiki_collection":
       purgePaths = revalidateForGtaWikiCollection(slug);
+      break;
+    case "red_dead_game":
+      purgePaths = revalidateForRedDeadGame(slug);
+      break;
+    case "red_dead_wiki":
+      purgePaths = revalidateForRedDeadWiki(slug);
+      break;
+    case "red_dead_wiki_collection":
+      purgePaths = revalidateForRedDeadWikiCollection(slug);
       break;
     case "tool":
       purgePaths = revalidateForTools(slug);

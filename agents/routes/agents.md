@@ -99,3 +99,9 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/sitemaps/tools.xml` | `GET` | `src/app/sitemaps/tools.xml/route.ts` | Tools sitemap. |
 | `/sitemaps/wiki.xml` | `GET` | `src/app/sitemaps/wiki.xml/route.ts` | Wiki sitemap. |
 | `/sitemaps/gta.xml` | `GET` | `src/app/sitemaps/gta.xml/route.ts` | GTA landing, wiki hub/collection, and tool sitemap. |
+
+## Red Dead and collectible rollout (2026-09-07)
+
+Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+
+Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.

@@ -44,7 +44,7 @@ Scoped route-family guides:
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
 - Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `dev-docs/pipelines/catalog.md` and `dev-docs/pipelines/wiki-collections.md` respectively; a shared card/list renderer does not merge their data ownership.
 - GTA wiki and collection pages reuse the same renderer contract but load only from the `gta_*` tables through `apps/web/src/lib/gta.ts`; never attach GTA rows to Roblox universe or wiki tables.
-- Roblox wiki collections use the same `wiki_collection_pages` row with an explicit `page_type`: `database` keeps the existing paginated table/card renderer, while `checklist` uses the shared checklist renderer and local-first/account-synced progress. Keep the page-type decision in the runtime manifest and page row rather than creating a new table.
+- Roblox wiki collections use the same `wiki_collection_pages` row with an explicit `page_type`: `database` keeps the existing paginated table/card renderer, while `collectible` uses the shared collectible renderer and local-first/account-synced progress. Keep the page-type decision in the runtime manifest and page row rather than creating a new table.
 
 ## Public Route Checklists
 
@@ -64,3 +64,9 @@ Scoped route-family guides:
 4. Keep route slugs, API filtering, and revalidation behavior aligned.
 5. If the page is commentable, wire it through the existing comments flow instead of inventing a new one.
 6. Follow the scoped workflow in `catalog/AGENTS.md` or `tools/AGENTS.md`.
+
+## Red Dead and collectible rollout (2026-09-07)
+
+Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+
+Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.

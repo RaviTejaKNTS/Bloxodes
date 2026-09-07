@@ -8,7 +8,7 @@ export function GtaCollectionSelect({
   options
 }: {
   value: string;
-  options: Array<{ value: string; label: string; href: string; pageType?: "database" | "checklist" }>;
+  options: Array<{ value: string; label: string; href: string; pageType?: "database" | "collectible" }>;
 }) {
   const router = useRouter();
   if (!options.length) return null;

@@ -68,7 +68,7 @@ export async function generateGtaCollectionMetadata({
   if (!page) {
     return { alternates: buildAlternates(canonical), robots: { index: false, follow: false } };
   }
-  if (page.page_type === "checklist" && currentPage > 1) {
+  if (page.page_type === "collectible" && currentPage > 1) {
     const baseCanonical = `${SITE_URL}${basePath}`;
     return {
       title: page.title,
@@ -119,7 +119,7 @@ export async function renderGtaCollectionPage({
     href: buildGtaCollectionPath(entry.wiki_slug, entry.collection_slug),
     pageType: entry.page_type
   }));
-  if (context.page.page_type === "checklist") {
+  if (context.page.page_type === "collectible") {
     return renderGtaCollectibleCollectionPage({
       page: context.page,
       config: context.config,
@@ -146,5 +146,5 @@ export async function renderGtaCollectionPage({
 export async function getGtaCollectionPageCount(slug: string, collection: string): Promise<number> {
   const context = await resolveContext(slug, collection);
   if (!context) return 1;
-  return context.page.page_type === "checklist" ? 1 : context.prepared.totalPages;
+  return context.page.page_type === "collectible" ? 1 : context.prepared.totalPages;
 }

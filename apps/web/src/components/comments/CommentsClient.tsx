@@ -13,7 +13,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 type CommentsClientProps = {
-  entityType: "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_collection" | "gta_wiki" | "gta_wiki_collection";
+  entityType:
+    | "code"
+    | "article"
+    | "catalog"
+    | "event"
+    | "tool"
+    | "wiki"
+    | "wiki_collection"
+    | "gta_wiki"
+    | "gta_wiki_collection"
+    | "red_dead_wiki"
+    | "red_dead_wiki_collection";
   entityId: string;
   initialComments: CommentEntry[];
 };

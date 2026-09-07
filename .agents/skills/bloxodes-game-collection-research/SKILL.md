@@ -25,7 +25,7 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/brief.md
 6. Decide whether the collection is durable, useful, and source-backed.
 7. Identify the item fields players need, such as source, location, price, rarity, chance, requirement, damage, role, availability, or effect. These are examples; pick fields based on that game and collection.
 8. Decide how the collection should be divided into sections before data work starts. Use sections that help players compare items, not sections that only mirror source tables.
-9. Classify the page as `database` or `checklist` before data work starts. Use `checklist` for finite, player-completed goals such as collectibles, locations, quests, badges, or route steps. Use `database` for reference rosters players browse and compare. This is a page presentation choice, not a new table or route family.
+9. Classify the page as `database` or `collectible` before data work starts. Use `collectible` for finite, player-completed goals such as collectibles, locations, quests, badges, or route steps. Use `database` for reference rosters players browse and compare. This is a page presentation choice, not a new table or route family.
 
 ## Gather Sources
 
@@ -49,7 +49,7 @@ Sources to use:
 - etc.
 
 Data plan:
-- Page type: `database` or `checklist`:
+- Page type: `database` or `collectible`:
 - Item count expected:
 - Useful fields:
 - Grouping:
@@ -69,7 +69,7 @@ Page layout plan:
 - Sort order:
 - Section note needs:
 - Renderer/config changes needed: yes/no
-- Checklist rationale and progress key: (required only for `checklist`)
+- Collectible rationale and progress key: (required only for `collectible`)
 ```
 
 If source proof is weak, say what is missing and stop.

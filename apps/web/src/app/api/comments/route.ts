@@ -19,7 +19,9 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "wiki",
   "wiki_collection",
   "gta_wiki",
-  "gta_wiki_collection"
+  "gta_wiki_collection",
+  "red_dead_wiki",
+  "red_dead_wiki_collection"
 ]);
 const MAX_BODY_LENGTH = 1000;
 const MAX_GUEST_NAME_LENGTH = 60;
@@ -30,7 +32,18 @@ const COMMENT_WRITE_RATE_LIMIT = {
   windowMs: 10 * 60 * 1000
 };
 
-type CommentEntityType = "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_collection" | "gta_wiki" | "gta_wiki_collection";
+type CommentEntityType =
+  | "code"
+  | "article"
+  | "catalog"
+  | "event"
+  | "tool"
+  | "wiki"
+  | "wiki_collection"
+  | "gta_wiki"
+  | "gta_wiki_collection"
+  | "red_dead_wiki"
+  | "red_dead_wiki_collection";
 
 type CommentPageTarget = {
   pageType: string;
@@ -168,6 +181,31 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
     return {
       pageType: "GTA Wiki Collection",
       pageUrl: buildPageUrl(`/gta/wiki/${data.wiki_slug}/${data.collection_slug}`)
+    };
+  }
+
+  if (entityType === "red_dead_wiki") {
+    const { data, error } = await admin
+      .from("red_dead_wiki_pages")
+      .select("slug")
+      .eq("id", entityId)
+      .eq("is_published", true)
+      .maybeSingle();
+    if (error || !hasSlug(data) || !data.slug.trim()) return null;
+    return { pageType: "Red Dead Wiki", pageUrl: buildPageUrl(`/red-dead/wiki/${data.slug}`) };
+  }
+
+  if (entityType === "red_dead_wiki_collection") {
+    const { data, error } = await admin
+      .from("red_dead_wiki_collection_pages")
+      .select("wiki_slug, collection_slug")
+      .eq("id", entityId)
+      .eq("is_published", true)
+      .maybeSingle();
+    if (error || !hasWikiCollectionPath(data) || !data.wiki_slug.trim() || !data.collection_slug.trim()) return null;
+    return {
+      pageType: "Red Dead Wiki Collection",
+      pageUrl: buildPageUrl(`/red-dead/wiki/${data.wiki_slug}/${data.collection_slug}`)
     };
   }
 

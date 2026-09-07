@@ -86,7 +86,7 @@ export function renderRobloxCollectionChecklistPage({
   const sections = buildSections(groupedSections, page.description_json);
   const itemCount = sections.reduce((sum, section) => sum + section.items.length, 0);
   const title = contentHtml?.title?.trim() || `All ${itemCount.toLocaleString("en-US")} ${config.label} in ${config.gameName}`;
-  const description = page.meta_description || `${config.gameName} ${config.label.toLowerCase()} checklist with locations and progress tracking.`;
+  const description = page.meta_description || `${config.gameName} ${config.label.toLowerCase()} collectibles with locations and progress tracking.`;
   const canonicalPath = `/wiki/${config.gameSlug}/${config.slug}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const updatedAt = contentHtml?.updatedAt ?? page.content_updated_at ?? page.updated_at ?? page.published_at;

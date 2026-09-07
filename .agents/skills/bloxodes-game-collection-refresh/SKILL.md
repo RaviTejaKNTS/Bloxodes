@@ -41,7 +41,7 @@ Make the decision immediately:
 - **Unchanged:** no verified data delta and all required/accepted item images are present. Stop. Do not create `brief.md`, `final.json`, replacement copy, or worker tasks.
 - **Data update:** a verified data delta exists. Apply only that delta, then check images for the affected new or changed items.
 - **Image update:** data is unchanged but existing items are missing images or have a clearly better exact item image available. Run only the image pass.
-- **Page-type update:** the collection is now clearly a finite player-completed goal or a reference roster, so an approved switch between `checklist` and `database` is needed.
+- **Page-type update:** the collection is now clearly a finite player-completed goal or a reference roster, so an approved switch between `collectible` and `database` is needed.
 - **Blocked:** evidence is weak, sources conflict, or the dataset/page is missing. Leave files unchanged and report the exact blocker. Use the focused research skill only if resolving it is necessary and in scope.
 
 For a game-wide or all-registered run, perform these quick checks in parallel where practical, then spend the detailed passes only on collections with a positive data or image delta.

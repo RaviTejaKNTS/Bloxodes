@@ -43,7 +43,7 @@ type PlannedItem = {
 
 type CollectionPlan = {
   config: GameCollectionConfig;
-  pageType: "database" | "checklist";
+  pageType: "database" | "collectible";
   universeId: number;
   datasetPath: string;
   schemaVersion: number;
@@ -58,7 +58,7 @@ type CollectionPlan = {
 type RuntimeManifest = {
   schemaVersion: 1;
   game: { slug: string; name: string; universeId: number };
-  collection: { slug: string; label: string; sortOrder?: number; pageType?: "database" | "checklist" };
+  collection: { slug: string; label: string; sortOrder?: number; pageType?: "database" | "collectible" };
   dataset: string;
   finalJson?: string;
   mediaRoot: string;
@@ -67,7 +67,7 @@ type RuntimeManifest = {
 
 type CollectionSource = {
   config: GameCollectionConfig;
-  pageType: "database" | "checklist";
+  pageType: "database" | "collectible";
   universeId: number;
   datasetPath: string;
   mediaRoot: string;
@@ -268,8 +268,8 @@ async function targetSources(): Promise<CollectionSource[]> {
       if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) {
         throw new Error(`Missing game name or collection label in ${manifestPath}.`);
       }
-      const pageType = manifest.collection.pageType ?? "database";
-      if (pageType !== "database" && pageType !== "checklist") {
+      const pageType = String(manifest.collection.pageType) === "checklist" ? "collectible" : manifest.collection.pageType ?? "database";
+      if (pageType !== "database" && pageType !== "collectible") {
         throw new Error(`Invalid collection pageType in ${manifestPath}.`);
       }
       if (!Array.isArray(manifest.sourceUrls) || !manifest.sourceUrls.length) {

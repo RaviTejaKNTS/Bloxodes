@@ -31,7 +31,7 @@ export function GtaCollectibleChecklist({
   collectionLabel: string;
   sections: GtaCollectibleSection[];
   cardFields?: string[] | null;
-  collectionOptions: Array<{ value: string; label: string; href: string; pageType?: "database" | "checklist" }>;
+  collectionOptions: Array<{ value: string; label: string; href: string; pageType?: "database" | "collectible" }>;
 }) {
   return (
     <CollectionChecklist

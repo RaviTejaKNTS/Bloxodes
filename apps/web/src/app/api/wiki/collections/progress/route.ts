@@ -25,7 +25,7 @@ async function isPublishedChecklistCollection(code: string): Promise<boolean> {
     .select("code")
     .eq("code", code)
     .eq("is_published", true)
-    .eq("page_type", "checklist")
+    .in("page_type", ["collectible", "checklist"])
     .not("published_dataset_id", "is", null)
     .maybeSingle();
   return !error && Boolean(data);
