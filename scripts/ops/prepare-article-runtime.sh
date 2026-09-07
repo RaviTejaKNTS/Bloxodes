@@ -28,7 +28,7 @@ mkdir -p "${SOURCE_ROOT}/tmp/article-writer"
 [[ -e "${RELEASE_DIR}/tmp" ]] || ln -s "${RUNTIME_ROOT}/state" "${RELEASE_DIR}/tmp"
 [[ -e "${RELEASE_DIR}/.envs" ]] || ln -s "${SOURCE_ROOT}/.envs" "${RELEASE_DIR}/.envs"
 cd "${RELEASE_DIR}"
-npm ci --no-audit --no-fund
+npm ci --workspace @bloxodes/web --include-workspace-root --no-audit --no-fund
 node --env-file=/etc/bloxodes/article-automation.env ./node_modules/tsx/dist/cli.mjs scripts/ops/check-homelab-article-automation.ts --component all
 printf '%s\n' "${ARTICLE_SHA}" > "${RUNTIME_ROOT}/prepared-sha"
 printf 'Prepared and checked %s\n' "${RELEASE_DIR}"
