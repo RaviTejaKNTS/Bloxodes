@@ -144,3 +144,7 @@ The parent approves readiness before writing. An article may proceed with no ins
 ```bash
 npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
 ```
+
+## Unattended code-controlled inspection
+
+Scheduled image work has headless Chrome, not a connected Codex desktop browser. Use `npm --prefix <repository> run articles:inspect-image -- <exact-source-image-url> <article-workspace>` and open the returned screenshot with `view_image`. Do not load desktop browser setup helpers in this mode. A successful screenshot proves access only; inspect the depicted gameplay and match it to the source and intended placement before marking an image verified. Keep the exact original URL and attribution evidence in media.json. The independent reviewer receives code-captured screenshots in `image-inspection/index.json`; it must inspect them before acceptance. Tool/network failures are operational problems, not grounds for inventing a match or silently accepting an omission.

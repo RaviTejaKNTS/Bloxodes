@@ -1,3 +1,4 @@
+import { fetchImageBytes } from "../shared/fetch-image-bytes";
 import "../shared/load-env";
 
 import { createHash } from "node:crypto";
@@ -106,21 +107,10 @@ function sourceHash(entry: ArticleImageEntry): string {
 }
 
 async function downloadImage(url: string, referer: string) {
-  const response = await fetch(url, {
-    redirect: "follow",
-    headers: {
-      accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
-      "user-agent": "Mozilla/5.0 Bloxodes article image collector",
-      referer,
-    },
-  });
-  if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
-  const contentType = response.headers.get("content-type") ?? "";
-  if (contentType && !contentType.startsWith("image/") && !contentType.includes("octet-stream")) {
-    throw new Error(`${url} returned ${contentType}, not an image`);
-  }
-
-  return Buffer.from(await response.arrayBuffer());
+  return fetchImageBytes(url, { redirect: "follow", headers: {
+    accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+    "user-agent": "Mozilla/5.0 Bloxodes article image collector", referer
+  } });
 }
 
 async function prepareImage(entry: ArticleImageEntry, useApprovedHostedBytes: boolean) {
@@ -144,12 +134,7 @@ async function prepareImage(entry: ArticleImageEntry, useApprovedHostedBytes: bo
 }
 
 async function verifyPublicReadback(publicUrl: string): Promise<void> {
-  const response = await fetch(publicUrl, { method: "GET", redirect: "follow" });
-  if (!response.ok) throw new Error(`uploaded image readback returned HTTP ${response.status}`);
-  const contentType = response.headers.get("content-type") ?? "";
-  if (!contentType.startsWith("image/")) {
-    throw new Error(`uploaded image readback returned ${contentType || "an unknown content type"}`);
-  }
+  await fetchImageBytes(publicUrl, { redirect: "follow" });
 }
 
 async function saveManifest(filePath: string, manifest: ArticleImageManifest): Promise<void> {

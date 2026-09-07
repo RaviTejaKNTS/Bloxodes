@@ -19,3 +19,7 @@ Do not include seo_title or internal review notes.
 Insert all verified hosted images from media.json at their useful matching headings with factual alt text. Preserve approved URLs and provenance. Accepted missing entries need no substitute. Never insert the cover as a body image. Use confirmed links naturally where the destination helps. Perfect-match approved YouTube media is optional using {{ youtube: URL }} on its own line. Specialized blocks follow the relevant page-type skill.
 
 Before returning, read the complete copy aloud in your head. Check the title's promise through the result, repeated explanations, misplaced evidence language, useful headings, and FAQ value. Parse the JSON. Return a draft or revision decision, not self-approval. A separate reviewer evaluates it; code performs QA.
+
+## Focused corrections
+
+When revising, preserve supported useful passages and repair the concrete finding without rephrasing unrelated sections. Code may apply one limited literal prose correction and request a fresh editorial review after the ordinary repair allowance is used. This does not approve the edited draft, relax factual support, impose article lengths, or authorize a whole-article rewrite loop. HTML entities that render as the same image alt text are handled by the validator; do not rewrite copy to work around an equivalent apostrophe encoding.

@@ -13,7 +13,9 @@ if [[ "${EUID}" -ne 0 ]]; then
 fi
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-UNIT_SOURCE="${REPO_ROOT}/scripts/ops/systemd"
+RUNTIME_ROOT="/home/teja/.local/share/bloxodes-article-runtime"
+RELEASE_DIR="${RUNTIME_ROOT}/releases/${APPROVED_SHA}"
+UNIT_SOURCE="${RELEASE_DIR}/scripts/ops/systemd"
 ENV_DIR="/etc/bloxodes"
 ENV_PATH="${ENV_DIR}/article-automation.env"
 
@@ -29,7 +31,10 @@ if [[ -n "$(git -C "${REPO_ROOT}" status --porcelain)" ]]; then
   echo "Checkout is dirty; refusing to install service units." >&2
   exit 1
 fi
-for service in bloxodes-article-discovery.service bloxodes-article-writer.service; do
+[[ "$(cat "${RUNTIME_ROOT}/prepared-sha")" == "${APPROVED_SHA}" ]] || { echo "Prepare and check this runtime first." >&2; exit 1; }
+[[ "$(git -C "${RELEASE_DIR}" rev-parse HEAD)" == "${APPROVED_SHA}" ]]
+[[ -z "$(git -C "${RELEASE_DIR}" status --porcelain)" ]]
+for service in bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service; do
   if systemctl is-active --quiet "${service}"; then
     echo "${service} is active; retry after it finishes." >&2
     exit 1
@@ -49,7 +54,9 @@ chmod 0640 "${ENV_PATH}"
 for unit in \
   bloxodes-article-discovery.service \
   bloxodes-article-discovery.timer \
-  bloxodes-article-writer.service; do
+  bloxodes-article-writer.service \
+  bloxodes-article-publication.service \
+  bloxodes-article-publication.timer; do
   install -m 0644 "${UNIT_SOURCE}/${unit}" "/etc/systemd/system/${unit}"
 done
 
@@ -57,7 +64,10 @@ if [[ -e /etc/systemd/system/bloxodes-article-writer.timer ]]; then
   systemctl disable --now bloxodes-article-writer.timer >/dev/null 2>&1 || true
   rm -f /etc/systemd/system/bloxodes-article-writer.timer
 fi
+ln -s "${RELEASE_DIR}" "${RUNTIME_ROOT}/current.next"
+mv -Tf "${RUNTIME_ROOT}/current.next" "${RUNTIME_ROOT}/current"
 systemctl daemon-reload
+systemctl enable --now bloxodes-article-publication.timer
 
 echo "Installed Bloxodes article units from ${APPROVED_SHA}."
 echo "Existing discovery timer enablement and active state were preserved."

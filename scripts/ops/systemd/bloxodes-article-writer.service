@@ -1,5 +1,5 @@
 [Unit]
-Description=Bloxodes managed-dev Grok article batch writer
+Description=Bloxodes managed-dev Luna article batch writer
 After=network-online.target bloxodes-article-discovery.service
 Wants=network-online.target
 
@@ -7,10 +7,10 @@ Wants=network-online.target
 Type=oneshot
 User=teja
 Group=teja
-WorkingDirectory=/home/teja/projects/Bloxodes
+WorkingDirectory=/home/teja/.local/share/bloxodes-article-runtime/current
 EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
-Environment=ARTICLE_WRITER_WORKTREE=/home/teja/projects/Bloxodes
+Environment=ARTICLE_WRITER_WORKTREE=/home/teja/.local/share/bloxodes-article-runtime/current
 Environment=ARTICLE_AUTO_PUBLISH=true
 ExecStart=/usr/bin/npm run articles:homelab:check -- --component writer
 ExecStart=/usr/bin/npm run articles:writer:batch -- --apply --limit 6

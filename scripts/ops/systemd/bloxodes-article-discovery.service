@@ -8,7 +8,7 @@ OnSuccess=bloxodes-article-writer.service
 Type=oneshot
 User=teja
 Group=teja
-WorkingDirectory=/home/teja/projects/Bloxodes
+WorkingDirectory=/home/teja/.local/share/bloxodes-article-runtime/current
 EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
 ExecStart=/usr/bin/npm run articles:homelab:check -- --component discovery

@@ -410,9 +410,9 @@ function isArticleFinal(value: unknown): value is ArticleFinal {
 export async function resolveReleaseArtifactPath(filePath: string, queueId: string, slug: string, worktree = process.cwd()): Promise<string> {
   const root = await realpath(worktree);
   const actual = await realpath(filePath);
-  const legacy = path.join(root, "tmp", "content-workspace");
+  const legacy = await realpath(path.join(root, "tmp", "content-workspace")).catch(() => path.join(root, "tmp", "content-workspace"));
   if (actual.startsWith(`${legacy}${path.sep}`)) return actual;
-  const pipeline = path.join(root, "tmp", "article-pipeline");
+  const pipeline = await realpath(path.join(root, "tmp", "article-pipeline")).catch(() => path.join(root, "tmp", "article-pipeline"));
   if (!actual.startsWith(`${pipeline}${path.sep}`) || path.basename(path.dirname(actual)) !== "content") {
     throw new Error(`${filePath} resolves outside an approved article workspace.`);
   }
@@ -707,6 +707,22 @@ async function releaseOne(params: {
     };
   }
 
+  // Recover a crash after production commit but before queue acknowledgement without rewriting it.
+  const expected = structuredClone(params.artifact);
+  for (const entry of expected.manifest.entries) {
+    if (entry.status !== "verified" || !entry.public_url || !entry.uploaded_path || entry.public_url.startsWith("/")) continue;
+    const promotedUrl = `${CANONICAL_MEDIA_ORIGIN}/storage/v1/object/public/${params.productionEnv.SUPABASE_MEDIA_BUCKET}/${entry.uploaded_path}`;
+    expected.finalJson.content_md = expected.finalJson.content_md.split(entry.public_url).join(promotedUrl);
+    entry.public_url = promotedUrl;
+  }
+  let committed = false;
+  try { await verifyProductionReadback(expected, params.production); committed = true; } catch { /* absent or incomplete: guarded idempotent promotion below */ }
+  if (committed) {
+    await verifyLiveRelease(expected, params.options, params.productionEnv);
+    await closeQueueRow(expected, productionUrl, params.dev);
+    return { queueId: expected.row.id, slug: expected.finalJson.slug, productionUrl, status: "already-published" };
+  }
+
   // Promotion rewrites URLs. Preserve the original files and their pipeline approval hashes.
   const stagingRoot = path.join(process.cwd(), "tmp", "content-workspace");
   await mkdir(stagingRoot, { recursive: true });
@@ -731,13 +747,10 @@ async function main() {
   const dev = resolveArticleDevCredentials({ envFile: options.devEnvFile });
   const productionCredentials = await readProductionCredentials(options.productionEnvFile);
   const rows = await loadQueueRows(options.queueIds, dev);
-  const artifacts = await Promise.all(rows.map(readReleaseArtifact));
 
-  console.log(`Article release allowlist: ${artifacts.length} exact queue row(s).`);
-  for (const artifact of artifacts) {
-    console.log(`- ${artifact.row.id} ${artifact.finalJson.slug} status=${artifact.row.status}`);
-  }
+  console.log(`Article release allowlist: ${rows.length} exact queue row(s).`);
   if (!options.apply) {
+    for (const row of rows) { const artifact = await readReleaseArtifact(row); console.log(`${row.id} ${artifact.finalJson.slug}`); }
     console.log("Dry run only. Add --apply --allow-prod to publish this exact allowlist.");
     return;
   }
@@ -752,8 +765,9 @@ async function main() {
   const failures: Array<{ queueId: string; slug: string; error: string }> = [];
 
   try {
-    for (const artifact of artifacts) {
+    for (const row of rows) {
       try {
+        const artifact = await readReleaseArtifact(row);
         receipts.push(await releaseOne({
           artifact,
           options,
@@ -764,8 +778,8 @@ async function main() {
         }));
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
-        failures.push({ queueId: artifact.row.id, slug: artifact.finalJson.slug, error: message });
-        console.error(`Release failed for ${artifact.finalJson.slug}: ${message}`);
+        failures.push({ queueId: row.id, slug: row.result_slug!, error: message });
+        console.error(`Release failed for ${row.result_slug}: ${message}`);
       }
     }
   } finally {

@@ -232,7 +232,11 @@
     "verify:franchise-collection-final": "node --import tsx scripts/franchise/verify-franchise-collection-final.ts",
     "sync:franchise-wiki-media": "node --import tsx scripts/franchise/sync-franchise-wiki-media.ts",
     "publish:franchise-wiki-hubs": "node --import tsx scripts/franchise/publish-franchise-wiki-hubs.ts",
-    "sync:franchise-collection-runtime": "node --import tsx scripts/franchise/sync-franchise-collection-runtime.ts"
+    "sync:franchise-collection-runtime": "node --import tsx scripts/franchise/sync-franchise-collection-runtime.ts",
+    "articles:publication:drain": "tsx scripts/articles/article-publication-outbox.ts",
+    "articles:inspect-image": "tsx scripts/articles/inspect-article-image.ts",
+    "articles:automation:audit": "tsx scripts/articles/audit-article-automation.ts",
+    "articles:runtime:prepare": "bash scripts/ops/prepare-article-runtime.sh"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

@@ -1,6 +1,6 @@
 import "../shared/load-env";
 
-import { spawn } from "node:child_process";
+import { authorizePublication, drainPublications } from "./article-publication-outbox";
 import { accessSync, constants as fsConstants } from "node:fs";
 import { access } from "node:fs/promises";
 import os from "node:os";
@@ -370,25 +370,6 @@ export async function requeueDueBlockedRows(
   return { requeued: data?.length ?? 0, failed: failedRows?.length ?? 0 };
 }
 
-async function releaseCompletedArticles(options: Options, completedRows: QueueRowReference[]): Promise<void> {
-  if (completedRows.length === 0) return;
-  const args = ["run", "articles:release", "--", "--apply", "--allow-prod"];
-  for (const row of completedRows) args.push("--queue-id", row.id);
-  console.log(`Publishing ${completedRows.length} completed article(s) through the guarded exact-row production release.`);
-  await new Promise<void>((resolve, reject) => {
-    const child = spawn("npm", args, {
-      cwd: options.worktree,
-      env: process.env,
-      stdio: "inherit"
-    });
-    child.on("error", (error) => reject(new Error(`Production release could not start: ${error.message}`)));
-    child.on("close", (code) => {
-      if (code === 0) resolve();
-      else reject(new Error(`Production release exited with code ${code ?? 1}.`));
-    });
-  });
-}
-
 async function main() {
   if (process.env.ARTICLE_WRITER_BATCH_CONTEXT === "1") {
     console.log("Nested article writer batch invocation ignored; the outer homelab batch already owns this run.");
@@ -405,6 +386,7 @@ async function main() {
   }
   try {
     if (options.apply) {
+      if (options.releaseCompleted) await drainPublications(options.worktree, dev).catch(error => console.error(errorMessage(error)));
       const staleClaims = await recoverStaleBatchClaims(dev, options.maxAttempts, options.timeoutMinutes + 30, options.queueId);
       if (staleClaims) console.log(`Recovered ${staleClaims} stale homelab batch claim(s).`);
       const retryResult = await requeueDueBlockedRows(dev, options.maxAttempts, options.queueId);
@@ -459,6 +441,7 @@ async function main() {
           for (const id of selectedIds) {
             if (controller.signal.aborted || Date.now() >= deadline) break;
             try {
+              if (options.releaseCompleted) await authorizePublication(options.worktree, id);
               const result = await processArticleQueueRow(dev, id, {
                 worktree: options.worktree, runDir: path.join(options.worktree, "tmp/article-pipeline", id), env, baseUrl,
                 deadline, stageTimeoutMs: stageMinutes * 60_000, signal: controller.signal,
@@ -482,7 +465,7 @@ async function main() {
         throw new Error("DEGRADED ARTICLE WRITER: A non-empty batch completed zero verified managed-dev articles.");
       }
       console.log(`Article writer completed ${completedRows.length} managed-dev article(s).`);
-      if (options.releaseCompleted && !controller.signal.aborted) await releaseCompletedArticles(options, completedRows);
+      if (options.releaseCompleted && !controller.signal.aborted) await drainPublications(options.worktree, dev);
       else console.log("Automatic production release is disabled for this batch; completed rows remain available for review.");
       if (providerError) throw providerError;
     } catch (error) {

@@ -276,3 +276,7 @@ If research is weak, say what is missing. Do not pretend the article is ready.
 ## Focused independent re-review
 
 A first research review checks decisive source evidence and the full reader promise. A re-review uses the retained earlier findings, checks the requested correction and regressions, and reuses facts already accepted unless a changed claim, contradiction, or freshness issue makes them uncertain. An internal route correction does not require researching the mechanic again. Do not turn source search fallbacks into a mandatory checklist when the evidence gate has already been met.
+
+## Early viability in scheduled stages
+
+Check whether the central promised result is sourceable before collecting peripheral detail. Search specifically for missing acquisition steps, prerequisites, conditions, and conflicting outcomes. If decisive facts remain unsupported, identify the exact gap and stop this topic before images and writing. Do not quietly narrow an “all” promise or turn an actionable guide into guesses. Other queue topics can continue independently. Record a game-specific universe_id clearly so code can prepare its managed-development reference row; database setup belongs to the runtime.

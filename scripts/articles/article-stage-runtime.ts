@@ -1,3 +1,6 @@
+import { applyLocalCorrections } from "./article-local-correction";
+import { inspectArticleImage } from "./inspect-article-image";
+import { briefUniverseId, ensureArticleGameIdentity } from "./article-game-identity";
 import { spawn } from "node:child_process";
 import { createWriteStream } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -18,8 +21,8 @@ export const DECISION_SCHEMA = {
   }
 };
 export const EDITORIAL_DECISION_SCHEMA = { ...DECISION_SCHEMA,
-  required: [...DECISION_SCHEMA.required, "editorial_evidence"],
-  properties: { ...DECISION_SCHEMA.properties, editorial_evidence: EDITORIAL_EVIDENCE_SCHEMA }
+  required: [...DECISION_SCHEMA.required, "editorial_evidence", "localized_corrections"],
+  properties: { ...DECISION_SCHEMA.properties, editorial_evidence: EDITORIAL_EVIDENCE_SCHEMA, localized_corrections: { type: "array", maxItems: 3, items: { type: "object", additionalProperties: false, required: ["before", "after"], properties: { before: { type: "string" }, after: { type: "string" } } } } }
 };
 export type StageRuntimeOptions = {
   worktree: string; runDir: string; deadline: number; stageTimeoutMs: number;
@@ -95,12 +98,12 @@ export function stagePrompt(options: StageRuntimeOptions, stage: Stage, state: P
   const workspace = path.join(options.runDir, "content");
   const writingSkill = /tier/i.test(state.job.article_type) ? "bloxodes-tier-list-writing" : /tech|troubleshoot|platform/i.test(state.job.article_type) ? "bloxodes-tech-article-writing" : "bloxodes-article-writing";
   const assignment: Partial<Record<Stage, string>> = {
-    research: `Use ${skills}/bloxodes-article-research/SKILL.md. Research the supplied topic and write brief.md. Preserve the full reader promise and fixed slug; distinguish omitted detail from contradiction. Save partial evidence while working. An exact, credible single source is not automatically disqualified; apply the skill's qualified single-source exception honestly. Return completed only with Research status: ready_for_review. Do not grant your own approval.`,
+    research: `Use ${skills}/bloxodes-article-research/SKILL.md. Research the supplied topic and write brief.md. Check early whether credible sources can answer the central reader promise; if essential steps cannot be established after focused searches, return blocked with the exact missing facts before investing in peripheral detail. Do not shrink the promised topic to force approval. Preserve the full reader promise and fixed slug; distinguish omitted detail from contradiction. Save partial evidence while working. An exact, credible single source is not automatically disqualified; apply the skill's qualified single-source exception honestly. Return completed only with Research status: ready_for_review. Do not grant your own approval.`,
     research_review: `Read brief.md and ${skills}/bloxodes-article-research/SKILL.md. Independently judge source quality, overlap, identity, central facts and procedure completeness through the promised result. Source omissions are not automatically contradictions and independent-source counts are not substitutes for judgment. Inspect decisive source evidence when necessary. Do not edit the brief. Return completed only when it supports the public promise; otherwise request focused research with exact findings, or skip genuinely duplicate/wrong page-type coverage.`,
-    images: `Use ${skills}/bloxodes-article-images/SKILL.md in code-controlled stage mode. The research brief is approved. Find and visually inspect useful exact source images and write media.json, preserving source URLs, provenance, useful placements and a nonzero target set. Reuse valid hosted entries already present. Leave unresolved targets missing with documented searches; do not self-approve accepted_missing, upload images, or write article copy. The runtime owns uploads and omission approval.`,
-    image_review: `Read brief.md, media.json, and ${skills}/bloxodes-article-images/SKILL.md. Review exact image matches, source provenance, placement usefulness, explicit attribution conditions and search evidence for omissions. Inspect full source images as needed. Do not modify artifacts. List accepted_missing IDs only for omissions that meet the skill's search and evidence requirements. Return completed only for a useful verified set with justified omissions; otherwise return focused images findings. Pending upload fields are expected here, not a blocker.`,
+    images: `Use ${skills}/bloxodes-article-images/SKILL.md in code-controlled stage mode. The research brief is approved. Use the unattended headless Chrome helper: npm --prefix ${options.worktree} run articles:inspect-image -- <source-image-url> ${workspace}; then open its returned screenshot with view_image. Do not use the desktop browser plugin or setupBrowserRuntime: no desktop browser exists in scheduled jobs. Find and visually inspect useful exact source images and write media.json, preserving source URLs, provenance, useful placements and a nonzero target set. Reuse valid hosted entries already present. Leave unresolved targets missing with documented searches; do not self-approve accepted_missing, upload images, or write article copy. The runtime owns uploads and omission approval.`,
+    image_review: `Read brief.md, media.json, and ${skills}/bloxodes-article-images/SKILL.md. Review exact image matches, source provenance, placement usefulness, explicit attribution conditions and search evidence for omissions. Read image-inspection/index.json and open the corresponding local screenshots with view_image. These are captured by code using headless Chrome. Judge the actual gameplay match, not merely successful capture. Do not use desktop browser tools. Do not modify artifacts. List accepted_missing IDs only for omissions that meet the skill's search and evidence requirements. Return completed only for a useful verified set with justified omissions; otherwise return focused images findings. Pending upload fields are expected here, not a blocker.`,
     writing: `${writingSkill === "bloxodes-article-writing" ? `Read ${skills}/bloxodes-article-writing/references/pipeline-writing.md as the complete focused writing contract; do not load interactive upload/import instructions from the longer SKILL.md.` : `Use ${skills}/${writingSkill}/SKILL.md in code-controlled stage mode, applying the focused base writing contract.`} Research and image readiness have been approved by the preceding review stages. Read brief.md, media.json, ${skills}/bloxodes-article-writing/references/editorial-standard.md and the closest original editorial example. Write or revise final.json with the approved facts and hosted media. Preserve slug ${state.job.slug}, the reader promise and useful depth. Keep cover_image null. Choose your own headings, outline, tone and prose/table balance; do not force highlights, FAQ counts, fixed lengths or templates. You may update media placement_heading to match revised headings, but no image source/status/URL changes. Do not edit brief.md, self-approve, upload, import or run verification. If evidence is missing, return needs_revision targeting research with exact questions.`,
-    editorial_review: `First read final.json as a player, together with ${skills}/bloxodes-article-writing/references/editorial-standard.md. Assess clarity, natural wording, flow and repeated advice before opening the evidence brief. Then read brief.md, media.json and ${skills}/bloxodes-article-writing/references/editorial-review.md to check factual fidelity and completeness. Research approval does not make research-note wording suitable for public copy. Perform its promise/completeness/opening/repetition/uncertainty checks on the actual text. Evaluate supported practical depth, conversational explanation, distinct searchable headings and grouping, unnecessary repetition, unsupported connections, and US localization. Trace every essential ingredient/action to usable guidance; do not trust the writer's self-report. Return concrete locations/examples for substantive defects and target writing, research or images appropriately. Let the writer choose structure and phrasing. Do not request cosmetic changes when the copy works. Return editorial_evidence: checks for opening, completeness, structure, explanation, repetition, and evidence, each with verbatim draft quotations and a specific assessment. For every faq_json question, explain its additional answer absent from the body; mark adds_information false if it repeats a body answer. Any revise verdict or redundant FAQ prevents approval. Do not edit files. completed means editorial acceptance, not technical QA or publication.`
+    editorial_review: `First read final.json as a player, together with ${skills}/bloxodes-article-writing/references/editorial-standard.md. Assess clarity, natural wording, flow and repeated advice before opening the evidence brief. Then read brief.md, media.json and ${skills}/bloxodes-article-writing/references/editorial-review.md to check factual fidelity and completeness. Research approval does not make research-note wording suitable for public copy. Perform its promise/completeness/opening/repetition/uncertainty checks on the actual text. Evaluate supported practical depth, conversational explanation, distinct searchable headings and grouping, unnecessary repetition, unsupported connections, and US localization. Trace every essential ingredient/action to usable guidance; do not trust the writer's self-report. Return concrete locations/examples for substantive defects and target writing, research or images appropriately. Let the writer choose structure and phrasing. Do not request cosmetic changes when the copy works. Return editorial_evidence: checks for opening, completeness, structure, explanation, repetition, and evidence, each with verbatim draft quotations and a specific assessment. For every faq_json question, explain its additional answer absent from the body; mark adds_information false if it repeats a body answer. Any revise verdict or redundant FAQ prevents approval. If every remaining defect is a small evidence-backed prose correction, return localized_corrections with exact unique before/after passages (at most three, each under 100 words); otherwise return an empty array. This is not permission to invent facts, restructure the article, or approve the proposed correction. Code may apply it once and request another independent review. Do not edit files. completed means editorial acceptance, not technical QA or publication.`
   };
   return `You are one focused ${stage} worker in a CODE-CONTROLLED Bloxodes article pipeline. The runtime owns scheduling, waiting, retries, approvals, queue state, uploads, verification and publication. Multi-agent tools are disabled. Do not launch Codex/Grok/other workers, call a workflow runner, manage processes/services, read env/auth files, or change any queue/database state. Do not create subagents. Only do this stage and return the required JSON decision. Stage-specific ownership here overrides interactive parent/subagent instructions in skills. The repository is read-only guidance; only assigned article artifacts may be edited.
 
@@ -139,6 +142,19 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
     const r = await runStageCommand({ bin: "npm", args: ["run", alias, "--", ...args], cwd: options.worktree, env, log: path.join(attemptDir, `${alias.replaceAll(":", "-")}.log`), timeoutMs: timeoutMs(), signal: options.signal });
     if (r.code !== 0) throw new StageFailure(`${alias} failed (exit ${r.code}). ${r.tail.slice(-4000)}`, !repair, repair);
   };
+  if (stage === "images") await ensureArticleGameIdentity(briefUniverseId(await readFile(file("brief.md"), "utf8")), options.env);
+  if (stage === "image_review") {
+    const media = await json(file("media.json"));
+    const inspections: Record<string, string> = {};
+    for (const entry of media.entries ?? []) {
+      const url = entry.original_image_url || entry.public_url;
+      if (entry.status === "verified" && /^https?:/.test(url ?? "")) {
+        try { inspections[entry.id] = await inspectArticleImage(url, workspace); }
+        catch (error) { throw new StageFailure(`Unattended image inspection unavailable: ${error instanceof Error ? error.message : error}`, true); }
+      }
+    }
+    await saveJson(file("image-inspection/index.json"), inspections);
+  }
   if (isModelStage(stage)) {
     const before = await artifactHashes(workspace);
     const priorMedia = stage === "writing" ? await json(file("media.json")) : null;
@@ -200,12 +216,24 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
       await saveJson(path.join(options.runDir, `${stage}.json`), { ...decision, input_hashes: before });
       if (stage === "editorial_review") await writeFile(file("editorial-review.md"), `Status: ${decision.status === "completed" ? "approved" : "needs_attention"}\nRevision passes used: ${state.revisions.writing}\n\n${decision.summary}\n\n${decision.findings.map(f => `- ${f}`).join("\n")}\n\nReview evidence:\n${JSON.stringify((response as any).editorial_evidence, null, 2)}\n\nReviewed input hashes: ${JSON.stringify(before)}\n`);
     }
+    if (stage === "editorial_review" && decision.status === "needs_revision" && decision.repair_stage === "writing" && state.revisions.writing >= 1 && !(state.editorialCorrections ?? 0)) {
+      const final = await json(file("final.json"));
+      const corrected = applyLocalCorrections(final.content_md, (response as any).localized_corrections);
+      if (corrected !== null) {
+        await saveJson(path.join(attemptDir, "localized-correction.json"), { before_hash: before["final.json"], edits: (response as any).localized_corrections });
+        await saveJson(file("final.json"), { ...final, content_md: corrected });
+        decision.localizedCorrectionApplied = true;
+      }
+    }
     return decision;
   }
   if (stage === "image_upload") await command("collect:article-images", ["--manifest", file("media.json"), "--apply"]);
   if (stage === "copy_check") await command("content:check-copy", [file("final.json")], "writing");
   if (stage === "image_check") await command("check:article-image-readiness", ["--manifest", file("media.json"), "--file", file("final.json")], "images");
-  if (stage === "import_verify") await command("verify:article-finals", ["--base-url", options.baseUrl, "--file", file("final.json")]);
+  if (stage === "import_verify") {
+    await ensureArticleGameIdentity((await json(file("final.json"))).universe_id, options.env);
+    await command("verify:article-finals", ["--base-url", options.baseUrl, "--file", file("final.json")]);
+  }
   if (stage === "browser_verify") await command("verify:article-browser", ["--base-url", options.baseUrl, "--file", file("final.json")]);
   return done(`${stage} passed.`);
 }

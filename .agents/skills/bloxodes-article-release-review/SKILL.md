@@ -7,6 +7,10 @@ description: Review locally completed Bloxodes article queue work, start a local
 
 Keep managed-dev queue state separate from production article publication. Treat `completed` as locally written and QA-passed, not published.
 
+## Scheduled runtime location
+
+On the homelab, first check whether `/home/teja/.local/share/bloxodes-article-runtime/current` exists. Once installed, scheduled artifacts live under that runtime's persistent `tmp` directory, not the primary task checkout's old `tmp` copy. Inspect scheduled state and run exact-ID publication commands from the runtime directory. Manual task artifacts remain in their own worktree. Do not copy or regenerate a missing final merely because the primary checkout does not contain an automated run. A completed scheduled article may already have durable automatic publication authorization; inspect its publication intent before describing it as waiting for a new human decision. Review-only requests still do not grant new publication authorization.
+
 ## Code-controlled run evidence
 
 For finals under tmp/article-pipeline/<run-id>/content/, also inspect the sibling run's state.json and editorial_review.json. A current run must be completed with final technical checks recorded before it is presented as ready. A retained final from a blocked run does not inherit an older approval. The runtime's owned preview may have stopped after QA; start or reuse a managed-dev Tailscale preview for human review. Do not restart research/writing just to serve accepted copy.

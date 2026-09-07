@@ -281,3 +281,10 @@ Explicit completed article revisions: `articles:queue:update --status completed 
 Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
 
 Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
+
+## Article reliability commands
+
+- `articles:runtime:prepare -- --sha <commit>` prepares an independent versioned runtime and npm install, copies existing article state once, links protected profiles/shared leases, and runs readiness. The sudo installer activates only a checked exact SHA while jobs are inactive.
+- `articles:publication:drain -- --apply` consumes durable, previously authorized exact queue IDs with bounded retry/backoff and production approval verification. It can mutate production only through the guarded publisher; never use it to authorize arbitrary manual completed work.
+- `articles:automation:audit` reads managed queue and installed timer health, writes an ignored report, and exits nonzero for actionable findings.
+- `articles:inspect-image -- <url> <workspace>` captures a source in headless Chrome for model visual inspection; it writes only screenshots, grants no image/content approval, and needs no database credentials.

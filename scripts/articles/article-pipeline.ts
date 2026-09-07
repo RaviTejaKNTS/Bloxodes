@@ -12,6 +12,7 @@ export type Decision = {
   findings: string[];
   repair_stage: WorkStage | null;
   accepted_missing: string[];
+  localizedCorrectionApplied?: boolean;
 };
 export type ArticleJob = {
   id: string;
@@ -30,6 +31,7 @@ export type PipelineState = {
   revisions: Record<WorkStage, number>;
   failures: Partial<Record<Stage, number>>;
   technicalRepairs: Partial<Record<Stage, number>>;
+  editorialCorrections?: number;
   operationalResumes?: Partial<Record<Stage, number>>;
   retryAfter?: string;
   blockerKind?: "provider" | "technical";
@@ -83,6 +85,12 @@ export function applyDecision(state: PipelineState, decision: Decision, maxRevis
   const stage = state.stage as Stage;
   state.feedback = [...new Set([decision.summary, ...decision.findings])].join("\n");
   if (decision.status === "blocked" || decision.status === "skipped") { state.status = decision.status; return; }
+  if (decision.localizedCorrectionApplied && stage === "editorial_review" && decision.status === "needs_revision") {
+    if ((state.editorialCorrections ?? 0) >= 1) throw new StageFailure("Localized editorial correction exhausted.");
+    state.editorialCorrections = (state.editorialCorrections ?? 0) + 1;
+    state.stage = "editorial_review";
+    return; // Changed copy must receive a fresh independent review before QA.
+  }
   if (decision.status === "needs_revision") {
     const target = decision.repair_stage!;
     if (!allowedRepairs[stage]?.includes(target)) throw new StageFailure(`${stage} cannot route a repair to ${target}.`);
@@ -185,7 +193,7 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
       delete state.inFlight;
     }
     while (state.stage !== "done") {
-      if (Date.now() >= options.deadline) { state.status = "blocked"; state.feedback = "Outer article deadline reached; saved work retained."; break; }
+      if (Date.now() >= options.deadline) { state.status = "blocked"; state.feedback = "Outer article deadline reached; saved work retained."; state.blockerKind = "technical"; if ((state.operationalResumes?.[state.stage as Stage] ?? 0) < 2) state.retryAfter = new Date(Date.now() + 180 * 60_000).toISOString(); break; }
       const stage = state.stage;
       const attempt = (state.attempts[stage] ?? 0) + 1;
       state.attempts[stage] = attempt;

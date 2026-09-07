@@ -1,0 +1,10 @@
+[Unit]
+Description=Recover authorized article publications every 15 minutes
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+Unit=bloxodes-article-publication.service
+
+[Install]
+WantedBy=timers.target

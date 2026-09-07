@@ -1,5 +1,11 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { load } from "cheerio";
+
+export function normalizeImageAlt(value: string): string {
+  // Decode entities as text, never interpret literal angle brackets as markup.
+  return load(`<span>${value.replace(/</g, "&lt;")}</span>`)("span").text().replace(/\s+/g, " ").trim();
+}
 
 import { classifyArticleImageSrc, findMarkdownImages } from "@/lib/article-media";
 
@@ -256,7 +262,7 @@ export function checkArticleImageReadiness(params: {
       continue;
     }
     inserted += 1;
-    if (hasText(entry.alt) && placed.alt.trim() !== entry.alt.trim()) {
+    if (hasText(entry.alt) && normalizeImageAlt(placed.alt) !== normalizeImageAlt(entry.alt)) {
       errors.push(`${label}: content_md alt text does not match media.json`);
     }
 

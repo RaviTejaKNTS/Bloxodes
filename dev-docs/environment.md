@@ -114,3 +114,7 @@ The code-controlled article runtime gives model tasks only tool/user paths, loca
 Optional pipeline controls are ARTICLE_PIPELINE_STAGE_TIMEOUT_MINUTES (45), ARTICLE_PIPELINE_PREVIEW_PORT (3100), and ARTICLE_PIPELINE_PREVIEW_BASE_URL (an existing managed-dev localhost/Tailscale URL). Defaults are in code and committed examples; no protected env values were changed. Host env:doctor passed on September 6 after this change.
 
 The September 6 manual article run verified that deterministic article upload/import/QA stages must use NODE_ENV=development while retaining BLOXODES_ENV_PROFILE=process-only and the validated managed-development credentials. Model stages retain their minimized process-only environment. The import production guard remains unchanged; managed runs do not use --allow-prod.
+
+### Isolated article runtime
+
+The prepared article release links the existing ignored `.envs` tree and uses `/etc/bloxodes/article-automation.env`; it does not copy secrets into Git or model environments. Releases have independent dependencies and persistent state under `/home/teja/.local/share/bloxodes-article-runtime`. Preparation validates the existing profile contract; activation requires the reviewed host installer. No new secret values are required.
