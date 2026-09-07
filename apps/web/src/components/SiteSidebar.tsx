@@ -4,6 +4,7 @@ import Link from "next/link";
 import { RedDeadWikiSidebarLinks } from "@/components/RedDeadWikiSidebarLinks";
 import { usePathname } from "next/navigation";
 import { SidebarActiveState } from "@/components/SidebarActiveState";
+import { GtaWikiSidebarLinks } from "@/components/GtaWikiSidebarLinks";
 import { SidebarSearch } from "@/components/SidebarSearch";
 import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import { SiteLogo } from "@/components/SiteLogo";
@@ -61,6 +62,9 @@ export function SiteSidebar({ pathname }: SiteSidebarProps) {
         </nav>
 
         <RedDeadWikiSidebarLinks pathname={currentPathname} />
+        {currentPathname.startsWith("/gta") ? (
+          <GtaWikiSidebarLinks pathname={currentPathname} />
+        ) : null}
 
         <div className="mx-3 my-2 h-px bg-sidebar-border" />
 
