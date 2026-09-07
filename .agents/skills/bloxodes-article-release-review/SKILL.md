@@ -7,6 +7,10 @@ description: Review locally completed Bloxodes article queue work, start a local
 
 Keep managed-dev queue state separate from production article publication. Treat `completed` as locally written and QA-passed, not published.
 
+## Code-controlled run evidence
+
+For finals under tmp/article-pipeline/<run-id>/content/, also inspect the sibling run's state.json and editorial_review.json. A current run must be completed with final technical checks recorded before it is presented as ready. A retained final from a blocked run does not inherit an older approval. The runtime's owned preview may have stopped after QA; start or reuse a managed-dev Tailscale preview for human review. Do not restart research/writing just to serve accepted copy.
+
 ## Queue Lifecycle
 
 - `pending`: waiting for the writer
@@ -45,8 +49,9 @@ npm run articles:review:list -- --base-url http://127.0.0.1:<port> --limit 100 -
 ```
 
 3. Confirm each row has `result_slug`, `result_path`, and a matching managed-dev `articles` row. Check that each localhost URL returns the expected article. Do not rerun the writing workflow or production release checks.
-4. Return a compact list containing title, queue ID, localhost link, source links, and any missing-artifact blocker.
-5. Ask the user to publish or reject exact titles/slugs. Stop without changing queue state.
+4. During the existing page review, use [the shared editorial standard](../bloxodes-article-writing/references/editorial-standard.md) to flag generic headings, thin explanations, repeated caveats, or a poor opening/ending. Check the closest [Beebom format example](../bloxodes-article-writing/references/beebom-style-study.md) when a style decision is unclear. Mechanical QA alone does not establish editorial readiness. For new runs using the one-revision procedure, inspect the sibling `editorial-review.md` and the actual copy; missing or unapproved review is a blocker for those runs. Legacy completed articles without the note can be reviewed directly rather than rerun automatically. Report any issue for revision; do not silently rewrite or publish it.
+5. Return a compact list containing title, queue ID, preview link, source links, and any missing-artifact or editorial blocker. On the homelab, bind to `0.0.0.0` and use the actual Tailscale host and port.
+6. Ask the user to publish or reject exact titles/slugs. Stop without changing queue state.
 
 ## Homelab Artifacts
 
@@ -108,7 +113,7 @@ Do not delete local files, managed-dev article rows, media, or source provenance
 
 ## Final Receipt
 
-For review, return localhost links and ask for exact decisions.
+For review, return reachable preview links (Tailscale on the homelab) and ask for exact decisions.
 
 For publication or rejection, return:
 

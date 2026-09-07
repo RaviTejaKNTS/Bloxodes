@@ -27,14 +27,19 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Game wiki hubs that store editorial overview copy in `description_md` and link controls/tips to `roblox_universes` automation.
 - `wiki_collection_pages`, `wiki_collection_pages_view`, `wiki_collection_datasets`, `wiki_collection_items`
   - Game-specific collection pages rendered under `/wiki/<game-slug>/<collection-slug>`, with stable `code` values kept for scripts, search, and old catalog URL redirects.
-  - `wiki_collection_pages.page_type` selects `database` (reference roster) or `checklist` (finite player-completed goal) while both types share the same immutable dataset and page row.
+  - `wiki_collection_pages.page_type` selects `database` (reference roster) or `collectible` (finite player-completed goal) while both types share the same immutable dataset and page row.
   - Use `display_name` for clean navigation labels such as `Domains` or `Characters`; keep `title`/`seo_title` as full page/SEO titles. Use `item_count` for collection navigation counts instead of parsing titles.
   - `published_dataset_id` selects one immutable dataset revision. Web, mobile, tools, sitemaps, and media loaders use these database rows and R2 keys only.
 - `gta_games`, `gta_wiki_pages`, `gta_wiki_pages_view`
   - GTA game identity and wiki hub copy for `/gta/wiki/<game-slug>`, intentionally separate from `roblox_universes` and Roblox editorial tables.
+  - `gta_games.cover_image` is the wide card/social artwork and `gta_games.hero_image` is the separate square-friendly artwork beside the wiki title; published hubs require both, they must not be duplicate URLs, and both should point to `https://media.bloxodes.com/wiki/...` objects. GTA VI is retained as unpublished source data until release.
 - `gta_wiki_collection_pages`, `gta_wiki_collection_pages_view`, `gta_wiki_collection_datasets`, `gta_wiki_collection_items`
   - GTA collection page copy plus immutable published revisions and generic item fields for `/gta/wiki/<game-slug>/<collection-slug>`; media uses the shared wiki R2 worker with `gta/...` keys.
-  - `gta_wiki_collection_pages.page_type` is `database` by default and `checklist` for location/progress pages; both types use the same immutable dataset and route contract.
+  - `gta_wiki_collection_pages.page_type` is `database` by default and `collectible` for location/progress pages; both types use the same immutable dataset and route contract.
+- `red_dead_games`, `red_dead_wiki_pages`, `red_dead_wiki_pages_view`
+  - Red Dead franchise game identity and hub copy tables from `20260920000023_create_red_dead_content_platform.sql` for `/red-dead/wiki/<game-slug>`. `red_dead_games.content_kind` distinguishes games, expansions, and online scopes; `parent_game_id` supports relationships such as Undead Nightmare under Red Dead Redemption and Red Dead Online under Red Dead Redemption 2. `red_dead_games.cover_image` is the wide card/social artwork and `red_dead_games.hero_image` is the square-friendly artwork beside the wiki title; published hubs should use distinct `https://media.bloxodes.com/wiki/...` objects populated by `sync:franchise-wiki-media`.
+- `red_dead_wiki_collection_pages`, `red_dead_wiki_collection_pages_view`, `red_dead_wiki_collection_datasets`, `red_dead_wiki_collection_items`
+  - Red Dead collection page copy plus immutable published revisions and generic item fields for `/red-dead/wiki/<game-slug>/<collection-slug>`, using `red-dead/...` media keys. `page_type` is `database` by default or `collectible` for finite player-completed goals; both types share the immutable dataset and route contract. The schema is applied in managed development and consumed by the Red Dead reader/routes.
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`
@@ -104,9 +109,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `user_code_progress`
   - Used-code progress per user/game.
 - `user_checklist_progress`
-  - Checklist completion state for global `/checklists` pages and namespaced Roblox wiki collection checklists (`checklist_slug = wiki-collection:<code>`). The wiki collection endpoint is `/api/wiki/collections/progress`; signed-out UI state remains local-first.
+  - Checklist completion state for global `/checklists` pages and namespaced Roblox wiki collectible collections (`checklist_slug = wiki-collection:<code>`). The wiki collection endpoint is `/api/wiki/collections/progress`; signed-out UI state remains local-first.
 - `user_gta_collection_progress`
-  - Signed-in progress for GTA checklist collections, keyed by collection code with checked item slugs; the GTA checklist UI also keeps a local browser copy for signed-out visitors and syncs through `/api/gta/collections/progress`.
+  - Signed-in progress for GTA collectible collections, keyed by collection code with checked item slugs; the GTA checklist UI also keeps a local browser copy for signed-out visitors and syncs through `/api/gta/collections/progress`.
+- `user_red_dead_collection_progress`
+  - Signed-in progress for Red Dead collectible collections, keyed by collection code with checked item slugs; the Red Dead checklist UI keeps a local browser copy for signed-out visitors and syncs through `/api/red-dead/collections/progress`.
 - `user_quiz_progress`
   - Quiz history and seen-question state.
 - `revalidation_events`
@@ -114,7 +121,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `article_discovery_candidates`, `article_curation_runs`
   - Managed-dev raw publisher leads and the Groq/Llama batch decision audit. Candidate rows retain source name, reusable canonical source URL, headline/date, bounded headings/excerpt evidence, content hash, curation prompt version, rejection reason, model/confidence, and every promoted queue ID. Runs record repeated zero-approval degradation. Homelab automation owns these rows; production is checked through the GET-only editorial inventory endpoint.
 - `article_generation_queue`, `article_generation_artifacts`
-  - Article draft generation queue state and per-run model/source/validation audit artifacts. Source-discovered `agent_runner` work is eligible only after Groq curation and retains all grouped publisher links/evidence in `source_urls` and `source_items`; one source may support several distinct topic keys. `blocked` is retryable, `skipped` is an editorial stop, `completed` means the local article passed QA and awaits human review, `published` records a verified production URL, and `rejected` records a human decision not to publish. Blocked, published, and rejected topic keys remain deduplicated.
+  - Article draft generation queue state and per-run model/source/validation audit artifacts. Source-discovered `agent_runner` work is eligible only after Groq curation and retains all grouped publisher links/evidence in `source_urls` and `source_items`; one source may support several distinct topic keys. The code-controlled article runner owns claims and completion. `blocked` with `next_attempt_at` has bounded retry handling; exhausted stage/evidence/editorial work without that timestamp requires attention. `skipped` is an editorial stop, `completed` means reviewed local content passed managed-dev and browser QA, `published` records a verified production URL, and `rejected` records a human decision not to publish. The scheduled batch may release its own exact completed IDs under its existing publication policy; manual runs remain available for human review. Stage checkpoints, input hashes, revision budgets and model decisions live in ignored `tmp/article-pipeline/<queue-id>/`; no new database schema is introduced. Blocked, published, and rejected topic keys remain deduplicated.
 - RPC `search_site`
   - Site-wide search aggregation.
 

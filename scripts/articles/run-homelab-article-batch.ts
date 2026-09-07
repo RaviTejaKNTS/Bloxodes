@@ -5,24 +5,21 @@ import { accessSync, constants as fsConstants } from "node:fs";
 import { access } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { createClient } from "@supabase/supabase-js";
 
 import {
-  ARTICLE_DEV_ENV_KEYS,
-  ARTICLE_QUEUE_ENV_KEYS,
   resolveArticleDevCredentials,
   supabaseTarget
 } from "./article-queue-env";
 import {
-  buildCodexExecArgs,
-  buildGrokExecArgs,
-  classifyCodexFallbackReason,
-  fallbackTargetCount,
   parseCodexReasoningEffort,
   type CodexReasoningEffort
 } from "./article-writer-provider";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
+import { managedArticleEnvironment, withArticlePreview } from "./run-article-pipeline";
+import { processArticleQueueRow } from "./article-pipeline-queue";
 
 type Options = {
   apply: boolean;
@@ -37,27 +34,12 @@ type Options = {
   grokModel: string;
   maxAttempts: number;
   releaseCompleted: boolean;
+  queueId?: string;
 };
 
 type QueueRowReference = {
   id: string;
 };
-
-type ProviderProcessResult = {
-  exitCode: number;
-  output: string;
-  timedOut: boolean;
-};
-
-class ProviderProcessError extends Error {
-  constructor(
-    message: string,
-    readonly output: string,
-    readonly timedOut: boolean
-  ) {
-    super(message);
-  }
-}
 
 const MAX_BATCH_SIZE = 6;
 const BATCH_RETRY_AFTER_MINUTES = 180;
@@ -79,23 +61,24 @@ function printUsage() {
   console.log(`Usage: npm run articles:writer:batch -- [options]
 
 Options:
-  --apply                    Run Codex with a classified Grok fallback; dry-run by default
+  --apply                    Run code-controlled article stages; dry-run by default
   --limit N                  Maximum queued articles, 1-6 (default: 6)
+  --queue-id UUID            Select only this curated pending row
   --worktree PATH            Persistent Bloxodes worktree (default: current repo)
   --codex-bin PATH           Codex CLI path (default: ARTICLE_WRITER_CODEX_BIN or codex)
   --codex-model MODEL        Codex model (default: ARTICLE_WRITER_CODEX_MODEL or gpt-5.6-luna)
-  --codex-reasoning EFFORT   Codex reasoning effort (default: ARTICLE_WRITER_CODEX_REASONING_EFFORT or xhigh)
+  --codex-reasoning EFFORT   Codex reasoning effort (default: ARTICLE_WRITER_CODEX_REASONING_EFFORT or max)
   --no-grok-fallback         Disable the Grok provider fallback
   --grok-bin PATH            Grok CLI path (default: ARTICLE_WRITER_GROK_BIN or grok)
   --grok-model MODEL         Grok model (default: ARTICLE_WRITER_GROK_MODEL or grok-4.5)
   --max-attempts N           Retry threshold for blocked rows, 1-10 (default: 3)
   --timeout-minutes N        Batch timeout, 30-330 (default: 300)
-  --release-completed        Publish completed rows to production after the provider exits (default)
+  --release-completed        Publish only code-verified completed rows to production (default)
   --skip-production-release  Leave completed rows in the queue for manual release
   --help                     Show this help
 
 The batch exits without invoking a writer when no curated pending queue rows exist.
-Grok runs only after a classified Codex provider/account failure.`);
+Grok is a single-stage fallback only after a classified Codex provider/account failure; neither provider controls workers.`);
 }
 
 function parseBoolean(value: string | undefined, fallback: boolean, label: string): boolean {
@@ -141,7 +124,7 @@ function parseArgs(argv: string[]): Options {
       executableDefault(path.join(os.homedir(), ".local", "bin", "codex"), "codex"),
     codexModel: process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna",
     codexReasoningEffort: parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "xhigh"
+      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
     ),
     grokFallback: parseBoolean(process.env.ARTICLE_WRITER_GROK_FALLBACK, true, "ARTICLE_WRITER_GROK_FALLBACK"),
     grokBin:
@@ -159,6 +142,9 @@ function parseArgs(argv: string[]): Options {
       process.exit(0);
     } else if (arg === "--apply") {
       options.apply = true;
+    } else if (arg === "--queue-id") {
+      options.queueId = requireValue(argv, index++, arg);
+      if (!/^[0-9a-f-]{36}$/i.test(options.queueId)) throw new Error("--queue-id requires a UUID.");
     } else if (arg === "--limit") {
       options.limit = parseInteger(requireValue(argv, index, arg), arg, 1, MAX_BATCH_SIZE);
       index += 1;
@@ -219,12 +205,13 @@ function parseArgs(argv: string[]): Options {
 
 async function pendingQueueSelection(
   dev: { url: string; serviceRole: string },
-  limit: number
+  limit: number,
+  queueId?: string
 ): Promise<{ total: number; rows: QueueRowReference[] }> {
   const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
-  const { data, count, error } = await supabase
+  let query = supabase
     .from("article_generation_queue")
     .select("id", { count: "exact" })
     .eq("workflow_mode", "agent_runner")
@@ -233,6 +220,8 @@ async function pendingQueueSelection(
     .order("source_published_at", { ascending: false, nullsFirst: false })
     .order("created_at", { ascending: true })
     .limit(limit);
+  if (queueId) query = query.eq("id", queueId);
+  const { data, count, error } = await query;
   if (error) throw new Error(`Could not select pending article queue rows: ${error.message}`);
   return { total: count ?? 0, rows: (data ?? []) as QueueRowReference[] };
 }
@@ -256,25 +245,6 @@ async function completedQueueRowsSince(
     .order("completed_at", { ascending: true });
   if (error) throw new Error(`Could not select articles completed by the current batch: ${error.message}`);
   return (data ?? []) as QueueRowReference[];
-}
-
-async function queueActivityIdsSince(
-  dev: { url: string; serviceRole: string },
-  startedAt: string,
-  selectedIds: string[]
-): Promise<string[]> {
-  if (selectedIds.length === 0) return [];
-  const supabase = createClient(dev.url, dev.serviceRole, {
-    auth: { autoRefreshToken: false, persistSession: false }
-  });
-  const { data, error } = await supabase
-    .from("article_generation_queue")
-    .select("id")
-    .eq("workflow_mode", "agent_runner")
-    .in("id", selectedIds)
-    .gte("last_attempted_at", startedAt);
-  if (error) throw new Error(`Could not select article activity for the current batch: ${error.message}`);
-  return (data ?? []).map((row) => String(row.id));
 }
 
 async function releaseUnfinishedBatchClaims(
@@ -310,22 +280,25 @@ async function releaseUnfinishedBatchClaims(
   return data?.length ?? 0;
 }
 
-async function recoverStaleBatchClaims(
+export async function recoverStaleBatchClaims(
   dev: { url: string; serviceRole: string },
   maxAttempts: number,
-  staleMinutes: number
+  staleMinutes: number,
+  queueId?: string
 ): Promise<number> {
   const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
   const cutoff = new Date(Date.now() - staleMinutes * 60_000).toISOString();
-  const { data, error } = await supabase
+  let query = supabase
     .from("article_generation_queue")
     .select("id, attempts")
     .eq("workflow_mode", "agent_runner")
     .eq("status", "processing")
     .like("locked_by", "%-homelab%")
     .lt("locked_at", cutoff);
+  if (queueId) query = query.eq("id", queueId);
+  const { data, error } = await query;
   if (error) throw new Error(`Could not inspect stale homelab batch claims: ${error.message}`);
 
   for (const row of data ?? []) {
@@ -351,15 +324,16 @@ async function recoverStaleBatchClaims(
   return data?.length ?? 0;
 }
 
-async function requeueDueBlockedRows(
+export async function requeueDueBlockedRows(
   dev: { url: string; serviceRole: string },
-  maxAttempts: number
+  maxAttempts: number,
+  queueId?: string
 ): Promise<{ requeued: number; failed: number }> {
   const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
   const now = new Date().toISOString();
-  const { data: failedRows, error: failedError } = await supabase
+  let exhausted = supabase
     .from("article_generation_queue")
     .update({
       status: "failed",
@@ -374,8 +348,10 @@ async function requeueDueBlockedRows(
     .gte("attempts", maxAttempts)
     .lte("next_attempt_at", now)
     .select("id");
+  if (queueId) exhausted = exhausted.eq("id", queueId);
+  const { data: failedRows, error: failedError } = await exhausted;
   if (failedError) throw new Error(`Could not close exhausted blocked article rows: ${failedError.message}`);
-  const { data, error } = await supabase
+  let due = supabase
     .from("article_generation_queue")
     .update({
       status: "pending",
@@ -388,128 +364,10 @@ async function requeueDueBlockedRows(
     .lt("attempts", maxAttempts)
     .lte("next_attempt_at", now)
     .select("id");
+  if (queueId) due = due.eq("id", queueId);
+  const { data, error } = await due;
   if (error) throw new Error(`Could not requeue due blocked article rows: ${error.message}`);
   return { requeued: data?.length ?? 0, failed: failedRows?.length ?? 0 };
-}
-
-function buildPrompt(
-  targetCount: number,
-  workerName: "codex-homelab" | "grok-homelab",
-  selectedIds: string[]
-): string {
-  return `Use $bloxodes-article-workflow-runner for this unattended homelab batch.
-
-The wrapper selected these exact article_generation_queue IDs: ${selectedIds.join(", ")}. Process only these rows and no other queue rows. Do not claim, write, or update any other queue row. Process at most ${targetCount} accepted articles in this run. Mark processing rows with worker name ${workerName}. Use the runner's required research, image, and writing subagents, queueing work within this same parent run when available subagent slots are full. Continue until those accepted articles are completed, deliberately skipped, or terminally failed; do not stop after producing only a plan.
-
-Follow the complete workflow for every accepted row: processing status, research brief, parent review, separate image subagent with required media.json and at least one planned target, separate writing subagent, managed-dev import, verifier, real-browser localhost preview, and immediate final queue status. Never classify images as optional or set expected_count to zero. An article may have no body images only when the image pass searched reliable sources for every accurate, helpful target, recorded at least two distinct query variants and two checked source-page URLs per omitted target, and the parent explicitly marked every target accepted_missing. Keep final.json cover_image null and use the normal managed-dev import cover-editing process for every article; do not reuse a source-provided or pre-existing cover as the final cover. Do not invent substitute topics. Never publish to production. Production access is limited to the GET-only editorial inventory command.
-
-This process is already inside run-homelab-article-batch.ts. Do not invoke npm run articles:writer:batch or any other outer batch/writer wrapper, and do not try to acquire another article-writer lock. The outer wrapper owns the selected queue IDs, lock, and production release.
-
-For rendered browser QA, run npm run verify:article-browser -- --base-url http://localhost:<port> --file <final.json> for every reviewed final. That command uses the installed headless Chrome/Chromium executable, scrolls the real route, and checks rendered article images. An empty product/browser-agent list is not a blocker in unattended homelab mode; use this Playwright command instead. Mark a row completed only after both verify:article-finals and verify:article-browser pass.`;
-}
-
-function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
-  const childEnv: NodeJS.ProcessEnv = { ...process.env };
-  for (const key of ARTICLE_QUEUE_ENV_KEYS) delete childEnv[key];
-  for (const key of ARTICLE_DEV_ENV_KEYS) delete childEnv[key];
-  childEnv.ARTICLE_DEV_SUPABASE_URL = dev.url;
-  childEnv.ARTICLE_DEV_SUPABASE_SERVICE_ROLE = dev.serviceRole;
-  childEnv.SUPABASE_URL = dev.url;
-  childEnv.SUPABASE_SERVICE_ROLE = dev.serviceRole;
-  childEnv.ARTICLE_WRITER_DEV_ONLY = "true";
-  childEnv.ARTICLE_WRITER_REGENERATE_COVERS = "true";
-  childEnv.ARTICLE_WRITER_BATCH_CONTEXT = "1";
-  return childEnv;
-}
-
-async function runProviderProcess(params: {
-  bin: string;
-  args: string[];
-  label: string;
-  options: Options;
-  dev: { url: string; serviceRole: string };
-}): Promise<ProviderProcessResult> {
-  return new Promise((resolve, reject) => {
-    const child = spawn(params.bin, params.args, {
-      cwd: params.options.worktree,
-      env: childEnvironment(params.dev),
-      stdio: ["ignore", "pipe", "pipe"]
-    });
-    let output = "";
-    let timedOut = false;
-    const capture = (chunk: Buffer, stream: NodeJS.WriteStream) => {
-      stream.write(chunk);
-      output += chunk.toString("utf8");
-      if (output.length > 1_000_000) output = output.slice(-1_000_000);
-    };
-    child.stdout.on("data", (chunk: Buffer) => capture(chunk, process.stdout));
-    child.stderr.on("data", (chunk: Buffer) => capture(chunk, process.stderr));
-    child.on("error", (error) => {
-      reject(new ProviderProcessError(`${params.label} could not start: ${error.message}`, `${output}\n${error.message}`, false));
-    });
-    const timeout = setTimeout(() => {
-      timedOut = true;
-      child.kill("SIGTERM");
-      setTimeout(() => child.kill("SIGKILL"), 15_000).unref();
-    }, params.options.timeoutMinutes * 60_000);
-    timeout.unref();
-    child.on("close", (code) => {
-      clearTimeout(timeout);
-      resolve({ exitCode: code ?? 1, output, timedOut });
-    });
-  });
-}
-
-async function runCodex(
-  options: Options,
-  targetCount: number,
-  dev: { url: string; serviceRole: string },
-  selectedIds: string[]
-): Promise<void> {
-  const result = await runProviderProcess({
-    bin: options.codexBin,
-    args: buildCodexExecArgs({
-      worktree: options.worktree,
-      model: options.codexModel,
-      reasoningEffort: options.codexReasoningEffort,
-      prompt: buildPrompt(targetCount, "codex-homelab", selectedIds)
-    }),
-    label: "Codex",
-    options,
-    dev
-  });
-  if (result.timedOut) {
-    throw new ProviderProcessError(`Codex batch exceeded ${options.timeoutMinutes} minutes.`, result.output, true);
-  }
-  if (result.exitCode !== 0) {
-    throw new ProviderProcessError(`Codex batch exited with code ${result.exitCode}.`, result.output, false);
-  }
-}
-
-async function runGrok(
-  options: Options,
-  targetCount: number,
-  dev: { url: string; serviceRole: string },
-  selectedIds: string[]
-): Promise<void> {
-  const result = await runProviderProcess({
-    bin: options.grokBin,
-    args: buildGrokExecArgs({
-      worktree: options.worktree,
-      model: options.grokModel,
-      prompt: buildPrompt(targetCount, "grok-homelab", selectedIds),
-      maxTurns: 400
-    }),
-    label: "Grok",
-    options,
-    dev
-  });
-  if (result.timedOut) {
-    throw new ProviderProcessError(`Grok batch exceeded ${options.timeoutMinutes} minutes.`, result.output, true);
-  }
-  if (result.exitCode !== 0) {
-    throw new ProviderProcessError(`Grok batch exited with code ${result.exitCode}.`, result.output, false);
-  }
 }
 
 async function releaseCompletedArticles(options: Options, completedRows: QueueRowReference[]): Promise<void> {
@@ -538,93 +396,93 @@ async function main() {
   }
   const options = parseArgs(process.argv.slice(2));
   if (path.isAbsolute(options.codexBin)) await access(options.codexBin, fsConstants.X_OK);
-  if (path.isAbsolute(options.grokBin)) await access(options.grokBin, fsConstants.X_OK);
+  if (options.grokFallback && path.isAbsolute(options.grokBin)) await access(options.grokBin, fsConstants.X_OK);
   const dev = resolveArticleDevCredentials();
-  if (options.apply) {
-    const staleClaims = await recoverStaleBatchClaims(dev, options.maxAttempts, options.timeoutMinutes + 30);
-    if (staleClaims) console.log(`Recovered ${staleClaims} stale homelab batch claim(s).`);
-    const retryResult = await requeueDueBlockedRows(dev, options.maxAttempts);
-    if (retryResult.requeued) console.log(`Returned ${retryResult.requeued} due blocked article row(s) to pending.`);
-    if (retryResult.failed) console.log(`Closed ${retryResult.failed} blocked article row(s) after max attempts.`);
-  }
-  const selection = await pendingQueueSelection(dev, options.limit);
-  const selectedIds = selection.rows.map((row) => row.id);
-  const targetCount = selectedIds.length;
-  console.log(
-    `Managed dev queue: ${selection.total} pending at ${supabaseTarget(dev.url)}; batch target ${targetCount}.` +
-      (selectedIds.length ? ` Selected IDs: ${selectedIds.join(", ")}.` : "")
-  );
-
-  if (targetCount === 0) {
-    console.log("No curated pending article rows; no writer was started.");
-    return;
-  }
-  if (!options.apply) {
-    console.log(
-      `Dry run: would start Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
-    );
-    console.log(
-      options.grokFallback
-        ? `Fallback: ${options.grokModel} after a classified Codex provider/account failure.`
-        : "Fallback: disabled."
-    );
-    console.log(
-      options.releaseCompleted
-        ? "Post-provider release: enabled for the exact completed IDs selected by this batch."
-        : "Post-provider release: disabled; completed rows remain queued for manual release."
-    );
-    return;
-  }
-
-  const releaseLock = await acquireAgentWorkLock(options.worktree, "article-batch");
-  if (!releaseLock) {
-    console.log(`Another article writer is active on ${os.hostname()}; this batch was skipped without overlap.`);
+  const releaseLock = options.apply ? await acquireAgentWorkLock(options.worktree, "article-batch") : null;
+  if (options.apply && !releaseLock) {
+    console.log(`Another article/wiki writer is active on ${os.hostname()}; no queue state changed.`);
     return;
   }
   try {
+    if (options.apply) {
+      const staleClaims = await recoverStaleBatchClaims(dev, options.maxAttempts, options.timeoutMinutes + 30, options.queueId);
+      if (staleClaims) console.log(`Recovered ${staleClaims} stale homelab batch claim(s).`);
+      const retryResult = await requeueDueBlockedRows(dev, options.maxAttempts, options.queueId);
+      if (retryResult.requeued) console.log(`Returned ${retryResult.requeued} due blocked article row(s) to pending.`);
+      if (retryResult.failed) console.log(`Closed ${retryResult.failed} blocked article row(s) after max attempts.`);
+    }
+    const selection = await pendingQueueSelection(dev, options.limit, options.queueId);
+    const selectedIds = selection.rows.map((row) => row.id);
+    const targetCount = selectedIds.length;
     console.log(
-      `Starting Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
+      `Managed dev queue: ${selection.total} pending at ${supabaseTarget(dev.url)}; batch target ${targetCount}.` +
+        (selectedIds.length ? ` Selected IDs: ${selectedIds.join(", ")}.` : "")
+    );
+
+    if (targetCount === 0) {
+      console.log("No curated pending article rows; no writer was started.");
+      return;
+    }
+    if (!options.apply) {
+      console.log(
+        `Dry run: would start Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
+      );
+      console.log(
+        options.grokFallback
+          ? `Fallback: ${options.grokModel} after a classified Codex provider/account failure.`
+          : "Fallback: disabled."
+      );
+      console.log(
+        options.releaseCompleted
+          ? "Post-verification release: enabled for the exact completed IDs selected by this batch."
+          : "Post-verification release: disabled; completed rows remain queued for manual release."
+      );
+      return;
+    }
+
+    console.log(
+      `Starting code-controlled pipeline with ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
     );
     const batchStartedAt = new Date().toISOString();
     try {
       let providerError: unknown = null;
+      const verifiedIds: string[] = [];
+      const deadline = Date.now() + options.timeoutMinutes * 60_000;
+      const controller = new AbortController();
+      const stop = () => controller.abort();
+      process.once("SIGTERM", stop); process.once("SIGINT", stop);
+      const stageMinutes = Number(process.env.ARTICLE_PIPELINE_STAGE_TIMEOUT_MINUTES ?? "45");
+      if (!Number.isFinite(stageMinutes) || stageMinutes < 1 || stageMinutes > 120) throw new Error("Stage timeout must be 1-120 minutes.");
+      const env = managedArticleEnvironment(dev);
       try {
-        await runCodex(options, targetCount, dev, selectedIds);
-      } catch (error) {
-        const processError = error instanceof ProviderProcessError ? error : null;
-        const fallbackReason = processError && !processError.timedOut
-          ? classifyCodexFallbackReason(`${processError.message}\n${processError.output}`)
-          : null;
-        if (!options.grokFallback || !fallbackReason) {
-          providerError = error;
-        } else {
-          const activityIds = await queueActivityIdsSince(dev, batchStartedAt, selectedIds);
-          const untouchedIds = selectedIds.filter((id) => !activityIds.includes(id));
-          const grokTarget = Math.min(fallbackTargetCount(targetCount, activityIds.length), untouchedIds.length);
-          if (grokTarget === 0) {
-            providerError = new Error(
-              `Codex failed because of ${fallbackReason}, but all ${targetCount} batch slot(s) already show queue activity; ` +
-                "Grok fallback was withheld to avoid overlapping partial work."
-            );
-          } else {
-            console.warn(
-              `Codex provider failure classified as ${fallbackReason}; starting one Grok fallback for up to ${grokTarget} untouched article(s).`
-            );
+        await withArticlePreview(options.worktree, env, process.env.ARTICLE_PIPELINE_PREVIEW_BASE_URL, async baseUrl => {
+          for (const id of selectedIds) {
+            if (controller.signal.aborted || Date.now() >= deadline) break;
             try {
-              await runGrok(options, grokTarget, dev, untouchedIds.slice(0, grokTarget));
-            } catch (fallbackError) {
-              providerError = fallbackError;
-            }
+              const result = await processArticleQueueRow(dev, id, {
+                worktree: options.worktree, runDir: path.join(options.worktree, "tmp/article-pipeline", id), env, baseUrl,
+                deadline, stageTimeoutMs: stageMinutes * 60_000, signal: controller.signal,
+                codexBin: options.codexBin, model: options.codexModel, reasoning: options.codexReasoningEffort,
+                grokFallback: options.grokFallback, grokBin: options.grokBin, grokModel: options.grokModel
+              });
+              if (result?.status === "completed") verifiedIds.push(id);
+              if (result?.blockerKind === "provider") {
+                providerError = new Error(result.feedback);
+                console.warn("Provider access failed; remaining selected articles stay pending.");
+                break;
+              }
+            } catch (error) { providerError = error; console.error(errorMessage(error)); }
           }
-        }
-      }
-      const completedRows = await completedQueueRowsSince(dev, batchStartedAt, selectedIds);
+        });
+        if (controller.signal.aborted) providerError = new Error("Article batch stopped by external request; saved stages retained.");
+      } finally { process.off("SIGTERM", stop); process.off("SIGINT", stop); }
+      const completedRows = await completedQueueRowsSince(dev, batchStartedAt, verifiedIds);
       if (completedRows.length === 0) {
         if (providerError) throw providerError;
-        throw new Error("DEGRADED ARTICLE WRITER: A non-empty provider batch completed zero managed-dev articles.");
+        throw new Error("DEGRADED ARTICLE WRITER: A non-empty batch completed zero verified managed-dev articles.");
       }
       console.log(`Article writer completed ${completedRows.length} managed-dev article(s).`);
-      if (options.releaseCompleted) await releaseCompletedArticles(options, completedRows);
+      if (options.releaseCompleted && !controller.signal.aborted) await releaseCompletedArticles(options, completedRows);
       else console.log("Automatic production release is disabled for this batch; completed rows remain available for review.");
       if (providerError) throw providerError;
     } catch (error) {
@@ -640,11 +498,11 @@ async function main() {
       throw error;
     }
   } finally {
-    await releaseLock();
+    if (releaseLock) await releaseLock();
   }
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch((error) => {
   console.error(error instanceof Error ? error.message : error);
   process.exit(1);
 });

@@ -5,6 +5,10 @@ description: Write one Bloxodes article final.json from an approved brief.md, in
 
 # Bloxodes Article Writing
 
+## Code-controlled execution
+
+When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. For a code-controlled writing invocation, read [the focused writing contract](references/pipeline-writing.md), the shared editorial standard, and the closest original example, then perform that contract. The interactive upload/import instructions below are not part of your stage. Specialized tech/tier skills still supply their additional page-type contracts.
+
 Use this after `brief.md` is approved. Do not use this for first-pass research; use `bloxodes-article-research`.
 
 Use this for one article only. Do not handle batches here; use `bloxodes-article-workflow-runner`.
@@ -15,57 +19,22 @@ Use this for one article only. Do not handle batches here; use `bloxodes-article
 tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   brief.md
   final.json
+  editorial-review.md  # parent-owned in the workflow; writer-owned for standalone work
 ```
 
 ## Before Writing
 
 Read the approved `brief.md`.
 
-If the brief is missing, weak, unapproved, or has unresolved source gaps, stop and ask for the article research step to be fixed first.
+If the brief is missing, weak, unapproved, or has unresolved central source gaps, return the exact missing requirement for brief correction. Use the reader-facing writing packet first; consult its private evidence notes for claim checks. A source being community-authored is not itself a reason to qualify every supported fact. For older approved briefs, separate facts, actionable uncertainties, and private notes while reading; do not restart research merely to reformat them.
 
 Always read sibling `media.json`. Start writing only after the parent approved image readiness. Insert every verified hosted image beneath its matching `placement_heading`; do not replace it with prose, a YouTube embed, a lead-source hotlink, or an unrelated generic image. An image-free article is allowed only when every planned target is `accepted_missing` because no reliable, accurate, helpful match was found.
 
+Before accepting a how-to brief, check its procedure proof through the final result. If it gives only prerequisites and then says to follow unknown quest objectives, return that exact central gap to the parent. Prior approval does not require writing an incomplete walkthrough. Use the approved facts to explain the task in ordinary player language; do not turn private terms such as “gate” or “reward interaction” into the article's voice.
+
 ## Writing Rules
 
-**Voice & tone (Bloxodes house voice)**
-- Write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the change, action, problem, or answer. No mood-setting, no suspense, no warm-up lines, no "Welcome to" or "In this game".
-- Read the room. Keep the wit lighter, or drop it, when the reader is stressed: error fixes, "won't open", crashes, anything troubleshooting. Help first.
-- Keep functional slots clean. Steps, table cells, and labels stay plain and direct. Let the playful voice live in intros, explanations, and blurbs.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place. Also ban vague filler like "this is a big change" or "this matters".
-
-**Length and density**
-- Every sentence must add value. No padding, no repetition, ever.
-- If 300 words covers it fully, stop at 300. There's no minimum or maximum: the only test is whether more words add real depth.
-- Never restate something already said elsewhere in the article, even in different phrasing.
-- However, do not skip on any info. Do not asssume people already know something, make it clear for everyone to understand.
-- Before drafting, check the competing pages for the target topic and make a materially better page. One-up them with better SEO, SEO-friendly headings, more information that is actually useful, better readability, simpler explanations, and a clean flow readers can follow from start to finish. If useful information is missing, research and add it; do not add filler merely to make the article longer.
-
-**Readability and formatting**
-- This sits on top of the value rule: every sentence must add value, and every sentence must also be easy to read.
-- One idea per paragraph. Each paragraph covers a single point clearly, then stops. Never write a wall of text.
-- Keep paragraphs short: aim for 1-3 short sentences. If a paragraph is growing past that, split it into two.
-- Write short, plain sentences. Prefer one simple sentence over one long sentence with commas and "and"s. If a sentence runs long, break it in two.
-- Use everyday words a younger Roblox player understands. Explain any necessary technical term in plain language right where it appears.
-- Keep list and step items short: one action or fact per item, ideally one line. Never cram a paragraph into a single bullet or numbered step.
-- If a step needs a little detail, use a short bolded lead (the action) followed by one short sentence of explanation, not a dense block.
-- Put each distinct action on its own step. Do not chain several actions into one point.
-- Leave white space between ideas so the page is easy to scan, not a dense block of text.
-
-**Structure**
-- Follow the provided outline, but adjust it if a different flow serves the reader better.
-- Use fewer headings so the article stays scannable. If 2 headings can help the user, we can just use 2.
-- However keep each section also small, do not cramp a lot of info into one section making it hard to read.
-- Headings should read like sentences and reveal the core info, not tease it. Keep them short.
-- Each section must build on the last, not re-explain it.
-- One structured element per section, never a table and a list together. Keep it simple.
-- Use tables and lists only for core, structured info (stats, steps, comparisons). Otherwise default to plain prose.
-- Use numbered lists for step-by-step instructions.
+Read and apply [the shared editorial standard](references/editorial-standard.md) before drafting. It owns audience, openings, headings, structure, depth, voice, uncertainty, dates, links, and editorial review. Read [the Beebom Roblox style study](references/beebom-style-study.md) and the closest [original example](references/editorial-examples.md) when choosing the article shape. Use specific search-intent headings and connected explanations, not just a compact feature outline. Apply these alongside the operational rules below.
 
 **Preferred article media**
 - Insert every verified useful image from the mandatory image pass. A YouTube embed may supplement those images when the brief marks it as a perfect match.
@@ -84,6 +53,8 @@ Always read sibling `media.json`. Start writing only after the parent approved i
 
 Use `bloxodes-tier-list-writing` instead of this skill when the article's primary job is ranking a complete item set. It owns the visual overview and matching per-tier detail-table contract.
 
+The image-selection, readiness, and Storage rules below describe the approved media contract. In the writing stage, reuse the completed manifest and hosted files; do not repeat source discovery, downloads, uploads, or provenance writes merely because these rules are present. Return an actual media defect to the parent/image agent. The parent owns import and rendered verification after editorial acceptance.
+
 **Source-provided article images**
 - Actively inspect the approved lead source for genuine gameplay screenshots, item or character panels, maps, menus, raid screens, and collection-style images. Use them when they explain an article fact, step, item, or table row better than prose alone.
 - Prefer genuine in-game captures over a publisher's custom illustrations or branded composites. Clean, exact gameplay screenshots from credible guide or wiki pages are usable when the approved manifest records their provenance. Flag any explicit attribution or license condition for parent review.
@@ -92,7 +63,7 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 - Normal articles usually use one to three body images. Complete visual sets may use more.
 - Write each hosted image as `![useful factual alt text](<Supabase public URL>)` beside the matching explanation. Use the exact public URL returned for the current environment, never the original source URL.
 - Keep the source article URL in `sources`. Keep per-image provenance in `article_source_images`; do not mention competitors or image collection in public copy.
-- Treat media like tables and lists: use the one structured element that best explains the point instead of stacking several versions of the same information.
+- Combine images, tables, lists, and prose when each explains a distinct useful detail. Avoid redundant presentations of the same information.
 
 **Required visual sets**
 - For location guides, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, catalog entries, items, characters, enemies, rewards, abilities, evolutions, loadouts, or another visual collection, gather a useful matching image set. This is a required research and writing step, not an optional enhancement.
@@ -128,14 +99,14 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 
 **How-to-fix and troubleshooting articles**
 - Give each fix its own `###` (H3) heading, grouped under one `##` (H2) like "How to fix it". This beats a long numbered list with nested sub-bullets, which gets hard to scan.
-- The H3 is a short action ("Restart your device", "Update your graphics drivers"). Under it, write 1-3 short sentences, or a short numbered list only if the fix has ordered steps.
+- The H3 is a short action ("Restart your device", "Update your graphics drivers"). Under it, explain when the fix helps, give the procedure, and say what result to check. Use a numbered list when the fix has ordered steps; do not impose a sentence-count ceiling.
 - Do not stack deep bullet hierarchies (bullets inside bullets inside steps). Keep each fix flat and simple.
 - Order fixes easiest-first.
 - Never repeat the same fix, cause, or explanation across sections. Each H3 covers one distinct thing. If two fixes overlap, merge them.
 - Keep one short intro before the fixes, and an optional short closing section (e.g. when the problem is on Roblox's side and waiting is the answer). Do not pad with a separate "what is this error" section unless it adds real value.
 
 **Accuracy (never ship wrong info)**
-- Verify every platform claim before writing. Do real research; do not guess menu paths, toggles, limits, or behavior. If a label or path is uncertain, keep the wording generic instead of inventing specifics.
+- Check platform claims against the approved evidence before writing; do not guess menu paths, toggles, limits, or behavior. Return an essential uncertain label or path for focused research correction; do not replace a necessary instruction with unusably generic wording.
 - Roblox experiences cannot be played in a web browser. The in-browser player was discontinued; roblox.com only launches the installed app. Never tell readers to "play in the browser" or "try the browser instead of the app" as a fix.
 - Do not suggest actions that are not actually possible (e.g. disabling a system that cannot be disabled). Do not claim a fix works for a platform you have not verified it on.
 - When unsure whether something is true, leave it out rather than risk misinformation.
@@ -144,28 +115,32 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 - Include the game name in the title and slug. Use "Roblox" when it aids search or clarity.
 
 **Gaps and links**
-- If info is missing, run a fan-out research query and fill it, never leave a gap.
-- Add at least 2 relevant internal links to existing Bloxodes pages. Use the same-game articles and related pages the brief listed; if the brief has none, query the production DB for other published articles on the same `universe_id` before writing.
+- Return essential factual gaps to the parent for targeted research correction. If evidence remains unavailable, request a narrower promise or retain a blocker; omit nonessential unknowns without repeated disclaimers. Do not independently restart research from the writing stage.
+- Use relevant internal-link candidates from the brief. If none were supplied, use the GET-only production editorial inventory for same-game pages. Link where it helps; there is no quota and no direct production database query.
 - Link only to pages that actually exist. Use real, current slugs (article links are `/articles/<slug>`). Never invent a slug or link to a page you have not confirmed exists.
 - Weave each internal link naturally, mid-sentence, as part of the flow. No "read this" or similar call-outs. Pick anchor text that matches what the reader gets, and place links where they genuinely help (related mechanic, income, next goal), not as filler.
 
 **What never appears in copy**
-- No mentions of research, sources, competitors, databases, or internal notes.
-- No self-referential words: "this article," "this guide," "this page," "this catalog," "this dataset," "this database." Just talk about the game.
+- Keep research processes, competitor comparisons, database checks, and internal notes out of public copy. Useful developer attribution and verified official links are allowed.
+- Brief article/guide orientation is allowed when useful; avoid self-description that replaces player help.
 
-**Final pass**
-- Re-read as a reader, not the writer. Cut anything that doesn't earn its place. Confirm the article actually solves what the reader came for.
-- If non-cover media is present, confirm it is useful. Each video must be a perfect match, and each hosted image path, placement, and alt text must help the reader. Remove media that does not help.
+## Draft and One Editorial Revision
+
+Follow [the editorial review procedure](references/editorial-review.md). In a parent workflow, first return the draft for combined feedback, then revise the actual `final.json` once in the same writing agent. For standalone writing, perform the review and revision yourself. Keep the configured model; Luna does not need a separate editor model. Save the short review note beside the final, outside public JSON.
+
+Before drafting, read the one or two [before/after examples](references/editorial-examples.md#turning-research-into-an-explanation) selected in the handoff. They demonstrate transformations, not required wording or gameplay facts. Keep a brief mental map of the player's goal, prerequisites, next obstacles, and result. Choose prose, steps, and tables to explain that map without repeating it in every format.
+
+Reuse approved facts and images during revision. Return genuine evidence gaps to the parent; do not browse again to fix phrasing. Preserve useful approved media, and reconcile placement headings with the parent if the structure changes.
 
 ## Writing and Field Jobs
 
-Write `final.json` only in the content workspace. Approved Supabase Storage uploads and `article_source_images` provenance writes are allowed, but do not create repository image assets.
+Write `final.json` and the editorial review note only in the content workspace. The parent owns the note in a parent workflow. Approved Supabase Storage uploads and `article_source_images` provenance writes are allowed, but do not create repository image assets.
 
 - `title`: State the exact reader question, action, story, or guide promise in human search language. Include the game name for game-specific articles.
 - `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
 - `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
 - `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. Insert every approved `media.json` image under its matching heading or table row. Use no body images only when all planned entries are explicitly `accepted_missing`.
-- `faq_json`: Add 2-4 useful questions only when they cover follow-up points not already answered in the article. Keep answers short, clear, and source-backed. Use `[]` if FAQs would repeat the body.
+- `faq_json`: Optional, with no question quota. This field renders a visible FAQ section as well as structured data: it is the sole home for FAQs. Never also put an FAQ section or the same questions in `content_md`. Keep a question only if its source-backed answer adds useful information not already answered in the body; otherwise use `[]`. Search wording alone does not make a repeated answer useful.
 - `cover_image`: Use an existing Bloxodes Supabase Storage public URL when a cover is already hosted; otherwise use null so the import path can generate and upload one.
 - `author_id`: Set when known, or let the import path assign it if that is the project flow.
 - `universe_id`: Set whenever the article belongs to one Roblox game and that game has a `roblox_universes` row. Look it up (by name/slug, or reuse the id other same-game articles use) instead of leaving it null. Only leave it null if no universe row exists for the game.
@@ -198,4 +173,4 @@ For game-linked articles, use the article topic and game name for the slug. Do n
 
 If the article topic is about some specific roblox game, then you must include universe id.
 
-Before returning final.json, run or mentally apply the public-copy rules: avoid self-referential phrases like "this article/guide/page/catalog", avoid "row-by-row/full reference" framing, avoid "not just" contrast filler, and write the copy as direct player help.
+Parse-check JSON on each handoff. Identify the first return as a draft awaiting editorial review; after the one revision, return the revised file and concrete changes for parent acceptance. Do not claim editorial approval or managed-development completion merely because the file parses.

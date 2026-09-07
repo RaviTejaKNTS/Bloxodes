@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Collection Suggestions"
+  short_description: "Suggest franchise collection pages"
+  default_prompt: "Use $bloxodes-franchise-game-collection-suggestions to find durable collection opportunities for one approved non-Roblox title. Check route overlap, source coverage, mode boundaries, useful fields, and database versus checklist fit."

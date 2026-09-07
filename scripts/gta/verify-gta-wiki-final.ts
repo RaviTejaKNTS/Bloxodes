@@ -131,6 +131,14 @@ async function main() {
   if (!game.title.trim() || !wiki.title.trim() || !wiki.description_md?.trim()) {
     throw new Error("game.json and final.json require titles; final.json also requires description_md.");
   }
+  const coverImage = game.cover_image?.trim() ?? "";
+  const heroImage = game.hero_image?.trim() ?? "";
+  if (!coverImage || !heroImage) {
+    throw new Error("GTA game.json requires both cover_image and hero_image for a released wiki hub.");
+  }
+  if (coverImage === heroImage) {
+    throw new Error("GTA game.json cover_image and hero_image must be separate image URLs.");
+  }
   validateWikiControlsJson(wiki.controls_json ?? [], "GTA final.json controls_json");
   await run("npm", ["run", "content:check-copy", "--", finalFile]);
   const gameId = await saveGame(game);

@@ -5,6 +5,10 @@ description: Gather, host, map, and verify useful images for every approved Blox
 
 # Bloxodes Article Images
 
+## Code-controlled execution
+
+When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+
 Use this after article research and parent brief approval for every article. The image pass is mandatory even when the article is not a location guide or collection. Do not write `final.json`.
 
 ## Workspace
@@ -21,7 +25,7 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 2. Define at least one useful visual target. The image pass can never start with an expected count of zero.
 3. For named locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, complete rankings, or other visual sets, list every distinct target that images would help identify. For a normal article, list the one to three highest-value screenshots, UI states, items, characters, or steps that would make the answer clearer. For an opinionated best-games article, every selected game is a distinct target: plan one useful landscape gameplay thumbnail per game section, in the approved order.
 4. Do not let easy-to-find images define the expected count. The approved game selection defines the expected thumbnail count.
-5. Use one stable entry ID and one planned article heading per target.
+5. Use one stable entry ID and one planned article heading per target. Follow the approved reader-focused outline. When editorial review renames or regroups a heading, update `placement_heading` to match; do not keep an awkward section just to preserve an old media label. Existing-article refreshes may reuse verified matching hosted images after URL and visual readback.
 
 For example, a five-location guide starts with five entries even if the lead source has no reusable images.
 

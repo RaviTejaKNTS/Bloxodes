@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Collection Data"
+  short_description: "Prepare franchise collection data"
+  default_prompt: "Use $bloxodes-franchise-game-collection-data after brief approval to prepare one v2 collection dataset and runtime manifest with source-backed rows, sections, display metadata, pageType, image planning, and readiness checks."

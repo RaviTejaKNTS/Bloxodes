@@ -44,7 +44,7 @@ async function main() {
   const finalJson = path.join(options.workspace, "final.json");
   const final = JSON.parse(await readFile(finalJson, "utf8")) as { title?: string; display_name?: string };
   const manifestDocument = JSON.parse(await readFile(manifest, "utf8")) as { collection?: { pageType?: string } };
-  const expectedPageType = manifestDocument.collection?.pageType === "checklist" ? "checklist" : "database";
+  const expectedPageType = ["collectible", "checklist"].includes(String(manifestDocument.collection?.pageType)) ? "collectible" : "database";
   await run("npm", ["run", "content:check-copy", "--", finalJson]);
   await run("npm", ["run", "audit:game-collection-datasets:v2", "--", "--game", options.game, "--collection", options.collection, "--file", dataset]);
   const checkArgs = ["run", "check:game-collection-data", "--", "--game", options.game, "--collection", options.collection, "--file", dataset, "--final-json", finalJson];
@@ -71,9 +71,9 @@ async function main() {
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   if (response.status !== 200 || (expectedTitle && !html.includes(expectedTitle))) throw new Error(`${url} failed route verification (HTTP ${response.status}).`);
-  if (expectedPageType === "checklist") {
+  if (expectedPageType === "collectible") {
     const pageTwo = await fetch(`${url}/page/2`, { redirect: "manual" });
-    if (pageTwo.status !== 404) throw new Error(`${url}/page/2 should return 404 for a checklist.`);
+    if (pageTwo.status !== 404) throw new Error(`${url}/page/2 should return 404 for a collectible collection.`);
   }
   console.log(`Verified GTA collection: ${url}`);
 }

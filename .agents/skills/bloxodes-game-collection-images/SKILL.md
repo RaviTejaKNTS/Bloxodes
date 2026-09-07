@@ -34,7 +34,7 @@ npm run check:game-collection-data -- --game <game-slug> --collection <collectio
 
 Do not save collection data or staging media under `data/` or `apps/web/public/`.
 
-For `checklist` collections, prefer an exact location, route, quest step, or collectible view that helps a player recognize the goal. Do not switch a checklist to text-only merely because a generic item thumbnail is easier to find; record attempted sources and obtain parent approval for any accepted gap.
+For `collectible` collections, prefer an exact location, route, quest step, or collectible view that helps a player recognize the goal. Do not switch a collectible to text-only merely because a generic item thumbnail is easier to find; record attempted sources and obtain parent approval for any accepted gap.
 
 10. Update `brief.md` with image readiness.
 
@@ -45,7 +45,7 @@ Add this section to `brief.md`:
 ```text
 Image readiness:
 - Image field:
-- Page type (`database` or `checklist`):
+- Page type (`database` or `collectible`):
 - Expected image count:
 - Images found:
 - Images missing:

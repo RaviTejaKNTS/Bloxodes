@@ -84,6 +84,24 @@ Do not start with one enormous `/gta/wiki/gta-5/collectibles` dataset. Location-
 | Under the Bridge | `under-the-bridge` | Bridge location, approach direction, recommended aircraft, clearance notes, and completion requirement. |
 | Knife Flights | `knife-flights` | Building gap, approach direction, recommended aircraft, difficulty notes, and completion requirement. |
 
+### Managed-development completion (2026-09-03)
+
+The ten remaining checklist-style collections are complete and published in managed development. Production remains intentionally unchanged.
+
+| Collection | Rows | Route |
+| --- | ---: | --- |
+| Spaceship Parts | 50 | `/gta/wiki/gta-5/spaceship-parts` |
+| Submarine Pieces | 30 | `/gta/wiki/gta-5/submarine-pieces` |
+| Nuclear Waste | 30 | `/gta/wiki/gta-5/nuclear-waste` |
+| Epsilon Tracts | 10 | `/gta/wiki/gta-5/epsilon-tracts` |
+| Peyote Plants | 27 | `/gta/wiki/gta-5/peyote-plants` |
+| Monkey Mosaics | 50 | `/gta/wiki/gta-5/monkey-mosaics` |
+| Hidden Packages | 15 | `/gta/wiki/gta-5/hidden-packages` |
+| Stunt Jumps | 50 | `/gta/wiki/gta-5/stunt-jumps` |
+| Under the Bridge | 50 | `/gta/wiki/gta-5/under-the-bridge` |
+| Knife Flights | 15 | `/gta/wiki/gta-5/knife-flights` |
+| **Total** | **327** | |
+
 An optional `/gta/wiki/gta-5/collectibles` page can come later as a purpose-built index that introduces the collectible categories and links to these routes. It should not duplicate every collectible row. The current wiki hub can perform that job until the number of collectible pages makes a separate index useful.
 
 Do not include GTA Online-only sets such as Action Figures, Playing Cards, Movie Props, LD Organics Products, or time-limited event collectibles in the GTA 5 Story Mode queue.

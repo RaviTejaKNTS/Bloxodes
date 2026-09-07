@@ -1,3 +1,4 @@
+import { ARTICLE_EDITORIAL_STANDARD } from "../shared/article-editorial-standard";
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -184,15 +185,8 @@ Boundaries:
 - After you write final.json, Codex may review and directly fix tiny non-content metadata or JSON issues such as slug/source URL/tag/schema/ID/null-field mistakes. Codex should not rewrite your body copy, FAQ copy, structure, tone, or substantive claims; those changes should come back to you as feedback.
 
 Writing requirements:
-- Write like a Roblox player or platform helper explaining the topic to another player.
-- Keep the copy simple, warm, concrete, and human friendly.
-- Avoid generic page filler, AI-ish contrast phrases, hype words, and textbook voice.
-- Open on the real topic, action, problem, or answer. No warm-up lines.
-- Every sentence must add value. Cut repetition.
-- Keep paragraphs short and easy to scan.
-- Do not mention sources, competitors, research, databases, internal notes, Bloxodes, or page usage in public copy.
-- Do not use self-referential phrases like "this article", "this guide", or "this page".
-- Do not use em dashes.
+${ARTICLE_EDITORIAL_STANDARD}
+
 - Use q/a keys for faq_json entries, not question/answer.
 - Do not include seo_title. The articles table does not use it.
 - Keep sources as the URLs that support important facts. Do not pad them.
@@ -203,7 +197,7 @@ Required second pass before you stop:
 1. Reopen the final.json you wrote.
 2. Check that JSON parses.
 3. Revise once for human-friendly voice: specific, easy to read, not generic, and genuinely useful.
-4. Check again for no source/research/database/internal/page wording, no self-referential article/page/guide phrasing, no em dashes, no hype words, correct faq_json keys, useful links, and valid slugs.
+4. Review the opening, heading map, topic grouping, practical completeness, factual status, US dates/times, useful links, and nonredundant FAQs. Keep private evidence logs out of copy; allow useful developer attribution and brief orientation.
 5. Return a short note with the final.json path and any remaining risk.`;
 }
 
@@ -284,11 +278,11 @@ function validateFinalJson(file: string, options: CliOptions, finalJson: Article
   }
 
   for (const copy of collectPublicCopy(finalJson)) {
-    if (/[\u2013\u2014]/.test(copy)) errors.push("public copy contains an en dash or em dash");
-    if (/\b(research|source gathering|sources|competitors?|database|internal notes?|Bloxodes)\b/i.test(copy)) {
-      errors.push("public copy mentions research, source gathering, sources, competitors, database, internal notes, or Bloxodes");
+    if (/\u2014/.test(copy)) errors.push("public copy contains an em dash");
+    if (/\b(source gathering|database checks?|internal notes?)\b/i.test(copy)) {
+      errors.push("public copy exposes source gathering, database checks, or internal notes");
     }
-    if (/\bthis\s+(article|guide|page|catalog|dataset|database)\b/i.test(copy)) {
+    if (/\bthis\s+(catalog|dataset|database)\b/i.test(copy)) {
       errors.push("public copy is self-referential");
     }
     if (/\bnot\s+(just|only)\b/i.test(copy)) errors.push("public copy contains AI-ish contrast filler");
@@ -309,7 +303,7 @@ async function main() {
   const finalJson = path.join(articleDir, "final.json");
   const promptOut = resolveRepoPath(options.promptOut ?? path.join(articleDir, "claude-writing-prompt.md"));
   const skillName = options.tech ? "bloxodes-tech-article-writing" : "bloxodes-article-writing";
-  const skill = resolveRepoPath(path.join(".claude", "skills", skillName, "SKILL.md"));
+  const skill = resolveRepoPath(path.join(".agents", "skills", skillName, "SKILL.md"));
 
   if (!(await pathExists(brief))) throw new Error(`Missing approved brief: ${brief}`);
   if (!(await pathExists(skill))) throw new Error(`Missing Claude writing skill: ${skill}`);

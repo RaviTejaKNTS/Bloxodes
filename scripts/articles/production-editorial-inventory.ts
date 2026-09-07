@@ -14,6 +14,18 @@ type ProductionInventoryResponse = {
 export const DEFAULT_PRODUCTION_INVENTORY_URL =
   "https://bloxodes.com/api/articles/editorial-inventory";
 
+/** Resolve editorial routes centrally; collection codes are not URL path segments. */
+export function inventoryPublicPath(item: ProductionInventoryItem, inventory: ProductionInventoryItem[]): string | null {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.key)) return null;
+  const roots: Record<string, string> = { article: "articles", codes: "codes", wiki: "wiki", catalog: "catalog", event: "events", checklist: "checklists", quiz: "quizzes", tool: "tools" };
+  if (roots[item.family]) return `/${roots[item.family]}/${item.key}`;
+  if (item.family !== "collection") return null;
+  const hubs = inventory.filter(h => h.family === "wiki" && item.universe_id !== null && h.universe_id === item.universe_id && item.key.startsWith(`${h.key}-`));
+  // Ambiguous aliases require a real route lookup, not a guessed game slug.
+  if (hubs.length !== 1) return null;
+  return `/wiki/${hubs[0].key}/${item.key.slice(hubs[0].key.length + 1)}`;
+}
+
 function isInventoryItem(value: unknown): value is ProductionInventoryItem {
   if (!value || typeof value !== "object") return false;
   const row = value as Record<string, unknown>;

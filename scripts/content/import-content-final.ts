@@ -16,6 +16,7 @@ import {
 } from "../shared/article-cover";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { assertCanonicalMediaUrls, toMediaPublicUrl } from "../shared/storage-public-url";
+import { fetchWithTransientRetries, TransientHttpError } from "../shared/transient-http";
 
 type CliOptions = {
   files: string[];
@@ -389,16 +390,24 @@ async function verifyProductionArticleMedia(params: {
 
   // The assertion above guarantees a published production article has a cover.
   if (!coverImage) return;
-  const response = await fetch(coverImage, {
-    headers: {
-      Range: "bytes=0-0",
-      "User-Agent": "Bloxodes article release check",
-    },
-  });
-  if (!response.ok) {
-    throw new Error(`Article ${params.slug} cover returned HTTP ${response.status}: ${coverImage}`);
+  try {
+    const response = await fetchWithTransientRetries(coverImage, {
+      headers: {
+        Range: "bytes=0-0",
+        "User-Agent": "Bloxodes article release check",
+      },
+    });
+    await response.body?.cancel();
+  } catch (error) {
+    if (error instanceof TransientHttpError) {
+      console.warn(
+        `Article ${params.slug} cover public check is temporarily unavailable; ` +
+        "continuing because the upload and production database readback succeeded."
+      );
+      return;
+    }
+    throw error;
   }
-  await response.body?.cancel();
 }
 
 async function importArticle(

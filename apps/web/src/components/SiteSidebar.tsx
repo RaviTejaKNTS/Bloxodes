@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { RedDeadWikiSidebarLinks } from "@/components/RedDeadWikiSidebarLinks";
 import { usePathname } from "next/navigation";
 import { SidebarActiveState } from "@/components/SidebarActiveState";
 import { SidebarSearch } from "@/components/SidebarSearch";
@@ -58,6 +59,8 @@ export function SiteSidebar({ pathname }: SiteSidebarProps) {
             })}
           </ul>
         </nav>
+
+        <RedDeadWikiSidebarLinks pathname={currentPathname} />
 
         <div className="mx-3 my-2 h-px bg-sidebar-border" />
 

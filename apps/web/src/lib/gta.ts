@@ -1,3 +1,4 @@
+import { normalizeCollectionPageType } from "./wiki-collection-page-type";
 import "server-only";
 
 import { cache } from "react";
@@ -94,7 +95,7 @@ export type GtaWikiCollectionPage = {
   wiki_slug: string;
   collection_slug: string;
   code: string;
-  page_type: "database" | "checklist";
+  page_type: "database" | "collectible";
   title: string;
   display_name: string;
   item_count: number;
@@ -149,6 +150,22 @@ export function buildGtaWikiPath(slug: string): string {
 
 export function buildGtaCollectionPath(wikiSlug: string, collectionSlug: string): string {
   return `${buildGtaWikiPath(wikiSlug)}/${normalizeSlug(collectionSlug)}`;
+}
+
+type GtaWikiImageFields = {
+  cover_image?: string | null;
+  game_cover_image?: string | null;
+  game_hero_image?: string | null;
+};
+
+/** The wide artwork used for GTA cards, metadata, and structured data. */
+export function resolveGtaWikiCoverImage(page: GtaWikiImageFields): string {
+  return page.cover_image?.trim() || page.game_cover_image?.trim() || page.game_hero_image?.trim() || "/Bloxodes.png";
+}
+
+/** The separate square-friendly artwork shown beside a GTA wiki title. */
+export function resolveGtaWikiThumbnailImage(page: GtaWikiImageFields): string {
+  return page.game_hero_image?.trim() || page.cover_image?.trim() || page.game_cover_image?.trim() || "/Bloxodes.png";
 }
 
 export async function listPublishedGtaGames(): Promise<GtaGame[]> {
@@ -240,7 +257,7 @@ export async function getGtaWikiCollectionPageByPath(
         console.error("Error fetching GTA wiki collection", error);
         return null;
       }
-      return (data as GtaWikiCollectionPage | null) ?? null;
+      return data ? { ...data, page_type: normalizeCollectionPageType(data.page_type) } as GtaWikiCollectionPage : null;
     }
   );
 }
@@ -266,7 +283,7 @@ export async function listPublishedGtaWikiCollectionsByWikiSlug(
         console.error("Error fetching GTA wiki collections", error);
         return [];
       }
-      return (data ?? []) as GtaWikiCollectionPage[];
+      return (data ?? []).map((row) => ({ ...row, page_type: normalizeCollectionPageType(row.page_type) })) as GtaWikiCollectionPage[];
     }
   );
 }
@@ -283,7 +300,7 @@ export async function listPublishedGtaWikiCollections(): Promise<GtaWikiCollecti
       console.error("Error fetching GTA wiki collections index", error);
       return [];
     }
-    return (data ?? []) as GtaWikiCollectionPage[];
+    return (data ?? []).map((row) => ({ ...row, page_type: normalizeCollectionPageType(row.page_type) })) as GtaWikiCollectionPage[];
   });
 }
 

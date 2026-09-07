@@ -1,6 +1,6 @@
 import "../shared/load-env";
 
-import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
+import { fetchProductionEditorialInventory, inventoryPublicPath } from "./production-editorial-inventory";
 
 type Options = {
   family: string | null;
@@ -39,7 +39,7 @@ async function main() {
     (!options.family || item.family === options.family) &&
     (!options.universeId || item.universe_id === options.universeId) &&
     (!needle || `${item.title} ${item.key}`.toLowerCase().includes(needle))
-  );
+  ).map(item => ({ ...item, public_path: inventoryPublicPath(item, payload.items) }));
   if (options.json) {
     console.log(JSON.stringify({ generated_at: payload.generated_at, items }, null, 2));
     return;

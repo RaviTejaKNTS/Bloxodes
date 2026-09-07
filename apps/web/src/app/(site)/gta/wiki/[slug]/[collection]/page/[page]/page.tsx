@@ -20,6 +20,6 @@ export default async function GtaCollectionPaginatedPage({ params }: PageProps) 
   const currentPage = parsePage(page);
   if (!currentPage) notFound();
   const collectionPage = await getGtaWikiCollectionPageByPath(slug, collection);
-  if (collectionPage?.page_type === "checklist") notFound();
+  if (collectionPage?.page_type === "collectible") notFound();
   return renderGtaCollectionPage({ slug, collection, currentPage });
 }

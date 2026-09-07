@@ -23,7 +23,7 @@ type CollectionPageRow = {
   wiki_slug: string;
   collection_slug: string;
   code: string;
-  page_type?: "database" | "checklist" | null;
+  page_type?: "database" | "collectible" | null;
   display_name?: string | null;
   title?: string | null;
   seo_title?: string | null;
@@ -321,7 +321,7 @@ async function main() {
   const manifest = {
     schemaVersion: 1,
     game: { slug: row.wiki_slug, name: config.gameName, universeId },
-    collection: { slug: row.collection_slug, label: row.display_name ?? config.label, sortOrder: row.wiki_sort_order ?? config.sortOrder, pageType: row.page_type === "checklist" ? "checklist" : "database" },
+    collection: { slug: row.collection_slug, label: row.display_name ?? config.label, sortOrder: row.wiki_sort_order ?? config.sortOrder, pageType: ["collectible", "checklist"].includes(String(row.page_type)) ? "collectible" : "database" },
     dataset: "dataset.json",
     finalJson: "final.json",
     mediaRoot: "media",

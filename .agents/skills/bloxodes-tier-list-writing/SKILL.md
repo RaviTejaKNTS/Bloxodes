@@ -5,6 +5,10 @@ description: Write one Bloxodes Roblox tier-list article final.json from an appr
 
 # Bloxodes Tier List Writing
 
+## Code-controlled execution
+
+When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+
 Use this after `bloxodes-article-research` and parent approval. Write one article only.
 
 ## Workspace
@@ -16,7 +20,7 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   final.json
 ```
 
-Read the approved `brief.md` and the sibling `../bloxodes-article-writing/SKILL.md` before writing. Apply its house voice, accuracy, linking, metadata, FAQ, and final-output rules unless this skill gives a stricter tier-list rule.
+Read the approved `brief.md` and the sibling `../bloxodes-article-writing/SKILL.md` before writing. Apply its house voice, accuracy, linking, metadata, FAQ, and final-output rules unless this skill gives a stricter tier-list rule. Its draft, parent feedback, and one-revision procedure also applies; run final verification only after editorial acceptance. Preserve the tier inventory, ranking evidence, and visual/table contracts during revision.
 
 ## Readiness
 

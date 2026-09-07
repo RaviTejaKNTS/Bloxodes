@@ -1,3 +1,4 @@
+import { ARTICLE_EDITORIAL_STANDARD } from "../shared/article-editorial-standard";
 import "../shared/load-env";
 
 import { Readability } from "@mozilla/readability";
@@ -1787,51 +1788,14 @@ function buildArticlePrompt(params: {
   return `
 
 Write a detailed Roblox event guide for "${event.eventName}" in "${event.gameName}".
-The guide should be detailed and provides all the needed for the players waiting for the event. 
-Write in simple english and make the article flow like a story from start to the end. 
-Write an article in simple English that is easy for anyone to understand. Use a conversational tone like a professional Indian Roblox gaming writer sharing their Roblox knowledge/experience in US English. The article should feel like a friend talking to a friend while still being factual, helpful, and engaging.
-Use event name with context as per details available from the sources.
+${ARTICLE_EDITORIAL_STANDARD}
 
 ${eventBlock}
 Topic focus: "${topic}"
 
-Writing requirements:
+Cover the verified event schedule, participation requirements, activities, rewards, and useful next actions. Use the authoritative UTC event timestamps to provide date-aware Eastern Time first, with Pacific Time when useful. Do not substitute the server timezone or invent an exact time for missing timestamps.
 
-Start with an intro that directly gets into the core topic of the article. No fluff, no generic statements, no clichéd phrases, no templates. Just get to the point and write in a way that is easy to understand and engaging.
- - The start of the article should be very engaging and hook the audience into reading the entire article.
- - Instead of just a generic question or statement like If you play the game. Get directly into the explaining or bringing the pain point of the core topic if possible. 
- - Think about what type of intro serves the article best and use that.
- - No gnereic statements even if they are accurate. Instead you can bring out a interesting point, raise a question, tell an experience, highlight the pain point, break the misconception, put an bold opinion. (Should be accurate to the sources)
- - Keep it short, consise and easy to understand.
- - Stay strictly on the event topic "${topic}". Do not broaden scope to other events, items, or unrelated guides. Use related info only to clarify confusion and then return focus to the event.
- - Title must stay strictly about this event guide (no extra targets like "X and Y").
-
-After that, start with a H2 heading and then write the main content following these rules:
- - The article should flow like a story from the start to the end. Every section should be connected and tell a clean explaination of the said topic. 
- - Keep the article information dense, and communicate it in a way that is easy to understand. 
- - Adjust depth based on the topic. If something is simple, keep it short. If something needs more explanation, expand it properly. 
- - Use headings only when they are really important and drive the topic forward. Keep the structure simple to scan through. No headings for "Tips", "Why this matters", "Outro" or any other generic sections.
- - Headings should be conversational like a casual sentence talking to the user. Use Sentence case for all headings, capitalize the first letter of the first word only and for proper nouns.
- - Random tips can be said with small "Note:" or "Tip:" or anything that works instead of giving a full headings. 
- - Use H2 headings for main sections and H3 headings for sub-sections. (As mentioned, only when really needed)
- - Do not include why this matters or is it worth it kind of headings, weave the info into other sections of the article. 
- - Write in-depth and make sure everything is covered, but write in as less words as possible. 
- - Use full sentences and explain things clearly without any repetations or useless information. 
- - whereever possible and can be factually accurate, use personal anecdotes, opinionated language and show emotional variation according to the info. (Use this subtly)
- - Use tables and bullet points when it makes information easier to scan. Prefer paras to communitate tips, information, etc.
- - Use numbered steps when explaining a process.
- - When mentioning rewards, items or any list or table, include each and every item. Do not skip on anything. This has to be one stop guide that everything that user needs to know.
- - Before any tables, bullet points, or steps, write a short paragraph that sets the context. This helps the article to flow like a story.
- - Conclude the article with a short friendly takeaway that leaves the reader feeling guided and confident. No need for any cringe ending words like "Happy fishing and defending out there!". Just keep it real and helpful. Don't need any heading for this section.
- - Include the official Roblox event link exactly once. Use the exact URL from the event details and explicitly say it is the official Roblox event page so readers can open it directly.
- - Do not add any images to the article — the cover image will be inserted separately.
- - Do not include any other external URLs.
-
- Most importantly: Do not add emojis, sources, or reference numbers. The only external URL allowed is the official Roblox event link. Do not add any images. No emdashes anywhere. (Never mention these anywhere in your output)
- Additional writing rules:
- - Do not copy or quote sentences from the research. Paraphrase everything in fresh wording.
- - Never mention sources, research, or citations. Do not add any external URLs other than the official Roblox event link and the event thumbnail image URL.
- - Never include bracketed citations like [1] or [2], or any references section.
+Keep the title and content focused on this event. Include the official Roblox event link exactly once, identifying it clearly. Do not add images at this draft stage; the existing media pass owns image insertion. Preserve supplied destinations and do not invent external URLs. Write independently from the evidence. Keep research logs private; useful developer attribution is allowed, but no numbered citations or references section in content_md.
 
 ${contextBlock}
 
@@ -1864,6 +1828,10 @@ async function buildArticleContext(
 
   const prompt = `
 Create an SEO planning brief AND a coverage checklist for a Roblox event guide. Ground everything in the research below.
+
+${ARTICLE_EDITORIAL_STANDARD}
+
+Prioritize the player journey: availability, prerequisites, participation, rewards, and useful exceptions. The checklist is a planning aid, not a limit on useful coverage.
 
 Topic: "${topic}"
 Guide title: "${guideTitle}"
@@ -1925,7 +1893,7 @@ async function draftArticle(prompt: string): Promise<DraftArticle> {
       {
         role: "system",
         content:
-          "You are an expert Roblox event guide writer. Always return valid JSON with title, content_md, and meta_description. Title must be very short, on-point, and include relevant keywords. Keep the title and content strictly about the given event topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Never mention sources or citations, never include bracketed references like [1], and do not quote the research; paraphrase it in your own words."
+          "You are an expert Roblox event guide writer. Always return valid JSON with title, content_md, and meta_description. Title must name the game, exact event, and useful search intent without keyword stuffing. Keep the title and content strictly about the given event topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Keep research logs private; useful developer attribution is allowed. No numbered references like [1] or copied research prose."
       },
       { role: "user", content: prompt }
     ]
@@ -2096,14 +2064,18 @@ async function reviseArticleWithFeedback(
   const sourceBlock = formatSourcesForPrompt(sources);
   const label = feedbackLabel || "feedback";
   const prompt = `
-You are updating a Roblox event guide after ${label}. Keep the same friendly, conversational tone and overall structure.
+You are updating a Roblox event guide after ${label}.
+
+${ARTICLE_EDITORIAL_STANDARD}
+
+Keep the same useful facts and scope.
 - If feedback starts with "Yes", return the original article unchanged.
 - If feedback starts with "No", only adjust the parts that were flagged. Keep everything else as close as possible to the original voice.
 - Use the ${label} plus the provided research; do not invent new information.
 - Make only the changes required by the feedback—no extra rewrites.
 - Keep the guide strictly about the topic; do not change or broaden it.
 - Keep the title and content strictly focused on "${topic}". Do not add extra targets (no "X and Y"). Use related items only to correct confusion, then return focus to the event.
-- Do not mention sources, research, or citations. Do not add any external URLs other than the official Roblox event link and event thumbnail image already present in the article.
+- Keep research-process notes private; useful developer attribution is allowed. Preserve the existing official event and image URLs without inventing new destinations.
 - Keep the official Roblox event link if it already exists in the article; do not remove it.
 - Do not add bracketed references like [1] or [2]. Paraphrase any new text you add.
 
@@ -2138,7 +2110,7 @@ Return JSON:
       {
         role: "system",
         content:
-          "You are an expert Roblox writer. Always return valid JSON with title, content_md, and meta_description. Title must be very short, on-point, and include relevant keywords. Keep the title and content strictly about the given event topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Never mention sources or citations, never include bracketed references like [1], and keep any new text paraphrased."
+          "You are an expert Roblox writer. Always return valid JSON with title, content_md, and meta_description. Title must name the game, exact event, and useful search intent without keyword stuffing. Keep the title and content strictly about the given event topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Keep research logs private; useful developer attribution is allowed. No numbered references like [1]; write new text independently."
       },
       { role: "user", content: prompt }
     ]
@@ -2455,22 +2427,9 @@ async function insertRelatedLinksSection(params: {
   const prompt = `
 You are adding internal links to an existing Roblox event guide. Your goal is to genuinely help the reader — not to stuff links in wherever possible.
 
-How to decide where to link:
-- Read the guide fully. For each related page, judge whether the guide is already discussing something that page is directly relevant to. Use the page title, description, and type context to make that call.
-- If there is a clear match, add one short sentence at that point in the guide body that leads the reader to the page naturally. Write the sentence yourself — it should fit the surrounding text, sound like the same author, and make it obvious what the reader will find there.
-- The link MUST be written as a proper Markdown link: [descriptive anchor text](URL from the page list). Use the exact URL as provided — it will be a relative path like /articles/slug or /codes/slug. Do NOT convert it to a full URL with a domain. Do NOT write https://bloxodes.com/... or https://roblox.com/... — just use the path as-is. The anchor text should describe what the reader will find, not the page title verbatim.
-- Do NOT wrap existing words into links. The link must live inside a new sentence you write.
-- Spread links through the guide — never cluster them together or put them all near the top.
+${ARTICLE_EDITORIAL_STANDARD}
 
-Fallback — if a page has no matching spot in the body but is still genuinely useful to someone reading this guide:
-- Add it as a standalone sentence at the very end, after the final paragraph. Write it naturally with a proper Markdown link [anchor text](url). Skip any page that is not relevant enough to deserve a mention even at the end.
-
-Limits:
-- 2–4 links total across body and fallback combined.
-- No heading or list for the links.
-- Every single link must be formatted as [anchor text](url) — plain text mentions with no link are not acceptable.
-- Keep the official Roblox event link exactly as it appears — do not remove or change it. Do not add images.
-- Stay strictly on topic: "${topic}".
+Link supplied pages only where they help with the event requirement, activity, reward, or next action being discussed. Prefer linking suitable existing words. Use exact site-relative destinations, without inventing URLs or prepending a domain. There is no minimum count or fallback link block. Keep the official Roblox event link and any existing image destinations. Stay strictly on topic: "${topic}".
 
 Event details (authoritative):
 - Event name: ${event.eventName}
@@ -2502,7 +2461,7 @@ Return JSON:
       {
         role: "system",
         content:
-          "You add contextual internal links to Roblox event guides. Every link must be a Markdown link [anchor text](url) using the exact URL from the page list — these are relative paths like /articles/slug or /codes/slug. NEVER prepend a domain — do not write https://bloxodes.com/... or https://roblox.com/... or any other domain. Use the path exactly as given. Never write plain text mentions without a link. Never wrap existing words as links. Never force a link where context does not exist. Keep the official Roblox event link and event thumbnail unchanged. Return valid JSON with title, content_md, meta_description."
+          "You add contextual internal links to Roblox event guides. Every link must be a Markdown link [anchor text](url) using the exact URL from the page list — these are relative paths like /articles/slug or /codes/slug. NEVER prepend a domain — do not write https://bloxodes.com/... or https://roblox.com/... or any other domain. Use the path exactly as given. Never write plain text mentions without a link. Prefer linking suitable existing words. Omit weak matches; there is no quota. Keep the official Roblox event link and event thumbnail unchanged. Return valid JSON with title, content_md, meta_description."
       },
       { role: "user", content: prompt }
     ]
@@ -2537,13 +2496,12 @@ async function buildEventGuideTitle(params: {
   const hintTitle = cleanText(params.guideTitle);
 
   const prompt = `
-Write a short Roblox event guide title.
-Write a simple event guide title that's easily tells to the reader which exact event it is. Make it more descriptive, so any event with same name from the same game should not get confused. Make sure the event name is contextual and accurate to something people search and understand easily.
+Write a descriptive Roblox event guide title that identifies the exact game, event, and reader intent. Distinguish it from similarly named events using verified context.
 - Include the event name that is contextual
 - Do not include any emojis, brackets or anything in the title. Use a simple event name that users search and understand. 
-- Try include the words "Guide" and "Event"
+- Include "Guide" or "Event" when it clarifies the subject; do not force both.
 - Use the game name "${params.gameName}"
-- Keep it concise and scannable, in as less words as possible.
+- Keep it readable and specific. Do not strip useful game or event context just to shorten the title.
 - Avoid colons, quotes, and em dashes
 ${hintTitle ? `Existing title hint: "${hintTitle}"` : ""}
 Return only the title text.
@@ -2588,19 +2546,11 @@ Return only the title text.
 
 async function finalPolishArticle(topic: string, article: DraftArticle): Promise<DraftArticle> {
   const prompt = `
-Give this Roblox event guide a final polish before publishing. Your job is light editing only — do not rewrite, restructure, or change the voice. Keep every sentence as close to the original as possible.
+Review this Roblox event guide before publishing. Correct unclear openings, headings, grouping, and prose while preserving supported facts.
 
-What to check and fix:
-- Intro: make sure it hooks immediately with no generic openers, clichéd phrases, or filler. It should get straight into the event topic.
-- Headings: sentence case only (capitalize first word and proper nouns only). No "Tips", "Why this matters", "Outro", or other generic section headers. Headings should read like a casual sentence to the reader.
-- Internal links: every link must be a proper Markdown link [anchor text](url) — never a bare URL or plain text mention. Make sure every existing link has clear context around it so the reader knows exactly what they will find before clicking. If any link feels random or has no surrounding context, either tighten the sentence around it or remove the link entirely. Do not add new links. Do not modify any existing URLs.
-- Keep the official Roblox event link exactly as it appears — do not remove or change it. Do not add images.
-- No em-dashes anywhere — replace any with a colon or restructure the sentence.
-- No emojis, no bracketed citations like [1], no mention of sources or research.
-- No new external URLs. Keep all existing Markdown links, image URLs, and tables exactly as they are.
-- The outro should leave the reader feeling confident and guided. No catchphrases or cringe sign-offs.
-- Clean up any obvious repetition or awkward phrasing, but only where it reads poorly — do not rewrite for the sake of it.
-- MOST Importantly: The article should feel like one clean story from top to bottom.
+${ARTICLE_EDITORIAL_STANDARD}
+
+Preserve the official event URL and existing media destinations; do not invent new URLs or insert images at this stage. Remove decorative links, repeated caveats, and redundant recaps. Do not add numbered research citations. A conclusion is optional.
 
 Topic: "${topic}"
 
@@ -2614,7 +2564,7 @@ Return JSON:
 {
   "title": "Keep the original title unless it clearly violates the topic rule — short, scannable, on-point",
   "meta_description": "Specific summary with keywords, under 160 characters, no generic phrasing",
-  "content_md": "Polished guide — minimal changes, same voice"
+  "content_md": "Reviewed guide with clear structure and natural prose"
 }
 `.trim();
 
@@ -2627,7 +2577,7 @@ Return JSON:
       {
         role: "system",
         content:
-          "You are a copy editor for a Roblox gaming site. Your job is light final polish only — fix formatting issues, clean up links, remove em-dashes, tighten the intro and outro. Do not rewrite or restructure. Keep the original voice. Keep the official Roblox event link and event thumbnail unchanged. Return valid JSON with title, content_md, meta_description."
+          "You are a copy editor for a Roblox gaming site. Apply the shared editorial standard to the opening, headings, grouping, and prose. Preserve supported facts. Keep the official Roblox event link and event thumbnail unchanged. Return valid JSON with title, content_md, meta_description."
       },
       { role: "user", content: prompt }
     ]
@@ -2925,7 +2875,7 @@ Return JSON:
       {
         role: "system",
         content:
-          "You are an expert Roblox content editor. Always return valid JSON with title, content_md, and meta_description. Title must be very short, on-point, and include relevant keywords. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic."
+          "You are an expert Roblox content editor. Always return valid JSON with title, content_md, and meta_description. Title must name the game, exact event, and useful search intent without keyword stuffing. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic."
       },
       { role: "user", content: prompt }
     ]

@@ -2,6 +2,13 @@ import { describe, expect, it } from "vitest";
 import { cacheTagsForEvent, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 
 describe("public cache tags", () => {
+  it("refreshes the wiki overview when its activity and events change", () => {
+    const tags = cacheTagsForPath("/wiki");
+    expect(tags).toEqual(expect.arrayContaining(["wiki-index", "stats", "events"]));
+    expect(cacheTagsForEvent("stats", "platform").some((tag) => tags.includes(tag))).toBe(true);
+    expect(cacheTagsForEvent("event", "fisch").some((tag) => tags.includes(tag))).toBe(true);
+    expect(cacheTagsForPath("/wiki/page/2")).toContain("stats");
+  });
   it("tags the codes index separately from code detail pages", () => {
     expect(cacheTagsForPath("/codes")).toContain("codes-index");
     expect(cacheTagsForPath("/codes/page/2")).toContain("codes-index");

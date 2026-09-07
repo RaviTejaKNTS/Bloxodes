@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Wiki Suggestions"
+  short_description: "Suggest franchise wiki hub pages"
+  default_prompt: "Use $bloxodes-franchise-wiki-suggestions with a resolved franchise context to decide whether one non-Roblox game title should receive a wiki hub. Check overlap, scope, and primary-source coverage before returning a decision."

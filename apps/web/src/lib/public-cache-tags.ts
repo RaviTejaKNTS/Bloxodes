@@ -16,6 +16,9 @@ export type PublicCacheEventType =
   | "gta_game"
   | "gta_wiki"
   | "gta_wiki_collection"
+  | "red_dead_game"
+  | "red_dead_wiki"
+  | "red_dead_wiki_collection"
   | "stats";
 
 export type PublicCacheEvent = {
@@ -174,6 +177,23 @@ export function cacheTagsForPath(pathname: string) {
     return unique(tags);
   }
 
+  if (first === "red-dead") {
+    if (!second) return unique([...tags, "red-dead-home"]);
+    if (second === "wiki") {
+      if (!third || third === "page") return unique([...tags, "red-dead-wiki-index"]);
+      if (fourth && fourth !== "page") {
+        return unique([
+          ...tags,
+          "red-dead-wiki-collection-index",
+          slugTag("red-dead-wiki", third),
+          slugTag("red-dead-wiki-collection", `${third}/${fourth}`)
+        ]);
+      }
+      return unique([...tags, "red-dead-wiki", slugTag("red-dead-wiki", third)]);
+    }
+    return unique(tags);
+  }
+
   if (pathnameOnly === "/feed.xml") {
     return unique([...tags, "feed"]);
   }
@@ -257,7 +277,7 @@ export function cacheTagsForPath(pathname: string) {
   }
 
   if (first === "wiki") {
-    if (!second || second === "page") return unique([...tags, "wiki-index"]);
+    if (!second || second === "page") return unique([...tags, "wiki-index", "stats", "events"]);
     if (third && third !== "page") {
       return unique([
         ...tags,
@@ -388,6 +408,38 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "gta-wiki-collection-index",
         "sitemap",
         "sitemap:gta"
+      ]);
+    }
+    case "red_dead_game":
+      return unique([
+        ...base,
+        slugTag("red-dead-game", normalized),
+        "red-dead-home",
+        "red-dead-wiki-index",
+        "games-index",
+        "sitemap",
+        "sitemap:red-dead"
+      ]);
+    case "red_dead_wiki":
+      return unique([
+        ...base,
+        slugTag("red-dead-wiki", normalized),
+        "red-dead-home",
+        "red-dead-wiki-index",
+        "sitemap",
+        "sitemap:red-dead"
+      ]);
+    case "red_dead_wiki_collection": {
+      const [wikiSlug, collectionSlug] = normalized.split("/");
+      return unique([
+        ...base,
+        wikiSlug ? slugTag("red-dead-wiki", wikiSlug) : "",
+        wikiSlug && collectionSlug ? slugTag("red-dead-wiki-collection", `${wikiSlug}/${collectionSlug}`) : "",
+        "red-dead-home",
+        "red-dead-wiki-index",
+        "red-dead-wiki-collection-index",
+        "sitemap",
+        "sitemap:red-dead"
       ]);
     }
     case "wiki_collection": {

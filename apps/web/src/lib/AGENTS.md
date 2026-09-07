@@ -11,7 +11,7 @@ Most application behavior should flow through this folder before it reaches page
 - `public-cache-tags.ts`: Cloudflare `Cache-Tag` mapping for public route families and Supabase revalidation events.
 - `catalog.ts`, `tools.ts`, and `wiki.ts`: Supabase-backed content helpers, related-content aggregators, and index readers.
 - `gta.ts`: server-only GTA game, wiki, and collection-runtime readers for the `/gta` namespace. Keep this separate from Roblox universe/editorial slug ownership.
-- `wiki-collections.ts`: shared Roblox collection page/list reads, including the explicit `database` or `checklist` page type and compatibility fallbacks for older schemas.
+- `wiki-collections.ts`: shared Roblox collection page/list reads, including the explicit `database` or `collectible` page type and compatibility fallbacks for older schemas.
 - `collection-checklist-progress-client.ts` and `wiki-collection-progress.ts`: shared local-first/account-synced checklist progress behavior for Roblox collection pages. The GTA adapter uses the same client renderer with its own endpoint and GTA progress namespace.
 - `seo.ts`, `site-config.ts`, `sitemap.ts`, `content-dates.ts`, `updated-label.ts`: metadata, canonical URLs, sitemap shaping, and freshness labels.
 - `auth/*`: session cookies, Roblox OAuth helpers, navigation safety, and current-user lookup.

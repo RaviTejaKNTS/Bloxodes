@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Collection Research"
+  short_description: "Research one franchise collection"
+  default_prompt: "Use $bloxodes-franchise-game-collection-research for one approved collection. Establish roster proof, scope, useful fields, sections, page type, image feasibility, and risks in brief.md, then stop before dataset work."

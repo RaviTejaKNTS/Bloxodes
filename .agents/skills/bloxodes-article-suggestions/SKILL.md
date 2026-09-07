@@ -23,6 +23,10 @@ You can check websites like Beebom, Pro Game Guides, game specific wikis, Techwi
 
 Do a proper deep dive search, do not settle for what was indexed in initial search, do various fan out queries, specific queries with each website to get deeper understanding of that specific topic or the game.
 
+## Editorial fit
+
+Use [the shared article standard](../bloxodes-article-writing/references/editorial-standard.md) and [the Beebom Roblox study](../bloxodes-article-writing/references/beebom-style-study.md) to judge reader intent and likely depth. Proposed titles should name the exact game/topic and the answer promised, using natural search language rather than vague or clever labels. Identify the player problem and the practical follow-up questions the article should resolve; competitor headings alone are not a research brief.
+
 ## Good Article Ideas
 
 1. Suggest articles that answer one clear reader question.
@@ -59,4 +63,4 @@ Then give me the actual article suggestions:
 - `[skip]` weak, duplicate, too broad, or better as another page type
 - `[research incomplete]` when you are not confidence enough with something, so user can continue research.
 
-Each `[create]` idea should include a short title, angle, why players care, and sources to use.
+Each `[create]` idea should include a specific, readable title, angle, why players care, and sources to use.

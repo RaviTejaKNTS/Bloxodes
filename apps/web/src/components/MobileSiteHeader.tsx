@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { RedDeadWikiSidebarLinks } from "@/components/RedDeadWikiSidebarLinks";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { AccountSheetButton } from "@/components/AccountSheetButton";
@@ -111,6 +112,8 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
                   })}
                 </ul>
               </nav>
+
+              <RedDeadWikiSidebarLinks pathname={pathname} onNavigate={closeMenu} />
 
               <div className="mx-3 my-2 h-px bg-sidebar-border" />
 

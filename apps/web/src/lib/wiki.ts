@@ -101,6 +101,9 @@ export type WikiListEntry = Pick<
   | "created_at"
   | "updated_at"
   | "content_updated_at"
+  | "universe_genre_l1"
+  | "playing"
+  | "last_playing_refreshed_at"
 >;
 
 export type WikiMediaItem = {
@@ -241,7 +244,7 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
     const supabase = supabaseAdmin();
     const { data, error } = await supabase
       .from("wiki_pages_view")
-      .select("id, slug, title, meta_description, cover_image, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at")
+      .select("id, slug, title, meta_description, cover_image, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at, universe_genre_l1, playing, last_playing_refreshed_at")
       .eq("is_published", true)
       .order("content_updated_at", { ascending: false })
       .order("id", { ascending: true });

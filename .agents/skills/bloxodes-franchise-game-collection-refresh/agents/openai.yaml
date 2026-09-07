@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Collection Refresh"
+  short_description: "Refresh existing franchise collections"
+  default_prompt: "Use $bloxodes-franchise-game-collection-refresh to check existing collections for verified roster, scope, field, page-type, and image deltas. Stop unchanged without edits and never discover or publish new collections."

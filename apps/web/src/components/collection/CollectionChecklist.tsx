@@ -188,7 +188,7 @@ export function CollectionChecklist({
 
   return (
     <GameCollectionViewShell availableViews={["cards", "list"]} defaultView="cards" toolbar={toolbar}>
-      <section aria-label={`${collectionLabel} checklist`} className="space-y-7">
+      <section aria-label={`${collectionLabel} collectibles`} className="space-y-7">
         <div className="rounded-lg border border-border/70 bg-surface p-5 md:p-6">
           <p className="text-sm font-medium text-foreground" role="status" aria-live="polite">
             {done} of {total} found · {percent}% complete

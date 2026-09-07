@@ -25,6 +25,9 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "gta_game",
   "gta_wiki",
   "gta_wiki_collection",
+  "red_dead_game",
+  "red_dead_wiki",
+  "red_dead_wiki_collection",
   "stats"
 ]);
 
@@ -60,6 +63,7 @@ const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
 const GTA_SITEMAP_PATH = "/sitemaps/gta.xml";
+const RED_DEAD_SITEMAP_PATH = "/sitemaps/red-dead.xml";
 const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
@@ -170,7 +174,7 @@ function revalidateForAuthor(slug: string) {
 
 function revalidateForEvents(slug: string) {
   return applyRevalidation(
-    ["/events", `/events/${slug}`, "/", FEED_PATH, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH],
+    ["/events", `/events/${slug}`, "/wiki", "/", FEED_PATH, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH],
     ["events-pages", "home"]
   );
 }
@@ -213,7 +217,7 @@ function revalidateForPuzzle(slug: string) {
 
 function revalidateForWiki(slug: string) {
   return applyRevalidation(
-    ["/wiki", `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
+    [...paginatedIndexPaths("/wiki"), `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
     [`wiki:${slug}`, "wiki-index", "home"]
   );
 }
@@ -255,6 +259,43 @@ function revalidateForGtaWikiCollection(slug: string) {
   );
 }
 
+function revalidateForRedDeadGame(slug: string) {
+  return applyRevalidation(
+    ["/games", "/red-dead", "/red-dead/wiki", `/red-dead/wiki/${slug}`, SITEMAP_INDEX_PATH, RED_DEAD_SITEMAP_PATH],
+    ["games-index", "red-dead-home", "red-dead-games-index", "red-dead-wiki-index", `red-dead-game:${slug}`]
+  );
+}
+
+function revalidateForRedDeadWiki(slug: string) {
+  return applyRevalidation(
+    ["/games", "/red-dead", "/red-dead/wiki", `/red-dead/wiki/${slug}`, SITEMAP_INDEX_PATH, RED_DEAD_SITEMAP_PATH],
+    ["games-index", "red-dead-home", "red-dead-wiki-index", `red-dead-wiki:${slug}`]
+  );
+}
+
+function revalidateForRedDeadWikiCollection(slug: string) {
+  const [wikiSlug, collectionSlug] = slug.split("/");
+  const basePath = wikiSlug && collectionSlug ? `/red-dead/wiki/${wikiSlug}/${collectionSlug}` : "";
+  return applyRevalidation(
+    [
+      "/red-dead",
+      "/red-dead/wiki",
+      wikiSlug ? `/red-dead/wiki/${wikiSlug}` : "",
+      basePath,
+      ...(basePath ? Array.from({ length: 39 }, (_, index) => `${basePath}/page/${index + 2}`) : []),
+      SITEMAP_INDEX_PATH,
+      RED_DEAD_SITEMAP_PATH
+    ].filter(Boolean) as string[],
+    [
+      "red-dead-home",
+      "red-dead-wiki-index",
+      "red-dead-wiki-collection-index",
+      wikiSlug ? `red-dead-wiki:${wikiSlug}` : "",
+      wikiSlug && collectionSlug ? `red-dead-wiki-collection:${wikiSlug}/${collectionSlug}` : ""
+    ]
+  );
+}
+
 function revalidateForStats(slug: string) {
   const normalized = normalizeSlug(slug);
   const reportSlug = normalized.startsWith("reports/") ? normalized.replace(/^reports\//, "") : "";
@@ -276,7 +317,7 @@ function revalidateForStats(slug: string) {
             : ["/stats", "/stats/roblox-platform", "/stats/games", "/stats/creators", "/stats/items"];
   const detailSlug = normalized.startsWith("games/") ? normalized.replace(/^games\//, "") : null;
   return applyRevalidation(
-    [...scopedPaths, "/api/stats/platform/chart", "/api/stats/visit-share", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    [...scopedPaths, "/wiki", "/api/stats/platform/chart", "/api/stats/visit-share", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
     [
       "stats",
       "stats-home",
@@ -867,6 +908,15 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       break;
     case "gta_wiki_collection":
       purgePaths = revalidateForGtaWikiCollection(slug);
+      break;
+    case "red_dead_game":
+      purgePaths = revalidateForRedDeadGame(slug);
+      break;
+    case "red_dead_wiki":
+      purgePaths = revalidateForRedDeadWiki(slug);
+      break;
+    case "red_dead_wiki_collection":
+      purgePaths = revalidateForRedDeadWikiCollection(slug);
       break;
     case "tool":
       purgePaths = revalidateForTools(slug);

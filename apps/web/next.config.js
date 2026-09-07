@@ -43,6 +43,8 @@ const nextConfig = {
   poweredByHeader: false,
   devIndicators: false,
   distDir: process.env.NEXT_DIST_DIR || ".next",
+  // Keep the documented homelab preview interactive with Next's dev-origin guard.
+  allowedDevOrigins: ["teja-homelab.tail13b5bd.ts.net", "100.86.117.125", "127.0.0.1"],
   output: "standalone",
   outputFileTracingRoot: repoRoot,
   staticPageGenerationTimeout: 120,

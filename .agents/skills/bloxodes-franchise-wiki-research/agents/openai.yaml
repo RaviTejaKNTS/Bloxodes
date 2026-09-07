@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Wiki Research"
+  short_description: "Research one franchise wiki hub"
+  default_prompt: "Use $bloxodes-franchise-wiki-research for one approved non-Roblox franchise title. Verify identity, scope, controls, source proof, related coverage, and risks in brief.md, then stop before writing final.json."

@@ -1,8 +1,8 @@
 # Architecture
 
 Status: Active; production has documented degraded components
-Last verified: 2026-09-02
-Evidence: repository architecture/configuration, database-only wiki/quiz runtime audit, managed-development GTA schema/content/route readback, managed-development/production content readback, and existing VPS/homelab platform checks
+Last verified: 2026-09-04
+Evidence: repository architecture/configuration, database-only wiki/quiz runtime audit, managed-development GTA and Red Dead schema/content-route readback, managed-development/production content readback, and existing VPS/homelab platform checks
 
 ## Product Surfaces
 
@@ -12,7 +12,7 @@ Evidence: repository architecture/configuration, database-only wiki/quiz runtime
 - Mobile: Expo Router in `apps/mobile`; it calls `/api/mobile/*`, uses optional bearer authentication, and does not connect directly to Supabase.
 - Data/content jobs: root `scripts/` grouped by pipeline, with stable npm aliases in `package.json`.
 - Database functions: migrations and Edge Functions under `supabase/`.
-- Game namespaces: the established Roblox routes remain at `/wiki`, `/tools`, and the other root content families. GTA is isolated under `/gta`, with its own sidebar/search scope, wiki routes, and platform-owned Supabase tables while reusing the public shell and collection renderer. `/games` is the platform chooser. GTA tools are intentionally absent until a real tool is ready to ship.
+- Game namespaces: the established Roblox routes remain at `/wiki`, `/tools`, and the other root content families. GTA is isolated under `/gta`, and Red Dead under `/red-dead`, each with its own sidebar/search scope, wiki routes, and platform-owned Supabase tables while reusing the public shell and collection renderer. `/games` is the platform chooser. GTA and Red Dead tools are intentionally absent until real tools are ready to ship.
 
 ## Production Request Path
 
@@ -68,3 +68,5 @@ Cloudflare is the long-lived public cache. The origin uses Next.js ISR-style res
 - VPS swap was effectively full (2 GiB used) with 15 GiB RAM and about 8.7 GiB available memory.
 - The earlier homelab Grok Build `402 Payment Required` failure is historical; the latest audited discovery and writer services succeeded.
 - Universe stats had an active end-to-end incident audit started 2026-08-12. Current public health was green, but the audit identified scheduler/index ordering, capacity, NEW quarantine, growth-baseline, daily-rank, and alerting defects. See `pipelines/stats.md`.
+
+Article execution update verified in the September 6 implementation: the homelab batch delegates focused model tasks through a code-owned stage controller. Queue claims, process lifetimes, approvals, uploads/imports and browser checks are runtime responsibilities; models return artifacts or structured review findings. See [Article Pipeline](pipelines/articles.md) for recovery, credential and publication boundaries.

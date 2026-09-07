@@ -74,7 +74,7 @@ Also give the writing subagent:
 1. Confirm the approved game, universe ID, and collection list.
 2. Give each collection subagent exactly one collection.
 3. Research gate: subagent returns `brief.md`.
-4. Review source proof, scope, coverage, whether the collection is worth publishing, and the approved `database` versus `checklist` page-type decision.
+4. Review source proof, scope, coverage, whether the collection is worth publishing, and the approved `database` versus `collectible` page-type decision.
 5. Approve, refine, or block.
 6. Data gate: same subagent prepares the dataset and updates brief notes.
 7. Review item count, missing items, v2 shape, sections, fields, image planning, route assumptions, and `runtime-manifest.json` `collection.pageType`.
@@ -103,8 +103,8 @@ npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<colle
 - choosing a section on another page opens that page at the correct section anchor
 - `/wiki/<game-slug>/<collection-slug>/page/2` returns 200 and has `noindex, follow`
 - paginated collection URLs are not listed in `/sitemaps/wiki.xml`
-17. For `checklist` collections, verify the clean checklist renderer, local-first progress for signed-out users, account-saved progress for signed-in users, search/filter/reset behavior, and that `/page/2` returns 404 with the base URL as canonical. Checklist collections must not receive database pagination or the card/list switch.
-18. Return paths, localhost links, blocked collections, page-type decisions, size-gate results, pagination/checklist checks, and remaining risks.
+17. For `collectible` collections, verify the clean collectible renderer, local-first progress for signed-out users, account-saved progress for signed-in users, search/filter/reset behavior, and that `/page/2` returns 404 with the base URL as canonical. Collectible collections must not receive database pagination or the card/list switch.
+18. Return paths, localhost links, blocked collections, page-type decisions, size-gate results, pagination/collectible checks, and remaining risks.
 
 ## Research checks
 
@@ -115,7 +115,7 @@ Once the research subagent returns `brief.md`, check that:
 - item fields are useful for players to compare items
 - section plan is clear and useful for players
 - section labels are not source-table noise
-- page type is explicit: finite player-completed goals use `checklist`; reference rosters use `database`
+- page type is explicit: finite player-completed goals use `collectible`; reference rosters use `database`
 
 ## Data checks
 
@@ -173,7 +173,7 @@ Before approving any `final.json`, make sure:
 - paragraphs add context beyond the cards
 - `final.json` parses
 - verifier, HTML size gate, pagination checks, and Browser preview look good before calling it done
-- for `checklist`, account/local progress and no-pagination route checks pass instead of database pagination checks
+- for `collectible`, account/local progress and no-pagination route checks pass instead of database pagination checks
 
 ## Parent checks
 

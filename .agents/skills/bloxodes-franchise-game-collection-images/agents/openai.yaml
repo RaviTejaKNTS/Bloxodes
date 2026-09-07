@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Collection Images"
+  short_description: "Prepare franchise collection images"
+  default_prompt: "Use $bloxodes-franchise-game-collection-images after data approval to gather exact item images, save and wire workspace media, record sources and gaps, run the configured checker, and stop before writing final.json."

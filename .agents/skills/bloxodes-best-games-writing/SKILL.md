@@ -5,7 +5,13 @@ description: Write a complete Bloxodes Articles-page best-games recommendation f
 
 # Best Games Article Writing
 
+## Code-controlled execution
+
+When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+
 Use this as the final stage for opinionated Roblox recommendation pages. It writes one coherent Articles-page piece, not a template preview or a catalog page.
+
+Read and apply [the shared article editorial standard](../bloxodes-article-writing/references/editorial-standard.md) for US audience, voice, evidence, time conventions, and review. Keep the specialized game-card and recommendation structure below. Apply [one editorial revision before acceptance](../bloxodes-article-writing/references/editorial-review.md), using the same configured writer and approved research. Preserve recommendation evidence and game-card contracts during revision; do not rerun discovery to fix prose.
 
 ## Inputs and output
 
@@ -41,7 +47,7 @@ statsUrl: /stats/games/...
 
 The image belongs inside the game section, usually after the first paragraph and before the second paragraph or card. It should be a useful landscape thumbnail from the exact official game page, hosted through the article-image workflow. Keep the square icon in the clean horizontal card as the final action surface.
 
-The card is a clean horizontal link surface. Keep descriptive content in the prose, not inside the card. Do not add “best for” labels, verdict badges, player-stat panels, ranking methodology, filler introductions, or a redundant “our picks” heading. A short, warm closing note or a small FAQ is optional and should add real search value.
+The card is a clean horizontal link surface. Keep descriptive content in the prose, not inside the card. Do not add “best for” labels, verdict badges, player-stat panels, ranking methodology, filler introductions, or a redundant “our picks” heading. A short, warm closing note is optional. FAQs are optional and belong only in faq_json, which renders visibly after the body; never duplicate them in Markdown. Keep only source-backed follow-up answers absent from the body, with no count quota.
 
 ## Article pagination
 

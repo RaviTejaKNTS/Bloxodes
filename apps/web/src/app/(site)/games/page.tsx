@@ -26,6 +26,12 @@ const platforms = [
     label: "Grand Theft Auto",
     description: "GTA game wikis and structured collections built on the same Bloxodes system.",
     icon: Gamepad2
+  },
+  {
+    href: "/red-dead",
+    label: "Red Dead",
+    description: "Red Dead game wikis and structured collections for story and online adventures.",
+    icon: Gamepad2
   }
 ];
 

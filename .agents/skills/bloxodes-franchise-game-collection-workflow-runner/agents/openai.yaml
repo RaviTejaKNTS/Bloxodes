@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Franchise Collection Runner"
+  short_description: "Run franchise collection workflow"
+  default_prompt: "Use $bloxodes-franchise-game-collection-workflow-runner for approved non-Roblox franchise collections. Gate research, v2 data, exact images, fresh writing, managed-development verification, size checks, pagination, checklist progress, and Browser review before stopping."

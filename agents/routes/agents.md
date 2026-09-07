@@ -17,6 +17,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/checklists/progress` | `GET`, `PUT` | `src/app/api/checklists/progress/route.ts` | Per-user checklist progress read/write. |
 | `/api/wiki/collections/progress` | `GET`, `PUT` | `apps/web/src/app/api/wiki/collections/progress/route.ts` | Per-user progress for published Roblox wiki collection checklist pages; namespaced in the existing checklist progress table and local-first when signed out. |
 | `/api/gta/collections/progress` | `GET`, `PUT` | `apps/web/src/app/api/gta/collections/progress/route.ts` | Per-user progress for published GTA collection checklist pages; signed-out UI state remains local-first. |
+| `/api/red-dead/collections/progress` | `GET`, `PUT` | `src/app/api/red-dead/collections/progress/route.ts` | Per-user progress for published Red Dead collection checklist pages; signed-out UI state remains local-first. |
 | `/api/checklists/session` | `GET` | `src/app/api/checklists/session/route.ts` | Session snapshot for checklist UI. |
 | `/api/codes/progress` | `GET`, `PUT`, `PATCH` | `src/app/api/codes/progress/route.ts` | Per-user used-code progress read/write; PATCH applies one used/restored action without overwriting concurrent progress. |
 | `/api/codes/session` | `GET` | `src/app/api/codes/session/route.ts` | Session snapshot for code pages. |
@@ -98,4 +99,5 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/sitemaps/stats.xml` | `GET` | `src/app/sitemaps/stats.xml/route.ts` | Sole sitemap owner for stats routes, with real index-refresh `lastmod` values, the approved games-list SEO matrix, and the top 1,000 eligible individual game pages. |
 | `/sitemaps/tools.xml` | `GET` | `src/app/sitemaps/tools.xml/route.ts` | Tools sitemap. |
 | `/sitemaps/wiki.xml` | `GET` | `src/app/sitemaps/wiki.xml/route.ts` | Wiki sitemap. |
+| `/sitemaps/red-dead.xml` | `GET` | `src/app/sitemaps/red-dead.xml/route.ts` | Red Dead landing, wiki hubs, and published collections; database pagination is excluded. |
 | `/sitemaps/gta.xml` | `GET` | `src/app/sitemaps/gta.xml/route.ts` | GTA landing, wiki hub/collection, and tool sitemap. |

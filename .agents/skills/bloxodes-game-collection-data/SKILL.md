@@ -45,7 +45,7 @@ npm run check:game-collection-data -- --game <game-slug> --collection <collectio
 
 Every collection workspace must also contain `runtime-manifest.json`; never move the dataset into `data/`. Do not use `--require-images` here; the image skill owns that check.
 
-21. Carry the approved page type into `runtime-manifest.json` as `collection.pageType`. Use `"checklist"` only for finite, player-completed goals. Use `"database"` for reference rosters. The page type changes the renderer and progress behavior, not the dataset table or v2 row shape. Existing manifests may omit it and default to `database`, but new or refreshed work should state it explicitly.
+21. Carry the approved page type into `runtime-manifest.json` as `collection.pageType`. Use `"collectible"` only for finite, player-completed goals. Use `"database"` for reference rosters. The page type changes the renderer and progress behavior, not the dataset table or v2 row shape. Existing manifests may omit it and default to `database`, but new or refreshed work should state it explicitly.
 
 20. Update `brief.md` with data status and gaps from the checker.
 

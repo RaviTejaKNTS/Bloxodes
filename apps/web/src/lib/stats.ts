@@ -335,6 +335,7 @@ export type StatsPlatformTotals = {
 };
 
 export type StatsPlatformPageData = {
+  totalsComplete?: boolean;
   totals: StatsPlatformTotals;
   chart: StatsGameChartData;
   topGames: StatsGame[];
@@ -3278,6 +3279,7 @@ export async function getStatsPlatformPage(): Promise<StatsPlatformPageData> {
     .slice(0, 10);
 
   return {
+    totalsComplete: platformTotals !== null,
     totals: {
       trackedGames,
       livePlayers: platformTotals?.livePlayers ?? topGames.reduce((sum, game) => sum + (game.playing ?? 0), 0),
