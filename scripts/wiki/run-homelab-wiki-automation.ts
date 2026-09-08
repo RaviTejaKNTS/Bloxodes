@@ -329,20 +329,12 @@ Identity:
 - artifact root: ${resultRoot}
 - reserved localhost preview port: ${3240 + (row.processing_slot || 1)}
 
-Required workflow:
-0. For this unattended run, the queue artifact root above overrides the skills' default tmp/content-workspace path. Put every suggestion, brief, dataset, media file, final JSON, manifest, report, and screenshot inside that exact artifact root. Do not write elsewhere in the checkout.
-1. Read and follow .agents/skills/bloxodes-game-collection-suggestions/SKILL.md. Save its evidence-complete suggestion record under the artifact root.
-2. As the parent, approve only defensible [create] suggestions. A source-incomplete or partial roster is blocked, never guessed.
-3. Read and follow .agents/skills/bloxodes-game-collection-workflow-runner/SKILL.md for every approved collection. Let that runner delegate its research, data, images, and writing gates exactly as the skill requires, but keep no more than two collection subagents active at once.
-4. Read and follow .agents/skills/bloxodes-wiki-workflow-runner/SKILL.md for the hub.
-5. Use task-local runtime-manifest.json files and scripts/collections/sync-game-collection-runtime.ts. Publish verified datasets and media to managed development and the shared bloxodes-wiki R2 bucket. Do not register collections in source code and do not add local data/public media.
-6. Use scripts/collections/sync-game-wiki-runtime.ts to publish the hub to managed development.
-7. Run the final copy/data/media, managed-dev readback, localhost route, metadata, pagination, sitemap, HTML-size, typecheck, git diff, and rendered Browser/Chromium gates required by the skills. Use only the reserved preview port above and stop that server after verification. If the in-app Browser backend is unavailable, use the installed headless Google Chrome or Playwright fallback and save screenshots; Browser unavailability alone is not a content block. For task-local hubs and collections, use the runtime sync dry-run/readback commands instead of registry-only compatibility seeders. Tracked source must remain unchanged.
+Workflow:
+1. Run .agents/skills/bloxodes-game-collection-suggestions/SKILL.md for ${row.game_name}. Save suggestions.md under the artifact root.
+2. Run .agents/skills/bloxodes-game-collection-workflow-runner/SKILL.md for ${row.game_name}, using that suggestions.md file to create all [create] collections.
+3. Run .agents/skills/bloxodes-wiki-workflow-runner/SKILL.md for ${row.game_name}.
 
-Security:
-- This process is managed-development only. Never read .envs, /etc/bloxodes, production credentials, or production infrastructure.
-- Never write production. Scheduled runs stop at managed-dev-ready for review; production release is a separate explicit operation.
-- This process is already inside the outer wiki batch. Do not invoke wiki:homelab:run or try to acquire another automation lock.
+Runtime context: use the artifact root above instead of the skills' default workspace. This scheduled run targets managed development only. Use the reserved preview port and stop the preview when finished. Keep tracked source unchanged. Task-local publication uses scripts/collections/sync-game-collection-runtime.ts and scripts/collections/sync-game-wiki-runtime.ts.
 
 Finish by writing ${path.join(resultRoot, "workflow-result.json")} with exactly:
 {
@@ -357,7 +349,7 @@ Finish by writing ${path.join(resultRoot, "workflow-result.json")} with exactly:
   "blockedCollections": [{"slug":"...","reason":"..."}],
   "collectionManifests": ["absolute runtime-manifest.json path"]
 }
-Ready requires a verified hub and at least one verified collection. If no collection clears the evidence gates, write blocked honestly.`;
+Record ready when the skill workflows finish successfully; otherwise record blocked with the unfinished work.`;
 }
 
 async function runCommand(command: string, args: string[], env: NodeJS.ProcessEnv, timeoutMs?: number) {

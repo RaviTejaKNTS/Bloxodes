@@ -70,11 +70,11 @@ Use the matching wiki and game-collection workflow skills. For existing datasets
 ## Scheduled Top-100 Automation
 
 - The homelab daily runner reads the exact production top 100 from `/api/stats/games`, excludes production wiki coverage and every durable queue result, and enqueues the highest-ranked remaining universe in managed development.
-- One restricted Codex process runs collection suggestions, parent approval, each approved collection workflow, and the wiki workflow. It must produce a verified hub and at least one source-complete collection; otherwise the queue row is recorded as blocked rather than padded with guessed data.
+- One restricted Codex process runs the collection suggestions skill for the game, passes its suggestions file to the collection workflow runner to create every `[create]` collection, then runs the wiki workflow runner. The wrapper supplies operational identity, workspace, preview, and result-file context only; collection selection, data, images, and editorial work follow the skills without additional roster-completeness approval instructions.
 - All authoring artifacts stay under ignored `tmp/wiki-automation/<queue-id>/`. Runtime publication uses explicit manifests with `sync-game-collection-runtime.ts` and `sync-game-wiki-runtime.ts`; no collection dataset or quiz payload is registered in code.
 - The scheduled service uploads shared R2 media and publishes only to managed development, then records `managed_dev_ready`. Production release remains a separate reviewed operation.
 - The wiki and article agents share one host lock. The daily wiki timer is persistent, and readiness retries transient managed-development, R2, and public API failures before failing the unit.
-- A dirty operator checkout is diagnostic, not a failure condition: scheduled wiki work is database/media-only, and the restricted systemd unit cannot write tracked source.
+- The runner requires a clean checkout at startup and after the model completes; the restricted systemd unit cannot write tracked source.
 
 ## Images and Renderer Readiness
 
