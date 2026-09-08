@@ -9,6 +9,10 @@ This is the parent workflow for one collection or a list of collections.
 
 You are the parent. You judge. You do not take over the writing voice unless the fix is tiny.
 
+## Useful coverage
+
+Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
+
 ## How the work splits
 
 1. A **collection subagent** owns research, data, and images for one collection, and waits at each gate.
@@ -30,48 +34,23 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
   final.json
 ```
 
-## Collection subagent handoff (research → data → images)
+## Subagent handoffs
 
-Every collection-subagent message should set:
+Send only the skill path, game name, and collection name. The skills contain the stage instructions; agents use the inherited workspace context and existing artifacts. Do not restate research requirements, add approval criteria, or send hurry-up / READY-or-BLOCKED checkpoint messages.
 
-- You own one game collection only.
-- Do not run `/bloxodes-game-collection-workflow-runner`.
-- Do not spawn other subagents. Do the work yourself with your own tools.
-- Start with research, then wait for parent approval at each gate.
+Use the same collection subagent for these stages, one skill per handoff:
 
-Skills by gate:
+- `.agents/skills/bloxodes-game-collection-research/SKILL.md`
+- `.agents/skills/bloxodes-game-collection-data/SKILL.md`
+- `.agents/skills/bloxodes-game-collection-images/SKILL.md`
 
-- Research: `.agents/skills/bloxodes-game-collection-research/SKILL.md` → return `brief.md` only
-- Data: `.agents/skills/bloxodes-game-collection-data/SKILL.md` → update dataset and brief data notes
-- Images: `.agents/skills/bloxodes-game-collection-images/SKILL.md` → save images, wire paths, update brief image notes
+After the image stage, use a new writing subagent with `.agents/skills/bloxodes-game-collection-writing/SKILL.md`, the game name, and the collection name.
 
-Repeat the no-nested-subagents rule when you send each next gate.
-
-## Writing subagent handoff (after image approval)
-
-After image readiness is approved, start a **new** writing subagent. Do not hand writing back to the research/data/image subagent unless the user says to.
-
-Tell the writing subagent:
-
-- You own one collection only.
-- Do not run this workflow runner.
-- Do not spawn other subagents.
-- Skill: `.agents/skills/bloxodes-game-collection-writing/SKILL.md` — read it fully
-- Read the approved `brief.md` first, including data and image readiness notes
-- Write only:
-  `tmp/content-workspace/<game-slug>/collections/<collection-slug>/final.json`
-- After drafting, reread once for simple player voice, concrete usefulness, valid JSON, no prose counts, no source/dataset/workflow/page wording, correct `faq_json` keys (`q` / `a`), and a useful `wiki_md`
-
-Also give the writing subagent:
-
-- game slug and collection slug
-- path to `brief.md`
-- path for `final.json`
-- any parent approval notes (soft facts, accepted image gaps, section label risks)
+Record approval notes or specific corrections in the collection brief before sending the next skill handoff.
 
 ## Workflow
 
-1. Confirm the approved game, universe ID, and collection list.
+1. Read the supplied suggestions file and run every `[create]` collection for the game.
 2. Give each collection subagent exactly one collection.
 3. Research gate: subagent returns `brief.md`.
 4. Review source proof, scope, coverage, whether the collection is worth publishing, and the approved `database` versus `collectible` page-type decision.
@@ -110,7 +89,7 @@ npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<colle
 
 Once the research subagent returns `brief.md`, check that:
 
-- source proof is strong and complete
+- sources support a useful collection; unresolved coverage is recorded for later improvement
 - collection is durable, useful, and source-backed
 - item fields are useful for players to compare items
 - section plan is clear and useful for players
@@ -121,7 +100,7 @@ Once the research subagent returns `brief.md`, check that:
 
 Once the data subagent updates the brief, check that:
 
-- Data is complete, accurate, and matches the approved brief.
+- Data includes the supported rows and accurate available fields from the brief; missing rows or values are documented, not a completeness blocker.
 - Dataset uses v2 wrapped `{ meta, items[].item, items[].system }`, not a bare array.
 - Public game fields live only in `items[].item`; system fields live only in `items[].system`.
 - If a real multi-section grouping exists, `items[].system.section`, `items[].system.sortOrder`, `meta.display.groupLabel`, and `meta.display.sectionOrder` are present and match actual rendered labels.

@@ -5,6 +5,11 @@ description: Suggest Bloxodes game collection page opportunities for one Roblox 
 
 # Bloxodes Game Collection Suggestions
 
+## Useful coverage
+
+Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
+
+
 Use this to decide what game collection pages Bloxodes should create for one Roblox game. Do not write the pages here.
 
 ## Start

@@ -5,6 +5,13 @@ description: Gather, save, wire, and verify images for one approved Bloxodes gam
 
 # Bloxodes Game Collection Images
 
+## Useful coverage
+
+Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
+
+Use the game and collection names to locate their suggestions and workspace in the inherited task context, or the default workspace below. Keep the supplied workspace override when present. This skill owns its stage; do not spawn subagents. Return the stage artifacts when finished.
+
+
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Download images and edit dataset files directly using Bash and the Edit/Write tools.**
 
 Use this after `brief.md` and data readiness are approved. Give images their own authoring pass before writing. Save staging media under the collection workspace; the parent verifier uploads and verifies immutable R2 media keys before the database-backed route can render them.
@@ -57,4 +64,4 @@ Image readiness:
 - Ready for writing: yes/no
 ```
 
-If images are important and coverage is weak, stop and say what is missing. If the collection can work without images, explain why and mark the missing images as accepted. Record the source URL in the manifest/brief even when the source image contains a baked-in item name. User- or parent-approved direct item-image sources may be used when their images clearly match the exact game; keep source/licensing caveats in the brief rather than silently dropping usable coverage.
+Search beyond the roster source for usable exact-item images. Save and wire every verified match even when the set is incomplete; never discard available images because other rows lack them. Record remaining gaps and proceed with the useful collection. Missing images do not make the whole collection unworthy, and the image pass must still be performed. Record the source URL in the manifest/brief even when the source image contains a baked-in item name. User- or parent-approved direct item-image sources may be used when their images clearly match the exact game; keep source/licensing caveats in the brief rather than silently dropping usable coverage.

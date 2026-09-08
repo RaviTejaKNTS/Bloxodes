@@ -5,6 +5,13 @@ description: Research one approved Bloxodes game collection before data or writi
 
 # Bloxodes Game Collection Research
 
+## Useful coverage
+
+Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
+
+Use the game and collection names to locate their suggestions and workspace in the inherited task context, or the default workspace below. Keep the supplied workspace override when present. This skill owns its stage; do not spawn subagents. Return the stage artifacts when finished.
+
+
 Use this for one approved game collection. Research only. Do not write `final.json`.
 
 ## Output
@@ -72,4 +79,4 @@ Page layout plan:
 - Collectible rationale and progress key: (required only for `collectible`)
 ```
 
-If source proof is weak, say what is missing and stop.
+Return a usable brief with supported scope and known gaps. Block only when the supported material cannot make a worthwhile collection.

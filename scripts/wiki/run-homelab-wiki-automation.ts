@@ -334,6 +334,8 @@ Workflow:
 2. Run .agents/skills/bloxodes-game-collection-workflow-runner/SKILL.md for ${row.game_name}, using that suggestions.md file to create all [create] collections.
 3. Run .agents/skills/bloxodes-wiki-workflow-runner/SKILL.md for ${row.game_name}.
 
+For collection subagent handoffs, send only the skill, game name, and collection name. Let the skills supply the instructions.
+
 Runtime context: use the artifact root above instead of the skills' default workspace. This scheduled run targets managed development only. Use the reserved preview port and stop the preview when finished. Keep tracked source unchanged. Task-local publication uses scripts/collections/sync-game-collection-runtime.ts and scripts/collections/sync-game-wiki-runtime.ts.
 
 Finish by writing ${path.join(resultRoot, "workflow-result.json")} with exactly:

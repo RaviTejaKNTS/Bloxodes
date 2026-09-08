@@ -5,6 +5,13 @@ description: Prepare source-backed data for one approved Bloxodes game collectio
 
 # Bloxodes Game Collection Data
 
+## Useful coverage
+
+Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
+
+Use the game and collection names to locate their suggestions and workspace in the inherited task context, or the default workspace below. Keep the supplied workspace override when present. This skill owns its stage; do not spawn subagents. Return the stage artifacts when finished.
+
+
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Write and edit all files directly using the Write and Edit tools.**
 
 Use this after `brief.md` is approved. Prepare one game collection under `tmp/content-workspace/<game-slug>/collections/<collection-slug>/`. Repository collection datasets are retired; the parent verifier publishes the workspace as an immutable database revision before preview. Do not gather images here; plan the image field and leave image collection for `bloxodes-game-collection-images`.
@@ -121,4 +128,4 @@ Data readiness:
 - Ready for images: yes/no
 ```
 
-If data is not ready, stop and say exactly what is blocked. If data is ready, hand off to the image step before writing.
+Fix invalid dataset structure before handoff. Missing source rows or values belong in the brief and do not prevent handing a useful dataset to the image step.
