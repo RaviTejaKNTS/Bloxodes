@@ -559,11 +559,16 @@ async function release(result: WorkflowResult) {
     }
     if (!ok) throw new Error(`Live verification failed for ${expected.url}.`);
   }
-  await retryOperation("Published wiki sitemap", async () => {
-    const response = await fetch("https://bloxodes.com/sitemaps/wiki.xml", { signal: AbortSignal.timeout(30_000) });
-    const body = await response.text();
-    if (!response.ok || expectedPages.some((page) => !body.includes(`<loc>${page.url}</loc>`))) throw new Error("Published wiki URLs are not yet in the sitemap.");
-  });
+  let sitemapReady = false;
+  for (let attempt = 0; attempt < 24; attempt += 1) {
+    try {
+      const response = await fetch("https://bloxodes.com/sitemaps/wiki.xml", { signal: AbortSignal.timeout(30_000) });
+      const body = await response.text();
+      if (response.ok && expectedPages.every((page) => body.includes(`<loc>${page.url}</loc>`))) { sitemapReady = true; break; }
+    } catch { /* Cache/origin recovery is bounded by this publication poll. */ }
+    await new Promise((resolve) => setTimeout(resolve, 5_000));
+  }
+  if (!sitemapReady) throw new Error("Published wiki URLs are not yet in the sitemap.");
   return expectedPages.map((page) => page.url);
 }
 
