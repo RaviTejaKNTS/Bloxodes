@@ -1,0 +1,102 @@
+Evidence checked:
+- Existing Bloxodes coverage: No published `/articles` page covers lob or self lob for Practical Basketball. Sitemap check found no Practical Basketball article URLs. Slug `how-to-lob-and-self-lob-in-practical-basketball` returns 404 on production. Related Bloxodes pages already live: `/wiki/practical-basketball` (wiki hub with partial controls table), `/wiki/practical-basketball/badges` (includes Alley-Oop Finisher badge), `/wiki/practical-basketball/takeovers`, and `/stats/games/practical-basketball-7529591378`.
+- Game universe_id (if game-specific): `7529591378` (matches local `apps/web/src/lib/game-collections/games/practical-basketball.ts` and Bloxodes stats URL).
+- Internal link candidates (existing same-game/related pages with slugs, 2+):
+  - `/wiki/practical-basketball` — wiki hub; controls table already lists self lob as `F` and sprint as `Shift`.
+  - `/wiki/practical-basketball/badges` — Alley-Oop Finisher badge explicitly mentions lob catches and self-lob attempts.
+  - `/stats/games/practical-basketball-7529591378` — game stats page for broader Practical Basketball context.
+- Source/competitor coverage: Beebom (Aug 5, 2026 lead), allthings.how lob guide (Aug 5, 2026), allthings.how Stress Test 3 controls guides, TheSpike.gg controls guide (Jan 2026), treyexgaming beginner/Trello-style controls list, gamestratwiki self-lob guide, practicalbasketball.wiki controls page (conflicting F-based lob wording), YouTube controls walkthroughs.
+- Sources found:
+  - https://beebom.com/how-to-lob-and-self-lob-in-practical-basketball/ (lead; Aug 5, 2026)
+  - https://allthings.how/practical-basketball-how-to-throw-lobs-and-self-lobs/ (Aug 5, 2026; mirrors Beebom inputs)
+  - https://allthings.how/practical-basketball-controls-full-pc-xbox-and-ps5-keybinds-stress-test-3/
+  - https://allthings.how/practical-basketball-full-controls-guide-for-keyboard-and-controller-roblox/
+  - https://allthings.how/practical-basketball-how-to-self-lob-on-pc-and-controller/
+  - https://www.thespike.gg/roblox/beginner-guides/roblox-practical-basketball-controls-guide
+  - https://www.treyexgaming.com/practical-basketball-beginner-guide/
+  - https://gamestratwiki.com/how-to-self-lob-on-pc-controller-in-practical-basketball/
+  - https://www.practicalbasketball.wiki/controls/practical-basketball-controls-pc
+  - https://bloxodes.com/wiki/practical-basketball
+  - https://www.youtube.com/watch?v=xlzQ-7gaW8g
+  - https://www.youtube.com/watch?v=IOQYouDjZLg
+- Sources used for exact facts:
+  - Teammate lob/alley-oop PC input: `T + teammate number (1/2/3/4)` — supported independently by TheSpike, treyexgaming, allthings.how Stress Test 3/full controls guides, and allthings.how full controls guide. Safer than Beebom’s `Hold T + Press R`.
+  - Self lob PC input: `F` while driving toward the rim with forward momentum — supported by TheSpike, treyexgaming, allthings.how Stress Test 3/full/self-lob guides, gamestratwiki, and Bloxodes wiki controls table. Safer than Beebom’s `Shift + F` combo; sprint (`Shift`) is separate movement, not part of the bind in consensus sources.
+  - Self lob controller input: hold `LB/L1` and press `RS/R3` together — supported by allthings.how Stress Test 3 guide, allthings.how self-lob guide, and Bloxodes wiki.
+  - Teammate lob controller input: hold `LB/L1 + RB/R1 + teammate icon` — supported by allthings.how Stress Test 3 guide.
+  - Finish after self lob: standard finishes, not unique keys — layup `Hold E while driving`; driving dunk `Shift + Spacebar`; standing dunk `Hold Spacebar`. Supported by TheSpike, treyexgaming, allthings.how, and Bloxodes wiki.
+  - Usage/timing facts: lobs travel on a high arc over defenders; teammate lobs work best on cutters moving toward the rim, not stationary players; self lobs need open lanes/fast breaks and fail in crowded paint — supported across Beebom, TheSpike, allthings.how, and gamestratwiki.
+  - Game context: Practical Basketball is in Stress Test 3; controls can change between builds; in-game overlay/community server controls are the authoritative fallback — supported by Bloxodes wiki, allthings.how Stress Test 3 guide, and Roblox experience description.
+- Sources checked but not usable:
+  - Beebom lead + allthings.how Aug 5 lob article: usable for topic framing and situational advice, but their exact PC binds (`T + R`, `Shift + F`) conflict with the stronger multi-source Stress Test 3 control set and Bloxodes wiki. Treat as risk, not primary fact source.
+  - https://www.practicalbasketball.wiki/controls/practical-basketball-controls-pc — AI-style wiki with conflicting lob wording (`F + teammate number`, `F + Spacebar` self lob); not independent enough to override Trello-style/community lists.
+  - https://noleep.com/en/how-to-self-lob-practical-basketball-simulator-roblox/ — appears to describe a different “Practical Basketball Simulator” flow with jump + timing meter; weak match to current Stress Test 3 Practical Basketball sources.
+  - trendsmask.com post-up/screen posts — generic, inaccurate controls (`X` for post up vs confirmed `G`), not usable.
+  - Roblox game pages — accessible for context but no detailed control list on-page; controls deferred to community server.
+- Search limitations: Production Supabase REST query for `roblox_universes` slug returned empty without auth key in this environment; universe_id confirmed via Bloxodes stats URL and repo config instead. Article inventory checked via sitemap + slug 404, not a full authenticated `articles` table query by `universe_id`. Discord/Trello primary control docs were not directly accessible; treyexgaming list treated as secondary mirror of community controls. YouTube transcripts show additional conflicting teammate-lob wording (`F + number` in one controls video).
+- Related page-type overlap: `/wiki/practical-basketball` already lists self lob (`F`) but does not explain teammate lob inputs, timing, finishes, or when to use either move. Badges collection mentions Alley-Oop Finisher but is not a how-to. No codes/checklist/quiz overlap found. This belongs as a focused gameplay article, not a wiki rewrite or collection page.
+- Useful uncovered angle: Practical Basketball is top-ranked and in active Stress Test 3; players searching “lob/self lob” need a short PC + controller answer with timing reads and turnover warnings. Bloxodes can link to the Alley-Oop Finisher badge and wiki controls while going deeper on execution than the wiki table alone.
+
+Media plan:
+- YouTube match quality (perfect / near / none): near
+- YouTube candidate URL and reason: https://www.youtube.com/watch?v=xlzQ-7gaW8g — useful controls overview and mentions self lob (`F`), but teammate lob wording conflicts (`F + number` vs consensus `T + number`) and it also mixes in lob-dunk (`Shift + Space + F`) as a separate finish type. Do not embed unless verified. Secondary near match: https://www.youtube.com/watch?v=IOQYouDjZLg — self-lob only, adds unconfirmed jump/timing-meter steps.
+- Image candidates (source URL, what it shows, clean yes/no, rights note): None required. Inputs are short keyboard/controller binds; a markdown table is clearer than competitor screenshots.
+- Images to host (0-3, with planned file stems): 0
+- Cover image plan (null / generated / hosted cover.webp): null — let import flow generate from linked universe thumbnail
+
+Article plan:
+- Working title: How to Lob and Self Lob in Practical Basketball (Roblox)
+- Suggested slug: how-to-lob-and-self-lob-in-practical-basketball
+- Title promise: Show the exact PC and controller inputs for teammate lobs and self lobs, how to finish a self lob, and when each move is worth trying.
+- Reader need: Players keep seeing highlight self lobs and want the bind plus timing without reading a full controls encyclopedia. They also confuse teammate lobs with regular numbered passes and attempt both moves in traffic.
+- Facts to use:
+  - Teammate lob is a high-arcing alley-oop pass over defenders, not a flat numbered pass.
+  - PC teammate lob: `T + teammate number (1/2/3/4)`.
+  - PC self lob: press `F` while sprinting/driving toward the rim with forward momentum; do not stop after throwing.
+  - Controller self lob: hold `LB/L1` and press `RS/R3` together.
+  - Controller teammate lob: hold `LB/L1 + RB/R1 + teammate icon` (per Stress Test 3 controls guide).
+  - After catching a self lob, finish with normal gather inputs: layup `Hold E while driving`; driving dunk `Shift + Spacebar` when the lane stays open.
+  - Best situations: teammate cutting to the rim; fast breaks/open lanes for self lob.
+  - Avoid: stationary teammate targets, crowded paint, no forward momentum on self lob.
+  - Practical Basketball is in Stress Test 3; confirm binds in the in-game overlay or community server before a session.
+  - Alley-Oop Finisher badge on Bloxodes supports lob/self-lob finishing builds.
+- Facts to avoid:
+  - Beebom lead’s `Hold T + Press R` and `Shift + F` as confirmed current binds unless in-game verification overrides the consensus set.
+  - Claiming a dedicated self-lob-only finish bind (`E` vs `Space`) separate from normal layup/dunk controls unless verified in current build.
+  - noleep-style jump + green timing meter requirement for self lob (not corroborated by stronger sources).
+  - Mobile button labels/steps without a verified current Stress Test 3 source.
+  - Invented badge tier requirements, rep costs, or “meta” claims beyond the Alley-Oop Finisher description already on Bloxodes.
+  - Freshness language like “latest/current/new controls” tied to August 2026 competitor posts.
+- FAQ opportunities:
+  - What is the difference between a lob and a normal pass in Practical Basketball?
+  - Do you need to hold Shift for a self lob on PC?
+  - When should you throw a teammate lob instead of a bounce or chest pass?
+- Open gaps or risks:
+  - **Major control disagreement:** Beebom/allthings.how Aug 5 lob articles say `T + R` and `Shift + F`; the stronger Stress Test 3 set used by TheSpike, treyexgaming, allthings.how controls guides, and Bloxodes wiki says `T + number` and `F`. Parent should choose whether writing proceeds on the consensus set or requires in-game verification first.
+  - **Secondary disagreement:** one YouTube controls video says teammate lob is `F + number`; do not use unless verified.
+  - **Stress Test volatility:** brief recommends a short “confirm in-game overlay/community server” note because binds can change mid-test.
+  - **Article inventory check was sitemap-based, not authenticated DB query by `universe_id`.**
+  - Proceed recommendation: **yes, with parent approval of the safer control set** (`T + number`, `F`, standard finishes) and a verification note in the article.
+
+Outline:
+- Intro (no H2): One short paragraph explaining that Practical Basketball has two different lob moves — a teammate alley-oop over defenders and a self lob off the backboard — and that both need timing and space more than button spam. Mention Stress Test 3 control checks briefly.
+
+- **How to lob to a teammate in Practical Basketball**
+  - PC: `T + teammate number (1/2/3/4)`.
+  - Controller: `LB/L1 + RB/R1 + teammate icon`.
+  - Explain what the pass does (high arc over a defender) and when it connects: teammate cutting toward the rim, pass thrown early, not to a stationary body in traffic.
+  - Small comparison list or table vs overhead/chest/bounce pass is optional if it stays scannable.
+  - Link to `/wiki/practical-basketball` for the wider controls list.
+
+- **How to self lob in Practical Basketball and finish the play**
+  - PC: sprint toward the rim, press `F` with forward momentum, keep running to the catch.
+  - Controller: `LB/L1 + RS/R3` together while driving.
+  - Finish using normal gather buttons: layup `Hold E while driving`; driving dunk `Shift + Spacebar` if the lane stays open.
+  - Note common failure causes: no momentum, stopping after the throw, crowded paint.
+  - Optional small finish table (Layup / Driving dunk / When to pick each).
+  - Link to `/wiki/practical-basketball/badges` when mentioning Alley-Oop Finisher for players building around lob finishes.
+
+- **When lobs are worth it and when they turn the ball over**
+  - Teammate lob: use when a defender is in the passing lane or your cutter has a live path to the rim; skip when the receiver is parked or surrounded.
+  - Self lob: fast breaks and wide lanes only; practice in an empty court first.
+  - Close with a one-line reminder to confirm current binds in-game because Stress Test 3 can change them.
