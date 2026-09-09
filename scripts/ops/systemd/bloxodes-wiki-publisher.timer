@@ -1,0 +1,10 @@
+[Unit]
+Description=Check completed wiki publication requests each minute
+
+[Timer]
+OnBootSec=1min
+OnUnitInactiveSec=1min
+Unit=bloxodes-wiki-publisher.service
+
+[Install]
+WantedBy=timers.target

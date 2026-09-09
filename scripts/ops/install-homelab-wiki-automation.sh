@@ -28,7 +28,7 @@ if [[ -n "$(git -C "${REPO_ROOT}" status --porcelain)" ]]; then
   echo "Checkout is dirty; refusing to install." >&2
   exit 1
 fi
-if systemctl is-active --quiet bloxodes-wiki-builder.service; then
+if systemctl is-active --quiet bloxodes-wiki-builder.service || systemctl is-active --quiet bloxodes-wiki-publisher.service; then
   echo "bloxodes-wiki-builder.service is active; retry after it finishes." >&2
   exit 1
 fi
@@ -60,8 +60,10 @@ setfacl -m "u:${MODEL_USER}:rwx" "${REPO_ROOT}/tmp/article-writer"
 runuser --user "${MODEL_USER}" -- git config --global --replace-all safe.directory "${REPO_ROOT}"
 install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.service" /etc/systemd/system/bloxodes-wiki-builder.service
 install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-builder.timer" /etc/systemd/system/bloxodes-wiki-builder.timer
+install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-publisher.service" /etc/systemd/system/bloxodes-wiki-publisher.service
+install -m 0644 "${REPO_ROOT}/scripts/ops/systemd/bloxodes-wiki-publisher.timer" /etc/systemd/system/bloxodes-wiki-publisher.timer
 systemctl daemon-reload
 systemctl reset-failed bloxodes-wiki-builder.service || true
-systemctl enable --now bloxodes-wiki-builder.timer
+systemctl enable --now bloxodes-wiki-builder.timer bloxodes-wiki-publisher.timer
 echo "Installed and started the one-game daily top-100 Bloxodes wiki service timer from ${APPROVED_SHA}."
 echo "The timer owns future starts; do not start the service manually unless an immediate game is intended."

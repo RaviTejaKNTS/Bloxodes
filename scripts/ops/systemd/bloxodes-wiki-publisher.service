@@ -1,0 +1,22 @@
+[Unit]
+Description=Publish exact completed Bloxodes wiki requests
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=teja
+Group=teja
+WorkingDirectory=/home/teja/projects/Bloxodes
+EnvironmentFile=/etc/bloxodes/wiki-automation.env
+Environment=NODE_ENV=development
+Environment=BLOXODES_ENV_PROFILE=process-only
+Environment=BLOXODES_ENV_OVERLAYS=
+ExecStart=/usr/bin/npm run wiki:homelab:run -- --apply --release-only
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+NoNewPrivileges=true
+CapabilityBoundingSet=
+TimeoutStartSec=15min
+Nice=10

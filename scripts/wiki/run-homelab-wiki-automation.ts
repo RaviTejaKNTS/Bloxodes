@@ -17,6 +17,7 @@ import {
 } from "../articles/article-writer-provider";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
+import { readSessionState, saveSessionState, recoverStep, resumedCodexArgs } from "./wiki-session-recovery";
 import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-automation-env";
 
 type StatsGame = {
@@ -90,6 +91,7 @@ const productionEnvFile = path.resolve(process.env.WIKI_RELEASE_PRODUCTION_ENV_F
 const apply = process.argv.includes("--apply");
 const skipProduction = process.argv.includes("--skip-production-release");
 const releaseOnly = process.argv.includes("--release-only");
+const queueId = process.env.WIKI_AUTOMATION_QUEUE_ID?.trim();
 const activeChildren = new Set<ChildProcess>();
 let stopRequested = false;
 
@@ -145,7 +147,7 @@ async function retryOperation<T>(label: string, operation: () => Promise<T>): Pr
 }
 
 function assertCleanCheckout(context: string) {
-  const result = spawnSync("git", ["status", "--porcelain"], { cwd: worktree, encoding: "utf8" });
+  const result = spawnSync("git", ["-c", `safe.directory=${worktree}`, "status", "--porcelain"], { cwd: worktree, encoding: "utf8" });
   if (result.status !== 0) throw new Error(`Could not inspect git status during ${context}: ${result.stderr.trim()}`);
   if (result.stdout.trim()) throw new Error(`Wiki automation requires a clean checkout during ${context}.`);
 }
@@ -269,7 +271,8 @@ async function claim(dev: SupabaseClient, lane: number): Promise<QueueRow | null
   const worker = `${os.hostname()}-wiki-homelab-${lane}`;
   const { data, error } = await dev.rpc("claim_wiki_generation_queue_item", {
     p_worker: worker,
-    p_lease_minutes: leaseMinutes
+    p_lease_minutes: leaseMinutes,
+    ...(queueId ? { p_queue_id: queueId } : {})
   });
   if (error) throw new Error(`Wiki queue claim failed: ${error.message}`);
   const row = Array.isArray(data) ? data[0] : data;
@@ -285,7 +288,7 @@ async function claimOrEnqueue(dev: SupabaseClient, lane: number): Promise<QueueR
   await previous;
   try {
     let row = await claim(dev, lane);
-    if (row) return row;
+    if (row || queueId) return row;
     const enqueued = await enqueueNext(dev);
     if (!enqueued) return null;
     row = await claim(dev, lane);
@@ -336,7 +339,7 @@ Workflow:
 
 For collection subagent handoffs, send only the skill, game name, and collection name. Let the skills supply the instructions.
 
-Runtime context: use the artifact root above instead of the skills' default workspace. This scheduled run targets managed development only. Use the reserved preview port and stop the preview when finished. Keep tracked source unchanged. Task-local publication uses scripts/collections/sync-game-collection-runtime.ts and scripts/collections/sync-game-wiki-runtime.ts.
+Runtime context: use the artifact root above instead of the skills' default workspace. The model works in managed development; trusted code publishes to production after verification. Use the reserved preview port and stop the preview when finished. Keep tracked source unchanged. Task-local publication uses scripts/collections/sync-game-collection-runtime.ts and scripts/collections/sync-game-wiki-runtime.ts.
 
 Finish by writing ${path.join(resultRoot, "workflow-result.json")} with exactly:
 {
@@ -354,16 +357,41 @@ Finish by writing ${path.join(resultRoot, "workflow-result.json")} with exactly:
 Record ready when the skill workflows finish successfully; otherwise record blocked with the unfinished work.`;
 }
 
-async function runCommand(command: string, args: string[], env: NodeJS.ProcessEnv, timeoutMs?: number) {
+function sanitizeError(value: string, env: NodeJS.ProcessEnv): string {
+  let text = value;
+  for (const [key, secret] of Object.entries(env)) {
+    if (secret && secret.length > 6 && /KEY|TOKEN|SECRET|PASSWORD|ROLE/i.test(key)) text = text.split(secret).join("[redacted]");
+  }
+  return text.slice(-6000);
+}
+
+async function runCommand(command: string, args: string[], env: NodeJS.ProcessEnv, timeoutMs?: number, sessionFile?: string) {
   await new Promise<void>((resolve, reject) => {
     const child = spawn(command, args, {
-      cwd: worktree,
-      env,
-      stdio: "inherit",
-      shell: false,
-      detached: process.platform !== "win32"
+      cwd: worktree, env, stdio: ["ignore", "pipe", "pipe"], shell: false, detached: process.platform !== "win32"
     });
     activeChildren.add(child);
+    let tail = "", pending = "", sessionWrite = Promise.resolve();
+    child.stdout?.on("data", (chunk: Buffer) => {
+      process.stdout.write(chunk);
+      if (!sessionFile) { tail = (tail + chunk.toString()).slice(-12000); return; }
+      pending += chunk.toString();
+      const lines = pending.split("\n"); pending = lines.pop() || "";
+      for (const line of lines) {
+        try {
+          const event = JSON.parse(line);
+          if (event.type === "thread.started" && typeof event.thread_id === "string") {
+            sessionWrite = sessionWrite.then(async () => {
+              const state = await readSessionState(sessionFile);
+              if (state.sessionId && state.sessionId !== event.thread_id) throw new Error("Codex resumed a different session.");
+              state.sessionId = event.thread_id;
+              await saveSessionState(sessionFile, state);
+            });
+          }
+        } catch { /* Other JSONL events are not session metadata. */ }
+      }
+    });
+    child.stderr?.on("data", (chunk: Buffer) => { process.stderr.write(chunk); tail = (tail + chunk.toString()).slice(-12000); });
     const timer = timeoutMs ? setTimeout(() => {
       terminateProcessGroup(child, "SIGTERM");
       setTimeout(() => terminateProcessGroup(child, "SIGKILL"), 15_000).unref();
@@ -374,10 +402,8 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
       if (timer) clearTimeout(timer);
       terminateProcessGroup(child, "SIGTERM");
       setTimeout(() => {
-        terminateProcessGroup(child, "SIGKILL");
-        activeChildren.delete(child);
-        if (code === 0) resolve();
-        else reject(new Error(`${command} exited with ${code ?? "unknown"}.`));
+        terminateProcessGroup(child, "SIGKILL"); activeChildren.delete(child);
+        sessionWrite.then(() => code === 0 ? resolve() : reject(new Error(`${command} exited with ${code}: ${sanitizeError(tail, env)}`)), reject);
       }, 1_000);
     });
   });
@@ -391,7 +417,7 @@ async function runDirectCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot
     NEXT_DIST_DIR: path.join(".next", "wiki-automation", relativeAttempt)
   };
   await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
-  await runCommand(codexBin, args, directEnv, timeoutMinutes * 60_000);
+  await runCommand(codexBin, ["exec", "--sandbox", "workspace-write", ...args.slice(1).filter((arg) => arg !== "--ephemeral" && arg !== "--approve-for-me")], directEnv, timeoutMinutes * 60_000, path.join(resultRoot, "session.json"));
 }
 
 async function assertPreviewPortFree(port: number) {
@@ -500,13 +526,13 @@ async function release(result: WorkflowResult) {
   const env = productionEnvironment();
   await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", result.wikiSlug, "--universe-id", String(result.universeId)], env);
   for (const manifest of result.collectionManifests) {
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--manifest", manifest], env);
+    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest], env);
   }
   for (const manifest of result.collectionManifests) {
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--manifest", manifest, "--apply", "--allow-prod"], env);
+    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest, "--apply", "--upload-media", "--allow-prod"], env);
   }
   for (const manifest of result.collectionManifests) {
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--manifest", manifest, "--apply", "--publish", "--allow-prod"], env);
+    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest, "--apply", "--upload-media", "--publish", "--allow-prod"], env);
   }
   await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", result.wikiSlug, "--universe-id", String(result.universeId), "--apply", "--allow-prod"], env);
   const wikiFinal = JSON.parse(await readFile(result.wikiFinalPath!, "utf8")) as { title?: unknown };
@@ -533,33 +559,70 @@ async function release(result: WorkflowResult) {
     }
     if (!ok) throw new Error(`Live verification failed for ${expected.url}.`);
   }
+  await retryOperation("Published wiki sitemap", async () => {
+    const response = await fetch("https://bloxodes.com/sitemaps/wiki.xml", { signal: AbortSignal.timeout(30_000) });
+    const body = await response.text();
+    if (!response.ok || expectedPages.some((page) => !body.includes(`<loc>${page.url}</loc>`))) throw new Error("Published wiki URLs are not yet in the sitemap.");
+  });
   return expectedPages.map((page) => page.url);
 }
 
-async function releaseManagedDevReady(dev: SupabaseClient): Promise<boolean> {
-  if (skipProduction) return false;
+async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
   const query = await dev.from("wiki_generation_queue").select("*")
-    .eq("status", "managed_dev_ready")
-    .order("managed_dev_completed_at", { ascending: true })
-    .limit(1)
-    .maybeSingle();
-  if (query.error) throw new Error(`Could not inspect pending wiki releases: ${query.error.message}`);
-  if (!query.data) return false;
-  const row = query.data as QueueRow;
-  if (!row.result_root || !row.wiki_final_path) throw new Error(`Managed-dev-ready row ${row.id} has incomplete artifact paths.`);
-  const result = await readWorkflowResult(row, row.result_root);
-  if (result.outcome !== "ready") throw new Error(`Managed-dev-ready row ${row.id} has a non-ready workflow result.`);
-  const urls = await release(result);
-  const update = await dev.from("wiki_generation_queue").update({
-    status: "published",
-    published_at: new Date().toISOString(),
-    completed_at: new Date().toISOString(),
-    production_receipt: { urls, verified_at: new Date().toISOString() },
-    last_error: null
-  }).eq("id", row.id).eq("status", "managed_dev_ready");
-  if (update.error) throw new Error(`Could not record resumed wiki publication: ${update.error.message}`);
-  console.log(`Resumed, published, and verified ${row.game_name}: ${urls.join(", ")}`);
+    .eq("status", "processing").in("production_receipt->>state", ["requested", "publishing"])
+    .gt("lease_expires_at", new Date().toISOString()).order("started_at").limit(20);
+  if (query.error) throw query.error;
+  const now = Date.now();
+  const row = (query.data || []).find((candidate) => candidate.production_receipt?.state === "requested" ||
+    now - Date.parse(candidate.production_receipt?.started_at || "") > 16 * 60_000);
+  if (!row) return false;
+  const request = row.production_receipt;
+  const claimed = await dev.from("wiki_generation_queue").update({ production_receipt: { ...request, state: "publishing", started_at: new Date().toISOString() } })
+    .eq("id", row.id).eq("status", "processing").eq("lease_token", row.lease_token)
+    .eq("production_receipt->>request_id", request.request_id).eq("production_receipt->>state", request.state).select("id");
+  if (claimed.error) throw claimed.error;
+  if (!claimed.data?.length) return false;
+  let receipt;
+  try {
+    if (!row.result_root) throw new Error("Publication request has no artifact root.");
+    const expectedRoot = path.join(worktree, "tmp", "wiki-automation", row.id);
+    if (!(await realpath(row.result_root)).startsWith(`${await realpath(expectedRoot)}${path.sep}`)) throw new Error("Publication root escapes the requested queue game.");
+    const result = await readWorkflowResult(row, row.result_root);
+    if (result.outcome !== "ready") throw new Error("Publication request is not ready.");
+    const urls = await release(result);
+    receipt = { ...request, state: "published", urls, verified_at: new Date().toISOString() };
+  } catch (error) {
+    receipt = { ...request, state: "failed", error: sanitizeError(error instanceof Error ? error.message : String(error), productionEnvironment()), failed_at: new Date().toISOString() };
+  }
+  const saved = await dev.from("wiki_generation_queue").update({ production_receipt: receipt })
+    .eq("id", row.id).eq("status", "processing").eq("lease_token", row.lease_token).eq("production_receipt->>request_id", request.request_id);
+  if (saved.error) throw saved.error;
+  console.log(`Publisher ${receipt.state}: ${row.game_name}`);
   return true;
+}
+
+async function requestProduction(dev: SupabaseClient, row: QueueRow, resultRoot: string, result: WorkflowResult): Promise<string[]> {
+  const requestId = `${row.id}-${Date.now()}`;
+  await transition(dev, row, {
+    result_root: resultRoot, wiki_final_path: result.wikiFinalPath, collection_manifests: result.collectionManifests,
+    approved_collections: result.approvedCollections, blocked_collections: result.blockedCollections,
+    managed_dev_completed_at: new Date().toISOString(),
+    production_receipt: { state: "requested", request_id: requestId }
+  });
+  console.log(`Requested trusted production publication for ${row.game_name}.`);
+  const deadline = Date.now() + 30 * 60_000;
+  while (!stopRequested && Date.now() < deadline) {
+    const query = await dev.from("wiki_generation_queue").select("production_receipt,status,lease_token").eq("id", row.id).single();
+    if (query.error) throw query.error;
+    if (query.data.status !== "processing" || query.data.lease_token !== row.lease_token) throw new Error("Publication wait lost its queue lease.");
+    const receipt = query.data.production_receipt;
+    if (receipt?.request_id === requestId) {
+      if (receipt.state === "published" && Array.isArray(receipt.urls)) return receipt.urls;
+      if (receipt.state === "failed") throw new Error(receipt.error || "Production publication failed.");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
+  }
+  throw new Error("Production publisher did not finish before the wait deadline.");
 }
 
 async function retryDelay(dev: SupabaseClient): Promise<number | null> {
@@ -598,20 +661,42 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       return true;
     }
 
-    const resultRoot = path.join(worktree, "tmp", "wiki-automation", row.id, `attempt-${row.attempts}`);
+    const queueRoot = path.join(worktree, "tmp", "wiki-automation", row.id);
+    const resultRoot = row.result_root ? path.resolve(row.result_root) : path.join(queueRoot, `attempt-${row.attempts}`);
+    if (!resultRoot.startsWith(`${queueRoot}${path.sep}`)) throw new Error("Saved result root escapes queue workspace.");
     await mkdir(resultRoot, { recursive: true });
-    const heartbeatTimer = setInterval(() => void heartbeat(dev, row).catch((error) => console.error(error)), 5 * 60_000);
+    await transition(dev, row, { result_root: resultRoot });
+    const sessionFile = path.join(resultRoot, "session.json");
+    const env = modelEnvironment(devCredentials);
+    const port = 3240 + (row.processing_slot || lane);
+    const heartbeatTimer = setInterval(() => void heartbeat(dev, row).catch(console.error), 5 * 60_000);
     heartbeatTimer.unref();
-    let result: WorkflowResult;
     try {
-      const args = buildCodexExecArgs({ worktree, model: codexModel, reasoningEffort: codexReasoning, prompt: promptFor(row, resultRoot) });
-      await runDirectCodex(args, modelEnvironment(devCredentials), resultRoot, 3240 + (row.processing_slot || lane));
-      await assertPreviewPortFree(3240 + (row.processing_slot || lane));
-      assertCleanCheckout(`post-agent verification for lane ${lane}`);
+    let result: WorkflowResult;
+    try { result = await readWorkflowResult(row, resultRoot); }
+    catch {
+      const state = await readSessionState(sessionFile);
+      const prompt = state.sessionId ? "Continue the unfinished wiki and collection workflow in this session and write its workflow-result.json." : promptFor(row, resultRoot);
+      const args = state.sessionId ? resumedCodexArgs(state.sessionId, prompt, codexModel, codexReasoning)
+        : buildCodexExecArgs({ worktree, model: codexModel, reasoningEffort: codexReasoning, prompt });
+      await runDirectCodex(args, env, resultRoot, port);
       result = await readWorkflowResult(row, resultRoot);
-    } finally {
-      clearInterval(heartbeatTimer);
     }
+    const syncDevelopment = async () => {
+      result = await readWorkflowResult(row, resultRoot);
+      if (result.outcome !== "ready") throw new Error(result.outcomeReason || "Workflow is not ready.");
+      await assertPreviewPortFree(port);
+      assertCleanCheckout(`post-agent verification for lane ${lane}`);
+      await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", row.wiki_slug, "--universe-id", String(row.universe_id), "--apply"], env);
+      for (const manifest of result.collectionManifests) {
+        await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest, "--apply", "--upload-media", "--publish"], env);
+      }
+    };
+    const repair = async (sessionId: string, error: string) => {
+      const prompt = `The outer publication step failed: ${error}\nFix the affected artifacts in this existing workflow and update workflow-result.json. Verify in managed development. Trusted code will retry publication; do not access production.`;
+      await runDirectCodex(resumedCodexArgs(sessionId, prompt, codexModel, codexReasoning), env, resultRoot, port);
+      result = await readWorkflowResult(row, resultRoot);
+    };
 
     if (result.outcome === "blocked") {
       await transition(dev, row, {
@@ -632,10 +717,11 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       return true;
     }
 
-    const devEnv = modelEnvironment(devCredentials);
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", row.wiki_slug, "--universe-id", String(row.universe_id), "--apply"], devEnv);
-    for (const manifest of result.collectionManifests) {
-      await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--manifest", manifest, "--apply", "--upload-media", "--publish"], devEnv);
+    await recoverStep({ file: sessionFile, label: "Managed-development sync", operation: syncDevelopment, repair });
+    let urls: string[] = [];
+    if (!skipProduction) {
+      urls = await recoverStep({ file: sessionFile, label: "Production publication", operation: () => requestProduction(dev, row, resultRoot, result),
+        repair: async (sessionId, error) => { await repair(sessionId, error); await syncDevelopment(); } });
     }
     await transition(dev, row, {
       status: "managed_dev_ready",
@@ -656,7 +742,6 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       console.log(`[lane ${lane}] Managed-dev workflow complete; production release disabled.`);
       return true;
     }
-    const urls = await release(result);
     const { error } = await dev.from("wiki_generation_queue").update({
       status: "published",
       published_at: new Date().toISOString(),
@@ -665,8 +750,11 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       last_error: null
     }).eq("id", row.id).eq("status", "managed_dev_ready");
     if (error) throw new Error(`Could not record wiki publication: ${error.message}`);
+    const session = await readSessionState(sessionFile);
+    await saveSessionState(sessionFile, { ...session, completed: true, lastError: undefined });
     console.log(`[lane ${lane}] Published and verified ${row.game_name}: ${urls.join(", ")}`);
     return true;
+    } finally { clearInterval(heartbeatTimer); }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`[lane ${lane}] ${message}`);
@@ -705,6 +793,11 @@ async function main() {
     await previewNext(dev);
     return;
   }
+  if (releaseOnly) {
+    productionEnvironment();
+    while (await releaseRequestedWiki(dev)) { /* Trusted publisher never runs model turns or takes the model lock. */ }
+    return;
+  }
   let lock = await acquireAgentWorkLock(worktree, "wiki-automation");
   while (!lock && !stopRequested) {
     console.log("Another article or wiki agent workflow is active; waiting 60 seconds without interrupting it.");
@@ -713,13 +806,6 @@ async function main() {
   }
   if (!lock) return;
   try {
-    while (await releaseManagedDevReady(dev)) {
-      // Drain verified release backlog before spending model tokens on new games.
-    }
-    if (releaseOnly) {
-      console.log("Release-only run complete; no new wiki game was claimed.");
-      return;
-    }
     let claimedGames = 0;
     const reserveClaim = () => {
       if (maxGamesPerRun === 0) return true;
@@ -739,6 +825,7 @@ async function main() {
         }
         const worked = await runOne(dev, devCredentials, lane);
         if (worked) continue;
+        if (queueId) { console.log(`Requested queue row ${queueId} is not claimable.`); return; }
         releaseUnusedClaim();
         const delay = await retryDelay(dev);
         if (delay === null) {

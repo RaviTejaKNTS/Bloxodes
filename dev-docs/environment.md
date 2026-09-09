@@ -118,3 +118,5 @@ The September 6 manual article run verified that deterministic article upload/im
 ### Isolated article runtime
 
 The prepared article release links the existing ignored `.envs` tree and uses `/etc/bloxodes/article-automation.env`; it does not copy secrets into Git or model environments. Releases have independent dependencies and persistent state under `/home/teja/.local/share/bloxodes-article-runtime`. Preparation validates the existing profile contract; activation requires the reviewed host installer. No new secret values are required.
+
+Wiki automatic publication: the builder and Codex remain under `bloxodes-wiki-model` with no production credential access. The separate `bloxodes-wiki-publisher.service` uses the existing `teja` operator account, has no extra capabilities, runs trusted publication code only, and reads the existing protected production env. `/etc/bloxodes/wiki-automation.env` continues to hold development/media values and a production env file path, never production credentials. Queue receipts carry exact publication requests and errors between services. No approval-bypass flag is passed to Codex.
