@@ -19,6 +19,7 @@ import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { readSessionState, saveSessionState, recoverStep, resumedCodexArgs } from "./wiki-session-recovery";
 import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-automation-env";
+import { resolveWikiAttemptRoot } from "./wiki-workspace-paths";
 
 type StatsGame = {
   universeId: number;
@@ -413,14 +414,14 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
 }
 
 async function runDirectCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string, previewPort: number) {
-  const relativeAttempt = path.relative(path.join(worktree, "tmp", "wiki-automation"), resultRoot);
+  const relativeAttempt = path.relative(await realpath(path.join(worktree, "tmp", "wiki-automation")), await realpath(resultRoot));
   const directEnv = {
     ...env,
     PORT: String(previewPort),
     NEXT_DIST_DIR: process.env.BLOXODES_AUTOMATION_RUNTIME === "1" ? ".next" : path.join(".next", "wiki-automation", relativeAttempt)
   };
   await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
-  await runCommand(codexBin, ["exec", "--sandbox", "workspace-write", ...args.slice(1).filter((arg) => arg !== "--ephemeral" && arg !== "--approve-for-me")], directEnv, timeoutMinutes * 60_000, path.join(resultRoot, "session.json"));
+  await runCommand(codexBin, ["exec", "--sandbox", "workspace-write", "--add-dir", await realpath(resultRoot), ...args.slice(1).filter((arg) => arg !== "--ephemeral" && arg !== "--approve-for-me")], directEnv, timeoutMinutes * 60_000, path.join(resultRoot, "session.json"));
 }
 
 async function assertPreviewPortFree(port: number) {
@@ -670,9 +671,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     }
 
     const queueRoot = path.join(worktree, "tmp", "wiki-automation", row.id);
-    const resultRoot = row.result_root ? path.resolve(row.result_root) : path.join(queueRoot, `attempt-${row.attempts}`);
-    if (!resultRoot.startsWith(`${queueRoot}${path.sep}`)) throw new Error("Saved result root escapes queue workspace.");
-    await mkdir(resultRoot, { recursive: true });
+    const resultRoot = await resolveWikiAttemptRoot(queueRoot, row.result_root, row.attempts);
     await transition(dev, row, { result_root: resultRoot });
     const sessionFile = path.join(resultRoot, "session.json");
     const env = modelEnvironment(devCredentials);

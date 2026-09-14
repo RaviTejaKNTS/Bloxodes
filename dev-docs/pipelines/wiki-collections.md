@@ -116,3 +116,5 @@ September 9 recovery verification: Southern Mudding OffRoading completed automat
 ## Shared scheduled checkout
 
 Article and wiki/collection services now select the same versioned `bloxodes-automation-runtime/current` checkout, independent of the development branch. Artifact state survives release changes and legacy absolute paths remain aliases. Standard `.next` output and the shared lease keep this source checkout clean; scheduled wiki concurrency is one. Use `automation:runtime:prepare` followed by the unified `install-homelab-automation.sh` installer while jobs are idle. See [the homelab runtime contract](../infrastructure/homelab.md#shared-automation-runtime-september-14-2026) for permissions, schedules, migration and rollback. Existing content quality and publication gates are unchanged.
+
+Saved wiki attempts validate canonical filesystem containment, so old checkout aliases remain resumable without allowing cross-game paths or symlink escapes. Codex receives only the resolved attempt directory as an additional writable root; this is required because persistent artifacts live outside the release checkout.
