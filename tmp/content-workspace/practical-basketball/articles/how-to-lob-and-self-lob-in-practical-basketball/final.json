@@ -1,0 +1,40 @@
+{
+  "title": "How to Lob and Self Lob in Practical Basketball (Roblox)",
+  "slug": "how-to-lob-and-self-lob-in-practical-basketball",
+  "meta_description": "Learn the PC and controller inputs for teammate lobs and self lobs in Practical Basketball, how to finish after a self lob, and when each move is worth the risk.",
+  "content_md": "[Practical Basketball](/stats/games/practical-basketball-7529591378) gives you two different lob moves: a high teammate alley-oop over a defender, and a self lob off the backboard for a solo finish. Both need space and timing more than fast fingers. The game is still in Stress Test 3, so open the in-game controls overlay or check the community server before you lock in binds for a session.\n\n## How to lob to a teammate in Practical Basketball\n\nA teammate lob is not your normal numbered pass. It sends the ball on a high arc over a defender so a cutter can catch it near the rim.\n\n**On PC:** Press **T**, then press the teammate number (**1**, **2**, **3**, or **4**) for the player you want.\n\n**On controller:** Hold **LB** (Xbox) or **L1** (PlayStation) and **RB** or **R1**, then pick the teammate icon on screen.\n\nThe pass connects when your teammate is already moving toward the basket, not standing still in traffic. Throw it early while they cut, not after the lane closes. A flat chest or bounce pass gets eaten when a hand is in the lane; the lob buys height instead of speed.\n\nThe [Practical Basketball wiki](/wiki/practical-basketball) lists the full keyboard and controller map if you want every bind in one place.\n\n## How to self lob in Practical Basketball and finish the play\n\nA self lob is you tossing the ball off the backboard, catching it on the run, and finishing before the defense resets.\n\n**On PC:** Sprint toward the rim with forward momentum, then press **F**. Keep driving after you throw it. Stopping right after the toss is how you miss the catch.\n\n**On controller:** Hold **LB** or **L1** and press **RS** or **R3** together while you are driving toward the basket.\n\nSprint with **Shift** on PC when you need speed, but the self lob bind itself is just **F**. Sprint and lob are separate inputs.\n\nAfter you catch the ball, finish with the same gather buttons you use on any drive:\n\n| Finish | Input (PC) | When to use it |\n| --- | --- | --- |\n| Layup | Hold **E** while driving | Tight lane, quick two points |\n| Driving dunk | **Shift** + **Spacebar** | Open lane and enough height on the catch |\n\nCrowded paint, no forward momentum, or stopping after the toss will turn a self lob into a turnover. Wide fast breaks and open lanes are where it shines. An open catch with room to rise is when you reach for a [driving dunk](/articles/how-to-dunk-in-practical-basketball) instead of the layup. If you are building around lob finishes, the [Alley-Oop Finisher badge](/wiki/practical-basketball/badges) pays out on clean alley-oop and self-lob attempts.\n\n## When lobs are worth it and when they turn the ball over\n\n**Teammate lob:** Throw it when a defender is sitting in the passing lane and your cutter has a live path to the rim. Skip it when the receiver is parked under the hoop or buried in bodies. A lob to a standing player is basically a gift for the other team.\n\n**Self lob:** Save it for fast breaks and clear lanes. Practice the toss and catch on an empty court first so you are not learning mid-possession in a ranked game.\n\nPractical Basketball is still in Stress Test 3, and binds can change between builds. If a lob stops working after an update, check the in-game overlay or community server before you blame your timing.",
+  "faq_json": [
+    {
+      "q": "What is the difference between a lob and a normal pass in Practical Basketball?",
+      "a": "A lob travels on a high arc over defenders for an alley-oop catch near the rim. A normal numbered pass stays lower and faster, which is better for open teammates but easier to intercept when a hand is in the lane."
+    },
+    {
+      "q": "Do you need to hold Shift for a self lob on PC?",
+      "a": "No. Sprint with Shift when you want speed, but the self lob input is just F while you are driving toward the rim with forward momentum."
+    },
+    {
+      "q": "When should you throw a teammate lob instead of a bounce or chest pass?",
+      "a": "Use a lob when a defender is blocking the direct passing lane and your teammate is cutting toward the basket. Use chest or bounce passes when the lane is already open and you do not need extra height."
+    }
+  ],
+  "cover_image": null,
+  "author_id": null,
+  "universe_id": 7529591378,
+  "tags": [
+    "practical-basketball",
+    "how-to",
+    "controls",
+    "lob",
+    "alley-oop"
+  ],
+  "sources": [
+    "https://beebom.com/how-to-lob-and-self-lob-in-practical-basketball/",
+    "https://allthings.how/practical-basketball-controls-full-pc-xbox-and-ps5-keybinds-stress-test-3/",
+    "https://allthings.how/practical-basketball-how-to-self-lob-on-pc-and-controller/",
+    "https://www.thespike.gg/roblox/beginner-guides/roblox-practical-basketball-controls-guide",
+    "https://www.treyexgaming.com/practical-basketball-beginner-guide/",
+    "https://gamestratwiki.com/how-to-self-lob-on-pc-controller-in-practical-basketball/",
+    "https://bloxodes.com/wiki/practical-basketball"
+  ],
+  "is_published": true
+}
