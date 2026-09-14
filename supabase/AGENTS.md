@@ -55,3 +55,10 @@ When adding a new table, view, or publishable content type:
 3. Update relevant routes in `src/app/(site)` or `src/app/api`.
 4. Wire revalidation through `src/app/api/revalidate/route.ts` and `supabase/functions/revalidate/index.ts` if the content is public. If public pages should be warmed after purge, enqueue through `cache_warm_events` and `supabase/functions/cache-warm/index.ts` instead of warming synchronously inside `/api/revalidate`.
 5. Refresh `agents/data/agents.md`.
+
+
+## GTA standalone checklist support (2026-09-10)
+
+Standalone GTA checklists use `gta_checklist_pages` (one title, composite game ID/slug foreign key) and `gta_checklist_items` (stable item keys and three-part leaf codes). Keep tables/view service-only with RLS enabled; the security-invoker view must filter game/page publication. Progress remains in `user_checklist_progress` under `gta:<slug>`. Seed migrations must preserve existing task IDs on upsert.
+Migrations `20260920000030` and `20260920000031` seed the San Andreas, Vice City, and GTA Online checklist pages in managed development and correct their collection-link copy. GTA Online rows are a dated Career Progress snapshot and should be refreshed with a new forward-only seed/update migration when Rockstar changes permanent challenge cards.
+Migration `20260920000032` clarifies that GTA Online contains selected tasks only. Preserve its task IDs and partial-coverage notice when maintaining the page; Bloxodes guides do not expose Rockstar player state.
