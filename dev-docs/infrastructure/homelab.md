@@ -1,6 +1,6 @@
 # Homelab
 
-Status: Article automation active; top-100 wiki automation restored for managed-development review
+Status: Article and wiki/collection automation activated on the shared versioned runtime
 Last verified: 2026-09-14 (shared runtime contract; older health evidence retains its dated scope)
 Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
@@ -130,3 +130,9 @@ Persistent article and wiki artifacts live in the shared runtime `state` directo
 Discovery remains midnight/06:00/12:00/18:00 IST; article publication retries every 15 minutes; wiki construction remains daily at 01:00 plus up to 10 minutes jitter; wiki publication checks each minute. Activation does not requeue historical content failures. Retain the previous runtime for rollback; reverting installed units also requires the same idle-job and timer-preservation procedure.
 
 Saved wiki attempts validate canonical filesystem containment, so old checkout aliases remain resumable without allowing cross-game paths or symlink escapes. Codex receives only the resolved attempt directory as an additional writable root; this is required because persistent artifacts live outside the release checkout.
+
+### Shared runtime activation verified September 14, 2026
+
+With explicit host-installation approval, all six article/wiki service units were switched to `bloxodes-automation-runtime/current` at runtime SHA `290f8a24fb6d76f2cdcff9be817e71ea0cbc9c87`. Activation waited for active publisher jobs to finish and interrupted no running job. The restricted wiki readiness check and rendered `/wiki` preview passed; the release checkout remained clean. Credential-file hashes, persistent directory inodes, and all four timer enabled/active states matched the pre-activation snapshot. The wiki publisher subsequently exited successfully from the new runtime at 15:31:52 IST.
+
+The next discovery remains 18:00 IST, article publication remains every 15 minutes, and the daily wiki builder remains 01:00 with up to 10 minutes jitter. The builder's morning failed-run flag and existing article content-audit findings are historical state, not evidence of a failed migration; no extra content batch was started for this activation. The previous article runtime is retained for rollback. The unit backup is `activations/20260914T100100Z-290f8a24fb6d76f2cdcff9be817e71ea0cbc9c87` under the shared runtime root. Later documentation-only production commits do not require replacing this verified runtime.
