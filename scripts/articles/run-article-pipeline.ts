@@ -40,7 +40,7 @@ export async function withArticlePreview<T>(worktree: string, env: NodeJS.Proces
   await mkdir(output, { recursive: true });
   const log = createWriteStream(path.join(output, "preview.log"), { flags: "a", mode: 0o600 });
   const child = spawn(process.execPath, [path.join(worktree, "node_modules/next/dist/bin/next"), "dev", "--webpack", "--hostname", "0.0.0.0", "--port", String(port)], {
-    cwd: path.join(worktree, "apps/web"), env: { ...env, NODE_ENV: "development", NEXT_DIST_DIR: ".next-article-pipeline" }, detached: process.platform !== "win32", stdio: ["ignore", "pipe", "pipe"]
+    cwd: path.join(worktree, "apps/web"), env: { ...env, NODE_ENV: "development", NEXT_DIST_DIR: process.env.BLOXODES_AUTOMATION_RUNTIME === "1" ? ".next" : ".next-article-pipeline" }, detached: process.platform !== "win32", stdio: ["ignore", "pipe", "pipe"]
   });
   child.stdout.pipe(log); child.stderr.pipe(log);
   let launchError: Error | undefined;

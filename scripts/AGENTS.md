@@ -208,3 +208,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 - `articles:publication:drain -- --apply` consumes durable, previously authorized exact queue IDs with bounded retry/backoff and production approval verification. It can mutate production only through the guarded publisher; never use it to authorize arbitrary manual completed work.
 - `articles:automation:audit` reads managed queue and installed timer health, writes an ignored report, and exits nonzero for actionable findings.
 - `articles:inspect-image -- <url> <workspace>` captures a source in headless Chrome for model visual inspection; it writes only screenshots, grants no image/content approval, and needs no database credentials.
+
+## Shared automation runtime
+
+`npm run automation:runtime:prepare -- --sha <full-sha>` prepares a detached article/wiki release with independent dependencies and persistent state. `sudo bash scripts/ops/install-homelab-automation.sh --apply <released-full-sha>` activates both pipelines while idle, checks the restricted wiki sandbox, preserves timer states and credentials, and retains rollback units. The old article preparation and article/wiki installer entrypoints delegate here. Never stop an active job to activate a release. `BLOXODES_AUTOMATION_RUNTIME=1` selects the shared standard `.next` cache; one wiki lane and the shared lease prevent preview overlap. See `dev-docs/infrastructure/homelab.md` for state aliases and permission ownership.

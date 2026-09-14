@@ -9,9 +9,10 @@ OnFailure=bloxodes-article-audit.service
 Type=oneshot
 User=teja
 Group=teja
-WorkingDirectory=/home/teja/.local/share/bloxodes-article-runtime/current
+WorkingDirectory=/home/teja/.local/share/bloxodes-automation-runtime/current
 EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
+Environment=BLOXODES_AUTOMATION_RUNTIME=1
 ExecStart=/usr/bin/npm run articles:publication:drain -- --apply
 Nice=10
 CPUWeight=20

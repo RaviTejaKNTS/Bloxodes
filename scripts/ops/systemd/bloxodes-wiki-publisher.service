@@ -7,9 +7,10 @@ Wants=network-online.target
 Type=oneshot
 User=teja
 Group=teja
-WorkingDirectory=/home/teja/projects/Bloxodes
+WorkingDirectory=/home/teja/.local/share/bloxodes-automation-runtime/current
 EnvironmentFile=/etc/bloxodes/wiki-automation.env
 Environment=NODE_ENV=development
+Environment=BLOXODES_AUTOMATION_RUNTIME=1
 Environment=BLOXODES_ENV_PROFILE=process-only
 Environment=BLOXODES_ENV_OVERLAYS=
 ExecStart=/usr/bin/npm run wiki:homelab:run -- --apply --release-only

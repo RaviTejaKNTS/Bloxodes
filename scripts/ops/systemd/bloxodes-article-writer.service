@@ -7,10 +7,11 @@ Wants=network-online.target
 Type=oneshot
 User=teja
 Group=teja
-WorkingDirectory=/home/teja/.local/share/bloxodes-article-runtime/current
+WorkingDirectory=/home/teja/.local/share/bloxodes-automation-runtime/current
 EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
-Environment=ARTICLE_WRITER_WORKTREE=/home/teja/.local/share/bloxodes-article-runtime/current
+Environment=BLOXODES_AUTOMATION_RUNTIME=1
+Environment=ARTICLE_WRITER_WORKTREE=/home/teja/.local/share/bloxodes-automation-runtime/current
 Environment=ARTICLE_AUTO_PUBLISH=true
 ExecStart=/usr/bin/npm run articles:homelab:check -- --component writer
 ExecStart=/usr/bin/npm run articles:writer:batch -- --apply --limit 6

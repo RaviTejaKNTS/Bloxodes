@@ -115,6 +115,9 @@ for (const signal of ["SIGINT", "SIGTERM"] as const) {
 }
 
 function assertOptions() {
+  if (process.env.BLOXODES_AUTOMATION_RUNTIME === "1" && workerCount !== 1) {
+    throw new Error("The shared automation preview requires exactly one wiki lane.");
+  }
   if (!Number.isInteger(timeoutMinutes) || timeoutMinutes < 60 || timeoutMinutes > 690) {
     throw new Error("WIKI_AUTOMATION_TIMEOUT_MINUTES must be an integer from 60 to 690.");
   }
@@ -414,7 +417,7 @@ async function runDirectCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot
   const directEnv = {
     ...env,
     PORT: String(previewPort),
-    NEXT_DIST_DIR: path.join(".next", "wiki-automation", relativeAttempt)
+    NEXT_DIST_DIR: process.env.BLOXODES_AUTOMATION_RUNTIME === "1" ? ".next" : path.join(".next", "wiki-automation", relativeAttempt)
   };
   await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
   await runCommand(codexBin, ["exec", "--sandbox", "workspace-write", ...args.slice(1).filter((arg) => arg !== "--ephemeral" && arg !== "--approve-for-me")], directEnv, timeoutMinutes * 60_000, path.join(resultRoot, "session.json"));

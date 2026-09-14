@@ -291,3 +291,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 # GTA checklist release support (2026-09-14)
 
 `verify:gta-checklist-final` compares explicit GTA checklist payloads with managed-development rows and rendered pages. `ads:update` retains the existing non-empty ads.txt on a network failure or request timeout; without a usable fallback the build still fails.
+
+## Shared automation runtime
+
+`npm run automation:runtime:prepare -- --sha <full-sha>` prepares a detached article/wiki release with independent dependencies and persistent state. `sudo bash scripts/ops/install-homelab-automation.sh --apply <released-full-sha>` activates both pipelines while idle, checks the restricted wiki sandbox, preserves timer states and credentials, and retains rollback units. The old article preparation and article/wiki installer entrypoints delegate here. Never stop an active job to activate a release. `BLOXODES_AUTOMATION_RUNTIME=1` selects the shared standard `.next` cache; one wiki lane and the shared lease prevent preview overlap. See `dev-docs/infrastructure/homelab.md` for state aliases and permission ownership.

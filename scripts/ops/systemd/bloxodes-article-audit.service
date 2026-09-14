@@ -7,9 +7,10 @@ Wants=network-online.target
 Type=oneshot
 User=teja
 Group=teja
-WorkingDirectory=/home/teja/.local/share/bloxodes-article-runtime/current
+WorkingDirectory=/home/teja/.local/share/bloxodes-automation-runtime/current
 EnvironmentFile=/etc/bloxodes/article-automation.env
 Environment=NODE_ENV=development
+Environment=BLOXODES_AUTOMATION_RUNTIME=1
 ExecStart=/usr/bin/npm run articles:automation:audit
 Nice=10
 TimeoutStartSec=2min

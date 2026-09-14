@@ -237,7 +237,9 @@
     "articles:publication:drain": "tsx scripts/articles/article-publication-outbox.ts",
     "articles:inspect-image": "tsx scripts/articles/inspect-article-image.ts",
     "articles:automation:audit": "tsx scripts/articles/audit-article-automation.ts",
-    "articles:runtime:prepare": "bash scripts/ops/prepare-article-runtime.sh"
+    "articles:runtime:prepare": "bash scripts/ops/prepare-automation-runtime.sh",
+    "automation:runtime:prepare": "bash scripts/ops/prepare-automation-runtime.sh",
+    "automation:runtime:activate": "bash scripts/ops/install-homelab-automation.sh"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
