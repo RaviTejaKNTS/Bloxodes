@@ -1,3 +1,4 @@
+import { getGtaChecklistPageBySlug } from "@/lib/gta-checklists";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -69,7 +70,7 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const page = await getGtaWikiPageBySlug(slug);
   if (!page) notFound();
-  const collections = await listPublishedGtaWikiCollectionsByWikiSlug(page.slug);
+  const [collections, checklist] = await Promise.all([listPublishedGtaWikiCollectionsByWikiSlug(page.slug), getGtaChecklistPageBySlug(page.slug)]);
   const [descriptionHtml, tipsHtml] = await Promise.all([
     page.description_md ? renderMarkdown(page.description_md) : Promise.resolve(""),
     page.tips_md ? renderMarkdown(page.tips_md) : Promise.resolve("")
@@ -134,6 +135,7 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
           ) : null}
         </div>
       </header>
+        {checklist ? <p><Link href={`/gta/checklists/${page.slug}`} className="text-accent underline underline-offset-4">Track your 100% completion with the {page.game_title} checklist</Link></p> : null}
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
         <article id="article-body" itemProp="articleBody" className="min-w-0 space-y-9 journey-content-stream journey-content-stream--prose">

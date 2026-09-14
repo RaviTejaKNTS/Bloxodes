@@ -5,7 +5,7 @@ describe("GTA wiki sidebar navigation", () => {
   it("lists every released GTA wiki once in newest-first order", () => {
     expect(gtaWikiNavLinks).toHaveLength(16);
     expect(gtaWikiNavLinks[0]).toEqual({ href: "/gta/wiki/gta-online", label: "GTA Online" });
-    expect(gtaWikiNavLinks.at(-1)).toEqual({ href: "/gta/wiki/gta", label: "Grand Theft Auto" });
+    expect(gtaWikiNavLinks[gtaWikiNavLinks.length - 1]).toEqual({ href: "/gta/wiki/gta", label: "Grand Theft Auto" });
     expect(new Set(gtaWikiNavLinks.map((link) => link.href)).size).toBe(gtaWikiNavLinks.length);
   });
 

@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { FiCheck, FiClock } from "react-icons/fi";
+import { DEFAULT_QUIZ_PROGRESS, ROBLOX_QUIZZES } from "@/lib/engagement/config";
 import { ContentCard } from "@/components/ContentCard";
 
 type QuizCardProps = {
+  href?: string;
+  progressEndpoint?: string;
   code: string;
   title: string;
   summary: string;
-  universeName: string | null;
+  gameName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
   updatedLabel: string | null;
@@ -26,11 +29,11 @@ type QuizProgressState =
   | { status: "ready"; progress: Map<string, QuizProgress> }
   | { status: "error" };
 
-let quizProgressPromise: Promise<QuizProgressState> | null = null;
+const quizProgressPromises = new Map<string, Promise<QuizProgressState>>();
 
-async function loadQuizProgressIndex(): Promise<QuizProgressState> {
-  if (!quizProgressPromise) {
-    quizProgressPromise = fetch("/api/quizzes/progress", { credentials: "include" })
+async function loadQuizProgressIndex(endpoint: string): Promise<QuizProgressState> {
+  if (!quizProgressPromises.has(endpoint)) {
+    const promise = fetch(endpoint, { credentials: "include" })
       .then(async (res) => {
         if (res.status === 401) return { status: "signed-out" } as QuizProgressState;
         if (!res.ok) return { status: "error" } as QuizProgressState;
@@ -49,25 +52,26 @@ async function loadQuizProgressIndex(): Promise<QuizProgressState> {
         return { status: "ready", progress } as QuizProgressState;
       })
       .catch(() => ({ status: "error" }) as QuizProgressState);
+    quizProgressPromises.set(endpoint, promise);
   }
 
-  return quizProgressPromise;
+  return quizProgressPromises.get(endpoint)!;
 }
 
-export function QuizCard({ code, title, universeName, coverImage, updatedLabel }: QuizCardProps) {
+export function QuizCard({ code, title, gameName, coverImage, updatedLabel, href, progressEndpoint = DEFAULT_QUIZ_PROGRESS.progressEndpoint }: QuizCardProps) {
   const [progressState, setProgressState] = useState<QuizProgressState>({ status: "loading" });
   const normalizedCode = code.trim().toLowerCase();
 
   useEffect(() => {
     let cancelled = false;
-    void loadQuizProgressIndex().then((state) => {
+    void loadQuizProgressIndex(progressEndpoint).then((state) => {
       if (!cancelled) setProgressState(state);
     });
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [progressEndpoint]);
 
   const progress = progressState.status === "ready" ? progressState.progress.get(normalizedCode) ?? null : null;
   const hasCompleted = Boolean(
@@ -86,9 +90,9 @@ export function QuizCard({ code, title, universeName, coverImage, updatedLabel }
   return (
     <ContentCard
       type="quiz"
-      href={`/quizzes/${code}`}
-      title={`${universeName ?? "Roblox"} Quiz`}
-      image={{ src: coverImage, alt: universeName || title, ratio: "1:1" }}
+      href={href ?? `${ROBLOX_QUIZZES.basePath}/${code}`}
+      title={gameName ? `${gameName} Quiz` : title}
+      image={{ src: coverImage, alt: gameName || title, ratio: "1:1" }}
       meta={
         <>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-foreground/70">

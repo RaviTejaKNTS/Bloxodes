@@ -62,6 +62,7 @@ export const siteNavLinks: SiteNavLink[] = [
 export const gtaNavLinks: SiteNavLink[] = [
   { href: "/gta", label: "GTA Home", icon: Home },
   { href: "/gta/wiki", label: "GTA Wiki", icon: BookOpen },
+  { href: "/gta/checklists", label: "Checklists", icon: SquareCheckBig },
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
 
@@ -133,6 +134,7 @@ export function isNavLinkActive(pathname: string | null | undefined, href: strin
 
 export function resolveSearchScope(pathname: string | null | undefined): SearchScope {
   const path = pathname ?? "/";
+  if (path.startsWith("/gta/checklists")) return { scope: "gta-checklists", label: "checklists" };
   if (path.startsWith("/gta")) return { scope: "gta", label: "GTA" };
   if (path.startsWith("/red-dead")) return { scope: "red-dead", label: "Red Dead" };
   if (

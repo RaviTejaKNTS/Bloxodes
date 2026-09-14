@@ -8,14 +8,16 @@ import {
   useChecklistProgressIndex,
   useChecklistSession
 } from "@/lib/checklist-progress-client";
+import { ROBLOX_CHECKLISTS } from "@/lib/engagement/config";
 import { ContentCard } from "@/components/ContentCard";
 
 type ChecklistCardProps = {
+  href?: string;
   id: string;
   slug: string;
   title: string;
   summary: string;
-  universeName: string | null;
+  gameName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
   updatedLabel: string | null;
@@ -24,7 +26,7 @@ type ChecklistCardProps = {
 
 type Progress = { done: number; total: number; percent: number };
 
-export function ChecklistCard({ slug, title, coverImage, universeName, updatedLabel, itemsCount }: ChecklistCardProps) {
+export function ChecklistCard({ slug, title, coverImage, gameName, updatedLabel, itemsCount, href }: ChecklistCardProps) {
   const session = useChecklistSession();
   const progressIndex = useChecklistProgressIndex(session.status === "ready" ? session.userId : null);
   const accountDone =
@@ -76,9 +78,9 @@ export function ChecklistCard({ slug, title, coverImage, universeName, updatedLa
   return (
     <ContentCard
       type="checklist"
-      href={`/checklists/${slug}`}
+      href={href ?? `${ROBLOX_CHECKLISTS.basePath}/${slug}`}
       title={title}
-      image={{ src: coverImage, alt: universeName || title, ratio: "1:1" }}
+      image={{ src: coverImage, alt: gameName || title, ratio: "1:1" }}
       subtitle={
         updatedLabel ? (
           <span className="inline-flex items-center gap-1.5">

@@ -1,3 +1,4 @@
+import { listPublishedGtaChecklists } from "@/lib/gta-checklists";
 import { NextResponse } from "next/server";
 import {
   buildGtaCollectionPath,
@@ -13,14 +14,17 @@ export const fetchCache = "force-no-store";
 
 export async function GET() {
   try {
-    const [wikiPages, collections] = await Promise.all([
+    const [wikiPages, collections, checklistData] = await Promise.all([
       listPublishedGtaWikiPages(),
-      listPublishedGtaWikiCollections()
+      listPublishedGtaWikiCollections(),
+      listPublishedGtaChecklists(1, 1000)
     ]);
     const pages: SitemapUrlSetEntry[] = [
       { loc: withSiteUrl("/games"), changefreq: "weekly", priority: "0.8" },
       { loc: withSiteUrl("/gta"), changefreq: "weekly", priority: "0.9" },
       { loc: withSiteUrl("/gta/wiki"), changefreq: "weekly", priority: "0.9" },
+      ...(checklistData.total ? [{ loc: withSiteUrl("/gta/checklists"), changefreq: "weekly" as const, priority: "0.9" }] : []),
+      ...checklistData.checklists.map(page => ({ loc: withSiteUrl(`/gta/checklists/${page.slug}`), changefreq: "weekly" as const, priority: "0.9", lastmod: toIsoDate(page.content_updated_at ?? page.updated_at) })),
       ...wikiPages.map((page) => ({
         loc: withSiteUrl(buildGtaWikiPath(page.slug)),
         changefreq: "weekly" as const,

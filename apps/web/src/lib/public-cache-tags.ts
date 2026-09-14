@@ -13,6 +13,7 @@ export type PublicCacheEventType =
   | "puzzle"
   | "wiki"
   | "wiki_collection"
+  | "gta_checklist"
   | "gta_game"
   | "gta_wiki"
   | "gta_wiki_collection"
@@ -161,6 +162,7 @@ export function cacheTagsForPath(pathname: string) {
   }
 
   if (first === "gta") {
+    if (second === "checklists") return unique([...tags, "gta-checklists", "gta-checklists-index", third && third !== "page" ? slugTag("gta-checklist", third) : ""]);
     if (!second) return unique([...tags, "gta-home"]);
     if (second === "wiki") {
       if (!third || third === "page") return unique([...tags, "gta-wiki-index"]);
@@ -393,6 +395,8 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "sitemap",
         "sitemap:stats"
       ]);
+    case "gta_checklist":
+      return unique([...base, slugTag("gta-checklist", normalized), "gta-checklists", "gta-checklists-index", "gta-home", slugTag("gta-wiki", normalized), "feed", "sitemap", "sitemap:gta"]);
     case "gta_game":
       return unique([...base, slugTag("gta-game", normalized), "gta-home", "gta-wiki-index", "games-index", "sitemap", "sitemap:gta"]);
     case "gta_wiki":

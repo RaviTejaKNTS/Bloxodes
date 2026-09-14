@@ -62,7 +62,7 @@ type PuzzleRow = {
 
 const FEED_LIMIT = 120;
 const FEED_DESCRIPTION =
-  "Latest Roblox codes, guides, checklists, stats, puzzle answers, and event updates from Bloxodes.";
+  "Roblox codes, guides, stats, puzzles and events, plus GTA completion checklists from Bloxodes.";
 
 function escapeXml(value: string): string {
   return value
@@ -99,7 +99,7 @@ function toFeedItem(input: {
 
 async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
-  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes] = await Promise.all([
+  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes] = await Promise.all([
     sb
       .from("articles")
       .select("slug, title, updated_at, published_at, created_at")
@@ -134,13 +134,15 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .eq("is_published", true)
       .not("slug", "is", null)
       .order("content_updated_at", { ascending: false, nullsFirst: false })
-      .limit(40)
+      .limit(40),
+    sb.from("gta_checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40)
   ]);
 
   const firstError =
     articlesRes.error ||
     gamesRes.error ||
     checklistsRes.error ||
+    gtaChecklistsRes.error ||
     eventsRes.error ||
     puzzlesRes.error;
   if (firstError) {
@@ -191,6 +193,19 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     const item = toFeedItem({
         title: checklist.title,
         path: `/checklists/${checklist.slug}`,
+        description: "Checklist update.",
+        updatedAt: checklist.updated_at,
+        publishedAt: checklist.published_at,
+        createdAt: checklist.created_at
+      });
+    if (item) items.push(item);
+  }
+
+  for (const checklist of (gtaChecklistsRes.data ?? []) as ChecklistRow[]) {
+    if (!checklist.slug || !checklist.title) continue;
+    const item = toFeedItem({
+        title: checklist.title,
+        path: `/gta/checklists/${checklist.slug}`,
         description: "Checklist update.",
         updatedAt: checklist.updated_at,
         publishedAt: checklist.published_at,

@@ -1,50 +1,12 @@
-import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
+import { pickThumbnail, summarize } from "@/lib/engagement/presentation";
+import { ChecklistIndexPage } from "@/components/checklists/ChecklistIndexPage";
+import { ROBLOX_CHECKLISTS } from "@/lib/engagement/config";
+import type { ChecklistCardData } from "@/lib/engagement/types";
 import { listPublishedChecklistsPage, type ChecklistSummaryRow } from "@/lib/db";
 import { CHECKLISTS_DESCRIPTION, SITE_URL } from "@/lib/seo";
-import { ChecklistCard } from "@/components/ChecklistCard";
-import { IndexPageStats } from "@/components/IndexPageStats";
-import { PagePagination } from "@/components/PagePagination";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 
 export const PAGE_SIZE = 20;
-
-type ChecklistCardData = {
-  id: string;
-  slug: string;
-  title: string;
-  summary: string;
-  universeName: string | null;
-  coverImage: string | null;
-  updatedAt: string | null;
-  updatedLabel: string | null;
-  itemsCount: number | null;
-};
-
-function pickThumbnail(value: unknown): string | null {
-  if (!value) return null;
-  if (typeof value === "string") return value;
-  if (Array.isArray(value)) {
-    for (const entry of value) {
-      if (typeof entry === "string" && entry.trim()) return entry;
-      if (entry && typeof entry === "object" && "url" in entry) {
-        const url = (entry as { url?: unknown }).url;
-        if (typeof url === "string" && url.trim()) return url;
-      }
-    }
-  }
-  return null;
-}
-
-function summarize(descriptionMd: string | null | undefined, fallback: string): string {
-  if (!descriptionMd) return fallback;
-  const plain = descriptionMd.replace(/[#>*_`~[\]]/g, " ").replace(/\s+/g, " ").trim();
-  if (!plain) return fallback;
-  if (plain.length <= 160) return plain;
-  const slice = plain.slice(0, 157);
-  const lastSpace = slice.lastIndexOf(" ");
-  return `${lastSpace > 120 ? slice.slice(0, lastSpace) : slice}…`;
-}
 
 function mapRowToCard(row: ChecklistSummaryRow): ChecklistCardData {
   const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
@@ -66,9 +28,10 @@ function mapRowToCard(row: ChecklistSummaryRow): ChecklistCardData {
   return {
     id: row.id,
     slug: row.slug,
+    href: `${ROBLOX_CHECKLISTS.basePath}/${row.slug}`,
     title: row.title,
     summary,
-    universeName,
+    gameName: universeName,
     coverImage,
     updatedAt,
     updatedLabel: formatUpdatedLabel(updatedAt),
@@ -83,107 +46,7 @@ async function loadPage(pageNumber: number) {
   return { cards, total, totalPages };
 }
 
-function ChecklistsPageView({
-  cards,
-  total,
-  totalPages,
-  currentPage,
-  showHero
-}: {
-  cards: ChecklistCardData[];
-  total: number;
-  totalPages: number;
-  currentPage: number;
-  showHero: boolean;
-}) {
-  const latest = cards.reduce<Date | null>((latestDate, card) => {
-    if (!card.updatedAt) return latestDate;
-    const candidate = new Date(card.updatedAt);
-    if (!latestDate || candidate > latestDate) return candidate;
-    return latestDate;
-  }, null);
-  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
-
-  return (
-    <div className="space-y-8">
-      {showHero ? (
-        <header className="space-y-4">
-          <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-            Guided Roblox checklists to track your progress
-          </h1>
-          <p className="max-w-2xl text-base text-muted md:text-lg">
-            Actionable runbooks for your favorite experiences so you can mark off tasks, rewards, and codes as you play.
-          </p>
-          <IndexPageStats
-            items={[
-              { label: `${total} checklists published`, icon: "checklists", tone: "accent" },
-              ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
-            ]}
-          />
-        </header>
-      ) : (
-        <header className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/80">Roblox Checklists</p>
-          <h1 className="text-3xl font-semibold text-foreground">Roblox checklists</h1>
-          {refreshedLabel ? (
-            <p className="text-sm text-muted">Updated {refreshedLabel} · Page {currentPage} of {totalPages}</p>
-          ) : null}
-        </header>
-      )}
-
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
-        {cards.length ? (
-          cards.map((card, index) => (
-            <div
-              key={card.id}
-              data-journey-item
-              className="h-full"
-              data-analytics-event="select_item"
-              data-analytics-item-list-name="checklists_index"
-              data-analytics-item-id={card.slug}
-              data-analytics-item-name={card.title}
-              data-analytics-position={index + 1}
-              data-analytics-content-type="checklist"
-            >
-              <ChecklistCard {...card} />
-            </div>
-          ))
-        ) : (
-          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-            No public checklists yet. Check back soon.
-          </div>
-        )}
-
-        <PagePagination basePath="/checklists" currentPage={currentPage} totalPages={totalPages} />
-
-        <div className="rounded-xl border border-border/60 bg-surface/60 p-4 text-xs text-muted">
-          Want a checklist added? <Link href="/contact" className="text-accent underline-offset-4 hover:underline">Tell us</Link> which
-          game you want a guided rundown for.
-        </div>
-      </section>
-
-      {showHero ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "CollectionPage",
-              name: "Roblox Checklists",
-              description: CHECKLISTS_DESCRIPTION,
-              url: `${SITE_URL}/checklists`
-            })
-          }}
-        />
-      ) : null}
-    </div>
-  );
-}
-
-export async function loadChecklistsPageData(page: number) {
-  return loadPage(page);
-}
-
-export function renderChecklistsPage(props: Parameters<typeof ChecklistsPageView>[0]) {
-  return <ChecklistsPageView {...props} />;
+export async function loadChecklistsPageData(page: number) { return loadPage(page); }
+export function renderChecklistsPage(props: Awaited<ReturnType<typeof loadChecklistsPageData>> & { currentPage: number; showHero: boolean }) {
+  return <ChecklistIndexPage {...props} config={ROBLOX_CHECKLISTS} />;
 }

@@ -167,7 +167,7 @@ export async function MoreQuizzes({ excludeCode }: { excludeCode: string }) {
             code={quiz.code}
             title={quiz.title}
             summary=""
-            universeName={quiz.universe?.display_name ?? quiz.universe?.name ?? null}
+            gameName={quiz.universe?.display_name ?? quiz.universe?.name ?? "Roblox"}
             coverImage={pickThumbnail(quiz.universe?.thumbnail_urls) ?? quiz.universe?.icon_url ?? null}
             updatedAt={updatedAt}
             updatedLabel={formatUpdatedLabel(updatedAt)}

@@ -1554,7 +1554,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     data-analytics-target-type="checklist"
                     data-analytics-target-slug={card.slug}
                   >
-                    <ChecklistCard {...card} />
+                    <ChecklistCard {...card} gameName={card.universeName} />
                   </div>
                 ))}
               </div>
@@ -1574,7 +1574,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     data-analytics-target-type="quiz"
                     data-analytics-target-slug={card.code}
                   >
-                    <QuizCard {...card} />
+                    <QuizCard {...card} gameName={card.universeName ?? "Roblox"} />
                   </div>
                 ))}
               </div>

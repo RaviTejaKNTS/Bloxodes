@@ -1,7 +1,7 @@
 /**
  * Fetches the latest provider-managed ads.txt file and writes it to the public directory.
  */
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
 
@@ -28,7 +28,15 @@ async function main() {
     return;
   }
 
-  const response = await fetch(ADS_TXT_URL, { redirect: "follow" });
+  let response: Response;
+  try {
+    response = await fetch(ADS_TXT_URL, { redirect: "follow", signal: AbortSignal.timeout(15_000) });
+  } catch (error) {
+    const existing = await readFile(OUTPUT_PATH, "utf8").catch(() => "");
+    if (!existing.trim()) throw error;
+    console.warn("ads.txt provider unavailable; retaining the existing non-empty ads.txt file.");
+    return;
+  }
 
   if (!response.ok) {
     console.warn(

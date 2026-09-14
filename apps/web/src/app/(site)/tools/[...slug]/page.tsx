@@ -395,7 +395,7 @@ export default async function ToolFallbackPage({ params }: PageProps) {
                   data-analytics-target-type="checklist"
                   data-analytics-target-slug={card.slug}
                 >
-                  <ChecklistCard {...card} />
+                  <ChecklistCard {...card} gameName={card.universeName} />
                 </div>
               ))}
             </div>

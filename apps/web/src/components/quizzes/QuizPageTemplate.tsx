@@ -1,0 +1,171 @@
+import type { ReactNode } from "react";
+import type { QuizConfig, QuizTemplateData } from "@/lib/engagement/types";
+import { engagementProgressKey } from "@/lib/engagement/types";
+import type { Metadata } from "next";
+import { formatDistanceToNow } from "date-fns";
+import { FiClock } from "react-icons/fi";
+import "@/styles/article-content.css";
+import { QuizRunner } from "@/components/QuizRunner";
+import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
+import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
+import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
+
+export function quizMetadata(page: QuizTemplateData["page"] | null, config: QuizConfig): Metadata {
+  if (!page) return {};
+  const titleBase = resolveSeoTitle(page.seo_title) ?? page.title;
+  const description =
+    page.seo_description ||
+    (page.description_md ? markdownToPlainText(page.description_md).slice(0, 160) : config.description);
+  const canonical = `${SITE_URL}${config.basePath}/${page.code}`;
+  const image = page.image || `${SITE_URL}/Bloxodes.png`;
+
+  return {
+    title: `${titleBase} | ${SITE_NAME}`,
+    description,
+    alternates: buildAlternates(canonical),
+    openGraph: {
+      type: "website",
+      url: canonical,
+      title: titleBase,
+      description,
+      siteName: SITE_NAME,
+      images: [image]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: titleBase,
+      description,
+      images: [image]
+    }
+  };
+}
+
+export async function QuizPageTemplate({ data, config, sidebar, relatedContent }: {
+  data: QuizTemplateData;
+  config: QuizConfig;
+  sidebar?: ReactNode;
+  relatedContent?: ReactNode;
+}) {
+  const { page, questions: quizData } = data;
+  const progressKey = engagementProgressKey(config.progressNamespace, page.code);
+  const initialAttempt = buildServerQuizAttempt(quizData, progressKey);
+  const description = page.description_md
+    ? markdownToPlainText(page.description_md).replace(/\s+/g, " ").trim()
+    : null;
+  const descriptionHtml = page.description_md
+    ? await renderMarkdown(page.description_md, { paragraphizeLineBreaks: true })
+    : "";
+  const heroImage = page.image ?? null;
+  const gameName = page.gameName;
+  const heroAlt = `${gameName} Quiz Thumbnail`;
+  const canonical = `${SITE_URL}${config.basePath}/${page.code}`;
+  const publishedTime = page.published_at || page.created_at || null;
+  const modifiedTime = page.content_updated_at || page.updated_at || publishedTime || null;
+  const updatedDateValue = modifiedTime;
+  const updatedDate = updatedDateValue ? new Date(updatedDateValue) : null;
+  const formattedUpdated = updatedDate
+    ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+    : null;
+  const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        name: page.title,
+        description: description ?? config.description,
+        url: canonical,
+        datePublished: publishedTime ? new Date(publishedTime).toISOString() : undefined,
+        dateModified: modifiedTime ? new Date(modifiedTime).toISOString() : undefined,
+        breadcrumb: {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}${config.homePath === "/" ? "" : config.homePath}` },
+            { "@type": "ListItem", position: 2, name: "Quizzes", item: `${SITE_URL}${config.basePath}` },
+            { "@type": "ListItem", position: 3, name: page.title }
+          ]
+        },
+        mainEntity: { "@id": `${canonical}#quizapp` }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": `${canonical}#quizapp`,
+        name: page.title,
+        description: description ?? config.description,
+        url: canonical,
+        applicationCategory: "EducationalApplication",
+        operatingSystem: "Web",
+        inLanguage: "en",
+        image: heroImage ? [heroImage] : undefined,
+        isPartOf: {
+          "@type": "WebSite",
+          name: SITE_NAME,
+          url: SITE_URL
+        }
+      }
+    ]
+  };
+
+  return (
+    <div className="space-y-12">
+      <div className={sidebar ? "grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]" : "grid gap-8"}>
+      <section
+        id="article-body"
+        itemProp="articleBody"
+        className="min-w-0 journey-content-stream journey-content-stream--interactive"
+      >
+      <nav aria-label="Breadcrumb" className="mb-6 text-xs uppercase tracking-[0.25em] text-muted">
+        <ol className="flex flex-wrap items-center gap-2">
+          <li className="flex items-center gap-2">
+            <a href={config.homePath} className="font-semibold text-muted transition hover:text-accent">
+              Home
+            </a>
+            <span className="text-muted/60">&gt;</span>
+          </li>
+          <li className="flex items-center gap-2">
+            <a href={config.basePath} className="font-semibold text-muted transition hover:text-accent">
+              Quizzes
+            </a>
+            <span className="text-muted/60">&gt;</span>
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="font-semibold text-foreground/80">{page.title}</span>
+          </li>
+        </ol>
+      </nav>
+      <header className="mb-6 space-y-3">
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
+        {formattedUpdated ? (
+          <p className="inline-flex items-center gap-1.5 text-sm text-foreground/80">
+            <FiClock className="h-4 w-4 shrink-0" aria-hidden />
+            Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
+            {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
+          </p>
+        ) : null}
+        {descriptionHtml ? (
+          <div
+            className="article-content prose dark:prose-invert game-copy max-w-3xl"
+            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+          />
+        ) : description ? (
+          <p className="max-w-3xl text-sm text-muted md:text-base">{description}</p>
+        ) : null}
+      </header>
+      <QuizRunner
+        key={`${progressKey}:${config.progress.progressEndpoint}`}
+        quizCode={progressKey}
+        progress={config.progress}
+        questions={quizData}
+        initialAttempt={initialAttempt}
+        heroImage={heroImage}
+        heroAlt={heroAlt}
+      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      </section>
+      {sidebar ? <aside className="space-y-4">{sidebar}</aside> : null}
+      </div>
+      {relatedContent}
+    </div>
+  );
+}

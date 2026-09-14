@@ -279,3 +279,8 @@ All game-collection JSON and `quiz.json` entries below are retained authoring/mi
 Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
 
 Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
+
+
+## GTA standalone checklist support (2026-09-10)
+
+GTA standalone checklists: `gta_checklist_pages`, `gta_checklist_items`, and security-invoker `gta_checklist_pages_view`; title FK to `gta_games`, runtime readers in `gta-checklists.ts`, namespaced shared progress. Managed development pages are GTA V (151 leaves), San Andreas (168), Vice City (153), and the current GTA Online Career Progress snapshot (27). See `dev-docs/pipelines/content.md`.

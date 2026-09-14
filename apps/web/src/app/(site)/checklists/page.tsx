@@ -1,13 +1,14 @@
+import { ROBLOX_CHECKLISTS } from "@/lib/engagement/config";
 import { notFound } from "next/navigation";
-import { CHECKLISTS_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
+import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { loadChecklistsPageData, renderChecklistsPage } from "./page-data";
 
 export const revalidate = 21600;
 
 export const metadata = {
-  title: `Roblox Checklists | ${SITE_NAME}`,
-  description: CHECKLISTS_DESCRIPTION,
-  alternates: buildAlternates(`${SITE_URL}/checklists`)
+  title: `${ROBLOX_CHECKLISTS.title} | ${SITE_NAME}`,
+  description: ROBLOX_CHECKLISTS.description,
+  alternates: buildAlternates(`${SITE_URL}${ROBLOX_CHECKLISTS.basePath}`)
 };
 
 export default async function ChecklistsPage() {

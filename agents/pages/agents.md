@@ -132,3 +132,12 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
 
 Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
+
+
+## GTA standalone checklist support (2026-09-10)
+
+GTA standalone checklist routes: `/gta/checklists`, `/gta/checklists/page/<page>`, `/gta/checklists/<game-slug>`. Shared checklist template/board/cards; managed development currently publishes GTA V, San Andreas, Vice City, and GTA Online at their game slugs. Includes GTA navigation/search, wiki and collection links, metadata, feed, GTA sitemap and revalidation.
+
+## Shared engagement presentation (2026-09-10)
+
+Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.

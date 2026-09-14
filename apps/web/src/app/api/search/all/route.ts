@@ -55,6 +55,7 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   music_artist: "music",
   wiki: "wiki",
   wiki_collection: "wiki",
+  gta_checklist: "checklist",
   gta_game: "wiki",
   gta_wiki: "wiki",
   gta_wiki_collection: "wiki",
@@ -77,7 +78,8 @@ const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
   authors: ["author"],
   music: ["music_hub", "music_genre", "music_artist"],
   wiki: ["wiki", "wiki_collection"],
-  gta: ["gta_wiki", "gta_wiki_collection"],
+  gta: ["gta_wiki", "gta_wiki_collection", "gta_checklist"],
+  "gta-checklists": ["gta_checklist"],
   "red-dead": ["red_dead_wiki", "red_dead_wiki_collection"]
 };
 

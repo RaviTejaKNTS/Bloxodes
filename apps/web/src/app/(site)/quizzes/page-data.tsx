@@ -1,37 +1,15 @@
-import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
-import { IndexPageStats } from "@/components/IndexPageStats";
-import { QuizCard } from "@/components/QuizCard";
-import { listPublishedQuizzes, type QuizListEntry } from "@/lib/quizzes";
+import { pickThumbnail, summarize } from "@/lib/engagement/presentation";
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
+import { MoreQuizzes } from "@/components/more-content";
+import type { QuizTemplateData } from "@/lib/engagement/types";
+import { QuizIndexPage } from "@/components/quizzes/QuizIndexPage";
+import { ROBLOX_QUIZZES } from "@/lib/engagement/config";
+import type { QuizCardData } from "@/lib/engagement/types";
+import { getQuizPageByCode, loadQuizData, listPublishedQuizzes, type QuizPage, type QuizListEntry } from "@/lib/quizzes";
 import { QUIZZES_DESCRIPTION, SITE_URL } from "@/lib/seo";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 
-function pickThumbnail(value: unknown): string | null {
-  if (!value) return null;
-  if (typeof value === "string") return value;
-  if (Array.isArray(value)) {
-    for (const entry of value) {
-      if (typeof entry === "string" && entry.trim()) return entry;
-      if (entry && typeof entry === "object" && "url" in entry) {
-        const url = (entry as { url?: unknown }).url;
-        if (typeof url === "string" && url.trim()) return url;
-      }
-    }
-  }
-  return null;
-}
-
-function summarize(descriptionMd: string | null | undefined, fallback: string): string {
-  if (!descriptionMd) return fallback;
-  const plain = descriptionMd.replace(/[#>*_`~[\]]/g, " ").replace(/\s+/g, " ").trim();
-  if (!plain) return fallback;
-  if (plain.length <= 160) return plain;
-  const slice = plain.slice(0, 157);
-  const lastSpace = slice.lastIndexOf(" ");
-  return `${lastSpace > 120 ? slice.slice(0, lastSpace) : slice}…`;
-}
-
-function mapRowToCard(row: QuizListEntry) {
+function mapRowToCard(row: QuizListEntry): QuizCardData {
   const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
   const thumb = pickThumbnail(row.universe?.thumbnail_urls);
   const coverImage = row.universe?.icon_url || thumb || `${SITE_URL}/Bloxodes.png`;
@@ -40,9 +18,10 @@ function mapRowToCard(row: QuizListEntry) {
 
   return {
     code: row.code,
+    href: `${ROBLOX_QUIZZES.basePath}/${row.code}`,
     title: row.title,
     summary,
-    universeName,
+    gameName: universeName ?? "Roblox",
     coverImage,
     updatedAt,
     updatedLabel: formatUpdatedLabel(updatedAt)
@@ -55,81 +34,34 @@ async function loadQuizzes() {
   return { cards, total: quizzes.length };
 }
 
-function QuizzesPageView({ cards, total }: { cards: ReturnType<typeof mapRowToCard>[]; total: number }) {
-  const latest = cards.reduce<Date | null>((latestDate, card) => {
-    if (!card.updatedAt) return latestDate;
-    const candidate = new Date(card.updatedAt);
-    if (!latestDate || candidate > latestDate) return candidate;
-    return latestDate;
-  }, null);
-  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
-
-  return (
-    <div className="space-y-8">
-      <header className="space-y-4">
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-          Roblox quizzes to test in-game knowledge
-        </h1>
-        <p className="max-w-2xl text-base text-muted md:text-lg">
-          Quick, replayable quizzes built from in-game mechanics, NPCs, and regions. Pick a game and take a 15-question run.
-        </p>
-        <IndexPageStats
-          items={[
-            { label: `${total} quizzes published`, icon: "quizzes", tone: "accent" },
-            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
-          ]}
-        />
-      </header>
-
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
-        {cards.length ? (
-          cards.map((card, index) => (
-            <div
-              key={card.code}
-              data-journey-item
-              className="h-full"
-              data-analytics-event="select_item"
-              data-analytics-item-list-name="quizzes_index"
-              data-analytics-item-id={card.code}
-              data-analytics-item-name={card.title}
-              data-analytics-position={index + 1}
-              data-analytics-content-type="quiz"
-            >
-              <QuizCard {...card} />
-            </div>
-          ))
-        ) : (
-          <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-            No quizzes have been published yet. Check back soon.
-          </div>
-        )}
-
-        <div className="rounded-xl border border-border/60 bg-surface/60 p-4 text-xs text-muted">
-          Want a quiz for another game? <Link href="/contact" className="text-accent underline-offset-4 hover:underline">Tell us</Link> which
-          experience you want next.
-        </div>
-      </section>
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: "Roblox Quizzes",
-            description: QUIZZES_DESCRIPTION,
-            url: `${SITE_URL}/quizzes`
-          })
-        }}
-      />
-    </div>
-  );
+export async function loadQuizzesPageData() { return loadQuizzes(); }
+export function renderQuizzesPage(props: Awaited<ReturnType<typeof loadQuizzesPageData>>) {
+  return <QuizIndexPage {...props} config={ROBLOX_QUIZZES} />;
 }
 
-export async function loadQuizzesPageData() {
-  return loadQuizzes();
+function mapQuizPage(page: QuizPage): QuizTemplateData["page"] {
+  return {
+    code: page.code, title: page.title, description_md: page.description_md,
+    seo_title: page.seo_title, seo_description: page.seo_description,
+    created_at: page.created_at, updated_at: page.updated_at,
+    published_at: page.published_at, content_updated_at: page.content_updated_at,
+    image: pickThumbnail(page.universe?.thumbnail_urls) || page.universe?.icon_url || null,
+    gameName: page.universe?.display_name ?? page.universe?.name ?? page.title
+  };
 }
-
-export function renderQuizzesPage(props: Parameters<typeof QuizzesPageView>[0]) {
-  return <QuizzesPageView {...props} />;
+export async function loadQuizMetadataPage(code: string) {
+  const page = await getQuizPageByCode(code);
+  return page ? mapQuizPage(page) : null;
+}
+export async function loadQuizDetailPage(code: string) {
+  const page = await getQuizPageByCode(code);
+  if (!page) return null;
+  const questions = await loadQuizData(page.code);
+  if (!questions) return null;
+  const viewPage = mapQuizPage(page);
+  return {
+    data: { page: viewPage, questions },
+    sidebar: <GameDiscoverySidebar universeId={page.universe_id ?? null} universeName={viewPage.gameName} currentType="quiz" />,
+    relatedContent: <MoreQuizzes excludeCode={page.code} />
+  };
 }

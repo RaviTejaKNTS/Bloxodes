@@ -1,3 +1,5 @@
+import { validateGtaChecklistProgress } from "@/lib/gta-checklist-progress";
+import { checkRateLimit } from "@/lib/security/rate-limit";
 import { NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth/session-user";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -8,7 +10,7 @@ export const dynamic = "force-dynamic";
 const MAX_CHECKED_IDS = 2000;
 
 function normalizeSlug(value: string | null): string {
-  if (!value) return "";
+  if (typeof value !== "string") return "";
   const trimmed = value.trim();
   if (!trimmed || trimmed.length > 200) return "";
   return trimmed;
@@ -42,6 +44,8 @@ export async function GET(request: Request) {
     const slug = normalizeSlug(url.searchParams.get("slug"));
 
     if (slug) {
+      const invalid = await validateGtaChecklistProgress(slug);
+      if (invalid) return NextResponse.json({ error: invalid.error }, { status: invalid.status });
       const { data, error } = await admin
         .from("user_checklist_progress")
         .select("checked_item_ids")
@@ -107,6 +111,11 @@ export async function PUT(request: Request) {
     if (!slug) {
       return NextResponse.json({ error: "Checklist slug is required." }, { status: 400 });
     }
+
+    const rate = checkRateLimit({ key: `checklist-progress:${user.id}`, limit: 180, windowMs: 60000 });
+    if (!rate.allowed) return NextResponse.json({ error: "Please try again shortly." }, { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } });
+    const invalid = await validateGtaChecklistProgress(slug, checkedIds);
+    if (invalid) return NextResponse.json({ error: invalid.error }, { status: invalid.status });
 
     if (checkedIds.length === 0) {
       const { error } = await admin

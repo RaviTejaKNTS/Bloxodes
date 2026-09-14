@@ -1,4 +1,5 @@
-import type { ChecklistItem } from "@/lib/db";
+import { checklistDescriptionText } from "@/lib/checklist-description";
+import type { ChecklistViewItem as ChecklistItem } from "@/lib/engagement/types";
 
 function parseCodeParts(code: string): { top: number; child: number | null; leaf: number | null } {
   const parts = code
@@ -25,7 +26,7 @@ export function ChecklistServerSnapshot({ items }: { items: ChecklistItem[] }) {
         {leafItems.map((item) => (
           <li key={item.id}>
             <span>{item.title}</span>
-            {item.description ? <p>{item.description}</p> : null}
+            {item.description ? <p>{checklistDescriptionText(item.description)}</p> : null}
           </li>
         ))}
       </ol>

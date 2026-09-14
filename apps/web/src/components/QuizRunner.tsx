@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { QuizData, QuizOption, QuizQuestion } from "@/lib/quiz-types";
+import { DEFAULT_QUIZ_PROGRESS } from "@/lib/engagement/config";
+import type { QuizProgressConfig } from "@/lib/engagement/types";
 import { ProgressBar } from "@/components/ProgressBar";
 import {
   buildQuizAttempt,
@@ -17,6 +19,7 @@ type Difficulty = QuizDifficulty;
 type AttemptQuestion = QuizAttemptQuestion;
 
 type QuizRunnerProps = {
+  progress?: QuizProgressConfig;
   quizCode: string;
   questions: QuizData;
   initialAttempt?: AttemptQuestion[];
@@ -153,6 +156,7 @@ function getStorageKey(quizCode: string) {
 
 export function QuizRunner(props: QuizRunnerProps) {
   const { quizCode, questions } = props;
+  const { sessionEndpoint, progressEndpoint } = props.progress ?? DEFAULT_QUIZ_PROGRESS;
   const initialAttempt = props.initialAttempt ?? [];
   const heroImage = props.heroImage ?? null;
   const heroAlt = props.heroAlt ?? null;
@@ -173,7 +177,7 @@ export function QuizRunner(props: QuizRunnerProps) {
 
     async function loadSession() {
       try {
-        const res = await fetch("/api/quizzes/session", { credentials: "include" });
+        const res = await fetch(sessionEndpoint, { credentials: "include" });
         const payload = await res.json().catch(() => ({}));
         if (cancelled) return;
         const userId = typeof payload?.userId === "string" ? payload.userId : null;
@@ -189,7 +193,7 @@ export function QuizRunner(props: QuizRunnerProps) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [sessionEndpoint]);
 
   useEffect(() => {
     let cancelled = false;
@@ -197,7 +201,7 @@ export function QuizRunner(props: QuizRunnerProps) {
     async function loadProgress() {
       setProgressStatus("loading");
       try {
-        const res = await fetch(`/api/quizzes/progress?code=${encodeURIComponent(quizCode)}`, {
+        const res = await fetch(`${progressEndpoint}?code=${encodeURIComponent(quizCode)}`, {
           credentials: "include"
         });
         if (!res.ok) {
@@ -235,7 +239,7 @@ export function QuizRunner(props: QuizRunnerProps) {
     return () => {
       cancelled = true;
     };
-  }, [session.status, session.userId, quizCode]);
+  }, [session.status, session.userId, quizCode, progressEndpoint]);
 
   const readyToStart = session.status === "ready" && progressStatus === "ready";
   const canInteract = readyToStart;
@@ -371,7 +375,7 @@ export function QuizRunner(props: QuizRunnerProps) {
 
     if (!session.userId) return;
 
-    void fetch("/api/quizzes/progress", {
+    void fetch(progressEndpoint, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -383,7 +387,7 @@ export function QuizRunner(props: QuizRunnerProps) {
         breakdown
       })
     });
-  }, [showSummary, session.userId, attempt, quizCode, totalCorrect, totalQuestions, breakdown, seenQuestionIds]);
+  }, [showSummary, session.userId, attempt, quizCode, totalCorrect, totalQuestions, breakdown, seenQuestionIds, progressEndpoint]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

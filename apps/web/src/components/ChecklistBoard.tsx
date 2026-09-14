@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import { FiCheckCircle, FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import type { ChecklistItem } from "@/lib/db";
+import type { ChecklistViewItem as ChecklistItem } from "@/lib/engagement/types";
 import { ContentSlot } from "@/components/ContentSlot";
+import { ChecklistDescription } from "@/components/ChecklistDescription";
 import { ProgressBar } from "@/components/ProgressBar";
 import { trackEvent } from "@/lib/analytics";
 import {
@@ -746,7 +747,7 @@ export function ChecklistBoard({ slug, items, descriptionHtml, className }: Chec
               {categoryDescription ? (
                 <div className="relative flex w-full flex-col rounded-2xl border border-border/60 bg-surface/70 px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
                   <div className="prose dark:prose-invert max-w-none game-copy text-foreground">
-                    <p className="whitespace-pre-line">{categoryDescription}</p>
+                    <p className="whitespace-pre-line"><ChecklistDescription text={categoryDescription} /></p>
                   </div>
                   <div className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-gradient-to-l from-surface/90 to-transparent" />
                 </div>
@@ -833,7 +834,7 @@ export function ChecklistBoard({ slug, items, descriptionHtml, className }: Chec
                                 );
                               })()}
                               {item.description ? (
-                                <p className="text-xs text-muted-foreground">{item.description}</p>
+                                <p className="text-xs text-muted-foreground"><ChecklistDescription text={item.description} /></p>
                               ) : null}
                             </div>
                           </label>
@@ -952,7 +953,7 @@ export function ChecklistBoard({ slug, items, descriptionHtml, className }: Chec
                     {categoryDescription ? (
                       <div className="relative w-[440px] shrink-0 self-start rounded-2xl border border-border/60 bg-surface/70 px-5 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
                         <div className="prose dark:prose-invert max-w-none game-copy text-foreground">
-                          <p className="whitespace-pre-line">{categoryDescription}</p>
+                          <p className="whitespace-pre-line"><ChecklistDescription text={categoryDescription} /></p>
                         </div>
                         <div className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-gradient-to-l from-surface/90 to-transparent" />
                       </div>
@@ -1091,7 +1092,7 @@ export function ChecklistBoard({ slug, items, descriptionHtml, className }: Chec
                                                       );
                                                     })()}
                                                     {item.description ? (
-                                                      <p className="text-xs text-muted-foreground">{item.description}</p>
+                                                      <p className="text-xs text-muted-foreground"><ChecklistDescription text={item.description} /></p>
                                                     ) : null}
                                                   </div>
                                                 </label>

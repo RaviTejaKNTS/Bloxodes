@@ -105,6 +105,7 @@
     "verify:game-collection-finals": "node --import tsx scripts/content/verify-game-collection-finals.ts",
     "verify:gta-wiki-final": "node --import tsx scripts/gta/verify-gta-wiki-final.ts",
     "verify:gta-collection-final": "node --import tsx scripts/gta/verify-gta-collection-final.ts",
+    "verify:gta-checklist-final": "node --import tsx scripts/gta/verify-gta-checklist-final.ts",
     "sync:gta-wiki-runtime": "node --import tsx scripts/gta/sync-gta-wiki-runtime.ts",
     "sync:gta-wiki-media": "node --import tsx scripts/gta/sync-gta-wiki-media.ts",
     "verify:simple-page-finals": "tsx scripts/content/verify-simple-page-finals.ts",

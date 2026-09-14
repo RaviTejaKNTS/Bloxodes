@@ -1,24 +1,25 @@
+import { ROBLOX_QUIZZES } from "@/lib/engagement/config";
 import type { Metadata } from "next";
-import { QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
+import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { loadQuizzesPageData, renderQuizzesPage } from "./page-data";
 
 export const revalidate = 21600;
 
 export const metadata: Metadata = {
-  title: `Roblox Quizzes | ${SITE_NAME}`,
-  description: QUIZZES_DESCRIPTION,
-  alternates: buildAlternates(`${SITE_URL}/quizzes`),
+  title: `${ROBLOX_QUIZZES.title} | ${SITE_NAME}`,
+  description: ROBLOX_QUIZZES.description,
+  alternates: buildAlternates(`${SITE_URL}${ROBLOX_QUIZZES.basePath}`),
   openGraph: {
     type: "website",
-    url: `${SITE_URL}/quizzes`,
-    title: `Roblox Quizzes | ${SITE_NAME}`,
-    description: QUIZZES_DESCRIPTION,
+    url: `${SITE_URL}${ROBLOX_QUIZZES.basePath}`,
+    title: `${ROBLOX_QUIZZES.title} | ${SITE_NAME}`,
+    description: ROBLOX_QUIZZES.description,
     siteName: SITE_NAME
   },
   twitter: {
     card: "summary_large_image",
-    title: `Roblox Quizzes | ${SITE_NAME}`,
-    description: QUIZZES_DESCRIPTION
+    title: `${ROBLOX_QUIZZES.title} | ${SITE_NAME}`,
+    description: ROBLOX_QUIZZES.description
   }
 };
 

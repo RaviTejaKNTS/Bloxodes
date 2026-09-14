@@ -22,6 +22,7 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "puzzle",
   "wiki",
   "wiki_collection",
+  "gta_checklist",
   "gta_game",
   "gta_wiki",
   "gta_wiki_collection",
@@ -899,6 +900,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       break;
     case "wiki_collection":
       purgePaths = revalidateForWikiCollection(slug);
+      break;
+    case "gta_checklist":
+      purgePaths = applyRevalidation([...paginatedIndexPaths("/gta/checklists"), `/gta/checklists/${slug}`, `/gta/wiki/${slug}`, "/gta", FEED_PATH, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH], ["gta-checklists-index", "gta-checklists", `gta-checklist:${slug}`]);
       break;
     case "gta_game":
       purgePaths = revalidateForGtaGame(slug);

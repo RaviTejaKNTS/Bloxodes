@@ -288,3 +288,6 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 - `articles:publication:drain -- --apply` consumes durable, previously authorized exact queue IDs with bounded retry/backoff and production approval verification. It can mutate production only through the guarded publisher; never use it to authorize arbitrary manual completed work.
 - `articles:automation:audit` reads managed queue and installed timer health, writes an ignored report, and exits nonzero for actionable findings.
 - `articles:inspect-image -- <url> <workspace>` captures a source in headless Chrome for model visual inspection; it writes only screenshots, grants no image/content approval, and needs no database credentials.
+# GTA checklist release support (2026-09-14)
+
+`verify:gta-checklist-final` compares explicit GTA checklist payloads with managed-development rows and rendered pages. `ads:update` retains the existing non-empty ads.txt on a network failure or request timeout; without a usable fallback the build still fails.

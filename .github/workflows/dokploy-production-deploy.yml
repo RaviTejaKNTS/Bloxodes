@@ -111,6 +111,14 @@ jobs:
                   deploy=true
                   runtime_code=true
                   case "$file" in
+                    apps/web/src/app/\(site\)/gta/checklists/*|apps/web/src/lib/gta-checklists.ts|apps/web/src/lib/gta-checklist-progress.ts)
+                      add_path "/gta/checklists"
+                      add_tag "gta-checklists"
+                      add_tag "gta-checklists-index"
+                      add_tag "gta-wiki"
+                      add_tag "feed"
+                      add_tag "sitemap:gta"
+                      ;;
                     apps/web/src/app/sitemap.xml/*|apps/web/src/app/sitemaps/*|apps/web/src/app/feed.xml/*)
                       add_path "/sitemap.xml"
                       add_tag "sitemap"
@@ -119,7 +127,7 @@ jobs:
                     *"/wiki/"*|*game-collection*) add_path "/wiki"; add_tag "wiki-index"; add_tag "wiki"; add_tag "wiki-collection-index" ;;
                     *"/catalog/"*) add_path "/catalog"; add_tag "catalog-index"; add_tag "catalog" ;;
                     *"/tools/"*) add_path "/tools"; add_tag "tools-index"; add_tag "tools" ;;
-                    *"/checklists/"*|*Checklist*) add_path "/checklists"; add_tag "checklists-index"; add_tag "checklists" ;;
+                    *"/checklists/"*|*Checklist*) add_path "/checklists"; add_path "/gta/checklists"; add_tag "checklists-index"; add_tag "checklists"; add_tag "gta-checklists"; add_tag "gta-checklists-index" ;;
                     *"/quizzes/"*|*Quiz*) add_path "/quizzes"; add_tag "quizzes-index"; add_tag "quizzes" ;;
                     *"/events/"*) add_path "/events"; add_tag "events-index"; add_tag "events" ;;
                     *"/articles/"*) add_path "/articles"; add_tag "articles-index"; add_tag "articles" ;;

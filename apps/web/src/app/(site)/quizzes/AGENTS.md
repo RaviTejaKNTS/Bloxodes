@@ -58,3 +58,7 @@ Before calling a quiz route update complete:
 8. Run `npm run typecheck:web` when route or shared TypeScript changed.
 
 If the managed-development page shows old questions after import, verify the `quiz_pages.quiz_data` readback and clear the relevant Next cache before judging the page.
+
+## Shared engagement presentation (2026-09-10)
+
+Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.

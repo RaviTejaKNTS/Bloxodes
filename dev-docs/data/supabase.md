@@ -53,6 +53,8 @@ Official changelog items relevant to this self-hosted installation:
 
 ## Schema and Security
 
+On September 14, 2026, production applied GTA standalone checklist migrations `20260920000025`–`20260920000032` through the exact-SHA transactional release at `1debfe3840377d900c7341d2dcb696a287306b17`. The four page rows, task counts (151/168/153/27), search entries, security-invoker view and service-only table grants were read back successfully. The checked-in schema snapshot was regenerated from production after application. Managed-development advisors report the expected no-policy notice for these service-only RLS tables; there are no anonymous/authenticated grants. The earlier topology evidence below retains its original verification date.
+
 - Add forward-only migrations under `supabase/migrations/` using the current CLI workflow in `supabase/AGENTS.md`.
 - `supabase/migration-policy.json` preserves the audited reconciliation record. Managed development received the four pre-cutoff stats migrations under a recorded baseline; production received the genuine pending wiki/article migrations and four object-proven ledger repairs. Both environments were then converged through `20260920000013_harden_internal_security_definer_execution.sql` on 2026-08-14.
 - The convergence migration moves the privileged admin implementation into a private schema and narrows queue, worker, chart, and pipeline-health RPC execution. Readback confirmed the private admin function, expected service-role execution, and removal of anonymous execution for the protected RPCs in both environments.

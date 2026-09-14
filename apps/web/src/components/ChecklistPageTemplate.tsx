@@ -1,0 +1,150 @@
+import { checklistDescriptionText } from "@/lib/checklist-description";
+import type { Metadata } from "next";
+import "@/styles/article-content.css";
+import { ChecklistBoard } from "@/components/ChecklistBoard";
+import { ChecklistServerSnapshot } from "@/components/ChecklistServerSnapshot";
+import { ChecklistProgressHeader } from "@/components/ChecklistProgressHeader";
+import { ChecklistFooterLinks } from "@/components/ChecklistFooterLinks";
+import type { ChecklistConfig, ChecklistTemplateData } from "@/lib/engagement/types";
+import { engagementProgressKey } from "@/lib/engagement/types";
+import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
+import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
+import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+
+export function checklistMetadata(data: ChecklistTemplateData | null, config: ChecklistConfig): Metadata {
+  if (!data) return {};
+  const basePath = config.basePath;
+  const { page } = data;
+  const titleBase = resolveSeoTitle(page.seo_title) ?? page.title;
+  const description =
+    page.seo_description ||
+    (page.description_md ? markdownToPlainText(page.description_md).slice(0, 160) : config.description);
+  const canonical = `${SITE_URL}${basePath}/${page.slug}`;
+  const publishedAt = resolvePublishedAt(page);
+  const updatedAt = resolveModifiedAt(page);
+  const publishedTime = publishedAt ? new Date(publishedAt).toISOString() : undefined;
+  const updatedTime = updatedAt ? new Date(updatedAt).toISOString() : undefined;
+
+  return {
+    title: `${titleBase} | ${SITE_NAME}`,
+    description,
+    alternates: buildAlternates(canonical),
+    openGraph: {
+      type: "article",
+      url: canonical,
+      title: titleBase,
+      description,
+      siteName: SITE_NAME,
+      publishedTime,
+      modifiedTime: updatedTime
+    },
+    twitter: {
+      card: "summary",
+      title: titleBase,
+      description
+    }
+  };
+}
+
+export async function ChecklistPageTemplate({ data, config }: { data: ChecklistTemplateData; config: ChecklistConfig }) {
+  const basePath = config.basePath;
+  const progressKey = engagementProgressKey(config.progressNamespace, data.page.slug);
+  const { page, items } = data;
+  const canonicalUrl = `${SITE_URL}${basePath}/${page.slug}`;
+  const descriptionPlain =
+    page.seo_description ||
+    (page.description_md ? markdownToPlainText(page.description_md).slice(0, 160) : config.description);
+  const coverImage = page.image || `${SITE_URL}/Bloxodes.png`;
+  const descriptionHtml = page.description_md ? await renderMarkdown(page.description_md) : null;
+  const leafItems = items.filter((item) => item.section_code.split(".").filter(Boolean).length === 3);
+  const publishedDate = new Date(resolvePublishedAt(page) ?? page.created_at);
+  const updatedDateSource = resolveModifiedAt(page) ?? page.updated_at ?? page.created_at;
+  const updatedDate = new Date(updatedDateSource);
+  const itemListElements = leafItems.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Thing",
+      name: item.title,
+      ...(item.description ? { description: checklistDescriptionText(item.description) } : {}),
+      identifier: item.section_code
+    }
+  }));
+  const webApplicationSchema = {
+    "@type": "WebApplication",
+    name: `${page.title} Checklist`,
+    url: canonicalUrl,
+    description: descriptionPlain,
+    operatingSystem: "Web",
+    applicationCategory: "UtilityApplication",
+    image: coverImage
+  };
+  const itemListSchema = {
+    "@type": "ItemList",
+    name: `${page.title} Checklist Items`,
+    description: descriptionPlain,
+    url: canonicalUrl,
+    datePublished: publishedDate.toISOString(),
+    dateModified: updatedDate.toISOString(),
+    numberOfItems: leafItems.length,
+    itemListOrder: "Ascending",
+    itemListElement: itemListElements
+  };
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: page.title,
+    url: canonicalUrl,
+    description: descriptionPlain,
+    datePublished: publishedDate.toISOString(),
+    dateModified: updatedDate.toISOString(),
+    image: coverImage,
+    mainEntity: webApplicationSchema,
+    hasPart: [itemListSchema]
+  };
+  const boardContainerClass =
+    "-mx-[calc((100vw-100%)/2)] overflow-x-auto px-[calc((100vw-100%)/2)] [scrollbar-color:theme(colors.border)_transparent] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
+  const mainContent = (
+    <section
+      id="article-body"
+      itemProp="articleBody"
+      className="flex flex-col gap-1 pb-2 md:gap-0 -mt-4 md:-mt-6 journey-content-stream journey-content-stream--interactive"
+    >
+      <header className="sticky top-0 z-30 flex flex-col gap-2 bg-background/95 py-5 backdrop-blur supports-[backdrop-filter]:backdrop-blur-md">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 min-h-[32px]">
+          <h1 className="text-xl font-black leading-tight sm:text-[26px] sm:whitespace-nowrap m-0">
+            {page.title}
+          </h1>
+          <ChecklistProgressHeader title={page.title} slug={progressKey} totalItems={leafItems.length} />
+        </div>
+        <UpdatedTimestamp
+          value={updatedDateSource}
+          className="inline-flex items-center gap-1.5 text-sm text-foreground/80"
+        />
+      </header>
+      <ChecklistServerSnapshot items={items} />
+      <div className={boardContainerClass} data-checklist-scroll>
+        <div className="w-full pr-6 md:min-w-max">
+          <ChecklistBoard
+            slug={progressKey}
+            items={items}
+            descriptionHtml={descriptionHtml}
+            className="w-auto min-w-max"
+          />
+        </div>
+      </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+    </section>
+  );
+
+  return (
+    <>
+      {mainContent}
+      <ChecklistFooterLinks />
+    </>
+  );
+}
