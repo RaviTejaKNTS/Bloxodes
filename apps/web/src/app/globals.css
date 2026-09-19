@@ -263,7 +263,8 @@ body {
   }
 
   @media (min-width: 640px) {
-    .journey-content-stream--options {
+    .journey-content-stream--options,
+    .journey-content-stream--game-ids {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }

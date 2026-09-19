@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { GameIdCard } from "../../GameIdCard";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentFaq } from "@/components/ContentFaq";
@@ -64,17 +64,12 @@ export function renderDecalGamesHub({ contentHtml }: { contentHtml: PageContentH
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--options">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--game-ids">
         {intro}
         <DecalCatalogNav active="games" />
         {DECAL_GAME_ID_PAGES.map((game) => (
           <div key={game.slug} data-journey-item className="h-full">
-            <Link href={`${DECAL_GAMES_PATH}/${game.slug}`} className="group block h-full">
-              <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
-                <h2 className="text-xl font-semibold leading-snug text-foreground">{game.title}</h2>
-                <p className="mt-2 text-sm leading-6 text-muted">{game.description}</p>
-              </article>
-            </Link>
+            <GameIdCard game={game} basePath={DECAL_GAMES_PATH} />
           </div>
         ))}
       </section>

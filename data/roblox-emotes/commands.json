@@ -1,0 +1,241 @@
+[
+  {
+    "code": "wave",
+    "name": "Wave",
+    "command": "/e wave",
+    "asset_id": null,
+    "kind": "default",
+    "description": "Wave hello.",
+    "requirements": "No purchase needed.",
+    "source_urls": [
+      "https://en.help.roblox.com/hc/en-us/articles/203314300-Animation-System-Emotes"
+    ],
+    "verification_method": "official_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 0,
+    "is_published": true
+  },
+  {
+    "code": "point",
+    "name": "Point",
+    "command": "/e point",
+    "asset_id": null,
+    "kind": "default",
+    "description": "Point forward.",
+    "requirements": "No purchase needed.",
+    "source_urls": [
+      "https://en.help.roblox.com/hc/en-us/articles/203314300-Animation-System-Emotes"
+    ],
+    "verification_method": "official_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 1,
+    "is_published": true
+  },
+  {
+    "code": "cheer",
+    "name": "Cheer",
+    "command": "/e cheer",
+    "asset_id": null,
+    "kind": "default",
+    "description": "Raise your arms to cheer.",
+    "requirements": "No purchase needed.",
+    "source_urls": [
+      "https://en.help.roblox.com/hc/en-us/articles/203314300-Animation-System-Emotes"
+    ],
+    "verification_method": "official_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 2,
+    "is_published": true
+  },
+  {
+    "code": "laugh",
+    "name": "Laugh",
+    "command": "/e laugh",
+    "asset_id": null,
+    "kind": "default",
+    "description": "Play a laughing gesture.",
+    "requirements": "No purchase needed.",
+    "source_urls": [
+      "https://en.help.roblox.com/hc/en-us/articles/203314300-Animation-System-Emotes"
+    ],
+    "verification_method": "official_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 3,
+    "is_published": true
+  },
+  {
+    "code": "dance",
+    "name": "Dance",
+    "command": "/e dance",
+    "asset_id": null,
+    "kind": "default",
+    "description": "Play the first default dance.",
+    "requirements": "No purchase needed.",
+    "source_urls": [
+      "https://en.help.roblox.com/hc/en-us/articles/203314300-Animation-System-Emotes"
+    ],
+    "verification_method": "official_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 4,
+    "is_published": true
+  },
+  {
+    "code": "dance2",
+    "name": "Dance 2",
+    "command": "/e dance2",
+    "asset_id": null,
+    "kind": "default",
+    "description": "Play the second default dance.",
+    "requirements": "No purchase needed.",
+    "source_urls": [
+      "https://en.help.roblox.com/hc/en-us/articles/203314300-Animation-System-Emotes"
+    ],
+    "verification_method": "official_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 5,
+    "is_published": true
+  },
+  {
+    "code": "dance3",
+    "name": "Dance 3",
+    "command": "/e dance3",
+    "asset_id": null,
+    "kind": "default",
+    "description": "Play the third default dance.",
+    "requirements": "No purchase needed.",
+    "source_urls": [
+      "https://en.help.roblox.com/hc/en-us/articles/203314300-Animation-System-Emotes"
+    ],
+    "verification_method": "official_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 6,
+    "is_published": true
+  },
+  {
+    "code": "applaud",
+    "name": "Applaud",
+    "command": "/e applaud",
+    "asset_id": 5915779043,
+    "kind": "avatar",
+    "description": "Clap your hands.",
+    "requirements": "Own this emote. Equip it to use the emote menu.",
+    "source_urls": [
+      "https://about.roblox.com/newsroom/2019/08/expanding-emotes-more-animations-more-fun",
+      "https://create.roblox.com/docs/characters/emotes",
+      "https://www.roblox.com/catalog/5915779043",
+      "https://create.roblox.com/docs/resources/modules/emote-bar"
+    ],
+    "verification_method": "source_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 7,
+    "is_published": false
+  },
+  {
+    "code": "shrug",
+    "name": "Shrug",
+    "command": "/e shrug",
+    "asset_id": 3576968026,
+    "kind": "avatar",
+    "description": "Shrug your shoulders.",
+    "requirements": "Own this emote. Equip it to use the emote menu.",
+    "source_urls": [
+      "https://about.roblox.com/newsroom/2019/08/expanding-emotes-more-animations-more-fun",
+      "https://create.roblox.com/docs/characters/emotes",
+      "https://www.roblox.com/catalog/3576968026"
+    ],
+    "verification_method": "source_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 8,
+    "is_published": false
+  },
+  {
+    "code": "tilt",
+    "name": "Tilt",
+    "command": "/e tilt",
+    "asset_id": 3360692915,
+    "kind": "avatar",
+    "description": "Lean sideways with your arms lifted.",
+    "requirements": "Own this emote. Equip it to use the emote menu.",
+    "source_urls": [
+      "https://about.roblox.com/newsroom/2019/08/expanding-emotes-more-animations-more-fun",
+      "https://create.roblox.com/docs/characters/emotes",
+      "https://www.roblox.com/catalog/3360692915"
+    ],
+    "verification_method": "source_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 9,
+    "is_published": false
+  },
+  {
+    "code": "point2",
+    "name": "Point2",
+    "command": "/e point2",
+    "asset_id": 3576823880,
+    "kind": "avatar",
+    "description": "Play the additional pointing gesture.",
+    "requirements": "Own this emote. Equip it to use the emote menu.",
+    "source_urls": [
+      "https://about.roblox.com/newsroom/2019/08/expanding-emotes-more-animations-more-fun",
+      "https://create.roblox.com/docs/characters/emotes",
+      "https://www.roblox.com/catalog/3576823880"
+    ],
+    "verification_method": "source_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 10,
+    "is_published": false
+  },
+  {
+    "code": "hello",
+    "name": "Hello",
+    "command": "/e hello",
+    "asset_id": 3576686446,
+    "kind": "avatar",
+    "description": "Play the additional waving gesture.",
+    "requirements": "Own this emote. Equip it to use the emote menu.",
+    "source_urls": [
+      "https://about.roblox.com/newsroom/2019/08/expanding-emotes-more-animations-more-fun",
+      "https://create.roblox.com/docs/characters/emotes",
+      "https://www.roblox.com/catalog/3576686446"
+    ],
+    "verification_method": "source_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 11,
+    "is_published": false
+  },
+  {
+    "code": "stadium",
+    "name": "Stadium",
+    "command": "/e stadium",
+    "asset_id": 3360686498,
+    "kind": "avatar",
+    "description": "Wave your arms in a stadium-style cheer.",
+    "requirements": "Own this emote. Equip it to use the emote menu.",
+    "source_urls": [
+      "https://about.roblox.com/newsroom/2019/08/expanding-emotes-more-animations-more-fun",
+      "https://create.roblox.com/docs/characters/emotes",
+      "https://www.roblox.com/catalog/3360686498"
+    ],
+    "verification_method": "source_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 12,
+    "is_published": false
+  },
+  {
+    "code": "salute",
+    "name": "Salute",
+    "command": "/e salute",
+    "asset_id": 3360689775,
+    "kind": "avatar",
+    "description": "Play a salute.",
+    "requirements": "Own this emote. Equip it to use the emote menu.",
+    "source_urls": [
+      "https://about.roblox.com/newsroom/2019/08/expanding-emotes-more-animations-more-fun",
+      "https://create.roblox.com/docs/characters/emotes",
+      "https://www.roblox.com/catalog/3360689775"
+    ],
+    "verification_method": "source_documentation",
+    "verified_at": "2026-09-15",
+    "sort_order": 13,
+    "is_published": false
+  }
+]

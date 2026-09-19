@@ -77,3 +77,7 @@ Do not re-implement these patterns inside each route unless the catalog page gen
 7. Set `revalidate` intentionally instead of copying another route blindly.
 8. Update sitemap and revalidation coverage if the route is publishable.
 9. Update `agents/pages/agents.md` if the route surface changes.
+
+### Emote IDs and commands
+
+Keep `/catalog/roblox-items-and-bundles/roblox-emotes` focused on Marketplace emote IDs, prices, creators, and listings. `/catalog/roblox-emote-commands` owns the separate command reference and loads published rows from `roblox_emote_commands`. Preserve the legacy emote-catalog redirect. Publish only commands backed by current evidence; never infer a command from a Marketplace name or interpret an item ID as a command or wheel slot. `data/roblox-emotes/commands.json` is seed input only.

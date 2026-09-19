@@ -50,3 +50,5 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - Before importing quiz data, validate the `QuizData` shape, difficulty counts, option IDs, and answer IDs. Then verify the saved `quiz_pages.quiz_data` readback and rendered `/quizzes/<slug>` page.
 - If a new dataset becomes long-lived, document it in `agents/data/agents.md`.
 - Do not store manual active-code lists, expired-code lists, code dates, or code rewards in `data/`. Code data belongs to the source-driven codes refresh workflow.
+
+- `data/roblox-emotes/commands.json`: reviewed emote command seed input with provenance, verification dates, and explicit publication state; import through `npm run seed:emote-commands -- --apply`. Runtime reads only published `roblox_emote_commands` rows. Marketplace names and prices remain in the existing item tables and are never converted into commands.

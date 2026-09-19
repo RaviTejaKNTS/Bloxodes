@@ -117,8 +117,13 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const rows = await readFinals(options.files);
 
-  await runCommand("npm", ["run", "content:check-copy", "--", ...options.files]);
-  await runCommand("npm", ["run", "seed:catalog-pages", "--", ...options.files.flatMap((file) => ["--file", file])]);
+  await runCommand(process.execPath, ["--import", "tsx", "scripts/content/check-public-copy.ts", ...options.files]);
+  await runCommand(process.execPath, [
+    "--import",
+    "tsx",
+    "scripts/catalog/seed-catalog-pages.ts",
+    ...options.files.flatMap((file) => ["--file", file])
+  ]);
   await verifyReadback(rows);
 
   const urls = rows.map((row) => `${options.baseUrl}/catalog/${row.code}`);

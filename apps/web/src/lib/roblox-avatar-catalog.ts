@@ -183,7 +183,7 @@ const AVATAR_CATALOG_PAGE_HEADINGS: Record<string, string> = {
   [`${AVATAR_BODY_PARTS_CODE}/dynamic-heads`]: "Roblox Dynamic Head Codes and IDs",
   [`${AVATAR_BODY_PARTS_CODE}/classic-heads`]: "Roblox Classic Head IDs and Codes",
   [`${AVATAR_BODY_PARTS_CODE}/classic-faces`]: "Roblox Classic Face IDs and Codes",
-  [AVATAR_EMOTES_CODE]: "Roblox Emote IDs and Codes",
+  [AVATAR_EMOTES_CODE]: "Roblox Emote IDs",
   [AVATAR_ANIMATIONS_CODE]: "Roblox Animation Pack and Bundle IDs",
   [AVATAR_MAKEUP_CODE]: "Roblox Makeup Codes and Item IDs"
 };
@@ -217,7 +217,7 @@ const AVATAR_CATALOG_SEO_TITLE_PREFIXES: Record<string, string> = {
   [`${AVATAR_BODY_PARTS_CODE}/dynamic-heads`]: "Roblox Dynamic Head Codes",
   [`${AVATAR_BODY_PARTS_CODE}/classic-heads`]: "Roblox Classic Head Codes",
   [`${AVATAR_BODY_PARTS_CODE}/classic-faces`]: "Roblox Classic Face Codes",
-  [AVATAR_EMOTES_CODE]: "Roblox Emote Codes",
+  [AVATAR_EMOTES_CODE]: "Roblox Emote IDs",
   [AVATAR_ANIMATIONS_CODE]: "Roblox Animation Codes",
   [AVATAR_MAKEUP_CODE]: "Roblox Makeup Codes"
 };
@@ -231,6 +231,7 @@ function getAvatarCatalogSeoCountType(code: string): string {
   if (code === AVATAR_CATALOG_MASTER_CODE) return "Marketplace IDs";
   if (code === AVATAR_BODY_PARTS_CODE) return "Item & Bundle IDs";
   if (code.endsWith("/full-bodies") || code === AVATAR_ANIMATIONS_CODE) return "Bundle IDs";
+  if (code === AVATAR_EMOTES_CODE) return "Marketplace Items";
   return "Item IDs";
 }
 
@@ -248,6 +249,7 @@ export function getAvatarCatalogSeoTitle(
 }
 
 export function getAvatarCatalogSeoDescription(config: Pick<AvatarCatalogConfig, "code" | "title">): string {
+  if (config.code === AVATAR_EMOTES_CODE) return "Find Roblox emote item IDs. Search by name, creator, or ID, compare prices and popularity, and open the official Marketplace listing.";
   const catalogName = config.title.replace(/\s+on Roblox$/i, "");
   const idTypes = config.code === AVATAR_CATALOG_MASTER_CODE || config.code.endsWith("/full-bodies") || config.code === AVATAR_ANIMATIONS_CODE
     ? "item and bundle IDs"

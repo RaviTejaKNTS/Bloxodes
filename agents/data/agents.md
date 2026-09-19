@@ -284,3 +284,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 ## GTA standalone checklist support (2026-09-10)
 
 GTA standalone checklists: `gta_checklist_pages`, `gta_checklist_items`, and security-invoker `gta_checklist_pages_view`; title FK to `gta_games`, runtime readers in `gta-checklists.ts`, namespaced shared progress. Managed development pages are GTA V (151 leaves), San Andreas (168), Vice City (153), and the current GTA Online Career Progress snapshot (27). See `dev-docs/pipelines/content.md`.
+
+### Emote commands (2026-09-15)
+
+`roblox_emote_commands` powers `/catalog/roblox-emote-commands` with reviewed command text, requirements, source URLs, verification dates, and explicit publication state. It uses RLS/server-only grants and optional item foreign keys. `data/roblox-emotes/commands.json` is seed input only; runtime reads the database. The initial public roster is limited to the seven defaults in current Roblox Support documentation. Marketplace names are never converted into commands. See `dev-docs/pipelines/catalog.md`.

@@ -295,3 +295,8 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 ## Shared automation runtime
 
 `npm run automation:runtime:prepare -- --sha <full-sha>` prepares a detached article/wiki release with independent dependencies and persistent state. `sudo bash scripts/ops/install-homelab-automation.sh --apply <released-full-sha>` activates both pipelines while idle, checks the restricted wiki sandbox, preserves timer states and credentials, and retains rollback units. The old article preparation and article/wiki installer entrypoints delegate here. Never stop an active job to activate a release. `BLOXODES_AUTOMATION_RUNTIME=1` selects the shared standard `.next` cache; one wiki lane and the shared lease prevent preview overlap. See `dev-docs/infrastructure/homelab.md` for state aliases and permission ownership.
+
+### Emote command maintenance (2026-09-15)
+
+- `seed:emote-commands`: reviewed reference JSON to server-only `roblox_emote_commands`, dry-run by default; managed-development apply before explicitly allowed production. Changed rows enqueue catalog revalidation.
+- `audit:emote-commands`: read-only database coverage report under `tmp/emotes/`, with optional `--baseline` inventory. The report counts published references and linked Marketplace commands without deriving commands from item names.
