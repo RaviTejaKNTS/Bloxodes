@@ -78,6 +78,30 @@ const SECTION_FIELD_PRIORITY = [
   "slot"
 ];
 
+const GAMEPLAY_SOURCE_TERMS = [
+  /\bSource Cargo\b/gi,
+  /\bSource Goods\b/gi,
+  /\bSource Supplies\b/gi,
+  /\bsource Air Freight Cargo\b/gi,
+  /\bsource all (?:vehicles|types of Cargo|types of Special Items)\b/gi,
+  /\bSource 250 crates of Cargo\b/gi,
+  /\bHumane Labs and Research\b/gi,
+  /\bScientist Research Center\b/gi,
+  /\bResearch projects?\b/gi,
+  /\bResearch 25 projects\b/gi,
+  /\bBunker Research upgrades\b/gi,
+  /\bresearch and manufacturing\b/gi
+];
+
+function containsPublicProvenance(value: string): boolean {
+  if (value.trim() === "Sources") return false;
+  const masked = GAMEPLAY_SOURCE_TERMS.reduce(
+    (current, pattern) => current.replace(pattern, "gameplay-term"),
+    value
+  );
+  return /\b(?:sources?|research|manifest|workflow)\b/i.test(masked);
+}
+
 function printUsage() {
   console.log(`Usage:
   npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> [options]
@@ -412,6 +436,20 @@ async function main() {
     issues.push({ level: "error", message: `${cardSummaryMissing} item(s) are missing cardSummary.` });
   } else if (cardSummaryMissing && cardSummaryMissing < rows.length) {
     issues.push({ level: "warning", message: `${cardSummaryMissing} item(s) are missing cardSummary.` });
+  }
+
+  const publicProvenanceFields = rows.flatMap((row) =>
+    Object.entries(row)
+      .filter(([key, value]) => !HIDDEN_FIELD_KEYS.has(key) && containsPublicProvenance(stringValue(value) ?? ""))
+      .map(([key]) => `${itemSlug(row)}.${key}`)
+  );
+  if (publicProvenanceFields.length) {
+    const sample = publicProvenanceFields.slice(0, 8).join(", ");
+    const remainder = publicProvenanceFields.length > 8 ? ` (+${publicProvenanceFields.length - 8} more)` : "";
+    issues.push({
+      level: "error",
+      message: `Public item fields must not expose provenance or workflow wording: ${sample}${remainder}`
+    });
   }
 
   const imageStats = await checkImages(rows, datasetPath);

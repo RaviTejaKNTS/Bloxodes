@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Fragment, type ReactNode } from "react";
 import { PagePagination } from "@/components/PagePagination";
@@ -875,6 +877,8 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
 
   return (
     <GameCollectionViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]} defaultView={defaultView} toolbar={toolbar}>
+      {(activeView) => (
+      <>
       <CollectionImageLightbox containerId="article-body" />
       <section
         id="article-body"
@@ -924,7 +928,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
               ) : null}
             </div>
 
-            {renderCards
+            {renderCards && activeView === "cards"
               ? items.map((presentation) => (
                   <div key={presentation.id} data-journey-item className="game-collection-card-item h-full">
                     <ForgeItemCard presentation={presentation} showImage={showImages} />
@@ -932,7 +936,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
                 ))
               : null}
 
-            {renderList ? (
+            {renderList && activeView === "list" ? (
               <div className="game-collection-list-view">
                 <ForgeItemTable
                   presentations={items}
@@ -954,6 +958,8 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
           />
         ) : null}
       </section>
+      </>
+      )}
     </GameCollectionViewShell>
   );
 }

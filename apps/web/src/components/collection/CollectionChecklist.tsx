@@ -188,7 +188,8 @@ export function CollectionChecklist({
 
   return (
     <GameCollectionViewShell availableViews={["cards", "list"]} defaultView="cards" toolbar={toolbar}>
-      <section aria-label={`${collectionLabel} collectibles`} className="space-y-7">
+      {(activeView) => (
+        <section aria-label={`${collectionLabel} collectibles`} className="space-y-7">
         <div className="rounded-lg border border-border/70 bg-surface p-5 md:p-6">
           <p className="text-sm font-medium text-foreground" role="status" aria-live="polite">
             {done} of {total} found · {percent}% complete
@@ -239,7 +240,7 @@ export function CollectionChecklist({
         ) : null}
       </div>
 
-      {visibleSections.length ? (
+      {activeView === "cards" && visibleSections.length ? (
         <div className="game-collection-cards-view space-y-9">
           {visibleSections.map((section) => {
             const sectionDone = section.items.filter((item) => checked.has(item.id)).length;
@@ -314,7 +315,7 @@ export function CollectionChecklist({
         </div>
       ) : null}
 
-      {visibleSections.length ? (
+      {activeView === "list" && visibleSections.length ? (
         <div className="game-collection-list-view space-y-9">
           {visibleSections.map((section) => {
             const sectionDone = section.items.filter((item) => checked.has(item.id)).length;
@@ -396,12 +397,13 @@ export function CollectionChecklist({
             );
           })}
         </div>
-      ) : (
+      ) : !visibleSections.length ? (
         <div className="rounded-lg border border-dashed border-border/70 bg-surface/60 p-8 text-center text-sm text-muted">
           No entries match those filters.
         </div>
+      ) : null}
+        </section>
       )}
-      </section>
     </GameCollectionViewShell>
   );
 }

@@ -1,8 +1,8 @@
 # Game Wiki and Collection Pipeline
 
 Status: Active
-Last verified: 2026-09-07
-Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive R2 audits, live route/image checks, route tests, exact production row/pointer counts, 209-route production crawl, and Tailscale-reachable GTA preview checks
+Last verified: 2026-09-21
+Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive R2 audits, live route/image checks, route tests, exact production row/pointer counts, 209-route production crawl, 106-route managed-development GTA collection crawl, zero public-provenance findings across managed GTA copy and rows, and Tailscale-reachable GTA preview checks
 
 ## Scope
 
@@ -29,7 +29,8 @@ These collections describe one game's durable systems and items—pets, weapons,
 - Collection codes use `<game-slug>-<collection-slug>`; `wiki_slug` must use the editorial game slug, never a stats/universe slug.
 - Roblox APIs may verify universe identity, metadata, and thumbnails. Collection item rows come from source research rather than assuming Roblox exposes a complete item endpoint.
 - GTA uses the same v2 workspace dataset shape and shared collection renderer, but it does not require a `roblox_universes` row or registered Roblox collection config. Its ignored authoring workspace lives under `tmp/content-workspace/gta/<game-slug>/` and immutable media keys use `gta/<game-slug>/<collection-slug>/...` in the shared wiki R2 bucket.
-- Managed development currently has 173 published GTA collections across 16 hubs, including 80 database pages and 93 checklist pages. GTA 5 contains 26 published collections, including 11 checklist collections: Letter Scraps, Spaceship Parts, Submarine Pieces, Nuclear Waste, Epsilon Tracts, Peyote Plants, Monkey Mosaics, Hidden Packages, Stunt Jumps, Under the Bridge, and Knife Flights.
+- Research URLs, evidence notes, image provenance, manifests, and workflow status are private authoring data. They must never appear in public page copy or public item fields. The public-copy and collection-data checks reject provenance/workflow language while allowing literal in-game names such as Source Cargo, Bunker Research, and the Chinatown Wars mission `Sources`.
+- Managed development currently has 280 published GTA collections across 16 hubs and 10,773 active item rows: 160 database pages and 120 collectible pages. The latest 106-page coverage batch contains 3,242 items, 2,236 exact images, and 1,006 documented text-only image gaps. GTA 5 contains 26 published collections, including 11 collectible collections: Letter Scraps, Spaceship Parts, Submarine Pieces, Nuclear Waste, Epsilon Tracts, Peyote Plants, Monkey Mosaics, Hidden Packages, Stunt Jumps, Under the Bridge, and Knife Flights.
 
 ## Roblox wiki landing page
 
@@ -59,10 +60,6 @@ When the agent is running on `teja-homelab`, bind the managed-development previe
 
 For any supported non-Roblox franchise, use `sync:franchise-collection-runtime`, `verify:franchise-wiki-final`, and `verify:franchise-collection-final` with an explicit `--namespace`; these commands default to managed development. GTA compatibility commands remain available, and Red Dead production promotion is deliberately outside this workflow.
 
-### Homelab preview handoff
-
-When the agent is running on `teja-homelab`, a local Next preview must be reachable from the reviewer's other Tailscale device. Bind the managed-development preview to `0.0.0.0` and share routes beneath `http://teja-homelab.tail13b5bd.ts.net:3000`; use `http://100.86.117.125:3000` if MagicDNS is unavailable. Never hand off `localhost:3000` or `127.0.0.1:3000` for remote review. Keep `https://bloxodes.com/...` as the canonical URL and keep production credentials and publication out of preview QA. The homelab command and the large-page webpack/Turbopack recovery procedure live in `dev-docs/infrastructure/homelab.md`.
-
 Use `.agents/skills/bloxodes-gta-wiki-*/SKILL.md` for GTA hub work and `.agents/skills/bloxodes-gta-game-collection-*/SKILL.md` for GTA collection discovery, research, data, images, writing, managed-development verification, and later refreshes. The Roblox wiki and collection skills are not interchangeable with these because they assume Roblox universe identity, tables, routes, and publication commands.
 
 Use the matching wiki and game-collection workflow skills. For existing datasets, `bloxodes-game-collection-refresh` is the maintenance path for one collection, one game, or the registered collection set.
@@ -84,6 +81,8 @@ Use the matching wiki and game-collection workflow skills. For existing datasets
 Red Dead hub covers must use landscape source artwork or screenshots and fill the 16:9 card edge to edge. The media sync rejects cover sources below a 1.5 aspect ratio and uses a cover resize; padding portrait box art into a wide canvas does not satisfy this requirement. Square title artwork uses a separate source. Verify actual browser screenshots as well as image dimensions and database URLs.
 
 Collection image manifests are authoring inputs. Runtime item media is stored by immutable R2 object key in `wiki_collection_items` and served through the wiki-media worker. A collection is not ready merely because its copy exists: every item count, media key, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
+
+The collectible renderer mounts only the active cards or table view. This keeps large collections from duplicating every row in the initial HTML while preserving the cards/list switch after hydration.
 
 Wiki hub images have separate roles. For Roblox, `/wiki` cards and social previews use the first official 768x432 universe thumbnail, while the square artwork beside a wiki title uses the current official 512x512 universe icon. GTA uses the same UI contract through `gta_games.cover_image` for cards/social previews and `gta_games.hero_image` for separate square title artwork. `sync:gta-wiki-media` source-checks, optimizes, uploads, and verifies the reviewed GTA assets in the shared `bloxodes-wiki` R2 bucket; its thumbnail pipeline center-crops to a bounded square and rejects non-square output before upload. It stores only `https://media.bloxodes.com/wiki/...` URLs, so runtime does not depend on direct Wikia/Rockstar hotlinks. Universe linking fetches missing official media immediately, rotating enrichment replaces the active fields and primary rows with Roblox's current media while retaining prior URLs as history, and `sync-game-wiki-runtime.ts` refuses publication unless both roles exist. Wiki finals must leave `cover_image` null; a reviewed exception requires the explicit `--allow-cover-override` flag.
 

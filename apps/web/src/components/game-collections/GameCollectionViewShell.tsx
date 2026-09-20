@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 
-type ViewMode = "cards" | "list";
+export type ViewMode = "cards" | "list";
 
 export function GameCollectionViewShell({
   availableViews = ["cards", "list"],
@@ -13,7 +13,7 @@ export function GameCollectionViewShell({
   availableViews?: ViewMode[];
   defaultView?: ViewMode;
   toolbar?: ReactNode;
-  children: ReactNode;
+  children: ReactNode | ((activeView: ViewMode) => ReactNode);
 }) {
   const initialView =
     defaultView && availableViews.includes(defaultView)
@@ -66,7 +66,7 @@ export function GameCollectionViewShell({
           {viewSwitcher}
         </div>
       ) : null}
-      {children}
+      {typeof children === "function" ? children(activeView) : children}
     </div>
   );
 }

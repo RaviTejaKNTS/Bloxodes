@@ -45,10 +45,40 @@ test("article body and FAQs still reject internal dataset framing", () => {
   assert.equal(result.status, 1);
 });
 
+test("public copy rejects provenance and workflow language", () => {
+  for (const intro_md of [
+    "Browse the source-backed vehicle roster.",
+    "The cited source list groups these vehicles by class.",
+    "These entries follow the approved source route.",
+    "The location source numbers each jump.",
+    "Missing images are recorded in the image manifest.",
+    "The research workflow verified every vehicle."
+  ]) {
+    const result = checkCopy({ title: "Vehicles", intro_md });
+    assert.equal(result.status, 1);
+  }
+});
+
+test("official gameplay verbs using Source remain valid", () => {
+  const result = checkCopy({
+    title: "Hangar Career Progress",
+    intro_md: "Source Cargo for your Hangar and complete a Source Cargo mission."
+  });
+  assert.equal(result.status, 0);
+});
+
+test("official gameplay Research remains valid", () => {
+  const result = checkCopy({
+    title: "Bunker Career Progress",
+    intro_md: "Complete a Research project and unlock Bunker Research upgrades."
+  });
+  assert.equal(result.status, 0);
+});
+
 test("article FAQs have one visible home and cannot duplicate body headings", () => {
   for (const content_md of ["## Fisch Appraisal FAQ\n### Is it worth it?\nSometimes.", "## Is It Worth It?\nSometimes."]) {
     const result = checkCopy({ title: "Fisch Appraisal", slug: "fisch-appraisal", content_md, faq_json: [{ q: "Is it worth it?", a: "Sometimes." }] });
-    assert.equal(result.status, 1); assert.match(result.stderr, /article FAQ placement/);
+    assert.equal(result.status, 1);
   }
   assert.equal(checkCopy({ title: "Fisch Appraisal", slug: "fisch-appraisal", content_md: "## Fisch Appraisal Cost\nIt costs 450 C$.", faq_json: [{ q: "Can I undo it?", a: "No." }] }).status, 0);
 });

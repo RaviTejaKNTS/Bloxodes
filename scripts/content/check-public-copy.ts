@@ -49,6 +49,30 @@ const HARD_PATTERNS: Array<{ rule: string; pattern: RegExp }> = [
   }
 ];
 
+const GAMEPLAY_SOURCE_TERMS = [
+  /\bSource Cargo\b/gi,
+  /\bSource Goods\b/gi,
+  /\bSource Supplies\b/gi,
+  /\bsource Air Freight Cargo\b/gi,
+  /\bsource all (?:vehicles|types of Cargo|types of Special Items)\b/gi,
+  /\bSource 250 crates of Cargo\b/gi,
+  /\bHumane Labs and Research\b/gi,
+  /\bScientist Research Center\b/gi,
+  /\bResearch projects?\b/gi,
+  /\bResearch 25 projects\b/gi,
+  /\bBunker Research upgrades\b/gi,
+  /\bresearch and manufacturing\b/gi
+];
+
+function publicProvenanceMatch(value: string): RegExpExecArray | null {
+  if (value.trim() === "Sources") return null;
+  const masked = GAMEPLAY_SOURCE_TERMS.reduce(
+    (current, pattern) => current.replace(pattern, "gameplay-term"),
+    value
+  );
+  return /\b(?:sources?|research|manifest|workflow)\b/i.exec(masked);
+}
+
 function isPublicCopyPath(parts: string[]): boolean {
   return parts.some((part) => PUBLIC_COPY_KEYS.has(part));
 }
@@ -61,6 +85,16 @@ function excerpt(value: string, index: number): string {
 
 function scanString(value: string, file: string, field: string, article: boolean): Finding[] {
   const findings: Finding[] = [];
+
+  const provenanceMatch = publicProvenanceMatch(value);
+  if (provenanceMatch) {
+    findings.push({
+      file,
+      field,
+      rule: "public provenance or workflow reference",
+      excerpt: excerpt(value, provenanceMatch.index)
+    });
+  }
 
   for (const rule of HARD_PATTERNS) {
     // Article orientation is allowed; retain the stricter catalog/page contract.
