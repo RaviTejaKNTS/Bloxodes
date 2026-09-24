@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { access, mkdir, readFile, realpath } from "node:fs/promises";
-import { constants as fsConstants, readFileSync } from "node:fs";
+import { constants as fsConstants, readFileSync, realpathSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import net from "node:net";
@@ -151,7 +151,9 @@ async function retryOperation<T>(label: string, operation: () => Promise<T>): Pr
 }
 
 function assertCleanCheckout(context: string) {
-  const result = spawnSync("git", ["-c", `safe.directory=${worktree}`, "status", "--porcelain"], { cwd: worktree, encoding: "utf8" });
+  // Git checks ownership against the resolved release path, while systemd enters through `current`.
+  const gitWorktree = realpathSync(worktree);
+  const result = spawnSync("git", ["-c", `safe.directory=${gitWorktree}`, "status", "--porcelain"], { cwd: gitWorktree, encoding: "utf8" });
   if (result.status !== 0) throw new Error(`Could not inspect git status during ${context}: ${result.stderr.trim()}`);
   if (result.stdout.trim()) throw new Error(`Wiki automation requires a clean checkout during ${context}.`);
 }

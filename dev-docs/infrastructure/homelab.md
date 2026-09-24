@@ -1,7 +1,7 @@
 # Homelab
 
 Status: Article and wiki/collection automation activated on the shared versioned runtime
-Last verified: 2026-09-14 (shared runtime contract; older health evidence retains its dated scope)
+Last verified: 2026-09-24 (wiki builder startup recovery; other evidence retains its dated scope)
 Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
 ## Host
@@ -130,6 +130,12 @@ Persistent article and wiki artifacts live in the shared runtime `state` directo
 Discovery remains midnight/06:00/12:00/18:00 IST; article publication retries every 15 minutes; wiki construction remains daily at 01:00 plus up to 10 minutes jitter; wiki publication checks each minute. Activation does not requeue historical content failures. Retain the previous runtime for rollback; reverting installed units also requires the same idle-job and timer-preservation procedure.
 
 Saved wiki attempts validate canonical filesystem containment, so old checkout aliases remain resumable without allowing cross-game paths or symlink escapes. Codex receives only the resolved attempt directory as an additional writable root; this is required because persistent artifacts live outside the release checkout.
+
+### Wiki builder startup recovery (September 24, 2026)
+
+The daily builder passed readiness but failed its Git cleanliness check on September 15–24 before claiming a queue row. The unit sets `WIKI_AUTOMATION_WORKTREE` to the `current` symlink, while Git checks ownership against its resolved release directory. The runner passed the symlink to `safe.directory`, causing Git's dubious-ownership error under `bloxodes-wiki-model`. The trusted publisher continued polling, but no new builder output was available to publish.
+
+The live service account now trusts only the exact active release directory, `290f8a24fb6d76f2cdcff9be817e71ea0cbc9c87`, as an immediate repair. A dry run inside the restricted systemd sandbox passed the startup check and reached the durable queue, identifying Karinderya as the next retry. Both wiki timers remained active, with the next builder run scheduled for September 25 at 01:04 IST. The source runner also resolves the worktree before its Git check, so a subsequent versioned runtime will not depend on a per-release Git configuration entry.
 
 ### Shared runtime activation verified September 14, 2026
 
