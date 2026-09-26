@@ -63,7 +63,7 @@ function buildItemListSchema({
         "@type": "Thing",
         name: item.name,
         url: `${url}#item-${item.id}`,
-        image: resolveAbsoluteUrl(item.image)
+        ...(item.image ? { image: resolveAbsoluteUrl(item.image) } : {})
       }
     }))
   };
@@ -85,6 +85,11 @@ export function renderGtaCollectibleCollectionPage({
   collectionOptions: Array<{ value: string; label: string; href: string; pageType?: "database" | "collectible" }>;
 }) {
   const sections = buildSections(groupedSections, page.description_json);
+  const configuredCardFields = dataset.meta?.display?.cardFields ?? [];
+  const cardFields = sections.some((section) => section.items.some((item) => typeof item.location === "string" && item.location.trim()))
+    && !configuredCardFields.includes("location")
+    ? [...configuredCardFields, "location"]
+    : configuredCardFields;
   const itemCount = sections.reduce((sum, section) => sum + section.items.length, 0);
   const title = contentHtml?.title?.trim() || `All ${itemCount.toLocaleString("en-US")} ${config.label} in ${config.gameName}`;
   const description = page.meta_description || `${config.gameName} ${config.label.toLowerCase()} collectibles with locations, access notes, and progress tracking.`;
@@ -130,7 +135,10 @@ export function renderGtaCollectibleCollectionPage({
           gameName={config.gameName}
           collectionLabel={config.label}
           sections={sections}
-          cardFields={dataset.meta?.display?.cardFields ?? null}
+          cardFields={cardFields}
+          fieldLabels={Object.fromEntries(Object.entries(dataset.meta?.display?.fieldPresentation ?? {}).flatMap(([key, value]) =>
+            typeof value === "object" && value?.label ? [[key, value.label]] : []
+          ))}
           collectionOptions={collectionOptions}
         />
         <CatalogAdSlot />

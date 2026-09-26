@@ -24,6 +24,7 @@ export function GtaCollectibleChecklist({
   collectionLabel,
   sections,
   cardFields,
+  fieldLabels,
   collectionOptions
 }: {
   code: string;
@@ -31,6 +32,7 @@ export function GtaCollectibleChecklist({
   collectionLabel: string;
   sections: GtaCollectibleSection[];
   cardFields?: string[] | null;
+  fieldLabels?: Record<string, string>;
   collectionOptions: Array<{ value: string; label: string; href: string; pageType?: "database" | "collectible" }>;
 }) {
   return (
@@ -40,6 +42,7 @@ export function GtaCollectibleChecklist({
       collectionLabel={collectionLabel}
       sections={sections}
       cardFields={cardFields}
+      fieldLabels={fieldLabels}
       toolbar={
         <CatalogSelectNav
           label={`${gameName} collection`}

@@ -53,12 +53,13 @@ type Plan = {
 
 const argv = process.argv.slice(2);
 if (argv.includes("--help") || argv.includes("-h")) {
-  console.log("Usage: npm run sync:gta-collection-runtime -- --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--allow-prod]");
+  console.log("Usage: npm run sync:gta-collection-runtime -- --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--reuse-published-media] [--allow-prod]");
   process.exit(0);
 }
 const apply = argv.includes("--apply");
 const publish = argv.includes("--publish");
 const uploadMedia = argv.includes("--upload-media");
+const reusePublishedMedia = argv.includes("--reuse-published-media");
 const allowProd = argv.includes("--allow-prod");
 const manifestPaths = collectValues("--manifest").map((value) => path.resolve(value));
 const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -295,17 +296,45 @@ async function verifyImages(plan: Plan, r2: R2Client) {
   });
 }
 
+async function verifyReusedImages(plan: Plan) {
+  const images = plan.items.filter((item) => item.image_key);
+  if (!images.length) return;
+  const sb = supabaseAdmin();
+  const page = await sb.from("gta_wiki_collection_pages")
+    .select("published_dataset_id")
+    .eq("code", plan.code)
+    .single();
+  if (page.error || !page.data?.published_dataset_id) throw page.error ?? new Error(`${plan.code} has no published media revision to reuse.`);
+  const existing = new Map<string, { image_key: string | null; image_sha256: string | null }>();
+  for (let start = 0; ; start += 1000) {
+    const result = await sb.from("gta_wiki_collection_items")
+      .select("item_slug, image_key, image_sha256")
+      .eq("dataset_id", page.data.published_dataset_id)
+      .range(start, start + 999);
+    if (result.error) throw result.error;
+    for (const item of result.data ?? []) existing.set(item.item_slug, item);
+    if ((result.data?.length ?? 0) < 1000) break;
+  }
+  for (const item of images) {
+    const old = existing.get(item.item_slug);
+    if (old?.image_key !== item.image_key || old.image_sha256 !== item.image_sha256) {
+      throw new Error(`${plan.code}/${item.item_slug} has new or changed media; upload and verify it with R2 before publishing.`);
+    }
+  }
+}
+
 async function publishPlan(plan: Plan, r2: R2Client | null) {
   for (let attempt = 1; attempt <= 5; attempt += 1) {
     try {
       if (uploadMedia && r2) await uploadImages(plan, r2);
       if (publish && r2) await verifyImages(plan, r2);
+      if (publish && reusePublishedMedia) await verifyReusedImages(plan);
       await applyPlan(plan);
       return;
     } catch (error) {
       if (attempt === 5 || !transientFailure(error)) throw error;
       const delayMs = 2_000 * 2 ** (attempt - 1);
-      console.warn(`${plan.code} hit a transient production failure; retrying attempt ${attempt + 1}/5 in ${delayMs / 1000}s.`);
+      console.warn(`${plan.code} hit a transient database failure; retrying attempt ${attempt + 1}/5 in ${delayMs / 1000}s.`);
       await new Promise((resolve) => setTimeout(resolve, delayMs));
     }
   }
@@ -402,15 +431,18 @@ async function main() {
   if (!manifestPaths.length) throw new Error("At least one --manifest is required.");
   if (publish && !apply) throw new Error("--publish requires --apply.");
   if (uploadMedia && !apply) throw new Error("--upload-media requires --apply.");
+  if (reusePublishedMedia && (!publish || !apply || uploadMedia)) throw new Error("--reuse-published-media requires --apply --publish without --upload-media.");
   const managed = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
   if (apply && !managed && !allowProd) throw new Error("GTA collection writes default to managed development; production requires --allow-prod.");
   if (allowProd && (!apply || !production)) throw new Error("--allow-prod requires --apply and the recognized production target.");
+  if (reusePublishedMedia && !managed) throw new Error("--reuse-published-media is limited to managed development.");
   const plans: Plan[] = [];
   for (const manifestPath of manifestPaths) plans.push(await planManifest(manifestPath));
   console.table(plans.map((plan) => ({ code: plan.code, items: plan.items.length, images: plan.items.filter((item) => item.image_key).length, contentHash: plan.contentHash })));
   if (!apply) return;
-  const r2Config = uploadMedia || publish ? loadR2ClientConfig(process.env) : null;
+  const needsR2 = (uploadMedia || (publish && !reusePublishedMedia)) && plans.some((plan) => plan.items.some((item) => Boolean(item.image_key)));
+  const r2Config = needsR2 ? loadR2ClientConfig(process.env) : null;
   if (r2Config && r2Config.bucket !== "bloxodes-wiki") throw new Error(`Expected shared R2 bucket bloxodes-wiki, received ${r2Config.bucket}.`);
   const r2 = r2Config ? new R2Client(r2Config) : null;
   for (const plan of plans) {

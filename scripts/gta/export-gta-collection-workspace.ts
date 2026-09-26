@@ -284,6 +284,12 @@ async function main() {
 
   const sourceManifest = dataset.source_manifest_json ?? {};
   const meta = dataset.meta_json ?? {};
+  const runtimeMeta = meta.runtime && typeof meta.runtime === "object" && !Array.isArray(meta.runtime)
+    ? meta.runtime as Record<string, unknown>
+    : {};
+  const runtimeGameName = typeof runtimeMeta.gameName === "string" && runtimeMeta.gameName.trim()
+    ? runtimeMeta.gameName.trim()
+    : gameData.title;
   const sourceUrls = Array.from(new Set([
     ...sourceUrlsFrom(sourceManifest.sourceUrls),
     ...sourceUrlsFrom(meta.sources),
@@ -304,8 +310,7 @@ async function main() {
   const datasetDocument = {
     meta: {
       ...meta,
-      schemaVersion: dataset.schema_version ?? 2,
-      sources: sourceUrls
+      schemaVersion: dataset.schema_version ?? 2
     },
     items: items.map((item) => ({
       item: { name: item.item_name, ...(item.fields_json ?? {}) },
@@ -319,8 +324,8 @@ async function main() {
   };
   const manifest = {
     schemaVersion: 1,
-    game: { slug: row.wiki_slug, name: gameData.title },
-    collection: { slug: row.collection_slug, label: row.display_name ?? row.collection_slug, sortOrder: row.wiki_sort_order ?? 0, pageType: row.page_type === "checklist" ? "checklist" : "database" },
+    game: { slug: row.wiki_slug, name: runtimeGameName },
+    collection: { slug: row.collection_slug, label: row.display_name ?? row.collection_slug, sortOrder: row.wiki_sort_order ?? 0, pageType: row.page_type === "checklist" || row.page_type === "collectible" ? "collectible" : "database" },
     route: `/gta/wiki/${row.wiki_slug}/${row.collection_slug}`,
     dataset: "dataset.json",
     finalJson: "final.json",

@@ -185,6 +185,12 @@ export function buildCollectionPagination<TItem extends CollectionPaginationItem
     });
   });
   const sectionHrefById = new Map<string, string>();
+  const itemLinks = buckets.flatMap((pageBucket, bucketIndex) =>
+    pageBucket.sections.flatMap((section) => section.items.map((item) => ({
+      id: item.id,
+      href: `${bucketIndex === 0 ? basePath : `${basePath}/page/${bucketIndex + 1}`}#item-${item.id}`
+    })))
+  );
   const sectionLinks = sections.map((section) => {
     const page = sectionPageById.get(section.id) ?? 1;
     const path = page === 1 ? basePath : `${basePath}/page/${page}`;
@@ -208,6 +214,7 @@ export function buildCollectionPagination<TItem extends CollectionPaginationItem
   return {
     sections: pageSections,
     sectionLinks,
+    itemLinks,
     info: {
       currentPage: safeCurrentPage,
       totalPages,

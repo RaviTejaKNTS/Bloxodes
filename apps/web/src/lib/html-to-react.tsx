@@ -36,6 +36,7 @@ function toReactAttrName(name: string): string {
   if (name === "class") return "className";
   if (name === "for") return "htmlFor";
   if (name === "allowfullscreen") return "allowFullScreen";
+  if (name === "frameborder") return "frameBorder";
   if (name === "readonly") return "readOnly";
   if (name === "referrerpolicy") return "referrerPolicy";
   if (name === "srcset") return "srcSet";
@@ -161,7 +162,7 @@ function renderNode(node: Node, key: string, markerAttr: string, parentTag?: str
 export function renderHtmlAsReactNodes(html: string, options: RenderHtmlOptions = {}): ReactNode[] {
   const markerAttr = options.markerAttr ?? "data-md-copy";
   const keyPrefix = options.keyPrefix ?? "md";
-  const document = parseDocument(html, { decodeEntities: false });
+  const document = parseDocument(html, { decodeEntities: true });
 
   return document.children
     .map((node, index) => renderNode(node, `${keyPrefix}-${index}`, markerAttr))

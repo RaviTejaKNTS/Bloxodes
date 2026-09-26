@@ -42,6 +42,7 @@ describe("game collection pagination", () => {
       { id: "weapons", label: "Weapons", count: 24, page: 1, href: "/wiki/test/items#weapons" },
       { id: "armor", label: "Armor", count: 24, page: 2, href: "/wiki/test/items/page/2#armor" }
     ]);
+    expect(result.itemLinks.find((item) => item.id === "armor-1")?.href).toBe("/wiki/test/items/page/2#item-armor-1");
   });
 
   it("splits oversized sections and preserves continuation metadata", () => {
@@ -67,6 +68,7 @@ describe("game collection pagination", () => {
       startPage: 1,
       startHref: "/wiki/test/pets#pets"
     });
+    expect(result.itemLinks.find((item) => item.id === "pet-50")?.href).toBe("/wiki/test/pets/page/3#item-pet-50");
   });
 
   it("returns a stable empty first page", () => {
@@ -74,6 +76,7 @@ describe("game collection pagination", () => {
 
     expect(result.sections).toEqual([]);
     expect(result.sectionLinks).toEqual([]);
+    expect(result.itemLinks).toEqual([]);
     expect(result.info).toEqual({
       currentPage: 1,
       totalPages: 1,

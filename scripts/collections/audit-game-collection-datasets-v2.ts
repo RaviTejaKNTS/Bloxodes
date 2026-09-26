@@ -163,6 +163,13 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value && typeof value === "object" && !Array.isArray(value));
 }
 
+function hasContent(value: unknown): boolean {
+  if (value === null || value === undefined) return false;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.length > 0;
+  return true;
+}
+
 function stringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((entry): entry is string => typeof entry === "string" && entry.trim().length > 0) : [];
 }
@@ -272,6 +279,53 @@ function auditDataset(code: string, datasetPath: string, document: DatasetDocume
     }
   }
 
+  if (allDisplayFields.includes("name")) {
+    addIssue(issues, code, datasetPath, "Display fields must not list \"name\"; the card title already renders item.name.");
+  }
+
+  const usefulItemFields = itemFields.filter((field) => !["name", "cardSummary", "slug"].includes(field));
+  const imageBackedLocationGuide = usefulItemFields.length === 2
+    && usefulItemFields.includes("guideNumber")
+    && usefulItemFields.includes("location")
+    && items.length >= 10
+    && items.every((row) => {
+      const item = isRecord(row.item) ? row.item : {};
+      const system = isRecord(row.system) ? row.system : {};
+      return typeof item.guideNumber === "number" && Number.isInteger(item.guideNumber)
+        && typeof item.location === "string" && Boolean(item.location.trim())
+        && typeof system.image === "string" && Boolean(system.image.trim());
+    });
+  if (usefulItemFields.length <= 2 && !imageBackedLocationGuide) {
+    addIssue(
+      issues,
+      code,
+      datasetPath,
+      `Dataset has only ${usefulItemFields.length} useful item field(s) beyond name/cardSummary (${usefulItemFields.join(", ") || "none"}). Enrich to GTABase parity before publishing.`
+    );
+  }
+
+  const FILLER_PATTERNS = [
+    /open wheel vehicle in gta online/i,
+    /listed online vehicle entry/i,
+    /use the image to confirm/i,
+    /use the item image and location note/i,
+    /appears among grand theft auto/i
+  ];
+  let fillerCount = 0;
+  for (const row of items) {
+    if (!isRecord(row) || !isRecord(row.item)) continue;
+    const summary = typeof row.item.cardSummary === "string" ? row.item.cardSummary : "";
+    if (FILLER_PATTERNS.some((pattern) => pattern.test(summary))) fillerCount += 1;
+  }
+  if (fillerCount) {
+    addIssue(
+      issues,
+      code,
+      datasetPath,
+      `${fillerCount} item(s) use generic filler cardSummary. Replace with bespoke source-backed data.`
+    );
+  }
+
   for (const label of FORBIDDEN_RENDER_LABELS) {
     const normalizedLabel = label.toLowerCase();
     if (allDisplayFields.some((field) => field.replace(/[_-]/g, " ").toLowerCase() === normalizedLabel)) {
@@ -325,6 +379,37 @@ function auditDataset(code: string, datasetPath: string, document: DatasetDocume
   for (const section of sectionValues) {
     if (!sectionOrder.includes(section)) {
       addIssue(issues, code, datasetPath, `meta.display.sectionOrder is missing section "${section}".`);
+    }
+  }
+
+  if (code.startsWith("gta-")) {
+    const itemRows = items.filter((row): row is Record<string, unknown> => isRecord(row) && isRecord(row.item))
+      .map((row) => row.item as Record<string, unknown>);
+    const emptyFields = itemFields.filter((field) => field !== "name" && !itemRows.some((item) => hasContent(item[field])));
+    if (emptyFields.length) {
+      addIssue(issues, code, datasetPath, `Declared fields are empty in every item: ${emptyFields.join(", ")}. Remove unsupported fields or research their values.`);
+    }
+    for (const [field, source] of [["objectives", "cardSummary"], ["mapHint", "location"]] as const) {
+      const comparable = itemRows.filter((item) => hasContent(item[field]) && hasContent(item[source]));
+      const duplicates = comparable.filter((item) => JSON.stringify(item[field]) === JSON.stringify(item[source]));
+      if (comparable.length >= 3 && duplicates.length / comparable.length >= 0.8) {
+        addIssue(issues, code, datasetPath, `${duplicates.length}/${comparable.length} ${field} values duplicate ${source}; add distinct, useful detail or remove the field.`);
+      }
+    }
+    const generic = itemRows.filter((item) => ["cardSummary", "description", "objectives", "mapHint", "modeRules"]
+      .some((field) => typeof item[field] === "string" && /mission details and requirements for|use the (?:item )?image to|search exact (?:perch|location) shown in image|complete the team objective, survive the round and outscore/i.test(item[field] as string)));
+    if (generic.length) {
+      addIssue(issues, code, datasetPath, `${generic.length} item(s) contain known generic or misleading descriptive text.`);
+    }
+    const wrongCrewMax = itemRows.filter((item) => {
+      const range = typeof item.players === "string" ? item.players.match(/^\s*\d+\s*[-–]\s*(\d+)\s*$/) : null;
+      return range && hasContent(item.crewMax) && String(item.crewMax).trim() !== range[1];
+    });
+    if (wrongCrewMax.length) {
+      addIssue(issues, code, datasetPath, `${wrongCrewMax.length} item(s) have crewMax conflicting with the listed player range.`);
+    }
+    if (code === "gta-online-criminal-careers" && itemRows.some((item) => hasContent(item.payout) || hasContent(item.rankUnlock))) {
+      addIssue(issues, code, datasetPath, "Career Builder paths are starting business choices, not ranked jobs with fixed payouts.");
     }
   }
 }

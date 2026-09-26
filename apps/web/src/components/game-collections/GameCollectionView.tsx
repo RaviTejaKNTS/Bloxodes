@@ -30,8 +30,10 @@ export type GameCollectionViewConfig = {
   descriptionKey?: string;
   cardDescriptionKey?: string;
   cardFields?: string[];
+  detailFields?: string[];
   fieldPresentation?: Record<string, CollectionFieldPresentation | CollectionFieldKind>;
   hideImages?: boolean;
+  hideMissingImagePlaceholders?: boolean;
 };
 
 export type GameCollectionItem = {
@@ -88,7 +90,10 @@ type CollectionItemPresentation = {
   id: string;
   title: string;
   image: string | null;
+  imageCreditUrl: string | null;
   description: string | null;
+  tracks: string[];
+  details: Array<{ key: string; label: string; value: string }>;
   fields: CollectionPresentationField[];
 };
 
@@ -103,6 +108,16 @@ function resolveImageSrc(image: string | null | undefined): string | null {
   if (image.startsWith("http")) return image;
   if (image.startsWith("/")) return image;
   return `/${image}`;
+}
+
+function resolveImageCreditUrl(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password ? url.href : null;
+  } catch {
+    return null;
+  }
 }
 
 function normalizeValue(value: unknown): string | null {
@@ -389,12 +404,14 @@ function getPrimaryDescriptionKey(config: GameCollectionViewConfig): string | nu
   return config.cardDescriptionKey ?? config.descriptionKey ?? null;
 }
 
-function buildFieldDefinitions(config: GameCollectionViewConfig): CollectionPresentationFieldDefinition[] {
+function buildFieldDefinitions(config: GameCollectionViewConfig, view: "cards" | "list"): CollectionPresentationFieldDefinition[] {
   const fields: CollectionPresentationFieldDefinition[] = [];
   const seen = new Set<string>();
   const descriptionKey = getPrimaryDescriptionKey(config);
   const statMap = new Map((config.stats ?? []).map((stat) => [stat.key, stat.label]));
-  const preferredKeys = config.cardFields ?? (config.stats ?? []).map((stat) => stat.key);
+  const preferredKeys = view === "cards" && config.cardFields
+    ? config.cardFields
+    : (config.stats ?? []).map((stat) => stat.key);
 
   addUniqueField(
     fields,
@@ -435,7 +452,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig): CollectionPres
     );
   }
 
-  for (const stat of config.stats ?? []) {
+  for (const stat of view === "list" || !config.cardFields ? config.stats ?? [] : []) {
     const presentation = getConfiguredFieldPresentation(config, stat.key);
     addUniqueField(
       fields,
@@ -535,7 +552,14 @@ function buildItemPresentation(
     id: item.id,
     title: item.name,
     image: resolveImageSrc(item.image ?? null),
+    imageCreditUrl: resolveImageCreditUrl(item.imageCreditUrl),
     description: descriptionKey ? normalizeValue(item[descriptionKey]) : null,
+    tracks: Array.isArray(item.tracklist) ? item.tracklist.filter((track): track is string => typeof track === "string" && track.trim().length > 0) : [],
+    details: (config.detailFields ?? []).flatMap((key) => {
+      const value = normalizeValue(item[key]);
+      if (!value) return [];
+      return [{ key, label: getConfiguredFieldPresentation(config, key)?.label ?? formatKeyLabel(key), value }];
+    }),
     fields: fieldDefinitions.map((definition) => buildPresentationField(definition, item))
   };
 }
@@ -550,6 +574,39 @@ function presentationHasWideContent(presentation: CollectionItemPresentation): b
 
 function renderMissingValue() {
   return <span className="text-xs text-muted">-</span>;
+}
+
+function TracklistDetails({ tracks }: { tracks: string[] }) {
+  if (!tracks.length) return null;
+  return (
+    <details className="mt-3 rounded-md border border-border/60 bg-background/40 px-3 py-2 text-sm">
+      <summary className="cursor-pointer font-medium text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+        Listed tracks ({tracks.length})
+      </summary>
+      <ol className="mt-3 max-h-80 list-decimal space-y-1 overflow-y-auto pl-5 text-muted">
+        {tracks.map((track, index) => <li key={`${index}-${track}`}>{track}</li>)}
+      </ol>
+    </details>
+  );
+}
+
+function ItemDetails({ details }: { details: CollectionItemPresentation["details"] }) {
+  if (!details.length) return null;
+  return (
+    <details className="mt-3 rounded-md border border-border/60 bg-background/40 px-3 py-2 text-sm">
+      <summary className="cursor-pointer font-medium text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+        More details
+      </summary>
+      <dl className="mt-3 space-y-3 border-t border-border/60 pt-3">
+        {details.map((detail) => (
+          <div key={detail.key}>
+            <dt className="text-xs font-medium text-muted">{detail.label}</dt>
+            <dd className="mt-0.5 whitespace-pre-line break-words text-foreground">{detail.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </details>
+  );
 }
 
 function getCardFieldRowClass(field: CollectionPresentationField) {
@@ -611,7 +668,7 @@ function CollectionImageFrame({
   if (!showImage) return null;
 
   const frameClass = compact
-    ? "flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl bg-surface-muted/70 p-3"
+    ? "relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl bg-surface-muted/70 p-3"
     : "relative aspect-[4/3] w-full overflow-hidden border-b border-border/60 bg-background/50";
 
   if (!presentation.image) {
@@ -652,6 +709,17 @@ function CollectionImageFrame({
           />
         )}
       </button>
+      {presentation.imageCreditUrl ? (
+        <a
+          href={presentation.imageCreditUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Image credit for ${presentation.title}`}
+          className="absolute bottom-2 right-2 rounded bg-background/90 px-2 py-1 text-xs text-foreground/80 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          Image credit
+        </a>
+      ) : null}
     </div>
   );
 }
@@ -663,26 +731,23 @@ function ForgeItemCard({
   presentation: CollectionItemPresentation;
   showImage: boolean;
 }) {
+  const visibleFields = presentation.fields.filter((field) => !(field.omitWhenEmpty && !field.value));
   return (
     <article
       id={`item-${presentation.id}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
+      className="group flex h-full scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
     >
       <CollectionImageFrame presentation={presentation} showImage={showImage} />
       <div className="flex flex-1 flex-col p-4">
-        <div className="min-h-[5.75rem] space-y-2">
+        <div className={`${presentation.description ? "min-h-[5.75rem]" : ""} space-y-2`}>
           <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-foreground [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:balance]">
             {presentation.title}
           </h3>
-          <p className="text-sm leading-relaxed text-muted [overflow-wrap:anywhere]">
-            {presentation.description || "-"}
-          </p>
+          {presentation.description ? <p className="text-sm leading-relaxed text-muted [overflow-wrap:anywhere]">{presentation.description}</p> : null}
         </div>
 
-        <dl className="mt-4 space-y-3 border-t border-border/60 pt-4">
-          {presentation.fields
-            .filter((field) => !(field.omitWhenEmpty && !field.value))
-            .map((field) => (
+        {visibleFields.length ? <dl className="mt-4 space-y-3 border-t border-border/60 pt-4">
+          {visibleFields.map((field) => (
               <div key={field.key} className={getCardFieldRowClass(field)}>
                 <dt className="min-w-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted [overflow-wrap:break-word]">
                   {field.label}
@@ -690,7 +755,9 @@ function ForgeItemCard({
                 <dd className="min-w-0 text-sm">{renderFieldValue(field)}</dd>
               </div>
             ))}
-        </dl>
+        </dl> : null}
+        <TracklistDetails tracks={presentation.tracks} />
+        <ItemDetails details={presentation.details} />
       </div>
     </article>
   );
@@ -775,11 +842,13 @@ function ForgeItemTable({
   presentations,
   fieldDefinitions,
   showImages,
+  hideMissingImagePlaceholders,
   descriptionLabel
 }: {
   presentations: CollectionItemPresentation[];
   fieldDefinitions: CollectionPresentationFieldDefinition[];
   showImages: boolean;
+  hideMissingImagePlaceholders: boolean;
   descriptionLabel: string | null;
 }) {
   const fieldColumnClasses = new Map(
@@ -807,11 +876,11 @@ function ForgeItemTable({
               const fieldsByKey = new Map(presentation.fields.map((field) => [field.key, field]));
 
               return (
-                <tr key={presentation.id} id={`item-${presentation.id}-row`}>
+                <tr key={presentation.id} id={`item-${presentation.id}`} className="scroll-mt-28">
                   {showImages ? (
                     <td className="table-col-compact">
                       <div className="flex items-center justify-center">
-                        <CollectionImageFrame presentation={presentation} showImage={showImages} compact />
+                        <CollectionImageFrame presentation={presentation} showImage={showImages && !(hideMissingImagePlaceholders && !presentation.image)} compact />
                       </div>
                     </td>
                   ) : null}
@@ -819,6 +888,8 @@ function ForgeItemTable({
                     <span className="block font-semibold text-foreground [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:balance]">
                       {presentation.title}
                     </span>
+                    <TracklistDetails tracks={presentation.tracks} />
+                    <ItemDetails details={presentation.details} />
                   </td>
                   {descriptionLabel ? (
                     <td className="w-[13rem] min-w-[13rem] max-w-[18rem]">
@@ -852,15 +923,17 @@ function ForgeItemTable({
 export function GameCollectionView({ sections, config, pagination, toolbar }: GameCollectionViewProps) {
   const hasItems = sections.some((section) => section.items.length > 0);
   const totalItemCount = sections.reduce((sum, section) => sum + section.items.length, 0);
-  const fieldDefinitions = buildFieldDefinitions(config);
+  const cardFieldDefinitions = buildFieldDefinitions(config, "cards");
+  const tableFieldDefinitions = buildFieldDefinitions(config, "list");
   const descriptionKey = getPrimaryDescriptionKey(config);
   const descriptionLabel = descriptionKey ? getDescriptionLabel(descriptionKey) : null;
-  const showImages = !config.hideImages;
+  const showImages = !config.hideImages && sections.some((section) => section.items.some((item) => Boolean(item.image)));
   const sectionPresentations = sections.map((section) => ({
     section,
-    items: section.items.map((item) => buildItemPresentation(item, config, fieldDefinitions))
+    cardItems: section.items.map((item) => buildItemPresentation(item, config, cardFieldDefinitions)),
+    tableItems: section.items.map((item) => buildItemPresentation(item, config, tableFieldDefinitions))
   }));
-  const hasWideCardContent = sectionPresentations.some(({ items }) => items.some(presentationHasWideContent));
+  const hasWideCardContent = sectionPresentations.some(({ cardItems }) => cardItems.some(presentationHasWideContent));
   const renderCards = totalItemCount <= 600;
   const renderList = true;
   const defaultView = renderCards ? "cards" : "list";
@@ -899,7 +972,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
           </div>
         ) : null}
 
-        {sectionPresentations.map(({ section, items }) => (
+        {sectionPresentations.map(({ section, cardItems, tableItems }) => (
           <Fragment key={section.id}>
             <div id={section.id} className="space-y-5 scroll-mt-28">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -929,9 +1002,9 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
             </div>
 
             {renderCards && activeView === "cards"
-              ? items.map((presentation) => (
+              ? cardItems.map((presentation) => (
                   <div key={presentation.id} data-journey-item className="game-collection-card-item h-full">
-                    <ForgeItemCard presentation={presentation} showImage={showImages} />
+                    <ForgeItemCard presentation={presentation} showImage={showImages && !(config.hideMissingImagePlaceholders && !presentation.image)} />
                   </div>
                 ))
               : null}
@@ -939,9 +1012,10 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
             {renderList && activeView === "list" ? (
               <div className="game-collection-list-view">
                 <ForgeItemTable
-                  presentations={items}
-                  fieldDefinitions={fieldDefinitions}
+                  presentations={tableItems}
+                  fieldDefinitions={tableFieldDefinitions}
                   showImages={showImages}
+                  hideMissingImagePlaceholders={Boolean(config.hideMissingImagePlaceholders)}
                   descriptionLabel={descriptionLabel}
                 />
               </div>

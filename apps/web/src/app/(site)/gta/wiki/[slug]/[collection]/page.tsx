@@ -86,7 +86,8 @@ export async function generateGtaCollectionMetadata({
     title,
     description,
     alternates: buildAlternates(canonical),
-    robots: currentPage > 1 ? { index: false, follow: true } : undefined,
+    // Each numbered page contains a distinct slice of the collection and has
+    // its own canonical URL. Keep those item rows eligible for search indexing.
     openGraph: { type: "website", url: canonical, title, description, siteName: SITE_NAME, images: [image] },
     twitter: { card: "summary_large_image", title, description, images: [image] }
   };
@@ -139,7 +140,8 @@ export async function renderGtaCollectionPage({
     wikiLabel: "GTA Wiki",
     collectionOptions,
     commentsEntityType: "gta_wiki_collection",
-    showMoreCollections: false
+    showMoreCollections: false,
+    enableItemFinder: true
   });
 }
 

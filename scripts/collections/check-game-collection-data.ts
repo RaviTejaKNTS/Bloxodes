@@ -36,6 +36,7 @@ const HIDDEN_FIELD_KEYS = new Set([
   "imageMissingReason",
   "imageSource",
   "sourceImageUrl",
+  "imageCreditUrl",
   "sourceImage",
   "sourcePage",
   "secondarySourcePage",
@@ -79,6 +80,7 @@ const SECTION_FIELD_PRIORITY = [
 ];
 
 const GAMEPLAY_SOURCE_TERMS = [
+  /[“"']Sources[”"']/g,
   /\bSource Cargo\b/gi,
   /\bSource Goods\b/gi,
   /\bSource Supplies\b/gi,
@@ -89,7 +91,7 @@ const GAMEPLAY_SOURCE_TERMS = [
   /\bScientist Research Center\b/gi,
   /\bResearch projects?\b/gi,
   /\bResearch 25 projects\b/gi,
-  /\bBunker Research upgrades\b/gi,
+  /\bBunker Research (?:upgrades|unlocks)\b/gi,
   /\bresearch and manufacturing\b/gi
 ];
 
@@ -426,6 +428,56 @@ async function main() {
   if (!cardFields.length) {
     issues.push({ level: "error", message: "No useful card fields found. Add meta.defaultCardFields or useful item fields." });
   }
+
+  const displayFieldList = meta?.schemaVersion === 2 && meta.display && typeof meta.display === "object" && !Array.isArray(meta.display)
+    ? [
+        ...((meta.display as Record<string, unknown>).tableFields as unknown[] ?? []),
+        ...((meta.display as Record<string, unknown>).cardFields as unknown[] ?? []),
+        ...((meta.display as Record<string, unknown>).subtitleFields as unknown[] ?? [])
+      ].filter((value): value is string => typeof value === "string")
+    : [];
+  if (displayFieldList.includes("name")) {
+    issues.push({ level: "error", message: "Display fields must not list \"name\"; the card title already renders item.name." });
+  }
+
+  const usefulFieldKeys = columns.filter((key) => {
+    if (HIDDEN_FIELD_KEYS.has(key)) return false;
+    if (key === sectionField) return false;
+    if (key === "cardSummary") return false;
+    return usefulValues(rows, key).size > 0;
+  });
+  // A numbered location guide can be useful with just its number and exact
+  // location when every row also has a verified per-item image. Requiring a
+  // third text field here encouraged repeated equipment and reward filler.
+  const imageBackedLocationGuide = usefulFieldKeys.length === 2
+    && usefulFieldKeys.includes("guideNumber")
+    && usefulFieldKeys.includes("location")
+    && rows.length >= 10
+    && rows.every((row) => typeof row.guideNumber === "number" && Number.isInteger(row.guideNumber)
+      && Boolean(stringValue(row.location)) && Boolean(stringValue(row.image)));
+  if (usefulFieldKeys.length <= 2 && !imageBackedLocationGuide) {
+    issues.push({
+      level: "error",
+      message: `Collection has only ${usefulFieldKeys.length} useful field(s) beyond name/cardSummary (${usefulFieldKeys.join(", ") || "none"}). Enrich to GTABase parity before publishing.`
+    });
+  }
+
+  const FILLER_PATTERNS = [
+    /open wheel vehicle in gta online/i,
+    /listed online vehicle entry/i,
+    /use the image to confirm/i,
+    /use the item image and location note/i,
+    /appears among grand theft auto/i
+  ];
+  const fillerRows = rows.filter((row) =>
+    FILLER_PATTERNS.some((pattern) => pattern.test(stringValue(row.cardSummary) ?? ""))
+  );
+  if (fillerRows.length) {
+    issues.push({
+      level: "error",
+      message: `${fillerRows.length} item(s) use generic filler cardSummary (e.g. "Use the image to confirm..." or "X appears among..."). Replace with bespoke source-backed data.`
+    });
+  }
   for (const field of cardFields) {
     const populated = rows.filter((row) => stringValue(row[field])).length;
     if (populated === 0) issues.push({ level: "error", message: `Card field "${field}" has no values.` });
@@ -440,7 +492,8 @@ async function main() {
 
   const publicProvenanceFields = rows.flatMap((row) =>
     Object.entries(row)
-      .filter(([key, value]) => !HIDDEN_FIELD_KEYS.has(key) && containsPublicProvenance(stringValue(value) ?? ""))
+      // Song titles such as "Research" and "The Source" are legitimate track names.
+      .filter(([key, value]) => key !== "tracklist" && !HIDDEN_FIELD_KEYS.has(key) && containsPublicProvenance(stringValue(value) ?? ""))
       .map(([key]) => `${itemSlug(row)}.${key}`)
   );
   if (publicProvenanceFields.length) {

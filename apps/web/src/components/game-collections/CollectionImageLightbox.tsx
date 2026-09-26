@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 type PreviewImage = {
@@ -11,6 +11,7 @@ type PreviewImage = {
 export function CollectionImageLightbox({ containerId }: { containerId: string }) {
   const [mounted, setMounted] = useState(false);
   const [image, setImage] = useState<PreviewImage | null>(null);
+  const closeButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -27,6 +28,7 @@ export function CollectionImageLightbox({ containerId }: { containerId: string }
 
       const src = trigger.dataset.collectionImageSrc;
       if (!src) return;
+      trigger.focus();
 
       setImage({
         src,
@@ -41,16 +43,23 @@ export function CollectionImageLightbox({ containerId }: { containerId: string }
   useEffect(() => {
     if (!image) return;
     const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
+    closeButton.current?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setImage(null);
+      if (event.key === "Tab") {
+        event.preventDefault();
+        closeButton.current?.focus();
+      }
     };
 
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", onKeyDown);
+      previousFocus?.focus();
     };
   }, [image]);
 
@@ -70,6 +79,7 @@ export function CollectionImageLightbox({ containerId }: { containerId: string }
     >
       <div className="relative flex max-h-full w-full max-w-5xl items-center justify-center">
         <button
+          ref={closeButton}
           type="button"
           onClick={() => setImage(null)}
           className="absolute right-0 top-0 z-10 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"

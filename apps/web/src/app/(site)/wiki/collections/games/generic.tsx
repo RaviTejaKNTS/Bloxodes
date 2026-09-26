@@ -5,6 +5,7 @@ import { MoreWikiCollections } from "@/components/more-content";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { GameCollectionView, type CollectionFieldKind, type CollectionFieldPresentation } from "@/components/game-collections/GameCollectionView";
+import { CollectionItemFinder, type CollectionFinderEntry } from "@/components/game-collections/CollectionItemFinder";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
@@ -58,6 +59,7 @@ export type GameDatasetMeta = {
     descriptionField?: string | null;
     cardDescriptionField?: string | null;
     cardFields?: string[] | null;
+    detailFields?: string[] | null;
     tableFields?: string[] | null;
     fieldPresentation?: Record<string, CollectionFieldPresentation | CollectionFieldKind> | null;
   } | null;
@@ -88,6 +90,7 @@ type GenericViewConfig = {
   descriptionKey?: string;
   cardDescriptionKey?: string;
   cardFields?: string[];
+  detailFields?: string[];
   fieldPresentation?: Record<string, CollectionFieldPresentation | CollectionFieldKind>;
   hideImages?: boolean;
 };
@@ -108,6 +111,7 @@ const HIDDEN_FIELD_KEYS = new Set([
   "imageMissingReason",
   "imageSource",
   "sourceImageUrl",
+  "imageCreditUrl",
   "sourceImage",
   "sourcePage",
   "secondarySourcePage",
@@ -455,12 +459,18 @@ function buildViewConfig(
   };
 }
 
+// Card title + artwork already render the identity fields, so never repeat them as stat rows.
+// This removes the "Name: <same as title>" duplication across all existing v2 revisions
+// without touching immutable dataset rows.
+const IDENTITY_FIELD_KEYS = new Set(["id", "slug", "name", "image"]);
+
 function sanitizeDisplayFieldList(value: string[] | null | undefined, dataset: GameCollectionDataset): string[] {
   if (!Array.isArray(value)) return [];
   const seen = new Set<string>();
   const fields: string[] = [];
   for (const key of value) {
     if (!key || seen.has(key) || key.startsWith("__")) continue;
+    if (IDENTITY_FIELD_KEYS.has(key)) continue;
     if (!dataset.columns.includes(key)) continue;
     if (!hasUsefulValues(dataset.items, key)) continue;
     seen.add(key);
@@ -471,6 +481,7 @@ function sanitizeDisplayFieldList(value: string[] | null | undefined, dataset: G
 
 function sanitizeDisplayField(value: string | null | undefined, dataset: GameCollectionDataset): string | null {
   if (!value || value.startsWith("__")) return null;
+  if (IDENTITY_FIELD_KEYS.has(value)) return null;
   if (!dataset.columns.includes(value)) return null;
   if (!hasUsefulValues(dataset.items, value)) return null;
   return value;
@@ -478,15 +489,20 @@ function sanitizeDisplayField(value: string | null | undefined, dataset: GameCol
 
 function buildExplicitViewConfig(config: GameCollectionRenderConfig, dataset: GameCollectionDataset): GenericViewConfig {
   const display = dataset.meta?.display;
-  const tableFields = sanitizeDisplayFieldList(display?.tableFields, dataset);
+  // The renderer gives tracklist its own expandable ordered list. Rendering it
+  // as a normal card/table field creates a multi-screen inline text wall.
+  const tableFields = sanitizeDisplayFieldList(display?.tableFields, dataset).filter((key) => key !== "tracklist");
   const badgeKey = sanitizeDisplayField(display?.badgeField, dataset);
   const descriptionKey = sanitizeDisplayField(display?.descriptionField, dataset);
   const cardDescriptionKey = sanitizeDisplayField(display?.cardDescriptionField, dataset) ?? descriptionKey;
   const subtitleKeys = sanitizeDisplayFieldList(display?.subtitleFields, dataset).filter(
-    (key) => key !== badgeKey && key !== descriptionKey && key !== cardDescriptionKey
+    (key) => key !== "tracklist" && key !== badgeKey && key !== descriptionKey && key !== cardDescriptionKey
   );
   const cardFields = sanitizeDisplayFieldList(display?.cardFields, dataset).filter(
-    (key) => key !== badgeKey && key !== descriptionKey && key !== cardDescriptionKey && !subtitleKeys.includes(key)
+    (key) => key !== "tracklist" && key !== badgeKey && key !== descriptionKey && key !== cardDescriptionKey && !subtitleKeys.includes(key)
+  );
+  const detailFields = sanitizeDisplayFieldList(display?.detailFields, dataset).filter(
+    (key) => key !== "tracklist" && key !== badgeKey && key !== descriptionKey && key !== cardDescriptionKey && !subtitleKeys.includes(key) && !cardFields.includes(key)
   );
   const stats = tableFields
     .filter((key) => key !== badgeKey && key !== descriptionKey && key !== cardDescriptionKey && !subtitleKeys.includes(key))
@@ -504,6 +520,7 @@ function buildExplicitViewConfig(config: GameCollectionRenderConfig, dataset: Ga
     descriptionKey: descriptionKey ?? undefined,
     cardDescriptionKey: cardDescriptionKey ?? undefined,
     cardFields,
+    detailFields,
     stats,
     maxStats: stats.length,
     fieldPresentation: fieldPresentation && Object.keys(fieldPresentation).length ? fieldPresentation : undefined,
@@ -840,7 +857,7 @@ function buildItemListSchema({
       "@type": "Thing",
       name: item.name,
       url: `${url}#item-${item.id}`,
-      image: resolveAbsoluteUrl(item.image ?? FALLBACK_IMAGE)
+      ...(item.image ? { image: resolveAbsoluteUrl(item.image) } : {})
     }
   }));
 
@@ -912,7 +929,8 @@ export function renderGameCollectionPage({
   wikiLabel = "Wiki",
   collectionOptions,
   commentsEntityType = "wiki_collection",
-  showMoreCollections = true
+  showMoreCollections = true,
+  enableItemFinder = false
 }: {
   config: GameCollectionRenderConfig;
   dataset: GameCollectionDataset;
@@ -924,6 +942,7 @@ export function renderGameCollectionPage({
   collectionOptions?: Array<{ value: string; label: string; href: string }>;
   commentsEntityType?: "wiki_collection" | "gta_wiki_collection";
   showMoreCollections?: boolean;
+  enableItemFinder?: boolean;
 }) {
   const preparedCollection = prepared ?? buildGameDatasetPreparedCollection(config, dataset);
   const displayDataset = preparedCollection.dataset;
@@ -934,6 +953,7 @@ export function renderGameCollectionPage({
     `All ${itemCount.toLocaleString("en-US")} ${config.label} in ${config.gameName}`;
   const pageDescription = `${config.gameName} ${config.label.toLowerCase()} collection with ${itemCount.toLocaleString("en-US")} tracked entries.`;
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml.introHtml : "";
+  const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const faqHtml = contentHtml?.faqHtml ?? [];
   const dataUpdatedAt = resolveDataUpdatedAt(dataset.meta);
@@ -952,6 +972,20 @@ export function renderGameCollectionPage({
     maxSectionWeight: resolvePaginationMaxSectionWeight(config.code)
   });
   const pageSections = pagination.sections;
+  const itemHrefs = new Map(pagination.itemLinks.map(({ id, href }) => [id, href]));
+  const finderEntries: CollectionFinderEntry[] = enableItemFinder && itemCount >= 100
+    ? preparedCollection.groupedSections.flatMap((section) => section.items.map((item) => {
+        const hint = normalizeText(item.manufacturer) ?? normalizeText(item.category) ?? normalizeText(item.location) ?? "";
+        return {
+          id: item.id,
+          name: item.name,
+          section: section.label,
+          hint: hint !== section.label ? hint : "",
+          href: itemHrefs.get(item.id) ?? `${basePath}#item-${item.id}`,
+          searchText: [item.name, section.label, ...["manufacturer", "category", "vehicleClass", "location", "availability", "effect", "weaponClass"].map((key) => normalizeValue(item[key]))].filter(Boolean).join(" ")
+        };
+      }))
+    : [];
   const pageItems = pageSections.flatMap((section) => section.items);
   const canonicalPath =
     pagination.info.currentPage === 1 ? basePath : `${basePath}/page/${pagination.info.currentPage}`;
@@ -1000,6 +1034,7 @@ export function renderGameCollectionPage({
   ];
 
   const introNodes = introHtml ? renderPageContentNodes(introHtml, `${config.code}-intro`) : null;
+  const howNodes = howHtml ? renderPageContentNodes(howHtml, `${config.code}-how`) : null;
   const descriptionNodes = detailDescriptionHtml.flatMap((entry) =>
     renderPageContentNodes(entry.html, `${config.code}-description-${entry.key}`)
   );
@@ -1049,12 +1084,23 @@ export function renderGameCollectionPage({
 
       <section className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
         {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
+        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase !== "/gta/wiki" ? (
+          <section aria-labelledby="collection-how-to" className="max-w-3xl space-y-3">
+            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
+            {howNodes}
+          </section>
+        ) : null}
 
         <CatalogAdSlot />
 
+        {finderEntries.length ? <CollectionItemFinder entries={finderEntries} /> : null}
+
         <GameCollectionView
           sections={groupedSectionsWithNotes}
-          config={preparedCollection.viewConfig}
+          config={{
+            ...preparedCollection.viewConfig,
+            hideMissingImagePlaceholders: normalizedRouteBase === "/gta/wiki"
+          }}
           pagination={pagination.info}
           toolbar={
             <>
@@ -1074,6 +1120,13 @@ export function renderGameCollectionPage({
         />
 
         <CatalogAdSlot />
+
+        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase === "/gta/wiki" ? (
+          <section aria-labelledby="collection-how-to" className="max-w-3xl space-y-3">
+            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
+            {howNodes}
+          </section>
+        ) : null}
 
         {hasDetails ? (
           <>

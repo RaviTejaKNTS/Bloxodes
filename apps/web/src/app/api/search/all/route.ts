@@ -186,6 +186,15 @@ function rankSearchRow(row: SearchRow, query: string): number {
   if (title.includes(normalizedQuery)) return 3;
   if (searchable.includes(normalizedQuery)) return 4;
 
+  // A collection title often puts the game after the subject (for example,
+  // "Vehicles in Grand Theft Auto Online"). Rank all meaningful query words
+  // ahead of loose RPC matches even when the word order differs.
+  const filler = new Set(["all", "gta", "grand", "theft", "auto", "in", "of", "the", "story", "mode"]);
+  const terms = (value: string) => value.split(/[^a-z0-9]+/).filter((word) => word && !filler.has(word));
+  const queryTerms = terms(normalizedQuery);
+  const titleTerms = new Set(terms(title));
+  if (queryTerms.length >= 2 && queryTerms.every((word) => titleTerms.has(word))) return 5;
+
   return 20;
 }
 

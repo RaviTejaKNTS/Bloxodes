@@ -11,7 +11,8 @@ type SiteShellProps = {
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap"
+  display: "swap",
+  fallback: ["Arial", "Helvetica", "system-ui", "sans-serif"]
 });
 
 export function SiteShell({ children }: SiteShellProps) {

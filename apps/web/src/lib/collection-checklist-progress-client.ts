@@ -172,7 +172,9 @@ export function useCollectionChecklistProgress(
   useEffect(() => {
     pendingPersistRef.current = false;
     changeVersionRef.current = 0;
-    setChecked(new Set());
+    const localChecked = new Set(readLocal(options));
+    checkedRef.current = localChecked;
+    setChecked(localChecked);
   }, [options.code, options.endpoint, options.requestKey, options.storageKeyPrefix]);
 
   useEffect(() => {
@@ -218,31 +220,32 @@ export function useCollectionChecklistProgress(
   }, [options.code, options.storageKeyPrefix, session.userId]);
 
   const persist = (ids: string[]) => {
+    // Save immediately so a quick navigation or reload cannot lose a click
+    // while the session request is still in flight.
+    writeLocal(options, ids);
     if (session.status !== "ready") {
       pendingPersistRef.current = true;
       return;
     }
     if (session.userId) void saveRemote(options, ids);
-    else writeLocal(options, ids);
   };
 
   const toggle = (id: string) => {
     const normalized = normalizeId(id);
     if (!normalized) return;
     changeVersionRef.current += 1;
-    setChecked((current) => {
-      const next = new Set(current);
-      const isChecked = !next.has(normalized);
-      if (isChecked) next.add(normalized);
-      else next.delete(normalized);
-      persist(Array.from(next));
-      return next;
-    });
+    const next = new Set(checkedRef.current);
+    if (next.has(normalized)) next.delete(normalized);
+    else next.add(normalized);
+    checkedRef.current = next;
+    setChecked(next);
+    persist(Array.from(next));
   };
 
   const reset = () => {
     changeVersionRef.current += 1;
-    setChecked(new Set());
+    checkedRef.current = new Set();
+    setChecked(checkedRef.current);
     persist([]);
   };
 
