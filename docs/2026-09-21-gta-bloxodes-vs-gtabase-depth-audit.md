@@ -328,3 +328,8 @@ Generated from `gta_wiki_collection_pages_view` ordered by `wiki_slug, collectio
 7. Global: de-duplicate `name` in batch; enforce “no publish with ≤2 useful fields” gate.
 
 *No files were modified except this doc. To continue, pick one collection (recommended: `gta-online-vehicles`) and run the `bloxodes-gta-game-collection-refresh` skill for that single slug.*
+
+
+## Production publication follow-up — 2026-09-26
+
+The reviewed candidate is now live at web SHA `d62e52ee597b07b91893bd99d49eec896bf12fc9`: 281 collections, 10,793 actual item rows, 16 hubs and 32 hosted hub images. All production pointer/hash/count/copy checks and 281 collection URLs passed. The competitor comparison remains the qualified September 26 assessment above; publication does not establish universal GTABase parity. See the [release verification and outstanding cache configuration repair](2026-09-21-gta-collection-depth-todo.md#production-release-verification--2026-09-26).

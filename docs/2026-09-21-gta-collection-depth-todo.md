@@ -1,12 +1,12 @@
 # GTA Collection Depth — Production Readiness Review
 
-Updated: 2026-09-26. Scope: all GTA collection work from Phases 0–5. This is a review record, not a production release instruction.
+Updated: 2026-09-26. Scope: all GTA collection work from Phases 0–6. This is a review record, not a production release instruction.
 
 ## Gate
 
-**Production release authorized on 2026-09-26; live verification pending.** Managed development has 281 published GTA collections with 10,793 active items (216 database pages and 65 progress checklists). The aggregate readback command below reports page pointers, page types, dataset counts, content hashes, and page-copy fields equal to the chosen authoring workspaces; repeat it after each authoring change. All 281 v2 audits and data/final checks pass after the September 26 corrections. These checks establish revision consistency; they do not prove every source claim or image is useful.
+**Released to production on 2026-09-26 at web SHA `d62e52ee597b07b91893bd99d49eec896bf12fc9`.** Managed development has 281 published GTA collections with 10,793 active items (216 database pages and 65 progress checklists). The aggregate readback command below reports page pointers, page types, dataset counts, content hashes, and page-copy fields equal to the chosen authoring workspaces; repeat it after each authoring change. All 281 v2 audits and data/final checks pass after the September 26 corrections. These checks establish revision consistency; they do not prove every source claim or image is useful.
 
-The fresh release preflight found 280 production GTA collections with 10,773 items; the earlier 173-page snapshot was historical. No active production data pointer, branch or deployment was changed during the development review. New immutable media objects in the shared wiki bucket are referenced by managed-development revisions only.
+The fresh release preflight found 280 production GTA collections with 10,773 items; the earlier 173-page snapshot was historical. No active production data pointer, branch or deployment was changed during the development review. The user subsequently approved production publication; all authoritative revisions and their approved media are now referenced by production.
 
 The quality profile reports **3 high and 77 medium missing-image signals across 80 collections**. There are **1,230 unpictured rows**, including 472 cheat rows; outside cheat collections, 758 rows are unpictured. The 25 Drug Wars/Gang Wars encounter ticks remain documented text-only progress rows. Missing images remain visible in the audit; visual alternatives do not turn into invented photo coverage.
 
@@ -57,7 +57,7 @@ These source passes fix the identified defects. Automated checks do not certify 
 
 ## Release gate and known limitations
 
-1. **Human preview review and explicit release approval:** Production remains on hold. The authoring map is the only release allowlist; do not glob outer manifests. An obsolete 896-row Online vehicle candidate was briefly published to managed development, caught by count comparison and replaced with the authoritative 882-row revision. Its old immutable revision is not selected for release.
+1. **Human preview review and explicit release approval:** The user approved the complete reviewed GTA batch and hub images on 2026-09-26; controlled production publication and live checks are complete. The authoring map is the only release allowlist; do not glob outer manifests. An obsolete 896-row Online vehicle candidate was briefly published to managed development, caught by count comparison and replaced with the authoritative 882-row revision. Its old immutable revision is not selected for release.
 2. **Optional media enrichment, visible in this candidate:** The raw audit still lists 1,230 image gaps, including cheats and historical minor characters with no exact portrait. The three high signals are GTA 2 Kill Frenzies (60), GTA V Hidden Packages (15) and VCS Shooting Range (5); these now have verified gameplay visual alternatives. Do not claim they have individual photos. Nine new Online vehicles and the Kortz heist still need an exact reusable published image. Warden’s candidate was rejected for visible artifacts. GamerGuides underwater screenshots and AreaGTA frenzy media cannot be copied under their stated terms; no generic item art was substituted.
 3. **Factual limits:** Source-backed title/edition/mode passes repaired the identified issues; structural checks do not certify every historical sentence in 10,793 rows. Conflicting gun-club silver scores (7,500 vs 8,000) are recorded privately and omitted publicly. Minor written-only GTA 2 cast entries retain verified faction/context rather than invented biographies. Preserve conditional payouts, availability caveats and platform distinctions during release.
 4. **Final consistency:** Repeat authoring validation, runtime readback, production build and route/SEO verification after any further data or code changes. The shared checklist interaction checks include keyboard lightbox focus, photo/credit links preserving progress, reload persistence and local restoration while the session endpoint is pending. Online characters page two uses `/page/2`, with ten remaining rows and a self-canonical URL.
@@ -93,6 +93,18 @@ npm run typecheck:web
 npm run test:page-contracts
 ```
 
-Managed-development preview base: `http://teja-homelab.tail13b5bd.ts.net:3127`. The `/gta/wiki/...` routes under it are for private review; their HTML canonicals point to future public production URLs. The alternate direct Tailscale IP is `http://100.86.117.125:3127`.
+Managed-development preview base: `http://teja-homelab.tail13b5bd.ts.net:3127`. The `/gta/wiki/...` routes under it are for private review; their HTML canonicals point to the released public production URLs. The alternate direct Tailscale IP is `http://100.86.117.125:3127`.
 
-The Phase 0–5 checkmarks in the original plan mean those workflows reached managed development under the former gate. They do not mean this production readiness gate has passed. Phase 6 remains unchecked.
+The Phase 0–5 checkmarks in the original plan mean those workflows reached managed development under the former gate. The subsequent production release and readback passed for the exact authoritative map. Phase 6 is released; the site-wide automatic cache configuration repair below remains separately gated.
+
+
+## Production release verification — 2026-09-26
+
+- Commit `d62e52ee597b07b91893bd99d49eec896bf12fc9` was pushed without force to `production`; GitHub run `36251386057` passed, and live deploy health reports that exact SHA with a healthy database.
+- All 281 collections were dry-planned and published by game from the authoritative map. Readback verifies 281 page pointers/revisions, 216 database pages, 65 collectible pages and 10,793 actual item rows, with zero hash/count/type/copy mismatches.
+- All 16 released hubs have 32 distinct hosted cover/thumbnail images. All source checks, R2 checks, public image HEAD checks and hub metadata checks passed. The live index uses hosted URLs for all 16 covers. GTA VI remains unpublished.
+- The production crawl returned 281/281 HTTP 200 pages with title/H1, canonical, Open Graph URL, indexable metadata and item anchors. The GTA sitemap contains 305 URLs including every collection; pagination is excluded. Scoped weapons, characters and Property Locations searches passed. The RSS feed remains reachable and includes the existing standalone GTA checklists.
+- Eight desktop/mobile content interaction cases passed: accurate item/video/link counts, progress preserved when opening walkthroughs, no overflow and no failed content images. Third-party ad tracking/CSP messages remain in the raw browser logs. One initial hub hydration warning did not recur in six controlled follow-up cases; it is recorded rather than represented as an error-free ad ecosystem.
+- The production Cloudflare zone variable contains a control character followed by a second environment assignment. Automatic `/api/revalidate` therefore returns a Cloudflare purge failure. All 281 origin paths and their pagination were explicitly revalidated, and a scoped operator purge refreshed the GTA tags successfully. The released content is fresh, but automatic future refresh is not certified until the environment repair is approved.
+- The prepared repair restores a line break between the two existing Cloudflare assignments, preserves the rest of the environment, redeploys the same immutable web image, and checks authenticated revalidation for HTTP 200. No production environment values or services were changed for that repair.
+- Evidence: `tmp/gta-production-release-summary-2026-09-26.json`, `tmp/gta-production-readback-2026-09-26.json`, `tmp/gta-production-route-crawl-2026-09-26.json`, `tmp/gta-production-discovery-2026-09-26.json`, and `tmp/gta-cache-config-repair-plan-2026-09-26.json`. Authoring inputs and proof stay ignored in the retained task checkout.

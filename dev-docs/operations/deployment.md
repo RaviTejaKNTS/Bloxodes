@@ -35,6 +35,12 @@ Schema changes use the authenticated Supabase connector for managed development,
 
 Production Edge Functions use the same immutable-SHA boundary. `npm run supabase:production:function:release -- --function <name> --approved-sha <full-sha>` compares local and deployed checksums without mutation. Apply requires `--apply --confirm "APPLY <name>"`, preserves the host file ownership/mode, restarts only Edge Runtime, performs an authenticated smoke request, and restores the previous function on failure.
 
+### GTA release cache configuration finding — 2026-09-26
+
+The GTA code release at `d62e52ee597b07b91893bd99d49eec896bf12fc9` passed exact-SHA deploy/database health and controlled content readback. Automatic content revalidation was then found to fail its Cloudflare purge because the Dokploy runtime zone-ID assignment contains a control character and the following warm-after-purge assignment. This is a runtime environment value problem, not an approved schema or Edge Function change.
+
+For this release, authenticated requests inside the exact deployed web container revalidated only the approved GTA origin routes and pagination; a separate operator purge refreshed only the GTA cache tags. All live routes, sitemap/search and hosted hub artwork were checked after that refresh. The prepared repair is a line-break correction between two existing assignments, preserving every other environment/build value and redeploying the same immutable image. It remains pending explicit production environment approval. Verify HTTP 200 plus `cloudflare.ok` after repair; an origin-only HTTP 502 is not a passing automatic revalidation result.
+
 ## Stats Worker Release
 
 The stats worker is a separate production artifact shared by the VPS jobs and
