@@ -9,6 +9,7 @@ import {
   Home,
   KeyRound,
   LayoutGrid,
+  Map,
   Puzzle,
   SquareCheckBig,
   Wrench
@@ -62,6 +63,7 @@ export const siteNavLinks: SiteNavLink[] = [
 export const gtaNavLinks: SiteNavLink[] = [
   { href: "/gta", label: "GTA Home", icon: Home },
   { href: "/gta/wiki", label: "GTA Wiki", icon: BookOpen },
+  { href: "/gta/maps", label: "Interactive Maps", icon: Map },
   { href: "/gta/checklists", label: "Checklists", icon: SquareCheckBig },
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];

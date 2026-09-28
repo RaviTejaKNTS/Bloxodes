@@ -5,6 +5,7 @@ import { cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type Public
 import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
+import { getGtaMapRoutesForWikiSlug } from "@/lib/gta-interactive-map-registry";
 
 type SinglePayload = PublicCacheEvent;
 type Payload = SinglePayload | { type: "batch"; events: SinglePayload[] };
@@ -225,14 +226,14 @@ function revalidateForWiki(slug: string) {
 
 function revalidateForGtaGame(slug: string) {
   return applyRevalidation(
-    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
+    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
     ["games-index", "gta-home", "gta-games-index", "gta-wiki-index", `gta-game:${slug}`]
   );
 }
 
 function revalidateForGtaWiki(slug: string) {
   return applyRevalidation(
-    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
+    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
     ["games-index", "gta-home", "gta-wiki-index", `gta-wiki:${slug}`]
   );
 }
@@ -244,7 +245,9 @@ function revalidateForGtaWikiCollection(slug: string) {
     [
       "/gta",
       "/gta/wiki",
+      "/gta/maps",
       wikiSlug ? `/gta/wiki/${wikiSlug}` : "",
+      ...(wikiSlug ? getGtaMapRoutesForWikiSlug(wikiSlug) : []),
       basePath,
       ...(basePath ? Array.from({ length: 39 }, (_, index) => `${basePath}/page/${index + 2}`) : []),
       SITEMAP_INDEX_PATH,

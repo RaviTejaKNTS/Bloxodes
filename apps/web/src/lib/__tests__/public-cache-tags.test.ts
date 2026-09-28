@@ -17,6 +17,20 @@ describe("public cache tags", () => {
     );
   });
 
+  it("tags interactive GTA maps with their hub and linked collection revisions", () => {
+    expect(cacheTagsForPath("/gta/maps")).toEqual(expect.arrayContaining(["site", "gta-home", "gta-wiki-index"]));
+    expect(cacheTagsForPath("/gta/maps/gta5")).toEqual(expect.arrayContaining(["gta-wiki:gta-5", "gta-wiki-collection-index"]));
+    expect(cacheTagsForPath("/gta/maps/gta-4")).toEqual(expect.arrayContaining([
+      "gta-wiki:gta-4",
+      "gta-wiki:gta-4-tlad",
+      "gta-wiki:gta-4-tbogt",
+      "gta-wiki-collection:gta-4/flying-rats",
+      "gta-wiki-collection:gta-4-tlad/seagulls",
+      "gta-wiki-collection:gta-4-tbogt/seagulls"
+    ]));
+    expect(cacheTagsForPath("/gta/maps/gta-online")).toContain("gta-wiki-collection:gta-online/signal-jammers");
+  });
+
   it("purges code detail, indexes, home, feed, and sitemap tags for code events", () => {
     const tags = cacheTagsForEvent("code", "Car-Wash-Tycoon");
     expect(tags).toEqual(

@@ -174,6 +174,25 @@ function rowKey(row: SearchRow): string {
   return `${row.entity_type}:${row.entity_id}`;
 }
 
+function gta5MapSearchRow(query: string, entityTypes: string[] | null): SearchRow[] {
+  if (entityTypes?.length && !entityTypes.includes("gta_wiki")) return [];
+  const title = "GTA 5 Interactive Map";
+  const searchText = "gta 5 gta v interactive map los santos blaine county story mode spaceship parts letter scraps nuclear waste submarine pieces monkey mosaics peyote plants epsilon tracts hidden packages stunt jumps under the bridge knife flights landmarks hospitals travel collectible locations";
+  const terms = query.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  if (!terms.length || !terms.every((term) => searchText.includes(term))) return [];
+  return [{
+    entity_type: "gta_wiki",
+    entity_id: "gta5-interactive-map",
+    slug: "gta5-interactive-map",
+    title,
+    subtitle: "377 Story Mode collection locations, 92 places, and progress tracking",
+    url: "/gta/maps/gta5",
+    updated_at: null,
+    active_code_count: null,
+    search_text: searchText
+  }];
+}
+
 function rankSearchRow(row: SearchRow, query: string): number {
   const normalizedQuery = query.toLowerCase();
   const title = row.title.toLowerCase();
@@ -261,7 +280,7 @@ export async function GET(request: Request) {
       searchStatsGames(rawQuery, safeLimit, entityTypes)
     ]);
     const rpcRows = error ? [] : ((data ?? []) as SearchRow[]);
-    const rows = mergeAndRankRows(rawQuery, [...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
+    const rows = mergeAndRankRows(rawQuery, [...gta5MapSearchRow(rawQuery, entityTypes), ...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
 
     const items: SearchItem[] = rows.map((row) => {
       const type = TYPE_MAP[row.entity_type] ?? "article";

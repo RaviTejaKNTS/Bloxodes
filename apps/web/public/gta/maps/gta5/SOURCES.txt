@@ -1,0 +1,13 @@
+GTA V roadmap and satellite tile sets (zoom levels 0–5)
+Source: https://github.com/rolux/gtadb.org/tree/main/maps/tiles/5
+Copyright © 2025–2026 GTADB.ORG and contributors.
+License: CC BY 4.0 (see LICENSE-DATA.txt).
+Downloaded 2026-09-28. Files copied without visual changes or remote hotlinking.
+
+GTA V world-space location coordinate research
+Source: https://github.com/rootBrz/collectibles-on-map-gta-5/blob/main/src/collectibles/coords.h
+Cross-check: https://github.com/danharper/GTAV/blob/master/locations.json
+Zone cross-check: https://github.com/VIRUXE/gtav-coordinate-lookup/blob/main/data/zones.json
+The source coordinate arrays were matched to Bloxodes guide item numbers by landmark,
+route description, geographic zone and spatial position. The map data records game
+x/y positions; z (height) is not needed for a 2D marker.

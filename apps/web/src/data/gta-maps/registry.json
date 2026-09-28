@@ -1,0 +1,1574 @@
+[
+  {
+    "slug": "gta-san-andreas",
+    "wikiSlug": "gta-san-andreas",
+    "title": "GTA San Andreas",
+    "mapTitle": "GTA San Andreas interactive map",
+    "description": "Explore mapped collectibles, challenges, services, and named locations across the State of San Andreas, Los Santos, and San Fierro. Track supported collections as you play.",
+    "summary": "Explore the State of San Andreas, Los Santos, and San Fierro with mapped collectibles, challenges, pickups, and useful places.",
+    "route": "/gta/maps/gta-san-andreas",
+    "views": [
+      {
+        "slug": "state",
+        "label": "State of San Andreas",
+        "asset": "state.webp",
+        "sourceTitle": "Map:GTA San Andreas: Unique Stunt Jumps",
+        "image": "/gta/maps/gta-san-andreas/state.webp",
+        "width": 6250,
+        "height": 6250,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Unique_Stunt_Jumps"
+      },
+      {
+        "slug": "los-santos",
+        "label": "Los Santos",
+        "asset": "los-santos.webp",
+        "sourceTitle": "Map:GTA San Andreas: Tags",
+        "image": "/gta/maps/gta-san-andreas/los-santos.webp",
+        "width": 3500,
+        "height": 3500,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Tags"
+      },
+      {
+        "slug": "san-fierro",
+        "label": "San Fierro",
+        "asset": "san-fierro.webp",
+        "sourceTitle": "Map:GTA San Andreas: Snapshots",
+        "image": "/gta/maps/gta-san-andreas/san-fierro.webp",
+        "width": 3500,
+        "height": 3500,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Snapshots"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "gang-tags",
+        "label": "Gang tags",
+        "group": "Collectibles",
+        "color": "#e0c44f",
+        "sourceTitle": "Map:GTA San Andreas: Tags",
+        "view": "los-santos",
+        "collection": {
+          "wikiSlug": "gta-san-andreas",
+          "collectionSlug": "gang-tags"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Tags",
+        "pointCount": 100,
+        "collectionCount": 100
+      },
+      {
+        "slug": "horseshoes",
+        "label": "Horseshoes",
+        "group": "Collectibles",
+        "color": "#4fc9a4",
+        "sourceTitle": "Map:GTA San Andreas: Horseshoes",
+        "view": "state",
+        "collection": {
+          "wikiSlug": "gta-san-andreas",
+          "collectionSlug": "horseshoes"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Horseshoes",
+        "pointCount": 50,
+        "collectionCount": 50
+      },
+      {
+        "slug": "oysters",
+        "label": "Oysters",
+        "group": "Collectibles",
+        "color": "#4ea9db",
+        "sourceTitle": "Map:GTA San Andreas: Oysters",
+        "view": "state",
+        "collection": {
+          "wikiSlug": "gta-san-andreas",
+          "collectionSlug": "oysters"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Oysters",
+        "pointCount": 50,
+        "collectionCount": 50
+      },
+      {
+        "slug": "snapshots",
+        "label": "Snapshots",
+        "group": "Collectibles",
+        "color": "#be8de4",
+        "sourceTitle": "Map:GTA San Andreas: Snapshots",
+        "view": "san-fierro",
+        "collection": {
+          "wikiSlug": "gta-san-andreas",
+          "collectionSlug": "snapshots"
+        },
+        "categoryIds": [
+          "1"
+        ],
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Snapshots",
+        "pointCount": 50,
+        "collectionCount": 50
+      },
+      {
+        "slug": "camera-locations",
+        "label": "Camera locations",
+        "group": "Places",
+        "color": "#d0a1e8",
+        "sourceTitle": "Map:GTA San Andreas: Snapshots",
+        "view": "san-fierro",
+        "collection": null,
+        "categoryIds": [
+          "2"
+        ],
+        "mode": null,
+        "defaultEnabled": true,
+        "note": "These camera markers are extra map references, not collectible Snapshots.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Snapshots",
+        "pointCount": 19,
+        "collectionCount": null
+      },
+      {
+        "slug": "unique-stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA San Andreas: Unique Stunt Jumps",
+        "view": "state",
+        "collection": {
+          "wikiSlug": "gta-san-andreas",
+          "collectionSlug": "unique-stunt-jumps"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Unique_Stunt_Jumps",
+        "pointCount": 70,
+        "collectionCount": 70
+      },
+      {
+        "slug": "barber-shops",
+        "label": "Barber shops",
+        "group": "Services",
+        "color": "#8dc2d9",
+        "sourceTitle": "Map:GTA San Andreas: Barber Shops",
+        "view": "state",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Barber_Shops",
+        "pointCount": 7,
+        "collectionCount": null
+      },
+      {
+        "slug": "clothing-stores",
+        "label": "Clothing stores",
+        "group": "Services",
+        "color": "#c58ab9",
+        "sourceTitle": "Map:GTA San Andreas: Clothing Stores",
+        "view": "state",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Clothing_Stores",
+        "pointCount": 17,
+        "collectionCount": null
+      },
+      {
+        "slug": "dating-locations",
+        "label": "Dating locations",
+        "group": "Places",
+        "color": "#d6818d",
+        "sourceTitle": "Map:GTA San Andreas: Dating Guide",
+        "view": "state",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Dating_Guide",
+        "pointCount": 76,
+        "collectionCount": null
+      },
+      {
+        "slug": "export-vehicle-locations",
+        "label": "Export vehicle locations",
+        "group": "Activities",
+        "color": "#e0c77d",
+        "sourceTitle": "Map:GTA San Andreas: Export Vehicles",
+        "view": "state",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": "These are map locations from the guide. The import/export checklist tracks required vehicle models.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Export_Vehicles",
+        "pointCount": 30,
+        "collectionCount": null
+      },
+      {
+        "slug": "items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#d76f63",
+        "sourceTitle": "Map:GTA San Andreas: Items and Weapons",
+        "view": "state",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Items_and_Weapons",
+        "pointCount": 332,
+        "collectionCount": null
+      },
+      {
+        "slug": "tattoo-parlors",
+        "label": "Tattoo parlors",
+        "group": "Services",
+        "color": "#9d89ce",
+        "sourceTitle": "Map:GTA San Andreas: Tattoo Parlors",
+        "view": "state",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_San_Andreas:_Tattoo_Parlors",
+        "pointCount": 4,
+        "collectionCount": null
+      }
+    ],
+    "modes": [],
+    "defaultMode": null,
+    "editionOptions": [],
+    "defaultEdition": null,
+    "variantOptions": [],
+    "defaultVariant": null,
+    "guideOnly": [
+      {
+        "wikiSlug": "gta-san-andreas",
+        "collectionSlug": "import-export",
+        "label": "Import/export vehicle checklist",
+        "note": "The guide tracks the required vehicle roster; the plotted points are guide locations.",
+        "href": "/gta/wiki/gta-san-andreas/import-export"
+      }
+    ],
+    "about": [
+      "San Andreas uses three map views because the collectible source maps for Los Santos and San Fierro use city-scale images that do not line up with the full-state map. Switch views to see each region's pins.",
+      "Snapshot pins track 50 collectibles. The source map also includes 19 camera locations; these appear in a separate reference layer and do not count toward Snapshot progress."
+    ],
+    "mappedPointCount": 805,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  },
+  {
+    "slug": "gta-vice-city",
+    "wikiSlug": "gta-vice-city",
+    "title": "GTA Vice City",
+    "mapTitle": "GTA Vice City interactive map",
+    "description": "Explore Vice City hidden packages, rampages, stunt jumps, store robberies, weapons, clothing, and other mapped locations. Track supported collection guides from the map.",
+    "summary": "Find hidden packages, rampages, stunt jumps, stores, weapons, and clothing across Vice City.",
+    "route": "/gta/maps/gta-vice-city",
+    "views": [
+      {
+        "slug": "vice-city",
+        "label": "Vice City",
+        "asset": "map.webp",
+        "sourceTitle": "Map:GTA Vice City: Hidden Packages",
+        "image": "/gta/maps/gta-vice-city/map.webp",
+        "width": 3660,
+        "height": 3660,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City:_Hidden_Packages"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "hidden-packages",
+        "label": "Hidden packages",
+        "group": "Collectibles",
+        "color": "#e3c275",
+        "sourceTitle": "Map:GTA Vice City: Hidden Packages",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city",
+          "collectionSlug": "hidden-packages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City:_Hidden_Packages",
+        "pointCount": 100,
+        "collectionCount": 100
+      },
+      {
+        "slug": "rampages",
+        "label": "Rampages",
+        "group": "Challenges",
+        "color": "#e76666",
+        "sourceTitle": "Map:GTA Vice City: Rampages",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city",
+          "collectionSlug": "rampages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City:_Rampages",
+        "pointCount": 35,
+        "collectionCount": 35
+      },
+      {
+        "slug": "unique-stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA Vice City: Unique Stunt Jumps",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city",
+          "collectionSlug": "unique-stunt-jumps"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City:_Unique_Stunt_Jumps",
+        "pointCount": 36,
+        "collectionCount": 36
+      },
+      {
+        "slug": "store-robberies",
+        "label": "Store robberies",
+        "group": "Activities",
+        "color": "#d4816f",
+        "sourceTitle": "Map:GTA Vice City: Store Robberies",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city",
+          "collectionSlug": "store-robberies"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City:_Store_Robberies",
+        "pointCount": 15,
+        "collectionCount": 15
+      },
+      {
+        "slug": "clothing-locations",
+        "label": "Clothing locations",
+        "group": "Services",
+        "color": "#b686cc",
+        "sourceTitle": "Map:GTA Vice City: Clothing",
+        "view": "vice-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City:_Clothing",
+        "pointCount": 14,
+        "collectionCount": null
+      },
+      {
+        "slug": "items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#6ba6cf",
+        "sourceTitle": "Map:GTA Vice City: Items and Weapons",
+        "view": "vice-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City:_Items_and_Weapons",
+        "pointCount": 114,
+        "collectionCount": null
+      }
+    ],
+    "modes": [],
+    "defaultMode": null,
+    "editionOptions": [],
+    "defaultEdition": null,
+    "variantOptions": [],
+    "defaultVariant": null,
+    "guideOnly": [],
+    "about": [
+      "Vice City includes the published collectible and challenge map sets, plus the available clothing, weapon, and pickup locations. Store robbery markers identify stores; they are not a completion checklist."
+    ],
+    "mappedPointCount": 314,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  },
+  {
+    "slug": "gta-iii",
+    "wikiSlug": "gta-iii",
+    "title": "GTA III",
+    "mapTitle": "GTA III interactive map",
+    "description": "Explore Liberty City hidden packages, rampages, unique stunt jumps, weapons, and pickups. Switch between original and alternate rampage locations without double-counting progress.",
+    "summary": "Track Liberty City packages, rampages, and stunt jumps, with selectable rampage location variants.",
+    "route": "/gta/maps/gta-iii",
+    "views": [
+      {
+        "slug": "liberty-city",
+        "label": "Liberty City",
+        "asset": "map.webp",
+        "sourceTitle": "Map:GTA III: Hidden Packages",
+        "image": "/gta/maps/gta-iii/map.webp",
+        "width": 4000,
+        "height": 2789,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_III:_Hidden_Packages"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "hidden-packages",
+        "label": "Hidden packages",
+        "group": "Collectibles",
+        "color": "#e3c275",
+        "sourceTitle": "Map:GTA III: Hidden Packages",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-iii",
+          "collectionSlug": "hidden-packages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_III:_Hidden_Packages",
+        "pointCount": 100,
+        "collectionCount": 100
+      },
+      {
+        "slug": "rampages",
+        "label": "Rampages",
+        "group": "Challenges",
+        "color": "#e76666",
+        "sourceTitle": "Map:GTA III: Rampages",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-iii",
+          "collectionSlug": "rampages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_III:_Rampages",
+        "pointCount": 40,
+        "collectionCount": 20
+      },
+      {
+        "slug": "unique-stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA III: Unique Stunt Jumps",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-iii",
+          "collectionSlug": "unique-stunt-jumps"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_III:_Unique_Stunt_Jumps",
+        "pointCount": 20,
+        "collectionCount": 20
+      },
+      {
+        "slug": "items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#6ba6cf",
+        "sourceTitle": "Map:GTA III: Items & Weapons",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_III:_Items_&_Weapons",
+        "pointCount": 113,
+        "collectionCount": null
+      }
+    ],
+    "modes": [],
+    "defaultMode": null,
+    "editionOptions": [],
+    "defaultEdition": null,
+    "variantOptions": [
+      {
+        "value": "original",
+        "label": "Original locations"
+      },
+      {
+        "value": "alternate",
+        "label": "Alternate locations"
+      }
+    ],
+    "defaultVariant": "original",
+    "guideOnly": [],
+    "about": [
+      "The rampage guide has 20 objectives, while the map records an original and an alternate start for each one. Use the location selector to switch between those pins; both positions share the same completion state."
+    ],
+    "mappedPointCount": 273,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  },
+  {
+    "slug": "gta-4",
+    "wikiSlug": "gta-4",
+    "title": "GTA IV and Episodes from Liberty City",
+    "mapTitle": "GTA IV and Episodes interactive map",
+    "description": "Explore Liberty City for GTA IV, The Lost and Damned, and The Ballad of Gay Tony. Switch game mode to browse pigeons, stunt jumps, episode seagulls, random characters, pickups, and more.",
+    "summary": "One Liberty City map for GTA IV, The Lost and Damned, and The Ballad of Gay Tony, with mode-specific layers.",
+    "route": "/gta/maps/gta-4",
+    "views": [
+      {
+        "slug": "liberty-city",
+        "label": "Liberty City",
+        "asset": "map.webp",
+        "sourceTitle": "Map:GTA IV: Flying Rats",
+        "image": "/gta/maps/gta-4/map.webp",
+        "width": 6000,
+        "height": 3800,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV:_Flying_Rats"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "flying-rats",
+        "label": "Flying rats",
+        "group": "Collectibles",
+        "color": "#a5c96a",
+        "sourceTitle": "Map:GTA IV: Flying Rats",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-4",
+          "collectionSlug": "flying-rats"
+        },
+        "categoryIds": null,
+        "mode": [
+          "gta-4"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV:_Flying_Rats",
+        "pointCount": 200,
+        "collectionCount": 200
+      },
+      {
+        "slug": "stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA IV: Unique Stunt Jumps",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-4",
+          "collectionSlug": "stunt-jumps"
+        },
+        "categoryIds": null,
+        "mode": [
+          "gta-4"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV:_Unique_Stunt_Jumps",
+        "pointCount": 50,
+        "collectionCount": 50
+      },
+      {
+        "slug": "gta4-random-characters",
+        "label": "Random characters",
+        "group": "Characters",
+        "color": "#8baddb",
+        "sourceTitle": "Map:GTA IV: Random Characters",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": [
+          "gta-4"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV:_Random_Characters",
+        "pointCount": 21,
+        "collectionCount": null
+      },
+      {
+        "slug": "stevies-car-thefts",
+        "label": "Stevie's car thefts",
+        "group": "Activities",
+        "color": "#c89064",
+        "sourceTitle": "Map:GTA IV: Stevie's Car Thefts",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": [
+          "gta-4"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV:_Stevie's_Car_Thefts",
+        "pointCount": 31,
+        "collectionCount": null
+      },
+      {
+        "slug": "under-the-radar",
+        "label": "Under the Radar flights",
+        "group": "Challenges",
+        "color": "#7db9ae",
+        "sourceTitle": "Map:GTA IV: Under The Radar",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": [
+          "gta-4"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV:_Under_The_Radar",
+        "pointCount": 14,
+        "collectionCount": null
+      },
+      {
+        "slug": "cash-registers",
+        "label": "Cash registers",
+        "group": "Places",
+        "color": "#dcb765",
+        "sourceTitle": "Map:GTA IV & Episodes from Liberty City: Cash Registers",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": [
+          "gta-4",
+          "tlad",
+          "tbogt"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV_&_Episodes_from_Liberty_City:_Cash_Registers",
+        "pointCount": 8,
+        "collectionCount": null
+      },
+      {
+        "slug": "items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#6ba6cf",
+        "sourceTitle": "Map:GTA IV & Episodes from Liberty City: Items and Weapons",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": [
+          "gta-4",
+          "tlad",
+          "tbogt"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_IV_&_Episodes_from_Liberty_City:_Items_and_Weapons",
+        "pointCount": 239,
+        "collectionCount": null
+      },
+      {
+        "slug": "tlad-seagulls",
+        "label": "Seagulls",
+        "group": "Collectibles",
+        "color": "#91c77d",
+        "sourceTitle": "Map:The Lost and Damned: Seagulls",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-4-tlad",
+          "collectionSlug": "seagulls"
+        },
+        "categoryIds": null,
+        "mode": [
+          "tlad"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:The_Lost_and_Damned:_Seagulls",
+        "pointCount": 50,
+        "collectionCount": 50
+      },
+      {
+        "slug": "tlad-random-characters",
+        "label": "Random characters",
+        "group": "Characters",
+        "color": "#bb8ed4",
+        "sourceTitle": "Map:The Lost and Damned: Random Characters",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-4-tlad",
+          "collectionSlug": "random-characters"
+        },
+        "categoryIds": null,
+        "mode": [
+          "tlad"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:The_Lost_and_Damned:_Random_Characters",
+        "pointCount": 4,
+        "collectionCount": 4
+      },
+      {
+        "slug": "tbogt-seagulls",
+        "label": "Seagulls",
+        "group": "Collectibles",
+        "color": "#91c77d",
+        "sourceTitle": "Map:The Ballad of Gay Tony: Seagulls",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-4-tbogt",
+          "collectionSlug": "seagulls"
+        },
+        "categoryIds": null,
+        "mode": [
+          "tbogt"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:The_Ballad_of_Gay_Tony:_Seagulls",
+        "pointCount": 50,
+        "collectionCount": 50
+      },
+      {
+        "slug": "tbogt-random-characters",
+        "label": "Random characters",
+        "group": "Characters",
+        "color": "#bb8ed4",
+        "sourceTitle": "Map:The Ballad of Gay Tony: Random Characters",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-4-tbogt",
+          "collectionSlug": "random-characters"
+        },
+        "categoryIds": null,
+        "mode": [
+          "tbogt"
+        ],
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:The_Ballad_of_Gay_Tony:_Random_Characters",
+        "pointCount": 5,
+        "collectionCount": 5
+      }
+    ],
+    "modes": [
+      {
+        "value": "gta-4",
+        "label": "GTA IV"
+      },
+      {
+        "value": "tlad",
+        "label": "The Lost and Damned"
+      },
+      {
+        "value": "tbogt",
+        "label": "The Ballad of Gay Tony"
+      }
+    ],
+    "defaultMode": "gta-4",
+    "editionOptions": [],
+    "defaultEdition": null,
+    "variantOptions": [],
+    "defaultVariant": null,
+    "guideOnly": [
+      {
+        "wikiSlug": "gta-4",
+        "collectionSlug": "side-missions-activities",
+        "label": "GTA IV side missions and activities",
+        "href": "/gta/wiki/gta-4/side-missions-activities"
+      },
+      {
+        "wikiSlug": "gta-4-tlad",
+        "collectionSlug": "angus-bike-thefts",
+        "label": "Angus' bike thefts",
+        "href": "/gta/wiki/gta-4-tlad/angus-bike-thefts"
+      },
+      {
+        "wikiSlug": "gta-4-tlad",
+        "collectionSlug": "bike-races",
+        "label": "Bike races",
+        "href": "/gta/wiki/gta-4-tlad/bike-races"
+      },
+      {
+        "wikiSlug": "gta-4-tbogt",
+        "collectionSlug": "base-jumps",
+        "label": "Base jumps",
+        "href": "/gta/wiki/gta-4-tbogt/base-jumps"
+      }
+    ],
+    "about": [
+      "The base game and both episodes share the Liberty City map image, but their collectibles and characters stay in separate mode layers. Choose GTA IV, The Lost and Damned, or The Ballad of Gay Tony above the layer list.",
+      "The Cash Registers and Items and Weapons records cover GTA IV and Episodes from Liberty City. Episode seagulls and random characters are separate sets. A completed marker always syncs to its own game's collection guide."
+    ],
+    "mappedPointCount": 672,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  },
+  {
+    "slug": "gta-liberty-city-stories",
+    "wikiSlug": "gta-liberty-city-stories",
+    "title": "GTA Liberty City Stories",
+    "mapTitle": "GTA Liberty City Stories interactive map",
+    "description": "Explore Liberty City Stories hidden packages, rampages, stunt jumps, weapons, and pickups on one zoomable map. Track supported collection progress from each marker.",
+    "summary": "Find hidden packages, rampages, stunt jumps, weapons, and pickups around Liberty City.",
+    "route": "/gta/maps/gta-liberty-city-stories",
+    "views": [
+      {
+        "slug": "liberty-city",
+        "label": "Liberty City",
+        "asset": "map.webp",
+        "sourceTitle": "Map:GTA Liberty City Stories: Hidden Packages",
+        "image": "/gta/maps/gta-liberty-city-stories/map.webp",
+        "width": 4000,
+        "height": 2789,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Liberty_City_Stories:_Hidden_Packages"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "hidden-packages",
+        "label": "Hidden packages",
+        "group": "Collectibles",
+        "color": "#e3c275",
+        "sourceTitle": "Map:GTA Liberty City Stories: Hidden Packages",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-liberty-city-stories",
+          "collectionSlug": "hidden-packages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Liberty_City_Stories:_Hidden_Packages",
+        "pointCount": 100,
+        "collectionCount": 100
+      },
+      {
+        "slug": "rampages",
+        "label": "Rampages",
+        "group": "Challenges",
+        "color": "#e76666",
+        "sourceTitle": "Map:GTA Liberty City Stories: Rampages",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-liberty-city-stories",
+          "collectionSlug": "rampages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Liberty_City_Stories:_Rampages",
+        "pointCount": 20,
+        "collectionCount": 20
+      },
+      {
+        "slug": "unique-stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA Liberty City Stories: Unique Stunt Jumps",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-liberty-city-stories",
+          "collectionSlug": "unique-stunt-jumps"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Liberty_City_Stories:_Unique_Stunt_Jumps",
+        "pointCount": 26,
+        "collectionCount": 26
+      },
+      {
+        "slug": "items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#6ba6cf",
+        "sourceTitle": "Map:GTA Liberty City Stories: Items and Weapons",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Liberty_City_Stories:_Items_and_Weapons",
+        "pointCount": 145,
+        "collectionCount": null
+      }
+    ],
+    "modes": [],
+    "defaultMode": null,
+    "editionOptions": [],
+    "defaultEdition": null,
+    "variantOptions": [],
+    "defaultVariant": null,
+    "guideOnly": [],
+    "about": [
+      "The map covers the 100 packages, 20 rampage objectives, and 26 unique stunt jumps, alongside the available weapon and pickup locations."
+    ],
+    "mappedPointCount": 291,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  },
+  {
+    "slug": "gta-vice-city-stories",
+    "wikiSlug": "gta-vice-city-stories",
+    "title": "GTA Vice City Stories",
+    "mapTitle": "GTA Vice City Stories interactive map",
+    "description": "Explore Vice City Stories empire sites, red balloons, rampages, stunt jumps, stores, weapons, and vehicles. Switch PSP and PlayStation 2 views to see edition-specific locations.",
+    "summary": "Find empire building sites, red balloons, rampages, stunt jumps, stores, pickups, and vehicles around Vice City.",
+    "route": "/gta/maps/gta-vice-city-stories",
+    "views": [
+      {
+        "slug": "vice-city",
+        "label": "Vice City",
+        "asset": "map.webp",
+        "sourceTitle": "Map:GTA Vice City Stories: Empire Building Locations (Default)",
+        "image": "/gta/maps/gta-vice-city-stories/map.webp",
+        "width": 3660,
+        "height": 3660,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Empire_Building_Locations_(Default)"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "empire-building-sites",
+        "label": "Empire building sites",
+        "group": "Activities",
+        "color": "#d09558",
+        "sourceTitle": "Map:GTA Vice City Stories: Empire Building Locations (Default)",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city-stories",
+          "collectionSlug": "empire-building-sites"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Empire_Building_Locations_(Default)",
+        "pointCount": 30,
+        "collectionCount": 30
+      },
+      {
+        "slug": "red-balloons",
+        "label": "Red balloons",
+        "group": "Collectibles",
+        "color": "#e45c5c",
+        "sourceTitle": "Map:GTA Vice City Stories: Red Balloons",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city-stories",
+          "collectionSlug": "red-balloons"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Red_Balloons",
+        "pointCount": 99,
+        "collectionCount": 99
+      },
+      {
+        "slug": "rampages",
+        "label": "Rampages",
+        "group": "Challenges",
+        "color": "#e76666",
+        "sourceTitle": "Map:GTA Vice City Stories: Rampages",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city-stories",
+          "collectionSlug": "rampages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Rampages",
+        "pointCount": 36,
+        "collectionCount": 35
+      },
+      {
+        "slug": "unique-stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA Vice City Stories: Unique Stunt Jumps",
+        "view": "vice-city",
+        "collection": {
+          "wikiSlug": "gta-vice-city-stories",
+          "collectionSlug": "unique-stunt-jumps"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Unique_Stunt_Jumps",
+        "pointCount": 36,
+        "collectionCount": 36
+      },
+      {
+        "slug": "store-robberies",
+        "label": "Store robberies",
+        "group": "Activities",
+        "color": "#d4816f",
+        "sourceTitle": "Map:GTA Vice City Stories: Store Robberies",
+        "view": "vice-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Store_Robberies",
+        "pointCount": 30,
+        "collectionCount": null
+      },
+      {
+        "slug": "items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#6ba6cf",
+        "sourceTitle": "Map:GTA Vice City Stories: Items and Weapons",
+        "view": "vice-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Items_and_Weapons",
+        "pointCount": 123,
+        "collectionCount": null
+      },
+      {
+        "slug": "purchasable-vehicles",
+        "label": "Purchasable vehicles",
+        "group": "Vehicles",
+        "color": "#7db9ae",
+        "sourceTitle": "Map:GTA Vice City Stories: Purchasable Vehicles",
+        "view": "vice-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Vice_City_Stories:_Purchasable_Vehicles",
+        "pointCount": 13,
+        "collectionCount": null
+      }
+    ],
+    "modes": [],
+    "defaultMode": null,
+    "editionOptions": [
+      {
+        "value": "psp",
+        "label": "PSP"
+      },
+      {
+        "value": "ps2",
+        "label": "PlayStation 2"
+      }
+    ],
+    "defaultEdition": "psp",
+    "variantOptions": [],
+    "defaultVariant": null,
+    "guideOnly": [],
+    "about": [
+      "Rampages and stunt jumps differ by platform. Choose PSP or PlayStation 2 to filter exclusive locations. Rampage #15 has two platform-specific start locations but one shared checklist entry; alternate pins do not double-count completion.",
+      "Red balloon point numbers are matched from each source location image, not the source map's marker IDs. This accounts for the source page's non-sequential marker ordering."
+    ],
+    "mappedPointCount": 367,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  },
+  {
+    "slug": "gta-chinatown-wars",
+    "wikiSlug": "gta-chinatown-wars",
+    "title": "GTA Chinatown Wars",
+    "mapTitle": "GTA Chinatown Wars interactive map",
+    "description": "Explore Liberty City Chinatown Wars collectibles, drug dealers, camera sites, rampages, stunt jumps, street vendors, and pickups. Track mapped collection progress as you go.",
+    "summary": "Track drug dealers, security cameras, rampages, stunt jumps, random characters, lions, and pickups across Liberty City.",
+    "route": "/gta/maps/gta-chinatown-wars",
+    "views": [
+      {
+        "slug": "liberty-city",
+        "label": "Liberty City",
+        "asset": "map.webp",
+        "sourceTitle": "Map:GTA Chinatown Wars: Security Cameras",
+        "image": "/gta/maps/gta-chinatown-wars/map.webp",
+        "width": 4000,
+        "height": 3600,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Security_Cameras"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "drug-dealers",
+        "label": "Drug dealers",
+        "group": "Activities",
+        "color": "#d5925b",
+        "sourceTitle": "Map:GTA Chinatown Wars: Drug Dealers",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-chinatown-wars",
+          "collectionSlug": "drug-dealers"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Drug_Dealers",
+        "pointCount": 81,
+        "collectionCount": 80
+      },
+      {
+        "slug": "security-cameras",
+        "label": "Security cameras",
+        "group": "Collectibles",
+        "color": "#7ab1d4",
+        "sourceTitle": "Map:GTA Chinatown Wars: Security Cameras",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-chinatown-wars",
+          "collectionSlug": "security-cameras"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Security_Cameras",
+        "pointCount": 100,
+        "collectionCount": 100
+      },
+      {
+        "slug": "rampages",
+        "label": "Rampages",
+        "group": "Challenges",
+        "color": "#e76666",
+        "sourceTitle": "Map:GTA Chinatown Wars: Rampages",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-chinatown-wars",
+          "collectionSlug": "rampages"
+        },
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Rampages",
+        "pointCount": 35,
+        "collectionCount": 35
+      },
+      {
+        "slug": "unique-stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA Chinatown Wars: Unique Stunt Jumps",
+        "view": "liberty-city",
+        "collection": {
+          "wikiSlug": "gta-chinatown-wars",
+          "collectionSlug": "unique-stunt-jumps"
+        },
+        "categoryIds": [
+          "1"
+        ],
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Unique_Stunt_Jumps",
+        "pointCount": 30,
+        "collectionCount": 30
+      },
+      {
+        "slug": "rusty-brown-billboards",
+        "label": "Rusty Brown's billboards",
+        "group": "Places",
+        "color": "#d7bd6a",
+        "sourceTitle": "Map:GTA Chinatown Wars: Unique Stunt Jumps",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": [
+          "2"
+        ],
+        "mode": null,
+        "defaultEnabled": true,
+        "note": "These are separate billboards on the stunt-jump map, not stunt-jump checklist entries.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Unique_Stunt_Jumps",
+        "pointCount": 30,
+        "collectionCount": null
+      },
+      {
+        "slug": "lions-of-fo",
+        "label": "Lion statues",
+        "group": "Places",
+        "color": "#b98acb",
+        "sourceTitle": "Map:GTA Chinatown Wars: Lions of Fo",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": "The 20 pins are possible statue locations. The guide's two statue checklist entries are randomized and should not be marked from these individual pins.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Lions_of_Fo",
+        "pointCount": 20,
+        "collectionCount": null
+      },
+      {
+        "slug": "random-characters",
+        "label": "Random characters",
+        "group": "Characters",
+        "color": "#8baddb",
+        "sourceTitle": "Map:GTA Chinatown Wars: Random Characters",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Random_Characters",
+        "pointCount": 14,
+        "collectionCount": null
+      },
+      {
+        "slug": "street-vendors",
+        "label": "Street vendors",
+        "group": "Services",
+        "color": "#d28284",
+        "sourceTitle": "Map:GTA Chinatown Wars: Street Vendors",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Street_Vendors",
+        "pointCount": 65,
+        "collectionCount": null
+      },
+      {
+        "slug": "items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#6ba6cf",
+        "sourceTitle": "Map:GTA Chinatown Wars: Items and Weapons",
+        "view": "liberty-city",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Chinatown_Wars:_Items_and_Weapons",
+        "pointCount": 190,
+        "collectionCount": null
+      }
+    ],
+    "modes": [],
+    "defaultMode": null,
+    "editionOptions": [],
+    "defaultEdition": null,
+    "variantOptions": [],
+    "defaultVariant": null,
+    "guideOnly": [
+      {
+        "wikiSlug": "gta-chinatown-wars",
+        "collectionSlug": "random-encounters",
+        "label": "Random encounters guide",
+        "href": "/gta/wiki/gta-chinatown-wars/random-encounters"
+      },
+      {
+        "wikiSlug": "gta-chinatown-wars",
+        "collectionSlug": "lions-of-fo",
+        "label": "Lion of Fo guide",
+        "note": "The statues have randomized identities; the map shows possible statue locations, not a one-pin-per-collection-item checklist.",
+        "href": "/gta/wiki/gta-chinatown-wars/lions-of-fo"
+      }
+    ],
+    "about": [
+      "The drug dealer map includes 80 named guide entries plus one platform/social-club-specific marker that is not in the 80-item Bloxodes checklist. The extra point is labeled reference-only and cannot be checked off.",
+      "The stunt-jump map also records 30 Rusty Brown billboard locations. Those remain a separate layer and do not count as stunt jumps.",
+      "Lion of Fo markers show 20 possible statue sites. The Bloxodes guide has two randomized statue identities, so the map does not assign completion to any one site."
+    ],
+    "mappedPointCount": 565,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  },
+  {
+    "slug": "gta-online",
+    "wikiSlug": "gta-online",
+    "title": "GTA Online",
+    "mapTitle": "GTA Online interactive map",
+    "description": "Explore GTA Online mapped stunt jumps, weapon and item pickups, store robberies, LS Tags, daily poster sites, seasonal ghost locations, and Air Freight mission jammers. Collection guides without verified map coordinates remain linked separately.",
+    "summary": "Explore mapped GTA Online world locations, including stunt jumps, pickups, shops, seasonal event pins, and Air Freight cargo points.",
+    "route": "/gta/maps/gta-online",
+    "views": [
+      {
+        "slug": "san-andreas",
+        "label": "Southern San Andreas",
+        "asset": "map.webp",
+        "sourceTitle": "Map:GTA Online: Unique Stunt Jumps",
+        "image": "/gta/maps/gta-online/map.webp",
+        "width": 8192,
+        "height": 8192,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Unique_Stunt_Jumps"
+      },
+      {
+        "slug": "air-freight",
+        "label": "Air Freight mission map",
+        "asset": "air-freight.webp",
+        "sourceTitle": "Map:GTAO Air Freight Cargo: Signal jammers",
+        "image": "/gta/maps/gta-online/air-freight.webp",
+        "width": 5597,
+        "height": 7905,
+        "sourceUrl": "https://gta.wiki/w/Map:GTAO_Air_Freight_Cargo:_Signal_jammers"
+      }
+    ],
+    "layers": [
+      {
+        "slug": "online-stunt-jumps",
+        "label": "Unique stunt jumps",
+        "group": "Challenges",
+        "color": "#e99e55",
+        "sourceTitle": "Map:GTA Online: Unique Stunt Jumps",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Unique_Stunt_Jumps",
+        "pointCount": 50,
+        "collectionCount": null
+      },
+      {
+        "slug": "convenience-store-robberies",
+        "label": "Convenience store robberies",
+        "group": "Activities",
+        "color": "#d4816f",
+        "sourceTitle": "Map:GTA Online: Convenience Store Robberies",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Convenience_Store_Robberies",
+        "pointCount": 20,
+        "collectionCount": null
+      },
+      {
+        "slug": "online-items-and-weapons",
+        "label": "Items and weapons",
+        "group": "Pickups",
+        "color": "#6ba6cf",
+        "sourceTitle": "Map:GTA Online: Items and Weapons",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Items_and_Weapons",
+        "pointCount": 214,
+        "collectionCount": null
+      },
+      {
+        "slug": "spray-cans",
+        "label": "LS Tags spray cans",
+        "group": "Collectibles",
+        "color": "#e45c5c",
+        "sourceTitle": "Map:GTA Online: LS Tags & Spray Cans",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": [
+          "1"
+        ],
+        "mode": null,
+        "defaultEnabled": true,
+        "note": null,
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_LS_Tags_&_Spray_Cans",
+        "pointCount": 30,
+        "collectionCount": null
+      },
+      {
+        "slug": "daily-poster-sites",
+        "label": "Daily poster sites",
+        "group": "Rotating locations",
+        "color": "#84c78d",
+        "sourceTitle": "Map:GTA Online: LS Tags & Spray Cans",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": [
+          "2"
+        ],
+        "mode": null,
+        "defaultEnabled": false,
+        "note": "These are the 30 possible poster locations. Only one changes daily; availability and active spot vary.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_LS_Tags_&_Spray_Cans",
+        "pointCount": 30,
+        "collectionCount": null
+      },
+      {
+        "slug": "ghosts-2023",
+        "label": "Ghosts Exposed (2023)",
+        "group": "Seasonal events",
+        "color": "#bd93df",
+        "sourceTitle": "Map:GTA Online: Ghosts Exposed - Halloween 2023",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": false,
+        "note": "Seasonal event map. Availability is limited to its event window.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Ghosts_Exposed_-_Halloween_2023",
+        "pointCount": 19,
+        "collectionCount": null
+      },
+      {
+        "slug": "ghosts-2024",
+        "label": "Ghosts Exposed (2024)",
+        "group": "Seasonal events",
+        "color": "#bd93df",
+        "sourceTitle": "Map:GTA Online: Ghosts Exposed - Halloween 2024",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": false,
+        "note": "Seasonal event map. Availability is limited to its event window.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Ghosts_Exposed_-_Halloween_2024",
+        "pointCount": 19,
+        "collectionCount": null
+      },
+      {
+        "slug": "ghosts-2025",
+        "label": "Ghosts Exposed (2025)",
+        "group": "Seasonal events",
+        "color": "#bd93df",
+        "sourceTitle": "Map:GTA Online: Ghosts Exposed - Halloween 2025",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": false,
+        "note": "Seasonal event map. Availability is limited to its event window.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Ghosts_Exposed_-_Halloween_2025",
+        "pointCount": 19,
+        "collectionCount": null
+      },
+      {
+        "slug": "ghosts-2026",
+        "label": "Ghosts Exposed (2026)",
+        "group": "Seasonal events",
+        "color": "#bd93df",
+        "sourceTitle": "Map:GTA Online: Ghosts Exposed - Halloween 2026",
+        "view": "san-andreas",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": false,
+        "note": "Seasonal event map. Verify current event timing before attempting these locations.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTA_Online:_Ghosts_Exposed_-_Halloween_2026",
+        "pointCount": 19,
+        "collectionCount": null
+      },
+      {
+        "slug": "air-freight-signal-jammers",
+        "label": "Air Freight cargo mission signal jammers",
+        "group": "Missions",
+        "color": "#87b8c8",
+        "sourceTitle": "Map:GTAO Air Freight Cargo: Signal jammers",
+        "view": "air-freight",
+        "collection": null,
+        "categoryIds": null,
+        "mode": null,
+        "defaultEnabled": true,
+        "note": "These seven markers are mission cargo targets. They are not the separate 50 freemode Signal Jammers collectible set.",
+        "sourceUrl": "https://gta.wiki/w/Map:GTAO_Air_Freight_Cargo:_Signal_jammers",
+        "pointCount": 7,
+        "collectionCount": null
+      }
+    ],
+    "modes": [],
+    "defaultMode": null,
+    "editionOptions": [],
+    "defaultEdition": null,
+    "variantOptions": [],
+    "defaultVariant": null,
+    "guideOnly": [
+      {
+        "wikiSlug": "gta-online",
+        "collectionSlug": "action-figures",
+        "label": "Action Figures",
+        "note": "No source map page with verified coordinates is available for this collection.",
+        "href": "/gta/wiki/gta-online/action-figures"
+      },
+      {
+        "wikiSlug": "gta-online",
+        "collectionSlug": "playing-cards",
+        "label": "Playing Cards",
+        "note": "No source map page with verified coordinates is available for this collection.",
+        "href": "/gta/wiki/gta-online/playing-cards"
+      },
+      {
+        "wikiSlug": "gta-online",
+        "collectionSlug": "signal-jammers",
+        "label": "Signal Jammers (50 collectibles)",
+        "note": "No source map page with verified coordinates is available for the 50 freemode collectible jammers. The seven Air Freight mission markers are separate.",
+        "href": "/gta/wiki/gta-online/signal-jammers"
+      },
+      {
+        "wikiSlug": "gta-online",
+        "collectionSlug": "media-sticks",
+        "label": "Media Sticks",
+        "note": "No source map page with verified coordinates is available for this collection.",
+        "href": "/gta/wiki/gta-online/media-sticks"
+      },
+      {
+        "wikiSlug": "gta-online",
+        "collectionSlug": "movie-props",
+        "label": "Movie Props",
+        "note": "No source map page with verified coordinates is available for this collection.",
+        "href": "/gta/wiki/gta-online/movie-props"
+      },
+      {
+        "wikiSlug": "gta-online",
+        "collectionSlug": "peyote-plants",
+        "label": "Peyote Plants",
+        "note": "No source map page with verified coordinates is available for this collection.",
+        "href": "/gta/wiki/gta-online/peyote-plants"
+      }
+    ],
+    "about": [
+      "This page shows map locations published in GTA Wiki's current map records. Event layers are off by default because their locations are seasonal; turn on the year you need and check whether that event is active.",
+      "LS Tags uses 30 Spray Can locations. The 30 Daily Poster markers are possible rotation sites, not 30 posters that can all be collected at once.",
+      "The seven Air Freight mission Signal Jammers are not the 50 freemode Signal Jammers in the linked collection guide.",
+      "Action Figures, Playing Cards, the 50 freemode Signal Jammers, Media Sticks, Movie Props, and Peyote Plants are linked as guides but not drawn as pins because the reviewed source map records did not provide verifiable coordinates for those sets."
+    ],
+    "mappedPointCount": 427,
+    "retrievedAt": "2026-09-28T11:27:42Z"
+  }
+]

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContentCard } from "@/components/ContentCard";
+import Link from "next/link";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { listPublishedGtaWikiPages, resolveGtaWikiCoverImage } from "@/lib/gta";
@@ -22,6 +23,10 @@ export default async function GtaHomePage() {
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Grand Theft Auto wiki hubs and game data</h1>
         <p className="max-w-2xl text-base text-muted md:text-lg">{description}</p>
         <IndexPageStats items={[{ label: `${wikiPages.length} game ${wikiPages.length === 1 ? "hub" : "hubs"}`, icon: "wiki", tone: "accent" }]} />
+        <p className="flex flex-wrap gap-3">
+          <Link href="/gta/maps" className="inline-flex min-h-11 items-center rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-background transition hover:opacity-90">Explore all interactive maps →</Link>
+          <Link href="/gta/maps/gta5" className="inline-flex min-h-11 items-center rounded-xl border border-border bg-surface px-4 py-2 text-sm font-semibold text-accent transition hover:border-accent">Open GTA V Story Mode map</Link>
+        </p>
       </header>
 
       <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">

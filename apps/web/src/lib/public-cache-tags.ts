@@ -1,3 +1,5 @@
+import { getGtaInteractiveMapDefinition } from "@/lib/gta-interactive-map-registry";
+
 export const CACHE_TAG_HEADER = "Cache-Tag";
 
 export type PublicCacheEventType =
@@ -163,6 +165,29 @@ export function cacheTagsForPath(pathname: string) {
 
   if (first === "gta") {
     if (second === "checklists") return unique([...tags, "gta-checklists", "gta-checklists-index", third && third !== "page" ? slugTag("gta-checklist", third) : ""]);
+    if (second === "maps") {
+      if (!third) return unique([...tags, "gta-home", "gta-wiki-index"]);
+      if (third === "gta5") return unique([...tags, "gta-home", "gta-wiki:gta-5", "gta-wiki-collection-index"]);
+      const map = getGtaInteractiveMapDefinition(third);
+      if (!map) return unique([...tags, "gta-home", "gta-wiki-index"]);
+      const wikiSlugs = new Set([
+        map.wikiSlug,
+        ...map.layers.flatMap((layer) => layer.collection ? [layer.collection.wikiSlug] : []),
+        ...map.guideOnly.map((guide) => guide.wikiSlug)
+      ]);
+      const collectionTags = [
+        ...map.layers.flatMap((layer) => layer.collection ? [slugTag("gta-wiki-collection", layer.collection.wikiSlug + "/" + layer.collection.collectionSlug)] : []),
+        ...map.guideOnly.map((guide) => slugTag("gta-wiki-collection", guide.wikiSlug + "/" + guide.collectionSlug))
+      ];
+      return unique([
+        ...tags,
+        "gta-home",
+        "gta-wiki-index",
+        "gta-wiki-collection-index",
+        ...Array.from(wikiSlugs, (slug) => slugTag("gta-wiki", slug)),
+        ...collectionTags
+      ]);
+    }
     if (!second) return unique([...tags, "gta-home"]);
     if (second === "wiki") {
       if (!third || third === "page") return unique([...tags, "gta-wiki-index"]);

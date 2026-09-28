@@ -2,7 +2,7 @@ import { getGtaChecklistPageBySlug } from "@/lib/gta-checklists";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { CommentsSection } from "@/components/comments/CommentsSection";
@@ -18,6 +18,7 @@ import {
   resolveGtaWikiThumbnailImage,
   type GtaWikiPage
 } from "@/lib/gta";
+import { getGtaMapRouteForWikiSlug } from "@/lib/gta-interactive-map-registry";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { breadcrumbJsonLd, buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
@@ -77,6 +78,7 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
   ]);
   const coverImage = resolveGtaWikiCoverImage(page);
   const thumbnailImage = resolveGtaWikiThumbnailImage(page);
+  const mapRoute = getGtaMapRouteForWikiSlug(page.slug);
   const platforms = stringList(page.game_platforms_json);
   const releases = releaseLabels(page.game_release_dates_json);
   const canonicalPath = `/gta/wiki/${page.slug}`;
@@ -135,6 +137,7 @@ export default async function GtaWikiDetailPage({ params }: PageProps) {
           ) : null}
         </div>
       </header>
+      {mapRoute ? <p><Link href={mapRoute} className="inline-flex min-h-11 items-center rounded-xl border border-border bg-surface px-4 py-2 text-sm font-semibold text-accent transition hover:border-accent">Explore the interactive map <ArrowUpRight className="ml-2 h-4 w-4" aria-hidden /></Link></p> : null}
         {checklist ? <p><Link href={`/gta/checklists/${page.slug}`} className="text-accent underline underline-offset-4">Track your 100% completion with the {page.game_title} checklist</Link></p> : null}
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
