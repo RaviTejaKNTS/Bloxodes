@@ -18,7 +18,9 @@ test("saved wiki attempts survive release aliases while cross-game and symlink e
     assert.equal(await resolveWikiAttemptRoot(queue, saved, 2), saved);
     assert.equal(await resolveWikiAttemptRoot(queue, null, 2), path.join(queue, "attempt-2"));
     await assert.rejects(resolveWikiAttemptRoot(queue, path.join(state, "game-b", "attempt-1"), 2), /escapes/);
-    await assert.rejects(resolveWikiAttemptRoot(queue, queue, 2), /escapes/);
+    assert.equal(await resolveWikiAttemptRoot(queue, queue, 2), queue);
+    assert.equal(await resolveWikiAttemptRoot(queue, path.join(root, "old-checkout", "game-a"), 2), path.join(root, "old-checkout", "game-a"));
+    await assert.rejects(resolveWikiAttemptRoot(queue, state, 2), /escapes/);
     await symlink(path.join(state, "game-b"), path.join(queue, "escape"));
     await assert.rejects(resolveWikiAttemptRoot(queue, path.join(queue, "escape", "attempt-1"), 2), /escapes/);
     await symlink(path.join(state, "game-b"), path.join(queue, "attempt-3"));

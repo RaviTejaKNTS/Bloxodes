@@ -9,7 +9,9 @@ export async function resolveWikiAttemptRoot(queueRoot: string, savedRoot: strin
   if (savedRoot) {
     const canonicalSaved = await realpath(savedRoot);
     const relative = path.relative(canonicalQueue, canonicalSaved);
-    if (!relative || relative === ".." || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+    // Older queue rows kept their artifacts directly in their own queue directory.
+    // That exact root is contained too; sibling games and escaped symlinks are not.
+    if (relative === ".." || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
       throw new Error("Saved result root escapes queue workspace.");
     }
     return path.resolve(savedRoot);
