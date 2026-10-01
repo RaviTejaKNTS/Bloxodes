@@ -53,7 +53,7 @@ finish() {
     cp -a "$BACKUP/units/." /etc/systemd/system/
     for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do
       if [[ -f "$BACKUP/units/$unit.absent" ]]; then
-        rm -f "/etc/systemd/system/$unit" "/etc/systemd/system/$unit.absent"
+        rm -f "/etc/systemd/system/$unit" "/etc/systemd/system/$unit.absent" "/etc/systemd/system/timers.target.wants/$unit"
       fi
     done
     if [[ -s "$BACKUP/previous-current" ]]; then
@@ -116,7 +116,7 @@ mv -Tf "$ROOT/current.next" "$ROOT/current"
 systemctl daemon-reload
 for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do cmp "$RELEASE/scripts/ops/systemd/$unit" "/etc/systemd/system/$unit"; done
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
-SUCCESS=1
 systemctl enable bloxodes-wiki-recovery.timer
 ACTIVE+=(bloxodes-wiki-recovery.timer)
+SUCCESS=1
 echo "Activated articles and wiki/collections at $SHA. Prior timer enablement/cadence retained. Rollback units: $BACKUP"

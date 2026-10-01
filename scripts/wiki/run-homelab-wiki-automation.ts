@@ -319,13 +319,12 @@ async function claimOrEnqueue(dev: SupabaseClient, lane: number): Promise<QueueR
 }
 
 function modelEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
-  const env: NodeJS.ProcessEnv = { ...process.env };
+  const env: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: "development" };
   for (const key of MODEL_FORBIDDEN_ENV_KEYS) delete env[key];
   for (const key of Object.keys(env)) {
     if (/PRODUCTION|DOKPLOY|SUPABASE_DB_PASSWORD|SSH_AUTH_SOCK|VPS_|GITHUB_TOKEN|GH_TOKEN|BITWARDEN|^BW_/i.test(key)) delete env[key];
   }
   env.BLOXODES_ENV_PROFILE = "managed-dev";
-  env.NODE_ENV = "development";
   env.BLOXODES_ENV_OVERLAYS = "";
   env.SUPABASE_URL = dev.url;
   env.SUPABASE_SERVICE_ROLE = dev.serviceRole;
@@ -528,8 +527,7 @@ function productionEnvironment(): NodeJS.ProcessEnv {
   const url = parsed.SUPABASE_URL?.trim();
   const serviceRole = parsed.SUPABASE_SERVICE_ROLE?.trim();
   if (!url || !serviceRole || !isProductionSupabaseUrl(url)) throw new Error("Production wiki credentials are missing or target an unrecognized host.");
-  const env: NodeJS.ProcessEnv = { ...process.env, ...parsed, SUPABASE_URL: url, SUPABASE_SERVICE_ROLE: serviceRole };
-  env.NODE_ENV = "production";
+  const env: NodeJS.ProcessEnv = { ...process.env, ...parsed, SUPABASE_URL: url, SUPABASE_SERVICE_ROLE: serviceRole, NODE_ENV: "production" };
   env.BLOXODES_ENV_PROFILE = "process-only";
   env.BLOXODES_ENV_OVERLAYS = "";
   return env;

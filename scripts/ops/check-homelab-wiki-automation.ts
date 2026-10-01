@@ -44,7 +44,6 @@ async function main() {
     if (result.error) throw new Error(`Managed-dev wiki queue is not ready: ${result.error.message}`);
     return result;
   });
-  if (table.error) throw new Error(`Managed-dev wiki queue is not ready: ${table.error.message}`);
   const concurrency = await retryCheck("Managed-dev queue concurrency contract", async () => {
     const result = await sb.rpc("wiki_generation_queue_concurrency_contract");
     if (result.error) throw new Error(result.error.message);
@@ -52,12 +51,11 @@ async function main() {
   });
   const contract = concurrency.data as { max_processing?: unknown; slot_index?: unknown; slot_constraint?: unknown } | null;
   if (
-    concurrency.error ||
     contract?.max_processing !== 2 ||
     contract.slot_index !== true ||
     contract.slot_constraint !== true
   ) {
-    throw new Error(`Managed-dev two-slot queue contract is not ready: ${concurrency.error?.message || JSON.stringify(contract)}.`);
+    throw new Error(`Managed-dev two-slot queue contract is not ready: ${JSON.stringify(contract)}.`);
   }
   const rpc = await retryCheck("Managed-dev heartbeat RPC", async () => {
     const result = await sb.rpc("heartbeat_wiki_generation_queue_item", {
@@ -68,7 +66,7 @@ async function main() {
     if (result.error) throw new Error(result.error.message);
     return result;
   });
-  if (rpc.error || rpc.data !== false) throw new Error(`Managed-dev heartbeat RPC is not ready: ${rpc.error?.message || "unexpected result"}`);
+  if (rpc.data !== false) throw new Error("Managed-dev heartbeat RPC returned an unexpected result.");
 
   const modelHome = process.env.WIKI_AUTOMATION_MODEL_HOME || "/var/lib/bloxodes/wiki-model";
   const codex = executable([process.env.WIKI_AUTOMATION_CODEX_BIN || "", "/home/teja/.local/bin/codex", "codex"].filter(Boolean));
@@ -99,7 +97,8 @@ async function main() {
   if (r2Config.bucket !== "bloxodes-wiki") throw new Error(`Expected shared R2 bucket bloxodes-wiki; received ${r2Config.bucket}.`);
   const image = await sb.from("wiki_collection_items").select("image_key").not("image_key", "is", null).limit(1).maybeSingle();
   if (image.error || !image.data?.image_key) throw new Error(`Managed-dev R2 canary key is unavailable: ${image.error?.message || "no image"}`);
-  await retryCheck("R2 media canary", () => new R2Client(r2Config).headObject(String(image.data.image_key)));
+  const imageKey = String(image.data.image_key);
+  await retryCheck("R2 media canary", () => new R2Client(r2Config).headObject(imageKey));
 
   const [stats, inventory] = await retryCheck("Public wiki inputs", async () => {
     const responses = await Promise.all([

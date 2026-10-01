@@ -89,3 +89,7 @@ The final platform check treats the live web image as synchronized when it is th
 - Inspect the Swarm task, app logs, database health, and shared VPS pressure.
 - Deploy immutable previous images for application rollback; database changes remain forward-only and require compensating migrations/scripts.
 - Never force-push production or include another worktree's changes.
+
+### Cache configuration repair — October 1, 2026
+
+The user-authorized automation repair rechecked the September 26 environment defect and confirmed it still existed. The malformed control-character separator was replaced with a newline under an exact environment/image snapshot guard. Every other parsed environment value and all build settings were preserved. Dokploy redeployed the same immutable `64dd8684bbc9023aa85c377009f19c8c76007bda` image; deploy health returned healthy database readiness at that SHA. Authenticated revalidation of the already-published Dusty Trip article then returned HTTP 200 with `cloudflare.ok=true`, nine successful tag purges and no purge errors. This supersedes the pending cache-environment repair above; it is a scoped revalidation check, not a broad production audit.
