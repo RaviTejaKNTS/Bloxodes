@@ -3,7 +3,7 @@ import test from "node:test";
 import { mkdtemp, readFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { authorizePublication, drainPublications, publicationDue } from "../article-publication-outbox";
+import { authorizePublication, acknowledgePublishedIntents, drainPublications, publicationDue } from "../article-publication-outbox";
 import { saveJson, runArticlePipeline, type Decision } from "../article-pipeline";
 import { applyLocalCorrections } from "../article-local-correction";
 import { normalizeImageAlt } from "../../content/article-image-readiness";
@@ -50,6 +50,26 @@ test("a verified manual recovery closes an exhausted outbox without a new releas
     await drainPublications(root, dev, async () => { assert.fail("already published: no new release"); });
     const recovered = JSON.parse(await readFile(file, "utf8"));
     assert.ok(recovered.publishedAt); assert.equal(recovered.attempts, 6); assert.equal(recovered.error, undefined);
+  } finally { globalThis.fetch = original; }
+});
+test("exact acknowledgement touches only the selected published intent and rejects unfinished rows", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-exact-"));
+  const original = globalThis.fetch;
+  globalThis.fetch = async (input, init) => {
+    const request = new Request(input, init);
+    assert.equal(new URL(request.url).searchParams.get('id'), `in.(${ids[0]})`);
+    return new Response(JSON.stringify([{ id: ids[0], status: "published", result_slug: "recovered", production_url: "https://bloxodes.com/articles/recovered" }]), { headers: { "Content-Type": "application/json" } });
+  };
+  try {
+    for (const id of ids) await authorizePublication(root, id);
+    const file = (id: string) => path.join(root, "tmp/article-publication", `${id}.json`);
+    const untouched = await readFile(file(ids[1]), "utf8");
+    await acknowledgePublishedIntents(root, dev, [ids[0]]);
+    assert.ok(JSON.parse(await readFile(file(ids[0]), "utf8")).publishedAt);
+    assert.equal(await readFile(file(ids[1]), "utf8"), untouched);
+    globalThis.fetch = async () => new Response(JSON.stringify([{ id: ids[1], status: "completed" }]), { headers: { "Content-Type": "application/json" } });
+    await assert.rejects(acknowledgePublishedIntents(root, dev, [ids[1]]), /not acknowledged as published/);
+    assert.equal(await readFile(file(ids[1]), "utf8"), untouched);
   } finally { globalThis.fetch = original; }
 });
 test("equivalent alt encodings pass while meaningfully different text stays different", () => {

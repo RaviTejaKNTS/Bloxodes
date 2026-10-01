@@ -21,6 +21,7 @@ import { readSessionState, saveSessionState, recoverStep, resumedCodexArgs } fro
 import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-automation-env";
 import { resolveWikiAttemptRoot } from "./wiki-workspace-paths";
 import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage } from "./wiki-execution";
+import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 
 type StatsGame = {
   universeId: number;
@@ -527,6 +528,7 @@ function productionEnvironment(): NodeJS.ProcessEnv {
   const url = parsed.SUPABASE_URL?.trim();
   const serviceRole = parsed.SUPABASE_SERVICE_ROLE?.trim();
   if (!url || !serviceRole || !isProductionSupabaseUrl(url)) throw new Error("Production wiki credentials are missing or target an unrecognized host.");
+  if (!parsed.REVALIDATE_SECRET?.trim()) throw new Error("Production target requires REVALIDATE_SECRET before wiki publication.");
   const env: NodeJS.ProcessEnv = { ...process.env, ...parsed, SUPABASE_URL: url, SUPABASE_SERVICE_ROLE: serviceRole, NODE_ENV: "production" };
   env.BLOXODES_ENV_PROFILE = "process-only";
   env.BLOXODES_ENV_OVERLAYS = "";
@@ -567,6 +569,10 @@ async function release(result: WorkflowResult) {
       text: String(manifest.collection?.label || manifest.collection?.slug)
     });
   }
+  await revalidatePublishedContent(env, expectedPages.map(page => ({
+    type: page.url === `https://bloxodes.com/wiki/${result.wikiSlug}` ? "wiki" : "wiki_collection",
+    slug: page.url.slice("https://bloxodes.com/wiki/".length)
+  })));
   for (const expected of expectedPages) {
     let ok = false;
     for (let attempt = 0; attempt < 24; attempt += 1) {

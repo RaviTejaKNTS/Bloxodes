@@ -1,3 +1,5 @@
+import { fetchWithTransientRetries } from "../shared/transient-http";
+
 export type ProductionInventoryItem = {
   family: string;
   title: string;
@@ -47,9 +49,8 @@ export function productionInventoryUrl(): string {
 }
 
 export async function fetchProductionEditorialInventory(): Promise<ProductionInventoryResponse> {
-  const response = await fetch(productionInventoryUrl(), {
+  const response = await fetchWithTransientRetries(productionInventoryUrl(), {
     headers: { Accept: "application/json", "User-Agent": "BloxodesArticleAutomation/1.0" },
-    signal: AbortSignal.timeout(30_000)
   });
   if (!response.ok) {
     throw new Error(`Production editorial inventory returned ${response.status} ${response.statusText}.`);

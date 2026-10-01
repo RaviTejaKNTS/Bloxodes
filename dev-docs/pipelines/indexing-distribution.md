@@ -29,3 +29,5 @@ Social posting must not be coupled to database publication success in a way that
 ## Manual Fallbacks
 
 Several GitHub workflows remain manual-only emergency fallbacks because recurring ownership moved to the VPS. Do not re-enable schedules without first removing the corresponding VPS entry and documenting the ownership change.
+
+October 1 automation repair: the live cache worker reserves 80 stats and 20 editorial events per batch and is draining its backlog. Article/wiki trusted publishers now perform exact authenticated cache revalidation before live/sitemap checks, so a new release does not wait behind older editorial batches. The event and deferred warm workers retain their ownership and cadence.

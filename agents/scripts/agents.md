@@ -304,3 +304,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 - `audit:emote-commands`: read-only database coverage report under `tmp/emotes/`, with optional `--baseline` inventory. The report counts published references and linked Marketplace commands without deriving commands from item names.
 
 October 1 automation repair: `scripts/ops/check-wiki-model-sandbox.ts` performs a no-model nested sandbox readiness probe; `scripts/wiki/wiki-execution.ts` shares initial/resumed CLI policy and technical error classification. The restricted `bloxodes-wiki-recovery` service/timer uses `wiki:homelab:run -- --apply --retry-only` for existing due rows only, deferring on the shared lease. `scripts/shared/official-universe-cover.ts` resolves exact completed Roblox landscape artwork when stored cover sources are missing. No schema change is involved; see the existing homelab/article/wiki pipeline owners for activation evidence.
+
+The article/wiki trusted publishers use `shared/revalidate-published-content.ts` for immediate exact page/sitemap refresh before verification; credentials stay in the protected production target.
+
+For an exact manual publication recovery, `articles:publication:drain -- --acknowledge-published --queue-id <UUID> [--queue-id <UUID>] --apply` only closes existing authorized intents whose queue rows already acknowledge matching canonical published URLs. It never launches a release, scans for other due publications, or resets attempts.

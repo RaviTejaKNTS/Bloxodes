@@ -89,7 +89,8 @@ async function main() {
       const productionEnvFile = path.resolve(
         process.env.ARTICLE_RELEASE_PRODUCTION_ENV_FILE?.trim() || ".envs/targets/production.env"
       );
-      await readProductionCredentials(productionEnvFile);
+      const production = await readProductionCredentials(productionEnvFile);
+      if (!production.revalidateSecret) throw new Error("Production target requires REVALIDATE_SECRET for verified article publication.");
       console.log(`Production release target: ${productionEnvFile} (validated)`);
     } else {
       console.log("Production release: disabled for manual review");

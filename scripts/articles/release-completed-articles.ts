@@ -21,6 +21,7 @@ import {
 } from "../content/article-image-readiness";
 import { CANONICAL_MEDIA_ORIGIN } from "../shared/storage-public-url";
 import { fetchWithTransientRetries, TransientHttpError } from "../shared/transient-http";
+import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { artifactHashes, type PipelineState } from "./article-pipeline";
 import {
   ARTICLE_DEV_ENV_KEYS,
@@ -75,6 +76,7 @@ export type ProductionCredentials = {
   serviceRole: string;
   mediaBucket: string;
   mediaPublicUrl: string;
+  revalidateSecret?: string;
 };
 
 type ProductionArticleRow = {
@@ -256,7 +258,7 @@ export async function readProductionCredentials(filePath: string): Promise<Produ
   if (new URL(mediaPublicUrl).origin !== CANONICAL_MEDIA_ORIGIN) {
     throw new Error(`${filePath} must use ${CANONICAL_MEDIA_ORIGIN} for SUPABASE_MEDIA_PUBLIC_URL.`);
   }
-  return { url, serviceRole, mediaBucket, mediaPublicUrl };
+  return { url, serviceRole, mediaBucket, mediaPublicUrl, revalidateSecret: parsed.REVALIDATE_SECRET?.trim() };
 }
 
 function clearTargetEnvironment(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
@@ -282,6 +284,7 @@ export function productionChildEnvironment(
     SUPABASE_SERVICE_ROLE: credentials.serviceRole,
     SUPABASE_MEDIA_BUCKET: credentials.mediaBucket,
     SUPABASE_MEDIA_PUBLIC_URL: credentials.mediaPublicUrl,
+    REVALIDATE_SECRET: credentials.revalidateSecret || "",
   };
 }
 
@@ -428,7 +431,7 @@ export async function resolveReleaseArtifactPath(filePath: string, queueId: stri
     if (!hashes[name] || hashes[name] !== state.artifacts[name]) throw new Error(`Pipeline approval no longer matches ${name}.`);
   }
   for (const stage of ["copy_check", "image_check", "import_verify", "browser_verify"] as const) {
-    if (state.history.filter(entry => entry.stage === stage).at(-1)?.decision.status !== "completed") {
+    if (state.history.filter(entry => entry.stage === stage).pop()?.decision.status !== "completed") {
       throw new Error(`Pipeline article is missing ${stage} verification.`);
     }
   }
@@ -647,6 +650,7 @@ async function verifyLiveRelease(
   options: ReleaseOptions,
   productionEnv: NodeJS.ProcessEnv,
 ): Promise<void> {
+  await revalidatePublishedContent(productionEnv, [{ type: "article", slug: artifact.finalJson.slug }]);
   await runNpmScript(
     "verify:published-url",
     [
@@ -746,6 +750,7 @@ async function main() {
   const options = parseReleaseOptions(process.argv.slice(2));
   const dev = resolveArticleDevCredentials({ envFile: options.devEnvFile });
   const productionCredentials = await readProductionCredentials(options.productionEnvFile);
+  if (options.apply && !productionCredentials.revalidateSecret) throw new Error("Production target requires REVALIDATE_SECRET before article publication.");
   const rows = await loadQueueRows(options.queueIds, dev);
 
   console.log(`Article release allowlist: ${rows.length} exact queue row(s).`);
