@@ -68,7 +68,9 @@ finish() {
   exit "$status"
 }
 trap finish EXIT
-systemctl stop "${TIMERS[@]}"
+# A new timer has no loaded unit on its first installation. Suspend only the
+# timers that were actually active; rollback restores this exact same set.
+if [[ ${#ACTIVE[@]} -gt 0 ]]; then systemctl stop "${ACTIVE[@]}"; fi
 # Catch a timer firing between the initial check and trigger suspension.
 idle
 # Exclude manual article/wiki workers too; the same lease is visible in all releases.

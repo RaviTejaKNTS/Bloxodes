@@ -158,3 +158,5 @@ The active Wi-Fi connection used router-provided IPv4/IPv6 DNS. At diagnosis, th
 The real restricted CLI canary executed shell, artifact, HTTPS and ephemeral-listener checks and resumed the same saved session (`01a0f656-2a60-7690-9931-5df93ad3389a`). Both marker checks passed. The final prepared runtime passed restricted wiki readiness and a real `/wiki` Next preview with HTTP 200 while preserving the clean source checkout.
 
 Legacy wiki jobs may retain artifacts directly under their exact queue UUID directory rather than `attempt-N`. Recovery accepts this own-game root after resolving aliases; parent directories, sibling games and escaped symlinks still fail containment. The outer workflow then checks exact queue/universe/slug identity and manifest containment before publication.
+
+First installation suspends only timers captured as active, so an absent new recovery timer cannot abort activation. Failed preflight restores the exact prior active timer set. Provider workspace-routing timeouts are technical failures, never evidence-based rejection.
