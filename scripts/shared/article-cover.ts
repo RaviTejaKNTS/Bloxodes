@@ -4,6 +4,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 import { toMediaPublicUrl } from "./storage-public-url";
+import { fetchImageBytes } from "./fetch-image-bytes";
 
 export type ArticleCoverStorage = {
   upload(
@@ -135,12 +136,10 @@ export async function createEditedArticleCover(params: {
 }
 
 async function fetchSourceImage(url: string): Promise<Buffer> {
-  const response = await fetch(url, {
+  return await fetchImageBytes(url, {
     headers: {
       "User-Agent": "Mozilla/5.0 Bloxodes article cover generator",
       Accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
     },
   });
-  if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
-  return Buffer.from(await response.arrayBuffer());
 }

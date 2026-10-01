@@ -6,7 +6,7 @@ test('sandbox readiness supports both CLI command generations without bypassing 
   const current = wikiSandboxProbeArgs('/state/game', '--permission-profile <NAME>');
   assert.deepEqual(current.slice(0, 3), ['sandbox', '--permission-profile', 'wiki-readiness']);
   assert.ok(current.includes('permissions.wiki-readiness.network.enabled=true'));
-  assert.ok(current.includes('permissions.wiki-readiness.filesystem."/state/game"="write"'));
+  assert.ok(current.includes('permissions.wiki-readiness.filesystem={"/state/game"="write"}'));
   const previous = wikiSandboxProbeArgs('/state/game', 'Commands:\n  linux Run a command');
   assert.deepEqual(previous.slice(0, 2), ['sandbox', 'linux']);
   assert.ok(previous.includes('sandbox_workspace_write.network_access=true'));

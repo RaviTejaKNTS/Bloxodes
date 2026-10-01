@@ -40,10 +40,18 @@ export async function drainPublications(root: string, dev: { url: string; servic
         const intent = JSON.parse(await readFile(file, "utf8")) as PublicationIntent;
         if (intent.version !== 1 || !Number.isInteger(intent.attempts) || intent.attempts < 0 || !Number.isFinite(Date.parse(intent.authorizedAt)) || (intent.nextAttemptAt && !Number.isFinite(Date.parse(intent.nextAttemptAt))) || path.basename(intentPath(root, intent.queueId)) !== name) throw new Error(`Invalid publication intent ${name}`);
         if (intent.publishedAt) continue;
+        const { data: row, error } = await db.from("article_generation_queue").select("status,result_slug,production_url").eq("id", intent.queueId).eq("workflow_mode", "agent_runner").maybeSingle();
+        if (error) throw new Error(error.message);
+        // An exact guarded manual recovery may finish after the outbox exhausts.
+        // Reconcile its verified queue acknowledgement without resetting attempts.
+        if (row?.status === "published") {
+          if (!row.result_slug || row.production_url !== `https://bloxodes.com/articles/${row.result_slug}`) throw new Error("Published queue acknowledgement has no matching canonical URL.");
+          intent.publishedAt = new Date().toISOString(); delete intent.error; delete intent.nextAttemptAt;
+          await saveJson(file, intent);
+          continue;
+        }
         if (intent.attempts >= 6) { issues.push(`${intent.queueId}: publication retries exhausted; ${intent.error}`); continue; }
         if (!publicationDue(intent)) continue;
-        const { data: row, error } = await db.from("article_generation_queue").select("status").eq("id", intent.queueId).eq("workflow_mode", "agent_runner").maybeSingle();
-        if (error) throw new Error(error.message);
         if (!row || !["completed", "published"].includes(row.status)) continue;
         // Reserve retry durably before subprocess: process loss also consumes a bounded attempt.
         intent.attempts++;

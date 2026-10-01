@@ -38,6 +38,20 @@ test("unapproved and unfinished articles never reach publication", async () => {
 test("publication retries remain bounded even if the child dies before acknowledgement", () => {
   assert.equal(publicationDue({ version: 1, queueId: ids[0], authorizedAt: "", attempts: 6 }), false);
 });
+test("a verified manual recovery closes an exhausted outbox without a new release or retry reset", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-recovered-"));
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "published", result_slug: "recovered", production_url: "https://bloxodes.com/articles/recovered" }), { headers: { "Content-Type": "application/json" } });
+  try {
+    await authorizePublication(root, ids[0]);
+    const file = path.join(root, "tmp/article-publication", `${ids[0]}.json`);
+    const intent = JSON.parse(await readFile(file, "utf8"));
+    intent.attempts = 6; intent.error = "old cover failure"; await saveJson(file, intent);
+    await drainPublications(root, dev, async () => { assert.fail("already published: no new release"); });
+    const recovered = JSON.parse(await readFile(file, "utf8"));
+    assert.ok(recovered.publishedAt); assert.equal(recovered.attempts, 6); assert.equal(recovered.error, undefined);
+  } finally { globalThis.fetch = original; }
+});
 test("equivalent alt encodings pass while meaningfully different text stays different", () => {
   assert.equal(normalizeImageAlt("Woodsman&#39;s &amp; axe"), normalizeImageAlt("Woodsman's & axe"));
   assert.notEqual(normalizeImageAlt("Woodsman's axe"), normalizeImageAlt("Elemental's axe"));

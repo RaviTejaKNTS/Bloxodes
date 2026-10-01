@@ -16,7 +16,7 @@ export function wikiSandboxProbeArgs(writableRoot: string, help: string): string
     return ["sandbox", "--permission-profile", "wiki-readiness",
       "--config", 'permissions.wiki-readiness.extends=":workspace"',
       "--config", "permissions.wiki-readiness.network.enabled=true",
-      "--config", `permissions.wiki-readiness.filesystem.${JSON.stringify(writableRoot)}="write"`];
+      "--config", `permissions.wiki-readiness.filesystem={${JSON.stringify(writableRoot)}="write"}`];
   }
   return ["sandbox", ...(/Commands:[\s\S]*\blinux\b/.test(help) ? ["linux"] : []), ...wikiSandboxConfig(writableRoot)];
 }
