@@ -617,7 +617,9 @@ async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
   try {
     if (!row.result_root) throw new Error("Publication request has no artifact root.");
     const expectedRoot = path.join(worktree, "tmp", "wiki-automation", row.id);
-    if (!(await realpath(row.result_root)).startsWith(`${await realpath(expectedRoot)}${path.sep}`)) throw new Error("Publication root escapes the requested queue game.");
+    // Use the same canonical containment policy as builder recovery, including
+    // legacy artifacts directly under their exact queue directory.
+    await resolveWikiAttemptRoot(expectedRoot, row.result_root, row.attempts);
     const result = await readWorkflowResult(row, row.result_root);
     if (result.outcome !== "ready") throw new Error("Publication request is not ready.");
     const urls = await release(result);
