@@ -1,6 +1,16 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage } from "../wiki-execution";
+import { wikiCodexArgs, wikiSandboxProbeArgs, isWikiTechnicalFailure, wikiFailureMessage } from "../wiki-execution";
+
+test('sandbox readiness supports both CLI command generations without bypassing restrictions', () => {
+  const current = wikiSandboxProbeArgs('/state/game', '--permission-profile <NAME>');
+  assert.deepEqual(current.slice(0, 3), ['sandbox', '--permission-profile', 'wiki-readiness']);
+  assert.ok(current.includes('permissions.wiki-readiness.network.enabled=true'));
+  assert.ok(current.includes('permissions.wiki-readiness.filesystem."/state/game"="write"'));
+  const previous = wikiSandboxProbeArgs('/state/game', 'Commands:\n  linux Run a command');
+  assert.deepEqual(previous.slice(0, 2), ['sandbox', 'linux']);
+  assert.ok(previous.includes('sandbox_workspace_write.network_access=true'));
+});
 
 test('new and resumed sessions retain network, writable artifacts and sandbox restrictions', () => {
   for (const input of [['exec','--approve-for-me','--ephemeral','prompt'],['exec','resume','--json','session','prompt']]) {

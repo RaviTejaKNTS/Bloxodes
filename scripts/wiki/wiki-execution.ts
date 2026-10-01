@@ -11,6 +11,16 @@ export function wikiCodexArgs(args: string[], writableRoot: string): string[] {
     ...args.slice(1).filter(arg => arg !== "--ephemeral" && arg !== "--approve-for-me")];
 }
 
+export function wikiSandboxProbeArgs(writableRoot: string, help: string): string[] {
+  if (help.includes("--permission-profile")) {
+    return ["sandbox", "--permission-profile", "wiki-readiness",
+      "--config", 'permissions.wiki-readiness.extends=":workspace"',
+      "--config", "permissions.wiki-readiness.network.enabled=true",
+      "--config", `permissions.wiki-readiness.filesystem.${JSON.stringify(writableRoot)}="write"`];
+  }
+  return ["sandbox", ...(/Commands:[\s\S]*\blinux\b/.test(help) ? ["linux"] : []), ...wikiSandboxConfig(writableRoot)];
+}
+
 export function isWikiTechnicalFailure(message: string): boolean {
   return /\b(?:ENOTFOUND|EAI_AGAIN|ECONNRESET|ECONNREFUSED|ETIMEDOUT|EPERM|EACCES|EROFS|ENOENT)\b|bwrap:|sandbox|fetch failed|preview.*(?:bind|port|startup)|sitemap|publication.*(?:failed|timeout)|CLI.*(?:quota|usage limit)/i.test(message);
 }

@@ -3,7 +3,7 @@ import { spawnSync } from "node:child_process";
 import { mkdtemp, writeFile, rm, realpath, access } from "node:fs/promises";
 import path from "node:path";
 import { resolveWikiDevCredentials } from "../wiki/wiki-automation-env";
-import { wikiSandboxConfig } from "../wiki/wiki-execution";
+import { wikiSandboxProbeArgs } from "../wiki/wiki-execution";
 
 // No model turn or database mutation: exercise the nested CLI sandbox used by workers.
 async function main() {
@@ -28,8 +28,7 @@ async function main() {
     const env = { ...process.env, HOME: process.env.WIKI_AUTOMATION_MODEL_HOME || "/var/lib/bloxodes/wiki-model",
       CODEX_HOME: path.join(process.env.WIKI_AUTOMATION_MODEL_HOME || "/var/lib/bloxodes/wiki-model", ".codex") };
     const help = spawnSync(bin, ["sandbox", "--help"], { encoding: "utf8", env });
-    const args = ["sandbox", ...(/\blinux\b.*Run|Commands:[\s\S]*\blinux\b/.test(help.stdout) ? ["linux"] : []),
-      ...wikiSandboxConfig(await realpath(dir)), "--cd", root, process.execPath, probe];
+    const args = [...wikiSandboxProbeArgs(await realpath(dir), help.stdout), "--cd", root, process.execPath, probe];
     const result = spawnSync(bin, args, { cwd: root, env, encoding: "utf8", timeout: 60_000 });
     if (result.status !== 0) throw new Error(`Wiki model sandbox readiness failed: ${result.error?.message || result.stderr || result.stdout}`);
     process.stdout.write(result.stdout);
