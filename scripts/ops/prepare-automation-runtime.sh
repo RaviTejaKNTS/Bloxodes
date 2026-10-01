@@ -18,6 +18,12 @@ if [[ ! -e "$ROOT/state" ]]; then ln -s "$LEGACY/state" "$ROOT/state"; fi
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
 [[ -e "$RELEASE/tmp" ]] || ln -s "$ROOT/state" "$RELEASE/tmp"
 [[ -e "$RELEASE/.envs" ]] || ln -s "$SOURCE/.envs" "$RELEASE/.envs"
+# Codex protects project .aws as a read-only mount. Its mountpoint must exist
+# before the enclosing systemd filesystem becomes read-only.
+mkdir -p "$RELEASE/.aws"
+EXCLUDE=$(git -C "$RELEASE" rev-parse --git-path info/exclude)
+[[ "$EXCLUDE" == /* ]] || EXCLUDE="$RELEASE/$EXCLUDE"
+rg -qx '/.aws/' "$EXCLUDE" || printf '\n/.aws/\n' >> "$EXCLUDE"
 [[ "$(readlink -f "$RELEASE/tmp")" == "$(readlink -f "$ROOT/state")" ]]
 [[ "$(readlink -f "$RELEASE/.envs")" == "$SOURCE/.envs" ]]
 cd "$RELEASE"

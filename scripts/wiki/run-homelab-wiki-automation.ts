@@ -20,6 +20,7 @@ import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { readSessionState, saveSessionState, recoverStep, resumedCodexArgs } from "./wiki-session-recovery";
 import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-automation-env";
 import { resolveWikiAttemptRoot } from "./wiki-workspace-paths";
+import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage } from "./wiki-execution";
 
 type StatsGame = {
   universeId: number;
@@ -92,6 +93,7 @@ const productionEnvFile = path.resolve(process.env.WIKI_RELEASE_PRODUCTION_ENV_F
 const apply = process.argv.includes("--apply");
 const skipProduction = process.argv.includes("--skip-production-release");
 const releaseOnly = process.argv.includes("--release-only");
+const retryOnly = process.argv.includes("--retry-only");
 const queueId = process.env.WIKI_AUTOMATION_QUEUE_ID?.trim();
 const activeChildren = new Set<ChildProcess>();
 let stopRequested = false;
@@ -293,8 +295,19 @@ async function claimOrEnqueue(dev: SupabaseClient, lane: number): Promise<QueueR
   allocationTail = new Promise<void>((resolve) => { releaseAllocation = resolve; });
   await previous;
   try {
-    let row = await claim(dev, lane);
-    if (row || queueId) return row;
+    let row: QueueRow | null;
+    if (retryOnly && !queueId) {
+      const due = await dev.from("wiki_generation_queue").select("id").eq("status", "retry")
+        .lte("next_attempt_at", new Date().toISOString()).order("rank_at_claim").limit(1).maybeSingle();
+      if (due.error) throw new Error(`Could not inspect due wiki retries: ${due.error.message}`);
+      if (!due.data) return null;
+      const response = await dev.rpc("claim_wiki_generation_queue_item", {
+        p_worker: `${os.hostname()}-wiki-recovery-${lane}`, p_lease_minutes: leaseMinutes, p_queue_id: due.data.id
+      });
+      if (response.error) throw new Error(`Wiki recovery claim failed: ${response.error.message}`);
+      row = (Array.isArray(response.data) ? response.data[0] : response.data) || null;
+    } else row = await claim(dev, lane);
+    if (row || queueId || retryOnly) return row;
     const enqueued = await enqueueNext(dev);
     if (!enqueued) return null;
     row = await claim(dev, lane);
@@ -372,7 +385,7 @@ function sanitizeError(value: string, env: NodeJS.ProcessEnv): string {
 }
 
 async function runCommand(command: string, args: string[], env: NodeJS.ProcessEnv, timeoutMs?: number, sessionFile?: string) {
-  await new Promise<void>((resolve, reject) => {
+  return await new Promise<string>((resolve, reject) => {
     const child = spawn(command, args, {
       cwd: worktree, env, stdio: ["ignore", "pipe", "pipe"], shell: false, detached: process.platform !== "win32"
     });
@@ -380,7 +393,8 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
     let tail = "", pending = "", sessionWrite = Promise.resolve();
     child.stdout?.on("data", (chunk: Buffer) => {
       process.stdout.write(chunk);
-      if (!sessionFile) { tail = (tail + chunk.toString()).slice(-12000); return; }
+      tail = (tail + chunk.toString()).slice(-12000);
+      if (!sessionFile) return;
       pending += chunk.toString();
       const lines = pending.split("\n"); pending = lines.pop() || "";
       for (const line of lines) {
@@ -409,7 +423,7 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
       terminateProcessGroup(child, "SIGTERM");
       setTimeout(() => {
         terminateProcessGroup(child, "SIGKILL"); activeChildren.delete(child);
-        sessionWrite.then(() => code === 0 ? resolve() : reject(new Error(`${command} exited with ${code}: ${sanitizeError(tail, env)}`)), reject);
+        sessionWrite.then(() => code === 0 ? resolve(sanitizeError(tail, env)) : reject(new Error(`${command} exited with ${code}: ${sanitizeError(tail, env)}`)), reject);
       }, 1_000);
     });
   });
@@ -423,7 +437,7 @@ async function runDirectCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot
     NEXT_DIST_DIR: process.env.BLOXODES_AUTOMATION_RUNTIME === "1" ? ".next" : path.join(".next", "wiki-automation", relativeAttempt)
   };
   await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
-  await runCommand(codexBin, ["exec", "--sandbox", "workspace-write", "--add-dir", await realpath(resultRoot), ...args.slice(1).filter((arg) => arg !== "--ephemeral" && arg !== "--approve-for-me")], directEnv, timeoutMinutes * 60_000, path.join(resultRoot, "session.json"));
+  return await runCommand(codexBin, wikiCodexArgs(args, await realpath(resultRoot)), directEnv, timeoutMinutes * 60_000, path.join(resultRoot, "session.json"));
 }
 
 async function assertPreviewPortFree(port: number) {
@@ -651,6 +665,7 @@ async function retryDelay(dev: SupabaseClient): Promise<number | null> {
 async function runOne(dev: SupabaseClient, devCredentials: { url: string; serviceRole: string }, lane: number): Promise<boolean> {
   let activeRow: QueueRow | null = null;
   let leaseActive = false;
+  let activeSessionFile: string | undefined;
   try {
     const row = await claimOrEnqueue(dev, lane);
     if (!row) return false;
@@ -676,20 +691,27 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     const resultRoot = await resolveWikiAttemptRoot(queueRoot, row.result_root, row.attempts);
     await transition(dev, row, { result_root: resultRoot });
     const sessionFile = path.join(resultRoot, "session.json");
+    activeSessionFile = sessionFile;
     const env = modelEnvironment(devCredentials);
     const port = 3240 + (row.processing_slot || lane);
     const heartbeatTimer = setInterval(() => void heartbeat(dev, row).catch(console.error), 5 * 60_000);
     heartbeatTimer.unref();
     try {
     let result: WorkflowResult;
-    try { result = await readWorkflowResult(row, resultRoot); }
+    try {
+      result = await readWorkflowResult(row, resultRoot);
+      if (result.outcome === "blocked" && isWikiTechnicalFailure(result.outcomeReason || "")) {
+        throw new Error("Resume retained artifacts after a technical failure.");
+      }
+    }
     catch {
       const state = await readSessionState(sessionFile);
-      const prompt = state.sessionId ? "Continue the unfinished wiki and collection workflow in this session and write its workflow-result.json." : promptFor(row, resultRoot);
+      const prompt = state.sessionId ? "Continue the unfinished wiki and collection workflow in this session. Reuse retained research, datasets, images and finals. Repair technical publication/verification failures, verify in managed development, and write workflow-result.json. Record blocked only for unresolved editorial/evidence issues; technical tool failures must be reported explicitly." : promptFor(row, resultRoot);
       const args = state.sessionId ? resumedCodexArgs(state.sessionId, prompt, codexModel, codexReasoning)
         : buildCodexExecArgs({ worktree, model: codexModel, reasoningEffort: codexReasoning, prompt });
-      await runDirectCodex(args, env, resultRoot, port);
-      result = await readWorkflowResult(row, resultRoot);
+      const output = await runDirectCodex(args, env, resultRoot, port);
+      try { result = await readWorkflowResult(row, resultRoot); }
+      catch (error) { throw new Error(wikiFailureMessage(output, error instanceof Error ? error.message : String(error))); }
     }
     const syncDevelopment = async () => {
       result = await readWorkflowResult(row, resultRoot);
@@ -708,6 +730,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     };
 
     if (result.outcome === "blocked") {
+      if (isWikiTechnicalFailure(result.outcomeReason || "")) throw new Error(result.outcomeReason);
       await transition(dev, row, {
         status: "blocked",
         completed_at: new Date().toISOString(),
@@ -767,6 +790,10 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`[lane ${lane}] ${message}`);
+    if (activeSessionFile) {
+      const session = await readSessionState(activeSessionFile);
+      await saveSessionState(activeSessionFile, { ...session, lastError: message });
+    }
     if (leaseActive && activeRow?.lease_token && activeRow.lease_owner) {
       const terminal = activeRow.attempts >= activeRow.max_attempts;
       const delayMinutes = Math.min(60, 15 * 2 ** Math.max(0, activeRow.attempts - 1));
@@ -782,7 +809,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       }).eq("id", activeRow.id).eq("status", "processing")
         .eq("lease_token", activeRow.lease_token).eq("lease_owner", activeRow.lease_owner);
       if (failure.error) throw new Error(`Could not record wiki retry state: ${failure.error.message}`);
-      return true;
+      throw new Error(`Wiki workflow needs recovery: ${message}`);
     }
     throw error;
   }
@@ -808,6 +835,7 @@ async function main() {
     return;
   }
   let lock = await acquireAgentWorkLock(worktree, "wiki-automation");
+  if (!lock && retryOnly) { console.log("Recovery deferred while another article/wiki workflow owns the shared lease."); return; }
   while (!lock && !stopRequested) {
     console.log("Another article or wiki agent workflow is active; waiting 60 seconds without interrupting it.");
     await new Promise((resolve) => setTimeout(resolve, 60_000));
@@ -834,7 +862,7 @@ async function main() {
         }
         const worked = await runOne(dev, devCredentials, lane);
         if (worked) continue;
-        if (queueId) { console.log(`Requested queue row ${queueId} is not claimable.`); return; }
+        if (queueId || retryOnly) { console.log("No requested or due retry wiki row is claimable."); return; }
         releaseUnusedClaim();
         const delay = await retryDelay(dev);
         if (delay === null) {

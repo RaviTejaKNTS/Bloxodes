@@ -17,6 +17,7 @@ import {
 import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { assertCanonicalMediaUrls, toMediaPublicUrl } from "../shared/storage-public-url";
 import { fetchWithTransientRetries, TransientHttpError } from "../shared/transient-http";
+import { officialUniverseCover } from "../shared/official-universe-cover";
 
 type CliOptions = {
   files: string[];
@@ -269,7 +270,7 @@ async function pickUniverseCoverImage(sb: SupabaseAdminClient, universeId: numbe
   const iconUrl = (data as { icon_url?: unknown } | null)?.icon_url;
   const candidates = thumbs.length ? thumbs : typeof iconUrl === "string" && iconUrl.trim() ? [iconUrl] : [];
 
-  return pickRandom(candidates);
+  return candidates.length ? pickRandom(candidates) : await officialUniverseCover(universeId);
 }
 
 function isEditedArticleCover(value: string | null | undefined, slug: string): boolean {

@@ -11,6 +11,8 @@ When assigned a code-controlled stage, follow [stage ownership](../bloxodes-arti
 
 Use this after article research and parent brief approval for every article. The image pass is mandatory even when the article is not a location guide or collection. Do not write `final.json`.
 
+In the code-controlled `images` stage, **only `media.json` may change**. Treat `brief.md` as immutable approved research. Put all image targets, search evidence, omissions and readiness notes in the manifest entries. Skip the standalone brief-update step below. Reviewers change no artifacts; code records their decisions and applies accepted omissions.
+
 ## Workspace
 
 ```text

@@ -17,8 +17,8 @@ flock -n 9 || { echo 'Another activation is running.' >&2; exit 1; }
 [[ -r /etc/bloxodes/article-automation.env && -r /etc/bloxodes/wiki-automation.env ]]
 id "$MODEL" >/dev/null
 command -v setfacl >/dev/null
-SERVICES=(bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service bloxodes-wiki-builder.service bloxodes-wiki-publisher.service)
-TIMERS=(bloxodes-article-discovery.timer bloxodes-article-publication.timer bloxodes-wiki-builder.timer bloxodes-wiki-publisher.timer)
+SERVICES=(bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service bloxodes-wiki-builder.service bloxodes-wiki-publisher.service bloxodes-wiki-recovery.service)
+TIMERS=(bloxodes-article-discovery.timer bloxodes-article-publication.timer bloxodes-wiki-builder.timer bloxodes-wiki-publisher.timer bloxodes-wiki-recovery.timer)
 idle() {
   local service state pid
   for service in "${SERVICES[@]}"; do
@@ -32,7 +32,10 @@ idle() {
 idle
 BACKUP="$ROOT/activations/$(date -u +%Y%m%dT%H%M%SZ)-$SHA"
 mkdir -p "$BACKUP/units"
-for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do cp -a "/etc/systemd/system/$unit" "$BACKUP/units/$unit"; done
+for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do
+  if [[ -f "/etc/systemd/system/$unit" ]]; then cp -a "/etc/systemd/system/$unit" "$BACKUP/units/$unit";
+  else touch "$BACKUP/units/$unit.absent"; fi
+done
 readlink "$ROOT/current" > "$BACKUP/previous-current" || true
 ACTIVE=()
 for timer in "${TIMERS[@]}"; do
@@ -48,6 +51,11 @@ finish() {
   trap - EXIT
   if [[ "$SUCCESS" == 0 && "$CHANGED" == 1 ]]; then
     cp -a "$BACKUP/units/." /etc/systemd/system/
+    for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do
+      if [[ -f "$BACKUP/units/$unit.absent" ]]; then
+        rm -f "/etc/systemd/system/$unit" "/etc/systemd/system/$unit.absent"
+      fi
+    done
     if [[ -s "$BACKUP/previous-current" ]]; then
       ln -sfn "$(cat "$BACKUP/previous-current")" "$ROOT/current.rollback"
       mv -Tf "$ROOT/current.rollback" "$ROOT/current"
@@ -109,4 +117,6 @@ systemctl daemon-reload
 for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do cmp "$RELEASE/scripts/ops/systemd/$unit" "/etc/systemd/system/$unit"; done
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
 SUCCESS=1
+systemctl enable bloxodes-wiki-recovery.timer
+ACTIVE+=(bloxodes-wiki-recovery.timer)
 echo "Activated articles and wiki/collections at $SHA. Prior timer enablement/cadence retained. Rollback units: $BACKUP"

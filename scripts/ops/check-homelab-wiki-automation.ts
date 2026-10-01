@@ -85,6 +85,13 @@ async function main() {
     const result = spawnSync(codex, args, { encoding: "utf8", env: codexEnv });
     if (result.status !== 0) throw new Error(`Codex ${args.join(" ")} failed: ${result.stderr || result.stdout}`);
   }
+  if (!operatorCheck) {
+    const probe = spawnSync(process.execPath, ["--import", "tsx", "scripts/ops/check-wiki-model-sandbox.ts"], {
+      cwd: checkout, env: codexEnv, encoding: "utf8", timeout: 90_000
+    });
+    if (probe.status !== 0) throw new Error(probe.stderr || probe.stdout || "Wiki model sandbox readiness failed.");
+    process.stdout.write(probe.stdout);
+  }
   const browser = executable(["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "google-chrome", "chromium", "chromium-browser"]);
   if (!browser) throw new Error("Chrome or Chromium is required for rendered verification.");
 

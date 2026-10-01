@@ -216,3 +216,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 ### Emote command references
 
 `catalog/seed-emote-commands.ts` validates reviewed `data/roblox-emotes/commands.json` and upserts only changed command references with `npm run seed:emote-commands -- --apply`; dry-run is the default, and production requires `--allow-prod`. It checks linked rows are emote assets and triggers the dedicated command-page revalidation flow. `catalog/audit-emote-commands.ts` is read-only (`npm run audit:emote-commands`) and reports published references, linked Marketplace rows, duplicate names, thumbnail gaps, and optional baseline differences without deriving commands from item names. Both use the standard target env loader. See `dev-docs/pipelines/catalog.md`.
+
+### Automation recovery
+
+The wiki readiness command invokes `check-wiki-model-sandbox.ts` to test the nested CLI sandbox without model generation or database mutation. It checks writes, DNS/HTTPS, preview listener binding and read-only source. Prepare runtime mountpoints before activation. `wiki:homelab:run -- --apply --retry-only` claims only existing due retries, defers on the shared model lease and never discovers a new game; the restricted recovery service schedules it every fifteen minutes. Technical failures retain artifacts/session, release queue claims and fail the service. Image-stage workers change only `media.json`. The article importer can obtain missing official landscape cover metadata, and completion requires a hosted cover readback.

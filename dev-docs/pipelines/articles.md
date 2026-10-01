@@ -152,3 +152,9 @@ Activation verified September 7: runtime `cfadab0db53575c235535234185cea5120b56e
 ## Shared scheduled checkout
 
 Article and wiki/collection services now select the same versioned `bloxodes-automation-runtime/current` checkout, independent of the development branch. Artifact state survives release changes and legacy absolute paths remain aliases. Standard `.next` output and the shared lease keep this source checkout clean; scheduled wiki concurrency is one. Use `automation:runtime:prepare` followed by the unified `install-homelab-automation.sh` installer while jobs are idle. See [the homelab runtime contract](../infrastructure/homelab.md#shared-automation-runtime-september-14-2026) for permissions, schedules, migration and rollback. Existing content quality and publication gates are unchanged.
+
+### Cover and image-stage recovery (October 1, 2026)
+
+The prepared repair makes image-stage ownership explicit in both the skill and stage prompt: only `media.json` changes; approved `brief.md` stays immutable and image notes belong in the manifest. Article model workspaces precreate their nonsecret `.aws` mountpoint. Authoring workspace networking is explicit; reviewers retain read-only execution.
+
+When stored universe artwork is absent, the deterministic importer requests the exact official completed Roblox landscape thumbnail and accepts only HTTPS Roblox CDN URLs. It still generates/uploads an edited cover through the existing target storage path; it does not hotlink that image in public copy. Managed-development completion now also requires a hosted cover readback after final verification, matching the production prerequisite. Approved body-image omissions do not waive the feature-image requirement. Retained cover-blocked finals can be recovered without altering their approved text or approval hashes.

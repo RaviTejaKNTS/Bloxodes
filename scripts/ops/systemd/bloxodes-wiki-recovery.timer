@@ -1,0 +1,11 @@
+[Unit]
+Description=Recover due wiki jobs every fifteen minutes
+
+[Timer]
+OnCalendar=*-*-* *:00/15:00
+Persistent=true
+RandomizedDelaySec=30s
+Unit=bloxodes-wiki-recovery.service
+
+[Install]
+WantedBy=timers.target
