@@ -25,6 +25,8 @@ These collections describe one game's durable systems and items—pets, weapons,
 
 ## Source and Data Ownership
 
+October 1 automation repair: `verify:wiki-final` syncs one explicit task-local final through `sync:game-wiki-runtime`, with exact slug/universe checks and a managed-development-only guard. It no longer calls the registry-only seed script. The workflow keeps rendered desktop/mobile QA; headless Chromium is the fallback when the product-native Browser tools are absent or explicitly unavailable, with screenshots and DOM findings retained in the workspace. Technical backend/registry failures remain retryable; source/evidence gates are unchanged.
+
 - Supabase is the only runtime source for collection page copy, display metadata, immutable dataset revisions, item rows, and media keys. Web, mobile, tools, sitemaps, and related-content loaders do not read collection JSON from the repository.
 - Repository game-collection and quiz datasets have been removed. Existing collection work starts by exporting the published database revision to `tmp/content-workspace/<game-slug>/collections/<collection-slug>/`; new work creates the same ignored workspace contract. Each collection workspace owns `dataset.json`, `media/`, `final.json`, and `runtime-manifest.json` until an immutable database/R2 revision is published.
 - `wiki_pages` owns hub copy, controls, tips, metadata, and game identity.

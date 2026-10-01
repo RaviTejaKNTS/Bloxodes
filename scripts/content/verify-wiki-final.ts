@@ -6,6 +6,7 @@ import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
+import { wikiVerificationSyncArgs } from "../shared/wiki-verification-plan";
 
 type CliOptions = {
   baseUrl: string;
@@ -82,10 +83,7 @@ async function findFile(candidates: string[]) {
 async function readWikiFinal(file: string, expectedGame: string): Promise<WikiFinal> {
   const parsed = JSON.parse(await readFile(file, "utf8")) as WikiFinal;
   validateWikiControlsJson(parsed.controls_json, "final.json controls_json");
-  if (parsed.slug && parsed.slug.trim().toLowerCase() !== expectedGame) {
-    // The seed script also checks this; this warning keeps verifier output direct when the path shape is different.
-    console.warn(`Warning: final.json slug is ${parsed.slug}`);
-  }
+  wikiVerificationSyncArgs(file, expectedGame, parsed, process.env.SUPABASE_URL);
   return parsed;
 }
 
@@ -158,15 +156,7 @@ async function main() {
   const finalJson = await readWikiFinal(finalJsonPath, options.game);
 
   await runCommand("npm", ["run", "content:check-copy", "--", finalJsonPath]);
-  await runCommand("npm", [
-    "run",
-    "seed:game-wiki-pages",
-    "--",
-    "--game",
-    options.game,
-    "--final-json-root",
-    options.finalJsonRoot,
-  ]);
+  await runCommand("npm", wikiVerificationSyncArgs(finalJsonPath, options.game, finalJson, process.env.SUPABASE_URL));
   await verifyReadback(options.game, finalJson);
 
   const url = `${options.baseUrl}/wiki/${options.game}`;

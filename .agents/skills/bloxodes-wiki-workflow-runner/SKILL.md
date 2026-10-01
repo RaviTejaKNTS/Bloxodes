@@ -49,7 +49,9 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 npm run verify:wiki-final -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>
 ```
 
-9. If the verifier passes, open the verified `/wiki/<game-slug>` link in the Codex Browser.
+The verifier publishes and reads back the supplied task-local final in managed development. It does not require a hardcoded game registry entry and refuses any other database target or mismatched game identity.
+
+9. If the verifier passes, open the verified `/wiki/<game-slug>` link in the product-native collaborative Browser. First check `preview_status` and, when needed, `preview_open`. If those tools are absent or explicitly report unsupported/unavailable, use headless Chrome/Chromium through Playwright; `scripts/content/article-browser.ts` exports `launchArticleBrowser`. Check desktop/mobile rendering, headings, canonical/metadata, images and controls, and save screenshots plus DOM findings in the task workspace. Rendered QA remains required.
 10. Return paths, localhost link, blocked reason if any, and remaining risks.
 
 ## Parent Checks

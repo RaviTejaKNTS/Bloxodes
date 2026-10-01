@@ -20,7 +20,7 @@ import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { readSessionState, saveSessionState, recoverStep, resumedCodexArgs } from "./wiki-session-recovery";
 import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-automation-env";
 import { resolveWikiAttemptRoot } from "./wiki-workspace-paths";
-import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage } from "./wiki-execution";
+import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage, WIKI_RENDERED_PREVIEW_GUIDANCE } from "./wiki-execution";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 
 type StatsGame = {
@@ -359,6 +359,8 @@ Workflow:
 For collection subagent handoffs, send only the skill, game name, and collection name. Let the skills supply the instructions.
 
 Runtime context: use the artifact root above instead of the skills' default workspace. The model works in managed development; trusted code publishes to production after verification. Use the reserved preview port and stop the preview when finished. Keep tracked source unchanged. Task-local publication uses scripts/collections/sync-game-collection-runtime.ts and scripts/collections/sync-game-wiki-runtime.ts.
+
+${WIKI_RENDERED_PREVIEW_GUIDANCE}
 
 Finish by writing ${path.join(resultRoot, "workflow-result.json")} with exactly:
 {
@@ -710,7 +712,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     }
     catch {
       const state = await readSessionState(sessionFile);
-      const prompt = state.sessionId ? "Continue the unfinished wiki and collection workflow in this session. Reuse retained research, datasets, images and finals. Repair technical publication/verification failures, verify in managed development, and write workflow-result.json. Record blocked only for unresolved editorial/evidence issues; technical tool failures must be reported explicitly." : promptFor(row, resultRoot);
+      const prompt = state.sessionId ? `Continue the unfinished wiki and collection workflow in this session. Reuse retained research, datasets, images and finals. Repair technical publication/verification failures, verify in managed development, and write workflow-result.json. Record blocked only for unresolved editorial/evidence issues; technical tool failures must be reported explicitly. Artifact root: ${resultRoot}. Reserved preview port: ${port}.\n${WIKI_RENDERED_PREVIEW_GUIDANCE}` : promptFor(row, resultRoot);
       const args = state.sessionId ? resumedCodexArgs(state.sessionId, prompt, codexModel, codexReasoning)
         : buildCodexExecArgs({ worktree, model: codexModel, reasoningEffort: codexReasoning, prompt });
       const output = await runDirectCodex(args, env, resultRoot, port);
@@ -728,7 +730,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       }
     };
     const repair = async (sessionId: string, error: string) => {
-      const prompt = `The outer publication step failed: ${error}\nFix the affected artifacts in this existing workflow and update workflow-result.json. Verify in managed development. Trusted code will retry publication; do not access production.`;
+      const prompt = `The outer publication step failed: ${error}\nFix the affected artifacts in this existing workflow and update workflow-result.json. Verify in managed development. Trusted code will retry publication; do not access production.\n${WIKI_RENDERED_PREVIEW_GUIDANCE}`;
       await runDirectCodex(resumedCodexArgs(sessionId, prompt, codexModel, codexReasoning), env, resultRoot, port);
       result = await readWorkflowResult(row, resultRoot);
     };

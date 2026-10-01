@@ -24,7 +24,7 @@ test('new and resumed sessions retain network, writable artifacts and sandbox re
   }
 });
 test('technical blockers remain recoverable, evidence gaps remain editorial', () => {
-  for(const error of ['Supabase ENOTFOUND','preview EPERM','bwrap: read-only filesystem','Published wiki URLs are not yet in the sitemap'])assert.equal(isWikiTechnicalFailure(error),true);
+  for(const error of ['Supabase ENOTFOUND','preview EPERM','bwrap: read-only filesystem','Published wiki URLs are not yet in the sitemap','Browser runtime had no available backend','registry-only seed cannot recognize the unregistered hub'])assert.equal(isWikiTechnicalFailure(error),true);
   assert.equal(isWikiTechnicalFailure('No reliable source identifies these weapons.'),false);
   assert.match(wikiFailureMessage('bwrap: Cannot mkdir .aws: Read-only file system','Missing workflow-result.json'),/bwrap:.*Missing workflow/);
 });

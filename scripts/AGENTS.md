@@ -219,6 +219,8 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 
 ### Automation recovery
 
+`verify:wiki-final` writes and verifies only the explicitly supplied task-local hub in managed development through `sync:game-wiki-runtime`. It validates exact slug/universe identity before mutation, requires no hardcoded registry, and cannot target production. Browser backend unavailability uses rendered headless Chromium QA rather than skipping the gate.
+
 The wiki readiness command invokes `check-wiki-model-sandbox.ts` to test the nested CLI sandbox without model generation or database mutation. It checks writes, DNS/HTTPS, preview listener binding and read-only source. Prepare runtime mountpoints before activation. `wiki:homelab:run -- --apply --retry-only` claims only existing due retries, defers on the shared model lease and never discovers a new game; the restricted recovery service schedules it every fifteen minutes. Technical failures retain artifacts/session, release queue claims and fail the service. Image-stage workers change only `media.json`. The article importer can obtain missing official landscape cover metadata, and completion requires a hosted cover readback.
 
 `shared/revalidate-published-content.ts` is trusted publication code only. It requires the production target and its protected `REVALIDATE_SECRET`, sends an exact article/wiki batch to `/api/revalidate`, and rejects unsuccessful cache purges before live verification. Never pass this credential to model execution.
