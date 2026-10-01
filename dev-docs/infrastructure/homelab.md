@@ -1,7 +1,7 @@
 # Homelab
 
 Status: Article and wiki/collection automation activated on the shared versioned runtime
-Last verified: 2026-09-24 (wiki builder startup recovery; other evidence retains its dated scope)
+Last verified: 2026-10-01 (shared automation activation, restricted startup and timer state; older evidence retains its dated scope)
 Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
 ## Host
@@ -161,3 +161,11 @@ Legacy wiki jobs may retain artifacts directly under their exact queue UUID dire
 The trusted publisher reuses this same containment helper rather than a separate prefix rule, so verified legacy work reaches publication under the identical boundary.
 
 First installation suspends only timers captured as active, so an absent new recovery timer cannot abort activation. Failed preflight restores the exact prior active timer set. Provider workspace-routing timeouts are technical failures, never evidence-based rejection.
+
+### Repair activation and owner holds verified October 1, 2026
+
+Installed runtime: `fa7a24cc5cdea529cc7867cf81f6828c9bd6bf78`. The final activation passed nested restricted sandbox checks (shell, artifact writes, DNS/HTTPS, listener binding, source-write denial), managed-development queue/media readiness and a real `/wiki` preview returning HTTP 200 with a clean release checkout. Receipt: `activations/20261001T100422Z-fa7a24cc5cdea529cc7867cf81f6828c9bd6bf78`. The trusted wiki publisher subsequently exited successfully from this runtime. A separate restricted runner dry run selected Build and Kill Zombies, universe `10741654282`, without claiming or writing content. Provider saved-session execution/resumption had also passed earlier. These startup checks do not claim that a new full content batch has completed.
+
+The owner explicitly stopped historical wiki recovery because those games are being handled separately. Slayers 2, Clean all the leaves, Illegal Soccer, +1 Loot To Forge and Karinderya are `blocked` with cleared leases and retry timestamps; attempt history and saved artifacts remain intact. No recovery or production wiki publication is required to finish this repair. `bloxodes-wiki-recovery.timer` is disabled and inactive. The installer currently enables this optional timer on activation, so preserve the owner's disabled choice after any future installation unless separately authorized. Do not reopen these held rows automatically.
+
+All four normal timers remain enabled and active: article discovery at 00:00/06:00/12:00/18:00 IST, article publication every fifteen minutes, wiki builder daily at 01:00 plus up to ten minutes jitter, and trusted wiki publication every minute. At final verification, the next article discovery was October 1 at 18:00 and the next wiki builder October 2 at 01:03:14 IST. The final article from the preceding batch was allowed to finish before runtime activation; the subsequent wiki recovery was stopped only on the owner's explicit instruction.
