@@ -1,7 +1,7 @@
 # Codes Pipeline
 
 Status: Active
-Last verified: 2026-08-13
+Last verified: 2026-10-02
 Evidence: code/schema rules, installed VPS cron, production read-only counts, and route/revalidation contracts
 
 ## Ownership
@@ -53,4 +53,4 @@ A failed provider no longer prevents trying another configured source in schedul
 
 The October 2 checks confirmed that Mining Simulator 2 and the original PLS Donate But Infinite Robux RobloxDen URLs return 404. RobloxDen's public search has no source matching their original place IDs. Similarly named replacements point to different experiences, so no replacement URL or code was entered manually.
 
-The case-insensitive upsert migration is verified in managed development at version `20261002105551`. Lower-priority observations preserve stronger data, equal-priority case variants preserve the stored code spelling, and higher-priority reactivation updates exactly one row and its timestamp. Production schema application is pending. The scraper/runtime fixes are deployed in the web and worker at `34b925cca7788e7db83e58d640031e89ffe01cec`.
+The case-insensitive upsert migration is verified in managed development at version `20261002105551`. Lower-priority observations preserve stronger data, equal-priority case variants preserve the stored code spelling, and higher-priority reactivation updates exactly one row and its timestamp. The owner-approved production schema application and ledger readback passed at SHA `339b177b3c2766a2c324da4d75d28dec74c0abd2`. The scraper/runtime fixes are deployed in the web and worker at `34b925cca7788e7db83e58d640031e89ffe01cec`.

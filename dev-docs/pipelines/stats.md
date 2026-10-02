@@ -1,7 +1,7 @@
 # Stats Pipelines
 
 Status: Active; worker packaging guard deployed and verified
-Last verified: 2026-08-14
+Last verified: 2026-10-02
 Evidence: checked-in/installed cron, worker and Northflank logs, production DB/API/health, container inspection, and worker packaging regression tests
 
 ## Universe Stats Flow

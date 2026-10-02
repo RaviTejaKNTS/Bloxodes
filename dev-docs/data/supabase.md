@@ -1,7 +1,7 @@
 # Supabase
 
 Status: Active; production and managed development include Red Dead and the shared collectible page type
-Last verified: 2026-09-07
+Last verified: 2026-10-02
 Evidence: official Supabase documentation, managed-development migration/readiness/advisor checks, production transactional release/readback, VPS container/process inspection, Edge Function checksum/smoke, and public health
 
 ## Managed Development
@@ -81,4 +81,6 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 
 The owner reconnected the authenticated connector to managed-development project `bbtcaurrtyoukvjbxbbj`. Both repair migrations are applied there under the committed versions `20261002105551` and `20261002111156`. Rollback-only fixtures passed case-insensitive code upsert, provider priority, reactivation timestamps, repeated bundle insertion and partial bundle upsert. There were zero duplicate live canonical keys. Managed-development readiness passed seven schema/API checks. Security and performance advisors reported existing warnings and informational findings; neither reported an error.
 
-Production functions `set_roblox_catalog_item_identity` and `get_roblox_item_pipeline_health` belong to `supabase_admin`. The ordinary `postgres` role is not a member, so a plan using that role fails and rolls back. The schema release command accepts explicit `--database-role supabase_admin` for this ownership boundary, retaining exact-SHA, clean-checkout, ledger, transaction and apply-confirmation guards. Dokploy transport uses the same allowlisted role and now exposes PostgreSQL errors on failure. Production application remains pending the successful final plan and explicit schema approval.
+Production functions `set_roblox_catalog_item_identity` and `get_roblox_item_pipeline_health` belong to `supabase_admin`. The ordinary `postgres` role is not a member, so a plan using that role fails and rolls back. The schema release command accepts explicit `--database-role supabase_admin` for this ownership boundary, retaining exact-SHA, clean-checkout, ledger, transaction and apply-confirmation guards. Dokploy transport uses the same allowlisted role and now exposes PostgreSQL errors on failure. After the owner approved these exact two versions, production plan/apply passed at SHA `339b177b3c2766a2c324da4d75d28dec74c0abd2`. The ledger contains both versions, all 256 duplicate legacy bundle aliases are retired, duplicate live keys are zero, and SLA health fields remain intact. The live public/extensions schema snapshot was regenerated after application.
+
+The REST readiness repair initially left the socat proxy attached to the removed REST container's network namespace. Authenticated reads returned 502 until the proxy reattached. The proxy is now a Compose service named `rest-proxy`, with `network_mode: service:rest` and a healthy/restart dependency on REST. Future REST maintenance must reconcile `rest rest-proxy` together through the existing base and PG17 Compose files. Readiness, proxy namespace ownership, authenticated API traffic and app health were checked after repair. [Docker documents dependency startup and restart behavior](https://docs.docker.com/compose/how-tos/startup-order/).

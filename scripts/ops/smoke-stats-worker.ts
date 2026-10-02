@@ -14,6 +14,7 @@ const requiredRuntimeFiles = [
   "scripts/universes/audit-universe-stats-workflow.ts",
   "scripts/codes/update-codes.ts",
   "scripts/catalog/enrich-roblox-catalog-items.ts",
+  "scripts/catalog/import-robloxden-free-items.py",
   "scripts/items/catalog-refresh-ack.ts",
   "scripts/items/update-item-hourly-stats.ts",
   "scripts/ops/reconcile-worker-ledger.ts",

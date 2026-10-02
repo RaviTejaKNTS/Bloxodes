@@ -1,7 +1,7 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-08-15
+Last verified: 2026-10-02
 Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
 ## Normal Path
@@ -101,3 +101,5 @@ The dedicated homelab Bloxodes public key was appended to the existing `codex-ad
 This repair must preserve disabled services and current cron ownership. Install only the changed wrapper and active job entries, retaining owner-disabled entries and unrelated crontab blocks. Build the worker with the explicit released SHA and smoke its candidate before promotion. Homelab runtime activation waits for all existing jobs to finish and preserves the optional recovery timer state. Event runners and GitHub monitoring are excluded.
 
 October 2 repairs released as `34b925cca7788e7db83e58d640031e89ffe01cec`. The production deploy succeeded and `/api/health?scope=deploy` returned that SHA with a healthy database. The VPS worker candidate passed the expanded smoke check and promoted at the same SHA. Its wrapper and selected WARM/ledger cron changes are installed; unrelated jobs and legacy event entries stayed unchanged. The active REST readiness listener now binds IPv4 loopback and is healthy. Schema release accepts explicit `--database-role supabase_admin` for functions owned by that administrator; the default stays `postgres`.
+
+The existing `alpine/socat` REST proxy is now Compose-owned as `rest-proxy`, sharing the REST service namespace with an explicit healthy/restart dependency. Reconcile the pair with `docker compose -f docker-compose.yml -f docker-compose.pg17.yml up -d rest rest-proxy`; do not replace REST alone with `--no-deps`. Verify that proxy `HostConfig.NetworkMode` is `container:<current REST container ID>`, `postgrest --ready` succeeds, an authenticated public REST read succeeds, and the web health check is healthy. The declaration avoids leaving a manually launched proxy attached to a removed container. This operation controls the existing active pair only.

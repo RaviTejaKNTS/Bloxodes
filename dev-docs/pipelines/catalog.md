@@ -1,7 +1,7 @@
 # Global Roblox Catalog Pipeline
 
 Status: Active
-Last verified: 2026-08-29
+Last verified: 2026-10-02
 Evidence: `/catalog` route contracts, catalog/music/decal/free-item scripts, checked-in VPS schedules, local dataset ownership, and the latest production row-count sample
 
 ## Scope
@@ -65,4 +65,6 @@ Enrichment uses the same tier intervals as stats, including 21 days for WARM, in
 
 A prepared forward migration retires duplicate positive-ID legacy bundle aliases from live lists and refresh queues, while preserving source rows and all item history. New bundle inserts use negative internal IDs and a unique index protects active canonical keys. Existing stats detail lookup already falls back from positive public IDs to negative bundle rows. The health RPC counts duplicate live keys. This database migration remains unapplied until managed-development SQL verification succeeds.
 
-October 2 deployment verification: worker `34b925cca7788e7db83e58d640031e89ffe01cec` and the repaired wrapper are installed. A 30-item WARM batch passed and acknowledged matching catalog refresh tasks. The formerly skipped free-item candidate job was launched through its existing active pipeline with bounded shared-lock waiting. Duplicate alias migration passed managed-development fixtures; production application is still pending.
+October 2 deployment verification: worker `34b925cca7788e7db83e58d640031e89ffe01cec` and the repaired wrapper are installed. A 30-item WARM batch passed and acknowledged matching catalog refresh tasks. The formerly skipped free-item candidate job was launched through its existing active pipeline with bounded shared-lock waiting. Duplicate alias migration passed managed-development fixtures and the approved production application. Production readback found 256 retired aliases, zero duplicate live keys, and preserved SLA health fields.
+
+The candidate importer now honors the worker's `process-only` environment without requiring an env file inside `/app`. Workstation runs keep the existing private env profile, with process values taking precedence. Missing credentials and non-development import guards remain explicit. A worker run uncovered this file requirement after the lock repair allowed the job to execute; the credential guard and process-only smoke check passed after correction.

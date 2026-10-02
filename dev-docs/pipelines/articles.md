@@ -3,7 +3,7 @@
 Release handoff (September 7, 2026): the exact-ID publisher accepts completed `tmp/article-pipeline/<run>/content/final.json` artifacts as well as legacy content workspaces. Pipeline publication checks the queue identity, completed editorial decision, artifact hashes, and final technical stage results. Promotion rewrites isolated release copies, preserving approved originals and their hashes; published-row verification maps approved managed-development URLs to their production equivalents. A focused release regression checks valid, blocked, changed, incomplete, and escaped artifact paths.
 
 Status: Code-controlled article stages with Luna authoring/review, managed-development technical QA, and guarded exact-row automatic production release
-Last verified: 2026-09-06
+Last verified: 2026-10-02
 Evidence: September 6 code/skill implementation, process/queue/recovery tests, TypeScript checks, host env:doctor and writer readiness, plus a live owned-preview start/HTTP/stop test. The first live Luna max canary hit an account usage limit during images. A later manual Fisch appraisal run completed all stages after an internal-link correction and a technical import-environment fix; it remained managed-development only. The scheduled service entrypoint was inspected read-only and an older in-flight batch was left running. Earlier production-health evidence below retains its original date; no production publication is part of this implementation test.
 
 ## Editorial ownership

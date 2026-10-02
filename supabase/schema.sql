@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict YeeCPcDuZvVkRZVCMHmXFsYbCAyUczL8ziOkrcjweakny2VY9XxfieQymi7pdgB
+\restrict Vmov9zqeGXJVdTNQycVxcRhyRM2DF37iIDmJF93AdpE5n6dnTcSlSd9Dsw1lolS
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -1468,6 +1468,23 @@ $$;
 ALTER FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") OWNER TO "postgres";
 
 --
+-- Name: enqueue_emote_command_revalidation(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION "public"."enqueue_emote_command_revalidation"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'public'
+    AS $$
+begin
+  perform public.enqueue_revalidation('catalog', 'roblox-emote-commands', 'emote_commands_' || lower(tg_op));
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."enqueue_emote_command_revalidation"() OWNER TO "postgres";
+
+--
 -- Name: enqueue_free_items_catalog_scope("text", "text", "text"); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -1796,7 +1813,7 @@ CREATE FUNCTION "public"."get_roblox_item_pipeline_health"() RETURNS "jsonb"
       'stats_stale_7d', (select count(*) from eligible where last_item_stats_refreshed_at is null or last_item_stats_refreshed_at < now() - interval '7 days'),
       'stats_overdue', (select count(*) from eligible where next_item_stats_refresh_at is null or next_item_stats_refresh_at <= now()),
       'broken_media', (select count(*) from eligible where thumbnail_http_status >= 400),
-      'duplicate_canonical_keys', (select count(*) from (select catalog_item_key from public.roblox_catalog_items group by catalog_item_key having count(*) > 1) duplicates),
+      'duplicate_canonical_keys', (select count(*) from (select catalog_item_key from public.roblox_catalog_items where is_deleted = false group by catalog_item_key having count(*) > 1) duplicates),
       'tiers', coalesce((select jsonb_object_agg(item_stats_tier, item_count) from (select item_stats_tier, count(*) item_count from eligible group by item_stats_tier) tier_counts), '{}'::jsonb),
       'statuses', coalesce((select jsonb_object_agg(catalog_status, item_count) from (select catalog_status, count(*) item_count from public.roblox_catalog_items group by catalog_status) status_counts), '{}'::jsonb)
     ),
@@ -5144,6 +5161,14 @@ CREATE FUNCTION "public"."set_roblox_catalog_item_identity"() RETURNS "trigger"
     AS $$
 begin
   new.item_type := case when new.item_type = 'Bundle' then 'Bundle' else 'Asset' end;
+  if new.item_type = 'Bundle' and new.asset_id > 0 then
+    if tg_op = 'INSERT' then
+      new.asset_id := -new.asset_id;
+    elsif exists (select 1 from public.roblox_catalog_items canonical
+      where canonical.asset_id = -new.asset_id and canonical.item_type = 'Bundle') then
+      new.is_deleted := true;
+    end if;
+  end if;
   new.roblox_item_id := case when new.item_type = 'Bundle' then abs(new.asset_id) else new.asset_id end;
   new.catalog_item_key := new.item_type || ':' || new.roblox_item_id::text;
   return new;
@@ -7375,44 +7400,26 @@ ALTER FUNCTION "public"."trg_search_index_wiki_pages"() OWNER TO "postgres";
 
 CREATE FUNCTION "public"."upsert_code"("p_code_page_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer DEFAULT 0) RETURNS "void"
     LANGUAGE "plpgsql"
+    SET "search_path" TO ''
     AS $$
 declare
-  v_code text := trim(p_code);
-  v_provider_priority integer := coalesce(p_provider_priority, 0);
+  v_code text := btrim(p_code);
+  v_priority integer := coalesce(p_provider_priority, 0);
 begin
-  if v_code is null or v_code = '' then
-    return;
-  end if;
-
-  if exists (
-    select 1
-    from public.codes
-    where code_page_id = p_code_page_id
-      and upper(code) = upper(v_code)
-      and provider_priority > v_provider_priority
-  ) then
-    update public.codes
-    set last_seen_at = now()
-    where code_page_id = p_code_page_id
-      and upper(code) = upper(v_code)
-      and provider_priority > v_provider_priority;
-    return;
-  end if;
-
-  insert into public.codes (code_page_id, code, status, rewards_text, level_requirement, is_new, provider_priority)
-  values (p_code_page_id, v_code, p_status, p_rewards_text, p_level_requirement, p_is_new, v_provider_priority)
-  on conflict (code_page_id, code) do update
-  set
-    status = excluded.status,
-    rewards_text = excluded.rewards_text,
-    level_requirement = excluded.level_requirement,
-    is_new = excluded.is_new,
-    provider_priority = greatest(public.codes.provider_priority, excluded.provider_priority),
+  if v_code is null or v_code = '' then return; end if;
+  insert into public.codes as existing
+    (code_page_id, code, status, rewards_text, level_requirement, is_new, provider_priority)
+  values (p_code_page_id, v_code, p_status, p_rewards_text, p_level_requirement, p_is_new, v_priority)
+  on conflict (code_page_id, (upper(code))) do update set
+    code = case when excluded.provider_priority > existing.provider_priority then excluded.code else existing.code end,
+    status = case when excluded.provider_priority >= existing.provider_priority then excluded.status else existing.status end,
+    rewards_text = case when excluded.provider_priority >= existing.provider_priority then excluded.rewards_text else existing.rewards_text end,
+    level_requirement = case when excluded.provider_priority >= existing.provider_priority then excluded.level_requirement else existing.level_requirement end,
+    is_new = case when excluded.provider_priority >= existing.provider_priority then excluded.is_new else existing.is_new end,
+    provider_priority = greatest(existing.provider_priority, excluded.provider_priority),
     last_seen_at = now(),
-    first_seen_at = case
-      when public.codes.status = 'expired' and excluded.status = 'active' then now()
-      else public.codes.first_seen_at
-    end;
+    first_seen_at = case when excluded.provider_priority >= existing.provider_priority
+      and existing.status = 'expired' and excluded.status = 'active' then now() else existing.first_seen_at end;
 end;
 $$;
 
@@ -10045,6 +10052,35 @@ CREATE VIEW "public"."roblox_decal_ids_ranked_view" WITH ("security_invoker"='tr
 ALTER VIEW "public"."roblox_decal_ids_ranked_view" OWNER TO "supabase_admin";
 
 --
+-- Name: roblox_emote_commands; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE "public"."roblox_emote_commands" (
+    "code" "text" NOT NULL,
+    "name" "text" NOT NULL,
+    "command" "text" NOT NULL,
+    "asset_id" bigint,
+    "kind" "text" NOT NULL,
+    "description" "text" NOT NULL,
+    "requirements" "text" NOT NULL,
+    "source_urls" "jsonb" NOT NULL,
+    "verification_method" "text" NOT NULL,
+    "verified_at" timestamp with time zone NOT NULL,
+    "sort_order" integer DEFAULT 0 NOT NULL,
+    "is_published" boolean DEFAULT false NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "roblox_emote_commands_check" CHECK ((("kind" <> 'default'::"text") OR ("asset_id" IS NULL))),
+    CONSTRAINT "roblox_emote_commands_check1" CHECK ((("kind" <> 'avatar'::"text") OR ("asset_id" IS NOT NULL))),
+    CONSTRAINT "roblox_emote_commands_command_check" CHECK ((("command" ~~ '/e %'::"text") AND ("command" !~ '[\r\n]'::"text"))),
+    CONSTRAINT "roblox_emote_commands_kind_check" CHECK (("kind" = ANY (ARRAY['default'::"text", 'avatar'::"text"]))),
+    CONSTRAINT "roblox_emote_commands_source_urls_check" CHECK ((("jsonb_typeof"("source_urls") = 'array'::"text") AND ("jsonb_array_length"("source_urls") > 0))),
+    CONSTRAINT "roblox_emote_commands_verification_method_check" CHECK (("verification_method" = ANY (ARRAY['official_documentation'::"text", 'source_documentation'::"text", 'in_game_test'::"text"])))
+);
+
+
+ALTER TABLE "public"."roblox_emote_commands" OWNER TO "postgres";
+
+--
 -- Name: roblox_font_ids; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -12313,6 +12349,14 @@ ALTER TABLE ONLY "public"."roblox_decal_ids"
 
 
 --
+-- Name: roblox_emote_commands roblox_emote_commands_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "public"."roblox_emote_commands"
+    ADD CONSTRAINT "roblox_emote_commands_pkey" PRIMARY KEY ("code");
+
+
+--
 -- Name: roblox_font_ids roblox_font_ids_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -13630,6 +13674,13 @@ CREATE INDEX "idx_roblox_catalog_items_verified_free" ON "public"."roblox_catalo
 
 
 --
+-- Name: idx_roblox_catalog_live_canonical_key; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX "idx_roblox_catalog_live_canonical_key" ON "public"."roblox_catalog_items" USING "btree" ("catalog_item_key") WHERE ("is_deleted" = false);
+
+
+--
 -- Name: idx_roblox_catalog_refresh_queue_lease; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -14834,6 +14885,13 @@ CREATE UNIQUE INDEX "red_dead_wiki_pages_slug_lower_key" ON "public"."red_dead_w
 
 
 --
+-- Name: roblox_emote_commands_asset_id_idx; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "roblox_emote_commands_asset_id_idx" ON "public"."roblox_emote_commands" USING "btree" ("asset_id");
+
+
+--
 -- Name: wiki_generation_queue_lease_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -14859,6 +14917,13 @@ CREATE INDEX "wiki_generation_queue_ready_idx" ON "public"."wiki_generation_queu
 --
 
 CREATE UNIQUE INDEX "wiki_generation_queue_slug_unique_idx" ON "public"."wiki_generation_queue" USING "btree" ("lower"("wiki_slug"));
+
+
+--
+-- Name: roblox_emote_commands emote_commands_revalidation; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER "emote_commands_revalidation" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_emote_commands" FOR EACH STATEMENT EXECUTE FUNCTION "public"."enqueue_emote_command_revalidation"();
 
 
 --
@@ -16275,6 +16340,14 @@ ALTER TABLE ONLY "public"."roblox_decal_id_sources"
 
 
 --
+-- Name: roblox_emote_commands roblox_emote_commands_asset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "public"."roblox_emote_commands"
+    ADD CONSTRAINT "roblox_emote_commands_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE RESTRICT;
+
+
+--
 -- Name: roblox_universe_badges roblox_universe_badges_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -17165,6 +17238,12 @@ CREATE POLICY "roblox_decal_ids_public_read" ON "public"."roblox_decal_ids" FOR 
 
 
 --
+-- Name: roblox_emote_commands; Type: ROW SECURITY; Schema: public; Owner: postgres
+--
+
+ALTER TABLE "public"."roblox_emote_commands" ENABLE ROW LEVEL SECURITY;
+
+--
 -- Name: roblox_font_ids; Type: ROW SECURITY; Schema: public; Owner: postgres
 --
 
@@ -17815,6 +17894,14 @@ GRANT ALL ON FUNCTION "public"."enforce_universe_stats_visibility_deadline"() TO
 GRANT ALL ON FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") TO "service_role";
+
+
+--
+-- Name: FUNCTION "enqueue_emote_command_revalidation"(); Type: ACL; Schema: public; Owner: postgres
+--
+
+REVOKE ALL ON FUNCTION "public"."enqueue_emote_command_revalidation"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."enqueue_emote_command_revalidation"() TO "service_role";
 
 
 --
@@ -20080,6 +20167,13 @@ GRANT ALL ON TABLE "public"."roblox_decal_ids_ranked_view" TO "service_role";
 
 
 --
+-- Name: TABLE "roblox_emote_commands"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON TABLE "public"."roblox_emote_commands" TO "service_role";
+
+
+--
 -- Name: TABLE "roblox_font_ids"; Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -20900,6 +20994,5 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "supabase_admin" IN SCHEMA "public" GRANT ALL 
 -- PostgreSQL database dump complete
 --
 
-\unrestrict YeeCPcDuZvVkRZVCMHmXFsYbCAyUczL8ziOkrcjweakny2VY9XxfieQymi7pdgB
-
+\unrestrict Vmov9zqeGXJVdTNQycVxcRhyRM2DF37iIDmJF93AdpE5n6dnTcSlSd9Dsw1lolS
 

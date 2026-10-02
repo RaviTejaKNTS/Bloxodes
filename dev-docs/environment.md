@@ -1,7 +1,7 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-08-19
+Last verified: 2026-10-02
 Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on both the workstation and homelab on 2026-08-19
 
 ## Storage Model
@@ -130,3 +130,7 @@ October 1, 2026, scoped production repair: the authorized automation work correc
 October 1 publisher verification additionally stores the existing production web `REVALIDATE_SECRET` in ignored `.envs/targets/production.env`; every prior target value is preserved. Trusted publication reads it explicitly. Neither protected development automation env nor model credentials receive the secret; the restricted wiki account remains unable to read `.envs`. `env:doctor` and contract checks verify this ownership.
 
 Host resolver repair is owned by [homelab operations](infrastructure/homelab.md#host-dns-repair-verified-october-1-2026). NetworkManager now uses the two independently tested public DNS servers, while Tailscale keeps split private-name resolution. No networking service or content job was stopped.
+
+## October 2 worker and operator verification
+
+The free-item candidate Python importer uses existing process credentials under `BLOXODES_ENV_PROFILE=process-only`. It never searches workstation env files in that profile. Other runs load the existing target file, strip dotenv quotes, then apply process values; production candidate imports still require `ALLOW_PROD_FREE_ITEMS_IMPORT=true`. The protected VPS overlay now names the tested `codex-admin` operator. No secret values were added or transferred. Environment doctor and contract checks passed.

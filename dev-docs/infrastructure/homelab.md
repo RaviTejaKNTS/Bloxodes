@@ -1,7 +1,7 @@
 # Homelab
 
 Status: Article and wiki/collection automation activated on the shared versioned runtime
-Last verified: 2026-10-01 (shared automation activation, restricted startup and timer state; older evidence retains its dated scope)
+Last verified: 2026-10-02
 Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
 ## Host

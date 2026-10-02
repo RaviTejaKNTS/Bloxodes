@@ -1,7 +1,7 @@
 # Indexing, Analytics, and Distribution
 
 Status: Active
-Last verified: 2026-08-14
+Last verified: 2026-10-02
 Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, env ownership contracts, and redacted live Umami tracker-ID comparison
 
 ## Search Indexing

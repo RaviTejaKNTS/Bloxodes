@@ -47,7 +47,7 @@ def load_env(path: str) -> Dict[str, str]:
             if not line or line.startswith("#") or "=" not in line:
                 continue
             key, value = line.split("=", 1)
-            env[key.strip()] = value.strip()
+            env[key.strip()] = value.strip().strip("\"'")
     return env
 
 
@@ -68,6 +68,15 @@ def resolve_env_path() -> str:
         if os.path.exists(candidate):
             return candidate
     raise FileNotFoundError(f"No Bloxodes env file found under {repo_root}")
+
+
+def resolve_credentials() -> Dict[str, str]:
+    # Scheduled Docker workers own process-only credentials, not workstation files.
+    if os.environ.get("BLOXODES_ENV_PROFILE") == "process-only":
+        return dict(os.environ)
+    env = load_env(resolve_env_path())
+    env.update(os.environ)
+    return env
 
 
 def is_managed_dev_supabase_url(value: str) -> bool:
@@ -763,10 +772,9 @@ def print_summary(rows: List[Dict[str, Any]], stale_count: int) -> None:
 
 
 def main() -> int:
-    env_path = resolve_env_path()
-    env = load_env(env_path)
-    if "SUPABASE_URL" not in env or "SUPABASE_SERVICE_ROLE" not in env:
-        print("Missing Supabase credentials in .env", file=sys.stderr)
+    env = resolve_credentials()
+    if not env.get("SUPABASE_URL") or not env.get("SUPABASE_SERVICE_ROLE"):
+        print("Missing Supabase URL or service-role credential", file=sys.stderr)
         return 1
     if not is_managed_dev_supabase_url(env["SUPABASE_URL"]) and os.environ.get("ALLOW_PROD_FREE_ITEMS_IMPORT") != "true":
         print(
