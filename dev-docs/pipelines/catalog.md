@@ -54,3 +54,13 @@ Last verified: 2026-09-15 (managed-development schema, data readback, route veri
 - `npm run audit:emote-commands -- --baseline <inventory.json>` is read-only and writes `tmp/emotes/coverage.json`, including published references, linked Marketplace rows, duplicate-name groups, missing thumbnails, and items absent from an optional earlier inventory. It does not create command candidates.
 - Statement triggers on command changes enqueue `roblox-emote-commands`. Item names, prices, and thumbnails retain the avatar-catalog triggers for the separate IDs route.
 - September 15 evidence boundary: source review supports the seven default commands. No original motion previews or in-game validation were completed, so the page does not promise universal experience compatibility or publish additional named commands.
+
+## October 2 refresh reliability repairs
+
+The VPS wrapper retains Roblox serialization and waits up to two hours for a shared lock. Busy same-job invocations exit 75 without overwriting the running owner's state. Host state files distinguish waiting, running, success, failure and skipped work; separate last-success timestamps survive failed invocations. Job containers have a two-hour deadline and the wrapper removes its exact timed-out container before releasing the API lock.
+
+The WARM schedule provides four batches of 1,500 rows per day, or 6,000 rows before upstream failures. The inspected 73,549-row WARM inventory needs about 3,502 rows per day for its 21-day cycle. Each WARM batch uses a 150-minute row lease. Historical overdue rows still need catch-up; verify declining due counts rather than declaring immediate freshness.
+
+Enrichment uses the same tier intervals as stats, including 21 days for WARM, instead of requeueing those rows daily. A stats observation with verified metadata and completed thumbnails can satisfy pending/retry enrichment tasks. It never overwrites processing leases or observations newer than that stats pass. Individual idempotent database writes retry transient Data API failures; claims do not retry blindly.
+
+A prepared forward migration retires duplicate positive-ID legacy bundle aliases from live lists and refresh queues, while preserving source rows and all item history. New bundle inserts use negative internal IDs and a unique index protects active canonical keys. Existing stats detail lookup already falls back from positive public IDs to negative bundle rows. The health RPC counts duplicate live keys. This database migration remains unapplied until managed-development SQL verification succeeds.

@@ -243,7 +243,8 @@
     "articles:automation:audit": "tsx scripts/articles/audit-article-automation.ts",
     "articles:runtime:prepare": "bash scripts/ops/prepare-automation-runtime.sh",
     "automation:runtime:prepare": "bash scripts/ops/prepare-automation-runtime.sh",
-    "automation:runtime:activate": "bash scripts/ops/install-homelab-automation.sh"
+    "automation:runtime:activate": "bash scripts/ops/install-homelab-automation.sh",
+    "stats:worker:reconcile": "node --import tsx scripts/ops/reconcile-worker-ledger.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

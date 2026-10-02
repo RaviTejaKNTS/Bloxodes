@@ -93,3 +93,9 @@ remains incident history rather than current architecture.
 - Production operator commands must identify the production target; managed-development output is not production evidence.
 - Rank/index/rollup/audit commands can mutate state; capture before/after and job IDs.
 - Keep Roblox calls serialized through appropriate lock groups.
+
+## October 2 VPS worker repairs
+
+The worker wrapper records durable host outcomes and last-success timestamps, waits for shared API capacity, and bounds container runtime. A new daily `stats:worker:reconcile -- --apply` job receives a complete host Docker ID snapshot from the wrapper. It marks only running ledger rows older than six hours whose Docker worker is absent. Active workers and non-Docker worker identities remain unchanged. No external notification or GitHub monitoring change is included.
+
+Worker smoke now verifies codes/catalog/item and reconciliation helpers in the narrow Docker image, including their runtime imports. The released worker must still be built and promoted at its explicit approved SHA; changing source files alone does not update the VPS image.

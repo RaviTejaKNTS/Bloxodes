@@ -118,7 +118,6 @@ mv -Tf "$ROOT/current.next" "$ROOT/current"
 systemctl daemon-reload
 for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do cmp "$RELEASE/scripts/ops/systemd/$unit" "/etc/systemd/system/$unit"; done
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
-systemctl enable bloxodes-wiki-recovery.timer
-ACTIVE+=(bloxodes-wiki-recovery.timer)
+# Optional recovery retains the owner's existing enablement and active state.
 SUCCESS=1
 echo "Activated articles and wiki/collections at $SHA. Prior timer enablement/cadence retained. Rollback units: $BACKUP"

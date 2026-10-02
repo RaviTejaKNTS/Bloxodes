@@ -128,6 +128,36 @@ test("persistent stage workspaces outside Git retain the same model sandbox", as
   assert.equal(args[args.indexOf("--sandbox") + 1], "read-only");
 });
 
+test("fixed copy-gate recovery preserves budgets and requires fresh review for changed copy", async () => {
+  const { recoverFixedRuntimeBlocker } = await import("../article-runtime-recovery");
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-runtime-recovery-"));
+  const hashes = { "brief.md": "brief", "media.json": "media", "final.json": "approved" };
+  await saveJson(path.join(root, "editorial_review.json"), { status: "completed", input_hashes: hashes });
+  const state = () => ({status:"blocked",stage:"writing",feedback:"The checker rejects /sources/ image URLs.",
+    revisions:{research:1,images:1,writing:1},technicalRepairs:{copy_check:1},
+    history:[{stage:"copy_check",decision:{status:"needs_revision"}}]} as any);
+  const unchanged = state();
+  assert.equal(await recoverFixedRuntimeBlocker(unchanged,root,hashes),true);
+  assert.equal(unchanged.stage,"copy_check"); assert.equal(unchanged.revisions.writing,1); assert.equal(unchanged.technicalRepairs.copy_check,1);
+  const changed = state();
+  assert.equal(await recoverFixedRuntimeBlocker(changed,root,{...hashes,"final.json":"changed"}),true);
+  assert.equal(changed.stage,"editorial_review");
+  const evidence = state();
+  assert.equal(await recoverFixedRuntimeBlocker(evidence,root,{...hashes,"media.json":"changed"}),false);
+  const editorial = state(); editorial.feedback="The draft repeats important advice.";
+  assert.equal(await recoverFixedRuntimeBlocker(editorial,root,hashes),false);
+});
+
+test("review prompts return decisions without demanding artifact writes", async () => {
+  const { stagePrompt } = await import("../article-stage-runtime");
+  const state = {job:{slug:"door",title:"Door",article_type:"guide"},history:[],feedback:"",revisions:{writing:0}} as any;
+  const options = {worktree:"/repo",runDir:"/state"} as any;
+  for (const stage of ["research_review","image_review","editorial_review"] as const) {
+    const prompt = stagePrompt(options,stage,state);
+    assert.match(prompt,/controller saves review artifacts/); assert.doesNotMatch(prompt,/Save the artifact before returning/);
+  }
+});
+
 test("persistent-state symlinks preserve approval checks and reject changed artifacts", async () => {
   const { mkdir, symlink, writeFile } = await import("node:fs/promises");
   const { artifactHashes } = await import("../article-pipeline");

@@ -205,7 +205,9 @@ export function detectProvider(url: string): Provider | null {
   throw new Error(`Unsupported source host: ${host}`);
 }
 
-export async function scrapeSources(urls: string[]): Promise<ScrapeResult> {
+export class CodeSourcesUnavailableError extends Error {}
+
+export async function scrapeSources(urls: string[], options: { allowPartial?: boolean } = {}): Promise<ScrapeResult> {
   const unique = Array.from(
     new Set(
       urls
@@ -219,6 +221,7 @@ export async function scrapeSources(urls: string[]): Promise<ScrapeResult> {
   }
 
   const results: ScrapeResult[] = [];
+  const failures: Array<{ url: string; error: string }> = [];
   const skippedProviders = new Set<string>();
   for (const url of unique) {
     const provider = detectProvider(url);
@@ -227,8 +230,11 @@ export async function scrapeSources(urls: string[]): Promise<ScrapeResult> {
       continue;
     }
     const scraper = SCRAPER_MAP[provider];
-    const result = await scraper(url);
-    results.push(result);
+    try { results.push(await scraper(url)); }
+    catch (error) {
+      if (!options.allowPartial) throw error;
+      failures.push({ url, error: error instanceof Error ? error.message : String(error) });
+    }
   }
 
   if (skippedProviders.size) {
@@ -236,5 +242,10 @@ export async function scrapeSources(urls: string[]): Promise<ScrapeResult> {
     console.warn(`Skipped disabled providers for: ${skippedList}`);
   }
 
-  return mergeScrapeResults(results);
+  if (failures.length && !results.length) {
+    const message = failures.map(failure => failure.error).join("; ");
+    if (failures.every(failure => /:\s*(?:404|410)\b/.test(failure.error))) throw new CodeSourcesUnavailableError(message);
+    throw new Error(message);
+  }
+  return { ...mergeScrapeResults(results), ...(failures.length ? { sourceFailures: failures } : {}) };
 }

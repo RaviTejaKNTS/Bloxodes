@@ -6,7 +6,9 @@ import { fileURLToPath } from "node:url";
 
 const DEFAULT_LIMIT_BYTES = 1_800_000;
 const DEFAULT_WARN_BYTES = 1_000_000;
-const DEFAULT_OUTPUT_DIR = "tmp/html-size-audits";
+const DEFAULT_OUTPUT_DIR = process.env.WIKI_AUTOMATION_RESULT_ROOT
+  ? path.join(process.env.WIKI_AUTOMATION_RESULT_ROOT, "verification", "html-size")
+  : "tmp/html-size-audits";
 const DEFAULT_CONCURRENCY = 8;
 const USER_AGENT = "BloxodesHtmlSizeAudit/1.0 (+https://bloxodes.com)";
 

@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { runDataApiOperation } from "../shared/data-api-retry";
 
 import { randomUUID } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
@@ -88,12 +89,6 @@ function addHours(value: string, hours: number) {
 
 function retryHours(attempts: number) {
   return Math.min(72, Math.max(1, 2 ** Math.max(0, attempts - 1)));
-}
-
-function refreshHours(tier: ItemStatsTier) {
-  if (tier === "NEW" || tier === "HOT") return 6;
-  if (tier === "WARM") return 24;
-  return 168;
 }
 
 function errorMessage(error: unknown) {
@@ -256,7 +251,7 @@ async function loadItems(assetIds: number[]) {
 async function upsertRows(table: string, rows: Record<string, unknown>[], conflict: string) {
   if (DRY_RUN || !rows.length) return;
   for (const batch of chunkArray(rows, DB_BATCH)) {
-    const { error } = await supabaseAdmin().from(table).upsert(batch, { onConflict: conflict });
+    const { error } = await runDataApiOperation(`Enrich ${table}`, () => supabaseAdmin().from(table).upsert(batch, { onConflict: conflict }));
     if (error) throw new Error(`Failed to upsert ${table}: ${error.message}`);
   }
 }
@@ -336,6 +331,7 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
   const historyRows: Record<string, unknown>[] = [];
   const resultByAssetId = new Map<number, ItemResult>();
   const metadataRows: ExistingItemRow[] = [];
+  const refreshHoursByAsset = new Map<number, number>();
 
   for (const row of queueRows) {
     const existing = items.get(row.asset_id);
@@ -403,6 +399,7 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
       is_limited_unique: normalizeBoolean(update.is_limited_unique) ?? existing.is_limited_unique
     });
     update.item_stats_tier = tier.tier;
+    refreshHoursByAsset.set(row.asset_id, tier.refreshHours);
     update.item_stats_tier_reason = tier.reason;
     update.item_stats_tier_updated_at = nowIso;
     update.next_item_stats_refresh_at = existing.next_item_stats_refresh_at ?? nowIso;
@@ -462,13 +459,12 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
         thumbnailItemUpdates.push(thumbnailItemUpdate);
         if (completed) {
           const current = resultByAssetId.get(existing.asset_id);
-          const tier = (itemUpdates.find((update) => update.asset_id === existing.asset_id)?.item_stats_tier ?? "COLD") as ItemStatsTier;
           resultByAssetId.set(existing.asset_id, {
             assetId: existing.asset_id,
             success: true,
             metadataUpdated: current?.metadataUpdated ?? true,
             thumbnailUpdated: true,
-            nextRunAt: addHours(nowIso, refreshHours(tier))
+            nextRunAt: addHours(nowIso, refreshHoursByAsset.get(existing.asset_id)!)
           });
         }
       }

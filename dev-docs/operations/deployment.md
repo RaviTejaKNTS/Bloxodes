@@ -93,3 +93,9 @@ The final platform check treats the live web image as synchronized when it is th
 ### Cache configuration repair — October 1, 2026
 
 The user-authorized automation repair rechecked the September 26 environment defect and confirmed it still existed. The malformed control-character separator was replaced with a newline under an exact environment/image snapshot guard. Every other parsed environment value and all build settings were preserved. Dokploy redeployed the same immutable `64dd8684bbc9023aa85c377009f19c8c76007bda` image; deploy health returned healthy database readiness at that SHA. Authenticated revalidation of the already-published Dusty Trip article then returned HTTP 200 with `cloudflare.ok=true`, nine successful tag purges and no purge errors. This supersedes the pending cache-environment repair above; it is a scoped revalidation check, not a broad production audit.
+
+## October 2 operator and pipeline repair
+
+The dedicated homelab Bloxodes public key was appended to the existing `codex-admin` authorized keys without removing prior keys. Direct key-based SSH to the VPS now succeeds. The workstation operator profile uses `codex-admin`; no private key or application secret was copied to the VPS.
+
+This repair must preserve disabled services and current cron ownership. Install only the changed wrapper and active job entries, retaining owner-disabled entries and unrelated crontab blocks. Build the worker with the explicit released SHA and smoke its candidate before promotion. Homelab runtime activation waits for all existing jobs to finish and preserves the optional recovery timer state. Event runners and GitHub monitoring are excluded.

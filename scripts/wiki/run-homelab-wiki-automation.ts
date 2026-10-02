@@ -22,6 +22,7 @@ import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-auto
 import { resolveWikiAttemptRoot } from "./wiki-workspace-paths";
 import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage, WIKI_RENDERED_PREVIEW_GUIDANCE } from "./wiki-execution";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
+import { reconcileExpiredWikiLeases, guardWikiHeartbeat, WikiLeaseLostError } from "./wiki-lease-health";
 
 type StatsGame = {
   universeId: number;
@@ -85,7 +86,7 @@ const worktree = path.resolve(process.env.WIKI_AUTOMATION_WORKTREE?.trim() || pr
 const timeoutMinutes = Number(process.env.WIKI_AUTOMATION_TIMEOUT_MINUTES || "660");
 const workerCount = Number(process.env.WIKI_AUTOMATION_CONCURRENCY || "1");
 const maxGamesPerRun = Number(process.env.WIKI_AUTOMATION_MAX_GAMES_PER_RUN || "1");
-const leaseMinutes = Math.min(720, Math.max(30, timeoutMinutes + 30));
+const leaseMinutes = 30;
 const modelHome = process.env.WIKI_AUTOMATION_MODEL_HOME?.trim() || "/var/lib/bloxodes/wiki-model";
 const codexBin = process.env.WIKI_AUTOMATION_CODEX_BIN?.trim() || "/home/teja/.local/bin/codex";
 const codexModel = process.env.WIKI_AUTOMATION_CODEX_MODEL?.trim() || "gpt-5.6-luna";
@@ -97,6 +98,7 @@ const releaseOnly = process.argv.includes("--release-only");
 const retryOnly = process.argv.includes("--retry-only");
 const queueId = process.env.WIKI_AUTOMATION_QUEUE_ID?.trim();
 const activeChildren = new Set<ChildProcess>();
+const environmentSignals = new WeakMap<NodeJS.ProcessEnv, AbortSignal>();
 let stopRequested = false;
 
 function terminateProcessGroup(child: ChildProcess, signal: NodeJS.Signals) {
@@ -298,6 +300,7 @@ async function claimOrEnqueue(dev: SupabaseClient, lane: number): Promise<QueueR
   try {
     let row: QueueRow | null;
     if (retryOnly && !queueId) {
+      await reconcileExpiredWikiLeases(dev);
       const due = await dev.from("wiki_generation_queue").select("id").eq("status", "retry")
         .lte("next_attempt_at", new Date().toISOString()).order("rank_at_claim").limit(1).maybeSingle();
       if (due.error) throw new Error(`Could not inspect due wiki retries: ${due.error.message}`);
@@ -387,11 +390,18 @@ function sanitizeError(value: string, env: NodeJS.ProcessEnv): string {
 }
 
 async function runCommand(command: string, args: string[], env: NodeJS.ProcessEnv, timeoutMs?: number, sessionFile?: string) {
+  const signal = environmentSignals.get(env);
+  signal?.throwIfAborted();
   return await new Promise<string>((resolve, reject) => {
     const child = spawn(command, args, {
       cwd: worktree, env, stdio: ["ignore", "pipe", "pipe"], shell: false, detached: process.platform !== "win32"
     });
     activeChildren.add(child);
+    const abort = () => {
+      terminateProcessGroup(child, "SIGTERM");
+      setTimeout(() => terminateProcessGroup(child, "SIGKILL"), 15_000).unref();
+    };
+    signal?.addEventListener("abort", abort, { once: true });
     let tail = "", pending = "", sessionWrite = Promise.resolve();
     child.stdout?.on("data", (chunk: Buffer) => {
       process.stdout.write(chunk);
@@ -421,11 +431,12 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
     timer?.unref();
     child.on("error", reject);
     child.on("close", (code) => {
+      signal?.removeEventListener("abort", abort);
       if (timer) clearTimeout(timer);
       terminateProcessGroup(child, "SIGTERM");
       setTimeout(() => {
         terminateProcessGroup(child, "SIGKILL"); activeChildren.delete(child);
-        sessionWrite.then(() => code === 0 ? resolve(sanitizeError(tail, env)) : reject(new Error(`${command} exited with ${code}: ${sanitizeError(tail, env)}`)), reject);
+        sessionWrite.then(() => signal?.aborted ? reject(signal.reason) : code === 0 ? resolve(sanitizeError(tail, env)) : reject(new Error(`${command} exited with ${code}: ${sanitizeError(tail, env)}`)), reject);
       }, 1_000);
     });
   });
@@ -513,6 +524,7 @@ async function readWorkflowResult(row: QueueRow, resultRoot: string): Promise<Wo
 async function transition(dev: SupabaseClient, row: QueueRow, values: Record<string, unknown>) {
   const { data, error } = await dev.from("wiki_generation_queue").update(values)
     .eq("id", row.id).eq("status", "processing").eq("lease_token", row.lease_token!).eq("lease_owner", row.lease_owner!)
+    .gt("lease_expires_at", new Date().toISOString())
     .select("id").maybeSingle();
   if (error) throw new Error(`Queue transition failed: ${error.message}`);
   if (!data) throw new Error("Queue lease was lost before transition.");
@@ -522,7 +534,8 @@ async function heartbeat(dev: SupabaseClient, row: QueueRow) {
   const { data, error } = await dev.rpc("heartbeat_wiki_generation_queue_item", {
     p_id: row.id, p_lease_token: row.lease_token, p_lease_minutes: leaseMinutes
   });
-  if (error || data !== true) throw new Error(`Wiki queue heartbeat failed: ${error?.message || "lease lost"}`);
+  if (error) throw new Error(`Wiki queue heartbeat failed: ${error.message}`);
+  if (data !== true) throw new WikiLeaseLostError("Wiki queue lease lost.");
 }
 
 function productionEnvironment(): NodeJS.ProcessEnv {
@@ -701,9 +714,10 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     const sessionFile = path.join(resultRoot, "session.json");
     activeSessionFile = sessionFile;
     const env = modelEnvironment(devCredentials);
+    env.WIKI_AUTOMATION_RESULT_ROOT = resultRoot;
     const port = 3240 + (row.processing_slot || lane);
-    const heartbeatTimer = setInterval(() => void heartbeat(dev, row).catch(console.error), 5 * 60_000);
-    heartbeatTimer.unref();
+    const heartbeatGuard = guardWikiHeartbeat(() => heartbeat(dev, row));
+    environmentSignals.set(env, heartbeatGuard.signal);
     try {
     let result: WorkflowResult;
     try {
@@ -760,6 +774,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     await recoverStep({ file: sessionFile, label: "Managed-development sync", operation: syncDevelopment, repair });
     let urls: string[] = [];
     if (!skipProduction) {
+      heartbeatGuard.signal.throwIfAborted();
       urls = await recoverStep({ file: sessionFile, label: "Production publication", operation: () => requestProduction(dev, row, resultRoot, result),
         repair: async (sessionId, error) => { await repair(sessionId, error); await syncDevelopment(); } });
     }
@@ -794,7 +809,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     await saveSessionState(sessionFile, { ...session, completed: true, lastError: undefined });
     console.log(`[lane ${lane}] Published and verified ${row.game_name}: ${urls.join(", ")}`);
     return true;
-    } finally { clearInterval(heartbeatTimer); }
+    } finally { heartbeatGuard.stop(); }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`[lane ${lane}] ${message}`);
@@ -832,13 +847,18 @@ async function main() {
   assertCleanCheckout("startup");
   if (!releaseOnly) await access(codexBin, fsConstants.X_OK);
   const devCredentials = resolveWikiDevCredentials();
-  const dev = createClient(devCredentials.url, devCredentials.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
+  const dev = createClient(devCredentials.url, devCredentials.serviceRole, {
+    auth: { autoRefreshToken: false, persistSession: false },
+    global: { fetch: (input, init) => fetch(input, { ...init, signal: init?.signal ?? AbortSignal.timeout(30_000) }) }
+  });
   if (!apply) {
     await previewNext(dev);
     return;
   }
   if (releaseOnly) {
     productionEnvironment();
+    const recovered = await reconcileExpiredWikiLeases(dev);
+    if (recovered) console.log(`Reconciled ${recovered} expired wiki leases.`);
     while (await releaseRequestedWiki(dev)) { /* Trusted publisher never runs model turns or takes the model lock. */ }
     return;
   }

@@ -309,3 +309,10 @@ October 1 automation repair: `scripts/ops/check-wiki-model-sandbox.ts` performs 
 The article/wiki trusted publishers use `shared/revalidate-published-content.ts` for immediate exact page/sitemap refresh before verification; credentials stay in the protected production target.
 
 For an exact manual publication recovery, `articles:publication:drain -- --acknowledge-published --queue-id <UUID> [--queue-id <UUID>] --apply` only closes existing authorized intents whose queue rows already acknowledge matching canonical published URLs. It never launches a release, scans for other due publications, or resets attempts.
+
+## October 2 pipeline maintenance
+
+- `ops/reconcile-worker-ledger.ts`, alias `stats:worker:reconcile`, plans or retires orphaned six-hour Docker ledger records using the wrapper's active-container snapshot.
+- `ops/prune-automation-caches.ts` plans or removes generated caches in superseded runtime releases while preserving source, state, credentials and retained releases. Runtime preparation owns recurring retention.
+- Article `--retry-technical` recognizes fixed URL-copy and read-only-review blockers without resetting quality budgets. Changed draft copy requires another editorial review.
+- Wiki leases, recovery and report output paths are owned by `wiki/wiki-lease-health.ts`, `wiki/run-homelab-wiki-automation.ts` and the restricted sandbox readiness probe. Optional owner-disabled recovery stays disabled.

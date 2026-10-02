@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { copyFile, mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
+import { recoverFixedRuntimeBlocker } from "./article-runtime-recovery";
 
 export const STAGES = ["research", "research_review", "images", "image_review", "image_upload", "writing", "editorial_review", "copy_check", "image_check", "import_verify", "browser_verify"] as const;
 export type Stage = typeof STAGES[number];
@@ -165,6 +166,9 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
     const interrupted = state.status === "running" && Boolean(state.inFlight);
     if (JSON.stringify(hashes) !== JSON.stringify(state.artifacts) && !interrupted && Object.keys(state.artifacts).length) {
       throw new Error("Artifacts changed outside the recorded stage. Start a new reviewed run; cached approvals cannot be reused.");
+    }
+    if (options.retryTechnical && state.status === "blocked" && !state.retryAfter) {
+      await recoverFixedRuntimeBlocker(state, runDir, hashes);
     }
     if (state.status === "blocked" && state.retryAfter && (Date.now() >= Date.parse(state.retryAfter) || (options.retryTechnical && state.blockerKind === "technical"))) {
       const stage = state.stage as Stage;

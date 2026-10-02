@@ -24,6 +24,8 @@ import {
   type ItemStatsTier
 } from "./item-stats-utils";
 import { refreshStatsItemCurrentIndexes } from "./item-index-refresh";
+import { acknowledgeCatalogRefreshFromStats } from "./catalog-refresh-ack";
+import { runDataApiOperation } from "../shared/data-api-retry";
 
 type Options = {
   tier: ItemStatsTier | "ALL";
@@ -308,7 +310,7 @@ function hourlyRowFromUpdate(row: ItemStatsSourceRow, update: Record<string, unk
 
 async function upsertRows(table: string, rows: Record<string, unknown>[], onConflict: string, size = 100) {
   for (const chunk of chunkArray(rows, size)) {
-    const { error } = await supabaseAdmin().from(table).upsert(chunk, { onConflict });
+    const { error } = await runDataApiOperation(`Upsert ${table}`, () => supabaseAdmin().from(table).upsert(chunk, { onConflict }));
     if (error) throw new Error(`Failed to upsert ${table}: ${error.message}`);
   }
 }
@@ -482,6 +484,7 @@ async function main() {
       await upsertRows("roblox_catalog_items", itemUpdates, "asset_id", 100);
       await upsertRows("roblox_catalog_item_images", thumbnailRows, "asset_id,size,format", 100);
       await upsertRows("roblox_catalog_item_stats_hourly", hourlyRows, "asset_id,hour_start", 100);
+      await acknowledgeCatalogRefreshFromStats(supabaseAdmin(), itemUpdates);
     }
 
     const indexResult = !options.dryRun && options.refreshIndexes ? await refreshIndexes() : null;

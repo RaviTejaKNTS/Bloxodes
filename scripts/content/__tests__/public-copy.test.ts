@@ -29,6 +29,21 @@ test("article orientation and useful developer attribution pass the copy gate", 
   assert.equal(result.status, 0, result.stderr);
 });
 
+test("hosted image and reference destinations do not count as displayed provenance", () => {
+  const result = checkCopy({ title: "Find the island key", slug: "island-key", content_md:
+    '![Key beside the door](https://media.bloxodes.com/sources/research/key.png)\n\n[Open the door][door]\n\n[door]: https://example.com/workflow/manifest\n\n<img alt="Door location" src="https://media.bloxodes.com/sources/door.png">', faq_json: [] });
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test("visible labels, captions and image alt text retain the provenance gate", () => {
+  for (const content_md of [
+    "![Research image](https://example.com/image.png)",
+    "[Approved source](https://example.com/)",
+    "![Door](https://example.com/image.png)\n\nResearch confirmed the location.",
+    '<a href="https://example.com/" title="Research workflow">Door</a>'
+  ]) assert.equal(checkCopy({ title: "Door", slug: "door", content_md, faq_json: [] }).status, 1);
+});
+
 test("catalog finals retain their stricter self-reference gate", () => {
   const result = checkCopy({
     title: "Fruit Catalog", slug: "fruit-catalog", intro_md: "This guide lists the available fruits."

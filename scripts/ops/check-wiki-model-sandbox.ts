@@ -15,6 +15,10 @@ async function main() {
   await writeFile(probe, `const fs=require('node:fs/promises'), net=require('node:net'), dns=require('node:dns/promises');
     (async()=>{
       await fs.writeFile(${JSON.stringify(path.join(dir, "write-canary"))},'ready');
+      const audit = require('node:child_process').spawnSync(process.execPath,
+        ['--import','tsx','scripts/automation/audit-html-size.ts','--url','data:text/html,<h1>Ready</h1>'],
+        {cwd:${JSON.stringify(root)},env:{...process.env,WIKI_AUTOMATION_RESULT_ROOT:${JSON.stringify(dir)}},encoding:'utf8',timeout:20000});
+      if(audit.status!==0)throw Error('HTML audit report write failed: '+audit.stderr);
       await dns.lookup(${JSON.stringify(new URL(dev.url).hostname)});
       const response=await fetch(${JSON.stringify(`${dev.url}/rest/v1/`)},{signal:AbortSignal.timeout(20000)});
       if(response.status!==401&&response.status!==200)throw Error('Managed development HTTPS returned '+response.status);

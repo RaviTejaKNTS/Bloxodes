@@ -42,3 +42,13 @@ The VPS worker runs `refresh:codes` every six hours at minute 0 with configured 
 - Never manually seed active/expired codes or code dates.
 - Do not run a production refresh using the managed-development target.
 - New page publication must preserve metadata, sitemap/search/feed/revalidation behavior.
+
+## October 2 reliability repairs
+
+The refresh retries individual existing-code reads, touches and idempotent upserts after transient Data API failures. Exact stored code text is used for touches, so `_` and `%` cannot act as wildcard matches. Reactivation timestamps belong to the database upsert rather than a second unguarded update.
+
+The prepared `20261002105551` migration targets the existing case-insensitive unique index atomically and applies provider precedence inside the conflict update. Lower-priority observations only refresh last-seen time. Equal priority preserves existing redemption text; higher priority may replace it. Managed-development SQL verification and production application remain pending.
+
+A failed provider no longer prevents trying another configured source in scheduled refresh. An incomplete scrape preserves missing active codes and reports a degraded refresh. If all sources return 404/410, the page is skipped with an explicit unavailable-source reason and existing observations remain unchanged. Other HTTP/network failures still fail the refresh. Strict admin imports retain their existing all-sources contract.
+
+The October 2 checks confirmed that Mining Simulator 2 and the original PLS Donate But Infinite Robux RobloxDen URLs return 404. RobloxDen's public search has no source matching their original place IDs. Similarly named replacements point to different experiences, so no replacement URL or code was entered manually.

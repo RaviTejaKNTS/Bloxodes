@@ -1,7 +1,7 @@
 import "../shared/load-env";
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { promises as fs } from "node:fs";
-import { detectProvider, getCodeDisplayPriority, scrapeSources } from "@/lib/scraper";
+import { CodeSourcesUnavailableError, detectProvider, getCodeDisplayPriority, scrapeSources } from "@/lib/scraper";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import type { CodePage } from "@/lib/db";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@/lib/code-normalization";
 import { isLikelyNonCodeText } from "@/lib/beebom";
 import { isSuspiciousEmptyCodeRefresh } from "@/lib/code-refresh-safety";
+import { runDataApiOperation } from "../shared/data-api-retry";
 
 const PAGE_SIZE = Number(process.env.REFRESH_PAGE_SIZE ?? 500);
 const CONCURRENCY = Math.max(1, Number(process.env.REFRESH_CONCURRENCY ?? 5));
@@ -327,7 +328,8 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     return { slug: game.slug, name: game.name, status: "skipped", error: "all sources disabled or unsupported" };
   }
 
-  const { codes, expiredCodes } = await scrapeSources(enabledUrls);
+  const { codes, expiredCodes, sourceFailures } = await scrapeSources(enabledUrls, { allowPartial: true });
+  if (sourceFailures?.length) console.warn(`Incomplete scrape for ${game.slug}: ${sourceFailures.map(f => f.error).join("; ")}. Missing codes will be preserved.`);
   let newCodesCount = 0;
   const scrapedExpired = expiredCodes ?? [];
 
@@ -361,10 +363,10 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     setExpired(normalized, displayCode, priority);
   }
 
-  const { data: existingRows, error: existingError } = await sb
+  const { data: existingRows, error: existingError } = await runDataApiOperation(`Load existing codes for ${game.slug}`, () => sb
     .from("codes")
     .select("code, status, provider_priority, first_seen_at")
-    .eq("code_page_id", game.id);
+    .eq("code_page_id", game.id));
 
   if (existingError) {
     throw new Error(`failed to load existing codes for ${game.slug}: ${existingError.message}`);
@@ -457,11 +459,11 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
 
       if (!existingExpired && (higherPriorityExists || samePrioritySameDisplay)) {
         // Still touch the row to refresh last_seen_at without overwriting provider priority
-        const { error: touchError } = await sb
+        const { error: touchError } = await runDataApiOperation(`Touch code for ${game.slug}`, () => sb
           .from("codes")
           .update({ last_seen_at: new Date().toISOString() })
           .eq("code_page_id", game.id)
-          .ilike("code", existingEntry.code);
+          .eq("code", existingEntry.code));
 
         if (touchError) {
           throw new Error(`failed to refresh last_seen_at for ${displayCode}: ${touchError.message}`);
@@ -483,8 +485,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     }
 
     const status = c.status === "check" ? "expired" : c.status;
-    const shouldResetFirstSeen = status === "active" && expiredInDb.has(normalized);
-    const { error } = await sb.rpc("upsert_code", {
+    const { error } = await runDataApiOperation(`Upsert code for ${game.slug}`, () => sb.rpc("upsert_code", {
       p_code_page_id: game.id,
       p_code: displayCode,
       p_status: status,
@@ -492,37 +493,18 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
       p_level_requirement: c.levelRequirement ?? null,
       p_is_new: c.isNew ?? false,
       p_provider_priority: providerPriority,
-    });
+    }));
 
     if (error) {
       throw new Error(`upsert failed for ${c.code}: ${error.message}`);
     }
 
-    if (shouldResetFirstSeen) {
-      const nowIso = new Date().toISOString();
-      const { error: resetError } = await sb
-        .from("codes")
-        .update({ first_seen_at: nowIso })
-        .eq("code_page_id", game.id)
-        .ilike("code", displayCode);
-
-      if (resetError) {
-        throw new Error(`failed to reset first_seen_at for ${displayCode}: ${resetError.message}`);
-      }
-      existingNormalizedMap.set(normalized, {
-        code: displayCode,
-        providerPriority,
-        status,
-        firstSeenAt: nowIso,
-      });
-    } else {
-      existingNormalizedMap.set(normalized, {
-        code: displayCode,
-        providerPriority,
-        status,
-        firstSeenAt: existingEntry?.firstSeenAt,
-      });
-    }
+    // The atomic RPC owns reactivation timestamps and provider precedence.
+    const stored = existingEntry && existingEntry.providerPriority > providerPriority ? existingEntry : {
+      code: existingEntry && existingEntry.providerPriority === providerPriority ? existingEntry.code : displayCode,
+      providerPriority, status, firstSeenAt: existingEntry?.firstSeenAt
+    };
+    existingNormalizedMap.set(normalized, stored);
 
     upserted += 1;
   }
@@ -569,7 +551,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     })
     .filter((entry): entry is { normalized: string; original: string } => {
       if (!entry) return false;
-      return !incomingNormalized.has(entry.normalized);
+      return !sourceFailures?.length && !incomingNormalized.has(entry.normalized);
     });
 
   if (toExpireEntries.length) {
@@ -619,7 +601,8 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
   return {
     slug: game.slug,
     name: game.name,
-    status: "ok",
+    status: sourceFailures?.length ? "error" : "ok",
+    ...(sourceFailures?.length ? { error: `Partial refresh; preserved missing codes. ${sourceFailures.map(f => f.error).join("; ")}` } : {}),
     found: codes.length,
     upserted,
     expired: toExpireEntries.length,
@@ -673,6 +656,10 @@ async function main() {
           const result = await processCodePage(sb, game);
           return result;
         } catch (err: any) {
+          if (err instanceof CodeSourcesUnavailableError) return {
+            slug: game.slug, name: game.name, status: "skipped" as const,
+            error: `All configured sources returned 404/410; existing code data retained. ${err.message}`
+          };
           return {
             slug: game.slug,
             name: game.name,

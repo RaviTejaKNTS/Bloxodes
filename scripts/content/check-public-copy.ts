@@ -1,5 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { marked } from "marked";
+import { load } from "cheerio";
 
 type Finding = {
   file: string;
@@ -84,6 +86,14 @@ function excerpt(value: string, index: number): string {
 }
 
 function scanString(value: string, file: string, field: string, article: boolean): Finding[] {
+  // Inspect displayed copy while retaining labels, alt text and visible titles.
+  const document = load(marked.parse(value, { async: false }) as string);
+  document("img").each((_, image) => {
+    document(image).replaceWith(document("<span>").text(`${document(image).attr("alt") || ""} ${document(image).attr("title") || ""}`));
+  });
+  document("[title]").each((_, element) => { document(element).append(document("<span>").text(` ${document(element).attr("title")}`)); });
+  document("p,li,h1,h2,h3,h4,h5,h6,td,th,br").append(" ");
+  value = document.root().text();
   const findings: Finding[] = [];
 
   const provenanceMatch = publicProvenanceMatch(value);

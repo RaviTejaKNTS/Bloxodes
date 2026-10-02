@@ -12,6 +12,11 @@ const requiredRuntimeFiles = [
   "scripts/shared/load-env.ts",
   "scripts/universes/update-universe-hourly-stats.ts",
   "scripts/universes/audit-universe-stats-workflow.ts",
+  "scripts/codes/update-codes.ts",
+  "scripts/catalog/enrich-roblox-catalog-items.ts",
+  "scripts/items/catalog-refresh-ack.ts",
+  "scripts/items/update-item-hourly-stats.ts",
+  "scripts/ops/reconcile-worker-ledger.ts",
 ];
 
 const missing = requiredRuntimeFiles.filter(
@@ -27,13 +32,21 @@ if (loaded.profile !== "process-only") {
     `Stats worker smoke expected the process-only env profile, received ${loaded.profile}`
   );
 }
+
 if (loaded.files.length > 0) {
   throw new Error(
     `Stats worker smoke unexpectedly loaded workstation env files: ${loaded.files.join(", ")}`
   );
 }
 
-console.log(
+async function checkRuntimeModules() {
+  // Load helpers without invoking side-effectful script entrypoints.
+  await Promise.all([
+    import("../items/catalog-refresh-ack"),
+    import("../../apps/web/src/lib/scraper"),
+    import("marked"),
+  ]);
+  console.log(
   JSON.stringify({
     ok: true,
     profile: loaded.profile,
@@ -41,3 +54,5 @@ console.log(
     buildSha: process.env.BLOXODES_BUILD_SHA ?? "unknown",
   })
 );
+}
+checkRuntimeModules().catch(error => { console.error(error.message); process.exitCode = 1; });

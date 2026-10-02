@@ -166,3 +166,9 @@ Trusted publication now refreshes the exact article through authenticated `/api/
 For an exact manual publication recovery, `articles:publication:drain -- --acknowledge-published --queue-id <UUID> [--queue-id <UUID>] --apply` only closes existing authorized intents whose queue rows already acknowledge matching canonical published URLs. It never launches a release, scans for other due publications, or resets attempts.
 
 October 1 activation: shared runtime `fa7a24cc5cdea529cc7867cf81f6828c9bd6bf78` is installed; article discovery and publication timers retain their enabled schedules. The Anime Breaker weather events and +1 Slash Per Click rebirth guide publication recoveries passed exact production readback, public title/canonical, hosted cover and sitemap verification; their authorized publication intents were acknowledged without resetting attempts. Existing content/evidence holds remain separate from runtime repair. No additional content batch was started to validate this activation.
+
+## October 2 runtime repairs
+
+The public-copy checker parses Markdown and scans displayed text, link labels, image alt text and titles. Hidden URL destinations do not trigger provenance rules. Approved `/sources/` media paths remain unchanged. Focused reviewers return decision JSON; the controller saves review artifacts, so read-only reviewers never need file-write access.
+
+`articles:pipeline --retry-technical` can recover the two identified runtime defects without resetting editorial budgets. Read-only review failures rerun the same review. Copy-gate recovery requires a completed editorial receipt with matching brief/media hashes. Unchanged approved copy resumes at the copy check; changed copy returns to editorial review. Real evidence/prose blockers and exhausted recovery budgets remain blocked. Runtime activation and recovery receipts belong in the repair report.

@@ -13,4 +13,5 @@ export type ScrapedExpiredCode = string | { code: string; provider?: ScrapedCode
 export type ScrapeResult = {
   codes: ScrapedCode[];
   expiredCodes: ScrapedExpiredCode[];
+  sourceFailures?: Array<{ url: string; error: string }>;
 };

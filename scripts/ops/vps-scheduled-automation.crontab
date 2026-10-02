@@ -8,19 +8,21 @@
 # /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
 #
 # Required env lives in /home/codex-admin/bloxodes-stats-worker/env.stats-worker.
-# It must include Supabase service-role env plus job-specific secrets such as
-# Google Indexing, OpenAI/Tavily for event details, GROQ_API_KEY for article
-# topic curation, and LINKEDIN_LI_AT for LinkedIn puzzles when available.
+# Active jobs use Supabase service-role env and their own required credentials.
+# Legacy event description generation used OpenAI/Tavily. Events and Google
+# Indexing remain owner-disabled; do not install their legacy schedule entries.
 
 # BLOXODES_SCHEDULED_AUTOMATION_START
+10 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh worker-ledger-reconciliation "npm run stats:worker:reconcile -- --apply"
 2 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit -- --strict"
 5 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-platform-refresh "npm run stats:platform:refresh -- --hourly-days 2 --daily-days 2"
 
 0 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh codes-refresh "export REFRESH_CONCURRENCY=6 REFRESH_BATCH_DELAY_MS=750; npm run refresh:codes"
-17 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh google-indexing "export GOOGLE_INDEXING_STATE_BACKEND=supabase; npm run indexing:google -- --apply"
+# Google Indexing remains owner-disabled. No scheduled no-op invocation.
 40 9 * * 3 JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh promo-rewards-refresh "export ROBLOX_PROMO_RETIRE_AFTER_MISSES=2; npm run refresh:promo-rewards -- --apply --allow-prod"
 
-15 0 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh events-refresh "export ROBLOX_VIRTUAL_EVENTS_LIMIT=200; npm run collect:virtual-events && npm run seed:event-details -- --all"
+# Owner-disabled legacy entry, retained for reference only.
+# 15 0 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh events-refresh "export ROBLOX_VIRTUAL_EVENTS_LIMIT=200; npm run collect:virtual-events && npm run seed:event-details -- --all"
 
 10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-early-nyt "npm run sync:puzzles -- --group early-nyt --skip-linkedin-if-missing"
 45 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-beebom-with-early "npm run sync:puzzles -- --group beebom-with-early --skip-linkedin-if-missing"
@@ -45,7 +47,7 @@
 5 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-tier "npm run stats:items:tier -- --apply"
 55 1-5,7-11,13-17,19-23 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-new "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=65000 ROBLOX_ITEM_STATS_DETAILS_BATCH=30 ROBLOX_RATE_LIMIT_FALLBACK_MS=60000; npm run stats:items:refresh -- --tier NEW --limit 300 --skip-index-refresh"
 32 2-6,8-11,14-18,20-22 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-hot "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=65000 ROBLOX_ITEM_STATS_DETAILS_BATCH=30 ROBLOX_RATE_LIMIT_FALLBACK_MS=60000; npm run stats:items:refresh -- --tier HOT --limit 250 --skip-index-refresh"
-32 1,7,13,19 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-warm "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=65000 ROBLOX_ITEM_STATS_DETAILS_BATCH=30 ROBLOX_RATE_LIMIT_FALLBACK_MS=60000; npm run stats:items:refresh -- --tier WARM --limit 400 --skip-index-refresh"
+32 1,7,13,19 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-warm "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=65000 ROBLOX_ITEM_STATS_DETAILS_BATCH=30 ROBLOX_ITEM_STATS_REFRESH_LEASE_MINUTES=150 ROBLOX_RATE_LIMIT_FALLBACK_MS=60000; npm run stats:items:refresh -- --tier WARM --limit 1500 --skip-index-refresh"
 32 23 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-cold "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=65000 ROBLOX_ITEM_STATS_DETAILS_BATCH=30 ROBLOX_RATE_LIMIT_FALLBACK_MS=60000; npm run stats:items:refresh -- --tier COLD --limit 400 --skip-index-refresh"
 17 1-23/3 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-resale "export ROBLOX_ITEM_RESALE_MIN_REQUEST_MS=3000; npm run stats:items:resale -- --limit 50 --max-age-hours 24"
 45 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-index "npm run stats:items:index:refresh"
