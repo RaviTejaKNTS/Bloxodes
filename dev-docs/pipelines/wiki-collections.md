@@ -97,6 +97,8 @@ Red Dead hub covers must use landscape source artwork or screenshots and fill th
 
 Collection image manifests are authoring inputs. Runtime item media is stored by immutable R2 object key in `wiki_collection_items` and served through the wiki-media worker. A collection is not ready merely because its copy exists: every item count, media key, section, sort order, useful field, badge/subtitle/description mapping, pagination state, and responsive renderer must be checked.
 
+Roblox collectible pagination rejection keeps the base collection canonical in the pagination layout. Page-level metadata is discarded when Next renders `notFound()`, so `/wiki/<game>/<collection>/page/2` inherits that canonical from `page/layout.tsx` while returning 404 with `noindex`. Database pagination retains its page-specific metadata. Verified in managed development on 2026-10-03 with Wings Areas and Rebirths.
+
 The collectible renderer mounts only the active cards or table view. This keeps large collections from duplicating every row in the initial HTML while preserving the cards/list switch after hydration.
 
 Roblox collectible collection canonicals also live in the collection segment layout. Next retains layout metadata when an invalid child pagination URL returns 404, so `/wiki/<game>/<collection>/page/2` keeps the published collectible base URL as its canonical. The failing page remains noindex; database pages keep their existing page-level canonicals. Managed-development HTTP checks on October 2, 2026 confirmed the collectible base route, ordinary and Twitterbot 404 responses, an unknown collection, and a valid database page 2.

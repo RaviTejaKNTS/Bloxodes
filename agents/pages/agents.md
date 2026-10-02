@@ -145,3 +145,6 @@ Checklist and quiz routes use neutral contracts/configuration in `lib/engagement
 ### Emote IDs and commands (2026-09-15)
 
 `/catalog/roblox-items-and-bundles/roblox-emotes` is the Marketplace emote ID browser with images, prices, creators, search, filters, and pagination. `/catalog/roblox-emote-commands` is a separate server-rendered reference for source-verified `/e` commands with copy controls, usage guidance, its own canonical and ItemList schema. Marketplace names are never treated as commands. The legacy `/catalog/roblox-emotes` redirect remains.
+
+
+Roblox wiki collectible pagination canonical, verified 2026-10-03: `apps/web/src/app/(site)/wiki/[slug]/[collection]/page/layout.tsx` preserves the base collection canonical when page-level `notFound()` rejects pagination. The rejected route remains 404/noindex. Database pagination metadata remains page-specific.
