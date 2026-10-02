@@ -31,7 +31,7 @@ Public unauthenticated health-shaped routes returning `401` is expected where an
 ## Health Caveats
 
 - On 2026-08-15, the `supabase-meta` image-level health probe had accumulated about 19,000 unreaped Node child processes over two months and was using about one CPU continuously. Recreating only Meta cleared the processes; Compose now explicitly disables that probe so it cannot recur. Meta remained running and public database traffic was not restarted.
-- `supabase-rest` is Docker-unhealthy because the configured probe calls `localhost:3001/ready`, which refuses the connection.
+- On October 2, the REST readiness listener moved from `localhost` to `127.0.0.1`. The former resolved to IPv6 while the probe attempted IPv4. Recreating only the active REST container restored its Docker health and `/ready` returned 200; other stack services stayed running. The original Compose file remains in `docker-compose.yml.before-readiness-repair-20261002`.
 - Public REST returns the expected authenticated boundary and the app reads production successfully through Kong/proxy.
 
 The remaining REST state is a monitoring defect, not a data-plane outage. Align its probe with the proxy topology in a separate tested change.
@@ -77,8 +77,8 @@ Wiki collection page types are `database` and `collectible` across Roblox, GTA, 
 
 Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
 
-## October 2 pipeline migration preparation
+## October 2 pipeline repairs
 
-The existing managed-development environment service credentials return HTTP 200 and expose the article/wiki queues. The connected SQL tool still denies access to project `bbtcaurrtyoukvjbxbbj`. Service API keys are not management access tokens, and this project deliberately has no development database password in workstation env.
+The owner reconnected the authenticated connector to managed-development project `bbtcaurrtyoukvjbxbbj`. Both repair migrations are applied there under the committed versions `20261002105551` and `20261002111156`. Rollback-only fixtures passed case-insensitive code upsert, provider priority, reactivation timestamps, repeated bundle insertion and partial bundle upsert. There were zero duplicate live canonical keys. Managed-development readiness passed seven schema/API checks. Security and performance advisors reported existing warnings and informational findings; neither reported an error.
 
-Two forward migrations are prepared: `20261002105551` fixes atomic case-insensitive code upsert and provider precedence; `20261002111156` retires live duplicate legacy bundle aliases and prevents their recurrence. Neither has been applied. Verify both through authenticated managed-development SQL access, inspect migration/advisor/readiness results, then use the exact-SHA production release plan/apply. Production API/data repairs do not substitute for that schema verification.
+Production functions `set_roblox_catalog_item_identity` and `get_roblox_item_pipeline_health` belong to `supabase_admin`. The ordinary `postgres` role is not a member, so a plan using that role fails and rolls back. The schema release command accepts explicit `--database-role supabase_admin` for this ownership boundary, retaining exact-SHA, clean-checkout, ledger, transaction and apply-confirmation guards. Dokploy transport uses the same allowlisted role and now exposes PostgreSQL errors on failure. Production application remains pending the successful final plan and explicit schema approval.

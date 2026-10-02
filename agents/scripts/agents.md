@@ -316,3 +316,5 @@ For an exact manual publication recovery, `articles:publication:drain -- --ackno
 - `ops/prune-automation-caches.ts` plans or removes generated caches in superseded runtime releases while preserving source, state, credentials and retained releases. Runtime preparation owns recurring retention.
 - Article `--retry-technical` recognizes fixed URL-copy and read-only-review blockers without resetting quality budgets. Changed draft copy requires another editorial review.
 - Wiki leases, recovery and report output paths are owned by `wiki/wiki-lease-health.ts`, `wiki/run-homelab-wiki-automation.ts` and the restricted sandbox readiness probe. Optional owner-disabled recovery stays disabled.
+
+Schema release accepts explicit `--database-role supabase_admin` when ordinary `postgres` cannot replace administrator-owned functions. The Dokploy psql helper accepts the same two-role allowlist; failed plans expose their PostgreSQL error.

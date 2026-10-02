@@ -11,7 +11,10 @@ declare
   bundle_id bigint := 900000000000001;
 begin
   select id into page_id from public.code_pages order by is_published, id limit 1;
-  if page_id is null then raise exception 'A managed-development code page is required'; end if;
+  if page_id is null then
+    insert into public.code_pages(name,slug,is_published)
+      values('Pipeline rollback fixture','pipeline-rollback-fixture-20261002',false) returning id into page_id;
+  end if;
   if exists(select 1 from public.codes where code_page_id=page_id and upper(code)=upper(fixture)) then
     raise exception 'Code fixture already exists; do not overwrite it';
   end if;

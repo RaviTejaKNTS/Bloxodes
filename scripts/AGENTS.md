@@ -234,3 +234,5 @@ For an exact manual publication recovery, `articles:publication:drain -- --ackno
 `ops/prune-automation-caches.ts` plans generated cache retention by default. `--apply` preserves active/prepared/rollback/recent releases and every source/state/credential path. Runtime preparation runs this maintenance. Wiki HTML-size QA reads `WIKI_AUTOMATION_RESULT_ROOT` and writes reports inside that attempt.
 
 The VPS wrapper records outcomes under the owned worker `state` directory, waits for shared locks, and removes its exact container on timeout before releasing the lock. Event runners, optional held wiki recovery, and GitHub monitoring remain outside this repair. See the owning homelab/catalog/codes/stats documents for recovery boundaries and pending schema verification.
+
+Production schema release supports `--database-role postgres|supabase_admin`. Use the administrator only for migrations that must replace its owned functions. Both SSH and Dokploy retain the same clean exact-SHA, transaction, ledger and explicit apply guards.

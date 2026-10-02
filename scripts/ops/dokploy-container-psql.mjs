@@ -3,6 +3,11 @@ import WebSocket from "ws";
 const baseUrl = process.env.DOKPLOY_PUBLIC_URL?.trim();
 const apiKey = process.env.DOKPLOY_API_CLI_KEY?.trim();
 const tuplesOnly = process.argv.includes("--tuples-only");
+const roleIndex = process.argv.indexOf("--database-role");
+const databaseRole = roleIndex === -1 ? "postgres" : process.argv[roleIndex + 1];
+if (!["postgres", "supabase_admin"].includes(databaseRole)) {
+  throw new Error("--database-role must be postgres or supabase_admin.");
+}
 if (!baseUrl || !apiKey) {
   throw new Error("DOKPLOY_PUBLIC_URL and DOKPLOY_API_CLI_KEY are required for Dokploy transport.");
 }
@@ -29,7 +34,7 @@ const encodedSql = Buffer.from(sql, "utf8").toString("base64");
 const encodedChunks = encodedSql.match(/.{1,2048}/g) ?? [];
 const command = [
   `printf '\\n${beginMarker}\\n'`,
-  `base64 -d | psql -U postgres -d postgres -X -v ON_ERROR_STOP=1 ${psqlFlags}`,
+  `base64 -d | psql -U ${databaseRole} -d postgres -X -v ON_ERROR_STOP=1 ${psqlFlags}`,
   "code=$?",
   `printf '\\n${endMarker}%s\\n' "$code"`,
   "exit",
