@@ -3,6 +3,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import { resolveContentDates } from "@/lib/content-dates";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
+import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
 import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
 
 export const dynamic = "force-dynamic";
@@ -150,7 +151,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
   }
 
   const items: FeedItem[] = [];
-  for (const report of [robloxJuly2026Report, robloxJune2026Report]) {
+  for (const report of [robloxSeptember2026Report, robloxJuly2026Report, robloxJune2026Report]) {
     const monthlyReport = toFeedItem({
       title: report.title,
       path: `/stats/reports/${report.slug}`,
