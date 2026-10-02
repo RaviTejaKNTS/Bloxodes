@@ -130,6 +130,7 @@ if timeout --signal=TERM --kill-after=30 "$RUN_TIMEOUT" docker run --rm \
   --name "$CONTAINER" \
   --network "$DOCKER_NETWORK" \
   --env-file "$ENV_FILE" \
+  -e BLOXODES_ENV_PROFILE=process-only \
   -e SUPABASE_URL="$SUPABASE_INTERNAL_URL" \
   -e STATS_WORKER_COMMAND="$COMMAND" \
   -e STATS_WORKER_ACTIVE_CONTAINER_IDS="$ACTIVE_CONTAINER_IDS" \

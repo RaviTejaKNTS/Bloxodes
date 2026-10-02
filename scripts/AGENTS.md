@@ -236,3 +236,5 @@ For an exact manual publication recovery, `articles:publication:drain -- --ackno
 The VPS wrapper records outcomes under the owned worker `state` directory, waits for shared locks, and removes its exact container on timeout before releasing the lock. Event runners, optional held wiki recovery, and GitHub monitoring remain outside this repair. See the owning homelab/catalog/codes/stats documents for recovery boundaries and pending schema verification.
 
 Production schema release supports `--database-role postgres|supabase_admin`. Use the administrator only for migrations that must replace its owned functions. Both SSH and Dokploy retain the same clean exact-SHA, transaction, ledger and explicit apply guards.
+
+The worker image default and host wrapper both enforce `BLOXODES_ENV_PROFILE=process-only`, including Python commands. The wrapper sets it after `--env-file`; workstation profiles must never override scheduled worker environment ownership.

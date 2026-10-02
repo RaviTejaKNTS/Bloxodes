@@ -31,4 +31,6 @@ COPY env/config.json ./env/config.json
 # missing from the deliberately narrow worker image manifest.
 RUN npm run stats:worker:smoke
 
+ENV BLOXODES_ENV_PROFILE=process-only
+
 CMD ["sh", "-lc", "eval \"${STATS_WORKER_COMMAND:-npm run stats:audit}\""]

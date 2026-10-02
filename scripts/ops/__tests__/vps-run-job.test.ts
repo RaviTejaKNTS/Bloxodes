@@ -14,7 +14,7 @@ case "$1" in
  network|image) exit 0 ;;
  ps) exit 0 ;;
  rm) echo removed >> "$STATS_WORKER_BASE/removed"; exit 0 ;;
- run) case "$*" in *--name*) sleep "\${MOCK_DURATION:-0}"; exit "\${MOCK_EXIT:-0}" ;; *) exit 0 ;; esac ;;
+ run) case "$*" in *--name*) case "$*" in *BLOXODES_ENV_PROFILE=process-only*) ;; *) exit 22 ;; esac; sleep "\${MOCK_DURATION:-0}"; exit "\${MOCK_EXIT:-0}" ;; *) exit 0 ;; esac ;;
 esac
 `, {mode:0o755});
   const env = {...process.env, STATS_WORKER_BASE:root, PATH:path.join(root,'bin')+':'+process.env.PATH};

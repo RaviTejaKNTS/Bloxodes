@@ -134,3 +134,5 @@ Host resolver repair is owned by [homelab operations](infrastructure/homelab.md#
 ## October 2 worker and operator verification
 
 The free-item candidate Python importer uses existing process credentials under `BLOXODES_ENV_PROFILE=process-only`. It never searches workstation env files in that profile. Other runs load the existing target file, strip dotenv quotes, then apply process values; production candidate imports still require `ALLOW_PROD_FREE_ITEMS_IMPORT=true`. The protected VPS overlay now names the tested `codex-admin` operator. No secret values were added or transferred. Environment doctor and contract checks passed.
+
+The Docker worker sets `BLOXODES_ENV_PROFILE=process-only` by default, and the host wrapper explicitly enforces it after loading the worker env file. This also covers Python jobs, which do not use the Node loader's implicit production profile. The wrapper regression fixture rejects real job launches missing that process-only setting.
