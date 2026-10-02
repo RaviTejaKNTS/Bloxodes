@@ -105,3 +105,5 @@ October 2 repairs released as `34b925cca7788e7db83e58d640031e89ffe01cec`. The pr
 The existing `alpine/socat` REST proxy is now Compose-owned as `rest-proxy`, sharing the REST service namespace with an explicit healthy/restart dependency. Reconcile the pair with `docker compose -f docker-compose.yml -f docker-compose.pg17.yml up -d rest rest-proxy`; do not replace REST alone with `--no-deps`. Verify that proxy `HostConfig.NetworkMode` is `container:<current REST container ID>`, `postgrest --ready` succeeds, an authenticated public REST read succeeds, and the web health check is healthy. The declaration avoids leaving a manually launched proxy attached to a removed container. This operation controls the existing active pair only.
 
 Worker launches explicitly enforce `BLOXODES_ENV_PROFILE=process-only`, matching the image default. This is required for the Python candidate importer as well as Node jobs. The wrapper test rejects real execution commands that omit it.
+
+The stats worker installs Python system CA certificates and fails its image build when Python's HTTPS trust store is empty. Node's built-in roots alone do not cover the Python candidate importer.

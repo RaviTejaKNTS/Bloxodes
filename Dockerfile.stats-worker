@@ -9,8 +9,10 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV BLOXODES_BUILD_SHA=$BLOXODES_BUILD_SHA
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends python3 \
+  && apt-get install -y --no-install-recommends python3 ca-certificates \
   && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -c "import ssl; assert ssl.create_default_context().get_ca_certs(), 'Python HTTPS trust store is empty'"
 
 COPY package.json package-lock.json tsconfig.json ./
 COPY apps/web/package.json ./apps/web/package.json
