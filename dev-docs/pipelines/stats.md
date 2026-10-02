@@ -100,4 +100,4 @@ The worker wrapper records durable host outcomes and last-success timestamps, wa
 
 Worker smoke now verifies codes/catalog/item and reconciliation helpers in the narrow Docker image, including their runtime imports. The released worker must still be built and promoted at its explicit approved SHA; changing source files alone does not update the VPS image.
 
-Installed worker SHA on October 2: `34b925cca7788e7db83e58d640031e89ffe01cec`. The new wrapper reconciled all 13 observed orphan Docker execution records, preserving active workers. Its bounded WARM canary completed 30 metadata/history/thumbnail rows with zero failed batches. The active WARM schedule now requests four batches of 1,500 daily. Backlog catch-up continues through those scheduled jobs.
+Installed worker SHA on October 2: `69b47e4f888896c66cfe1524978926fc0de009ae`. The new wrapper reconciled all 13 observed orphan Docker execution records, preserving active workers. Its bounded WARM canary completed 30 metadata/history/thumbnail rows with zero failed batches. The active WARM schedule now requests four batches of 1,500 daily. Backlog catch-up continues through those scheduled jobs.

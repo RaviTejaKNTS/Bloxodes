@@ -107,3 +107,5 @@ The existing `alpine/socat` REST proxy is now Compose-owned as `rest-proxy`, sha
 Worker launches explicitly enforce `BLOXODES_ENV_PROFILE=process-only`, matching the image default. This is required for the Python candidate importer as well as Node jobs. The wrapper test rejects real execution commands that omit it.
 
 The stats worker installs Python system CA certificates and fails its image build when Python's HTTPS trust store is empty. Node's built-in roots alone do not cover the Python candidate importer.
+
+Final VPS worker image and approved-worker-sha: `69b47e4f888896c66cfe1524978926fc0de009ae`. The host wrapper matches committed checksum `2abf4878d00c209cf90adebea9e117bfacf8fcf086c152607af0c905c90bdc52`. Full candidate import and bounded official verification succeeded. Web/homelab remain at the code-equivalent pipeline runtime `34b925cca7788e7db83e58d640031e89ffe01cec`; subsequent commits concern the worker, operations and schema snapshot.
