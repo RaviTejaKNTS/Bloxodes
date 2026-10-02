@@ -14,6 +14,8 @@ Evidence: repository architecture/configuration, database-only wiki/quiz runtime
 - Database functions: migrations and Edge Functions under `supabase/`.
 - Game namespaces: the established Roblox routes remain at `/wiki`, `/tools`, and the other root content families. GTA is isolated under `/gta`, and Red Dead under `/red-dead`, each with its own sidebar/search scope and desktop/mobile links to its published game wikis (16 GTA and five Red Dead hubs), wiki routes, and platform-owned Supabase tables while reusing the public shell and collection renderer. `/games` is the platform chooser. GTA and Red Dead tools are intentionally absent until real tools are ready to ship.
 
+Navigation and Games page implementation checked locally on 2026-10-02. The shared desktop/mobile navigation order is Home, Articles, Wiki, Catalog, Tools, Stats, Checklists, Quizzes, Codes, Events, Games. `/games` links to Roblox, GTA, Red Dead, and Puzzles through 1200 × 675 image cards with titles over a bottom gradient. Local thumbnails use Roblox press artwork, Rockstar store screenshots, and a CC0 Wordle screenshot; source credits live in `apps/web/public/images/games/SOURCES.md`. Puzzle routes remain under `/puzzles` and activate Games in the shared navigation. These UI changes require a web deployment; production verification is separate.
+
 ## Production Request Path
 
 1. `bloxodes.com` is proxied by Cloudflare.

@@ -10,7 +10,6 @@ import {
   KeyRound,
   LayoutGrid,
   Map,
-  Puzzle,
   SquareCheckBig,
   Wrench
 } from "lucide-react";
@@ -47,17 +46,16 @@ export type SidebarAccount = {
 
 export const siteNavLinks: SiteNavLink[] = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/games", label: "Games", icon: Gamepad2 },
-  { href: "/codes", label: "Codes", icon: KeyRound },
-  { href: "/stats", label: "Stats", icon: BarChart3 },
-  { href: "/wiki", label: "Wiki", icon: BookOpen },
-  { href: "/tools", label: "Tools", icon: Wrench },
-  { href: "/catalog", label: "Catalog", icon: LayoutGrid },
-  { href: "/checklists", label: "Checklists", icon: SquareCheckBig },
-  { href: "/events", label: "Events", icon: Calendar },
   { href: "/articles", label: "Articles", icon: FileText },
-  { href: "/puzzles", label: "Puzzles", icon: Puzzle },
-  { href: "/quizzes", label: "Quizzes", icon: Award }
+  { href: "/wiki", label: "Wiki", icon: BookOpen },
+  { href: "/catalog", label: "Catalog", icon: LayoutGrid },
+  { href: "/tools", label: "Tools", icon: Wrench },
+  { href: "/stats", label: "Stats", icon: BarChart3 },
+  { href: "/checklists", label: "Checklists", icon: SquareCheckBig },
+  { href: "/quizzes", label: "Quizzes", icon: Award },
+  { href: "/codes", label: "Codes", icon: KeyRound },
+  { href: "/events", label: "Events", icon: Calendar },
+  { href: "/games", label: "Games", icon: Gamepad2 }
 ];
 
 export const gtaNavLinks: SiteNavLink[] = [
@@ -130,6 +128,7 @@ export const signedOutSidebarAccount: SidebarAccount = {
 
 export function isNavLinkActive(pathname: string | null | undefined, href: string) {
   const path = pathname ?? "/";
+  if (href === "/games" && (path === "/puzzles" || path.startsWith("/puzzles/"))) return true;
   if (href === "/gta" || href === "/red-dead") return path === href;
   return path === href || (href !== "/" && path.startsWith(`${href}/`));
 }

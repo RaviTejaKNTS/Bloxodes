@@ -189,6 +189,7 @@ export async function renderPuzzlesIndex({ pages }: Awaited<ReturnType<typeof lo
   return (
     <div className="space-y-8">
       <header className="space-y-4">
+        <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Games", href: "/games" }, { label: "Puzzles" }]} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Daily puzzle answers in one clean place</h1>
         <p className="max-w-2xl text-base text-muted md:text-lg">{PUZZLES_DESCRIPTION}</p>
       </header>
@@ -250,6 +251,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
   const previousAnswers = [yesterday, ...archive].filter((answer): answer is PuzzleAnswer => Boolean(answer));
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: baseUrl },
+    { name: "Games", url: `${baseUrl}/games` },
     { name: "Puzzles", url: `${baseUrl}/puzzles` },
     { name: page.title, url: `${baseUrl}/puzzles/${page.slug}` }
   ]);
@@ -268,7 +270,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
     <article className="space-y-8">
       <PageBreadcrumb
         className="mb-4 text-xs uppercase tracking-[0.25em] text-muted"
-        items={[{ label: "Home", href: "/" }, { label: "Puzzles", href: "/puzzles" }, { label: page.title }]}
+        items={[{ label: "Home", href: "/" }, { label: "Games", href: "/games" }, { label: "Puzzles", href: "/puzzles" }, { label: page.title }]}
       />
       <header className="mb-6">
         <h1 className="text-4xl font-bold text-foreground md:text-5xl">{page.title}</h1>
@@ -352,6 +354,7 @@ export async function renderPuzzleArchive(data: NonNullable<Awaited<ReturnType<t
       <PageBreadcrumb
         items={[
           { label: "Home", href: "/" },
+          { label: "Games", href: "/games" },
           { label: "Puzzles", href: "/puzzles" },
           { label: page.title, href: `/puzzles/${page.slug}` },
           { label: formatDateShort(answer.answer_date) }

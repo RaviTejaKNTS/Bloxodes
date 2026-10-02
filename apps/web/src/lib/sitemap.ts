@@ -20,6 +20,7 @@ export type MainSitemapRoute = {
 
 export const MAIN_SITEMAP_ROUTES: MainSitemapRoute[] = [
   { path: "/", changefreq: "daily", priority: "1.0" },
+  { path: "/games", changefreq: "weekly", priority: "0.9" },
   { path: "/codes", changefreq: "daily", priority: "0.7" },
   { path: "/articles", changefreq: "weekly", priority: "0.9" },
   { path: "/tools", changefreq: "weekly", priority: "0.9" },

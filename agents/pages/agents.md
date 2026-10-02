@@ -17,7 +17,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Secure shell | signed-in UI | `src/app/(secure)/layout.tsx` |
 | Not found | `404` | `src/app/(site)/not-found.tsx` |
 | Home | `/` | `src/app/(site)/page.tsx` |
-| Game platforms | `/games` | `src/app/(site)/games/page.tsx`; chooses between the established Roblox content surface and the GTA and Red Dead franchise namespaces. |
+| Game platforms | `/games` | `src/app/(site)/games/page.tsx`; large 1200 × 675 thumbnail cards link to Roblox, GTA, Red Dead, and Puzzles, with names over a bottom gradient and theme-aware borders. Includes CollectionPage/ItemList and breadcrumb JSON-LD and main sitemap coverage. Puzzles belong under Games in desktop and mobile navigation. |
 | Legacy slug redirect | `/{legacy-slug}` | `src/app/(site)/[slug]/page.tsx`, backed by `src/data/slug_oldslugs.json` |
 
 ## Secure Account UI
