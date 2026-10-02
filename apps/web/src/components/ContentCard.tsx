@@ -77,6 +77,8 @@ type ContentCardProps = {
   overlayTextClassName?: string;
   /** overlay center only: let the subtitle wrap to 2 lines while reserving that height (keeps the hero anchored across cards). */
   overlaySubtitleReserve?: boolean;
+  /** overlay center only: compact typography and spacing for small cards. */
+  overlayCompact?: boolean;
 
   /** Outer container override. */
   className?: string;
@@ -119,6 +121,7 @@ export function ContentCard({
   overlayScrim = false,
   overlayTextClassName,
   overlaySubtitleReserve = false,
+  overlayCompact = false,
   className,
   thumbClassName
 }: ContentCardProps) {
@@ -154,23 +157,33 @@ export function ContentCard({
                 {overlayScrim ? <div className="absolute inset-0 bg-white/80 dark:bg-black/75" aria-hidden /> : null}
                 <div
                   className={cn(
-                    "absolute inset-0 z-10 flex items-center justify-center p-5 text-center",
+                    "absolute inset-0 z-10 flex items-center justify-center text-center",
+                    overlayCompact ? "p-[clamp(0.75rem,4.5cqw,1rem)]" : "p-5",
                     overlayTextClassName ?? "text-foreground dark:text-white"
                   )}
                 >
-                  <div className="w-full space-y-1.5">
+                  <div className="min-w-0 w-full space-y-1.5">
                     {eyebrow ? (
-                      <p className="line-clamp-1 text-[11px] font-semibold uppercase tracking-[0.28em] opacity-80">
+                      <p className={cn(
+                        "mb-0 line-clamp-1 opacity-80",
+                        overlayCompact
+                          ? "text-xs font-medium leading-snug tracking-normal"
+                          : "text-[11px] font-semibold uppercase tracking-[0.28em]"
+                      )}>
                         {eyebrow}
                       </p>
                     ) : null}
-                    <Title as={titleAs} className={cn("text-3xl font-bold tracking-tight sm:text-4xl", titleClassName)}>
+                    <Title as={titleAs} className={cn(
+                      overlayCompact ? "break-words text-lg font-semibold" : "text-3xl font-bold tracking-tight sm:text-4xl",
+                      titleClassName
+                    )}>
                       {title}
                     </Title>
                     {subtitle ? (
                       <div
                         className={cn(
-                          "text-sm opacity-80",
+                          "opacity-80",
+                          overlayCompact ? "break-words text-[clamp(0.75rem,4cqw,0.8125rem)]" : "text-sm",
                           overlaySubtitleReserve ? "line-clamp-2 min-h-[2.5em] leading-snug" : "line-clamp-1"
                         )}
                       >

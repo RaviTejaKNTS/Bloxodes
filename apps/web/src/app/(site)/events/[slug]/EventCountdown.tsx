@@ -48,7 +48,7 @@ export function EventCountdown({
   }
 
   return (
-    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border/60 bg-surface-muted lg:max-w-[50%]">
+    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border/60 bg-surface-muted [container-type:inline-size] lg:max-w-[50%]">
       {thumbnailUrl ? (
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -58,12 +58,12 @@ export function EventCountdown({
         <div className="absolute inset-0 bg-black" />
       )}
       <div className="absolute inset-0 bg-white/80 dark:bg-black/80" />
-      <div className="relative z-10 flex h-full items-center justify-center p-6 text-center">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-foreground/80 dark:text-white/80">
+      <div className="relative z-10 flex h-full items-center justify-center p-[clamp(0.75rem,4.5cqw,1rem)] text-center">
+        <div className="min-w-0 space-y-2">
+          <p className="mb-0 line-clamp-2 break-words text-sm font-medium leading-snug text-foreground/80 dark:text-white/80">
             {eventName}
           </p>
-          <p className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl dark:text-white">
+          <p className="mb-0 whitespace-nowrap text-[clamp(1rem,8cqw,1.5rem)] font-semibold leading-tight tracking-tight text-foreground tabular-nums dark:text-white">
             {label}
           </p>
         </div>

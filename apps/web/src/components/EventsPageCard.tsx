@@ -118,7 +118,6 @@ export function EventsPageCard({
 
   const hasTimer = Boolean(timerLabel) && timerLabel !== "No event time";
 
-  // Consistent layout for every status: status label / big time / game · event.
   const eyebrowText =
     status === "current"
       ? "Live now"
@@ -134,7 +133,9 @@ export function EventsPageCard({
       : hasTimer && status === "upcoming"
         ? "text-accent"
         : "";
-  const heroSize = hasTimer ? "text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl" : "text-xl font-bold";
+  const heroSize = hasTimer
+    ? "whitespace-nowrap text-[clamp(1rem,8cqw,1.5rem)] font-semibold leading-tight tracking-tight tabular-nums"
+    : "text-[clamp(1rem,7cqw,1.25rem)] font-semibold leading-snug";
   const subtitleText = hasTimer ? (eventName ? `${gameTitle} · ${eventName}` : gameTitle) : eventTitle;
 
   return (
@@ -144,6 +145,8 @@ export function EventsPageCard({
       overlayAlign="center"
       overlayScrim
       overlaySubtitleReserve
+      overlayCompact
+      className="[container-type:inline-size]"
       href={`/events/${slug}`}
       prefetch={false}
       image={{ src: imageUrl, alt: gameTitle, ratio: "16:9" }}
