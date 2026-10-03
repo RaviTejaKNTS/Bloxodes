@@ -1,0 +1,40 @@
+{
+  "title": "How to Dunk in Practical Basketball (Roblox)",
+  "slug": "how-to-dunk-in-practical-basketball",
+  "meta_description": "PC keyboard inputs for every main dunk in Practical Basketball: standing dunk, driving dunk, contact dunk, and self lob dunk, plus why finishes turn into layups.",
+  "content_md": "Your dunk button in Practical Basketball is **Space**, not **E**. Stand too far from the rim, sprint without real momentum, or miss the green timing meter and the game will hand you a layup instead. Everything below is PC keyboard for the current stress-test build. If a move stops working after an update, open the in-game controls overlay and confirm the binding before you blame your build.\n\nNew to the mode? The [Practical Basketball wiki](/wiki/practical-basketball) covers the broader game loop and positions.\n\n## Standing and driving dunks use Space and the green timing meter\n\n**E** is shoot and layup. Hold **E** while running and you get a layup. Dunks use **Space**, and a timing meter appears when you are close enough to the rim.\n\n**Standing dunk:** Park under the basket with little or no movement. Hold **Space**. When the timing meter pops up, release in the **green zone**. Best when the paint is open and you do not need a running start.\n\n**Driving dunk:** Hold **Shift** to sprint, attack the paint with forward momentum, and press **Shift + Space** as you reach the rim. Release in the green zone. Start the gather just outside the restricted area, not from half court, or you may get a gather instead of a full dunk.\n\n| Dunk type | Input | Best use |\n| --- | --- | --- |\n| Standing dunk | Hold **Space** near rim | Stationary finish under the basket |\n| Driving dunk | **Shift + Space** on approach | Sprinting lane to the rim |\n\nLine up on the painted area when you can. A sharp approach angle can still turn a dunk attempt into a layup even with the right buttons.\n\n## Self lob dunks and contact dunks need a clean lane and the right finish\n\n**Self lob dunk:** On an open fast break, sprint toward the rim and press **F** to throw a self lob (some guides list **Shift + F** because sprint is already held). Catch near the rim, then press **Space** for a dunk or **E** for a layup. For teammate lobs and full self-lob setup, see [how to lob and self lob in Practical Basketball](/articles/how-to-lob-and-self-lob-in-practical-basketball).\n\n**Contact dunk:** Same input as a driving dunk: **Shift + Space** with speed into the paint. Contact dunks are a situational animation when you have momentum and favorable positioning against a defender. No separate button. Bodies parked directly under the rim can still force a layup or a block, badge stack or not.\n\nBadges like **High Flyer**, **Traffic Finisher**, and **Relentless Finisher** on the [Practical Basketball badges](/wiki/practical-basketball/badges) list can make driving and contact finishes land more often. Slashers chasing highlight contact dunks may like **Highlight Reel**; bigs leaning on paint bully finishes can look at **Diesel** in the [takeovers](/wiki/practical-basketball/takeovers) collection. Spacing and timing still run the show, but those picks help when the lane is tight.\n\n## If your dunk keeps failing, check the button, spacing, and timing\n\nMost dunk misses come down to a few repeat offenders:\n\n- **You pressed E instead of Space.** Near the basket, E is layup territory. Space is dunk territory.\n- **No sprint or momentum on the drive.** A slow walk-up often becomes a gather or a weak finish.\n- **The paint is crowded.** A defender directly under the rim can force a layup, a block, or a bad animation.\n- **Early or late on the meter.** Release inside the green zone. White or red usually means a miss or a softer finish.\n- **Bad approach angle.** Cut toward the rim with a straighter line when the lane allows it.\n\nPractice on an empty court or in shootaround until the meter timing feels automatic. Standing dunks are the tutorial move; driving dunks are what you will actually score with once the basics click.\n\nMost builds can dunk in the right spot. Taller builds and stronger finishing attributes make standing, driving, and contact dunks more reliable, but position and inputs still come first.",
+  "faq_json": [
+    {
+      "q": "Why does my dunk turn into a layup in Practical Basketball?",
+      "a": "You probably pressed E instead of Space, started too far from the rim, had low momentum on the drive, or released the timing meter outside the green zone. A defender parked directly under the basket can also force a layup."
+    },
+    {
+      "q": "Can every build dunk in Practical Basketball?",
+      "a": "Most builds can finish a dunk in the right situation, especially a standing dunk under the basket. Taller builds and higher finishing attributes make driving and contact dunks more consistent, but spacing and inputs matter more than stats alone."
+    },
+    {
+      "q": "What is the difference between a driving dunk and a contact dunk?",
+      "a": "Same button: Shift + Space with sprint momentum. A contact dunk is a situational animation when you have speed and favorable positioning against a defender. There is no separate contact-dunk key."
+    },
+    {
+      "q": "Do I need a self lob to dunk in Practical Basketball?",
+      "a": "No. Standing and driving dunks are the baseline finishes. Self lob dunks are an optional fast-break tool when you have a clean lane to throw, catch, and finish with Space."
+    }
+  ],
+  "cover_image": null,
+  "author_id": null,
+  "universe_id": 7529591378,
+  "tags": [
+    "practical-basketball",
+    "dunking",
+    "controls",
+    "how-to"
+  ],
+  "sources": [
+    "https://beebom.com/how-to-dunk-in-practical-basketball/",
+    "https://allthings.how/practical-basketball-controls-full-pc-xbox-and-ps5-keybinds-stress-test-3/",
+    "https://allthings.how/practical-basketball-full-controls-guide-for-keyboard-and-controller-roblox/",
+    "https://www.thespike.gg/roblox/beginner-guides/roblox-practical-basketball-controls-guide"
+  ],
+  "is_published": true
+}
