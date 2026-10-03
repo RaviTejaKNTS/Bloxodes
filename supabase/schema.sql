@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict ZxrvV4jQY4yqbf8oDDlwFD8oGP6mdbeHXCNKaiaHoCMTw1RnY8EK9i2qOw3FBWz
+\restrict Qv0KuKt0qo2p8dzvfMzydq10NvbXHt6GFXlBABbTYhSzJ46WkJc4R6xoOqOSbXb
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -350,6 +350,67 @@ ALTER FUNCTION "extensions"."set_graphql_placeholder"() OWNER TO "supabase_admin
 
 COMMENT ON FUNCTION "extensions"."set_graphql_placeholder"() IS 'Reintroduces placeholder function for graphql_public.graphql';
 
+
+--
+-- Name: activate_minecraft_edition_migration("jsonb"); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."activate_minecraft_edition_migration"("expected" "jsonb") RETURNS "jsonb"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+declare
+  entry record;
+  page_row public.minecraft_wiki_collection_pages%rowtype;
+  dataset_row public.minecraft_wiki_collection_datasets%rowtype;
+  edition_slug text;
+  required_slugs text[] := array['armor','armor-trims','biomes','blocks','commands','crops-and-plants','enchantments','food','fuels','items','mobs','music-discs','ores','potions','pottery-sherds','recipes','redstone-components','status-effects','structures','tools','villager-professions','villager-trades','weapons'];
+begin
+  if jsonb_typeof(expected) <> 'array' or jsonb_array_length(expected) <> 48 then
+    raise exception 'An exact 48-revision Minecraft edition allowlist is required';
+  end if;
+  if (select count(distinct row.code) from jsonb_to_recordset(expected) as row(code text)) <> 48 then
+    raise exception 'Edition publication codes must be unique';
+  end if;
+  foreach edition_slug in array array['minecraft-java','minecraft-bedrock'] loop
+    if not exists (select 1 from public.minecraft_games where slug = edition_slug)
+      or not exists (select 1 from public.minecraft_wiki_pages wiki join public.minecraft_games game on game.id = wiki.game_id where wiki.slug = edition_slug and game.slug = edition_slug) then
+      raise exception 'Stage the owned edition game and wiki before activation: %', edition_slug;
+    end if;
+    if (select count(*) from jsonb_to_recordset(expected) as row(code text)
+      where row.code = any(select edition_slug || '-' || slug from unnest(required_slugs || case when edition_slug = 'minecraft-java' then 'advancements' else 'achievements' end) slug)) <> 24 then
+      raise exception 'Unexpected collection inventory for %', edition_slug;
+    end if;
+  end loop;
+  -- Validate every pointer and roster before changing any publication flag.
+  for entry in select * from jsonb_to_recordset(expected) as row(code text, content_hash text, item_count integer) loop
+    select * into strict page_row from public.minecraft_wiki_collection_pages where code = entry.code for update;
+    if page_row.wiki_slug not in ('minecraft-java','minecraft-bedrock') or page_row.code <> page_row.wiki_slug || '-' || page_row.collection_slug then
+      raise exception 'Invalid edition ownership for %', entry.code;
+    end if;
+    select * into strict dataset_row from public.minecraft_wiki_collection_datasets
+      where collection_page_id = page_row.id and content_hash = entry.content_hash;
+    if entry.item_count is null or entry.item_count < 1 or entry.item_count <> dataset_row.item_count or entry.item_count <> page_row.item_count
+      or entry.item_count <> (select count(*) from public.minecraft_wiki_collection_items where dataset_id = dataset_row.id) then
+      raise exception 'Incomplete staged revision for %', entry.code;
+    end if;
+  end loop;
+  update public.minecraft_games set is_published = true where slug in ('minecraft-java','minecraft-bedrock');
+  update public.minecraft_wiki_pages set is_published = true where slug in ('minecraft-java','minecraft-bedrock');
+  for entry in select * from jsonb_to_recordset(expected) as row(code text, content_hash text, item_count integer) loop
+    update public.minecraft_wiki_collection_pages page
+      set published_dataset_id = dataset.id, is_published = true
+      from public.minecraft_wiki_collection_datasets dataset
+      where page.code = entry.code and dataset.collection_page_id = page.id and dataset.content_hash = entry.content_hash;
+  end loop;
+  -- Parent visibility triggers hide the legacy hub and search children atomically.
+  update public.minecraft_games set is_published = false where slug = 'minecraft';
+  return jsonb_build_object('hubs', 2, 'collections', 48, 'legacy_archived', true);
+end;
+$$;
+
+
+ALTER FUNCTION "public"."activate_minecraft_edition_migration"("expected" "jsonb") OWNER TO "supabase_admin";
 
 --
 -- Name: article_generation_queue_idempotency_key("text", bigint); Type: FUNCTION; Schema: public; Owner: postgres
@@ -2655,6 +2716,23 @@ $$;
 
 
 ALTER FUNCTION "public"."is_admin"("user_uuid" "uuid") OWNER TO "postgres";
+
+--
+-- Name: minecraft_wiki_path("text"); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."minecraft_wiki_path"("wiki_slug" "text") RETURNS "text"
+    LANGUAGE "sql" IMMUTABLE STRICT
+    SET "search_path" TO ''
+    AS $$
+  select case wiki_slug
+    when 'minecraft-java' then '/minecraft/java/wiki'
+    when 'minecraft-bedrock' then '/minecraft/bedrock/wiki'
+    else '/minecraft/wiki' end;
+$$;
+
+
+ALTER FUNCTION "public"."minecraft_wiki_path"("wiki_slug" "text") OWNER TO "supabase_admin";
 
 --
 -- Name: normalize_section_code("text"); Type: FUNCTION; Schema: public; Owner: postgres
@@ -5595,7 +5673,7 @@ begin
       perform public.enqueue_revalidation(
         'minecraft_wiki_collection',
         (
-          select lower(page.collection_slug)
+          select lower(page.code)
           from public.minecraft_wiki_collection_pages page
           where page.id = old.entity_id
         ),
@@ -5619,7 +5697,7 @@ begin
       perform public.enqueue_revalidation(
         'minecraft_wiki_collection',
         (
-          select lower(page.collection_slug)
+          select lower(page.code)
           from public.minecraft_wiki_collection_pages page
           where page.id = new.entity_id
         ),
@@ -6358,7 +6436,7 @@ begin
   if tg_op = 'DELETE' then
     if coalesce((to_jsonb(old) ->> 'is_published')::boolean, false) then
       event_slug := case
-        when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(old) ->> 'collection_slug'
+        when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(old) ->> 'code'
         else to_jsonb(old) ->> 'slug'
       end;
       perform public.enqueue_revalidation(event_type, event_slug, tg_table_name || '_delete');
@@ -6368,7 +6446,7 @@ begin
 
   if coalesce((to_jsonb(new) ->> 'is_published')::boolean, false) then
     event_slug := case
-      when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(new) ->> 'collection_slug'
+      when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(new) ->> 'code'
       else to_jsonb(new) ->> 'slug'
     end;
     perform public.enqueue_revalidation(event_type, event_slug, tg_table_name || '_' || lower(tg_op));
@@ -6376,7 +6454,7 @@ begin
 
   old_slug := case
     when tg_op <> 'UPDATE' then null
-    when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(old) ->> 'collection_slug'
+    when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(old) ->> 'code'
     else to_jsonb(old) ->> 'slug'
   end;
 
@@ -7376,13 +7454,13 @@ begin
     target_slug := new.slug;
     target_title := new.title;
     target_subtitle := 'Minecraft wiki';
-    target_url := '/minecraft/wiki';
+    target_url := public.minecraft_wiki_path(new.slug);
     target_search := concat_ws(' ', new.title, new.slug, new.seo_title, new.meta_description, new.description_md, new.tips_md);
   else
-    target_slug := new.collection_slug;
+    target_slug := new.code;
     target_title := new.title;
     target_subtitle := 'Minecraft wiki collection';
-    target_url := '/minecraft/wiki/' || new.collection_slug;
+    target_url := public.minecraft_wiki_path(new.wiki_slug) || '/' || new.collection_slug;
     target_search := concat_ws(' ', new.title, new.display_name, new.code, new.wiki_slug, new.collection_slug, new.seo_title, new.meta_description, new.intro_md, new.description_md, new.how_it_works_md, new.wiki_md);
   end if;
 
@@ -9473,7 +9551,7 @@ CREATE TABLE "public"."minecraft_games" (
     CONSTRAINT "minecraft_games_parent_not_self" CHECK ((("parent_game_id" IS NULL) OR ("parent_game_id" <> "id"))),
     CONSTRAINT "minecraft_games_platforms_array" CHECK (("jsonb_typeof"("platforms_json") = 'array'::"text")),
     CONSTRAINT "minecraft_games_release_dates_object" CHECK (("jsonb_typeof"("release_dates_json") = 'object'::"text")),
-    CONSTRAINT "minecraft_games_slug_check" CHECK (("slug" = 'minecraft'::"text")),
+    CONSTRAINT "minecraft_games_slug_check" CHECK (("slug" = ANY (ARRAY['minecraft'::"text", 'minecraft-java'::"text", 'minecraft-bedrock'::"text"]))),
     CONSTRAINT "minecraft_games_slug_not_blank" CHECK (("length"("btrim"("slug")) > 0)),
     CONSTRAINT "minecraft_games_status_check" CHECK (("status" = ANY (ARRAY['announced'::"text", 'upcoming'::"text", 'released'::"text"]))),
     CONSTRAINT "minecraft_games_title_not_blank" CHECK (("length"("btrim"("title")) > 0))
@@ -9665,7 +9743,7 @@ CREATE TABLE "public"."minecraft_wiki_collection_pages" (
     CONSTRAINT "minecraft_wiki_collection_pages_faq_array" CHECK (("jsonb_typeof"("faq_json") = 'array'::"text")),
     CONSTRAINT "minecraft_wiki_collection_pages_item_count_nonnegative" CHECK (("item_count" >= 0)),
     CONSTRAINT "minecraft_wiki_collection_pages_page_type_check" CHECK (("page_type" = 'database'::"text")),
-    CONSTRAINT "minecraft_wiki_collection_pages_wiki_slug_check" CHECK (("wiki_slug" = 'minecraft'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_pages_wiki_slug_check" CHECK (("wiki_slug" = ANY (ARRAY['minecraft'::"text", 'minecraft-java'::"text", 'minecraft-bedrock'::"text"]))),
     CONSTRAINT "minecraft_wiki_collection_pages_wiki_slug_not_blank" CHECK (("length"("btrim"("wiki_slug")) > 0))
 );
 
@@ -9692,7 +9770,7 @@ CREATE TABLE "public"."minecraft_wiki_pages" (
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     CONSTRAINT "minecraft_wiki_pages_controls_array" CHECK (("jsonb_typeof"("controls_json") = 'array'::"text")),
-    CONSTRAINT "minecraft_wiki_pages_slug_check" CHECK (("slug" = 'minecraft'::"text")),
+    CONSTRAINT "minecraft_wiki_pages_slug_check" CHECK (("slug" = ANY (ARRAY['minecraft'::"text", 'minecraft-java'::"text", 'minecraft-bedrock'::"text"]))),
     CONSTRAINT "minecraft_wiki_pages_slug_not_blank" CHECK (("length"("btrim"("slug")) > 0)),
     CONSTRAINT "minecraft_wiki_pages_title_not_blank" CHECK (("length"("btrim"("title")) > 0))
 );
@@ -18971,6 +19049,15 @@ GRANT ALL ON FUNCTION "extensions"."set_graphql_placeholder"() TO "postgres" WIT
 
 
 --
+-- Name: FUNCTION "activate_minecraft_edition_migration"("expected" "jsonb"); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."activate_minecraft_edition_migration"("expected" "jsonb") FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."activate_minecraft_edition_migration"("expected" "jsonb") TO "postgres";
+GRANT ALL ON FUNCTION "public"."activate_minecraft_edition_migration"("expected" "jsonb") TO "service_role";
+
+
+--
 -- Name: FUNCTION "article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint); Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -19274,6 +19361,15 @@ REVOKE ALL ON FUNCTION "public"."is_admin"("user_uuid" "uuid") FROM PUBLIC;
 GRANT ALL ON FUNCTION "public"."is_admin"("user_uuid" "uuid") TO "service_role";
 GRANT ALL ON FUNCTION "public"."is_admin"("user_uuid" "uuid") TO "anon";
 GRANT ALL ON FUNCTION "public"."is_admin"("user_uuid" "uuid") TO "authenticated";
+
+
+--
+-- Name: FUNCTION "minecraft_wiki_path"("wiki_slug" "text"); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."minecraft_wiki_path"("wiki_slug" "text") FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."minecraft_wiki_path"("wiki_slug" "text") TO "postgres";
+GRANT ALL ON FUNCTION "public"."minecraft_wiki_path"("wiki_slug" "text") TO "service_role";
 
 
 --
@@ -22361,4 +22457,4 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "supabase_admin" IN SCHEMA "public" GRANT ALL 
 -- PostgreSQL database dump complete
 --
 
-\unrestrict ZxrvV4jQY4yqbf8oDDlwFD8oGP6mdbeHXCNKaiaHoCMTw1RnY8EK9i2qOw3FBWz
+\unrestrict Qv0KuKt0qo2p8dzvfMzydq10NvbXHt6GFXlBABbTYhSzJ46WkJc4R6xoOqOSbXb

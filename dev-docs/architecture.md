@@ -1,7 +1,7 @@
 # Architecture
 
 Status: Active; production has documented degraded components
-Last verified: 2026-09-04
+Last verified: 2026-10-03 for Minecraft; 2026-09-04 for the remaining architecture
 Evidence: repository architecture/configuration, database-only wiki/quiz runtime audit, managed-development GTA and Red Dead schema/content-route readback, managed-development/production content readback, and existing VPS/homelab platform checks
 
 ## Product Surfaces
@@ -74,4 +74,4 @@ Cloudflare is the long-lived public cache. The origin uses Next.js ISR-style res
 Article execution update verified in the September 6 implementation: the homelab batch delegates focused model tasks through a code-owned stage controller. Queue claims, process lifetimes, approvals, uploads/imports and browser checks are runtime responsibilities; models return artifacts or structured review findings. See [Article Pipeline](pipelines/articles.md) for recovery, credential and publication boundaries.
 
 
-Minecraft now separates Java and Bedrock into editorial game/wiki identities and immutable collection revisions. Server routes own each edition’s canonical, title and content. `/minecraft/wiki` is the neutral directory; legacy links use permanent deterministic redirects. Shared calculators retain stable page metadata and local calculation inputs. Managed-development schema, publication and raw HTML checks were verified on October 3; production cutover is the final release gate.
+Minecraft now separates Java and Bedrock into editorial game/wiki identities and immutable collection revisions. Server routes own each edition's canonical, title and content. `/minecraft/wiki` is the neutral directory; legacy links use permanent deterministic redirects. Shared calculators retain stable page metadata and local calculation inputs. Managed-development checks and the production cutover passed on October 3, 2026. Deployed commit `34541eb14b0fb5d2138539d01314a1597edc2105` has healthy database readiness. Production readback and all 50 exact wiki URLs passed; the Minecraft sitemap contains 66 URLs.

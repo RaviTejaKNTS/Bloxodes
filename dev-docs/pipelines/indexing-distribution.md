@@ -1,8 +1,8 @@
 # Indexing, Analytics, and Distribution
 
 Status: Active
-Last verified: 2026-10-02
-Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, env ownership contracts, and redacted live Umami tracker-ID comparison
+Last verified: 2026-10-03
+Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, env ownership contracts, and redacted live Umami tracker-ID comparison; October 3 Minecraft edition publication, all 50 exact public wiki URLs and 66-URL sitemap readback
 
 ## Search Indexing
 
@@ -33,4 +33,4 @@ Several GitHub workflows remain manual-only emergency fallbacks because recurrin
 October 1 automation repair: the live cache worker reserves 80 stats and 20 editorial events per batch and is draining its backlog. Article/wiki trusted publishers now perform exact authenticated cache revalidation before live/sitemap checks, so a new release does not wait behind older editorial batches. The event and deferred warm workers retain their ownership and cadence.
 
 
-Minecraft edition hubs and collections have independent indexable URLs, self-canonicals, authored metadata and structured data. Both edition inventories appear in the Minecraft sitemap, shared feed and search index. Legacy query and flat collection URLs are excluded from distribution and permanently redirect. Paginated collection URLs remain noindex and outside sitemaps. Managed-development schema, publication and raw HTML checks were verified on October 3; production cutover is the final release gate.
+Minecraft edition hubs and collections have independent indexable URLs, self-canonicals, authored metadata and structured data. Both edition inventories appear in the Minecraft sitemap, shared feed and search index. Legacy query and flat collection URLs are excluded from distribution and permanently redirect. Paginated collection URLs remain noindex and outside sitemaps. Managed-development checks and the production cutover passed on October 3, 2026. Deployed commit `34541eb14b0fb5d2138539d01314a1597edc2105` has healthy database readiness. Production readback and all 50 exact wiki URLs passed; the Minecraft sitemap contains 66 URLs.
