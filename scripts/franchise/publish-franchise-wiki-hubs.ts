@@ -22,7 +22,7 @@ async function main() {
     return;
   }
   if (!["red-dead", "minecraft"].includes(namespace) || !args.includes("--workspace") || !slugs.length || slugs.some(s => !/^[a-z0-9-]+$/.test(s))) throw new Error("Explicit namespace, workspace and game allowlist required.");
-  if (namespace === "minecraft" && slugs.some(slug => slug !== "minecraft")) throw new Error("Minecraft has one shared wiki.");
+  if (namespace === "minecraft" && slugs.some(slug => !["minecraft", "minecraft-java", "minecraft-bedrock"].includes(slug))) throw new Error("Minecraft requires an approved edition identity.");
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
   if (!production && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) throw new Error("Unrecognized database target.");
   if (apply && production && !allowProd) throw new Error("Production writes require --allow-prod.");
@@ -36,21 +36,24 @@ async function main() {
     if (game.slug !== slug || wiki.slug !== slug || wiki.game_slug !== slug || game.is_published !== true || wiki.is_published !== true) throw new Error(`Unapproved or mismatched hub ${slug}`);
     if (!game.cover_image || !game.hero_image || game.cover_image === game.hero_image) throw new Error(`Separate hosted media required for ${slug}`);
     for (const url of [game.cover_image, game.hero_image]) {
-      if (!url.startsWith(`https://media.bloxodes.com/wiki/${namespace}/${slug}/`)) throw new Error(`Unapproved media URL for ${slug}`);
+      if (!url.startsWith(`https://media.bloxodes.com/wiki/${namespace}/${namespace === "minecraft" ? "minecraft" : slug}/`)) throw new Error(`Unapproved media URL for ${slug}`);
       const response = await fetch(url, { method: "HEAD", signal: AbortSignal.timeout(30000) });
       if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) throw new Error(`Unavailable image for ${slug}`);
     }
     plans.push({ slug, game, wiki });
   }
+  if (args.includes("--stage") && (namespace !== "minecraft" || slugs.some(slug => slug === "minecraft"))) throw new Error("Staging requires independent Minecraft edition hubs.");
   // Read all exact target rows before the first mutation.
-  const existing = await sb.from(`${tablePrefix}_games`).select("id,slug").in("slug", slugs);
+  const existing = await sb.from(`${tablePrefix}_games`).select("id,slug,is_published").in("slug", slugs);
   if (existing.error) throw existing.error;
   console.log(`${apply ? "Apply" : "Dry run"}: ${plans.length} ${label} hubs; ${existing.data.length} existing games; target=${production ? "production" : "managed-development"}`);
+  if (args.includes("--stage") && existing.data.some(row => row.is_published)) throw new Error("Staging cannot hide an already published hub.");
   if (!apply) return;
   const ids = new Map<string, string>();
   for (const { slug, game } of plans) {
     const current = existing.data.find(row => row.slug === slug);
     const payload = pick(game, gameFields);
+    if (args.includes("--stage")) payload.is_published = false;
     const result = current
       ? await sb.from(`${tablePrefix}_games`).update(payload).eq("id", current.id).select("id").single()
       : await sb.from(`${tablePrefix}_games`).insert(payload).select("id").single();
@@ -65,9 +68,9 @@ async function main() {
       const linked = await sb.from(`${tablePrefix}_games`).update({ parent_game_id: parent.data.id }).eq("id", id);
       if (linked.error) throw linked.error;
     }
-    const result = await sb.from(`${tablePrefix}_wiki_pages`).upsert({ ...pick(wiki, wikiFields), game_id: id }, { onConflict: "game_id" }).select("slug,is_published").single();
-    if (result.error || result.data?.slug !== slug || !result.data.is_published) throw result.error ?? new Error(`Hub readback failed for ${slug}`);
-    console.log(`Published ${slug}`);
+    const result = await sb.from(`${tablePrefix}_wiki_pages`).upsert({ ...pick(wiki, wikiFields), ...(args.includes("--stage") ? { is_published: false } : {}), game_id: id }, { onConflict: "game_id" }).select("slug,is_published").single();
+    if (result.error || result.data?.slug !== slug || result.data.is_published !== !args.includes("--stage")) throw result.error ?? new Error(`Hub readback failed for ${slug}`);
+    console.log(`${args.includes("--stage") ? "Staged" : "Published"} ${slug}`);
   }
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

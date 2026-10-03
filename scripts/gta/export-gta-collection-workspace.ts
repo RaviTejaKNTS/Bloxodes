@@ -124,7 +124,7 @@ function parseArgs(argv: string[]): CliOptions {
         throw new Error(`Unknown option: ${arg}`);
     }
   }
-  if (options.namespace === "minecraft" && options.game !== "minecraft") throw new Error("Minecraft has one shared wiki identity.");
+  if (options.namespace === "minecraft" && !["minecraft", "minecraft-java", "minecraft-bedrock"].includes(options.game)) throw new Error("Minecraft requires an approved edition identity.");
   if (!options.game) throw new Error("--game is required");
   if (!options.collection) throw new Error("--collection is required");
   if (!options.dryRun && !options.outputRoot) throw new Error("--output-root is required unless --dry-run is used");
@@ -340,7 +340,7 @@ async function main() {
     game: { slug: row.wiki_slug, name: runtimeGameName },
     collection: { slug: row.collection_slug, label: row.display_name ?? row.collection_slug, sortOrder: row.wiki_sort_order ?? 0, pageType: row.page_type === "checklist" || row.page_type === "collectible" ? "collectible" : "database" },
     namespace: options.namespace,
-    route: options.namespace === "minecraft" ? `/minecraft/wiki/${row.collection_slug}` : `/gta/wiki/${row.wiki_slug}/${row.collection_slug}`,
+    route: options.namespace === "minecraft" ? `${row.wiki_slug === "minecraft" ? "/minecraft/wiki" : `/minecraft/${row.wiki_slug.replace("minecraft-", "")}/wiki`}/${row.collection_slug}` : `/gta/wiki/${row.wiki_slug}/${row.collection_slug}`,
     dataset: "dataset.json",
     finalJson: "final.json",
     mediaRoot: "media",

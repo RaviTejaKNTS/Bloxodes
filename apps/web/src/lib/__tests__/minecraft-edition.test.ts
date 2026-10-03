@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { minecraftCollectionEdition, minecraftCollectionTitleForCount, minecraftEditionHref, minecraftEditionRedirect, parseMinecraftEdition, selectMinecraftEdition, summarizeMinecraftCollectionEditions } from "../minecraft-edition";
+import { minecraftCollectionEdition, minecraftCollectionTitleForCount,  parseMinecraftEdition, selectMinecraftEdition, summarizeMinecraftCollectionEditions } from "../minecraft-edition";
 
 const source = {
   meta: { schemaVersion: 2 },
@@ -35,11 +35,7 @@ describe("Minecraft edition selection", () => {
     expect(summary.java.itemCount).toBe(10);
     expect(summary.bedrock.itemCount).toBe(10);
   });
-  it("resets edition switches to page one while preserving other query parameters", () => {
-    const href = minecraftEditionHref("/minecraft/wiki/items/page/4", "bedrock", { edition: ["java", "java"], sort: "name", tag: ["a", "b"], absent: undefined });
-    expect(href).toBe("/minecraft/wiki/items?edition=bedrock&sort=name&tag=a&tag=b");
-    expect(minecraftEditionHref("/minecraft/wiki", "java")).toBe("/minecraft/wiki?edition=java");
-  });
+
   it("opens edition-exclusive collections with content and preserves explicit choices", () => {
     const achievements = [{ item: { editions: ["bedrock"] } }];
     expect(minecraftCollectionEdition(achievements)).toBe("bedrock");
@@ -51,15 +47,7 @@ describe("Minecraft edition selection", () => {
     expect(minecraftCollectionTitleForCount("All 3,893 recipes in Minecraft", 3893, 1763)).toBe("All 1,763 recipes in Minecraft");
     expect(minecraftCollectionTitleForCount("Minecraft 26.3 recipes", 3893, 1763)).toBe("Minecraft 26.3 recipes");
   });
-  it("puts remembered Bedrock preferences in edition URLs without crossing namespaces", () => {
-    expect(minecraftEditionRedirect("/minecraft/wiki/tools/page/2", "?sort=name", "bedrock")).toBe("/minecraft/wiki/tools/page/2?sort=name&edition=bedrock");
-    expect(minecraftEditionRedirect("/minecraft/tools/xp-calculator", "?edition=java", "bedrock")).toBeNull();
-    expect(minecraftEditionRedirect("/minecraft/wiki", "?edition=unknown", "bedrock")).toBe("/minecraft/wiki?edition=java");
-    expect(minecraftEditionRedirect("/minecraft/wiki", "?edition=bedrock&edition=java", "bedrock")).toBe("/minecraft/wiki?edition=java");
-    for (const path of ["/wiki", "/tools", "/minecraft", "/minecraft/wiki-other", "/minecraft/toolshed"]) {
-      expect(minecraftEditionRedirect(path, "", "bedrock")).toBeNull();
-    }
-  });
+
   it("accepts only exact supported edition values", () => {
     expect(parseMinecraftEdition("java")).toBe("java");
     expect(parseMinecraftEdition("bedrock")).toBe("bedrock");

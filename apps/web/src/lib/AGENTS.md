@@ -77,3 +77,6 @@ The current managed-development content covers `gta-5`, `gta-san-andreas`, `gta-
 ## Shared engagement presentation (2026-09-10)
 
 Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.
+
+
+Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. Stage new identities and revisions unpublished with explicit `--stage`, deploy routes, then use the exact-hash `activate:minecraft-editions` transaction for the cutover. See `dev-docs/pipelines/wiki-collections.md`.

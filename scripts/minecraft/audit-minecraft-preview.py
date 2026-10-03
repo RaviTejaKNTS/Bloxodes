@@ -1,132 +1,109 @@
 #!/usr/bin/env python3
-"""Read-only HTTP review of the fixed Minecraft page inventory and editions."""
-import argparse, concurrent.futures, datetime, hashlib, json, re, time, urllib.error, urllib.request
+"""Read-only HTTP checks for the independent Minecraft edition inventories."""
+import argparse, datetime, hashlib, json, re, urllib.error, urllib.request
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 
-ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'tmp/content-workspace/minecraft'
-COLLECTIONS=['achievements','advancements','armor','armor-trims','biomes','blocks','commands','crops-and-plants','enchantments','food','fuels','items','mobs','music-discs','ores','potions','pottery-sherds','recipes','redstone-components','status-effects','structures','tools','villager-professions','villager-trades','weapons']
-TOOLS=['anvil-enchantment-planner','beacon-materials-calculator','brewing-planner','building-materials-estimator','command-generator','crafting-materials-planner','furnace-fuel-calculator','gear-comparison','nether-coordinate-converter','pixel-circle-generator','stack-and-storage-calculator','stronghold-triangulation','xp-calculator']
-CANONICAL='https://bloxodes.com'
-REQUEST_TIMEOUT_SECONDS=300
+ROOT = Path(__file__).resolve().parents[2]
+CANONICAL = 'https://bloxodes.com'
+TOOLS = ['anvil-enchantment-planner','beacon-materials-calculator','brewing-planner','building-materials-estimator','command-generator','crafting-materials-planner','furnace-fuel-calculator','gear-comparison','nether-coordinate-converter','pixel-circle-generator','stack-and-storage-calculator','stronghold-triangulation','xp-calculator']
 
-def get(base,path,cookie=None):
- headers={'User-Agent':'BloxodesManagedDevelopmentQA/1.0','Accept':'text/html,application/xml,application/json'}
- if cookie:headers['Cookie']=cookie
- request=urllib.request.Request(base+path,headers=headers)
- try:
-  with urllib.request.urlopen(request,timeout=REQUEST_TIMEOUT_SECONDS) as response:return response.status,response.read(),dict(response.headers),response.geturl()
- except urllib.error.HTTPError as error:return error.code,error.read(),dict(error.headers),error.geturl()
- except Exception as error:return 0,str(error).encode(),{},base+path
-
-def count(slug,edition):
- file=WORK/'minecraft/collections'/slug/'dataset.json'
- if not file.exists():return None
- data=json.loads(file.read_text());return sum(not isinstance(row['item'].get('editions'),list) or edition in row['item']['editions'] for row in data['items'])
-
-def audit(base,path,edition=None,expected=200,cookie=None):
- query=path+('?edition='+edition if edition else '')
- started=time.perf_counter();status,body,headers,final=get(base,query,cookie);request_seconds=time.perf_counter()-started;soup=BeautifulSoup(body,'html.parser');issues=[]
- canonical=soup.find('link',rel='canonical');canonical=canonical.get('href') if canonical else None
- robots=[node.get('content','') for node in soup.find_all('meta') if node.get('name','').lower() in ['robots','googlebot']];noindex=any('noindex' in value.lower() for value in robots)
- headings=[node.get_text(' ',strip=True) for node in soup.find_all('h1')];wanted=CANONICAL+path
- if status!=expected:issues.append({'check':'http','expected':expected,'actual':status})
- selected=None;overview_cards=[]
- if expected==200 and status==200:
-  if canonical!=wanted:issues.append({'check':'canonical','expected':wanted,'actual':canonical})
-  if len(headings)!=1:issues.append({'check':'h1','actual':headings})
-  slug=path.removeprefix('/minecraft/wiki/').split('/')[0]
-  if path=='/minecraft/wiki':
-   selected_edition=edition or 'java'
-   expected_cards={slug:count(slug,selected_edition) for slug in COLLECTIONS if count(slug,selected_edition)}
-   actual_cards={}
-   for link in soup.select('#article-body a[href]'):
-    parsed=urlparse(link['href']);card_slug=parsed.path.removeprefix('/minecraft/wiki/')
-    if card_slug not in COLLECTIONS:continue
-    text=link.get_text(' ',strip=True);match=re.search(r'([\d,]+) entries',text);actual_count=int(match.group(1).replace(',','')) if match else None
-    actual_cards[card_slug]=actual_count;overview_cards.append({'slug':card_slug,'href':link['href'],'itemCount':actual_count})
-    if parse_qs(parsed.query).get('edition')!=[selected_edition]:issues.append({'check':'overview-link-edition','href':link['href']})
-    if ('Java Edition' if selected_edition=='java' else 'Bedrock Edition') not in text:issues.append({'check':'overview-card-edition-label','slug':card_slug})
-    if re.search(r'\bAll [\d,]+\b',text):issues.append({'check':'overview-combined-title','slug':card_slug})
-   if actual_cards!=expected_cards:issues.append({'check':'overview-edition-counts','expected':expected_cards,'actual':actual_cards})
-   edition_links=soup.select('nav[aria-label="Minecraft edition"] a[href]')
-   if len(edition_links)!=2 or sum(link.get('aria-current')=='page' for link in edition_links)!=1:issues.append({'check':'overview-crawlable-edition-navigation'})
-   for target in ['java','bedrock']:
-    if not any(urlparse(link['href']).path==path and parse_qs(urlparse(link['href']).query).get('edition')==[target] for link in edition_links):issues.append({'check':'overview-edition-link','edition':target})
-   graphs=[json.loads(node.string or node.get_text()) for node in soup.select('script[type="application/ld+json"]')]
-   entities=[node for graph in graphs for node in graph.get('@graph',[graph])]
-   directory=next((node for node in entities if node.get('@type')=='CollectionPage'),None)
-   listing=directory.get('mainEntity',{}) if directory else {}
-   if listing.get('numberOfItems')!=len(expected_cards) or [entry.get('url') for entry in listing.get('itemListElement',[])]!=[CANONICAL+card['href'] for card in overview_cards]:issues.append({'check':'overview-item-list-jsonld'})
-  elif slug in COLLECTIONS:
-   selected=count(slug,edition or 'java')
-   if selected==0:
-    if not noindex:issues.append({'check':'empty-edition-noindex','expected':True})
-    if 'no entries' not in soup.get_text(' ',strip=True).lower():issues.append({'check':'empty-edition-explanation'})
-   elif selected is not None:
-    values=[int(value.replace(',','')) for heading in headings for value in re.findall(r'\b[\d,]+\b',heading)]
-    if selected not in values:issues.append({'check':'heading-item-count','expected':selected,'actual':headings})
-   if '/page/' in path and not noindex:issues.append({'check':'pagination-noindex','expected':True})
-  elif noindex:issues.append({'check':'unexpected-noindex','actual':robots})
-  if path=='/minecraft/wiki' or path.startswith('/minecraft/wiki/') or path.startswith('/minecraft/tools/'):
-   edition_links=soup.select('nav[aria-label="Minecraft edition"] a[href]');edition_base=re.sub(r'/page/\d+$','',path)
-   if len(edition_links)!=2 or sum(link.get('aria-current')=='page' for link in edition_links)!=1:issues.append({'check':'crawlable-edition-navigation'})
-   for target in ['java','bedrock']:
-    if not any(urlparse(link['href']).path==edition_base and parse_qs(urlparse(link['href']).query).get('edition')==[target] for link in edition_links):issues.append({'check':'edition-navigation-destination','edition':target})
-  if len(body)>4_000_000:issues.append({'check':'html-size','threshold':4_000_000,'actual':len(body)})
- else:
-  if status==200 and not noindex:issues.append({'check':'unexpected-indexable-item-route'})
- navigation=[]
- if cookie and status==200:
-  for link in soup.find_all('a',href=True):
-   if link.find_parent('nav',attrs={'aria-label':'Minecraft edition'}):continue
-   href=link['href'];parsed=urlparse(href)
-   if parsed.path.startswith('/minecraft/wiki/'):
-    navigation.append(href)
-    if parse_qs(parsed.query).get('edition')!=[edition]:issues.append({'check':'navigation-edition','href':href,'expected':edition})
- return {'path':path,'edition':edition,'cookie':cookie,'status':status,'transportError':body.decode(errors='replace') if status==0 else None,'finalUrl':final,'canonical':canonical,'robots':robots,'h1':headings,'expectedItemCount':selected,'overviewCards':overview_cards,'htmlBytes':len(body),'requestSeconds':round(request_seconds,3),'bodySha256':hashlib.sha256(body).hexdigest(),'navigationLinks':navigation,'issues':issues}
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl): return None
 
 def main():
- global REQUEST_TIMEOUT_SECONDS
- parser=argparse.ArgumentParser();parser.add_argument('--base',default='http://127.0.0.1:3307');parser.add_argument('--output',default=str(WORK/'qa/preview-review.json'));parser.add_argument('--workers',type=int,default=1);parser.add_argument('--pending-collections',default='');parser.add_argument('--timeout',type=int,default=300,help='HTTP request timeout in seconds; allow cold preview compilation');args=parser.parse_args()
- if args.timeout<=0:parser.error('Timeout must be positive.')
- REQUEST_TIMEOUT_SECONDS=args.timeout
- target=urlparse(args.base)
- if target.scheme!='http' or target.hostname not in ['127.0.0.1','localhost','100.86.117.125','teja-homelab.tail13b5bd.ts.net']:raise ValueError('This audit only targets the managed-development homelab preview.')
- paths=['/minecraft','/minecraft/wiki','/minecraft/tools']+['/minecraft/wiki/'+slug for slug in COLLECTIONS]+['/minecraft/tools/'+slug for slug in TOOLS]
- pending=set(filter(None,args.pending_collections.split(',')))
- if not pending.issubset(COLLECTIONS):raise ValueError('Pending collections must belong to the planned inventory.')
- published_paths=[path for path in paths if path.removeprefix('/minecraft/wiki/').split('/')[0] not in pending]
- tasks=[(path,edition,200) for path in paths for edition in ['java','bedrock']]
- tasks+=[('/minecraft/wiki/items/page/2',edition,200) for edition in ['java','bedrock']]
- tasks+=[(path,None,404) for path in ['/minecraft/wiki/items/diamond','/minecraft/wiki/enchantments/mending','/minecraft/wiki/java','/minecraft/wiki/bedrock','/minecraft/java/wiki','/minecraft/wiki/items/page/99999']]
- results=[]
- output=Path(args.output);output.parent.mkdir(parents=True,exist_ok=True)
- def checkpoint():
-  output.write_text(json.dumps({'generatedAt':datetime.datetime.now(datetime.UTC).isoformat(),'base':args.base,'expectedPages':len(paths),'state':'in-progress','checks':results},indent=2)+'\n')
- with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
-  futures={pool.submit(audit,args.base,*task):task for task in tasks}
-  for future in concurrent.futures.as_completed(futures):
-   result=future.result()
-   if result['path'].removeprefix('/minecraft/wiki/').split('/')[0] in pending and result['status']==404 and futures[future][2]==200:
-    result['pendingPublication']=True;result['issues']=[]
-   results.append(result);checkpoint();print(json.dumps({'path':result['path'],'edition':result['edition'],'status':result['status'],'pendingPublication':result.get('pendingPublication',False),'issues':result['issues']}),flush=True)
- for path in ['/minecraft/wiki/items','/minecraft/wiki/enchantments','/minecraft/wiki/items/page/2']:
-  result=audit(args.base,path,'java',200,'minecraft-edition=bedrock')
-  if path.removeprefix('/minecraft/wiki/').split('/')[0] in pending and result['status']==404:result['pendingPublication']=True;result['issues']=[]
-  results.append(result);checkpoint()
- inventory={}
- for endpoint in ['/sitemaps/minecraft.xml','/sitemap.xml','/feed.xml','/api/search/all?q=minecraft&scope=minecraft&limit=200']:
-  status,body,_,_=get(args.base,endpoint);urls=[]
-  try:
-   if '/api/search/' in endpoint:urls=[entry['url'] for entry in json.loads(body).get('items',[])]
-   else:
-    soup=BeautifulSoup(body,'xml');urls=[node.get_text(strip=True) for node in soup.find_all('loc' if 'sitemap' in endpoint else 'link')]
-  except Exception as error:urls=['PARSE ERROR: '+str(error)]
-  found={urlparse(value).path for value in urls};expected_paths=published_paths if endpoint.startswith('/sitemaps/') else [path for path in published_paths if path not in ['/minecraft','/minecraft/tools']] if endpoint.startswith(('/feed','/api/search')) else ['/sitemaps/minecraft.xml']
-  inventory[endpoint]={'status':status,'minecraftUrls':sorted(value for value in found if '/minecraft' in value),'missing':sorted(set(expected_paths)-found),'unexpectedItemUrls':sorted(value for value in found if value.startswith('/minecraft/wiki/') and value not in paths)}
- report={'generatedAt':datetime.datetime.now(datetime.UTC).isoformat(),'base':args.base,'requestTimeoutSeconds':args.timeout,'state':'complete','expectedPages':len(paths),'pendingCollections':sorted(pending),'editionPageRequests':len(paths)*2,'checks':sorted(results,key=lambda x:(x['path'],x['edition'] or '')),'inventory':inventory,'failureCount':sum(bool(x['issues']) for x in results)+sum(x['status']!=200 or bool(x['missing']) or bool(x['unexpectedItemUrls']) for x in inventory.values()),'limits':'HTTP and server-rendered HTML only. Browser interaction and visual QA remain separate. Pending unpublished collections require another sweep after publication.'}
- output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'receipt':str(output),'expectedPages':len(paths),'checks':len(results),'failureCount':report['failureCount'],'inventory':inventory}),flush=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--base', default='http://127.0.0.1:3307')
+    parser.add_argument('--workspace', default=str(ROOT/'tmp/content-workspace/minecraft-editions'))
+    parser.add_argument('--output')
+    parser.add_argument('--only', default='', help='Comma-separated paths for a targeted follow-up check')
+    parser.add_argument('--workers', type=int, default=1)
+    parser.add_argument('--timeout', type=int, default=300)
+    args = parser.parse_args()
+    host = urlparse(args.base).hostname
+    if host not in ['localhost','127.0.0.1','100.86.117.125','teja-homelab.tail13b5bd.ts.net']:
+        parser.error('Use an existing managed-development homelab preview.')
+    workspace = Path(args.workspace)
+    inventories = {}
+    for edition in ['java','bedrock']:
+        inventories[edition] = {}
+        for file in (workspace/f'minecraft-{edition}'/'collections').glob('*/dataset.json'):
+            data = json.loads(file.read_text()); final = json.loads((file.parent/'final.json').read_text())
+            inventories[edition][file.parent.name] = {'count':len(data['items']), 'title':final['title'].replace('{count}',f"{len(data['items']):,}"), 'seo_title':final['seo_title'].replace('{count}',f"{len(data['items']):,}")}
+        if len(inventories[edition]) != 24: parser.error(f'{edition} must have 24 reviewed collections.')
+    output = Path(args.output) if args.output else workspace/'qa/preview-review.json'
+    only = set(filter(None,args.only.split(',')))
+    results = []; opener = urllib.request.build_opener(NoRedirect())
+    def request(path, expected=200, cookie='', agent='BloxodesManagedDevelopmentQA/2.0'):
+        try:
+            req = urllib.request.Request(args.base.rstrip('/')+path,headers={'User-Agent':agent,'Cookie':cookie})
+            with opener.open(req,timeout=args.timeout) as res: status,body,headers=res.status,res.read(),res.headers
+        except urllib.error.HTTPError as error: status,body,headers=error.code,error.read(),error.headers
+        soup = BeautifulSoup(body,'html.parser'); issues=[]
+        if status != expected: issues.append(f'HTTP {status}, expected {expected}')
+        canonical=soup.find('link',rel='canonical'); canonical=canonical.get('href') if canonical else None
+        record={'path':path,'status':status,'canonical':canonical,'bytes':len(body),'sha256':hashlib.sha256(body).hexdigest(),'issues':issues}
+        if expected == 200:
+            h1=soup.find_all('h1'); record['title']=soup.title.get_text() if soup.title else ''; record['h1']=[node.get_text(' ',strip=True) for node in h1]
+            if len(h1)!=1: issues.append('Expected one H1')
+            if canonical != CANONICAL+path: issues.append('Incorrect canonical')
+            if len(body)>4_000_000: issues.append('HTML exceeds 4 MB')
+            if soup.select('nav[aria-label="Minecraft edition"]') or any('edition=' in a['href'] for a in soup.select('a[href]')): issues.append('Obsolete edition switch')
+            match=re.fullmatch(r'/minecraft/(java|bedrock)/wiki(?:/([^/]+))?(?:/page/(\d+))?',path)
+            if match:
+                edition,slug,page=match.groups()
+                robots=soup.find('meta',attrs={'name':'robots'}); noindex=bool(robots and 'noindex' in robots.get('content',''))
+                if page and not noindex: issues.append('Pagination must be noindex')
+                if not page and noindex: issues.append('Base page must be indexable')
+                if slug:
+                    expected_title=inventories[edition][slug]['title'] + (f' - Page {page}' if page else '')
+                    if not h1 or h1[0].get_text(' ',strip=True)!=expected_title: issues.append('Collection title/count mismatch')
+                    expected_seo=inventories[edition][slug]['seo_title'] + (f' - Page {page}' if page else '')
+                    if not record['title'].startswith(expected_seo): issues.append('Metadata title mismatch')
+                else:
+                    cards={a['href'].split('/')[-1]:a.get_text(' ',strip=True) for a in soup.select('#article-body a[href]') if a['href'].startswith(f'/minecraft/{edition}/wiki/')}
+                    if set(cards)!=set(inventories[edition]): issues.append('Hub inventory mismatch')
+                    for name,entry in inventories[edition].items():
+                        if entry['title'] not in cards.get(name,''): issues.append(f'Card title/count mismatch: {name}')
+                    graphs=[json.loads(node.get_text()) for node in soup.select('script[type="application/ld+json"]')]
+                    directory=next((n for g in graphs for n in g.get('@graph',[g]) if n.get('@type')=='CollectionPage'),{})
+                    links={x['url'] for x in directory.get('mainEntity',{}).get('itemListElement',[])}
+                    if links!={f'{CANONICAL}/minecraft/{edition}/wiki/{name}' for name in inventories[edition]}: issues.append('Hub JSON-LD inventory mismatch')
+        elif expected == 308: record['location']=headers.get('location')
+        results.append(record);output.parent.mkdir(parents=True,exist_ok=True);output.write_text(json.dumps({'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':results},indent=2)+'\n')
+        print(path,status,'PASS' if not issues else issues,flush=True)
+        return soup,record
+    named=['/minecraft','/minecraft/wiki','/minecraft/tools']
+    for edition,entries in inventories.items():
+        named += [f'/minecraft/{edition}/wiki']+[f'/minecraft/{edition}/wiki/{slug}' for slug in entries]
+    named += [f'/minecraft/tools/{slug}' for slug in TOOLS]
+    for path in named:
+        if not only or path in only: request(path)
+    for edition in inventories:
+        if not only or f'/minecraft/{edition}/wiki/recipes/page/2' in only: request(f'/minecraft/{edition}/wiki/recipes/page/2')
+        if not only or f'/minecraft/{edition}/wiki/fuels' in only: request(f'/minecraft/{edition}/wiki/fuels',cookie='minecraft-edition='+('bedrock' if edition=='java' else 'java'),agent='Googlebot')
+        if not only or f'/minecraft/{edition}/wiki' in only: request(f'/minecraft/{edition}/wiki',agent='GPTBot')
+    for path in ['/minecraft/java/wiki/achievements','/minecraft/bedrock/wiki/advancements','/minecraft/other/wiki','/minecraft/java/wiki/fuels/item/coal','/minecraft/java/wiki/fuels/page/1']:
+        if not only or path in only: request(path,404)
+    for path,target in [('/minecraft/wiki/fuels','/minecraft/java/wiki/fuels'),('/minecraft/wiki/achievements','/minecraft/bedrock/wiki/achievements'),('/minecraft/wiki/recipes/page/2?edition=bedrock','/minecraft/bedrock/wiki/recipes/page/2')]:
+        if only and path not in only: continue
+        _,record=request(path,308,cookie='minecraft-edition=bedrock')
+        if not record.get('location','').endswith(target): record['issues'].append('Incorrect legacy destination')
+    for path,expected in [('/sitemaps/minecraft.xml',66),('/feed.xml',None)]:
+        if only and path not in only: continue
+        req=urllib.request.Request(args.base.rstrip('/')+path)
+        with opener.open(req,timeout=args.timeout) as res:body=res.read()
+        soup=BeautifulSoup(body,'xml');links=[n.get_text() for n in soup.find_all('loc' if expected else 'link')]
+        needed={CANONICAL+p for p in (named if expected else named[3:])}
+        # The feed carries content pages, not directory pages.
+        if not expected:needed-={CANONICAL+'/minecraft/tools'}
+        issues=[]
+        if not needed<=set(links):issues.append('Missing published URLs')
+        if expected and len(links)!=expected:issues.append('Incorrect sitemap inventory')
+        if any('/minecraft/wiki/' in p or 'edition=' in p or '/page/' in p for p in links):issues.append('Legacy or paginated URLs in distribution')
+        results.append({'path':path,'count':len(links),'issues':issues});print(path,'PASS' if not issues else issues,flush=True)
+    output.write_text(json.dumps({'checkedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'results':results},indent=2)+'\n')
+    if any(x['issues'] for x in results):raise SystemExit(1)
+    print(f'Passed {len(results)} checks across {len(named)} named pages.')
 if __name__=='__main__':main()

@@ -254,7 +254,8 @@
     "export:minecraft-collection-workspace": "node --import tsx scripts/minecraft/export-minecraft-collection-workspace.ts",
     "acquire:minecraft-source-pack": "python3 scripts/minecraft/acquire-minecraft-source-pack.py",
     "render:minecraft-assets": "python3 scripts/minecraft/render-minecraft-assets.py",
-    "sync:minecraft-wiki-media": "node --import tsx scripts/minecraft/sync-minecraft-wiki-media.ts"
+    "sync:minecraft-wiki-media": "node --import tsx scripts/minecraft/sync-minecraft-wiki-media.ts",
+    "activate:minecraft-editions": "node --import tsx scripts/minecraft/activate-minecraft-editions.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

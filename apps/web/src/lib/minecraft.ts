@@ -1,3 +1,5 @@
+import { buildMinecraftCollectionPath, buildMinecraftWikiPath } from "./minecraft-paths";
+export { buildMinecraftCollectionPath, buildMinecraftWikiPath } from "./minecraft-paths";
 import { normalizeCollectionPageType } from "./wiki-collection-page-type";
 import "server-only";
 
@@ -152,13 +154,6 @@ async function withCache<T>(key: string[], tags: string[], loader: () => Promise
   return publicContentCache(loader, key, { revalidate: REVALIDATE_SECONDS, tags })();
 }
 
-export function buildMinecraftWikiPath(slug: string): string {
-  return "/minecraft/wiki";
-}
-
-export function buildMinecraftCollectionPath(wikiSlug: string, collectionSlug: string): string {
-  return `/minecraft/wiki/${normalizeSlug(collectionSlug)}`;
-}
 
 type MinecraftWikiImageFields = {
   cover_image?: string | null;
@@ -507,7 +502,7 @@ export async function listMinecraftTools(): Promise<MinecraftToolPage[]> {
 export const getMinecraftToolBySlug = getMinecraftTool;
 export const listPublishedMinecraftTools = listMinecraftTools;
 export function getMinecraftWiki() { return getMinecraftWikiPageBySlug("minecraft"); }
-export function listPublishedMinecraftCollections() { return listPublishedMinecraftWikiCollectionsByWikiSlug("minecraft"); }
+export function listPublishedMinecraftCollections() { return Promise.all([listPublishedMinecraftWikiCollectionsByWikiSlug("minecraft-java"), listPublishedMinecraftWikiCollectionsByWikiSlug("minecraft-bedrock")]).then(groups => groups.flat()); }
 export function getMinecraftCollectionBySlug(slug: string) { return getMinecraftWikiCollectionPageByPath("minecraft", slug); }
 export const getPublishedMinecraftCollectionRuntime = getPublishedMinecraftWikiCollectionRuntime;
 export type MinecraftCollectionPage = MinecraftWikiCollectionPage;

@@ -50,7 +50,7 @@ const platforms = [
 ];
 
 export default async function GamesPage() {
-  const minecraft = await getMinecraftWikiPageBySlug("minecraft");
+  const minecraft = await getMinecraftWikiPageBySlug("minecraft-java");
   const publishedPlatforms = minecraft
     ? [...platforms.slice(0, 1), { href: "/minecraft", label: "Minecraft", image: resolveMinecraftWikiCoverImage(minecraft) }, ...platforms.slice(1)]
     : platforms;

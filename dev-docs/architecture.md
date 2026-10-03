@@ -72,3 +72,6 @@ Cloudflare is the long-lived public cache. The origin uses Next.js ISR-style res
 - Universe stats had an active end-to-end incident audit started 2026-08-12. Current public health was green, but the audit identified scheduler/index ordering, capacity, NEW quarantine, growth-baseline, daily-rank, and alerting defects. See `pipelines/stats.md`.
 
 Article execution update verified in the September 6 implementation: the homelab batch delegates focused model tasks through a code-owned stage controller. Queue claims, process lifetimes, approvals, uploads/imports and browser checks are runtime responsibilities; models return artifacts or structured review findings. See [Article Pipeline](pipelines/articles.md) for recovery, credential and publication boundaries.
+
+
+Minecraft now separates Java and Bedrock into editorial game/wiki identities and immutable collection revisions. Server routes own each edition’s canonical, title and content. `/minecraft/wiki` is the neutral directory; legacy links use permanent deterministic redirects. Shared calculators retain stable page metadata and local calculation inputs. Managed-development schema, publication and raw HTML checks were verified on October 3; production cutover is the final release gate.

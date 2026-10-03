@@ -1,6 +1,6 @@
 # Data Sources Inventory
 
-Minecraft owns `minecraft_games`, `minecraft_wiki_pages`, `minecraft_wiki_collection_pages`, `minecraft_wiki_collection_datasets`, `minecraft_wiki_collection_items`, `minecraft_tools` and `minecraft_releases`. Server reads use the three security-invoker views and published immutable dataset pointers. Authoring source packs and review artifacts stay under ignored `tmp/content-workspace/minecraft`; public routes never read those files. Tool `rules_json` records edition applicability and source/revision information. Release order is numeric rather than a version-string comparison. The schema is verified in managed development and production. The October 3 production release contains 25 published collection revisions with 9,070 active rows, 13 tools and two ordered edition release anchors.
+Minecraft owns seven `minecraft_*` tables and three protected views. Editorial game/wiki identities are `minecraft-java` and `minecraft-bedrock`; the legacy `minecraft` parent stays stored for historical revisions and comments. Independent datasets store resolved native rows without runtime edition filtering. Java has 24 collections with 6,716 rows and Bedrock has 24 with 6,310. Tool rules and the two ordered release anchors remain shared namespace records. Immutable media objects retain the approved `minecraft/minecraft/<collection>` prefix so separating page ownership does not duplicate artwork. Runtime never reads ignored authoring files.
 
 Authoritative workflow guidance lives in:
 

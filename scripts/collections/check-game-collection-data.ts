@@ -82,6 +82,7 @@ const SECTION_FIELD_PRIORITY = [
 
 const GAMEPLAY_SOURCE_TERMS = [
   /[“"']Sources[”"']/g,
+  /\bspecific loot sources\b/gi,
   /\bSource Cargo\b/gi,
   /\bSource Goods\b/gi,
   /\bSource Supplies\b/gi,
@@ -483,7 +484,14 @@ async function main() {
   const publicProvenanceFields = rows.flatMap((row) =>
     Object.entries(row)
       // Song titles such as "Research" and "The Source" are legitimate track names.
-      .filter(([key, value]) => key !== "tracklist" && !HIDDEN_FIELD_KEYS.has(key) && containsPublicProvenance(stringValue(value) ?? ""))
+      .filter(([key, value]) => {
+        let text = stringValue(value) ?? "";
+        // Native Minecraft grammar uses source arguments and Slot Source types.
+        if (options.game?.startsWith("minecraft") && options.collection === "commands" && ["syntax", "parameters"].includes(key)) {
+          text = text.replace(/\bsource\b/gi, "command-argument");
+        }
+        return key !== "tracklist" && !HIDDEN_FIELD_KEYS.has(key) && containsPublicProvenance(text);
+      })
       .map(([key]) => `${itemSlug(row)}.${key}`)
   );
   if (publicProvenanceFields.length) {

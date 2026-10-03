@@ -75,6 +75,7 @@ type Plan = {
 
 const argv = process.argv.slice(2);
 const apply = argv.includes("--apply");
+const stage = argv.includes("--stage");
 const publish = argv.includes("--publish");
 const uploadMedia = argv.includes("--upload-media");
 const allowProd = argv.includes("--allow-prod");
@@ -114,6 +115,7 @@ if (!(namespace in FRANCHISES)) throw new Error("--namespace must be gta, red-de
 if (argv.includes("--minecraft-media-concurrency") && namespace !== "minecraft") throw new Error("--minecraft-media-concurrency is only supported for Minecraft.");
 if (!Number.isInteger(minecraftMediaConcurrency) || minecraftMediaConcurrency < 1 || minecraftMediaConcurrency > 8) throw new Error("--minecraft-media-concurrency must be an integer from 1 to 8.");
 if (!manifestPaths.length) throw new Error("At least one --manifest is required.");
+if (stage && (namespace !== "minecraft" || publish)) throw new Error("Staging is limited to unpublished Minecraft edition revisions.");
 if (publish && !apply) throw new Error("--publish requires --apply.");
 if (uploadMedia && !apply) throw new Error("--upload-media requires --apply.");
 
@@ -192,9 +194,9 @@ async function planManifest(namespaceValue: Namespace, manifestPath: string): Pr
   if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) throw new Error(`${manifestPath} needs game and collection labels.`);
   const pageType = String(manifest.collection.pageType) === "checklist" ? "collectible" : manifest.collection.pageType ?? "database";
   if (pageType !== "database" && pageType !== "collectible") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
-  if (namespaceValue === "minecraft" && (gameSlug !== "minecraft" || pageType !== "database")) throw new Error("Minecraft requires one shared wiki and database collections.");
+  if (namespaceValue === "minecraft" && (!["minecraft", "minecraft-java", "minecraft-bedrock"].includes(gameSlug) || pageType !== "database")) throw new Error("Minecraft requires an approved edition identity and database collections.");
   if (namespaceValue === "minecraft" && (!Array.isArray(manifest.sourceUrls) || !manifest.sourceUrls.length || manifest.sourceUrls.some(url => typeof url !== "string" || !url.startsWith("https://")))) throw new Error("Minecraft collections need verified HTTPS source URLs.");
-  const expectedRoute = namespaceValue === "minecraft" ? `${config.routePrefix}/${collectionSlug}` : `${config.routePrefix}/${gameSlug}/${collectionSlug}`;
+  const expectedRoute = namespaceValue === "minecraft" ? gameSlug === "minecraft" ? `${config.routePrefix}/${collectionSlug}` : `/minecraft/${gameSlug.replace("minecraft-", "")}/wiki/${collectionSlug}` : `${config.routePrefix}/${gameSlug}/${collectionSlug}`;
   if (manifest.route && manifest.route !== expectedRoute) throw new Error(`${manifestPath} route does not match its slugs.`);
   const datasetPath = resolveInside(root, manifest.dataset, "dataset");
   const mediaRoot = resolveInside(root, manifest.mediaRoot, "mediaRoot");
@@ -239,7 +241,7 @@ async function planManifest(namespaceValue: Namespace, manifestPath: string): Pr
       const source = resolveInside(mediaRoot, relativeImage, `image for ${itemSlug}`);
       const prepared = await prepareImage(source);
       image = {
-        image_key: collectionImageKey({ namespace: namespaceValue, mediaPrefix: config.mediaPrefix, gameSlug, collectionSlug, itemSlug, hash: prepared.hash, extension: extensionForMime(prepared.mime) }),
+        image_key: collectionImageKey({ namespace: namespaceValue, mediaPrefix: config.mediaPrefix, gameSlug: namespaceValue === "minecraft" ? "minecraft" : gameSlug, collectionSlug, itemSlug, hash: prepared.hash, extension: extensionForMime(prepared.mime) }),
         image_mime: prepared.mime,
         image_width: prepared.width,
         image_height: prepared.height,
@@ -345,12 +347,12 @@ async function applyPlan(plan: Plan) {
   const pagesTable = tableName(plan.config, "wiki_collection_pages");
   const datasetsTable = tableName(plan.config, "wiki_collection_datasets");
   const itemsTable = tableName(plan.config, "wiki_collection_items");
-  const game = await sb.from(gameTable).select("id, slug").eq("slug", plan.manifest.game.slug).eq("is_published", true).maybeSingle();
+  const game = await sb.from(gameTable).select("id, slug, is_published").eq("slug", plan.manifest.game.slug).maybeSingle();
   if (game.error) throw game.error;
-  if (!game.data) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} game row before its collection.`);
-  const wiki = await sb.from(wikiTable).select("id, game_id, slug").eq("slug", plan.manifest.game.slug).eq("is_published", true).maybeSingle();
+  if (!game.data || !stage && !game.data.is_published) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} game row before its collection.`);
+  const wiki = await sb.from(wikiTable).select("id, game_id, slug, is_published").eq("slug", plan.manifest.game.slug).maybeSingle();
   if (wiki.error) throw wiki.error;
-  if (!wiki.data || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} wiki row before its collection.`);
+  if (!wiki.data || !stage && !wiki.data.is_published || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} wiki row before its collection.`);
   const copy = pageCopy(plan);
   let pageQuery = await sb
     .from(pagesTable)
@@ -398,7 +400,7 @@ async function applyPlan(plan: Plan) {
         runtimeManifestSchemaVersion: plan.manifest.schemaVersion,
         namespace: plan.namespace,
         datasetFile: path.basename(plan.datasetPath),
-        mediaPrefix: `${plan.config.mediaPrefix}/${plan.manifest.game.slug}/${plan.manifest.collection.slug}/`,
+        mediaPrefix: `${plan.config.mediaPrefix}/${plan.namespace === "minecraft" ? "minecraft" : plan.manifest.game.slug}/${plan.manifest.collection.slug}/`,
         sourceUrls: plan.manifest.sourceUrls
       }
     }).select("id, item_count").single();
@@ -444,6 +446,7 @@ async function main() {
 
   const plans: Plan[] = [];
   for (const manifestPath of manifestPaths) plans.push(await planManifest(namespaceValue, manifestPath));
+  if (stage && plans.some(plan => plan.manifest.game.slug === "minecraft")) throw new Error("Staging requires independent edition identities.");
   console.table(plans.map((plan) => ({ namespace: plan.namespace, code: plan.code, pageType: plan.pageType, items: plan.items.length, images: plan.items.filter((item) => item.image_key).length, contentHash: plan.contentHash })));
   if (!apply) return;
 

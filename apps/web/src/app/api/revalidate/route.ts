@@ -1,3 +1,4 @@
+import { buildMinecraftWikiPath, minecraftCollectionEventPath } from "@/lib/minecraft-paths";
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
@@ -307,8 +308,8 @@ function revalidateForRedDeadWikiCollection(slug: string) {
 }
 
 function revalidateForMinecraft(type: "minecraft_game" | "minecraft_wiki" | "minecraft_wiki_collection" | "minecraft_tool", slug: string) {
-  const indexes = ["/minecraft", "/minecraft/wiki", "/minecraft/tools", "/games", FEED_PATH, SITEMAP_INDEX_PATH, MINECRAFT_SITEMAP_PATH];
-  const detailPath = type === "minecraft_wiki_collection" ? `/minecraft/wiki/${slug}` : type === "minecraft_tool" ? `/minecraft/tools/${slug}` : "";
+  const indexes = ["/minecraft", "/minecraft/wiki", "/minecraft/java/wiki", "/minecraft/bedrock/wiki", "/minecraft/tools", "/games", FEED_PATH, SITEMAP_INDEX_PATH, MINECRAFT_SITEMAP_PATH];
+  const detailPath = type === "minecraft_wiki_collection" ? minecraftCollectionEventPath(slug) : type === "minecraft_tool" ? `/minecraft/tools/${slug}` : buildMinecraftWikiPath(slug);
   const paginatedPaths = type === "minecraft_wiki_collection"
     ? Array.from({ length: PAGINATED_INDEX_PURGE_LIMIT - 1 }, (_, index) => `${detailPath}/page/${index + 2}`)
     : [];

@@ -210,6 +210,11 @@ export function cacheTagsForPath(pathname: string) {
 
   if (first === "minecraft") {
     if (!second) return unique([...tags, "minecraft-home"]);
+    if ((second === "java" || second === "bedrock") && third === "wiki") {
+      const wiki = `minecraft-${second}`;
+      const collection = fourth;
+      return unique([...tags, "minecraft-wiki-index", slugTag("minecraft-wiki", wiki), "minecraft-wiki-collection-index", collection ? slugTag("minecraft-wiki-collection", `${wiki}/${collection}`) : "", collection ? slugTag("minecraft-wiki-collection", `${wiki}-${collection}`) : ""]);
+    }
     if (second === "wiki") {
       if (!third) return unique([...tags, "minecraft-wiki-index"]);
       return unique([...tags, "minecraft-wiki-collection-index", slugTag("minecraft-wiki-collection", third)]);
@@ -488,9 +493,9 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
       ]);
     }
     case "minecraft_game":
-      return unique([...base, "minecraft-games-index", "minecraft-game:minecraft", "minecraft-home", "minecraft-wiki:minecraft", "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
+      return unique([...base, "minecraft-games-index", slugTag("minecraft-game", normalized), "minecraft-home", slugTag("minecraft-wiki", normalized), "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
     case "minecraft_wiki":
-      return unique([...base, "minecraft-wiki:minecraft", "minecraft-home", "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
+      return unique([...base, slugTag("minecraft-wiki", normalized), "minecraft-home", "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
     case "minecraft_wiki_collection":
       return unique([
         ...base,

@@ -1,3 +1,4 @@
+import { buildMinecraftWikiPath, buildMinecraftCollectionPath } from "@/lib/minecraft-paths";
 import { NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
 import { getSessionUser } from "@/lib/auth/session-user";
@@ -168,11 +169,11 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
   if (entityType === "minecraft_wiki" || entityType === "minecraft_wiki_collection" || entityType === "minecraft_tool") {
     const table = entityType === "minecraft_wiki" ? "minecraft_wiki_pages_view" : entityType === "minecraft_tool" ? "minecraft_tools_view" : "minecraft_wiki_collection_pages_view";
     const key = entityType === "minecraft_wiki_collection" ? "collection_slug" : "slug";
-    const { data, error } = await admin.from(table).select(key).eq("id", entityId).eq("is_published", true).maybeSingle();
+    const { data, error } = await admin.from(table).select(entityType === "minecraft_wiki_collection" ? "collection_slug, wiki_slug, code" : key).eq("id", entityId).eq("is_published", true).maybeSingle();
     if (error || !data) return null;
     const slug = normalizeString((data as unknown as Record<string, unknown>)[key]);
     if (!slug) return null;
-    const path = entityType === "minecraft_wiki" ? "/minecraft/wiki" : entityType === "minecraft_tool" ? `/minecraft/tools/${slug}` : `/minecraft/wiki/${slug}`;
+    const path = entityType === "minecraft_wiki" ? buildMinecraftWikiPath(slug) : entityType === "minecraft_tool" ? `/minecraft/tools/${slug}` : buildMinecraftCollectionPath(normalizeString((data as unknown as Record<string, unknown>).wiki_slug), slug);
     return { pageType: entityType === "minecraft_tool" ? "Minecraft Tool" : "Minecraft Wiki", pageUrl: buildPageUrl(path) };
   }
 

@@ -5,7 +5,7 @@ import { resolveContentDates } from "@/lib/content-dates";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
 import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
-import { getMinecraftWiki, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
+import { buildMinecraftWikiPath, buildMinecraftCollectionPath, listPublishedMinecraftWikiPages, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -138,7 +138,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .order("content_updated_at", { ascending: false, nullsFirst: false })
       .limit(40),
     sb.from("gta_checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
-    getMinecraftWiki(),
+    listPublishedMinecraftWikiPages(),
     listPublishedMinecraftCollections(),
     listPublishedMinecraftTools()
   ]);
@@ -156,8 +156,8 @@ async function loadFeedItems(): Promise<FeedItem[]> {
 
   const items: FeedItem[] = [];
   const minecraftPages = [
-    ...(minecraftWiki ? [{ ...minecraftWiki, path: "/minecraft/wiki" }] : []),
-    ...minecraftCollections.map((page) => ({ ...page, path: `/minecraft/wiki/${page.collection_slug}` })),
+    ...minecraftWiki.filter(page => page.slug !== "minecraft").map(page => ({ ...page, path: buildMinecraftWikiPath(page.slug) })),
+    ...minecraftCollections.map((page) => ({ ...page, path: buildMinecraftCollectionPath(page.wiki_slug, page.collection_slug) })),
     ...minecraftTools.map((page) => ({ ...page, path: `/minecraft/tools/${page.slug}` }))
   ];
   for (const page of minecraftPages) {

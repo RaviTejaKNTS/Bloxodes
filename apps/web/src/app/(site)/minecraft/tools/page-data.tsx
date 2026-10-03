@@ -1,16 +1,11 @@
 import Link from "next/link";
 import { cache } from "react";
 import { ContentCard } from "@/components/ContentCard";
-import { getMinecraftTool, listMinecraftTools, listPublishedMinecraftWikiCollectionsByWikiSlug, type MinecraftToolPage } from "@/lib/minecraft";
-import { parseMinecraftEdition } from "@/lib/minecraft-edition";
+import { buildMinecraftCollectionPath, getMinecraftTool, listMinecraftTools, listPublishedMinecraftCollections, type MinecraftToolPage } from "@/lib/minecraft";
 import { isMinecraftToolSlug, MINECRAFT_TOOL_COLLECTIONS } from "@/lib/minecraft-tools/manifest";
-import { type Edition } from "@/lib/minecraft-tools/types";
 import type { ToolRules } from "@/lib/minecraft-tools/types";
 
 export const loadMinecraftTool = cache(async (slug: string) => isMinecraftToolSlug(slug) ? getMinecraftTool(slug) : null);
-export async function resolveToolEdition(value: unknown) {
-  return parseMinecraftEdition(value) ?? "java";
-}
 export function toolRules(tool: MinecraftToolPage): ToolRules {
   const raw = tool.rules_json;
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new Error(`Published tool ${tool.slug} has no verified rules.`);
@@ -30,18 +25,7 @@ export async function RelatedMinecraftTools({ exclude, collection }: { exclude?:
 export async function RelatedMinecraftCollections({ tool }: { tool: string }) {
   if (!isMinecraftToolSlug(tool)) return null;
   const relevant = MINECRAFT_TOOL_COLLECTIONS[tool];
-  const collections = (await listPublishedMinecraftWikiCollectionsByWikiSlug("minecraft")).filter(entry => relevant.includes(entry.collection_slug));
+  const collections = (await listPublishedMinecraftCollections()).filter(entry => relevant.includes(entry.collection_slug));
   if (!collections.length) return null;
-  return <section className="mt-10 space-y-4"><h2 className="text-2xl font-semibold">Minecraft reference collections</h2><div className="space-y-3">{collections.map(entry => <ContentCard key={entry.code} type="wiki" variant="bar" href={`/minecraft/wiki/${entry.collection_slug}`} title={entry.display_name} subtitle={entry.meta_description} />)}</div></section>;
-}
-
-/** Send only the chosen edition's rules to the browser. */
-export function rulesForEdition(rules: ToolRules, edition: Edition): ToolRules {
-  const next = { ...rules, ...rules.editionRules?.[edition] };
-  delete next.editionRules;
-  for (const key of ["items", "fuels", "processing", "recipes", "enchantments", "brewing", "equipment"] as const) {
-    const values = next[key];
-    if (values) (next as unknown as Record<string, unknown>)[key] = values.filter(value => !value.editions || value.editions.includes(edition));
-  }
-  return next;
+  return <section className="mt-10 space-y-4"><h2 className="text-2xl font-semibold">Minecraft reference collections</h2><div className="space-y-3">{collections.map(entry => <ContentCard key={entry.code} type="wiki" variant="bar" href={buildMinecraftCollectionPath(entry.wiki_slug, entry.collection_slug)} title={entry.title} subtitle={entry.meta_description} />)}</div></section>;
 }

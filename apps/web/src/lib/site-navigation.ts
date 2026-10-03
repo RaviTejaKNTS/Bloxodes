@@ -136,6 +136,7 @@ export const signedOutSidebarAccount: SidebarAccount = {
 
 export function isNavLinkActive(pathname: string | null | undefined, href: string) {
   const path = pathname ?? "/";
+  if (href === "/minecraft/wiki" && /^\/minecraft\/(java|bedrock)\/wiki(?:\/|$)/.test(path)) return true;
   if (href === "/games" && (path === "/puzzles" || path.startsWith("/puzzles/"))) return true;
   if (href === "/gta" || href === "/red-dead" || href === "/minecraft") return path === href;
   return path === href || (href !== "/" && path.startsWith(`${href}/`));

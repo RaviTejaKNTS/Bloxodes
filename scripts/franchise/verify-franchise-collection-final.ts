@@ -78,11 +78,11 @@ async function main() {
   const expectedTitle = resolveCountTokens(final.title, page.data.item_count);
   if (page.data.title !== expectedTitle || page.data.display_name !== final.display_name) throw new Error("Published collection copy readback failed.");
 
-  const url = namespace === "minecraft" ? `${baseUrl}${config.routePrefix}/${collectionSlug}` : `${baseUrl}${config.routePrefix}/${gameSlug}/${collectionSlug}`;
+  const url = namespace === "minecraft" ? `${baseUrl}${gameSlug === "minecraft" ? config.routePrefix : `/minecraft/${gameSlug.replace("minecraft-", "")}/wiki`}/${collectionSlug}` : `${baseUrl}${config.routePrefix}/${gameSlug}/${collectionSlug}`;
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   const javaCount = dataset.items.filter(row => !Array.isArray(row.item?.editions) || row.item.editions.includes("java")).length;
-  const renderedTitle = namespace === "minecraft" ? minecraftCollectionTitleForCount(expectedTitle, dataset.items.length, javaCount || dataset.items.length) : expectedTitle;
+  const renderedTitle = namespace === "minecraft" && gameSlug === "minecraft" ? minecraftCollectionTitleForCount(expectedTitle, dataset.items.length, javaCount || dataset.items.length) : expectedTitle;
   if (response.status !== 200 || !html.includes(renderedTitle)) throw new Error(`${url} failed route verification (HTTP ${response.status}).`);
   if (expectedPageType === "collectible") {
     const pageTwo = await fetch(`${url}/page/2`, { redirect: "manual" });
