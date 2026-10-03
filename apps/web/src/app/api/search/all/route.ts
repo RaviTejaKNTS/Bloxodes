@@ -62,6 +62,9 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   red_dead_game: "wiki",
   red_dead_wiki: "wiki",
   red_dead_wiki_collection: "wiki",
+  minecraft_wiki: "wiki",
+  minecraft_wiki_collection: "wiki",
+  minecraft_tool: "tool",
   stats_game: "stats"
 };
 
@@ -80,7 +83,8 @@ const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
   wiki: ["wiki", "wiki_collection"],
   gta: ["gta_wiki", "gta_wiki_collection", "gta_checklist"],
   "gta-checklists": ["gta_checklist"],
-  "red-dead": ["red_dead_wiki", "red_dead_wiki_collection"]
+  "red-dead": ["red_dead_wiki", "red_dead_wiki_collection"],
+  minecraft: ["minecraft_wiki", "minecraft_wiki_collection", "minecraft_tool"]
 };
 
 const DEFAULT_LIMIT = 120;

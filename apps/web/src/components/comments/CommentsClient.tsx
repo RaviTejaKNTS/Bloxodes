@@ -24,7 +24,10 @@ type CommentsClientProps = {
     | "gta_wiki"
     | "gta_wiki_collection"
     | "red_dead_wiki"
-    | "red_dead_wiki_collection";
+    | "red_dead_wiki_collection"
+    | "minecraft_wiki"
+    | "minecraft_wiki_collection"
+    | "minecraft_tool";
   entityId: string;
   initialComments: CommentEntry[];
 };

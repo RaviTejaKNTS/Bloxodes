@@ -7,8 +7,9 @@ import sharp from "sharp";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
+import { collectionImageKey, uploadCollectionImages, verifyCollectionImages } from "../shared/franchise-collection-media";
 
-type Namespace = "gta" | "red-dead";
+type Namespace = "gta" | "red-dead" | "minecraft";
 
 type FranchiseConfig = {
   label: string;
@@ -19,6 +20,7 @@ type FranchiseConfig = {
 
 const FRANCHISES: Record<Namespace, FranchiseConfig> = {
   gta: { label: "GTA", routePrefix: "/gta/wiki", tablePrefix: "gta", mediaPrefix: "gta" },
+  minecraft: { label: "Minecraft", routePrefix: "/minecraft/wiki", tablePrefix: "minecraft", mediaPrefix: "minecraft" },
   "red-dead": { label: "Red Dead", routePrefix: "/red-dead/wiki", tablePrefix: "red_dead", mediaPrefix: "red-dead" }
 };
 
@@ -77,6 +79,7 @@ const publish = argv.includes("--publish");
 const uploadMedia = argv.includes("--upload-media");
 const allowProd = argv.includes("--allow-prod");
 const namespace = value("--namespace") as Namespace | "";
+const minecraftMediaConcurrency = Number(value("--minecraft-media-concurrency") || "8");
 const manifestPaths = collectValues("--manifest").map((entry) => path.resolve(entry));
 const SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const ALLOWED_SYSTEM_FIELDS = new Set(["slug", "section", "sortOrder", "image"]);
@@ -87,7 +90,7 @@ const FORBIDDEN_PUBLIC_FIELDS = new Set([
 
 function usage(): never {
   console.log(
-    "Usage: npm run sync:franchise-collection-runtime -- --namespace <gta|red-dead> --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--allow-prod]"
+    "Usage: npm run sync:franchise-collection-runtime -- --namespace <gta|red-dead|minecraft> --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--allow-prod] [--minecraft-media-concurrency <1-8>]"
   );
   process.exit(0);
 }
@@ -107,7 +110,9 @@ function collectValues(flag: string): string[] {
 }
 
 if (argv.includes("--help") || argv.includes("-h")) usage();
-if (!(namespace in FRANCHISES)) throw new Error("--namespace must be gta or red-dead.");
+if (!(namespace in FRANCHISES)) throw new Error("--namespace must be gta, red-dead, or minecraft.");
+if (argv.includes("--minecraft-media-concurrency") && namespace !== "minecraft") throw new Error("--minecraft-media-concurrency is only supported for Minecraft.");
+if (!Number.isInteger(minecraftMediaConcurrency) || minecraftMediaConcurrency < 1 || minecraftMediaConcurrency > 8) throw new Error("--minecraft-media-concurrency must be an integer from 1 to 8.");
 if (!manifestPaths.length) throw new Error("At least one --manifest is required.");
 if (publish && !apply) throw new Error("--publish requires --apply.");
 if (uploadMedia && !apply) throw new Error("--upload-media requires --apply.");
@@ -187,7 +192,9 @@ async function planManifest(namespaceValue: Namespace, manifestPath: string): Pr
   if (!manifest.game.name?.trim() || !manifest.collection.label?.trim()) throw new Error(`${manifestPath} needs game and collection labels.`);
   const pageType = String(manifest.collection.pageType) === "checklist" ? "collectible" : manifest.collection.pageType ?? "database";
   if (pageType !== "database" && pageType !== "collectible") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
-  const expectedRoute = `${config.routePrefix}/${gameSlug}/${collectionSlug}`;
+  if (namespaceValue === "minecraft" && (gameSlug !== "minecraft" || pageType !== "database")) throw new Error("Minecraft requires one shared wiki and database collections.");
+  if (namespaceValue === "minecraft" && (!Array.isArray(manifest.sourceUrls) || !manifest.sourceUrls.length || manifest.sourceUrls.some(url => typeof url !== "string" || !url.startsWith("https://")))) throw new Error("Minecraft collections need verified HTTPS source URLs.");
+  const expectedRoute = namespaceValue === "minecraft" ? `${config.routePrefix}/${collectionSlug}` : `${config.routePrefix}/${gameSlug}/${collectionSlug}`;
   if (manifest.route && manifest.route !== expectedRoute) throw new Error(`${manifestPath} route does not match its slugs.`);
   const datasetPath = resolveInside(root, manifest.dataset, "dataset");
   const mediaRoot = resolveInside(root, manifest.mediaRoot, "mediaRoot");
@@ -232,7 +239,7 @@ async function planManifest(namespaceValue: Namespace, manifestPath: string): Pr
       const source = resolveInside(mediaRoot, relativeImage, `image for ${itemSlug}`);
       const prepared = await prepareImage(source);
       image = {
-        image_key: `${config.mediaPrefix}/${gameSlug}/${collectionSlug}/${itemSlug}-${prepared.hash.slice(0, 16)}.${extensionForMime(prepared.mime)}`,
+        image_key: collectionImageKey({ namespace: namespaceValue, mediaPrefix: config.mediaPrefix, gameSlug, collectionSlug, itemSlug, hash: prepared.hash, extension: extensionForMime(prepared.mime) }),
         image_mime: prepared.mime,
         image_width: prepared.width,
         image_height: prepared.height,
@@ -327,25 +334,6 @@ function pageCopy(plan: Plan): Record<string, unknown> | null {
   };
 }
 
-async function uploadImages(plan: Plan, r2: R2Client) {
-  for (const item of plan.items) {
-    if (!item.image_key || !item.image_mime || !item.image_sha256 || !item.prepared_image) continue;
-    if (await r2.hasObject(item.image_key)) continue;
-    await r2.putObject({
-      key: item.image_key,
-      body: item.prepared_image,
-      contentType: item.image_mime,
-      metadata: { width: item.image_width ?? 0, height: item.image_height ?? 0, sha256: item.image_sha256 }
-    });
-  }
-}
-
-async function verifyImages(plan: Plan, r2: R2Client) {
-  for (const item of plan.items) {
-    if (item.image_key && !(await r2.hasObject(item.image_key))) throw new Error(`Missing R2 image for ${plan.code}/${item.item_slug}.`);
-  }
-}
-
 function tableName(config: FranchiseConfig, suffix: string): string {
   return `${config.tablePrefix}_${suffix}`;
 }
@@ -427,20 +415,22 @@ async function applyPlan(plan: Plan) {
       throw error;
     }
   }
-  const count = await sb.from(itemsTable).select("id", { count: "exact", head: true }).eq("dataset_id", dataset.data.id);
+  if (!dataset.data) throw new Error(`${plan.code} dataset did not return a row.`);
+  const publishedDataset = dataset.data;
+  const count = await sb.from(itemsTable).select("id", { count: "exact", head: true }).eq("dataset_id", publishedDataset.id);
   if (count.error) throw count.error;
-  if (count.count !== plan.items.length || Number(dataset.data.item_count) !== plan.items.length) throw new Error(`${plan.code} dataset count mismatch.`);
+  if (count.count !== plan.items.length || Number(publishedDataset.item_count) !== plan.items.length) throw new Error(`${plan.code} dataset count mismatch.`);
   if (publish) {
     if (!copy) throw new Error(`${plan.code} cannot publish without final.json.`);
     const updated = await sb.from(pagesTable).update({
       ...copy,
       page_type: plan.pageType,
       item_count: plan.items.length,
-      published_dataset_id: dataset.data.id,
+      published_dataset_id: publishedDataset.id,
       is_published: true
     }).eq("id", page.id).select("published_dataset_id, item_count").single();
     if (updated.error) throw updated.error;
-    if (updated.data.published_dataset_id !== dataset.data.id || updated.data.item_count !== plan.items.length) throw new Error(`${plan.code} published pointer mismatch.`);
+    if (updated.data.published_dataset_id !== publishedDataset.id || updated.data.item_count !== plan.items.length) throw new Error(`${plan.code} published pointer mismatch.`);
   }
 }
 
@@ -461,9 +451,10 @@ async function main() {
   const r2Config = needsR2 && (uploadMedia || publish) ? loadR2ClientConfig(process.env) : null;
   if (r2Config && r2Config.bucket !== "bloxodes-wiki") throw new Error(`Expected shared R2 bucket bloxodes-wiki, received ${r2Config.bucket}.`);
   const r2 = r2Config ? new R2Client(r2Config) : null;
+  const confirmedMediaKeys = namespaceValue === "minecraft" ? new Set<string>() : undefined;
   for (const plan of plans) {
-    if (uploadMedia && r2) await uploadImages(plan, r2);
-    if (publish && r2) await verifyImages(plan, r2);
+    if (uploadMedia && r2) await uploadCollectionImages(plan.items, r2, confirmedMediaKeys, minecraftMediaConcurrency);
+    if (publish && r2) await verifyCollectionImages(plan.items, r2, plan.code, confirmedMediaKeys, minecraftMediaConcurrency);
     await applyPlan(plan);
   }
 }

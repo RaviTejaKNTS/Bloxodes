@@ -4,8 +4,9 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { getMinecraftWikiPageBySlug, resolveMinecraftWikiCoverImage } from "@/lib/minecraft";
 
-const description = "Explore Roblox, Grand Theft Auto, Red Dead, and daily puzzles on Bloxodes.";
+const description = "Explore Roblox, Minecraft, Grand Theft Auto, Red Dead and daily puzzles on Bloxodes.";
 const canonical = `${SITE_URL}/games`;
 
 export const metadata: Metadata = {
@@ -48,7 +49,11 @@ const platforms = [
   }
 ];
 
-export default function GamesPage() {
+export default async function GamesPage() {
+  const minecraft = await getMinecraftWikiPageBySlug("minecraft");
+  const publishedPlatforms = minecraft
+    ? [...platforms.slice(0, 1), { href: "/minecraft", label: "Minecraft", image: resolveMinecraftWikiCoverImage(minecraft) }, ...platforms.slice(1)]
+    : platforms;
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -63,13 +68,13 @@ export default function GamesPage() {
         url: canonical,
         mainEntity: {
           "@type": "ItemList",
-          numberOfItems: platforms.length,
-          itemListElement: platforms.map(({ href, label, image }, index) => ({
+          numberOfItems: publishedPlatforms.length,
+          itemListElement: publishedPlatforms.map(({ href, label, image }, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: label,
             url: `${SITE_URL}${href}`,
-            image: `${SITE_URL}${image}`
+            image: new URL(image, SITE_URL).toString()
           }))
         }
       }
@@ -85,7 +90,7 @@ export default function GamesPage() {
       </header>
 
       <section className="grid gap-5 md:grid-cols-2" aria-label="Games and puzzles">
-        {platforms.map(({ href, label, image }, index) => (
+        {publishedPlatforms.map(({ href, label, image }, index) => (
           <Link
             key={href}
             href={href}

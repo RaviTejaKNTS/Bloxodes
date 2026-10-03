@@ -2,6 +2,7 @@ import "../shared/load-env";
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { imageLocalPath } from "./local-image-path";
 
 import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
 
@@ -314,17 +315,6 @@ function getCardFields(meta: Record<string, unknown> | null, columns: string[], 
     if (key === "cardSummary") return false;
     return true;
   });
-}
-
-function imageLocalPath(value: string, datasetPath: string): string | null {
-  if (/^https?:\/\//i.test(value)) return null;
-  const withoutQuery = value.split("?")[0] ?? value;
-  const decoded = decodeURIComponent(withoutQuery.replace(/^\/+/, ""));
-  const mediaRoot = path.resolve(path.dirname(datasetPath), "media");
-  const resolved = path.resolve(mediaRoot, decoded);
-  const relative = path.relative(mediaRoot, resolved);
-  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) return null;
-  return resolved;
 }
 
 async function checkImages(rows: Record<string, unknown>[], datasetPath: string) {

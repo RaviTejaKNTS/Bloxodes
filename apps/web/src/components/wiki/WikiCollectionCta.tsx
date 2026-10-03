@@ -17,10 +17,12 @@ function normalizeImageUrls(value?: string[] | null): string[] {
 export function WikiCollectionCta({
   href,
   title,
+  subtitle,
   imageUrls
 }: {
   href: string;
   title: string;
+  subtitle?: string;
   imageUrls?: string[] | null;
 }) {
   const images = normalizeImageUrls(imageUrls);
@@ -46,7 +48,11 @@ export function WikiCollectionCta({
         aria-hidden
       />
       <span className="relative z-10 flex w-full items-center">
-        <span className="max-w-3xl text-base font-semibold leading-6 md:text-lg">{label}</span>
+        <span className="max-w-3xl space-y-1">
+          <span className="block text-base font-semibold leading-6 md:text-lg">{label}</span>
+          {subtitle ? <span className="block text-sm leading-6 text-muted">{subtitle}</span> : null}
+          {subtitle ? <span className="block text-sm font-medium leading-6">Browse collection</span> : null}
+        </span>
       </span>
     </Link>
   );

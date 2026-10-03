@@ -1,5 +1,7 @@
 # Page Inventory
 
+Minecraft task implementation has `/minecraft`, one `/minecraft/wiki` overview and collection directory, `/minecraft/wiki/[collection]` with existing collection pagination, `/minecraft/tools` and `/minecraft/tools/[tool]`. It reuses `ContentCard`, `WikiCollectionCta`, the generic collection renderer and `DedicatedToolPage`. Java/Bedrock navigation uses server-rendered links in those shared canonical routes. The overview filters collection cards, counts and preview images by edition, labels each count, and passes the edition in every card link. Its CollectionPage/ItemList JSON-LD matches the visible directory. There are no Minecraft item pages, game-slug subhubs or deferred guide/checklist/update/seed routes. Managed content publication and browser verification remain separate from route creation.
+
 Authoritative workflow guidance lives in:
 
 - `apps/web/src/app/AGENTS.md`

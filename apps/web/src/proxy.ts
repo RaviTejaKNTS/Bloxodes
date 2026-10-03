@@ -6,6 +6,7 @@ import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } f
 import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
+import { isMinecraftEditionPath, minecraftEditionRedirect, MINECRAFT_EDITION_COOKIE, parseMinecraftEdition } from "@/lib/minecraft-edition";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
 
@@ -54,6 +55,12 @@ const LEGACY_SLUG_MAP = new Map<string, string>(
 );
 
 function applySecurityHeaders(res: NextResponse, pathname: string, hostname: string) {
+  if (isMinecraftEditionPath(pathname)) {
+    // Remembered edition preferences must never share HTML between visitors.
+    res.headers.set("Cache-Control", "private, no-store");
+    res.headers.set("CDN-Cache-Control", "no-store");
+    res.headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+  }
   for (const { key, value } of buildSecurityHeaders(pathname, undefined, {
     enableHsts: !isLocalHostname(hostname),
     useDevelopmentCsp: isLocalHostname(hostname)
@@ -165,12 +172,28 @@ export function proxy(req: NextRequest) {
     return applySecurityHeaders(redirectWithStatus(redirectUrl, 301), redirectUrl.pathname, hostname);
   }
 
+  const editionPath = minecraftEditionRedirect(url.pathname, url.search, req.cookies.get(MINECRAFT_EDITION_COOKIE)?.value);
+  if (editionPath) {
+    return applySecurityHeaders(redirectWithStatus(new URL(editionPath, url), 307), url.pathname, hostname);
+  }
+
   // Pass a header downstream for routes that need request-time consent context.
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(CONSENT_HEADER, serializeConsentRequirement(requiresConsent));
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
 
-  return applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
+  const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
+  const edition = parseMinecraftEdition(url.searchParams.get("edition"));
+  if (isMinecraftEditionPath(url.pathname) && edition) {
+    response.cookies.set(MINECRAFT_EDITION_COOKIE, edition, {
+      path: "/minecraft",
+      maxAge: 31536000,
+      sameSite: "lax",
+      httpOnly: true,
+      secure: url.protocol === "https:"
+    });
+  }
+  return response;
 }
 
 export const config = {

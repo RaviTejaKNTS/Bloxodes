@@ -16,6 +16,21 @@ function items(prefix: string, count: number): Item[] {
 }
 
 describe("game collection pagination", () => {
+  it("keeps an explicit edition on item and section links without changing the canonical base", () => {
+    const result = buildCollectionPagination({
+      sections: [{ id: "blocks", label: "Blocks", items: items("block", 50) }],
+      currentPage: 2,
+      basePath: "/minecraft/wiki/blocks",
+      query: "edition=java",
+      targetWeight: 1,
+      maxSectionWeight: 1
+    });
+    expect(result.info.basePath).toBe("/minecraft/wiki/blocks");
+    expect(result.info.query).toBe("edition=java");
+    expect(result.itemLinks.find((item) => item.id === "block-25")?.href).toBe("/minecraft/wiki/blocks/page/2?edition=java#item-block-25");
+    expect(result.sectionLinks[0].href).toBe("/minecraft/wiki/blocks?edition=java#blocks");
+    expect(result.sections[0].startHref).toBe("/minecraft/wiki/blocks?edition=java#blocks");
+  });
   it("starts a new page only after the minimum useful item count", () => {
     const sections: CollectionPaginationSection<Item>[] = [
       { id: "weapons", label: "Weapons", items: items("weapon", 24) },

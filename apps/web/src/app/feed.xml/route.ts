@@ -5,6 +5,7 @@ import { resolveContentDates } from "@/lib/content-dates";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
 import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
+import { getMinecraftWiki, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -63,7 +64,7 @@ type PuzzleRow = {
 
 const FEED_LIMIT = 120;
 const FEED_DESCRIPTION =
-  "Roblox codes, guides, stats, puzzles and events, plus GTA completion checklists from Bloxodes.";
+  "Roblox codes, guides, stats, puzzles and events, GTA completion checklists, and Minecraft wiki collections and tools from Bloxodes.";
 
 function escapeXml(value: string): string {
   return value
@@ -100,7 +101,7 @@ function toFeedItem(input: {
 
 async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
-  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes] = await Promise.all([
+  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes, minecraftWiki, minecraftCollections, minecraftTools] = await Promise.all([
     sb
       .from("articles")
       .select("slug, title, updated_at, published_at, created_at")
@@ -136,7 +137,10 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .not("slug", "is", null)
       .order("content_updated_at", { ascending: false, nullsFirst: false })
       .limit(40),
-    sb.from("gta_checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40)
+    sb.from("gta_checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
+    getMinecraftWiki(),
+    listPublishedMinecraftCollections(),
+    listPublishedMinecraftTools()
   ]);
 
   const firstError =
@@ -151,6 +155,22 @@ async function loadFeedItems(): Promise<FeedItem[]> {
   }
 
   const items: FeedItem[] = [];
+  const minecraftPages = [
+    ...(minecraftWiki ? [{ ...minecraftWiki, path: "/minecraft/wiki" }] : []),
+    ...minecraftCollections.map((page) => ({ ...page, path: `/minecraft/wiki/${page.collection_slug}` })),
+    ...minecraftTools.map((page) => ({ ...page, path: `/minecraft/tools/${page.slug}` }))
+  ];
+  for (const page of minecraftPages) {
+    const item = toFeedItem({
+      title: page.title,
+      path: page.path,
+      description: page.meta_description ?? "Minecraft wiki and tools.",
+      updatedAt: page.content_updated_at ?? page.updated_at,
+      publishedAt: page.published_at,
+      createdAt: page.created_at
+    });
+    if (item) items.push(item);
+  }
   for (const report of [robloxSeptember2026Report, robloxJuly2026Report, robloxJune2026Report]) {
     const monthlyReport = toFeedItem({
       title: report.title,

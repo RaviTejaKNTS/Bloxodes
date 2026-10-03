@@ -966,6 +966,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
             </p>
             <PagePagination
               basePath={pagination.basePath}
+              query={pagination.query}
               currentPage={pagination.currentPage}
               totalPages={pagination.totalPages}
             />
@@ -1026,6 +1027,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
         {pagination && pagination.totalPages > 1 ? (
           <PagePagination
             basePath={pagination.basePath}
+            query={pagination.query}
             currentPage={pagination.currentPage}
             totalPages={pagination.totalPages}
             className="flex flex-wrap items-center gap-2 border-t border-border/60 pt-6"

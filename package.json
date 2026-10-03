@@ -244,7 +244,17 @@
     "articles:runtime:prepare": "bash scripts/ops/prepare-automation-runtime.sh",
     "automation:runtime:prepare": "bash scripts/ops/prepare-automation-runtime.sh",
     "automation:runtime:activate": "bash scripts/ops/install-homelab-automation.sh",
-    "stats:worker:reconcile": "node --import tsx scripts/ops/reconcile-worker-ledger.ts"
+    "stats:worker:reconcile": "node --import tsx scripts/ops/reconcile-worker-ledger.ts",
+    "sync:minecraft-collection-runtime": "node --import tsx scripts/minecraft/sync-minecraft-collection-runtime.ts",
+    "publish:minecraft-wiki": "node --import tsx scripts/minecraft/publish-minecraft-wiki.ts",
+    "publish:minecraft-tools": "node --import tsx scripts/minecraft/publish-minecraft-tools.ts",
+    "audit:minecraft-preview": "python3 scripts/minecraft/audit-minecraft-preview.py",
+    "seed:minecraft-releases": "node --import tsx scripts/minecraft/seed-minecraft-releases.ts",
+    "verify:minecraft-collection-final": "node --import tsx scripts/minecraft/verify-minecraft-collection-final.ts",
+    "export:minecraft-collection-workspace": "node --import tsx scripts/minecraft/export-minecraft-collection-workspace.ts",
+    "acquire:minecraft-source-pack": "python3 scripts/minecraft/acquire-minecraft-source-pack.py",
+    "render:minecraft-assets": "python3 scripts/minecraft/render-minecraft-assets.py",
+    "sync:minecraft-wiki-media": "node --import tsx scripts/minecraft/sync-minecraft-wiki-media.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

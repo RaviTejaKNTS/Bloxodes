@@ -926,6 +926,9 @@ export function renderGameCollectionPage({
   currentPage = 1,
   prepared,
   routeBase = "/wiki",
+  collectionBasePath,
+  navigationQuery,
+  wikiHomePath,
   wikiLabel = "Wiki",
   collectionOptions,
   commentsEntityType = "wiki_collection",
@@ -938,6 +941,9 @@ export function renderGameCollectionPage({
   currentPage?: number;
   prepared?: GameDatasetPreparedCollection;
   routeBase?: string;
+  collectionBasePath?: string;
+  navigationQuery?: string;
+  wikiHomePath?: string;
   wikiLabel?: string;
   collectionOptions?: Array<{ value: string; label: string; href: string }>;
   commentsEntityType?: "wiki_collection" | "gta_wiki_collection";
@@ -961,13 +967,15 @@ export function renderGameCollectionPage({
   const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const normalizedRouteBase = routeBase === "/" ? "" : routeBase.replace(/\/+$/, "");
-  const basePath = `${normalizedRouteBase}/${config.gameSlug}/${config.slug}`;
+  const basePath = collectionBasePath ?? `${normalizedRouteBase}/${config.gameSlug}/${config.slug}`;
+  const gameWikiPath = wikiHomePath ?? `${normalizedRouteBase}/${config.gameSlug}`;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const publishedIso = toIsoContentDate(contentHtml?.publishedAt) ?? updatedIso;
   const pagination = buildCollectionPagination({
     sections: preparedCollection.groupedSections,
     currentPage,
     basePath,
+    query: navigationQuery,
     targetWeight: resolvePaginationTargetWeight(config.code),
     maxSectionWeight: resolvePaginationMaxSectionWeight(config.code)
   });
@@ -981,7 +989,7 @@ export function renderGameCollectionPage({
           name: item.name,
           section: section.label,
           hint: hint !== section.label ? hint : "",
-          href: itemHrefs.get(item.id) ?? `${basePath}#item-${item.id}`,
+          href: itemHrefs.get(item.id) ?? `${basePath}${navigationQuery ? `?${navigationQuery}` : ""}#item-${item.id}`,
           searchText: [item.name, section.label, ...["manufacturer", "category", "vehicleClass", "location", "availability", "effect", "weaponClass"].map((key) => normalizeValue(item[key]))].filter(Boolean).join(" ")
         };
       }))
@@ -1026,7 +1034,7 @@ export function renderGameCollectionPage({
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: wikiLabel, href: normalizedRouteBase },
-    { label: config.gameName, href: `${normalizedRouteBase}/${config.gameSlug}` },
+    ...(gameWikiPath === normalizedRouteBase ? [] : [{ label: config.gameName, href: gameWikiPath }]),
     {
       label: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`,
       href: null
@@ -1047,7 +1055,7 @@ export function renderGameCollectionPage({
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
       { name: wikiLabel, url: `${SITE_URL.replace(/\/$/, "")}${normalizedRouteBase}` },
-      { name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}${normalizedRouteBase}/${config.gameSlug}` },
+      ...(gameWikiPath === normalizedRouteBase ? [] : [{ name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}${gameWikiPath}` }]),
       { name: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`, url: canonicalUrl }
     ])
   );

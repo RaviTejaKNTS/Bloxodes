@@ -4,11 +4,13 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
+import { minecraftCollectionTitleForCount } from "../../apps/web/src/lib/minecraft-edition";
 
-type Namespace = "gta" | "red-dead";
+type Namespace = "gta" | "red-dead" | "minecraft";
 type Config = { label: string; routePrefix: string; tablePrefix: string };
 const CONFIGS: Record<Namespace, Config> = {
   gta: { label: "GTA", routePrefix: "/gta/wiki", tablePrefix: "gta" },
+  minecraft: { label: "Minecraft", routePrefix: "/minecraft/wiki", tablePrefix: "minecraft" },
   "red-dead": { label: "Red Dead", routePrefix: "/red-dead/wiki", tablePrefix: "red_dead" }
 };
 
@@ -26,11 +28,11 @@ function required(name: string): string {
   return result;
 }
 if (argv.includes("--help") || argv.includes("-h")) {
-  console.log("Usage: npm run verify:franchise-collection-final -- --namespace <gta|red-dead> --base-url <url> --game <slug> --collection <slug> --workspace <dir> [--allow-missing-images]");
+  console.log("Usage: npm run verify:franchise-collection-final -- --namespace <gta|red-dead|minecraft> --base-url <url> --game <slug> --collection <slug> --workspace <dir> [--allow-missing-images]");
   process.exit(0);
 }
 const namespace = required("--namespace") as Namespace;
-if (!(namespace in CONFIGS)) throw new Error("--namespace must be gta or red-dead.");
+if (!(namespace in CONFIGS)) throw new Error("--namespace must be gta, red-dead, or minecraft.");
 const config = CONFIGS[namespace];
 const baseUrl = new URL(required("--base-url")).toString().replace(/\/$/, "");
 const gameSlug = required("--game").toLowerCase();
@@ -76,10 +78,12 @@ async function main() {
   const expectedTitle = resolveCountTokens(final.title, page.data.item_count);
   if (page.data.title !== expectedTitle || page.data.display_name !== final.display_name) throw new Error("Published collection copy readback failed.");
 
-  const url = `${baseUrl}${config.routePrefix}/${gameSlug}/${collectionSlug}`;
+  const url = namespace === "minecraft" ? `${baseUrl}${config.routePrefix}/${collectionSlug}` : `${baseUrl}${config.routePrefix}/${gameSlug}/${collectionSlug}`;
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
-  if (response.status !== 200 || !html.includes(expectedTitle)) throw new Error(`${url} failed route verification (HTTP ${response.status}).`);
+  const javaCount = dataset.items.filter(row => !Array.isArray(row.item?.editions) || row.item.editions.includes("java")).length;
+  const renderedTitle = namespace === "minecraft" ? minecraftCollectionTitleForCount(expectedTitle, dataset.items.length, javaCount || dataset.items.length) : expectedTitle;
+  if (response.status !== 200 || !html.includes(renderedTitle)) throw new Error(`${url} failed route verification (HTTP ${response.status}).`);
   if (expectedPageType === "collectible") {
     const pageTwo = await fetch(`${url}/page/2`, { redirect: "manual" });
     if (pageTwo.status !== 404) throw new Error(`${url}/page/2 should return 404 for a collectible collection.`);

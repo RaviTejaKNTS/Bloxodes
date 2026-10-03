@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentFaq } from "@/components/ContentFaq";
@@ -10,7 +10,7 @@ import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { getToolContentWithDevFallback } from "@/lib/tools";
+import { getToolContentWithDevFallback, type ToolContent } from "@/lib/tools";
 import "@/styles/article-content.css";
 
 const TOOL_AD_SLOT = "3529946151";
@@ -21,15 +21,22 @@ type DedicatedToolConfig = {
   fallbackTitle: string;
   fallbackDescription: string;
   applicationCategory?: string;
+  content?: ToolContent | null;
+  canonicalPath?: string;
+  breadcrumbItems?: Array<{ label: string; href?: string | null }>;
+  relatedContent?: ReactNode;
+  commentEntityType?: ComponentProps<typeof CommentsSection>["entityType"];
 };
 
 export async function buildDedicatedToolMetadata({
   toolCode,
   fallbackTitle,
-  fallbackDescription
+  fallbackDescription,
+  content,
+  canonicalPath
 }: DedicatedToolConfig): Promise<Metadata> {
-  const tool = await getToolContentWithDevFallback(toolCode);
-  const canonical = `${SITE_URL.replace(/\/$/, "")}/tools/${toolCode}`;
+  const tool = content !== undefined ? content : await getToolContentWithDevFallback(toolCode);
+  const canonical = `${SITE_URL.replace(/\/$/, "")}${canonicalPath ?? `/tools/${toolCode}`}`;
   const title = resolveSeoTitle(tool?.seo_title) ?? tool?.title ?? fallbackTitle;
   const description = tool?.meta_description ?? fallbackDescription;
   const image = tool?.thumb_url || FALLBACK_IMAGE;
@@ -64,10 +71,15 @@ export async function DedicatedToolPage({
   fallbackTitle,
   fallbackDescription,
   applicationCategory = "Calculator",
+  content,
+  canonicalPath,
+  breadcrumbItems,
+  relatedContent,
+  commentEntityType = "tool",
   children
 }: DedicatedToolConfig & { children: ReactNode }) {
-  const tool = await getToolContentWithDevFallback(toolCode);
-  const canonical = `${SITE_URL.replace(/\/$/, "")}/tools/${toolCode}`;
+  const tool = content !== undefined ? content : await getToolContentWithDevFallback(toolCode);
+  const canonical = `${SITE_URL.replace(/\/$/, "")}${canonicalPath ?? `/tools/${toolCode}`}`;
   const title = tool?.title ?? fallbackTitle;
   const description = tool?.meta_description ?? fallbackDescription;
   const contentHtml = await buildPageContentHtml(tool);
@@ -104,11 +116,7 @@ export async function DedicatedToolPage({
         dateModified: modifiedTime ? new Date(modifiedTime).toISOString() : undefined,
         breadcrumb: {
           "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-            { "@type": "ListItem", position: 2, name: "Tools", item: `${SITE_URL.replace(/\/$/, "")}/tools` },
-            { "@type": "ListItem", position: 3, name: title }
-          ]
+          itemListElement: (breadcrumbItems ?? [{ label: "Home", href: "/" }, { label: "Tools", href: "/tools" }, { label: title }]).map((entry, index) => ({ "@type": "ListItem", position: index + 1, name: entry.label, ...(entry.href ? { item: `${SITE_URL.replace(/\/$/, "")}${entry.href}` } : {}) }))
         },
         mainEntity: {
           "@type": "WebApplication",
@@ -125,10 +133,10 @@ export async function DedicatedToolPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
-        items={[
+        items={breadcrumbItems ?? [
           { label: "Home", href: "/" },
           { label: "Tools", href: "/tools" },
           { label: title, href: null }
@@ -167,12 +175,12 @@ export async function DedicatedToolPage({
 
       {tool?.id ? (
         <div className="mt-10">
-          <CommentsSection entityType="tool" entityId={tool.id} />
+          <CommentsSection entityType={commentEntityType} entityId={tool.id} />
         </div>
       ) : null}
 
       <ContentSlot slot={TOOL_AD_SLOT} className="mt-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
-      <MoreTools excludeCode={toolCode} />
+      {relatedContent === undefined ? <MoreTools excludeCode={toolCode} /> : relatedContent}
     </>
   );
 }

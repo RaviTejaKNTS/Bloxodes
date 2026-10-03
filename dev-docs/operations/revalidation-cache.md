@@ -1,8 +1,8 @@
 # Revalidation and Cache Warming
 
 Status: Active
-Last verified: 2026-08-14
-Evidence: repository event mapping, live cron, deployed `revalidate` checksum and authenticated worker smoke, public cache headers, and health features
+Last verified: 2026-10-02
+Evidence: Minecraft repository event mapping and managed-development trigger fixtures on October 2; live cron, deployed worker checksum, public cache headers and health evidence retain their August 14 boundary
 
 ## Flow
 
@@ -22,6 +22,8 @@ content/data write
 Revalidation and warming are intentionally separate. Broad stats/list invalidations should not hold the revalidation request open while many public pages warm.
 
 ## Ownership
+
+Minecraft integration was checked in the task checkout on 2026-10-02 and its database triggers were tested in managed development. `minecraft_game`, `minecraft_wiki`, `minecraft_wiki_collection` and `minecraft_tool` use the existing queue. Collection event slugs contain only the collection slug, matching `/minecraft/wiki/<collection>`; tool slugs match `/minecraft/tools/<tool>`. Minecraft tags stay separate from Roblox indexes. Collection writes invalidate Minecraft tool tags because tools can depend on published collection rules. The Minecraft sitemap and feed join the same purge/warm flow. Minecraft wiki and collection search entries inherit game/wiki publication state; the managed-development rollback fixture verified that hiding either parent hides its children. Edition-specific wiki/tool HTML uses private, no-store origin and CDN headers. The proxy puts remembered Bedrock preferences into query URLs before rendering; shared typed data caches remain enabled. This code has not been deployed to production; the production verification above retains its original date.
 
 - Database queue/functions: Supabase migrations and `supabase/functions/{revalidate,cache-warm}`.
 - Public path/tag mapping: `apps/web/src/app/api/revalidate/route.ts` and `apps/web/src/lib/public-cache-tags.ts`.

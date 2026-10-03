@@ -17,6 +17,10 @@ type EventRow = {
     | "puzzle"
     | "wiki"
     | "wiki_collection"
+    | "minecraft_game"
+    | "minecraft_wiki"
+    | "minecraft_wiki_collection"
+    | "minecraft_tool"
     | "stats";
   slug: string;
 };

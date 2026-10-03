@@ -1,5 +1,7 @@
 # Data Sources Inventory
 
+Minecraft owns `minecraft_games`, `minecraft_wiki_pages`, `minecraft_wiki_collection_pages`, `minecraft_wiki_collection_datasets`, `minecraft_wiki_collection_items`, `minecraft_tools` and `minecraft_releases`. Server reads use the three security-invoker views and published immutable dataset pointers. Authoring source packs and review artifacts stay under ignored `tmp/content-workspace/minecraft`; public routes never read those files. Tool `rules_json` records edition applicability and source/revision information. Release order is numeric rather than a version-string comparison. The schema is verified in managed development; production application is pending.
+
 Authoritative workflow guidance lives in:
 
 - `apps/web/src/lib/AGENTS.md`

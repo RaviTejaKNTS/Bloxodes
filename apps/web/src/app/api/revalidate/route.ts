@@ -6,6 +6,7 @@ import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
 import { getGtaMapRoutesForWikiSlug } from "@/lib/gta-interactive-map-registry";
+import { MINECRAFT_TOOL_SLUGS } from "@/lib/minecraft-tools/manifest";
 
 type SinglePayload = PublicCacheEvent;
 type Payload = SinglePayload | { type: "batch"; events: SinglePayload[] };
@@ -30,6 +31,10 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "red_dead_game",
   "red_dead_wiki",
   "red_dead_wiki_collection",
+  "minecraft_game",
+  "minecraft_wiki",
+  "minecraft_wiki_collection",
+  "minecraft_tool",
   "stats"
 ]);
 
@@ -66,6 +71,7 @@ const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
 const GTA_SITEMAP_PATH = "/sitemaps/gta.xml";
 const RED_DEAD_SITEMAP_PATH = "/sitemaps/red-dead.xml";
+const MINECRAFT_SITEMAP_PATH = "/sitemaps/minecraft.xml";
 const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
@@ -297,6 +303,18 @@ function revalidateForRedDeadWikiCollection(slug: string) {
       wikiSlug ? `red-dead-wiki:${wikiSlug}` : "",
       wikiSlug && collectionSlug ? `red-dead-wiki-collection:${wikiSlug}/${collectionSlug}` : ""
     ]
+  );
+}
+
+function revalidateForMinecraft(type: "minecraft_game" | "minecraft_wiki" | "minecraft_wiki_collection" | "minecraft_tool", slug: string) {
+  const indexes = ["/minecraft", "/minecraft/wiki", "/minecraft/tools", "/games", FEED_PATH, SITEMAP_INDEX_PATH, MINECRAFT_SITEMAP_PATH];
+  const detailPath = type === "minecraft_wiki_collection" ? `/minecraft/wiki/${slug}` : type === "minecraft_tool" ? `/minecraft/tools/${slug}` : "";
+  const paginatedPaths = type === "minecraft_wiki_collection"
+    ? Array.from({ length: PAGINATED_INDEX_PURGE_LIMIT - 1 }, (_, index) => `${detailPath}/page/${index + 2}`)
+    : [];
+  return applyRevalidation(
+    [...indexes, detailPath, ...paginatedPaths, ...(type === "minecraft_wiki_collection" ? MINECRAFT_TOOL_SLUGS.map((tool) => `/minecraft/tools/${tool}`) : [])].filter(Boolean),
+    cacheTagsForEvent(type, slug)
   );
 }
 
@@ -733,6 +751,11 @@ async function resolveUniverseIdsForEvent(type: SinglePayload["type"], slug: str
       return lookupUniverseIdsBySlug("events_pages", "slug", [slug]);
     case "checklist":
       return lookupUniverseIdsBySlug("checklist_pages", "slug", [slug]);
+    case "minecraft_game":
+    case "minecraft_wiki":
+    case "minecraft_wiki_collection":
+    case "minecraft_tool":
+      return [];
     case "tool":
       return lookupUniverseIdsBySlug("tools", "code", [slug]);
     case "quiz":
@@ -871,6 +894,12 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   let impactedWikiSlugs: string[] = [];
 
   switch (payload.type) {
+    case "minecraft_game":
+    case "minecraft_wiki":
+    case "minecraft_wiki_collection":
+    case "minecraft_tool":
+      purgePaths = revalidateForMinecraft(payload.type, slug);
+      break;
     case "code":
       purgePaths = revalidateForCode(slug);
       break;

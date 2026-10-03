@@ -80,6 +80,13 @@ export const redDeadNavLinks: SiteNavLink[] = [
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
 
+export const minecraftNavLinks: SiteNavLink[] = [
+  { href: "/minecraft", label: "Minecraft Home", icon: Home },
+  { href: "/minecraft/wiki", label: "Minecraft Wiki", icon: BookOpen },
+  { href: "/minecraft/tools", label: "Tools", icon: Wrench },
+  { href: "/games", label: "All Games", icon: Gamepad2 }
+];
+
 // Keep released GTA hubs in a stable, newest-first order for fast sidebar access.
 // GTA VI stays out of navigation until its wiki is approved for publication.
 export const gtaWikiNavLinks: GtaWikiNavLink[] = [
@@ -106,6 +113,7 @@ export function isGtaWikiNavLinkActive(pathname: string, href: string) {
 }
 export function siteNavLinksForPath(pathname: string | null | undefined): SiteNavLink[] {
   const path = pathname ?? "";
+  if (path === "/minecraft" || path.startsWith("/minecraft/")) return minecraftNavLinks;
   if (path.startsWith("/gta")) return gtaNavLinks;
   if (path.startsWith("/red-dead")) return redDeadNavLinks;
   return siteNavLinks;
@@ -129,12 +137,13 @@ export const signedOutSidebarAccount: SidebarAccount = {
 export function isNavLinkActive(pathname: string | null | undefined, href: string) {
   const path = pathname ?? "/";
   if (href === "/games" && (path === "/puzzles" || path.startsWith("/puzzles/"))) return true;
-  if (href === "/gta" || href === "/red-dead") return path === href;
+  if (href === "/gta" || href === "/red-dead" || href === "/minecraft") return path === href;
   return path === href || (href !== "/" && path.startsWith(`${href}/`));
 }
 
 export function resolveSearchScope(pathname: string | null | undefined): SearchScope {
   const path = pathname ?? "/";
+  if (path === "/minecraft" || path.startsWith("/minecraft/")) return { scope: "minecraft", label: "Minecraft" };
   if (path.startsWith("/gta/checklists")) return { scope: "gta-checklists", label: "checklists" };
   if (path.startsWith("/gta")) return { scope: "gta", label: "GTA" };
   if (path.startsWith("/red-dead")) return { scope: "red-dead", label: "Red Dead" };

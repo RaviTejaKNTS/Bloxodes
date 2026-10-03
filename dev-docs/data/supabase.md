@@ -6,6 +6,8 @@ Evidence: official Supabase documentation, managed-development migration/readine
 
 ## Managed Development
 
+Minecraft migration `20261002134153_minecraft_wiki_and_tools_platform.sql` is applied in managed development only. Seven service-only tables own the game, shared wiki, collection pages, immutable datasets/items, tool metadata/rules and ordered edition releases. The three read views use `security_invoker`; base tables have RLS and no anonymous or authenticated grants. Transactional fixtures verified dataset ownership/count publication guards, immutable published rows, parent publication visibility, flat search URLs and generated tool codes. Fixtures were rolled back. Minecraft content publication and production rollout are separate from this schema receipt.
+
 Production verified on 2026-09-07 at web SHA `bf7ea6ad71a9d6646f83077ceb373d2912ccf997`: five Red Dead hubs and six collections (271 items) are live with ten hosted hub images, sitemap/search coverage, and 100% Completion excluded. Production migrations `20260920000023` and `20260920000024` are applied. The 19 Roblox and 93 GTA legacy wiki checklist rows now use `collectible`; Red Dead has two collectible and four database collections. Saved-progress rows and storage keys were preserved. Standalone checklist pages are unchanged.
 
 All workstation web development, content imports, script writes, migration validation, and article queue/writer work use the managed HTTPS `*.supabase.co` development project. Its private credentials live only in `.envs/targets/managed-dev.env` and workload-specific private overlays. Shared guards reject localhost and production when a development-only command runs.

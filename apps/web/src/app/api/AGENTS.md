@@ -116,4 +116,6 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 
 ## GTA standalone checklist support (2026-09-10)
 
+Minecraft reuses search, comments and revalidation. Search scope `minecraft` includes only published Minecraft wiki, collections and tools. Comment entities use `minecraft_wiki`, `minecraft_wiki_collection` and `minecraft_tool`; resolve published entity IDs to the owned flat routes before accepting submissions. Minecraft publication events must invalidate the shared indexes, feed and Minecraft sitemap. Collection changes also invalidate data-backed Minecraft tools.
+
 `checklists/progress` also serves GTA standalone checklists using `gta:<game-slug>` keys. Validate GTA published-page membership and real leaf IDs before saving; use the session user ID, trusted-origin check and write rate limit. It does not replace `/gta/collections/progress`.

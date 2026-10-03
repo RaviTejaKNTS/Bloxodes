@@ -26,6 +26,7 @@ export type CollectionPaginationInfo = {
   pageItemCount: number;
   pageStartIndex: number;
   basePath: string;
+  query?: string;
 };
 
 export type CollectionPaginationSectionLink = {
@@ -131,12 +132,14 @@ export function buildCollectionPagination<TItem extends CollectionPaginationItem
   sections,
   currentPage,
   basePath,
+  query,
   targetWeight = DEFAULT_TARGET_WEIGHT,
   maxSectionWeight = DEFAULT_MAX_SECTION_WEIGHT
 }: {
   sections: CollectionPaginationSection<TItem>[];
   currentPage: number;
   basePath: string;
+  query?: string;
   targetWeight?: number;
   maxSectionWeight?: number;
 }) {
@@ -185,16 +188,17 @@ export function buildCollectionPagination<TItem extends CollectionPaginationItem
     });
   });
   const sectionHrefById = new Map<string, string>();
+  const suffix = query ? `?${query.replace(/^\?/, "")}` : "";
   const itemLinks = buckets.flatMap((pageBucket, bucketIndex) =>
     pageBucket.sections.flatMap((section) => section.items.map((item) => ({
       id: item.id,
-      href: `${bucketIndex === 0 ? basePath : `${basePath}/page/${bucketIndex + 1}`}#item-${item.id}`
+      href: `${bucketIndex === 0 ? basePath : `${basePath}/page/${bucketIndex + 1}`}${suffix}#item-${item.id}`
     })))
   );
   const sectionLinks = sections.map((section) => {
     const page = sectionPageById.get(section.id) ?? 1;
     const path = page === 1 ? basePath : `${basePath}/page/${page}`;
-    const href = `${path}#${section.id}`;
+    const href = `${path}${suffix}#${section.id}`;
     sectionHrefById.set(section.id, href);
     return {
       id: section.id,
@@ -207,7 +211,7 @@ export function buildCollectionPagination<TItem extends CollectionPaginationItem
   const pageSections = bucket.sections.map((section) => ({
     ...section,
     startPage: sectionPageById.get(section.id) ?? 1,
-    startHref: sectionHrefById.get(section.id) ?? `${basePath}#${section.id}`,
+    startHref: sectionHrefById.get(section.id) ?? `${basePath}${suffix}#${section.id}`,
     totalItemCount: section.totalItemCount ?? sections.find((entry) => entry.id === section.id)?.items.length ?? section.items.length
   }));
 
@@ -221,7 +225,8 @@ export function buildCollectionPagination<TItem extends CollectionPaginationItem
       totalItems,
       pageItemCount: bucket.itemCount,
       pageStartIndex,
-      basePath
+      basePath,
+      ...(query ? { query } : {})
     } satisfies CollectionPaginationInfo
   };
 }

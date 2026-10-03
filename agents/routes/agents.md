@@ -1,5 +1,7 @@
 # Route Handlers Inventory
 
+Minecraft uses the existing `/api/search/all` with `scope=minecraft`, `/api/comments` with Minecraft wiki/collection/tool ownership, `/api/revalidate` with Minecraft event types, `/feed.xml` and `/sitemaps/minecraft.xml`. Its sitemap is listed in `/sitemap.xml`, includes published routes only and returns 503 on data-loading failure. Existing mutation origin, rate-limit and moderation rules remain in place.
+
 Authoritative workflow guidance lives in:
 
 - `apps/web/src/app/AGENTS.md`

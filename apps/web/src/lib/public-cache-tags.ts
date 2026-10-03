@@ -22,6 +22,10 @@ export type PublicCacheEventType =
   | "red_dead_game"
   | "red_dead_wiki"
   | "red_dead_wiki_collection"
+  | "minecraft_game"
+  | "minecraft_wiki"
+  | "minecraft_wiki_collection"
+  | "minecraft_tool"
   | "stats";
 
 export type PublicCacheEvent = {
@@ -200,6 +204,18 @@ export function cacheTagsForPath(pathname: string) {
         ]);
       }
       return unique([...tags, "gta-wiki", slugTag("gta-wiki", third)]);
+    }
+    return unique(tags);
+  }
+
+  if (first === "minecraft") {
+    if (!second) return unique([...tags, "minecraft-home"]);
+    if (second === "wiki") {
+      if (!third) return unique([...tags, "minecraft-wiki-index"]);
+      return unique([...tags, "minecraft-wiki-collection-index", slugTag("minecraft-wiki-collection", third)]);
+    }
+    if (second === "tools") {
+      return unique([...tags, "minecraft-tools", "minecraft-tools-index", third ? slugTag("minecraft-tool", third) : ""]);
     }
     return unique(tags);
   }
@@ -471,6 +487,22 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "sitemap:red-dead"
       ]);
     }
+    case "minecraft_game":
+      return unique([...base, "minecraft-games-index", "minecraft-game:minecraft", "minecraft-home", "minecraft-wiki:minecraft", "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
+    case "minecraft_wiki":
+      return unique([...base, "minecraft-wiki:minecraft", "minecraft-home", "minecraft-wiki-index", "minecraft-wiki-collection-index", "minecraft-tools", "minecraft-tools-index", "games-index", "feed", "sitemap", "sitemap:minecraft"]);
+    case "minecraft_wiki_collection":
+      return unique([
+        ...base,
+        slugTag("minecraft-wiki-collection", normalized),
+        "minecraft-home", "minecraft-wiki-index", "minecraft-wiki-collection-index",
+        "minecraft-tools", "minecraft-tools-index", "feed", "sitemap", "sitemap:minecraft"
+      ]);
+    case "minecraft_tool":
+      return unique([
+        ...base, slugTag("minecraft-tool", normalized),
+        "minecraft-home", "minecraft-tools", "minecraft-tools-index", "feed", "sitemap", "sitemap:minecraft"
+      ]);
     case "wiki_collection": {
       const [wikiSlug, collectionSlug] = normalized.split("/");
       const flatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";

@@ -1,5 +1,11 @@
 # Script Inventory
 
+Minecraft wrappers reuse franchise publication and verification: `publish:minecraft-wiki`, `sync:minecraft-collection-runtime`, `verify:minecraft-collection-final` and `publish:minecraft-tools`. Each requires an explicit workspace/file or collection allowlist. Publication defaults to planning and uses managed development for this implementation. Minecraft is one shared game identity with flat wiki routes. Production schema/content application requires its separately approved release flow.
+
+`seed:minecraft-releases` validates an explicit frozen seed and source hashes, then plans by default. Its optional apply supports only the reviewed managed-development project, preserves existing release chronology and verifies every anchor field. It has no production mode. The two baseline anchors record Java 26.3 and Bedrock 26.52 at independent edition order 1, with unknown release dates left null and the reviewed verification date normalized to UTC midnight.
+
+`acquire:minecraft-source-pack` plans pinned Java client, Java registry summary and official Bedrock sample archives. Its explicit `--apply` writes hash-verified extraction and receipts into ignored `tmp`, without database, env or service changes.
+
 Authoritative workflow guidance lives in `scripts/AGENTS.md`.
 This file is the quick reference for what exists today and how to invoke it.
 
@@ -318,3 +324,9 @@ For an exact manual publication recovery, `articles:publication:drain -- --ackno
 - Wiki leases, recovery and report output paths are owned by `wiki/wiki-lease-health.ts`, `wiki/run-homelab-wiki-automation.ts` and the restricted sandbox readiness probe. Optional owner-disabled recovery stays disabled.
 
 Schema release accepts explicit `--database-role supabase_admin` when ordinary `postgres` cannot replace administrator-owned functions. The Dokploy psql helper accepts the same two-role allowlist; failed plans expose their PostgreSQL error.
+
+Minecraft asset rendering and hub media sync reuse the existing wiki R2 contract. The renderer writes ignored authoring media only; hub sync requires explicit reviewed hashes and managed development before immutable upload. Neither command publishes database page rows.
+
+`audit:minecraft-preview` runs `scripts/minecraft/audit-minecraft-preview.py` against an already running HTTP homelab preview. It is read-only and rejects production targets. It checks both editions of the 41 planned pages, overview card counts and edition links, visible-directory JSON-LD, namespace boundaries and published inventory. It writes ignored partial/final receipts and keeps pending publication separate from transport or content failures. Use one worker while other authoring jobs are active. It grants no database, service-control or publication permission.
+
+Minecraft collection publication shares identical prepared image bytes through full SHA-256 object keys and deduplicates PUT/HEAD work within one invocation, with at most eight unique-object operations together and failures propagated after the current batch settles. `--minecraft-media-concurrency <1-8>` lowers the request cap for one Minecraft invocation. Known transport errors can retry at most three times per object; HTTP status errors stop immediately. A possibly completed immutable PUT is checked again before writing. Row facts and image credits remain separate. GTA and Red Dead retain their existing media-key contracts. `scripts/minecraft/wire-minecraft-reference-images.py` dry-plans exact source-image wiring after the parent data gate and validates frozen identities and byte hashes before applying local image paths and canonical credits.

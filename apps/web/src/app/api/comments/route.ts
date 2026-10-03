@@ -21,7 +21,10 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "gta_wiki",
   "gta_wiki_collection",
   "red_dead_wiki",
-  "red_dead_wiki_collection"
+  "red_dead_wiki_collection",
+  "minecraft_wiki",
+  "minecraft_wiki_collection",
+  "minecraft_tool"
 ]);
 const MAX_BODY_LENGTH = 1000;
 const MAX_GUEST_NAME_LENGTH = 60;
@@ -43,7 +46,10 @@ type CommentEntityType =
   | "gta_wiki"
   | "gta_wiki_collection"
   | "red_dead_wiki"
-  | "red_dead_wiki_collection";
+  | "red_dead_wiki_collection"
+  | "minecraft_wiki"
+  | "minecraft_wiki_collection"
+  | "minecraft_tool";
 
 type CommentPageTarget = {
   pageType: string;
@@ -157,6 +163,17 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
       .maybeSingle();
     if (error || !hasSlug(data) || !data.slug.trim()) return null;
     return { pageType: "Wiki", pageUrl: buildPageUrl(`/wiki/${data.slug}`) };
+  }
+
+  if (entityType === "minecraft_wiki" || entityType === "minecraft_wiki_collection" || entityType === "minecraft_tool") {
+    const table = entityType === "minecraft_wiki" ? "minecraft_wiki_pages_view" : entityType === "minecraft_tool" ? "minecraft_tools_view" : "minecraft_wiki_collection_pages_view";
+    const key = entityType === "minecraft_wiki_collection" ? "collection_slug" : "slug";
+    const { data, error } = await admin.from(table).select(key).eq("id", entityId).eq("is_published", true).maybeSingle();
+    if (error || !data) return null;
+    const slug = normalizeString((data as unknown as Record<string, unknown>)[key]);
+    if (!slug) return null;
+    const path = entityType === "minecraft_wiki" ? "/minecraft/wiki" : entityType === "minecraft_tool" ? `/minecraft/tools/${slug}` : `/minecraft/wiki/${slug}`;
+    return { pageType: entityType === "minecraft_tool" ? "Minecraft Tool" : "Minecraft Wiki", pageUrl: buildPageUrl(path) };
   }
 
   if (entityType === "gta_wiki") {

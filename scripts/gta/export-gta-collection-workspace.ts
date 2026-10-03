@@ -8,6 +8,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
+  namespace: "gta" | "minecraft";
   game: string | null;
   collection: string | null;
   outputRoot: string | null;
@@ -75,6 +76,7 @@ This helper reads one managed-development GTA collection revision and writes no 
 
 function parseArgs(argv: string[]): CliOptions {
   const options: CliOptions = {
+    namespace: "gta",
     game: null,
     collection: null,
     outputRoot: null,
@@ -90,6 +92,10 @@ function parseArgs(argv: string[]): CliOptions {
       case "--help":
         printUsage();
         process.exit(0);
+      case "--namespace":
+        options.namespace = requireValue(argv, ++index, arg) as "gta" | "minecraft";
+        if (!["gta", "minecraft"].includes(options.namespace)) throw new Error("Unsupported export namespace.");
+        break;
       case "--game":
       case "--game-slug":
         options.game = requireValue(argv, ++index, arg).toLowerCase();
@@ -118,6 +124,7 @@ function parseArgs(argv: string[]): CliOptions {
         throw new Error(`Unknown option: ${arg}`);
     }
   }
+  if (options.namespace === "minecraft" && options.game !== "minecraft") throw new Error("Minecraft has one shared wiki identity.");
   if (!options.game) throw new Error("--game is required");
   if (!options.collection) throw new Error("--collection is required");
   if (!options.dryRun && !options.outputRoot) throw new Error("--output-root is required unless --dry-run is used");
@@ -201,7 +208,7 @@ async function main() {
 
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("gta_wiki_collection_pages")
+    .from(`${options.namespace}_wiki_collection_pages`)
     .select(
       "game_id,wiki_slug,collection_slug,code,page_type,display_name,title,seo_title,meta_description,intro_md,description_md,how_it_works_md,description_json,faq_json,wiki_md,is_published,item_count,published_dataset_id,schema_ld_json,thumb_url,wiki_sort_order"
     )
@@ -213,7 +220,7 @@ async function main() {
 
   const row = data as CollectionPageRow;
   const { data: gameData, error: gameError } = await sb
-    .from("gta_games")
+    .from(`${options.namespace}_games`)
     .select("title")
     .eq("id", row.game_id)
     .maybeSingle();
@@ -263,21 +270,27 @@ async function main() {
 
   if (!row.published_dataset_id) throw new Error(`${row.code} has no published dataset pointer.`);
   const { data: datasetData, error: datasetError } = await sb
-    .from("gta_wiki_collection_datasets")
+    .from(`${options.namespace}_wiki_collection_datasets`)
     .select("id,schema_version,item_count,meta_json,source_manifest_json")
     .eq("id", row.published_dataset_id)
     .maybeSingle();
   if (datasetError) throw new Error(`Failed to read collection dataset: ${datasetError.message}`);
   if (!datasetData) throw new Error(`Published dataset ${row.published_dataset_id} is missing.`);
   const dataset = datasetData as CollectionDatasetRow;
-  const { data: itemData, error: itemError } = await sb
-    .from("gta_wiki_collection_items")
-    .select("item_slug,item_name,section,sort_order,image_key,fields_json")
-    .eq("dataset_id", dataset.id)
-    .order("sort_order")
-    .order("item_slug");
-  if (itemError) throw new Error(`Failed to read collection items: ${itemError.message}`);
-  const items = (itemData ?? []) as CollectionItemRow[];
+  const items: CollectionItemRow[] = [];
+  for (let offset = 0; ; offset += 1000) {
+    const { data: itemData, error: itemError } = await sb
+      .from(`${options.namespace}_wiki_collection_items`)
+      .select("item_slug,item_name,section,sort_order,image_key,fields_json")
+      .eq("dataset_id", dataset.id)
+      .order("sort_order")
+      .order("item_slug")
+      .range(offset, offset + 999);
+    if (itemError) throw new Error(`Failed to read collection items: ${itemError.message}`);
+    const chunk = (itemData ?? []) as CollectionItemRow[];
+    items.push(...chunk);
+    if (chunk.length < 1000) break;
+  }
   if (items.length !== Number(dataset.item_count) || items.length !== Number(row.item_count)) {
     throw new Error(`${row.code} item count mismatch: page=${row.item_count} dataset=${dataset.item_count} rows=${items.length}.`);
   }
@@ -326,7 +339,8 @@ async function main() {
     schemaVersion: 1,
     game: { slug: row.wiki_slug, name: runtimeGameName },
     collection: { slug: row.collection_slug, label: row.display_name ?? row.collection_slug, sortOrder: row.wiki_sort_order ?? 0, pageType: row.page_type === "checklist" || row.page_type === "collectible" ? "collectible" : "database" },
-    route: `/gta/wiki/${row.wiki_slug}/${row.collection_slug}`,
+    namespace: options.namespace,
+    route: options.namespace === "minecraft" ? `/minecraft/wiki/${row.collection_slug}` : `/gta/wiki/${row.wiki_slug}/${row.collection_slug}`,
     dataset: "dataset.json",
     finalJson: "final.json",
     mediaRoot: "media",
