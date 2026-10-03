@@ -180,3 +180,8 @@ The shared wiki now has Java and Bedrock links styled as tabs. The server filter
 Edition changes work through ordinary anchor links. Middleware remembers the preference without browser code, and an explicit edition query wins over the cookie. Switching editions resets collection pagination to page one. Existing shared collection controls and tool inputs retain their client interactions.
 
 The full build and TypeScript passed, along with 17 focused tests, 93 updated HTTP checks, four raw Googlebot/GPTBot requests and desktop/mobile browser navigation. Java and Bedrock recipe cards match their opened pages at 2,042 and 1,851 entries. Three HTTP checks were rerun after correcting the auditor's treatment of intentional edition-switch links; the original receipt remains available. The previous release allowlist is superseded by the new code snapshot and follow-up receipts. Production remains pending separate approval.
+
+
+## Production release, October 3, 2026
+
+The owner approved and published the prepared batch. Implementation SHA `a9cc2a01bb0f41adadcd4e5349bfd776df9f85b6` is live with a healthy database. Both migrations, the revalidation worker, one hub, all 25 collection revisions, all 13 tools and the two frozen edition anchors are published. Exact production dataset hashes/counts and full tool payloads match the reviewed inputs. The final live audit passed 93 HTTP checks, four crawler requests and the complete 41-URL sitemap plus 39-entry feed/search inventory. Exact Minecraft revalidation and the final worker smoke passed. Production schema/security and app/Supabase container checks passed. The retained production receipts live under the ignored QA workspace.

@@ -1,8 +1,8 @@
 # Revalidation and Cache Warming
 
 Status: Active
-Last verified: 2026-10-02
-Evidence: Minecraft repository event mapping and managed-development trigger fixtures on October 2; live cron, deployed worker checksum, public cache headers and health evidence retain their August 14 boundary
+Last verified: 2026-10-03
+Evidence: Minecraft trigger fixtures, October 3 production worker checksum/readback, exact-batch revalidation with successful Cloudflare tag purge, worker smoke and public edition cache headers; cron installation retains its earlier verification boundary
 
 ## Flow
 
@@ -23,7 +23,7 @@ Revalidation and warming are intentionally separate. Broad stats/list invalidati
 
 ## Ownership
 
-Minecraft integration was checked in the task checkout on 2026-10-02 and its database triggers were tested in managed development. `minecraft_game`, `minecraft_wiki`, `minecraft_wiki_collection` and `minecraft_tool` use the existing queue. Collection event slugs contain only the collection slug, matching `/minecraft/wiki/<collection>`; tool slugs match `/minecraft/tools/<tool>`. Minecraft tags stay separate from Roblox indexes. Collection writes invalidate Minecraft tool tags because tools can depend on published collection rules. The Minecraft sitemap and feed join the same purge/warm flow. Minecraft wiki and collection search entries inherit game/wiki publication state; the managed-development rollback fixture verified that hiding either parent hides its children. Edition-specific wiki/tool HTML uses private, no-store origin and CDN headers. The proxy puts remembered Bedrock preferences into query URLs before rendering; shared typed data caches remain enabled. This code has not been deployed to production; the production verification above retains its original date.
+Minecraft integration was checked in the task checkout on 2026-10-02 and its database triggers were tested in managed development. `minecraft_game`, `minecraft_wiki`, `minecraft_wiki_collection` and `minecraft_tool` use the existing queue. Collection event slugs contain only the collection slug, matching `/minecraft/wiki/<collection>`; tool slugs match `/minecraft/tools/<tool>`. Minecraft tags stay separate from Roblox indexes. Collection writes invalidate Minecraft tool tags because tools can depend on published collection rules. The Minecraft sitemap and feed join the same purge/warm flow. Minecraft wiki and collection search entries inherit game/wiki publication state; the managed-development rollback fixture verified that hiding either parent hides its children. Edition-specific wiki/tool HTML uses private, no-store origin and CDN headers. The proxy puts remembered Bedrock preferences into query URLs before rendering; shared typed data caches remain enabled. The code and worker are deployed to production as of October 3. Authenticated revalidation passed for the exact 40 Minecraft publication events, purged all 50 selected Cloudflare tags without errors and queued deferred warming. The final worker smoke returned HTTP 200 with zero failed events. The initial smoke before the dependent web deployment recorded a failed batch; the final check supersedes it. Worker endpoint and operator secret matched without exposing their values. The deployed SHA-256 is `cf77cdb15f9942d7d627f46accded2e64633c7caf35d132151ba90ecafd895b7`. The release used the owner-authenticated Dokploy container terminal and restart API because the operator SSH key was unavailable, preserved file ownership/mode and retained a guarded rollback copy. No runtime environment value was changed.
 
 - Database queue/functions: Supabase migrations and `supabase/functions/{revalidate,cache-warm}`.
 - Public path/tag mapping: `apps/web/src/app/api/revalidate/route.ts` and `apps/web/src/lib/public-cache-tags.ts`.

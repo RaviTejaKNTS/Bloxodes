@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Vmov9zqeGXJVdTNQycVxcRhyRM2DF37iIDmJF93AdpE5n6dnTcSlSd9Dsw1lolS
+\restrict ZxrvV4jQY4yqbf8oDDlwFD8oGP6mdbeHXCNKaiaHoCMTw1RnY8EK9i2qOw3FBWz
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -2695,6 +2695,25 @@ $$;
 ALTER FUNCTION "public"."percent_delta"("p_current" numeric, "p_previous" numeric) OWNER TO "postgres";
 
 --
+-- Name: protect_minecraft_runtime_insert(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."protect_minecraft_runtime_insert"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+begin
+  if exists (select 1 from public.minecraft_wiki_collection_pages where published_dataset_id = new.dataset_id) then
+    raise exception 'Published Minecraft dataset items are immutable.';
+  end if;
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."protect_minecraft_runtime_insert"() OWNER TO "supabase_admin";
+
+--
 -- Name: protect_published_gta_wiki_collection_runtime(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -2727,6 +2746,41 @@ $$;
 
 
 ALTER FUNCTION "public"."protect_published_gta_wiki_collection_runtime"() OWNER TO "postgres";
+
+--
+-- Name: protect_published_minecraft_wiki_collection_runtime(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+declare
+  target_dataset_id uuid;
+begin
+  if tg_op = 'UPDATE' then
+    raise exception 'Minecraft wiki collection runtime revisions are immutable. Publish a new revision instead.';
+  end if;
+
+  target_dataset_id := case
+    when tg_table_name = 'minecraft_wiki_collection_datasets' then old.id
+    else old.dataset_id
+  end;
+
+  if exists (
+    select 1
+    from public.minecraft_wiki_collection_pages page
+    where page.published_dataset_id = target_dataset_id
+  ) then
+    raise exception 'Published Minecraft wiki collection dataset % is immutable. Publish a new revision instead.', target_dataset_id;
+  end if;
+
+  return old;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"() OWNER TO "supabase_admin";
 
 --
 -- Name: protect_published_red_dead_wiki_collection_runtime(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -2975,6 +3029,35 @@ $$;
 
 
 ALTER FUNCTION "public"."record_stats_health_check"() OWNER TO "postgres";
+
+--
+-- Name: refresh_minecraft_search_visibility("uuid"); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."refresh_minecraft_search_visibility"("target_game_id" "uuid") RETURNS "void"
+    LANGUAGE "sql"
+    SET "search_path" TO ''
+    AS $$
+  update public.search_index as entry
+  set is_published = page.is_published and game.is_published
+  from public.minecraft_wiki_pages as page
+  join public.minecraft_games as game on game.id = page.game_id
+  where page.game_id = target_game_id
+    and entry.entity_type = 'minecraft_wiki'
+    and entry.entity_id = page.id::text;
+
+  update public.search_index as entry
+  set is_published = page.is_published and wiki.is_published and game.is_published
+  from public.minecraft_wiki_collection_pages as page
+  join public.minecraft_wiki_pages as wiki on wiki.id = page.wiki_page_id
+  join public.minecraft_games as game on game.id = page.game_id
+  where page.game_id = target_game_id
+    and entry.entity_type = 'minecraft_wiki_collection'
+    and entry.entity_id = page.id::text;
+$$;
+
+
+ALTER FUNCTION "public"."refresh_minecraft_search_visibility"("target_game_id" "uuid") OWNER TO "supabase_admin";
 
 --
 -- Name: refresh_roblox_platform_stats_daily("date"); Type: FUNCTION; Schema: public; Owner: postgres
@@ -5090,6 +5173,27 @@ $$;
 ALTER FUNCTION "public"."set_gta_published_at"() OWNER TO "postgres";
 
 --
+-- Name: set_minecraft_published_at(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."set_minecraft_published_at"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+begin
+  if new.is_published = true and new.published_at is null then
+    if tg_op = 'INSERT' or old.is_published is distinct from true then
+      new.published_at := now();
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."set_minecraft_published_at"() OWNER TO "supabase_admin";
+
+--
 -- Name: set_puzzle_page_published_at(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -5464,6 +5568,72 @@ $$;
 
 
 ALTER FUNCTION "public"."trg_comments_revalidate_entity"() OWNER TO "postgres";
+
+--
+-- Name: trg_comments_revalidate_minecraft_entity(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."trg_comments_revalidate_minecraft_entity"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'pg_catalog', 'public'
+    AS $$
+declare
+  event_source text;
+begin
+  if tg_op <> 'INSERT' then
+    event_source := 'comments_' || lower(tg_op) || '_old';
+
+    if old.entity_type = 'minecraft_tool' then
+      perform public.enqueue_revalidation('minecraft_tool', (select slug from public.minecraft_tools where id = old.entity_id), event_source);
+    elsif old.entity_type = 'minecraft_wiki' then
+      perform public.enqueue_revalidation(
+        'minecraft_wiki',
+        (select lower(page.slug) from public.minecraft_wiki_pages page where page.id = old.entity_id),
+        event_source
+      );
+    elsif old.entity_type = 'minecraft_wiki_collection' then
+      perform public.enqueue_revalidation(
+        'minecraft_wiki_collection',
+        (
+          select lower(page.collection_slug)
+          from public.minecraft_wiki_collection_pages page
+          where page.id = old.entity_id
+        ),
+        event_source
+      );
+    end if;
+  end if;
+
+  if tg_op <> 'DELETE' then
+    event_source := 'comments_' || lower(tg_op);
+
+    if new.entity_type = 'minecraft_tool' then
+      perform public.enqueue_revalidation('minecraft_tool', (select slug from public.minecraft_tools where id = new.entity_id), event_source);
+    elsif new.entity_type = 'minecraft_wiki' then
+      perform public.enqueue_revalidation(
+        'minecraft_wiki',
+        (select lower(page.slug) from public.minecraft_wiki_pages page where page.id = new.entity_id),
+        event_source
+      );
+    elsif new.entity_type = 'minecraft_wiki_collection' then
+      perform public.enqueue_revalidation(
+        'minecraft_wiki_collection',
+        (
+          select lower(page.collection_slug)
+          from public.minecraft_wiki_collection_pages page
+          where page.id = new.entity_id
+        ),
+        event_source
+      );
+    end if;
+  end if;
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_comments_revalidate_minecraft_entity"() OWNER TO "supabase_admin";
 
 --
 -- Name: trg_comments_revalidate_red_dead_entity(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -6166,6 +6336,65 @@ $$;
 ALTER FUNCTION "public"."trg_enqueue_revalidation_mesh_ids"() OWNER TO "postgres";
 
 --
+-- Name: trg_enqueue_revalidation_minecraft_content(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'pg_catalog', 'public'
+    AS $$
+declare
+  event_type text;
+  event_slug text;
+  old_slug text;
+begin
+  event_type := case tg_table_name
+    when 'minecraft_games' then 'minecraft_game'
+    when 'minecraft_wiki_pages' then 'minecraft_wiki'
+    when 'minecraft_wiki_collection_pages' then 'minecraft_wiki_collection'
+    when 'minecraft_tools' then 'minecraft_tool'
+  end;
+
+  if tg_op = 'DELETE' then
+    if coalesce((to_jsonb(old) ->> 'is_published')::boolean, false) then
+      event_slug := case
+        when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(old) ->> 'collection_slug'
+        else to_jsonb(old) ->> 'slug'
+      end;
+      perform public.enqueue_revalidation(event_type, event_slug, tg_table_name || '_delete');
+    end if;
+    return null;
+  end if;
+
+  if coalesce((to_jsonb(new) ->> 'is_published')::boolean, false) then
+    event_slug := case
+      when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(new) ->> 'collection_slug'
+      else to_jsonb(new) ->> 'slug'
+    end;
+    perform public.enqueue_revalidation(event_type, event_slug, tg_table_name || '_' || lower(tg_op));
+  end if;
+
+  old_slug := case
+    when tg_op <> 'UPDATE' then null
+    when tg_table_name = 'minecraft_wiki_collection_pages' then to_jsonb(old) ->> 'collection_slug'
+    else to_jsonb(old) ->> 'slug'
+  end;
+
+  if tg_op = 'UPDATE' and coalesce((to_jsonb(old) ->> 'is_published')::boolean, false) and (
+    not coalesce((to_jsonb(new) ->> 'is_published')::boolean, false)
+    or old_slug is distinct from event_slug
+  ) then
+    perform public.enqueue_revalidation(event_type, old_slug, tg_table_name || '_old_slug_or_unpublish');
+  end if;
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"() OWNER TO "supabase_admin";
+
+--
 -- Name: trg_enqueue_revalidation_music_game_usage(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -6692,6 +6921,37 @@ $$;
 ALTER FUNCTION "public"."trg_normalize_section_code"() OWNER TO "postgres";
 
 --
+-- Name: trg_refresh_minecraft_search_visibility(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."trg_refresh_minecraft_search_visibility"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+declare
+  old_row jsonb;
+  new_row jsonb;
+begin
+  if tg_op <> 'INSERT' then
+    old_row := to_jsonb(old);
+    perform public.refresh_minecraft_search_visibility(
+      (old_row ->> case when tg_table_name = 'minecraft_games' then 'id' else 'game_id' end)::uuid
+    );
+  end if;
+  if tg_op <> 'DELETE' then
+    new_row := to_jsonb(new);
+    perform public.refresh_minecraft_search_visibility(
+      (new_row ->> case when tg_table_name = 'minecraft_games' then 'id' else 'game_id' end)::uuid
+    );
+  end if;
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_refresh_minecraft_search_visibility"() OWNER TO "supabase_admin";
+
+--
 -- Name: trg_refresh_search_index_music(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -7071,6 +7331,78 @@ $$;
 
 
 ALTER FUNCTION "public"."trg_search_index_gta_content"() OWNER TO "postgres";
+
+--
+-- Name: trg_search_index_minecraft_content(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."trg_search_index_minecraft_content"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'pg_catalog', 'public'
+    AS $$
+declare
+  kind text;
+  target_slug text;
+  target_title text;
+  target_subtitle text;
+  target_url text;
+  target_search text;
+begin
+  if tg_table_name = 'minecraft_games' then
+    delete from public.search_index
+    where entity_type = 'minecraft_game'
+      and entity_id = case when tg_op = 'DELETE' then old.id::text else new.id::text end;
+    return null;
+  end if;
+
+  kind := case tg_table_name
+    when 'minecraft_wiki_pages' then 'minecraft_wiki'
+    when 'minecraft_wiki_collection_pages' then 'minecraft_wiki_collection'
+    when 'minecraft_tools' then 'minecraft_tool'
+  end;
+
+  if tg_op = 'DELETE' then
+    delete from public.search_index where entity_type = kind and entity_id = old.id::text;
+    return null;
+  end if;
+
+  if tg_table_name = 'minecraft_tools' then
+    target_slug := new.slug;
+    target_title := new.title;
+    target_subtitle := 'Minecraft tool';
+    target_url := '/minecraft/tools/' || new.slug;
+    target_search := concat_ws(' ', new.title, new.slug, new.meta_description, new.intro_md, new.how_it_works_md);
+  elsif tg_table_name = 'minecraft_wiki_pages' then
+    target_slug := new.slug;
+    target_title := new.title;
+    target_subtitle := 'Minecraft wiki';
+    target_url := '/minecraft/wiki';
+    target_search := concat_ws(' ', new.title, new.slug, new.seo_title, new.meta_description, new.description_md, new.tips_md);
+  else
+    target_slug := new.collection_slug;
+    target_title := new.title;
+    target_subtitle := 'Minecraft wiki collection';
+    target_url := '/minecraft/wiki/' || new.collection_slug;
+    target_search := concat_ws(' ', new.title, new.display_name, new.code, new.wiki_slug, new.collection_slug, new.seo_title, new.meta_description, new.intro_md, new.description_md, new.how_it_works_md, new.wiki_md);
+  end if;
+
+  perform public.upsert_search_index(
+    kind,
+    new.id::text,
+    target_slug,
+    target_title,
+    target_subtitle,
+    target_url,
+    new.updated_at,
+    new.is_published,
+    left(target_search, 4000)
+  );
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_search_index_minecraft_content"() OWNER TO "supabase_admin";
 
 --
 -- Name: trg_search_index_puzzle_pages(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -7734,6 +8066,31 @@ $$;
 
 
 ALTER FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") OWNER TO "postgres";
+
+--
+-- Name: validate_minecraft_collection_publication(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION "public"."validate_minecraft_collection_publication"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+declare expected_count integer; actual_count integer;
+begin
+  if new.is_published then
+    if new.published_dataset_id is null then raise exception 'Published Minecraft collections require a dataset.'; end if;
+    select item_count into expected_count from public.minecraft_wiki_collection_datasets where id = new.published_dataset_id and collection_page_id = new.id;
+    select count(*) into actual_count from public.minecraft_wiki_collection_items where dataset_id = new.published_dataset_id;
+    if expected_count is null or expected_count <> actual_count or new.item_count <> actual_count or actual_count = 0 then
+      raise exception 'Minecraft collection publication count or ownership mismatch.';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."validate_minecraft_collection_publication"() OWNER TO "supabase_admin";
 
 --
 -- Name: wiki_generation_queue_concurrency_contract(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -8559,7 +8916,7 @@ CREATE TABLE "public"."comments" (
     "guest_email" "text",
     "page_type" "text",
     "page_url" "text",
-    CONSTRAINT "comments_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'catalog'::"text", 'event'::"text", 'tool'::"text", 'wiki'::"text", 'wiki_collection'::"text", 'gta_wiki'::"text", 'gta_wiki_collection'::"text", 'red_dead_wiki'::"text", 'red_dead_wiki_collection'::"text"]))),
+    CONSTRAINT "comments_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'catalog'::"text", 'event'::"text", 'tool'::"text", 'wiki'::"text", 'wiki_collection'::"text", 'gta_wiki'::"text", 'gta_wiki_collection'::"text", 'red_dead_wiki'::"text", 'red_dead_wiki_collection'::"text", 'minecraft_wiki'::"text", 'minecraft_wiki_collection'::"text", 'minecraft_tool'::"text"]))),
     CONSTRAINT "comments_status_check" CHECK (("status" = ANY (ARRAY['pending'::"text", 'approved'::"text", 'rejected'::"text", 'deleted'::"text"])))
 );
 
@@ -9088,6 +9445,349 @@ COMMENT ON VIEW "public"."limited_items_trading_view" IS 'Simplified view of Lim
 
 
 --
+-- Name: minecraft_games; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE "public"."minecraft_games" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "slug" "text" NOT NULL,
+    "title" "text" NOT NULL,
+    "short_title" "text",
+    "installment" "text",
+    "content_kind" "text" DEFAULT 'game'::"text" NOT NULL,
+    "parent_game_id" "uuid",
+    "developer" "text",
+    "publisher" "text",
+    "description_md" "text",
+    "cover_image" "text",
+    "hero_image" "text",
+    "official_url" "text",
+    "release_dates_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "platforms_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "status" "text" DEFAULT 'released'::"text" NOT NULL,
+    "is_published" boolean DEFAULT false NOT NULL,
+    "published_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "minecraft_games_content_kind_check" CHECK (("content_kind" = ANY (ARRAY['game'::"text", 'expansion'::"text", 'online'::"text"]))),
+    CONSTRAINT "minecraft_games_parent_not_self" CHECK ((("parent_game_id" IS NULL) OR ("parent_game_id" <> "id"))),
+    CONSTRAINT "minecraft_games_platforms_array" CHECK (("jsonb_typeof"("platforms_json") = 'array'::"text")),
+    CONSTRAINT "minecraft_games_release_dates_object" CHECK (("jsonb_typeof"("release_dates_json") = 'object'::"text")),
+    CONSTRAINT "minecraft_games_slug_check" CHECK (("slug" = 'minecraft'::"text")),
+    CONSTRAINT "minecraft_games_slug_not_blank" CHECK (("length"("btrim"("slug")) > 0)),
+    CONSTRAINT "minecraft_games_status_check" CHECK (("status" = ANY (ARRAY['announced'::"text", 'upcoming'::"text", 'released'::"text"]))),
+    CONSTRAINT "minecraft_games_title_not_blank" CHECK (("length"("btrim"("title")) > 0))
+);
+
+
+ALTER TABLE "public"."minecraft_games" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_releases; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE "public"."minecraft_releases" (
+    "edition" "text" NOT NULL,
+    "version" "text" NOT NULL,
+    "release_order" integer NOT NULL,
+    "released_at" "date",
+    "source_url" "text" NOT NULL,
+    "is_stable" boolean DEFAULT true NOT NULL,
+    "checked_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "minecraft_releases_edition_check" CHECK (("edition" = ANY (ARRAY['java'::"text", 'bedrock'::"text"]))),
+    CONSTRAINT "minecraft_releases_release_order_check" CHECK (("release_order" > 0)),
+    CONSTRAINT "minecraft_releases_source_url_check" CHECK (("source_url" ~ '^https://'::"text"))
+);
+
+
+ALTER TABLE "public"."minecraft_releases" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_tools; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE "public"."minecraft_tools" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "slug" "text" NOT NULL,
+    "code" "text" GENERATED ALWAYS AS ("slug") STORED,
+    "title" "text" NOT NULL,
+    "seo_title" "text" DEFAULT ''::"text" NOT NULL,
+    "meta_description" "text" NOT NULL,
+    "intro_md" "text" DEFAULT ''::"text" NOT NULL,
+    "how_it_works_md" "text" DEFAULT ''::"text" NOT NULL,
+    "description_md" "text",
+    "description_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "faq_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "schema_ld_json" "jsonb",
+    "thumb_url" "text",
+    "tool_key" "text" NOT NULL,
+    "rules_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "is_published" boolean DEFAULT false NOT NULL,
+    "published_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "minecraft_tools_description_json_check" CHECK (("jsonb_typeof"("description_json") = 'object'::"text")),
+    CONSTRAINT "minecraft_tools_faq_json_check" CHECK (("jsonb_typeof"("faq_json") = 'array'::"text")),
+    CONSTRAINT "minecraft_tools_rules_json_check" CHECK (("jsonb_typeof"("rules_json") = 'object'::"text")),
+    CONSTRAINT "minecraft_tools_slug_check" CHECK (("slug" ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::"text")),
+    CONSTRAINT "minecraft_tools_title_check" CHECK (("length"("btrim"("title")) > 0))
+);
+
+
+ALTER TABLE "public"."minecraft_tools" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_tools_view; Type: VIEW; Schema: public; Owner: supabase_admin
+--
+
+CREATE VIEW "public"."minecraft_tools_view" WITH ("security_invoker"='true') AS
+ SELECT "id",
+    "slug",
+    "code",
+    "title",
+    "seo_title",
+    "meta_description",
+    "intro_md",
+    "how_it_works_md",
+    "description_md",
+    "description_json",
+    "faq_json",
+    "schema_ld_json",
+    "thumb_url",
+    "tool_key",
+    "rules_json",
+    "is_published",
+    "published_at",
+    "created_at",
+    "updated_at",
+    GREATEST("updated_at", COALESCE("published_at", "updated_at")) AS "content_updated_at"
+   FROM "public"."minecraft_tools";
+
+
+ALTER VIEW "public"."minecraft_tools_view" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_wiki_collection_datasets; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE "public"."minecraft_wiki_collection_datasets" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "collection_page_id" "uuid" NOT NULL,
+    "schema_version" integer DEFAULT 2 NOT NULL,
+    "content_hash" "text" NOT NULL,
+    "item_count" integer NOT NULL,
+    "meta_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "validation_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "source_manifest_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "minecraft_wiki_collection_datasets_content_hash_sha256" CHECK (("content_hash" ~ '^[0-9a-f]{64}$'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_datasets_item_count_nonnegative" CHECK (("item_count" >= 0)),
+    CONSTRAINT "minecraft_wiki_collection_datasets_meta_object" CHECK (("jsonb_typeof"("meta_json") = 'object'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_datasets_schema_version_positive" CHECK (("schema_version" > 0)),
+    CONSTRAINT "minecraft_wiki_collection_datasets_source_manifest_object" CHECK (("jsonb_typeof"("source_manifest_json") = 'object'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_datasets_validation_object" CHECK (("jsonb_typeof"("validation_json") = 'object'::"text"))
+);
+
+
+ALTER TABLE "public"."minecraft_wiki_collection_datasets" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_wiki_collection_items; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE "public"."minecraft_wiki_collection_items" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "dataset_id" "uuid" NOT NULL,
+    "item_slug" "text" NOT NULL,
+    "item_name" "text" NOT NULL,
+    "section" "text" NOT NULL,
+    "sort_order" integer NOT NULL,
+    "image_key" "text",
+    "image_mime" "text",
+    "image_width" integer,
+    "image_height" integer,
+    "image_bytes" bigint,
+    "image_sha256" "text",
+    "fields_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "minecraft_wiki_collection_items_fields_object" CHECK (("jsonb_typeof"("fields_json") = 'object'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_items_image_bytes_nonnegative" CHECK ((("image_bytes" IS NULL) OR ("image_bytes" >= 0))),
+    CONSTRAINT "minecraft_wiki_collection_items_image_height_positive" CHECK ((("image_height" IS NULL) OR ("image_height" > 0))),
+    CONSTRAINT "minecraft_wiki_collection_items_image_key_not_blank" CHECK ((("image_key" IS NULL) OR ("length"("btrim"("image_key")) > 0))),
+    CONSTRAINT "minecraft_wiki_collection_items_image_mime_supported" CHECK ((("image_mime" IS NULL) OR ("image_mime" = ANY (ARRAY['image/avif'::"text", 'image/gif'::"text", 'image/jpeg'::"text", 'image/png'::"text", 'image/webp'::"text"])))),
+    CONSTRAINT "minecraft_wiki_collection_items_image_sha256_format" CHECK ((("image_sha256" IS NULL) OR ("image_sha256" ~ '^[0-9a-f]{64}$'::"text"))),
+    CONSTRAINT "minecraft_wiki_collection_items_image_width_positive" CHECK ((("image_width" IS NULL) OR ("image_width" > 0))),
+    CONSTRAINT "minecraft_wiki_collection_items_name_not_blank" CHECK (("length"("btrim"("item_name")) > 0)),
+    CONSTRAINT "minecraft_wiki_collection_items_section_not_blank" CHECK (("length"("btrim"("section")) > 0)),
+    CONSTRAINT "minecraft_wiki_collection_items_slug_not_blank" CHECK (("length"("btrim"("item_slug")) > 0))
+);
+
+
+ALTER TABLE "public"."minecraft_wiki_collection_items" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_wiki_collection_pages; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE "public"."minecraft_wiki_collection_pages" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "wiki_page_id" "uuid" NOT NULL,
+    "game_id" "uuid" NOT NULL,
+    "wiki_slug" "text" NOT NULL,
+    "collection_slug" "text" NOT NULL,
+    "code" "text" NOT NULL,
+    "page_type" "text" DEFAULT 'database'::"text" NOT NULL,
+    "title" "text" NOT NULL,
+    "display_name" "text" NOT NULL,
+    "item_count" integer DEFAULT 0 NOT NULL,
+    "seo_title" "text" NOT NULL,
+    "meta_description" "text" NOT NULL,
+    "intro_md" "text",
+    "how_it_works_md" "text",
+    "description_md" "text",
+    "description_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "faq_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "schema_ld_json" "jsonb",
+    "thumb_url" "text",
+    "wiki_md" "text",
+    "wiki_sort_order" integer,
+    "is_published" boolean DEFAULT false NOT NULL,
+    "published_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "published_dataset_id" "uuid",
+    CONSTRAINT "minecraft_wiki_collection_pages_code_not_blank" CHECK (("length"("btrim"("code")) > 0)),
+    CONSTRAINT "minecraft_wiki_collection_pages_collection_slug_not_blank" CHECK (("length"("btrim"("collection_slug")) > 0)),
+    CONSTRAINT "minecraft_wiki_collection_pages_description_object" CHECK (("jsonb_typeof"("description_json") = 'object'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_pages_display_name_not_blank" CHECK (("length"("btrim"("display_name")) > 0)),
+    CONSTRAINT "minecraft_wiki_collection_pages_faq_array" CHECK (("jsonb_typeof"("faq_json") = 'array'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_pages_item_count_nonnegative" CHECK (("item_count" >= 0)),
+    CONSTRAINT "minecraft_wiki_collection_pages_page_type_check" CHECK (("page_type" = 'database'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_pages_wiki_slug_check" CHECK (("wiki_slug" = 'minecraft'::"text")),
+    CONSTRAINT "minecraft_wiki_collection_pages_wiki_slug_not_blank" CHECK (("length"("btrim"("wiki_slug")) > 0))
+);
+
+
+ALTER TABLE "public"."minecraft_wiki_collection_pages" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_wiki_pages; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE "public"."minecraft_wiki_pages" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "game_id" "uuid" NOT NULL,
+    "slug" "text" NOT NULL,
+    "title" "text" NOT NULL,
+    "seo_title" "text",
+    "meta_description" "text",
+    "description_md" "text",
+    "cover_image" "text",
+    "controls_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "tips_md" "text",
+    "is_published" boolean DEFAULT false NOT NULL,
+    "published_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "minecraft_wiki_pages_controls_array" CHECK (("jsonb_typeof"("controls_json") = 'array'::"text")),
+    CONSTRAINT "minecraft_wiki_pages_slug_check" CHECK (("slug" = 'minecraft'::"text")),
+    CONSTRAINT "minecraft_wiki_pages_slug_not_blank" CHECK (("length"("btrim"("slug")) > 0)),
+    CONSTRAINT "minecraft_wiki_pages_title_not_blank" CHECK (("length"("btrim"("title")) > 0))
+);
+
+
+ALTER TABLE "public"."minecraft_wiki_pages" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_wiki_collection_pages_view; Type: VIEW; Schema: public; Owner: supabase_admin
+--
+
+CREATE VIEW "public"."minecraft_wiki_collection_pages_view" WITH ("security_invoker"='true') AS
+ SELECT "page"."id",
+    "page"."wiki_page_id",
+    "page"."game_id",
+    "page"."wiki_slug",
+    "page"."collection_slug",
+    "page"."code",
+    "page"."page_type",
+    "page"."title",
+    "page"."display_name",
+    "page"."item_count",
+    "page"."seo_title",
+    "page"."meta_description",
+    "page"."intro_md",
+    "page"."how_it_works_md",
+    "page"."description_md",
+    "page"."description_json",
+    "page"."faq_json",
+    "page"."schema_ld_json",
+    "page"."thumb_url",
+    "page"."wiki_md",
+    "page"."wiki_sort_order",
+    "page"."is_published",
+    "page"."published_at",
+    "page"."created_at",
+    "page"."updated_at",
+    "page"."published_dataset_id",
+    GREATEST("page"."updated_at", COALESCE("page"."published_at", "page"."updated_at")) AS "content_updated_at",
+    "game"."title" AS "game_title",
+    "game"."short_title" AS "game_short_title",
+    "game"."content_kind" AS "game_content_kind",
+    "game"."parent_game_id" AS "game_parent_game_id",
+    "game"."cover_image" AS "game_cover_image",
+    "game"."hero_image" AS "game_hero_image"
+   FROM (("public"."minecraft_wiki_collection_pages" "page"
+     JOIN "public"."minecraft_games" "game" ON (("game"."id" = "page"."game_id")))
+     JOIN "public"."minecraft_wiki_pages" "wiki" ON (("wiki"."id" = "page"."wiki_page_id")))
+  WHERE ("game"."is_published" AND "wiki"."is_published");
+
+
+ALTER VIEW "public"."minecraft_wiki_collection_pages_view" OWNER TO "supabase_admin";
+
+--
+-- Name: minecraft_wiki_pages_view; Type: VIEW; Schema: public; Owner: supabase_admin
+--
+
+CREATE VIEW "public"."minecraft_wiki_pages_view" WITH ("security_invoker"='true') AS
+ SELECT "wp"."id",
+    "wp"."game_id",
+    "wp"."slug",
+    "wp"."title",
+    "wp"."seo_title",
+    "wp"."meta_description",
+    "wp"."description_md",
+    "wp"."cover_image",
+    "wp"."controls_json",
+    "wp"."tips_md",
+    "wp"."is_published",
+    "wp"."published_at",
+    "wp"."created_at",
+    "wp"."updated_at",
+    GREATEST("wp"."updated_at", COALESCE("wp"."published_at", "wp"."updated_at")) AS "content_updated_at",
+    "game"."title" AS "game_title",
+    "game"."short_title" AS "game_short_title",
+    "game"."installment" AS "game_installment",
+    "game"."content_kind" AS "game_content_kind",
+    "game"."parent_game_id" AS "game_parent_game_id",
+    "game"."developer" AS "game_developer",
+    "game"."publisher" AS "game_publisher",
+    "game"."description_md" AS "game_description_md",
+    "game"."cover_image" AS "game_cover_image",
+    "game"."hero_image" AS "game_hero_image",
+    "game"."official_url" AS "game_official_url",
+    "game"."release_dates_json" AS "game_release_dates_json",
+    "game"."platforms_json" AS "game_platforms_json",
+    "game"."status" AS "game_status"
+   FROM ("public"."minecraft_wiki_pages" "wp"
+     JOIN "public"."minecraft_games" "game" ON (("game"."id" = "wp"."game_id")))
+  WHERE "game"."is_published";
+
+
+ALTER VIEW "public"."minecraft_wiki_pages_view" OWNER TO "supabase_admin";
+
+--
 -- Name: puzzle_answers; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -9511,7 +10211,7 @@ CREATE TABLE "public"."revalidation_events" (
     "slug" "text" NOT NULL,
     "source" "text",
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text", 'wiki_collection'::"text", 'stats'::"text", 'puzzle'::"text", 'gta_game'::"text", 'gta_wiki'::"text", 'gta_wiki_collection'::"text", 'gta_checklist'::"text", 'red_dead_game'::"text", 'red_dead_wiki'::"text", 'red_dead_wiki_collection'::"text"])))
+    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text", 'wiki_collection'::"text", 'stats'::"text", 'puzzle'::"text", 'gta_game'::"text", 'gta_wiki'::"text", 'gta_wiki_collection'::"text", 'gta_checklist'::"text", 'red_dead_game'::"text", 'red_dead_wiki'::"text", 'red_dead_wiki_collection'::"text", 'minecraft_game'::"text", 'minecraft_wiki'::"text", 'minecraft_wiki_collection'::"text", 'minecraft_tool'::"text"])))
 );
 
 
@@ -12042,6 +12742,142 @@ ALTER TABLE ONLY "public"."gta_wiki_pages"
 
 ALTER TABLE ONLY "public"."gta_wiki_pages"
     ADD CONSTRAINT "gta_wiki_pages_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: minecraft_games minecraft_games_id_pair_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_games"
+    ADD CONSTRAINT "minecraft_games_id_pair_key" UNIQUE ("id", "slug");
+
+
+--
+-- Name: minecraft_games minecraft_games_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_games"
+    ADD CONSTRAINT "minecraft_games_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: minecraft_releases minecraft_releases_edition_release_order_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_releases"
+    ADD CONSTRAINT "minecraft_releases_edition_release_order_key" UNIQUE ("edition", "release_order");
+
+
+--
+-- Name: minecraft_releases minecraft_releases_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_releases"
+    ADD CONSTRAINT "minecraft_releases_pkey" PRIMARY KEY ("edition", "version");
+
+
+--
+-- Name: minecraft_tools minecraft_tools_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_tools"
+    ADD CONSTRAINT "minecraft_tools_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: minecraft_tools minecraft_tools_slug_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_tools"
+    ADD CONSTRAINT "minecraft_tools_slug_key" UNIQUE ("slug");
+
+
+--
+-- Name: minecraft_wiki_collection_datasets minecraft_wiki_collection_datasets_id_page_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_datasets"
+    ADD CONSTRAINT "minecraft_wiki_collection_datasets_id_page_key" UNIQUE ("id", "collection_page_id");
+
+
+--
+-- Name: minecraft_wiki_collection_datasets minecraft_wiki_collection_datasets_page_hash_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_datasets"
+    ADD CONSTRAINT "minecraft_wiki_collection_datasets_page_hash_key" UNIQUE ("collection_page_id", "content_hash");
+
+
+--
+-- Name: minecraft_wiki_collection_datasets minecraft_wiki_collection_datasets_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_datasets"
+    ADD CONSTRAINT "minecraft_wiki_collection_datasets_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: minecraft_wiki_collection_items minecraft_wiki_collection_items_dataset_slug_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_items"
+    ADD CONSTRAINT "minecraft_wiki_collection_items_dataset_slug_key" UNIQUE ("dataset_id", "item_slug");
+
+
+--
+-- Name: minecraft_wiki_collection_items minecraft_wiki_collection_items_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_items"
+    ADD CONSTRAINT "minecraft_wiki_collection_items_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: minecraft_wiki_collection_pages minecraft_wiki_collection_pages_code_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_pages"
+    ADD CONSTRAINT "minecraft_wiki_collection_pages_code_key" UNIQUE ("code");
+
+
+--
+-- Name: minecraft_wiki_collection_pages minecraft_wiki_collection_pages_path_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_pages"
+    ADD CONSTRAINT "minecraft_wiki_collection_pages_path_key" UNIQUE ("wiki_slug", "collection_slug");
+
+
+--
+-- Name: minecraft_wiki_collection_pages minecraft_wiki_collection_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_pages"
+    ADD CONSTRAINT "minecraft_wiki_collection_pages_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: minecraft_wiki_pages minecraft_wiki_pages_game_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_pages"
+    ADD CONSTRAINT "minecraft_wiki_pages_game_key" UNIQUE ("game_id");
+
+
+--
+-- Name: minecraft_wiki_pages minecraft_wiki_pages_id_game_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_pages"
+    ADD CONSTRAINT "minecraft_wiki_pages_id_game_key" UNIQUE ("id", "game_id");
+
+
+--
+-- Name: minecraft_wiki_pages minecraft_wiki_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_pages"
+    ADD CONSTRAINT "minecraft_wiki_pages_pkey" PRIMARY KEY ("id");
 
 
 --
@@ -14794,6 +15630,104 @@ CREATE INDEX "idx_wiki_pages_universe_id" ON "public"."wiki_pages" USING "btree"
 
 
 --
+-- Name: minecraft_games_parent_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_games_parent_idx" ON "public"."minecraft_games" USING "btree" ("parent_game_id");
+
+
+--
+-- Name: minecraft_games_published_updated_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_games_published_updated_idx" ON "public"."minecraft_games" USING "btree" ("updated_at" DESC, "id") WHERE ("is_published" = true);
+
+
+--
+-- Name: minecraft_games_slug_lower_key; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE UNIQUE INDEX "minecraft_games_slug_lower_key" ON "public"."minecraft_games" USING "btree" ("lower"("slug"));
+
+
+--
+-- Name: minecraft_tools_published_updated_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_tools_published_updated_idx" ON "public"."minecraft_tools" USING "btree" ("updated_at" DESC, "id") WHERE "is_published";
+
+
+--
+-- Name: minecraft_wiki_collection_datasets_page_created_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_datasets_page_created_idx" ON "public"."minecraft_wiki_collection_datasets" USING "btree" ("collection_page_id", "created_at" DESC);
+
+
+--
+-- Name: minecraft_wiki_collection_items_dataset_section_sort_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_items_dataset_section_sort_idx" ON "public"."minecraft_wiki_collection_items" USING "btree" ("dataset_id", "section", "sort_order", "item_slug");
+
+
+--
+-- Name: minecraft_wiki_collection_items_dataset_sort_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_items_dataset_sort_idx" ON "public"."minecraft_wiki_collection_items" USING "btree" ("dataset_id", "sort_order", "item_slug");
+
+
+--
+-- Name: minecraft_wiki_collection_pages_game_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_pages_game_idx" ON "public"."minecraft_wiki_collection_pages" USING "btree" ("game_id");
+
+
+--
+-- Name: minecraft_wiki_collection_pages_published_dataset_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_pages_published_dataset_idx" ON "public"."minecraft_wiki_collection_pages" USING "btree" ("published_dataset_id", "id") WHERE ("published_dataset_id" IS NOT NULL);
+
+
+--
+-- Name: minecraft_wiki_collection_pages_type_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_pages_type_idx" ON "public"."minecraft_wiki_collection_pages" USING "btree" ("wiki_slug", "page_type", "wiki_sort_order", "title") WHERE ("is_published" = true);
+
+
+--
+-- Name: minecraft_wiki_collection_pages_wiki_game_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_pages_wiki_game_idx" ON "public"."minecraft_wiki_collection_pages" USING "btree" ("wiki_page_id", "game_id");
+
+
+--
+-- Name: minecraft_wiki_collection_pages_wiki_sort_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_collection_pages_wiki_sort_idx" ON "public"."minecraft_wiki_collection_pages" USING "btree" ("wiki_slug", "wiki_sort_order", "title") WHERE ("is_published" = true);
+
+
+--
+-- Name: minecraft_wiki_pages_published_updated_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX "minecraft_wiki_pages_published_updated_idx" ON "public"."minecraft_wiki_pages" USING "btree" ("updated_at" DESC, "id") WHERE ("is_published" = true);
+
+
+--
+-- Name: minecraft_wiki_pages_slug_lower_key; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE UNIQUE INDEX "minecraft_wiki_pages_slug_lower_key" ON "public"."minecraft_wiki_pages" USING "btree" ("lower"("slug"));
+
+
+--
 -- Name: red_dead_games_parent_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -15081,6 +16015,13 @@ CREATE TRIGGER "trg_comments_revalidate_entity" AFTER INSERT OR DELETE OR UPDATE
 
 
 --
+-- Name: comments trg_comments_revalidate_minecraft_entity; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER "trg_comments_revalidate_minecraft_entity" AFTER INSERT OR DELETE OR UPDATE ON "public"."comments" FOR EACH ROW EXECUTE FUNCTION "public"."trg_comments_revalidate_minecraft_entity"();
+
+
+--
 -- Name: comments trg_comments_revalidate_red_dead_entity; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -15232,6 +16173,34 @@ CREATE TRIGGER "trg_enqueue_revalidation_gta_wiki_pages" AFTER INSERT OR DELETE 
 --
 
 CREATE TRIGGER "trg_enqueue_revalidation_mesh_ids" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_mesh_ids" FOR EACH STATEMENT EXECUTE FUNCTION "public"."trg_enqueue_revalidation_mesh_ids"();
+
+
+--
+-- Name: minecraft_games trg_enqueue_revalidation_minecraft_games; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_enqueue_revalidation_minecraft_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"();
+
+
+--
+-- Name: minecraft_tools trg_enqueue_revalidation_minecraft_tools; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_enqueue_revalidation_minecraft_tools" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_tools" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"();
+
+
+--
+-- Name: minecraft_wiki_collection_pages trg_enqueue_revalidation_minecraft_wiki_collection_pages; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_enqueue_revalidation_minecraft_wiki_collection_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"();
+
+
+--
+-- Name: minecraft_wiki_pages trg_enqueue_revalidation_minecraft_wiki_pages; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_enqueue_revalidation_minecraft_wiki_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"();
 
 
 --
@@ -15466,10 +16435,73 @@ CREATE TRIGGER "trg_gta_wiki_pages_updated_at" BEFORE UPDATE ON "public"."gta_wi
 
 
 --
+-- Name: minecraft_games trg_minecraft_games_published_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_games_published_at" BEFORE INSERT OR UPDATE ON "public"."minecraft_games" FOR EACH ROW EXECUTE FUNCTION "public"."set_minecraft_published_at"();
+
+
+--
+-- Name: minecraft_games trg_minecraft_games_updated_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_games_updated_at" BEFORE UPDATE ON "public"."minecraft_games" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+--
+-- Name: minecraft_tools trg_minecraft_tools_published_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_tools_published_at" BEFORE INSERT OR UPDATE ON "public"."minecraft_tools" FOR EACH ROW EXECUTE FUNCTION "public"."set_minecraft_published_at"();
+
+
+--
+-- Name: minecraft_tools trg_minecraft_tools_updated_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_tools_updated_at" BEFORE UPDATE ON "public"."minecraft_tools" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+--
+-- Name: minecraft_wiki_collection_pages trg_minecraft_wiki_collection_pages_published_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_wiki_collection_pages_published_at" BEFORE INSERT OR UPDATE ON "public"."minecraft_wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_minecraft_published_at"();
+
+
+--
+-- Name: minecraft_wiki_collection_pages trg_minecraft_wiki_collection_pages_updated_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_wiki_collection_pages_updated_at" BEFORE UPDATE ON "public"."minecraft_wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+--
+-- Name: minecraft_wiki_pages trg_minecraft_wiki_pages_published_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_wiki_pages_published_at" BEFORE INSERT OR UPDATE ON "public"."minecraft_wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_minecraft_published_at"();
+
+
+--
+-- Name: minecraft_wiki_pages trg_minecraft_wiki_pages_updated_at; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_minecraft_wiki_pages_updated_at" BEFORE UPDATE ON "public"."minecraft_wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+--
 -- Name: roblox_music_id_game_usage trg_music_id_game_usage_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER "trg_music_id_game_usage_updated_at" BEFORE UPDATE ON "public"."roblox_music_id_game_usage" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+--
+-- Name: minecraft_wiki_collection_items trg_protect_minecraft_runtime_insert; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_protect_minecraft_runtime_insert" BEFORE INSERT ON "public"."minecraft_wiki_collection_items" FOR EACH ROW EXECUTE FUNCTION "public"."protect_minecraft_runtime_insert"();
 
 
 --
@@ -15484,6 +16516,20 @@ CREATE TRIGGER "trg_protect_published_gta_wiki_collection_dataset" BEFORE DELETE
 --
 
 CREATE TRIGGER "trg_protect_published_gta_wiki_collection_item" BEFORE DELETE OR UPDATE ON "public"."gta_wiki_collection_items" FOR EACH ROW EXECUTE FUNCTION "public"."protect_published_gta_wiki_collection_runtime"();
+
+
+--
+-- Name: minecraft_wiki_collection_datasets trg_protect_published_minecraft_wiki_collection_dataset; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_protect_published_minecraft_wiki_collection_dataset" BEFORE DELETE OR UPDATE ON "public"."minecraft_wiki_collection_datasets" FOR EACH ROW EXECUTE FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"();
+
+
+--
+-- Name: minecraft_wiki_collection_items trg_protect_published_minecraft_wiki_collection_item; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_protect_published_minecraft_wiki_collection_item" BEFORE DELETE OR UPDATE ON "public"."minecraft_wiki_collection_items" FOR EACH ROW EXECUTE FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"();
 
 
 --
@@ -15767,6 +16813,34 @@ CREATE TRIGGER "trg_search_index_gta_wiki_pages" AFTER INSERT OR DELETE OR UPDAT
 
 
 --
+-- Name: minecraft_games trg_search_index_minecraft_games; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_search_index_minecraft_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_minecraft_content"();
+
+
+--
+-- Name: minecraft_tools trg_search_index_minecraft_tools; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_search_index_minecraft_tools" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_tools" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_minecraft_content"();
+
+
+--
+-- Name: minecraft_wiki_collection_pages trg_search_index_minecraft_wiki_collection_pages; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_search_index_minecraft_wiki_collection_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_minecraft_content"();
+
+
+--
+-- Name: minecraft_wiki_pages trg_search_index_minecraft_wiki_pages; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_search_index_minecraft_wiki_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_minecraft_content"();
+
+
+--
 -- Name: puzzle_pages trg_search_index_puzzle_pages; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -15935,6 +17009,13 @@ CREATE TRIGGER "trg_user_red_dead_collection_progress_updated_at" BEFORE UPDATE 
 
 
 --
+-- Name: minecraft_wiki_collection_pages trg_validate_minecraft_collection_publication; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "trg_validate_minecraft_collection_publication" BEFORE INSERT OR UPDATE ON "public"."minecraft_wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."validate_minecraft_collection_publication"();
+
+
+--
 -- Name: wiki_collection_pages trg_wiki_collection_pages_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -15953,6 +17034,27 @@ CREATE TRIGGER "trg_wiki_generation_queue_updated_at" BEFORE UPDATE ON "public".
 --
 
 CREATE TRIGGER "trg_wiki_pages_updated_at" BEFORE UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+--
+-- Name: minecraft_wiki_collection_pages zzz_minecraft_collection_search_visibility; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "zzz_minecraft_collection_search_visibility" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_refresh_minecraft_search_visibility"();
+
+
+--
+-- Name: minecraft_games zzz_minecraft_game_search_visibility; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "zzz_minecraft_game_search_visibility" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_refresh_minecraft_search_visibility"();
+
+
+--
+-- Name: minecraft_wiki_pages zzz_minecraft_wiki_search_visibility; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER "zzz_minecraft_wiki_search_visibility" AFTER INSERT OR DELETE OR UPDATE ON "public"."minecraft_wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_refresh_minecraft_search_visibility"();
 
 
 --
@@ -16193,6 +17295,54 @@ ALTER TABLE ONLY "public"."gta_wiki_collection_pages"
 
 ALTER TABLE ONLY "public"."gta_wiki_pages"
     ADD CONSTRAINT "gta_wiki_pages_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."gta_games"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: minecraft_games minecraft_games_parent_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_games"
+    ADD CONSTRAINT "minecraft_games_parent_game_id_fkey" FOREIGN KEY ("parent_game_id") REFERENCES "public"."minecraft_games"("id") ON DELETE SET NULL;
+
+
+--
+-- Name: minecraft_wiki_collection_datasets minecraft_wiki_collection_datasets_collection_page_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_datasets"
+    ADD CONSTRAINT "minecraft_wiki_collection_datasets_collection_page_id_fkey" FOREIGN KEY ("collection_page_id") REFERENCES "public"."minecraft_wiki_collection_pages"("id");
+
+
+--
+-- Name: minecraft_wiki_collection_items minecraft_wiki_collection_items_dataset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_items"
+    ADD CONSTRAINT "minecraft_wiki_collection_items_dataset_id_fkey" FOREIGN KEY ("dataset_id") REFERENCES "public"."minecraft_wiki_collection_datasets"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: minecraft_wiki_collection_pages minecraft_wiki_collection_pages_published_dataset_owner_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_pages"
+    ADD CONSTRAINT "minecraft_wiki_collection_pages_published_dataset_owner_fkey" FOREIGN KEY ("published_dataset_id", "id") REFERENCES "public"."minecraft_wiki_collection_datasets"("id", "collection_page_id") DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: minecraft_wiki_collection_pages minecraft_wiki_collection_pages_wiki_game_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_collection_pages"
+    ADD CONSTRAINT "minecraft_wiki_collection_pages_wiki_game_fkey" FOREIGN KEY ("wiki_page_id", "game_id") REFERENCES "public"."minecraft_wiki_pages"("id", "game_id") ON DELETE CASCADE;
+
+
+--
+-- Name: minecraft_wiki_pages minecraft_wiki_pages_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY "public"."minecraft_wiki_pages"
+    ADD CONSTRAINT "minecraft_wiki_pages_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."minecraft_games"("id") ON DELETE CASCADE;
 
 
 --
@@ -17007,6 +18157,48 @@ ALTER TABLE "public"."gta_wiki_collection_pages" ENABLE ROW LEVEL SECURITY;
 --
 
 ALTER TABLE "public"."gta_wiki_pages" ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: minecraft_games; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE "public"."minecraft_games" ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: minecraft_releases; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE "public"."minecraft_releases" ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: minecraft_tools; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE "public"."minecraft_tools" ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: minecraft_wiki_collection_datasets; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE "public"."minecraft_wiki_collection_datasets" ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: minecraft_wiki_collection_items; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE "public"."minecraft_wiki_collection_items" ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: minecraft_wiki_collection_pages; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE "public"."minecraft_wiki_collection_pages" ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: minecraft_wiki_pages; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE "public"."minecraft_wiki_pages" ENABLE ROW LEVEL SECURITY;
 
 --
 -- Name: roblox_music_id_game_usage music_id_game_usage_public_read; Type: POLICY; Schema: public; Owner: postgres
@@ -18103,6 +19295,17 @@ GRANT ALL ON FUNCTION "public"."percent_delta"("p_current" numeric, "p_previous"
 
 
 --
+-- Name: FUNCTION "protect_minecraft_runtime_insert"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."protect_minecraft_runtime_insert"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."protect_minecraft_runtime_insert"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."protect_minecraft_runtime_insert"() TO "anon";
+GRANT ALL ON FUNCTION "public"."protect_minecraft_runtime_insert"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."protect_minecraft_runtime_insert"() TO "service_role";
+
+
+--
 -- Name: FUNCTION "protect_published_gta_wiki_collection_runtime"(); Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -18110,6 +19313,17 @@ REVOKE ALL ON FUNCTION "public"."protect_published_gta_wiki_collection_runtime"(
 GRANT ALL ON FUNCTION "public"."protect_published_gta_wiki_collection_runtime"() TO "anon";
 GRANT ALL ON FUNCTION "public"."protect_published_gta_wiki_collection_runtime"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."protect_published_gta_wiki_collection_runtime"() TO "service_role";
+
+
+--
+-- Name: FUNCTION "protect_published_minecraft_wiki_collection_runtime"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"() TO "anon";
+GRANT ALL ON FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."protect_published_minecraft_wiki_collection_runtime"() TO "service_role";
 
 
 --
@@ -18155,6 +19369,15 @@ GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux
 
 REVOKE ALL ON FUNCTION "public"."record_stats_health_check"() FROM PUBLIC;
 GRANT ALL ON FUNCTION "public"."record_stats_health_check"() TO "service_role";
+
+
+--
+-- Name: FUNCTION "refresh_minecraft_search_visibility"("target_game_id" "uuid"); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."refresh_minecraft_search_visibility"("target_game_id" "uuid") FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."refresh_minecraft_search_visibility"("target_game_id" "uuid") TO "postgres";
+GRANT ALL ON FUNCTION "public"."refresh_minecraft_search_visibility"("target_game_id" "uuid") TO "service_role";
 
 
 --
@@ -18378,6 +19601,17 @@ GRANT ALL ON FUNCTION "public"."set_gta_published_at"() TO "service_role";
 
 
 --
+-- Name: FUNCTION "set_minecraft_published_at"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."set_minecraft_published_at"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."set_minecraft_published_at"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."set_minecraft_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_minecraft_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_minecraft_published_at"() TO "service_role";
+
+
+--
 -- Name: FUNCTION "set_puzzle_page_published_at"(); Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -18517,6 +19751,17 @@ GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_code"() TO "service_role
 GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_entity"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_entity"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_entity"() TO "service_role";
+
+
+--
+-- Name: FUNCTION "trg_comments_revalidate_minecraft_entity"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."trg_comments_revalidate_minecraft_entity"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_minecraft_entity"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_minecraft_entity"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_minecraft_entity"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_minecraft_entity"() TO "service_role";
 
 
 --
@@ -18681,6 +19926,17 @@ GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_gta_content"() TO "serv
 
 REVOKE ALL ON FUNCTION "public"."trg_enqueue_revalidation_mesh_ids"() FROM PUBLIC;
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_mesh_ids"() TO "service_role";
+
+
+--
+-- Name: FUNCTION "trg_enqueue_revalidation_minecraft_content"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_minecraft_content"() TO "service_role";
 
 
 --
@@ -18850,6 +20106,15 @@ GRANT ALL ON FUNCTION "public"."trg_normalize_section_code"() TO "service_role";
 
 
 --
+-- Name: FUNCTION "trg_refresh_minecraft_search_visibility"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."trg_refresh_minecraft_search_visibility"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_refresh_minecraft_search_visibility"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."trg_refresh_minecraft_search_visibility"() TO "service_role";
+
+
+--
 -- Name: FUNCTION "trg_refresh_search_index_music"(); Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -18920,6 +20185,17 @@ REVOKE ALL ON FUNCTION "public"."trg_search_index_gta_content"() FROM PUBLIC;
 GRANT ALL ON FUNCTION "public"."trg_search_index_gta_content"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_search_index_gta_content"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_search_index_gta_content"() TO "service_role";
+
+
+--
+-- Name: FUNCTION "trg_search_index_minecraft_content"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."trg_search_index_minecraft_content"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_search_index_minecraft_content"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."trg_search_index_minecraft_content"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_minecraft_content"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_minecraft_content"() TO "service_role";
 
 
 --
@@ -19010,6 +20286,17 @@ GRANT ALL ON FUNCTION "public"."upsert_roblox_universe_stats_hourly"("p_universe
 GRANT ALL ON FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") TO "service_role";
+
+
+--
+-- Name: FUNCTION "validate_minecraft_collection_publication"(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION "public"."validate_minecraft_collection_publication"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."validate_minecraft_collection_publication"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."validate_minecraft_collection_publication"() TO "anon";
+GRANT ALL ON FUNCTION "public"."validate_minecraft_collection_publication"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."validate_minecraft_collection_publication"() TO "service_role";
 
 
 --
@@ -19809,6 +21096,86 @@ GRANT SELECT ON TABLE "public"."gta_wiki_pages_view" TO "authenticated";
 GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "anon";
 GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "authenticated";
 GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_games"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_games" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_games" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_releases"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_releases" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_releases" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_tools"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_tools" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_tools" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_tools_view"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_tools_view" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_tools_view" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_wiki_collection_datasets"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_datasets" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_datasets" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_wiki_collection_items"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_items" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_items" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_wiki_collection_pages"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_pages" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_pages" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_wiki_pages"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_wiki_pages" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_wiki_pages" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_wiki_collection_pages_view"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_pages_view" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_wiki_collection_pages_view" TO "service_role";
+
+
+--
+-- Name: TABLE "minecraft_wiki_pages_view"; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE "public"."minecraft_wiki_pages_view" TO "postgres";
+GRANT ALL ON TABLE "public"."minecraft_wiki_pages_view" TO "service_role";
 
 
 --
@@ -20994,5 +22361,4 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "supabase_admin" IN SCHEMA "public" GRANT ALL 
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Vmov9zqeGXJVdTNQycVxcRhyRM2DF37iIDmJF93AdpE5n6dnTcSlSd9Dsw1lolS
-
+\unrestrict ZxrvV4jQY4yqbf8oDDlwFD8oGP6mdbeHXCNKaiaHoCMTw1RnY8EK9i2qOw3FBWz

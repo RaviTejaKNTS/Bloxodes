@@ -1,7 +1,7 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-10-02
+Last verified: 2026-10-03
 Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
 ## Normal Path
@@ -109,3 +109,10 @@ Worker launches explicitly enforce `BLOXODES_ENV_PROFILE=process-only`, matching
 The stats worker installs Python system CA certificates and fails its image build when Python's HTTPS trust store is empty. Node's built-in roots alone do not cover the Python candidate importer.
 
 Final VPS worker image and approved-worker-sha: `69b47e4f888896c66cfe1524978926fc0de009ae`. The host wrapper matches committed checksum `2abf4878d00c209cf90adebea9e117bfacf8fcf086c152607af0c905c90bdc52`. Full candidate import and bounded official verification succeeded. Web/homelab remain at the code-equivalent pipeline runtime `34b925cca7788e7db83e58d640031e89ffe01cec`; subsequent commits concern the worker, operations and schema snapshot.
+
+
+## Minecraft release, October 3, 2026
+
+The owner-approved Minecraft release deployed commit `a9cc2a01bb0f41adadcd4e5349bfd776df9f85b6` through [GitHub run 37116355973](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37116355973). Exact-SHA web/database health passed. The production rollback-only schema plan contained only the two approved Minecraft migrations; atomic application and a later zero-pending convergence check passed. The operator SSH key was unavailable, so schema release used the documented Dokploy transport. The revalidation artifact used the authenticated Dokploy container terminal and restart API with checksum, ownership/mode and rollback guards. Its final smoke passed after the web deployment.
+
+Controlled publication and full readback matched one hub, 25 revisions with 9,070 rows, 13 tools and two release anchors. All 93 live HTTP checks and four crawler-agent requests passed. The current web and Supabase containers were running with healthy probes where configured. Stopped older Swarm web tasks remained historical deployment entries. The regenerated schema snapshot and release documentation are a follow-up commit with no web-runtime changes, so the deployed image remains the exact Minecraft implementation SHA. The task checkout and unrelated primary-checkout edits are retained.

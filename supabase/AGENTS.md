@@ -48,7 +48,7 @@ This folder defines the app's database contract and edge-function behavior.
 
 ## App Integration Checklist
 
-Minecraft owns seven `minecraft_*` tables and three service-only security-invoker views. Keep the single `minecraft` game/wiki identity, edition-specific ordered releases, flat collection/tool event slugs and immutable published dataset pointers. A published collection needs nonzero rows matching both dataset and page counts. Clients read Minecraft through server routes; do not grant anonymous/authenticated access or reuse Roblox universe IDs. Migration `20261002134153` is applied in managed development only.
+Minecraft owns seven `minecraft_*` tables and three service-only security-invoker views. Keep the single `minecraft` game/wiki identity, edition-specific ordered releases, flat collection/tool event slugs and immutable published dataset pointers. A published collection needs nonzero rows matching both dataset and page counts. Clients read Minecraft through server routes; do not grant anonymous/authenticated access or reuse Roblox universe IDs. Migrations `20261002134153` and `20261002142559` are applied in managed development and production as of October 3, 2026. Production has 25 published collection revisions, 9,070 active rows, 13 tools and two ordered edition release anchors; the live schema snapshot and service-only grants were verified.
 
 When adding a new table, view, or publishable content type:
 
