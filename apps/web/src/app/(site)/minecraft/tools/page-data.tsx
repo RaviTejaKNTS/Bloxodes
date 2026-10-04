@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { cache } from "react";
 import { ContentCard } from "@/components/ContentCard";
+import { ToolCard } from "@/components/ToolCard";
 import { buildMinecraftCollectionPath, getMinecraftTool, listMinecraftTools, listPublishedMinecraftCollections, type MinecraftToolPage } from "@/lib/minecraft";
 import { isMinecraftToolSlug, MINECRAFT_TOOL_COLLECTIONS } from "@/lib/minecraft-tools/manifest";
 import type { ToolRules } from "@/lib/minecraft-tools/types";
@@ -13,8 +14,30 @@ export function toolRules(tool: MinecraftToolPage): ToolRules {
   if (typeof rules.revision !== "string" || !Array.isArray(rules.editions) || !rules.editions.length) throw new Error(`Published tool ${tool.slug} has an invalid rules revision.`);
   return rules;
 }
-export function MinecraftToolCards({ tools }: { tools: MinecraftToolPage[] }) {
-  return <div className="space-y-3">{tools.map(tool => <ContentCard key={tool.id} type="tool" variant="bar" href={`/minecraft/tools/${tool.slug}`} title={tool.title} image={{ src: tool.thumb_url, alt: tool.title }} subtitle={tool.meta_description} />)}</div>;
+export function MinecraftToolCards({ tools, hub = false }: { tools: MinecraftToolPage[]; hub?: boolean }) {
+  return (
+    <section
+      id={hub ? "article-body" : undefined}
+      itemProp={hub ? "articleBody" : undefined}
+      className="journey-content-stream journey-content-stream--index"
+    >
+      {tools.map((tool, index) => (
+        <div
+          key={tool.id}
+          data-journey-item
+          className="h-full"
+          data-analytics-event="select_item"
+          data-analytics-item-list-name={hub ? "minecraft_tools_index" : "minecraft_related_tools"}
+          data-analytics-item-id={tool.slug}
+          data-analytics-item-name={tool.title}
+          data-analytics-position={index + 1}
+          data-analytics-content-type="tool"
+        >
+          <ToolCard tool={tool} href={`/minecraft/tools/${tool.slug}`} />
+        </div>
+      ))}
+    </section>
+  );
 }
 export async function RelatedMinecraftTools({ exclude, collection }: { exclude?: string; collection?: string }) {
   const tools = (await listMinecraftTools()).filter(tool => tool.slug !== exclude && isMinecraftToolSlug(tool.slug) && (!collection || MINECRAFT_TOOL_COLLECTIONS[tool.slug].includes(collection)));

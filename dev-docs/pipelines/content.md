@@ -1,5 +1,7 @@
 # Content and Engagement Pipelines
 
+Minecraft tool presentation uses the shared Roblox `ToolCard` and Journey index grid. The 13 generated WebP covers are committed web assets under `apps/web/public/images/tools/minecraft/`, resolved by `lib/minecraft-tools/covers.ts` in the Minecraft read adapter. Database copy and calculation rules remain in `minecraft_tools`; these assets ship with the web image and require no database publication. Generation prompts are recorded in `docs/2026-10-04-minecraft-tool-covers.json`.
+
 Status: Active
 Last verified: 2026-09-14
 Evidence: fresh managed-development page/item readback, all 386 web tests, isolated production web build, route metadata/search/sitemap/feed checks, and production overlap readback on September 14. Browser interaction QA remains unavailable. Earlier family counts below retain their August 14 scope.

@@ -9,6 +9,7 @@ import { resolveWikiMediaUrl } from "@/lib/wiki-media";
 import { supabaseAdmin } from "@/lib/supabase";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 import { validateMinecraftToolRules } from "@/lib/minecraft-tools/validate";
+import { getMinecraftToolCover } from "@/lib/minecraft-tools/covers";
 import { summarizeMinecraftCollectionEditions, type MinecraftCollectionEditionSummary } from "@/lib/minecraft-edition";
 
 const REVALIDATE_SECONDS = 3600;
@@ -487,7 +488,7 @@ export async function getMinecraftTool(slug: string): Promise<MinecraftToolPage 
       if (data.tool_key !== normalized) throw new Error("Minecraft tool ownership does not match its route.");
       validateMinecraftToolRules(data.tool_key, data.rules_json);
     }
-    return data as MinecraftToolPage | null;
+    return data ? { ...data, thumb_url: getMinecraftToolCover(normalized) ?? data.thumb_url } as MinecraftToolPage : null;
   });
 }
 
@@ -495,7 +496,7 @@ export async function listMinecraftTools(): Promise<MinecraftToolPage[]> {
   return withCache(["minecraft-tools-index-v1"], ["minecraft-tools-index"], async () => {
     const { data, error } = await supabaseAdmin().from("minecraft_tools_view").select("*").eq("is_published", true).order("title");
     if (error) throw new Error(`Minecraft tool directory read failed: ${error.message}`);
-    return (data ?? []) as MinecraftToolPage[];
+    return (data ?? []).map(tool => ({ ...tool, thumb_url: getMinecraftToolCover(tool.slug) ?? tool.thumb_url })) as MinecraftToolPage[];
   });
 }
 

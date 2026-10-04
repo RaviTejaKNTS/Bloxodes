@@ -6,9 +6,10 @@ import { ContentCard } from "@/components/ContentCard";
 
 type ToolCardProps = {
   tool: ToolListEntry;
+  href?: string;
 };
 
-export function ToolCard({ tool }: ToolCardProps) {
+export function ToolCard({ tool, href = `/tools/${tool.code}` }: ToolCardProps) {
   const updatedLabel = formatUpdatedLabel(resolveModifiedAt(tool));
   const thumb = tool.thumb_url || tool.universe?.icon_url || null;
 
@@ -16,7 +17,7 @@ export function ToolCard({ tool }: ToolCardProps) {
     <ContentCard
       type="tool"
       variant="bar"
-      href={`/tools/${tool.code}`}
+      href={href}
       title={tool.title}
       titleClassName="line-clamp-3"
       image={{ src: thumb, alt: tool.title }}
