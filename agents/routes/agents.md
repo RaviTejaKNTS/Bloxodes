@@ -117,6 +117,6 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 
 `/api/checklists/progress` accepts `gta:<slug>` keys for GTA standalone completion boards, validates published GTA pages and their leaf IDs, and keeps existing Roblox keys intact. Session ownership, trusted origin and write rate limiting apply. `/api/search/all?scope=gta-checklists` selects GTA checklist results.
 
-## Shared reference-page routes in development
+## Shared reference-page routes
 
-Generic `/<namespace>/maps|quizzes|catalog|checklists/<slug>` pages and section directories use shared published rows. `/api/games/[namespace]/quizzes/progress` handles private quiz history; `/api/checklists/progress` accepts shared standalone namespace keys. Existing Roblox contracts and GTA map URLs remain supported. See `dev-docs/pipelines/content.md` for the unreleased development extension.
+Generic `/<namespace>/maps|quizzes|catalog|checklists/<slug>` pages and section directories use shared published rows. `/api/games/[namespace]/quizzes/progress` handles private quiz history; `/api/checklists/progress` accepts shared standalone namespace keys. Existing Roblox contracts and GTA map URLs remain supported. See `dev-docs/pipelines/content.md` for the shared extension and production release.

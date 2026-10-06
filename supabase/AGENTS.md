@@ -78,4 +78,4 @@ Migration `20260920000032` clarifies that GTA Online contains selected tasks onl
 
 ## Shared page-type extension
 
-Managed development additionally has `game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress`. The three new read views are service-only and filter publication. Use the atomic publisher for page/task batches and `save_game_quiz_progress` for account history. Do not replace registered GTA engine snapshots or renderer identity through ordinary edits. See the managed-development section of `dev-docs/pipelines/content.md`; production has not received this extension.
+Managed development and production have `game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress`. The three new read views are service-only and filter publication. Use the atomic publisher for page/task batches and `save_game_quiz_progress` for account history. Do not replace registered GTA engine snapshots or renderer identity through ordinary edits. See `dev-docs/pipelines/content.md` for the shared page contract and verified production release.

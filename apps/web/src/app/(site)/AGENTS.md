@@ -91,4 +91,4 @@ Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, perma
 
 ## Shared game reference routes
 
-The generic `/<namespace>` route additionally serves maps, quizzes, catalogs and standalone checklists, with named detail slugs and section directories. Reuse `GameContentPage`, `GameMap`, `GameCatalog`, `GameQuizPage` and the neutral checklist template. Custom tool bodies use `GameToolPageLayout`. Existing GTA map routes retain registered engines while their snapshots load from shared storage. The page-type extension is managed-development-only until separately released.
+The generic `/<namespace>` route additionally serves maps, quizzes, catalogs and standalone checklists, with named detail slugs and section directories. Reuse `GameContentPage`, `GameMap`, `GameCatalog`, `GameQuizPage` and the neutral checklist template. Custom tool bodies use `GameToolPageLayout`. Existing GTA map routes retain registered engines while their snapshots load from shared storage. The page types use shared storage in managed development and production.

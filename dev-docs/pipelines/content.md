@@ -19,10 +19,10 @@ Shared tools use `game_tool_pages`; Minecraft retains its registered calculators
 
 GTA standalone checklist pages and tasks use `game_checklist_pages` and `game_checklist_items` in development and production. Their account progress still uses `user_checklist_progress` and existing `gta:<slug>` keys. GTA and Red Dead collection progress uses `game_collection_progress`; the old endpoints and local browser keys remain compatible. New namespaces use `/api/games/<namespace>/collections/progress`.
 
-## Shared game page types in managed development
+## Shared game page types
 
 Last verified: 2026-10-06
-Evidence: eight applied development migrations, atomic rollback and concurrent-save checks, all 472 web tests, the optimized web build and independent GPT-6.1-Sol review. Browser checks passed for map controls, catalog mobile width, checklist account saving and reload, and full and short quiz result reloads. All nine existing GTA map routes and eight test routes under Minecraft and Red Dead returned their correct canonical pages. Hidden-map visibility and authenticated revalidation passed. Production has the earlier shared core model; this extension has not been applied there.
+Evidence: eight applied development migrations, atomic rollback and concurrent-save checks, all 472 web tests, the optimized web build and independent GPT-6.1-Sol review. Browser checks passed for map controls, catalog mobile width, checklist account saving and reload, and full and short quiz result reloads. All nine existing GTA map routes and eight test routes under Minecraft and Red Dead returned their correct canonical pages. Hidden-map visibility and authenticated revalidation passed. The production release passed migration, permission, snapshot and exact-SHA health checks, plus all nine owned live map URLs.
 
 QA cleanup removed all 12 temporary reference pages, both test accounts and their saved progress. The nine real GTA map rows remain.
 
@@ -44,7 +44,9 @@ Use `.agents/skills/bloxodes-game-plan/SKILL.md` to research a game and choose t
 
 `npm run import:gta-shared-maps` validates the nine existing GTA snapshots. Add `--apply` to import them into development. Repeated imports make no changes. Registered `gta-layered` and `gta5` engines keep their original data and interaction code. Database hashes protect those frozen snapshots, and renderer identity cannot change during an ordinary edit. A deliberate snapshot update requires a reviewed forward migration and updated authoring files. New simple GTA maps use `image-pins` and appear in the GTA directory and sitemap.
 
-For an authorized production release, apply the eight page-type migrations and import the nine GTA maps before deploying this web change. Verify the stored snapshots and published map rows first. The existing map routes now depend on those shared rows.
+The production release applied the eight page-type migrations and imported the nine GTA maps before web deployment. Stored snapshots and published map rows passed verification first. The existing map routes now depend on those shared rows.
+
+The production release used schema commit `048123eda0ed18f813da5fa6f7f776a7d6a8fc8e` and web commit `118b66d471623c520b1e9ae4457523c5d51fdf09`. [GitHub deployment 37492747348](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37492747348) passed exact-SHA web/database health. All nine map URLs, canonicals and GTA sitemap entries passed. The new quiz progress API returns private uncached responses and rejects anonymous requests. Web and Supabase container checks passed. No temporary test pages or accounts were published to production.
 
 ## Page Families
 

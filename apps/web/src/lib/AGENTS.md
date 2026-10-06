@@ -89,4 +89,4 @@ Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, perma
 
 ## Shared game reference pages
 
-`game-page-data.ts` validates map pins, quiz pools and plain catalog fields. `game-extra-pages.ts` reads protected published reference views and checklist tasks; keep game/parent visibility in those views. `game-quiz-progress.ts` owns the namespaced account API and calls the atomic history RPC. GTA map readers load stored snapshots rather than authoring files. Preserve the internal Roblox `wiki-collection` progress namespace. See `dev-docs/pipelines/content.md` for the development-only extension.
+`game-page-data.ts` validates map pins, quiz pools and plain catalog fields. `game-extra-pages.ts` reads protected published reference views and checklist tasks; keep game/parent visibility in those views. `game-quiz-progress.ts` owns the namespaced account API and calls the atomic history RPC. GTA map readers load stored snapshots rather than authoring files. Preserve the internal Roblox `wiki-collection` progress namespace. See `dev-docs/pipelines/content.md` for the shared extension and production release.

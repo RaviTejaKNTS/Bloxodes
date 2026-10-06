@@ -11,7 +11,7 @@ Evidence: development checks and independent review, production backup hashes an
 
 Managed development and production use `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate content tables. Roblox stays separate. The October 6 production release deployed `49cbe765bb1a8f13b6967e6fcee800960534760a`. Earlier game-specific evidence below records the storage used before this release.
 
-The next page-type extension is implemented in managed development. Use `bloxodes-game-plan` to choose useful page types for any non-Roblox title. Wiki and collection storage stays unchanged. Maps, quizzes, catalogs and shared standalone checklist routes are described in [content pipelines](content.md#shared-game-page-types-in-managed-development). The new extension is not yet in production.
+The page-type extension is live in managed development and production. Use `bloxodes-game-plan` to choose useful page types for any non-Roblox title. Wiki and collection storage stays unchanged. Maps, quizzes, catalogs and shared standalone checklist routes are described in [content pipelines](content.md#shared-game-page-types). The October 6 release applied its eight migrations and preserved all nine GTA maps before deploying dependent code.
 
 `games.kind` is only `franchise` or `game`. `parent_id` groups child titles under a franchise. A standalone game has no parent. All rows have a `namespace`, which is the root URL slug. Existing game metadata, IDs and relationships remain stored. Roblox does not join this registry.
 

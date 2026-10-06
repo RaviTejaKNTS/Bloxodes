@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 7rU01wFQvRcqSEvdmCFmjSrmA7ki5wTY7gEJMthsb2jisEFS1XHFT1LHbMHblLd
+\restrict TTeGmpiZHdpmfaqpsZ4wIsi18dLo1VcM2Hp86cWe49dEymG7JNSTeTw49N9f4mz
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
@@ -2773,7 +2773,11 @@ begin
  end if;
  if new.canonical_path not like '/'||new.namespace||'/%' then raise exception 'Page route must belong to its namespace'; end if;
  if new.canonical_path !~ '^/[a-z0-9/-]+$' or new.canonical_path like '%..%' then raise exception 'Invalid game content path'; end if;
- if tg_table_name<>'game_checklist_pages' and new.is_published and new.published_at is null then new.published_at:=now(); end if;
+ if tg_table_name='game_checklist_pages' then
+  if new.is_public and new.published_at is null then new.published_at:=now(); end if;
+ else
+  if new.is_published and new.published_at is null then new.published_at:=now(); end if;
+ end if;
  return new;
 end $_$;
 
@@ -2801,6 +2805,46 @@ end $$;
 
 
 ALTER FUNCTION public.prepare_game_data_owner() OWNER TO supabase_admin;
+
+--
+-- Name: prepare_game_extended_page(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION public.prepare_game_extended_page() RETURNS trigger
+    LANGUAGE plpgsql
+    SET search_path TO ''
+    AS $_$
+declare section_name text; expected text;
+begin
+ section_name:=case tg_table_name when 'game_map_pages' then 'maps' when 'game_quiz_pages' then 'quizzes' else 'catalog' end;
+ expected:='/'||new.namespace||'/'||section_name||'/'||new.slug;
+ if exists(select 1 from jsonb_array_elements(new.sources_json) source where jsonb_typeof(source) is distinct from 'object' or jsonb_typeof(source->'title') is distinct from 'string' or coalesce(source->>'url','')!~ '^https://[^[:space:]]+$') then raise exception 'Sources need a title and HTTPS URL'; end if;
+ if tg_op='UPDATE' and (new.namespace<>old.namespace or new.game_id<>old.game_id or new.slug<>old.slug or new.canonical_path<>old.canonical_path) then raise exception 'Page ownership and route are permanent'; end if;
+ if new.canonical_path is null then new.canonical_path:=expected; end if;
+ if new.canonical_path<>expected then raise exception 'Page route does not match its game and page type'; end if;
+ if new.is_published and new.published_at is null then new.published_at:=now(); end if;
+ new.updated_at:=now();
+ return new;
+end $_$;
+
+
+ALTER FUNCTION public.prepare_game_extended_page() OWNER TO supabase_admin;
+
+--
+-- Name: protect_game_checklist_task_owner(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION public.protect_game_checklist_task_owner() RETURNS trigger
+    LANGUAGE plpgsql
+    SET search_path TO ''
+    AS $$
+begin
+ if new.page_id<>old.page_id or new.namespace<>old.namespace or new.item_key<>old.item_key then raise exception 'Checklist task ownership and identity are permanent'; end if;
+ return new;
+end $$;
+
+
+ALTER FUNCTION public.protect_game_checklist_task_owner() OWNER TO supabase_admin;
 
 --
 -- Name: protect_game_code_identity(); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -2834,6 +2878,22 @@ end $$;
 
 
 ALTER FUNCTION public.protect_game_identity() OWNER TO supabase_admin;
+
+--
+-- Name: protect_game_map_renderer(); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION public.protect_game_map_renderer() RETURNS trigger
+    LANGUAGE plpgsql
+    SET search_path TO ''
+    AS $$
+begin
+ if new.renderer_key<>old.renderer_key then raise exception 'Map renderer identity is permanent; use a reviewed migration'; end if;
+ return new;
+end $$;
+
+
+ALTER FUNCTION public.protect_game_map_renderer() OWNER TO supabase_admin;
 
 --
 -- Name: protect_game_page_owner(); Type: FUNCTION; Schema: public; Owner: supabase_admin
@@ -2993,20 +3053,26 @@ CREATE FUNCTION public.publish_game_content_batch(target_namespace text, payload
 declare group_name text; table_name text; conflict_columns text; row_value jsonb; columns_sql text; updates_sql text; result_id uuid; results jsonb:='[]'::jsonb;
 begin
  if target_namespace !~ '^[a-z0-9]+(-[a-z0-9]+)*$' or target_namespace='roblox' then raise exception 'Invalid game namespace'; end if;
- if jsonb_typeof(payload)<>'object' or payload='{}'::jsonb or exists(select 1 from jsonb_object_keys(payload) key where key not in ('games','wiki','codesPages','tools','codes')) then raise exception 'Invalid game publication groups'; end if;
+ if jsonb_typeof(payload) is distinct from 'object' or payload='{}'::jsonb or exists(select 1 from jsonb_object_keys(payload) key where key not in ('games','wiki','codesPages','tools','maps','quizzes','catalog','checklists','checklistItems','codes')) then raise exception 'Invalid game publication groups'; end if;
+ perform pg_catalog.pg_advisory_xact_lock(pg_catalog.hashtextextended('game-publish:'||target_namespace,0));
  begin
-  foreach group_name in array array['games','wiki','codesPages','tools','codes'] loop
+  foreach group_name in array array['games','wiki','codesPages','tools','maps','quizzes','catalog','checklists','checklistItems','codes'] loop
    if not payload ? group_name then continue; end if;
-   if jsonb_typeof(payload->group_name)<>'array' or jsonb_array_length(payload->group_name)=0 then raise exception 'Invalid % rows',group_name; end if;
+   if jsonb_typeof(payload->group_name) is distinct from 'array' or jsonb_array_length(payload->group_name)=0 then raise exception 'Invalid % rows',group_name; end if;
    case group_name
     when 'games' then table_name:='games';conflict_columns:='namespace,slug,kind';
     when 'wiki' then table_name:='game_wiki_pages';conflict_columns:='game_id';
     when 'codesPages' then table_name:='game_code_pages';conflict_columns:='game_id';
     when 'tools' then table_name:='game_tool_pages';conflict_columns:='namespace,slug';
+    when 'maps' then table_name:='game_map_pages';conflict_columns:='namespace,slug';
+    when 'quizzes' then table_name:='game_quiz_pages';conflict_columns:='namespace,slug';
+    when 'catalog' then table_name:='game_catalog_pages';conflict_columns:='namespace,slug';
+    when 'checklists' then table_name:='game_checklist_pages';conflict_columns:='namespace,slug';
+    when 'checklistItems' then table_name:='game_checklist_items';conflict_columns:='page_id,item_key';
     else table_name:='game_codes';conflict_columns:='code_page_id,code';
    end case;
    for row_value in select value from jsonb_array_elements(payload->group_name) loop
-    if jsonb_typeof(row_value)<>'object' or row_value='{}'::jsonb then raise exception 'Invalid % row',group_name; end if;
+    if jsonb_typeof(row_value) is distinct from 'object' or row_value='{}'::jsonb then raise exception 'Invalid % row',group_name; end if;
     if row_value ? 'namespace' and row_value->>'namespace' is distinct from target_namespace then raise exception 'Cross-namespace publication rejected'; end if;
     if group_name='codes' then
      if not exists(select 1 from public.game_code_pages where id=(row_value->>'code_page_id')::uuid and namespace=target_namespace) then raise exception 'Code page ownership mismatch'; end if;
@@ -3020,6 +3086,7 @@ begin
     results:=results||jsonb_build_array(jsonb_build_object('group',group_name,'id',result_id));
    end loop;
   end loop;
+  if exists(select 1 from public.game_checklist_pages p where p.namespace=target_namespace and p.is_public and p.id in (select (entry->>'id')::uuid from jsonb_array_elements(results) entry where entry->>'group'='checklists' union select i.page_id from public.game_checklist_items i join jsonb_array_elements(results) entry on i.id=(entry->>'id')::uuid where entry->>'group'='checklistItems') and not exists(select 1 from public.game_checklist_items i where i.page_id=p.id and cardinality(string_to_array(i.section_code,'.'))=3)) then raise exception 'Public checklists need checkable tasks'; end if;
   if apply_changes is not true then raise exception 'Validated rollback-only publication' using errcode='PT001'; end if;
  exception when sqlstate 'PT001' then null;
  end;
@@ -3172,6 +3239,12 @@ begin
   select p.id,p.namespace,p.slug,p.title,p.meta_description,p.canonical_path,p.updated_at,p.is_published and g.is_published and coalesce(parent.is_published,true),'code' from public.game_code_pages p join public.games g on g.id=p.game_id left join public.games parent on parent.id=g.parent_id where p.namespace=target_namespace
   union all
   select p.id,p.namespace,p.slug,p.title,p.seo_description,p.canonical_path,p.updated_at,p.is_public and p.published_at<=now() and g.is_published and coalesce(parent.is_published,true),'checklist' from public.game_checklist_pages p join public.games g on g.id=p.game_id left join public.games parent on parent.id=g.parent_id where p.namespace=target_namespace
+  union all
+  select p.id,p.namespace,p.slug,p.title,p.meta_description,p.canonical_path,p.updated_at,p.is_published and g.is_published and coalesce(parent.is_published,true) and coalesce(p.published_at<=now(),true),'map' from public.game_map_pages p join public.games g on g.id=p.game_id left join public.games parent on parent.id=g.parent_id where p.namespace=target_namespace
+  union all
+  select p.id,p.namespace,p.slug,p.title,p.meta_description,p.canonical_path,p.updated_at,p.is_published and g.is_published and coalesce(parent.is_published,true) and coalesce(p.published_at<=now(),true),'quiz' from public.game_quiz_pages p join public.games g on g.id=p.game_id left join public.games parent on parent.id=g.parent_id where p.namespace=target_namespace
+  union all
+  select p.id,p.namespace,p.slug,p.title,p.meta_description,p.canonical_path,p.updated_at,p.is_published and g.is_published and coalesce(parent.is_published,true) and coalesce(p.published_at<=now(),true),'catalog' from public.game_catalog_pages p join public.games g on g.id=p.game_id left join public.games parent on parent.id=g.parent_id where p.namespace=target_namespace
  loop
   entity_kind:=case when row_data.page_kind='wiki' and row_data.namespace in ('gta','red-dead','minecraft') then replace(row_data.namespace,'-','_')||'_wiki' when row_data.page_kind='collection' and row_data.namespace in ('gta','red-dead','minecraft') then replace(row_data.namespace,'-','_')||'_wiki_collection' when row_data.page_kind='tool' and row_data.namespace='minecraft' then 'minecraft_tool' when row_data.page_kind='checklist' and row_data.namespace='gta' then 'gta_checklist' else 'game_'||row_data.page_kind end;
   perform public.upsert_search_index(entity_kind,row_data.id::text,row_data.slug,row_data.title,row_data.namespace||' '||row_data.page_kind,row_data.canonical_path,row_data.updated_at,row_data.visible,left(concat_ws(' ',row_data.title,row_data.summary,row_data.slug),4000));
@@ -5048,6 +5121,33 @@ $$;
 ALTER FUNCTION public.run_roblox_universe_hourly_prune(p_days integer, p_batch_size integer, p_max_batches integer) OWNER TO postgres;
 
 --
+-- Name: safe_game_content_url(text); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION public.safe_game_content_url(value text) RETURNS boolean
+    LANGUAGE plpgsql IMMUTABLE
+    SET search_path TO ''
+    AS $_$
+declare authority text; hostname text; port_text text;
+begin
+ if value is null or value ~ '[[:space:]]' or position(chr(92) in value)>0 then return false; end if;
+ if value ~ '^/[^/][a-zA-Z0-9/_.,%#?=&-]*$' then return value ~ '^/[a-zA-Z0-9_.,%#?=&-][a-zA-Z0-9/_.,%#?=&-]*$'; end if;
+ if value !~ '^https://[a-zA-Z0-9][a-zA-Z0-9.-]*(:[0-9]{1,5})?([/?#].*)?$' then return false; end if;
+ authority:=substring(value from '^https://([^/?#]+)');
+ hostname:=split_part(authority,':',1); port_text:=nullif(split_part(authority,':',2),'');
+ if port_text is not null and port_text::integer>65535 then return false; end if;
+ if hostname ~ '^[0-9.]+$' then
+  if cardinality(string_to_array(hostname,'.'))<>4 or family(hostname::inet)<>4 then return false; end if;
+ elsif hostname !~ '^([a-zA-Z0-9][a-zA-Z0-9-]*[.])*[a-zA-Z][a-zA-Z-]*$' then return false;
+ end if;
+ return true;
+exception when others then return false;
+end $_$;
+
+
+ALTER FUNCTION public.safe_game_content_url(value text) OWNER TO supabase_admin;
+
+--
 -- Name: sanitize_stats_creator_top_player(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -5101,6 +5201,26 @@ $$;
 
 
 ALTER FUNCTION public.sanitize_stats_game_current_player() OWNER TO postgres;
+
+--
+-- Name: save_game_quiz_progress(uuid, uuid, text, text[], integer, integer, jsonb); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION public.save_game_quiz_progress(target_user uuid, target_page uuid, target_namespace text, question_ids text[], score integer, total integer, breakdown jsonb) RETURNS void
+    LANGUAGE plpgsql
+    SET search_path TO ''
+    AS $$
+begin
+ if not exists(select 1 from public.game_quiz_pages_view where id=target_page and namespace=target_namespace) then raise exception 'Unknown published quiz'; end if;
+ insert into public.game_quiz_progress(user_id,quiz_page_id,namespace,seen_question_ids,last_score,last_total,last_breakdown,last_attempt_at)
+ values(target_user,target_page,target_namespace,question_ids,score,total,breakdown,now())
+ on conflict(user_id,quiz_page_id) do update set
+  seen_question_ids=ARRAY(select distinct item from unnest(public.game_quiz_progress.seen_question_ids || excluded.seen_question_ids) item order by item),
+  last_score=excluded.last_score,last_total=excluded.last_total,last_breakdown=excluded.last_breakdown,last_attempt_at=excluded.last_attempt_at,updated_at=now();
+end $$;
+
+
+ALTER FUNCTION public.save_game_quiz_progress(target_user uuid, target_page uuid, target_namespace text, question_ids text[], score integer, total integer, breakdown jsonb) OWNER TO supabase_admin;
 
 --
 -- Name: search_site(text, integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -5605,7 +5725,7 @@ CREATE FUNCTION public.trg_comments_revalidate_game_content() RETURNS trigger
 declare row_data jsonb; target_table text; page_path text;
 begin
  for row_data in select v from (values(case when tg_op in ('UPDATE','DELETE') then to_jsonb(old) end),(case when tg_op in ('INSERT','UPDATE') then to_jsonb(new) end)) r(v) where v is not null loop
-  target_table:=case when row_data->>'entity_type' in ('game_wiki','gta_wiki','red_dead_wiki','minecraft_wiki') then 'game_wiki_pages' when row_data->>'entity_type' in ('game_collection','gta_wiki_collection','red_dead_wiki_collection','minecraft_wiki_collection') then 'game_collection_pages' when row_data->>'entity_type' in ('game_tool','minecraft_tool') then 'game_tool_pages' when row_data->>'entity_type'='game_code' then 'game_code_pages' end;
+  target_table:=case when row_data->>'entity_type' in ('game_wiki','gta_wiki','red_dead_wiki','minecraft_wiki') then 'game_wiki_pages' when row_data->>'entity_type' in ('game_collection','gta_wiki_collection','red_dead_wiki_collection','minecraft_wiki_collection') then 'game_collection_pages' when row_data->>'entity_type' in ('game_tool','minecraft_tool') then 'game_tool_pages' when row_data->>'entity_type'='game_code' then 'game_code_pages' when row_data->>'entity_type'='game_map' then 'game_map_pages' when row_data->>'entity_type'='game_quiz' then 'game_quiz_pages' when row_data->>'entity_type'='game_catalog' then 'game_catalog_pages' end;
   if target_table is not null then
    execute format('select canonical_path from public.%I where id=$1',target_table) into page_path using (row_data->>'entity_id')::uuid;
    if page_path is not null then perform public.enqueue_revalidation('game_content',ltrim(page_path,'/'),'comments_'||lower(tg_op)); end if;
@@ -6618,7 +6738,7 @@ begin
  ns:=case when tg_op='DELETE' then old.namespace else new.namespace end;
  if tg_table_name='games' then
   perform public.refresh_game_content_index(ns);
-  for new_path in select canonical_path from public.game_wiki_pages where namespace=ns union select canonical_path from public.game_collection_pages where namespace=ns union select canonical_path from public.game_tool_pages where namespace=ns union select canonical_path from public.game_checklist_pages where namespace=ns union select canonical_path from public.game_code_pages where namespace=ns loop
+  for new_path in select canonical_path from public.game_wiki_pages where namespace=ns union select canonical_path from public.game_collection_pages where namespace=ns union select canonical_path from public.game_tool_pages where namespace=ns union select canonical_path from public.game_checklist_pages where namespace=ns union select canonical_path from public.game_code_pages where namespace=ns union select canonical_path from public.game_map_pages where namespace=ns union select canonical_path from public.game_quiz_pages where namespace=ns union select canonical_path from public.game_catalog_pages where namespace=ns loop
    perform public.enqueue_revalidation('game_content',ltrim(new_path,'/'),'games_'||lower(tg_op));
   end loop;
  else
@@ -7602,6 +7722,83 @@ $$;
 ALTER FUNCTION public.valid_game_codes_faq(value jsonb) OWNER TO supabase_admin;
 
 --
+-- Name: valid_game_page_data(text, jsonb); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION public.valid_game_page_data(kind text, data jsonb) RETURNS boolean
+    LANGUAGE plpgsql IMMUTABLE
+    SET search_path TO ''
+    AS $_$
+declare entry jsonb; question jsonb; option_data jsonb; seen text[]:='{}'; option_ids text[]; level_name text; columns_keys text[]:='{}';
+begin
+ if jsonb_typeof(data) is distinct from 'object' or octet_length(data::text)>4194304 then return false; end if;
+ if kind='map' then
+  if jsonb_typeof(data->'image') is distinct from 'string' or jsonb_typeof(data->'attribution') is distinct from 'string' or jsonb_typeof(data->'width') is distinct from 'number' or jsonb_typeof(data->'height') is distinct from 'number' or coalesce(data->>'attribution','')!~ '[^[:space:]]' or jsonb_typeof(data->'markers') is distinct from 'array' or jsonb_array_length(data->'markers')<1 or jsonb_array_length(data->'markers')>10000 or not public.safe_game_content_url(data->>'image') or not ((data->>'width')::numeric between 0.000001 and 1000000 and (data->>'height')::numeric between 0.000001 and 1000000) then return false; end if;
+  for entry in select value from jsonb_array_elements(data->'markers') loop
+   if jsonb_typeof(entry->'id') is distinct from 'string' or jsonb_typeof(entry->'title') is distinct from 'string' or jsonb_typeof(entry->'x') is distinct from 'number' or jsonb_typeof(entry->'y') is distinct from 'number' or coalesce(entry->>'id','')!~ '[^[:space:]]' or coalesce(entry->>'title','')!~ '[^[:space:]]' or entry->>'id'=any(seen) or not ((entry->>'x')::numeric between 0 and 100 and (entry->>'y')::numeric between 0 and 100) then return false; end if;
+   if entry ? 'href' and (jsonb_typeof(entry->'href') is distinct from 'string' or not public.safe_game_content_url(entry->>'href')) then return false; end if;
+   if entry ? 'category' and (jsonb_typeof(entry->'category') is distinct from 'string' or coalesce(entry->>'category','')!~ '[^[:space:]]') then return false; end if;
+   if entry ? 'description' and jsonb_typeof(entry->'description') is distinct from 'string' then return false; end if;
+   seen:=array_append(seen,entry->>'id');
+  end loop;
+ elsif kind='quiz' then
+  foreach level_name in array array['easy','medium','hard'] loop
+   if jsonb_typeof(data->level_name) is distinct from 'array' or jsonb_array_length(data->level_name)<1 or jsonb_array_length(data->level_name)>1000 then return false; end if;
+   for question in select value from jsonb_array_elements(data->level_name) loop
+    if jsonb_typeof(question->'id') is distinct from 'string' or jsonb_typeof(question->'question') is distinct from 'string' or coalesce(question->>'id','')='' or question->>'id' ~ '^[[:space:]]|[[:space:]]$' or question->>'id'=any(seen) or coalesce(question->>'question','')!~ '[^[:space:]]' or jsonb_typeof(question->'options') is distinct from 'array' or jsonb_array_length(question->'options')<>4 then return false; end if;
+    if question ? 'image' and jsonb_typeof(question->'image')<>'null' and (jsonb_typeof(question->'image') is distinct from 'string' or not public.safe_game_content_url(question->>'image')) then return false; end if;
+    seen:=array_append(seen,question->>'id'); option_ids:='{}';
+    for option_data in select value from jsonb_array_elements(question->'options') loop
+     if jsonb_typeof(option_data->'id') is distinct from 'string' or jsonb_typeof(option_data->'text') is distinct from 'string' or coalesce(option_data->>'id','')='' or option_data->>'id' ~ '^[[:space:]]|[[:space:]]$' or coalesce(option_data->>'text','')!~ '[^[:space:]]' or option_data->>'id'=any(option_ids) then return false; end if;
+     option_ids:=array_append(option_ids,option_data->>'id');
+    end loop;
+    if jsonb_typeof(question->'correctOptionId') is distinct from 'string' or not coalesce(question->>'correctOptionId'=any(option_ids),false) then return false; end if;
+   end loop;
+  end loop;
+ elsif kind='catalog' then
+  if jsonb_typeof(data->'columns') is distinct from 'array' or jsonb_array_length(data->'columns')<1 or jsonb_array_length(data->'columns')>30 or jsonb_typeof(data->'items') is distinct from 'array' or jsonb_array_length(data->'items')<1 or jsonb_array_length(data->'items')>10000 then return false; end if;
+  for entry in select value from jsonb_array_elements(data->'columns') loop
+   if jsonb_typeof(entry->'key') is distinct from 'string' or jsonb_typeof(entry->'label') is distinct from 'string' or entry->>'key'='id' or coalesce(entry->>'key','')!~ '^[a-z][a-z0-9_]*$' or coalesce(entry->>'label','')!~ '[^[:space:]]' or entry->>'key'=any(columns_keys) then return false; end if;
+   columns_keys:=array_append(columns_keys,entry->>'key');
+  end loop;
+  for entry in select value from jsonb_array_elements(data->'items') loop
+   if jsonb_typeof(entry) is distinct from 'object' or jsonb_typeof(entry->'id') is distinct from 'string' or coalesce(entry->>'id','')!~ '[^[:space:]]' or entry->>'id'=any(seen) or exists(select 1 from jsonb_each(entry) fields where fields.key<>'id' and (not fields.key=any(columns_keys) or jsonb_typeof(fields.value) not in ('string','number','boolean','null') or (jsonb_typeof(fields.value)='number' and abs((fields.value::text)::numeric)>1.7976931348623157e308))) then return false; end if;
+   seen:=array_append(seen,entry->>'id');
+  end loop;
+ else return false;
+ end if;
+ return true;
+exception when others then return false;
+end $_$;
+
+
+ALTER FUNCTION public.valid_game_page_data(kind text, data jsonb) OWNER TO supabase_admin;
+
+--
+-- Name: valid_gta_map_snapshot(text, text, jsonb); Type: FUNCTION; Schema: public; Owner: supabase_admin
+--
+
+CREATE FUNCTION public.valid_gta_map_snapshot(slug text, renderer text, data jsonb) RETURNS boolean
+    LANGUAGE sql IMMUTABLE
+    SET search_path TO ''
+    AS $$
+ select renderer=case when slug='gta5' then 'gta5' else 'gta-layered' end and encode(extensions.digest(data::text,'sha256'),'hex')=case slug
+ when 'gta-4' then '393f66b8f803a7b34bb6396cfe605fcc7b20d964964e9d70cbd7bf6506085b68'
+ when 'gta-chinatown-wars' then '8fee8a2fbaacdc387c84aabff030cf13c110262caf9d8450781a7b998a137832'
+ when 'gta-iii' then '7243483239cf9ded6f8a4ae5d82d47802380fa27160041db94451894fafc789f'
+ when 'gta-liberty-city-stories' then 'e971f3fb8934fccf58a79a1d562f1b826a7d5d332bcaa2692ca325bd7941b64a'
+ when 'gta-online' then 'ecafbe58217508c6ad4e1e48157bcf46f1cd48b30dcd6a455fb5f0c59688c335'
+ when 'gta-san-andreas' then '0f47f7b10c793147d2cf777c75a65005f51dd773f392bc197a45f05bb57ffb19'
+ when 'gta-vice-city' then 'fd5752da5114de9c2da000e926437651cb283b86ca52096f7e1758b72f9196d4'
+ when 'gta-vice-city-stories' then '3506028acc165c5892f23c8a3d6d98abfd989e67bd34452203ec1714b951ca20'
+ when 'gta5' then '5a01530f556e974af20f28e02d9e2620d51af2cd8ccd8298c1e59b78eb5ece1f'
+ else null end
+$$;
+
+
+ALTER FUNCTION public.valid_gta_map_snapshot(slug text, renderer text, data jsonb) OWNER TO supabase_admin;
+
+--
 -- Name: validate_game_collection_publication(); Type: FUNCTION; Schema: public; Owner: supabase_admin
 --
 
@@ -8494,7 +8691,7 @@ CREATE TABLE public.comments (
     guest_email text,
     page_type text,
     page_url text,
-    CONSTRAINT comments_entity_type_check CHECK ((entity_type = ANY (ARRAY['code'::text, 'article'::text, 'catalog'::text, 'event'::text, 'tool'::text, 'wiki'::text, 'wiki_collection'::text, 'gta_wiki'::text, 'gta_wiki_collection'::text, 'red_dead_wiki'::text, 'red_dead_wiki_collection'::text, 'minecraft_wiki'::text, 'minecraft_wiki_collection'::text, 'minecraft_tool'::text, 'game_wiki'::text, 'game_collection'::text, 'game_tool'::text, 'game_code'::text]))),
+    CONSTRAINT comments_entity_type_check CHECK ((entity_type = ANY (ARRAY['code'::text, 'article'::text, 'catalog'::text, 'event'::text, 'tool'::text, 'wiki'::text, 'wiki_collection'::text, 'gta_wiki'::text, 'gta_wiki_collection'::text, 'red_dead_wiki'::text, 'red_dead_wiki_collection'::text, 'minecraft_wiki'::text, 'minecraft_wiki_collection'::text, 'minecraft_tool'::text, 'game_wiki'::text, 'game_collection'::text, 'game_tool'::text, 'game_code'::text, 'game_map'::text, 'game_quiz'::text, 'game_catalog'::text]))),
     CONSTRAINT comments_status_check CHECK ((status = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text, 'deleted'::text])))
 );
 
@@ -8546,6 +8743,117 @@ CREATE TABLE public.events_pages (
 ALTER TABLE public.events_pages OWNER TO postgres;
 
 --
+-- Name: game_catalog_pages; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE public.game_catalog_pages (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    namespace text NOT NULL,
+    game_id uuid NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    seo_title text,
+    meta_description text,
+    intro_md text,
+    description_md text,
+    sources_json jsonb DEFAULT '[]'::jsonb NOT NULL,
+    catalog_data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    canonical_path text NOT NULL,
+    is_published boolean DEFAULT false NOT NULL,
+    published_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT game_catalog_pages_catalog_data_check CHECK ((jsonb_typeof(catalog_data) = 'object'::text)),
+    CONSTRAINT game_catalog_pages_check CHECK (((NOT is_published) OR public.valid_game_page_data('catalog'::text, catalog_data))),
+    CONSTRAINT game_catalog_pages_slug_check CHECK ((slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text)),
+    CONSTRAINT game_catalog_pages_sources_json_check CHECK ((jsonb_typeof(sources_json) = 'array'::text)),
+    CONSTRAINT game_catalog_pages_title_check CHECK ((length(btrim(title)) > 0))
+);
+
+
+ALTER TABLE public.game_catalog_pages OWNER TO supabase_admin;
+
+--
+-- Name: games; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE public.games (
+    id uuid DEFAULT extensions.uuid_generate_v4() NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    short_title text,
+    installment text,
+    content_kind text DEFAULT 'game'::text NOT NULL,
+    parent_game_id uuid,
+    developer text,
+    publisher text,
+    description_md text,
+    cover_image text,
+    hero_image text,
+    official_url text,
+    release_dates_json jsonb DEFAULT '{}'::jsonb NOT NULL,
+    platforms_json jsonb DEFAULT '[]'::jsonb NOT NULL,
+    status text DEFAULT 'released'::text NOT NULL,
+    is_published boolean DEFAULT false NOT NULL,
+    published_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    namespace text DEFAULT ''::text NOT NULL,
+    kind text DEFAULT 'game'::text NOT NULL,
+    parent_id uuid,
+    CONSTRAINT games_check CHECK (((kind = 'game'::text) OR (parent_id IS NULL))),
+    CONSTRAINT games_check1 CHECK (((parent_id IS NOT NULL) OR (slug = namespace))),
+    CONSTRAINT games_kind_check CHECK ((kind = ANY (ARRAY['franchise'::text, 'game'::text]))),
+    CONSTRAINT games_namespace_check CHECK ((namespace ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text)),
+    CONSTRAINT games_namespace_check1 CHECK ((namespace <> 'roblox'::text)),
+    CONSTRAINT games_parent_not_self CHECK (((parent_id IS NULL) OR (parent_id <> id))),
+    CONSTRAINT games_progress_namespace_check CHECK ((namespace <> 'wiki-collection'::text)),
+    CONSTRAINT games_reserved_namespace_check CHECK ((namespace <> ALL (ARRAY['roblox'::text, 'games'::text, 'wiki'::text, 'codes'::text, 'tools'::text, 'articles'::text, 'catalog'::text, 'stats'::text, 'checklists'::text, 'quizzes'::text, 'events'::text, 'puzzles'::text, 'authors'::text, 'about'::text, 'contact'::text, 'disclaimer'::text, 'lists'::text, 'browser-extension'::text, 'editorial-guidelines'::text, 'how-we-gather-and-verify-codes'::text, 'terms-of-service'::text, 'privacy-policy'::text, 'cookie-settings'::text, 'account-deletion'::text, 'api'::text, 'auth'::text, 'account'::text, 'login'::text, 'logout'::text, 'search'::text, 'sitemaps'::text, 'feed'::text]))),
+    CONSTRAINT red_dead_games_content_kind_check CHECK ((content_kind = ANY (ARRAY['game'::text, 'expansion'::text, 'online'::text]))),
+    CONSTRAINT red_dead_games_parent_not_self CHECK (((parent_game_id IS NULL) OR (parent_game_id <> id))),
+    CONSTRAINT red_dead_games_platforms_array CHECK ((jsonb_typeof(platforms_json) = 'array'::text)),
+    CONSTRAINT red_dead_games_release_dates_object CHECK ((jsonb_typeof(release_dates_json) = 'object'::text)),
+    CONSTRAINT red_dead_games_slug_not_blank CHECK ((length(btrim(slug)) > 0)),
+    CONSTRAINT red_dead_games_status_check CHECK ((status = ANY (ARRAY['announced'::text, 'upcoming'::text, 'released'::text]))),
+    CONSTRAINT red_dead_games_title_not_blank CHECK ((length(btrim(title)) > 0))
+);
+
+
+ALTER TABLE public.games OWNER TO supabase_admin;
+
+--
+-- Name: game_catalog_pages_view; Type: VIEW; Schema: public; Owner: supabase_admin
+--
+
+CREATE VIEW public.game_catalog_pages_view WITH (security_invoker='true') AS
+ SELECT p.id,
+    p.namespace,
+    p.game_id,
+    p.slug,
+    p.title,
+    p.seo_title,
+    p.meta_description,
+    p.intro_md,
+    p.description_md,
+    p.sources_json,
+    p.catalog_data,
+    p.canonical_path,
+    p.is_published,
+    p.published_at,
+    p.created_at,
+    p.updated_at,
+    g.title AS game_title,
+    g.slug AS game_slug
+   FROM (public.game_catalog_pages p
+     JOIN public.games g ON ((g.id = p.game_id)))
+  WHERE (p.is_published AND g.is_published AND ((p.published_at IS NULL) OR (p.published_at <= now())) AND (NOT (EXISTS ( SELECT 1
+           FROM public.games parent
+          WHERE ((parent.id = g.parent_id) AND (NOT parent.is_published))))));
+
+
+ALTER VIEW public.game_catalog_pages_view OWNER TO supabase_admin;
+
+--
 -- Name: game_checklist_items; Type: TABLE; Schema: public; Owner: supabase_admin
 --
 
@@ -8593,53 +8901,6 @@ CREATE TABLE public.game_checklist_pages (
 
 
 ALTER TABLE public.game_checklist_pages OWNER TO supabase_admin;
-
---
--- Name: games; Type: TABLE; Schema: public; Owner: supabase_admin
---
-
-CREATE TABLE public.games (
-    id uuid DEFAULT extensions.uuid_generate_v4() NOT NULL,
-    slug text NOT NULL,
-    title text NOT NULL,
-    short_title text,
-    installment text,
-    content_kind text DEFAULT 'game'::text NOT NULL,
-    parent_game_id uuid,
-    developer text,
-    publisher text,
-    description_md text,
-    cover_image text,
-    hero_image text,
-    official_url text,
-    release_dates_json jsonb DEFAULT '{}'::jsonb NOT NULL,
-    platforms_json jsonb DEFAULT '[]'::jsonb NOT NULL,
-    status text DEFAULT 'released'::text NOT NULL,
-    is_published boolean DEFAULT false NOT NULL,
-    published_at timestamp with time zone,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    namespace text DEFAULT ''::text NOT NULL,
-    kind text DEFAULT 'game'::text NOT NULL,
-    parent_id uuid,
-    CONSTRAINT games_check CHECK (((kind = 'game'::text) OR (parent_id IS NULL))),
-    CONSTRAINT games_check1 CHECK (((parent_id IS NOT NULL) OR (slug = namespace))),
-    CONSTRAINT games_kind_check CHECK ((kind = ANY (ARRAY['franchise'::text, 'game'::text]))),
-    CONSTRAINT games_namespace_check CHECK ((namespace ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text)),
-    CONSTRAINT games_namespace_check1 CHECK ((namespace <> 'roblox'::text)),
-    CONSTRAINT games_parent_not_self CHECK (((parent_id IS NULL) OR (parent_id <> id))),
-    CONSTRAINT games_reserved_namespace_check CHECK ((namespace <> ALL (ARRAY['roblox'::text, 'games'::text, 'wiki'::text, 'codes'::text, 'tools'::text, 'articles'::text, 'catalog'::text, 'stats'::text, 'checklists'::text, 'quizzes'::text, 'events'::text, 'puzzles'::text, 'authors'::text, 'about'::text, 'contact'::text, 'disclaimer'::text, 'lists'::text, 'browser-extension'::text, 'editorial-guidelines'::text, 'how-we-gather-and-verify-codes'::text, 'terms-of-service'::text, 'privacy-policy'::text, 'cookie-settings'::text, 'account-deletion'::text, 'api'::text, 'auth'::text, 'account'::text, 'login'::text, 'logout'::text, 'search'::text, 'sitemaps'::text, 'feed'::text]))),
-    CONSTRAINT red_dead_games_content_kind_check CHECK ((content_kind = ANY (ARRAY['game'::text, 'expansion'::text, 'online'::text]))),
-    CONSTRAINT red_dead_games_parent_not_self CHECK (((parent_game_id IS NULL) OR (parent_game_id <> id))),
-    CONSTRAINT red_dead_games_platforms_array CHECK ((jsonb_typeof(platforms_json) = 'array'::text)),
-    CONSTRAINT red_dead_games_release_dates_object CHECK ((jsonb_typeof(release_dates_json) = 'object'::text)),
-    CONSTRAINT red_dead_games_slug_not_blank CHECK ((length(btrim(slug)) > 0)),
-    CONSTRAINT red_dead_games_status_check CHECK ((status = ANY (ARRAY['announced'::text, 'upcoming'::text, 'released'::text]))),
-    CONSTRAINT red_dead_games_title_not_blank CHECK ((length(btrim(title)) > 0))
-);
-
-
-ALTER TABLE public.games OWNER TO supabase_admin;
 
 --
 -- Name: game_checklist_pages_view; Type: VIEW; Schema: public; Owner: supabase_admin
@@ -8989,6 +9250,158 @@ CREATE TABLE public.game_generation_queue (
 
 
 ALTER TABLE public.game_generation_queue OWNER TO postgres;
+
+--
+-- Name: game_map_pages; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE public.game_map_pages (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    namespace text NOT NULL,
+    game_id uuid NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    seo_title text,
+    meta_description text,
+    intro_md text,
+    description_md text,
+    sources_json jsonb DEFAULT '[]'::jsonb NOT NULL,
+    renderer_key text DEFAULT 'image-pins'::text NOT NULL,
+    map_data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    canonical_path text NOT NULL,
+    is_published boolean DEFAULT false NOT NULL,
+    published_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT game_map_pages_check CHECK (((namespace = 'gta'::text) OR (renderer_key = 'image-pins'::text))),
+    CONSTRAINT game_map_pages_check1 CHECK (((NOT is_published) OR ((renderer_key = 'image-pins'::text) AND public.valid_game_page_data('map'::text, map_data)) OR ((namespace = 'gta'::text) AND (renderer_key = ANY (ARRAY['gta-layered'::text, 'gta5'::text])) AND (map_data <> '{}'::jsonb)))),
+    CONSTRAINT game_map_pages_map_data_check CHECK ((jsonb_typeof(map_data) = 'object'::text)),
+    CONSTRAINT game_map_pages_renderer_key_check CHECK ((renderer_key = ANY (ARRAY['image-pins'::text, 'gta-layered'::text, 'gta5'::text]))),
+    CONSTRAINT game_map_pages_slug_check CHECK ((slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text)),
+    CONSTRAINT game_map_pages_sources_json_check CHECK ((jsonb_typeof(sources_json) = 'array'::text)),
+    CONSTRAINT game_map_pages_title_check CHECK ((length(btrim(title)) > 0)),
+    CONSTRAINT game_registered_map_snapshot_check CHECK (((renderer_key = 'image-pins'::text) OR (public.valid_gta_map_snapshot(slug, renderer_key, map_data) IS TRUE)))
+);
+
+
+ALTER TABLE public.game_map_pages OWNER TO supabase_admin;
+
+--
+-- Name: game_map_pages_view; Type: VIEW; Schema: public; Owner: supabase_admin
+--
+
+CREATE VIEW public.game_map_pages_view WITH (security_invoker='true') AS
+ SELECT p.id,
+    p.namespace,
+    p.game_id,
+    p.slug,
+    p.title,
+    p.seo_title,
+    p.meta_description,
+    p.intro_md,
+    p.description_md,
+    p.sources_json,
+    p.renderer_key,
+    p.map_data,
+    p.canonical_path,
+    p.is_published,
+    p.published_at,
+    p.created_at,
+    p.updated_at,
+    g.title AS game_title,
+    g.slug AS game_slug
+   FROM (public.game_map_pages p
+     JOIN public.games g ON ((g.id = p.game_id)))
+  WHERE (p.is_published AND g.is_published AND ((p.published_at IS NULL) OR (p.published_at <= now())) AND (NOT (EXISTS ( SELECT 1
+           FROM public.games parent
+          WHERE ((parent.id = g.parent_id) AND (NOT parent.is_published))))));
+
+
+ALTER VIEW public.game_map_pages_view OWNER TO supabase_admin;
+
+--
+-- Name: game_quiz_pages; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE public.game_quiz_pages (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    namespace text NOT NULL,
+    game_id uuid NOT NULL,
+    slug text NOT NULL,
+    title text NOT NULL,
+    seo_title text,
+    meta_description text,
+    intro_md text,
+    description_md text,
+    sources_json jsonb DEFAULT '[]'::jsonb NOT NULL,
+    quiz_data jsonb DEFAULT '{}'::jsonb NOT NULL,
+    canonical_path text NOT NULL,
+    is_published boolean DEFAULT false NOT NULL,
+    published_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT game_quiz_pages_check CHECK (((NOT is_published) OR public.valid_game_page_data('quiz'::text, quiz_data))),
+    CONSTRAINT game_quiz_pages_quiz_data_check CHECK ((jsonb_typeof(quiz_data) = 'object'::text)),
+    CONSTRAINT game_quiz_pages_slug_check CHECK ((slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'::text)),
+    CONSTRAINT game_quiz_pages_sources_json_check CHECK ((jsonb_typeof(sources_json) = 'array'::text)),
+    CONSTRAINT game_quiz_pages_title_check CHECK ((length(btrim(title)) > 0))
+);
+
+
+ALTER TABLE public.game_quiz_pages OWNER TO supabase_admin;
+
+--
+-- Name: game_quiz_pages_view; Type: VIEW; Schema: public; Owner: supabase_admin
+--
+
+CREATE VIEW public.game_quiz_pages_view WITH (security_invoker='true') AS
+ SELECT p.id,
+    p.namespace,
+    p.game_id,
+    p.slug,
+    p.title,
+    p.seo_title,
+    p.meta_description,
+    p.intro_md,
+    p.description_md,
+    p.sources_json,
+    p.quiz_data,
+    p.canonical_path,
+    p.is_published,
+    p.published_at,
+    p.created_at,
+    p.updated_at,
+    g.title AS game_title,
+    g.slug AS game_slug
+   FROM (public.game_quiz_pages p
+     JOIN public.games g ON ((g.id = p.game_id)))
+  WHERE (p.is_published AND g.is_published AND ((p.published_at IS NULL) OR (p.published_at <= now())) AND (NOT (EXISTS ( SELECT 1
+           FROM public.games parent
+          WHERE ((parent.id = g.parent_id) AND (NOT parent.is_published))))));
+
+
+ALTER VIEW public.game_quiz_pages_view OWNER TO supabase_admin;
+
+--
+-- Name: game_quiz_progress; Type: TABLE; Schema: public; Owner: supabase_admin
+--
+
+CREATE TABLE public.game_quiz_progress (
+    user_id uuid NOT NULL,
+    quiz_page_id uuid NOT NULL,
+    namespace text NOT NULL,
+    seen_question_ids text[] DEFAULT '{}'::text[] NOT NULL,
+    last_score integer,
+    last_total integer,
+    last_breakdown jsonb DEFAULT '{}'::jsonb NOT NULL,
+    last_attempt_at timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    CONSTRAINT game_quiz_progress_check CHECK (((last_score >= 0) AND (last_total >= last_score)))
+);
+
+
+ALTER TABLE public.game_quiz_progress OWNER TO supabase_admin;
 
 --
 -- Name: game_releases; Type: TABLE; Schema: public; Owner: supabase_admin
@@ -11768,6 +12181,38 @@ ALTER TABLE ONLY public.events_pages
 
 
 --
+-- Name: game_catalog_pages game_catalog_pages_canonical_path_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_catalog_pages
+    ADD CONSTRAINT game_catalog_pages_canonical_path_key UNIQUE (canonical_path);
+
+
+--
+-- Name: game_catalog_pages game_catalog_pages_id_namespace_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_catalog_pages
+    ADD CONSTRAINT game_catalog_pages_id_namespace_key UNIQUE (id, namespace);
+
+
+--
+-- Name: game_catalog_pages game_catalog_pages_namespace_slug_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_catalog_pages
+    ADD CONSTRAINT game_catalog_pages_namespace_slug_key UNIQUE (namespace, slug);
+
+
+--
+-- Name: game_catalog_pages game_catalog_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_catalog_pages
+    ADD CONSTRAINT game_catalog_pages_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: game_checklist_items game_checklist_items_page_id_item_key_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
 --
 
@@ -11925,6 +12370,78 @@ ALTER TABLE ONLY public.game_collection_progress
 
 ALTER TABLE ONLY public.game_generation_queue
     ADD CONSTRAINT game_generation_queue_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: game_map_pages game_map_pages_canonical_path_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_map_pages
+    ADD CONSTRAINT game_map_pages_canonical_path_key UNIQUE (canonical_path);
+
+
+--
+-- Name: game_map_pages game_map_pages_id_namespace_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_map_pages
+    ADD CONSTRAINT game_map_pages_id_namespace_key UNIQUE (id, namespace);
+
+
+--
+-- Name: game_map_pages game_map_pages_namespace_slug_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_map_pages
+    ADD CONSTRAINT game_map_pages_namespace_slug_key UNIQUE (namespace, slug);
+
+
+--
+-- Name: game_map_pages game_map_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_map_pages
+    ADD CONSTRAINT game_map_pages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: game_quiz_pages game_quiz_pages_canonical_path_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_pages
+    ADD CONSTRAINT game_quiz_pages_canonical_path_key UNIQUE (canonical_path);
+
+
+--
+-- Name: game_quiz_pages game_quiz_pages_id_namespace_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_pages
+    ADD CONSTRAINT game_quiz_pages_id_namespace_key UNIQUE (id, namespace);
+
+
+--
+-- Name: game_quiz_pages game_quiz_pages_namespace_slug_key; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_pages
+    ADD CONSTRAINT game_quiz_pages_namespace_slug_key UNIQUE (namespace, slug);
+
+
+--
+-- Name: game_quiz_pages game_quiz_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_pages
+    ADD CONSTRAINT game_quiz_pages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: game_quiz_progress game_quiz_progress_pkey; Type: CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_progress
+    ADD CONSTRAINT game_quiz_progress_pkey PRIMARY KEY (user_id, quiz_page_id);
 
 
 --
@@ -12688,6 +13205,13 @@ ALTER TABLE ONLY public.wiki_pages
 
 
 --
+-- Name: game_catalog_owner_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX game_catalog_owner_idx ON public.game_catalog_pages USING btree (game_id, namespace);
+
+
+--
 -- Name: game_checklist_items_owner_idx; Type: INDEX; Schema: public; Owner: supabase_admin
 --
 
@@ -12765,6 +13289,13 @@ CREATE INDEX game_items_namespace_dataset_idx ON public.game_collection_items US
 
 
 --
+-- Name: game_map_owner_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX game_map_owner_idx ON public.game_map_pages USING btree (game_id, namespace);
+
+
+--
 -- Name: game_namespace_root_idx; Type: INDEX; Schema: public; Owner: supabase_admin
 --
 
@@ -12776,6 +13307,20 @@ CREATE UNIQUE INDEX game_namespace_root_idx ON public.games USING btree (namespa
 --
 
 CREATE INDEX game_progress_collection_idx ON public.game_collection_progress USING btree (namespace, collection_code);
+
+
+--
+-- Name: game_quiz_owner_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX game_quiz_owner_idx ON public.game_quiz_pages USING btree (game_id, namespace);
+
+
+--
+-- Name: game_quiz_progress_owner_idx; Type: INDEX; Schema: public; Owner: supabase_admin
+--
+
+CREATE INDEX game_quiz_progress_owner_idx ON public.game_quiz_progress USING btree (quiz_page_id, namespace);
 
 
 --
@@ -14788,6 +15333,13 @@ CREATE TRIGGER game_collection_touch BEFORE UPDATE ON public.game_collection_pag
 
 
 --
+-- Name: game_catalog_pages game_content_changed; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER game_content_changed AFTER INSERT OR DELETE OR UPDATE ON public.game_catalog_pages FOR EACH ROW EXECUTE FUNCTION public.trg_game_content_changed();
+
+
+--
 -- Name: game_checklist_pages game_content_changed; Type: TRIGGER; Schema: public; Owner: supabase_admin
 --
 
@@ -14806,6 +15358,20 @@ CREATE TRIGGER game_content_changed AFTER INSERT OR DELETE OR UPDATE ON public.g
 --
 
 CREATE TRIGGER game_content_changed AFTER INSERT OR DELETE OR UPDATE ON public.game_collection_pages FOR EACH ROW EXECUTE FUNCTION public.trg_game_content_changed();
+
+
+--
+-- Name: game_map_pages game_content_changed; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER game_content_changed AFTER INSERT OR DELETE OR UPDATE ON public.game_map_pages FOR EACH ROW EXECUTE FUNCTION public.trg_game_content_changed();
+
+
+--
+-- Name: game_quiz_pages game_content_changed; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER game_content_changed AFTER INSERT OR DELETE OR UPDATE ON public.game_quiz_pages FOR EACH ROW EXECUTE FUNCTION public.trg_game_content_changed();
 
 
 --
@@ -14921,6 +15487,34 @@ CREATE TRIGGER prepare_game_data_owner BEFORE INSERT OR UPDATE ON public.game_co
 
 
 --
+-- Name: game_catalog_pages prepare_game_extended_page; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER prepare_game_extended_page BEFORE INSERT OR UPDATE ON public.game_catalog_pages FOR EACH ROW EXECUTE FUNCTION public.prepare_game_extended_page();
+
+
+--
+-- Name: game_map_pages prepare_game_extended_page; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER prepare_game_extended_page BEFORE INSERT OR UPDATE ON public.game_map_pages FOR EACH ROW EXECUTE FUNCTION public.prepare_game_extended_page();
+
+
+--
+-- Name: game_quiz_pages prepare_game_extended_page; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER prepare_game_extended_page BEFORE INSERT OR UPDATE ON public.game_quiz_pages FOR EACH ROW EXECUTE FUNCTION public.prepare_game_extended_page();
+
+
+--
+-- Name: game_checklist_items protect_game_checklist_task_owner; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER protect_game_checklist_task_owner BEFORE UPDATE ON public.game_checklist_items FOR EACH ROW EXECUTE FUNCTION public.protect_game_checklist_task_owner();
+
+
+--
 -- Name: game_codes protect_game_code_identity; Type: TRIGGER; Schema: public; Owner: supabase_admin
 --
 
@@ -14932,6 +15526,13 @@ CREATE TRIGGER protect_game_code_identity BEFORE UPDATE ON public.game_codes FOR
 --
 
 CREATE TRIGGER protect_game_identity BEFORE UPDATE ON public.games FOR EACH ROW EXECUTE FUNCTION public.protect_game_identity();
+
+
+--
+-- Name: game_map_pages protect_game_map_renderer; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER protect_game_map_renderer BEFORE UPDATE ON public.game_map_pages FOR EACH ROW EXECUTE FUNCTION public.protect_game_map_renderer();
 
 
 --
@@ -14995,6 +15596,13 @@ CREATE TRIGGER protect_game_runtime_insert BEFORE INSERT ON public.game_collecti
 --
 
 CREATE TRIGGER touch_game_codes BEFORE UPDATE ON public.game_code_pages FOR EACH ROW EXECUTE FUNCTION public.game_content_touch();
+
+
+--
+-- Name: game_quiz_progress touch_game_quiz_progress; Type: TRIGGER; Schema: public; Owner: supabase_admin
+--
+
+CREATE TRIGGER touch_game_quiz_progress BEFORE UPDATE ON public.game_quiz_progress FOR EACH ROW EXECUTE FUNCTION public.game_content_touch();
 
 
 --
@@ -16001,6 +16609,14 @@ ALTER TABLE ONLY public.events_pages
 
 
 --
+-- Name: game_catalog_pages game_catalog_pages_game_id_namespace_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_catalog_pages
+    ADD CONSTRAINT game_catalog_pages_game_id_namespace_fkey FOREIGN KEY (game_id, namespace) REFERENCES public.games(id, namespace);
+
+
+--
 -- Name: game_checklist_items game_checklist_items_page_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
 --
 
@@ -16094,6 +16710,38 @@ ALTER TABLE ONLY public.game_collection_progress
 
 ALTER TABLE ONLY public.game_collection_progress
     ADD CONSTRAINT game_collection_progress_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.app_users(user_id) ON DELETE CASCADE;
+
+
+--
+-- Name: game_map_pages game_map_pages_game_id_namespace_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_map_pages
+    ADD CONSTRAINT game_map_pages_game_id_namespace_fkey FOREIGN KEY (game_id, namespace) REFERENCES public.games(id, namespace);
+
+
+--
+-- Name: game_quiz_pages game_quiz_pages_game_id_namespace_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_pages
+    ADD CONSTRAINT game_quiz_pages_game_id_namespace_fkey FOREIGN KEY (game_id, namespace) REFERENCES public.games(id, namespace);
+
+
+--
+-- Name: game_quiz_progress game_quiz_progress_quiz_page_id_namespace_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_progress
+    ADD CONSTRAINT game_quiz_progress_quiz_page_id_namespace_fkey FOREIGN KEY (quiz_page_id, namespace) REFERENCES public.game_quiz_pages(id, namespace) ON DELETE CASCADE;
+
+
+--
+-- Name: game_quiz_progress game_quiz_progress_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE ONLY public.game_quiz_progress
+    ADD CONSTRAINT game_quiz_progress_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.app_users(user_id) ON DELETE CASCADE;
 
 
 --
@@ -16834,6 +17482,12 @@ ALTER TABLE public.event_guide_generation_queue ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.events_pages ENABLE ROW LEVEL SECURITY;
 
 --
+-- Name: game_catalog_pages; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE public.game_catalog_pages ENABLE ROW LEVEL SECURITY;
+
+--
 -- Name: game_checklist_items; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
 --
 
@@ -16886,6 +17540,24 @@ ALTER TABLE public.game_collection_progress ENABLE ROW LEVEL SECURITY;
 --
 
 ALTER TABLE public.game_generation_queue ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: game_map_pages; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE public.game_map_pages ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: game_quiz_pages; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE public.game_quiz_pages ENABLE ROW LEVEL SECURITY;
+
+--
+-- Name: game_quiz_progress; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
+--
+
+ALTER TABLE public.game_quiz_progress ENABLE ROW LEVEL SECURITY;
 
 --
 -- Name: game_releases; Type: ROW SECURITY; Schema: public; Owner: supabase_admin
@@ -17969,6 +18641,24 @@ GRANT ALL ON FUNCTION public.prepare_game_data_owner() TO service_role;
 
 
 --
+-- Name: FUNCTION prepare_game_extended_page(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION public.prepare_game_extended_page() FROM PUBLIC;
+GRANT ALL ON FUNCTION public.prepare_game_extended_page() TO postgres;
+GRANT ALL ON FUNCTION public.prepare_game_extended_page() TO service_role;
+
+
+--
+-- Name: FUNCTION protect_game_checklist_task_owner(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION public.protect_game_checklist_task_owner() FROM PUBLIC;
+GRANT ALL ON FUNCTION public.protect_game_checklist_task_owner() TO postgres;
+GRANT ALL ON FUNCTION public.protect_game_checklist_task_owner() TO service_role;
+
+
+--
 -- Name: FUNCTION protect_game_code_identity(); Type: ACL; Schema: public; Owner: supabase_admin
 --
 
@@ -17986,6 +18676,16 @@ GRANT ALL ON FUNCTION public.protect_game_identity() TO postgres;
 GRANT ALL ON FUNCTION public.protect_game_identity() TO anon;
 GRANT ALL ON FUNCTION public.protect_game_identity() TO authenticated;
 GRANT ALL ON FUNCTION public.protect_game_identity() TO service_role;
+
+
+--
+-- Name: FUNCTION protect_game_map_renderer(); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON FUNCTION public.protect_game_map_renderer() TO postgres;
+GRANT ALL ON FUNCTION public.protect_game_map_renderer() TO anon;
+GRANT ALL ON FUNCTION public.protect_game_map_renderer() TO authenticated;
+GRANT ALL ON FUNCTION public.protect_game_map_renderer() TO service_role;
 
 
 --
@@ -18203,6 +18903,15 @@ GRANT ALL ON FUNCTION public.run_roblox_universe_hourly_prune(p_days integer, p_
 
 
 --
+-- Name: FUNCTION safe_game_content_url(value text); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION public.safe_game_content_url(value text) FROM PUBLIC;
+GRANT ALL ON FUNCTION public.safe_game_content_url(value text) TO postgres;
+GRANT ALL ON FUNCTION public.safe_game_content_url(value text) TO service_role;
+
+
+--
 -- Name: FUNCTION sanitize_stats_creator_top_player(); Type: ACL; Schema: public; Owner: postgres
 --
 
@@ -18216,6 +18925,15 @@ GRANT ALL ON FUNCTION public.sanitize_stats_creator_top_player() TO service_role
 
 REVOKE ALL ON FUNCTION public.sanitize_stats_game_current_player() FROM PUBLIC;
 GRANT ALL ON FUNCTION public.sanitize_stats_game_current_player() TO service_role;
+
+
+--
+-- Name: FUNCTION save_game_quiz_progress(target_user uuid, target_page uuid, target_namespace text, question_ids text[], score integer, total integer, breakdown jsonb); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION public.save_game_quiz_progress(target_user uuid, target_page uuid, target_namespace text, question_ids text[], score integer, total integer, breakdown jsonb) FROM PUBLIC;
+GRANT ALL ON FUNCTION public.save_game_quiz_progress(target_user uuid, target_page uuid, target_namespace text, question_ids text[], score integer, total integer, breakdown jsonb) TO postgres;
+GRANT ALL ON FUNCTION public.save_game_quiz_progress(target_user uuid, target_page uuid, target_namespace text, question_ids text[], score integer, total integer, breakdown jsonb) TO service_role;
 
 
 --
@@ -18874,6 +19592,24 @@ GRANT ALL ON FUNCTION public.valid_game_codes_faq(value jsonb) TO postgres;
 GRANT ALL ON FUNCTION public.valid_game_codes_faq(value jsonb) TO anon;
 GRANT ALL ON FUNCTION public.valid_game_codes_faq(value jsonb) TO authenticated;
 GRANT ALL ON FUNCTION public.valid_game_codes_faq(value jsonb) TO service_role;
+
+
+--
+-- Name: FUNCTION valid_game_page_data(kind text, data jsonb); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION public.valid_game_page_data(kind text, data jsonb) FROM PUBLIC;
+GRANT ALL ON FUNCTION public.valid_game_page_data(kind text, data jsonb) TO postgres;
+GRANT ALL ON FUNCTION public.valid_game_page_data(kind text, data jsonb) TO service_role;
+
+
+--
+-- Name: FUNCTION valid_gta_map_snapshot(slug text, renderer text, data jsonb); Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+REVOKE ALL ON FUNCTION public.valid_gta_map_snapshot(slug text, renderer text, data jsonb) FROM PUBLIC;
+GRANT ALL ON FUNCTION public.valid_gta_map_snapshot(slug text, renderer text, data jsonb) TO postgres;
+GRANT ALL ON FUNCTION public.valid_gta_map_snapshot(slug text, renderer text, data jsonb) TO service_role;
 
 
 --
@@ -19577,6 +20313,30 @@ GRANT UPDATE(slug) ON TABLE public.events_pages TO basebuddy_editor;
 
 
 --
+-- Name: TABLE game_catalog_pages; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.game_catalog_pages TO postgres;
+GRANT ALL ON TABLE public.game_catalog_pages TO service_role;
+
+
+--
+-- Name: TABLE games; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.games TO postgres;
+GRANT ALL ON TABLE public.games TO service_role;
+
+
+--
+-- Name: TABLE game_catalog_pages_view; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.game_catalog_pages_view TO postgres;
+GRANT ALL ON TABLE public.game_catalog_pages_view TO service_role;
+
+
+--
 -- Name: TABLE game_checklist_items; Type: ACL; Schema: public; Owner: supabase_admin
 --
 
@@ -19590,14 +20350,6 @@ GRANT ALL ON TABLE public.game_checklist_items TO service_role;
 
 GRANT ALL ON TABLE public.game_checklist_pages TO postgres;
 GRANT ALL ON TABLE public.game_checklist_pages TO service_role;
-
-
---
--- Name: TABLE games; Type: ACL; Schema: public; Owner: supabase_admin
---
-
-GRANT ALL ON TABLE public.games TO postgres;
-GRANT ALL ON TABLE public.games TO service_role;
 
 
 --
@@ -19687,6 +20439,46 @@ GRANT ALL ON TABLE public.game_collection_progress TO service_role;
 GRANT ALL ON TABLE public.game_generation_queue TO anon;
 GRANT ALL ON TABLE public.game_generation_queue TO authenticated;
 GRANT ALL ON TABLE public.game_generation_queue TO service_role;
+
+
+--
+-- Name: TABLE game_map_pages; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.game_map_pages TO postgres;
+GRANT ALL ON TABLE public.game_map_pages TO service_role;
+
+
+--
+-- Name: TABLE game_map_pages_view; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.game_map_pages_view TO postgres;
+GRANT ALL ON TABLE public.game_map_pages_view TO service_role;
+
+
+--
+-- Name: TABLE game_quiz_pages; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.game_quiz_pages TO postgres;
+GRANT ALL ON TABLE public.game_quiz_pages TO service_role;
+
+
+--
+-- Name: TABLE game_quiz_pages_view; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.game_quiz_pages_view TO postgres;
+GRANT ALL ON TABLE public.game_quiz_pages_view TO service_role;
+
+
+--
+-- Name: TABLE game_quiz_progress; Type: ACL; Schema: public; Owner: supabase_admin
+--
+
+GRANT ALL ON TABLE public.game_quiz_progress TO postgres;
+GRANT ALL ON TABLE public.game_quiz_progress TO service_role;
 
 
 --
@@ -20873,4 +21665,4 @@ ALTER DEFAULT PRIVILEGES FOR ROLE supabase_admin IN SCHEMA public GRANT ALL ON T
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 7rU01wFQvRcqSEvdmCFmjSrmA7ki5wTY7gEJMthsb2jisEFS1XHFT1LHbMHblLd
+\unrestrict TTeGmpiZHdpmfaqpsZ4wIsi18dLo1VcM2Hp86cWe49dEymG7JNSTeTw49N9f4mz

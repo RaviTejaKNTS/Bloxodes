@@ -23,7 +23,7 @@ Evidence: development checks and independent review, production backup hashes an
 
 Managed development and production use `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate content tables. Roblox stays separate. The October 6 production release deployed `49cbe765bb1a8f13b6967e6fcee800960534760a`. Earlier game-specific evidence below records the storage used before this release.
 
-Managed development additionally supports shared maps, quizzes, catalogs and generic standalone checklist routes. Nine GTA map snapshots now load from shared map rows while their registered renderers remain in code. This page-type extension is not yet applied to production. See [content pipelines](pipelines/content.md#shared-game-page-types-in-managed-development).
+Managed development and production support shared maps, quizzes, catalogs and generic standalone checklist routes. Nine GTA map snapshots now load from shared map rows while their registered renderers remain in code. The page-type extension deployed at `118b66d471623c520b1e9ae4457523c5d51fdf09` after schema and map verification. See [content pipelines](pipelines/content.md#shared-game-page-types).
 
 Local shared-game reads use `game-content-db.ts`, `shared-game-reader.ts` and `game-registry.ts`. Existing GTA, Red Dead and Minecraft routes call common page templates. New namespaces use the registry-backed `[slug]/[[...segments]]` route. The published registry supplies additional `/games` entries. `/sitemaps/games.xml` and the feed discover new pages; existing game sitemaps preserve their URL and pagination policies. New collection pagination is noindex and omitted from the sitemap.
 

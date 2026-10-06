@@ -134,3 +134,14 @@ Evidence: production workflow `37448331294`, exact runtime SHA and healthy datab
 The shared-game release applied five backward-compatible migrations first, deployed web SHA `49cbe765bb1a8f13b6967e6fcee800960534760a`, then applied eight retirement and integrity migrations. Each migration flushes deferred constraints before its ledger entry. The retirement compares every original field while locking the 21 source tables, then removes those tables and eight views without `CASCADE`. Production retains 49,197 collection items, 756 revisions, 116 comments and 12 saved checklist-progress records. The schema snapshot is a native post-retirement dump.
 
 The three owned namespace revalidation events passed through the existing production worker. Its compiled JavaScript is identical to the previous source; the added event type is only a TypeScript annotation. No worker restart was needed. This release ran on the primary homelab, so no separate homelab checkout synchronization was needed. The task worktree remains available for follow-up.
+
+## Shared reference-page release
+
+Last verified: 2026-10-06
+Evidence: schema workflow `37492031155`, deployment workflow `37492747348`, atomic migration receipts, map snapshot readback, exact-SHA health and scoped public URL checks.
+
+The schema-only push `048123eda0ed18f813da5fa6f7f776a7d6a8fc8e` skipped web deployment. The rollback-only production plan passed, then the eight reviewed migrations applied atomically through the existing Studio transport. The importer preserved and published all nine GTA map snapshots before dependent code reached production.
+
+The web deployed `118b66d471623c520b1e9ae4457523c5d51fdf09` with healthy database readiness. All nine owned map URLs passed canonicals and sitemap checks. The current web and Supabase containers are running and healthy where probes are configured. The native schema snapshot and current-state guidance follow in a documentation-only commit.
+
+The release ran on the primary homelab, so no separate homelab checkout synchronization was needed. The task worktree and branch remain available. Local env checks reported four undocumented article automation keys outside this release. Those runtime values were not changed.
