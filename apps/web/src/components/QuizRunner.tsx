@@ -1,13 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { QuizData, QuizOption, QuizQuestion } from "@/lib/quiz-types";
+import type { QuizData } from "@/lib/quiz-types";
 import { DEFAULT_QUIZ_PROGRESS } from "@/lib/engagement/config";
 import type { QuizProgressConfig } from "@/lib/engagement/types";
 import { ProgressBar } from "@/components/ProgressBar";
 import {
   buildQuizAttempt,
   QUIZ_LEVEL_CONFIG,
+  restoreQuizAttempt as restoreAttempt,
+  type PersistedQuizQuestion as PersistedQuestion,
   type QuizAttemptQuestion,
   type QuizDifficulty
 } from "@/lib/quiz-attempts";
@@ -33,12 +35,6 @@ type SessionState = { status: "loading" | "ready"; userId: string | null };
 
 type Breakdown = Record<Difficulty, { correct: number; total: number }>;
 
-type PersistedQuestion = {
-  id: string;
-  difficulty: Difficulty;
-  optionOrder: string[];
-};
-
 type PersistedState = {
   version: number;
   attempt: PersistedQuestion[];
@@ -60,78 +56,12 @@ function formatDifficulty(value: Difficulty) {
   return "Hard";
 }
 
-function buildQuestionMap(quizData: QuizData) {
-  const map = new Map<string, { question: QuizQuestion; difficulty: Difficulty }>();
-  for (const question of quizData.easy ?? []) {
-    map.set(question.id, { question, difficulty: "easy" });
-  }
-  for (const question of quizData.medium ?? []) {
-    map.set(question.id, { question, difficulty: "medium" });
-  }
-  for (const question of quizData.hard ?? []) {
-    map.set(question.id, { question, difficulty: "hard" });
-  }
-  return map;
-}
-
 function toPersistedAttempt(attempt: AttemptQuestion[]): PersistedQuestion[] {
   return attempt.map((question) => ({
     id: question.id,
     difficulty: question.difficulty,
     optionOrder: (question.options ?? []).map((option) => option.id)
   }));
-}
-
-function restoreAttempt(persisted: PersistedQuestion[], quizData: QuizData): AttemptQuestion[] | null {
-  if (!Array.isArray(persisted) || persisted.length !== 15) return null;
-  const questionMap = buildQuestionMap(quizData);
-  const attempt: AttemptQuestion[] = [];
-
-  for (const entry of persisted) {
-    if (!entry || typeof entry.id !== "string") return null;
-    const source = questionMap.get(entry.id);
-    if (!source) return null;
-    const difficulty = source.difficulty;
-    const sourceQuestion = source.question;
-    const optionsById = new Map((sourceQuestion.options ?? []).map((option) => [option.id, option]));
-    const orderedOptions: QuizOption[] = [];
-    const seenOptionIds = new Set<string>();
-
-    for (const optionId of entry.optionOrder ?? []) {
-      const option = optionsById.get(optionId);
-      if (!option || seenOptionIds.has(optionId)) continue;
-      seenOptionIds.add(optionId);
-      orderedOptions.push(option);
-    }
-
-    for (const option of sourceQuestion.options ?? []) {
-      if (seenOptionIds.has(option.id)) continue;
-      orderedOptions.push(option);
-    }
-
-    if (!orderedOptions.length || !orderedOptions.find((option) => option.id === sourceQuestion.correctOptionId)) {
-      return null;
-    }
-
-    attempt.push({
-      ...sourceQuestion,
-      difficulty,
-      options: orderedOptions
-    });
-  }
-
-  const expectedOrder: Difficulty[] = [
-    ...Array.from({ length: QUIZ_LEVEL_CONFIG.easy }, () => "easy" as const),
-    ...Array.from({ length: QUIZ_LEVEL_CONFIG.medium }, () => "medium" as const),
-    ...Array.from({ length: QUIZ_LEVEL_CONFIG.hard }, () => "hard" as const)
-  ];
-
-  if (attempt.length !== expectedOrder.length) return null;
-  for (let i = 0; i < expectedOrder.length; i += 1) {
-    if (attempt[i]?.difficulty !== expectedOrder[i]) return null;
-  }
-
-  return attempt;
 }
 
 function sanitizeAnswers(
@@ -171,6 +101,7 @@ export function QuizRunner(props: QuizRunnerProps) {
   const lastSavedAttempt = useRef<string | null>(null);
   const storageKey = useMemo(() => getStorageKey(quizCode), [quizCode]);
   const initializedStorageKey = useRef<string | null>(null);
+  const [restoredStorageKey, setRestoredStorageKey] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -258,6 +189,7 @@ export function QuizRunner(props: QuizRunnerProps) {
     if (!readyToStart) return;
     if (initializedStorageKey.current === storageKey) return;
     initializedStorageKey.current = storageKey;
+    setRestoredStorageKey(storageKey);
 
     const queryStartAnswerOptionId =
       props.startAnswerOptionId ??
@@ -392,7 +324,7 @@ export function QuizRunner(props: QuizRunnerProps) {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (!attempt.length) return;
+    if (!attempt.length || restoredStorageKey !== storageKey) return;
 
     if (answeredCount === 0) {
       try {
@@ -417,7 +349,7 @@ export function QuizRunner(props: QuizRunnerProps) {
     } catch {
       // ignore storage failures
     }
-  }, [attempt, currentIndex, answers, showSummary, savedAttemptKey, storageKey, answeredCount]);
+  }, [attempt, currentIndex, answers, showSummary, savedAttemptKey, storageKey, answeredCount, restoredStorageKey]);
 
   const handleSelectOption = (optionId: string) => {
     if (!canInteract) return;

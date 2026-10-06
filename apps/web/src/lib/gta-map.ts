@@ -1,8 +1,6 @@
 import "server-only";
+import { getGameExtendedPage } from "./game-extra-pages";
 
-import points from "@/data/gta5-map-points.json";
-import places from "@/data/gta5-map-places.json";
-import markerSnapshot from "@/data/gta5-map-marker-snapshot.json";
 import { GTA5_MAP_LAYERS, type Gta5MapMarker } from "@/lib/gta-map-types";
 import {
   buildGtaCollectionPath,
@@ -41,7 +39,8 @@ function mapFacts(slug: string, item: Record<string, unknown>) {
   });
 }
 
-function getPlaceMarkers(): Gta5MapMarker[] {
+type MapSnapshot = { points:Record<string,Array<{number:number;x:number;y:number}>>;places:Array<{id:string;group:string;name:string;x:number;y:number}>;markerSnapshot:Gta5MapMarker[] };
+function getPlaceMarkers(places: MapSnapshot["places"]): Gta5MapMarker[] {
   return places.map((place) => ({
     id: `place-${place.id.toLowerCase()}`,
     number: 0,
@@ -59,7 +58,8 @@ function getPlaceMarkers(): Gta5MapMarker[] {
   }));
 }
 
-async function getLiveGta5MapMarkers(): Promise<Gta5MapMarker[]> {
+async function getLiveGta5MapMarkers(snapshot: MapSnapshot): Promise<Gta5MapMarker[]> {
+  const {points,places} = snapshot;
   const layers = await Promise.all(GTA5_MAP_LAYERS.filter((layer) => layer.group !== "Places").map(async (layer) => {
     const page = await getGtaWikiCollectionPageByPath("gta-5", layer.slug);
     if (!page) throw new Error(`GTA V map requires the published ${layer.slug} collection.`);
@@ -106,14 +106,17 @@ async function getLiveGta5MapMarkers(): Promise<Gta5MapMarker[]> {
       } satisfies Gta5MapMarker;
     });
   }));
-  return [...layers.flat(), ...getPlaceMarkers()];
+  return [...layers.flat(), ...getPlaceMarkers(places)];
 }
 
 export async function getGta5MapMarkers(): Promise<Gta5MapMarker[]> {
+  const page = await getGameExtendedPage("gta","/gta/maps/gta5","map");
+  if(!page || page.renderer_key !== "gta5") throw new Error("GTA V map needs its published shared snapshot.");
+  const snapshot = page.map_data as MapSnapshot;
   let timeout: ReturnType<typeof setTimeout> | undefined;
   try {
     return await Promise.race([
-      getLiveGta5MapMarkers(),
+      getLiveGta5MapMarkers(snapshot),
       new Promise<Gta5MapMarker[]>((_, reject) => {
         timeout = setTimeout(() => reject(new Error("GTA V map collection lookup timed out")), 3500);
       })
@@ -122,7 +125,7 @@ export async function getGta5MapMarkers(): Promise<Gta5MapMarker[]> {
     // Keep the map usable during a transient collection database outage. This
     // snapshot is generated from the same published collection revision.
     console.warn("Serving the GTA V map marker snapshot:", error);
-    return [...markerSnapshot as Gta5MapMarker[], ...getPlaceMarkers()];
+    return [...snapshot.markerSnapshot, ...getPlaceMarkers(snapshot.places)];
   } finally {
     if (timeout) clearTimeout(timeout);
   }

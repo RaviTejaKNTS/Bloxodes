@@ -29,7 +29,10 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "game_wiki",
   "game_collection",
   "game_tool",
-  "game_code"
+  "game_code",
+  "game_map",
+  "game_quiz",
+  "game_catalog"
 ]);
 const MAX_BODY_LENGTH = 1000;
 const MAX_GUEST_NAME_LENGTH = 60;
@@ -58,7 +61,10 @@ type CommentEntityType =
     | "game_wiki"
     | "game_collection"
     | "game_tool"
-    | "game_code";
+    | "game_code"
+    | "game_map"
+    | "game_quiz"
+    | "game_catalog";
 
 type CommentPageTarget = {
   pageType: string;
@@ -108,6 +114,7 @@ function hasWikiCollectionPath(row: unknown): row is { wiki_slug: string; collec
 async function resolveCommentPageTarget(entityType: CommentEntityType, entityId: string): Promise<CommentPageTarget | null> {
   const admin = supabaseAdmin();
   const gameTargets: Record<string, { table: string; namespace?: string }> = {
+    game_map:{table:"game_map_pages_view"},game_quiz:{table:"game_quiz_pages_view"},game_catalog:{table:"game_catalog_pages_view"},
     game_wiki: { table: "game_wiki_pages_view" }, game_collection: { table: "game_collection_pages_view" }, game_tool: { table: "game_tool_pages_view" }, game_code: { table: "game_code_pages_view" },
     gta_wiki: { table: "game_wiki_pages_view", namespace: "gta" }, gta_wiki_collection: { table: "game_collection_pages_view", namespace: "gta" },
     red_dead_wiki: { table: "game_wiki_pages_view", namespace: "red-dead" }, red_dead_wiki_collection: { table: "game_collection_pages_view", namespace: "red-dead" },

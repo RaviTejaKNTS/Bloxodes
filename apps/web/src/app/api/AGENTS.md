@@ -125,3 +125,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 Minecraft reuses search, comments and revalidation. Search entries and comment ownership resolve to the saved edition’s permanent wiki/collection URL. Wiki/game events carry the editorial edition slug; collection events carry the full collection code. Revalidation covers the edition hub, collection pagination, neutral indexes, Minecraft sitemap and feed. Shared tool events retain tool slugs. No cookie selects public content.
 
 `checklists/progress` also serves GTA standalone checklists using `gta:<game-slug>` keys. Validate GTA published-page membership and real leaf IDs before saving; use the session user ID, trusted-origin check and write rate limit. It does not replace `/gta/collections/progress`.
+
+## Shared quiz progress
+
+`/api/games/[namespace]/quizzes/progress` reads/writes signed-in account results for published shared quizzes. Validate the namespace, code, question IDs, score and difficulty totals. PUT requires a trusted origin and rate limit. Save through the service-only atomic merge RPC, never a read/merge/upsert race. All progress responses are private and use `no-store`. Shared standalone checklists reuse `/api/checklists/progress` with `<namespace>:<slug>` while existing Roblox keys remain valid.

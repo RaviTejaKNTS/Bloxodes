@@ -88,3 +88,7 @@ Checklist and quiz routes use neutral contracts/configuration in `lib/engagement
 
 
 Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `dev-docs/pipelines/wiki-collections.md`.
+
+## Shared game reference routes
+
+The generic `/<namespace>` route additionally serves maps, quizzes, catalogs and standalone checklists, with named detail slugs and section directories. Reuse `GameContentPage`, `GameMap`, `GameCatalog`, `GameQuizPage` and the neutral checklist template. Custom tool bodies use `GameToolPageLayout`. Existing GTA map routes retain registered engines while their snapshots load from shared storage. The page-type extension is managed-development-only until separately released.

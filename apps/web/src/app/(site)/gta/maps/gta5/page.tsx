@@ -1,3 +1,6 @@
+import { notFound } from "next/navigation";
+import { getGameExtendedPage } from "@/lib/game-extra-pages";
+import { gameContentMetadata } from "@/components/games/GameContentPage";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "leaflet/dist/leaflet.css";
@@ -14,15 +17,13 @@ const title = "GTA 5 Interactive Map: Story Mode Collectibles & Challenges";
 const description = "Explore 377 GTA 5 Story Mode collectible and challenge locations on a full-screen Los Santos map. Search 11 collections, browse 92 named places, and track your progress.";
 const canonical = `${SITE_URL}${GTA5_MAP_PATH}`;
 
-export const metadata: Metadata = {
-  title: `${title} | ${SITE_NAME}`,
-  description,
-  alternates: buildAlternates(canonical),
-  openGraph: { type: "website", url: canonical, title, description, siteName: SITE_NAME, images: [`${SITE_URL}/Bloxodes.png`] },
-  twitter: { card: "summary_large_image", title, description, images: [`${SITE_URL}/Bloxodes.png`] }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getGameExtendedPage("gta",GTA5_MAP_PATH,"map");
+  return page ? gameContentMetadata(page) : {};
+}
 
 export default async function Gta5MapPage() {
+  if(!await getGameExtendedPage("gta",GTA5_MAP_PATH,"map")) notFound();
   const markers = await getGta5MapMarkers();
   const structuredData = [
     webPageJsonLd({ siteUrl: SITE_URL, slug: GTA5_MAP_PATH.slice(1), title, description, image: `${SITE_URL}/Bloxodes.png`, author: null }),

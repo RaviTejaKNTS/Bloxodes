@@ -1,13 +1,6 @@
 import "server-only";
+import { getGameExtendedPage } from "./game-extra-pages";
 
-import sanAndreasPoints from "@/data/gta-maps/gta-san-andreas.json";
-import viceCityPoints from "@/data/gta-maps/gta-vice-city.json";
-import gtaThreePoints from "@/data/gta-maps/gta-iii.json";
-import gtaFourPoints from "@/data/gta-maps/gta-4.json";
-import libertyCityStoriesPoints from "@/data/gta-maps/gta-liberty-city-stories.json";
-import viceCityStoriesPoints from "@/data/gta-maps/gta-vice-city-stories.json";
-import chinatownWarsPoints from "@/data/gta-maps/gta-chinatown-wars.json";
-import gtaOnlinePoints from "@/data/gta-maps/gta-online.json";
 import {
   buildGtaCollectionPath,
   getGtaWikiCollectionPageByPath,
@@ -30,16 +23,7 @@ import {
 } from "@/lib/gta-interactive-map-registry";
 
 type PointFile = { points: GtaMapPointRecord[] };
-const POINT_FILES: Record<string, PointFile> = {
-  "gta-san-andreas": sanAndreasPoints as PointFile,
-  "gta-vice-city": viceCityPoints as PointFile,
-  "gta-iii": gtaThreePoints as PointFile,
-  "gta-4": gtaFourPoints as PointFile,
-  "gta-liberty-city-stories": libertyCityStoriesPoints as PointFile,
-  "gta-vice-city-stories": viceCityStoriesPoints as PointFile,
-  "gta-chinatown-wars": chinatownWarsPoints as PointFile,
-  "gta-online": gtaOnlinePoints as PointFile
-};
+
 
 function normalizedName(value: string): string {
   return value.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -116,7 +100,7 @@ function guideCollectionRows(items: Array<{ item: Record<string, unknown>; syste
 async function readCollection(layer: GtaMapDefinition["layers"][number]) {
   if (!layer.collection) return null;
   const page = await getGtaWikiCollectionPageByPath(layer.collection.wikiSlug, layer.collection.collectionSlug);
-  if (!page) throw new Error("Published GTA collection is missing: " + layer.collection.wikiSlug + "/" + layer.collection.collectionSlug);
+  if (!page) return null;
   const runtime = await getPublishedGtaWikiCollectionRuntime(page);
   if (!runtime) throw new Error("Published GTA collection runtime is unavailable: " + page.code);
   return { page, runtime, ...guideCollectionRows(runtime.document.items) };
@@ -179,11 +163,14 @@ function buildMarker(point: GtaMapPointRecord, layer: GtaMapLayer, collection: A
 }
 
 export async function getGtaInteractiveMapPageData(slug: string): Promise<GtaMapPageData | null> {
-  const config = getGtaInteractiveMapDefinition(slug);
-  const pointFile = POINT_FILES[slug];
-  if (!config || !pointFile) return null;
+  const registered = getGtaInteractiveMapDefinition(slug);
+  if (!registered) return null;
+  const stored = await getGameExtendedPage("gta",registered.route,"map");
+  if (!stored || stored.renderer_key !== "gta-layered") return null;
+  const mapData = stored.map_data as {definition:GtaMapDefinition;points:GtaMapPointRecord[]};
+  const config = mapData.definition;
+  const pointFile: PointFile = {points:mapData.points};
   const hub = await getGtaWikiPageBySlug(config.wikiSlug);
-  if (!hub) return null;
 
   const collectionResults = await Promise.all(config.layers.map(async (layer) => {
     if (!layer.collection) return [layer.slug, null] as const;
@@ -247,7 +234,7 @@ export async function getGtaInteractiveMapPageData(slug: string): Promise<GtaMap
     layers,
     markers,
     guides: guidePages.filter((guide): guide is GtaMapGuide => Boolean(guide)),
-    hubTitle: hub.title,
-    hubPath: "/gta/wiki/" + config.wikiSlug
+    hubTitle: hub?.title ?? stored.game_title,
+    hubPath: hub ? "/gta/wiki/" + config.wikiSlug : "/gta"
   };
 }

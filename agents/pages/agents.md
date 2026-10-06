@@ -154,3 +154,7 @@ Checklist and quiz routes use neutral contracts/configuration in `lib/engagement
 
 
 Roblox wiki collectible pagination canonical, verified 2026-10-03: `apps/web/src/app/(site)/wiki/[slug]/[collection]/page/layout.tsx` preserves the base collection canonical when page-level `notFound()` rejects pagination. The rejected route remains 404/noindex. Database pagination metadata remains page-specific.
+
+## Shared game reference templates in development
+
+Non-Roblox maps, quizzes and catalogs use `GameContentPage` for title, intro, body, description, sources and comments. `GameMap` adds image pins, search, categories and zoom. `GameCatalog` supplies a plain table. `GameQuizPage` supplies the shared quiz runner. Standalone checklists use `ChecklistPageTemplate`; tools use the `GameToolPageLayout` body slot. Special catalog interactions require a code implementation. Homepage and sidebar templates are deferred. See `dev-docs/pipelines/content.md`.

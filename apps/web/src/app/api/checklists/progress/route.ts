@@ -6,6 +6,8 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { isTrustedMutationOrigin } from "@/lib/security/request";
 
 export const dynamic = "force-dynamic";
+const privateJson = (body: unknown, init: { status?: number; headers?: Record<string, string> } = {}) =>
+  NextResponse.json(body, { ...init, headers: { ...init.headers, "Cache-Control": "private, no-store, max-age=0" } });
 
 const MAX_CHECKED_IDS = 2000;
 
@@ -36,7 +38,7 @@ export async function GET(request: Request) {
     const user = await getSessionUser();
 
     if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return privateJson({ error: "Unauthorized" }, { status: 401 });
     }
 
     const admin = supabaseAdmin();
@@ -45,7 +47,7 @@ export async function GET(request: Request) {
 
     if (slug) {
       const invalid = await validateGtaChecklistProgress(slug);
-      if (invalid) return NextResponse.json({ error: invalid.error }, { status: invalid.status });
+      if (invalid) return privateJson({ error: invalid.error }, { status: invalid.status });
       const { data, error } = await admin
         .from("user_checklist_progress")
         .select("checked_item_ids")
@@ -54,11 +56,11 @@ export async function GET(request: Request) {
         .maybeSingle();
 
       if (error) {
-        return NextResponse.json({ error: "Unable to load checklist progress." }, { status: 500 });
+        return privateJson({ error: "Unable to load checklist progress." }, { status: 500 });
       }
 
       const checkedIds = normalizeCheckedIds((data as { checked_item_ids?: unknown } | null)?.checked_item_ids);
-      return NextResponse.json(
+      return privateJson(
         { checkedIds },
         { headers: { "Cache-Control": "private, no-store, max-age=0" } }
       );
@@ -70,7 +72,7 @@ export async function GET(request: Request) {
       .eq("user_id", user.id);
 
     if (error) {
-      return NextResponse.json({ error: "Unable to load checklist progress." }, { status: 500 });
+      return privateJson({ error: "Unable to load checklist progress." }, { status: 500 });
     }
 
     const progress = (data ?? []).map((row) => {
@@ -81,26 +83,26 @@ export async function GET(request: Request) {
       };
     }).filter((entry) => entry.slug);
 
-    return NextResponse.json(
+    return privateJson(
       { progress },
       { headers: { "Cache-Control": "private, no-store, max-age=0" } }
     );
   } catch (error) {
     console.error("Failed to load checklist progress", error);
-    return NextResponse.json({ error: "Unable to load checklist progress." }, { status: 500 });
+    return privateJson({ error: "Unable to load checklist progress." }, { status: 500 });
   }
 }
 
 export async function PUT(request: Request) {
   try {
     if (!isTrustedMutationOrigin(request)) {
-      return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
+      return privateJson({ error: "Invalid request origin." }, { status: 403 });
     }
 
     const user = await getSessionUser();
 
     if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return privateJson({ error: "Unauthorized" }, { status: 401 });
     }
 
     const admin = supabaseAdmin();
@@ -109,13 +111,13 @@ export async function PUT(request: Request) {
     const checkedIds = normalizeCheckedIds(payload?.checkedIds);
 
     if (!slug) {
-      return NextResponse.json({ error: "Checklist slug is required." }, { status: 400 });
+      return privateJson({ error: "Checklist slug is required." }, { status: 400 });
     }
 
     const rate = checkRateLimit({ key: `checklist-progress:${user.id}`, limit: 180, windowMs: 60000 });
-    if (!rate.allowed) return NextResponse.json({ error: "Please try again shortly." }, { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } });
+    if (!rate.allowed) return privateJson({ error: "Please try again shortly." }, { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } });
     const invalid = await validateGtaChecklistProgress(slug, checkedIds);
-    if (invalid) return NextResponse.json({ error: invalid.error }, { status: invalid.status });
+    if (invalid) return privateJson({ error: invalid.error }, { status: invalid.status });
 
     if (checkedIds.length === 0) {
       const { error } = await admin
@@ -125,10 +127,10 @@ export async function PUT(request: Request) {
         .eq("checklist_slug", slug);
 
       if (error) {
-        return NextResponse.json({ error: "Unable to clear checklist progress." }, { status: 500 });
+        return privateJson({ error: "Unable to clear checklist progress." }, { status: 500 });
       }
 
-      return NextResponse.json({ checkedIds: [] });
+      return privateJson({ checkedIds: [] });
     }
 
     const { error } = await admin
@@ -143,12 +145,12 @@ export async function PUT(request: Request) {
       );
 
     if (error) {
-      return NextResponse.json({ error: "Unable to save checklist progress." }, { status: 500 });
+      return privateJson({ error: "Unable to save checklist progress." }, { status: 500 });
     }
 
-    return NextResponse.json({ checkedIds });
+    return privateJson({ checkedIds });
   } catch (error) {
     console.error("Failed to save checklist progress", error);
-    return NextResponse.json({ error: "Unable to save checklist progress." }, { status: 500 });
+    return privateJson({ error: "Unable to save checklist progress." }, { status: 500 });
   }
 }

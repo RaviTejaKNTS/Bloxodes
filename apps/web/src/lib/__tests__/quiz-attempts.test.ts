@@ -54,3 +54,18 @@ describe("quiz attempts", () => {
     expect(attempt.filter((entry) => seenIds.includes(entry.id))).toHaveLength(0);
   });
 });
+
+
+describe("restoring saved quiz attempts", () => {
+  it("restores smaller banks while retaining the original option order", async () => {
+    const { buildQuizAttempt, restoreQuizAttempt } = await import("../quiz-attempts");
+    const questions = Object.fromEntries(["easy", "medium", "hard"].map(level => [level, [{
+      id: level, question: "Which letter?", options: ["a", "b", "c", "d"].map(id => ({ id, text: id })), correctOptionId: "a"
+    }]])) as import("../quiz-types").QuizData;
+    const attempt = buildQuizAttempt(questions);
+    const saved = attempt.map(question => ({ id: question.id, difficulty: question.difficulty, optionOrder: question.options.map(option => option.id) }));
+    expect(restoreQuizAttempt(saved, questions)).toEqual(attempt);
+    expect(restoreQuizAttempt([...saved, saved[0]], questions)).toBeNull();
+    expect(restoreQuizAttempt([saved[0], saved[0], saved[2]], questions)).toBeNull();
+  });
+});

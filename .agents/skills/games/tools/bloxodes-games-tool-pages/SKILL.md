@@ -13,4 +13,4 @@ Use this for a non-Roblox tool with verified inputs and a working calculator. Ro
 4. Validate with `npm run publish:game-pages -- --namespace <slug> --file <reviewed.json>` using the `tools` group. `--apply` is development-only within the user's authorized work.
 5. Check ordinary, zero, invalid and large inputs against known results. Verify units, metadata, comments, game links, search, sitemap, feed and cache refresh.
 
-Reuse `DedicatedToolPage` and a registered client calculator. Preserve existing Minecraft tools. Homepage and sidebar templates remain deferred. Do not publish production.
+Reuse `GameToolPageLayout` for the title, copy, content columns and calculator body. It uses the same `DedicatedToolPage` shell as Roblox and Minecraft tools. Supply a registered client calculator as its body; the page layout does not dictate the calculation. Preserve existing Minecraft tools. Homepage and sidebar templates remain deferred. Do not publish production.

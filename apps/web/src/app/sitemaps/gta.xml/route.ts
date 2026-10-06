@@ -1,5 +1,5 @@
 import { listPublishedGtaChecklists } from "@/lib/gta-checklists";
-import { listGtaInteractiveMapDefinitions } from "@/lib/gta-interactive-map-registry";
+import { listGameMapPages } from "@/lib/game-extra-pages";
 import { NextResponse } from "next/server";
 import {
   buildGtaCollectionPath,
@@ -15,18 +15,14 @@ export const fetchCache = "force-no-store";
 
 export async function GET() {
   try {
-    const [wikiPages, collections, checklistData] = await Promise.all([
+    const [wikiPages, collections, checklistData, maps] = await Promise.all([
       listPublishedGtaWikiPages(),
       listPublishedGtaWikiCollections(),
-      listPublishedGtaChecklists(1, 1000)
+      listPublishedGtaChecklists(1, 1000),
+      listGameMapPages("gta")
     ]);
-    const publishedWikiSlugs = new Set(wikiPages.map((page) => page.slug));
-    const mapRoutes = [
-      ...(publishedWikiSlugs.has("gta-5") ? [{ loc: withSiteUrl("/gta/maps/gta5"), changefreq: "monthly" as const, priority: "0.9" }] : []),
-      ...listGtaInteractiveMapDefinitions()
-        .filter((map) => publishedWikiSlugs.has(map.wikiSlug))
-        .map((map) => ({ loc: withSiteUrl(map.route), changefreq: "monthly" as const, priority: "0.9" }))
-    ];
+    const mapRoutes = maps.map(page => ({ loc: withSiteUrl(page.canonical_path),
+      changefreq: "monthly" as const, priority: "0.9", lastmod: toIsoDate(page.updated_at) }));
     const pages: SitemapUrlSetEntry[] = [
       { loc: withSiteUrl("/games"), changefreq: "weekly", priority: "0.8" },
       { loc: withSiteUrl("/gta"), changefreq: "weekly", priority: "0.9" },

@@ -70,6 +70,9 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   game_code: "codes",
   game_tool: "tool",
   game_checklist: "checklist",
+  game_map: "tool",
+  game_quiz: "quiz",
+  game_catalog: "catalog",
   stats_game: "stats"
 };
 

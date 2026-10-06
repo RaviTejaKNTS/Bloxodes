@@ -22,6 +22,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `dev-docs/pipelines/wiki-collections.md`: game wiki hubs and their game-specific collection workflow/data ownership.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
+- `.agents/skills/bloxodes-game-plan/SKILL.md`: research and plan useful page types for any non-Roblox game.
+- `.agents/skills/bloxodes-games-reference-pages/SKILL.md`: shared maps, standalone checklists, quizzes and catalogs.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
 - `.agents/skills/bloxodes-article-release-review/SKILL.md`: list completed automated articles, serve managed-dev previews, and publish or reject only explicit human selections.
 - `.agents/skills/bloxodes-article-images/SKILL.md`: run a separate collection-style image pass for location guides, routes, NPCs, puzzle steps, collectibles, and other visually dependent articles before writing.

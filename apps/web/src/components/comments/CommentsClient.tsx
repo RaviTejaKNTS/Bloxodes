@@ -31,7 +31,10 @@ type CommentsClientProps = {
     | "game_wiki"
     | "game_collection"
     | "game_tool"
-    | "game_code";
+    | "game_code"
+    | "game_map"
+    | "game_quiz"
+    | "game_catalog";
   entityId: string;
   initialComments: CommentEntry[];
 };

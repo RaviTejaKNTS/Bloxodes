@@ -3,11 +3,15 @@ import { supabaseAdmin } from "./supabase";
 export type GameContentIndexEntry = { canonical_path: string; title: string; meta_description: string | null; updated_at: string | null; published_at: string | null; created_at: string | null };
 export async function listSharedGameDiscoveryPages(): Promise<GameContentIndexEntry[]> {
  const sb = supabaseAdmin();
- const groups = ["game_wiki_pages_view", "game_collection_pages_view", "game_tool_pages_view", "game_code_pages_view"];
+ const groups = ["game_wiki_pages_view", "game_collection_pages_view", "game_tool_pages_view", "game_code_pages_view", "game_map_pages_view", "game_quiz_pages_view", "game_catalog_pages_view", "game_checklist_pages_view"];
  const results = await Promise.all(groups.map(async table => {
   const rows: GameContentIndexEntry[] = [];
   for(let offset=0;;offset+=1000) {
-   let query = sb.from(table).select("canonical_path,title,meta_description,updated_at,published_at,created_at").eq("is_published",true).order("id");
+   const checklist = table === "game_checklist_pages_view";
+   let query = sb.from(table).select(checklist ? "canonical_path,title,meta_description:seo_description,updated_at,published_at,created_at" : "canonical_path,title,meta_description,updated_at,published_at,created_at").order("id");
+   if (!checklist) query = query.eq("is_published",true);
+   if (table === "game_map_pages_view") query = query.neq("namespace","gta");
+   if (checklist) query = query.neq("namespace","gta");
    // Existing platform sitemaps keep their URL and pagination policies.
    if(table.includes("wiki") || table.includes("collection")) query=query.not("namespace","in","(gta,red-dead,minecraft)");
    else if(table.includes("tool")) query=query.neq("namespace","minecraft");

@@ -1,3 +1,7 @@
+import { getGameExtendedPage } from "@/lib/game-extra-pages";
+import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
+import { GameMap } from "@/components/games/GameMap";
+import { parseGameMapData } from "@/lib/game-page-data";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -16,6 +20,8 @@ type PageProps = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  const shared = await getGameExtendedPage("gta",`/gta/maps/${slug}`,"map");
+  if(shared) return gameContentMetadata(shared);
   const config = getGtaInteractiveMapDefinition(slug);
   if (!config) return { title: "GTA Interactive Map", alternates: buildAlternates(SITE_URL + "/gta/maps/" + slug) };
   const canonical = SITE_URL + config.route;
@@ -75,7 +81,11 @@ function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaIntera
 export default async function GtaInteractiveMapPage({ params }: PageProps) {
   const { slug } = await params;
   const data = await getGtaInteractiveMapPageData(slug);
-  if (!data) notFound();
+  if (!data) {
+    const page = await getGameExtendedPage("gta",`/gta/maps/${slug}`,"map");
+    if(!page || page.renderer_key !== "image-pins") notFound();
+    return <GameContentPage page={page}><GameMap data={parseGameMapData(page.map_data)} /></GameContentPage>;
+  }
   const jsonLd = structuredData(data);
   const collectionLayers = data.layers.filter((layer) => layer.collectionCode && layer.guideUrl);
   const sourcePages = Array.from(new Map(

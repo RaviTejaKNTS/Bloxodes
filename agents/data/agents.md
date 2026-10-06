@@ -292,3 +292,7 @@ GTA standalone checklists: `gta_checklist_pages`, `gta_checklist_items`, and sec
 ### Emote commands (2026-09-15)
 
 `roblox_emote_commands` powers `/catalog/roblox-emote-commands` with reviewed command text, requirements, source URLs, verification dates, and explicit publication state. It uses RLS/server-only grants and optional item foreign keys. `data/roblox-emotes/commands.json` is seed input only; runtime reads the database. The initial public roster is limited to the seven defaults in current Roblox Support documentation. Marketplace names are never converted into commands. See `dev-docs/pipelines/catalog.md`.
+
+## Shared reference-page extension in development
+
+`game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress` extend the common non-Roblox model. Protected views hide unpublished games/parents. Nine frozen GTA map snapshots are preserved in shared rows; their authoring files are import sources only. Development has 16 shared tables and eight views. Production remains on the preceding shared core model. See `dev-docs/pipelines/content.md`.

@@ -8,7 +8,7 @@ import { ChecklistFooterLinks } from "@/components/ChecklistFooterLinks";
 import type { ChecklistConfig, ChecklistTemplateData } from "@/lib/engagement/types";
 import { engagementProgressKey } from "@/lib/engagement/types";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
-import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
+import { safeJsonLd, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 
@@ -136,7 +136,7 @@ export async function ChecklistPageTemplate({ data, config }: { data: ChecklistT
       </div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageSchema) }}
       />
     </section>
   );

@@ -1,3 +1,10 @@
+import { getGameExtendedPage, getGameChecklistByPath } from "@/lib/game-extra-pages";
+import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
+import { GameMap } from "@/components/games/GameMap";
+import { GameCatalog } from "@/components/games/GameCatalog";
+import { GameQuizPage } from "@/components/games/GameQuizPage";
+import { ChecklistPageTemplate, checklistMetadata } from "@/components/ChecklistPageTemplate";
+import { parseGameMapData, parseGameCatalogData } from "@/lib/game-page-data";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,15 +31,18 @@ async function context(params: Props["params"]) {
   const currentPage = match ? Number(match[1]) : 1;
   const basePath = match ? path.slice(0, match.index) : path;
   if (!Number.isSafeInteger(currentPage)) notFound();
-  const [wiki, collection, codes, tool] = await Promise.all([getGameWikiByPath(slug, basePath), getGameCollectionByPath(slug, basePath), getGameCodeByPath(slug, basePath), getGameToolByPath(slug, basePath)]);
+  const [wiki, collection, codes, tool, map, quiz, catalog, checklist] = await Promise.all([getGameWikiByPath(slug, basePath), getGameCollectionByPath(slug, basePath), getGameCodeByPath(slug, basePath), getGameToolByPath(slug, basePath), getGameExtendedPage(slug,basePath,"map"),getGameExtendedPage(slug,basePath,"quiz"),getGameExtendedPage(slug,basePath,"catalog"),getGameChecklistByPath(slug,basePath)]);
   if (match && !collection) notFound();
-  return { root, path, basePath, segments, currentPage, wiki, collection, codes, tool };
+  return { root, path, basePath, segments, currentPage, wiki, collection, codes, tool, map, quiz, catalog, checklist };
 }
+function checklistConfig(namespace: string) { return { basePath:`/${namespace}/checklists`,title:"Checklists",heading:"Checklists",intro:"",description:"Game completion checklists.",progressNamespace:namespace }; }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ctx = await context(params);
   if (ctx.wiki) return gameWikiMetadata(ctx.wiki);
   if (ctx.collection) return gameCollectionMetadata(ctx.collection, ctx.currentPage);
   if (ctx.tool) return gameToolMetadata(ctx.tool);
+  if (ctx.map || ctx.quiz || ctx.catalog) return gameContentMetadata((ctx.map || ctx.quiz || ctx.catalog)!);
+  if (ctx.checklist) return checklistMetadata(ctx.checklist,checklistConfig(ctx.root.namespace));
   return { title: ctx.codes?.seo_title || ctx.codes?.title || ctx.root.title, description: ctx.codes?.meta_description ?? undefined, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
 }
 export default async function SharedGamePage({ params }: Props) {
@@ -41,10 +51,18 @@ export default async function SharedGamePage({ params }: Props) {
   if (ctx.collection) return renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });
   if (ctx.codes) return <GameCodePage page={ctx.codes} namespaceTitle={ctx.root.title} />;
   if (ctx.tool) return <GameToolPage tool={ctx.tool} namespaceTitle={ctx.root.title} />;
+  if (ctx.map) { if (ctx.map.renderer_key !== "image-pins") notFound(); return <GameContentPage page={ctx.map}><GameMap data={parseGameMapData(ctx.map.map_data)} /></GameContentPage>; }
+  if (ctx.catalog) return <GameContentPage page={ctx.catalog}><GameCatalog data={parseGameCatalogData(ctx.catalog.catalog_data)} /></GameContentPage>;
+  if (ctx.quiz) return <GameQuizPage page={ctx.quiz} />;
+  if (ctx.checklist) return <ChecklistPageTemplate data={ctx.checklist} config={checklistConfig(ctx.root.namespace)} />;
   // Directory pages reuse the current plain shell. Homepage and sidebar templates remain deferred.
-  if (!ctx.segments.length || (ctx.segments.length === 1 && ["codes", "tools"].includes(ctx.segments[0]))) {
-    const tables = ctx.segments.length ? [ctx.segments[0] === "codes" ? "game_code_pages_view" : "game_tool_pages_view"] : ["game_wiki_pages_view", "game_code_pages_view", "game_tool_pages_view"];
-    const results = await Promise.all(tables.map(table => supabaseAdmin().from(table).select("id,title,canonical_path").eq("namespace", ctx.root.namespace).eq("is_published", true).order("title")));
+  if (!ctx.segments.length || (ctx.segments.length === 1 && ["codes", "tools", "maps", "quizzes", "checklists", "catalog"].includes(ctx.segments[0]))) {
+    const sectionTables: Record<string,string> = {codes:"game_code_pages_view",tools:"game_tool_pages_view",maps:"game_map_pages_view",quizzes:"game_quiz_pages_view",catalog:"game_catalog_pages_view",checklists:"game_checklist_pages_view"};
+    const tables = ctx.segments.length ? [sectionTables[ctx.segments[0]]] : ["game_wiki_pages_view",...Object.values(sectionTables)];
+    const results = await Promise.all(tables.map(table => {
+      let query = supabaseAdmin().from(table).select("id,title,canonical_path").eq("namespace",ctx.root.namespace).order("title");
+      return table === "game_checklist_pages_view" ? query : query.eq("is_published",true);
+    }));
     for (const result of results) if (result.error) throw new Error(`Game directory read failed: ${result.error.message}`);
     const pages = results.flatMap(result => result.data ?? []);
     if (ctx.segments.length && !pages.length) notFound();

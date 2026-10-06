@@ -1,8 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import markerSnapshot from "@/data/gta5-map-marker-snapshot.json";
+import points from "@/data/gta5-map-points.json";
+import places from "@/data/gta5-map-places.json";
 import { getGtaWikiCollectionPageByPath } from "@/lib/gta";
 
 vi.mock("server-only", () => ({}));
+vi.mock("@/lib/game-extra-pages", () => ({
+  getGameExtendedPage: vi.fn(async () => ({renderer_key:"gta5",map_data:{points,places,markerSnapshot}}))
+}));
 vi.mock("@/lib/gta", () => ({
   buildGtaCollectionPath: (game: string, collection: string) => `/gta/wiki/${game}/${collection}`,
   getGtaWikiCollectionPageByPath: vi.fn(async () => null),

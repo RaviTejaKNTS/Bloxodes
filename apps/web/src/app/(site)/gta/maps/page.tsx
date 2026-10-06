@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Map } from "lucide-react";
-import { listPublishedGtaWikiPages } from "@/lib/gta";
+import { listGameMapPages } from "@/lib/game-extra-pages";
+import { parseGameMapData } from "@/lib/game-page-data";
 import { listGtaInteractiveMapDefinitions } from "@/lib/gta-interactive-map-registry";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
@@ -48,12 +49,12 @@ const GTA5_CARD: GtaMapCard = {
 };
 
 export default async function GtaMapsIndexPage() {
-  const publishedWikis = await listPublishedGtaWikiPages();
-  const publishedSlugs = new Set(publishedWikis.map((page) => page.slug));
+  const publishedMaps = await listGameMapPages("gta");
+  const publishedSlugs = new Set(publishedMaps.map(page => page.slug));
   const cards: GtaMapCard[] = [
-    ...(publishedSlugs.has("gta-5") ? [GTA5_CARD] : []),
+    ...(publishedSlugs.has("gta5") ? [GTA5_CARD] : []),
     ...listGtaInteractiveMapDefinitions()
-      .filter((map) => publishedSlugs.has(map.wikiSlug))
+      .filter((map) => publishedSlugs.has(map.slug))
       .map((map) => ({
         slug: map.slug,
         title: map.title,
@@ -64,7 +65,14 @@ export default async function GtaMapsIndexPage() {
         modes: map.modes.length ? map.modes.map((mode) => mode.label)
           : map.editionOptions.length ? map.editionOptions.map((edition) => edition.label)
           : map.views.map((view) => view.label)
-      }))
+      })),
+    ...publishedMaps.filter(page => page.renderer_key === "image-pins").map(page => {
+      const data = parseGameMapData(page.map_data);
+      return { slug: page.slug, title: page.title, route: page.canonical_path,
+        preview: { type: "image" as const, src: data.image, width: data.width, height: data.height },
+        summary: page.meta_description ?? "Browse the map locations and linked guides.",
+        count: `${data.markers.length.toLocaleString()} map points`, modes: [] };
+    })
   ];
 
   return (
@@ -115,7 +123,7 @@ export default async function GtaMapsIndexPage() {
           ))}
         </section>
       ) : (
-        <p className="rounded-xl border border-border bg-surface p-6 text-sm text-muted">Interactive maps will appear here as their game wiki hubs are published.</p>
+        <p className="rounded-xl border border-border bg-surface p-6 text-sm text-muted">Interactive maps will appear here as their pages are published.</p>
       )}
 
       <section className="max-w-3xl border-t border-border pt-6 text-sm leading-6 text-muted">

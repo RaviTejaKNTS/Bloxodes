@@ -28,6 +28,8 @@ Every canonical document includes a `Last verified` date and evidence boundary. 
 Last verified: 2026-10-06
 GTA, Red Dead and Minecraft share non-Roblox content storage in managed development and production. Roblox stays separate. The October 6 production cutover preserved all original fields before removing the old game tables. See [Supabase](data/supabase.md) and [wiki and collections](pipelines/wiki-collections.md) for the applied migrations, current readers, publication commands and cleanup evidence.
 
+The shared page-type extension is verified in managed development only. It adds map, quiz and catalog storage, account quiz history, generic checklist routes and game-planning skills. The production boundary and authoring commands are recorded in [content pipelines](pipelines/content.md#shared-game-page-types-in-managed-development).
+
 ## Current System Map
 
 ```text

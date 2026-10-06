@@ -900,7 +900,7 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     case "game_content": {
       if (!/^[a-z0-9-]+\/[a-z0-9/-]+$/.test(slug) || slug.includes("..")) break;
       const namespace = slug.split("/")[0];
-      purgePaths = applyRevalidation([`/${slug}`, `/${namespace}`, `/${namespace}/wiki`, `/${namespace}/tools`, "/games", FEED_PATH, SITEMAP_INDEX_PATH, "/sitemaps/games.xml", ...( ["gta", "red-dead", "minecraft"].includes(namespace) ? [`/sitemaps/${namespace}.xml`] : []), ...Array.from({ length: 39 }, (_, i) => `/${slug}/page/${i+2}`), ...(namespace === "gta" ? ["/gta/maps", "/gta/maps/[slug]", "/gta/maps/gta5"] : []), ...(namespace === "minecraft" ? MINECRAFT_TOOL_SLUGS.map(tool => `/minecraft/tools/${tool}`) : [])], [namespace, "game-wiki-index", "game-wiki-collection-index", "games-index"]);
+      purgePaths = applyRevalidation([`/${slug}`, `/${namespace}`, `/${namespace}/wiki`, `/${namespace}/tools`, ...["codes","maps","quizzes","catalog","checklists"].map(section => `/${namespace}/${section}`), "/games", FEED_PATH, SITEMAP_INDEX_PATH, "/sitemaps/games.xml", ...( ["gta", "red-dead", "minecraft"].includes(namespace) ? [`/sitemaps/${namespace}.xml`] : []), ...Array.from({ length: 39 }, (_, i) => `/${slug}/page/${i+2}`), ...(namespace === "gta" ? ["/gta/maps", "/gta/maps/[slug]", "/gta/maps/gta5"] : []), ...(namespace === "minecraft" ? MINECRAFT_TOOL_SLUGS.map(tool => `/minecraft/tools/${tool}`) : [])], [namespace, "game-wiki-index", "game-wiki-collection-index", "games-index"]);
       purgeTags = [...purgeTags, namespace];
       break;
     }

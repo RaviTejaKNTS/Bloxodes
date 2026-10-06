@@ -260,7 +260,8 @@
     "verify:shared-games": "node --import tsx scripts/games/verify-shared-games.ts",
     "audit:shared-games-preview": "node --import tsx scripts/games/audit-shared-games-preview.ts",
     "sync:shared-game-collection-runtime": "node --import tsx scripts/franchise/sync-franchise-collection-runtime.ts",
-    "export:shared-game-collection-workspace": "node --import tsx scripts/gta/export-gta-collection-workspace.ts --workspace"
+    "export:shared-game-collection-workspace": "node --import tsx scripts/gta/export-gta-collection-workspace.ts --workspace",
+    "import:gta-shared-maps": "tsx scripts/games/import-gta-shared-maps.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

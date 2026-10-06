@@ -265,3 +265,7 @@ Minecraft collection media uses full SHA-256 object keys under the existing name
 
 
 Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. The October 3 production cutover used the now-retired exact-hash activation command. New publication uses shared storage and the current publishers. See `dev-docs/pipelines/wiki-collections.md`.
+
+## Shared map import and reference pages
+
+`import:gta-shared-maps` reads the nine reviewed committed snapshots, validates stored hashes and ownership, then uses atomic publication. It is rollback-only by default; `--apply` writes managed development. Production requires the production environment plus `--allow-prod` and explicit authorization. Snapshot changes require a reviewed migration. `publish:game-pages` additionally supports maps, quizzes, catalog, checklists and checklistItems. `audit:shared-games-preview` crawls all eight shared page views. `backup:shared-games` includes reference pages and quiz account history. See `dev-docs/pipelines/content.md`.

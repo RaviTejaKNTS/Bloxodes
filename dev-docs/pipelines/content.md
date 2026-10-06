@@ -1,6 +1,6 @@
 # Content and Engagement Pipelines
 
-Minecraft tool presentation uses the shared Roblox `ToolCard` and Journey index grid. The 13 generated WebP covers are committed web assets under `apps/web/public/images/tools/minecraft/`, resolved by `lib/minecraft-tools/covers.ts` in the Minecraft read adapter. Development database copy and calculation rules use `game_tool_pages` with `namespace=minecraft`. Production still uses `minecraft_tools`; these assets ship with the web image and require no database publication. Generation prompts are recorded in `docs/2026-10-04-minecraft-tool-covers.json`.
+Minecraft tool presentation uses the shared Roblox `ToolCard` and Journey index grid. The 13 generated WebP covers are committed web assets under `apps/web/public/images/tools/minecraft/`, resolved by `lib/minecraft-tools/covers.ts` in the Minecraft read adapter. Development database copy and calculation rules use `game_tool_pages` with `namespace=minecraft`. Production also uses `game_tool_pages`; these assets ship with the web image and require no database publication. Generation prompts are recorded in `docs/2026-10-04-minecraft-tool-covers.json`.
 
 Status: Active
 Last verified: 2026-09-14
@@ -17,7 +17,34 @@ Shared non-Roblox codes use `game_code_pages` and `game_codes`. The template has
 
 Shared tools use `game_tool_pages`; Minecraft retains its registered calculators and specialist publisher. New shared tools use an explicit registered `tool_key`, with `resource-cost` as the first generic calculator. Adding a different calculation requires a checked client implementation and rule validation.
 
-GTA standalone checklist pages and tasks now use `game_checklist_pages` and `game_checklist_items` in development. Their account progress still uses `user_checklist_progress` and existing `gta:<slug>` keys. GTA and Red Dead collection progress uses `game_collection_progress`; the old endpoints and local browser keys remain compatible. New namespaces use `/api/games/<namespace>/collections/progress`.
+GTA standalone checklist pages and tasks use `game_checklist_pages` and `game_checklist_items` in development and production. Their account progress still uses `user_checklist_progress` and existing `gta:<slug>` keys. GTA and Red Dead collection progress uses `game_collection_progress`; the old endpoints and local browser keys remain compatible. New namespaces use `/api/games/<namespace>/collections/progress`.
+
+## Shared game page types in managed development
+
+Last verified: 2026-10-06
+Evidence: eight applied development migrations, atomic rollback and concurrent-save checks, all 472 web tests, the optimized web build and independent GPT-6.1-Sol review. Browser checks passed for map controls, catalog mobile width, checklist account saving and reload, and full and short quiz result reloads. All nine existing GTA map routes and eight test routes under Minecraft and Red Dead returned their correct canonical pages. Hidden-map visibility and authenticated revalidation passed. Production has the earlier shared core model; this extension has not been applied there.
+
+QA cleanup removed all 12 temporary reference pages, both test accounts and their saved progress. The nine real GTA map rows remain.
+
+Non-Roblox games can use wiki pages, collections, codes, tools, maps, standalone checklists, quizzes and catalogs. They share tables by page type. Roblox keeps its own content model. Homepage and sidebar templates remain separate work.
+
+- `game_map_pages` stores credited artwork and verified pins. The default map has search, categories, zoom and guide links.
+- `game_quiz_pages` stores source-backed question banks. `game_quiz_progress` stores each account's seen questions and last result. The service-only save RPC merges history under a row lock.
+- `game_catalog_pages` stores named columns and plain rows. Its default body is a table. A special interactive catalog requires a code change that supplies its own body through `GameContentPage`.
+- `game_checklist_pages` and `game_checklist_items` already hold shared standalone checklists. All namespaces now use the neutral checklist template. Account progress keeps `user_checklist_progress` with `<namespace>:<slug>` keys. Roblox keys stay unchanged, and the internal `wiki-collection` prefix is reserved.
+- `GameToolPageLayout` supplies the title, copy and tool-body slot. Calculators still require a registered implementation and verified rules.
+
+Named reference pages use `/<namespace>/maps|quizzes|catalog|checklists/<slug>`. Their section URL lists published pages. Minecraft keeps its existing `/minecraft/<edition>/wiki` URLs; edition-specific reference slugs must be distinct. A franchise's child title owns its data through `game_id`.
+
+Development now has 16 shared tables and eight protected read views. RLS is enabled, with direct access limited to the service role. Published views check page, game and parent visibility. Public routes include canonical URLs, escaped JSON-LD, search, sitemap, feed and `game_content` invalidation. Private progress responses use `no-store`.
+
+Use `.agents/skills/bloxodes-game-plan/SKILL.md` to research a game and choose the page types that fit. Use `.agents/skills/bloxodes-games-reference-pages/SKILL.md` for maps, checklists, quizzes and catalogs. Existing wiki, collection, codes and tool skills remain the authoring entry points. Plans and source proof stay in ignored workspaces, not extra database fields.
+
+`npm run publish:game-pages -- --namespace <slug> --file <reviewed.json>` validates the whole batch and rolls it back. Add `--apply` for an authorized development publication. The batch serializes writes within a namespace, keeps page ownership permanent, rejects invalid data and requires checkable tasks after checklist page or task updates. Production still requires explicit authorization and its target guard.
+
+`npm run import:gta-shared-maps` validates the nine existing GTA snapshots. Add `--apply` to import them into development. Repeated imports make no changes. Registered `gta-layered` and `gta5` engines keep their original data and interaction code. Database hashes protect those frozen snapshots, and renderer identity cannot change during an ordinary edit. A deliberate snapshot update requires a reviewed forward migration and updated authoring files. New simple GTA maps use `image-pins` and appear in the GTA directory and sitemap.
+
+For an authorized production release, apply the eight page-type migrations and import the nine GTA maps before deploying this web change. Verify the stored snapshots and published map rows first. The existing map routes now depend on those shared rows.
 
 ## Page Families
 

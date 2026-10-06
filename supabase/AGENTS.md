@@ -75,3 +75,7 @@ Migration `20260920000032` clarifies that GTA Online contains selected tasks onl
 ### Emote command references
 
 `roblox_emote_commands` is server-only with RLS, optional catalog-item foreign keys, provenance, verification dates, and explicit publication state. Its statement trigger targets `/catalog/roblox-emote-commands` through the catalog revalidation flow. Migration `20260915045100` creates the table; `20260915061528` moves revalidation ownership from the Marketplace emote IDs page to the command page. Seed references with `seed:emote-commands` after linked item rows exist. See the catalog pipeline owner for evidence boundaries.
+
+## Shared page-type extension
+
+Managed development additionally has `game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress`. The three new read views are service-only and filter publication. Use the atomic publisher for page/task batches and `save_game_quiz_progress` for account history. Do not replace registered GTA engine snapshots or renderer identity through ordinary edits. See the managed-development section of `dev-docs/pipelines/content.md`; production has not received this extension.

@@ -837,6 +837,265 @@ export type SharedGameDatabase = {
           },
         ]
       }
+      game_map_pages: {
+        Row: {
+          canonical_path: string
+          created_at: string
+          description_md: string | null
+          game_id: string
+          id: string
+          intro_md: string | null
+          is_published: boolean
+          map_data: Json
+          meta_description: string | null
+          namespace: string
+          published_at: string | null
+          renderer_key: string
+          seo_title: string | null
+          slug: string
+          sources_json: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          canonical_path: string
+          created_at?: string
+          description_md?: string | null
+          game_id: string
+          id?: string
+          intro_md?: string | null
+          is_published?: boolean
+          map_data?: Json
+          meta_description?: string | null
+          namespace: string
+          published_at?: string | null
+          renderer_key?: string
+          seo_title?: string | null
+          slug: string
+          sources_json?: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          canonical_path?: string
+          created_at?: string
+          description_md?: string | null
+          game_id?: string
+          id?: string
+          intro_md?: string | null
+          is_published?: boolean
+          map_data?: Json
+          meta_description?: string | null
+          namespace?: string
+          published_at?: string | null
+          renderer_key?: string
+          seo_title?: string | null
+          slug?: string
+          sources_json?: Json
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_map_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
+      game_quiz_pages: {
+        Row: {
+          canonical_path: string
+          created_at: string
+          description_md: string | null
+          game_id: string
+          id: string
+          intro_md: string | null
+          is_published: boolean
+          meta_description: string | null
+          namespace: string
+          published_at: string | null
+          quiz_data: Json
+          seo_title: string | null
+          slug: string
+          sources_json: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          canonical_path: string
+          created_at?: string
+          description_md?: string | null
+          game_id: string
+          id?: string
+          intro_md?: string | null
+          is_published?: boolean
+          meta_description?: string | null
+          namespace: string
+          published_at?: string | null
+          quiz_data?: Json
+          seo_title?: string | null
+          slug: string
+          sources_json?: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          canonical_path?: string
+          created_at?: string
+          description_md?: string | null
+          game_id?: string
+          id?: string
+          intro_md?: string | null
+          is_published?: boolean
+          meta_description?: string | null
+          namespace?: string
+          published_at?: string | null
+          quiz_data?: Json
+          seo_title?: string | null
+          slug?: string
+          sources_json?: Json
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_quiz_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
+      game_catalog_pages: {
+        Row: {
+          canonical_path: string
+          catalog_data: Json
+          created_at: string
+          description_md: string | null
+          game_id: string
+          id: string
+          intro_md: string | null
+          is_published: boolean
+          meta_description: string | null
+          namespace: string
+          published_at: string | null
+          seo_title: string | null
+          slug: string
+          sources_json: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          canonical_path: string
+          catalog_data?: Json
+          created_at?: string
+          description_md?: string | null
+          game_id: string
+          id?: string
+          intro_md?: string | null
+          is_published?: boolean
+          meta_description?: string | null
+          namespace: string
+          published_at?: string | null
+          seo_title?: string | null
+          slug: string
+          sources_json?: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          canonical_path?: string
+          catalog_data?: Json
+          created_at?: string
+          description_md?: string | null
+          game_id?: string
+          id?: string
+          intro_md?: string | null
+          is_published?: boolean
+          meta_description?: string | null
+          namespace?: string
+          published_at?: string | null
+          seo_title?: string | null
+          slug?: string
+          sources_json?: Json
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_catalog_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
+      game_quiz_progress: {
+        Row: {
+          created_at: string
+          last_attempt_at: string | null
+          last_breakdown: Json
+          last_score: number | null
+          last_total: number | null
+          namespace: string
+          quiz_page_id: string
+          seen_question_ids: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          last_attempt_at?: string | null
+          last_breakdown?: Json
+          last_score?: number | null
+          last_total?: number | null
+          namespace: string
+          quiz_page_id: string
+          seen_question_ids?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          last_attempt_at?: string | null
+          last_breakdown?: Json
+          last_score?: number | null
+          last_total?: number | null
+          namespace?: string
+          quiz_page_id?: string
+          seen_question_ids?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_quiz_progress_quiz_page_id_namespace_fkey"
+            columns: ["quiz_page_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "game_quiz_pages"
+            referencedColumns: ["id", "namespace"]
+          },
+          {
+            foreignKeyName: "game_quiz_progress_quiz_page_id_namespace_fkey"
+            columns: ["quiz_page_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "game_quiz_pages_view"
+            referencedColumns: ["id", "namespace"]
+          },
+          {
+            foreignKeyName: "game_quiz_progress_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "app_users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
     }
     Views: {
       game_wiki_pages_view: {
@@ -1004,37 +1263,6 @@ export type SharedGameDatabase = {
           },
         ]
       }
-      game_checklist_pages_view: {
-        Row: {
-          canonical_path: string | null
-          content_updated_at: string | null
-          created_at: string | null
-          description_md: string | null
-          game_id: string | null
-          game_slug: string | null
-          game_title: string | null
-          id: string | null
-          image: string | null
-          is_public: boolean | null
-          leaf_item_count: number | null
-          namespace: string | null
-          published_at: string | null
-          seo_description: string | null
-          seo_title: string | null
-          slug: string | null
-          title: string | null
-          updated_at: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "game_checklist_pages_game_id_namespace_fkey"
-            columns: ["game_id", "namespace"]
-            isOneToOne: false
-            referencedRelation: "games"
-            referencedColumns: ["id", "namespace"]
-          },
-        ]
-      }
       game_code_pages_view: {
         Row: {
           canonical_path: string | null
@@ -1074,8 +1302,145 @@ export type SharedGameDatabase = {
           },
         ]
       }
+      game_checklist_pages_view: {
+        Row: {
+          canonical_path: string | null
+          content_updated_at: string | null
+          created_at: string | null
+          description_md: string | null
+          game_id: string | null
+          game_slug: string | null
+          game_title: string | null
+          id: string | null
+          image: string | null
+          is_public: boolean | null
+          leaf_item_count: number | null
+          namespace: string | null
+          published_at: string | null
+          seo_description: string | null
+          seo_title: string | null
+          slug: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_checklist_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
+      game_map_pages_view: {
+        Row: {
+          canonical_path: string | null
+          created_at: string | null
+          description_md: string | null
+          game_id: string | null
+          game_slug: string | null
+          game_title: string | null
+          id: string | null
+          intro_md: string | null
+          is_published: boolean | null
+          map_data: Json | null
+          meta_description: string | null
+          namespace: string | null
+          published_at: string | null
+          renderer_key: string | null
+          seo_title: string | null
+          slug: string | null
+          sources_json: Json | null
+          title: string | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_map_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
+      game_quiz_pages_view: {
+        Row: {
+          canonical_path: string | null
+          created_at: string | null
+          description_md: string | null
+          game_id: string | null
+          game_slug: string | null
+          game_title: string | null
+          id: string | null
+          intro_md: string | null
+          is_published: boolean | null
+          meta_description: string | null
+          namespace: string | null
+          published_at: string | null
+          quiz_data: Json | null
+          seo_title: string | null
+          slug: string | null
+          sources_json: Json | null
+          title: string | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_quiz_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
+      game_catalog_pages_view: {
+        Row: {
+          canonical_path: string | null
+          catalog_data: Json | null
+          created_at: string | null
+          description_md: string | null
+          game_id: string | null
+          game_slug: string | null
+          game_title: string | null
+          id: string | null
+          intro_md: string | null
+          is_published: boolean | null
+          meta_description: string | null
+          namespace: string | null
+          published_at: string | null
+          seo_title: string | null
+          slug: string | null
+          sources_json: Json | null
+          title: string | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_catalog_pages_game_id_namespace_fkey"
+            columns: ["game_id", "namespace"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id", "namespace"]
+          },
+        ]
+      }
     }
     Functions: {
+      save_game_quiz_progress: {
+        Args: {
+          breakdown: Json
+          question_ids: string[]
+          score: number
+          target_namespace: string
+          target_page: string
+          target_user: string
+          total: number
+        }
+        Returns: undefined
+      }
       publish_game_content_batch: {
         Args: {
           apply_changes?: boolean

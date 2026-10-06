@@ -10,7 +10,7 @@ async function main() {
  assert.equal(new URL(process.env.SUPABASE_URL!).hostname,"bbtcaurrtyoukvjbxbbj.supabase.co");
  const sb=createClient(process.env.SUPABASE_URL!,process.env.SUPABASE_SERVICE_ROLE!,{auth:{persistSession:false}});
  const paths=new Set<string>();
- for(const table of ["game_wiki_pages_view","game_collection_pages_view","game_tool_pages_view","game_code_pages_view","game_checklist_pages_view"]) {
+ for(const table of ["game_wiki_pages_view","game_collection_pages_view","game_tool_pages_view","game_code_pages_view","game_checklist_pages_view","game_map_pages_view","game_quiz_pages_view","game_catalog_pages_view"]) {
   const {data,error}=await sb.from(table).select("canonical_path").eq(table.includes("checklist")?"is_public":"is_published",true);
   if(error) throw error;
   for(const page of data) paths.add(page.canonical_path);

@@ -86,3 +86,7 @@ Checklist and quiz routes use neutral contracts/configuration in `lib/engagement
 
 
 Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `dev-docs/pipelines/wiki-collections.md`.
+
+## Shared game reference pages
+
+`game-page-data.ts` validates map pins, quiz pools and plain catalog fields. `game-extra-pages.ts` reads protected published reference views and checklist tasks; keep game/parent visibility in those views. `game-quiz-progress.ts` owns the namespaced account API and calls the atomic history RPC. GTA map readers load stored snapshots rather than authoring files. Preserve the internal Roblox `wiki-collection` progress namespace. See `dev-docs/pipelines/content.md` for the development-only extension.
