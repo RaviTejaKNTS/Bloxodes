@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "server-only";
 
 import { supabaseAdmin } from "@/lib/supabase";
@@ -40,8 +41,7 @@ export async function loadUserGtaCollectionProgress(userId: string, collectionCo
   const normalizedCode = normalizeGtaCollectionCode(collectionCode);
   if (!normalizedCode) return [];
 
-  const { data, error } = await supabaseAdmin()
-    .from("user_gta_collection_progress")
+  const { data, error } = await gameDatabase(supabaseAdmin(), "gta").from("collection_progress")
     .select("checked_item_slugs")
     .eq("user_id", userId)
     .eq("collection_code", normalizedCode)
@@ -54,8 +54,7 @@ export async function loadUserGtaCollectionProgress(userId: string, collectionCo
 export async function loadUserGtaCollectionProgressIndex(
   userId: string
 ): Promise<Array<{ code: string; checkedCount: number }>> {
-  const { data, error } = await supabaseAdmin()
-    .from("user_gta_collection_progress")
+  const { data, error } = await gameDatabase(supabaseAdmin(), "gta").from("collection_progress")
     .select("collection_code, checked_item_slugs")
     .eq("user_id", userId);
 
@@ -80,8 +79,7 @@ export async function saveUserGtaCollectionProgress(
   const admin = supabaseAdmin();
 
   if (checkedSlugs.length === 0) {
-    const { error } = await admin
-      .from("user_gta_collection_progress")
+    const { error } = await gameDatabase(admin, "gta").from("collection_progress")
       .delete()
       .eq("user_id", userId)
       .eq("collection_code", normalizedCode);
@@ -89,8 +87,7 @@ export async function saveUserGtaCollectionProgress(
     return [];
   }
 
-  const { error } = await admin
-    .from("user_gta_collection_progress")
+  const { error } = await gameDatabase(admin, "gta").from("collection_progress")
     .upsert(
       {
         user_id: userId,

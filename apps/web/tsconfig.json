@@ -25,6 +25,7 @@
     "node_modules",
     ".next",
     ".next-prod-preview",
-    ".next-prod-preview-platform"
+    ".next-prod-preview-platform",
+    "tmp"
   ]
 }

@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { execFileSync } from "node:child_process";
@@ -29,13 +30,13 @@ for (let start = 0; start < manifests.length; start += 20) {
 }
 if (planned.size !== manifests.length) throw new Error(`Parsed ${planned.size}/${manifests.length} plans.`);
 const sb = supabaseAdmin();
-const pageResult = await sb.from("gta_wiki_collection_pages").select("id, code, page_type, is_published, item_count, published_dataset_id, title, display_name, seo_title, meta_description, intro_md, description_md, how_it_works_md, description_json, faq_json, wiki_md").eq("is_published", true).range(0, 999);
+const pageResult = await gameDatabase(sb, "gta").from("wiki_collection_pages").select("id, code, page_type, is_published, item_count, published_dataset_id, title, display_name, seo_title, meta_description, intro_md, description_md, how_it_works_md, description_json, faq_json, wiki_md").eq("is_published", true).range(0, 999);
 if (pageResult.error) throw pageResult.error;
 const pages = new Map((pageResult.data ?? []).map((page) => [page.code, page]));
 const datasetIds = [...pages.values()].map((page) => page.published_dataset_id).filter(Boolean);
 const datasets = new Map<string, { id: string; content_hash: string; item_count: number }>();
 for (let start = 0; start < datasetIds.length; start += 100) {
-  const result = await sb.from("gta_wiki_collection_datasets").select("id, content_hash, item_count").in("id", datasetIds.slice(start, start + 100));
+  const result = await gameDatabase(sb, "gta").from("wiki_collection_datasets").select("id, content_hash, item_count").in("id", datasetIds.slice(start, start + 100));
   if (result.error) throw result.error;
   for (const row of result.data ?? []) datasets.set(row.id, row);
 }

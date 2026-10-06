@@ -23,6 +23,11 @@ Every canonical document includes a `Last verified` date and evidence boundary. 
 - Create a new canonical page only for a genuinely new system or pipeline with no existing owner, and add it to this index immediately.
 - Use `docs/YYYY-MM-DD-topic.md` for plans, investigations, incident records, and point-in-time audits. Fold verified current-state conclusions back into the existing canonical page.
 
+## Development content model
+
+Last verified: 2026-10-06
+GTA, Red Dead and Minecraft now share non-Roblox content storage in managed development. Production keeps its previous schema. See [Supabase](data/supabase.md) and [wiki and collections](pipelines/wiki-collections.md) for the applied migrations, current readers, publication commands and cleanup evidence.
+
 ## Current System Map
 
 ```text

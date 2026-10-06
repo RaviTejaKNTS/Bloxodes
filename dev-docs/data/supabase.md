@@ -4,6 +4,27 @@ Status: Active; production and managed development include Red Dead and the shar
 Last verified: 2026-10-03
 Evidence: official Supabase documentation, managed-development migration/readiness/advisor checks, production transactional release/readback, VPS container/process inspection, Edge Function checksum/smoke, and public health
 
+## Shared non-Roblox storage in managed development
+
+Last verified: 2026-10-06
+Evidence: applied development migrations, full source-field comparison before and after table retirement, namespace tests and local route checks. Production was not queried or changed by this work.
+
+Managed development now uses `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate tables there. Production retains its previous schema until an approved coordinated database and web release. Earlier production evidence below keeps its original date.
+
+The shared model has 12 service-only tables and five `security_invoker` read views. Row-level security is enabled. Anonymous and authenticated roles have no direct grants. Server routes enforce page publication, user ownership, trusted mutation origin and rate limits.
+
+Thirteen forward-only migrations were applied in managed development: `20261006065358`, `20261006070414`, `20261006071532`, `20261006072758`, `20261006073445`, `20261006074815`, `20261006075942`, `20261006081101`, `20261006081924`, `20261006081931`, `20261006082417`, `20261006082803` and `20261006083229`. Their local versions match the development ledger. The retirement migration removes obsolete tables without `CASCADE` after a complete source-field comparison. Historical migrations remain unchanged.
+
+Page publication uses the service-only `publish_game_content_batch` function. Its default check runs the entire batch inside a transaction and rolls it back. Applying commits all groups together; one invalid row rolls back the whole batch. Tool codes come from their slugs through a database trigger and constraint. Release rows require a game owner. Codes-page FAQs require nonempty question and answer strings.
+
+Deleting items locks their dataset before checking publication. Concurrent REST verification confirmed deletion waits for that lock and then rejects removal of published items. Incomplete unpublished revisions can be removed with their items. Ordinary edits cannot change route identity.
+
+`supabase/types/shared-games.ts` is generated from the live development schema and constrains the shared table mapping. `supabase/schema.sql` remains the previous dump, which still includes the production-era separate game tables. No managed database password is stored, so this work did not create a new full SQL dump. Read the applied migrations and generated types for the current shared development model. Regenerate the SQL snapshot through an authorized live dump when that connection is available.
+
+Database deployment readiness and all seven managed-development checks passed. The operational health endpoint still reports inactive Roblox stats jobs in development; this migration does not change those jobs.
+
+Shared storage includes GTA standalone checklists, account collection progress and Minecraft release anchors. Existing comments retain their content types and IDs. New games use generic comment types. `game_content` events refresh owned paths and namespace cache tags, search, sitemaps and feed data. The development project has no deployed Bloxodes queue worker. Local authenticated `/api/revalidate` checks verify the consumer; a production release must deploy the matching worker source separately.
+
 ## Managed Development
 
 Minecraft migrations `20261002134153`, `20261002142559`, `20261003112951` and `20261003115649` are applied in managed development and production. The October 3 edition release deployed `34541eb14b0fb5d2138539d01314a1597edc2105`. The rollback-only production plan contained only the two new edition migrations; application and ledger readback passed. Seven service-only tables own the Java and Bedrock games/wikis, immutable collection revisions, shared tools and ordered release anchors. Production verification confirmed RLS on all seven tables, no anonymous/authenticated SELECT grants, and `security_invoker=true` on all three protected views. The atomic activation function accepts only an exact 48-revision inventory and is executable by the service role. Production readback matched two published game/wiki identities, 48 pointers and content hashes, all 13,026 rows, their media mappings and authored copy, plus 50 owned search URLs. The legacy parent is unpublished, retaining its original revisions and comments. Shared tools and both release anchors retain their previous publication. The public/extensions schema snapshot was regenerated from the live PostgreSQL 17.6 database after application.

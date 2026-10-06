@@ -4,6 +4,12 @@ Scope: `apps/web/src/app/api`.
 
 These routes back interactive site features, search, tool data, session/progress storage, moderation-aware comments, consent state, health checks, and publish-time revalidation.
 
+## Shared game integration
+
+`/api/games/[namespace]/collections/progress` uses the shared progress handler. Existing GTA and Red Dead progress endpoints wrap it and preserve their client contracts. Keep session ownership, trusted-origin checks, rate limits, published collection/item validation and private no-store responses. Roblox progress uses its existing tables and endpoints.
+
+Shared comments resolve their exact published canonical paths. Search accepts generic game content types alongside preserved GTA, Red Dead and Minecraft types. `/api/revalidate` consumes `game_content` with a namespace-owned path and invalidates dependent hubs, maps, tools, sitemaps and feeds. These changes currently target managed development.
+
 ## Endpoint Groups
 
 - Search and catalog data:

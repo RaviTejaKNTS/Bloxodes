@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
@@ -103,14 +104,14 @@ async function saveGame(game: GameInput): Promise<string> {
     status: game.status ?? "released",
     is_published: game.is_published ?? true
   };
-  const existing = await sb.from("gta_games").select("id").eq("slug", payload.slug).maybeSingle();
+  const existing = await gameDatabase(sb, "gta").from("games").select("id").eq("slug", payload.slug).maybeSingle();
   if (existing.error) throw existing.error;
   if (existing.data?.id) {
-    const updated = await sb.from("gta_games").update(payload).eq("id", existing.data.id).select("id").single();
+    const updated = await gameDatabase(sb, "gta").from("games").update(payload).eq("id", existing.data.id).select("id").single();
     if (updated.error) throw updated.error;
     return updated.data.id;
   }
-  const inserted = await sb.from("gta_games").insert(payload).select("id").single();
+  const inserted = await gameDatabase(sb, "gta").from("games").insert(payload).select("id").single();
   if (inserted.error) throw inserted.error;
   return inserted.data.id;
 }
@@ -129,14 +130,14 @@ async function saveWiki(gameId: string, wiki: WikiInput): Promise<string> {
     tips_md: wiki.tips_md ?? null,
     is_published: wiki.is_published ?? true
   };
-  const existing = await sb.from("gta_wiki_pages").select("id").eq("slug", payload.slug).maybeSingle();
+  const existing = await gameDatabase(sb, "gta").from("wiki_pages").select("id").eq("slug", payload.slug).maybeSingle();
   if (existing.error) throw existing.error;
   if (existing.data?.id) {
-    const updated = await sb.from("gta_wiki_pages").update(payload).eq("id", existing.data.id).select("id").single();
+    const updated = await gameDatabase(sb, "gta").from("wiki_pages").update(payload).eq("id", existing.data.id).select("id").single();
     if (updated.error) throw updated.error;
     return updated.data.id;
   }
-  const inserted = await sb.from("gta_wiki_pages").insert(payload).select("id").single();
+  const inserted = await gameDatabase(sb, "gta").from("wiki_pages").insert(payload).select("id").single();
   if (inserted.error) throw inserted.error;
   return inserted.data.id;
 }
@@ -166,8 +167,7 @@ async function main() {
     const gameId = await saveGame(plan.game);
     await saveWiki(gameId, plan.wiki);
   }
-  const readback = await supabaseAdmin()
-    .from("gta_wiki_pages_view")
+  const readback = await gameDatabase(supabaseAdmin(), "gta").from("wiki_pages_view")
     .select("slug,is_published,game_cover_image,game_hero_image")
     .in("slug", slugs);
   if (readback.error) throw readback.error;

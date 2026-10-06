@@ -1,3 +1,4 @@
+import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { spawn } from "node:child_process";
@@ -7,11 +8,11 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
-type Namespace = "gta" | "red-dead";
-type Config = { label: string; routePrefix: string; tablePrefix: string };
+type Namespace = string;
+type Config = { label: string; routePrefix: string };
 const CONFIGS: Record<Namespace, Config> = {
-  gta: { label: "GTA", routePrefix: "/gta/wiki", tablePrefix: "gta" },
-  "red-dead": { label: "Red Dead", routePrefix: "/red-dead/wiki", tablePrefix: "red_dead" }
+  gta: { label: "GTA", routePrefix: "/gta/wiki" },
+  "red-dead": { label: "Red Dead", routePrefix: "/red-dead/wiki" }
 };
 
 type GameInput = {
@@ -60,13 +61,13 @@ function required(name: string): string {
 }
 
 if (argv.includes("--help") || argv.includes("-h")) {
-  console.log("Usage: npm run verify:franchise-wiki-final -- --namespace <gta|red-dead> --base-url <url> --game <slug> --workspace <dir>");
+  console.log("Usage: npm run verify:franchise-wiki-final -- --namespace <game-namespace> --base-url <url> --game <slug> --workspace <dir>");
   process.exit(0);
 }
 
 const namespace = required("--namespace") as Namespace;
-if (!(namespace in CONFIGS)) throw new Error("--namespace must be gta or red-dead.");
-const config = CONFIGS[namespace];
+if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(namespace) || namespace === "roblox") throw new Error("Invalid non-Roblox namespace");
+const config = CONFIGS[namespace] ?? {label: namespace, routePrefix: `/${namespace}/wiki`};
 const baseUrl = new URL(required("--base-url")).toString().replace(/\/$/, "");
 const gameSlug = required("--game").toLowerCase();
 const workspace = path.resolve(required("--workspace"));
@@ -75,8 +76,8 @@ async function readJson<T>(file: string): Promise<T> {
   return JSON.parse(await readFile(file, "utf8")) as T;
 }
 
-function tableName(suffix: string): string {
-  return `${config.tablePrefix}_${suffix}`;
+function tableName(suffix: string): keyof typeof gameTables {
+  return suffix as keyof typeof gameTables;
 }
 
 async function run(command: string, args: string[]) {
@@ -88,7 +89,7 @@ async function run(command: string, args: string[]) {
 }
 
 async function saveGame(game: GameInput): Promise<string> {
-  const sb = supabaseAdmin();
+  const sb = gameDatabase(supabaseAdmin(), namespace);
   const slug = game.slug.trim().toLowerCase();
   const payload: Record<string, unknown> = {
     slug,
@@ -130,7 +131,7 @@ async function saveGame(game: GameInput): Promise<string> {
 }
 
 async function saveWiki(gameId: string, wiki: WikiInput): Promise<string> {
-  const sb = supabaseAdmin();
+  const sb = gameDatabase(supabaseAdmin(), namespace);
   const slug = wiki.slug.trim().toLowerCase();
   const payload = {
     game_id: gameId,
@@ -173,16 +174,16 @@ async function main() {
   await run("npm", ["run", "content:check-copy", "--", finalFile]);
   const gameId = await saveGame(game);
   const wikiId = await saveWiki(gameId, wiki);
-  const readback = await supabaseAdmin()
+  const readback = await gameDatabase(supabaseAdmin(), namespace)
     .from(tableName("wiki_pages_view"))
-    .select("id, slug, title, game_id, game_title, is_published")
+    .select("id, slug, title, game_id, game_title, is_published, canonical_path")
     .eq("id", wikiId)
     .single();
   if (readback.error) throw readback.error;
   if (!readback.data.is_published || readback.data.game_id !== gameId || readback.data.title !== wiki.title) {
     throw new Error(`Managed-development readback failed for ${gameSlug}.`);
   }
-  const url = `${baseUrl}${config.routePrefix}/${gameSlug}`;
+  const url = `${baseUrl}${readback.data.canonical_path}`;
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   if (response.status !== 200 || !html.includes(wiki.title)) throw new Error(`${url} did not render ${wiki.title} (HTTP ${response.status}).`);

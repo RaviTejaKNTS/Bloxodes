@@ -1,0 +1,2 @@
+// Existing site routes cannot become game namespaces.
+export const reservedGameNamespaces = new Set(["roblox", "games", "wiki", "codes", "tools", "articles", "catalog", "stats", "checklists", "quizzes", "events", "puzzles", "authors", "about", "contact", "disclaimer", "lists", "browser-extension", "editorial-guidelines", "how-we-gather-and-verify-codes", "terms-of-service", "privacy-policy", "cookie-settings", "account-deletion", "api", "auth", "account", "login", "logout", "search", "sitemaps", "feed"]);

@@ -4,6 +4,33 @@ Status: Active
 Last verified: 2026-10-03
 Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive R2 audits, live route/image checks, route tests, exact production row/pointer counts, 209-route production crawl, 106-route managed-development GTA collection crawl, managed GTA public-provenance scan, 2026-09-26 managed-development GTA 281-pointer/type/count/hash/copy reconciliation, 281-route HTML crawl and 281-workspace quality profile, 305-URL GTA sitemap, Tailscale-reachable desktop/mobile GTA preview checks, the user-approved 2026-09-26 production 281-revision/10,793-row reconciliation, 281-route crawl and 32-hosted-hub-image release, and 2026-09-28 GTA V map 377-item/92-place readback, fallback tests, managed-development build, and desktop/mobile browser checks; October 3 independent Minecraft edition build/typecheck, 37 focused tests, 96 authoring checks, 48 final verifiers, 82 managed-development HTTP checks, controlled production schema/data activation, full 48-revision/13,026-row readback and 50 exact live wiki URL checks
 
+## Shared non-Roblox storage in managed development
+
+Last verified: 2026-10-06
+Evidence: applied development migrations, full source-field comparison before and after table retirement, namespace tests and local route checks. Production was not queried or changed by this work.
+
+Managed development now uses `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate tables there. Production retains its previous schema until an approved coordinated database and web release. Earlier production evidence below keeps its original date.
+
+`games.kind` is only `franchise` or `game`. `parent_id` groups child titles under a franchise. A standalone game has no parent. All rows have a `namespace`, which is the root URL slug. Existing game metadata, IDs and relationships remain stored. Roblox does not join this registry.
+
+`game_wiki_pages`, `game_collection_pages`, `game_collection_datasets` and `game_collection_items` own the shared wiki system. A dataset is an immutable revision. The published pointer must belong to its page and match its exact nonzero item count. Items and revisions cannot be edited after creation. Hidden games, parents and wikis cannot expose child collections through the read views.
+
+The migration preserved all original columns across 97,733 collection item rows and 1,618 revisions. It also preserved unpublished and archived content, hosted media references, GTA checklist task IDs, Minecraft tools and releases. The final retirement migration checked every original source field in its transaction before dropping 21 old tables and eight old views. The ignored backup and hash receipts remain under `tmp/shared-games/before`.
+
+`game-content-db.ts` scopes legacy specialist calls to their namespace through explicit shared table names. `shared-game-reader.ts` owns the common readers and immutable runtime loading. The GTA and Red Dead adapters are thin wrappers. Minecraft keeps its edition and calculator helpers. `components/games` contains the common wiki hub, wiki, collection, codes and tool templates. Existing route wrappers preserve URLs, GTA maps and all 13 Minecraft calculators. Homepage and sidebar template work remains deferred.
+
+Default wiki paths are `/<namespace>/wiki` for a root and `/<namespace>/wiki/<game-slug>` for a child. Minecraft keeps `/minecraft/java/wiki` and `/minecraft/bedrock/wiki`. Collection paths append their collection slug to the owning wiki. Existing archived Minecraft URLs remain stored and hidden. Reserved site names cannot become game namespaces.
+
+Use `publish:game-pages -- --namespace <slug> --file <reviewed.json>` to validate a reviewed game/wiki/codes/tool payload. Add `--apply` to write managed development. The command is development-only. Its default check runs the full batch and rolls it back. With `--apply`, the database commits every group together or rolls the entire batch back on failure. Tool codes are derived from their slugs; release rows require game ownership. Redemption codes require their verified source, date and status. GTA cheats remain collections.
+
+Use `sync:shared-game-collection-runtime` with an explicit namespace and reviewed workspace manifests for collection publication. It retains the existing source, media, hash, item-count and readback checks. `export:shared-game-collection-workspace` exports a saved immutable revision. Existing GTA, Red Dead and Minecraft command aliases remain available and use shared storage. The completed one-time `activate:minecraft-editions` command and RPC were removed from managed development.
+
+Run `backup:shared-games` before a future data migration. Run `verify:shared-games` to compare the migrated rows with the frozen legacy backup. `audit:shared-games-preview -- --base-url <preview>` checks every published shared page, its linked collection pagination, canonicals, JSON-LD, progress API guards and XML discovery endpoints.
+
+Signed-in collection progress keeps historical completed IDs when a later revision removes an item, while responses and page totals count only current items. Reset clears the whole saved history. Two-account, two-revision API verification passed. Existing local progress keys remain unchanged.
+
+Skills now live under `.agents/skills/roblox`, `games` and `shared`. Stable flat symlink entry points keep the existing automation paths working. General non-Roblox wiki and collection skills live in `games/wiki-and-collections`; GTA source rules remain in its `gta` subfolder. Shared codes and tools have their own focused instructions.
+
 ## Scope
 
 Production verified on 2026-09-07 at web SHA `bf7ea6ad71a9d6646f83077ceb373d2912ccf997`: five Red Dead hubs and six collections (271 items) are live with ten hosted hub images, sitemap/search coverage, and 100% Completion excluded. Production migrations `20260920000023` and `20260920000024` are applied. The 19 Roblox and 93 GTA legacy wiki checklist rows now use `collectible`; Red Dead has two collectible and four database collections. Saved-progress rows and storage keys were preserved. Standalone checklist pages are unchanged.
@@ -60,7 +87,7 @@ Wiki publication revalidates paginated index paths. The index carries `wiki-inde
 ## Workflow
 
 1. Research and approve the wiki hub or collection opportunity, production overlap, game identity, sources, scope, and route.
-2. For an existing collection, export its published database revision with `npm run export:game-collection-workspace`; for a new collection, create the same ignored workspace and runtime manifest. Gather the complete source-backed dataset and useful player fields there.
+2. For an existing collection, export its published database revision with `npm run export:game-collection-workspace` for Roblox or `npm run export:shared-game-collection-workspace` for other games; for a new collection, create the same ignored workspace and runtime manifest. Gather the complete source-backed dataset and useful player fields there.
 3. Audit the v2 dataset and approve its rows/sections before collecting and wiring images.
 4. Write the wiki or collection `final.json` only after the required research/data/image gates pass.
 5. Synchronize the approved page and immutable dataset revision from its explicit runtime manifest into managed development, publish its dataset pointer there, then run `verify-wiki-final` or `verify-game-collection-finals` against the managed-development web preview.

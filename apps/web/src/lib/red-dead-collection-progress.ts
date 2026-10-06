@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "server-only";
 
 import { supabaseAdmin } from "@/lib/supabase";
@@ -45,8 +46,7 @@ export async function loadUserRedDeadCollectionProgress(userId: string, collecti
   const normalizedCode = normalizeRedDeadCollectionCode(collectionCode);
   if (!normalizedCode) return [];
 
-  const { data, error } = await supabaseAdmin()
-    .from("user_red_dead_collection_progress")
+  const { data, error } = await gameDatabase(supabaseAdmin(), "red-dead").from("collection_progress")
     .select("checked_item_slugs")
     .eq("user_id", userId)
     .eq("collection_code", normalizedCode)
@@ -59,8 +59,7 @@ export async function loadUserRedDeadCollectionProgress(userId: string, collecti
 export async function loadUserRedDeadCollectionProgressIndex(
   userId: string
 ): Promise<Array<{ code: string; checkedCount: number }>> {
-  const { data, error } = await supabaseAdmin()
-    .from("user_red_dead_collection_progress")
+  const { data, error } = await gameDatabase(supabaseAdmin(), "red-dead").from("collection_progress")
     .select("collection_code, checked_item_slugs")
     .eq("user_id", userId);
 
@@ -87,8 +86,7 @@ export async function saveUserRedDeadCollectionProgress(
   const admin = supabaseAdmin();
 
   if (checkedSlugs.length === 0) {
-    const { error } = await admin
-      .from("user_red_dead_collection_progress")
+    const { error } = await gameDatabase(admin, "red-dead").from("collection_progress")
       .delete()
       .eq("user_id", userId)
       .eq("collection_code", normalizedCode);
@@ -96,8 +94,7 @@ export async function saveUserRedDeadCollectionProgress(
     return [];
   }
 
-  const { error } = await admin
-    .from("user_red_dead_collection_progress")
+  const { error } = await gameDatabase(admin, "red-dead").from("collection_progress")
     .upsert(
       {
         user_id: userId,

@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -52,7 +53,11 @@ async function main() {
   const report = { target: "managed-development", projectId: "bbtcaurrtyoukvjbxbbj", seedFile: file, seedSha256: hash(bytes), apply: args.includes("--apply"), releases, sourceEvidence: seed.sourceEvidence, changedRows: 0 };
   if (report.apply) {
     const sb = supabaseAdmin();
-    const existing = await sb.from("minecraft_releases").select(fields);
+    const owners = await gameDatabase(sb, "minecraft").from("games").select("id,slug").in("slug", ["minecraft-java", "minecraft-bedrock"]);
+    if (owners.error) throw owners.error;
+    const editionOwners = new Map((owners.data ?? []).map(row => [String(row.slug).replace("minecraft-", ""), row.id]));
+    if (!editionOwners.get("java") || !editionOwners.get("bedrock")) throw new Error("Both Minecraft edition owners are required.");
+    const existing = await gameDatabase(sb, "minecraft").from("releases").select(fields);
     if (existing.error) throw existing.error;
     const rows = existing.data ?? [];
     for (const row of releases) {
@@ -60,10 +65,10 @@ async function main() {
     }
     const changed = releases.filter(row => !rows.some(actual => actual.edition === row.edition && actual.version === row.version && same(actual, row)));
     if (changed.length) {
-      const written = await sb.from("minecraft_releases").upsert(changed, { onConflict: "edition,version" });
+      const written = await gameDatabase(sb, "minecraft").from("releases").upsert(changed.map(row => ({ ...row, game_id: editionOwners.get(row.edition) })), { onConflict: "edition,version" });
       if (written.error) throw written.error;
     }
-    const readback = await sb.from("minecraft_releases").select(fields).in("version", releases.map(row => row.version));
+    const readback = await gameDatabase(sb, "minecraft").from("releases").select(fields).in("version", releases.map(row => row.version));
     if (readback.error) throw readback.error;
     if (!releases.every(row => (readback.data ?? []).some(actual => same(actual, row)))) throw new Error("Release anchor readback failed.");
     report.changedRows = changed.length;

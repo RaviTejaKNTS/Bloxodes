@@ -16,6 +16,17 @@ Evidence: repository architecture/configuration, database-only wiki/quiz runtime
 
 Navigation and Games page implementation checked locally on 2026-10-02. The shared desktop/mobile navigation order is Home, Articles, Wiki, Catalog, Tools, Stats, Checklists, Quizzes, Codes, Events, Games. `/games` links to Roblox, GTA, Red Dead, and Puzzles through 1200 × 675 image cards with titles over a bottom gradient. Local thumbnails use Roblox press artwork, Rockstar store screenshots, and a CC0 Wordle screenshot; source credits live in `apps/web/public/images/games/SOURCES.md`. Puzzle routes remain under `/puzzles` and activate Games in the shared navigation. These UI changes require a web deployment; production verification is separate.
 
+## Shared non-Roblox storage in managed development
+
+Last verified: 2026-10-06
+Evidence: applied development migrations, full source-field comparison before and after table retirement, namespace tests and local route checks. Production was not queried or changed by this work.
+
+Managed development now uses `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate tables there. Production retains its previous schema until an approved coordinated database and web release. Earlier production evidence below keeps its original date.
+
+Local shared-game reads use `game-content-db.ts`, `shared-game-reader.ts` and `game-registry.ts`. Existing GTA, Red Dead and Minecraft routes call common page templates. New namespaces use the registry-backed `[slug]/[[...segments]]` route. The published registry supplies additional `/games` entries. `/sitemaps/games.xml` and the feed discover new pages; existing game sitemaps preserve their URL and pagination policies. New collection pagination is noindex and omitted from the sitemap.
+
+This checkout now requires the shared database schema. Do not deploy it against the previous production schema. A future production release must coordinate the additive copy, web/worker deployment, verification and old-table retirement. This local task supplied no production authorization.
+
 ## Production Request Path
 
 1. `bloxodes.com` is proxied by Cloudflare.

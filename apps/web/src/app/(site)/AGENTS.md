@@ -10,6 +10,12 @@ Scoped route-family guides:
 - `apps/web/src/app/(site)/quizzes/AGENTS.md`
 - `apps/web/src/app/(site)/tools/AGENTS.md`
 
+## Shared game pages
+
+Managed-development GTA, Red Dead and Minecraft routes use shared game readers and `components/games` page templates. Existing route files retain their public URL contracts. New namespaces resolve through `[slug]/[[...segments]]/page.tsx`; unknown roots and unpublished pages return 404. `games.kind` and `parent_id` choose a franchise hub or standalone wiki. Minecraft keeps its edition paths and redirects. Homepage and sidebar template redesign remains deferred.
+
+Check metadata, structured data, pagination, shared search, comments, progress, sitemaps, feed and revalidation whenever adding a page type. New non-GTA collection pagination is noindex. The shared changes have not been released to production.
+
 ## Route Families
 
 - Core content: home, codes, articles, stats, checklists, events, quizzes, wiki pages, puzzles, authors.
@@ -17,7 +23,7 @@ Scoped route-family guides:
 - Catalog: music IDs, free Roblox items, admin commands, color codes, decal IDs, The Forge, and generic catalog fallback routes.
 - Tools: Roblox ID extractor, Robux/USD, DevEx, The Forge calculators, Grow a Garden calculator, and generic tool fallback routes.
 - Static pages: about, contact, policies, disclaimer, editorial, cookie settings.
-- Redirect/fallback: legacy slug resolver in `[slug]/page.tsx`.
+- Redirect/fallback: registry-backed game routes in `[slug]/[[...segments]]/page.tsx`.
 
 ## Working Patterns
 
@@ -43,7 +49,7 @@ Scoped route-family guides:
 - Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`.
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
 - Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `dev-docs/pipelines/catalog.md` and `dev-docs/pipelines/wiki-collections.md` respectively; a shared card/list renderer does not merge their data ownership.
-- GTA wiki and collection pages reuse the same renderer contract but load only from the `gta_*` tables through `apps/web/src/lib/gta.ts`; never attach GTA rows to Roblox universe or wiki tables.
+- GTA wiki and collection pages reuse the same renderer contract but load shared development storage through `apps/web/src/lib/gta.ts`; never attach GTA rows to Roblox universe or wiki tables.
 - Roblox wiki collections use the same `wiki_collection_pages` row with an explicit `page_type`: `database` keeps the existing paginated table/card renderer, while `collectible` uses the shared collectible renderer and local-first/account-synced progress. Keep the page-type decision in the runtime manifest and page row rather than creating a new table.
 
 ## Public Route Checklists
@@ -67,18 +73,18 @@ Scoped route-family guides:
 
 ## Red Dead and collectible rollout (2026-09-07)
 
-Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. The previous production model uses isolated `red_dead_*` tables for Red Dead, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. These migrations preceded the current shared development storage.
 
 Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
 
 
 ## GTA standalone checklist support (2026-09-10)
 
-GTA standalone completion checklists live under `/gta/checklists/<game-slug>` and reuse `ChecklistPageTemplate`, `ChecklistBoard` and the platform-neutral index renderer. Keep the UI shared; checklist page data belongs to `gta_checklist_pages` and `gta_checklist_items` linked to `gta_games`, not Roblox universes. Managed development currently publishes GTA V, San Andreas, Vice City, and the dated GTA Online Career Progress snapshot. All checkable tasks require exactly three-part section codes. See `dev-docs/pipelines/content.md`.
+GTA standalone completion checklists live under `/gta/checklists/<game-slug>` and reuse `ChecklistPageTemplate`, `ChecklistBoard` and the platform-neutral index renderer. Keep the UI shared; development checklist data belongs to `game_checklist_pages` and `game_checklist_items` linked to `games` with the GTA namespace. Managed development currently publishes GTA V, San Andreas, Vice City, and the dated GTA Online Career Progress snapshot. All checkable tasks require exactly three-part section codes. See `dev-docs/pipelines/content.md`.
 
 ## Shared engagement presentation (2026-09-10)
 
 Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.
 
 
-Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. Stage new identities and revisions unpublished with explicit `--stage`, deploy routes, then use the exact-hash `activate:minecraft-editions` transaction for the cutover. See `dev-docs/pipelines/wiki-collections.md`.
+Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New development publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `dev-docs/pipelines/wiki-collections.md`.

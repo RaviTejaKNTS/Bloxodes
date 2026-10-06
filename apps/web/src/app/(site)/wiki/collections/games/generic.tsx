@@ -946,7 +946,7 @@ export function renderGameCollectionPage({
   wikiHomePath?: string;
   wikiLabel?: string;
   collectionOptions?: Array<{ value: string; label: string; href: string }>;
-  commentsEntityType?: "wiki_collection" | "gta_wiki_collection";
+  commentsEntityType?: "wiki_collection" | "gta_wiki_collection" | "red_dead_wiki_collection" | "minecraft_wiki_collection" | "game_collection";
   showMoreCollections?: boolean;
   enableItemFinder?: boolean;
 }) {

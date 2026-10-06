@@ -25,7 +25,11 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "red_dead_wiki_collection",
   "minecraft_wiki",
   "minecraft_wiki_collection",
-  "minecraft_tool"
+  "minecraft_tool",
+  "game_wiki",
+  "game_collection",
+  "game_tool",
+  "game_code"
 ]);
 const MAX_BODY_LENGTH = 1000;
 const MAX_GUEST_NAME_LENGTH = 60;
@@ -50,7 +54,11 @@ type CommentEntityType =
   | "red_dead_wiki_collection"
   | "minecraft_wiki"
   | "minecraft_wiki_collection"
-  | "minecraft_tool";
+  | "minecraft_tool"
+    | "game_wiki"
+    | "game_collection"
+    | "game_tool"
+    | "game_code";
 
 type CommentPageTarget = {
   pageType: string;
@@ -99,6 +107,20 @@ function hasWikiCollectionPath(row: unknown): row is { wiki_slug: string; collec
 
 async function resolveCommentPageTarget(entityType: CommentEntityType, entityId: string): Promise<CommentPageTarget | null> {
   const admin = supabaseAdmin();
+  const gameTargets: Record<string, { table: string; namespace?: string }> = {
+    game_wiki: { table: "game_wiki_pages_view" }, game_collection: { table: "game_collection_pages_view" }, game_tool: { table: "game_tool_pages_view" }, game_code: { table: "game_code_pages_view" },
+    gta_wiki: { table: "game_wiki_pages_view", namespace: "gta" }, gta_wiki_collection: { table: "game_collection_pages_view", namespace: "gta" },
+    red_dead_wiki: { table: "game_wiki_pages_view", namespace: "red-dead" }, red_dead_wiki_collection: { table: "game_collection_pages_view", namespace: "red-dead" },
+    minecraft_wiki: { table: "game_wiki_pages_view", namespace: "minecraft" }, minecraft_wiki_collection: { table: "game_collection_pages_view", namespace: "minecraft" }, minecraft_tool: { table: "game_tool_pages_view", namespace: "minecraft" }
+  };
+  const target = gameTargets[entityType];
+  if (target) {
+    let query = admin.from(target.table).select("canonical_path").eq("id", entityId).eq("is_published", true);
+    if (target.namespace) query = query.eq("namespace", target.namespace);
+    const { data, error } = await query.maybeSingle();
+    if (error || !data?.canonical_path) return null;
+    return { pageType: entityType, pageUrl: buildPageUrl(data.canonical_path) };
+  }
 
   if (entityType === "code") {
     const { data, error } = await admin
@@ -164,67 +186,6 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
       .maybeSingle();
     if (error || !hasSlug(data) || !data.slug.trim()) return null;
     return { pageType: "Wiki", pageUrl: buildPageUrl(`/wiki/${data.slug}`) };
-  }
-
-  if (entityType === "minecraft_wiki" || entityType === "minecraft_wiki_collection" || entityType === "minecraft_tool") {
-    const table = entityType === "minecraft_wiki" ? "minecraft_wiki_pages_view" : entityType === "minecraft_tool" ? "minecraft_tools_view" : "minecraft_wiki_collection_pages_view";
-    const key = entityType === "minecraft_wiki_collection" ? "collection_slug" : "slug";
-    const { data, error } = await admin.from(table).select(entityType === "minecraft_wiki_collection" ? "collection_slug, wiki_slug, code" : key).eq("id", entityId).eq("is_published", true).maybeSingle();
-    if (error || !data) return null;
-    const slug = normalizeString((data as unknown as Record<string, unknown>)[key]);
-    if (!slug) return null;
-    const path = entityType === "minecraft_wiki" ? buildMinecraftWikiPath(slug) : entityType === "minecraft_tool" ? `/minecraft/tools/${slug}` : buildMinecraftCollectionPath(normalizeString((data as unknown as Record<string, unknown>).wiki_slug), slug);
-    return { pageType: entityType === "minecraft_tool" ? "Minecraft Tool" : "Minecraft Wiki", pageUrl: buildPageUrl(path) };
-  }
-
-  if (entityType === "gta_wiki") {
-    const { data, error } = await admin
-      .from("gta_wiki_pages")
-      .select("slug")
-      .eq("id", entityId)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (error || !hasSlug(data) || !data.slug.trim()) return null;
-    return { pageType: "GTA Wiki", pageUrl: buildPageUrl(`/gta/wiki/${data.slug}`) };
-  }
-
-  if (entityType === "gta_wiki_collection") {
-    const { data, error } = await admin
-      .from("gta_wiki_collection_pages")
-      .select("wiki_slug, collection_slug")
-      .eq("id", entityId)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (error || !hasWikiCollectionPath(data) || !data.wiki_slug.trim() || !data.collection_slug.trim()) return null;
-    return {
-      pageType: "GTA Wiki Collection",
-      pageUrl: buildPageUrl(`/gta/wiki/${data.wiki_slug}/${data.collection_slug}`)
-    };
-  }
-
-  if (entityType === "red_dead_wiki") {
-    const { data, error } = await admin
-      .from("red_dead_wiki_pages")
-      .select("slug")
-      .eq("id", entityId)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (error || !hasSlug(data) || !data.slug.trim()) return null;
-    return { pageType: "Red Dead Wiki", pageUrl: buildPageUrl(`/red-dead/wiki/${data.slug}`) };
-  }
-
-  if (entityType === "red_dead_wiki_collection") {
-    const { data, error } = await admin
-      .from("red_dead_wiki_collection_pages")
-      .select("wiki_slug, collection_slug")
-      .eq("id", entityId)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (error || !hasWikiCollectionPath(data) || !data.wiki_slug.trim() || !data.collection_slug.trim()) return null;
-    return {
-      pageType: "Red Dead Wiki Collection",
-      pageUrl: buildPageUrl(`/red-dead/wiki/${data.wiki_slug}/${data.collection_slug}`)
-    };
   }
 
   const { data, error } = await admin

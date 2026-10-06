@@ -4,12 +4,13 @@ import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
+import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { collectionImageKey, uploadCollectionImages, verifyCollectionImages } from "../shared/franchise-collection-media";
 
-type Namespace = "gta" | "red-dead" | "minecraft";
+type Namespace = string;
 
 type FranchiseConfig = {
   label: string;
@@ -91,7 +92,7 @@ const FORBIDDEN_PUBLIC_FIELDS = new Set([
 
 function usage(): never {
   console.log(
-    "Usage: npm run sync:franchise-collection-runtime -- --namespace <gta|red-dead|minecraft> --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--allow-prod] [--minecraft-media-concurrency <1-8>]"
+    "Usage: npm run sync:franchise-collection-runtime -- --namespace <game-namespace> --manifest <runtime-manifest.json> [--apply] [--upload-media] [--publish] [--allow-prod] [--minecraft-media-concurrency <1-8>]"
   );
   process.exit(0);
 }
@@ -111,11 +112,11 @@ function collectValues(flag: string): string[] {
 }
 
 if (argv.includes("--help") || argv.includes("-h")) usage();
-if (!(namespace in FRANCHISES)) throw new Error("--namespace must be gta, red-dead, or minecraft.");
+if (!SAFE_SLUG.test(namespace) || namespace === "roblox") throw new Error("--namespace must be a non-Roblox game namespace.");
 if (argv.includes("--minecraft-media-concurrency") && namespace !== "minecraft") throw new Error("--minecraft-media-concurrency is only supported for Minecraft.");
 if (!Number.isInteger(minecraftMediaConcurrency) || minecraftMediaConcurrency < 1 || minecraftMediaConcurrency > 8) throw new Error("--minecraft-media-concurrency must be an integer from 1 to 8.");
 if (!manifestPaths.length) throw new Error("At least one --manifest is required.");
-if (stage && (namespace !== "minecraft" || publish)) throw new Error("Staging is limited to unpublished Minecraft edition revisions.");
+if (stage && publish) throw new Error("--stage creates unpublished revisions and cannot use --publish.");
 if (publish && !apply) throw new Error("--publish requires --apply.");
 if (uploadMedia && !apply) throw new Error("--upload-media requires --apply.");
 
@@ -183,7 +184,7 @@ function resolveInside(root: string, valueToResolve: string, label: string): str
 }
 
 async function planManifest(namespaceValue: Namespace, manifestPath: string): Promise<Plan> {
-  const config = FRANCHISES[namespaceValue];
+  const config = FRANCHISES[namespaceValue] ?? { label: namespaceValue, routePrefix: `/${namespaceValue}/wiki`, tablePrefix: namespaceValue, mediaPrefix: namespaceValue };
   const root = path.dirname(manifestPath);
   const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8")) as Manifest;
   if (manifest.schemaVersion !== 1) throw new Error(`${manifestPath} must use schemaVersion 1.`);
@@ -196,7 +197,10 @@ async function planManifest(namespaceValue: Namespace, manifestPath: string): Pr
   if (pageType !== "database" && pageType !== "collectible") throw new Error(`${manifestPath} has an invalid collection.pageType.`);
   if (namespaceValue === "minecraft" && (!["minecraft", "minecraft-java", "minecraft-bedrock"].includes(gameSlug) || pageType !== "database")) throw new Error("Minecraft requires an approved edition identity and database collections.");
   if (namespaceValue === "minecraft" && (!Array.isArray(manifest.sourceUrls) || !manifest.sourceUrls.length || manifest.sourceUrls.some(url => typeof url !== "string" || !url.startsWith("https://")))) throw new Error("Minecraft collections need verified HTTPS source URLs.");
-  const expectedRoute = namespaceValue === "minecraft" ? gameSlug === "minecraft" ? `${config.routePrefix}/${collectionSlug}` : `/minecraft/${gameSlug.replace("minecraft-", "")}/wiki/${collectionSlug}` : `${config.routePrefix}/${gameSlug}/${collectionSlug}`;
+  const { data: wikiIdentity, error: wikiError } = await gameDatabase(supabaseAdmin(), namespaceValue).from("wiki_pages").select("canonical_path").eq("slug", gameSlug).maybeSingle();
+  if (wikiError) throw wikiError;
+  if (!wikiIdentity) throw new Error(`Create the ${gameSlug} wiki before planning its collections.`);
+  const expectedRoute = `${wikiIdentity.canonical_path}/${collectionSlug}`;
   if (manifest.route && manifest.route !== expectedRoute) throw new Error(`${manifestPath} route does not match its slugs.`);
   const datasetPath = resolveInside(root, manifest.dataset, "dataset");
   const mediaRoot = resolveInside(root, manifest.mediaRoot, "mediaRoot");
@@ -268,7 +272,7 @@ async function planManifest(namespaceValue: Namespace, manifestPath: string): Pr
       label: manifest.collection.label.trim(),
       pageType,
       namespace: namespaceValue,
-      source: `${config.tablePrefix}_wiki_collection_datasets`
+      source: "game_collection_datasets"
     }
   };
   const hashDocument = {
@@ -336,12 +340,12 @@ function pageCopy(plan: Plan): Record<string, unknown> | null {
   };
 }
 
-function tableName(config: FranchiseConfig, suffix: string): string {
-  return `${config.tablePrefix}_${suffix}`;
+function tableName(_config: FranchiseConfig, suffix: string): keyof typeof gameTables {
+  return suffix as keyof typeof gameTables;
 }
 
 async function applyPlan(plan: Plan) {
-  const sb = supabaseAdmin();
+  const sb = gameDatabase(supabaseAdmin(), plan.namespace);
   const gameTable = tableName(plan.config, "games");
   const wikiTable = tableName(plan.config, "wiki_pages");
   const pagesTable = tableName(plan.config, "wiki_collection_pages");
@@ -350,7 +354,7 @@ async function applyPlan(plan: Plan) {
   const game = await sb.from(gameTable).select("id, slug, is_published").eq("slug", plan.manifest.game.slug).maybeSingle();
   if (game.error) throw game.error;
   if (!game.data || !stage && !game.data.is_published) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} game row before its collection.`);
-  const wiki = await sb.from(wikiTable).select("id, game_id, slug, is_published").eq("slug", plan.manifest.game.slug).maybeSingle();
+  const wiki = await sb.from(wikiTable).select("id, game_id, slug, is_published, canonical_path").eq("slug", plan.manifest.game.slug).maybeSingle();
   if (wiki.error) throw wiki.error;
   if (!wiki.data || !stage && !wiki.data.is_published || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} wiki row before its collection.`);
   const copy = pageCopy(plan);
@@ -413,7 +417,8 @@ async function applyPlan(plan: Plan) {
         if (insertedItems.error) throw insertedItems.error;
       }
     } catch (error) {
-      await sb.from(datasetsTable).delete().eq("id", inserted.data.id);
+      const cleanup = await sb.from(datasetsTable).delete().eq("id", inserted.data.id);
+      if (cleanup.error) throw new Error(`Failed revision ${inserted.data.id} could not be removed: ${cleanup.error.message}`, { cause: error });
       throw error;
     }
   }
@@ -438,7 +443,7 @@ async function applyPlan(plan: Plan) {
 
 async function main() {
   const namespaceValue = namespace as Namespace;
-  const config = FRANCHISES[namespaceValue];
+  const config = FRANCHISES[namespaceValue] ?? { label: namespaceValue, routePrefix: `/${namespaceValue}/wiki`, tablePrefix: namespaceValue, mediaPrefix: namespaceValue };
   const managed = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
   if (apply && !managed && !allowProd) throw new Error(`${config.label} collection writes default to managed development; production requires --allow-prod.`);

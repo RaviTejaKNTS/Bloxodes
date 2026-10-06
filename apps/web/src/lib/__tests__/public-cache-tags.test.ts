@@ -87,3 +87,11 @@ describe("public cache tags", () => {
     expect(serializeCacheTags(["home", "home", "codes-index"])).toBe("home,codes-index");
   });
 });
+
+
+describe("shared game cache invalidation", () => {
+ it("purges the cached games directory when shared game content changes", () => {
+  expect(cacheTagsForEvent("game_content", "sandustry/wiki")).toContain("games-index");
+  expect(cacheTagsForPath("/games")).toContain("games-index");
+ });
+});

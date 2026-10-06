@@ -1,3 +1,4 @@
+import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { createHash } from "node:crypto";
@@ -28,18 +29,18 @@ type HostedMedia = {
 
 type NamespaceConfig = {
   label: string;
-  gameTable: string;
-  pageTable: string;
-  viewTable: string;
+  gameTable: keyof typeof gameTables;
+  pageTable: keyof typeof gameTables;
+  viewTable: keyof typeof gameTables;
   mediaPrefix: string;
 };
 
 const NAMESPACE_CONFIG: Record<Namespace, NamespaceConfig> = {
   "red-dead": {
     label: "Red Dead",
-    gameTable: "red_dead_games",
-    pageTable: "red_dead_wiki_pages",
-    viewTable: "red_dead_wiki_pages_view",
+    gameTable: "games",
+    pageTable: "wiki_pages",
+    viewTable: "wiki_pages_view",
     mediaPrefix: "red-dead"
   }
 };
@@ -236,7 +237,7 @@ async function uploadHostedMedia(
 }
 
 async function requireRows(config: NamespaceConfig, media: readonly FranchiseWikiMedia[]) {
-  const sb = supabaseAdmin();
+  const sb = gameDatabase(supabaseAdmin(), namespace);
   const slugs = media.map((entry) => entry.slug);
   const [games, pages] = await Promise.all([
     sb.from(config.gameTable).select("slug,is_published,cover_image,hero_image").in("slug", slugs),
@@ -258,7 +259,7 @@ async function requireRows(config: NamespaceConfig, media: readonly FranchiseWik
 }
 
 async function applyMediaRoles(config: NamespaceConfig, media: readonly FranchiseWikiMedia[], prepared: Map<string, { cover: HostedMedia; hero: HostedMedia }>) {
-  const sb = supabaseAdmin();
+  const sb = gameDatabase(supabaseAdmin(), namespace);
   for (const entry of media) {
     const assets = prepared.get(entry.slug);
     if (!assets) throw new Error(`Missing prepared hosted media for ${entry.slug}.`);
@@ -275,7 +276,7 @@ async function applyMediaRoles(config: NamespaceConfig, media: readonly Franchis
 }
 
 async function verifyState(config: NamespaceConfig, media: readonly FranchiseWikiMedia[], prepared: Map<string, { cover: HostedMedia; hero: HostedMedia }>) {
-  const sb = supabaseAdmin();
+  const sb = gameDatabase(supabaseAdmin(), namespace);
   const slugs = media.map((entry) => entry.slug);
   const [games, pages, view] = await Promise.all([
     sb.from(config.gameTable).select("slug,is_published,cover_image,hero_image").in("slug", slugs),

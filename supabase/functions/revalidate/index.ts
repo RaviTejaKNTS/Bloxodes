@@ -21,6 +21,7 @@ type EventRow = {
     | "minecraft_wiki"
     | "minecraft_wiki_collection"
     | "minecraft_tool"
+    | "game_content"
     | "stats";
   slug: string;
 };

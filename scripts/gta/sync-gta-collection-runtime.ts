@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { createHash } from "node:crypto";
@@ -224,7 +225,7 @@ async function planManifest(manifestPath: string): Promise<Plan> {
       gameName: manifest.game.name.trim(),
       label: manifest.collection.label.trim(),
       pageType,
-      source: "gta_wiki_collection_datasets"
+      source: "game_collection_datasets"
     }
   };
   const hashDocument = {
@@ -300,14 +301,14 @@ async function verifyReusedImages(plan: Plan) {
   const images = plan.items.filter((item) => item.image_key);
   if (!images.length) return;
   const sb = supabaseAdmin();
-  const page = await sb.from("gta_wiki_collection_pages")
+  const page = await gameDatabase(sb, "gta").from("wiki_collection_pages")
     .select("published_dataset_id")
     .eq("code", plan.code)
     .single();
   if (page.error || !page.data?.published_dataset_id) throw page.error ?? new Error(`${plan.code} has no published media revision to reuse.`);
   const existing = new Map<string, { image_key: string | null; image_sha256: string | null }>();
   for (let start = 0; ; start += 1000) {
-    const result = await sb.from("gta_wiki_collection_items")
+    const result = await gameDatabase(sb, "gta").from("wiki_collection_items")
       .select("item_slug, image_key, image_sha256")
       .eq("dataset_id", page.data.published_dataset_id)
       .range(start, start + 999);
@@ -342,15 +343,14 @@ async function publishPlan(plan: Plan, r2: R2Client | null) {
 
 async function applyPlan(plan: Plan) {
   const sb = supabaseAdmin();
-  const game = await sb.from("gta_games").select("id, slug").eq("slug", plan.manifest.game.slug).eq("is_published", true).maybeSingle();
+  const game = await gameDatabase(sb, "gta").from("games").select("id, slug").eq("slug", plan.manifest.game.slug).eq("is_published", true).maybeSingle();
   if (game.error) throw game.error;
   if (!game.data) throw new Error(`Publish the ${plan.manifest.game.slug} GTA game row before its collection.`);
-  const wiki = await sb.from("gta_wiki_pages").select("id, game_id, slug").eq("slug", plan.manifest.game.slug).eq("is_published", true).maybeSingle();
+  const wiki = await gameDatabase(sb, "gta").from("wiki_pages").select("id, game_id, slug").eq("slug", plan.manifest.game.slug).eq("is_published", true).maybeSingle();
   if (wiki.error) throw wiki.error;
   if (!wiki.data || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} GTA wiki row before its collection.`);
   const copy = pageCopy(plan);
-  let pageQuery = await sb
-    .from("gta_wiki_collection_pages")
+  let pageQuery = await gameDatabase(sb, "gta").from("wiki_collection_pages")
     .select("id, game_id, wiki_page_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
     .eq("wiki_slug", plan.manifest.game.slug)
     .eq("collection_slug", plan.manifest.collection.slug)
@@ -359,7 +359,7 @@ async function applyPlan(plan: Plan) {
   let page = pageQuery.data;
   if (!page) {
     if (!copy) throw new Error(`${plan.code} needs final.json before its page can be created.`);
-    const inserted = await sb.from("gta_wiki_collection_pages").insert({
+    const inserted = await gameDatabase(sb, "gta").from("wiki_collection_pages").insert({
       ...copy,
       wiki_page_id: wiki.data.id,
       game_id: game.data.id,
@@ -374,10 +374,10 @@ async function applyPlan(plan: Plan) {
     page = inserted.data;
   }
   if (page.game_id !== game.data.id || page.wiki_page_id !== wiki.data.id || page.code !== plan.code) throw new Error(`${plan.code} page identity mismatch.`);
-  let dataset = await sb.from("gta_wiki_collection_datasets").select("id, item_count").eq("collection_page_id", page.id).eq("content_hash", plan.contentHash).maybeSingle();
+  let dataset = await gameDatabase(sb, "gta").from("wiki_collection_datasets").select("id, item_count").eq("collection_page_id", page.id).eq("content_hash", plan.contentHash).maybeSingle();
   if (dataset.error) throw dataset.error;
   if (!dataset.data) {
-    const inserted = await sb.from("gta_wiki_collection_datasets").insert({
+    const inserted = await gameDatabase(sb, "gta").from("wiki_collection_datasets").insert({
       collection_page_id: page.id,
       schema_version: 2,
       content_hash: plan.contentHash,
@@ -402,20 +402,21 @@ async function applyPlan(plan: Plan) {
     try {
       for (let start = 0; start < plan.items.length; start += 500) {
         const rows = plan.items.slice(start, start + 500).map(({ prepared_image: _bytes, ...item }) => ({ dataset_id: inserted.data.id, ...item }));
-        const insertedItems = await sb.from("gta_wiki_collection_items").insert(rows);
+        const insertedItems = await gameDatabase(sb, "gta").from("wiki_collection_items").insert(rows);
         if (insertedItems.error) throw insertedItems.error;
       }
     } catch (error) {
-      await sb.from("gta_wiki_collection_datasets").delete().eq("id", inserted.data.id);
+      const cleanup = await gameDatabase(sb, "gta").from("wiki_collection_datasets").delete().eq("id", inserted.data.id);
+      if (cleanup.error) throw new Error(`Failed revision ${inserted.data.id} could not be removed: ${cleanup.error.message}`, { cause: error });
       throw error;
     }
   }
-  const count = await sb.from("gta_wiki_collection_items").select("id", { count: "exact", head: true }).eq("dataset_id", dataset.data.id);
+  const count = await gameDatabase(sb, "gta").from("wiki_collection_items").select("id", { count: "exact", head: true }).eq("dataset_id", dataset.data.id);
   if (count.error) throw count.error;
   if (count.count !== plan.items.length || Number(dataset.data.item_count) !== plan.items.length) throw new Error(`${plan.code} dataset count mismatch.`);
   if (publish) {
     if (!copy) throw new Error(`${plan.code} cannot publish without final.json.`);
-    const updated = await sb.from("gta_wiki_collection_pages").update({
+    const updated = await gameDatabase(sb, "gta").from("wiki_collection_pages").update({
       ...copy,
       page_type: plan.pageType,
       item_count: plan.items.length,

@@ -65,6 +65,11 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   minecraft_wiki: "wiki",
   minecraft_wiki_collection: "wiki",
   minecraft_tool: "tool",
+  game_wiki: "wiki",
+  game_collection: "wiki",
+  game_code: "codes",
+  game_tool: "tool",
+  game_checklist: "checklist",
   stats_game: "stats"
 };
 

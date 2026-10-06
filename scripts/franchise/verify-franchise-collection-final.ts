@@ -1,3 +1,4 @@
+import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
@@ -6,12 +7,12 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 import { minecraftCollectionTitleForCount } from "../../apps/web/src/lib/minecraft-edition";
 
-type Namespace = "gta" | "red-dead" | "minecraft";
-type Config = { label: string; routePrefix: string; tablePrefix: string };
+type Namespace = string;
+type Config = { label: string; routePrefix: string };
 const CONFIGS: Record<Namespace, Config> = {
-  gta: { label: "GTA", routePrefix: "/gta/wiki", tablePrefix: "gta" },
-  minecraft: { label: "Minecraft", routePrefix: "/minecraft/wiki", tablePrefix: "minecraft" },
-  "red-dead": { label: "Red Dead", routePrefix: "/red-dead/wiki", tablePrefix: "red_dead" }
+  gta: { label: "GTA", routePrefix: "/gta/wiki" },
+  minecraft: { label: "Minecraft", routePrefix: "/minecraft/wiki" },
+  "red-dead": { label: "Red Dead", routePrefix: "/red-dead/wiki" }
 };
 
 type Manifest = { schemaVersion?: number; namespace?: Namespace; game?: { slug?: string }; collection?: { slug?: string; pageType?: "database" | "collectible" } };
@@ -28,20 +29,20 @@ function required(name: string): string {
   return result;
 }
 if (argv.includes("--help") || argv.includes("-h")) {
-  console.log("Usage: npm run verify:franchise-collection-final -- --namespace <gta|red-dead|minecraft> --base-url <url> --game <slug> --collection <slug> --workspace <dir> [--allow-missing-images]");
+  console.log("Usage: npm run verify:franchise-collection-final -- --namespace <game-namespace> --base-url <url> --game <slug> --collection <slug> --workspace <dir> [--allow-missing-images]");
   process.exit(0);
 }
 const namespace = required("--namespace") as Namespace;
-if (!(namespace in CONFIGS)) throw new Error("--namespace must be gta, red-dead, or minecraft.");
-const config = CONFIGS[namespace];
+if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(namespace) || namespace === "roblox") throw new Error("Invalid non-Roblox namespace");
+const config = CONFIGS[namespace] ?? {label: namespace, routePrefix: `/${namespace}/wiki`};
 const baseUrl = new URL(required("--base-url")).toString().replace(/\/$/, "");
 const gameSlug = required("--game").toLowerCase();
 const collectionSlug = required("--collection").toLowerCase();
 const workspace = path.resolve(required("--workspace"));
 const allowMissingImages = argv.includes("--allow-missing-images");
 
-function tableName(suffix: string): string {
-  return `${config.tablePrefix}_${suffix}`;
+function tableName(suffix: string): keyof typeof gameTables {
+  return suffix as keyof typeof gameTables;
 }
 function resolveCountTokens(value: string, count: number): string {
   return value.replace(/\{\{\s*(?:count|item_count)\s*\}\}|\{\s*(?:count|item_count)\s*\}/gi, count.toLocaleString("en-US"));
@@ -66,8 +67,8 @@ async function main() {
   }
   if (final.code !== `${gameSlug}-${collectionSlug}` || !final.display_name?.trim() || !final.title?.trim()) throw new Error("final.json identity, display_name, and title are required.");
 
-  const sb = supabaseAdmin();
-  const page = await sb.from(tableName("wiki_collection_pages")).select("id, title, display_name, item_count, published_dataset_id, is_published, page_type").eq("wiki_slug", gameSlug).eq("collection_slug", collectionSlug).single();
+  const sb = gameDatabase(supabaseAdmin(), namespace);
+  const page = await sb.from(tableName("wiki_collection_pages")).select("id, title, display_name, item_count, published_dataset_id, is_published, page_type, canonical_path").eq("wiki_slug", gameSlug).eq("collection_slug", collectionSlug).single();
   if (page.error) throw page.error;
   if (!page.data.is_published || !page.data.published_dataset_id || page.data.item_count < 1) throw new Error("Published collection page readback failed.");
   const expectedPageType = ["collectible", "checklist"].includes(String(manifest.collection?.pageType)) ? "collectible" : "database";
@@ -78,7 +79,7 @@ async function main() {
   const expectedTitle = resolveCountTokens(final.title, page.data.item_count);
   if (page.data.title !== expectedTitle || page.data.display_name !== final.display_name) throw new Error("Published collection copy readback failed.");
 
-  const url = namespace === "minecraft" ? `${baseUrl}${gameSlug === "minecraft" ? config.routePrefix : `/minecraft/${gameSlug.replace("minecraft-", "")}/wiki`}/${collectionSlug}` : `${baseUrl}${config.routePrefix}/${gameSlug}/${collectionSlug}`;
+  const url = `${baseUrl}${page.data.canonical_path}`;
   const response = await fetch(url, { redirect: "follow" });
   const html = await response.text();
   const javaCount = dataset.items.filter(row => !Array.isArray(row.item?.editions) || row.item.editions.includes("java")).length;

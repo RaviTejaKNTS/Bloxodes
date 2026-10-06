@@ -1,5 +1,7 @@
 # Route Handlers Inventory
 
+Development verified 2026-10-06 adds `/api/games/[namespace]/collections/progress` and `/sitemaps/games.xml`. Existing GTA and Red Dead progress endpoints delegate to the namespace-scoped shared handler. Generic game comments/search types and `game_content` cache events support new namespaces. Saved canonical paths drive comment links and cache refresh. Existing mutation authorization and no-store rules remain required. Production has not received this change.
+
 Minecraft uses the existing `/api/search/all` with `scope=minecraft`, `/api/comments` with Minecraft wiki/collection/tool ownership, `/api/revalidate` with Minecraft event types, `/feed.xml` and `/sitemaps/minecraft.xml`. Its sitemap is listed in `/sitemap.xml`, includes published routes only and returns 503 on data-loading failure. Existing mutation origin, rate-limit and moderation rules remain in place.
 
 Authoritative workflow guidance lives in:

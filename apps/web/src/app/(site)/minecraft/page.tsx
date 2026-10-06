@@ -3,7 +3,7 @@ import { ContentCard } from "@/components/ContentCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { MinecraftEditionCards } from "./wiki/page";
+import { MinecraftEditionCards } from "./wiki/page-data";
 import { buildMinecraftWikiPath, listPublishedMinecraftWikiPages, getMinecraftWikiPageBySlug, listPublishedMinecraftCollections, listMinecraftTools, resolveMinecraftWikiCoverImage } from "@/lib/minecraft";
 
 const description = "Explore Minecraft collections and calculators for Java and Bedrock Edition.";

@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { createHash } from "node:crypto";
@@ -217,8 +218,8 @@ async function uploadHostedMedia(
 async function requireRows() {
   const sb = supabaseAdmin();
   const [games, pages] = await Promise.all([
-    sb.from("gta_games").select("slug,is_published,cover_image,hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)),
-    sb.from("gta_wiki_pages").select("slug,is_published").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug))
+    gameDatabase(sb, "gta").from("games").select("slug,is_published,cover_image,hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)),
+    gameDatabase(sb, "gta").from("wiki_pages").select("slug,is_published").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug))
   ]);
   if (games.error) throw games.error;
   if (pages.error) throw pages.error;
@@ -227,7 +228,7 @@ async function requireRows() {
   const pageMap = new Map((pages.data ?? []).map((row) => [row.slug, row]));
   for (const media of GTA_WIKI_MEDIA) {
     if (!gameMap.has(media.slug) || !gameMap.get(media.slug)?.is_published) {
-      throw new Error(`Expected published gta_games row is missing: ${media.slug}`);
+      throw new Error(`Expected published GTA game row is missing: ${media.slug}`);
     }
     if (!pageMap.has(media.slug) || !pageMap.get(media.slug)?.is_published) {
       throw new Error(`Expected published gta_wiki_pages row is missing: ${media.slug}`);
@@ -240,8 +241,7 @@ async function applyMediaRoles(prepared: Map<string, { cover: HostedMedia; thumb
   for (const media of GTA_WIKI_MEDIA) {
     const assets = prepared.get(media.slug);
     if (!assets) throw new Error(`Missing prepared hosted media for ${media.slug}.`);
-    const result = await sb
-      .from("gta_games")
+    const result = await gameDatabase(sb, "gta").from("games")
       .update({ cover_image: assets.cover.publicUrl, hero_image: assets.thumbnail.publicUrl })
       .eq("slug", media.slug)
       .eq("is_published", true)
@@ -254,24 +254,21 @@ async function applyMediaRoles(prepared: Map<string, { cover: HostedMedia; thumb
 
 async function unpublishGtaVi() {
   const sb = supabaseAdmin();
-  const collections = await sb
-    .from("gta_wiki_collection_pages")
+  const collections = await gameDatabase(sb, "gta").from("wiki_collection_pages")
     .update({ is_published: false })
     .eq("wiki_slug", GTA_VI_SLUG)
     .eq("is_published", true)
     .select("id");
   if (collections.error) throw collections.error;
 
-  const wiki = await sb
-    .from("gta_wiki_pages")
+  const wiki = await gameDatabase(sb, "gta").from("wiki_pages")
     .update({ is_published: false })
     .eq("slug", GTA_VI_SLUG)
     .eq("is_published", true)
     .select("id");
   if (wiki.error) throw wiki.error;
 
-  const game = await sb
-    .from("gta_games")
+  const game = await gameDatabase(sb, "gta").from("games")
     .update({ is_published: false })
     .eq("slug", GTA_VI_SLUG)
     .eq("is_published", true)
@@ -302,12 +299,12 @@ async function removeStaleGtaViSearchRows() {
 async function verifyState(prepared: Map<string, { cover: HostedMedia; thumbnail: HostedMedia }>) {
   const sb = supabaseAdmin();
   const [games, pages, view, viGame, viPage, viCollections, viSearch] = await Promise.all([
-    sb.from("gta_games").select("slug,is_published,cover_image,hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)),
-    sb.from("gta_wiki_pages").select("slug,is_published").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)).eq("is_published", true),
-    sb.from("gta_wiki_pages_view").select("slug,is_published,game_cover_image,game_hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)).eq("is_published", true),
-    sb.from("gta_games").select("is_published").eq("slug", GTA_VI_SLUG).maybeSingle(),
-    sb.from("gta_wiki_pages").select("is_published").eq("slug", GTA_VI_SLUG).maybeSingle(),
-    sb.from("gta_wiki_collection_pages").select("id").eq("wiki_slug", GTA_VI_SLUG).eq("is_published", true),
+    gameDatabase(sb, "gta").from("games").select("slug,is_published,cover_image,hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)),
+    gameDatabase(sb, "gta").from("wiki_pages").select("slug,is_published").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)).eq("is_published", true),
+    gameDatabase(sb, "gta").from("wiki_pages_view").select("slug,is_published,game_cover_image,game_hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)).eq("is_published", true),
+    gameDatabase(sb, "gta").from("games").select("is_published").eq("slug", GTA_VI_SLUG).maybeSingle(),
+    gameDatabase(sb, "gta").from("wiki_pages").select("is_published").eq("slug", GTA_VI_SLUG).maybeSingle(),
+    gameDatabase(sb, "gta").from("wiki_collection_pages").select("id").eq("wiki_slug", GTA_VI_SLUG).eq("is_published", true),
     sb.from("search_index").select("id").eq("entity_type", "gta_wiki").eq("slug", GTA_VI_SLUG)
   ]);
   for (const result of [games, pages, view, viGame, viPage, viCollections, viSearch]) {

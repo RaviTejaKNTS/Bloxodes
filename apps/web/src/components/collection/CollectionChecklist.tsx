@@ -171,6 +171,8 @@ export function CollectionChecklist({
   progressOptions: CollectionChecklistProgressOptions;
 }) {
   const { checked, toggle, reset } = useCollectionChecklistProgress(progressOptions);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => { setHydrated(true); }, []);
   const allItems = useMemo(() => sections.flatMap((section) => section.items), [sections]);
   const fieldKeys = useMemo(() => getFieldKeys(allItems, cardFields ?? undefined), [allItems, cardFields]);
   const [query, setQuery] = useState("");
@@ -179,7 +181,7 @@ export function CollectionChecklist({
 
   const total = allItems.length;
   const hasImages = allItems.some((item) => Boolean(resolveImageSrc(item.image)));
-  const done = Math.min(checked.size, total);
+  const done = allItems.filter(item => checked.has(item.id)).length;
   const percent = total ? Math.round((done / total) * 100) : 0;
   const normalizedQuery = query.trim().toLowerCase();
 
@@ -303,6 +305,7 @@ export function CollectionChecklist({
                           <input
                             id={inputId}
                             type="checkbox"
+                            disabled={!hydrated}
                             checked={isChecked}
                             onChange={() => handleToggle(item.id, isChecked)}
                             aria-label={`${item.name}, ${isChecked ? "completed" : "not completed"}`}
@@ -392,6 +395,7 @@ export function CollectionChecklist({
                               <input
                                 id={inputId}
                                 type="checkbox"
+                            disabled={!hydrated}
                                 checked={isChecked}
                                 onChange={() => handleToggle(item.id, isChecked)}
                                 aria-label={`${item.name}, ${isChecked ? "completed" : "not completed"}`}

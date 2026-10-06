@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import fs from "node:fs/promises";
@@ -8,7 +9,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
-  namespace: "gta" | "minecraft";
+  namespace: string;
   game: string | null;
   collection: string | null;
   outputRoot: string | null;
@@ -20,10 +21,11 @@ type CliOptions = {
 
 type CollectionPageRow = {
   game_id: string;
+  canonical_path: string;
   wiki_slug: string;
   collection_slug: string;
   code: string;
-  page_type?: "database" | "checklist" | null;
+  page_type?: "database" | "collectible" | "checklist" | null;
   display_name?: string | null;
   title?: string | null;
   seo_title?: string | null;
@@ -61,16 +63,17 @@ type CollectionItemRow = {
 
 function printUsage() {
   console.log(`Usage:
-  npm run export:gta-collection-workspace -- --game <game-slug> --collection <collection-slug> --output-root <directory> [options]
+  npm run export:shared-game-collection-workspace -- --namespace <slug> --game <game-slug> --collection <collection-slug> --output-root <directory> [options]
 
 Options:
+  --namespace <slug>    Read this non-Roblox namespace. Defaults to gta for the legacy GTA alias.
   --allow-remote-read   Allow an intentional read-only export outside managed development.
   --workspace           Export dataset.json, media/, final.json, and runtime-manifest.json.
   --force               Replace an existing final.json.
   --dry-run             Print the final JSON without writing a file.
   -h, --help            Show this help.
 
-This helper reads one managed-development GTA collection revision and writes no database data.
+This helper reads one managed-development shared game collection revision and writes no database data.
 `);
 }
 
@@ -93,8 +96,8 @@ function parseArgs(argv: string[]): CliOptions {
         printUsage();
         process.exit(0);
       case "--namespace":
-        options.namespace = requireValue(argv, ++index, arg) as "gta" | "minecraft";
-        if (!["gta", "minecraft"].includes(options.namespace)) throw new Error("Unsupported export namespace.");
+        options.namespace = requireValue(argv, ++index, arg);
+        if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.namespace) || options.namespace === "roblox") throw new Error("Unsupported export namespace.");
         break;
       case "--game":
       case "--game-slug":
@@ -206,21 +209,21 @@ async function main() {
     throw new Error("Refusing a read outside managed development. Pass --allow-remote-read for an intentional remote export.");
   }
 
-  const sb = supabaseAdmin();
+  const sb = gameDatabase(supabaseAdmin(), options.namespace);
   const { data, error } = await sb
-    .from(`${options.namespace}_wiki_collection_pages`)
+    .from("wiki_collection_pages")
     .select(
-      "game_id,wiki_slug,collection_slug,code,page_type,display_name,title,seo_title,meta_description,intro_md,description_md,how_it_works_md,description_json,faq_json,wiki_md,is_published,item_count,published_dataset_id,schema_ld_json,thumb_url,wiki_sort_order"
+      "game_id,canonical_path,wiki_slug,collection_slug,code,page_type,display_name,title,seo_title,meta_description,intro_md,description_md,how_it_works_md,description_json,faq_json,wiki_md,is_published,item_count,published_dataset_id,schema_ld_json,thumb_url,wiki_sort_order"
     )
     .eq("wiki_slug", options.game!)
     .eq("collection_slug", options.collection!)
     .maybeSingle();
   if (error) throw new Error(`Failed to read collection page: ${error.message}`);
-  if (!data) throw new Error(`No gta_wiki_collection_pages row found for ${options.game}/${options.collection}`);
+  if (!data) throw new Error(`No shared game collection page found for ${options.game}/${options.collection}`);
 
   const row = data as CollectionPageRow;
   const { data: gameData, error: gameError } = await sb
-    .from(`${options.namespace}_games`)
+    .from("games")
     .select("title")
     .eq("id", row.game_id)
     .maybeSingle();
@@ -270,7 +273,7 @@ async function main() {
 
   if (!row.published_dataset_id) throw new Error(`${row.code} has no published dataset pointer.`);
   const { data: datasetData, error: datasetError } = await sb
-    .from(`${options.namespace}_wiki_collection_datasets`)
+    .from("wiki_collection_datasets")
     .select("id,schema_version,item_count,meta_json,source_manifest_json")
     .eq("id", row.published_dataset_id)
     .maybeSingle();
@@ -280,7 +283,7 @@ async function main() {
   const items: CollectionItemRow[] = [];
   for (let offset = 0; ; offset += 1000) {
     const { data: itemData, error: itemError } = await sb
-      .from(`${options.namespace}_wiki_collection_items`)
+      .from("wiki_collection_items")
       .select("item_slug,item_name,section,sort_order,image_key,fields_json")
       .eq("dataset_id", dataset.id)
       .order("sort_order")
@@ -340,7 +343,7 @@ async function main() {
     game: { slug: row.wiki_slug, name: runtimeGameName },
     collection: { slug: row.collection_slug, label: row.display_name ?? row.collection_slug, sortOrder: row.wiki_sort_order ?? 0, pageType: row.page_type === "checklist" || row.page_type === "collectible" ? "collectible" : "database" },
     namespace: options.namespace,
-    route: options.namespace === "minecraft" ? `${row.wiki_slug === "minecraft" ? "/minecraft/wiki" : `/minecraft/${row.wiki_slug.replace("minecraft-", "")}/wiki`}/${row.collection_slug}` : `/gta/wiki/${row.wiki_slug}/${row.collection_slug}`,
+    route: row.canonical_path,
     dataset: "dataset.json",
     finalJson: "final.json",
     mediaRoot: "media",

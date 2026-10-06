@@ -26,6 +26,7 @@ export type PublicCacheEventType =
   | "minecraft_wiki"
   | "minecraft_wiki_collection"
   | "minecraft_tool"
+  | "game_content"
   | "stats";
 
 export type PublicCacheEvent = {
@@ -158,6 +159,7 @@ export function cacheTagsForPath(pathname: string) {
   const segments = pathnameOnly.split("/").filter(Boolean);
   const [first, second, third, fourth] = segments;
   const tags = ["site"];
+  if (first && ["gta", "red-dead", "minecraft"].includes(first)) tags.push(first);
 
   if (pathnameOnly === "/") {
     return unique([...tags, "home"]);
@@ -371,7 +373,7 @@ export function cacheTagsForPath(pathname: string) {
     return unique(catalogTags);
   }
 
-  return [];
+  return first && (second === undefined || ["wiki", "tools", "codes", "checklists"].includes(second)) ? unique([...tags, first, "game-wiki-index"]) : [];
 }
 
 export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
@@ -379,6 +381,8 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
   const base: string[] = [];
 
   switch (type) {
+    case "game_content":
+      return unique([normalized.split("/")[0], "games-index", "game-wiki-index", "feed", "sitemap", "sitemap:games"]);
     case "code":
       return unique([...base, slugTag("code", normalized), "codes", "codes-index", "home", "feed", "sitemap", "sitemap:codes"]);
     case "article":

@@ -1,10 +1,23 @@
 # Content and Engagement Pipelines
 
-Minecraft tool presentation uses the shared Roblox `ToolCard` and Journey index grid. The 13 generated WebP covers are committed web assets under `apps/web/public/images/tools/minecraft/`, resolved by `lib/minecraft-tools/covers.ts` in the Minecraft read adapter. Database copy and calculation rules remain in `minecraft_tools`; these assets ship with the web image and require no database publication. Generation prompts are recorded in `docs/2026-10-04-minecraft-tool-covers.json`.
+Minecraft tool presentation uses the shared Roblox `ToolCard` and Journey index grid. The 13 generated WebP covers are committed web assets under `apps/web/public/images/tools/minecraft/`, resolved by `lib/minecraft-tools/covers.ts` in the Minecraft read adapter. Development database copy and calculation rules use `game_tool_pages` with `namespace=minecraft`. Production still uses `minecraft_tools`; these assets ship with the web image and require no database publication. Generation prompts are recorded in `docs/2026-10-04-minecraft-tool-covers.json`.
 
 Status: Active
 Last verified: 2026-09-14
 Evidence: fresh managed-development page/item readback, all 386 web tests, isolated production web build, route metadata/search/sitemap/feed checks, and production overlap readback on September 14. Browser interaction QA remains unavailable. Earlier family counts below retain their August 14 scope.
+
+## Shared non-Roblox storage in managed development
+
+Last verified: 2026-10-06
+Evidence: applied development migrations, full source-field comparison before and after table retirement, namespace tests and local route checks. Production was not queried or changed by this work.
+
+Managed development now uses `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate tables there. Production retains its previous schema until an approved coordinated database and web release. Earlier production evidence below keeps its original date.
+
+Shared non-Roblox codes use `game_code_pages` and `game_codes`. The template has active/expired rows, copy buttons, redemption instructions, FAQs and comments. A code in `check` status stays hidden. Verification belongs to the target game's sources. Roblox codes and their automated refresh stay separate.
+
+Shared tools use `game_tool_pages`; Minecraft retains its registered calculators and specialist publisher. New shared tools use an explicit registered `tool_key`, with `resource-cost` as the first generic calculator. Adding a different calculation requires a checked client implementation and rule validation.
+
+GTA standalone checklist pages and tasks now use `game_checklist_pages` and `game_checklist_items` in development. Their account progress still uses `user_checklist_progress` and existing `gta:<slug>` keys. GTA and Red Dead collection progress uses `game_collection_progress`; the old endpoints and local browser keys remain compatible. New namespaces use `/api/games/<namespace>/collections/progress`.
 
 ## Page Families
 

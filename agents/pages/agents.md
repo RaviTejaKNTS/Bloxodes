@@ -1,5 +1,7 @@
 # Page Inventory
 
+Development verified 2026-10-06 uses common `components/games` templates for franchise hubs, individual wikis, collections, codes and tools. Registry-backed new games use `[slug]/[[...segments]]`. Existing GTA, Red Dead and Minecraft URLs, map code, calculator engines and sidebars remain in their route wrappers. `/games` includes published new roots. Production has not received this change.
+
 The Minecraft tools hub at `/minecraft/tools` reuses Roblox's `ToolCard`, responsive Journey index grid, timestamp row and tool-count badge. All 13 calculator covers live in `apps/web/public/images/tools/minecraft/`; the Minecraft read adapter supplies them to hub cards, related tools and detail metadata.
 
 Minecraft has a neutral edition directory at `/minecraft/wiki`, independent hubs at `/minecraft/java/wiki` and `/minecraft/bedrock/wiki`, and edition-owned collection routes under each hub. Each hub has 24 database collections and uses the standard GTA-style `WikiCollectionCta` with its destination title. Collection facts, copy, counts, canonicals and JSON-LD belong to one saved edition revision. No wiki or collection edition switch remains. Legacy query links permanently redirect to their matching edition; bare legacy collections use Java except achievements, which use Bedrock. Cookies never select a page. Shared calculators keep stable HTML and metadata, with an ordinary edition input only where calculation rules differ.

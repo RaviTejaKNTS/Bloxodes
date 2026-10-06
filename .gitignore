@@ -8,6 +8,9 @@ node_modules
 
 # Next.js
 .next/
+apps/web/.next-shared-games/
+apps/web/.next-shared-games-build/
+apps/web/.next-shared-games-cache-check/
 apps/web/.next-minecraft-edition-dev/
 apps/web/.next-minecraft-edition-build/
 apps/web/.next-prod-preview*/

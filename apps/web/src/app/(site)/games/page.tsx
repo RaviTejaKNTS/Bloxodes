@@ -1,9 +1,10 @@
+import { supabaseAdmin } from "@/lib/supabase";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
-import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { safeJsonLd, breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { getMinecraftWikiPageBySlug, resolveMinecraftWikiCoverImage } from "@/lib/minecraft";
 
 const description = "Explore Roblox, Minecraft, Grand Theft Auto, Red Dead and daily puzzles on Bloxodes.";
@@ -54,6 +55,9 @@ export default async function GamesPage() {
   const publishedPlatforms = minecraft
     ? [...platforms.slice(0, 1), { href: "/minecraft", label: "Minecraft", image: resolveMinecraftWikiCoverImage(minecraft) }, ...platforms.slice(1)]
     : platforms;
+  const { data: extraGames, error } = await supabaseAdmin().from("games").select("namespace,title,cover_image,hero_image").is("parent_id", null).eq("is_published",true).not("namespace","in","(gta,red-dead,minecraft)").order("title");
+  if (error) throw new Error(`Games directory read failed: ${error.message}`);
+  publishedPlatforms.push(...(extraGames ?? []).map(game => ({ href: `/${game.namespace}`, label: game.title, image: game.cover_image || game.hero_image || "/Bloxodes.png" })));
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -114,7 +118,7 @@ export default async function GamesPage() {
           </Link>
         ))}
       </section>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(structuredData) }} />
     </div>
   );
 }

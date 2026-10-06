@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "server-only";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -8,11 +9,11 @@ export async function validateGtaChecklistProgress(key: string, checkedIds?: str
   const slug = key.slice(4);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return { status: 400, error: "Invalid GTA checklist." };
   const sb = supabaseAdmin();
-  const { data: page, error } = await sb.from("gta_checklist_pages_view").select("id").eq("slug", slug).maybeSingle();
+  const { data: page, error } = await gameDatabase(sb, "gta").from("checklist_pages_view").select("id").eq("slug", slug).maybeSingle();
   if (error) throw error;
   if (!page) return { status: 404, error: "Unknown GTA checklist." };
   if (checkedIds?.length) {
-    const { data: items, error: itemError } = await sb.from("gta_checklist_items").select("id,section_code").eq("page_id", page.id);
+    const { data: items, error: itemError } = await gameDatabase(sb, "gta").from("checklist_items").select("id,section_code").eq("page_id", page.id);
     if (itemError) throw itemError;
     const valid = new Set((items ?? []).filter(item => item.section_code.split(".").length === 3).map(item => item.id));
     if (checkedIds.some(id => !valid.has(id))) return { status: 400, error: "Progress contains an unknown checklist task." };

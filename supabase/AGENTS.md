@@ -8,6 +8,12 @@ Update that existing canonical document in the same change whenever the live top
 
 This folder defines the app's database contract and edge-function behavior.
 
+## Shared games development contract
+
+Managed development uses `games` and `game_*` tables for all non-Roblox content. Production has not received this change. Use the applied October 6 migrations and generated `types/shared-games.ts` for the development schema; `schema.sql` is the older production-era dump. Never hand-edit that dump.
+
+Keep namespaces explicit in reads and writes. Roblox stays outside these tables. Preserve immutable revision guards, owner foreign keys, exact-count publication, reserved namespaces and route validation. New tables and views remain service-only. See `dev-docs/pipelines/wiki-collections.md` for the active publication and verification commands. The old Minecraft activation RPC is retired in development.
+
 ## Layout
 
 - `migrations/`: forward-only schema changes.
@@ -15,12 +21,13 @@ This folder defines the app's database contract and edge-function behavior.
 - `functions/revalidate/`: drains publish events and calls the app revalidation endpoint.
 - `functions/cache-warm/`: drains deferred Cloudflare warm paths from `cache_warm_events`.
 - `functions/roblox-codes/`: Supabase edge function related to Roblox code workflows.
-- `schema.sql`: schema snapshot used as a reference point for the current database shape.
+- `schema.sql`: previous live SQL dump.
+- `types/shared-games.ts`: live managed-development shared-game table/view types.
 
 ## Current Responsibilities
 
 - Production Supabase is self-hosted on the same VPS as the web app. The production API endpoint is `https://database.bloxodes.com`; Studio is `https://studio.bloxodes.com`; public storage/media URLs should use `https://media.bloxodes.com`. The separate managed HTTPS `*.supabase.co` project owns all workstation development and non-production content work; it must not be used as the public site's production runtime or media origin. Do not start or target a local Supabase CLI database.
-- Core public content tables and views for codes, articles, checklists, quizzes, wiki pages, tools, catalog pages, authors, puzzles, stats, and events. GTA content uses its own `gta_*` game/wiki/collection tables rather than Roblox universe or editorial tables, while keeping the same immutable collection-dataset pointer pattern. GTA tools are not modeled until a real tool is ready to ship.
+- Core public content tables and views for codes, articles, checklists, quizzes, wiki pages, tools, catalog pages, authors, puzzles, stats, and events. Production still uses separate `gta_*` game/wiki/collection tables. Managed development uses shared `games` and `game_*` storage; neither system uses Roblox universe or editorial tables for GTA content. Both retain immutable collection dataset pointers. Shared development tool pages use registered tool renderers.
 - User/account data in `app_users` plus session/progress/comment tables used by account and community features.
 - Search, ranking, music IDs, free items, and universe enrichment data that power public pages and API routes.
 - Revalidation queueing, publish-trigger automation, and deferred cache warming through `revalidation_events`, `cache_warm_events`, and their worker-run audit tables.
@@ -30,7 +37,7 @@ This folder defines the app's database contract and edge-function behavior.
 - Add new migrations; do not rewrite old ones once they are part of repo history.
 - Create migration files with `supabase migration new <name>`, then run `npm run supabase:migrations:check`.
 - Favor additive, reversible changes where possible.
-- For this repo, `schema.sql` is the clean reference for the current database shape. Read it first when you need to understand the live schema.
+- Check the snapshot date and target before using `schema.sql`. Shared development storage is newer than this dump; use its applied migrations and generated types.
 - Do not manually edit `schema.sql` during feature work. Treat it as a live database dump/reference snapshot only.
 - Validate pending migrations against managed Supabase development before controlled production application. Do not bootstrap a local Supabase database as part of the active workflow.
 - `supabase/migration-policy.json` records verified pre-convergence ledger exceptions. Do not add an exception from filenames alone: prove the corresponding live objects and record why history differs.
@@ -48,7 +55,7 @@ This folder defines the app's database contract and edge-function behavior.
 
 ## App Integration Checklist
 
-Minecraft owns seven tables and three service-only security-invoker views. Use `minecraft-java` and `minecraft-bedrock` for edition game/wiki identities and `<wiki-slug>-<collection>` for collection codes and events. Legacy `minecraft` revisions and comments remain stored behind an unpublished parent. Keep composite dataset ownership and exact-count publication guards. `activate_minecraft_edition_migration` is service-only and activates an exact 48-hash allowlist atomically after staged content and route deployment. Clients use server routes; keep RLS and no anonymous/authenticated table grants. Migration `20261003112951` expands identities/routes and `20261003115649` adds atomic cutover; both passed managed-development fixtures and production application on October 3, 2026. Production activation/readback verified two hubs, 48 exact revisions and 13,026 rows with the legacy parent unpublished.
+The October 3 production model owns seven Minecraft tables and three service-only security-invoker views. Managed development now uses the shared game tables described above. Use `minecraft-java` and `minecraft-bedrock` for edition game/wiki identities and `<wiki-slug>-<collection>` for collection codes and events. Legacy `minecraft` revisions and comments remain stored behind an unpublished parent. Keep composite dataset ownership and exact-count publication guards. `activate_minecraft_edition_migration` is service-only and activates an exact 48-hash allowlist atomically after staged content and route deployment. Clients use server routes; keep RLS and no anonymous/authenticated table grants. Migration `20261003112951` expands identities/routes and `20261003115649` adds atomic cutover; both passed managed-development fixtures and production application on October 3, 2026. Production activation/readback verified two hubs, 48 exact revisions and 13,026 rows with the legacy parent unpublished.
 
 When adding a new table, view, or publishable content type:
 
@@ -61,7 +68,7 @@ When adding a new table, view, or publishable content type:
 
 ## GTA standalone checklist support (2026-09-10)
 
-Standalone GTA checklists use `gta_checklist_pages` (one title, composite game ID/slug foreign key) and `gta_checklist_items` (stable item keys and three-part leaf codes). Keep tables/view service-only with RLS enabled; the security-invoker view must filter game/page publication. Progress remains in `user_checklist_progress` under `gta:<slug>`. Seed migrations must preserve existing task IDs on upsert.
+The previous production model uses `gta_checklist_pages` for standalone GTA checklists (one title, composite game ID/slug foreign key) and `gta_checklist_items` (stable item keys and three-part leaf codes). Keep tables/view service-only with RLS enabled; the security-invoker view must filter game/page publication. Progress remains in `user_checklist_progress` under `gta:<slug>`. Seed migrations must preserve existing task IDs on upsert.
 Migrations `20260920000030` and `20260920000031` seed the San Andreas, Vice City, and GTA Online checklist pages in managed development and correct their collection-link copy. GTA Online rows are a dated Career Progress snapshot and should be refreshed with a new forward-only seed/update migration when Rockstar changes permanent challenge cards.
 Migration `20260920000032` clarifies that GTA Online contains selected tasks only. Preserve its task IDs and partial-coverage notice when maintaining the page; Bloxodes guides do not expose Rockstar player state.
 

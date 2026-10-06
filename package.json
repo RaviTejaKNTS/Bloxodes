@@ -255,7 +255,12 @@
     "acquire:minecraft-source-pack": "python3 scripts/minecraft/acquire-minecraft-source-pack.py",
     "render:minecraft-assets": "python3 scripts/minecraft/render-minecraft-assets.py",
     "sync:minecraft-wiki-media": "node --import tsx scripts/minecraft/sync-minecraft-wiki-media.ts",
-    "activate:minecraft-editions": "node --import tsx scripts/minecraft/activate-minecraft-editions.ts"
+    "publish:game-pages": "node --import tsx scripts/games/publish-game-pages.ts",
+    "backup:shared-games": "node --import tsx scripts/dev/backup-shared-games.ts",
+    "verify:shared-games": "node --import tsx scripts/games/verify-shared-games.ts",
+    "audit:shared-games-preview": "node --import tsx scripts/games/audit-shared-games-preview.ts",
+    "sync:shared-game-collection-runtime": "node --import tsx scripts/franchise/sync-franchise-collection-runtime.ts",
+    "export:shared-game-collection-workspace": "node --import tsx scripts/gta/export-gta-collection-workspace.ts --workspace"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

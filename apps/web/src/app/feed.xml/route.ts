@@ -1,3 +1,5 @@
+import { gameDatabase } from "@/lib/game-content-db";
+import { listSharedGameDiscoveryPages } from "@/lib/game-content-index";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -137,7 +139,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .not("slug", "is", null)
       .order("content_updated_at", { ascending: false, nullsFirst: false })
       .limit(40),
-    sb.from("gta_checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
+    gameDatabase(sb, "gta").from("checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
     listPublishedMinecraftWikiPages(),
     listPublishedMinecraftCollections(),
     listPublishedMinecraftTools()
@@ -155,6 +157,10 @@ async function loadFeedItems(): Promise<FeedItem[]> {
   }
 
   const items: FeedItem[] = [];
+  for (const page of await listSharedGameDiscoveryPages()) {
+    const item = toFeedItem({ title: page.title, path: page.canonical_path, description: page.meta_description ?? "Game reference.", updatedAt: page.updated_at, publishedAt: page.published_at, createdAt: page.created_at });
+    if (item) items.push(item);
+  }
   const minecraftPages = [
     ...minecraftWiki.filter(page => page.slug !== "minecraft").map(page => ({ ...page, path: buildMinecraftWikiPath(page.slug) })),
     ...minecraftCollections.map((page) => ({ ...page, path: buildMinecraftCollectionPath(page.wiki_slug, page.collection_slug) })),

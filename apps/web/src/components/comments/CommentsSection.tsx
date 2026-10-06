@@ -16,7 +16,11 @@ type CommentsSectionProps = {
     | "red_dead_wiki_collection"
     | "minecraft_wiki"
     | "minecraft_wiki_collection"
-    | "minecraft_tool";
+    | "minecraft_tool"
+    | "game_wiki"
+    | "game_collection"
+    | "game_tool"
+    | "game_code";
   entityId: string;
 };
 

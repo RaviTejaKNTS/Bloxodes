@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
@@ -67,8 +68,7 @@ async function readFinal(file: string): Promise<ChecklistFinal> {
 
 async function verifyPage(baseUrl: string, final: ChecklistFinal, file: string) {
   const sb = supabaseAdmin();
-  const pageResult = await sb
-    .from("gta_checklist_pages_view")
+  const pageResult = await gameDatabase(sb, "gta").from("checklist_pages_view")
     .select("id, slug, title, game_slug, is_public, leaf_item_count")
     .eq("slug", final.slug)
     .maybeSingle();
@@ -77,8 +77,7 @@ async function verifyPage(baseUrl: string, final: ChecklistFinal, file: string) 
   if (!page || !page.is_public || page.slug !== final.slug || page.game_slug !== final.game_slug || page.title !== final.title) {
     throw new Error(`Managed-development page readback failed for ${final.slug} (${file}).`);
   }
-  const itemsResult = await sb
-    .from("gta_checklist_items")
+  const itemsResult = await gameDatabase(sb, "gta").from("checklist_items")
     .select("item_key, section_code, title, description, is_required")
     .eq("page_id", page.id);
   if (itemsResult.error) throw itemsResult.error;

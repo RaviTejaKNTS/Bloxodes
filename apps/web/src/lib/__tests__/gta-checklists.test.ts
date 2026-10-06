@@ -9,7 +9,7 @@ vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string) => {
   const chain = { select: () => chain, eq: () => chain,
     maybeSingle: async () => ({ data: db.page, error: null }),
-    then: (resolve: (value: unknown) => unknown) => resolve({ data: table === "gta_checklist_items" ? db.items : [], error: null }) };
+    then: (resolve: (value: unknown) => unknown) => resolve({ data: table === "game_checklist_items" ? db.items : [], error: null }) };
   return chain;
 } }) }));
 import { validateGtaChecklistProgress } from "@/lib/gta-checklist-progress";

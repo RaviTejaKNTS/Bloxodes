@@ -1,3 +1,4 @@
+import { gameDatabase } from "@/lib/game-content-db";
 import "server-only";
 import { supabaseAdmin } from "@/lib/supabase";
 import type { ChecklistItem } from "@/lib/db";
@@ -13,12 +14,12 @@ export type GtaChecklistPage = ChecklistTemplatePage & {
 };
 export async function listPublishedGtaChecklists(page = 1, pageSize = 20) {
   const sb = supabaseAdmin();
-  const { count, error: countError } = await sb.from("gta_checklist_pages_view").select("id", { count: "exact", head: true });
+  const { count, error: countError } = await gameDatabase(sb, "gta").from("checklist_pages_view").select("id", { count: "exact", head: true });
   if (countError) throw countError;
   const total = count ?? 0;
   const offset = (page - 1) * pageSize;
   if (offset >= total) return { checklists: [], total };
-  const { data, error } = await sb.from("gta_checklist_pages_view")
+  const { data, error } = await gameDatabase(sb, "gta").from("checklist_pages_view")
     .select("*").order("published_at", { ascending: false }).order("slug")
     .range(offset, offset + pageSize - 1);
   if (error?.code === "PGRST103") return { checklists: [], total: 0 };
@@ -27,11 +28,11 @@ export async function listPublishedGtaChecklists(page = 1, pageSize = 20) {
 }
 export async function getGtaChecklistPageBySlug(slug: string) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null;
-  const { data: page, error } = await supabaseAdmin().from("gta_checklist_pages_view")
+  const { data: page, error } = await gameDatabase(supabaseAdmin(), "gta").from("checklist_pages_view")
     .select("*").eq("slug", slug).maybeSingle();
   if (error) throw error;
   if (!page) return null;
-  const { data: items, error: itemError } = await supabaseAdmin().from("gta_checklist_items")
+  const { data: items, error: itemError } = await gameDatabase(supabaseAdmin(), "gta").from("checklist_items")
     .select("*").eq("page_id", page.id).order("section_code");
   if (itemError) throw itemError;
   return { page: page as GtaChecklistPage, items: ((items ?? []) as ChecklistItem[]).sort((a, b) => a.section_code.localeCompare(b.section_code, "en", { numeric: true })) };
