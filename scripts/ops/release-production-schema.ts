@@ -185,6 +185,7 @@ async function main() {
     ...pending.flatMap((migration) => [
       `-- ${migration.file}`,
       migration.sql,
+      "set constraints all immediate;",
       ledgerInsert(migration)
     ]),
     apply ? "commit;" : "rollback;"
