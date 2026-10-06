@@ -70,8 +70,8 @@ function readMigrations(): Migration[] {
 }
 
 function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
-  if (transport === "dokploy") {
-    const helper = path.join(repoRoot, "scripts/ops/dokploy-container-psql.mjs");
+  if (transport === "dokploy" || transport === "studio") {
+    const helper = path.join(repoRoot, transport === "studio" ? "scripts/ops/studio-container-psql.mjs" : "scripts/ops/dokploy-container-psql.mjs");
     const result = spawnSync(process.execPath, [helper, "--database-role", databaseRole, ...(tuplesOnly ? ["--tuples-only"] : [])], {
       cwd: repoRoot,
       input: sql,
@@ -83,7 +83,7 @@ function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
     if (result.stderr) process.stderr.write(result.stderr);
     if (result.status !== 0) {
       if (result.stdout) process.stderr.write(result.stdout);
-      throw new Error(`Dokploy production psql exited with status ${result.status}.`);
+      throw new Error(`${transport} production SQL exited with status ${result.status}.`);
     }
     return result.stdout.trim();
   }
@@ -116,8 +116,8 @@ function ledgerInsert(migration: Migration): string {
 }
 
 async function main() {
-  if (transport !== "ssh" && transport !== "dokploy") {
-    throw new Error("--transport must be ssh or dokploy.");
+  if (!["ssh", "dokploy", "studio"].includes(transport)) {
+    throw new Error("--transport must be ssh, dokploy or studio.");
   }
   if (!["postgres", "supabase_admin"].includes(databaseRole)) {
     throw new Error("--database-role must be postgres or supabase_admin.");
