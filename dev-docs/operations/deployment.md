@@ -14,6 +14,8 @@ Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, mana
 6. The workflow waits until `/api/health?scope=deploy` reports that exact SHA and a healthy database.
 7. It purges route-family Cloudflare tags, optionally performs an explicit full purge, and checks selected public paths.
 
+The classifier skips `AGENTS.md` guidance files under `apps/web`. Updating route or library instructions alone does not rebuild the web image.
+
 The public `/api/health?scope=deploy` response is the container/deploy gate. It performs one lightweight database-readiness request and returns build SHA plus cache feature flags; it does not run stats freshness or pipeline RPCs. The default `/api/health` response remains the deeper operational check and includes stats freshness and pipeline health. Keeping these scopes separate prevents a slow stats query from replacing the only healthy web replica.
 
 ## Secrets
@@ -123,3 +125,12 @@ Controlled publication and full readback matched one hub, 25 revisions with 9,07
 The Java/Bedrock split deployed `34541eb14b0fb5d2138539d01314a1597edc2105` through [GitHub run 37122762324](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37122762324). The workflow succeeded and deploy health returned the exact SHA with healthy database readiness. Two backward-compatible migrations passed the rollback-only plan and were applied through the established Dokploy transport before deployment. Prepared hubs and revisions were staged unpublished. After exact-SHA health passed, service-only atomic activation published both hubs and 48 exact revisions while hiding the legacy parent. All 50 exact wiki URLs, three legacy redirects, sitemap coverage and complete affected data/media/copy readback passed. Scoped revalidation processed 53 events with 64 successful Cloudflare tag purges. The deployed web container and production Supabase stack remained running and healthy where probes are configured.
 
 Local production synchronized to the release while preserving unrelated edits. Publication ran on the primary homelab, so separate homelab synchronization was unnecessary. The task worktree and branch remain available. The live schema snapshot and these release receipts are a documentation-only follow-up and do not require another web deployment.
+
+## Shared game production release
+
+Last verified: 2026-10-06
+Evidence: production workflow `37448331294`, exact runtime SHA and healthy database, guarded migration receipts, private backup hashes and affected live URL readback.
+
+The shared-game release applied five backward-compatible migrations first, deployed web SHA `49cbe765bb1a8f13b6967e6fcee800960534760a`, then applied eight retirement and integrity migrations. Each migration flushes deferred constraints before its ledger entry. The retirement compares every original field while locking the 21 source tables, then removes those tables and eight views without `CASCADE`. Production retains 49,197 collection items, 756 revisions, 116 comments and 12 saved checklist-progress records. The schema snapshot is a native post-retirement dump.
+
+The three owned namespace revalidation events passed through the existing production worker. Its compiled JavaScript is identical to the previous source; the added event type is only a TypeScript annotation. No worker restart was needed. This release ran on the primary homelab, so no separate homelab checkout synchronization was needed. The task worktree remains available for follow-up.

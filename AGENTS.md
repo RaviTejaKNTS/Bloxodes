@@ -86,7 +86,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 ### Game wiki and collection pages
 
 1. Use the matching `.agents/skills/bloxodes-*` skill directly. For new pages, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`. For source-backed maintenance of existing local collection datasets and their wiki pages, use `bloxodes-game-collection-refresh`.
-2. For GTA pages, use the corresponding `bloxodes-gta-wiki-*` or `bloxodes-gta-game-collection-*` skill. GTA skills own GTA source rules, workspace, routes, scripts, mode boundaries, and managed-development safety rules. Development storage uses namespace-scoped shared `games`/`game_*` tables; do not use Roblox universe IDs or Roblox publication commands.
+2. For GTA pages, use the corresponding `bloxodes-gta-wiki-*` or `bloxodes-gta-game-collection-*` skill. GTA skills own GTA source rules, workspace, routes, scripts, mode boundaries, and managed-development safety rules. Development and production storage use namespace-scoped shared `games`/`game_*` tables; do not use Roblox universe IDs or Roblox publication commands.
 3. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
 4. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
 5. Seed page copy and publish the immutable collection dataset/media revision in managed development before preview or production.

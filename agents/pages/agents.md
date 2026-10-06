@@ -1,6 +1,6 @@
 # Page Inventory
 
-Development verified 2026-10-06 uses common `components/games` templates for franchise hubs, individual wikis, collections, codes and tools. Registry-backed new games use `[slug]/[[...segments]]`. Existing GTA, Red Dead and Minecraft URLs, map code, calculator engines and sidebars remain in their route wrappers. `/games` includes published new roots. Production has not received this change.
+Development and production verified 2026-10-06 use common `components/games` templates for franchise hubs, individual wikis, collections, codes and tools. Registry-backed new games use `[slug]/[[...segments]]`. Existing GTA, Red Dead and Minecraft URLs, map code, calculator engines and sidebars remain in their route wrappers. `/games` includes published new roots.
 
 The Minecraft tools hub at `/minecraft/tools` reuses Roblox's `ToolCard`, responsive Journey index grid, timestamp row and tool-count badge. All 13 calculator covers live in `apps/web/public/images/tools/minecraft/`; the Minecraft read adapter supplies them to hub cards, related tools and detail metadata.
 
@@ -135,7 +135,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 ## Red Dead and collectible rollout (2026-09-07)
 
-Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Roblox collectible canonical metadata also lives in the collection segment layout so invalid pagination URLs retain the base canonical on their 404 response. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Roblox collectible canonical metadata also lives in the collection segment layout so invalid pagination URLs retain the base canonical on their 404 response. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Before October 6, Red Dead used isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
 
 Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
 

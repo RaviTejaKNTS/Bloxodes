@@ -16,16 +16,16 @@ Evidence: repository architecture/configuration, database-only wiki/quiz runtime
 
 Navigation and Games page implementation checked locally on 2026-10-02. The shared desktop/mobile navigation order is Home, Articles, Wiki, Catalog, Tools, Stats, Checklists, Quizzes, Codes, Events, Games. `/games` links to Roblox, GTA, Red Dead, and Puzzles through 1200 × 675 image cards with titles over a bottom gradient. Local thumbnails use Roblox press artwork, Rockstar store screenshots, and a CC0 Wordle screenshot; source credits live in `apps/web/public/images/games/SOURCES.md`. Puzzle routes remain under `/puzzles` and activate Games in the shared navigation. These UI changes require a web deployment; production verification is separate.
 
-## Shared non-Roblox storage in managed development
+## Shared non-Roblox storage
 
 Last verified: 2026-10-06
-Evidence: applied development migrations, full source-field comparison before and after table retirement, namespace tests and local route checks. Production was not queried or changed by this work.
+Evidence: development checks and independent review, production backup hashes and full source-field comparison, 13 applied production migrations, exact-SHA deployment health, scoped live pages and successful shared-content queue processing.
 
-Managed development now uses `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate tables there. Production retains its previous schema until an approved coordinated database and web release. Earlier production evidence below keeps its original date.
+Managed development and production use `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate content tables. Roblox stays separate. The October 6 production release deployed `49cbe765bb1a8f13b6967e6fcee800960534760a`. Earlier game-specific evidence below records the storage used before this release.
 
 Local shared-game reads use `game-content-db.ts`, `shared-game-reader.ts` and `game-registry.ts`. Existing GTA, Red Dead and Minecraft routes call common page templates. New namespaces use the registry-backed `[slug]/[[...segments]]` route. The published registry supplies additional `/games` entries. `/sitemaps/games.xml` and the feed discover new pages; existing game sitemaps preserve their URL and pagination policies. New collection pagination is noindex and omitted from the sitemap.
 
-This checkout now requires the shared database schema. Do not deploy it against the previous production schema. A future production release must coordinate the additive copy, web/worker deployment, verification and old-table retirement. This local task supplied no production authorization.
+The shared readers require the shared database schema. The approved October 6 production release applied the additive copy first, deployed the new web app, verified health, then retired the old tables. The existing worker processed the new event type without a runtime change.
 
 ## Production Request Path
 

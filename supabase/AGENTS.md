@@ -8,11 +8,11 @@ Update that existing canonical document in the same change whenever the live top
 
 This folder defines the app's database contract and edge-function behavior.
 
-## Shared games development contract
+## Shared games contract
 
-Managed development uses `games` and `game_*` tables for all non-Roblox content. Production has not received this change. Use the applied October 6 migrations and generated `types/shared-games.ts` for the development schema; `schema.sql` is the older production-era dump. Never hand-edit that dump.
+Managed development and production use `games` and `game_*` tables for non-Roblox content. Use the applied October 6 migrations and generated `types/shared-games.ts` for the shared contract. `schema.sql` is the native live production dump after the retirement. Never hand-edit it.
 
-Keep namespaces explicit in reads and writes. Roblox stays outside these tables. Preserve immutable revision guards, owner foreign keys, exact-count publication, reserved namespaces and route validation. New tables and views remain service-only. See `dev-docs/pipelines/wiki-collections.md` for the active publication and verification commands. The old Minecraft activation RPC is retired in development.
+Keep namespaces explicit in reads and writes. Roblox stays outside these tables. Preserve immutable revision guards, owner foreign keys, exact-count publication, reserved namespaces and route validation. New tables and views remain service-only. See `dev-docs/pipelines/wiki-collections.md` for the active publication and verification commands. The old Minecraft activation RPC is retired in development and production.
 
 ## Layout
 
@@ -21,13 +21,13 @@ Keep namespaces explicit in reads and writes. Roblox stays outside these tables.
 - `functions/revalidate/`: drains publish events and calls the app revalidation endpoint.
 - `functions/cache-warm/`: drains deferred Cloudflare warm paths from `cache_warm_events`.
 - `functions/roblox-codes/`: Supabase edge function related to Roblox code workflows.
-- `schema.sql`: previous live SQL dump.
+- `schema.sql`: native live production SQL dump from October 6.
 - `types/shared-games.ts`: live managed-development shared-game table/view types.
 
 ## Current Responsibilities
 
 - Production Supabase is self-hosted on the same VPS as the web app. The production API endpoint is `https://database.bloxodes.com`; Studio is `https://studio.bloxodes.com`; public storage/media URLs should use `https://media.bloxodes.com`. The separate managed HTTPS `*.supabase.co` project owns all workstation development and non-production content work; it must not be used as the public site's production runtime or media origin. Do not start or target a local Supabase CLI database.
-- Core public content tables and views for codes, articles, checklists, quizzes, wiki pages, tools, catalog pages, authors, puzzles, stats, and events. Production still uses separate `gta_*` game/wiki/collection tables. Managed development uses shared `games` and `game_*` storage; neither system uses Roblox universe or editorial tables for GTA content. Both retain immutable collection dataset pointers. Shared development tool pages use registered tool renderers.
+- Core public content tables and views for codes, articles, checklists, quizzes, wiki pages, tools, catalog pages, authors, puzzles, stats, and events. Production and managed development use shared `games` and `game_*` storage; neither system uses Roblox universe or editorial tables for GTA content. Both retain immutable collection dataset pointers. Shared tool pages use registered tool renderers.
 - User/account data in `app_users` plus session/progress/comment tables used by account and community features.
 - Search, ranking, music IDs, free items, and universe enrichment data that power public pages and API routes.
 - Revalidation queueing, publish-trigger automation, and deferred cache warming through `revalidation_events`, `cache_warm_events`, and their worker-run audit tables.
@@ -37,13 +37,13 @@ Keep namespaces explicit in reads and writes. Roblox stays outside these tables.
 - Add new migrations; do not rewrite old ones once they are part of repo history.
 - Create migration files with `supabase migration new <name>`, then run `npm run supabase:migrations:check`.
 - Favor additive, reversible changes where possible.
-- Check the snapshot date and target before using `schema.sql`. Shared development storage is newer than this dump; use its applied migrations and generated types.
+- Check the snapshot date and target before using `schema.sql`. The October 6 snapshot includes shared storage; use applied migrations and generated types for later changes.
 - Do not manually edit `schema.sql` during feature work. Treat it as a live database dump/reference snapshot only.
 - Validate pending migrations against managed Supabase development before controlled production application. Do not bootstrap a local Supabase database as part of the active workflow.
 - `supabase/migration-policy.json` records verified pre-convergence ledger exceptions. Do not add an exception from filenames alone: prove the corresponding live objects and record why history differs.
 - Migration histories must contain every version at or after the policy's `convergence_version`. Earlier history repairs and schema migrations are separate operations and require explicit target review.
 - Apply each reviewed migration to managed development through the authenticated Supabase connector, then list migrations and run readiness/advisors. This project intentionally does not store the managed database password or a second CI copy of it.
-- Plan self-hosted production with `npm run supabase:production:release -- --approved-sha <full-sha>`. Apply only after explicit permission, after that SHA is on `origin/production`, with `--apply --confirm "APPLY production"`. The command streams an atomic transaction through SSH into the existing database container, proves policy-listed live objects, repairs only verified historical gaps, applies only expected migrations, and verifies the ledger without SSH forwarding or public Postgres.
+- Plan self-hosted production with `npm run supabase:production:release -- --approved-sha <full-sha>`. Apply only after explicit permission, after that SHA is on `origin/production`, with `--apply --confirm "APPLY production"`. The command streams an atomic transaction through SSH, Dokploy or the guarded Studio SQL transport into the existing database, proves policy-listed live objects, repairs only verified historical gaps, applies only expected migrations, and verifies the ledger without SSH forwarding or public Postgres.
 - After a managed-development application, run `npm run supabase:managed-dev:check` and Supabase security/performance advisors. After production application, verify the ledger, affected objects/RPCs, application health, and the self-hosted security audit before calling the environments converged.
 - Do not use `supabase db reset`, local seeding, or a local CLI database in this repository.
 - After migrations are applied to live, regenerate `schema.sql` from the live database dump instead of hand-editing it.
@@ -55,7 +55,7 @@ Keep namespaces explicit in reads and writes. Roblox stays outside these tables.
 
 ## App Integration Checklist
 
-The October 3 production model owns seven Minecraft tables and three service-only security-invoker views. Managed development now uses the shared game tables described above. Use `minecraft-java` and `minecraft-bedrock` for edition game/wiki identities and `<wiki-slug>-<collection>` for collection codes and events. Legacy `minecraft` revisions and comments remain stored behind an unpublished parent. Keep composite dataset ownership and exact-count publication guards. `activate_minecraft_edition_migration` is service-only and activates an exact 48-hash allowlist atomically after staged content and route deployment. Clients use server routes; keep RLS and no anonymous/authenticated table grants. Migration `20261003112951` expands identities/routes and `20261003115649` adds atomic cutover; both passed managed-development fixtures and production application on October 3, 2026. Production activation/readback verified two hubs, 48 exact revisions and 13,026 rows with the legacy parent unpublished.
+The October 3 production model used seven Minecraft tables and three service-only security-invoker views. Development and production now use the shared game tables described above. Use `minecraft-java` and `minecraft-bedrock` for edition game/wiki identities and `<wiki-slug>-<collection>` for collection codes and events. Legacy `minecraft` revisions and comments remain stored behind an unpublished parent. Keep composite dataset ownership and exact-count publication guards. The October 3 release used the service-only `activate_minecraft_edition_migration` function for an exact 48-hash allowlist. The October 6 shared-table release removed this one-time function. Clients use server routes; keep RLS and no anonymous/authenticated table grants. Migration `20261003112951` expands identities/routes and `20261003115649` adds atomic cutover; both passed managed-development fixtures and production application on October 3, 2026. Production activation/readback verified two hubs, 48 exact revisions and 13,026 rows with the legacy parent unpublished.
 
 When adding a new table, view, or publishable content type:
 

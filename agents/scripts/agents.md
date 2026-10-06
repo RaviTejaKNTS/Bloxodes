@@ -1,6 +1,6 @@
 # Script Inventory
 
-Development verified 2026-10-06 adds `backup:shared-games`, `verify:shared-games`, `audit:shared-games-preview`, `publish:game-pages`, `sync:shared-game-collection-runtime` and `export:shared-game-collection-workspace`. Legacy GTA, Red Dead and Minecraft aliases use shared storage. The one-time Minecraft activation command was removed. Production-capable aliases cannot run against the previous production schema until the coordinated release. See `scripts/AGENTS.md` for target and side-effect rules.
+Development and production verified 2026-10-06 use `backup:shared-games`, `verify:shared-games`, `audit:shared-games-preview`, `publish:game-pages`, `sync:shared-game-collection-runtime` and `export:shared-game-collection-workspace`. Legacy GTA, Red Dead and Minecraft aliases use shared storage. The one-time Minecraft activation command was removed. The coordinated production schema release is complete. Production-capable aliases retain their explicit guards. See `scripts/AGENTS.md` for target and side-effect rules.
 
 Minecraft wrappers reuse franchise publication and verification with explicit `--game minecraft-java|minecraft-bedrock` identities and exact manifests. `--stage` writes unpublished edition hubs and revisions before a route deployment. The October 3 cutover used an exact 48-hash activation transaction. That one-time command is now removed from this checkout. Existing legacy revisions and comments remain stored.
 
@@ -289,7 +289,7 @@ Explicit completed article revisions: `articles:queue:update --status completed 
 
 ## Red Dead and collectible rollout (2026-09-07)
 
-Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Red Dead uses isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
+Wiki collection page types are `database` and `collectible` across Roblox, GTA, and Red Dead. Legacy wiki `checklist` values are normalized during rollout; standalone `/checklists` pages and progress storage keys remain unchanged. Before October 6, Red Dead used isolated `red_dead_*` tables, `/red-dead/wiki` routes, its own comments/search/revalidation mappings, and the shared collectible renderer. Migration `20260920000023` creates the Red Dead platform; `20260920000024` renames wiki collection types. Both have been applied in managed development.
 
 Publish the five Red Dead hubs from reviewed game/wiki files using `publish:franchise-wiki-hubs -- --namespace red-dead --workspace <root> --game <slug>` (dry-run default; production writes require `--apply --allow-prod`). It checks distinct hosted cover/hero URLs and remaps parent/game IDs. Then publish only six approved manifests using `sync:franchise-collection-runtime`: Online Roles, RDR1/Revolver/Undead Story Missions, and RDR2 Cigarette Cards/Dinosaur Bones. The 100% Completion wiki stays unpublished. Runtime uses database revisions and shared R2 media, never workspace files.
 

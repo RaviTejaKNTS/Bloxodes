@@ -4,26 +4,26 @@ Status: Active; production and managed development include Red Dead and the shar
 Last verified: 2026-10-03
 Evidence: official Supabase documentation, managed-development migration/readiness/advisor checks, production transactional release/readback, VPS container/process inspection, Edge Function checksum/smoke, and public health
 
-## Shared non-Roblox storage in managed development
+## Shared non-Roblox storage
 
 Last verified: 2026-10-06
-Evidence: applied development migrations, full source-field comparison before and after table retirement, namespace tests and local route checks. Production was not queried or changed by this work.
+Evidence: development checks and independent review, production backup hashes and full source-field comparison, 13 applied production migrations, exact-SHA deployment health, scoped live pages and successful shared-content queue processing.
 
-Managed development now uses `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate tables there. Production retains its previous schema until an approved coordinated database and web release. Earlier production evidence below keeps its original date.
+Managed development and production use `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate content tables. Roblox stays separate. The October 6 production release deployed `49cbe765bb1a8f13b6967e6fcee800960534760a`. Earlier game-specific evidence below records the storage used before this release.
 
 The shared model has 12 service-only tables and five `security_invoker` read views. Row-level security is enabled. Anonymous and authenticated roles have no direct grants. Server routes enforce page publication, user ownership, trusted mutation origin and rate limits.
 
-Thirteen forward-only migrations were applied in managed development: `20261006065358`, `20261006070414`, `20261006071532`, `20261006072758`, `20261006073445`, `20261006074815`, `20261006075942`, `20261006081101`, `20261006081924`, `20261006081931`, `20261006082417`, `20261006082803` and `20261006083229`. Their local versions match the development ledger. The retirement migration removes obsolete tables without `CASCADE` after a complete source-field comparison. Historical migrations remain unchanged.
+Thirteen forward-only migrations were applied in managed development and production: `20261006065358`, `20261006070414`, `20261006071532`, `20261006072758`, `20261006073445`, `20261006074815`, `20261006075942`, `20261006081101`, `20261006081924`, `20261006081931`, `20261006082417`, `20261006082803` and `20261006083229`. Their local versions match both migration ledgers. The retirement migration removes obsolete tables without `CASCADE` after a complete source-field comparison. Historical migrations remain unchanged.
 
 Page publication uses the service-only `publish_game_content_batch` function. Its default check runs the entire batch inside a transaction and rolls it back. Applying commits all groups together; one invalid row rolls back the whole batch. Tool codes come from their slugs through a database trigger and constraint. Release rows require a game owner. Codes-page FAQs require nonempty question and answer strings.
 
 Deleting items locks their dataset before checking publication. Concurrent REST verification confirmed deletion waits for that lock and then rejects removal of published items. Incomplete unpublished revisions can be removed with their items. Ordinary edits cannot change route identity.
 
-`supabase/types/shared-games.ts` is generated from the live development schema and constrains the shared table mapping. `supabase/schema.sql` remains the previous dump, which still includes the production-era separate game tables. No managed database password is stored, so this work did not create a new full SQL dump. Read the applied migrations and generated types for the current shared development model. Regenerate the SQL snapshot through an authorized live dump when that connection is available.
+`supabase/types/shared-games.ts` is generated from the live development schema and constrains the shared table mapping. `supabase/schema.sql` is the native PostgreSQL public/extensions schema dump taken after the production retirement. It includes the shared tables and excludes the old game tables.
 
 Database deployment readiness and all seven managed-development checks passed. The operational health endpoint still reports inactive Roblox stats jobs in development; this migration does not change those jobs.
 
-Shared storage includes GTA standalone checklists, account collection progress and Minecraft release anchors. Existing comments retain their content types and IDs. New games use generic comment types. `game_content` events refresh owned paths and namespace cache tags, search, sitemaps and feed data. The development project has no deployed Bloxodes queue worker. Local authenticated `/api/revalidate` checks verify the consumer; a production release must deploy the matching worker source separately.
+Shared storage includes GTA standalone checklists, account collection progress and Minecraft release anchors. Existing comments retain their content types and IDs. New games use generic comment types. `game_content` events refresh owned paths and namespace cache tags, search, sitemaps and feed data. The development project has no deployed Bloxodes queue worker. Local authenticated `/api/revalidate` checks verify its consumer. The production worker already forwards arbitrary event types. Its only source change adds `game_content` to a TypeScript union; compiled JavaScript is unchanged. Production processed the three scoped namespace events successfully without an Edge Runtime restart.
 
 ## Managed Development
 

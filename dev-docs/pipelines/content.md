@@ -6,12 +6,12 @@ Status: Active
 Last verified: 2026-09-14
 Evidence: fresh managed-development page/item readback, all 386 web tests, isolated production web build, route metadata/search/sitemap/feed checks, and production overlap readback on September 14. Browser interaction QA remains unavailable. Earlier family counts below retain their August 14 scope.
 
-## Shared non-Roblox storage in managed development
+## Shared non-Roblox storage
 
 Last verified: 2026-10-06
-Evidence: applied development migrations, full source-field comparison before and after table retirement, namespace tests and local route checks. Production was not queried or changed by this work.
+Evidence: development checks and independent review, production backup hashes and full source-field comparison, 13 applied production migrations, exact-SHA deployment health, scoped live pages and successful shared-content queue processing.
 
-Managed development now uses `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate tables there. Production retains its previous schema until an approved coordinated database and web release. Earlier production evidence below keeps its original date.
+Managed development and production use `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate content tables. Roblox stays separate. The October 6 production release deployed `49cbe765bb1a8f13b6967e6fcee800960534760a`. Earlier game-specific evidence below records the storage used before this release.
 
 Shared non-Roblox codes use `game_code_pages` and `game_codes`. The template has active/expired rows, copy buttons, redemption instructions, FAQs and comments. A code in `check` status stays hidden. Verification belongs to the target game's sources. Roblox codes and their automated refresh stay separate.
 

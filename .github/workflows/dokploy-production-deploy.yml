@@ -90,6 +90,8 @@ jobs:
             fi
             while IFS= read -r -d '' file; do
               case "$file" in
+                apps/web/AGENTS.md|apps/web/*/AGENTS.md)
+                  ;;
                 data/*)
                   deploy=true
                   dataset=true
