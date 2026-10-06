@@ -4,6 +4,15 @@ Status: Active; environment, schema, Edge Function, and platform synchronization
 Last verified: 2026-10-03
 Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
+## Local agent checkout
+
+Last verified: 2026-10-07
+Evidence: fetched `origin/production`, checked local status and commit ancestry, verified recovery archives and bundle, and inspected registered worktrees and runtime pointers.
+
+Agent work uses `/home/teja/projects/Bloxodes` on `production`. Agents must not create branches or worktrees unless the user explicitly requests one, including during releases. Commit and publish only the current task's authorized files. The branch name does not grant production deployment or database permission; ordinary development keeps using managed Supabase development.
+
+The October 7 cleanup removed the completed `shared-game-page-types` and `top7-wiki-canonical` development worktrees. Their commits were already in production. Uncommitted main-checkout work and task artifacts are preserved in a private recovery directory under `tmp/worktree-cleanup-*`, with its path recorded in `tmp/worktree-cleanup-latest.txt`. The full working-tree snapshot also has a local `refs/cleanup-backups/20261007-main-checkout` recovery ref. Existing article and shared automation release checkouts and their runtime pointers remain unchanged.
+
 ## Normal Path
 
 1. Approved code/data reaches `production`.
@@ -72,7 +81,7 @@ advance production health.
 3. After an approved repository release, require the public deploy health SHA and database health to match.
 4. Apply approved schema changes to managed development through the Supabase connector, then list migrations and run readiness/advisors.
 5. Obtain separate production permission before production schema, Edge Function, VPS, or homelab mutations other than the guarded checkout synchronization included in an explicit e2e release. That checkout-only authorization does not include env changes, unit installation, job interruption, or service control.
-6. The homelab is the primary development workspace (user-confirmed and host identity verified September 7, 2026). When releasing on `teja-homelab`, skip separate homelab checkout synchronization and SSH-to-self checks; preserve the active task branch and unrelated working files. Synchronize local `production` independently, updating its branch reference when no worktree has it checked out. When releasing from another machine, synchronize the remote homelab only for article automation changes or an explicit request, using the released `scripts/ops/sync-homelab-checkout.sh` dry-run and exact-SHA apply. Remote preflight failures remain blockers for that remote sync; they do not apply to the active primary workspace. Env, installed-unit, and service changes retain separate authorization.
+6. The homelab is the primary development workspace (user-confirmed and host identity verified September 7, 2026). When releasing on `teja-homelab`, use the main `production` checkout, preserve unrelated working files, and skip separate homelab checkout synchronization and SSH-to-self checks. Do not create a temporary release branch or worktree. When releasing from another machine, synchronize the remote homelab only for article automation changes or an explicit request, using the released `scripts/ops/sync-homelab-checkout.sh` dry-run and exact-SHA apply. Remote preflight failures remain blockers for that remote sync; they do not apply to the active primary workspace. Env, installed-unit, and service changes retain separate authorization.
 7. Run the full read-only platform check only for an in-scope remote homelab synchronization or an explicit platform-check request. Releases made on the homelab use the local-only check and required live deployment/content verification, including article automation releases; they do not invoke SSH-based self-inspection.
 
 The check reports drift; it never fixes drift. Database/Storage backup work is intentionally outside this sequence for now.
