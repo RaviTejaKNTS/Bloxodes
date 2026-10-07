@@ -8,6 +8,7 @@ import { createHash } from "node:crypto";
 import { batchPath, ownedPath, parseBatch } from "./content-contract.mjs";
 import { assertProductionPublication } from "./publication-guard";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
+import { resolveArticleDevCredentials } from "../articles/article-queue-env";
 
 const args = process.argv.slice(2);
 const file = batchPath(args[args.indexOf("--batch") + 1]);
@@ -67,7 +68,7 @@ function run(operation: any, write: boolean) {
     return;
   }
   const [script, ...options] = command(operation, write);
-  execFileSync("npm", ["run", script!, "--", ...options], { cwd: root, env: process.env, stdio: "inherit" });
+  execFileSync("npm", ["run", script!, "--", ...options], { cwd: root, env: { ...process.env, BLOXODES_DEFER_ARTICLE_ACK: "true" }, stdio: "inherit" });
   if (write && operation.publisher === "roblox-codes-page") {
     const payload = JSON.parse(fs.readFileSync(inputPath(operation.file), "utf8"));
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(payload.slug ?? "")) throw new Error("Codes refresh needs an exact reviewed editorial slug.");
@@ -89,6 +90,29 @@ async function main() {
     const html = await response.text();
     if (!response.ok || !load(html)("body").text().replace(/\s+/g, " ").toLowerCase().includes(url.contains.toLowerCase())) throw new Error(`Public readback failed for ${url.path}.`);
     console.log(`Verified https://bloxodes.com${url.path}`);
+    const family = url.path.split("/")[1];
+    const section = url.path.split("/")[2];
+    const sitemap = ["articles", "authors", "catalog", "checklists", "codes", "events", "puzzles", "quizzes", "stats", "tools", "wiki"].includes(family)
+      ? family
+      : family === "gta" && ["wiki", "maps", "checklists"].includes(section) || family === "red-dead" && section === "wiki" || family === "minecraft" && ["wiki", "tools"].includes(section)
+        ? family
+        : ["", "games", "gta", "red-dead", "minecraft"].includes(family) && !section ? "main" : "games";
+    execFileSync("npm", ["run", "verify:published-url", "--", "--path", url.path, "--sitemap", `/sitemaps/${sitemap}.xml`, "--base-url", "https://bloxodes.com"], { env: process.env, stdio: "inherit" });
+  }
+  // Queue acknowledgement follows the selected desktop/mobile browser checks.
+  execFileSync("npx", ["playwright", "test", "apps/web/e2e/release-smoke.spec.ts"], {
+    env: { ...process.env, TEST_BASE_URL: "https://bloxodes.com", PLAYWRIGHT_SKIP_WEBSERVER: "1", RELEASE_SMOKE_BATCH: path.resolve(file) },
+    stdio: "inherit",
+  });
+  if (apply) for (const operation of batch.operations) {
+    if (operation.publisher !== "article-queue") continue;
+    const final = JSON.parse(fs.readFileSync(inputPath(operation.file), "utf8"));
+    const productionUrl = `https://bloxodes.com/articles/${final.slug}`;
+    if (!batch.urls.some((url: {path: string}) => `https://bloxodes.com${url.path}` === productionUrl)) throw new Error("Article acknowledgement requires its selected verified URL.");
+    const dev = resolveArticleDevCredentials();
+    execFileSync("npm", ["run", "articles:queue:update", "--", "--queue-id", operation.queueId, "--status", "published", "--production-url", productionUrl, "--apply"], {
+      env: { ...process.env, SUPABASE_URL: dev.url, SUPABASE_SERVICE_ROLE: dev.serviceRole }, stdio: "inherit",
+    });
   }
   if (apply) await wikiPublicationReceipt(batch.wikiReceipt, batch.urls.map((url: { path: string }) => `https://bloxodes.com${url.path}`));
 }

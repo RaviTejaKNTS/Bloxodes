@@ -671,6 +671,7 @@ async function closeQueueRow(
   productionUrl: string,
   dev: { url: string; serviceRole: string },
 ): Promise<void> {
+  if (process.env.BLOXODES_DEFER_ARTICLE_ACK === "true") return;
   await runNpmScript(
     "articles:queue:update",
     [

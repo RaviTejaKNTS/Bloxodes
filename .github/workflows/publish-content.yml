@@ -66,6 +66,7 @@ jobs:
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: node --test scripts/ci/__tests__/*.test.mjs
+      - run: npx playwright install --with-deps chromium
       - name: Load the selected private bundle
         if: inputs.bundle_hash != ''
         run: |
@@ -89,3 +90,10 @@ jobs:
           flags=()
           if [ "$APPLY" = true ]; then flags+=(--apply); fi
           node --import tsx scripts/ci/publish-content.ts --batch "$BATCH" "${flags[@]}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selected-content-browser-${{ github.run_id }}
+          path: tmp/test-reports/
+          retention-days: 1
+          if-no-files-found: ignore

@@ -10,11 +10,11 @@ These files are operational jobs, imports, backfills, collectors, and automation
 
 ## Shared non-Roblox game commands
 
-The October 6 shared schema is applied in managed development and production. GTA, Red Dead and Minecraft scripts use shared `games`/`game_*` storage with an explicit namespace. Existing production-capable aliases retain their dry-run and explicit production guards. `publish:game-pages` remains development-only.
+The October 6 shared schema is applied in managed development and production. GTA, Red Dead and Minecraft scripts use shared `games`/`game_*` storage with an explicit namespace. Production publication uses the selected-content CI job and retains exact target and input guards.
 
 - `backup:shared-games` exports the current shared rows with counts and hash readback into ignored private files. `--legacy-before-migration` is only for an environment that still has the old tables.
 - `verify:shared-games` compares every original source field against the frozen legacy backup.
-- `publish:game-pages -- --namespace <slug> --file <reviewed.json>` validates game, wiki, codes-page, verified-code and registered-tool groups. It plans by default and `--apply` writes only managed development.
+- `publish:game-pages -- --namespace <slug> --file <reviewed.json>` validates shared page groups. It plans by default. Development application runs on GitHub; production application additionally requires `--allow-prod` and the reviewed current-SHA CI publication guard.
 - `sync:shared-game-collection-runtime` and `export:shared-game-collection-workspace` retain the reviewed immutable dataset/media workflow and accept an explicit non-Roblox namespace.
 - `audit:shared-games-preview -- --base-url <preview>` crawls all published shared content, linked pagination, metadata and discovery routes, and tests mutation guards.
 
