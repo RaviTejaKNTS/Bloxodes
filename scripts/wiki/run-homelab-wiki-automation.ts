@@ -1,6 +1,6 @@
 import "../shared/load-env";
 import { dispatchWiki } from "../ci/dispatch-wiki";
-import { wikiDispatchReady, wikiDispatchRecovery, matchingWikiRun } from "../ci/wiki-publication-state.mjs";
+import { findWikiDispatchCandidate, wikiDispatchRecovery, matchingWikiRun, wikiRunRecoveryReceipt } from "../ci/wiki-publication-state.mjs";
 
 import { execFileSync, spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { access, mkdir, readFile, realpath } from "node:fs/promises";
@@ -540,48 +540,60 @@ async function heartbeat(dev: SupabaseClient, row: QueueRow) {
 }
 
 async function recoverWikiDispatchClaims(dev: SupabaseClient) {
-  const query = await dev.from("wiki_generation_queue").select("*")
-    .in("status", ["processing", "publishing"]).eq("production_receipt->>state", "publishing")
-    .order("started_at").limit(20);
-  if (query.error) throw query.error;
-  for (const row of query.data || []) {
-    const action = wikiDispatchRecovery(row);
-    if (!action) continue;
-    const previous = row.production_receipt;
-    let receipt = {...previous};
-    if (action === "retry") {
-      receipt = {...previous, state: "failed", failed_at: new Date().toISOString(), error: "Publisher exited before its dispatch began."};
-    } else {
-      // Absence from a bounded API read cannot prove that dispatch never reached GitHub.
-      const since = new Date(Math.floor(Date.parse(previous.started_at) / 1000) * 1000).toISOString();
-      const params = new URLSearchParams({branch: "production", event: "workflow_dispatch", created: `>=${since}`, per_page: "100"});
-      let run;
-      for (let page = 1; page <= 5; page++) {
-        params.set("page", String(page));
-        const result = JSON.parse(execFileSync("gh", ["api", `repos/RaviTejaKNTS/Bloxodes/actions/workflows/publish-content.yml/runs?${params}`], {encoding: "utf8", timeout: 30_000}));
-        run = matchingWikiRun(result.workflow_runs, previous);
-        if (run || result.workflow_runs.length < 100) break;
+  let afterId: string | undefined;
+  while (true) {
+    let page = dev.from("wiki_generation_queue").select("*")
+      .in("status", ["processing", "publishing"]).eq("production_receipt->>state", "publishing")
+      .order("id").limit(20);
+    if (afterId) page = page.gt("id", afterId);
+    const query = await page;
+    if (query.error) throw query.error;
+    for (const row of query.data || []) {
+      const action = wikiDispatchRecovery(row);
+      if (!action) continue;
+      const previous = row.production_receipt;
+      let receipt = {...previous};
+      if (action === "retry") {
+        receipt = {...previous, state: "failed", failed_at: new Date().toISOString(), error: "Publisher exited before its dispatch began."};
+      } else {
+        // Absence from a bounded API read cannot prove that dispatch never reached GitHub.
+        const since = new Date(Math.floor(Date.parse(previous.started_at) / 1000) * 1000).toISOString();
+        const params = new URLSearchParams({branch: "production", event: "workflow_dispatch", created: `>=${since}`, per_page: "100"});
+        let run;
+        if (Number.isSafeInteger(previous.github_run_id) && previous.github_run_id > 0) {
+          run = JSON.parse(execFileSync("gh", ["api", `repos/RaviTejaKNTS/Bloxodes/actions/runs/${previous.github_run_id}`], {encoding: "utf8", timeout: 30_000}));
+        }
+        for (let page = 1; !run && page <= 5; page++) {
+          params.set("page", String(page));
+          const result = JSON.parse(execFileSync("gh", ["api", `repos/RaviTejaKNTS/Bloxodes/actions/workflows/publish-content.yml/runs?${params}`], {encoding: "utf8", timeout: 30_000}));
+          run = matchingWikiRun(result.workflow_runs, previous);
+          if (run || result.workflow_runs.length < 100) break;
+        }
+        if (!run) continue;
+        const recovered = wikiRunRecoveryReceipt(previous, run);
+        if (!recovered) continue;
+        receipt = recovered;
       }
-      if (!run) continue;
-      receipt.github_run_id = run.id;
-      receipt.github_run_url = run.html_url;
+      let save = dev.from("wiki_generation_queue").update({production_receipt: receipt})
+        .eq("id", row.id).eq("status", row.status).eq("production_receipt", JSON.stringify(previous));
+      if (row.status === "processing") save = save.eq("lease_token", row.lease_token).gt("lease_expires_at", new Date().toISOString());
+      const saved = await save.select("id");
+      if (saved.error) throw saved.error;
+      if (saved.data?.length) console.log(`Recovered wiki dispatch evidence for ${row.game_name}.`);
     }
-    let save = dev.from("wiki_generation_queue").update({production_receipt: receipt})
-      .eq("id", row.id).eq("status", row.status).eq("production_receipt", JSON.stringify(previous));
-    if (row.status === "processing") save = save.eq("lease_token", row.lease_token).gt("lease_expires_at", new Date().toISOString());
-    const saved = await save.select("id");
-    if (saved.error) throw saved.error;
-    if (saved.data?.length) console.log(`Recovered wiki dispatch evidence for ${row.game_name}.`);
+    if (!query.data?.length || query.data.length < 20) break;
+    afterId = query.data[query.data.length - 1].id;
   }
 }
 
 async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
-  const query = await dev.from("wiki_generation_queue").select("*")
-    .in("status", ["processing", "publishing"]).in("production_receipt->>state", ["requested", "failed"])
-    .order("started_at").limit(20);
-  if (query.error) throw query.error;
-  const now = Date.now();
-  const row = (query.data || []).find(candidate => wikiDispatchReady(candidate,now));
+  const row = await findWikiDispatchCandidate(async (offset, pageSize) => {
+    const query = await dev.from("wiki_generation_queue").select("*")
+      .in("status", ["processing", "publishing"]).in("production_receipt->>state", ["requested", "failed"])
+      .order("started_at").order("id").range(offset, offset + pageSize - 1);
+    if (query.error) throw query.error;
+    return query.data || [];
+  });
   if (!row) return false;
   const request = row.production_receipt;
   const publishing = { ...request, state: "publishing", dispatch_phase: "preparing", github_run_id: null, github_run_url: null, started_at: new Date().toISOString(), dispatch_attempts: Number(request.dispatch_attempts || 0) + 1 };
