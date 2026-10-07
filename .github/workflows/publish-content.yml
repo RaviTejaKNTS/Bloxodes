@@ -63,7 +63,6 @@ jobs:
       BATCH: ${{ inputs.batch }}
       BUNDLE_HASH: ${{ inputs.bundle_hash }}
       APPLY: ${{ inputs.apply }}
-      BLOXODES_MANAGED_RECEIPT: ${{ runner.temp }}/managed-receipt/managed-content-receipt.json
     steps:
       - uses: actions/checkout@v6
         with:
@@ -106,6 +105,8 @@ jobs:
           if (changed.some(file => /^(apps\/web\/|data\/|Dockerfile$|package(-lock)?\.json$)/.test(file) && !file.endsWith('/AGENTS.md'))) throw new Error('Dependent web code has not deployed yet.');
           JS
       - name: Prove the batch, publish when selected, and verify public URLs
+        env:
+          BLOXODES_MANAGED_RECEIPT: ${{ runner.temp }}/managed-receipt/managed-content-receipt.json
         run: |
           flags=()
           if [ "$APPLY" = true ]; then flags+=(--apply); fi
