@@ -146,6 +146,8 @@ GTA standalone checklist routes: `/gta/checklists`, `/gta/checklists/page/<page>
 
 ## Shared engagement presentation (2026-09-10)
 
+Standalone checklist authoring normally covers verified 100% completion with one board per detail page. Narrower scopes require an explicit user exception. Collectible trackers keep their own roster scope and do not establish in-game 100%. See `dev-docs/pipelines/content.md#standalone-checklist-scope` for the current convention.
+
 Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.
 
 ### Emote IDs and commands (2026-09-15)

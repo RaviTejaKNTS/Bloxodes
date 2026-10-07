@@ -22,6 +22,8 @@ Account history is stored in `game_quiz_progress` and saved only through `/api/g
 
 ## Checklists
 
+One checklist page row owns one board and all its section/task rows. Normally its scope is verified 100% completion of the named game and edition or mode. Record any explicit user exception in the brief. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`; payload validity alone does not prove full game completion.
+
 Group `checklists`, existing table `game_checklist_pages`, section `checklists`. Use `description_md`, `seo_title`, `seo_description`, `is_public` and `published_at`; a public checklist needs a valid publication date. Other page types use `is_published` instead.
 
 Group `checklistItems`, table `game_checklist_items`. Each row needs `page_id`, a stable `item_key`, `section_code`, `title`, optional `description` and `is_required`. Numeric codes have one part for a group, two for a section and three for a checkable task, such as `1`, `1.1`, `1.1.1`. Include the group and section rows needed by the board. Task IDs must survive content updates.

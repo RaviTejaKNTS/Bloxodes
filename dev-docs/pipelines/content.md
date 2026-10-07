@@ -54,6 +54,21 @@ The production release applied the eight page-type migrations and imported the n
 
 The production release used schema commit `048123eda0ed18f813da5fa6f7f776a7d6a8fc8e` and web commit `118b66d471623c520b1e9ae4457523c5d51fdf09`. [GitHub deployment 37492747348](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37492747348) passed exact-SHA web/database health. All nine map URLs, canonicals and GTA sitemap entries passed. The new quiz progress API returns private uncached responses and rejects anonymous requests. Web and Supabase container checks passed. No temporary test pages or accounts were published to production.
 
+## Standalone checklist scope
+
+Last verified: 2026-10-07
+Evidence: user-confirmed editorial convention, checklist planning/research/writing skills, and the single-board composition in `ChecklistPageTemplate.tsx`. This is authoring guidance, not a database constraint or a new audit of published content.
+
+Normally create standalone checklists only for source-verified 100% completion of a named game and supported edition or mode. Verify the full required activity set, thresholds, exclusions and alternative paths before proposing or writing the page. When sources do not establish that scope, defer it. Beginner milestones, preparation lists and repeatable routines need an explicit user exception recorded in the plan and brief.
+
+Each detail page contains one checklist board. Group its requirements into sections within that board; do not combine independent checklists for different games or completion scopes on one page. Section directories list pages, not additional boards. Check existing coverage before proposing another page for the same scope.
+
+The board's percentage counts checked tasks. It does not reproduce a game's weighted completion meter unless that relationship is verified. Required alternatives must let players complete a valid path without demanding mutually exclusive choices.
+
+Collectible wiki collections remain separate. An achievements tracker can cover a verified Steam roster with checkmarks, but all achievements or collectibles do not establish in-game 100% completion. Do not relabel those trackers or use them to bypass the standalone checklist scope check.
+
+Keep existing pages, URLs, saved progress and previously approved exceptions intact. This convention does not authorize retrospective removal or migration of content.
+
 ## Page Families
 
 - Tools: 13 rows.

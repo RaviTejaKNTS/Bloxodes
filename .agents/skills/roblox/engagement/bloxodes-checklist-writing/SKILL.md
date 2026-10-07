@@ -1,11 +1,11 @@
 ---
 name: bloxodes-checklist-writing
-description: Write one Bloxodes checklist final.json after brief approval. Use for /checklists pages, metadata, section_code planning, checklist_items, and practical Roblox progression tasks.
+description: Write one Bloxodes 100% completion checklist final.json after brief approval. Use for one /checklists board, metadata, sections and verified completion tasks, with explicit user exceptions recorded.
 ---
 
 # Bloxodes Checklist Writing
 
-Use this after `bloxodes-checklist-research` and parent approval. Checklists help players complete a progression path, prep path, collection route, or repeatable in-game routine.
+Use this after `bloxodes-checklist-research` and parent approval. Normally write only source-verified 100% completion checklists for the exact game and edition or mode. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Preparation lists, beginner milestones and routines need an explicit user exception in the brief.
 
 ## Workflow
 
@@ -38,6 +38,9 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 ## Writing Rules
 
 - Tasks should be actions a player can mark complete.
+- Write one checklist board per detail page. Sections divide its verified completion requirements, not independent checklists.
+- Cover the full required set and keep valid alternative paths achievable. Do not write around unresolved completion requirements or relabel an achievement roster as in-game 100%.
+- Describe the board percentage as checked-task progress unless sources verify its relationship to the in-game meter.
 - Keep task titles short.
 - Use descriptions only when the task needs context.
 - Do not create vague tasks like `Learn the game` or `Get better`.
@@ -47,7 +50,7 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 
 - `page.universe_id`: Link the checklist to the exact game universe.
 - `page.slug`: Use the editorial game slug.
-- `page.title`: Use the simple pattern `<Game> Checklist` unless the checklist has a narrower route.
+- `page.title`: Normally use `<Game> 100% completion checklist`. Name the edition or mode when needed. A narrower scope requires an explicit user exception in the brief.
 - `page.seo_title`: Keep null or close to the title unless search needs custom text.
 - `page.seo_description`: Summarize the route or completion path the board tracks.
 - `page.description_md`: Briefly explain what progress the checklist helps players track. Do not turn it into a guide.

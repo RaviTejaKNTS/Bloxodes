@@ -22,7 +22,7 @@ Use `kind=game` for a standalone title and `kind=franchise` for a root containin
 - Codes: only when the game has redeem codes with verified announcements and redemption steps.
 - Tools: only when a calculation helps players and its rules can be verified. Check the registered calculators. Name any new calculation code required.
 - Maps: only with reusable map artwork and verified pin positions. The shared image map supports categories, search and zoom. Name a custom map engine only when needed.
-- Checklists: concrete objectives players can tick off, with an explicit completion scope. Do not invent a universal completion percentage.
+- Checklists: normally propose only source-verified 100% completion for the exact game and edition or mode, with one checklist board per detail page. Verify the full requirements before recommending creation. Defer when that scope is unknown; beginner, preparation and routine lists need an explicit user exception. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. A collectible or achievement roster does not establish in-game 100% completion.
 - Quizzes: stable, source-backed game facts with fair answers. Use the shared quiz player.
 - Catalogs: a reference that needs its own columns or presentation outside an individual wiki collection. Reuse a collection when it already fits. Catalogs have a plain page shell and a table by default; cards are optional custom work.
 

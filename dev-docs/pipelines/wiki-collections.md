@@ -43,6 +43,8 @@ Signed-in collection progress keeps historical completed IDs when a later revisi
 
 Skills now live under `.agents/skills/roblox`, `games` and `shared`. Stable flat symlink entry points keep the existing automation paths working. General non-Roblox wiki and collection skills live in `games/wiki-and-collections`; GTA source rules remain in its `gta` subfolder. Shared codes and tools have their own focused instructions.
 
+Standalone checklist planning follows the [100% completion convention](content.md#standalone-checklist-scope), with one checklist board per detail page. Collectible collections keep their roster-specific progress and do not imply in-game 100% completion.
+
 ## Scope
 
 Production verified on 2026-09-07 at web SHA `bf7ea6ad71a9d6646f83077ceb373d2912ccf997`: five Red Dead hubs and six collections (271 items) are live with ten hosted hub images, sitemap/search coverage, and 100% Completion excluded. Production migrations `20260920000023` and `20260920000024` are applied. The 19 Roblox and 93 GTA legacy wiki checklist rows now use `collectible`; Red Dead has two collectible and four database collections. Saved-progress rows and storage keys were preserved. Standalone checklist pages are unchanged.

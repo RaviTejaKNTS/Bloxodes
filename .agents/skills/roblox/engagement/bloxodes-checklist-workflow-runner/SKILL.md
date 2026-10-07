@@ -1,11 +1,13 @@
 ---
 name: bloxodes-checklist-workflow-runner
-description: Run one approved Bloxodes checklist page with parent review. Use when the user asks to create or update a /checklists page with subagent research, checklist writing, local verification, and Codex Browser preview.
+description: Run one approved Bloxodes 100% completion checklist page with parent review, source-backed research, writing and GitHub verification. Record explicit user exceptions to the normal completion scope.
 ---
 
 # Bloxodes Checklist Workflow Runner
 
 Use one subagent for one checklist. The same subagent researches the player route, waits for parent approval, then writes `final.json`.
+
+Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Normally require verified 100% completion for the exact game and edition or mode, with one board per detail page. Record explicit user exceptions for narrower checklists. Defer when full completion requirements cannot be verified. Collectible collection trackers remain separate.
 
 ## Subagent Handoff
 
@@ -26,27 +28,28 @@ After the parent approves the brief, send the same subagent:
 
 ## Workflow
 
-1. Confirm the game, universe ID, and checklist idea.
+1. Confirm the game, universe ID, edition or mode and full completion scope, or the explicit user exception.
 2. Ask the subagent to use `/bloxodes-checklist-research` and return `brief.md`.
-3. Review the route, sections, existing coverage, source proof, and gaps.
+3. Review full requirements, thresholds, exclusions, alternative paths, sections within one board, existing coverage, source proof and gaps.
 4. Ask the same subagent to use `/bloxodes-checklist-writing` and create `final.json`.
 5. Review that tasks are concrete actions players can complete.
-6. Start or reuse localhost with `npm run dev:managed`.
-7. Run:
+6. Submit the reviewed inputs through the assigned task PR and selected CI batch described in `dev-docs/operations/deployment.md`. GitHub owns managed-development validation and browser QA.
+7. Run the verifier on GitHub against its managed-development preview:
 
 ```bash
-npm run verify:engagement-finals -- --base-url http://localhost:<port> --file <final.json>
+npm run verify:engagement-finals -- --base-url <ci-preview-base-url> --file <final.json>
 ```
 
-8. If the verifier passes, open the verified `/checklists/<slug>` link in the Codex Browser.
-9. Return paths, localhost link, blocked reason if any, and remaining risks.
+8. Review the GitHub browser screenshots and reports for the exact `/checklists/<slug>` page and its single board.
+9. Return paths, GitHub verification/artifact links, any available reviewed preview URL and remaining gaps.
 
 ## Parent Checks
 
 - production overlap is checked
-- checklist tracks a real player route, not generic advice
+- checklist covers source-verified 100% completion, or records an explicit user exception
+- one board contains the full required set with achievable alternatives
 - parent rows and leaf tasks have consistent section codes
 - task titles are concrete actions
 - descriptions add useful context only when needed
 - public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
-- verifier and Browser preview pass
+- GitHub verifier and browser QA pass

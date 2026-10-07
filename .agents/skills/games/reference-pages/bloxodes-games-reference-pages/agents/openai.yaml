@@ -1,4 +1,4 @@
 interface:
   display_name: "Shared game reference pages"
   short_description: "Create game maps, quizzes, checklists and catalogs"
-  default_prompt: "Use $bloxodes-games-reference-pages to create the approved non-Roblox reference page."
+  default_prompt: "Use $bloxodes-games-reference-pages to create the approved non-Roblox reference page. A standalone checklist normally covers verified 100% completion with one board per page; record explicit user exceptions."

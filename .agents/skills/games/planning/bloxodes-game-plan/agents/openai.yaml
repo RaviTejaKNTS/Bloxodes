@@ -1,4 +1,4 @@
 interface:
   display_name: "Plan a new game"
   short_description: "Plan useful pages for a non-Roblox game"
-  default_prompt: "Use $bloxodes-game-plan to research this game and plan its Bloxodes pages."
+  default_prompt: "Use $bloxodes-game-plan to research this game and plan useful Bloxodes pages. Normally propose standalone checklists only for verified 100% completion, with one board per page; record explicit user exceptions."
