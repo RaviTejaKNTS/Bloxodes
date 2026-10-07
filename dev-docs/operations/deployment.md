@@ -6,7 +6,7 @@ Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, mana
 
 ## Task and release workflow
 
-Status: Protected PR flow and production schema/web release verified. The read-only content canary exposed an install issue; its corrected retry is pending.
+Status: Protected PR flow, production schema/web release and verification-only content flow verified.
 
 T3 assigns one task worktree and branch. Agents stay there, edit the task's files and push a PR targeting `production`. The main checkout stays clean on `production`. `t3.json` runs the lightweight setup hook, which links ignored env storage and creates scratch directories. It installs no dependencies and runs no local checks or builds.
 
@@ -22,7 +22,11 @@ Use T3's PR watcher while waiting. Merge approved work with a merge commit to ke
 
 The main checkout fast-forwarded cleanly to this SHA. Its tracked T3 actions now use lightweight setup and GitHub PR/check links. The prior ignored T3 config was preserved in `/tmp/bloxodes-task30-t3-before-release.json`. GitHub deleted the merged remote branch. Production protection and the production-only environment policy were read back. The active task checkout remains attached to T3; cleanup waits until T3 releases it.
 
-The verification-only [content run 37576589509](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37576589509) stopped before its ledger command because the production environment made npm omit the development-only `tsx` package. The content workflow now installs locked development dependencies explicitly with `npm ci --include=dev`. It keeps production mode for the guarded publishers and performs no local install. Retry the existing `/games` canary after the fix merges. No content operation or revalidation ran in the failed canary.
+The verification-only [content run 37576589509](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37576589509) stopped before its ledger command because the production environment made npm omit the development-only `tsx` package. The content workflow now installs locked development dependencies explicitly with `npm ci --include=dev`. It keeps production mode for the guarded publishers and performs no local install. No content operation or revalidation ran in the failed canary.
+
+The install correction passed [PR #31](https://github.com/RaviTejaKNTS/Bloxodes/pull/31) checks and completed review with no findings, then merged as `868acaf2ce30a4099097cf2883dbae1574afce65`. Its [production classification run 37577903746](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37577903746) correctly skipped schema application and image rebuilding. The live image remains the healthy `c199d39ac3bc03d37aec9c55aee13f0b2bb4cbaa` release.
+
+The corrected verification-only [content run 37577949157](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37577949157) passed the exact-current-production gate, read-only production migration-ledger gate, compatible-live-code gate, `/games` text/metadata/canonical/sitemap checks and desktop/mobile Chromium checks. The batch contained zero operations and zero cache events, with `apply=false`. It created or changed no content, media, queue receipt or revalidation event. Browser reports expire after one day. Actual content publication still requires an explicit approved batch; this canary verifies the workflow without testing a real write.
 
 Installed runtime pointers remain `cfadab0db53575c235535234185cea5120b56e0a` for the article runtime and `34b925cca7788e7db83e58d640031e89ffe01cec` for the shared automation runtime. Their env, services and jobs were not changed or activated.
 
