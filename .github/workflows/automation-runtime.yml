@@ -15,8 +15,11 @@ jobs:
           test "$GITHUB_REF" = refs/heads/production
           test "$GITHUB_SHA" = "$(git ls-remote origin refs/heads/production | cut -f1)"
       - uses: actions/setup-node@v4
-        with: {node-version: '24', cache: npm}
+        # Match /usr/bin/node used by the installed homelab services.
+        with: {node-version: '22', cache: npm}
       - run: npm ci --workspace @bloxodes/web --include-workspace-root --no-audit --no-fund
+      - name: Verify automation helpers on the host Node version
+        run: npm run test:article-queue && npm run test:wiki-runtime
       - name: Package dependencies and their source receipt
         run: |
           mkdir -p "$RUNNER_TEMP/runtime"
@@ -27,7 +30,7 @@ jobs:
           import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';
           const hash=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
           const root=path.join(process.env.RUNNER_TEMP,'runtime');
-          fs.writeFileSync(path.join(root,'receipt.json'),JSON.stringify({sha:process.env.GITHUB_SHA,lockHash:hash('package-lock.json'),archiveHash:hash(path.join(root,'dependencies.tgz')),platform:process.platform,arch:process.arch,nodeMajor:24}));
+          fs.writeFileSync(path.join(root,'receipt.json'),JSON.stringify({sha:process.env.GITHUB_SHA,lockHash:hash('package-lock.json'),archiveHash:hash(path.join(root,'dependencies.tgz')),platform:process.platform,arch:process.arch,nodeMajor:Number(process.versions.node.split('.')[0])}));
           JS
       - uses: actions/upload-artifact@v4
         with:
