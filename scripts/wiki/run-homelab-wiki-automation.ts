@@ -1,8 +1,8 @@
 import "../shared/load-env";
 import { dispatchWiki } from "../ci/dispatch-wiki";
-import { wikiDispatchReady } from "../ci/wiki-publication-state.mjs";
+import { wikiDispatchReady, wikiDispatchRecovery, matchingWikiRun } from "../ci/wiki-publication-state.mjs";
 
-import { spawn, spawnSync, type ChildProcess } from "node:child_process";
+import { execFileSync, spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { access, mkdir, readFile, realpath } from "node:fs/promises";
 import { constants as fsConstants, readFileSync, realpathSync } from "node:fs";
 import os from "node:os";
@@ -539,6 +539,42 @@ async function heartbeat(dev: SupabaseClient, row: QueueRow) {
   if (data !== true) throw new WikiLeaseLostError("Wiki queue lease lost.");
 }
 
+async function recoverWikiDispatchClaims(dev: SupabaseClient) {
+  const query = await dev.from("wiki_generation_queue").select("*")
+    .in("status", ["processing", "publishing"]).eq("production_receipt->>state", "publishing")
+    .order("started_at").limit(20);
+  if (query.error) throw query.error;
+  for (const row of query.data || []) {
+    const action = wikiDispatchRecovery(row);
+    if (!action) continue;
+    const previous = row.production_receipt;
+    let receipt = {...previous};
+    if (action === "retry") {
+      receipt = {...previous, state: "failed", failed_at: new Date().toISOString(), error: "Publisher exited before its dispatch began."};
+    } else {
+      // Absence from a bounded API read cannot prove that dispatch never reached GitHub.
+      const since = new Date(Math.floor(Date.parse(previous.started_at) / 1000) * 1000).toISOString();
+      const params = new URLSearchParams({branch: "production", event: "workflow_dispatch", created: `>=${since}`, per_page: "100"});
+      let run;
+      for (let page = 1; page <= 5; page++) {
+        params.set("page", String(page));
+        const result = JSON.parse(execFileSync("gh", ["api", `repos/RaviTejaKNTS/Bloxodes/actions/workflows/publish-content.yml/runs?${params}`], {encoding: "utf8", timeout: 30_000}));
+        run = matchingWikiRun(result.workflow_runs, previous);
+        if (run || result.workflow_runs.length < 100) break;
+      }
+      if (!run) continue;
+      receipt.github_run_id = run.id;
+      receipt.github_run_url = run.html_url;
+    }
+    let save = dev.from("wiki_generation_queue").update({production_receipt: receipt})
+      .eq("id", row.id).eq("status", row.status).eq("production_receipt", JSON.stringify(previous));
+    if (row.status === "processing") save = save.eq("lease_token", row.lease_token).gt("lease_expires_at", new Date().toISOString());
+    const saved = await save.select("id");
+    if (saved.error) throw saved.error;
+    if (saved.data?.length) console.log(`Recovered wiki dispatch evidence for ${row.game_name}.`);
+  }
+}
+
 async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
   const query = await dev.from("wiki_generation_queue").select("*")
     .in("status", ["processing", "publishing"]).in("production_receipt->>state", ["requested", "failed"])
@@ -548,7 +584,7 @@ async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
   const row = (query.data || []).find(candidate => wikiDispatchReady(candidate,now));
   if (!row) return false;
   const request = row.production_receipt;
-  const publishing = { ...request, state: "publishing", started_at: new Date().toISOString(), dispatch_attempts: Number(request.dispatch_attempts || 0) + 1 };
+  const publishing = { ...request, state: "publishing", dispatch_phase: "preparing", github_run_id: null, github_run_url: null, started_at: new Date().toISOString(), dispatch_attempts: Number(request.dispatch_attempts || 0) + 1 };
   let claim = dev.from("wiki_generation_queue").update({ production_receipt: publishing })
     .eq("id", row.id).eq("status", row.status)
     .eq("production_receipt->>request_id", request.request_id).eq("production_receipt->>state", request.state);
@@ -562,15 +598,16 @@ async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
     await resolveWikiAttemptRoot(expectedRoot, row.result_root, row.attempts);
     const result = await readWorkflowResult(row, row.result_root);
     if (result.outcome !== "ready") throw new Error("Publication request is not ready.");
-    await dispatchWiki(row, result);
+    await dispatchWiki({...row, production_receipt: publishing}, result);
     console.log(`GitHub publication dispatched for ${row.game_name}; CI owns the final receipt.`);
   } catch (error) {
     const receipt = { ...publishing, state: "failed", error: sanitizeError(error instanceof Error ? error.message : String(error), process.env), failed_at: new Date().toISOString() };
     const saved = await dev.from("wiki_generation_queue").update({ production_receipt: receipt })
       .eq("id", row.id).eq("status", row.status).eq("production_receipt->>request_id", request.request_id)
-      .eq("production_receipt->>state", "publishing");
+      .eq("production_receipt->>state", "publishing").eq("production_receipt->>started_at", publishing.started_at)
+      .eq("production_receipt->>dispatch_phase", "preparing");
     if (saved.error) throw saved.error;
-    console.log(`Publisher failed: ${row.game_name}`);
+    console.log(`Publisher stopped for ${row.game_name}. An uncertain GitHub dispatch remains pending for inspection.`);
   }
   return true;
 }
@@ -762,6 +799,7 @@ async function main() {
   if (releaseOnly) {
     const recovered = await reconcileExpiredWikiLeases(dev);
     if (recovered) console.log(`Reconciled ${recovered} expired wiki leases.`);
+    await recoverWikiDispatchClaims(dev);
     while (await releaseRequestedWiki(dev)) { /* Trusted publisher never runs model turns or takes the model lock. */ }
     return;
   }

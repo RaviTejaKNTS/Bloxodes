@@ -34,7 +34,7 @@ export async function dispatchContentBundle(batch: any, inputs: Array<{ source: 
   const approvedSha = execFileSync("git", ["ls-remote", "origin", "refs/heads/production"], { encoding: "utf8" }).split(/\s+/)[0];
   if (!/^[0-9a-f]{40}$/.test(approvedSha ?? "")) throw new Error("Production SHA is unavailable.");
   if (beforeDispatch) await beforeDispatch(hash);
-  execFileSync("gh", ["workflow", "run", "publish-content.yml", "--repo", "RaviTejaKNTS/Bloxodes", "--ref", "production", "--json"], { input: JSON.stringify({ bundle_hash: hash, approved_sha: approvedSha, apply: "true" }), stdio: ["pipe", "inherit", "inherit"] });
+  execFileSync("gh", ["workflow", "run", "publish-content.yml", "--repo", "RaviTejaKNTS/Bloxodes", "--ref", "production", "--json"], { input: JSON.stringify({ bundle_hash: hash, approved_sha: approvedSha, apply: "true" }), stdio: ["pipe", "inherit", "inherit"], timeout: 60_000 });
   console.log(`Dispatched frozen content ${hash}. Production acknowledgement follows CI readback.`);
   return { dispatched: true as const, hash };
 }

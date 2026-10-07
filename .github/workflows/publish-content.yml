@@ -1,4 +1,5 @@
 name: Publish selected content
+run-name: Selected content ${{ inputs.bundle_hash || inputs.batch }}
 on:
   workflow_dispatch:
     inputs:
