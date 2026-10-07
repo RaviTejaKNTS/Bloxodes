@@ -1,0 +1,104 @@
+name: Managed content QA
+on:
+  workflow_call:
+    inputs:
+      batch: {type: string, required: false, default: ''}
+      bundle_hash: {type: string, required: false, default: ''}
+      approved_sha: {type: string, required: true}
+  workflow_dispatch:
+    inputs:
+      batch: {type: string, required: false}
+      bundle_hash: {type: string, required: false}
+      approved_sha: {type: string, required: true}
+      self_test: {type: boolean, default: false, description: 'Exercise isolated development checklist fixtures and remove them'}
+permissions:
+  contents: read
+concurrency:
+  group: bloxodes-managed-content-qa
+  queue: max
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 30
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      BLOXODES_MANAGED_QA: 'true'
+      BLOXODES_APPROVED_SHA: ${{ inputs.approved_sha }}
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      SUPABASE_MEDIA_PUBLIC_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_MEDIA_BUCKET: media
+      ARTICLE_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      ARTICLE_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      WIKI_R2_ENDPOINT: ${{ secrets.WIKI_R2_ENDPOINT }}
+      WIKI_R2_ACCESS_KEY_ID: ${{ secrets.WIKI_R2_ACCESS_KEY_ID }}
+      WIKI_R2_SECRET_ACCESS_KEY: ${{ secrets.WIKI_R2_SECRET_ACCESS_KEY }}
+      WIKI_R2_BUCKET: ${{ secrets.WIKI_R2_BUCKET }}
+      SITE_URL: https://bloxodes.com
+      NEXT_PUBLIC_SITE_URL: https://bloxodes.com
+      # Chromium maps this test host to loopback. Public canonicals stay on SITE_URL.
+      TEST_BASE_URL: http://bloxodes.test:3000
+      BATCH: ${{ inputs.batch }}
+      BUNDLE_HASH: ${{ inputs.bundle_hash }}
+    steps:
+      - uses: actions/checkout@v6
+        with: {ref: production, fetch-depth: 0}
+      - name: Require reviewed source and development target
+        run: |
+          test "$GITHUB_REF" = refs/heads/production
+          test "$BLOXODES_APPROVED_SHA" = "$(git rev-parse HEAD)"
+          test "$SUPABASE_URL" = https://bbtcaurrtyoukvjbxbbj.supabase.co
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm}
+      - run: npm ci --include=dev --no-audit --no-fund
+      - name: Load immutable selected inputs
+        if: inputs.bundle_hash != ''
+        run: node --import tsx scripts/ci/download-content-bundle.ts
+      - name: Prepare isolated development-only fixtures
+        if: inputs.self_test == true
+        run: node --import tsx scripts/ci/checklist-qa-fixture.ts
+      - name: Prove all inputs and stage development content
+        run: node --import tsx scripts/ci/publish-content.ts --managed --stage --batch "$BATCH"
+      - name: Create isolated checklist account and runner-only session secret
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import {randomBytes} from 'node:crypto';
+          const secret=randomBytes(32).toString('hex');
+          console.log(`::add-mask::${secret}`);
+          fs.appendFileSync(process.env.GITHUB_ENV,`AUTH_SESSION_SECRET=${secret}\n`);
+          JS
+      - run: node --import tsx scripts/ci/managed-checklists.ts account
+      - run: npm run build:web
+      - run: npx playwright install --with-deps chromium
+      - name: Verify the selected pages and checklist interactions
+        env:
+          RELEASE_SMOKE_BATCH: ${{ runner.temp }}/managed-smoke.json
+          MANAGED_CHECKLIST_STATE: ${{ runner.temp }}/managed-checklists.json
+          MANAGED_CHECKLIST_AUTH: ${{ runner.temp }}/checklist-auth.json
+        run: npx playwright test apps/web/e2e/release-smoke.spec.ts apps/web/e2e/managed-checklists.spec.ts
+      - name: Repeat exact data comparison and bind receipt to reviewed bytes
+        run: |
+          node --import tsx scripts/ci/managed-checklists.ts verify
+          node scripts/ci/managed-content-receipt.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: managed-content-receipt-${{ github.run_id }}
+          overwrite: true
+          path: ${{ runner.temp }}/managed-content-receipt.json
+          retention-days: 1
+      - name: Remove only this run's isolated checklist rows
+        if: always()
+        run: node --import tsx scripts/ci/managed-checklists.ts cleanup
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: managed-content-browser-${{ github.run_id }}
+          overwrite: true
+          path: tmp/test-reports/
+          retention-days: 1
+          if-no-files-found: ignore

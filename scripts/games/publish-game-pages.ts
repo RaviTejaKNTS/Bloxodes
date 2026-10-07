@@ -26,6 +26,25 @@ async function main() {
  if (!Object.keys(payload).length || Object.keys(payload).some(key => !(key in contract))) throw new Error("Supported groups: games, wiki, codesPages, tools, maps, quizzes, catalog, checklists, checklistItems, codes.");
  const sb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, { auth: { persistSession: false } });
  const validated = new Map<keyof typeof contract, Array<Record<string, unknown>>>();
+ if(payload.checklists || payload.checklistItems) {
+  if(!Array.isArray(payload.checklists)||!payload.checklists.length||!Array.isArray(payload.checklistItems)) throw new Error('Checklist changes require reviewed page rows and the full retained task inventory.');
+  for(const page of payload.checklists) {
+   if(!validId(page.id)) throw new Error('Checklists require an explicit stable page UUID.');
+   const items=payload.checklistItems.filter(item=>item.page_id===page.id);
+   if(new Set(items.map(item=>item.item_key)).size!==items.length) throw new Error('Duplicate checklist task identity.');
+   const current=await sb.from('game_checklist_pages').select('id').eq('namespace',namespace).eq('slug',page.slug).maybeSingle();if(current.error)throw current.error;
+   if(current.data && current.data.id!==page.id)throw new Error('Preserve the existing checklist page UUID.');
+   for(let start=0;;start+=500) {
+    const retained=await sb.from('game_checklist_items').select('id,item_key').eq('page_id',page.id).eq('namespace',namespace).order('id').range(start,start+499);if(retained.error)throw retained.error;
+    for(const existing of retained.data) {
+     const selected=items.find(item=>item.item_key===existing.item_key);
+     if(!selected || selected.id!==undefined && selected.id!==existing.id)throw new Error('Include every retained task and preserve its existing UUID.');
+    }
+    if(retained.data.length<500)break;
+   }
+  }
+  if(payload.checklistItems.some(item=>!payload.checklists.some(page=>page.id===item.page_id)))throw new Error('Every edited task needs its reviewed page and full inventory.');
+ }
  for (const key of Object.keys(contract) as Array<keyof typeof contract>) {
   const rows = payload[key];
   if (!rows) continue;
@@ -69,7 +88,9 @@ async function main() {
     if (key === "checklists" && (typeof row.is_public!=="boolean" || row.is_public && (typeof row.published_at!=="string" || !Number.isFinite(Date.parse(row.published_at))))) throw new Error("Checklists need an explicit public state and publication date.");
     if (key === "tools" && (row.tool_key !== "resource-cost" || typeof row.rules_json !== "object" || row.rules_json === null || typeof (row.rules_json as Record<string, unknown>).unitCost !== "number" || !Number.isFinite((row.rules_json as Record<string, number>).unitCost) || (row.rules_json as Record<string, number>).unitCost < 0 || typeof (row.rules_json as Record<string, unknown>).resourceLabel !== "string" || !(row.rules_json as Record<string, string>).resourceLabel.trim())) throw new Error("New shared tools need registered resource-cost rules. Minecraft uses its existing specialist publisher.");
    }
-   prepared.push(key === "codes" ? row : { ...row, namespace });
+   prepared.push(key === "codes" ? row : { ...row, namespace,
+    ...(key==='checklistItems'?{description:row.description??null,is_required:row.is_required??false}:{}),
+    ...(key==='checklists'?{seo_title:row.seo_title??null,seo_description:row.seo_description??null,description_md:row.description_md??null}:{}) });
   }
   console.log(`${namespace}: ${prepared.length} ${key} rows validated${argv.includes("--apply") ? ", checking atomic publication" : ", checking rollback-only publication"}`);
   validated.set(key, prepared);

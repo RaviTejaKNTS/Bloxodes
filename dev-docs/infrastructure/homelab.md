@@ -10,6 +10,14 @@ New agent tasks use their one T3-assigned checkout and branch under `/srv/data/t
 
 Finished remote task branches delete after merge. The exact-worktree cleanup helper runs only after T3 releases that clean merged checkout. It skips detached automation/rollback runtimes. This migration does not change installed services, env files, timers or runtime pointers, and does not interrupt jobs. Installed automation keeps its existing contract until a separately authorized activation. See `../operations/deployment.md`.
 
+## GitHub QA runtime activation
+
+The reviewed units use `/srv/data/bloxodes-automation-runtime/current` and set `BLOXODES_CI_QA=1`. They keep content research, writing, editorial reviews and media preparation on the worker. Final checks, development staging, builds and rendered QA run on GitHub before production publication. Protected `/etc/bloxodes/` env files keep their values.
+
+Prepare dependencies with the GitHub `Package automation runtime` workflow on the released production SHA. Download its SHA-named artifact to HDD, verify the successful run/source SHA and call `automation:runtime:prepare` with that SHA and `--artifact-dir`. The package receipt binds source, lockfile, archive and host platform. Preparation never starts a job or runs a local install/build.
+
+The unified installer refuses active workers and an occupied shared lease. It temporarily suspends only active timers, preserves their cadence/enablement, stages and hashes persistent state on HDD, and retains old paths as compatibility links. It switches reviewed units and the current pointer with rollback backups, then resumes the prior timers. No running job is stopped. Until that installer succeeds, installed workers keep their previous runtime. Use the deployment owner for the complete procedure; earlier activation records below describe their historical releases.
+
 ## Host
 
 - Hostname: `teja-homelab`.

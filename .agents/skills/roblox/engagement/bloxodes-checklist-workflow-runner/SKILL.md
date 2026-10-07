@@ -34,23 +34,11 @@ After the parent approves the brief, send the same subagent:
 4. Ask the same subagent to use `/bloxodes-checklist-writing` and create `final.json`.
 5. Review that tasks are concrete actions players can complete.
 6. Keep the reviewed `final.json` in the task workspace. For CI, stage an exact copy with its selected batch under `content/releases/<batch>/`, or use a reviewed immutable bundle accepted by the chosen job. Ignored `tmp/` files are not available on GitHub by themselves.
-7. Require a managed-development GitHub job that consumes that exact final, starts a development-backed preview and runs the existing verifier before production publication:
+7. Use `Managed content QA` on GitHub with the exact committed batch or immutable private bundle. It stages an isolated development board, compares complete normalized page/task contents and repeats comparison after desktop/mobile browser checks.
+8. Review the job's screenshots and reports for board coverage, ticking, reload, unticking and account saving. The receipt must match the selected input bytes and reviewed source SHA. Count-only or unrelated route checks do not pass this gate.
+9. Return the exact final path and successful GitHub artifact links. Production publication requires explicit authorization and uses the same development QA gate before its first production write. If QA fails, return the files and actual failure. Do not run checks locally or call a dispatch published.
 
-```bash
-npm run verify:engagement-finals -- --base-url http://127.0.0.1:3000 --file content/releases/<batch>/final.json
-```
-
-The existing verifier checks copy, imports the reviewed final, checks page identity/public status and total item count, and fetches the route by title. It does not compare item contents. Its job must use only managed-development credentials and preserve the importer's production guard. The loopback URL above belongs to the GitHub runner, not the workstation or a public preview.
-
-8. Before accepting QA, extend the verifier or job to compare every saved item's `section_code`, `title`, `description` and `is_required` against the exact reviewed final. Match the importer's trimming, null descriptions and default required-leaf behavior. Compare the complete normalized row set, including duplicates, without database-generated IDs or timestamps; item count alone is insufficient. Serialize all jobs writing the same universe/slug through import, browser QA and final readback, or isolate their targets. Bind the final hash and successful comparison to the artifacts.
-9. Require desktop/mobile browser QA for the exact `/checklists/<slug>` page, including the single board, ticks and reload. Review the job's screenshots and reports. A generic smoke of unrelated routes is insufficient.
-10. Return the exact final path and successful GitHub verification/artifact links. If the job or exact-row comparison is unavailable, return the authored files and the explicit QA blocker, then stop before production dispatch. Do not report verification as passed.
-
-## Current GitHub QA gap
-
-PR CI currently dry-runs committed content batches against managed development. It does not apply the reviewed final, run `verify:engagement-finals`, or render the selected checklist. The selected-content publication workflow targets production, so its browser artifacts cannot satisfy prepublication QA.
-
-A managed-development job with the input, target, exact-row comparison and browser steps above must be implemented and verified before this workflow can complete a new checklist. The current count-only verifier cannot certify the reviewed completion requirements. Keep production publication blocked until that evidence exists. Do not run the missing checks locally or publish to production to obtain it. See `dev-docs/operations/deployment.md` for the current CI contract.
+See `dev-docs/operations/deployment.md#managed-development-content-qa` for dispatch inputs, isolation, cleanup and receipt ownership.
 
 ## Parent Checks
 

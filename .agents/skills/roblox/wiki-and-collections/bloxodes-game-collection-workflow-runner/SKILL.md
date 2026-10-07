@@ -1,6 +1,6 @@
 ---
 name: bloxodes-game-collection-workflow-runner
-description: Run one or many approved Bloxodes game collection pages with parent review. Use when the user gives approved game collection ideas, asks to create multiple /wiki/game-slug/collection-slug pages, wants subagents for collection research, data, images, and writing, or needs local verification before Browser preview.
+description: Run one or many approved Bloxodes game collection pages with parent review. Use when the user gives approved game collection ideas, asks to create multiple /wiki/game-slug/collection-slug pages, wants subagents for collection research, data, images, and writing, or needs GitHub verification and browser reports.
 ---
 
 # Bloxodes Game Collection Workflow Runner
@@ -18,7 +18,7 @@ Build the most accurate and up-to-date useful collection the available sources s
 1. A **collection subagent** owns research, data, and images for one collection, and waits at each gate.
 2. You approve, refine, or block at research, data, and image gates.
 3. A **writing subagent** writes `final.json` after image readiness is approved.
-4. You review the final copy, run verification, and preview the local page.
+4. You review the final copy, review GitHub verification and rendered screenshots.
 
 Give each collection subagent one collection only. If you have more collections than open slots, queue the rest. Do not write collections from the parent seat.
 
@@ -58,32 +58,13 @@ Record approval notes or specific corrections in the collection brief before sen
 6. Data gate: same subagent prepares the dataset and updates brief notes.
 7. Review item count, missing items, v2 shape, sections, fields, image planning, route assumptions, and `runtime-manifest.json` `collection.pageType`.
 8. Image gate: same subagent gathers and wires images, then updates brief notes.
-9. Review image coverage, quality, paths, dataset wiring, and checker result.
+9. Review image coverage, quality, paths, dataset wiring, and GitHub checker result when available.
 10. Writing gate: spawn a writing subagent with `bloxodes-game-collection-writing`.
 11. Review `final.json`. Send copy/tone/structure/FAQ fixes to the writing subagent. Send data/image gaps back to the collection subagent.
-12. Start or reuse localhost with `npm run dev:managed`.
-13. Confirm each collection folder contains `brief.md`, `dataset.json`, `media/`, `final.json`, and `runtime-manifest.json`. Run the managed-development verifier. It checks the workspace dataset, creates and publishes the immutable database/R2 runtime revision and page copy from the manifest, validates the saved dataset pointer and item count, and only then checks the route:
-
-```bash
-npm run verify:game-collection-finals -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --collection <collection-slug>
-```
-
-Use one `--collection` for each approved collection.
-
-14. Run the HTML size gate against each verified collection URL:
-
-```bash
-npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<collection-slug> --fail-on-limit
-```
-
-15. If the verifier and size gate pass, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Browser (or fetch/preview the live local route when Browser is unavailable).
-16. For `database` collections with pagination, verify:
-- the section dropdown lists all real sections, not only the current page section
-- choosing a section on another page opens that page at the correct section anchor
-- `/wiki/<game-slug>/<collection-slug>/page/2` returns 200 and has `noindex, follow`
-- paginated collection URLs are not listed in `/sitemaps/wiki.xml`
-17. For `collectible` collections, verify the clean collectible renderer, local-first progress for signed-out users, account-saved progress for signed-in users, search/filter/reset behavior, and that `/page/2` returns 404 with the base URL as canonical. Collectible collections must not receive database pagination or the card/list switch.
-18. Return paths, localhost links, blocked collections, page-type decisions, size-gate results, pagination/collectible checks, and remaining risks.
+12. Confirm the collection folder contains `brief.md`, `dataset.json`, `media/`, `final.json` and `runtime-manifest.json`. Prepare exact selected `roblox-collection` operations with their immutable bundle. Include the approved hub when needed. Do not start local previews or run checks locally.
+13. Use `Managed content QA` on GitHub. It validates and publishes the selected development revisions/media, builds the runner preview and records the selected desktop/mobile routes.
+14. Review dataset pointer/count readback, useful rendered fields, image coverage, metadata and screenshots. Page-specific pagination, HTML-size or collectible progress checks also run on GitHub when needed. For database pages, verify section navigation and paginated canonical/noindex behavior. For collectible pages, verify local/account progress, filters/reset and absence of pagination.
+15. Return artifact paths, the exact GitHub run and reports, blocked collections and supported page-type decisions. Do not claim a page-specific check passed unless its report exists. Installed CI-mode builders return authored artifacts for GitHub QA before production publication.
 
 ## Research checks
 
@@ -105,7 +86,7 @@ Once the data subagent updates the brief, check that:
 - Public game fields live only in `items[].item`; system fields live only in `items[].system`.
 - If a real multi-section grouping exists, `items[].system.section`, `items[].system.sortOrder`, `meta.display.groupLabel`, and `meta.display.sectionOrder` are present and match actual rendered labels.
 - No public item field is named `collectionSection`, `section`, `sortOrder`, `image`, `slug`, source/verification/raw text, or any other workflow/debug key.
-- `npm run check:game-collection-data` passed or the remaining warning is accepted.
+- GitHub data checks passed or the remaining warning is accepted.
 - Section field, section counts, and section order are recorded.
 - Every item lands in the right section.
 - Card fields help players compare items.
@@ -130,7 +111,7 @@ Once the image subagent updates `brief.md`, check that:
 - Images clearly show the item and are not thumbnails, logos, page screenshots, or unrelated art.
 - Public image paths exist under the expected folder.
 - Dataset image fields are wired to the saved images.
-- `npm run check:game-collection-data -- --require-images` passed when images are required.
+- GitHub image checks passed when images are required.
 - If images are not ready, send it back to the subagent for fixes before writing.
 
 ## Final checks
@@ -151,7 +132,7 @@ Before approving any `final.json`, make sure:
 - title follows `All {count} <Collection> in <Game>`
 - paragraphs add context beyond the cards
 - `final.json` parses
-- verifier, HTML size gate, pagination checks, and Browser preview look good before calling it done
+- verifier, HTML size gate, pagination checks, and GitHub browser report look good before calling it done
 - for `collectible`, account/local progress and no-pagination route checks pass instead of database pagination checks
 
 ## Parent checks
@@ -169,4 +150,4 @@ Before approving any `final.json`, make sure:
 - `wiki_md` clearly explains the in-game system and is useful, not generic, with no item count
 - no public copy mentions research, datasets, workflow, or page usage
 - `final.json` parses
-- verifier, HTML size gate, pagination checks, and Browser preview pass before calling it done
+- verifier, HTML size gate, pagination checks, and GitHub browser report pass before calling it done

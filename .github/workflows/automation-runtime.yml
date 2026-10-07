@@ -1,0 +1,37 @@
+name: Package automation runtime
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with: {fetch-depth: 0}
+      - name: Require released production source
+        run: |
+          test "$GITHUB_REF" = refs/heads/production
+          test "$GITHUB_SHA" = "$(git ls-remote origin refs/heads/production | cut -f1)"
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm}
+      - run: npm ci --workspace @bloxodes/web --include-workspace-root --no-audit --no-fund
+      - name: Package dependencies and their source receipt
+        run: |
+          mkdir -p "$RUNNER_TEMP/runtime"
+          directories=(node_modules)
+          if [ -d apps/web/node_modules ]; then directories+=(apps/web/node_modules); fi
+          tar -czf "$RUNNER_TEMP/runtime/dependencies.tgz" "${directories[@]}"
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';
+          const hash=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+          const root=path.join(process.env.RUNNER_TEMP,'runtime');
+          fs.writeFileSync(path.join(root,'receipt.json'),JSON.stringify({sha:process.env.GITHUB_SHA,lockHash:hash('package-lock.json'),archiveHash:hash(path.join(root,'dependencies.tgz')),platform:process.platform,arch:process.arch,nodeMajor:24}));
+          JS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: automation-runtime-${{ github.sha }}
+          overwrite: true
+          path: ${{ runner.temp }}/runtime/
+          retention-days: 1

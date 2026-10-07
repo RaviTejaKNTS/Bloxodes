@@ -6,6 +6,7 @@ import path from "node:path";
 
 import { parseQuizData, type QuizData } from "@/lib/quiz-types";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import {assertChecklistItems} from '../ci/checklist-proof.mjs';
 
 type ChecklistFinal = {
   page: {
@@ -30,7 +31,7 @@ type QuizFinal = {
 };
 
 type FinalEntry =
-  | { kind: "checklist"; file: string; slug: string; title: string; universeId: number; itemCount: number }
+  | { kind: "checklist"; file: string; slug: string; title: string; universeId: number; itemCount: number; items: ChecklistFinal['items'] }
   | { kind: "quiz"; file: string; code: string; title: string; universeId: number | null; quizData: QuizData };
 
 type CliOptions = {
@@ -110,6 +111,7 @@ async function readFinal(file: string): Promise<FinalEntry> {
       title: parsed.page.title.trim(),
       universeId: Number(parsed.page.universe_id),
       itemCount: parsed.items.length,
+      items: parsed.items,
     };
   }
 
@@ -164,6 +166,12 @@ async function verifyReadback(entries: FinalEntry[]) {
         .eq("page_id", (data as { id: string }).id);
       if (countError) throw new Error(`Failed to count checklist items for ${entry.slug}: ${countError.message}`);
       if ((count ?? 0) !== entry.itemCount) throw new Error(`Checklist item count mismatch for ${entry.slug}`);
+      const items:any[]=[];
+      for(let start=0;;start+=500) {
+        const result=await sb.from('checklist_items').select('section_code,title,description,is_required').eq('page_id',(data as {id:string}).id).order('id').range(start,start+499);
+        if(result.error) throw result.error; items.push(...result.data); if(result.data.length<500) break;
+      }
+      assertChecklistItems(entry.items,items);
     } else {
       const { data, error } = await sb
         .from("quiz_pages")

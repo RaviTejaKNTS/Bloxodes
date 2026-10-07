@@ -10,11 +10,9 @@ Evidence: fresh managed-development page/item readback, all 386 web tests, isola
 
 Authoring stays in the assigned T3 task worktree. Validation, build and browser commands run on GitHub. Use the selected publisher registry and exact batches in `../operations/deployment.md`; do not copy whole tables or account progress. The shared non-Roblox publisher now accepts guarded production application only inside the approved content CI job. Roblox retains its separate publishers.
 
-The page templates and routes are unchanged by this release. Queued articles and wikis now have CI dispatch hooks in source. Installed runtimes stay on their previous release until separately activated.
+The page templates and routes are unchanged. Queued articles and wikis freeze only approved authoring artifacts and dispatch GitHub publication. Installed workers use CI mode after the separately authorized runtime activation.
 
-Prepublication checklist QA remains a CI gap. The PR content-batch job only dry-runs inputs; it does not apply a new final, run `verify:engagement-finals`, or render the selected checklist. Production publication screenshots do not prove development QA. A managed-development job must consume the reviewed final and capture the exact board on desktop/mobile before production dispatch. The existing verifier only checks page identity/public status and item count, so the job or verifier must also compare every normalized saved item with the reviewed final and protect QA from concurrent writers for the same checklist. Until that job and stronger comparison exist and pass, checklist workflows return authored files with the QA blocker. Local execution remains disallowed. See the evidence boundary in `../operations/deployment.md#managed-development-content-qa-gap`.
-
-This gate also applies to shared non-Roblox checklists. Their publisher's row-ID readback and PR dry-run do not establish exact contents or board behavior. The shared reference-page skill must return authored inputs with the blocker until matching development readback and browser artifacts exist; the Roblox engagement verifier cannot validate shared tables.
+`Managed content QA` checks the selected inputs before production. Checklist jobs compare the complete page/task contents, use isolated development boards, test desktop/mobile ticks, reload and account saving, and repeat database readback. Shared updates include all retained tasks and stable IDs. Production needs the successful receipt for the same input bytes and source SHA. See `../operations/deployment.md#managed-development-content-qa` for dispatch, artifacts and cleanup. Local checks and previews remain disallowed.
 
 ## Shared non-Roblox storage
 

@@ -76,6 +76,7 @@ function applySecurityHeaders(res: NextResponse, pathname: string, hostname: str
 
 function isLocalHostname(hostname: string) {
   const normalized = hostname.trim().toLowerCase();
+  if(process.env.GITHUB_ACTIONS==='true' && process.env.BLOXODES_MANAGED_QA==='true' && normalized==='bloxodes.test') return true;
   return normalized === "localhost" || normalized === "127.0.0.1" || normalized === "::1" || normalized === "[::1]" || isDevelopmentTailscaleHostname(normalized);
 }
 

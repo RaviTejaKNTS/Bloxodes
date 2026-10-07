@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Wiki Release Review"
   short_description: "Release final-checked wiki batches"
-  default_prompt: "Use $bloxodes-wiki-release-review to release already-final-checked wiki artifacts after per-game approval without rerunning content QA."
+  default_prompt: "Use $bloxodes-wiki-release-review to release already-final-checked wiki artifacts after per-game approval through selected GitHub publication with its required managed QA receipt."

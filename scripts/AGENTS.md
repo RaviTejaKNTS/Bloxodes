@@ -31,9 +31,15 @@ The one-time `activate:minecraft-editions` command is removed. Preserve all unre
 - For script env loading, use `scripts/shared/load-env.ts`. Profiles and overlays are defined in `env/config.json`; do not add root `.env*` fallbacks.
 - When a script changes pipeline behavior, schedules, env ownership, or side effects, update the existing owning `dev-docs/pipelines/*`, `dev-docs/environment.md`, or operations page in the same change; do not create a parallel current-state doc.
 
+## Content QA and runtime activation
+
+`managed-content-qa.yml` stages selected frozen inputs in development and saves exact-content/browser evidence. Production requires its SHA/hash-bound receipt. Checklist fixtures are development-only and cleaned after verification. `managed-checklists.ts` owns isolated boards and per-browser test accounts; `checklist-proof.mjs` compares complete rows and preserves Roblox task IDs. Shared checklist updates must include the complete retained task inventory.
+
+`automation-runtime.yml` installs dependencies on GitHub. Runtime preparation takes `--sha <released-sha> --artifact-dir <download-directory>` and verifies that package without a local install or build. The unified installer requires idle workers, preserves protected env/timer state and moves persistent files to HDD with hash readback. `BLOXODES_CI_QA=1` delegates technical article/wiki QA to GitHub. These are explicitly authorized operator actions, never ordinary release side effects.
+
 ## Folder Map
 
-- `ci/review-scope.mjs` decides whether a PR needs a paid Codex review. Docs, skills and content-only changes skip it. Same-repository production PRs review when opened ready or changed to ready; pushes cancel stale reviews and explicit workflow dispatch reviews completed fixes. It performs no database or publication operations. GitHub runs its policy tests.
+- `ci/review-scope.mjs` decides whether a PR needs a paid Codex review. Docs, skills and content-only changes skip it. Same-repository production PRs review when opened ready or changed to ready; pushes cancel stale reviews and explicit workflow dispatch reviews completed fixes. It performs no database or publication operations. Review feedback accepts only changed files, normalizing an absolute path only when it starts with the known runner checkout root. GitHub runs its policy tests.
 - `ci/migration-history.mjs` proves the finite managed-development timestamp aliases with exact source/local hashes and current objects. It copies original ledger evidence without executing retired SQL. `ci/wiki-publication-state.mjs` defines the durable request and bounded retry rules for wiki releases. GitHub owns their tests.
 - `ci/wiki-publication-binding.mjs` binds queue receipts to the stored approved result paths, exact frozen bundle, artifact hashes and canonical pages. The selected-content job checks production migration history before publication with the read-only `supabase:production:release -- --check-ledger` mode.
 - `ci/migration-byte-proof.mjs` rejects unproven applied SQL before CI issues a receipt. `ci/article-publication-binding.mjs` ties each selected final and canonical URL to its exact article queue row before publication. GitHub runs their mismatch/replay tests.

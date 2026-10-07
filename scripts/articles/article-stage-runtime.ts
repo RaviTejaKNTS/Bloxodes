@@ -230,6 +230,9 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
     }
     return decision;
   }
+  if (options.env.BLOXODES_CI_QA === '1' && ['copy_check','image_check','import_verify','browser_verify'].includes(stage)) {
+    return {...done(`${stage} delegated to GitHub. Authoring is ready; technical QA is pending.`),delegatedToCi:true};
+  }
   if (stage === "image_upload") await command("collect:article-images", ["--manifest", file("media.json"), "--apply"]);
   if (stage === "copy_check") await command("content:check-copy", [file("final.json")], "writing");
   if (stage === "image_check") await command("check:article-image-readiness", ["--manifest", file("media.json"), "--file", file("final.json")], "images");

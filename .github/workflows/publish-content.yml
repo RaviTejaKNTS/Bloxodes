@@ -29,7 +29,15 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  managed:
+    uses: ./.github/workflows/managed-content-qa.yml
+    with:
+      batch: ${{ inputs.batch }}
+      bundle_hash: ${{ inputs.bundle_hash }}
+      approved_sha: ${{ inputs.approved_sha }}
+    secrets: inherit
   publish:
+    needs: managed
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 30
@@ -55,6 +63,7 @@ jobs:
       BATCH: ${{ inputs.batch }}
       BUNDLE_HASH: ${{ inputs.bundle_hash }}
       APPLY: ${{ inputs.apply }}
+      BLOXODES_MANAGED_RECEIPT: ${{ runner.temp }}/managed-receipt/managed-content-receipt.json
     steps:
       - uses: actions/checkout@v6
         with:
@@ -72,6 +81,10 @@ jobs:
       - run: npm ci --include=dev --no-audit --no-fund
       - run: node --test scripts/ci/__tests__/*.test.mjs
       - run: npx playwright install --with-deps chromium
+      - uses: actions/download-artifact@v4
+        with:
+          name: managed-content-receipt-${{ github.run_id }}
+          path: ${{ runner.temp }}/managed-receipt
       - name: Require production migrations before loading the batch or writing content
         run: node --import tsx scripts/ops/release-production-schema.ts --approved-sha "$BLOXODES_APPROVED_SHA" --transport studio --database-role supabase_admin --check-ledger
       - name: Load the selected private bundle
@@ -101,6 +114,7 @@ jobs:
         if: always()
         with:
           name: selected-content-browser-${{ github.run_id }}
+          overwrite: true
           path: tmp/test-reports/
           retention-days: 1
           if-no-files-found: ignore

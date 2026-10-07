@@ -2,9 +2,9 @@
 set -euo pipefail
 [[ "${1:-}" == --apply && "${2:-}" =~ ^[0-9a-f]{40}$ ]] || { echo 'Usage: sudo scripts/ops/install-homelab-automation.sh --apply <released-40-char-sha>' >&2; exit 2; }
 SHA="$2"
-SOURCE=/home/teja/projects/Bloxodes
-ROOT=/home/teja/.local/share/bloxodes-automation-runtime
-LEGACY=/home/teja/.local/share/bloxodes-article-runtime
+SOURCE=/srv/data/projects/Bloxodes
+ROOT=/srv/data/bloxodes-automation-runtime
+LEGACY=/home/teja/.local/share/bloxodes-automation-runtime
 RELEASE="$ROOT/releases/$SHA"
 MODEL=bloxodes-wiki-model
 [[ "$EUID" == 0 && "$(hostname)" == teja-homelab ]]
@@ -77,40 +77,29 @@ idle
 (set -o noclobber; printf '{"pid":%s,"token":"runtime-activation-%s","mode":"runtime-activation"}\n' "$$" "$$" > "$SOURCE/tmp/article-writer/writer.lock") || { echo 'Shared article/wiki lease exists; retry after its owner finishes.' >&2; exit 1; }
 LOCKED=1
 # Persist data once, retaining every old absolute artifact path for queued retries.
-if [[ -L "$ROOT/state" ]]; then
-  [[ "$(readlink -f "$ROOT/state")" == "$LEGACY/state" ]]
-  unlink "$ROOT/state"
-  mv "$LEGACY/state" "$ROOT/state"
-  ln -s "$ROOT/state" "$LEGACY/state"
+if [[ -L "$ROOT/state" || -f "$ROOT/state-relocation.json" && ( ! -L "$LEGACY/state" || -d "$LEGACY/state.before-hdd" ) ]]; then
+  python3 "$RELEASE/scripts/ops/relocate-automation-state.py" "$LEGACY" "$ROOT"
 fi
 if [[ ! -e "$ROOT/state/wiki-automation" ]]; then
   mv "$SOURCE/tmp/wiki-automation" "$ROOT/state/wiki-automation"
   ln -s "$ROOT/state/wiki-automation" "$SOURCE/tmp/wiki-automation"
 fi
 [[ "$(readlink -f "$SOURCE/tmp/wiki-automation")" == "$ROOT/state/wiki-automation" ]]
-[[ "$(readlink -f "$RELEASE/tmp/article-writer")" == "$SOURCE/tmp/article-writer" ]]
+[[ "$(readlink -f "$RELEASE/tmp/article-writer")" == "$(readlink -f "$SOURCE/tmp/article-writer")" ]]
 # The model can traverse the runtime and read code, but only write artifacts/cache.
 # Do not recurse through .envs or grant access to any credential directory.
 setfacl -m "u:$MODEL:--x" /home/teja/.local/share
+setfacl -m "u:$MODEL:--x" /srv/data
 setfacl -m "u:$MODEL:r-x" "$ROOT" "$ROOT/releases" "$RELEASE" "$ROOT/state"
-install -d -o teja -g teja -m 0770 "$RELEASE/apps/web/.next"
-setfacl -m "u:$MODEL:rwx,d:u:$MODEL:rwx,d:u:teja:rwx" "$RELEASE/apps/web/.next"
 setfacl -m "u:$MODEL:rwx" "$SOURCE/tmp/article-writer"
 setfacl -R -m u:teja:rX "$ROOT/state/wiki-automation"
 setfacl -m d:u:teja:rX "$ROOT/state/wiki-automation"
 runuser -u "$MODEL" -- test ! -r "$RELEASE/.envs"
 runuser -u "$MODEL" -- git -c "safe.directory=$RELEASE" -C "$RELEASE" status --porcelain > "$BACKUP/model-git-status"
 [[ ! -s "$BACKUP/model-git-status" ]]
-# Check the actual restricted service sandbox without claiming content or publishing.
-systemd-run --quiet --wait --pipe --collect --unit=bloxodes-automation-readiness \
-  --property="User=$MODEL" --property="Group=$MODEL" --property="WorkingDirectory=$RELEASE" \
-  --property=EnvironmentFile=/etc/bloxodes/wiki-automation.env \
-  --property=ProtectSystem=strict --property=ProtectHome=read-only --property=PrivateTmp=true \
-  --property=NoNewPrivileges=true --property=CapabilityBoundingSet= \
-  --property="ReadWritePaths=/var/lib/bloxodes/wiki-model $SOURCE/tmp/article-writer $ROOT/state/wiki-automation $RELEASE/apps/web/.next" \
-  --setenv=NODE_ENV=development --setenv=BLOXODES_ENV_PROFILE=managed-dev --setenv=BLOXODES_ENV_OVERLAYS= \
-  --setenv=BLOXODES_AUTOMATION_RUNTIME=1 --setenv="WIKI_AUTOMATION_WORKTREE=$RELEASE" \
-  /bin/bash -euc 'npm run wiki:homelab:check; node --import tsx scripts/ops/check-automation-preview.ts'
+# GitHub owns dependency installation, checks, builds and browser verification.
+# This activation performs filesystem and service-state readback only.
+[[ -f "$ROOT/package-receipt-$SHA.json" ]]
 CHANGED=1
 for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do install -m 0644 "$RELEASE/scripts/ops/systemd/$unit" "/etc/systemd/system/$unit"; done
 ln -sfn "$RELEASE" "$ROOT/current.next"

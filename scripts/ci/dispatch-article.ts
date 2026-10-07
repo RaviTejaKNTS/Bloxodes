@@ -5,7 +5,7 @@ import { resolveArticleDevCredentials } from "../articles/article-queue-env";
 import { resolveReleaseArtifactPath } from "../articles/release-completed-articles";
 import { dispatchContentBundle, folderInputs } from "./dispatch-content-bundle";
 
-export async function dispatchArticle(queueId: string, root: string) {
+export async function dispatchArticle(queueId: string, root: string, beforeDispatch?: (hash: string) => Promise<void>) {
   if (!/^[0-9a-f-]{36}$/i.test(queueId)) throw new Error("Select an exact article queue ID.");
   const dev = resolveArticleDevCredentials();
   const db = createClient(dev.url, dev.serviceRole, { auth: { persistSession: false } });
@@ -17,5 +17,5 @@ export async function dispatchArticle(queueId: string, root: string) {
   const copy = JSON.parse(await fs.readFile(final, "utf8"));
   const inputs = await folderInputs(path.dirname(final), path.dirname(row.result_path));
   if (row.result_path.startsWith("tmp/article-pipeline/")) for (const name of ["state.json", "editorial_review.json"]) inputs.push({source: path.join(sourceRun, name), destination: `${relativeRun}/${name}`});
-  return dispatchContentBundle({ version: 1, operations: [{ publisher: "article-queue", queueId, file: row.result_path }], urls: [{ path: `/articles/${row.result_slug}`, contains: copy.title }], events: [{ type: "article", slug: row.result_slug }] }, inputs);
+  return dispatchContentBundle({ version: 1, operations: [{ publisher: "article-queue", queueId, file: row.result_path }], urls: [{ path: `/articles/${row.result_slug}`, contains: copy.title }], events: [{ type: "article", slug: row.result_slug }] }, inputs, beforeDispatch);
 }
