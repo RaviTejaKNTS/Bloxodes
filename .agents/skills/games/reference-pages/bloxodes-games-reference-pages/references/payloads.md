@@ -22,9 +22,13 @@ Account history is stored in `game_quiz_progress` and saved only through `/api/g
 
 ## Checklists
 
+Normally keep one standalone checklist page row per game, owning one board and all its section/task rows. Reuse the game's existing checklist rather than adding pages by edition or mode. Its scope is verified 100% completion with the supported edition or mode stated. Additional pages or narrower scopes require an explicit user exception in the brief. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`; payload validity alone does not prove full game completion.
+
 Group `checklists`, existing table `game_checklist_pages`, section `checklists`. Use `description_md`, `seo_title`, `seo_description`, `is_public` and `published_at`; a public checklist needs a valid publication date. Other page types use `is_published` instead.
 
 Group `checklistItems`, table `game_checklist_items`. Each row needs `page_id`, a stable `item_key`, `section_code`, `title`, optional `description` and `is_required`. Numeric codes have one part for a group, two for a section and three for a checkable task, such as `1`, `1.1`, `1.1.1`. Include the group and section rows needed by the board. Task IDs must survive content updates.
+
+The board counts all three-level leaves regardless of `is_required`. Use one required leaf with an explicit `A or B` title for interchangeable paths, and explain both verified options in its description. Do not split mutually exclusive alternatives into separate tasks or use `is_required: false` to hide optional tasks from progress. Keep optional tips in descriptions. Defer branching requirements that need unsupported alternative groups.
 
 Progress uses the existing `/api/checklists/progress` protocol and `<namespace>:<slug>` keys. Existing GTA and Roblox keys remain unchanged.
 

@@ -110,6 +110,12 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 7. Verify authoring data/media, database pointer and item-count readback, useful card fields, metadata, sitemaps, search, and revalidation before publishing. Runtime must not depend on local collection files.
 8. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
 
+### Standalone checklists
+
+1. Normally create only source-verified 100% completion checklists. Record the game, edition or mode and full completion requirements; defer the page when that scope cannot be verified.
+2. Normally keep one standalone checklist page per game, containing one board with sections for required activities. Reuse the game's existing checklist; extra pages for editions, modes, preparation, beginner milestones or routines need an explicit user exception.
+3. Keep collectible collection trackers separate. Completing an achievement or collectible roster does not establish in-game 100% completion. See `dev-docs/pipelines/content.md#standalone-checklist-scope`.
+
 ### Codes pages
 
 1. Use the game slug only for `code_pages.slug`, for example `wizard-alchemy`; do not append `-codes` because the route is already `/codes/<slug>`.

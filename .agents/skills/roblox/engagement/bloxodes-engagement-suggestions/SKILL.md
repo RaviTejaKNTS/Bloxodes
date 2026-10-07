@@ -20,7 +20,7 @@ Do not hide the research in a file. Put the proof in the final reply:
 Evidence checked:
 - Existing Bloxodes coverage:
 - Codes sources:
-- Progression/task sources:
+- 100% completion requirements and sources:
 - Stable quiz fact sources:
 - Event sources:
 ```
@@ -30,7 +30,7 @@ If a line is not checked, use `[research incomplete]` for that page family.
 ## Page Rules
 
 - Codes: recommend only when the game has a real code system and usable code sources. Do not list active codes in suggestions.
-- Checklists: recommend only when the game has clear progression, unlocks, collections, quests, or repeatable goals players can track.
+- Checklists: normally recommend one standalone source-verified 100% completion checklist per game. Check the game's published pages and drafts and reuse its existing checklist. State the supported edition or mode and verify the full required activity set within one board with sections. Additional pages or beginner, preparation and routine lists need an explicit user exception. Defer an unknown completion scope. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Collectible collection trackers remain separate and do not establish in-game 100%.
 - Quizzes: recommend only when there are enough stable, source-backed facts for easy, medium, and hard questions.
 - Events: recommend only when there is a source-backed Roblox virtual event, official event hub, or clear current/upcoming/past event page value.
 

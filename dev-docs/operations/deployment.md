@@ -61,6 +61,19 @@ GitHub owns CI credentials. Dokploy owns application runtime env. Workstation `.
 - Collection publication needs `WIKI_R2_ENDPOINT`, `WIKI_R2_ACCESS_KEY_ID`, `WIKI_R2_SECRET_ACCESS_KEY` and `WIKI_R2_BUCKET`. Copy only the approved existing keys. Do not edit installed runtime env or stop jobs to obtain them.
 - `env/examples/ci.env.example` documents CI-only names. `env:doctor -- --ci` validates the committed profiles and injected development target without requiring workstation files on the runner.
 
+## Managed-development content QA gap
+
+Last verified: 2026-10-07
+Evidence: source inspection of `pull-request.yml`, `verify-content-batches.ts`, `publish-content.ts`, `verify-engagement-finals.ts`, `import-content-final.ts`, `scripts/games/publish-game-pages.ts` and both checklist authoring workflows. No development content was applied or rendered in this guidance task.
+
+PR CI proves reviewed committed batches with `publish-content.ts --managed`, which refuses application and returns after dry-runs. It does not stage new content into the development database for rendered QA. The generic web smoke checks its selected existing routes; it does not import an ignored checklist final or invoke `verify:engagement-finals`. Selected-content dispatch uses production, so its artifacts cannot replace prepublication development evidence.
+
+New checklist verification needs a separate managed-development job that accepts the exact reviewed final through committed inputs or an immutable bundle and captures desktop/mobile board behavior. The existing verifier imports the final but only compares page identity/public status and item count; it fetches the route by title. Extend it or the job to compare every saved item's `section_code`, `title`, `description` and `is_required` with the complete normalized reviewed row set. Preserve importer defaults and duplicate counts, exclude generated IDs/timestamps, and bind the final hash and comparison receipt to the browser artifacts. Serialize writers for the same universe/slug through import, browser QA and final readback, or isolate their targets.
+
+This documentation change implements neither the job nor the stronger comparison. Checklist publication remains blocked until both exist and pass. Keep development publication and production release authorization separate.
+
+Shared non-Roblox checklists have the same gate. PR CI only dry-runs `game-pages`, and the publisher reads back row IDs rather than exact checklist contents. Its workflow must return the reviewed payload with the QA blocker until a managed-development job compares complete expected `game_checklist_pages`/`game_checklist_items` data and records the exact board's desktop/mobile behavior. Include reviewed retained tasks when updating a board, protect its game/namespace/slug throughout QA, and bind the reviewed payload hash to the artifacts. The Roblox engagement verifier does not cover these shared tables.
+
 ## Selected content publication
 
 `Publish selected content` is a database-only dispatch. It does not build an image. It installs locked development dependencies explicitly because its publishers need TypeScript and browser tooling even in production mode. It requires the reviewed current production SHA and checks that any required web/data changes are already live.
