@@ -2,7 +2,7 @@
 
 Status: Active
 Last verified: 2026-10-07
-Evidence: HDD storage layout, private env filenames/modes, compatibility paths and T3 setup ownership inspected on October 7. Selective-review workflow secret boundaries and existing GitHub API-key metadata were also inspected on October 7. Ignored value store, loader guards and workstation/homelab `env:doctor`/`env:check` retain their August 19 verification boundary.
+Evidence: HDD storage layout, private env filenames/modes, compatibility paths and T3 setup ownership inspected on October 7. Selective-review workflow secret boundaries and existing GitHub API-key metadata were also inspected on October 7. Runtime activation readback verified unchanged protected env hashes, ownership, modes and HDD/shared-profile links. Ignored value store, loader guards and workstation/homelab `env:doctor`/`env:check` retain their August 19 verification boundary.
 
 ## GitHub CI ownership
 
@@ -123,7 +123,9 @@ Optional pipeline controls are ARTICLE_PIPELINE_STAGE_TIMEOUT_MINUTES (45), ARTI
 
 The September 6 manual article run verified that deterministic article upload/import/QA stages must use NODE_ENV=development while retaining BLOXODES_ENV_PROFILE=process-only and the validated managed-development credentials. Model stages retain their minimized process-only environment. The import production guard remains unchanged; managed runs do not use --allow-prod.
 
-### Isolated article runtime
+### Legacy isolated article runtime
+
+This earlier runtime is retained for rollback. Installed article and wiki units now use the shared HDD runtime below.
 
 The prepared article release links the existing ignored `.envs` tree and uses `/etc/bloxodes/article-automation.env`; it does not copy secrets into Git or model environments. Releases have independent dependencies and persistent state under `/home/teja/.local/share/bloxodes-article-runtime`. Preparation validates the existing profile contract; activation requires the reviewed host installer. No new secret values are required.
 
@@ -131,7 +133,9 @@ Wiki automatic publication: the builder and Codex remain under `bloxodes-wiki-mo
 
 ### Shared article/wiki runtime ownership
 
-The `bloxodes-automation-runtime` release links the existing protected primary-checkout `.envs` tree. `/etc/bloxodes/article-automation.env` and `/etc/bloxodes/wiki-automation.env` retain their contents and access controls. No new credentials are required. Units set `BLOXODES_AUTOMATION_RUNTIME=1` and `BLOXODES_CI_QA=1`. CI mode keeps authoring/media work on the worker and moves final checks, builds and rendered verification to GitHub. No local preview is started. Source, dependencies and persistent state live under `/srv/data/bloxodes-automation-runtime`; old artifact paths remain aliases. The wiki builder retains its restricted model account and cannot read `.envs`; the publisher retains the operator account. State and legacy artifact-path aliases are documented in [homelab operations](infrastructure/homelab.md#github-qa-runtime-activation).
+The installed `bloxodes-automation-runtime` release links the existing protected primary-checkout `.envs` tree. Activation readback confirmed both protected env files retained their bytes, owner, group and mode. No credential values changed or new credentials were required.
+
+Units set `BLOXODES_AUTOMATION_RUNTIME=1` and `BLOXODES_CI_QA=1`. CI mode keeps authoring/media work on the worker and moves final checks, builds and rendered verification to GitHub. No local preview is started. Source, dependencies and persistent state live under `/srv/data/bloxodes-automation-runtime`; old artifact paths remain aliases. The wiki builder retains its restricted model account and cannot read `.envs`; the publisher retains the operator account. State and legacy artifact-path aliases are documented in [homelab operations](infrastructure/homelab.md#github-qa-runtime-activation).
 
 October 1, 2026, scoped production repair: the authorized automation work corrected a malformed Dokploy runtime line separator joining `CLOUDFLARE_ZONE_ID` to a warm-after-purge assignment. A hash-guarded update preserved every other parsed runtime value, build argument/secret setting and the immutable image; same-image deploy/database health and authenticated Cloudflare tag revalidation passed. No workstation or protected homelab env values changed. See the existing deployment owner for exact verification scope.
 
