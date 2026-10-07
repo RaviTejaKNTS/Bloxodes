@@ -66,6 +66,7 @@ jobs:
       SITE_URL: https://bloxodes.com
       NEXT_PUBLIC_SITE_URL: https://bloxodes.com
       TEST_CANONICAL_ORIGIN: https://bloxodes.com
+      BLOXODES_BUILD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     services:
       postgres:
         image: postgres:17

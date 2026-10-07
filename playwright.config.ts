@@ -34,8 +34,8 @@ export default defineConfig({
   ],
   webServer: manageServer
     ? {
-        command: "npm run start:web",
-        url: `${baseURL}/api/health`,
+        command: process.env.GITHUB_ACTIONS === "true" ? "node scripts/ci/start-web.mjs" : "npm run start:web",
+        url: `${baseURL}/api/health?scope=deploy`,
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
         stdout: "pipe",

@@ -49,7 +49,7 @@ function command(operation: any, write: boolean): string[] {
     case "game-pages": return ["publish:game-pages", "--namespace", operation.namespace, "--file", file, ...(write ? ["--apply", ...prod] : [])];
     case "content-final": return ["import:content-final", "--file", file, ...(write ? prod : ["--dry-run", ...(!managed ? ["--allow-prod"] : [])])];
     case "roblox-wiki": return ["sync:game-wiki-runtime", "--final-json", file, ...(write ? ["--apply", ...prod] : [])];
-    case "roblox-collection": return ["sync:game-collection-runtime", "--manifest", file, ...(write ? ["--apply", "--upload-media", "--publish", ...prod] : [])];
+    case "roblox-collection": return ["sync:game-collection-runtime", "--normalize-legacy-media", "--manifest", file, ...(write ? ["--apply", "--upload-media", "--publish", ...prod] : [])];
     case "franchise-wiki": return ["publish:franchise-wiki-hubs", "--namespace", operation.namespace, "--workspace", inputPath(operation.workspace), ...operation.games.flatMap((slug: string) => ["--game", slug]), ...(write ? ["--apply", ...prod] : [])];
     case "franchise-collection": return ["sync:franchise-collection-runtime", "--namespace", operation.namespace, "--manifest", file, ...(write ? ["--apply", "--upload-media", "--publish", ...prod] : [])];
     case "minecraft-tools": return ["publish:minecraft-tools", "--final", file, ...(write ? ["--apply", ...prod] : [])];

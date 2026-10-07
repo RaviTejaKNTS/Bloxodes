@@ -3,12 +3,12 @@ import { load } from "cheerio";
 const legacyFamilies = new Set(["articles", "authors", "catalog", "checklists", "codes", "events", "puzzles", "quizzes", "stats", "tools", "wiki"]);
 
 export function publicationSitemap(pathname) {
-  const [, family, section] = pathname.split("/");
+  const [, family, section, subsection] = pathname.split("/");
   if (!family || family === "games") return "/sitemaps/main.xml";
   if (legacyFamilies.has(family)) return `/sitemaps/${section ? family : "main"}.xml`;
   if (family === "gta" && (!section || ["wiki", "maps", "checklists"].includes(section))) return "/sitemaps/gta.xml";
   if (family === "red-dead" && (!section || section === "wiki")) return "/sitemaps/red-dead.xml";
-  if (family === "minecraft" && (!section || ["wiki", "tools"].includes(section))) return "/sitemaps/minecraft.xml";
+  if (family === "minecraft" && (!section || ["wiki", "tools"].includes(section) || ["java", "bedrock"].includes(section) && subsection === "wiki")) return "/sitemaps/minecraft.xml";
   return "/sitemaps/games.xml";
 }
 
