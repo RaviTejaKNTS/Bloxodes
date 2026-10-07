@@ -2,7 +2,7 @@
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
 Last verified: 2026-10-07
-Evidence: inspected GitHub workflow/configuration, protected PR checks, managed-development readiness and SQL byte proof, guarded production ledger readback, exact-SHA deployment/database health, and verification-only content/browser checks. Historical VPS, Edge Function and installed-runtime observations retain their recorded dates below.
+Evidence: inspected GitHub workflow/configuration, protected PR checks, managed-development readiness and SQL byte proof, guarded production ledger readback, exact-SHA deployment/database health, and verification-only content/browser checks. Installed homelab runtime, HDD state aliases, protected env metadata and timer preservation were also verified. Historical VPS and Edge Function observations retain their recorded dates below.
 
 ## Task and release workflow
 
@@ -211,6 +211,8 @@ The web deployed `118b66d471623c520b1e9ae4457523c5d51fdf09` with healthy databas
 The release ran on the primary homelab, so no separate homelab checkout synchronization was needed. The task worktree and branch remain available. Local env checks reported four undocumented article automation keys outside this release. Those runtime values were not changed.
 
 ## Automation activation
+
+The GitHub QA runtime is installed and active at `/srv/data/bloxodes-automation-runtime/current`. All seven service files match the released source. The five timer files, their enablement and their active states are unchanged. Protected env contents and access controls, saved state, the original shared lease inode and rollback releases are preserved. See the [October 7 release audit](../../docs/2026-10-07-github-release-audit.md#checklist-qa-and-automation-release) for the installed SHA and activation receipts.
 
 Installed article/wiki workers author and review content. Their units set `BLOXODES_CI_QA=1`, so they do not start local previews or run final checks. Completed authoring remains pending technical QA until GitHub verifies its frozen batch. Article outbox records the bundle hash before dispatch and reconciles its exact GitHub run. Pending runs do not consume another retry. Failed runs retain bounded retry limits; successful runs still need the verified queue receipt.
 
