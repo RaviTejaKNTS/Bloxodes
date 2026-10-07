@@ -1,3 +1,4 @@
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 
@@ -175,7 +176,7 @@ async function loadRows(files: string[]): Promise<ToolRow[]> {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (process.env.SUPABASE_URL === "https://database.bloxodes.com" && !options.dryRun) assertProductionPublication();
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL) && !options.dryRun) assertProductionPublication();
   const rows = await loadRows(options.files);
 
   if (options.dryRun) {

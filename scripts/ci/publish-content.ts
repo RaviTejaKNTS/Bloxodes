@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { publicationSitemap, verifyPublicText } from "./public-readback.mjs";
-import { wikiPublicationReceipt } from "./wiki-publication-receipt";
+import { wikiPublicationReceipt, wikiPublicationFailure } from "./wiki-publication-receipt";
 import { createHash } from "node:crypto";
 import { batchPath, ownedPath, parseBatch } from "./content-contract.mjs";
 import { assertProductionPublication } from "./publication-guard";
@@ -107,4 +107,8 @@ async function main() {
   }
   if (apply) await wikiPublicationReceipt(batch.wikiReceipt, batch.urls.map((url: { path: string }) => `https://bloxodes.com${url.path}`));
 }
-main().catch(error => { console.error(error.message); process.exitCode = 1; });
+main().catch(async error => {
+  console.error(error.message);
+  process.exitCode = 1;
+  if (apply) await wikiPublicationFailure(batch.wikiReceipt).catch(() => console.error("Could not record the failed wiki CI publication."));
+});

@@ -6,7 +6,9 @@ Evidence: database-only web/mobile/tool loaders, removed repository collection/q
 
 ## GitHub publication flow
 
-New source hooks freeze only the approved wiki and selected collection workspaces into a private hash-addressed development bundle. CI uses the established hub/dataset/media publishers, with exact row/pointer/count readback, cache events and public URL verification. The trusted wiki publisher dispatches the exact request; GitHub closes its production receipt under the same live queue lease after verification. A dispatched request is still publishing.
+New builder source moves approved development work to durable `publishing` status and releases its lease/slot. The hook dispatches the exact request once. CI can wait in the production queue without a builder timeout, then records `published` after media, page, sitemap and browser verification. Failed receipts retain their files for up to three dispatch attempts, spaced by at least 15 minutes. An unknown dispatch outcome requires GitHub run inspection before retrying. Installed legacy builders keep the live-lease receipt contract until separately activated.
+
+New source hooks freeze only the approved wiki and selected collection workspaces into a private hash-addressed development bundle. CI uses the established hub/dataset/media publishers, with exact row/pointer/count readback, cache events and public URL verification. The trusted wiki publisher dispatches the exact request; GitHub closes its exact production request after verification. Legacy processing requests also require their original live lease. A dispatched request is still publishing.
 
 Renderer/config changes go through a PR targeting production before dependent rows publish. Manual agent validation and browser checks run on GitHub. R2 credentials are required for collection media. The installed detached builder/publisher runtimes and their env remain unchanged until separately activated. See `../operations/deployment.md`.
 

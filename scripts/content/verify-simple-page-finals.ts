@@ -1,3 +1,4 @@
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
@@ -109,7 +110,7 @@ function assertLocalWriteTarget() {
 }
 
 export async function upsertEntry(entry: FinalEntry) {
-  if (process.env.SUPABASE_URL === "https://database.bloxodes.com") assertProductionPublication();
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL)) assertProductionPublication();
   const sb = supabaseAdmin();
   if (entry.kind === "tool") {
     const row = entry.row;

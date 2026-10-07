@@ -1,5 +1,6 @@
 import "../shared/load-env";
 import { dispatchWiki } from "../ci/dispatch-wiki";
+import { wikiDispatchReady } from "../ci/wiki-publication-state.mjs";
 
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { access, mkdir, readFile, realpath } from "node:fs/promises";
@@ -540,63 +541,49 @@ async function heartbeat(dev: SupabaseClient, row: QueueRow) {
 
 async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
   const query = await dev.from("wiki_generation_queue").select("*")
-    .eq("status", "processing").in("production_receipt->>state", ["requested", "publishing"])
-    .gt("lease_expires_at", new Date().toISOString()).order("started_at").limit(20);
+    .in("status", ["processing", "publishing"]).in("production_receipt->>state", ["requested", "failed"])
+    .order("started_at").limit(20);
   if (query.error) throw query.error;
   const now = Date.now();
-  const row = (query.data || []).find((candidate) => candidate.production_receipt?.state === "requested" ||
-    now - Date.parse(candidate.production_receipt?.started_at || "") > 16 * 60_000);
+  const row = (query.data || []).find(candidate => wikiDispatchReady(candidate,now));
   if (!row) return false;
   const request = row.production_receipt;
-  const claimed = await dev.from("wiki_generation_queue").update({ production_receipt: { ...request, state: "publishing", started_at: new Date().toISOString() } })
-    .eq("id", row.id).eq("status", "processing").eq("lease_token", row.lease_token)
-    .eq("production_receipt->>request_id", request.request_id).eq("production_receipt->>state", request.state).select("id");
+  const publishing = { ...request, state: "publishing", started_at: new Date().toISOString(), dispatch_attempts: Number(request.dispatch_attempts || 0) + 1 };
+  let claim = dev.from("wiki_generation_queue").update({ production_receipt: publishing })
+    .eq("id", row.id).eq("status", row.status)
+    .eq("production_receipt->>request_id", request.request_id).eq("production_receipt->>state", request.state);
+  if (row.status === "processing") claim = claim.eq("lease_token", row.lease_token).gt("lease_expires_at", new Date().toISOString());
+  const claimed = await claim.select("id");
   if (claimed.error) throw claimed.error;
   if (!claimed.data?.length) return false;
-  let receipt;
   try {
     if (!row.result_root) throw new Error("Publication request has no artifact root.");
     const expectedRoot = path.join(worktree, "tmp", "wiki-automation", row.id);
-    // Use the same canonical containment policy as builder recovery, including
-    // legacy artifacts directly under their exact queue directory.
     await resolveWikiAttemptRoot(expectedRoot, row.result_root, row.attempts);
     const result = await readWorkflowResult(row, row.result_root);
     if (result.outcome !== "ready") throw new Error("Publication request is not ready.");
     await dispatchWiki(row, result);
     console.log(`GitHub publication dispatched for ${row.game_name}; CI owns the final receipt.`);
-    return true;
   } catch (error) {
-    receipt = { ...request, state: "failed", error: sanitizeError(error instanceof Error ? error.message : String(error), process.env), failed_at: new Date().toISOString() };
+    const receipt = { ...publishing, state: "failed", error: sanitizeError(error instanceof Error ? error.message : String(error), process.env), failed_at: new Date().toISOString() };
+    const saved = await dev.from("wiki_generation_queue").update({ production_receipt: receipt })
+      .eq("id", row.id).eq("status", row.status).eq("production_receipt->>request_id", request.request_id)
+      .eq("production_receipt->>state", "publishing");
+    if (saved.error) throw saved.error;
+    console.log(`Publisher failed: ${row.game_name}`);
   }
-  const saved = await dev.from("wiki_generation_queue").update({ production_receipt: receipt })
-    .eq("id", row.id).eq("status", "processing").eq("lease_token", row.lease_token).eq("production_receipt->>request_id", request.request_id);
-  if (saved.error) throw saved.error;
-  console.log(`Publisher ${receipt.state}: ${row.game_name}`);
   return true;
 }
 
-async function requestProduction(dev: SupabaseClient, row: QueueRow, resultRoot: string, result: WorkflowResult): Promise<string[]> {
-  const requestId = `${row.id}-${Date.now()}`;
+async function requestProduction(dev: SupabaseClient, row: QueueRow, resultRoot: string, result: WorkflowResult) {
   await transition(dev, row, {
+    status: "publishing", lease_token: null, lease_owner: null, lease_expires_at: null, processing_slot: null,
     result_root: resultRoot, wiki_final_path: result.wikiFinalPath, collection_manifests: result.collectionManifests,
     approved_collections: result.approvedCollections, blocked_collections: result.blockedCollections,
-    managed_dev_completed_at: new Date().toISOString(),
-    production_receipt: { state: "requested", request_id: requestId }
+    managed_dev_completed_at: new Date().toISOString(), suggestions_path: result.suggestionsPath,
+    production_receipt: { state: "requested", request_id: `${row.id}-${Date.now()}` }
   });
-  console.log(`Requested trusted production publication for ${row.game_name}.`);
-  const deadline = Date.now() + 30 * 60_000;
-  while (!stopRequested && Date.now() < deadline) {
-    const query = await dev.from("wiki_generation_queue").select("production_receipt,status,lease_token").eq("id", row.id).single();
-    if (query.error) throw query.error;
-    if (query.data.status !== "processing" || query.data.lease_token !== row.lease_token) throw new Error("Publication wait lost its queue lease.");
-    const receipt = query.data.production_receipt;
-    if (receipt?.request_id === requestId) {
-      if (receipt.state === "published" && Array.isArray(receipt.urls)) return receipt.urls;
-      if (receipt.state === "failed") throw new Error(receipt.error || "Production publication failed.");
-    }
-    await new Promise((resolve) => setTimeout(resolve, 10_000));
-  }
-  throw new Error("Production publisher did not finish before the wait deadline.");
+  console.log(`Queued trusted production publication for ${row.game_name}. CI will record the verified result.`);
 }
 
 async function retryDelay(dev: SupabaseClient): Promise<number | null> {
@@ -700,11 +687,14 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     }
 
     await recoverStep({ file: sessionFile, label: "Managed-development sync", operation: syncDevelopment, repair });
-    let urls: string[] = [];
     if (!skipProduction) {
       heartbeatGuard.signal.throwIfAborted();
-      urls = await recoverStep({ file: sessionFile, label: "Production publication", operation: () => requestProduction(dev, row, resultRoot, result),
-        repair: async (sessionId, error) => { await repair(sessionId, error); await syncDevelopment(); } });
+      heartbeatGuard.stop();
+      await requestProduction(dev, row, resultRoot, result);
+      leaseActive = false;
+      const session = await readSessionState(sessionFile);
+      await saveSessionState(sessionFile, { ...session, completed: true, lastError: undefined });
+      return true;
     }
     await transition(dev, row, {
       status: "managed_dev_ready",
@@ -721,21 +711,7 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
       processing_slot: null
     });
     leaseActive = false;
-    if (skipProduction) {
-      console.log(`[lane ${lane}] Managed-dev workflow complete; production release disabled.`);
-      return true;
-    }
-    const { error } = await dev.from("wiki_generation_queue").update({
-      status: "published",
-      published_at: new Date().toISOString(),
-      completed_at: new Date().toISOString(),
-      production_receipt: { urls, verified_at: new Date().toISOString() },
-      last_error: null
-    }).eq("id", row.id).eq("status", "managed_dev_ready");
-    if (error) throw new Error(`Could not record wiki publication: ${error.message}`);
-    const session = await readSessionState(sessionFile);
-    await saveSessionState(sessionFile, { ...session, completed: true, lastError: undefined });
-    console.log(`[lane ${lane}] Published and verified ${row.game_name}: ${urls.join(", ")}`);
+    console.log(`[lane ${lane}] Managed-dev workflow complete; production release disabled.`);
     return true;
     } finally { heartbeatGuard.stop(); }
   } catch (error) {

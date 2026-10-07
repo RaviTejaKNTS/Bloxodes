@@ -28,7 +28,7 @@ When new code is needed, release it first. Use the fixed publishers in `scripts/
 
 - A committed batch lives at `content/releases/<batch>/batch.json` with its reviewed files inside that directory. GitHub validates changed batches against development. After merge, run `node scripts/ci/dispatch-content.mjs <batch-path> <production-sha> apply`.
 - Larger or automated batches use `dispatchContentBundle` in `scripts/ci/dispatch-content-bundle.ts`. It stores an immutable, private, hash-addressed bundle in managed development and dispatches the same production CI job. It contains only selected finals, datasets, media and approval evidence. No source code, SQL, env files or user progress.
-- Article queue publication uses the exact queue IDs through the article dispatcher. Wiki automation keeps its exact live request/lease. Only CI closes their publication receipts after media, database and public readback pass.
+- Article queue publication uses the exact queue IDs through the article dispatcher. Wiki automation keeps its exact durable publishing request. Legacy processing requests also require their live lease. Only CI closes their publication receipts after media, database and public readback pass.
 - `Publish selected content` proves every selected publisher before writing, publishes its media/data, revalidates exact events and verifies each exact URL. It shares the production release lane and requires compatible live code.
 - Verification-only batches can check existing URLs without writing. Do not create canary game pages or rewrite real content to test the pipeline.
 

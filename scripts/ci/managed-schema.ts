@@ -1,5 +1,6 @@
 import "../shared/load-env";
 import { migrationBody } from "./migration-transaction.mjs";
+import { historyRepairs, repairHistorySql } from "./migration-history.mjs";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -31,15 +32,18 @@ async function query(sql: string): Promise<Array<Record<string, unknown>>> {
 }
 const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 async function main() {
-  const before = new Set((await query("select version from supabase_migrations.schema_migrations order by version;")).map(row => String(row.version)));
+  const ledger = await query("select version,name,encode(sha256(convert_to(array_to_string(statements,E'\\n'),'UTF8')),'hex') as sql_hash from supabase_migrations.schema_migrations order by version;");
+  const repairs = historyRepairs(policy.managed_dev_history_aliases ?? [], migrations, ledger);
+  const before = new Set([...ledger.map(row => String(row.version)), ...repairs.map(row => row.version)]);
   const pending = migrations.filter(m => !before.has(m.version) && (m.version >= policy.convergence_version || policy.managed_dev_pending_before_convergence.includes(m.version)));
+  console.log(`Managed-development verified history repairs: ${repairs.map(row => row.version).join(", ") || "none"}`);
   console.log(`Managed-development pending migrations: ${pending.map(m => m.file).join(", ") || "none"}`);
-  const transaction = ["begin;", "select pg_advisory_xact_lock(746213809);", "set local lock_timeout = '15s';", "set local statement_timeout = '180s';", ...pending.flatMap(m => [
+  const transaction = ["begin;", "select pg_advisory_xact_lock(746213809);", "set local lock_timeout = '15s';", "set local statement_timeout = '180s';", ...repairHistorySql(repairs), ...pending.flatMap(m => [
     migrationBody(m.sql),
     "set constraints all immediate;",
     `insert into supabase_migrations.schema_migrations(version,name,statements) values (${literal(m.version)},${literal(m.name)},array[]::text[]);`
   ]), apply ? "commit;" : "rollback;"].join("\n");
-  if (pending.length) {
+  if (pending.length || repairs.length) {
     await query(transaction.replace(/commit;\s*$/, "rollback;"));
     if (apply) await query(transaction);
   }

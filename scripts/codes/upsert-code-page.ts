@@ -1,3 +1,4 @@
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import "../shared/load-env";
 import { assertProductionPublication } from "../ci/publication-guard";
 import { readFile } from "node:fs/promises";
@@ -284,7 +285,7 @@ async function upsertCodePage(payload: CodePagePayload, options: CliOptions) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (process.env.SUPABASE_URL === "https://database.bloxodes.com" && !options.dryRun) assertProductionPublication();
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL) && !options.dryRun) assertProductionPublication();
   if (!options.file) {
     printUsage();
     process.exitCode = 1;
