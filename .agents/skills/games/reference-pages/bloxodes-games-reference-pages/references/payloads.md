@@ -28,6 +28,8 @@ Group `checklists`, existing table `game_checklist_pages`, section `checklists`.
 
 Group `checklistItems`, table `game_checklist_items`. Each row needs `page_id`, a stable `item_key`, `section_code`, `title`, optional `description` and `is_required`. Numeric codes have one part for a group, two for a section and three for a checkable task, such as `1`, `1.1`, `1.1.1`. Include the group and section rows needed by the board. Task IDs must survive content updates.
 
+The board counts all three-level leaves regardless of `is_required`. Use one required leaf with an explicit `A or B` title for interchangeable paths, and explain both verified options in its description. Do not split mutually exclusive alternatives into separate tasks or use `is_required: false` to hide optional tasks from progress. Keep optional tips in descriptions. Defer branching requirements that need unsupported alternative groups.
+
 Progress uses the existing `/api/checklists/progress` protocol and `<namespace>:<slug>` keys. Existing GTA and Roblox keys remain unchanged.
 
 ## Catalogs

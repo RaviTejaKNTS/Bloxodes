@@ -39,7 +39,9 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 
 - Tasks should be actions a player can mark complete.
 - Write one checklist board per detail page. Sections divide its verified completion requirements, not independent checklists.
-- Cover the full required set and keep valid alternative paths achievable. Do not write around unresolved completion requirements or relabel an achievement roster as in-game 100%.
+- Cover the full required set. Encode interchangeable paths as one required leaf with an explicit `A or B` title; describe each verified option and when either complete path satisfies that task. Do not split mutually exclusive choices into separate leaves.
+- Every three-level leaf counts toward board progress, even with `is_required: false`. Put optional tips in descriptions rather than checkable rows. Defer branching requirements that cannot fit an accurate single leaf until reviewed alternative-group support exists.
+- Do not write around unresolved completion requirements or relabel an achievement roster as in-game 100%.
 - Describe the board percentage as checked-task progress unless sources verify its relationship to the in-game meter.
 - Keep task titles short.
 - Use descriptions only when the task needs context.
@@ -57,7 +59,7 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 - `section_code`: Use numeric depth: parent sections, subsections, then checkable tasks.
 - `title`: For parents, name a real phase or system. For leaf tasks, write a concrete action.
 - `description`: Add context only when it helps the player complete or understand the task.
-- `is_required`: Use `true` for checkable leaf tasks and `false` for parent or subsection rows.
+- `is_required`: Use `true` for checkable leaf tasks, including a single `A or B` task, and `false` for parent or subsection rows. This flag does not remove a leaf from the board's percentage.
 
 ## Output Shape
 

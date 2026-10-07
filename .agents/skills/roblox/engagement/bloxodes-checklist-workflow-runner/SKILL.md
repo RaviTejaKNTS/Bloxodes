@@ -30,7 +30,7 @@ After the parent approves the brief, send the same subagent:
 
 1. Confirm the game, universe ID, edition or mode and full completion scope, or the explicit user exception.
 2. Ask the subagent to use `/bloxodes-checklist-research` and return `brief.md`.
-3. Review full requirements, thresholds, exclusions, alternative paths, sections within one board, existing coverage, source proof and gaps.
+3. Review full requirements, thresholds, exclusions, alternative paths, sections within one board, existing coverage, source proof and gaps. Interchangeable paths must use one explicit `A or B` leaf; separate mutually exclusive leaves and optional-leaf flags cannot produce achievable progress. Defer unsupported branching requirements.
 4. Ask the same subagent to use `/bloxodes-checklist-writing` and create `final.json`.
 5. Review that tasks are concrete actions players can complete.
 6. Keep the reviewed `final.json` in the task workspace. For CI, stage an exact copy with its selected batch under `content/releases/<batch>/`, or use a reviewed immutable bundle accepted by the chosen job. Ignored `tmp/` files are not available on GitHub by themselves.
@@ -56,7 +56,7 @@ A managed-development job with the input, target, exact-row comparison and brows
 
 - production overlap is checked
 - checklist covers source-verified 100% completion, or records an explicit user exception
-- one board contains the full required set with achievable alternatives
+- one board contains the full required set, with interchangeable alternatives represented as one explicit `A or B` leaf
 - parent rows and leaf tasks have consistent section codes
 - task titles are concrete actions
 - descriptions add useful context only when needed

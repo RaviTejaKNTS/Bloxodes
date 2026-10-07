@@ -11,6 +11,8 @@ Research the exact page and save source proof in an ignored `brief.md`. Verify t
 
 For standalone checklists, follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Normally create only verified 100% completion checklists. Record the exact game, edition or mode, full requirements, exclusions and alternatives. Keep one board per detail page, with sections inside it. Defer an unverified completion scope; preparation lists, beginner milestones and routines require an explicit user exception in the plan and brief. Preserve collectible collection trackers without claiming they establish in-game 100%.
 
+Use one explicit `A or B` leaf for interchangeable paths, with verified criteria in its description. The board counts every three-level leaf regardless of `is_required`; separate mutually exclusive or optional leaves cannot express alternatives. Defer branching requirements that need unsupported alternative groups. See `references/payloads.md` for the row contract.
+
 Read [payloads](references/payloads.md) for the page type being created. Write a reviewed JSON payload with the matching groups. Store content and data together; do not use workspace files at runtime. Keep stable IDs on updates. Do not overwrite another game's rows or move page ownership during ordinary edits.
 
 Use `npm run publish:game-pages -- --namespace <slug> --file <reviewed.json>` for full database validation and rollback. Add `--apply` for authorized managed-development publication. The batch either commits every group or rolls every group back. Checklist page rows precede their task rows within that transaction. An update retains tasks omitted from the batch; removing tasks requires an explicit reviewed cleanup.

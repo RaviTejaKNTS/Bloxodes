@@ -59,13 +59,15 @@ The production release used schema commit `048123eda0ed18f813da5fa6f7f776a7d6a8f
 ## Standalone checklist scope
 
 Last verified: 2026-10-07
-Evidence: user-confirmed editorial convention, checklist planning/research/writing skills, and the single-board composition in `ChecklistPageTemplate.tsx`. This is authoring guidance, not a database constraint or a new audit of published content.
+Evidence: user-confirmed editorial convention, checklist planning/research/writing skills, and board composition/progress calculations in `ChecklistPageTemplate.tsx` and `ChecklistBoard.tsx`. This is authoring guidance, not a database constraint or a new audit of published content.
 
 Normally create standalone checklists only for source-verified 100% completion of a named game and supported edition or mode. Verify the full required activity set, thresholds, exclusions and alternative paths before proposing or writing the page. When sources do not establish that scope, defer it. Beginner milestones, preparation lists and repeatable routines need an explicit user exception recorded in the plan and brief.
 
 Each detail page contains one checklist board. Group its requirements into sections within that board; do not combine independent checklists for different games or completion scopes on one page. Section directories list pages, not additional boards. Check existing coverage before proposing another page for the same scope.
 
-The board's percentage counts checked tasks. It does not reproduce a game's weighted completion meter unless that relationship is verified. Required alternatives must let players complete a valid path without demanding mutually exclusive choices.
+The board's percentage counts checked tasks. It does not reproduce a game's weighted completion meter unless that relationship is verified. The current template counts every three-level leaf and does not use `is_required` to exclude optional tasks from progress.
+
+Encode interchangeable completion paths as one required leaf with an explicit "A or B" title. Its description explains each source-verified option and tells players to tick it after either complete path. Do not create separate leaves for mutually exclusive choices or try to exclude one with `is_required: false`. Keep optional tips in descriptions rather than checkable rows. If branching requirements cannot fit one accurate leaf per completion requirement, defer the page until reviewed alternative-group support exists. Do not change existing task IDs or progress under this guidance-only update.
 
 Collectible wiki collections remain separate. An achievements tracker can cover a verified Steam roster with checkmarks, but all achievements or collectibles do not establish in-game 100% completion. Do not relabel those trackers or use them to bypass the standalone checklist scope check.
 

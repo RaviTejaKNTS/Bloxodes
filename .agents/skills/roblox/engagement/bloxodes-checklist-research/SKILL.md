@@ -22,7 +22,7 @@ tmp/content-workspace/<game-slug>/checklists/<checklist-slug>/brief.md
 1. Resolve the exact game and universe ID.
 2. Check existing Bloxodes checklist and related pages for overlap.
 3. Verify the full completion requirements, thresholds, exclusions and alternative paths for the exact scope. Record sources and any explicit user exception. If the scope cannot be verified, return the gap without approving creation.
-4. Split the verified requirements into sections and checkable tasks within one board. Keep mutually exclusive alternatives achievable through a valid path.
+4. Split the verified requirements into sections and checkable tasks within one board. Plan interchangeable paths as one explicit `A or B` leaf, with each option's completion criteria in its description. All three-level leaves count toward progress regardless of `is_required`; do not plan separate mutually exclusive or optional leaves. Return a gap when branching requirements need unsupported alternative groups.
 5. Skip generic advice, article-style how-tos, and tasks that players cannot mark complete.
 
 ## Brief Shape
@@ -34,7 +34,7 @@ Evidence checked:
 - Player goal:
 - Game/edition/mode completion scope:
 - Full 100% requirements, thresholds and exclusions:
-- Alternative paths:
+- Alternative paths and their single-leaf representation:
 - Explicit user exception, if any:
 
 Checklist plan:
