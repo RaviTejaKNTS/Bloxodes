@@ -1,5 +1,9 @@
 # Scripts Guide
 
+## GitHub task and release flow
+
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+
 Scope: `scripts/`.
 
 These files are operational jobs, imports, backfills, collectors, and automation workers. Many are side-effectful.
@@ -30,7 +34,7 @@ The one-time `activate:minecraft-editions` command is removed. Preserve all unre
 ## Folder Map
 
 - `dev/`: workstation development and worktree setup.
-  - `setup-worktree.sh` powers `npm run setup:worktree`. In linked worktrees only, it links ignored `.envs/` from the main checkout without overwriting an existing path, installs dependencies when `package-lock.json` changes, and creates ignored temp/report directories.
+  - `setup-worktree.sh` powers `npm run setup:worktree`. In linked worktrees only, it links ignored `.envs/` from the main checkout without overwriting an existing path, creates ignored temp/report directories, and never installs dependencies or runs checks.
   - `start-managed-dev.ts` powers both `npm run dev` and `npm run dev:managed`. It loads `.envs/targets/managed-dev.env` and refuses targets outside HTTPS `*.supabase.co`.
   - `env-doctor.ts` owns workstation readiness and safety checks; `check-env-contract.ts` owns committed example coverage. The one-time legacy env migration commands are retired.
   - `check-migration-integrity.ts` validates migration filenames, version uniqueness, the convergence policy, seed retirement, and future `SECURITY DEFINER` search paths without connecting to a database.
@@ -269,3 +273,5 @@ Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, perma
 ## Shared map import and reference pages
 
 `import:gta-shared-maps` reads the nine reviewed committed snapshots, validates stored hashes and ownership, then uses atomic publication. It is rollback-only by default; `--apply` writes managed development. Production requires the production environment plus `--allow-prod` and explicit authorization. Snapshot changes require a reviewed migration. `publish:game-pages` additionally supports maps, quizzes, catalog, checklists and checklistItems. `audit:shared-games-preview` crawls all eight shared page views. `backup:shared-games` includes reference pages and quiz account history. See `dev-docs/pipelines/content.md`.
+
+- `ci/`: GitHub path scope, injected env checks, transaction composition and rollback tests, managed schema receipts, production publication guards, frozen selected content bundles and article/wiki dispatch/readback. Use the owning deployment doc for commands and credentials.

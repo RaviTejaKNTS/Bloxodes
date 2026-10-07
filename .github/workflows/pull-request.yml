@@ -1,0 +1,136 @@
+name: Pull request checks
+
+on:
+  pull_request:
+    branches: [production]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scope:
+    runs-on: ubuntu-latest
+    outputs:
+      checks: ${{ steps.scope.outputs.checks }}
+      migrations: ${{ steps.scope.outputs.migrations }}
+      web: ${{ steps.scope.outputs.web }}
+      extension: ${{ steps.scope.outputs.extension }}
+      admin: ${{ steps.scope.outputs.admin }}
+      mobile: ${{ steps.scope.outputs.mobile }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - id: scope
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/ci/change-scope.mjs
+      - name: Keep applied migrations immutable
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          changed="$(git diff --name-only --diff-filter=DMRT "$BASE_SHA" "$HEAD_SHA" -- supabase/migrations/)"
+          if [ -n "$changed" ]; then
+            echo "Existing migrations cannot be edited or deleted. Add a forward migration."
+            exit 1
+          fi
+  managed-development:
+    needs: scope
+    if: needs.scope.outputs.checks == 'true'
+    uses: ./.github/workflows/schema-release.yml
+    with:
+      production: false
+      sha: ${{ github.event.pull_request.head.sha || github.sha }}
+    secrets: inherit
+  checks:
+    needs: [scope, managed-development]
+    if: ${{ always() && !cancelled() && needs.scope.outputs.checks == 'true' && (needs.scope.outputs.migrations == 'false' || needs.managed-development.result == 'success') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: pr-checks-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    env:
+      CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
+      BLOXODES_ENV_PROFILE: process-only
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      SUPABASE_MEDIA_PUBLIC_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SITE_URL: https://bloxodes.com
+      NEXT_PUBLIC_SITE_URL: https://bloxodes.com
+      TEST_CANONICAL_ORIGIN: https://bloxodes.com
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: ci-only
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx tsc --project scripts/ci/tsconfig.json
+      - run: npm run supabase:migrations:check
+      - run: node --test scripts/ci/__tests__/*.test.mjs
+      - name: Verify selected content against managed development
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --import tsx scripts/ci/verify-content-batches.ts
+      - run: npm run env:doctor -- --ci
+      - run: npm run env:check
+      - run: npm run test:article-queue && npm run test:wiki-runtime
+      - if: needs.scope.outputs.extension == 'true'
+        run: npm run typecheck:extension && npm run package:extension
+      - if: needs.scope.outputs.admin == 'true'
+        run: npm run typecheck:admin-extension
+      - if: needs.scope.outputs.mobile == 'true'
+        run: npm run typecheck:mobile
+      - if: needs.scope.outputs.web == 'true'
+        run: npm run lint && npm run test:unit:web && npm run build:web && npm run typecheck:web
+      - if: needs.scope.outputs.web == 'true'
+        run: npx playwright install --with-deps chromium
+      - if: needs.scope.outputs.web == 'true'
+        run: npx playwright test apps/web/e2e/release-smoke.spec.ts
+      - uses: actions/upload-artifact@v4
+        if: always() && needs.scope.outputs.web == 'true'
+        with:
+          name: browser-review-${{ github.event.pull_request.head.sha || github.sha }}
+          path: tmp/test-reports/
+          retention-days: 1
+          if-no-files-found: ignore
+  required:
+    name: Required PR checks
+    needs: [scope, managed-development, checks]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          SCOPE: ${{ needs.scope.result }}
+          DOCS_ONLY: ${{ needs.scope.outputs.checks == 'false' }}
+          MANAGED: ${{ needs.managed-development.result }}
+          CHECKS: ${{ needs.checks.result }}
+        run: |
+          test "$SCOPE" = success
+          if [ "$DOCS_ONLY" != true ]; then
+            test "$MANAGED" = success
+            test "$CHECKS" = success
+          fi

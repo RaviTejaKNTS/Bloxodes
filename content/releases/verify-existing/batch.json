@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "operations": [],
+  "urls": [{ "path": "/games", "contains": "Games" }],
+  "events": []
+}

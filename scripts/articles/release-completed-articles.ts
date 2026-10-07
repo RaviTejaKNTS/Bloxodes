@@ -1,3 +1,4 @@
+import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 
 import { randomUUID } from "node:crypto";
@@ -242,7 +243,7 @@ export function parseReleaseOptions(
 }
 
 export async function readProductionCredentials(filePath: string): Promise<ProductionCredentials> {
-  const parsed = parseDotenv(await readFile(filePath, "utf8"));
+  const parsed = process.env.GITHUB_ACTIONS === "true" && process.env.BLOXODES_CONTENT_RELEASE === "true" ? process.env : parseDotenv(await readFile(filePath, "utf8"));
   const url = parsed.SUPABASE_URL?.trim();
   const serviceRole = parsed.SUPABASE_SERVICE_ROLE?.trim();
   const mediaBucket = parsed.SUPABASE_MEDIA_BUCKET?.trim();
@@ -438,11 +439,12 @@ export async function resolveReleaseArtifactPath(filePath: string, queueId: stri
   return actual;
 }
 
-async function readReleaseArtifact(row: QueueRow): Promise<ReleaseArtifact> {
+export async function readReleaseArtifact(row: QueueRow): Promise<ReleaseArtifact> {
   if (!row.result_path || path.isAbsolute(row.result_path) || path.basename(row.result_path) !== "final.json") {
     throw new Error(`Queue row ${row.id} has an unsafe result_path.`);
   }
-  const finalPath = await resolveReleaseArtifactPath(path.resolve(process.cwd(), row.result_path), row.id, row.result_slug!);
+  const artifactRoot = process.env.BLOXODES_ARTIFACT_ROOT || process.cwd();
+  const finalPath = await resolveReleaseArtifactPath(path.resolve(artifactRoot, row.result_path), row.id, row.result_slug!, artifactRoot);
   const mediaPath = await realpath(path.join(path.dirname(finalPath), "media.json"));
   if (path.dirname(mediaPath) !== path.dirname(finalPath)) throw new Error("Article media manifest escapes its workspace.");
   await access(finalPath);
@@ -748,6 +750,7 @@ async function releaseOne(params: {
 
 async function main() {
   const options = parseReleaseOptions(process.argv.slice(2));
+  if (options.apply) assertProductionPublication();
   const dev = resolveArticleDevCredentials({ envFile: options.devEnvFile });
   const productionCredentials = await readProductionCredentials(options.productionEnvFile);
   if (options.apply && !productionCredentials.revalidateSecret) throw new Error("Production target requires REVALIDATE_SECRET before article publication.");

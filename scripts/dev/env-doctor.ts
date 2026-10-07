@@ -1,3 +1,4 @@
+import { checkCiEnv } from "../ci/check-env";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -8,6 +9,8 @@ type EnvConfig = {
   profiles: Record<string, string[]>;
   overlays: Record<string, string[]>;
 };
+
+if (process.argv.includes("--ci")) { checkCiEnv(); process.exit(0); }
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const envRoot = path.join(repoRoot, ".envs");

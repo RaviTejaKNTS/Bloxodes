@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { dispatchWiki } from "../ci/dispatch-wiki";
 
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { access, mkdir, readFile, realpath } from "node:fs/promises";
@@ -21,7 +22,6 @@ import { readSessionState, saveSessionState, recoverStep, resumedCodexArgs } fro
 import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-automation-env";
 import { resolveWikiAttemptRoot } from "./wiki-workspace-paths";
 import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage, WIKI_RENDERED_PREVIEW_GUIDANCE } from "./wiki-execution";
-import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { reconcileExpiredWikiLeases, guardWikiHeartbeat, WikiLeaseLostError } from "./wiki-lease-health";
 
 type StatsGame = {
@@ -538,79 +538,6 @@ async function heartbeat(dev: SupabaseClient, row: QueueRow) {
   if (data !== true) throw new WikiLeaseLostError("Wiki queue lease lost.");
 }
 
-function productionEnvironment(): NodeJS.ProcessEnv {
-  const parsed = parseDotenv(readFileSync(productionEnvFile, "utf8"));
-  const url = parsed.SUPABASE_URL?.trim();
-  const serviceRole = parsed.SUPABASE_SERVICE_ROLE?.trim();
-  if (!url || !serviceRole || !isProductionSupabaseUrl(url)) throw new Error("Production wiki credentials are missing or target an unrecognized host.");
-  if (!parsed.REVALIDATE_SECRET?.trim()) throw new Error("Production target requires REVALIDATE_SECRET before wiki publication.");
-  const env: NodeJS.ProcessEnv = { ...process.env, ...parsed, SUPABASE_URL: url, SUPABASE_SERVICE_ROLE: serviceRole, NODE_ENV: "production" };
-  env.BLOXODES_ENV_PROFILE = "process-only";
-  env.BLOXODES_ENV_OVERLAYS = "";
-  return env;
-}
-
-async function release(result: WorkflowResult) {
-  const inventory = await retryOperation("Production editorial inventory", fetchProductionEditorialInventory);
-  const collisions = inventory.items.filter(
-    (item) => item.family === "wiki" && (item.universe_id === result.universeId || item.key === result.wikiSlug)
-  );
-  if (collisions.some((item) => item.universe_id !== result.universeId || item.key !== result.wikiSlug)) {
-    throw new Error(`Production wiki identity collision: ${JSON.stringify(collisions)}.`);
-  }
-  const env = productionEnvironment();
-  await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", result.wikiSlug, "--universe-id", String(result.universeId)], env);
-  for (const manifest of result.collectionManifests) {
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest], env);
-  }
-  for (const manifest of result.collectionManifests) {
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest, "--apply", "--upload-media", "--allow-prod"], env);
-  }
-  for (const manifest of result.collectionManifests) {
-    await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest, "--apply", "--upload-media", "--publish", "--allow-prod"], env);
-  }
-  await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-wiki-runtime.ts", "--final-json", result.wikiFinalPath!, "--game", result.wikiSlug, "--universe-id", String(result.universeId), "--apply", "--allow-prod"], env);
-  const wikiFinal = JSON.parse(await readFile(result.wikiFinalPath!, "utf8")) as { title?: unknown };
-  const expectedPages = [{
-    url: `https://bloxodes.com/wiki/${result.wikiSlug}`,
-    text: typeof wikiFinal.title === "string" ? wikiFinal.title : result.wikiSlug
-  }];
-  for (const manifestPath of result.collectionManifests) {
-    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
-      collection?: { slug?: unknown; label?: unknown };
-    };
-    expectedPages.push({
-      url: `https://bloxodes.com/wiki/${result.wikiSlug}/${String(manifest.collection?.slug)}`,
-      text: String(manifest.collection?.label || manifest.collection?.slug)
-    });
-  }
-  await revalidatePublishedContent(env, expectedPages.map(page => ({
-    type: page.url === `https://bloxodes.com/wiki/${result.wikiSlug}` ? "wiki" : "wiki_collection",
-    slug: page.url.slice("https://bloxodes.com/wiki/".length)
-  })));
-  for (const expected of expectedPages) {
-    let ok = false;
-    for (let attempt = 0; attempt < 24; attempt += 1) {
-      const response = await fetch(expected.url, { redirect: "follow", signal: AbortSignal.timeout(30_000) });
-      const body = response.status === 200 ? await response.text() : "";
-      if (response.status === 200 && body.toLowerCase().includes(expected.text.toLowerCase())) { ok = true; break; }
-      await new Promise((resolve) => setTimeout(resolve, 5_000));
-    }
-    if (!ok) throw new Error(`Live verification failed for ${expected.url}.`);
-  }
-  let sitemapReady = false;
-  for (let attempt = 0; attempt < 24; attempt += 1) {
-    try {
-      const response = await fetch("https://bloxodes.com/sitemaps/wiki.xml", { signal: AbortSignal.timeout(30_000) });
-      const body = await response.text();
-      if (response.ok && expectedPages.every((page) => body.includes(`<loc>${page.url}</loc>`))) { sitemapReady = true; break; }
-    } catch { /* Cache/origin recovery is bounded by this publication poll. */ }
-    await new Promise((resolve) => setTimeout(resolve, 5_000));
-  }
-  if (!sitemapReady) throw new Error("Published wiki URLs are not yet in the sitemap.");
-  return expectedPages.map((page) => page.url);
-}
-
 async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
   const query = await dev.from("wiki_generation_queue").select("*")
     .eq("status", "processing").in("production_receipt->>state", ["requested", "publishing"])
@@ -635,10 +562,11 @@ async function releaseRequestedWiki(dev: SupabaseClient): Promise<boolean> {
     await resolveWikiAttemptRoot(expectedRoot, row.result_root, row.attempts);
     const result = await readWorkflowResult(row, row.result_root);
     if (result.outcome !== "ready") throw new Error("Publication request is not ready.");
-    const urls = await release(result);
-    receipt = { ...request, state: "published", urls, verified_at: new Date().toISOString() };
+    await dispatchWiki(row, result);
+    console.log(`GitHub publication dispatched for ${row.game_name}; CI owns the final receipt.`);
+    return true;
   } catch (error) {
-    receipt = { ...request, state: "failed", error: sanitizeError(error instanceof Error ? error.message : String(error), productionEnvironment()), failed_at: new Date().toISOString() };
+    receipt = { ...request, state: "failed", error: sanitizeError(error instanceof Error ? error.message : String(error), process.env), failed_at: new Date().toISOString() };
   }
   const saved = await dev.from("wiki_generation_queue").update({ production_receipt: receipt })
     .eq("id", row.id).eq("status", "processing").eq("lease_token", row.lease_token).eq("production_receipt->>request_id", request.request_id);
@@ -856,7 +784,6 @@ async function main() {
     return;
   }
   if (releaseOnly) {
-    productionEnvironment();
     const recovered = await reconcileExpiredWikiLeases(dev);
     if (recovered) console.log(`Reconciled ${recovered} expired wiki leases.`);
     while (await releaseRequestedWiki(dev)) { /* Trusted publisher never runs model turns or takes the model lock. */ }

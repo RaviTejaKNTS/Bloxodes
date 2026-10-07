@@ -3,7 +3,8 @@ import { reservedGameNamespaces } from "../../apps/web/src/lib/game-route-names"
 import { parseGameMapData, parseGameQuizData, parseGameCatalogData } from "../../apps/web/src/lib/game-page-data";
 import fs from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
-import { assertManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
+import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
+import { assertProductionPublication } from "../ci/publication-guard";
 
 const validSlug = (value: unknown) => typeof value === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const validId = (value: unknown) => typeof value === "string" && /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(value);
@@ -12,10 +13,14 @@ function option(flag: string) { const index = argv.indexOf(flag); return index <
 async function main() {
  const namespace = option("--namespace");
  const file = option("--file");
- if (argv.includes("--help")) { console.log("Usage: npm run publish:game-pages -- --namespace <game> --file <reviewed.json> [--apply]. Development only; dry run by default."); return; }
+ if (argv.includes("--help")) { console.log("Usage: npm run publish:game-pages -- --namespace <game> --file <reviewed.json> [--apply --allow-prod]. Production publication runs in GitHub CI."); return; }
  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(namespace) || reservedGameNamespaces.has(namespace) || !file) throw new Error("Provide a non-Roblox namespace and reviewed JSON file.");
- assertManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL, "game page publication");
- if (new URL(process.env.SUPABASE_URL!).hostname !== "bbtcaurrtyoukvjbxbbj.supabase.co") throw new Error("Unexpected development project");
+ const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
+ if (!production && (!isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL) || new URL(process.env.SUPABASE_URL!).hostname !== "bbtcaurrtyoukvjbxbbj.supabase.co")) throw new Error("Unexpected database target");
+ if (production && argv.includes("--apply")) {
+  if (!argv.includes("--allow-prod")) throw new Error("Production publication requires --allow-prod.");
+  assertProductionPublication();
+ }
  const payload = JSON.parse(await fs.readFile(file, "utf8")) as Record<string, Array<Record<string, unknown>>>;
  const contract = { games: { table: "games", conflict: "namespace,slug,kind" }, wiki: { table: "game_wiki_pages", conflict: "game_id" }, codesPages: { table: "game_code_pages", conflict: "game_id" }, tools: { table: "game_tool_pages", conflict: "namespace,slug" }, maps: { table: "game_map_pages", conflict:"namespace,slug" }, quizzes:{table:"game_quiz_pages",conflict:"namespace,slug"}, catalog:{table:"game_catalog_pages",conflict:"namespace,slug"}, checklists:{table:"game_checklist_pages",conflict:"namespace,slug"}, checklistItems:{table:"game_checklist_items",conflict:"page_id,item_key"}, codes: { table: "game_codes", conflict: "code_page_id,code" } } as const;
  if (!Object.keys(payload).length || Object.keys(payload).some(key => !(key in contract))) throw new Error("Supported groups: games, wiki, codesPages, tools, maps, quizzes, catalog, checklists, checklistItems, codes.");

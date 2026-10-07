@@ -1,3 +1,4 @@
+import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 
 import fs from "node:fs/promises";
@@ -71,6 +72,7 @@ async function main() {
   const target = process.env.SUPABASE_URL;
   const managedDev = isManagedDevelopmentSupabaseUrl(target);
   const production = isProductionSupabaseUrl(target);
+  if (production && apply) assertProductionPublication();
   if (apply && !managedDev && !allowProd) {
     throw new Error("Refusing wiki runtime write outside managed development without --allow-prod.");
   }

@@ -1,3 +1,4 @@
+import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
@@ -726,6 +727,7 @@ async function main() {
   if (publish && !apply) throw new Error("--publish requires --apply.");
   const managedDevelopment = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
+  if (production && apply) assertProductionPublication();
   if (apply && !managedDevelopment && !allowProd) {
     throw new Error("Refusing database writes outside managed development. Production requires explicit --allow-prod.");
   }

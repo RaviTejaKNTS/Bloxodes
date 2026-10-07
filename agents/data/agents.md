@@ -296,3 +296,7 @@ GTA standalone checklists: `gta_checklist_pages`, `gta_checklist_items`, and sec
 ## Shared reference-page extension
 
 `game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress` extend the common non-Roblox model. Protected views hide unpublished games/parents. Nine frozen GTA map snapshots are preserved in shared rows; their authoring files are import sources only. Development and production have 16 shared tables and eight views. See `dev-docs/pipelines/content.md`.
+
+## GitHub release ownership
+
+`scripts/ci/` owns path classification, managed migration receipts, selected content contracts, private frozen bundles and CI publication dispatch/readback. `.github/workflows/pull-request.yml`, `schema-release.yml` and `publish-content.yml` connect those helpers to protected production PRs. `scripts/dev/setup-worktree.sh` installs no dependencies; `cleanup-task-worktree.mjs` removes only an exact clean, merged, inactive task. Current operations belong to `dev-docs/operations/deployment.md`.

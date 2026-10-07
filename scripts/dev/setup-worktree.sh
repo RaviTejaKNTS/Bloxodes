@@ -19,21 +19,7 @@ fi
 
 mkdir -p "$repo_root/tmp" "$repo_root/tmp/test-reports"
 
-lock_hash="$(git hash-object "$repo_root/package-lock.json")"
-install_marker="$repo_root/node_modules/.bloxodes-package-lock.sha256"
-installed_hash=""
-if [[ -f "$install_marker" ]]; then
-  installed_hash="$(<"$install_marker")"
-fi
-
-if [[ ! -d "$repo_root/node_modules" || "$installed_hash" != "$lock_hash" ]]; then
-  (
-    cd "$repo_root"
-    npm ci
-  )
-  printf '%s\n' "$lock_hash" > "$install_marker"
-fi
-
 printf 'Worktree ready (%d env director%s linked).\n' \
   "$linked_env_count" \
   "$([[ "$linked_env_count" -eq 1 ]] && printf 'y' || printf 'ies')"
+printf 'Dependencies, checks, builds, and browser verification run on GitHub.\n'

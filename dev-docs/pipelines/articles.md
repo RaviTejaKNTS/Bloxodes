@@ -6,6 +6,12 @@ Status: Code-controlled article stages with Luna authoring/review, managed-devel
 Last verified: 2026-10-02
 Evidence: September 6 code/skill implementation, process/queue/recovery tests, TypeScript checks, host env:doctor and writer readiness, plus a live owned-preview start/HTTP/stop test. The first live Luna max canary hit an account usage limit during images. A later manual Fisch appraisal run completed all stages after an internal-link correction and a technical import-environment fix; it remained managed-development only. The scheduled service entrypoint was inspected read-only and an older in-flight batch was left running. Earlier production-health evidence below retains its original date; no production publication is part of this implementation test.
 
+## GitHub publication flow
+
+New source hooks freeze only an explicitly authorized, completed article run and dispatch `Publish selected content`. The bundle includes its final/media/brief and unchanged approval evidence. Production keys stay in GitHub. CI promotes media, imports through the existing article publisher, reads back article/provenance, revalidates and checks the exact URL before closing the queue row. Dispatch alone leaves the row completed and the outbox unfinished.
+
+Manual agent QA runs in GitHub with browser artifacts. Do not start task-local builds or previews. Installed detached runtimes still use their previous release until separately activated; no service, env or job change belongs to this migration. See `../operations/deployment.md` for PR flow and credentials.
+
 ## Editorial ownership
 
 The maintained article style lives in `.agents/skills/bloxodes-article-writing/references/editorial-standard.md`. Topic suggestions, research, normal/tech/tier-list writing, best-games writing, parent review, and release review use that standard. The adjacent `beebom-style-study.md` records a September 6 review of 15 Roblox articles across Blox Fruits, Fisch, Grow a Garden, and Steal a Brainrot, with source links and format-specific observations. `editorial-examples.md` supplies original headings, introductions, connected explanations, and endings; competitor prose is not a template to copy.

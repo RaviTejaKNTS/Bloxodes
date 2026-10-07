@@ -4,6 +4,12 @@ Status: Active
 Last verified: 2026-10-03
 Evidence: database-only web/mobile/tool loaders, removed repository collection/quiz archives, immutable collection runtime tables, zero-local-media-reference audits in managed development and production, exhaustive R2 audits, live route/image checks, route tests, exact production row/pointer counts, 209-route production crawl, 106-route managed-development GTA collection crawl, managed GTA public-provenance scan, 2026-09-26 managed-development GTA 281-pointer/type/count/hash/copy reconciliation, 281-route HTML crawl and 281-workspace quality profile, 305-URL GTA sitemap, Tailscale-reachable desktop/mobile GTA preview checks, the user-approved 2026-09-26 production 281-revision/10,793-row reconciliation, 281-route crawl and 32-hosted-hub-image release, and 2026-09-28 GTA V map 377-item/92-place readback, fallback tests, managed-development build, and desktop/mobile browser checks; October 3 independent Minecraft edition build/typecheck, 37 focused tests, 96 authoring checks, 48 final verifiers, 82 managed-development HTTP checks, controlled production schema/data activation, full 48-revision/13,026-row readback and 50 exact live wiki URL checks
 
+## GitHub publication flow
+
+New source hooks freeze only the approved wiki and selected collection workspaces into a private hash-addressed development bundle. CI uses the established hub/dataset/media publishers, with exact row/pointer/count readback, cache events and public URL verification. The trusted wiki publisher dispatches the exact request; GitHub closes its production receipt under the same live queue lease after verification. A dispatched request is still publishing.
+
+Renderer/config changes go through a PR targeting production before dependent rows publish. Manual agent validation and browser checks run on GitHub. R2 credentials are required for collection media. The installed detached builder/publisher runtimes and their env remain unchanged until separately activated. See `../operations/deployment.md`.
+
 ## Shared non-Roblox storage
 
 Last verified: 2026-10-06

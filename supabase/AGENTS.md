@@ -1,5 +1,9 @@
 # Supabase Guide
 
+## GitHub task and release flow
+
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+
 Scope: `supabase/`.
 
 Current verified managed-development and self-hosted-production topology, versions, health caveats, and upgrade watch items live in `dev-docs/data/supabase.md`. Treat older migration plans in `docs/` as historical evidence.
@@ -42,9 +46,9 @@ Keep namespaces explicit in reads and writes. Roblox stays outside these tables.
 - Validate pending migrations against managed Supabase development before controlled production application. Do not bootstrap a local Supabase database as part of the active workflow.
 - `supabase/migration-policy.json` records verified pre-convergence ledger exceptions. Do not add an exception from filenames alone: prove the corresponding live objects and record why history differs.
 - Migration histories must contain every version at or after the policy's `convergence_version`. Earlier history repairs and schema migrations are separate operations and require explicit target review.
-- Apply each reviewed migration to managed development through the authenticated Supabase connector, then list migrations and run readiness/advisors. This project intentionally does not store the managed database password or a second CI copy of it.
+- The schema CI job uses `MANAGED_DEV_SUPABASE_ACCESS_TOKEN` with the Management API for project `bbtcaurrtyoukvjbxbbj`. It proves the transaction with rollback, applies pending forward migrations, and reads back the ledger and readiness. The managed database password remains absent. OAuth connector sessions are for inspection and are not CI credentials.
 - Plan self-hosted production with `npm run supabase:production:release -- --approved-sha <full-sha>`. Apply only after explicit permission, after that SHA is on `origin/production`, with `--apply --confirm "APPLY production"`. The command streams an atomic transaction through SSH, Dokploy or the guarded Studio SQL transport into the existing database, proves policy-listed live objects, repairs only verified historical gaps, applies only expected migrations, and verifies the ledger without SSH forwarding or public Postgres.
-- After a managed-development application, run `npm run supabase:managed-dev:check` and Supabase security/performance advisors. After production application, verify the ledger, affected objects/RPCs, application health, and the self-hosted security audit before calling the environments converged.
+- After a managed-development application, CI runs `npm run supabase:managed-dev:check` and Supabase security/performance advisors. After production application, verify the ledger, affected objects/RPCs, application health, and the self-hosted security audit before calling the environments converged.
 - Do not use `supabase db reset`, local seeding, or a local CLI database in this repository.
 - After migrations are applied to live, regenerate `schema.sql` from the live database dump instead of hand-editing it.
 - Treat `migrations/` as deployment history for the existing production project, not as the easiest way to infer current state.

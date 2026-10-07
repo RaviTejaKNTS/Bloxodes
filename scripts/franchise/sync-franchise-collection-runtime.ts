@@ -1,3 +1,4 @@
+import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 
 import { createHash } from "node:crypto";
@@ -442,6 +443,7 @@ async function applyPlan(plan: Plan) {
 }
 
 async function main() {
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL) && apply) assertProductionPublication();
   const namespaceValue = namespace as Namespace;
   const config = FRANCHISES[namespaceValue] ?? { label: namespaceValue, routePrefix: `/${namespaceValue}/wiki`, tablePrefix: namespaceValue, mediaPrefix: namespaceValue };
   const managed = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);

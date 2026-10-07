@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "allowJs": true,
+    "checkJs": false,
+    "incremental": false
+  },
+  "include": ["**/*.ts", "**/*.mjs", "../../types/**/*.d.ts"],
+  "exclude": ["__tests__"]
+}

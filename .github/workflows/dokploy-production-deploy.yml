@@ -37,11 +37,16 @@ permissions:
   contents: read
   packages: write
 
+concurrency:
+  group: bloxodes-production
+  cancel-in-progress: false
+
 jobs:
   classify:
     runs-on: ubuntu-latest
     outputs:
       deploy: ${{ steps.scope.outputs.deploy }}
+      schema: ${{ steps.scope.outputs.schema }}
       runtime_code: ${{ steps.scope.outputs.runtime_code }}
       dataset: ${{ steps.scope.outputs.dataset }}
       smoke_paths: ${{ steps.scope.outputs.smoke_paths }}
@@ -60,6 +65,7 @@ jobs:
           DISPATCH_DEPLOY: ${{ inputs.trigger_dokploy || 'true' }}
         run: |
           deploy=false
+          schema=false
           runtime_code=false
           dataset=false
           : > /tmp/smoke-paths.txt
@@ -78,6 +84,7 @@ jobs:
           }
 
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            schema=true
             if [ "$DISPATCH_DEPLOY" = "true" ]; then
               deploy=true
               runtime_code=true
@@ -89,6 +96,11 @@ jobs:
               BEFORE_SHA="$(git rev-parse "${HEAD_SHA}^")"
             fi
             while IFS= read -r -d '' file; do
+              case "$file" in
+                supabase/migrations/*|supabase/migration-policy.json|scripts/ci/*|scripts/ops/release-production-schema.ts|scripts/ops/studio-container-psql.mjs|.github/workflows/schema-release.yml|.github/workflows/dokploy-production-deploy.yml)
+                  schema=true
+                  ;;
+              esac
               case "$file" in
                 apps/web/AGENTS.md|apps/web/*/AGENTS.md)
                   ;;
@@ -109,7 +121,7 @@ jobs:
                   deploy=true
                   dataset=true
                   ;;
-                apps/web/*|Dockerfile|package.json|package-lock.json)
+                apps/web/*|Dockerfile|package.json|package-lock.json|.github/workflows/dokploy-production-deploy.yml)
                   deploy=true
                   runtime_code=true
                   case "$file" in
@@ -147,6 +159,7 @@ jobs:
 
           smoke_paths="$(head -n 5 /tmp/smoke-paths.txt | jq -R -s -c 'split("\n") | map(select(length > 0))')"
           purge_tags="$(jq -R -s -c 'split("\n") | map(select(length > 0))' /tmp/purge-tags.txt)"
+          echo "schema=$schema" >> "$GITHUB_OUTPUT"
           echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
           echo "runtime_code=$runtime_code" >> "$GITHUB_OUTPUT"
           echo "dataset=$dataset" >> "$GITHUB_OUTPUT"
@@ -154,15 +167,21 @@ jobs:
           echo "purge_tags=$purge_tags" >> "$GITHUB_OUTPUT"
           echo "deploy=$deploy runtime_code=$runtime_code dataset=$dataset smoke_paths=$smoke_paths purge_tags=$purge_tags"
 
+  schema:
+    needs: classify
+    if: needs.classify.outputs.schema == 'true'
+    uses: ./.github/workflows/schema-release.yml
+    with:
+      production: true
+      sha: ${{ github.sha }}
+    secrets: inherit
+
   deploy:
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 30
-    needs: classify
-    if: ${{ needs.classify.outputs.deploy == 'true' }}
-    concurrency:
-      group: dokploy-production
-      cancel-in-progress: false
+    needs: [classify, schema]
+    if: ${{ !cancelled() && needs.classify.result == 'success' && needs.classify.outputs.deploy == 'true' && (needs.schema.result == 'success' || needs.schema.result == 'skipped') }}
     env:
       BLOXODES_ENV_PROFILE: process-only
       PRODUCTION_SITE_URL: ${{ inputs.site_url || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}

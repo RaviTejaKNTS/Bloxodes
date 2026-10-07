@@ -6,6 +6,12 @@ Status: Active
 Last verified: 2026-09-14
 Evidence: fresh managed-development page/item readback, all 386 web tests, isolated production web build, route metadata/search/sitemap/feed checks, and production overlap readback on September 14. Browser interaction QA remains unavailable. Earlier family counts below retain their August 14 scope.
 
+## GitHub page validation and publication
+
+Authoring stays in the assigned T3 task worktree. Validation, build and browser commands run on GitHub. Use the selected publisher registry and exact batches in `../operations/deployment.md`; do not copy whole tables or account progress. The shared non-Roblox publisher now accepts guarded production application only inside the approved content CI job. Roblox retains its separate publishers.
+
+The page templates and routes are unchanged by this release. Queued articles and wikis now have CI dispatch hooks in source. Installed runtimes stay on their previous release until separately activated.
+
 ## Shared non-Roblox storage
 
 Last verified: 2026-10-06

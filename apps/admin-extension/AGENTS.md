@@ -1,5 +1,9 @@
 # Admin Extension Guide
 
+## GitHub task and release flow
+
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+
 Scope: everything under `apps/admin-extension`.
 
 This is a personal, unpacked-only Chrome MV3 popup that acts as a quick admin panel for Bloxodes codes pages and articles. It is never packaged, never published to a store, and is not part of the Dokploy web build. It is separate from the public `apps/extension`.
