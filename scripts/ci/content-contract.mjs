@@ -13,9 +13,14 @@ export function ownedPath(base, input) {
 }
 export function parseBatch(input) {
   if (!input || input.version !== 1 || !Array.isArray(input.operations) || input.operations.length > 20 || !Array.isArray(input.urls) || !input.urls.length || input.urls.length > 20 || !Array.isArray(input.events) || input.events.length > 100) throw new Error("Invalid content batch.");
+  const articleIds = new Set();
   for (const operation of input.operations) {
     if (!operation || !publishers.has(operation.publisher)) throw new Error("Unknown content publisher.");
     if (operation.publisher === "article-queue" && !/^[0-9a-f-]{36}$/i.test(operation.queueId ?? "")) throw new Error("Article releases need an exact queue ID.");
+    if (operation.publisher === "article-queue") {
+      if (articleIds.has(operation.queueId)) throw new Error("An article queue ID may appear only once per batch.");
+      articleIds.add(operation.queueId);
+    }
     if (operation.file !== undefined) ownedPath("batch", operation.file);
     if (operation.workspace !== undefined) ownedPath("batch", operation.workspace);
     if (!operation.file && !operation.workspace) throw new Error("Each publisher needs its own reviewed input.");

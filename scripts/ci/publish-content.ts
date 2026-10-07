@@ -65,7 +65,7 @@ function run(operation: any, write: boolean) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(payload.slug ?? "")) throw new Error("Codes setup requires an exact reviewed editorial slug.");
   }
   if (operation.publisher === "article-queue" && !write) {
-    execFileSync(process.execPath, ["--import", "tsx", "scripts/ci/verify-article-bundle.ts", operation.queueId], { env: process.env, stdio: "inherit" });
+    execFileSync(process.execPath, ["--import", "tsx", "scripts/ci/verify-article-bundle.ts", operation.queueId, operation.file, file], { env: process.env, stdio: "inherit" });
     return;
   }
   const [script, ...options] = command(operation, write);

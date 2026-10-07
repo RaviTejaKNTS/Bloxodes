@@ -127,5 +127,25 @@
       "local_sha256": "8fcb06203a6012c0722022124fb16fc3771efd7d2618b7eb7389d6aff2878c35",
       "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
     }
+  ],
+  "managed_dev_sql_equivalences": [
+    {
+      "version": "20260920000013",
+      "source_sha256": "777ef63b9e6bfb8360ad7fda5f7a80658b82eef1bfeb8ab714df1e9de92500b4",
+      "local_sha256": "94f89543975feb7bb9b516d623d83406f8fe9b516f9968b53c8061a9c048d567",
+      "reason": "Stored SQL and committed SQL were compared on 2026-10-07. Versions 13 and 27 omit leading comments; version 28 has the same statements on one line. No executable statement differs."
+    },
+    {
+      "version": "20260920000027",
+      "source_sha256": "5e392fc5c659abb618442bf924ea54b2cd2256290a93d18c96749d4a2e1b7050",
+      "local_sha256": "ac1935e606784097bd3eb5ee804359fe0bfc4d6fe5907aad7b42d1b78f31d82d",
+      "reason": "Stored SQL and committed SQL were compared on 2026-10-07. Versions 13 and 27 omit leading comments; version 28 has the same statements on one line. No executable statement differs."
+    },
+    {
+      "version": "20260920000028",
+      "source_sha256": "f0e1e904d7075d35e24e40fc43f48b6520238589d20a4a0806710aa4fe0bce5f",
+      "local_sha256": "e32828ca1e686581558fbe8ab6a68c5fbfc29d7fe2afad17e35237ce55e754de",
+      "reason": "Stored SQL and committed SQL were compared on 2026-10-07. Versions 13 and 27 omit leading comments; version 28 has the same statements on one line. No executable statement differs."
+    }
   ]
 }

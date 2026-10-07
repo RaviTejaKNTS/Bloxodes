@@ -1,6 +1,7 @@
 import "../shared/load-env";
 import { migrationBody } from "./migration-transaction.mjs";
 import { historyRepairs, repairHistorySql } from "./migration-history.mjs";
+import { verifiedMigrationHashes } from "./migration-byte-proof.mjs";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -32,7 +33,12 @@ async function query(sql: string): Promise<Array<Record<string, unknown>>> {
 }
 const literal = (value: string) => `'${value.replaceAll("'", "''")}'`;
 async function main() {
-  const ledger = await query("select version,name,encode(sha256(convert_to(array_to_string(statements,E'\\n'),'UTF8')),'hex') as sql_hash from supabase_migrations.schema_migrations order by version;");
+  const ledgerQuery = "select version,name,encode(sha256(convert_to(array_to_string(statements,E'\\n'),'UTF8')),'hex') as sql_hash from supabase_migrations.schema_migrations order by version;";
+  const ledger = await query(ledgerQuery);
+  // Include legacy pending production versions when present; never attest an
+  // unproven pre-convergence baseline merely because its version exists.
+  const proofMigrations = migrations.filter(m => m.version >= policy.convergence_version || policy.managed_dev_pending_before_convergence.includes(m.version) || policy.production_pending_before_convergence.includes(m.version));
+  verifiedMigrationHashes(proofMigrations,ledger,policy);
   const repairs = historyRepairs(policy.managed_dev_history_aliases ?? [], migrations, ledger);
   const before = new Set([...ledger.map(row => String(row.version)), ...repairs.map(row => row.version)]);
   const pending = migrations.filter(m => !before.has(m.version) && (m.version >= policy.convergence_version || policy.managed_dev_pending_before_convergence.includes(m.version)));
@@ -41,17 +47,19 @@ async function main() {
   const transaction = ["begin;", "select pg_advisory_xact_lock(746213809);", "set local lock_timeout = '15s';", "set local statement_timeout = '180s';", ...repairHistorySql(repairs), ...pending.flatMap(m => [
     migrationBody(m.sql),
     "set constraints all immediate;",
-    `insert into supabase_migrations.schema_migrations(version,name,statements) values (${literal(m.version)},${literal(m.name)},array[]::text[]);`
+    `insert into supabase_migrations.schema_migrations(version,name,statements) values (${literal(m.version)},${literal(m.name)},array[${literal(m.sql)}]::text[]);`
   ]), apply ? "commit;" : "rollback;"].join("\n");
   if (pending.length || repairs.length) {
     await query(transaction.replace(/commit;\s*$/, "rollback;"));
     if (apply) await query(transaction);
   }
-  const after = new Set((await query("select version from supabase_migrations.schema_migrations order by version;")).map(row => String(row.version)));
+  const afterLedger = await query(ledgerQuery);
+  const verified = verifiedMigrationHashes(proofMigrations,afterLedger,policy);
+  const after = new Set(afterLedger.map(row => String(row.version)));
   const missing = migrations.filter(m => (m.version >= policy.convergence_version || policy.managed_dev_pending_before_convergence.includes(m.version)) && !after.has(m.version));
   if (apply && missing.length) throw new Error(`Managed-development ledger is missing ${missing.map(m => m.version).join(", ")}`);
   if (process.env.GITHUB_ACTIONS === "true") {
-    fs.writeFileSync(path.join(process.env.RUNNER_TEMP!, "managed-schema-receipt.json"), JSON.stringify({ sha, project: PROJECT, applied: apply, migrations: migrations.filter(m => after.has(m.version)).map(({ version, hash }) => ({ version, hash })) }, null, 2));
+    fs.writeFileSync(path.join(process.env.RUNNER_TEMP!, "managed-schema-receipt.json"), JSON.stringify({ sha, project: PROJECT, applied: apply, migrations: verified }, null, 2));
   }
   console.log(apply ? `Managed-development schema verified at ${sha}.` : "Managed-development rollback plan passed.");
 }

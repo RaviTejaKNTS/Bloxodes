@@ -10,6 +10,8 @@ Evidence: September 6 code/skill implementation, process/queue/recovery tests, T
 
 New source hooks freeze only an explicitly authorized, completed article run and dispatch `Publish selected content`. The bundle includes its final/media/brief and unchanged approval evidence. Production keys stay in GitHub. CI promotes media, imports through the existing article publisher, reads back article/provenance, revalidates and checks the exact URL before closing the queue row. Dispatch alone leaves the row completed and the outbox unfinished.
 
+Before any writes, CI binds each article queue ID to its stored `result_path`, approved real file, slug and bytes. It verifies pipeline approval hashes and requires that article's canonical URL and cache event in the batch. Duplicate queue IDs and mismatched finals fail before publication. Queue acknowledgement uses only that selected, verified article.
+
 Manual agent QA runs in GitHub with browser artifacts. Do not start task-local builds or previews. Installed detached runtimes still use their previous release until separately activated; no service, env or job change belongs to this migration. See `../operations/deployment.md` for PR flow and credentials.
 
 ## Editorial ownership
