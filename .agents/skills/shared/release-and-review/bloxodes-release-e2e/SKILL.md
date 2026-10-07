@@ -39,7 +39,7 @@ Leave failed queue publication unfinished and retain its frozen bundle for a gua
 
 Fast-forward the clean main `production` checkout to the merged SHA. Never reset a dirty checkout. No dependency install or local platform check is part of synchronization.
 
-Keep the active T3 task checkout while this thread uses it. After the task settles and T3 releases it, run `npm run cleanup:task-worktree -- --worktree <exact-finished-path> --released-sha <full-sha>` from another checkout. Inspect its plan, then add `--apply`. It removes only that clean, merged task branch/worktree. Remote branches disappear automatically after merge. Unfinished tasks and detached runtimes stay.
+Keep the active T3 task checkout while this thread uses it. After checking that the task is settled in T3 with no active run, run `npm run cleanup:task-worktree -- --worktree <exact-finished-path> --released-sha <full-sha>` from another checkout. Inspect its plan, then add `--apply --inactive-confirmed`. Release its shared game claims first. The helper supports T3 HDD paths, refuses checkout-owned private env files and unknown ignored data, and archives private scratch files with hash readback before removing the clean merged task. Remote branches disappear automatically after merge. Unfinished tasks and detached runtimes stay.
 
 Do not synchronize or activate installed automation runtimes as a side effect. A separate, explicit runtime change must preserve active jobs and their owned env.
 

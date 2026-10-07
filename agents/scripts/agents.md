@@ -20,7 +20,7 @@ Selective PR review uses `scripts/ci/review-scope.mjs` and `.github/workflows/co
 
 ## Worktree setup
 
-`npm run setup:worktree` prepares an existing linked worktree; it never creates another worktree. It symlinks ignored root `.env*` files or directories from the main checkout without replacing worktree-specific paths, installs dependencies only when needed for the current `package-lock.json`, and creates ignored temp/report directories. It exits immediately in the main checkout. Codex invokes it through `.codex/environments/environment.toml`; Claude and Grok share the `.claude/settings.json` `SessionStart` hook.
+`npm run setup:worktree` prepares the T3-assigned checkout through dependency-free `setup-worktree.mjs`. It checks the main checkout and private env metadata, links `.envs/` plus approved shared authoring folders, and creates separate scratch/report directories. Conflicting local paths stay intact and stop setup. It installs no dependencies and runs no checks. Codex invokes the shell wrapper through `.codex/environments/environment.toml`; Claude and Grok share the `.claude/settings.json` `SessionStart` hook. `claim:shared-content -- --game <slug>` reserves shared drafts until the owning checkout adds `--release`. Cleanup requires a T3 inactivity check, archives scratch files before removal and supports T3 HDD paths. See `dev-docs/operations/deployment.md`.
 
 ## Stability and SEO verification
 

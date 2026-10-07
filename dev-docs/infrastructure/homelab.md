@@ -1,12 +1,12 @@
 # Homelab
 
 Status: Article and wiki/collection automation activated on the shared versioned runtime
-Last verified: 2026-10-02
-Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
+Last verified: 2026-10-07
+Evidence: HDD development storage, T3 project/worktree settings and compatibility paths inspected October 7. Earlier automation evidence retains its recorded verification dates: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
 ## T3 task worktrees and GitHub checks
 
-New agent tasks use their one T3-assigned checkout and branch. The root checkout stays clean on `production`. Worktree setup links ignored env storage and makes scratch directories without dependency installs. Checks, builds and browser QA run on GitHub; browser artifacts replace task-local previews.
+New agent tasks use their one T3-assigned checkout and branch under `/srv/data/t3code/worktrees/Bloxodes/`. The saved T3 project defaults to worktree mode and runs automatic setup before the first agent turn. Setup and the GitHub PR/check actions are registered; the active checkout has its shared links. The canonical main checkout is `/srv/data/projects/Bloxodes`, clean on `production`; `/home/teja/projects/Bloxodes` remains its compatibility link. Git history, private env storage and drafts are on `/srv/data`, the HDD. Setup links private envs and approved authoring folders while keeping scratch and pipeline state separate. It installs nothing. Checks, builds and browser QA run on GitHub. Shared game drafts require `claim:shared-content` ownership. See [deployment](../operations/deployment.md#hdd-worktrees-and-shared-files) for links and cleanup.
 
 Finished remote task branches delete after merge. The exact-worktree cleanup helper runs only after T3 releases that clean merged checkout. It skips detached automation/rollback runtimes. This migration does not change installed services, env files, timers or runtime pointers, and does not interrupt jobs. Installed automation keeps its existing contract until a separately authorized activation. See `../operations/deployment.md`.
 
@@ -16,8 +16,8 @@ Finished remote task branches delete after merge. The exact-worktree cleanup hel
 - OS: Linux Mint 22.3, kernel 6.14.0-37.
 - CPU: 4 logical CPUs.
 - Memory: 7.7 GiB; 2 GiB swap nearly full at check time.
-- Root disk: 117 GB, 41% used.
-- Primary development repository: `/home/teja/projects/Bloxodes`. The user works directly on `teja-homelab` as the ongoing primary project host, confirmed September 7, 2026. New T3 tasks use their assigned worktrees; this main checkout stays on `production`.
+- Storage: `/dev/sda3` is the 117 GB SSD mounted at `/`; `/dev/sdb1` is the 916 GB HDD mounted at `/srv/data`. Keep Bloxodes development files and new T3 worktrees on the HDD. Historical memory and runtime observations below retain their original dates.
+- Primary development repository: `/srv/data/projects/Bloxodes`, with `/home/teja/projects/Bloxodes` as a compatibility link. The user works directly on `teja-homelab` as the ongoing primary project host, confirmed September 7, 2026. New T3 tasks use their assigned worktrees; this main checkout stays on `production`.
 
 ## Tailscale and managed-development preview
 
