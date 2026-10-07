@@ -14,6 +14,8 @@ The page templates and routes are unchanged by this release. Queued articles and
 
 Prepublication checklist QA remains a CI gap. The PR content-batch job only dry-runs inputs; it does not apply a new final, run `verify:engagement-finals`, or render the selected checklist. Production publication screenshots do not prove development QA. A managed-development job must consume the reviewed final and capture the exact board on desktop/mobile before production dispatch. The existing verifier only checks page identity/public status and item count, so the job or verifier must also compare every normalized saved item with the reviewed final and protect QA from concurrent writers for the same checklist. Until that job and stronger comparison exist and pass, checklist workflows return authored files with the QA blocker. Local execution remains disallowed. See the evidence boundary in `../operations/deployment.md#managed-development-content-qa-gap`.
 
+This gate also applies to shared non-Roblox checklists. Their publisher's row-ID readback and PR dry-run do not establish exact contents or board behavior. The shared reference-page skill must return authored inputs with the blocker until matching development readback and browser artifacts exist; the Roblox engagement verifier cannot validate shared tables.
+
 ## Shared non-Roblox storage
 
 Last verified: 2026-10-06
@@ -63,7 +65,7 @@ Evidence: user-confirmed editorial convention, checklist planning/research/writi
 
 Normally create standalone checklists only for source-verified 100% completion of a named game and supported edition or mode. Verify the full required activity set, thresholds, exclusions and alternative paths before proposing or writing the page. When sources do not establish that scope, defer it. Beginner milestones, preparation lists and repeatable routines need an explicit user exception recorded in the plan and brief.
 
-Each detail page contains one checklist board. Group its requirements into sections within that board; do not combine independent checklists for different games or completion scopes on one page. Section directories list pages, not additional boards. Check existing coverage before proposing another page for the same scope.
+Normally keep at most one standalone checklist page per game, with one board and sections for its completion requirements. Check published pages and drafts for the whole game and reuse its existing checklist. Do not create additional pages by edition, mode, milestone or activity unless the user explicitly requests an exception. State the supported edition or mode in that game's checklist and defer incompatible scopes the board cannot represent. Section directories list pages, not additional boards.
 
 The board's percentage counts checked tasks. It does not reproduce a game's weighted completion meter unless that relationship is verified. The current template counts every three-level leaf and does not use `is_required` to exclude optional tasks from progress.
 

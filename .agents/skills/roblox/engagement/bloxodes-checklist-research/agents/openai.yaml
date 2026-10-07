@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Checklist Research"
   short_description: "Research one 100% completion checklist"
-  default_prompt: "Use $bloxodes-checklist-research to verify one approved game's full 100% completion scope, sources, alternatives and sections within one board in brief.md. Record explicit user exceptions and unresolved gaps, then stop."
+  default_prompt: "Use $bloxodes-checklist-research to verify one approved game's full 100% completion scope, sources, alternatives and sections in brief.md. Normally keep one standalone checklist per game and reuse existing coverage. Record explicit user exceptions and unresolved gaps, then stop."

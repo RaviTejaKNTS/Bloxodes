@@ -7,7 +7,7 @@ description: Run one approved Bloxodes 100% completion checklist page with paren
 
 Use one subagent for one checklist. The same subagent researches the player route, waits for parent approval, then writes `final.json`.
 
-Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Normally require verified 100% completion for the exact game and edition or mode, with one board per detail page. Record explicit user exceptions for narrower checklists. Defer when full completion requirements cannot be verified. Collectible collection trackers remain separate.
+Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Normally maintain one standalone verified 100% completion checklist page per game, with the supported edition or mode stated and sections inside one board. Check published pages and drafts and reuse the game's existing checklist. Record explicit user exceptions for additional pages or narrower checklists. Defer when full completion requirements cannot be verified. Collectible collection trackers remain separate.
 
 ## Subagent Handoff
 
@@ -56,6 +56,7 @@ A managed-development job with the input, target, exact-row comparison and brows
 
 - production overlap is checked
 - checklist covers source-verified 100% completion, or records an explicit user exception
+- the game has one standalone checklist page, or an explicit user exception authorizes additional pages
 - one board contains the full required set, with interchangeable alternatives represented as one explicit `A or B` leaf
 - parent rows and leaf tasks have consistent section codes
 - task titles are concrete actions

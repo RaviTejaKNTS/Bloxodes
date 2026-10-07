@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Checklist Writing"
   short_description: "Write one 100% completion checklist"
-  default_prompt: "Use $bloxodes-checklist-writing to write one board from an approved 100% completion brief, or its explicit user exception. Cover verified required tasks with consistent section codes in final.json. Represent interchangeable paths as one explicit A or B leaf; defer unsupported alternative groups."
+  default_prompt: "Use $bloxodes-checklist-writing to write the game's single standalone checklist from an approved 100% completion brief, or its explicit user exception. Reuse existing coverage. Cover verified required tasks with consistent section codes in final.json. Represent interchangeable paths as one explicit A or B leaf; defer unsupported alternative groups."

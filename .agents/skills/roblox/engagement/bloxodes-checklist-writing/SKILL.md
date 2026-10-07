@@ -38,7 +38,7 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 ## Writing Rules
 
 - Tasks should be actions a player can mark complete.
-- Write one checklist board per detail page. Sections divide its verified completion requirements, not independent checklists.
+- Normally write one standalone checklist page per game and reuse its existing checklist. Additional pages need an explicit user exception. Sections divide the single board's verified completion requirements.
 - Cover the full required set. Encode interchangeable paths as one required leaf with an explicit `A or B` title; describe each verified option and when either complete path satisfies that task. Do not split mutually exclusive choices into separate leaves.
 - Every three-level leaf counts toward board progress, even with `is_required: false`. Put optional tips in descriptions rather than checkable rows. Defer branching requirements that cannot fit an accurate single leaf until reviewed alternative-group support exists.
 - Do not write around unresolved completion requirements or relabel an achievement roster as in-game 100%.

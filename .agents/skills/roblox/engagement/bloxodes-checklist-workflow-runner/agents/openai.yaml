@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Checklist Runner"
   short_description: "Run 100% checklist research, writing and QA"
-  default_prompt: "Use $bloxodes-checklist-workflow-runner for one approved 100% completion board or explicit user exception. Have one subagent research with $bloxodes-checklist-research, wait for parent approval, then write with $bloxodes-checklist-writing. Do not let it spawn other agents. Require GitHub managed-development exact-row comparison and browser evidence for the reviewed final, or return the explicit QA blocker before production publication."
+  default_prompt: "Use $bloxodes-checklist-workflow-runner for the game's single standalone 100% completion checklist or explicit user exception. Reuse existing coverage. Have one subagent research with $bloxodes-checklist-research, wait for parent approval, then write with $bloxodes-checklist-writing. Do not let it spawn other agents. Require GitHub managed-development exact-row comparison and browser evidence for the reviewed final, or return the explicit QA blocker before production publication."

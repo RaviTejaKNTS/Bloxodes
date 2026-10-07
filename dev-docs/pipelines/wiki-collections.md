@@ -43,7 +43,7 @@ Signed-in collection progress keeps historical completed IDs when a later revisi
 
 Skills now live under `.agents/skills/roblox`, `games` and `shared`. Stable flat symlink entry points keep the existing automation paths working. General non-Roblox wiki and collection skills live in `games/wiki-and-collections`; GTA source rules remain in its `gta` subfolder. Shared codes and tools have their own focused instructions.
 
-Standalone checklist planning follows the [100% completion convention](content.md#standalone-checklist-scope), with one checklist board per detail page. Collectible collections keep their roster-specific progress and do not imply in-game 100% completion.
+Standalone checklist planning follows the [100% completion convention](content.md#standalone-checklist-scope), normally with one standalone checklist page per game and sections inside its single board. Additional checklist pages require an explicit user exception. Collectible collections keep their roster-specific progress and do not imply in-game 100% completion.
 
 ## Scope
 
