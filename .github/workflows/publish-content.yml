@@ -69,7 +69,7 @@ jobs:
         with:
           node-version: '24'
           cache: npm
-      - run: npm ci --no-audit --no-fund
+      - run: npm ci --include=dev --no-audit --no-fund
       - run: node --test scripts/ci/__tests__/*.test.mjs
       - run: npx playwright install --with-deps chromium
       - name: Require production migrations before loading the batch or writing content
