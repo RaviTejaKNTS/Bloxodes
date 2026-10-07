@@ -9,11 +9,15 @@ import { batchPath, ownedPath, parseBatch } from "./content-contract.mjs";
 import { assertProductionPublication } from "./publication-guard";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { resolveArticleDevCredentials } from "../articles/article-queue-env";
+import { stageChecklist, verifyChecklists } from "./managed-checklists";
+import { ensureArticleGameIdentity } from "../articles/article-game-identity";
+import { contentDigest } from "./managed-content-receipt.mjs";
 
 const args = process.argv.slice(2);
 const file = batchPath(args[args.indexOf("--batch") + 1]);
 const apply = args.includes("--apply");
 const managed = args.includes("--managed");
+const stage = args.includes("--stage");
 const root = process.cwd();
 const base = path.dirname(file);
 const batch = parseBatch(JSON.parse(fs.readFileSync(file, "utf8")));
@@ -34,19 +38,23 @@ function inspect(directory: string) {
 }
 inspect(base);
 if (managed) {
-  if (process.env.SUPABASE_URL !== "https://bbtcaurrtyoukvjbxbbj.supabase.co" || apply) throw new Error("Managed-development batch verification is rollback/dry-run only.");
+  if (process.env.SUPABASE_URL !== "https://bbtcaurrtyoukvjbxbbj.supabase.co" || apply) throw new Error("Managed QA requires the intended development target and cannot apply a production release.");
+  if (stage && (process.env.GITHUB_ACTIONS !== "true" || process.env.BLOXODES_MANAGED_QA !== "true")) throw new Error("Managed staging runs only in the selected GitHub QA job.");
 } else if (apply) {
   assertProductionPublication();
   if (!batch.operations.length) throw new Error("A verification-only batch cannot publish content.");
+  const receipt=JSON.parse(fs.readFileSync(process.env.BLOXODES_MANAGED_RECEIPT!,"utf8"));
+  if(receipt.status!=="passed" || receipt.sha!==process.env.BLOXODES_APPROVED_SHA || receipt.runId!==process.env.GITHUB_RUN_ID || receipt.digest!==contentDigest(base)) throw new Error("The exact selected inputs have no successful development QA receipt.");
 }
-const inputPath = (input: string) => ownedPath(base, input);
+let executionBase=base;
+const inputPath = (input: string) => ownedPath(executionBase, input);
 function command(operation: any, write: boolean): string[] {
   const file = operation.file ? inputPath(operation.file) : "";
   const prod = write && !managed ? ["--allow-prod"] : [];
   switch (operation.publisher) {
     case "events-final": return ["ci:events:publish", "--file", file, ...(write ? ["--apply"] : [])];
     case "roblox-codes-page": return ["upsert:code-page", "--file", file, ...(write ? [] : ["--dry-run"])];
-    case "article-queue": return ["articles:release", "--queue-id", operation.queueId, ...(write ? ["--apply", "--allow-prod"] : [])];
+    case "article-queue": return managed ? ["import:content-final", "--file", file, ...(write ? [] : ["--dry-run"])] : ["articles:release", "--queue-id", operation.queueId, ...(write ? ["--apply", "--allow-prod"] : [])];
     case "game-pages": return ["publish:game-pages", "--namespace", operation.namespace, "--file", file, ...(write ? ["--apply", ...prod] : [])];
     case "content-final": return ["import:content-final", "--file", file, ...(write ? prod : ["--dry-run", ...(!managed ? ["--allow-prod"] : [])])];
     case "roblox-wiki": return ["sync:game-wiki-runtime", "--final-json", file, ...(write ? ["--apply", ...prod] : [])];
@@ -59,7 +67,7 @@ function command(operation: any, write: boolean): string[] {
     default: throw new Error("Unsupported publisher.");
   }
 }
-function run(operation: any, write: boolean) {
+async function run(operation: any, write: boolean) {
   if (operation.publisher === "roblox-codes-page" && !write) {
     const payload = JSON.parse(fs.readFileSync(inputPath(operation.file), "utf8"));
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(payload.slug ?? "")) throw new Error("Codes setup requires an exact reviewed editorial slug.");
@@ -68,7 +76,19 @@ function run(operation: any, write: boolean) {
     execFileSync(process.execPath, ["--import", "tsx", "scripts/ci/verify-article-bundle.ts", operation.queueId, operation.file, file], { env: process.env, stdio: "inherit" });
     return;
   }
-  const [script, ...options] = command(operation, write);
+  let selected=operation;
+  let stagedFile: string | null=null;
+  if(managed && write && operation.file) {
+    if(operation.publisher==='article-queue') {
+      const final=inputPath(operation.file);
+      await ensureArticleGameIdentity(JSON.parse(fs.readFileSync(final,'utf8')).universe_id,process.env);
+      execFileSync('npm',['run','content:check-copy','--',final],{env:process.env,stdio:'inherit'});
+      execFileSync('npm',['run','check:article-image-readiness','--','--manifest',path.join(path.dirname(final),'media.json'),'--file',final],{env:process.env,stdio:'inherit'});
+    }
+    stagedFile=await stageChecklist(operation,inputPath(operation.file));
+  }
+  const [script, ...options] = command(selected, write);
+  if(stagedFile) options[options.indexOf('--file')+1]=stagedFile;
   execFileSync("npm", ["run", script!, "--", ...options], { cwd: root, env: { ...process.env, BLOXODES_DEFER_ARTICLE_ACK: "true" }, stdio: "inherit" });
   if (write && operation.publisher === "roblox-codes-page") {
     const payload = JSON.parse(fs.readFileSync(inputPath(operation.file), "utf8"));
@@ -83,10 +103,23 @@ async function main() {
     wikiRequestValidated = Boolean(batch.wikiReceipt);
   }
   // Prove every selected publisher before the first production write.
-  for (const operation of batch.operations) run(operation, false);
-  if (managed) return;
+  for (const operation of batch.operations) await run(operation, false);
+  if (managed) {
+    if(stage) {
+      executionBase=path.join(process.env.RUNNER_TEMP!,'managed-selected-inputs');
+      fs.cpSync(base,executionBase,{recursive:true});
+      process.env.BLOXODES_ARTIFACT_ROOT=executionBase;
+      for(const operation of batch.operations) await run(operation,true);
+      await verifyChecklists();
+      const entries=fs.existsSync(path.join(process.env.RUNNER_TEMP!,'managed-checklists.json')) ? JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP!,'managed-checklists.json'),'utf8')) : [];
+      const urls=batch.urls.map((url:any)=>({...url,path:entries.find((entry:any)=>entry.originalPath===url.path)?.path??url.path}));
+      for(const entry of entries) if(!batch.urls.some((url:any)=>url.path===entry.originalPath)) throw new Error('Every checklist requires its selected canonical URL.');
+      fs.writeFileSync(path.join(process.env.RUNNER_TEMP!,'managed-smoke.json'),JSON.stringify({...batch,urls}));
+    }
+    return;
+  }
   if (apply) {
-    for (const operation of batch.operations) run(operation, true);
+    for (const operation of batch.operations) await run(operation, true);
     await revalidatePublishedContent(process.env, batch.events);
   }
   for (const url of batch.urls) {

@@ -2,7 +2,7 @@
 
 Release handoff (September 7, 2026): the exact-ID publisher accepts completed `tmp/article-pipeline/<run>/content/final.json` artifacts as well as legacy content workspaces. Pipeline publication checks the queue identity, completed editorial decision, artifact hashes, and final technical stage results. Promotion rewrites isolated release copies, preserving approved originals and their hashes; published-row verification maps approved managed-development URLs to their production equivalents. A focused release regression checks valid, blocked, changed, incomplete, and escaped artifact paths.
 
-Status: Code-controlled article stages with Luna authoring/review, managed-development technical QA, and guarded exact-row automatic production release
+Status: Code-controlled authoring/review with GitHub technical QA and exact-row publication
 Last verified: 2026-10-02
 Evidence: September 6 code/skill implementation, process/queue/recovery tests, TypeScript checks, host env:doctor and writer readiness, plus a live owned-preview start/HTTP/stop test. The first live Luna max canary hit an account usage limit during images. A later manual Fisch appraisal run completed all stages after an internal-link correction and a technical import-environment fix; it remained managed-development only. The scheduled service entrypoint was inspected read-only and an older in-flight batch was left running. Earlier production-health evidence below retains its original date; no production publication is part of this implementation test.
 
@@ -12,7 +12,9 @@ New source hooks freeze only an explicitly authorized, completed article run and
 
 Before any writes, CI binds each article queue ID to its stored `result_path`, approved real file, slug and bytes. It verifies pipeline approval hashes and requires that article's canonical URL and cache event in the batch. Duplicate queue IDs and mismatched finals fail before publication. Queue acknowledgement uses only that selected, verified article.
 
-Manual agent QA runs in GitHub with browser artifacts. Do not start task-local builds or previews. Installed detached runtimes still use their previous release until separately activated; no service, env or job change belongs to this migration. See `../operations/deployment.md` for PR flow and credentials.
+With `BLOXODES_CI_QA=1`, installed workers skip local preview, copy/image validators, import verification and browser verification. Those stages record `delegatedToCi`, which means authoring is ready and technical QA is pending. GitHub checks copy and image readiness, stages the exact final in development, and verifies loaded body images and expected video embeds on desktop/mobile. Production requires the matching managed QA receipt. Old completed artifacts remain accepted through their existing approval proofs. Do not start task-local builds or previews.
+
+The outbox records its frozen bundle hash before dispatch. It reads the matching GitHub run before considering another attempt. Queued/running runs remain pending, failed runs back off within the existing six-attempt budget, and unknown dispatch outcomes require inspection. A successful run still needs the exact published queue acknowledgement. Research/editorial retry budgets are unchanged. See `../operations/deployment.md` for PR flow and credentials.
 
 ## Editorial ownership
 
@@ -159,7 +161,7 @@ Activation verified September 7: runtime `cfadab0db53575c235535234185cea5120b56e
 
 ## Shared scheduled checkout
 
-Article and wiki/collection services now select the same versioned `bloxodes-automation-runtime/current` checkout, independent of the development branch. Artifact state survives release changes and legacy absolute paths remain aliases. Standard `.next` output and the shared lease keep this source checkout clean; scheduled wiki concurrency is one. Use `automation:runtime:prepare` followed by the unified `install-homelab-automation.sh` installer while jobs are idle. See [the homelab runtime contract](../infrastructure/homelab.md#shared-automation-runtime-september-14-2026) for permissions, schedules, migration and rollback. Existing content quality and publication gates are unchanged.
+Article and wiki/collection services now select the same versioned `bloxodes-automation-runtime/current` checkout, independent of the development branch. Artifact state survives release changes and legacy absolute paths remain aliases. Standard `.next` output and the shared lease keep this source checkout clean; scheduled wiki concurrency is one. Use `automation:runtime:prepare` followed by the unified `install-homelab-automation.sh` installer while jobs are idle. See [the homelab runtime contract](../infrastructure/homelab.md#github-qa-runtime-activation) for permissions, schedules, migration and rollback. Existing content quality and publication gates are unchanged.
 
 ### Cover and image-stage recovery (October 1, 2026)
 

@@ -435,6 +435,8 @@ export async function resolveReleaseArtifactPath(filePath: string, queueId: stri
     if (state.history.filter(entry => entry.stage === stage).pop()?.decision.status !== "completed") {
       throw new Error(`Pipeline article is missing ${stage} verification.`);
     }
+    // Delegated technical stages prove authoring readiness only. The production
+    // content job requires its exact successful managed-development QA receipt.
   }
   return actual;
 }

@@ -437,7 +437,7 @@ async function main() {
       if (!Number.isFinite(stageMinutes) || stageMinutes < 1 || stageMinutes > 120) throw new Error("Stage timeout must be 1-120 minutes.");
       const env = managedArticleEnvironment(dev);
       try {
-        await withArticlePreview(options.worktree, env, process.env.ARTICLE_PIPELINE_PREVIEW_BASE_URL, async baseUrl => {
+        const processSelected = async (baseUrl: string) => {
           for (const id of selectedIds) {
             if (controller.signal.aborted || Date.now() >= deadline) break;
             try {
@@ -456,7 +456,9 @@ async function main() {
               }
             } catch (error) { providerError = error; console.error(errorMessage(error)); }
           }
-        });
+        };
+        if(process.env.BLOXODES_CI_QA==='1') await processSelected('https://bloxodes.com');
+        else await withArticlePreview(options.worktree,env,process.env.ARTICLE_PIPELINE_PREVIEW_BASE_URL,processSelected);
         if (controller.signal.aborted) providerError = new Error("Article batch stopped by external request; saved stages retained.");
       } finally { process.off("SIGTERM", stop); process.off("SIGINT", stop); }
       const completedRows = await completedQueueRowsSince(dev, batchStartedAt, verifiedIds);

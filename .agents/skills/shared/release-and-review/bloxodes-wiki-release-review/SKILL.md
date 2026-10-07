@@ -15,7 +15,7 @@ Release required renderer/config changes through the task's PR targeting `produc
 
 Prepare an exact content batch using `roblox-wiki` and `roblox-collection`, or the matching non-Roblox publishers. Put the reviewed hub before its collections. Use immutable private bundles for datasets/media rather than committing ignored workspaces or binary collections merely for deployment. `dispatchContentBundle` owns the private upload and hash-bound dispatch. Wiki automation uses `dispatchWiki` and its exact queue request.
 
-GitHub runs the existing publishers' dry-runs, writes only the selected hubs/datasets/media, verifies database pointers and counts, revalidates the selected URLs and checks public readback. Runtime pages keep reading Supabase revisions and hosted media. A dispatch is not completion.
+GitHub first stages the exact frozen inputs in managed development and records browser QA. Production requires the matching successful receipt, runs the existing publishers' dry-runs, and writes only the selected hubs/datasets/media, verifies database pointers and counts, revalidates the selected URLs and checks public readback. Runtime pages keep reading Supabase revisions and hosted media. A dispatch is not completion.
 
 Preserve failed batches for a guarded retry. Do not mark a wiki request published before CI writes its verified receipt. Do not change installed services, env files or detached runtimes during this release.
 

@@ -14,6 +14,7 @@ export type Decision = {
   repair_stage: WorkStage | null;
   accepted_missing: string[];
   localizedCorrectionApplied?: boolean;
+  delegatedToCi?: boolean;
 };
 export type ArticleJob = {
   id: string;

@@ -15,20 +15,14 @@ Use one explicit `A or B` leaf for interchangeable paths, with verified criteria
 
 Read [payloads](references/payloads.md) for the page type being created. Write a reviewed JSON payload with the matching groups. Store content and data together; do not use workspace files at runtime. Keep stable IDs on updates. Do not overwrite another game's rows or move page ownership during ordinary edits.
 
-## Checklist QA gate
+## GitHub verification and publication
 
-The publication and preview instructions below require managed-development GitHub evidence for the exact reviewed checklist payload. PR CI currently only dry-runs `game-pages`. The publisher's row-ID readback does not compare checklist contents or provide checklist-specific browser artifacts. No current job completes this prepublication QA.
+Prepare the exact reviewed payload in a committed selected batch or immutable private bundle. Dispatch `Managed content QA` on GitHub with its reviewed production source SHA. Development validation, application, build and browser checks run there. Do not start local previews or run checks locally.
 
-Until a matching job exists and passes, return the reviewed payload and this QA blocker. Do not report verification as passed or dispatch production publication. Do not apply content or run previews/checks locally to bypass the gap.
+Checklist updates must include the page's stable UUID and its complete retained task inventory. Preserve existing task UUIDs and keys. The publisher checks the actual target before writing. QA stages a unique temporary board, compares every reviewed page/task field and publisher default, and tests desktop/mobile ticks, reload, unticking and account saving. A successful hash-bound receipt is required before production publication. See `dev-docs/operations/deployment.md#managed-development-content-qa`.
 
-The required job must consume the exact reviewed inputs, apply only their authorized development changes, and compare the complete expected saved page/task data against the normalized payload and any reviewed retained tasks. It must protect the same game/namespace/slug from concurrent writes through desktop/mobile checks of ticks, reload and account saving, then repeat readback and bind the payload hash to its artifacts. Use shared `game_checklist_pages` and `game_checklist_items`; the Roblox `verify:engagement-finals` command does not validate these tables. See `dev-docs/operations/deployment.md#managed-development-content-qa-gap`.
-
-## Publication and preview
-
-Use `npm run publish:game-pages -- --namespace <slug> --file <reviewed.json>` for full database validation and rollback. Add `--apply` for authorized managed-development publication. The batch either commits every group or rolls every group back. Checklist page rows precede their task rows within that transaction. An update retains tasks omitted from the batch; removing tasks requires an explicit reviewed cleanup.
-
-Start a managed-development preview. Verify the exact page, its section directory, metadata, JSON-LD, sitemap, search, feed and cache refresh. Check map search, category selection, pins and zoom; quiz answers, result and saved history; checklist ticks, reload and account saving; catalog columns, row data and mobile overflow. Check hidden games, unpublished pages and cross-game progress rejection.
+Review GitHub screenshots and reports for the exact page, metadata and layout. Request page-specific GitHub checks for map controls, quiz behavior or custom catalog logic as needed. Production publication stays separate and requires explicit authorization through the selected-content workflow. It applies only the selected rows and never copies user progress.
 
 Use `GameContentPage` for a plain title, intro, body, description and sources. `GameCatalog` is the default table body; a special catalog requires a code change to supply its own React body and bind it to its route. Never put executable code in database rows. `GameMap` provides image pins. `GameQuizPage` uses the existing quiz player. Shared checklists use the existing neutral checklist template and progress API.
 
-Return the exact preview URLs and verification result. Keep work in development unless production publication was explicitly authorized. Do not use Roblox universe IDs for any of these rows.
+Return the exact page paths and GitHub verification/artifact links. Keep work in development unless production publication was explicitly authorized. Do not use Roblox universe IDs for any of these rows.

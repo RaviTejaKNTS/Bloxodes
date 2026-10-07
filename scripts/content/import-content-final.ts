@@ -4,6 +4,8 @@ import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import {retainChecklistIds} from '../ci/checklist-proof.mjs';
+import {randomUUID} from 'node:crypto';
 
 import { parseQuizData } from "@/lib/quiz-types";
 import { supabaseAdmin } from "@/lib/supabase-admin";
@@ -566,19 +568,21 @@ async function importChecklist(rawFinalJson: ChecklistFinal | LegacyChecklistFin
   const { data: savedPage, error: pageError } = await pageQuery.select("id").single<{ id: string }>();
   if (pageError || !savedPage) throw new Error(`Failed to save checklist ${slug}: ${pageError?.message ?? "no row returned"}`);
 
-  const { error: deleteError } = await sb.from("checklist_items").delete().eq("page_id", savedPage.id);
-  if (deleteError) throw new Error(`Failed to clear checklist items for ${slug}: ${deleteError.message}`);
-
-  if (finalJson.items.length) {
-    const rows = finalJson.items.map((item) => ({
-      page_id: savedPage.id,
-      section_code: item.section_code.trim(),
-      title: item.title.trim(),
-      description: item.description ?? null,
-      is_required: item.is_required ?? item.section_code.split(".").filter(Boolean).length === 3,
-    }));
-    const { error: insertError } = await sb.from("checklist_items").insert(rows);
+  const existingItems:any[]=[];
+  for(let start=0;;start+=500) {
+    const result=await sb.from('checklist_items').select('id,section_code,title').eq('page_id',savedPage.id).order('id').range(start,start+499);
+    if(result.error)throw result.error;existingItems.push(...result.data);if(result.data.length<500)break;
+  }
+  const rows=retainChecklistIds(finalJson.items,existingItems).map(item=>({...item,id:item.id??randomUUID(),page_id:savedPage.id}));
+  if(rows.length) {
+    const { error: insertError } = await sb.from("checklist_items").upsert(rows,{onConflict:'id'});
     if (insertError) throw new Error(`Failed to insert checklist items for ${slug}: ${insertError.message}`);
+  }
+  const retainedIds=new Set(rows.map(row=>row.id));
+  const removed=existingItems.filter(item=>!retainedIds.has(item.id));
+  for(let start=0;start<removed.length;start+=500) {
+    const result=await sb.from('checklist_items').delete().eq('page_id',savedPage.id).in('id',removed.slice(start,start+500).map(item=>item.id));
+    if(result.error)throw result.error;
   }
 
   console.log(existing ? `Updated checklist ${slug}` : `Created checklist ${slug}`);

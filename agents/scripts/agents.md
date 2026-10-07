@@ -342,3 +342,15 @@ Minecraft collection publication shares identical prepared image bytes through f
 ## GitHub release ownership
 
 `scripts/ci/` owns path classification, managed migration receipts and audited timestamp repair, selected content contracts, private frozen bundles and CI publication dispatch/readback. Wiki publication uses durable requests with bounded retries; queued releases do not hold builder leases. `.github/workflows/pull-request.yml`, `schema-release.yml` and `publish-content.yml` connect those helpers to protected production PRs. `scripts/dev/setup-worktree.sh` installs no dependencies; `cleanup-task-worktree.mjs` removes only an exact clean, merged, inactive task. Current operations belong to `dev-docs/operations/deployment.md`.
+
+## GitHub content QA and runtime packages
+
+- `scripts/ci/managed-checklists.ts` stages and compares isolated managed-development checklist boards, provisions runner-only QA sessions and cleans their rows.
+- `scripts/ci/checklist-proof.mjs` compares full normalized inventories and preserves unchanged Roblox task IDs.
+- `scripts/ci/managed-content-receipt.mjs` binds successful development QA to selected bytes, source SHA and run ID.
+- `scripts/ci/checklist-qa-fixture.ts` creates development-only fixtures for the manual GitHub self-test.
+- `scripts/ci/article-publication-state.mjs` distinguishes pending runs from failed releases without duplicate dispatches.
+- `scripts/ops/verify-runtime-package.mjs` reads back the SHA/lock/archive/platform receipt of GitHub-installed dependencies.
+- `scripts/ops/relocate-automation-state.py` moves idle persistent files to HDD through a verified copy and recoverable compatibility aliases.
+
+Canonical usage, ownership and side effects are in `dev-docs/operations/deployment.md` and `scripts/AGENTS.md`.

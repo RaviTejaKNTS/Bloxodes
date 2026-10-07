@@ -1,13 +1,13 @@
 ---
 name: bloxodes-wiki-workflow-runner
-description: Run one approved Bloxodes wiki hub with parent review. Use when the user asks to create or update a /wiki/<game-slug> page with subagent research, wiki writing, local verification, and Codex Browser preview.
+description: Run one approved Bloxodes wiki hub with parent review. Use when the user asks to create or update a /wiki/<game-slug> page with subagent research, wiki writing, GitHub verification and browser reports.
 ---
 
 # Bloxodes Wiki Workflow Runner
 
 Use one subagent for one wiki hub. The same subagent researches the game, waits for parent approval, then writes `final.json`.
 
-The parent owns judgment: approve the research, review the wiki copy, run local verification, and preview the route.
+The parent owns judgment: approve the research, review the wiki copy, review GitHub verification and rendered screenshots.
 
 ## Subagent Handoff
 
@@ -42,17 +42,9 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 4. Send feedback or approve the research.
 5. Ask the same subagent to use `/bloxodes-wiki-writing` and create `final.json`.
 6. Review `final.json`, simple language, controls, tips, metadata, and related-page assumptions.
-7. Start or reuse localhost with `npm run dev:managed`.
-8. Run:
-
-```bash
-npm run verify:wiki-final -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>
-```
-
-The verifier publishes and reads back the supplied task-local final in managed development. It does not require a hardcoded game registry entry and refuses any other database target or mismatched game identity.
-
-9. If the verifier passes, open the verified `/wiki/<game-slug>` link in the product-native collaborative Browser. First check `preview_status` and, when needed, `preview_open`. If those tools are absent or explicitly report unsupported/unavailable, use headless Chrome/Chromium through Playwright; `scripts/content/article-browser.ts` exports `launchArticleBrowser`. Check desktop/mobile rendering, headings, canonical/metadata, images and controls, and save screenshots plus DOM findings in the task workspace. Rendered QA remains required.
-10. Return paths, localhost link, blocked reason if any, and remaining risks.
+7. Keep the approved final and source proof in the ignored workspace. Prepare the exact selected `roblox-wiki` batch or immutable private bundle. Do not start a local preview or run checks locally.
+8. Use `Managed content QA` on GitHub to stage that exact hub in development, build its preview and capture desktop/mobile screenshots. Review headings, canonical/metadata, images and controls in the reports. A source review does not mean browser QA passed.
+9. Return paths and the successful GitHub run/artifact links, or the actual QA failure. Production needs explicit authorization and the selected-content workflow's matching development QA receipt. Installed builders may return authoring-ready artifacts and a durable publication request; GitHub then owns technical QA.
 
 ## Parent Checks
 
@@ -65,4 +57,4 @@ The verifier publishes and reads back the supplied task-local final in managed d
 - tips are concrete and useful
 - public copy does not mention workflow, sources, databases, or page usage
 - public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
-- verifier and Browser preview pass
+- GitHub publisher and rendered checks pass

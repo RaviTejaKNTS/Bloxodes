@@ -13,7 +13,7 @@ Present only the selected articles with their title, source evidence and review 
 
 After explicit approval, use `dispatchArticle(queueId, artifactRoot)` from `scripts/ci/dispatch-article.ts`. It freezes the unchanged selected run and sends it to `Publish selected content`. Use the existing article publisher in CI for media promotion, article/provenance readback, revalidation, exact public verification and queue acknowledgement. Do not run `articles:release --apply` locally.
 
-The queue stays `completed` while CI runs. It becomes `published` only after production verification. A failed or merely dispatched release must not be labelled published. The outbox preserves bounded attempts and reconciles exact queue acknowledgements.
+The queue stays `completed` while CI runs. It becomes `published` only after production verification. A failed or merely dispatched release must not be labelled published. The outbox records its frozen hash before dispatch, reconciles the exact GitHub run, leaves pending runs alone and preserves bounded attempts. GitHub first checks that exact final in development and requires its hash-bound QA receipt before production writes.
 
 For an explicit rejection, use the existing managed-development queue update command from an authorized GitHub job, with the exact queue ID and the user's reason. Leave other completed articles alone.
 
