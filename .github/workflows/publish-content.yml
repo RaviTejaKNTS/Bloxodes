@@ -114,6 +114,7 @@ jobs:
         if: always()
         with:
           name: selected-content-browser-${{ github.run_id }}
+          overwrite: true
           path: tmp/test-reports/
           retention-days: 1
           if-no-files-found: ignore

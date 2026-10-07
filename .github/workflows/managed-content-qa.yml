@@ -88,6 +88,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: managed-content-receipt-${{ github.run_id }}
+          overwrite: true
           path: ${{ runner.temp }}/managed-content-receipt.json
           retention-days: 1
       - name: Remove only this run's isolated checklist rows
@@ -97,6 +98,7 @@ jobs:
         if: always()
         with:
           name: managed-content-browser-${{ github.run_id }}
+          overwrite: true
           path: tmp/test-reports/
           retention-days: 1
           if-no-files-found: ignore
