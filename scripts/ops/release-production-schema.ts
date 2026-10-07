@@ -3,6 +3,8 @@ import "../shared/load-env";
 import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { migrationBody } from "../ci/migration-transaction.mjs";
+import { createHash } from "node:crypto";
 
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
 
@@ -19,18 +21,11 @@ type Migration = {
   sql: string;
 };
 
-function transactionBody(sql: string): string {
-  return sql
-    .trim()
-    .replace(/^begin;\s*/i, "")
-    .replace(/\s*commit;\s*$/i, "")
-    .trim();
-}
-
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const migrationRoot = path.join(repoRoot, "supabase/migrations");
 const argv = process.argv.slice(2);
 const apply = argv.includes("--apply");
+const checkLedger = argv.includes("--check-ledger");
 const transport = value("--transport") ?? "ssh";
 const databaseRole = value("--database-role") ?? "postgres";
 
@@ -64,7 +59,7 @@ function readMigrations(): Migration[] {
         version: match[1]!,
         name: match[2]!,
         file,
-        sql: transactionBody(fs.readFileSync(path.join(migrationRoot, file), "utf8"))
+        sql: fs.readFileSync(path.join(migrationRoot, file), "utf8")
       };
     });
 }
@@ -129,14 +124,15 @@ async function main() {
   if (apply && value("--confirm") !== "APPLY production") {
     throw new Error('Production apply requires --confirm "APPLY production".');
   }
-  if (apply && git("rev-parse", "origin/production") !== approvedSha) {
+  if (checkLedger && apply) throw new Error("--check-ledger cannot apply migrations.");
+  if ((apply || checkLedger) && git("rev-parse", "origin/production") !== approvedSha) {
     throw new Error("Production apply requires origin/production to equal the approved SHA.");
   }
 
   const productionUrl = required("SUPABASE_URL", process.env.SUPABASE_URL);
   if (!isProductionSupabaseUrl(productionUrl)) throw new Error("SUPABASE_URL is not the Bloxodes production host.");
-  const sshUser = required("VPS_ADMIN_USER", process.env.VPS_ADMIN_USER);
-  const sshHost = required("VPS_HOST", process.env.VPS_HOST);
+  const sshUser = transport === "ssh" ? required("VPS_ADMIN_USER", process.env.VPS_ADMIN_USER) : "unused";
+  const sshHost = transport === "ssh" ? required("VPS_HOST", process.env.VPS_HOST) : "unused";
   if (!/^[a-zA-Z0-9_.-]+$/.test(sshUser) || !/^[a-zA-Z0-9_.-]+$/.test(sshHost)) {
     throw new Error("The configured VPS SSH target is invalid.");
   }
@@ -174,17 +170,40 @@ async function main() {
     throw new Error(`Unexpected pre-convergence production migrations: ${unexpected.map((item) => item.file).join(", ")}`);
   }
 
+  if (checkLedger) {
+    if (historyRepairs.length || pending.length) throw new Error("Production schema is pending. Retry content publication after the production schema release succeeds.");
+    console.log(`Production migration ledger is ready at ${approvedSha}. No SQL changes were executed.`);
+    return;
+  }
+
+  if (process.env.GITHUB_ACTIONS === "true") {
+    const receiptPath = required("--managed-receipt", value("--managed-receipt"));
+    const receipt = JSON.parse(fs.readFileSync(receiptPath, "utf8"));
+    if (receipt.sha !== approvedSha || receipt.project !== "bbtcaurrtyoukvjbxbbj" || receipt.applied !== true || !Array.isArray(receipt.migrations)) {
+      throw new Error("A matching managed-development application receipt is required.");
+    }
+    for (const migration of pending) {
+      const hash = createHash("sha256").update(fs.readFileSync(path.join(migrationRoot, migration.file))).digest("hex");
+      if (!receipt.migrations.some((entry: { version: string; hash: string }) => entry.version === migration.version && entry.hash === hash)) {
+        throw new Error(`${migration.file} has no matching managed-development proof.`);
+      }
+    }
+  }
+
   const proofSql = fs.readFileSync(
     path.join(repoRoot, "scripts/ops/sql/verify-production-history-repair.sql"),
     "utf8"
   );
   const transaction = [
-    proofSql,
     "begin;",
+    "select pg_advisory_xact_lock(746213809);",
+    "set local lock_timeout = '15s';",
+    "set local statement_timeout = '180s';",
+    proofSql,
     ...historyRepairs.map(ledgerInsert),
     ...pending.flatMap((migration) => [
       `-- ${migration.file}`,
-      migration.sql,
+      migrationBody(migration.sql),
       "set constraints all immediate;",
       ledgerInsert(migration)
     ]),
@@ -194,6 +213,7 @@ async function main() {
   console.log(`Production history repairs: ${historyRepairs.map((item) => item.version).join(", ") || "none"}`);
   console.log(`Production schema migrations: ${pending.map((item) => item.version).join(", ") || "none"}`);
   if (!historyRepairs.length && !pending.length) {
+    runRemoteSql(target, proofSql);
     console.log("Production schema is already converged.");
     return;
   }

@@ -4,6 +4,12 @@ Status: Active
 Last verified: 2026-10-02
 Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on both the workstation and homelab on 2026-08-19
 
+## GitHub CI ownership
+
+Task setup links existing ignored env storage and creates scratch directories. It performs no install/build/check. GitHub checks use process-only injected managed-development credentials and `env:doctor -- --ci`; they do not need workstation `.envs` files. `env/examples/ci.env.example` documents CI-only names.
+
+Managed SQL uses a project-targeted Supabase access token rather than a database password or copied OAuth session. Production migrations use separate HTTPS Studio credentials inside the production GitHub environment. Collection CI needs the four existing `WIKI_R2_*` values. Preserve installed env files and services. See `operations/deployment.md` for rollout and credential verification status.
+
 ## Storage Model
 
 ```text

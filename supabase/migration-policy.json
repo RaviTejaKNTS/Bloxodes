@@ -34,5 +34,118 @@
     "20260920000010",
     "20260920000011"
   ],
-  "notes": "Managed development and production were converged through 20260920000013 on 2026-08-14. Production history-only repairs, genuinely applied pre-convergence versions, and the pending pre-convergence wiki queue, GTA checklist, and Roblox emote command migrations are recorded above. Managed development records both wiki queue versions exactly, including 20260829154018 verified through the live connector ledger on 2026-08-29, and the GTA checklist migrations were applied and verified on 2026-09-03. The follow-up GTA policy-consolidation migration and the Roblox collection page-type migration were applied and verified in managed development on 2026-09-03. Both environments must contain every migration at or after convergence_version; the listed pre-convergence versions remain expected production work until their controlled release."
+  "notes": "Managed development and production were converged through 20260920000013 on 2026-08-14. Production history-only repairs, genuinely applied pre-convergence versions, and the pending pre-convergence wiki queue, GTA checklist, and Roblox emote command migrations are recorded above. Managed development records both wiki queue versions exactly, including 20260829154018 verified through the live connector ledger on 2026-08-29, and the GTA checklist migrations were applied and verified on 2026-09-03. The follow-up GTA policy-consolidation migration and the Roblox collection page-type migration were applied and verified in managed development on 2026-09-03. Both environments must contain every migration at or after convergence_version; the listed pre-convergence versions remain expected production work until their controlled release. The October 7 audited managed-development aliases preserve the original connector records and SQL evidence. CI adds canonical history records only after exact source/local hash and current-object proof. No retired migration SQL is replayed.",
+  "managed_dev_history_aliases": [
+    {
+      "version": "20260920000014",
+      "source_version": "20260815055922",
+      "source_sha256": "dfa8faa66cee92fe96f6629a0e83e2d2610f5c5685ef9c8bf9a620224341fad2",
+      "local_sha256": "ece692202c8c91d1098d491b19dafb68ecca7fe388a1d574eea8a2646e600a22",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000015",
+      "source_version": "20260827101110",
+      "source_sha256": "a3bcd16cacef823bfb02cf4f1a533f3112a35e4ce7b20bf7959adcd1ffcf3f3b",
+      "local_sha256": "462335dc816bfede93bdc39f47f3802964caa4a5cd25a695560337c28015ac4c",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000016",
+      "source_version": "20260829070039",
+      "source_sha256": "8ecd273c511a3ce6259cc833be7c73a2d5e2c701fb9beb20a448fb9ca9a82711",
+      "local_sha256": "78263855c627b35d7b44fcf6cd136e8e05e2432d511a2d5a1fc13d5e104b02a0",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000017",
+      "source_version": "20260902115316",
+      "source_sha256": "45418e159e446302a8580d5feb7e8af02cffea22462a56724eb00cc74b6848a4",
+      "local_sha256": "b72074f6cf3ef8c54b015158cf00d8e6a2c89eff042269e16a93779224d93693",
+      "reason": "Connector SQL retained the original GTA tools branches. Verified source migration 20260902122707 removed them; recorded migration 20261006074815 retired the legacy GTA tables and functions. Current shared objects and absent legacy tables were read back on 2026-10-07."
+    },
+    {
+      "version": "20260920000018",
+      "source_version": "20260902115428",
+      "source_sha256": "9e12a6f6a564c5a1bcb8928b1ca3bbbea5c17ff56c41cf77e7fec4fa6451e95e",
+      "local_sha256": "9e12a6f6a564c5a1bcb8928b1ca3bbbea5c17ff56c41cf77e7fec4fa6451e95e",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000019",
+      "source_version": "20260902115752",
+      "source_sha256": "113fe8bfad17634e9b15345c37d70dcf257f92534bc837f5e645064b921d9992",
+      "local_sha256": "a6f00ef4bab6d28d42b9eab189d1698e15e2d27cafde123a64dd18d8c981d9c5",
+      "reason": "Connector SQL retained the original GTA tools branches. Verified source migration 20260902122707 removed them; recorded migration 20261006074815 retired the legacy GTA tables and functions. Current shared objects and absent legacy tables were read back on 2026-10-07."
+    },
+    {
+      "version": "20260920000020",
+      "source_version": "20260902121113",
+      "source_sha256": "f08d0e51110a1763044c434d7f8d5a4d57b276696d2f118362d36e503f3f983f",
+      "local_sha256": "56ab3ac9e3ffb604452d4cd31e371963654e2a7ad37b691b4b918b198a714df5",
+      "reason": "Connector SQL retained the original GTA tools branches. Verified source migration 20260902122707 removed them; recorded migration 20261006074815 retired the legacy GTA tables and functions. Current shared objects and absent legacy tables were read back on 2026-10-07."
+    },
+    {
+      "version": "20260920000021",
+      "source_version": "20260902122707",
+      "source_sha256": "aa6382985142b2b0bd522aafe28af05b20accdcbcb6a0c7570e4756150468d9b",
+      "local_sha256": "aa6382985142b2b0bd522aafe28af05b20accdcbcb6a0c7570e4756150468d9b",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000022",
+      "source_version": "20260903120749",
+      "source_sha256": "0e2e282481c435bff424da1af607c09c30a3270bb6c6ebdc149b3060341b3831",
+      "local_sha256": "a9868d8a04a282a54633a27b5843ab901ab88d9370672a42c26530d9897f6707",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000023",
+      "source_version": "20260904112518",
+      "source_sha256": "ce161027bdd3e5e329e0d2818d508f531d8be9ada50cb681de0135f33cee3ce1",
+      "local_sha256": "ce161027bdd3e5e329e0d2818d508f531d8be9ada50cb681de0135f33cee3ce1",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000030",
+      "source_version": "20260910074418",
+      "source_sha256": "23f7acd5d9a0a823d293f5635ebde6f041c1321cbe84774721b41b6c6bc607f1",
+      "local_sha256": "23f7acd5d9a0a823d293f5635ebde6f041c1321cbe84774721b41b6c6bc607f1",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000031",
+      "source_version": "20260910075012",
+      "source_sha256": "0b97dbc138b4a2635df465dcb4b3dbf3e9478c5339f5dd04a9dc1307369afa38",
+      "local_sha256": "0b97dbc138b4a2635df465dcb4b3dbf3e9478c5339f5dd04a9dc1307369afa38",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    },
+    {
+      "version": "20260920000032",
+      "source_version": "20260914063111",
+      "source_sha256": "8fcb06203a6012c0722022124fb16fc3771efd7d2618b7eb7389d6aff2878c35",
+      "local_sha256": "8fcb06203a6012c0722022124fb16fc3771efd7d2618b7eb7389d6aff2878c35",
+      "reason": "Connector timestamp differs; stored SQL matches the committed migration apart from formatting."
+    }
+  ],
+  "managed_dev_sql_equivalences": [
+    {
+      "version": "20260920000013",
+      "source_sha256": "777ef63b9e6bfb8360ad7fda5f7a80658b82eef1bfeb8ab714df1e9de92500b4",
+      "local_sha256": "94f89543975feb7bb9b516d623d83406f8fe9b516f9968b53c8061a9c048d567",
+      "reason": "Stored SQL and committed SQL were compared on 2026-10-07. Versions 13 and 27 omit leading comments; version 28 has the same statements on one line. No executable statement differs."
+    },
+    {
+      "version": "20260920000027",
+      "source_sha256": "5e392fc5c659abb618442bf924ea54b2cd2256290a93d18c96749d4a2e1b7050",
+      "local_sha256": "ac1935e606784097bd3eb5ee804359fe0bfc4d6fe5907aad7b42d1b78f31d82d",
+      "reason": "Stored SQL and committed SQL were compared on 2026-10-07. Versions 13 and 27 omit leading comments; version 28 has the same statements on one line. No executable statement differs."
+    },
+    {
+      "version": "20260920000028",
+      "source_sha256": "f0e1e904d7075d35e24e40fc43f48b6520238589d20a4a0806710aa4fe0bce5f",
+      "local_sha256": "e32828ca1e686581558fbe8ab6a68c5fbfc29d7fe2afad17e35237ce55e754de",
+      "reason": "Stored SQL and committed SQL were compared on 2026-10-07. Versions 13 and 27 omit leading comments; version 28 has the same statements on one line. No executable statement differs."
+    }
+  ]
 }

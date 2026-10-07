@@ -4,6 +4,12 @@ Status: Article and wiki/collection automation activated on the shared versioned
 Last verified: 2026-10-02
 Evidence: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
+## T3 task worktrees and GitHub checks
+
+New agent tasks use their one T3-assigned checkout and branch. The root checkout stays clean on `production`. Worktree setup links ignored env storage and makes scratch directories without dependency installs. Checks, builds and browser QA run on GitHub; browser artifacts replace task-local previews.
+
+Finished remote task branches delete after merge. The exact-worktree cleanup helper runs only after T3 releases that clean merged checkout. It skips detached automation/rollback runtimes. This migration does not change installed services, env files, timers or runtime pointers, and does not interrupt jobs. Installed automation keeps its existing contract until a separately authorized activation. See `../operations/deployment.md`.
+
 ## Host
 
 - Hostname: `teja-homelab`.
@@ -11,7 +17,7 @@ Evidence: managed-dev readiness, real headless Chrome smoke and six-article rend
 - CPU: 4 logical CPUs.
 - Memory: 7.7 GiB; 2 GiB swap nearly full at check time.
 - Root disk: 117 GB, 41% used.
-- Primary development repository: `/home/teja/projects/Bloxodes`. The user works directly on `teja-homelab` as the ongoing primary project host, confirmed September 7, 2026. Task branches and unrelated in-progress work may remain in this checkout after a release; local `production` is tracked separately.
+- Primary development repository: `/home/teja/projects/Bloxodes`. The user works directly on `teja-homelab` as the ongoing primary project host, confirmed September 7, 2026. New T3 tasks use their assigned worktrees; this main checkout stays on `production`.
 
 ## Tailscale and managed-development preview
 
@@ -72,7 +78,7 @@ The interactive homelab checkout also contains the complete ignored private `.en
 ## Synchronization
 
 - When releasing from another machine and remote synchronization is in scope, execute the released `scripts/ops/sync-homelab-checkout.sh --expected-sha <full-sha>` on the homelab through configured operator access. It performs a read-only preflight by default and requires the clean `production` branch, stopped services, and an exact remote SHA before apply.
-- Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. An explicit e2e/end-to-end release from another machine authorizes this guarded remote checkout synchronization when the release changes homelab-owned article automation or the user explicitly requests it; ordinary web, collection, and editorial database releases do not require it.
+- Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. This is a legacy operator synchronization command, not part of the new agent release flow. A separate explicit operator request authorizes this guarded remote checkout synchronization when the release changes homelab-owned article automation or the user explicitly requests it; ordinary web, collection, and editorial database releases do not require it.
 - Releases already running on this host skip separate checkout synchronization and SSH-to-self checks, including article automation releases. Preserve the primary task checkout, synchronize local `production` independently, and report homelab synchronization as unnecessary rather than pending. This does not deploy env or installed service changes.
 - `scripts/ops/install-homelab-article-automation.sh --apply <full-sha>` installs reviewed units only from an exact clean approved checkout and preserves the timer state.
 - `scripts/ops/install-homelab-wiki-automation.sh --apply <full-sha>` replaces the same-named legacy wiki units from an exact clean approved checkout and enables the reviewed daily timer.

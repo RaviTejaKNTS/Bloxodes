@@ -4,38 +4,68 @@ Status: Active; environment, schema, Edge Function, and platform synchronization
 Last verified: 2026-10-03
 Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
-## Normal Path
+## Task and release workflow
 
-1. Approved code/data reaches `production`.
-2. GitHub classifies the changed paths and skips unrelated changes.
-3. A Node 24 BuildKit build receives production build variables through a secret mount.
-4. GHCR receives an immutable commit-SHA image and the moving `production` tag.
-5. GitHub updates Dokploy to the immutable image and triggers deployment.
-6. The workflow waits until `/api/health?scope=deploy` reports that exact SHA and a healthy database.
-7. It purges route-family Cloudflare tags, optionally performs an explicit full purge, and checks selected public paths.
+Status: PR migration/build/browser checks verified; first production release verification pending.
 
-The classifier skips `AGENTS.md` guidance files under `apps/web`. Updating route or library instructions alone does not rebuild the web image.
+T3 assigns one task worktree and branch. Agents stay there, edit the task's files and push a PR targeting `production`. The main checkout stays clean on `production`. `t3.json` runs the lightweight setup hook, which links ignored env storage and creates scratch directories. It installs no dependencies and runs no local checks or builds.
 
-The public `/api/health?scope=deploy` response is the container/deploy gate. It performs one lightweight database-readiness request and returns build SHA plus cache feature flags; it does not run stats freshness or pipeline RPCs. The default `/api/health` response remains the deeper operational check and includes stats freshness and pipeline health. Keeping these scopes separate prevents a slow stats query from replacing the only healthy web replica.
+`Pull request checks` classifies the diff. Guidance-only PRs skip dependency installs and builds. Code PRs run migration integrity, CI env contracts, script/runtime tests and affected app checks. Web changes get a development-backed production build and desktop/mobile Chromium smoke with screenshots. CI starts the standalone server with the same public/static/data layout as Docker and waits for the deployment database-health endpoint. It does not require a fresh production stats pipeline in development. Browser reports last one day. Superseded check jobs cancel; database jobs serialize and do not cancel an active transaction.
 
-## Secrets
+`Required PR checks` is the single protection check. It requires the real managed-development job and affected checks to succeed. A failed, cancelled or missing required job cannot turn green. Fork PRs cannot run credentialed development mutations; maintainers must bring approved work into an owned task branch. Production protection requires this check from GitHub Actions, enforces it for administrators, rejects force pushes/deletion and requires PR flow. The live settings were applied and read back on October 7. Required approval count is zero so the owner can release through a checked PR without a second account. This repository is public; protection is available on its current plan.
 
-- GitHub Actions owns CI build/deploy secrets and public build variables. Production-capable workflow jobs declare the `production` GitHub environment so its approvals/secrets can become the single CI production boundary after this change is released and configured.
-- Dokploy owns application runtime env.
-- Workstation `.envs/targets/production.env` is for explicit local operator preview/tools, not the deployment source of truth.
-- The Docker image must not contain the BuildKit env secret.
+Use T3's PR watcher while waiting. Merge approved work with a merge commit to keep ancestry for cleanup. GitHub deletes the remote branch after merge. After T3 releases a finished task checkout, the exact-worktree cleanup helper removes only its clean merged branch/checkout. Detached automation and rollback runtimes are preserved. Fast-forward the clean main checkout to the released SHA, without installing dependencies or altering installed services.
 
-## Data-Only Publication
+## Schema before deployment
 
-GTA standalone checklist releases apply the additive checklist schema and seeds before deploying dependent web code. The production classifier includes `/gta/checklists` and GTA checklist cache tags for GTA routes and shared checklist component changes. Verify each released detail URL and the GTA sitemap after deployment; do not infer GTA coverage from the Roblox checklist index smoke.
+`schema-release.yml` is the shared schema job. Development uses HTTPS Management API SQL with `MANAGED_DEV_SUPABASE_ACCESS_TOKEN`, scoped by the script to project `bbtcaurrtyoukvjbxbbj`. The managed database password stays absent. It executes a rollback plan, applies pending forward migrations in one transaction, checks the ledger and runs managed readiness. It produces a SHA/hash receipt.
 
-The ads.txt prebuild refresh has a 15-second timeout. Network/provider connection failures retain an existing non-empty public ads.txt file; they still fail the build if no usable local file exists. This preserves the last shipped provider file during an outage without producing an empty replacement.
+New applications store their exact SQL file bytes in the development ledger within the same transaction. Before issuing a receipt, CI compares every included migration with the stored SQL hash. An existing version with changed or missing SQL evidence fails. Audited old aliases and three historical comment/formatting differences use pinned source/local hashes in the policy. Their exceptions cannot certify changed files. A receipt contains only proven versions, including verified pre-convergence production candidates when present.
 
-Database-backed content normally publishes through controlled scripts/migrations and revalidation rather than requiring a web image. Local datasets under `data/` or `apps/web/src/data/` require a code/image deploy.
+The first PR exposed 13 old connector timestamps that differ from committed migration versions. The audited `managed_dev_history_aliases` pin the original SQL and local file hashes. CI also proves current shared objects and legacy retirement before copying the original SQL evidence into canonical history records. It preserves the old records and never replays their schema or content changes. The GTA differences were removed by the verified tools-removal migration and later shared-table retirement. New pending migrations still execute normally.
 
-Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` streams a transaction through SSH into the existing database container and rolls it back after proving the full plan. The publisher removes only migration-file boundary `BEGIN/COMMIT` wrappers before composing its single outer transaction, so a dry run cannot retain a partially committed migration. If host SSH is unavailable, load the `dokploy` env overlay and pass `--transport dokploy`; this uses Dokploy's authenticated owner-only terminal for the same fixed `supabase-db` container while preserving every release guard. If both SSH and Dokploy are unreachable, `--transport studio --database-role supabase_admin` uses the configured HTTPS Studio query API and verifies its database role. It retains the same clean-checkout, exact-SHA, transaction and ledger guards. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It runs the checked-in object proof, repairs only policy-listed schema-present ledger gaps, applies only expected migrations, finishes deferred constraint checks between migrations, commits atomically, and verifies the ledger. Managed development must pass first; production remains a separate explicit approval.
+[PR CI run 37569597377](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37569597377) passed the history repair, all seven development readiness checks, tests, build and desktop/mobile browser checks at `631a8c3cb6caa53b9bf217d7b5403775fbd7dfa2`. Readback confirmed all 13 canonical records, all 13 original records and absent legacy tables. Later publication safeguards remain subject to their own PR checks.
 
-Production Edge Functions use the same immutable-SHA boundary. `npm run supabase:production:function:release -- --function <name> --approved-sha <full-sha>` compares local and deployed checksums without mutation. Apply requires `--apply --confirm "APPLY <name>"`, preserves the host file ownership/mode, restarts only Edge Runtime, performs an authenticated smoke request, and restores the previous function on failure.
+After merge, the production workflow classifies schema changes separately from web changes. Schema-only releases apply without a web rebuild. For mixed changes, the schema job succeeds before the web job starts.
+
+Production uses the existing `release-production-schema.ts` and HTTPS Studio transport as `supabase_admin`. Postgres stays private inside the VPS. The job requires clean exact HEAD and current `origin/production`, a matching managed-development receipt for every pending migration, historical object proof, rollback planning, atomic application and ledger readback. Transactions use an advisory lock and bounded lock/statement timeouts. Do not copy Stack127's direct `supabase db push` into this project.
+
+Migration files remain immutable. CI rejects edits/deletions and runs the existing integrity policy. Additions must work with the old running app. Remove obsolete tables/columns only in a later migration after the app stops using them. A table-removal migration is not an ordinary first-step deploy.
+
+## Web deployment
+
+The existing Dokploy workflow still builds a Node 24 image through BuildKit, publishes an immutable SHA image to GHCR, updates Dokploy and requires `/api/health?scope=deploy` to report that SHA with a healthy database. It then purges mapped Cloudflare tags and checks a small set of public paths. Guidance-only changes skip the image build. The health gate stays lightweight and does not run the deeper stats pipeline checks.
+
+Schema, deployment and selected content jobs share the `bloxodes-production` concurrency lane with `queue: max`. Up to 100 pending runs wait without replacing one another, and active releases are not cancelled. Managed schema jobs use the same queue policy in their separate lane. Production classification compares the healthy live build SHA with the release SHA, so a later guidance commit still deploys earlier changes that are not live. An unknown or unrelated live SHA selects a full guarded schema/web release. Superseded SHAs still fail the exact-current-production gate rather than applying an older plan to a newer release. Queue capacity and ordering follow [GitHub concurrency rules](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency).
+
+## CI credentials
+
+GitHub owns CI credentials. Dokploy owns application runtime env. Workstation `.envs` remains ignored and is not copied into images. All CI processes use `BLOXODES_ENV_PROFILE=process-only`.
+
+- PR/development jobs need `MANAGED_DEV_SUPABASE_URL`, `MANAGED_DEV_SUPABASE_ANON_KEY`, `MANAGED_DEV_SUPABASE_SERVICE_ROLE` and `MANAGED_DEV_SUPABASE_ACCESS_TOKEN`. OAuth connector sessions cannot authenticate GitHub jobs.
+- The production environment contains Studio credentials and the four collection R2 keys. Existing database/media/revalidation and Dokploy/GHCR credentials remain repository secrets during first-release verification. Its live deployment policy allows only the `production` branch, configured and read back on October 7. Remove older repository-wide privileged copies only after replacement jobs and dependent scheduled jobs are verified.
+- Collection publication needs `WIKI_R2_ENDPOINT`, `WIKI_R2_ACCESS_KEY_ID`, `WIKI_R2_SECRET_ACCESS_KEY` and `WIKI_R2_BUCKET`. Copy only the approved existing keys. Do not edit installed runtime env or stop jobs to obtain them.
+- `env/examples/ci.env.example` documents CI-only names. `env:doctor -- --ci` validates the committed profiles and injected development target without requiring workstation files on the runner.
+
+## Selected content publication
+
+`Publish selected content` is a database-only dispatch. It does not build an image. It requires the reviewed current production SHA and checks that any required web/data changes are already live.
+
+Before loading inputs or writing content, it runs `supabase:production:release` with `--check-ledger`. This mode reads production migration history only and refuses publication if migrations or audited repairs are pending. It never applies SQL or waits while holding the release lane. Retry the batch after the protected production schema release succeeds.
+
+A small reviewed batch can live at `content/releases/<batch>/batch.json`. Its operations select fixed publishers and exact input files. Changed batches receive development dry-runs in PR CI. For larger/manual or automated work, `dispatchContentBundle` stores only selected authoring inputs in the private managed-development `ci-release-bundles` bucket. The immutable object is addressed by SHA-256. GitHub fetches that exact hash and accepts only bounded data/image files inside the bundle. It never executes bundled code or SQL. Keep failed bundles for retry and clean up expired successful bundles through a controlled storage operation.
+
+The registry covers shared non-Roblox page batches, queued articles, article/checklist/quiz finals, Roblox wiki hubs and collections, franchise hubs and collections, Minecraft tools, Roblox catalog/tool finals, codes-page setup and events finals. Shared pages cover maps, checklists, quizzes, catalogs, tools and codes. Specialist GTA maps keep their frozen engine/import contract; changes to those snapshots use reviewed migrations, not ordinary page publication.
+
+The job proves every selected publisher before its first write, then uses the established publisher's media/data operations and readback. Roblox collections use the same legacy-media normalization during proof and publication as managed-development automation. Codes setup refreshes only the reviewed slug. It revalidates explicit events and verifies exact public URLs, expected text, metadata and sitemap membership. Public text readback allows six attempts with ten-second request timeouts and five-second delays for temporary propagation failures. Sitemap verification also retains its bounded retry policy. Desktop/mobile Chromium checks the selected pages and saves screenshots for one day. Article queue acknowledgement and the exact wiki request close only after these checks pass. No other drafts, tables or user progress are copied.
+
+New wiki builders move verified work to the existing durable `publishing` status and release their builder lease/slot. The release hook dispatches its exact request once, then leaves queued work alone. CI records `published` after all readback passes, or retains a failed receipt for up to three dispatch attempts with a 15-minute delay. Legacy installed builders retain their live-lease receipt contract. The publisher records a preparation phase before uploading and a submitted phase immediately before calling GitHub. After 15 minutes, a stale preparation claim becomes retryable. The dispatch callback checks the exact claim timestamp and phase, so an older publisher cannot dispatch after recovery. For submitted claims, recovery checks bounded GitHub run history for the exact bundle hash, production branch and attempt time, then records the run ID. Each recovery pass also reads recorded runs. A completed run with an unsuccessful conclusion becomes a failed receipt even when CI stopped before the publisher started. Queued, waiting and running jobs remain pending. A successful run cannot replace the required public publication receipt. Failed attempts still wait 15 minutes and stop after three dispatches. Recovery reads all receipt pages by ID; dispatch selection reads past exhausted, delayed and expired requests, so older rows cannot hide newer work. A queued run never triggers another dispatch. An unknown submission outcome still requires manual inspection; missing results from a bounded API read do not prove that GitHub rejected it. Legacy receipts without a phase also require inspection. GitHub run titles use the bundle hash through [run-name](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#run-name), and recovery uses the documented [workflow run filters](https://docs.github.com/en/rest/actions/workflow-runs#list-workflow-runs-for-a-workflow).
+
+The dispatcher binds each wiki request to its stored result paths, exact final/manifest hashes and full immutable private bundle hash before dispatch. CI checks the queue's universe, wiki slug and approved collections against the selected artifacts, exact URLs and cache events before writing and acknowledging. Queue-backed wiki publication requires that frozen bundle; manual publications without a queue ticket can use normal reviewed batches. Failures for legacy processing requests use the same original live-lease check as success. A mismatched batch cannot close or fail another request.
+
+Each article operation must select its queue row's exact `result_path`, approved real file, slug and bytes. Pipeline approval hashes remain mandatory. Its canonical URL and article cache event must be selected before any writes. A queue ID appears once per batch; another article's final or URL cannot acknowledge it.
+
+`content/releases/verify-existing/batch.json` is a read-only `/games` canary. Dispatch it with `apply=false`. It publishes no game/page/row. Do not test CI by creating junk content or modifying a real page.
 
 ### GTA release cache configuration finding — 2026-09-26
 
@@ -65,19 +95,11 @@ Northflank build succeeds, one scheduled or bounded HOT run succeeds, the VPS
 candidate is promoted, and a bounded VPS collector plus current-index rebuild
 advance production health.
 
-## Platform Synchronization
+## Platform synchronization
 
-1. Run `npm run env:doctor`, `npm run env:check`, and `npm run supabase:migrations:check` locally.
-2. Run `npm run platform:sync:check -- --local-only` before release.
-3. After an approved repository release, require the public deploy health SHA and database health to match.
-4. Apply approved schema changes to managed development through the Supabase connector, then list migrations and run readiness/advisors.
-5. Obtain separate production permission before production schema, Edge Function, VPS, or homelab mutations other than the guarded checkout synchronization included in an explicit e2e release. That checkout-only authorization does not include env changes, unit installation, job interruption, or service control.
-6. The homelab is the primary development workspace (user-confirmed and host identity verified September 7, 2026). When releasing on `teja-homelab`, skip separate homelab checkout synchronization and SSH-to-self checks; preserve the active task branch and unrelated working files. Synchronize local `production` independently, updating its branch reference when no worktree has it checked out. When releasing from another machine, synchronize the remote homelab only for article automation changes or an explicit request, using the released `scripts/ops/sync-homelab-checkout.sh` dry-run and exact-SHA apply. Remote preflight failures remain blockers for that remote sync; they do not apply to the active primary workspace. Env, installed-unit, and service changes retain separate authorization.
-7. Run the full read-only platform check only for an in-scope remote homelab synchronization or an explicit platform-check request. Releases made on the homelab use the local-only check and required live deployment/content verification, including article automation releases; they do not invoke SSH-based self-inspection.
+GitHub owns release checks, schema application, build/deploy and selected content verification. The agent inspects their results and fast-forwards clean local production to the released SHA. It does not run local platform checks or dependency installs.
 
-The check reports drift; it never fixes drift. Database/Storage backup work is intentionally outside this sequence for now.
-
-The final platform check treats the live web image as synchronized when it is the exact production SHA. It may also accept an older ancestor when the intervening commits contain no web-runtime path according to the same classifier used by the deployment workflow.
+Installed automation release pointers, env files and services stay on their existing release until a separately authorized activation. The source publication hooks now dispatch exact CI batches, but merging source alone does not activate installed runtimes. Preserve active jobs and detached rollback checkouts. Existing runtime health evidence below retains its original dates.
 
 ## Known Release Caveats
 

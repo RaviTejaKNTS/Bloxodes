@@ -1,0 +1,84 @@
+name: Schema release
+on:
+  workflow_call:
+    inputs:
+      production:
+        required: true
+        type: boolean
+      sha:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  managed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: bloxodes-managed-schema
+      queue: max
+      cancel-in-progress: false
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
+    steps:
+      - name: Allow only this repository's tasks
+        env:
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+        run: test "$HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run supabase:migrations:check
+      - run: node --import tsx scripts/ci/managed-schema.ts --apply
+      - run: npm run supabase:managed-dev:check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: managed-schema-${{ inputs.sha }}
+          path: ${{ runner.temp }}/managed-schema-receipt.json
+          retention-days: 1
+  production:
+    if: inputs.production
+    needs: managed
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 15
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      VPS_SUPABASE_STUDIO_URL: https://studio.bloxodes.com
+      VPS_SUPABASE_STUDIO_USERNAME: ${{ secrets.VPS_SUPABASE_STUDIO_USERNAME }}
+      VPS_SUPABASE_STUDIO_PASSWORD: ${{ secrets.VPS_SUPABASE_STUDIO_PASSWORD }}
+      APPROVED_SHA: ${{ inputs.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.sha }}
+          fetch-depth: 0
+      - name: Require current production SHA
+        run: |
+          test "$APPROVED_SHA" = "$(git rev-parse HEAD)"
+          test "$APPROVED_SHA" = "$(git ls-remote origin refs/heads/production | cut -f1)"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - uses: actions/download-artifact@v4
+        with:
+          name: managed-schema-${{ inputs.sha }}
+          path: ${{ runner.temp }}/schema
+      - name: Prove production plan, then apply and read back
+        run: |
+          node --import tsx scripts/ops/release-production-schema.ts --approved-sha "$APPROVED_SHA" --transport studio --database-role supabase_admin --managed-receipt "$RUNNER_TEMP/schema/managed-schema-receipt.json"
+          node --import tsx scripts/ops/release-production-schema.ts --approved-sha "$APPROVED_SHA" --transport studio --database-role supabase_admin --managed-receipt "$RUNNER_TEMP/schema/managed-schema-receipt.json" --apply --confirm "APPLY production"

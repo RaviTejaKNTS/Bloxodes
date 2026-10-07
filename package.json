@@ -9,6 +9,11 @@
     "react-native": "0.83.6"
   },
   "scripts": {
+    "cleanup:task-worktree": "node scripts/dev/cleanup-task-worktree.mjs",
+    "ci:events:publish": "node --import tsx scripts/ci/publish-events.ts",
+    "ci:content:dispatch": "node scripts/ci/dispatch-content.mjs",
+    "ci:content:verify": "node --import tsx scripts/ci/publish-content.ts",
+    "ci:schema:managed": "node --import tsx scripts/ci/managed-schema.ts",
     "setup:worktree": "bash scripts/dev/setup-worktree.sh",
     "env:check": "node --import tsx scripts/dev/check-env-contract.ts",
     "env:doctor": "node --import tsx scripts/dev/env-doctor.ts",

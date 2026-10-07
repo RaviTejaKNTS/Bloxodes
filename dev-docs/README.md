@@ -81,3 +81,5 @@ When updating the existing canonical document:
 3. Record the date, evidence, and any unavailable boundary.
 4. State degraded conditions explicitly; do not rewrite them as intended behavior.
 5. Update the closest `AGENTS.md` only when an enduring working rule or ownership link changed.
+
+Task/release workflow changes are owned by `operations/deployment.md`. T3 assigns task worktrees; GitHub owns checks, schema application, web deployment and selected content publication. Its rollout section records what has actually passed.

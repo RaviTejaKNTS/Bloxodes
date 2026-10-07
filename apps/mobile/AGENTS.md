@@ -1,5 +1,9 @@
 # Mobile App Guide
 
+## GitHub task and release flow
+
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+
 Scope: `apps/mobile`.
 
 This workspace contains the Expo React Native app for Bloxodes Android and iOS builds. It uses expo-router with a bottom tab bar and native screens for codes, catalog, wiki + collections, quizzes, checklists, events, stats, and search. Tools remain web-only for now.

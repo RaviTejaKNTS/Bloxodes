@@ -1,0 +1,23 @@
+{
+  "$schema": "https://t3.codes/schema/t3.json",
+  "iconPath": "apps/web/public/favicon.ico",
+  "scripts": [
+    {
+      "name": "Setup worktree",
+      "command": "bash scripts/dev/setup-worktree.sh",
+      "icon": "configure",
+      "runOnWorktreeCreate": true,
+      "async": false
+    },
+    {
+      "name": "Open GitHub checks",
+      "command": "gh pr checks --web",
+      "icon": "test"
+    },
+    {
+      "name": "Open pull request",
+      "command": "gh pr view --web",
+      "icon": "play"
+    }
+  ]
+}

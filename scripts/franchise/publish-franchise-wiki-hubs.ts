@@ -1,3 +1,4 @@
+import { assertProductionPublication } from "../ci/publication-guard";
 import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import "../shared/load-env";
 import { readFile } from "node:fs/promises";
@@ -24,6 +25,7 @@ async function main() {
   if ((!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(namespace) || namespace === "roblox") || !args.includes("--workspace") || !slugs.length || slugs.some(s => !/^[a-z0-9-]+$/.test(s))) throw new Error("Explicit namespace, workspace and game allowlist required.");
   if (namespace === "minecraft" && slugs.some(slug => !["minecraft", "minecraft-java", "minecraft-bedrock"].includes(slug))) throw new Error("Minecraft requires an approved edition identity.");
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
+  if (production && apply) assertProductionPublication();
   if (!production && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) throw new Error("Unrecognized database target.");
   if (apply && production && !allowProd) throw new Error("Production writes require --allow-prod.");
   if (allowProd && !production) throw new Error("--allow-prod requires the production target.");

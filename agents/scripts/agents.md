@@ -336,3 +336,7 @@ Minecraft collection publication shares identical prepared image bytes through f
 ## Shared map snapshots and page-type publication
 
 `npm run import:gta-shared-maps` verifies the nine committed GTA snapshots and stored data. `--apply` imports missing rows atomically into managed development; repeat imports are unchanged. Production requires its guarded environment and explicit release authorization. Shared page publication also accepts maps, quizzes, catalog, checklists and checklistItems. Preview audits and backups now include the added views/tables. See `dev-docs/pipelines/content.md`.
+
+## GitHub release ownership
+
+`scripts/ci/` owns path classification, managed migration receipts and audited timestamp repair, selected content contracts, private frozen bundles and CI publication dispatch/readback. Wiki publication uses durable requests with bounded retries; queued releases do not hold builder leases. `.github/workflows/pull-request.yml`, `schema-release.yml` and `publish-content.yml` connect those helpers to protected production PRs. `scripts/dev/setup-worktree.sh` installs no dependencies; `cleanup-task-worktree.mjs` removes only an exact clean, merged, inactive task. Current operations belong to `dev-docs/operations/deployment.md`.

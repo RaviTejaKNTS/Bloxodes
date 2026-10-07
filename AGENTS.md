@@ -36,7 +36,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
-- `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only fast publication of completed work directly to production, including required deployment or database publication, exact-SHA local production synchronization and conditional remote homelab checkout synchronization, and retaining the task worktree for follow-up.
+- `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only publication through protected production PRs and GitHub content jobs, with exact-SHA verification and safe task cleanup.
 - `dev-docs/pipelines/indexing-distribution.md`: current indexing, analytics, and distribution ownership.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 
@@ -53,10 +53,21 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Production web and database now share VPS CPU, memory, disk, and bandwidth. After deploys or infrastructure work, check both the app container and the Supabase stack instead of treating them as separate platforms.
 - Runtime freshness uses `revalidation_events` plus the VPS `revalidate` Edge Function. `/api/revalidate` applies Next revalidation and Cloudflare tag purge, then queues `cache_warm_events`; the VPS `cache-warm` Edge Function warms those URLs separately.
 
+## Workspace and branches
+
+- T3 assigns one worktree and branch to each task. Stay in the worktree bound to the current thread. Do not launch another thread or create extra branches/worktrees for the same task.
+- Keep `/home/teja/projects/Bloxodes` on `production` as the clean main checkout. Preserve detached article/automation release and rollback checkouts.
+- Worktree setup links ignored env storage and creates scratch directories. It does not install dependencies or run checks. Never share `node_modules` or build output between checkouts.
+- Run checks, tests, builds, content validation and browser verification on GitHub. Do not run them locally. Use the PR workflow's screenshots and reports for review. Local work is inspection, authoring and edits.
+- Commit only the current task's allowlist. Push its branch and open a PR targeting `production`. Link the PR to T3 immediately. Use T3's PR watcher while waiting for checks.
+- Merge only after `Required PR checks` passes and the task has release authorization. Never push directly to `production`, force-push it, or bypass protection.
+- GitHub deletes the remote task branch after merge. Once the thread has stopped using its checkout, run `cleanup:task-worktree` from another checkout for that exact finished task. The helper requires clean, merged history and preserves detached runtimes. Never delete the active thread's worktree or another unfinished task.
+- Fast-forward the clean main checkout to the released production SHA. Do not install dependencies there or change installed services, env files, timers or running jobs as part of a release.
+
 ## Working Defaults
 
 - Treat canonical documentation maintenance as part of implementation. Any change to architecture, env ownership, infrastructure, deployment, data flow, or a pipeline must update its existing `dev-docs/` owner in the same change. Keep the stable filename, refresh `Last verified` only after rechecking evidence, and do not create parallel current-state docs. New rough notes belong in `docs/YYYY-MM-DD-topic.md`.
-- When running a managed-development preview on the homelab, bind Next to `0.0.0.0` and hand off Tailscale links, not `localhost` or `127.0.0.1`. The verified homelab preview base is `http://teja-homelab.tail13b5bd.ts.net:3000` with `http://100.86.117.125:3000` as the direct-IP fallback; append the route under that base. Keep the public canonical URL as `https://bloxodes.com/...` and do not expose production credentials or publish to production for preview QA.
+- Use GitHub browser artifacts for task preview QA. The existing homelab preview is operator infrastructure, not a task build target. When the user explicitly requests that existing preview, bind Next to `0.0.0.0` and hand off Tailscale links. The verified homelab preview base is `http://teja-homelab.tail13b5bd.ts.net:3000` with `http://100.86.117.125:3000` as the direct-IP fallback; append the route under that base. Keep the public canonical URL as `https://bloxodes.com/...` and do not expose production credentials or publish to production for preview QA.
 - Keep pages server-first. Move repeated loaders and rendering helpers into route-family `page-data.tsx` files or `apps/web/src/lib/*`.
 - Prefer adding or extending typed helpers in `apps/web/src/lib/db.ts` instead of scattering raw Supabase queries across page files.
 - For public content changes, check all of: metadata, JSON-LD, pagination, sitemap coverage, feed coverage, and `/api/revalidate`.
@@ -65,7 +76,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Treat `docs/`, `Writing plans/`, and legacy `agents/` narratives as notes, plans, reports, or historical evidence that can be outdated or unimplemented. Current architecture belongs in the existing owning `dev-docs/` file with a `Last verified` date.
 - Store real workstation env values only in ignored `.envs/`; committed contracts live in `env/examples/`. Development defaults to managed Supabase development, production/test use process-only, and production preview is explicit. See `dev-docs/environment.md`.
 - Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
-- Invoke `bloxodes-release-e2e` only when the user explicitly names `$bloxodes-release-e2e` or asks for an `e2e`/`end-to-end` production release. Treat that invocation as confirmation that final checks passed. Publish the explicit allowlist directly to `production` without force; use a PR only when the user explicitly requests one. Never include another branch/worktree's changes. After every release, synchronize local `production` while preserving the task checkout. The homelab (`teja-homelab`, primary project `/home/teja/projects/Bloxodes`) is the primary development workspace. When already running there, skip separate homelab synchronization and SSH-to-self checks; a dirty task branch is not a pending homelab-sync blocker. When releasing from another machine, use guarded exact-SHA homelab synchronization only for article automation changes or an explicit request. This authorization does not cover env changes, unit installation, job interruption, or service control. Keep the current task worktree and branch for immediate follow-up until the user asks for cleanup.
+- Invoke `bloxodes-release-e2e` only for an explicit release request. It uses the assigned task branch and a PR targeting `production`. GitHub owns checks, schema application, build/deploy and selected content publication. A release request covers the current task's reviewed allowlist, not unrelated pages, env changes or service control. See `dev-docs/operations/deployment.md` for the release contract.
+
 
 ## Design Direction
 
@@ -118,19 +130,19 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 1. Work under `apps/extension` and follow `apps/extension/AGENTS.md`.
 2. Keep permissions minimal and use Bloxodes API routes instead of Supabase or edge functions directly.
 3. Keep injected UI scoped under `#bloxodes-codes-extension`; avoid generic global class names that can collide with older live extensions.
-4. Run `npm run typecheck:extension` and `npm run package:extension`.
+4. GitHub CI runs `npm run typecheck:extension` and `npm run package:extension`.
 
 ### Mobile app
 
 1. Work under `apps/mobile` and follow `apps/mobile/AGENTS.md`.
 2. Keep mobile data access behind `apps/web/src/app/api/mobile/*`.
 3. Keep progress features local-first with optional account sync through the mobile bearer-session routes; articles and puzzles stay web-only.
-4. Run `npm run typecheck:mobile`.
+4. GitHub CI runs `npm run typecheck:mobile`.
 
 ### Database or content model
 
 1. Add a forward-only migration in `supabase/migrations/`.
-2. Run `npm run supabase:migrations:check`, plan against managed development, apply and verify there first, and obtain explicit approval before any production application.
+2. GitHub runs `supabase:migrations:check`, plans/applies against managed development, then proves and applies the approved merged SHA to production before dependent web deployment. Use forward migrations and separate destructive removals from the earlier compatibility release.
 3. Update the read layer in `apps/web/src/lib/*`.
 4. Wire publish/revalidation flows if the new data powers public content.
 5. Update the relevant existing `dev-docs/` owner, `AGENTS.md`, and `agents/data/agents.md`.
@@ -140,5 +152,5 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 1. Put the job in the correct `scripts/<area>/` folder.
 2. Add or update the `package.json` command if the script is part of the normal workflow.
 3. Keep shared helpers in `scripts/shared/`.
-4. Run `npm run env:doctor` when env ownership or runtime loading changes.
+4. GitHub runs `npm run env:doctor -- --ci` when env ownership or runtime loading changes.
 5. Document side effects, required env, and purpose in `scripts/AGENTS.md`, the existing owning `dev-docs/` file, and `agents/scripts/agents.md`.

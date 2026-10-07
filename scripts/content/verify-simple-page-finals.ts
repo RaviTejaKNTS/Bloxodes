@@ -1,7 +1,10 @@
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { assertProductionPublication } from "../ci/publication-guard";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
@@ -84,7 +87,7 @@ function isEventsFinal(value: unknown): value is EventsFinal {
   return Boolean(candidate?.slug && candidate.title && candidate.meta_description && candidate.content_md && candidate.universe_id);
 }
 
-async function readEntry(file: string): Promise<FinalEntry> {
+export async function readEntry(file: string): Promise<FinalEntry> {
   const parsed = JSON.parse(await readFile(path.resolve(process.cwd(), file), "utf8")) as unknown;
   if (isToolFinal(parsed)) {
     const code = parsed.code.trim().toLowerCase();
@@ -106,7 +109,8 @@ function assertLocalWriteTarget() {
   }
 }
 
-async function upsertEntry(entry: FinalEntry) {
+export async function upsertEntry(entry: FinalEntry) {
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL)) assertProductionPublication();
   const sb = supabaseAdmin();
   if (entry.kind === "tool") {
     const row = entry.row;
@@ -218,7 +222,7 @@ async function main() {
   urls.forEach((url) => console.log(`- ${url}`));
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });

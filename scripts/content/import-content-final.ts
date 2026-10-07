@@ -1,3 +1,5 @@
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
+import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
@@ -635,6 +637,7 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL) && !options.dryRun) assertProductionPublication();
 
   if (process.env.NODE_ENV === "production" && !options.allowProd) {
     throw new Error("Refusing to import to production without --allow-prod");

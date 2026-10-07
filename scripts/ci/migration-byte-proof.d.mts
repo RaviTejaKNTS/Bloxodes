@@ -1,0 +1,1 @@
+export function verifiedMigrationHashes(migrations: ReadonlyArray<{version: string; hash: string}>, ledger: ReadonlyArray<Record<string,unknown>>, policy: any): Array<{version: string; hash: string}>;

@@ -1,4 +1,6 @@
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import "../shared/load-env";
+import { assertProductionPublication } from "../ci/publication-guard";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -218,7 +220,7 @@ async function upsertCodePage(payload: CodePagePayload, options: CliOptions) {
   }
 
   let universeId = existing?.universe_id ?? null;
-  if (payload.robloxLink) {
+  if (payload.robloxLink && !options.dryRun) {
     try {
       const ensured = await ensureUniverseForRobloxLink(sb as any, payload.robloxLink);
       universeId = ensured.universeId ?? universeId;
@@ -283,6 +285,7 @@ async function upsertCodePage(payload: CodePagePayload, options: CliOptions) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
+  if (isProductionSupabaseUrl(process.env.SUPABASE_URL) && !options.dryRun) assertProductionPublication();
   if (!options.file) {
     printUsage();
     process.exitCode = 1;

@@ -1,16 +1,20 @@
 # Scripts Guide
 
+## GitHub task and release flow
+
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+
 Scope: `scripts/`.
 
 These files are operational jobs, imports, backfills, collectors, and automation workers. Many are side-effectful.
 
 ## Shared non-Roblox game commands
 
-The October 6 shared schema is applied in managed development and production. GTA, Red Dead and Minecraft scripts use shared `games`/`game_*` storage with an explicit namespace. Existing production-capable aliases retain their dry-run and explicit production guards. `publish:game-pages` remains development-only.
+The October 6 shared schema is applied in managed development and production. GTA, Red Dead and Minecraft scripts use shared `games`/`game_*` storage with an explicit namespace. Production publication uses the selected-content CI job and retains exact target and input guards.
 
 - `backup:shared-games` exports the current shared rows with counts and hash readback into ignored private files. `--legacy-before-migration` is only for an environment that still has the old tables.
 - `verify:shared-games` compares every original source field against the frozen legacy backup.
-- `publish:game-pages -- --namespace <slug> --file <reviewed.json>` validates game, wiki, codes-page, verified-code and registered-tool groups. It plans by default and `--apply` writes only managed development.
+- `publish:game-pages -- --namespace <slug> --file <reviewed.json>` validates shared page groups. It plans by default. Development application runs on GitHub; production application additionally requires `--allow-prod` and the reviewed current-SHA CI publication guard.
 - `sync:shared-game-collection-runtime` and `export:shared-game-collection-workspace` retain the reviewed immutable dataset/media workflow and accept an explicit non-Roblox namespace.
 - `audit:shared-games-preview -- --base-url <preview>` crawls all published shared content, linked pagination, metadata and discovery routes, and tests mutation guards.
 
@@ -29,8 +33,12 @@ The one-time `activate:minecraft-editions` command is removed. Preserve all unre
 
 ## Folder Map
 
+- `ci/migration-history.mjs` proves the finite managed-development timestamp aliases with exact source/local hashes and current objects. It copies original ledger evidence without executing retired SQL. `ci/wiki-publication-state.mjs` defines the durable request and bounded retry rules for wiki releases. GitHub owns their tests.
+- `ci/wiki-publication-binding.mjs` binds queue receipts to the stored approved result paths, exact frozen bundle, artifact hashes and canonical pages. The selected-content job checks production migration history before publication with the read-only `supabase:production:release -- --check-ledger` mode.
+- `ci/migration-byte-proof.mjs` rejects unproven applied SQL before CI issues a receipt. `ci/article-publication-binding.mjs` ties each selected final and canonical URL to its exact article queue row before publication. GitHub runs their mismatch/replay tests.
+
 - `dev/`: workstation development and worktree setup.
-  - `setup-worktree.sh` powers `npm run setup:worktree`. In linked worktrees only, it links ignored `.envs/` from the main checkout without overwriting an existing path, installs dependencies when `package-lock.json` changes, and creates ignored temp/report directories.
+  - `setup-worktree.sh` powers `npm run setup:worktree`. In linked worktrees only, it links ignored `.envs/` from the main checkout without overwriting an existing path, creates ignored temp/report directories, and never installs dependencies or runs checks.
   - `start-managed-dev.ts` powers both `npm run dev` and `npm run dev:managed`. It loads `.envs/targets/managed-dev.env` and refuses targets outside HTTPS `*.supabase.co`.
   - `env-doctor.ts` owns workstation readiness and safety checks; `check-env-contract.ts` owns committed example coverage. The one-time legacy env migration commands are retired.
   - `check-migration-integrity.ts` validates migration filenames, version uniqueness, the convergence policy, seed retirement, and future `SECURITY DEFINER` search paths without connecting to a database.
@@ -269,3 +277,6 @@ Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, perma
 ## Shared map import and reference pages
 
 `import:gta-shared-maps` reads the nine reviewed committed snapshots, validates stored hashes and ownership, then uses atomic publication. It is rollback-only by default; `--apply` writes managed development. Production requires the production environment plus `--allow-prod` and explicit authorization. Snapshot changes require a reviewed migration. `publish:game-pages` additionally supports maps, quizzes, catalog, checklists and checklistItems. `audit:shared-games-preview` crawls all eight shared page views. `backup:shared-games` includes reference pages and quiz account history. See `dev-docs/pipelines/content.md`.
+
+- Wiki release recovery retries only stale preparation claims. The dispatch callback rejects replaced claims. Submitted claims record matching GitHub run evidence, recheck recorded conclusions and retry unsuccessful completed runs within the existing limit. Unknown outcomes stay pending. Dispatch selection reads past ineligible rows; recovery reads all receipt pages by ID. Never reset a queued release because it has waited a long time.
+- `ci/`: GitHub path scope, injected env checks, transaction composition and rollback tests, managed schema receipts, production publication guards, frozen selected content bundles and article/wiki dispatch/readback. Use the owning deployment doc for commands and credentials.

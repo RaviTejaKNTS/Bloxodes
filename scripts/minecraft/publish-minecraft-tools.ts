@@ -1,3 +1,4 @@
+import { assertProductionPublication } from "../ci/publication-guard";
 import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 import { readFile } from "node:fs/promises";
@@ -16,6 +17,7 @@ async function main() {
   if (args.includes("--help")) { console.log("Usage: publish:minecraft-tools -- --final <final.json> [--final <final.json>] [--apply] [--allow-prod]"); return; }
   if (!files.length) throw new Error("At least one exact --final file is required.");
   const production = isProductionSupabaseUrl(process.env.SUPABASE_URL);
+  if (production && apply) assertProductionPublication();
   if (!production && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) throw new Error("Unrecognized database target.");
   if (apply && production && !allowProd) throw new Error("Production writes require --allow-prod.");
   if (allowProd && (!apply || !production)) throw new Error("--allow-prod requires production with --apply.");

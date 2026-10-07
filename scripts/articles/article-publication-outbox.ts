@@ -2,7 +2,7 @@ import "../shared/load-env";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { spawn } from "node:child_process";
+import { dispatchArticle } from "../ci/dispatch-article";
 import { createClient } from "@supabase/supabase-js";
 import { saveJson } from "./article-pipeline";
 import { resolveArticleDevCredentials } from "./article-queue-env";
@@ -46,12 +46,7 @@ export async function acknowledgePublishedIntents(root: string, dev: { url: stri
     }
   } finally { await unlock(); }
 }
-export async function drainPublications(root: string, dev: { url: string; serviceRole: string }, release = async (id: string) => {
-  await new Promise<void>((resolve, reject) => {
-    const child = spawn("npm", ["run", "articles:release", "--", "--queue-id", id, "--apply", "--allow-prod"], { cwd: root, env: process.env, stdio: "inherit" });
-    child.on("error", reject); child.on("close", code => code === 0 ? resolve() : reject(new Error(`Guarded release exited ${code}`)));
-  });
-}) {
+export async function drainPublications(root: string, dev: { url: string; serviceRole: string }, release: (id: string) => Promise<void | { dispatched: true; hash: string }> = id => dispatchArticle(id, root)) {
   const unlock = await acquireAgentWorkLock(directory(root), "publication-outbox");
   if (!unlock) return;
   const issues: string[] = [];
@@ -81,8 +76,9 @@ export async function drainPublications(root: string, dev: { url: string; servic
         intent.nextAttemptAt = new Date(Date.now() + Math.min(360, 15 * 2 ** (intent.attempts - 1)) * 60_000).toISOString();
         await saveJson(file, intent);
         try {
-          await release(intent.queueId);
-          intent.publishedAt = new Date().toISOString(); delete intent.error; delete intent.nextAttemptAt;
+          const result = await release(intent.queueId);
+          if (!result?.dispatched) { intent.publishedAt = new Date().toISOString(); delete intent.nextAttemptAt; }
+          delete intent.error;
         } catch (error) { intent.error = error instanceof Error ? error.message : String(error); issues.push(`${intent.queueId}: ${intent.error}`); }
         await saveJson(file, intent);
       } catch (error) { issues.push(`${name}: ${error instanceof Error ? error.message : error}`); }

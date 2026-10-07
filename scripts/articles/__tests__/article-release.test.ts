@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -11,6 +11,7 @@ import {
   pickCoverSourceEntry,
   productionChildEnvironment,
   readProductionCredentials,
+  readReleaseArtifact,
   resolveReleaseArtifactPath,
   type ProductionCredentials,
 } from "../release-completed-articles";
@@ -77,6 +78,36 @@ function manifest(): ArticleImageManifest {
     ],
   };
 }
+
+test("article promotion reads checkout staging while a frozen bundle root is set", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-release-staging-"));
+  const bundle = path.join(root, "content/releases/frozen");
+  const original = path.join(bundle, "tmp/content-workspace/article");
+  const staged = path.join(root, "tmp/content-workspace/staged");
+  const previousRoot = process.env.BLOXODES_ARTIFACT_ROOT;
+  try {
+    await mkdir(original, {recursive: true});
+    await mkdir(staged, {recursive: true});
+    const media = manifest();
+    media.entries = [{...media.entries[0]!, match_evidence: "The verified source shows the required item.", rights_note: "Source attribution retained.", alt: "First image", width: 640, height: 480}];
+    media.expected_count = 1;
+    await writeFile(path.join(original, "final.json"), JSON.stringify({title: "Tested article", slug: SLUG, content_md: `## First\n\n![First image](${IMAGE_URL})`}));
+    await writeFile(path.join(original, "media.json"), JSON.stringify(media));
+    const row = {id: QUEUE_ID, article_title: "Tested article", workflow_mode: "agent_runner", status: "completed", result_path: "tmp/content-workspace/article/final.json", result_slug: SLUG, production_url: null};
+    process.env.BLOXODES_ARTIFACT_ROOT = bundle;
+    const approved = await readReleaseArtifact(row);
+    for (const name of ["final.json", "media.json"]) await copyFile(path.join(original, name), path.join(staged, name));
+    const promoted = await readReleaseArtifact({...row, result_path: "tmp/content-workspace/staged/final.json"}, root);
+    assert.equal(approved.finalPath, path.join(original, "final.json"));
+    assert.equal(promoted.finalPath, path.join(staged, "final.json"));
+    assert.deepEqual(promoted.finalJson, approved.finalJson);
+    assert.equal(process.env.BLOXODES_ARTIFACT_ROOT, bundle);
+  } finally {
+    if (previousRoot === undefined) delete process.env.BLOXODES_ARTIFACT_ROOT;
+    else process.env.BLOXODES_ARTIFACT_ROOT = previousRoot;
+    await rm(root, {recursive: true, force: true});
+  }
+});
 
 test("release accepts only an exact queue-ID allowlist", () => {
   const parsed = parseReleaseOptions(["--queue-id", QUEUE_ID, "--apply", "--allow-prod"], { NODE_ENV: "test" });

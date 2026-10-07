@@ -1,5 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
+import { historyRepairs } from "../ci/migration-history.mjs";
+import { verifiedMigrationHashes } from "../ci/migration-byte-proof.mjs";
 
 type MigrationPolicy = {
   version: number;
@@ -11,6 +14,8 @@ type MigrationPolicy = {
   production_applied_pre_convergence?: string[];
   managed_dev_pending_before_convergence: string[];
   managed_dev_baseline_applied?: string[];
+  managed_dev_history_aliases?: Array<Record<string, string>>;
+  managed_dev_sql_equivalences?: Array<Record<string, string>>;
 };
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
@@ -62,6 +67,17 @@ for (const version of [
   ...(policy.managed_dev_baseline_applied ?? [])
 ]) {
   if (!byVersion.has(version)) errors.push(`Migration policy references missing local version ${version}.`);
+}
+
+try {
+  historyRepairs(policy.managed_dev_history_aliases ?? [], [...byVersion].map(([version, files]) => ({
+    version, hash: createHash("sha256").update(fs.readFileSync(path.join(migrationRoot, files[0]!))).digest("hex")
+  })), []);
+  verifiedMigrationHashes([...byVersion].map(([version, files]) => ({
+    version,hash: createHash("sha256").update(fs.readFileSync(path.join(migrationRoot,files[0]!))).digest("hex")
+  })),[],policy);
+} catch (error) {
+  errors.push(error instanceof Error ? error.message : String(error));
 }
 
 if (errors.length) {
