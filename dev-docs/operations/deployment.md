@@ -8,6 +8,8 @@ Evidence: inspected GitHub workflow/configuration, protected PR checks, managed-
 
 Status: Protected PR flow, production schema/web release and verification-only content flow verified.
 
+PR checks validate changed workflow syntax before heavier jobs start. The GitHub runner downloads a pinned, checksum-verified actionlint release. Its only schema exception accepts GitHub's supported `concurrency.queue` field, which that release does not yet recognize. Publication passes the managed QA receipt path through the consuming step's environment, where the runner context is available.
+
 T3 assigns one task worktree and branch. Agents stay there, edit the task's files and push a PR targeting `production`. The main checkout stays clean on `production`. Configure T3 for worktree mode and register the actions in `t3.json`. New tasks start from a fresh `origin/production`. The automatic setup action waits before the agent starts; it installs no dependencies and runs no local checks or builds. See the HDD and shared-files contract below.
 
 `Pull request checks` classifies the diff. Guidance-only PRs skip dependency installs and builds. Code PRs run migration integrity, CI env contracts, script/runtime tests and affected app checks. Web changes get a development-backed production build and desktop/mobile Chromium smoke with screenshots. CI starts the standalone server with the same public/static/data layout as Docker and waits for the deployment database-health endpoint. It does not require a fresh production stats pipeline in development. Browser reports last one day. Superseded check jobs cancel; database jobs serialize and do not cancel an active transaction.
