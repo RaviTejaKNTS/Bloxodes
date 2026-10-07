@@ -18,6 +18,20 @@ Use T3's PR watcher while waiting. Merge approved work with a merge commit to ke
 
 Protected PR checks, managed/production schema verification, exact-SHA web/database health and the verification-only content flow have passed. The `/games` canary verifies migration history, compatible live code, metadata, sitemap membership and desktop/mobile rendering with zero content operations and zero cache events. It does not prove a real content write. Detailed execution receipts belong to the [October 7 release audit](../../docs/2026-10-07-github-release-audit.md).
 
+## Selective code review
+
+`Selective Codex review` uses `openai/codex-action`, pinned to a reviewed commit, with the existing repository `OPENAI_API_KEY`. It reviews application code, scripts, migrations, dependencies, CI and runtime configuration. Documentation, skills and authoring content alone skip the paid action. Mixed PRs receive a code review. `scripts/ci/review-scope.mjs` owns this decision and GitHub runs its policy tests.
+
+A same-repository PR targeting `production` gets a review when opened ready, reopened or changed from draft to ready. Drafts and forks cannot use the API credential. Follow-up pushes cancel outdated review runs without starting another paid review. Once fixes are ready, request a fresh review through Actions > Selective Codex review, or run:
+
+```bash
+gh workflow run codex-review.yml --ref production -f pull_request=<number>
+```
+
+The reviewer uses a read-only permission profile on a disposable Linux runner. It receives no database or production credentials, performs no builds or tests and returns bounded structured findings. A separate job posts one reusable PR comment only while the reviewed head is still current and ready. The comment names the reviewed SHA. Old feedback remains historical after a push until a fresh review replaces it. A failed review job is visible in Actions and must be inspected, not interpreted as a clean review. It does not replace the required deterministic PR checks or grant merge/release permission.
+
+Agents use an independent internal Codex review before opening a code PR. The repository's separate automatic all-PR review setting in ChatGPT is off, as confirmed by the operator. That account setting is outside GitHub workflow control. Keep it off to avoid duplicate reviews. The selected action uses billable API calls; draft and docs-only work do not consume review calls.
+
 ## Schema before deployment
 
 `schema-release.yml` is the shared schema job. Development uses HTTPS Management API SQL with `MANAGED_DEV_SUPABASE_ACCESS_TOKEN`, scoped by the script to project `bbtcaurrtyoukvjbxbbj`. The managed database password stays absent. It executes a rollback plan, applies pending forward migrations in one transaction, checks the ledger and runs managed readiness. It produces a SHA/hash receipt.

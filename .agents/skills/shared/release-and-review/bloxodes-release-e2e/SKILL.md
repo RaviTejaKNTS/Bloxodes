@@ -16,6 +16,7 @@ An explicit release request authorizes the current task's reviewed files and sel
 1. Inspect HEAD, branch, status and the exact task diff. Preserve unrelated changes. Never create a second task checkout.
 2. Stage only the explicit allowlist. Keep ignored env files, credentials, reports and build output out of git. Commit and push the task branch without force.
 3. Open a PR targeting `production`. Link it to T3 immediately. Do not push directly to production or bypass protection.
+   Use an independent internal Codex review before opening a code PR. Ready code PRs also receive the selective GitHub review. Docs and skills-only PRs skip the paid action. After fixes, request a fresh review with `gh workflow run codex-review.yml --ref production -f pull_request=<number>` and inspect its exact-head feedback. Do not expect every push to start a review.
 4. Let `Pull request checks` run. Fix failures through task commits. GitHub owns dependency installs, managed-development schema verification, tests, builds and browser screenshots. Guidance-only PRs skip heavy work.
 5. Use T3 `watch_pull_request` and end the turn while awaiting checks. A wake is evidence to inspect, not approval to merge. Require `Required PR checks` to pass and confirm the approved scope.
 6. Merge using a merge commit so task ancestry remains available for cleanup. GitHub deletes the remote branch after merge.

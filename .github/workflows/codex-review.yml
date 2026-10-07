@@ -1,0 +1,151 @@
+name: Selective Codex review
+run-name: Codex review for PR ${{ github.event.pull_request.number || inputs.pull_request }}
+
+on:
+  pull_request:
+    branches: [production]
+    types: [opened, ready_for_review, reopened, synchronize, converted_to_draft, closed]
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: Open production PR number to review when fixes are ready
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: codex-review-${{ github.event.pull_request.number || inputs.pull_request }}
+  cancel-in-progress: true
+
+jobs:
+  scope:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.head.repo.full_name == github.repository && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      review: ${{ steps.scope.outputs.review }}
+      number: ${{ steps.scope.outputs.number }}
+      base: ${{ steps.scope.outputs.base }}
+      head: ${{ steps.scope.outputs.head }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/github-script@v7
+        id: scope
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number || inputs.pull_request }}
+        with:
+          script: |
+            const raw = process.env.PR_NUMBER;
+            if (!/^[1-9][0-9]*$/.test(raw)) throw new Error('An exact PR number is required.');
+            const number = Number(raw);
+            const params = { ...context.repo, pull_number: number };
+            const { data: pr } = await github.rest.pulls.get(params);
+            const entries = await github.paginate(github.rest.pulls.listFiles, { ...params, per_page: 100 });
+            if (entries.length !== pr.changed_files) throw new Error('The complete changed-file list is required.');
+            const files = entries.flatMap(file => [file.filename, file.previous_filename].filter(Boolean));
+            const { selectCodexReview } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/ci/review-scope.mjs`);
+            const scope = selectCodexReview({
+              eventName: context.eventName, eventAction: context.payload.action,
+              draft: pr.draft, state: pr.state, baseBranch: pr.base.ref,
+              baseRepository: pr.base.repo.full_name, headRepository: pr.head.repo?.full_name,
+              files
+            });
+            for (const sha of [pr.base.sha, pr.head.sha]) {
+              if (!/^[0-9a-f]{40}$/.test(sha)) throw new Error('Full commit SHAs are required.');
+            }
+            core.setOutput('review', String(scope.review));
+            core.setOutput('number', String(number));
+            core.setOutput('base', pr.base.sha);
+            core.setOutput('head', pr.head.sha);
+            await core.summary.addHeading('Selective review').addRaw(scope.reason).write();
+
+  review:
+    needs: scope
+    if: needs.scope.outputs.review == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      result: ${{ steps.codex.outputs.final-message }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.scope.outputs.head }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Review the selected code diff
+        id: codex
+        uses: openai/codex-action@bdf19a4a223ec2549a3e2274a0cf61556bc07675 # v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          permission-profile: ':read-only'
+          safety-strategy: drop-sudo
+          effort: medium
+          codex-args: '["--ephemeral"]'
+          prompt: |
+            Review PR #${{ needs.scope.outputs.number }} at head ${{ needs.scope.outputs.head }}.
+            The base commit is ${{ needs.scope.outputs.base }}.
+            Use git diff ${{ needs.scope.outputs.base }}...${{ needs.scope.outputs.head }} to inspect this PR.
+            Follow .github/codex/review.md. Do not run checks, edit files or perform external actions.
+          output-schema: |
+            {"type":"object","additionalProperties":false,"required":["summary","findings"],"properties":{"summary":{"type":"string"},"findings":{"type":"array","maxItems":8,"items":{"type":"object","additionalProperties":false,"required":["priority","title","body","path","startLine","endLine"],"properties":{"priority":{"type":"string","enum":["P0","P1","P2"]},"title":{"type":"string"},"body":{"type":"string"},"path":{"type":"string"},"startLine":{"type":"integer","minimum":1},"endLine":{"type":"integer","minimum":1}}}}}}
+
+  feedback:
+    needs: [scope, review]
+    if: needs.review.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ needs.scope.outputs.number }}
+          REVIEW_HEAD: ${{ needs.scope.outputs.head }}
+          REVIEW_BASE: ${{ needs.scope.outputs.base }}
+          REVIEW_RESULT: ${{ needs.review.outputs.result }}
+        with:
+          script: |
+            const number = Number(process.env.PR_NUMBER);
+            const head = process.env.REVIEW_HEAD;
+            const base = process.env.REVIEW_BASE;
+            const params = { ...context.repo, pull_number: number };
+            const { data: pr } = await github.rest.pulls.get(params);
+            if (pr.state !== 'open' || pr.draft || pr.head.sha !== head || pr.base.sha !== base) {
+              core.notice('The reviewed commit is no longer ready/current. No feedback posted.');
+              return;
+            }
+            const result = JSON.parse(process.env.REVIEW_RESULT);
+            if (typeof result.summary !== 'string' || !Array.isArray(result.findings) || result.findings.length > 8) {
+              throw new Error('Codex did not return a bounded structured review.');
+            }
+            const entries = await github.paginate(github.rest.pulls.listFiles, { ...params, per_page: 100 });
+            const changed = new Map(entries.map(file => [file.filename, file.status]));
+            const findings = result.findings.map(finding => {
+              if (!['P0', 'P1', 'P2'].includes(finding.priority) || !changed.has(finding.path) ||
+                  !Number.isInteger(finding.startLine) || !Number.isInteger(finding.endLine) ||
+                  finding.startLine < 1 || finding.endLine < finding.startLine ||
+                  typeof finding.title !== 'string' || typeof finding.body !== 'string') {
+                throw new Error('A finding must cite a changed file with a valid line range.');
+              }
+              const path = finding.path.split('/').map(encodeURIComponent).join('/');
+              const source = changed.get(finding.path) === 'removed' ? base : head;
+              const url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/blob/${source}/${path}#L${finding.startLine}`;
+              return `- **${finding.priority}: ${finding.title}**\n\n  ${finding.body}\n\n  [${finding.path}:${finding.startLine}](${url})`;
+            });
+            const marker = '<!-- bloxodes-selective-codex-review -->';
+            const body = `${marker}\nReviewed commit: \`${head}\`\n\n${result.summary}\n\n${findings.join('\n\n') || 'No actionable findings.'}\n\nCode review feedback. Required PR checks still apply. Request a fresh review after fixes through Actions > Selective Codex review.`;
+            if (body.length > 60000) throw new Error('Review feedback exceeds the comment limit.');
+            const issue = { ...context.repo, issue_number: number };
+            const comments = await github.paginate(github.rest.issues.listComments, { ...issue, per_page: 100 });
+            const existing = comments.find(comment => comment.user?.login === 'github-actions[bot]' && comment.body?.startsWith(marker));
+            if (existing) await github.rest.issues.updateComment({ ...context.repo, comment_id: existing.id, body });
+            else await github.rest.issues.createComment({ ...issue, body });

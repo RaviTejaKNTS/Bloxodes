@@ -1,14 +1,16 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-10-02
-Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on both the workstation and homelab on 2026-08-19
+Last verified: 2026-10-07
+Evidence: selective-review workflow secret boundaries and existing GitHub API-key metadata inspected on October 7. Ignored value store, loader guards and workstation/homelab `env:doctor`/`env:check` retain their August 19 verification boundary.
 
 ## GitHub CI ownership
 
 Task setup links existing ignored env storage and creates scratch directories. It performs no install/build/check. GitHub checks use process-only injected managed-development credentials and `env:doctor -- --ci`; they do not need workstation `.envs` files. `env/examples/ci.env.example` documents CI-only names.
 
 Managed SQL uses a project-targeted Supabase access token rather than a database password or copied OAuth session. Production migrations use separate HTTPS Studio credentials inside the production GitHub environment. Collection CI needs the four existing `WIKI_R2_*` values. Preserve installed env files and services. See `operations/deployment.md` for rollout and credential verification status.
+
+Selective PR code reviews reuse the existing GitHub repository `OPENAI_API_KEY` through `openai/codex-action`. The key is injected only into the review job, with no database, media, deployment or revalidation credentials. A separate feedback job has PR comment permission and no API key. This does not change the key's existing article-generation uses or any installed env file. See [selective code review](operations/deployment.md#selective-code-review) for trigger and cost boundaries.
 
 ## Storage Model
 
