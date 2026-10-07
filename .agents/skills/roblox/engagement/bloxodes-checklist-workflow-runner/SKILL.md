@@ -40,16 +40,17 @@ After the parent approves the brief, send the same subagent:
 npm run verify:engagement-finals -- --base-url http://127.0.0.1:3000 --file content/releases/<batch>/final.json
 ```
 
-The verifier checks copy, imports the reviewed final into its selected database, checks saved rows and fetches the rendered route. Its job must use only managed-development credentials and preserve the importer's production guard. The loopback URL above belongs to the GitHub runner, not the workstation or a public preview.
+The existing verifier checks copy, imports the reviewed final, checks page identity/public status and total item count, and fetches the route by title. It does not compare item contents. Its job must use only managed-development credentials and preserve the importer's production guard. The loopback URL above belongs to the GitHub runner, not the workstation or a public preview.
 
-8. Require desktop/mobile browser QA for the exact `/checklists/<slug>` page, including the single board, ticks and reload. Review the job's screenshots and reports. A generic smoke of unrelated routes is insufficient.
-9. Return the exact final path and successful GitHub verification/artifact links. If the job is unavailable, return the authored files and the explicit QA blocker, then stop before production dispatch. Do not report verification as passed.
+8. Before accepting QA, extend the verifier or job to compare every saved item's `section_code`, `title`, `description` and `is_required` against the exact reviewed final. Match the importer's trimming, null descriptions and default required-leaf behavior. Compare the complete normalized row set, including duplicates, without database-generated IDs or timestamps; item count alone is insufficient. Serialize all jobs writing the same universe/slug through import, browser QA and final readback, or isolate their targets. Bind the final hash and successful comparison to the artifacts.
+9. Require desktop/mobile browser QA for the exact `/checklists/<slug>` page, including the single board, ticks and reload. Review the job's screenshots and reports. A generic smoke of unrelated routes is insufficient.
+10. Return the exact final path and successful GitHub verification/artifact links. If the job or exact-row comparison is unavailable, return the authored files and the explicit QA blocker, then stop before production dispatch. Do not report verification as passed.
 
 ## Current GitHub QA gap
 
 PR CI currently dry-runs committed content batches against managed development. It does not apply the reviewed final, run `verify:engagement-finals`, or render the selected checklist. The selected-content publication workflow targets production, so its browser artifacts cannot satisfy prepublication QA.
 
-A managed-development job with the input, target, verifier and browser steps above must be implemented and verified before this workflow can complete a new checklist. Keep production publication blocked until that evidence exists. Do not run the missing checks locally or publish to production to obtain it. See `dev-docs/operations/deployment.md` for the current CI contract.
+A managed-development job with the input, target, exact-row comparison and browser steps above must be implemented and verified before this workflow can complete a new checklist. The current count-only verifier cannot certify the reviewed completion requirements. Keep production publication blocked until that evidence exists. Do not run the missing checks locally or publish to production to obtain it. See `dev-docs/operations/deployment.md` for the current CI contract.
 
 ## Parent Checks
 
@@ -60,4 +61,4 @@ A managed-development job with the input, target, verifier and browser steps abo
 - task titles are concrete actions
 - descriptions add useful context only when needed
 - public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
-- GitHub verifier and browser QA pass
+- GitHub exact-row comparison and browser QA pass for the reviewed final
