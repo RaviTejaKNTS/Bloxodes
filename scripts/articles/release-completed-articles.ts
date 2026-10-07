@@ -439,11 +439,10 @@ export async function resolveReleaseArtifactPath(filePath: string, queueId: stri
   return actual;
 }
 
-export async function readReleaseArtifact(row: QueueRow): Promise<ReleaseArtifact> {
+export async function readReleaseArtifact(row: QueueRow, artifactRoot = process.env.BLOXODES_ARTIFACT_ROOT || process.cwd()): Promise<ReleaseArtifact> {
   if (!row.result_path || path.isAbsolute(row.result_path) || path.basename(row.result_path) !== "final.json") {
     throw new Error(`Queue row ${row.id} has an unsafe result_path.`);
   }
-  const artifactRoot = process.env.BLOXODES_ARTIFACT_ROOT || process.cwd();
   const finalPath = await resolveReleaseArtifactPath(path.resolve(artifactRoot, row.result_path), row.id, row.result_slug!, artifactRoot);
   const mediaPath = await realpath(path.join(path.dirname(finalPath), "media.json"));
   if (path.dirname(mediaPath) !== path.dirname(finalPath)) throw new Error("Article media manifest escapes its workspace.");
@@ -736,7 +735,7 @@ async function releaseOne(params: {
   const stagingDir = await mkdtemp(path.join(stagingRoot, ".article-release-"));
   await copyFile(params.artifact.finalPath, path.join(stagingDir, "final.json"));
   await copyFile(params.artifact.mediaPath, path.join(stagingDir, "media.json"));
-  const staged = await readReleaseArtifact({ ...params.artifact.row, result_path: path.relative(process.cwd(), path.join(stagingDir, "final.json")) });
+  const staged = await readReleaseArtifact({ ...params.artifact.row, result_path: path.relative(process.cwd(), path.join(stagingDir, "final.json")) }, process.cwd());
   const promoted = await promoteAndImport(staged, params.productionEnv, params.coverDir);
   await verifyProductionReadback(promoted, params.production);
   await verifyLiveRelease(promoted, params.options, params.productionEnv);

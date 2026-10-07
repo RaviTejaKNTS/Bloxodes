@@ -39,6 +39,7 @@ permissions:
 
 concurrency:
   group: bloxodes-production
+  queue: max
   cancel-in-progress: false
 
 jobs:
@@ -59,7 +60,6 @@ jobs:
         name: Classify production change
         shell: bash
         env:
-          BEFORE_SHA: ${{ github.event.before || '' }}
           HEAD_SHA: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
           DISPATCH_DEPLOY: ${{ inputs.trigger_dokploy || 'true' }}
@@ -92,8 +92,15 @@ jobs:
               add_tag "site"
             fi
           else
-            if [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
-              BEFORE_SHA="$(git rev-parse "${HEAD_SHA}^")"
+            BEFORE_SHA="$(node scripts/ci/production-diff-base.mjs)"
+            if [ -z "$BEFORE_SHA" ]; then
+              # Without a proven live base, include schema and web conservatively.
+              BEFORE_SHA="$HEAD_SHA"
+              schema=true
+              deploy=true
+              runtime_code=true
+              add_path "/"
+              add_tag "site"
             fi
             while IFS= read -r -d '' file; do
               case "$file" in

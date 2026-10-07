@@ -30,7 +30,7 @@ Migration files remain immutable. CI rejects edits/deletions and runs the existi
 
 The existing Dokploy workflow still builds a Node 24 image through BuildKit, publishes an immutable SHA image to GHCR, updates Dokploy and requires `/api/health?scope=deploy` to report that SHA with a healthy database. It then purges mapped Cloudflare tags and checks a small set of public paths. Guidance-only changes skip the image build. The health gate stays lightweight and does not run the deeper stats pipeline checks.
 
-Schema, deployment and selected content jobs share the `bloxodes-production` concurrency lane. They do not cancel an active production release. Superseded SHAs fail the exact-current-production gate rather than applying an older plan to a newer release.
+Schema, deployment and selected content jobs share the `bloxodes-production` concurrency lane with `queue: max`. Up to 100 pending runs wait without replacing one another, and active releases are not cancelled. Managed schema jobs use the same queue policy in their separate lane. Production classification compares the healthy live build SHA with the release SHA, so a later guidance commit still deploys earlier changes that are not live. An unknown or unrelated live SHA selects a full guarded schema/web release. Superseded SHAs still fail the exact-current-production gate rather than applying an older plan to a newer release. Queue capacity and ordering follow [GitHub concurrency rules](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency).
 
 ## CI credentials
 
