@@ -76,3 +76,14 @@ export async function taskLocationAllowed(main, target, current) {
   const roots = [path.join(main, "tmp/worktrees"), "/srv/data/t3code/worktrees/Bloxodes"];
   return roots.some(root => contains(root, resolved) && root !== resolved);
 }
+
+export async function findWorktreeRecord(records, target) {
+  for (const record of records) {
+    try {
+      if (await fs.realpath(record.worktree) === target) return record;
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+    }
+  }
+  return undefined;
+}

@@ -28,6 +28,16 @@ export async function inspectPrivatePaths(root, main) {
   }
 }
 
+export async function assertNoContentClaims(main, target) {
+  const directory = path.join(main, "tmp/content-claims");
+  if (!await existing(directory)) return;
+  for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith(".json")) continue;
+    const claim = JSON.parse(await fs.readFile(path.join(directory, entry.name), "utf8"));
+    if (claim.worktree === target) throw new Error(`Release the shared content claim before cleanup: ${entry.name}`);
+  }
+}
+
 export async function archiveScratch(source, archive) {
   if (!await existing(source)) return;
   const excluded = new Set(["node_modules", ".next", "node-compile-cache", "tsx-1000", "test-reports", "content-claims", "worktree-reference"]);

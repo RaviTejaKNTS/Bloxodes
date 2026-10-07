@@ -8,7 +8,7 @@ Evidence: inspected GitHub workflow/configuration, protected PR checks, managed-
 
 Status: Protected PR flow, production schema/web release and verification-only content flow verified.
 
-T3 assigns one task worktree and branch. Agents stay there, edit the task's files and push a PR targeting `production`. The main checkout stays clean on `production`. T3 defaults to worktree mode and registers the actions in `t3.json`. New tasks start from a fresh `origin/production`. The automatic setup action waits before the agent starts; it installs no dependencies and runs no local checks or builds. See the HDD and shared-files contract below.
+T3 assigns one task worktree and branch. Agents stay there, edit the task's files and push a PR targeting `production`. The main checkout stays clean on `production`. Configure T3 for worktree mode and register the actions in `t3.json`. New tasks start from a fresh `origin/production`. The automatic setup action waits before the agent starts; it installs no dependencies and runs no local checks or builds. See the HDD and shared-files contract below.
 
 `Pull request checks` classifies the diff. Guidance-only PRs skip dependency installs and builds. Code PRs run migration integrity, CI env contracts, script/runtime tests and affected app checks. Web changes get a development-backed production build and desktop/mobile Chromium smoke with screenshots. CI starts the standalone server with the same public/static/data layout as Docker and waits for the deployment database-health endpoint. It does not require a fresh production stats pipeline in development. Browser reports last one day. Superseded check jobs cancel; database jobs serialize and do not cancel an active transaction.
 
@@ -19,6 +19,8 @@ Use T3's PR watcher while waiting. Merge approved work with a merge commit to ke
 Protected PR checks, managed/production schema verification, exact-SHA web/database health and the verification-only content flow have passed. The `/games` canary verifies migration history, compatible live code, metadata, sitemap membership and desktop/mobile rendering with zero content operations and zero cache events. It does not prove a real content write. Detailed execution receipts belong to the [October 7 release audit](../../docs/2026-10-07-github-release-audit.md).
 
 ## HDD worktrees and shared files
+
+T3 project registration is pending. Its project-update tool rejected the current Auto-mode caller and requires a live Full access/default thread. The setup action and worktree setting are prepared, and setup has been applied to the active checkout. Switch the calling thread to Full access, then register the actions and worktree default.
 
 The homelab main checkout and Git history live at `/srv/data/projects/Bloxodes`. `/home/teja/projects/Bloxodes` remains a compatibility link, including the current thread's saved checkout path. New T3 worktrees use `/srv/data/t3code/worktrees/Bloxodes/`. T3 owns task creation and thread binding; do not move an attached thread by creating a second branch or thread. Keep main on `production` and preserve edits in existing tasks when fetching production for new tasks.
 

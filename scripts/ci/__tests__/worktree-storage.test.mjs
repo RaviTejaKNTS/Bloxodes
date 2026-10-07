@@ -6,8 +6,8 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { claimContent } from "../../dev/claim-shared-content.mjs";
 import { setupWorktree } from "../../dev/setup-worktree.mjs";
-import { archiveScratch, inspectPrivatePaths } from "../../dev/worktree-cleanup-storage.mjs";
-import { contains, inspectLink, privateEnvFiles, checkoutPaths, taskLocationAllowed } from "../../dev/worktree-storage.mjs";
+import { archiveScratch, assertNoContentClaims, inspectPrivatePaths } from "../../dev/worktree-cleanup-storage.mjs";
+import { contains, findWorktreeRecord, inspectLink, privateEnvFiles, checkoutPaths, taskLocationAllowed } from "../../dev/worktree-storage.mjs";
 
 async function temporary(t) {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "bloxodes-worktree-"));
@@ -69,6 +69,23 @@ test("cleanup refuses checkout-owned private env files", async t => {
   await fs.mkdir(main); await fs.mkdir(task);
   await fs.writeFile(path.join(task, ".env.local"), "private", { mode: 0o600 });
   await assert.rejects(inspectPrivatePaths(task, main), /checkout-owned/);
+});
+
+test("unrelated claim operation directories do not block cleanup", async t => {
+  const main = await temporary(t), task = path.join(main, "task"), directory = path.join(main, "tmp/content-claims");
+  await fs.mkdir(directory, { recursive: true });
+  await fs.mkdir(path.join(directory, "gta.operation"));
+  await fs.writeFile(path.join(directory, "gta.json"), JSON.stringify({ worktree: path.join(main, "other") }));
+  await assertNoContentClaims(main, task);
+  await fs.writeFile(path.join(directory, "sandustry.json"), JSON.stringify({ worktree: task }));
+  await assert.rejects(assertNoContentClaims(main, task), /Release/);
+});
+
+test("a missing unrelated worktree does not hide the selected task record", async t => {
+  const main = await temporary(t), task = path.join(main, "task");
+  await fs.mkdir(task);
+  const selected = { worktree: task, branch: "refs/heads/task" };
+  assert.equal(await findWorktreeRecord([{ worktree: path.join(main, "gone") }, selected], task), selected);
 });
 
 test("links preserve existing files and reject different or broken destinations", async t => {
