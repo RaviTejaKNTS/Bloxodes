@@ -31,7 +31,7 @@ export async function wikiPublicationFailure(ticket: any) {
   const db = createClient(process.env.ARTICLE_DEV_SUPABASE_URL, process.env.ARTICLE_DEV_SUPABASE_SERVICE_ROLE!, {auth: {persistSession: false}});
   const {data: row, error} = await db.from("wiki_generation_queue").select("status,lease_token,lease_expires_at,production_receipt").eq("id",ticket.queueId).eq("production_receipt->>request_id",ticket.requestId).eq("production_receipt->>state","publishing").maybeSingle();
   if (error) throw error;
-  if (!wikiReceiptMatches(row,ticket)) return;
+  if (!row || !wikiReceiptMatches(row,ticket)) return;
   const now = new Date().toISOString();
   let save = db.from("wiki_generation_queue").update({production_receipt: {...row.production_receipt,state: "failed",error: "GitHub publication failed. Inspect its run before retrying.",failed_at: now}}).eq("id",ticket.queueId).eq("status",row.status).eq("production_receipt->>request_id",ticket.requestId).eq("production_receipt->>state","publishing");
   if (row.status === "processing") save = save.eq("lease_token",row.lease_token).gt("lease_expires_at",now);
