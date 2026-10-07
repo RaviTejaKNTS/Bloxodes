@@ -9,7 +9,21 @@ Read the approved game plan and `dev-docs/pipelines/content.md`. Resolve the reg
 
 Research the exact page and save source proof in an ignored `brief.md`. Verify the facts and any roster before preparing data. Maps need artwork attribution and actual coordinates. Quiz answers need sources. Checklist objectives must describe actions a player can complete. Catalog fields must fit the specific reference.
 
+For standalone checklists, follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Normally maintain one standalone verified 100% completion checklist page per game. Check published pages and drafts, then reuse the game's existing checklist. Record its supported edition or mode, full requirements, exclusions and alternatives in one board with sections. Additional pages or preparation lists, beginner milestones and routines require an explicit user exception in the plan and brief. Defer an unverified completion scope. Preserve collectible collection trackers without claiming they establish in-game 100%.
+
+Use one explicit `A or B` leaf for interchangeable paths, with verified criteria in its description. The board counts every three-level leaf regardless of `is_required`; separate mutually exclusive or optional leaves cannot express alternatives. Defer branching requirements that need unsupported alternative groups. See `references/payloads.md` for the row contract.
+
 Read [payloads](references/payloads.md) for the page type being created. Write a reviewed JSON payload with the matching groups. Store content and data together; do not use workspace files at runtime. Keep stable IDs on updates. Do not overwrite another game's rows or move page ownership during ordinary edits.
+
+## Checklist QA gate
+
+The publication and preview instructions below require managed-development GitHub evidence for the exact reviewed checklist payload. PR CI currently only dry-runs `game-pages`. The publisher's row-ID readback does not compare checklist contents or provide checklist-specific browser artifacts. No current job completes this prepublication QA.
+
+Until a matching job exists and passes, return the reviewed payload and this QA blocker. Do not report verification as passed or dispatch production publication. Do not apply content or run previews/checks locally to bypass the gap.
+
+The required job must consume the exact reviewed inputs, apply only their authorized development changes, and compare the complete expected saved page/task data against the normalized payload and any reviewed retained tasks. It must protect the same game/namespace/slug from concurrent writes through desktop/mobile checks of ticks, reload and account saving, then repeat readback and bind the payload hash to its artifacts. Use shared `game_checklist_pages` and `game_checklist_items`; the Roblox `verify:engagement-finals` command does not validate these tables. See `dev-docs/operations/deployment.md#managed-development-content-qa-gap`.
+
+## Publication and preview
 
 Use `npm run publish:game-pages -- --namespace <slug> --file <reviewed.json>` for full database validation and rollback. Add `--apply` for authorized managed-development publication. The batch either commits every group or rolls every group back. Checklist page rows precede their task rows within that transaction. An update retains tasks omitted from the batch; removing tasks requires an explicit reviewed cleanup.
 

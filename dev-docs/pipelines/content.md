@@ -12,6 +12,10 @@ Authoring stays in the assigned T3 task worktree. Validation, build and browser 
 
 The page templates and routes are unchanged by this release. Queued articles and wikis now have CI dispatch hooks in source. Installed runtimes stay on their previous release until separately activated.
 
+Prepublication checklist QA remains a CI gap. The PR content-batch job only dry-runs inputs; it does not apply a new final, run `verify:engagement-finals`, or render the selected checklist. Production publication screenshots do not prove development QA. A managed-development job must consume the reviewed final and capture the exact board on desktop/mobile before production dispatch. The existing verifier only checks page identity/public status and item count, so the job or verifier must also compare every normalized saved item with the reviewed final and protect QA from concurrent writers for the same checklist. Until that job and stronger comparison exist and pass, checklist workflows return authored files with the QA blocker. Local execution remains disallowed. See the evidence boundary in `../operations/deployment.md#managed-development-content-qa-gap`.
+
+This gate also applies to shared non-Roblox checklists. Their publisher's row-ID readback and PR dry-run do not establish exact contents or board behavior. The shared reference-page skill must return authored inputs with the blocker until matching development readback and browser artifacts exist; the Roblox engagement verifier cannot validate shared tables.
+
 ## Shared non-Roblox storage
 
 Last verified: 2026-10-06
@@ -53,6 +57,23 @@ Use `.agents/skills/bloxodes-game-plan/SKILL.md` to research a game and choose t
 The production release applied the eight page-type migrations and imported the nine GTA maps before web deployment. Stored snapshots and published map rows passed verification first. The existing map routes now depend on those shared rows.
 
 The production release used schema commit `048123eda0ed18f813da5fa6f7f776a7d6a8fc8e` and web commit `118b66d471623c520b1e9ae4457523c5d51fdf09`. [GitHub deployment 37492747348](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37492747348) passed exact-SHA web/database health. All nine map URLs, canonicals and GTA sitemap entries passed. The new quiz progress API returns private uncached responses and rejects anonymous requests. Web and Supabase container checks passed. No temporary test pages or accounts were published to production.
+
+## Standalone checklist scope
+
+Last verified: 2026-10-07
+Evidence: user-confirmed editorial convention, checklist planning/research/writing skills, and board composition/progress calculations in `ChecklistPageTemplate.tsx` and `ChecklistBoard.tsx`. This is authoring guidance, not a database constraint or a new audit of published content.
+
+Normally create standalone checklists only for source-verified 100% completion of a named game and supported edition or mode. Verify the full required activity set, thresholds, exclusions and alternative paths before proposing or writing the page. When sources do not establish that scope, defer it. Beginner milestones, preparation lists and repeatable routines need an explicit user exception recorded in the plan and brief.
+
+Normally keep at most one standalone checklist page per game, with one board and sections for its completion requirements. Check published pages and drafts for the whole game and reuse its existing checklist. Do not create additional pages by edition, mode, milestone or activity unless the user explicitly requests an exception. State the supported edition or mode in that game's checklist and defer incompatible scopes the board cannot represent. Section directories list pages, not additional boards.
+
+The board's percentage counts checked tasks. It does not reproduce a game's weighted completion meter unless that relationship is verified. The current template counts every three-level leaf and does not use `is_required` to exclude optional tasks from progress.
+
+Encode interchangeable completion paths as one required leaf with an explicit "A or B" title. Its description explains each source-verified option and tells players to tick it after either complete path. Do not create separate leaves for mutually exclusive choices or try to exclude one with `is_required: false`. Keep optional tips in descriptions rather than checkable rows. If branching requirements cannot fit one accurate leaf per completion requirement, defer the page until reviewed alternative-group support exists. Do not change existing task IDs or progress under this guidance-only update.
+
+Collectible wiki collections remain separate. An achievements tracker can cover a verified Steam roster with checkmarks, but all achievements or collectibles do not establish in-game 100% completion. Do not relabel those trackers or use them to bypass the standalone checklist scope check.
+
+Keep existing pages, URLs, saved progress and previously approved exceptions intact. This convention does not authorize retrospective removal or migration of content.
 
 ## Page Families
 
