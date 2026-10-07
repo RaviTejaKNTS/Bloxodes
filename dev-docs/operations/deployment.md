@@ -1,12 +1,12 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-10-03
+Last verified: 2026-10-07
 Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
 ## Task and release workflow
 
-Status: PR migration/build/browser checks verified; first production release verification pending.
+Status: Protected PR flow and production schema/web release verified. The read-only content canary exposed an install issue; its corrected retry is pending.
 
 T3 assigns one task worktree and branch. Agents stay there, edit the task's files and push a PR targeting `production`. The main checkout stays clean on `production`. `t3.json` runs the lightweight setup hook, which links ignored env storage and creates scratch directories. It installs no dependencies and runs no local checks or builds.
 
@@ -16,6 +16,16 @@ T3 assigns one task worktree and branch. Agents stay there, edit the task's file
 
 Use T3's PR watcher while waiting. Merge approved work with a merge commit to keep ancestry for cleanup. GitHub deletes the remote branch after merge. After T3 releases a finished task checkout, the exact-worktree cleanup helper removes only its clean merged branch/checkout. Detached automation and rollback runtimes are preserved. Fast-forward the clean main checkout to the released SHA, without installing dependencies or altering installed services.
 
+## October 7 release verification
+
+[PR #30](https://github.com/RaviTejaKNTS/Bloxodes/pull/30) merged as `c199d39ac3bc03d37aec9c55aee13f0b2bb4cbaa` after required checks and completed automated review. [Production run 37575599220](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37575599220) passed managed-development readiness, the guarded Studio production schema job, image publication, exact-SHA web/database health, targeted cache purge and live smoke. Both databases had no pending migrations, so this release changed no production schema.
+
+The main checkout fast-forwarded cleanly to this SHA. Its tracked T3 actions now use lightweight setup and GitHub PR/check links. The prior ignored T3 config was preserved in `/tmp/bloxodes-task30-t3-before-release.json`. GitHub deleted the merged remote branch. Production protection and the production-only environment policy were read back. The active task checkout remains attached to T3; cleanup waits until T3 releases it.
+
+The verification-only [content run 37576589509](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37576589509) stopped before its ledger command because the production environment made npm omit the development-only `tsx` package. The content workflow now installs locked development dependencies explicitly with `npm ci --include=dev`. It keeps production mode for the guarded publishers and performs no local install. Retry the existing `/games` canary after the fix merges. No content operation or revalidation ran in the failed canary.
+
+Installed runtime pointers remain `cfadab0db53575c235535234185cea5120b56e0a` for the article runtime and `34b925cca7788e7db83e58d640031e89ffe01cec` for the shared automation runtime. Their env, services and jobs were not changed or activated.
+
 ## Schema before deployment
 
 `schema-release.yml` is the shared schema job. Development uses HTTPS Management API SQL with `MANAGED_DEV_SUPABASE_ACCESS_TOKEN`, scoped by the script to project `bbtcaurrtyoukvjbxbbj`. The managed database password stays absent. It executes a rollback plan, applies pending forward migrations in one transaction, checks the ledger and runs managed readiness. It produces a SHA/hash receipt.
@@ -24,7 +34,7 @@ New applications store their exact SQL file bytes in the development ledger with
 
 The first PR exposed 13 old connector timestamps that differ from committed migration versions. The audited `managed_dev_history_aliases` pin the original SQL and local file hashes. CI also proves current shared objects and legacy retirement before copying the original SQL evidence into canonical history records. It preserves the old records and never replays their schema or content changes. The GTA differences were removed by the verified tools-removal migration and later shared-table retirement. New pending migrations still execute normally.
 
-[PR CI run 37569597377](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37569597377) passed the history repair, all seven development readiness checks, tests, build and desktop/mobile browser checks at `631a8c3cb6caa53b9bf217d7b5403775fbd7dfa2`. Readback confirmed all 13 canonical records, all 13 original records and absent legacy tables. Later publication safeguards remain subject to their own PR checks.
+[PR CI run 37569597377](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37569597377) passed the history repair, all seven development readiness checks, tests, build and desktop/mobile browser checks at `631a8c3cb6caa53b9bf217d7b5403775fbd7dfa2`. Readback confirmed all 13 canonical records, all 13 original records and absent legacy tables. The final publication safeguards passed [PR CI run 37574740753](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37574740753) at `3e6638b18a3aa483ad741d1d228536b3f76c8345`, including migration byte proof, queue/artifact binding and wiki dispatch recovery tests. Desktop/mobile browser artifacts expire after one day.
 
 After merge, the production workflow classifies schema changes separately from web changes. Schema-only releases apply without a web rebuild. For mixed changes, the schema job succeeds before the web job starts.
 
@@ -49,7 +59,7 @@ GitHub owns CI credentials. Dokploy owns application runtime env. Workstation `.
 
 ## Selected content publication
 
-`Publish selected content` is a database-only dispatch. It does not build an image. It requires the reviewed current production SHA and checks that any required web/data changes are already live.
+`Publish selected content` is a database-only dispatch. It does not build an image. It installs locked development dependencies explicitly because its publishers need TypeScript and browser tooling even in production mode. It requires the reviewed current production SHA and checks that any required web/data changes are already live.
 
 Before loading inputs or writing content, it runs `supabase:production:release` with `--check-ledger`. This mode reads production migration history only and refuses publication if migrations or audited repairs are pending. It never applies SQL or waits while holding the release lane. Retry the batch after the protected production schema release succeeds.
 
