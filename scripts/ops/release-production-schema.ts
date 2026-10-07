@@ -25,6 +25,7 @@ const repoRoot = path.resolve(import.meta.dirname, "../..");
 const migrationRoot = path.join(repoRoot, "supabase/migrations");
 const argv = process.argv.slice(2);
 const apply = argv.includes("--apply");
+const checkLedger = argv.includes("--check-ledger");
 const transport = value("--transport") ?? "ssh";
 const databaseRole = value("--database-role") ?? "postgres";
 
@@ -123,7 +124,8 @@ async function main() {
   if (apply && value("--confirm") !== "APPLY production") {
     throw new Error('Production apply requires --confirm "APPLY production".');
   }
-  if (apply && git("rev-parse", "origin/production") !== approvedSha) {
+  if (checkLedger && apply) throw new Error("--check-ledger cannot apply migrations.");
+  if ((apply || checkLedger) && git("rev-parse", "origin/production") !== approvedSha) {
     throw new Error("Production apply requires origin/production to equal the approved SHA.");
   }
 
@@ -166,6 +168,12 @@ async function main() {
   );
   if (unexpected.length) {
     throw new Error(`Unexpected pre-convergence production migrations: ${unexpected.map((item) => item.file).join(", ")}`);
+  }
+
+  if (checkLedger) {
+    if (historyRepairs.length || pending.length) throw new Error("Production schema is pending. Retry content publication after the production schema release succeeds.");
+    console.log(`Production migration ledger is ready at ${approvedSha}. No SQL changes were executed.`);
+    return;
   }
 
   if (process.env.GITHUB_ACTIONS === "true") {

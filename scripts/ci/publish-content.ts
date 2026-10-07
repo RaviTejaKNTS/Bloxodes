@@ -18,6 +18,7 @@ const root = process.cwd();
 const base = path.dirname(file);
 const batch = parseBatch(JSON.parse(fs.readFileSync(file, "utf8")));
 const realBase = fs.realpathSync(base);
+let wikiRequestValidated = false;
 process.env.BLOXODES_ARTIFACT_ROOT = path.resolve(base);
 // Every input in the bundle must be a regular committed file inside this batch.
 function inspect(directory: string) {
@@ -77,7 +78,10 @@ function run(operation: any, write: boolean) {
 }
 async function main() {
   console.log(`Selected batch ${file}; SHA-256 ${createHash("sha256").update(fs.readFileSync(file)).digest("hex")}; ${batch.operations.length} operations.`);
-  if (apply) await wikiPublicationReceipt(batch.wikiReceipt);
+  if (apply) {
+    await wikiPublicationReceipt(batch.wikiReceipt,batch,base);
+    wikiRequestValidated = Boolean(batch.wikiReceipt);
+  }
   // Prove every selected publisher before the first production write.
   for (const operation of batch.operations) run(operation, false);
   if (managed) return;
@@ -105,10 +109,10 @@ async function main() {
       env: { ...process.env, SUPABASE_URL: dev.url, SUPABASE_SERVICE_ROLE: dev.serviceRole }, stdio: "inherit",
     });
   }
-  if (apply) await wikiPublicationReceipt(batch.wikiReceipt, batch.urls.map((url: { path: string }) => `https://bloxodes.com${url.path}`));
+  if (apply) await wikiPublicationReceipt(batch.wikiReceipt,batch,base,batch.urls.map((url: { path: string }) => `https://bloxodes.com${url.path}`));
 }
 main().catch(async error => {
   console.error(error.message);
   process.exitCode = 1;
-  if (apply) await wikiPublicationFailure(batch.wikiReceipt).catch(() => console.error("Could not record the failed wiki CI publication."));
+  if (apply && wikiRequestValidated) await wikiPublicationFailure(batch.wikiReceipt).catch(() => console.error("Could not record the failed wiki CI publication."));
 });

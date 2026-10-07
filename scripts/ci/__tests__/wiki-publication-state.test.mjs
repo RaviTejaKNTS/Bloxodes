@@ -22,3 +22,10 @@ test("failed requests retry after a delay and stop after three attempts", () => 
   assert.equal(wikiDispatchReady({...failed,production_receipt: {...failed.production_receipt,dispatch_attempts: 3}},now),false);
   assert.equal(wikiDispatchReady({...failed,production_receipt: {...failed.production_receipt,failed_at: "2026-10-07T05:50:00Z"}},now),false);
 });
+test("legacy failures use the same live-lease rule and remain retryable", () => {
+  const legacy = {...queued,status: "processing",lease_expires_at: "2026-10-07T07:00:00Z"};
+  assert.equal(wikiReceiptMatches(legacy,ticket,now),true);
+  const failed = {...legacy,production_receipt: {...legacy.production_receipt,state: "failed",dispatch_attempts: 1,failed_at: "2026-10-07T05:30:00Z"}};
+  assert.equal(wikiDispatchReady(failed,now),true);
+  assert.equal(wikiDispatchReady({...failed,lease_expires_at: "2026-10-07T05:00:00Z"},now),false);
+});

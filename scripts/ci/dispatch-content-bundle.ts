@@ -8,7 +8,7 @@ import { resolveArticleDevCredentials } from "../articles/article-queue-env";
 import { parseBatch } from "./content-contract.mjs";
 import { decodeBundle } from "./content-bundle.mjs";
 
-export async function dispatchContentBundle(batch: any, inputs: Array<{ source: string; destination: string }>) {
+export async function dispatchContentBundle(batch: any, inputs: Array<{ source: string; destination: string }>, beforeDispatch?: (hash: string) => Promise<void>) {
   parseBatch(batch);
   const files = await Promise.all(inputs.map(async input => ({ path: input.destination, base64: (await fs.readFile(input.source)).toString("base64") })));
   const buffer = Buffer.from(JSON.stringify({ version: 1, batch, files }));
@@ -33,6 +33,7 @@ export async function dispatchContentBundle(batch: any, inputs: Array<{ source: 
   }
   const approvedSha = execFileSync("git", ["ls-remote", "origin", "refs/heads/production"], { encoding: "utf8" }).split(/\s+/)[0];
   if (!/^[0-9a-f]{40}$/.test(approvedSha ?? "")) throw new Error("Production SHA is unavailable.");
+  if (beforeDispatch) await beforeDispatch(hash);
   execFileSync("gh", ["workflow", "run", "publish-content.yml", "--repo", "RaviTejaKNTS/Bloxodes", "--ref", "production", "--json"], { input: JSON.stringify({ bundle_hash: hash, approved_sha: approvedSha, apply: "true" }), stdio: ["pipe", "inherit", "inherit"] });
   console.log(`Dispatched frozen content ${hash}. Production acknowledgement follows CI readback.`);
   return { dispatched: true as const, hash };

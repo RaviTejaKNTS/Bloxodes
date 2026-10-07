@@ -46,6 +46,9 @@ jobs:
       WIKI_R2_ACCESS_KEY_ID: ${{ secrets.WIKI_R2_ACCESS_KEY_ID }}
       WIKI_R2_SECRET_ACCESS_KEY: ${{ secrets.WIKI_R2_SECRET_ACCESS_KEY }}
       WIKI_R2_BUCKET: ${{ secrets.WIKI_R2_BUCKET }}
+      VPS_SUPABASE_STUDIO_URL: https://studio.bloxodes.com
+      VPS_SUPABASE_STUDIO_USERNAME: ${{ secrets.VPS_SUPABASE_STUDIO_USERNAME }}
+      VPS_SUPABASE_STUDIO_PASSWORD: ${{ secrets.VPS_SUPABASE_STUDIO_PASSWORD }}
       ARTICLE_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
       ARTICLE_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
       BATCH: ${{ inputs.batch }}
@@ -68,6 +71,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: node --test scripts/ci/__tests__/*.test.mjs
       - run: npx playwright install --with-deps chromium
+      - name: Require production migrations before loading the batch or writing content
+        run: node --import tsx scripts/ops/release-production-schema.ts --approved-sha "$BLOXODES_APPROVED_SHA" --transport studio --database-role supabase_admin --check-ledger
       - name: Load the selected private bundle
         if: inputs.bundle_hash != ''
         run: |

@@ -6,7 +6,7 @@ Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, mana
 
 ## Task and release workflow
 
-Status: GitHub migration prepared; first PR/release verification pending.
+Status: PR migration/build/browser checks verified; first production release verification pending.
 
 T3 assigns one task worktree and branch. Agents stay there, edit the task's files and push a PR targeting `production`. The main checkout stays clean on `production`. `t3.json` runs the lightweight setup hook, which links ignored env storage and creates scratch directories. It installs no dependencies and runs no local checks or builds.
 
@@ -21,6 +21,8 @@ Use T3's PR watcher while waiting. Merge approved work with a merge commit to ke
 `schema-release.yml` is the shared schema job. Development uses HTTPS Management API SQL with `MANAGED_DEV_SUPABASE_ACCESS_TOKEN`, scoped by the script to project `bbtcaurrtyoukvjbxbbj`. The managed database password stays absent. It executes a rollback plan, applies pending forward migrations in one transaction, checks the ledger and runs managed readiness. It produces a SHA/hash receipt.
 
 The first PR exposed 13 old connector timestamps that differ from committed migration versions. The audited `managed_dev_history_aliases` pin the original SQL and local file hashes. CI also proves current shared objects and legacy retirement before copying the original SQL evidence into canonical history records. It preserves the old records and never replays their schema or content changes. The GTA differences were removed by the verified tools-removal migration and later shared-table retirement. New pending migrations still execute normally.
+
+[PR CI run 37569597377](https://github.com/RaviTejaKNTS/Bloxodes/actions/runs/37569597377) passed the history repair, all seven development readiness checks, tests, build and desktop/mobile browser checks at `631a8c3cb6caa53b9bf217d7b5403775fbd7dfa2`. Readback confirmed all 13 canonical records, all 13 original records and absent legacy tables. Later publication safeguards remain subject to their own PR checks.
 
 After merge, the production workflow classifies schema changes separately from web changes. Schema-only releases apply without a web rebuild. For mixed changes, the schema job succeeds before the web job starts.
 
@@ -39,13 +41,15 @@ Schema, deployment and selected content jobs share the `bloxodes-production` con
 GitHub owns CI credentials. Dokploy owns application runtime env. Workstation `.envs` remains ignored and is not copied into images. All CI processes use `BLOXODES_ENV_PROFILE=process-only`.
 
 - PR/development jobs need `MANAGED_DEV_SUPABASE_URL`, `MANAGED_DEV_SUPABASE_ANON_KEY`, `MANAGED_DEV_SUPABASE_SERVICE_ROLE` and `MANAGED_DEV_SUPABASE_ACCESS_TOKEN`. OAuth connector sessions cannot authenticate GitHub jobs.
-- The production environment owns Studio credentials, production database/media/revalidation credentials, Dokploy/GHCR deploy credentials and collection R2 credentials. Configure its deployment policy for the `production` branch. Remove older repository-wide privileged copies only after replacement jobs and dependent scheduled jobs are verified.
+- The production environment contains Studio credentials and the four collection R2 keys. Existing database/media/revalidation and Dokploy/GHCR credentials remain repository secrets during first-release verification. Its live deployment policy allows only the `production` branch, configured and read back on October 7. Remove older repository-wide privileged copies only after replacement jobs and dependent scheduled jobs are verified.
 - Collection publication needs `WIKI_R2_ENDPOINT`, `WIKI_R2_ACCESS_KEY_ID`, `WIKI_R2_SECRET_ACCESS_KEY` and `WIKI_R2_BUCKET`. Copy only the approved existing keys. Do not edit installed runtime env or stop jobs to obtain them.
 - `env/examples/ci.env.example` documents CI-only names. `env:doctor -- --ci` validates the committed profiles and injected development target without requiring workstation files on the runner.
 
 ## Selected content publication
 
 `Publish selected content` is a database-only dispatch. It does not build an image. It requires the reviewed current production SHA and checks that any required web/data changes are already live.
+
+Before loading inputs or writing content, it runs `supabase:production:release` with `--check-ledger`. This mode reads production migration history only and refuses publication if migrations or audited repairs are pending. It never applies SQL or waits while holding the release lane. Retry the batch after the protected production schema release succeeds.
 
 A small reviewed batch can live at `content/releases/<batch>/batch.json`. Its operations select fixed publishers and exact input files. Changed batches receive development dry-runs in PR CI. For larger/manual or automated work, `dispatchContentBundle` stores only selected authoring inputs in the private managed-development `ci-release-bundles` bucket. The immutable object is addressed by SHA-256. GitHub fetches that exact hash and accepts only bounded data/image files inside the bundle. It never executes bundled code or SQL. Keep failed bundles for retry and clean up expired successful bundles through a controlled storage operation.
 
@@ -54,6 +58,8 @@ The registry covers shared non-Roblox page batches, queued articles, article/che
 The job proves every selected publisher before its first write, then uses the established publisher's media/data operations and readback. Roblox collections use the same legacy-media normalization during proof and publication as managed-development automation. Codes setup refreshes only the reviewed slug. It revalidates explicit events and verifies exact public URLs, expected text, metadata and sitemap membership. Public text readback allows six attempts with ten-second request timeouts and five-second delays for temporary propagation failures. Sitemap verification also retains its bounded retry policy. Desktop/mobile Chromium checks the selected pages and saves screenshots for one day. Article queue acknowledgement and the exact wiki request close only after these checks pass. No other drafts, tables or user progress are copied.
 
 New wiki builders move verified work to the existing durable `publishing` status and release their builder lease/slot. The release hook dispatches its exact request once, then leaves queued work alone. CI records `published` after all readback passes, or retains a failed receipt for up to three dispatch attempts with a 15-minute delay. Legacy installed builders retain their live-lease receipt contract. An interrupted dispatch with an unknown outcome requires checking the GitHub run before resetting the request; elapsed queue time alone never triggers a duplicate dispatch.
+
+The dispatcher binds each wiki request to its stored result paths, exact final/manifest hashes and full immutable private bundle hash before dispatch. CI checks the queue's universe, wiki slug and approved collections against the selected artifacts, exact URLs and cache events before writing and acknowledging. Queue-backed wiki publication requires that frozen bundle; manual publications without a queue ticket can use normal reviewed batches. Failures for legacy processing requests use the same original live-lease check as success. A mismatched batch cannot close or fail another request.
 
 `content/releases/verify-existing/batch.json` is a read-only `/games` canary. Dispatch it with `apply=false`. It publishes no game/page/row. Do not test CI by creating junk content or modifying a real page.
 

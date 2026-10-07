@@ -31,5 +31,12 @@ export function parseBatch(input) {
   }
   for (const event of input.events) if (!eventTypes.has(event.type) || !/^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*$/.test(event.slug)) throw new Error("Invalid exact revalidation event.");
   if (input.operations.length && !input.events.length) throw new Error("Publication requires explicit cache events.");
+  if (input.wikiReceipt !== undefined) {
+    const ticket = input.wikiReceipt;
+    if (!ticket || !/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(ticket.queueId ?? "") ||
+        typeof ticket.requestId !== "string" || !ticket.requestId.startsWith(`${ticket.queueId}-`) ||
+        Object.keys(ticket).some(key => !["queueId","requestId"].includes(key)) ||
+        input.operations.some(operation => !["roblox-wiki","roblox-collection"].includes(operation.publisher))) throw new Error("Invalid exact wiki receipt batch.");
+  }
   return input;
 }
