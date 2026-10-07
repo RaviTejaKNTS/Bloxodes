@@ -2,7 +2,7 @@ import "../shared/load-env";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { load } from "cheerio";
+import { publicationSitemap, verifyPublicText } from "./public-readback.mjs";
 import { wikiPublicationReceipt } from "./wiki-publication-receipt";
 import { createHash } from "node:crypto";
 import { batchPath, ownedPath, parseBatch } from "./content-contract.mjs";
@@ -86,18 +86,9 @@ async function main() {
     await revalidatePublishedContent(process.env, batch.events);
   }
   for (const url of batch.urls) {
-    const response = await fetch(`https://bloxodes.com${url.path}`, { signal: AbortSignal.timeout(30_000) });
-    const html = await response.text();
-    if (!response.ok || !load(html)("body").text().replace(/\s+/g, " ").toLowerCase().includes(url.contains.toLowerCase())) throw new Error(`Public readback failed for ${url.path}.`);
+    await verifyPublicText(url.path, url.contains);
     console.log(`Verified https://bloxodes.com${url.path}`);
-    const family = url.path.split("/")[1];
-    const section = url.path.split("/")[2];
-    const sitemap = ["articles", "authors", "catalog", "checklists", "codes", "events", "puzzles", "quizzes", "stats", "tools", "wiki"].includes(family)
-      ? family
-      : family === "gta" && ["wiki", "maps", "checklists"].includes(section) || family === "red-dead" && section === "wiki" || family === "minecraft" && ["wiki", "tools"].includes(section)
-        ? family
-        : ["", "games", "gta", "red-dead", "minecraft"].includes(family) && !section ? "main" : "games";
-    execFileSync("npm", ["run", "verify:published-url", "--", "--path", url.path, "--sitemap", `/sitemaps/${sitemap}.xml`, "--base-url", "https://bloxodes.com"], { env: process.env, stdio: "inherit" });
+    execFileSync("npm", ["run", "verify:published-url", "--", "--path", url.path, "--sitemap", publicationSitemap(url.path), "--base-url", "https://bloxodes.com"], { env: process.env, stdio: "inherit" });
   }
   // Queue acknowledgement follows the selected desktop/mobile browser checks.
   execFileSync("npx", ["playwright", "test", "apps/web/e2e/release-smoke.spec.ts"], {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { brewingPlan, compareEquipment } from "@/lib/minecraft-tools/calculations";
 import { anvilPlan, craftingPlan, type AnvilInput } from "@/lib/minecraft-tools/planners";
@@ -40,12 +40,12 @@ export function CraftingTool({ rules, edition }: { rules: ToolRules; edition: Ed
   const search = useItemSearch(outputs);
   const [target, st] = useState(outputs.some(item => item.id === "chest") ? "chest" : outputs[0]?.id ?? ""), [count, sc] = useState("1");
   const [owned, so] = useState<Array<{ id: string; quantity: string }>>([]), [preferences, sp] = useState<Record<string, string>>({});
-  const result = useMemo(() => calculate(() => {
+  const result = calculate(() => {
     if (!target) throw new Error("Choose a supported output.");
     const inventory: Record<string, number> = {};
     owned.forEach(row => { if (!row.id) throw new Error("Choose an item for every owned-inventory row."); inventory[row.id] = (inventory[row.id] ?? 0) + n(row.quantity); });
     return craftingPlan({ [target]: n(count) }, inventory, recipes, preferences);
-  }), [target, count, owned, preferences, recipes]);
+  });
   const activeOutputs = new Set([target, ...(result.value?.steps.map(step => step.output) ?? [])]);
   const selectableRecipes = [...activeOutputs].map(output => {
     const choices = recipes.filter(recipe => recipe.output === output);
