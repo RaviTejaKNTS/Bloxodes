@@ -41,6 +41,8 @@ jobs:
       WIKI_R2_BUCKET: ${{ secrets.WIKI_R2_BUCKET }}
       SITE_URL: https://bloxodes.com
       NEXT_PUBLIC_SITE_URL: https://bloxodes.com
+      # Chromium maps this test host to loopback. Public canonicals stay on SITE_URL.
+      TEST_BASE_URL: http://bloxodes.test:3000
       BATCH: ${{ inputs.batch }}
       BUNDLE_HASH: ${{ inputs.bundle_hash }}
     steps:

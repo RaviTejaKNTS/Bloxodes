@@ -11,7 +11,8 @@ for (const [source, target] of [["apps/web/public", "public"], ["apps/web/.next/
 }
 fs.cpSync(path.join(root, "data"), path.join(standalone, "data"), {recursive: true});
 const address = new URL(process.env.TEST_BASE_URL ?? "http://127.0.0.1:3000");
-if (address.protocol !== "http:" || !["127.0.0.1", "localhost"].includes(address.hostname)) throw new Error("The CI preview must stay on runner loopback.");
+const managedTestHost=process.env.BLOXODES_MANAGED_QA==='true' && address.hostname==='bloxodes.test' && address.port==='3000';
+if (address.protocol !== "http:" || !["127.0.0.1", "localhost"].includes(address.hostname) && !managedTestHost) throw new Error("The CI preview must stay on runner loopback.");
 const server = spawn(process.execPath, [path.join(web, "server.js")], {
   stdio: "inherit", env: {...process.env, NODE_ENV: "production", HOSTNAME: "127.0.0.1", PORT: address.port || "3000"},
 });

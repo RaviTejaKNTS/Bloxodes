@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const baseURL = process.env.TEST_BASE_URL || process.env.PLAYWRIGHT_TEST_BASE_URL || "http://127.0.0.1:3000";
 const manageServer = process.env.PLAYWRIGHT_SKIP_WEBSERVER !== "1";
+const managedQa=process.env.GITHUB_ACTIONS==='true' && process.env.BLOXODES_MANAGED_QA==='true';
 
 export default defineConfig({
   testDir: "./apps/web/e2e",
@@ -17,6 +18,7 @@ export default defineConfig({
   outputDir: "tmp/test-reports/playwright-results",
   use: {
     baseURL,
+    launchOptions: managedQa ? {args:['--host-resolver-rules=MAP bloxodes.test 127.0.0.1','--no-proxy-server']} : undefined,
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
@@ -35,7 +37,7 @@ export default defineConfig({
   webServer: manageServer
     ? {
         command: process.env.GITHUB_ACTIONS === "true" ? "node scripts/ci/start-web.mjs" : "npm run start:web",
-        url: `${baseURL}/api/health?scope=deploy`,
+        url: `${managedQa?'http://127.0.0.1:3000':baseURL}/api/health?scope=deploy`,
         reuseExistingServer: !process.env.CI,
         timeout: 120_000,
         stdout: "pipe",
