@@ -33,6 +33,7 @@ The one-time `activate:minecraft-editions` command is removed. Preserve all unre
 
 ## Folder Map
 
+- `ci/review-scope.mjs` decides whether a PR needs a paid Codex review. Docs, skills and content-only changes skip it. Same-repository production PRs review when opened ready or changed to ready; pushes cancel stale reviews and explicit workflow dispatch reviews completed fixes. It performs no database or publication operations. GitHub runs its policy tests.
 - `ci/migration-history.mjs` proves the finite managed-development timestamp aliases with exact source/local hashes and current objects. It copies original ledger evidence without executing retired SQL. `ci/wiki-publication-state.mjs` defines the durable request and bounded retry rules for wiki releases. GitHub owns their tests.
 - `ci/wiki-publication-binding.mjs` binds queue receipts to the stored approved result paths, exact frozen bundle, artifact hashes and canonical pages. The selected-content job checks production migration history before publication with the read-only `supabase:production:release -- --check-ledger` mode.
 - `ci/migration-byte-proof.mjs` rejects unproven applied SQL before CI issues a receipt. `ci/article-publication-binding.mjs` ties each selected final and canonical URL to its exact article queue row before publication. GitHub runs their mismatch/replay tests.

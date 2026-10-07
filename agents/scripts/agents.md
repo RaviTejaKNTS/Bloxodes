@@ -11,6 +11,8 @@ Minecraft wrappers reuse franchise publication and verification with explicit `-
 Authoritative workflow guidance lives in `scripts/AGENTS.md`.
 This file is the quick reference for what exists today and how to invoke it.
 
+Selective PR review uses `scripts/ci/review-scope.mjs` and `.github/workflows/codex-review.yml`. Ready code PRs receive a read-only API-backed review; docs and skills-only PRs skip it. After fixes, run `gh workflow run codex-review.yml --ref production -f pull_request=<number>` to review the current head. It creates no application build or content publication.
+
 ## Preferred Entry Point
 
 - Prefer `npm run <name>` when a package script exists.
