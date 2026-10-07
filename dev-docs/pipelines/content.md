@@ -12,6 +12,8 @@ Authoring stays in the assigned T3 task worktree. Validation, build and browser 
 
 The page templates and routes are unchanged by this release. Queued articles and wikis now have CI dispatch hooks in source. Installed runtimes stay on their previous release until separately activated.
 
+Prepublication checklist QA remains a CI gap. The PR content-batch job only dry-runs inputs; it does not apply a new final, run `verify:engagement-finals`, or render the selected checklist. Production publication screenshots do not prove development QA. A managed-development job must consume the reviewed final, run that importing/readback/route verifier against its development-backed server, and capture the exact board on desktop/mobile before production dispatch. Until that job exists and passes, checklist workflows return authored files with the QA blocker. Local execution remains disallowed. See the evidence boundary in `../operations/deployment.md#managed-development-content-qa-gap`.
+
 ## Shared non-Roblox storage
 
 Last verified: 2026-10-06
