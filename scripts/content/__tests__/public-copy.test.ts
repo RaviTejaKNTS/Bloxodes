@@ -67,6 +67,8 @@ test("public copy rejects provenance and workflow language", () => {
     "These entries follow the approved source route.",
     "According to our sources, each jump is numbered.",
     "Our research shows the vault opens at night.",
+    "We have verified every location.",
+    "Sources do not list a requirement.",
     "Missing images are recorded in the image manifest.",
     "The research workflow verified every vehicle."
   ]) {
@@ -95,7 +97,9 @@ test("game terms named Research or Source remain valid", () => {
   for (const intro_md of [
     "Complete Research on each Twisted to unlock its toon.",
     "Research takes 3 minutes, and the Source of the river is north of spawn.",
-    "Coins come from multiple sources, such as quests and drops."
+    "Coins come from multiple sources, such as quests and drops.",
+    "Fishing is your primary source of coins.",
+    "Complete additional Research on each Twisted."
   ]) assert.equal(checkCopy({ title: "Dandy's World Twisteds", intro_md }).status, 0);
 });
 

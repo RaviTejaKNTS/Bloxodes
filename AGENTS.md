@@ -98,7 +98,7 @@ Write like a player who knows the game. Never say where a fact came from or how 
 - Bad: "Our research shows the vault opens at night." Good: "The vault opens at night."
 - Bad: "This source-backed list covers every pet." Good: "There are 42 pets across five rarities."
 
-Game terms that use these words, such as Dandy's World's Research or GTA's Source Cargo, are fine. `scripts/content/check-public-copy.ts` blocks the process-voice phrases, not the bare words.
+Game terms that use these words, such as Dandy's World's Research or GTA's Source Cargo, are fine. `scripts/content/check-public-copy.ts` blocks process-voice phrases. Bare `source` and `research` pass; `manifest` and `workflow` stay blocked.
 
 ## Change Checklists
 
