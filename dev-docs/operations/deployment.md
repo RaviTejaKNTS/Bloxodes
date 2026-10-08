@@ -1,7 +1,8 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-10-07
+Last verified: 2026-10-08
+Path layout rechecked 2026-10-08 against live T3 registrations, Git worktree metadata, service paths and env links. Other component verification boundaries remain as documented.
 Evidence: inspected GitHub workflow/configuration, protected PR checks, managed-development readiness and SQL byte proof, guarded production ledger readback, exact-SHA deployment/database health, and verification-only content/browser checks. Installed homelab runtime, HDD state aliases, protected env metadata and timer preservation were also verified. Historical VPS and Edge Function observations retain their recorded dates below.
 
 ## Task and release workflow
@@ -24,7 +25,7 @@ Protected PR checks, managed/production schema verification, exact-SHA web/datab
 
 The saved T3 project uses `/srv/data/projects/Bloxodes`, defaults to worktree mode and has Setup worktree, Open GitHub checks and Open pull request actions. Setup runs on worktree creation with `async: false`, so T3 waits before the first agent turn. The active checkout also has its env and shared-draft links. Updating these project settings through T3 requires a live Full access/default caller.
 
-The homelab main checkout and Git history live at `/srv/data/projects/Bloxodes`. `/home/teja/projects/Bloxodes` remains a compatibility link, including the current thread's saved checkout path. New T3 worktrees use `/srv/data/t3code/worktrees/Bloxodes/`. T3 owns task creation and thread binding; do not move an attached thread by creating a second branch or thread. Keep main on `production` and preserve edits in existing tasks when fetching production for new tasks.
+The homelab main checkout and Git history live at `/srv/data/projects/Bloxodes`. T3 project and thread registrations use canonical HDD paths; the home-project compatibility link has been removed. New T3 worktrees use `/srv/data/t3code/worktrees/Bloxodes/`. T3 owns task creation and thread binding; do not move an attached thread by creating a second branch or thread. Keep main on `production` and preserve edits in existing tasks when fetching production for new tasks.
 
 Setup links `.envs/` and four authoring folders from the main checkout: `tmp/content-workspace`, `tmp/game-plans`, `tmp/game-collection-suggestions` and `tmp/game-collection-runs`. A change to shared draft files is visible in every worktree. They remain ignored and are not copied into a code PR. Selected publication still needs its exact reviewed CI bundle and authorization.
 
@@ -32,7 +33,7 @@ Before editing shared game drafts, run `npm run claim:shared-content -- --game <
 
 `tmp/shared-history` exposes existing article briefs/finals/media/reviews and selected source/media folders as historical references. Keep those originals unchanged. New pipeline runs, reports, logs and preview state belong in each task's own scratch directory. Never link the entire `tmp`, `node_modules` or `.next` between checkouts. The setup script checks all destinations before adding links and stops on conflicts without replacing local files.
 
-Installed automation releases, `/etc` env files, timers and runtime state retain their existing ownership. The shared article/wiki lease keeps its original directory inode through the compatibility path under `/home/teja/projects/Bloxodes-runtime-legacy/tmp/article-writer`. That small runtime directory and the retired restricted-account build cache remain outside development HDD storage. The original provider working directory is retained until its open handles close; the thread's saved path resolves to the HDD copy. The move neither activates new automation source nor changes a service.
+Installed automation releases, `/etc` env files, timers and runtime state retain their existing ownership. The shared article/wiki lease keeps its original directory inode at the canonical path under `/srv/data/projects/Bloxodes-runtime-legacy/tmp/article-writer`. The retained legacy runtime directory is also on HDD; installed automation releases keep their existing locations. Saved T3 worktree paths and Git pointers now use their canonical HDD locations. This path update does not activate a new automation release or alter credentials.
 
 Cleanup accepts the actual T3 HDD task directory and old nested task paths. Run it from another checkout only after checking T3 inactivity. It preserves detached releases, dirty/unmerged/locked tasks and claimed drafts. Its private archive under main `tmp/finished-worktrees/` retains regular scratch files and hashes, without following shared-folder symlinks or copying caches. Link targets are recorded in the private manifest. Checkout-owned env files and unknown ignored data outside scratch block cleanup until preserved.
 

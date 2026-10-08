@@ -1,7 +1,8 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-10-07
+Last verified: 2026-10-08
+Path layout rechecked 2026-10-08 against live T3 registrations, Git worktree metadata, service paths and env links. Other component verification boundaries remain as documented.
 Evidence: HDD storage layout, private env filenames/modes, compatibility paths and T3 setup ownership inspected on October 7. Selective-review workflow secret boundaries and existing GitHub API-key metadata were also inspected on October 7. Runtime activation readback verified unchanged protected env hashes, ownership, modes and HDD/shared-profile links. Ignored value store, loader guards and workstation/homelab `env:doctor`/`env:check` retain their August 19 verification boundary.
 
 ## GitHub CI ownership
@@ -86,7 +87,7 @@ Do not create a pipeline env file merely for symmetry. Codes, catalog, stats, an
 
 ## Worktrees
 
-The canonical homelab store is `/srv/data/projects/Bloxodes/.envs/`. The old `/home/teja/projects/Bloxodes` path remains a compatibility link for saved artifact and runtime references. T3 runs `scripts/dev/setup-worktree.sh` automatically and waits for its dependency-free Node helper. New worktrees link this one store, so all 16 private env/service-account files stay in sync. Setup reads env metadata, checks the required managed-development files, and never prints values. Files must remain private with no group/other access; nested symlinks are rejected. Existing local files or incorrect links stay intact and stop setup until reconciled. The `.envs` path itself and its contents are ignored. Setup does not change `/etc/bloxodes/`, GitHub secrets or provider login storage.
+The canonical homelab store is `/srv/data/projects/Bloxodes/.envs/`. T3 project and thread paths use the canonical HDD locations; the former home-project compatibility link has been removed. T3 runs `scripts/dev/setup-worktree.sh` automatically and waits for its dependency-free Node helper. New worktrees link this one store, so all 16 private env/service-account files stay in sync. Setup reads env metadata, checks the required managed-development files, and never prints values. Files must remain private with no group/other access; nested symlinks are rejected. Existing local files or incorrect links stay intact and stop setup until reconciled. The `.envs` path itself and its contents are ignored. Setup does not change `/etc/bloxodes/`, GitHub secrets or provider login storage.
 
 The homelab checkout mirrors the complete private `.envs/` profile tree for feature, content, and operator work. Host-specific executable paths may differ between the Mac and Linux checkouts; systemd jobs use separate protected `/etc/bloxodes/article-automation.env` and `/etc/bloxodes/wiki-automation.env` runtime files. The wiki model child receives only managed-development and shared-media values.
 

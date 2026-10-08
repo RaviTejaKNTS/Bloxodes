@@ -38,7 +38,8 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 ## Writing Rules
 
 - Write for Roblox players like a Roblox player who gathered the wiki for everyone to check.
-- Do not write about sources, dataset, or what this page is about.
+- Do not write about what this page is about.
+- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
 - Do not write about your actions. Always focus on the game and players.
 
 - Start with what the player does in the game.

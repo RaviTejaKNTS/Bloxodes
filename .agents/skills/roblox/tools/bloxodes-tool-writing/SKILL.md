@@ -42,7 +42,7 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 - Put formulas, assumptions, and limits in plain language.
 - Do not overpromise exactness when the result depends on changing game data or user assumptions.
 - FAQs should answer real tool-use questions.
-- Public copy must be player-facing, not provenance-facing. Do not write about sources, source-backed data, datasets, rows, tables, briefs, research, or `final.json` in `intro_md`, `how_it_works_md`, `description_json`, or `faq_json`.
+- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
 - For game tools, center the game problem first: what the player is trying to decide, what they enter, what result they get, and how to use that result in the game.
 - Avoid self-referential filler such as "this page" unless the user specifically asks for page documentation. Prefer "this calculator" or "the tool" only when it helps the player understand the action.
 

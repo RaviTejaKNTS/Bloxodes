@@ -56,7 +56,8 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 
 **Do Not**
 
-- Do not write about sources, dataset, or what this page is about.
+- Do not write about what this page is about.
+- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
 - Do not write about your actions. Always focus on the game, items, and players.
 - Do not write copy that explains how to use the page. Write copy that explains the game system.
 - Do not write the collection number anywhere in prose. Never state how many items the collection has, how many are in a section, or phrases like "all X items", "over X", "the full list of X". The count changes every time more data is gathered, which makes the copy stale. This applies to `intro_md`, `description_md`, `description_json`, `faq_json`, and `wiki_md`. The only count allowed is the automated `{count}` token in `title` and `seo_title`, which the seed/verify workflow resolves from the live dataset so it never goes stale.
@@ -121,7 +122,7 @@ This is the blurb that shows on the game wiki hub next to the link to this colle
 - Be specific to this collection. Say what the items do, how you get them, where they fit in the game, or what choice the player makes between them. Use concrete in-game terms, not vague words.
 - Be simple and clear. Short sentences. No jargon, no hype words like "ultimate" or "complete".
 - 2 to 4 sentences. Enough to genuinely help someone decide if they want to open the page, but not a full guide.
-- Do not say how many items there are, do not mention the page, the list, sources, or "this collection". Talk about the game system itself.
+- Do not say how many items there are, do not mention the page, the list, or "this collection". Talk about the game system itself.
 
 Good shape: "what it is in the game" → "how it works / how you get it" → "why it matters to the player".
 

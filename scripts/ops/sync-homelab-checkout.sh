@@ -3,7 +3,7 @@ set -euo pipefail
 
 apply=false
 expected_sha=""
-repo_root="${HOMELAB_REPO_ROOT:-/home/teja/projects/Bloxodes}"
+repo_root="${HOMELAB_REPO_ROOT:-/srv/data/projects/Bloxodes}"
 env_path="${HOMELAB_ENV_PATH:-/etc/bloxodes/article-automation.env}"
 
 while [[ $# -gt 0 ]]; do

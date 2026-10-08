@@ -3,6 +3,7 @@ import "../shared/load-env";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { imageLocalPath } from "./local-image-path";
+import { publicProvenanceMatch } from "../content/public-provenance";
 
 import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
 
@@ -79,32 +80,6 @@ const SECTION_FIELD_PRIORITY = [
   "stage",
   "slot"
 ];
-
-const GAMEPLAY_SOURCE_TERMS = [
-  /[“"']Sources[”"']/g,
-  /\bspecific loot sources\b/gi,
-  /\bSource Cargo\b/gi,
-  /\bSource Goods\b/gi,
-  /\bSource Supplies\b/gi,
-  /\bsource Air Freight Cargo\b/gi,
-  /\bsource all (?:vehicles|types of Cargo|types of Special Items)\b/gi,
-  /\bSource 250 crates of Cargo\b/gi,
-  /\bHumane Labs and Research\b/gi,
-  /\bScientist Research Center\b/gi,
-  /\bResearch projects?\b/gi,
-  /\bResearch 25 projects\b/gi,
-  /\bBunker Research (?:upgrades|unlocks)\b/gi,
-  /\bresearch and manufacturing\b/gi
-];
-
-function containsPublicProvenance(value: string): boolean {
-  if (value.trim() === "Sources") return false;
-  const masked = GAMEPLAY_SOURCE_TERMS.reduce(
-    (current, pattern) => current.replace(pattern, "gameplay-term"),
-    value
-  );
-  return /\b(?:sources?|research|manifest|workflow)\b/i.test(masked);
-}
 
 function printUsage() {
   console.log(`Usage:
@@ -483,15 +458,7 @@ async function main() {
 
   const publicProvenanceFields = rows.flatMap((row) =>
     Object.entries(row)
-      // Song titles such as "Research" and "The Source" are legitimate track names.
-      .filter(([key, value]) => {
-        let text = stringValue(value) ?? "";
-        // Native Minecraft grammar uses source arguments and Slot Source types.
-        if (options.game?.startsWith("minecraft") && options.collection === "commands" && ["syntax", "parameters"].includes(key)) {
-          text = text.replace(/\bsource\b/gi, "command-argument");
-        }
-        return key !== "tracklist" && !HIDDEN_FIELD_KEYS.has(key) && containsPublicProvenance(text);
-      })
+      .filter(([key, value]) => !HIDDEN_FIELD_KEYS.has(key) && publicProvenanceMatch(stringValue(value) ?? "") !== null)
       .map(([key]) => `${itemSlug(row)}.${key}`)
   );
   if (publicProvenanceFields.length) {
