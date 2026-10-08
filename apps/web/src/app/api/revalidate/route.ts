@@ -235,14 +235,14 @@ function revalidateForWiki(slug: string) {
 
 function revalidateForGtaGame(slug: string) {
   return applyRevalidation(
-    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
+    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", FEED_PATH, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
     ["games-index", "gta-home", "gta-games-index", "gta-wiki-index", `gta-game:${slug}`]
   );
 }
 
 function revalidateForGtaWiki(slug: string) {
   return applyRevalidation(
-    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
+    ["/games", "/gta", "/gta/wiki", `/gta/wiki/${slug}`, ...getGtaMapRoutesForWikiSlug(slug), "/gta/maps", FEED_PATH, SITEMAP_INDEX_PATH, GTA_SITEMAP_PATH],
     ["games-index", "gta-home", "gta-wiki-index", `gta-wiki:${slug}`]
   );
 }
@@ -259,6 +259,7 @@ function revalidateForGtaWikiCollection(slug: string) {
       ...(wikiSlug ? getGtaMapRoutesForWikiSlug(wikiSlug) : []),
       basePath,
       ...(basePath ? Array.from({ length: 39 }, (_, index) => `${basePath}/page/${index + 2}`) : []),
+      FEED_PATH,
       SITEMAP_INDEX_PATH,
       GTA_SITEMAP_PATH
     ].filter(Boolean) as string[],
@@ -900,7 +901,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     case "game_content": {
       if (!/^[a-z0-9-]+\/[a-z0-9/-]+$/.test(slug) || slug.includes("..")) break;
       const namespace = slug.split("/")[0];
-      purgePaths = applyRevalidation([`/${slug}`, `/${namespace}`, `/${namespace}/wiki`, `/${namespace}/tools`, ...["codes","maps","quizzes","catalog","checklists"].map(section => `/${namespace}/${section}`), "/games", FEED_PATH, SITEMAP_INDEX_PATH, "/sitemaps/games.xml", ...( ["gta", "red-dead", "minecraft"].includes(namespace) ? [`/sitemaps/${namespace}.xml`] : []), ...Array.from({ length: 39 }, (_, i) => `/${slug}/page/${i+2}`), ...(namespace === "gta" ? ["/gta/maps", "/gta/maps/[slug]", "/gta/maps/gta5"] : []), ...(namespace === "minecraft" ? MINECRAFT_TOOL_SLUGS.map(tool => `/minecraft/tools/${tool}`) : [])], [namespace, "game-wiki-index", "game-wiki-collection-index", "games-index"]);
+      // A collection update also changes the copy and previews on its parent wiki.
+      const wikiPrefix = namespace === "gta" ? slug.match(/^gta\/wiki\/[^/]+/)?.[0] : undefined;
+      purgePaths = applyRevalidation([`/${slug}`, ...(wikiPrefix ? [`/${wikiPrefix}`] : []), `/${namespace}`, `/${namespace}/wiki`, `/${namespace}/tools`, ...["codes","maps","quizzes","catalog","checklists"].map(section => `/${namespace}/${section}`), "/games", FEED_PATH, SITEMAP_INDEX_PATH, "/sitemaps/games.xml", ...( ["gta", "red-dead", "minecraft"].includes(namespace) ? [`/sitemaps/${namespace}.xml`] : []), ...Array.from({ length: 39 }, (_, i) => `/${slug}/page/${i+2}`), ...(namespace === "gta" ? ["/gta/maps", "/gta/maps/[slug]", "/gta/maps/gta5"] : []), ...(namespace === "minecraft" ? MINECRAFT_TOOL_SLUGS.map(tool => `/minecraft/tools/${tool}`) : [])], [namespace, "game-wiki-index", "game-wiki-collection-index", "games-index"]);
       purgeTags = [...purgeTags, namespace];
       break;
     }

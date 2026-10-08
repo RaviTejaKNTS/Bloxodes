@@ -19,6 +19,8 @@ Read and follow .agents/skills/bloxodes-franchise-game-collection-data/SKILL.md 
 - Checker: npm run check:game-collection-data
 - Runtime sync dry plan: npm run sync:gta-collection-runtime -- --manifest <workspace>/runtime-manifest.json
 
+For database card videos, declare a public URL field in itemFields, columns, and cardFields with fieldPresentation kind video. Verify each URL against the official uploader. HTTPS YouTube watch, youtu.be, and embed URLs are supported. Keep system.image as the poster and fallback; use null for missing videos. Table and detail declarations render validated watch links.
+
 Preserve the old v2 contract, public/system field separation, display metadata, section, image-planning, sourceUrls, and data-readiness rules. Do not gather images, write final.json, use data/ or apps/web/public/, use GAME_COLLECTIONS or register:game-collection, call Roblox APIs, or pass --apply, --upload-media, --publish, or --allow-prod.
 ## Shared game storage
 

@@ -7,6 +7,7 @@ import { resolveContentDates } from "@/lib/content-dates";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
 import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
+import { listPublishedGtaWikiPages, listPublishedGtaWikiCollections } from "@/lib/gta";
 import { buildMinecraftWikiPath, buildMinecraftCollectionPath, listPublishedMinecraftWikiPages, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
 
 export const dynamic = "force-dynamic";
@@ -66,7 +67,7 @@ type PuzzleRow = {
 
 const FEED_LIMIT = 120;
 const FEED_DESCRIPTION =
-  "Roblox codes, guides, stats, puzzles and events, GTA completion checklists, and Minecraft wiki collections and tools from Bloxodes.";
+  "Roblox codes, guides, stats, puzzles and events, GTA wikis, collections and completion checklists, and Minecraft wiki collections and tools from Bloxodes.";
 
 function escapeXml(value: string): string {
   return value
@@ -103,7 +104,7 @@ function toFeedItem(input: {
 
 async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
-  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes, minecraftWiki, minecraftCollections, minecraftTools] = await Promise.all([
+  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes, gtaChecklistsRes, minecraftWiki, minecraftCollections, minecraftTools, gtaWiki, gtaCollections] = await Promise.all([
     sb
       .from("articles")
       .select("slug, title, updated_at, published_at, created_at")
@@ -142,7 +143,9 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     gameDatabase(sb, "gta").from("checklist_pages_view").select("slug,title,updated_at,published_at,created_at").order("updated_at", { ascending: false }).limit(40),
     listPublishedMinecraftWikiPages(),
     listPublishedMinecraftCollections(),
-    listPublishedMinecraftTools()
+    listPublishedMinecraftTools(),
+    listPublishedGtaWikiPages(),
+    listPublishedGtaWikiCollections()
   ]);
 
   const firstError =
@@ -159,6 +162,17 @@ async function loadFeedItems(): Promise<FeedItem[]> {
   const items: FeedItem[] = [];
   for (const page of await listSharedGameDiscoveryPages()) {
     const item = toFeedItem({ title: page.title, path: page.canonical_path, description: page.meta_description ?? "Game reference.", updatedAt: page.updated_at, publishedAt: page.published_at, createdAt: page.created_at });
+    if (item) items.push(item);
+  }
+  for (const page of [...gtaWiki, ...gtaCollections]) {
+    const item = toFeedItem({
+      title: page.title,
+      path: page.canonical_path,
+      description: page.meta_description ?? "GTA wiki and collections.",
+      updatedAt: page.content_updated_at ?? page.updated_at,
+      publishedAt: page.published_at,
+      createdAt: page.created_at
+    });
     if (item) items.push(item);
   }
   const minecraftPages = [

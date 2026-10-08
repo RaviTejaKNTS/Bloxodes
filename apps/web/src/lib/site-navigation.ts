@@ -87,9 +87,9 @@ export const minecraftNavLinks: SiteNavLink[] = [
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
 
-// Keep released GTA hubs in a stable, newest-first order for fast sidebar access.
-// GTA VI stays out of navigation until its wiki is approved for publication.
+// Keep GTA hubs in a stable, newest-first order for fast sidebar access.
 export const gtaWikiNavLinks: GtaWikiNavLink[] = [
+  { href: "/gta/wiki/gta-6", label: "GTA VI" },
   { href: "/gta/wiki/gta-online", label: "GTA Online" },
   { href: "/gta/wiki/gta-5", label: "GTA V" },
   { href: "/gta/wiki/gta-4-tbogt", label: "The Ballad of Gay Tony" },

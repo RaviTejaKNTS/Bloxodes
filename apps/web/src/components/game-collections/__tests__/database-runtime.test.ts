@@ -21,8 +21,8 @@ describe("database-backed wiki collection renderer", () => {
       {
         meta: {
           schemaVersion: 2,
-          itemFields: ["rarity", "cardSummary"],
-          columns: ["rarity", "cardSummary"],
+          itemFields: ["rarity", "cardSummary", "videoUrl"],
+          columns: ["rarity", "cardSummary", "videoUrl"],
           display: {
             groupLabel: "Rarity",
             sectionOrder: ["Rare"],
@@ -30,13 +30,14 @@ describe("database-backed wiki collection renderer", () => {
             subtitleFields: [],
             descriptionField: "cardSummary",
             cardDescriptionField: "cardSummary",
-            cardFields: ["rarity", "cardSummary"],
-            tableFields: ["rarity", "cardSummary"]
+            cardFields: ["rarity", "cardSummary", "videoUrl"],
+            tableFields: ["rarity", "cardSummary", "videoUrl"],
+            fieldPresentation: { videoUrl: { kind: "video" } }
           }
         },
         items: [
           {
-            item: { name: "Test Item", rarity: "Rare", cardSummary: "A useful test item." },
+            item: { name: "Test Item", rarity: "Rare", cardSummary: "A useful test item.", videoUrl: "https://youtu.be/QdBZY2fkU-0" },
             system: {
               slug: "test-item",
               section: "Rare",
@@ -52,5 +53,8 @@ describe("database-backed wiki collection renderer", () => {
     expect(prepared.dataset.items[0].image).toContain("media.bloxodes.com/wiki/");
     expect(prepared.groupedSections.map((section) => section.label)).toEqual(["Rare"]);
     expect(prepared.totalPages).toBe(1);
+    expect(prepared.viewConfig.cardFields).toContain("videoUrl");
+    expect(prepared.viewConfig.fieldPresentation?.videoUrl).toEqual({ kind: "video" });
+    expect(prepared.groupedSections[0].items[0].videoUrl).toBe("https://youtu.be/QdBZY2fkU-0");
   });
 });

@@ -448,9 +448,9 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
     case "gta_checklist":
       return unique([...base, slugTag("gta-checklist", normalized), "gta-checklists", "gta-checklists-index", "gta-home", slugTag("gta-wiki", normalized), "feed", "sitemap", "sitemap:gta"]);
     case "gta_game":
-      return unique([...base, slugTag("gta-game", normalized), "gta-home", "gta-wiki-index", "games-index", "sitemap", "sitemap:gta"]);
+      return unique([...base, slugTag("gta-game", normalized), "gta-home", "gta-wiki-index", "games-index", "feed", "sitemap", "sitemap:gta"]);
     case "gta_wiki":
-      return unique([...base, slugTag("gta-wiki", normalized), "gta-home", "gta-wiki-index", "sitemap", "sitemap:gta"]);
+      return unique([...base, slugTag("gta-wiki", normalized), "gta-home", "gta-wiki-index", "feed", "sitemap", "sitemap:gta"]);
     case "gta_wiki_collection": {
       const [wikiSlug, collectionSlug] = normalized.split("/");
       return unique([
@@ -460,6 +460,7 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "gta-home",
         "gta-wiki-index",
         "gta-wiki-collection-index",
+        "feed",
         "sitemap",
         "sitemap:gta"
       ]);

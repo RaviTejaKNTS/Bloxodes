@@ -55,6 +55,8 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
   const thumbnailImage = reader.resolveSharedGameWikiThumbnailImage(page);
   const platforms = stringList(page.game_platforms_json);
   const releases = releaseLabels(page.game_release_dates_json);
+  const isPrelaunch = page.game_status === "upcoming" || page.game_status === "announced";
+  const hasGameDetails = isPrelaunch || releases.length || platforms.length || page.game_developer || page.game_publisher;
   const canonicalPath = page.canonical_path;
   const canonicalUrl = `${SITE_URL}${canonicalPath}`;
   const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);
@@ -67,7 +69,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
     return { collection, copyHtml, imageUrls };
   }));
   const collectionGroups = [
-    { key: "database" as const, label: "Game data", entries: collectionBlocks.filter(({ collection }) => collection.page_type !== "collectible") },
+    { key: "database" as const, label: isPrelaunch ? "Pre-launch coverage" : "Game data", entries: collectionBlocks.filter(({ collection }) => collection.page_type !== "collectible") },
     { key: "collectible" as const, label: "Collectibles", entries: collectionBlocks.filter(({ collection }) => collection.page_type === "collectible") }
   ].filter((group) => group.entries.length);
   const controls = Array.isArray(page.controls_json) ? page.controls_json.filter((row): row is Record<string,string> => Boolean(row) && typeof row === "object" && typeof row.action === "string") : [];
@@ -135,7 +137,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
             </section>
           ) : null}
 
-          {releases.length || platforms.length || page.game_developer || page.game_publisher ? (
+          {hasGameDetails ? (
             <section aria-label="Game details" className="lg:hidden">
               <GameDetails page={page} releases={releases} platforms={platforms} />
             </section>
@@ -167,16 +169,16 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
           {controls.length ? <section className="max-w-3xl space-y-4"><h2 className="text-2xl font-semibold">Controls</h2><dl className="space-y-3">{controls.map((row,i) => <div key={i} className="grid gap-1 sm:grid-cols-2"><dt className="font-medium">{row.action}</dt><dd>{Object.entries(row).filter(([key,value]) => key !== "action" && typeof value === "string" && value.trim()).map(([key,value]) => `${key}: ${value}`).join("; ")}</dd></div>)}</dl></section> : null}
           {tipsHtml ? (
             <section className="article-content md-copy-scope game-copy min-w-0">
-              <h2>{page.game_short_title || page.game_title} gameplay tips</h2>
+              <h2>{page.game_short_title || page.game_title} {isPrelaunch ? "pre-launch notes" : "gameplay tips"}</h2>
               {renderPageContentNodes(tipsHtml, `${page.slug}-tips`)}
             </section>
           ) : null}
         </article>
 
         <aside className="space-y-4">
-          <section aria-label="Game details" className="hidden lg:block">
+          {hasGameDetails ? <section aria-label="Game details" className="hidden lg:block">
             <GameDetails page={page} releases={releases} platforms={platforms} />
-          </section>
+          </section> : null}
         </aside>
 
         <div className="min-w-0 lg:col-start-1">
@@ -188,10 +190,12 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
 }
 
 function GameDetails({ page, releases, platforms }: { page: SharedGameWikiPage; releases: string[]; platforms: string[] }) {
+  const isPrelaunch = page.game_status === "upcoming" || page.game_status === "announced";
   const items = [
+    isPrelaunch ? { label: "Status", value: page.game_status === "upcoming" ? "Upcoming" : "Announced" } : null,
     page.game_developer ? { label: "Developer", value: page.game_developer } : null,
     page.game_publisher ? { label: "Publisher", value: page.game_publisher } : null,
-    releases.length ? { label: "Release", value: releases.join(" · ") } : null,
+    releases.length ? { label: isPrelaunch ? "Announced release" : "Release", value: releases.join(" · ") } : null,
     platforms.length ? { label: "Platforms", value: platforms.join(", ") } : null
   ].filter((item): item is { label: string; value: string } => Boolean(item));
 

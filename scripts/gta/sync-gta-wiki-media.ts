@@ -2,6 +2,7 @@ import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
 
 import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
@@ -111,24 +112,50 @@ export const GTA_WIKI_MEDIA: readonly GtaWikiMedia[] = [
   }
 ];
 
-const GTA_VI_SLUG = "gta-6";
-const args = new Set(process.argv.slice(2));
-const apply = args.has("--apply");
-const allowProd = args.has("--allow-prod");
-const skipSourceCheck = args.has("--skip-source-check");
 const PUBLIC_WIKI_MEDIA_BASE_URL = "https://media.bloxodes.com/wiki";
 
 function printHelp() {
-  console.log("Usage: npm run sync:gta-wiki-media [--apply] [--allow-prod] [--skip-source-check]");
+  console.log("Usage: npm run sync:gta-wiki-media -- [--manifest <reviewed-media.json>] [--apply] [--allow-prod] [--skip-source-check]");
   console.log("Defaults to a read-only plan. Production apply requires --allow-prod and the recognized production target.");
+  console.log("An optional manifest replaces the built-in mapping with a nonempty JSON array of { slug, coverImage, heroImage } for the selected published hubs.");
 }
 
-function assertNoUnknownArgs() {
-  for (const arg of args) {
-    if (!["--apply", "--allow-prod", "--skip-source-check", "--help", "-h"].includes(arg)) {
+function parseArgs(argv: string[]) {
+  const flags = new Set<string>();
+  let manifest: string | undefined;
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === "--manifest") {
+      const value = argv[++index];
+      if (manifest || !value || value.startsWith("--")) throw new Error("Expected one file path after --manifest.");
+      manifest = value;
+    } else if (["--apply", "--allow-prod", "--skip-source-check", "--help", "-h"].includes(arg)) {
+      flags.add(arg);
+    } else {
       throw new Error(`Unknown option: ${arg}`);
     }
   }
+  return { manifest, apply: flags.has("--apply"), allowProd: flags.has("--allow-prod"), skipSourceCheck: flags.has("--skip-source-check"), help: flags.has("--help") || flags.has("-h") };
+}
+
+async function loadMediaMapping(manifest: string | undefined): Promise<readonly GtaWikiMedia[]> {
+  if (!manifest) return GTA_WIKI_MEDIA;
+  const rows: unknown = JSON.parse(await readFile(manifest, "utf8"));
+  if (!Array.isArray(rows) || !rows.length) throw new Error("Media manifest must be a nonempty array.");
+  const slugs = new Set<string>();
+  return rows.map((row: unknown) => {
+    if (!row || typeof row !== "object") throw new Error("Invalid media manifest row.");
+    const { slug, coverImage, heroImage } = row as Record<string, unknown>;
+    if (typeof slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slugs.has(slug)) {
+      throw new Error("Media manifest slugs must be unique game slugs.");
+    }
+    for (const value of [coverImage, heroImage]) {
+      if (typeof value !== "string" || new URL(value).protocol !== "https:") throw new Error(`Media for ${slug} must use HTTPS URLs.`);
+    }
+    if (coverImage === heroImage) throw new Error(`Cover and hero source URLs must differ for ${slug}.`);
+    slugs.add(slug);
+    return { slug, coverImage: coverImage as string, heroImage: heroImage as string };
+  });
 }
 
 async function verifySourceUrl(url: string): Promise<void> {
@@ -141,8 +168,8 @@ async function verifySourceUrl(url: string): Promise<void> {
   if (!ranged.ok) throw new Error(`${url} returned HTTP ${ranged.status}.`);
 }
 
-async function verifySources() {
-  const urls = GTA_WIKI_MEDIA.flatMap((media) => [media.coverImage, media.heroImage]);
+async function verifySources(mediaRows: readonly GtaWikiMedia[]) {
+  const urls = mediaRows.flatMap((media) => [media.coverImage, media.heroImage]);
   for (let index = 0; index < urls.length; index += 8) {
     await Promise.all(urls.slice(index, index + 8).map(verifySourceUrl));
   }
@@ -184,9 +211,9 @@ async function prepareHostedMedia(slug: string, role: "cover" | "thumbnail", sou
   };
 }
 
-async function prepareAllHostedMedia(): Promise<Map<string, { cover: HostedMedia; thumbnail: HostedMedia }>> {
+async function prepareAllHostedMedia(mediaRows: readonly GtaWikiMedia[]): Promise<Map<string, { cover: HostedMedia; thumbnail: HostedMedia }>> {
   const prepared = new Map<string, { cover: HostedMedia; thumbnail: HostedMedia }>();
-  for (const media of GTA_WIKI_MEDIA) {
+  for (const media of mediaRows) {
     const cover = await prepareHostedMedia(media.slug, "cover", media.coverImage);
     const thumbnail = await prepareHostedMedia(media.slug, "thumbnail", media.heroImage);
     prepared.set(media.slug, { cover, thumbnail });
@@ -215,18 +242,18 @@ async function uploadHostedMedia(
   console.log(`Verified ${prepared.size * 2} hosted GTA wiki media objects in R2.`);
 }
 
-async function requireRows() {
+async function requireRows(mediaRows: readonly GtaWikiMedia[]) {
   const sb = supabaseAdmin();
   const [games, pages] = await Promise.all([
-    gameDatabase(sb, "gta").from("games").select("slug,is_published,cover_image,hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)),
-    gameDatabase(sb, "gta").from("wiki_pages").select("slug,is_published").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug))
+    gameDatabase(sb, "gta").from("games").select("slug,is_published,cover_image,hero_image").in("slug", mediaRows.map((media) => media.slug)),
+    gameDatabase(sb, "gta").from("wiki_pages").select("slug,is_published").in("slug", mediaRows.map((media) => media.slug))
   ]);
   if (games.error) throw games.error;
   if (pages.error) throw pages.error;
 
   const gameMap = new Map((games.data ?? []).map((row) => [row.slug, row]));
   const pageMap = new Map((pages.data ?? []).map((row) => [row.slug, row]));
-  for (const media of GTA_WIKI_MEDIA) {
+  for (const media of mediaRows) {
     if (!gameMap.has(media.slug) || !gameMap.get(media.slug)?.is_published) {
       throw new Error(`Expected published GTA game row is missing: ${media.slug}`);
     }
@@ -238,109 +265,57 @@ async function requireRows() {
 
 async function applyMediaRoles(prepared: Map<string, { cover: HostedMedia; thumbnail: HostedMedia }>) {
   const sb = supabaseAdmin();
-  for (const media of GTA_WIKI_MEDIA) {
-    const assets = prepared.get(media.slug);
-    if (!assets) throw new Error(`Missing prepared hosted media for ${media.slug}.`);
+  for (const [slug, assets] of prepared) {
     const result = await gameDatabase(sb, "gta").from("games")
       .update({ cover_image: assets.cover.publicUrl, hero_image: assets.thumbnail.publicUrl })
-      .eq("slug", media.slug)
+      .eq("slug", slug)
       .eq("is_published", true)
       .select("slug");
     if (result.error) throw result.error;
-    if ((result.data ?? []).length !== 1) throw new Error(`Could not update exactly one GTA hub: ${media.slug}`);
+    if ((result.data ?? []).length !== 1) throw new Error(`Could not update exactly one GTA hub: ${slug}`);
   }
-  console.log(`Applied separate cover and thumbnail artwork to ${GTA_WIKI_MEDIA.length} GTA hubs.`);
-}
-
-async function unpublishGtaVi() {
-  const sb = supabaseAdmin();
-  const collections = await gameDatabase(sb, "gta").from("wiki_collection_pages")
-    .update({ is_published: false })
-    .eq("wiki_slug", GTA_VI_SLUG)
-    .eq("is_published", true)
-    .select("id");
-  if (collections.error) throw collections.error;
-
-  const wiki = await gameDatabase(sb, "gta").from("wiki_pages")
-    .update({ is_published: false })
-    .eq("slug", GTA_VI_SLUG)
-    .eq("is_published", true)
-    .select("id");
-  if (wiki.error) throw wiki.error;
-
-  const game = await gameDatabase(sb, "gta").from("games")
-    .update({ is_published: false })
-    .eq("slug", GTA_VI_SLUG)
-    .eq("is_published", true)
-    .select("id");
-  if (game.error) throw game.error;
-
-  console.log(`Unpublished GTA VI: ${wiki.data?.length ?? 0} hub, ${collections.data?.length ?? 0} collection pages; source rows were preserved.`);
-}
-
-async function removeStaleGtaViSearchRows() {
-  const sb = supabaseAdmin();
-  const existing = await sb
-    .from("search_index")
-    .select("id")
-    .eq("entity_type", "gta_wiki")
-    .eq("slug", GTA_VI_SLUG);
-  if (existing.error) throw existing.error;
-  if (!(existing.data ?? []).length) return;
-  const deleted = await sb
-    .from("search_index")
-    .delete()
-    .eq("entity_type", "gta_wiki")
-    .eq("slug", GTA_VI_SLUG);
-  if (deleted.error) throw deleted.error;
-  console.log("Removed the stale GTA VI wiki search-index row.");
+  console.log(`Applied separate cover and thumbnail artwork to ${prepared.size} GTA hubs.`);
 }
 
 async function verifyState(prepared: Map<string, { cover: HostedMedia; thumbnail: HostedMedia }>) {
   const sb = supabaseAdmin();
-  const [games, pages, view, viGame, viPage, viCollections, viSearch] = await Promise.all([
-    gameDatabase(sb, "gta").from("games").select("slug,is_published,cover_image,hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)),
-    gameDatabase(sb, "gta").from("wiki_pages").select("slug,is_published").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)).eq("is_published", true),
-    gameDatabase(sb, "gta").from("wiki_pages_view").select("slug,is_published,game_cover_image,game_hero_image").in("slug", GTA_WIKI_MEDIA.map((media) => media.slug)).eq("is_published", true),
-    gameDatabase(sb, "gta").from("games").select("is_published").eq("slug", GTA_VI_SLUG).maybeSingle(),
-    gameDatabase(sb, "gta").from("wiki_pages").select("is_published").eq("slug", GTA_VI_SLUG).maybeSingle(),
-    gameDatabase(sb, "gta").from("wiki_collection_pages").select("id").eq("wiki_slug", GTA_VI_SLUG).eq("is_published", true),
-    sb.from("search_index").select("id").eq("entity_type", "gta_wiki").eq("slug", GTA_VI_SLUG)
+  const slugs = [...prepared.keys()];
+  const [games, pages, view] = await Promise.all([
+    gameDatabase(sb, "gta").from("games").select("slug,is_published,cover_image,hero_image").in("slug", slugs),
+    gameDatabase(sb, "gta").from("wiki_pages").select("slug,is_published").in("slug", slugs).eq("is_published", true),
+    gameDatabase(sb, "gta").from("wiki_pages_view").select("slug,is_published,game_cover_image,game_hero_image").in("slug", slugs).eq("is_published", true)
   ]);
-  for (const result of [games, pages, view, viGame, viPage, viCollections, viSearch]) {
+  for (const result of [games, pages, view]) {
     if (result.error) throw result.error;
   }
 
   const mediaBySlug = new Map(prepared);
   const gameRows = games.data ?? [];
-  if (gameRows.length !== GTA_WIKI_MEDIA.length) throw new Error("GTA hub image verification returned the wrong game count.");
+  if (gameRows.length !== prepared.size) throw new Error("GTA hub image verification returned the wrong game count.");
   for (const row of gameRows) {
     const expected = mediaBySlug.get(row.slug);
     if (!expected || !row.is_published || row.cover_image !== expected.cover.publicUrl || row.hero_image !== expected.thumbnail.publicUrl || row.cover_image === row.hero_image) {
       throw new Error(`GTA hub image verification failed for ${row.slug}.`);
     }
   }
-  if ((pages.data ?? []).length !== GTA_WIKI_MEDIA.length || (view.data ?? []).length !== GTA_WIKI_MEDIA.length) {
-    throw new Error("GTA wiki publication verification returned the wrong retained hub count.");
+  if ((pages.data ?? []).length !== prepared.size || (view.data ?? []).length !== prepared.size) {
+    throw new Error("GTA wiki publication verification returned the wrong hub count.");
   }
-  if (viGame.data?.is_published || viPage.data?.is_published || (viCollections.data ?? []).length || (viSearch.data ?? []).length) {
-    throw new Error("GTA VI is still visible in one or more publication surfaces.");
-  }
-  console.log(`Verified ${GTA_WIKI_MEDIA.length} retained published GTA hubs with distinct cover/thumbnail roles.`);
-  console.log("Verified retained hub images use Bloxodes-hosted wiki media URLs.");
-  console.log("Verified GTA VI is unpublished from game, wiki, collection, and search surfaces.");
+  console.log(`Verified ${prepared.size} published GTA hubs with distinct cover/thumbnail roles.`);
+  console.log("Verified hub images use Bloxodes-hosted wiki media URLs.");
 }
 
 async function main() {
-  assertNoUnknownArgs();
-  if (args.has("--help") || args.has("-h")) {
+  const { apply, allowProd, skipSourceCheck, manifest, help } = parseArgs(process.argv.slice(2));
+  if (help) {
     printHelp();
     return;
   }
-  if (!skipSourceCheck) await verifySources();
-  await requireRows();
+  const mediaRows = await loadMediaMapping(manifest);
+  if (!skipSourceCheck) await verifySources(mediaRows);
+  await requireRows(mediaRows);
   if (!apply) {
-    console.log(`Dry run only: ${GTA_WIKI_MEDIA.length} retained GTA hubs would receive media roles, and GTA VI would be unpublished.`);
+    console.log(`Dry run only: ${mediaRows.length} GTA hubs would receive media roles.`);
     return;
   }
   const managed = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);
@@ -349,11 +324,9 @@ async function main() {
   if (allowProd && (!apply || !production)) throw new Error("--allow-prod requires --apply and the recognized production target.");
   if (apply && production && !allowProd) throw new Error("Production GTA wiki media writes require --allow-prod.");
   const r2 = new R2Client(loadR2ClientConfig(process.env));
-  const prepared = await prepareAllHostedMedia();
+  const prepared = await prepareAllHostedMedia(mediaRows);
   await uploadHostedMedia(prepared, r2);
   await applyMediaRoles(prepared);
-  await unpublishGtaVi();
-  await removeStaleGtaViSearchRows();
   await verifyState(prepared);
 }
 
