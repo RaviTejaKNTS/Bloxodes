@@ -27,10 +27,25 @@ Use the T3 `delegate_task` tool. Check `orchestrator_capabilities` if a model ID
 | Work | Provider instance | Model | Options |
 | --- | --- | --- | --- |
 | Coding, implementation, bug fixes, code-heavy pipelines | `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
+| All writing: articles, wiki and collection copy, quizzes, checklists, page prose | `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
 | Data collection, scraping, mass scraping, polling, dataset building | `codex` | `gpt-6-luna` | `reasoningEffort: max` |
-| All writing: articles, wiki and collection copy, quizzes, checklists, page prose | `grok` | `grok-4.7` | `reasoningEffort: high` |
-| Light or miscellaneous tasks a smaller model can handle | `opencode` | `opencode/muse-spark-1.3-contributor-free` | — |
+| Read-only lookups a smaller model can handle | `opencode` | `opencode/muse-spark-1.3-contributor-free` | — |
 | Light or miscellaneous tasks a smaller model can handle | `antigravity` | the newest Gemini Flash (currently `gemini-3.8-flash-high`) | — |
+| Light or miscellaneous tasks a smaller model can handle | `grok` | `grok-4.7` | `reasoningEffort: high` |
+
+### Light models and permissions
+
+Codex does all routine delegated work. Muse Spark, Gemini and Grok are optional, for small self-contained actions only. They run in T3's inherited `auto` mode, never `full-access`. In `auto`, T3 handles each one differently:
+
+- **Gemini (Antigravity):** T3's adapter approves its permission requests itself, so it should run without prompts. This hasn't been confirmed by a live run yet.
+- **Grok:** T3 shows every Grok permission request to the owner. The committed `.grok/config.toml` pre-approves reads, edits, search, web and ordinary shell commands. It denies pushes, merges, workflow dispatch, history rewrites, production targets and `.envs` edits. Grok cannot pre-approve its sub-agent tool, so Grok briefs must say not to start sub-agents.
+- **Muse Spark (OpenCode):** T3 adds `ask` rules for shell, edits, web and outside-folder access to every OpenCode session that is not `full-access`. A project `opencode.json` cannot override them. Use Muse Spark only for read-only work.
+
+If a model reports a usage or quota limit, move the task to Codex.
+
+Approval prompts appear only in the agent's own thread. The orchestrator tools cannot list or answer them. When checking any non-Codex agent, read its `childThreadId` timeline with `t3_thread_read` and look for an `approval_request` with status `waiting`. If one is waiting, tell the owner immediately with the thread and the action.
+
+### Pipelines
 
 Multi-stage content jobs go to one agent as a whole pipeline. For example, wiki and collection pages run suggestions → research → data → images → writing. Name the matching `bloxodes-*-workflow-runner` skill in the brief, and let that agent start its own sub-agents as the skill describes. Give the pipeline to the model matching its main kind of work.
 
