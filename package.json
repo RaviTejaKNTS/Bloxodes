@@ -105,6 +105,7 @@
     "import:tool-finals": "tsx scripts/content/import-tool-finals.ts",
     "verify:article-finals": "tsx scripts/content/verify-article-finals.ts",
     "verify:article-browser": "tsx scripts/content/verify-article-browser.ts",
+    "test:public-copy": "node --import tsx --test scripts/content/__tests__/public-copy.test.ts",
     "test:article-image-readiness": "node --import tsx --test scripts/content/__tests__/article-image-readiness.test.ts",
     "verify:catalog-finals": "node --import tsx scripts/content/verify-catalog-finals.ts",
     "verify:engagement-finals": "tsx scripts/content/verify-engagement-finals.ts",
