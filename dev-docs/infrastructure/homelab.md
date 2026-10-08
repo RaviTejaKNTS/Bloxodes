@@ -1,12 +1,13 @@
 # Homelab
 
 Status: Article and wiki/collection automation uses the HDD runtime with GitHub QA and publication
-Last verified: 2026-10-07
+Last verified: 2026-10-08
+Path layout rechecked 2026-10-08 against live T3 registrations, Git worktree metadata, service paths and env links. Other component verification boundaries remain as documented.
 Evidence: HDD development storage, T3 project/worktree settings, installed runtime source, seven service files, five unchanged timers, protected env metadata, state-copy receipt and compatibility paths inspected October 7. Earlier automation evidence retains its recorded verification dates: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
 
 ## T3 task worktrees and GitHub checks
 
-New agent tasks use their one T3-assigned checkout and branch under `/srv/data/t3code/worktrees/Bloxodes/`. The saved T3 project defaults to worktree mode and runs automatic setup before the first agent turn. Setup and the GitHub PR/check actions are registered; the active checkout has its shared links. The canonical main checkout is `/srv/data/projects/Bloxodes`, clean on `production`; `/home/teja/projects/Bloxodes` remains its compatibility link. Git history, private env storage and drafts are on `/srv/data`, the HDD. Setup links private envs and approved authoring folders while keeping scratch and pipeline state separate. It installs nothing. Checks, builds and browser QA run on GitHub. Shared game drafts require `claim:shared-content` ownership. See [deployment](../operations/deployment.md#hdd-worktrees-and-shared-files) for links and cleanup.
+New agent tasks use their one T3-assigned checkout and branch under `/srv/data/t3code/worktrees/Bloxodes/`. The saved T3 project defaults to worktree mode and runs automatic setup before the first agent turn. Setup and the GitHub PR/check actions are registered; the active checkout has its shared links. The canonical main checkout is `/srv/data/projects/Bloxodes`, clean on `production`; T3 uses this canonical HDD path. Git history, private env storage and drafts are on `/srv/data`, the HDD. Setup links private envs and approved authoring folders while keeping scratch and pipeline state separate. It installs nothing. Checks, builds and browser QA run on GitHub. Shared game drafts require `claim:shared-content` ownership. See [deployment](../operations/deployment.md#hdd-worktrees-and-shared-files) for links and cleanup.
 
 Finished remote task branches delete after merge. The exact-worktree cleanup helper runs only after T3 releases that clean merged checkout. It skips detached automation/rollback runtimes. Task-worktree setup does not change installed services, env files, timers or runtime pointers. The separately authorized runtime activation below is complete. See `../operations/deployment.md`.
 
@@ -27,7 +28,7 @@ Activation completed without interrupting a job. Readback confirmed all seven se
 - CPU: 4 logical CPUs.
 - Memory: 7.7 GiB; 2 GiB swap nearly full at check time.
 - Storage: `/dev/sda3` is the 117 GB SSD mounted at `/`; `/dev/sdb1` is the 916 GB HDD mounted at `/srv/data`. Keep Bloxodes development files and new T3 worktrees on the HDD. Historical memory and runtime observations below retain their original dates.
-- Primary development repository: `/srv/data/projects/Bloxodes`, with `/home/teja/projects/Bloxodes` as a compatibility link. The user works directly on `teja-homelab` as the ongoing primary project host, confirmed September 7, 2026. New T3 tasks use their assigned worktrees; this main checkout stays on `production`.
+- Primary development repository: `/srv/data/projects/Bloxodes`. The user works directly on `teja-homelab` as the ongoing primary project host, confirmed September 7, 2026. New T3 tasks use their assigned worktrees; this main checkout stays on `production`.
 
 ## Tailscale and managed-development preview
 
@@ -40,7 +41,7 @@ Activation completed without interrupting a job. Readback confirmed all seven se
 For a remotely reviewable managed-development preview, use the homelab wiki env without printing it and bind Next to the Tailscale-reachable interface:
 
 ```bash
-cd /home/teja/projects/Bloxodes/apps/web
+cd /srv/data/projects/Bloxodes/apps/web
 set -a
 source /etc/bloxodes/wiki-automation.env
 set +a
@@ -60,7 +61,7 @@ Use the webpack preview for very large GTA collection pages. If the development 
 For a remotely reviewable managed-development preview, use the homelab wiki env without printing it and bind Next to the Tailscale-reachable interface:
 
 ```bash
-cd /home/teja/projects/Bloxodes/apps/web
+cd /srv/data/projects/Bloxodes/apps/web
 set -a
 source /etc/bloxodes/wiki-automation.env
 set +a
@@ -141,7 +142,7 @@ The wiki service now supports a separate trusted operator-account publisher with
 
 ## Shared automation runtime (September 14, 2026)
 
-Articles and wiki/collection automation use one detached production release under `/home/teja/.local/share/bloxodes-automation-runtime/releases/<sha>`, selected by `current`. Development edits in `/home/teja/projects/Bloxodes` therefore cannot dirty the scheduled checkout. Each release has its own dependencies and ignored preview cache. Both pipelines use the standard `.next` directory in this runtime so Next does not rewrite tracked `next-env.d.ts`; the shared agent lease and one wiki lane prevent simultaneous previews. Interactive previews retain their existing separate output directories.
+Articles and wiki/collection automation use one detached production release under `/home/teja/.local/share/bloxodes-automation-runtime/releases/<sha>`, selected by `current`. Development edits in `/srv/data/projects/Bloxodes` therefore cannot dirty the scheduled checkout. Each release has its own dependencies and ignored preview cache. Both pipelines use the standard `.next` directory in this runtime so Next does not rewrite tracked `next-env.d.ts`; the shared agent lease and one wiki lane prevent simultaneous previews. Interactive previews retain their existing separate output directories.
 
 `npm run automation:runtime:prepare -- --sha <full-sha>` creates and checks a candidate without touching a running release. After the exact commit is released to `origin/production`, `sudo bash scripts/ops/install-homelab-automation.sh --apply <full-sha>` switches both pipelines together. The old article/wiki installer names delegate to this unified installer; they no longer independently switch services. The installer refuses active or activating jobs, suspends only timer triggers, rechecks idleness, and acquires the shared manual/article/wiki lease. It preserves timer enablement, cadence, protected env files, and model identity. Restricted-user readiness runs inside the service sandbox before activation. Previous units and the `current` pointer are restored on activation failure; receipts and unit backups live under `activations/`. No content is generated or published by preparation or activation.
 
