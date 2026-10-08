@@ -7,17 +7,19 @@ import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
-type Options = { baseUrl: string; game: string; collection: string; workspace: string; allowMissingImages: boolean };
+type Options = { baseUrl: string; game: string; collection: string; workspace: string; allowMissingImages: boolean; reusePublishedMedia: boolean };
 
 function parseArgs(argv: string[]): Options {
   const values = new Map<string, string>();
   let allowMissingImages = false;
+  let reusePublishedMedia = false;
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
     if (["--base-url", "--game", "--collection", "--workspace"].includes(arg)) values.set(arg, argv[++index] ?? "");
     else if (arg === "--allow-missing-images") allowMissingImages = true;
+    else if (arg === "--reuse-published-media") reusePublishedMedia = true;
     else if (arg === "--help" || arg === "-h") {
-      console.log("Usage: npm run verify:gta-collection-final -- --base-url http://localhost:3000 --game gta-5 --collection weapons --workspace tmp/content-workspace/gta/gta-5/collections/weapons [--allow-missing-images]");
+      console.log("Usage: npm run verify:gta-collection-final -- --base-url http://localhost:3000 --game gta-5 --collection weapons --workspace tmp/content-workspace/gta/gta-5/collections/weapons [--allow-missing-images] [--reuse-published-media]");
       process.exit(0);
     } else throw new Error(`Unknown option: ${arg}`);
   }
@@ -26,7 +28,7 @@ function parseArgs(argv: string[]): Options {
   const collection = (values.get("--collection") ?? "").trim().toLowerCase();
   const workspace = values.get("--workspace") ?? "";
   if (!baseUrl || !game || !collection || !workspace) throw new Error("--base-url, --game, --collection, and --workspace are required.");
-  return { baseUrl: new URL(baseUrl).toString().replace(/\/$/, ""), game, collection, workspace: path.resolve(workspace), allowMissingImages };
+  return { baseUrl: new URL(baseUrl).toString().replace(/\/$/, ""), game, collection, workspace: path.resolve(workspace), allowMissingImages, reusePublishedMedia };
 }
 
 async function run(command: string, args: string[], extraEnv?: Record<string, string>) {
@@ -54,7 +56,7 @@ async function main() {
   await run("npm", ["run", "sync:gta-collection-runtime", "--", "--manifest", manifest]);
   await run(
     "npm",
-    ["run", "sync:gta-collection-runtime", "--", "--manifest", manifest, "--apply", "--upload-media", "--publish"],
+    ["run", "sync:gta-collection-runtime", "--", "--manifest", manifest, "--apply", "--publish", options.reusePublishedMedia ? "--reuse-published-media" : "--upload-media"],
     { BLOXODES_ENV_OVERLAYS: "cloudflare" }
   );
   const sb = supabaseAdmin();

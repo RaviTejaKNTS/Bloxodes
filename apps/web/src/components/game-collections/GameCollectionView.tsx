@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { extractYouTubeVideoUrlId } from "@/lib/youtube-media";
+import { CollectionVideo } from "./CollectionVideo";
 import { Fragment, type ReactNode } from "react";
 import { PagePagination } from "@/components/PagePagination";
 import type { CollectionPaginationInfo } from "./collection-pagination";
@@ -10,7 +12,7 @@ import { GameCollectionViewShell } from "./GameCollectionViewShell";
 
 type GameCollectionStat = { key: string; label: string };
 
-export type CollectionFieldKind = "normal" | "highlight" | "chip" | "detail";
+export type CollectionFieldKind = "normal" | "highlight" | "chip" | "detail" | "video";
 export type CollectionFieldTone = "positive" | "negative" | "warning" | "neutral";
 export type CollectionFieldPresentation = {
   kind: CollectionFieldKind;
@@ -91,9 +93,10 @@ type CollectionItemPresentation = {
   title: string;
   image: string | null;
   imageCreditUrl: string | null;
+  videoUrl: string | null;
   description: string | null;
   tracks: string[];
-  details: Array<{ key: string; label: string; value: string }>;
+  details: Array<{ key: string; label: string; value: string; kind?: CollectionFieldKind }>;
   fields: CollectionPresentationField[];
 };
 
@@ -516,6 +519,7 @@ function classifyFieldKind(
   definition: CollectionPresentationFieldDefinition,
   displayStat: GameCollectionDisplayStat | null
 ): CollectionFieldKind {
+  if (definition.presentation?.kind === "video") return "video";
   if (!displayStat?.value) return "normal";
   if (definition.presentation?.kind) return definition.presentation.kind;
   if (isLongSentenceValue(displayStat.value)) return "detail";
@@ -529,7 +533,10 @@ function buildPresentationField(
   definition: CollectionPresentationFieldDefinition,
   item: GameCollectionItem
 ): CollectionPresentationField {
-  const displayStat = getFieldDisplayStat(definition, item);
+  const videoId = definition.presentation?.kind === "video" ? extractYouTubeVideoUrlId(item[definition.key]) : null;
+  const displayStat: GameCollectionDisplayStat | null = definition.presentation?.kind === "video"
+    ? videoId ? { label: definition.label, value: `https://www.youtube.com/watch?v=${videoId}` } : null
+    : getFieldDisplayStat(definition, item);
   const configured = Boolean(definition.presentation);
   return {
     key: definition.key,
@@ -548,17 +555,25 @@ function buildItemPresentation(
   fieldDefinitions: CollectionPresentationFieldDefinition[]
 ): CollectionItemPresentation {
   const descriptionKey = getPrimaryDescriptionKey(config);
+  const videoField = (config.cardFields ?? []).find((key) =>
+    getConfiguredFieldPresentation(config, key)?.kind === "video" && extractYouTubeVideoUrlId(item[key])
+  );
   return {
     id: item.id,
     title: item.name,
     image: resolveImageSrc(item.image ?? null),
     imageCreditUrl: resolveImageCreditUrl(item.imageCreditUrl),
+    videoUrl: videoField ? String(item[videoField]) : null,
     description: descriptionKey ? normalizeValue(item[descriptionKey]) : null,
     tracks: Array.isArray(item.tracklist) ? item.tracklist.filter((track): track is string => typeof track === "string" && track.trim().length > 0) : [],
     details: (config.detailFields ?? []).flatMap((key) => {
-      const value = normalizeValue(item[key]);
+      const presentation = getConfiguredFieldPresentation(config, key);
+      const videoId = presentation?.kind === "video" ? extractYouTubeVideoUrlId(item[key]) : null;
+      const value = presentation?.kind === "video"
+        ? videoId ? `https://www.youtube.com/watch?v=${videoId}` : null
+        : normalizeValue(item[key]);
       if (!value) return [];
-      return [{ key, label: getConfiguredFieldPresentation(config, key)?.label ?? formatKeyLabel(key), value }];
+      return [{ key, label: presentation?.label ?? formatKeyLabel(key), value, kind: presentation?.kind }];
     }),
     fields: fieldDefinitions.map((definition) => buildPresentationField(definition, item))
   };
@@ -601,7 +616,7 @@ function ItemDetails({ details }: { details: CollectionItemPresentation["details
         {details.map((detail) => (
           <div key={detail.key}>
             <dt className="text-xs font-medium text-muted">{detail.label}</dt>
-            <dd className="mt-0.5 whitespace-pre-line break-words text-foreground">{detail.value}</dd>
+            <dd className="mt-0.5 whitespace-pre-line break-words text-foreground">{detail.kind === "video" ? <VideoWatchLink url={detail.value} /> : detail.value}</dd>
           </div>
         ))}
       </dl>
@@ -615,8 +630,13 @@ function getCardFieldRowClass(field: CollectionPresentationField) {
   return `${base} min-h-[2.75rem]`;
 }
 
+function VideoWatchLink({ url }: { url: string }) {
+  return <a href={url} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">Watch on YouTube</a>;
+}
+
 function renderFieldValue(field: CollectionPresentationField, size: "card" | "table" = "card") {
   if (!field.value) return renderMissingValue();
+  if (field.kind === "video") return <VideoWatchLink url={field.value} />;
   const textWrapClass =
     size === "table"
       ? "[word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:pretty]"
@@ -731,13 +751,15 @@ function ForgeItemCard({
   presentation: CollectionItemPresentation;
   showImage: boolean;
 }) {
-  const visibleFields = presentation.fields.filter((field) => !(field.omitWhenEmpty && !field.value));
+  const visibleFields = presentation.fields.filter((field) => field.kind !== "video" && !(field.omitWhenEmpty && !field.value));
   return (
     <article
       id={`item-${presentation.id}`}
       className="group flex h-full scroll-mt-28 flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
     >
-      <CollectionImageFrame presentation={presentation} showImage={showImage} />
+      {presentation.videoUrl ? (
+        <CollectionVideo key={presentation.videoUrl} url={presentation.videoUrl} title={presentation.title} poster={presentation.image} />
+      ) : <CollectionImageFrame presentation={presentation} showImage={showImage} />}
       <div className="flex flex-1 flex-col p-4">
         <div className={`${presentation.description ? "min-h-[5.75rem]" : ""} space-y-2`}>
           <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-foreground [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:balance]">

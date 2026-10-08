@@ -354,3 +354,5 @@ Minecraft collection publication shares identical prepared image bytes through f
 - `scripts/ops/relocate-automation-state.py` moves idle persistent files to HDD through a verified copy and recoverable compatibility aliases.
 
 Canonical usage, ownership and side effects are in `dev-docs/operations/deployment.md` and `scripts/AGENTS.md`.
+
+`verify:gta-collection-final` accepts `--reuse-published-media` for managed-development data changes with unchanged image keys and hashes. It uses the existing sync guard and preserves all final readback and route checks.

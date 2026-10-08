@@ -289,3 +289,5 @@ Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, perma
 
 - Wiki release recovery retries only stale preparation claims. The dispatch callback rejects replaced claims. Submitted claims record matching GitHub run evidence, recheck recorded conclusions and retry unsuccessful completed runs within the existing limit. Unknown outcomes stay pending. Dispatch selection reads past ineligible rows; recovery reads all receipt pages by ID. Never reset a queued release because it has waited a long time.
 - `ci/`: GitHub path scope, injected env checks, transaction composition and rollback tests, managed schema receipts, production publication guards, frozen selected content bundles and article/wiki dispatch/readback. Use the owning deployment doc for commands and credentials.
+
+`verify:gta-collection-final -- --reuse-published-media` verifies a managed-development data update with unchanged image keys and hashes through the sync command. It skips R2 upload credentials and retains copy, dataset, database readback and route checks. Changed media still requires the default upload path.
