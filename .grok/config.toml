@@ -1,0 +1,43 @@
+# Grok permissions for delegated Bloxodes tasks (see CLAUDE.md).
+# T3 starts delegated agents in auto mode. These rules pre-approve routine work
+# so the agent does not stop on an approval prompt the main agent cannot see.
+# Deny rules win over allow rules. Sub-agent spawning cannot be pre-approved
+# in auto mode, so briefs for Grok must not ask it to start sub-agents.
+
+[permission]
+allow = [
+  "Read",
+  "Edit",
+  "Write",
+  "Grep",
+  "Glob",
+  "WebFetch",
+  "WebSearch",
+  "Bash",
+]
+deny = [
+  # Publishing and history rewrites belong to the main agent.
+  "Bash(git push*)",
+  "Bash(git reset --hard*)",
+  "Bash(git clean*)",
+  "Bash(git stash*)",
+  "Bash(git branch -D*)",
+  "Bash(git worktree remove*)",
+  "Bash(gh pr merge*)",
+  "Bash(gh workflow run*)",
+  "Bash(gh release*)",
+  # Production targets.
+  "Bash(*--allow-prod*)",
+  "Bash(*production-preview*)",
+  "Bash(*NODE_ENV=production*)",
+  "Bash(*ALLOW_PROD*)",
+  "Bash(*supabase:production*)",
+  "Bash(*dev:prod*)",
+  "Bash(*targets/production.env*)",
+  "Read(**/.envs/targets/production.env)",
+  "Edit(**/.envs/**)",
+  "Write(**/.envs/**)",
+  # Destructive or privileged shell.
+  "Bash(rm -rf*)",
+  "Bash(sudo*)",
+]
