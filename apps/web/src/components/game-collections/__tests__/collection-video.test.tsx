@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { act } from "react";
+import { flushSync } from "react-dom";
 import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
@@ -7,7 +7,11 @@ import { CollectionVideo } from "../CollectionVideo";
 import { GameCollectionView, type GameCollectionViewConfig } from "../GameCollectionView";
 
 vi.mock("../CollectionImageLightbox", () => ({ CollectionImageLightbox: () => null }));
-Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
+// CI loads React's production build, which has no `act`; flush updates directly instead.
+async function settle(run: () => void) {
+  flushSync(run);
+  await new Promise((resolve) => setTimeout(resolve, 0));
+}
 const url = "https://www.youtube.com/watch?v=QdBZY2fkU-0";
 const poster = "https://media.bloxodes.com/trailer.webp";
 const config: GameCollectionViewConfig = {
@@ -53,14 +57,14 @@ describe("collection video facade", () => {
     document.body.append(container);
     const root = createRoot(container);
     try {
-      await act(async () => root.render(<GameCollectionView config={config} sections={[{
+      await settle(() => root.render(<GameCollectionView config={config} sections={[{
         id: "videos", label: "Videos", items: [
           { id: "valid", name: "Valid", image: poster, videoUrl: url },
           { id: "invalid", name: "Invalid", image: poster, videoUrl: "https://evil.test/watch?v=QdBZY2fkU-0" },
         ],
       }]} />));
       const listButton = [...container.querySelectorAll("button")].find((button) => button.textContent === "List")!;
-      await act(async () => listButton.click());
+      await settle(() => listButton.click());
       const link = container.querySelector("table a")!;
       expect(link.getAttribute("href")).toBe(url);
       expect(link.textContent).toBe("Watch on YouTube");
@@ -68,7 +72,7 @@ describe("collection video facade", () => {
       expect(container.querySelector("iframe")).toBeNull();
       expect(container.textContent).not.toContain("evil.test");
     } finally {
-      await act(async () => root.unmount());
+      root.unmount();
       container.remove();
     }
     const html = renderItem(url, { ...config, cardFields: [], detailFields: ["videoUrl"] });
@@ -81,7 +85,7 @@ describe("collection video facade", () => {
     document.body.append(container);
     const root = createRoot(container);
     try {
-      await act(async () => root.render(<>
+      await settle(() => root.render(<>
         <CollectionVideo url={url} title="Trailer 1" poster={poster} />
         <CollectionVideo url="https://youtu.be/VQRLujxTm3c" title="Trailer 2" poster={null} />
       </>));
@@ -89,7 +93,7 @@ describe("collection video facade", () => {
       const button = container.querySelector("button")!;
       button.focus();
       expect(document.activeElement).toBe(button);
-      await act(async () => button.click());
+      await settle(() => button.click());
       const frame = container.querySelector("iframe")!;
       expect(container.querySelectorAll("iframe")).toHaveLength(1);
       expect(frame.src).toBe("https://www.youtube-nocookie.com/embed/QdBZY2fkU-0?autoplay=1");
@@ -99,7 +103,7 @@ describe("collection video facade", () => {
       expect(document.activeElement).toBe(frame);
       expect(container.querySelector('button[aria-label="Play Trailer 2"]')).not.toBeNull();
     } finally {
-      await act(async () => root.unmount());
+      root.unmount();
       container.remove();
     }
   });
