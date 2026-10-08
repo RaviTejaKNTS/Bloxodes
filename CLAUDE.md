@@ -11,6 +11,7 @@ Claude is the owner's main, always-available agent for this project. Claude plan
 Claude owns these directly, without delegating:
 
 - Small tasks where checking and acting immediately is cheaper than briefing an agent: quick reads, status checks, data lookups, one-file fixes, and answering questions.
+- Content, SEO and editorial quality of every page agents produce. See "Content and SEO review" below.
 - Edits that improve agent-written prose. Make them yourself instead of starting another writer.
 - Project docs (`AGENTS.md` files, `dev-docs/`, `docs/`, `CLAUDE.md`) and skills (`.agents/skills/*`).
 - Git, branches, commits, PRs, PR watching, merges, and production release steps, under the rules in `AGENTS.md` and `bloxodes-release-e2e`.
@@ -27,10 +28,25 @@ Use the T3 `delegate_task` tool. Check `orchestrator_capabilities` if a model ID
 | Work | Provider instance | Model | Options |
 | --- | --- | --- | --- |
 | Coding, implementation, bug fixes, code-heavy pipelines | `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
+| All writing: articles, wiki and collection copy, quizzes, checklists, page prose | `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
 | Data collection, scraping, mass scraping, polling, dataset building | `codex` | `gpt-6-luna` | `reasoningEffort: max` |
-| All writing: articles, wiki and collection copy, quizzes, checklists, page prose | `grok` | `grok-4.7` | `reasoningEffort: high` |
-| Light or miscellaneous tasks a smaller model can handle | `opencode` | `opencode/muse-spark-1.3-contributor-free` | — |
+| Read-only lookups a smaller model can handle | `opencode` | `opencode/muse-spark-1.3-contributor-free` | — |
 | Light or miscellaneous tasks a smaller model can handle | `antigravity` | the newest Gemini Flash (currently `gemini-3.8-flash-high`) | — |
+| Light or miscellaneous tasks a smaller model can handle | `grok` | `grok-4.7` | `reasoningEffort: high` |
+
+### Light models and permissions
+
+Codex does all routine delegated work. Muse Spark, Gemini and Grok are optional, for small self-contained actions only. They run in T3's inherited `auto` mode, never `full-access`. In `auto`, T3 handles each one differently:
+
+- **Gemini (Antigravity):** T3's adapter approves its permission requests itself, so it should run without prompts. This hasn't been confirmed by a live run yet.
+- **Grok:** T3 shows every Grok permission request to the owner. The committed `.grok/config.toml` pre-approves reads, edits, search, web and ordinary shell commands. It denies pushes, merges, workflow dispatch, history rewrites, production targets and `.envs` edits. Grok cannot pre-approve its sub-agent tool, so Grok briefs must say not to start sub-agents.
+- **Muse Spark (OpenCode):** T3 adds `ask` rules for shell, edits, web and outside-folder access to every OpenCode session that is not `full-access`. A project `opencode.json` cannot override them. Use Muse Spark only for read-only work.
+
+If a model reports a usage or quota limit, move the task to Codex.
+
+Approval prompts appear only in the agent's own thread. The orchestrator tools cannot list or answer them. When checking any non-Codex agent, read its `childThreadId` timeline with `t3_thread_read` and look for an `approval_request` with status `waiting`. If one is waiting, tell the owner immediately with the thread and the action.
+
+### Pipelines
 
 Multi-stage content jobs go to one agent as a whole pipeline. For example, wiki and collection pages run suggestions → research → data → images → writing. Name the matching `bloxodes-*-workflow-runner` skill in the brief, and let that agent start its own sub-agents as the skill describes. Give the pipeline to the model matching its main kind of work.
 
@@ -57,3 +73,26 @@ Remind agents to run checks on GitHub, not locally, and not to commit, push or p
 Agents running in parallel must not edit the same files or the same game.
 
 Before a code PR, have an independent Codex agent review the task diff, as `AGENTS.md` requires.
+
+## Content and SEO review
+
+Claude is the content, SEO and agent manager. Codex owns the technical work: rendering, data loading, metadata wiring, checks and builds. A page that renders without errors is not yet ready for production.
+
+Review every page an agent produces as an editor. Check:
+
+- **Reader value:** does it answer what a gamer searched for, quickly, before any background?
+- **Accuracy:** facts match the brief's sources. Nothing speculative, stale or invented.
+- **Coverage gaps:** compare with the pages currently ranking for the target query. Note anything they cover that players need and we miss: items, fields, steps, locations, images, FAQs.
+- **SEO depth:** a page too thin to compete, a weak title or meta description, headings that don't match search intent, missing internal links to related Bloxodes pages.
+- **Writing quality:** simple, clean and easy to read. Short sentences, plain words, no filler or marketing tone. Follow the matching `bloxodes-*-writing` skill and `AGENTS.md` copy rules.
+
+Codex research and first drafts are the starting point. Fix the writing yourself: tighten prose, restructure, add missing details from the brief's sources, and fill small gaps. Send work back to an agent only when the gap needs new research, new data, images or code. In each review report, list what you found and what you changed.
+
+## Status line
+
+End every reply to the owner with a one-line status that says whether the thread's work is finished. Name what is still running or blocking it. Examples:
+
+- `Status: not done. Codex is building the GTA VI collections; the code review is still running.`
+- `Status: not done. Waiting on Required PR checks for #42.`
+- `Status: not done. PR #42 is ready but not merged; worktree fully committed and pushed.`
+- `Status: done. Checks passed, PR #42 merged to production, worktree clean, nothing pending in this thread.`

@@ -1,8 +1,9 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-10-07
-Evidence: inspected GitHub workflow/configuration, protected PR checks, managed-development readiness and SQL byte proof, guarded production ledger readback, exact-SHA deployment/database health, and verification-only content/browser checks. Historical VPS, Edge Function and installed-runtime observations retain their recorded dates below.
+Last verified: 2026-10-08
+Path layout rechecked 2026-10-08 against live T3 registrations, Git worktree metadata, service paths and env links. Other component verification boundaries remain as documented.
+Evidence: inspected GitHub workflow/configuration, protected PR checks, managed-development readiness and SQL byte proof, guarded production ledger readback, exact-SHA deployment/database health, and verification-only content/browser checks. Installed homelab runtime, HDD state aliases, protected env metadata and timer preservation were also verified. Historical VPS and Edge Function observations retain their recorded dates below.
 
 ## Task and release workflow
 
@@ -24,7 +25,7 @@ Protected PR checks, managed/production schema verification, exact-SHA web/datab
 
 The saved T3 project uses `/srv/data/projects/Bloxodes`, defaults to worktree mode and has Setup worktree, Open GitHub checks and Open pull request actions. Setup runs on worktree creation with `async: false`, so T3 waits before the first agent turn. The active checkout also has its env and shared-draft links. Updating these project settings through T3 requires a live Full access/default caller.
 
-The homelab main checkout and Git history live at `/srv/data/projects/Bloxodes`. `/home/teja/projects/Bloxodes` remains a compatibility link, including the current thread's saved checkout path. New T3 worktrees use `/srv/data/t3code/worktrees/Bloxodes/`. T3 owns task creation and thread binding; do not move an attached thread by creating a second branch or thread. Keep main on `production` and preserve edits in existing tasks when fetching production for new tasks.
+The homelab main checkout and Git history live at `/srv/data/projects/Bloxodes`. T3 project and thread registrations use canonical HDD paths; the home-project compatibility link has been removed. New T3 worktrees use `/srv/data/t3code/worktrees/Bloxodes/`. T3 owns task creation and thread binding; do not move an attached thread by creating a second branch or thread. Keep main on `production` and preserve edits in existing tasks when fetching production for new tasks.
 
 Setup links `.envs/` and four authoring folders from the main checkout: `tmp/content-workspace`, `tmp/game-plans`, `tmp/game-collection-suggestions` and `tmp/game-collection-runs`. A change to shared draft files is visible in every worktree. They remain ignored and are not copied into a code PR. Selected publication still needs its exact reviewed CI bundle and authorization.
 
@@ -32,7 +33,7 @@ Before editing shared game drafts, run `npm run claim:shared-content -- --game <
 
 `tmp/shared-history` exposes existing article briefs/finals/media/reviews and selected source/media folders as historical references. Keep those originals unchanged. New pipeline runs, reports, logs and preview state belong in each task's own scratch directory. Never link the entire `tmp`, `node_modules` or `.next` between checkouts. The setup script checks all destinations before adding links and stops on conflicts without replacing local files.
 
-Installed automation releases, `/etc` env files, timers and runtime state retain their existing ownership. The shared article/wiki lease keeps its original directory inode through the compatibility path under `/home/teja/projects/Bloxodes-runtime-legacy/tmp/article-writer`. That small runtime directory and the retired restricted-account build cache remain outside development HDD storage. The original provider working directory is retained until its open handles close; the thread's saved path resolves to the HDD copy. The move neither activates new automation source nor changes a service.
+Installed automation releases, `/etc` env files, timers and runtime state retain their existing ownership. The shared article/wiki lease keeps its original directory inode at the canonical path under `/srv/data/projects/Bloxodes-runtime-legacy/tmp/article-writer`. The retained legacy runtime directory is also on HDD; installed automation releases keep their existing locations. Saved T3 worktree paths and Git pointers now use their canonical HDD locations. This path update does not activate a new automation release or alter credentials.
 
 Cleanup accepts the actual T3 HDD task directory and old nested task paths. Run it from another checkout only after checking T3 inactivity. It preserves detached releases, dirty/unmerged/locked tasks and claimed drafts. Its private archive under main `tmp/finished-worktrees/` retains regular scratch files and hashes, without following shared-folder symlinks or copying caches. Link targets are recorded in the private manifest. Checkout-owned env files and unknown ignored data outside scratch block cleanup until preserved.
 
@@ -211,6 +212,8 @@ The web deployed `118b66d471623c520b1e9ae4457523c5d51fdf09` with healthy databas
 The release ran on the primary homelab, so no separate homelab checkout synchronization was needed. The task worktree and branch remain available. Local env checks reported four undocumented article automation keys outside this release. Those runtime values were not changed.
 
 ## Automation activation
+
+The GitHub QA runtime is installed and active at `/srv/data/bloxodes-automation-runtime/current`. All seven service files match the released source. The five timer files, their enablement and their active states are unchanged. Protected env contents and access controls, saved state, the original shared lease inode and rollback releases are preserved. See the [October 7 release audit](../../docs/2026-10-07-github-release-audit.md#checklist-qa-and-automation-release) for the installed SHA and activation receipts.
 
 Installed article/wiki workers author and review content. Their units set `BLOXODES_CI_QA=1`, so they do not start local previews or run final checks. Completed authoring remains pending technical QA until GitHub verifies its frozen batch. Article outbox records the bundle hash before dispatch and reconciles its exact GitHub run. Pending runs do not consume another retry. Failed runs retain bounded retry limits; successful runs still need the verified queue receipt.
 

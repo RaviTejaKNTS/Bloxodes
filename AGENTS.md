@@ -56,7 +56,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 ## Workspace and branches
 
 - T3 assigns one worktree and branch to each task. Stay in the worktree bound to the current thread. Do not launch another thread or create extra branches/worktrees for the same task.
-- Keep `/srv/data/projects/Bloxodes` on `production` as the clean main checkout. `/home/teja/projects/Bloxodes` is its compatibility link. T3 task checkouts use `/srv/data/t3code/worktrees/Bloxodes/`; all development source, Git history, env storage and drafts resolve to the HDD. Preserve detached article/automation release and rollback checkouts.
+- Keep `/srv/data/projects/Bloxodes` on `production` as the clean main checkout. T3 uses this canonical HDD path. T3 task checkouts use `/srv/data/t3code/worktrees/Bloxodes/`; all development source, Git history, env storage and drafts resolve to the HDD. Preserve detached article/automation release and rollback checkouts.
 - Use T3 worktree mode. Start a new task from a fresh `origin/production`; do not reset an existing task when production advances. Automatic setup waits before the first agent turn, links the main `.envs` and shared authoring folders, and creates checkout-owned scratch directories. It does not install dependencies or run checks. Never share `node_modules`, build output, preview state or automation queue/lease files.
 - Shared drafts live under `tmp/content-workspace`, `tmp/game-plans`, `tmp/game-collection-suggestions` and `tmp/game-collection-runs`. Before editing a game, run `npm run claim:shared-content -- --game <slug>` from the assigned checkout. Release it with the same command plus `--release` when finished. Another checkout must not edit that game while its claim exists. Read old article artifacts and research through `tmp/shared-history`; keep new pipeline state in the task's own scratch directory.
 - Run checks, tests, builds, content validation and browser verification on GitHub. Do not run them locally. Use the PR workflow's screenshots and reports for review. Local work is inspection, authoring and edits.
@@ -89,6 +89,16 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Keep SEO-friendly page/article titles and comfortable body text. Do not shrink editorial content into an admin-dashboard density.
 - Use shadcn primitives for reusable interface surfaces such as sidebars, search inputs, nav items, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
 - Keep shadcn composition minimal. Match Bloxodes tokens and behavior without building heavy custom layouts inside primitives.
+
+## Public Copy
+
+Write like a player who knows the game. Never say where a fact came from or how the page was made. Keep sources, research notes, briefs, datasets, manifests and workflows out of visible copy.
+
+- Bad: "According to our sources, Research takes 3 minutes." Good: "Research takes 3 minutes."
+- Bad: "Our research shows the vault opens at night." Good: "The vault opens at night."
+- Bad: "This source-backed list covers every pet." Good: "There are 42 pets across five rarities."
+
+Game terms that use these words, such as Dandy's World's Research or GTA's Source Cargo, are fine. `scripts/content/check-public-copy.ts` blocks process-voice phrases. Bare `source` and `research` pass; `manifest` and `workflow` stay blocked.
 
 ## Change Checklists
 

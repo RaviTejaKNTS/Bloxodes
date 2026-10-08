@@ -45,7 +45,8 @@ Write like a player who knows the game and can explain it without performing for
 - Talk to the player as you when it helps.
 - A light dry line is fine when it carries a real fact. Do not force jokes.
 - Do not use em dashes, hype, generic welcome copy, or stock AI phrases.
-- Do not mention sources, research, database rows, SEO, workflows, or what the page plans to cover.
+- Do not mention database rows, SEO, or what the page plans to cover.
+- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
 - Do not add franchise-specific visual instructions or eyebrow text. Use the existing Bloxodes design.
 
 ## Writing rules

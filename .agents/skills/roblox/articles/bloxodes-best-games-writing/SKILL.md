@@ -64,7 +64,7 @@ Use a unique lowercase hyphenated `id` for each break. Do not put a break inside
 
 ## Voice and accuracy
 
-Write like an experienced Roblox player giving clear recommendations: specific, conversational, decisive, and willing to mention friction. Use first-person editorial phrasing where it helps the recommendation, but never invent a personal session, result, or feeling that was not verified. Let the voice have taste without pretending to have played a session that the research did not establish.
+Write like an experienced Roblox player giving clear recommendations: specific, conversational, decisive, and willing to mention friction. Use first-person editorial phrasing where it helps the recommendation, but never invent a personal session, result, or feeling that was not verified. Let the voice have taste without pretending to have played a session that the research did not establish. Never say where a fact came from or how the article was made; follow the Public Copy rule in root `AGENTS.md`.
 
 Prefer concrete verbs and details over labels. Explain what the player actually does, what creates tension, and what makes the game worth opening. Vary paragraph openings and rhythm. Do not repeat the same “This is for players who...” or “Compared with the previous game...” formula across sections. Avoid database-entry language, keyword stuffing, inflated claims, and filler transitions.
 
