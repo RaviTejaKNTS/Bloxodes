@@ -70,7 +70,13 @@ async function main() {
       const linked = await sb.from("games").update({ parent_game_id: parent.data.id }).eq("id", id);
       if (linked.error) throw linked.error;
     }
-    const result = await sb.from("wiki_pages").upsert({ ...pick(wiki, wikiFields), ...(args.includes("--stage") ? { is_published: false } : {}), game_id: id }, { onConflict: "game_id" }).select("slug,is_published").single();
+    const payload = { ...pick(wiki, wikiFields), ...(args.includes("--stage") ? { is_published: false } : {}), game_id: id };
+    // Update existing hubs in place. An upsert inserts a new id first, which the route-identity trigger rejects.
+    const page = await sb.from("wiki_pages").select("id").eq("game_id", id).maybeSingle();
+    if (page.error) throw page.error;
+    const result = page.data
+      ? await sb.from("wiki_pages").update(payload).eq("id", page.data.id).select("slug,is_published").single()
+      : await sb.from("wiki_pages").insert(payload).select("slug,is_published").single();
     if (result.error || result.data?.slug !== slug || result.data.is_published !== !args.includes("--stage")) throw result.error ?? new Error(`Hub readback failed for ${slug}`);
     console.log(`${args.includes("--stage") ? "Staged" : "Published"} ${slug}`);
   }
