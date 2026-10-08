@@ -16,7 +16,7 @@ Read and follow .agents/skills/bloxodes-franchise-wiki-workflow-runner/SKILL.md 
 - Managed development: npm run dev:managed
 - Final verifier: npm run verify:gta-wiki-final -- --base-url http://localhost:<port> --game <game-slug> --workspace tmp/content-workspace/gta/<game-slug>/wiki/<game-slug>
 - Browser checks: GTA-only sidebar and search scope, normal Bloxodes layout, collection CTA, metadata, canonical, structured data, desktop and mobile overflow and images
-- Published hub media check: confirm both game.json image roles are present, source-backed, distinct, and served from Bloxodes-hosted wiki media; confirm cover artwork is used for cards/social metadata and hero artwork is used for the square title thumbnail. GTA VI is intentionally unpublished until the game is released.
+- Published hub media check: confirm both game.json image roles are present, source-backed, distinct, and served from Bloxodes-hosted wiki media; confirm cover artwork is used for cards/social metadata and hero artwork is used for the square title thumbnail. GTA VI (`gta-6`) uses status `upcoming` and only Rockstar-confirmed pre-launch facts until it releases; sync its hub media with `sync:gta-wiki-media -- --manifest <reviewed.json>`.
 
 Preserve the prior parent gates, one-worker-per-hub rule, research approval before writing, and stop-before-production boundary. Never use Roblox tables, APIs, or /wiki routes. Application or schema changes are outside this compatibility wrapper unless a separate request explicitly authorizes them.
 ## Shared game storage
