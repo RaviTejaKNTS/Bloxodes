@@ -38,7 +38,8 @@ Write like a player who knows the game and can explain its systems to another pl
 - Light, dry humor is fine when it sits on a real fact. Do not stack jokes or write around the answer.
 - Do not use em dashes, hype, generic welcome copy, or stock AI phrases.
 - Keep card facts, table values, controls, mission names, platform sequences, and directions plain.
-- Do not mention sources, research, datasets, workflow, databases, SEO, cards, pages, or how the site works in public copy.
+- Do not mention databases, SEO, cards, pages, or how the site works in public copy.
+- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
 - Do not add franchise-specific visual instructions or eyebrow text.
 
 ## Non-negotiable content rules

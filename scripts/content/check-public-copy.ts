@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { marked } from "marked";
 import { load } from "cheerio";
+import { publicProvenanceMatch } from "./public-provenance";
 
 type Finding = {
   file: string;
@@ -50,30 +51,6 @@ const HARD_PATTERNS: Array<{ rule: string; pattern: RegExp }> = [
     pattern: /\bnot\s+(just|only)\b/i
   }
 ];
-
-const GAMEPLAY_SOURCE_TERMS = [
-  /\bSource Cargo\b/gi,
-  /\bSource Goods\b/gi,
-  /\bSource Supplies\b/gi,
-  /\bsource Air Freight Cargo\b/gi,
-  /\bsource all (?:vehicles|types of Cargo|types of Special Items)\b/gi,
-  /\bSource 250 crates of Cargo\b/gi,
-  /\bHumane Labs and Research\b/gi,
-  /\bScientist Research Center\b/gi,
-  /\bResearch projects?\b/gi,
-  /\bResearch 25 projects\b/gi,
-  /\bBunker Research upgrades\b/gi,
-  /\bresearch and manufacturing\b/gi
-];
-
-function publicProvenanceMatch(value: string): RegExpExecArray | null {
-  if (value.trim() === "Sources") return null;
-  const masked = GAMEPLAY_SOURCE_TERMS.reduce(
-    (current, pattern) => current.replace(pattern, "gameplay-term"),
-    value
-  );
-  return /\b(?:sources?|research|manifest|workflow)\b/i.exec(masked);
-}
 
 function isPublicCopyPath(parts: string[]): boolean {
   return parts.some((part) => PUBLIC_COPY_KEYS.has(part));
