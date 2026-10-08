@@ -98,7 +98,7 @@ describe("collection video facade", () => {
       expect(container.querySelectorAll("iframe")).toHaveLength(1);
       expect(frame.src).toBe("https://www.youtube-nocookie.com/embed/QdBZY2fkU-0?autoplay=1");
       expect(frame.title).toBe("Trailer 1");
-      expect(frame.referrerPolicy).toBe("strict-origin-when-cross-origin");
+      expect(frame.getAttribute("referrerpolicy")).toBe("strict-origin-when-cross-origin");
       expect(frame.hasAttribute("allowfullscreen")).toBe(true);
       expect(document.activeElement).toBe(frame);
       expect(container.querySelector('button[aria-label="Play Trailer 2"]')).not.toBeNull();
