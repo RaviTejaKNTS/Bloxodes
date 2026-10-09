@@ -43,12 +43,32 @@ export async function checkoutPaths(cwd = process.cwd(), suppliedMain = process.
   return { root, main, records };
 }
 
-export async function inspectLink(source, destination) {
+async function optionalReferencePath(file) {
+  try { return await fs.realpath(file); }
+  catch (error) { if (["ENOENT", "ENOTDIR", "ELOOP"].includes(error.code)) return null; throw error; }
+}
+
+export async function inspectLink(source, destination, { optional = false } = {}) {
   const current = await existing(destination);
-  if (!current) return true;
-  if (!current.isSymbolicLink()) throw new Error(`Preserving existing local path. Merge its files before linking: ${destination}`);
-  if (await fs.realpath(destination) !== await fs.realpath(source)) throw new Error(`Existing link points somewhere else: ${destination}`);
-  return false;
+  if (current && !current.isSymbolicLink()) throw new Error(`Preserving existing local path. Merge its files before linking: ${destination}`);
+  if (!optional) {
+    if (!current) return true;
+    if (await fs.realpath(destination) !== await fs.realpath(source)) throw new Error(`Existing link points somewhere else: ${destination}`);
+    return false;
+  }
+  // Check destination conflicts before skipping, so a missing source never hides one.
+  const resolvedSource = await optionalReferencePath(source);
+  const resolvedDestination = current ? await optionalReferencePath(destination) : null;
+  if (resolvedDestination && resolvedDestination !== resolvedSource) throw new Error(`Existing link points somewhere else: ${destination}`);
+  if (!resolvedSource) {
+    console.warn(`Skipping missing or dangling optional reference source: ${source}`);
+    return false;
+  }
+  if (current && !resolvedDestination) {
+    console.warn(`Skipping dangling optional reference link: ${destination}`);
+    return false;
+  }
+  return !current;
 }
 
 export async function privateEnvFiles(directory) {

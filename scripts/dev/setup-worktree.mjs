@@ -20,8 +20,8 @@ export async function setupWorktree({ cwd = process.cwd(), suppliedMain = proces
   const history = path.join(mainTmp, "worktree-reference");
   const claims = path.join(mainTmp, "content-claims");
   const links = [];
-  const collectLink = async (source, destination) => {
-    if (await inspectLink(source, destination)) links.push({ source, destination });
+  const collectLink = async (source, destination, options) => {
+    if (await inspectLink(source, destination, options)) links.push({ source, destination, options });
   };
   // Inspect every destination before creating directories or links.
   if (root !== main) {
@@ -32,7 +32,7 @@ export async function setupWorktree({ cwd = process.cwd(), suppliedMain = proces
   }
   for (const name of referenceFolders) {
     const source = path.join(mainTmp, name);
-    if (await existing(source)) await collectLink(source, path.join(history, name));
+    await collectLink(source, path.join(history, name), { optional: true });
   }
   for (const name of ["AGENTS.md", ".agents/skills", ".claude/skills", ".codex/environments/environment.toml", "t3.json"]) await fs.access(path.join(root, name));
   await fs.mkdir(tmp, { recursive: true });
@@ -40,11 +40,11 @@ export async function setupWorktree({ cwd = process.cwd(), suppliedMain = proces
   for (const name of sharedFolders) await fs.mkdir(path.join(mainTmp, name), { recursive: true });
   await fs.mkdir(history, { recursive: true });
   await fs.mkdir(claims, { recursive: true, mode: 0o700 });
-  for (const { source, destination } of links) {
+  for (const { source, destination, options } of links) {
     try { await fs.symlink(source, destination); }
     catch (error) {
       if (error.code !== "EEXIST") throw error;
-      await inspectLink(source, destination);
+      await inspectLink(source, destination, options);
     }
   }
   console.log(`Worktree ready: ${root}. Shared private env files: ${files.length}.`);
