@@ -5,45 +5,70 @@ description: Gather, save, wire, and verify images for one approved Bloxodes gam
 
 # Bloxodes Game Collection Images
 
-## Useful coverage
-
-Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
-
-Use the game and collection names to locate their suggestions and workspace in the inherited task context, or the default workspace below. Keep the supplied workspace override when present. This skill owns its stage; do not spawn subagents. Return the stage artifacts when finished.
-
+You're finding and wiring a clear image for every item in one approved game collection, so players can recognize what they're looking at. You're done when every verified match is saved and wired, every gap is recorded with a reason, the checker has run, and `brief.md` has a filled-in `Image readiness` section.
 
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Download images and edit dataset files directly using Bash and the Edit/Write tools.**
 
-Use this after `brief.md` and data readiness are approved. Give images their own authoring pass before writing. Save staging media under the collection workspace; the parent verifier uploads and verifies immutable R2 media keys before the database-backed route can render them.
+Use the game and collection names to find their suggestions and workspace in the inherited task context, or use the default workspace. Keep any supplied workspace override. This skill owns its stage. Return the stage artifacts when you're done.
 
-## Work
+Run this after `brief.md` and data readiness are approved. Images get their own authoring pass before writing. Save staging media under the collection workspace. The parent verifier uploads and verifies immutable R2 media keys before the database-backed route can render them.
+
+## Useful coverage
+
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources, merge duplicates and leave unresolved values empty or null. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
+
+A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile player-facing page.
+
+## Steps
 
 1. Read the approved `brief.md` and dataset.
 2. Confirm which items need images and which dataset field stores the image path.
-3. Find clear item images from useful sources. Prefer official/game-wiki-style images when available. Use Fandom, BloxInformer, Beebom, Game8, Pro Game Guides, approved fan wikis, and similar Roblox guide sites when they have better usable images.
-4. Do not use edited thumbnails, page screenshots, logos, or images that do not clearly show the item. A readable item name or other identifying text baked into an otherwise useful item image is acceptable; never reject an image solely because the item name appears on it.
-5. Save images under `<workspace>/media/` for the game and collection.
-6. Update the dataset image field for each matched item.
-7. If an image is missing, record the exact item and why it is missing.
-8. If you have an image manifest, collect images with:
+3. Find clear item images (see "What a good image looks like").
+4. Save images under `<workspace>/media/` for the game and collection.
+5. Update the dataset image field for each matched item.
+6. If an image is missing, record the exact item and why.
+7. If you have an image manifest, collect images with a dry run first:
 
-```bash
-npm run collect:collection-images -- --manifest <images.json> --dataset <workspace>/dataset.json --game-name "<Game>" --collection-name "<Collection>" --dry-run
-```
+   ```bash
+   npm run collect:collection-images -- --manifest <images.json> --dataset <workspace>/dataset.json --game-name "<Game>" --collection-name "<Collection>" --dry-run
+   ```
 
-If the dry run looks right, run it again without `--dry-run`.
+   If the dry run looks right, run it again without `--dry-run`.
 
-9. Run the readiness check with images required when this collection should have images:
+8. When this collection should have images, run the readiness check with images required:
 
-```bash
-npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json --require-images
-```
+   ```bash
+   npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json --require-images
+   ```
 
-Do not save collection data or staging media under `data/` or `apps/web/public/`.
+9. Update `brief.md` with image readiness (see "Image Approval Notes").
 
-For `collectible` collections, prefer an exact location, route, quest step, or collectible view that helps a player recognize the goal. Do not switch a collectible to text-only merely because a generic item thumbnail is easier to find; record attempted sources and obtain parent approval for any accepted gap.
+Never save collection data or staging media under `data/` or `apps/web/public/`.
 
-10. Update `brief.md` with image readiness.
+## What a good image looks like
+
+**Where to look**
+
+- Prefer official or game-wiki-style images when they exist.
+- Use Fandom, BloxInformer, Beebom, Game8, Pro Game Guides, approved fan wikis and similar Roblox guide sites when they have better usable images.
+- Search beyond the roster source for exact-item images.
+- User- or parent-approved direct item-image sources are fine when their images clearly match the exact game. Keep source or licensing caveats in the brief instead of silently dropping usable coverage.
+
+**Keep or reject**
+
+- Keep images that clearly show the item.
+- Reject edited thumbnails, page screenshots, logos and anything that doesn't clearly show the item.
+- A readable item name or other identifying text baked into an otherwise useful item image is fine. Never reject an image just because the item name appears on it. Still record its source URL in the manifest and brief.
+
+**Collectible pages**
+
+For `collectible` collections, prefer an exact location, route, quest step or collectible view that helps a player recognize the goal. Don't switch a collectible to text-only just because a generic item thumbnail is easier to find. Record the sources you tried and get parent approval for any accepted gap.
+
+## Partial coverage is fine, skipping the pass isn't
+
+- Save and wire every verified match, even when the set is incomplete. Never throw away available images because other rows lack them.
+- Record the remaining gaps and carry on with the useful collection. Missing images don't make the whole collection unworthy.
+- The image pass still has to happen, every time.
 
 ## Image Approval Notes
 
@@ -63,5 +88,3 @@ Image readiness:
 - Checker result:
 - Ready for writing: yes/no
 ```
-
-Search beyond the roster source for usable exact-item images. Save and wire every verified match even when the set is incomplete; never discard available images because other rows lack them. Record remaining gaps and proceed with the useful collection. Missing images do not make the whole collection unworthy, and the image pass must still be performed. Record the source URL in the manifest/brief even when the source image contains a baked-in item name. User- or parent-approved direct item-image sources may be used when their images clearly match the exact game; keep source/licensing caveats in the brief rather than silently dropping usable coverage.

@@ -5,78 +5,72 @@ description: Prepare one Bloxodes codes page payload backed by the code_pages ta
 
 # Bloxodes Code Writing
 
-Code pages are source-wired pages. The script owns active codes, expired codes, rewards tied to code names, dates, and counts.
+A codes page has two jobs. The refresh script keeps the code list live, and your copy makes the page feel like it was written by someone who plays: what the rewards are good for, how to redeem without fumbling, and why a code didn't work. Your words have to stay true for months, so everything you write is evergreen.
 
-## Hard Rules
+## Hard rules
 
-- Do not manually write active codes, expired codes, code names, code dates, first-seen dates, active counts, or current reward mappings.
-- `code_pages.slug` is the game slug only, such as `wizard-alchemy`. Do not add `-codes`.
-- Do not use `roblox_universes.slug` for `code_pages.slug`.
-- Put the Roblox experience URL in `roblox_link`.
-- Put the RobloxDen codes page in `source_url`.
-- Put the Beebom codes page in `source_url_2`.
+- Never write active codes, expired codes, code names, code dates, first-seen dates, active counts or current reward mappings. The script owns all of that.
+- `code_pages.slug` is the game slug only, like `wizard-alchemy`. Never add `-codes`.
+- Never use `roblox_universes.slug` for `code_pages.slug`.
+- The Roblox experience URL goes in `roblox_link`.
+- The RobloxDen codes page goes in `source_url`.
+- The Beebom codes page goes in `source_url_2`.
 - Keep `seo_title` null or empty unless the user explicitly asks for custom SEO title text.
+
+## Read first
+
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Codes pages" section of its `references/examples.md`.
 
 ## Workflow
 
-1. Check production for an existing `code_pages` row and live `/codes/<slug>` page.
-2. Verify the exact Roblox experience and whether the game has a real codes system.
-3. Check RobloxDen and Beebom source pages.
-4. Create workspace:
+1. Check production for an existing `code_pages` row and a live `/codes/<slug>` page.
+2. Confirm the exact Roblox experience and whether the game really has a codes system.
+3. Check the RobloxDen and Beebom source pages.
+4. Create the workspace:
 
-```text
-tmp/content-workspace/<game-slug>/codes/<game-slug>/
-  brief.md
-  payload.json
-```
+   ```text
+   tmp/content-workspace/<game-slug>/codes/<game-slug>/
+     brief.md
+     payload.json
+   ```
 
-5. Write `brief.md` with the game identity, existing `code_pages` row, live `/codes/<slug>` page, source URLs, and refresh action.
-6. Write only evergreen `code_pages` row fields in `payload.json`.
-7. After importing/upserting the code page row, run `npm run refresh:codes -- --slug <game-slug>` when code rows should be populated.
+5. Write `brief.md` with the game identity, existing `code_pages` row, live `/codes/<slug>` page, source URLs and refresh action.
+6. Write only evergreen `code_pages` fields in `payload.json`.
+7. After importing or upserting the row, run `npm run refresh:codes -- --slug <game-slug>` when code rows should be filled in.
 
-## Voice & Tone
+## How the copy should read
 
-Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- **Open on the game and why codes matter in it.** What do rewards actually help with? "Garden Rush codes hand out free Seeds and the occasional Golden Egg, which is a big deal early on."
+- **Redeem steps are plain and exact.** Numbered, one action each, using the game's real button and menu names. Never guess UI steps.
+- **Troubleshooting is calm and practical.** Expired, case-sensitive, level-locked, one use per account: whatever actually applies to this game.
+- **Evergreen, always.** No `latest`, `current`, `fresh`, `new` or `updated daily`, and no dates, counts or code names. The personality comes from knowing the game, not from promising freshness.
+- **Never narrate how the page was made.** Follow Public Copy in root `AGENTS.md`.
 
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact. The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the game and its codes. No "Welcome to…" or mood-setting warm-ups.
-- Keep it evergreen. The playful voice never promises freshness or reaches for active codes, counts, or dates that go stale.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
-
-## Public Copy
-
-Write simply:
+Cover, in simple words:
 
 - what the game is
 - what code rewards usually help with
 - how players normally redeem codes
 - why a code might fail
-- where new codes usually appear
+- where new codes usually show up
 
-Do not promise freshness with phrases like `latest`, `current`, `fresh`, or `updated daily`.
+## Field jobs
 
-## Field Jobs
+- `name`: the official game name as players know it.
+- `slug`: the editorial game slug only. The route already adds `/codes/`.
+- `robloxLink`: the official Roblox experience URL.
+- `sourceUrls`: RobloxDen first when available, Beebom second when available.
+- `seoTitle`: null unless the user asks for custom text.
+- `seoDescription`: what the page helps with, in evergreen terms with no counts or dates. "Redeem Garden Rush codes for free Seeds and eggs. See how to use them, what they give and why a code might not work."
+- `introMd`: the game and how codes fit its rewards or progression.
+- `redeemMd`: verified redemption steps.
+- `rewardsMd`: the kinds of rewards and how to use them well, never current code-name mappings.
+- `troubleshootMd`: lasting reasons a code can fail.
+- `findCodesMd`: the official places the game usually announces codes.
 
-- `name`: Use the official game name as players know it.
-- `slug`: Use the editorial game slug only. The route already adds `/codes/`.
-- `robloxLink`: Use the official Roblox experience URL.
-- `sourceUrls`: Put RobloxDen first when available and Beebom second when available.
-- `seoTitle`: Keep null unless the user asks for custom text.
-- `seoDescription`: Explain the code page in evergreen terms without active counts or date claims.
-- `introMd`: Explain the game and how codes usually fit its rewards or progression.
-- `redeemMd`: Explain verified redemption steps. Do not guess UI steps.
-- `rewardsMd`: Explain reward types and smart use, not current code-name mappings.
-- `troubleshootMd`: Explain durable reasons a code can fail.
-- `findCodesMd`: Point to official places where the game usually announces codes.
+## Output shape
 
-## Output Shape
-
-Write the `payload.json` shape used by `npm run upsert:code-page -- --file <payload.json> --publish`:
+This is the `payload.json` shape for `npm run upsert:code-page -- --file <payload.json> --publish`:
 
 ```json
 {
@@ -100,4 +94,4 @@ Write the `payload.json` shape used by `npm run upsert:code-page -- --file <payl
 }
 ```
 
-Do not include a `codes` array.
+Never include a `codes` array.

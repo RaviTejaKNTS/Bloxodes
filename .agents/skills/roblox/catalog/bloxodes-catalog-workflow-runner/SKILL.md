@@ -5,11 +5,13 @@ description: Run one approved global Bloxodes /catalog page with parent review. 
 
 # Bloxodes Catalog Workflow Runner
 
-Use one subagent for one global catalog page. The same subagent researches the collection, waits for parent approval, then writes `final.json`.
+You run one global catalog page from research to a verified local preview. One subagent does the work: it researches, waits for your approval of the brief, then writes `final.json`. You review both stages.
 
-## Subagent Handoff
+## Subagent handoff
 
-Every subagent message must set the role and exact skill:
+Every message to the subagent sets its role and the exact skill.
+
+First message:
 
 - You are the subagent for one global catalog page only.
 - Do not run `/bloxodes-catalog-workflow-runner`.
@@ -18,39 +20,51 @@ Every subagent message must set the role and exact skill:
 - Skill file: `.agents/skills/bloxodes-catalog-research/SKILL.md`.
 - Return `brief.md` only and wait for parent approval.
 
-After the parent approves the brief, send the same subagent:
+After you approve the brief, send the same subagent:
 
 - Continue with `/bloxodes-catalog-writing`.
 - Skill file: `.agents/skills/bloxodes-catalog-writing/SKILL.md`.
+- Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md`.
 - Create `final.json` for the approved brief only.
 
 ## Workflow
 
 1. Confirm the catalog idea and route code.
 2. Ask the subagent to use `/bloxodes-catalog-research` and return `brief.md`.
-3. Review existing coverage, data state, sources, useful fields, and gaps.
+3. Review existing coverage, data state, sources, useful fields and gaps.
 4. Ask the same subagent to use `/bloxodes-catalog-writing` and create `final.json`.
-5. Review copy, metadata, FAQs, and JSON.
+5. Review the copy, metadata, FAQs and JSON (see Parent checks).
 6. Start or reuse localhost with `npm run dev:managed`.
-7. Run:
+7. Run the verifier:
 
-```bash
-npm run verify:catalog-finals -- --base-url http://localhost:<port> --file <final.json>
-```
+   ```bash
+   npm run verify:catalog-finals -- --base-url http://localhost:<port> --file <final.json>
+   ```
 
 8. If the verifier passes, open the verified `/catalog/<code>` link in the Codex Browser.
-9. In the rendered page, verify the browser title, meta description, canonical, one H1, meaningful H2 outline, Open Graph title, and relevant JSON-LD names. Confirm that visible headings add information instead of repeating the H1.
-10. Return paths, localhost link, blocked reason if any, and remaining risks.
+9. On the rendered page, check the browser title, meta description, canonical, one H1, a meaningful H2 outline, the Open Graph title and the relevant JSON-LD names. Visible headings should add information, not repeat the H1.
+10. Return the paths, the localhost link, any blocked reason and the remaining risks.
 
-## Parent Checks
+## Parent checks
 
-- production duplicate check is done
-- item/data source is strong enough
-- copy explains the collection, not how to use the page
-- no raw dataset or website-first wording appears in public copy
-- public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
-- verifier and Browser preview pass
-- H1 is keyword-first and stable; changing counts or dates live in metadata only when verified
-- SEO title follows the approved comparable-page pattern without keyword stuffing
-- section headings are complete and meaningful, with no redundant `Browse all...`, eyebrow, count, or label added only for hierarchy
-- rendered metadata, canonical, Open Graph title, heading outline, and JSON-LD names agree
+Research and data:
+
+- The production duplicate check is done.
+- The item and data source is strong enough.
+
+Copy, checked against `.agents/skills/bloxodes-voice/SKILL.md`:
+
+- The opening answers what the reader came for. No template openings.
+- It reads like a player talking: simple English, calm and a bit playful, light wit only on real facts. No hype words, AI filler or research voice ("sources say," "data shows").
+- It explains the collection, not how to use the page.
+- No raw dataset or website-first wording in public copy.
+- No fact repeated across intro, body and FAQ.
+- Every fact matches the approved brief.
+
+SEO and rendering:
+
+- The H1 is keyword-first and stable. Changing counts or dates go in metadata only, and only when verified.
+- The SEO title follows the approved comparable-page pattern without keyword stuffing.
+- Section headings are complete and meaningful. No redundant `Browse all...`, eyebrow, count or label added only for hierarchy.
+- Rendered metadata, canonical, Open Graph title, heading outline and JSON-LD names agree.
+- The verifier and Browser preview pass.

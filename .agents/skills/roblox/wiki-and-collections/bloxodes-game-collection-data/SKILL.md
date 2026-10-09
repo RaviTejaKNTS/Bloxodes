@@ -5,89 +5,143 @@ description: Prepare source-backed data for one approved Bloxodes game collectio
 
 # Bloxodes Game Collection Data
 
-## Useful coverage
-
-Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
-
-Use the game and collection names to locate their suggestions and workspace in the inherited task context, or the default workspace below. Keep the supplied workspace override when present. This skill owns its stage; do not spawn subagents. Return the stage artifacts when finished.
-
+You're building the dataset for one approved game collection: the rows, fields and sections players will compare on the page. You're done when `dataset.json` passes the audit and checker, `runtime-manifest.json` declares the page type, and `brief.md` has a filled-in `Data readiness` section.
 
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Write and edit all files directly using the Write and Edit tools.**
 
-Use this after `brief.md` is approved. Prepare one game collection under `tmp/content-workspace/<game-slug>/collections/<collection-slug>/`. Repository collection datasets are retired; the parent verifier publishes the workspace as an immutable database revision before preview. Do not gather images here; plan the image field and leave image collection for `bloxodes-game-collection-images`.
+Use the game and collection names to find their suggestions and workspace in the inherited task context, or use the default workspace below. Keep any supplied workspace override. This skill owns its stage. Return the stage artifacts when you're done.
 
-## Work
+## Useful coverage
+
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources, merge duplicates and leave unresolved values empty or null. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
+
+A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile player-facing page.
+
+## Where things live
+
+- Work after `brief.md` is approved, in `tmp/content-workspace/<game-slug>/collections/<collection-slug>/`.
+- Repository collection datasets are retired. The parent verifier publishes the workspace as an immutable database revision before preview.
+- Every collection workspace must contain `runtime-manifest.json`. Never move the dataset into `data/`.
+- Don't gather images here. Plan the image field and leave collection to `bloxodes-game-collection-images`.
+
+## Steps
 
 1. Read the approved `brief.md`.
-2. Inspect or create `dataset.json` beside `brief.md` in the collection workspace. For an existing collection, first export its current database revision with `npm run export:game-collection-workspace -- --game <game-slug> --collection <collection-slug> --output-root tmp/content-workspace/<game-slug>/collections`.
+2. Inspect or create `dataset.json` next to `brief.md`. For an existing collection, first export its current database revision:
+
+   ```bash
+   npm run export:game-collection-workspace -- --game <game-slug> --collection <collection-slug> --output-root tmp/content-workspace/<game-slug>/collections
+   ```
+
 3. Check that item rows match the source-backed scope.
-4. Add useful fields players can compare. Do not add raw source clutter.
-5. Use the v2 wrapped dataset shape `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`. Do not create bare array datasets.
-6. Keep public game data and Bloxodes system data separate. Put player-facing facts only inside `items[].item`. Put only `slug`, `section`, `sortOrder`, and `image` inside `items[].system`.
-7. Never put system/dev/source keys inside `items[].item`: no `collectionSection`, `sortOrder`, `image`, `slug`, `sourcePage`, `sourceUrl`, `sourceImageUrl`, `verificationNote`, `imageStatus`, `rawText`, `fields`, or similar workflow/debug fields.
-8. When a real multi-section grouping exists, store the rendered section label in `items[].system.section`, store the numeric order in `items[].system.sortOrder`, and list all section labels in `meta.display.sectionOrder`.
-9. If no real multi-section field exists, set every `items[].system.section` to `Items` and set `meta.display.sectionOrder` to `["Items"]`. Do not invent fake sections.
-10. Add `meta.schemaVersion: 2`, `meta.itemFields`, `meta.columns`, and `meta.display` so the generic renderer has an explicit display contract and does not infer dev fields.
-11. In `meta.display`, set `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, `badgeField`, `subtitleFields`, `descriptionField`, `cardDescriptionField`, and `fieldPresentation` where useful. Every display field must exist in `meta.itemFields` and `items[].item`.
-12. Add short `cardSummary` text when cards need a plain-English explanation beyond raw fields.
-13. When adding descriptions, always use your own words. Do not directly copy from the sources. Make sure the description is accurate and matches the source information.
-14. Do not rewrite sourced stats or facts just to sound nicer. Keep factual values accurate.
-15. Decide whether the collection should have images. Images belong in `items[].system.image`, not in a public item field.
-16. Confirm `apps/web/src/lib/game-collections/index.ts` can render the collection, card fields, grouping, item count, and planned image field.
-17. Confirm section labels are stable and useful enough for the shared renderer's section dropdown. Do not split, rename, or reorder sections only for page-size reasons; pagination is handled by the renderer.
-18. If the collection is missing from `apps/web/src/lib/game-collections/index.ts`, run:
+4. Add useful fields players can compare. Leave raw source clutter out.
+5. Build the dataset in the v2 shape (see "Dataset shape" below).
+6. Add short `cardSummary` text when cards need a plain-English explanation beyond the raw fields.
+7. Write descriptions in your own words. Never copy from sources. Make sure each one is accurate and matches the source information.
+8. Keep sourced stats and facts exact. Don't reword them just to sound nicer.
+9. Decide whether the collection should have images. Images go in `items[].system.image`, never in a public item field.
+10. Confirm `apps/web/src/lib/game-collections/index.ts` can render the collection, card fields, grouping, item count and planned image field.
+11. Confirm section labels are stable and useful enough for the shared renderer's section dropdown. Don't split, rename or reorder sections just for page size. The renderer handles pagination.
+12. If the collection is missing from `apps/web/src/lib/game-collections/index.ts`, register it with a dry run first:
 
-```bash
-npm run register:game-collection -- --game <game-slug> --collection <collection-slug> --dry-run
+    ```bash
+    npm run register:game-collection -- --game <game-slug> --collection <collection-slug> --dry-run
+    ```
+
+    If the dry run looks right and the game group already exists, run it again without `--dry-run`.
+
+13. Audit and check the dataset:
+
+    ```bash
+    npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
+    npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
+    ```
+
+    Don't use `--require-images` here. The image skill owns that check.
+
+14. Carry the approved page type into `runtime-manifest.json` as `collection.pageType`:
+    - `"collectible"` only for finite, player-completed goals.
+    - `"database"` for reference rosters.
+
+    The page type changes the renderer and progress behavior, not the dataset table or the v2 row shape. Existing manifests may omit it and default to `database`, but new or refreshed work should state it explicitly.
+
+15. Update `brief.md` with data status and the checker's gaps (see "Data Approval Notes").
+
+## Dataset shape
+
+Use the v2 wrapped shape. Never create a bare array dataset.
+
+```json
+{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }
 ```
 
-If the dry run looks right and the game group already exists, run it again without `--dry-run`.
+**Public vs system data**
 
-19. Audit and check the dataset:
+- Player-facing facts go only in `items[].item`.
+- `items[].system` holds only `slug`, `section`, `sortOrder` and `image`.
+- Never put system, dev or source keys in `items[].item`: no `collectionSection`, `sortOrder`, `image`, `slug`, `sourcePage`, `sourceUrl`, `sourceImageUrl`, `verificationNote`, `imageStatus`, `rawText`, `fields` or similar workflow or debug fields.
 
-```bash
-npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
-npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json
-```
+**Sections**
 
-Every collection workspace must also contain `runtime-manifest.json`; never move the dataset into `data/`. Do not use `--require-images` here; the image skill owns that check.
+- When a real multi-section grouping exists, put the rendered section label in `items[].system.section`, the numeric order in `items[].system.sortOrder`, and list every section label in `meta.display.sectionOrder`.
+- If there's no real multi-section field, set every `items[].system.section` to `Items` and `meta.display.sectionOrder` to `["Items"]`. Don't invent fake sections.
+- Never create public `collectionSection`, `section` or `sortOrder` item fields. System metadata owns grouping and ordering.
 
-21. Carry the approved page type into `runtime-manifest.json` as `collection.pageType`. Use `"collectible"` only for finite, player-completed goals. Use `"database"` for reference rosters. The page type changes the renderer and progress behavior, not the dataset table or v2 row shape. Existing manifests may omit it and default to `database`, but new or refreshed work should state it explicitly.
+**Meta**
 
-20. Update `brief.md` with data status and gaps from the checker.
+- Add `meta.schemaVersion: 2`, `meta.itemFields`, `meta.columns` and `meta.display`, so the generic renderer has an explicit display contract and doesn't infer dev fields.
+- In `meta.display`, set `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, `badgeField`, `subtitleFields`, `descriptionField`, `cardDescriptionField` and `fieldPresentation` where useful.
+- Every display field must exist in both `meta.itemFields` and `items[].item`.
 
-## Catalog Presentation Contract
+## How public values should read
 
-The shared game collection renderer now treats cards as the primary view and list/table as the complete scanning view. Prepare dataset rows so both views can show the same useful information cleanly.
+Item values are what players scan on cards and in the table, so they follow the "plain" slot in `.agents/skills/bloxodes-voice/SKILL.md`: short, exact and easy to compare. No jokes in a value someone needs one precise answer from.
 
-- Every item should have a clear `items[].item.name`, one useful description field such as `cardSummary`, `description`, or `summary`, and the same public comparison fields across rows. If a value is not source-backed for one item, leave it empty/null so the renderer can show `-`; do not remove the field from that row.
-- Dataset system metadata owns rendered grouping and ordering. Use `items[].system.section`, `items[].system.sortOrder`, and `meta.display.sectionOrder`. Do not create public `collectionSection`, `section`, or `sortOrder` item fields.
-- Include all important player-facing details in dataset fields. Do not hide useful details only because cards are compact; the renderer decides how to present long values.
-- Keep labels out of values. Use `"type": "Standard boost"`, not `"type": "Type: Standard boost"`.
-- Define the field presentation contract by collection, not by value text. For every card/table field, decide the `kind`: `plain`, `chip`, `highlight`, or `detail`.
-- Use `plain` for normal comparable text such as source, shop, main use, role, or route names.
-- Use `chip` for prices, rarity, tier, levels, duration, cooldown, chance, cost, BPS, damage, or other important short numbers. If one key is a chip on one card, that same key must be a chip on every card.
-- Use `highlight` for source-backed status, availability, strength, best-use, or recommendation fields. Do not invent a highlight just to satisfy layout.
-- Use `detail` for complete sentence values such as obtainment notes, behavior, weakness, effect notes, route notes, or strategy notes. Keep these concise enough to scan in cards and complete in table view.
-- Do not depend on renderer word guessing. A value containing words like Robux, rare, available, cost, event, or source must not be expected to change styling by itself.
-- Avoid semicolon pseudo-lists in prose. If the value is one sentence, write it as one sentence. Use arrays only when the source really provides separate list items.
-- If the collection has some item images but not all, still wire the available images. The renderer will keep card shape consistent with placeholders for missing images.
-- When the collection is registered, add the machine-readable `fieldPresentation` map under `meta.display.fieldPresentation`, for example:
+- **Plain and exact.** "Hatches from the Golden Egg," not "This pet can be obtained by players through hatching the Golden Egg."
+- **No research wording in public values.** Never write "reportedly," "unconfirmed," "according to the wiki," "community-documented" or similar in `description`, `cardSummary` or detail fields.
+- **Uncertainty stays private.** If a value is shaky, leave it empty or null and note the doubt in `brief.md`. Never put a source or verification note in a public field.
+- **Keep labels out of values.** Use `"type": "Standard boost"`, not `"type": "Type: Standard boost"`.
+- **One sentence stays one sentence.** No semicolon pseudo-lists in prose. Use arrays only when the source really gives separate list items.
+
+## Catalog presentation contract
+
+The shared game collection renderer treats cards as the main view and the list/table as the complete scanning view. Prepare rows so both views show the same useful information cleanly.
+
+**Every row**
+
+- Give each item a clear `items[].item.name`, one useful description field (`cardSummary`, `description` or `summary`) and the same public comparison fields as the other rows.
+- If a value isn't source-backed for one item, leave it empty or null so the renderer shows `-`. Don't remove the field from that row.
+- Include every important player-facing detail in dataset fields. Don't drop useful details because cards are compact. The renderer decides how to show long values.
+
+**Field presentation**
+
+Set the presentation per collection, not per value. Give every card and table field one `kind`:
+
+| Kind | Use it for |
+| --- | --- |
+| `plain` | Normal comparable text: source, shop, main use, role, route names. |
+| `chip` | Prices, rarity, tier, levels, duration, cooldown, chance, cost, BPS, damage and other important short numbers. If a key is a chip on one card, it's a chip on every card. |
+| `highlight` | Source-backed status, availability, strength, best use or recommendation. Don't invent a highlight just to fill the layout. |
+| `detail` | Full-sentence values: obtainment notes, behavior, weakness, effect notes, route notes, strategy notes. Concise enough to scan on cards and complete in the table. |
+
+- Don't rely on the renderer guessing from words. A value containing "Robux," "rare," "available," "cost," "event" or "source" won't change styling by itself.
+- If some items have images and some don't, still wire the ones you have. The renderer keeps card shapes consistent with placeholders.
+- When the collection is registered, add the machine-readable map under `meta.display.fieldPresentation`, for example:
 
 ```json
 {
   "display": {
     "fieldPresentation": {
-    "availability": { "kind": "highlight", "label": "Status" },
-    "source": "normal",
-    "price": "chip",
-    "obtainment": "detail"
+      "availability": { "kind": "highlight", "label": "Status" },
+      "source": "normal",
+      "price": "chip",
+      "obtainment": "detail"
     }
   }
 }
 ```
 
-Use `normal` in config for plain fields; describe it as `plain` in notes if that is clearer for humans.
+Use `normal` in config for plain fields. Calling it `plain` in notes is fine if that's clearer for humans.
 
 ## Data Approval Notes
 
@@ -128,4 +182,4 @@ Data readiness:
 - Ready for images: yes/no
 ```
 
-Fix invalid dataset structure before handoff. Missing source rows or values belong in the brief and do not prevent handing a useful dataset to the image step.
+Fix invalid dataset structure before handoff. Missing source rows or values go in the brief. They don't stop you from handing a useful dataset to the image step.

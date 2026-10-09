@@ -13,6 +13,8 @@ For standalone checklists, follow `dev-docs/pipelines/content.md#standalone-chec
 
 Use one explicit `A or B` leaf for interchangeable paths, with verified criteria in its description. The board counts every three-level leaf regardless of `is_required`; separate mutually exclusive or optional leaves cannot express alternatives. Defer branching requirements that need unsupported alternative groups. See `references/payloads.md` for the row contract.
 
+Write every public field (titles, intros, descriptions, marker and task text, quiz explanations) in the house voice: `.agents/skills/bloxodes-voice/SKILL.md`. Intros and descriptions can have personality. Marker labels, task titles, quiz questions and catalog cells stay plain and exact.
+
 Read [payloads](references/payloads.md) for the page type being created. Write a reviewed JSON payload with the matching groups. Store content and data together; do not use workspace files at runtime. Keep stable IDs on updates. Do not overwrite another game's rows or move page ownership during ordinary edits.
 
 ## GitHub verification and publication

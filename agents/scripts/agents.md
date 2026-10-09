@@ -37,7 +37,7 @@ Automatic daily workflows use fast code/build/dataset checks and tiny targeted s
 
 | Purpose | File | Preferred command |
 | --- | --- | --- |
-| Batch article generation | `scripts/articles/generate-articles.ts` | `npm run generate:articles`; generation and polish load the canonical article editorial standard through `scripts/shared/article-editorial-standard.ts`. The same reference serves refresh copy and agent handoffs; no new env or publication side effects. |
+| Batch article generation | `scripts/articles/generate-articles.ts` | `npm run generate:articles`; generation and polish load the house voice (`bloxodes-voice`) plus the canonical article editorial standard through `scripts/shared/article-editorial-standard.ts`. The same reference serves refresh copy and agent handoffs; no new env or publication side effects. |
 | Draft code page generation | `scripts/codes/generate-code-page-copy.ts` | `npm run generate` |
 | Reviewed code page upsert with provider-owned source fields | `scripts/codes/upsert-code-page.ts` | `npm run upsert:code-page -- --file <payload.json> --dry-run` before the approved write |
 | Beebom code-page discovery and immediate draft generation | `scripts/codes/discover-beebom-code-pages.ts` | `npm run discover:beebom-codes -- --apply` |

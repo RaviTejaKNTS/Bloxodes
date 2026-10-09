@@ -1,17 +1,19 @@
-# Beebom Roblox Editorial Study
+# Beebom Roblox Study
 
-Reviewed September 6, 2026. This is a study of 15 complete Roblox articles across four games, covering update explainers, acquisition guides, progression, reference tables, and event walkthroughs. It records editorial decisions, not a fact source for future gameplay claims. Recheck changing mechanics independently. All examples in the companion examples file are original.
+Reviewed September 6, 2026: 15 full Beebom Roblox articles across four games, covering update explainers, item guides, progression, reference tables and event walkthroughs. Use it to learn how strong guides match search intent, organize sections and go deep enough. It isn't a fact source, so recheck any game mechanic yourself.
 
-## What to carry into Bloxodes
+Beebom is our benchmark for structure and coverage, not for voice. Our voice is friendlier and more fun: see the voice guide (`.agents/skills/bloxodes-voice/SKILL.md`).
 
-1. **Match headings to search intent.** Strong major headings name a game, item, or system and the answer supplied: acquisition, requirements, moveset, location, rewards, or use. A heading such as `Magnet Fruit Moveset in Blox Fruits` is more useful alone than `Abilities`. Contextual H3s and numbered action headings can be shorter. Do not mechanically prefix every heading with the complete article title.
-2. **Give the introduction a reason to exist.** Start with the specific change or player problem, explain why it matters, and establish what the reader will learn. Connected sentences are welcome. Skip generic Roblox popularity statements and the compressed changelog voice. Highlights are optional and are not the essence of this style.
-3. **Have a conversation through the explanation.** Anticipate the player's next obstacle: an unavailable item, missing coordinates, a crafting prerequisite, a reset cost, or a move that behaves differently when held. Explain the condition, action, and consequence together. Contractions, direct address, and an occasional relevant question help; forced jokes and constant rhetorical questions do not.
-4. **Supply the details that make advice usable.** Name supported NPCs and landmarks, prerequisites, controls, costs, rewards, and failure cases. Continue beyond acquiring an item or summoning a reward to explain its use or the next action. Avoid an arbitrary length target or a sentence-count ceiling that cuts those connections.
-5. **Let tables handle comparison and prose handle reasoning.** Recipes, tap/hold controls, effects, and reward requirements suit tables. Introduce what matters, then explain a useful implication instead of repeating all the cells. A table-heavy article still needs a voice.
-6. **Finish the player's journey.** End with a relevant next action, choice, or practical recommendation. A closing question can fit, but is not a required engagement device. A substantial explainer should not simply stop at its final minor feature bullet.
+## What to take from it
 
-## Article-by-article observations
+1. **Headings that match search intent.** Strong main headings name the game, item or system plus the answer: how to get, requirements, moveset, location, rewards, use. "Magnet Fruit Moveset in Blox Fruits" beats "Abilities." Short H3s and numbered action headings are fine once the H2 sets the context. Don't paste the full title onto every heading.
+2. **An intro with a reason to exist.** Start with the change or the player's problem, say why it matters, then what they'll learn. Skip lines about how popular Roblox is and changelog-style openers. Highlights boxes are optional.
+3. **A conversation through the explanation.** See the next obstacle coming: an item that won't show up, missing coordinates, a crafting prerequisite, a reset cost, a move that changes when held. Explain the condition, the action and the result together.
+4. **Details that make advice usable.** Real NPCs, landmarks, prerequisites, controls, costs, rewards and failure cases. Keep going past "you got the item" to how to use it or what's next.
+5. **Tables compare, prose explains.** Recipes, controls, effects and requirements suit tables. Say what matters before the table and the takeaway after.
+6. **Finish the player's journey.** End on the next step, a choice or a practical recommendation, not on the last bullet.
+
+## Article-by-article notes
 
 | Article | Useful editorial lesson |
 | --- | --- |
@@ -31,8 +33,8 @@ Reviewed September 6, 2026. This is a study of 15 complete Roblox articles acros
 | [Steal a Brainrot rebirth guide](https://beebom.com/steal-a-brainrot-rebirth-guide-levels-and-rewards/) | Reset consequences and preparation matter before the requirements table. Do not duplicate body answers in FAQs or add unrelated codes links simply because the example does. |
 | [Steal a Brainrot fishing guide](https://beebom.com/steal-a-brainrot-fishing-guide/) | Explains the activity, equipment bottleneck, and cast/reel sequence with the consequence of each action. Connected paragraphs make a simple mechanic feel explained rather than listed. |
 
-## What not to adopt
+## What not to copy
 
-These articles vary in quality. Do not copy their prose, author personality, repetitive opening formulas, unsupported testing or ranking claims, dated facts, keyword repetition, obligatory closing questions, or decorative related links. US English and date-aware Eastern/Pacific times remain Bloxodes requirements even when the source uses another locale. Evaluate the article text separately from ads and page chrome.
+These articles vary in quality. Don't copy their prose, author personality, repeated opening formulas, unsupported testing or ranking claims, dated facts, keyword repetition, forced closing questions or decorative related links. US English and Eastern/Pacific times stay our rule even when the source uses something else. Judge the article text, not the ads or page chrome.
 
-Use the closest format as a comparison before approving a brief and again during prose review. Ask whether Bloxodes explains the same useful reader questions at least as clearly, not whether it has copied the same heading count or layout. See [the editorial standard](editorial-standard.md) and [original examples](editorial-examples.md).
+Compare against the closest format before approving a brief and again in prose review. The question is whether our article explains the same useful things at least as clearly, not whether it matches their heading count or layout. See the [article standard](editorial-standard.md) and [article examples](editorial-examples.md).

@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Franchise Collection Writing"
   short_description: "Write franchise collection pages"
-  default_prompt: "Use $bloxodes-franchise-game-collection-writing to write one collection final.json from approved brief, data, and image gates. Keep scope accurate, prose count-free, sections aligned, FAQs q/a-shaped, and wiki_md useful."
+  default_prompt: "Use $bloxodes-franchise-game-collection-writing to write one collection final.json from approved brief, data, and image gates. Keep scope accurate, prose count-free, sections aligned, FAQs q/a-shaped, and wiki_md useful. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

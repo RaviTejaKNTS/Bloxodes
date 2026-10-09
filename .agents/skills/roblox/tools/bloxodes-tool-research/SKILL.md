@@ -5,24 +5,33 @@ description: Research one approved Bloxodes tool page before writing. Use for pr
 
 # Bloxodes Tool Research
 
-Use this for one approved tool idea. Research only. Do not write `final.json`.
+You're researching one approved tool idea so the writer and builder know exactly what the player puts in, what they get out and why the math holds up. You hand back a `brief.md`. You don't write `final.json`.
 
-Write:
+## Output
 
 ```text
 tmp/content-workspace/<game-or-topic-slug>/tools/<tool-code>/brief.md
 ```
 
-Include:
+## What the brief includes
 
 - existing Bloxodes tools and related pages
-- player job
+- the player job
 - inputs
 - outputs
-- formula or data source
+- the formula or data source
 - assumptions and limits
 - edge cases
-- why this should be a tool, not an article/catalog/wiki page
+- why this should be a tool, not an article, catalog or wiki page
 - open gaps or risks
 
-Keep source/provenance details in `brief.md`. When the tool later moves to writing, public-facing fields should talk about the game problem and player workflow, not about sources, datasets, rows, or research process.
+## Writing the brief for the writer
+
+Keep source and provenance details in `brief.md`. When the tool moves to writing, public fields talk about the game problem and the player's workflow, not about sources, datasets, rows or the research process. Read `.agents/skills/bloxodes-voice/SKILL.md` first.
+
+- **Describe the player job in plain words.** "Figure out how many runs you need to max your pet," not "compute required iterations to reach level cap."
+- **Name the reader's real question:** what decision does the tool help them make?
+- **Hooks worth using:** a result that surprises players, like an upgrade that pays back slower than it looks.
+- **Keep sources and doubts private.** If an assumption is shaky, say so once in plain words so the writer can add one short caveat next to the result it affects.
+- **No research jargon in the player job, inputs or outputs.** Formula notes and data sources stay in their own lines.
+- Input labels and result wording stay plain and exact.

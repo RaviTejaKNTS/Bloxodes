@@ -5,16 +5,16 @@ description: Suggest Bloxodes tool page opportunities for one Roblox game or Rob
 
 # Bloxodes Tool Suggestions
 
-Use this to decide whether Bloxodes should build tool pages. Do not write tool-page content or app code here.
+You decide whether Bloxodes should build tool pages for one game or platform topic. You give a short, labeled list with proof. You don't write tool-page content or app code here.
 
 ## Start
 
 1. Resolve the game or platform topic.
-2. Check existing Bloxodes tools and related pages. Do not suggest a tool we already cover or a tool that should just be an article/catalog/wiki page.
+2. Check existing Bloxodes tools and related pages. Don't suggest a tool we already cover, or one that should just be an article, catalog or wiki page.
 
-## Source Check
+## Show your proof
 
-Do not hide the research in a file. Put the proof in the final reply:
+Put the proof in your final reply, not in a hidden file:
 
 ```text
 Evidence checked:
@@ -24,25 +24,29 @@ Evidence checked:
 - Player input/output need:
 ```
 
-If the formula, data source, or player input/output need is missing, do not mark `[create]`.
+If the formula, data source or player input/output need is missing, don't mark the idea `[create]`.
 
-## Good Tool Ideas
+## Good tool ideas
 
-Recommend tools only when players have a repeatable decision or calculation:
+Recommend a tool only when players have a repeatable decision or calculation:
 
-- calculators for value, cost, profit, chance, XP, damage, crafting, upgrades, or time
-- planners for builds, loadouts, routes, farming, trading, or progression
+- calculators for value, cost, profit, chance, XP, damage, crafting, upgrades or time
+- planners for builds, loadouts, routes, farming, trading or progression
 - converters or trackers that need user input and produce a useful result
 
-Skip static lists, vague helpers, pure content pages, and ideas where the answer is just a paragraph.
+Skip static lists, vague helpers, pure content pages and ideas where the answer is just a paragraph.
+
+## Name tools the way players search
+
+Use the words a player would type: "Garden Rush sell value calculator," "Tower Brawl DPS calculator" (made-up games). Base the angle on a real decision players face in this game. Don't fill in a generic template like "Ultimate [Game] Helper Tool."
 
 ## Output
 
-Start with `Evidence checked`, then use these labels:
+Start with `Evidence checked`. Then use these labels:
 
-- `[create]` real tool with clear inputs, outputs, and source-backed logic
+- `[create]` a real tool with clear inputs, outputs and source-backed logic
 - `[we already have a tool]` production already covers it
-- `[skip]` weak, static, duplicate, unsupported, or better as content
-- `[research incomplete]` required checks were not completed
+- `[skip]` weak, static, duplicate, unsupported or better as content
+- `[research incomplete]` required checks weren't completed
 
-Each `[create]` idea should include the tool name, user input, result, source basis, and why it helps players.
+Each `[create]` idea includes the tool name, the user input, the result, the source basis and why it helps players.

@@ -5,27 +5,46 @@ description: Research one approved Bloxodes 100% completion checklist before wri
 
 # Bloxodes Checklist Research
 
-Use this for one approved checklist idea. Research only. Do not write `final.json`.
+You're researching one approved checklist so the writer can build a board players can actually tick through to 100%. You hand back a `brief.md`. You don't write `final.json`.
 
-Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Normally research one standalone source-verified 100% completion checklist per game, with its supported edition or mode stated and sections inside one board. Reuse the game's existing checklist. Additional pages or preparation lists, beginner milestones and routines need an explicit user exception. Collectible trackers and achievement rosters do not establish in-game 100%.
+## Scope
+
+Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`.
+
+- Normally, each game gets one standalone, source-verified 100% completion checklist. State the supported edition or mode, and put sections inside one board.
+- Reuse the game's existing checklist.
+- Additional pages, preparation lists, beginner milestones and routines need an explicit user exception.
+- Collectible trackers and achievement rosters don't establish in-game 100%.
 
 ## Output
-
-Write:
 
 ```text
 tmp/content-workspace/<game-slug>/checklists/<checklist-slug>/brief.md
 ```
 
-## Research
+## Research steps
 
 1. Resolve the exact game and universe ID.
-2. Check the game's published and draft Bloxodes checklists and related pages. Reuse its existing checklist; additional pages require an explicit user exception.
-3. Verify the full completion requirements, thresholds, exclusions and alternative paths for the exact scope. Record sources and any explicit user exception. If the scope cannot be verified, return the gap without approving creation.
-4. Split the verified requirements into sections and checkable tasks within one board. Plan interchangeable paths as one explicit `A or B` leaf, with each option's completion criteria in its description. All three-level leaves count toward progress regardless of `is_required`; do not plan separate mutually exclusive or optional leaves. Return a gap when branching requirements need unsupported alternative groups.
-5. Skip generic advice, article-style how-tos, and tasks that players cannot mark complete.
+2. Check the game's published and draft Bloxodes checklists and related pages. Reuse its existing checklist. Additional pages need an explicit user exception.
+3. Verify the full completion requirements, thresholds, exclusions and alternative paths for the exact scope. Record sources and any explicit user exception. If you can't verify the scope, return the gap. Don't approve creation.
+4. Split the verified requirements into sections and checkable tasks within one board.
+   - Plan interchangeable paths as one explicit `A or B` leaf, with each option's completion criteria in its description.
+   - All three-level leaves count toward progress, whatever their `is_required` value. So don't plan separate mutually exclusive or optional leaves.
+   - If branching requirements would need unsupported alternative groups, return a gap.
+5. Skip generic advice, article-style how-tos and tasks players can't mark complete.
 
-## Brief Shape
+## Writing the brief for the writer
+
+Task titles end up on the page almost word for word, so write them the way a player would. Read `.agents/skills/bloxodes-voice/SKILL.md` first.
+
+- **Plain player language.** "Beat the Frost Warden on Hard," not "Boss encounter completion (Hard difficulty)."
+- **Name the player's real goal** in `Player goal`: what does finishing the game mean to them?
+- **Hooks worth using:** the requirement most players miss, the task that takes longest, the order that saves time. Put these in the plan so the short intro has something real to say.
+- **Keep sources and doubts private.** They go under `Evidence checked` or `Open gaps or risks`. If a threshold is shaky, say so once in plain words so the writer can add one short note or leave it out.
+- **No research jargon in task wording.** Words like source, requirement set or leaf stay in your notes.
+- Tasks stay plain and exact. Save personality for the short intro.
+
+## Brief shape
 
 ```text
 Evidence checked:
@@ -44,5 +63,6 @@ Checklist plan:
 - One board and its required task set:
 - Leaf task examples:
 - Skipped tasks:
+- Hooks worth using:
 - Open gaps or risks:
 ```

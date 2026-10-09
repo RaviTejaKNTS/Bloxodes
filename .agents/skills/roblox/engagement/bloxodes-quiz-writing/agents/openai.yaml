@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Quiz Writing"
   short_description: "Write quiz pages"
-  default_prompt: "Use $bloxodes-quiz-writing to write one Bloxodes quiz final.json from approved brief.md. Keep questions stable, fair, source-backed, and avoid option-length tells."
+  default_prompt: "Use $bloxodes-quiz-writing to write one Bloxodes quiz final.json from approved brief.md. Keep questions stable, fair, source-backed, and avoid option-length tells. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

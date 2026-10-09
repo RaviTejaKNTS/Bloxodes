@@ -5,59 +5,60 @@ description: Write one Bloxodes quiz final.json after brief approval. Use for /q
 
 # Bloxodes Quiz Writing
 
-Use this after `bloxodes-quiz-research` and parent approval. Questions should be clear, fair, and based on facts a player can learn from the game or reliable sources.
+A good quiz feels like a friend testing how well you really know the game. Easy questions make players feel smart, hard ones make them say "wait, really?", and every explanation teaches something. Questions must be clear, fair and based on facts players can learn in the game or from reliable sources.
+
+Use this after `bloxodes-quiz-research` and parent approval.
+
+## Read first
+
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Quizzes" section of its `references/examples.md`.
+- The approved `brief.md`.
 
 ## Workflow
 
-1. Read the approved `brief.md`.
+1. Read the approved brief.
 2. Create or update:
 
-```text
-tmp/content-workspace/<game-slug>/quizzes/<quiz-code>/
-  brief.md
-  final.json
-```
+   ```text
+   tmp/content-workspace/<game-slug>/quizzes/<quiz-code>/
+     brief.md
+     final.json
+   ```
 
-3. Write page metadata and quiz data in `final.json`. The approved importer stores both in `quiz_pages`, including `quiz_data`; do not create or update a runtime `quiz.json` file.
-4. Parse JSON and validate the quiz shape.
+3. Write page metadata and quiz data in `final.json`. The approved importer stores both in `quiz_pages`, including `quiz_data`. Never create or update a runtime `quiz.json` file.
+4. Parse the JSON and validate the quiz shape.
 
-## Voice & Tone
+## Where the voice goes
 
-Bloxodes house voice for the page copy (`description_md`, intro, explanations): write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- **The page description gets the personality.** A quick challenge to the reader and a hint of what the questions cover, without giving answers away. "Think you know Ember Isles? Easy questions cover Harbor Camp basics. Hard ones ask about vault puzzles even veterans get wrong."
+- **Questions and options stay plain.** One exact question, four clean options. No jokes, puns or extra words where a player needs one precise answer.
+- **Explanations teach in a friendly sentence or two.** Add the useful "why," not just "the answer is B."
+- **Never narrate how the page was made.** Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
 
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the topic or the challenge. No "Welcome to…" or mood-setting warm-ups.
-- Keep functional slots clean. Questions, options, and explanations stay plain, clear, and unambiguous; the playful voice lives in the page intro and description, never inside a question that needs one exact answer.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+## Question rules
 
-## Question Rules
+- Use easy, medium and hard questions when the game has enough depth.
+- Each question has exactly one correct answer and believable wrong answers of similar specificity.
+- No trick questions, stale current-event claims, or questions that depend on private servers or rumors.
+- No exact dates, code names or temporary events unless the quiz is explicitly about a stable historical fact.
+- Test one clear fact, decision, route or system per question.
+- Vary how questions start. Twenty questions in a row beginning "Which of the following..." feels like an exam.
 
-- Use easy, medium, and hard questions when the game has enough depth.
-- Each question needs one correct answer and plausible wrong answers.
-- Avoid trick questions, stale current-event claims, and questions that depend on private servers or rumors.
-- Do not ask about exact dates, code names, or temporary events unless the quiz is explicitly about a stable historical fact.
-- Explanations should teach the fact in one or two simple sentences.
+## Field jobs
 
-## Field Jobs
+- `page.universe_id`: the exact game universe.
+- `page.code`: the editorial game slug. The route already adds `/quizzes/`.
+- `page.title`: the game and the quiz promise, written the way people search ("Ember Isles Quiz: How Well Do You Know the Islands?").
+- `page.description_md`: what knowledge the quiz tests, without giving away answers.
+- `page.seo_title`: null or close to the title unless search needs custom text.
+- `page.seo_description`: the quiz topic and why it's worth taking, in one lasting snippet.
+- `quizData`: the full question pool in the shape the route expects.
+- `question`: one clear fact, decision, route or system.
+- `options`: four believable choices.
+- `correctOptionId`: matches one option ID exactly.
+- `explanation`: teaches the answer briefly when the data shape supports it.
 
-- `page.universe_id`: Link the quiz to the exact game universe.
-- `page.code`: Use the editorial game slug. The route already adds `/quizzes/`.
-- `page.title`: Name the game and the quiz promise in a readable way.
-- `page.description_md`: Tell players what knowledge the quiz tests without giving away answers.
-- `page.seo_title`: Keep null or close to the title unless search needs custom text.
-- `page.seo_description`: Summarize the quiz topic and player value in one durable snippet.
-- `quizData`: Store the full question pool in the shape the route expects.
-- `question`: Test one clear fact, decision, route, or system.
-- `options`: Provide four plausible choices with similar specificity.
-- `correctOptionId`: Match one option ID exactly.
-- `explanation`: Teach the answer briefly when the data shape supports it.
-
-## Output Shape
+## Output shape
 
 ```json
 {
@@ -78,4 +79,4 @@ Bloxodes house voice for the page copy (`description_md`, intro, explanations): 
 }
 ```
 
-Each difficulty must be a non-empty array. Every question needs a globally unique ID, exactly four options with unique IDs, and a `correctOptionId` present in that question's options.
+Each difficulty must be a non-empty array. Every question needs a globally unique ID, exactly four options with unique IDs, and a `correctOptionId` that exists in that question's options.

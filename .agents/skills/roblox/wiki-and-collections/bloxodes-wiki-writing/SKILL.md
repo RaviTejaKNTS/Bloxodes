@@ -5,63 +5,57 @@ description: Write one Bloxodes Roblox game wiki hub final.json after brief appr
 
 # Bloxodes Wiki Writing
 
-Use this after `bloxodes-wiki-research` and parent approval. Wiki hubs explain one Roblox game clearly.
+A wiki hub is the front door to one Roblox game. A new player should finish the description knowing what they actually do in the game, and the tips should feel like advice from someone who's already made the early mistakes.
+
+Use this after `bloxodes-wiki-research` and parent approval.
+
+## Read first
+
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of its `references/examples.md`.
+- The approved `brief.md`.
 
 ## Workflow
 
-1. Read the approved `brief.md`.
+1. Read the approved brief.
 2. Create or update:
 
-```text
-tmp/content-workspace/<game-slug>/wiki/<game-slug>/
-  brief.md
-  final.json
-```
+   ```text
+   tmp/content-workspace/<game-slug>/wiki/<game-slug>/
+     brief.md
+     final.json
+   ```
 
 3. Write `final.json` for `wiki_pages`.
-4. Parse JSON before returning.
+4. Parse the JSON before returning.
 
-## Voice & Tone
+## How the hub should read
 
-Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- **Start with what the player does.** The first sentence of `description_md` puts the reader in the game: what you do, what you're working toward, what makes this game its own thing. Not "X is a Roblox game where..."
+- **Explain the core loop like a friend would.** Earn this, spend it on that, unlock the next thing. Use the game's real names for places, currencies and systems, and explain any odd term in a few words right where it shows up.
+- **Tips are the fun part.** Each one is a specific move with a reason: what to buy first, what to skip, what trips people up. "Upgrade your rod" is a chore list. "Buy the Iron Rod before any boat upgrade, because a faster boat doesn't help when your line keeps snapping" is a tip.
+- **Talk about the game, never the page.** Don't describe what the wiki covers, and don't narrate how it was made. Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
 
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the item, mechanic, or answer. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
-- Read the room. Keep the wit lighter, or drop it, when the reader is stressed: error fixes, "won't open", crashes, anything troubleshooting. Help first.
-- Keep functional slots clean. Steps, task items, table cells, quiz questions, and input labels stay plain and direct. Let the playful voice live in intros, descriptions, and blurbs.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+## Rules
 
-## Writing Rules
+- `tips_md` has 3 or 4 useful gameplay tips.
+- Fill `controls_json` only with verified controls. If you can't verify them, use `[]` and make sure the gap is listed in `brief.md`.
+- Never infer controls from Roblox supported-device flags. A device goes in `controls_json` only when you have its actual control.
+- Don't rewrite catalog blurbs in a wiki task. Catalog copy belongs to the catalog skills.
+- No generic Roblox controls or generic beginner advice ("explore the map," "have fun with friends").
 
-- Write for Roblox players like a Roblox player who gathered the wiki for everyone to check.
-- Do not write about what this page is about.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Do not write about your actions. Always focus on the game and players.
+## Fields
 
-- Start with what the player does in the game.
-- Keep `tips_md` to 3-4 useful gameplay tips.
-- Fill `controls_json` only with verified controls. If controls cannot be verified, use `[]` and make sure the gap is listed in `brief.md`.
-- Do not infer controls from Roblox supported-device flags. A device belongs in `controls_json` only when you have that device's actual control.
-- Do not rewrite catalog blurbs inside a wiki task. Use catalog skills for catalog copy.
-- Do not pad with generic Roblox controls or generic beginner advice.
+- `universe_id`: the exact Roblox universe for the game.
+- `slug`: the editorial game slug. Never `roblox_universes.slug`.
+- `title`: the simple hub pattern `<Game> Wiki`.
+- `seo_title`: close to the title and readable in search.
+- `meta_description`: what a player can figure out here, in one or two plain sentences with a reason to click. Example: "Learn how fishing, crafting and the island vaults fit together in Ember Isles, plus the early tips that save you hours."
+- `description_md`: 1 or 2 short, link-free paragraphs about what the player does and how the core loop works. No promises about what the wiki covers, no links, not a full guide.
+- `tips_md`: 3 or 4 concrete tips for a new or returning player.
+- `controls_json`: `[]` when nothing is verified. Otherwise an array of rows like `{ "action": "Jump", "desktop": "Space" }`, using only verified device keys: `desktop`, `mobile`, `tablet`, `console` and `vr`. Never generic `controls`, `keys`, `value` or `description` fields.
+- `cover_image`: `null` for normal hubs. The runtime uses the official universe icon for the square title art and the first official landscape thumbnail for `/wiki` cards and social previews. `sync-game-wiki-runtime.ts` rejects non-null values unless a user-requested, reviewed exception is published with `--allow-cover-override`.
 
-## Field Jobs
-
-- `universe_id`: Link the wiki to the exact Roblox universe.
-- `slug`: Use the editorial game slug.
-- `title`: Use the simple hub pattern `<Game> Wiki`.
-- `seo_title`: Keep it close to the title and readable in search.
-- `meta_description`: Say what the hub helps players check or understand.
-- `description_md`: Write 1-2 short, link-free paragraphs focused only on what the player does in the game and how the core loop works. Do not promise what the wiki covers, do not add links, and do not turn this into a long guide.
-- `tips_md`: Write 3-4 concrete gameplay tips that help a new or returning player.
-- `controls_json`: Use `[]` when no controls are verified. Otherwise write an array of rows shaped like `{ "action": "Jump", "desktop": "Space" }`, using only verified device keys: `desktop`, `mobile`, `tablet`, `console`, and `vr`. Do not use generic `controls`, `keys`, `value`, or `description` fields.
-- `cover_image`: Use `null` for normal wiki hubs. The runtime uses the current official universe icon for the square title artwork and the first official landscape universe thumbnail for `/wiki` cards and social previews. `sync-game-wiki-runtime.ts` rejects non-null values unless a user-requested, reviewed exception is published with `--allow-cover-override`.
-
-## Output Shape
+## Output shape
 
 ```json
 {
@@ -77,3 +71,5 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
   "is_published": true
 }
 ```
+
+Before returning, run the voice guide's "Before you hand it in" check on the description and tips.

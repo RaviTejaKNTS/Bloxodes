@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Tool Writing"
   short_description: "Write tool page content"
-  default_prompt: "Use $bloxodes-tool-writing to write one Bloxodes tool final.json from approved brief.md. Keep inputs, outputs, formula assumptions, limits, and result copy clear."
+  default_prompt: "Use $bloxodes-tool-writing to write one Bloxodes tool final.json from approved brief.md. Keep inputs, outputs, formula assumptions, limits, and result copy clear. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

@@ -5,48 +5,64 @@ description: Suggest focused Bloxodes article ideas for one Roblox game, platfor
 
 # Bloxodes Article Suggestions
 
-Use this to suggest article topics only. Do not start writing any articles at this stage. Only continue once approved by user. This is a read-only skill.
+You suggest article topics for one game, platform topic or source lead. Done means a short, checked list of ideas players would actually search for, each with a clear angle and sources. This skill is read-only: don't start writing any article, and only move on once the user approves.
 
 ## Start
 
-1. Resolve the topic or exact Roblox game when one is involved.
-2. Check existing Bloxodes articles and related pages. Do not suggest an article that is already covered by us.
-3. Do not suggest articles that collide with other page types like wiki, catalog, codes page, tool, entire gameplay checklist, quiz, or event page.
-4. When a game name is provided, check the `articles` table inside production db with the universe id to check for already covered articles of that game.
+1. Pin down the topic, or the exact Roblox game when there is one.
+2. Check existing Bloxodes articles and related pages. Don't suggest anything we already cover.
+3. Don't suggest articles that collide with our other page types: wiki, catalog, codes page, tool, full-game checklist, quiz or events page.
+4. When you have a game, check the production `articles` rows for that game's universe ID. Use the GET-only inventory command, never a direct production query:
 
+   ```bash
+   npm run articles:inventory:production -- --family article --universe-id <id> --json
+   ```
 
-## Source Check
+## Check the sources
 
-You can start with a quick understanding of the topic or mentioned game. Then move on to what competitors have already written.
-
-You can check websites like Beebom, Pro Game Guides, game specific wikis, Techwiser, IGN, Eurogamer, Game Rant and other websites.
-
-Do a proper deep dive search, do not settle for what was indexed in initial search, do various fan out queries, specific queries with each website to get deeper understanding of that specific topic or the game.
+1. Get a quick understanding of the topic or game.
+2. Then look at what competitors have already written: Beebom, Pro Game Guides, game-specific wikis, TechWiser, IGN, Eurogamer, Game Rant and other sites.
+3. Dig properly. Don't settle for what the first search indexed. Run varied fan-out queries, plus site-specific queries for each website, to understand the topic or game in depth.
 
 ## Editorial fit
 
-Use [the shared article standard](../bloxodes-article-writing/references/editorial-standard.md) and [the Beebom Roblox study](../bloxodes-article-writing/references/beebom-style-study.md) to judge reader intent and likely depth. Proposed titles should name the exact game/topic and the answer promised, using natural search language rather than vague or clever labels. Identify the player problem and the practical follow-up questions the article should resolve; competitor headings alone are not a research brief.
+Use [the article standard](../bloxodes-article-writing/references/editorial-standard.md) and [the Beebom Roblox study](../bloxodes-article-writing/references/beebom-style-study.md) to judge what the reader wants and how deep the article needs to go.
 
-## Good Article Ideas
+- Name the player's problem and the follow-up questions the article should answer. Competitor headings alone aren't a research brief.
+- Proposed titles name the exact game or topic and the answer it promises, in natural search language. No vague or clever labels.
 
-1. Suggest articles that answer one clear reader question.
-2. Suggest evergreen articles rather than event specific or timely or outdated article topics.
-3. Articles ideas should not merge with our page types like codes, events, wiki, or game collections.
-4. Does not have to stick with topics covered by other websites, you can go out your way and suggest topics that can helpful for people even if no one has already covered. Make sure these are accurate to the game or topic.
+### Titles that sound like search, not a template
 
-Most importantly, along with good guides or listicles, you can go creative and suggest various topics like
+Write each title the way a player would type the question, with the game name in it. Follow the title rules in `.agents/skills/bloxodes-voice/SKILL.md`.
 
-1. specific tier lists
-2. suggestions
-3. small checklist to follow to complete some process
-4. How to get/catch/perform/reach specific things inside game
-5. You can even opt for unique opinions if they are accurate and helpful for user.
+| Templated | Better |
+| --- | --- |
+| Ember Isles Ember Compass Guide: Everything You Need to Know | How to Get the Ember Compass in Ember Isles |
+| The Ultimate Garden Rush Pet Guide | Best Pets in Garden Rush, Ranked by Sell Bonus |
 
-Go for the most needed, unique, helpful for people kind of articles that are good in quality for Bloxodes standards.
+- Skip "Everything You Need to Know," "Ultimate Guide," "Complete Guide" and similar filler.
+- Vary the angles across your list. Five ideas that all read "How to X in Game" look like a form. Mix how-tos, rankings, comparisons and "is it worth it" picks where the topic supports them.
+
+## What makes a good idea
+
+- It answers one clear reader question.
+- It's evergreen. Prefer it over event-specific, timely or soon-outdated topics.
+- It doesn't overlap our page types like codes, events, wiki or game collections.
+- It doesn't have to copy competitors. Suggest helpful topics nobody has covered yet, as long as they're accurate to the game or topic.
+
+Along with solid guides and listicles, get creative:
+
+- specific tier lists
+- recommendations
+- a small checklist for finishing one process
+- how to get, catch, perform or reach a specific thing in the game
+- a clear opinion, when it's accurate and helpful
+
+Aim for the ideas players need most: unique, helpful and good enough for Bloxodes standards.
 
 ## Output
 
-Start with what you have checked, give me accurate outline of how the research went along with links and depth like this:
+Start with what you checked and how the research went, with links and depth:
 
 ```
 Evidence checked:
@@ -56,11 +72,11 @@ Evidence checked:
 - Useful uncovered angles:
 ```
 
-Then give me the actual article suggestions:
+Then list the suggestions, each tagged:
 
-- `[create]` focused article with clear reader value and source support
-- `[already covered]` existing Bloxodes page covers it
-- `[skip]` weak, duplicate, too broad, or better as another page type
-- `[research incomplete]` when you are not confidence enough with something, so user can continue research.
+- `[create]` a focused article with clear reader value and source support
+- `[already covered]` an existing Bloxodes page covers it
+- `[skip]` weak, duplicate, too broad or better as another page type
+- `[research incomplete]` you aren't confident enough yet, so the user can continue the research
 
-Each `[create]` idea should include a specific, readable title, angle, why players care, and sources to use.
+Every `[create]` idea includes a specific, readable title, the angle, why players care and the sources to use.

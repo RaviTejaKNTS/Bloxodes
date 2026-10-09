@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Wiki Writing"
   short_description: "Write game wiki hubs"
-  default_prompt: "Use $bloxodes-wiki-writing to write one Bloxodes wiki hub final.json from approved brief.md. Explain the game loop clearly, include only verified controls, and parse-check final.json."
+  default_prompt: "Use $bloxodes-wiki-writing to write one Bloxodes wiki hub final.json from approved brief.md. Explain the game loop clearly, include only verified controls, and parse-check final.json. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

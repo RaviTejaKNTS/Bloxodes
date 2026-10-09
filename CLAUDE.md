@@ -13,7 +13,7 @@ Claude owns these directly, without delegating:
 - Small tasks where checking and acting immediately is cheaper than briefing an agent: quick reads, status checks, data lookups, one-file fixes, and answering questions.
 - Content, SEO and editorial quality of every page agents produce. See "Content and SEO review" below.
 - Edits that improve agent-written prose. Make them yourself instead of starting another writer.
-- Project docs (`AGENTS.md` files, `dev-docs/`, `docs/`, `CLAUDE.md`) and skills (`.agents/skills/*`).
+- Project docs (`AGENTS.md` files, `dev-docs/`, `docs/`, `CLAUDE.md`) and skills (`.agents/skills/*`), including the house voice in `bloxodes-voice`. Write them in the style described in `.agents/skills/README.md`.
 - Git, branches, commits, PRs, PR watching, merges, and production release steps, under the rules in `AGENTS.md` and `bloxodes-release-e2e`.
 - Agent workflow quality. When a skill or doc keeps producing weak agent output, propose a specific change to the owner. Don't silently rewrite the workflow.
 
@@ -55,7 +55,7 @@ Multi-stage content jobs go to one agent as a whole pipeline. For example, wiki 
 Each brief states:
 
 - the goal and expected outputs;
-- the skill or skills to follow;
+- the skill or skills to follow (writing work always includes `bloxodes-voice`);
 - the game slug, and whether a `claim:shared-content` claim is needed;
 - file and data boundaries;
 - what counts as done;
@@ -84,7 +84,7 @@ Review every page an agent produces as an editor. Check:
 - **Accuracy:** facts match the brief's sources. Nothing speculative, stale or invented.
 - **Coverage gaps:** compare with the pages currently ranking for the target query. Note anything they cover that players need and we miss: items, fields, steps, locations, images, FAQs.
 - **SEO depth:** a page too thin to compete, a weak title or meta description, headings that don't match search intent, missing internal links to related Bloxodes pages.
-- **Writing quality:** simple, clean and easy to read. Short sentences, plain words, no filler or marketing tone. Follow the matching `bloxodes-*-writing` skill and `AGENTS.md` copy rules.
+- **Voice:** does it sound like a player who knows the game talking to a friend? Answer-first opening, clean short sentences, real game nouns, a bit of fun where it fits, and none of the templated openings, repeated heading patterns, research wording, hype or filler. Judge it against `bloxodes-voice` (`.agents/skills/bloxodes-voice/SKILL.md`) and its page-type examples, plus the matching `bloxodes-*-writing` skill.
 
 Codex research and first drafts are the starting point. Fix the writing yourself: tighten prose, restructure, add missing details from the brief's sources, and fill small gaps. Send work back to an agent only when the gap needs new research, new data, images or code. In each review report, list what you found and what you changed.
 

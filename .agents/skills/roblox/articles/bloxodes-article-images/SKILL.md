@@ -5,13 +5,21 @@ description: Gather, host, map, and verify useful images for every approved Blox
 
 # Bloxodes Article Images
 
-## Code-controlled execution
+You find, verify and host the images for one approved article before anyone writes it. Done means a `media.json` where every planned target is either a verified exact match or a precise, well-searched missing entry. You don't write `final.json`.
 
-When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+The image pass is mandatory for every article, even ones that aren't location guides or collections. It runs after article research and the parent's brief approval.
 
-Use this after article research and parent brief approval for every article. The image pass is mandatory even when the article is not a location guide or collection. Do not write `final.json`.
+## Code-controlled runs
 
-In the code-controlled `images` stage, **only `media.json` may change**. Treat `brief.md` as immutable approved research. Put all image targets, search evidence, omissions and readiness notes in the manifest entries. Skip the standalone brief-update step below. Reviewers change no artifacts; code records their decisions and applies accepted omissions.
+If you were assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides the interactive parent/subagent, upload/import and standalone self-review instructions here for that invocation. Do only the assigned artifact or review. The runtime owns later stages and approval records. The editorial and page-type contracts below still apply.
+
+In the code-controlled `images` stage:
+
+- **Only `media.json` may change.** Treat `brief.md` as immutable approved research.
+- Put all image targets, search evidence, omissions and readiness notes in the manifest entries.
+- Skip the standalone brief-update step in [Readiness](#readiness).
+- Reviewers change no artifacts. Code records their decisions and applies accepted omissions.
+- See [Unattended inspection](#unattended-code-controlled-inspection) for how to look at images without a desktop browser.
 
 ## Workspace
 
@@ -24,24 +32,30 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 ## Define the expected set first
 
 1. Read the approved `brief.md`.
-2. Define at least one useful visual target. The image pass can never start with an expected count of zero.
-3. For named locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, complete rankings, or other visual sets, list every distinct target that images would help identify. For a normal article, list the one to three highest-value screenshots, UI states, items, characters, or steps that would make the answer clearer. For an opinionated best-games article, every selected game is a distinct target: plan one useful landscape gameplay thumbnail per game section, in the approved order.
-4. Do not let easy-to-find images define the expected count. The approved game selection defines the expected thumbnail count.
-5. Use one stable entry ID and one planned article heading per target. Follow the approved reader-focused outline. When editorial review renames or regroups a heading, update `placement_heading` to match; do not keep an awkward section just to preserve an old media label. Existing-article refreshes may reuse verified matching hosted images after URL and visual readback.
+2. Define at least one useful visual target. The image pass never starts with an expected count of zero.
+3. Size the set to the article:
+   - **Visual sets** (named locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, complete rankings or other sets): list every distinct target an image would help identify.
+   - **Normal articles:** list the one to three highest-value screenshots, UI states, items, characters or steps that make the answer clearer.
+   - **Opinionated best-games articles:** every selected game is a target. Plan one useful landscape gameplay thumbnail per game section, in the approved order. The approved game selection sets the expected thumbnail count.
+4. Don't let easy finds set the expected count.
+5. Give each target one stable entry ID and one planned article heading. Follow the approved reader-focused outline.
+6. When editorial review renames or regroups a heading, update `placement_heading` to match. Don't keep an awkward section just to save an old media label.
+7. Refreshes of existing articles can reuse verified, matching hosted images after URL and visual readback.
 
 For example, a five-location guide starts with five entries even if the lead source has no reusable images.
 
 ## Find and verify images
 
 1. Start with the lead source, then fan out for every unresolved entry.
-2. Search the exact game name plus location, NPC, item, or step name. Try spelling variants.
-3. Check official game pages and media, the game's wiki, reputable community wikis, and credible guide pages. A clean, exact, genuine gameplay screenshot from a credible page is usable when its provenance is recorded; do not reject it only because another editorial site hosts it or the page does not state a general reuse license.
-4. Inspect full source pages and lazy-loaded `src`, `srcset`, and `data-src` values. Do not select from a search thumbnail alone.
-5. Match each image with nearby headings, captions, alt text, map labels, or surrounding instructions. For best-games articles, the exact official Roblox experience page is the source-page proof for its landscape thumbnail. Visually inspect the full image. Cross-check ambiguous matches.
-6. Reject logos, covers, edited thumbnails, page screenshots, decorative art, unrelated maps, collages that hide the target, watermarks, large arrows, and visible site branding.
-7. Record the source page, original image URL, exact-match evidence, provenance/source note, useful alt text, and status for every entry. If the source or file states an explicit attribution or license condition, record it and stop for parent review before use. Do not add a public attribution caption automatically.
+2. Search the exact game name plus the location, NPC, item or step name. Try spelling variants.
+3. Check official game pages and media, the game's wiki, reputable community wikis and credible guide pages. A clean, exact, genuine gameplay screenshot from a credible page is usable when you record its provenance. Don't reject it just because another editorial site hosts it or the page has no general reuse license.
+4. Inspect full source pages, including lazy-loaded `src`, `srcset` and `data-src` values. Never pick from a search thumbnail alone.
+5. Match each image using nearby headings, captions, alt text, map labels or surrounding instructions. For best-games articles, the exact official Roblox experience page is the source-page proof for its landscape thumbnail. Look at the full image yourself. Cross-check unclear matches.
+6. Reject logos, covers, edited thumbnails, page screenshots, decorative art, unrelated maps, collages that hide the target, watermarks, big arrows and visible site branding.
+7. For every entry, record the source page, original image URL, exact-match evidence, provenance note, useful alt text and status.
+8. If the source or file states an explicit attribution or license condition, record it and stop for parent review before use. Don't add a public attribution caption automatically.
 
-Do not stop after rejecting the lead source. Continue the source fan-out until every expected entry is verified or has a precise missing reason.
+Don't stop after rejecting the lead source. Keep fanning out until every expected entry is verified or has a precise missing reason.
 
 ## media.json
 
@@ -75,9 +89,18 @@ Use this shape:
 }
 ```
 
-Allowed statuses are `candidate`, `verified`, `missing`, and `accepted_missing`. The manifest and every entry must use `required: true`. `candidate` and `missing` never pass readiness. Only the parent may approve `accepted_missing`. Each accepted omission must include `search_queries` with at least two distinct query variants, `searched_source_urls` with at least two distinct HTTP source-page URLs, a specific `missing_reason`, and the parent's explicit decision in `acceptance_note`.
+Status rules:
 
-Use this shape for an accepted omission:
+- Allowed statuses are `candidate`, `verified`, `missing` and `accepted_missing`.
+- The manifest and every entry use `required: true`.
+- `candidate` and `missing` never pass readiness.
+- Only the parent can approve `accepted_missing`. Each accepted omission needs:
+  - `search_queries` with at least two distinct query variants
+  - `searched_source_urls` with at least two distinct HTTP source-page URLs
+  - a specific `missing_reason`
+  - the parent's explicit decision in `acceptance_note`
+
+An accepted omission looks like this:
 
 ```json
 {
@@ -101,19 +124,19 @@ Use this shape for an accepted omission:
 
 ## Host the verified set
 
-Dry-run the manifest first:
+1. Dry-run the manifest first:
 
-```bash
-npm run collect:article-images -- --manifest <media.json>
-```
+   ```bash
+   npm run collect:article-images -- --manifest <media.json>
+   ```
 
-After the source matches and usage notes are approved, upload to the configured managed-dev Supabase Storage target:
+2. Once the source matches and usage notes are approved, upload to the configured managed-dev Supabase Storage target:
 
-```bash
-npm run collect:article-images -- --manifest <media.json> --apply
-```
+   ```bash
+   npm run collect:article-images -- --manifest <media.json> --apply
+   ```
 
-The collector downloads, validates, converts to WebP, uploads to `articles/<article-slug>/sources/`, verifies public readback, and updates `media.json`. Do not save article-owned images in the repository and do not hotlink source hosts.
+The collector downloads, validates, converts to WebP, uploads to `articles/<article-slug>/sources/`, checks public readback and updates `media.json`. Never save article images in the repo, and never hotlink source hosts.
 
 Production publication promotes the exact approved managed-dev WebP bytes to the same object paths and rewrites the reviewed final to production URLs:
 
@@ -121,11 +144,11 @@ Production publication promotes the exact approved managed-dev WebP bytes to the
 BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run collect:article-images -- --manifest <media.json> --file <final.json> --apply --allow-prod
 ```
 
-Do not run that command without explicit production publication approval.
+Never run that command without explicit production publication approval.
 
 ## Readiness
 
-Update `brief.md` with:
+In interactive runs, update `brief.md` with this block (code-controlled runs put these notes in `media.json` instead):
 
 ```text
 Image readiness:
@@ -141,7 +164,9 @@ Image readiness:
 - Ready for writing: yes/no
 ```
 
-The parent approves readiness before writing. An article may proceed with no inserted images only when reliable, accurate, helpful images could not be found for every planned target and every entry is `accepted_missing`. The writing pass inserts every verified `public_url` beneath its matching `placement_heading`; final verification then runs:
+- The parent approves readiness before writing starts.
+- An article can go ahead with no inserted images only when reliable, accurate, helpful images couldn't be found for any planned target and every entry is `accepted_missing`.
+- The writing pass inserts every verified `public_url` under its matching `placement_heading`. Final verification then runs:
 
 ```bash
 npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
@@ -149,4 +174,11 @@ npm run verify:article-finals -- --base-url http://localhost:<port> --file <fina
 
 ## Unattended code-controlled inspection
 
-Scheduled image work has headless Chrome, not a connected Codex desktop browser. Use `npm --prefix <repository> run articles:inspect-image -- <exact-source-image-url> <article-workspace>` and open the returned screenshot with `view_image`. Do not load desktop browser setup helpers in this mode. A successful screenshot proves access only; inspect the depicted gameplay and match it to the source and intended placement before marking an image verified. Keep the exact original URL and attribution evidence in media.json. The independent reviewer receives code-captured screenshots in `image-inspection/index.json`; it must inspect them before acceptance. Tool/network failures are operational problems, not grounds for inventing a match or silently accepting an omission.
+Scheduled image work has headless Chrome, not a connected Codex desktop browser.
+
+- Run `npm --prefix <repository> run articles:inspect-image -- <exact-source-image-url> <article-workspace>` and open the returned screenshot with `view_image`.
+- Don't load desktop browser setup helpers in this mode.
+- A successful screenshot only proves access. Look at the gameplay it shows and match it to the source and the intended placement before marking it verified.
+- Keep the exact original URL and attribution evidence in `media.json`.
+- The independent reviewer gets code-captured screenshots in `image-inspection/index.json` and must inspect them before accepting.
+- Tool or network failures are operational problems. They're never a reason to invent a match or quietly accept an omission.

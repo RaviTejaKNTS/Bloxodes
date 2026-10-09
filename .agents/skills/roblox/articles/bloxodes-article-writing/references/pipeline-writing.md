@@ -1,25 +1,42 @@
-# Focused pipeline writing contract
+# Pipeline Writing Contract
 
-The controller has approved brief.md and media.json. Your job is final.json only; you may adjust media.json placement_heading to match your headings. Do not repeat research, inventory queries, image collection, uploads, import, or browser checks. If the approved evidence truly lacks a central answer, return the specific question to research. Use identity and confirmed internal URLs from the brief; do not construct collection paths from database codes.
+The controller has already approved `brief.md` and `media.json`. Your job is `final.json`. You may also update `media.json` `placement_heading` values to match your headings. Don't redo research, inventory queries, image collection, uploads, import or browser checks. If the evidence really lacks a central answer, send the exact question back to research. Use the identity and confirmed internal URLs from the brief. Never build collection paths from database codes.
 
-Read the reader-facing writing packet first and private evidence notes as needed. Read editorial-standard.md and the closest original example in editorial-examples.md. The Beebom study is additional guidance when deciding how to handle an unfamiliar format. Examples teach explanation and prioritization, not phrasing or a required outline.
+## Read first
 
-Choose a natural article around the reader's goal. Explain what matters and why, in connected, conversational American English. Give each substantial answer one home. Use helpful named events, tools and conditions from the approved evidence instead of replacing them with abstract goal/route advice. A table row must fit its column category and each cell should add a fact or consequence; switch to connected prose when there is little to compare. A table should help compare, steps should guide action, and surrounding prose should explain a consequence or choice rather than restating the same rows. Keep meaningful caveats beside the affected advice once. Source disagreements, verification methods, and source-category labels belong in private research notes unless an actual uncertainty changes the reader's decision. Do not replace a needed caveat with certainty.
+1. The voice guide (`.agents/skills/bloxodes-voice/SKILL.md`) and the article section of its examples (`.agents/skills/bloxodes-voice/references/examples.md`). This is how the article should sound.
+2. [editorial-standard.md](editorial-standard.md). This is what the article has to deliver.
+3. The closest section of [editorial-examples.md](editorial-examples.md). The [Beebom study](beebom-style-study.md) helps when the format is unfamiliar.
+4. The brief's reader-facing writing packet, then its private evidence notes when you need to check a claim.
 
-Use specific searchable titles and H2s and contextual H3s. Do not force highlights, section counts, lengths, jokes, a stock opening, or a recap ending. Stop when the player's task is answered; a useful next decision can make a natural ending. Do not pad a complete answer with FAQs.
+The examples teach moves, not wording or a required outline.
 
-Output valid JSON with exactly these article fields:
-- title, slug (preserve the assigned slug), meta_description, content_md.
-- faq_json: an array of {q, a}. It renders a visible FAQ after the body and supplies structured data. This is the sole FAQ location. Never include an FAQ section in content_md. Each optional question must add a supported follow-up answer absent from the body; use [] when the body already answers the useful questions. There is no question quota.
-- cover_image: null; the runtime owns cover generation.
-- author_id: approved known ID or null; universe_id: the verified game universe ID from the brief for a game-linked article.
-- tags: specific reusable labels; sources: URLs supporting the actual facts; is_published: true (managed-development import only; the controller owns publication permission).
-Do not include seo_title or internal review notes.
+## Write it
 
-Insert all verified hosted images from media.json at their useful matching headings with factual alt text. Preserve approved URLs and provenance. Accepted missing entries need no substitute. Never insert the cover as a body image. Use confirmed links naturally where the destination helps. Perfect-match approved YouTube media is optional using {{ youtube: URL }} on its own line. Specialized blocks follow the relevant page-type skill.
+- Build the article around the reader's goal. Answer first, then explain what matters and why, in friendly, connected American English that sounds like a player who knows the game.
+- Give each substantial answer one home. Use the named events, tools and conditions from the brief instead of generic advice.
+- Tables compare, steps guide, prose explains. Every table row must fit its column and every cell must add a fact or consequence. If there's little to compare, write a paragraph instead.
+- Put a needed caveat once, next to the advice it affects, in plain words. Source disagreements, verification methods and source-type labels stay in the brief unless a real uncertainty changes what the reader should do. Never swap a needed caveat for false certainty.
+- Use specific, searchable titles and main H2s, short contextual H3s, and a mix of heading shapes. No forced highlights, section counts, lengths, jokes, stock openings or recap endings. Stop when the task is answered. A useful next step makes a good ending. Don't pad a complete answer with FAQs.
 
-Before returning, read the complete copy aloud in your head. Check the title's promise through the result, repeated explanations, misplaced evidence language, useful headings, and FAQ value. Parse the JSON. Return a draft or revision decision, not self-approval. A separate reviewer evaluates it; code performs QA.
+## Output
+
+Valid JSON with exactly these fields:
+
+- `title`, `slug` (keep the assigned slug), `meta_description`, `content_md`.
+- `faq_json`: an array of `{q, a}`. It renders a visible FAQ after the body and supplies structured data. It's the only FAQ location, so never add an FAQ section to `content_md`. Each question must add a supported answer the body doesn't already give. Use `[]` when the body covers it. No quota.
+- `cover_image`: `null`. The runtime makes the cover.
+- `author_id`: the approved known ID or `null`. `universe_id`: the verified game universe ID from the brief for a game-linked article.
+- `tags`: specific reusable labels. `sources`: URLs that support the actual facts. `is_published`: `true` (managed-development import only; the controller owns publishing).
+
+No `seo_title` and no internal review notes.
+
+Insert every verified hosted image from `media.json` under its matching heading with factual alt text. Keep approved URLs and provenance. Accepted-missing entries need no substitute. Never put the cover in the body. Add confirmed internal links where they help. A perfect-match approved YouTube video is optional: `{{ youtube: URL }}` on its own line. Specialized blocks follow their page-type skill.
+
+## Before you return
+
+Read the whole article in your head as the player who searched the title. Run the voice guide's "Before you hand it in" check. Then check the title's promise through to the result, repeated explanations, leftover research wording, heading quality and FAQ value. Parse the JSON. Return a draft or revision decision, not self-approval. A separate reviewer judges it and code runs QA.
 
 ## Focused corrections
 
-When revising, preserve supported useful passages and repair the concrete finding without rephrasing unrelated sections. Code may apply one limited literal prose correction and request a fresh editorial review after the ordinary repair allowance is used. This does not approve the edited draft, relax factual support, impose article lengths, or authorize a whole-article rewrite loop. HTML entities that render as the same image alt text are handled by the validator; do not rewrite copy to work around an equivalent apostrophe encoding.
+When revising, keep the useful passages and fix the specific finding without rewording unrelated sections. Code may apply one limited literal prose correction and ask for a fresh review once the normal repair allowance is used. That doesn't approve the draft, relax factual support, set article lengths or allow a whole-article rewrite loop. HTML entities that render the same alt text are handled by the validator, so don't rewrite copy to work around an apostrophe encoding.

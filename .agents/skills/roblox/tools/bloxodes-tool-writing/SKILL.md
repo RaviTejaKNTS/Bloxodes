@@ -5,62 +5,59 @@ description: Write one Bloxodes tool final.json after brief approval. Use for /t
 
 # Bloxodes Tool Writing
 
-Use this after `bloxodes-tool-research` and parent approval. Do not create a tool page if the input, output, or formula is weak.
+A tool page helps a player make one decision: sell or keep, which upgrade next, how long until the next rebirth. Your copy starts from that decision, explains what to enter and what the result means, and is honest about where the math gets fuzzy.
+
+Use this after `bloxodes-tool-research` and parent approval. Don't create a tool page if the input, output or formula is weak.
+
+## Read first
+
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Tool pages" section of its `references/examples.md`.
+- The approved `brief.md`.
 
 ## Workflow
 
-1. Read the approved `brief.md`.
+1. Read the approved brief.
 2. Create or update:
 
-```text
-tmp/content-workspace/<game-or-topic-slug>/tools/<tool-code>/
-  brief.md
-  final.json
-```
+   ```text
+   tmp/content-workspace/<game-or-topic-slug>/tools/<tool-code>/
+     brief.md
+     final.json
+   ```
 
 3. Write `final.json`.
-4. Parse JSON before returning.
+4. Parse the JSON before returning.
 
-## Voice & Tone
+## How the copy should read
 
-Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- **Start with the player's problem.** What they're trying to decide, what they enter, what they get and how to use it in the game. "Not sure whether that mutated pumpkin is worth selling now? Enter the crop, its weight and any mutations, and you'll see what it sells for at every shop."
+- **Formulas in plain language.** Say how the number is built and what can throw it off. Use a quick worked example when it helps.
+- **Honest about limits.** Don't promise exactness when results depend on changing game data or the player's assumptions. Say it once, where it matters.
+- **Labels and inputs stay plain.** Personality lives in the intro and explanations, not in input labels or result units.
+- **Avoid "this page."** Say "the calculator" or "the tool" only when it helps the player understand the action. Never narrate how the page was made. Follow Public Copy in root `AGENTS.md`.
 
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the item, mechanic, or answer. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
-- Read the room. Keep the wit lighter, or drop it, when the reader is stressed: error fixes, "won't open", crashes, anything troubleshooting. Help first.
-- Keep functional slots clean. Steps, task items, table cells, quiz questions, and input labels stay plain and direct. Let the playful voice live in intros, descriptions, and blurbs.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+## Writing rules
 
-## Writing Rules
-
-- Explain what the tool result means and how players should use it.
+- Explain what the result means and how to use it.
 - Keep the intro short and useful.
-- Put formulas, assumptions, and limits in plain language.
-- Do not overpromise exactness when the result depends on changing game data or user assumptions.
-- FAQs should answer real tool-use questions.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- For game tools, center the game problem first: what the player is trying to decide, what they enter, what result they get, and how to use that result in the game.
-- Avoid self-referential filler such as "this page" unless the user specifically asks for page documentation. Prefer "this calculator" or "the tool" only when it helps the player understand the action.
+- Put formulas, assumptions and limits in plain language.
+- FAQs answer real questions people have after using the tool.
 
-## Field Jobs
+## Field jobs
 
-- `code`: Use the stable tool route code.
-- `title`: Name the tool by the job it performs.
-- `seo_title`: Keep it readable for search and close to the visible title.
-- `meta_description`: Say what result the tool gives.
-- `intro_md`: Explain when to use the tool and what decision it helps with.
-- `how_it_works_md`: Explain inputs, outputs, formulas, assumptions, and limits in plain language.
-- `description_json`: Add deeper notes for edge cases, examples, or result interpretation.
-- `faq_json`: Answer real questions users have after using the tool.
-- `cta_label` and `cta_url`: Use only when there is a clear next action.
-- `thumb_url`: Use an approved image when the page needs one.
-- `universe_id`: Set only when the tool belongs to one Roblox game.
+- `code`: the stable tool route code.
+- `title`: names the tool by the job it does, in search wording ("Garden Rush Crop Value Calculator").
+- `seo_title`: readable in search and close to the visible title.
+- `meta_description`: what result the tool gives and why it helps.
+- `intro_md`: when to use the tool and the decision it helps with.
+- `how_it_works_md`: inputs, outputs, formulas, assumptions and limits in plain language.
+- `description_json`: deeper notes for edge cases, examples or reading the result.
+- `faq_json`: real questions players have after using the tool.
+- `cta_label` and `cta_url`: only when there's a clear next action.
+- `thumb_url`: an approved image when the page needs one.
+- `universe_id`: only when the tool belongs to one Roblox game.
 
-## Output Shape
+## Output shape
 
 ```json
 {

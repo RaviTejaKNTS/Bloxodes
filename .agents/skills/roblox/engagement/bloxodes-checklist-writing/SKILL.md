@@ -5,64 +5,62 @@ description: Write one Bloxodes 100% completion checklist final.json after brief
 
 # Bloxodes Checklist Writing
 
-Use this after `bloxodes-checklist-research` and parent approval. Normally write only source-verified 100% completion checklists for the exact game and edition or mode. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Preparation lists, beginner milestones and routines need an explicit user exception in the brief.
+A checklist is a player's map to 100%. The tasks have to be exact and checkable, and the short page description should make the grind feel doable. Normally you only write source-verified 100% completion checklists for the exact game and edition or mode.
+
+Use this after `bloxodes-checklist-research` and parent approval. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Preparation lists, beginner milestones and routines need an explicit user exception in the brief.
+
+## Read first
+
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Checklists" section of its `references/examples.md`.
+- The approved `brief.md`.
 
 ## Workflow
 
-1. Read the approved `brief.md`.
+1. Read the approved brief.
 2. Create or update:
 
-```text
-tmp/content-workspace/<game-slug>/checklists/<checklist-slug>/
-  brief.md
-  final.json
-```
+   ```text
+   tmp/content-workspace/<game-slug>/checklists/<checklist-slug>/
+     brief.md
+     final.json
+   ```
 
-3. Write checklist page metadata and task rows in `final.json`.
-4. Parse JSON and validate that section codes are consistent.
+3. Write the page metadata and task rows in `final.json`.
+4. Parse the JSON and check that section codes are consistent.
 
-## Voice & Tone
+## Where the voice goes
 
-Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- **`description_md` gets a little personality.** Say what 100% means in this game and set up the run. "Ember Isles 100% means every vault, every rod and every island quest. It's a long haul, so tick things off as you go."
+- **Task titles are plain actions.** "Craft the Ember Compass," not "Make sure you complete the important task of obtaining the Ember Compass."
+- **Descriptions only when they help.** A location, a requirement or the one thing people miss.
+- **Never narrate how the page was made.** Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
 
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the item, mechanic, or answer. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
-- Read the room. Keep the wit lighter, or drop it, when the reader is stressed: error fixes, "won't open", crashes, anything troubleshooting. Help first.
-- Keep functional slots clean. Steps, task items, table cells, quiz questions, and input labels stay plain and direct. Let the playful voice live in intros, descriptions, and blurbs.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+## Task rules
 
-## Writing Rules
-
-- Tasks should be actions a player can mark complete.
-- Normally write one standalone checklist page per game and reuse its existing checklist. Additional pages need an explicit user exception. Sections divide the single board's verified completion requirements.
-- Cover the full required set. Encode interchangeable paths as one required leaf with an explicit `A or B` title; describe each verified option and when either complete path satisfies that task. Do not split mutually exclusive choices into separate leaves.
-- Every three-level leaf counts toward board progress, even with `is_required: false`. Put optional tips in descriptions rather than checkable rows. Defer branching requirements that cannot fit an accurate single leaf until reviewed alternative-group support exists.
-- Do not write around unresolved completion requirements or relabel an achievement roster as in-game 100%.
-- Describe the board percentage as checked-task progress unless sources verify its relationship to the in-game meter.
+- Every task is an action a player can mark complete.
+- Normally write one standalone checklist page per game and reuse its existing checklist. Extra pages need an explicit user exception. Sections split the single board's verified completion requirements.
+- Cover the full required set. When there are interchangeable paths, write one required leaf with an explicit `A or B` title, describe each verified option and say when either complete path counts. Never split mutually exclusive choices into separate leaves.
+- Every three-level leaf counts toward board progress, even with `is_required: false`. Put optional tips in descriptions, not in checkable rows. Defer branching requirements that can't fit an accurate single leaf until reviewed alternative-group support exists.
+- Never write around unresolved completion requirements or relabel an achievement roster as in-game 100%.
+- Describe the board percentage as checked-task progress unless sources verify how it relates to the in-game meter.
 - Keep task titles short.
-- Use descriptions only when the task needs context.
-- Do not create vague tasks like `Learn the game` or `Get better`.
-- Avoid generic Roblox advice that does not belong to the game.
+- No vague tasks like `Learn the game` or `Get better`.
+- No generic Roblox advice that doesn't belong to this game.
 
-## Field Jobs
+## Field jobs
 
-- `page.universe_id`: Link the checklist to the exact game universe.
-- `page.slug`: Use the editorial game slug.
-- `page.title`: Normally use `<Game> 100% completion checklist`. Name the edition or mode when needed. A narrower scope requires an explicit user exception in the brief.
-- `page.seo_title`: Keep null or close to the title unless search needs custom text.
-- `page.seo_description`: Summarize the route or completion path the board tracks.
-- `page.description_md`: Briefly explain what progress the checklist helps players track. Do not turn it into a guide.
-- `section_code`: Use numeric depth: parent sections, subsections, then checkable tasks.
-- `title`: For parents, name a real phase or system. For leaf tasks, write a concrete action.
-- `description`: Add context only when it helps the player complete or understand the task.
-- `is_required`: Use `true` for checkable leaf tasks, including a single `A or B` task, and `false` for parent or subsection rows. This flag does not remove a leaf from the board's percentage.
+- `page.universe_id`: the exact game universe.
+- `page.slug`: the editorial game slug.
+- `page.title`: normally `<Game> 100% completion checklist`. Name the edition or mode when needed. A narrower scope needs an explicit user exception in the brief.
+- `page.seo_title`: null or close to the title unless search needs custom text.
+- `page.seo_description`: the route or completion path the board tracks, with a reason to use it.
+- `page.description_md`: a short note on what progress the checklist tracks. Not a guide.
+- `section_code`: numeric depth: parent sections, then subsections, then checkable tasks.
+- `title`: parents name a real phase or system. Leaf tasks are concrete actions.
+- `description`: context only when it helps the player complete or understand the task.
+- `is_required`: `true` for checkable leaf tasks, including a single `A or B` task, and `false` for parent or subsection rows. This flag doesn't remove a leaf from the board's percentage.
 
-## Output Shape
+## Output shape
 
 ```json
 {

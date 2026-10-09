@@ -5,71 +5,61 @@ description: Write one global Bloxodes catalog final.json after brief approval. 
 
 # Bloxodes Catalog Writing
 
-Use this after `bloxodes-catalog-research` and parent approval. For one Roblox game's item collection, use `bloxodes-game-collection-writing`.
+Catalog pages cover Roblox-wide sets: music codes, font IDs, emotes, error codes. People land here with a job to do, like finding an ID, copying it and using it. Your copy gets them there fast, explains anything that trips them up, and sounds like a player who has done it a hundred times.
+
+Use this after `bloxodes-catalog-research` and parent approval. For one game's item collection, use `bloxodes-game-collection-writing`.
+
+## Read first
+
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Catalog pages" section of its `references/examples.md`.
+- The approved `brief.md`.
 
 ## Workflow
 
-1. Read the approved `brief.md`.
+1. Read the approved brief.
 2. Create or update:
 
-```text
-tmp/content-workspace/<topic-slug>/catalogs/<catalog-code>/
-  brief.md
-  final.json
-```
+   ```text
+   tmp/content-workspace/<topic-slug>/catalogs/<catalog-code>/
+     brief.md
+     final.json
+   ```
 
 3. Write `final.json`.
-4. Parse JSON before returning.
+4. Parse the JSON before returning.
 
-## Voice & Tone
+## How the copy should read
 
-Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- **Explain what the items are and what players can do with them.** "Roblox font IDs let you change the text style in your game UI, signs and nametags. Copy the ID, paste it into the Font property in Studio, and the text updates right away."
+- **Short intro, practical body.** `description_md` covers practical help, caveats and how to use or compare the items.
+- **Talk about the items, not the website.** No `use this catalog`, `this page` or `the dataset`. Never narrate how the page was made. Follow Public Copy in root `AGENTS.md`.
+- **No raw output.** No raw HTML, raw arrays, nested objects or unexplained `Yes`/`No` values.
+- **FAQs answer real player questions.**
 
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the item, mechanic, or answer. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
-- Read the room. Keep the wit lighter, or drop it, when the reader is stressed: error fixes, "won't open", crashes, anything troubleshooting. Help first.
-- Keep functional slots clean. Steps, task items, table cells, quiz questions, and input labels stay plain and direct. Let the playful voice live in intros, descriptions, and blurbs.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+## SEO and headings
 
-## Writing Rules
+- `title` is one keyword-first H1: a natural, stable phrase that names the collection. Don't pair exact synonyms like `codes` and `IDs` when they mean the same value. Use the clearest term once. Never lead the H1 with an item count, month, year or freshness claim.
+- Keep `seo_title` close to the H1. When a verified count or short synonym really helps search intent, put it after the main phrase in brackets, like `Roblox Music Codes [58K+ Audio/Song IDs]`. Skip the count if the source workflow doesn't maintain it.
+- `meta_description` says what the reader can find, compare, filter or copy. Include a verified count only when the same refresh workflow maintains it.
+- H2s describe the section fully on their own. Clear questions or tasks work well, like `What are Roblox Music Codes?` or `How to use Roblox Music Codes`. Avoid fragments like `Choosing a font`, `Overview`, `Details` and a generic `How it works`.
+- Use a topic-specific FAQ heading in the renderer, like `Roblox Font IDs FAQ`, instead of a bare `FAQ` when the route supports a custom title.
+- Don't add a visible `Browse all...` line, count line, eyebrow, badge or label just to create a heading level or repeat the H1. If repeated item names need headings and there's no useful parent heading, render item names as H2s. Use H3s only under a genuinely useful visible H2.
+- Keep the H1, browser title, Open Graph title, breadcrumb name, WebPage name and ItemList name sourced consistently so they don't drift.
 
-- Explain what the items are and what players can do with them.
-- Keep intro copy short.
-- Use `description_md` for practical help, caveats, and how to use or compare the items.
-- Use `description_json` only for short notes tied to rendered sections.
-- Do not write website-first lines like `use this catalog`, `this page`, or `the dataset`.
-- Do not expose raw HTML, raw arrays, nested objects, or unexplained `Yes`/`No` values.
-- FAQs should answer real player questions.
+## Field jobs
 
-## SEO and Heading Rules
+- `code`: the stable catalog route code.
+- `title`: the natural keyword-first H1, with no changing counts or dates.
+- `seo_title`: follows the approved comparison-page pattern. A verified count or short synonym in brackets only when it improves search clarity.
+- `meta_description`: what the reader can find, compare or understand, with a reason to click.
+- `intro_md`: what the collection is and why players use it.
+- `description_md`: answers the main question in depth without repeating item cards.
+- `description_json`: short section notes only when they explain rendered groups.
+- `how_it_works_md`: fields, filters, IDs, values, limits or lookup behavior when needed.
+- `faq_json`: useful follow-up questions not already answered.
+- `wiki_md`: only when the catalog needs a short related-page blurb.
 
-- Write one keyword-first H1 in `title`. Use a natural, stable phrase that names the collection. Do not pair exact synonyms such as `codes` and `IDs` when they refer to the same value; use the clearest search term once. Do not lead the H1 with an item count, month, year, or freshness claim.
-- Keep `seo_title` close to the H1. When a verified count or compact synonym materially helps search intent, place it after the main phrase in brackets, such as `Roblox Music Codes [58K+ Audio/Song IDs]`. Omit the count when it is not maintained by the source workflow.
-- Make `meta_description` state what the reader can find, compare, filter, or copy. Include a verified count only when the same refresh workflow maintains it.
-- Write H2s as complete, standalone descriptions of the section. Prefer clear questions or tasks such as `What are Roblox Music Codes?` or `How to use Roblox Music Codes`. Avoid fragments such as `Choosing a font`, `Overview`, `Details`, and generic `How it works`.
-- Use a topic-specific FAQ heading in the renderer, such as `Roblox Font IDs FAQ`, instead of a bare `FAQ` when the route supports a custom title.
-- Do not add a visible `Browse all...`, count line, eyebrow, badge, or label merely to create a heading level or repeat the H1. If repeated item names need headings and no useful parent heading exists, render item names as H2s. Use H3s only under a genuinely useful visible H2.
-- Keep the H1, browser title, Open Graph title, breadcrumb name, WebPage name, and ItemList name sourced consistently so they do not drift.
-
-## Field Jobs
-
-- `code`: Use the stable catalog route code.
-- `title`: Write the natural keyword-first H1. Keep changing counts and dates out of it.
-- `seo_title`: Follow the approved comparison-page pattern. Put a verified count or compact synonym in brackets only when it improves search clarity.
-- `meta_description`: Say what the reader can find, compare, or understand.
-- `intro_md`: Explain what the collection is and why players use it.
-- `description_md`: Answer the main collection question in depth without repeating item cards.
-- `description_json`: Add short section notes only when they explain rendered groups.
-- `how_it_works_md`: Explain fields, filters, IDs, values, limits, or lookup behavior when needed.
-- `faq_json`: Answer useful follow-up questions not already covered.
-- `wiki_md`: Add only when the catalog needs a short related-page blurb.
-
-## Output Shape
+## Output shape
 
 ```json
 {

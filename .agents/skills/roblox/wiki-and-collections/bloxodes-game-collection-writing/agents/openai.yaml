@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Game Collection Writing"
   short_description: "Write game collection pages"
-  default_prompt: "Use $bloxodes-game-collection-writing as a writing subagent to write one game collection final.json from approved brief.md, data readiness, and image readiness. Keep copy simple and player-facing, match description_json to real section labels, explain the game system, land useful wiki_md, avoid prose counts, and use faq_json q/a keys."
+  default_prompt: "Use $bloxodes-game-collection-writing as a writing subagent to write one game collection final.json from approved brief.md, data readiness, and image readiness. Keep copy simple and player-facing, match description_json to real section labels, explain the game system, land useful wiki_md, avoid prose counts, and use faq_json q/a keys. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

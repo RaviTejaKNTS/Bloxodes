@@ -5,11 +5,13 @@ description: Run one approved Bloxodes events page with parent review. Use when 
 
 # Bloxodes Events Workflow Runner
 
-Use one subagent for one events page. The same subagent researches the event source path, waits for parent approval, then writes `final.json`.
+You run one events page from research to a verified local preview. One subagent does the work: it researches the event source path, waits for your approval of the brief, then writes `final.json`. You review both stages.
 
-## Subagent Handoff
+## Subagent handoff
 
-Every subagent message must set the role and exact skill:
+Every message to the subagent sets its role and the exact skill.
+
+First message:
 
 - You are the subagent for one events page only.
 - Do not run `/bloxodes-events-workflow-runner`.
@@ -18,25 +20,29 @@ Every subagent message must set the role and exact skill:
 - Skill file: `.agents/skills/bloxodes-events-research/SKILL.md`.
 - Return `brief.md` only and wait for parent approval.
 
-After the parent approves the brief, send the same subagent:
+After you approve the brief, send the same subagent:
 
 - Continue with `/bloxodes-events-writing`.
 - Skill file: `.agents/skills/bloxodes-events-writing/SKILL.md`.
+- Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md`.
 - Create `final.json` for the approved brief only.
 
 ## Workflow
 
 1. Confirm the game and universe ID.
 2. Ask the subagent to use `/bloxodes-events-research` and return `brief.md`.
-3. Review whether the event data source is good enough. Do not approve manual timeline rows.
-4. Ask the same subagent to use `/bloxodes-events-writing` and create evergreen `final.json`.
-5. Review for stale dates, current-event claims, and invented timeline facts.
+3. Review whether the event data source is good enough. Don't approve manual timeline rows.
+4. Ask the same subagent to use `/bloxodes-events-writing` and create an evergreen `final.json`.
+5. Review the final:
+   - No stale dates, current-event claims or invented timeline facts.
+   - The copy reads right against `.agents/skills/bloxodes-voice/SKILL.md`: it opens on what events mean in this game, sounds like a player, and has no template openings, research voice, hype, filler or repeated facts. Headings say what's under them.
+   - Every fact matches the approved brief.
 6. Start or reuse localhost with `npm run dev:managed`.
-7. Run:
+7. Run the verifier:
 
-```bash
-npm run verify:simple-page-finals -- --base-url http://localhost:<port> --file <final.json>
-```
+   ```bash
+   npm run verify:simple-page-finals -- --base-url http://localhost:<port> --file <final.json>
+   ```
 
 8. If the verifier passes, open the verified `/events/<slug>` link in the Codex Browser.
-9. Return paths, localhost link, blocked reason if any, and remaining risks.
+9. Return the paths, the localhost link, any blocked reason and the remaining risks.

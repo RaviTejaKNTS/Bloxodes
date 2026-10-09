@@ -1,72 +1,74 @@
 # One Editorial Revision Before Acceptance
-In the code-controlled pipeline, a separate focused model invocation performs this review, and the runtime routes findings and writes the review note. The reviewer cannot edit artifacts or manage workers. The writing invocation produces the draft or requested revision only. Apply the same substantive criteria below; code, rather than a model parent, owns the retry count and acceptance transition.
 
-Use this after the first draft and before import. The existing parent reviews; the same writing agent revises. Keep the configured model and reasoning effort, including Luna when selected. Do not add an editor agent or escalate to a different model for prose quality.
+Every approved-brief article gets one real editorial pass: specific feedback, one revision by the same writer, and a final read. This replaces endless polish loops.
 
-## Review the reader's task
+In the code-controlled pipeline, a separate reviewer invocation does the review. The runtime routes findings and writes the review note. The reviewer can't edit files or manage workers, and the writer only produces the draft or the requested revision. The judging criteria below are the same either way. Code, not a model parent, owns the retry count and the acceptance step.
 
-First read the actual public draft against [the shared editorial standard](editorial-standard.md), before reading the evidence brief. Judge it as a player: does the language sound like usable advice, or like a report about what sources documented? Note concrete weaknesses in phrasing, explanation and repetition. Then consult the approved brief for accuracy and completeness; do not let its research language become the standard for public prose. A factually supported draft can still require writing revision. Check these five dimensions and record concrete locations/examples for defects:
+In an interactive workflow, the parent reviews and the same writing agent revises. Keep the configured model and reasoning effort. Don't add an extra editor agent or switch models for prose quality.
 
-| Dimension | Acceptance question |
+## Read it as a player first
+
+Read the public draft against the voice guide (`.agents/skills/bloxodes-voice/SKILL.md`) and the [article standard](editorial-standard.md) before you open the brief. Does it sound like a player giving useful advice, or like a report about what sources said? Note the weak phrasing, thin explanations and repeats.
+
+Then open the brief to check accuracy and completeness. The brief's wording is never the standard for public prose. A factually correct draft can still need a rewrite.
+
+## The six checks
+
+These match the `editorial_evidence` schema (`opening`, `completeness`, `structure`, `explanation`, `repetition`, `evidence`). Each one needs a concrete basis, with quotes for defects and a short specific reason for passes.
+
+| Check | The question |
 | --- | --- |
-| Practical completeness | Can the reader perform the promised task in order? Are prerequisite ingredients and their sources, controls, conditions, and outcomes explained where needed? For other formats, can they understand the change or make the promised choice? |
-| Natural explanation | Does the opening lead with the player's goal or consequence? Do paragraphs explain the next obstacle in familiar language, without invented experience or evidence-report phrasing? |
-| Structure | Does each section answer a distinct question? Are searchable H2s and contextual H3s grouped around the task, with media beside the explanation? |
-| Repetition and emphasis | Do steps duplicate adjacent prose? Does each table column add information? Are useful details developed and minor tangents kept in proportion? |
-| Evidence fidelity | Does the draft preserve approved facts, conditions, and meaningful uncertainty? Did an unsupported guarantee, stronger claim, or missing step appear during writing? |
+| Opening | Quote the first sentence. Does it hand over the reader's goal, problem or payoff right away? If the goal only shows up later, it fails. Restating the title ("To unlock X, complete its route") fails. A direct definition is fine when the reader asked for a definition. |
+| Completeness | Can the reader do the promised task in order? List every essential prerequisite, resource and action from the brief and where the draft explains it. For a recipe guide, check that every ingredient across every prerequisite has a farming spot at the point of need. For a full unlock or how-to, trace every required stage through the reward. "Finish the questline" or a tracker reference is a central gap even if the brief approved it. |
+| Structure | Does each section answer a distinct question? Do main H2s use searchable words with the game where it's natural, and do the heading shapes vary? Is media next to the explanation it belongs to? |
+| Explanation | Does it sound like the voice guide: plain words, short clean sentences, real game nouns, a bit of personality where it fits, calm in troubleshooting? Does each paragraph handle the next obstacle? Flag manual voice, research voice, hype, filler, forced jokes, invented experience and literal nonsense ("bring access to an island"). |
+| Repetition | Compare prose, steps, tables and FAQs. Is the same action or advice said twice, even in different words? Read actual table cells: does each row fit its column, and does each column add a new fact? If something repeats on purpose, name the different need it serves. |
+| Evidence | Are approved facts, conditions and real uncertainty preserved? Did a stronger claim, a guarantee or a missing step sneak in? Compare each qualifier with the evidence, not just with the brief's suggested wording. Flag source-category labels ("community-documented") that don't help the reader. |
 
-Before assigning findings, make these short evidence checks in the local review note. They are reading aids, not additional public article tables:
+Also check every `faq_json` question on its own. Name the extra answer it adds that the body doesn't have, or mark `adds_information: false` and ask for removal or merging. Rewording a body heading as a question adds nothing. An FAQ section in `content_md` is invalid, because `faq_json` is already visible. An article with no FAQs doesn't need a replacement section.
 
-- **Promise check:** compare the public title and opening with the actual instructions, independently of the brief's approval label. For a full unlock/how-to, enumerate every mandatory stage through the reward and identify the explained action and completion condition. Mark an unexplained “finish the questline” or tracker referral as a central gap, even if the brief explicitly approved it. A title cannot promise the full procedure while a private note limits the article to prerequisites and location.
-- **Completeness trace:** list each essential prerequisite, resource, or action from the approved brief and its usable location in the draft. For a recipe guide, compare the union of ingredients across every prerequisite and final recipe with the actual farming guidance. A resource named only in a distant reward list is not explained at the point of need. For other formats, trace the promised controls, fixes, or changes and their practical explanations. Mark omissions or misplaced answers explicitly; “material sources are covered” is not evidence.
-- **Opening check:** quote the actual first sentence and identify the player's goal/problem and first obstacle. For an acquisition guide, assess whether item classification or procedural jargon delays the desired reward. If the goal appears later, do not call the opening goal-first merely because it eventually mentions the goal. A direct definition can be appropriate for a definition question; match the reader promise. Merely restating “to unlock X, complete its route” also fails to explain an obstacle or reason to care. Quote the useful context that the opening actually supplies before approving it.
-- **Structure and repetition check:** compare adjacent prose, ordered steps, and tables for the same actions. Give a concrete example of any duplication or explain briefly what distinct job each format does. Examine table cells before declaring their columns useful. Check whether troubleshooting adds a distinct diagnosis or merely repeats prerequisites, and whether adjacent requirement items name the same action twice.
-- **Uncertainty check:** compare each meaningful qualifier with the underlying evidence, not just wording the brief suggested. Preserve actual uncertainty; flag repeated source-category labels that do not help the reader. Approval of research does not require copying the researcher's proposed phrasing.
+When the brief names a useful option or condition (especially timing in a "when to use" guide), check that the draft uses it instead of generic advice.
 
-Use these observations for the five judgments. A passing dimension still needs a short specific basis, not generic praise. Do not let the draft's assertion that it covers “every ingredient” stand in for checking the rows.
+## What blocks acceptance
 
-An unexplained mandatory objective prevents acceptance before prose polishing. Return it to research and keep the how-to unapproved; a generic tracker reminder or Early Access disclaimer does not resolve it. After the procedure is supported, evaluate the actual prose rather than accepting every instruction from an approved brief.
+- An unexplained required step. Send it back to research and keep the how-to unapproved. A tracker reminder or Early Access note doesn't fix it.
+- A missing ingredient source, a contradictory instruction or a thin core explanation.
+- Copy that reads like a report, a manual or a template, even if every fact checks out.
 
-A missing ingredient source, contradictory instruction, or thin central explanation prevents acceptance. Do not invent numeric grades or treat heading/word counts, contractions, keyword checks, or successful JSON/browser tests as substitutes for judgment.
+Don't invent scores. Heading counts, word counts, contractions, keyword checks and passing JSON or browser tests are not substitutes for reading the copy.
 
 ## Draft, feedback, one revision
 
-1. The writer saves the initial `final.json` as a draft and returns it to the parent. This filename is not approval. Correct syntax while drafting, but reserve the substantive editorial revision for the combined feedback.
-2. The parent reads the brief and draft and writes a short sibling `editorial-review.md`: `Status: revision_required`, `Revision passes used: 0`, findings grouped by the five dimensions above, and the exact changes requested. Record `no issue found` briefly for dimensions that pass. Include a specific strength worth retaining so an edit does not erase useful detail. Do not copy the whole article into feedback.
-3. Send the findings together to the same writer with the approved brief, media manifest, and one or two relevant before/after examples from `editorial-examples.md`. The writer revises the actual `final.json`, preserving the reader promise, facts, slug, hosted media, and output contract. A checklist or promise to revise is not the deliverable. If the first draft has no defects, the writer performs the final reader pass and may retain copy that already works; do not demand cosmetic changes.
-4. The parent reads the revised copy, checks both the requested fixes and possible factual/structural regressions, and updates the note to `Status: approved` or `Status: needs_attention`, with `Revision passes used: 1` and concise evidence. Only approved copy proceeds to import and the existing final/browser checks. Technical QA remains required.
+1. The writer saves the first `final.json` as a draft and returns it. The filename isn't approval. Fix syntax while drafting, but save the real editorial work for the combined feedback.
+2. The parent reads the brief and draft and writes a short sibling `editorial-review.md`: `Status: revision_required`, `Revision passes used: 0`, findings grouped by the six checks, and the exact changes requested. Write `no issue found` briefly for checks that pass. Name one strength worth keeping so the edit doesn't erase it. Don't paste the whole article.
+3. Send all findings together to the same writer with the brief, media manifest and one or two relevant examples from [article examples](editorial-examples.md) or the voice guide examples. The writer revises the actual `final.json`, keeping the promise, facts, slug, hosted media and output contract. A promise to revise isn't a revision. If the draft had no defects, the writer does a final read and can keep what works. Don't ask for cosmetic changes.
+4. The parent reads the revision, checks the requested fixes and looks for new factual or structural problems. Update the note to `Status: approved` or `Status: needs_attention`, with `Revision passes used: 1` and short evidence. Only approved copy moves on to import and the final and browser checks. Technical QA is still required.
 
-For a standalone writing invocation without a parent, the writer performs these same review and revision steps itself and returns revised `final.json` plus the short review note. This replaces, rather than adds to, other generic self-edit instructions. Specialized article shapes retain their media and block contracts.
+A standalone writer with no parent runs these same steps on its own draft and returns the revised `final.json` plus the short review note. Specialized article shapes keep their media and block contracts.
 
 ## Keep recovery bounded
 
-- Reuse the approved brief and media. An editorial defect does not authorize a new research run, image search, upload, or complete workflow restart. If a detail is already in the brief, place it correctly in the article instead of browsing again.
-- Before requesting research, search the entire approved brief, including reward notes and source-backed findings outside the writing packet. Quote the relevant existing evidence in the private feedback. A drop listed in boss rewards can supply an ingredient source; moving that supported fact into farming guidance is a writing correction. Distinguish missing from the draft, misplaced in the draft, and absent from the evidence.
-- If an essential fact is genuinely missing or contradictory in the evidence, record the exact question and request a focused brief correction from the existing researcher. Do not invent the answer or weaken necessary uncertainty for a smoother voice. After correction, continue from the retained draft; it does not reset the revision counter.
-- If headings change, reconcile the existing manifest's placement headings without replacing approved images. Flag an actual mapping problem to the parent; do not silently remove useful media.
-- After one substantive revision, unresolved editorial problems require attention. Preserve all artifacts and the review note; do not mark the queue completed, start another polish loop, or switch models. The parent reports the specific remaining defect and uses the existing blocked/backoff path for a claimed queue row. On recovery, read this note and do not silently reset the counter; another editorial pass requires an explicit user instruction. Do not change scheduler retry limits or queue schemas through this skill.
-- If later technical checks expose a narrow correctable defect, repair only that defect and recheck the affected output. They do not authorize another general rewrite. Recheck factual changes with the parent before acceptance.
+- Reuse the approved brief and media. An editorial problem doesn't justify new research, image searches, uploads or a restart. If the fact is already in the brief, move it to the right place.
+- Before asking for research, search the whole brief, including reward notes and findings outside the writing packet, and quote what's there. A drop listed under boss rewards can be an ingredient source, and moving it into the farming section is a writing fix. Separate "missing from the draft," "in the wrong place" and "not in the evidence."
+- If an essential fact is truly missing or contradictory, write the exact question and ask the existing researcher for a focused correction. Don't invent the answer or soften real uncertainty for flow. After the correction, continue from the kept draft. The revision counter doesn't reset.
+- If headings change, update the manifest's placement headings without replacing approved images. Flag real mapping problems to the parent.
+- After the one revision, any remaining editorial problem needs attention. Keep every artifact and the note, don't mark the queue completed, don't start another polish loop and don't switch models. The parent reports the exact defect and uses the existing blocked/backoff path for a claimed queue row. On recovery, read the note. Another pass needs an explicit user instruction. Don't change scheduler retry limits or queue schemas from this skill.
+- If later technical checks find a narrow defect, fix only that and recheck it. That's not permission for a general rewrite. Recheck factual changes with the parent.
 
-## Explicit user-authorized quality experiments
+## Re-reviews
 
-The normal unattended workflow retains its one-revision limit. If the user explicitly asks to iterate until the quality is acceptable, that authorization permits further reviewed passes for the experiment. Retain a baseline and a short iteration history, explain the substantive defect motivating each pass, reuse approved evidence/media, and judge the actual revised copy. Keep feedback about outcomes; let the writer choose the form. Do not continue cosmetic revisions after the article fulfills its promise clearly and naturally. If repeated passes stall, report the specific persistent model limitations and source limitations separately rather than declaring success or endlessly adding rules.
+Read the earlier findings, confirm the requested fixes and look for regressions. Reuse accepted evidence unless a claim changed or a factual question is still open. Don't redo the whole research pass to review a prose edit. These checks are private review aids, never a required public article shape.
 
-## Comparing Luna results
+## Don't approve these by mistake
 
-When the user requests a writing experiment, keep the approved facts/media and article promise fixed for the first comparison. Retain the original output outside the live article path; run the draft and one revision in an isolated workspace. Compare the five dimensions above and the remaining manual edits. Then use other approved formats, such as an update explainer and another guide, before claiming the workflow is reliable across articles. Do not start extra articles or live imports merely to benchmark a skill change.
+"Sources do not list a requirement" is a research result. It doesn't prove the requirement is absent, and it isn't how a player would explain buying something. Check the positive evidence and write the supported procedure. "Listed as retained" leaves the reader asking who listed it when the evidence already shows the behavior. Keep a real caveat when evidence is weak, but don't keep report wording just because the brief used it. These are examples of judgment, not a word blacklist.
 
-If section-level drafting is explicitly chosen after repeated weak results, give the same writer the complete outline and shared facts, work through difficult sections, and use the single revision for continuity. This is an alternative drafting method, not an extra agent chain or additional revision budget.
+## When the user asks for more passes
 
-## Machine-readable review evidence
+The normal unattended workflow keeps the one-revision limit. If the user explicitly asks to keep iterating until the quality is right, that allows more reviewed passes for that experiment. Keep a baseline and a short history, explain the defect behind each pass, reuse approved evidence and media, and judge the actual revised copy. Give feedback about outcomes and let the writer choose the fix. Stop when the article answers its promise clearly and naturally. If passes stall, report model limits and source limits separately instead of declaring success or piling on rules.
 
-For code-controlled editorial review, return editorial_evidence matching the supplied schema. Assess opening, completeness, structure, explanation, repetition, and evidence exactly once, each with actual verbatim draft quotations and a specific assessment. Quote the opening itself for the opening check. For repetition, compare locations/formats, not merely whether identical sentences recur. For evidence, compare meaningful qualifiers with the brief. For completeness, trace the necessary actions and conditions through the promised result. Passing judgments require evidence too; a generic summary cannot grant approval.
+## Comparing writer models
 
-Audit every faq_json question individually: identify the useful additional answer absent from the body, or mark adds_information false and request removal/integration. Rephrasing a body heading as a question does not add information. faq_json is already visible on the page; an FAQ in content_md is invalid. An article with no FAQs needs no replacement section.
+When the user asks for a writing experiment, keep the approved facts, media and promise fixed for the first comparison. Save the original output outside the live article path and run the draft plus one revision in an isolated workspace. Compare the six checks and the manual edits still needed. Then try other formats, like an update explainer and another guide, before calling the workflow reliable. Don't start extra articles or live imports just to benchmark a skill change.
 
-On re-review, read the retained earlier findings, verify the requested corrections and check for regressions. Reuse accepted source evidence unless a changed claim or unresolved factual question requires checking it. Do not repeat the entire research pass to review a prose edit. These are private review checks, never a required public article shape.
-
-In the completeness check, compare actionable named options/conditions in the brief with the draft: flag generic substitutes that hide a useful supported answer, especially timing in a “when to use” guide. In structure/repetition checks, quote and assess actual table cells, not only headers: does each row belong to the column category, and does each column add a different fact or consequence? Repetition can be the same advice in different words across sections. Explain any deliberate repeat by the distinct reader need it serves. Do not request removal of useful depth merely to shorten the piece.
-
-### Avoid false editorial approvals
-
-“Sources do not list a requirement” reports a research result; it neither proves the requirement is absent nor explains the purchase naturally. Check the actual positive procedure evidence and write that supported procedure. “Listed as retained” leaves the reader wondering who listed it when the evidence already establishes the behavior. Keep a necessary uncertainty when evidence is weak, but do not use source-report wording merely because it appears in the brief. Also check literal sentence sense: “bring access to an island” is not a natural player action. These examples illustrate judgment, not a blacklist of words or a license to remove factual caveats.
+If section-by-section drafting is chosen after repeated weak results, give the same writer the full outline and shared facts, work through the hard sections, and use the one revision for continuity. That's a different drafting method, not an extra agent chain or more revision budget.

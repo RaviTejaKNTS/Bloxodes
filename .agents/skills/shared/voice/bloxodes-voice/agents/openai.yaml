@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Voice"
+  short_description: "House voice for all public copy"
+  default_prompt: "Use $bloxodes-voice before writing or reviewing Bloxodes page copy. Answer first, sound like a player who knows the game, keep it clean and a little fun, and skip templates, hype and research language."

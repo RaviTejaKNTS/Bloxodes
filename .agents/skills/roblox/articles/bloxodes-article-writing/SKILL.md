@@ -5,151 +5,175 @@ description: Write one Bloxodes article final.json from an approved brief.md, in
 
 # Bloxodes Article Writing
 
-## Code-controlled execution
+You're writing one article that a player will actually enjoy reading: answer first, clean sentences, real game details and a bit of personality. Research is already done. Your job is to turn an approved brief into the best page on the topic.
 
-When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. For a code-controlled writing invocation, read [the focused writing contract](references/pipeline-writing.md), the shared editorial standard, and the closest original example, then perform that contract. The interactive upload/import instructions below are not part of your stage. Specialized tech/tier skills still supply their additional page-type contracts.
+## Code-controlled runs
 
-Use this after `brief.md` is approved. Do not use this for first-pass research; use `bloxodes-article-research`.
+If you were assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides the interactive parent/subagent, upload/import and standalone self-review instructions here. For a writing stage, read [the pipeline writing contract](references/pipeline-writing.md), the voice guide, the article standard and the closest example, then do exactly that contract. Skip the upload/import parts below. Tech and tier-list skills still add their page-type rules.
 
-Use this for one article only. Do not handle batches here; use `bloxodes-article-workflow-runner`.
+## When to use this
+
+- After `brief.md` is approved. For first-pass research, use `bloxodes-article-research`.
+- For one article. Batches go through `bloxodes-article-workflow-runner`.
+- If the article's main job is ranking a full set of items, use `bloxodes-tier-list-writing`. Platform and troubleshooting pieces use `bloxodes-tech-article-writing` on top of this skill.
 
 ## Workspace
 
 ```text
 tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   brief.md
+  media.json
   final.json
   editorial-review.md  # parent-owned in the workflow; writer-owned for standalone work
 ```
 
-## Before Writing
+## Read first
 
-Read the approved `brief.md`.
+1. **The voice guide:** `.agents/skills/bloxodes-voice/SKILL.md` and the article section of `references/examples.md`. This is how we sound.
+2. **The article standard:** [references/editorial-standard.md](references/editorial-standard.md). Openings, headings, depth, evidence, dates, links and FAQs.
+3. **The closest example** in [references/editorial-examples.md](references/editorial-examples.md), plus the [Beebom study](references/beebom-style-study.md) for structure on unfamiliar formats.
+4. **The approved `brief.md`.** Use the reader-facing writing packet first, and the private evidence notes to check claims.
+5. **The sibling `media.json`.** Start writing only after the parent approves image readiness.
 
-If the brief is missing, weak, unapproved, or has unresolved central source gaps, return the exact missing requirement for brief correction. Use the reader-facing writing packet first; consult its private evidence notes for claim checks. A source being community-authored is not itself a reason to qualify every supported fact. For older approved briefs, separate facts, actionable uncertainties, and private notes while reading; do not restart research merely to reformat them.
+## Check the brief before writing
 
-Always read sibling `media.json`. Start writing only after the parent approved image readiness. Insert every verified hosted image beneath its matching `placement_heading`; do not replace it with prose, a YouTube embed, a lead-source hotlink, or an unrelated generic image. An image-free article is allowed only when every planned target is `accepted_missing` because no reliable, accurate, helpful match was found.
+- If the brief is missing, weak, unapproved or has open central gaps, return the exact missing piece for a brief correction.
+- A community source isn't a reason to hedge every supported fact.
+- For older briefs, sort facts, real uncertainties and private notes as you read. Don't restart research just to reformat.
+- For a how-to, check the brief proves every step through the final result. If it lists prerequisites and then says "follow the quest objectives," send that gap back to the parent. Earlier approval doesn't mean you have to write an incomplete walkthrough.
+- Turn private research terms ("gate," "reward interaction") into normal player language.
 
-Before accepting a how-to brief, check its procedure proof through the final result. If it gives only prerequisites and then says to follow unknown quest objectives, return that exact central gap to the parent. Prior approval does not require writing an incomplete walkthrough. Use the approved facts to explain the task in ordinary player language; do not turn private terms such as “gate” or “reward interaction” into the article's voice.
+## Writing rules
 
-## Writing Rules
+The voice guide and article standard cover tone, openings, headings, structure and depth. These are the article-specific extras.
 
-Read and apply [the shared editorial standard](references/editorial-standard.md) before drafting. It owns audience, openings, headings, structure, depth, voice, uncertainty, dates, links, and editorial review. Read [the Beebom Roblox style study](references/beebom-style-study.md) and the closest [original example](references/editorial-examples.md) when choosing the article shape. Use specific search-intent headings and connected explanations, not just a compact feature outline. Apply these alongside the operational rules below.
+### Accuracy
 
-**Preferred article media**
-- Insert every verified useful image from the mandatory image pass. A YouTube embed may supplement those images when the brief marks it as a perfect match.
-- The cover image does not count as body media. Do not bypass the image pass because a cover exists.
+- Check platform claims against the approved evidence. Don't guess menu paths, toggles, limits or behavior. If an essential label or path is uncertain, send it back for focused research instead of writing something too vague to use.
+- Roblox experiences can't be played in a web browser. The browser player was discontinued, and roblox.com only launches the installed app. Never suggest playing in the browser as a fix.
+- Don't suggest things that aren't possible, like disabling a system that can't be disabled. Don't claim a fix works on a platform you haven't verified.
+- When you're not sure something is true, leave it out.
 
-**YouTube embeds (optional)**
-- Embed a video only when the approved brief marks it as a perfect match. Skip near matches and filler videos.
-- Put an embed on its own line with `{{ youtube: https://www.youtube.com/watch?v=VIDEO_ID }}`. Do not invent IDs or leave a raw YouTube URL when an embed is intended.
-- One embed is normally enough. Place it near the step or explanation it demonstrates.
+### Game-specific articles
 
-**Embedded article checklists (optional)**
-- Use a fenced `article-checklist` YAML block only when a short actionable list materially helps inside the article. Full standalone checklist jobs still use `bloxodes-checklist-writing`.
-- Use `schema: 1`, a unique lowercase hyphenated block `id`, a short `title`, and unique lowercase hyphenated item IDs. Each item needs a direct `label`; `description` and `href` are optional.
-- Keep the embedded checklist compact. Use `sections` only when the items have meaningful groups. The renderer adds progress and local persistence.
-- Do not use raw HTML checkboxes or manually add progress copy.
+Put the game name in the title and slug. Add "Roblox" when it helps search or clarity.
 
-Use `bloxodes-tier-list-writing` instead of this skill when the article's primary job is ranking a complete item set. It owns the visual overview and matching per-tier detail-table contract.
+### How-to-fix and troubleshooting sections
 
-The image-selection, readiness, and Storage rules below describe the approved media contract. In the writing stage, reuse the completed manifest and hosted files; do not repeat source discovery, downloads, uploads, or provenance writes merely because these rules are present. Return an actual media defect to the parent/image agent. The parent owns import and rendered verification after editorial acceptance.
+- Give each fix its own `###` under one `##` like "How to fix it." That's easier to scan than one long numbered list with sub-bullets.
+- The H3 is a short action: "Restart your device," "Update your graphics drivers." Under it, say when the fix helps, give the steps and say what to check after. Use a numbered list for ordered steps. No sentence limit.
+- Keep fixes flat. No bullets inside bullets inside steps.
+- Easiest fixes first.
+- Each H3 covers one distinct fix. If two overlap, merge them. Never repeat a fix, cause or explanation.
+- One short intro before the fixes. An optional short closing section works when the problem is on Roblox's side and waiting is the answer. Skip a "what is this error" section unless it adds real value.
 
-**Source-provided article images**
-- Actively inspect the approved lead source for genuine gameplay screenshots, item or character panels, maps, menus, raid screens, and collection-style images. Use them when they explain an article fact, step, item, or table row better than prose alone.
-- Prefer genuine in-game captures over a publisher's custom illustrations or branded composites. Clean, exact gameplay screenshots from credible guide or wiki pages are usable when the approved manifest records their provenance. Flag any explicit attribution or license condition for parent review.
-- Do not use images with watermarks, large arrows, subscribe overlays, or competitor branding.
-- Do not hotlink the source page, wiki, Discord, Imgur, competitor CDN, or any other third-party host in `content_md`. Download, validate, convert to WebP, and upload the selected image to Bloxodes Supabase Storage first.
-- Normal articles usually use one to three body images. Complete visual sets may use more.
-- Write each hosted image as `![useful factual alt text](<Supabase public URL>)` beside the matching explanation. Use the exact public URL returned for the current environment, never the original source URL.
-- Keep the source article URL in `sources`. Keep per-image provenance in `article_source_images`; do not mention competitors or image collection in public copy.
-- Combine images, tables, lists, and prose when each explains a distinct useful detail. Avoid redundant presentations of the same information.
+### Gaps and links
+
+- Send essential factual gaps to the parent for targeted research. If the evidence still isn't there, ask for a narrower promise or keep a blocker. Leave out nonessential unknowns without repeated disclaimers. Don't restart research from the writing stage.
+- Use internal-link candidates from the brief. If there are none, use the GET-only production editorial inventory for same-game pages. Link where it helps. There's no quota, and never query the production database directly.
+- Link only to pages that exist, with real current slugs (`/articles/<slug>` for articles). Never invent a slug.
+- Put links on words already in the sentence. No "read this" callouts. The anchor text should say what the reader gets, and the link should help: a related mechanic, income, the next goal.
+
+### What never appears in copy
+
+- Research process, competitor comparisons, database checks and internal notes stay out. Useful developer credit and verified official links are fine.
+- A brief "this guide" for orientation is OK. Self-description that replaces actual help isn't.
+
+## Media
+
+### Article images
+
+- Insert every verified useful image from the image pass. A YouTube embed can add to those images when the brief marks it a perfect match.
+- The cover image doesn't count as body media, and having a cover doesn't let you skip the image pass.
+- An image-free article is only allowed when every planned target in `media.json` is `accepted_missing` because no reliable, accurate, helpful match exists.
+- Put each verified hosted image under its matching `placement_heading`. Don't replace it with prose, a YouTube embed, a lead-source hotlink or an unrelated generic image.
+
+### YouTube embeds (optional)
+
+- Only when the approved brief marks the video as a perfect match. Skip near matches and filler.
+- Put it on its own line: `{{ youtube: https://www.youtube.com/watch?v=VIDEO_ID }}`. Never invent IDs or leave a raw YouTube URL when you meant an embed.
+- One is usually enough. Place it next to the step or explanation it shows.
+
+### Embedded checklists (optional)
+
+- Use a fenced `article-checklist` YAML block only when a short to-do list really helps inside the article. Full checklist pages use `bloxodes-checklist-writing`.
+- Use `schema: 1`, a unique lowercase hyphenated block `id`, a short `title` and unique lowercase hyphenated item IDs. Each item needs a direct `label`. `description` and `href` are optional.
+- Keep it compact. Use `sections` only for real groups. The renderer adds progress and saving. No raw HTML checkboxes or hand-written progress copy.
+
+### The image contract
+
+The rules below describe the approved media contract. In the writing stage, reuse the finished manifest and hosted files. Don't redo source discovery, downloads, uploads or provenance writes just because these rules are here. Send real media defects back to the parent or image agent. The parent owns import and rendered checks after editorial acceptance.
+
+**Source-provided images**
+
+- Look through the approved lead source for real gameplay screenshots, item or character panels, maps, menus, raid screens and collection-style images. Use them when they explain a fact, step, item or table row better than words.
+- Prefer real in-game captures over a publisher's custom art or branded composites. Clean, exact gameplay screenshots from credible guide or wiki pages are fine when the manifest records their provenance. Flag any explicit attribution or license condition for parent review.
+- No images with watermarks, big arrows, subscribe overlays or competitor branding.
+- Never hotlink the source page, wiki, Discord, Imgur, a competitor CDN or any other third-party host in `content_md`. Download, validate, convert to WebP and upload to Bloxodes Supabase Storage first.
+- Normal articles usually have one to three body images. Complete visual sets can have more.
+- Write each image as `![useful factual alt text](<Supabase public URL>)` next to the matching explanation, using the exact public URL for the current environment.
+- Keep the source article URL in `sources` and per-image provenance in `article_source_images`. Never mention competitors or image collection in public copy.
+- Mix images, tables, lists and prose when each one explains something different. Don't show the same information twice.
 
 **Required visual sets**
-- For location guides, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, catalog entries, items, characters, enemies, rewards, abilities, evolutions, loadouts, or another visual collection, gather a useful matching image set. This is a required research and writing step, not an optional enhancement.
-- Apply the same readiness standard as the game-collection image workflow: identify the expected item set first, find one clean exact-match image per useful entry, record every missing entry, and do not call the image pass ready while important coverage is weak.
-- Use `bloxodes-article-images` for this separate pass. Its `media.json` is the mapping contract between research and writing: entry label, planned heading, approved hosted URL, alt text, source provenance, match evidence, and readiness status.
-- Start with the approved lead source. If it has no usable images or does not cover the full useful set, run a targeted image fan-out. Check official game pages, official media, the game's own wiki, reputable community wikis, and other credible source articles. Do not reject a clean exact-match gameplay screenshot only because another editorial site hosts it or the page lacks a general reuse statement.
-- Do not stop because the lead source has no images. Search each item or group by its exact in-game name plus the game name, try spelling variants, and inspect relevant source pages rather than relying only on image-search thumbnails.
-- Inspect the source's in-article images, including lazy-loaded `src`, `srcset`, and `data-src` candidates. Exclude logos, ads, author photos, related-post thumbnails, decorative banners, duplicates, and images for entries the article does not cover.
-- Match every selected image to its exact item using nearby headings, captions, alt text, table-row text, or surrounding copy. Open the full source image and visually confirm it shows that item. Cross-check ambiguous matches against an official or independent source. Do not guess from a filename, search thumbnail, color, or resemblance.
-- Reject edited thumbnails, page screenshots, group collages that hide the individual item, placeholder art, logos, fan art presented as game art, and any image that does not clearly show the named entry.
-- Put the hosted image in the matching table row or directly beneath the matching location, step, NPC, puzzle, or item heading. Give the alt text the real location, item, or state name plus the visible detail; never use generic text such as `image` or `screenshot`.
-- The normal zero-to-three preference does not apply to this useful item set. Include one clear image per distinct entry when it materially helps identification, but do not copy unrelated parts of the source gallery.
-- Add every image source page used to `sources` and keep the original image URL in `article_source_images` provenance.
-- Do not silently finish an image-free `final.json` before completing this fan-out. If useful images still cannot be found, downloaded, mapped confidently, approved for reuse, uploaded, or verified, return the searches attempted and the exact media gap for correction instead of substituting hotlinks or repo files.
 
-**Article image readiness gate**
-- Before collecting, list the exact locations, steps, NPCs, puzzle states, collectibles, or table rows that should have images. Treat that count as `expected`; do not let whatever images happen to be easy to find define the scope.
-- For walkthroughs, use one useful heading per visual target and put its verified `![specific alt](<Supabase public URL>)` in that section. For tables, add one `Image` column and put each image in the correct row. Do not create a detached gallery that makes the reader map images back to instructions.
-- Keep the target-to-image mapping in `media.json`: canonical target name, placement heading, source page, original image URL, Storage object path, public URL, match evidence, and status (`verified` or a precise missing reason).
-- Before returning `final.json`, compare expected, found, uploaded, inserted, and missing counts. Every inserted URL must belong to its row, and one image must not be reused for different entries unless the entries genuinely share the same visual.
-- Open every uploaded public URL and visually inspect it, then preview the rendered local article. Confirm each image loads beneath the correct heading or in the correct table row, its label agrees, and its alt text is accurate.
-- The image gate passes only when all useful rows are verified or every unresolved row has an explicit accepted reason. A wrong image is worse than a missing image: remove uncertain matches and report them as missing.
+- Location guides, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, catalog entries, items, characters, enemies, rewards, abilities, evolutions, loadouts and other visual collections need a matching image set. This is required, not a nice extra.
+- Use the same readiness standard as the game-collection image workflow: list the expected set first, find one clean exact-match image per useful entry, record every missing entry, and don't call it ready while important coverage is weak.
+- Run this through `bloxodes-article-images`. Its `media.json` maps research to writing: entry label, planned heading, hosted URL, alt text, provenance, match evidence and readiness status.
+- Start with the lead source. If it lacks images or doesn't cover the whole set, fan out: official game pages, official media, the game's own wiki, reputable community wikis and other credible articles. Don't reject a clean exact-match screenshot just because another editorial site hosts it or the page has no general reuse statement.
+- Don't stop because the lead source has no images. Search each item or group by exact in-game name plus the game name, try spelling variants and open the relevant pages instead of trusting image-search thumbnails.
+- Check in-article images, including lazy-loaded `src`, `srcset` and `data-src`. Skip logos, ads, author photos, related-post thumbnails, decorative banners, duplicates and entries the article doesn't cover.
+- Match every image to its exact item using nearby headings, captions, alt text, table rows or surrounding copy. Open the full image and confirm it shows that item. Cross-check unclear matches against an official or independent source. Never guess from a filename, thumbnail, color or resemblance.
+- Reject edited thumbnails, page screenshots, group collages that hide the item, placeholder art, logos, fan art posing as game art and anything that doesn't clearly show the named entry.
+- Put each hosted image in its matching table row or right under its location, step, NPC, puzzle or item heading. Alt text names the real thing plus what's visible. Never "image" or "screenshot."
+- The usual one-to-three range doesn't apply to these sets. Include one clear image per entry when it helps identification, but don't copy unrelated parts of a source gallery.
+- Add every image source page to `sources` and keep the original image URL in `article_source_images`.
+- Don't quietly finish an image-free `final.json` before doing this fan-out. If images still can't be found, downloaded, matched, cleared, uploaded or verified, return the searches you tried and the exact gap instead of hotlinks or repo files.
 
-**Supabase Storage workflow for article images**
-- Never save article images under `apps/web/public`, another tracked repository path, or a permanent local asset folder. The repository must not gain image files from article writing.
-- Use a temporary file outside the repository only for download and WebP conversion. Remove it after the upload and readback checks pass.
-- Upload to the environment selected by the existing Supabase env configuration and `SUPABASE_MEDIA_BUCKET`. Use the stable object path `articles/<article-slug>/sources/<descriptive-name>-<source-hash>.webp`; use `upsert` only when intentionally replacing that exact object.
-- Treat managed dev and production as separate Storage targets. During homelab verification, upload to managed-dev Supabase Storage and use its public URL in the draft row. During an explicitly approved production publish, upload the same approved bytes and object path to production Storage, then use the production public URL normalized through `SUPABASE_MEDIA_PUBLIC_URL` (`https://media.bloxodes.com` in production).
-- Never put a localhost URL in production, point a production article at the retired managed Supabase project, or assume a local Storage upload was promoted automatically.
-- After the article row exists, upsert one `article_source_images` row per used image with `article_id`, source page URL and host, original image URL, object path, public URL, useful alt/context, and available dimensions. Do this in managed-dev Supabase for homelab verification and again in production during the approved production publish.
-- Verify the Storage object is readable and the `article_source_images` row matches it in each target environment. Only then place that environment's public URL in `content_md`. If upload, provenance write, or readback fails, omit the image rather than hotlinking or creating a repo fallback.
-- Keep `cover_image` null unless a cover already exists in Supabase Storage. Let the import flow generate and upload the edited cover from the game's thumbnail when it is null. Never insert the cover URL into `content_md`; the feature image is stored in `cover_image` only.
+**Image readiness gate**
 
-**How-to-fix and troubleshooting articles**
-- Give each fix its own `###` (H3) heading, grouped under one `##` (H2) like "How to fix it". This beats a long numbered list with nested sub-bullets, which gets hard to scan.
-- The H3 is a short action ("Restart your device", "Update your graphics drivers"). Under it, explain when the fix helps, give the procedure, and say what result to check. Use a numbered list when the fix has ordered steps; do not impose a sentence-count ceiling.
-- Do not stack deep bullet hierarchies (bullets inside bullets inside steps). Keep each fix flat and simple.
-- Order fixes easiest-first.
-- Never repeat the same fix, cause, or explanation across sections. Each H3 covers one distinct thing. If two fixes overlap, merge them.
-- Keep one short intro before the fixes, and an optional short closing section (e.g. when the problem is on Roblox's side and waiting is the answer). Do not pad with a separate "what is this error" section unless it adds real value.
+- Before collecting, list the exact locations, steps, NPCs, puzzle states, collectibles or table rows that need images. That's `expected`. Don't let the easy finds define the scope.
+- Walkthroughs get one useful heading per visual target with its image in that section. Tables get one `Image` column with each image in the right row. No detached galleries.
+- Keep the target-to-image map in `media.json`: target name, placement heading, source page, original image URL, Storage object path, public URL, match evidence and status (`verified` or a precise missing reason).
+- Before returning `final.json`, compare expected, found, uploaded, inserted and missing counts. Every URL must belong to its row, and one image can't stand in for different entries unless they really look the same.
+- Open every uploaded public URL and look at it, then preview the rendered local article. Confirm each image loads under the right heading or in the right row, with matching label and accurate alt text.
+- The gate passes only when every useful row is verified or every missing row has an accepted reason. A wrong image is worse than a missing one, so drop uncertain matches and report them as missing.
 
-**Accuracy (never ship wrong info)**
-- Check platform claims against the approved evidence before writing; do not guess menu paths, toggles, limits, or behavior. Return an essential uncertain label or path for focused research correction; do not replace a necessary instruction with unusably generic wording.
-- Roblox experiences cannot be played in a web browser. The in-browser player was discontinued; roblox.com only launches the installed app. Never tell readers to "play in the browser" or "try the browser instead of the app" as a fix.
-- Do not suggest actions that are not actually possible (e.g. disabling a system that cannot be disabled). Do not claim a fix works for a platform you have not verified it on.
-- When unsure whether something is true, leave it out rather than risk misinformation.
+**Supabase Storage for article images**
 
-**Game-specific pages**
-- Include the game name in the title and slug. Use "Roblox" when it aids search or clarity.
+- Never save article images under `apps/web/public`, any tracked repo path or a permanent local folder. Article writing must not add image files to the repo.
+- Use a temp file outside the repo only for download and WebP conversion. Delete it after upload and readback pass.
+- Upload to the environment selected by the existing Supabase env config and `SUPABASE_MEDIA_BUCKET`. Object path: `articles/<article-slug>/sources/<descriptive-name>-<source-hash>.webp`. Use `upsert` only to deliberately replace that exact object.
+- Managed dev and production are separate Storage targets. For homelab verification, upload to managed-dev Storage and use its public URL in the draft row. For an explicitly approved production publish, upload the same approved bytes and path to production Storage and use the production public URL normalized through `SUPABASE_MEDIA_PUBLIC_URL` (`https://media.bloxodes.com` in production).
+- Never put a localhost URL in production, point a production article at the retired managed Supabase project, or assume a local upload was promoted.
+- Once the article row exists, upsert one `article_source_images` row per image: `article_id`, source page URL and host, original image URL, object path, public URL, useful alt/context and available dimensions. Do this in managed dev for homelab verification and again in production during the approved publish.
+- Confirm the Storage object is readable and its `article_source_images` row matches in each target environment before putting that environment's URL in `content_md`. If upload, provenance or readback fails, leave the image out. No hotlinks, no repo fallback.
+- Keep `cover_image` null unless a cover already lives in Supabase Storage. The import flow makes and uploads the cover from the game's thumbnail when it's null. Never put the cover URL in `content_md`.
 
-**Gaps and links**
-- Return essential factual gaps to the parent for targeted research correction. If evidence remains unavailable, request a narrower promise or retain a blocker; omit nonessential unknowns without repeated disclaimers. Do not independently restart research from the writing stage.
-- Use relevant internal-link candidates from the brief. If none were supplied, use the GET-only production editorial inventory for same-game pages. Link where it helps; there is no quota and no direct production database query.
-- Link only to pages that actually exist. Use real, current slugs (article links are `/articles/<slug>`). Never invent a slug or link to a page you have not confirmed exists.
-- Weave each internal link naturally, mid-sentence, as part of the flow. No "read this" or similar call-outs. Pick anchor text that matches what the reader gets, and place links where they genuinely help (related mechanic, income, next goal), not as filler.
+## Draft and one editorial revision
 
-**What never appears in copy**
-- Keep research processes, competitor comparisons, database checks, and internal notes out of public copy. Useful developer attribution and verified official links are allowed.
-- Brief article/guide orientation is allowed when useful; avoid self-description that replaces player help.
+Follow [the editorial review procedure](references/editorial-review.md). In a parent workflow, return the draft for combined feedback, then revise the actual `final.json` once in the same agent. For standalone work, do the review and revision yourself. Keep the configured model. Save the short review note next to the final, outside the public JSON.
 
-## Draft and One Editorial Revision
+Before drafting, read the one or two examples picked in the handoff. They show moves, not wording or facts. Keep a quick mental map of the player's goal, prerequisites, next obstacles and result, then choose prose, steps and tables to explain it without repeating it in every format.
 
-Follow [the editorial review procedure](references/editorial-review.md). In a parent workflow, first return the draft for combined feedback, then revise the actual `final.json` once in the same writing agent. For standalone writing, perform the review and revision yourself. Keep the configured model; Luna does not need a separate editor model. Save the short review note beside the final, outside public JSON.
+During revision, reuse approved facts and images. Send real evidence gaps to the parent instead of browsing again to fix phrasing. Keep useful approved media, and line up placement headings with the parent if the structure changes.
 
-Before drafting, read the one or two [before/after examples](references/editorial-examples.md#turning-research-into-an-explanation) selected in the handoff. They demonstrate transformations, not required wording or gameplay facts. Keep a brief mental map of the player's goal, prerequisites, next obstacles, and result. Choose prose, steps, and tables to explain that map without repeating it in every format.
+## Fields
 
-Reuse approved facts and images during revision. Return genuine evidence gaps to the parent; do not browse again to fix phrasing. Preserve useful approved media, and reconcile placement headings with the parent if the structure changes.
+Write `final.json` and the review note only in the content workspace. Approved Supabase Storage uploads and `article_source_images` writes are allowed. Repo image assets aren't.
 
-## Writing and Field Jobs
+- `title`: the reader's exact question, action, story or guide promise in search language. Game name included for game articles.
+- `slug`: short and stable for the topic. Game name included for game articles. Never use `roblox_universes.slug`.
+- `meta_description`: the answer or outcome plus a reason to click, in one or two plain sentences.
+- `content_md`: answers the title fully. Headings only for real sections. Every approved `media.json` image under its matching heading or row. No body images only when every planned entry is `accepted_missing`.
+- `faq_json`: optional, no quota. It renders a visible FAQ and structured data, so it's the only home for FAQs. Never add an FAQ section to `content_md`. Keep a question only if its supported answer adds something the body doesn't have. Otherwise `[]`.
+- `cover_image`: an existing Bloxodes Storage URL if a cover is already hosted, otherwise `null`.
+- `author_id`: set when known, or let the import path assign it.
+- `universe_id`: required whenever the article is about one Roblox game that has a `roblox_universes` row. Look it up by name or slug, or reuse the ID from other articles on the same game. Null only when no row exists.
+- `tags`: specific reusable labels, no keyword stuffing.
+- `sources`: URLs that support the important facts. No weak repeats.
 
-Write `final.json` and the editorial review note only in the content workspace. The parent owns the note in a parent workflow. Approved Supabase Storage uploads and `article_source_images` provenance writes are allowed, but do not create repository image assets.
-
-- `title`: State the exact reader question, action, story, or guide promise in human search language. Include the game name for game-specific articles.
-- `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
-- `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
-- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. Insert every approved `media.json` image under its matching heading or table row. Use no body images only when all planned entries are explicitly `accepted_missing`.
-- `faq_json`: Optional, with no question quota. This field renders a visible FAQ section as well as structured data: it is the sole home for FAQs. Never also put an FAQ section or the same questions in `content_md`. Keep a question only if its source-backed answer adds useful information not already answered in the body; otherwise use `[]`. Search wording alone does not make a repeated answer useful.
-- `cover_image`: Use an existing Bloxodes Supabase Storage public URL when a cover is already hosted; otherwise use null so the import path can generate and upload one.
-- `author_id`: Set when known, or let the import path assign it if that is the project flow.
-- `universe_id`: Set whenever the article belongs to one Roblox game and that game has a `roblox_universes` row. Look it up (by name/slug, or reuse the id other same-game articles use) instead of leaving it null. Only leave it null if no universe row exists for the game.
-- `tags`: Use specific reusable labels, not loose keyword stuffing.
-- `sources`: Keep the URLs that support important facts. Do not pad with weak repeats.
-
-Parse-check JSON before returning.
-
-## Output Shape
+No `seo_title`. The articles table doesn't use it.
 
 ```json
 {
@@ -167,10 +191,4 @@ Parse-check JSON before returning.
 }
 ```
 
-Do not include `seo_title`; the articles table does not use it.
-
-For game-linked articles, use the article topic and game name for the slug. Do not use `roblox_universes.slug`.
-
-If the article topic is about some specific roblox game, then you must include universe id.
-
-Parse-check JSON on each handoff. Identify the first return as a draft awaiting editorial review; after the one revision, return the revised file and concrete changes for parent acceptance. Do not claim editorial approval or managed-development completion merely because the file parses.
+Parse-check the JSON at every handoff. Mark the first return as a draft awaiting review. After the one revision, return the revised file and the concrete changes for parent acceptance. A file that parses isn't editorial approval or managed-development completion.
