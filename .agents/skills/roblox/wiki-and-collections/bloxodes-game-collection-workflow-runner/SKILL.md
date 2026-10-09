@@ -164,6 +164,7 @@ Before you approve any `final.json`, and before you call a collection done:
 
 - **Answer first.** `intro_md` opens on the item system and the choice that matters, not on what the page is.
 - **Player voice.** Simple and easy for everyone to read, like a player explaining the system to a friend.
+- **Complete, not just clean.** The body uses the dataset's real numbers to say what to pick early, mid and late, the best-value options, how the system unlocks and the common mistakes, at least as well as the top-ranking guides. A few short "check the cost" sections is a fail.
 - **No templates or research voice.** No stock openings, no "reportedly" or "sources say." No public copy mentions research, datasets, workflow or page usage.
 - **No repeats.** Paragraphs add context beyond the cards, and each fact has one home across intro, description, section notes and FAQs.
 - **Headings** say what's under them in words a player would search, without one repeated pattern.

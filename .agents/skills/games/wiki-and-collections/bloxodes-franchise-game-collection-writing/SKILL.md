@@ -69,6 +69,8 @@ Write one short paragraph that starts with the in-game system. Explain why the e
 
 Answer the remaining player questions with the fewest useful headings:
 
+- Be complete: use the dataset's real numbers to cover the best early, mid and late choices, best-value options, unlocks and common mistakes, at least as well as the top-ranking guides. Give answers, not "check the X" chores.
+
 - Explain unlocks, progression, tradeoffs, route choices, platform differences, edition limits, and common mistakes when relevant.
 - Use short paragraphs, bullets for steps or comparisons, and a small table only when it clarifies several shared options.
 - Do not repeat the intro, card descriptions, how_it_works_md, section notes, or FAQ answers.

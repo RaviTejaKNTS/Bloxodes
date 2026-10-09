@@ -22,7 +22,7 @@ Most game names, NPCs and numbers in this guide and its examples are made up. Tr
 ## What we want
 
 - **Answer first.** The first two sentences should tell the reader something they came for. Background can wait.
-- **Plain words, short sentences.** A 12-year-old and a 30-year-old should both get it on the first read. If a game term needs explaining, explain it right there in a few words.
+- **Plain words, short sentences, full pages.** A 12-year-old and a 30-year-old should both get it on the first read. If a game term needs explaining, explain it right there in a few words. Short sentences never mean a short page (see "Short sentences, full pages").
 - **Talk to "you."** Use contractions. Write the way you'd say it in voice chat, minus the "um."
 - **Real game nouns.** The NPC's name, the button, the price, the island, the drop rate. Specific beats clever every time.
 - **A bit of spark.** One good line in a section beats a joke in every sentence. The fun comes from a sharp, true observation about the game ("Range is a weird first buy: you get to stand farther from a stack you're still feeding one block at a time"), not from exclamation marks or big adjectives.
@@ -119,6 +119,24 @@ Quick habits:
 - Cut words that add nothing: "in order to" becomes "to," "is able to" becomes "can," "at this point in time" becomes "now."
 - Read it out loud in your head. If you'd run out of breath or sound like a terms-of-service page, rewrite it.
 
+## Short sentences, full pages
+
+Keep sentences short. Keep pages complete. Those two rules never fight. A clean, friendly page that leaves out half the useful facts is a worse page, not a tighter one.
+
+- **Use what the brief gives you.** Every supported fact that helps the reader (stats, prices, unlock steps, what an item does, how it compares, what to do next) belongs on the page. Don't drop facts to keep it short.
+- **Say why it matters.** "How to get X" always includes what X does and why it's worth the trip. A walkthrough that never says why you'd want the reward is unfinished.
+- **Answer the next question.** After each section, ask what the reader wants to know next (what it costs, what it unlocks, what goes wrong, what to do after) and answer it.
+- **Match the best page out there.** If the top-ranking guides cover stats, a comparison table, common mistakes or the next step, ours should too, written better.
+- **Cut filler, never facts.** Remove throat-clearing, repeats and padding. Keep every useful detail.
+
+> **Too thin:** The Storm Rod is free from Old Bram in the Ash Caves. Sail to Ember Isles, follow the path into the caves, then talk to him.
+>
+> **Full:** The Storm Rod is the best free upgrade you'll find early. It doubles rare bites in rain, and it costs nothing but a boat trip. (Then: how to reach Ember Isles, the route into the Ash Caves with landmarks, what Old Bram asks for, what the rod is good for, and which rod to aim for next.)
+
+Tips follow the same rule: a specific move plus the reason. "Pick a direction for your country" is a chore list. "Hatch a common sell-price pet before your first rare egg, because early gardens are too small for growth boosts to matter" is a tip.
+
+Watch for one more flat habit: a string of "Check the X before you Y" instructions. Say the actual answer instead ("The Iron Rod is the cheapest rod that survives storm fish") so the reader doesn't have to go check anything.
+
 ## Turning the energy up and down
 
 Personality lives in some places and stays out of others.
@@ -181,6 +199,7 @@ Read the whole thing as a player who just searched the title. Then check:
 6. Is every caveat useful, said once and in plain words?
 7. Any em dashes, hype words, filler words or self-references?
 8. Does it end on something useful (the next step, the choice, the payoff) and not a recap?
+9. Is it complete? Did I use every useful fact in the brief, say why the reader should care, and cover what the best competing page covers?
 
 ## Page-type examples
 

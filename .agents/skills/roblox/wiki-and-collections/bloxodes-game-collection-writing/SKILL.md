@@ -93,7 +93,9 @@ Optional section notes that sit above each card group. Use one only when it adds
 
 The main body. It covers what a player needs to use or finish this collection: strategy, progression, the key choices and trade-offs, common mistakes and any rules the cards don't make obvious. Cover what's genuinely useful for this collection, then stop. The goal is a page that feels complete, not one that fills a template.
 
-- Let the content decide the structure. Use as few sections as the brief's player questions need. Don't force a section count or reuse the same shape on every page.
+- Let the content decide the structure. Use as few sections as the brief's player questions need, but answer all of them. Don't force a section count or reuse the same shape on every page.
+- Be complete. Cover what a player needs to choose well: best early, mid and late picks with the real numbers behind them, the best-value options, how the system unlocks or progresses, and the common mistakes. Match what the top-ranking guides for this collection cover. Three thin sections of "check the cost before you buy" is not a finished body.
+- Give answers, not chores. Instead of "check the route before you save up," say which items need Research, a case or an event, and what the cheapest good option is.
 - Short paragraphs of about 2 or 3 sentences. Break up anything that turns into a wall.
 - Bullets for steps, tips, quick comparisons and short lists.
 - A Markdown table when you're comparing a few options on the same dimensions (like which item to pick for which situation). Only when it reads cleaner than prose.

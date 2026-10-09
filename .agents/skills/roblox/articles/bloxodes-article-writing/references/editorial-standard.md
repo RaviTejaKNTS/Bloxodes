@@ -33,9 +33,13 @@ Everything in the article serves those answers. Write for a US audience in Ameri
 
 ## Depth
 
-- There's no word target and no brevity target. Match depth to the promise and the evidence. A big update deserves several full sections. A simple answer can be short.
+- There's no word target and no brevity target. Match depth to the promise and the evidence. A big update deserves several full sections. Short sentences never mean a short article: see "Short sentences, full pages" in the voice guide.
+- Aim to be the most complete page for the query. Look at what the top-ranking guides cover (stats, comparisons, prerequisites, common mistakes, what to do next) and cover at least that much, written better.
+- Use every supported, useful fact in the brief. Leaving out stats, costs or effects the brief has is a defect, not tightening.
+- Only a question with a genuinely one-line answer gets a very short article. A how-to, an item or unlock guide, an update explainer or a strategy guide never does.
 - Develop each subject until it answers the next obvious question: how does it work, where do I go, what do I press, what happens if I hold it, what do I get, what can go wrong.
 - Name the real NPCs, landmarks, controls, costs, rewards and exceptions the brief supports. "Adds stronger attacks and better movement" isn't enough when the brief says exactly what changes.
+- An item or unlock guide ("How to get X") covers: what X does and why it's worth getting (with its supported stats or effects), anything you need first, the route with landmarks, each step, what X is good for once you have it, and what to aim for next. Add common problems when the evidence has them.
 - A how-to explains every required stage through the final result. "Follow the current objectives" or "complete the questline" never replaces the actual tasks. If the brief doesn't have them, send it back to research.
 - Cut filler, not explanation.
 

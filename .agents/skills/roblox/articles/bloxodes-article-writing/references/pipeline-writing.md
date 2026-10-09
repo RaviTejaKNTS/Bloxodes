@@ -14,6 +14,7 @@ The examples teach moves, not wording or a required outline.
 ## Write it
 
 - Build the article around the reader's goal. Answer first, then explain what matters and why, in friendly, connected American English that sounds like a player who knows the game.
+- Write a complete article. Use every useful supported fact in the brief, say why the reader should care, answer the next question after each section and cover what the best competing guides cover. Short sentences, full pages: never trim facts to make it shorter.
 - Give each substantial answer one home. Use the named events, tools and conditions from the brief instead of generic advice.
 - Tables compare, steps guide, prose explains. Every table row must fit its column and every cell must add a fact or consequence. If there's little to compare, write a paragraph instead.
 - Put a needed caveat once, next to the advice it affects, in plain words. Source disagreements, verification methods and source-type labels stay in the brief unless a real uncertainty changes what the reader should do. Never swap a needed caveat for false certainty.

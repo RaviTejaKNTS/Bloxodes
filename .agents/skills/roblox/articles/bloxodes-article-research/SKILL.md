@@ -90,7 +90,11 @@ A gameplay how-to normally needs at least two independent sources for exact mech
 3. The one-source facts are marked as a risk, not overstated.
 4. You didn't add unsupported claims to make the article feel fuller.
 
-When sources disagree, list the disagreement and recommend the safer fact set. When sources are thin, keep these apart:
+When sources disagree, list the disagreement and recommend the safer fact set. Drop only the value that conflicts and keep the facts that agree. If two guides disagree on a rod's weight limit but agree on its Luck, the Luck stays in the brief.
+
+**Keep the payoff and the depth.** The writer can only be as complete as the brief. Always collect what the topic's reward or subject actually does (stats, effects, costs, comparisons), why a player would want it, what comes next, and the common problems. Match what the top-ranking guides cover. Never narrow a guide to "just the route" by removing the facts that explain why the reader should care. That makes a thin page, not a safer one.
+
+When sources are thin, keep these apart:
 
 - `Sources found`: everything the fan-out turned up.
 - `Sources used for exact facts`: sources strong enough to back requirements, steps, drops, locations or numbers.
@@ -297,11 +301,14 @@ If the research is weak, say what's missing. Don't pretend the article is ready.
 - Separates facts to use from facts to avoid.
 - Defines a nonzero expected visual set before discovery. Media is never optional.
 - Hands the writer plain player-language facts and a clear angle.
+- Is deep enough for a complete article: what the subject does and why it matters, supported stats or effects, what comes next, and at least the coverage of the best competing guides.
 - Makes gaps obvious so the parent can approve, refine or block the article.
 
 ## Re-reviews
 
-A first research review checks the decisive source evidence and the full reader promise. A re-review starts from the earlier findings:
+A first research review checks the decisive source evidence and the full reader promise. It also checks depth: a brief that skips what the subject does or why it matters needs more research, not approval. Reviewers ask to remove only facts that are wrong or conflicting, never supported facts that make the article more useful.
+
+A re-review starts from the earlier findings:
 
 - Check the requested correction and look for regressions.
 - Reuse facts already accepted unless a changed claim, a contradiction or a freshness issue makes them uncertain.

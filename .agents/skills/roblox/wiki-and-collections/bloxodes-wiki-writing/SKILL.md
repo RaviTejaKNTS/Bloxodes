@@ -37,7 +37,8 @@ Use this after `bloxodes-wiki-research` and parent approval.
 
 ## Rules
 
-- `tips_md` has 3 or 4 useful gameplay tips.
+- `tips_md` has 3 or 4 useful gameplay tips. Each one names something real (a building, item, price, place or unlock) and gives the reason. If the brief doesn't have enough specifics for that, send it back for research instead of writing vague tips.
+- `description_md` stays short, but it's never vague. Name the game's actual systems, currencies and goals so a new player knows exactly what they'll be doing. Short sentences, full content: see "Short sentences, full pages" in the voice guide.
 - Fill `controls_json` only with verified controls. If you can't verify them, use `[]` and make sure the gap is listed in `brief.md`.
 - Never infer controls from Roblox supported-device flags. A device goes in `controls_json` only when you have its actual control.
 - Don't rewrite catalog blurbs in a wiki task. Catalog copy belongs to the catalog skills.

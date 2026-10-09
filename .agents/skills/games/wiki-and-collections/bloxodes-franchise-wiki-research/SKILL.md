@@ -69,6 +69,7 @@ The writer builds the hub from your brief, so hand them material that already so
 - **The reader's real question.** A new player wants to know what you actually do and what to do first. A returning player wants what changed. Say which one this hub serves.
 - **Hooks worth using.** Note one or two sharp, true things the opening could lead with, like a system that surprises people or a mistake almost everyone makes early.
 - **Tips that are real tips.** Each one should be specific enough to change what a player does.
+- **Go past the official page.** Use reputable guide sources for concrete names, prices and unlocks. Leave a fact out only when it's wrong, conflicting or unsupported.
 - **Private notes stay private.** Source names, disagreements and confidence go in "Evidence checked", "Facts to avoid" and "Open gaps or risks". The writer uses them to check claims, never to narrate them.
 - **Say uncertainty once, plainly.** If something matters but is shaky, give the best answer and one short reason it might be off. If it doesn't matter, list it under "Facts to avoid".
 

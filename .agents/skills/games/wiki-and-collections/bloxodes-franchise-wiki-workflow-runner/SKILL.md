@@ -93,6 +93,7 @@ Voice, checked against `bloxodes-voice`:
 
 - **Answer first.** `description_md` opens on what the player actually does and how the game moves forward, not on popularity or a "welcome" line.
 - **Player voice.** Real game nouns, short sentences, the occasional sharp line. No manual or report tone.
+- **Complete, not just clean.** Tips name real buildings, items, prices or unlocks with a reason, and the description names the actual systems. If the brief lacks those specifics, send it back for research. Short and vague is a fail.
 - **No templates or research voice.** No "In this guide", "X is a popular game where", "according to sources", "reportedly" or hype words.
 - **Useful tips.** Each tip changes what a player does. No "make sure to have fun" filler.
 - **No repeats** between the description, tips and any FAQs.

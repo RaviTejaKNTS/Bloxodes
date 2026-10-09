@@ -19,7 +19,7 @@ These match the `editorial_evidence` schema (`opening`, `completeness`, `structu
 | Check | The question |
 | --- | --- |
 | Opening | Quote the first sentence. Does it hand over the reader's goal, problem or payoff right away? If the goal only shows up later, it fails. Restating the title ("To unlock X, complete its route") fails. A direct definition is fine when the reader asked for a definition. |
-| Completeness | Can the reader do the promised task in order? List every essential prerequisite, resource and action from the brief and where the draft explains it. For a recipe guide, check that every ingredient across every prerequisite has a farming spot at the point of need. For a full unlock or how-to, trace every required stage through the reward. "Finish the questline" or a tracker reference is a central gap even if the brief approved it. |
+| Completeness | Can the reader do the promised task in order? List every essential prerequisite, resource and action from the brief and where the draft explains it. For a recipe guide, check that every ingredient across every prerequisite has a farming spot at the point of need. For a full unlock or how-to, trace every required stage through the reward. "Finish the questline" or a tracker reference is a central gap even if the brief approved it. Also check depth: does the draft use every useful supported fact in the brief (stats, costs, effects, comparisons), say why the reader should care, cover what to do next, and match what the best competing pages cover? An item guide that never says what the item does fails. |
 | Structure | Does each section answer a distinct question? Do main H2s use searchable words with the game where it's natural, and do the heading shapes vary? Is media next to the explanation it belongs to? |
 | Explanation | Does it sound like the voice guide: plain words, short clean sentences, real game nouns, a bit of personality where it fits, calm in troubleshooting? Does each paragraph handle the next obstacle? Flag manual voice, research voice, hype, filler, forced jokes, invented experience and literal nonsense ("bring access to an island"). |
 | Repetition | Compare prose, steps, tables and FAQs. Is the same action or advice said twice, even in different words? Read actual table cells: does each row fit its column, and does each column add a new fact? If something repeats on purpose, name the different need it serves. |
@@ -34,6 +34,7 @@ When the brief names a useful option or condition (especially timing in a "when 
 - An unexplained required step. Send it back to research and keep the how-to unapproved. A tracker reminder or Early Access note doesn't fix it.
 - A missing ingredient source, a contradictory instruction or a thin core explanation.
 - Copy that reads like a report, a manual or a template, even if every fact checks out.
+- A thin article: supported useful facts from the brief left out, no reason to care about the reward, or clearly less coverage than the pages it competes with. Short and clean is not the same as done.
 
 Don't invent scores. Heading counts, word counts, contractions, keyword checks and passing JSON or browser tests are not substitutes for reading the copy.
 

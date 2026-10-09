@@ -68,4 +68,5 @@ Copy, checked against `.agents/skills/bloxodes-voice/SKILL.md`:
 - **No templates or research voice.** No stock openings, no "reportedly" or "sources say," no mention of workflow, sources, databases or page usage.
 - **No repeats.** Each fact has one home across description, tips and FAQs.
 - **Tips are concrete and useful,** like "Buy the Iron Rod before any boat upgrade," not "Upgrading is important."
+- **Complete, not just clean.** Tips name real buildings, items, prices or unlocks with a reason, and the description names the actual systems. If the brief lacks those specifics, send it back for research. Short and vague is a fail.
 - **Headings** say what's under them in words a player would search.
