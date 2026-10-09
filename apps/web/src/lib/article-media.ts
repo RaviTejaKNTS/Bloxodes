@@ -189,7 +189,7 @@ export function isLocalArticleImagePath(src: string, slug?: string): boolean {
   return safePath.startsWith(articlePublicDir(slug));
 }
 
-export function isAllowedRemoteArticleImageUrl(src: string): boolean {
+export function isAllowedRemoteArticleImageUrl(src: string, env: NodeJS.ProcessEnv = process.env): boolean {
   try {
     const url = new URL(src);
     if (url.protocol !== "https:" && url.protocol !== "http:") return false;
@@ -202,9 +202,9 @@ export function isAllowedRemoteArticleImageUrl(src: string): boolean {
 
     if (!url.pathname.includes("/storage/v1/object/public/")) return false;
     const configuredOrigins = [
-      process.env.SUPABASE_MEDIA_PUBLIC_URL,
-      process.env.SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      env.SUPABASE_MEDIA_PUBLIC_URL,
+      env.SUPABASE_URL,
+      env.NEXT_PUBLIC_SUPABASE_URL,
     ]
       .map((value) => value?.trim())
       .filter((value): value is string => Boolean(value))
@@ -241,7 +241,8 @@ export function isBlockedHotlinkImageUrl(src: string): boolean {
  */
 export function classifyArticleImageSrc(
   src: string,
-  slug: string
+  slug: string,
+  env: NodeJS.ProcessEnv = process.env,
 ): { ok: true; kind: "local" | "bloxodes-remote" } | { ok: false; reason: string } {
   const value = src.trim();
   if (!value) return { ok: false, reason: "empty image src" };
@@ -264,7 +265,7 @@ export function classifyArticleImageSrc(
     return { ok: true, kind: "local" };
   }
 
-  if (isAllowedRemoteArticleImageUrl(value)) {
+  if (isAllowedRemoteArticleImageUrl(value, env)) {
     return { ok: true, kind: "bloxodes-remote" };
   }
 

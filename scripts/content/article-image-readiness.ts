@@ -163,8 +163,9 @@ export async function readArticleImageManifest(filePath: string): Promise<Articl
 export function checkArticleImageReadiness(params: {
   manifest: ArticleImageManifest;
   finalJson: ArticleFinalForImages;
+  env?: NodeJS.ProcessEnv;
 }): ArticleImageReadinessResult {
-  const { manifest, finalJson } = params;
+  const { manifest, finalJson, env } = params;
   const errors: string[] = [];
   const images = findMarkdownImages(finalJson.content_md);
   const ids = new Set<string>();
@@ -240,12 +241,12 @@ export function checkArticleImageReadiness(params: {
     const isCanonicalLocalAsset =
       manifest.visual_type === "items" &&
       publicUrl.startsWith("/") &&
-      classifyArticleImageSrc(publicUrl, manifest.article_slug).ok;
+      classifyArticleImageSrc(publicUrl, manifest.article_slug, env).ok;
     if (!publicUrl || (!isHttpUrl(publicUrl) && !isCanonicalLocalAsset)) {
       errors.push(`${label}: verified visual has no hosted public_url`);
     } else if (isHttpUrl(publicUrl)) {
       uploaded += 1;
-      const classified = classifyArticleImageSrc(publicUrl, manifest.article_slug);
+      const classified = classifyArticleImageSrc(publicUrl, manifest.article_slug, env);
       if (!classified.ok) errors.push(`${label}: public_url is not Bloxodes-hosted (${classified.reason})`);
       if (publicUrls.has(publicUrl)) errors.push(`${label}: public_url is reused by another visual`);
       publicUrls.add(publicUrl);

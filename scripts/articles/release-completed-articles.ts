@@ -441,7 +441,11 @@ export async function resolveReleaseArtifactPath(filePath: string, queueId: stri
   return actual;
 }
 
-export async function readReleaseArtifact(row: QueueRow, artifactRoot = process.env.BLOXODES_ARTIFACT_ROOT || process.cwd()): Promise<ReleaseArtifact> {
+export async function readReleaseArtifact(
+  row: QueueRow,
+  artifactRoot = process.env.BLOXODES_ARTIFACT_ROOT || process.cwd(),
+  imageEnv: NodeJS.ProcessEnv = process.env,
+): Promise<ReleaseArtifact> {
   if (!row.result_path || path.isAbsolute(row.result_path) || path.basename(row.result_path) !== "final.json") {
     throw new Error(`Queue row ${row.id} has an unsafe result_path.`);
   }
@@ -458,7 +462,7 @@ export async function readReleaseArtifact(row: QueueRow, artifactRoot = process.
     throw new Error(`Queue row ${row.id} result_slug does not match final.json.`);
   }
   const manifest = await readArticleImageManifest(mediaPath);
-  const readiness = checkArticleImageReadiness({ manifest, finalJson });
+  const readiness = checkArticleImageReadiness({ manifest, finalJson, env: imageEnv });
   assertArticleImageReadiness(readiness, mediaPath);
   return { row, finalPath, mediaPath, finalJson, manifest };
 }
@@ -629,7 +633,7 @@ async function promoteAndImport(
     ["--manifest", artifact.mediaPath, "--file", artifact.finalPath, "--apply", "--allow-prod"],
     productionEnv,
   );
-  const promoted = await readReleaseArtifact(artifact.row);
+  const promoted = await readReleaseArtifact(artifact.row, process.cwd(), productionEnv);
   const coverSource = await downloadCoverSource(promoted, coverDir);
   const importArgs = ["--file", promoted.finalPath];
   if (coverSource) importArgs.push("--cover-source-file", coverSource);
@@ -737,7 +741,7 @@ async function releaseOne(params: {
   const stagingDir = await mkdtemp(path.join(stagingRoot, ".article-release-"));
   await copyFile(params.artifact.finalPath, path.join(stagingDir, "final.json"));
   await copyFile(params.artifact.mediaPath, path.join(stagingDir, "media.json"));
-  const staged = await readReleaseArtifact({ ...params.artifact.row, result_path: path.relative(process.cwd(), path.join(stagingDir, "final.json")) }, process.cwd());
+  const staged = await readReleaseArtifact({ ...params.artifact.row, result_path: path.relative(process.cwd(), path.join(stagingDir, "final.json")) }, process.cwd(), { SUPABASE_URL: params.dev.url });
   const promoted = await promoteAndImport(staged, params.productionEnv, params.coverDir);
   await verifyProductionReadback(promoted, params.production);
   await verifyLiveRelease(promoted, params.options, params.productionEnv);
@@ -757,10 +761,12 @@ async function main() {
   const productionCredentials = await readProductionCredentials(options.productionEnvFile);
   if (options.apply && !productionCredentials.revalidateSecret) throw new Error("Production target requires REVALIDATE_SECRET before article publication.");
   const rows = await loadQueueRows(options.queueIds, dev);
+  // Approved inputs still contain development URLs until isolated copies are promoted.
+  const imageEnv = { SUPABASE_URL: dev.url };
 
   console.log(`Article release allowlist: ${rows.length} exact queue row(s).`);
   if (!options.apply) {
-    for (const row of rows) { const artifact = await readReleaseArtifact(row); console.log(`${row.id} ${artifact.finalJson.slug}`); }
+    for (const row of rows) { const artifact = await readReleaseArtifact(row, undefined, imageEnv); console.log(`${row.id} ${artifact.finalJson.slug}`); }
     console.log("Dry run only. Add --apply --allow-prod to publish this exact allowlist.");
     return;
   }
@@ -777,7 +783,7 @@ async function main() {
   try {
     for (const row of rows) {
       try {
-        const artifact = await readReleaseArtifact(row);
+        const artifact = await readReleaseArtifact(row, undefined, imageEnv);
         receipts.push(await releaseOne({
           artifact,
           options,

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { copyFile, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -79,32 +79,63 @@ function manifest(): ArticleImageManifest {
   };
 }
 
-test("article promotion reads checkout staging while a frozen bundle root is set", async () => {
+test("article release checks development inputs and promoted staging with separate media targets", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "article-release-staging-"));
   const bundle = path.join(root, "content/releases/frozen");
   const original = path.join(bundle, "tmp/content-workspace/article");
   const staged = path.join(root, "tmp/content-workspace/staged");
   const previousRoot = process.env.BLOXODES_ARTIFACT_ROOT;
+  const targetKeys = ["SUPABASE_URL", "SUPABASE_MEDIA_PUBLIC_URL", "NEXT_PUBLIC_SUPABASE_URL"] as const;
+  const previousTargets = Object.fromEntries(targetKeys.map(key => [key, process.env[key]]));
+  const productionEnv = { SUPABASE_URL: "https://database.bloxodes.com", SUPABASE_MEDIA_PUBLIC_URL: "https://media.bloxodes.com" };
+  const devEnv = { SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co" };
+  const devUrl = `${devEnv.SUPABASE_URL}/storage/v1/object/public/article-media/articles/${SLUG}/sources/first.webp`;
   try {
     await mkdir(original, {recursive: true});
     await mkdir(staged, {recursive: true});
     const media = manifest();
-    media.entries = [{...media.entries[0]!, match_evidence: "The verified source shows the required item.", rights_note: "Source attribution retained.", alt: "First image", width: 640, height: 480}];
+    media.entries = [{...media.entries[0]!, public_url: devUrl, match_evidence: "The verified source shows the required item.", rights_note: "Source attribution retained.", alt: "First image", width: 640, height: 480}];
     media.expected_count = 1;
-    await writeFile(path.join(original, "final.json"), JSON.stringify({title: "Tested article", slug: SLUG, content_md: `## First\n\n![First image](${IMAGE_URL})`}));
+    const final = {title: "Tested article", slug: SLUG, content_md: `## First\n\n![First image](${devUrl})`};
+    await writeFile(path.join(original, "final.json"), JSON.stringify(final));
     await writeFile(path.join(original, "media.json"), JSON.stringify(media));
     const row = {id: QUEUE_ID, article_title: "Tested article", workflow_mode: "agent_runner", status: "completed", result_path: "tmp/content-workspace/article/final.json", result_slug: SLUG, production_url: null};
     process.env.BLOXODES_ARTIFACT_ROOT = bundle;
-    const approved = await readReleaseArtifact(row);
+    process.env.SUPABASE_URL = productionEnv.SUPABASE_URL;
+    process.env.SUPABASE_MEDIA_PUBLIC_URL = productionEnv.SUPABASE_MEDIA_PUBLIC_URL;
+    delete process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const originalHashes = await artifactHashes(original);
+    await assert.rejects(readReleaseArtifact(row), /public_url is not Bloxodes-hosted/);
+    const approved = await readReleaseArtifact(row, undefined, devEnv);
     for (const name of ["final.json", "media.json"]) await copyFile(path.join(original, name), path.join(staged, name));
-    const promoted = await readReleaseArtifact({...row, result_path: "tmp/content-workspace/staged/final.json"}, root);
+    const stagedRow = {...row, result_path: "tmp/content-workspace/staged/final.json"};
+    await assert.rejects(readReleaseArtifact(stagedRow, root, productionEnv), /public_url is not Bloxodes-hosted/);
+    assert.deepEqual((await readReleaseArtifact(stagedRow, root, devEnv)).finalJson, approved.finalJson);
+    for (const badUrl of [devUrl.replace("bbtcaurrtyoukvjbxbbj", "another-project"), devUrl.replace("/storage/v1/object/public/", "/unowned/")]) {
+      await writeFile(path.join(staged, "media.json"), JSON.stringify({...media, entries: [{...media.entries[0], public_url: badUrl}]}));
+      await writeFile(path.join(staged, "final.json"), JSON.stringify({...final, content_md: final.content_md.replace(devUrl, badUrl)}));
+      await assert.rejects(readReleaseArtifact(stagedRow, root, devEnv), /public_url is not Bloxodes-hosted/);
+    }
+    const promotedMedia = {...media, entries: [{...media.entries[0], public_url: IMAGE_URL}]};
+    const promotedFinal = {...final, content_md: final.content_md.replace(devUrl, IMAGE_URL)};
+    await writeFile(path.join(staged, "media.json"), JSON.stringify(promotedMedia));
+    await writeFile(path.join(staged, "final.json"), JSON.stringify(promotedFinal));
+    const promoted = await readReleaseArtifact(stagedRow, root, productionEnv);
     assert.equal(approved.finalPath, path.join(original, "final.json"));
     assert.equal(promoted.finalPath, path.join(staged, "final.json"));
-    assert.deepEqual(promoted.finalJson, approved.finalJson);
+    assert.deepEqual(promoted.finalJson, promotedFinal);
+    assert.deepEqual(await artifactHashes(original), originalHashes);
+    assert.deepEqual(JSON.parse(await readFile(approved.finalPath, "utf8")), final);
     assert.equal(process.env.BLOXODES_ARTIFACT_ROOT, bundle);
+    assert.equal(process.env.SUPABASE_URL, productionEnv.SUPABASE_URL);
+    assert.equal(process.env.SUPABASE_MEDIA_PUBLIC_URL, productionEnv.SUPABASE_MEDIA_PUBLIC_URL);
   } finally {
     if (previousRoot === undefined) delete process.env.BLOXODES_ARTIFACT_ROOT;
     else process.env.BLOXODES_ARTIFACT_ROOT = previousRoot;
+    for (const key of targetKeys) {
+      if (previousTargets[key] === undefined) delete process.env[key];
+      else process.env[key] = previousTargets[key];
+    }
     await rm(root, {recursive: true, force: true});
   }
 });
@@ -182,6 +213,14 @@ test("production snapshot requires exact content, body images, and provenance", 
     () => assertProductionSnapshot({ ...input, provenance: [] }),
     /provenance rows mismatch/,
   );
+  const devUrl = `https://bbtcaurrtyoukvjbxbbj.supabase.co/storage/v1/object/public/article-media/articles/${SLUG}/sources/first.webp`;
+  const devContent = content.replace(IMAGE_URL, devUrl);
+  assert.throws(() => assertProductionSnapshot({
+    ...input,
+    finalJson: {...input.finalJson, content_md: devContent},
+    manifest: {...input.manifest, entries: input.manifest.entries.map(entry => entry.status === "verified" ? {...entry, public_url: devUrl} : entry)},
+    article: {...input.article, content_md: devContent},
+  }), /promoted body image is not hosted/);
 });
 
 test("production credentials accept only the canonical production target", async () => {

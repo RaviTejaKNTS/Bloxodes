@@ -17,7 +17,7 @@ const selectedFile = process.argv[3];
 const batch = parseBatch(JSON.parse(await readFile(batchPath(process.argv[4]),"utf8")));
 const operation = batch.operations.find((item: any) => item.publisher === "article-queue" && item.queueId === id && item.file === selectedFile);
 if (!operation) throw new Error("The exact article operation is missing from the reviewed batch.");
-const artifact = await readReleaseArtifact(data);
+const artifact = await readReleaseArtifact(data, undefined, { SUPABASE_URL: dev.url });
 const root = process.env.BLOXODES_ARTIFACT_ROOT || process.cwd();
 const selectedPath = await realpath(path.resolve(ownedPath(root,selectedFile)));
 const selectedBytes = await readFile(selectedPath);
