@@ -3,7 +3,8 @@
 Release handoff (September 7, 2026): the exact-ID publisher accepts completed `tmp/article-pipeline/<run>/content/final.json` artifacts as well as legacy content workspaces. Pipeline publication checks the queue identity, completed editorial decision, artifact hashes, and final technical stage results. Promotion rewrites isolated release copies, preserving approved originals and their hashes; published-row verification maps approved managed-development URLs to their production equivalents. A focused release regression checks valid, blocked, changed, incomplete, and escaped artifact paths.
 
 Status: Code-controlled authoring/review with GitHub technical QA and exact-row publication
-Last verified: 2026-10-02
+Last verified: 2026-10-09
+Publication evidence: current publisher, collector and bundle verifier; the failed GitHub run 37856949462; and read-only homelab writer journals for October 6 and October 9 at 06:59 and 12:02. October 6 direct releases uploaded body images to `media.bloxodes.com/storage/v1/object/public/bloxodes-media/` before article import and queue closure. Their parent process inherited the writer's development target; production child processes handled promotion and import. The fix has not published content or changed the installed runtime. Run 37577949157 succeeded with zero publication operations and does not prove article promotion.
 Evidence: September 6 code/skill implementation, process/queue/recovery tests, TypeScript checks, host env:doctor and writer readiness, plus a live owned-preview start/HTTP/stop test. The first live Luna max canary hit an account usage limit during images. A later manual Fisch appraisal run completed all stages after an internal-link correction and a technical import-environment fix; it remained managed-development only. The scheduled service entrypoint was inspected read-only and an older in-flight batch was left running. Earlier production-health evidence below retains its original date; no production publication is part of this implementation test.
 
 ## GitHub publication flow
@@ -12,9 +13,13 @@ New source hooks freeze only an explicitly authorized, completed article run and
 
 Before any writes, CI binds each article queue ID to its stored `result_path`, approved real file, slug and bytes. It verifies pipeline approval hashes and requires that article's canonical URL and cache event in the batch. Duplicate queue IDs and mismatched finals fail before publication. Queue acknowledgement uses only that selected, verified article.
 
+The bundle verifier and publisher validate approved media against the resolved managed-development origin, independently of the production job environment. Image readiness still requires hosted images, matching placements and article-owned object paths. The publisher copies approved final/media files into checkout staging, promotes their image bytes with production credentials, and rewrites only those copies. It then reads staging with the production media target before import. Production readback requires canonical `media.bloxodes.com` image URLs and matching provenance; development URLs cannot pass that readback. The approved bundle and its hashes remain unchanged.
+
 With `BLOXODES_CI_QA=1`, installed workers skip local preview, copy/image validators, import verification and browser verification. Those stages record `delegatedToCi`, which means authoring is ready and technical QA is pending. GitHub checks copy and image readiness, stages the exact final in development, and verifies loaded body images and expected video embeds on desktop/mobile. Production requires the matching managed QA receipt. Old completed artifacts remain accepted through their existing approval proofs. Do not start task-local builds or previews.
 
 The outbox records its frozen bundle hash before dispatch. It reads the matching GitHub run before considering another attempt. Queued/running runs remain pending, failed runs back off within the existing six-attempt budget, and unknown dispatch outcomes require inspection. A successful run still needs the exact published queue acknowledgement. Research/editorial retry budgets are unchanged. See `../operations/deployment.md` for PR flow and credentials.
+
+The writer's completion message counts managed-development articles. With automatic publication enabled, it then drains all authorized publication intents. Exhausted publication attempts make that drain throw and the service exit with status 1 even when new articles completed. Both inspected October 9 failures reported exhausted GitHub publication retries after dispatching the newly completed articles. Fixing the publisher does not reset those intents or recover exhausted attempts.
 
 ## Editorial ownership
 
