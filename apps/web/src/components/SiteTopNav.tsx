@@ -55,7 +55,7 @@ export function SiteTopNav({ className, catalogNav = null, gameNav = null, onNav
         )}
         aria-label={`${gameNav.gameName} pages`}
       >
-        <div className="mr-1 inline-flex h-9 min-w-[9rem] max-w-[16rem] shrink items-center gap-2 rounded-md px-2.5 text-[13px] font-semibold text-foreground sm:min-w-[10rem]">
+        <div className="mr-1 inline-flex h-9 min-w-0 max-w-[8rem] shrink-0 items-center gap-2 rounded-md px-2.5 text-[13px] font-semibold text-foreground sm:min-w-[10rem] sm:max-w-[16rem] sm:shrink">
           <span className="relative h-6 w-6 shrink-0 overflow-hidden rounded-md border border-border/70 bg-muted">
             {gameNav.thumbnailUrl ? (
               <Image src={gameNav.thumbnailUrl} alt="" fill sizes="24px" className="object-cover" />
