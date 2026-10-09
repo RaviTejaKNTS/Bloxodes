@@ -56,11 +56,13 @@ test("scratch archives verify regular files and record links without following t
   const root = await temporary(t), source = path.join(root, "scratch"), archive = path.join(root, "archive");
   await fs.mkdir(source); await fs.writeFile(path.join(source, "brief.md"), "preserve this brief");
   await fs.symlink(root, path.join(source, "outside"));
+  await fs.symlink(path.join(root, "missing"), path.join(source, "dangling"));
   await archiveScratch(source, archive);
   assert.equal(await fs.readFile(path.join(archive, "tmp/brief.md"), "utf8"), "preserve this brief");
   const manifest = JSON.parse(await fs.readFile(path.join(archive, "manifest.json"), "utf8"));
   assert.match(manifest.find(entry => entry.path === "brief.md").sha256, /^[a-f0-9]{64}$/);
   assert.equal(manifest.find(entry => entry.path === "outside").symlink, root);
+  assert.equal(manifest.find(entry => entry.path === "dangling").symlink, path.join(root, "missing"));
   await assert.rejects(fs.access(path.join(archive, "tmp/outside")));
 });
 
@@ -102,6 +104,30 @@ test("links preserve existing files and reject different or broken destinations"
   await assert.rejects(inspectLink(source, destination), /ENOENT/);
 });
 
+test("optional references skip missing sources and dangling links without weakening required links", async t => {
+  const root = await temporary(t), source = path.join(root, "source"), missing = path.join(root, "missing");
+  const brokenSource = path.join(root, "broken-source"), destination = path.join(root, "destination"), other = path.join(root, "other");
+  const warnings = [];
+  t.mock.method(console, "warn", message => warnings.push(message));
+  await fs.mkdir(source); await fs.mkdir(other);
+  await fs.symlink(missing, brokenSource); await fs.symlink(missing, destination);
+  assert.equal(await inspectLink(missing, path.join(root, "absent-reference"), { optional: true }), false);
+  assert.equal(await inspectLink(brokenSource, path.join(root, "broken-reference"), { optional: true }), false);
+  assert.equal(await inspectLink(source, destination, { optional: true }), false);
+  assert.equal(warnings.length, 3);
+  assert.match(warnings[0], /optional reference source/); assert.ok(warnings[0].includes(missing));
+  assert.ok(warnings[1].includes(brokenSource)); assert.ok(warnings[2].includes(destination));
+  assert.equal(await fs.readlink(destination), missing);
+  await assert.rejects(inspectLink(source, destination), /ENOENT/);
+  await assert.rejects(inspectLink(source, other, { optional: true }), /Preserving/);
+  const wrong = path.join(root, "wrong");
+  await fs.symlink(other, wrong);
+  await assert.rejects(inspectLink(source, wrong, { optional: true }), /somewhere else/);
+  await assert.rejects(inspectLink(missing, other, { optional: true }), /Preserving/);
+  await assert.rejects(inspectLink(brokenSource, wrong, { optional: true }), /somewhere else/);
+  assert.equal(warnings.length, 3);
+});
+
 test("env metadata rejects public files and nested symlinks without reading secrets", async t => {
   const root = await temporary(t), secret = path.join(root, "private.env");
   await fs.writeFile(secret, "secret", { mode: 0o600 });
@@ -123,8 +149,23 @@ test("setup links the canonical store but leaves scratch and pipeline state sepa
   await fs.writeFile(path.join(main, ".gitignore"), ".envs\ntmp\n");
   await fs.writeFile(path.join(main, ".envs/targets/managed-dev.env"), "fixture", { mode: 0o600 });
   git("add", "."); git("commit", "-m", "Fixture"); git("worktree", "add", "-b", "task", worktree);
-  await setupWorktree({ cwd: worktree, suppliedMain: main });
-  await setupWorktree({ cwd: worktree, suppliedMain: main });
+  const history = path.join(main, "tmp/worktree-reference"), missing = path.join(main, "tmp/missing");
+  await fs.mkdir(history, { recursive: true });
+  await fs.mkdir(path.join(main, "tmp/article-pipeline"));
+  await fs.symlink(missing, path.join(main, "tmp/release-backups"));
+  await fs.symlink(path.join(main, "tmp/release-backups"), path.join(history, "release-backups"));
+  await fs.symlink(missing, path.join(history, "article-pipeline"));
+  const warnings = [];
+  t.mock.method(console, "warn", message => warnings.push(message));
+  for (let run = 0; run < 2; run++) {
+    warnings.length = 0;
+    await setupWorktree({ cwd: worktree, suppliedMain: main });
+    assert.equal(warnings.filter(message => message.includes("release-backups")).length, 1);
+    assert.ok(warnings.some(message => message.includes("optional reference source") && message.includes("release-backups")));
+    assert.ok(warnings.some(message => message.includes("optional reference link") && message.includes("article-pipeline")));
+  }
+  assert.equal(await fs.readlink(path.join(history, "article-pipeline")), missing);
+  assert.equal(await fs.readlink(path.join(history, "release-backups")), path.join(main, "tmp/release-backups"));
   assert.equal(await fs.realpath(path.join(worktree, ".envs")), path.join(main, ".envs"));
   assert.equal(await fs.realpath(path.join(worktree, "tmp/content-workspace")), path.join(main, "tmp/content-workspace"));
   assert.equal((await fs.lstat(path.join(worktree, "tmp"))).isSymbolicLink(), false);
