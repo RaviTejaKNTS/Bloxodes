@@ -35,7 +35,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-gta-game-collection-*/SKILL.md`: GTA-specific collection suggestion, research, data, image, writing, workflow, and refresh rules for `/gta/wiki/<game-slug>/<collection-slug>`; never substitute the Roblox collection skills.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
-- `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
+- `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Mediavine automatic in-content ad placement, including pagination and hydrated DOM verification.
+- `dev-docs/architecture.md#advertising`: Mediavine ad script, ads.txt redirect, CSP, 300px sidebar rule, privacy policy block, and how to test ads with `?test=houseads`.
 - `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only publication through protected production PRs and GitHub content jobs, with exact-SHA verification and safe task cleanup.
 - `dev-docs/pipelines/indexing-distribution.md`: current indexing, analytics, and distribution ownership.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
@@ -89,6 +90,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Keep SEO-friendly page/article titles and comfortable body text. Do not shrink editorial content into an admin-dashboard density.
 - Use shadcn primitives for reusable interface surfaces such as sidebars, search inputs, nav items, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
 - Keep shadcn composition minimal. Match Bloxodes tokens and behavior without building heavy custom layouts inside primitives.
+- A right content sidebar must stay at least 300px wide at every viewport of 1200px and up, because Mediavine places sidebar ads there. Reuse the existing sidebar grid instead of a new column definition. Check ad placement with `?test=houseads` in an incognito window.
 
 ## Public Copy
 

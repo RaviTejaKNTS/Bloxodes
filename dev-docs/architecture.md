@@ -76,6 +76,22 @@ Current content scale refreshed read-only on 2026-09-01 (infrastructure figures 
 
 Cloudflare is the long-lived public cache. The origin uses Next.js ISR-style responses and public cache tags. Supabase-backed public content is not wrapped in a second long-lived application data cache. Mutation/release flows enqueue revalidation events, purge targeted Cloudflare tags, and defer page warming to a separate queue.
 
+## Advertising
+
+Last verified: 2026-10-09 against repository code. Recheck the live items below after the first release of this setup.
+
+Bloxodes runs full Mediavine ads. It moved from Mediavine Journey when Mediavine set its ads live on 2026-10-08. The Mediavine site ID is `75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed`.
+
+- **Ad script:** the public `(site)` layout loads `https://scripts.mediavine.com/tags/<site-id>.js` in production builds only. Mediavine places every ad from that one script.
+- **ads.txt:** `/ads.txt` returns a 301 redirect to `https://adstxt.mediavine.com/sites/<site-id>/ads.txt`, so Mediavine keeps the file current. Don't add a static `apps/web/public/ads.txt`; it goes stale. Cloudflare caches `/ads.txt`, so purge that URL after any change to its handling.
+- **Mixed content:** the CSP in `apps/web/src/config/csp-directives.json` sends `block-all-mixed-content`, following Mediavine's "Force All Ads Secure" guide. Don't add `upgrade-insecure-requests`; it stops Mediavine's directive from applying.
+- **Sidebar width:** Mediavine needs the right content sidebar to be at least 300px wide at every viewport of 1200px and up. Page grids with a right sidebar set that minimum from 1200px. The left site nav is `14.5rem` so the main column keeps its width. New page templates with a right sidebar must meet the same rule.
+- **In-content ads:** Mediavine scans the direct children of `#article-body`. See `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md` for the flat DOM contract.
+- **Privacy:** `/privacy-policy` contains Mediavine's "Mediavine Programmatic Advertising (Ver 1.1)" block word for word. The dashboard Privacy Policy Health Check looks for that heading and version, and for a link to the policy from the home page (the footer has one). Mediavine adds its US opt-out link in the site footer (dashboard: Settings > Privacy > Privacy Notice Location = Footer) and runs its own consent tool for EU and UK visitors.
+- **Cloudflare:** keep Rocket Loader and script deferral off for the ad script.
+- **Testing ads:** open the page in an incognito window and add `?test=houseads` to the URL. Mediavine then shows house ads in every slot, so you can check placement without waiting for real fill. Real fill is patchy for the first couple of weeks after launch.
+- **Dashboard:** revenue updates daily around 10am US Eastern; sessions and pageviews lag two days. GA4 is linked in the Mediavine dashboard and must report in Eastern Time.
+
 ## Known Degraded State
 
 - The `supabase-meta` image-level health probe is explicitly disabled after it accumulated unreaped Node processes and overloaded the shared host; Meta itself remains running and Studio still responds behind authentication.

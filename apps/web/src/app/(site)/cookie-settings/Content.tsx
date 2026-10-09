@@ -142,7 +142,7 @@ function EnabledCookieSettingsContent() {
           />
           <div>
             <p className="font-semibold">Ads/marketing</p>
-            <p className="text-sm text-muted-foreground">Used for ads if enabled (Mediavine Journey).</p>
+            <p className="text-sm text-muted-foreground">Used for ads served by Mediavine.</p>
           </div>
         </label>
       </div>

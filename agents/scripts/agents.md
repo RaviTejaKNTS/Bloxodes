@@ -211,7 +211,6 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 
 | Purpose | File | Preferred command |
 | --- | --- | --- |
-| Update `ads.txt` | `scripts/ads/update-ads-txt.ts` | `npm run ads:update` |
 | Audit Journey-compatible DOM | `scripts/ads/audit-journey-catalog-dom.ts` | Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; read-only guard for catalog/index card and list streams, pagination, redirects, discoverable nested Music/Decal routes, and no manual content hints |
 | Audit hydrated Journey-compatible DOM | `scripts/ads/audit-journey-catalog-browser.ts` | Run `npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>` against a local build; discovers safe nested routes, checks desktop/mobile/breakpoint hydration and exact prose paragraph/heading/list/blank-line rhythm, and proves synthetic full-width in-content placement |
 | IndexNow bootstrap | `scripts/automation/indexnow-bootstrap.ts` | `npm run indexnow:bootstrap` |
@@ -303,7 +302,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 - `articles:inspect-image -- <url> <workspace>` captures a source in headless Chrome for model visual inspection; it writes only screenshots, grants no image/content approval, and needs no database credentials.
 # GTA checklist release support (2026-09-14)
 
-`verify:gta-checklist-final` compares explicit GTA checklist payloads with managed-development rows and rendered pages. `ads:update` retains the existing non-empty ads.txt on a network failure or request timeout; without a usable fallback the build still fails.
+`verify:gta-checklist-final` compares explicit GTA checklist payloads with managed-development rows and rendered pages.
 
 ## Shared automation runtime
 

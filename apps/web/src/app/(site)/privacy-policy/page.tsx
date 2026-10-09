@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
   });
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+    <div className="grid gap-8 content-sidebar-grid">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">{title}</h1>
@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
           <p>
             <strong>Effective Date:</strong> January 31, 2026
             <br />
-            <strong>Last Updated:</strong> July 28, 2026
+            <strong>Last Updated:</strong> October 9, 2026
           </p>
           <p>
             This policy applies to Bloxodes.com, Bloxodes mobile apps, Bloxodes browser extensions, and the APIs and account features that
@@ -136,8 +136,8 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">2. Website, Mobile, and Extension Storage</h2>
           <p>
             <strong>Website:</strong> We use an essential session cookie for sign-in. Theme, consent choices, and signed-out code,
-            checklist, quiz, or tool progress can be kept in cookies or browser local storage. Google Analytics and Mediavine Journey can
-            set non-essential cookies or similar identifiers when permitted by the consent tools active for your region.
+            checklist, quiz, or tool progress can be kept in cookies or browser local storage. Google Analytics and Mediavine can set
+            non-essential cookies or similar identifiers when permitted by the consent tools active for your region.
           </p>
           <p>
             <strong>Mobile apps:</strong> Authentication tokens are stored using the operating system&apos;s secure storage where available.
@@ -203,8 +203,9 @@ export default function PrivacyPolicyPage() {
             analytics services.
           </p>
           <p>
-            The website uses Mediavine Journey and related advertising services. Advertising providers may use cookies and similar
-            technologies to deliver and measure ads and prevent fraud. The extension and mobile apps do not currently contain Bloxodes ads.
+            The website works with Mediavine to show ads. Mediavine and its partners may use cookies and similar technologies to deliver
+            and measure ads and prevent fraud. The extension and mobile apps do not currently contain Bloxodes ads. Mediavine&apos;s required
+            disclosure is below.
           </p>
           <p>
             Use the controls shown by our consent partner, our{" "}
@@ -219,6 +220,80 @@ export default function PrivacyPolicyPage() {
             </a>
             .
           </p>
+
+          <h3 className="text-xl font-semibold text-foreground">Mediavine Programmatic Advertising (Ver 1.1)</h3>
+          <p>
+            The Website works with Mediavine to manage third-party interest-based advertising appearing on the Website. Mediavine serves
+            content and advertisements when you visit the Website, which may use first and third-party cookies. A cookie is a small text file
+            which is sent to your computer or mobile device (referred to in this policy as a “device”) by the web server so that a website
+            can remember some information about your browsing activity on the Website.
+          </p>
+          <p>
+            First party cookies are created by the website that you are visiting. A third-party cookie is frequently used in behavioral
+            advertising and analytics and is created by a domain other than the website you are visiting. Third-party cookies, tags, pixels,
+            beacons and other similar technologies (collectively, “Tags”) may be placed on the Website to monitor interaction with
+            advertising content and to target and optimize advertising. Each internet browser has functionality so that you can block both
+            first and third-party cookies and clear your browser’s cache. The &quot;help&quot; feature of the menu bar on most browsers will
+            tell you how to stop accepting new cookies, how to receive notification of new cookies, how to disable existing cookies and how
+            to clear your browser’s cache. For more information about cookies and how to disable them, you can consult the information at{" "}
+            <a href="https://www.allaboutcookies.org/manage-cookies/" target="_blank" rel="noreferrer noopener nofollow">
+              All About Cookies
+            </a>
+            .
+          </p>
+          <p>
+            Without cookies you may not be able to take full advantage of the Website content and features. Please note that rejecting
+            cookies does not mean that you will no longer see ads when you visit our Site. In the event you opt-out, you will still see
+            non-personalized advertisements on the Website.
+          </p>
+          <p>The Website collects the following data using a cookie when serving personalized ads:</p>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>IP Address</li>
+            <li>Operating System type</li>
+            <li>Operating System version</li>
+            <li>Device Type</li>
+            <li>Language of the website</li>
+            <li>Web browser type</li>
+            <li>Email (in hashed form)</li>
+          </ul>
+          <p>
+            Mediavine Partners (companies listed below with whom Mediavine shares data) may also use this data to link to other end user
+            information the partner has independently collected to deliver targeted advertisements. Mediavine Partners may also separately
+            collect data about end users from other sources, such as advertising IDs or pixels, and link that data to data collected from
+            Mediavine publishers in order to provide interest-based advertising across your online experience, including devices, browsers
+            and apps. This data includes usage data, cookie information, device information, information about interactions between users
+            and advertisements and websites, geolocation data, traffic data, and information about a visitor’s referral source to a
+            particular website. Mediavine Partners may also create unique IDs to create audience segments, which are used to provide
+            targeted advertising.
+          </p>
+          <p>
+            If you would like more information about this practice and to know your choices to opt-in or opt-out of this data collection,
+            please visit{" "}
+            <a href="https://thenai.org/opt-out/" target="_blank" rel="noreferrer noopener nofollow">
+              National Advertising Initiative opt out page
+            </a>
+            . You may also visit{" "}
+            <a href="http://optout.aboutads.info/#/" target="_blank" rel="noreferrer noopener nofollow">
+              Digital Advertising Alliance website
+            </a>{" "}
+            and{" "}
+            <a href="http://optout.networkadvertising.org/#" target="_blank" rel="noreferrer noopener nofollow">
+              Network Advertising Initiative website
+            </a>{" "}
+            to learn more information about interest-based advertising. You may download the AppChoices app at{" "}
+            <a href="https://youradchoices.com/appchoices" target="_blank" rel="noreferrer noopener nofollow">
+              Digital Advertising Alliance’s AppChoices app
+            </a>{" "}
+            to opt out in connection with mobile apps, or use the platform controls on your mobile device to opt out.
+          </p>
+          <p>
+            For specific information about Mediavine Partners, the data each collects and their data collection and privacy policies, please
+            visit{" "}
+            <a href="https://www.mediavine.com/ad-partners/" target="_blank" rel="noreferrer noopener nofollow">
+              Mediavine Partners
+            </a>
+            .
+          </p>
         </section>
 
         <section className="space-y-4">
@@ -228,7 +303,7 @@ export default function PrivacyPolicyPage() {
             <li>Roblox for OAuth authentication and Roblox profile or game information.</li>
             <li>OpenAI for automated moderation of submitted comment text.</li>
             <li>Google Analytics for website measurement.</li>
-            <li>Mediavine Journey and its advertising partners for website advertising and measurement.</li>
+            <li>Mediavine and its advertising partners for website advertising and measurement.</li>
             <li>Our self-hosted Umami and Supabase services for analytics, database, storage, and account operations.</li>
             <li>Hosting, CDN, security, and network providers, including infrastructure used to deliver and protect the Services.</li>
             <li>Authorities or other parties when required by law or reasonably necessary to protect rights, safety, and security.</li>

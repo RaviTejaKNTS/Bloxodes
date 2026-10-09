@@ -71,7 +71,7 @@ import { cn } from "@/lib/utils";
 
 export function StatsPageShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative left-1/2 w-[calc(100vw-2rem)] max-w-[1800px] -translate-x-1/2 xl:w-[calc(100vw-18rem)]">
+    <div className="relative left-1/2 w-[calc(100vw-2rem)] max-w-[1800px] -translate-x-1/2 xl:w-[calc(100vw-17rem)]">
       {children}
     </div>
   );
@@ -1671,7 +1671,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   ];
   return (
     <div className="stats-surface space-y-5">
-      <header className="relative left-1/2 -mt-6 w-screen -translate-x-1/2 overflow-hidden border-b border-border/60 bg-surface pt-6 shadow-none md:-mt-8 md:pt-8 xl:-mt-10 xl:w-[calc(100vw-15.5rem)] xl:pt-10">
+      <header className="relative left-1/2 -mt-6 w-screen -translate-x-1/2 overflow-hidden border-b border-border/60 bg-surface pt-6 shadow-none md:-mt-8 md:pt-8 xl:-mt-10 xl:w-[calc(100vw-14.5rem)] xl:pt-10">
         {game.thumbnailUrls[0] || game.iconUrl ? (
           <div className="absolute inset-0">
             <Image src={game.thumbnailUrls[0] ?? game.iconUrl ?? ""} alt="" fill sizes="100vw" className="object-cover opacity-50 blur-[1px] saturate-75" priority />

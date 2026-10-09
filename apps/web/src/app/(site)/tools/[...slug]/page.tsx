@@ -335,7 +335,7 @@ export default async function ToolFallbackPage({ params }: PageProps) {
 
   return (
     <div className="space-y-12">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+      <div className="grid gap-8 content-sidebar-grid">
       {mainContent}
       <aside className="space-y-4">
         <SocialShare

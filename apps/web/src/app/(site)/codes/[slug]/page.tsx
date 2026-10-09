@@ -656,7 +656,7 @@ export default async function GamePage({ params }: Params) {
   const universeId = game.universe_id ?? null;
   return (
     <div className="space-y-12">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+      <div className="grid gap-8 content-sidebar-grid">
       <article className="min-w-0">
         <nav aria-label="Breadcrumb" className="mb-4 text-xs uppercase tracking-[0.25em] text-muted">
           <ol className="flex flex-wrap items-center gap-2">

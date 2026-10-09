@@ -20,7 +20,7 @@ export function SiteShell({ children }: SiteShellProps) {
     <div className={`${inter.className} min-h-screen`}>
       <SiteSidebar pathname="" />
       <MobileSiteHeader account={signedOutSidebarAccount} initialPathname="" />
-      <div className="flex min-h-screen flex-col xl:pl-[15.5rem]">
+      <div className="flex min-h-screen flex-col xl:pl-[14.5rem]">
         <main className="flex-1">{children}</main>
         <SiteFooter />
       </div>
