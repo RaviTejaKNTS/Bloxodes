@@ -26,7 +26,7 @@ Verified public home response:
 
 ## Deployment Purge
 
-The production workflow uses the deployment-scoped Cloudflare token and zone ID to purge targeted tags after runtime changes. A full purge requires explicit workflow input.
+The production workflow uses the deployment-scoped Cloudflare token and zone ID to purge targeted tags after runtime changes. Changes to the shared shell (site layout and template, `globals.css`, `next.config.js`, `apps/web/src/config/*`, the `Site*`, consent and `ui` components, and `PublicSiteProviders.tsx`) also purge the `site` tag, which every public page carries. A full purge requires explicit workflow input. `/ads.txt` is not long-cached at the edge (`max-age=0`) and redirects to Mediavine.
 
 ## Operator Emergency Cache
 

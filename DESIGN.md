@@ -44,7 +44,7 @@ tokens:
     compact: "0.375rem"
     panel: "1.25rem"
   layout:
-    sidebarWidth: "240px"
+    sidebarWidth: "232px"
     contentTopPaddingDesktop: "2.5rem"
     contentTopPaddingTablet: "2rem"
     contentTopPaddingMobile: "1.5rem"
@@ -66,7 +66,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Use clean, restrained shadcn-style primitives for interface surfaces: sidebar, navigation items, search inputs, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
 - Prefer plain page layouts with strong content hierarchy. Let reusable components carry the product/database feel.
 - Avoid heavy custom decorative layouts inside shadcn primitives. Compose primitives simply and override only enough to match Bloxodes tokens.
-- The primary sidebar should stay narrow and calm at `240px` on desktop. Use compact rows, 16px or smaller icons, subtle hover/active fills, and avoid loud borders around normal nav items.
+- The primary sidebar should stay narrow and calm at `232px` (`14.5rem`) on desktop, which leaves room for a 300px Mediavine sidebar ad column. Use compact rows, 16px or smaller icons, subtle hover/active fills, and avoid loud borders around normal nav items.
 
 ## Layout
 

@@ -96,6 +96,18 @@ body {
 }
 
 @layer utilities {
+  @media (min-width: 1024px) {
+    .content-sidebar-grid {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 1.25fr);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .content-sidebar-grid {
+      grid-template-columns: minmax(0, 3fr) minmax(300px, 1.25fr);
+    }
+  }
+
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
@@ -175,7 +187,7 @@ body {
   }
 
   /*
-   * Journey scans direct children of #article-body. Keep catalog cards as
+   * Mediavine scans direct children of #article-body. Keep catalog cards as
    * direct block-level children, while allowing every non-card child
    * (including ad elements inserted at runtime) to span the full grid.
    */

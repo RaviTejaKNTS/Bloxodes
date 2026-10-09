@@ -6,7 +6,7 @@ const canonicalOrigin = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL
 
 test.beforeEach(async ({ page }) => {
   await page.route(
-    /https?:\/\/(?:scripts\.scriptwrapper\.com|www\.googletagmanager\.com|scripts\.grow\.me)\//,
+    /https?:\/\/(?:scripts\.mediavine\.com|www\.googletagmanager\.com|scripts\.grow\.me)\//,
     (route) => route.abort("blockedbyclient")
   );
 });

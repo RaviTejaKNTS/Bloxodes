@@ -10,24 +10,25 @@ import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { ConsentGate } from "@/components/consent/ConsentGate";
 import { ConsentMode } from "@/components/consent/ConsentMode";
 import { ConsentProvider } from "@/components/consent/ConsentProvider";
-
-const JOURNEY_SCRIPT_SRC = "https://scripts.scriptwrapper.com/tags/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed.js";
+import { MEDIAVINE_SCRIPT_SRC } from "@/config/mediavine";
 
 type PublicSiteProvidersProps = {
   children: ReactNode;
-  enableJourney?: boolean;
+  enableMediavine?: boolean;
   enableLocalConsent?: boolean;
   googleAnalyticsId?: string;
   umamiHostUrl?: string;
   umamiWebsiteId?: string;
 };
 
-function JourneyScript() {
+function MediavineScript() {
   return (
     <Script
-      id="journey-script-wrapper"
+      id="mediavine-script"
+      type="text/javascript"
+      async
       strategy="afterInteractive"
-      src={JOURNEY_SCRIPT_SRC}
+      src={MEDIAVINE_SCRIPT_SRC}
       data-noptimize="1"
       data-cfasync="false"
     />
@@ -36,7 +37,7 @@ function JourneyScript() {
 
 export function PublicSiteProviders({
   children,
-  enableJourney = false,
+  enableMediavine = false,
   enableLocalConsent = false,
   googleAnalyticsId,
   umamiHostUrl,
@@ -53,9 +54,9 @@ export function PublicSiteProviders({
   return (
     <ConsentProvider>
       {enableLocalConsent ? <ConsentMode /> : null}
-      {enableLocalConsent && enableJourney ? (
+      {enableLocalConsent && enableMediavine ? (
         <ConsentGate category="marketing">
-          <JourneyScript />
+          <MediavineScript />
         </ConsentGate>
       ) : null}
       {googleAnalyticsId ? (

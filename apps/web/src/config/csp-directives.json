@@ -15,7 +15,7 @@
     "worker-src 'self' blob:",
     "manifest-src 'self'",
     "media-src 'self' data: blob: https:",
-    "upgrade-insecure-requests"
+    "block-all-mixed-content"
   ],
   "secureProductionDirectives": [
     "default-src 'self'",
@@ -33,7 +33,7 @@
     "worker-src 'self' blob:",
     "manifest-src 'self'",
     "media-src 'self' data: blob:",
-    "upgrade-insecure-requests"
+    "block-all-mixed-content"
   ],
   "developmentDirectives": [
     "default-src 'self' http: https: data: blob:",

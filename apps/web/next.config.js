@@ -69,6 +69,15 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   serverExternalPackages: ["@supabase/supabase-js"],
+  async redirects() {
+    return [
+      {
+        source: "/ads.txt",
+        destination: "https://adstxt.mediavine.com/sites/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed/ads.txt",
+        statusCode: 301
+      }
+    ];
+  },
   experimental: {
     serverActions: { allowedOrigins: ["*"] },
   },

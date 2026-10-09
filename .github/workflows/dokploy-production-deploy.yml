@@ -154,6 +154,13 @@ jobs:
                     *"/articles/"*) add_path "/articles"; add_tag "articles-index"; add_tag "articles" ;;
                     *"/stats/"*|*/stats.ts) add_path "/stats"; add_tag "stats" ;;
                   esac
+                  # Shared shell, styles, ad script and CSP reach every public page.
+                  case "$file" in
+                    apps/web/next.config.js|apps/web/src/app/layout.tsx|apps/web/src/app/\(site\)/layout.tsx|apps/web/src/app/\(site\)/template.tsx|apps/web/src/app/globals.css|apps/web/src/config/*|apps/web/src/components/Site*|apps/web/src/components/PublicSiteProviders.tsx|apps/web/src/components/consent/*|apps/web/src/components/ui/*)
+                      add_path "/"
+                      add_tag "site"
+                      ;;
+                  esac
                   ;;
               esac
             done < <(git diff --name-only -z "$BEFORE_SHA" "$HEAD_SHA")

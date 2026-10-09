@@ -1,6 +1,6 @@
 ---
 name: bloxodes-simplify-journey-dom
-description: Audit and simplify Bloxodes React and Next.js page families so Mediavine Journey can automatically insert in-content ads between repeated cards or list items. Use when a catalog, index, trending, chart, paginated, category, artist, genre, or similar page has low ad impressions, nested grid or list wrappers, multiple or missing #article-body selectors, flex direct children, client rerenders that change wrapper depth, or needs Journey DOM verification before release.
+description: Audit and simplify Bloxodes React and Next.js page families so Mediavine (formerly Mediavine Journey) can automatically insert in-content ads between repeated cards or list items. Use when a catalog, index, trending, chart, paginated, category, artist, genre, or similar page has low ad impressions, nested grid or list wrappers, multiple or missing #article-body selectors, flex direct children, client rerenders that change wrapper depth, or needs Journey DOM verification before release.
 ---
 
 # Bloxodes Journey DOM Simplification
@@ -8,6 +8,8 @@ description: Audit and simplify Bloxodes React and Next.js page families so Medi
 ## Overview
 
 Convert one Bloxodes page family at a time into a flat, valid, testable content stream that Journey can parse for automatic in-content ad placement.
+
+Bloxodes moved from Mediavine Journey to full Mediavine on 2026-10-08. The in-content placement rules below still apply; "Journey" in class names, attributes and script names is historical. Read `dev-docs/architecture.md#advertising` for the current ad setup.
 
 Read `docs/analytics/journey-auto-ads-dom-refactor-2026-07-14.md` when historical implementation details, proven route coverage, or release evidence are needed.
 
@@ -150,7 +152,8 @@ After explicit production approval:
 2. Wait for immutable image build, Dokploy activation, health verification, Cloudflare purge, and cache warming.
 3. Confirm `/api/health` reports the pushed SHA.
 4. Run the server DOM audit against `https://bloxodes.com`.
-5. Monitor Journey impressions per pageview after enough traffic accumulates.
+5. Open the changed routes in an incognito window with `?test=houseads` added to the URL. Mediavine fills every slot with house ads, so you can see each in-content placement without waiting for real demand.
+6. Monitor Mediavine impressions per pageview after enough traffic accumulates.
 
 ## Stop conditions
 

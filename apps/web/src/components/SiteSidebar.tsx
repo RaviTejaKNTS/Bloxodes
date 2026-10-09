@@ -22,7 +22,7 @@ export function SiteSidebar({ pathname }: SiteSidebarProps) {
   const currentPathname = usePathname() ?? pathname;
   const links = siteNavLinksForPath(currentPathname);
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-[15.5rem] flex-col border-r border-sidebar-border/80 bg-sidebar text-sidebar-foreground shadow-none xl:flex">
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-[14.5rem] flex-col border-r border-sidebar-border/80 bg-sidebar text-sidebar-foreground shadow-none xl:flex">
       <div className="px-3 pb-2 pt-5">
         <div className="flex min-h-11 items-center justify-center">
           <SiteLogo className="h-10" />

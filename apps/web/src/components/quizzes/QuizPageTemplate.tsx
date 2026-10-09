@@ -109,7 +109,7 @@ export async function QuizPageTemplate({ data, config, sidebar, relatedContent }
 
   return (
     <div className="space-y-12">
-      <div className={sidebar ? "grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]" : "grid gap-8"}>
+      <div className={sidebar ? "grid gap-8 content-sidebar-grid" : "grid gap-8"}>
       <section
         id="article-body"
         itemProp="articleBody"
