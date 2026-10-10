@@ -30,7 +30,7 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 
 ## Voice for rankings
 
-- **Open with the verdict.** Name the top pick or two and the one reason that puts them there. "Frost Archer runs Tower Brawl right now. It slows every enemy in range, and nothing else controls a lane that cheaply."
+- **Open with the verdict.** Name the top pick or two and the one reason that puts them there. Lead with the unit's name and the concrete thing it does better than anything else.
 - **State scope early and plainly:** wave mode, PvP, beginners, endgame.
 - **Tier analysis explains, it doesn't re-read the table.** What do units in this tier have in common, where do they fall off, and what should you pair them with?
 - **Table cells stay short and plain.** Save the personality for the prose around them.

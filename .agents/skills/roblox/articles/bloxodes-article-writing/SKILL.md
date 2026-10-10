@@ -108,7 +108,7 @@ The rules below describe the approved media contract. In the writing stage, reus
 
 - Look through the approved lead source for real gameplay screenshots, item or character panels, maps, menus, raid screens and collection-style images. Use them when they explain a fact, step, item or table row better than words.
 - Prefer real in-game captures over a publisher's custom art or branded composites. Clean, exact gameplay screenshots from credible guide or wiki pages are fine when the manifest records their provenance. Flag any explicit attribution or license condition for parent review.
-- No images with watermarks, big arrows, subscribe overlays or competitor branding.
+- No images with watermarks, big arrows (as `bloxodes-article-images` defines them), subscribe overlays or competitor branding.
 - Never hotlink the source page, wiki, Discord, Imgur, a competitor CDN or any other third-party host in `content_md`. Download, validate, convert to WebP and upload to Bloxodes Supabase Storage first.
 - Normal articles usually have one to three body images. Complete visual sets can have more.
 - Write each image as `![useful factual alt text](<Supabase public URL>)` next to the matching explanation, using the exact public URL for the current environment.
@@ -164,7 +164,7 @@ Write `final.json` and the review note only in the content workspace. Approved S
 
 - `title`: the reader's exact question, action, story or guide promise in search language. Game name included for game articles.
 - `slug`: short and stable for the topic. Game name included for game articles. Never use `roblox_universes.slug`.
-- `meta_description`: the answer or outcome plus a reason to click, in one or two plain sentences.
+- `meta_description`: the answer or outcome plus a reason to click, in one or two plain sentences of roughly 140 to 160 characters.
 - `content_md`: answers the title fully. Headings only for real sections. Every approved `media.json` image under its matching heading or row. No body images only when every planned entry is `accepted_missing`.
 - `faq_json`: optional, no quota. It renders a visible FAQ and structured data, so it's the only home for FAQs. Never add an FAQ section to `content_md`. Keep a question only if its supported answer adds something the body doesn't have. Otherwise `[]`.
 - `cover_image`: an existing Bloxodes Storage URL if a cover is already hosted, otherwise `null`.

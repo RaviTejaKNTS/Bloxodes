@@ -11,7 +11,7 @@ Use this after `bloxodes-catalog-research` and parent approval. For one game's i
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Catalog pages" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Catalog pages" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - The approved `brief.md`.
 
 ## Workflow
@@ -30,7 +30,7 @@ Use this after `bloxodes-catalog-research` and parent approval. For one game's i
 
 ## How the copy should read
 
-- **Explain what the items are and what players can do with them.** "Roblox font IDs let you change the text style in your game UI, signs and nametags. Copy the ID, paste it into the Font property in Studio, and the text updates right away."
+- **Explain what the items are and what players can do with them.** Say where the items show up, then the exact copy-and-paste step to use one.
 - **Short intro, practical body.** `description_md` covers practical help, caveats and how to use or compare the items.
 - **Talk about the items, not the website.** No `use this catalog`, `this page` or `the dataset`. Never narrate how the page was made. Follow Public Copy in root `AGENTS.md`.
 - **No raw output.** No raw HTML, raw arrays, nested objects or unexplained `Yes`/`No` values.

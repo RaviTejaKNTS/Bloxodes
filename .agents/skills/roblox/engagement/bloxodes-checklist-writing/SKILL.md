@@ -11,7 +11,7 @@ Use this after `bloxodes-checklist-research` and parent approval. Follow `dev-do
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Checklists" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Checklists" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - The approved `brief.md`.
 
 ## Workflow
@@ -30,7 +30,7 @@ Use this after `bloxodes-checklist-research` and parent approval. Follow `dev-do
 
 ## Where the voice goes
 
-- **`description_md` gets a little personality.** Say what 100% means in this game and set up the run. "Ember Isles 100% means every vault, every rod and every island quest. It's a long haul, so tick things off as you go."
+- **`description_md` gets a little personality.** Say what 100% means in this game and set up the run. Name the real groups this game's 100% covers, then give one honest line about the size of the run.
 - **Task titles are plain actions.** "Craft the Ember Compass," not "Make sure you complete the important task of obtaining the Ember Compass."
 - **Descriptions only when they help.** A location, a requirement or the one thing people miss.
 - **Never narrate how the page was made.** Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.

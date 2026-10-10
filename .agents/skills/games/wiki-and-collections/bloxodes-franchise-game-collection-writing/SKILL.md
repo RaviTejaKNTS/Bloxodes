@@ -31,7 +31,7 @@ When updating an existing collection, preserve accurate copy and structure. Chan
 
 ## Voice
 
-Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of its `references/examples.md`. Write like a player who has already figured this system out and is happy to save you the trial and error.
+Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`. Write like a player who has already figured this system out and is happy to save you the trial and error.
 
 - Lead every prose field with the useful bit: what these things do, the choice that matters, the mistake to avoid.
 - Personality goes in `intro_md`, `description_md` and `wiki_md`. Card facts, table values, controls, mission names, platform sequences and directions stay plain.
@@ -69,7 +69,7 @@ Write one short paragraph that starts with the in-game system. Explain why the e
 
 Answer the remaining player questions with the fewest useful headings:
 
-- Be complete: use the dataset's real numbers to cover the best early, mid and late choices, best-value options, unlocks and common mistakes, at least as well as the top-ranking guides. Give answers, not "check the X" chores.
+- Be complete: use the dataset's real numbers to cover what players need to choose well, at least as well as the top-ranking guides. That means early, mid and late choices and best-value options when the collection has a progression or price, plus unlocks and common mistakes. A location or route collection covers access and route logic instead. Give answers, not "check the X" chores.
 
 - Explain unlocks, progression, tradeoffs, route choices, platform differences, edition limits, and common mistakes when relevant.
 - Use short paragraphs, bullets for steps or comparisons, and a small table only when it clarifies several shared options.

@@ -1,6 +1,6 @@
 # Bloxodes Article Standard
 
-This is the article layer on top of the house voice. Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md` (examples in `references/examples.md`). It covers how articles sound. This file covers what a good Bloxodes article has to deliver. It applies to research, writing, editing and review. Specialized skills (tech, tier list, best games, monthly report) add their own data, media and block rules on top.
+This is the article layer on top of the house voice. Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md` (examples in `.agents/skills/bloxodes-voice/references/examples.md` when you can open repo files). It covers how articles sound. This file covers what a good Bloxodes article has to deliver. It applies to research, writing, editing and review. Specialized skills (tech, tier list, best games, monthly report) add their own data, media and block rules on top.
 
 None of this is a template. Pick the outline, heading mix, opening and ending that fit the topic. If two of our articles on different topics have the same shape, ask whether the second one really needed it.
 
@@ -36,7 +36,7 @@ Everything in the article serves those answers. Write for a US audience in Ameri
 - There's no word target and no brevity target. Match depth to the promise and the evidence. A big update deserves several full sections. Short sentences never mean a short article: see "Short sentences, full pages" in the voice guide.
 - Aim to be the most complete page for the query. Look at what the top-ranking guides cover (stats, comparisons, prerequisites, common mistakes, what to do next) and cover at least that much, written better.
 - Use every supported, useful fact in the brief. Leaving out stats, costs or effects the brief has is a defect, not tightening.
-- Only a question with a genuinely one-line answer gets a very short article. A how-to, an item or unlock guide, an update explainer or a strategy guide never does.
+- A simple answer may be short: only a question with a genuinely one-line answer gets a very short article. A how-to, an item or unlock guide, an update explainer or a strategy guide never does.
 - Develop each subject until it answers the next obvious question: how does it work, where do I go, what do I press, what happens if I hold it, what do I get, what can go wrong.
 - Name the real NPCs, landmarks, controls, costs, rewards and exceptions the brief supports. "Adds stronger attacks and better movement" isn't enough when the brief says exactly what changes.
 - An item or unlock guide ("How to get X") covers: what X does and why it's worth getting (with its supported stats or effects), anything you need first, the route with landmarks, each step, what X is good for once you have it, and what to aim for next. Add common problems when the evidence has them.
@@ -89,7 +89,7 @@ When the brief gives a useful named event, tool, condition or option, use it whe
 
 ## Benchmark
 
-The [Beebom study](beebom-style-study.md) shows how strong Roblox guides cover search intent, structure and depth. Use it for structure and coverage. Our voice comes from the voice guide, not from Beebom.
+The Beebom study (`.agents/skills/bloxodes-article-writing/references/beebom-style-study.md`) shows how strong Roblox guides cover search intent, structure and depth. Use it for structure and coverage. Our voice comes from the voice guide, not from Beebom.
 
 ## Final review
 
@@ -100,4 +100,4 @@ Before calling an article done:
 - Check tables, transitions, supported advice and the ending. A correct outline with thin sections or a list-like voice is not done.
 - Cut forced humor, repeated caveats, decorative links and FAQs that repeat the body.
 - JSON, media, route and browser checks are separate. Passing them doesn't mean the article explains its topic well.
-- Approved-brief articles get [one editorial revision](editorial-review.md): specific feedback, revised copy, a final read. Keep facts and media. Prose fixes don't trigger new research. Focused factual refreshes keep their narrow scope.
+- Approved-brief articles get one editorial revision (`.agents/skills/bloxodes-article-writing/references/editorial-review.md`): specific feedback, revised copy, a final read. Keep facts and media. Prose fixes don't trigger new research. Focused factual refreshes keep their narrow scope.

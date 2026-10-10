@@ -97,7 +97,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 Every public word follows the house voice in `.agents/skills/bloxodes-voice/SKILL.md`. Short version: write like a player who knows the game and is explaining it to a friend. Answer first, use clean short sentences and real game nouns, and add a bit of fun where it fits. No templates, hype, filler or em dashes.
 
-Never say where a fact came from or how the page was made. Sources, research notes, briefs, datasets, manifests and workflows stay out of visible copy.
+Never say where a fact came from or how the page was made. Sources, research notes, briefs, datasets, manifests and workflows stay out of visible copy. The one exception is credit that helps the reader: crediting the developer or an official announcement ("the developer confirmed a fix is coming"), and, in news and data reports, attributing company figures and allegations to whoever made them ("Roblox says...", "the lawsuit claims..."). See "Facts and honesty" in the voice guide.
 
 - Bad: "According to our sources, Research takes 3 minutes." Good: "Research takes 3 minutes."
 - Bad: "Our research shows the vault opens at night." Good: "The vault opens at night."

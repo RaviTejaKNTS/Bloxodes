@@ -49,7 +49,7 @@ The collection page gets built from the sources you find, so list every one. Lat
 
 Later, a writer turns your brief into the page intro, section notes and wiki blurb. Read `.agents/skills/bloxodes-voice/SKILL.md` first so you know what the page should sound like, then give them good material.
 
-- **Write facts in player language.** "Legendaries only hatch from the Golden Egg" is ready to use. "Legendary-tier acquisition is restricted to premium egg sources" isn't.
+- **Write facts in player language.** "Mythic boats only come from the Storm Crate" is ready to use. "Mythic-tier acquisition is restricted to premium crate sources" isn't.
 - **Name the reader's real question.** Why does someone look up this collection? Picking the best one, finding where to get one, tracking what's left?
 - **Flag hooks worth using.** The choice that matters most, a common mistake, a surprising true fact about the system.
 - **Keep doubts and sources private.** Source quality, conflicts and uncertainty go in `Known gaps or risks` and the source list, not mixed into facts the writer will copy.

@@ -11,7 +11,7 @@ Use this after `bloxodes-quiz-research` and parent approval.
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Quizzes" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Quizzes" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - The approved `brief.md`.
 
 ## Workflow
@@ -30,7 +30,7 @@ Use this after `bloxodes-quiz-research` and parent approval.
 
 ## Where the voice goes
 
-- **The page description gets the personality.** A quick challenge to the reader and a hint of what the questions cover, without giving answers away. "Think you know Ember Isles? Easy questions cover Harbor Camp basics. Hard ones ask about vault puzzles even veterans get wrong."
+- **The page description gets the personality.** A quick challenge to the reader and a hint of what the questions cover, without giving answers away. Name the real places or systems the easy and hard questions touch.
 - **Questions and options stay plain.** One exact question, four clean options. No jokes, puns or extra words where a player needs one precise answer.
 - **Explanations teach in a friendly sentence or two.** Add the useful "why," not just "the answer is B."
 - **Never narrate how the page was made.** Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.

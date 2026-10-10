@@ -52,6 +52,7 @@ For example, a five-location guide starts with five entries even if the lead sou
 4. Inspect full source pages, including lazy-loaded `src`, `srcset` and `data-src` values. Never pick from a search thumbnail alone.
 5. Match each image using nearby headings, captions, alt text, map labels or surrounding instructions. For best-games articles, the exact official Roblox experience page is the source-page proof for its landscape thumbnail. Look at the full image yourself. Cross-check unclear matches.
 6. Reject logos, covers, edited thumbnails, page screenshots, decorative art, unrelated maps, collages that hide the target, watermarks, big arrows and visible site branding.
+   - A "big arrow" is a mark someone drew on top of the screenshot (arrow, circle, box or scribble) that covers part of the target or pulls the eye away from it. Markers that are part of the game itself, like map pins, quest arrows or the game's own highlight boxes, are fine. A small, neat editor mark that points at the target without covering it is also fine; note it in `media.json`.
 7. For every entry, record the source page, original image URL, exact-match evidence, provenance note, useful alt text and status.
 8. If the source or file states an explicit attribution or license condition, record it and stop for parent review before use. Don't add a public attribution caption automatically.
 

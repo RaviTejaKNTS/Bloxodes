@@ -13,7 +13,7 @@ Use this after `brief.md`, data readiness and image readiness are approved, for 
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - The approved `brief.md`.
 
 ## Useful coverage
@@ -53,9 +53,7 @@ The brief owns the page type. `database` copy can focus on browsing and comparin
 
 ### `intro_md`
 
-One small paragraph that drops straight into the item system and gives the reader their bearings. It shouldn't repeat anything said elsewhere on the page.
-
-> Every pet in Garden Rush boosts one thing: growth speed, harvest size or sell price. The trick is picking the boost your garden is short on, not the rarest egg you can afford.
+One small paragraph that drops straight into the item system and gives the reader their bearings. It shouldn't repeat anything said elsewhere on the page. A strong intro names what every item does in the game, then the one choice that actually matters when picking. See "Game collections" in `.agents/skills/bloxodes-voice/references/examples.md` for the move, and write your own words.
 
 ### Cards (from the dataset)
 
@@ -86,15 +84,14 @@ Optional section notes that sit above each card group. Use one only when it adds
 
 - Keys must exactly match the rendered section labels from `items[].system.section` and `meta.display.sectionOrder`. If the sections are `Basic`, `Rare` and `Exclusive`, those are your keys.
 - Don't write a note for every section by default. An empty `description_json` is fine when the labels say enough.
-
-> Legendaries only hatch from the Golden Egg, and their boosts stack with any mutation the pet rolls.
+- A good note gives one fact that changes how a player reads that group: where those items come from, or a rule that applies only to them.
 
 ### `description_md`
 
 The main body. It covers what a player needs to use or finish this collection: strategy, progression, the key choices and trade-offs, common mistakes and any rules the cards don't make obvious. Cover what's genuinely useful for this collection, then stop. The goal is a page that feels complete, not one that fills a template.
 
 - Let the content decide the structure. Use as few sections as the brief's player questions need, but answer all of them. Don't force a section count or reuse the same shape on every page.
-- Be complete. Cover what a player needs to choose well: best early, mid and late picks with the real numbers behind them, the best-value options, how the system unlocks or progresses, and the common mistakes. Match what the top-ranking guides for this collection cover. Three thin sections of "check the cost before you buy" is not a finished body.
+- Be complete. Cover what a player needs to choose well: best early, mid and late picks with the real numbers behind them and the best-value options (when the collection has a progression or price), how the system unlocks or progresses, and the common mistakes. Match what the top-ranking guides for this collection cover. Three thin sections of "check the cost before you buy" is not a finished body.
 - Give answers, not chores. Instead of "check the route before you save up," say which items need Research, a case or an event, and what the cheapest good option is.
 - Short paragraphs of about 2 or 3 sentences. Break up anything that turns into a wall.
 - Bullets for steps, tips, quick comparisons and short lists.
@@ -115,16 +112,14 @@ The blurb that sits next to this collection's link on the game's wiki hub. Most 
 - 2 to 4 sentences: enough to help someone decide to open the page, not a full guide.
 - No item counts, and never mention the page, the list or "this collection." Talk about the game system.
 
-A good shape: what it is in the game, then how it works or how you get it, then why it matters.
-
-> Pets hatch from eggs at the Seed Shop and follow you around your plot. Each one boosts growth speed, harvest size or sell price, and higher rarities boost more. Early on, a common sell-price pet usually earns more than a rare growth pet.
+A good shape: what it is in the game, then how it works or how you get it, then why it matters. End on a practical takeaway a new player can act on.
 
 ## Field jobs
 
 - `display_name`: the short reusable collection name for UI labels and wiki hub headings, like `Units`, `Food Items`, `NPCs` or `UGC Items`. No counts, game names, colons or SEO phrasing. This is the canonical label, so scripts never infer it from `collection_slug` or `title`.
 - `title`: the collection title pattern with the count token: `All {count} <Collection> in <Game>`. Add one short reader-focused angle only when it makes the title clearer. Never replace `{count}` with a number yourself.
 - `seo_title`: close to the title, natural for search, with the same `{count}` token when the title has a count.
-- `meta_description`: what the reader can compare or learn, plus a reason to click. "Compare every Garden Rush pet by boost, rarity and egg, and see which ones are worth hatching first."
+- `meta_description`: what the reader can compare or learn, plus a reason to click, in roughly 140 to 160 characters. Name the game, the items and the comparison players care about.
 - `intro_md`: what this collection is in the game and why players compare it.
 - `description_md`: the main body described above. Flexible structure, no fluff, no repeats.
 - `how_it_works_md`: explain page fields only when they need context. Keep it short.

@@ -11,7 +11,7 @@ Use this after `bloxodes-tool-research` and parent approval. Don't create a tool
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Tool pages" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Tool pages" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - The approved `brief.md`.
 
 ## Workflow
@@ -30,7 +30,7 @@ Use this after `bloxodes-tool-research` and parent approval. Don't create a tool
 
 ## How the copy should read
 
-- **Start with the player's problem.** What they're trying to decide, what they enter, what they get and how to use it in the game. "Not sure whether that mutated pumpkin is worth selling now? Enter the crop, its weight and any mutations, and you'll see what it sells for at every shop."
+- **Start with the player's problem.** What they're trying to decide, what they enter, what they get and how to use it in the game. Name the real inputs and the result in this game's terms.
 - **Formulas in plain language.** Say how the number is built and what can throw it off. Use a quick worked example when it helps.
 - **Honest about limits.** Don't promise exactness when results depend on changing game data or the player's assumptions. Say it once, where it matters.
 - **Labels and inputs stay plain.** Personality lives in the intro and explanations, not in input labels or result units.

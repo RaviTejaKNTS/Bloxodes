@@ -78,7 +78,7 @@ If subagents aren't available, run the same gates as separate passes. Never coll
 **Writing worker** (after image approval)
 
 - Read `.agents/skills/bloxodes-franchise-game-collection-writing/SKILL.md` completely.
-- Read `.agents/skills/bloxodes-voice/SKILL.md` and the "Game collections" section of its `references/examples.md`. That's how the copy should sound.
+- Read `.agents/skills/bloxodes-voice/SKILL.md` and the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`. That's how the copy should sound.
 - Read the approved brief and dataset.
 - Write only `final.json`, parse it and return it for parent review.
 
@@ -174,7 +174,7 @@ Then read it as a player and check it against `bloxodes-voice`:
 
 - **Answer first.** The intro opens on something the player came for, not on the game's popularity or what the page covers.
 - **Player voice.** It sounds like someone who plays, with real game nouns and an opinion the facts back. No manual or report tone.
-- **Complete, not just clean.** The body uses the dataset's real numbers to say what to pick early, mid and late, the best-value options, how the system unlocks and the common mistakes, at least as well as the top-ranking guides. A few short "check the cost" sections is a fail.
+- **Complete, not just clean.** The body uses the dataset's real numbers to answer what players need to choose well: early, mid and late picks and best-value options when the collection has a progression or price, plus how the system unlocks and the common mistakes, at least as well as the top-ranking guides. A few short "check the cost" sections is a fail.
 - **No templates or research voice.** No "Welcome to", "In this guide", "according to sources", "reportedly" or hype words.
 - **Public copy explains the game system,** never the site, sources, workflow or database.
 - **No repeats.** Intro, section notes, FAQs and hub blurb each add something new.

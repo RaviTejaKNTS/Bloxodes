@@ -39,7 +39,7 @@ Use the target franchise schema supplied by the context. Unless the target imple
 
 ## Voice
 
-Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of its `references/examples.md`. A hub is the front door to the game, so a new player should finish the description knowing what they actually do in it, and the tips should sound like advice from someone who's already made the early mistakes.
+Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`. A hub is the front door to the game, so a new player should finish the description knowing what they actually do in it, and the tips should sound like advice from someone who's already made the early mistakes.
 
 - Open `description_md` on what the player does, not "X is a game where..."
 - Real game nouns, short paragraphs, "you" when it helps.

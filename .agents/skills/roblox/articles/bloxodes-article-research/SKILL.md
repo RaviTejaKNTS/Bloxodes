@@ -90,7 +90,7 @@ A gameplay how-to normally needs at least two independent sources for exact mech
 3. The one-source facts are marked as a risk, not overstated.
 4. You didn't add unsupported claims to make the article feel fuller.
 
-When sources disagree, list the disagreement and recommend the safer fact set. Drop only the value that conflicts and keep the facts that agree. If two guides disagree on a rod's weight limit but agree on its Luck, the Luck stays in the brief.
+When sources disagree, keep every competing value in the brief with its source, then recommend how the writer should use it: the better-supported value, a range ("400 to 600 Coins") or the in-game place to confirm it. Never drop a number, recipe or step just because sources differ. The facts that agree stay as plain facts. If two guides disagree on a rod's weight limit but agree on its Luck, the Luck stays as a fact and the weight limit stays as a recommended value or range.
 
 **Keep the payoff and the depth.** The writer can only be as complete as the brief. Always collect what the topic's reward or subject actually does (stats, effects, costs, comparisons), why a player would want it, what comes next, and the common problems. Match what the top-ranking guides cover. Never narrow a guide to "just the route" by removing the facts that explain why the reader should care. That makes a thin page, not a safer one.
 
@@ -218,7 +218,7 @@ Search every planned target, even when prose could technically describe it. An i
 Accept an image only when it:
 
 - shows the useful detail clearly
-- has no watermarks, big arrows, subscribe overlays or competitor branding
+- has no watermarks, big arrows (see the definition in `bloxodes-article-images`), subscribe overlays or competitor branding
 - comes from a reliable source page and matches the exact game target or state
 
 A clean, exact, genuine gameplay screenshot from a credible guide or wiki is usable when you record its provenance. Don't reject it just because another editorial site hosts it or the page has no general reuse license. If the source or file states an explicit attribution or license condition, record it for parent review before use. Don't add a public attribution caption automatically.

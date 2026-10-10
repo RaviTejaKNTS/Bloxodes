@@ -33,7 +33,7 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 
 ## Tone for stressed readers
 
-- Open by saying what the error or problem means in one or two plain sentences, then point straight at the fixes. "Error 277 means your connection to the game server dropped. Usually it's your network, sometimes it's Roblox's servers."
+- Open by saying what the error or problem means in one or two plain sentences, then point straight at the fixes. Name the likely cause in plain words, and say whether it's usually on the player's side or Roblox's.
 - Calm and reassuring, never chirpy. Wit is off.
 - Every fix says when it helps, what to do and what you should see after. Then "still stuck? try the next one."
 
@@ -76,7 +76,7 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 ### Tech accuracy
 
 - Never tell a reader to play Roblox in a web browser. The browser player is discontinued, and `roblox.com` only launches the installed app.
-- Never invent error codes, menu paths or toggles. If a path is uncertain, keep the wording general.
+- Never invent error codes, menu paths or toggles. If a path a fix depends on is uncertain, send it back for research, like the base skill says. Keep wording general only for side details the fix doesn't need.
 - Stay evergreen: no version numbers, dates, "latest/current/2025" or "updated" claims.
 
 ### Media for troubleshooting

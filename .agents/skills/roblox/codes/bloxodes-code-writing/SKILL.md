@@ -19,7 +19,7 @@ A codes page has two jobs. The refresh script keeps the code list live, and your
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Codes pages" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Codes pages" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 
 ## Workflow
 
@@ -61,7 +61,7 @@ Cover, in simple words:
 - `robloxLink`: the official Roblox experience URL.
 - `sourceUrls`: RobloxDen first when available, Beebom second when available.
 - `seoTitle`: null unless the user asks for custom text.
-- `seoDescription`: what the page helps with, in evergreen terms with no counts or dates. "Redeem Garden Rush codes for free Seeds and eggs. See how to use them, what they give and why a code might not work."
+- `seoDescription`: what the page helps with, in evergreen terms with no counts or dates. Name the game's real rewards, then what the page helps with (redeeming, rewards, codes that fail), in roughly 140 to 160 characters.
 - `introMd`: the game and how codes fit its rewards or progression.
 - `redeemMd`: verified redemption steps.
 - `rewardsMd`: the kinds of rewards and how to use them well, never current code-name mappings.

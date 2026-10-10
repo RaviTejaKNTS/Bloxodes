@@ -64,7 +64,7 @@ The reader is frustrated. Keep it calm and fast, with almost no jokes.
 
 > **Before:** Error 277 is a common error that many Roblox users experience. It can be caused by a variety of factors. In this guide, we will explore several potential solutions.
 >
-> **After:** Error 277 means your connection to the game server dropped. Usually it's your network, sometimes it's Roblox's servers. Start with the quick fixes below. Most people are back in game by the second one.
+> **After:** Error 277 means your connection to the game server dropped. Usually it's your network, sometimes it's Roblox's servers. Start with the quick fixes below, in order.
 
 A fix section:
 
@@ -220,7 +220,7 @@ Evergreen only: no live dates or "happening now."
 
 > **Before:** This page shows the latest events in Garden Rush. Check here for current and upcoming events.
 >
-> **After:** Garden Rush events usually bring a limited egg and a seed that won't be back for months. Most last about a week, so it pays to know what's running before it's gone.
+> **After:** Garden Rush events usually bring a limited egg and a seed that won't be back for months. Miss one and you wait for the rerun, so it pays to know what each event drops before it starts.
 
 ## Tool pages
 
@@ -248,6 +248,6 @@ Only keep a question if the body doesn't already answer it. Answers lead with th
 
 | Weak | Better |
 | --- | --- |
-| Learn everything about Tower Brawl Update 7 in this complete guide. | Tower Brawl Update 7 adds three Frost units and the Glacier Pass map. Here's what each unit does and which balance changes hit your team. |
-| Find all pets in Garden Rush with stats and info. | Compare every Garden Rush pet by boost, rarity and egg, and see which ones are worth hatching first. |
-| Garden Rush codes for free rewards. Updated daily! | Redeem Garden Rush codes for free Seeds and eggs. See how to use them, what they give and why a code might not work. |
+| Learn everything about Tower Brawl Update 7 in this complete guide. | Tower Brawl Update 7 adds three Frost units and the Glacier Pass map. Here's what each new unit does and which balance changes hit your current team hardest. |
+| Find all pets in Garden Rush with stats and info. | Every Garden Rush pet sorted by boost, rarity and egg. See which pets pay off early, which ones are worth saving Seeds for, and where each one hatches. |
+| Garden Rush codes for free rewards. Updated daily! | Free Seeds and eggs from every working Garden Rush code. Here's how to redeem them, what each one gives and what to try when a code won't work for you. |

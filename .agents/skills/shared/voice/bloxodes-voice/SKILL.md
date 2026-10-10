@@ -36,7 +36,7 @@ Most game names, NPCs and numbers in this guide and its examples are made up. Tr
 | --- | --- | --- |
 | Template openings | "Welcome to...", "In this guide, we'll...", "Are you looking for...", "X is a popular Roblox game where...", "If you're a fan of..." | Open on the answer, the problem or the payoff (see Openings). |
 | Manual voice | "Players can utilize the menu to...", "This feature allows users to...", "The system provides..." | "Open the menu and..." Say what the player does. |
-| Research voice | "according to sources", "is reported to", "community-documented", "launch-day guides describe", "it's unresolved whether", "a common tip, not a studio rule" | State what's known. Put a real doubt in plain words, once (see Uncertain facts). |
+| Research voice | "according to sources", "is reported to", "community-documented", "launch-day guides describe", "it's unresolved whether", "a common tip, not a studio rule", "no guide confirms", "guides posted in October", "the lists below come from" | State what's known. Put a real doubt in plain words, once (see Uncertain facts). |
 | Hype | ultimate, insane, epic, amazing, must-have, game-changer, unleash, dive in, embark, look no further, take your game to the next level | Let a concrete detail do the work. |
 | AI filler | Additionally, Furthermore, Moreover, It's worth noting, It's important to note, In conclusion, Overall, "not just X but Y", "whether you're a beginner or a pro", "the world of" | Cut it. The sentence almost always works without it. |
 | Fake experience | "When I played...", "In our testing...", "We spent hours..." | Use the facts you have. Never invent a session, test or result. |
@@ -71,7 +71,7 @@ After the hook, a sentence or two of useful context is welcome. Then get into it
 
 SEO and voice aren't fighting. Search engines and readers want the same thing: a page that clearly answers the question someone typed.
 
-**Titles** lead with the exact thing people search for, including the game name. Add a short hook only if it's useful and there's room.
+**Titles** lead with the exact thing people search for, including the game name. Keep the query's key word when the brief names it: if players search "awaken", the title says "awaken", even if the game also calls it "evolve". Add a short hook only if it's useful and there's room.
 
 | Templated | Better |
 | --- | --- |
@@ -82,7 +82,7 @@ SEO and voice aren't fighting. Search engines and readers want the same thing: a
 **Meta descriptions** are one or two plain sentences: what the reader gets, plus a reason to click. Aim for roughly 140 to 160 characters. No "Learn everything about..." and no keyword lists.
 
 > Weak: "Learn everything about the Ember Compass in Ember Isles, including how to get it and more."
-> Better: "Mara won't show the Ember Compass recipe until you finish two other crafts. Here's the full route, every material and where to farm it."
+> Better: "Mara won't show the Ember Compass recipe until you finish two other crafts first. Here's the full unlock route, every material and the best spot to farm each."
 
 **Headings:**
 
@@ -156,7 +156,7 @@ Some facts are fuzzy: estimated drop rates, a timer nobody has confirmed, a pric
 | Sounds like a research report | Sounds like a player |
 | --- | --- |
 | "Current community-documented behavior suggests an approximately ten-minute duration. This is not an official timer." | "The portal stays open for about ten minutes, and leaving the area can close it early. Get your group ready first." |
-| "Bulk Pickup's first Coin price is not settled, so pay what the panel shows." | "Bulk Pickup's first price can vary, so check the stall before you save up." |
+| "Bulk Pickup's first Coin price is not settled, so pay what the panel shows." | "Bulk Pickup's first upgrade costs 400 to 600 Coins, depending on the server. Save 600 and you're covered either way." |
 | "Launch-day guides also describe offline crafting." | "Crafts keep running while you're offline." (If the brief verifies it. If it doesn't, leave it out.) |
 | "A common tip, not a studio rule, is Bulk Pickup first." | "Most players grab Bulk Pickup first, and it's the right call: it speeds up every trip." |
 | "Times and costs below follow launch-day guides. Double-check after patches." | "Patches sometimes tweak these numbers, so trust the in-game menu if one looks off." (Once per page, only if it matters.) |
@@ -203,6 +203,6 @@ Read the whole thing as a player who just searched the title. Then check:
 
 ## Page-type examples
 
-[references/examples.md](references/examples.md) has before/after examples for every page type: article intros and sections, troubleshooting, tier lists, best-games picks, wiki hubs, collections, catalogs, codes, quizzes, checklists, events, tools and FAQs. Read the section for your page before drafting. Learn the move, then write your own words. Don't reuse the example sentences.
+`.agents/skills/bloxodes-voice/references/examples.md` has before/after examples for every page type: article intros and sections, troubleshooting, tier lists, best-games picks, wiki hubs, collections, catalogs, codes, quizzes, checklists, events, tools and FAQs. Read the section for your page before drafting when you can open repo files. Script prompts embed this guide without the examples, and the rules above stand on their own. Learn the move, then write your own words. Don't reuse the example sentences.
 
 Each page-type writing skill still owns its fields, output shape and data rules. This guide owns how the words sound.

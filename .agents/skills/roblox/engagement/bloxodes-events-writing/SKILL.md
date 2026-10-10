@@ -18,7 +18,7 @@ Use this after `bloxodes-events-research` and parent approval. Timeline rows, li
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Events pages" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Events pages" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - The approved `brief.md`.
 
 ## Workflow
@@ -37,7 +37,7 @@ Use this after `bloxodes-events-research` and parent approval. Timeline rows, li
 
 ## How the copy should read
 
-- **Open on what events mean in this game.** Limited eggs, a seasonal boss, double XP weekends: whatever this game's events actually bring. "Garden Rush events usually bring a limited egg and a seed that won't be back for months."
+- **Open on what events mean in this game.** Limited eggs, a seasonal boss, double XP weekends: whatever this game's events actually bring. Name the real rewards and why missing them hurts.
 - **Give players a reason to keep an eye out,** without pointing at a live event that will expire.
 - **Talk about the game, not the page.** Never narrate how it was made. Follow Public Copy in root `AGENTS.md`.
 

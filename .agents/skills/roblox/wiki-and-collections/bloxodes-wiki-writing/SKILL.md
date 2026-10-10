@@ -11,7 +11,7 @@ Use this after `bloxodes-wiki-research` and parent approval.
 
 ## Read first
 
-- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of its `references/examples.md`.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - The approved `brief.md`.
 
 ## Workflow
@@ -50,7 +50,7 @@ Use this after `bloxodes-wiki-research` and parent approval.
 - `slug`: the editorial game slug. Never `roblox_universes.slug`.
 - `title`: the simple hub pattern `<Game> Wiki`.
 - `seo_title`: close to the title and readable in search.
-- `meta_description`: what a player can figure out here, in one or two plain sentences with a reason to click. Example: "Learn how fishing, crafting and the island vaults fit together in Ember Isles, plus the early tips that save you hours."
+- `meta_description`: what a player can figure out here, in one or two plain sentences with a reason to click. Aim for roughly 140 to 160 characters. Lead with the game and what the player gets, never "Learn how" or "Learn everything".
 - `description_md`: 1 or 2 short, link-free paragraphs about what the player does and how the core loop works. No promises about what the wiki covers, no links, not a full guide.
 - `tips_md`: 3 or 4 concrete tips for a new or returning player.
 - `controls_json`: `[]` when nothing is verified. Otherwise an array of rows like `{ "action": "Jump", "desktop": "Space" }`, using only verified device keys: `desktop`, `mobile`, `tablet`, `console` and `vr`. Never generic `controls`, `keys`, `value` or `description` fields.

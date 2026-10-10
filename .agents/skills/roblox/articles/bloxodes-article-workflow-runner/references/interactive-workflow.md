@@ -108,7 +108,7 @@ Put these in the writer handoff:
 
 Then tell the writer, for normal gameplay and general articles:
 
-- Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md` and the article section of its `references/examples.md`. This is how the article should sound.
+- Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md` and the article section of `.agents/skills/bloxodes-voice/references/examples.md`. This is how the article should sound.
 - Use `/bloxodes-article-writing`. Skill file: `.agents/skills/bloxodes-article-writing/SKILL.md`, including its [article standard](../../bloxodes-article-writing/references/editorial-standard.md).
 - Read the approved `brief.md`, starting with its writing packet, and the approved `media.json`.
 - Write the matching `final.json` as a first draft, then return it for review.

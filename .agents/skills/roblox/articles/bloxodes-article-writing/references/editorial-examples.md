@@ -39,7 +39,7 @@ Possible sections: "How to Get the Ember Compass in Ember Isles", "Ember Compass
 
 Before a materials table, say what unlocks the recipe. After it, say where to craft and anything that trips people up. Don't praise the system, and don't re-read the rows.
 
-> **Before the table:** You'll need materials for all three crafts, not just the compass. Here's the full shopping list.
+> **Before the table:** The compass is only the first of three crafts, and each one needs its own materials. Here's the full shopping list.
 >
 > **After the table:** Cinder Shards are the slow one. Ember Crabs drop them at night only, so plan your farming around the clock.
 

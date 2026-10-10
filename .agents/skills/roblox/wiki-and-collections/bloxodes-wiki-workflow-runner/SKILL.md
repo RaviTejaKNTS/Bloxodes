@@ -26,7 +26,7 @@ After you approve the brief, send the same subagent:
 
 - Continue with `/bloxodes-wiki-writing`.
 - Skill file: `.agents/skills/bloxodes-wiki-writing/SKILL.md`.
-- Voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of its `references/examples.md`.
+- Voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - Create `final.json` for the approved brief only.
 
 ## Workspace

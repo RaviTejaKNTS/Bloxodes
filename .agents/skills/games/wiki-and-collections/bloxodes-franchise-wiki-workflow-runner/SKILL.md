@@ -49,7 +49,7 @@ When subagents are available and authorized, give one worker one title. Workers 
 **Writing handoff** (after approval)
 
 - Read `.agents/skills/bloxodes-franchise-wiki-writing/SKILL.md` completely.
-- Read `.agents/skills/bloxodes-voice/SKILL.md` and the "Wiki hubs" section of its `references/examples.md`. That's how the hub should sound.
+- Read `.agents/skills/bloxodes-voice/SKILL.md` and the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`. That's how the hub should sound.
 - Read the approved brief.
 - Write `game.json` and `final.json` for that title only.
 
