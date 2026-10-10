@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Model Routing"
+  short_description: "Split T3 Code runs between Luna and Haiku 5.5"
+  default_prompt: "Use $bloxodes-model-routing when you orchestrate a Bloxodes runner in T3 Code. Hand each stage to a fresh child on its assigned model: Luna for research, data, images and editorial review, Haiku 5.5 for reviews of Luna's work, writing and the one revision. Review every handoff and stop at approved finals."

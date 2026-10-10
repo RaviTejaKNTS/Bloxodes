@@ -1,11 +1,13 @@
 ---
 name: bloxodes-gta-wiki-workflow-runner
-description: Run one approved Bloxodes GTA wiki hub through research, parent review, writing, managed-development verification, and browser review. Use for new or updated GTA wiki hubs. Never publish production.
+description: Run one approved Bloxodes GTA wiki hub through research, parent review, writing, managed-development verification, and browser review. In T3 Code each stage goes to its assigned model (Luna for research and editorial review; Haiku 5.5 for research review and writing). Use for new or updated GTA wiki hubs. Never publish production.
 ---
 
 # Bloxodes GTA wiki workflow runner compatibility entrypoint
 
 This is the GTA entry point for running a hub. Read and follow `.agents/skills/bloxodes-franchise-wiki-workflow-runner/SKILL.md` completely, using this fixed context.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs GTA hubs here), follow the "Franchise wiki hubs" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the franchise runner's worker handoffs, using the GTA context below. Luna researches and does the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, the flow below applies.
 
 ## GTA context
 

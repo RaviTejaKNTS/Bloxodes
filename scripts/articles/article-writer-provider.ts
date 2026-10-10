@@ -87,21 +87,21 @@ export function classifyCodexFallbackReason(output: string): CodexFallbackReason
     return "authentication";
   }
   if (
-    /\b(model[_ -]not[_ -]found|model unavailable|does not have access to model|unsupported model|unknown model)\b/.test(
+    /\b(model[_ -]not[_ -]found|model unavailable|does not have access to model|unsupported model|unknown model|model may not exist|invalid model|model.*(?:not exist|no access))\b/.test(
       normalized
     )
   ) {
     return "model_unavailable";
   }
   if (
-    /\b(402|429|insufficient[_ -]quota|quota|rate[_ -]?limit|too many requests|usage limit|out of credits|billing limit)\b/.test(
+    /\b(402|429|insufficient[_ -]quota|quota|rate[_ -]?limit(?:s|[_ -](?:exceeded|error))?|too many requests|usage limit|out of credits|billing limit|hit your (?:\w+ )?limit)\b/.test(
       normalized
     )
   ) {
     return "quota_or_rate_limit";
   }
   if (
-    /\b(502|503|504|enoent|no such file or directory|service unavailable|temporarily unavailable|provider unavailable|overloaded|capacity|connection reset|connection refused|dns|network unreachable)\b/.test(
+    /\b(502|503|504|enoent|eacces|enoexec|no such file or directory|service unavailable|temporarily unavailable|provider unavailable|overloaded(?:[_ -]error)?|capacity|connection reset|connection refused|dns|network unreachable|workspace routing discovery timed out)\b/.test(
       normalized
     )
   ) {

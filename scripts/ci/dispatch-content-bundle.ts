@@ -1,12 +1,12 @@
 import "../shared/load-env";
 import fs from "node:fs/promises";
-import path from "node:path";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { resolveArticleDevCredentials } from "../articles/article-queue-env";
 import { parseBatch } from "./content-contract.mjs";
 import { decodeBundle } from "./content-bundle.mjs";
+export { folderInputs } from "./content-bundle.mjs";
 
 export async function dispatchContentBundle(batch: any, inputs: Array<{ source: string; destination: string }>, beforeDispatch?: (hash: string) => Promise<void>) {
   parseBatch(batch);
@@ -39,13 +39,3 @@ export async function dispatchContentBundle(batch: any, inputs: Array<{ source: 
   return { dispatched: true as const, hash };
 }
 
-export async function folderInputs(directory: string, destination: string): Promise<Array<{ source: string; destination: string }>> {
-  const inputs = [];
-  for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
-    const source = path.join(directory, entry.name);
-    if (entry.isSymbolicLink()) throw new Error("Frozen workspaces cannot contain symlinks.");
-    if (entry.isDirectory()) inputs.push(...await folderInputs(source, `${destination}/${entry.name}`));
-    else if (/\.(json|md|png|jpg|jpeg|webp)$/.test(entry.name) && !/^(session|logs?|receipt|history)/.test(entry.name)) inputs.push({ source, destination: `${destination}/${entry.name}` });
-  }
-  return inputs;
-}

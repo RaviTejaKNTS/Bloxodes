@@ -72,7 +72,7 @@ Before you start:
 
 4. Player-facing facts go only in `items[].item`. `items[].system` holds only `slug`, `section`, `sortOrder` and `image`.
 5. Every row needs `items[].item.name`, a stable system slug, a section and a deterministic sort order.
-6. Keep the same public field keys on every row. If a field isn't verified, use `null` or an empty value. Don't delete the key and don't guess.
+6. Keep the same public field keys on every row. If no reliable source gives a value, use `null` or an empty value. Don't delete the key and don't guess. When sources disagree, follow "Conflicting sources" in `.agents/skills/bloxodes-game-collection-data/SKILL.md`: use the better-supported value or a range.
 7. Make mode, expansion, edition, platform, release generation and live-service availability explicit whenever they affect rows or values.
 8. Don't invent normalized performance scores. Use game-displayed or source-defined metrics. The page copy explains their scale later.
 
@@ -83,7 +83,7 @@ Public item values are what players read on cards and tables, so they follow the
 - Write the value, not the research: `12 seconds`, not `reportedly around 12 seconds (unconfirmed)`.
 - No research wording in public values: "reportedly", "unconfirmed", "according to", "sources say", "community-documented".
 - Never expose source URLs, verification notes, raw text, image status, debug fields, scrape keys or internal IDs as public item fields.
-- If a value is shaky, leave it `null` or empty and note the doubt in `brief.md`. The writer decides later whether the page needs a plain caveat.
+- If a value is shaky, use the best-supported value or range and note the doubt and every competing value in `brief.md`. Leave it `null` or empty only when no reliable source gives one. The writer decides later whether the page needs a plain caveat.
 
 ## Display metadata
 

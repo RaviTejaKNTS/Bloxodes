@@ -407,14 +407,37 @@ function normalizeHeadingText(value: string): string {
     .toLowerCase();
 }
 
-function tierDetailSection(markdown: string, rank: string): string | null {
-  const lines = markdown.split(/\r?\n/);
-  const expected = normalizeHeadingText(`${rank} Tier`);
+function normalizeTierHeading(value: string, ranks: string[]): string {
+  // A single longest-first match keeps S- intact even when S is also declared.
+  const escaped = [...ranks].sort((a, b) => b.length - a.length)
+    .map(rank => normalizeHeadingText(rank).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  return normalizeHeadingText(value).replace(new RegExp(`(^|\\s)(${escaped})(?:\\s+[-\\u2010-\\u2015]\\s*|[-\\u2010-\\u2015]\\s*|\\s+)tier(?=\\s|$)`, "g"), "$1$2 tier");
+}
+
+function unfencedLines(markdown: string): string[] {
+  let fence: { marker: string; length: number } | null = null;
+  return markdown.split(/\r?\n/).map(line => {
+    const marker = /^ {0,3}(`{3,}|~{3,})(.*)$/.exec(line);
+    if (fence) {
+      if (marker && marker[1][0] === fence.marker && marker[1].length >= fence.length && !marker[2].trim()) fence = null;
+      return "";
+    }
+    if (marker) { fence = { marker: marker[1][0], length: marker[1].length }; return ""; }
+    return line;
+  });
+}
+
+function tierDetailSection(markdown: string, rank: string, ranks: string[]): string | null {
+  const lines = unfencedLines(markdown);
+  const expected = normalizeTierHeading(`${rank} Tier`, ranks);
   let start = -1;
 
   for (let index = 0; index < lines.length; index += 1) {
     const match = lines[index]?.match(/^##[ \t]+(.+?)[ \t]*#*[ \t]*$/);
-    if (match && normalizeHeadingText(match[1]) === expected) {
+    const heading = match ? normalizeTierHeading(match[1], ranks) : "";
+    const headingRanks = ranks.filter(candidate => ` ${heading} `.includes(` ${normalizeHeadingText(candidate)} tier `));
+    if (headingRanks.length !== 1) continue;
+    if (match && (heading === expected || heading.startsWith(`${expected} `) || heading.endsWith(` ${expected}`))) {
       start = index + 1;
       break;
     }
@@ -431,10 +454,10 @@ function tierDetailSection(markdown: string, rank: string): string | null {
   return lines.slice(start, end).join("\n");
 }
 
-function leadingMarkdownTable(markdown: string): string | null {
-  const lines = markdown.split(/\r?\n/);
-  let start = 0;
-  while (start < lines.length && !(lines[start] ?? "").trim()) start += 1;
+function detailMarkdownTable(markdown: string): string | null {
+  const lines = unfencedLines(markdown);
+  const start = lines.findIndex((line, index) => line.includes("|") && /^\s*\|?\s*:?-{3,}/.test(lines[index + 1] ?? "") && (lines[index + 1] ?? "").includes("|"));
+  if (start < 0) return null;
 
   const header = lines[start] ?? "";
   const separator = lines[start + 1] ?? "";
@@ -447,7 +470,7 @@ function leadingMarkdownTable(markdown: string): string | null {
   return lines.slice(start, end).join("\n");
 }
 
-/** Enforce the overview → one detailed table per tier article contract. */
+/** Require complete detail tables while allowing contextual headings and introductions. */
 export function validateTierListArticleDetails(markdown: string): string[] {
   const tierLists = parseArticleContentBlocks(markdown).filter(
     (block): block is Extract<ArticleContentBlock, { kind: "tier-list" }> => block.kind === "tier-list"
@@ -456,15 +479,23 @@ export function validateTierListArticleDetails(markdown: string): string[] {
   if (tierLists.length > 1) return ["Use one tier-list overview block per article"];
 
   const errors: string[] = [];
+  for (const line of unfencedLines(markdown)) {
+    const match = /^##[ \t]+(.+)$/.exec(line);
+    if (!match) continue;
+    const declaredRanks = tierLists[0].data.tiers.map(tier => tier.rank);
+    const heading = normalizeTierHeading(match[1], declaredRanks);
+    const matches = declaredRanks.filter(rank => ` ${heading} `.includes(` ${normalizeHeadingText(rank)} tier `));
+    if (matches.length > 1) errors.push(`Ambiguous multi-tier detail heading: ${match[1]}`);
+  }
   for (const tier of tierLists[0].data.tiers) {
-    const section = tierDetailSection(markdown, tier.rank);
+    const section = tierDetailSection(markdown, tier.rank, tierLists[0].data.tiers.map(entry => entry.rank));
     if (section === null) {
       errors.push(`Missing ## ${tier.rank} Tier detail section`);
       continue;
     }
-    const table = leadingMarkdownTable(section);
+    const table = detailMarkdownTable(section);
     if (table === null) {
-      errors.push(`## ${tier.rank} Tier must begin with a Markdown detail table`);
+      errors.push(`## ${tier.rank} Tier needs a Markdown detail table`);
       continue;
     }
     const tableLower = table.toLowerCase();

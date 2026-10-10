@@ -1,11 +1,13 @@
 ---
 name: bloxodes-code-workflow-runner
-description: Run one Bloxodes codes page setup with parent review. Use when the user asks to create or update /codes/<game-slug> page fields, source URLs, Roblox link, GitHub Managed content QA, and code refresh workflow without manually writing code rows.
+description: Run one Bloxodes codes page setup with parent review. In T3 Code each stage goes to its assigned model (Luna for the source check and the source and evergreen review; Haiku 5.5 for payload writing). Use when the user asks to create or update /codes/<game-slug> page fields, source URLs, Roblox link, GitHub Managed content QA, and code refresh workflow without manually writing code rows.
 ---
 
 # Bloxodes Code Workflow Runner
 
 You set up one `/codes/<game-slug>` page with one subagent. Codes work differently from other pages: you write the page row, and the refresh script fills in the code rows.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs a codes page here), follow the "Codes" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent handoff below. Luna checks the sources and reviews the payload against them and the evergreen rules. Haiku 5.5 writes the payload and the one revision. Code rows still come only from the refresh job. Outside T3 Code, the flow below applies.
 
 ## Never write code rows by hand
 

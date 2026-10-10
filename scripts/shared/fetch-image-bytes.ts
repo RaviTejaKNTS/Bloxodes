@@ -9,7 +9,7 @@ export async function fetchImageBytes(url: string, init: RequestInit = {}, fetch
     }
     if (!response.ok) {
       await response.body?.cancel();
-      if ((response.status === 429 || response.status >= 500) && attempt < 2) { await pause(1000 * 2 ** attempt); continue; }
+      if (([408, 425, 429].includes(response.status) || response.status >= 500) && attempt < 2) { await pause(1000 * 2 ** attempt); continue; }
       throw new Error(`Image ${url} returned HTTP ${response.status}`);
     }
     const type = response.headers.get("content-type") ?? "";

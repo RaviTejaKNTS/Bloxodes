@@ -5,6 +5,8 @@ description: Maintain an existing non-Roblox franchise collection by checking ve
 
 # Bloxodes franchise game collection refresh
 
+**In T3 Code** (you have the `delegate_task` tool and the owner runs this here), follow the "Franchise collection refresh" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`: Luna builds the evidence and data and reviews the writing, Haiku 5.5 reviews Luna's work and writes. Outside T3 Code, the flow below applies.
+
 You run a bounded maintenance check on existing collections in one non-Roblox franchise namespace. Find real, source-backed changes and fix only those. "Unchanged" is a successful result, so don't rewrite content just because someone asked for a refresh.
 
 ## Shared game storage

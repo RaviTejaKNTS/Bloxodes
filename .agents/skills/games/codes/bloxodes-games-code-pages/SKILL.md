@@ -5,6 +5,8 @@ description: Prepare and verify shared non-Roblox codes pages and verified code 
 
 # Shared game codes pages
 
+**In T3 Code** (you have the `delegate_task` tool and the owner runs this here), follow the "Shared game codes pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`: Luna builds the evidence and data and reviews the writing, Haiku 5.5 reviews Luna's work and writes. Outside T3 Code, the flow below applies.
+
 Use this for verified non-Roblox redeem codes. GTA cheats use collections. Roblox keeps its existing codes skills and refresh script.
 
 1. Read `dev-docs/pipelines/wiki-collections.md` and the approved registry identity. Resolve namespace, game ID and route.

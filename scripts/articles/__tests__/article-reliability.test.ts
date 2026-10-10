@@ -7,7 +7,8 @@ import { authorizePublication, acknowledgePublishedIntents, drainPublications, p
 import { saveJson, runArticlePipeline, type Decision } from "../article-pipeline";
 import { applyLocalCorrections } from "../article-local-correction";
 import { normalizeImageAlt } from "../../content/article-image-readiness";
-import { briefUniverseId, ensureArticleGameIdentity } from "../article-game-identity";
+import { briefUniverseId, ensureArticleGameIdentity, resolveOfficialArticleGame } from "../article-game-identity";
+import { assertArticleUniverseReadback } from "../../content/article-final-readback";
 const dev = { url: "https://test.supabase.co", serviceRole: "test-placeholder" };
 const ids = ["11111111-1111-4111-8111-111111111111", "22222222-2222-4222-8222-222222222222"];
 test("failed publication survives restart, backs off, and does not block another completed article", async () => {
@@ -111,6 +112,40 @@ test("identity preflight only inserts the exact official game, preserves existin
   } finally { globalThis.fetch = original; }
 });
 
+test("official identity retries empty/transient responses and resolves place IDs before giving up", async () => {
+  let calls = 0;
+  const game = { id: 1234, rootPlaceId: 9876, name: "Game" };
+  const direct = await resolveOfficialArticleGame(1234, async () => ++calls === 1 ? new Response(null, { status: 429 }) : calls === 2 ? new Response('{"data":[]}') : new Response(JSON.stringify({ data: [game] })), async () => {});
+  assert.equal(direct.game?.id, 1234); assert.equal(calls, 3);
+  const urls: string[] = [];
+  const mapped = await resolveOfficialArticleGame(9876, async input => {
+    const url = String(input); urls.push(url);
+    return new Response(JSON.stringify(url.includes("/places/") ? { universeId: 1234 } : url.endsWith("=1234") ? { data: [game] } : { data: [] }));
+  }, async () => {});
+  assert.equal(mapped.game?.id, 1234); assert.match(mapped.note, /place mapping corrected/);
+  assert.equal(urls.length, 5);
+  calls = 0;
+  const unavailable = await resolveOfficialArticleGame(9999, async () => { calls++; return new Response('{"data":[]}'); }, async () => {});
+  assert.equal(unavailable.game, null); assert.match(unavailable.note, /universe_id is null/); assert.equal(calls, 4);
+});
+test("official identity retries malformed and empty JSON within its existing budget", async () => {
+  const game = { id: 1234, rootPlaceId: 9876, name: "Game" };
+  let calls = 0;
+  const result = await resolveOfficialArticleGame(1234, async () => new Response(++calls === 1 ? "{" : calls === 2 ? "" : JSON.stringify({ data: [game] })), async () => {});
+  assert.equal(result.game?.id, 1234); assert.equal(calls, 3);
+  calls = 0;
+  const unavailable = await resolveOfficialArticleGame(1234, async () => { calls++; return new Response("{"); }, async () => {});
+  assert.equal(unavailable.game, null); assert.equal(calls, 4);
+});
+test("identity readback compares nullable associations even when the final clears a game", () => {
+  for (const finalId of [null, undefined]) {
+    assert.throws(() => assertArticleUniverseReadback(1234, finalId, "guide"), /universe_id mismatch/);
+    assert.doesNotThrow(() => assertArticleUniverseReadback(null, finalId, "guide"));
+  }
+  assert.throws(() => assertArticleUniverseReadback(null, 1234, "guide"), /universe_id mismatch/);
+  assert.doesNotThrow(() => assertArticleUniverseReadback(1234, 1234, "guide"));
+});
+
 test("image bytes retry transient failures but do not retry a 404 or invalid image payload", async () => {
   const { fetchImageBytes } = await import("../../shared/fetch-image-bytes");
   let attempts = 0;
@@ -125,7 +160,8 @@ test("persistent stage workspaces outside Git retain the same model sandbox", as
   const { stageCodexArgs } = await import("../article-stage-runtime");
   const args = stageCodexArgs({ runDir: "/state/article", model: "gpt-5.6-luna", reasoning: "max" } as any, "editorial_review", "review", "/state/attempt");
   assert.ok(args.includes("--skip-git-repo-check"));
-  assert.equal(args[args.indexOf("--sandbox") + 1], "read-only");
+  assert.ok(args.includes("permissions.bloxodes_article.network.enabled=false"));
+  assert.ok(!args.includes("--sandbox"));
 });
 
 test("fixed copy-gate recovery preserves budgets and requires fresh review for changed copy", async () => {

@@ -9,6 +9,8 @@ User=bloxodes-wiki-model
 Group=bloxodes-wiki-model
 WorkingDirectory=/srv/data/bloxodes-automation-runtime/current
 EnvironmentFile=/etc/bloxodes/wiki-automation.env
+Environment=HOME=/var/lib/bloxodes/wiki-model
+Environment=CODEX_HOME=/var/lib/bloxodes/wiki-model/.codex
 Environment=NODE_ENV=development
 Environment=BLOXODES_AUTOMATION_RUNTIME=1
 Environment=BLOXODES_CI_QA=1
@@ -17,6 +19,8 @@ Environment=BLOXODES_ENV_OVERLAYS=
 Environment=WIKI_AUTOMATION_WORKTREE=/srv/data/bloxodes-automation-runtime/current
 Environment=WIKI_AUTOMATION_CONCURRENCY=1
 Environment=WIKI_AUTOMATION_MAX_GAMES_PER_RUN=1
+# ProtectHome leaves the CLI under /home/teja readable/executable. This exception
+# lets Claude and Codex write login/runtime state under the model account HOME.
 ReadWritePaths=/var/lib/bloxodes/wiki-model
 ReadWritePaths=/srv/data/projects/Bloxodes/tmp/article-writer
 ReadWritePaths=/srv/data/bloxodes-automation-runtime/state/wiki-automation

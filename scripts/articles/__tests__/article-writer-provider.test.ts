@@ -43,6 +43,8 @@ test("Codex fallback classifies only provider and account failures", () => {
   assert.equal(classifyCodexFallbackReason("503 service unavailable"), "provider_unavailable");
   assert.equal(classifyCodexFallbackReason("article verifier failed because final.json is invalid"), null);
   assert.equal(classifyCodexFallbackReason("batch exceeded its timeout"), null);
+  assert.equal(classifyCodexFallbackReason("workspace routing discovery timed out"), "provider_unavailable");
+  assert.equal(classifyCodexFallbackReason("You've hit your limit"), "quota_or_rate_limit");
 });
 
 test("fallback target excludes rows already touched by Codex", () => {

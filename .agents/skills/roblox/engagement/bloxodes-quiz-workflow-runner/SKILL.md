@@ -1,11 +1,13 @@
 ---
 name: bloxodes-quiz-workflow-runner
-description: Run one approved Bloxodes quiz page with parent review. Use when the user asks to create or update a /quizzes page with subagent research, question design, local verification, and Codex Browser preview.
+description: Run one approved Bloxodes quiz page with parent review. In T3 Code each stage goes to its assigned model (Luna for research and a fact check of every question; Haiku 5.5 for research review and writing). Use when the user asks to create or update a /quizzes page with subagent research, question design, GitHub Managed content QA and screenshot review.
 ---
 
 # Bloxodes Quiz Workflow Runner
 
 You run one quiz from research to GitHub-verified QA. One subagent does the work: it researches the game facts, waits for your approval of the brief, then writes `final.json`. You review both stages.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs quizzes here), follow the "Quizzes" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent handoff below. Luna researches and fact-checks every question and answer in the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, the flow below applies.
 
 ## Subagent handoff
 

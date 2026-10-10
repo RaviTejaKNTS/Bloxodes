@@ -14,11 +14,11 @@ import {
   supabaseTarget
 } from "./article-queue-env";
 import {
-  parseCodexReasoningEffort,
   type CodexReasoningEffort
 } from "./article-writer-provider";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import { managedArticleEnvironment, withArticlePreview } from "./run-article-pipeline";
+import { articleLegacyReasoning } from "./article-stage-config";
 import { processArticleQueueRow } from "./article-pipeline-queue";
 
 type Options = {
@@ -66,8 +66,8 @@ Options:
   --queue-id UUID            Select only this curated pending row
   --worktree PATH            Persistent Bloxodes worktree (default: current repo)
   --codex-bin PATH           Codex CLI path (default: ARTICLE_WRITER_CODEX_BIN or codex)
-  --codex-model MODEL        Codex model (default: ARTICLE_WRITER_CODEX_MODEL or gpt-5.6-luna)
-  --codex-reasoning EFFORT   Codex reasoning effort (default: ARTICLE_WRITER_CODEX_REASONING_EFFORT or max)
+  --codex-model MODEL        Legacy Codex default; requires ARTICLE_STAGE_USE_LEGACY_CODEX_DEFAULTS=true
+  --codex-reasoning EFFORT   Legacy Codex effort; per-stage settings take priority
   --no-grok-fallback         Disable the Grok provider fallback
   --grok-bin PATH            Grok CLI path (default: ARTICLE_WRITER_GROK_BIN or grok)
   --grok-model MODEL         Grok model (default: ARTICLE_WRITER_GROK_MODEL or grok-4.5)
@@ -103,36 +103,35 @@ function requireValue(argv: string[], index: number, flag: string): string {
   return value;
 }
 
-function parseArgs(argv: string[]): Options {
+export function parseArgs(argv: string[], env: NodeJS.ProcessEnv = process.env): Options {
+  let legacyReasoning = env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max";
   const options: Options = {
     apply: false,
     limit: parseInteger(
-      process.env.ARTICLE_WRITER_BATCH_SIZE ?? String(MAX_BATCH_SIZE),
+      env.ARTICLE_WRITER_BATCH_SIZE ?? String(MAX_BATCH_SIZE),
       "ARTICLE_WRITER_BATCH_SIZE",
       1,
       MAX_BATCH_SIZE
     ),
     timeoutMinutes: parseInteger(
-      process.env.ARTICLE_WRITER_TIMEOUT_MINUTES ?? "300",
+      env.ARTICLE_WRITER_TIMEOUT_MINUTES ?? "300",
       "ARTICLE_WRITER_TIMEOUT_MINUTES",
       30,
       330
     ),
-    worktree: path.resolve(process.env.ARTICLE_WRITER_WORKTREE?.trim() || process.cwd()),
+    worktree: path.resolve(env.ARTICLE_WRITER_WORKTREE?.trim() || process.cwd()),
     codexBin:
-      process.env.ARTICLE_WRITER_CODEX_BIN?.trim() ||
+      env.ARTICLE_WRITER_CODEX_BIN?.trim() ||
       executableDefault(path.join(os.homedir(), ".local", "bin", "codex"), "codex"),
-    codexModel: process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna",
-    codexReasoningEffort: parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
-    ),
-    grokFallback: parseBoolean(process.env.ARTICLE_WRITER_GROK_FALLBACK, true, "ARTICLE_WRITER_GROK_FALLBACK"),
+    codexModel: env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna",
+    codexReasoningEffort: "max",
+    grokFallback: parseBoolean(env.ARTICLE_WRITER_GROK_FALLBACK, true, "ARTICLE_WRITER_GROK_FALLBACK"),
     grokBin:
-      process.env.ARTICLE_WRITER_GROK_BIN?.trim() ||
+      env.ARTICLE_WRITER_GROK_BIN?.trim() ||
       executableDefault(path.join(os.homedir(), ".grok", "bin", "grok"), "grok"),
-    grokModel: process.env.ARTICLE_WRITER_GROK_MODEL?.trim() || "grok-4.5",
-    maxAttempts: parseInteger(process.env.ARTICLE_WRITER_MAX_ATTEMPTS ?? "3", "ARTICLE_WRITER_MAX_ATTEMPTS", 1, 10),
-    releaseCompleted: parseBoolean(process.env.ARTICLE_AUTO_PUBLISH, true, "ARTICLE_AUTO_PUBLISH")
+    grokModel: env.ARTICLE_WRITER_GROK_MODEL?.trim() || "grok-4.5",
+    maxAttempts: parseInteger(env.ARTICLE_WRITER_MAX_ATTEMPTS ?? "3", "ARTICLE_WRITER_MAX_ATTEMPTS", 1, 10),
+    releaseCompleted: parseBoolean(env.ARTICLE_AUTO_PUBLISH, true, "ARTICLE_AUTO_PUBLISH")
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -166,10 +165,10 @@ function parseArgs(argv: string[]): Options {
     } else if (arg.startsWith("--codex-model=")) {
       options.codexModel = arg.slice("--codex-model=".length).trim();
     } else if (arg === "--codex-reasoning") {
-      options.codexReasoningEffort = parseCodexReasoningEffort(requireValue(argv, index, arg));
+      legacyReasoning = requireValue(argv, index, arg);
       index += 1;
     } else if (arg.startsWith("--codex-reasoning=")) {
-      options.codexReasoningEffort = parseCodexReasoningEffort(arg.slice("--codex-reasoning=".length).trim());
+      legacyReasoning = arg.slice("--codex-reasoning=".length).trim();
     } else if (arg === "--no-grok-fallback") {
       options.grokFallback = false;
     } else if (arg === "--grok-bin") {
@@ -200,6 +199,7 @@ function parseArgs(argv: string[]): Options {
       throw new Error(`Unknown option: ${arg}`);
     }
   }
+  options.codexReasoningEffort = articleLegacyReasoning(env, legacyReasoning);
   return options;
 }
 
@@ -407,7 +407,7 @@ async function main() {
     }
     if (!options.apply) {
       console.log(
-        `Dry run: would start Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
+        `Dry run: would use per-stage provider/model/effort routing for up to ${targetCount} article(s).`
       );
       console.log(
         options.grokFallback
@@ -423,7 +423,7 @@ async function main() {
     }
 
     console.log(
-      `Starting code-controlled pipeline with ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
+      `Starting code-controlled pipeline with per-stage provider/model/effort routing for up to ${targetCount} article(s).`
     );
     const batchStartedAt = new Date().toISOString();
     try {

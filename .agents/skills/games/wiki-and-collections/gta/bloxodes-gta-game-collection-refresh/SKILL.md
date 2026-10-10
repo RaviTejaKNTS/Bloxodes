@@ -5,6 +5,8 @@ description: Maintain an existing Bloxodes GTA collection by checking verified r
 
 # Bloxodes GTA game collection refresh compatibility entrypoint
 
+**In T3 Code** (you have the `delegate_task` tool and the owner runs this here), follow the "Franchise collection refresh" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`: Luna builds the evidence and data and reviews the writing, Haiku 5.5 reviews Luna's work and writes. Outside T3 Code, the flow below applies.
+
 This is the GTA entry point for collection refreshes. Read and follow `.agents/skills/bloxodes-franchise-game-collection-refresh/SKILL.md` completely, using the GTA context below.
 
 ## GTA context

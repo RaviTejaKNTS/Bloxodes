@@ -1,6 +1,6 @@
 ---
 name: bloxodes-franchise-game-collection-workflow-runner
-description: Run one or many approved non-Roblox franchise collections through research, data, images, writing, managed-development publication, verification, size checks, and Browser review. Never publish production.
+description: Run one or many approved non-Roblox franchise collections through research, data, images, writing, managed-development publication, verification, size checks, and Browser review. In T3 Code each stage goes to its assigned model (Luna for suggestions, research, data, images and editorial review; Haiku 5.5 for reviews and writing). Never publish production.
 ---
 
 # Bloxodes franchise game collection workflow runner
@@ -8,6 +8,8 @@ description: Run one or many approved non-Roblox franchise collections through r
 You're the parent for approved collections in one non-Roblox franchise namespace. Workers build one collection at a time through research, data, images and writing. You judge every gate, own final verification and decide when a collection is done. Workers never approve their own work.
 
 This workflow stops at managed development. It never touches production.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs franchise collections here), follow the "Franchise collections" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the worker model and handoffs below. Luna does suggestions, research, data, images and the editorial review. Haiku 5.5 reviews the research, data and images and writes. Outside T3 Code, the flow below applies.
 
 ## Shared game storage
 

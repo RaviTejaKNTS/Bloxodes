@@ -7,7 +7,9 @@ import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 import { resolveArticleDevCredentials, supabaseTarget } from "../articles/article-queue-env";
-import { parseCodexReasoningEffort } from "../articles/article-writer-provider";
+import { articleClaudeBin, articleStageConfig } from "../articles/article-stage-config";
+import { isModelStage, STAGES } from "../articles/article-pipeline";
+import { workerEnvironment } from "../articles/article-stage-runtime";
 import { readProductionCredentials } from "../articles/release-completed-articles";
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
 import { runArticleBrowserSmokeTest } from "../content/article-browser";
@@ -106,11 +108,20 @@ async function main() {
     if (codexLogin.status !== 0) {
       throw new Error(`Codex CLI authentication is not ready: ${codexLogin.stderr.trim() || codexLogin.stdout.trim()}`);
     }
-    const codexModel = process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna";
-    const codexReasoning = parseCodexReasoningEffort(
-      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "max"
-    );
-    console.log(`Codex CLI: ${codexVersion.stdout.trim()} (${codexModel}, ${codexReasoning})`);
+    console.log(`Codex CLI: ${codexVersion.stdout.trim()}`);
+    const stageConfigs = STAGES.filter(isModelStage).map(stage => ({ stage, ...articleStageConfig(stage, process.env) }));
+    console.log(`Article stage routing: ${JSON.stringify(stageConfigs)}`);
+    if (stageConfigs.some(config => config.provider === "claude")) {
+      const claude = findExecutable([articleClaudeBin(process.env)]);
+      if (!claude) console.warn("Claude CLI is missing; configured Claude stages will fall back to Codex gpt-6-luna.");
+      else {
+        const auth = spawnSync(claude, ["auth", "status"], { encoding: "utf8", env: workerEnvironment(process.env), timeout: 30_000 });
+        let loggedIn = false;
+        try { loggedIn = auth.status === 0 && JSON.parse(auth.stdout).loggedIn === true; } catch { /* CLI diagnosis stays private. */ }
+        if (!loggedIn) console.warn("Claude OAuth is not ready; provider authentication failures will fall back to Codex gpt-6-luna.");
+        else console.log("Claude OAuth: ready. Bare mode is disabled.");
+      }
+    }
     const features = spawnSync(codex, ["--config", "features.multi_agent=false", "--config", "features.multi_agent_v2=false", "features", "list"], { encoding: "utf8" });
     if (features.status !== 0 || !/^multi_agent\s+\S+\s+false$/m.test(features.stdout)) throw new Error("Codex cannot confirm disabled worker-management tools for article stages.");
     for (const file of ["scripts/articles/article-pipeline.ts", "scripts/articles/article-stage-runtime.ts", ".agents/skills/bloxodes-article-workflow-runner/references/code-controlled-stages.md"]) accessSync(path.resolve(file), fsConstants.R_OK);
