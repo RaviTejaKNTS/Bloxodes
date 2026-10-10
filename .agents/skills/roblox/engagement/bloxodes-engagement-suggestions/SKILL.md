@@ -5,16 +5,16 @@ description: Suggest Bloxodes codes, checklist, quiz, and event page opportuniti
 
 # Bloxodes Engagement Suggestions
 
-Use this to decide whether Bloxodes should create codes, checklist, quiz, or event pages for one Roblox game. Do not write the pages here.
+You decide whether one Roblox game should get codes, checklist, quiz or event pages. You give a short, labeled answer with proof. You don't write the pages here.
 
 ## Start
 
-1. Resolve the exact game: name, universe ID, root place ID, creator, official Roblox URL, and editorial slug.
-2. Check existing Bloxodes `code_pages`, `checklist_pages`, `quiz_pages`, `events_pages`, and related routes for that universe/topic.
+1. Resolve the exact game: name, universe ID, root place ID, creator, official Roblox URL and editorial slug.
+2. Check existing Bloxodes `code_pages`, `checklist_pages`, `quiz_pages`, `events_pages` and related routes for that universe or topic.
 
-## Source Check
+## Show your proof
 
-Do not hide the research in a file. Put the proof in the final reply:
+Put the proof in your final reply, not in a hidden file:
 
 ```text
 Evidence checked:
@@ -25,26 +25,36 @@ Evidence checked:
 - Event sources:
 ```
 
-If a line is not checked, use `[research incomplete]` for that page family.
+If you didn't check a line, mark that page family `[research incomplete]`.
 
-## Page Rules
+## When to recommend each page
 
-- Codes: recommend only when the game has a real code system and usable code sources. Do not list active codes in suggestions.
-- Checklists: normally recommend one standalone source-verified 100% completion checklist per game. Check the game's published pages and drafts and reuse its existing checklist. State the supported edition or mode and verify the full required activity set within one board with sections. Additional pages or beginner, preparation and routine lists need an explicit user exception. Defer an unknown completion scope. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Collectible collection trackers remain separate and do not establish in-game 100%.
-- Quizzes: recommend only when there are enough stable, source-backed facts for easy, medium, and hard questions.
-- Events: recommend only when there is a source-backed Roblox virtual event, official event hub, or clear current/upcoming/past event page value.
+- **Codes:** only when the game has a real code system and usable code sources. Don't list active codes in suggestions.
+- **Checklists:** follow `dev-docs/pipelines/content.md#standalone-checklist-scope`.
+  - Normally recommend one standalone, source-verified 100% completion checklist per game.
+  - Check the game's published pages and drafts, and reuse its existing checklist.
+  - State the supported edition or mode, and verify the full required activity set within one board with sections.
+  - Additional pages, or beginner, preparation and routine lists, need an explicit user exception.
+  - Defer when the completion scope is unknown.
+  - Collectible collection trackers stay separate and don't establish in-game 100%.
+- **Quizzes:** only when there are enough stable, source-backed facts for easy, medium and hard questions.
+- **Events:** only when there's a source-backed Roblox virtual event, an official event hub, or clear current, upcoming or past event page value.
 
-Skip gamepasses, badges, developer products, servers, raw Roblox media, thin trivia, and generic beginner tasks.
+Skip gamepasses, badges, developer products, servers, raw Roblox media, thin trivia and generic beginner tasks.
+
+## Name pages the way players search
+
+When you propose a page, use the words a player would actually type: "Garden Rush quiz," "Ember Isles 100% completion checklist," "Tower Brawl codes" (made-up games). Base the angle on what's real about this game, like a big event players keep asking about or a completion goal that takes real work. Don't fill in a generic template like "Ultimate [Game] Quiz Challenge."
 
 ## Output
 
-Start with `Evidence checked`, then return one section for each family: codes, checklist, quiz, events.
+Start with `Evidence checked`. Then give one section for each family: codes, checklist, quiz, events.
 
 Use these labels:
 
-- `[create]` page family is useful and source-backed
+- `[create]` the page family is useful and source-backed
 - `[we already have a page]` production already covers it
-- `[skip]` weak, unsupported, duplicate, or not useful
-- `[research incomplete]` required checks were not completed
+- `[skip]` weak, unsupported, duplicate or not useful
+- `[research incomplete]` required checks weren't completed
 
-Keep the answer short. Include the reason and the source proof for each decision.
+Keep it short. Give the reason and the source proof for each decision.

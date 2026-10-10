@@ -5,141 +5,130 @@ description: Write one Bloxodes game-specific collection final.json after collec
 
 # Bloxodes Game Collection Writing
 
-## Useful coverage
-
-Build the most accurate and up-to-date useful collection the available sources support. Gather supported rows across sources, reconcile duplicates, and leave unresolved values empty/null. Record missing rows, conflicting claims, and follow-up opportunities in the brief so the collection can improve later. A source saying 97 items while listing 98, incomplete rosters, missing official confirmation, or uncertain update coverage are not by themselves reasons to block. Do not invent facts or claim exhaustive live coverage. Block a collection only when the supported material is genuinely insufficient to make a worthwhile player-facing page.
-
-Use the game and collection names to locate their suggestions and workspace in the inherited task context, or the default workspace below. Keep the supplied workspace override when present. This skill owns its stage; do not spawn subagents. Return the stage artifacts when finished.
-
+A collection page lets players compare everything in one in-game system: pets, units, rods, recipes. The cards carry the data. Your copy explains the system around them: what matters, what to pick first and what people get wrong. Write it like a player who's already figured the system out and is happy to save you the trial and error.
 
 > **You are a subagent. Do NOT spawn sub-agents or call other agents. Write final.json directly using the Write tool.**
 
-Use this after `brief.md`, data readiness, and image readiness are approved. Use it for one durable item or system collection inside one Roblox game.
+Use this after `brief.md`, data readiness and image readiness are approved, for one durable item or system collection in one Roblox game. Find the game and collection suggestions and workspace from the task context, or use the default workspace below. Keep any supplied workspace override. Return the stage artifacts when you're done.
 
-The approved `brief.md` owns the page type. `database` copy can focus on browsing and comparing the roster. `collectible` copy should explain the route, unlocks, order, or completion rules that help a player finish the goal. Do not add a new final JSON shape or a page-specific table: `collection.pageType` stays in `runtime-manifest.json` and the shared renderer selects the presentation.
+## Read first
+
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`.
+- The approved `brief.md`.
+
+## Useful coverage
+
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the page can improve later.
+
+A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile page.
+
+The brief owns the page type. `database` copy can focus on browsing and comparing the roster. `collectible` copy explains the route, unlocks, order or completion rules that help a player finish. Don't add a new final JSON shape or a page-specific table: `collection.pageType` stays in `runtime-manifest.json`, and the shared renderer picks the presentation.
 
 ## Workflow
 
 1. Read the approved `brief.md`.
-2. Confirm `Data readiness` says the dataset uses v2 wrapped `{ meta, items[].item, items[].system }`, public game fields are separate from system fields, the grouping metadata is ready when sections exist, the section labels, card/table field order, field presentation map, highlight/chip/detail/plain fields, field consistency, and renderer/config support are ready.
-3. Confirm `Image readiness` is approved, or missing images were clearly accepted.
-4. When updating an existing page, preserve its copy, headings, and structure unless the approved brief shows that a specific passage is inaccurate or outdated. Change only the affected passages.
+2. Confirm `Data readiness` says the dataset uses the v2 wrapped shape `{ meta, items[].item, items[].system }`, public game fields are separate from system fields, grouping metadata is ready when sections exist, and section labels, card/table field order, the field presentation map, highlight/chip/detail/plain fields, field consistency and renderer/config support are all ready.
+3. Confirm `Image readiness` is approved, or that missing images were clearly accepted.
+4. When updating an existing page, keep its copy, headings and structure unless the brief shows a passage is wrong or outdated. Change only those passages.
 5. Create or update:
 
-```text
-tmp/content-workspace/<game-slug>/collections/<collection-slug>/
-  brief.md
-  final.json
-```
+   ```text
+   tmp/content-workspace/<game-slug>/collections/<collection-slug>/
+     brief.md
+     final.json
+   ```
 
 6. Write `final.json`.
-7. Parse JSON before returning.
+7. Parse the JSON before returning.
 
-## Voice & Tone
+## How the copy should read
 
-Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- **Explain the game system, not the page.** Never describe what the page is, how to use it, or "the cards below." Talk about the items and the choices players make.
+- **Lead with the useful bit.** Every field opens on the real thing: what these items do, the choice that matters, the mistake to avoid.
+- **Personality goes in the intro, description and wiki blurb.** Card values, table cells and short facts stay plain and exact.
+- **Use the dataset's values and the brief's recommended ranges.** Never leave a pick, price or stat out of the body because sources disagreed. A caveat goes in once, next to the advice, only when the difference changes what the player should do.
+- **Never narrate the research.** Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
+- **Never write item counts in prose.** Don't say how many items the collection or a section has, and avoid phrases like "all X items," "over X" or "the full list of X." Counts change every time data improves, so the copy goes stale. This applies to `intro_md`, `description_md`, `description_json`, `faq_json` and `wiki_md`. The only count allowed is the `{count}` token in `title` and `seo_title`, which the seed/verify workflow fills from the live dataset.
 
-- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
-- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing: the item or mechanic. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
-- Keep functional slots clean. Card fields, table cells, and short facts stay plain and direct. Let the playful voice live in intros, descriptions, and the wiki blurb.
-- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+## Field by field
 
-## Writing Rules
+### `intro_md`
 
-**Key rules**
+One small paragraph that drops straight into the item system and gives the reader their bearings. It shouldn't repeat anything said elsewhere on the page. A strong intro names what every item does in the game, then the one choice that actually matters when picking. See "Game collections" in `.agents/skills/bloxodes-voice/references/examples.md` for the move, and write your own words.
 
-- Write for Roblox players like a Roblox player who gathered the collection for everyone to check.
+### Cards (from the dataset)
 
-**Do Not**
+Cards are the default view. They should feel complete, consistent and quick to scan:
 
-- Do not write about what this page is about.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Do not write about your actions. Always focus on the game, items, and players.
-- Do not write copy that explains how to use the page. Write copy that explains the game system.
-- Do not write the collection number anywhere in prose. Never state how many items the collection has, how many are in a section, or phrases like "all X items", "over X", "the full list of X". The count changes every time more data is gathered, which makes the copy stale. This applies to `intro_md`, `description_md`, `description_json`, `faq_json`, and `wiki_md`. The only count allowed is the automated `{count}` token in `title` and `seo_title`, which the seed/verify workflow resolves from the live dataset so it never goes stale.
-
-
-**intro_md**
-
-- Write one small paragraph that gets directly into the game item system.
-- Give context and cue to the collection with no repeated info that's anywhere on this page.
-
-**Card copy**
-
-Cards are the default collection view. They should feel complete, aligned, and easy to scan:
-
-- Name of the item
+- The item name.
 - One useful description line or short paragraph.
-- Useful key-value facts that are easy to scan.
-- A collection-specific field presentation contract. Do not rely on renderer word matching or random value heuristics.
-- At least one source-backed highlight-style field when the collection has a natural status, strength, availability, best-use, or recommendation value.
-- Chip-style fields for prices, time, rarity, tier, chance, levels, costs, damage, BPS, or other important short numbers.
-- Plain fields for normal comparable text such as source, shop, main use, role, or route names.
-- Detail fields for longer sentence facts such as obtainment, behavior, weaknesses, route notes, or strategy notes.
-- There is no hard limit on key-value pairs, but only include fields that help players compare items or understand important differences.
-- Card details come from the dataset. Do not invent fields in `final.json`; make sure the dataset already has the fields the page needs.
-- Both cards and list view show the same public details. Do not plan details for one view only.
-- Keep field names consistent across rows. Missing source-backed values should stay empty/null in the dataset so the renderer can show `-`.
-- Do not merge labels into values. The dataset should provide a value like `Available`, not `Availability: Available`.
-- Do not turn normal sentence values into random bullet-like fragments. Use complete prose for detail fields and arrays only for real lists.
-- If one field key is rendered as a chip, highlight, detail, or plain value on one card, the same field key must render that way on every card in the collection. Style belongs to the field key/config, not to individual values.
+- Easy-to-scan key-value facts.
+- A collection-specific field presentation contract. Don't rely on renderer word matching or value guessing.
+- At least one supported highlight-style field when the collection has a natural status, strength, availability, best-use or recommendation value.
+- Chip fields for prices, time, rarity, tier, chance, levels, costs, damage, BPS and other short numbers.
+- Plain fields for comparable text like source, shop, main use, role or route name.
+- Detail fields for longer sentence facts like how to get it, behavior, weaknesses, route notes or strategy.
+- No hard limit on fields, but include only fields that help players compare or understand real differences.
 
-**description_json**
+Card rules:
 
-Explain section groups only when it adds context beyond the cards.
-This goes above each cards section and should not repeat the card copy. It should be a small paragraph that gives context to the group of items in that section.
-`description_json` keys must match the actual rendered section labels from `items[].system.section` and `meta.display.sectionOrder`. If the dataset sections are `Basic`, `Rare`, and `Exclusive`, use those exact keys.
-Do not create a section note for every section unless it helps. Empty `description_json` is fine when the section labels already explain enough.
+- Card details come from the dataset. Don't invent fields in `final.json`. Make sure the dataset already has what the page needs.
+- Cards and list view show the same public details. Don't plan details for only one view.
+- Keep field names consistent across rows. Missing supported values stay empty or null so the renderer shows `-`.
+- Don't merge labels into values. The value is `Available`, not `Availability: Available`.
+- Detail fields are complete sentences. Arrays are only for real lists.
+- If a field key renders as a chip, highlight, detail or plain value on one card, it renders that way on every card. Style belongs to the field key, not to individual values.
 
+### `description_json`
 
-**description_md**
+Optional section notes that sit above each card group. Use one only when it adds context the cards don't. One small paragraph, never a repeat of card copy.
 
-This is the main body of the page. Its job is to cover everything a reader actually needs to use or finish this collection: strategy, how to progress, the key decisions and trade-offs between items, common mistakes, and any rules the cards alone do not make obvious. Cover what is genuinely useful for this specific collection, then stop. The goal is a page that feels complete, not a page that hits a fixed template.
+- Keys must exactly match the rendered section labels from `items[].system.section` and `meta.display.sectionOrder`. If the sections are `Basic`, `Rare` and `Exclusive`, those are your keys.
+- Don't write a note for every section by default. An empty `description_json` is fine when the labels say enough.
+- A good note gives one fact that changes how a player reads that group: where those items come from, or a rule that applies only to them.
 
-Let the content decide the structure. Use the fewest sections needed to cover the player questions and expected coverage identified in the brief. Do not force a set number of sections or default to the same shape on every page.
+### `description_md`
 
-- Short paragraphs, around 2-3 sentences each, so they are easy to read. Break a long paragraph into smaller ones instead of writing a wall of text.
-- Bullet points for steps, tips, quick comparisons, or short lists.
-- A markdown table when you are comparing a few things across the same dimensions (for example, which option to pick for which situation). Use tables when they read more cleanly than prose, not for decoration.
-- Use a few clear, search-friendly headings that state what each section answers. A short body may need none. Avoid vague, clever, or sentence-like headings and unnecessary subsections.
+The main body. It covers what a player needs to use or finish this collection: strategy, progression, the key choices and trade-offs, common mistakes and any rules the cards don't make obvious. Cover what's genuinely useful for this collection, then stop. The goal is a page that feels complete, not one that fills a template.
 
-Rules:
+- Let the content decide the structure. Use as few sections as the brief's player questions need, but answer all of them. Don't force a section count or reuse the same shape on every page.
+- Be complete. Cover what a player needs to choose well: best early, mid and late picks with the real numbers behind them and the best-value options (when the collection has a progression or price), how the system unlocks or progresses, and the common mistakes. Match what the top-ranking guides for this collection cover. Three thin sections of "check the cost before you buy" is not a finished body.
+- Give answers, not chores. Instead of "check the route before you save up," say which items need Research, a case or an event, and what the cheapest good option is.
+- Short paragraphs of about 2 or 3 sentences. Break up anything that turns into a wall.
+- Bullets for steps, tips, quick comparisons and short lists.
+- A Markdown table when you're comparing a few options on the same dimensions (like which item to pick for which situation). Only when it reads cleaner than prose.
+- A few clear, search-friendly headings that say what each section answers, using the game name where it reads naturally ("Which Garden Rush Pets to Hatch First"). A short body may need none. No vague, cute or sentence-like headings and no needless subsections.
+- Don't repeat the cards, intro, how-it-works note or section notes. Only add what the rest of the page doesn't say.
+- No filler. If a section would only pad the page, cut it.
+- Stay concrete and specific to this game system, in plain English anyone can follow.
+- The no-count rule applies here too.
 
-- Do not repeat the card copy, the intro, the how-it-works note, or the section notes. Only add information the rest of the page does not already give.
-- No fluff, no filler, no restating the obvious. Every line should earn its place. If a section would just pad the page, cut it.
-- Keep it concrete and specific to this game system, in plain, simple English that anyone can follow.
-- Follow the global no-count rule: never state how many items the collection or a section has.
+### `wiki_md`
 
-**wiki_md**
+The blurb that sits next to this collection's link on the game's wiki hub. Most blurbs are too generic ("this collection lists all the items") and tell the reader nothing. Make this one useful.
 
-This is the blurb that shows on the game wiki hub next to the link to this collection. Most wiki blurbs are too generic ("this collection lists all the items") and tell the reader nothing. Write a blurb that is actually useful on the wiki page.
+- Explain what this thing is in the game and how it works for a player, like you're explaining it to someone who just started.
+- Be specific: what the items do, how you get them, where they fit, or the choice a player makes between them. Use real in-game terms.
+- Short, simple sentences. No jargon, no hype like "ultimate" or "complete."
+- 2 to 4 sentences: enough to help someone decide to open the page, not a full guide.
+- No item counts, and never mention the page, the list or "this collection." Talk about the game system.
 
-- Explain in plain words what this thing is inside the game and how it works for a player. Treat it like you are explaining the system to a new player who just started the game.
-- Be specific to this collection. Say what the items do, how you get them, where they fit in the game, or what choice the player makes between them. Use concrete in-game terms, not vague words.
-- Be simple and clear. Short sentences. No jargon, no hype words like "ultimate" or "complete".
-- 2 to 4 sentences. Enough to genuinely help someone decide if they want to open the page, but not a full guide.
-- Do not say how many items there are, do not mention the page, the list, or "this collection". Talk about the game system itself.
+A good shape: what it is in the game, then how it works or how you get it, then why it matters. End on a practical takeaway a new player can act on.
 
-Good shape: "what it is in the game" → "how it works / how you get it" → "why it matters to the player".
+## Field jobs
 
-## Field Jobs
+- `display_name`: the short reusable collection name for UI labels and wiki hub headings, like `Units`, `Food Items`, `NPCs` or `UGC Items`. No counts, game names, colons or SEO phrasing. This is the canonical label, so scripts never infer it from `collection_slug` or `title`.
+- `title`: the collection title pattern with the count token: `All {count} <Collection> in <Game>`. Add one short reader-focused angle only when it makes the title clearer. Never replace `{count}` with a number yourself.
+- `seo_title`: close to the title, natural for search, with the same `{count}` token when the title has a count.
+- `meta_description`: what the reader can compare or learn, plus a reason to click, in roughly 140 to 160 characters. Name the game, the items and the comparison players care about.
+- `intro_md`: what this collection is in the game and why players compare it.
+- `description_md`: the main body described above. Flexible structure, no fluff, no repeats.
+- `how_it_works_md`: explain page fields only when they need context. Keep it short.
+- `description_json`: section notes only when they add context. Keys match rendered section labels.
+- `faq_json`: useful follow-up questions not already answered. Every entry uses `q` and `a`: `{ "q": "...", "a": "..." }`. Never `question`/`answer`, because the renderer reads `q`/`a` and wrong keys render a blank FAQ.
+- `wiki_md`: the hub blurb described above. Specific, 2 to 4 sentences, no count.
 
-- `display_name`: Write the short reusable collection name exactly as it should appear in UI labels and wiki hub headings, for example `Units`, `Food Items`, `NPCs`, or `UGC Items`. Do not include counts, game names, colons, or SEO phrasing. This is the canonical collection label; do not make scripts infer it from `collection_slug` or `title`.
-- `title`: Use the Bloxodes collection title pattern with an automated count token: `All {count} <Collection> in <Game>`. Add one short reader-focused angle only when it makes the title clearer. Do not manually replace `{count}` with a number; the seed/verify workflow resolves it from the verified dataset row count so refreshed data does not leave a stale title.
-- `seo_title`: Keep it close to the title, make it natural for search, and use the same `{count}` token when the title count appears.
-- `meta_description`: Say what the reader can compare or learn from the page.
-- `intro_md`: Explain what this collection is in the game and why players compare it.
-- `description_md`: The main body. Cover everything a reader needs to use or finish this collection (strategy, progression, trade-offs, mistakes) using whatever structure fits: short paragraphs, bullets, tables, and headings only where they help. Fluid, not a fixed two-section template; no fluff and no repeating the other fields.
-- `how_it_works_md`: Explain page fields only when the fields need context. Keep it short.
-- `description_json`: Explain section groups only when it adds context beyond the cards. Keys must match rendered section labels.
-- `faq_json`: Answer useful follow-up questions not already covered. Each entry MUST use the keys `q` (question) and `a` (answer): `{ "q": "...", "a": "..." }`. Do NOT use `question`/`answer`: the renderer reads `q`/`a` and wrong keys make the FAQ render blank.
-- `wiki_md`: Explain the in-game system this collection covers in plain, simple words so the blurb is genuinely useful on the wiki hub: what it is, how a player gets or uses it, and why it matters. Be specific, 2-4 sentences, no item count.
-
-## Output Shape
+## Output shape
 
 ```json
 {
@@ -161,6 +150,8 @@ Good shape: "what it is in the game" → "how it works / how you get it" → "wh
 }
 ```
 
-Use `<game-slug>-<collection-slug>` for `code`.
-Use `<game-slug>` for `wiki_slug` and `<collection-slug>` for `collection_slug`.
-Do not use `roblox_universes.slug` for editorial slugs.
+- `code` is `<game-slug>-<collection-slug>`.
+- `wiki_slug` is `<game-slug>` and `collection_slug` is `<collection-slug>`.
+- Never use `roblox_universes.slug` for editorial slugs.
+
+Before returning, run the voice guide's "Before you hand it in" check across every prose field.

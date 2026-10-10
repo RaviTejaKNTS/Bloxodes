@@ -5,13 +5,23 @@ description: Run one approved Bloxodes 100% completion checklist page with paren
 
 # Bloxodes Checklist Workflow Runner
 
-Use one subagent for one checklist. The same subagent researches the player route, waits for parent approval, then writes `final.json`.
+You run one checklist from research to GitHub-verified QA. One subagent does the work: it researches the player route, waits for your approval of the brief, then writes `final.json`. You review both stages.
 
-Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Normally maintain one standalone verified 100% completion checklist page per game, with the supported edition or mode stated and sections inside one board. Check published pages and drafts and reuse the game's existing checklist. Record explicit user exceptions for additional pages or narrower checklists. Defer when full completion requirements cannot be verified. Collectible collection trackers remain separate.
+## Scope
 
-## Subagent Handoff
+Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`.
 
-Every subagent message must set the role and exact skill:
+- Normally, keep one standalone, verified 100% completion checklist page per game. State the supported edition or mode, and put sections inside one board.
+- Check published pages and drafts, and reuse the game's existing checklist.
+- Record explicit user exceptions for additional pages or narrower checklists.
+- Defer when the full completion requirements can't be verified.
+- Collectible collection trackers stay separate.
+
+## Subagent handoff
+
+Every message to the subagent sets its role and the exact skill.
+
+First message:
 
 - You are the subagent for one checklist only.
 - Do not run `/bloxodes-checklist-workflow-runner`.
@@ -20,34 +30,50 @@ Every subagent message must set the role and exact skill:
 - Skill file: `.agents/skills/bloxodes-checklist-research/SKILL.md`.
 - Return `brief.md` only and wait for parent approval.
 
-After the parent approves the brief, send the same subagent:
+After you approve the brief, send the same subagent:
 
 - Continue with `/bloxodes-checklist-writing`.
 - Skill file: `.agents/skills/bloxodes-checklist-writing/SKILL.md`.
+- Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md`.
 - Create `final.json` for the approved brief only.
 
 ## Workflow
 
-1. Confirm the game, universe ID, edition or mode and full completion scope, or the explicit user exception.
+1. Confirm the game, universe ID, edition or mode, and the full completion scope or the explicit user exception.
 2. Ask the subagent to use `/bloxodes-checklist-research` and return `brief.md`.
-3. Review full requirements, thresholds, exclusions, alternative paths, sections within one board, existing coverage, source proof and gaps. Interchangeable paths must use one explicit `A or B` leaf; separate mutually exclusive leaves and optional-leaf flags cannot produce achievable progress. Defer unsupported branching requirements.
+3. Review the brief: full requirements, thresholds, exclusions, alternative paths, sections within one board, existing coverage, source proof and gaps.
+   - Interchangeable paths must use one explicit `A or B` leaf. Separate mutually exclusive leaves and optional-leaf flags can't produce achievable progress.
+   - Defer unsupported branching requirements.
 4. Ask the same subagent to use `/bloxodes-checklist-writing` and create `final.json`.
-5. Review that tasks are concrete actions players can complete.
-6. Keep the reviewed `final.json` in the task workspace. For CI, stage an exact copy with its selected batch under `content/releases/<batch>/`, or use a reviewed immutable bundle accepted by the chosen job. Ignored `tmp/` files are not available on GitHub by themselves.
-7. Use `Managed content QA` on GitHub with the exact committed batch or immutable private bundle. It stages an isolated development board, compares complete normalized page/task contents and repeats comparison after desktop/mobile browser checks.
-8. Review the job's screenshots and reports for board coverage, ticking, reload, unticking and account saving. The receipt must match the selected input bytes and reviewed source SHA. Count-only or unrelated route checks do not pass this gate.
-9. Return the exact final path and successful GitHub artifact links. Production publication requires explicit authorization and uses the same development QA gate before its first production write. If QA fails, return the files and actual failure. Do not run checks locally or call a dispatch published.
+5. Review that tasks are concrete actions players can complete, and check the copy (see Parent checks).
+6. Keep the reviewed `final.json` in the task workspace. For CI, stage an exact copy with its selected batch under `content/releases/<batch>/`, or use a reviewed immutable bundle accepted by the chosen job. Ignored `tmp/` files aren't available on GitHub by themselves.
+7. Run `Managed content QA` on GitHub with the exact committed batch or immutable private bundle. It stages an isolated development board, compares the complete normalized page and task contents, and repeats that comparison after desktop and mobile browser checks.
+8. Review the job's screenshots and reports for board coverage, ticking, reload, unticking and account saving. The receipt must match the selected input bytes and the reviewed source SHA. Count-only or unrelated route checks don't pass this gate.
+9. Return the exact final path and the successful GitHub artifact links.
+   - Production publication needs explicit authorization, and it goes through the same development QA gate before its first production write.
+   - If QA fails, return the files and the actual failure.
+   - Don't run checks locally, and don't call a dispatch published.
 
-See `dev-docs/operations/deployment.md#managed-development-content-qa` for dispatch inputs, isolation, cleanup and receipt ownership.
+For dispatch inputs, isolation, cleanup and receipt ownership, see `dev-docs/operations/deployment.md#managed-development-content-qa`.
 
-## Parent Checks
+## Parent checks
 
-- production overlap is checked
-- checklist covers source-verified 100% completion, or records an explicit user exception
-- the game has one standalone checklist page, or an explicit user exception authorizes additional pages
-- one board contains the full required set, with interchangeable alternatives represented as one explicit `A or B` leaf
-- parent rows and leaf tasks have consistent section codes
-- task titles are concrete actions
-- descriptions add useful context only when needed
-- public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
-- GitHub exact-row comparison and browser QA pass for the reviewed final
+Scope and structure:
+
+- Production overlap is checked.
+- The checklist covers source-verified 100% completion, or records an explicit user exception.
+- The game has one standalone checklist page, or an explicit user exception authorizes more.
+- One board holds the full required set, with interchangeable alternatives as one explicit `A or B` leaf.
+- Parent rows and leaf tasks have consistent section codes.
+
+Copy, checked against `.agents/skills/bloxodes-voice/SKILL.md`:
+
+- Task titles are concrete actions, short, plain and exact. No jokes in tasks.
+- Descriptions add useful context only when needed.
+- The intro and description open with what the board tracks, in a player's voice. No template openings, research voice, hype or AI filler.
+- No fact repeated between the description and the tasks.
+- Every task and threshold matches the approved brief.
+
+Verification:
+
+- GitHub exact-row comparison and browser QA pass for the reviewed final.

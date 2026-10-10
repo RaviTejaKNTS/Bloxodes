@@ -5,7 +5,7 @@ description: Write one non-Roblox franchise game wiki hub from an approved brief
 
 # Bloxodes franchise wiki writing
 
-Use this after bloxodes-franchise-wiki-research has produced an approved brief. Write one title hub only. Do not publish production, change the dataset, or add future-page promises.
+Use this after `bloxodes-franchise-wiki-research` has produced an approved brief. Write one title hub only. Do not publish production, change the dataset, or add future-page promises.
 
 ## Shared game storage
 
@@ -39,15 +39,12 @@ Use the target franchise schema supplied by the context. Unless the target imple
 
 ## Voice
 
-Write like a player who knows the game and can explain it without performing for the reader.
+Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`. A hub is the front door to the game, so a new player should finish the description knowing what they actually do in it, and the tips should sound like advice from someone who's already made the early mistakes.
 
-- Use plain English, short paragraphs, concrete game nouns, and direct sentences.
-- Talk to the player as you when it helps.
-- A light dry line is fine when it carries a real fact. Do not force jokes.
-- Do not use em dashes, hype, generic welcome copy, or stock AI phrases.
-- Do not mention database rows, SEO, or what the page plans to cover.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Do not add franchise-specific visual instructions or eyebrow text. Use the existing Bloxodes design.
+- Open `description_md` on what the player does, not "X is a game where..."
+- Real game nouns, short paragraphs, "you" when it helps.
+- Never mention database rows, SEO or what the page plans to cover. Never say where a fact came from or how the page was made. Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
+- No franchise-specific visual instructions or eyebrow text. Use the existing Bloxodes design.
 
 ## Writing rules
 

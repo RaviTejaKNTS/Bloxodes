@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Article Workflow Runner"
-  short_description: "Run article research, images, writing, and QA"
-  default_prompt: "Use $bloxodes-article-workflow-runner to run approved article ideas with separate research, mandatory image, and writing subagents. Require media.json for every article, verify each final, and preview it in an available real browser such as Chrome."
+  short_description: "Run articles through the code-controlled pipeline"
+  default_prompt: "Use $bloxodes-article-workflow-runner to run explicit article topics or curated queue rows through the repo's code-controlled pipeline. Don't spawn research, image or writing subagents yourself: code owns the stages, retries and completion. Start the right command, watch the real stage state, and report accepted articles and exact blockers."

@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Franchise Wiki Writing"
   short_description: "Write franchise game wiki hubs"
-  default_prompt: "Use $bloxodes-franchise-wiki-writing to write one title hub from an approved brief, preserving the target franchise schema, verified controls, scope boundaries, player-facing voice, and parseable JSON."
+  default_prompt: "Use $bloxodes-franchise-wiki-writing to write one title hub from an approved brief, preserving the target franchise schema, verified controls, scope boundaries, player-facing voice, and parseable JSON. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

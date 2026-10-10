@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Article Writing"
   short_description: "Write Bloxodes articles"
-  default_prompt: "Use $bloxodes-article-writing to write one Bloxodes article final.json from an approved brief.md and mandatory media.json. Insert every verified hosted image, allow image-free copy only when all targets are accepted missing, include the game name in title/slug for game articles, avoid self-referential wording, then parse-check final.json."
+  default_prompt: "Use $bloxodes-article-writing to write one Bloxodes article final.json from an approved brief.md and its media.json (images are best effort). Insert every verified hosted image, allow image-free copy only when all targets are accepted missing, include the game name in title/slug for game articles, avoid self-referential wording, then parse-check final.json. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

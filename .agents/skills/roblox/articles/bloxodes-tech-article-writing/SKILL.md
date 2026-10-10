@@ -6,72 +6,86 @@ description: >-
 
 # Bloxodes Tech Article Writing
 
-## Code-controlled execution
+Someone reading a fix guide is annoyed and wants to get back into their game. Be the calm friend who knows exactly what's wrong: say what the error means, hand over the fixes in the order most likely to work, and skip the jokes.
 
-When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+## Code-controlled runs
 
-Use this for one Roblox **tech / platform / troubleshooting** article only, after `brief.md` is approved.
+If you were assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides the interactive parent/subagent, upload/import and standalone self-review instructions. Do only the assigned artifact or review. The runtime owns the next stages and approval records. Keep the editorial and page-type rules below.
 
-This is a thin add-on. It does not replace `bloxodes-article-writing`; it sits on top of it.
+## How this skill fits
 
-- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
+This is a thin add-on for one Roblox **tech, platform or troubleshooting** article, used after `brief.md` is approved.
 
-**First, apply every rule in `bloxodes-article-writing`** (voice, length, readability, structure, accuracy, public-copy bans, the `final.json` field jobs, and the output shape). Everything below only adds or sharpens rules for tech articles. Where this skill is more specific, it wins.
+- **Apply every rule in `bloxodes-article-writing` first:** voice, structure, accuracy, public-copy bans, fields and output shape. That includes the voice guide (`.agents/skills/bloxodes-voice/SKILL.md`) and the "Troubleshooting articles" section of its examples. Where this skill is more specific, it wins.
+- Research and brief approval come from `bloxodes-article-research`. Batches run through `bloxodes-article-workflow-runner`, which hands tech articles to this skill instead of the base writing skill.
+- No em dashes in any field: title, metadata, body, FAQ or any JSON value.
 
-Research and brief approval still come from `bloxodes-article-research`. Batches still run through `bloxodes-article-workflow-runner` (the parent should hand tech articles to this writing skill instead of `bloxodes-article-writing`).
+## When it applies
 
-## When this skill applies
+Articles about the Roblox platform itself, not one game's gameplay:
 
-Use it when the article is about the Roblox platform itself, not a single game's gameplay:
-
-- Error-code fixes ("Roblox Error 277 Fix") and named-error popups ("An Unexpected Error Occurred and Roblox Needs to Quit").
-- "Won't open / won't install / keeps crashing / black screen / stuck loading / high ping" fix guides.
+- Error-code fixes ("Roblox Error 277 Fix") and named error popups ("An Unexpected Error Occurred and Roblox Needs to Quit").
+- Won't open, won't install, keeps crashing, black screen, stuck loading and high ping guides.
 - Platform how-tos and settings walkthroughs (voice chat, parental controls, account settings, performance).
-- Any procedure with ordered steps where the reader is troubleshooting or configuring something.
+- Any ordered procedure where the reader is troubleshooting or configuring something.
 
-These are almost always platform-level, so `universe_id` is usually `null`. Set it only if the piece is genuinely tied to one Roblox game.
+These are almost always platform-level, so `universe_id` is usually `null`. Set it only if the piece is truly tied to one Roblox game.
+
+## Tone for stressed readers
+
+- Open by saying what the error or problem means in one or two plain sentences, then point straight at the fixes. Name the likely cause in plain words, and say whether it's usually on the player's side or Roblox's.
+- Calm and reassuring, never chirpy. Wit is off.
+- Every fix says when it helps, what to do and what you should see after. Then "still stuck? try the next one."
 
 ## What this skill adds
 
-**Depth profile: complete and easy to follow**
-- Go deeper than a normal article: cover causes, every realistic fix or step, and the fallback when nothing works. Do not leave a gap a competitor covers.
-- Give each fix enough room to explain when it applies, the exact action, the result to check, and the next option if it fails. Keep paragraphs comfortable without a sentence-count ceiling. Remove padding, not useful explanation.
-- The whole piece should read as one clean story: problem → relevant cause → fixes/steps → useful fallback. FAQs are optional; the scan table may summarize facts explained in the fixes.
+### Depth: complete and easy to follow
 
-**Quick-scan table at the top (when it helps)**
-- When the article has several ordered fixes, steps, or options, add a compact scan table right after the intro, before the first `##` section.
-- Keep it to 2-3 columns and one line per row (e.g. `#` | `Fix` | `What it does`). It is a map of the page, not a second copy of the content.
-- Skip the table when there are only one or two steps, or when there is nothing ordered to summarize. Do not force it.
+- Go deeper than a normal article: causes, every realistic fix or step, and the fallback when nothing works. Don't leave a gap a competitor covers.
+- Give each fix room to explain when it applies, the exact action, the result to check and what to do if it fails. No sentence limit. Cut padding, not explanation.
+- The piece reads as one clean story: the problem, the likely cause, the fixes or steps, then a useful fallback. FAQs are optional. The scan table can summarize facts the fixes explain.
 
-**Numbered headings and numbered steps**
-- Number the fix/step `###` headings (`### 1. Clear the Roblox cache`, `### 2. Run as administrator`) so the order is obvious and matches the scan table.
-- Under each heading, explain when the fix helps, then give the procedure as a **numbered list** when it has ordered steps. Use one action per step with the exact path or click, and explain how to check the result afterward.
-- Keep the `bloxodes-article-writing` troubleshooting rule: each fix gets its own `###` under one `##`; no deep bullet-in-bullet hierarchies; order easiest-first.
+### Quick-scan table at the top (when it helps)
 
-**Headings**
-- Use concise action labels or natural reader questions that identify the actual error, setting, or fix. Do not force sentence-like headings.
-- Lead with the words a player would actually search or scan for.
+- With several ordered fixes, steps or options, add a compact scan table right after the intro, before the first `##`.
+- 2 or 3 columns, one line per row (like `#` | `Fix` | `What it does`). It's a map of the page, not a second copy of it.
+- Skip it for one or two steps, or when there's nothing ordered to summarize.
 
-**Links: internal**
-- Add verified internal links where they support a fix, explanation, or next action. Prefer suitable existing words; there is no minimum count.
-- Good targets: the error-codes pillar page, sibling fix articles, and any related wiki / tool / catalog / checklist page on the site.
-- Omit unpublished targets and keep any missing-link note in the brief, never in public copy.
+### Numbered headings and steps
 
-**Links: external official sources**
-- Link to the official source when it helps the reader act: Roblox download (`roblox.com/download`), Roblox Support (`roblox.com/support`), the Roblox status/help pages, or the relevant vendor page (GPU driver download, Windows update, etc.).
-- Prefer first-party/official destinations. Do not link to sketchy "repair tool" downloads or low-trust mirrors.
+- Number the fix `###` headings (`### 1. Clear the Roblox cache`, `### 2. Run as administrator`) so the order is obvious and matches the scan table.
+- Under each, say when the fix helps, then give the procedure as a **numbered list** when it has ordered steps. One action per step, with the exact path or click, then how to check the result.
+- Keep the base skill's troubleshooting rules: each fix gets its own `###` under one `##`, no deep bullet nesting, easiest first.
 
-**Accuracy reminders specific to tech**
-- Never tell a reader to play Roblox in a web browser: the in-browser player is discontinued; `roblox.com` only launches the installed app.
-- Do not invent error codes, menu paths, or toggles. If a path is uncertain, keep the wording generic.
-- Keep it evergreen: no version numbers, dates, "latest/current/2025", or "updated" freshness claims.
+### Headings
 
-**Media for troubleshooting**
-- Follow the base writing skill's perfect-match video and hosted-image rules.
-- Use a video only when it demonstrates the same error or procedure. Place it after the short intro or near the matching fix.
-- Use a clean hosted screenshot when a settings path or UI control is difficult to find from prose alone.
-- Use the mandatory image pass to target at least the highest-value error screen, setting, control, or result. When the scan table and numbered fixes already make the procedure clear, choose the lightest useful image target. Omit body images only when every planned target is explicitly accepted missing after reliable exact-match searches.
+- Short action labels or natural reader questions that name the actual error, setting or fix. Don't force sentence-like headings.
+- Lead with the words a player would search or scan for.
+
+### Internal links
+
+- Add verified internal links where they support a fix, explanation or next step, on words already in the sentence. No minimum count.
+- Good targets: the error-codes pillar page, sibling fix articles and related wiki, tool, catalog or checklist pages.
+- Skip unpublished targets. Missing-link notes go in the brief, never in public copy.
+
+### Official external links
+
+- Link to the official source when it helps the reader act: Roblox download (`roblox.com/download`), Roblox Support (`roblox.com/support`), Roblox status or help pages, or the relevant vendor page (GPU drivers, Windows Update and so on).
+- Prefer first-party destinations. Never link sketchy "repair tool" downloads or low-trust mirrors.
+
+### Tech accuracy
+
+- Never tell a reader to play Roblox in a web browser. The browser player is discontinued, and `roblox.com` only launches the installed app.
+- Never invent error codes, menu paths or toggles. If a path a fix depends on is uncertain, send it back for research, like the base skill says. Keep wording general only for side details the fix doesn't need.
+- Stay evergreen: no version numbers, dates, "latest/current/2025" or "updated" claims.
+
+### Media for troubleshooting
+
+- Follow the base skill's perfect-match video and hosted-image rules.
+- Use a video only when it shows the same error or procedure. Place it after the short intro or next to the matching fix.
+- Use a clean hosted screenshot when a settings path or control is hard to find from words alone.
+- The image pass should target at least the most useful error screen, setting, control or result. When the scan table and numbered fixes already make things clear, pick the lightest useful target. If nothing good turns up, the article ships without body images once the targets are accepted as missing.
 
 ## Output
 
-Apply the base skill's draft, parent feedback, and one-revision procedure before final verification. Keep its local review note outside public JSON. Write `final.json` in the same shape and to the same field rules as `bloxodes-article-writing`. Parse-check the JSON. `universe_id` is usually `null` for platform pieces. Then verify with `npm run verify:article-finals` like any other article final.
+Use the base skill's draft, parent feedback and one-revision procedure before final checks. Keep its local review note outside the public JSON. Write `final.json` in the same shape and with the same field rules as `bloxodes-article-writing`. Parse-check the JSON. `universe_id` is usually `null` for platform pieces. Then verify with `npm run verify:article-finals` like any other article final.

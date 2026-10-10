@@ -18,13 +18,8 @@ Read and follow .agents/skills/bloxodes-franchise-wiki-writing/SKILL.md complete
 - GTA hub artwork has two required, distinct roles for released/published hubs: game.json cover_image is the wide card/social cover, and game.json hero_image is separate square-friendly artwork for the thumbnail beside the wiki title. Never duplicate the two URLs.
 - Scope: keep Story Mode, GTA Online, announced titles, expansions, editions, and platform differences explicit
 
-Preserve the existing GTA voice and prohibitions: plain player-facing copy, light factual humor, no hype or AI filler, no em dashes, no source, workflow, database, or SEO language, no future collection promises, three or four useful tips, and no production publishing. Parse both JSON files before returning.
+Write the copy in the house voice (`.agents/skills/bloxodes-voice/SKILL.md`): a player who knows GTA explaining it to a friend, answer first, real game nouns, a little fun, no Rockstar press-release tone. Keep the GTA rules: no hype or AI filler, no em dashes, no source, workflow, database or SEO language, no future collection promises, three or four useful tips, and no production publishing. Parse both JSON files before returning.
+
 ## Shared game storage
 
-Managed development uses `games`, `game_wiki_pages`, `game_collection_pages`, `game_collection_datasets`, `game_collection_items`, `game_code_pages`, `game_codes` and `game_tool_pages`. Roblox stays separate. Scope every read and write by namespace. Use `gameDatabase(client, namespace)` for existing logical suffixes.
-
-`games.kind` is only `franchise` or `game`. `parent_id` links a game to its franchise. Other mode and edition labels describe content without adding kinds. Read the wiki row's `canonical_path` before planning collection links. A standalone game's wiki is `/<namespace>/wiki`. A franchise has its own wiki hub and child game wikis. Preserve Minecraft's edition URLs.
-
-Use `publish:game-pages -- --namespace <slug> --file <reviewed.json>` for reviewed game, wiki, codes page and registered tool payloads. It is dry run by default; `--apply` writes only to development. Combined payloads need explicit IDs. Publish identity before wiki, then collections. Research stays in ignored workspaces.
-
-Use `sync:shared-game-collection-runtime` with `--namespace` and the reviewed runtime manifest. Keep immutable dataset/media publication and pointer readback. Preserve drafts, revisions, sources, fields and media. Never edit published items. General wiki and collection workflows cover standalone games and franchises. GTA specialists retain mode, source, map and collectible rules under `namespace = 'gta'`.
+The franchise skill's "Shared game storage" rules apply as written, with `namespace = 'gta'`. GTA keeps its own mode, source, map and collectible rules under that namespace.

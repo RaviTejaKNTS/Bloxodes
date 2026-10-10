@@ -5,23 +5,27 @@ description: Write a complete Bloxodes Articles-page best-games recommendation f
 
 # Best Games Article Writing
 
-## Code-controlled execution
+This is the most opinionated thing we write. A best-games list should read like a friend with great taste walking you through their picks: what each game actually feels like to play, who'll love it, and the catch worth knowing before you hit Play. It's one flowing Articles-page piece, not a template preview or a catalog page.
 
-When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+## Code-controlled runs
 
-Use this as the final stage for opinionated Roblox recommendation pages. It writes one coherent Articles-page piece, not a template preview or a catalog page.
+If you were assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides the interactive parent/subagent, upload/import and standalone self-review instructions. Do only the assigned artifact or review. The runtime owns the next stages and approval records. Keep the editorial and page-type rules below.
 
-Read and apply [the shared article editorial standard](../bloxodes-article-writing/references/editorial-standard.md) for US audience, voice, evidence, time conventions, and review. Keep the specialized game-card and recommendation structure below. Apply [one editorial revision before acceptance](../bloxodes-article-writing/references/editorial-review.md), using the same configured writer and approved research. Preserve recommendation evidence and game-card contracts during revision; do not rerun discovery to fix prose.
+## Read first
+
+- The voice guide (`.agents/skills/bloxodes-voice/SKILL.md`) and the "Best-games lists" section of its examples.
+- [The article standard](../bloxodes-article-writing/references/editorial-standard.md) for US audience, evidence, time conventions and review.
+- [One editorial revision before acceptance](../bloxodes-article-writing/references/editorial-review.md), using the same configured writer and approved research. Keep recommendation evidence and game-card contracts through revision. Don't rerun discovery to fix prose.
 
 ## Inputs and output
 
-Read the article brief plus `research/discovery.md`, `research/selection.md`, and `research/game-research.md` or the per-game research files. Write `final.json` in the article workspace using the existing Articles import shape: `title`, `slug`, `meta_description`, `content_md`, `tags`, `sources`, `faq_json`, and publication fields as appropriate.
+Read the article brief plus `research/discovery.md`, `research/selection.md`, and `research/game-research.md` or the per-game research files. Write `final.json` in the article workspace using the existing Articles import shape: `title`, `slug`, `meta_description`, `content_md`, `tags`, `sources`, `faq_json` and publication fields as needed.
 
 ## Required article shape
 
-Set the final count from the approved selection and use it everywhere it matters: the article `title`, H1/title rendered by the route, and the opening metadata should say `<N> Best ...`. Never hardcode ten or another default count.
+Set the final count from the approved selection and use it everywhere it matters: the article `title`, the H1/title the route renders and the opening metadata should all say `<N> Best ...`. Never hardcode ten or any other default.
 
-Start with a short, direct introduction with a little editorial personality. Give the reader a concrete reason to continue and name the range of experiences the list actually contains. Avoid empty openings such as “here are the best games,” generic warnings about Roblox, or lines about not knowing what kind of horror the reader likes.
+Start with a short, direct intro with real personality. Give the reader a concrete reason to keep going and name the range of experiences the list actually covers. Skip empty openers like "here are the best games," generic warnings about Roblox, or lines about not knowing what kind of horror the reader likes.
 
 Then repeat this pattern for every selected game, in approved order:
 
@@ -64,13 +68,15 @@ Use a unique lowercase hyphenated `id` for each break. Do not put a break inside
 
 ## Voice and accuracy
 
-Write like an experienced Roblox player giving clear recommendations: specific, conversational, decisive, and willing to mention friction. Use first-person editorial phrasing where it helps the recommendation, but never invent a personal session, result, or feeling that was not verified. Let the voice have taste without pretending to have played a session that the research did not establish. Never say where a fact came from or how the article was made; follow the Public Copy rule in root `AGENTS.md`.
+- **Sound like an experienced Roblox player making recommendations:** specific, conversational, decisive and honest about friction.
+- **Open each game on what it feels like to play.** What you actually do, what creates the tension or the fun, and what makes it worth opening. Concrete verbs and details beat labels.
+- **Vary everything.** Paragraph openings, rhythm and the angle for each game. Never repeat "This is for players who..." or "Compared with the previous game..." across sections.
+- **Opinions are welcome, invented experiences aren't.** First-person editorial phrasing ("I'd start here if...") is fine where it helps a recommendation. Never claim a play session, result or feeling that research didn't establish.
+- **No database-entry language,** keyword stuffing, inflated claims or filler transitions.
+- **Never say where a fact came from or how the article was made.** Follow Public Copy in root `AGENTS.md`.
+- **The intro and closing should feel authored.** The intro can set a mood or make a sharp promise. The closing helps the reader choose where to start without recapping the whole article.
 
-Prefer concrete verbs and details over labels. Explain what the player actually does, what creates tension, and what makes the game worth opening. Vary paragraph openings and rhythm. Do not repeat the same “This is for players who...” or “Compared with the previous game...” formula across sections. Avoid database-entry language, keyword stuffing, inflated claims, and filler transitions.
-
-The introduction and closing should feel authored. The introduction can set a mood or make a sharp editorial promise; the closing should help the reader choose where to start without restating the whole article.
-
-Use every selected game. Do not truncate to ten or another hardcoded count. If selection research calls for pagination, preserve the approved split and do not silently drop games.
+Use every selected game. Never truncate to ten or another hardcoded count. If selection research calls for pagination, keep the approved split and don't silently drop games.
 
 ## Final checks
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Code Writing"
   short_description: "Write codes page payloads"
-  default_prompt: "Use $bloxodes-code-writing to prepare one evergreen codes page payload for upsert:code-page. Do not write code rows, active code names, code dates, active counts, or current reward mappings."
+  default_prompt: "Use $bloxodes-code-writing to prepare one evergreen codes page payload for upsert:code-page. Do not write code rows, active code names, code dates, active counts, or current reward mappings. Follow $bloxodes-voice: answer first, sound like a player who knows the game, clean and a little fun, no templates or research language."

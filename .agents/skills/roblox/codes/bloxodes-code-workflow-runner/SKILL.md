@@ -1,37 +1,36 @@
 ---
 name: bloxodes-code-workflow-runner
-description: Run one Bloxodes codes page setup with parent review. Use when the user asks to create or update /codes/<game-slug> page fields, source URLs, Roblox link, local preview, and code refresh workflow without manually writing code rows.
+description: Run one Bloxodes codes page setup with parent review. Use when the user asks to create or update /codes/<game-slug> page fields, source URLs, Roblox link, GitHub Managed content QA, and code refresh workflow without manually writing code rows.
 ---
 
 # Bloxodes Code Workflow Runner
 
-Use one subagent for one codes page. Codes are different from normal content: the page row is written, then code rows come from the refresh script.
+You set up one `/codes/<game-slug>` page with one subagent. Codes work differently from other pages: you write the page row, and the refresh script fills in the code rows.
 
-## Subagent Handoff
+## Never write code rows by hand
 
-Every subagent message must set the role and exact skill:
+Don't manually add active codes, expired codes, rewards tied to code names, code dates or active-code counts. The refresh script owns all of that.
+
+## Subagent handoff
+
+Every message to the subagent sets its role and the exact skill:
 
 - You are the subagent for one codes page only.
 - Do not run `/bloxodes-code-workflow-runner`.
 - Do not create or call other subagents.
 - Use `/bloxodes-code-writing`.
 - Skill file: `.agents/skills/bloxodes-code-writing/SKILL.md`.
+- Read the voice guide first: `.agents/skills/bloxodes-voice/SKILL.md`.
 - Return the approved payload for `upsert:code-page` only.
 
 ## Workflow
 
-1. Confirm the game, Roblox link, and whether it has a real code system.
+1. Confirm the game, the Roblox link and whether the game has a real code system.
 2. Ask the subagent to use `/bloxodes-code-writing` and return the approved payload for `upsert:code-page`.
-3. Review source URLs, evergreen copy, slug, and that no active code names or current counts are written.
-4. Run:
-
-```bash
-npm run upsert:code-page -- --file <payload.json> --publish
-npm run refresh:codes -- --slug <game-slug>
-```
-
-5. Start or reuse localhost with `npm run dev:managed`.
-6. Open `/codes/<game-slug>` in the Codex Browser and verify the page renders.
-7. Return paths, localhost link, refresh status, blocked reason if any, and remaining risks.
-
-Do not manually add active codes, expired codes, rewards tied to code names, code dates, or active-code counts.
+3. Review the payload:
+   - Source URLs and slug are right.
+   - The copy is evergreen. No active code names or current counts.
+   - The copy reads right against `.agents/skills/bloxodes-voice/SKILL.md`: answer-first opening, player voice, no template openings, research voice, hype or filler, no fact said twice, headings that say what's under them, and plain, exact wording for steps like how to redeem.
+4. Stage the reviewed payload in a selected batch under `content/releases/<batch>/` (operation kind `roblox-codes-page`), or use a reviewed immutable bundle. Don't run `upsert:code-page`, `refresh:codes` or a local preview yourself.
+5. Run `Managed content QA` on GitHub with the exact committed batch or bundle, then review its screenshots and reports for `/codes/<game-slug>`. Code rows come from the scheduled `Daily Codes Refresh` job, not from this run.
+6. Return the paths, the successful GitHub artifact links, any blocked reason and the remaining risks. Production publication needs explicit authorization.

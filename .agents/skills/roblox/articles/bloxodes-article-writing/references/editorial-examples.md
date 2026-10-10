@@ -1,140 +1,126 @@
-# Article Planning and Prose Examples
+# Article Examples
 
-Use these original examples alongside [the Beebom style study](beebom-style-study.md). They demonstrate writing decisions, not verified current game facts or prescribed wording. Select the format that matches the reader's task; do not repeat the examples as a template.
+Article-specific examples to sit alongside the voice guide examples (`.agents/skills/bloxodes-voice/references/examples.md`) and the [Beebom study](beebom-style-study.md). The games and facts here are made up unless a real game appears in a heading pattern. They show writing decisions. Don't copy the sentences, and don't add these mechanics to a real article.
+
+Pick the one or two sections closest to your article. Ignore the rest.
 
 ## Headings that carry search intent
 
-| Too generic | More useful heading | Reader expectation |
+| Too generic | Better | What the reader expects |
 | --- | --- | --- |
-| First Sea Rework | Blox Fruits Update 30 First Sea Rework | What changed in this game's starting region |
-| Island Secrets | How Island Secrets Unlock Levels in Blox Fruits | How exploration affects progression |
-| Abilities | Magnet Fruit Moveset in Blox Fruits | Controls, effects, and meaningful differences |
-| Event Rewards | How the Blox Fruits Magnet Event Works | Participation, tokens, and rewards |
+| First Sea Rework | Blox Fruits Update 30 First Sea Rework | What changed in the starting region |
+| Island Secrets | How Island Secrets Unlock Levels in Blox Fruits | How exploring affects progress |
+| Abilities | Magnet Fruit Moveset in Blox Fruits | Controls, effects, tap vs hold |
+| Event Rewards | How the Blox Fruits Magnet Event Works | How to join, tokens, rewards |
 | Ingredients | Dandelion Seed Crafting Requirements in Grow a Garden | Exact materials before crafting |
-| Getting Started | How to Use Treasure Maps in Fisch | A procedure for an identified game mechanic |
+| Getting Started | How to Use Treasure Maps in Fisch | Steps for one named mechanic |
 
-The game/entity is part of a natural search phrase, not a suffix pasted onto everything. Under a contextual Magnet H2, H3s can simply say `Magnetic Power and Magnetic Pull` and `Maximum Overdrive Transformation`. In an update overview, use feature headings; in an acquisition guide, use acquisition headings. Do not promise a full moveset with only two vague examples.
+Under a Magnet H2, short H3s like "Magnetic Pull" and "Maximum Overdrive" are fine. Don't promise a full moveset and then show two vague moves.
 
-## Update explainer: orient, explain, connect
+## Update explainer
 
-A compressed opening lists additions and stops. A developed opening names the changes, identifies the player affected, and explains the article's scope. No separate highlights block is needed when prose already does this well.
+A weak opening lists the additions and stops. A strong one names the changes, says who they affect and points at the decision the reader faces.
 
-Illustrative original opening:
+> Tower Brawl Update 7 is all about ice. Three Frost units can slow a whole lane at once, and the new Glacier Pass map gives them plenty of room to do it. If you're deciding whether to save gems for the Frost banner, here's what each unit does and which balance changes hit your current team.
 
-> Blox Fruits Update 30 gives you two new things to get to grips with: Magnet Fruit and a rebuilt First Sea. The fruit introduces a scrap-powered combat system, while Island Secrets give returning players another reason to explore the early islands. If you're wondering how those secrets affect leveling or what Magnet actually does in a fight, here's how the main additions work.
+Possible sections: "Tower Brawl Update 7 Frost Units", "Glacier Pass Map Layout and Tips", "Update 7 Balance Changes", "Is the Frost Banner Worth Your Gems?" Add or rename sections to match what actually shipped.
 
-Only use those details after verification. The useful pattern is topic → player consequence → concrete coverage promise. Avoid replaying the same additions in highlights immediately afterward.
+For a combat section, explain the meter before the moves that spend it. Then connect them: the move that builds scrap feeds the passive that grows with scrap. Put tap and hold differences in the table and the useful takeaway after it.
 
-Possible major sections include `Blox Fruits Update 30 First Sea Rework`, `How Island Secrets Unlock Levels in Blox Fruits`, `Magnet Fruit Moveset in Blox Fruits`, `How the Blox Fruits Magnet Event Works`, and `Blox Fruits Update 30 UI Changes`. Add sections when another subject deserves one, and adjust names to match the verified content.
+## Item acquisition guide
 
-For a combat section, explain the meter before listing controls. Then describe a practical connection: the move that gathers scrap supports the passive that improves as scrap accumulates. Explain a verified tap/hold distinction in the table and a useful implication afterward. A phrase such as "stronger attacks and better movement" is not enough when sources support what actually changes.
+> **Weak:** Craft the prerequisite items. This unlocks the recipe. Collect materials and craft the item.
+>
+> **Better:** If the recipe isn't showing up, you're missing the earlier crafts. Finish the Trail Band and Ash Mask, then go back to Mara with the materials below.
 
-## Item acquisition: answer the obstacle
+Possible sections: "How to Get the Ember Compass in Ember Isles", "Ember Compass Materials and Where to Farm Them", "What the Ember Compass Unlocks". Order them around the actual task.
 
-Weak explanation:
+## Tables with prose around them
 
-> Craft the prerequisite items. This unlocks the recipe. Collect materials and craft the item.
+Before a materials table, say what unlocks the recipe. After it, say where to craft and anything that trips people up. Don't praise the system, and don't re-read the rows.
 
-Better approach:
+> **Before the table:** The compass is only the first of three crafts, and each one needs its own materials. Here's the full shopping list.
+>
+> **After the table:** Cinder Shards are the slow one. Ember Crabs drop them at night only, so plan your farming around the clock.
 
-> If the recipe isn't showing up, check the earlier crafts first. You need to finish both prerequisite accessories before the NPC offers the next recipe. Once those are done, return with the materials listed below and speak to the same NPC again.
+## Rankings and recommendations
 
-The second version connects a likely player problem to its cause and next action. In actual copy, name the accessories, NPC, location, and materials from verified evidence. Do not insert invented names or leave a generic explanation where exact facts are known.
+State the mode or scope and the top picks early. Then explain reasons, alternatives and drawbacks with real game details. Tier-list and best-games block rules still apply.
 
-Use headings such as `How to Get [Item] in [Game]`, `[Item] Crafting Requirements in [Game]`, and `How to Use [Item] in [Game]`. Order them around the actual task. Develop conditions, costs, consequences, and failure cases where readers need them; keep a short procedure short when there are no additional steps.
+## Troubleshooting
 
-## Tables with explanatory prose
-
-A materials or controls table answers the comparison question. The surrounding prose answers how to use that information. For example, explain the unlock condition before a crafting table, then tell readers where to complete the craft afterward. Do not add generic praise for the system or narrate each row again.
-
-## Conversational flow and endings
-
-Talk through the player's decision. "If your goal is to reach the new cap, start with the unfinished island objectives" can be a useful closing when verified. "Pay attention to your choices" is vague. The ending should point to a relevant next action or resolve the practical tradeoff, not merely announce that the guide has ended.
-
-Use contractions and occasional reader questions where a real question arises. Do not manufacture a joke, anecdote, question, or transition in each paragraph. A natural conversation still needs exact nouns, useful detail, and evidence.
-
-## Troubleshooting and recommendations
-
-Use headings that name the error or decision and explain verified fixes in action order. Include expected results and what to try if a step fails. Give a worried reader calm explanations rather than a playful performance.
-
-For rankings, state the mode/scope and top choices early, then explain reasons, alternatives, and drawbacks with concrete game details. Preserve specialized tier-list and best-games block/media contracts. The overview can repeat names from detail sections, but the analysis must contribute something beyond the ranking.
+Headings name the error or the fix. Fixes go easiest first. Each one says when it helps, what to do and what you should see after. Calm, no jokes.
 
 ## Turning research into an explanation
 
-These original before/after pairs illustrate editing decisions. Names and facts are hypothetical unless verified in the assigned brief. The parent selects the relevant pair or two for the handoff; do not reproduce the wording or add these mechanics to an article.
+Each pair shows a research note becoming something a player would actually want to read.
 
 ### Goal before classification
 
-Research note: Ember Compass is a rare crafted item; it unlocks the Ash Vault; Mara makes it at Harbor Camp; two earlier crafts unlock its recipe.
+Research note: Ember Compass is a rare crafted item. It unlocks the Ash Vault. Mara makes it at Harbor Camp. Two earlier crafts unlock its recipe.
 
-Before:
-> Ember Compass is a rare crafting item. The intended recipient must complete prerequisite crafts to access the final recipe.
-
-After:
-> To enter the Ash Vault, you'll need an Ember Compass. Mara can make one at Harbor Camp, but you won't see the recipe until you've finished her first two crafts.
-
-Lead with the desired result, then explain the obstacle. The assigned brief must supply the exact prerequisite names in the relevant instructions. Do not add a generic popularity introduction or force every article to open with a question.
-
-### Explain the dependency once
-
-Research note: Mara's recipe unlocks after crafting a Trail Band and Ash Mask. Both need Cinder Shards, which drop from Ember Crabs. The compass also needs shards. The brief contains all quantities.
-
-Before:
-> Craft the prerequisites to unlock the recipe. First craft Trail Band and Ash Mask. Then unlock the compass recipe. Follow these steps: craft Trail Band, craft Ash Mask, unlock the compass recipe.
-
-After:
-> If Mara isn't offering the compass yet, finish the Trail Band and Ash Mask first. Both use Cinder Shards, so include their costs when you're farming Ember Crabs. The table below separates the two prerequisite recipes from the compass itself.
-
-Use one recipe table with supported quantities and nearby farming sources. Do not replay the same actions as prose, steps, and another summary. Check every ingredient, including those used only in prerequisites, against the farming guidance. A source buried later in a reward table does not complete the shopping instructions.
-
-### Preserve meaningful uncertainty without narrating research
-
-Evidence note: several guides repeat the same community wiki, which estimates a portal lasts about ten minutes. The exact duration has not been established, and leaving the area may close it sooner.
-
-Before:
-> Current community-documented behavior suggests an approximately ten-minute duration. This is an approximate community estimate, not an official timer.
-
-After:
-> The portal is reported to stay open for about ten minutes, but leaving the area may close it sooner. Gather your group before you open it.
-
-The estimate remains explicitly qualified, and the advice explains its consequence. Keep shared source ancestry in the evidence notes. If the exact timing determines whether the procedure works, resolve the conflict or narrow the promise instead of writing around it. For an established, corroborated recipe, state the recipe directly without attaching the source category to every ingredient.
-
-### Replace formal labels with the player's action
-
-Before:
-> The intended reward owner must remain within the active encounter area to preserve eligibility. The calculated aggregate material total is not an additional displayed recipe.
-
-After:
-> If you're collecting the reward, stay near the boss until the fight ends.
+> **Before:** Ember Compass is a rare crafting item. The intended recipient must complete prerequisite crafts to access the final recipe.
 >
-> Starting from scratch? The shopping list below includes both prerequisite crafts and the compass.
+> **After:** To get into the Ash Vault, you need an Ember Compass. Mara makes them at Harbor Camp, but she keeps the recipe hidden until you've done her first two crafts.
 
-These are two separate examples, not consecutive article paragraphs. Retain any specific damage or ownership conditions from the approved brief where they affect the reward. Keep arithmetic and evidence logs private while clearly distinguishing shopping totals from individual recipes.
+Lead with what the player wants, then the obstacle.
 
-### Give each table column a job
+### Say the dependency once
 
-Before: a farming table has `Material`, `Where to get it`, and `Practical note`, with notes such as “enemy drop” or “farm this enemy” repeating the source column.
+Research note: Mara's recipe unlocks after the Trail Band and Ash Mask. Both need Cinder Shards from Ember Crabs. The compass also needs shards.
 
-After: use `Material`, `Total needed`, and `Where to get it` when all three are supported and useful; explain a shared drop-rate limitation once beside the table. Otherwise use two columns. Extra columns and side rewards do not establish depth. Develop the bottleneck or next action that helps the reader finish.
+> **Before:** Craft the prerequisites to unlock the recipe. First craft Trail Band and Ash Mask. Then unlock the compass recipe. Follow these steps: craft Trail Band, craft Ash Mask, unlock the compass recipe.
+>
+> **After:** If Mara isn't offering the compass yet, finish the Trail Band and Ash Mask first. All three crafts eat Cinder Shards, so farm extra while you're at the Ember Crabs. The table splits the two warm-up recipes from the compass itself.
 
-### A walkthrough must explain the work
+One recipe table with real quantities and where to farm each item. Check that every material, including ones only used in the prerequisites, has a farming spot. A drop listed way down in a boss rewards table doesn't count.
 
-Hypothetical source facts: after paying a trainer, the player must land five rear attacks on training dummies and collect two harbor parcels, then return to claim the style. These are illustrative facts, not Grand Blue instructions.
+### Keep real uncertainty, drop the research voice
 
-Before:
-> Pay the fee, follow the current objectives in your quest tracker, and complete the reward interaction. The game is in Early Access, so the tracker is the best authority.
+Evidence note: several guides repeat one wiki's estimate that the portal lasts about ten minutes. Leaving the area may close it sooner.
 
-After:
-> Paying the trainer starts two practice tasks. First, move behind the training dummies and land five attacks. Then collect the two parcels at the harbor and bring them back to the trainer to unlock the style.
+> **Before:** Current community-documented behavior suggests an approximately ten-minute duration. This is an approximate community estimate, not an official timer.
+>
+> **After:** The portal stays open for about ten minutes, and leaving the area can close it early. Get your group ready before you open it.
 
-The second version is possible only when the brief supports those exact tasks. If the evidence says only “complete the questline,” research is incomplete; do not invent tasks or use the first version as a safe substitute. When the real task varies, explain its verified selection rule and how to complete the possible objectives.
+If the exact timing decides whether the plan works, resolve it or narrow the promise. For a solid, confirmed recipe, just state it.
 
-### An opening needs more than the title repeated
+### Player actions, not formal labels
 
-Before:
-> To unlock the Ember stance, you need to complete its unlock route in order. The trainer interaction is gated behind the opening sequence.
+> **Before:** The intended reward owner must remain within the active encounter area to preserve eligibility.
+>
+> **After:** Stay near the boss until it goes down, or you won't get the reward.
 
-After:
-> Reached the Ember trainer but can't start training? Finish Mara's harbor delivery first, then return with the training fee. Here's where that delivery starts and what you'll need to do before you can learn the stance.
+### Give every table column a job
 
-This hypothetical opening explains a concrete obstacle. A different article might open with the stance's supported combat role instead. Do not force the question format or add unsupported benefits. Let a short requirements summary orient the reader, then develop each step once. A separate troubleshooting section must supply more than the same summary again.
+> **Before:** `Material | Where to get it | Practical note`, with notes like "enemy drop" that repeat the second column.
+>
+> **After:** `Material | Total needed | Where to get it`, plus one line under the table about the slow drop rate.
+
+Extra columns don't add depth. The bottleneck explained once does.
+
+### A walkthrough explains the work
+
+Research note: paying the trainer starts two tasks. Land five rear attacks on training dummies, then bring two harbor parcels back.
+
+> **Before:** Pay the fee, follow the current objectives in your quest tracker, and complete the reward interaction. The game is in Early Access, so the tracker is the best authority.
+>
+> **After:** Paying the trainer starts two quick tasks. Get behind the training dummies and land five hits on their backs. Then grab the two parcels at the harbor and bring them back. Hand them over and the style is yours.
+
+You can only write the second version when the brief has those tasks. If it only says "complete the questline," research isn't finished.
+
+### An opening needs more than the title
+
+> **Before:** To unlock the Ember stance, you need to complete its unlock route in order. The trainer interaction is gated behind the opening sequence.
+>
+> **After:** Found the Ember trainer but can't start training? Finish Mara's harbor delivery first, then come back with the fee. Here's where the delivery starts and what you'll do before you learn the stance.
+
+Another article might open with what the stance does in a fight instead. Don't force the question format.
+
+## Endings
+
+> **Weak:** Pay attention to your choices and have fun!
+>
+> **Better:** If you're chasing the new level cap, finish the island secrets before grinding quests. They give more XP per minute than anything else in the First Sea.
+
+Point to the next move or settle the last choice. Don't just announce that the guide is over.

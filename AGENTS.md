@@ -22,6 +22,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `dev-docs/pipelines/wiki-collections.md`: game wiki hubs and their game-specific collection workflow/data ownership.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
+- `.agents/skills/bloxodes-voice/SKILL.md`: the house voice for every public word we publish, with before/after examples for every page type. Read it before writing or reviewing any page copy.
 - `.agents/skills/bloxodes-game-plan/SKILL.md`: research and plan useful page types for any non-Roblox game.
 - `.agents/skills/bloxodes-games-reference-pages/SKILL.md`: shared maps, standalone checklists, quizzes and catalogs.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
@@ -94,13 +95,19 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ## Public Copy
 
-Write like a player who knows the game. Never say where a fact came from or how the page was made. Keep sources, research notes, briefs, datasets, manifests and workflows out of visible copy.
+Every public word follows the house voice in `.agents/skills/bloxodes-voice/SKILL.md`. Short version: write like a player who knows the game and is explaining it to a friend. Answer first, use clean short sentences and real game nouns, and add a bit of fun where it fits. No templates, hype, filler or em dashes.
+
+Never say where a fact came from or how the page was made. Sources, research notes, briefs, datasets, manifests and workflows stay out of visible copy. The one exception is credit that helps the reader: crediting the developer or an official announcement ("the developer confirmed a fix is coming"), and, in news and data reports, attributing company figures and allegations to whoever made them ("Roblox says...", "the lawsuit claims..."). See "Facts and honesty" in the voice guide.
 
 - Bad: "According to our sources, Research takes 3 minutes." Good: "Research takes 3 minutes."
 - Bad: "Our research shows the vault opens at night." Good: "The vault opens at night."
 - Bad: "This source-backed list covers every pet." Good: "There are 42 pets across five rarities."
 
 Game terms that use these words, such as Dandy's World's Research or GTA's Source Cargo, are fine. `scripts/content/check-public-copy.ts` blocks process-voice phrases. Bare `source` and `research` pass; `manifest` and `workflow` stay blocked.
+
+## Writing skills and docs
+
+Skills and docs follow the same spirit as public copy, because agents copy the tone of what they read. Keep them clear, friendly, direct and easy to scan, with exact commands, paths and fields kept exact. See "How we write skills and docs" in `.agents/skills/README.md`.
 
 ## Change Checklists
 

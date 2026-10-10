@@ -1,15 +1,17 @@
 ---
 name: bloxodes-tier-list-writing
-description: Write one Bloxodes Roblox tier-list article final.json from an approved brief and mandatory media.json. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities, using a visual tier list when exact images are verified and text/table fallback only for explicitly accepted-missing image targets.
+description: Write one Bloxodes Roblox tier-list article final.json from an approved brief and its media.json. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities, using a visual tier list when exact images are verified and text/table fallback only for explicitly accepted-missing image targets.
 ---
 
 # Bloxodes Tier List Writing
 
-## Code-controlled execution
+Tier lists are where players want a confident take. Lead with the answer (what's on top and why), then back every placement with real game reasons. Be decisive where the evidence is clear and upfront about the scope, so nobody's surprised that the PvP king sits in B tier for wave mode.
 
-When assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides interactive parent/subagent, upload/import, and standalone self-review instructions for that invocation. Complete only the assigned artifact or review; the runtime owns subsequent stages and approval records. Preserve the editorial and page-type contracts below.
+## Code-controlled runs
 
-Use this after `bloxodes-article-research` and parent approval. Write one article only.
+If you were assigned a code-controlled stage, follow [stage ownership](../bloxodes-article-workflow-runner/references/code-controlled-stages.md). It overrides the interactive parent/subagent, upload/import and standalone self-review instructions. Do only the assigned artifact or review. The runtime owns the next stages and approval records. Keep the editorial and page-type rules below.
+
+Use this after `bloxodes-article-research` and parent approval. One article only.
 
 ## Workspace
 
@@ -20,31 +22,42 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   final.json
 ```
 
-Read the approved `brief.md` and the sibling `../bloxodes-article-writing/SKILL.md` before writing. Apply its house voice, accuracy, linking, metadata, FAQ, and final-output rules unless this skill gives a stricter tier-list rule. Its draft, parent feedback, and one-revision procedure also applies; run final verification only after editorial acceptance. Preserve the tier inventory, ranking evidence, and visual/table contracts during revision.
+## Read first
+
+- The approved `brief.md`.
+- `../bloxodes-article-writing/SKILL.md`. Apply its voice, accuracy, linking, metadata, FAQ and final-output rules unless this skill is stricter. Its draft, parent feedback and one-revision procedure also apply. Run final checks only after editorial acceptance, and keep the tier inventory, ranking evidence and visual/table contracts through revision.
+- The voice guide (`.agents/skills/bloxodes-voice/SKILL.md`) and the "Tier lists" section of its examples.
+
+## Voice for rankings
+
+- **Open with the verdict.** Name the top pick or two and the one reason that puts them there. Lead with the unit's name and the concrete thing it does better than anything else.
+- **State scope early and plainly:** wave mode, PvP, beginners, endgame.
+- **Tier analysis explains, it doesn't re-read the table.** What do units in this tier have in common, where do they fall off, and what should you pair them with?
+- **Table cells stay short and plain.** Save the personality for the prose around them.
 
 ## Readiness
 
 Before ranking:
 
-1. Define the exact scope, such as general progression, PvE, PvP, beginners, or endgame.
-2. List the complete expected item set. Do not let easy-to-find images define coverage.
-3. Verify ranking criteria and placements from the approved sources and game evidence. Do not copy one competitor's order blindly.
-4. Check whether every item has an exact existing Bloxodes public image path. Reuse canonical game and collection assets under `apps/web/public`; do not duplicate them into the article folder.
+1. Define the exact scope, like general progression, PvE, PvP, beginners or endgame.
+2. List the complete expected item set. Don't let easy-to-find images define coverage.
+3. Verify ranking criteria and placements from the approved sources and game evidence. Don't copy one competitor's order blindly.
+4. Check whether every item has an exact existing Bloxodes public image path. Reuse canonical game and collection assets under `apps/web/public`. Don't duplicate them into the article folder.
 5. Stop if important items or placement evidence are unresolved. Run `bloxodes-article-images` for the complete item set. Use the text/table-first shape only when the parent has explicitly accepted unresolved images as missing after reliable exact-match searches.
 
-## Required Article Shape
+## Required article shape
 
 Write Markdown in `content_md` in this order:
 
-1. Give the direct answer and top recommendations with any essential caveat.
-2. State the ranking scope and criteria briefly.
-3. When every ranked item has an exact verified image, add exactly one `tier-list` block containing tier ranks, images, names, and optional links. When the parent has explicitly accepted missing visuals, the block may still include every ranked item with text-only tiles for those accepted omissions. Otherwise omit the block entirely and introduce the ranking with a concise Markdown summary table.
-4. Add one `## <rank> Tier` section for every tier, in best-to-worst ranking order.
-5. Begin each tier section with one Markdown detail table. In visual mode, repeat the exact item name and image path from the overview. In text/table-first mode, omit the image column and include every ranked item by exact name.
-6. Follow the table with useful tier-level analysis, exceptions, and player advice. Do not narrate every row again.
-7. Add a conclusion only when it contributes a choice, caveat, or next step.
+1. The direct answer and top picks, with any essential caveat.
+2. The ranking scope and criteria, briefly.
+3. When every ranked item has an exact verified image, exactly one `tier-list` block with tier ranks, images, names and optional links. When the parent has explicitly accepted missing visuals, the block can still include every ranked item, with text-only tiles for those accepted omissions. Otherwise leave the block out and introduce the ranking with a short Markdown summary table.
+4. One `## <rank> Tier` section for every tier, best to worst.
+5. Each tier section starts with one Markdown detail table. In visual mode, repeat the exact item name and image path from the overview. In text/table-first mode, leave out the image column and include every ranked item by exact name.
+6. After the table, useful tier-level analysis, exceptions and player advice. Don't narrate every row again.
+7. A closing section only when it adds a choice, caveat or next step.
 
-Use topic-specific detail columns. Examples include role, cost, stats, strengths, weaknesses, best use, PvE value, or PvP value. Keep cells concise.
+Use topic-specific detail columns, like role, cost, stats, strengths, weaknesses, best use, PvE value or PvP value. Keep cells short.
 
 ## Tier-List Block
 
@@ -121,10 +134,6 @@ Before returning `final.json`:
 - Confirm each placement belongs to the stated scope and each table adds real detail.
 - Confirm overview names and tier placements exactly match the per-tier tables. In visual mode, confirm image paths match; for accepted missing visuals, confirm the text-only item appears in the matching table without a placeholder image.
 - Parse-check JSON.
-- Run the normal article verifier against a local web server:
+- Hand the final back for the normal article QA: the runtime's `import_verify` and `browser_verify` stages in code-controlled runs, or `Managed content QA` on GitHub for task work. Don't run the verifier yourself.
 
-```bash
-npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
-```
-
-Do not call a visual article ready if the structured block or local image checks fail. For either shape, do not call it ready if the tier detail contract, import, or rendered route fails.
+Do not call a visual article ready if the structured block or image checks fail. For either shape, do not call it ready if the tier detail contract, import, or rendered route fails.

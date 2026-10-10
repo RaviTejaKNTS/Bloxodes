@@ -8,7 +8,7 @@ When dataset ownership or a consuming pipeline changes, update that existing can
 
 The documented files below back only file-driven tools and catalog sections that are not modeled in Supabase. Game-collection JSON and `quiz.json` archives have been removed. Public wiki collections, collection-backed tools, mobile collection APIs, sitemaps, and quizzes read Supabase only; temporary collection authoring belongs under ignored `tmp/content-workspace/`.
 
-When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
+When turning a game dataset into public wiki or collection pages, use the matching wiki or game collection skill and the house voice in `.agents/skills/bloxodes-voice/SKILL.md`. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
 
 ## Dataset Map
 

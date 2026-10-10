@@ -5,7 +5,7 @@ description: Write one non-Roblox franchise collection final.json after approved
 
 # Bloxodes franchise game collection writing
 
-Own the writing pass for one approved collection. Start only after the brief records approved data and image readiness. Follow the approved page type: database copy supports browsing and comparison; collectible copy supports route planning, access requirements, and completion.
+You own the writing pass for one approved collection in a non-Roblox game. The dataset carries the facts. Your copy explains the system around them so a player knows what matters and what to do next. Start only after the brief records approved data and image readiness. Follow the approved page type: database copy supports browsing and comparison; collectible copy supports route planning, access requirements, and completion.
 
 ## Shared game storage
 
@@ -31,16 +31,12 @@ When updating an existing collection, preserve accurate copy and structure. Chan
 
 ## Voice
 
-Write like a player who knows the game and can explain its systems to another player.
+Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`. Write like a player who has already figured this system out and is happy to save you the trial and error.
 
-- Use simple English, short paragraphs, concrete game nouns, and direct sentences.
-- Address the player as you when useful.
-- Light, dry humor is fine when it sits on a real fact. Do not stack jokes or write around the answer.
-- Do not use em dashes, hype, generic welcome copy, or stock AI phrases.
-- Keep card facts, table values, controls, mission names, platform sequences, and directions plain.
-- Do not mention databases, SEO, cards, pages, or how the site works in public copy.
-- Never say where a fact came from or how the page was made. Follow the Public Copy rule in root `AGENTS.md`. Game terms such as Research or Source Cargo are fine.
-- Do not add franchise-specific visual instructions or eyebrow text.
+- Lead every prose field with the useful bit: what these things do, the choice that matters, the mistake to avoid.
+- Personality goes in `intro_md`, `description_md` and `wiki_md`. Card facts, table values, controls, mission names, platform sequences and directions stay plain.
+- Never mention databases, SEO, cards, pages or how the site works. Never say where a fact came from or how the page was made. Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
+- No franchise-specific visual instructions or eyebrow text.
 
 ## Non-negotiable content rules
 
@@ -72,6 +68,8 @@ Write one short paragraph that starts with the in-game system. Explain why the e
 ### description_md
 
 Answer the remaining player questions with the fewest useful headings:
+
+- Be complete: use the dataset's real numbers to cover what players need to choose well, at least as well as the top-ranking guides. That means early, mid and late choices and best-value options when the collection has a progression or price, plus unlocks and common mistakes. A location or route collection covers access and route logic instead. Give answers, not "check the X" chores.
 
 - Explain unlocks, progression, tradeoffs, route choices, platform differences, edition limits, and common mistakes when relevant.
 - Use short paragraphs, bullets for steps or comparisons, and a small table only when it clarifies several shared options.
@@ -138,6 +136,6 @@ Write two to four sentences for the game wiki hub. Explain what the system is, h
 - Section-note keys match the dataset exactly.
 - Public copy contains no source, workflow, page, database, or renderer language.
 - Mode, expansion, edition, platform, and release claims match the brief.
-- The copy reads as Bloxodes, not a publisher press release or a generic guide.
+- The copy passes the voice guide's "Before you hand it in" check: it sounds like a player explaining the game, not a publisher press release or a generic guide.
 
 Return the final path, parse result, and any approved fact that could not be expressed without overstating the evidence.
