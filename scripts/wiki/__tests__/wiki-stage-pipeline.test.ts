@@ -295,6 +295,25 @@ test("downloads normalize uppercase extensions and omit GIF", async t => {
   assert.equal(requests, 1, "retained lowercase download is reused");
 });
 
+test("downloads reject a filename already claimed by another item", async t => {
+  const folder = await imageFixture(t);
+  await save(path.join(folder, "dataset.json"), { meta: { schemaVersion: 2 }, items: [
+    { item: { name: "Cat" }, system: { slug: "cat", image: null } },
+    { item: { name: "Dog" }, system: { slug: "dog", image: null } },
+    { item: { name: "Fox" }, system: { slug: "fox", image: "/fox.png" } }
+  ] });
+  t.mock.method(globalThis, "fetch", async (url: string | URL) => new Response(`bytes-${String(url).split("/").pop()}`, { headers: { "content-type": "image/png" } }));
+  const download = (itemSlug: string, relativePath: string) => ({ itemSlug, url: `https://images.example.com/${itemSlug}`, sourcePage: `https://example.com/${itemSlug}`, relativePath });
+  await save(path.join(folder, "images.json"), { downloads: [download("cat", "pet.png"), download("dog", "PET.png"), download("dog", "fox.png")] });
+  const notes = (await downloadWikiImages(folder)).join(" ");
+  assert.match(notes, /pet\.png is already used by item cat/i);
+  assert.match(notes, /fox\.png is already used by item fox/);
+  const rows = JSON.parse(await readFile(path.join(folder, "dataset.json"), "utf8")).items;
+  assert.equal(rows[0].system.image, "/pet.png");
+  assert.equal(rows[1].system.image, null);
+  assert.equal(await readFile(path.join(folder, "media/pet.png"), "utf8"), "bytes-cat");
+});
+
 test("malformed optional plans do not trap pipeline recovery after a saved decision", async t => {
   const f = await fixture(t);
   const execute = async (task: WikiStageTask) => {

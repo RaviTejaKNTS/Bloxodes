@@ -16,6 +16,12 @@ test("Claude review keeps OAuth and exposes read-only tools including image Read
   const denied = args[args.indexOf("--disallowedTools") + 1].split(",");
   for (const tool of ["Agent", "Task", "Bash", "Write", "Edit"]) assert.ok(denied.includes(tool));
   assert.equal(args[args.indexOf("--mcp-config") + 1], '{"mcpServers":{}}');
+  // Reads are scoped to the workspace and added roots, never a blanket Read/Grep/Glob grant.
+  const allowed = args[args.indexOf("--allowedTools") + 1].split(",");
+  for (const rule of ["Read(//state/run/content/**)", "Read(//repo/.agents/skills/**)", "Read(//state/run/**)"]) assert.ok(allowed.includes(rule), rule);
+  for (const blanket of ["Read", "Grep", "Glob"]) assert.ok(!allowed.includes(blanket), blanket);
+  const deny = JSON.parse(args[args.indexOf("--settings") + 1]).permissions.deny;
+  for (const rule of ["Read(//**/.ssh/**)", "Read(//**/.config/gh/**)", "Read(//proc/**)"]) assert.ok(deny.includes(rule), rule);
 });
 
 test("Claude writing grants Write/Edit only under the workspace and disables hooks", () => {

@@ -63,6 +63,8 @@ export async function downloadWikiImages(folder: string, signal?: AbortSignal): 
   if (!plan || typeof plan !== "object" || Array.isArray(plan) || (plan.downloads !== undefined && !Array.isArray(plan.downloads))) return ["Image download plan must be an object with an optional downloads array."];
   const data = await json(path.join(folder, "dataset.json"));
   const media = await realpath(path.join(folder, "media"));
+  // One file per item: two items sharing a filename would overwrite each other's image.
+  const claimed = new Map<string, string>();
   for (const entry of plan.downloads ?? []) {
     signal?.throwIfAborted();
     try {
@@ -73,6 +75,10 @@ export async function downloadWikiImages(folder: string, signal?: AbortSignal): 
       if (typeof entry.sourcePage !== "string" || !/^https?:\/\//.test(entry.sourcePage)) throw new Error("Image source page is missing.");
       if (typeof entry.relativePath !== "string" || path.basename(entry.relativePath) !== entry.relativePath || !/^[a-zA-Z0-9_-]+\.(webp|png|jpe?g)$/i.test(entry.relativePath)) throw new Error("Image download must use a PNG, JPEG or WebP filename under media/; GIF is omitted.");
       const filename = entry.relativePath.replace(/\.[^.]+$/, (extension: string) => extension.toLowerCase());
+      const key = filename.toLowerCase();
+      const owner = claimed.get(key) ?? datasetRows(data).find(r => r.system.slug !== entry.itemSlug && typeof r.system.image === "string" && r.system.image.toLowerCase() === `/${key}`)?.system.slug;
+      if (owner && owner !== entry.itemSlug) throw new Error(`Image filename ${filename} is already used by item ${owner}.`);
+      claimed.set(key, entry.itemSlug);
       const target = path.join(media, filename);
       // Artifact traversal rejects symlinks before this function runs.
       if (row.system.image === `/${filename}`) {

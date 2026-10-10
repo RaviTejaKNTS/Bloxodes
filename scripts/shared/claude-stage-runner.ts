@@ -15,19 +15,24 @@ export function buildClaudeStageArgs(options: {
   model: string; effort: ClaudeEffort; schema: unknown; prompt: string;
 }): string[] {
   const readTools = ["Read", "Grep", "Glob", "WebFetch", "WebSearch"];
+  const rule = (directory: string) => `//${path.resolve(directory).replace(/^\//, "")}/**`;
+  // --restricted already confines file tools to the workspace and --add-dir roots.
+  // Scoped Read rules (which also govern Grep and Glob) repeat that boundary.
+  const readable = [options.workspace, ...options.readDirectories].map(directory => `Read(${rule(directory)})`);
   // Claude checks both Write and Edit paths against Edit rules, not Write(path).
-  const writable = [`Edit(//${path.resolve(options.workspace).replace(/^\//, "")}/**)`];
+  const writable = [`Edit(${rule(options.workspace)})`];
   return ["-p", options.prompt, "--model", options.model, "--effort", options.effort,
     "--output-format", "json", "--json-schema", JSON.stringify(options.schema),
     "--no-session-persistence", "--strict-mcp-config", "--mcp-config", '{"mcpServers":{}}',
     "--restricted", "--safe-mode", "--no-chrome", "--disable-slash-commands", "--permission-mode", "dontAsk",
     "--permission-prompts", "none", "--tools", [...readTools, ...(!options.review ? ["Write", "Edit"] : [])].join(","),
-    "--allowedTools", [...readTools, ...(!options.review ? writable : [])].join(","),
+    "--allowedTools", [...readable, "WebFetch", "WebSearch", ...(!options.review ? writable : [])].join(","),
     "--disallowedTools", ["Task", "Agent", "Bash", "PowerShell", "REPL", "mcp__*", ...(options.review ? ["Write", "Edit"] : [])].join(","),
     ...options.readDirectories.flatMap(directory => ["--add-dir", path.resolve(directory)]),
     "--settings", JSON.stringify({ disableAllHooks: true, permissions: { deny: [
       "Read(//**/.env*)", "Read(//**/.envs/**)", "Read(//**/.claude/**)", "Read(//**/.codex/**)", "Read(//**/.aws/**)",
-      "Read(//etc/bloxodes/**)"
+      "Read(//**/.ssh/**)", "Read(//**/.config/gh/**)", "Read(//**/.grok/**)", "Read(//**/.netrc)", "Read(//**/.git-credentials)",
+      "Read(//etc/bloxodes/**)", "Read(//proc/**)"
     ] } })];
 }
 
