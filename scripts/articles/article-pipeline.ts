@@ -24,6 +24,12 @@ export type ArticleJob = {
   sources: unknown;
   refresh?: boolean;
 };
+type ControllerFile = "game-identity.json" | "content/media.json" | "content/final.json";
+export type ControllerWrites = {
+  stage: Stage;
+  briefHash: string;
+  files: Partial<Record<ControllerFile, { bytes: string; hash: string }>>;
+};
 export type PipelineState = {
   version: 1;
   job: ArticleJob;
@@ -43,6 +49,7 @@ export type PipelineState = {
   afterImageUpload?: Stage;
   inFlight?: Stage;
   ownershipInput?: { hashes: Record<string, string>; media: string | null; identity: string | null };
+  controllerWrites?: ControllerWrites;
   identityInput?: string | null;
   artifacts: Record<string, string>;
   history: { stage: Stage; attempt: number; at: string; decision: Decision }[];
@@ -86,29 +93,55 @@ export async function ownershipSnapshot(runDir: string) {
     identity: await optionalText(path.join(runDir, "game-identity.json")),
   };
 }
-export async function assertStageOwnership(runDir: string, stage: Stage, before: Awaited<ReturnType<typeof ownershipSnapshot>>, controllerOutput?: unknown) {
+const controllerFileForStage: Partial<Record<Stage, ControllerFile>> = {
+  research_review: "game-identity.json", image_review: "content/media.json", editorial_review: "content/final.json",
+};
+export async function saveArticleControllerJson(runDir: string, state: PipelineState, stage: Stage, before: Awaited<ReturnType<typeof ownershipSnapshot>>, file: ControllerFile, value: unknown) {
+  const briefHash = before.hashes["brief.md"];
+  if (!briefHash || controllerFileForStage[stage] !== file || (state.inFlight && state.inFlight !== stage)) throw new ArtifactOwnershipFailure("Invalid controller write intent.");
+  if (file === "game-identity.json" && (value as any)?.approved_brief_hash !== briefHash) throw new ArtifactOwnershipFailure("Controller identity is not bound to the approved brief.");
+  const bytes = `${JSON.stringify(value, null, 2)}\n`;
+  state.controllerWrites = { stage, briefHash, files: { [file]: { bytes, hash: createHash("sha256").update(bytes).digest("hex") } } };
+  await saveJson(path.join(runDir, "state.json"), state);
+  // Persist the exact intent before replacing an input protected by the stage snapshot.
+  const target = path.join(runDir, file);
+  const temporary = `${target}.${process.pid}.tmp`;
+  await writeFile(temporary, bytes, { mode: 0o600 });
+  await rename(temporary, target);
+}
+export async function assertStageOwnership(runDir: string, stage: Stage, before: Awaited<ReturnType<typeof ownershipSnapshot>>, controllerWrites?: ControllerWrites) {
   const after = await ownershipSnapshot(runDir);
-  const output = controllerOutput as Decision | undefined;
   const allowed = stage === "research" ? ["brief.md"] : ["images", "image_upload"].includes(stage) ? ["media.json"] : ["writing", "import_verify"].includes(stage) ? ["final.json", "media.json"] : [];
-  // Successful adapters can apply reviewed omissions or a bounded local correction.
-  // Failed/malformed adapter exits below always use the strict worker ownership rules.
-  if (output?.status === "completed" && stage === "image_review") allowed.push("media.json");
-  if (output?.localizedCorrectionApplied && stage === "editorial_review") allowed.push("final.json");
+  if (controllerWrites?.stage === stage && controllerWrites.briefHash === before.hashes["brief.md"] && after.hashes["brief.md"] === controllerWrites.briefHash) {
+    const file = controllerFileForStage[stage];
+    const intent = file && controllerWrites.files[file];
+    if (intent && createHash("sha256").update(intent.bytes).digest("hex") === intent.hash) {
+      if (file === "game-identity.json") {
+        try {
+          if (after.identity === intent.bytes && JSON.parse(intent.bytes).approved_brief_hash === controllerWrites.briefHash) after.identity = before.identity;
+        } catch { /* Reject malformed identity. */ }
+      } else if (file && after.hashes[path.basename(file)] === intent.hash) {
+        const name = path.basename(file);
+        if (before.hashes[name] === undefined) delete after.hashes[name];
+        else after.hashes[name] = before.hashes[name];
+      }
+    }
+  }
   if (ARTIFACTS.some(name => before.hashes[name] !== after.hashes[name] && !allowed.includes(name))) {
     throw new ArtifactOwnershipFailure(`${stage} modified an artifact outside its ownership; approval rejected.`);
   }
   if (before.identity !== after.identity) {
-    let reviewedIdentity = false;
-    if (output?.status === "completed" && stage === "research_review" && after.identity) {
-      try { reviewedIdentity = Boolean(before.hashes["brief.md"]) && JSON.parse(after.identity).approved_brief_hash === before.hashes["brief.md"]; } catch { /* Reject malformed identity. */ }
-    }
-    if (!reviewedIdentity) throw new ArtifactOwnershipFailure(`${stage} changed the immutable code-owned game identity input; approval rejected.`);
+    throw new ArtifactOwnershipFailure(`${stage} changed the immutable code-owned game identity input; approval rejected.`);
   }
   if (stage === "writing" && before.media !== after.media) {
     try { if (imageEvidence(before.media) === imageEvidence(after.media)) return; }
     catch { /* Invalid image evidence cannot inherit approval. */ }
     throw new ArtifactOwnershipFailure("Writer changed approved image evidence or URLs; approval rejected.");
   }
+}
+function retainControllerCorrection(state: PipelineState, hashes: Record<string, string>) {
+  const intent = state.controllerWrites?.stage === "editorial_review" && state.controllerWrites.files["content/final.json"];
+  if (intent && hashes["final.json"] === intent.hash) state.editorialCorrections = (state.editorialCorrections ?? 0) + 1;
 }
 export function parseDecision(value: unknown): Decision {
   const d = value as Decision;
@@ -243,7 +276,7 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
     if (interrupted) {
       const stage = state.inFlight!;
       const savedInput = state.ownershipInput;
-      if (savedInput) await assertStageOwnership(runDir, stage, savedInput);
+      if (savedInput) await assertStageOwnership(runDir, stage, savedInput, state.controllerWrites);
       else {
         // Older interrupted runs have no image/identity snapshot. Do not inherit approval.
         if (JSON.stringify(hashes) !== JSON.stringify(state.artifacts)) throw new Error("Interrupted legacy stage changed inputs; start a new reviewed run.");
@@ -251,9 +284,11 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
       state.failures[stage] = (state.failures[stage] ?? 0) + 1;
       if (state.failures[stage]! >= (options.maxStageFailures ?? 2)) { state.status = "blocked"; state.feedback = `Repeated interrupted ${stage} executions; retained artifacts require attention.`; await saveJson(stateFile, state); return state; }
       state.artifacts = hashes;
+      retainControllerCorrection(state, hashes);
       state.identityInput = await optionalText(path.join(runDir, "game-identity.json"));
       state.feedback = `Resume the interrupted ${stage} from its saved artifacts.\n${state.feedback}`;
       delete state.inFlight;
+      delete state.controllerWrites;
     }
     while (state.stage !== "done") {
       if (Date.now() >= options.deadline) { state.status = "blocked"; state.feedback = "Outer article deadline reached; saved work retained."; state.blockerKind = "technical"; if ((state.operationalResumes?.[state.stage as Stage] ?? 0) < 2) state.retryAfter = new Date(Date.now() + 180 * 60_000).toISOString(); break; }
@@ -262,6 +297,7 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
       state.attempts[stage] = attempt;
       state.inFlight = stage;
       state.ownershipInput = await ownershipSnapshot(runDir);
+      delete state.controllerWrites;
       state.identityInput ??= state.ownershipInput.identity;
       const attemptDir = path.join(runDir, "attempts", `${stage}-${attempt}`);
       await mkdir(attemptDir, { recursive: true });
@@ -272,12 +308,12 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
       let ownershipRejected = false;
       try {
         const output = await options.execute(stage, state, attemptDir);
-        await assertStageOwnership(runDir, stage, state.ownershipInput, output);
+        await assertStageOwnership(runDir, stage, state.ownershipInput, state.controllerWrites);
         decision = parseDecision(output);
       }
       catch (error) {
         // Execution adapters may fail before parsing, including provider fallback and shutdown.
-        try { await assertStageOwnership(runDir, stage, state.ownershipInput); }
+        try { await assertStageOwnership(runDir, stage, state.ownershipInput, state.controllerWrites); }
         catch (ownershipError) { error = ownershipError; }
         ownershipRejected = error instanceof ArtifactOwnershipFailure;
         if (error instanceof StageInterrupted) {
@@ -290,8 +326,10 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
         delete state.inFlight;
         if (!ownershipRejected) {
           state.artifacts = await artifactHashes(workspace);
+          retainControllerCorrection(state, state.artifacts);
           state.identityInput = await optionalText(path.join(runDir, "game-identity.json"));
         }
+        delete state.controllerWrites;
         if (failure.retryable && state.failures[stage]! < (options.maxStageFailures ?? 2)) {
           state.feedback = failure.message;
           await saveJson(path.join(attemptDir, "failure.json"), { message: failure.message, retryable: true });
@@ -312,6 +350,7 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
         state.identityInput = await optionalText(path.join(runDir, "game-identity.json"));
       }
       delete state.ownershipInput;
+      delete state.controllerWrites;
       try { applyDecision(state, decision, options.maxRevisions ?? 1); }
       catch (error) { state.status = "blocked"; state.feedback = error instanceof Error ? error.message : String(error); }
       await saveJson(stateFile, state);

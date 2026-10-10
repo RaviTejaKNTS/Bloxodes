@@ -343,6 +343,56 @@ test("saved image decisions recover exact code-owned omissions and review notes"
   assert.equal(JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8")).items[0].system.image, null);
 });
 
+test("saved editorial decisions recover exact draft promotion and reject different bytes", async t => {
+  for (const tampered of [false, true]) {
+    const f = await fixture(t);
+    await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => {
+      if (task.stage === "collection_editorial_review") throw new StageInterrupted("Stopped before decision commit.");
+      return f.execute(task);
+    } }), /Stopped before decision commit/);
+    const state = await f.state();
+    const task = state.collections[0].state.inFlight!;
+    task.decision = done();
+    const bytes = await readFile(path.join(task.folder, "draft-final.json"), "utf8");
+    const file = path.join(task.folder, "final.json");
+    task.codeWrites = { [path.relative(f.root, file)]: [createHash("sha256").update(bytes).digest("hex")] };
+    await save(path.join(f.root, ".stages/state.json"), state);
+    await writeFile(file, tampered ? `${bytes} ` : bytes);
+    let editorialCalls = 0;
+    const resume = () => runWikiStagePipeline({ ...f.options, execute: async task => {
+      if (task.stage === "collection_editorial_review") editorialCalls++;
+      return f.execute(task);
+    } });
+    if (tampered) {
+      await assert.rejects(resume(), WikiOwnershipError);
+      assert.ok((await f.state()).integrityError);
+    } else assert.equal((await resume()).outcome, "ready");
+    assert.equal(editorialCalls, 0, "only the persisted decision may authorize promotion");
+  }
+});
+
+test("saved image write hashes do not authorize different omission or review-note bytes", async t => {
+  for (const name of ["dataset.json", "image-review.md"]) {
+    const f = await fixture(t);
+    await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => {
+      if (task.stage === "collection_image_review") throw new StageInterrupted("Stopped before decision commit.");
+      return f.execute(task);
+    } }), /Stopped before decision commit/);
+    const state = await f.state();
+    const task = state.collections[0].state.inFlight!;
+    task.decision = done({ accepted_missing: ["cat"] });
+    const bytes = name === "dataset.json" ? `${JSON.stringify(JSON.parse(await readFile(path.join(task.folder, name), "utf8")), null, 2)}\n` : `${JSON.stringify(task.decision, null, 2)}\n`;
+    const file = path.join(task.folder, name);
+    task.codeWrites = { [path.relative(f.root, file)]: [createHash("sha256").update(bytes).digest("hex")] };
+    await save(path.join(f.root, ".stages/state.json"), state);
+    await writeFile(file, `${bytes} `);
+    let calls = 0;
+    await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => { calls++; return f.execute(task); } }), WikiOwnershipError);
+    assert.equal(calls, 0);
+    assert.ok((await f.state()).integrityError);
+  }
+});
+
 test("readable GIF and uppercase worker files are omitted instead of leaving dangling bundle references", async t => {
   for (const filename of ["cat.gif", "cat.PNG"]) {
     const f = await fixture(t);

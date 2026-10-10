@@ -6,7 +6,7 @@ import { createWriteStream } from "node:fs";
 import { mkdir, readFile, realpath, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { buildCodexExecArgs, classifyCodexFallbackReason, type CodexReasoningEffort } from "./article-writer-provider";
-import { assertStageOwnership, ownershipSnapshot, isModelStage, isReviewStage, parseDecision, saveJson, StageFailure, StageInterrupted, type Decision, type PipelineState, type Stage } from "./article-pipeline";
+import { assertStageOwnership, ownershipSnapshot, isModelStage, isReviewStage, parseDecision, saveJson, saveArticleControllerJson, StageFailure, StageInterrupted, type Decision, type PipelineState, type Stage } from "./article-pipeline";
 import { assertNonProductionArticleTarget } from "./article-queue-env";
 import { EDITORIAL_EVIDENCE_SCHEMA, validateEditorialEvidence } from "./article-editorial-review";
 import { articleClaudeBin, articleStageConfig, articleStageTimeoutMs, type ArticleStageConfig } from "./article-stage-config";
@@ -272,7 +272,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
       if (stage === "research_review") {
         const identity = await ensureArticleGameIdentity(briefUniverseId(await readFile(file("brief.md"), "utf8")), options.env);
         await assertOwnership();
-        await saveJson(path.join(options.runDir, "game-identity.json"), { ...identity, approved_brief_hash: before["brief.md"] });
+        await saveArticleControllerJson(options.runDir, state, stage, ownership, "game-identity.json", { ...identity, approved_brief_hash: before["brief.md"] });
       }
       if (stage === "research" && !/^Research status:\s*ready_for_review\s*$/mi.test(await readFile(file("brief.md"), "utf8"))) throw new StageFailure("Research did not save a ready_for_review brief.", false, "research");
       if (stage === "images" || stage === "image_review") {
@@ -289,7 +289,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
               acceptArticleImageOmission(entry, decision.summary);
             } else if (entry.status !== "verified") throw new StageFailure(`Image target is unresolved: ${entry.id}`, false, "images");
           }
-          await saveJson(file("media.json"), media);
+          await saveArticleControllerJson(options.runDir, state, stage, ownership, "content/media.json", media);
         }
       }
       if (stage === "writing" || stage === "editorial_review") {
@@ -311,7 +311,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
       const corrected = applyLocalCorrections(final.content_md, (response as any).localized_corrections);
       if (corrected !== null) {
         await saveJson(path.join(attemptDir, "localized-correction.json"), { before_hash: before["final.json"], edits: (response as any).localized_corrections });
-        await saveJson(file("final.json"), { ...final, content_md: corrected });
+        await saveArticleControllerJson(options.runDir, state, stage, ownership, "content/final.json", { ...final, content_md: corrected });
         decision.localizedCorrectionApplied = true;
       }
     }
