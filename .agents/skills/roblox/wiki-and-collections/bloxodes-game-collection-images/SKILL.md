@@ -1,6 +1,6 @@
 ---
 name: bloxodes-game-collection-images
-description: Gather, save, wire, and verify images for one approved Bloxodes game collection after data approval. Use for item image source checks, image manifests, local public image paths, dataset image fields, image coverage, and image readiness before collection writing. Do not write final.json.
+description: Gather, save, wire, and verify images for one approved Bloxodes game collection after data approval. Use for item image source checks, image manifests, workspace media paths, dataset image fields, image coverage, and image readiness before collection writing. Do not write final.json.
 ---
 
 # Bloxodes Game Collection Images
@@ -27,14 +27,7 @@ A source saying 97 items while listing 98, an incomplete roster, no official con
 4. Save images under `<workspace>/media/` for the game and collection.
 5. Update the dataset image field for each matched item.
 6. If an image is missing, record the exact item and why.
-7. If you have an image manifest, collect images with a dry run first:
-
-   ```bash
-   npm run collect:collection-images -- --manifest <images.json> --dataset <workspace>/dataset.json --game-name "<Game>" --collection-name "<Collection>" --out-dir <workspace>/media --dry-run
-   ```
-
-   Always pass `--out-dir <workspace>/media`. Without it, the script writes to `apps/web/public/<Game>/<Collection>`, which this skill forbids. If the dry run looks right, run it again without `--dry-run`.
-
+7. Don't use `npm run collect:collection-images` for workspace collections. It's a legacy tool that only writes into `apps/web/public` and emits public-root paths, which this skill forbids. Save each image into `<workspace>/media/` yourself and set the dataset image field to its path relative to the runtime manifest's `mediaRoot` (like `/first-rebirth.webp`). Updating the collector for workspaces is a separate code task.
 8. When this collection should have images, run the readiness check with images required:
 
    ```bash

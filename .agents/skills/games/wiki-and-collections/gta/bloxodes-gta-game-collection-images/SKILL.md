@@ -14,7 +14,7 @@ This is the GTA entry point for collection images. Read and follow `.agents/skil
 - **Media prefix:** `gta/<game-slug>/<collection-slug>/`
 - **Preferred sources:** official Rockstar media, manuals, guides, stable GTA Wiki or database images, and exact traceable in-game captures
 - **Route scope:** keep Story Mode, GTA Online, edition, platform, model and location images separate
-- **Image helper:** `npm run collect:collection-images`
+- **Image helper:** none for workspaces. Save images straight into `<workspace>/media/`. `collect:collection-images` only writes into `apps/web/public`, so don't use it here
 - **Image checker:** `npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json --require-images`
 
 ## GTA rules

@@ -244,4 +244,4 @@ Only keep a question if the body doesn't already answer it. Answers lead with th
 | --- | --- |
 | Learn everything about Tower Brawl Update 7 in this complete guide. | Tower Brawl Update 7 adds three Frost units and the Glacier Pass map. Here's what each new unit does and which balance changes hit your current team hardest. |
 | Find all pets in Garden Rush with stats and info. | Every Garden Rush pet sorted by boost, rarity and egg. See which pets pay off early, which ones are worth saving Seeds for, and where each one hatches. |
-| Garden Rush codes for free rewards. Updated daily! | Free Seeds and eggs from every working Garden Rush code. Here's how to redeem them, what each one gives and what to try when a code won't work for you. |
+| Garden Rush codes for free rewards. Updated daily! | Garden Rush codes hand out free Seeds and eggs. Here's how to redeem them, the kinds of rewards they give and what to try when a code won't work for you. |
