@@ -2,13 +2,14 @@ import { fetchImageBytes } from "../shared/fetch-image-bytes";
 import "../shared/load-env";
 
 import { createHash } from "node:crypto";
+import { createClient } from "@supabase/supabase-js";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import sharp from "sharp";
 
 import { classifyArticleImageSrc } from "@/lib/article-media";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { markArticleImageUnavailable, uploadArticleImageWithRetries } from "./article-image-transfer";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
 import {
   type ArticleImageEntry,
@@ -172,7 +173,6 @@ async function main() {
   const collectable = manifest.entries.filter(
     (entry) => entry.status === "verified" && !isCanonicalLocalAsset(entry),
   );
-  for (const entry of collectable) assertCollectionReady(entry);
 
   console.log(
     `Article image plan: type=${manifest.visual_type} expected=${manifest.expected_count} verified=${manifest.entries.filter((entry) => entry.status === "verified").length} promotable=${collectable.length}`
@@ -192,54 +192,70 @@ async function main() {
     console.log("Dry run only. Add --apply to upload verified entries and update media.json.");
     return;
   }
+  if (!collectable.length) {
+    console.log(`Article image collection complete: uploaded=0 manifest=${manifestPath}`);
+    return;
+  }
 
   assertTargetAllowed(options);
   const bucket = process.env.SUPABASE_MEDIA_BUCKET!;
-  const storage = supabaseAdmin().storage.from(bucket);
+  const storage = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE!, {
+    auth: { autoRefreshToken: false, persistSession: false },
+    global: { fetch: (input, init) => fetch(input, { ...init, signal: init?.signal ?? AbortSignal.timeout(30_000) }) },
+  }).storage.from(bucket);
   let uploaded = 0;
 
   for (const entry of collectable) {
-    const objectPath = entry.uploaded_path ||
-      `articles/${manifest.article_slug}/sources/${entry.id}-${sourceHash(entry)}.webp`;
-    const targetPublicUrl = toMediaPublicUrl(storage.getPublicUrl(objectPath).data.publicUrl);
-    if (!targetPublicUrl) throw new Error(`${entry.label}: Storage returned no target public URL`);
+    try {
+      assertCollectionReady(entry);
+      const objectPath = entry.uploaded_path ||
+        `articles/${manifest.article_slug}/sources/${entry.id}-${sourceHash(entry)}.webp`;
+      const targetPublicUrl = toMediaPublicUrl(storage.getPublicUrl(objectPath).data.publicUrl);
+      if (!targetPublicUrl) throw new Error(`${entry.label}: Storage returned no target public URL`);
 
-    if (entry.public_url === targetPublicUrl && entry.uploaded_path === objectPath) {
-      await verifyPublicReadback(entry.public_url);
-      continue;
-    }
-    if (entry.public_url && entry.public_url !== targetPublicUrl && !finalJson) {
-      throw new Error(
-        `${entry.label}: target environment changes the hosted URL; pass --file <final.json> so content_md is rewritten`
-      );
-    }
-
-    const previousPublicUrl = entry.public_url ?? null;
-    if (finalJson && previousPublicUrl && previousPublicUrl !== targetPublicUrl) {
-      if (!finalJson.content_md.includes(previousPublicUrl)) {
-        throw new Error(`${entry.label}: final.json does not contain the managed-dev public URL`);
+      if (entry.public_url === targetPublicUrl && entry.uploaded_path === objectPath) {
+        await verifyPublicReadback(entry.public_url);
+        continue;
       }
-    }
-    const converted = await prepareImage(entry, Boolean(previousPublicUrl));
-    const result = await storage.upload(objectPath, converted.bytes, {
-      contentType: "image/webp",
-      upsert: true,
-    });
-    if (result.error) throw new Error(`${entry.label}: upload failed: ${result.error.message}`);
+      if (entry.public_url && entry.public_url !== targetPublicUrl && !finalJson && process.env.ARTICLE_PIPELINE_STAGE !== "image_upload") {
+        throw new Error(
+          `${entry.label}: target environment changes the hosted URL; pass --file <final.json> so content_md is rewritten`
+        );
+      }
 
-    await verifyPublicReadback(targetPublicUrl);
+      const previousPublicUrl = entry.public_url ?? null;
+      if (finalJson && previousPublicUrl && previousPublicUrl !== targetPublicUrl) {
+        if (!finalJson.content_md.includes(previousPublicUrl)) {
+          throw new Error(`${entry.label}: final.json does not contain the managed-dev public URL`);
+        }
+      }
+      const converted = await prepareImage(entry, Boolean(previousPublicUrl));
+      await uploadArticleImageWithRetries(() => storage.upload(objectPath, converted.bytes, {
+        contentType: "image/webp",
+        upsert: true,
+      }));
 
-    entry.uploaded_path = objectPath;
-    entry.public_url = targetPublicUrl;
-    entry.width = converted.width;
-    entry.height = converted.height;
-    await saveManifest(manifestPath, manifest);
-    if (finalJson && previousPublicUrl && previousPublicUrl !== targetPublicUrl) {
-      finalJson.content_md = finalJson.content_md.split(previousPublicUrl).join(targetPublicUrl);
-      await saveFinal(finalPath, finalJson);
+      await verifyPublicReadback(targetPublicUrl);
+
+      entry.uploaded_path = objectPath;
+      entry.public_url = targetPublicUrl;
+      entry.width = converted.width;
+      entry.height = converted.height;
+      await saveManifest(manifestPath, manifest);
+      if (finalJson && previousPublicUrl && previousPublicUrl !== targetPublicUrl) {
+        finalJson.content_md = finalJson.content_md.split(previousPublicUrl).join(targetPublicUrl);
+        await saveFinal(finalPath, finalJson);
+      }
+      uploaded += 1;
+      console.log(`Uploaded ${entry.label}: ${targetPublicUrl}`);
+    } catch (error) {
+      // A frozen final must retain its reviewed bytes during production promotion.
+      // Before writing, optional image failure is recorded and the other targets continue.
+      if (finalJson || process.env.NODE_ENV === "production") throw error;
+      markArticleImageUnavailable(entry, "transfer", error);
+      await saveManifest(manifestPath, manifest);
+      console.warn(`${entry.label}: ${entry.missing_reason}`);
     }
-    uploaded += 1;
-    console.log(`Uploaded ${entry.label}: ${targetPublicUrl}`);
   }
 
   console.log(`Article image collection complete: uploaded=${uploaded} manifest=${manifestPath}`);

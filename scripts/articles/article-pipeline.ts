@@ -69,11 +69,14 @@ export async function artifactHashes(workspace: string) {
 }
 export function parseDecision(value: unknown): Decision {
   const d = value as Decision;
-  if (!d || !["completed", "needs_revision", "blocked", "skipped"].includes(d.status) || typeof d.summary !== "string" || !d.summary.trim() ||
-      !Array.isArray(d.findings) || d.findings.some(x => typeof x !== "string") ||
-      ![null, "research", "images", "writing"].includes(d.repair_stage) || !Array.isArray(d.accepted_missing) || d.accepted_missing.some(x => typeof x !== "string")) {
-    throw new StageFailure("Invalid stage decision; no downstream approval was inferred.");
-  }
+  const errors: string[] = [];
+  if (!d || typeof d !== "object" || Array.isArray(d)) throw new StageFailure("Invalid stage decision: expected a JSON object, not prose or an array.", true);
+  if (!["completed", "needs_revision", "blocked", "skipped"].includes(d.status)) errors.push("status must be completed, needs_revision, blocked, or skipped");
+  if (typeof d.summary !== "string" || !d.summary.trim()) errors.push("summary must be a nonempty string");
+  if (!Array.isArray(d.findings) || d.findings.some(x => typeof x !== "string")) errors.push("findings must be an array of strings");
+  if (![null, "research", "images", "writing"].includes(d.repair_stage)) errors.push("repair_stage must be research, images, writing, or null");
+  if (!Array.isArray(d.accepted_missing) || d.accepted_missing.some(x => typeof x !== "string")) errors.push("accepted_missing must be an array of exact media.json id strings");
+  if (errors.length) throw new StageFailure(`Invalid stage decision: ${errors.join("; ")}. Return the complete schema object.`, true);
   if (d.status === "needs_revision" && (!d.repair_stage || !d.findings.length)) throw new StageFailure("Revision requires a target stage and concrete findings.");
   if (d.status === "completed" && (d.repair_stage !== null || d.findings.length)) throw new StageFailure("A completed stage cannot retain unresolved findings or request repair.");
   return d;

@@ -85,9 +85,14 @@ export async function runConfiguredArticle(job: ArticleJob, runtime: StageRuntim
       reviseFrom: runtime.reviseFrom, reviewFirst: runtime.reviewFirst, revisionFeedback: runtime.revisionFeedback,
       execute: async (stage, state, attemptDir) => {
         const started = Date.now();
+        runtime.modelAttempts = [];
         let outcome = "failed";
         try { const decision = await executeArticleStage(runtime, stage, state, attemptDir); outcome = decision.status; return decision; }
-        finally { await saveJson(path.join(attemptDir, "timing.json"), { stage, started_at: new Date(started).toISOString(), finished_at: new Date().toISOString(), elapsed_ms: Date.now() - started, outcome }); }
+        finally {
+          const actual = runtime.modelAttempts.at(-1);
+          await saveJson(path.join(attemptDir, "timing.json"), { stage, started_at: new Date(started).toISOString(), finished_at: new Date().toISOString(), elapsed_ms: Date.now() - started, outcome,
+            provider: actual?.provider ?? "code", model: actual?.model ?? null, effort: actual?.effort ?? null, model_attempts: runtime.modelAttempts });
+        }
       } });
   } finally {
     // Reporting must not replace the original execution outcome or release a queue lease early.

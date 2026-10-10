@@ -164,9 +164,12 @@ describe("article content blocks", () => {
       "| ![Boxing fighting style icon](/Gakuran/Fighting%20Styles/boxing.png) | Boxing | Reliable |",
     ].join("\n");
     expect(validateTierListArticleDetails(details)).toEqual([]);
-    expect(validateTierListArticleDetails(tierListMarkdown)).toContain("## S Tier must begin with a Markdown detail table");
+    expect(validateTierListArticleDetails(tierListMarkdown)).toContain("## S Tier needs a Markdown detail table");
 
     const lateTable = details.replace("## A Tier\n\n| Image", "## A Tier\n\nBoxing remains useful.\n\n| Image");
-    expect(validateTierListArticleDetails(lateTable)).toContain("## A Tier must begin with a Markdown detail table");
+    expect(validateTierListArticleDetails(lateTable)).toEqual([]);
+    const contextual = lateTable.replace("## S Tier", "## S-tier fighting styles in Gakuran").replace("## A Tier", "## A Tier fighting styles in Gakuran");
+    expect(validateTierListArticleDetails(contextual)).toEqual([]);
+    expect(validateTierListArticleDetails(contextual.replace("![Boxing fighting style icon]", "![Style icon]").replace("| Boxing |", "| Other |"))).toContain("## A Tier detail table is missing item name Boxing");
   });
 });

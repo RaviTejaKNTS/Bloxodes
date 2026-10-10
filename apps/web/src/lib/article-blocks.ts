@@ -414,7 +414,8 @@ function tierDetailSection(markdown: string, rank: string): string | null {
 
   for (let index = 0; index < lines.length; index += 1) {
     const match = lines[index]?.match(/^##[ \t]+(.+?)[ \t]*#*[ \t]*$/);
-    if (match && normalizeHeadingText(match[1]) === expected) {
+    const heading = match ? normalizeHeadingText(match[1]).replace(/[-\u2010-\u2015]/g, " ").replace(/\s+/g, " ") : "";
+    if (match && (heading === expected || heading.startsWith(`${expected} `) || heading.endsWith(` ${expected}`))) {
       start = index + 1;
       break;
     }
@@ -431,10 +432,10 @@ function tierDetailSection(markdown: string, rank: string): string | null {
   return lines.slice(start, end).join("\n");
 }
 
-function leadingMarkdownTable(markdown: string): string | null {
+function detailMarkdownTable(markdown: string): string | null {
   const lines = markdown.split(/\r?\n/);
-  let start = 0;
-  while (start < lines.length && !(lines[start] ?? "").trim()) start += 1;
+  const start = lines.findIndex((line, index) => line.includes("|") && /^\s*\|?\s*:?-{3,}/.test(lines[index + 1] ?? "") && (lines[index + 1] ?? "").includes("|"));
+  if (start < 0) return null;
 
   const header = lines[start] ?? "";
   const separator = lines[start + 1] ?? "";
@@ -447,7 +448,7 @@ function leadingMarkdownTable(markdown: string): string | null {
   return lines.slice(start, end).join("\n");
 }
 
-/** Enforce the overview → one detailed table per tier article contract. */
+/** Require complete detail tables while allowing contextual headings and introductions. */
 export function validateTierListArticleDetails(markdown: string): string[] {
   const tierLists = parseArticleContentBlocks(markdown).filter(
     (block): block is Extract<ArticleContentBlock, { kind: "tier-list" }> => block.kind === "tier-list"
@@ -462,9 +463,9 @@ export function validateTierListArticleDetails(markdown: string): string[] {
       errors.push(`Missing ## ${tier.rank} Tier detail section`);
       continue;
     }
-    const table = leadingMarkdownTable(section);
+    const table = detailMarkdownTable(section);
     if (table === null) {
-      errors.push(`## ${tier.rank} Tier must begin with a Markdown detail table`);
+      errors.push(`## ${tier.rank} Tier needs a Markdown detail table`);
       continue;
     }
     const tableLower = table.toLowerCase();

@@ -140,6 +140,7 @@ test("provider fallback accepts structured stdout without mixing diagnostic stde
   const result = await executeArticleStage(runtime, 'research', { job, feedback: '' } as PipelineState, attemptDir);
   assert.equal(result.status, 'completed');
   await writeFile(codex, `#!/usr/bin/env node\nconsole.log(JSON.stringify({type:'item.completed',item:{output:'source returned 429'}}));process.exitCode=1;\n`, { mode: 0o700 });
+  runtime.env.ARTICLE_STAGE_RESEARCH_REVIEW_PROVIDER = 'codex';
   await assert.rejects(executeArticleStage(runtime, 'research_review', { job, feedback: '' } as PipelineState, attemptDir), /Codex research_review exited/);
 });
 test("external process cancellation is distinguished from a deadline and launches no replacement", async () => {

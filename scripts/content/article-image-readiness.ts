@@ -30,6 +30,7 @@ export type ArticleImageEntry = {
   acceptance_note?: string | null;
   search_queries?: string[] | null;
   searched_source_urls?: string[] | null;
+  availability_failure?: "transfer" | "inspection";
 };
 
 export type ArticleImageManifest = {
@@ -208,10 +209,11 @@ export function checkArticleImageReadiness(params: {
       if (!hasText(entry.acceptance_note, 8)) {
         errors.push(`${label}: accepted_missing needs an explicit acceptance_note`);
       }
-      if (distinctTextCount(entry.search_queries) < 2) {
+      const unavailable = ["transfer", "inspection"].includes(entry.availability_failure ?? "");
+      if (!unavailable && distinctTextCount(entry.search_queries) < 2) {
         errors.push(`${label}: accepted_missing needs at least two distinct search_queries`);
       }
-      if (distinctHttpUrlCount(entry.searched_source_urls) < 2) {
+      if (!unavailable && distinctHttpUrlCount(entry.searched_source_urls) < 2) {
         errors.push(`${label}: accepted_missing needs at least two distinct searched_source_urls`);
       }
       continue;
@@ -220,7 +222,9 @@ export function checkArticleImageReadiness(params: {
     if (entry.status === "missing") {
       missing += 1;
       if (!hasText(entry.missing_reason, 8)) errors.push(`${label}: missing needs a specific missing_reason`);
-      errors.push(`${label}: required visual is still missing`);
+      if (!["transfer", "inspection"].includes(entry.availability_failure ?? "") || !hasText(entry.acceptance_note, 8)) {
+        errors.push(`${label}: required visual is still missing`);
+      }
       continue;
     }
 

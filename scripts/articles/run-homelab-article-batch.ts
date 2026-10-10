@@ -66,8 +66,8 @@ Options:
   --queue-id UUID            Select only this curated pending row
   --worktree PATH            Persistent Bloxodes worktree (default: current repo)
   --codex-bin PATH           Codex CLI path (default: ARTICLE_WRITER_CODEX_BIN or codex)
-  --codex-model MODEL        Codex model (default: ARTICLE_WRITER_CODEX_MODEL or gpt-5.6-luna)
-  --codex-reasoning EFFORT   Codex reasoning effort (default: ARTICLE_WRITER_CODEX_REASONING_EFFORT or max)
+  --codex-model MODEL        Legacy Codex default; requires ARTICLE_STAGE_USE_LEGACY_CODEX_DEFAULTS=true
+  --codex-reasoning EFFORT   Legacy Codex effort; per-stage settings take priority
   --no-grok-fallback         Disable the Grok provider fallback
   --grok-bin PATH            Grok CLI path (default: ARTICLE_WRITER_GROK_BIN or grok)
   --grok-model MODEL         Grok model (default: ARTICLE_WRITER_GROK_MODEL or grok-4.5)
@@ -407,7 +407,7 @@ async function main() {
     }
     if (!options.apply) {
       console.log(
-        `Dry run: would start Codex ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
+        `Dry run: would use per-stage provider/model/effort routing for up to ${targetCount} article(s).`
       );
       console.log(
         options.grokFallback
@@ -423,7 +423,7 @@ async function main() {
     }
 
     console.log(
-      `Starting code-controlled pipeline with ${options.codexModel} at ${options.codexReasoningEffort} reasoning for up to ${targetCount} article(s).`
+      `Starting code-controlled pipeline with per-stage provider/model/effort routing for up to ${targetCount} article(s).`
     );
     const batchStartedAt = new Date().toISOString();
     try {
