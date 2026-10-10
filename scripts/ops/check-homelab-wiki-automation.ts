@@ -6,6 +6,8 @@ import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
+import { checkWikiClaudeAvailability } from "../wiki/wiki-claude-readiness";
+import { WIKI_STAGES, wikiStageConfig } from "../wiki/wiki-stage-config";
 import { resolveWikiDevCredentials } from "../wiki/wiki-automation-env";
 
 function executable(candidates: string[]): string | null {
@@ -90,6 +92,11 @@ async function main() {
     if (probe.status !== 0) throw new Error(probe.stderr || probe.stdout || "Wiki model sandbox readiness failed.");
     process.stdout.write(probe.stdout);
   }
+  for (const stage of WIKI_STAGES) wikiStageConfig(stage, process.env);
+  const claude = await checkWikiClaudeAvailability({ ...codexEnv, HOME: modelHome });
+  if (claude.available) console.log(`Claude readiness: ${claude.message}`);
+  else console.warn(`Claude readiness warning: ${claude.message}`);
+  if (operatorCheck) console.warn("Operator checks do not prove the model user's directory permissions or systemd mount access. Repeat readiness inside the restricted service environment before activation.");
   const browser = executable(["/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "google-chrome", "chromium", "chromium-browser"]);
   if (!browser) throw new Error("Chrome or Chromium is required for rendered verification.");
 
@@ -111,7 +118,7 @@ async function main() {
     return responses;
   });
   if (!stats.ok || !inventory.ok) throw new Error(`Public readiness failed: stats=${stats.status}, inventory=${inventory.status}.`);
-  console.log(`Homelab wiki automation readiness passed: direct Luna model, restricted checkout, ${new URL(dev.url).hostname}, two queue slots, ${r2Config.bucket}, ${browser}.`);
+  console.log(`Homelab wiki automation readiness passed: per-stage Luna/Haiku routing, restricted checkout, ${new URL(dev.url).hostname}, two queue slots, ${r2Config.bucket}, ${browser}.`);
 }
 
 main().catch((error) => {

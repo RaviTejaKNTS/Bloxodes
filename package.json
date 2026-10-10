@@ -176,7 +176,7 @@
     "audit:gta-collection-quality": "python3 scripts/gta/audit-gta-collection-quality.py",
     "promote:wiki-collection-page-types": "node --import tsx scripts/collections/promote-wiki-collection-page-types.ts",
     "sync:production-collection-runtime:managed-dev": "node --import tsx scripts/collections/sync-production-collection-runtime-to-managed-dev.ts",
-    "test:wiki-runtime": "node --import tsx --test workers/wiki-media/__tests__/*.test.ts scripts/shared/__tests__/*.test.ts",
+    "test:wiki-runtime": "node --import tsx --test workers/wiki-media/__tests__/*.test.ts scripts/shared/__tests__/*.test.ts scripts/wiki/__tests__/*.test.ts",
     "wiki-media:check": "npx wrangler@4.127.0 deploy --dry-run --config workers/wiki-media/wrangler.jsonc --outdir tmp/wiki-media-worker-build",
     "wiki-media:dev": "npx wrangler@4.127.0 dev --local --config workers/wiki-media/wrangler.jsonc",
     "seed:game-wiki-pages": "tsx scripts/collections/seed-game-wiki-pages.ts",

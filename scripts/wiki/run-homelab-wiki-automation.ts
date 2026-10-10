@@ -3,7 +3,7 @@ import { dispatchWiki } from "../ci/dispatch-wiki";
 import { findWikiDispatchCandidate, wikiDispatchRecovery, matchingWikiRun, wikiRunRecoveryReceipt } from "../ci/wiki-publication-state.mjs";
 
 import { execFileSync, spawn, spawnSync, type ChildProcess } from "node:child_process";
-import { access, mkdir, readFile, realpath } from "node:fs/promises";
+import { access, readFile, realpath } from "node:fs/promises";
 import { constants as fsConstants, readFileSync, realpathSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -13,16 +13,14 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 import { articleGameSlugFromUniverse } from "@/lib/slug";
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
-import {
-  buildCodexExecArgs,
-  parseCodexReasoningEffort
-} from "../articles/article-writer-provider";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
-import { readSessionState, saveSessionState, recoverStep, resumedCodexArgs } from "./wiki-session-recovery";
+import { readSessionState, saveSessionState } from "./wiki-session-recovery";
+import { runWikiStagePipeline } from "./wiki-stage-pipeline";
+import { WIKI_STAGES, wikiStageConfig } from "./wiki-stage-config";
 import { MODEL_FORBIDDEN_ENV_KEYS, resolveWikiDevCredentials } from "./wiki-automation-env";
 import { resolveWikiAttemptRoot } from "./wiki-workspace-paths";
-import { wikiCodexArgs, isWikiTechnicalFailure, wikiFailureMessage, WIKI_RENDERED_PREVIEW_GUIDANCE } from "./wiki-execution";
+import { isWikiTechnicalFailure } from "./wiki-execution";
 import { reconcileExpiredWikiLeases, guardWikiHeartbeat, WikiLeaseLostError } from "./wiki-lease-health";
 
 type StatsGame = {
@@ -90,8 +88,6 @@ const maxGamesPerRun = Number(process.env.WIKI_AUTOMATION_MAX_GAMES_PER_RUN || "
 const leaseMinutes = 30;
 const modelHome = process.env.WIKI_AUTOMATION_MODEL_HOME?.trim() || "/var/lib/bloxodes/wiki-model";
 const codexBin = process.env.WIKI_AUTOMATION_CODEX_BIN?.trim() || "/home/teja/.local/bin/codex";
-const codexModel = process.env.WIKI_AUTOMATION_CODEX_MODEL?.trim() || "gpt-5.6-luna";
-const codexReasoning = parseCodexReasoningEffort(process.env.WIKI_AUTOMATION_CODEX_REASONING?.trim() || "max");
 const productionEnvFile = path.resolve(process.env.WIKI_RELEASE_PRODUCTION_ENV_FILE?.trim() || ".envs/targets/production.env");
 const apply = process.argv.includes("--apply");
 const skipProduction = process.argv.includes("--skip-production-release");
@@ -101,6 +97,7 @@ const queueId = process.env.WIKI_AUTOMATION_QUEUE_ID?.trim();
 const activeChildren = new Set<ChildProcess>();
 const environmentSignals = new WeakMap<NodeJS.ProcessEnv, AbortSignal>();
 let stopRequested = false;
+const runtimeStop = new AbortController();
 
 function terminateProcessGroup(child: ChildProcess, signal: NodeJS.Signals) {
   if (!child.pid) return;
@@ -116,6 +113,7 @@ for (const signal of ["SIGINT", "SIGTERM"] as const) {
   process.on(signal, () => {
     if (stopRequested) return;
     stopRequested = true;
+    runtimeStop.abort(new Error(`Runtime stop requested by ${signal}.`));
     console.log(`Received ${signal}; stopping active lanes and returning their leases to retry.`);
     for (const child of activeChildren) terminateProcessGroup(child, "SIGTERM");
   });
@@ -137,7 +135,7 @@ function assertOptions() {
   if (releaseOnly && (!apply || skipProduction)) {
     throw new Error("--release-only requires --apply and cannot be combined with --skip-production-release.");
   }
-  if (!codexModel) throw new Error("WIKI_AUTOMATION_CODEX_MODEL cannot be empty.");
+  for (const stage of WIKI_STAGES) wikiStageConfig(stage, process.env);
 }
 
 async function retryOperation<T>(label: string, operation: () => Promise<T>): Promise<T> {
@@ -323,7 +321,7 @@ async function claimOrEnqueue(dev: SupabaseClient, lane: number): Promise<QueueR
   }
 }
 
-function modelEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
+function trustedDevelopmentEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
   const env: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: "development" };
   for (const key of MODEL_FORBIDDEN_ENV_KEYS) delete env[key];
   for (const key of Object.keys(env)) {
@@ -339,50 +337,6 @@ function modelEnvironment(dev: { url: string; serviceRole: string }): NodeJS.Pro
   env.CODEX_HOME = path.join(modelHome, ".codex");
   env.WIKI_AUTOMATION_BATCH_CONTEXT = "1";
   return env;
-}
-
-const ciAuthoringGuidance = 'Prepare source-backed, parent-reviewed wiki and collection artifacts only. GitHub owns copy/data/media checks, development imports, builds, browser QA and production publication. Do not start a local preview or run validation/import/publication commands. This overrides older skill instructions requesting local verification. Ready means authoring is complete and waiting for CI, not that QA passed.';
-const previewGuidance = () => process.env.BLOXODES_CI_QA === '1' ? ciAuthoringGuidance : WIKI_RENDERED_PREVIEW_GUIDANCE;
-
-function promptFor(row: QueueRow, resultRoot: string): string {
-  return `Run one complete Bloxodes wiki + collection workflow for this exact game.
-
-Identity:
-- queue id: ${row.id}
-- game: ${row.game_name}
-- wiki slug: ${row.wiki_slug}
-- universe id: ${row.universe_id}
-- root place id: ${row.root_place_id}
-- Roblox URL: https://www.roblox.com/games/${row.root_place_id}
-- current top-100 rank snapshot: ${row.rank_at_claim}
-- artifact root: ${resultRoot}
-- reserved localhost preview port: ${3240 + (row.processing_slot || 1)}
-
-Workflow:
-1. Run .agents/skills/bloxodes-game-collection-suggestions/SKILL.md for ${row.game_name}. Save suggestions.md under the artifact root.
-2. Run .agents/skills/bloxodes-game-collection-workflow-runner/SKILL.md for ${row.game_name}, using that suggestions.md file to create all [create] collections.
-3. Run .agents/skills/bloxodes-wiki-workflow-runner/SKILL.md for ${row.game_name}.
-
-For collection subagent handoffs, send only the skill, game name, and collection name. Let the skills supply the instructions.
-
-Runtime context: use the artifact root above instead of the skills' default workspace. The model works in managed development; trusted code publishes to production after verification. Keep tracked source unchanged. Follow the verification instructions below.
-
-${previewGuidance()}
-
-Finish by writing ${path.join(resultRoot, "workflow-result.json")} with exactly:
-{
-  "queueId": "${row.id}",
-  "universeId": ${row.universe_id},
-  "wikiSlug": "${row.wiki_slug}",
-  "outcome": "ready" or "blocked",
-  "outcomeReason": "...",
-  "suggestionsPath": "absolute path",
-  "wikiFinalPath": "absolute path when ready",
-  "approvedCollections": ["slug"],
-  "blockedCollections": [{"slug":"...","reason":"..."}],
-  "collectionManifests": ["absolute runtime-manifest.json path"]
-}
-Record ready when the skill workflows finish successfully; otherwise record blocked with the unfinished work.`;
 }
 
 function sanitizeError(value: string, env: NodeJS.ProcessEnv): string {
@@ -444,17 +398,6 @@ async function runCommand(command: string, args: string[], env: NodeJS.ProcessEn
       }, 1_000);
     });
   });
-}
-
-async function runDirectCodex(args: string[], env: NodeJS.ProcessEnv, resultRoot: string, previewPort: number) {
-  const relativeAttempt = path.relative(await realpath(path.join(worktree, "tmp", "wiki-automation")), await realpath(resultRoot));
-  const directEnv = {
-    ...env,
-    PORT: String(previewPort),
-    NEXT_DIST_DIR: process.env.BLOXODES_AUTOMATION_RUNTIME === "1" ? ".next" : path.join(".next", "wiki-automation", relativeAttempt)
-  };
-  await mkdir(path.join(resultRoot, "tmp"), { recursive: true });
-  return await runCommand(codexBin, wikiCodexArgs(args, await realpath(resultRoot)), directEnv, timeoutMinutes * 60_000, path.join(resultRoot, "session.json"));
 }
 
 async function assertPreviewPortFree(port: number) {
@@ -680,28 +623,34 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     await transition(dev, row, { result_root: resultRoot });
     const sessionFile = path.join(resultRoot, "session.json");
     activeSessionFile = sessionFile;
-    const env = modelEnvironment(devCredentials);
+    const env = trustedDevelopmentEnvironment(devCredentials);
     env.WIKI_AUTOMATION_RESULT_ROOT = resultRoot;
     const port = 3240 + (row.processing_slot || lane);
     const heartbeatGuard = guardWikiHeartbeat(() => heartbeat(dev, row));
     environmentSignals.set(env, heartbeatGuard.signal);
     try {
     let result: WorkflowResult;
-    try {
-      result = await readWorkflowResult(row, resultRoot);
-      if (result.outcome === "blocked" && isWikiTechnicalFailure(result.outcomeReason || "")) {
-        throw new Error("Resume retained artifacts after a technical failure.");
-      }
+    let hasStageState = false;
+    try { await access(path.join(resultRoot, ".stages", "state.json")); hasStageState = true; }
+    catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error; }
+    const author = async () => {
+      await runWikiStagePipeline({
+        worktree, root: resultRoot,
+        identity: { id: row.id, game_name: row.game_name, wiki_slug: row.wiki_slug, universe_id: row.universe_id, root_place_id: row.root_place_id },
+        env, codexBin, deadline: Date.now() + timeoutMinutes * 60_000, signal: AbortSignal.any([heartbeatGuard.signal, runtimeStop.signal])
+      });
+      return readWorkflowResult(row, resultRoot);
+    };
+    if (hasStageState) result = await author();
+    else {
+      // Retain completed legacy results. Unfinished sessions enter focused stages;
+      // their session IDs and repair counters stay available for operator inspection.
+      try {
+        result = await readWorkflowResult(row, resultRoot);
+        if (result.outcome === "blocked" && isWikiTechnicalFailure(result.outcomeReason || "")) throw new Error("Resume retained artifacts after a technical failure.");
+      } catch { result = await author(); }
     }
-    catch {
-      const state = await readSessionState(sessionFile);
-      const prompt = state.sessionId ? `Continue the unfinished wiki and collection workflow in this session. Reuse retained research, datasets, images and finals. Repair technical publication/verification failures, verify in managed development, and write workflow-result.json. Record blocked only for unresolved editorial/evidence issues; technical tool failures must be reported explicitly. Artifact root: ${resultRoot}. Reserved preview port: ${port}.\n${previewGuidance()}` : promptFor(row, resultRoot);
-      const args = state.sessionId ? resumedCodexArgs(state.sessionId, prompt, codexModel, codexReasoning)
-        : buildCodexExecArgs({ worktree, model: codexModel, reasoningEffort: codexReasoning, prompt });
-      const output = await runDirectCodex(args, env, resultRoot, port);
-      try { result = await readWorkflowResult(row, resultRoot); }
-      catch (error) { throw new Error(wikiFailureMessage(output, error instanceof Error ? error.message : String(error))); }
-    }
+    assertCleanCheckout(`post-stage verification for lane ${lane}`);
     const syncDevelopment = async () => {
       result = await readWorkflowResult(row, resultRoot);
       if (result.outcome !== "ready") throw new Error(result.outcomeReason || "Workflow is not ready.");
@@ -712,12 +661,6 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
         await runCommand("node", ["--import", "tsx", "scripts/collections/sync-game-collection-runtime.ts", "--normalize-legacy-media", "--manifest", manifest, "--apply", "--upload-media", "--publish"], env);
       }
     };
-    const repair = async (sessionId: string, error: string) => {
-      const prompt = `The outer publication step failed: ${error}\nFix the affected artifacts in this existing workflow and update workflow-result.json. Verify in managed development. Trusted code will retry publication; do not access production.\n${previewGuidance()}`;
-      await runDirectCodex(resumedCodexArgs(sessionId, prompt, codexModel, codexReasoning), env, resultRoot, port);
-      result = await readWorkflowResult(row, resultRoot);
-    };
-
     if (result.outcome === "blocked") {
       if (isWikiTechnicalFailure(result.outcomeReason || "")) throw new Error(result.outcomeReason);
       await transition(dev, row, {
@@ -739,9 +682,10 @@ async function runOne(dev: SupabaseClient, devCredentials: { url: string; servic
     }
 
     if(process.env.BLOXODES_CI_QA === "1" && skipProduction) throw new Error('CI authoring is ready, but development QA is pending. Preserve artifacts and use the managed content QA workflow before marking this row ready.');
-    if(process.env.BLOXODES_CI_QA !== "1") await recoverStep({ file: sessionFile, label: "Managed-development sync", operation: syncDevelopment, repair });
+    if(process.env.BLOXODES_CI_QA !== "1") await syncDevelopment();
     if (!skipProduction) {
       heartbeatGuard.signal.throwIfAborted();
+      runtimeStop.signal.throwIfAborted();
       heartbeatGuard.stop();
       await requestProduction(dev, row, resultRoot, result);
       leaseActive = false;
@@ -859,6 +803,7 @@ async function main() {
       }
     })().catch((error) => {
       stopRequested = true;
+      runtimeStop.abort(error);
       for (const child of activeChildren) terminateProcessGroup(child, "SIGTERM");
       throw error;
     }));
