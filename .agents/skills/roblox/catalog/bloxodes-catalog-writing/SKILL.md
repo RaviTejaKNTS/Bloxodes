@@ -56,7 +56,7 @@ Use this after `bloxodes-catalog-research` and parent approval. For one game's i
 - `description_md`: answers the main question in depth without repeating item cards.
 - `description_json`: short section notes only when they explain rendered groups.
 - `how_it_works_md`: fields, filters, IDs, values, limits or lookup behavior when needed.
-- `faq_json`: useful follow-up questions not already answered.
+- `faq_json`: useful follow-up questions not already answered. Every entry is `{ "q": "...", "a": "..." }`.
 - `wiki_md`: only when the catalog needs a short related-page blurb.
 
 ## Output shape
@@ -71,7 +71,7 @@ Use this after `bloxodes-catalog-research` and parent approval. For one game's i
   "description_md": "",
   "description_json": {},
   "how_it_works_md": "",
-  "faq_json": [],
+  "faq_json": [{ "q": "", "a": "" }],
   "wiki_md": "",
   "is_published": true
 }

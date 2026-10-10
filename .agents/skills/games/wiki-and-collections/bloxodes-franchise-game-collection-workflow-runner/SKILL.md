@@ -96,24 +96,12 @@ If subagents aren't available, run the same gates as separate passes. Never coll
 10. Review exact-match coverage, file quality, source records, dataset wiring, missing-image decisions and the image-required checker.
 11. Run the writing gate with a fresh writer.
 12. Review identity, title token, metadata, body, FAQs, hub blurb, section notes, voice, spoilers and scope separation (see "Writing gate").
-13. Start or reuse the managed-development preview.
-14. Run the context-provided final verifier:
-
-    ```bash
-    <collection-verifier-command> --base-url <managed-dev-base-url> --game <game-slug> --collection <collection-slug> --workspace <workspace>
-    ```
-
-    The verifier may publish the immutable revision and page copy to managed development so the real route can render. It never authorizes production.
-
-15. Run the context-provided HTML-size gate:
-
-    ```bash
-    <html-size-command> --url <collection-route> --fail-on-limit
-    ```
-
-16. Open the route in Browser at desktop and mobile widths.
-17. For `database` collections, verify the section dropdown, list/card switching, section navigation, pagination page 2, noindex/follow behavior and sitemap exclusion for paginated URLs.
-18. For `collectible` collections, verify the clean collectible renderer, local-first anonymous progress, account-saved progress when supported, search/filter/reset behavior, no card/list database switch, and page 2 returning 404 with the base URL canonical.
+13. Stage the reviewed workspace and runtime manifest for CI in a selected batch under `content/releases/<batch>/` (operation kind `franchise-collection` with the franchise namespace), or in a reviewed immutable bundle. Don't start a local preview, or run the verifier or HTML-size gate locally.
+14. Run `Managed content QA` on GitHub with the exact committed batch or bundle. It publishes the immutable revision and page copy to managed development so the real route can render. It never authorizes production.
+15. Review the job's screenshots and reports at desktop and mobile widths, including the HTML-size result.
+16. For `database` collections, confirm the section dropdown, list/card switching, section navigation, pagination page 2, noindex/follow behavior and sitemap exclusion for paginated URLs.
+17. For `collectible` collections, confirm the clean collectible renderer, local-first anonymous progress, account-saved progress when supported, search/filter/reset behavior, no card/list database switch, and page 2 returning 404 with the base URL canonical.
+18. If the reports don't cover an interaction in steps 16 or 17, report it as an open QA gap instead of testing locally.
 19. Check the title hub after collection publication. Its collection copy must appear before the shared image CTA, and the CTA must use real collection images.
 20. Record the finished state in the approved roadmap or handoff doc when that doc is in scope.
 

@@ -1,6 +1,6 @@
 ---
 name: bloxodes-code-workflow-runner
-description: Run one Bloxodes codes page setup with parent review. Use when the user asks to create or update /codes/<game-slug> page fields, source URLs, Roblox link, local preview, and code refresh workflow without manually writing code rows.
+description: Run one Bloxodes codes page setup with parent review. Use when the user asks to create or update /codes/<game-slug> page fields, source URLs, Roblox link, GitHub Managed content QA, and code refresh workflow without manually writing code rows.
 ---
 
 # Bloxodes Code Workflow Runner
@@ -31,13 +31,6 @@ Every message to the subagent sets its role and the exact skill:
    - Source URLs and slug are right.
    - The copy is evergreen. No active code names or current counts.
    - The copy reads right against `.agents/skills/bloxodes-voice/SKILL.md`: answer-first opening, player voice, no template openings, research voice, hype or filler, no fact said twice, headings that say what's under them, and plain, exact wording for steps like how to redeem.
-4. Publish the page row and refresh codes:
-
-   ```bash
-   npm run upsert:code-page -- --file <payload.json> --publish
-   npm run refresh:codes -- --slug <game-slug>
-   ```
-
-5. Start or reuse localhost with `npm run dev:managed`.
-6. Open `/codes/<game-slug>` in the Codex Browser and check that the page renders.
-7. Return the paths, the localhost link, the refresh status, any blocked reason and the remaining risks.
+4. Stage the reviewed payload in a selected batch under `content/releases/<batch>/` (operation kind `roblox-codes-page`), or use a reviewed immutable bundle. Don't run `upsert:code-page`, `refresh:codes` or a local preview yourself.
+5. Run `Managed content QA` on GitHub with the exact committed batch or bundle, then review its screenshots and reports for `/codes/<game-slug>`. Code rows come from the scheduled `Daily Codes Refresh` job, not from this run.
+6. Return the paths, the successful GitHub artifact links, any blocked reason and the remaining risks. Production publication needs explicit authorization.

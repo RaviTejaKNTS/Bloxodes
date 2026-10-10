@@ -52,7 +52,7 @@ Use this after `bloxodes-tool-research` and parent approval. Don't create a tool
 - `intro_md`: when to use the tool and the decision it helps with.
 - `how_it_works_md`: inputs, outputs, formulas, assumptions and limits in plain language.
 - `description_json`: deeper notes for edge cases, examples or reading the result.
-- `faq_json`: real questions players have after using the tool.
+- `faq_json`: real questions players have after using the tool. Every entry is `{ "q": "...", "a": "..." }`.
 - `cta_label` and `cta_url`: only when there's a clear next action.
 - `thumb_url`: an approved image when the page needs one.
 - `universe_id`: only when the tool belongs to one Roblox game.
@@ -68,7 +68,7 @@ Use this after `bloxodes-tool-research` and parent approval. Don't create a tool
   "intro_md": "",
   "how_it_works_md": "",
   "description_json": {},
-  "faq_json": [],
+  "faq_json": [{ "q": "", "a": "" }],
   "cta_label": null,
   "cta_url": null,
   "thumb_url": null,

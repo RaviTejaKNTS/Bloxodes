@@ -15,9 +15,9 @@ This is the GTA entry point for running collections. Read and follow `.agents/sk
 - **Workspace:** `tmp/content-workspace/gta/<game-slug>/collections/<collection-slug>/`
 - **Tables:** `games`, `game_wiki_pages`, `game_collection_pages`, `game_collection_datasets`, `game_collection_items`
 - **Runtime progress:** GTA collection page type and the existing GTA progress adapter/table
-- **Managed development:** `npm run dev:managed`
-- **Final verifier:** `npm run verify:gta-collection-final -- --base-url http://localhost:<port> --game <game-slug> --collection <collection-slug> --workspace tmp/content-workspace/gta/<game-slug>/collections/<collection-slug>`
-- **HTML-size gate:** `npm run audit:html-size -- --url http://localhost:<port>/gta/wiki/<game-slug>/<collection-slug> --fail-on-limit`
+- **Final verifier:** `npm run verify:gta-collection-final` (args `--game <game-slug> --collection <collection-slug> --workspace tmp/content-workspace/gta/<game-slug>/collections/<collection-slug>`). The route verifier for this page type. Never run it locally; use the GitHub QA job below.
+- **GitHub QA:** `Managed content QA` with a selected batch or bundle using operation kind `franchise-collection` and namespace `gta`
+- **HTML-size gate:** `audit:html-size` on `/gta/wiki/<game-slug>/<collection-slug>` with `--fail-on-limit`. Never run it locally; read the size result from the GitHub QA reports
 - **Source policy:** Rockstar first, then GTA Wiki or exact-game databases, configured guide sources and targeted searches
 - **Mode boundary:** Story Mode and GTA Online stay separate
 

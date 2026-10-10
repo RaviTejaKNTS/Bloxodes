@@ -134,10 +134,6 @@ Before returning `final.json`:
 - Confirm each placement belongs to the stated scope and each table adds real detail.
 - Confirm overview names and tier placements exactly match the per-tier tables. In visual mode, confirm image paths match; for accepted missing visuals, confirm the text-only item appears in the matching table without a placeholder image.
 - Parse-check JSON.
-- Run the normal article verifier against a local web server:
+- Hand the final back for the normal article QA: the runtime's `import_verify` and `browser_verify` stages in code-controlled runs, or `Managed content QA` on GitHub for task work. Don't run the verifier yourself.
 
-```bash
-npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
-```
-
-Do not call a visual article ready if the structured block or local image checks fail. For either shape, do not call it ready if the tier detail contract, import, or rendered route fails.
+Do not call a visual article ready if the structured block or image checks fail. For either shape, do not call it ready if the tier detail contract, import, or rendered route fails.

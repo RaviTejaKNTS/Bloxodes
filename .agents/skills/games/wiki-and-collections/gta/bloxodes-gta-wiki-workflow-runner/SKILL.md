@@ -15,8 +15,8 @@ This is the GTA entry point for running a hub. Read and follow `.agents/skills/b
 - **Tables/views:** `games`, `game_wiki_pages`, and their GTA views
 - **Official-source policy:** Rockstar first, then dedicated GTA wikis and databases, established guides, and limited community evidence
 - **Mode boundary:** Story Mode and GTA Online stay separate. Announced titles use confirmed facts only.
-- **Managed development:** `npm run dev:managed`
-- **Final verifier:** `npm run verify:gta-wiki-final -- --base-url http://localhost:<port> --game <game-slug> --workspace tmp/content-workspace/gta/<game-slug>/wiki/<game-slug>`
+- **Final verifier:** `npm run verify:gta-wiki-final` (args `--game <game-slug> --workspace tmp/content-workspace/gta/<game-slug>/wiki/<game-slug>`). The route verifier for this page type. Never run it locally; use the GitHub QA job below.
+- **GitHub QA:** `Managed content QA` with a selected batch or bundle using operation kind `franchise-wiki` and namespace `gta`
 - **Browser checks:** GTA-only sidebar and search scope, normal Bloxodes layout, collection CTA, metadata, canonical, structured data, desktop and mobile overflow, and images
 
 ## Published hub media check

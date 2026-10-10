@@ -5,7 +5,7 @@ description: Run one approved global Bloxodes /catalog page with parent review. 
 
 # Bloxodes Catalog Workflow Runner
 
-You run one global catalog page from research to a verified local preview. One subagent does the work: it researches, waits for your approval of the brief, then writes `final.json`. You review both stages.
+You run one global catalog page from research to GitHub-verified QA. One subagent does the work: it researches, waits for your approval of the brief, then writes `final.json`. You review both stages.
 
 ## Subagent handoff
 
@@ -34,16 +34,10 @@ After you approve the brief, send the same subagent:
 3. Review existing coverage, data state, sources, useful fields and gaps.
 4. Ask the same subagent to use `/bloxodes-catalog-writing` and create `final.json`.
 5. Review the copy, metadata, FAQs and JSON (see Parent checks).
-6. Start or reuse localhost with `npm run dev:managed`.
-7. Run the verifier:
-
-   ```bash
-   npm run verify:catalog-finals -- --base-url http://localhost:<port> --file <final.json>
-   ```
-
-8. If the verifier passes, open the verified `/catalog/<code>` link in the Codex Browser.
-9. On the rendered page, check the browser title, meta description, canonical, one H1, a meaningful H2 outline, the Open Graph title and the relevant JSON-LD names. Visible headings should add information, not repeat the H1.
-10. Return the paths, the localhost link, any blocked reason and the remaining risks.
+6. Keep the reviewed `final.json` in the task workspace. For CI, stage an exact copy in a selected batch under `content/releases/<batch>/` (operation kind `catalog`), or use a reviewed immutable bundle. Ignored `tmp/` files aren't available on GitHub by themselves. Don't start a local preview or run the verifier locally.
+7. Run `Managed content QA` on GitHub with the exact committed batch or bundle. It stages the page in managed development, builds the site and checks the selected route on desktop and mobile.
+8. Review the job's screenshots and reports for the `/catalog/<code>` route: browser title, meta description, canonical, one H1, a meaningful H2 outline, the Open Graph title and the relevant JSON-LD names. Visible headings should add information, not repeat the H1. The receipt must match the selected input bytes and the reviewed source SHA.
+9. Return the exact final path, the successful GitHub artifact links, any blocked reason and the remaining risks. Production publication needs explicit authorization.
 
 ## Parent checks
 

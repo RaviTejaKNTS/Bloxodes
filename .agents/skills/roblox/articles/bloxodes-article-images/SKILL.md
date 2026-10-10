@@ -167,11 +167,7 @@ Image readiness:
 
 - The parent approves readiness before writing starts.
 - An article can go ahead with no inserted images only when reliable, accurate, helpful images couldn't be found for any planned target and every entry is `accepted_missing`.
-- The writing pass inserts every verified `public_url` under its matching `placement_heading`. Final verification then runs:
-
-```bash
-npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
-```
+- The writing pass inserts every verified `public_url` under its matching `placement_heading`. Final verification then runs on GitHub in `Managed content QA` (or in the runtime's `import_verify` stage for code-controlled runs), never locally.
 
 ## Unattended code-controlled inspection
 

@@ -30,10 +30,10 @@ A source saying 97 items while listing 98, an incomplete roster, no official con
 7. If you have an image manifest, collect images with a dry run first:
 
    ```bash
-   npm run collect:collection-images -- --manifest <images.json> --dataset <workspace>/dataset.json --game-name "<Game>" --collection-name "<Collection>" --dry-run
+   npm run collect:collection-images -- --manifest <images.json> --dataset <workspace>/dataset.json --game-name "<Game>" --collection-name "<Collection>" --out-dir <workspace>/media --dry-run
    ```
 
-   If the dry run looks right, run it again without `--dry-run`.
+   Always pass `--out-dir <workspace>/media`. Without it, the script writes to `apps/web/public/<Game>/<Collection>`, which this skill forbids. If the dry run looks right, run it again without `--dry-run`.
 
 8. When this collection should have images, run the readiness check with images required:
 

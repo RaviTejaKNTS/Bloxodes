@@ -5,7 +5,7 @@ description: Write one Bloxodes quiz final.json after brief approval. Use for /q
 
 # Bloxodes Quiz Writing
 
-A good quiz feels like a friend testing how well you really know the game. Easy questions make players feel smart, hard ones make them say "wait, really?", and every explanation teaches something. Questions must be clear, fair and based on facts players can learn in the game or from reliable sources.
+A good quiz feels like a friend testing how well you really know the game. Easy questions make players feel smart, and hard ones make them say "wait, really?" Questions must be clear, fair and based on facts players can learn in the game or from reliable sources.
 
 Use this after `bloxodes-quiz-research` and parent approval.
 
@@ -32,7 +32,7 @@ Use this after `bloxodes-quiz-research` and parent approval.
 
 - **The page description gets the personality.** A quick challenge to the reader and a hint of what the questions cover, without giving answers away. Name the real places or systems the easy and hard questions touch.
 - **Questions and options stay plain.** One exact question, four clean options. No jokes, puns or extra words where a player needs one precise answer.
-- **Explanations teach in a friendly sentence or two.** Add the useful "why," not just "the answer is B."
+- **No explanations.** The quiz route doesn't store or show an `explanation` field, so don't write one. Make the question itself teach by naming the real place, item or system.
 - **Never narrate how the page was made.** Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
 
 ## Question rules
@@ -56,7 +56,7 @@ Use this after `bloxodes-quiz-research` and parent approval.
 - `question`: one clear fact, decision, route or system.
 - `options`: four believable choices.
 - `correctOptionId`: matches one option ID exactly.
-- `explanation`: teaches the answer briefly when the data shape supports it.
+- `image`: optional, a hosted image URL or null.
 
 ## Output shape
 
@@ -72,11 +72,26 @@ Use this after `bloxodes-quiz-research` and parent approval.
     "is_published": true
   },
   "quizData": {
-    "easy": [],
+    "easy": [
+      {
+        "id": "easy-1",
+        "question": "",
+        "options": [
+          { "id": "a", "text": "" },
+          { "id": "b", "text": "" },
+          { "id": "c", "text": "" },
+          { "id": "d", "text": "" }
+        ],
+        "correctOptionId": "a",
+        "image": null
+      }
+    ],
     "medium": [],
     "hard": []
   }
 }
 ```
+
+Questions use only these keys. Anything else, like `explanation`, is dropped on import.
 
 Each difficulty must be a non-empty array. Every question needs a globally unique ID, exactly four options with unique IDs, and a `correctOptionId` that exists in that question's options.

@@ -1,11 +1,11 @@
 ---
 name: bloxodes-monthly-roblox-report
-description: Research, write, implement, and locally verify one Bloxodes monthly Roblox editorial report from a supplied month and year. Use when the user asks for a dated `/stats/reports/roblox-month-year` page combining Bloxodes historical player data, genre and game trends, Roblox events, major news, community context, real data-backed charts, and a reusable non-AI feature image for archive and social previews.
+description: Research, write, implement and GitHub-verify one Bloxodes monthly Roblox editorial report from a supplied month and year. Use when the user asks for a dated `/stats/reports/roblox-month-year` page combining Bloxodes historical player data, genre and game trends, Roblox events, major news, community context, real data-backed charts, and a reusable non-AI feature image for archive and social previews.
 ---
 
 # Bloxodes Monthly Roblox Report
 
-You make one grounded monthly Roblox feature, from data and research through a local preview. It's an editorial article that tells the month's story, with charts that back it up. It's never a dashboard. Done means a dossier, a working local route, a real feature image, passing checks and an honest list of limits.
+You make one grounded monthly Roblox feature, from data and research through GitHub-verified checks. It's an editorial article that tells the month's story, with charts that back it up. It's never a dashboard. Done means a dossier, an implemented route, a real feature image, passing GitHub checks and an honest list of limits.
 
 ## Inputs and defaults
 
@@ -125,7 +125,7 @@ Write `brief.md` from `references/dossier-template.md`. It must contain:
 
 The dossier is the factual contract for the writing pass. Check it against `analysis.json` and primary sources before any page writing.
 
-### 6. Write and implement the report locally
+### 6. Write and implement the report
 
 Work in the current task workspace once the dossier is complete. Read `references/local-writing.md`, then write the prose and implement the route, data module, charts, focused tests and feature-image config directly.
 
@@ -178,9 +178,7 @@ Require one continuous article, no more than three main H2 sections, and at most
 
 ### 9. Verify code and the rendered page
 
-Run the focused report tests and `npm run typecheck:web`. Add tests for date alignment, normalization, ordering, event-marker dates and banned public terminology.
-
-Start or reuse the local web server. Check the rendered route in a real browser at:
+Add focused tests for date alignment, normalization, ordering, event-marker dates and banned public terminology. Don't run tests, typecheck, builds or a local server locally. They run on GitHub in the PR workflow once the brief allows a commit and PR. Review that workflow's results and screenshots of the rendered route at:
 
 - desktop: about 1440×1000
 - mobile: about 390×844
@@ -200,17 +198,17 @@ Verify:
 - metadata stays `noindex`
 - the route is absent from sitemap, feeds, navigation and revalidation
 
-Keep the localhost server running when the user wants to review the page.
+If the PR workflow's screenshots don't cover an item above, report it as an open QA gap. Only when the owner explicitly asks for the existing homelab preview, follow the preview rule in root `AGENTS.md`.
 
 ## Final response
 
 Return:
 
-- the localhost report link
+- the GitHub check and screenshot links (or why no PR was opened yet)
 - the dossier path
 - the feature-image path
 - files created or changed
-- tests, typecheck and responsive QA completed
+- GitHub tests, typecheck and responsive QA results
 - confirmation that the page stays internal and unpublished
 - any unresolved source or data limitations
 

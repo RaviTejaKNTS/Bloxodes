@@ -110,7 +110,7 @@ The rules below describe the approved media contract. In the writing stage, reus
 - Prefer real in-game captures over a publisher's custom art or branded composites. Clean, exact gameplay screenshots from credible guide or wiki pages are fine when the manifest records their provenance. Flag any explicit attribution or license condition for parent review.
 - No images with watermarks, big arrows (as `bloxodes-article-images` defines them), subscribe overlays or competitor branding.
 - Never hotlink the source page, wiki, Discord, Imgur, a competitor CDN or any other third-party host in `content_md`. Download, validate, convert to WebP and upload to Bloxodes Supabase Storage first.
-- Normal articles usually have one to three body images. Complete visual sets can have more.
+- Insert every verified image that helps the reader (see above). Most normal articles land at one to three, and complete visual sets can have more. Never drop a verified, useful image to hit a count.
 - Write each image as `![useful factual alt text](<Supabase public URL>)` next to the matching explanation, using the exact public URL for the current environment.
 - Keep the source article URL in `sources` and per-image provenance in `article_source_images`. Never mention competitors or image collection in public copy.
 - Mix images, tables, lists and prose when each one explains something different. Don't show the same information twice.
@@ -181,7 +181,7 @@ No `seo_title`. The articles table doesn't use it.
   "slug": "",
   "meta_description": "",
   "content_md": "",
-  "faq_json": [],
+  "faq_json": [{ "q": "", "a": "" }],
   "cover_image": null,
   "author_id": null,
   "universe_id": null,

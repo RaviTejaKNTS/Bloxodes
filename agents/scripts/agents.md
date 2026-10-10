@@ -229,33 +229,12 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 
 ### Wiki And Game Collection Production Publish
 
-Use this only after local content, data, images, DB readback, and rendered routes are clean.
+Production publication goes through GitHub only, under `.agents/skills/bloxodes-release-e2e/SKILL.md` and an explicit release request. Never write production from a workstation. Select the reviewed inputs in a batch under `content/releases/<batch>/` or a reviewed immutable bundle:
 
-1. Confirm production env:
-   - `NODE_ENV=production`
-   - Supabase host is production, not local.
-2. Confirm or create the production `roblox_universes` row first. Prefer universe ID, root place ID, display name, creator, and Roblox URL. Treat `roblox_universes.slug` as a stats-only URL slug, not as the source for page slugs.
-3. Check existing production rows before writing:
-   - `wiki_pages.slug = <editorial-game-slug>`
-   - `wiki_collection_pages.code in (<game-slug>-<collection-slug>...)`
-   - `wiki_collection_pages.wiki_slug = <editorial-game-slug>` and `collection_slug`
-4. Run production dry-runs:
+- hub: operation kind `roblox-wiki`, which runs `sync:game-wiki-runtime --final-json <final.json>`
+- collections: operation kind `roblox-collection`, which runs `sync:game-collection-runtime --manifest <runtime-manifest.json>` with media upload and publish
 
-```bash
-NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run --game <game-slug>
-NODE_ENV=production npm run seed:game-collection-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections
-```
-
-5. Push in order:
-
-```bash
-NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --allow-prod
-NODE_ENV=production npm run seed:game-collection-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --allow-prod
-```
-
-Read back the production wiki row after the wiki push, before collection seeding, so collection rows can link to the production `wiki_page_id`.
-
-After DB publish, push and deploy only the current game's repo artifacts required by those pages: `data/<Game>/`, `apps/web/public/<Game>/`, game dataset config/rendering code, and approved seed-script changes for that game. Do not include unrelated docs, other game data, temporary workspace files, or unrelated code in the game release commit.
+Publish the hub before its collections, so collection rows can link to the production `wiki_page_id`. Runtime pages must not depend on local collection files (see root `AGENTS.md`). The retired `seed:game-collection-pages` command no longer exists.
 
 Do not manually queue revalidation by default. Wait and poll live pages for up to 5 minutes because the app/database revalidation path should handle the update. If pages are still stale after that, inspect the revalidation queue or worker and report the blocker.
 

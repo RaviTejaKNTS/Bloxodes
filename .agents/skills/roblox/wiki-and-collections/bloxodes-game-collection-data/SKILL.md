@@ -65,6 +65,22 @@ A source saying 97 items while listing 98, an incomplete roster, no official con
 
     The page type changes the renderer and progress behavior, not the dataset table or the v2 row shape. Existing manifests may omit it and default to `database`, but new or refreshed work should state it explicitly.
 
+    The full manifest shape that `sync:game-collection-runtime` reads. Paths are relative to the collection workspace:
+
+    ```json
+    {
+      "schemaVersion": 1,
+      "game": { "slug": "<game-slug>", "name": "<Game Name>", "universeId": 1234567890 },
+      "collection": { "slug": "<collection-slug>", "label": "<Display Label>", "sortOrder": 0, "pageType": "database" },
+      "dataset": "dataset.json",
+      "finalJson": "final.json",
+      "mediaRoot": "media",
+      "sourceUrls": ["https://..."]
+    }
+    ```
+
+    `collection.slug` is the slug, never the label (`factories`, not `Factories`). `universeId` must be a positive integer, and `sourceUrls` needs at least one entry. Media paths in the dataset are relative to `mediaRoot`, so don't repeat a `media/` prefix in them.
+
 15. Update `brief.md` with data status and the checker's gaps (see "Data Approval Notes").
 
 ## Dataset shape

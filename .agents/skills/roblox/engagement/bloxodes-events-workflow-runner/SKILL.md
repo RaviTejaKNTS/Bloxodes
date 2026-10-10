@@ -5,7 +5,7 @@ description: Run one approved Bloxodes events page with parent review. Use when 
 
 # Bloxodes Events Workflow Runner
 
-You run one events page from research to a verified local preview. One subagent does the work: it researches the event source path, waits for your approval of the brief, then writes `final.json`. You review both stages.
+You run one events page from research to GitHub-verified QA. One subagent does the work: it researches the event source path, waits for your approval of the brief, then writes `final.json`. You review both stages.
 
 ## Subagent handoff
 
@@ -37,12 +37,7 @@ After you approve the brief, send the same subagent:
    - No stale dates, current-event claims or invented timeline facts.
    - The copy reads right against `.agents/skills/bloxodes-voice/SKILL.md`: it opens on what events mean in this game, sounds like a player, and has no template openings, research voice, hype, filler or repeated facts. Headings say what's under them.
    - Every fact matches the approved brief.
-6. Start or reuse localhost with `npm run dev:managed`.
-7. Run the verifier:
-
-   ```bash
-   npm run verify:simple-page-finals -- --base-url http://localhost:<port> --file <final.json>
-   ```
-
-8. If the verifier passes, open the verified `/events/<slug>` link in the Codex Browser.
-9. Return the paths, the localhost link, any blocked reason and the remaining risks.
+6. Keep the reviewed `final.json` in the task workspace. For CI, stage an exact copy in a selected batch under `content/releases/<batch>/` (operation kind `events-final`), or use a reviewed immutable bundle. Ignored `tmp/` files aren't available on GitHub by themselves. Don't start a local preview or run the verifier locally.
+7. Run `Managed content QA` on GitHub with the exact committed batch or bundle. It stages the page in managed development, builds the site and checks the selected route on desktop and mobile.
+8. Review the job's screenshots and reports for the `/events/<slug>` route. The receipt must match the selected input bytes and the reviewed source SHA.
+9. Return the exact final path, the successful GitHub artifact links, any blocked reason and the remaining risks. Production publication needs explicit authorization.

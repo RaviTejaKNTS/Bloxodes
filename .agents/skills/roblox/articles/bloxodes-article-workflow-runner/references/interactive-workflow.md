@@ -4,6 +4,8 @@ This is the parent review workflow for one article or a list of articles. You or
 
 When `run-homelab-article-batch.ts` invokes this skill, run the workflow below directly in the current parent turn. Never call `articles:writer:batch` from inside this skill. The outer batch already owns the single-writer lock, the selected queue IDs and production release.
 
+The local server, verifier and browser steps below belong to this retained homelab batch path only, which runs on operator infrastructure. Task agents working in a T3 worktree don't use this path. They run checks on GitHub, as root `AGENTS.md` requires.
+
 ## Choose the inputs
 
 Pick inputs in this order:

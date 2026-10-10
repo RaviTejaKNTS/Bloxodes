@@ -71,7 +71,7 @@ Fix factual, causal, accessibility and layout problems before QA. If the writing
 
 ## Required checks
 
-Run the focused report test and `npm run typecheck:web`. Start or reuse the local web server and check the rendered route at about 1440×1000, 390×844 and 320×800.
+The focused report test, `typecheck:web` and the rendered checks run on GitHub in the PR workflow, never locally. Review its screenshots of the route at about 1440×1000, 390×844 and 320×800.
 
 Verify:
 

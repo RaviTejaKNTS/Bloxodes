@@ -194,12 +194,6 @@ A question (plain on purpose):
 >
 > **After:** Which item opens the Ash Vault?
 
-An explanation:
-
-> **Before:** The correct answer is the Ember Compass because it is the item that opens the Ash Vault.
->
-> **After:** Mara crafts the Ember Compass at Harbor Camp, and it's the only key the Ash Vault accepts.
-
 ## Checklists
 
 `description_md`:

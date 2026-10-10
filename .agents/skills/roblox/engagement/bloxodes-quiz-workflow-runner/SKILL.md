@@ -5,7 +5,7 @@ description: Run one approved Bloxodes quiz page with parent review. Use when th
 
 # Bloxodes Quiz Workflow Runner
 
-You run one quiz from research to a verified local preview. One subagent does the work: it researches the game facts, waits for your approval of the brief, then writes `final.json`. You review both stages.
+You run one quiz from research to GitHub-verified QA. One subagent does the work: it researches the game facts, waits for your approval of the brief, then writes `final.json`. You review both stages.
 
 ## Subagent handoff
 
@@ -34,15 +34,10 @@ After you approve the brief, send the same subagent:
 3. Review the source proof, topic coverage, difficulty plan and facts to avoid.
 4. Ask the same subagent to use `/bloxodes-quiz-writing` and create `final.json`.
 5. Review that the questions are fair, stable and useful, and check the copy (see Parent checks).
-6. Start or reuse localhost with `npm run dev:managed`.
-7. Run the managed-development verifier. It validates and imports both the page copy and `final.json.quizData` into `quiz_pages`, reads the exact saved payload back, and only then checks the route:
-
-   ```bash
-   npm run verify:engagement-finals -- --base-url http://localhost:<port> --file <final.json>
-   ```
-
-8. If the verifier passes, open the verified `/quizzes/<code>` link in the Codex Browser.
-9. Return the paths, the localhost link, any blocked reason and the remaining risks.
+6. Keep the reviewed `final.json` in the task workspace. For CI, stage an exact copy in a selected batch under `content/releases/<batch>/` (operation kind `content-final`), or use a reviewed immutable bundle. Ignored `tmp/` files aren't available on GitHub by themselves. Don't start a local preview or run the verifier locally.
+7. Run `Managed content QA` on GitHub with the exact committed batch or bundle. It stages the page in managed development, builds the site and checks the selected route on desktop and mobile.
+8. Review the job's screenshots and reports for the `/quizzes/<code>` route, and confirm the saved `quizData` matches `final.json`. The receipt must match the selected input bytes and the reviewed source SHA.
+9. Return the exact final path, the successful GitHub artifact links, any blocked reason and the remaining risks. Production publication needs explicit authorization.
 
 ## Parent checks
 
@@ -52,7 +47,7 @@ Facts and questions:
 - Questions are stable and source-backed.
 - Wrong answers are plausible and similar in specificity.
 - No answer is given away by option length.
-- Explanations teach the fact briefly.
+- No `explanation` fields. The route drops them.
 
 Copy, checked against `.agents/skills/bloxodes-voice/SKILL.md`:
 

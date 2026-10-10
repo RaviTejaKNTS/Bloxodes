@@ -31,7 +31,7 @@ Before delegating, resolve one context record for the whole run:
 - game and wiki tables/views
 - official-source hierarchy
 - campaign, online-service, expansion, edition and platform boundaries
-- managed-development command, final verifier, local preview base and Browser route
+- final verifier, GitHub QA operation kind and namespace, and the hub route
 - any progress endpoint/table and sitemap/cache/revalidation ownership
 
 These are placeholders for the target franchise, not values to guess. If the route, table or verifier doesn't exist, stop at the exact infrastructure blocker, or run only an explicitly authorized setup phase. Never quietly fall back to Roblox or another franchise's runtime.
@@ -64,18 +64,10 @@ If subagents aren't available, keep research and writing as separate parent-revi
 5. Approve only when identity, release status, scope boundary, source proof, the controls decision and the related-page inventory are sound, and the brief gives the writer plain player-language facts, the reader's main question and any hooks.
 6. Run the writing gate against the approved brief.
 7. Review metadata, copy, controls, tips, scope and the no-future-promise rule, and check the voice (see "Parent checks").
-8. Start or reuse the target managed-development preview command. Bind it the way the repository instructions say.
-9. Run the context-provided final verifier:
-
-   ```bash
-   <wiki-verifier-command> --base-url <managed-dev-base-url> --game <game-slug> --workspace <workspace>
-   ```
-
-   Don't pass production or allow-production flags unless a later, explicit release workflow authorizes them. This skill stops before production.
-
-10. Open the verified hub route in Browser at desktop and mobile widths.
-11. Check title hierarchy, normal Bloxodes margins, readable body width, target-franchise navigation/search scope, collection links, overflow, images, metadata, canonical URL and structured data.
-12. Return workspace paths, the managed-development URL, verifier result, Browser result, blocked facts and remaining risks.
+8. Stage the reviewed workspace for CI in a selected batch under `content/releases/<batch>/` (operation kind `franchise-wiki` with the franchise namespace), or in a reviewed immutable bundle. Don't start a local preview or run the verifier locally.
+9. Run `Managed content QA` on GitHub with the exact committed batch or bundle. It stages the hub in managed development, builds the site and renders the route on desktop and mobile. Don't pass production or allow-production flags. This skill stops before production.
+10. Review the job's screenshots and reports: title hierarchy, normal Bloxodes margins, readable body width, target-franchise navigation and search scope, collection links, overflow, images, metadata, canonical URL and structured data. If the reports don't cover one of these, report it as an open QA gap instead of testing locally.
+11. Return workspace paths, the GitHub artifact links, the QA result, blocked facts and remaining risks.
 
 ## Parent checks
 
@@ -87,7 +79,7 @@ Accuracy and scope:
 - Controls are verified or `[]`.
 - Public copy never mentions workflow, sources, databases or planned pages.
 - The page follows the existing Bloxodes wiki design without a forced franchise theme.
-- The managed-development verifier and the desktop/mobile review pass.
+- The GitHub `Managed content QA` job and the desktop/mobile screenshot review pass.
 
 Voice, checked against `bloxodes-voice`:
 
