@@ -39,7 +39,7 @@ When the current message says `scripts/articles/run-local-article-writer.ts` has
 
 - Treat the supplied title, type, queue reference and source packet as the one explicit approved input.
 - Don't list, claim or update `article_generation_queue`. The wrapper owns managed-dev queue state, and Grok doesn't get production database credentials.
-- Run the same separate research, mandatory image and writing-subagent workflow, with parent review at each gate, then the verifier, managed-dev Supabase import and real-browser preview.
+- Run the same separate research, image and writing-subagent workflow, with parent review at each gate, then the verifier, managed-dev Supabase import and real-browser preview.
 - Check production overlap only with `npm run articles:inventory:production`. This GET-only path can't change production.
 - Never publish or import the article to production. Normal `SUPABASE_*` variables point to managed dev on purpose in this mode.
 - End with the structured status the wrapper asks for. Report `completed` only when `final.json`, verification, managed-dev import and the rendered preview all passed. Otherwise return `skipped`, `blocked` or `failed` with the actual reason.
@@ -119,7 +119,7 @@ Then tell the writer, for normal gameplay and general articles:
 Swap the writing skill for special shapes:
 
 - **Roblox tech, platform or troubleshooting articles:** use `/bloxodes-tech-article-writing` and apply its rules on top of the base article-writing rules.
-- **Articles whose main job is ranking a complete set** of units, classes, weapons, abilities, items, characters or similar: use `/bloxodes-tier-list-writing`. Run the same mandatory image pass first. Prefer its visual overview when a complete exact-match image set exists. Use its text/table-first shape only when the unresolved image targets were explicitly accepted missing after the source search.
+- **Articles whose main job is ranking a complete set** of units, classes, weapons, abilities, items, characters or similar: use `/bloxodes-tier-list-writing`. Run the same image pass first (images are best effort). Prefer its visual overview when a complete exact-match image set exists. Use its text/table-first shape only when the unresolved image targets were explicitly accepted missing after the source search.
 
 Resume the same writing subagent when copy changes are needed so it keeps the article context.
 

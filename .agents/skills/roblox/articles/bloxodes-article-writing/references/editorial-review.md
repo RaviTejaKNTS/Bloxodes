@@ -38,6 +38,20 @@ When the brief names a useful option or condition (especially timing in a "when 
 
 Don't invent scores. Heading counts, word counts, contractions, keyword checks and passing JSON or browser tests are not substitutes for reading the copy.
 
+## What doesn't block acceptance
+
+A finding has to change what the reader gets: a wrong or missing fact, a step they can't follow, thin coverage, report voice, or the same advice repeated across sections. These are not findings. Approve the draft and mention them in the summary instead:
+
+- one near-duplicate sentence or a slightly awkward line;
+- a wording, heading or ordering preference;
+- a style nit the voice guide doesn't call out.
+
+The writer gets one revision, so spend it on what matters. A draft that answers the promise clearly and sounds right is `completed`, even if you'd have phrased a line differently.
+
+## Evidence format
+
+In code-controlled runs, `editorial_evidence` needs an actual quotation from the draft for every check, including passes, plus a one-line assessment. A check without a quote gets the whole review rejected. Quote the exact sentence, table cell or heading you judged.
+
 ## Draft, feedback, one revision
 
 1. The writer saves the first `final.json` as a draft and returns it. The filename isn't approval. Fix syntax while drafting, but save the real editorial work for the combined feedback.

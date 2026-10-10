@@ -1,6 +1,6 @@
 ---
 name: bloxodes-tier-list-writing
-description: Write one Bloxodes Roblox tier-list article final.json from an approved brief and mandatory media.json. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities, using a visual tier list when exact images are verified and text/table fallback only for explicitly accepted-missing image targets.
+description: Write one Bloxodes Roblox tier-list article final.json from an approved brief and its media.json. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities, using a visual tier list when exact images are verified and text/table fallback only for explicitly accepted-missing image targets.
 ---
 
 # Bloxodes Tier List Writing

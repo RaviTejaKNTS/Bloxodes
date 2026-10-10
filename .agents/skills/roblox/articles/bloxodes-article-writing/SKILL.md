@@ -128,7 +128,8 @@ The rules below describe the approved media contract. In the writing stage, reus
 - Put each hosted image in its matching table row or right under its location, step, NPC, puzzle or item heading. Alt text names the real thing plus what's visible. Never "image" or "screenshot."
 - The usual one-to-three range doesn't apply to these sets. Include one clear image per entry when it helps identification, but don't copy unrelated parts of a source gallery.
 - Add every image source page to `sources` and keep the original image URL in `article_source_images`.
-- Don't quietly finish an image-free `final.json` before doing this fan-out. If images still can't be found, downloaded, matched, cleared, uploaded or verified, return the searches you tried and the exact gap instead of hotlinks or repo files.
+- An image-free `final.json` is fine when the image pass accepted every target as missing. Never use hotlinks or repo files to fill a gap.
+- Never change an approved image's URL, source or status in `media.json`. You may only update `placement_heading` when you rename a heading. Changing anything else gets the draft rejected.
 
 **Image readiness gate**
 
@@ -137,7 +138,7 @@ The rules below describe the approved media contract. In the writing stage, reus
 - Keep the target-to-image map in `media.json`: target name, placement heading, source page, original image URL, Storage object path, public URL, match evidence and status (`verified` or a precise missing reason).
 - Before returning `final.json`, compare expected, found, uploaded, inserted and missing counts. Every URL must belong to its row, and one image can't stand in for different entries unless they really look the same.
 - Open every uploaded public URL and look at it, then preview the rendered local article. Confirm each image loads under the right heading or in the right row, with matching label and accurate alt text.
-- The gate passes only when every useful row is verified or every missing row has an accepted reason. A wrong image is worse than a missing one, so drop uncertain matches and report them as missing.
+- The gate passes when every useful row is verified or accepted as missing. Missing images never block the article. A wrong image is worse than a missing one, so drop uncertain matches and report them as missing.
 
 **Supabase Storage for article images**
 

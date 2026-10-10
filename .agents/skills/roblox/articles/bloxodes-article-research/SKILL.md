@@ -172,7 +172,7 @@ When the approved idea is a tier list, add a readiness pass:
 2. Build the complete expected item list before assigning tiers.
 3. Record placement evidence, disagreements, update or version boundaries and uncertain items. Community consensus can inform a placement but doesn't replace exact game facts.
 4. Check the published collection database pages and existing hosted or public media for canonical item rows and images. Export an ignored collection workspace when you need row-level detail. Don't read repository game datasets. Record the exact usable image URL for every expected item, then plan source-image searches for the gaps.
-5. Mark the brief blocked if important item coverage or placement evidence is weak. Image gaps carry into the mandatory image pass. A text or table fallback is allowed only after the parent accepts those targets as missing.
+5. Mark the brief blocked if important item coverage or placement evidence is weak. Image gaps carry into the image pass. A text or table fallback is fine once those targets are accepted as missing.
 
 Add this block to `brief.md` for tier lists:
 
@@ -191,7 +191,7 @@ Tier-list readiness:
 
 ## Plan the media
 
-Every article gets a separate image pass and a visual target set of at least one. Media is never optional. Images can be left out only after the image pass finds no reliable, accurate, helpful match and the parent explicitly accepts every unresolved target as missing.
+Every article gets a separate image pass with at least one planned target. Images are best effort: when the image pass finds no good exact match, the reviewer accepts the targets as missing and the article goes ahead without them. Never block research or an article over images.
 
 1. List every expected visual target and the expected count before searching. The count must be at least one.
 2. For locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual walkthroughs, complete rankings and item sets, include every distinct target an image would help identify. For other articles, pick the one to three highest-value screenshots, UI states, items, characters or steps.
@@ -300,14 +300,16 @@ If the research is weak, say what's missing. Don't pretend the article is ready.
 - Explains why this should be an article and not another page type.
 - Gives an outline that answers the title promise.
 - Separates facts to use from facts to avoid.
-- Defines a nonzero expected visual set before discovery. Media is never optional.
+- Defines a nonzero expected visual set before discovery. Images are best effort and never block the article.
 - Hands the writer plain player-language facts and a clear angle.
 - Is deep enough for a complete article: what the subject does and why it matters, supported stats or effects, what comes next, and at least the coverage of the best competing guides.
 - Makes gaps obvious so the parent can approve, refine or block the article.
 
 ## Re-reviews
 
-A first research review checks the decisive source evidence and the full reader promise. It also checks depth: a brief that skips what the subject does or why it matters needs more research, not approval. Reviewers ask to remove only facts that are wrong or conflicting, never supported facts that make the article more useful.
+A first research review checks the decisive source evidence and the full reader promise. It also checks depth: a brief that skips what the subject does or why it matters needs more research, not approval. Reviewers ask to remove only facts that are wrong, never supported facts that make the article more useful. A conflicting fact stays with a recommended value or range.
+
+Request research only for gaps that change what the reader can do or believe. These aren't findings: a malformed URL the writer won't publish, a weighting that doesn't add up when the ranking itself is supported, or a side fact without a conflict note. Mention them in the summary and return `completed`. Each research correction is scarce, so spend it on the central promise.
 
 A re-review starts from the earlier findings:
 

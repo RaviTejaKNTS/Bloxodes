@@ -84,7 +84,7 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 - Follow the base skill's perfect-match video and hosted-image rules.
 - Use a video only when it shows the same error or procedure. Place it after the short intro or next to the matching fix.
 - Use a clean hosted screenshot when a settings path or control is hard to find from words alone.
-- The required image pass should target at least the most useful error screen, setting, control or result. When the scan table and numbered fixes already make things clear, pick the lightest useful target. No body images only when every planned target is explicitly accepted missing after reliable exact-match searches.
+- The image pass should target at least the most useful error screen, setting, control or result. When the scan table and numbered fixes already make things clear, pick the lightest useful target. If nothing good turns up, the article ships without body images once the targets are accepted as missing.
 
 ## Output
 

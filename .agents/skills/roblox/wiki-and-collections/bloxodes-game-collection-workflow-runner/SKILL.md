@@ -151,7 +151,7 @@ Before you approve any `final.json`, and before you call a collection done:
 - Source proof supports the collection and its important fields.
 - The page type is recorded and matches the manifest, page row and route renderer.
 - Item count and title count agree.
-- Image readiness is approved, or image gaps are fixed, accepted or blocked.
+- Image readiness is approved, or image gaps are fixed or accepted. Missing images never block a collection.
 - `description_json` keys match the actual rendered section labels.
 - Sections are useful and their labels are easy to understand.
 - Card fields help players compare items.

@@ -39,6 +39,8 @@ Return the supplied JSON schema:
 - `repair_stage`: `research`, `images`, `writing` or `null`
 - `accepted_missing` IDs
 
+The images stage's `repair_stage` is `research` or `null`, never `writing`. Only image review fills `accepted_missing`, using exact entry `id` values from `media.json`. Images are best effort: a reasonably searched miss gets accepted, and missing images never block an article.
+
 Rules for the decision:
 
 - `completed` has no unresolved findings and a `null` repair target.

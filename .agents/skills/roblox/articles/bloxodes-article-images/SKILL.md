@@ -1,13 +1,13 @@
 ---
 name: bloxodes-article-images
-description: Gather, host, map, and verify useful images for every approved Bloxodes article before writing. Define a nonzero target set, search reliable exact-match sources, and allow image-free output only when every target is explicitly accepted as missing after the search. Creates media.json and updates brief.md; does not write final.json.
+description: Gather, host, map, and verify useful images for every approved Bloxodes article before writing. Plan at least one target, search reliable exact-match sources, and mark targets missing when no good match turns up. Images are best effort and never block an article. Creates media.json and updates brief.md; does not write final.json.
 ---
 
 # Bloxodes Article Images
 
 You find, verify and host the images for one approved article before anyone writes it. Done means a `media.json` where every planned target is either a verified exact match or a precise, well-searched missing entry. You don't write `final.json`.
 
-The image pass is mandatory for every article, even ones that aren't location guides or collections. It runs after article research and the parent's brief approval.
+Every article gets an image pass after research approval, but images are best effort. When a reasonable search finds no good exact match, the targets are marked missing and the article goes ahead without them. An article with no images is a normal result, never a failure or a blocker. A wrong image is worse than no image.
 
 ## Code-controlled runs
 
@@ -15,7 +15,8 @@ If you were assigned a code-controlled stage, follow [stage ownership](../bloxod
 
 In the code-controlled `images` stage:
 
-- **Only `media.json` may change.** Treat `brief.md` as immutable approved research.
+- **Only `media.json` may change.** Treat `brief.md` and `final.json` as read-only. Editing either one gets the stage rejected.
+- Never ask for writing changes, like inserting an image into `final.json`. The writing stage places images. Your decision's `repair_stage` is `research` or `null`, never `writing`.
 - Put all image targets, search evidence, omissions and readiness notes in the manifest entries.
 - Skip the standalone brief-update step in [Readiness](#readiness).
 - Reviewers change no artifacts. Code records their decisions and applies accepted omissions.
@@ -56,7 +57,7 @@ For example, a five-location guide starts with five entries even if the lead sou
 7. For every entry, record the source page, original image URL, exact-match evidence, provenance note, useful alt text and status.
 8. If the source or file states an explicit attribution or license condition, record it and stop for parent review before use. Don't add a public attribution caption automatically.
 
-Don't stop after rejecting the lead source. Keep fanning out until every expected entry is verified or has a precise missing reason.
+Don't stop after rejecting the lead source. Search each target with at least two query variants across at least two credible source pages. That's a reasonable search. If nothing good turns up, mark the entry `missing` with the queries, pages and a specific reason, and move on. Don't spend the whole stage hunting one image.
 
 ## media.json
 
@@ -95,7 +96,7 @@ Status rules:
 - Allowed statuses are `candidate`, `verified`, `missing` and `accepted_missing`.
 - The manifest and every entry use `required: true`.
 - `candidate` and `missing` never pass readiness.
-- Only the parent can approve `accepted_missing`. Each accepted omission needs:
+- Only the parent or image reviewer can approve `accepted_missing`. Approve it whenever the search was reasonable. Each accepted omission needs:
   - `search_queries` with at least two distinct query variants
   - `searched_source_urls` with at least two distinct HTTP source-page URLs
   - a specific `missing_reason`
@@ -166,7 +167,17 @@ Image readiness:
 ```
 
 - The parent approves readiness before writing starts.
-- An article can go ahead with no inserted images only when reliable, accurate, helpful images couldn't be found for any planned target and every entry is `accepted_missing`.
+- An article can go ahead with no inserted images whenever no good exact match turned up for any target and every entry is `accepted_missing`. That's a normal outcome.
+
+## Image review
+
+The reviewer (the parent, or the `image_review` stage in code-controlled runs) judges what was found. It doesn't demand more images.
+
+- Return `completed` when every entry is either a verified exact match or a reasonably searched miss. A set where every entry is `accepted_missing` is a valid `completed` result.
+- List every reasonably searched miss in `accepted_missing`, using the exact entry `id` values from `media.json`. Unknown IDs make the decision invalid.
+- Return `needs_revision` only for a wrong or unclear match, missing provenance, a big arrow or branding, a bad placement, or a miss with no real search behind it. Never send the stage back just to keep looking for an image that a reasonable search didn't find.
+- Never block an article because images are missing.
+- A completed review has no open findings. Put optional notes in the summary.
 - The writing pass inserts every verified `public_url` under its matching `placement_heading`. Final verification then runs on GitHub in `Managed content QA` (or in the runtime's `import_verify` stage for code-controlled runs), never locally.
 
 ## Unattended code-controlled inspection
@@ -178,4 +189,4 @@ Scheduled image work has headless Chrome, not a connected Codex desktop browser.
 - A successful screenshot only proves access. Look at the gameplay it shows and match it to the source and the intended placement before marking it verified.
 - Keep the exact original URL and attribution evidence in `media.json`.
 - The independent reviewer gets code-captured screenshots in `image-inspection/index.json` and must inspect them before accepting.
-- Tool or network failures are operational problems. They're never a reason to invent a match or quietly accept an omission.
+- Tool or network failures are operational problems. Never invent a match. If an image host fails, mark that entry `missing` with the exact error and keep going with the other targets. The reviewer can accept it as missing.
