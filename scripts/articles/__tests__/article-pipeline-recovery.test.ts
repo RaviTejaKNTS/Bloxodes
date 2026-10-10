@@ -23,7 +23,7 @@ async function interruptedControllerWrite(t: any, stage: Stage, file: string) {
   await writeFile(path.join(runDir, "content/brief.md"), "Approved game instructions.\n");
   const body = "Follow the four-country progression.";
   await saveJson(path.join(runDir, "content/final.json"), { slug: job.slug, title: job.title, universe_id: null, content_md: body });
-  await saveJson(path.join(runDir, "content/media.json"), { required: true, article_slug: job.slug, expected_count: 1, entries: [{ id: "target", status: "missing", missing_reason: "No suitable screenshot.", search_queries: ["game target", "game screenshot"], searched_source_urls: ["https://wiki.example/target", "https://guide.example/target"] }] });
+  await saveJson(path.join(runDir, "content/media.json"), { schema: 1, visual_type: "other", required: true, article_slug: job.slug, expected_count: 1, entries: [{ id: "target", label: "Optional target", required: true, placement_heading: "Progression", status: "accepted_missing", acceptance_note: "Reviewer accepted written instructions.", missing_reason: "No suitable screenshot.", search_queries: ["game target", "game screenshot"], searched_source_urls: ["https://wiki.example/target", "https://guide.example/target"] }] });
   const artifacts = await artifactHashes(path.join(runDir, "content"));
   await saveJson(path.join(runDir, "game-identity.json"), { universe_id: null, supplied_id: null, note: "Previous identity.", approved_brief_hash: artifacts["brief.md"] });
   const identityInput = await readFile(path.join(runDir, "game-identity.json"), "utf8");
@@ -36,7 +36,7 @@ async function interruptedControllerWrite(t: any, stage: Stage, file: string) {
   } : pass;
   const codexBin = path.join(runDir, "codex.cjs"), claudeBin = path.join(runDir, "claude.cjs");
   await writeFile(codexBin, `#!/usr/bin/env node\nconst fs = require('fs'); const args = process.argv; fs.writeFileSync(args[args.indexOf('--output-last-message') + 1], ${JSON.stringify(JSON.stringify(response))});\n`, { mode: 0o700 });
-  await writeFile(claudeBin, `#!/usr/bin/env node\nconsole.log(JSON.stringify({ structured_output: ${JSON.stringify(response)} }));\n`, { mode: 0o700 });
+  await writeFile(claudeBin, `#!/usr/bin/env node\nrequire('fs').writeSync(1, JSON.stringify({ structured_output: ${JSON.stringify(response)} }));\n`, { mode: 0o700 });
   const runtime: StageRuntimeOptions = { worktree: process.cwd(), runDir, codexBin, claudeBin, model: "gpt-6-luna", reasoning: "max", grokFallback: false, grokBin: "unused", grokModel: "unused", deadline: Date.now() + 60_000, stageTimeoutMs: 5000, baseUrl: "http://localhost:3100", env: { HOME: os.homedir(), PATH: process.env.PATH, SUPABASE_URL: "https://test.supabase.co" } };
   const original = await readFile(path.join(runDir, file), "utf8");
   let crashState = "";

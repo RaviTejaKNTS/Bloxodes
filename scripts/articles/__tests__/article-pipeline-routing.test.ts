@@ -19,7 +19,10 @@ async function fixture() {
   const state = { job, feedback: "", history: [], revisions: { writing: 0, images: 0, research: 0 } } as unknown as PipelineState;
   return { runDir, runtime, state, attempt: path.join(runDir, "attempt") };
 }
-async function fake(bin: string, body: string) { await writeFile(bin, `#!/usr/bin/env node\n${body}\n`, { mode: 0o700 }); }
+async function fake(bin: string, body: string) {
+  const stdout = "console.log=(...values)=>require('fs').writeSync(1,values.join(' ')+'\\n');";
+  await writeFile(bin, `#!/usr/bin/env node\n${stdout}\n${body}\n`, { mode: 0o700 });
+}
 
 test("Claude returns a structured review without a decision-file write and records usage", async () => {
   const f = await fixture();

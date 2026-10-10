@@ -3,8 +3,10 @@ import "../shared/load-env";
 import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { removeUnusedArticleImageProvenance } from "./sync-article-image-provenance";
 import {
   assertNoArticleMediaErrors,
   checkArticleMedia,
@@ -14,6 +16,8 @@ import {
   assertArticleImageReadiness,
   checkArticleImageReadiness,
   readArticleImageManifest,
+  usedVerifiedArticleImages,
+  findArticleImages,
   type ArticleImageManifest,
 } from "./article-image-readiness";
 import { classifyArticleImageSrc } from "@/lib/article-media";
@@ -275,7 +279,7 @@ async function loadAndCheckImageManifests(
     const result = checkArticleImageReadiness({ manifest, finalJson: finals[index]! });
     const summary = result.summary;
     console.log(
-      `Image readiness ${manifest.article_slug}: expected=${summary.expected} verified=${summary.verified} uploaded=${summary.uploaded} inserted=${summary.inserted} missing=${summary.missing} accepted_missing=${summary.acceptedMissing}`
+      `Image readiness ${manifest.article_slug}: expected=${summary.expected} verified=${summary.verified} uploaded=${summary.uploaded} inserted=${summary.inserted} unused=${summary.unused} missing=${summary.missing} accepted_missing=${summary.acceptedMissing}`
     );
     assertArticleImageReadiness(result, mediaFile);
     loaded.push({ file: mediaFile, manifest });
@@ -284,18 +288,18 @@ async function loadAndCheckImageManifests(
   return loaded;
 }
 
-async function syncImageProvenance(
+export async function syncImageProvenance(
   manifests: LoadedImageManifest[],
-  rowsBySlug: Map<string | null, ArticleRow>
+  rowsBySlug: Map<string | null, ArticleRow>,
+  sb = supabaseAdmin(),
 ): Promise<void> {
-  const sb = supabaseAdmin();
   let synced = 0;
 
   for (const loaded of manifests) {
     const article = rowsBySlug.get(loaded.manifest.article_slug);
     if (!article) throw new Error(`Cannot sync image provenance: article ${loaded.manifest.article_slug} was not imported`);
 
-    for (const entry of loaded.manifest.entries) {
+    for (const entry of usedVerifiedArticleImages(loaded.manifest, article.content_md ?? "")) {
       if (entry.status !== "verified" || !entry.original_image_url || !entry.public_url) {
         continue;
       }
@@ -331,12 +335,13 @@ async function syncImageProvenance(
       if (lookupError) throw new Error(`Failed to read image provenance for ${entry.label}: ${lookupError.message}`);
 
       const operation = existing?.id
-        ? sb.from("article_source_images").update(payload).eq("id", existing.id)
+        ? sb.from("article_source_images").update(payload).eq("id", existing.id).eq("article_id", article.id)
         : sb.from("article_source_images").insert(payload);
       const { error } = await operation;
       if (error) throw new Error(`Failed to sync image provenance for ${entry.label}: ${error.message}`);
       synced += 1;
     }
+    await removeUnusedArticleImageProvenance(article.id, article.content_md ?? "", sb);
   }
 
   if (synced) console.log(`Synced ${synced} article_source_images provenance row${synced === 1 ? "" : "s"}.`);
@@ -385,8 +390,8 @@ async function verifyRoute(url: string, title: string, finalJson: ArticleFinal) 
       }
 
       // End-to-end media checks on the rendered page when the final claims media.
-      const { findYouTubeDirectives, findMarkdownImages } = await import("@/lib/article-media");
-      const { extractArticleBlockImageRefs, parseArticleContentBlocks } = await import("@/lib/article-blocks");
+      const { findYouTubeDirectives } = await import("@/lib/article-media");
+      const { parseArticleContentBlocks } = await import("@/lib/article-blocks");
       const youtube = findYouTubeDirectives(finalJson.content_md);
       for (const directive of youtube) {
         if (!directive.videoId) continue;
@@ -400,15 +405,7 @@ async function verifyRoute(url: string, title: string, finalJson: ArticleFinal) 
         }
       }
 
-      const images = [
-        ...findMarkdownImages(finalJson.content_md),
-        ...extractArticleBlockImageRefs(finalJson.content_md).map((image) => ({
-          alt: image.alt,
-          src: image.src,
-          raw: image.src,
-          index: 0,
-        })),
-      ];
+      const images = findArticleImages(finalJson.content_md);
       for (const image of images) {
         if (image.src.startsWith("/")) {
           // Next may encode paths; check the path segment at least.
@@ -497,7 +494,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}

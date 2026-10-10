@@ -54,7 +54,7 @@ async function main() {
   const result = checkArticleImageReadiness({ manifest, finalJson });
   const summary = result.summary;
   console.log(
-    `Article image readiness: expected=${summary.expected} verified=${summary.verified} uploaded=${summary.uploaded} inserted=${summary.inserted} missing=${summary.missing} accepted_missing=${summary.acceptedMissing}`
+    `Article image readiness: expected=${summary.expected} verified=${summary.verified} uploaded=${summary.uploaded} inserted=${summary.inserted} unused=${summary.unused} missing=${summary.missing} accepted_missing=${summary.acceptedMissing}`
   );
   assertArticleImageReadiness(result, manifestPath);
   console.log("Article image readiness passed.");

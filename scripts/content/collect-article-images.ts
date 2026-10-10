@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import sharp from "sharp";
 
@@ -15,6 +16,7 @@ import {
   type ArticleImageEntry,
   type ArticleImageManifest,
   readArticleImageManifest,
+  usedVerifiedArticleImages,
 } from "./article-image-readiness";
 
 type CliOptions = {
@@ -153,6 +155,12 @@ async function saveFinal(filePath: string, finalJson: ArticleFinal): Promise<voi
   await writeFile(filePath, `${JSON.stringify(finalJson, null, 2)}\n`);
 }
 
+export function collectableArticleImages(manifest: ArticleImageManifest, finalJson: ArticleFinal | null): ArticleImageEntry[] {
+  // Without a final, image_upload collects every approved candidate before writing.
+  const selected = finalJson ? usedVerifiedArticleImages(manifest, finalJson.content_md) : manifest.entries.filter(entry => entry.status === "verified");
+  return selected.filter(entry => !(entry.public_url?.startsWith("/") && classifyArticleImageSrc(entry.public_url, manifest.article_slug).ok));
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const manifestPath = path.resolve(process.cwd(), options.manifest);
@@ -165,22 +173,16 @@ async function main() {
     );
   }
 
-  const isCanonicalLocalAsset = (entry: ArticleImageEntry) =>
-    Boolean(
-      entry.public_url?.startsWith("/") &&
-        classifyArticleImageSrc(entry.public_url, manifest.article_slug).ok,
-    );
-  const collectable = manifest.entries.filter(
-    (entry) => entry.status === "verified" && !isCanonicalLocalAsset(entry),
-  );
+  const selected = finalJson ? usedVerifiedArticleImages(manifest, finalJson.content_md) : manifest.entries.filter(entry => entry.status === "verified");
+  const collectable = collectableArticleImages(manifest, finalJson);
 
   console.log(
     `Article image plan: type=${manifest.visual_type} expected=${manifest.expected_count} verified=${manifest.entries.filter((entry) => entry.status === "verified").length} promotable=${collectable.length}`
   );
   for (const entry of manifest.entries) {
-    const action = entry.status !== "verified"
+    const action = !selected.includes(entry)
       ? "skip"
-      : isCanonicalLocalAsset(entry)
+      : entry.public_url?.startsWith("/") && classifyArticleImageSrc(entry.public_url, manifest.article_slug).ok
         ? "preserve-local"
         : entry.public_url
           ? "reuse"
@@ -225,7 +227,7 @@ async function main() {
 
       const previousPublicUrl = entry.public_url ?? null;
       if (finalJson && previousPublicUrl && previousPublicUrl !== targetPublicUrl) {
-        if (!finalJson.content_md.includes(previousPublicUrl)) {
+        if (!usedVerifiedArticleImages(manifest, finalJson.content_md).includes(entry)) {
           throw new Error(`${entry.label}: final.json does not contain the managed-dev public URL`);
         }
       }
@@ -261,7 +263,9 @@ async function main() {
   console.log(`Article image collection complete: uploaded=${uploaded} manifest=${manifestPath}`);
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exitCode = 1;
+  });
+}

@@ -20,7 +20,7 @@ The runtime runs: research → research review → image selection → image rev
 | research_review | A structured decision with concrete evidence findings. No artifact edits | Record approval or ask for bounded focused research |
 | images | `media.json` with verified source matches or documented missing targets. No uploads and no self-approved omissions | Launch image review |
 | image_review | A structured decision, exact `accepted_missing` IDs and any source or placement findings. No artifact edits | Apply justified omissions, upload approved media, verify hosted bytes |
-| writing | `final.json`. Media placement headings can change; approved sources, statuses and URLs can't | Launch a separate editorial review |
+| writing | `final.json`. Media placement headings can change; approved sources, statuses and URLs can't | Sync placed images' headings and alt text, then launch a separate editorial review |
 | editorial_review | A structured decision with draft quotes, assessments for each check and per-FAQ added-value evidence. No artifact edits | Write `editorial-review.md`, route one bounded correction and enforce technical checks |
 
 - The stage prompt gives you the exact workspace, title, slug, sources and feedback. Use those paths even when an interactive skill shows a different workspace convention.
@@ -67,7 +67,8 @@ How to review:
 
 - In the unattended workflow, each of research, images and writing gets one substantive correction, followed by review.
 - Technical failures have bounded retry handling.
-- One separate narrow correction per copy or image validator is still available after the substantive review.
+- The copy validator has one separate narrow correction after the substantive review. Image defects use the remaining writing revision.
+- After every writing pass and localized edit, code syncs placed images' headings and alt text. Unused verified images keep their URLs and evidence, pass readiness and stay out of promotion and provenance sync. Image readiness runs locally even with `BLOXODES_CI_QA=1`; unresolved defects block locally once the writing revision is exhausted.
 - Exhausted review or evidence problems need attention. They don't requeue themselves forever.
 
 **Provider and operational failures.**

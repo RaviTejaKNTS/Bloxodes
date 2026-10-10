@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { load } from "cheerio";
+import { lexer, walkTokens } from "marked";
 
 export function normalizeImageAlt(value: string): string {
   // Decode entities as text, never interpret literal angle brackets as markup.
@@ -53,11 +54,57 @@ export function acceptArticleImageOmission(entry: ArticleImageEntry, summary: st
   entry.acceptance_note = summary;
 }
 
+export function findArticleImages(content: string) {
+  return [
+    ...findMarkdownImages(stripArticleContentBlocks(content)),
+    ...extractArticleBlockImageRefs(content),
+  ];
+}
+
+export function canonicalArticleMediaUrl(value: string): string {
+  return value.trim()
+    .replaceAll("https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/", "https://media.bloxodes.com/storage/v1/object/public/")
+    .replaceAll("https://database.bloxodes.com/storage/v1/object/public/", "https://media.bloxodes.com/storage/v1/object/public/");
+}
+
+export function usedVerifiedArticleImages(manifest: ArticleImageManifest, content: string): ArticleImageEntry[] {
+  const usedUrls = new Set(findArticleImages(content).map(image => canonicalArticleMediaUrl(image.src)));
+  return manifest.entries.filter(entry => entry.status === "verified" && usedUrls.has(canonicalArticleMediaUrl(entry.public_url ?? "")));
+}
+
+export function articleImagePlacementSections(content: string, src: string): string[][] {
+  const sections: string[][] = [];
+  const headings: Array<{ depth: number; text: string }> = [];
+  walkTokens(lexer(content), token => {
+    if (token.type === "heading") {
+      while (headings.length && headings[headings.length - 1]!.depth >= token.depth) headings.pop();
+      if (token.depth === 1) headings.length = 0;
+      else headings.push({ depth: token.depth, text: token.text });
+    }
+    if (token.type === "image" && token.href.trim() === src) sections.push(headings.map(heading => heading.text));
+    if (token.type === "code") {
+      for (const image of extractArticleBlockImageRefs(token.raw)) {
+        if (image.src === src) sections.push(headings.map(heading => heading.text));
+      }
+    }
+  });
+  return sections;
+}
+
+export function articleImagePlacementHeadings(content: string, src: string): Array<string | null> {
+  return articleImagePlacementSections(content, src).map(headings => headings[headings.length - 1] ?? null);
+}
+
+export function articleImagePlacementHeading(content: string, src: string): string | null {
+  return articleImagePlacementHeadings(content, src)[0] ?? null;
+}
+
 export type ArticleImageReadinessSummary = {
   expected: number;
   verified: number;
   uploaded: number;
   inserted: number;
+  unused: number;
   missing: number;
   acceptedMissing: number;
 };
@@ -125,29 +172,6 @@ function normalizeHeading(value: string): string {
     .toLowerCase();
 }
 
-function sectionForHeading(content: string, heading: string): string | null {
-  const lines = content.split(/\r?\n/);
-  const target = normalizeHeading(heading);
-
-  for (let index = 0; index < lines.length; index += 1) {
-    const match = /^(#{2,6})\s+(.+?)\s*$/.exec(lines[index] ?? "");
-    if (!match || normalizeHeading(match[2] ?? "") !== target) continue;
-
-    const level = match[1]!.length;
-    let end = lines.length;
-    for (let cursor = index + 1; cursor < lines.length; cursor += 1) {
-      const next = /^(#{2,6})\s+/.exec(lines[cursor] ?? "");
-      if (next && next[1]!.length <= level) {
-        end = cursor;
-        break;
-      }
-    }
-    return lines.slice(index, end).join("\n");
-  }
-
-  return null;
-}
-
 export function parseArticleImageManifest(value: unknown, label = "media.json"): ArticleImageManifest {
   if (!isRecord(value)) throw new Error(`${label} must contain a JSON object`);
   if (value.schema !== 1) throw new Error(`${label} schema must be 1`);
@@ -179,10 +203,7 @@ export function checkArticleImageReadiness(params: {
 }): ArticleImageReadinessResult {
   const { manifest, finalJson, env } = params;
   const errors: string[] = [];
-  const images = [
-    ...findMarkdownImages(stripArticleContentBlocks(finalJson.content_md)),
-    ...extractArticleBlockImageRefs(finalJson.content_md),
-  ];
+  const images = findArticleImages(finalJson.content_md);
   const approvedUrls = new Set(manifest.entries.filter(entry => entry.status === "verified").map(entry => entry.public_url?.trim()).filter(Boolean));
   const rejectedUrls = new Set(manifest.entries.filter(entry => entry.status !== "verified").flatMap(entry => [entry.public_url, entry.original_image_url, ...(entry.rejected_urls ?? [])]).filter(Boolean));
   for (const image of images) {
@@ -197,6 +218,7 @@ export function checkArticleImageReadiness(params: {
   let verified = 0;
   let uploaded = 0;
   let inserted = 0;
+  let unused = 0;
   let missing = 0;
   let acceptedMissing = 0;
 
@@ -257,13 +279,15 @@ export function checkArticleImageReadiness(params: {
     }
 
     verified += 1;
+    const publicUrl = hasText(entry.public_url) ? entry.public_url.trim() : "";
+    const placed = images.filter(image => image.src === publicUrl);
+    if (!placed.length) unused += 1;
     if (!isHttpUrl(entry.source_page_url)) errors.push(`${label}: source_page_url must be an HTTP URL`);
     if (!isHttpUrl(entry.original_image_url)) errors.push(`${label}: original_image_url must be an HTTP URL`);
     if (!hasText(entry.match_evidence, 12)) errors.push(`${label}: match_evidence is too weak`);
     if (!hasText(entry.rights_note, 8)) errors.push(`${label}: rights_note is required`);
     if (!hasText(entry.alt, 8)) errors.push(`${label}: useful alt text is required`);
 
-    const publicUrl = hasText(entry.public_url) ? entry.public_url.trim() : "";
     const uploadedPath = hasText(entry.uploaded_path) ? entry.uploaded_path.trim() : "";
     const isCanonicalLocalAsset =
       manifest.visual_type === "items" &&
@@ -274,7 +298,8 @@ export function checkArticleImageReadiness(params: {
     } else if (isHttpUrl(publicUrl)) {
       uploaded += 1;
       const classified = classifyArticleImageSrc(publicUrl, manifest.article_slug, env);
-      if (!classified.ok) errors.push(`${label}: public_url is not Bloxodes-hosted (${classified.reason})`);
+      // Unused development assets retain their URL when the used assets are promoted.
+      if (placed.length && !classified.ok) errors.push(`${label}: public_url is not Bloxodes-hosted (${classified.reason})`);
       if (publicUrls.has(publicUrl)) errors.push(`${label}: public_url is reused by another visual`);
       publicUrls.add(publicUrl);
     }
@@ -284,20 +309,13 @@ export function checkArticleImageReadiness(params: {
     if (!Number.isInteger(entry.width) || Number(entry.width) < 1) errors.push(`${label}: width is required`);
     if (!Number.isInteger(entry.height) || Number(entry.height) < 1) errors.push(`${label}: height is required`);
 
-    const placed = images.find((image) => image.src === publicUrl);
-    if (!placed) {
-      errors.push(`${label}: hosted image is not inserted in content_md`);
-      continue;
-    }
+    if (!placed.length) continue;
     inserted += 1;
-    if (hasText(entry.alt) && normalizeImageAlt(placed.alt) !== normalizeImageAlt(entry.alt)) {
-      errors.push(`${label}: content_md alt text does not match media.json`);
+    const sections = articleImagePlacementSections(finalJson.content_md, publicUrl);
+    if (sections.length !== placed.length || sections.some(headings => !headings.length)) {
+      errors.push(`${label}: image is not inside a heading section for every occurrence`);
     }
-
-    const section = sectionForHeading(finalJson.content_md, entry.placement_heading);
-    if (!section) {
-      errors.push(`${label}: placement heading not found: ${entry.placement_heading}`);
-    } else if (!section.includes(publicUrl)) {
+    if (!sections.some(headings => headings.some(heading => normalizeHeading(heading) === normalizeHeading(entry.placement_heading)))) {
       errors.push(`${label}: image is not inside its ${entry.placement_heading} section`);
     }
   }
@@ -307,6 +325,7 @@ export function checkArticleImageReadiness(params: {
     verified,
     uploaded,
     inserted,
+    unused,
     missing,
     acceptedMissing,
   };
