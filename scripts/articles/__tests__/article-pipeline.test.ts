@@ -159,7 +159,7 @@ test("model stages receive no database, queue, release or unrelated integration 
 });
 test("quiet process is allowed to finish; only the runtime deadline stops it", async () => {
   const runDir = await dir();
-  const r = await runStageCommand({ bin: process.execPath, args: ["-e", "setTimeout(()=>console.log('finished'),150)"], cwd: runDir, env: process.env, log: path.join(runDir, "quiet.log"), timeoutMs: 5000 });
+  const r = await runStageCommand({ bin: process.execPath, args: ["-e", "setTimeout(()=>require('fs').writeSync(1,'finished'),150)"], cwd: runDir, env: process.env, log: path.join(runDir, "quiet.log"), timeoutMs: 5000 });
   assert.equal(r.code, 0); assert.match(r.tail, /finished/);
   await assert.rejects(runStageCommand({ bin: process.execPath, args: ["-e", "setInterval(()=>{},1000)"], cwd: runDir, env: process.env, log: path.join(runDir, "deadline.log"), timeoutMs: 100 }), /deadline/);
 });
@@ -176,13 +176,13 @@ test("provider failure retains bounded recovery rather than launching an unrestr
   const runDir = await dir(), attemptDir = path.join(runDir, 'attempt');
   await mkdir(path.join(runDir, 'content')); await mkdir(attemptDir);
   const codex = path.join(runDir, 'codex.cjs'), grok = path.join(runDir, 'grok.cjs');
-  await writeFile(codex, `#!/usr/bin/env node\nconsole.log(JSON.stringify({type:'error',message:'429 rate limit'}));process.exitCode=1;\n`, { mode: 0o700 });
+  await writeFile(codex, `#!/usr/bin/env node\nrequire('fs').writeSync(1,JSON.stringify({type:'error',message:'429 rate limit'}));process.exitCode=1;\n`, { mode: 0o700 });
   await writeFile(grok, `#!/usr/bin/env node\nconst fs=require('fs');fs.writeFileSync('brief.md','Research status: ready_for_review\\n');console.error('provider diagnostic');console.log(JSON.stringify({structured_output:${JSON.stringify(pass())}}));\n`, { mode: 0o700 });
   const runtime: StageRuntimeOptions = { worktree: process.cwd(), runDir, deadline: deadline(), stageTimeoutMs: 5000, codexBin: codex, model: 'gpt-5.6-luna', reasoning: 'max', grokFallback: true, grokBin: grok, grokModel: 'grok-4.5', env: { ...process.env, SUPABASE_URL: 'https://test.supabase.co' }, baseUrl: 'http://localhost:3000' };
   await assert.rejects(executeArticleStage(runtime, 'research', { job, feedback: '' } as PipelineState, attemptDir), /Grok fallback withheld/);
   assert.equal(runtime.modelAttempts?.length, 1);
   await assert.rejects(readFile(path.join(runDir, 'content/brief.md')), { code: 'ENOENT' });
-  await writeFile(codex, `#!/usr/bin/env node\nconsole.log(JSON.stringify({type:'item.completed',item:{output:'source returned 429'}}));process.exitCode=1;\n`, { mode: 0o700 });
+  await writeFile(codex, `#!/usr/bin/env node\nrequire('fs').writeSync(1,JSON.stringify({type:'item.completed',item:{output:'source returned 429'}}));process.exitCode=1;\n`, { mode: 0o700 });
   runtime.env.ARTICLE_STAGE_RESEARCH_REVIEW_PROVIDER = 'codex';
   await assert.rejects(executeArticleStage(runtime, 'research_review', { job, feedback: '' } as PipelineState, attemptDir), /Codex research_review exited/);
 });

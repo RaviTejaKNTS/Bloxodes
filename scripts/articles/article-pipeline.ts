@@ -93,15 +93,17 @@ export async function ownershipSnapshot(runDir: string) {
     identity: await optionalText(path.join(runDir, "game-identity.json")),
   };
 }
-const controllerFileForStage: Partial<Record<Stage, ControllerFile>> = {
-  research_review: "game-identity.json", image_review: "content/media.json", editorial_review: "content/final.json",
+const controllerFilesForStage: Partial<Record<Stage, ControllerFile[]>> = {
+  research_review: ["game-identity.json"], image_review: ["content/media.json"],
+  writing: ["content/media.json"], editorial_review: ["content/final.json", "content/media.json"],
 };
 export async function saveArticleControllerJson(runDir: string, state: PipelineState, stage: Stage, before: Awaited<ReturnType<typeof ownershipSnapshot>>, file: ControllerFile, value: unknown) {
   const briefHash = before.hashes["brief.md"];
-  if (!briefHash || controllerFileForStage[stage] !== file || (state.inFlight && state.inFlight !== stage)) throw new ArtifactOwnershipFailure("Invalid controller write intent.");
+  if (!briefHash || !controllerFilesForStage[stage]?.includes(file) || (state.inFlight && state.inFlight !== stage)) throw new ArtifactOwnershipFailure("Invalid controller write intent.");
   if (file === "game-identity.json" && (value as any)?.approved_brief_hash !== briefHash) throw new ArtifactOwnershipFailure("Controller identity is not bound to the approved brief.");
   const bytes = `${JSON.stringify(value, null, 2)}\n`;
-  state.controllerWrites = { stage, briefHash, files: { [file]: { bytes, hash: createHash("sha256").update(bytes).digest("hex") } } };
+  const retained = state.controllerWrites?.stage === stage && state.controllerWrites.briefHash === briefHash ? state.controllerWrites.files : {};
+  state.controllerWrites = { stage, briefHash, files: { ...retained, [file]: { bytes, hash: createHash("sha256").update(bytes).digest("hex") } } };
   await saveJson(path.join(runDir, "state.json"), state);
   // Persist the exact intent before replacing an input protected by the stage snapshot.
   const target = path.join(runDir, file);
@@ -113,17 +115,19 @@ export async function assertStageOwnership(runDir: string, stage: Stage, before:
   const after = await ownershipSnapshot(runDir);
   const allowed = stage === "research" ? ["brief.md"] : ["images", "image_upload"].includes(stage) ? ["media.json"] : ["writing", "import_verify"].includes(stage) ? ["final.json", "media.json"] : [];
   if (controllerWrites?.stage === stage && controllerWrites.briefHash === before.hashes["brief.md"] && after.hashes["brief.md"] === controllerWrites.briefHash) {
-    const file = controllerFileForStage[stage];
-    const intent = file && controllerWrites.files[file];
-    if (intent && createHash("sha256").update(intent.bytes).digest("hex") === intent.hash) {
-      if (file === "game-identity.json") {
-        try {
-          if (after.identity === intent.bytes && JSON.parse(intent.bytes).approved_brief_hash === controllerWrites.briefHash) after.identity = before.identity;
-        } catch { /* Reject malformed identity. */ }
-      } else if (file && after.hashes[path.basename(file)] === intent.hash) {
-        const name = path.basename(file);
-        if (before.hashes[name] === undefined) delete after.hashes[name];
-        else after.hashes[name] = before.hashes[name];
+    for (const file of controllerFilesForStage[stage] ?? []) {
+      const intent = controllerWrites.files[file];
+      if (intent && createHash("sha256").update(intent.bytes).digest("hex") === intent.hash) {
+        if (file === "game-identity.json") {
+          try {
+            if (after.identity === intent.bytes && JSON.parse(intent.bytes).approved_brief_hash === controllerWrites.briefHash) after.identity = before.identity;
+          } catch { /* Reject malformed identity. */ }
+        } else if (file && after.hashes[path.basename(file)] === intent.hash) {
+          const name = path.basename(file);
+          if (file === "content/media.json") after.media = before.media;
+          if (before.hashes[name] === undefined) delete after.hashes[name];
+          else after.hashes[name] = before.hashes[name];
+        }
       }
     }
   }
@@ -175,7 +179,7 @@ export function applyDecision(state: PipelineState, decision: Decision, maxRevis
   if (decision.status === "needs_revision") {
     const target = decision.repair_stage!;
     if (!allowedRepairs[stage]?.includes(target)) throw new StageFailure(`${stage} cannot route a repair to ${target}.`);
-    const technical = stage === "copy_check" || stage === "image_check";
+    const technical = stage === "copy_check" || (stage === "image_check" && target !== "writing");
     const used = technical ? (state.technicalRepairs[stage] ?? 0) : state.revisions[target];
     if (used >= maxRevisions) { state.status = "blocked"; state.feedback = `${technical ? "Technical correction" : "Review"} budget exhausted for ${target}. ${state.feedback}`; return; }
     if (technical) state.technicalRepairs[stage] = used + 1;

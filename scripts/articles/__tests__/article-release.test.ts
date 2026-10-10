@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
-import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import sharp from "sharp";
 
 import type { ArticleImageManifest } from "../../content/article-image-readiness";
 import {
   assertProductionSnapshot,
+  downloadCoverSource,
   parseReleaseOptions,
   pickCoverSourceEntry,
   productionChildEnvironment,
@@ -16,6 +18,7 @@ import {
   type ProductionCredentials,
 } from "../release-completed-articles";
 import { artifactHashes } from "../article-pipeline";
+import { fetchWithTransientRetries, TransientHttpError } from "../../shared/transient-http";
 
 const QUEUE_ID = "123e4567-e89b-42d3-a456-426614174000";
 const SLUG = "tested-article";
@@ -179,8 +182,65 @@ test("production child environment removes development credentials", () => {
   assert.equal(env.NODE_ENV, "production");
 });
 
-test("release uses the first verified image as the deterministic cover source", () => {
-  assert.equal(pickCoverSourceEntry(manifest())?.id, "first");
+test("release uses the first used verified image as the deterministic cover source", () => {
+  const input = manifest();
+  input.entries.unshift({ ...input.entries[0]!, id: "unused", public_url: "https://development.supabase.co/unused.webp" });
+  const content = `## First\n\n![First image](${IMAGE_URL})`;
+  assert.equal(pickCoverSourceEntry(input, content)?.id, "first");
+  assert.equal(pickCoverSourceEntry(input, "Written instructions only."), null);
+});
+
+test("cover download skips unused images and passes a used source to the importer", async t => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "article-cover-source-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const input = manifest();
+  input.entries.unshift({ ...input.entries[0]!, id: "unused", public_url: "https://development.supabase.co/unused.webp" });
+  const finalJson = { title: "Tested article", slug: SLUG, content_md: `## First\n\n![First image](${IMAGE_URL})` };
+  const bytes = await sharp({ create: { width: 1, height: 1, channels: 3, background: "white" } }).webp().toBuffer();
+  let calls = 0;
+  const fetchSource: typeof fetchWithTransientRetries = async url => {
+    calls += 1;
+    assert.equal(url, IMAGE_URL);
+    return new Response(new Uint8Array(bytes), { headers: { "content-type": "image/webp" } });
+  };
+  const file = await downloadCoverSource({ manifest: input, finalJson }, directory, fetchSource);
+  assert.deepEqual(await readFile(file!), bytes);
+  assert.equal(await downloadCoverSource({ manifest: input, finalJson: { ...finalJson, content_md: "No body images." } }, directory, fetchSource), null);
+  assert.equal(calls, 1);
+});
+
+test("unavailable cover sources return the normal importer fallback", async t => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "article-cover-fallback-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const artifact = { manifest: manifest(), finalJson: { title: "Tested article", slug: SLUG, content_md: `## First\n\n![First image](${IMAGE_URL})` } };
+  const failures: Array<[string, typeof fetchWithTransientRetries]> = [
+    ["404", (url, init) => fetchWithTransientRetries(url, init, { fetchImpl: async () => new Response("Missing", { status: 404 }) })],
+    ["HTTP error response", async () => new Response("Missing", { status: 404, headers: { "content-type": "image/webp" } })],
+    ["transient", async () => { throw new TransientHttpError("Source unavailable"); }],
+    ["bad content type", async () => new Response("HTML", { headers: { "content-type": "text/html" } })],
+    ["empty body", async () => new Response(null, { headers: { "content-type": "image/webp" } })],
+    ["body read failure", async () => new Response(new ReadableStream({ start(controller) { controller.error(new Error("Interrupted body")); } }), { headers: { "content-type": "image/webp" } })],
+  ];
+  for (const [name, fetchSource] of failures) {
+    assert.equal(await downloadCoverSource(artifact, directory, fetchSource), null, name);
+  }
+});
+
+test("corrupt used body image bytes fail cover decoding and never use the importer fallback", async t => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "article-cover-corrupt-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const artifact = { manifest: manifest(), finalJson: { title: "Tested article", slug: SLUG, content_md: `## First\n\n![First image](${IMAGE_URL})` } };
+  const valid = await sharp({ create: { width: 1, height: 1, channels: 3, background: "white" } }).webp().toBuffer();
+  for (const bytes of [Buffer.from("Broken image"), valid.subarray(0, 12)]) {
+    await assert.rejects(downloadCoverSource(artifact, directory, async () => new Response(new Uint8Array(bytes), { headers: { "content-type": "image/webp" } })), /unsupported image format|corrupt header/i);
+    assert.deepEqual(await readdir(directory), []);
+  }
+});
+
+test("cover staging write failures remain operational failures", async () => {
+  const artifact = { manifest: manifest(), finalJson: { title: "Tested article", slug: SLUG, content_md: `## First\n\n![First image](${IMAGE_URL})` } };
+  const bytes = await sharp({ create: { width: 1, height: 1, channels: 3, background: "white" } }).webp().toBuffer();
+  await assert.rejects(downloadCoverSource(artifact, "/dev/null", async () => new Response(new Uint8Array(bytes), { headers: { "content-type": "image/webp" } })), /ENOTDIR/);
 });
 
 test("production snapshot requires exact content, body images, and provenance", () => {
@@ -221,6 +281,36 @@ test("production snapshot requires exact content, body images, and provenance", 
     manifest: {...input.manifest, entries: input.manifest.entries.map(entry => entry.status === "verified" ? {...entry, public_url: devUrl} : entry)},
     article: {...input.article, content_md: devContent},
   }), /promoted body image is not hosted/);
+});
+
+test("production readback allows unused verified development entries and zero body images", () => {
+  const input = manifest();
+  input.entries[0]!.public_url = `https://development.supabase.co/storage/v1/object/public/media/${input.entries[0]!.uploaded_path}`;
+  const content = "## First\n\nWritten instructions only.";
+  const snapshot = {
+    finalJson: { title: "Tested article", slug: SLUG, content_md: content },
+    manifest: input,
+    article: { id: "article-id", slug: SLUG, title: "Tested article", cover_image: `https://media.bloxodes.com/articles/${SLUG}/cover.webp`, content_md: content, is_published: true },
+    provenance: [],
+  };
+  assert.doesNotThrow(() => assertProductionSnapshot(snapshot));
+});
+
+test("production readback compares only used verified entries, including block-only images", () => {
+  const input = manifest();
+  input.entries.push({ ...input.entries[0]!, id: "unused", label: "Unused image", uploaded_path: `articles/${SLUG}/sources/unused.webp`, public_url: `https://development.supabase.co/storage/v1/object/public/media/articles/${SLUG}/sources/unused.webp` });
+  input.expected_count += 1;
+  const content = ["## First", "", "```tier-list", "schema: 1", "id: weapons", "title: Weapon rankings", "tiers:", "  - rank: S", "    items:", "      - name: Sword", `        image: ${IMAGE_URL}`, "        alt: First image", "```"].join("\n");
+  const snapshot = {
+    finalJson: { title: "Tested article", slug: SLUG, content_md: content },
+    manifest: input,
+    article: { id: "article-id", slug: SLUG, title: "Tested article", cover_image: `https://media.bloxodes.com/articles/${SLUG}/cover.webp`, content_md: content, is_published: true },
+    provenance: [{ public_url: IMAGE_URL, uploaded_path: `articles/${SLUG}/sources/first.webp`, original_url: "https://example.com/first.png" }],
+  };
+  assert.doesNotThrow(() => assertProductionSnapshot(snapshot));
+  assert.throws(() => assertProductionSnapshot({ ...snapshot, provenance: [] }), /provenance rows mismatch/);
+  const unknownContent = content.replace(IMAGE_URL, "https://media.bloxodes.com/unapproved.webp");
+  assert.throws(() => assertProductionSnapshot({ ...snapshot, finalJson: { ...snapshot.finalJson, content_md: unknownContent }, article: { ...snapshot.article, content_md: unknownContent } }), /body image URLs mismatch/);
 });
 
 test("production credentials accept only the canonical production target", async () => {

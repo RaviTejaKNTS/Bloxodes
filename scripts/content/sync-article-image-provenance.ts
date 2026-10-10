@@ -1,8 +1,10 @@
 import "../shared/load-env";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { classifyArticleImageSrc } from "@/lib/article-media";
-import { readArticleImageManifest } from "./article-image-readiness";
+import { canonicalArticleMediaUrl, findArticleImages, readArticleImageManifest, usedVerifiedArticleImages, type ArticleImageManifest } from "./article-image-readiness";
 
 type CliOptions = {
   manifest: string;
@@ -49,35 +51,47 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   assertTargetAllowed(options);
   const manifest = await readArticleImageManifest(options.manifest);
-  const entries = manifest.entries.filter((entry) => {
-    if (entry.status !== "verified" || !entry.public_url) return false;
-    const publicUrl = entry.public_url.trim();
-    return !(publicUrl.startsWith("/") && classifyArticleImageSrc(publicUrl, manifest.article_slug).ok);
-  });
+  await syncArticleImageProvenance(manifest, options);
+}
 
-  for (const entry of entries) {
-    if (
-      !entry.source_page_url ||
-      !entry.original_image_url ||
-      !entry.uploaded_path ||
-      !entry.public_url
-    ) {
-      throw new Error(`${entry.label}: verified provenance is incomplete`);
-    }
-  }
+export async function removeUnusedArticleImageProvenance(articleId: string, content: string, sb = supabaseAdmin()): Promise<void> {
+  const usedUrls = new Set(findArticleImages(content).map(image => canonicalArticleMediaUrl(image.src)));
+  const { data: rows, error: readError } = await sb
+    .from("article_source_images")
+    .select("id,public_url")
+    .eq("article_id", articleId);
+  if (readError) throw new Error(`Failed to read article ${articleId} provenance for cleanup: ${readError.message}`);
+  const staleIds = (rows ?? []).filter(row => !usedUrls.has(canonicalArticleMediaUrl(row.public_url ?? ""))).map(row => row.id);
+  if (!staleIds.length) return;
 
-  const sb = supabaseAdmin();
+  const { error } = await sb
+    .from("article_source_images")
+    .delete()
+    .eq("article_id", articleId)
+    .in("id", staleIds);
+  if (error) throw new Error(`Failed to remove unused article ${articleId} provenance: ${error.message}`);
+}
+
+export async function syncArticleImageProvenance(manifest: ArticleImageManifest, options: Pick<CliOptions, "apply">, sb = supabaseAdmin()) {
   const { data: article, error: articleError } = await sb
     .from("articles")
-    .select("id,slug")
+    .select("id,slug,content_md")
     .eq("slug", manifest.article_slug)
     .maybeSingle();
   if (articleError) throw new Error(`Failed to find article ${manifest.article_slug}: ${articleError.message}`);
   if (!article) throw new Error(`Article ${manifest.article_slug} does not exist in the target environment`);
 
+  const entries = usedVerifiedArticleImages(manifest, article.content_md ?? "").filter(entry =>
+    !(entry.public_url?.startsWith("/") && classifyArticleImageSrc(entry.public_url, manifest.article_slug).ok));
+  for (const entry of entries) {
+    if (!entry.source_page_url || !entry.original_image_url || !entry.uploaded_path || !entry.public_url) {
+      throw new Error(`${entry.label}: verified provenance is incomplete`);
+    }
+  }
+
   console.log(`Article image provenance plan: slug=${manifest.article_slug} rows=${entries.length}`);
   if (!options.apply) {
-    console.log("Dry run only. Add --apply to insert or update article_source_images rows.");
+    console.log("Dry run only. Add --apply to sync article_source_images and remove rows for images absent from this article body.");
     return;
   }
 
@@ -89,7 +103,7 @@ async function main() {
       name: entry.label,
       original_url: entry.original_image_url!,
       uploaded_path: entry.uploaded_path!,
-      public_url: entry.public_url!,
+      public_url: entry.public_url!.trim(),
       alt_text: entry.alt ?? null,
       caption: null,
       context: entry.match_evidence ?? entry.placement_heading,
@@ -109,16 +123,19 @@ async function main() {
     if (lookupError) throw new Error(`Failed to read ${entry.label} provenance: ${lookupError.message}`);
 
     const operation = existing?.id
-      ? sb.from("article_source_images").update(payload).eq("id", existing.id)
+      ? sb.from("article_source_images").update(payload).eq("id", existing.id).eq("article_id", article.id)
       : sb.from("article_source_images").insert(payload);
     const { error } = await operation;
     if (error) throw new Error(`Failed to sync ${entry.label} provenance: ${error.message}`);
   }
 
+  await removeUnusedArticleImageProvenance(article.id, article.content_md ?? "", sb);
   console.log(`Synced ${entries.length} article_source_images row${entries.length === 1 ? "" : "s"}.`);
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exitCode = 1;
+  });
+}

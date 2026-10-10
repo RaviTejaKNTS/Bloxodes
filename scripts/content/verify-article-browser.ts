@@ -2,9 +2,10 @@ import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
-import { extractArticleBlockImageRefs } from "@/lib/article-blocks";
-import { findMarkdownImages, findYouTubeDirectives } from "@/lib/article-media";
+import { findArticleImages } from "./article-image-readiness";
+import { findYouTubeDirectives } from "@/lib/article-media";
 
 import { assertRenderedArticle, launchArticleBrowser } from "./article-browser";
 
@@ -72,20 +73,26 @@ async function main(): Promise<void> {
   const options = parseArgs(process.argv.slice(2));
   const baseUrl = normalizeBaseUrl(options.baseUrl);
   const finals = await Promise.all(options.files.map(readFinal));
-  const { browser, executable } = await launchArticleBrowser();
+  await verifyArticleBrowser(finals, baseUrl);
+}
+
+export async function verifyArticleBrowser(
+  finals: Array<{ title: string; slug: string; content: string }>,
+  baseUrl: string,
+  launchBrowser = launchArticleBrowser,
+  assertArticle = assertRenderedArticle,
+): Promise<void> {
+  const { browser, executable } = await launchBrowser();
   console.log(`Rendered browser: ${executable}`);
   try {
     const page = await browser.newPage();
     for (const finalJson of finals) {
-      const expectedImageSources = [
-        ...findMarkdownImages(finalJson.content).map((image) => image.src),
-        ...extractArticleBlockImageRefs(finalJson.content).map((image) => image.src)
-      ];
+      const expectedImageSources = findArticleImages(finalJson.content).map(image => image.src);
       const expectedYouTubeIds = findYouTubeDirectives(finalJson.content)
         .map((directive) => directive.videoId)
         .filter((videoId): videoId is string => Boolean(videoId));
       const url = `${baseUrl}/articles/${finalJson.slug}`;
-      await assertRenderedArticle(page, {
+      await assertArticle(page, {
         url,
         title: finalJson.title,
         expectedImageSources,
@@ -98,7 +105,9 @@ async function main(): Promise<void> {
   }
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exitCode = 1;
+  });
+}

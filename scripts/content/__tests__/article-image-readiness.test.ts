@@ -2,10 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  articleImagePlacementHeadings,
+  canonicalArticleMediaUrl,
   checkArticleImageReadiness,
   parseArticleImageManifest,
   type ArticleImageManifest,
   acceptArticleImageOmission,
+  usedVerifiedArticleImages,
 } from "../article-image-readiness";
 
 const manifest: ArticleImageManifest = {
@@ -63,6 +66,39 @@ function contentFor(input: ArticleImageManifest): string {
     .join("\n\n");
 }
 
+test("canonical article media URLs mirror only the database trigger replacements and trim whitespace", () => {
+  const suffix = `storage/v1/object/public/media/${manifest.entries[0]!.uploaded_path}`;
+  const canonical = `https://media.bloxodes.com/${suffix}`;
+  for (const host of ["bmwksaykcsndsvgspapz.supabase.co", "database.bloxodes.com", "media.bloxodes.com"]) {
+    assert.equal(canonicalArticleMediaUrl(` \t https://${host}/${suffix}\n `), canonical);
+  }
+  for (const url of [
+    `https://development.supabase.co/${suffix}`,
+    `http://database.bloxodes.com/${suffix}`,
+    "https://database.bloxodes.com/articles/image.webp",
+    "/games/sword.webp",
+    "",
+  ]) assert.equal(canonicalArticleMediaUrl(` ${url} `), url);
+});
+
+test("used verified images match canonical database body URLs in both directions without changing the manifest", () => {
+  const input = structuredClone(manifest);
+  const canonical = input.entries[0]!.public_url!;
+  for (const host of ["bmwksaykcsndsvgspapz.supabase.co", "database.bloxodes.com"]) {
+    const legacy = canonical.replace("media.bloxodes.com", host);
+    for (const [manifestUrl, bodyUrl] of [[legacy, canonical], [canonical, legacy]]) {
+      input.entries[0]!.public_url = ` ${manifestUrl} `;
+      const before = structuredClone(input);
+      const content = `## School\n\n![School landmark](${bodyUrl})`;
+      assert.deepEqual(usedVerifiedArticleImages(input, content).map(entry => entry.id), [input.entries[0]!.id]);
+      assert.deepEqual(input, before);
+    }
+  }
+  input.entries[0]!.public_url = canonical;
+  const unrelated = canonical.replace("media.bloxodes.com", "development.supabase.co");
+  assert.deepEqual(usedVerifiedArticleImages(input, `![School landmark](${unrelated})`), []);
+});
+
 test("passes a complete exact-match location image set", () => {
   const result = checkArticleImageReadiness({
     manifest,
@@ -75,6 +111,7 @@ test("passes a complete exact-match location image set", () => {
     verified: 2,
     uploaded: 2,
     inserted: 2,
+    unused: 0,
     missing: 0,
     acceptedMissing: 0,
   });
@@ -267,4 +304,77 @@ test("structured-block images use verified placement and cannot reference reject
   acceptArticleImageOmission(entry, "Rejected because the screenshot shows another location.");
   const result = checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md: body } });
   assert.equal(result.ready, false); assert.match(result.errors.join("\n"), /omitted or rejected image/);
+});
+
+test("unused verified images permit zero body images and later reinsertion", () => {
+  const input = structuredClone(manifest);
+  for (const env of [{}, { BLOXODES_CI_QA: "1" }]) {
+    const result = checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md: "Written instructions without images." }, env });
+    assert.equal(result.ready, true);
+    assert.equal(result.summary.unused, 2);
+    assert.equal(result.summary.verified, 2);
+    assert.equal(result.summary.acceptedMissing, 0);
+    assert.equal(checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md: contentFor(input) }, env }).ready, true);
+  }
+});
+
+test("unused development images pass after used images are promoted", () => {
+  const input = structuredClone(manifest);
+  input.entries[1]!.public_url = `https://development.supabase.co/storage/v1/object/public/media/${input.entries[1]!.uploaded_path}`;
+  const content_md = `## ${input.entries[0]!.placement_heading}\n\n![${input.entries[0]!.alt}](${input.entries[0]!.public_url})`;
+  const result = checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md }, env: { SUPABASE_URL: "https://database.bloxodes.com" } });
+  assert.equal(result.ready, true, result.errors.join("\n"));
+  assert.equal(result.summary.unused, 1);
+});
+
+test("each duplicate placement needs a heading and the recorded heading can match either occurrence", () => {
+  const input = structuredClone(manifest);
+  input.entries = [input.entries[0]!]; input.expected_count = 1;
+  const entry = input.entries[0]!;
+  const image = `![${entry.alt}](${entry.public_url})`;
+  const check = (content_md: string) => checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md } });
+  assert.equal(check(`## ${entry.placement_heading}\n\n${image}\n\n## Upgrade\n\n${image}`).ready, true);
+  entry.placement_heading = "Upgrade";
+  assert.equal(check(`## Recipe\n\n${image}\n\n## Upgrade\n\n${image}`).ready, true);
+  assert.equal(check(`${image}\n\n## Upgrade\n\n${image}`).ready, false);
+  assert.equal(check(`## Recipe\n\n${image}\n\n## Other\n\n${image}`).ready, false);
+});
+
+test("placements accept ancestor sections while reconciliation keeps the nearest heading", () => {
+  const input = structuredClone(manifest);
+  input.entries = [input.entries[0]!]; input.expected_count = 1;
+  const entry = input.entries[0]!;
+  entry.placement_heading = "Evolution";
+  const image = `![${entry.alt}](${entry.public_url})`;
+  const block = ["```tier-list", "schema: 1", "id: weapons", "title: Weapons ranked", "tiers:", "  - rank: S", "    items:", "      - name: Sword", `        image: ${entry.public_url}`, `        alt: ${entry.alt}`, "```"].join("\n");
+  for (const placed of [image, block]) {
+    const content_md = `## Evolution\n\n### Recipe\n\n#### Requirements\n\n${placed}`;
+    const result = checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md } });
+    assert.equal(result.ready, true, result.errors.join("\n"));
+    assert.deepEqual(articleImagePlacementHeadings(content_md, entry.public_url!), ["Requirements"]);
+    const sibling = `## Evolution\n\n### Recipe\n\n## Upgrade\n\n### Requirements\n\n${placed}`;
+    assert.equal(checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md: sibling } }).ready, false);
+  }
+});
+
+test("an H1 clears all ancestor sections for every occurrence", () => {
+  const input = structuredClone(manifest);
+  input.entries = [input.entries[0]!]; input.expected_count = 1;
+  const entry = input.entries[0]!;
+  const image = `![${entry.alt}](${entry.public_url})`;
+  const content_md = `## ${entry.placement_heading}\n\n${image}\n\n# New article\n\n${image}`;
+  const result = checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md } });
+  assert.equal(result.ready, false);
+  assert.match(result.errors.join("\n"), /heading section for every occurrence/);
+  assert.deepEqual(articleImagePlacementHeadings(content_md, entry.public_url!), [entry.placement_heading, null]);
+});
+
+test("a plain URL in the planned section cannot cover an image outside all headings", () => {
+  const input = structuredClone(manifest);
+  input.entries = [input.entries[0]!]; input.expected_count = 1;
+  const entry = input.entries[0]!;
+  const content_md = `![${entry.alt}](${entry.public_url})\n\n### ${entry.placement_heading}\n\nAudit URL: ${entry.public_url}`;
+  const result = checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md } });
+  assert.equal(result.ready, false);
+  assert.match(result.errors.join("\n"), /image is not inside/);
 });

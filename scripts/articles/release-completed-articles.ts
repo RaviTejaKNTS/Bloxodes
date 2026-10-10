@@ -11,17 +11,20 @@ import { spawn } from "node:child_process";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { load } from "cheerio";
 import { parse as parseDotenv } from "dotenv";
+import sharp from "sharp";
 
-import { classifyArticleImageSrc, findMarkdownImages } from "@/lib/article-media";
+import { classifyArticleImageSrc } from "@/lib/article-media";
 import {
   assertArticleImageReadiness,
   checkArticleImageReadiness,
   readArticleImageManifest,
+  findArticleImages,
+  usedVerifiedArticleImages,
   type ArticleImageEntry,
   type ArticleImageManifest,
 } from "../content/article-image-readiness";
 import { CANONICAL_MEDIA_ORIGIN } from "../shared/storage-public-url";
-import { fetchWithTransientRetries, TransientHttpError } from "../shared/transient-http";
+import { fetchWithTransientRetries } from "../shared/transient-http";
 import { revalidatePublishedContent } from "../shared/revalidate-published-content";
 import { artifactHashes, type PipelineState } from "./article-pipeline";
 import {
@@ -467,8 +470,8 @@ export async function readReleaseArtifact(
   return { row, finalPath, mediaPath, finalJson, manifest };
 }
 
-export function pickCoverSourceEntry(manifest: ArticleImageManifest): ArticleImageEntry | null {
-  return manifest.entries.find((entry) => entry.status === "verified" && Boolean(entry.public_url)) ?? null;
+export function pickCoverSourceEntry(manifest: ArticleImageManifest, content: string): ArticleImageEntry | null {
+  return usedVerifiedArticleImages(manifest, content)[0] ?? null;
 }
 
 function normalizedSet(values: string[]): string[] {
@@ -506,7 +509,7 @@ export function assertProductionSnapshot(params: {
     throw new Error(`${finalJson.slug}: production cover_image is missing or not hosted on ${CANONICAL_MEDIA_ORIGIN}.`);
   }
 
-  const verifiedEntries = manifest.entries.filter((entry) => entry.status === "verified");
+  const verifiedEntries = usedVerifiedArticleImages(manifest, finalJson.content_md);
   const expectedBodyUrls = verifiedEntries.map((entry) => entry.public_url?.trim() || "");
   if (expectedBodyUrls.some((value) => !value)) {
     throw new Error(`${finalJson.slug}: verified manifest entry is missing public_url after promotion.`);
@@ -518,7 +521,7 @@ export function assertProductionSnapshot(params: {
     }
   }
   assertSameValues(
-    findMarkdownImages(article.content_md ?? "").map((image) => image.src),
+    findArticleImages(article.content_md ?? "").map((image) => image.src),
     expectedBodyUrls,
     `${finalJson.slug} body image URLs`,
   );
@@ -561,31 +564,32 @@ async function verifyProductionReadback(
   });
 }
 
-async function downloadCoverSource(
-  artifact: ReleaseArtifact,
+export async function downloadCoverSource(
+  artifact: Pick<ReleaseArtifact, "manifest" | "finalJson">,
   targetDir: string,
+  fetchSource = fetchWithTransientRetries,
 ): Promise<string | null> {
-  const entry = pickCoverSourceEntry(artifact.manifest);
+  const entry = pickCoverSourceEntry(artifact.manifest, artifact.finalJson.content_md);
   if (!entry?.public_url) return null;
-  let response: Response;
+  let bytes: Buffer;
   try {
-    response = await fetchWithTransientRetries(entry.public_url, {
+    const response = await fetchSource(entry.public_url, {
       redirect: "follow",
       headers: { "user-agent": "Bloxodes automated article release" },
     });
-  } catch (error) {
-    if (error instanceof TransientHttpError) {
-      console.warn(`${entry.label}: cover source is temporarily unavailable; using the normal article cover fallback.`);
-      return null;
+    if (!response.ok) throw new Error(`cover source returned HTTP ${response.status}`);
+    const contentType = response.headers.get("content-type") ?? "";
+    if (!contentType.startsWith("image/")) {
+      throw new Error(`cover source returned ${contentType || "an unknown content type"}`);
     }
-    throw error;
+    bytes = Buffer.from(await response.arrayBuffer());
+    if (!bytes.length) throw new Error("cover source returned an empty body");
+  } catch (error) {
+    console.warn(`${entry.label}: ${error instanceof Error ? error.message : String(error)}; using the normal article cover fallback.`);
+    return null;
   }
-  const contentType = response.headers.get("content-type") ?? "";
-  if (!contentType.startsWith("image/")) {
-    throw new Error(`${entry.label}: cover source returned ${contentType || "an unknown content type"}.`);
-  }
-  const bytes = Buffer.from(await response.arrayBuffer());
-  if (!bytes.length) throw new Error(`${entry.label}: cover source returned an empty body.`);
+  // This source is also a used body image, so corrupt pixels must fail publication.
+  await sharp(bytes).resize(1, 1).raw().toBuffer();
   const filePath = path.join(targetDir, `${artifact.finalJson.slug}.webp`);
   await writeFile(filePath, bytes);
   return filePath;
@@ -703,7 +707,7 @@ async function releaseOne(params: {
       throw new Error(`${params.artifact.row.id}: published queue URL does not match ${productionUrl}.`);
     }
     const expected = structuredClone(params.artifact);
-    for (const entry of expected.manifest.entries) {
+    for (const entry of usedVerifiedArticleImages(expected.manifest, expected.finalJson.content_md)) {
       if (entry.status !== "verified" || !entry.public_url || !entry.uploaded_path || entry.public_url.startsWith("/")) continue;
       const publicUrl = `${CANONICAL_MEDIA_ORIGIN}/storage/v1/object/public/${params.productionEnv.SUPABASE_MEDIA_BUCKET}/${entry.uploaded_path}`;
       expected.finalJson.content_md = expected.finalJson.content_md.split(entry.public_url).join(publicUrl);
@@ -721,7 +725,7 @@ async function releaseOne(params: {
 
   // Recover a crash after production commit but before queue acknowledgement without rewriting it.
   const expected = structuredClone(params.artifact);
-  for (const entry of expected.manifest.entries) {
+  for (const entry of usedVerifiedArticleImages(expected.manifest, expected.finalJson.content_md)) {
     if (entry.status !== "verified" || !entry.public_url || !entry.uploaded_path || entry.public_url.startsWith("/")) continue;
     const promotedUrl = `${CANONICAL_MEDIA_ORIGIN}/storage/v1/object/public/${params.productionEnv.SUPABASE_MEDIA_BUCKET}/${entry.uploaded_path}`;
     expected.finalJson.content_md = expected.finalJson.content_md.split(entry.public_url).join(promotedUrl);
