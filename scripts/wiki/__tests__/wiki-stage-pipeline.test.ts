@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import test from "node:test";
-import { mkdtemp, readFile, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { runWikiStagePipeline, type WikiStageState } from "../wiki-stage-pipeline";
+import { runWikiStagePipeline, downloadWikiImages, type WikiStageState } from "../wiki-stage-pipeline";
 import { StageInterrupted, WikiOwnershipError, type WikiStageTask } from "../wiki-stage-runtime";
 import type { WikiDecision, WikiCollection } from "../wiki-stage-prompts";
 
@@ -151,4 +152,221 @@ test("an image-only editorial repair never requires a second writing revision", 
   assert.equal(result.outcome, "ready"); assert.equal(reviews, 3);
   assert.equal(f.calls.filter(c => c.stage === "collection_writing").length, 2);
   assert.equal(f.calls.filter(c => c.stage === "collection_images").length, 2);
+});
+
+
+test("recovery rejects protected changes made while the parent was stopped", async t => {
+  for (const [stage, file, savedDecision] of [
+    ["collection_images", "dataset.json", false],
+    ["collection_writing", "brief.md", false],
+    ["collection_writing", "dataset.json", true],
+    ["collection_research_review", "brief.md", true],
+  ] as const) {
+    const f = await fixture(t);
+    await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => {
+      if (task.stage === stage) throw new StageInterrupted("Parent stopped.");
+      return f.execute(task);
+    } }), /Parent stopped/);
+    const state = await f.state();
+    const task = state.collections[0].state.inFlight!;
+    assert.ok(task.ownershipInput, "snapshot is durable before launch");
+    if (stage === "collection_images") assert.ok(task.ownershipInput.imageIndependentData);
+    if (savedDecision) {
+      task.decision = done();
+      await save(path.join(f.root, ".stages/state.json"), state);
+    }
+    const target = path.join(task.folder, file);
+    if (file === "dataset.json") {
+      const data = JSON.parse(await readFile(target, "utf8"));
+      data.items[0].item.cost = 999;
+      await save(target, data);
+    } else await writeFile(target, "Unapproved replacement.");
+    let calls = 0;
+    await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => { calls++; return f.execute(task); } }), WikiOwnershipError);
+    assert.equal(calls, 0);
+    assert.ok((await f.state()).integrityError);
+  }
+});
+
+test("recovery permits an interrupted writer's owned draft and reuses a saved decision", async t => {
+  const f = await fixture(t);
+  await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => {
+    const decision = await f.execute(task);
+    if (task.stage === "collection_writing") throw new StageInterrupted("Parent stopped.");
+    return decision;
+  } }), /Parent stopped/);
+  const state = await f.state();
+  state.collections[0].state.inFlight!.decision = done();
+  await save(path.join(f.root, ".stages/state.json"), state);
+  let writingCalls = 0;
+  assert.equal((await runWikiStagePipeline({ ...f.options, execute: async task => {
+    if (task.stage === "collection_writing") writingCalls++;
+    return f.execute(task);
+  } })).outcome, "ready");
+  assert.equal(writingCalls, 0);
+});
+
+test("old interrupted state without an original snapshot fails closed", async t => {
+  const f = await fixture(t);
+  await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async () => { throw new StageInterrupted("Stopped."); } }), /Stopped/);
+  const state = await f.state();
+  delete state.suggestions.inFlight!.ownershipInput;
+  await save(path.join(f.root, ".stages/state.json"), state);
+  await assert.rejects(runWikiStagePipeline({ ...f.options, execute: f.execute }), /no original ownership snapshot/);
+});
+
+test("failed, malformed, blocked and exhausted image reviews clear existing mappings", async t => {
+  for (const mode of ["throw", "malformed", "unknown", "blocked", "revision", "completed"] as const) {
+    const f = await fixture(t);
+    const result = await runWikiStagePipeline({ ...f.options, execute: async task => {
+      if (task.stage === "collection_images") {
+        const file = path.join(task.folder, "dataset.json");
+        const data = JSON.parse(await readFile(file, "utf8"));
+        data.items[0].system.image = "/cat.png";
+        await save(file, data);
+        await writeFile(path.join(task.folder, "media/cat.png"), "Readable image.");
+        return done();
+      }
+      if (task.stage === "collection_image_review") {
+        if (mode === "throw") throw new Error("Reviewer unavailable.");
+        if (mode === "malformed") return null as unknown as WikiDecision;
+        if (mode === "unknown") return done({ accepted_missing: ["unknown-item"] });
+        if (mode === "revision") return done({ status: "needs_revision", findings: ["Wrong cat."], repair_stage: "images", accepted_missing: [] });
+        return done({ status: mode === "blocked" ? "blocked" : "completed", accepted_missing: [] });
+      }
+      return f.execute(task);
+    } });
+    assert.equal(result.outcome, "ready");
+    const data = JSON.parse(await readFile(path.join(f.root, "collections/pets/dataset.json"), "utf8"));
+    assert.equal(data.items[0].system.image, mode === "completed" ? "/cat.png" : null);
+    const review = (await f.state()).collections[0].state.history.filter(h => h.stage === "collection_image_review").at(-1)!;
+    if (mode !== "completed") assert.deepEqual(review.decision.accepted_missing, ["cat"]);
+  }
+});
+
+test("data and image workers cannot rewrite the approved research brief", async t => {
+  for (const stage of ["collection_data", "collection_images"] as const) {
+    const f = await fixture(t);
+    await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => {
+      if (task.stage === stage) await writeFile(path.join(task.folder, "brief.md"), "Changed research.");
+      return f.execute(task);
+    } }), /outside its ownership/);
+  }
+});
+
+test("a completed review requesting a data repair cannot advance", async t => {
+  const f = await fixture(t);
+  await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => task.stage === "collection_data_review"
+    ? done({ repair_stage: "data", findings: ["Wrong cost."] }) : f.execute(task) }), /cannot request repairs/);
+  assert.equal(f.calls.filter(task => task.stage === "collection_writing").length, 0);
+});
+
+async function imageFixture(t: any) {
+  const folder = await mkdtemp(path.join(os.tmpdir(), "wiki-downloads-"));
+  t.after(() => rm(folder, { recursive: true, force: true }));
+  await mkdir(path.join(folder, "media"));
+  await save(path.join(folder, "dataset.json"), { meta: { schemaVersion: 2 }, items: [{ item: { name: "Cat" }, system: { slug: "cat", image: null } }] });
+  return folder;
+}
+test("optional download plans tolerate null plans and malformed entries", async t => {
+  t.mock.method(globalThis, "fetch", async () => { throw new Error("Must not fetch malformed plans."); });
+  for (const plan of [null, [], { downloads: null }, { downloads: [null, 42, [], {}] }]) {
+    const folder = await imageFixture(t);
+    await save(path.join(folder, "images.json"), plan);
+    const notes = await downloadWikiImages(folder);
+    assert.ok(notes.length);
+    assert.equal(JSON.parse(await readFile(path.join(folder, "dataset.json"), "utf8")).items[0].system.image, null);
+  }
+});
+
+test("downloads normalize uppercase extensions and omit GIF", async t => {
+  const folder = await imageFixture(t);
+  let requests = 0;
+  t.mock.method(globalThis, "fetch", async () => { requests++; return new Response("png-bytes", { headers: { "content-type": "image/png" } }); });
+  const entry = { itemSlug: "cat", url: "https://images.example.com/cat", sourcePage: "https://example.com/cat", relativePath: "cat.GIF" };
+  await save(path.join(folder, "images.json"), { downloads: [entry] });
+  assert.match((await downloadWikiImages(folder)).join(" "), /GIF is omitted/);
+  assert.equal(requests, 0);
+  await save(path.join(folder, "images.json"), { downloads: [{ ...entry, relativePath: "cat.PNG" }] });
+  assert.deepEqual(await downloadWikiImages(folder), []);
+  assert.equal(JSON.parse(await readFile(path.join(folder, "dataset.json"), "utf8")).items[0].system.image, "/cat.png");
+  assert.equal(await readFile(path.join(folder, "media/cat.png"), "utf8"), "png-bytes");
+  assert.deepEqual(await downloadWikiImages(folder), []);
+  assert.equal(requests, 1, "retained lowercase download is reused");
+});
+
+test("malformed optional plans do not trap pipeline recovery after a saved decision", async t => {
+  const f = await fixture(t);
+  const execute = async (task: WikiStageTask) => {
+    if (task.stage === "collection_images") { await save(path.join(task.folder, "images.json"), { downloads: [null] }); return done(); }
+    return f.execute(task);
+  };
+  let first = true;
+  await assert.rejects(runWikiStagePipeline({ ...f.options, execute, downloadImages: async () => {
+    if (first) { first = false; throw new StageInterrupted("Stopped after decision."); }
+    return [];
+  } }), /Stopped after decision/);
+  assert.ok((await f.state()).collections[0].state.inFlight?.decision);
+  assert.equal((await runWikiStagePipeline({ ...f.options, execute, downloadImages: downloadWikiImages })).outcome, "ready");
+  assert.equal((await f.state()).collections[0].state.history.find(h => h.stage === "collection_images")!.decision.findings.length, 1);
+});
+
+
+test("saved image decisions recover exact code-owned omissions and review notes", async t => {
+  const f = await fixture(t);
+  await assert.rejects(runWikiStagePipeline({ ...f.options, execute: async task => {
+    if (task.stage === "collection_images") {
+      const data = JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8"));
+      data.items[0].system.image = "/cat.png";
+      await save(path.join(task.folder, "dataset.json"), data);
+      await writeFile(path.join(task.folder, "media/cat.png"), "Readable image.");
+      return done();
+    }
+    if (task.stage === "collection_image_review") throw new StageInterrupted("Parent stopped.");
+    return f.execute(task);
+  } }), /Parent stopped/);
+  const state = await f.state();
+  const task = state.collections[0].state.inFlight!;
+  task.decision = done({ accepted_missing: ["cat"] });
+  const data = JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8"));
+  data.items[0].system.image = null;
+  const outputs = { "dataset.json": `${JSON.stringify(data, null, 2)}\n`, "image-review.md": `${JSON.stringify(task.decision, null, 2)}\n` };
+  task.codeWrites = Object.fromEntries(Object.entries(outputs).map(([name, bytes]) => [path.relative(f.root, path.join(task.folder, name)), [createHash("sha256").update(bytes).digest("hex")]]));
+  await save(path.join(f.root, ".stages/state.json"), state);
+  for (const [name, bytes] of Object.entries(outputs)) await writeFile(path.join(task.folder, name), bytes);
+  let imageReviews = 0;
+  assert.equal((await runWikiStagePipeline({ ...f.options, execute: async task => {
+    if (task.stage === "collection_image_review") imageReviews++;
+    return f.execute(task);
+  } })).outcome, "ready");
+  assert.equal(imageReviews, 0);
+  assert.equal(JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8")).items[0].system.image, null);
+});
+
+test("readable GIF and uppercase worker files are omitted instead of leaving dangling bundle references", async t => {
+  for (const filename of ["cat.gif", "cat.PNG"]) {
+    const f = await fixture(t);
+    await runWikiStagePipeline({ ...f.options, execute: async task => {
+      if (task.stage === "collection_images") {
+        const data = JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8"));
+        data.items[0].system.image = `/${filename}`;
+        await save(path.join(task.folder, "dataset.json"), data);
+        await writeFile(path.join(task.folder, "media", filename), "Readable image.");
+        return done();
+      }
+      if (task.stage === "collection_image_review") return done({ accepted_missing: [] });
+      return f.execute(task);
+    } });
+    assert.equal(JSON.parse(await readFile(path.join(f.root, "collections/pets/dataset.json"), "utf8")).items[0].system.image, null);
+  }
+});
+
+
+test("a GIF response under a PNG filename is a recorded omission", async t => {
+  const folder = await imageFixture(t);
+  t.mock.method(globalThis, "fetch", async () => new Response("gif-bytes", { headers: { "content-type": "image/gif" } }));
+  await save(path.join(folder, "images.json"), { downloads: [{ itemSlug: "cat", url: "https://images.example.com/cat", sourcePage: "https://example.com/cat", relativePath: "cat.png" }] });
+  assert.match((await downloadWikiImages(folder)).join(" "), /unsupported format/);
+  assert.equal(JSON.parse(await readFile(path.join(folder, "dataset.json"), "utf8")).items[0].system.image, null);
+  await assert.rejects(readFile(path.join(folder, "media/cat.png")), { code: "ENOENT" });
 });

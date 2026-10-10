@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
-import { decodeBundle } from "./content-bundle.mjs";
+import { decodeBundle, extractBundle } from "./content-bundle.mjs";
 import { parseBatch } from "./content-contract.mjs";
 
 async function main() {
@@ -15,13 +15,8 @@ const bundle = decodeBundle(Buffer.from(await data.arrayBuffer()), hash);
 parseBatch(bundle.batch);
 const base = `content/releases/${hash}`;
 if (fs.existsSync(base)) throw new Error("Frozen bundle destination already exists.");
-fs.mkdirSync(base, { recursive: true });
-for (const file of bundle.files) {
-  const destination = path.join(base, file.path);
-  fs.mkdirSync(path.dirname(destination), { recursive: true });
-  fs.writeFileSync(destination, Buffer.from(file.base64, "base64"), { flag: "wx" });
-}
-fs.writeFileSync(path.join(base, "batch.json"), JSON.stringify(bundle.batch));
+fs.mkdirSync(path.dirname(base), { recursive: true });
+await extractBundle(bundle, base);
 fs.appendFileSync(process.env.GITHUB_ENV!, `BATCH=${base}/batch.json\nBLOXODES_VERIFIED_BUNDLE=${hash}\n`);
 console.log(`Loaded exact private content bundle ${hash}.`);
 

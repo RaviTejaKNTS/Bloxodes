@@ -170,7 +170,15 @@ describe("article content blocks", () => {
     expect(validateTierListArticleDetails(lateTable)).toEqual([]);
     const contextual = lateTable.replace("## S Tier", "## S-tier fighting styles in Gakuran").replace("## A Tier", "## A Tier fighting styles in Gakuran");
     expect(validateTierListArticleDetails(contextual)).toEqual([]);
-    expect(validateTierListArticleDetails(contextual.replace("![Boxing fighting style icon]", "![Style icon]").replace("| Boxing |", "| Other |"))).toContain("## A Tier detail table is missing item name Boxing");
+    expect(validateTierListArticleDetails(contextual.replace("![Boxing fighting style icon](/Gakuran/Fighting%20Styles/boxing.png)", "![Style icon](/Gakuran/Fighting%20Styles/other.png)").replace("| Boxing |", "| Other |"))).toContain("## A Tier detail table is missing item name Boxing");
+  });
+  it("preserves S- and A+ rank modifiers across plain and separated tier headings", () => {
+    const markdown = tierListMarkdown.replace("rank: S", "rank: S-").replace("rank: A", "rank: A+").replace("## S Tier", "## S- Tier") + "\n\n| Image | Style | Details |\n|---|---|---|\n| ![Hakari icon](/Gakuran/Fighting%20Styles/hakari.png) | Hakari | Strong |\n\n## A+ Tier\n\n| Image | Style | Details |\n|---|---|---|\n| ![Boxing icon](/Gakuran/Fighting%20Styles/boxing.png) | Boxing | Reliable |";
+    expect(validateTierListArticleDetails(markdown)).toEqual([]);
+    expect(validateTierListArticleDetails(markdown.replace("rank: A+", "rank: S").replace("## A+ Tier", "## S Tier"))).toEqual([]);
+    expect(validateTierListArticleDetails(markdown.replace("## S- Tier", "## S--Tier Gakuran").replace("## A+ Tier", "## A+-Tier Gakuran"))).toEqual([]);
+    expect(validateTierListArticleDetails(markdown.replace("## S- Tier", "## S Tier"))).toContain("Missing ## S- Tier detail section");
+    expect(validateTierListArticleDetails(markdown.replace("## S- Tier", "## S- Tier vs A+ Tier"))).toContain("Ambiguous multi-tier detail heading: S- Tier vs A+ Tier");
   });
   it("rejects combined tier headings even when their table contains all items", () => {
     const combined = tierListMarkdown.replace("## S Tier", "## S Tier vs A Tier") + "\n\n| Image | Style | Details |\n|---|---|---|\n| ![Hakari icon](/Gakuran/Fighting%20Styles/hakari.png) | Hakari | Strong |\n| ![Boxing icon](/Gakuran/Fighting%20Styles/boxing.png) | Boxing | Reliable |";

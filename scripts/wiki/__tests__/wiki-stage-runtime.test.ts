@@ -3,7 +3,7 @@ import test from "node:test";
 import { mkdtemp, mkdir, writeFile, readFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { executeWikiModelStage, WikiOwnershipError } from "../wiki-stage-runtime";
+import { executeWikiModelStage, wikiOwnershipSnapshot, WikiOwnershipError } from "../wiki-stage-runtime";
 
 const done = { status: "completed", summary: "Approved.", findings: [], repair_stage: null };
 async function fixture(t: any) {
@@ -71,4 +71,19 @@ test("a reviewer cannot change code-owned stage state", async t => {
     await writeFile(path.join(f.root, ".stages/state.json"), '{"changed":true}');
     return { code: 0, stdout: JSON.stringify({ structured_output: done }), stderr: "", tail: "" };
   } }, { ...f.task, stage: "collection_research_review" }), WikiOwnershipError);
+});
+
+
+test("the runtime enforces retained producer snapshots before invoking any provider", async t => {
+  for (const stage of ["collection_writing", "collection_images"] as const) {
+    const f = await fixture(t);
+    await writeFile(path.join(f.folder, "brief.md"), "Approved brief.");
+    await writeFile(path.join(f.folder, "dataset.json"), JSON.stringify({ meta: { schemaVersion: 2 }, items: [{ item: { cost: 1 }, system: { slug: "cat", image: null } }] }));
+    const task = { ...f.task, stage, ownershipInput: await wikiOwnershipSnapshot(f.root, { ...f.task, stage }) };
+    if (stage === "collection_images") await writeFile(path.join(f.folder, "dataset.json"), JSON.stringify({ meta: { schemaVersion: 2 }, items: [{ item: { cost: 99 }, system: { slug: "cat", image: null } }] }));
+    else await writeFile(path.join(f.folder, "brief.md"), "Changed while parent was stopped.");
+    let calls = 0;
+    await assert.rejects(executeWikiModelStage({ ...f.options, runCommand: async () => { calls++; throw new Error("Must not run."); } }, task), WikiOwnershipError);
+    assert.equal(calls, 0);
+  }
 });

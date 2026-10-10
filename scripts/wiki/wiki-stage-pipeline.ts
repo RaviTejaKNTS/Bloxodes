@@ -1,7 +1,8 @@
-import { mkdir, readFile, realpath, writeFile } from "node:fs/promises";
+import { mkdir, readFile, realpath, rename, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { saveJson } from "../articles/article-pipeline";
-import { executeWikiModelStage, StageInterrupted, WikiOwnershipError, wikiArtifactHashes, type WikiModelOptions, type WikiStageTask } from "./wiki-stage-runtime";
+import { executeWikiModelStage, StageInterrupted, WikiOwnershipError, wikiArtifactHashes, wikiOwnershipSnapshot, assertWikiStageInput, type WikiModelOptions, type WikiStageTask } from "./wiki-stage-runtime";
 import { isWikiReview, wikiStageConfig, type WikiStageConfig, type WikiStage } from "./wiki-stage-config";
 import { parseWikiDecision, type WikiCollection, type WikiDecision, type WikiIdentity } from "./wiki-stage-prompts";
 
@@ -28,7 +29,7 @@ const message = (error: unknown) => error instanceof Error ? error.message : Str
 const json = async (file: string) => JSON.parse(await readFile(file, "utf8"));
 const folderHashes = (root: string) => wikiArtifactHashes(root);
 async function assertRetained(entity: Entity, folder: string) {
-  if (entity.hashes && (!entity.inFlight || (isWikiReview(entity.inFlight.stage) && !entity.inFlight.decision)) && JSON.stringify(entity.hashes) !== JSON.stringify(await folderHashes(folder))) throw new WikiOwnershipError(`Retained approved artifacts changed: ${folder}`);
+  if (entity.hashes && !entity.inFlight && JSON.stringify(entity.hashes) !== JSON.stringify(await folderHashes(folder))) throw new WikiOwnershipError(`Retained approved artifacts changed: ${folder}`);
 }
 function stop(entity: Entity, stage: WikiStage, reason: string) { entity.status = "blocked"; entity.reason = `${stage}: ${reason}`; }
 function datasetRows(data: any): any[] {
@@ -59,24 +60,27 @@ export async function downloadWikiImages(folder: string, signal?: AbortSignal): 
   const notes: string[] = [];
   let plan: any;
   try { plan = await json(path.join(folder, "images.json")); } catch (error) { if ((error as NodeJS.ErrnoException).code === "ENOENT") return notes; notes.push(message(error)); return notes; }
+  if (!plan || typeof plan !== "object" || Array.isArray(plan) || (plan.downloads !== undefined && !Array.isArray(plan.downloads))) return ["Image download plan must be an object with an optional downloads array."];
   const data = await json(path.join(folder, "dataset.json"));
   const media = await realpath(path.join(folder, "media"));
-  if (plan.downloads !== undefined && !Array.isArray(plan.downloads)) return ["Image download plan must contain a downloads array."];
   for (const entry of plan.downloads ?? []) {
     signal?.throwIfAborted();
     try {
+      if (!entry || typeof entry !== "object" || Array.isArray(entry) || typeof entry.itemSlug !== "string" || typeof entry.url !== "string") throw new Error("Malformed image download entry.");
       const row = datasetRows(data).find(r => r.system.slug === entry.itemSlug);
       const url = new URL(entry.url);
       if (!row || url.protocol !== "https:" || url.username || url.password || /^(localhost|127\.|10\.|192\.168\.|169\.254\.|\[|172\.(1[6-9]|2\d|3[01])\.)/.test(url.hostname)) throw new Error("Invalid item or public HTTPS image URL.");
       if (typeof entry.sourcePage !== "string" || !/^https?:\/\//.test(entry.sourcePage)) throw new Error("Image source page is missing.");
-      if (typeof entry.relativePath !== "string" || path.basename(entry.relativePath) !== entry.relativePath || !/^[a-zA-Z0-9_-]+\.(webp|png|jpe?g|gif)$/i.test(entry.relativePath)) throw new Error("Image download must use a filename under media/.");
-      const target = path.join(media, entry.relativePath);
+      if (typeof entry.relativePath !== "string" || path.basename(entry.relativePath) !== entry.relativePath || !/^[a-zA-Z0-9_-]+\.(webp|png|jpe?g)$/i.test(entry.relativePath)) throw new Error("Image download must use a PNG, JPEG or WebP filename under media/; GIF is omitted.");
+      const filename = entry.relativePath.replace(/\.[^.]+$/, (extension: string) => extension.toLowerCase());
+      const target = path.join(media, filename);
       // Artifact traversal rejects symlinks before this function runs.
-      if (row.system.image === `/${entry.relativePath}`) {
+      if (row.system.image === `/${filename}`) {
         try { await readFile(target); continue; } catch { /* Retained download is unavailable. */ }
       }
       const response = await fetch(url, { signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(30_000)]) : AbortSignal.timeout(30_000), redirect: "error" });
-      if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) throw new Error(`Image response ${response.status} is unusable.`);
+      const mime = response.headers.get("content-type")?.split(";")[0].trim().toLowerCase();
+      if (!response.ok || !mime || !["image/png", "image/jpeg", "image/webp"].includes(mime)) throw new Error(`Image response ${response.status} is unusable or uses an unsupported format.`);
       if (Number(response.headers.get("content-length")) > 20_000_000) throw new Error("Image exceeds 20 MB.");
       if (!response.body) throw new Error("Image response has no body.");
       const chunks: Uint8Array[] = []; let size = 0;
@@ -91,31 +95,36 @@ export async function downloadWikiImages(folder: string, signal?: AbortSignal): 
         }
       } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
       await writeFile(target, Buffer.concat(chunks), { mode: 0o600 });
-      row.system.image = `/${entry.relativePath}`;
+      row.system.image = `/${filename}`;
       await saveJson(path.join(folder, "dataset.json"), data);
-    } catch (error) { notes.push(`${entry.itemSlug}: ${message(error)}`); }
+    } catch (error) { notes.push(`${typeof entry?.itemSlug === "string" ? entry.itemSlug : "Unknown item"}: ${message(error)}`); }
   }
   await saveJson(path.join(folder, "dataset.json"), data);
   return notes;
 }
-export async function acceptWikiImageGaps(folder: string, decision: WikiDecision) {
+export async function acceptWikiImageGaps(folder: string, decision: WikiDecision, write?: (file: string, bytes: string) => Promise<void>) {
   const data = await json(path.join(folder, "dataset.json"));
   const rows = datasetRows(data);
   const accepted = new Set(decision.accepted_missing ?? []);
-  for (const slug of accepted) if (!rows.some(r => r.system.slug === slug)) { accepted.delete(slug); decision.findings.push(`Image reviewer returned unknown omission slug: ${slug}; ignored.`); }
+  for (const slug of accepted) if (!rows.some(r => r.system.slug === slug)) {
+    accepted.delete(slug);
+    decision.status = "blocked";
+    decision.findings.push(`Image reviewer returned unknown omission slug: ${slug}; omit all unreviewed images.`);
+  }
   for (const row of rows) {
     let available = false;
     if (typeof row.system.image === "string" && row.system.image) {
       const relative = row.system.image.replace(/^\//, "");
       const file = path.resolve(folder, "media", relative);
-      if (file.startsWith(`${path.resolve(folder, "media")}${path.sep}`)) {
+      if (/\.(png|jpg|jpeg|webp)$/.test(relative) && file.startsWith(`${path.resolve(folder, "media")}${path.sep}`)) {
         try { await readFile(file); available = true; } catch { /* Optional image unavailable. */ }
       }
     }
-    if (accepted.has(row.system.slug) || !available) { accepted.add(row.system.slug); row.system.image = null; }
+    if (decision.status !== "completed" || accepted.has(row.system.slug) || !available) { accepted.add(row.system.slug); row.system.image = null; }
   }
   decision.accepted_missing = [...accepted];
-  await saveJson(path.join(folder, "dataset.json"), data);
+  if (write) await write(path.join(folder, "dataset.json"), `${JSON.stringify(data, null, 2)}\n`);
+  else await saveJson(path.join(folder, "dataset.json"), data);
 }
 export async function runWikiStagePipeline(options: WikiModelOptions & { execute?: (task: WikiStageTask) => Promise<WikiDecision>; downloadImages?: (folder: string) => Promise<string[]> }): Promise<WikiWorkflowResult> {
   const root = await realpath(options.root);
@@ -144,10 +153,14 @@ export async function runWikiStagePipeline(options: WikiModelOptions & { execute
     await mkdir(path.join(folder, ".aws"), { recursive: true });
     if (collection) await mkdir(path.join(folder, "media"), { recursive: true });
     await assertRetained(entity, folder);
+    if (entity.inFlight) {
+      try { await assertWikiStageInput(root, entity.inFlight); }
+      catch (error) { if (error instanceof WikiOwnershipError) { state.integrityError = message(error); await persist(); } throw error; }
+    }
     while (entity.status === "active") {
       options.signal?.throwIfAborted();
       if (Date.now() >= options.deadline) throw new Error("Wiki stage deadline reached; retain the current stage for queue recovery.");
-      const stage = flow[entity.index];
+      const stage = entity.inFlight?.stage ?? flow[entity.index];
       if (!stage) { entity.status = "completed"; entity.hashes = flow[0] === "collection_suggestions" ? undefined : await folderHashes(folder); await persist(); break; }
       if (!entity.inFlight) {
         const workStage = stage.replace(/_(research|data|image|editorial)_review$/, (_, part) => `_${part === "editorial" ? "writing" : part === "image" ? "images" : part}`) as WikiStage;
@@ -162,6 +175,7 @@ export async function runWikiStagePipeline(options: WikiModelOptions & { execute
         entity.configs ??= {};
         entity.configs[stage] ??= wikiStageConfig(stage, options.env);
         entity.inFlight = { config: entity.configs[stage], stage, round, folder, collection, revision: stage.endsWith("writing") ? round > 1 : (entity.passes[collection ? "collection_writing" : "hub_writing"] ?? 0) > 1, feedback: entity.feedback, approved: approved(), attemptDir };
+        entity.inFlight.ownershipInput = await wikiOwnershipSnapshot(root, entity.inFlight);
         await persist();
       }
       const task = entity.inFlight;
@@ -174,39 +188,61 @@ export async function runWikiStagePipeline(options: WikiModelOptions & { execute
         await mkdir(task.attemptDir, { recursive: true });
         const started = new Date().toISOString();
         try {
-          task.decision = parseWikiDecision(await execute(task), stage);
+          await assertWikiStageInput(root, task);
+          let response: WikiDecision;
+          try { response = await execute(task); }
+          finally { await assertWikiStageInput(root, task); }
+          task.decision = parseWikiDecision(response, stage);
           if (task.decision.status === "completed") await validateOutput(task, options.identity, task.decision);
         } catch (error) {
           await saveJson(path.join(task.attemptDir, "failure.json"), { message: message(error), started_at: started, ended_at: new Date().toISOString() });
           if (error instanceof WikiOwnershipError) state.integrityError = message(error);
           if (!optional(stage) || error instanceof WikiOwnershipError || error instanceof StageInterrupted || options.signal?.aborted || Date.now() >= options.deadline) { delete task.decision; await persist(); throw error; }
-          task.decision = { status: "completed", summary: `Optional image stage failed; retain available images and record omissions. ${message(error)}`, findings: [message(error)], repair_stage: null, ...(stage === "collection_image_review" ? { accepted_missing: [] } : {}) };
+          task.decision = { status: "blocked", summary: `Optional image stage failed; record omissions. ${message(error)}`, findings: [message(error)], repair_stage: null, ...(stage === "collection_image_review" ? { accepted_missing: [] } : {}) };
         }
         await saveJson(path.join(task.attemptDir, "timing.json"), { started_at: started, ended_at: new Date().toISOString() });
         await persist(); // Resume after a returned decision without paying for another model call.
       }
-      const d = task.decision;
+      const d = structuredClone(parseWikiDecision(task.decision, stage));
+      const trustedWrite = async (file: string, bytes: string | Buffer) => {
+        task.codeWrites ??= {};
+        const name = path.relative(root, file);
+        const hashes = task.codeWrites[name] ??= [];
+        const hash = createHash("sha256").update(bytes).digest("hex");
+        if (!hashes.includes(hash)) hashes.push(hash);
+        await persist();
+        const temporary = path.join(task.attemptDir, `${hash}.pending`);
+        await writeFile(temporary, bytes, { mode: 0o600 });
+        await rename(temporary, file);
+      };
       if (stage === "collection_images") {
         const downloadSignal = AbortSignal.any([...(options.signal ? [options.signal] : []), AbortSignal.timeout(Math.max(1, options.deadline - Date.now()))]);
-        const problems = options.downloadImages ? await options.downloadImages(folder) : await downloadWikiImages(folder, downloadSignal);
-        d.findings.push(...problems);
+        try {
+          const problems = options.downloadImages ? await options.downloadImages(folder) : await downloadWikiImages(folder, downloadSignal);
+          d.findings.push(...problems);
+        } catch (error) {
+          if (error instanceof WikiOwnershipError || error instanceof StageInterrupted || options.signal?.aborted || Date.now() >= options.deadline) throw error;
+          d.findings.push(`Optional image downloads failed: ${message(error)}`);
+        }
+        await assertWikiStageInput(root, task);
       }
-      if (stage === "collection_image_review" && d.status !== "needs_revision") await acceptWikiImageGaps(folder, d);
+      if (stage === "collection_image_review" && d.status !== "needs_revision") await acceptWikiImageGaps(folder, d, trustedWrite);
       if (isWikiReview(stage)) {
         const note = stage.includes("editorial") ? "editorial-review.md" : stage.includes("image") ? "image-review.md" : stage.includes("data") ? "data-review.md" : "research-review.md";
-        await writeFile(path.join(folder, note), `${JSON.stringify(d, null, 2)}\n`, { mode: 0o600 });
+        await trustedWrite(path.join(folder, note), `${JSON.stringify(d, null, 2)}\n`);
       }
       await saveJson(path.join(task.attemptDir, "decision.json"), d);
       const optionalJson = async (name: string) => { try { return await json(path.join(task.attemptDir, name)); } catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error; return null; } };
-      entity.history.push({ stage, round: task.round, decision: d, attemptDir: task.attemptDir, models: await optionalJson("model-attempts.json") ?? [], timing: await optionalJson("timing.json") });
+      const record = { stage, round: task.round, decision: d, attemptDir: task.attemptDir, models: await optionalJson("model-attempts.json") ?? [], timing: await optionalJson("timing.json") };
+      const savedRecord = entity.history.findIndex(h => h.attemptDir === task.attemptDir);
+      if (savedRecord < 0) entity.history.push(record); else entity.history[savedRecord] = record;
       // stage-log.md is code-owned; reviewers never need write permission.
       const logFile = stage === "collection_suggestions" ? path.join(root, ".stages", "suggestions-log.md") : path.join(folder, "stage-log.md");
-      await writeFile(logFile, entity.history.map(h => `${h.stage}, pass ${h.round}, ${h.decision.status}, ${h.decision.summary}, findings ${JSON.stringify(h.decision.findings)}, models ${JSON.stringify(h.models)}, timing ${JSON.stringify(h.timing)}, attempt ${h.attemptDir}`).join("\n") + "\n", { mode: 0o600 });
-      delete entity.inFlight;
+      await trustedWrite(logFile, entity.history.map(h => `${h.stage}, pass ${h.round}, ${h.decision.status}, ${h.decision.summary}, findings ${JSON.stringify(h.decision.findings)}, models ${JSON.stringify(h.models)}, timing ${JSON.stringify(h.timing)}, attempt ${h.attemptDir}`).join("\n") + "\n");
       entity.feedback = JSON.stringify(entity.history.map(h => ({ stage: h.stage, ...h.decision })));
       if (d.status === "completed" || (optional(stage) && d.status === "blocked")) {
         if (stage.endsWith("editorial_review")) {
-          if ((entity.passes[collection ? "collection_writing" : "hub_writing"] ?? 0) === 1) await writeFile(path.join(folder, "final.json"), await readFile(path.join(folder, "draft-final.json")), { mode: 0o600 });
+          if ((entity.passes[collection ? "collection_writing" : "hub_writing"] ?? 0) === 1) await trustedWrite(path.join(folder, "final.json"), await readFile(path.join(folder, "draft-final.json")));
         }
         entity.index += 1;
         if (stage === "collection_image_review" && entity.reuseWritingAfterImages) {
@@ -225,7 +261,7 @@ export async function runWikiStagePipeline(options: WikiModelOptions & { execute
         if (index < 0 || index > entity.index) stop(entity, stage, `Invalid repair target ${target}. ${d.summary}`);
         else if ((entity.passes[target] ?? 0) >= 2) {
           if (optional(stage) || target === "collection_images") {
-            await acceptWikiImageGaps(folder, { ...d, accepted_missing: d.accepted_missing ?? datasetRows(await json(path.join(folder, "dataset.json"))).filter(r => d.findings.some(f => f.includes(r.system.slug))).map(r => r.system.slug) });
+            await acceptWikiImageGaps(folder, d, trustedWrite);
             entity.index = optional(stage) ? entity.index + 1 : flow.indexOf(entity.reuseWritingAfterImages ? "collection_editorial_review" : "collection_writing");
             if (optional(stage) && entity.reuseWritingAfterImages) entity.index = flow.indexOf("collection_editorial_review");
             entity.reuseWritingAfterImages = false;
@@ -234,6 +270,7 @@ export async function runWikiStagePipeline(options: WikiModelOptions & { execute
       }
       // Suggestions share the root with all entities, so hash only their output.
       if (stage !== "collection_suggestions") entity.hashes = await folderHashes(folder);
+      delete entity.inFlight;
       await persist();
     }
   };

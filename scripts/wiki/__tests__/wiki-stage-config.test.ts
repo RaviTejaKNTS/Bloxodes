@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { WIKI_STAGES, wikiStageConfig } from "../wiki-stage-config";
-import { wikiWorkerEnvironment, wikiCodexStageArgs, assertWikiOwnership } from "../wiki-stage-runtime";
-import { wikiDecisionSchema, wikiStagePrompt, type WikiIdentity } from "../wiki-stage-prompts";
+import { wikiWorkerEnvironment, wikiCodexStageArgs, wikiStageSandboxProbeArgs, assertWikiOwnership } from "../wiki-stage-runtime";
+import { wikiDecisionSchema, wikiStagePrompt, parseWikiDecision, type WikiIdentity } from "../wiki-stage-prompts";
 
 const identity: WikiIdentity = { id: "queue", game_name: "Game", wiki_slug: "game", universe_id: 123, root_place_id: 456 };
 test("every wiki stage uses the owner's model split despite old installed defaults", () => {
@@ -47,10 +47,11 @@ test("review args and prompts disable writes, subagents and local technical QA",
   assert.match(prompt, /Missing images never block/);
   assert.match(prompt, /No database access/);
 });
-test("Codex profile keeps the sandbox helper readable and gives networked stages resolver access", async () => {
-  const { mkdtemp, mkdir, writeFile } = await import("node:fs/promises");
+test("Codex profile keeps the sandbox helper readable and gives networked stages resolver access", async t => {
+  const { mkdtemp, mkdir, writeFile, rm } = await import("node:fs/promises");
   const os = await import("node:os"); const path = await import("node:path");
   const codexHome = await mkdtemp(path.join(os.tmpdir(), "wiki-codex-home-"));
+  t.after(() => rm(codexHome, { recursive: true, force: true }));
   await mkdir(path.join(codexHome, "packages")); await writeFile(path.join(codexHome, "auth.json"), "{}");
   const options = { worktree: "/repo", root: "/state", identity, env: { HOME: "/model", CODEX_HOME: codexHome }, codexBin: "codex", deadline: Date.now() + 1000 };
   for (const [stage, review] of [["collection_images", false], ["collection_image_review", true]] as const) {
@@ -70,4 +71,29 @@ test("ownership catches reviewer edits, sibling changes and writing changes to d
   const revision = { ...task, stage: "collection_writing" as const, revision: true };
   assert.doesNotThrow(() => assertWikiOwnership({}, { "collections/pets/final.json": "new" }, revision, "/state"));
   for (const file of ["collections/pets/draft-final.json", "collections/pets/dataset.json", "collections/units/final.json", ".stages/state.json"]) assert.throws(() => assertWikiOwnership({ [file]: "old" }, { [file]: "new" }, revision, "/state"));
+});
+
+
+test("decisions distinguish unresolved findings from accepted image omissions", () => {
+  const completed = { status: "completed", summary: "Approved.", findings: [], repair_stage: null };
+  assert.throws(() => parseWikiDecision({ ...completed, repair_stage: "data" }, "collection_data_review"), /cannot request repairs/);
+  assert.throws(() => parseWikiDecision({ ...completed, findings: ["Wrong costs."] }, "collection_data_review"), /unresolved findings/);
+  assert.doesNotThrow(() => parseWikiDecision({ ...completed, accepted_missing: ["cat"] }, "collection_image_review"));
+  assert.doesNotThrow(() => parseWikiDecision({ ...completed, status: "needs_revision", findings: ["Wrong costs."], repair_stage: "data" }, "collection_data_review"));
+});
+
+test("readiness uses the actual named stage policy without model generation or legacy flags", () => {
+  const task = { stage: "collection_images" as const, folder: "/state/collections/pets", revision: false, feedback: "", approved: [], attemptDir: "/state/.stages/probe" };
+  const options = { worktree: "/repo", root: "/state", identity, env: { HOME: "/model" }, codexBin: "codex", deadline: Date.now() + 1000 };
+  const args = wikiStageSandboxProbeArgs(options, task, "/state/collections/pets/probe.cjs");
+  assert.equal(args[0], "sandbox");
+  assert.ok(args.includes('default_permissions="bloxodes_wiki_stage"'));
+  const policy = args.find(arg => arg.startsWith("permissions.bloxodes_wiki_stage.filesystem="))!;
+  assert.ok(policy.includes('"/state/collections/pets" = { "." = "write"'));
+  assert.ok(policy.includes('"**/.env*" = "deny"'));
+  assert.ok(policy.includes('"**/.aws/**" = "deny"'));
+  assert.ok(!args.includes("--sandbox"));
+  assert.ok(!args.includes("--model"));
+  assert.ok(!args.includes("--approve-for-me"));
+  assert.deepEqual(args.slice(-3), ["--", process.execPath, "/state/collections/pets/probe.cjs"]);
 });

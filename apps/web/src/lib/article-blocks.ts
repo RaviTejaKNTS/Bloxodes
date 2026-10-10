@@ -407,6 +407,13 @@ function normalizeHeadingText(value: string): string {
     .toLowerCase();
 }
 
+function normalizeTierHeading(value: string, ranks: string[]): string {
+  // A single longest-first match keeps S- intact even when S is also declared.
+  const escaped = [...ranks].sort((a, b) => b.length - a.length)
+    .map(rank => normalizeHeadingText(rank).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  return normalizeHeadingText(value).replace(new RegExp(`(^|\\s)(${escaped})(?:\\s+[-\\u2010-\\u2015]\\s*|[-\\u2010-\\u2015]\\s*|\\s+)tier(?=\\s|$)`, "g"), "$1$2 tier");
+}
+
 function unfencedLines(markdown: string): string[] {
   let fence: { marker: string; length: number } | null = null;
   return markdown.split(/\r?\n/).map(line => {
@@ -422,12 +429,12 @@ function unfencedLines(markdown: string): string[] {
 
 function tierDetailSection(markdown: string, rank: string, ranks: string[]): string | null {
   const lines = unfencedLines(markdown);
-  const expected = normalizeHeadingText(`${rank} Tier`);
+  const expected = normalizeTierHeading(`${rank} Tier`, ranks);
   let start = -1;
 
   for (let index = 0; index < lines.length; index += 1) {
     const match = lines[index]?.match(/^##[ \t]+(.+?)[ \t]*#*[ \t]*$/);
-    const heading = match ? normalizeHeadingText(match[1]).replace(/[-\u2010-\u2015]/g, " ").replace(/\s+/g, " ") : "";
+    const heading = match ? normalizeTierHeading(match[1], ranks) : "";
     const headingRanks = ranks.filter(candidate => ` ${heading} `.includes(` ${normalizeHeadingText(candidate)} tier `));
     if (headingRanks.length !== 1) continue;
     if (match && (heading === expected || heading.startsWith(`${expected} `) || heading.endsWith(` ${expected}`))) {
@@ -475,9 +482,10 @@ export function validateTierListArticleDetails(markdown: string): string[] {
   for (const line of unfencedLines(markdown)) {
     const match = /^##[ \t]+(.+)$/.exec(line);
     if (!match) continue;
-    const heading = normalizeHeadingText(match[1]).replace(/[-\u2010-\u2015]/g, " ");
-    const ranks = heading.match(/(?:^|\s)(?:s|a|b|c|d|e|f)\s+tier(?=\s|$)/g) ?? [];
-    if (ranks.length > 1) errors.push(`Ambiguous multi-tier detail heading: ${match[1]}`);
+    const declaredRanks = tierLists[0].data.tiers.map(tier => tier.rank);
+    const heading = normalizeTierHeading(match[1], declaredRanks);
+    const matches = declaredRanks.filter(rank => ` ${heading} `.includes(` ${normalizeHeadingText(rank)} tier `));
+    if (matches.length > 1) errors.push(`Ambiguous multi-tier detail heading: ${match[1]}`);
   }
   for (const tier of tierLists[0].data.tiers) {
     const section = tierDetailSection(markdown, tier.rank, tierLists[0].data.tiers.map(entry => entry.rank));

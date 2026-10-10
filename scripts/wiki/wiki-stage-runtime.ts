@@ -14,7 +14,8 @@ import type { WikiStage } from "./wiki-stage-config";
 
 export { StageInterrupted };
 export class WikiOwnershipError extends Error {}
-export type WikiStageTask = { stage: WikiStage; folder: string; collection?: WikiCollection; revision: boolean; feedback: string; approved: string[]; attemptDir: string; config?: WikiStageConfig };
+export type WikiOwnershipInput = { hashes: Record<string, string>; imageIndependentData?: unknown };
+export type WikiStageTask = { stage: WikiStage; folder: string; collection?: WikiCollection; revision: boolean; feedback: string; approved: string[]; attemptDir: string; config?: WikiStageConfig; ownershipInput?: WikiOwnershipInput; codeWrites?: Record<string, string[]> };
 export type WikiModelOptions = { worktree: string; root: string; identity: WikiIdentity; env: NodeJS.ProcessEnv; codexBin: string; deadline: number; signal?: AbortSignal; runCommand?: typeof runStageCommand };
 export function wikiWorkerEnvironment(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
   const allowed = ["PATH", "HOME", "USER", "LOGNAME", "SHELL", "LANG", "LC_ALL", "TMPDIR", "TZ", "CODEX_HOME", "HTTPS_PROXY", "HTTP_PROXY", "NO_PROXY", "NODE_EXTRA_CA_CERTS", "CLAUDE_CODE_OAUTH_TOKEN"];
@@ -53,6 +54,35 @@ export function assertWikiOwnership(before: Record<string, string>, after: Recor
   for (const file of new Set([...Object.keys(before), ...Object.keys(after)])) {
     if (before[file] === after[file]) continue;
     if (!allowed.some(rule => rule.endsWith("/**") ? file.startsWith(rule.slice(0, -2)) : file === rule)) throw new WikiOwnershipError(`${task.stage} changed an artifact outside its ownership: ${file}`);
+  }
+}
+function withoutImages(data: any) {
+  return { ...data, items: data.items.map(({ system, ...row }: any) => { const { image: _, ...rest } = system; return { ...row, system: rest }; }) };
+}
+export async function wikiOwnershipSnapshot(root: string, task: WikiStageTask): Promise<WikiOwnershipInput> {
+  const hashes = await wikiArtifactHashes(root);
+  // Parent state changes between invocations. Each live invocation checks it separately.
+  delete hashes[".stages/state.json"];
+  return { hashes, ...(task.stage === "collection_images" ? { imageIndependentData: withoutImages(JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8"))) } : {}) };
+}
+export async function assertWikiStageInput(root: string, task: WikiStageTask) {
+  if (!task.ownershipInput) throw new WikiOwnershipError("Interrupted wiki stage has no original ownership snapshot; manual inspection is required.");
+  const after = await wikiArtifactHashes(root);
+  delete after[".stages/state.json"];
+  // Code records exact planned bytes before writing review notes or promoting copy.
+  // Recovery permits those bytes, or the original bytes if the write never happened.
+  for (const [file, hashes] of Object.entries(task.codeWrites ?? {})) {
+    if (hashes.includes(after[file])) {
+      if (task.ownershipInput.hashes[file] === undefined) delete after[file];
+      else after[file] = task.ownershipInput.hashes[file];
+    }
+  }
+  assertWikiOwnership(task.ownershipInput.hashes, after, task, root);
+  if (task.ownershipInput.imageIndependentData !== undefined) {
+    try {
+      const data = JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8"));
+      if (!isDeepStrictEqual(task.ownershipInput.imageIndependentData, withoutImages(data))) throw new Error("Changed public data.");
+    } catch { throw new WikiOwnershipError("Image worker changed approved rows or public data."); }
   }
 }
 function codexHomeEntries(codexHome: string): string[] {
@@ -99,6 +129,9 @@ export function wikiCodexStageArgs(o: WikiModelOptions, task: WikiStageTask, con
     "--output-schema", path.join(task.attemptDir, "schema.json"), "--output-last-message", path.join(task.attemptDir, "response.json"));
   return args;
 }
+export function wikiStageSandboxProbeArgs(o: WikiModelOptions, task: WikiStageTask, probe: string) {
+  return ["sandbox", ...wikiCodexPermissions(o, task), "--", process.execPath, probe];
+}
 export async function executeWikiModelStage(o: WikiModelOptions, task: WikiStageTask): Promise<WikiDecision> {
   o.signal?.throwIfAborted();
   const config = task.config ?? wikiStageConfig(task.stage, o.env);
@@ -108,17 +141,10 @@ export async function executeWikiModelStage(o: WikiModelOptions, task: WikiStage
   await mkdir(task.attemptDir, { recursive: true });
   await saveJson(path.join(task.attemptDir, "schema.json"), schema);
   await writeFile(path.join(task.attemptDir, "prompt.md"), prompt, { mode: 0o600 });
+  task.ownershipInput ??= await wikiOwnershipSnapshot(o.root, task);
+  await assertWikiStageInput(o.root, task);
   const before = await wikiArtifactHashes(o.root);
-  const previousData = task.stage === "collection_images" ? JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8")) : null;
-  await saveJson(path.join(task.attemptDir, "input-hashes.json"), before);
-  const assertImageData = async () => {
-    if (!previousData) return;
-    try {
-      const after = JSON.parse(await readFile(path.join(task.folder, "dataset.json"), "utf8"));
-      const withoutImages = (data: any) => ({ ...data, items: data.items.map(({ system, ...row }: any) => { const { image: _, ...rest } = system; return { ...row, system: rest }; }) });
-      if (!isDeepStrictEqual(withoutImages(previousData), withoutImages(after))) throw new Error("Changed approved rows or public data.");
-    } catch { throw new WikiOwnershipError("Image worker changed approved rows or public data."); }
-  };
+  await saveJson(path.join(task.attemptDir, "input-hashes.json"), task.ownershipInput);
   const attempts: Array<WikiStageConfig & { fallback_reason?: string; usage?: unknown; modelUsage?: unknown }> = [];
   const persist = () => saveJson(path.join(task.attemptDir, "model-attempts.json"), attempts);
   const run = async (selected: WikiStageConfig, fallbackReason?: string): Promise<WikiDecision> => {
@@ -151,13 +177,13 @@ export async function executeWikiModelStage(o: WikiModelOptions, task: WikiStage
       if (config.provider !== "claude" || !reason) throw error;
       // Check the failed worker too before authorizing a second provider.
       assertWikiOwnership(before, await wikiArtifactHashes(o.root), task, o.root);
-      await assertImageData();
+      await assertWikiStageInput(o.root, task);
       console.warn(`[wiki ${o.identity.id}] Claude ${reason}; ${task.stage} falls back to Codex gpt-6-luna.`);
       decision = await run({ provider: "codex", model: "gpt-6-luna", effort: "max", timeoutMs: config.timeoutMs }, reason);
     }
   } finally {
     assertWikiOwnership(before, await wikiArtifactHashes(o.root), task, o.root);
-    await assertImageData();
+    await assertWikiStageInput(o.root, task);
     await persist();
   }
   return decision!;
