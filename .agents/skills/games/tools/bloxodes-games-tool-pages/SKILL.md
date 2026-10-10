@@ -5,6 +5,8 @@ description: Prepare and verify shared non-Roblox tool pages backed by registere
 
 # Shared game tool pages
 
+**In T3 Code** (you have the `delegate_task` tool and the owner runs this here), follow the "Shared game tool pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md`: Luna builds the evidence and data and reviews the writing, Haiku 5.5 reviews Luna's work and writes. Outside T3 Code, the flow below applies.
+
 Use this for a non-Roblox tool with verified inputs and a working calculator. Roblox keeps its tools workflow. Minecraft keeps its calculator engines and rules publisher.
 
 1. Read the registry identity, published wiki and approved brief. Keep game ID, namespace and scope explicit.

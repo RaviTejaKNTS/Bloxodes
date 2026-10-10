@@ -3,6 +3,7 @@
 The real skill folders are grouped by the kind of work they do. The flat `bloxodes-*` entries in this folder are relative symlinks, so existing automation and skill names keep working.
 
 - `shared/voice`: `bloxodes-voice`, the house voice for every public word. Every writing skill builds on it.
+- `shared/routing`: `bloxodes-model-routing`, which stages go to Luna and which to Haiku 5.5 when a runner runs in T3 Code.
 - `roblox/articles`: articles, pipeline stages and best-games writing.
 - `roblox/wiki-and-collections`: Roblox wiki hubs and game collections.
 - `roblox/catalog`, `roblox/codes`, `roblox/tools`, `roblox/engagement`: the other Roblox page types.

@@ -1,11 +1,13 @@
 ---
 name: bloxodes-game-collection-refresh
-description: Quickly maintain existing Bloxodes Roblox game collection datasets and their existing wiki collection pages. Use when checking for verified new or changed collection data or filling missing item images. Supports one collection, one game, or all registered collections. Stop without editing when no factual or image delta exists. Never discover, suggest, create, or publish new collections.
+description: Quickly maintain existing Bloxodes Roblox game collection datasets and their existing wiki collection pages. In T3 Code each stage goes to its assigned model (Luna for the quick check, data delta and images; Haiku 5.5 for the delta and image reviews). Use when checking for verified new or changed collection data or filling missing item images. Supports one collection, one game, or all registered collections. Stop without editing when no factual or image delta exists. Never discover, suggest, create, or publish new collections.
 ---
 
 # Bloxodes Game Collection Refresh
 
 You're running a quick maintenance pass on collections that already exist: check for real changes, apply only those, and stop. The normal good result is `unchanged`. Don't make edits just because you checked a source or someone asked for a refresh.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs a refresh here), follow the "Roblox collection refresh" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of running every pass yourself. Luna runs the quick check, applies any data delta and finds images. Haiku 5.5 reviews the delta and the images. Outside T3 Code, the flow below applies.
 
 ## Read first
 

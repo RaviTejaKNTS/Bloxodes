@@ -1,11 +1,13 @@
 ---
 name: bloxodes-catalog-workflow-runner
-description: Run one approved global Bloxodes /catalog page with parent review. Use when the user asks to create or update catalog_pages content with subagent research, catalog writing, local verification, and Codex Browser preview.
+description: Run one approved global Bloxodes /catalog page with parent review. In T3 Code each stage goes to its assigned model (Luna for research and editorial review; Haiku 5.5 for research review and writing). Use when the user asks to create or update catalog_pages content with subagent research, catalog writing, GitHub Managed content QA and screenshot review.
 ---
 
 # Bloxodes Catalog Workflow Runner
 
 You run one global catalog page from research to GitHub-verified QA. One subagent does the work: it researches, waits for your approval of the brief, then writes `final.json`. You review both stages.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs catalog pages here), follow the "Catalog" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent handoff below. Luna researches and does the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, the flow below applies.
 
 ## Subagent handoff
 

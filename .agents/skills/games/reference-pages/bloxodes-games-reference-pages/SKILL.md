@@ -1,11 +1,13 @@
 ---
 name: bloxodes-games-reference-pages
-description: Create or update an approved non-Roblox map, standalone checklist, quiz or catalog using shared tables, plain templates and managed-development verification.
+description: Create or update an approved non-Roblox map, standalone checklist, quiz or catalog using shared tables, plain templates and managed-development verification. In T3 Code each stage goes to its assigned model (Luna for research, map and catalog data and a fact check of every question, task and value; Haiku 5.5 for reviews and writing).
 ---
 
 # Shared game reference pages
 
 Read the approved game plan and `dev-docs/pipelines/content.md`. Resolve the registry game UUID, namespace, page slug and scope. Roblox stays on its own workflows and tables. Existing GTA maps keep their registered engines.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs reference pages here), follow the "Shared game reference pages" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of doing every step in one pass. Luna researches, builds map and catalog data, and fact-checks the payload. Haiku 5.5 reviews the research and data and writes the payload. Outside T3 Code, the flow below applies.
 
 Research the exact page and save source proof in an ignored `brief.md`. Verify the facts and any roster before preparing data. Maps need artwork attribution and actual coordinates. Quiz answers need sources. Checklist objectives must describe actions a player can complete. Catalog fields must fit the specific reference.
 

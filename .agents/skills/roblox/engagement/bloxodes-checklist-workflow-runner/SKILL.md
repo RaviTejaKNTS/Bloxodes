@@ -1,11 +1,13 @@
 ---
 name: bloxodes-checklist-workflow-runner
-description: Run one approved Bloxodes 100% completion checklist page with parent review, source-backed research, writing and GitHub verification. Record explicit user exceptions to the normal completion scope.
+description: Run one approved Bloxodes 100% completion checklist page with parent review, source-backed research, writing and GitHub verification. In T3 Code each stage goes to its assigned model (Luna for research and a fact check of every task; Haiku 5.5 for research review and writing). Record explicit user exceptions to the normal completion scope.
 ---
 
 # Bloxodes Checklist Workflow Runner
 
 You run one checklist from research to GitHub-verified QA. One subagent does the work: it researches the player route, waits for your approval of the brief, then writes `final.json`. You review both stages.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs checklists here), follow the "Checklists" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent handoff below. Luna researches and fact-checks every task and threshold in the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, the flow below applies.
 
 ## Scope
 

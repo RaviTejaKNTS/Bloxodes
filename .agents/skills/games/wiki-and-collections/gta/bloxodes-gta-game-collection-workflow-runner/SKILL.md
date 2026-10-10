@@ -1,11 +1,13 @@
 ---
 name: bloxodes-gta-game-collection-workflow-runner
-description: Run one or many approved Bloxodes GTA collections through research, data, images, writing, managed-development publication, verification, size checks, and browser review. Use for GTA wiki collection work. Never publish production.
+description: Run one or many approved Bloxodes GTA collections through research, data, images, writing, managed-development publication, verification, size checks, and browser review. In T3 Code each stage goes to its assigned model (Luna for research, data, images and editorial review; Haiku 5.5 for reviews and writing). Use for GTA wiki collection work. Never publish production.
 ---
 
 # Bloxodes GTA game collection workflow runner compatibility entrypoint
 
 This is the GTA entry point for running collections. Read and follow `.agents/skills/bloxodes-franchise-game-collection-workflow-runner/SKILL.md` completely, using the GTA context below.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs GTA collections here), follow the "Franchise collections" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the franchise runner's worker model, using the GTA context below. Luna does research, data, images and the editorial review. Haiku 5.5 reviews the research, data and images and writes. Outside T3 Code, the flow below applies.
 
 ## GTA context
 

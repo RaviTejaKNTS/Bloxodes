@@ -1,6 +1,6 @@
 ---
 name: bloxodes-franchise-wiki-workflow-runner
-description: Run one or many approved non-Roblox franchise wiki hubs through research, parent review, writing, managed-development verification, and Browser review. Never publish production.
+description: Run one or many approved non-Roblox franchise wiki hubs through research, parent review, writing, managed-development verification, and Browser review. In T3 Code each stage goes to its assigned model (Luna for suggestions, research and editorial review; Haiku 5.5 for research review and writing). Never publish production.
 ---
 
 # Bloxodes franchise wiki workflow runner
@@ -9,6 +9,8 @@ You're the parent for approved title hubs in a non-Roblox franchise namespace, o
 
 - For Roblox titles, use the Roblox wiki runner instead.
 - This workflow stops before production.
+
+**In T3 Code** (you have the `delegate_task` tool and the owner runs franchise hubs here), follow the "Franchise wiki hubs" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the worker handoffs below. Luna suggests titles, researches and does the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, the flow below applies.
 
 ## Shared game storage
 
