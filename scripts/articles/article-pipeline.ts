@@ -42,6 +42,8 @@ export type PipelineState = {
   afterResearchReview?: Stage;
   afterImageUpload?: Stage;
   inFlight?: Stage;
+  ownershipInput?: { hashes: Record<string, string>; media: string | null; identity: string | null };
+  identityInput?: string | null;
   artifacts: Record<string, string>;
   history: { stage: Stage; attempt: number; at: string; decision: Decision }[];
 };
@@ -49,6 +51,7 @@ export class StageFailure extends Error {
   constructor(message: string, readonly retryable = false, readonly repairStage: WorkStage | null = null, readonly kind: "provider" | "technical" = "technical") { super(message); }
 }
 export class StageInterrupted extends Error {}
+export class ArtifactOwnershipFailure extends StageFailure {}
 export const ARTIFACTS = ["brief.md", "media.json", "final.json"];
 export const isModelStage = (stage: Stage) => ["research", "research_review", "images", "image_review", "writing", "editorial_review"].includes(stage);
 export const isReviewStage = (stage: Stage) => stage.endsWith("_review");
@@ -66,6 +69,46 @@ export async function artifactHashes(workspace: string) {
     catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error; }
   }
   return result;
+}
+async function optionalText(file: string) {
+  try { return await readFile(file, "utf8"); }
+  catch (error) { if ((error as NodeJS.ErrnoException).code === "ENOENT") return null; throw error; }
+}
+function imageEvidence(text: string | null) {
+  if (text === null) return null;
+  const media = JSON.parse(text);
+  return JSON.stringify({ ...media, entries: media.entries.map(({ placement_heading: _, ...entry }: any) => entry) });
+}
+export async function ownershipSnapshot(runDir: string) {
+  return {
+    hashes: await artifactHashes(path.join(runDir, "content")),
+    media: await optionalText(path.join(runDir, "content/media.json")),
+    identity: await optionalText(path.join(runDir, "game-identity.json")),
+  };
+}
+export async function assertStageOwnership(runDir: string, stage: Stage, before: Awaited<ReturnType<typeof ownershipSnapshot>>, controllerOutput?: unknown) {
+  const after = await ownershipSnapshot(runDir);
+  const output = controllerOutput as Decision | undefined;
+  const allowed = stage === "research" ? ["brief.md"] : ["images", "image_upload"].includes(stage) ? ["media.json"] : ["writing", "import_verify"].includes(stage) ? ["final.json", "media.json"] : [];
+  // Successful adapters can apply reviewed omissions or a bounded local correction.
+  // Failed/malformed adapter exits below always use the strict worker ownership rules.
+  if (output?.status === "completed" && stage === "image_review") allowed.push("media.json");
+  if (output?.localizedCorrectionApplied && stage === "editorial_review") allowed.push("final.json");
+  if (ARTIFACTS.some(name => before.hashes[name] !== after.hashes[name] && !allowed.includes(name))) {
+    throw new ArtifactOwnershipFailure(`${stage} modified an artifact outside its ownership; approval rejected.`);
+  }
+  if (before.identity !== after.identity) {
+    let reviewedIdentity = false;
+    if (output?.status === "completed" && stage === "research_review" && after.identity) {
+      try { reviewedIdentity = Boolean(before.hashes["brief.md"]) && JSON.parse(after.identity).approved_brief_hash === before.hashes["brief.md"]; } catch { /* Reject malformed identity. */ }
+    }
+    if (!reviewedIdentity) throw new ArtifactOwnershipFailure(`${stage} changed the immutable code-owned game identity input; approval rejected.`);
+  }
+  if (stage === "writing" && before.media !== after.media) {
+    try { if (imageEvidence(before.media) === imageEvidence(after.media)) return; }
+    catch { /* Invalid image evidence cannot inherit approval. */ }
+    throw new ArtifactOwnershipFailure("Writer changed approved image evidence or URLs; approval rejected.");
+  }
 }
 export function parseDecision(value: unknown): Decision {
   const d = value as Decision;
@@ -159,6 +202,12 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
         for (const name of ARTIFACTS) await copyFile(path.join(source, "content", name), path.join(workspace, name));
         state.artifacts = await artifactHashes(workspace);
         if (JSON.stringify(state.artifacts) !== JSON.stringify(sourceHashes)) throw new Error("Revision source changed while copying; no approval inherited.");
+        const sourceIdentity = await optionalText(path.join(source, "game-identity.json"));
+        if (sourceIdentity && sourceIdentity === prior.identityInput && JSON.parse(sourceIdentity).approved_brief_hash === sourceHashes["brief.md"]) {
+          await writeFile(path.join(runDir, "game-identity.json"), sourceIdentity, { mode: 0o600 });
+          if (sourceIdentity !== await optionalText(path.join(source, "game-identity.json"))) throw new Error("Revision identity changed while copying; no approval inherited.");
+          state.identityInput = sourceIdentity;
+        }
         state.stage = options.reviewFirst ? "editorial_review" : "writing";
         state.feedback = options.revisionFeedback || "User-authorized editorial refinement. Review the retained draft against the current writing contract and improve substantive defects while preserving approved facts and media.";
         state.origin = { runDir: source, artifacts: sourceHashes, reason: state.feedback };
@@ -168,6 +217,7 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
     state.technicalRepairs ??= {};
     const hashes = await artifactHashes(workspace);
     const interrupted = state.status === "running" && Boolean(state.inFlight);
+    if (!interrupted && state.identityInput !== undefined && state.identityInput !== await optionalText(path.join(runDir, "game-identity.json"))) throw new Error("Game identity changed outside the recorded stage; cached approvals cannot be reused.");
     if (JSON.stringify(hashes) !== JSON.stringify(state.artifacts) && !interrupted && Object.keys(state.artifacts).length) {
       throw new Error("Artifacts changed outside the recorded stage. Start a new reviewed run; cached approvals cannot be reused.");
     }
@@ -192,11 +242,16 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
     if (state.status !== "running") return state; // Evidence/review blockers and pending backoff never reset.
     if (interrupted) {
       const stage = state.inFlight!;
-      const writable = stage === "research" ? ["brief.md"] : stage === "images" || stage === "image_upload" ? ["media.json"] : stage === "writing" ? ["final.json", "media.json"] : stage === "import_verify" ? ["final.json", "media.json"] : [];
-      if (ARTIFACTS.some(name => hashes[name] !== state.artifacts[name] && !writable.includes(name))) throw new Error("Interrupted stage changed an input outside its ownership; review is required.");
+      const savedInput = state.ownershipInput;
+      if (savedInput) await assertStageOwnership(runDir, stage, savedInput);
+      else {
+        // Older interrupted runs have no image/identity snapshot. Do not inherit approval.
+        if (JSON.stringify(hashes) !== JSON.stringify(state.artifacts)) throw new Error("Interrupted legacy stage changed inputs; start a new reviewed run.");
+      }
       state.failures[stage] = (state.failures[stage] ?? 0) + 1;
       if (state.failures[stage]! >= (options.maxStageFailures ?? 2)) { state.status = "blocked"; state.feedback = `Repeated interrupted ${stage} executions; retained artifacts require attention.`; await saveJson(stateFile, state); return state; }
       state.artifacts = hashes;
+      state.identityInput = await optionalText(path.join(runDir, "game-identity.json"));
       state.feedback = `Resume the interrupted ${stage} from its saved artifacts.\n${state.feedback}`;
       delete state.inFlight;
     }
@@ -206,14 +261,25 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
       const attempt = (state.attempts[stage] ?? 0) + 1;
       state.attempts[stage] = attempt;
       state.inFlight = stage;
+      state.ownershipInput = await ownershipSnapshot(runDir);
+      state.identityInput ??= state.ownershipInput.identity;
       const attemptDir = path.join(runDir, "attempts", `${stage}-${attempt}`);
       await mkdir(attemptDir, { recursive: true });
       // Persist before launch: a crash cannot silently grant another editorial revision.
       await saveJson(stateFile, state);
       console.log(`[article ${job.id}] ${stage} attempt ${attempt}`);
       let decision: Decision;
-      try { decision = parseDecision(await options.execute(stage, state, attemptDir)); }
+      let ownershipRejected = false;
+      try {
+        const output = await options.execute(stage, state, attemptDir);
+        await assertStageOwnership(runDir, stage, state.ownershipInput, output);
+        decision = parseDecision(output);
+      }
       catch (error) {
+        // Execution adapters may fail before parsing, including provider fallback and shutdown.
+        try { await assertStageOwnership(runDir, stage, state.ownershipInput); }
+        catch (ownershipError) { error = ownershipError; }
+        ownershipRejected = error instanceof ArtifactOwnershipFailure;
         if (error instanceof StageInterrupted) {
           state.feedback = error.message;
           await saveJson(stateFile, state); // Keep inFlight so a later run resumes this exact stage.
@@ -222,7 +288,10 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
         const failure = error instanceof StageFailure ? error : new StageFailure(String(error));
         state.failures[stage] = (state.failures[stage] ?? 0) + 1;
         delete state.inFlight;
-        state.artifacts = await artifactHashes(workspace);
+        if (!ownershipRejected) {
+          state.artifacts = await artifactHashes(workspace);
+          state.identityInput = await optionalText(path.join(runDir, "game-identity.json"));
+        }
         if (failure.retryable && state.failures[stage]! < (options.maxStageFailures ?? 2)) {
           state.feedback = failure.message;
           await saveJson(path.join(attemptDir, "failure.json"), { message: failure.message, retryable: true });
@@ -238,7 +307,11 @@ export async function runArticlePipeline(options: PipelineOptions): Promise<Pipe
       await saveJson(path.join(attemptDir, "decision.json"), decision);
       delete state.inFlight;
       state.history.push({ stage, attempt, at: new Date().toISOString(), decision });
-      state.artifacts = await artifactHashes(workspace);
+      if (!ownershipRejected) {
+        state.artifacts = await artifactHashes(workspace);
+        state.identityInput = await optionalText(path.join(runDir, "game-identity.json"));
+      }
+      delete state.ownershipInput;
       try { applyDecision(state, decision, options.maxRevisions ?? 1); }
       catch (error) { state.status = "blocked"; state.feedback = error instanceof Error ? error.message : String(error); }
       await saveJson(stateFile, state);

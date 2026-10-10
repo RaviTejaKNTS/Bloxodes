@@ -172,4 +172,22 @@ describe("article content blocks", () => {
     expect(validateTierListArticleDetails(contextual)).toEqual([]);
     expect(validateTierListArticleDetails(contextual.replace("![Boxing fighting style icon]", "![Style icon]").replace("| Boxing |", "| Other |"))).toContain("## A Tier detail table is missing item name Boxing");
   });
+  it("rejects combined tier headings even when their table contains all items", () => {
+    const combined = tierListMarkdown.replace("## S Tier", "## S Tier vs A Tier") + "\n\n| Image | Style | Details |\n|---|---|---|\n| ![Hakari icon](/Gakuran/Fighting%20Styles/hakari.png) | Hakari | Strong |\n| ![Boxing icon](/Gakuran/Fighting%20Styles/boxing.png) | Boxing | Reliable |";
+    const errors = validateTierListArticleDetails(combined);
+    expect(errors).toContain("Ambiguous multi-tier detail heading: S Tier vs A Tier");
+    expect(errors).toContain("Missing ## S Tier detail section");
+    expect(errors).toContain("Missing ## A Tier detail section");
+  });
+  it("ignores fenced headings and tables while accepting contextual headings with prose", () => {
+    const table = "| Image | Style | Details |\n|---|---|---|\n| ![Hakari icon](/Gakuran/Fighting%20Styles/hakari.png) | Hakari | Strong |";
+    for (const fence of ["```", "~~~", "````"]) {
+      const fencedHeading = tierListMarkdown.replace("## S Tier", `${fence}markdown\n## S Tier\n${table}\n${fence}`);
+      expect(validateTierListArticleDetails(fencedHeading)).toContain("Missing ## S Tier detail section");
+      const fencedTable = `${tierListMarkdown}\n\n${fence}markdown\n${table}\n${fence}`;
+      expect(validateTierListArticleDetails(fencedTable)).toContain("## S Tier needs a Markdown detail table");
+    }
+    const contextual = `${tierListMarkdown.replace("## S Tier", "## S Tier Gakuran")}\n\nHakari works well here.\n\n${table}\n\n## A Tier Gakuran\n\nBoxing remains useful.\n\n${table.replaceAll("Hakari", "Boxing").replace("hakari.png", "boxing.png")}`;
+    expect(validateTierListArticleDetails(contextual)).toEqual([]);
+  });
 });

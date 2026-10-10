@@ -17,6 +17,7 @@ import {
   type ArticleImageManifest,
 } from "./article-image-readiness";
 import { classifyArticleImageSrc } from "@/lib/article-media";
+import { assertArticleUniverseReadback } from "./article-final-readback";
 
 type ArticleFinal = {
   title: string;
@@ -210,9 +211,7 @@ function assertRowMatchesFinal(row: ArticleRow | null, finalJson: ArticleFinal) 
   if (row.cover_image && row.content_md.includes(row.cover_image)) {
     throw new Error(`Readback article ${finalJson.slug} repeats cover_image inside content_md`);
   }
-  if (finalJson.universe_id && row.universe_id !== finalJson.universe_id) {
-    throw new Error(`Readback universe_id mismatch for ${finalJson.slug}`);
-  }
+  assertArticleUniverseReadback(row.universe_id, finalJson.universe_id, finalJson.slug);
   if (finalJson.meta_description && row.meta_description !== finalJson.meta_description) {
     throw new Error(`Readback meta_description mismatch for ${finalJson.slug}`);
   }

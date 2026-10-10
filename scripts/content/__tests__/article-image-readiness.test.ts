@@ -5,6 +5,7 @@ import {
   checkArticleImageReadiness,
   parseArticleImageManifest,
   type ArticleImageManifest,
+  acceptArticleImageOmission,
 } from "../article-image-readiness";
 
 const manifest: ArticleImageManifest = {
@@ -224,4 +225,46 @@ test("rejects an entry that tries to opt out of the planned visual set", () => {
     () => parseArticleImageManifest(optionalEntryManifest),
     /entries\[1\]\.required must be true/
   );
+});
+test("omitted verified images lose their hosted fields and cannot remain in the body", () => {
+  const rejected = structuredClone(manifest);
+  const url = rejected.entries[1].public_url!;
+  rejected.entries[1].search_queries = ["scorched ruins screenshot", "scorched ruins clean image"];
+  rejected.entries[1].searched_source_urls = ["https://wiki.example/ruins", "https://guide.example/ruins"];
+  acceptArticleImageOmission(rejected.entries[1], "Rejected because the screenshot shows a different location.");
+  assert.equal(rejected.entries[1].status, "accepted_missing");
+  assert.equal(rejected.entries[1].public_url, null);
+  assert.equal(rejected.entries[1].uploaded_path, null);
+  assert.ok(rejected.entries[1].rejected_urls?.includes(url));
+  const finalJson = { slug: manifest.article_slug, content_md: contentFor(manifest) };
+  const result = checkArticleImageReadiness({ manifest: rejected, finalJson });
+  assert.equal(result.ready, false);
+  assert.match(result.errors.join("\n"), /omitted or rejected image/);
+  finalJson.content_md = contentFor({ ...manifest, entries: [manifest.entries[0]] });
+  assert.equal(checkArticleImageReadiness({ manifest: rejected, finalJson }).ready, true);
+});
+test("older accepted omissions with retained hosted URLs cannot pass readiness", () => {
+  const legacy = structuredClone(manifest);
+  Object.assign(legacy.entries[1], { status: "accepted_missing", availability_failure: "inspection", missing_reason: "Rejected after image inspection.", acceptance_note: "Reviewer accepted prose coverage for this target." });
+  const result = checkArticleImageReadiness({ manifest: legacy, finalJson: { slug: legacy.article_slug, content_md: contentFor(manifest) } });
+  assert.equal(result.ready, false); assert.match(result.errors.join("\n"), /omitted or rejected image/);
+});
+test("every extra Markdown or structured-block image needs a verified manifest entry", () => {
+  const url = "https://media.bloxodes.com/articles/unknown.webp";
+  const structured = ["```tier-list", "schema: 1", "id: locations", "title: Locations ranked", "scope: Travel", "tiers:", "  - rank: S", "    items:", "      - name: Unknown location", `        image: ${url}`, "        alt: Unknown location landmark", "```"].join("\n");
+  for (const extra of [`![Unknown location landmark](${url})`, structured, `<img src="${url}" alt="Unknown location">`]) {
+    const result = checkArticleImageReadiness({ manifest, finalJson: { slug: manifest.article_slug, content_md: `${contentFor(manifest)}\n\n${extra}` } });
+    assert.equal(result.ready, false);
+    assert.match(result.errors.join("\n"), /no verified manifest entry|unsupported raw HTML images/);
+  }
+});
+test("structured-block images use verified placement and cannot reference rejected audit URLs", () => {
+  const input = structuredClone(manifest); input.entries = [input.entries[0]]; input.expected_count = 1;
+  const entry = input.entries[0];
+  const body = [`### ${entry.placement_heading}`, "", "```tier-list", "schema: 1", "id: locations", "title: Locations ranked", "scope: Travel", "tiers:", "  - rank: S", "    items:", `      - name: ${entry.label}`, `        image: ${entry.public_url}`, `        alt: ${entry.alt}`, "```"].join("\n");
+  assert.equal(checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md: body } }).ready, true);
+  entry.availability_failure = "inspection";
+  acceptArticleImageOmission(entry, "Rejected because the screenshot shows another location.");
+  const result = checkArticleImageReadiness({ manifest: input, finalJson: { slug: input.article_slug, content_md: body } });
+  assert.equal(result.ready, false); assert.match(result.errors.join("\n"), /omitted or rejected image/);
 });

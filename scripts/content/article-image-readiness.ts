@@ -7,7 +7,8 @@ export function normalizeImageAlt(value: string): string {
   return load(`<span>${value.replace(/</g, "&lt;")}</span>`)("span").text().replace(/\s+/g, " ").trim();
 }
 
-import { classifyArticleImageSrc, findMarkdownImages } from "@/lib/article-media";
+import { classifyArticleImageSrc, findMarkdownImages, findRawHtmlArticleImages } from "@/lib/article-media";
+import { extractArticleBlockImageRefs, stripArticleContentBlocks } from "@/lib/article-blocks";
 
 export type ArticleImageStatus = "candidate" | "verified" | "missing" | "accepted_missing";
 
@@ -24,6 +25,7 @@ export type ArticleImageEntry = {
   alt?: string | null;
   uploaded_path?: string | null;
   public_url?: string | null;
+  rejected_urls?: string[];
   width?: number | null;
   height?: number | null;
   missing_reason?: string | null;
@@ -41,6 +43,15 @@ export type ArticleImageManifest = {
   expected_count: number;
   entries: ArticleImageEntry[];
 };
+
+export function acceptArticleImageOmission(entry: ArticleImageEntry, summary: string) {
+  entry.rejected_urls = [...new Set([...(entry.rejected_urls ?? []), entry.public_url, entry.original_image_url].filter((url): url is string => Boolean(url)))];
+  entry.public_url = null;
+  entry.uploaded_path = null;
+  entry.status = "accepted_missing";
+  entry.missing_reason ||= summary;
+  entry.acceptance_note = summary;
+}
 
 export type ArticleImageReadinessSummary = {
   expected: number;
@@ -168,7 +179,19 @@ export function checkArticleImageReadiness(params: {
 }): ArticleImageReadinessResult {
   const { manifest, finalJson, env } = params;
   const errors: string[] = [];
-  const images = findMarkdownImages(finalJson.content_md);
+  const images = [
+    ...findMarkdownImages(stripArticleContentBlocks(finalJson.content_md)),
+    ...extractArticleBlockImageRefs(finalJson.content_md),
+  ];
+  const approvedUrls = new Set(manifest.entries.filter(entry => entry.status === "verified").map(entry => entry.public_url?.trim()).filter(Boolean));
+  const rejectedUrls = new Set(manifest.entries.filter(entry => entry.status !== "verified").flatMap(entry => [entry.public_url, entry.original_image_url, ...(entry.rejected_urls ?? [])]).filter(Boolean));
+  for (const image of images) {
+    if (rejectedUrls.has(image.src)) errors.push(`content_md references an omitted or rejected image: ${image.src}`);
+    if (!approvedUrls.has(image.src)) errors.push(`content_md image has no verified manifest entry: ${image.src}`);
+    const entry = manifest.entries.find(entry => entry.status === "verified" && entry.public_url?.trim() === image.src);
+    if (entry?.alt && normalizeImageAlt(image.alt) !== normalizeImageAlt(entry.alt)) errors.push(`content_md image alt text does not match its verified manifest entry: ${image.src}`);
+  }
+  if (findRawHtmlArticleImages(stripArticleContentBlocks(finalJson.content_md)).length) errors.push("content_md contains unsupported raw HTML images; use verified Markdown or structured-block images");
   const ids = new Set<string>();
   const publicUrls = new Set<string>();
   let verified = 0;

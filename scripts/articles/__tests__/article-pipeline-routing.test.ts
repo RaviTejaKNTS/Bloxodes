@@ -4,10 +4,10 @@ import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { executeArticleStage, stagePrompt, stageDecisionSchema, type StageRuntimeOptions } from "../article-stage-runtime";
-import { parseDecision, saveJson, type PipelineState } from "../article-pipeline";
+import { parseDecision, saveJson, runArticlePipeline, artifactHashes, type Decision, type PipelineState } from "../article-pipeline";
 import { writeArticleRunReport } from "../article-run-report";
 
-const pass = { status: "completed", summary: "Reviewed the evidence and accepted the omissions.", findings: [], repair_stage: null, accepted_missing: [] };
+const pass: Decision = { status: "completed", summary: "Reviewed the evidence and accepted the omissions.", findings: [], repair_stage: null, accepted_missing: [] };
 const job = { id: "routing-test", slug: "routing-test", title: "Routing guide", article_type: "guide", sources: [] };
 async function fixture() {
   const runDir = await mkdtemp(path.join(os.tmpdir(), "article-routing-"));
@@ -51,6 +51,58 @@ test("Claude tool/content errors do not trigger provider fallback; reviewer owne
   assert.equal(f.runtime.modelAttempts?.length, 1);
   await fake(f.runtime.claudeBin!, `require('fs').writeFileSync('brief.md','modified');console.log(JSON.stringify({structured_output:${JSON.stringify(pass)}}));`);
   await assert.rejects(executeArticleStage(f.runtime, "research_review", f.state, f.attempt), /outside its ownership/);
+});
+test("ownership violations beat malformed responses, provider fallback and command timeout", async () => {
+  for (const provider of ["claude", "codex"] as const) {
+    for (const exit of ["malformed", "provider", "timeout"] as const) {
+      const f = await fixture();
+      f.runtime.stageConfigs = { research_review: { provider, model: provider === "claude" ? "claude-haiku-5-5" : "gpt-6-luna", effort: provider === "claude" ? "xhigh" : "max" } };
+      f.runtime.stageTimeoutMs = exit === "timeout" ? 800 : 5000;
+      const bin = provider === "claude" ? f.runtime.claudeBin! : f.runtime.codexBin;
+      const result = exit === "timeout" ? "setInterval(()=>{},1000);" : exit === "provider" ? (provider === "claude" ? "console.log(JSON.stringify({is_error:true,errors:['429 rate limit']}));process.exitCode=1;" : "console.log(JSON.stringify({type:'error',message:'429 rate limit'}));process.exitCode=1;") : provider === "claude" ? "console.log('not JSON');" : "const a=process.argv;require('fs').writeFileSync(a[a.indexOf('--output-last-message')+1],'not JSON');";
+      await fake(bin, `require('fs').writeFileSync('brief.md','tampered');${result}`);
+      await assert.rejects(executeArticleStage(f.runtime, "research_review", f.state, f.attempt), /outside its ownership/);
+      assert.equal(f.runtime.modelAttempts?.length, 1, "no fallback may adopt tampered inputs");
+      await assert.rejects(readFile(path.join(f.runDir, "research_review.json")), { code: "ENOENT" });
+    }
+  }
+});
+test("writing evidence changes are rejected before malformed Claude responses can retry", async () => {
+  const f = await fixture();
+  await saveJson(path.join(f.runDir, "content/media.json"), { entries: [{ id: "target", status: "verified", public_url: "https://media.example/approved" }] });
+  await fake(f.runtime.claudeBin!, "require('fs').writeFileSync('media.json',JSON.stringify({entries:[]}));console.log('invalid decision');");
+  await assert.rejects(executeArticleStage(f.runtime, "writing", f.state, f.attempt), /Writer changed approved image evidence/);
+});
+test("research repairs refresh identity after review even when the pipeline skips images", async () => {
+  const f = await fixture(); let research = 0, writing = 0, reviews = 0;
+  await fake(f.runtime.claudeBin!, `console.log(JSON.stringify({structured_output:${JSON.stringify(pass)}}));`);
+  const original = globalThis.fetch;
+  globalThis.fetch = async input => {
+    const id = new URL(new Request(input).url).searchParams.get("universe_id")?.replace("eq.", "");
+    assert.ok(id === "1234" || id === "5678");
+    return new Response(JSON.stringify({ universe_id: Number(id) }), { headers: { "Content-Type": "application/json" } });
+  };
+  try {
+    const state = await runArticlePipeline({ job, runDir: f.runDir, deadline: f.runtime.deadline, execute: async (stage, state, attempt) => {
+      if (stage === "research") await writeFile(path.join(f.runDir, "content/brief.md"), `Research status: ready_for_review\nuniverse_id: ${++research === 1 ? 1234 : 5678}`);
+      if (stage === "research_review") return executeArticleStage(f.runtime, stage, state, attempt);
+      if (stage === "writing") {
+        const identity = JSON.parse(await readFile(path.join(f.runDir, "game-identity.json"), "utf8"));
+        assert.equal(identity.universe_id, ++writing === 1 ? 1234 : 5678);
+        assert.equal(identity.approved_brief_hash, (await artifactHashes(path.join(f.runDir, "content")))["brief.md"]);
+      }
+      if (stage === "editorial_review" && ++reviews === 1) return { ...pass, status: "needs_revision" as const, findings: ["Repair the game identity."], repair_stage: "research" as const };
+      return pass;
+    } });
+    assert.equal(state.status, "completed"); assert.equal(writing, 2); assert.equal(state.attempts.images, 1);
+  } finally { globalThis.fetch = original; }
+});
+test("writing cannot reuse an identity resolved for an older brief", async () => {
+  const f = await fixture();
+  await saveJson(path.join(f.runDir, "game-identity.json"), { universe_id: null, approved_brief_hash: "old-brief" });
+  const final = { slug: job.slug, title: job.title, content_md: "The route starts here.", universe_id: null };
+  await fake(f.runtime.claudeBin!, `require('fs').writeFileSync('final.json',${JSON.stringify(JSON.stringify(final))});console.log(JSON.stringify({structured_output:${JSON.stringify(pass)}}));`);
+  await assert.rejects(executeArticleStage(f.runtime, "writing", f.state, f.attempt), /not bound to the approved brief/);
 });
 
 test("image review accepts an image-free plan and may omit a rejected verified candidate by exact id", async () => {

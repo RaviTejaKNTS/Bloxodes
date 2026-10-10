@@ -5,12 +5,14 @@ import { spawn } from "node:child_process";
 import { createWriteStream } from "node:fs";
 import { mkdir, readFile, realpath, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { buildCodexExecArgs, buildGrokExecArgs, classifyCodexFallbackReason, type CodexReasoningEffort } from "./article-writer-provider";
-import { ARTIFACTS, artifactHashes, isModelStage, isReviewStage, parseDecision, saveJson, StageFailure, StageInterrupted, type Decision, type PipelineState, type Stage } from "./article-pipeline";
+import { buildCodexExecArgs, classifyCodexFallbackReason, type CodexReasoningEffort } from "./article-writer-provider";
+import { assertStageOwnership, ownershipSnapshot, isModelStage, isReviewStage, parseDecision, saveJson, StageFailure, StageInterrupted, type Decision, type PipelineState, type Stage } from "./article-pipeline";
 import { assertNonProductionArticleTarget } from "./article-queue-env";
 import { EDITORIAL_EVIDENCE_SCHEMA, validateEditorialEvidence } from "./article-editorial-review";
 import { articleClaudeBin, articleStageConfig, articleStageTimeoutMs, type ArticleStageConfig } from "./article-stage-config";
 import { buildClaudeStageArgs, headlessProviderErrors, headlessResultMetadata, parseClaudeEffort, parseHeadlessResult } from "../shared/claude-stage-runner";
+import { articleModelPermissionArgs } from "./article-model-permissions";
+import { acceptArticleImageOmission } from "../content/article-image-readiness";
 
 export const DECISION_SCHEMA = {
   type: "object", additionalProperties: false,
@@ -96,15 +98,15 @@ export async function runStageCommand(options: CommandOptions): Promise<{ code: 
   });
 }
 
-export function stageCodexArgs(options: StageRuntimeOptions, stage: Stage, prompt: string, attemptDir: string, config = options.stageConfigs?.[stage] ?? articleStageConfig(stage, options.env ?? {}, { model: options.model, effort: options.reasoning })) {
+export function stageCodexArgs(options: StageRuntimeOptions, stage: Stage, prompt: string, attemptDir: string, config = options.stageConfigs?.[stage] ?? articleStageConfig(stage, options.env ?? {}, { model: options.model, effort: options.reasoning }), baseline?: string) {
   const args = buildCodexExecArgs({ worktree: path.join(options.runDir, "content"), model: config.model, reasoningEffort: config.effort as CodexReasoningEffort, prompt });
-  if (isReviewStage(stage)) args.splice(args.indexOf("--approve-for-me"), 1);
+  // Legacy --sandbox/--approve-for-me flags override named permission profiles.
+  args.splice(args.indexOf("--approve-for-me"), 1);
   // Persistent article workspaces intentionally live outside the immutable release checkout.
   args.splice(args.length - 1, 0, "--skip-git-repo-check",
     "--config", "features.multi_agent=false", "--config", "features.multi_agent_v2=false",
     "--config", "features.apps=false", "--config", 'web_search="live"',
-    ...(!isReviewStage(stage) ? ["--config", "sandbox_workspace_write.network_access=true"] : []),
-    ...(isReviewStage(stage) ? ["--sandbox", "read-only", "--config", 'approval_policy="never"'] : []),
+    ...articleModelPermissionArgs({ ...options, env: options.env ?? {} }, isReviewStage(stage), baseline),
     "--output-schema", path.join(attemptDir, "schema.json"), "--output-last-message", path.join(attemptDir, "response.json"));
   return args;
 }
@@ -117,7 +119,7 @@ export function stagePrompt(options: StageRuntimeOptions, stage: Stage, state: P
     research_review: `Read brief.md and ${skills}/bloxodes-article-research/SKILL.md. Independently judge source quality, overlap, identity, central facts and procedure completeness through the promised result. Source omissions are not automatically contradictions and independent-source counts are not substitutes for judgment. Inspect decisive source evidence when necessary. Do not edit the brief. Return completed only when it supports the public promise; otherwise request focused research with exact findings, or skip genuinely duplicate/wrong page-type coverage.`,
     images: `Use ${skills}/bloxodes-article-images/SKILL.md in code-controlled stage mode. The research brief is approved and immutable. Write only media.json; skip the skill’s standalone brief-update step and put readiness/search notes in the manifest. Use the unattended headless Chrome helper: npm --prefix ${options.worktree} run articles:inspect-image -- <source-image-url> ${workspace}; then open its returned screenshot with view_image. Do not use the desktop browser plugin or setupBrowserRuntime: no desktop browser exists in scheduled jobs. Images are best effort and never block article writing. Return completed when every target is verified or missing after a reasonable search, even if no images are usable. Never request a writing repair from this stage. Find and visually inspect useful exact source images and write media.json, preserving source URLs, provenance, useful placements and a nonzero target set. Reuse valid hosted entries already present. Leave unresolved targets missing with documented searches; do not self-approve accepted_missing, upload images, or write article copy. The runtime owns uploads and omission approval.`,
     image_review: `Read brief.md, media.json, and ${skills}/bloxodes-article-images/SKILL.md. Review exact image matches, source provenance, placement usefulness, explicit attribution conditions and search evidence for omissions. Read image-inspection/index.json and image-inspection/failures.json. Accept failed captures as optional omissions using their exact media entry ids. Open the corresponding local screenshots using Read on Claude or view_image on Codex. These are captured by code using headless Chrome. Judge the actual gameplay match, not merely successful capture. Do not use desktop browser tools. Do not modify artifacts. Images are best effort. Accept every reasonably searched miss, including a verified candidate you reject as unsuitable. Use exact media.json entry ids in accepted_missing, never labels, invented ids or renamed ids. A set where every target is accepted_missing and zero body images remain is a valid completed result. Code inspection/download failures are valid omissions. Return completed with justified omissions; request images repairs only for incorrect evidence or an invalid manifest, never because an optional image is unavailable. Never route image repairs to writing. Pending upload fields are expected here, not a blocker.`,
-    writing: `${writingSkill === "bloxodes-article-writing" ? `Read ${skills}/bloxodes-article-writing/references/pipeline-writing.md as the complete focused writing contract; do not load interactive upload/import instructions from the longer SKILL.md.` : `Use ${skills}/${writingSkill}/SKILL.md in code-controlled stage mode, applying the focused base writing contract.`} Research and image readiness have been approved by the preceding review stages. Read ${path.join(options.runDir, "game-identity.json")} when present as immutable code-owned input and use its universe_id, including null, rather than copying a place ID from the brief. Read brief.md, media.json, ${skills}/bloxodes-article-writing/references/editorial-standard.md and the closest original editorial example. Write or revise final.json with the approved facts and hosted media. Omit missing and accepted_missing images; an article with zero body images is valid. Do not run validators or invent an image to fill a gap. Preserve slug ${state.job.slug}, the reader promise and useful depth. Keep cover_image null. Choose your own headings, outline, tone and prose/table balance; do not force highlights, FAQ counts, fixed lengths or templates. You may update media placement_heading to match revised headings, but no image source/status/URL changes. Do not edit brief.md, self-approve, upload, import or run verification. If evidence is missing, return needs_revision targeting research with exact questions.`,
+    writing: `${writingSkill === "bloxodes-article-writing" ? `Read ${skills}/bloxodes-article-writing/references/pipeline-writing.md as the complete focused writing contract; do not load interactive upload/import instructions from the longer SKILL.md.` : `Use ${skills}/${writingSkill}/SKILL.md in code-controlled stage mode, applying the focused base writing contract.`} Research and image readiness have been approved by the preceding review stages. Read ${path.join(options.runDir, "game-identity.json")} as immutable code-owned input bound to the approved brief and use its universe_id, including null, rather than copying a place ID from the brief. Read brief.md, media.json, ${skills}/bloxodes-article-writing/references/editorial-standard.md and the closest original editorial example. Write or revise final.json with the approved facts and hosted media. Omit missing and accepted_missing images; an article with zero body images is valid. Do not run validators or invent an image to fill a gap. Preserve slug ${state.job.slug}, the reader promise and useful depth. Keep cover_image null. Choose your own headings, outline, tone and prose/table balance; do not force highlights, FAQ counts, fixed lengths or templates. You may update media placement_heading to match revised headings, but no image source/status/URL changes. Do not edit brief.md, self-approve, upload, import or run verification. If evidence is missing, return needs_revision targeting research with exact questions.`,
     editorial_review: `First read final.json as a player, together with ${skills}/bloxodes-article-writing/references/editorial-standard.md. Assess clarity, natural wording, flow and repeated advice before opening the evidence brief. Then read brief.md, media.json and ${skills}/bloxodes-article-writing/references/editorial-review.md to check factual fidelity and completeness. Research approval does not make research-note wording suitable for public copy. Perform its promise/completeness/opening/repetition/uncertainty checks on the actual text. Evaluate supported practical depth, conversational explanation, distinct searchable headings and grouping, unnecessary repetition, unsupported connections, and US localization. Trace every essential ingredient/action to usable guidance; do not trust the writer's self-report. Return concrete locations/examples for substantive defects and target writing, research or images appropriately. Let the writer choose structure and phrasing. Do not request cosmetic changes when the copy works. Return editorial_evidence: checks for opening, completeness, structure, explanation, repetition, and evidence, each with verbatim draft quotations and a specific assessment. For every faq_json question, explain its additional answer absent from the body; mark adds_information false if it repeats a body answer. Any revise verdict or redundant FAQ prevents approval. If every remaining defect is a small evidence-backed prose correction, return localized_corrections with exact unique before/after passages (at most three, each under 100 words); otherwise return an empty array. This is not permission to invent facts, restructure the article, or approve the proposed correction. Code may apply it once and request another independent review. Do not edit files. completed means editorial acceptance, not technical QA or publication.`
   };
   return `You are one focused ${stage} worker in a CODE-CONTROLLED Bloxodes article pipeline. The runtime owns scheduling, waiting, retries, approvals, queue state, uploads, verification and publication. Multi-agent tools are disabled. Do not launch Codex/Grok/other workers, call a workflow runner, manage processes/services, read env/auth files, or change any queue/database state. Do not create subagents. Only do this stage and return the required JSON decision. Review-only stages must never create decision.json, a review note, or any other file; the CLI returns structured JSON and code saves it. Stage-specific ownership here overrides interactive parent/subagent instructions in skills. The repository is read-only guidance; only assigned article artifacts may be edited.
@@ -143,9 +145,6 @@ Return only the schema-conforming decision. completed has no unresolved findings
 
 const done = (summary: string): Decision => ({ status: "completed", summary, findings: [], repair_stage: null, accepted_missing: [] });
 async function json(file: string) { return JSON.parse(await readFile(file, "utf8")); }
-function mediaIdentity(media: any) {
-  return JSON.stringify({ ...media, entries: media.entries.map(({ placement_heading: _, ...entry }: any) => entry) });
-}
 export async function executeArticleStage(options: StageRuntimeOptions, stage: Stage, state: PipelineState, attemptDir: string): Promise<Decision> {
   if (options.signal?.aborted) throw new StageInterrupted("Runtime stop requested; stage retained.");
   assertNonProductionArticleTarget(options.env.SUPABASE_URL!);
@@ -162,7 +161,6 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
   if (isModelStage(stage) && options.deadline - Date.now() < 15 * 60_000 && options.stageTimeoutMs >= 15 * 60_000) {
     throw new StageFailure("Less than 15 minutes remain in the batch; retain this stage for bounded operational resume.", true);
   }
-  if (stage === "images") await saveJson(path.join(options.runDir, "game-identity.json"), await ensureArticleGameIdentity(briefUniverseId(await readFile(file("brief.md"), "utf8")), options.env));
   if (stage === "image_review") {
     const media = await json(file("media.json"));
     const inspections: Record<string, string> = {};
@@ -180,16 +178,23 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
   }
   if (isModelStage(stage)) {
     await mkdir(file(".aws"), { recursive: true });
-    const before = await artifactHashes(workspace);
-    const identityFile = path.join(options.runDir, "game-identity.json");
-    const readIdentityInput = () => readFile(identityFile, "utf8").catch(error => { if (error.code === "ENOENT") return null; throw error; });
-    const identityInput = await readIdentityInput();
-    const priorMedia = stage === "writing" ? await json(file("media.json")) : null;
+    const ownership = state.ownershipInput ?? await ownershipSnapshot(options.runDir);
+    const before = ownership.hashes;
+    const assertOwnership = () => assertStageOwnership(options.runDir, stage, ownership);
+    await assertOwnership();
+    // Every provider exit is checked before parsing, retrying or launching a fallback.
+    const modelCommand = async (commandOptions: CommandOptions) => {
+      try { return await runStageCommand(commandOptions); }
+      finally { await assertOwnership(); }
+    };
     const schema = stageDecisionSchema(stage);
     await saveJson(path.join(attemptDir, "schema.json"), schema);
     const prompt = stagePrompt(options, stage, state, workspace);
     await writeFile(path.join(attemptDir, "prompt.md"), prompt, { mode: 0o600 });
     const workerEnv = workerEnvironment(env);
+    const modelTmp = file(".model-tmp");
+    await mkdir(modelTmp, { recursive: true, mode: 0o700 });
+    workerEnv.TMPDIR = modelTmp;
     const configured = options.stageConfigs?.[stage] ?? articleStageConfig(stage, options.env, { model: options.model, effort: options.reasoning });
     const models = options.modelAttempts = [];
     const persistModels = () => saveJson(path.join(attemptDir, "model-attempts.json"), models);
@@ -209,7 +214,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
       await persistModels();
       let r;
       try {
-        r = await runStageCommand({ bin: options.codexBin, args: stageCodexArgs(options, stage, prompt, attemptDir, config), cwd: workspace, env: workerEnv, log: path.join(attemptDir, "codex-events.jsonl"), timeoutMs: timeoutMs(), signal: options.signal });
+        r = await modelCommand({ bin: options.codexBin, args: stageCodexArgs(options, stage, prompt, attemptDir, config, state.origin ? path.join(state.origin.runDir, "content") : undefined), cwd: workspace, env: workerEnv, log: path.join(attemptDir, "codex-events.jsonl"), timeoutMs: timeoutMs(), signal: options.signal });
       } catch (error) {
         if (!(error instanceof StageFailure) || error instanceof StageInterrupted) throw error;
         // A launch error can fall back, but a deadline cannot launch another process.
@@ -221,18 +226,9 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
       const errors = r.tail.split("\n").flatMap(line => { try { const e = JSON.parse(line); return ["error", "turn.failed"].includes(e.type) ? [JSON.stringify(e)] : []; } catch { return []; } }).join("\n");
       const reason = classifyCodexFallbackReason(errors);
       if (!options.grokFallback || !reason) throw new StageFailure(`Codex ${stage} exited ${r.code}. ${errors || r.tail.slice(-1200)}\nSee ${attemptDir}/codex-events.jsonl`, Boolean(reason), null, reason ? "provider" : "technical");
-      console.warn(`[article ${state.job.id}] Codex ${reason}; stage-only Grok fallback`);
-      models.push({ provider: "grok", model: options.grokModel, effort: "provider_default", fallback_reason: reason });
-      await persistModels();
-      const args = buildGrokExecArgs({ worktree: workspace, model: options.grokModel, prompt, maxTurns: 120 });
-      if (isReviewStage(stage)) { args.splice(args.indexOf("--always-approve"), 1); args.push("--permission-mode", "plan"); }
-      args.push("--no-subagents", "--json-schema", JSON.stringify(schema));
-      const fallback = await runStageCommand({ bin: options.grokBin, args, cwd: workspace, env: workerEnv, log: path.join(attemptDir, "grok-output.log"), timeoutMs: timeoutMs(), signal: options.signal });
-      recordResult({ decision: null, ...headlessResultMetadata(fallback.stdout) });
-      await persistModels();
-      if (fallback.code !== 0) throw new StageFailure(`Grok stage fallback failed; see ${attemptDir}/grok-output.log`, true, null, "provider");
-      const parsed = structuredResult(fallback.stdout);
-      response = recordResult(parsed);
+      // Grok cannot enforce the Codex command read-deny profile. Never escape it on fallback.
+      await saveJson(path.join(attemptDir, "fallback-blocked.json"), { provider: "grok", reason, policy: "No equivalent credential-read sandbox" });
+      throw new StageFailure(`Codex ${reason}; Grok fallback withheld because it has no equivalent credential-read sandbox. Retain this stage for bounded provider recovery.`, true, null, "provider");
     };
     if (configured.provider === "claude") {
       models.push({ ...configured });
@@ -240,7 +236,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
       const args = buildClaudeStageArgs({ workspace, readDirectories: [path.join(options.worktree, ".agents/skills"), options.runDir, ...(state.origin ? [path.join(state.origin.runDir, "content")] : [])], review: isReviewStage(stage), model: configured.model, effort: parseClaudeEffort(configured.effort), schema, prompt });
       let failure: string | null = null;
       try {
-        const r = await runStageCommand({ bin: options.claudeBin ?? articleClaudeBin(options.env), args, cwd: workspace, env: workerEnv, log: path.join(attemptDir, "claude-output.log"), timeoutMs: timeoutMs(), signal: options.signal });
+        const r = await modelCommand({ bin: options.claudeBin ?? articleClaudeBin(options.env), args, cwd: workspace, env: workerEnv, log: path.join(attemptDir, "claude-output.log"), timeoutMs: timeoutMs(), signal: options.signal });
         recordResult({ decision: null, ...headlessResultMetadata(r.stdout) });
         await persistModels();
         const errors = headlessProviderErrors(r.stdout);
@@ -265,17 +261,19 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
     } else await runCodex(configured);
     await persistModels();
     await saveJson(path.join(attemptDir, "response.json"), response);
+    await assertOwnership();
     const decision = parseDecision(response);
     if (stage === "editorial_review" && ["completed", "needs_revision"].includes(decision.status)) {
       validateEditorialEvidence(decision, (response as any).editorial_evidence, await json(file("final.json")));
     }
-    const after = await artifactHashes(workspace);
-    if (identityInput !== await readIdentityInput()) throw new StageFailure(`${stage} changed the immutable code-owned game identity input; approval rejected.`);
-    const allowed = stage === "research" ? ["brief.md"] : stage === "images" ? ["media.json"] : stage === "writing" ? ["final.json", "media.json"] : [];
-    if (ARTIFACTS.some(name => before[name] !== after[name] && !allowed.includes(name))) throw new StageFailure(`${stage} modified an artifact outside its ownership; approval rejected.`);
-    if (stage === "writing" && mediaIdentity(priorMedia) !== mediaIdentity(await json(file("media.json")))) throw new StageFailure("Writer changed approved image evidence or URLs; approval rejected.");
+    await assertOwnership();
     if (decision.accepted_missing.length && stage !== "image_review") throw new StageFailure("Only the image reviewer may accept missing images.");
     if (decision.status === "completed") {
+      if (stage === "research_review") {
+        const identity = await ensureArticleGameIdentity(briefUniverseId(await readFile(file("brief.md"), "utf8")), options.env);
+        await assertOwnership();
+        await saveJson(path.join(options.runDir, "game-identity.json"), { ...identity, approved_brief_hash: before["brief.md"] });
+      }
       if (stage === "research" && !/^Research status:\s*ready_for_review\s*$/mi.test(await readFile(file("brief.md"), "utf8"))) throw new StageFailure("Research did not save a ready_for_review brief.", false, "research");
       if (stage === "images" || stage === "image_review") {
         const media = await json(file("media.json"));
@@ -288,8 +286,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
             if (accepted.has(entry.id)) {
               if (inspectionFailures[entry.id]) { entry.availability_failure = "inspection"; entry.missing_reason = inspectionFailures[entry.id]; }
               if (!entry.availability_failure && (new Set(entry.search_queries ?? []).size < 2 || new Set(entry.searched_source_urls ?? []).size < 2)) throw new StageFailure(`Undocumented image omission ${entry.id}: save two distinct search_queries and searched_source_urls in media.json.`, false, "images");
-              entry.missing_reason ||= decision.summary;
-              entry.status = "accepted_missing"; entry.acceptance_note = decision.summary;
+              acceptArticleImageOmission(entry, decision.summary);
             } else if (entry.status !== "verified") throw new StageFailure(`Image target is unresolved: ${entry.id}`, false, "images");
           }
           await saveJson(file("media.json"), media);
@@ -300,8 +297,9 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
         if (final.slug !== state.job.slug || !final.title?.trim() || !final.content_md?.trim()) throw new StageFailure("Article identity or body missing.", false, "writing");
         try {
           const identity = await json(path.join(options.runDir, "game-identity.json"));
+          if (identity.approved_brief_hash !== before["brief.md"]) throw new StageFailure("Game identity is not bound to the approved brief; request research review before writing.", false, "research");
           if ((final.universe_id ?? null) !== identity.universe_id) throw new StageFailure(`final.json universe_id must be ${JSON.stringify(identity.universe_id)} from game-identity.json, not a place ID or an unconfirmed association. Preserve the prose and correct this field before review.`, false, "writing");
-        } catch (error) { if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error; }
+        } catch (error) { if ((error as NodeJS.ErrnoException).code === "ENOENT") throw new StageFailure("Approved game identity is missing; request research review before writing.", false, "research"); throw error; }
       }
     }
     if (isReviewStage(stage)) {

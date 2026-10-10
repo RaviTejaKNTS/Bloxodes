@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { resolveArticleDevCredentials } from "./article-queue-env";
-import { parseCodexReasoningEffort } from "./article-writer-provider";
+import { articleLegacyReasoning } from "./article-stage-config";
 import { runArticlePipeline, saveJson, STAGES, type ArticleJob } from "./article-pipeline";
 import { executeArticleStage, type StageRuntimeOptions } from "./article-stage-runtime";
 import { writeArticleRunReport } from "./article-run-report";
@@ -131,7 +131,7 @@ async function main() {
   const result = await withArticlePreview(worktree, env, baseUrl, async url => runConfiguredArticle(job, {
     worktree, runDir, env, baseUrl: url, retryTechnical, reviseFrom, reviewFirst, revisionFeedback: feedbackFile ? await readFile(feedbackFile, "utf8") : undefined, deadline: Date.now() + 300 * 60_000, stageTimeoutMs: stageMinutes * 60_000,
     codexBin: process.env.ARTICLE_WRITER_CODEX_BIN || path.join(os.homedir(), ".local/bin/codex"), model: process.env.ARTICLE_WRITER_CODEX_MODEL || "gpt-5.6-luna",
-    reasoning: parseCodexReasoningEffort(process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT || "max"),
+    reasoning: articleLegacyReasoning(process.env, process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT || "max"),
     grokFallback: /^(true|1)$/i.test(process.env.ARTICLE_WRITER_GROK_FALLBACK || "false"), grokBin: process.env.ARTICLE_WRITER_GROK_BIN || "grok", grokModel: process.env.ARTICLE_WRITER_GROK_MODEL || "grok-4.5"
   }));
   console.log(JSON.stringify({ status: result.status, stage: result.stage, reason: result.feedback, runDir }, null, 2));

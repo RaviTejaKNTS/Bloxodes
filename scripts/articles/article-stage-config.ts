@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { parseClaudeEffort } from "../shared/claude-stage-runner";
 import { parseCodexReasoningEffort } from "./article-writer-provider";
-import { isModelStage, type Stage } from "./article-pipeline";
+import { isModelStage, STAGES, type Stage } from "./article-pipeline";
 
 export type ArticleStageConfig = { provider: "codex" | "claude"; model: string; effort: string };
 export function articleClaudeBin(env: NodeJS.ProcessEnv): string {
@@ -18,6 +18,14 @@ export function articleStageConfig(stage: Stage, env: NodeJS.ProcessEnv, legacyV
   const effort = env[`${prefix}_EFFORT`]?.trim() || (legacy ? (legacyValues?.effort ?? env.ARTICLE_WRITER_CODEX_REASONING_EFFORT)?.trim() : "") || (provider === "claude" ? "xhigh" : "max");
   if (provider === "claude") parseClaudeEffort(effort); else parseCodexReasoningEffort(effort);
   return { provider, model, effort };
+}
+export function articleLegacyReasoning(env: NodeJS.ProcessEnv, value: string) {
+  let used = false;
+  for (const stage of STAGES.filter(isModelStage)) {
+    const config = articleStageConfig(stage, env, { model: env.ARTICLE_WRITER_CODEX_MODEL || "gpt-6-luna", effort: value });
+    if (env.ARTICLE_STAGE_USE_LEGACY_CODEX_DEFAULTS === "true" && config.provider === "codex" && !env[`ARTICLE_STAGE_${stage.toUpperCase()}_EFFORT`]?.trim()) used = true;
+  }
+  return used ? parseCodexReasoningEffort(value) : "max";
 }
 export function articleStageTimeoutMs(stage: Stage, env: NodeJS.ProcessEnv, legacyDefaultMs = 45 * 60_000): number {
   const raw = env[`ARTICLE_STAGE_${stage.toUpperCase()}_TIMEOUT_MINUTES`];

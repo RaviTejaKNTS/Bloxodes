@@ -407,14 +407,29 @@ function normalizeHeadingText(value: string): string {
     .toLowerCase();
 }
 
-function tierDetailSection(markdown: string, rank: string): string | null {
-  const lines = markdown.split(/\r?\n/);
+function unfencedLines(markdown: string): string[] {
+  let fence: { marker: string; length: number } | null = null;
+  return markdown.split(/\r?\n/).map(line => {
+    const marker = /^ {0,3}(`{3,}|~{3,})(.*)$/.exec(line);
+    if (fence) {
+      if (marker && marker[1][0] === fence.marker && marker[1].length >= fence.length && !marker[2].trim()) fence = null;
+      return "";
+    }
+    if (marker) { fence = { marker: marker[1][0], length: marker[1].length }; return ""; }
+    return line;
+  });
+}
+
+function tierDetailSection(markdown: string, rank: string, ranks: string[]): string | null {
+  const lines = unfencedLines(markdown);
   const expected = normalizeHeadingText(`${rank} Tier`);
   let start = -1;
 
   for (let index = 0; index < lines.length; index += 1) {
     const match = lines[index]?.match(/^##[ \t]+(.+?)[ \t]*#*[ \t]*$/);
     const heading = match ? normalizeHeadingText(match[1]).replace(/[-\u2010-\u2015]/g, " ").replace(/\s+/g, " ") : "";
+    const headingRanks = ranks.filter(candidate => ` ${heading} `.includes(` ${normalizeHeadingText(candidate)} tier `));
+    if (headingRanks.length !== 1) continue;
     if (match && (heading === expected || heading.startsWith(`${expected} `) || heading.endsWith(` ${expected}`))) {
       start = index + 1;
       break;
@@ -433,7 +448,7 @@ function tierDetailSection(markdown: string, rank: string): string | null {
 }
 
 function detailMarkdownTable(markdown: string): string | null {
-  const lines = markdown.split(/\r?\n/);
+  const lines = unfencedLines(markdown);
   const start = lines.findIndex((line, index) => line.includes("|") && /^\s*\|?\s*:?-{3,}/.test(lines[index + 1] ?? "") && (lines[index + 1] ?? "").includes("|"));
   if (start < 0) return null;
 
@@ -457,8 +472,15 @@ export function validateTierListArticleDetails(markdown: string): string[] {
   if (tierLists.length > 1) return ["Use one tier-list overview block per article"];
 
   const errors: string[] = [];
+  for (const line of unfencedLines(markdown)) {
+    const match = /^##[ \t]+(.+)$/.exec(line);
+    if (!match) continue;
+    const heading = normalizeHeadingText(match[1]).replace(/[-\u2010-\u2015]/g, " ");
+    const ranks = heading.match(/(?:^|\s)(?:s|a|b|c|d|e|f)\s+tier(?=\s|$)/g) ?? [];
+    if (ranks.length > 1) errors.push(`Ambiguous multi-tier detail heading: ${match[1]}`);
+  }
   for (const tier of tierLists[0].data.tiers) {
-    const section = tierDetailSection(markdown, tier.rank);
+    const section = tierDetailSection(markdown, tier.rank, tierLists[0].data.tiers.map(entry => entry.rank));
     if (section === null) {
       errors.push(`Missing ## ${tier.rank} Tier detail section`);
       continue;

@@ -11,10 +11,10 @@ export async function resolveOfficialArticleGame(id: number, fetcher = fetch, pa
       try {
         const response = await fetchWithTransientRetries(`https://games.roblox.com/v1/games?universeIds=${universeId}`, {}, { fetchImpl: fetcher, sleep: pause, timeoutMs: 30_000, attempts: 3 });
         const payload = await response.json();
-        const game = Array.isArray(payload.data) ? payload.data.find((item: any) => Number(item.id) === universeId) : null;
+        const game = Array.isArray(payload?.data) ? payload.data.find((item: any) => item && Number(item.id) === universeId) : null;
         if (game && Number.isSafeInteger(game.rootPlaceId) && game.rootPlaceId > 0 && typeof game.name === "string" && game.name.trim()) return { ...game, id: universeId };
         notes.push(`Universe ${universeId}: official response had no complete matching game.`);
-      } catch (error) { notes.push(error instanceof Error ? error.message : String(error)); break; }
+      } catch (error) { notes.push(error instanceof Error ? error.message : String(error)); if (!(error instanceof SyntaxError)) break; }
       if (attempt < 2) await (pause ?? (ms => new Promise(resolve => setTimeout(resolve, ms))))(1000 * 2 ** attempt);
     }
     return null;

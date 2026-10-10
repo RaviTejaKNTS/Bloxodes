@@ -99,14 +99,56 @@ test("invalid or contradictory decisions never grant approval", () => {
   assert.throws(() => validateJob({ ...job, slug: undefined }));
   assert.throws(() => validateJob({ ...job, refresh: "true" }));
 });
+test("malformed/provider/interrupted exits cannot adopt changed approved brief or image evidence", async () => {
+  for (const exit of ["malformed", "provider", "interrupt"] as const) {
+    for (const artifact of ["brief.md", "media.json", "game-identity.json"]) {
+      const runDir = await dir(); let writingCalls = 0;
+      const brief = path.join(runDir, "content/brief.md");
+      const media = path.join(runDir, "content/media.json");
+      const identity = path.join(runDir, "game-identity.json");
+      const state = await runArticlePipeline({ job, runDir, deadline: deadline(), execute: async stage => {
+        if (stage === "research") await writeFile(brief, "Approved research.");
+        if (stage === "images") await writeFile(media, JSON.stringify({ entries: [{ id: "image", status: "verified", public_url: "https://media.example/approved" }] }));
+        if (stage === "writing") {
+          writingCalls++;
+          await writeFile(artifact === "game-identity.json" ? identity : path.join(runDir, "content", artifact), artifact === "media.json" ? JSON.stringify({ entries: [] }) : "unreviewed change");
+          if (exit === "provider") throw new StageFailure("429 rate limit", true, null, "provider");
+          if (exit === "interrupt") throw new StageInterrupted("shutdown");
+          return { status: "completed" } as Decision;
+        }
+        return pass();
+      } });
+      assert.equal(writingCalls, 1);
+      assert.equal(state.status, "blocked");
+      assert.match(state.feedback, /ownership|approved image evidence|immutable code-owned/);
+      assert.equal(state.retryAfter, undefined);
+      assert.equal(state.artifacts["brief.md"], (await import("node:crypto")).createHash("sha256").update("Approved research.").digest("hex"));
+      if (artifact === "media.json") assert.notEqual(state.artifacts["media.json"], (await import("node:crypto")).createHash("sha256").update(await readFile(media)).digest("hex"));
+    }
+  }
+});
+test("an invalid decision with only permitted draft edits may retry while approved inputs stay fixed", async () => {
+  const runDir = await dir(); let attempts = 0;
+  const state = await runArticlePipeline({ job, runDir, deadline: deadline(), execute: async stage => {
+    if (stage === "research") await writeFile(path.join(runDir, "content/brief.md"), "Approved research.");
+    if (stage === "writing" && ++attempts === 1) {
+      await writeFile(path.join(runDir, "content/final.json"), "partial draft");
+      return { status: "completed" } as Decision;
+    }
+    return pass();
+  } });
+  assert.equal(state.status, "completed"); assert.equal(attempts, 2);
+  assert.equal(await readFile(path.join(runDir, "content/brief.md"), "utf8"), "Approved research.");
+});
 test("native worker controls are disabled and review sessions are read-only", () => {
   const options = { worktree: "/repo", runDir: "/repo/tmp/run", model: "gpt-5.6-luna", reasoning: "max" } as StageRuntimeOptions;
   const args = stageCodexArgs(options, "editorial_review", "review", "/repo/tmp/run/attempt");
   assert.ok(args.includes("features.multi_agent=false")); assert.ok(args.includes("features.multi_agent_v2=false"));
-  assert.ok(args.includes("features.apps=false")); assert.ok(args.includes("read-only")); assert.ok(args.includes("--output-schema"));
+  assert.ok(args.includes("features.apps=false")); assert.ok(args.includes("permissions.bloxodes_article.network.enabled=false")); assert.ok(args.includes("--output-schema"));
   assert.ok(!args.includes("--approve-for-me"));
   const writerArgs = stageCodexArgs(options, "writing", "write", "/repo/tmp/run/attempt");
-  assert.ok(writerArgs.includes("--approve-for-me")); assert.ok(!writerArgs.includes("--sandbox"));
+  assert.ok(!writerArgs.includes("--approve-for-me")); assert.ok(!writerArgs.includes("--sandbox"));
+  assert.ok(writerArgs.includes("permissions.bloxodes_article.network.enabled=true"));
   const prompt = stagePrompt(options, "writing", { job, feedback: "Fix the missing ingredient source" } as PipelineState);
   assert.match(prompt, /Fix the missing ingredient/); assert.match(prompt, /Choose your own headings/);
 });
@@ -130,15 +172,16 @@ test("completed model response without its promised artifact cannot advance", as
   await assert.rejects(executeArticleStage(runtime, "research", { job, feedback: "" } as PipelineState, attemptDir));
   assert.ok((await readFile(path.join(attemptDir, "schema.json"), "utf8")).includes("repair_stage"));
 });
-test("provider fallback accepts structured stdout without mixing diagnostic stderr into the decision", async () => {
+test("provider failure retains bounded recovery rather than launching an unrestricted Grok fallback", async () => {
   const runDir = await dir(), attemptDir = path.join(runDir, 'attempt');
   await mkdir(path.join(runDir, 'content')); await mkdir(attemptDir);
   const codex = path.join(runDir, 'codex.cjs'), grok = path.join(runDir, 'grok.cjs');
   await writeFile(codex, `#!/usr/bin/env node\nconsole.log(JSON.stringify({type:'error',message:'429 rate limit'}));process.exitCode=1;\n`, { mode: 0o700 });
   await writeFile(grok, `#!/usr/bin/env node\nconst fs=require('fs');fs.writeFileSync('brief.md','Research status: ready_for_review\\n');console.error('provider diagnostic');console.log(JSON.stringify({structured_output:${JSON.stringify(pass())}}));\n`, { mode: 0o700 });
   const runtime: StageRuntimeOptions = { worktree: process.cwd(), runDir, deadline: deadline(), stageTimeoutMs: 5000, codexBin: codex, model: 'gpt-5.6-luna', reasoning: 'max', grokFallback: true, grokBin: grok, grokModel: 'grok-4.5', env: { ...process.env, SUPABASE_URL: 'https://test.supabase.co' }, baseUrl: 'http://localhost:3000' };
-  const result = await executeArticleStage(runtime, 'research', { job, feedback: '' } as PipelineState, attemptDir);
-  assert.equal(result.status, 'completed');
+  await assert.rejects(executeArticleStage(runtime, 'research', { job, feedback: '' } as PipelineState, attemptDir), /Grok fallback withheld/);
+  assert.equal(runtime.modelAttempts?.length, 1);
+  await assert.rejects(readFile(path.join(runDir, 'content/brief.md')), { code: 'ENOENT' });
   await writeFile(codex, `#!/usr/bin/env node\nconsole.log(JSON.stringify({type:'item.completed',item:{output:'source returned 429'}}));process.exitCode=1;\n`, { mode: 0o700 });
   runtime.env.ARTICLE_STAGE_RESEARCH_REVIEW_PROVIDER = 'codex';
   await assert.rejects(executeArticleStage(runtime, 'research_review', { job, feedback: '' } as PipelineState, attemptDir), /Codex research_review exited/);
