@@ -17,7 +17,7 @@ The examples teach moves, not wording or a required outline.
 - Write a complete article. Use every useful supported fact in the brief, say why the reader should care, answer the next question after each section and cover what the best competing guides cover. Short sentences, full pages: never trim facts to make it shorter.
 - Give each substantial answer one home. Use the named events, tools and conditions from the brief instead of generic advice.
 - Tables compare, steps guide, prose explains. Every table row must fit its column and every cell must add a fact or consequence. If there's little to compare, write a paragraph instead.
-- Put a needed caveat once, next to the advice it affects, in plain words. Source disagreements, verification methods and source-type labels stay in the brief unless a real uncertainty changes what the reader should do. Never swap a needed caveat for false certainty.
+- Put a needed caveat once, next to the advice it affects, in plain words. Source disagreements, verification methods and source-type labels stay in the brief unless a real uncertainty changes what the reader should do. Never swap a needed caveat for false certainty. When the brief gives a recommended value or range for a fact sources disagree on, use it. Never drop the number, recipe or step because sources differed.
 - Use specific, searchable titles and main H2s, short contextual H3s, and a mix of heading shapes. No forced highlights, section counts, lengths, jokes, stock openings or recap endings. Stop when the task is answered. A useful next step makes a good ending. Don't pad a complete answer with FAQs.
 
 ## Output

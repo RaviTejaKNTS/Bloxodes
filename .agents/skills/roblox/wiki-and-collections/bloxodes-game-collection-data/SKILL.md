@@ -13,7 +13,7 @@ Use the game and collection names to find their suggestions and workspace in the
 
 ## Useful coverage
 
-Build the most accurate, up-to-date collection the sources support. Combine rows across sources, merge duplicates and leave unresolved values empty or null. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
 
 A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile player-facing page.
 
@@ -109,13 +109,23 @@ Use the v2 wrapped shape. Never create a bare array dataset.
 - In `meta.display`, set `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, `badgeField`, `subtitleFields`, `descriptionField`, `cardDescriptionField` and `fieldPresentation` where useful.
 - Every display field must exist in both `meta.itemFields` and `items[].item`.
 
+## Conflicting sources
+
+Sources often disagree on a price, drop rate, stat or location. Don't drop the value because of that. An empty card field helps nobody.
+
+1. Check whether it's a real conflict. One source skipping a detail, a copied page or an older version isn't a contradiction.
+2. Pick the better-supported value: the newer one after an update, the developer's or the game's own wording, or the one independent sources agree on.
+3. If you can't pick one, use a range for numbers (`400 to 600 Coins`) or the value most independent sources give.
+4. Record every competing value with its source and your choice in `brief.md`, so the collection can improve later.
+5. Leave the field empty or null only when no reliable source gives a value at all.
+
 ## How public values should read
 
 Item values are what players scan on cards and in the table, so they follow the "plain" slot in `.agents/skills/bloxodes-voice/SKILL.md`: short, exact and easy to compare. No jokes in a value someone needs one precise answer from.
 
 - **Plain and exact.** "Hatches from the Golden Egg," not "This pet can be obtained by players through hatching the Golden Egg."
 - **No research wording in public values.** Never write "reportedly," "unconfirmed," "according to the wiki," "community-documented" or similar in `description`, `cardSummary` or detail fields.
-- **Uncertainty stays private.** If a value is shaky, leave it empty or null and note the doubt in `brief.md`. Never put a source or verification note in a public field.
+- **Uncertainty stays private.** Fill shaky values with the best-supported value or range (see "Conflicting sources" below) and note the doubt in `brief.md`. Never put a source or verification note in a public field.
 - **Keep labels out of values.** Use `"type": "Standard boost"`, not `"type": "Type: Standard boost"`.
 - **One sentence stays one sentence.** No semicolon pseudo-lists in prose. Use arrays only when the source really gives separate list items.
 

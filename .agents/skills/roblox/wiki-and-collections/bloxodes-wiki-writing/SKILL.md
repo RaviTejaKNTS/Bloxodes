@@ -33,6 +33,7 @@ Use this after `bloxodes-wiki-research` and parent approval.
 - **Start with what the player does.** The first sentence of `description_md` puts the reader in the game: what you do, what you're working toward, what makes this game its own thing. Not "X is a Roblox game where..."
 - **Explain the core loop like a friend would.** Earn this, spend it on that, unlock the next thing. Use the game's real names for places, currencies and systems, and explain any odd term in a few words right where it shows up.
 - **Tips are the fun part.** Each one is a specific move with a reason: what to buy first, what to skip, what trips people up. "Upgrade your rod" is a chore list. "Buy the Iron Rod before any boat upgrade, because a faster boat doesn't help when your line keeps snapping" is a tip.
+- **Use the brief's numbers.** When the brief gives a recommended value or range for something sources disagree on, use it. Never drop a price or unlock because sources differed.
 - **Talk about the game, never the page.** Don't describe what the wiki covers, and don't narrate how it was made. Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
 
 ## Rules

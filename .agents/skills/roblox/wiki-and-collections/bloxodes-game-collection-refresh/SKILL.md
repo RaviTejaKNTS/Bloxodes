@@ -58,7 +58,7 @@ Decide right away:
 | **Data update** | A verified data delta exists. | Apply only that delta, then check images for the affected new or changed items. |
 | **Image update** | Data is unchanged, but existing items are missing images or a clearly better exact item image is available. | Run only the image pass. |
 | **Page-type update** | The collection is now clearly a finite player-completed goal or a reference roster. | Make the approved switch between `collectible` and `database`. |
-| **Blocked** | Evidence is weak, sources conflict, or the dataset or page is missing. | Leave files unchanged and report the exact blocker. Use the focused research skill only if resolving it is necessary and in scope. |
+| **Blocked** | Evidence for the change is weak, or the dataset or page is missing. Sources disagreeing isn't a blocker on its own: apply the data skill's "Conflicting sources" rule, and keep the current value when the new evidence isn't better supported. | Leave files unchanged and report the exact blocker. Use the focused research skill only if resolving it is necessary and in scope. |
 
 For a game-wide or all-registered run, do the quick checks in parallel where practical. Spend the detailed passes only on collections with a positive data or image delta.
 

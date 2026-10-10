@@ -24,7 +24,8 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/brief.md
 3. **Learn how the game plays:** the normal player loop, main systems, progression, controls, and which related pages should be linked.
    - Don't stop at the official Roblox description. Use reputable guide sources (the game's wiki, Beebom, TechWiser and similar) for concrete facts, the same way collection research does.
    - Collect the specifics a writer needs to sound like a player: names of key buildings, items or currencies, early prices, what unlocks what, and the early mistakes players make. Tips need real names and numbers, so gather at least four tip-worthy facts.
-   - Only leave a fact out when it's wrong, conflicting or unsupported. "Not on the official page" isn't a reason to ban it.
+   - Only leave a fact out when it's wrong or unsupported. "Not on the official page" isn't a reason to ban it.
+   - When sources disagree on a price, unlock or number, keep every value with its source in the evidence notes and give the writer the better-supported value or a range ("400 to 600 Coins"). Never drop a tip-worthy fact just because sources differ.
 4. **Verify controls** from reliable sources. If you can't, record that controls should stay empty.
 5. **Keep the wiki about the game.** Don't turn catalog facts into a wiki rewrite. The wiki explains the game. It doesn't duplicate item lists.
 

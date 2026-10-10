@@ -117,6 +117,7 @@ For each apparent conflict:
 - Don't count copied domains as independent confirmation.
 - When summaries skip the decisive step, go to the original walkthrough, source images, or a video or transcript you can actually inspect. Record the quote or timestamp privately. A video title alone proves nothing.
 - Check that official and community pages really belong to this game.
+- A real conflict on a number or step that remains after this goes in the brief with every value and source, plus your recommended value or range. It isn't a reason to leave the fact out.
 
 If essential steps are still unsupported after focused follow-up, the full how-to promise is blocked.
 

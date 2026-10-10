@@ -18,7 +18,7 @@ Use this after `brief.md`, data readiness and image readiness are approved, for 
 
 ## Useful coverage
 
-Build the most accurate, up-to-date collection the sources support. Combine rows across sources, merge duplicates and leave unresolved values empty or null. Record missing rows, conflicting claims and follow-ups in the brief so the page can improve later.
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the page can improve later.
 
 A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile page.
 
@@ -46,6 +46,7 @@ The brief owns the page type. `database` copy can focus on browsing and comparin
 - **Explain the game system, not the page.** Never describe what the page is, how to use it, or "the cards below." Talk about the items and the choices players make.
 - **Lead with the useful bit.** Every field opens on the real thing: what these items do, the choice that matters, the mistake to avoid.
 - **Personality goes in the intro, description and wiki blurb.** Card values, table cells and short facts stay plain and exact.
+- **Use the dataset's values and the brief's recommended ranges.** Never leave a pick, price or stat out of the body because sources disagreed. A caveat goes in once, next to the advice, only when the difference changes what the player should do.
 - **Never narrate the research.** Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
 - **Never write item counts in prose.** Don't say how many items the collection or a section has, and avoid phrases like "all X items," "over X" or "the full list of X." Counts change every time data improves, so the copy goes stale. This applies to `intro_md`, `description_md`, `description_json`, `faq_json` and `wiki_md`. The only count allowed is the `{count}` token in `title` and `seo_title`, which the seed/verify workflow fills from the live dataset.
 

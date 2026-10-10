@@ -29,7 +29,8 @@ Use the T3 `delegate_task` tool. Check `orchestrator_capabilities` if a model ID
 | --- | --- | --- | --- |
 | Coding, implementation, bug fixes, code-heavy pipelines | `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
 | Article stages (research, reviews, images, writing) | see the stage table in `.agents/skills/bloxodes-article-workflow-runner/references/t3-model-routing.md` | Luna and Haiku 5.5 by stage | — |
-| Other writing: wiki and collection copy, quizzes, checklists, page prose | `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
+| Roblox wiki hub and collection stages | see the stage table in `.agents/skills/bloxodes-game-collection-workflow-runner/references/t3-model-routing.md` | Luna and Haiku 5.5 by stage | — |
+| Other writing: quizzes, checklists, page prose | `codex` | `gpt-6.1-sol` | `reasoningEffort: high` |
 | Data collection, scraping, mass scraping, polling, dataset building | `codex` | `gpt-6-luna` | `reasoningEffort: max` |
 | Read-only lookups a smaller model can handle | `opencode` | `opencode/muse-spark-1.3-contributor-free` | — |
 | Light or miscellaneous tasks a smaller model can handle | `antigravity` | the newest Gemini Flash (currently `gemini-3.8-flash-high`) | — |
@@ -51,7 +52,7 @@ Approval prompts appear only in the agent's own thread. The orchestrator tools c
 
 Multi-stage content jobs go to one agent as a whole pipeline. For example, wiki and collection pages run suggestions → research → data → images → writing. Name the matching `bloxodes-*-workflow-runner` skill in the brief, and let that agent start its own sub-agents as the skill describes. Give the pipeline to the model matching its main kind of work.
 
-Articles are the exception. When the owner runs articles in T3 Code, you orchestrate the stages yourself and hand each one to its assigned model, as `.agents/skills/bloxodes-article-workflow-runner/references/t3-model-routing.md` describes.
+Articles and Roblox wiki and collection pages are the exception. When the owner runs them in T3 Code, you orchestrate the stages yourself and hand each one to its assigned model, as the runners' `references/t3-model-routing.md` files describe (`.agents/skills/bloxodes-article-workflow-runner/` and `.agents/skills/bloxodes-game-collection-workflow-runner/`).
 
 ### Briefs
 

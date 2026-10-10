@@ -165,6 +165,7 @@ Rules of thumb:
 
 - If a fact is solid, state it. Don't hedge solid facts.
 - If a fact is shaky but matters, give the best number and one short, useful caveat.
+- If sources give different numbers, use the brief's recommended value or a range ("400 to 600 Coins"). Don't drop the number.
 - If a fact is shaky and doesn't matter, leave it out.
 - If the central answer is missing, don't write around it. Send it back to research.
 - Never say who said it ("sources say," "players report," "the wiki lists"). Readers don't care where the fact came from, only whether they can use it.

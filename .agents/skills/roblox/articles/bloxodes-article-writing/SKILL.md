@@ -52,7 +52,7 @@ The voice guide and article standard cover tone, openings, headings, structure a
 - Check platform claims against the approved evidence. Don't guess menu paths, toggles, limits or behavior. If an essential label or path is uncertain, send it back for focused research instead of writing something too vague to use.
 - Roblox experiences can't be played in a web browser. The browser player was discontinued, and roblox.com only launches the installed app. Never suggest playing in the browser as a fix.
 - Don't suggest things that aren't possible, like disabling a system that can't be disabled. Don't claim a fix works on a platform you haven't verified.
-- When you're not sure something is true, leave it out.
+- When you're not sure something is true and the brief has no supported value for it, leave it out. A recommended value or range for a fact sources disagree on isn't a reason to skip it: use it.
 
 ### Game-specific articles
 

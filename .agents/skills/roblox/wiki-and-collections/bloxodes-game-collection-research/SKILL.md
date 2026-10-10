@@ -13,7 +13,7 @@ Use the game and collection names to find their suggestions and workspace in the
 
 ## Useful coverage
 
-Build the most accurate, up-to-date collection the sources support. Combine rows across sources, merge duplicates and leave unresolved values empty or null. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
 
 A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile player-facing page.
 
@@ -53,6 +53,7 @@ Later, a writer turns your brief into the page intro, section notes and wiki blu
 - **Name the reader's real question.** Why does someone look up this collection? Picking the best one, finding where to get one, tracking what's left?
 - **Flag hooks worth using.** The choice that matters most, a common mistake, a surprising true fact about the system.
 - **Keep doubts and sources private.** Source quality, conflicts and uncertainty go in `Known gaps or risks` and the source list, not mixed into facts the writer will copy.
+- **Don't drop conflicting facts.** When sources disagree, record every value with its source and recommend the better-supported value or a range, following the data skill's "Conflicting sources" rule. Never leave a fact out just because sources differ.
 - **Leave research jargon out of reader-facing lines.** No "reportedly," "community-documented" or "sources say" in anything the writer might reuse.
 
 ## Brief shape
