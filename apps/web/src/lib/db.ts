@@ -256,6 +256,9 @@ export async function listCodePageSitemapDates(offset: number, limit: number): P
     .eq("is_published", true)
     .not("slug", "is", null)
     .order("slug", { ascending: true })
+    // Only the newest code addition matters for lastmod.
+    .order("first_seen_at", { referencedTable: "codes", ascending: false, nullsFirst: false })
+    .limit(1, { referencedTable: "codes" })
     .range(offset, offset + limit - 1);
   if (error) throw error;
   return (data ?? []) as CodePageSitemapDates[];

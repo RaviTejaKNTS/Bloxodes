@@ -179,10 +179,10 @@ export function proxy(req: NextRequest) {
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
-  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`);
+  // When indexing is disabled, the all-engine noindex header already covers Google.
+  const googleRobots = SEARCH_INDEXING_ENABLED ? googleIndexHeader(`${url.pathname}${url.search}`) : null;
   if (googleRobots) {
-    // Append to preserve the all-engine preview restriction when indexing is disabled.
-    response.headers.append("X-Robots-Tag", googleRobots);
+    response.headers.set("X-Robots-Tag", googleRobots);
   }
   return response;
 }
