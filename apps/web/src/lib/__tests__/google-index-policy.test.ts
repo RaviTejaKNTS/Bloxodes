@@ -135,6 +135,17 @@ describe("Google index policy", () => {
     }
   });
 
+  it("keeps the all-engine robots header on private routes for every crawler", () => {
+    for (const path of ["/login", "/account", "/auth/callback", "/admin/tools"]) {
+      for (const userAgent of ["Googlebot", "bingbot", "Mozilla/5.0"]) {
+        const response = proxy(new NextRequest(`https://bloxodes.com${path}`, {
+          headers: { "user-agent": userAgent }
+        }));
+        expect(response.headers.get("x-robots-tag")).toMatch(/^noindex, nofollow/);
+      }
+    }
+  });
+
   it("leaves existing all-engine noindex metadata in place even for allowlisted pages", () => {
     const august = readFileSync(new URL("../../app/(site)/stats/reports/roblox-august-2026/page.tsx", import.meta.url), "utf8");
     expect(isGoogleIndexable("/stats/reports/roblox-august-2026")).toBe(true);
