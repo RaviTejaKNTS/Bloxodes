@@ -4,6 +4,7 @@ import { revalidateTag } from "next/cache";
 import { getSessionUser } from "@/lib/auth/session-user";
 import { supabaseAdmin } from "@/lib/supabase";
 import { moderateCommentBody } from "@/lib/comment-moderation";
+import { COMMENT_LINK_ERROR, detectCommentLink } from "@/lib/comment-links";
 import { getCommentsTag, toCommentEntry, type CommentRow } from "@/lib/comments";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { getRequestIp, isTrustedMutationOrigin } from "@/lib/security/request";
@@ -251,6 +252,10 @@ export async function POST(request: Request) {
 
     if (body.length > MAX_BODY_LENGTH) {
       return NextResponse.json({ error: `Comments must be ${MAX_BODY_LENGTH} characters or less.` }, { status: 400 });
+    }
+
+    if (detectCommentLink(body) || detectCommentLink(guestName)) {
+      return NextResponse.json({ error: COMMENT_LINK_ERROR }, { status: 400 });
     }
 
     const sessionUser = await getSessionUser();
