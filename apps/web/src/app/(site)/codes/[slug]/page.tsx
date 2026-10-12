@@ -7,6 +7,7 @@ import { FiClock } from "react-icons/fi";
 import { FaFacebook, FaTelegramPlane, FaTwitch, FaUsers, FaYoutube, FaDiscord } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { SiGooglechrome, SiGuilded, SiRoblox } from "react-icons/si";
+import { formatDistanceToNow } from "date-fns";
 import "@/styles/article-content.css";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
 import { processHtmlLinks } from "@/lib/link-utils";
@@ -37,8 +38,7 @@ import {
 import { replaceLinkPlaceholders } from "@/lib/link-placeholders";
 import { extractHowToSteps } from "@/lib/how-to";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { formatExactDate, resolvePublishedAt } from "@/lib/content-dates";
-import { resolveCodePageModifiedAt, resolveCodesLastCheckedAt } from "@/lib/code-content-dates";
+import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 
 export const revalidate = 3600;
 
@@ -335,7 +335,17 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 
   const codes = Array.isArray((game as any).codes) ? ((game as any).codes as Code[]) : [];
+  const latestCodeFirstSeen = codes.reduce<string | null>((latest, code) => {
+    if (code.status !== "active") return latest;
+    if (!code.first_seen_at) return latest;
+    if (!latest || code.first_seen_at > latest) return code.first_seen_at;
+    return latest;
+  }, null);
   const activeCount = codes.filter((code) => code.status === "active").length;
+  const baselineUpdatedAt = resolveModifiedAt(game) ?? game.updated_at;
+  const lastContentUpdate = latestCodeFirstSeen && baselineUpdatedAt && latestCodeFirstSeen > baselineUpdatedAt
+    ? latestCodeFirstSeen
+    : baselineUpdatedAt ?? game.updated_at;
   const when = monthYear();
   const title =
     resolveSeoTitle(game.seo_title) || `${game.name} Codes (${when}) - ${activeCount} Active Codes`;
@@ -441,19 +451,41 @@ export default async function GamePage({ params }: Params) {
 
   // Merge: recent expired codes first, then legacy codes
   const expiredWithoutSpaces = [...expiredFromCodesTable, ...uniqueLegacyExpired];
-  const lastContentUpdate = resolveCodePageModifiedAt(game, codes);
-  const lastUpdatedFormatted = formatExactDate(lastContentUpdate);
-  const lastChecked = resolveCodesLastCheckedAt(codes);
+  const latestCodeFirstSeen = codes.reduce<string | null>((latest, code) => {
+    if (code.status !== "active") return latest;
+    if (!code.first_seen_at) return latest;
+    if (!latest || code.first_seen_at > latest) return code.first_seen_at;
+    return latest;
+  }, null);
+
+  const baselineUpdatedAt = resolveModifiedAt(game) ?? game.updated_at;
+  const lastContentUpdate = latestCodeFirstSeen && baselineUpdatedAt && latestCodeFirstSeen > baselineUpdatedAt
+    ? latestCodeFirstSeen
+    : baselineUpdatedAt ?? game.updated_at;
+
+  const lastUpdatedFormatted = new Date(lastContentUpdate).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+  const lastChecked = codes.reduce((acc, c) => (acc > c.last_seen_at ? acc : c.last_seen_at), game.updated_at);
   const allCodePages = await listCodePagesWithActiveCounts();
   const currentGenreL2 = normalizeCategory(universe?.genre_l2 ?? (game as any).genre_l2 ?? null);
   const currentGenreL1 = normalizeCategory(universe?.genre_l1 ?? (game as any).genre_l1 ?? null);
   const suggestedCodes = pickSuggestedCodes(allCodePages, game.id, currentGenreL1, currentGenreL2);
 
-  const lastCheckedDate = lastChecked ? new Date(lastChecked) : null;
-  const lastCheckedFormatted = formatExactDate(lastChecked);
+  const lastCheckedDate = new Date(lastChecked);
+  const lastCheckedDatePart = lastCheckedDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const lastCheckedFormatted = lastCheckedDatePart;
 
   const lastCheckedRelativeLabel = (() => {
-    if (!lastCheckedDate) return null;
     const now = new Date();
     const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
     const checkedUtc = Date.UTC(
@@ -578,7 +610,7 @@ export default async function GamePage({ params }: Params) {
   const metaDescription = metaDescriptionRaw?.trim() || CODES_DESCRIPTION;
   const publishedAt = resolvePublishedAt(game) ?? game.created_at;
   const publishedIso = new Date(publishedAt).toISOString();
-  const updatedIso = lastContentUpdate ?? undefined;
+  const updatedIso = new Date(lastContentUpdate).toISOString();
   const siteBaseUrl = SITE_URL.replace(/\/$/, "");
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
@@ -646,16 +678,14 @@ export default async function GamePage({ params }: Params) {
           <h1 className="text-4xl font-bold text-foreground md:text-5xl">
             {game.name} Codes ({monthYear()})
           </h1>
-          {lastUpdatedFormatted ? (
-            <div className="mt-4 flex flex-col gap-3 text-sm text-muted">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 text-foreground/80">
-                  <FiClock className="h-4 w-4 shrink-0" aria-hidden />
-                  Updated on <span className="font-semibold text-foreground">{lastUpdatedFormatted}</span>
-                </span>
-              </div>
+          <div className="mt-4 flex flex-col gap-3 text-sm text-muted">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-foreground/80">
+                <FiClock className="h-4 w-4 shrink-0" aria-hidden />
+                Updated on <span className="font-semibold text-foreground">{lastUpdatedFormatted}</span>
+              </span>
             </div>
-          ) : null}
+          </div>
         </header>
 
         <section id="article-body" className="article-content md-copy-scope journey-content-stream journey-content-stream--prose">
@@ -668,6 +698,7 @@ export default async function GamePage({ params }: Params) {
             codes={sortedActive}
             gameName={game.name}
             gameSlug={game.slug}
+            lastUpdatedLabel={lastUpdatedFormatted}
             lastCheckedLabel={lastCheckedFormatted}
             lastCheckedRelativeLabel={lastCheckedRelativeLabel}
             nowMs={nowMs}

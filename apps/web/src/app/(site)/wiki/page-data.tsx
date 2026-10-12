@@ -405,7 +405,7 @@ function WikiActiveCodesPreview({
               {lastCheckedLabel ? (
                 <p className="flex items-center gap-1.5 text-sm leading-5 text-muted-foreground">
                   <Check className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                  <span>Codes last checked on {lastCheckedLabel}</span>
+                  <span>Checked and verified on {lastCheckedLabel}</span>
                 </p>
               ) : null}
             </div>

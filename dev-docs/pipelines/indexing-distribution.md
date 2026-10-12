@@ -21,9 +21,7 @@ Google can fetch our pages, but since October 2025 it has indexed only the homep
 - The proxy adds `X-Robots-Tag: googlebot: noindex, follow` to every HTML path that isn't allowlisted. That includes pagination, query variants and new pages. The header depends only on the URL, never on the user agent. APIs, `_next`, sitemaps, feeds, robots.txt, ads.txt and asset files are skipped.
 - To add a page, add its path to the allowlist once it's editorially approved. An entry only lifts the Google restriction; it never overrides a page's own all-engine noindex.
 - For metadata, don't set `googleBot: { index: true }` in page metadata. The root layout keeps only Google preview settings, so a page's meta tags never contradict the header.
-- Sitemaps still list Google-noindexed pages, because Bing uses them. Query URLs are left out for every engine.
-- For codes dates, the "Updated on" label, JSON-LD `dateModified` and sitemap `lastmod` come from `code-content-dates.ts`. They move on publication, recorded copy rewrites (`re_rewritten_at`) and code additions or reactivations (`first_seen_at`), never on routine row touches. "Codes last checked on" uses the latest `last_seen_at`. Expirations, deletions and hand edits have no stored change time yet, so they do not move the date. A refresh with no code rows also has no stored check timestamp. Fixing these gaps needs a separate schema or pipeline task.
-- Catalog "Updated" dates come from editorial or asset-content dates, never from sync, observation or verification timestamps.
+- Nothing in this policy changes what Bing or other engines see. Generic robots meta, canonicals, content, dates and sitemaps stay the same, and sitemaps still list Google-noindexed pages.
 
 ## Analytics
 
