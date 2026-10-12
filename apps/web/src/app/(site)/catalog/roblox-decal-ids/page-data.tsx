@@ -5,7 +5,6 @@ import { MoreCatalogs } from "@/components/more-content";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import type { CatalogPageContent } from "@/lib/catalog";
-import { formatRelativeDate } from "@/lib/content-dates";
 import {
   DEFAULT_SORT,
   normalizeSearchQuery,
@@ -648,14 +647,13 @@ export function renderRobloxDecalIdsPage({
   pageDescription?: string;
 }) {
   const latest = decals.reduce<Date | null>((latestDate, decal) => {
-    const dateValue = decal.verified_at ?? decal.last_seen_at ?? decal.thumbnail_checked_at;
+    const dateValue = decal.roblox_updated_at ?? decal.first_seen_at;
     if (!dateValue) return latestDate;
     const candidate = new Date(dateValue);
     if (Number.isNaN(candidate.getTime())) return latestDate;
     if (!latestDate || candidate > latestDate) return candidate;
     return latestDate;
   }, null);
-  const refreshedLabel = formatRelativeDate(latest);
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml?.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml?.howHtml : "";
@@ -756,7 +754,7 @@ export function renderRobloxDecalIdsPage({
           <h1 className="text-3xl font-semibold text-foreground">{baseTitle}</h1>
           <UpdatedTimestamp value={updatedDate} />
           <p className="text-sm text-muted">
-            {refreshedLabel ? `Fresh data ${refreshedLabel} · ` : ""}Page {currentPage} of {totalPages}
+            Page {currentPage} of {totalPages}
           </p>
         </header>
       )}

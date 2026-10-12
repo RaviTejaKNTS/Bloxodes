@@ -290,7 +290,8 @@ async function run() {
     });
 
   await writeUpdates(updates);
-  const catalogTimestampUpdated = await updateCatalogTimestamp();
+  // Only a real ranking change should move the page's "Updated" date.
+  const catalogTimestampUpdated = updates.length > 0 ? await updateCatalogTimestamp() : false;
   const topPreview = scored
     .slice()
     .sort((a, b) => b.score - a.score || a.row.asset_id - b.row.asset_id)

@@ -85,7 +85,7 @@ export function renderMeshIdsPage({
   const title = currentPage > 1 ? `${baseTitle} — Page ${currentPage}` : baseTitle;
   const path = currentPage > 1 ? `${BASE_PATH}/page/${currentPage}` : BASE_PATH;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${path}`;
-  const updatedAt = contentHtml?.updatedAt ?? meshes[0]?.verified_at ?? meshes[0]?.roblox_updated_at ?? null;
+  const updatedAt = contentHtml?.updatedAt ?? meshes[0]?.roblox_updated_at ?? null;
   const introNodes = currentPage === 1 && contentHtml?.introHtml
     ? renderPageContentNodes(contentHtml.introHtml, "mesh-ids-intro")
     : null;

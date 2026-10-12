@@ -1,8 +1,6 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import {
-  getStatsGamesSeoTaxonomy,
   getStatsSitemapLastModifiedTimes,
-  listStatsGamesIndexPaths,
   listStatsSitemapGames
 } from "@/lib/stats";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
@@ -47,8 +45,7 @@ export async function GET() {
   ];
 
   try {
-    const [taxonomy, lastModified, games] = await Promise.all([
-      getStatsGamesSeoTaxonomy(),
+    const [lastModified, games] = await Promise.all([
       getStatsSitemapLastModifiedTimes(),
       listStatsSitemapGames(1000)
     ]);
@@ -56,13 +53,12 @@ export async function GET() {
     pages[1].lastmod = toIsoDate(lastModified.platform);
     pages[2].lastmod = toIsoDate(lastModified.creators);
     pages[3].lastmod = toIsoDate(lastModified.items);
-    pages.push(...listStatsGamesIndexPaths(taxonomy.genres, taxonomy.subgenres)
-      .map((path) => ({
-        loc: withSiteUrl(path),
-        changefreq: "hourly" as const,
-        priority: path === "/stats/games" ? "0.8" : "0.7",
-        lastmod: toIsoDate(lastModified.games)
-      })));
+    pages.push({
+      loc: withSiteUrl("/stats/games"),
+      changefreq: "hourly",
+      priority: "0.8",
+      lastmod: toIsoDate(lastModified.games)
+    });
 
     pages.push(...games.map((game) => ({
       loc: withSiteUrl(`/stats/games/${game.slug}`),
