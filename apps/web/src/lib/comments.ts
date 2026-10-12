@@ -1,5 +1,5 @@
 import { publicContentCache } from "@/lib/public-content-cache";
-import { renderMarkdown } from "@/lib/markdown";
+import { renderCommentText } from "@/lib/comment-text";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type CommentAuthor = {
@@ -70,7 +70,7 @@ function normalizeAuthor(row: CommentRow): CommentAuthor {
 
 export async function toCommentEntry(row: CommentRow): Promise<CommentEntry> {
   const body_md = row.body_md ?? "";
-  const body_html = await renderMarkdown(body_md);
+  const body_html = renderCommentText(body_md);
   return {
     id: row.id,
     parent_id: row.parent_id ?? null,

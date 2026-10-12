@@ -25,8 +25,8 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/checklists/session` | `GET` | `src/app/api/checklists/session/route.ts` | Session snapshot for checklist UI. |
 | `/api/codes/progress` | `GET`, `PUT`, `PATCH` | `src/app/api/codes/progress/route.ts` | Per-user used-code progress read/write; PATCH applies one used/restored action without overwriting concurrent progress. |
 | `/api/codes/session` | `GET` | `src/app/api/codes/session/route.ts` | Session snapshot for code pages. |
-| `/api/comments` | `POST` | `src/app/api/comments/route.ts` | Create moderated comments with guest or signed-in author support. |
-| `/api/comments/[id]` | `PATCH`, `DELETE` | `src/app/api/comments/[id]/route.ts` | Edit or delete the current user's comments. |
+| `/api/comments` | `POST` | `src/app/api/comments/route.ts` | Create moderated comments with guest or signed-in author support. Reject links in the body or guest name before moderation; return plain-text comment HTML. |
+| `/api/comments/[id]` | `PATCH`, `DELETE` | `src/app/api/comments/[id]/route.ts` | Edit or delete the current user's comments. Reject links in edited bodies before moderation. |
 | `/api/comments/session` | `GET` | `src/app/api/comments/session/route.ts` | Signed-in user payload for comment forms. |
 | `/api/consent` | `GET` | `src/app/api/consent/route.ts` | Consent state resolution. |
 | `/api/extension/roblox-game-codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-codes/route.ts` | Public Chrome extension lookup for a Roblox game page, returning a three-code preview and full Bloxodes URL. |

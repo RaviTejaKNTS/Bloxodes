@@ -479,7 +479,14 @@ export async function loadPreparedGrowGardenCollection(
   const cached = growGardenPreparedCollectionCache.get(config.slug);
   if (cached) return cached;
 
-  const next = loadGrowGardenCollectionDataset(config).then((dataset) => buildGrowGardenPreparedCollection(config, dataset));
+  const next: Promise<GrowGardenPreparedCollection> = loadGrowGardenCollectionDataset(config)
+    .then((dataset) => buildGrowGardenPreparedCollection(config, dataset))
+    .catch((error: unknown) => {
+      if (growGardenPreparedCollectionCache.get(config.slug) === next) {
+        growGardenPreparedCollectionCache.delete(config.slug);
+      }
+      throw error;
+    });
   growGardenPreparedCollectionCache.set(config.slug, next);
   return next;
 }

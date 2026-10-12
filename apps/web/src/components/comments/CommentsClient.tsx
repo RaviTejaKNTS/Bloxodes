@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { MessageCircle, Pencil, Reply, Send, Trash2 } from "lucide-react";
 import { FiCompass, FiCoffee, FiFeather, FiStar, FiUser, FiZap } from "react-icons/fi";
 import type { CommentEntry } from "@/lib/comments";
+import { renderCommentText } from "@/lib/comment-text";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -74,19 +75,6 @@ function hashString(input: string): number {
     hash = (hash * 31 + input.charCodeAt(i)) >>> 0;
   }
   return hash;
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-function plainTextToHtml(value: string): string {
-  return escapeHtml(value).replace(/\r?\n/g, "<br />");
 }
 
 function displayName(author: CommentEntry["author"]): string {
@@ -314,7 +302,7 @@ export function CommentsClient({ entityType, entityId, initialComments }: Commen
       id: tempId,
       parent_id: parentId,
       body_md: trimmed,
-      body_html: plainTextToHtml(trimmed),
+      body_html: renderCommentText(trimmed),
       status: "pending",
       created_at: new Date().toISOString(),
       created_label: "Just now",
@@ -428,7 +416,7 @@ export function CommentsClient({ entityType, entityId, initialComments }: Commen
       updateCommentState(prev, editingId, (comment) => ({
         ...comment,
         body_md: trimmed,
-        body_html: plainTextToHtml(trimmed),
+        body_html: renderCommentText(trimmed),
         status: "pending"
       }))
     );
@@ -487,7 +475,7 @@ export function CommentsClient({ entityType, entityId, initialComments }: Commen
   }
 
   return (
-    <Card className="overflow-hidden rounded-lg border-border/70 bg-card shadow-none" id="comments">
+    <Card className="overflow-hidden rounded-lg border-border/70 bg-card shadow-none" id="comments" data-nosnippet="">
       <CardHeader className="border-b border-border/60 px-4 py-4 sm:px-5">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -708,12 +696,18 @@ function CommentThread({
   const canReply = !isSubmitting && (isAuthenticated || guestInfoValid);
 
   return (
-    <div className="space-y-4 rounded-md border border-border/60 bg-card px-4 py-4">
+    <div
+      className="space-y-4 rounded-md border border-border/60 bg-card px-4 py-4"
+      itemScope
+      itemType="https://schema.org/Comment"
+    >
       <div className="flex items-start gap-3">
         <CommentAvatar author={node.author} />
         <div className="min-w-0 flex-1 space-y-2">
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-            <span className="text-sm font-semibold text-foreground">{name}</span>
+            <span itemProp="author" itemScope itemType="https://schema.org/Person">
+              <span itemProp="name" className="text-sm font-semibold text-foreground">{name}</span>
+            </span>
             {isAdmin ? (
               <Badge variant="outline" className="rounded-md px-1.5 py-0 text-[10px] text-amber-300">
                 Admin
@@ -724,7 +718,7 @@ function CommentThread({
                 Pending
               </Badge>
             ) : null}
-            {node.created_label ? <span>{node.created_label}</span> : null}
+            {node.created_label ? <time itemProp="dateCreated" dateTime={node.created_at}>{node.created_label}</time> : null}
           </div>
           {isEditing ? (
             <form onSubmit={onEditSubmit} className="space-y-3">
@@ -762,7 +756,8 @@ function CommentThread({
           ) : (
             <div
               className="prose prose-sm max-w-none text-sm text-foreground dark:prose-invert"
-              dangerouslySetInnerHTML={{ __html: node.body_html }}
+              itemProp="text"
+              dangerouslySetInnerHTML={{ __html: renderCommentText(node.body_md) }}
             />
           )}
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
