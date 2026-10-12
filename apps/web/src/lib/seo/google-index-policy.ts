@@ -1,5 +1,171 @@
 type PublicPath = `/${string}`;
 
+type GoogleIndexableGame = {
+  game: string;
+  wikiSlug: string;
+  codesSlugs: readonly string[];
+  quizSlugs: readonly string[];
+  checklistSlugs: readonly string[];
+};
+
+// Keep each game's page-type slugs together, including published slug variants.
+export const GOOGLE_INDEXABLE_GAMES = [
+  {
+    game: "restaurant-tycoon-3",
+    wikiSlug: "restaurant-tycoon-3",
+    codesSlugs: ["restaurant-tycoon-3"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "blox-fruits",
+    wikiSlug: "blox-fruits",
+    codesSlugs: ["blox-fruits"],
+    quizSlugs: [],
+    checklistSlugs: ["blox-fruits"]
+  },
+  {
+    game: "driving-empire",
+    wikiSlug: "driving-empire",
+    codesSlugs: ["driving-empire"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "rivals",
+    wikiSlug: "rivals",
+    codesSlugs: ["rivals"],
+    quizSlugs: ["rivals"],
+    checklistSlugs: ["rivals"]
+  },
+  {
+    game: "murder-mystery-2",
+    wikiSlug: "murder-mystery-2",
+    codesSlugs: ["murder-mystery-2"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "fisch",
+    wikiSlug: "fisch",
+    codesSlugs: ["fisch"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "lineage-piece",
+    wikiSlug: "lineage-piece",
+    codesSlugs: [],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "1-speed-keyboard-escape",
+    wikiSlug: "1-speed-keyboard-escape",
+    codesSlugs: ["1-speed-keyboard-escape"],
+    quizSlugs: ["1-speed-keyboard-escape"],
+    checklistSlugs: ["1-speed-keyboard-escape"]
+  },
+  {
+    game: "tower-of-hell",
+    wikiSlug: "tower-of-hell",
+    codesSlugs: [],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "gakuran",
+    wikiSlug: "gakuran",
+    codesSlugs: ["gakuran"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "animal-hospital",
+    wikiSlug: "animal-hospital",
+    codesSlugs: [],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "adopt-me",
+    wikiSlug: "adopt-me",
+    codesSlugs: ["adopt-me"],
+    quizSlugs: [],
+    checklistSlugs: ["adopt-me"]
+  },
+  {
+    game: "jujutsu-shenanigans",
+    wikiSlug: "jujutsu-shenanigans",
+    codesSlugs: ["jujutsu-shenanigans"],
+    quizSlugs: ["jujutsu-shenanigans"],
+    checklistSlugs: ["jujutsu-shenanigans"]
+  },
+  {
+    game: "gym-star-simulator",
+    wikiSlug: "gym-star-simulator",
+    codesSlugs: ["gym-star-simulator"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "ride-a-pet",
+    wikiSlug: "ride-a-pet",
+    codesSlugs: ["ride-a-pet"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "steal-an-egg",
+    wikiSlug: "steal-an-egg",
+    codesSlugs: [],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "forsaken",
+    wikiSlug: "forsaken",
+    codesSlugs: ["forsaken"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "creatures-of-sonaria",
+    wikiSlug: "creatures-of-sonaria",
+    codesSlugs: ["creatures-of-sonaria"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "brookhaven",
+    wikiSlug: "brookhaven-rp",
+    codesSlugs: ["brookhaven", "brookhaven-rp"],
+    quizSlugs: ["brookhaven-rp"],
+    checklistSlugs: []
+  },
+  {
+    game: "evade",
+    wikiSlug: "evade",
+    codesSlugs: ["evade"],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+  {
+    game: "demonology",
+    wikiSlug: "demonology",
+    codesSlugs: [],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
+] as const satisfies readonly GoogleIndexableGame[];
+
+const gamePaths: readonly PublicPath[] = GOOGLE_INDEXABLE_GAMES.flatMap((game): PublicPath[] => [
+  `/wiki/${game.wikiSlug}`,
+  ...game.codesSlugs.map((slug): PublicPath => `/codes/${slug}`),
+  ...game.quizSlugs.map((slug): PublicPath => `/quizzes/${slug}`),
+  ...game.checklistSlugs.map((slug): PublicPath => `/checklists/${slug}`)
+]);
+
 export const GOOGLE_INDEXABLE_PATHS = [
   "/",
   "/about",
@@ -8,23 +174,6 @@ export const GOOGLE_INDEXABLE_PATHS = [
   "/how-we-gather-and-verify-codes",
   "/authors",
   "/catalog",
-  "/catalog/roblox-music-ids",
-  "/catalog/roblox-music-ids/trending",
-  "/catalog/roblox-music-ids/charts",
-  "/catalog/roblox-music-ids/games",
-  "/catalog/roblox-decal-ids",
-  "/catalog/roblox-decal-ids/categories",
-  "/catalog/roblox-decal-ids/curated",
-  "/catalog/roblox-decal-ids/games",
-  "/catalog/roblox-mesh-ids",
-  "/catalog/roblox-items-and-bundles",
-  "/catalog/roblox-items-and-bundles/roblox-clothing",
-  "/catalog/roblox-items-and-bundles/roblox-clothing/classic-shirts",
-  "/catalog/roblox-items-and-bundles/roblox-accessories",
-  "/catalog/roblox-items-and-bundles/roblox-emotes",
-  "/catalog/free-roblox-items",
-  "/catalog/roblox-color-codes",
-  "/catalog/roblox-font-ids",
   "/stats",
   "/stats/games",
   "/stats/items",
@@ -39,41 +188,22 @@ export const GOOGLE_INDEXABLE_PATHS = [
   "/tools/roblox-username-generator",
   "/tools/roblox-devex-calculator",
   "/wiki",
-  "/wiki/blox-fruits",
-  "/wiki/blox-fruits/fruits",
-  "/wiki/blox-fruits/swords",
-  "/wiki/murder-mystery-2/knives",
-  "/wiki/murder-mystery-2/guns",
-  "/wiki/rivals/skins",
-  "/wiki/rivals/weapons",
-  "/wiki/ride-a-pet/eggs",
-  "/wiki/steal-an-egg/pets",
-  "/wiki/demonology/ghosts",
-  "/wiki/jujutsu-shenanigans/emotes",
-  "/wiki/fisch/enchantments",
-  "/wiki/1-speed-keyboard-escape",
   "/articles",
-  "/articles/roblox-account-status",
-  "/articles/how-to-fix-the-roblox-captcha-loop",
-  "/articles/how-to-fix-roblox-age-verification-not-working",
-  "/articles/create-and-publish-roblox-game",
-  "/articles/roblox-classic-theme-guide",
-  "/articles/legacy-piece-tier-list",
-  "/articles/tower-defense-simulator-best-towers-tier-list",
   "/codes",
-  "/codes/restaurant-tycoon-3",
-  "/codes/driving-empire",
-  "/codes/gym-star-simulator",
-  "/codes/brookhaven",
   "/codes/it-girl",
   "/codes/luck-incremental",
   "/codes/southwest-florida",
   "/codes/multiverse-tower-defense",
-  "/codes/blox-fruits",
-  "/codes/doors"
+  "/codes/doors",
+  ...gamePaths
 ] as const satisfies readonly PublicPath[];
 
 const indexablePaths: ReadonlySet<string> = new Set(GOOGLE_INDEXABLE_PATHS);
+const indexablePathPrefixes: readonly PublicPath[] = [
+  "/catalog",
+  "/articles",
+  ...GOOGLE_INDEXABLE_GAMES.map((game): PublicPath => `/wiki/${game.wikiSlug}`)
+];
 export const GOOGLE_AUTHOR_PROFILE_PREFIX = "/authors/";
 export const GOOGLE_NOINDEX_HEADER = "googlebot: noindex, follow";
 
@@ -87,7 +217,8 @@ export function isGoogleIndexable(pathname: string): boolean {
   if (pathname.includes("?")) return false;
   const path = normalizePath(pathname);
   if (indexablePaths.has(path)) return true;
-  // Only profile pages use the prefix exception. Nested routes still default to noindex.
+  if (indexablePathPrefixes.some((prefix) => path.startsWith(`${prefix}/`))) return true;
+  // Author profiles allow one slug, without nested routes.
   return path.startsWith(GOOGLE_AUTHOR_PROFILE_PREFIX)
     && Boolean(path.slice(GOOGLE_AUTHOR_PROFILE_PREFIX.length))
     && !path.slice(GOOGLE_AUTHOR_PROFILE_PREFIX.length).includes("/");

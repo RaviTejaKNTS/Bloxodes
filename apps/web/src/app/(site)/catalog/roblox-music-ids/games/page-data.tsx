@@ -25,6 +25,14 @@ function serializeJsonLd(value: unknown): string {
   return JSON.stringify(value).replace(/</g, "\\u003c").replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 }
 
+function newestMusicDate(songs: MusicRow[], contentHtml: PageContentHtml | null): string | null {
+  if (contentHtml?.updatedAt) return contentHtml.updatedAt;
+  return songs.reduce<string | null>((latest, song) => {
+    if (!song.last_seen_at) return latest;
+    return !latest || Date.parse(song.last_seen_at) > Date.parse(latest) ? song.last_seen_at : latest;
+  }, null);
+}
+
 export async function buildMusicGameContentHtml(catalog: CatalogPageContent | null) {
   return buildPageContentHtml(catalog);
 }
@@ -105,7 +113,7 @@ export function renderMusicGamePage({
   const basePath = `${MUSIC_GAMES_PATH}/${game.slug}`;
   const path = currentPage > 1 ? `${basePath}/page/${currentPage}` : basePath;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${path}`;
-  const updatedAt = contentHtml?.updatedAt ?? null;
+  const updatedAt = newestMusicDate(songs, contentHtml);
   const introNodes = currentPage === 1 && contentHtml?.introHtml
     ? renderPageContentNodes(contentHtml.introHtml, `${game.slug}-music-intro`)
     : currentPage === 1 ? <p>{game.description}</p> : null;

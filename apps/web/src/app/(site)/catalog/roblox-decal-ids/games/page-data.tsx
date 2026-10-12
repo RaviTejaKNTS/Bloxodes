@@ -25,7 +25,7 @@ function serializeJsonLd(value: unknown): string {
 function newestDecalDate(decals: DecalRow[], contentHtml: PageContentHtml | null): string | null {
   if (contentHtml?.updatedAt) return contentHtml.updatedAt;
   return decals.reduce<string | null>((latest, decal) => {
-    const value = decal.roblox_updated_at ?? decal.first_seen_at;
+    const value = decal.verified_at ?? decal.last_seen_at ?? decal.thumbnail_checked_at;
     if (!value) return latest;
     return !latest || Date.parse(value) > Date.parse(latest) ? value : latest;
   }, null);

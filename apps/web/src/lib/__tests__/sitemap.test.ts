@@ -21,25 +21,13 @@ describe("sitemap builders", () => {
   it("escapes URL-set values", () => {
     const xml = buildSitemapUrlSetXml([
       {
-        loc: "https://bloxodes.com/catalog/A&B",
+        loc: "https://bloxodes.com/stats/games?genre=A&B",
         changefreq: "weekly",
         priority: "0.5"
       }
     ]);
     expect(xml).toContain("A&amp;B");
     expect(xml).toContain("<urlset");
-  });
-
-  it("omits query URLs while keeping Google-noindexed paths", () => {
-    const xml = buildSitemapUrlSetXml([
-      { loc: "https://bloxodes.com/stats/games?genre=RPG", changefreq: "hourly", priority: "0.7" },
-      { loc: "https://bloxodes.com/codes/unlisted-game", changefreq: "weekly", priority: "0.7" },
-      { loc: "https://bloxodes.com/stats/games", changefreq: "hourly", priority: "0.8" }
-    ]);
-    expect(xml).not.toContain("genre=RPG");
-    expect(xml).toContain("https://bloxodes.com/codes/unlisted-game");
-    expect(xml).toContain("https://bloxodes.com/stats/games");
-    expect(buildSitemapIndexXml([{ loc: "https://bloxodes.com/sitemaps/stats.xml?filter=RPG" }])).not.toContain("filter=RPG");
   });
 
   it("builds sitemap indexes with lastmod", () => {

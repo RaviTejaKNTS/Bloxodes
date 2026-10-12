@@ -15,15 +15,15 @@ Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, e
 
 ## Google index policy
 
-Google can fetch our pages, but since October 2025 it has indexed only the homepage. Search Console URL Inspection confirmed the diagnosis on 2026-10-12. We give Google a short allowlist of strong pages and ask it to skip the rest. Bing and other engines keep their existing robots directives.
+Google can fetch our pages, but since October 2025 it has indexed only the homepage. Search Console URL Inspection confirmed the diagnosis on 2026-10-12. We give Google an allowlist of our strongest page groups and ask it to skip the rest. Bing and other engines keep their existing robots directives.
 
-- The allowlist lives in `GOOGLE_INDEXABLE_PATHS` in `apps/web/src/lib/seo/google-index-policy.ts`. Paths are exact, with no trailing slash or query. `/authors/<slug>` is the only prefix rule.
-- The proxy adds `X-Robots-Tag: googlebot: noindex, follow` to every HTML path that isn't allowlisted. That includes pagination, query variants and new pages. The header depends only on the URL, never on the user agent. APIs, `_next`, sitemaps, feeds, robots.txt, ads.txt and asset files are skipped.
-- To add a page, add its path to the allowlist once it's editorially approved. An entry only lifts the Google restriction; it never overrides a page's own all-engine noindex.
+- The allowlist lives in `apps/web/src/lib/seo/google-index-policy.ts`. `GOOGLE_INDEXABLE_PATHS` keeps exact paths for home, trust pages, authors, stats hubs and reports, tools, the wiki and codes indexes, and the existing top-10 codes pages. `/authors/<slug>` allows one profile slug without nested routes.
+- `/catalog` and `/articles` allow every path beneath them, including path-based pagination. Prefixes match whole segments, so `/catalogue` stays denied. Query variants stay denied, and trailing slashes are normalized.
+- `GOOGLE_INDEXABLE_GAMES` allows each listed game's wiki hub and every path beneath it, including future collections. It also allows that game's listed codes, quiz and checklist slugs. The games are restaurant-tycoon-3, blox-fruits, driving-empire, rivals, murder-mystery-2, fisch, lineage-piece, 1-speed-keyboard-escape, tower-of-hell, gakuran, animal-hospital, adopt-me, jujutsu-shenanigans, gym-star-simulator, ride-a-pet, steal-an-egg, forsaken, creatures-of-sonaria, brookhaven, evade and demonology. Brookhaven uses `brookhaven-rp` for its wiki and quiz. Both published Brookhaven codes slugs are included. Gym Star Simulator's wiki prefix is reserved for future pages; its hub currently returns 404. Per-game `/stats/games/<slug>` pages stay denied.
+- To add a game, add one typed entry to `GOOGLE_INDEXABLE_GAMES` with its wiki slug and confirmed codes, quiz and checklist slugs. Use empty lists for page types without published pages. Other approved exact paths belong in `GOOGLE_INDEXABLE_PATHS`. An entry only lifts the Google restriction; it never overrides a page's own all-engine noindex.
+- The proxy adds `X-Robots-Tag: googlebot: noindex, follow` to every HTML path that isn't allowlisted, including query variants. The header depends only on the URL, never on the user agent. APIs, `_next`, sitemaps, feeds, robots.txt, ads.txt and asset files are skipped.
 - For metadata, don't set `googleBot: { index: true }` in page metadata. The root layout keeps only Google preview settings, so a page's meta tags never contradict the header.
-- Sitemaps still list Google-noindexed pages, because Bing uses them. Query URLs are left out for every engine.
-- For codes dates, the "Updated on" label, JSON-LD `dateModified` and sitemap `lastmod` come from `code-content-dates.ts`. They move on publication, recorded copy rewrites (`re_rewritten_at`) and code additions or reactivations (`first_seen_at`), never on routine row touches. "Codes last checked on" uses the latest `last_seen_at`. Expirations, deletions and hand edits have no stored change time yet, so they do not move the date. A refresh with no code rows also has no stored check timestamp. Fixing these gaps needs a separate schema or pipeline task.
-- Catalog "Updated" dates come from editorial or asset-content dates, never from sync, observation or verification timestamps.
+- Nothing in this policy changes what Bing or other engines see. Generic robots meta, canonicals, content, dates and sitemaps stay the same, and sitemaps still list Google-noindexed pages.
 
 ## Analytics
 

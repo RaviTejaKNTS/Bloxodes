@@ -179,9 +179,9 @@ export function proxy(req: NextRequest) {
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
-  // When indexing is disabled, the all-engine noindex header already covers Google.
-  const googleRobots = SEARCH_INDEXING_ENABLED ? googleIndexHeader(`${url.pathname}${url.search}`) : null;
-  if (googleRobots) {
+  // An existing all-engine robots header (private routes, indexing disabled) already covers Google.
+  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`);
+  if (googleRobots && !response.headers.has("X-Robots-Tag")) {
     response.headers.set("X-Robots-Tag", googleRobots);
   }
   return response;
