@@ -233,7 +233,14 @@ export async function loadPreparedTheForgeCollection(config: GameCollectionViewC
   const cached = theForgePreparedCollectionCache.get(config.slug);
   if (cached) return cached;
 
-  const next = loadTheForgeCollectionDataset(config).then((dataset) => buildTheForgePreparedCollection(config, dataset));
+  const next: Promise<TheForgePreparedCollection> = loadTheForgeCollectionDataset(config)
+    .then((dataset) => buildTheForgePreparedCollection(config, dataset))
+    .catch((error: unknown) => {
+      if (theForgePreparedCollectionCache.get(config.slug) === next) {
+        theForgePreparedCollectionCache.delete(config.slug);
+      }
+      throw error;
+    });
   theForgePreparedCollectionCache.set(config.slug, next);
   return next;
 }

@@ -83,6 +83,7 @@
     "test:article-pipeline": "NODE_ENV=test node --import tsx --test scripts/articles/__tests__/article-pipeline*.test.ts",
     "articles:homelab:check": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/ops/check-homelab-article-automation.ts",
     "articles:update": "tsx scripts/articles/update-articles.ts",
+    "comments:hide-links": "tsx scripts/comments/hide-comments-with-links.ts",
     "refresh:codes": "tsx scripts/codes/update-codes.ts",
     "refresh:promo-rewards": "tsx scripts/catalog/refresh-roblox-promo-rewards.ts",
     "collect:font-ids": "tsx scripts/catalog/collect-roblox-font-ids.ts",

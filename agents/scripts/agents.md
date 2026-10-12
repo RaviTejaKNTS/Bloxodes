@@ -13,6 +13,8 @@ This file is the quick reference for what exists today and how to invoke it.
 
 Selective PR review uses `scripts/ci/review-scope.mjs` and `.github/workflows/codex-review.yml`. Ready code PRs receive a read-only API-backed review; docs and skills-only PRs skip it. After fixes, run `gh workflow run codex-review.yml --ref production -f pull_request=<number>` to review the current head. It creates no application build or content publication.
 
+`comments:hide-links` scans comment bodies and guest names, prints matches by default and sets public/pending matches to `rejected` with `--apply`. It preserves moderation data. Production reads and writes require `NODE_ENV=production` and `--allow-prod`; comment UPDATE triggers queue page revalidation. See `scripts/AGENTS.md` for env selection.
+
 ## Preferred Entry Point
 
 - Prefer `npm run <name>` when a package script exists.
