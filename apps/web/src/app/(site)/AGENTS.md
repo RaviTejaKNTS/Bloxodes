@@ -44,6 +44,7 @@ Check metadata, structured data, pagination, shared search, comments, progress, 
 ## SEO and Structured Data
 
 - Public pages should define metadata or `generateMetadata`.
+- New pages are Google-noindexed until added to the allowlist in `apps/web/src/lib/seo/google-index-policy.ts`.
 - Use JSON-LD where the page type clearly maps to content entities like `CollectionPage`, `Article`, `FAQPage`, `ItemList`, or breadcrumbs.
 - Canonicals should come from shared helpers in `apps/web/src/lib/seo.ts` and `apps/web/src/lib/site-config.ts`.
 

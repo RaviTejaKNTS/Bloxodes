@@ -1,6 +1,7 @@
 import { publicContentCache } from "@/lib/public-content-cache";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
+import type { CodeDateSource, CodePageDateSource } from "@/lib/code-content-dates";
 
 export type Author = {
   id: string;
@@ -242,6 +243,23 @@ export type Code = {
   first_seen_at: string;
   last_seen_at: string;
 };
+
+export type CodePageSitemapDates = CodePageDateSource & {
+  slug: string;
+  codes: Pick<CodeDateSource, "first_seen_at">[];
+};
+
+export async function listCodePageSitemapDates(offset: number, limit: number): Promise<CodePageSitemapDates[]> {
+  const { data, error } = await supabaseAdmin()
+    .from("code_pages")
+    .select("slug, created_at, published_at, re_rewritten_at, codes(first_seen_at)")
+    .eq("is_published", true)
+    .not("slug", "is", null)
+    .order("slug", { ascending: true })
+    .range(offset, offset + limit - 1);
+  if (error) throw error;
+  return (data ?? []) as CodePageSitemapDates[];
+}
 
 export async function listPublishedCodePages(): Promise<CodePage[]> {
   const sb = supabaseAdmin();

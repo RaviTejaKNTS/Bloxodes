@@ -64,6 +64,7 @@ export function toIsoDate(value?: string | null) {
 
 export function buildSitemapUrlSetXml(entries: SitemapUrlSetEntry[]) {
   const body = entries
+    .filter((entry) => !entry.loc.includes("?"))
     .map((entry) => {
       const loc = escapeXml(entry.loc);
       const lastmod = entry.lastmod ? `<lastmod>${escapeXml(entry.lastmod)}</lastmod>` : "";
@@ -79,6 +80,7 @@ ${body}
 
 export function buildSitemapIndexXml(entries: SitemapIndexEntry[]) {
   const body = entries
+    .filter((entry) => !entry.loc.includes("?"))
     .map((entry) => {
       const loc = escapeXml(entry.loc);
       const lastmod = entry.lastmod ? `<lastmod>${escapeXml(entry.lastmod)}</lastmod>` : "";

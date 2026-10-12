@@ -21,8 +21,6 @@ export const metadata = {
     index: SEARCH_INDEXING_ENABLED,
     follow: SEARCH_INDEXING_ENABLED,
     googleBot: {
-      index: SEARCH_INDEXING_ENABLED,
-      follow: SEARCH_INDEXING_ENABLED,
       maxSnippet: -1,
       maxImagePreview: "large",
       maxVideoPreview: -1

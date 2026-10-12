@@ -21,11 +21,7 @@ export const metadata: Metadata = {
   alternates: buildAlternates(canonicalUrl),
   robots: {
     index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true
-    }
+    follow: true
   },
   openGraph: {
     type: "article",

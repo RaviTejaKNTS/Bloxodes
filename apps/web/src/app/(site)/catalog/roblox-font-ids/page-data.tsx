@@ -60,7 +60,7 @@ export function renderFontIdsPage({
   description?: string;
 }) {
   const title = contentHtml?.title?.trim() || FALLBACK_TITLE;
-  const updatedAt = contentHtml?.updatedAt ?? fonts[0]?.verified_at ?? fonts[0]?.roblox_updated_at ?? null;
+  const updatedAt = contentHtml?.updatedAt ?? fonts[0]?.roblox_updated_at ?? null;
   const introNodes = contentHtml?.introHtml
     ? renderPageContentNodes(contentHtml.introHtml, "font-ids-intro")
     : null;

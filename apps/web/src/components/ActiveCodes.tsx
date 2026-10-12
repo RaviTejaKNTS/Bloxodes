@@ -27,8 +27,7 @@ type Props = {
   codes: Code[];
   gameName: string;
   gameSlug: string;
-  lastUpdatedLabel: string;
-  lastCheckedLabel: string;
+  lastCheckedLabel: string | null;
   lastCheckedRelativeLabel?: string | null;
   nowMs: number;
 };
@@ -43,7 +42,6 @@ export function ActiveCodes({
   codes,
   gameName,
   gameSlug,
-  lastUpdatedLabel,
   lastCheckedLabel,
   lastCheckedRelativeLabel,
   nowMs
@@ -193,13 +191,15 @@ export function ActiveCodes({
             <CardTitle className="text-xl leading-tight text-foreground sm:text-2xl">
               Active {gameName} Codes
             </CardTitle>
-            <p className="flex items-center gap-1.5 text-sm leading-5 text-muted-foreground">
-              <Check className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              <span>
-                Checked and verified on {lastCheckedLabel}
-                {lastCheckedRelativeLabel ? <span> ({lastCheckedRelativeLabel})</span> : null}
-              </span>
-            </p>
+            {lastCheckedLabel ? (
+              <p className="flex items-center gap-1.5 text-sm leading-5 text-muted-foreground">
+                <Check className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                <span>
+                  Codes last checked on {lastCheckedLabel}
+                  {lastCheckedRelativeLabel ? <span> ({lastCheckedRelativeLabel})</span> : null}
+                </span>
+              </p>
+            ) : null}
           </div>
           <Badge variant="secondary" className="shrink-0 rounded-md px-2 py-1 text-xs">
             {codes.length} active

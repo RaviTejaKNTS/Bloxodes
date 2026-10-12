@@ -63,12 +63,7 @@ export function renderEmoteCommandsPage({
   description?: string;
 }) {
   const title = contentHtml?.title?.trim() || FALLBACK_TITLE;
-  const verificationDates = commands
-    .map((entry) => entry.verified_at)
-    .filter(Boolean)
-    .sort();
-  const latestVerification = verificationDates[verificationDates.length - 1];
-  const updatedAt = contentHtml?.updatedAt ?? latestVerification ?? null;
+  const updatedAt = contentHtml?.updatedAt ?? null;
   const introNodes = contentHtml?.introHtml
     ? renderPageContentNodes(contentHtml.introHtml, "emote-commands-intro")
     : null;

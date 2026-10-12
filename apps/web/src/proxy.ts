@@ -7,6 +7,7 @@ import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
 import { minecraftLegacyRedirect } from "@/lib/minecraft-paths";
+import { googleIndexHeader } from "@/lib/seo/google-index-policy";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
 
@@ -178,6 +179,11 @@ export function proxy(req: NextRequest) {
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
+  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`);
+  if (googleRobots) {
+    // Append to preserve the all-engine preview restriction when indexing is disabled.
+    response.headers.append("X-Robots-Tag", googleRobots);
+  }
   return response;
 }
 
