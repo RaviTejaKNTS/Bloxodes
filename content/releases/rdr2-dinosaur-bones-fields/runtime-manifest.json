@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "namespace": "red-dead",
+  "game": {
+    "slug": "red-dead-redemption-2",
+    "name": "Red Dead Redemption 2"
+  },
+  "collection": {
+    "slug": "dinosaur-bones",
+    "label": "Dinosaur Bones",
+    "sortOrder": 100,
+    "pageType": "collectible"
+  },
+  "route": "/red-dead/wiki/red-dead-redemption-2/dinosaur-bones",
+  "dataset": "dataset.json",
+  "mediaRoot": "media",
+  "sourceUrls": [
+    "https://www.rockstargames.com/games/RedDeadRedemption2",
+    "https://www.rockstargames.com/newswire/article/25o2411817aa9a/Pre-Order-the-Red-Dead-Redemption-2-Complete-Official-Guide",
+    "https://guides4gamers.com/red-dead-redemption-2/pois/dinosaur-bones/",
+    "https://guides4gamers.com/json/map.2.0.php?id=67",
+    "https://www.powerpyx.com/red-dead-redemption-2-all-dinosaur-bones-locations/",
+    "https://www.gamepur.com/guides/rdr2-dinosaur-bone-locations",
+    "https://www.rdr2.org/guides/a-test-of-faith-stranger-mission-dinosaur-bones-locations-guide/",
+    "https://www.gamerevolution.com/guides/453235-red-dead-redemption-2-dinosaur-bone-locations",
+    "https://holdtoreset.com/dinosaur-bones-locations-guide-where-to-find-all-30-dinosaur-bones-in-red-dead-redemption-2/",
+    "https://www.pushsquare.com/guides/red-dead-redemption-2-all-dinosaur-bones-locations"
+  ]
+}
