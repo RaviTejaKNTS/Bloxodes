@@ -1,0 +1,688 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Red Dead Redemption 2",
+    "gameSlug": "red-dead-redemption-2",
+    "collection": "dinosaur-bones",
+    "route": "/red-dead/wiki/red-dead-redemption-2/dinosaur-bones",
+    "catalogCode": "red-dead-redemption-2-dinosaur-bones",
+    "sourceItemCount": 30,
+    "itemFields": [
+      "name",
+      "routeOrder",
+      "state",
+      "region",
+      "approachHint",
+      "availability",
+      "spoilerLevel",
+      "questRelation",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "routeOrder",
+      "state",
+      "region",
+      "approachHint",
+      "availability",
+      "spoilerLevel",
+      "questRelation",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Route section",
+      "sectionOrder": [
+        "Heartlands and Scarlett Meadows",
+        "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "Big Valley",
+        "New Austin"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "region"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "state",
+        "region",
+        "availability",
+        "spoilerLevel"
+      ],
+      "tableFields": [
+        "routeOrder",
+        "name",
+        "state",
+        "region",
+        "availability"
+      ],
+      "fieldPresentation": {
+        "name": {
+          "kind": "highlight",
+          "label": "Site",
+          "omitWhenEmpty": false
+        },
+        "routeOrder": {
+          "kind": "chip",
+          "label": "Route",
+          "omitWhenEmpty": false
+        },
+        "state": {
+          "kind": "normal",
+          "label": "State",
+          "omitWhenEmpty": false
+        },
+        "region": {
+          "kind": "normal",
+          "label": "Region",
+          "omitWhenEmpty": false
+        },
+        "approachHint": {
+          "kind": "detail",
+          "label": "Approach",
+          "omitWhenEmpty": false
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability",
+          "omitWhenEmpty": false
+        },
+        "spoilerLevel": {
+          "kind": "highlight",
+          "tone": "warning",
+          "label": "Spoiler level",
+          "omitWhenEmpty": false
+        },
+        "questRelation": {
+          "kind": "normal",
+          "label": "Quest",
+          "omitWhenEmpty": false
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary",
+          "omitWhenEmpty": false
+        }
+      }
+    },
+    "notes": {
+      "scope": "Red Dead Redemption 2 Story Mode dinosaur-bone sites tied to A Test of Faith. Red Dead Online, Red Dead Redemption, and Undead Nightmare are excluded.",
+      "rowUnit": "One named collectible site, not a source ordinal, species, screenshot, or quest milestone.",
+      "progressionNote": "The first 22 sites use the normal Chapter 2+ route. The eight New Austin sites are marked post-story/epilogue for normal Story Mode access; exploit routes are excluded.",
+      "namingNote": "Canonical site names follow the approved Guides4Gamers roster. Conflicting guide ordinals and spelling variants are not public item identity.",
+      "imagePolicy": "The separate image pass must resolve exact-location image rights or approved replacement captures. No images are wired during this data pass, so every items[].system.image value is null."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Heartlands Oil Field",
+        "routeOrder": 1,
+        "state": "New Hanover",
+        "region": "Heartlands",
+        "approachHint": "Under the oil derrick, at the bottom of the well.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search beneath the oil derrick at the bottom of the well."
+      },
+      "system": {
+        "slug": "heartlands-oil-field",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heartlands Southern Gorge",
+        "routeOrder": 2,
+        "state": "New Hanover",
+        "region": "Heartlands",
+        "approachHint": "Follow the dry riverbed or gorge on the hill near the oil derrick.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Follow the dry riverbed or nearby gorge on the hill near the oil derrick."
+      },
+      "system": {
+        "slug": "heartlands-southern-gorge",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heartlands Grassy Hill",
+        "routeOrder": 3,
+        "state": "New Hanover",
+        "region": "Heartlands",
+        "approachHint": "Look across the exposed open grassy hill.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the exposed ground across the open grassy hill."
+      },
+      "system": {
+        "slug": "heartlands-grassy-hill",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heartlands Dewberry Creek",
+        "routeOrder": 4,
+        "state": "New Hanover",
+        "region": "Heartlands",
+        "approachHint": "Travel west of Dewberry Creek and check beside the dried river.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search west of Dewberry Creek beside the dried river."
+      },
+      "system": {
+        "slug": "heartlands-dewberry-creek",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scarlett Meadows Dewberry Creek",
+        "routeOrder": 5,
+        "state": "Lemoyne",
+        "region": "Scarlett Meadows",
+        "approachHint": "Check south of Dewberry Creek under the L area of Lemoyne on the map.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search south of Dewberry Creek in the L area of Lemoyne."
+      },
+      "system": {
+        "slug": "scarlett-meadows-dewberry-creek",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heartlands Abandoned Shack",
+        "routeOrder": 6,
+        "state": "New Hanover",
+        "region": "Heartlands",
+        "approachHint": "Search the ground south of the abandoned cabin.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Check the ground south of the abandoned cabin."
+      },
+      "system": {
+        "slug": "heartlands-abandoned-shack",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heartlands Northern Boundary",
+        "routeOrder": 7,
+        "state": "New Hanover",
+        "region": "Heartlands",
+        "approachHint": "Climb the cliff or top near the Dakota River and the northern Heartlands edge.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Climb toward the cliff top near the Dakota River and northern Heartlands edge."
+      },
+      "system": {
+        "slug": "heartlands-northern-boundary",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Heartlands Cliff Face",
+        "routeOrder": 8,
+        "state": "New Hanover",
+        "region": "Heartlands",
+        "approachHint": "Search at the base of the cliff in the Dakota River area.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search at the base of the cliff in the Dakota River area."
+      },
+      "system": {
+        "slug": "heartlands-cliff-face",
+        "section": "Heartlands and Scarlett Meadows",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Roanoke Ridge Van Horn",
+        "routeOrder": 9,
+        "state": "New Hanover",
+        "region": "Roanoke Ridge",
+        "approachHint": "Check the edge of the clearing northwest of Van Horn.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the clearing edge northwest of Van Horn."
+      },
+      "system": {
+        "slug": "roanoke-ridge-van-horn",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Roanoke Ridge Kamassa River",
+        "routeOrder": 10,
+        "state": "New Hanover",
+        "region": "Roanoke Ridge",
+        "approachHint": "Use the middle cliff level west of the Kamassa River.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the middle cliff level west of the Kamassa River."
+      },
+      "system": {
+        "slug": "roanoke-ridge-kamassa-river",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Roanoke Ridge Valley Overlook",
+        "routeOrder": 11,
+        "state": "New Hanover",
+        "region": "Roanoke Ridge",
+        "approachHint": "Climb to the cliff above the trail toward Brandywine Drop.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Climb to the cliff above the trail toward Brandywine Drop."
+      },
+      "system": {
+        "slug": "roanoke-ridge-valley-overlook",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Roanoke Ridge Overlook",
+        "routeOrder": 12,
+        "state": "New Hanover",
+        "region": "Roanoke Ridge",
+        "approachHint": "Search the rocky plateau south of the railroad bridge.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the rocky plateau south of the railroad bridge."
+      },
+      "system": {
+        "slug": "roanoke-ridge-overlook",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grizzlies O’Creagh’s Run Overlook",
+        "routeOrder": 13,
+        "state": "Ambarino",
+        "region": "Grizzlies",
+        "approachHint": "Follow the ridgeline west of O’Creagh’s Run.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Follow the ridgeline west of O’Creagh’s Run."
+      },
+      "system": {
+        "slug": "grizzlies-ocreaghs-run-overlook",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grizzlies Northern Boundary",
+        "routeOrder": 14,
+        "state": "Ambarino",
+        "region": "Grizzlies",
+        "approachHint": "Search the grassy hill near the northern boundary and Fairvale area.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the grassy hill near the northern boundary and Fairvale area."
+      },
+      "system": {
+        "slug": "grizzlies-northern-boundary",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grizzlies Calumet Ravine",
+        "routeOrder": 15,
+        "state": "Ambarino",
+        "region": "Grizzlies",
+        "approachHint": "Look around the red-rock outcrop near the hilltop.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the red-rock outcrop near the hilltop."
+      },
+      "system": {
+        "slug": "grizzlies-calumet-ravine",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cumberland Forest Bacchus Station",
+        "routeOrder": 16,
+        "state": "New Hanover",
+        "region": "Cumberland Forest",
+        "approachHint": "Search the cliff southwest of Bacchus Station beside the stone spike.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the cliff southwest of Bacchus Station beside the stone spike."
+      },
+      "system": {
+        "slug": "cumberland-forest-bacchus-station",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grizzlies Dakota River Ledge",
+        "routeOrder": 17,
+        "state": "Ambarino",
+        "region": "Grizzlies",
+        "approachHint": "Check the small ledge below the cliff top.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the small ledge below the cliff top near the Dakota River."
+      },
+      "system": {
+        "slug": "grizzlies-dakota-river-ledge",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cumberland Forest Six Point Overlook",
+        "routeOrder": 18,
+        "state": "New Hanover",
+        "region": "Cumberland Forest",
+        "approachHint": "Search along the cliff edge at Six Point Overlook.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the cliff edge at Six Point Overlook."
+      },
+      "system": {
+        "slug": "cumberland-forest-six-point-overlook",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grizzlies Rock Wall",
+        "routeOrder": 19,
+        "state": "Ambarino",
+        "region": "Grizzlies",
+        "approachHint": "Search at the base of the rock wall or cliff.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search at the base of the rock wall or cliff."
+      },
+      "system": {
+        "slug": "grizzlies-rock-wall",
+        "section": "Cumberland Forest, Grizzlies, and Roanoke Ridge",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Valley Beryl’s Dream Overlook",
+        "routeOrder": 20,
+        "state": "West Elizabeth",
+        "region": "Big Valley",
+        "approachHint": "Search the rocky S-bend on the Mount Shann ascent.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the rocky S-bend on the Mount Shann ascent."
+      },
+      "system": {
+        "slug": "big-valley-beryls-dream-overlook",
+        "section": "Big Valley",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Valley Rocky Slope",
+        "routeOrder": 21,
+        "state": "West Elizabeth",
+        "region": "Big Valley",
+        "approachHint": "Search the exposed open rocky slope.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the exposed open rocky slope."
+      },
+      "system": {
+        "slug": "big-valley-rocky-slope",
+        "section": "Big Valley",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Valley Northern Cave",
+        "routeOrder": 22,
+        "state": "West Elizabeth",
+        "region": "Big Valley",
+        "approachHint": "Search the cave at the foot of Mount Hagen.",
+        "availability": "Chapter 2+",
+        "spoilerLevel": "Moderate",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the cave at the foot of Mount Hagen."
+      },
+      "system": {
+        "slug": "big-valley-northern-cave",
+        "section": "Big Valley",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hennigan’s Stead Pike’s Basin",
+        "routeOrder": 23,
+        "state": "New Austin",
+        "region": "Hennigan’s Stead",
+        "approachHint": "Climb to the elevated plateau at the west end of the canyon.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the elevated plateau at the west end of Pike’s Basin."
+      },
+      "system": {
+        "slug": "hennigans-stead-pikes-basin",
+        "section": "New Austin",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cholla Springs High Desert",
+        "routeOrder": 24,
+        "state": "New Austin",
+        "region": "Cholla Springs",
+        "approachHint": "Search the rock wall or crevasse near the northern boundary.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the rock wall or crevasse near the northern boundary of Cholla Springs."
+      },
+      "system": {
+        "slug": "cholla-springs-high-desert",
+        "section": "New Austin",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gaptooth Ridge North Tumbleweed",
+        "routeOrder": 25,
+        "state": "New Austin",
+        "region": "Gaptooth Ridge",
+        "approachHint": "Search the east side of the cliff overlooking the canyon.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the east side of the cliff overlooking the canyon near Tumbleweed."
+      },
+      "system": {
+        "slug": "gaptooth-ridge-north-tumbleweed",
+        "section": "New Austin",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gaptooth Ridge South Tumbleweed",
+        "routeOrder": 26,
+        "state": "New Austin",
+        "region": "Gaptooth Ridge",
+        "approachHint": "Search the plateau edge overlooking south Tumbleweed.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the plateau edge overlooking south Tumbleweed."
+      },
+      "system": {
+        "slug": "gaptooth-ridge-south-tumbleweed",
+        "section": "New Austin",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cholla Springs Jorge’s Gap",
+        "routeOrder": 27,
+        "state": "New Austin",
+        "region": "Cholla Springs",
+        "approachHint": "Search the small bush-covered hill southwest of Jorge’s Gap.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the small bush-covered hill southwest of Jorge’s Gap."
+      },
+      "system": {
+        "slug": "cholla-springs-jorges-gap",
+        "section": "New Austin",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hennigan’s Stead San Luis River",
+        "routeOrder": 28,
+        "state": "New Austin",
+        "region": "Hennigan’s Stead",
+        "approachHint": "Search the river bank north of the small islet.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the San Luis River bank north of the small islet."
+      },
+      "system": {
+        "slug": "hennigans-stead-san-luis-river",
+        "section": "New Austin",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rio Bravo Del Lobo Rock",
+        "routeOrder": 29,
+        "state": "New Austin",
+        "region": "Rio Bravo",
+        "approachHint": "Search the slope at or above the east side of Rio Del Lobo Rock.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the slope at or above the east side of Rio Del Lobo Rock."
+      },
+      "system": {
+        "slug": "rio-bravo-del-lobo-rock",
+        "section": "New Austin",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rio Bravo San Luis River",
+        "routeOrder": 30,
+        "state": "New Austin",
+        "region": "Rio Bravo",
+        "approachHint": "Search the rock plateau overlooking Fort Mercer.",
+        "availability": "Post-story/epilogue",
+        "spoilerLevel": "Heavy",
+        "questRelation": "A Test of Faith",
+        "cardSummary": "Search the rock plateau overlooking Fort Mercer."
+      },
+      "system": {
+        "slug": "rio-bravo-san-luis-river",
+        "section": "New Austin",
+        "sortOrder": 30,
+        "image": null
+      }
+    }
+  ]
+}
