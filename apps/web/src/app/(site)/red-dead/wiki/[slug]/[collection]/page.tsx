@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import {
@@ -8,6 +9,7 @@ import {
 } from "@/app/(site)/wiki/collections/games/generic";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { renderRedDeadCollectionPage } from "@/components/red-dead/RedDeadCollectionPage";
+import { GameCollectionSidebarLayout } from "@/components/games/GameCollectionSidebarLayout";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 import {
   buildRedDeadCollectionPath,
@@ -120,15 +122,27 @@ export async function renderRedDeadCollectionPageRoute({
     href: buildRedDeadCollectionPath(entry.wiki_slug, entry.collection_slug),
     pageType: entry.page_type
   }));
+  const layout = (children: ReactNode) => (
+    <GameCollectionSidebarLayout
+      canonicalPath={buildRedDeadCollectionPath(context.page.wiki_slug, context.page.collection_slug)}
+      title={context.page.title}
+      code={context.page.code}
+      gameName={context.page.game_short_title || context.config.gameName}
+      wikiPath={`/red-dead/wiki/${context.page.wiki_slug}`}
+      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: buildRedDeadCollectionPath(entry.wiki_slug, entry.collection_slug), description: entry.meta_description }))}
+    >
+      {children}
+    </GameCollectionSidebarLayout>
+  );
   if (context.page.page_type === "collectible") {
-    return renderRedDeadCollectionPage({
+    return layout(renderRedDeadCollectionPage({
       page: context.page,
       config: context.config,
       dataset: context.prepared.dataset,
       groupedSections: context.prepared.groupedSections,
       contentHtml,
       collectionOptions
-    });
+    }));
   }
 
   // The shared renderer currently owns Roblox/GTA comment entity types. Render
@@ -144,13 +158,14 @@ export async function renderRedDeadCollectionPageRoute({
     routeBase: "/red-dead/wiki",
     wikiLabel: "Red Dead Wiki",
     collectionOptions,
-    showMoreCollections: false
+    showMoreCollections: false,
+    stream: true
   });
-  return (
+  return layout(
     <>
       {renderedCollection}
       {contentHtml?.id ? (
-        <div className="mx-auto mt-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mt-10">
           <CommentsSection entityType="red_dead_wiki_collection" entityId={contentHtml.id} />
         </div>
       ) : null}

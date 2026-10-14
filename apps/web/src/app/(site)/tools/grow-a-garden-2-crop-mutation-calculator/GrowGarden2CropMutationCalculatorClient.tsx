@@ -93,7 +93,7 @@ export function GrowGarden2CropMutationCalculatorClient({ crops, mutations }: Pr
 
   return (
     <div className="tool-surface space-y-6">
-      <div className="grid gap-6 lg:grid-cols-[1.45fr_1fr]">
+      <div className="ads-tools-columns grid gap-6 lg:grid-cols-[1.45fr_1fr]">
         <section className="space-y-5">
           <div className="rounded-lg border border-border/70 bg-surface/60 p-5 shadow-soft">
             <div className="flex flex-wrap items-start justify-between gap-3">
@@ -183,7 +183,7 @@ export function GrowGarden2CropMutationCalculatorClient({ crops, mutations }: Pr
 
           <div className="rounded-lg border border-border/70 bg-surface/60 p-5 shadow-soft">
             <h2 className="text-lg font-semibold text-foreground">Pick a mutation</h2>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="ads-tools-field-grid mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {mutations.map((mutation) => {
                 const selected = mutation.id === selectedMutation?.id;
                 return (
@@ -227,7 +227,7 @@ export function GrowGarden2CropMutationCalculatorClient({ crops, mutations }: Pr
           </div>
         </section>
 
-        <aside className="space-y-5">
+        <div className="space-y-5">
           <div className="sticky top-24 rounded-lg border border-border/70 bg-surface/75 p-5 shadow-soft">
             <h2 className="text-lg font-semibold text-foreground">Estimated value</h2>
             <div className="mt-4 rounded-lg border border-accent/30 bg-accent/10 p-4">
@@ -271,7 +271,7 @@ export function GrowGarden2CropMutationCalculatorClient({ crops, mutations }: Pr
               </div>
             </div>
           </div>
-        </aside>
+        </div>
       </div>
     </div>
   );

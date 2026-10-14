@@ -9,7 +9,7 @@ import { MoreCatalogs } from "@/components/more-content";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 
 export const revalidate = 21600;
 
@@ -84,7 +84,7 @@ export default async function AdminCommandsHubPage() {
         <UpdatedTimestamp value={contentHtml?.updatedAt ?? null} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--options">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--options">
         {introNodes ? introNodes : null}
 
         {datasets.length ? (

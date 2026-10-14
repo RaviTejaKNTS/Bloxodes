@@ -103,7 +103,7 @@ export function DevexCalculatorClient({
       </section>
 
       {mode === "robux_to_usd" ? (
-        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
+        <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
           <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
               e.preventDefault();
@@ -256,7 +256,7 @@ export function DevexCalculatorClient({
           </div>
         </section>
       ) : (
-        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
+        <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
           <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
               e.preventDefault();

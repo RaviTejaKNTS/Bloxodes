@@ -7,6 +7,7 @@ import {
   type GameDatasetPreparedCollection
 } from "@/app/(site)/wiki/collections/games/generic";
 import { renderGtaCollectibleCollectionPage } from "@/components/gta/GtaCollectibleCollectionPage";
+import { GameCollectionSidebarLayout } from "@/components/games/GameCollectionSidebarLayout";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 import {
   buildGtaCollectionPath,
@@ -120,29 +121,42 @@ export async function renderGtaCollectionPage({
     href: buildGtaCollectionPath(entry.wiki_slug, entry.collection_slug),
     pageType: entry.page_type
   }));
-  if (context.page.page_type === "collectible") {
-    return renderGtaCollectibleCollectionPage({
-      page: context.page,
-      config: context.config,
-      dataset: context.prepared.dataset,
-      groupedSections: context.prepared.groupedSections,
-      contentHtml,
-      collectionOptions
-    });
-  }
-  return renderGameCollectionPage({
-    config: context.config,
-    dataset: context.prepared.dataset,
-    contentHtml,
-    currentPage,
-    prepared: context.prepared,
-    routeBase: "/gta/wiki",
-    wikiLabel: "GTA Wiki",
-    collectionOptions,
-    commentsEntityType: "gta_wiki_collection",
-    showMoreCollections: false,
-    enableItemFinder: true
-  });
+  const wikiPath = `/gta/wiki/${context.page.wiki_slug}`;
+  const rendered = context.page.page_type === "collectible"
+    ? renderGtaCollectibleCollectionPage({
+        page: context.page,
+        config: context.config,
+        dataset: context.prepared.dataset,
+        groupedSections: context.prepared.groupedSections,
+        contentHtml,
+        collectionOptions
+      })
+    : renderGameCollectionPage({
+        config: context.config,
+        dataset: context.prepared.dataset,
+        contentHtml,
+        currentPage,
+        prepared: context.prepared,
+        routeBase: "/gta/wiki",
+        wikiLabel: "GTA Wiki",
+        collectionOptions,
+        commentsEntityType: "gta_wiki_collection",
+        showMoreCollections: false,
+        enableItemFinder: true,
+        stream: true
+      });
+  return (
+    <GameCollectionSidebarLayout
+      canonicalPath={buildGtaCollectionPath(context.page.wiki_slug, context.page.collection_slug)}
+      title={context.page.title}
+      code={context.page.code}
+      gameName={context.page.game_short_title || context.config.gameName}
+      wikiPath={wikiPath}
+      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: buildGtaCollectionPath(entry.wiki_slug, entry.collection_slug), description: entry.meta_description }))}
+    >
+      {rendered}
+    </GameCollectionSidebarLayout>
+  );
 }
 
 export async function getGtaCollectionPageCount(slug: string, collection: string): Promise<number> {

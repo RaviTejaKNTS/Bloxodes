@@ -1,11 +1,10 @@
+import { StatsContentLayout } from "@/app/(site)/stats/components/StatsContentLayout";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
-import { robloxSeptember2026Report } from "@/data/reports/roblox-september-2026";
-import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
-import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
+import { PUBLISHED_STATS_REPORTS } from "@/data/reports/published";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const pageUrl = `${SITE_URL}/stats/reports`;
@@ -23,29 +22,7 @@ export const metadata: Metadata = {
   }
 };
 
-const reports = [
-  {
-    href: `/stats/reports/${robloxSeptember2026Report.slug}`,
-    month: robloxSeptember2026Report.featureImage.month,
-    title: robloxSeptember2026Report.title,
-    description: robloxSeptember2026Report.subtitle,
-    image: robloxSeptember2026Report.featureImage
-  },
-  {
-    href: `/stats/reports/${robloxJuly2026Report.slug}`,
-    month: robloxJuly2026Report.featureImage.month,
-    title: robloxJuly2026Report.title,
-    description: robloxJuly2026Report.subtitle,
-    image: robloxJuly2026Report.featureImage
-  },
-  {
-    href: `/stats/reports/${robloxJune2026Report.slug}`,
-    month: robloxJune2026Report.featureImage.month,
-    title: robloxJune2026Report.title,
-    description: robloxJune2026Report.subtitle,
-    image: robloxJune2026Report.featureImage
-  }
-] as const;
+const reports = PUBLISHED_STATS_REPORTS;
 
 const breadcrumbStructuredData = breadcrumbJsonLd([
   { name: "Home", url: SITE_URL },
@@ -55,7 +32,8 @@ const breadcrumbStructuredData = breadcrumbJsonLd([
 
 export default function StatsReportsPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl">
+    <StatsContentLayout title="Monthly Roblox reports" canonicalPath="/stats/reports">
+    <main className="min-w-0">
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
         items={[
@@ -117,5 +95,6 @@ export default function StatsReportsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
     </main>
+    </StatsContentLayout>
   );
 }

@@ -343,8 +343,8 @@ export function RobloxUsernameGeneratorClient() {
   const maxLengthPosition = ((maxLength - MIN_USERNAME_LENGTH) / (MAX_USERNAME_LENGTH - MIN_USERNAME_LENGTH)) * 100;
 
   return (
-    <section className="overflow-hidden rounded-xl border border-border bg-background shadow-soft">
-      <div className="grid lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)]">
+    <section className="ads-tools-widget overflow-hidden rounded-xl border border-border bg-background shadow-soft">
+      <div className="ads-tools-columns grid lg:grid-cols-[minmax(18rem,0.8fr)_minmax(0,1.2fr)]">
         <form onSubmit={handleSubmit} className="space-y-6 p-5 md:p-6 lg:border-r lg:border-border">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold text-foreground">Build your username shortlist</h2>

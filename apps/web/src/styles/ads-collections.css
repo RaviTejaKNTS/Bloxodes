@@ -1,0 +1,134 @@
+.collections-stream {
+  container: collections / inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  min-width: 0;
+}
+.collections-stream > * {
+  min-width: 0;
+  grid-column: 1 / -1;
+}
+.collections-stream > [hidden] {
+  display: none;
+}
+/* An existing slot loses its content boundary when a view or filter hides that group. */
+.collections-stream > [hidden] + :is(.mv-ad-box, .adunitwrapper) {
+  display: none !important;
+}
+/*
+ * List view: a section's row groups are chunks of one table (shared colgroup,
+ * header shown once). No gap or inner borders between chunks; the frame only
+ * closes at the section's ends, or around an ad that lands between chunks.
+ */
+.collections-stream > .collections-list-chunk + .collections-list-chunk {
+  margin-top: -1.25rem;
+}
+/* The frame's own corner radius, used again where an ad closes or reopens it. */
+.collections-list-chunk > .table-scroll-wrapper {
+  --collections-list-radius: 0.5rem;
+}
+.catalog-surface .collections-list-chunk > .table-scroll-wrapper.rounded-lg {
+  --collections-list-radius: 0.375rem;
+}
+.collections-list-chunk:not(.ads-tables-chunk-first) > .table-scroll-wrapper {
+  margin-top: 0;
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.collections-list-chunk:not(.ads-tables-chunk-last) > .table-scroll-wrapper {
+  margin-bottom: 0;
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.collections-list-chunk:not(.ads-tables-chunk-last) .game-copy tbody tr:last-child > :is(td, th) {
+  border-bottom: 1px solid rgb(var(--color-border) / 0.45) !important;
+}
+#article-body > .collections-list-chunk:has(+ :is(.mv-ad-box, .adunitwrapper)) > .table-scroll-wrapper {
+  border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+  border-bottom-left-radius: var(--collections-list-radius);
+  border-bottom-right-radius: var(--collections-list-radius);
+}
+#article-body > .collections-list-chunk:has(+ :is(.mv-ad-box, .adunitwrapper)) .game-copy tbody tr:last-child > :is(td, th) {
+  border-bottom: 0 !important;
+}
+#article-body > :is(.mv-ad-box, .adunitwrapper) + .collections-list-chunk > .table-scroll-wrapper {
+  border-top: 1px solid rgb(var(--color-border) / 0.7);
+  border-top-left-radius: var(--collections-list-radius);
+  border-top-right-radius: var(--collections-list-radius);
+}
+/* Checklist rows draw their own top border; the reopened frame already does. */
+#article-body > :is(.mv-ad-box, .adunitwrapper) + .collections-list-chunk tbody > tr:first-child {
+  border-top-width: 0;
+}
+.collections-card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+}
+.collections-toolbar,
+.collections-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+}
+.collections-toolbar > * {
+  flex: 1 1 13rem;
+  min-width: 0;
+}
+.collections-filters > * {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+.collections-filters > label:first-child {
+  flex-basis: 15rem;
+}
+#article-body.collections-stream > [data-md-copy].md-copy-node {
+  margin-block: 0 !important;
+}
+.collections-stream .collections-faq-heading {
+  border-top: 1px solid rgb(var(--color-border) / 0.6);
+  padding-top: 1.5rem;
+  margin-top: 0.25rem;
+}
+.collections-stream .collections-faq-item {
+  border-top: 1px solid rgb(var(--color-border) / 0.6);
+  padding-top: 1rem;
+}
+.collections-stream .collections-faq-heading + .collections-faq-item {
+  border-top: 0;
+  padding-top: 0;
+}
+/*
+ * Keep in sync with collectionCardColumns() in CollectionRowGroups.tsx. Each card stays close to
+ * its narrowest width in the old full-width layout, so desktop rows hold about as many cards as
+ * before the right rail.
+ */
+@container collections (min-width: 460px) {
+  .collections-card-grid:not(.collections-card-grid--wide) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container collections (min-width: 520px) {
+  .collections-card-grid--wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container collections (min-width: 740px) {
+  .collections-card-grid:not(.collections-card-grid--wide) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@container collections (min-width: 850px) {
+  .collections-card-grid--wide {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@container collections (min-width: 920px) {
+  .collections-card-grid:not(.collections-card-grid--wide) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

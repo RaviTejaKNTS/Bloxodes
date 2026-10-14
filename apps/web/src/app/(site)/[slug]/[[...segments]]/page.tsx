@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import { getGameRoot, getGameWikiByPath, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath } from "@/lib/game-registry";
 import { gameWikiMetadata, renderGameWikiPage } from "@/components/games/GameWikiPage";
 import { GameWikiHub } from "@/components/games/GameWikiHub";
+import { HubsSidebarLayout, hubsSidebarLinksFor } from "@/components/hubs/HubsSidebar";
 import { gameCollectionMetadata, renderSharedGameCollection } from "@/components/games/GameCollectionPage";
 import { GameCodePage } from "@/components/games/GameCodePage";
 import { GameToolPage, gameToolMetadata } from "@/components/games/GameToolPage";
@@ -47,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function SharedGamePage({ params }: Props) {
   const ctx = await context(params);
-  if (ctx.wiki) return ctx.wiki.game_kind === "franchise" ? <GameWikiHub page={ctx.wiki} namespaceTitle={ctx.root.title} /> : renderGameWikiPage({ page: ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
+  if (ctx.wiki) return ctx.wiki.game_kind === "franchise" ? <HubsSidebarLayout canonicalPath={ctx.wiki.canonical_path} title={ctx.wiki.title} {...hubsSidebarLinksFor(ctx.root.namespace)}><GameWikiHub page={ctx.wiki} namespaceTitle={ctx.root.title} /></HubsSidebarLayout> : renderGameWikiPage({ page: ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
   if (ctx.collection) return renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });
   if (ctx.codes) return <GameCodePage page={ctx.codes} namespaceTitle={ctx.root.title} />;
   if (ctx.tool) return <GameToolPage tool={ctx.tool} namespaceTitle={ctx.root.title} />;

@@ -1,0 +1,139 @@
+/*
+ * Long archive tables are split into chunks (separate #article-body children)
+ * so ads can fall between rows. Chunks share fixed column widths and show the
+ * header once; later chunks keep their header for screen readers only.
+ */
+#article-body .ads-tables-chunk table {
+  table-layout: fixed;
+}
+
+.ads-tables-chunk:not(.ads-tables-chunk-first) thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Event archive: one rounded frame across every chunk. */
+#article-body > .ads-tables-event-chunk {
+  margin: 0;
+}
+
+#article-body > .ads-content-event-archive + :is(.ads-tables-event-chunk, .ads-tables-event-empty) {
+  margin-top: 1.5rem;
+}
+
+.ads-tables-event-chunk:not(.ads-tables-chunk-first) {
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.ads-tables-event-chunk:not(.ads-tables-chunk-last) {
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: none;
+}
+
+.ads-tables-event-chunk:not(.ads-tables-chunk-last) > .table-scroll-inner {
+  padding-bottom: 0;
+}
+
+.ads-tables-event-chunk:not(.ads-tables-chunk-last) .game-copy tbody tr:last-child td {
+  border-bottom: 1px solid rgb(var(--color-border) / 0.45) !important;
+}
+
+/* An ad between chunks closes the frame above it and reopens it below. */
+#article-body > .ads-tables-event-chunk:has(+ :is(.mv-ad-box, .adunitwrapper)) {
+  border-bottom: 1px solid rgba(18, 22, 40, 0.18);
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+}
+
+.dark #article-body > .ads-tables-event-chunk:has(+ :is(.mv-ad-box, .adunitwrapper)) {
+  border-bottom-color: rgb(var(--color-border) / 0.75);
+}
+
+#article-body > .ads-tables-event-chunk:has(+ :is(.mv-ad-box, .adunitwrapper)) .game-copy tbody tr:last-child td {
+  border-bottom: 0 !important;
+}
+
+#article-body > :is(.mv-ad-box, .adunitwrapper) + .ads-tables-event-chunk {
+  border-top: 1px solid rgba(18, 22, 40, 0.18);
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+
+.dark #article-body > :is(.mv-ad-box, .adunitwrapper) + .ads-tables-event-chunk {
+  border-top-color: rgb(var(--color-border) / 0.75);
+}
+
+/* Close to the old auto layout; the event name column gets the spare width. */
+.ads-tables-event-col-start,
+.ads-tables-event-col-end {
+  width: 29%;
+}
+
+.ads-tables-event-col-guide {
+  width: 8.5%;
+}
+
+/* Phones: the old auto layout sized the last three columns to their nowrap
+ * headers and overflowed the frame slightly; keep that size and scroll. */
+@media (max-width: 767px) {
+  .ads-tables-event-col-start {
+    width: 92px;
+  }
+
+  .ads-tables-event-col-end {
+    width: 87px;
+  }
+
+  .ads-tables-event-col-guide {
+    width: 65px;
+  }
+
+  #article-body .ads-tables-event-chunk table {
+    min-width: 374px;
+  }
+}
+
+/* Puzzle answer archive: plain rows, no frame. */
+#article-body > .ads-tables-puzzle-chunk + .ads-tables-puzzle-chunk {
+  margin-top: 0;
+}
+
+.game-copy .ads-tables-puzzle-chunk:not(.ads-tables-chunk-last) tbody tr:last-child td {
+  border-bottom: 1px solid rgb(var(--color-border) / 0.45) !important;
+}
+
+.ads-tables-puzzle-col-date {
+  width: 49.5%;
+}
+
+.ads-tables-puzzle-col-id {
+  width: 25%;
+}
+
+.ads-tables-puzzle-col-link {
+  width: 25.5%;
+}
+
+@media (max-width: 767px) {
+  .ads-tables-puzzle-col-date {
+    width: 50.5%;
+  }
+
+  .ads-tables-puzzle-col-id {
+    width: 24.5%;
+  }
+
+  .ads-tables-puzzle-col-link {
+    width: 25%;
+  }
+}

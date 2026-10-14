@@ -2,15 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { AccountSheetButton } from "@/components/AccountSheetButton";
 import { SiteTopNav } from "@/components/SiteTopNav";
 import { parseGameTopNavPath } from "@/lib/game-top-nav-path";
 import type { CatalogTopNavContext, GameTopNavContext } from "@/lib/game-top-nav-types";
-import type { SidebarAccount } from "@/lib/site-navigation";
-import { cn } from "@/lib/utils";
 
 type SiteGameTopBarClientProps = {
-  account: SidebarAccount;
   initialGameNav?: GameTopNavContext | null;
   initialCatalogNav?: CatalogTopNavContext | null;
   initialPathname?: string;
@@ -26,8 +22,10 @@ function normalizePathname(value: string | null | undefined): string {
   return value?.trim() || "/";
 }
 
+/**
+ * Secondary bar under the site header for game and catalog pages. It scrolls away with the page.
+ */
 export function SiteGameTopBarClient({
-  account,
   initialGameNav = null,
   initialCatalogNav = null,
   initialPathname = ""
@@ -75,17 +73,13 @@ export function SiteGameTopBarClient({
     };
   }, [initialCatalogNav, initialGameNav, initialPathname, pathname]);
 
+  if (!showTopNav) return null;
+
   return (
-    <header
-      className={cn(
-        "top-0 z-30 border-b border-border/60 bg-background/95 backdrop-blur xl:sticky",
-        !showTopNav ? "hidden xl:block" : ""
-      )}
-    >
-      <div className="container flex min-h-14 items-center gap-3 py-2">
+    <div data-game-bar className="border-b border-border/60 bg-surface/40">
+      <div className="site-container flex min-h-11 items-center py-1">
         <SiteTopNav gameNav={gameNav} catalogNav={catalogNav} />
-        <AccountSheetButton account={account} className="ml-auto hidden shrink-0 xl:inline-flex" />
       </div>
-    </header>
+    </div>
   );
 }

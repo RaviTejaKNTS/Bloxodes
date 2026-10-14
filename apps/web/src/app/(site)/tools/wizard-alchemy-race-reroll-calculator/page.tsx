@@ -1,7 +1,9 @@
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 import { ContentSlot } from "@/components/ContentSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -132,7 +134,7 @@ export default async function WizardAlchemyRaceRerollCalculatorPage() {
   };
 
   return (
-    <>
+    <ToolPageLayout sidebarContent={tool?.universe_id ? <GameDiscoverySidebar universeId={tool.universe_id} universeName={null} currentType="tool" /> : undefined} toolCode="wizard-alchemy-race-reroll-calculator" title={tool?.title ?? "Tool"} canonicalPath="/tools/wizard-alchemy-race-reroll-calculator">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
@@ -183,7 +185,7 @@ export default async function WizardAlchemyRaceRerollCalculatorPage() {
                   adFormat="auto"
                   fullWidthResponsive
                 />
-                <ContentFaq
+                <ToolFaq
                   items={faqNodes.map((faq, idx) => ({
                     id: `${faq.q}-${idx}`,
                     question: faq.q,
@@ -210,6 +212,6 @@ export default async function WizardAlchemyRaceRerollCalculatorPage() {
         fullWidthResponsive
       />
       <MoreTools excludeCode="wizard-alchemy-race-reroll-calculator" />
-    </>
+    </ToolPageLayout>
   );
 }

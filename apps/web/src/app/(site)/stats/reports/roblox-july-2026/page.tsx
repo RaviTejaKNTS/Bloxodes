@@ -1,3 +1,4 @@
+import { StatsContentLayout } from "@/app/(site)/stats/components/StatsContentLayout";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -103,7 +104,8 @@ const body = "text-[1.05rem] leading-relaxed text-foreground md:text-[1.09rem]";
 
 export default function RobloxJuly2026ReportPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl">
+    <StatsContentLayout title={report.title} canonicalPath={`/stats/reports/${report.slug}`}>
+    <main className="min-w-0">
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
         items={[
@@ -116,7 +118,7 @@ export default function RobloxJuly2026ReportPage() {
       <article
         id="article-body"
         itemProp="articleBody"
-        className="journey-content-stream journey-content-stream--prose"
+        className="journey-content-stream journey-content-stream--prose stats-report-stream"
       >
         <header className="space-y-3">
           <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{report.title}</h1>
@@ -124,13 +126,13 @@ export default function RobloxJuly2026ReportPage() {
           <p className="text-sm text-muted">{report.dataWindowLabel} · Bloxodes player readings</p>
         </header>
 
-        <div className="mt-8 space-y-5">
-          <p className={body}>
+
+          <p className={`${body} stats-report-copy stats-report-copy-first`}>
             For the first three weeks of July, <GameLink href="/stats/games/murder-mystery-2-66654135">Murder Mystery 2</GameLink> barely
             moved. Its daily average stayed in a tight band, roughly 252,000 to 301,000 players online at the same time,
             day after day. Then the line broke upward on July 23.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             That was the day Roblox&rsquo;s <ExternalLink href="https://www.roblox.com/events/2246431876220846708">Summer 2026 event</ExternalLink> opened
             inside the game at 21:00 UTC, adding a summer lobby, a summer map, a mystery box, a Godly item pack, and
             rewards for opening those boxes. The daily average jumped to 373,872 that same day, then stayed above
@@ -138,7 +140,7 @@ export default function RobloxJuly2026ReportPage() {
             30, averaged 596,960 players online at once, more than double its quietest week of 259,673 from July 2 to
             8. The timing matches the surge. It does not prove the event caused it.
           </p>
-        </div>
+
 
         <MurderMystery2Chart points={report.murderMystery2.points} markers={report.murderMystery2.markers} />
 
@@ -152,12 +154,12 @@ export default function RobloxJuly2026ReportPage() {
           Older games found different routes back
         </h2>
 
-        <div className="mt-5 space-y-5">
-          <p className={body}>
+
+          <p className={`${body} stats-report-copy`}>
             Murder Mystery 2 was not the only established game drawing a larger crowd in July. Three other older
             titles climbed too, each along a different path.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             <GameLink href="/stats/games/flee-the-facility-372226183">Flee the Facility</GameLink>, running on Roblox
             since 2017, was already climbing through most of the month before its own{" "}
             <ExternalLink href="https://www.roblox.com/events/4307181808962896528">summer event</ExternalLink> began on
@@ -165,14 +167,14 @@ export default function RobloxJuly2026ReportPage() {
             of those comparisons positive. Its strongest seven-day stretch averaged 43,586 players online at once,
             versus 24,205 in its weakest week. The event landed right alongside the sharpest jump of the month.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             <GameLink href="/stats/games/shinobi-life-2-1511883870">Shindo Life</GameLink> told a steadier story. Every
             single usable same-weekday comparison in July was positive, and its typical weekly gain was a striking
             101.1%. It went from a quiet weakest week of 3,734 players online at once to a strongest week of 36,458,
             then held near that level through month&rsquo;s end. The line shows the shape of the return without telling
             us what caused it.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             <GameLink href="/stats/games/bee-swarm-simulator-601130232">Bee Swarm Simulator</GameLink>, out since 2018,
             moved the most quietly of all: a steady 5.0% typical weekly gain, every usable comparison positive, and a
             strongest week (20,158) only modestly ahead of its weakest (16,923).{" "}
@@ -180,7 +182,7 @@ export default function RobloxJuly2026ReportPage() {
             similar quiet gain of 10.4% with 96% of its comparisons positive, another sign that several long-running
             games found room to grow in July.
           </p>
-        </div>
+
 
         <ComebackGamesChart series={report.comebackGames.series} eventMarker={report.comebackGames.eventMarker} />
 
@@ -188,8 +190,8 @@ export default function RobloxJuly2026ReportPage() {
           The broader picture was moving the other way
         </h2>
 
-        <div className="mt-5 space-y-5">
-          <p className={body}>
+
+          <p className={`${body} stats-report-copy`}>
             Zoom out to the wider set of games in this analysis, 356 titles with a steady presence across the month,
             and the picture looks different. Shooter games led with a typical same-weekday gain of 4.0%, the
             strongest of any genre, though still a modest number. Action, obby and platformer, RPG, and sports and
@@ -198,12 +200,12 @@ export default function RobloxJuly2026ReportPage() {
             -19.1%, and strategy games -20.2%. This is movement among the selected games in this analysis, not a
             measurement of Roblox as a whole.
           </p>
-        </div>
+
 
         <GenreMovementChart data={report.genreMovement} />
 
-        <div className="space-y-5">
-          <p className={body}>
+
+          <p className={`${body} stats-report-copy`}>
             Inside that cooling picture were three clear full-period slides.{" "}
             <GameLink href="/stats/games/adopt-me-383310974">Adopt Me!</GameLink> had the largest cool-down: its
             typical weekly change was -13.3%, with only 22% of usable comparisons positive, sliding from a strongest
@@ -215,7 +217,7 @@ export default function RobloxJuly2026ReportPage() {
             weekly change of -28.4%, just 4% of comparisons positive, and a strongest week of 69,452 against a
             weakest week of 24,744.
           </p>
-        </div>
+
 
         <CoolDownGamesChart series={report.coolDownGames.series} />
 
@@ -251,5 +253,6 @@ export default function RobloxJuly2026ReportPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
     </main>
+    </StatsContentLayout>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { listPublishedGtaWikiPages, resolveGtaWikiCoverImage } from "@/lib/gta";
+import { GTA_LINKS, HubsSidebarLayout } from "@/components/hubs/HubsSidebar";
 
 const description = "Browse Grand Theft Auto wikis and structured game collections on Bloxodes.";
 
@@ -18,6 +19,7 @@ export const revalidate = 21600;
 export default async function GtaHomePage() {
   const wikiPages = await listPublishedGtaWikiPages();
   return (
+    <HubsSidebarLayout canonicalPath="/gta" title="Grand Theft Auto wiki hubs and game data" heading="Popular GTA pages" links={GTA_LINKS}>
     <div className="space-y-10">
       <header className="space-y-4">
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Grand Theft Auto wiki hubs and game data</h1>
@@ -45,5 +47,6 @@ export default async function GtaHomePage() {
         )}
       </section>
     </div>
+    </HubsSidebarLayout>
   );
 }

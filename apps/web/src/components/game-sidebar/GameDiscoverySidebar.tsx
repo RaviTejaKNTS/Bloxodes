@@ -10,12 +10,14 @@ import { ChecklistSidebarCard } from "@/components/game-sidebar/ChecklistSidebar
 import { StatsSidebarCard } from "@/components/game-sidebar/StatsSidebarCard";
 import { CatalogListSidebar } from "@/components/game-sidebar/CatalogListSidebar";
 
-type CurrentType = "codes" | "articles" | "events" | "quiz";
+type CurrentType = "codes" | "articles" | "events" | "quiz" | "wiki" | "collection" | "checklist" | "tool";
 
 type GameDiscoverySidebarProps = {
   universeId: number | null | undefined;
   universeName: string | null;
   currentType: CurrentType;
+  extended?: boolean;
+  currentSlug?: string;
 };
 
 const cardClass = "block rounded-lg border border-border/70 bg-card p-4 transition-colors hover:border-border";
@@ -96,12 +98,36 @@ function ArticlesCard({ articles, heading = "Articles" }: { articles: SidebarArt
   );
 }
 
-export async function GameDiscoverySidebar({ universeId, universeName, currentType }: GameDiscoverySidebarProps) {
+export async function GameDiscoverySidebar({ universeId, universeName, currentType, extended = false, currentSlug }: GameDiscoverySidebarProps) {
   if (typeof universeId !== "number") return null;
 
   const data = await getGameSidebarData(universeId);
-  const gameName = universeName ?? "Roblox";
+  // Tool pages don't load their game's name, so take it from the game's own sidebar data.
+  const toolUniverse = data.tools.find((tool) => tool.universe?.display_name || tool.universe?.name)?.universe;
+  const gameName = universeName ?? (toolUniverse?.display_name?.trim() || toolUniverse?.name?.trim() || data.codes?.name || "Roblox");
   const sections: React.ReactNode[] = [];
+
+  if (!extended) {
+    const relatedArticles = data.articles.filter(article => currentType !== "articles" || article.slug !== currentSlug);
+    const articles = (relatedArticles.length ? relatedArticles : data.fallback?.articles ?? []).filter(article => currentType !== "articles" || article.slug !== currentSlug).slice(0, 2);
+    const checklist = data.checklist && currentType !== "checklist" ? data.checklist : null;
+    const quiz = !checklist && data.quiz && currentType !== "quiz" ? data.quiz : null;
+    const extraLink = !checklist && !quiz
+      ? data.event && currentType !== "events"
+        ? { href: `/events/${data.event.slug}`, title: `${gameName} Events` }
+        : data.tools[0] && currentType !== "tool"
+          ? { href: `/tools/${data.tools[0].code}`, title: data.tools[0].title }
+          : null
+      : null;
+    return (
+      <div className="space-y-4">
+        {data.codes && currentType !== "codes" ? <CodesCard slug={data.codes.slug} name={data.codes.name} activeCount={data.codes.activeCount} coverImage={data.codes.coverImage} /> : null}
+        {data.wiki && currentType !== "wiki" ? <WikiCard slug={data.wiki.slug} title={data.wiki.title} iconUrl={data.universeIcon ?? data.wiki.iconUrl} /> : null}
+        {articles.length ? <ArticlesCard articles={articles} heading={relatedArticles.length ? "Articles" : "From the blog"} /> : null}
+        {checklist ? <ChecklistSidebarCard slug={checklist.slug} title={checklist.title} itemsCount={checklist.itemsCount} /> : quiz ? <QuizSidebarCard code={quiz.code} gameName={gameName} question={quiz.firstQuestion} /> : extraLink ? <Link href={extraLink.href} className={cardClass}><span className="text-sm font-semibold text-foreground">{extraLink.title}</span></Link> : null}
+      </div>
+    );
+  }
 
   if (data.wiki) {
     sections.push(

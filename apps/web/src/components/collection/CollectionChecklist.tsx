@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, Fragment, type ReactNode } from "react";
 import { RotateCcw, Search } from "lucide-react";
 import { ProgressBar } from "@/components/ProgressBar";
+import { CollectionRowGroups } from "@/components/game-collections/CollectionRowGroups";
 import { GameCollectionViewShell } from "@/components/game-collections/GameCollectionViewShell";
 import { CollectionImageLightbox } from "@/components/game-collections/CollectionImageLightbox";
 import {
@@ -159,7 +160,10 @@ export function CollectionChecklist({
   cardFields,
   fieldLabels,
   toolbar,
-  progressOptions
+  progressOptions,
+  stream = false,
+  beforeToolbar,
+  afterContent
 }: {
   code: string;
   gameName: string;
@@ -168,6 +172,9 @@ export function CollectionChecklist({
   cardFields?: string[] | null;
   fieldLabels?: Record<string, string>;
   toolbar?: ReactNode;
+  stream?: boolean;
+  beforeToolbar?: ReactNode;
+  afterContent?: ReactNode;
   progressOptions: CollectionChecklistProgressOptions;
 }) {
   const { checked, toggle, reset } = useCollectionChecklistProgress(progressOptions);
@@ -175,12 +182,20 @@ export function CollectionChecklist({
   useEffect(() => { setHydrated(true); }, []);
   const allItems = useMemo(() => sections.flatMap((section) => section.items), [sections]);
   const fieldKeys = useMemo(() => getFieldKeys(allItems, cardFields ?? undefined), [allItems, cardFields]);
+  const hasWideCards = useMemo(() => stream && (
+    fieldKeys.length > 6 || allItems.some(item => fieldKeys.some(key => {
+      const value = normalizeText(item[key]);
+      return value.length > 92 || value.split(/\s+/).length > 14;
+    }))
+  ), [stream, allItems, fieldKeys]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
   const [sectionId, setSectionId] = useState("all");
 
   const total = allItems.length;
   const hasImages = allItems.some((item) => Boolean(resolveImageSrc(item.image)));
+  // List chunks: Done, Entry, optional Image, then one 10rem column per field.
+  const listMinWidth = Math.max(42, 4.75 + 13 + (hasImages ? 8 : 0) + fieldKeys.length * 10);
   const done = allItems.filter(item => checked.has(item.id)).length;
   const percent = total ? Math.round((done / total) * 100) : 0;
   const normalizedQuery = query.trim().toLowerCase();
@@ -216,6 +231,213 @@ export function CollectionChecklist({
       checked: !isChecked
     });
   };
+
+  if (stream) {
+    return (
+      <GameCollectionViewShell availableViews={["cards", "list"]} defaultView="cards" toolbar={toolbar} stream beforeToolbar={beforeToolbar} afterContent={afterContent}>
+        {activeView => (
+          <>
+        <div className="rounded-lg border border-border/70 bg-surface p-5 md:p-6">
+          <p className="text-sm font-medium text-foreground" role="status" aria-live="polite">
+            {done} of {total} completed · {percent}% complete
+          </p>
+          <ProgressBar percent={percent} className="mt-4 h-2" label={`${gameName} ${collectionLabel} progress`} />
+        </div>
+
+      <div className="collections-filters rounded-lg border border-border/70 bg-surface/70 p-4">
+        <label className="relative block min-w-0">
+          <span className="sr-only">Search {collectionLabel}</span>
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder={`Search ${collectionLabel.toLowerCase()}`}
+            className="h-11 w-full rounded-md border border-border/70 bg-background pl-9 pr-3 text-sm text-foreground outline-none transition placeholder:text-muted focus:border-accent/70 focus:ring-2 focus:ring-accent/15"
+          />
+        </label>
+        <label className="block min-w-0">
+          <span className="sr-only">Filter by progress</span>
+          <select value={filter} onChange={(event) => setFilter(event.target.value as Filter)} className="h-11 w-full rounded-md border border-border/70 bg-background px-3 text-sm font-medium text-foreground outline-none focus:border-accent/70">
+            <option value="all">All entries</option>
+            <option value="remaining">Not completed</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+        {sections.length > 1 ? (
+          <label className="block min-w-0">
+            <span className="sr-only">Filter by section</span>
+            <select value={sectionId} onChange={(event) => setSectionId(event.target.value)} className="h-11 w-full rounded-md border border-border/70 bg-background px-3 text-sm font-medium text-foreground outline-none focus:border-accent/70">
+              <option value="all">All sections</option>
+              {sections.map((section) => <option key={section.id} value={section.id}>{section.label}</option>)}
+            </select>
+          </label>
+        ) : <div aria-hidden className="hidden md:block" />}
+        {done > 0 ? (
+          <button
+            type="button"
+            onClick={() => {
+              reset();
+              trackCollectionChecklistEvent(progressOptions.analyticsPrefix, "progress_reset", eventPayload);
+            }}
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-md border border-border/70 bg-background px-3 text-sm font-semibold text-foreground transition hover:border-accent/70 hover:text-accent"
+          >
+            <RotateCcw className="h-4 w-4" aria-hidden />
+            Reset
+          </button>
+        ) : null}
+      </div>
+
+
+            {sections.map(sourceSection => {
+              const section = visibleSections.find(entry => entry.id === sourceSection.id) ?? { ...sourceSection, items: [] };
+              const sectionDone = section.items.filter(item => checked.has(item.id)).length;
+              const sectionTotal = section.items.length;
+              const sourceTotal = sourceSection.items.length;
+              const sourceDone = sourceSection.items.filter(item => checked.has(item.id)).length;
+              return (
+                <Fragment key={section.id}>
+                  <div id={section.id} className="scroll-mt-28 space-y-4" hidden={!sectionTotal}>
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                  <h2 className="text-2xl font-semibold leading-tight text-foreground">{section.label}</h2>
+                  <div className="flex items-center gap-3 text-sm text-muted">
+                    <ProgressBar percent={sourceTotal ? (sourceDone / sourceTotal) * 100 : 0} className="h-1.5 w-28" label={`${section.label} progress`} />
+                    <span className="whitespace-nowrap">{sourceDone}/{sourceTotal}</span>
+                  </div>
+                </div>
+                {section.note ? <p className="max-w-3xl whitespace-pre-line text-sm leading-6 text-muted">{section.note}</p> : null}
+                {filter !== "all" || normalizedQuery || sectionTotal !== sourceTotal ? (
+                  <p className="text-sm text-muted">Showing {sectionDone} of {sectionTotal} visible entries.</p>
+                ) : null}
+
+                  </div>
+                  <CollectionRowGroups items={section.items} slots={sourceTotal} activeView={activeView} wide={hasWideCards} renderCard={item => {
+
+                    const isChecked = checked.has(item.id);
+                    const position = itemPositions.get(item.id) ?? 0;
+                    const image = resolveImageSrc(item.image);
+                    const imageCredit = resolveImageCredit(item.imageCreditUrl);
+                    const inputId = `collection-check-${code}-${item.id}`;
+                    return (
+                      <label id={`item-${item.id}`} key={item.id} className={`group flex min-w-0 cursor-pointer flex-col overflow-hidden rounded-lg border bg-surface transition hover:border-accent/60 ${isChecked ? "border-accent/50" : "border-border/70"}`}>
+                        <div className="flex min-w-0 items-start gap-3 p-4">
+                          <input
+                            id={inputId}
+                            type="checkbox"
+                            disabled={!hydrated}
+                            checked={isChecked}
+                            onChange={() => handleToggle(item.id, isChecked)}
+                            aria-label={`${item.name}, ${isChecked ? "completed" : "not completed"}`}
+                            className="mt-0.5 h-6 w-6 shrink-0 cursor-pointer rounded border-border/80 bg-background accent-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                            style={{ accentColor: "rgb(var(--color-accent))" }}
+                          />
+                          <span className="min-w-0">
+                            <span className="block text-xs font-medium text-muted">{getItemPosition(item, position)}</span>
+                            <span className={`mt-1 block break-words text-base font-semibold leading-snug text-foreground ${isChecked ? "line-through decoration-accent/70" : ""}`}>{item.name}</span>
+                          </span>
+                        </div>
+                        {image ? <div className="relative aspect-[16/9] w-full border-y border-border/60 bg-background/40">
+                          <button type="button" data-collection-image-preview data-collection-image-src={image} data-collection-image-alt={item.name} aria-label={`Open larger image for ${item.name}`} className="relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60">
+                          <Image src={image} alt={item.name} fill sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw" className="object-contain p-4" unoptimized />
+                          </button>
+                          {imageCredit ? <a href={imageCredit} target="_blank" rel="noopener noreferrer" aria-label={`Image credit for ${item.name}`} onClick={(event) => event.stopPropagation()} className="absolute bottom-2 right-2 rounded bg-background/90 px-2 py-1 text-xs text-foreground/80 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Image credit</a> : null}
+                        </div> : null}
+                        {fieldKeys.length ? (
+                          <dl className="min-w-0 space-y-3 p-4">
+                            {fieldKeys.map((key) => {
+                              const value = normalizeText(item[key]);
+                              if (!value) return null;
+                              return (
+                                <div key={key} className="grid min-w-0 grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-3">
+                                  <dt className="min-w-0 break-words text-xs font-medium text-muted">{fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)}</dt>
+                                  <dd className="min-w-0 break-words text-sm leading-5 text-foreground"><ChecklistFieldValue item={item} field={key} /></dd>
+                                </div>
+                              );
+                            })}
+                          </dl>
+                        ) : null}
+                      </label>
+                    );
+                  }} renderList={group => (
+                <div className="table-scroll-wrapper rounded-lg border border-border/70 bg-surface">
+                  <div className="table-scroll-inner">
+                  <table className="w-full text-sm" style={{ minWidth: `${listMinWidth}rem` }}>
+                    {/* Fixed widths shared by every chunk of the list; Entry takes the spare width. */}
+                    <colgroup>
+                      <col style={{ width: "4.75rem" }} />
+                      <col />
+                      {hasImages ? <col style={{ width: "8rem" }} /> : null}
+                      {fieldKeys.map((key) => <col key={key} style={{ width: "10rem" }} />)}
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th className="w-16 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.16em] text-muted">Done</th>
+                        <th className="min-w-52 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.16em] text-muted">Entry</th>
+                        {hasImages ? <th className="w-28 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.16em] text-muted">Image</th> : null}
+                        {fieldKeys.map((key) => (
+                          <th key={key} className="min-w-40 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.16em] text-muted">
+                            {fieldLabels?.[key] ?? FIELD_LABELS[key] ?? humanize(key)}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {group.map((item) => {
+                        const isChecked = checked.has(item.id);
+                        const position = itemPositions.get(item.id) ?? 0;
+                        const image = resolveImageSrc(item.image);
+                        const imageCredit = resolveImageCredit(item.imageCreditUrl);
+                        const inputId = `collection-check-${code}-${item.id}-list`;
+                        return (
+                          <tr key={item.id} id={`item-${item.id}-row`} className={`border-t border-border/60 ${isChecked ? "bg-accent/5" : ""}`}>
+                            <td className="px-4 py-4 align-top">
+                              <input
+                                id={inputId}
+                                type="checkbox"
+                            disabled={!hydrated}
+                                checked={isChecked}
+                                onChange={() => handleToggle(item.id, isChecked)}
+                                aria-label={`${item.name}, ${isChecked ? "completed" : "not completed"}`}
+                                className="h-6 w-6 cursor-pointer rounded border-border/80 bg-background accent-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                                style={{ accentColor: "rgb(var(--color-accent))" }}
+                              />
+                            </td>
+                            <th scope="row" className="px-4 py-4 text-left align-top">
+                              <span className="block text-xs font-medium text-muted">{getItemPosition(item, position)}</span>
+                              <span className={`mt-1 block break-words font-semibold leading-snug text-foreground ${isChecked ? "line-through decoration-accent/70" : ""}`}>{item.name}</span>
+                            </th>
+                            {hasImages ? <td className="px-4 py-4 align-top">
+                              {image ? <div className="relative h-20 w-24 overflow-hidden rounded-md bg-background/40">
+                                  <button type="button" data-collection-image-preview data-collection-image-src={image} data-collection-image-alt={item.name} aria-label={`Open larger image for ${item.name}`} className="relative block h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60">
+                                  <Image src={image} alt={item.name} fill sizes="6rem" className="object-contain p-2" unoptimized />
+                                  </button>
+                              </div> : <span className="text-muted">—</span>}
+                              {image && imageCredit ? <a href={imageCredit} target="_blank" rel="noopener noreferrer" aria-label={`Image credit for ${item.name}`} className="mt-2 inline-block text-xs text-foreground/80 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">Image credit</a> : null}
+                            </td> : null}
+                            {fieldKeys.map((key) => (
+                              <td key={key} className="min-w-40 px-4 py-4 align-top text-sm leading-5 text-foreground">
+                                <ChecklistFieldValue item={item} field={key} />
+                              </td>
+                            ))}
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+                  )} />
+                </Fragment>
+              );
+            })}
+            <div hidden={visibleSections.length > 0} className="rounded-lg border border-dashed border-border/70 bg-surface/60 p-8 text-center text-sm text-muted">
+              No entries match those filters.
+            </div>
+            <CollectionImageLightbox containerId="article-body" />
+          </>
+        )}
+      </GameCollectionViewShell>
+    );
+  }
 
   return (
     <GameCollectionViewShell availableViews={["cards", "list"]} defaultView="cards" toolbar={toolbar}>

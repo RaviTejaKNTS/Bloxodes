@@ -20,8 +20,6 @@ export type SiteNavLink = {
   icon: LucideIcon;
 };
 
-export type GtaWikiNavLink = Pick<SiteNavLink, "href" | "label">;
-
 export type SearchItem = {
   id: string;
   title: string;
@@ -66,14 +64,6 @@ export const gtaNavLinks: SiteNavLink[] = [
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
 
-// Published hubs only, newest first. Collections belong beneath their game hub.
-export const redDeadWikiNavLinks: Pick<SiteNavLink, "href" | "label">[] = [
-  { href: "/red-dead/wiki/red-dead-online", label: "Red Dead Online" },
-  { href: "/red-dead/wiki/red-dead-redemption-2", label: "Red Dead Redemption 2" },
-  { href: "/red-dead/wiki/undead-nightmare", label: "Undead Nightmare" },
-  { href: "/red-dead/wiki/red-dead-redemption", label: "Red Dead Redemption" },
-  { href: "/red-dead/wiki/red-dead-revolver", label: "Red Dead Revolver" }
-];
 export const redDeadNavLinks: SiteNavLink[] = [
   { href: "/red-dead", label: "Red Dead Home", icon: Home },
   { href: "/red-dead/wiki", label: "Red Dead Wiki", icon: BookOpen },
@@ -87,30 +77,6 @@ export const minecraftNavLinks: SiteNavLink[] = [
   { href: "/games", label: "All Games", icon: Gamepad2 }
 ];
 
-// Keep GTA hubs in a stable, newest-first order for fast sidebar access.
-export const gtaWikiNavLinks: GtaWikiNavLink[] = [
-  { href: "/gta/wiki/gta-6", label: "GTA VI" },
-  { href: "/gta/wiki/gta-online", label: "GTA Online" },
-  { href: "/gta/wiki/gta-5", label: "GTA V" },
-  { href: "/gta/wiki/gta-4-tbogt", label: "The Ballad of Gay Tony" },
-  { href: "/gta/wiki/gta-chinatown-wars", label: "Chinatown Wars" },
-  { href: "/gta/wiki/gta-4-tlad", label: "The Lost and Damned" },
-  { href: "/gta/wiki/gta-4", label: "GTA IV" },
-  { href: "/gta/wiki/gta-vice-city-stories", label: "Vice City Stories" },
-  { href: "/gta/wiki/gta-liberty-city-stories", label: "Liberty City Stories" },
-  { href: "/gta/wiki/gta-san-andreas", label: "San Andreas" },
-  { href: "/gta/wiki/gta-advance", label: "GTA Advance" },
-  { href: "/gta/wiki/gta-vice-city", label: "Vice City" },
-  { href: "/gta/wiki/gta-iii", label: "GTA III" },
-  { href: "/gta/wiki/gta-2", label: "GTA 2" },
-  { href: "/gta/wiki/gta-london-1961", label: "London 1961" },
-  { href: "/gta/wiki/gta-london-1969", label: "London 1969" },
-  { href: "/gta/wiki/gta", label: "Grand Theft Auto" }
-];
-
-export function isGtaWikiNavLinkActive(pathname: string, href: string) {
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
 export function siteNavLinksForPath(pathname: string | null | undefined): SiteNavLink[] {
   const path = pathname ?? "";
   if (path === "/minecraft" || path.startsWith("/minecraft/")) return minecraftNavLinks;
@@ -119,13 +85,25 @@ export function siteNavLinksForPath(pathname: string | null | undefined): SiteNa
   return siteNavLinks;
 }
 
-export const topNavLinks: SiteNavLink[] = [
-  { href: "/wiki", label: "Wiki", icon: BookOpen },
-  { href: "/codes", label: "Codes", icon: KeyRound },
-  { href: "/catalog", label: "Catalogs", icon: LayoutGrid },
-  { href: "/tools", label: "Tools", icon: Wrench },
-  { href: "/stats", label: "Stats", icon: BarChart3 }
-];
+export type SiteNavGroup = {
+  label: string;
+  links: SiteNavLink[];
+};
+
+/**
+ * Link groups for the More drawer. Franchise sections list their own pages first, then every
+ * site section, so each primary link is in the page HTML on every route.
+ */
+export function siteNavGroupsForPath(pathname: string | null | undefined): SiteNavGroup[] {
+  const links = siteNavLinksForPath(pathname);
+  if (links === siteNavLinks) return [{ label: "Browse", links: siteNavLinks }];
+  const label = links === gtaNavLinks ? "GTA" : links === redDeadNavLinks ? "Red Dead" : "Minecraft";
+  const shown = new Set(links.map((link) => link.href));
+  return [
+    { label, links },
+    { label: "Browse", links: siteNavLinks.filter((link) => !shown.has(link.href)) }
+  ];
+}
 
 export const signedOutSidebarAccount: SidebarAccount = {
   avatarUrl: null,

@@ -16,7 +16,7 @@ Scoped route-family guides:
 
 ## Shared game pages
 
-GTA, Red Dead and Minecraft routes in development and production use shared game readers and `components/games` page templates. Existing route files retain their public URL contracts. New namespaces resolve through `[slug]/[[...segments]]/page.tsx`; unknown roots and unpublished pages return 404. `games.kind` and `parent_id` choose a franchise hub or standalone wiki. Minecraft keeps its edition paths and redirects. Homepage and sidebar template redesign remains deferred.
+GTA, Red Dead and Minecraft routes in development and production use shared game readers and `components/games` page templates. Existing route files retain their public URL contracts. New namespaces resolve through `[slug]/[[...segments]]/page.tsx`; unknown roots and unpublished pages return 404. `games.kind` and `parent_id` choose a franchise hub or standalone wiki. Minecraft keeps its edition paths and redirects. The October 2026 homepage (`app/(site)/page.tsx`, data in `lib/home-page-data.ts`, blocks in `components/home/`) shows GTA, Red Dead and Minecraft in its "Beyond Roblox" block and directory, using the curated link lists in `components/hubs/HubsSidebar.tsx`.
 
 Check metadata, structured data, pagination, shared search, comments, progress, sitemaps, feed and revalidation whenever adding a page type. New non-GTA collection pagination is noindex. The shared changes have not been released to production.
 

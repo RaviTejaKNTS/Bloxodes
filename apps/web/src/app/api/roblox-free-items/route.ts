@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { listFreeItems } from "@/lib/db";
 import { normalizeSearchQuery, normalizeSortKey } from "@/lib/free-items-search";
+import { FREE_ITEMS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = FREE_ITEMS_PAGE_SIZE;
 
 function normalizePage(value: string | null): number {
   const parsed = Number(value);

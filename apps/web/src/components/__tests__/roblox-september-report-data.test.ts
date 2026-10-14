@@ -89,7 +89,10 @@ describe("September 2026 Roblox report", () => {
     expect(route).toContain("index: true");
     expect(route).toContain("follow: true");
     expect(route).not.toContain("index: false");
-    for (const file of ["src/app/(site)/stats/reports/page.tsx", "src/app/sitemaps/stats.xml/route.ts", "src/app/feed.xml/route.ts"]) {
+    // The archive page and the stats rail both list reports from the shared published index.
+    expect(read("src/app/(site)/stats/reports/page.tsx")).toContain("PUBLISHED_STATS_REPORTS");
+    expect(read("src/app/(site)/stats/components/StatsContentLayout.tsx")).toContain("PUBLISHED_STATS_REPORTS[0]");
+    for (const file of ["src/data/reports/published.ts", "src/app/sitemaps/stats.xml/route.ts", "src/app/feed.xml/route.ts"]) {
       expect(read(file)).toContain(report.slug);
       expect(read(file)).not.toContain("roblox-august-2026");
     }

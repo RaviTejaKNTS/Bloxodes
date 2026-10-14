@@ -92,14 +92,6 @@ export function RobuxPurchaseClient({
   const [valueBundlePlan, setValueBundlePlan] = useState<PlanWithPlatform | null>(initialValuePlan ?? null);
   const [budgetPlan, setBudgetPlan] = useState<BudgetPlan | null>(initialBudgetPlan ?? null);
 
-  const activeBundles = useMemo(
-    () =>
-      bundles
-        .filter((bundle) => bundle.active)
-        .sort((a, b) => a.sortOrder - b.sortOrder),
-    [bundles]
-  );
-
   const parsedRobux = Number(targetRobuxInput);
   const parsedUsd = Number(targetUsdInput);
 
@@ -150,7 +142,7 @@ export function RobuxPurchaseClient({
       </section>
 
       {mode === "robux_to_usd" ? (
-        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
+        <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
           <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
               e.preventDefault();
@@ -265,7 +257,7 @@ export function RobuxPurchaseClient({
           </div>
         </section>
       ) : (
-        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
+        <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)]">
           <form
             onSubmit={(e: FormEvent<HTMLFormElement>) => {
               e.preventDefault();
@@ -335,7 +327,21 @@ export function RobuxPurchaseClient({
             </div>
         </section>
       )}
+    </div>
+  );
+}
 
+export function RobuxPricingTable({ bundles }: { bundles: RobuxBundle[] }) {
+  const activeBundles = useMemo(
+    () =>
+      bundles
+        .filter((bundle) => bundle.active)
+        .sort((a, b) => a.sortOrder - b.sortOrder),
+    [bundles]
+  );
+
+  return (
+    <div className="ads-tools-pricing tool-surface">
       <section className="panel space-y-4 p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -391,7 +397,6 @@ export function RobuxPurchaseClient({
           </div>
         </div>
       </section>
-
     </div>
   );
 }

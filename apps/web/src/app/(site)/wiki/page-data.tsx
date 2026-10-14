@@ -1,6 +1,8 @@
+import { PageSidebar } from "@/components/PageSidebar";
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
+import { ContentCopyNodes } from "@/components/games/GameContentPage";
 import type { IconType } from "react-icons";
 import {
   FiCalendar,
@@ -1250,11 +1252,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const heroImage = getHeroImage(page, related);
   const controlColumns = getControlDeviceColumns(page.controls_json);
   const controlRows = parseControls(page.controls_json, controlColumns);
-  const hasControlsSection = controlColumns.length > 0 && controlRows.length > 0;
   const tipsNodes = await renderTipsNodes(page.tips_md);
-  const tipsSectionClassName = hasControlsSection
-    ? "article-content md-copy-scope game-copy min-w-0"
-    : "article-content md-copy-scope game-copy min-w-0";
   const catalogBlocks = await buildWikiCollectionBlocks(related);
   const catalogGroups = [
     { heading: "Game data", blocks: catalogBlocks.filter((block) => block.pageType !== "collectible") },
@@ -1390,28 +1388,24 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
         </div>
       </header>
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
+      <div className="grid gap-8 content-sidebar-grid">
         <article
           id="article-body"
           itemProp="articleBody"
           className="min-w-0 space-y-9 journey-content-stream journey-content-stream--prose"
         >
           {descriptionNodes?.length || gameDetailItems.length || heroStats.length ? (
-            <section className="space-y-4">
-              {descriptionNodes?.length ? (
-                <div className="article-content md-copy-scope game-copy max-w-3xl min-w-0 text-foreground">
-                  {descriptionNodes}
-                </div>
-              ) : null}
+            <>
+              <ContentCopyNodes nodes={descriptionNodes} group="wiki-intro" className="game-copy max-w-3xl min-w-0 text-foreground" />
 
               {gameDetailItems.length ? (
-                <section aria-label="Game details" className="lg:hidden">
+                <section aria-label="Game details" className="ads-content-wiki-intro-extra lg:hidden">
                   <WikiGameDetailsBlock details={gameDetailItems} />
                 </section>
               ) : null}
 
               {heroStats.length ? (
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <div className="ads-content-wiki-intro-extra grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {heroStats.map((stat) => {
                     const content = (
                       <>
@@ -1442,7 +1436,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                   })}
                 </div>
               ) : null}
-            </section>
+            </>
           ) : null}
 
           <WikiActiveCodesPreview
@@ -1453,13 +1447,12 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
           />
 
           {catalogGroups.map((group) => (
-            <section key={group.heading} className="space-y-5">
-              <h2 className="text-2xl font-semibold leading-tight text-foreground md:text-3xl">{group.heading}</h2>
-              <div className="space-y-8">
+            <Fragment key={group.heading}>
+              <h2 className="ads-content-section-heading text-2xl font-semibold leading-tight text-foreground md:text-3xl">{group.heading}</h2>
                 {group.blocks.map(({ page: catalogPage, heading, nodes, imageUrls }) => (
                   <section
                     key={catalogPage.code}
-                    className="space-y-4"
+                    className="ads-content-collection space-y-4"
                     data-journey-item
                     data-analytics-event="select_item"
                     data-analytics-item-list-name="wiki_collection"
@@ -1480,17 +1473,16 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     />
                   </section>
                 ))}
-              </div>
-            </section>
+            </Fragment>
           ))}
 
           <WikiControlsTable columns={controlColumns} heading={`${universeLabel} Controls`} rows={controlRows} />
 
           {tipsNodes?.length ? (
-            <section className={tipsSectionClassName}>
-              <h2>{universeLabel} Gameplay Tips</h2>
-              {tipsNodes}
-            </section>
+            <>
+              <div className="ads-content-tips-heading article-content md-copy-scope game-copy min-w-0"><h2>{universeLabel} Gameplay Tips</h2></div>
+              <ContentCopyNodes nodes={tipsNodes} group="wiki-tips" className="game-copy min-w-0" />
+            </>
           ) : null}
 
           <WikiEventsTimeline
@@ -1502,7 +1494,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
           <DeveloperGameCards games={related.developerGames} creatorLabel={creatorLabel} />
         </article>
 
-        <aside className="space-y-4">
+        <PageSidebar>
           {gameDetailItems.length ? (
             <section aria-label="Game details" className="hidden lg:block">
               <WikiGameDetailsBlock details={gameDetailItems} />
@@ -1600,7 +1592,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
               </div>
             </section>
           ) : null}
-        </aside>
+        </PageSidebar>
 
         <div className="min-w-0 lg:col-start-1">
           <CommentsSection entityType="wiki" entityId={page.id} />

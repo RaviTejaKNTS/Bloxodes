@@ -10,6 +10,9 @@ type Props = {
   code: string;
   tone?: Tone;
   size?: Size;
+  /** "bar" is a full-width button that shows the code itself next to the Copy label. */
+  variant?: "pill" | "bar";
+  label?: string;
   onCopySuccess?: () => void;
   analytics?: {
     event: string;
@@ -17,7 +20,22 @@ type Props = {
   };
 };
 
-export function CopyCodeButton({ code, tone = "surface", size = "md", onCopySuccess, analytics }: Props) {
+function CopyIcon({ copied, className }: { copied: boolean; className: string }) {
+  return (
+    <svg aria-hidden className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      {copied ? (
+        <path d="m5 13 4 4L19 7" />
+      ) : (
+        <>
+          <rect x="9" y="9" width="13" height="13" rx="2" />
+          <path d="M5 15a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+export function CopyCodeButton({ code, tone = "surface", size = "md", variant = "pill", label, onCopySuccess, analytics }: Props) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -32,6 +50,23 @@ export function CopyCodeButton({ code, tone = "surface", size = "md", onCopySucc
     } catch (err) {
       console.error("Copy failed", err);
     }
+  }
+
+  if (variant === "bar") {
+    return (
+      <button
+        type="button"
+        onClick={handleCopy}
+        className="flex w-full items-center justify-between gap-3 rounded-md border border-accent/35 bg-accent/[0.07] px-3 py-2 text-left transition hover:border-accent/60 hover:bg-accent/[0.12] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+        aria-label={label ?? `Copy code ${code}`}
+      >
+        <span className="min-w-0 truncate font-mono text-[0.82rem] font-semibold text-foreground">{code}</span>
+        <span className="inline-flex flex-none items-center gap-1.5 text-xs font-semibold text-accent">
+          <CopyIcon copied={copied} className="h-3.5 w-3.5" />
+          {copied ? "Copied" : "Copy"}
+        </span>
+      </button>
+    );
   }
 
   const baseClass = size === "sm"
@@ -51,25 +86,9 @@ export function CopyCodeButton({ code, tone = "surface", size = "md", onCopySucc
       type="button"
       onClick={handleCopy}
       className={`${baseClass} ${copied ? copiedClass : toneClass}`}
-      aria-label={`Copy code ${code}`}
+      aria-label={label ?? `Copy code ${code}`}
     >
-      <svg
-        aria-hidden
-        className={size === "sm" ? "h-3 w-3" : "h-3.5 w-3.5"}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      >
-        {copied ? (
-          <path d="m5 13 4 4L19 7" />
-        ) : (
-          <>
-            <rect x="9" y="9" width="13" height="13" rx="2" />
-            <path d="M5 15a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8" />
-          </>
-        )}
-      </svg>
+      <CopyIcon copied={copied} className={size === "sm" ? "h-3 w-3" : "h-3.5 w-3.5"} />
       {copied ? "Copied" : "Copy"}
     </button>
   );

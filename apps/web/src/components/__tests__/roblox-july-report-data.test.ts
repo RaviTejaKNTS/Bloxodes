@@ -81,7 +81,7 @@ describe("July 2026 Roblox report data", () => {
 
   it("publishes the route through the archive, sitemap, and feed", () => {
     const files = [
-      "src/app/(site)/stats/reports/page.tsx",
+      "src/data/reports/published.ts",
       "src/app/sitemaps/stats.xml/route.ts",
       "src/app/feed.xml/route.ts"
     ];

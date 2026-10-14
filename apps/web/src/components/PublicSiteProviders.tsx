@@ -21,6 +21,8 @@ type PublicSiteProvidersProps = {
   umamiWebsiteId?: string;
 };
 
+// Mediavine asks hydrated sites to run its wrapper after the page has rendered; an earlier
+// start lets it edit #article-body before React hydrates, which breaks hydration and drops ads.
 function MediavineScript() {
   return (
     <Script
@@ -54,10 +56,14 @@ export function PublicSiteProviders({
   return (
     <ConsentProvider>
       {enableLocalConsent ? <ConsentMode /> : null}
-      {enableLocalConsent && enableMediavine ? (
-        <ConsentGate category="marketing">
+      {enableMediavine ? (
+        enableLocalConsent ? (
+          <ConsentGate category="marketing">
+            <MediavineScript />
+          </ConsentGate>
+        ) : (
           <MediavineScript />
-        </ConsentGate>
+        )
       ) : null}
       {googleAnalyticsId ? (
         enableLocalConsent ? (

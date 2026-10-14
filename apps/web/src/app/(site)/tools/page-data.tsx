@@ -1,3 +1,4 @@
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import { ToolCard } from "@/components/ToolCard";
 import { listPublishedTools, listPublishedToolsPage, type ToolListEntry } from "@/lib/tools";
 import { TOOLS_DESCRIPTION, SITE_URL } from "@/lib/seo";
@@ -48,6 +49,7 @@ function ToolsPageView({
   latestUpdatedAt: string | null;
 }) {
   return (
+    <ToolPageLayout title="Roblox tools and calculators" canonicalPath={currentPage === 1 ? "/tools" : `/tools/page/${currentPage}`} >
     <div className="space-y-10">
       {showHero ? (
         <header className="space-y-4">
@@ -74,11 +76,12 @@ function ToolsPageView({
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+      <section id="article-body" itemProp="articleBody" role="list" className="journey-content-stream journey-content-stream--index">
         {tools.length ? (
           tools.map((tool, index) => (
             <div
               key={tool.id ?? tool.code}
+              role="listitem"
               data-journey-item
               className="h-full"
               data-analytics-event="select_item"
@@ -115,6 +118,7 @@ function ToolsPageView({
         />
       ) : null}
     </div>
+    </ToolPageLayout>
   );
 }
 

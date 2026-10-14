@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { PublicSiteProviders } from "@/components/PublicSiteProviders";
 import { SiteShell } from "@/components/SiteShell";
-import { MEDIAVINE_SCRIPT_SRC } from "@/config/mediavine";
 import { SITE_URL, organizationJsonLd, siteJsonLd } from "@/lib/seo";
 
 export const revalidate = 3600;
@@ -22,18 +21,9 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
       googleAnalyticsId={googleAnalyticsId}
       umamiHostUrl={umamiHostUrl}
       umamiWebsiteId={umamiWebsiteId}
-      enableMediavine={isProduction && enableLocalConsent}
+      enableMediavine={isProduction}
       enableLocalConsent={enableLocalConsent}
     >
-      {!enableLocalConsent && isProduction ? (
-        <script
-          type="text/javascript"
-          async
-          data-noptimize="1"
-          data-cfasync="false"
-          src={MEDIAVINE_SCRIPT_SRC}
-        />
-      ) : null}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       <SiteShell>{children}</SiteShell>
     </PublicSiteProviders>

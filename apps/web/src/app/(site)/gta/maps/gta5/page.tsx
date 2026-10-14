@@ -7,6 +7,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "@/styles/gta5-map.css";
 import { Gta5InteractiveMap } from "@/components/gta/Gta5InteractiveMap";
+import { GtaMapGuide } from "@/components/gta/GtaMapGuide";
 import { getGta5MapMarkers } from "@/lib/gta-map";
 import { GTA5_MAP_LAYERS, GTA5_MAP_PATH } from "@/lib/gta-map-types";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
@@ -49,22 +50,21 @@ export default async function Gta5MapPage() {
   return (
     <div className="gta-map-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": structuredData }) }} />
-      <Gta5InteractiveMap markers={markers}>
-        <div id="article-body" itemProp="articleBody">
-          <p>Choose a collection to plan a route, or search by item, location, or landmark. Select a pin for its location details and linked guide. The map covers GTA V Story Mode; GTA Online locations and later updates are outside this map.</p>
-          <p>Completed locations use the same progress as the collection guides. Progress saves in this browser when signed out and syncs to your Bloxodes account when signed in. A stunt jump or flight still requires the right approach and the game’s completion message.</p>
-          <p>For 100% Story Mode completion, you need all 50 spaceship parts and letter scraps, but only 25 of 50 stunt jumps, 25 of 50 Under the Bridge flights, and 8 of 15 knife flights. You can use the map to finish every challenge.</p>
-          <h3>Collection guides</h3>
-          <ul>
-            {GTA5_MAP_LAYERS.map((layer) => (
-              layer.group === "Places" ? null : <li key={layer.slug}><Link href={`/gta/wiki/gta-5/${layer.slug}`}>{layer.label} ↗</Link></li>
-            ))}
-          </ul>
-          <h3>Map notes</h3>
-          <p>Pins mark the location or start of each collectible or challenge. Flight and jump pins indicate the approach area; confirm completion in the game. Four Altruist Camp package entries share one area marker.</p>
-          <p>Road and satellite tiles and selected, grouped place names are from <a href="https://github.com/rolux/gtadb.org" target="_blank" rel="noreferrer">GTADB contributors</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Collectible positions were matched to guide entries using the <a href="https://github.com/rootBrz/collectibles-on-map-gta-5/blob/main/src/collectibles/coords.h" target="_blank" rel="noreferrer">GTA V coordinate list</a>. GTA V is © Rockstar Games.</p>
-        </div>
-      </Gta5InteractiveMap>
+      <Gta5InteractiveMap markers={markers} />
+      <GtaMapGuide canonicalPath={GTA5_MAP_PATH} title={title} heading="About this map">
+        <p>Choose a collection to plan a route, or search by item, location, or landmark. Select a pin for its location details and linked guide. The map covers GTA V Story Mode; GTA Online locations and later updates are outside this map.</p>
+        <p>Completed locations use the same progress as the collection guides. Progress saves in this browser when signed out and syncs to your Bloxodes account when signed in. A stunt jump or flight still requires the right approach and the game’s completion message.</p>
+        <p>For 100% Story Mode completion, you need all 50 spaceship parts and letter scraps, but only 25 of 50 stunt jumps, 25 of 50 Under the Bridge flights, and 8 of 15 knife flights. You can use the map to finish every challenge.</p>
+        <h3>Collection guides</h3>
+        <ul>
+          {GTA5_MAP_LAYERS.map((layer) => (
+            layer.group === "Places" ? null : <li key={layer.slug}><Link href={`/gta/wiki/gta-5/${layer.slug}`}>{layer.label} ↗</Link></li>
+          ))}
+        </ul>
+        <h3>Map notes</h3>
+        <p>Pins mark the location or start of each collectible or challenge. Flight and jump pins indicate the approach area; confirm completion in the game. Four Altruist Camp package entries share one area marker.</p>
+        <p>Road and satellite tiles and selected, grouped place names are from <a href="https://github.com/rolux/gtadb.org" target="_blank" rel="noreferrer">GTADB contributors</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Collectible positions were matched to guide entries using the <a href="https://github.com/rootBrz/collectibles-on-map-gta-5/blob/main/src/collectibles/coords.h" target="_blank" rel="noreferrer">GTA V coordinate list</a>. GTA V is © Rockstar Games.</p>
+      </GtaMapGuide>
     </div>
   );
 }

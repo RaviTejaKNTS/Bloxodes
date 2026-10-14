@@ -2,11 +2,12 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { normalizeSearchQuery, normalizeSortKey, type MusicSortKey } from "@/lib/music-ids-search";
 import { getMusicGameIdPage, type MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
+import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = MUSIC_IDS_PAGE_SIZE;
 const MUSIC_SOURCE_VIEW = "roblox_music_ids_ranked_view";
 const SELECT_FIELDS =
   "asset_id, title, artist, album, genre, duration_seconds, album_art_asset_id, thumbnail_url, rank, source, last_seen_at, popularity_score";

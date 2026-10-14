@@ -1,5 +1,7 @@
 "use client";
 
+import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
+
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
@@ -104,19 +106,16 @@ export function FontIdsBrowser({ fonts }: { fonts: RobloxFontId[] }) {
         </label>
       </div>
 
-      {filteredFonts.length ? (
-        <>
-          {filteredFonts.map((font, index) => (
-            <div key={font.asset_id} data-journey-item className="h-full">
+      <>
+          <CatalogStableItems slots={fonts.length}>{filteredFonts.map((font, index) => (
+            <div key={font.asset_id} className="h-full">
               <FontCard font={font} eager={index < 4} />
             </div>
-          ))}
+          ))}</CatalogStableItems>
         </>
-      ) : (
-        <p className="rounded-lg border border-dashed border-border/70 p-8 text-center text-muted">
+      <p hidden={!!filteredFonts.length} className="rounded-lg border border-dashed border-border/70 p-8 text-center text-muted">
           No official Roblox fonts match that search.
         </p>
-      )}
     </>
   );
 }

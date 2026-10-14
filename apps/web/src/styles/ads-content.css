@@ -1,0 +1,104 @@
+/* Preserve copy margins when its paragraphs become separate ad boundaries. */
+.ads-content-copy {
+  display: flow-root;
+}
+
+/* The shared reference stream already supplies a 24px grid gap. */
+#article-body > .ads-content-plain-copy + .ads-content-plain-copy {
+  margin-top: -1.5rem;
+}
+
+#article-body > header + .ads-content-game-intro {
+  margin-top: -0.5rem;
+}
+
+#article-body > .ads-content-copy + .ads-content-copy {
+  margin-top: 0;
+}
+
+#article-body.journey-content-stream--index > .ads-content-copy + .ads-content-copy {
+  margin-top: -1.5rem;
+}
+
+#article-body > .ads-content-copy + .ads-content-copy > .md-copy-p {
+  margin-top: 1.75rem !important;
+}
+
+#article-body > .ads-content-wiki-intro-extra {
+  margin-top: 1rem;
+}
+
+#article-body > .ads-content-section-heading + .ads-content-collection {
+  margin-top: 1.25rem;
+}
+
+#article-body > .ads-content-collection + .ads-content-collection {
+  margin-top: 2rem;
+}
+
+#article-body > .ads-content-game-section-heading + .ads-content-game-collection,
+#article-body > .ads-content-game-collection + .ads-content-game-collection {
+  margin-top: 1.5rem;
+}
+
+#article-body > .ads-content-event {
+  margin-top: 2.5rem;
+}
+
+#article-body > .md-copy-p + .ads-content-event {
+  margin-top: 0;
+}
+
+#article-body > .ads-content-event-time {
+  margin-top: 2rem;
+}
+
+#article-body > :is(.ads-content-event-time-intro, .ads-content-event-local-time, .ads-content-event-countdown, .ads-content-event-regions, .ads-content-event-regions-table) {
+  margin-top: 1rem;
+}
+
+#article-body > .ads-content-event-regions-table + .ads-content-copy {
+  margin-top: 2rem;
+}
+
+#article-body > .ads-content-event-link {
+  margin-top: 1rem;
+}
+
+#article-body > .ads-content-current-event + .ads-content-current-event {
+  margin-top: 1.5rem;
+}
+
+#article-body > :is(.ads-content-event-current-heading, .ads-content-event-archive),
+#article-body > .ads-content-event-link + .ads-content-event,
+#article-body > .ads-content-event-regions-table + .ads-content-event {
+  margin-top: 2.5rem;
+}
+
+#article-body > .ads-content-event-current-heading + .ads-content-current-event {
+  margin-top: 1.5rem;
+}
+
+.ads-content-quiz-widget {
+  margin-top: 1.5rem;
+}
+
+#article-body > .ads-content-code-rows {
+  margin-top: 1rem;
+}
+
+#article-body > .ads-content-code-rows + .ads-content-code-rows {
+  margin-top: 0.75rem;
+}
+
+#article-body > .ads-content-code-empty {
+  margin-top: 1rem;
+}
+
+#article-body > .ads-content-code-heading + .ads-content-copy {
+  margin-top: 0;
+}
+
+#article-body > .ads-content-tips-heading + .ads-content-copy {
+  margin-top: 1.75rem;
+}

@@ -1,10 +1,11 @@
+import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { MoreCatalogs } from "@/components/more-content";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { PagePagination } from "@/components/PagePagination";
 import { RobloxCatalogItemCard } from "@/components/RobloxCatalogItemCard";
@@ -425,7 +426,7 @@ function AvatarCatalogFilterForm({
   const advancedFilterCount = Number(filters.sale !== "all") + Number(filters.creator !== "all");
 
   return (
-    <form action={basePath} method="get" className="flex flex-col gap-3 md:flex-row md:items-end">
+    <form action={basePath} method="get" className="catalog-toolbar">
       <div className="min-w-0 flex-1 space-y-2">
         <label htmlFor="avatar-catalog-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           Search
@@ -536,9 +537,9 @@ function AvatarCatalogGrid({
   pageTitle: string;
   hasFilters: boolean;
 }) {
-  if (!items.length) {
-    return (
-      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center">
+  return (
+    <>
+      <div hidden={!!items.length} className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center">
         <p className="text-base font-semibold text-foreground">
           {hasFilters ? "No matching IDs" : "No IDs available yet"}
         </p>
@@ -548,16 +549,9 @@ function AvatarCatalogGrid({
             : `${pageTitle} entries are not available in this view yet.`}
         </p>
       </div>
-    );
-  }
-
-  return (
-    <>
-      {items.map((item) => (
-        <div key={`${item.item_type}-${item.asset_id}`} data-journey-item className="h-full">
-          <RobloxCatalogItemCard item={item} />
-        </div>
-      ))}
+      <CatalogStableItems slots={AVATAR_CATALOG_PAGE_SIZE}>
+        {items.map(item => <RobloxCatalogItemCard key={`${item.item_type}-${item.asset_id}`} item={item} />)}
+      </CatalogStableItems>
     </>
   );
 }
@@ -695,7 +689,7 @@ export async function renderAvatarCatalogPage({
         {route.page > 1 ? <p className="text-sm text-muted">Page {route.page} of {totalPages}</p> : null}
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--catalog-items">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--catalog-items">
         {showHero ? (
           <p>
             Search {route.config.title.replace(/\s+on Roblox$/i, "")} by name, creator, or Roblox ID. Every result includes a copy-ready
@@ -712,12 +706,12 @@ export async function renderAvatarCatalogPage({
 
         <AvatarCatalogFilterForm basePath={route.config.basePath} filters={filters} />
         <AvatarCatalogGrid items={items} pageTitle={pageHeading} hasFilters={hasFilters} />
-        <PagePagination
+        <div hidden={totalPages <= 1}><PagePagination
           basePath={route.config.basePath}
           currentPage={route.page}
           totalPages={totalPages}
           query={queryString || undefined}
-        />
+        /></div>
 
         <CatalogAdSlot />
 

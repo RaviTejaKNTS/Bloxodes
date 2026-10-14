@@ -105,6 +105,17 @@ When the Journey selector also uses `md-copy-scope`, don't let the grid row gap 
 2. Restore small adjacent-copy and heading offsets.
 3. Measure the rendered paragraph gap at desktop and mobile. The Bloxodes article rhythm is about 28px, not the 52px you get from a 24px grid gap plus a 28px paragraph margin.
 
+#### Sectioned grids, tall blocks and the right rail
+
+Dense flow only works for one unsectioned list: it would pull cards across section headings. For sectioned grids, and anything else the October 2026 ad work found, follow these rules:
+
+- **Row groups for sectioned grids.** Put each section's cards in wrapper elements that are direct children of `#article-body`, each with its own inner grid. Each group holds exactly one row: the component measures the stream width with a `ResizeObserver`, works out the column count, and fills that many cards per group (it starts from a 1024px layout on the server). Only a section's last group can be partial, so an ad always lands on a clean row boundary. List views use a fixed group size instead, and checklists use groups of up to 12 task rows. Keep the spacing between groups equal to the row gap inside them, so the breaks don't show.
+- **Fixed wrapper count.** Filters, view toggles, sorting, client pagination and responsive regrouping swap the contents of fixed wrappers. They never add, remove or reorder `#article-body`'s direct children, because Mediavine has already inserted ads between them. `apps/web/src/components/game-collections/CollectionRowGroups.tsx` is the reference.
+- **No tall blocks.** No direct child should be taller than about 1,100px at 1440x900 when it can be split without a visible change. Long tables become consecutive chunks that look like one table (shared column widths, header shown once, repeated visually hidden). See `apps/web/src/app/(site)/stats/components/StatsViews.tsx`. A single interactive widget stays whole; put its copy around it as separate children.
+- **One right rail.** Mediavine puts sticky sidebar ads at the end of the first `aside.space-y-4`. Render the rail with `PageSidebar` (`@/components/PageSidebar`) as a direct child of a `grid gap-8 content-sidebar-grid` wrapper, exactly once per page. Never use `<aside className="space-y-4">` inside page content. Keep the rail's own content short, ending about 900 to 1,100px from the top at 1440x900, so the first sticky ad shows early.
+- **Side-by-side blocks.** To show two separate blocks in one row on wide screens, keep each as its own direct child and place them with a grid on `#article-body` that uses dense flow, with anything unknown spanning the full width. An ad inserted between the pair then lands below it. Give a block the full row when its partner is empty. The homepage's `.home-stream` in `apps/web/src/styles/ads-hubs.css` is the reference.
+- **Family CSS.** Put new rules in `apps/web/src/styles/ads-<family>.css`, imported by the family's templates, instead of `globals.css`.
+
 ### 7. Remove misleading placement code
 
 Trace any manual slot component before you keep or delete it. If the component returns `null`, report it as a no-op and remove calls only within the approved page family. Don't remove a working ad integration just because the automatic stream is being simplified.
@@ -146,6 +157,7 @@ git diff --check
 ```
 
 - If the PR workflow doesn't cover the journey DOM and browser audits, request a page-specific GitHub check for them instead of running them on the workstation.
+- To see real placement, run the ad slot audit against production or a preview: `npx tsx scripts/ads/audit-ad-slots.ts --paths /codes/<slug>,/wiki/<slug> --devices desktop,mobile --screenshots --out tmp/ads/<run>`. It loads each page with Mediavine house ads and reports in-content and sidebar ad counts, the first ad position, the largest gap, tall blocks and ads that split a card row. Add `--base-url <server>` for a preview or local server; the harness then proxies bloxodes.com to that server and blocks every non-GET request to it. A production build renders its own loader. A dev build doesn't, so the harness injects the script before hydration; add `--after-hydration` to match the production loader, which starts after React hydrates.
 - Use the repository production-build environment wrapper only when managed development is unavailable and the task authorizes read-only production-backed rendering. State that caveat in the handoff.
 - If a browser tool fails to initialize, treat it as a tool failure, not an application failure.
 

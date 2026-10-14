@@ -18,6 +18,7 @@ function DisabledCookieSettingsContent() {
         </p>
       </div>
 
+      <div id="article-body" className="flex flex-col gap-6">
       <div className="rounded-xl border border-border bg-muted/30 p-5 text-sm leading-6 text-muted-foreground">
         <p>
           We currently use the consent controls provided on the live website by our advertising and consent partners. If a consent prompt
@@ -38,6 +39,7 @@ function DisabledCookieSettingsContent() {
           </Link>
           .
         </p>
+      </div>
       </div>
     </main>
   );
@@ -79,6 +81,7 @@ function EnabledCookieSettingsContent() {
         </p>
       </div>
 
+      <div id="article-body" className="flex flex-col gap-6">
       <div className="flex flex-wrap gap-3">
         <button
           type="button"
@@ -155,6 +158,7 @@ function EnabledCookieSettingsContent() {
           </Link>
           .
         </p>
+      </div>
       </div>
     </main>
   );

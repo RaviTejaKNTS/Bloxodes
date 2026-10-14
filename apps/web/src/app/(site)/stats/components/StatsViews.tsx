@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import {
   Activity,
   ArrowDownRight,
@@ -31,6 +31,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { StatsContentLayout } from "./StatsContentLayout";
+import { StatsTableScrollSync } from "./StatsTableScrollSync";
+import "@/styles/ads-stats.css";
 import { StatsGamesAutoSubmit } from "@/app/(site)/stats/components/StatsGamesAutoSubmit";
 import { StatsChartPanel } from "@/app/(site)/stats/components/StatsChartPanel";
 import { StatsItemImage } from "@/app/(site)/stats/components/StatsItemImage";
@@ -64,14 +67,25 @@ import {
   type StatsRelatedLink,
   type StatsSortKey,
   type StatsSubgenreOption,
+  STATS_PAGE_SIZE,
   robloxGameUrl
 } from "@/lib/stats";
 import { formatCompactNumber, formatDelta, formatDeltaPercent, formatFullNumber, formatPercent } from "@/lib/stats-format";
 import { cn } from "@/lib/utils";
 
+/**
+ * Split a page of ranking rows into fixed-size ad chunks. There are always enough chunks for a full
+ * page, so filters that return fewer rows keep the same #article-body children (empty ones are hidden),
+ * and a page with more rows than expected gets more chunks instead of losing rows.
+ */
+function statsChunks<T>(rows: T[], size: number): T[][] {
+  const count = Math.ceil(Math.max(rows.length, STATS_PAGE_SIZE, 1) / size);
+  return Array.from({ length: count }, (_, index) => rows.slice(index * size, (index + 1) * size));
+}
+
 export function StatsPageShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative left-1/2 w-[calc(100vw-2rem)] max-w-[1800px] -translate-x-1/2 xl:w-[calc(100vw-17rem)]">
+    <div className="relative left-1/2 w-[calc(100vw-2rem)] max-w-[1800px] -translate-x-1/2 xl:w-[calc(100vw-3rem)] xl:max-w-[calc(1536px-3rem)]">
       {children}
     </div>
   );
@@ -285,7 +299,10 @@ function GameListPanel({
   href?: string;
 }) {
   return (
-    <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+    <>
+    {Array.from({ length: Math.max(1, Math.ceil(games.length / 5)) }, (_, groupIndex) => (
+    <Card key={groupIndex} className={cn("stats-list-chunk rounded-lg border-border/70 bg-surface/80 shadow-none", groupIndex === 0 && "stats-chunk-first", (groupIndex + 1) * 5 >= games.length && "stats-chunk-last")}>
+      {groupIndex === 0 ? (
       <CardHeader className="flex flex-row items-start justify-between gap-3 border-b border-border/60 p-4">
         <div className="min-w-0">
           <CardTitle className="m-0 text-base font-semibold text-foreground">{title}</CardTitle>
@@ -299,12 +316,15 @@ function GameListPanel({
           </Button>
         ) : null}
       </CardHeader>
-      <CardContent className="space-y-2 p-3">
-        {games.length ? games.map((game, index) => <CompactGameRow key={game.universeId} game={game} rank={index + 1} metric={metric} />) : (
+      ) : null}
+      <CardContent className="stats-list-content space-y-2 p-3">
+        {games.length ? games.slice(groupIndex * 5, (groupIndex + 1) * 5).map((game, index) => <CompactGameRow key={game.universeId} game={game} rank={groupIndex * 5 + index + 1} metric={metric} />) : (
           <div className="rounded-lg border border-dashed border-border/70 p-6 text-center text-sm text-muted">Not enough hourly movement yet.</div>
         )}
       </CardContent>
     </Card>
+    ))}
+    </>
   );
 }
 
@@ -499,16 +519,18 @@ function SortableTableHead({
   data,
   column,
   label = columnHeaderLabel(column),
-  className
+  className,
+  continuation = false
 }: {
   data: StatsGamesPageData;
   column: StatsGameColumnKey;
   label?: string;
   className?: string;
+  continuation?: boolean;
 }) {
   const sort = sortForStatsColumn(column);
   const active = sort === data.filters.sort;
-  if (!sort) {
+  if (!sort || continuation) {
     return <TableHead className={className}>{label}</TableHead>;
   }
   return (
@@ -636,6 +658,9 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         </form>
       </header>
 
+      <StatsContentLayout title="Live Roblox game stats" canonicalPath="/stats">
+      <section id="article-body" className="stats-stream">
+
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         <MetricCard
           label="Platform CCU"
@@ -654,10 +679,10 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         />
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-2">
+      <Fragment>
         <GameListPanel title="Top games right now" subtitle="Ranked by latest current players; pill shows 24h movement." games={data.topGames} metric="playing" href="/stats/games" />
         <GameListPanel title="Fastest risers" subtitle="Ranked by 24h momentum across active games with meaningful gains." games={data.risers} metric="playing" href="/stats/games?sort=growth_24h" />
-      </div>
+      </Fragment>
 
       <div id="platform-ccu-trend" className="scroll-mt-24">
         <StatsChartPanel
@@ -675,14 +700,17 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
 
       <StatsVisitShareChartPanel initialChart={data.visitShareChart} />
 
-      <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+      <Fragment>
+        {Array.from({ length: Math.max(1, Math.ceil(data.genres.length / 5)) }, (_, groupIndex) => (
+        <Card key={groupIndex} hidden={groupIndex > 0 && data.genres.length <= groupIndex * 5} className={cn("stats-list-chunk rounded-lg border-border/70 bg-surface/80 shadow-none", groupIndex === 0 && "stats-chunk-first", (groupIndex + 1) * 5 >= data.genres.length && "stats-chunk-last")}>
+          {groupIndex === 0 ? (
           <CardHeader className="border-b border-border/60 p-4">
             <CardTitle className="m-0 text-base font-semibold text-foreground">Trending genres</CardTitle>
             <p className="mt-1 text-xs font-medium text-muted">Ranked by current players across top tracked games.</p>
           </CardHeader>
-          <CardContent className="space-y-3 p-4">
-            {data.genres.map((genre) => (
+          ) : null}
+          <CardContent className="stats-list-content stats-genre-content space-y-3 p-4">
+            {data.genres.slice(groupIndex * 5, (groupIndex + 1) * 5).map((genre) => (
               <Link key={genre.slug} href={`/stats/games?genre=${encodeURIComponent(genre.genre)}`} className="block rounded-lg border border-border/60 bg-background/35 p-3 transition hover:border-accent/70">
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -698,8 +726,11 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
             ))}
           </CardContent>
         </Card>
+        ))}
         <GameListPanel title="Most visited games" games={data.mostVisited.slice(0, 8)} metric="visits" href="/stats/games?sort=visits" />
-      </div>
+      </Fragment>
+      </section>
+      </StatsContentLayout>
     </div>
   );
 }
@@ -728,7 +759,10 @@ export function StatsPlatformView({ data }: { data: StatsPlatformPageData }) {
         </Button>
       </header>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <StatsContentLayout title="Roblox platform stats" canonicalPath="/stats/roblox-platform">
+      <section id="article-body" className="stats-stream">
+
+      <div className="stats-metrics grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <MetricCard
           label="Platform CCU"
           value={formatCompactNumber(data.totals.livePlayers)}
@@ -767,19 +801,22 @@ export function StatsPlatformView({ data }: { data: StatsPlatformPageData }) {
         area
       />
 
-      <div className="grid gap-4 xl:grid-cols-2">
+      <Fragment>
         <GameListPanel title="Top games right now" subtitle="Largest contributors to platform CCU." games={data.topGames} metric="playing" href="/stats/games" />
         <GameListPanel title="Fastest risers" subtitle="Games adding the most players over the last 24 hours." games={data.risers} metric="playing" href="/stats/games?sort=growth_24h" />
-      </div>
+      </Fragment>
 
-      <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+      <Fragment>
+        {Array.from({ length: Math.max(1, Math.ceil(data.genres.length / 5)) }, (_, groupIndex) => (
+        <Card key={groupIndex} hidden={groupIndex > 0 && data.genres.length <= groupIndex * 5} className={cn("stats-list-chunk rounded-lg border-border/70 bg-surface/80 shadow-none", groupIndex === 0 && "stats-chunk-first", (groupIndex + 1) * 5 >= data.genres.length && "stats-chunk-last")}>
+          {groupIndex === 0 ? (
           <CardHeader className="border-b border-border/60 p-4">
             <CardTitle className="m-0 text-base font-semibold text-foreground">Platform genre mix</CardTitle>
             <p className="mt-1 text-xs font-medium text-muted">Current players grouped by tracked Roblox genre.</p>
           </CardHeader>
-          <CardContent className="space-y-3 p-4">
-            {data.genres.map((genre) => (
+          ) : null}
+          <CardContent className="stats-list-content stats-genre-content space-y-3 p-4">
+            {data.genres.slice(groupIndex * 5, (groupIndex + 1) * 5).map((genre) => (
               <Link key={genre.slug} href={`/stats/games?genre=${encodeURIComponent(genre.genre)}`} className="block rounded-lg border border-border/60 bg-background/35 p-3 transition hover:border-accent/70">
                 <div className="flex items-center justify-between gap-3">
                   <div>
@@ -795,8 +832,11 @@ export function StatsPlatformView({ data }: { data: StatsPlatformPageData }) {
             ))}
           </CardContent>
         </Card>
+        ))}
         <GameListPanel title="Most visited games" subtitle="Long-running traffic leaders in the tracked game index." games={data.mostVisited} metric="visits" href="/stats/games?sort=visits" />
-      </div>
+      </Fragment>
+      </section>
+      </StatsContentLayout>
     </div>
   );
 }
@@ -844,13 +884,16 @@ function StatsItemSortableTableHead({
   data,
   sort,
   label,
-  className
+  className,
+  continuation = false
 }: {
   data: StatsItemsPageData;
   sort: StatsItemSortKey;
   label: string;
   className?: string;
+  continuation?: boolean;
 }) {
+  if (continuation) return <TableHead className={className}>{label}</TableHead>;
   const active = sort === data.filters.sort;
   return (
     <TableHead className={className}>
@@ -925,9 +968,10 @@ export function StatsItemsView({ data }: { data: StatsItemsPageData }) {
     : Object.values(STATS_ITEM_SUBCATEGORY_OPTIONS).flat();
 
   return (
-    <form key={formStateKey} action="/stats/items" className="stats-surface space-y-5" data-stats-games-form>
+    <form action="/stats/items" className="stats-surface space-y-5" data-stats-games-form>
       <StatsGamesAutoSubmit />
-      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <StatsTableScrollSync />
+      <header key={`${formStateKey}-header`} className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="space-y-3">
           <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
           <div>
@@ -946,7 +990,7 @@ export function StatsItemsView({ data }: { data: StatsItemsPageData }) {
         </div>
       </header>
 
-      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div key={`${formStateKey}-filters`} className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="grid flex-1 gap-2 sm:grid-cols-2 lg:grid-cols-5">
           <div className="space-y-1">
             <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Category</label>
@@ -1011,24 +1055,27 @@ export function StatsItemsView({ data }: { data: StatsItemsPageData }) {
         </Button>
       </div>
 
-      <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
-        <div className="hidden overflow-x-auto md:block">
-          <Table className="min-w-[1240px] table-auto">
+      <section id="article-body" className="stats-stream">
+        {statsChunks(data.items, 17).map((rows, index, chunks) => {
+          return (
+            <div key={`table-${index}`} hidden={index > 0 && !rows.length} className={cn("stats-ranking-chunk", index === 0 && "stats-chunk-first", (index === chunks.length - 1 || (index + 1) * 17 >= data.items.length) && "stats-chunk-last")}>
+          <Table aria-label="Roblox items rankings" className="min-w-[1240px] table-fixed">
+            <colgroup>{[64, 340, 180, 120, 110, 110, 170, 112, 96].map((width, index) => <col key={index} style={{ width }} />)}</colgroup>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead className="w-16 text-center">Rank</TableHead>
                 <TableHead className="min-w-[340px] text-left">Item</TableHead>
                 <TableHead className="min-w-[180px] text-left">Creator</TableHead>
-                <StatsItemSortableTableHead data={data} sort="favorites" label="Favorites" className="min-w-[120px] text-right" />
-                <StatsItemSortableTableHead data={data} sort="price_high" label="Price" className="min-w-[110px] text-right" />
-                <StatsItemSortableTableHead data={data} sort="resale_low" label="Resale" className="min-w-[110px] text-right" />
+                <StatsItemSortableTableHead continuation={index > 0} data={data} sort="favorites" label="Favorites" className="min-w-[120px] text-right" />
+                <StatsItemSortableTableHead continuation={index > 0} data={data} sort="price_high" label="Price" className="min-w-[110px] text-right" />
+                <StatsItemSortableTableHead continuation={index > 0} data={data} sort="resale_low" label="Resale" className="min-w-[110px] text-right" />
                 <TableHead className="min-w-[170px] text-left">Category</TableHead>
-                <StatsItemSortableTableHead data={data} sort="updated" label="Seen" className="min-w-[112px] text-right" />
+                <StatsItemSortableTableHead continuation={index > 0} data={data} sort="updated" label="Seen" className="min-w-[112px] text-right" />
                 <TableHead className="min-w-[96px] text-right">Roblox</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.items.map((item) => (
+              {rows.map((item) => (
                 <TableRow key={item.assetId} className="border-border/60 hover:bg-background/40">
                   <TableCell className="w-16 text-center font-mono text-xs text-muted">#{item.rank ?? "-"}</TableCell>
                   <TableCell className="min-w-[340px] align-middle">
@@ -1069,17 +1116,22 @@ export function StatsItemsView({ data }: { data: StatsItemsPageData }) {
               ))}
             </TableBody>
           </Table>
-        </div>
+              {index === 0 && !rows.length ? <div className="p-8 text-center text-sm text-muted">No items match the current filters.</div> : null}
+            </div>
+          );
+        })}
+        {statsChunks(data.items, 3).map((rows, index, chunks) => {
+          return (
+            <div key={`cards-${index}`} hidden={index > 0 && !rows.length} className={cn("stats-mobile-chunk", index === 0 && "stats-chunk-first", (index === chunks.length - 1 || (index + 1) * 3 >= data.items.length) && "stats-chunk-last")}>
+              <div className="space-y-2 p-3" role="list">
+                {rows.map(item => <div key={item.assetId} role="listitem"><StatsItemMobileCard item={item} /></div>)}
+              </div>
+              {index === 0 && !rows.length ? <div className="p-8 text-center text-sm text-muted">No items match the current filters.</div> : null}
+            </div>
+          );
+        })}
 
-        <div className="space-y-2 p-3 md:hidden">
-          {data.items.map((item) => <StatsItemMobileCard key={item.assetId} item={item} />)}
-        </div>
-
-        {!data.items.length ? (
-          <div className="border-t border-border/60 p-8 text-center text-sm text-muted">No items match the current filters.</div>
-        ) : null}
-      </Card>
-
+      <div hidden={data.totalPages <= 1}>
       {data.totalPages > 1 ? (
         <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
           <span>Page {data.page} of {data.totalPages}</span>
@@ -1093,6 +1145,8 @@ export function StatsItemsView({ data }: { data: StatsItemsPageData }) {
           </div>
         </div>
       ) : null}
+      </div>
+      </section>
     </form>
   );
 }
@@ -1141,7 +1195,10 @@ export function StatsItemDetailView({ data }: { data: StatsItemDetailData }) {
         </div>
       </header>
 
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <StatsContentLayout title={item.name} canonicalPath={itemStatsHref(item)}>
+      <section id="article-body" className="stats-stream">
+
+      <div className="stats-metrics grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         <MetricCard label="Favorites" value={formatFullNumber(item.favoriteCount)} detail={item.favoriteChange24h != null ? `${formatDelta(item.favoriteChange24h)} in 24h` : "Current tracked count"} icon={Heart} />
         <MetricCard label="Price" value={itemPriceLabel(item.priceRobux)} detail={item.priceChange24h != null ? `${formatDelta(item.priceChange24h)} in 24h` : item.priceStatus || "Marketplace price"} icon={ShoppingBag} />
         <MetricCard label="Lowest resale" value={item.hasResellers ? itemPriceLabel(item.lowestResalePriceRobux) : "No resale"} detail={item.resaleChange24h != null ? `${formatDelta(item.resaleChange24h)} in 24h` : "Reseller floor price"} icon={BarChart3} />
@@ -1191,6 +1248,8 @@ export function StatsItemDetailView({ data }: { data: StatsItemDetailData }) {
           </CardContent>
         </Card>
       ) : null}
+      </section>
+      </StatsContentLayout>
     </div>
   );
 }
@@ -1217,13 +1276,16 @@ function CreatorSortableTableHead({
   data,
   sort,
   label,
-  className
+  className,
+  continuation = false
 }: {
   data: StatsCreatorsPageData;
   sort: StatsCreatorSortKey;
   label: string;
   className?: string;
+  continuation?: boolean;
 }) {
+  if (continuation) return <TableHead className={className}>{label}</TableHead>;
   const active = sort === data.filters.sort;
   return (
     <TableHead className={className}>
@@ -1307,9 +1369,11 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
   ];
 
   return (
-    <form key={formStateKey} action="/stats/creators" className="stats-surface space-y-5" data-stats-games-form>
+    <StatsContentLayout title={title} canonicalPath="/stats/creators">
+    <form action="/stats/creators" className="stats-surface space-y-5" data-stats-games-form>
       <StatsGamesAutoSubmit />
-      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <StatsTableScrollSync />
+      <header key={`${formStateKey}-header`} className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="space-y-3">
           <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
           <div>
@@ -1328,7 +1392,7 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
         </div>
       </header>
 
-      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div key={`${formStateKey}-filters`} className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div className="grid flex-1 gap-2 sm:grid-cols-2 md:max-w-2xl">
           <div className="space-y-1">
             <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Type</label>
@@ -1358,24 +1422,27 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
         </Button>
       </div>
 
-      <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
-        <div className="hidden overflow-x-auto md:block">
-          <Table className="min-w-[1180px] table-auto">
+      <section id="article-body" className="stats-stream">
+        {statsChunks(data.creators, 17).map((rows, index, chunks) => {
+          return (
+            <div key={`table-${index}`} hidden={index > 0 && !rows.length} className={cn("stats-ranking-chunk", index === 0 && "stats-chunk-first", (index === chunks.length - 1 || (index + 1) * 17 >= data.creators.length) && "stats-chunk-last")}>
+          <Table aria-label="Roblox creators rankings" className="min-w-[1180px] table-fixed">
+            <colgroup>{[64, 300, 110, 100, 120, 120, 260, 120, 112].map((width, index) => <col key={index} style={{ width }} />)}</colgroup>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead className="w-16 text-center">Rank</TableHead>
                 <TableHead className="min-w-[300px] text-left">Creator</TableHead>
-                <CreatorSortableTableHead data={data} sort="playing" label="CCU" className="min-w-[110px] text-right" />
-                <CreatorSortableTableHead data={data} sort="games" label="Games" className="min-w-[100px] text-right" />
-                <CreatorSortableTableHead data={data} sort="visits" label="Visits" className="min-w-[120px] text-right" />
-                <CreatorSortableTableHead data={data} sort="favorites" label="Favorites" className="min-w-[120px] text-right" />
+                <CreatorSortableTableHead continuation={index > 0} data={data} sort="playing" label="CCU" className="min-w-[110px] text-right" />
+                <CreatorSortableTableHead continuation={index > 0} data={data} sort="games" label="Games" className="min-w-[100px] text-right" />
+                <CreatorSortableTableHead continuation={index > 0} data={data} sort="visits" label="Visits" className="min-w-[120px] text-right" />
+                <CreatorSortableTableHead continuation={index > 0} data={data} sort="favorites" label="Favorites" className="min-w-[120px] text-right" />
                 <TableHead className="min-w-[260px] text-left">Top game</TableHead>
-                <CreatorSortableTableHead data={data} sort="members" label="Members" className="min-w-[120px] text-right" />
+                <CreatorSortableTableHead continuation={index > 0} data={data} sort="members" label="Members" className="min-w-[120px] text-right" />
                 <TableHead className="min-w-[112px] text-right">Updated</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.creators.map((creator) => (
+              {rows.map((creator) => (
                 <TableRow key={creator.creatorKey} className="border-border/60 hover:bg-background/40">
                   <TableCell className="w-16 text-center font-mono text-xs text-muted">#{creator.rank ?? "-"}</TableCell>
                   <TableCell className="min-w-[300px] align-middle">
@@ -1410,17 +1477,22 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
               ))}
             </TableBody>
           </Table>
-        </div>
+              {index === 0 && !rows.length ? <div className="p-8 text-center text-sm text-muted">No creators match the current filters.</div> : null}
+            </div>
+          );
+        })}
+        {statsChunks(data.creators, 3).map((rows, index, chunks) => {
+          return (
+            <div key={`cards-${index}`} hidden={index > 0 && !rows.length} className={cn("stats-mobile-chunk", index === 0 && "stats-chunk-first", (index === chunks.length - 1 || (index + 1) * 3 >= data.creators.length) && "stats-chunk-last")}>
+              <div className="space-y-2 p-3" role="list">
+                {rows.map(creator => <div key={creator.creatorKey} role="listitem"><StatsCreatorMobileCard creator={creator} /></div>)}
+              </div>
+              {index === 0 && !rows.length ? <div className="p-8 text-center text-sm text-muted">No creators match the current filters.</div> : null}
+            </div>
+          );
+        })}
 
-        <div className="space-y-2 p-3 md:hidden">
-          {data.creators.map((creator) => <StatsCreatorMobileCard key={creator.creatorKey} creator={creator} />)}
-        </div>
-
-        {!data.creators.length ? (
-          <div className="border-t border-border/60 p-8 text-center text-sm text-muted">No creators match the current filters.</div>
-        ) : null}
-      </Card>
-
+      <div hidden={data.totalPages <= 1}>
       {data.totalPages > 1 ? (
         <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
           <span>Page {data.page} of {data.totalPages}</span>
@@ -1434,7 +1506,10 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
           </div>
         </div>
       ) : null}
+      </div>
+      </section>
     </form>
+    </StatsContentLayout>
   );
 }
 
@@ -1493,9 +1568,10 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
     data.filters.columns.join("\u0001")
   ].join("\u0002");
   return (
-    <form key={formStateKey} action="/stats/games" className="stats-surface space-y-5" data-stats-games-form>
+    <form action="/stats/games" className="stats-surface space-y-5" data-stats-games-form>
       <StatsGamesAutoSubmit />
-      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <StatsTableScrollSync />
+      <header key={`${formStateKey}-header`} className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="space-y-3">
           <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
           <div>
@@ -1512,7 +1588,7 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
         </div>
       </header>
 
-      <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+      <div key={`${formStateKey}-filters`} className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
         <div className="grid flex-1 gap-2 sm:grid-cols-2 md:grid-cols-[minmax(150px,1fr)_minmax(170px,1fr)_minmax(150px,0.9fr)]">
           <MultiCheckboxPanel
             label="Genre"
@@ -1559,20 +1635,27 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
         </div>
       </div>
 
-      <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
-        <div className="hidden overflow-x-auto md:block">
-          <Table className="table-auto" style={{ minWidth: statsGamesTableMinWidth(visibleColumns) }}>
+      <section id="article-body" className="stats-stream">
+        {statsChunks(data.games, 18).map((rows, index, chunks) => {
+          return (
+            <div key={`table-${index}`} hidden={index > 0 && !rows.length} className={cn("stats-ranking-chunk", index === 0 && "stats-chunk-first", (index === chunks.length - 1 || (index + 1) * 18 >= data.games.length) && "stats-chunk-last")}>
+          <Table aria-label="Roblox games rankings" className="table-fixed" style={{ minWidth: statsGamesTableMinWidth(visibleColumns) }}>
+            <colgroup>
+              {visibleColumns.includes("rank") ? <col style={{ width: STATS_GAME_COLUMN_WIDTHS.rank }} /> : null}
+              <col style={{ width: 320 }} />
+              {dataColumns.map(column => <col key={column} style={{ width: STATS_GAME_COLUMN_WIDTHS[column] }} />)}
+            </colgroup>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
-                {visibleColumns.includes("rank") ? <SortableTableHead data={data} column="rank" className={statsColumnCellClass("rank")} /> : null}
+                {visibleColumns.includes("rank") ? <SortableTableHead continuation={index > 0} data={data} column="rank" className={statsColumnCellClass("rank")} /> : null}
                 <TableHead className="min-w-[320px] text-left align-middle">Game</TableHead>
                 {dataColumns.map((column) => (
-                  <SortableTableHead key={column} data={data} column={column} className={statsColumnCellClass(column)} />
+                  <SortableTableHead continuation={index > 0} key={column} data={data} column={column} className={statsColumnCellClass(column)} />
                 ))}
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.games.map((game) => (
+              {rows.map((game) => (
                 <TableRow key={game.universeId} className="border-border/60 hover:bg-background/40">
                   {visibleColumns.includes("rank") ? <TableCell className={cn(statsColumnCellClass("rank"), "font-mono text-xs text-muted")}>#{game.rank ?? "-"}</TableCell> : null}
                   <TableCell className="min-w-[320px] align-middle">
@@ -1596,13 +1679,20 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
               ))}
             </TableBody>
           </Table>
-        </div>
+            </div>
+          );
+        })}
+        {statsChunks(data.games, 3).map((rows, index, chunks) => {
+          return (
+            <div key={`cards-${index}`} hidden={index > 0 && !rows.length} className={cn("stats-mobile-chunk", index === 0 && "stats-chunk-first", (index === chunks.length - 1 || (index + 1) * 3 >= data.games.length) && "stats-chunk-last")}>
+              <div className="space-y-2 p-3" role="list">
+                {rows.map(game => <div key={game.universeId} role="listitem"><StatsGameCardRow game={game} columns={visibleColumns} /></div>)}
+              </div>
+            </div>
+          );
+        })}
 
-        <div className="space-y-2 p-3 md:hidden">
-          {data.games.map((game) => <StatsGameCardRow key={game.universeId} game={game} columns={visibleColumns} />)}
-        </div>
-      </Card>
-
+      <div hidden={data.totalPages <= 1}>
       {data.totalPages > 1 ? (
         <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
           <span>Page {data.page} of {data.totalPages}</span>
@@ -1616,6 +1706,8 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
           </div>
         </div>
       ) : null}
+      </div>
+      </section>
     </form>
   );
 }
@@ -1671,7 +1763,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   ];
   return (
     <div className="stats-surface space-y-5">
-      <header className="relative left-1/2 -mt-6 w-screen -translate-x-1/2 overflow-hidden border-b border-border/60 bg-surface pt-6 shadow-none md:-mt-8 md:pt-8 xl:-mt-10 xl:w-[calc(100vw-14.5rem)] xl:pt-10">
+      <header className="relative left-1/2 -mt-6 w-screen -translate-x-1/2 overflow-hidden border-b border-border/60 bg-surface pt-6 shadow-none md:-mt-8 md:pt-8 xl:-mt-10 xl:pt-10">
         {game.thumbnailUrls[0] || game.iconUrl ? (
           <div className="absolute inset-0">
             <Image src={game.thumbnailUrls[0] ?? game.iconUrl ?? ""} alt="" fill sizes="100vw" className="object-cover opacity-50 blur-[1px] saturate-75" priority />
@@ -1723,6 +1815,9 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
         </div>
       </header>
 
+      <StatsContentLayout title={game.name} canonicalPath={`/stats/games/${game.slug}`}>
+      <section id="article-body" className="stats-stream">
+
       <GameDetailStatsRow game={game} />
 
       <StatsChartPanel
@@ -1748,11 +1843,13 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
       </Card>
 
       {data.similarGames.length || data.sameCreator.length ? (
-        <div className="grid gap-4 xl:grid-cols-2">
+        <Fragment>
           {data.similarGames.length ? <GameListPanel title="Similar games" games={data.similarGames} /> : null}
           {data.sameCreator.length ? <GameListPanel title="Same creator" games={data.sameCreator} /> : null}
-        </div>
+        </Fragment>
       ) : null}
+      </section>
+      </StatsContentLayout>
     </div>
   );
 }

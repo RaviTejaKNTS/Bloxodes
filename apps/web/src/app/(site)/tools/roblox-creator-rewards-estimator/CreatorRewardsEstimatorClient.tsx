@@ -68,7 +68,7 @@ export function CreatorRewardsEstimatorClient() {
       </div>
 
       {section === "daily" ? (
-        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div className="panel space-y-5 p-6">
             <div><h2 className="text-xl font-semibold text-foreground">Qualified Daily Engagement events</h2><p className="mt-2 text-sm leading-6 text-muted">Use already-qualified rewarded active-spender days from Creator Dashboard. Raw visits or ten-minute sessions are not enough.</p></div>
             <div className="inline-flex rounded-md border border-border/70 text-sm font-semibold">
@@ -90,7 +90,7 @@ export function CreatorRewardsEstimatorClient() {
           </div>
         </section>
       ) : (
-        <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div className="panel space-y-5 p-6">
             <div><h2 className="text-xl font-semibold text-foreground">Qualified Audience Expansion cohorts</h2><p className="mt-2 text-sm leading-6 text-muted">Enter only users Roblox already attributed and purchase bases already capped and adjusted per person.</p></div>
             <div className="space-y-3">{cohorts.map((row, index) => <div key={row.id} className="rounded-lg border border-border/60 bg-surface p-4"><div className="grid gap-3 sm:grid-cols-3"><label className="text-sm font-semibold text-foreground">User type<select value={row.type} onChange={(event) => updateCohort(row.id, "type", event.target.value)} className="mt-2 w-full rounded-md border border-border/60 bg-background px-3 py-2 font-normal"><option value="new">New users</option><option value="reactivated">Reactivated users</option></select></label><label className="text-sm font-semibold text-foreground">Qualified users<input aria-label={`Cohort ${index + 1} qualified users`} value={row.users} onChange={(event) => updateCohort(row.id, "users", event.target.value)} inputMode="numeric" className="mt-2 w-full rounded-md border border-border/60 bg-background px-3 py-2 font-normal" /></label><label className="text-sm font-semibold text-foreground">Eligible base, USD<input aria-label={`Cohort ${index + 1} eligible base`} value={row.base} onChange={(event) => updateCohort(row.id, "base", event.target.value)} inputMode="decimal" className="mt-2 w-full rounded-md border border-border/60 bg-background px-3 py-2 font-normal" /></label></div>{cohorts.length > 1 ? <button type="button" onClick={() => setCohorts((current) => current.filter((entry) => entry.id !== row.id))} className="mt-3 text-xs font-semibold text-muted hover:text-foreground">Remove cohort</button> : null}</div>)}</div>

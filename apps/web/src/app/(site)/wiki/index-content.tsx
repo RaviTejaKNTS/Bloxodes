@@ -15,7 +15,8 @@ export const wikiTopics = [
 ];
 
 function ReferenceSection({ id, title, children }: { id: string; title: string; children: ReactNode }) {
-  return <section aria-labelledby={id} className="space-y-4 border-t border-border/60 pt-7">
+  // Each section is its own #article-body child on the wiki index, so it carries the reference typography.
+  return <section aria-labelledby={id} className="hubs-wiki-ref min-w-0 space-y-4 border-t border-border/60 pt-7 text-[1.05rem] leading-relaxed text-foreground/90 [&_p]:max-w-3xl">
     <h2 id={id} className="scroll-mt-24 text-2xl font-semibold leading-tight text-foreground md:text-3xl">{title}</h2>
     {children}
   </section>;
@@ -36,7 +37,7 @@ function ReferenceTable({ caption, headings, rows }: { caption: string; headings
 }
 
 export function WikiReference() {
-  return <div className="min-w-0 space-y-9 text-[1.05rem] leading-relaxed text-foreground/90 [&_p]:max-w-3xl">
+  return <>
     <ReferenceSection id="games-and-places" title="Experiences, places, and game worlds">
       <p>A Roblox experience is a game or interactive world created on the platform. An experience can contain one place or several: a starting area, a dungeon, and a separate match map can all belong to the same game. Each place contains its own world and game logic.</p>
       <ReferenceTable caption="Roblox game structure" headings={["Term", "Meaning in Roblox"]} rows={[
@@ -129,5 +130,5 @@ export function WikiReference() {
       <div className="flex flex-wrap gap-x-5 gap-y-2 text-base"><a href="https://create.roblox.com/docs/studio" className="text-accent underline underline-offset-4">Roblox Studio</a><Link href="/stats/creators" className="text-accent underline underline-offset-4">Creator stats</Link><Link href="/catalog/roblox-dictionary" className="text-accent underline underline-offset-4">Roblox dictionary</Link></div>
       <Source href="https://en.wikipedia.org/wiki/Roblox">Roblox platform history</Source>
     </ReferenceSection>
-  </div>;
+  </>;
 }

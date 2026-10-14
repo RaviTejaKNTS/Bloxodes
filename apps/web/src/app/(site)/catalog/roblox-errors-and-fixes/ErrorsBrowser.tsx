@@ -1,5 +1,7 @@
 "use client";
 
+import { CatalogRowGroups } from "@/components/catalog/CatalogRowGroups";
+
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
@@ -110,8 +112,7 @@ export function ErrorsBrowser({ items, sections }: Props) {
         items: filteredItems
           .filter((item) => item.surface === section.surface)
           .sort((a, b) => a.sortOrder - b.sortOrder)
-      }))
-      .filter((section) => section.items.length > 0);
+      }));
   }, [sections, filteredItems]);
 
   if (!items.length) {
@@ -165,22 +166,21 @@ export function ErrorsBrowser({ items, sections }: Props) {
       </div>
 
       {visibleSections.flatMap((section) => [
-        <div key={`${section.surface}-heading`} className="space-y-1">
+        <div key={`${section.surface}-heading`} hidden={!section.items.length} className="space-y-1">
           <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
           <p className="text-sm text-muted">{section.blurb}</p>
         </div>,
-        ...section.items.map((item) => (
-          <div key={item.slug} data-journey-item className="h-full">
+        <CatalogRowGroups key={`${section.surface}-rows`} slots={items.filter(item => item.surface === section.surface).length}>{section.items.map((item) => (
+          <div key={item.slug} data-journey-item role="listitem" className="h-full">
             <RobloxErrorCard item={item} />
           </div>
-        ))
+        ))}</CatalogRowGroups>
       ])}
 
-      {!visibleSections.length ? (
-        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+
+        <div hidden={!!filteredItems.length} className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No Roblox errors matched that search.
         </div>
-      ) : null}
     </>
   );
 }

@@ -1,3 +1,5 @@
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
@@ -12,7 +14,7 @@ import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 
 export const revalidate = 21600;
 
@@ -109,7 +111,7 @@ export default async function GrowGardenCropValueCalculatorPage() {
   };
 
   return (
-    <>
+    <ToolPageLayout sidebarContent={tool?.universe_id ? <GameDiscoverySidebar universeId={tool.universe_id} universeName={null} currentType="tool" /> : undefined} toolCode="grow-a-garden-crop-value-calculator" title={tool?.title ?? "Tool"} canonicalPath="/tools/grow-a-garden-crop-value-calculator">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
       <PageBreadcrumb
@@ -164,7 +166,7 @@ export default async function GrowGardenCropValueCalculatorPage() {
                   adFormat="auto"
                   fullWidthResponsive
                 />
-                <ContentFaq
+                <ToolFaq
                   items={faqNodes.map((faq, idx) => ({
                     id: `${faq.q}-${idx}`,
                     question: faq.q,
@@ -192,6 +194,6 @@ export default async function GrowGardenCropValueCalculatorPage() {
         />
       </div>
       <MoreTools excludeCode="grow-a-garden-crop-value-calculator" />
-    </>
+    </ToolPageLayout>
   );
 }

@@ -44,7 +44,8 @@ tokens:
     compact: "0.375rem"
     panel: "1.25rem"
   layout:
-    sidebarWidth: "232px"
+    topBarHeight: "3.5rem"
+    rightRailWidth: "21rem (336px) from 1200px"
     contentTopPaddingDesktop: "2.5rem"
     contentTopPaddingTablet: "2rem"
     contentTopPaddingMobile: "1.5rem"
@@ -63,27 +64,30 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 
 - Keep page and article titles large when they support reading, scanning, and SEO.
 - Keep body copy comfortable and readable. Do not shrink long-form content into dashboard-sized text.
-- Use clean, restrained shadcn-style primitives for interface surfaces: sidebar, navigation items, search inputs, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
+- Use clean, restrained shadcn-style primitives for interface surfaces: navigation items, search inputs, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
 - Prefer plain page layouts with strong content hierarchy. Let reusable components carry the product/database feel.
 - Avoid heavy custom decorative layouts inside shadcn primitives. Compose primitives simply and override only enough to match Bloxodes tokens.
-- The primary sidebar should stay narrow and calm at `232px` (`14.5rem`) on desktop, which leaves room for a 300px Mediavine sidebar ad column. Use compact rows, 16px or smaller icons, subtle hover/active fills, and avoid loud borders around normal nav items.
+- Site navigation is the sticky top bar (`SiteHeader`): section links on one line, search, a More drawer and the account button. There is no left sidebar, so the main column gets the full width. Keep nav items quiet: compact text links, subtle hover/active fills and no borders.
+- Content pages put one right rail (`PageSidebar`) beside the main column. From 1200px it is a fixed `21rem` (336px), which leaves room for Mediavine's 300px sticky sidebar ads; from 1024px the columns split `3fr / 1.25fr`. Keep rail content short so the first sidebar ad shows early.
 
 ## Layout
 
 - Main content starts with the same vertical rhythm across page families: `py-6 md:py-8 xl:py-10`.
-- Sidebar header spacing should visually align with desktop content top padding.
-- Sidebar logo is centered within the sidebar width. Mobile close buttons or controls must not push the logo off-center.
-- On mobile and tablet, the sidebar opens as a sheet. Keep the drawer compact and readable rather than full-screen unless required by the route.
+- Every section link stays in the server HTML. Top bar links that don't fit wrap out of view, and the More drawer (a right-side sheet on every screen size) lists them all. Keep the drawer compact and readable rather than full-screen.
+- Game and catalog pages can add a second bar under the header (`SiteGameTopBar`) with that game's or catalog's pages. Pages without contextual links show no second bar.
+- The homepage has no rail. From 1280px some of its blocks share a row in pairs; see Advertising in `dev-docs/architecture.md` for why each block stays a separate element.
 
 ## Components
 
 - New shared UI components should live in `src/components/ui` when they are shadcn primitives or close extensions of shadcn primitives.
 - Use Bloxodes theme tokens through Tailwind classes instead of one-off color values.
 - Cards and controls should be compact, bordered, and neutral. Avoid oversized rounded cards, nested cards, and decorative gradients.
-- Sidebar and search should behave like database navigation: persistent, scoped, fast, and minimal.
+- Navigation and search should behave like database navigation: persistent, scoped, fast, and minimal.
 - Search should scope to the current content family when the route is specific, and fall back to global search on the homepage and neutral/legal pages.
-- Sidebar search results should read as list rows, not heavy cards.
-- Sidebar sections should use quiet labels where they help scanning, but avoid turning the public site into a literal workspace clone.
+- Search results should read as list rows, not heavy cards.
+- Navigation sections should use quiet labels where they help scanning, but avoid turning the public site into a literal workspace clone.
+- "More …" page lists in the rail use `RailLinkList`: one row per page with its image when it has one, otherwise an icon picked from the URL, and a one-line description. New pages need no extra data to look right.
+- Copyable codes and IDs on cards use `CopyCodeButton` with `variant="bar"`: one full-width button showing the code and a Copy label.
 
 ## Content
 
@@ -97,7 +101,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 
 ## Interaction
 
-- Prefer direct, inline interactions over modals when the sidebar or current surface can handle the workflow.
+- Prefer direct, inline interactions over modals when the current surface can handle the workflow.
 - Search inputs must retain focus while typing and should never remount on each keystroke.
 - Clear buttons should appear only when there is something to clear.
 - Scoped search should prioritize exact title, title prefix, word prefix, title substring, then broader body/search-text matches.

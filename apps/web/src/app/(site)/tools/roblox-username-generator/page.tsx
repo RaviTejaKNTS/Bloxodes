@@ -1,6 +1,7 @@
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 import { ContentSlot } from "@/components/ContentSlot";
 import { MoreTools } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -113,7 +114,7 @@ export default async function RobloxUsernameGeneratorPage() {
   };
 
   return (
-    <>
+    <ToolPageLayout toolCode="roblox-username-generator" title={tool?.title ?? "Tool"} canonicalPath="/tools/roblox-username-generator">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
@@ -148,7 +149,7 @@ export default async function RobloxUsernameGeneratorPage() {
         />
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
         {faqNodes.length ? (
-          <ContentFaq
+          <ToolFaq
             items={faqNodes.map((faq, index) => ({
               id: `${faq.q}-${index}`,
               question: faq.q,
@@ -172,6 +173,6 @@ export default async function RobloxUsernameGeneratorPage() {
         fullWidthResponsive
       />
       <MoreTools excludeCode={TOOL_CODE} />
-    </>
+    </ToolPageLayout>
   );
 }

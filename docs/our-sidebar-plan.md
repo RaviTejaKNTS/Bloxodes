@@ -1,5 +1,7 @@
 # Our Sidebar Plan
 
+> Superseded in October 2026. The left sidebar is gone: navigation is the sticky top bar and its More drawer, and content pages have one right rail (`PageSidebar`) with short "More …" lists (`RailLinkList`). `DESIGN.md` is the current source. The plan below is kept for history.
+
 ## Direction
 
 Move broad page-type navigation into the page header or top bar.

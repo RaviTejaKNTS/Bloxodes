@@ -1,3 +1,4 @@
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
@@ -10,7 +11,7 @@ import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 import {
   DEVEX_DEFAULT_TARGET_ROBUX,
   DEVEX_DEFAULT_TARGET_USD,
@@ -128,7 +129,7 @@ export default async function RobloxDevexPage() {
   };
 
   return (
-    <>
+    <ToolPageLayout toolCode="roblox-devex-calculator" title={tool?.title ?? "Tool"} canonicalPath="/tools/roblox-devex-calculator">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
@@ -182,7 +183,7 @@ export default async function RobloxDevexPage() {
                 adFormat="auto"
                 fullWidthResponsive
               />
-              <ContentFaq
+              <ToolFaq
                 items={faqNodes.map((faq, idx) => ({
                   id: `${faq.q}-${idx}`,
                   question: faq.q,
@@ -213,6 +214,6 @@ export default async function RobloxDevexPage() {
         <p>DevEx minimum: {DEVEX_MIN}</p>
       </div>
       <MoreTools excludeCode="roblox-devex-calculator" />
-    </>
+    </ToolPageLayout>
   );
 }

@@ -8,11 +8,17 @@ export function GameCollectionViewShell({
   availableViews = ["cards", "list"],
   defaultView,
   toolbar,
+  stream = false,
+  beforeToolbar,
+  afterContent,
   children
 }: {
   availableViews?: ViewMode[];
   defaultView?: ViewMode;
   toolbar?: ReactNode;
+  stream?: boolean;
+  beforeToolbar?: ReactNode;
+  afterContent?: ReactNode;
   children: ReactNode | ((activeView: ViewMode) => ReactNode);
 }) {
   const initialView =
@@ -54,19 +60,21 @@ export function GameCollectionViewShell({
     ) : null;
 
   return (
-    <div className="catalog-surface space-y-8" data-game-collection-view={activeView}>
-      <style>{`
+    <div id={stream ? "article-body" : undefined} itemProp={stream ? "articleBody" : undefined} className={stream ? "catalog-surface collections-stream article-content md-copy-scope" : "catalog-surface space-y-8"} data-game-collection-view={activeView}>
+      {!stream ? <style>{`
         [data-game-collection-view="cards"] .game-collection-list-view { display: none; }
         [data-game-collection-view="list"] .game-collection-cards-view,
         [data-game-collection-view="list"] .game-collection-card-item { display: none; }
-      `}</style>
+      `}</style> : null}
+      {beforeToolbar}
       {toolbar || viewSwitcher ? (
-        <div className="grid gap-4 md:grid-cols-3 md:items-end">
+        <div className={stream ? "collections-toolbar" : "grid gap-4 md:grid-cols-3 md:items-end"}>
           {toolbar}
           {viewSwitcher}
         </div>
       ) : null}
       {typeof children === "function" ? children(activeView) : children}
+      {afterContent}
     </div>
   );
 }

@@ -1,0 +1,176 @@
+/*
+ * Checklist pages: a plain vertical list in one #article-body.
+ * Direct children are intro copy, section headings and row groups (<ul>), so
+ * ads land between groups while consecutive groups read as one continuous list.
+ */
+.checklists-stream {
+  display: block;
+  min-width: 0;
+}
+
+.checklists-stream > .checklists-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-top: 2.75rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid rgb(var(--color-border) / 0.8);
+}
+
+.checklists-stream > .checklists-section-head:first-child {
+  margin-top: 0;
+}
+
+.checklists-section-head h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+}
+
+.checklists-stream > .checklists-subhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-top: 1.75rem;
+}
+
+.checklists-subhead h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.checklists-count {
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: rgb(var(--color-muted));
+}
+
+.checklists-count strong {
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.checklists-stream > .checklists-note {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgb(var(--color-foreground) / 0.85);
+  white-space: pre-line;
+}
+
+.checklists-stream > .checklists-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checklists-stream > :is(.checklists-section-head, .checklists-subhead, .checklists-note) + .checklists-group {
+  margin-top: 0.5rem;
+}
+
+/* Rows are separated by light dividers, including across group boundaries. */
+.checklists-group > li + li,
+.checklists-stream > .checklists-group + .checklists-group > li:first-child {
+  border-top: 1px solid rgb(var(--color-border) / 0.6);
+}
+
+.checklists-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  min-height: 3rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.checklists-row:hover {
+  background-color: rgb(var(--color-foreground) / 0.04);
+}
+
+.checklists-row input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0.125rem 0 0;
+  cursor: pointer;
+  accent-color: rgb(var(--color-accent));
+}
+
+.checklists-row input[type="checkbox"]:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: 2px;
+}
+
+.checklists-row-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.checklists-row-title {
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: rgb(var(--color-foreground));
+  overflow-wrap: anywhere;
+}
+
+a.checklists-row-title {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--color-accent) / 0.7);
+  text-underline-offset: 3px;
+}
+
+.checklists-row-note {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: rgb(var(--color-muted));
+  overflow-wrap: anywhere;
+}
+
+.checklists-row input:checked ~ .checklists-row-text .checklists-row-title {
+  color: rgb(var(--color-muted));
+  text-decoration-line: line-through;
+}
+
+@media (min-width: 768px) {
+  .checklists-row-title {
+    font-size: 1.0625rem;
+  }
+}
+
+/* Index pages: the article column is the container for the card stream. */
+.checklists-index-main {
+  container: checklists-index / inline-size;
+  min-width: 0;
+}
+
+.checklists-index-main .checklists-index-stream {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@container checklists-index (min-width: 480px) {
+  .checklists-index-main .checklists-index-stream {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container checklists-index (min-width: 760px) {
+  .checklists-index-main .checklists-index-stream {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

@@ -9,6 +9,7 @@ import { CollectionItemFinder, type CollectionFinderEntry } from "@/components/g
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
+import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { toIsoContentDate } from "@/lib/content-dates";
@@ -933,7 +934,8 @@ export function renderGameCollectionPage({
   collectionOptions,
   commentsEntityType = "wiki_collection",
   showMoreCollections = true,
-  enableItemFinder = false
+  enableItemFinder = false,
+  stream: streamOption
 }: {
   config: GameCollectionRenderConfig;
   dataset: GameCollectionDataset;
@@ -949,6 +951,8 @@ export function renderGameCollectionPage({
   commentsEntityType?: "wiki_collection" | "gta_wiki_collection" | "red_dead_wiki_collection" | "minecraft_wiki_collection" | "game_collection";
   showMoreCollections?: boolean;
   enableItemFinder?: boolean;
+  /** Franchise callers opt into the flat ad stream; Roblox collections always use it. */
+  stream?: boolean;
 }) {
   const preparedCollection = prepared ?? buildGameDatasetPreparedCollection(config, dataset);
   const displayDataset = preparedCollection.dataset;
@@ -967,6 +971,7 @@ export function renderGameCollectionPage({
   const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const normalizedRouteBase = routeBase === "/" ? "" : routeBase.replace(/\/+$/, "");
+  const useStream = streamOption ?? normalizedRouteBase === "/wiki";
   const basePath = collectionBasePath ?? `${normalizedRouteBase}/${config.gameSlug}/${config.slug}`;
   const gameWikiPath = wikiHomePath ?? `${normalizedRouteBase}/${config.gameSlug}`;
   const updatedIso = updatedDate?.toISOString() ?? null;
@@ -1090,7 +1095,8 @@ export function renderGameCollectionPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section className={useStream ? "min-w-0" : "article-content md-copy-scope copy-with-sidebar-space space-y-6"}>
+        {!useStream ? (<>
         {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
         {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase !== "/gta/wiki" ? (
           <section aria-labelledby="collection-how-to" className="max-w-3xl space-y-3">
@@ -1103,7 +1109,45 @@ export function renderGameCollectionPage({
 
         {finderEntries.length ? <CollectionItemFinder entries={finderEntries} /> : null}
 
+        </>) : null}
         <GameCollectionView
+          stream={useStream}
+          beforeToolbar={useStream ? (<>
+
+        {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
+        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase !== "/gta/wiki" ? (
+          <>
+            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
+            {howNodes}
+          </>
+        ) : null}
+
+        {finderEntries.length ? <CollectionItemFinder entries={finderEntries} /> : null}
+
+          </>) : null}
+          afterContent={useStream ? (<>
+
+        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase === "/gta/wiki" ? (
+          <>
+            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
+            {howNodes}
+          </>
+        ) : null}
+
+        {hasDetails ? (
+          <>
+            {descriptionNodes.length ? descriptionNodes : null}
+
+            <CollectionFaq
+              items={faqNodes.map((faq, idx) => ({
+                id: `${faq.q}-${idx}`,
+                question: faq.q,
+                answer: faq.nodes
+              }))}
+            />
+          </>
+        ) : null}
+          </>) : null}
           sections={groupedSectionsWithNotes}
           config={{
             ...preparedCollection.viewConfig,
@@ -1126,6 +1170,7 @@ export function renderGameCollectionPage({
             </>
           }
         />
+        {!useStream ? (<>
 
         <CatalogAdSlot />
 
@@ -1149,6 +1194,7 @@ export function renderGameCollectionPage({
             />
           </>
         ) : null}
+        </>) : null}
       </section>
 
       {pagination.info.currentPage === 1 ? (

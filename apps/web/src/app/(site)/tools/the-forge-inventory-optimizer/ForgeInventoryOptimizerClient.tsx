@@ -146,9 +146,9 @@ export function ForgeInventoryOptimizerClient({
     };
 
     return (
-        <div className="tool-surface grid lg:grid-cols-3 gap-6">
+        <div className="tool-surface ads-tools-inventory grid gap-6">
             {/* Left Panel - 2/3 width */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="ads-tools-inventory-inputs space-y-6">
                 {/* Optimization Goal */}
                 <div className="panel p-4 space-y-4">
                     <div className="flex flex-wrap items-center justify-between gap-4">
@@ -282,7 +282,7 @@ export function ForgeInventoryOptimizerClient({
                             return (
                                 <div key={rarity} className="space-y-3">
                                     <h4 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{rarity}</h4>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                                    <div className="ads-tools-ores grid grid-cols-2 gap-3">
                                         {oresInRarity.map((ore) => (
                                             <div
                                                 key={ore.id}
@@ -362,7 +362,7 @@ export function ForgeInventoryOptimizerClient({
 
             {/* Right Panel - 1/3 width */}
             <div className="lg:col-span-1">
-                <div className="panel p-4 lg:sticky lg:top-4 max-h-none lg:max-h-[calc(100vh-2rem)] overflow-y-auto">
+                <div className="panel p-4 lg:sticky lg:top-[4.5rem] max-h-none lg:max-h-[calc(100vh-5.5rem)] overflow-y-auto">
                     <h2 className="text-lg font-semibold text-foreground mb-1">Best Crafts</h2>
                     <p className="text-xs text-muted mb-4">
                         {inventoryEntries.length > 0 ? `Top ${suggestions.length} recommendations · ${optimizationGoal.replace(/_/g, " ")}` : "Add ores to get suggestions"}

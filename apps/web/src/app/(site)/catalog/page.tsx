@@ -242,7 +242,7 @@ export default async function CatalogIndexPage() {
         />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--index">
+      <section id="article-body" itemProp="articleBody" className="catalog-stream journey-content-stream journey-content-stream--index">
         {genericCards.length ? (
           genericCards.map(({ id, updatedAt: _updatedAt, universeId: _universeId, universeName: _universeName, ...card }, index) => (
             <div

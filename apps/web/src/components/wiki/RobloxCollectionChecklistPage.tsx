@@ -1,6 +1,5 @@
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { RobloxCollectionChecklist, type RobloxCollectionChecklistSection } from "@/components/wiki/RobloxCollectionChecklist";
@@ -120,10 +119,9 @@ export function renderRobloxCollectionChecklistPage({
         <UpdatedTimestamp value={updatedAt} />
       </header>
 
-      <article id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--interactive space-y-8">
-        {introNodes.length ? <section className="max-w-3xl space-y-4">{introNodes}</section> : null}
-        <CatalogAdSlot />
-        <RobloxCollectionChecklist
+      <RobloxCollectionChecklist
+          beforeToolbar={<>{introNodes}</>}
+          afterContent={<>{howNodes}{detailNodes}<CollectionFaq items={faqNodes} /></>}
           code={config.code}
           gameName={config.gameName}
           collectionLabel={config.label}
@@ -131,11 +129,6 @@ export function renderRobloxCollectionChecklistPage({
           cardFields={dataset.meta?.display?.cardFields ?? null}
           collectionOptions={collectionOptions}
         />
-        <CatalogAdSlot />
-        {howNodes.length ? <section className="max-w-3xl space-y-3">{howNodes}</section> : null}
-        {detailNodes.length ? <section className="max-w-3xl space-y-3">{detailNodes}</section> : null}
-        {faqNodes.length ? <ContentFaq items={faqNodes} /> : null}
-      </article>
 
       {contentHtml?.id ? <CommentsSection entityType="wiki_collection" entityId={contentHtml.id} /> : null}
     </div>

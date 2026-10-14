@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
+import { HubsPageSidebar } from "@/components/hubs/HubsSidebar";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 
 const title = "Editorial Guidelines";
@@ -42,7 +43,7 @@ export default function EditorialGuidelinesPage() {
   });
 
   return (
-    <div className="grid gap-8 content-sidebar-grid">
+    <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">Editorial Guidelines of Bloxodes.com</h1>
@@ -55,6 +56,8 @@ export default function EditorialGuidelinesPage() {
             list you read on our site meets the highest standards of accuracy, transparency, and fairness.
           </p>
         </header>
+
+        <div id="article-body" className="hubs-static-body">
 
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Accuracy and Verification</h2>
@@ -159,10 +162,12 @@ export default function EditorialGuidelinesPage() {
           </p>
         </section>
 
+        </div>
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       </article>
 
-      <aside aria-hidden className="hidden lg:block" />
+      <HubsPageSidebar canonicalPath="/editorial-guidelines" title={title} />
     </div>
   );
 }

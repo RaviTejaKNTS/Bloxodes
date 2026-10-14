@@ -222,7 +222,7 @@ export function GrowGardenCropValueCalculatorClient({
 
   return (
     <div className="tool-surface space-y-8">
-      <div className="grid gap-6 lg:grid-cols-[2fr_1.2fr]">
+      <div className="ads-tools-columns grid gap-6 lg:grid-cols-[2fr_1.2fr]">
         <section className="space-y-6">
           <div className="rounded-2xl border border-border/70 bg-surface/50 p-5 shadow-soft">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -348,7 +348,7 @@ export function GrowGardenCropValueCalculatorClient({
           <div className="rounded-2xl border border-border/70 bg-surface/50 p-5 shadow-soft">
             <h2 className="text-lg font-semibold text-foreground">Step 3 · Choose a Growth Mutation</h2>
             <p className="text-sm text-muted">Only one growth mutation can be active at a time.</p>
-            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="ads-tools-field-grid mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {variants.map((variant) => (
                 <VariantOption
                   key={variant.name}
@@ -416,7 +416,7 @@ export function GrowGardenCropValueCalculatorClient({
                 <p className="text-sm text-muted">Tap to select mutations. Multipliers stack using the provided formula.</p>
               </div>
             </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="ads-tools-field-grid mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {visibleMutations.map((mutation) => (
                 <MutationCard
                   key={mutation.name}
@@ -429,7 +429,7 @@ export function GrowGardenCropValueCalculatorClient({
           </div>
         </section>
 
-        <aside className="space-y-6">
+        <div className="space-y-6">
           <div className="rounded-2xl border border-border/70 bg-surface/70 p-5 shadow-soft">
             <h2 className="text-lg font-semibold text-foreground">Result</h2>
             {calculation ? (
@@ -546,7 +546,7 @@ export function GrowGardenCropValueCalculatorClient({
               <p className="mt-4 text-sm text-muted">Select a crop to see results.</p>
             )}
           </div>
-        </aside>
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { MoreCatalogs } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -197,7 +197,7 @@ export function renderRobloxDictionaryPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--dictionary">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--dictionary catalog-stream--sectioned">
         {introNodes}
 
         <CatalogAdSlot />

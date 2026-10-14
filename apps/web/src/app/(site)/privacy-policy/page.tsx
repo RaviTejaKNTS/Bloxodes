@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
+import { HubsPageSidebar } from "@/components/hubs/HubsSidebar";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 
 const title = "Privacy Policy";
@@ -43,12 +44,14 @@ export default function PrivacyPolicyPage() {
   });
 
   return (
-    <div className="grid gap-8 content-sidebar-grid">
+    <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">{title}</h1>
           <p className="text-base text-muted sm:text-lg">{description}</p>
         </header>
+
+        <div id="article-body" className="hubs-static-body">
 
         <section className="space-y-4">
           <p>
@@ -93,6 +96,9 @@ export default function PrivacyPolicyPage() {
             </li>
           </ul>
 
+        </section>
+
+        <section className="space-y-4">
           <p className="font-medium">Comments and other submissions</p>
           <ul className="list-disc space-y-2 pl-6">
             <li>
@@ -221,6 +227,9 @@ export default function PrivacyPolicyPage() {
             .
           </p>
 
+        </section>
+
+        <section className="space-y-4">
           <h3 className="text-xl font-semibold text-foreground">Mediavine Programmatic Advertising (Ver 1.1)</h3>
           <p>
             The Website works with Mediavine to manage third-party interest-based advertising appearing on the Website. Mediavine serves
@@ -256,6 +265,9 @@ export default function PrivacyPolicyPage() {
             <li>Web browser type</li>
             <li>Email (in hashed form)</li>
           </ul>
+        </section>
+
+        <section className="space-y-4">
           <p>
             Mediavine Partners (companies listed below with whom Mediavine shares data) may also use this data to link to other end user
             information the partner has independently collected to deliver targeted advertisements. Mediavine Partners may also separately
@@ -391,10 +403,12 @@ export default function PrivacyPolicyPage() {
           </p>
         </section>
 
+        </div>
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       </article>
 
-      <aside aria-hidden className="hidden lg:block" />
+      <HubsPageSidebar canonicalPath="/privacy-policy" title={title} />
     </div>
   );
 }

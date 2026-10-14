@@ -19,10 +19,11 @@ import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { FreeItemsBrowser } from "./FreeItemsBrowser";
+import { FREE_ITEMS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = FREE_ITEMS_PAGE_SIZE;
 
 export const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 export const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
@@ -231,7 +232,7 @@ export function FreeItemsNav({ active, categories }: { active: string; categorie
   ];
 
   return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+    <section className="catalog-surface catalog-navigation-grid">
       {navItems.map((item) => {
         const isActive = item.id === active;
         const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${
@@ -376,7 +377,7 @@ export function buildCategoryCards(categories: CategoryOption[]) {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <div className="catalog-navigation-grid">
       {categories.map((category) => (
         <Link
           key={category.slug}
@@ -415,7 +416,7 @@ function FreeItemsFilterForm({
   const hasFilters = search.length > 0 || sort !== DEFAULT_SORT;
 
   return (
-    <form action={basePath} method="get" className="flex flex-col gap-4 md:flex-row md:items-end">
+    <form action={basePath} method="get" className="catalog-toolbar">
       <div className="flex-1 space-y-2">
         <label htmlFor="free-items-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           Search
@@ -591,7 +592,7 @@ export async function renderRobloxFreeItemsPage({
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--catalog-items">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--catalog-items">
         {introNodes && showHero ? introNodes : null}
 
         <CatalogAdSlot />

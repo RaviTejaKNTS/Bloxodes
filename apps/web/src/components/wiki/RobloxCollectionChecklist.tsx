@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import {
   CollectionChecklist,
@@ -24,17 +25,24 @@ export function RobloxCollectionChecklist({
   collectionLabel,
   sections,
   cardFields,
-  collectionOptions
+  collectionOptions,
+  beforeToolbar,
+  afterContent
 }: {
   code: string;
   gameName: string;
   collectionLabel: string;
   sections: RobloxCollectionChecklistSection[];
   cardFields?: string[] | null;
+  beforeToolbar?: ReactNode;
+  afterContent?: ReactNode;
   collectionOptions: Array<{ value: string; label: string; href: string }>;
 }) {
   return (
     <CollectionChecklist
+      stream
+      beforeToolbar={beforeToolbar}
+      afterContent={afterContent}
       code={code}
       gameName={gameName}
       collectionLabel={collectionLabel}

@@ -35,6 +35,14 @@ Every public catalog page should follow this structure unless there is a strong 
 
 Do not re-implement these patterns inside each route unless the catalog page genuinely needs a different interaction model.
 
+## Ad layout
+
+`layout.tsx` provides the shared right `PageSidebar`. Keep the page content in its main column and do not add another sidebar inside a catalog page.
+
+Give the page's one `#article-body` the `catalog-stream` class alongside its existing Journey variant. `ads-catalog.css` sizes grids from the main column's width. Keep unsectioned cards as direct `data-journey-item` children. Client lists use `CatalogStableItems` with a fixed slot count so filters and sorting replace card contents without removing ad siblings. For paged browsers, take the slot count from `@/lib/catalog-page-sizes`, the same constant the page and its API use. `#article-body` also holds copy, forms and FAQs, so don't give it `role="list"`.
+
+Sectioned lists use `catalog-stream--sectioned` and `CatalogRowGroups`. The outer stream stays one column; the inner grid supplies complete rows. Keep the row wrappers mounted when filters or column counts change. Use `CatalogFaq` inside the stream to give each answer its own ad boundary.
+
 ## Freshness Rules
 
 - Public catalog routes should use real dates only.

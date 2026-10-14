@@ -1,7 +1,7 @@
 import { GameIdCard } from "../../GameIdCard";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import type { CatalogPageContent } from "@/lib/catalog";
@@ -64,7 +64,7 @@ export function renderDecalGamesHub({ contentHtml }: { contentHtml: PageContentH
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--game-ids">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--game-ids">
         {intro}
         <DecalCatalogNav active="games" />
         {DECAL_GAME_ID_PAGES.map((game) => (
@@ -155,7 +155,7 @@ export function renderDecalGamePage({
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--decals">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--decals">
         {introNodes}
         {currentPage === 1 ? <DecalCatalogNav active="games" /> : null}
         <DecalIdsBrowser

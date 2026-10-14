@@ -1,5 +1,8 @@
 "use client";
 
+import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
+import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+
 import Image from "next/image";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -194,7 +197,7 @@ function MeshIdsBrowserContent({
 
   return (
     <>
-      <form onSubmit={submit} aria-busy={loading} className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_13rem_auto]">
+      <form onSubmit={submit} aria-busy={loading} className="catalog-toolbar">
         <label>
           <span className="sr-only">Search Roblox meshes</span>
           <input
@@ -229,27 +232,24 @@ function MeshIdsBrowserContent({
         </div>
       </form>
 
-      {error ? <p className="text-sm text-destructive">{error}</p> : null}
-      {meshes.length ? (
-        <>
-          {meshes.map((mesh, index) => (
-            <div key={mesh.asset_id} data-journey-item className="h-full">
+      <p hidden={!error} className="text-sm text-destructive">{error}</p>
+      <>
+          <CatalogStableItems slots={MESH_IDS_PAGE_SIZE}>{meshes.map((mesh, index) => (
+            <div key={mesh.asset_id} className="h-full">
               <MeshCard mesh={mesh} eager={index < 4} />
             </div>
-          ))}
+          ))}</CatalogStableItems>
         </>
-      ) : (
-        <p className="rounded-lg border border-dashed border-border/70 p-8 text-center text-muted">
+      <p hidden={!!meshes.length} className="rounded-lg border border-dashed border-border/70 p-8 text-center text-muted">
           No Roblox meshes match that search.
         </p>
-      )}
 
-      <PagePagination
+      <div hidden={totalPages <= 1}><PagePagination
         basePath={basePath}
         currentPage={currentPage}
         totalPages={totalPages}
         query={queryString || undefined}
-      />
+      /></div>
     </>
   );
 }

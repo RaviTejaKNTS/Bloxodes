@@ -9,7 +9,7 @@ import { ColorCodesGrid, type ColorCodeItem } from "./ColorCodesGrid";
 import { HexColorPicker } from "./HexColorPicker";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 
 export const BASE_PATH = "/catalog/roblox-color-codes";
@@ -181,7 +181,7 @@ export function renderRobloxColorCodesPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--color-codes">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--color-codes">
         {introNodes ? introNodes : null}
 
         <p data-md-copy className="md-copy-node md-copy-p">

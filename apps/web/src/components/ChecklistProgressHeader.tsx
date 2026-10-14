@@ -68,15 +68,13 @@ export function ChecklistProgressHeader({ title, slug, totalItems }: ChecklistPr
   }, [session.userId, slug, totalItems]);
 
   return (
-    <div className="flex w-full flex-col gap-2 sm:flex-1 sm:flex-row sm:items-center sm:gap-3">
-      <ProgressBar percent={progress.percent} className="h-2.5 sm:flex-1" label={`Overall progress for ${title}`} />
-      <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-3 py-[6px] text-[11px] font-semibold text-muted-foreground shadow-sm whitespace-nowrap sm:self-auto">
-        <span className="text-foreground">{progress.done}/{progress.total}</span>
-        <span>tasks done</span>
-        <span className="text-border">.</span>
-        <span className="text-foreground">{progress.percent}%</span>
-        <span>complete</span>
-      </div>
+    <div className="flex w-full items-center gap-3">
+      <ProgressBar percent={progress.percent} className="h-2 flex-1" label={`Overall progress for ${title}`} />
+      <p className="m-0 whitespace-nowrap text-sm tabular-nums text-muted">
+        <span className="font-semibold text-foreground">{progress.done}/{progress.total}</span> tasks done
+        <span aria-hidden> · </span>
+        <span className="font-semibold text-foreground">{progress.percent}%</span>
+      </p>
     </div>
   );
 }

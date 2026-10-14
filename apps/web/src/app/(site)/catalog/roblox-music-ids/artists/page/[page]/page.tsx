@@ -104,7 +104,7 @@ export default async function MusicIdArtistsPaginatedPage({ params }: PageProps)
         />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--options">
+      <section id="article-body" itemProp="articleBody" className="catalog-stream journey-content-stream journey-content-stream--options">
         <MusicCatalogNav active="artists" />
         {buildArtistCards(artists)}
         <PagePagination basePath={`${BASE_PATH}/artists`} currentPage={pageNumber} totalPages={totalPages} />

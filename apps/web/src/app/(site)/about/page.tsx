@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
+import { HubsPageSidebar } from "@/components/hubs/HubsSidebar";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 
 const title = "About Bloxodes.com";
@@ -43,7 +44,7 @@ export default function AboutPage() {
   });
 
   return (
-    <div className="grid gap-8 content-sidebar-grid">
+    <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">About Bloxodes.com</h1>
@@ -52,6 +53,8 @@ export default function AboutPage() {
             statistics, codes, reference pages, and optional accounts.
           </p>
         </header>
+
+        <div id="article-body" className="hubs-static-body">
 
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">How Bloxodes Started</h2>
@@ -76,6 +79,10 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">What Bloxodes Is Today</h2>
           <p>Bloxodes is a Roblox Hub that is growing, expanding and keeps on updating as games get updated and info gets changed.</p>
           <p>Here is what you will find here:</p>
+        </section>
+
+        {/* Split so the long list is its own #article-body child; the spacing matches the old single section. */}
+        <section className="space-y-4">
           <ul className="list-disc pl-6">
             <li>
               <strong>
@@ -130,6 +137,9 @@ export default function AboutPage() {
               ID libraries. We also list specific game related items and everything.
             </li>
           </ul>
+        </section>
+
+        <section className="space-y-4">
           <p>
             The goal is simple: make Bloxodes the place you check when you need something specific related to Bloxodes either that is for
             latest active codes, tools that help you calculate and plan, checklists that keeps track of your gameplay progress from start to
@@ -188,10 +198,12 @@ export default function AboutPage() {
           </p>
         </section>
 
+        </div>
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       </article>
 
-      <aside aria-hidden className="hidden lg:block" />
+      <HubsPageSidebar canonicalPath="/about" title={title} />
     </div>
   );
 }

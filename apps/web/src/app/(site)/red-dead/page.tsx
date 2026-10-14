@@ -3,6 +3,7 @@ import { ContentCard } from "@/components/ContentCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { listPublishedRedDeadWikiPages, resolveRedDeadWikiCoverImage } from "@/lib/red-dead";
+import { HubsSidebarLayout, RED_DEAD_LINKS } from "@/components/hubs/HubsSidebar";
 
 const description = "Browse Red Dead wikis and structured game collections on Bloxodes.";
 
@@ -18,6 +19,7 @@ export default async function RedDeadHomePage() {
   const wikiPages = await listPublishedRedDeadWikiPages();
 
   return (
+    <HubsSidebarLayout canonicalPath="/red-dead" title="Red Dead wiki hubs and game data" heading="Popular Red Dead pages" links={RED_DEAD_LINKS}>
     <div className="space-y-10">
       <header className="space-y-4">
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Red Dead wiki hubs and game data</h1>
@@ -41,5 +43,6 @@ export default async function RedDeadHomePage() {
         )}
       </section>
     </div>
+    </HubsSidebarLayout>
   );
 }

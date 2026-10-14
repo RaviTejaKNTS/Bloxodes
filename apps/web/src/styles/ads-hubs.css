@@ -1,0 +1,90 @@
+/* Hubs family (home, games, franchise landings and wiki hubs, wiki index, maps, authors, static pages). */
+
+/* Main column next to the rail: card streams size from the column, not the viewport. */
+.hubs-main {
+  container: hubs / inline-size;
+}
+/* The shared index stream switches to 3-4 columns by viewport width; next to the rail that would
+   shrink cards below today's tablet size, so cap it at two columns (rule 4). */
+.hubs-main .journey-content-stream--index {
+  grid-template-columns: minmax(0, 1fr);
+}
+@container hubs (min-width: 520px) {
+  .hubs-main .journey-content-stream--index:not(.hubs-card-stream) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* Large image cards with big titles (/games, map cards) keep one column until 640px. */
+@container hubs (min-width: 640px) {
+  .hubs-main .hubs-card-stream {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Static pages: #article-body sits between the article and its sections. Keep the spacing the
+   sections had as direct article children. */
+:is(.prose, .game-copy) > .hubs-static-body > :is(div, section) > * + *:where(:not(.not-prose, .not-prose *)) {
+  margin-top: 1.75rem;
+}
+
+/* Roblox wiki index: one stream for the directory cards and every overview section. The spacing
+   below restores the old space-y-10 / space-y-9 rhythm on top of the 1.5rem stream gap. */
+#article-body.hubs-wiki-stream > .hubs-wiki-tight {
+  margin-top: -0.25rem;
+}
+#article-body.hubs-wiki-stream > :is(.hubs-wiki-section, .hubs-wiki-tail) {
+  margin-top: 1rem;
+}
+#article-body.hubs-wiki-stream > .hubs-wiki-ref,
+#article-body.hubs-wiki-stream > .hubs-wiki-aside {
+  margin-top: 0.75rem;
+}
+#article-body.hubs-wiki-stream > .hubs-wiki-section + .hubs-wiki-ref {
+  margin-top: 1rem;
+}
+/* From 1280px the reference sections take three of the four card columns and the updates column
+   sits beside them (dense flow moves it up next to the first section). Ads that land between
+   reference sections stay in the reference column. */
+@media (min-width: 1280px) {
+  #article-body.hubs-wiki-stream > .hubs-wiki-ref,
+  #article-body.hubs-wiki-stream > .hubs-wiki-ref ~ :not(.hubs-wiki-ref, .hubs-wiki-aside, .hubs-wiki-tail, .hubs-wiki-tail ~ *) {
+    grid-column: 1 / 4;
+  }
+  #article-body.hubs-wiki-stream > .hubs-wiki-aside {
+    grid-column: 4;
+    grid-row: span 8;
+    align-self: start;
+    margin-top: 1rem;
+  }
+}
+
+/* Home: every block is a direct child of #article-body so Mediavine can place an ad between any two.
+   From 1280px pairs of blocks share a row. Anything Mediavine inserts spans the full width, and dense
+   flow pulls the second block of a pair back up beside the first, so an ad lands below the pair. */
+#article-body.home-stream {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem 2rem;
+}
+#article-body.home-stream > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+@media (min-width: 1280px) {
+  #article-body.home-stream {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+  }
+  #article-body.home-stream > .home-col-4 {
+    grid-column: span 4;
+  }
+  #article-body.home-stream > .home-col-5 {
+    grid-column: span 5;
+  }
+  #article-body.home-stream > .home-col-7 {
+    grid-column: span 7;
+  }
+  #article-body.home-stream > .home-col-8 {
+    grid-column: span 8;
+  }
+}

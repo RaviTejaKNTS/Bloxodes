@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
 type RedeemImageGalleryProps = {
@@ -113,7 +114,7 @@ export function RedeemImageGallery({
         ))}
       </div>
 
-      {activeIndex !== null ? (
+      {activeIndex !== null ? createPortal(
         <div
           className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 px-4 py-6 backdrop-blur-sm"
           role="dialog"
@@ -159,7 +160,8 @@ export function RedeemImageGallery({
               </div>
             ) : null}
           </div>
-        </div>
+        </div>,
+        document.body
       ) : null}
     </>
   );

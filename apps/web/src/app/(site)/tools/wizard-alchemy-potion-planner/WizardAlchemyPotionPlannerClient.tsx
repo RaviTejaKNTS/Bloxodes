@@ -140,7 +140,7 @@ export function WizardAlchemyPotionPlannerClient({ potions, materials }: Props) 
 
   return (
     <div className="tool-surface rounded-xl border border-border/70 bg-surface/70 p-4 shadow-sm md:p-5">
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+      <div className="ads-tools-columns grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
         <section className="space-y-5">
           <div className="grid gap-4 md:grid-cols-2">
             <label className="space-y-2">
@@ -229,7 +229,7 @@ export function WizardAlchemyPotionPlannerClient({ potions, materials }: Props) 
           </div>
         </section>
 
-        <aside className="space-y-4">
+        <div className="space-y-4">
           <div className={cn("rounded-lg border p-4", canBrew ? "border-emerald-500/40 bg-emerald-500/10" : "border-amber-500/40 bg-amber-500/10")}>
             <div className="flex items-start justify-between gap-3">
               {selectedPotion ? (
@@ -343,7 +343,7 @@ export function WizardAlchemyPotionPlannerClient({ potions, materials }: Props) 
               </ul>
             </div>
           ) : null}
-        </aside>
+        </div>
       </div>
     </div>
   );

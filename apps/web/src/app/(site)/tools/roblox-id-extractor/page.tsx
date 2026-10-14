@@ -1,3 +1,4 @@
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
@@ -10,7 +11,7 @@ import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 
 export const revalidate = 21600;
 
@@ -123,7 +124,7 @@ export default async function RobloxIdExtractorPage() {
   };
 
   return (
-    <>
+    <ToolPageLayout toolCode="roblox-id-extractor" title={tool?.title ?? "Tool"} canonicalPath="/tools/roblox-id-extractor">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
@@ -174,7 +175,7 @@ export default async function RobloxIdExtractorPage() {
                 adFormat="auto"
                 fullWidthResponsive
               />
-              <ContentFaq
+              <ToolFaq
                 items={faqNodes.map((faq, idx) => ({
                   id: `${faq.q}-${idx}`,
                   question: faq.q,
@@ -201,6 +202,6 @@ export default async function RobloxIdExtractorPage() {
         fullWidthResponsive
       />
       <MoreTools excludeCode="roblox-id-extractor" />
-    </>
+    </ToolPageLayout>
   );
 }

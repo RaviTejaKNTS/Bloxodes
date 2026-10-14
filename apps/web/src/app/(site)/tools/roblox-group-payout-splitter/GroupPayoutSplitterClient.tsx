@@ -113,7 +113,7 @@ export function GroupPayoutSplitterClient() {
         ))}
       </div>
 
-      <section className="grid gap-8 xl:grid-cols-[minmax(0,3fr)_minmax(22rem,2fr)]">
+      <section className="ads-tools-columns grid gap-8 xl:grid-cols-[minmax(0,3fr)_minmax(22rem,2fr)]">
         <div className="panel space-y-5 p-6">
           <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:items-end">
             <label className="block text-sm font-semibold text-foreground">
@@ -123,7 +123,7 @@ export function GroupPayoutSplitterClient() {
             <p id="pool-help" className="text-sm leading-6 text-muted">Enter the whole-Robux balance currently available to spend. Do not include held, pending, or forecast revenue.</p>
           </div>
 
-          <div className="overflow-x-auto">
+          <div className="ads-tools-table-scroll overflow-x-auto">
             <table className="w-full min-w-[720px] border-separate border-spacing-y-2 text-left text-sm">
               <thead><tr className="text-muted"><th className="px-2 font-medium">Recipient</th><th className="px-2 font-medium">Roblox user ID, optional</th><th className="px-2 font-medium">{MODE_COPY[mode].valueLabel}</th><th className="px-2 font-medium"><span className="sr-only">Remove</span></th></tr></thead>
               <tbody>

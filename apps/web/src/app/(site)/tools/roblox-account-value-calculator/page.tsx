@@ -1,6 +1,7 @@
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 import { ContentSlot } from "@/components/ContentSlot";
 import { MoreTools } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -98,7 +99,7 @@ export default async function RobloxAccountValueCalculatorPage() {
   };
 
   return (
-    <>
+    <ToolPageLayout toolCode="roblox-account-value-calculator" title={tool?.title ?? "Tool"} canonicalPath="/tools/roblox-account-value-calculator">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
@@ -115,12 +116,12 @@ export default async function RobloxAccountValueCalculatorPage() {
         <ContentSlot slot={TOOL_AD_SLOT} className="my-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
         {faqNodes.length ? (
-          <ContentFaq items={faqNodes.map((faq, index) => ({ id: `${faq.q}-${index}`, question: faq.q, answer: faq.nodes }))} />
+          <ToolFaq items={faqNodes.map((faq, index) => ({ id: `${faq.q}-${index}`, question: faq.q, answer: faq.nodes }))} />
         ) : null}
       </section>
       {tool?.id ? <div className="mt-10"><CommentsSection entityType="tool" entityId={tool.id} /></div> : null}
       <ContentSlot slot={TOOL_AD_SLOT} className="mt-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
       <MoreTools excludeCode={TOOL_CODE} />
-    </>
+    </ToolPageLayout>
   );
 }

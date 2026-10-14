@@ -44,7 +44,7 @@ export function DataStoreBudgetCalculatorClient() {
   return <div className="tool-surface space-y-8">
     <section className="panel p-6">
       <div><h2 className="text-xl font-semibold text-foreground">Describe the server and experience</h2><p className="mt-2 text-sm leading-6 text-muted">All operation inputs are requests per minute for one representative game server. The calculator multiplies them across similar servers for the experience check.</p></div>
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="ads-tools-field-grid mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <NumberField label="Players in this server" value={players} onChange={setPlayers} max={1000} />
         <NumberField label="Total experience CCU" value={concurrentUsers} onChange={setConcurrentUsers} max={10000000} help="Across every live server" />
         <NumberField label="Similar servers" value={serverCount} onChange={setServerCount} min={1} max={100000} />
@@ -54,7 +54,7 @@ export function DataStoreBudgetCalculatorClient() {
 
     <section className="panel p-6">
       <h2 className="text-xl font-semibold text-foreground">Plan one server's requests per minute</h2>
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">{OPERATION_FIELDS.map((field) => <NumberField key={field.key} label={field.label} help={field.help} value={operations[field.key]} onChange={(value) => setOperations((current) => ({ ...current, [field.key]: value }))} max={1000000} />)}</div>
+      <div className="ads-tools-field-grid mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">{OPERATION_FIELDS.map((field) => <NumberField key={field.key} label={field.label} help={field.help} value={operations[field.key]} onChange={(value) => setOperations((current) => ({ ...current, [field.key]: value }))} max={1000000} />)}</div>
       {calculation.errors.length ? <div className="mt-5 rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-900 dark:text-red-200"><ul className="list-disc space-y-1 pl-5">{calculation.errors.map((error) => <li key={error}>{error}</li>)}</ul></div> : null}
     </section>
 
