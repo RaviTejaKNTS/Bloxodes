@@ -145,6 +145,12 @@ body {
 }
 
 @layer utilities {
+  /* One column below 1024px. A plain `grid` would size it to its widest unbreakable content, so a
+     long one-line rail description could push the whole page wider than a phone screen. */
+  .content-sidebar-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   @media (min-width: 1024px) {
     .content-sidebar-grid {
       grid-template-columns: minmax(0, 3fr) minmax(0, 1.25fr);
