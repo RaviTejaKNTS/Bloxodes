@@ -1,3 +1,4 @@
+import { ContentCopyNodes } from "./GameContentPage";
 import { safeJsonLd } from "@/lib/seo";
 import { ContentCard } from "@/components/ContentCard";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -20,7 +21,7 @@ export async function GameWikiHub({ page, namespaceTitle }: { page: SharedGameWi
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": graph }) }} />
     <header className="space-y-4"><PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: namespaceTitle, href: `/${page.namespace}` }, { label: "Wiki", href: null }]} /><h1 className="text-4xl font-semibold leading-tight md:text-5xl">{page.title}</h1></header>
     <article id="article-body" className="journey-content-stream journey-content-stream--index">
-      <div className="article-content md-copy-scope max-w-3xl">{renderPageContentNodes(html, `${page.namespace}-hub-intro`)}</div>
+      <ContentCopyNodes nodes={renderPageContentNodes(html, `${page.namespace}-hub-intro`)} group="game-hub-intro" className="max-w-3xl" />
       {pages.map(child => <div key={child.id} data-journey-item><ContentCard type="wiki" variant="overlay" href={child.canonical_path} title={child.title} image={{ src: reader.resolveSharedGameWikiCoverImage(child), alt: child.title, ratio: "1200/675" }} /></div>)}
     </article>
     <CommentsSection entityType={legacyWikiCommentType(page.namespace)} entityId={page.id} />

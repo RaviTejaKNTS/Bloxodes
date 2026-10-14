@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { safeJsonLd, breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { getMinecraftWikiPageBySlug, resolveMinecraftWikiCoverImage } from "@/lib/minecraft";
+import { HubsSidebarLayout, POPULAR_LINKS } from "@/components/hubs/HubsSidebar";
 
 const description = "Explore Roblox, Minecraft, Grand Theft Auto, Red Dead and daily puzzles on Bloxodes.";
 const canonical = `${SITE_URL}/games`;
@@ -86,6 +87,7 @@ export default async function GamesPage() {
   };
 
   return (
+    <HubsSidebarLayout canonicalPath="/games" title="Browse games on Bloxodes" heading="Popular pages" links={POPULAR_LINKS}>
     <div className="space-y-10">
       <header className="space-y-4">
         <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Games", href: null }]} />
@@ -93,11 +95,12 @@ export default async function GamesPage() {
         <p className="max-w-2xl text-base leading-7 text-muted md:text-lg">{description}</p>
       </header>
 
-      <section className="grid gap-5 md:grid-cols-2" aria-label="Games and puzzles">
+      <section id="article-body" className="journey-content-stream journey-content-stream--index hubs-card-stream gap-5" aria-label="Games and puzzles">
         {publishedPlatforms.map(({ href, label, image }, index) => (
           <Link
             key={href}
             href={href}
+            data-journey-item
             className="group block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
           >
             <Card className="relative aspect-[1200/675] overflow-hidden rounded-xl border-border/70 bg-card shadow-none transition-colors group-hover:border-accent/60">
@@ -120,5 +123,6 @@ export default async function GamesPage() {
       </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(structuredData) }} />
     </div>
+    </HubsSidebarLayout>
   );
 }

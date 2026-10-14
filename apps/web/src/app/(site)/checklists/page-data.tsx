@@ -8,6 +8,14 @@ import { formatUpdatedLabel } from "@/lib/updated-label";
 
 export const PAGE_SIZE = 20;
 
+const RELATED_LINKS = [
+  { href: "/quizzes", title: "Roblox quizzes" },
+  { href: "/codes", title: "Roblox game codes" },
+  { href: "/wiki", title: "Roblox game wikis" },
+  { href: "/events", title: "Roblox events" },
+  { href: "/gta/checklists", title: "GTA checklists" }
+];
+
 function mapRowToCard(row: ChecklistSummaryRow): ChecklistCardData {
   const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
   const thumb = pickThumbnail((row as any).universe?.thumbnail_urls);
@@ -48,5 +56,5 @@ async function loadPage(pageNumber: number) {
 
 export async function loadChecklistsPageData(page: number) { return loadPage(page); }
 export function renderChecklistsPage(props: Awaited<ReturnType<typeof loadChecklistsPageData>> & { currentPage: number; showHero: boolean }) {
-  return <ChecklistIndexPage {...props} config={ROBLOX_CHECKLISTS} />;
+  return <ChecklistIndexPage {...props} config={ROBLOX_CHECKLISTS} relatedLinks={RELATED_LINKS} />;
 }

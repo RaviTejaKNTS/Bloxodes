@@ -1,4 +1,5 @@
 import { supabaseAdmin } from "@/lib/supabase";
+import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 import {
   DEFAULT_MESH_SORT,
   normalizeMeshSearch,
@@ -6,7 +7,7 @@ import {
   type MeshSortKey
 } from "@/lib/roblox-mesh-ids-search";
 
-export const MESH_IDS_PAGE_SIZE = 40;
+export { MESH_IDS_PAGE_SIZE };
 
 export type RobloxMeshId = {
   asset_id: number;

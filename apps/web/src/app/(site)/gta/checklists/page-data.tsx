@@ -3,6 +3,11 @@ import { formatUpdatedLabel } from "@/lib/updated-label";
 import { ChecklistIndexPage } from "@/components/checklists/ChecklistIndexPage";
 import { GTA_CHECKLISTS } from "@/lib/engagement/config";
 import { engagementProgressKey } from "@/lib/engagement/types";
+const RELATED_LINKS = [
+  { href: "/gta", title: "GTA hub" },
+  { href: "/gta/wiki", title: "GTA wiki" },
+  { href: "/checklists", title: "Roblox checklists" }
+];
 export async function loadGtaChecklistsPage(page: number) {
   const { checklists, total } = await listPublishedGtaChecklists(page);
   return { cards: checklists.map(row => ({
@@ -13,5 +18,5 @@ export async function loadGtaChecklistsPage(page: number) {
   })), total, totalPages: Math.max(1, Math.ceil(total / 20)) };
 }
 export function renderGtaChecklistsPage(props: Awaited<ReturnType<typeof loadGtaChecklistsPage>> & { currentPage: number }) {
-  return <ChecklistIndexPage {...props} showHero={props.currentPage === 1} config={GTA_CHECKLISTS} />;
+  return <ChecklistIndexPage {...props} showHero={props.currentPage === 1} config={GTA_CHECKLISTS} relatedLinks={RELATED_LINKS} />;
 }

@@ -1,3 +1,4 @@
+import { CatalogRowGroups } from "@/components/catalog/CatalogRowGroups";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -11,7 +12,7 @@ import { getAdminCommandSystems, loadAdminCommandDataset, loadAdminCommandDatase
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 
 export const revalidate = 21600;
 
@@ -411,13 +412,13 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
         <UpdatedTimestamp value={updatedDateValue} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--options">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--options catalog-stream--sectioned">
       {introNodes ? (
         introNodes
       ) : null}
 
       {systemNavItems.length ? (
-        <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <section className="catalog-surface catalog-navigation-grid">
           {systemNavItems.map((item) => {
             const isActive = item.id === dataset.system.slug;
             const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${
@@ -496,8 +497,8 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
             {section.commands.length.toLocaleString("en-US")} commands
           </span>
         </div>,
-        ...section.commands.map((command) => (
-          <div key={command.id} data-journey-item className="h-full">
+        <CatalogRowGroups key={`${section.id}-rows`} size="large">{section.commands.map((command) => (
+          <div key={command.id} data-journey-item role="listitem" className="h-full">
             <div className="rounded-lg border border-border/70 bg-surface/60 p-4">
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
                     <div className="flex flex-wrap items-center gap-2">
@@ -547,7 +548,7 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
                   ) : null}
             </div>
           </div>
-        ))
+        ))}</CatalogRowGroups>
       ])}
 
       {descriptionNodes.length ? descriptionNodes : null}

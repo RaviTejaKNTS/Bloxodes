@@ -125,7 +125,7 @@ export function MarketplaceFeeCalculatorClient() {
         </button>
       </div>
 
-      <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+      <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <div className="panel space-y-5 p-6">
           <div>
             <h2 className="text-xl font-semibold text-foreground">Set up the sale</h2>

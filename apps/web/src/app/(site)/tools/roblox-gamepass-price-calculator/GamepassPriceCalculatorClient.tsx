@@ -113,7 +113,7 @@ export function GamepassPriceCalculatorClient() {
         </button>
       </div>
 
-      <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+      <section className="ads-tools-columns grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
         <form onSubmit={handleSubmit} className="panel space-y-5 p-6">
           <div className="space-y-2">
             <h2 className="text-xl font-semibold text-foreground">

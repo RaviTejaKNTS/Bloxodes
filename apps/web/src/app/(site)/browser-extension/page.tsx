@@ -85,6 +85,7 @@ export default function BrowserExtensionPage() {
           </a>
         </header>
 
+        <div id="article-body">
         <figure className="space-y-3">
           <Image
             src="/browser-extension/active-codes.webp"
@@ -169,6 +170,7 @@ export default function BrowserExtensionPage() {
             </a>
           </div>
         </footer>
+        </div>
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />

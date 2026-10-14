@@ -52,6 +52,16 @@ describe("catalog edge-cache contracts", () => {
     expect(source).toContain("<Suspense fallback=");
     expect(source).toContain("useSearchParams()");
     expect(source).toContain(`fetch(\`${apiPath}?`);
+    // Cards sit in fixed slots so a client page change never moves the boundaries beside ads.
+    expect(source).toContain("<CatalogStableItems slots={");
+  });
+
+  it("keeps catalog card slots as Journey items", () => {
+    const source = readFileSync(
+      new URL("../../components/catalog/CatalogStableItems.tsx", import.meta.url),
+      "utf8"
+    );
+
     expect(source).toContain("data-journey-item");
   });
 });

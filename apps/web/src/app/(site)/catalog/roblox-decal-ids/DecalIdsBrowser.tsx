@@ -1,5 +1,8 @@
 "use client";
 
+import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
+import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BadgeCheck } from "lucide-react";
@@ -309,7 +312,7 @@ function DecalIdsBrowserContent({
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-end">
+      <form onSubmit={handleSubmit} className="catalog-toolbar">
         <div className="flex-1 space-y-2">
           <label htmlFor="decal-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
             Search
@@ -361,17 +364,15 @@ function DecalIdsBrowserContent({
         </div>
       </form>
 
-      {loading ? <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Updating results...</p> : null}
-      {error ? <p className="text-sm font-semibold text-rose-400">{error}</p> : null}
+      <p hidden={!loading} className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Updating results...</p>
+      <p hidden={!error} className="text-sm font-semibold text-rose-400">{error}</p>
 
-      {!decals.length ? (
-        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div hidden={!!decals.length} className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No decal IDs have been collected yet. Check back soon.
         </div>
-      ) : (
-        <>
-          {decals.map((decal) => (
-            <div key={decal.asset_id} data-journey-item className="h-full">
+      <>
+          <CatalogStableItems slots={DECAL_IDS_PAGE_SIZE}>{decals.map((decal) => (
+            <div key={decal.asset_id} className="h-full">
               <DecalCard
                 decal={decal}
                 idLabel={idLabel}
@@ -379,16 +380,15 @@ function DecalIdsBrowserContent({
                 showCuratedDetails={section === "curated"}
               />
             </div>
-          ))}
+          ))}</CatalogStableItems>
         </>
-      )}
 
-      <PagePagination
+      <div hidden={totalPages <= 1}><PagePagination
         basePath={basePath}
         currentPage={currentPage}
         totalPages={totalPages}
         query={searchQueryString || undefined}
-      />
+      /></div>
     </>
   );
 }

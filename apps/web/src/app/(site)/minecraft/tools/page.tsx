@@ -1,3 +1,4 @@
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -47,6 +48,7 @@ export default async function MinecraftToolsPage() {
   };
 
   return (
+    <ToolPageLayout title="Minecraft tools and calculators" canonicalPath="/minecraft/tools">
     <div className="space-y-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Minecraft", href: "/minecraft" }, { label: "Tools" }]} />
@@ -59,10 +61,11 @@ export default async function MinecraftToolsPage() {
         <IndexPageStats items={[{ label: `${tools.length} tools published`, icon: "tools", tone: "accent" }]} />
       </header>
       {tools.length ? <MinecraftToolCards tools={tools} hub /> : (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+        <section id="article-body" itemProp="articleBody" className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No Minecraft tools are published yet.
-        </div>
+        </section>
       )}
     </div>
+    </ToolPageLayout>
   );
 }

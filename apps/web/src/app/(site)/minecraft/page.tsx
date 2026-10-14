@@ -4,6 +4,7 @@ import { IndexPageStats } from "@/components/IndexPageStats";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { MinecraftEditionCards } from "./wiki/page-data";
+import { HubsSidebarLayout, MINECRAFT_LINKS } from "@/components/hubs/HubsSidebar";
 import { buildMinecraftWikiPath, listPublishedMinecraftWikiPages, getMinecraftWikiPageBySlug, listPublishedMinecraftCollections, listMinecraftTools, resolveMinecraftWikiCoverImage } from "@/lib/minecraft";
 
 const description = "Explore Minecraft collections and calculators for Java and Bedrock Edition.";
@@ -23,6 +24,7 @@ export default async function MinecraftHomePage() {
   const structuredData = { "@context": "https://schema.org", "@graph": [breadcrumbJsonLd([{ name: "Home", url: SITE_URL }, { name: "Minecraft", url: canonical }]), { "@type": "CollectionPage", name: "Minecraft wiki and tools", description, url: canonical, mainEntity: { "@type": "ItemList", itemListElement: [...wikis.filter(page => page.slug !== "minecraft").map((page, index) => ({ "@type": "ListItem", position: index + 1, name: page.title, url: `${SITE_URL}${buildMinecraftWikiPath(page.slug)}` })), { "@type": "ListItem", position: 3, name: "Minecraft tools", url: `${canonical}/tools` }] } }] };
 
   return (
+    <HubsSidebarLayout canonicalPath="/minecraft" title="Minecraft wiki and tools" heading="Popular Minecraft pages" links={MINECRAFT_LINKS}>
     <div className="space-y-10">
       <header className="space-y-4">
         <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Minecraft", href: null }]} />
@@ -37,5 +39,6 @@ export default async function MinecraftHomePage() {
       </section>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
     </div>
+    </HubsSidebarLayout>
   );
 }

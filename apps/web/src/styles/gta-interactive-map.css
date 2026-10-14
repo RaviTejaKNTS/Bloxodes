@@ -10,15 +10,11 @@
 .gta-map-layer-notes{display:grid;gap:7px;margin:5px 5px 10px;padding:9px 10px;border-left:2px solid rgb(var(--color-accent));background:rgb(var(--color-background)/.7);color:rgb(var(--color-muted));font-size:10px;line-height:1.5}
 .gta-map-layer-notes strong{color:rgb(var(--color-foreground))}
 .gta-map-detail__category{margin-top:12px!important;font-size:11px!important}
-.gta-map-detail__source a,.gta-map-about__body a{color:rgb(var(--color-accent));text-decoration:underline;text-underline-offset:2px}
+.gta-map-detail__source a{color:rgb(var(--color-accent));text-decoration:underline;text-underline-offset:2px}
 .gta-map-progress-bridges{display:none}
 .gta-interactive-map .gta-map-sidebar__scroll{padding-top:3px}
 .gta-interactive-map .gta-map-pin{font-size:9px}
 .gta-interactive-map .gta-map-sidebar__header span{max-width:220px;line-height:1.35}
-.gta-interactive-map .gta-map-about__body{padding-bottom:38px}
-.gta-interactive-map .gta-map-about__body h3{margin-top:25px}
-.gta-interactive-map .gta-map-about__body ul{grid-template-columns:1fr}
-.gta-interactive-map .gta-map-about__body li{padding:3px 0}
 .gta-map-image-status{position:absolute;z-index:500;top:50%;left:50%;max-width:calc(100vw - 32px);padding:10px 14px;transform:translate(-50%,-50%);border:1px solid rgb(var(--color-border));border-radius:9px;background:rgb(var(--color-surface)/.95);box-shadow:0 4px 18px #07162450;color:rgb(var(--color-foreground));font-size:12px;font-weight:700;pointer-events:none}
 .gta-map-image-status.is-error{color:#fb7185}
 .gta-interactive-map :is(button,a,input,select){-webkit-tap-highlight-color:transparent;touch-action:manipulation}

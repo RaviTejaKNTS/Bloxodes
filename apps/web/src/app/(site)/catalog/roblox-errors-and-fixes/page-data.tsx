@@ -6,7 +6,7 @@ import { MoreCatalogs } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { ErrorsBrowser, type ErrorSection, type RobloxErrorItem } from "./ErrorsBrowser";
 
@@ -219,7 +219,7 @@ export function renderRobloxErrorsPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--errors">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--errors catalog-stream--sectioned">
         {introNodes ? introNodes : null}
 
         <CatalogAdSlot />

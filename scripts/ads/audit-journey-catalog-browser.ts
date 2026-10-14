@@ -30,6 +30,8 @@ const ROUTES = [
   "/catalog/roblox-items-and-bundles/roblox-animations",
   "/catalog/roblox-items-and-bundles/roblox-makeup",
   "/catalog/admin-commands",
+  "/catalog/admin-commands/hd-admin",
+  "/catalog/roblox-emote-commands",
   "/articles",
   "/codes",
   "/checklists",
@@ -66,24 +68,24 @@ const GRID_BREAKPOINTS = [
     ]
   },
   {
-    name: "music-three-column",
+    name: "music-container-columns",
     width: 1024,
     height: 1000,
     routes: ["/catalog/roblox-music-ids", "/catalog/roblox-music-ids/games/jujutsu-shenanigans"]
   },
   {
-    name: "catalog-four-column",
+    name: "catalog-sidebar-columns",
     width: 1280,
     height: 1000,
     routes: ["/catalog/free-roblox-items", "/catalog/roblox-items-and-bundles", "/articles"]
   },
   {
-    name: "color-six-column",
+    name: "color-sidebar-columns",
     width: 1280,
     height: 1000,
     routes: ["/catalog/roblox-color-codes"]
   },
-  { name: "decal-five-column", width: 1600, height: 1000, routes: ["/catalog/roblox-decal-ids"] }
+  { name: "decal-sidebar-columns", width: 1600, height: 1000, routes: ["/catalog/roblox-decal-ids"] }
 ] as const;
 
 const DISCOVERY_ROOTS = [
@@ -325,9 +327,18 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
 
     const content = selectors[0];
     const allItems = [...content.querySelectorAll<HTMLElement>("[data-journey-item]")];
-    const directItems = allItems.filter((item) => item.parentElement === content);
-    if (allItems.length !== directItems.length) {
-      throw new Error(`${allItems.length - directItems.length} Journey items are nested`);
+    const directItems = [...content.querySelectorAll<HTMLElement>(":scope > [data-journey-item]:not([hidden]), :scope > [data-catalog-row-group]:not([hidden])")];
+    const invalidItems = allItems.filter(item => item.parentElement !== content && !(item.parentElement?.matches(".catalog-section-grid") && item.parentElement.parentElement?.matches("[data-catalog-row-group]") && item.parentElement.parentElement.parentElement === content));
+    if (invalidItems.length) {
+      throw new Error(`${invalidItems.length} Journey items have no direct stream or catalog row boundary`);
+    }
+    for (const group of content.querySelectorAll<HTMLElement>(":scope > [data-catalog-row-group]:not([hidden])")) {
+      const grid = group.querySelector<HTMLElement>(".catalog-section-grid")!;
+      const columns = getComputedStyle(grid).gridTemplateColumns.split(/\s+/).length;
+      const next = group.nextElementSibling;
+      if (next?.matches("[data-catalog-row-group]:not([hidden])") && grid.children.length % columns !== 0) {
+        throw new Error("catalog row group leaves an incomplete row before more section cards");
+      }
     }
 
     const contentStyle = getComputedStyle(content);
@@ -336,7 +347,7 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
       content.classList.contains("journey-content-stream--prose") ||
       content.classList.contains("journey-content-stream--interactive");
     const isCollectionStream = content.classList.contains("journey-content-stream--collection");
-    const isCardGrid = isJourneyGrid && !isStructuredStream && !isCollectionStream;
+    const isCardGrid = isJourneyGrid && !isStructuredStream && !isCollectionStream && !content.classList.contains("catalog-stream--sectioned");
     const hasEmptyState = content.matches('[class*="border-dashed"]') || Boolean(content.querySelector('[class*="border-dashed"]'));
     if (!isJourneyGrid) throw new Error("#article-body is missing the Journey content stream contract");
 

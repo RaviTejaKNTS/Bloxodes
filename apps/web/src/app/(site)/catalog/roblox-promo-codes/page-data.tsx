@@ -1,7 +1,8 @@
+import { CatalogRowGroups } from "@/components/catalog/CatalogRowGroups";
 import Link from "next/link";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { MoreCatalogs } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { RobloxCatalogItemCard } from "@/components/RobloxCatalogItemCard";
@@ -214,7 +215,7 @@ export function renderPromoRewardsPage({
         <UpdatedTimestamp value={updatedAt} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--promo">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--promo catalog-stream--sectioned">
         {introNodes}
         <PromoRewardSections items={items} />
         <CatalogAdSlot />
@@ -222,7 +223,7 @@ export function renderPromoRewardsPage({
         {descriptionNodes.length ? descriptionNodes : null}
         {howNodes}
 
-        <section aria-labelledby="free-roblox-items" className="space-y-5">
+        <>
           <div className="space-y-2">
             <h2 id="free-roblox-items" className="text-2xl font-semibold text-foreground">
               More free Roblox items
@@ -233,16 +234,15 @@ export function renderPromoRewardsPage({
             </p>
           </div>
           {freeItems.length ? (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <CatalogRowGroups size="small" className="catalog-row-group--free-items">
               {freeItems.map((item) => (
-                <RobloxCatalogItemCard
-                  key={item.asset_id}
+                <div key={item.asset_id} role="listitem" data-journey-item className="h-full"><RobloxCatalogItemCard
                   item={item}
                   categoryLabelMode="taxonomy"
                   nameHeadingLevel="h3"
-                />
+                /></div>
               ))}
-            </div>
+            </CatalogRowGroups>
           ) : (
             <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
               Free Marketplace items are temporarily unavailable here.
@@ -256,7 +256,7 @@ export function renderPromoRewardsPage({
               View all free Roblox items
             </Link>
           </div>
-        </section>
+        </>
 
         {faqNodes.length ? <ContentFaq items={faqNodes} /> : null}
         <CatalogAdSlot />

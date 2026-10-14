@@ -1,5 +1,7 @@
 "use client";
 
+import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
+
 import { useMemo, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -302,17 +304,15 @@ export function ColorCodesGrid({ items }: Props) {
         aria-label="Search Roblox color codes"
       />
 
-      {filteredItems.map((item) => (
-        <div key={item.number} data-journey-item className="h-full">
+      <CatalogStableItems slots={items.length}>{filteredItems.map((item) => (
+        <div key={item.number} className="h-full">
           <ColorCodeCard item={item} />
         </div>
-      ))}
+      ))}</CatalogStableItems>
 
-      {trimmedQuery && !filteredItems.length ? (
-        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+        <div hidden={!trimmedQuery || !!filteredItems.length} className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No Roblox colors matched that search.
         </div>
-      ) : null}
     </>
   );
 }

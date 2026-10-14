@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { SiteLogo } from "@/components/SiteLogo";
+import { MAP_GUIDE_ID, scrollToMapGuide, useShellInertUnderMap } from "@/components/gta/map-guide";
 import { ArrowLeft, ArrowUpRight, Check, Crosshair, Info, Layers3, Link2, Map as MapIcon, Minus, Plus, Search, X } from "lucide-react";
 import type * as Leaflet from "leaflet";
 import { useCollectionChecklistProgress } from "@/lib/collection-checklist-progress-client";
@@ -64,7 +65,7 @@ function PointDetails({ marker, checked, toggle, clear, share, copyStatus }: {
   </>;
 }
 
-export function Gta5InteractiveMap({ markers, children }: { markers: Gta5MapMarker[]; children: ReactNode }) {
+export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
   const parts = useCollectionChecklistProgress({ ...PROGRESS_BASE, code: "gta-5-spaceship-parts" });
   const letters = useCollectionChecklistProgress({ ...PROGRESS_BASE, code: "gta-5-letter-scraps" });
   const jumps = useCollectionChecklistProgress({ ...PROGRESS_BASE, code: "gta-5-stunt-jumps" });
@@ -92,7 +93,6 @@ export function Gta5InteractiveMap({ markers, children }: { markers: Gta5MapMark
   const [copyStatus, setCopyStatus] = useState("");
   const [mapReady, setMapReady] = useState(false);
   const [listOpen, setListOpen] = useState(false);
-  const [infoOpen, setInfoOpen] = useState(false);
   const mapElement = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Leaflet.Map | null>(null);
   const leafletRef = useRef<typeof Leaflet | null>(null);
@@ -116,26 +116,7 @@ export function Gta5InteractiveMap({ markers, children }: { markers: Gta5MapMark
       })));
   }, [markers, activeLayers, onlyRemaining, query, isChecked]);
 
-  useEffect(() => {
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const map = mapElement.current;
-    const main = map?.closest("main");
-    const shell = main?.parentElement;
-    const shellRoot = shell?.parentElement;
-    const hiddenShell = [
-      main?.querySelector(":scope > header"),
-      shell?.querySelector(":scope > footer"),
-      shellRoot?.querySelector(":scope > aside"),
-      shellRoot?.querySelector(":scope > header")
-    ].filter((element): element is HTMLElement => element instanceof HTMLElement);
-    const previousInert = hiddenShell.map((element) => element.inert);
-    hiddenShell.forEach((element) => { element.inert = true; });
-    return () => {
-      document.body.style.overflow = previous;
-      hiddenShell.forEach((element, index) => { element.inert = previousInert[index]; });
-    };
-  }, []);
+  useShellInertUnderMap(mapElement);
   useEffect(() => {
     if (!mapReady || query.trim().length < 2 || !filtered.length) return;
     const timeout = window.setTimeout(() => {
@@ -149,7 +130,6 @@ export function Gta5InteractiveMap({ markers, children }: { markers: Gta5MapMark
   }, [query, filtered, mapReady]);
   const selectPoint = useCallback((id: string | null, writeUrl = true) => {
     setSelectedId(id);
-    setInfoOpen(false);
     setCopyStatus("");
     if (id && window.matchMedia("(max-width: 800px)").matches) setListOpen(false);
     if (writeUrl) {
@@ -173,7 +153,7 @@ export function Gta5InteractiveMap({ markers, children }: { markers: Gta5MapMark
   }, [markers, selectPoint]);
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") { selectPoint(null); setInfoOpen(false); setListOpen(false); }
+      if (event.key === "Escape") { selectPoint(null); setListOpen(false); }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -285,8 +265,8 @@ export function Gta5InteractiveMap({ markers, children }: { markers: Gta5MapMark
       <Link href="/gta/wiki/gta-5" className="gta-map-back" aria-label="Back to GTA 5 wiki"><ArrowLeft size={17} /></Link>
       <div className="gta-map-title"><SiteLogo className="h-6" /><span className="gta-map-title__separator" aria-hidden="true">.</span><h1>GTA 5 Story Mode interactive map</h1></div>
       <div className="gta-map-topbar__actions">
-        <button type="button" onClick={() => { setInfoOpen(false); setListOpen(!listOpen); }} aria-label="Toggle map layers and locations" aria-expanded={listOpen}><Layers3 size={17} /><span>Layers</span></button>
-        <button type="button" onClick={() => { setListOpen(false); setInfoOpen(!infoOpen); }} aria-label="About this map" aria-expanded={infoOpen}><Info size={17} /><span>About</span></button>
+        <button type="button" onClick={() => setListOpen(!listOpen)} aria-label="Toggle map layers and locations" aria-expanded={listOpen}><Layers3 size={17} /><span>Layers</span></button>
+        <button type="button" onClick={() => { setListOpen(false); scrollToMapGuide(); }} aria-label="About this map" aria-controls={MAP_GUIDE_ID}><Info size={17} /><span>About</span></button>
       </div>
     </header>
     <aside className={`gta-map-sidebar ${listOpen ? "is-open" : ""}`} aria-label="Map layers and locations">
@@ -326,9 +306,5 @@ export function Gta5InteractiveMap({ markers, children }: { markers: Gta5MapMark
     {selected ? <aside className="gta-map-detail" role="dialog" aria-label={`${selected.name} details`} aria-modal="false">
       <PointDetails marker={selected} checked={isChecked(selected)} toggle={() => progress[selected.layer]?.toggle(selected.id)} clear={() => selectPoint(null)} share={sharePoint} copyStatus={copyStatus} />
     </aside> : null}
-    <aside className={`gta-map-about ${infoOpen ? "is-open" : ""}`} aria-label="About the GTA 5 map">
-      <div className="gta-map-about__header"><h2>About this map</h2><button type="button" aria-label="Close about panel" onClick={() => setInfoOpen(false)}><X size={18} /></button></div>
-      <div className="gta-map-about__body">{children}</div>
-    </aside>
   </section>;
 }

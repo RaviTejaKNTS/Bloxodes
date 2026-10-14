@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
-import { MobileSiteHeader } from "@/components/MobileSiteHeader";
-import { SiteSidebar } from "@/components/SiteSidebar";
+import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { RecentVisitTracker } from "@/components/RecentVisitTracker";
 import { signedOutSidebarAccount } from "@/lib/site-navigation";
 
 type SiteShellProps = {
@@ -18,12 +18,12 @@ const inter = Inter({
 export function SiteShell({ children }: SiteShellProps) {
   return (
     <div className={`${inter.className} min-h-screen`}>
-      <SiteSidebar pathname="" />
-      <MobileSiteHeader account={signedOutSidebarAccount} initialPathname="" />
-      <div className="flex min-h-screen flex-col xl:pl-[14.5rem]">
+      <SiteHeader account={signedOutSidebarAccount} />
+      <div className="flex min-h-[calc(100vh-3.5rem)] flex-col">
         <main className="flex-1">{children}</main>
         <SiteFooter />
       </div>
+      <RecentVisitTracker />
     </div>
   );
 }

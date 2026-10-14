@@ -3,147 +3,132 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
+import { trapTabKey } from "@/components/SiteMoreDrawer";
 import { trackEvent } from "@/lib/analytics";
+import { resolveSearchScope } from "@/lib/site-navigation";
 
 const UnifiedSearch = dynamic(() => import("@/components/UnifiedSearch").then((mod) => mod.UnifiedSearch), {
   ssr: false,
   loading: () => (
-    <div className="space-y-3">
-      <div className="h-10 rounded-[var(--radius-lg)] border border-border/60 bg-surface animate-pulse" />
-      <div className="space-y-2">
-        <div className="h-12 rounded-[var(--radius-lg)] border border-border/60 bg-surface animate-pulse" />
-        <div className="h-12 rounded-[var(--radius-lg)] border border-border/60 bg-surface animate-pulse" />
-        <div className="h-12 rounded-[var(--radius-lg)] border border-border/60 bg-surface animate-pulse" />
-      </div>
+    <div className="space-y-2 p-3">
+      <div className="h-10 animate-pulse rounded-lg bg-sidebar-accent/60" />
+      <div className="h-11 animate-pulse rounded-lg bg-sidebar-accent/40" />
     </div>
   )
 });
 
+function isOpenShortcut(event: KeyboardEvent) {
+  return event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey;
+}
+
+/**
+ * Centered search popup. Opens from any `[data-search-trigger]` element, the
+ * `bloxodes:open-search` window event, or Cmd/Ctrl+K. Search is scoped to the current section.
+ */
 export function GlobalSearchOverlay() {
+  const pathname = usePathname() ?? "/";
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const previousActiveElement = useRef<HTMLElement | null>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const returnFocus = useRef<HTMLElement | null>(null);
+  const isOpenRef = useRef(false);
+  isOpenRef.current = isOpen;
 
   const openOverlay = useCallback(() => {
-    previousActiveElement.current = document.activeElement as HTMLElement | null;
+    returnFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     setIsOpen(true);
   }, []);
 
-  const closeOverlay = useCallback(() => {
-    setIsOpen(false);
-    previousActiveElement.current?.focus?.();
-  }, []);
+  const closeOverlay = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    function handleTrigger(event: Event) {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    function handleTrigger(event: MouseEvent) {
       const target = event.target as HTMLElement | null;
-      if (!target) return;
-      if (!target.closest('[data-search-trigger]')) return;
+      if (!target?.closest("[data-search-trigger]")) return;
       event.preventDefault();
       openOverlay();
     }
+    function handleShortcut(event: KeyboardEvent) {
+      if (!isOpenShortcut(event)) return;
+      event.preventDefault();
+      if (isOpenRef.current) setIsOpen(false);
+      else openOverlay();
+    }
 
     document.addEventListener("click", handleTrigger);
+    document.addEventListener("keydown", handleShortcut);
+    window.addEventListener("bloxodes:open-search", openOverlay);
     return () => {
       document.removeEventListener("click", handleTrigger);
+      document.removeEventListener("keydown", handleShortcut);
+      window.removeEventListener("bloxodes:open-search", openOverlay);
     };
   }, [openOverlay]);
-
-  useEffect(() => {
-    function handleOpenEvent() {
-      openOverlay();
-    }
-
-    window.addEventListener("bloxodes:open-search", handleOpenEvent);
-    return () => {
-      window.removeEventListener("bloxodes:open-search", handleOpenEvent);
-    };
-  }, [openOverlay]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closeOverlay();
-      }
-    }
-
-    function onFocus(event: FocusEvent) {
-      const modal = document.getElementById("global-search-overlay");
-      if (!modal) return;
-      if (!modal.contains(event.target as Node)) {
-        const focusable = modal.querySelector<HTMLElement>("button, input, a, textarea, select, [tabindex]:not([tabindex='-1'])");
-        focusable?.focus();
-      }
-    }
-
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("focus", onFocus, true);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("focus", onFocus, true);
-    };
-  }, [isOpen, closeOverlay]);
 
   useEffect(() => {
     if (!isOpen) return undefined;
+    trackEvent("search_open");
 
-    const { overflow, touchAction } = document.body.style;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.defaultPrevented) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsOpen(false);
+      } else if (event.key === "Tab") {
+        trapTabKey(event, panelRef.current);
+      }
+    }
+    // Keep focus in the popup if it lands outside (for example on the page behind the backdrop).
+    function onFocusIn(event: FocusEvent) {
+      const panel = panelRef.current;
+      if (panel && !panel.contains(event.target as Node)) {
+        panel.querySelector<HTMLElement>("input")?.focus();
+      }
+    }
+
+    const { overflow } = document.body.style;
     document.body.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
-
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", onFocusIn);
     return () => {
       document.body.style.overflow = overflow;
-      document.body.style.touchAction = touchAction;
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", onFocusIn);
+      const target = returnFocus.current;
+      returnFocus.current = null;
+      if (target?.isConnected) target.focus();
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      trackEvent("search_open");
-    }
-  }, [isOpen]);
+  if (!isMounted || !isOpen) return null;
 
-  if (!isMounted) {
-    return null;
-  }
-
-  const overlayContent = isOpen ? (
+  return createPortal(
     <div
-      className="fixed inset-0 z-[1000] flex items-start justify-center bg-black/60 px-4 py-8"
-      role="dialog"
-      aria-modal="true"
+      className="fixed inset-0 z-[100000] flex items-start justify-center bg-black/60 px-3 pt-3 backdrop-blur-[2px] sm:px-4 sm:pt-[12vh]"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) closeOverlay();
       }}
     >
       <div
+        ref={panelRef}
         id="global-search-overlay"
-        className="relative w-full max-w-3xl rounded-[var(--radius-lg)] border border-border/60 bg-surface p-6 shadow-soft max-h-[85vh] overflow-y-auto"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search"
+        className="w-full max-w-xl overflow-hidden rounded-xl border border-border/70 bg-background shadow-2xl"
       >
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-semibold text-foreground">Search Bloxodes</h2>
-          <button
-            type="button"
-            onClick={closeOverlay}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border/60 text-sm text-muted transition hover:border-accent hover:text-accent"
-            aria-label="Close search"
-          >
-            ×
-          </button>
-        </div>
-        <div className="mt-4">
-          <UnifiedSearch autoFocus />
-        </div>
+        <UnifiedSearch pageScope={resolveSearchScope(pathname)} autoFocus onNavigate={closeOverlay} onClose={closeOverlay} />
       </div>
-    </div>
-  ) : null;
-
-  return overlayContent ? createPortal(overlayContent, document.body) : null;
+    </div>,
+    document.body
+  );
 }

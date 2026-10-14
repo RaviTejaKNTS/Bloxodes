@@ -61,7 +61,7 @@ export function SiteFooter() {
 
   return (
     <footer className="mt-16 border-t border-border/60">
-      <div className="container grid gap-10 py-10 md:grid-cols-[1.2fr_1fr_1.3fr]">
+      <div className="site-container grid gap-10 py-10 md:grid-cols-[1.2fr_1fr_1.3fr]">
         <section className="space-y-5">
           <Link href="/" className="inline-flex w-fit items-center text-foreground" aria-label="Bloxodes home">
             <Image
@@ -97,7 +97,7 @@ export function SiteFooter() {
         </section>
       </div>
       <div className="border-t border-border/50">
-        <div className="container py-4 text-xs text-muted">
+        <div className="site-container py-4 text-xs text-muted">
           <p>© {currentYear} Bloxodes. Not affiliated with Roblox.</p>
         </div>
       </div>

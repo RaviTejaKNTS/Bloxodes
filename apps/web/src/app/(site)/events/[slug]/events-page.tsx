@@ -1,11 +1,15 @@
+import { PageSidebar } from "@/components/PageSidebar";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
+import { ContentCopyNodes } from "@/components/games/GameContentPage";
 import { formatDistanceToNow } from "date-fns";
 import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
+import "@/styles/ads-tables.css";
+import { ChunkedTableScrollSync } from "@/components/ChunkedTableScrollSync";
 import { ContentSlot } from "@/components/ContentSlot";
 import { SocialShare } from "@/components/SocialShare";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
@@ -578,8 +582,8 @@ function UpcomingEventBlock({ event }: { event: UpcomingEventView }) {
     : null;
 
   return (
-    <section className="space-y-8 md-copy-scope">
-      <header className="space-y-3">
+    <>
+      <header className="ads-content-event space-y-3 md-copy-scope">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <h2 className="text-[2rem] font-semibold leading-[1.15] text-foreground">
             {eventName} Event: Release Date and Time, Countdown and What to Expect
@@ -591,23 +595,24 @@ function UpcomingEventBlock({ event }: { event: UpcomingEventView }) {
         ) : null}
       </header>
 
-      <div className="space-y-4">
+      <div className="ads-content-event-time">
         <h3 className="text-[1.6rem] font-semibold leading-[1.2] text-foreground">
           When is the {eventName} start time
         </h3>
+      </div>
         <EventTimePanel
+          flat
           startUtc={event.start_utc}
           endUtc={event.end_utc}
           eventName={eventName}
           thumbnailUrl={event.primary_thumbnail_url}
         />
-      </div>
 
 
       {detailNodes ? (
-        <div className="space-y-4">
-          {detailNodes}
-          <div>
+        <>
+          <ContentCopyNodes nodes={detailNodes} group={`event-${event.event_id}-details`} />
+          <div className="ads-content-event-link">
             <a
               href={`https://www.roblox.com/events/${event.event_id}`}
               target="_blank"
@@ -617,9 +622,9 @@ function UpcomingEventBlock({ event }: { event: UpcomingEventView }) {
               View event on Roblox
             </a>
           </div>
-        </div>
+        </>
       ) : null}
-    </section>
+    </>
   );
 }
 
@@ -724,59 +729,83 @@ function CurrentEventCard({ event }: { event: CurrentEventView }) {
   );
 }
 
+const PAST_EVENTS_CHUNK_SIZE = 6;
+
 function PastEventsTable({ events }: { events: VirtualEvent[] }) {
   if (!events.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/70 bg-surface-muted/60 p-6 md-copy-scope">
+      <div className="ads-tables-event-empty rounded-2xl border border-dashed border-border/70 bg-surface-muted/60 p-6 md-copy-scope">
         <p data-md-copy="true" className="md-copy-node md-copy-p">No past events listed yet.</p>
       </div>
     );
   }
 
+  const chunks = Array.from({ length: Math.ceil(events.length / PAST_EVENTS_CHUNK_SIZE) }, (_, index) =>
+    events.slice(index * PAST_EVENTS_CHUNK_SIZE, (index + 1) * PAST_EVENTS_CHUNK_SIZE)
+  );
+
+  // Each chunk is its own #article-body child so ads can fall between rows.
   return (
-    <div className="table-scroll-wrapper">
-      <div className="table-scroll-inner game-copy">
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th className="table-col-compact">Starts (PT)</th>
-              <th className="table-col-compact">Ends (PT)</th>
-              <th className="table-col-compact">Guide</th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.map((event) => {
-              const eventName = getEventDisplayName(event);
-              const startLabel = formatPtDateTime(event.start_utc) ?? "TBA";
-              const endLabel = formatPtDateTime(event.end_utc) ?? "TBA";
-              return (
-                <tr key={event.event_id}>
-                  <td className="font-semibold text-foreground">{eventName}</td>
-                  <td>{startLabel}</td>
-                  <td>{endLabel}</td>
-                  <td>
-                    {event.guide_slug ? (
-                      <Link
-                        href={`/articles/${event.guide_slug}`}
-                        className="text-xs font-semibold uppercase tracking-wide text-accent underline-offset-4 hover:underline"
-                        data-analytics-event="event_guide_click"
-                        data-analytics-event-id={event.event_id}
-                        data-analytics-guide-slug={event.guide_slug}
-                      >
-                        Guide
-                      </Link>
-                    ) : (
-                      <span className="text-xs text-muted">—</span>
-                    )}
-                  </td>
+    <>
+      {chunks.map((rows, index) => (
+        <div
+          key={index}
+          className={[
+            "ads-tables-chunk ads-tables-event-chunk table-scroll-wrapper",
+            index === 0 ? "ads-tables-chunk-first" : null,
+            index === chunks.length - 1 ? "ads-tables-chunk-last" : null
+          ].filter(Boolean).join(" ")}
+        >
+          <div className="table-scroll-inner game-copy">
+            <table>
+              <colgroup>
+                <col />
+                <col className="ads-tables-event-col-start" />
+                <col className="ads-tables-event-col-end" />
+                <col className="ads-tables-event-col-guide" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Event</th>
+                  <th className="table-col-compact">Starts (PT)</th>
+                  <th className="table-col-compact">Ends (PT)</th>
+                  <th className="table-col-compact">Guide</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
+              </thead>
+              <tbody>
+                {rows.map((event) => {
+                  const eventName = getEventDisplayName(event);
+                  const startLabel = formatPtDateTime(event.start_utc) ?? "TBA";
+                  const endLabel = formatPtDateTime(event.end_utc) ?? "TBA";
+                  return (
+                    <tr key={event.event_id}>
+                      <td className="font-semibold text-foreground">{eventName}</td>
+                      <td>{startLabel}</td>
+                      <td>{endLabel}</td>
+                      <td>
+                        {event.guide_slug ? (
+                          <Link
+                            href={`/articles/${event.guide_slug}`}
+                            className="text-xs font-semibold uppercase tracking-wide text-accent underline-offset-4 hover:underline"
+                            data-analytics-event="event_guide_click"
+                            data-analytics-event-id={event.event_id}
+                            data-analytics-guide-slug={event.guide_slug}
+                          >
+                            Guide
+                          </Link>
+                        ) : (
+                          <span className="text-xs text-muted">—</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+    </>
   );
 }
 
@@ -918,7 +947,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
 
   return (
     <div className="space-y-12">
-      <div className="grid gap-8 content-sidebar-grid">
+      <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
       <article className="min-w-0">
         <header className="mb-6 space-y-3">
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.25em] text-muted">
@@ -966,14 +995,12 @@ export async function renderEventsPage({ slug }: { slug: string }) {
 
           <ContentSlot slot={EVENTS_IN_ARTICLE_AD_SLOT} className="my-8" />
 
-          <div className="space-y-10">
-            <section className="space-y-6">
               {upcomingEvents.length ? (
-                <div className="space-y-10">
+                <>
                   {upcomingEvents.map((event) => (
                     <UpcomingEventBlock key={event.event_id} event={event} />
                   ))}
-                </div>
+                </>
               ) : (
                 (() => {
                   // Get the last known event (current or most recent past event)
@@ -1033,37 +1060,32 @@ export async function renderEventsPage({ slug }: { slug: string }) {
                   }
                 })()
               )}
-            </section>
-
             {currentEvents.length > 0 ? (
-              <section className="space-y-6">
-                <div className="flex flex-wrap items-end justify-between gap-3">
+              <Fragment>
+                <div className="ads-content-event-current-heading flex flex-wrap items-end justify-between gap-3">
                   <div className="space-y-1">
                     <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">Live now</p>
                     <h2 className="text-[2rem] font-semibold leading-[1.15] text-foreground">Current events</h2>
                   </div>
                   <span className="text-xs text-muted">{currentEvents.length} active</span>
                 </div>
-                <div className="space-y-6">
                   {currentEvents.map((event) => (
-                    <CurrentEventCard key={event.event_id} event={event} />
+                    <div key={event.event_id} className="ads-content-current-event"><CurrentEventCard event={event} /></div>
                   ))}
-                </div>
-              </section>
+              </Fragment>
             ) : null}
 
-            <section className="space-y-6">
-              <div className="flex flex-wrap items-end justify-between gap-3">
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">Archive</p>
-                  <h2 className="text-[2rem] font-semibold leading-[1.15] text-foreground">Past events</h2>
-                </div>
-                <span className="text-xs text-muted">{grouped.past.length} events</span>
+            <div className="ads-content-event-archive flex flex-wrap items-end justify-between gap-3">
+              <div className="space-y-1">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">Archive</p>
+                <h2 className="text-[2rem] font-semibold leading-[1.15] text-foreground">Past events</h2>
               </div>
-              <PastEventsTable events={pastEvents} />
-            </section>
-          </div>
+              <span className="text-xs text-muted">{grouped.past.length} events</span>
+            </div>
+            <PastEventsTable events={pastEvents} />
         </section>
+
+        <ChunkedTableScrollSync chunkSelector=".ads-tables-event-chunk" />
 
         <div className="mt-10">
           <CommentsSection entityType="event" entityId={page.id} />
@@ -1076,7 +1098,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbData }} />
       </article>
 
-      <aside className="space-y-4">
+      <PageSidebar>
         <section className="space-y-3">
           <SocialShare
             url={canonicalUrl}
@@ -1087,7 +1109,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
         </section>
 
         <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="events" />
-      </aside>
+      </PageSidebar>
       </div>
       <MoreEvents excludeSlug={canonicalSlug} />
     </div>

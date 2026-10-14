@@ -1,8 +1,9 @@
+import { ToolPageLayout } from "./ToolPageLayout";
 import type { Metadata } from "next";
 import type { ComponentProps, ReactNode } from "react";
 
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 import { ContentSlot } from "@/components/ContentSlot";
 import { MoreTools } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -132,7 +133,7 @@ export async function DedicatedToolPage({
   };
 
   return (
-    <>
+    <ToolPageLayout toolCode={toolCode} title={title} canonicalPath={canonicalPath ?? `/tools/${toolCode}`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
@@ -155,14 +156,14 @@ export async function DedicatedToolPage({
       >
         {introNodes}
         <ContentSlot slot={TOOL_AD_SLOT} className="my-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
-        {children}
+        <div className="ads-tools-widget">{children}</div>
         {howNodes}
         <ContentSlot slot={TOOL_AD_SLOT} className="my-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
         {faqNodes.length ? (
           <>
             <ContentSlot slot={TOOL_AD_SLOT} className="w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
-            <ContentFaq
+            <ToolFaq
               items={faqNodes.map((faq, index) => ({
                 id: `${faq.q}-${index}`,
                 question: faq.q,
@@ -181,6 +182,6 @@ export async function DedicatedToolPage({
 
       <ContentSlot slot={TOOL_AD_SLOT} className="mt-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
       {relatedContent === undefined ? <MoreTools excludeCode={toolCode} /> : relatedContent}
-    </>
+    </ToolPageLayout>
   );
 }

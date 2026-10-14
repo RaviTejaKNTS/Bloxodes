@@ -1,0 +1,162 @@
+.catalog-main {
+  container: catalog / inline-size;
+}
+.catalog-main .catalog-stream {
+  container: catalog-stream / inline-size;
+  grid-template-columns: minmax(0, 1fr);
+}
+.catalog-main .catalog-stream > [hidden],
+.catalog-section-grid > [hidden] {
+  display: none;
+}
+.catalog-stream > [hidden] + :is(.mv-ad-box, .adunitwrapper) {
+  display: none !important;
+}
+.catalog-section-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+.catalog-section-grid > * { min-width: 0; }
+.catalog-stream--sectioned { grid-auto-flow: row; }
+.catalog-stream .catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+}
+.catalog-toolbar > * {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+.catalog-toolbar > :first-child { flex-basis: 18rem; }
+.catalog-toolbar > :last-child { flex: 0 1 auto; }
+.catalog-main .catalog-navigation-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+.catalog-stream .catalog-faq-heading {
+  border-top: 1px solid rgb(var(--color-border) / 0.6);
+  padding-top: 1.5rem;
+}
+.catalog-stream .catalog-faq-item {
+  border-top: 1px solid rgb(var(--color-border) / 0.6);
+  padding-block: 1rem 0;
+}
+.catalog-stream .catalog-faq-heading + .catalog-faq-item {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: -0.5rem;
+}
+/*
+ * Cards per row by main-column width. Each card stays close to its narrowest width in the old
+ * full-width layout, so desktop rows hold about as many cards as before the right rail.
+ * Small: index, item, promo and decal cards. Medium: option, dictionary and error cards.
+ * Music cards are compact enough for three from a 1280px laptop's main column.
+ */
+@container catalog (min-width: 420px) {
+  .catalog-main .journey-content-stream--decals,
+  .catalog-main .journey-content-stream--color-codes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 460px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--index, .journey-content-stream--catalog-items, .journey-content-stream--promo) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 560px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--music, .journey-content-stream--options, .journey-content-stream--game-ids, .journey-content-stream--dictionary, .journey-content-stream--errors) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .catalog-main .journey-content-stream--color-codes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 600px) {
+  .catalog-main .catalog-navigation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 700px) {
+  .catalog-main .journey-content-stream--decals {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 740px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--index, .journey-content-stream--catalog-items, .journey-content-stream--promo),
+  .catalog-main .catalog-navigation-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 760px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--mesh, .journey-content-stream--font) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .catalog-main .journey-content-stream--color-codes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 800px) {
+  .catalog-main .journey-content-stream--color-codes {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 820px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--music) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 850px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--options, .journey-content-stream--dictionary, .journey-content-stream--errors) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 930px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--index, .journey-content-stream--catalog-items, .journey-content-stream--promo, .journey-content-stream--decals),
+  .catalog-main .catalog-navigation-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .catalog-main .journey-content-stream--color-codes {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+@container catalog (min-width: 1100px) {
+  .catalog-main .journey-content-stream:is(.journey-content-stream--font) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* Sectioned pages: one row per group. Keep in sync with CATALOG_CARD_BREAKPOINTS in CatalogRowGroups.tsx. */
+@container catalog-stream (min-width: 460px) {
+  .catalog-section-grid:is(.catalog-section-grid--small, .catalog-section-grid--promo) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container catalog-stream (min-width: 560px) {
+  .catalog-section-grid:is(.catalog-section-grid--medium, .catalog-section-grid--large) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container catalog-stream (min-width: 740px) {
+  .catalog-section-grid:is(.catalog-section-grid--small, .catalog-section-grid--promo) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@container catalog-stream (min-width: 850px) {
+  .catalog-section-grid:is(.catalog-section-grid--medium) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@container catalog-stream (min-width: 930px) {
+  .catalog-section-grid:is(.catalog-section-grid--small) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@container catalog-stream (min-width: 1000px) {
+  .catalog-section-grid:is(.catalog-section-grid--promo) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .catalog-section-grid:is(.catalog-section-grid--large) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+/* Section headings and their complete rows always span the stream. */
+.catalog-main .catalog-stream.catalog-stream--sectioned { grid-template-columns: minmax(0, 1fr); }
+
+.catalog-main .copy-with-sidebar-space > [data-md-copy],
+.catalog-main .copy-with-sidebar-space > .md-copy-node { max-width: 50rem; }
+.catalog-stream .catalog-faq-item { margin-top: -0.5rem; }
+
+.catalog-row-group--free-items .catalog-section-grid { gap: 1rem; }
+.catalog-row-group--free-items + .catalog-row-group--free-items { margin-top: -0.5rem; }
+.catalog-row-group--emotes .catalog-section-grid { gap: 0.75rem; }
+.catalog-row-group--emotes + .catalog-row-group--emotes { margin-top: -0.75rem; }
+
+.catalog-main .journey-content-stream--prose > .catalog-faq-item { margin-top: 1rem; }

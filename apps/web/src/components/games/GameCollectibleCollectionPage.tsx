@@ -1,8 +1,6 @@
 import { safeJsonLd } from "@/lib/seo";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
-import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { GameCollectibleChecklist, type GameCollectibleSection } from "@/components/games/GameCollectibleChecklist";
@@ -132,26 +130,20 @@ export function renderGameCollectibleCollectionPage({
         <UpdatedTimestamp value={updatedAt} />
       </header>
 
-      <article id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--interactive space-y-8">
-        {introNodes.length ? <section className="max-w-3xl space-y-4">{introNodes}</section> : null}
-        <CatalogAdSlot />
-        <GameCollectibleChecklist
-          namespace={page.namespace}
-          code={config.code}
-          gameName={config.gameName}
-          collectionLabel={config.label}
-          sections={sections}
-          cardFields={cardFields}
-          fieldLabels={Object.fromEntries(Object.entries(dataset.meta?.display?.fieldPresentation ?? {}).flatMap(([key, value]) =>
-            typeof value === "object" && value?.label ? [[key, value.label]] : []
-          ))}
-          collectionOptions={collectionOptions}
-        />
-        <CatalogAdSlot />
-        {howNodes.length ? <section className="max-w-3xl space-y-3">{howNodes}</section> : null}
-        {detailNodes.length ? <section className="max-w-3xl space-y-3">{detailNodes}</section> : null}
-        {faqNodes.length ? <ContentFaq items={faqNodes} /> : null}
-      </article>
+      <GameCollectibleChecklist
+        namespace={page.namespace}
+        code={config.code}
+        gameName={config.gameName}
+        collectionLabel={config.label}
+        sections={sections}
+        cardFields={cardFields}
+        fieldLabels={Object.fromEntries(Object.entries(dataset.meta?.display?.fieldPresentation ?? {}).flatMap(([key, value]) =>
+          typeof value === "object" && value?.label ? [[key, value.label]] : []
+        ))}
+        collectionOptions={collectionOptions}
+        beforeToolbar={<>{introNodes}</>}
+        afterContent={<>{howNodes}{detailNodes}<CollectionFaq items={faqNodes} /></>}
+      />
 
       {contentHtml?.id ? <CommentsSection entityType={page.namespace === "gta" ? "gta_wiki_collection" : page.namespace === "red-dead" ? "red_dead_wiki_collection" : page.namespace === "minecraft" ? "minecraft_wiki_collection" : "game_collection"} entityId={contentHtml.id} /> : null}
     </div>

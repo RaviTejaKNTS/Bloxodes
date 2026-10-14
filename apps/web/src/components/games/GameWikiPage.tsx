@@ -1,5 +1,8 @@
+import { PageSidebar } from "@/components/PageSidebar";
 import { safeJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
+import { Fragment } from "react";
+import { ContentCopyNodes } from "./GameContentPage";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
@@ -129,12 +132,10 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
       </header>
 
       {extraLinks.map(link => <p key={link.href}><Link href={link.href} className="text-accent underline underline-offset-4">{link.title}</Link></p>)}
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
+      <div className="grid gap-8 content-sidebar-grid">
         <article id="article-body" itemProp="articleBody" className="min-w-0 space-y-9 journey-content-stream journey-content-stream--prose">
           {descriptionHtml ? (
-            <section className="article-content md-copy-scope game-copy max-w-3xl min-w-0 text-foreground">
-              {renderPageContentNodes(descriptionHtml, `${page.slug}-description`)}
-            </section>
+            <ContentCopyNodes nodes={renderPageContentNodes(descriptionHtml, `${page.slug}-description`)} group="game-wiki-intro" className="game-copy max-w-3xl min-w-0 text-foreground" />
           ) : null}
 
           {hasGameDetails ? (
@@ -144,11 +145,10 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
           ) : null}
 
           {collectionGroups.map((group) => (
-            <section key={group.key} className="space-y-6" aria-labelledby={`${namespace}-${group.key}-heading`}>
-              <h2 id={`${namespace}-${group.key}-heading`} className="text-2xl font-semibold leading-tight text-foreground">{group.label}</h2>
-              <div className="space-y-6">
+            <Fragment key={group.key}>
+              <h2 id={`${namespace}-${group.key}-heading`} className="ads-content-section-heading ads-content-game-section-heading text-2xl font-semibold leading-tight text-foreground">{group.label}</h2>
                 {group.entries.map(({ collection, copyHtml, imageUrls }) => (
-                  <section key={collection.id} className="space-y-4" data-journey-item>
+                  <section key={collection.id} className="ads-content-collection ads-content-game-collection space-y-4" data-journey-item>
                     <h3 className="text-xl font-semibold leading-snug text-foreground">{collection.display_name}</h3>
                     {copyHtml ? (
                       <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
@@ -162,24 +162,23 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
                     />
                   </section>
                 ))}
-              </div>
-            </section>
+            </Fragment>
           ))}
 
           {controls.length ? <section className="max-w-3xl space-y-4"><h2 className="text-2xl font-semibold">Controls</h2><dl className="space-y-3">{controls.map((row,i) => <div key={i} className="grid gap-1 sm:grid-cols-2"><dt className="font-medium">{row.action}</dt><dd>{Object.entries(row).filter(([key,value]) => key !== "action" && typeof value === "string" && value.trim()).map(([key,value]) => `${key}: ${value}`).join("; ")}</dd></div>)}</dl></section> : null}
           {tipsHtml ? (
-            <section className="article-content md-copy-scope game-copy min-w-0">
-              <h2>{page.game_short_title || page.game_title} {isPrelaunch ? "pre-launch notes" : "gameplay tips"}</h2>
-              {renderPageContentNodes(tipsHtml, `${page.slug}-tips`)}
-            </section>
+            <>
+              <div className="ads-content-tips-heading article-content md-copy-scope game-copy min-w-0"><h2>{page.game_short_title || page.game_title} {isPrelaunch ? "pre-launch notes" : "gameplay tips"}</h2></div>
+              <ContentCopyNodes nodes={renderPageContentNodes(tipsHtml, `${page.slug}-tips`)} group="game-wiki-tips" className="game-copy min-w-0" />
+            </>
           ) : null}
         </article>
 
-        <aside className="space-y-4">
+        <PageSidebar>
           {hasGameDetails ? <section aria-label="Game details" className="hidden lg:block">
             <GameDetails page={page} releases={releases} platforms={platforms} />
           </section> : null}
-        </aside>
+        </PageSidebar>
 
         <div className="min-w-0 lg:col-start-1">
           <CommentsSection entityType={legacyWikiCommentType(namespace)} entityId={page.id} />

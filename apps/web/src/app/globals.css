@@ -23,6 +23,8 @@
   --sidebar-accent-foreground: 224 18% 18%;
   --sidebar-border: 220 12% 84%;
   --sidebar-ring: 243 75% 59%;
+  /* Height of the sticky site header. Sticky page elements and anchors sit below it. */
+  --site-header-height: 3.5rem;
 }
 
 .dark {
@@ -44,6 +46,10 @@
   --sidebar-accent-foreground: 220 16% 92%;
   --sidebar-border: 220 8% 19%;
   --sidebar-ring: 221 100% 76%;
+}
+
+html {
+  scroll-padding-top: calc(var(--site-header-height) + 0.75rem);
 }
 
 html,
@@ -93,6 +99,49 @@ body {
     border-radius: 9999px;
     @apply inline-flex items-center gap-2 border border-border/50 bg-surface-muted px-3 py-1 text-xs font-medium text-muted;
   }
+
+  /*
+   * Page width shared by the header, game bar, content and footer. Tablets keep the stepped
+   * container widths; from 1024px the page uses the full window up to 1536px.
+   */
+  .site-container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .site-container {
+      max-width: 640px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .site-container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .site-container {
+      max-width: 1536px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .site-container {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  /*
+   * Wide main columns (collections, catalogs, hubs): markdown text keeps a comfortable reading
+   * width while grids, tables and widgets use the full column. Low specificity on purpose, so
+   * any page-level max-width still wins.
+   */
+  :where(#article-body) > :where(p, ul, ol, blockquote, h2, h3, h4)[data-md-copy] {
+    max-width: 50rem;
+  }
 }
 
 @layer utilities {
@@ -102,9 +151,19 @@ body {
     }
   }
 
+  /*
+   * From 1200px the right rail keeps a fixed 336px (Mediavine needs 300px or more for sticky
+   * sidebar ads) and the main column takes the rest. Prose pages cap the main column at a
+   * comfortable reading width and keep the rail on the right edge.
+   */
   @media (min-width: 1200px) {
     .content-sidebar-grid {
-      grid-template-columns: minmax(0, 3fr) minmax(300px, 1.25fr);
+      grid-template-columns: minmax(0, 1fr) 21rem;
+    }
+
+    .content-sidebar-grid.content-sidebar-grid--prose {
+      grid-template-columns: minmax(0, 50rem) 21rem;
+      justify-content: space-between;
     }
   }
 

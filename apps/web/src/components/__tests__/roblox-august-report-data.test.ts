@@ -71,6 +71,7 @@ describe("August 2026 Roblox report data", () => {
   it("keeps the internal route out of archive, navigation, sitemap, feed, and revalidation wiring", () => {
     const files = [
       "src/app/(site)/stats/reports/page.tsx",
+      "src/data/reports/published.ts",
       "src/app/(site)/stats/page.tsx",
       "src/app/sitemaps/stats.xml/route.ts",
       "src/app/feed.xml/route.ts",

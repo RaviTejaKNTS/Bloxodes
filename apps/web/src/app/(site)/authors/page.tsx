@@ -4,6 +4,7 @@ import { AuthorSocialLinks } from "@/components/AuthorSocialLinks";
 import { authorAvatarUrl } from "@/lib/avatar";
 import { listAuthors } from "@/lib/db";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
+import { HubsSidebarLayout, POPULAR_LINKS } from "@/components/hubs/HubsSidebar";
 
 const title = "Bloxodes Authors";
 const description = "Meet the editors and contributors who verify Roblox codes for Bloxodes.";
@@ -57,6 +58,7 @@ export default async function AuthorsIndexPage() {
   });
 
   return (
+    <HubsSidebarLayout canonicalPath="/authors" title={title} shareHeading="Share with your friends" heading="Popular pages" links={POPULAR_LINKS}>
     <section className="space-y-8">
       <header className="space-y-3">
         <h1 className="text-4xl font-semibold text-foreground">{title}</h1>
@@ -142,5 +144,6 @@ export default async function AuthorsIndexPage() {
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
     </section>
+    </HubsSidebarLayout>
   );
 }

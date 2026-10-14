@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { FiClock } from "react-icons/fi";
+import { ChunkedTableScrollSync } from "@/components/ChunkedTableScrollSync";
 import { MorePuzzles } from "@/components/more-content";
 import type { ContentFaqItem } from "@/components/ContentFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -16,11 +17,14 @@ import {
 } from "@/lib/puzzles";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { PuzzleVisualAnswer } from "./components/PuzzleVisualAnswer";
+import "@/styles/ads-tables.css";
 
 export const PUZZLES_DESCRIPTION =
   "Daily puzzle answers for Wordle, Connections, Strands, Spelling Bee, Letter Boxed, Sudoku, Pips, Contexto, Letroso, and LinkedIn games.";
 
 type AnyRecord = Record<string, unknown>;
+
+const ARCHIVE_CHUNK_SIZE = 12;
 
 const puzzleCardNames: Record<string, string> = {
   wordle: "Wordle",
@@ -47,7 +51,7 @@ function asString(value: unknown): string {
   return typeof value === "string" ? value : "";
 }
 
-function puzzleCardName(page: PuzzlePage) {
+export function puzzleCardName(page: Pick<PuzzlePage, "slug" | "title">) {
   return puzzleCardNames[page.slug] ?? page.title.replace(/^Today's\s+/i, "").replace(/\s+Answer$/i, "");
 }
 
@@ -249,6 +253,9 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
   const updatedLabel = formatUpdatedDate(today?.fetched_at ?? page.content_updated_at ?? page.updated_at ?? page.published_at);
   const baseUrl = SITE_URL.replace(/\/$/, "");
   const previousAnswers = [yesterday, ...archive].filter((answer): answer is PuzzleAnswer => Boolean(answer));
+  const archiveChunks = Array.from({ length: Math.ceil(previousAnswers.length / ARCHIVE_CHUNK_SIZE) }, (_, index) =>
+    previousAnswers.slice(index * ARCHIVE_CHUNK_SIZE, (index + 1) * ARCHIVE_CHUNK_SIZE)
+  );
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: baseUrl },
     { name: "Games", url: `${baseUrl}/games` },
@@ -301,37 +308,53 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
         {description}
 
         {previousAnswers.length ? (
-          <section>
+          <>
             <h2>Answer Archive</h2>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full min-w-[420px] border-collapse text-sm">
-                <thead>
-                  <tr className="text-left text-xs uppercase tracking-[0.18em] text-muted">
-                    <th className="py-2 pr-4">Date</th>
-                    <th className="py-2 pr-4">Puzzle</th>
-                    <th className="py-2">Archive</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {previousAnswers.map((answer) => (
-                    <tr key={answer.id}>
-                      <td className="py-3 pr-4 text-foreground">
-                        {formatDate(answer.answer_date)}
-                        {yesterday?.id === answer.id ? <span className="ml-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Yesterday</span> : null}
-                      </td>
-                      <td className="py-3 pr-4 text-muted">{puzzleIdLabel(answer) ?? "-"}</td>
-                      <td className="py-3"><Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}/${answer.answer_date}`}>View answer</Link></td>
+            {/* Each chunk is its own #article-body child so ads can fall between rows. */}
+            {archiveChunks.map((rows, index) => (
+              <div
+                key={index}
+                className={[
+                  "ads-tables-chunk ads-tables-puzzle-chunk overflow-x-auto",
+                  index === 0 ? "ads-tables-chunk-first mt-4" : null,
+                  index === archiveChunks.length - 1 ? "ads-tables-chunk-last" : null
+                ].filter(Boolean).join(" ")}
+              >
+                <table className="w-full min-w-[420px] border-collapse text-sm">
+                  <colgroup>
+                    <col className="ads-tables-puzzle-col-date" />
+                    <col className="ads-tables-puzzle-col-id" />
+                    <col className="ads-tables-puzzle-col-link" />
+                  </colgroup>
+                  <thead>
+                    <tr className="text-left text-xs uppercase tracking-[0.18em] text-muted">
+                      <th className="py-2 pr-4">Date</th>
+                      <th className="py-2 pr-4">Puzzle</th>
+                      <th className="py-2">Archive</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
+                  </thead>
+                  <tbody>
+                    {rows.map((answer) => (
+                      <tr key={answer.id}>
+                        <td className="py-3 pr-4 text-foreground">
+                          {formatDate(answer.answer_date)}
+                          {yesterday?.id === answer.id ? <span className="ml-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Yesterday</span> : null}
+                        </td>
+                        <td className="py-3 pr-4 text-muted">{puzzleIdLabel(answer) ?? "-"}</td>
+                        <td className="py-3"><Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}/${answer.answer_date}`}>View answer</Link></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
+          </>
         ) : null}
 
         <PuzzleFaq items={faqItems} />
       </section>
 
+      <ChunkedTableScrollSync chunkSelector=".ads-tables-puzzle-chunk" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }} />
       <MorePuzzles excludeSlug={page.slug} />

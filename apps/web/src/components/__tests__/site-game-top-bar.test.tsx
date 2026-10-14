@@ -9,14 +9,9 @@ vi.mock("next/image", () => ({ default: () => null }));
 vi.mock("next/link", () => ({
   default: ({ children, ...props }: ComponentProps<"a">) => <a {...props}>{children}</a>
 }));
-vi.mock("@/components/AccountSheetButton", () => ({
-  AccountSheetButton: ({ className }: { className: string }) => <button className={className}>Account</button>
-}));
-
 import { SiteGameTopBarClient } from "@/components/SiteGameTopBarClient";
 import { parseGameTopNavPath } from "@/lib/game-top-nav-path";
 
-const account = { avatarUrl: null, href: "/login", label: "Sign in", signedIn: false };
 const gameNav: GameTopNavContext = {
   gameName: "Blox Fruits",
   thumbnailUrl: null,
@@ -28,8 +23,8 @@ const gameNav: GameTopNavContext = {
   tools: [{ label: "Calculator", href: "/tools/blox-fruits/calculator" }]
 };
 
-function headerClasses(html: string) {
-  return html.match(/<header class="([^"]*)"/)![1].split(" ");
+function barClasses(html: string) {
+  return html.match(/<div data-game-bar="true" class="([^"]*)"/)?.[1].split(" ") ?? null;
 }
 
 beforeEach(() => {
@@ -37,63 +32,58 @@ beforeEach(() => {
 });
 
 describe("game top bar", () => {
-  it("shows game links below xl and keeps desktop sticky behavior and the account button", () => {
+  it("renders a compact secondary bar that scrolls with the page", () => {
     const html = renderToStaticMarkup(
-      <SiteGameTopBarClient account={account} initialPathname={navigation.pathname} initialGameNav={gameNav} />
+      <SiteGameTopBarClient initialPathname={navigation.pathname} initialGameNav={gameNav} />
     );
-    const classes = headerClasses(html);
+    const classes = barClasses(html)!;
     expect(classes).not.toContain("hidden");
-    expect(classes).not.toContain("sticky");
-    expect(classes).toContain("xl:sticky");
-    expect(classes).toContain("top-0");
+    expect(classes.some((name) => name.includes("sticky"))).toBe(false);
+    expect(html).toContain("min-h-11");
     expect(html).toContain('aria-label="Blox Fruits pages"');
     expect(html).toContain('href="/codes/blox-fruits"');
     expect(html).toContain("Tools");
     expect(html).toContain("overflow-x-auto");
     expect(html).toContain("max-w-[8rem]");
-    expect(html).toContain("hidden shrink-0 xl:inline-flex");
+    expect(html).not.toContain("Account");
   });
 
-  it("keeps a resolved empty bar hidden below xl", () => {
+  it("renders nothing once a page resolves without a game", () => {
     const html = renderToStaticMarkup(
-      <SiteGameTopBarClient account={account} initialPathname={navigation.pathname} initialGameNav={null} />
+      <SiteGameTopBarClient initialPathname={navigation.pathname} initialGameNav={null} />
     );
-    expect(headerClasses(html)).toContain("hidden");
-    expect(headerClasses(html)).toContain("xl:block");
+    expect(html).toBe("");
   });
 
   it("reserves the full row on the first render before the nav fetch", () => {
-    const html = renderToStaticMarkup(<SiteGameTopBarClient account={account} />);
-    expect(headerClasses(html)).not.toContain("hidden");
-    expect(html).toContain("min-h-14");
+    const html = renderToStaticMarkup(<SiteGameTopBarClient />);
+    expect(barClasses(html)).not.toBeNull();
+    expect(html).toContain("min-h-11");
     expect(html).not.toContain("Blox Fruits pages");
   });
 
   it.each(["/", "/articles", "/about"])("does not reserve an empty bar for %s", (pathname) => {
     navigation.pathname = pathname;
-    const html = renderToStaticMarkup(<SiteGameTopBarClient account={account} />);
-    expect(headerClasses(html)).toContain("hidden");
-    expect(headerClasses(html)).toContain("xl:block");
+    const html = renderToStaticMarkup(<SiteGameTopBarClient />);
+    expect(html).toBe("");
   });
 
   it("does not show initial nav from another pathname", () => {
     navigation.pathname = "/about";
     const html = renderToStaticMarkup(
-      <SiteGameTopBarClient account={account} initialPathname="/wiki/blox-fruits" initialGameNav={gameNav} />
+      <SiteGameTopBarClient initialPathname="/wiki/blox-fruits" initialGameNav={gameNav} />
     );
-    expect(headerClasses(html)).toContain("hidden");
-    expect(html).not.toContain("Blox Fruits pages");
+    expect(html).toBe("");
   });
 
-  it("shows an initial catalog nav below xl", () => {
+  it("shows an initial catalog nav", () => {
     const html = renderToStaticMarkup(
       <SiteGameTopBarClient
-        account={account}
         initialPathname={navigation.pathname}
         initialCatalogNav={{ title: "Catalog", links: [{ label: "Items", href: "/catalog" }] }}
       />
     );
-    expect(headerClasses(html)).not.toContain("hidden");
+    expect(barClasses(html)).not.toBeNull();
     expect(html).toContain('aria-label="Catalog catalog"');
   });
 });

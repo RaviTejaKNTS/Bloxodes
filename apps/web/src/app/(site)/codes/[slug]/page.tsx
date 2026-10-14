@@ -1,3 +1,4 @@
+import { PageSidebar } from "@/components/PageSidebar";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -656,7 +657,7 @@ export default async function GamePage({ params }: Params) {
   const universeId = game.universe_id ?? null;
   return (
     <div className="space-y-12">
-      <div className="grid gap-8 content-sidebar-grid">
+      <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
       <article className="min-w-0">
         <nav aria-label="Breadcrumb" className="mb-4 text-xs uppercase tracking-[0.25em] text-muted">
           <ol className="flex flex-wrap items-center gap-2">
@@ -885,7 +886,7 @@ export default async function GamePage({ params }: Params) {
         <CodeBlockEnhancer />
       </article>
 
-      <aside className="space-y-4">
+      <PageSidebar>
           <SocialShare
             url={canonicalUrl}
             title={`${game.name} Codes (${monthYear()})`}
@@ -901,7 +902,7 @@ export default async function GamePage({ params }: Params) {
           />
 
           <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="codes" />
-        </aside>
+        </PageSidebar>
       </div>
       <MoreCodes excludeSlug={game.slug} />
     </div>

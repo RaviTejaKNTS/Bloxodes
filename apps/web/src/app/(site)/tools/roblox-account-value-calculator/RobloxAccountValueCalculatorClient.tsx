@@ -304,7 +304,7 @@ export function RobloxAccountValueCalculatorClient() {
               <h2 id="value-summary" className="text-2xl font-semibold text-foreground">Visible value summary</h2>
               <p className="mt-1 text-sm text-muted">Only public RAP and the optional balance you entered are included.</p>
             </div>
-            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+            <div className="ads-tools-field-grid grid gap-3 md:grid-cols-2 xl:grid-cols-3">
               <ValueCard
                 label="Public inventory RAP"
                 value={inventoryState === "partial" && publicRap !== null ? `At least ${formatRobux(publicRap)}` : formatRobux(publicRap)}
@@ -360,7 +360,7 @@ export function RobloxAccountValueCalculatorClient() {
               </p>
             </div>
             {result.collectibles.items.length ? (
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              <div className="ads-tools-field-grid grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
                 {result.collectibles.items.slice(0, 12).map((item, index) => (
                   <a
                     key={`${item.assetId}-${item.serialNumber ?? "copy"}-${index}`}

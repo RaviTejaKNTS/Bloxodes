@@ -112,7 +112,7 @@ export function IconThumbnailCheckerClient() {
   return (
     <div className="tool-surface space-y-8">
       <section className="panel p-6">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(18rem,1fr)] lg:items-center">
+        <div className="ads-tools-columns grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(18rem,1fr)] lg:items-center">
           <div><h2 className="text-xl font-semibold text-foreground">Choose one local image</h2><p className="mt-2 text-sm leading-6 text-muted">Your image stays in this browser. The page does not upload it to Bloxodes, Roblox, an API route, analytics, or storage.</p></div>
           <label className="flex cursor-pointer items-center justify-center rounded-lg border border-dashed border-accent/50 bg-accent/5 px-6 py-8 text-center text-sm font-semibold text-accent hover:bg-accent/10"><input type="file" accept=".jpg,.jpeg,.gif,.png,.tga,.bmp,.webp,image/jpeg,image/gif,image/png,image/bmp,image/webp" className="sr-only" onChange={(event) => void inspectFile(event.target.files?.[0])} />Select image file</label>
         </div>
@@ -120,7 +120,7 @@ export function IconThumbnailCheckerClient() {
       </section>
 
       {inspected && result ? <>
-        <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        <section className="ads-tools-columns grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div className="panel space-y-4 p-6">
             <h2 className="text-xl font-semibold text-foreground">Local file summary</h2>
             <dl className="space-y-2 text-sm"><div className="flex justify-between gap-4"><dt className="text-muted">File</dt><dd className="max-w-[60%] truncate font-semibold text-foreground">{inspected.filename}</dd></div><div className="flex justify-between gap-4"><dt className="text-muted">Dimensions</dt><dd className="font-semibold text-foreground">{inspected.width.toLocaleString("en-US")} × {inspected.height.toLocaleString("en-US")} px</dd></div><div className="flex justify-between gap-4"><dt className="text-muted">Aspect ratio</dt><dd className="font-semibold text-foreground">{result.reducedAspect} ({result.decimalAspect.toFixed(4)})</dd></div><div className="flex justify-between gap-4"><dt className="text-muted">Detected format</dt><dd className="font-semibold uppercase text-foreground">{inspected.format}</dd></div><div className="flex justify-between gap-4"><dt className="text-muted">File size</dt><dd className="font-semibold text-foreground">{inspected.bytes.toLocaleString("en-US")} bytes ({(inspected.bytes / 1_000_000).toFixed(3)} MB)</dd></div></dl>

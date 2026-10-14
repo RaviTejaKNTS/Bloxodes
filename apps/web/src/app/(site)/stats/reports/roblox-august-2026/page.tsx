@@ -1,3 +1,4 @@
+import { StatsContentLayout } from "@/app/(site)/stats/components/StatsContentLayout";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -111,7 +112,8 @@ const body = "text-[1.05rem] leading-relaxed text-foreground md:text-[1.09rem]";
 
 export default function RobloxAugust2026ReportPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl">
+    <StatsContentLayout title={report.title} canonicalPath={`/stats/reports/${report.slug}`}>
+    <main className="min-w-0">
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
         items={[
@@ -121,27 +123,27 @@ export default function RobloxAugust2026ReportPage() {
           { label: report.featureImage.month, href: null }
         ]}
       />
-      <article id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--prose">
+      <article id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--prose stats-report-stream">
         <header className="space-y-3">
           <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{report.title}</h1>
           <p className="text-lg leading-8 text-muted">{report.subtitle}</p>
           <p className="text-sm text-muted">{report.dataWindowLabel} · Bloxodes player readings</p>
         </header>
 
-        <div className="mt-8 space-y-5">
-          <p className={body}>
+
+          <p className={`${body} stats-report-copy stats-report-copy-first`}>
             <GameLink href="/stats/games/adopt-me-383310974">Adopt Me!</GameLink>{" "}had August&rsquo;s clearest positive path
             among the larger games in this report. Its daily average was 219,399 players online at once. The strongest
             seven-day stretch, August 25–31, averaged 278,444, compared with 146,271 in the weakest stretch from
             August 1–7.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             That was not a straight climb. The daily average dipped to 109,596 on August 5, then reached 396,858 on
             August 29. Seven out of ten usable same-weekday comparisons were higher than the week before, giving the
             game a typical weekly change of +13.9%. The shape looks more like a series of waves than a new level that
             appeared overnight.
           </p>
-        </div>
+
 
         <AdoptMeChart points={report.adoptMe.points} markers={report.adoptMe.markers} />
 
@@ -164,29 +166,29 @@ export default function RobloxAugust2026ReportPage() {
           Older games found more than one way to rise
         </h2>
 
-        <div className="mt-5 space-y-5">
-          <p className={body}>
+
+          <p className={`${body} stats-report-copy`}>
             <GameLink href="/stats/games/doors-2440500124">DOORS</GameLink> and{" "}
             <GameLink href="/stats/games/tower-of-hell-703124385">Tower of Hell</GameLink> joined Adopt Me! on the
             positive side, even though their paths looked different. DOORS had a typical same-weekday change of
             +11.1%, with 83% of comparisons rising. Its strongest rolling week averaged 47,949 players online at
             once, against 17,735 in its weakest week.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             DOORS&rsquo; biggest move landed late. Its daily average reached 84,558 on August 29, one day after the official{" "}
             <ExternalLink href="https://www.roblox.com/events/2158475119163474563">THE ARCHIVES UPDATE</ExternalLink>{" "}
             listing began. The timing matches the late wave, but it does not establish that the event explains the full
             increase. Tower of Hell was quieter and steadier: its typical weekly change was +12.2%, 92% of its
             comparisons rose, and its strongest rolling week averaged 46,256 versus 32,617 in its weakest.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             <GameLink href="/stats/games/blox-fruits-994732206">Blox Fruits</GameLink> was a larger, milder example. Its
             typical weekly change was +4.8%, with 63% of comparisons higher, and its strongest rolling week averaged
             357,750 players online at once. Its official{" "}
             <ExternalLink href="https://www.roblox.com/events/5621792963953820284">Ultimate Balance Patch</ExternalLink>{" "}
             listing began on August 7, but the data does not isolate the patch from the normal week-to-week rhythm.
           </p>
-        </div>
+
 
         <EstablishedGamesChart series={report.establishedGames.series} markers={report.establishedGames.markers} />
 
@@ -204,8 +206,8 @@ export default function RobloxAugust2026ReportPage() {
           The biggest hits did not move together
         </h2>
 
-        <div className="mt-5 space-y-5">
-          <p className={body}>
+
+          <p className={`${body} stats-report-copy`}>
             <GameLink href="/stats/games/grow-a-garden-2">Grow a Garden 2</GameLink> shows how sharp the split could be.
             Its typical same-weekday change was -48.5%, with no usable comparison higher than the week before. Its
             strongest seven-day stretch averaged 482,533 players online at once; its weakest averaged 27,965. The
@@ -213,7 +215,7 @@ export default function RobloxAugust2026ReportPage() {
             and <ExternalLink href="https://www.roblox.com/events/4429757377838973713">MUFFIN BAKE</ExternalLink>{" "}
             listings give the line some event context, but not a causal explanation.
           </p>
-          <p className={body}>
+          <p className={`${body} stats-report-copy`}>
             <GameLink href="/stats/games/murder-mystery-2-66654135">Murder Mystery 2</GameLink> had a different shape. The
             2014 game climbed into a strongest rolling week of 1,010,247 before cooling to 295,231 in its weakest
             week, with a typical weekly change of -29.3%. Its{" "}
@@ -223,7 +225,7 @@ export default function RobloxAugust2026ReportPage() {
             younger-game comparison, moving from a strongest rolling week of 250,839 to a weakest of 116,897, with a
             typical weekly change of -14.1%.
           </p>
-        </div>
+
 
         <CoolDownGamesChart series={report.coolDownGames.series} markers={report.coolDownGames.markers} />
 
@@ -251,5 +253,6 @@ export default function RobloxAugust2026ReportPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
     </main>
+    </StatsContentLayout>
   );
 }

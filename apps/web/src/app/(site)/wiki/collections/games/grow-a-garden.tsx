@@ -1,4 +1,3 @@
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
@@ -6,7 +5,7 @@ import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { GameCollectionView } from "@/components/game-collections/GameCollectionView";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/games/grow-a-garden";
@@ -696,25 +695,26 @@ export function renderGrowGardenCollectionPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section className="min-w-0">
+        <GameCollectionView
+          stream
+          beforeToolbar={<>
+
         {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
 
-        <CatalogAdSlot />
-
-        <div className="grid gap-4 md:grid-cols-2 md:items-end">
+        <div className="collections-toolbar">
           <GrowGardenCollectionNav activeSlug={config.slug} className="max-w-none" />
           {sectionNav.length > 1 ? <GrowGardenSectionNav sections={sectionNav} className="max-w-none" /> : null}
         </div>
 
-        <GameCollectionView sections={pageSections} config={config} pagination={pagination.info} />
-
-        <CatalogAdSlot />
+          </>}
+          afterContent={<>
 
         {hasDetails ? (
           <>
             {descriptionNodes.length ? descriptionNodes : null}
 
-            <ContentFaq
+            <CollectionFaq
               items={faqNodes.map((faq, idx) => ({
                 id: `${faq.q}-${idx}`,
                 question: faq.q,
@@ -723,6 +723,7 @@ export function renderGrowGardenCollectionPage({
             />
           </>
         ) : null}
+          </>} sections={pageSections} config={config} pagination={pagination.info} />
       </section>
 
       {pagination.info.currentPage === 1 ? (

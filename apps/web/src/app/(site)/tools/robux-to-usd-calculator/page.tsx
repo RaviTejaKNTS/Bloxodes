@@ -1,3 +1,4 @@
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
@@ -5,13 +6,13 @@ import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo
 import { getToolContentWithDevFallback } from "@/lib/tools";
 import { ContentSlot } from "@/components/ContentSlot";
 import { fetchRobuxBundles } from "./robux-bundles";
-import { RobuxPurchaseClient } from "./RobuxPurchaseClient";
+import { RobuxPurchaseClient, RobuxPricingTable } from "./RobuxPurchaseClient";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 import {
   DEFAULT_HAS_PREMIUM,
   DEFAULT_TARGET_ROBUX,
@@ -139,7 +140,7 @@ export default async function RobloxPurchasePage() {
   };
 
   return (
-    <>
+    <ToolPageLayout toolCode="robux-to-usd-calculator" title={tool?.title ?? "Tool"} canonicalPath="/tools/robux-to-usd-calculator">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
@@ -176,6 +177,7 @@ export default async function RobloxPurchasePage() {
             initialBudgetPlan={initialBudgetPlan}
           />
         </div>
+        <RobuxPricingTable bundles={bundles} />
         {howNodes ? howNodes : null}
         <ContentSlot
           slot={TOOL_AD_SLOT}
@@ -197,7 +199,7 @@ export default async function RobloxPurchasePage() {
                 adFormat="auto"
                 fullWidthResponsive
               />
-              <ContentFaq
+              <ToolFaq
                 items={faqNodes.map((faq, idx) => ({
                   id: `${faq.q}-${idx}`,
                   question: faq.q,
@@ -224,6 +226,6 @@ export default async function RobloxPurchasePage() {
         fullWidthResponsive
       />
       <MoreTools excludeCode="robux-to-usd-calculator" />
-    </>
+    </ToolPageLayout>
   );
 }

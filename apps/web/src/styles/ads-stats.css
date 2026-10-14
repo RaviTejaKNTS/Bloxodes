@@ -1,0 +1,179 @@
+.stats-ad-main,
+.stats-stream > * {
+  min-width: 0;
+}
+.stats-stream {
+  display: flow-root;
+  min-width: 0;
+}
+.stats-stream > * + * {
+  margin-top: 1.5rem;
+}
+.stats-stream > [hidden] {
+  display: none;
+}
+.stats-stream > .stats-ranking-chunk + .stats-ranking-chunk,
+.stats-stream > .stats-mobile-chunk + .stats-mobile-chunk {
+  margin-top: 0;
+}
+.stats-ranking-chunk,
+.stats-mobile-chunk {
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-border) / 0.7);
+  border-radius: 0;
+  background: rgb(var(--color-surface) / 0.8);
+}
+.stats-ranking-chunk:not(.stats-chunk-first),
+.stats-mobile-chunk:not(.stats-chunk-first) {
+  border-top: 0;
+}
+.stats-chunk-first {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.stats-chunk-last {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+/* Each continuation has its own accessible column headings without a second visible header. */
+.stats-ranking-chunk:not(.stats-chunk-first) thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.stats-ranking-chunk td > :is(a, div),
+.stats-ranking-chunk td > :is(a, div) > span {
+  min-width: 0;
+  max-width: 100%;
+}
+.stats-mobile-chunk {
+  display: none;
+}
+.stats-ad-layout .stats-ad-main > .stats-stream > .stats-metrics {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.stats-report-stream > .stats-report-copy + .stats-report-copy {
+  margin-top: 1.25rem;
+}
+.stats-report-stream > .stats-report-copy-first {
+  margin-top: 2rem;
+}
+.stats-report-stream > h2 + .stats-report-copy {
+  margin-top: 1.25rem;
+}
+.stats-ad-layout {
+  grid-template-columns: minmax(0, 1fr);
+}
+.stats-ad-layout > .stats-ad-sidebar {
+  display: none;
+}
+@media (min-width: 1200px) {
+  /* Same columns as .content-sidebar-grid: a fixed 336px rail for sticky sidebar ads. */
+  .stats-ad-layout {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+  }
+  .stats-ad-layout > .stats-ad-sidebar {
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  .stats-ranking-chunk {
+    display: none;
+  }
+  .stats-mobile-chunk {
+    display: block;
+  }
+  .stats-ad-layout .stats-ad-main > .stats-stream > .stats-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.stats-stream > .stats-list-chunk {
+  border-radius: 0;
+}
+.stats-stream > .stats-list-chunk.stats-chunk-first {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.stats-stream > .stats-list-chunk.stats-chunk-last {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.stats-stream > .stats-list-chunk:not(.stats-chunk-first) {
+  border-top: 0;
+}
+.stats-stream > .stats-list-chunk + .stats-list-chunk:not(.stats-chunk-first) {
+  margin-top: 0;
+}
+.stats-list-chunk:not(.stats-chunk-last) > .stats-list-content {
+  padding-bottom: 0.25rem;
+}
+.stats-list-chunk:not(.stats-chunk-first) > .stats-list-content {
+  padding-top: 0.25rem;
+}
+
+.stats-list-chunk:not(.stats-chunk-last) > .stats-genre-content {
+  padding-bottom: 0.375rem;
+}
+.stats-list-chunk:not(.stats-chunk-first) > .stats-genre-content {
+  padding-top: 0.375rem;
+}
+
+/* The plot and its passive summaries keep one frame until an ad separates them. */
+.stats-stream > .stats-rank-chart {
+  border-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.stats-stream > .stats-rank-summary {
+  padding: 0 1rem 1rem;
+  border: 1px solid rgb(var(--color-border) / 0.7);
+  border-top: 0;
+  border-radius: 0 0 0.5rem 0.5rem;
+  background: rgb(var(--color-surface) / 0.8);
+}
+.stats-stream > .stats-rank-chart + .stats-rank-summary {
+  margin-top: 0;
+}
+.stats-stream > .stats-rank-chart:has(+ :is(.mv-ad-box, .adunitwrapper)) {
+  border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.stats-stream > :is(.mv-ad-box, .adunitwrapper) + .stats-rank-summary {
+  padding-top: 1rem;
+  border-top: 1px solid rgb(var(--color-border) / 0.7);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.stats-mobile-chunk:not(.stats-chunk-last) {
+  border-bottom: 0;
+}
+.stats-mobile-chunk:not(.stats-chunk-last) > [role="list"] {
+  padding-bottom: 0.25rem;
+}
+.stats-mobile-chunk:not(.stats-chunk-first) > [role="list"] {
+  padding-top: 0.25rem;
+}
+.stats-stream > .stats-mobile-chunk:has(+ :is(.mv-ad-box, .adunitwrapper)) {
+  border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.stats-stream > .stats-mobile-chunk:has(+ :is(.mv-ad-box, .adunitwrapper)) > [role="list"] {
+  padding-bottom: 0.75rem;
+}
+.stats-stream > :is(.mv-ad-box, .adunitwrapper) + .stats-mobile-chunk {
+  border-top: 1px solid rgb(var(--color-border) / 0.7);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.stats-stream > :is(.mv-ad-box, .adunitwrapper) + .stats-mobile-chunk > [role="list"] {
+  padding-top: 0.75rem;
+}

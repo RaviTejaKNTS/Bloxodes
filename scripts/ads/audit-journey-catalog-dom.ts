@@ -21,6 +21,8 @@ const INDEXABLE_PATHS = new Set([
   "/catalog/roblox-items-and-bundles/roblox-animations",
   "/catalog/roblox-items-and-bundles/roblox-makeup",
   "/catalog/admin-commands",
+  "/catalog/admin-commands/hd-admin",
+  "/catalog/roblox-emote-commands",
   "/articles",
   "/codes",
   "/checklists",
@@ -124,7 +126,7 @@ async function filterExistingPaths(baseUrl: string, paths: string[], label: stri
 function auditPage(snapshot: PageSnapshot) {
   const $ = load(snapshot.html);
   const content = $("#article-body");
-  const directItems = content.children("[data-journey-item]");
+  const directItems = content.children("[data-journey-item], [data-catalog-row-group]");
   const allItems = content.find("[data-journey-item]");
   const hasEmptyState = content.is('[class*="border-dashed"]') || content.find('[class*="border-dashed"]').length > 0;
   const isJourneyStream = content.hasClass("journey-content-stream");
@@ -145,11 +147,22 @@ function auditPage(snapshot: PageSnapshot) {
   if (!isStructuredStream && directItems.length < 1 && !hasEmptyState) {
     failures.push("expected at least one direct Journey item");
   }
-  if (directItems.length !== allItems.length) {
-    failures.push(`${allItems.length - directItems.length} Journey items are nested below another wrapper`);
+  const invalidItems = allItems.filter((_, item) => {
+    const parent = $(item).parent();
+    return !parent.is("#article-body") && !(parent.is(".catalog-section-grid") && parent.parent().is("[data-catalog-row-group]") && parent.parent().parent().is("#article-body"));
+  });
+  if (invalidItems.length) {
+    failures.push(`${invalidItems.length} Journey items have no direct stream or catalog row boundary`);
   }
   if ($(".content_hint,.content_mobile_hint,.content_desktop_hint").length > 0) {
     failures.push("manual Mediavine content hints are present and would disable automatic placement");
+  }
+
+  if (new URL(snapshot.responseUrl).pathname.startsWith("/catalog")) {
+    const sidebar = $("aside.space-y-4");
+    if (sidebar.length !== 1 || !sidebar.parent().hasClass("content-sidebar-grid") || sidebar.parents("#article-body").length) {
+      failures.push("catalog sidebar must be one direct grid child outside the article body");
+    }
   }
 
   const title = $("head title").text().trim();
@@ -302,6 +315,8 @@ async function main() {
     "/catalog/roblox-items-and-bundles/roblox-animations",
     "/catalog/roblox-items-and-bundles/roblox-makeup",
     "/catalog/admin-commands",
+    "/catalog/admin-commands/hd-admin",
+    "/catalog/roblox-emote-commands",
     "/articles",
     "/codes",
     "/checklists",

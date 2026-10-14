@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { marked } from "marked";
 import { AuthorSocialLinks } from "@/components/AuthorSocialLinks";
 import { ArticleCard } from "@/components/ArticleCard";
+import { HubsSidebarLayout, POPULAR_LINKS } from "@/components/hubs/HubsSidebar";
 import { authorAvatarUrl } from "@/lib/avatar";
 import {
   getAuthorBySlug,
@@ -99,6 +100,7 @@ export default async function AuthorPage({ params }: Params) {
   );
 
   return (
+    <HubsSidebarLayout canonicalPath={`/authors/${author.slug}`} title={author.name} heading="Popular pages" links={POPULAR_LINKS} footer={{ href: "/authors", label: "Meet the team" }}>
     <div className="space-y-12">
       <header className="border-b border-border/60 pb-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
@@ -151,5 +153,6 @@ export default async function AuthorPage({ params }: Params) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbData }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: authorData }} />
     </div>
+    </HubsSidebarLayout>
   );
 }

@@ -55,10 +55,10 @@ export function SiteTopNav({ className, catalogNav = null, gameNav = null, onNav
         )}
         aria-label={`${gameNav.gameName} pages`}
       >
-        <div className="mr-1 inline-flex h-9 min-w-0 max-w-[8rem] shrink-0 items-center gap-2 rounded-md px-2.5 text-[13px] font-semibold text-foreground sm:min-w-[10rem] sm:max-w-[16rem] sm:shrink">
-          <span className="relative h-6 w-6 shrink-0 overflow-hidden rounded-md border border-border/70 bg-muted">
+        <div className="mr-1 inline-flex h-8 min-w-0 max-w-[8rem] shrink-0 items-center gap-2 rounded-md px-2 text-[13px] font-semibold text-foreground sm:min-w-[9rem] sm:max-w-[16rem] sm:shrink">
+          <span className="relative h-5 w-5 shrink-0 overflow-hidden rounded border border-border/70 bg-muted">
             {gameNav.thumbnailUrl ? (
-              <Image src={gameNav.thumbnailUrl} alt="" fill sizes="24px" className="object-cover" />
+              <Image src={gameNav.thumbnailUrl} alt="" fill sizes="20px" className="object-cover" />
             ) : null}
           </span>
           <span className="min-w-0 truncate">{gameNav.gameName}</span>
@@ -74,11 +74,11 @@ export function SiteTopNav({ className, catalogNav = null, gameNav = null, onNav
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "inline-flex h-9 shrink-0 items-center gap-2 rounded-lg px-2.5 text-[13px] font-semibold text-muted transition-colors hover:bg-sidebar-accent/70 hover:text-foreground sm:px-3",
+                "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md px-2.5 text-[13px] font-semibold text-muted transition-colors hover:bg-sidebar-accent/70 hover:text-foreground",
                 active ? "bg-sidebar-accent/55 text-foreground" : ""
               )}
             >
-              <Icon aria-hidden className="h-4 w-4" />
+              <Icon aria-hidden className="h-3.5 w-3.5" />
               <span>{link.label}</span>
             </Link>
           );
@@ -100,7 +100,7 @@ export function SiteTopNav({ className, catalogNav = null, gameNav = null, onNav
         )}
         aria-label={`${catalogNav.title} catalog`}
       >
-        <div className="mr-1 inline-flex h-9 min-w-[9rem] max-w-[16rem] shrink items-center rounded-md px-2.5 text-[13px] font-semibold text-foreground sm:min-w-[10rem]">
+        <div className="mr-1 inline-flex h-8 min-w-[9rem] max-w-[16rem] shrink items-center rounded-md px-2 text-[13px] font-semibold text-foreground">
           <span className="min-w-0 truncate">{catalogNav.title}</span>
         </div>
 
@@ -113,7 +113,7 @@ export function SiteTopNav({ className, catalogNav = null, gameNav = null, onNav
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "inline-flex h-9 shrink-0 items-center rounded-lg px-2.5 text-[13px] font-semibold text-muted transition-colors hover:bg-sidebar-accent/70 hover:text-foreground sm:px-3",
+                "inline-flex h-8 shrink-0 items-center rounded-md px-2.5 text-[13px] font-semibold text-muted transition-colors hover:bg-sidebar-accent/70 hover:text-foreground",
                 active ? "bg-sidebar-accent/55 text-foreground" : ""
               )}
             >
@@ -142,11 +142,11 @@ function ToolsDropdown({
       <DropdownMenuTrigger
         aria-current={toolsActive ? "page" : undefined}
         className={cn(
-          "inline-flex h-9 shrink-0 items-center gap-2 rounded-lg px-2.5 text-[13px] font-semibold text-muted transition-colors hover:bg-sidebar-accent/70 hover:text-foreground sm:px-3",
+          "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md px-2.5 text-[13px] font-semibold text-muted transition-colors hover:bg-sidebar-accent/70 hover:text-foreground",
           toolsActive ? "bg-sidebar-accent/55 text-foreground" : ""
         )}
       >
-        <Wrench aria-hidden className="h-4 w-4" />
+        <Wrench aria-hidden className="h-3.5 w-3.5" />
         <span>Tools</span>
         <ChevronDown aria-hidden className="h-3.5 w-3.5" />
       </DropdownMenuTrigger>

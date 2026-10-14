@@ -1,3 +1,4 @@
+import { CatalogRowGroups } from "@/components/catalog/CatalogRowGroups";
 import Image from "next/image";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 
@@ -158,11 +159,11 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
         </p>
       </div>
       {availablePromoCodes.length ? (
-        availablePromoCodes.map((item, index) => (
-          <div key={item.id} data-journey-item className="h-full">
+        <CatalogRowGroups size="promo">{availablePromoCodes.map((item, index) => (
+          <div key={item.id} data-journey-item role="listitem" className="h-full">
             <PromoRewardRow item={item} eager={index < 3} />
           </div>
-        ))
+        ))}</CatalogRowGroups>
       ) : (
         <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
           There are no available website promo codes right now.
@@ -185,11 +186,11 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
             <h3 className="text-xl font-semibold text-foreground">Island of Move codes</h3>
             <p>Launch Island of Move, select Play It, then choose Redeem Code.</p>
           </div>
-          {islandOfMoveCodes.map((item) => (
-            <div key={item.id} data-journey-item className="h-full">
+          <CatalogRowGroups size="promo">{islandOfMoveCodes.map((item) => (
+            <div key={item.id} data-journey-item role="listitem" className="h-full">
               <PromoRewardRow item={item} headingLevel="h4" />
             </div>
-          ))}
+          ))}</CatalogRowGroups>
         </>
       ) : null}
 
@@ -199,19 +200,19 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
             <h3 className="text-xl font-semibold text-foreground">Mansion of Wonder codes</h3>
             <p>Launch Mansion of Wonder, open Get Swag at the Swag Booth, then choose Redeem Code.</p>
           </div>
-          {mansionOfWonderCodes.map((item) => (
-            <div key={item.id} data-journey-item className="h-full">
+          <CatalogRowGroups size="promo">{mansionOfWonderCodes.map((item) => (
+            <div key={item.id} data-journey-item role="listitem" className="h-full">
               <PromoRewardRow item={item} headingLevel="h4" />
             </div>
-          ))}
+          ))}</CatalogRowGroups>
         </>
       ) : null}
 
-      {otherInGameCodes.map((item) => (
-        <div key={item.id} data-journey-item className="h-full">
+      <CatalogRowGroups size="promo">{otherInGameCodes.map((item) => (
+        <div key={item.id} data-journey-item role="listitem" className="h-full">
           <PromoRewardRow item={item} headingLevel="h3" />
         </div>
-      ))}
+      ))}</CatalogRowGroups>
 
       {!inGameCodes.length ? (
         <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
@@ -228,11 +229,11 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
         </p>
       </div>
       {pastRewards.length ? (
-        pastRewards.map((item) => (
-          <div key={item.id} data-journey-item className="h-full">
+        <CatalogRowGroups size="promo">{pastRewards.map((item) => (
+          <div key={item.id} data-journey-item role="listitem" className="h-full">
             <PromoRewardRow item={item} />
           </div>
-        ))
+        ))}</CatalogRowGroups>
       ) : (
         <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
           There are no expired promo codes listed.

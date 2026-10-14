@@ -104,7 +104,7 @@ export default async function MusicIdGenresPaginatedPage({ params }: PageProps) 
         />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--options">
+      <section id="article-body" itemProp="articleBody" className="catalog-stream journey-content-stream journey-content-stream--options">
         <MusicCatalogNav active="genres" />
         {buildGenreCards(genres)}
         <PagePagination basePath={`${BASE_PATH}/genres`} currentPage={pageNumber} totalPages={totalPages} />

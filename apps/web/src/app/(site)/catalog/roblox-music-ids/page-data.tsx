@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { CopyCodeButton } from "@/components/CopyCodeButton";
-import { MusicCoverImage } from "@/components/MusicCoverImage";
+import { MusicIdCard, type MusicIdCardSong } from "@/components/catalog/MusicIdCard";
 import { PagePagination } from "@/components/PagePagination";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { MoreCatalogs } from "@/components/more-content";
@@ -15,13 +14,14 @@ import {
 } from "@/lib/music-ids-search";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { formatRelativeDate } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 import { MusicIdsBrowser } from "./MusicIdsBrowser";
 import type { MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
+import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = MUSIC_IDS_PAGE_SIZE;
 const OPTION_PAGE_SIZE = 24;
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
 const TOP_SONGS_TRENDING_LIMIT = 500;
@@ -571,7 +571,7 @@ export async function loadArtistOptionBySlug(slug: string) {
 
 export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
   return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4" aria-label="Roblox music ID sections">
+    <section className="catalog-surface catalog-navigation-grid" aria-label="Roblox music ID sections">
       {MUSIC_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
         const cardClasses = `group relative h-full overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
@@ -701,91 +701,17 @@ function MusicIdEmptyState() {
   );
 }
 
-function MusicIdCard({ song }: { song: MusicRow }) {
-  const durationLabel = formatDuration(song.duration_seconds);
-
-  return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
-      <div className="flex flex-1 flex-col gap-4 p-4">
-        <div className="flex items-start gap-4">
-          <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60">
-            <MusicCoverImage
-              src={buildThumbnailUrl(song)}
-              alt={`${song.title} Roblox music`}
-              sizes="80px"
-              className="object-cover transition duration-500 group-hover:scale-105"
-            />
-          </div>
-          <div className="min-w-0 flex-1 space-y-1">
-            <h2 className="text-lg font-semibold leading-snug text-foreground line-clamp-2">{song.title}</h2>
-            <div className="space-y-1 text-xs text-muted">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Artist</span>
-                <Link
-                  href={buildArtistPath(song.artist)}
-                  className="font-semibold text-foreground transition hover:text-accent"
-                >
-                  {song.artist}
-                </Link>
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Album</span>
-                <span className="text-foreground">{song.album ?? "Single / Unknown"}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
-            <span>Music ID</span>
-            <span className="font-mono text-[0.82rem]">{song.asset_id}</span>
-            <CopyCodeButton
-              code={String(song.asset_id)}
-              tone="surface"
-              size="sm"
-              analytics={{
-                event: "music_id_copy",
-                params: {
-                  asset_id: song.asset_id,
-                  artist: song.artist,
-                  genre: song.genre ?? ""
-                }
-              }}
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-          <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
-            <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
-            <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
-          </span>
-          <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
-            <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
-            {song.genre ? (
-              <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
-                {song.genre}
-              </Link>
-            ) : (
-              <span className="font-semibold text-foreground">—</span>
-            )}
-          </span>
-        </div>
-
-        <div className="mt-auto flex flex-wrap items-center justify-between gap-3">
-          <a
-            href={buildRobloxUrl(song.asset_id)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-          >
-            Play on Roblox
-          </a>
-        </div>
-      </div>
-    </article>
-  );
+function toMusicIdCardSong(song: MusicRow): MusicIdCardSong {
+  return {
+    assetId: song.asset_id,
+    title: song.title,
+    artist: song.artist,
+    genre: song.genre,
+    durationLabel: formatDuration(song.duration_seconds),
+    thumbnailUrl: buildThumbnailUrl(song),
+    artistHref: buildArtistPath(song.artist),
+    genreHref: song.genre ? buildGenrePath(song.genre) : null
+  };
 }
 
 export function MusicIdItems({ songs }: { songs: MusicRow[] }) {
@@ -797,7 +723,7 @@ export function MusicIdItems({ songs }: { songs: MusicRow[] }) {
     <>
       {songs.map((song) => (
         <div key={song.asset_id} data-journey-item className="h-full">
-          <MusicIdCard song={song} />
+          <MusicIdCard song={toMusicIdCardSong(song)} />
         </div>
       ))}
     </>
@@ -807,100 +733,19 @@ export function MusicIdItems({ songs }: { songs: MusicRow[] }) {
 export function TrendingMusicList({ songs, startIndex = 0 }: { songs: MusicRow[]; startIndex?: number }) {
   if (!songs.length) {
     return (
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--music rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <section id="article-body" itemProp="articleBody" className="catalog-stream journey-content-stream journey-content-stream--music rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No trending music IDs are available yet. Check back soon.
       </section>
     );
   }
 
   return (
-    <section id="article-body" itemProp="articleBody" role="list" className="journey-content-stream journey-content-stream--music">
-      {songs.map((song, index) => {
-        const durationLabel = formatDuration(song.duration_seconds);
-        const rank = song.rank ?? startIndex + index + 1;
-        return (
-          <article
-            key={song.asset_id}
-            data-journey-item
-            role="listitem"
-            className="block"
-          >
-            <div className="group flex flex-col gap-4 rounded-lg border border-border/70 bg-surface p-4 transition hover:border-accent/55 sm:p-5">
-              <div className="space-y-4">
-                <div className="flex min-w-0 items-start gap-3 sm:gap-4">
-                  <div className="flex h-11 w-12 flex-shrink-0 items-center justify-center rounded-md border border-accent/20 bg-accent/10 px-2 text-base font-semibold text-accent sm:h-12 sm:w-14 sm:text-xl">
-                    #{rank}
-                  </div>
-                  <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60 sm:h-14 sm:w-14">
-                    <MusicCoverImage
-                      src={buildThumbnailUrl(song)}
-                      alt={`${song.title} Roblox music`}
-                      sizes="56px"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1 space-y-1">
-                    <p className="break-words text-base font-semibold leading-snug text-foreground line-clamp-2 sm:text-lg">
-                      {song.title}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
-                      <Link
-                        href={buildArtistPath(song.artist)}
-                        className="font-semibold text-foreground transition hover:text-accent"
-                      >
-                        {song.artist}
-                      </Link>
-                      <span className="min-w-0 truncate">{song.album ?? "Single / Unknown"}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
-                    <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
-                  </span>
-                  {song.genre ? (
-                    <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
-                      <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
-                        {song.genre}
-                      </Link>
-                    </span>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-2 rounded-md border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground">
-                  <span>Music ID</span>
-                  <span className="font-mono text-[0.85rem]">{song.asset_id}</span>
-                  <CopyCodeButton
-                    code={String(song.asset_id)}
-                    tone="surface"
-                    size="sm"
-                    analytics={{
-                      event: "music_id_copy",
-                      params: {
-                        asset_id: song.asset_id,
-                        artist: song.artist,
-                        genre: song.genre ?? ""
-                      }
-                    }}
-                  />
-                </div>
-                <a
-                  href={buildRobloxUrl(song.asset_id)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-                >
-                  Play on Roblox
-                </a>
-              </div>
-            </div>
-          </article>
-        );
-      })}
+    <section id="article-body" role="list" itemProp="articleBody" className="catalog-stream journey-content-stream journey-content-stream--music">
+      {songs.map((song, index) => (
+        <div key={song.asset_id} data-journey-item role="listitem" className="h-full">
+          <MusicIdCard song={toMusicIdCardSong(song)} rank={song.rank ?? startIndex + index + 1} titleAs="p" />
+        </div>
+      ))}
     </section>
   );
 }
@@ -1019,7 +864,7 @@ export function renderRobloxMusicIdsPage({
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--music">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--music">
         {introNodes ? introNodes : null}
 
         <MusicCatalogNav active={activeNav} />

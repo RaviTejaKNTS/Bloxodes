@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { SiteLogo } from "@/components/SiteLogo";
+import { MAP_GUIDE_ID, scrollToMapGuide, useShellInertUnderMap } from "@/components/gta/map-guide";
 import { ArrowLeft, ArrowUpRight, Check, Crosshair, Info, Layers3, Link2, Minus, Plus, Search, X } from "lucide-react";
 import type * as Leaflet from "leaflet";
 import { useCollectionChecklistProgress } from "@/lib/collection-checklist-progress-client";
@@ -130,7 +131,7 @@ function PointDetails({
   );
 }
 
-export function GtaInteractiveMap({ map, children }: { map: GtaMapPageData; children: ReactNode }) {
+export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
   const { config, layers, markers, guides, hubPath } = map;
   const [query, setQuery] = useState("");
   const [activeLayers, setActiveLayers] = useState<Set<string>>(() => new Set(layers.filter((layer) => layer.defaultEnabled).map((layer) => layer.slug)));
@@ -144,7 +145,6 @@ export function GtaInteractiveMap({ map, children }: { map: GtaMapPageData; chil
   const [mapReady, setMapReady] = useState(false);
   const [mapImageStatus, setMapImageStatus] = useState<"loading" | "loaded" | "error">("loading");
   const [listOpen, setListOpen] = useState(false);
-  const [infoOpen, setInfoOpen] = useState(false);
   const [progressRevision, setProgressRevision] = useState(0);
   const [progressByCode, setProgressByCode] = useState<Map<string, ProgressValue>>(() => new Map());
   const mapElement = useRef<HTMLDivElement>(null);
@@ -207,7 +207,6 @@ export function GtaInteractiveMap({ map, children }: { map: GtaMapPageData; chil
 
   const selectPoint = useCallback((id: string | null, writeUrl = true) => {
     setSelectedId(id);
-    setInfoOpen(false);
     setCopyStatus("");
     if (id && window.matchMedia("(max-width: 800px)").matches) setListOpen(false);
     const point = markers.find((marker) => marker.id === id);
@@ -236,25 +235,7 @@ export function GtaInteractiveMap({ map, children }: { map: GtaMapPageData; chil
     }
   }, [markers, layers, viewBySlug]);
 
-  useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const main = mapElement.current?.closest("main");
-    const shell = main?.parentElement;
-    const shellRoot = shell?.parentElement;
-    const hiddenShell = [
-      main?.querySelector(":scope > header"),
-      shell?.querySelector(":scope > footer"),
-      shellRoot?.querySelector(":scope > aside"),
-      shellRoot?.querySelector(":scope > header")
-    ].filter((element): element is HTMLElement => element instanceof HTMLElement);
-    const previousInert = hiddenShell.map((element) => element.inert);
-    hiddenShell.forEach((element) => { element.inert = true; });
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      hiddenShell.forEach((element, index) => { element.inert = previousInert[index]; });
-    };
-  }, []);
+  useShellInertUnderMap(mapElement);
 
   useEffect(() => {
     if (!mapElement.current || mapRef.current) return;
@@ -430,7 +411,6 @@ export function GtaInteractiveMap({ map, children }: { map: GtaMapPageData; chil
       if (event.key === "Escape") {
         const pin = selectedId ? pinRefs.current.get(selectedId) : null;
         selectPoint(null);
-        setInfoOpen(false);
         setListOpen(false);
         window.requestAnimationFrame(() => pin?.getElement()?.focus());
       }
@@ -494,10 +474,10 @@ export function GtaInteractiveMap({ map, children }: { map: GtaMapPageData; chil
           <h1>{config.mapTitle}</h1>
         </div>
         <div className="gta-map-topbar__actions">
-          <button type="button" onClick={() => { setInfoOpen(false); setListOpen(!listOpen); }} aria-label="Toggle map layers and locations" aria-expanded={listOpen}>
+          <button type="button" onClick={() => setListOpen(!listOpen)} aria-label="Toggle map layers and locations" aria-expanded={listOpen}>
             <Layers3 size={17} aria-hidden="true" /><span>Layers</span>
           </button>
-          <button type="button" onClick={() => { setListOpen(false); setInfoOpen(!infoOpen); }} aria-label="About this map" aria-expanded={infoOpen}>
+          <button type="button" onClick={() => { setListOpen(false); scrollToMapGuide(); }} aria-label="About this map" aria-controls={MAP_GUIDE_ID}>
             <Info size={17} aria-hidden="true" /><span>About</span>
           </button>
         </div>
@@ -629,13 +609,6 @@ export function GtaInteractiveMap({ map, children }: { map: GtaMapPageData; chil
         </aside>
       ) : null}
 
-      <aside className={"gta-map-about" + (infoOpen ? " is-open" : "")} aria-label="About this map" aria-hidden={!infoOpen}>
-        <div className="gta-map-about__header">
-          <h2>About {config.title}</h2>
-          <button type="button" aria-label="Close about panel" onClick={() => setInfoOpen(false)}><X size={18} aria-hidden="true" /></button>
-        </div>
-        <div className="gta-map-about__body">{children}</div>
-      </aside>
 
       <div className="gta-map-progress-bridges" aria-hidden="true">
         {progressCodes.map((code) => <ProgressBridge key={code} code={code} onChange={onProgressChange} />)}

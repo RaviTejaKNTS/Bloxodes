@@ -6,6 +6,7 @@ import { listGameMapPages } from "@/lib/game-extra-pages";
 import { parseGameMapData } from "@/lib/game-page-data";
 import { listGtaInteractiveMapDefinitions } from "@/lib/gta-interactive-map-registry";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { GTA_LINKS, HubsSidebarLayout } from "@/components/hubs/HubsSidebar";
 
 export const revalidate = 21600;
 
@@ -76,7 +77,9 @@ export default async function GtaMapsIndexPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl space-y-8 px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <HubsSidebarLayout canonicalPath="/gta/maps" title={title} heading="Popular GTA pages" links={GTA_LINKS}>
+      <div className="space-y-8">
       <header className="max-w-3xl space-y-4">
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-muted">
           <Map size={14} aria-hidden /> Interactive maps
@@ -85,10 +88,11 @@ export default async function GtaMapsIndexPage() {
         <p className="text-base leading-7 text-muted md:text-lg">{description} Open a map to search pins, switch layers, inspect item details, and mark supported collection locations complete.</p>
       </header>
 
+      <section id="article-body" itemProp="articleBody" aria-label="Available GTA interactive maps" className="journey-content-stream journey-content-stream--index hubs-card-stream gap-5">
       {cards.length ? (
-        <section aria-label="Available GTA interactive maps" className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <>
           {cards.map((card) => (
-            <Link key={card.slug} href={card.route} className="group overflow-hidden rounded-2xl border border-border bg-surface transition hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-lg">
+            <Link key={card.slug} href={card.route} data-journey-item className="group overflow-hidden rounded-2xl border border-border bg-surface transition hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-lg">
               <div className="relative aspect-[16/9] overflow-hidden bg-[#1a2430]">
                 {card.preview.type === "tiles" ? (
                   <div role="img" aria-label={card.title + " full map preview"} className="absolute left-1/2 top-0 grid h-full aspect-square -translate-x-1/2 grid-cols-2 grid-rows-2">
@@ -121,7 +125,7 @@ export default async function GtaMapsIndexPage() {
               </div>
             </Link>
           ))}
-        </section>
+        </>
       ) : (
         <p className="rounded-xl border border-border bg-surface p-6 text-sm text-muted">Interactive maps will appear here as their pages are published.</p>
       )}
@@ -130,6 +134,9 @@ export default async function GtaMapsIndexPage() {
         <h2 className="text-lg font-semibold text-foreground">How map progress works</h2>
         <p className="mt-2">A map pin links to its Bloxodes collection item when the source location matches a tracked guide row. Checking a location on the map uses the same local or signed-in progress as that collection page. Reference points and seasonal coordinates stay informational, and collections without a verified source location are linked without invented pins.</p>
       </section>
+      </section>
+      </div>
+      </HubsSidebarLayout>
     </div>
   );
 }

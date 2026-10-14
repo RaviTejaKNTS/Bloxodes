@@ -100,7 +100,7 @@ export function WizardAlchemyRaceRerollCalculatorClient({ races }: Props) {
 
   return (
     <div className="tool-surface rounded-xl border border-border/70 bg-surface/70 p-4 shadow-sm md:p-5">
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,1.05fr)]">
+      <div className="ads-tools-columns grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,1.05fr)]">
         <section className="space-y-5">
           <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_180px]">
             <label className="space-y-2">
@@ -188,7 +188,7 @@ export function WizardAlchemyRaceRerollCalculatorClient({ races }: Props) {
           </div>
         </section>
 
-        <aside className="space-y-4">
+        <div className="space-y-4">
           <div className="rounded-lg border border-accent/40 bg-accent/10 p-4">
             <div className="flex items-start justify-between gap-3">
               {selectedRace ? (
@@ -260,7 +260,7 @@ export function WizardAlchemyRaceRerollCalculatorClient({ races }: Props) {
             </div>
             <p className="mt-3 text-xs text-muted">Uses the listed base chance only. Luck boosts or pity would change the result.</p>
           </div>
-        </aside>
+        </div>
       </div>
     </div>
   );

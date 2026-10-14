@@ -16,6 +16,7 @@ import { WIKI_PAGE_SIZE, wikiIndexQuery } from "@/lib/wiki-index-options";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 import { StatsChartPanel } from "../stats/components/StatsChartPanel";
 import { WikiReference, wikiTopics, WIKI_INDEX_DESCRIPTION, WIKI_INDEX_TITLE } from "./index-content";
+import "@/styles/ads-hubs.css";
 
 export { loadWikiIndexPageData } from "@/lib/wiki-index";
 export type { WikiIndexPageData } from "@/lib/wiki-index";
@@ -88,20 +89,19 @@ function Directory({ data }: { data: WikiIndexPageData }) {
   const { pages, total, totalPages, currentPage, options, genres } = data;
   const query = wikiIndexQuery(options);
   const selectClass = "h-10 w-full rounded-md border border-border/70 bg-background px-3 text-sm text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent";
-  return <section aria-labelledby="game-wikis" className="space-y-5">
+  // Direct #article-body children: heading, filters, every card and the pagination.
+  return <>
     <div className="flex flex-wrap items-baseline justify-between gap-3"><h2 id="game-wikis" className={`scroll-mt-24 ${sectionTitle}`}>Roblox game wikis</h2><p className="text-sm text-muted">{total.toLocaleString("en-US")} {query ? "matching " : ""}game{total === 1 ? "" : "s"}</p></div>
-    <form key={query} action="/wiki#game-wikis" method="get" role="search" aria-label="Find a game wiki" className="grid grid-cols-2 items-end gap-3 xl:grid-cols-[minmax(12rem,1fr)_minmax(10rem,0.65fr)_minmax(9rem,0.6fr)_auto]">
+    <form key={query} action="/wiki#game-wikis" method="get" role="search" aria-label="Find a game wiki" className="hubs-wiki-tight grid grid-cols-2 items-end gap-3 xl:grid-cols-[minmax(12rem,1fr)_minmax(10rem,0.65fr)_minmax(9rem,0.6fr)_auto]">
       <label className="col-span-2 space-y-2 text-sm font-medium text-foreground xl:col-span-1">Game name<Input name="q" type="search" maxLength={100} defaultValue={options.q} placeholder="Search game wikis" className="h-10 border-border/70 bg-background" /></label>
       <label className="space-y-2 text-sm font-medium text-foreground">Genre<select name="genre" defaultValue={options.genre} className={selectClass}><option value="">All genres</option>{options.genre && !genres.includes(options.genre) ? <option value={options.genre}>{options.genre}</option> : null}{genres.map((genre) => <option key={genre} value={genre}>{genre}</option>)}</select></label>
       <label className="space-y-2 text-sm font-medium text-foreground">Sort by<select name="sort" defaultValue={options.sort} className={selectClass}><option value="updated">Recently updated</option><option value="name">Game name A–Z</option><option value="players">Current players</option></select></label>
       <Button type="submit" className="col-span-2 h-10 xl:col-span-1"><Search className="mr-2 h-4 w-4" aria-hidden />Find games</Button>
     </form>
-    {query ? <p className="text-sm text-muted"><Link href="/wiki#game-wikis" className={quietLink}>Clear search and filters</Link></p> : null}
-    <div id="article-body" className="journey-content-stream journey-content-stream--index">
-      {pages.length ? pages.map((page) => <div key={page.id} data-journey-item><WikiCard page={page} /></div>) : <p className="rounded-lg border border-dashed border-border/70 p-6 text-muted">{query ? "No game wikis match these filters. Try another name or choose all genres." : "No game wikis have been published yet."}</p>}
-      <PagePagination basePath="/wiki" currentPage={currentPage} totalPages={totalPages} query={query ? `${query}#game-wikis` : ""} />
-    </div>
-  </section>;
+    {query ? <p className="hubs-wiki-tight text-sm text-muted"><Link href="/wiki#game-wikis" className={quietLink}>Clear search and filters</Link></p> : null}
+    {pages.length ? pages.map((page) => <div key={page.id} data-journey-item><WikiCard page={page} /></div>) : <p className="rounded-lg border border-dashed border-border/70 p-6 text-muted">{query ? "No game wikis match these filters. Try another name or choose all genres." : "No game wikis have been published yet."}</p>}
+    <PagePagination basePath="/wiki" currentPage={currentPage} totalPages={totalPages} query={query ? `${query}#game-wikis` : ""} />
+  </>;
 }
 
 async function WikiCollections({ overview }: { overview: Promise<WikiOverview> }) {
@@ -148,14 +148,15 @@ export function renderWikiIndexPage(data: WikiIndexPageData) {
         </nav>
       </header>
     ) : <header className="space-y-3"><Link href="/wiki" className={`text-sm text-muted ${quietLink}`}>Roblox Wiki</Link><h1 className="text-3xl font-semibold text-foreground">{query ? "Find a Roblox game wiki" : "Roblox game wikis"}</h1><p className="text-sm text-muted">Page {currentPage} of {data.totalPages}</p></header>}
-    <div className="min-w-0 space-y-10">
+    <div id="article-body" className="journey-content-stream journey-content-stream--index hubs-wiki-stream">
       <Directory data={data} />
       {overview ? <>
-        <Suspense fallback={null}><WikiCollections overview={overview} /></Suspense>
-        <Suspense fallback={<p className="text-sm text-muted" role="status">Loading Roblox activity…</p>}>
+        {/* Stable wrappers keep streamed sections from replacing #article-body children. */}
+        <div className="hubs-wiki-section"><Suspense fallback={null}><WikiCollections overview={overview} /></Suspense></div>
+        <div className="hubs-wiki-section"><Suspense fallback={<p className="text-sm text-muted" role="status">Loading Roblox activity…</p>}>
           <WikiActivity overview={overview} allPages={allPages} />
-        </Suspense>
-        <section aria-labelledby="roblox-reference" className="grid items-start gap-7 xl:grid-cols-[minmax(0,1fr)_20rem]">
+        </Suspense></div>
+        <section aria-labelledby="roblox-reference" className="hubs-wiki-section grid items-start gap-7 xl:grid-cols-[minmax(0,1fr)_20rem]">
           <div className="space-y-6">
             <div className="space-y-4">
               <h2 id="roblox-reference" className={`scroll-mt-24 ${sectionTitle}`}>Explore Roblox</h2>
@@ -171,8 +172,9 @@ export function renderWikiIndexPage(data: WikiIndexPageData) {
           </div>
           <RobloxFacts />
         </section>
-        <div className="grid items-start gap-9 xl:grid-cols-[minmax(0,1fr)_20rem]"><WikiReference /><Suspense fallback={null}><WikiUpdates overview={overview} allPages={allPages} /></Suspense></div>
-        <p className="border-t border-border/60 pt-5 text-sm text-muted">Bloxodes is an independent Roblox reference. Platform explanations cite Roblox documentation; live figures describe games tracked by Bloxodes.</p>
+        <WikiReference />
+        <div className="hubs-wiki-aside"><Suspense fallback={null}><WikiUpdates overview={overview} allPages={allPages} /></Suspense></div>
+        <p className="hubs-wiki-tail border-t border-border/60 pt-5 text-sm text-muted">Bloxodes is an independent Roblox reference. Platform explanations cite Roblox documentation; live figures describe games tracked by Bloxodes.</p>
       </> : null}
     </div>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
+import { HubsPageSidebar } from "@/components/hubs/HubsSidebar";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 
 const title = "How We Gather and Verify Codes";
@@ -42,9 +43,11 @@ export default function HowWeGatherAndVerifyCodesPage() {
   });
 
   return (
-    <div className="grid gap-8 content-sidebar-grid">
+    <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">How We Gather and Verify Codes</h1>
+
+        <div id="article-body" className="hubs-static-body">
 
         <p>
           Bloxodes is a Roblox codes and information hub where we track, verify, and list down working and active codes for various Roblox
@@ -76,10 +79,12 @@ export default function HowWeGatherAndVerifyCodesPage() {
 
         <p>Team Bloxodes</p>
 
+        </div>
+
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
       </article>
 
-      <aside aria-hidden className="hidden lg:block" />
+      <HubsPageSidebar canonicalPath="/how-we-gather-and-verify-codes" title={title} />
     </div>
   );
 }

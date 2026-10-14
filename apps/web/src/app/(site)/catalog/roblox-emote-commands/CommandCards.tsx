@@ -1,16 +1,15 @@
+import { CatalogRowGroups } from "@/components/catalog/CatalogRowGroups";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import type { RobloxEmoteCommand } from "@/lib/roblox-emote-commands";
 
 export function CommandCards({ commands }: { commands: RobloxEmoteCommand[] }) {
   return (
-    <section aria-labelledby="default-emote-commands" className="space-y-4">
+    <>
       <h2 id="default-emote-commands">Default Roblox emote commands</h2>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-journey-list>
+      <CatalogRowGroups className="catalog-row-group--emotes">
         {commands.map((entry) => (
-          <article
-            key={entry.code}
+          <div key={entry.code} role="listitem" data-journey-item className="h-full"><article
             id={entry.code}
-            data-journey-item
             className="flex h-full flex-col rounded-lg border border-border/70 bg-surface p-4 transition-colors hover:border-accent/55 sm:p-5"
           >
             <div className="flex items-center justify-between gap-3">
@@ -28,9 +27,9 @@ export function CommandCards({ commands }: { commands: RobloxEmoteCommand[] }) {
               {entry.command}
             </code>
             <p className="mb-0 mt-3 text-sm leading-6 text-muted">{entry.description}</p>
-          </article>
+          </article></div>
         ))}
-      </div>
-    </section>
+      </CatalogRowGroups>
+    </>
   );
 }

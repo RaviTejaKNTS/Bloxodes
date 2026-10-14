@@ -3,11 +3,12 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { normalizeCategorySlug } from "@/lib/decal-id-categories";
 import { normalizeSearchQuery, normalizeSortKey, type DecalSortKey } from "@/lib/decal-ids-search";
 import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
+import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = DECAL_IDS_PAGE_SIZE;
 const DECAL_SOURCE_TABLE = "roblox_decal_ids";
 const BASE_SELECT_FIELDS =
   "asset_id, texture_id, name, description, creator_id, creator_type, creator_name, creator_verified, roblox_created_at, roblox_updated_at, is_public_domain, is_for_sale, price_in_robux, sales, purchasable, vote_count, upvote_percent, thumbnail_url, thumbnail_state, thumbnail_checked_at, source, first_seen_at, last_seen_at, verified_at, popularity_score, categories, primary_category, curated_score, curated_rank, curated_tier, curated_reason";

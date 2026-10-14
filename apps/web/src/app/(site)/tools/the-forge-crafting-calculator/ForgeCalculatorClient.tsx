@@ -357,7 +357,7 @@ export function ForgeCalculatorClient({
         </div>
       </section>
 
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1.2fr)_minmax(0,1.5fr)]">
+      <div className="ads-tools-forge-panels grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1.2fr)_minmax(0,1.5fr)]">
         <section className="panel flex h-[88vh] flex-col space-y-4 p-4">
           <div className="flex items-center justify-between">
             <div>
@@ -546,7 +546,7 @@ export function ForgeCalculatorClient({
               return (
                 <div key={rarity} className="space-y-2">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{rarity}</p>
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+                  <div className="ads-tools-ores grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
                     {ores.map((ore) => {
                       const count = selectedMap.get(ore.id) ?? 0;
                       return (
@@ -580,7 +580,7 @@ export function ForgeCalculatorClient({
         </div>
 
         {mode === "weapon" ? (
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="ads-tools-field-grid grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {weaponResults.weapons
               .sort((a, b) => b.probability - a.probability)
               .map((entry) => (
@@ -618,7 +618,7 @@ export function ForgeCalculatorClient({
               ))}
           </div>
         ) : (
-          <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="ads-tools-field-grid grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {filteredArmor
               .sort((a, b) => b.probability - a.probability)
               .map((entry) => (

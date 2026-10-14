@@ -2,16 +2,18 @@ import {expect,test} from '@playwright/test';
 import fs from 'node:fs';
 type ChecklistEntry={path:string;title:string;items:Array<{section_code:string;title:string}>};
 type ChecklistAccount={project:string;token:string};
+// Mirrors parseTitleLink in ChecklistBoard: link titles render as their label, not the raw markdown or URL.
+const visibleTitle=(raw:string)=>{const title=raw.trim();const md=title.match(/^\[(.+?)\]\((https?:\/\/\S+)\)$/);if(md)return md[1];const url=title.match(/(https?:\/\/\S+)/);return url?(title.replace(url[0],'').trim()||url[1]):title;};
 const entries:ChecklistEntry[]=process.env.MANAGED_CHECKLIST_STATE && fs.existsSync(process.env.MANAGED_CHECKLIST_STATE)?JSON.parse(fs.readFileSync(process.env.MANAGED_CHECKLIST_STATE,'utf8')):[];
 for(const entry of entries) {
-  test(`${entry.path} preserves the reviewed board and checked tasks`,async({page},info)=>{
+  test(`${entry.path} preserves the reviewed checklist and checked tasks`,async({page},info)=>{
     await page.goto(entry.path);
     await expect(page.locator('h1')).toContainText(entry.title);
     const leaves=entry.items.filter(item=>item.section_code.trim().split('.').length===3);
     expect(leaves.length).toBeGreaterThan(0);
     const boxes=page.locator('main input[type=checkbox]');
     await expect(boxes).toHaveCount(leaves.length);
-    for(const item of leaves) await expect(page.locator('main')).toContainText(item.title.trim());
+    for(const item of leaves) await expect(page.locator('main')).toContainText(visibleTitle(item.title));
     const first=boxes.first();
     await first.locator('..').click();await expect(first).toBeChecked();
     await page.reload();await expect(boxes.first()).toBeChecked();

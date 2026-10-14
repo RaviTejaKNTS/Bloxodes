@@ -1,3 +1,4 @@
+import { PageSidebar } from "@/components/PageSidebar";
 import type { Metadata } from "next";
 import { Fragment } from "react";
 import Link from "next/link";
@@ -264,7 +265,7 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
 
   return (
     <div className="space-y-12">
-      <div className="grid gap-8 content-sidebar-grid">
+      <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
       <article className="min-w-0">
         <header className="mb-6 space-y-3">
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.25em] text-muted">
@@ -413,7 +414,7 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
       <CodeBlockEnhancer />
       </article>
 
-      <aside className="space-y-4">
+      <PageSidebar>
         <section className="space-y-3">
           <SocialShare
             url={canonicalUrl}
@@ -431,8 +432,8 @@ export async function renderArticlePage(article: ArticleWithRelations, currentPa
           minHeight="clamp(280px, 40vw, 600px)"
         />
 
-        <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="articles" />
-      </aside>
+        <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="articles" currentSlug={article.slug} />
+      </PageSidebar>
       </div>
       {showEndMatter ? <MoreArticles excludeSlug={article.slug} /> : null}
     </div>

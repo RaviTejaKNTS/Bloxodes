@@ -2,6 +2,7 @@ import { ROBLOX_CHECKLISTS } from "@/lib/engagement/config";
 import { notFound } from "next/navigation";
 import { getChecklistPageBySlug } from "@/lib/db";
 import { ChecklistPageTemplate, checklistMetadata } from "@/components/ChecklistPageTemplate";
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
 
 export const revalidate = 21600;
 type PageProps = { params: Promise<{ slug: string }> };
@@ -16,5 +17,18 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function ChecklistPage({ params }: PageProps) {
   const data = await load((await params).slug);
   if (!data) notFound();
-  return <ChecklistPageTemplate data={data} config={ROBLOX_CHECKLISTS} />;
+  const universe = data.page.universe;
+  return (
+    <ChecklistPageTemplate
+      data={data}
+      config={ROBLOX_CHECKLISTS}
+      sidebar={
+        <GameDiscoverySidebar
+          universeId={data.page.universe_id ?? universe?.universe_id ?? null}
+          universeName={universe?.display_name ?? universe?.name ?? null}
+          currentType="checklist"
+        />
+      }
+    />
+  );
 }

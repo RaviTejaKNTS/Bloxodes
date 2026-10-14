@@ -1,0 +1,149 @@
+.ads-tools-main {
+  container: ads-tools / inline-size;
+}
+
+.ads-tools-main .journey-content-stream--index {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ads-tools-main :is(.tool-surface, .ads-tools-widget) {
+  min-width: 0;
+}
+
+.ads-tools-main :is(.tool-surface, .ads-tools-widget) .grid > * {
+  min-width: 0;
+}
+
+.ads-tools-main :is(input, select, textarea) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ads-tools-columns {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@container ads-tools (min-width: 600px) {
+  .ads-tools-main .journey-content-stream--index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container ads-tools (min-width: 960px) {
+  .ads-tools-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ads-tools-main .journey-content-stream--index {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ads-tools-inventory {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@container ads-tools (min-width: 600px) {
+  .ads-tools-ores {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container ads-tools (min-width: 960px) {
+  .ads-tools-inventory {
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+  }
+}
+
+@container ads-tools (max-width: 959px) {
+  .ads-tools-columns > .lg\:border-r {
+    border-right-width: 0;
+    border-bottom: 1px solid rgb(var(--color-border));
+  }
+}
+
+/* Keep the existing FAQ rhythm when no ad separates its questions. */
+.ads-tools-main .journey-content-stream > .ads-tools-faq-item + .ads-tools-faq-item {
+  margin-top: 0;
+}
+
+.ads-tools-main .journey-content-stream > .ads-tools-pricing {
+  margin-top: 2.5rem;
+}
+
+@container ads-tools (min-width: 600px) and (max-width: 959px) {
+  .ads-tools-field-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container ads-tools (max-width: 599px) {
+  .ads-tools-field-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.ads-tools-forge-panels {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@container ads-tools (min-width: 740px) and (max-width: 1099px) {
+  .ads-tools-forge-panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ads-tools-forge-panels > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@container ads-tools (min-width: 1100px) {
+  .ads-tools-forge-panels {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.2fr) minmax(0, 1.5fr);
+  }
+}
+
+.ads-tools-table-scroll {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@container ads-tools (min-width: 760px) {
+  .ads-tools-ores {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@container ads-tools (min-width: 600px) and (max-width: 959px) {
+  .ads-tools-main section.mt-12 > .grid.lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container ads-tools (max-width: 599px) {
+  .ads-tools-main section.mt-12 > .grid.lg\:grid-cols-4 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.ads-tools-forge-panels > :last-child {
+  container: ads-tools-ore-picker / inline-size;
+}
+
+@container ads-tools-ore-picker (max-width: 599px) {
+  .ads-tools-ores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container ads-tools-ore-picker (min-width: 600px) {
+  .ads-tools-ores {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@container ads-tools-ore-picker (min-width: 760px) {
+  .ads-tools-ores {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -117,7 +117,7 @@ export default async function ArtistMusicIdsPaginatedPage({ params }: PageProps)
         />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--music">
+      <section id="article-body" itemProp="articleBody" className="catalog-stream journey-content-stream journey-content-stream--music">
         <MusicCatalogNav active="artists" />
         <MusicIdItems songs={songs} />
         <PagePagination

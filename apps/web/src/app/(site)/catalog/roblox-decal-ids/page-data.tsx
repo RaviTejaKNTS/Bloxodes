@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 import { MoreCatalogs } from "@/components/more-content";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -23,8 +23,9 @@ import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "
 import { supabaseAdmin } from "@/lib/supabase";
 import { DecalIdsBrowser } from "./DecalIdsBrowser";
 import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
+import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
-const PAGE_SIZE = 24;
+const PAGE_SIZE = DECAL_IDS_PAGE_SIZE;
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
 const DECAL_SOURCE_TABLE = "roblox_decal_ids";
 const BASE_SELECT_FIELDS =
@@ -452,7 +453,7 @@ function formatCount(value: number): string {
 
 export function DecalCatalogNav({ active }: { active: DecalNavKey }) {
   return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4" aria-label="Roblox decal ID sections">
+    <section className="catalog-surface catalog-navigation-grid" aria-label="Roblox decal ID sections">
       {DECAL_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
         const cardClasses = `group relative h-full overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
@@ -537,7 +538,7 @@ export function renderRobloxDecalCategoriesPage({
       <section
         id="article-body"
         itemProp="articleBody"
-        className="journey-content-stream journey-content-stream--options"
+        className="catalog-stream journey-content-stream journey-content-stream--options"
       >
         <DecalCatalogNav active="categories" />
 
@@ -761,7 +762,7 @@ export function renderRobloxDecalIdsPage({
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--decals">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--decals">
         {introNodes ? introNodes : null}
 
         {section === "curated" && currentPage === 1 ? (

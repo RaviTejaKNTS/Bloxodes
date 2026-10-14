@@ -137,7 +137,7 @@ export function ActiveCodes({
       const rewardText = cleanRewardsText(code.rewards_text);
       const isNew = isCodeNew(code, nowMs);
       const addedAtLabel = code.first_seen_at
-        ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(
+        ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(
             new Date(code.first_seen_at)
           )
         : null;

@@ -1,3 +1,4 @@
+import { PageSidebar } from "@/components/PageSidebar";
 import type { ReactNode } from "react";
 import type { QuizConfig, QuizTemplateData } from "@/lib/engagement/types";
 import { engagementProgressKey } from "@/lib/engagement/types";
@@ -5,6 +6,7 @@ import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
+import "@/styles/ads-content.css";
 import { QuizRunner } from "@/components/QuizRunner";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
@@ -109,7 +111,7 @@ export async function QuizPageTemplate({ data, config, sidebar, relatedContent }
 
   return (
     <div className="space-y-12">
-      <div className={sidebar ? "grid gap-8 content-sidebar-grid" : "grid gap-8"}>
+      <div className={sidebar ? "grid gap-8 content-sidebar-grid content-sidebar-grid--prose" : "grid gap-8"}>
       <section
         id="article-body"
         itemProp="articleBody"
@@ -152,6 +154,7 @@ export async function QuizPageTemplate({ data, config, sidebar, relatedContent }
           <p className="max-w-3xl text-sm text-muted md:text-base">{description}</p>
         ) : null}
       </header>
+      <div className="ads-content-quiz-widget">
       <QuizRunner
         key={`${progressKey}:${config.progress.progressEndpoint}`}
         quizCode={progressKey}
@@ -161,9 +164,10 @@ export async function QuizPageTemplate({ data, config, sidebar, relatedContent }
         heroImage={heroImage}
         heroAlt={heroAlt}
       />
+      </div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </section>
-      {sidebar ? <aside className="space-y-4">{sidebar}</aside> : null}
+      {sidebar ? <PageSidebar>{sidebar}</PageSidebar> : null}
       </div>
       {relatedContent}
     </div>

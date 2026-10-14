@@ -1,3 +1,5 @@
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
+import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { MoreTools } from "@/components/more-content";
 
@@ -5,7 +7,7 @@ import "@/styles/article-content.css";
 
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentSlot } from "@/components/ContentSlot";
-import { ContentFaq } from "@/components/ContentFaq";
+import { ToolFaq } from "@/components/tools/ToolFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
@@ -113,7 +115,7 @@ export default async function GrowGarden2CropMutationCalculatorPage() {
     "In Grow a Garden 2, one mutation can turn an ordinary harvest into a much bigger Sheckles payout. Enter the crop's normal value, choose a mutation, and see the per-crop and total Sheckles result.";
 
   return (
-    <>
+    <ToolPageLayout sidebarContent={tool?.universe_id ? <GameDiscoverySidebar universeId={tool.universe_id} universeName={null} currentType="tool" /> : undefined} toolCode="grow-a-garden-2-crop-mutation-calculator" title={tool?.title ?? "Tool"} canonicalPath="/tools/grow-a-garden-2-crop-mutation-calculator">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
       <PageBreadcrumb
@@ -161,7 +163,7 @@ export default async function GrowGarden2CropMutationCalculatorPage() {
                 adFormat="auto"
                 fullWidthResponsive
               />
-              <ContentFaq
+              <ToolFaq
                 items={faqNodes.map((faq, idx) => ({
                   id: `${faq.q}-${idx}`,
                   question: faq.q,
@@ -187,6 +189,6 @@ export default async function GrowGarden2CropMutationCalculatorPage() {
         />
       </div>
       <MoreTools excludeCode="grow-a-garden-2-crop-mutation-calculator" />
-    </>
+    </ToolPageLayout>
   );
 }

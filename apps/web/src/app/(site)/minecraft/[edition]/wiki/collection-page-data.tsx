@@ -8,8 +8,7 @@ import {
 } from "@/app/(site)/wiki/collections/games/generic";
 import { RelatedMinecraftTools } from "@/app/(site)/minecraft/tools/page-data";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-
-
+import { GameCollectionSidebarLayout } from "@/components/games/GameCollectionSidebarLayout";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 import {
   buildMinecraftCollectionPath,
@@ -127,18 +126,26 @@ export async function renderMinecraftCollectionPageRoute({
     wikiLabel: `${context.page.game_title} Wiki`,
     collectionOptions,
     showMoreCollections: false,
-    enableItemFinder: true
+    enableItemFinder: true,
+    stream: true
   });
   return (
-    <>
+    <GameCollectionSidebarLayout
+      canonicalPath={buildMinecraftCollectionPath(slug, collection)}
+      title={context.page.title}
+      code={context.page.code}
+      gameName={context.page.game_short_title || context.page.game_title}
+      wikiPath={buildMinecraftWikiPath(slug)}
+      collectionOptions={collections.map(entry => ({ value: entry.code, label: entry.display_name, href: buildMinecraftCollectionPath(entry.wiki_slug, entry.collection_slug), description: entry.meta_description }))}
+    >
       {renderedCollection}
-      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8"><RelatedMinecraftTools collection={collection} /></div>
+      <RelatedMinecraftTools collection={collection} />
       {contentHtml?.id ? (
-        <div className="mx-auto mt-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mt-10">
           <CommentsSection entityType="minecraft_wiki_collection" entityId={contentHtml.id} />
         </div>
       ) : null}
-    </>
+    </GameCollectionSidebarLayout>
   );
 }
 

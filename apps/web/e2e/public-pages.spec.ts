@@ -159,10 +159,12 @@ test.describe("public rendering contracts", () => {
 
   test("primary navigation exposes working public destinations", async ({ page }) => {
     await page.goto("/", { waitUntil: "networkidle" });
-    if (page.viewportSize()!.width < 1280) {
-      await page.getByRole("button", { name: "Open menu" }).click();
+    // Narrow windows move the header links into the More drawer.
+    let nav = page.getByRole("navigation", { name: "Primary" });
+    if (page.viewportSize()!.width < 768) {
+      await page.getByRole("button", { name: "More", exact: true }).click();
+      nav = page.getByRole("dialog", { name: "More" }).getByRole("navigation", { name: "Browse" });
     }
-    const nav = page.getByRole("navigation", { name: "Primary" });
     await expect(nav).toBeVisible();
     const destinations = await nav.locator('a[href^="/"]').evaluateAll((links) =>
       [...new Set(links.map((link) => (link as HTMLAnchorElement).getAttribute("href")).filter(Boolean))].slice(0, 8)
@@ -172,6 +174,19 @@ test.describe("public rendering contracts", () => {
       const response = await page.request.get(destination!, { maxRedirects: 0 });
       expect(response.status(), destination!).toBeLessThan(400);
     }
+  });
+
+  test("header search opens a section-scoped popup from the icon and Ctrl+K", async ({ page }) => {
+    await page.goto("/wiki", { waitUntil: "networkidle" });
+    const trigger = page.getByRole("button", { name: "Search", exact: true });
+    await trigger.click();
+    const dialog = page.getByRole("dialog", { name: "Search" });
+    await expect(dialog.getByRole("combobox", { name: "Search wiki" })).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await page.keyboard.press("Control+K");
+    await expect(dialog.getByRole("combobox", { name: "Search wiki" })).toBeFocused();
   });
 
   test("Robux calculator responds to user input and mode controls", async ({ page }) => {

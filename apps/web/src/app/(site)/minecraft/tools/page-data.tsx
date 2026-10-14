@@ -19,11 +19,13 @@ export function MinecraftToolCards({ tools, hub = false }: { tools: MinecraftToo
     <section
       id={hub ? "article-body" : undefined}
       itemProp={hub ? "articleBody" : undefined}
+      role="list"
       className="journey-content-stream journey-content-stream--index"
     >
       {tools.map((tool, index) => (
         <div
           key={tool.id}
+          role="listitem"
           data-journey-item
           className="h-full"
           data-analytics-event="select_item"

@@ -1,5 +1,8 @@
 "use client";
 
+import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
+import { FREE_ITEMS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PagePagination } from "@/components/PagePagination";
@@ -156,7 +159,7 @@ export function FreeItemsBrowser({
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-end">
+      <form onSubmit={handleSubmit} className="catalog-toolbar">
         <div className="flex-1 space-y-2">
           <label htmlFor="free-items-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
             Search
@@ -208,29 +211,26 @@ export function FreeItemsBrowser({
         </div>
       </form>
 
-      {loading ? <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Updating results...</p> : null}
-      {error ? <p className="text-sm font-semibold text-rose-400">{error}</p> : null}
+      <p hidden={!loading} className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">Updating results...</p>
+      <p hidden={!error} className="text-sm font-semibold text-rose-400">{error}</p>
 
-      {!items.length ? (
-        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div hidden={!!items.length} className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No free items match those filters right now.
         </div>
-      ) : (
-        <>
-          {items.map((item) => (
-            <div key={item.asset_id} data-journey-item className="h-full">
+      <>
+          <CatalogStableItems slots={FREE_ITEMS_PAGE_SIZE}>{items.map((item) => (
+            <div key={item.asset_id} className="h-full">
               <RobloxCatalogItemCard item={item} categoryLabelMode="taxonomy" />
             </div>
-          ))}
+          ))}</CatalogStableItems>
         </>
-      )}
 
-      <PagePagination
+      <div hidden={totalPages <= 1}><PagePagination
         basePath={basePath}
         currentPage={currentPage}
         totalPages={totalPages}
         query={searchQueryString || undefined}
-      />
+      /></div>
     </>
   );
 }

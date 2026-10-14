@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+import { ContentCopyNodes } from "./GameContentPage";
 import { safeJsonLd } from "@/lib/seo";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -21,9 +23,21 @@ export async function GameCodePage({ page, namespaceTitle }: { page: CodePage; n
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(webPageJsonLd({ siteUrl: SITE_URL, slug: page.canonical_path.slice(1), title: page.title, description: page.meta_description ?? "", image: `${SITE_URL}/Bloxodes.png`, author: null, publishedAt: page.published_at, updatedAt: page.updated_at })) }} />
     <header className="space-y-4"><PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: namespaceTitle, href: `/${page.namespace}` }, { label: "Codes", href: null }]} /><h1 className="text-4xl font-semibold md:text-5xl">{page.title}</h1><UpdatedTimestamp value={page.updated_at} /></header>
     <article id="article-body" className="journey-content-stream journey-content-stream--prose space-y-8">
-      {copy[0].nodes.length ? <div className="article-content md-copy-scope max-w-3xl">{copy[0].nodes}</div> : null}
-      {(["active", "expired"] as const).map(status => <section key={status} className="space-y-4"><h2 className="text-2xl font-semibold">{status === "active" ? "Active codes" : "Expired codes"}</h2>{codes?.some(code => code.status === status) ? <ul className="space-y-3">{codes.filter(code => code.status === status).map(code => <li key={code.code} className="flex flex-wrap items-center gap-4 rounded-lg border border-border p-4"><code className="font-semibold">{code.code}</code>{code.rewards_text ? <span>{code.rewards_text}</span> : null}{status === "active" ? <CopyGameCode code={code.code} /> : null}</li>)}</ul> : <p className="text-muted">{status === "active" ? "No verified active codes are listed." : "No expired codes are listed."}</p>}</section>)}
-      {copy.slice(1).filter(section => section.nodes.length).map(section => <section key={section.heading} className="article-content md-copy-scope max-w-3xl"><h2>{section.heading}</h2>{section.nodes}</section>)}
+      <ContentCopyNodes nodes={copy[0].nodes} group="game-codes-intro" className="max-w-3xl" />
+      {(["active", "expired"] as const).map(status => {
+        const rows = (codes ?? []).filter(code => code.status === status);
+        const groups = Array.from({ length: Math.ceil(rows.length / 8) }, (_, index) => rows.slice(index * 8, index * 8 + 8));
+        return <Fragment key={status}>
+          <h2 className="text-2xl font-semibold">{status === "active" ? "Active codes" : "Expired codes"}</h2>
+          {groups.length ? groups.map((group, index) => <ul key={index} className="ads-content-code-rows space-y-3" aria-label={status === "active" ? "Active codes" : "Expired codes"}>
+            {group.map(code => <li key={code.code} className="flex flex-wrap items-center gap-4 rounded-lg border border-border p-4"><code className="font-semibold">{code.code}</code>{code.rewards_text ? <span>{code.rewards_text}</span> : null}{status === "active" ? <CopyGameCode code={code.code} /> : null}</li>)}
+          </ul>) : <p className="ads-content-code-empty text-muted">{status === "active" ? "No verified active codes are listed." : "No expired codes are listed."}</p>}
+        </Fragment>;
+      })}
+      {copy.slice(1).filter(section => section.nodes.length).map(section => <Fragment key={section.heading}>
+        <div className="ads-content-code-heading article-content md-copy-scope max-w-3xl"><h2>{section.heading}</h2></div>
+        <ContentCopyNodes nodes={section.nodes} group={`game-codes-${section.heading}`} className="max-w-3xl" />
+      </Fragment>)}
       {faqs.length ? <ContentFaq items={faqs} /> : null}
     </article>
     <CommentsSection entityType="game_code" entityId={page.id} />

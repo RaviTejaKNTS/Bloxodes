@@ -8,6 +8,7 @@ import { PagePagination } from "@/components/PagePagination";
 import type { CollectionPaginationInfo } from "./collection-pagination";
 import { CollectionImageLightbox } from "./CollectionImageLightbox";
 import { CollectionImagePlaceholder } from "./CollectionImagePlaceholder";
+import { CollectionRowGroups } from "./CollectionRowGroups";
 import { GameCollectionViewShell } from "./GameCollectionViewShell";
 
 type GameCollectionStat = { key: string; label: string };
@@ -62,6 +63,9 @@ type GameCollectionViewProps = {
   config: GameCollectionViewConfig;
   pagination?: CollectionPaginationInfo | null;
   toolbar?: ReactNode;
+  stream?: boolean;
+  beforeToolbar?: ReactNode;
+  afterContent?: ReactNode;
 };
 
 type GameCollectionDisplayStat = {
@@ -829,10 +833,25 @@ const WIDE_TABLE_FIELD_KEYS = new Set([
   "notes"
 ]);
 
-function getTableFieldColumnClass(
+type TableFieldColumn = { className: string; width: number };
+
+// Widths in rem. Chunked list tables use them for a shared colgroup; the classes size the cells of single tables.
+const TABLE_FIELD_COLUMNS = {
+  tiny: { className: "w-[5.75rem] min-w-[5.75rem] max-w-[5.75rem]", width: 5.75 },
+  compact: { className: "w-[8rem] min-w-[8rem] max-w-[8rem]", width: 8 },
+  wide: { className: "w-[13rem] min-w-[13rem] max-w-[17rem]", width: 13 },
+  chip: { className: "w-[10rem] min-w-[10rem] max-w-[12rem]", width: 10 },
+  standard: { className: "w-[10rem] min-w-[10rem] max-w-[14rem]", width: 10 }
+} satisfies Record<string, TableFieldColumn>;
+
+const TABLE_IMAGE_COLUMN_WIDTH = 12;
+const TABLE_NAME_COLUMN_WIDTH = 8.5;
+const TABLE_DESCRIPTION_COLUMN_WIDTH = 13;
+
+function getTableFieldColumn(
   definition: CollectionPresentationFieldDefinition,
   presentations: CollectionItemPresentation[]
-): string {
+): TableFieldColumn {
   const key = definition.key;
   const sampleFields = presentations
     .map((presentation) => presentation.fields.find((field) => field.key === key))
@@ -842,22 +861,43 @@ function getTableFieldColumnClass(
   const hasChip = sampleFields.some((field) => field.kind === "chip");
 
   if (TINY_TABLE_FIELD_KEYS.has(key)) {
-    return "w-[5.75rem] min-w-[5.75rem] max-w-[5.75rem]";
+    return TABLE_FIELD_COLUMNS.tiny;
   }
 
   if (COMPACT_TABLE_FIELD_KEYS.has(key)) {
-    return "w-[8rem] min-w-[8rem] max-w-[8rem]";
+    return TABLE_FIELD_COLUMNS.compact;
   }
 
   if (WIDE_TABLE_FIELD_KEYS.has(key) || hasDetail || hasLongValue) {
-    return "w-[13rem] min-w-[13rem] max-w-[17rem]";
+    return TABLE_FIELD_COLUMNS.wide;
   }
 
   if (hasChip) {
-    return "w-[10rem] min-w-[10rem] max-w-[12rem]";
+    return TABLE_FIELD_COLUMNS.chip;
   }
 
-  return "w-[10rem] min-w-[10rem] max-w-[14rem]";
+  return TABLE_FIELD_COLUMNS.standard;
+}
+
+type ForgeTableLayout = { fieldColumns: Map<string, TableFieldColumn>; widths: number[] };
+
+/** One set of column widths for every chunk of a section's list, taken from all of its rows. */
+function buildForgeTableLayout(
+  fieldDefinitions: CollectionPresentationFieldDefinition[],
+  presentations: CollectionItemPresentation[],
+  showImages: boolean,
+  hasDescription: boolean
+): ForgeTableLayout {
+  const fieldColumns = new Map(fieldDefinitions.map((definition) => [definition.key, getTableFieldColumn(definition, presentations)]));
+  // Headers don't wrap, so a fixed column must fit its label, as the old auto layout did.
+  const headerWidth = (label: string) => label.length * 0.46 + 1.9;
+  const widths = [
+    ...(showImages ? [TABLE_IMAGE_COLUMN_WIDTH] : []),
+    TABLE_NAME_COLUMN_WIDTH,
+    ...(hasDescription ? [TABLE_DESCRIPTION_COLUMN_WIDTH] : []),
+    ...fieldDefinitions.map((definition) => Math.max(fieldColumns.get(definition.key)?.width ?? TABLE_FIELD_COLUMNS.standard.width, headerWidth(definition.label)))
+  ];
+  return { fieldColumns, widths };
 }
 
 function ForgeItemTable({
@@ -865,22 +905,27 @@ function ForgeItemTable({
   fieldDefinitions,
   showImages,
   hideMissingImagePlaceholders,
-  descriptionLabel
+  descriptionLabel,
+  layout
 }: {
   presentations: CollectionItemPresentation[];
   fieldDefinitions: CollectionPresentationFieldDefinition[];
   showImages: boolean;
   hideMissingImagePlaceholders: boolean;
   descriptionLabel: string | null;
+  /** Fixed section-wide columns for list chunks. Without it the table sizes columns from its own rows. */
+  layout?: ForgeTableLayout;
 }) {
-  const fieldColumnClasses = new Map(
-    fieldDefinitions.map((definition) => [definition.key, getTableFieldColumnClass(definition, presentations)])
+  const fieldColumns = layout?.fieldColumns ?? new Map(
+    fieldDefinitions.map((definition) => [definition.key, getTableFieldColumn(definition, presentations)])
   );
+  const fieldColumnClasses = new Map([...fieldColumns].map(([key, column]) => [key, column.className]));
 
   return (
     <div className="table-scroll-wrapper">
       <div className="table-scroll-inner game-copy">
-        <table>
+        <table style={layout ? { minWidth: `${layout.widths.reduce((sum, width) => sum + width, 0)}rem` } : undefined}>
+          {layout ? <colgroup>{layout.widths.map((width, index) => <col key={index} style={{ width: `${width}rem` }} />)}</colgroup> : null}
           <thead>
             <tr>
               {showImages ? <th className="table-col-compact">Image</th> : null}
@@ -942,7 +987,7 @@ function ForgeItemTable({
   );
 }
 
-export function GameCollectionView({ sections, config, pagination, toolbar }: GameCollectionViewProps) {
+export function GameCollectionView({ sections, config, pagination, toolbar, stream = false, beforeToolbar, afterContent }: GameCollectionViewProps) {
   const hasItems = sections.some((section) => section.items.length > 0);
   const totalItemCount = sections.reduce((sum, section) => sum + section.items.length, 0);
   const cardFieldDefinitions = buildFieldDefinitions(config, "cards");
@@ -954,32 +999,44 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
     section,
     cardItems: section.items.map((item) => buildItemPresentation(item, config, cardFieldDefinitions)),
     tableItems: section.items.map((item) => buildItemPresentation(item, config, tableFieldDefinitions))
+  })).map((entry) => ({
+    ...entry,
+    tableLayout: stream ? buildForgeTableLayout(tableFieldDefinitions, entry.tableItems, showImages, Boolean(descriptionLabel)) : undefined
   }));
-  const hasWideCardContent = sectionPresentations.some(({ cardItems }) => cardItems.some(presentationHasWideContent));
+  const hasWideCardContent = sectionPresentations.some(({ cardItems }) =>
+    cardItems.some(item => presentationHasWideContent(item) || (stream && item.fields.length > 6))
+  );
   const renderCards = totalItemCount <= 600;
   const renderList = true;
   const defaultView = renderCards ? "cards" : "list";
 
+  const Stream = stream ? Fragment : "section";
+
   if (!hasItems) {
+    const emptyState = (
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+        No {config.label.toLowerCase()} data has been collected yet. Check back soon.
+      </div>
+    );
+    if (!stream) {
+      return <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--collection">{emptyState}</section>;
+    }
     return (
-      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--collection">
-        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-          No {config.label.toLowerCase()} data has been collected yet. Check back soon.
-        </div>
-      </section>
+      <GameCollectionViewShell availableViews={[]} stream beforeToolbar={beforeToolbar} afterContent={afterContent}>
+        {emptyState}
+      </GameCollectionViewShell>
     );
   }
 
   return (
-    <GameCollectionViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]} defaultView={defaultView} toolbar={toolbar}>
+    <GameCollectionViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]} defaultView={defaultView} toolbar={toolbar} stream={stream} beforeToolbar={beforeToolbar} afterContent={afterContent}>
       {(activeView) => (
       <>
       <CollectionImageLightbox containerId="article-body" />
-      <section
-        id="article-body"
-        itemProp="articleBody"
-        className={`journey-content-stream journey-content-stream--collection${hasWideCardContent ? " journey-content-stream--collection-wide" : ""}`}
-      >
+      <Stream {...(stream ? {} : {
+        id: "article-body", itemProp: "articleBody",
+        className: `journey-content-stream journey-content-stream--collection${hasWideCardContent ? " journey-content-stream--collection-wide" : ""}`
+      })}>
         {pagination && pagination.totalPages > 1 ? (
           <div className="space-y-3 border-b border-border/60 pb-6">
             <p className="text-sm text-muted">
@@ -995,7 +1052,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
           </div>
         ) : null}
 
-        {sectionPresentations.map(({ section, cardItems, tableItems }) => (
+        {sectionPresentations.map(({ section, cardItems, tableItems, tableLayout }) => (
           <Fragment key={section.id}>
             <div id={section.id} className="space-y-5 scroll-mt-28">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -1024,7 +1081,16 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
               ) : null}
             </div>
 
-            {renderCards && activeView === "cards"
+            {stream ? <CollectionRowGroups
+              items={activeView === "cards" ? cardItems : tableItems}
+              activeView={activeView}
+              slots={section.items.length}
+              wide={hasWideCardContent}
+              renderCard={presentation => <ForgeItemCard presentation={presentation} showImage={showImages && !(config.hideMissingImagePlaceholders && !presentation.image)} />}
+              renderList={presentations => <ForgeItemTable presentations={presentations} fieldDefinitions={tableFieldDefinitions} showImages={showImages} hideMissingImagePlaceholders={Boolean(config.hideMissingImagePlaceholders)} descriptionLabel={descriptionLabel} layout={tableLayout} />}
+            /> : null}
+
+            {!stream && renderCards && activeView === "cards"
               ? cardItems.map((presentation) => (
                   <div key={presentation.id} data-journey-item className="game-collection-card-item h-full">
                     <ForgeItemCard presentation={presentation} showImage={showImages && !(config.hideMissingImagePlaceholders && !presentation.image)} />
@@ -1032,7 +1098,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
                 ))
               : null}
 
-            {renderList && activeView === "list" ? (
+            {!stream && renderList && activeView === "list" ? (
               <div className="game-collection-list-view">
                 <ForgeItemTable
                   presentations={tableItems}
@@ -1055,7 +1121,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar }: Ga
             className="flex flex-wrap items-center gap-2 border-t border-border/60 pt-6"
           />
         ) : null}
-      </section>
+      </Stream>
       </>
       )}
     </GameCollectionViewShell>

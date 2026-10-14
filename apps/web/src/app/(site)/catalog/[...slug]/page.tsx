@@ -9,7 +9,7 @@ import { splitPathToSlug } from "@/lib/static-params";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CatalogFaq as ContentFaq } from "@/components/catalog/CatalogFaq";
 
 export const revalidate = 21600;
 const RESERVED_CATALOG_PREFIXES = [
@@ -150,7 +150,7 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
         <UpdatedTimestamp value={contentHtml.updatedAt} />
       </header>
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6 journey-content-stream journey-content-stream--prose">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6 catalog-stream journey-content-stream journey-content-stream--prose">
         {introNodes ? introNodes : null}
 
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}

@@ -463,7 +463,8 @@ export function StatsRankChartPanel({
   }
 
   return (
-    <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
+    <>
+    <Card className="stats-rank-chart overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
       <CardHeader className="flex flex-col gap-3 border-b border-border/60 p-4 xl:flex-row xl:items-center xl:justify-between">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
@@ -789,7 +790,10 @@ export function StatsRankChartPanel({
           </TooltipProvider>
         </div>
 
-        <div className="mt-4 grid gap-3 md:grid-cols-3">
+      </CardContent>
+    </Card>
+    <div className="stats-rank-summary text-card-foreground">
+        <div className="grid gap-3 md:grid-cols-3">
           {(["global", "genre", "subgenre"] as RankScopeKey[])
             .map((key) => summaries.find((summary) => summary.key === key))
             .filter((summary): summary is RankSummary => Boolean(summary))
@@ -797,7 +801,7 @@ export function StatsRankChartPanel({
               <RankSummaryCard key={summary.key} summary={summary} />
             ))}
         </div>
-      </CardContent>
-    </Card>
+    </div>
+    </>
   );
 }

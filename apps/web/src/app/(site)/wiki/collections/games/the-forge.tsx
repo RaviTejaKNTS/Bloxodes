@@ -1,4 +1,3 @@
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
@@ -6,7 +5,7 @@ import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { GameCollectionView } from "@/components/game-collections/GameCollectionView";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { THE_FORGE_COLLECTIONS, type GameCollectionViewConfig } from "@/lib/game-collections/games/the-forge";
@@ -443,12 +442,30 @@ export function renderTheForgeCollectionPage({
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
-      <section className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section className="min-w-0">
+        <GameCollectionView
+          stream
+          beforeToolbar={<>
+
         {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
 
-        <CatalogAdSlot />
+          </>}
+          afterContent={<>
 
-        <GameCollectionView
+        {hasDetails ? (
+          <>
+            {descriptionNodes.length ? descriptionNodes : null}
+
+            <CollectionFaq
+              items={faqNodes.map((faq, idx) => ({
+                id: `${faq.q}-${idx}`,
+                question: faq.q,
+                answer: faq.nodes
+              }))}
+            />
+          </>
+        ) : null}
+          </>}
           sections={pageSections}
           config={config}
           pagination={pagination.info}
@@ -459,22 +476,6 @@ export function renderTheForgeCollectionPage({
             </>
           }
         />
-
-        <CatalogAdSlot />
-
-        {hasDetails ? (
-          <>
-            {descriptionNodes.length ? descriptionNodes : null}
-
-            <ContentFaq
-              items={faqNodes.map((faq, idx) => ({
-                id: `${faq.q}-${idx}`,
-                question: faq.q,
-                answer: faq.nodes
-              }))}
-            />
-          </>
-        ) : null}
       </section>
 
       {pagination.info.currentPage === 1 ? (

@@ -1,30 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { gtaWikiNavLinks, isGtaWikiNavLinkActive } from "@/lib/site-navigation";
+import { gtaNavLinks, minecraftNavLinks, redDeadNavLinks, siteNavGroupsForPath, siteNavLinks } from "@/lib/site-navigation";
 
-describe("GTA wiki sidebar navigation", () => {
-  it("lists every approved GTA wiki once in newest-first order", () => {
-    expect(gtaWikiNavLinks).toHaveLength(17);
-    expect(gtaWikiNavLinks[0]).toEqual({ href: "/gta/wiki/gta-6", label: "GTA VI" });
-    expect(gtaWikiNavLinks[1]).toEqual({ href: "/gta/wiki/gta-online", label: "GTA Online" });
-    expect(gtaWikiNavLinks[gtaWikiNavLinks.length - 1]).toEqual({ href: "/gta/wiki/gta", label: "Grand Theft Auto" });
-    expect(new Set(gtaWikiNavLinks.map((link) => link.href)).size).toBe(gtaWikiNavLinks.length);
+describe("More drawer link groups", () => {
+  it("lists every site section once outside the franchise sections", () => {
+    const groups = siteNavGroupsForPath("/wiki/the-forge");
+    expect(groups.map((group) => group.label)).toEqual(["Browse"]);
+    expect(groups[0].links).toBe(siteNavLinks);
   });
 
-  it("keeps GTA VI highlighted while browsing pre-launch collections", () => {
-    for (const collection of ["characters", "locations", "editions", "trailers"]) {
-      expect(isGtaWikiNavLinkActive(`/gta/wiki/gta-6/${collection}`, "/gta/wiki/gta-6")).toBe(true);
-      expect(isGtaWikiNavLinkActive(`/gta/wiki/gta-6/${collection}`, "/gta/wiki/gta-5")).toBe(false);
-    }
-  });
-
-  it("keeps a game highlighted while browsing one of its collections", () => {
-    expect(isGtaWikiNavLinkActive(
-      "/gta/wiki/gta-online/action-figures",
-      "/gta/wiki/gta-online"
-    )).toBe(true);
-    expect(isGtaWikiNavLinkActive(
-      "/gta/wiki/gta-online/action-figures",
-      "/gta/wiki/gta-5"
-    )).toBe(false);
+  it.each([
+    ["/gta/wiki/gta-5/vehicles", "GTA", gtaNavLinks],
+    ["/red-dead/wiki/red-dead-redemption-2/cigarette-cards", "Red Dead", redDeadNavLinks],
+    ["/minecraft/bedrock/wiki/enchantments", "Minecraft", minecraftNavLinks]
+  ])("puts the franchise pages first on %s and keeps every site section", (path, label, franchiseLinks) => {
+    const groups = siteNavGroupsForPath(path);
+    expect(groups.map((group) => group.label)).toEqual([label, "Browse"]);
+    expect(groups[0].links).toBe(franchiseLinks);
+    const hrefs = groups.flatMap((group) => group.links.map((link) => link.href));
+    expect(new Set(hrefs).size).toBe(hrefs.length);
+    for (const link of siteNavLinks) expect(hrefs).toContain(link.href);
   });
 });

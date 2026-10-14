@@ -36,12 +36,14 @@ export function EventTimePanel({
   startUtc,
   endUtc,
   eventName,
-  thumbnailUrl
+  thumbnailUrl,
+  flat = false
 }: {
   startUtc: string | null;
   endUtc?: string | null;
   eventName: string;
   thumbnailUrl?: string | null;
+  flat?: boolean;
 }) {
   const startDate = parseDate(startUtc);
   const endDate = parseDate(endUtc);
@@ -66,13 +68,13 @@ export function EventTimePanel({
   }));
   const initialCountdown = buildCountdown(startDate.getTime(), Date.now());
 
-  return (
-    <div className="space-y-4 md-copy-scope">
-      <p data-md-copy="true" className="md-copy-node md-copy-p">
+  const content = (
+    <>
+      <p data-md-copy="true" className="ads-content-event-time-intro md-copy-node md-copy-p">
           The event {startVerb} on <time dateTime={startDate.toISOString()}>{ptStartLabel} PT</time>.{durationSentence}
       </p>
-      <LocalTimeWidget startUtc={startUtc} endUtc={endUtc} />
-      <div className="space-y-3">
+      <div className="ads-content-event-local-time"><LocalTimeWidget startUtc={startUtc} endUtc={endUtc} /></div>
+      <div className="ads-content-event-countdown space-y-3">
         <p data-md-copy="true" className="md-copy-node md-copy-p">Use this countdown to track exactly when the event begins.</p>
         <EventCountdown
           startUtc={startUtc}
@@ -81,8 +83,8 @@ export function EventTimePanel({
           initialLabel={initialCountdown}
         />
       </div>
-      <p data-md-copy="true" className="md-copy-node md-copy-p">And here's the {eventName} update release date and time for select regions:</p>
-      <div className="table-scroll-wrapper">
+      <p data-md-copy="true" className="ads-content-event-regions md-copy-node md-copy-p">And here's the {eventName} update release date and time for select regions:</p>
+      <div className="ads-content-event-regions-table table-scroll-wrapper">
         <div className="table-scroll-inner game-copy">
           <table>
             <thead>
@@ -102,6 +104,7 @@ export function EventTimePanel({
           </table>
         </div>
       </div>
-    </div>
+    </>
   );
+  return flat ? content : <div className="space-y-4 md-copy-scope">{content}</div>;
 }

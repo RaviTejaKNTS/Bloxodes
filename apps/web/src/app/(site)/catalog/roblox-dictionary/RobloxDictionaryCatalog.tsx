@@ -1,3 +1,4 @@
+import { CatalogRowGroups } from "@/components/catalog/CatalogRowGroups";
 import Link from "next/link";
 
 export type DictionaryTerm = {
@@ -200,8 +201,7 @@ export function RobloxDictionaryDirectory({
     .map((category) => ({
       ...category,
       items: sortedItems.filter((item) => item.category === category.key)
-    }))
-    .filter((section) => section.items.length > 0);
+    }));
   const hasFilters = Boolean(filters.query || filters.category || filters.status || filters.letter);
   const availableLetters = new Set(items.map((item) => firstLetter(item.term)));
 
@@ -216,7 +216,7 @@ export function RobloxDictionaryDirectory({
   return (
     <>
       <div className="space-y-5 rounded-lg border border-border/70 bg-surface/45 p-4 sm:p-5">
-        <form action="/catalog/roblox-dictionary" method="get" className="flex flex-col gap-4 md:flex-row md:items-end">
+        <form action="/catalog/roblox-dictionary" method="get" className="catalog-toolbar">
           {filters.letter ? <input type="hidden" name="letter" value={filters.letter} /> : null}
           <div className="flex-1 space-y-2">
             <label htmlFor="dictionary-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
@@ -316,9 +316,8 @@ export function RobloxDictionaryDirectory({
         </div>
       </div>
 
-      {visibleSections.length ? (
-        visibleSections.flatMap((section) => [
-          <div key={`${section.key}-heading`} className="flex flex-wrap items-end justify-between gap-3">
+      {visibleSections.flatMap((section) => [
+          <div key={`${section.key}-heading`} hidden={!section.items.length} className="flex flex-wrap items-end justify-between gap-3">
             <div className="space-y-1">
               <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
               <p className="max-w-3xl text-sm text-muted">{section.blurb}</p>
@@ -327,21 +326,19 @@ export function RobloxDictionaryDirectory({
               {section.items.length} {section.items.length === 1 ? "term" : "terms"}
             </span>
           </div>,
-          ...section.items.map((item) => (
-            <div key={item.slug} data-journey-item className="h-full">
+          <CatalogRowGroups key={`${section.key}-rows`} slots={items.filter(item => item.category === section.key).length}>{section.items.map((item) => (
+            <div key={item.slug} data-journey-item role="listitem" className="h-full">
               <DictionaryTermCard
                 item={item}
                 categoryLabel={categoryByKey.get(item.category)?.shortLabel ?? item.category}
               />
             </div>
-          ))
-        ])
-      ) : (
-        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center">
+          ))}</CatalogRowGroups>
+        ])}
+        <div hidden={!!sortedItems.length} className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center">
           <p className="font-semibold text-foreground">No dictionary terms matched those filters.</p>
           <p className="mt-2 text-sm text-muted">Try a shorter search, another first letter, or clear the active category.</p>
         </div>
-      )}
     </>
   );
 }
