@@ -37,6 +37,24 @@ The full guide appears only on `/codes`. Continuation pages use their own canoni
 
 The VPS worker runs `refresh:codes` every six hours at minute 0 with configured concurrency and batch delay. GitHub schedules should remain disabled where the VPS manifest owns the recurring job.
 
+## Pasted Copy labels
+
+Added 2026-10-14. Beebom and RobloxDen sometimes publish codes with a pasted copy-button label, such as `PROUDFROGCopy` on Adopt Me or `!code hakotrapCopy` on Fairy Tail Lost Souls. The label appears in their visible text and in their copy-button attributes, so parsers alone cannot avoid it.
+
+`apps/web/src/lib/code-normalization.ts` owns `stripPastedCopySuffix`. It strips trailing `Copy` or `Copied` when glued to a preceding non-space character with that exact capitalization, or when separated by whitespace with any casing. It repeats the rule for multiple pasted labels and preserves a label when removing it would leave nothing. Standalone `Copy`, `copy` and `COPY`, lowercase glued endings such as `xcopy`, and `NEW` endings stay intact. Reward text keeps the broader `stripTrailingCopyButtonText` rule, applied after `(new)` markers are removed and repeated for stacked labels.
+
+The code rule does not require a clean twin from the other source, because a single source can carry the only copy of a pasted code. A legitimate code ending in a glued capital `Copy`, such as a hypothetical `CarbonCopy`, would lose that ending. On 2026-10-14 the rule changed no production code without a clean twin on the same page, so the trade-off is accepted. Revisit it if such a code appears.
+
+`mergeScrapeResults` cleans active and scraped expired code text before computing normalized keys. Display, reward and active/expired provider precedence stays the same. Beebom also calls the shared cleaner before its parser removes spaces, so a separate lowercase `copy` suffix cannot become a glued lowercase ending. This covers copy-control attributes as well as visible code text.
+
+The refresh cleans stored `code_pages.expired_codes` before adding them to its normalized map and cleans every subsequent insertion into that map. It compares the resulting array with the original stored array, so renames and duplicate removals trigger a page update on the next successful refresh.
+
+`npm run refresh:codes -- --cleanup-copy-text` plans a one-time repair across all code rows and all page expired lists, including unpublished pages and pages without code rows. It prints each affected slug with code rename/merge counts, reward cleanup counts and expired-list removal/rename counts. Expired-list deduplication keeps the first cleaned spelling and position. Reward counts include contaminated rewards addressed by a group merge, even when the row is deleted. Code merges preserve the clean twin's ID and spelling when one exists, merge metadata, save the survivor first and then delete duplicate rows. Without a twin, the survivor is renamed. The planner lives in `scripts/codes/copy-text-cleanup.ts` and has no database side effects.
+
+Dry-run is the default. `--apply` writes; production additionally requires `NODE_ENV=production` and `--allow-prod`. Before deleting a group's duplicates, the survivor update must match its original code text and return exactly one row. The script reads back code rows and page arrays, requires an empty cleanup plan across codes, rewards and expired lists, and compares saved code/reward text, deletions and cleaned arrays with the plan. Run it while the scheduled refresh is idle, because planning and application are separate requests rather than one transaction.
+
+Both `codes` updates/deletes and published `code_pages` updates already enqueue `code` revalidation through the triggers defined in `20260918000003_retire_lists_page_type.sql`. The verified apply also uses `scripts/shared/revalidation-events.ts` to coalesce a `code` event for every affected slug. The queue worker calls `/api/revalidate`, which purges the codes detail/index tags and schedules deferred warming. No synchronous warming or direct HTTP secret is needed. See [revalidation and cache](../operations/revalidation-cache.md).
+
 ## Safety
 
 - Never manually seed active/expired codes or code dates.

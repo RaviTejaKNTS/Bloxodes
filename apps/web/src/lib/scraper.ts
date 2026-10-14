@@ -4,6 +4,7 @@ import { scrapeBeebomPage } from "./beebom";
 import { scrapeProGameGuidesPage } from "./progameguides";
 import { scrapeDestructoidPage } from "./destructoid";
 import type { ScrapeResult, ScrapedCode } from "./scraper-types";
+import { normalizeCodeKey, stripPastedCopySuffix, stripTrailingCopyButtonText } from "./code-normalization";
 
 const SCRAPER_MAP = {
   robloxden: scrapeRobloxdenPage,
@@ -15,19 +16,15 @@ const SCRAPER_MAP = {
 
 type Provider = keyof typeof SCRAPER_MAP;
 
-function normalizeCodeKey(code: string): string {
-  return code.replace(/\s+/g, "").trim().toUpperCase();
-}
-
 function sanitizeRewardText(raw?: string): string | undefined {
   if (!raw) return undefined;
-  const cleaned = raw
+  const withoutNew = raw
     // Strip any "(new)" markers regardless of casing/spaces
     .replace(/\(\s*new\s*\)/gi, "")
     // Collapse leftover double spaces
-    .replace(/\s{2,}/g, " ")
-    .trim();
-  return cleaned || undefined;
+    .replace(/\s{2,}/g, " ");
+  // Remove copy labels after "(new)" so "200 Spins Copy (new)" is fully cleaned.
+  return stripTrailingCopyButtonText(withoutNew) ?? undefined;
 }
 
 const STATUS_PRIORITY: Record<ScrapedCode["status"], number> = {
@@ -138,20 +135,21 @@ export function mergeScrapeResults(results: ScrapeResult[]): ScrapeResult {
 
   for (const result of results) {
     for (const codeEntry of result.codes) {
+      const code = stripPastedCopySuffix(codeEntry.code);
+      if (!code) continue;
       const normalizedRewards = sanitizeRewardText(codeEntry.rewardsText);
       const sanitizedEntry: ScrapedCode = {
         ...codeEntry,
+        code,
         rewardsText: normalizedRewards,
       };
-      const normalizedCode = normalizeCodeKey(codeEntry.code);
+      const normalizedCode = normalizeCodeKey(code);
       if (!normalizedCode) continue;
       const existing = map.get(normalizedCode);
       if (!existing) {
-        const sanitizedCode = codeEntry.code.trim();
         map.set(normalizedCode, {
           data: {
             ...sanitizedEntry,
-            code: sanitizedCode,
             rewardsText: normalizedRewards,
             providerPriority: getCodeDisplayPriority(codeEntry.provider),
           },
@@ -166,7 +164,7 @@ export function mergeScrapeResults(results: ScrapeResult[]): ScrapeResult {
     }
 
     for (const expired of result.expiredCodes ?? []) {
-      const code = typeof expired === "string" ? expired.trim() : expired.code?.trim();
+      const code = stripPastedCopySuffix(typeof expired === "string" ? expired : expired.code);
       const provider = typeof expired === "string" ? undefined : expired.provider;
       if (!code) continue;
       const normalizedExpired = normalizeCodeKey(code);

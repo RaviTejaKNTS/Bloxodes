@@ -7,11 +7,14 @@ import type { CodePage } from "@/lib/db";
 import {
   sanitizeCodeDisplay,
   normalizeCodeKey,
-  stripTrailingCopyButtonText,
+  cleanExpiredCodeList,
+  stripPastedCopySuffix,
 } from "@/lib/code-normalization";
 import { isLikelyNonCodeText } from "@/lib/beebom";
 import { isSuspiciousEmptyCodeRefresh } from "@/lib/code-refresh-safety";
 import { runDataApiOperation } from "../shared/data-api-retry";
+import { enqueueRevalidationEvents } from "../shared/revalidation-events";
+import { buildCopyCleanupPlan, type CleanupCodePage, type CleanupCodeRow } from "./copy-text-cleanup";
 
 const PAGE_SIZE = Number(process.env.REFRESH_PAGE_SIZE ?? 500);
 const CONCURRENCY = Math.max(1, Number(process.env.REFRESH_CONCURRENCY ?? 5));
@@ -69,33 +72,6 @@ type ProcessResult = {
   error?: string;
 };
 
-type CleanupCodeRow = {
-  id: string;
-  code_page_id: string;
-  code: string;
-  status: "active" | "expired" | "check";
-  rewards_text: string | null;
-  level_requirement: number | null;
-  is_new: boolean | null;
-  first_seen_at: string;
-  last_seen_at: string;
-  posted_online: boolean;
-  provider_priority: number;
-};
-
-type CleanupGroup = {
-  survivor: CleanupCodeRow | null;
-  patch: Partial<CleanupCodeRow> | null;
-  deleteIds: string[];
-  updateBeforeDelete: boolean;
-};
-
-function statusRank(status: CleanupCodeRow["status"]): number {
-  if (status === "active") return 2;
-  if (status === "check") return 1;
-  return 0;
-}
-
 async function fetchAllCodeRows(sb: ReturnType<typeof supabaseAdmin>) {
   const rows: CleanupCodeRow[] = [];
   const pageSize = 1_000;
@@ -119,100 +95,25 @@ async function fetchAllCodeRows(sb: ReturnType<typeof supabaseAdmin>) {
   return rows;
 }
 
-function buildCopyCleanupPlan(rows: CleanupCodeRow[]) {
-  const dirtyCodeRows = rows.filter(
-    (row) => stripTrailingCopyButtonText(row.code) !== sanitizeCodeDisplay(row.code)
-  );
-  const dirtyGroups = new Map<string, CleanupCodeRow[]>();
+async function fetchAllCleanupCodePages(sb: ReturnType<typeof supabaseAdmin>) {
+  const pages: CleanupCodePage[] = [];
+  const pageSize = 1_000;
+  let from = 0;
 
-  for (const row of dirtyCodeRows) {
-    const cleaned = stripTrailingCopyButtonText(row.code);
-    const normalized = normalizeCodeKey(cleaned) ?? "";
-    const key = `${row.code_page_id}:${normalized}`;
-    const group = dirtyGroups.get(key) ?? [];
-    group.push(row);
-    dirtyGroups.set(key, group);
+  while (true) {
+    const { data, error } = await sb
+      .from("code_pages")
+      .select("id,slug,expired_codes")
+      .order("id")
+      .range(from, from + pageSize - 1);
+    if (error) throw error;
+    const chunk = (data ?? []) as CleanupCodePage[];
+    pages.push(...chunk);
+    if (chunk.length < pageSize) break;
+    from += pageSize;
   }
 
-  const groups: CleanupGroup[] = [];
-  const groupedIds = new Set<string>();
-  const rewardUpdates: Array<{ id: string; rewards_text: string | null }> = [];
-
-  for (const dirtyRows of dirtyGroups.values()) {
-    const firstDirty = dirtyRows[0];
-    const cleanedCode = stripTrailingCopyButtonText(firstDirty.code);
-    dirtyRows.forEach((row) => groupedIds.add(row.id));
-
-    if (!cleanedCode) {
-      groups.push({
-        survivor: null,
-        patch: null,
-        deleteIds: dirtyRows.map((row) => row.id),
-        updateBeforeDelete: false,
-      });
-      continue;
-    }
-
-    const normalized = normalizeCodeKey(cleanedCode);
-    const cleanCandidate = rows.find(
-      (row) =>
-        row.code_page_id === firstDirty.code_page_id &&
-        !dirtyRows.some((dirty) => dirty.id === row.id) &&
-        normalizeCodeKey(row.code) === normalized
-    );
-    const survivor =
-      cleanCandidate ??
-      [...dirtyRows].sort(
-        (left, right) =>
-          right.provider_priority - left.provider_priority ||
-          statusRank(right.status) - statusRank(left.status)
-      )[0];
-    const members = cleanCandidate ? [cleanCandidate, ...dirtyRows] : dirtyRows;
-    const priorityRows = [...members].sort(
-      (left, right) => right.provider_priority - left.provider_priority
-    );
-    const rewardSource = priorityRows.find((row) =>
-      Boolean(stripTrailingCopyButtonText(row.rewards_text))
-    );
-    const levelSource = priorityRows.find((row) => row.level_requirement != null);
-    const mergedStatus = [...members].sort(
-      (left, right) => statusRank(right.status) - statusRank(left.status)
-    )[0].status;
-    const mergedFirstSeen = members
-      .map((row) => row.first_seen_at)
-      .sort((left, right) => Date.parse(left) - Date.parse(right))[0];
-    const mergedLastSeen = members
-      .map((row) => row.last_seen_at)
-      .sort((left, right) => Date.parse(right) - Date.parse(left))[0];
-    const displayCode = cleanCandidate?.code ?? cleanedCode;
-
-    groups.push({
-      survivor,
-      patch: {
-        code: displayCode,
-        status: mergedStatus,
-        rewards_text: stripTrailingCopyButtonText(rewardSource?.rewards_text) ?? null,
-        level_requirement: levelSource?.level_requirement ?? null,
-        is_new: members.some((row) => row.is_new),
-        first_seen_at: mergedFirstSeen,
-        last_seen_at: mergedLastSeen,
-        posted_online: members.some((row) => row.posted_online),
-        provider_priority: Math.max(...members.map((row) => row.provider_priority)),
-      },
-      deleteIds: members.filter((row) => row.id !== survivor.id).map((row) => row.id),
-      updateBeforeDelete: Boolean(cleanCandidate),
-    });
-  }
-
-  for (const row of rows) {
-    if (groupedIds.has(row.id)) continue;
-    const cleanedReward = stripTrailingCopyButtonText(row.rewards_text);
-    if (cleanedReward !== sanitizeCodeDisplay(row.rewards_text)) {
-      rewardUpdates.push({ id: row.id, rewards_text: cleanedReward });
-    }
-  }
-
-  return { dirtyCodeRows, groups, rewardUpdates };
+  return pages;
 }
 
 async function runCopyCleanup(sb: ReturnType<typeof supabaseAdmin>) {
@@ -224,15 +125,21 @@ async function runCopyCleanup(sb: ReturnType<typeof supabaseAdmin>) {
     }
   }
 
-  const rows = await fetchAllCodeRows(sb);
-  const plan = buildCopyCleanupPlan(rows);
+  const [rows, pages] = await Promise.all([fetchAllCodeRows(sb), fetchAllCleanupCodePages(sb)]);
+  const plan = buildCopyCleanupPlan(rows, pages);
   const deleteCount = plan.groups.reduce((total, group) => total + group.deleteIds.length, 0);
   console.log("\n▶ Copy-button text cleanup");
   console.log(`   Code rows scanned: ${rows.length}`);
-  console.log(`   Code values ending in Copy/Copied: ${plan.dirtyCodeRows.length}`);
-  console.log(`   Reward values ending in Copy/Copied: ${plan.rewardUpdates.length}`);
-  console.log(`   Planned merged/renamed code groups: ${plan.groups.filter((group) => group.survivor).length}`);
-  console.log(`   Planned duplicate/empty deletions: ${deleteCount}`);
+  console.log(`   Code values with pasted Copy/Copied suffixes: ${plan.dirtyCodeRows.length}`);
+  console.log(`   Reward values ending in Copy/Copied: ${plan.dirtyRewardRows.length}`);
+  console.log(`   Planned merged/renamed code groups: ${plan.groups.length}`);
+  console.log(`   Planned duplicate code deletions: ${deleteCount}`);
+  console.log(`   Expired lists to clean: ${plan.expiredUpdates.length} of ${pages.length} pages`);
+  for (const page of plan.breakdown) {
+    console.log(
+      `   ${page.slug}: codes renamed ${page.codesRenamed}, merged ${page.codesMerged}; rewards cleaned ${page.rewardsCleaned}; expired entries removed ${page.expiredRemoved}, renamed ${page.expiredRenamed}`
+    );
+  }
 
   if (!APPLY_COPY_CLEANUP) {
     console.log("   Dry run only. Add --apply (and --allow-prod for production) to write changes.");
@@ -240,23 +147,17 @@ async function runCopyCleanup(sb: ReturnType<typeof supabaseAdmin>) {
   }
 
   for (const group of plan.groups) {
-    const update = async () => {
-      if (!group.survivor || !group.patch) return;
-      const { error } = await sb.from("codes").update(group.patch).eq("id", group.survivor.id);
-      if (error) throw error;
-    };
-    const remove = async () => {
-      if (!group.deleteIds.length) return;
+    // Persist merged fields before removing any duplicate, including when renaming.
+    const { error: updateError } = await sb.from("codes")
+      .update(group.patch)
+      .eq("id", group.survivor.id)
+      .eq("code", group.survivor.code)
+      .select("id")
+      .single();
+    if (updateError) throw updateError;
+    if (group.deleteIds.length) {
       const { error } = await sb.from("codes").delete().in("id", group.deleteIds);
       if (error) throw error;
-    };
-
-    if (group.updateBeforeDelete) {
-      await update();
-      await remove();
-    } else {
-      await remove();
-      await update();
     }
   }
 
@@ -273,14 +174,47 @@ async function runCopyCleanup(sb: ReturnType<typeof supabaseAdmin>) {
     );
   }
 
-  const verificationRows = await fetchAllCodeRows(sb);
-  const remaining = buildCopyCleanupPlan(verificationRows);
-  if (remaining.dirtyCodeRows.length || remaining.rewardUpdates.length) {
+  for (const page of plan.expiredUpdates) {
+    const { error } = await sb.from("code_pages")
+      .update({ expired_codes: page.expired_codes }).eq("id", page.id);
+    if (error) throw error;
+  }
+
+  const [verificationRows, verificationPages] = await Promise.all([
+    fetchAllCodeRows(sb), fetchAllCleanupCodePages(sb),
+  ]);
+  const remaining = buildCopyCleanupPlan(verificationRows, verificationPages);
+  if (remaining.dirtyCodeRows.length || remaining.dirtyRewardRows.length || remaining.expiredUpdates.length) {
     throw new Error(
-      `Copy cleanup verification failed: ${remaining.dirtyCodeRows.length} code values and ${remaining.rewardUpdates.length} reward values remain.`
+      `Copy cleanup verification failed: ${remaining.dirtyCodeRows.length} code values, ${remaining.dirtyRewardRows.length} reward values and ${remaining.expiredUpdates.length} expired lists remain.`
     );
   }
-  console.log("✔ Copy-button text cleanup applied and verified.");
+  const rowsById = new Map(verificationRows.map((row) => [row.id, row]));
+  for (const group of plan.groups) {
+    const stored = rowsById.get(group.survivor.id);
+    if (!stored || stored.code !== group.patch.code || stored.rewards_text !== group.patch.rewards_text ||
+      group.deleteIds.some((id) => rowsById.has(id))) {
+      throw new Error(`Copy cleanup readback mismatch for code group ${group.survivor.id}.`);
+    }
+  }
+  for (const update of plan.rewardUpdates) {
+    if (rowsById.get(update.id)?.rewards_text !== update.rewards_text) {
+      throw new Error(`Copy cleanup reward readback mismatch for ${update.id}.`);
+    }
+  }
+  const pagesById = new Map(verificationPages.map((page) => [page.id, page]));
+  for (const update of plan.expiredUpdates) {
+    if (JSON.stringify(pagesById.get(update.id)?.expired_codes) !== JSON.stringify(update.expired_codes)) {
+      throw new Error(`Copy cleanup expired-list readback mismatch for ${update.slug}.`);
+    }
+  }
+  // Table triggers already enqueue published pages. Coalesce an explicit event
+  // for every affected slug through the same worker, without synchronous warming.
+  const queued = await enqueueRevalidationEvents(
+    plan.breakdown.map((page) => ({ type: "code", slug: page.slug })),
+    "codes_copy_cleanup"
+  );
+  console.log(`✔ Copy-button text cleanup applied and verified; revalidation queued for ${queued.queued} pages.`);
 }
 
 async function fetchPublishedCodePages() {
@@ -334,33 +268,30 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
   const scrapedExpired = expiredCodes ?? [];
 
   const expiredByNormalized = new Map<string, { display: string; priority: number }>();
-  const setExpired = (normalized: string, display: string, priority: number) => {
+  const setExpired = (display: string, priority: number) => {
+    const cleaned = stripPastedCopySuffix(display);
+    const normalized = normalizeCodeKey(cleaned);
+    if (!cleaned || !normalized) return;
     const existing = expiredByNormalized.get(normalized);
     if (!existing || priority > existing.priority) {
-      expiredByNormalized.set(normalized, { display, priority });
+      expiredByNormalized.set(normalized, { display: cleaned, priority });
     }
   };
 
   const incomingNormalized = new Set<string>();
 
   const existingExpiredArray = Array.isArray(game.expired_codes) ? game.expired_codes : [];
-  for (const code of existingExpiredArray) {
-    const displayCode = sanitizeCodeDisplay(code);
-    if (!displayCode || isLikelyNonCodeText(displayCode)) continue;
-    const normalized = normalizeCodeKey(displayCode);
-    if (normalized) {
-      setExpired(normalized, displayCode, -1);
-    }
+  for (const displayCode of cleanExpiredCodeList(existingExpiredArray).codes) {
+    if (isLikelyNonCodeText(displayCode)) continue;
+    setExpired(displayCode, -1);
   }
 
   for (const raw of scrapedExpired) {
-    const displayCode = sanitizeCodeDisplay(typeof raw === "string" ? raw : raw?.code);
+    const displayCode = stripPastedCopySuffix(typeof raw === "string" ? raw : raw?.code);
     if (!displayCode) continue;
-    const normalized = normalizeCodeKey(displayCode);
-    if (!normalized) continue;
     const provider = typeof raw === "string" ? undefined : raw?.provider;
     const priority = getCodeDisplayPriority(provider);
-    setExpired(normalized, displayCode, priority);
+    setExpired(displayCode, priority);
   }
 
   const { data: existingRows, error: existingError } = await runDataApiOperation(`Load existing codes for ${game.slug}`, () => sb
@@ -432,7 +363,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
 
   for (let i = codes.length - 1; i >= 0; i -= 1) {
     const c = codes[i];
-    const displayCode = sanitizeCodeDisplay(c.code);
+    const displayCode = stripPastedCopySuffix(c.code);
     if (!displayCode) {
       continue;
     }
@@ -531,10 +462,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
       }
 
       for (const code of codesToMove) {
-        const normalized = normalizeCodeKey(code);
-        if (normalized) {
-          setExpired(normalized, code, 0);
-        }
+        setExpired(code, 0);
       }
     }
   }
@@ -571,7 +499,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     }
 
     for (const entry of toExpireEntries) {
-      setExpired(entry.normalized, entry.original, 0);
+      setExpired(entry.original, 0);
     }
   }
   const updatedExpiredCodes = Array.from(expiredByNormalized.values()).map((entry) => entry.display);
