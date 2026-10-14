@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "operations": [
+    { "publisher": "franchise-collection", "namespace": "red-dead", "file": "runtime-manifest.json" }
+  ],
+  "urls": [
+    { "path": "/red-dead/wiki/red-dead-redemption-2/dinosaur-bones", "contains": "Dinosaur Bones" }
+  ],
+  "events": [
+    { "type": "red_dead_wiki_collection", "slug": "red-dead-redemption-2/dinosaur-bones" }
+  ]
+}

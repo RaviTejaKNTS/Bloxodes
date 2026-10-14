@@ -13,6 +13,18 @@ Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, e
 - Indexing credentials are isolated in `.envs/pipelines/indexing.env`; the service-account JSON is under `.envs/secrets/`.
 - IndexNow bootstrap has its own value-free example; keep the public key file/location contract in sync with the site.
 
+## Google index policy
+
+Google can fetch our pages, but since October 2025 it has indexed only the homepage. Search Console URL Inspection confirmed the diagnosis on 2026-10-12. We give Google an allowlist of our strongest page groups and ask it to skip the rest. Bing and other engines keep their existing robots directives.
+
+- The allowlist lives in `apps/web/src/lib/seo/google-index-policy.ts`. `GOOGLE_INDEXABLE_PATHS` keeps exact paths for home, trust pages, authors, stats hubs and reports, tools, the wiki and codes indexes, and the existing top-10 codes pages. `/authors/<slug>` allows one profile slug without nested routes.
+- `/catalog` and `/articles` allow every path beneath them, including path-based pagination. Prefixes match whole segments, so `/catalogue` stays denied. Query variants stay denied, and trailing slashes are normalized.
+- `GOOGLE_INDEXABLE_GAMES` allows each listed game's wiki hub and every path beneath it, including future collections. It also allows that game's listed codes, quiz and checklist slugs. The games are restaurant-tycoon-3, blox-fruits, driving-empire, rivals, murder-mystery-2, fisch, lineage-piece, 1-speed-keyboard-escape, tower-of-hell, gakuran, animal-hospital, adopt-me, jujutsu-shenanigans, gym-star-simulator, ride-a-pet, steal-an-egg, forsaken, creatures-of-sonaria, brookhaven, evade and demonology. Brookhaven uses `brookhaven-rp` for its wiki and quiz. Both published Brookhaven codes slugs are included. Gym Star Simulator's wiki prefix is reserved for future pages; its hub currently returns 404. Per-game `/stats/games/<slug>` pages stay denied.
+- To add a game, add one typed entry to `GOOGLE_INDEXABLE_GAMES` with its wiki slug and confirmed codes, quiz and checklist slugs. Use empty lists for page types without published pages. Other approved exact paths belong in `GOOGLE_INDEXABLE_PATHS`. An entry only lifts the Google restriction; it never overrides a page's own all-engine noindex.
+- The proxy adds `X-Robots-Tag: googlebot: noindex, follow` to every HTML path that isn't allowlisted, including query variants. The header depends only on the URL, never on the user agent. APIs, `_next`, sitemaps, feeds, robots.txt, ads.txt and asset files are skipped.
+- For metadata, don't set `googleBot: { index: true }` in page metadata. The root layout keeps only Google preview settings, so a page's meta tags never contradict the header.
+- Nothing in this policy changes what Bing or other engines see. Generic robots meta, canonicals, content, dates and sitemaps stay the same, and sitemaps still list Google-noindexed pages.
+
 ## Analytics
 
 - Public runtime loads the GA measurement ID and Umami website ID through separate client-visible variables because they identify different analytics systems. Workstation GA configuration belongs to shared application env; production values are injected by GitHub/Dokploy.

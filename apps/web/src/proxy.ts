@@ -7,6 +7,7 @@ import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
 import { minecraftLegacyRedirect } from "@/lib/minecraft-paths";
+import { googleIndexHeader } from "@/lib/seo/google-index-policy";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
 
@@ -178,6 +179,11 @@ export function proxy(req: NextRequest) {
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
 
   const response = applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
+  // An existing all-engine robots header (private routes, indexing disabled) already covers Google.
+  const googleRobots = googleIndexHeader(`${url.pathname}${url.search}`);
+  if (googleRobots && !response.headers.has("X-Robots-Tag")) {
+    response.headers.set("X-Robots-Tag", googleRobots);
+  }
   return response;
 }
 
