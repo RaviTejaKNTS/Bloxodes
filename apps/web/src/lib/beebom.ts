@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 import type { ScrapeResult, ScrapedCode } from "./scraper-types";
-import { stripTrailingCopyButtonText } from "./code-normalization";
+import { stripPastedCopySuffix, stripTrailingCopyButtonText } from "./code-normalization";
 
 const USER_AGENT = "Mozilla/5.0 (compatible; RobloxCodesBot/1.0)";
 const LIST_SEPARATOR_REGEX = /\s*:\s*|\s*[–—]\s*|(?:\s+-\s*|\s*-\s+)/;
@@ -36,7 +36,8 @@ function normalizeCode(raw: string): string | null {
     spacedParts.length > 1 && spacedParts.every((segment) => segment.length === 1);
   if (hasSingleLetterSegments) return null;
 
-  return code.replace(/\s+/g, "");
+  // Clean before removing spaces, which distinguish "Cannon copy" from "xcopy".
+  return stripPastedCopySuffix(code)?.replace(/\s+/g, "") ?? null;
 }
 
 export function isLikelyRedemptionInstruction(raw: string): boolean {
