@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useRef, useState, type KeyboardEvent } from "react";
 import Link from "next/link";
 import { BookOpen, CalendarDays, ChevronRight, HelpCircle, ListChecks, Calculator, Ticket, type LucideIcon } from "lucide-react";
 import { CardImage } from "@/components/CardImage";
@@ -113,7 +113,24 @@ function GamePanel({ game }: { game: HomeGamePanel }) {
 export function HomeGameSwitcher({ games, className }: { games: HomeGamePanel[]; className?: string }) {
   const [active, setActive] = useState(0);
   const baseId = useId();
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   if (!games.length) return null;
+
+  // Arrow keys, Home and End move between tabs (one Tab stop for the whole list).
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    const last = games.length - 1;
+    const next =
+      event.key === "ArrowRight" ? (active === last ? 0 : active + 1)
+      : event.key === "ArrowLeft" ? (active === 0 ? last : active - 1)
+      : event.key === "Home" ? 0
+      : event.key === "End" ? last
+      : null;
+    if (next === null) return;
+    event.preventDefault();
+    setActive(next);
+    tabRefs.current[next]?.focus();
+  }
+
   return (
     <section className={className}>
       <div className="mb-4 flex items-baseline justify-between gap-4">
@@ -122,14 +139,18 @@ export function HomeGameSwitcher({ games, className }: { games: HomeGamePanel[];
           All games
         </Link>
       </div>
-      <div role="tablist" aria-label="Games" className="-mx-1 mb-4 flex gap-1 overflow-x-auto px-1 pb-1">
+      <div role="tablist" aria-label="Games" onKeyDown={handleKeyDown} className="-mx-1 mb-4 flex gap-1 overflow-x-auto px-1 pb-1">
         {games.map((game, index) => {
           const selected = index === active;
           return (
             <button
               key={game.universeId}
+              ref={(element) => {
+                tabRefs.current[index] = element;
+              }}
               type="button"
               role="tab"
+              tabIndex={selected ? 0 : -1}
               id={`${baseId}-tab-${index}`}
               aria-selected={selected}
               aria-controls={`${baseId}-panel-${index}`}

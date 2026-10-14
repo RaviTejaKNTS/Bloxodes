@@ -13,6 +13,7 @@ export function RecentVisitTracker() {
     const kind = recentPageKind(href);
     if (!kind) return undefined;
     const timer = window.setTimeout(() => {
+      if (document.querySelector("[data-page-not-found]")) return;
       const title = document.querySelector("main h1")?.textContent?.replace(/\s+/g, " ").trim();
       if (!title) return;
       const image = document.querySelector('meta[property="og:image"]')?.getAttribute("content") ?? null;

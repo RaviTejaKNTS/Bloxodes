@@ -12,6 +12,7 @@ import {
   History,
   LayoutGrid,
   ListChecks,
+  Map as MapIcon,
   Newspaper,
   Puzzle,
   Ticket,
@@ -32,7 +33,8 @@ const KIND_LABELS: Record<RecentPageKind, [string, LucideIcon]> = {
   event: ["Event", CalendarDays],
   catalog: ["Catalog", LayoutGrid],
   stats: ["Stats", BarChart3],
-  puzzle: ["Puzzle", Puzzle]
+  puzzle: ["Puzzle", Puzzle],
+  map: ["Map", MapIcon]
 };
 
 function checklistPercent(page: RecentPage, totals: Record<string, number>): number | null {

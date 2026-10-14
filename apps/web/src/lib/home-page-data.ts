@@ -83,6 +83,9 @@ export type HomePuzzle = { href: string; name: string; icon: string | null };
 
 export type HomeDirectoryGroup = { title: string; icon: "codes" | "catalog" | "stats" | "tools" | "wiki" | "map"; links: HomeLink[]; more: HomeLink };
 
+/** Past events older than this drop out of the homepage's "Recently ended" group. */
+const RECENTLY_ENDED_MS = 14 * 86_400_000;
+
 const CATALOG_PICKS = [
   "roblox-music-ids",
   "free-roblox-items",
@@ -92,12 +95,23 @@ const CATALOG_PICKS = [
   "roblox-color-codes"
 ];
 
+/** Data the hero needs. A failure fails the render, so ISR keeps serving the last good page. */
 async function load<T>(label: string, loader: () => Promise<T>): Promise<T> {
   try {
     return await loader();
   } catch (error) {
     console.error(`Home data loader failed: ${label}`, error);
     throw error;
+  }
+}
+
+/** Data for one block. A failure hides that block instead of taking the whole homepage down. */
+async function loadOptional<T>(label: string, loader: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    return await loader();
+  } catch (error) {
+    console.error(`Home data loader failed, block hidden: ${label}`, error);
+    return fallback;
   }
 }
 
@@ -216,17 +230,17 @@ export async function loadHomePageData() {
   const [statsHome, recentCodePages, wikiPages, eventsPayload, quizzes, tools, counts, articles, checklists, puzzles, catalogPages, minecraft] =
     await Promise.all([
       load("stats home", () => getStatsHome()),
-      load("recent code pages", () => loadRecentCodePages(8)),
+      loadOptional("recent code pages", () => loadRecentCodePages(8), []),
       load("wiki pages", () => listPublishedWikiPages()),
-      load("events", () => buildEventsCards()),
-      load("quizzes", () => listPublishedQuizzes()),
-      load("tools", () => listPublishedTools()),
+      loadOptional("events", () => buildEventsCards(), { cards: [], total: 0, refreshedLabel: null }),
+      loadOptional("quizzes", () => listPublishedQuizzes(), []),
+      loadOptional("tools", () => listPublishedTools(), []),
       load("content counts", () => getContentCounts()),
-      load("articles", () => listPublishedArticles(7)),
-      load("checklists", () => listPublishedChecklists(200)),
-      load("puzzles", () => listPublishedPuzzlePages()),
-      load("catalog pages", () => listPublishedTopLevelCatalogPages()),
-      load("minecraft hub", () => getMinecraftWikiPageBySlug("minecraft-java"))
+      loadOptional("articles", () => listPublishedArticles(7), []),
+      loadOptional("checklists", () => listPublishedChecklists(200), []),
+      loadOptional("puzzles", () => listPublishedPuzzlePages(), []),
+      loadOptional("catalog pages", () => listPublishedTopLevelCatalogPages(), []),
+      loadOptional("minecraft hub", () => getMinecraftWikiPageBySlug("minecraft-java"), null)
     ]);
 
   // Lookups by Roblox universe, used to join every page type to its game.
@@ -234,7 +248,7 @@ export async function loadHomePageData() {
   for (const page of wikiPages) {
     if (typeof page.universe_id === "number" && !wikiByUniverse.has(page.universe_id)) wikiByUniverse.set(page.universe_id, page);
   }
-  const codePages = await load("code pages", () => loadCodePagesForUniverses([...wikiByUniverse.keys()]));
+  const codePages = await loadOptional("code pages", () => loadCodePagesForUniverses([...wikiByUniverse.keys()]), []);
   const codesByUniverse = new Map<number, CodePageWithCounts>();
   for (const page of codePages) {
     if (typeof page.universe_id !== "number") continue;
@@ -282,7 +296,7 @@ export async function loadHomePageData() {
       const quiz = quizByUniverse.get(universeId);
       const event = eventByUniverse.get(universeId);
       const gameTools = toolsByUniverse.get(universeId) ?? [];
-      const latest = codePage ? await load("game codes", () => latestActiveCodes(codePage, 3)) : [];
+      const latest = codePage ? await loadOptional("game codes", () => latestActiveCodes(codePage, 3), []) : [];
       return {
         universeId,
         name: stats?.displayName || gameNameFromWiki(wiki),
@@ -305,11 +319,11 @@ export async function loadHomePageData() {
   const switcherIds = new Set(gamePanels.map((game) => game.universeId));
 
   // New codes: newest active code from the code pages that most recently gained one, one per game.
-  const codeIcons = await load("code page icons", () => loadUniverseIcons(recentCodePages.map((page) => page.universe_id)));
+  const codeIcons = await loadOptional("code page icons", () => loadUniverseIcons(recentCodePages.map((page) => page.universe_id)), new Map<number, string>());
   const newCodes: HomeCode[] = (
     await Promise.all(
       recentCodePages.map(async (page) => {
-        const [code] = await load("latest codes", () => latestActiveCodes(page, 1));
+        const [code] = await loadOptional("latest codes", () => latestActiveCodes(page, 1), []);
         if (!code) return null;
         const universeId = page.universe_id ?? -1;
         const wiki = wikiByUniverse.get(universeId);
@@ -334,7 +348,10 @@ export async function loadHomePageData() {
   const eventGroups = {
     current: events.filter((event) => event.status === "current").sort((a, b) => endOf(a) - endOf(b)).slice(0, 2),
     upcoming: events.filter((event) => event.status === "upcoming").sort((a, b) => startOf(a) - startOf(b)).slice(0, 2),
-    past: events.filter((event) => event.status === "past").sort((a, b) => endOf(b) - endOf(a)).slice(0, 2)
+    past: events
+      .filter((event) => event.status === "past" && now - endOf(event) <= RECENTLY_ENDED_MS)
+      .sort((a, b) => endOf(b) - endOf(a))
+      .slice(0, 2)
   };
 
   // Games with the most on Bloxodes: wikis ranked by how many page types they have.
@@ -391,7 +408,7 @@ export async function loadHomePageData() {
   // Quiz of the day: rotate through the quizzes by date.
   const dayIndex = Math.floor(now / 86_400_000);
   const quizPick = quizzes.length ? quizzes[dayIndex % quizzes.length] : null;
-  const quizData = quizPick ? await load("featured quiz", () => loadQuizData(quizPick.code)) : null;
+  const quizData = quizPick ? await loadOptional("featured quiz", () => loadQuizData(quizPick.code), null) : null;
   const quizAttempt = quizData && quizPick ? buildServerQuizAttempt(quizData, quizPick.code) : [];
   const firstQuestion = quizAttempt[0] ?? null;
   const quiz: HomeQuiz | null =
@@ -423,7 +440,7 @@ export async function loadHomePageData() {
   const catalogCards: HomeCatalogCard[] = (
     await Promise.all(
       CATALOG_PICKS.filter((code) => catalogByCode.has(code)).map(async (code) => {
-        const meta = await load("catalog card", () => resolveCatalogCardMeta(code));
+        const meta = await loadOptional("catalog card", () => resolveCatalogCardMeta(code), { shortLabel: null, count: null, unit: null, icon: null });
         const page = catalogByCode.get(code)!;
         return {
           href: `/catalog/${code}`,

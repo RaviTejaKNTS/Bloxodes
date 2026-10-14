@@ -63,7 +63,7 @@ function Thumb({ src, className }: { src: string | null; className?: string }) {
 }
 
 export function EventTag({ status }: { status: HomeEvent["status"] }) {
-  const label = status === "current" ? "Live now" : status === "upcoming" ? "Starting soon" : "Just ended";
+  const label = status === "current" ? "Live now" : status === "upcoming" ? "Starting soon" : "Recently ended";
   return (
     <span
       className={cn(

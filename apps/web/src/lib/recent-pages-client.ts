@@ -1,7 +1,7 @@
 "use client";
 
 /** Content pages a visitor opened, newest first. Kept only in this browser, for the homepage "pick up" row. */
-export type RecentPageKind = "codes" | "checklist" | "quiz" | "tool" | "wiki" | "guide" | "event" | "catalog" | "stats" | "puzzle";
+export type RecentPageKind = "codes" | "checklist" | "quiz" | "tool" | "wiki" | "guide" | "event" | "catalog" | "stats" | "puzzle" | "map";
 
 export type RecentPage = { href: string; kind: RecentPageKind; title: string; image: string | null; at: number };
 
@@ -19,6 +19,9 @@ const KINDS: Array<[RegExp, RecentPageKind]> = [
   [/^\/catalog\/.+/, "catalog"],
   [/^\/stats\/games\/[^/]+$/, "stats"],
   [/^\/puzzles\/[^/]+$/, "puzzle"],
+  [/^\/gta\/checklists\/[^/]+$/, "checklist"],
+  [/^\/gta\/maps\/.+/, "map"],
+  [/^\/minecraft\/tools\/[^/]+$/, "tool"],
   [/^\/(wiki|gta|red-dead|minecraft)\/.+/, "wiki"]
 ];
 
