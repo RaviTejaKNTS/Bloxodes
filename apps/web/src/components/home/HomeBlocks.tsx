@@ -362,7 +362,7 @@ export function HomeGuides({ data }: { data: HomePageData }) {
   return (
     <section>
       <SectionHead title="Latest guides" href="/articles" label={`All ${count(data.counts.articles)} guides`} />
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)]">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)]">
         <Link href={`/articles/${lead.slug}`} className="group block">
           <span className="relative block aspect-video overflow-hidden rounded-lg bg-surface-muted">
             <CardImage src={lead.image} alt={lead.title} />

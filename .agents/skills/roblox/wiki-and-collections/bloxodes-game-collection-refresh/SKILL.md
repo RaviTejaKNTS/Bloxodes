@@ -91,6 +91,7 @@ Use `bloxodes-game-collection-images` only for new or changed rows, or existing 
 The exported workspace is an authoring snapshot. The collection route keeps rendering only the published database revision. For a data- or image-only refresh:
 
 - Don't rewrite `final.json`, page prose, FAQs, headings or `description_json` by default.
+- The exporter leaves the retired `how_it_works_md` field empty without changing stored legacy help. Keep it empty. If the copy gate finds other old website instructions, report the exact passage for a separate writing pass instead of expanding a data refresh into a rewrite.
 - If a verified change makes existing copy wrong, stop and report the exact field or passage for a separate writing pass. Don't grow this quick workflow into full page writing.
 - If the item count, title/SEO count, stored thumbnail or another database page field is now stale, report the exact sync needed. Don't generate replacement copy just to update a count.
 - Verify the targeted local route once the changed files are ready. Run full final-copy, pagination, size or Browser checks only when page copy, renderer configuration or route behavior changed, or when the user asks.

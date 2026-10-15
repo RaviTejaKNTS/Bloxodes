@@ -74,6 +74,41 @@ test("one writing revision preserves the first draft and receives another editor
   assert.equal(JSON.parse(await readFile(path.join(folder, "final.json"), "utf8")).intro_md, "Revised.");
   assert.deepEqual(f.calls.filter(c => c.stage === "collection_writing").map(c => c.revision), [false, true]);
 });
+
+test("page-use copy gets a writing revision before a reviewer can approve it", async t => {
+  const f = await fixture(t);
+  const result = await runWikiStagePipeline({ ...f.options, execute: async task => {
+    const decision = await f.execute(task);
+    if (task.stage === "collection_writing" && !task.revision) {
+      const file = path.join(task.folder, "draft-final.json");
+      const draft = JSON.parse(await readFile(file, "utf8"));
+      await save(file, { ...draft, intro_md: "Use the cards to compare the pets.", how_it_works_md: "Rarity shows the tier." });
+    }
+    return decision;
+  } });
+  assert.equal(result.outcome, "ready");
+  assert.deepEqual(f.calls.filter(c => c.stage === "collection_writing").map(c => c.revision), [false, true]);
+  assert.match(f.calls.find(c => c.stage === "collection_writing" && c.revision)!.feedback, /how_it_works_md/);
+  const final = JSON.parse(await readFile(path.join(f.root, "collections/pets/final.json"), "utf8"));
+  assert.equal(final.intro_md, "Revised.");
+});
+
+test("repeated help copy exhausts the existing correction budget without approval", async t => {
+  const f = await fixture(t);
+  const result = await runWikiStagePipeline({ ...f.options, execute: async task => {
+    const decision = await f.execute(task);
+    if (task.stage === "collection_writing") {
+      const file = path.join(task.folder, task.revision ? "final.json" : "draft-final.json");
+      const draft = JSON.parse(await readFile(file, "utf8"));
+      await save(file, { ...draft, how_it_works_md: "The cards show prices." });
+    }
+    return decision;
+  } });
+  assert.deepEqual(result.approvedCollections, []);
+  assert.match(result.blockedCollections[0].reason, /One correction/);
+  assert.equal(f.calls.filter(c => c.stage === "collection_writing").length, 2);
+  assert.equal(f.calls.filter(c => c.stage === "collection_editorial_review").length, 0);
+});
 test("a second research rejection blocks only that entity and its budget survives resume", async t => {
   const f = await fixture(t);
   const execute = async (task: WikiStageTask) => task.stage === "collection_research_review" ? done({ status: "needs_revision", summary: "Still unsupported.", findings: ["Cost is unsupported."], repair_stage: "research" }) : f.execute(task);

@@ -38,3 +38,20 @@ for (const {path: pathname, contains} of selected.slice(0, 20)) {
     await page.screenshot({ path: info.outputPath("page.png"), fullPage: true });
   });
 }
+
+// The PR preview uses existing managed-development collections of both page types.
+if (!process.env.RELEASE_SMOKE_BATCH && !process.env.RELEASE_SMOKE_PATHS) {
+  for (const pathname of ["/wiki/1-stone-skipping/stones-and-throwables", "/wiki/sarab/maps", "/wiki/sarab/badges"]) {
+    test(`${pathname} shows game content without collection-use instructions`, async ({ page }, info) => {
+      const response = await page.goto(pathname, { waitUntil: "domcontentloaded" });
+      expect(response?.status()).toBe(200);
+      await expect(page.locator("h1")).toHaveCount(1);
+      await expect(page.locator("#collection-how-to")).toHaveCount(0);
+      await expect(page.getByRole("heading", { name: "How to use this collection", exact: true })).toHaveCount(0);
+      await expect(page.locator("main")).not.toContainText("The cards show the throwable type");
+      await expect(page.locator("main")).not.toContainText("Place ID is the official Roblox identifier for the entry");
+      await expect(page.locator("main")).not.toContainText("Badge ID is the stable Roblox identifier");
+      await page.screenshot({ path: info.outputPath("collection-opening.png"), fullPage: true });
+    });
+  }
+}

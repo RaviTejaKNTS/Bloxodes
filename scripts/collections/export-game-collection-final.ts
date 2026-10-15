@@ -226,7 +226,8 @@ async function main() {
     meta_description: row.meta_description ?? "",
     intro_md: row.intro_md ?? "",
     description_md: row.description_md ?? "",
-    how_it_works_md: row.how_it_works_md ?? "",
+    // Roblox renderers no longer use the legacy help field. Keep new finals empty.
+    how_it_works_md: "",
     description_json: row.description_json ?? {},
     faq_json: row.faq_json ?? [],
     wiki_md: row.wiki_md ?? "",

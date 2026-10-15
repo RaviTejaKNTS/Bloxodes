@@ -98,7 +98,7 @@ The main body. It covers what a player needs to use or finish this collection: s
 - Bullets for steps, tips, quick comparisons and short lists.
 - A Markdown table when you're comparing a few options on the same dimensions (like which item to pick for which situation). Only when it reads cleaner than prose.
 - A few clear, search-friendly headings that say what each section answers, using the game name where it reads naturally ("Which Garden Rush Pets to Hatch First"). A short body may need none. No vague, cute or sentence-like headings and no needless subsections.
-- Don't repeat the cards, intro, how-it-works note or section notes. Only add what the rest of the page doesn't say.
+- Don't repeat the cards, intro or section notes. Only add what the rest of the page doesn't say.
 - No filler. If a section would only pad the page, cut it.
 - Stay concrete and specific to this game system, in plain English anyone can follow.
 - The no-count rule applies here too.
@@ -123,7 +123,7 @@ A good shape: what it is in the game, then how it works or how you get it, then 
 - `meta_description`: what the reader can compare or learn, plus a reason to click, in roughly 140 to 160 characters. Name the game, the items and the comparison players care about.
 - `intro_md`: what this collection is in the game and why players compare it.
 - `description_md`: the main body described above. Flexible structure, no fluff, no repeats.
-- `how_it_works_md`: explain page fields only when they need context. Keep it short.
+- `how_it_works_md`: leave empty for Roblox collections. Put useful game mechanics, stat meanings and trade-offs in `description_md`. The intro and hub blurb explain the items; they never teach readers how to browse cards, fields or views.
 - `description_json`: section notes only when they add context. Keys match rendered section labels.
 - `faq_json`: useful follow-up questions not already answered. Every entry uses `q` and `a`: `{ "q": "...", "a": "..." }`. Never `question`/`answer`, because the renderer reads `q`/`a` and wrong keys render a blank FAQ.
 - `wiki_md`: the hub blurb described above. Specific, 2 to 4 sentences, no count.
