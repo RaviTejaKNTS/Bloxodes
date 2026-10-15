@@ -198,9 +198,9 @@ The isolated-runtime Luna max canary `runtime-reliability-canary` completed on S
 
 Activation verified September 7: runtime `cfadab0db53575c235535234185cea5120b56e0a` is installed. Discovery/writer/publication use the isolated `current` directory, with the original discovery schedule and independent 15-minute publication timer enabled and active. Earlier pending-installation statements are superseded. Verification used installed configuration and timer state; an extra immediate manual publication-service invocation was rejected by automatic approval review and was not executed.
 
-## Shared scheduled checkout
+## Homelab scheduled checkout
 
-Article and wiki/collection services now select the same versioned `bloxodes-automation-runtime/current` checkout, independent of the development branch. Artifact state survives release changes and legacy absolute paths remain aliases. Standard `.next` output and the shared lease keep this source checkout clean; scheduled wiki concurrency is one. Use `automation:runtime:prepare` followed by the unified `install-homelab-automation.sh` installer while jobs are idle. See [the homelab runtime contract](../infrastructure/homelab.md#github-qa-runtime-activation) for permissions, schedules, migration and rollback. Existing content quality and publication gates are unchanged.
+Verified October 15, 2026: article automation retains the versioned `bloxodes-automation-runtime/current` checkout and its protected env, state, shared lease and timer ownership. Wiki automation moved to the MacBook Pro T3 scheduler. Its homelab units and active state are retired. `automation:runtime:prepare` still prepares GitHub-packaged article dependencies; `install-homelab-automation.sh` now activates only article units while jobs are idle. Article activation cannot recreate wiki timers or state. See [homelab operations](../infrastructure/homelab.md#retired-homelab-wiki-automation).
 
 ### Cover and image-stage recovery (October 1, 2026)
 

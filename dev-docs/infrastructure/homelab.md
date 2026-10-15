@@ -1,9 +1,21 @@
 # Homelab
 
-Status: Article and wiki/collection automation uses the HDD runtime with GitHub QA and publication
-Last verified: 2026-10-08
+Status: Article automation remains on homelab; nightly wiki creation belongs to T3 on the MacBook Pro
+Last verified: 2026-10-15
 Path layout rechecked 2026-10-08 against live T3 registrations, Git worktree metadata, service paths and env links. Other component verification boundaries remain as documented.
 Evidence: HDD development storage, T3 project/worktree settings, installed runtime source, seven service files, five unchanged timers, protected env metadata, state-copy receipt and compatibility paths inspected October 7. Earlier automation evidence retains its recorded verification dates: managed-dev readiness, real headless Chrome smoke and six-article rendered-browser pass, exact-ID production release with six live 200 responses, queue recovery, the 18:00 timer schedule, and Tailscale-reachable managed-development preview route checks
+
+## Retired homelab wiki automation
+
+On October 15 the owner authorized replacing the wiki builder, publisher and recovery services with the MacBook Pro T3 task described in [wiki collections](../pipelines/wiki-collections.md#nightly-roblox-wiki-task). The task runs daily at 02:30 IST with Luna max and the existing T3 subagent routing. Its prompt includes standing production-release authorization and further useful corrections without changing skills.
+
+Cutover evidence belongs to the assigned task's ignored `tmp/wiki-t3-cutover/`. It records the saved scheduler settings, next run, real Luna/Haiku canary result, retired unit inventory, state move and article/runtime readback. The old wiki state is removed from active `state/wiki-automation` and compatibility paths. Its private retirement archive at `/srv/data/bloxodes-automation-runtime/retired/wiki-20261015T121154Z/` preserves authoring and publication evidence outside the active state tree. Old managed-development queue rows remain historical and do not control new selection or retries.
+
+The six wiki service/timer files are removed from installed systemd configuration. The repository's shared installer handles article services only; the old wiki installer refuses activation. The shared runtime pointer, article state, shared lease location, protected env values and article timers are preserved. `/etc/bloxodes/wiki-automation.env` remains protected for the existing operator preview and historical inspection. No service reads it on a wiki schedule.
+
+Wiki-specific runtime and activation statements below describe the earlier system. They do not authorize reinstalling it or reopening held queue rows. No old publication bundle may overwrite newer production content.
+
+The Mac task is enabled. Its next run after cutover is October 16, 2026 at 02:30 IST. The canary completed with Luna max and a Haiku 5.5 xhigh child. Retirement readback found zero installed wiki units and only the two original article timers. Article unit/env hashes, runtime pointer and shared lease-directory inode matched their pre-retirement values.
 
 ## T3 task worktrees and GitHub checks
 
@@ -13,13 +25,15 @@ Finished remote task branches delete after merge. The exact-worktree cleanup hel
 
 ## GitHub QA runtime activation
 
+Historical October 7 shared activation; wiki units were retired on October 15. The installed article units retain this runtime contract.
+
 The installed units use `/srv/data/bloxodes-automation-runtime/current` and set `BLOXODES_CI_QA=1`. They keep content research, writing, editorial reviews and media preparation on the worker. Final checks, development staging, builds and rendered QA run on GitHub before production publication. Protected `/etc/bloxodes/` env files keep their values.
 
 Prepare dependencies with the GitHub `Package automation runtime` workflow on the released production SHA. It uses Node 22 to match the installed homelab services' `/usr/bin/node` and runs article/wiki helper tests before packaging. The production web image remains on Node 24. Download its SHA-named artifact to HDD, verify the successful run/source SHA and call `automation:runtime:prepare` with that SHA and `--artifact-dir`. The package receipt records the actual Node major and binds source, lockfile, archive and host platform. Preparation never starts a job or runs a local install/build.
 
 The unified installer refuses active workers and an occupied shared lease. It temporarily suspends only active timers, preserves their cadence/enablement, stages and hashes persistent state on HDD, and retains old paths as compatibility links. It switches reviewed units and the current pointer with rollback backups, then resumes the prior timers. No running job is stopped.
 
-Activation completed without interrupting a job. Readback confirmed all seven services match released source, all five timer files and prior states are unchanged, and protected env contents/access controls match the baseline. The saved state is on HDD with verified compatibility links; the original shared lease inode and old runtime releases remain. Exact source and execution receipts are in the [October 7 audit](../../docs/2026-10-07-github-release-audit.md#checklist-qa-and-automation-release). Earlier activation records below describe historical releases.
+The October 7 activation completed without interrupting a job. Readback confirmed all seven services match released source, all five timer files and prior states are unchanged, and protected env contents/access controls match the baseline. The saved state is on HDD with verified compatibility links; the original shared lease inode and old runtime releases remain. Exact source and execution receipts are in the [October 7 audit](../../docs/2026-10-07-github-release-audit.md#checklist-qa-and-automation-release). Earlier activation records below describe historical releases.
 
 ## Host
 
@@ -75,14 +89,13 @@ Use the webpack preview for very large GTA collection pages. If the development 
 - `bloxodes-article-discovery.timer`: enabled, active, runs at 00:00/06:00/12:00/18:00 local time with persistence.
 - `bloxodes-article-discovery.service`: runs readiness, discovery and Groq curation.
 - `bloxodes-article-writer.service`: triggered after successful discovery. Readiness checks authoring credentials and configured model access. Code owns queue claims, research, images, writing and editorial reviews. Final staging, checks, builds and rendered QA run on GitHub. Exhausted evidence/editorial reviews require attention; operational claim failures retain bounded recovery. See the article pipeline owner for execution details.
-- `bloxodes-wiki-builder.timer`: enabled, active, runs daily at 01:00 local time with a bounded randomized delay and persistence.
-- `bloxodes-wiki-builder.service`: selects the highest-ranked eligible game from the production top 100 and prepares collections before the wiki hub. It retains reviewed artifacts and requests CI publication. GitHub stages and verifies the frozen batch before production writes. Readiness retries transient Supabase, R2 and public API failures three times.
-- `bloxodes-article-publication.service` and `bloxodes-wiki-publisher.service`: dispatch exact frozen batches to GitHub and reconcile their verified publication receipts. They retain failures for bounded retries.
-- `bloxodes-article-audit.service`: audits authoring queue state. The optional `bloxodes-wiki-recovery.timer` remains disabled.
+- `bloxodes-article-publication.service`: dispatches exact frozen article batches to GitHub and reconciles verified receipts.
+- `bloxodes-article-audit.service`: audits article authoring queue state.
+- The wiki builder, publisher and recovery units are retired. Their nightly replacement runs in T3 on the MacBook Pro.
 
 Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`, mode 640. It contains managed-dev Supabase, media, production inventory, Groq curation/fallback, Codex model/reasoning, and writer controls. Codex CLI authentication belongs to the `teja` account's protected Codex home and is checked without starting a paid model run.
 
-Wiki runtime env is `/etc/bloxodes/wiki-automation.env`, root-owned and readable only by the restricted `bloxodes-wiki-model` account plus the operator ACL. It contains managed-development Supabase and shared wiki R2 values; the scheduled unit never receives production credentials.
+Retained historical wiki env is `/etc/bloxodes/wiki-automation.env`, root-owned and readable only by the restricted `bloxodes-wiki-model` account plus the operator ACL. It contains managed-development Supabase and shared wiki R2 values; the scheduled unit never receives production credentials.
 
 The homelab currently has Codex CLI at `/home/teja/.local/bin/codex` and Grok at `/home/teja/.grok/bin/grok`. A read-only `gpt-5.6-luna` `xhigh` access canary succeeded on 2026-08-17. The writer resolves these user-local paths directly because systemd does not inherit the interactive shell's user-local PATH.
 
@@ -96,7 +109,7 @@ Installed article/wiki source and dependencies use the unified GitHub-packaged r
 - Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. This is a legacy operator synchronization command, not part of the new agent release flow. A separate explicit operator request authorizes this guarded remote checkout synchronization when the release changes homelab-owned article automation or the user explicitly requests it; ordinary web, collection, and editorial database releases do not require it.
 - Releases already running on this host skip separate checkout synchronization and SSH-to-self checks, including article automation releases. Preserve the primary task checkout, synchronize local `production` independently, and report homelab synchronization as unnecessary rather than pending. This does not deploy env or installed service changes.
 - `scripts/ops/install-homelab-article-automation.sh --apply <full-sha>` installs reviewed units only from an exact clean approved checkout and preserves the timer state.
-- `scripts/ops/install-homelab-wiki-automation.sh --apply <full-sha>` replaces the same-named legacy wiki units from an exact clean approved checkout and enables the reviewed daily timer.
+- `scripts/ops/install-homelab-wiki-automation.sh` refuses activation. Wiki scheduling belongs to the MacBook Pro T3 task.
 - The checkout synchronization command was applied and verified on 2026-08-19. The installer remains available for reviewed unit-file changes; do not run it when synchronization alone proves the installed units already match.
 
 ## Safety Boundary

@@ -6,7 +6,6 @@ SOURCE=/srv/data/projects/Bloxodes
 ROOT=/srv/data/bloxodes-automation-runtime
 LEGACY=/home/teja/.local/share/bloxodes-automation-runtime
 RELEASE="$ROOT/releases/$SHA"
-MODEL=bloxodes-wiki-model
 [[ "$EUID" == 0 && "$(hostname)" == teja-homelab ]]
 exec 9> /run/lock/bloxodes-automation-install.lock
 flock -n 9 || { echo 'Another activation is running.' >&2; exit 1; }
@@ -14,11 +13,9 @@ flock -n 9 || { echo 'Another activation is running.' >&2; exit 1; }
 [[ "$(cat "$ROOT/prepared-sha")" == "$SHA" ]]
 [[ "$(git -C "$RELEASE" rev-parse HEAD)" == "$SHA" ]]
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
-[[ -r /etc/bloxodes/article-automation.env && -r /etc/bloxodes/wiki-automation.env ]]
-id "$MODEL" >/dev/null
-command -v setfacl >/dev/null
-SERVICES=(bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service bloxodes-wiki-builder.service bloxodes-wiki-publisher.service bloxodes-wiki-recovery.service)
-TIMERS=(bloxodes-article-discovery.timer bloxodes-article-publication.timer bloxodes-wiki-builder.timer bloxodes-wiki-publisher.timer bloxodes-wiki-recovery.timer)
+[[ -r /etc/bloxodes/article-automation.env ]]
+SERVICES=(bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service)
+TIMERS=(bloxodes-article-discovery.timer bloxodes-article-publication.timer)
 idle() {
   local service state pid
   for service in "${SERVICES[@]}"; do
@@ -74,29 +71,15 @@ if [[ ${#ACTIVE[@]} -gt 0 ]]; then systemctl stop "${ACTIVE[@]}"; fi
 # Catch a timer firing between the initial check and trigger suspension.
 idle
 # Exclude manual article/wiki workers too; the same lease is visible in all releases.
-(set -o noclobber; printf '{"pid":%s,"token":"runtime-activation-%s","mode":"runtime-activation"}\n' "$$" "$$" > "$SOURCE/tmp/article-writer/writer.lock") || { echo 'Shared article/wiki lease exists; retry after its owner finishes.' >&2; exit 1; }
+(set -o noclobber; printf '{"pid":%s,"token":"runtime-activation-%s","mode":"runtime-activation"}\n' "$$" "$$" > "$SOURCE/tmp/article-writer/writer.lock") || { echo 'Shared automation lease exists; retry after its owner finishes.' >&2; exit 1; }
 LOCKED=1
 # Persist data once, retaining every old absolute artifact path for queued retries.
 if [[ -L "$ROOT/state" || -f "$ROOT/state-relocation.json" && ( ! -L "$LEGACY/state" || -d "$LEGACY/state.before-hdd" ) ]]; then
   python3 "$RELEASE/scripts/ops/relocate-automation-state.py" "$LEGACY" "$ROOT"
 fi
-if [[ ! -e "$ROOT/state/wiki-automation" ]]; then
-  mv "$SOURCE/tmp/wiki-automation" "$ROOT/state/wiki-automation"
-  ln -s "$ROOT/state/wiki-automation" "$SOURCE/tmp/wiki-automation"
-fi
-[[ "$(readlink -f "$SOURCE/tmp/wiki-automation")" == "$ROOT/state/wiki-automation" ]]
 [[ "$(readlink -f "$RELEASE/tmp/article-writer")" == "$(readlink -f "$SOURCE/tmp/article-writer")" ]]
-# The model can traverse the runtime and read code, but only write artifacts/cache.
-# Do not recurse through .envs or grant access to any credential directory.
-setfacl -m "u:$MODEL:--x" /home/teja/.local/share
-setfacl -m "u:$MODEL:--x" /srv/data
-setfacl -m "u:$MODEL:r-x" "$ROOT" "$ROOT/releases" "$RELEASE" "$ROOT/state"
-setfacl -m "u:$MODEL:rwx" "$SOURCE/tmp/article-writer"
-setfacl -R -m u:teja:rX "$ROOT/state/wiki-automation"
-setfacl -m d:u:teja:rX "$ROOT/state/wiki-automation"
-runuser -u "$MODEL" -- test ! -r "$RELEASE/.envs"
-runuser -u "$MODEL" -- git -c "safe.directory=$RELEASE" -C "$RELEASE" status --porcelain > "$BACKUP/model-git-status"
-[[ ! -s "$BACKUP/model-git-status" ]]
+# Wiki scheduling belongs to T3 on the MacBook Pro. Never recreate its retired
+# homelab units, model permissions, artifact aliases or correction state.
 # GitHub owns dependency installation, checks, builds and browser verification.
 # This activation performs filesystem and service-state readback only.
 [[ -f "$ROOT/package-receipt-$SHA.json" ]]
@@ -107,6 +90,6 @@ mv -Tf "$ROOT/current.next" "$ROOT/current"
 systemctl daemon-reload
 for unit in "${SERVICES[@]}" "${TIMERS[@]}"; do cmp "$RELEASE/scripts/ops/systemd/$unit" "/etc/systemd/system/$unit"; done
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
-# Optional recovery retains the owner's existing enablement and active state.
+# Restore only the article timers that were active before activation.
 SUCCESS=1
-echo "Activated articles and wiki/collections at $SHA. Prior timer enablement/cadence retained. Rollback units: $BACKUP"
+echo "Activated article automation at $SHA. Prior timer enablement/cadence retained. Rollback units: $BACKUP"

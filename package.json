@@ -183,7 +183,6 @@
     "seed:game-wiki-pages": "tsx scripts/collections/seed-game-wiki-pages.ts",
     "sync:game-wiki-runtime": "node --import tsx scripts/collections/sync-game-wiki-runtime.ts",
     "wiki:homelab:check": "node --import tsx scripts/ops/check-homelab-wiki-automation.ts",
-    "wiki:homelab:run": "node --import tsx scripts/wiki/run-homelab-wiki-automation.ts",
     "wiki:queue:check": "node --import tsx scripts/wiki/check-wiki-queue-contract.ts",
     "seed:catalog-pages": "tsx scripts/catalog/seed-catalog-pages.ts",
     "sync:game-specific-id-sources": "tsx scripts/catalog/sync-game-specific-id-sources.ts",

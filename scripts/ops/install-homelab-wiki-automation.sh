@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
-# Compatibility entrypoint: article and wiki services are activated together.
-exec bash "$(dirname "${BASH_SOURCE[0]}")/install-homelab-automation.sh" "$@"
+echo 'Homelab wiki automation is retired. Use the MacBook Pro T3 schedule documented in dev-docs/pipelines/wiki-collections.md.' >&2
+exit 1

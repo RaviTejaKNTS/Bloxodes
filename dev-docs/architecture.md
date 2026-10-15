@@ -69,6 +69,7 @@ Current content scale refreshed read-only on 2026-09-01 (infrastructure figures 
 - VPS `codex-admin` crontab owns universe stats, item stats, codes, indexing, events, puzzles, catalog, music IDs, decals, promo rewards, free items, revalidation, and cache warming.
 - The worker runs ephemeral `bloxodes-stats-worker:production` containers on the private `supabase_default` network and normally points database traffic at `http://supabase-kong:8000`.
 - Managed Supabase development owns all workstation/non-production database work; homelab systemd owns article discovery/curation and managed-dev article writing.
+- As verified October 15, 2026, the MacBook Pro T3 scheduler owns nightly Roblox wiki creation at 02:30 IST with Luna max and T3 subagents. Its standing release authorization uses GitHub selected-content QA/publication. Homelab wiki services are retired. See [wiki collections](pipelines/wiki-collections.md#nightly-roblox-wiki-task).
 - GitHub Actions owns immutable web image build/deploy and retains manual fallback workflows for several scheduled pipelines.
 - Production database events flow through `revalidation_events` and `cache_warm_events`; VPS minute cron invokes the two Edge Function workers.
 
