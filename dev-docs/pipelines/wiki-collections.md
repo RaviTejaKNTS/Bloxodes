@@ -49,7 +49,7 @@ Standalone checklist planning follows the [100% completion convention](content.m
 
 ### Roblox collection openings
 
-Source inspection and read-only production inventory: 2026-10-15. GitHub checks and production application of this repair are pending.
+Source inspection and read-only production inventory: 2026-10-15. GitHub applied the repair in managed development. Collection browser checks passed for three pages on desktop and mobile. Full PR checks and production application are pending.
 
 Roblox collection pages open with an intro about the items, followed by the collection. Database and collectible renderers ignore legacy `how_it_works_md`. Keep useful mechanics, stat meanings and trade-offs in `description_md`; new Roblox finals leave `how_it_works_md` empty. GTA and other game namespaces retain their existing help contracts.
 
