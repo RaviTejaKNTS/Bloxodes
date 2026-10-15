@@ -3,6 +3,7 @@ import path from "node:path";
 import { marked } from "marked";
 import { load } from "cheerio";
 import { publicProvenanceMatch } from "./public-provenance";
+import { robloxCollectionCopyFindings } from "./roblox-collection-copy";
 
 type Finding = {
   file: string;
@@ -237,6 +238,8 @@ async function scanFile(file: string): Promise<Finding[]> {
     typeof parsed.title === "string" && typeof parsed.slug === "string";
   const strings = collectPublicStrings(parsed);
   return [
+    ...(isRecord(parsed) && typeof parsed.wiki_slug === "string" && typeof parsed.collection_slug === "string" && "universe_id" in parsed
+      ? robloxCollectionCopyFindings(parsed).map(finding => ({ ...finding, file })) : []),
     ...strings.flatMap((entry) => scanString(entry.value, file, entry.field, article)),
     ...scanRepeatedStarts(strings, file),
     ...(article ? scanArticleFaqPlacement(parsed, file) : []),

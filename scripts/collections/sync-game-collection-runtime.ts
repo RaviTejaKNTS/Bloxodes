@@ -8,6 +8,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { type GameCollectionConfig } from "@/lib/game-collections";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
+import { assertRobloxCollectionCopy } from "../content/roblox-collection-copy";
 
 type DatasetDocument = {
   meta?: Record<string, unknown>;
@@ -739,6 +740,8 @@ async function main() {
   if (!sources.length) throw new Error("No collection matched the supplied filters or manifests.");
   const plans = [] as CollectionPlan[];
   for (const source of sources) plans.push(await planCollection(source));
+  // Reject copy before any media upload or database write, including dry-run plans.
+  for (const plan of plans) if (plan.finalJson) assertRobloxCollectionCopy(plan.finalJson);
 
   const report = plans.map((plan) => ({
     code: plan.config.code,

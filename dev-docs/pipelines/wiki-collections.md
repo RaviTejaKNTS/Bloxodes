@@ -47,6 +47,20 @@ Standalone checklist planning follows the [100% completion convention](content.m
 
 ## Scope
 
+### Roblox collection openings
+
+Source inspection and read-only production inventory: 2026-10-15. GitHub checks and production application of this repair are pending.
+
+Roblox collection pages open with an intro about the items, followed by the collection. Database and collectible renderers ignore legacy `how_it_works_md`. Keep useful mechanics, stat meanings and trade-offs in `description_md`; new Roblox finals leave `how_it_works_md` empty. GTA and other game namespaces retain their existing help contracts.
+
+The collection writing skill owns this copy rule. The runner and automated writing/editorial prompts apply it. `scripts/content/roblox-collection-copy.ts` checks for a nonempty help field and website instructions in public prose. The stage pipeline sends findings through its existing one-correction budget, including when a reviewer or resumed decision would otherwise approve them. The public-copy verifier, standalone Claude writer and immutable runtime publisher use the same check. Publication plans reject invalid copy before media uploads or database writes. The Roblox exporter leaves the retired help field empty in new authoring snapshots; data-only refreshes report other copy findings for a separate writing pass.
+
+The October 15 inventory found 755 published Roblox collections and 580 nonempty legacy help fields. Migration `20261015094044` repairs reviewed copy on 125 pages, including 119 intros, 27 hub blurbs, 20 FAQ arrays and eight generic bodies. Text fields require their reviewed original MD5; FAQ arrays require exact original JSON. Each field matches independently, preserving later edits. Dataset revisions, media, page types and saved progress are unchanged. Legacy help remains stored. Existing page triggers refresh search and enqueue collection and hub revalidation.
+
+Renderer, copy-gate, stage-revision and PostgreSQL repair regressions run in the existing required PR checks. Installed detached automation runtimes keep their current release until a separately authorized activation.
+
+### Existing publication scope
+
 Production verified on 2026-09-07 at web SHA `bf7ea6ad71a9d6646f83077ceb373d2912ccf997`: five Red Dead hubs and six collections (271 items) are live with ten hosted hub images, sitemap/search coverage, and 100% Completion excluded. Production migrations `20260920000023` and `20260920000024` are applied. The 19 Roblox and 93 GTA legacy wiki checklist rows now use `collectible`; Red Dead has two collectible and four database collections. Saved-progress rows and storage keys were preserved. Standalone checklist pages are unchanged.
 Game wiki hubs and their game-specific collections are one editorial/data unit:
 

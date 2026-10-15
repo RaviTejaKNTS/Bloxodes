@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { assertRobloxCollectionCopy } from "./roblox-collection-copy";
 
 type CliOptions = {
   game: string;
@@ -177,6 +178,7 @@ Writing requirements:
 - Keep the copy simple, warm, concrete, and human friendly.
 - Avoid generic page filler, AI-ish contrast phrases, hype words, and textbook voice.
 - Do not mention sources, dataset, workflow, Bloxodes, or page usage in public copy.
+- Leave how_it_works_md empty. Explain game mechanics in description_md; intros and wiki blurbs explain the items, without card, field or browsing instructions.
 - Do not state item counts or section counts in prose. Only use the automated {count} token in title and seo_title.
 - Use q/a keys for faq_json entries, not question/answer.
 - Use ${options.game}-${options.collection} for code, ${options.game} for wiki_slug, and ${options.collection} for collection_slug.
@@ -238,6 +240,7 @@ function collectPublicCopy(value: unknown): string[] {
 }
 
 function validateFinalJson(file: string, options: CliOptions, finalJson: CollectionFinal) {
+  assertRobloxCollectionCopy(finalJson as Record<string, unknown>);
   const errors: string[] = [];
   const expectedCode = `${options.game}-${options.collection}`;
 

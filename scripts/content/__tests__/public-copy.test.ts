@@ -110,3 +110,45 @@ test("article FAQs have one visible home and cannot duplicate body headings", ()
   }
   assert.equal(checkCopy({ title: "Fisch Appraisal", slug: "fisch-appraisal", content_md: "## Fisch Appraisal Cost\nIt costs 450 C$.", faq_json: [{ q: "Can I undo it?", a: "No." }] }).status, 0);
 });
+
+const collection = { universe_id: 123, wiki_slug: "game", collection_slug: "pets", code: "game-pets" };
+
+test("Roblox collections reject page instructions and legacy help fields", () => {
+  for (const copy of [
+    { intro_md: "Use the cards to compare prices." },
+    { intro_md: "Use [the cards](https://example.com/) to compare prices." },
+    { intro_md: "The cards show the purchase route." },
+    { intro_md: "The cards help you match loadout and playstyle." },
+    { intro_md: "Cards group them by who helps you." },
+    { intro_md: "The cards are meant to help you decide what to build next." },
+    { intro_md: "Use the map sections below to see who appears there." },
+    { intro_md: "Use the mutation list to compare multipliers." },
+    { intro_md: "Here you can line them up by rarity." },
+    { intro_md: "Here every seed is lined up by price." },
+    { intro_md: "All 11 are laid out side by side so you can compare them." },
+    { intro_md: "Every tool is listed below with its price." },
+    { wiki_md: "This collection lists the pets." },
+    { description_json: { Rare: "Switch to list view to compare these." } },
+    { faq_json: [{ q: "How should I use this page?", a: "Use the filters." }] },
+    { how_it_works_md: "Rarity shows the tier." }
+  ]) {
+    const result = checkCopy({ ...collection, ...copy });
+    assert.equal(result.status, 1, JSON.stringify(copy));
+    assert.match(result.stderr, /collection/);
+  }
+});
+
+test("Roblox game advice passes without treating gameplay cards as page controls", () => {
+  const result = checkCopy({ ...collection,
+    intro_md: "Pets hatch from eggs. Use the cards to summon a pet in battle. Cards help you defeat bosses.",
+    how_it_works_md: "",
+    description_md: "Open your inventory and equip a pet. Water filters remove contamination. Repair the Enchant Table before rolling. Collect every page in the chapter. The boats are lined up side by side at the dock.",
+    wiki_md: "The shop shows the egg price before you buy."
+  });
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test("other page families keep their own help-field contracts", () => {
+  const result = checkCopy({ game_id: "gta-game", wiki_slug: "gta-v", collection_slug: "vehicles", how_it_works_md: "The cards show vehicle prices." });
+  assert.equal(result.status, 0, result.stderr);
+});

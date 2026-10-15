@@ -66,7 +66,7 @@ Automatic daily workflows use fast code/build/dataset checks and tiny targeted s
 | Code-article rewrite | `scripts/codes/rewrite-codes-articles.ts` | `npm run rewrite:codes` |
 | Universe description generation | `scripts/universes/generate-universe-description.ts` | `npm run generate:universe-description` |
 | Queue event guides | `scripts/events/queue-event-guides.ts` | `npm run queue:event-guides` |
-| Public copy quality check | `scripts/content/check-public-copy.ts` | `npm run content:check-copy -- <final.json>` |
+| Public copy quality check | `scripts/content/check-public-copy.ts`, `scripts/content/roblox-collection-copy.ts` | `npm run content:check-copy -- <final.json>`; Roblox collection finals require empty help copy and reject website instructions. The stage pipeline, Claude writer and runtime publisher share that check. |
 | Collect and host an approved article visual set | `scripts/content/collect-article-images.ts` | `npm run collect:article-images -- --manifest <media.json>` for dry run; add `-- --apply` after exact-match/source approval |
 | Check article visual-set readiness | `scripts/content/check-article-image-readiness.ts` | `npm run check:article-image-readiness -- --manifest <media.json> --file <final.json>` |
 | Sync article image provenance | `scripts/content/sync-article-image-provenance.ts` | Dry-run `npm run sync:article-image-provenance -- --manifest <media.json>`; add `-- --apply` after article import. Production also requires `NODE_ENV=production` and `--allow-prod` |

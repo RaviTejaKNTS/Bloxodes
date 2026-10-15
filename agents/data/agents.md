@@ -32,6 +32,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `wiki_collection_pages`, `wiki_collection_pages_view`, `wiki_collection_datasets`, `wiki_collection_items`
   - Game-specific collection pages rendered under `/wiki/<game-slug>/<collection-slug>`, with stable `code` values kept for scripts, search, and old catalog URL redirects.
   - `wiki_collection_pages.page_type` selects `database` (reference roster) or `collectible` (finite player-completed goal) while both types share the same immutable dataset and page row.
+  - New Roblox collection copy leaves `how_it_works_md` empty. Both renderers ignore legacy help and keep game mechanics in `description_md`. The reviewed October 15 copy repair matches each original field independently and preserves dataset/media pointers, page types and progress. See `dev-docs/pipelines/wiki-collections.md#roblox-collection-openings`.
   - Use `display_name` for clean navigation labels such as `Domains` or `Characters`; keep `title`/`seo_title` as full page/SEO titles. Use `item_count` for collection navigation counts instead of parsing titles.
   - `published_dataset_id` selects one immutable dataset revision. Web, mobile, tools, sitemaps, and media loaders use these database rows and R2 keys only.
 - `gta_games`, `gta_wiki_pages`, `gta_wiki_pages_view`

@@ -5,6 +5,7 @@ import { saveJson } from "../articles/article-pipeline";
 import { executeWikiModelStage, StageInterrupted, WikiOwnershipError, wikiArtifactHashes, wikiOwnershipSnapshot, assertWikiStageInput, type WikiModelOptions, type WikiStageTask } from "./wiki-stage-runtime";
 import { isWikiReview, wikiStageConfig, type WikiStageConfig, type WikiStage } from "./wiki-stage-config";
 import { parseWikiDecision, type WikiCollection, type WikiDecision, type WikiIdentity } from "./wiki-stage-prompts";
+import { robloxCollectionCopyFindings } from "../content/roblox-collection-copy";
 
 export type WikiWorkflowResult = {
   queueId: string; universeId: number; wikiSlug: string; outcome: "ready" | "blocked"; outcomeReason?: string;
@@ -210,6 +211,16 @@ export async function runWikiStagePipeline(options: WikiModelOptions & { execute
         await persist(); // Resume after a returned decision without paying for another model call.
       }
       const d = structuredClone(parseWikiDecision(task.decision, stage));
+      if (d.status === "completed" && collection && (stage === "collection_writing" || stage === "collection_editorial_review")) {
+        const final = await json(path.join(folder, task.revision ? "final.json" : "draft-final.json"));
+        const findings = robloxCollectionCopyFindings(final);
+        if (findings.length) {
+          d.status = "needs_revision";
+          d.repair_stage = "writing";
+          d.summary = "Replace collection page instructions with game advice.";
+          d.findings = findings.map(finding => `${finding.field}: ${finding.rule}. ${finding.excerpt}`);
+        }
+      }
       const trustedWrite = async (file: string, bytes: string | Buffer) => {
         task.codeWrites ??= {};
         const name = path.relative(root, file);

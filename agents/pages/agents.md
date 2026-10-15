@@ -14,6 +14,8 @@ Authoritative workflow guidance lives in:
 This file is the route-family inventory for quick scanning.
 After the monorepo move, older shorthand paths in this inventory that begin with `src/` refer to `apps/web/src/`.
 
+Roblox database and collectible collections open with game-focused intro copy. Their renderers ignore legacy `how_it_works_md`; game explanations and FAQs follow the items. Other game namespaces retain their own help contracts. See `dev-docs/pipelines/wiki-collections.md#roblox-collection-openings` for the repair and verification state.
+
 ## Shell And Global UI
 
 | Area | Routes | Files / Notes |

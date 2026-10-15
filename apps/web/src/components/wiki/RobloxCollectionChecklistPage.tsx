@@ -92,7 +92,6 @@ export function renderRobloxCollectionChecklistPage({
   const introNodes = contentHtml?.introHtml ? renderPageContentNodes(contentHtml.introHtml, `${config.code}-intro`) : [];
   const detailEntries = contentHtml?.descriptionHtml?.filter((entry) => entry.key === DESCRIPTION_MD_KEY) ?? [];
   const detailNodes = detailEntries.flatMap((entry) => renderPageContentNodes(entry.html, `${config.code}-detail-${entry.key}`));
-  const howNodes = contentHtml?.howHtml ? renderPageContentNodes(contentHtml.howHtml, `${config.code}-how`) : [];
   const faqNodes = (contentHtml?.faqHtml ?? []).map((entry, index) => ({
     id: `${config.code}-faq-${index}`,
     question: entry.q,
@@ -121,7 +120,7 @@ export function renderRobloxCollectionChecklistPage({
 
       <RobloxCollectionChecklist
           beforeToolbar={<>{introNodes}</>}
-          afterContent={<>{howNodes}{detailNodes}<CollectionFaq items={faqNodes} /></>}
+          afterContent={<>{detailNodes}<CollectionFaq items={faqNodes} /></>}
           code={config.code}
           gameName={config.gameName}
           collectionLabel={config.label}

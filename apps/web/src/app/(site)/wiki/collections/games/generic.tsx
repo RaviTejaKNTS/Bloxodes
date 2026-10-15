@@ -963,7 +963,6 @@ export function renderGameCollectionPage({
     `All ${itemCount.toLocaleString("en-US")} ${config.label} in ${config.gameName}`;
   const pageDescription = `${config.gameName} ${config.label.toLowerCase()} collection with ${itemCount.toLocaleString("en-US")} tracked entries.`;
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml.introHtml : "";
-  const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const faqHtml = contentHtml?.faqHtml ?? [];
   const dataUpdatedAt = resolveDataUpdatedAt(dataset.meta);
@@ -971,6 +970,8 @@ export function renderGameCollectionPage({
   const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const normalizedRouteBase = routeBase === "/" ? "" : routeBase.replace(/\/+$/, "");
+  // Legacy help stays stored, but Roblox collections open directly on the items.
+  const howHtml = normalizedRouteBase !== "/wiki" && contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const useStream = streamOption ?? normalizedRouteBase === "/wiki";
   const basePath = collectionBasePath ?? `${normalizedRouteBase}/${config.gameSlug}/${config.slug}`;
   const gameWikiPath = wikiHomePath ?? `${normalizedRouteBase}/${config.gameSlug}`;
