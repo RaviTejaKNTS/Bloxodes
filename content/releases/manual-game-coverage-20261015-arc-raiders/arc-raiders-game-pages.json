@@ -1,0 +1,45 @@
+{
+  "games": [
+    {
+      "id": "1623b9cf-8907-4d7d-8275-bfaf30569167",
+      "kind": "game",
+      "parent_id": null,
+      "slug": "arc-raiders",
+      "title": "ARC Raiders",
+      "short_title": "ARC Raiders",
+      "installment": "",
+      "developer": "Embark Studios",
+      "publisher": "Embark Studios",
+      "description_md": "Gear up in your Workshop, head topside, and bring valuable loot back to Speranza. ARC Raiders is a multiplayer extraction adventure from Embark Studios, and the surface is shared with ARC machines and other Raiders.",
+      "cover_image": null,
+      "hero_image": null,
+      "official_url": "https://arcraiders.com/",
+      "release_dates_json": {
+        "Steam": "October 30, 2025"
+      },
+      "platforms_json": [
+        "Steam",
+        "Epic Games Store",
+        "PlayStation 5",
+        "Xbox Series X|S",
+        "GeForce NOW"
+      ],
+      "status": "released",
+      "is_published": true
+    }
+  ],
+  "wiki": [
+    {
+      "game_id": "1623b9cf-8907-4d7d-8275-bfaf30569167",
+      "slug": "arc-raiders",
+      "title": "ARC Raiders Wiki",
+      "seo_title": "ARC Raiders Wiki: Raids, Workshop Gear, Skill Tree and Feats",
+      "meta_description": "Prepare gear in your Workshop before a raid, then sell or craft what you bring back. See how Feats, the Reward Pass, and Solo, Duo, and Trio matchmaking work.",
+      "description_md": "Before a raid, prepare gear in your Workshop. Topside, ARC machines and other Raiders make every trip risky, so scavenge what you can, alone or with up to two teammates. Back in Speranza, you can sell what you carried out for coin or craft it into gear for the next raid. Trader quests award gear, crafting materials, and XP, and that XP adds to your Raider level and skill points.\n\nThe Skill Tree is built around choices. Each branch has a middle node with two skills, and you choose one. At the end of each branch, two nodes let you choose up to two of three skills once you've invested the required skill points. Finishing a project unlocks the Outpost, which gives you access to the Research Bench. The Outpost has 100 furniture designs you can learn and use. Of those, 73 can be found Topside, 22 unlock through Outpost upgrades, and five are exclusive to the Frozen Trail Pass (four) or a DLC (one). Solo, Duo, and Trio playstyles are tracked separately, and you're matched accordingly.",
+      "tips_md": "- Hard Feats add the most weekly milestone progress: 3 each, compared with 2 for Medium and 1 for Easy, toward the 4, 8, and 12 thresholds.\n- Every Feat pays Reward Points, which apply automatically to your active Reward Pass: 15 for Easy, 25 for Medium, and 50 for Hard. Each weekly milestone pays 250 Reward Points.\n- Once all three weekly milestones are done, you can still complete Feats, but the major milestone rewards wait for the weekly timer to reset.",
+      "controls_json": [],
+      "cover_image": null,
+      "is_published": true
+    }
+  ]
+}
