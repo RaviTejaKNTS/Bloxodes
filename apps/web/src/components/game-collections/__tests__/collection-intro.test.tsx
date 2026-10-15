@@ -38,7 +38,20 @@ describe("Roblox collection introductions", () => {
   });
 
   it("keeps collectible game advice without the old help field", () => {
-    const page = { meta_description: "Find the pets.", description_json: {}, published_at: null, updated_at: null, thumb_url: null } as WikiCollectionPageContent;
+    const page: WikiCollectionPageContent = {
+      wiki_slug: config.gameSlug,
+      collection_slug: config.slug,
+      code: config.code,
+      page_type: "collectible",
+      title: "Game pets",
+      seo_title: "Game pets",
+      meta_description: "Find the pets.",
+      intro_md: "Pets boost your harvest.",
+      how_it_works_md: "Legacy page instructions.",
+      description_json: {},
+      faq_json: [],
+      is_published: true
+    };
     const html = renderToStaticMarkup(renderRobloxCollectionChecklistPage({ page, config, dataset, groupedSections: [{ id: "pets", label: "Pets", items: dataset.items }], contentHtml, collectionOptions: [] }));
     expect(html).toContain("Pets boost your harvest.");
     expect(html).toContain("Collectible roster");
