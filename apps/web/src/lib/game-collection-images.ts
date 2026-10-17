@@ -35,7 +35,7 @@ export async function listGameCollectionImageUrls(code: string, limit = 6): Prom
   const safeLimit = Math.max(1, Math.min(12, requestedLimit));
   const cached = publicContentCache(
     () => readCollectionImageUrls(normalizedCode, safeLimit),
-    ["game-collection-images-v3", normalizedCode, String(safeLimit)],
+    ["game-collection-images-v4", normalizedCode, String(safeLimit)],
     {
       revalidate: COLLECTION_IMAGES_REVALIDATE_SECONDS,
       tags: ["collection-index", `collection:${normalizedCode}`]

@@ -10,7 +10,7 @@ import {
   listPublishedWikiCollectionPagesByWikiSlug,
   type WikiCollectionPageContent
 } from "@/lib/wiki-collections";
-import { getPublishedWikiCollectionRuntime } from "@/lib/wiki-collection-runtime";
+import { getPublishedWikiCollectionRuntime, hasWikiCollectionImageCredit } from "@/lib/wiki-collection-runtime";
 import {
   prepareGameCollectionDocument,
   renderGameCollectionPage
@@ -162,7 +162,9 @@ export async function generateWikiCollectionMetadata({
   let fallbackTitle = page?.title ?? `${collectionSlug} Wiki Collection`;
   let fallbackDescription = page?.meta_description ?? WIKI_DESCRIPTION;
   const databaseRuntime = page ? await getPublishedWikiCollectionRuntime(page) : null;
-  const databaseImage = databaseRuntime?.document.items.find((item) => item.system.image)?.system.image;
+  const databaseImage = databaseRuntime?.document.items.find(
+    (item) => item.system.image && !hasWikiCollectionImageCredit(item.item)
+  )?.system.image;
   const image = databaseImage ?? page?.thumb_url ?? `${SITE_URL}/Bloxodes.png`;
 
   const growGardenConfig = wikiSlug === "grow-a-garden"
