@@ -57,6 +57,7 @@ const MOBILE_COLLECTION_OMITTED_KEYS = new Set([
   "thumbnail",
   "thumbnail_url",
   "imageUrl",
+  "imageCreditUrl",
   "imageCandidate",
   "sourceImageUrl",
   "sourceImage",
@@ -811,8 +812,11 @@ function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[],
 }): MobileContentDetailItem {
   const title = firstMeaningfulValue(row, ["name", "title", "label", "id"]) ?? "Item";
   const id = firstMeaningfulValue(row, ["id", "slug", "name", "title"]) ?? title;
-  const body = options.descriptionKey ? formatUnknownValue(row[options.descriptionKey]) : null;
+  const body = options.descriptionKey && !MOBILE_COLLECTION_OMITTED_KEYS.has(options.descriptionKey)
+    ? formatUnknownValue(row[options.descriptionKey])
+    : null;
   const fields = fieldKeys
+    .filter((key) => !MOBILE_COLLECTION_OMITTED_KEYS.has(key))
     .map((key): MobileContentDetailField | null => {
       const value = formatUnknownValue(row[key]);
       if (!value) return null;
@@ -828,11 +832,16 @@ function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[],
     .filter(Boolean) as MobileContentDetailField[];
 
   return detailItem(String(id), title, {
-    badge: options.badgeKey ? formatUnknownValue(row[options.badgeKey]) : null,
+    badge: options.badgeKey && !MOBILE_COLLECTION_OMITTED_KEYS.has(options.badgeKey)
+      ? formatUnknownValue(row[options.badgeKey])
+      : null,
     body,
     fields,
     image: firstMeaningfulValue(row, ["image", "thumbnail_url", "thumbnail", "image_url"]),
-    subtitle: firstMeaningfulValue(row, options.subtitleKeys)
+    subtitle: firstMeaningfulValue(
+      row,
+      options.subtitleKeys.filter((key) => !MOBILE_COLLECTION_OMITTED_KEYS.has(key))
+    )
   });
 }
 
