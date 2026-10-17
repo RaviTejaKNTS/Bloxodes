@@ -20,6 +20,10 @@ Selective PR review uses `scripts/ci/review-scope.mjs` and `.github/workflows/co
 - Prefer `npm run <name>` when a package script exists.
 - Fall back to direct `tsx scripts/...` or `python scripts/...` only for scripts that do not have a package alias yet.
 
+## VPS boot recovery
+
+`scripts/ops/vps-boot-recovery.py` is a dependency-free host job for failed container starts after a reboot. `scripts/ops/install-vps-boot-recovery.sh --apply` installs reviewed files and only the `BLOXODES_BOOT_RECOVERY` crontab block as `codex-admin`. It does not start the job during installation. Use `--dry-run` for a read-only pass. GitHub runs `npm run test:vps-boot-recovery`; the fixtures never contact Docker. Installation, selection rules, journal recovery, rotated logs and verification commands are owned by [VPS operations](../../dev-docs/infrastructure/vps.md#boot-recovery).
+
 ## Worktree setup
 
 `npm run setup:worktree` prepares the T3-assigned checkout through dependency-free `setup-worktree.mjs`. It checks the main checkout and private env metadata, links `.envs/` plus approved shared authoring folders, and creates separate scratch/report directories. Conflicting local paths and live links to other targets stay intact and stop setup. Missing or dangling optional reference sources and dangling reference links produce warnings and stay intact. It installs no dependencies and runs no checks. Codex invokes the shell wrapper through `.codex/environments/environment.toml`; Claude and Grok share the `.claude/settings.json` `SessionStart` hook. `claim:shared-content -- --game <slug>` reserves shared drafts until the owning checkout adds `--release`. Cleanup requires a T3 inactivity check, archives scratch files before removal and supports T3 HDD paths. See `dev-docs/operations/deployment.md`.

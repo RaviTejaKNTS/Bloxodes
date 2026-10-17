@@ -34,6 +34,14 @@ The Supabase CLI project `roblox-codes` was observed on this workstation during 
 
 `compose.yml` is a plain-Docker local/alternate production runner. At build time it mounts the four split production-profile files as BuildKit secrets; at runtime it loads those same files through `env_file`. It persists Next cache in `next-cache` and maps `${APP_PORT:-3000}`. The normal Dokploy deployment does not use these workstation files as its secret source.
 
+### VPS boot failures on the Dokploy overlay
+
+The October 16 incident investigation supplied by the parent agent found that a remembered dynamic `IPAMConfig.IPv4Address` on `supabase-kong` collided with the `dokploy-network` overlay load balancer after a hypervisor shutdown. The Compose files did not configure a fixed IP. The stack uses `/home/codex-admin/bloxodes-supabase/docker-compose.yml` with `docker-compose.pg17.yml`, `docker-compose.rest-proxy.yml` and `docker-compose.dokploy-proxy.yml`. This incident evidence does not refresh the broader verification date above.
+
+Docker can reapply a saved address when starting a stopped container and fail if that address is unavailable. See [Docker network restart behavior](https://docs.docker.com/reference/cli/docker/network/connect/#network-implications-of-stopping-pausing-or-restarting-containers). A failed initial start also falls outside normal [restart-policy monitoring](https://docs.docker.com/engine/containers/start-containers-automatically/#restart-policy-details).
+
+The separate `codex-admin` boot-recovery job is ready for operator installation. It retries eligible failed starts, then permits a dynamic overlay reconnect only after an address collision and read-only Compose verification. It keeps every recorded alias and retains a journal across interrupted reconnects. It skips Swarm tasks and never applies Compose or recreates containers. [VPS operations](vps.md#boot-recovery) owns the decision rules, installation status, logs and verification commands.
+
 ## Local Verification Boundary
 
 On 2026-08-14, a real local `Dockerfile.stats-worker` image build completed and
