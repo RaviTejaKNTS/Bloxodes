@@ -22,6 +22,7 @@ import {
   buildWikiCollectionPath,
   listPublishedWikiCollectionPagesByWikiSlug
 } from "@/lib/wiki-collections";
+import { hasWikiCollectionImageCredit } from "@/lib/wiki-collection-runtime";
 
 const FALLBACK_IMAGE = "/Bloxodes.png";
 
@@ -858,7 +859,9 @@ function buildItemListSchema({
       "@type": "Thing",
       name: item.name,
       url: `${url}#item-${item.id}`,
-      ...(item.image ? { image: resolveAbsoluteUrl(item.image) } : {})
+      ...(item.image && !hasWikiCollectionImageCredit(item)
+        ? { image: resolveAbsoluteUrl(item.image) }
+        : {})
     }
   }));
 
