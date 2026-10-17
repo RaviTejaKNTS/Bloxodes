@@ -219,6 +219,7 @@
     "stats:items:index:refresh": "tsx scripts/items/rebuild-stats-item-indexes.ts",
     "stats:items:audit": "tsx scripts/items/audit-item-stats-workflow.ts",
     "test:universe-stats-pipeline": "node --import tsx --test scripts/universes/__tests__/universe-stats-pipeline.test.ts",
+    "test:vps-boot-recovery": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/ops/__tests__ -p 'test_vps_boot_recovery.py' -v",
     "test:items-pipeline": "tsx --test scripts/items/__tests__/*.test.ts",
     "generate:universe-description": "tsx scripts/universes/generate-universe-description.ts",
     "backfill:interlinking": "tsx scripts/backfill/backfill-interlinking.ts",

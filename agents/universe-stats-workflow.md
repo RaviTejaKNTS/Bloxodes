@@ -74,24 +74,24 @@ Current VPS host:
 Current worker user and folder:
 
 ```txt
-user: codex-admin
-folder: /home/codex-admin/bloxodes-stats-worker
+user: ravitejaknts
+folder: /home/ravitejaknts/bloxodes-stats-worker
 image: bloxodes-stats-worker:production
 source branch: production
 dockerfile: Dockerfile.stats-worker
 cron marker: BLOXODES_STATS_WORKER
 ```
 
-Important: `codex-admin` is the current live owner because that is how the worker was originally installed. Long term, this should move to a dedicated production worker user and a neutral folder such as `/srv/bloxodes/stats-worker`, but do not assume that migration has happened unless the VPS says so.
+The worker owner is `ravitejaknts` (uid 1001), renamed on 2026-10-17. The old home remains a compatibility symlink. Long term, this should move to a dedicated production worker user and a neutral folder such as `/srv/bloxodes/stats-worker`, but do not assume that migration has happened unless the VPS says so.
 
 Current worker files on the VPS:
 
 ```txt
-/home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
-/home/codex-admin/bloxodes-stats-worker/bin/build-image.sh
-/home/codex-admin/bloxodes-stats-worker/env.stats-worker
-/home/codex-admin/bloxodes-stats-worker/logs/
-/home/codex-admin/bloxodes-stats-worker/repo/
+/home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh
+/home/ravitejaknts/bloxodes-stats-worker/bin/build-image.sh
+/home/ravitejaknts/bloxodes-stats-worker/env.stats-worker
+/home/ravitejaknts/bloxodes-stats-worker/logs/
+/home/ravitejaknts/bloxodes-stats-worker/repo/
 ```
 
 `build-image.sh` pulls the `production` branch into the worker repo and builds:
@@ -105,7 +105,7 @@ docker build -t bloxodes-stats-worker:production -f Dockerfile.stats-worker .
 ```txt
 docker run --rm \
   --network supabase_default \
-  --env-file /home/codex-admin/bloxodes-stats-worker/env.stats-worker \
+  --env-file /home/ravitejaknts/bloxodes-stats-worker/env.stats-worker \
   -e SUPABASE_URL="http://supabase-kong:8000" \
   -e STATS_WORKER_COMMAND="<cron command>" \
   bloxodes-stats-worker:production
@@ -113,14 +113,14 @@ docker run --rm \
 
 The worker and Supabase share the VPS, so the runner deliberately uses Kong on the private `supabase_default` Docker network. This avoids Cloudflare gateway timeouts for long database RPCs and transient public-path 502s during bulk refreshes. `STATS_WORKER_DOCKER_NETWORK` and `STATS_WORKER_SUPABASE_INTERNAL_URL` are host-shell overrides; putting them only in `env.stats-worker` does not change wrapper routing. Keep `SUPABASE_MEDIA_PUBLIC_URL=https://media.bloxodes.com` in `env.stats-worker` so stored public media URLs never use the internal hostname.
 
-The self-hosted Supabase Kong config must give the `rest-v1` service a `read_timeout` of `300000` milliseconds. Full daily rank RPCs allow a PostgreSQL `statement_timeout` of 240 seconds and can legitimately exceed Kong's 60-second default. The live config is `/home/codex-admin/bloxodes-supabase/volumes/api/kong.yml`; validate it with `kong config parse` and recreate only the `kong` Compose service after changing it. A missing override produces an internal HTTP 504 with `upstream timed out while reading response header` even though PostgreSQL and the rank function are healthy.
+The self-hosted Supabase Kong config must give the `rest-v1` service a `read_timeout` of `300000` milliseconds. Full daily rank RPCs allow a PostgreSQL `statement_timeout` of 240 seconds and can legitimately exceed Kong's 60-second default. The live config is `/home/ravitejaknts/bloxodes-supabase/volumes/api/kong.yml`; validate it with `kong config parse` and recreate only the `kong` Compose service after changing it. A missing override produces an internal HTTP 504 with `upstream timed out while reading response header` even though PostgreSQL and the rank function are healthy.
 
 After a production pull, install the checked-in wrapper explicitly because image builds do not update the external executable:
 
 ```txt
-cp /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh.<timestamp>.bak
-install -m 0755 /home/codex-admin/bloxodes-stats-worker/repo/scripts/ops/vps-run-job.sh /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
-sh -n /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
+cp /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh.<timestamp>.bak
+install -m 0755 /home/ravitejaknts/bloxodes-stats-worker/repo/scripts/ops/vps-run-job.sh /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh
+sh -n /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh
 ```
 
 `Dockerfile.stats-worker` executes:
@@ -129,7 +129,7 @@ sh -n /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
 eval "${STATS_WORKER_COMMAND:-npm run stats:audit}"
 ```
 
-So the `codex-admin` crontab command is the source of truth for each VPS job.
+So the `ravitejaknts` crontab command is the source of truth for each VPS job.
 
 Current VPS crontab block (install the exact block from `scripts/ops/vps-universe-stats.crontab`):
 
@@ -173,19 +173,19 @@ Decal ID rerank source loading uses paginated reads instead of a large `asset_id
 First proof after worker changes should be a targeted one-off run:
 
 ```txt
-/home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-smoke "npm run stats:items:tier -- --apply --limit 100 && npm run enrich:catalog-items -- --max-total 10 && npm run stats:items:refresh -- --tier NEW --limit 10 --skip-index-refresh && npm run stats:items:index:refresh && npm run stats:items:audit -- --strict"
+/home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-items-smoke "npm run stats:items:tier -- --apply --limit 100 && npm run enrich:catalog-items -- --max-total 10 && npm run stats:items:refresh -- --tier NEW --limit 10 --skip-index-refresh && npm run stats:items:index:refresh && npm run stats:items:audit -- --strict"
 ```
 
 VPS logs live here:
 
 ```txt
-/home/codex-admin/bloxodes-stats-worker/logs/build-image.log
-/home/codex-admin/bloxodes-stats-worker/logs/stats-new-refresh.log
-/home/codex-admin/bloxodes-stats-worker/logs/stats-warm-refresh.log
-/home/codex-admin/bloxodes-stats-worker/logs/stats-cold-refresh.log
-/home/codex-admin/bloxodes-stats-worker/logs/stats-discovery.log
-/home/codex-admin/bloxodes-stats-worker/logs/stats-deep-enrichment.log
-/home/codex-admin/bloxodes-stats-worker/logs/stats-audit.log
+/home/ravitejaknts/bloxodes-stats-worker/logs/build-image.log
+/home/ravitejaknts/bloxodes-stats-worker/logs/stats-new-refresh.log
+/home/ravitejaknts/bloxodes-stats-worker/logs/stats-warm-refresh.log
+/home/ravitejaknts/bloxodes-stats-worker/logs/stats-cold-refresh.log
+/home/ravitejaknts/bloxodes-stats-worker/logs/stats-discovery.log
+/home/ravitejaknts/bloxodes-stats-worker/logs/stats-deep-enrichment.log
+/home/ravitejaknts/bloxodes-stats-worker/logs/stats-audit.log
 ```
 
 ### VPS Discovery Detail
@@ -290,9 +290,9 @@ purpose: catch other active games from creators we already know
 Current VPS cron lines:
 
 ```cron
-22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enrich:universes:light -- --tier HOT --limit 250 --batch 25 && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
-20 3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-search "npm run discover:universes:search -- --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
-10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-creators "npm run discover:universes:creators -- --limit 500 --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
+22 * * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enrich:universes:light -- --tier HOT --limit 250 --batch 25 && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
+20 3 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-discovery-search "npm run discover:universes:search -- --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
+10 4 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-discovery-creators "npm run discover:universes:creators -- --limit 500 --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
 ```
 
 Do not add direct HOT shortcuts here. New rows should continue through the existing path:

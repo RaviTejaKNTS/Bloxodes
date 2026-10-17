@@ -1,7 +1,8 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-10-08
+Last verified: 2026-10-17
+VPS operator credentials and their mirrors were rechecked October 17. Other component verification boundaries remain as documented below.
 Path layout rechecked 2026-10-08 against live T3 registrations, Git worktree metadata, service paths and env links. Other component verification boundaries remain as documented.
 Evidence: HDD storage layout, private env filenames/modes, compatibility paths and T3 setup ownership inspected on October 7. Selective-review workflow secret boundaries and existing GitHub API-key metadata were also inspected on October 7. Runtime activation readback verified unchanged protected env hashes, ownership, modes and HDD/shared-profile links. Ignored value store, loader guards and workstation/homelab `env:doctor`/`env:check` retain their August 19 verification boundary.
 
@@ -97,14 +98,20 @@ The homelab checkout mirrors the complete private `.envs/` profile tree for feat
 - GitHub/Dokploy web build: variables are injected through one aggregate BuildKit secret and process env; the image does not contain the secret file.
 - Local Compose web build/runtime: the same production profile is assembled from shared application, content integrations, distribution integrations, and the production target. Build inputs use four BuildKit secret mounts because `.envs/` is excluded from the Docker context; runtime uses the same four `env_file` entries.
 - Dokploy runtime: application secrets are configured on the deployed service.
-- VPS worker: `/home/codex-admin/bloxodes-stats-worker/env.stats-worker`, mode 600.
+- VPS worker: `/home/ravitejaknts/bloxodes-stats-worker/env.stats-worker`, mode 600. `/home/codex-admin` remains a compatibility symlink for existing container bind sources and released operator scripts.
 - Homelab: `/etc/bloxodes/article-automation.env`, root-owned, group-readable by the service group, mode 640.
 - Homelab Codex authentication: the `teja` service account's protected Codex home (currently ChatGPT-managed authentication), never the article env file. Treat its auth material like a password; readiness calls only `codex login status` and never prints tokens. The article env owns only the Codex binary/model/reasoning settings and the Grok fallback controls.
-- Self-hosted Supabase: `/home/codex-admin/bloxodes-supabase/.env`; do not copy this full vendor/runtime contract into the repository.
+- Self-hosted Supabase: `/home/ravitejaknts/bloxodes-supabase/.env`; do not copy this full vendor/runtime contract into the repository.
+
+### VPS operator credentials
+
+The October 17 account change renamed the existing VPS operator to `ravitejaknts` while retaining UID/GID `1001`, SSH keys and automation ownership. The homelab source `/srv/data/projects/Bloxodes/.envs/infrastructure/vps.env` owns `VPS_ADMIN_USER`, `VPS_ADMIN_PASSWORD` and the equal legacy alias `VPS_ADMIN_PASSWORD1`. The account password was reset and verified with sudo. Root and Studio credentials were preserved.
+
+Edit this file only on the homelab, with mode `0600`. The existing env mirror pushes it to the MacBook Pro and pulls it onto the MacBook Air. Both `~/projects/Bloxodes/.envs/infrastructure/vps.env` copies were verified byte-identical to the source and mode `0400` after the change. Worktrees use their machine's shared env storage. Do not change the Mac copies or put password values in documentation, logs or Git.
 
 ## Legacy Aliases
 
-The migration preserves these remaining old names: `HOSTINGER_Token` and `Northflank_API_Token`. Committed examples label them as legacy. Normalize them only together with all consumers and external stores. The former `Umami_website_id` alias was normalized to `UMAMI_WEBSITE_ID` on 2026-08-14 and must not be reintroduced.
+The migration preserves these remaining old names: `HOSTINGER_Token`, `Northflank_API_Token` and `VPS_ADMIN_PASSWORD1`. Committed examples label them as legacy. Keep `VPS_ADMIN_PASSWORD1` equal to `VPS_ADMIN_PASSWORD`. Normalize old names only together with all consumers and external stores. The former `Umami_website_id` alias was normalized to `UMAMI_WEBSITE_ID` on 2026-08-14 and must not be reintroduced.
 
 `env/examples/retired.env.example` records retired variable names that remain in protected operator profiles. Current loaders do not consume them. Keeping the blank name contract lets operators remove private values separately without deleting or exposing those values during a repository release.
 
@@ -159,7 +166,7 @@ Host resolver repair is owned by [homelab operations](infrastructure/homelab.md#
 
 ## October 2 worker and operator verification
 
-The free-item candidate Python importer uses existing process credentials under `BLOXODES_ENV_PROFILE=process-only`. It never searches workstation env files in that profile. Other runs load the existing target file, strip dotenv quotes, then apply process values; production candidate imports still require `ALLOW_PROD_FREE_ITEMS_IMPORT=true`. The protected VPS overlay now names the tested `codex-admin` operator. No secret values were added or transferred. Environment doctor and contract checks passed.
+The free-item candidate Python importer uses existing process credentials under `BLOXODES_ENV_PROFILE=process-only`. It never searches workstation env files in that profile. Other runs load the existing target file, strip dotenv quotes, then apply process values; production candidate imports still require `ALLOW_PROD_FREE_ITEMS_IMPORT=true`. The protected VPS overlay now names the tested `codex-admin` (renamed `ravitejaknts` on 2026-10-17) operator. No secret values were added or transferred. Environment doctor and contract checks passed.
 
 The Docker worker sets `BLOXODES_ENV_PROFILE=process-only` by default, and the host wrapper explicitly enforces it after loading the worker env file. This also covers Python jobs, which do not use the Node loader's implicit production profile. The wrapper regression fixture rejects real job launches missing that process-only setting.
 

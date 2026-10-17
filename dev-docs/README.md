@@ -45,7 +45,7 @@ Visitors / mobile / extension
             |
       PostgreSQL 17
 
-VPS codex-admin cron ----> stats, codes, catalog, indexing, puzzles, events
+VPS ravitejaknts cron ----> stats, codes, catalog, indexing, puzzles, events
 VPS Postgres cron bridge -> revalidation and cache-warm Edge Functions
 Homelab systemd ---------> article discovery and managed-dev article queue
 GitHub Actions ----------> web image build/deploy and manual fallback jobs

@@ -41,7 +41,7 @@ The local Supabase CLI database is retired. Do not start it, generate/store a `l
 
 ## Production Topology
 
-The self-hosted stack lives under `/home/codex-admin/bloxodes-supabase` and is reached through Traefik/Cloudflare hostnames.
+The self-hosted stack lives under `/home/ravitejaknts/bloxodes-supabase` and is reached through Traefik/Cloudflare hostnames.
 
 - PostgreSQL: 17.6, ~59 GB.
 - API gateway: Kong 3.9.1.
@@ -57,6 +57,7 @@ Public unauthenticated health-shaped routes returning `401` is expected where an
 
 ## Health Caveats
 
+- On October 16, a Hostinger hypervisor shutdown left `supabase-kong` unable to start after reboot because its remembered dynamic overlay IP clashed with the overlay load balancer. With Kong down, the database-dependent deploy probe caused the web Swarm service to replace tasks repeatedly. Reconnecting only Kong's overlay endpoint with its existing aliases and starting Kong restored service. The boot-recovery job installed on 2026-10-17 retries this case after future reboots; see [VPS operations](../infrastructure/vps.md#boot-recovery). It changes no Supabase data, images or Compose definitions.
 - On 2026-08-15, the `supabase-meta` image-level health probe had accumulated about 19,000 unreaped Node child processes over two months and was using about one CPU continuously. Recreating only Meta cleared the processes; Compose now explicitly disables that probe so it cannot recur. Meta remained running and public database traffic was not restarted.
 - On October 2, the REST readiness listener moved from `localhost` to `127.0.0.1`. The former resolved to IPv6 while the probe attempted IPv4. Recreating only the active REST container restored its Docker health and `/ready` returned 200; other stack services stayed running. The original Compose file remains in `docker-compose.yml.before-readiness-repair-20261002`.
 - Public REST returns the expected authenticated boundary and the app reads production successfully through Kong/proxy.

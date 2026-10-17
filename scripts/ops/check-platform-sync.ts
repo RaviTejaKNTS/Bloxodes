@@ -122,7 +122,7 @@ if (!localOnly) {
     "-o", "ConnectTimeout=10",
     vpsTarget,
     "printf '%s|' \"$(docker ps --filter name=bloxodes-web --format '{{.Image}}' | head -n1)\"; " +
-      "printf '%s|' \"$(sha256sum /home/codex-admin/bloxodes-supabase/volumes/functions/revalidate/index.ts | awk '{print $1}')\"; " +
+      "printf '%s|' \"$(sha256sum /home/ravitejaknts/bloxodes-supabase/volumes/functions/revalidate/index.ts | awk '{print $1}')\"; " +
       "docker exec supabase-db psql -U postgres -d postgres -Atc \"select version from supabase_migrations.schema_migrations order by version;\""
   ]);
   const [image = "", deployedRevalidateSha = "", ...versionParts] = vpsRaw.split("|");

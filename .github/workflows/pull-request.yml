@@ -104,6 +104,7 @@ jobs:
       - run: npx tsc --project scripts/ci/tsconfig.json
       - run: npm run supabase:migrations:check
       - run: node --test scripts/ci/__tests__/*.test.mjs
+      - run: npm run test:vps-boot-recovery
       - name: Verify selected content against managed development
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.sha }}

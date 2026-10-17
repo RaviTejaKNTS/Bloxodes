@@ -92,7 +92,7 @@ async function main() {
     throw new Error("The configured VPS SSH target is invalid.");
   }
   const target = `${sshUser}@${sshHost}`;
-  const live = `/home/codex-admin/bloxodes-supabase/volumes/functions/${functionName}/index.ts`;
+  const live = `/home/ravitejaknts/bloxodes-supabase/volumes/functions/${functionName}/index.ts`;
   const current = ssh(target, `sha256sum ${live}`).split(/\s+/)[0];
   console.log(`${functionName}: current=${current} desired=${desiredSha}`);
   if (current === desiredSha) {
