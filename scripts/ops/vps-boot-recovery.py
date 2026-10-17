@@ -16,7 +16,7 @@ import time
 
 
 LOG = logging.getLogger("boot-recovery")
-DEFAULT_BASE = Path("/home/codex-admin/bloxodes-supabase")
+DEFAULT_BASE = Path("/home/ravitejaknts/bloxodes-supabase")
 DISCONNECT_RESERVE_SECONDS = 90
 RECONNECT_BUDGET_SECONDS = 60
 

@@ -24,7 +24,7 @@ blindly retried because an ambiguous successful claim requires server-side
 idempotency rather than a second claim request.
 
 Northflank owns HOT at `:12` every hour for separate Roblox API capacity. The
-VPS `codex-admin` crontab runs:
+VPS `ravitejaknts` crontab runs:
 
 - an exact-approved-SHA worker image rebuild daily at 00:05;
 - NEW every two hours at `:07`;
@@ -40,7 +40,7 @@ API responses and preserves structured failure diagnostics instead of reducing
 them to `[object Object]`. Daily rank writes remain intentionally unscheduled.
 The schedule source is `scripts/ops/vps-universe-stats.crontab`. Jobs run through
 `vps-run-job.sh`, use explicit locks, private Kong, and worker logs under
-`/home/codex-admin/bloxodes-stats-worker/logs`.
+`/home/ravitejaknts/bloxodes-stats-worker/logs`.
 
 ## Worker Image Safety
 

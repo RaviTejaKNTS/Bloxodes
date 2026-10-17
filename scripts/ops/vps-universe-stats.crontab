@@ -1,16 +1,16 @@
 # Bloxodes universe stats worker schedule.
-# Install this exact marked block in the codex-admin crontab. HOT refresh stays
+# Install this exact marked block in the ravitejaknts crontab. HOT refresh stays
 # Northflank-owned for separate Roblox API capacity. The refresh lock is
 # intentionally reserved for NEW/WARM/COLD freshness work: discovery must never
 # consume the 24-hour public visibility budget. Database-only jobs do not take
 # a Roblox API lock.
 
 # BLOXODES_STATS_WORKER_START
-5 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/build-image.sh >> /home/codex-admin/bloxodes-stats-worker/logs/build-image.log 2>&1
-7 */2 * * * JOB_LOCK_GROUP=roblox-universe-refresh JOB_LOCK_WAIT_SECONDS=1800 /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-new-refresh "npm run stats:refresh:new -- --limit 5000 --skip-index-refresh && npm run enqueue:revalidation -- --source stats_new_vps --event stats:stats --event stats:games"
-22 * * * * JOB_LOCK_GROUP=roblox-universe-discovery /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "export ROBLOX_PRIORITY_EXPLORE_RETRY_LIMIT=1 ROBLOX_PRIORITY_EXPLORE_RETRY_MAX_DELAY_MS=5000; npm run discover:universes:priority -- --max-pages 1 --devices computer --countries us,br,ph"
-32 */6 * * * JOB_LOCK_GROUP=roblox-universe-refresh JOB_LOCK_WAIT_SECONDS=1800 /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-warm-refresh "npm run stats:refresh:warm -- --limit 20000 --skip-index-refresh && npm run enqueue:revalidation -- --source stats_warm_vps --event stats:stats --event stats:games"
-47 * * * * JOB_LOCK_GROUP=roblox-universe-refresh JOB_LOCK_WAIT_SECONDS=1800 /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-cold-refresh "npm run stats:refresh:cold -- --limit 7000 --skip-index-refresh && npm run stats:index:refresh && npm run enqueue:revalidation -- --source stats_cold_vps --event stats:stats --event stats:games"
-30 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-hourly-ranks "npm run stats:rank:hourly && npm run enqueue:revalidation -- --source stats_hourly_ranks_vps --event stats:games"
-10 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-audit "npm run stats:audit -- --strict"
+5 0 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/build-image.sh >> /home/ravitejaknts/bloxodes-stats-worker/logs/build-image.log 2>&1
+7 */2 * * * JOB_LOCK_GROUP=roblox-universe-refresh JOB_LOCK_WAIT_SECONDS=1800 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-new-refresh "npm run stats:refresh:new -- --limit 5000 --skip-index-refresh && npm run enqueue:revalidation -- --source stats_new_vps --event stats:stats --event stats:games"
+22 * * * * JOB_LOCK_GROUP=roblox-universe-discovery /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "export ROBLOX_PRIORITY_EXPLORE_RETRY_LIMIT=1 ROBLOX_PRIORITY_EXPLORE_RETRY_MAX_DELAY_MS=5000; npm run discover:universes:priority -- --max-pages 1 --devices computer --countries us,br,ph"
+32 */6 * * * JOB_LOCK_GROUP=roblox-universe-refresh JOB_LOCK_WAIT_SECONDS=1800 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-warm-refresh "npm run stats:refresh:warm -- --limit 20000 --skip-index-refresh && npm run enqueue:revalidation -- --source stats_warm_vps --event stats:stats --event stats:games"
+47 * * * * JOB_LOCK_GROUP=roblox-universe-refresh JOB_LOCK_WAIT_SECONDS=1800 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-cold-refresh "npm run stats:refresh:cold -- --limit 7000 --skip-index-refresh && npm run stats:index:refresh && npm run enqueue:revalidation -- --source stats_cold_vps --event stats:stats --event stats:games"
+30 * * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-hourly-ranks "npm run stats:rank:hourly && npm run enqueue:revalidation -- --source stats_hourly_ranks_vps --event stats:games"
+10 */6 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-audit "npm run stats:audit -- --strict"
 # BLOXODES_STATS_WORKER_END

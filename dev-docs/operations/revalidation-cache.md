@@ -9,12 +9,12 @@ Evidence: Minecraft trigger fixtures, October 3 production worker checksum/readb
 ```text
 content/data write
   -> revalidation_events
-  -> codex-admin minute cron
+  -> ravitejaknts minute cron
   -> Supabase revalidate Edge Function
   -> https://bloxodes.com/api/revalidate
   -> Next path/tag revalidation + Cloudflare tag purge
   -> cache_warm_events
-  -> codex-admin minute cron
+  -> ravitejaknts minute cron
   -> Supabase cache-warm Edge Function
   -> public page fetches
 ```
@@ -27,7 +27,7 @@ Minecraft events use the existing queue. Collection events now carry the full co
 
 - Database queue/functions: Supabase migrations and `supabase/functions/{revalidate,cache-warm}`.
 - Public path/tag mapping: `apps/web/src/app/api/revalidate/route.ts` and `apps/web/src/lib/public-cache-tags.ts`.
-- Scheduler: `codex-admin` crontab invokes `public.invoke_revalidation_worker()` and `public.invoke_cache_warm_worker()` every minute.
+- Scheduler: `ravitejaknts` crontab invokes `public.invoke_revalidation_worker()` and `public.invoke_cache_warm_worker()` every minute.
 - Deployment changes: GitHub performs targeted Cloudflare tag purge separately.
 
 ## Required Runtime Variables

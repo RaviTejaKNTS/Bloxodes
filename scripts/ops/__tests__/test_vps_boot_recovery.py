@@ -1,5 +1,6 @@
 """Dependency-free inspect fixtures and fake-Docker tests; never contact Docker."""
 
+import ast
 import copy
 import json
 from pathlib import Path
@@ -7,7 +8,7 @@ import runpy
 import subprocess
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 MODULE = runpy.run_path(str(Path(__file__).resolve().parents[1] / "vps-boot-recovery.py"))
 Recovery = MODULE["Recovery"]
@@ -306,6 +307,43 @@ class RecoveryTests(unittest.TestCase):
         with patch("time.monotonic", side_effect=lambda: clock[0]), patch("time.sleep", side_effect=sleep):
             self.assertEqual(recovery.run(2, 5, 1), 1)
         self.assertEqual(clock[0], 2)
+
+
+class InstallerTests(unittest.TestCase):
+    def test_only_install_base_owner_without_root_or_sudo_is_allowed(self):
+        installer = Path(__file__).resolve().parents[1] / "install-vps-boot-recovery.sh"
+        python = installer.read_text().split("<<'PY'\n", 1)[1].rsplit("\nPY", 1)[0]
+        function = next(node for node in ast.parse(python).body
+                        if isinstance(node, ast.FunctionDef) and node.name == "installer_user")
+        fake_os, fake_pwd, base = Mock(), Mock(), Mock()
+        fake_pwd.getpwuid.return_value.pw_name = "ravitejaknts"
+        namespace = {"os": fake_os, "pwd": fake_pwd}
+        exec(compile(ast.Module(body=[function], type_ignores=[]), str(installer), "exec"), namespace)
+        for uid, effective_uid, owner, environment, allowed in (
+                (1001, 1001, 1001, {}, True),
+                (2002, 2002, 2002, {}, True),
+                (1002, 1002, 1001, {}, False),
+                (0, 0, 0, {}, False),
+                (1001, 0, 1001, {}, False),
+                (1001, 1001, 1001, {"SUDO_USER": "root"}, False),
+                (1001, 1001, 1001, {"SUDO_UID": "0"}, False),
+                (1001, 1001, 1001, {"SUDO_GID": "0"}, False),
+                (1001, 1001, 1001, {"SUDO_COMMAND": "sh installer --apply"}, False)):
+            with self.subTest(uid=uid, effective_uid=effective_uid, owner=owner, environment=environment):
+                fake_os.getuid.return_value = uid
+                fake_os.geteuid.return_value = effective_uid
+                fake_os.environ = environment
+                base.stat.return_value.st_uid = owner
+                if allowed:
+                    self.assertEqual(namespace["installer_user"](base), "ravitejaknts")
+                else:
+                    with self.assertRaises(SystemExit):
+                        namespace["installer_user"](base)
+        fake_os.getuid.return_value = fake_os.geteuid.return_value = 1001
+        fake_os.environ = {}
+        base.stat.side_effect = FileNotFoundError
+        with self.assertRaisesRegex(SystemExit, "Cannot identify the install base owner"):
+            namespace["installer_user"](base)
 
 
 class CronTests(unittest.TestCase):

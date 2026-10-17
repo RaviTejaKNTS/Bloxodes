@@ -1,5 +1,5 @@
-# Install only this managed block in the codex-admin crontab.
+# Install only this managed block in the ravitejaknts crontab.
 # Python owns the bounded log rotation; cron output must not grow another file.
 # BLOXODES_BOOT_RECOVERY_START
-@reboot /usr/bin/python3 /home/codex-admin/bloxodes-supabase/bin/boot-recovery.py >/dev/null 2>&1
+@reboot /usr/bin/python3 /home/ravitejaknts/bloxodes-supabase/bin/boot-recovery.py >/dev/null 2>&1
 # BLOXODES_BOOT_RECOVERY_END

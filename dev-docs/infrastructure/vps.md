@@ -42,6 +42,8 @@ The account and SSH configuration, cron and affected installed scripts were back
 
 Authoritative credentials are in the homelab's ignored `.envs/infrastructure/vps.env`: `VPS_ADMIN_USER`, `VPS_ADMIN_PASSWORD` and the equal legacy alias `VPS_ADMIN_PASSWORD1`. Read them without logging values. Both Mac mirrors were verified byte-identical and mode `0400`; the homelab source remains mode `0600`. The automation dashboard now connects as `ravitejaknts`.
 
+Dokploy's `production-vps` server entry still had the SSH username `codex-admin` on October 17. The Bloxodes web app (`bloxodes-web-ujegas`) deploys through that entry. Change the username to `ravitejaknts` before the next deploy and test the connection in Dokploy (Settings → Servers).
+
 ## Docker and Services
 
 - Docker 29.4.1, Swarm active.
@@ -59,7 +61,7 @@ See `data/supabase.md` for Supabase versions and probe state. The Meta image-lev
 - `ravitejaknts` crontab: authoritative installed schedules for revalidation/cache warm, stats/scheduled automation and boot recovery. All 41 scheduled entries and both environment assignments were retained, with installed home paths changed to `/home/ravitejaknts`.
 - Systemd: `bloxodes-origin-firewall.service`; Bloxodes pipeline jobs are cron/Docker based on this host, not timers.
 - Checked-in sources: `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
-- The separate `scripts/ops/vps-boot-recovery.crontab` is ready for operator installation. Its `@reboot` job and installation boundary are described below; this implementation does not establish that it is installed.
+- The separate `scripts/ops/vps-boot-recovery.crontab` was installed and checked on 2026-10-17. Its `@reboot` line matches the source below.
 
 Worker ownership:
 
@@ -94,7 +96,7 @@ Kong received `10.0.1.82` and became healthy. Docker then saved `10.0.1.82` as K
 
 ## Boot recovery
 
-`scripts/ops/vps-boot-recovery.py` adds a bounded retry after boot. It runs as `codex-admin` through its own managed crontab block, using that account's Docker group access. It needs Python 3, the Docker CLI, the Compose plugin, and readable original Compose files. It uses the local `/var/run/docker.sock` explicitly and loads no Bloxodes credential files. No sudo or root systemd unit is needed.
+`scripts/ops/vps-boot-recovery.py` adds a bounded retry after boot. It runs as `ravitejaknts` through its own managed crontab block, using that account's Docker group access. It needs Python 3, the Docker CLI, the Compose plugin, and readable original Compose files. It uses the local `/var/run/docker.sock` explicitly and loads no Bloxodes credential files. No sudo or root systemd unit is needed.
 
 The job waits up to 600 seconds for the daemon and active Swarm state, because cron starts `@reboot` jobs before Docker finishes starting containers, then scans every 20 seconds for up to 600 seconds. Each Docker command has a timeout of at most 30 seconds within the current deadline. It keeps scanning even after an empty pass, allowing Docker's initial restart attempts to finish. A lock prevents overlapping real runs and installation during a run. It never removes or recreates containers or volumes, applies Compose configuration, changes restart policies, or operates on Swarm services.
 
@@ -115,25 +117,25 @@ Before disconnecting, the job saves every existing alias in a private write-ahea
 
 ### Install and verify
 
-Installation is pending until an operator reviews and installs this change. Stage these three reviewed files together in `/home/codex-admin/boot-recovery-review/` on the VPS: `vps-boot-recovery.py`, `vps-boot-recovery.crontab` and `install-vps-boot-recovery.sh`. As `codex-admin`, run:
+The installed boot cron line, checked on 2026-10-17, is `@reboot /usr/bin/python3 /home/ravitejaknts/bloxodes-supabase/bin/boot-recovery.py >/dev/null 2>&1`. To install reviewed updates, stage these three files together in `/home/ravitejaknts/boot-recovery-review/` on the VPS: `vps-boot-recovery.py`, `vps-boot-recovery.crontab` and `install-vps-boot-recovery.sh`. As `ravitejaknts`, run:
 
 ```sh
 /usr/bin/python3 --version
 docker --host unix:///var/run/docker.sock version
 docker --host unix:///var/run/docker.sock compose version
-/usr/bin/python3 /home/codex-admin/boot-recovery-review/vps-boot-recovery.py --dry-run
-sh /home/codex-admin/boot-recovery-review/install-vps-boot-recovery.sh --apply
+/usr/bin/python3 /home/ravitejaknts/boot-recovery-review/vps-boot-recovery.py --dry-run
+sh /home/ravitejaknts/boot-recovery-review/install-vps-boot-recovery.sh --apply
 crontab -l | sed -n '/^# BLOXODES_BOOT_RECOVERY_START$/,/^# BLOXODES_BOOT_RECOVERY_END$/p'
-/usr/bin/python3 /home/codex-admin/bloxodes-supabase/bin/boot-recovery.py --dry-run
+/usr/bin/python3 /home/ravitejaknts/bloxodes-supabase/bin/boot-recovery.py --dry-run
 ```
 
-The installer preserves all unrelated crontab lines, rejects duplicate or malformed recovery blocks, saves the original crontab as a private `crontab-before-boot-recovery-<UTC>.txt` file, and verifies crontab readback. Repeating installation refreshes only its own files and block. It does not run recovery or modify containers. Keep the backup for review. No change to the stats-worker blocks is needed.
+The installer derives the expected account from the owner of `/home/ravitejaknts/bloxodes-supabase` and refuses root or sudo execution before changing files. It preserves all unrelated crontab lines, rejects duplicate or malformed recovery blocks, saves the original crontab as a private `crontab-before-boot-recovery-<UTC>.txt` file, and verifies crontab readback. Repeating installation refreshes only its own files and block. It does not run recovery or modify containers. Keep the backup for review. No change to the stats-worker blocks is needed.
 
 `--dry-run` performs one read-only scan, prints planned starts and any provable network repairs, and creates no log, lock or journal files. A real manual run uses the same boot-time rules at any uptime:
 
 ```sh
-/usr/bin/python3 /home/codex-admin/bloxodes-supabase/bin/boot-recovery.py
-tail -n 80 /home/codex-admin/bloxodes-supabase/logs/boot-recovery.log
+/usr/bin/python3 /home/ravitejaknts/bloxodes-supabase/bin/boot-recovery.py
+tail -n 80 /home/ravitejaknts/bloxodes-supabase/logs/boot-recovery.log
 docker --host unix:///var/run/docker.sock inspect --format '{{.Name}} {{.State.Status}} {{if .State.Health}}{{.State.Health.Status}}{{end}}' supabase-kong
 docker --host unix:///var/run/docker.sock inspect --format '{{json (index .NetworkSettings.Networks "dokploy-network").Aliases}}' supabase-kong
 docker --host unix:///var/run/docker.sock service ps bloxodes-web-ujegas
@@ -142,7 +144,7 @@ curl --fail --silent --show-error 'https://bloxodes.com/api/health?scope=deploy'
 
 Real runs log to `logs/boot-recovery.log`, rotating at 1 MiB with three backups. Cron discards duplicate console output. Exit status is 0 for a completed scan without unresolved failures or an already-active job, 1 for readiness timeout or unresolved recovery, and 2 for invalid arguments. A successful start request does not prove application health; verify Kong, the web service and the deploy-health endpoint separately after an actual reboot. The job does not fix host downtime, arbitrary IP conflicts or failures after its retry window. Do not reboot the VPS or stop a live container merely to test installation.
 
-The fixture suite (`npm run test:vps-boot-recovery`) covers decisions, Compose pin checks, aliases, interrupted reconnects, read-only planning, timeout bounds and crontab preservation without contacting Docker. The PR workflow runs it on GitHub. This implementation has not been exercised against a live reboot.
+The fixture suite (`npm run test:vps-boot-recovery`) covers decisions, Compose pin checks, aliases, interrupted reconnects, read-only planning, timeout bounds, installer account guards and crontab preservation without contacting Docker. The PR workflow runs it on GitHub. This implementation has not been exercised against a live reboot.
 
 ## Operational Risks
 
