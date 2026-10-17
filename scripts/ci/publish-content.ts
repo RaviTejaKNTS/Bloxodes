@@ -68,6 +68,40 @@ function command(operation: any, write: boolean): string[] {
   }
 }
 async function run(operation: any, write: boolean) {
+  if (operation.publisher === "roblox-collection" && !write) {
+    const manifestPath = inputPath(operation.file);
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+    const game = manifest.game?.slug;
+    const collection = manifest.collection?.slug;
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(game ?? "") || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(collection ?? "")) {
+      throw new Error("Collection QA requires exact game and collection slugs in the selected runtime manifest.");
+    }
+    const manifestInput = (value: unknown, label: string) => {
+      if (typeof value !== "string" || !value.trim() || path.isAbsolute(value) || value.includes("\\") || value.split("/").some((part) => ["", ".", ".."].includes(part))) {
+        throw new Error(`Collection QA requires a safe relative ${label} path in the selected runtime manifest.`);
+      }
+      const resolved = path.resolve(path.dirname(manifestPath), value);
+      const relative = path.relative(executionBase, resolved);
+      if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+        throw new Error(`Collection ${label} must stay inside the selected content bundle.`);
+      }
+      const file = inputPath(relative.split(path.sep).join("/"));
+      if (!fs.existsSync(file) || !fs.statSync(file).isFile()) {
+        throw new Error(`Collection ${label} is missing from the selected content bundle.`);
+      }
+      return file;
+    };
+    const dataset = manifestInput(manifest.dataset, "dataset");
+    const sharedArgs = ["--game", game, "--collection", collection];
+    execFileSync("npm", ["run", "audit:game-collection-datasets:v2", "--", ...sharedArgs, "--file", dataset], {
+      cwd: root,
+      env: process.env,
+      stdio: "inherit",
+    });
+    const checkerArgs = ["run", "check:game-collection-data", "--", ...sharedArgs, "--file", dataset];
+    if (manifest.finalJson) checkerArgs.push("--final-json", manifestInput(manifest.finalJson, "finalJson"));
+    execFileSync("npm", checkerArgs, { cwd: root, env: process.env, stdio: "inherit" });
+  }
   if (operation.publisher === "roblox-codes-page" && !write) {
     const payload = JSON.parse(fs.readFileSync(inputPath(operation.file), "utf8"));
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(payload.slug ?? "")) throw new Error("Codes setup requires an exact reviewed editorial slug.");
