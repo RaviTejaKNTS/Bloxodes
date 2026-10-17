@@ -119,7 +119,7 @@ Wiki publication revalidates paginated index paths. The index carries `wiki-inde
 2. For an existing collection, export its published database revision with `npm run export:game-collection-workspace` for Roblox or `npm run export:shared-game-collection-workspace` for other games; for a new collection, create the same ignored workspace and runtime manifest. Gather the complete source-backed dataset and useful player fields there.
 3. Audit the v2 dataset and approve its rows/sections before collecting and wiring images.
 4. Write the wiki or collection `final.json` only after the required research/data/image gates pass.
-5. Synchronize the approved page and immutable dataset revision from its explicit runtime manifest into managed development, publish its dataset pointer there, then run `verify-wiki-final` or `verify-game-collection-finals` against the managed-development web preview.
+5. Run the selected-content `roblox-collection` publisher preflight on GitHub. It audits each selected v2 dataset and checks its fields, images and `description_json` keys against the selected final before any content is staged. The GitHub Managed content QA job then publishes the immutable dataset revision to managed development, builds the preview and records browser evidence. The local `verify-game-collection-finals` helper remains available for its managed-development workflow, but scheduled T3 work uses GitHub QA and does not run validators locally.
 6. Review hub-to-collection navigation, item counts, cards/tables, images, metadata, structured data, search, sitemap, and revalidation behavior.
 7. Promote through a controlled idempotent seed/upsert or forward-only migration, then verify production.
 
