@@ -123,7 +123,7 @@ Northflank HOT. `Dockerfile.stats-worker` must pass its build-time smoke before
 either environment can deploy it.
 
 For the VPS, install the released `scripts/ops/vps-build-stats-worker.sh` as
-`/home/codex-admin/bloxodes-stats-worker/bin/build-image.sh`, then invoke it
+`/home/ravitejaknts/bloxodes-stats-worker/bin/build-image.sh`, then invoke it
 with `--approved-sha <full-production-sha>`. The script fetches that exact
 commit, builds a candidate, repeats the smoke, preserves a healthy current image
 as last-known-good, promotes the candidate, and records the approved SHA for
@@ -163,7 +163,7 @@ The user-authorized automation repair rechecked the September 26 environment def
 
 ## October 2 operator and pipeline repair
 
-The dedicated homelab Bloxodes public key was appended to the existing `codex-admin` authorized keys without removing prior keys. Direct key-based SSH to the VPS now succeeds. The workstation operator profile uses `codex-admin`; no private key or application secret was copied to the VPS.
+The dedicated homelab Bloxodes public key was appended to the existing `codex-admin` (renamed `ravitejaknts` on 2026-10-17) authorized keys without removing prior keys. Direct key-based SSH to the VPS now succeeds. The workstation operator profile uses `codex-admin`; no private key or application secret was copied to the VPS.
 
 This repair must preserve disabled services and current cron ownership. Install only the changed wrapper and active job entries, retaining owner-disabled entries and unrelated crontab blocks. Build the worker with the explicit released SHA and smoke its candidate before promotion. Homelab runtime activation waits for all existing jobs to finish and preserves the optional recovery timer state. Event runners and GitHub monitoring are excluded.
 
