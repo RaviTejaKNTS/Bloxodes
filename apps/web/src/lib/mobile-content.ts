@@ -28,7 +28,8 @@ import {
   listPublishedWikiCollectionPagesByWikiSlug
 } from "@/lib/wiki-collections";
 import {
-  getPublishedWikiCollectionRuntime
+  getPublishedWikiCollectionRuntime,
+  hasWikiCollectionImageCredit
 } from "@/lib/wiki-collection-runtime";
 import { listUniverseEventTimeline } from "@/lib/events-summary";
 import { repoPath } from "@/lib/paths";
@@ -1638,7 +1639,9 @@ export async function getMobileContentDetail(
       const collection = await getWikiCollectionPageByCode(normalizedSlug);
       if (!collection || !collection.is_published) return null;
       const collectionRuntime = await getPublishedWikiCollectionRuntime(collection);
-      const runtimeCoverImage = collectionRuntime?.document.items.find((item) => item.system.image)?.system.image;
+      const runtimeCoverImage = collectionRuntime?.document.items.find(
+        (item) => item.system.image && !hasWikiCollectionImageCredit(item.item)
+      )?.system.image;
       const collectionUpdatedAt =
         collection.content_updated_at || collection.updated_at || collection.published_at || collection.created_at || null;
       const collectionNavItems = await collectionNavItemsForCode(normalizedSlug);

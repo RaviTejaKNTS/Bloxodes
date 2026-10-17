@@ -45,6 +45,11 @@ export type WikiCollectionDatasetDocument = {
   }>;
 };
 
+export function hasWikiCollectionImageCredit(item: Record<string, unknown>): boolean {
+  const imageCreditUrl = item.imageCreditUrl;
+  return imageCreditUrl !== undefined && imageCreditUrl !== null;
+}
+
 export type PublishedWikiCollectionRuntime = {
   datasetId: string;
   contentHash: string;
@@ -268,6 +273,7 @@ export async function listPublishedWikiCollectionRuntimeImages(
     .select("image_key")
     .eq("dataset_id", page.published_dataset_id)
     .not("image_key", "is", null)
+    .filter("fields_json->>imageCreditUrl", "is", null)
     .order("sort_order", { ascending: true })
     .order("item_slug", { ascending: true })
     .limit(safeLimit);
