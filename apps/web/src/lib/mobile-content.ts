@@ -812,6 +812,8 @@ function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[],
 }): MobileContentDetailItem {
   const title = firstMeaningfulValue(row, ["name", "title", "label", "id"]) ?? "Item";
   const id = firstMeaningfulValue(row, ["id", "slug", "name", "title"]) ?? title;
+  // Mobile has no image-credit link surface, so keep credited images off mobile.
+  const imageCreditUrl = firstMeaningfulValue(row, ["imageCreditUrl"]);
   const body = options.descriptionKey && !MOBILE_COLLECTION_OMITTED_KEYS.has(options.descriptionKey)
     ? formatUnknownValue(row[options.descriptionKey])
     : null;
@@ -837,7 +839,9 @@ function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[],
       : null,
     body,
     fields,
-    image: firstMeaningfulValue(row, ["image", "thumbnail_url", "thumbnail", "image_url"]),
+    image: imageCreditUrl
+      ? null
+      : firstMeaningfulValue(row, ["image", "thumbnail_url", "thumbnail", "image_url"]),
     subtitle: firstMeaningfulValue(
       row,
       options.subtitleKeys.filter((key) => !MOBILE_COLLECTION_OMITTED_KEYS.has(key))
