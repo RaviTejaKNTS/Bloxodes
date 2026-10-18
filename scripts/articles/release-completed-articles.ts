@@ -431,6 +431,10 @@ export async function resolveReleaseArtifactPath(filePath: string, queueId: stri
   if (state.status !== "completed" || state.stage !== "done" || state.job.id !== queueId || state.job.slug !== slug || review.status !== "completed") {
     throw new Error("Pipeline article has no matching completed approval.");
   }
+  const ownerApproval = state.ownerApprovals?.at(-1);
+  if (ownerApproval && (ownerApproval.status !== "completed" || ["brief.md", "media.json", "final.json"].some(name => ownerApproval.approvedArtifacts[name] !== hashes[name] || review.input_hashes?.[name] !== hashes[name]))) {
+    throw new Error("Owner approval is pending or does not match the release inputs.");
+  }
   for (const name of ["brief.md", "media.json", "final.json"]) {
     if (!hashes[name] || hashes[name] !== state.artifacts[name]) throw new Error(`Pipeline approval no longer matches ${name}.`);
   }

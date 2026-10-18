@@ -52,6 +52,7 @@ export type PipelineState = {
   controllerWrites?: ControllerWrites;
   identityInput?: string | null;
   artifacts: Record<string, string>;
+  ownerApprovals?: import("./approve-owner-article-edit").OwnerApproval[];
   history: { stage: Stage; attempt: number; at: string; decision: Decision }[];
 };
 export class StageFailure extends Error {

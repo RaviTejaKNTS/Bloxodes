@@ -265,7 +265,11 @@ Historical wiki controller only, retired October 15: the wiki readiness command 
 
 For an exact manual publication recovery, `articles:publication:drain -- --acknowledge-published --queue-id <UUID> [--queue-id <UUID>] --apply` only closes existing authorized intents whose queue rows already acknowledge matching canonical published URLs. It never launches a release, scans for other due publications, or resets attempts.
 
-The publication drain reports each exhausted intent once, persisting `exhaustionReportedAt` under its existing lock. Later drains retain the blocker in `tmp/article-publication/health.json` and still fail for new failures or reconciliation errors. This marker never resets attempts or grants publication/rejection. Frozen bundle collection skips hidden workspace entries, including model caches and credential directories; visible symlinks and unsafe bundle paths still fail.
+The publication drain records `exhaustionReportedAt` and reports exhaustion once; later health reports retain the blocker and new failures still fail. Frozen inputs skip hidden entries while visible symlink and unsafe-path guards remain.
+
+- `articles:publication:drain -- --retry-exhausted --queue-id <UUID> [--queue-id <UUID>] --operator <name> --reason <text> --apply` audits an exact exhausted/unpublished budget reset without launching publication.
+- `articles:approval:owner-edit -- --queue-id <UUID> --expected-final-hash <SHA256> --operator <name> --reason <text> --apply` records an owner copy approval after the copy gate, preserving prior evidence and all GitHub QA/publication gates.
+
 
 ## October 2 reliability controls
 
