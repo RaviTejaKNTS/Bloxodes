@@ -2,6 +2,7 @@ import { stealABrainrotCollectionGroup } from "./steal-a-brainrot";
 import { petSimulator99CollectionGroup } from "./pet-simulator-99";
 import { slimeRngCollectionGroup } from "./slime-rng";
 import { sellLemonsCollectionGroup } from "./sell-lemons";
+import { sellFriesCollectionGroup } from "./sell-fries";
 import { kickALuckyBlockCollectionGroup } from "./kick-a-lucky-block";
 import { catchAndTameCollectionGroup } from "./catch-and-tame";
 import { sailorPieceCollectionGroup } from "./sailor-piece";
@@ -74,6 +75,7 @@ export const GAME_COLLECTION_GROUPS = [
   petSimulator99CollectionGroup,
   slimeRngCollectionGroup,
   sellLemonsCollectionGroup,
+  sellFriesCollectionGroup,
   kickALuckyBlockCollectionGroup,
   catchAndTameCollectionGroup,
   sailorPieceCollectionGroup,
