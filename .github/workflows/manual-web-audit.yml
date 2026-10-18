@@ -47,6 +47,7 @@ permissions:
 
 jobs:
   audit:
+    if: ${{ inputs.audit != 'wiki-collections' }}
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 90
@@ -74,22 +75,8 @@ jobs:
             exit 1
           fi
       - name: Install Chromium
-        if: ${{ inputs.audit == 'render' || inputs.audit == 'wiki-collections' }}
+        if: ${{ inputs.audit == 'render' }}
         run: npx playwright install --with-deps chromium
-      - name: Validate selected wiki collections
-        if: ${{ inputs.audit == 'wiki-collections' }}
-        env:
-          COLLECTION_PATHS_INPUT: ${{ inputs.collection_paths }}
-        run: |
-          node <<'NODE'
-          const fs = require('node:fs');
-          const paths = process.env.COLLECTION_PATHS_INPUT.split(',').map(value => value.trim());
-          const valid = /^\/wiki\/[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
-          if (paths.length < 1 || paths.length > 10 || paths.some(value => !valid.test(value)) || new Set(paths).size !== paths.length) {
-            throw new Error('Select 1-10 distinct /wiki/<game>/<collection> paths, separated by commas. No query, fragment, or trailing slash.');
-          }
-          fs.appendFileSync(process.env.GITHUB_ENV, `WIKI_COLLECTION_AUDIT_PATHS=${paths.join(',')}\n`);
-          NODE
       - name: Run representative SEO and route sample
         if: ${{ inputs.audit == 'sample' }}
         run: |
@@ -104,11 +91,48 @@ jobs:
       - name: Run published-content data audit
         if: ${{ inputs.audit == 'published-content' }}
         run: npm run validate:published-content -- --allow-remote-read
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: manual-web-audit-${{ inputs.audit }}-${{ github.run_id }}
+          path: tmp/test-reports
+          if-no-files-found: ignore
+
+  wiki-collections:
+    if: ${{ inputs.audit == 'wiki-collections' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      TEST_BASE_URL: ${{ inputs.site_url }}
+      PLAYWRIGHT_SKIP_WEBSERVER: "1"
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Validate selected wiki collections
+        env:
+          COLLECTION_PATHS_INPUT: ${{ inputs.collection_paths }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const paths = process.env.COLLECTION_PATHS_INPUT.split(',').map(value => value.trim());
+          const valid = /^\/wiki\/[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
+          if (paths.length < 1 || paths.length > 10 || paths.some(value => !valid.test(value)) || new Set(paths).size !== paths.length) {
+            throw new Error('Select 1-10 distinct /wiki/<game>/<collection> paths, separated by commas. No query, fragment, or trailing slash.');
+          }
+          fs.appendFileSync(process.env.GITHUB_ENV, `WIKI_COLLECTION_AUDIT_PATHS=${paths.join(',')}\n`);
+          NODE
       - name: Audit selected wiki collection pages
-        if: ${{ inputs.audit == 'wiki-collections' }}
         run: npm run test:render -- apps/web/e2e/wiki-collection-audit.spec.ts
       - name: Measure selected collection HTML
-        if: ${{ inputs.audit == 'wiki-collections' && success() }}
+        if: success()
         run: |
           node <<'NODE'
           const fs = require('node:fs');
@@ -133,6 +157,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: manual-web-audit-${{ inputs.audit }}-${{ github.run_id }}
+          name: manual-web-audit-wiki-collections-${{ github.run_id }}
           path: tmp/test-reports
           if-no-files-found: ignore
