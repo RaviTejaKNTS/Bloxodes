@@ -69,11 +69,10 @@ A child can finish its report and still leave a background command running. T3 t
 
 Create one run folder per page inside the checkout before the first stage, at `tmp/<runner>-runs/<run-id>/...`. Each table below gives the exact path.
 
-- Don't use `tmp/content-workspace`. It's a symlink outside the checkout, and child agents can't write through it. The same goes for the other symlinked shared folders (`tmp/game-collection-runs`, `tmp/game-plans`, `tmp/content-claims`).
 - When a stage skill names a `tmp/content-workspace/...` path, tell the child to use the run folder instead.
-- Children work only in their own page folder. They never read another run, `tmp/content-workspace` or `tmp/model-test`.
+- Children work only in their own page folder. They never read another run's folder.
 - `stage-log.md` gets one entry per stage: model, start and end, result and problems.
-- For a game-scoped run, take the claim first: `npm run claim:shared-content -- --game <game-slug>`. Release it with `--release` when the run ends, blocked or not. The global catalog has no game and needs no claim.
+- A Roblox wiki run claims its game in the Roblox Wiki Queue before the first stage, as root `AGENTS.md` describes.
 
 ## Sources and images
 
@@ -87,7 +86,7 @@ Create one run folder per page inside the checkout before the first stage, at `t
 - The exact folder, the files to write and the previous stage's files to read.
 - The skills to read in full first. Writing and editorial review always include `.agents/skills/bloxodes-voice/SKILL.md` and the matching section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - Any findings to fix.
-- Boundaries: stay in the folder; read-only web research is fine; no database writes, Supabase or R2 uploads, imports, publishing, queue or claim commands, GitHub actions, commits, edits to tracked repo files, builds, tests, checks or previews; no sub-agents; never ask for permission escalation, and log anything blocked in `stage-log.md`.
+- Boundaries: stay in the folder; read-only web research is fine; no database writes, Supabase or R2 uploads, imports, publishing, queue commands, Notion edits, GitHub actions, commits, edits to tracked repo files, builds, tests, checks or previews; no sub-agents; never ask for permission escalation, and log anything blocked in `stage-log.md`.
 - Leave nothing running. Keep every command short enough to finish in the foreground, give each network call a timeout (`curl -m 30`), and split long loops into smaller commands. If a command still moves to the background, stop it before you report.
 - What to return: the decision or output paths, a short summary and any problems.
 

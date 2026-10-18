@@ -59,7 +59,7 @@ What the cleanup helper does:
 
 - It supports T3 HDD paths.
 - It refuses checkout-owned private env files and unknown ignored data.
-- It archives private scratch files with hash readback before removing the clean merged task.
+- It removes the clean merged task with its `tmp/` scratch; nothing is archived.
 
 Remote branches disappear automatically after merge. Unfinished tasks and detached runtimes stay.
 

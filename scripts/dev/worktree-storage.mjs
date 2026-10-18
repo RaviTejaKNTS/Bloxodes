@@ -2,15 +2,6 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-export const sharedFolders = ["content-workspace", "game-plans", "game-collection-suggestions", "game-collection-runs"];
-export const referenceFolders = [
-  "article-pipeline", "sourced-games", "minecraft-tool-covers", "beebom-editorial-study",
-  "gta-map-research", "gta-race-source-cache", "gta-radio-source-pages", "gta4-encounter-sources",
-  "gta-online-character-sources", "gta-vehicle-source-html-2026-09-26",
-  "gta-other-vehicle-source-html-2026-09-26", "gta-hd-weapon-source-html-2026-09-26",
-  "gta-kill-frenzy-source-2026-09-26", "gta-weapon-database-2026-09-26", "release-backups",
-];
-
 export function git(root, ...args) {
   return execFileSync("git", ["-C", root, ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim();
 }
@@ -43,32 +34,12 @@ export async function checkoutPaths(cwd = process.cwd(), suppliedMain = process.
   return { root, main, records };
 }
 
-async function optionalReferencePath(file) {
-  try { return await fs.realpath(file); }
-  catch (error) { if (["ENOENT", "ENOTDIR", "ELOOP"].includes(error.code)) return null; throw error; }
-}
-
-export async function inspectLink(source, destination, { optional = false } = {}) {
+export async function inspectLink(source, destination) {
   const current = await existing(destination);
   if (current && !current.isSymbolicLink()) throw new Error(`Preserving existing local path. Merge its files before linking: ${destination}`);
-  if (!optional) {
-    if (!current) return true;
-    if (await fs.realpath(destination) !== await fs.realpath(source)) throw new Error(`Existing link points somewhere else: ${destination}`);
-    return false;
-  }
-  // Check destination conflicts before skipping, so a missing source never hides one.
-  const resolvedSource = await optionalReferencePath(source);
-  const resolvedDestination = current ? await optionalReferencePath(destination) : null;
-  if (resolvedDestination && resolvedDestination !== resolvedSource) throw new Error(`Existing link points somewhere else: ${destination}`);
-  if (!resolvedSource) {
-    console.warn(`Skipping missing or dangling optional reference source: ${source}`);
-    return false;
-  }
-  if (current && !resolvedDestination) {
-    console.warn(`Skipping dangling optional reference link: ${destination}`);
-    return false;
-  }
-  return !current;
+  if (!current) return true;
+  if (await fs.realpath(destination) !== await fs.realpath(source)) throw new Error(`Existing link points somewhere else: ${destination}`);
+  return false;
 }
 
 export async function privateEnvFiles(directory) {

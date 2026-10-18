@@ -58,7 +58,7 @@ Each brief states:
 
 - the goal and expected outputs;
 - the skill or skills to follow (writing work always includes `bloxodes-voice`);
-- the game slug, and whether a `claim:shared-content` claim is needed;
+- the game slug, and for a Roblox wiki run, its Roblox Wiki Queue row;
 - file and data boundaries;
 - what counts as done;
 - what to report back.
