@@ -165,10 +165,14 @@ for (const entry of state?.collections ?? []) {
     const robots = await page.locator('meta[name="robots"]').evaluateAll(nodes => nodes.map(node => node.getAttribute('content')).join(','));
     expect(`${robots},${response?.headers()['x-robots-tag'] ?? ''}`).toMatch(/noindex/i);
     if (entry.pageType === 'collectible') {
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `${canonicalOrigin}${entry.path}`);
+      // Next can repeat identical metadata when the not-found response streams.
+      // Require at least one canonical and reject every conflicting value.
+      await expect.poll(async () => [...new Set(await page.locator('link[rel="canonical"]')
+        .evaluateAll(nodes => nodes.map(node => node.getAttribute('href'))))])
+        .toEqual([`${canonicalOrigin}${entry.path}`]);
     }
     await info.attach('invalid-continuation-metadata', {body: JSON.stringify({path: pathname, robots,
-      canonical: await page.locator('link[rel="canonical"]').first().getAttribute('href').catch(() => null)}), contentType: 'application/json'});
+      canonicals: await page.locator('link[rel="canonical"]').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))}), contentType: 'application/json'});
   });
   if (entry.pageType !== 'collectible') continue;
   const first = grouped[0].items[0];
@@ -228,12 +232,26 @@ for (const entry of state?.collections ?? []) {
       const initial = await loaded.json();
       await expect(checkedBox(page)).toBeEnabled();
       await expect(checkedBox(page)).toBeChecked({checked: initial.checkedIds.includes(first.id)});
+      async function savedProgress(expected: string[]) {
+        // The client consumes only PUT's status. Prove the committed state with
+        // a separate authenticated GET whose response body is consumed here.
+        const result = await page.evaluate(async code => {
+          const response = await fetch(`/api/wiki/collections/progress?code=${encodeURIComponent(code)}`, {
+            credentials: 'include', cache: 'no-store', signal: AbortSignal.timeout(15_000)
+          });
+          return {status: response.status, body: await response.json()};
+        }, entry.code);
+        expect(result.status).toBe(200);
+        expect(result.body.checkedIds).toEqual(expected);
+      }
       async function toggle(checked: boolean) {
         const write = remote('PUT');
         await checkedBox(page).setChecked(checked);
         const saved = await write;
         expect(saved.status()).toBe(200);
-        expect((await saved.json()).checkedIds).toEqual(checked ? [first.id] : []);
+        const expected = checked ? [first.id] : [];
+        expect(saved.request().postDataJSON().checkedIds).toEqual(expected);
+        await savedProgress(expected);
       }
       if (initial.checkedIds.includes(first.id)) await toggle(false); // Retry only touches this owned account.
       await toggle(true);
@@ -270,7 +288,8 @@ for (const entry of state?.collections ?? []) {
       await page.getByRole('button', {name: 'Reset', exact: true}).click();
       const cleared = await reset;
       expect(cleared.status()).toBe(200);
-      expect((await cleared.json()).checkedIds).toEqual([]);
+      expect(cleared.request().postDataJSON().checkedIds).toEqual([]);
+      await savedProgress([]);
       await expect(page.locator('main input[type="checkbox"]:checked')).toHaveCount(0);
       await reloadFromAccount([]);
       await info.attach('account-progress', {body: JSON.stringify({code: entry.code, endpoint: '/api/wiki/collections/progress',
