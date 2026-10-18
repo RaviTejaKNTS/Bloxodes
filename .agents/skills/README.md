@@ -7,9 +7,8 @@ The real skill folders are grouped by the kind of work they do. The flat `bloxod
 - `roblox/articles`: articles, pipeline stages and best-games writing.
 - `roblox/wiki-and-collections`: Roblox wiki hubs and game collections.
 - `roblox/catalog`, `roblox/codes`, `roblox/tools`, `roblox/engagement`: the other Roblox page types.
-- `games/wiki-and-collections`: shared non-Roblox wiki hubs and collections.
-- `games/wiki-and-collections/gta`: GTA source and mode specialists.
-- `games/codes`, `games/tools`, `games/reference-pages`, `games/planning`: other non-Roblox pages and planning.
+- `franchise/wiki-and-collections`: non-Roblox wiki hubs and collections, for single games and multi-game franchises, GTA included.
+- `franchise/planning`, `franchise/codes`, `franchise/tools`, `franchise/reference-pages`: planning and the other non-Roblox pages. Every skill here is named `bloxodes-franchise-*`.
 - `shared/release-and-review`: release and review workflows.
 
 Keep existing skill names. When you add a grouped skill that needs discovery, add a flat relative symlink here (and in `.claude/skills/` if Claude should load it). Research stays in ignored workspaces, and public content lives in its owning tables.

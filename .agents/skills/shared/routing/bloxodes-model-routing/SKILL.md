@@ -1,6 +1,6 @@
 ---
 name: bloxodes-model-routing
-description: How the T3 Code orchestrator splits a Bloxodes content run between two models. Luna builds evidence, data and facts and does the editorial and fact review. Haiku 5.5 reviews Luna's work, writes and does the one revision. Read it before running any bloxodes-*-workflow-runner stage by stage in T3 Code. Holds the shared rules and the stage tables for codes, quizzes, checklists, events, tools, catalog, franchise and GTA wiki hubs and collections, shared game reference, codes and tool pages, and the Roblox and franchise collection refreshes.
+description: How the T3 Code orchestrator splits a Bloxodes content run between two models. Luna builds evidence, data and facts and does the editorial and fact review. Haiku 5.5 reviews Luna's work, writes and does the one revision. Read it before running any bloxodes-*-workflow-runner stage by stage in T3 Code. Holds the shared rules and the stage tables for codes, quizzes, checklists, events, tools, catalog, franchise wiki hubs and collections, franchise reference, codes and tool pages, and the Roblox and franchise collection refreshes.
 ---
 
 # Bloxodes Model Routing
@@ -30,13 +30,13 @@ Luna builds anything that's evidence, data or facts. Haiku 5.5 checks Luna's wor
 | `bloxodes-events-workflow-runner` | [Events](#events) |
 | `bloxodes-tool-workflow-runner` | [Tools](#tools) |
 | `bloxodes-catalog-workflow-runner` | [Catalog](#catalog) |
-| `bloxodes-franchise-wiki-workflow-runner`, `bloxodes-gta-wiki-workflow-runner` | [Franchise wiki hubs](#franchise-wiki-hubs) |
-| `bloxodes-franchise-game-collection-workflow-runner`, `bloxodes-gta-game-collection-workflow-runner` | [Franchise collections](#franchise-collections) |
-| `bloxodes-games-reference-pages` | [Shared game reference pages](#shared-game-reference-pages) |
+| `bloxodes-franchise-wiki-workflow-runner` | [Franchise wiki hubs](#franchise-wiki-hubs) |
+| `bloxodes-franchise-game-collection-workflow-runner` | [Franchise collections](#franchise-collections) |
+| `bloxodes-franchise-reference-pages` | [Franchise reference pages](#franchise-reference-pages) |
 | `bloxodes-game-collection-refresh` | [Roblox collection refresh](#roblox-collection-refresh) |
-| `bloxodes-franchise-game-collection-refresh`, `bloxodes-gta-game-collection-refresh` | [Franchise collection refresh](#franchise-collection-refresh) |
-| `bloxodes-games-code-pages` | [Shared game codes pages](#shared-game-codes-pages) |
-| `bloxodes-games-tool-pages` | [Shared game tool pages](#shared-game-tool-pages) |
+| `bloxodes-franchise-game-collection-refresh` | [Franchise collection refresh](#franchise-collection-refresh) |
+| `bloxodes-franchise-codes` | [Franchise codes pages](#franchise-codes-pages) |
+| `bloxodes-franchise-tools` | [Franchise tool pages](#franchise-tool-pages) |
 
 Articles and Roblox wiki and collections follow their own reference pages. The rules below match them and apply to every other runner.
 
@@ -169,9 +169,9 @@ Never write code rows. Children never run `upsert:code-page` or `refresh:codes`.
 
 ## Franchise wiki hubs
 
-`bloxodes-franchise-wiki-workflow-runner` and the GTA wrapper `bloxodes-gta-wiki-workflow-runner`. Folder: `tmp/franchise-runs/<run-id>/<namespace>/<game-slug>/wiki/<game-slug>/`, which makes `tmp/franchise-runs/<run-id>/<namespace>` the workspace root the franchise skills ask for.
+`bloxodes-franchise-wiki-workflow-runner`. Folder: `tmp/franchise-runs/<run-id>/<namespace>/<game-slug>/wiki/<game-slug>/`, which makes `tmp/franchise-runs/<run-id>/<namespace>` the workspace root the franchise skills ask for.
 
-Before the first stage, resolve the runner's "Required context" record yourself. GTA uses the fixed context in its wrapper.
+Before the first stage, resolve the runner's "Required context" record yourself.
 
 | # | Stage | Model | Output |
 | --- | --- | --- | --- |
@@ -183,15 +183,15 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 | 5 | Revision | Haiku | `game.json`, `final.json` |
 
 - **Suggestions** follow `.agents/skills/bloxodes-franchise-wiki-suggestions/SKILL.md`. The owner approves the title allowlist before research.
-- **Research** follows `.agents/skills/bloxodes-franchise-wiki-research/SKILL.md`, or `bloxodes-gta-wiki-research` for GTA. The brief also records the identity values `game.json` needs (developer, publisher, official URL, release dates, platforms, status) and source artwork for its image roles, each with a source.
+- **Research** follows `.agents/skills/bloxodes-franchise-wiki-research/SKILL.md`. The brief also records the identity values `game.json` needs (developer, publisher, official URL, release dates, platforms, status) and source artwork for its image roles, each with a source.
 - **Research review** checks the approval list in step 5 of the runner's Workflow: identity, release status, scope boundary, source proof, the controls decision, related pages and plain player-language facts for the writer.
-- **Writing** follows `.agents/skills/bloxodes-franchise-wiki-writing/SKILL.md`, or `bloxodes-gta-wiki-writing` for GTA, plus the "Wiki hubs" voice examples. `game.json` identity values come from the brief unchanged.
-- **Editorial review** checks the runner's "Parent checks", `game.json` against the brief, and the no-future-promise rule. For GTA, add the wrapper's mode boundary, the `gta-6` confirmed-facts rule and two distinct artwork roles.
-- Hosted media sync (`sync:gta-wiki-media`) and `publish:game-pages` belong to you after the owner's go-ahead.
+- **Writing** follows `.agents/skills/bloxodes-franchise-wiki-writing/SKILL.md`, plus the "Wiki hubs" voice examples. `game.json` identity values come from the brief unchanged.
+- **Editorial review** checks the runner's "Parent checks", `game.json` against the brief, the no-future-promise rule, the scope boundaries from the plan (such as Story Mode versus GTA Online), confirmed facts only for announced or upcoming titles, and the two distinct artwork roles.
+- Hosted media sync (see the artwork roles in `bloxodes-franchise-wiki-writing`) and `publish:game-pages` belong to you after the owner's go-ahead.
 
 ## Franchise collections
 
-`bloxodes-franchise-game-collection-workflow-runner` and the GTA wrapper `bloxodes-gta-game-collection-workflow-runner`. Folder: `tmp/franchise-runs/<run-id>/<namespace>/<game-slug>/collections/<collection-slug>/`.
+`bloxodes-franchise-game-collection-workflow-runner`. Folder: `tmp/franchise-runs/<run-id>/<namespace>/<game-slug>/collections/<collection-slug>/`.
 
 | # | Stage | Model | Output |
 | --- | --- | --- | --- |
@@ -206,15 +206,15 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 | 8 | Editorial review | Luna | `editorial-review.md` |
 | 9 | Revision | Haiku | `final.json` |
 
-- Use the franchise skills (`bloxodes-franchise-game-collection-suggestions`, `-research`, `-data`, `-images`, `-writing`), or the `bloxodes-gta-game-collection-*` skills for GTA. Writing adds the "Game collections" voice examples.
+- Use the franchise skills (`bloxodes-franchise-game-collection-suggestions`, `-research`, `-data`, `-images`, `-writing`). Writing adds the "Game collections" voice examples.
 - **Suggestions** stop for the owner's approved collection allowlist before research.
 - Each review uses the runner's matching gate: "Research gate", "Data gate", "Image gate" and, for editorial review, "Writing gate". The editorial review also checks every useful number and pick against `dataset.json`.
 - Audits, checkers and runtime-sync dry plans named in the data and image skills run in GitHub QA, not in the child. Reviews mark them pending.
 - When a run has a hub and collections, write the collections first so the hub can link to the ones that passed. Publication order stays identity, wiki, then collections.
 
-## Shared game reference pages
+## Franchise reference pages
 
-`bloxodes-games-reference-pages`, for non-Roblox maps, standalone checklists, quizzes and catalogs. Folder: `tmp/reference-runs/<run-id>/<namespace>/<page-slug>/`.
+`bloxodes-franchise-reference-pages`, for non-Roblox maps, standalone checklists, quizzes and catalogs. Folder: `tmp/reference-runs/<run-id>/<namespace>/<page-slug>/`.
 
 | # | Stage | Model | Output |
 | --- | --- | --- | --- |
@@ -251,13 +251,13 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 
 ## Franchise collection refresh
 
-`bloxodes-franchise-game-collection-refresh` and its GTA wrapper. Folder: `tmp/refresh-runs/<run-id>/<namespace>/<game-slug>/collections/<collection-slug>/`.
+`bloxodes-franchise-game-collection-refresh`. Folder: `tmp/refresh-runs/<run-id>/<namespace>/<game-slug>/collections/<collection-slug>/`.
 
 Same four stages as the Roblox collection refresh: quick check and data delta (Luna), delta review only after a data or page-type update (Haiku), images only for new or changed rows or image gaps (Luna), image review (Haiku). Each stage follows the franchise refresh skill's own gates and the context's export command. Unchanged stops after stage 1.
 
-## Shared game codes pages
+## Franchise codes pages
 
-`bloxodes-games-code-pages`. Folder: `tmp/codes-runs/<run-id>/<namespace>/<game-slug>/`.
+`bloxodes-franchise-codes`. Folder: `tmp/codes-runs/<run-id>/<namespace>/<game-slug>/`.
 
 | # | Stage | Model | Output |
 | --- | --- | --- | --- |
@@ -269,9 +269,9 @@ Same four stages as the Roblox collection refresh: quick check and data delta (L
 - Code rows are Luna's data. Haiku writes only the long-lived page fields and never edits code rows.
 - The review checks evergreen copy (no code names or counts in prose), the status rules (missing from a source doesn't mean expired) and every source link.
 
-## Shared game tool pages
+## Franchise tool pages
 
-`bloxodes-games-tool-pages`. Folder: `tmp/tool-runs/<run-id>/<namespace>/<tool-slug>/`.
+`bloxodes-franchise-tools`. Folder: `tmp/tool-runs/<run-id>/<namespace>/<tool-slug>/`.
 
 | # | Stage | Model | Output |
 | --- | --- | --- | --- |

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan a franchise"
+  short_description: "Plan pages for a non-Roblox game or franchise"
+  default_prompt: "Use $bloxodes-franchise-plan to research this game or franchise and plan useful Bloxodes pages. Normally propose one standalone verified 100% completion checklist per game and reuse existing coverage; record explicit user exceptions."
