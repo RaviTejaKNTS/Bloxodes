@@ -13,6 +13,7 @@ on:
           - full-sitemap-crawl
           - render
           - published-content
+          - wiki-collections
       site_url:
         description: "Site origin to inspect"
         required: true
@@ -28,6 +29,11 @@ on:
           - "2"
       full_confirmation:
         description: "For a full sitemap crawl, enter RUN FULL AUDIT"
+        required: false
+        default: ""
+        type: string
+      collection_paths:
+        description: "For wiki-collections: comma-separated /wiki/<game>/<collection> paths (1-10)"
         required: false
         default: ""
         type: string
@@ -68,8 +74,22 @@ jobs:
             exit 1
           fi
       - name: Install Chromium
-        if: ${{ inputs.audit == 'render' }}
+        if: ${{ inputs.audit == 'render' || inputs.audit == 'wiki-collections' }}
         run: npx playwright install --with-deps chromium
+      - name: Validate selected wiki collections
+        if: ${{ inputs.audit == 'wiki-collections' }}
+        env:
+          COLLECTION_PATHS_INPUT: ${{ inputs.collection_paths }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const paths = process.env.COLLECTION_PATHS_INPUT.split(',').map(value => value.trim());
+          const valid = /^\/wiki\/[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
+          if (paths.length < 1 || paths.length > 10 || paths.some(value => !valid.test(value)) || new Set(paths).size !== paths.length) {
+            throw new Error('Select 1-10 distinct /wiki/<game>/<collection> paths, separated by commas. No query, fragment, or trailing slash.');
+          }
+          fs.appendFileSync(process.env.GITHUB_ENV, `WIKI_COLLECTION_AUDIT_PATHS=${paths.join(',')}\n`);
+          NODE
       - name: Run representative SEO and route sample
         if: ${{ inputs.audit == 'sample' }}
         run: |
@@ -84,6 +104,31 @@ jobs:
       - name: Run published-content data audit
         if: ${{ inputs.audit == 'published-content' }}
         run: npm run validate:published-content -- --allow-remote-read
+      - name: Audit selected wiki collection pages
+        if: ${{ inputs.audit == 'wiki-collections' }}
+        run: npm run test:render -- apps/web/e2e/wiki-collection-audit.spec.ts
+      - name: Measure selected collection HTML
+        if: ${{ inputs.audit == 'wiki-collections' && success() }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const { spawnSync } = require('node:child_process');
+          const root = 'tmp/test-reports/playwright-results';
+          function reports(dir) {
+            return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+              const name = path.join(dir, entry.name);
+              return entry.isDirectory() ? reports(name) : entry.name === 'collection-report.json' ? [name] : [];
+            });
+          }
+          const files = reports(root);
+          if (!files.length) throw new Error('No collection browser reports were produced.');
+          const paths = [...new Set(files.flatMap(file => JSON.parse(fs.readFileSync(file, 'utf8')).pagePaths))];
+          const origin = new URL(process.env.TEST_BASE_URL).origin;
+          const args = ['run', 'audit:html-size', '--', ...paths.flatMap(value => ['--url', `${origin}${value}`]), '--concurrency', '2', '--output-dir', 'tmp/test-reports/wiki-collection-html-size', '--fail-on-limit'];
+          const result = spawnSync('npm', args, { stdio: 'inherit' });
+          process.exit(result.status ?? 1);
+          NODE
       - name: Upload audit reports
         if: always()
         uses: actions/upload-artifact@v7

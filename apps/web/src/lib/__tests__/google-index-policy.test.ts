@@ -74,6 +74,19 @@ describe("Google index policy", () => {
     expect(isGoogleIndexable("/checklists/brookhaven-rp")).toBe(false);
   });
 
+  it("allows Illegal Soccer wiki pages while keeping query and unpublished page types restricted", () => {
+    expect(GOOGLE_INDEXABLE_GAMES.find((game) => game.game === "illegal-soccer")).toEqual({
+      game: "illegal-soccer", wikiSlug: "illegal-soccer", codesSlugs: [], quizSlugs: [], checklistSlugs: []
+    });
+    for (const path of ["/wiki/illegal-soccer", "/wiki/illegal-soccer/items", "/wiki/illegal-soccer/cosmetics"]) {
+      expect(googleIndexHeader(path)).toBeNull();
+      expect(googleIndexHeader(`${path}?page=2`)).toBe(GOOGLE_NOINDEX_HEADER);
+    }
+    for (const path of ["/codes/illegal-soccer", "/quizzes/illegal-soccer", "/checklists/illegal-soccer"]) {
+      expect(googleIndexHeader(path)).toBe(GOOGLE_NOINDEX_HEADER);
+    }
+  });
+
   it.each([
     "/catalogue", "/catalogue/item", "/catalog-other/item", "/articles-other/post",
     "/wiki/rivals-2", "/wiki/rivals-2/weapons", "/wiki/rival/skins"
