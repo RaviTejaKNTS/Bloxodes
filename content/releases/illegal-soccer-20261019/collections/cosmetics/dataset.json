@@ -1,0 +1,462 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "gameSlug": "illegal-soccer",
+    "collection": "cosmetics",
+    "title": "Illegal Soccer Cosmetics",
+    "itemFields": [
+      "name",
+      "slot",
+      "price",
+      "acquisition",
+      "availability",
+      "description"
+    ],
+    "columns": [
+      "name",
+      "slot",
+      "price",
+      "acquisition",
+      "availability",
+      "description"
+    ],
+    "display": {
+      "groupLabel": "Cosmetic type",
+      "sectionOrder": [
+        "Jerseys",
+        "Balls",
+        "Emotes",
+        "Goal Effects",
+        "Player Cards"
+      ],
+      "tableFields": [
+        "slot",
+        "price",
+        "acquisition",
+        "availability",
+        "description"
+      ],
+      "cardFields": [
+        "slot",
+        "price",
+        "acquisition",
+        "availability"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "fieldPresentation": {
+        "slot": {
+          "kind": "normal",
+          "label": "Slot"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "acquisition": {
+          "kind": "normal",
+          "label": "Acquisition",
+          "omitWhenEmpty": true
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability",
+          "omitWhenEmpty": true
+        },
+        "description": {
+          "kind": "detail",
+          "label": "Details"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Default",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "default-jersey",
+        "section": "Jerseys",
+        "sortOrder": 1,
+        "image": "/jersey-default.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Tiger",
+        "slot": "Jersey",
+        "price": "99 Robux",
+        "acquisition": "Daily Shop",
+        "availability": "Rotates in Daily Shop",
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "blue-tiger",
+        "section": "Jerseys",
+        "sortOrder": 2,
+        "image": "/jersey-blue-tiger.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Checkerboard",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "checkerboard",
+        "section": "Jerseys",
+        "sortOrder": 3,
+        "image": "/jersey-checkerboard.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Perforated",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "perforated",
+        "section": "Jerseys",
+        "sortOrder": 4,
+        "image": "/jersey-perforated.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Prism",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "pink-prism",
+        "section": "Jerseys",
+        "sortOrder": 5,
+        "image": "/jersey-pink-prism.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Pinstripe",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "pinstripe",
+        "section": "Jerseys",
+        "sortOrder": 6,
+        "image": "/jersey-pinstripe.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Collar",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "red-collar",
+        "section": "Jerseys",
+        "sortOrder": 7,
+        "image": "/jersey-red-collar.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Referee",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "referee",
+        "section": "Jerseys",
+        "sortOrder": 8,
+        "image": "/jersey-referee.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Tracksuit",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "tracksuit",
+        "section": "Jerseys",
+        "sortOrder": 9,
+        "image": "/jersey-tracksuit.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Violet Star",
+        "slot": "Jersey",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "A kit look."
+      },
+      "system": {
+        "slug": "violet-star",
+        "section": "Jerseys",
+        "sortOrder": 10,
+        "image": "/jersey-violet-star.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Default",
+        "slot": "Ball",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "The default ball look."
+      },
+      "system": {
+        "slug": "default-ball",
+        "section": "Balls",
+        "sortOrder": 11,
+        "image": "/ball-default.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "8-Ball",
+        "slot": "Ball",
+        "price": "249 Robux",
+        "acquisition": "Daily Shop",
+        "availability": "Rotates in Daily Shop",
+        "description": "Changes the look of the ball you kick."
+      },
+      "system": {
+        "slug": "8-ball",
+        "section": "Balls",
+        "sortOrder": 12,
+        "image": "/ball-8-ball.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Laugh",
+        "slot": "Emote",
+        "price": "49 Robux",
+        "acquisition": "Daily Shop",
+        "availability": "Rotates in Daily Shop",
+        "description": "Assign it to an active slot from 1 to 8, then use the radial wheel with P during a match."
+      },
+      "system": {
+        "slug": "laugh",
+        "section": "Emotes",
+        "sortOrder": 13,
+        "image": "/emote-laugh.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "T-Pose",
+        "slot": "Emote",
+        "price": "750 Coins",
+        "acquisition": "Daily Shop",
+        "availability": "Rotates in Daily Shop",
+        "description": "Assign it to an active slot from 1 to 8, then use the radial wheel with P during a match."
+      },
+      "system": {
+        "slug": "t-pose",
+        "section": "Emotes",
+        "sortOrder": 14,
+        "image": "/emote-t-pose.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Flash",
+        "slot": "Goal Effect",
+        "price": "349 Robux",
+        "acquisition": "Daily Shop",
+        "availability": "Rotates in Daily Shop",
+        "description": "A flash of light around the goal."
+      },
+      "system": {
+        "slug": "crimson-flash",
+        "section": "Goal Effects",
+        "sortOrder": 15,
+        "image": "/goal-effect-crimson-flash.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Implosion",
+        "slot": "Goal Effect",
+        "price": "799 Robux",
+        "acquisition": "Daily Shop",
+        "availability": "Rotates in Daily Shop",
+        "description": "A purple swirl in the goal."
+      },
+      "system": {
+        "slug": "implosion",
+        "section": "Goal Effects",
+        "sortOrder": 16,
+        "image": "/goal-effect-implosion.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Singularity",
+        "slot": "Goal Effect",
+        "price": null,
+        "acquisition": null,
+        "availability": null,
+        "description": "An item in the Goal Effects inventory tab."
+      },
+      "system": {
+        "slug": "singularity",
+        "section": "Goal Effects",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Black Hole",
+        "slot": "Player Card",
+        "price": null,
+        "acquisition": "Player Card shop or Dust",
+        "availability": null,
+        "description": "Cosmetic Player Card."
+      },
+      "system": {
+        "slug": "black-hole",
+        "section": "Player Cards",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Contraband",
+        "slot": "Player Card",
+        "price": null,
+        "acquisition": "Player Card shop or Dust",
+        "availability": null,
+        "description": "Cosmetic Player Card."
+      },
+      "system": {
+        "slug": "contraband",
+        "section": "Player Cards",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Map",
+        "slot": "Player Card",
+        "price": null,
+        "acquisition": "Player Card shop or Dust",
+        "availability": null,
+        "description": "Cosmetic Player Card."
+      },
+      "system": {
+        "slug": "gold-map",
+        "section": "Player Cards",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Smoke",
+        "slot": "Player Card",
+        "price": null,
+        "acquisition": "Player Card shop or Dust",
+        "availability": null,
+        "description": "Cosmetic Player Card."
+      },
+      "system": {
+        "slug": "rainbow-smoke",
+        "section": "Player Cards",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ringed World",
+        "slot": "Player Card",
+        "price": null,
+        "acquisition": "Player Card shop or Dust",
+        "availability": null,
+        "description": "Cosmetic Player Card."
+      },
+      "system": {
+        "slug": "ringed-world",
+        "section": "Player Cards",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stardust",
+        "slot": "Player Card",
+        "price": null,
+        "acquisition": "Player Card shop or Dust",
+        "availability": null,
+        "description": "Cosmetic Player Card."
+      },
+      "system": {
+        "slug": "stardust",
+        "section": "Player Cards",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wormhole",
+        "slot": "Player Card",
+        "price": null,
+        "acquisition": "Player Card shop or Dust",
+        "availability": null,
+        "description": "Cosmetic Player Card."
+      },
+      "system": {
+        "slug": "wormhole",
+        "section": "Player Cards",
+        "sortOrder": 24,
+        "image": null
+      }
+    }
+  ]
+}
