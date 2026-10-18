@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "roblox-wiki",
+      "file": "wiki/final.json"
+    },
+    {
+      "publisher": "roblox-collection",
+      "file": "collections/zones/runtime-manifest.json"
+    },
+    {
+      "publisher": "roblox-collection",
+      "file": "collections/animals/runtime-manifest.json"
+    },
+    {
+      "publisher": "roblox-collection",
+      "file": "collections/eggs/runtime-manifest.json"
+    },
+    {
+      "publisher": "roblox-collection",
+      "file": "collections/mutations/runtime-manifest.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/wiki/climb-for-animals-eggs",
+      "contains": "Climb For Animals Eggs Wiki"
+    },
+    {
+      "path": "/wiki/climb-for-animals-eggs/zones",
+      "contains": "All 12 Known Zones in Climb For Animals Eggs"
+    },
+    {
+      "path": "/wiki/climb-for-animals-eggs/animals",
+      "contains": "All 15 Known Animals in Climb For Animals Eggs"
+    },
+    {
+      "path": "/wiki/climb-for-animals-eggs/eggs",
+      "contains": "All 8 Known Eggs in Climb For Animals Eggs"
+    },
+    {
+      "path": "/wiki/climb-for-animals-eggs/mutations",
+      "contains": "All 6 Known Mutations in Climb For Animals Eggs"
+    }
+  ],
+  "events": [
+    {
+      "type": "wiki",
+      "slug": "climb-for-animals-eggs"
+    },
+    {
+      "type": "wiki_collection",
+      "slug": "climb-for-animals-eggs/zones"
+    },
+    {
+      "type": "wiki_collection",
+      "slug": "climb-for-animals-eggs/animals"
+    },
+    {
+      "type": "wiki_collection",
+      "slug": "climb-for-animals-eggs/eggs"
+    },
+    {
+      "type": "wiki_collection",
+      "slug": "climb-for-animals-eggs/mutations"
+    }
+  ]
+}

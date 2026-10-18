@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "game": {
+    "slug": "climb-for-animals-eggs",
+    "name": "Climb For Animals Eggs",
+    "universeId": 10765490774
+  },
+  "collection": {
+    "slug": "eggs",
+    "label": "Eggs",
+    "sortOrder": 2,
+    "pageType": "database"
+  },
+  "dataset": "dataset.json",
+  "finalJson": "final.json",
+  "mediaRoot": "media",
+  "sourceUrls": [
+    "https://www.roblox.com/games/85738654635245/Climb-For-Animals-Eggs?placeId=85738654635245&universeId=10765490774",
+    "https://allthings.how/climb-for-animals-eggs-how-to-get-better-animals-pets-and-eggs/",
+    "https://allthings.how/how-to-play-climb-for-animals-eggs-full-beginner-s-guide/",
+    "https://progameguides.com/roblox/climb-for-animals-eggs-beginners-guide/",
+    "https://climb-for-animals-eggs.wiki/eggs/climb-for-animals-eggs-eggs-list",
+    "https://climb-for-animals-eggs.wiki/animals/climb-for-animals-eggs-animals-list"
+  ]
+}

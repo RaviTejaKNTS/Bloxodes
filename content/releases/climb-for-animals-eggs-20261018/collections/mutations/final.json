@@ -1,0 +1,17 @@
+{
+  "universe_id": 10765490774,
+  "wiki_slug": "climb-for-animals-eggs",
+  "collection_slug": "mutations",
+  "code": "climb-for-animals-eggs-mutations",
+  "display_name": "Mutations",
+  "title": "All {count} Known Mutations in Climb For Animals Eggs",
+  "seo_title": "All {count} Known Mutations in Climb For Animals Eggs",
+  "meta_description": "Get Golden, Diamond or Rainbow from random map eggs or the Mutate Machine, and see the Lava, Hacker and Candy event spawn chances in Climb For Animals Eggs.",
+  "intro_md": "A mutated animal earns more Cash than the same animal in its base form, so mutations are worth chasing. Golden, Diamond and Rainbow can spawn in random map eggs, or you can make them in the Mutate Machine from three matching animals you already own. Lava, Hacker and Candy eggs come from timed events, so timing matters for those.",
+  "description_md": "## Golden, Diamond and Rainbow From Random Map Eggs\n\nRandom map eggs can spawn Golden, Diamond and Rainbow mutations. You don't need an event for any of them, so keep an eye out for these eggs as you climb.\n\n## Lava, Hacker and Candy Event Spawn Chances\n\nDuring the Lava Event, each 25-second check has a 12% chance to spawn a Lava egg. The Hacker Event gives each check a 10% chance for Hacker eggs, and the Candy Event gives each check a 15% chance for Candy eggs.\n\nEvent windows open at :15 and :45 each hour and last about 5 minutes 20 seconds. Most checks miss at these rates, so stay in the game for the whole window instead of popping in for a minute.\n\n## How to Mutate Animals in the Mutate Machine\n\nThe Mutate Machine sits at the left edge of the Safe Zone near spawn, beside the Sell Shop and the group chest. It turns three matching animals into a random mutation, and it can make Golden, Diamond or Rainbow.\n\n- Use three animals with the same species and the same variant. Weight doesn't matter.\n- Mixed variants fail. One Golden animal with two Normal animals gets rejected with “All 3 Animals Must Be the Same Variant!”\n- The machine uses up all three animals on each use.\n- Each use costs in-game currency, so keep some on hand before you load the machine.\n\nGolden is the common result, so expect it most often. Diamond and Rainbow can come out too. Lava, Hacker and Candy aren't machine results, so those come from event eggs.",
+  "how_it_works_md": "",
+  "description_json": {},
+  "faq_json": [],
+  "wiki_md": "Mutations are special versions of an animal, and you can get them from random map eggs, timed events or the Mutate Machine. Random eggs can give Golden, Diamond or Rainbow, and the machine can make those from matching animals. Lava, Hacker and Candy eggs come from timed events, so be in the game when those windows open. Keep spares of the same animal and variant on hand, since the machine needs three matching animals.",
+  "is_published": true
+}

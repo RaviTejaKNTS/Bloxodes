@@ -1,0 +1,17 @@
+{
+  "universe_id": 10765490774,
+  "wiki_slug": "climb-for-animals-eggs",
+  "collection_slug": "zones",
+  "code": "climb-for-animals-eggs-zones",
+  "display_name": "Zones",
+  "title": "All {count} Known Zones in Climb For Animals Eggs",
+  "seo_title": "All {count} Known Zones in Climb For Animals Eggs",
+  "meta_description": "Climb For Animals Eggs climb areas by Stamina requirement. See how many Stamina Shop upgrades each area needs from your starting 20 and what to aim for next.",
+  "intro_md": "Winter needs 28 Stamina, two Stamina Shop purchases above your starting 20. Buy toward that target before you push higher.",
+  "description_md": "## How Many Stamina Shop Upgrades Each Area Needs\n\nEach Stamina Shop purchase adds 4 Stamina. At the Stamina Shop, the first capacity boost costs $100 and takes your cap from 20 to 24. To find the purchases an area needs, subtract your starting 20 from its requirement and divide by 4.\n\n- Winter (28 Stamina): 2 purchases\n- Ocean (32 Stamina): 3 purchases\n- Crystal Mines (60 Stamina): 10 purchases\n- Realm of Legends (120 Stamina): 25 purchases\n\n## Which Stamina Target to Buy Toward Next\n\nBuy toward the lowest requirement you haven't reached yet. Every purchase stacks, so the Stamina you buy for Winter still counts toward Ocean and Desert. Ocean is one more purchase after Winter, and Desert is three more after Ocean.\n\n## Stamina vs Speed in Climb For Animals Eggs\n\nStamina is what gates the areas. Speed affects how long each trip takes, so when you plan a climb, plan around Stamina.",
+  "how_it_works_md": "",
+  "description_json": {},
+  "faq_json": [],
+  "wiki_md": "Climbing higher opens new areas in Climb For Animals Eggs, and most ask for a minimum Stamina before you can get in. Your starting Stamina covers Forest. Pick the area you want next and buy Stamina Shop upgrades until your Stamina matches its number.",
+  "is_published": true
+}
