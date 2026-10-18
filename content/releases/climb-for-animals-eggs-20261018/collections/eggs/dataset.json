@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Climb For Animals Eggs",
+    "gameSlug": "climb-for-animals-eggs",
+    "collection": "eggs",
+    "collectionLabel": "Eggs",
+    "itemFields": [
+      "name",
+      "location",
+      "howToGet",
+      "knownHatchResult",
+      "hatchTime",
+      "variantNotes",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "location",
+      "howToGet",
+      "knownHatchResult",
+      "hatchTime",
+      "variantNotes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Section",
+      "sectionOrder": ["Climb Eggs", "Shop Eggs"],
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "location",
+        "howToGet",
+        "knownHatchResult",
+        "hatchTime",
+        "variantNotes"
+      ],
+      "tableFields": [
+        "location",
+        "howToGet",
+        "knownHatchResult",
+        "hatchTime",
+        "variantNotes"
+      ],
+      "fieldPresentation": {
+        "location": { "kind": "normal", "label": "Location" },
+        "howToGet": { "kind": "detail", "label": "How to get" },
+        "knownHatchResult": { "kind": "normal", "label": "Known hatch result" },
+        "hatchTime": { "kind": "chip", "label": "Hatch time" },
+        "variantNotes": { "kind": "detail", "label": "Variant notes" },
+        "cardSummary": { "kind": "detail", "label": "Summary" }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Chicken Egg",
+        "location": "Forest tutorial nest",
+        "howToGet": "Steal it from the Forest tutorial nest and carry it to your plot. Equip it from your backpack, then place it on the grass to start hatching.",
+        "knownHatchResult": null,
+        "hatchTime": null,
+        "variantNotes": "The tutorial egg has the Diamond mutation and Common rarity.",
+        "cardSummary": "The Chicken Egg is at the Forest tutorial nest."
+      },
+      "system": { "slug": "chicken-egg", "section": "Climb Eggs", "sortOrder": 1, "image": null }
+    },
+    {
+      "item": {
+        "name": "Seal Egg",
+        "location": "Winter ledge",
+        "howToGet": "Steal it from the Winter ledge and carry it back to the base incubator.",
+        "knownHatchResult": null,
+        "hatchTime": null,
+        "variantNotes": null,
+        "cardSummary": "The Seal Egg sits on the Winter ledge."
+      },
+      "system": { "slug": "seal-egg", "section": "Climb Eggs", "sortOrder": 2, "image": null }
+    },
+    {
+      "item": {
+        "name": "Tuna Egg",
+        "location": "Winter",
+        "howToGet": "Steal it in Winter and carry it back to the base incubator.",
+        "knownHatchResult": null,
+        "hatchTime": null,
+        "variantNotes": null,
+        "cardSummary": "The Tuna Egg is found in Winter."
+      },
+      "system": { "slug": "tuna-egg", "section": "Climb Eggs", "sortOrder": 3, "image": null }
+    },
+    {
+      "item": {
+        "name": "Ocean Egg",
+        "location": "Ocean stretch of the climb",
+        "howToGet": "Steal it from the ocean stretch and carry it back to the base incubator.",
+        "knownHatchResult": null,
+        "hatchTime": "20 minutes (Rainbow)",
+        "variantNotes": "Rainbow is an egg mutation.",
+        "cardSummary": "The Ocean Egg is found along the ocean stretch of the climb."
+      },
+      "system": { "slug": "ocean-egg", "section": "Climb Eggs", "sortOrder": 4, "image": null }
+    },
+    {
+      "item": {
+        "name": "Dinosaur Egg",
+        "location": "Dinosaur area near the top",
+        "howToGet": "Steal it from the Dinosaur area near the top and carry it back to the base incubator.",
+        "knownHatchResult": "Dinosaur",
+        "hatchTime": "6 hours",
+        "variantNotes": "Sparkle marks a rare egg.",
+        "cardSummary": "Find the Dinosaur Egg in the area near the top. It may be absent on some visits."
+      },
+      "system": { "slug": "dinosaur-egg", "section": "Climb Eggs", "sortOrder": 5, "image": null }
+    },
+    {
+      "item": {
+        "name": "Dragon Egg",
+        "location": "High altitude on the climb",
+        "howToGet": "Steal it high on the climb and carry it back to the base incubator.",
+        "knownHatchResult": "Lava Dragon",
+        "hatchTime": "6 minutes",
+        "variantNotes": "Divine and golden versions appear on the climb.",
+        "cardSummary": "The Dragon Egg is high on the climb and can hatch a Lava Dragon."
+      },
+      "system": { "slug": "dragon-egg", "section": "Climb Eggs", "sortOrder": 6, "image": null }
+    },
+    {
+      "item": {
+        "name": "Demon Egg",
+        "location": "Summit",
+        "howToGet": "Steal it at the summit and carry it back to the base incubator.",
+        "knownHatchResult": "Golden Dragon (rare golden egg)",
+        "hatchTime": "Over 12 hours",
+        "variantNotes": null,
+        "cardSummary": "The Demon Egg sits at the summit."
+      },
+      "system": { "slug": "demon-egg", "section": "Climb Eggs", "sortOrder": 7, "image": null }
+    },
+    {
+      "item": {
+        "name": "Ice King Egg",
+        "location": "Shop",
+        "howToGet": "Buy it in the Shop.",
+        "knownHatchResult": "Ice Phoenix (chance)",
+        "hatchTime": null,
+        "variantNotes": null,
+        "cardSummary": "The Shop sells the Ice King Egg for a chance at an Ice Phoenix."
+      },
+      "system": { "slug": "ice-king-egg", "section": "Shop Eggs", "sortOrder": 8, "image": null }
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Climb For Animals Eggs",
+    "gameSlug": "climb-for-animals-eggs",
+    "collection": "zones",
+    "collectionLabel": "Zones",
+    "itemFields": [
+      "name",
+      "stamina",
+      "upgradesFrom20",
+      "eggExamples",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "stamina",
+      "upgradesFrom20",
+      "eggExamples",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Section",
+      "sectionOrder": [
+        "Items"
+      ],
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "stamina",
+        "upgradesFrom20",
+        "eggExamples"
+      ],
+      "tableFields": [
+        "stamina",
+        "upgradesFrom20",
+        "eggExamples",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "stamina": {
+          "kind": "chip",
+          "label": "Stamina to reach"
+        },
+        "upgradesFrom20": {
+          "kind": "chip",
+          "label": "Upgrades from 20 Stamina"
+        },
+        "eggExamples": {
+          "kind": "normal",
+          "label": "Egg examples"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Forest",
+        "stamina": 20,
+        "upgradesFrom20": 0,
+        "eggExamples": [
+          "Chicken Egg"
+        ],
+        "cardSummary": "Reach Forest with at least 20 Stamina."
+      },
+      "system": {
+        "slug": "forest",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/forest-winter-climb.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter",
+        "stamina": 28,
+        "upgradesFrom20": 2,
+        "eggExamples": [
+          "Seal Egg",
+          "Tuna Egg"
+        ],
+        "cardSummary": "Reach Winter with at least 28 Stamina."
+      },
+      "system": {
+        "slug": "winter",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/winter-seal-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ocean",
+        "stamina": 32,
+        "upgradesFrom20": 3,
+        "eggExamples": null,
+        "cardSummary": "Reach Ocean with at least 32 Stamina."
+      },
+      "system": {
+        "slug": "ocean",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Desert",
+        "stamina": 44,
+        "upgradesFrom20": 6,
+        "eggExamples": null,
+        "cardSummary": "Reach Desert with at least 44 Stamina."
+      },
+      "system": {
+        "slug": "desert",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crystal Mines",
+        "stamina": 60,
+        "upgradesFrom20": 10,
+        "eggExamples": null,
+        "cardSummary": "Reach Crystal Mines with at least 60 Stamina."
+      },
+      "system": {
+        "slug": "crystal-mines",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jungle",
+        "stamina": 68,
+        "upgradesFrom20": 12,
+        "eggExamples": null,
+        "cardSummary": "Reach Jungle with at least 68 Stamina."
+      },
+      "system": {
+        "slug": "jungle",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mystic Isles",
+        "stamina": 80,
+        "upgradesFrom20": 15,
+        "eggExamples": null,
+        "cardSummary": "Reach Mystic Isles with at least 80 Stamina."
+      },
+      "system": {
+        "slug": "mystic-isles",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Prehistoric",
+        "stamina": 92,
+        "upgradesFrom20": 18,
+        "eggExamples": null,
+        "cardSummary": "Reach Prehistoric with at least 92 Stamina."
+      },
+      "system": {
+        "slug": "prehistoric",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Divine Heights",
+        "stamina": 100,
+        "upgradesFrom20": 20,
+        "eggExamples": null,
+        "cardSummary": "Reach Divine Heights with at least 100 Stamina."
+      },
+      "system": {
+        "slug": "divine-heights",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial",
+        "stamina": 112,
+        "upgradesFrom20": 23,
+        "eggExamples": null,
+        "cardSummary": "Reach Celestial with at least 112 Stamina."
+      },
+      "system": {
+        "slug": "celestial",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Realm of Legends",
+        "stamina": 120,
+        "upgradesFrom20": 25,
+        "eggExamples": null,
+        "cardSummary": "Reach Realm of Legends with at least 120 Stamina."
+      },
+      "system": {
+        "slug": "realm-of-legends",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lava",
+        "stamina": null,
+        "upgradesFrom20": null,
+        "eggExamples": null,
+        "cardSummary": "Reach Lava during the climb."
+      },
+      "system": {
+        "slug": "lava",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
+    }
+  ]
+}

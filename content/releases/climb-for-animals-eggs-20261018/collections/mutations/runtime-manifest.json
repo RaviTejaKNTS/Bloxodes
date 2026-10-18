@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "game": {
+    "slug": "climb-for-animals-eggs",
+    "name": "Climb For Animals Eggs",
+    "universeId": 10765490774
+  },
+  "collection": {
+    "slug": "mutations",
+    "label": "Mutations",
+    "sortOrder": 3,
+    "pageType": "database"
+  },
+  "dataset": "dataset.json",
+  "finalJson": "final.json",
+  "mediaRoot": "media",
+  "sourceUrls": [
+    "https://www.roblox.com/games/85738654635245/Climb-For-Animals-Eggs",
+    "https://progameguides.com/roblox/climb-for-animals-eggs-beginners-guide/",
+    "https://allthings.how/climb-for-animals-eggs-how-to-mutate-animals-in-the-mutate-machine/",
+    "https://roonby.com/2026/10/14/climb-for-animals-eggs-beginner-guide-stamina-speed-upgrades-and-mutations/",
+    "https://zing.co.uk/industry-resources/roblox/experience/10765490774-climb-for-animals-eggs/"
+  ]
+}

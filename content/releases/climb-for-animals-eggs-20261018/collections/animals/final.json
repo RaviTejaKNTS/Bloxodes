@@ -1,0 +1,17 @@
+{
+  "universe_id": 10765490774,
+  "wiki_slug": "climb-for-animals-eggs",
+  "collection_slug": "animals",
+  "code": "climb-for-animals-eggs-animals",
+  "display_name": "Animals",
+  "title": "All {count} Known Animals in Climb For Animals Eggs",
+  "seo_title": "All {count} Known Animals in Climb For Animals Eggs",
+  "meta_description": "Animals you can hatch in Climb For Animals Eggs, the eggs that lead to them, and how Index Speed and placed-animal Cash work, with example payouts.",
+  "intro_md": "Animals you place at your base earn Cash every second, and they don't all pay the same. The egg you hatch shapes which animal you get, so knowing which eggs lead where tells you what to aim for.",
+  "description_md": "## How to Get Animals in Climb For Animals Eggs\n\nThe loop goes like this:\n\n1. Climb to find an egg.\n2. Bring the egg back to your base.\n3. Hatch it.\n4. Place the animal at your base.\n\n## Which Eggs Lead to Which Animals\n\nAn egg name is a clue, not a promise, so treat these as leads rather than guaranteed results:\n\n- **Golden Dragon:** A rare golden Demon Egg can hatch a Golden Dragon.\n- **Lava Dragon:** A Dragon Egg can hatch a Lava Dragon.\n- **Dinosaur:** A Dinosaur Egg in the dinosaur area can hatch a Dinosaur.\n- **Ice Phoenix:** The Ice King Egg from the shop can hatch an Ice Phoenix as a Royal result.\n- **Fish:** A golden egg can hatch a Fish.\n\n## How Much Each Animal Pays\n\nUpgrades, rebirths and multipliers can change what an animal earns. For scale, a Winter-tier Sail Fish can pay $680/s and a Common Chicken can pay $1/s. Treat those as examples rather than fixed stats, since your own setup changes the number.\n\n## Index Speed for New Animals\n\nEach new animal you log in the Index pays a Speed reward you can claim. Only new entries count, so hatching an animal you already have doesn't pay it again.\n\nSpeed and Cash are separate rewards: the Index pays Speed for new entries, and placed animals pay Cash.\n\nThese entries don't cover the whole Index, so collecting all of them doesn't finish the Index or the game.\n\n## Egg Mutations and Pet Traits\n\nGolden, Diamond, Hacker, Lava and Candy show up as egg mutations or pet traits, and Rainbow is a trait an egg can carry, not a type of egg. Golden and Lava are also part of the hatch names Golden Dragon and Lava Dragon, so use the full name when you're looking for those animals. A Fox with a Hacker trait is still a Fox.",
+  "how_it_works_md": "",
+  "description_json": {},
+  "faq_json": [],
+  "wiki_md": "Animals hatch from eggs, and each one you place at your base pays Cash every second. Some can pay far more than others, so the egg you hatch matters. Each new animal you log in the Index pays a Speed reward you can claim, so a new kind is worth hatching even before you place it.",
+  "is_published": true
+}

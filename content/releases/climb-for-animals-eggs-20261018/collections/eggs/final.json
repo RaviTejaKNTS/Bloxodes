@@ -1,0 +1,24 @@
+{
+  "universe_id": 10765490774,
+  "wiki_slug": "climb-for-animals-eggs",
+  "collection_slug": "eggs",
+  "code": "climb-for-animals-eggs-eggs",
+  "display_name": "Eggs",
+  "title": "All {count} Known Eggs in Climb For Animals Eggs",
+  "seo_title": "All {count} Known Eggs in Climb For Animals Eggs",
+  "meta_description": "Where to find each known egg in Climb For Animals Eggs, on the climb or in the Shop. Compare the dragon routes and the Ice King Egg's Ice Phoenix chance.",
+  "intro_md": "Eggs hatch into the animals you collect in Climb For Animals Eggs. Choose an egg for the animal you want, then weigh its location and hatch time.",
+  "description_md": "## Where to Find the Chicken, Seal and Tuna Eggs\n\nThe Chicken Egg comes from the Forest tutorial nest. The Seal Egg sits on the Winter ledge, and the Tuna Egg is found in Winter.\n\n## Which Climb For Animals Eggs Hatch a Dragon\n\nThe Dragon Egg high on the climb can hatch a Lava Dragon. The Golden Dragon route runs through the rare golden Demon Egg at the summit, not every Demon Egg.\n\n## How Long the Hatch Timers Run\n\nHatch times vary by egg:\n\n- **Ocean Egg:** 20 minutes for the Rainbow version.\n- **Dinosaur Egg:** 6 hours.\n- **Dragon Egg:** 6 minutes.\n- **Demon Egg:** over 12 hours.\n\nEgg traits and hatch-speed boosts can change these times, so treat them as a guide, not a promise.\n\n## Climb Eggs or the Ice King Egg\n\nClimb eggs take a trip up the climb. The Ice King Egg is sold in the Shop, so it's the shortcut if you'd rather skip the climb. If an Ice Phoenix is what you're after, start there, knowing the egg has a chance to hatch one, not a guarantee.",
+  "how_it_works_md": "",
+  "description_json": {
+    "Climb Eggs": "Climb eggs go into the base incubator once you carry them back. For the Forest tutorial's Chicken Egg, equip it from your backpack, then place it on the grass to start hatching."
+  },
+  "faq_json": [
+    {
+      "q": "What do Diamond, Rainbow and Common mean on an egg?",
+      "a": "Diamond and Rainbow are mutations, so they're versions of the same base egg, not separate eggs. Common is a rarity label. A Rainbow Ocean Egg is still an Ocean Egg, just a Rainbow version of it."
+    }
+  ],
+  "wiki_md": "Eggs are how you get animals in Climb For Animals Eggs. Most are stolen off the climb, carried back to base and hatched in the incubator, while the Ice King Egg is sold in the Shop. If a Lava Dragon is what you want, the Dragon Egg high on the climb is the one to find.",
+  "is_published": true
+}
