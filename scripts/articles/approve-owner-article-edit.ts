@@ -45,7 +45,7 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
     const review = JSON.parse(await readFile(reviewFile, "utf8"));
     if (state.status !== "completed" || state.stage !== "done" || state.job.id !== id || state.job.slug !== row.result_slug || state.inFlight || state.controllerWrites || review.status !== "completed") throw new Error("Owner approval requires matching completed pipeline and editorial approval.");
     for (const stage of ["copy_check", "image_check", "import_verify", "browser_verify"] as const) {
-      if (state.history.filter(entry => entry.stage === stage).at(-1)?.decision.status !== "completed") throw new Error(`Missing original ${stage} approval.`);
+      if (state.history.filter(entry => entry.stage === stage).slice(-1).pop()?.decision.status !== "completed") throw new Error(`Missing original ${stage} approval.`);
     }
     const hashes = await artifactHashes(content);
     for (const name of ["brief.md", "media.json"]) {
@@ -57,7 +57,7 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
     // Run the real gate on the new bytes. No model, import, dispatch or publication.
     execFileSync(process.execPath, ["--import", import.meta.resolve("tsx"), path.join(root, "scripts/content/check-public-copy.ts"), finalPath], { cwd: root, stdio: "inherit", timeout: 60_000 });
     if (JSON.stringify(await artifactHashes(content)) !== JSON.stringify(hashes)) throw new Error("Article inputs changed during copy validation.");
-    let approval = state.ownerApprovals?.at(-1);
+    let approval = state.ownerApprovals?.slice(-1).pop();
     if (approval?.status === "pending") {
       if (JSON.stringify(approval.approvedArtifacts) !== JSON.stringify(hashes) || JSON.stringify(approval.previousArtifacts) !== JSON.stringify(state.artifacts) || approval.operator !== evidence.operator || approval.reason !== evidence.reason) throw new Error("Pending owner approval differs; restore its exact reviewed inputs and operator request.");
     } else {

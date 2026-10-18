@@ -103,7 +103,7 @@ for (const [before, after] of edits) test(`owner copy approval binds repaired by
   const state = await read(f.stateFile), review = await read(f.reviewFile);
   assert.equal(state.artifacts["final.json"], hash); assert.deepEqual(review.input_hashes, state.artifacts);
   assert.deepEqual(state.ownerApprovals[0].previousArtifacts, f.originalHashes); assert.deepEqual(state.ownerApprovals[0].previousReview, f.previousReview);
-  assert.equal(state.ownerApprovals[0].status, "completed"); assert.equal(state.history.at(-1).decision.delegatedToCi, true);
+  assert.equal(state.ownerApprovals[0].status, "completed"); assert.equal(state.history.slice(-1).pop().decision.delegatedToCi, true);
   assert.equal(await readFile(f.intentFile(), "utf8"), oldIntent);
   assert.equal(await resolveReleaseArtifactPath(f.finalPath, ids[0], "test", f.root), f.finalPath);
   state.ownerApprovals[0].status = "pending"; state.artifacts = f.originalHashes; await saveJson(f.stateFile, state);
