@@ -33,11 +33,11 @@ for (const basePath of selected) {
       if (requireGoogleHeader) expect(xRobotsTag, `${path} Google query restriction`).toBe("googlebot: noindex, follow");
       else expect(xRobotsTag === null || xRobotsTag === "googlebot: noindex, follow", `${path} X-Robots-Tag: ${xRobotsTag}`).toBe(true);
       const canonicalTag = page.locator('link[rel="canonical"]');
-      const canonical = await canonicalTag.count() ? await canonicalTag.getAttribute("href") : null;
+      const canonical = await canonicalTag.count() ? await canonicalTag.first().getAttribute("href") : null;
       const robotsTag = page.locator('meta[name="robots"]');
-      const documentRobots = await robotsTag.count() ? await robotsTag.getAttribute("content") : null;
+      const documentRobots = await robotsTag.count() ? (await robotsTag.evaluateAll(nodes => nodes.map(node => node.getAttribute("content") ?? ""))).join(", ") : null;
       const googlebotTag = page.locator('meta[name="googlebot"]');
-      const documentGooglebotRobots = await googlebotTag.count() ? await googlebotTag.getAttribute("content") : null;
+      const documentGooglebotRobots = await googlebotTag.count() ? (await googlebotTag.evaluateAll(nodes => nodes.map(node => node.getAttribute("content") ?? ""))).join(", ") : null;
       const noindex = (value: string | null) => /(?:^|[,\s])(?:noindex|none)(?:[,\s]|$)/i.test(value ?? "");
       indexability.push({
         path, canonical, documentRobots, documentGooglebotRobots, xRobotsTag,
@@ -48,7 +48,7 @@ for (const basePath of selected) {
     async function assertMetadata(path: string, noindex: boolean) {
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `${origin}${path}`);
       const robotsTag = page.locator('meta[name="robots"]');
-      const robots = await robotsTag.count() ? (await robotsTag.getAttribute("content")) ?? "" : "";
+      const robots = (await robotsTag.evaluateAll(nodes => nodes.map(node => node.getAttribute("content") ?? ""))).join(", ");
       expect(robots.includes("noindex"), `${path} robots: ${robots}`).toBe(noindex);
       await expect(page.locator("h1")).toHaveCount(1);
       await expect(page.locator('[data-game-collection-view="cards"]')).toHaveCount(1);
@@ -125,7 +125,7 @@ for (const basePath of selected) {
     const invalidPath = `${basePath}/page/${totalPages + 1}`;
     const invalidResponse = await page.goto(invalidPath, { waitUntil: "domcontentloaded" });
     expect(invalidResponse?.status()).toBe(404);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+    await expect(page.locator('meta[name="robots"][content*="noindex"]').first()).toHaveAttribute("content", /noindex/);
     await recordIndexability(invalidPath, invalidResponse!);
     expect(errors).toEqual([]);
 
