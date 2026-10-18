@@ -37,11 +37,13 @@ The MacBook Pro T3 schedule "Bloxodes nightly Roblox wiki" runs daily at 02:30 I
 
 ## Content QA and runtime activation
 
+The article publication drain checks approved copy before freezing or spending an attempt, records findings in the intent and `health.json`, and reports once per final hash while unchanged bad copy stays blocked.
+
 Roblox collection finals leave `how_it_works_md` empty and explain game systems without website instructions. `content/roblox-collection-copy.ts` owns the shared check used by the public-copy gate, Claude writer, stage pipeline and runtime publication plan. The stage pipeline uses its existing correction budget for these findings. See `dev-docs/pipelines/wiki-collections.md#roblox-collection-openings` for the copy repair and verification boundary.
 
 `managed-content-qa.yml` stages selected frozen inputs in development and saves exact-content/browser evidence. Production requires its SHA/hash-bound receipt. Checklist fixtures are development-only and cleaned after verification. `managed-checklists.ts` owns isolated boards and per-browser test accounts; `checklist-proof.mjs` compares complete rows and preserves Roblox task IDs. Shared checklist updates must include the complete retained task inventory.
 
-`automation-runtime.yml` installs dependencies on GitHub. Runtime preparation takes `--sha <released-sha> --artifact-dir <download-directory>` and verifies that package without a local install or build. The unified installer requires idle workers, preserves protected env/timer state and moves persistent files to HDD with hash readback. `BLOXODES_CI_QA=1` delegates technical article/wiki QA to GitHub, except the file-only article image readiness check. Article writing and localized editorial edits sync placed images' headings and alt text through recorded controller writes. Unused verified images pass readiness and stay out of promotion and provenance sync; remaining defects use the writing revision or block locally. These are explicitly authorized operator actions, never ordinary release side effects.
+`automation-runtime.yml` installs dependencies on GitHub. Runtime preparation takes `--sha <released-sha> --artifact-dir <download-directory>` and verifies that package without a local install or build. The unified installer requires idle workers, preserves protected env/timer state and moves persistent files to HDD with hash readback. `BLOXODES_CI_QA=1` delegates technical article/wiki QA to GitHub, except file-only article copy and image readiness checks; copy findings return to writing within the existing correction budget. Article writing and localized editorial edits sync placed images' headings and alt text through recorded controller writes. Unused verified images pass readiness and stay out of promotion and provenance sync; remaining defects use the writing revision or block locally. These are explicitly authorized operator actions, never ordinary release side effects.
 
 ## Folder Map
 
@@ -264,6 +266,11 @@ Historical wiki controller only, retired October 15: the wiki readiness command 
 `shared/revalidate-published-content.ts` is trusted publication code only. It requires the production target and its protected `REVALIDATE_SECRET`, sends an exact article/wiki batch to `/api/revalidate`, and rejects unsuccessful cache purges before live verification. Never pass this credential to model execution.
 
 For an exact manual publication recovery, `articles:publication:drain -- --acknowledge-published --queue-id <UUID> [--queue-id <UUID>] --apply` only closes existing authorized intents whose queue rows already acknowledge matching canonical published URLs. It never launches a release, scans for other due publications, or resets attempts.
+
+The publication drain records `exhaustionReportedAt` and reports exhaustion once; later health reports retain the blocker and new failures still fail. Frozen inputs skip hidden entries while visible symlink and unsafe-path guards remain.
+
+- `articles:publication:drain -- --retry-exhausted --queue-id <UUID> [--queue-id <UUID>] --operator <name> --reason <text> --apply` audits an exact exhausted/unpublished budget reset without launching publication.
+- `articles:approval:owner-edit -- --queue-id <UUID> --expected-final-hash <SHA256> --operator <name> --reason <text> --apply` records an owner copy approval for any authorized unpublished intent without an unresolved dispatch, preserving prior evidence and all GitHub QA/publication gates; it clears copy blocking and makes non-exhausted intents due without resetting attempts.
 
 ## October 2 reliability controls
 

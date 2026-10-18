@@ -18,6 +18,8 @@ export function decodeBundle(buffer, expectedHash) {
 export async function folderInputs(directory, destination) {
   const inputs = [];
   for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
+    // Model caches and credential directories are never publication inputs.
+    if (entry.name.startsWith(".")) continue;
     const source = path.join(directory, entry.name);
     if (entry.isSymbolicLink()) throw new Error("Frozen workspaces cannot contain symlinks.");
     if (entry.isDirectory()) inputs.push(...await folderInputs(source, `${destination}/${entry.name}`));

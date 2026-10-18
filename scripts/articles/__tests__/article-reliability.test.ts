@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mkdtemp, readFile } from "node:fs/promises";
+import { mkdtemp, readFile, mkdir, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { authorizePublication, acknowledgePublishedIntents, drainPublications, publicationDue } from "../article-publication-outbox";
+import { authorizePublication as authorizeIntent, acknowledgePublishedIntents, drainPublications, publicationDue } from "../article-publication-outbox";
 import { saveJson, runArticlePipeline, type Decision } from "../article-pipeline";
 import { applyLocalCorrections } from "../article-local-correction";
 import { normalizeImageAlt } from "../../content/article-image-readiness";
@@ -11,10 +11,14 @@ import { briefUniverseId, ensureArticleGameIdentity, resolveOfficialArticleGame 
 import { assertArticleUniverseReadback } from "../../content/article-final-readback";
 const dev = { url: "https://test.supabase.co", serviceRole: "test-placeholder" };
 const ids = ["11111111-1111-4111-8111-111111111111", "22222222-2222-4222-8222-222222222222"];
+async function authorizePublication(root: string, id: string) {
+  await authorizeIntent(root, id);
+  await saveJson(path.join(root, "tmp/content-workspace/final.json"), { title: "Test", slug: "test", content_md: "Collect the reward." });
+}
 test("failed publication survives restart, backs off, and does not block another completed article", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-"));
   const original = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed" }), { headers: { "Content-Type": "application/json" } });
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
   try {
     for (const id of ids) await authorizePublication(root, id);
     const attempted: string[] = [];
@@ -38,6 +42,98 @@ test("unapproved and unfinished articles never reach publication", async () => {
 });
 test("publication retries remain bounded even if the child dies before acknowledgement", () => {
   assert.equal(publicationDue({ version: 1, queueId: ids[0], authorizedAt: "", attempts: 6 }), false);
+});
+test("exhaustion alerts once across restarts while health retains every blocked intent", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-exhausted-"));
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
+  const file = (id: string) => path.join(root, "tmp/article-publication", `${id}.json`);
+  const health = async () => JSON.parse(await readFile(path.join(root, "tmp/article-publication/health.json"), "utf8"));
+  try {
+    await authorizePublication(root, ids[0]);
+    const intent = JSON.parse(await readFile(file(ids[0]), "utf8"));
+    intent.attempts = 6; intent.error = "old failure"; await saveJson(file(ids[0]), intent);
+    const release = async () => { assert.fail("exhausted: must not launch"); };
+    await assert.rejects(drainPublications(root, dev, release), /publication retries exhausted/);
+    const reported = JSON.parse(await readFile(file(ids[0]), "utf8"));
+    assert.ok(reported.exhaustionReportedAt); assert.equal(reported.attempts, 6); assert.equal(reported.error, "old failure");
+    await drainPublications(root, dev, release);
+    assert.deepEqual((await health()).issues, [`${ids[0]}: publication retries exhausted; old failure`]);
+    assert.deepEqual(JSON.parse(await readFile(file(ids[0]), "utf8")), reported);
+
+    await authorizePublication(root, ids[1]);
+    await assert.rejects(drainPublications(root, dev, async id => { assert.equal(id, ids[1]); throw Error("new failure"); }), /new failure/);
+    assert.equal((await health()).issues.length, 2);
+    const newer = JSON.parse(await readFile(file(ids[1]), "utf8"));
+    newer.attempts = 6; await saveJson(file(ids[1]), newer);
+    await assert.rejects(drainPublications(root, dev, release), /publication retries exhausted; new failure/);
+    await drainPublications(root, dev, release);
+    assert.equal((await health()).issues.length, 2);
+
+    reported.exhaustionReportedAt = "invalid"; await saveJson(file(ids[0]), reported);
+    await assert.rejects(drainPublications(root, dev, release), /Invalid publication intent/);
+  } finally { globalThis.fetch = original; }
+});
+test("the sixth synchronous failure surfaces once and does not block another publication", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-last-attempt-"));
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
+  try {
+    for (const id of ids) await authorizePublication(root, id);
+    const file = path.join(root, "tmp/article-publication", `${ids[0]}.json`);
+    const intent = JSON.parse(await readFile(file, "utf8"));
+    intent.attempts = 5; await saveJson(file, intent);
+    const attempted: string[] = [];
+    await assert.rejects(drainPublications(root, dev, async id => { attempted.push(id); if (id === ids[0]) throw Error("sixth failure"); }), /sixth failure/);
+    assert.deepEqual(attempted, ids);
+    assert.ok(JSON.parse(await readFile(file, "utf8")).exhaustionReportedAt);
+    await drainPublications(root, dev, async () => { assert.fail("no further release"); });
+    globalThis.fetch = async () => new Response(JSON.stringify({ status: "published", result_slug: "recovered", production_url: "https://bloxodes.com/articles/recovered" }), { headers: { "Content-Type": "application/json" } });
+    await drainPublications(root, dev, async () => { assert.fail("receipt only"); });
+    const recovered = JSON.parse(await readFile(file, "utf8"));
+    assert.ok(recovered.publishedAt); assert.equal(recovered.attempts, 6);
+    assert.deepEqual(JSON.parse(await readFile(path.join(root, "tmp/article-publication/health.json"), "utf8")).issues, []);
+  } finally { globalThis.fetch = original; }
+});
+test("recorded GitHub outcomes reconcile before exhaustion and new failures surface during backoff", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-github-"));
+  const original = globalThis.fetch;
+  const originalPath = process.env.PATH;
+  const bin = path.join(root, "bin");
+  const response = path.join(root, "github.json");
+  await mkdir(bin);
+  await writeFile(path.join(bin, "gh"), `#!${process.execPath}\nprocess.stdout.write(require("node:fs").readFileSync(${JSON.stringify(response)}, "utf8"));\n`, { mode: 0o700 });
+  process.env.PATH = `${bin}${path.delimiter}${originalPath}`;
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
+  try {
+    await authorizePublication(root, ids[0]);
+    const file = path.join(root, "tmp/article-publication", `${ids[0]}.json`);
+    const intent = JSON.parse(await readFile(file, "utf8"));
+    Object.assign(intent, { attempts: 6, dispatchHash: "a".repeat(64), submittedAt: new Date().toISOString(), githubRunId: 123, nextAttemptAt: new Date(Date.now() + 3600_000).toISOString() });
+    await saveJson(file, intent);
+    const run = { id: 123, display_title: `Selected content ${intent.dispatchHash}`, event: "workflow_dispatch", head_branch: "production", created_at: intent.submittedAt, status: "in_progress", conclusion: null as string | null, html_url: "https://github.com/example/runs/123" };
+    await saveJson(response, run);
+    const release = async () => { assert.fail("recorded dispatch or backoff: must not launch"); };
+    await drainPublications(root, dev, release);
+    assert.equal(JSON.parse(await readFile(file, "utf8")).exhaustionReportedAt, undefined);
+    run.status = "completed"; run.conclusion = "success"; await saveJson(response, run);
+    await assert.rejects(drainPublications(root, dev, release), /no publication receipt/);
+    await assert.rejects(drainPublications(root, dev, release), /no publication receipt/);
+    run.conclusion = "failure"; await saveJson(response, run);
+    await assert.rejects(drainPublications(root, dev, release), /publication retries exhausted/);
+    assert.ok(JSON.parse(await readFile(file, "utf8")).exhaustionReportedAt);
+    await drainPublications(root, dev, release);
+
+    // A separate non-terminal outcome also fails once without waiting for its next retry.
+    intent.attempts = 1; await saveJson(file, intent);
+    await assert.rejects(drainPublications(root, dev, release), /GitHub publication 123 ended with failure/);
+    const failed = JSON.parse(await readFile(file, "utf8"));
+    assert.equal(failed.exhaustionReportedAt, undefined); assert.equal(failed.dispatchHash, undefined);
+    await drainPublications(root, dev, release);
+  } finally {
+    globalThis.fetch = original;
+    if (originalPath === undefined) delete process.env.PATH; else process.env.PATH = originalPath;
+  }
 });
 test("a verified manual recovery closes an exhausted outbox without a new release or retry reset", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-recovered-"));
@@ -204,8 +300,8 @@ test("persistent-state symlinks preserve approval checks and reject changed arti
   const run = path.join(stateRoot, "article-pipeline", ids[0]);
   const content = path.join(run, "content"); await mkdir(content, { recursive: true });
   for (const file of ["brief.md", "media.json", "final.json"]) await writeFile(path.join(content, file), "approved");
-  await saveJson(path.join(run, "state.json"), { status: "completed", stage: "done", job: { id: ids[0], slug: "test" }, artifacts: await artifactHashes(content), history: ["copy_check", "image_check", "import_verify", "browser_verify"].map(stage => ({ stage, decision: { status: "completed" } })) });
-  await saveJson(path.join(run, "editorial_review.json"), { status: "completed" });
+  await saveJson(path.join(run, "state.json"), { status: "completed", stage: "done", job: { id: ids[0], slug: "test" }, artifacts: await artifactHashes(content), history: ["copy_check", "image_check", "import_verify", "browser_verify"].map(stage => ({ stage, decision: { status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" } })) });
+  await saveJson(path.join(run, "editorial_review.json"), { status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" });
   const logical = path.join(root, "tmp/article-pipeline", ids[0], "content/final.json");
   assert.equal(await resolveReleaseArtifactPath(logical, ids[0], "test", root), path.join(content, "final.json"));
   await writeFile(path.join(content, "final.json"), "changed");
