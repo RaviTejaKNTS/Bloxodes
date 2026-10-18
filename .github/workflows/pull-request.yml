@@ -171,8 +171,6 @@ jobs:
       TEST_CANONICAL_ORIGIN: https://bloxodes.com
       TEST_BASE_URL: http://bloxodes.test:3000
       BLOXODES_BUILD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-      MANAGED_WIKI_STATE: ${{ runner.temp }}/managed-wiki-qa.json
-      MANAGED_WIKI_AUTH: ${{ runner.temp }}/managed-wiki-auth.json
     steps:
       - name: Allow only this repository's tasks
         env:
@@ -185,6 +183,10 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: '24', cache: npm}
       - run: npm ci --include=dev --no-audit --no-fund
+      - name: Set runner-owned temporary QA paths
+        run: |
+          echo "MANAGED_WIKI_STATE=$RUNNER_TEMP/managed-wiki-qa.json" >> "$GITHUB_ENV"
+          echo "MANAGED_WIKI_AUTH=$RUNNER_TEMP/managed-wiki-auth.json" >> "$GITHUB_ENV"
       - name: Load exact reviewed selection and bind the test head
         run: node --import tsx scripts/ci/managed-wiki-qa.ts select
       - name: Download the frozen data-only bundle
