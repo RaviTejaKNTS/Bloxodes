@@ -48,6 +48,14 @@ Articles and Roblox wiki and collections follow their own reference pages. The r
 - If a model ID stops resolving, check `orchestrator_capabilities`. Never swap in another model on your own. Ask the owner.
 - Pages can run in parallel, one stage at a time per page. Two runs never work on the same game at once.
 
+## When a child looks stuck
+
+A child can finish its report and still leave a background command running. T3 then keeps the task open, so its result never reaches you and nothing wakes you. Claude Code stops a background command after 30 minutes, so the result can arrive that late.
+
+- Don't rely on the automatic result alone. Before you end a turn to wait, call `t3_thread_wait` on the child's `childThreadId` with a `timeoutMs`. The child's thread finishes when its turn does, even while the task stays open.
+- If `task_status` shows `workState: waiting_for_children` with `latestTerminalStatus: completed` and `summary: null`, the child is done. Read its final message with `t3_thread_read`, review its files and carry on.
+- Note it in `stage-log.md` so the brief can be tightened next time.
+
 ## Reviews and corrections
 
 - Every review returns `completed`, `needs_revision` or `blocked`, with concrete, quoted findings. Reviews never edit artifacts.
@@ -80,6 +88,7 @@ Create one run folder per page inside the checkout before the first stage, at `t
 - The skills to read in full first. Writing and editorial review always include `.agents/skills/bloxodes-voice/SKILL.md` and the matching section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - Any findings to fix.
 - Boundaries: stay in the folder; read-only web research is fine; no database writes, Supabase or R2 uploads, imports, publishing, queue or claim commands, GitHub actions, commits, edits to tracked repo files, builds, tests, checks or previews; no sub-agents; never ask for permission escalation, and log anything blocked in `stage-log.md`.
+- Leave nothing running. Keep every command short enough to finish in the foreground, give each network call a timeout (`curl -m 30`), and split long loops into smaller commands. If a command still moves to the background, stop it before you report.
 - What to return: the decision or output paths, a short summary and any problems.
 
 ## Your review
