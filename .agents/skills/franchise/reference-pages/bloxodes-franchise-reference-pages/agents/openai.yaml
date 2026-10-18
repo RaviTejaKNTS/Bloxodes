@@ -1,0 +1,4 @@
+interface:
+  display_name: "Franchise reference pages"
+  short_description: "Create game maps, quizzes, checklists and catalogs"
+  default_prompt: "Use $bloxodes-franchise-reference-pages to create the approved non-Roblox reference page. Normally maintain one standalone verified 100% completion checklist page per game and reuse existing coverage; record explicit user exceptions. Use Managed content QA on GitHub for complete checklist data comparison and desktop/mobile account-progress evidence before publication."
