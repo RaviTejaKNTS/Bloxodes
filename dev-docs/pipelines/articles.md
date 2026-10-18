@@ -61,26 +61,7 @@ An owner may edit a completed pipeline article's `content/final.json`, then run 
 
 Both owner commands require only the existing managed-development article credentials and write only local persistent article state. They use no production keys, change no queue rows and grant no new authorization. `--operator` is an explicit owner attribution; the separately recorded OS user/host identifies the executing account.
 
-After the source is merged and the packaged runtime is activated, run the edit and approval commands **before** resetting budgets. To select owner-edit paths through the existing queue reader:
-
-```bash
-cd /srv/data/bloxodes-automation-runtime/current
-npm run --silent articles:queue:list -- --status completed --limit 50 --json > tmp/owner-completed-articles.json
-ANIME_FINAL=$(node -e 'const rows=require("./tmp/owner-completed-articles.json"); const r=rows.find(r=>r.id==="4d70bc35-5a93-4c6e-b692-7c581d1fe595"); if(!r?.result_path)process.exit(1); process.stdout.write(r.result_path)')
-PET_FINAL=$(node -e 'const rows=require("./tmp/owner-completed-articles.json"); const r=rows.find(r=>r.id==="98553ff2-8131-4ebe-8df6-359f19675abc"); if(!r?.result_path)process.exit(1); process.stdout.write(r.result_path)')
-```
-
-Stop if an ID is absent; do not infer its result path. The owner applies the reviewed replacements in those files, then approves their exact hashes:
-
-```bash
-npm run content:check-copy -- "$ANIME_FINAL" "$PET_FINAL"
-npm run articles:approval:owner-edit -- --queue-id 4d70bc35-5a93-4c6e-b692-7c581d1fe595 --expected-final-hash "$(sha256sum "$ANIME_FINAL" | cut -d ' ' -f 1)" --operator Claude --reason 'Owner copy repair: claim older milestone rows' --apply
-npm run articles:approval:owner-edit -- --queue-id 98553ff2-8131-4ebe-8df6-359f19675abc --expected-final-hash "$(sha256sum "$PET_FINAL" | cut -d ' ' -f 1)" --operator Claude --reason 'Owner copy repair: Halloween Egg finishers' --apply
-npm run articles:publication:drain -- --retry-exhausted --queue-id 379df1f3-3dcf-41a6-87f0-0dae1d0e925e --queue-id 4d70bc35-5a93-4c6e-b692-7c581d1fe595 --queue-id 91b473f2-6c02-4a8f-999e-6c71be79a7ba --queue-id 98553ff2-8131-4ebe-8df6-359f19675abc --operator Claude --reason 'Owner repairs reviewed; fresh freeze and guarded publication retry' --apply
-```
-
-The fifteen-minute publication timer then performs the normal drain. An explicitly requested immediate drain uses `npm run articles:publication:drain -- --apply`; it processes all due authorized intents. Retry setup itself never launches it. If recovery reports a busy outbox or pipeline, wait for its owner to finish and rerun the same request. Runtime preparation requires the released SHA-bound GitHub dependency package; see [runtime activation](../operations/deployment.md) and the installer commands in [homelab operations](../infrastructure/homelab.md#github-qa-runtime-activation).
-
+Edit and approve copy before resetting a budget. Find the article's file from the queue's `result_path` (`articles:queue:list -- --status completed --json`); stop if the ID is missing. After a reset, the fifteen-minute timer runs the normal drain, which handles every due intent, not just the reset ones. If the outbox or pipeline is busy, wait for it and rerun the same command.
 
 After each writing pass and localized editorial edit, the controller reconciles `media.json` with the body. Unused verified images keep their URLs and evidence, pass readiness and stay out of promotion and provenance sync. The controller syncs placed images' headings and alt text; unresolved image defects return to writing while its revision remains, or block locally when that budget is exhausted.
 

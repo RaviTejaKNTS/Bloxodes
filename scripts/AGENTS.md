@@ -270,7 +270,6 @@ The publication drain records `exhaustionReportedAt` and reports exhaustion once
 - `articles:publication:drain -- --retry-exhausted --queue-id <UUID> [--queue-id <UUID>] --operator <name> --reason <text> --apply` audits an exact exhausted/unpublished budget reset without launching publication.
 - `articles:approval:owner-edit -- --queue-id <UUID> --expected-final-hash <SHA256> --operator <name> --reason <text> --apply` records an owner copy approval after the copy gate, preserving prior evidence and all GitHub QA/publication gates.
 
-
 ## October 2 reliability controls
 
 Minecraft commands live under `scripts/minecraft`. Use `publish:minecraft-wiki` for the reviewed game/wiki pair, `sync:minecraft-collection-runtime` for explicit reviewed manifests, `verify:minecraft-collection-final` for database/readback/route checks and `publish:minecraft-tools` for exact tool metadata/rule files. The wrappers share existing franchise publishers and guards. Source-pack acquisition and authoring artifacts remain ignored; they must not become runtime filesystem dependencies. This implementation targets managed development, with no automatic production release.
