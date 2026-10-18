@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 import { createClient } from "@supabase/supabase-js";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import { artifactHashes, saveJson, type PipelineState } from "./article-pipeline";
-import { assertExhaustedUnpublishedIntent, type PublicationIntent } from "./article-publication-outbox";
+import { assertUnpublishedIntent, type PublicationIntent } from "./article-publication-outbox";
 import { exactQueueIds, ownerEvidence, parseOwnerArgs } from "./article-owner-actions";
 import { resolveArticleDevCredentials } from "./article-queue-env";
 
@@ -30,7 +30,7 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
     const { data: row, error } = await db.from("article_generation_queue").select("id,status,result_slug,result_path,production_url").eq("id", id).eq("workflow_mode", "agent_runner").maybeSingle();
     if (error) throw new Error(error.message);
     const intent = JSON.parse(await readFile(path.join(root, "tmp/article-publication", `${id}.json`), "utf8")) as PublicationIntent;
-    assertExhaustedUnpublishedIntent(intent, id, row ?? undefined);
+    assertUnpublishedIntent(intent, id, row ?? undefined);
     if (!row?.result_path || path.isAbsolute(row.result_path)) throw new Error("Owner approval requires a stored relative pipeline result_path.");
     const pipeline = await realpath(path.join(root, "tmp/article-pipeline"));
     const finalPath = await realpath(path.resolve(root, row.result_path));
@@ -59,6 +59,11 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
     execFileSync(process.execPath, ["--import", pathToFileURL(createRequire(import.meta.url).resolve("tsx")).href, path.join(root, "scripts/content/check-public-copy.ts"), finalPath], { cwd: root, stdio: "inherit", timeout: 60_000 });
     if (JSON.stringify(await artifactHashes(content)) !== JSON.stringify(hashes)) throw new Error("Article inputs changed during copy validation.");
     let approval = state.ownerApprovals?.slice(-1).pop();
+    // Resume a crash after the completed approval was saved but before the outbox.
+    if (approval?.status === "completed" && state.artifacts["final.json"] === expectedHash && approval.operator === evidence.operator && approval.reason === evidence.reason && JSON.stringify(approval.approvedArtifacts) === JSON.stringify(hashes)) {
+      await makeEditedIntentDue(root, intent);
+      return;
+    }
     if (approval?.status === "pending") {
       if (JSON.stringify(approval.approvedArtifacts) !== JSON.stringify(hashes) || JSON.stringify(approval.previousArtifacts) !== JSON.stringify(state.artifacts) || approval.operator !== evidence.operator || approval.reason !== evidence.reason) throw new Error("Pending owner approval differs; restore its exact reviewed inputs and operator request.");
     } else {
@@ -74,12 +79,20 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
       owner_approval: { operator: approval.operator, at: approval.at, previous_final_hash: approval.previousArtifacts["final.json"] },
     });
     state.history.push({ stage: "editorial_review", attempt: state.attempts.editorial_review ?? 0, at: approval.at, decision: { status: "completed", summary: `Owner approval: ${approval.reason}`, findings: [], repair_stage: null, accepted_missing: [] } });
-    state.history.push({ stage: "copy_check", attempt: state.attempts.copy_check ?? 0, at: approval.at, decision: { status: "completed", summary: "Owner edit passed content:check-copy; exact-content managed QA remains required.", findings: [], repair_stage: null, accepted_missing: [], delegatedToCi: true } });
+    state.history.push({ stage: "copy_check", attempt: state.attempts.copy_check ?? 0, at: approval.at, decision: { status: "completed", summary: "Owner edit passed content:check-copy; exact-content managed QA remains required.", findings: [], repair_stage: null, accepted_missing: [] } });
     state.artifacts = hashes;
     approval.status = "completed";
     await saveJson(stateFile, state);
+    await makeEditedIntentDue(root, intent);
     console.log(`Recorded owner approval for ${id} at ${expectedHash}; publication budget unchanged.`);
   } finally { if (unlockRun) await unlockRun(); await unlock(); }
+}
+
+async function makeEditedIntentDue(root: string, intent: PublicationIntent) {
+  // Keep exhausted budgets explicit; all other approved edits are due again.
+  delete intent.copyBlocked;
+  if (intent.attempts < 6) { delete intent.nextAttemptAt; delete intent.error; }
+  await saveJson(path.join(root, "tmp/article-publication", `${intent.queueId}.json`), intent);
 }
 
 async function main() {

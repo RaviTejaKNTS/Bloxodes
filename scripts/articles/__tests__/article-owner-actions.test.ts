@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm, symlink } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { authorizePublication, retryExhaustedIntents, drainPublications } from "../article-publication-outbox";
+import { authorizePublication, retryExhaustedIntents, drainPublications, publicationDue } from "../article-publication-outbox";
 import { approveOwnerArticleEdit } from "../approve-owner-article-edit";
 import { artifactHashes, saveJson } from "../article-pipeline";
 import { resolveReleaseArtifactPath } from "../release-completed-articles";
@@ -30,6 +30,8 @@ async function fixture(t: any) {
   t.after(async () => { globalThis.fetch = original; await rm(root, { recursive: true, force: true }); });
   for (const id of ids) {
     await authorizePublication(root, id);
+    rows.find(row => row.id === id)!.result_path = `tmp/content-workspace/${id}/final.json`;
+    await saveJson(path.join(root, rows.find(row => row.id === id)!.result_path), { title: "Test", slug: "test", content_md: "Collect the reward." });
     await saveJson(intentFile(id), { ...await read(intentFile(id)), attempts: 6, error: "previous error", exhaustionReportedAt: new Date().toISOString(), nextAttemptAt: new Date(Date.now() + 3600_000).toISOString() });
   }
   return { root, rows, intentFile };
@@ -81,6 +83,7 @@ async function articleFixture(t: any, text: string) {
   const finalPath = path.join(content, "final.json"), stateFile = path.join(run, "state.json"), reviewFile = path.join(run, "editorial_review.json");
   await saveJson(path.join(content, "brief.md"), "unchanged brief"); await saveJson(path.join(content, "media.json"), { entries: [] });
   await saveJson(finalPath, { title: "Test", slug: "test", content_md: text });
+  fixtureData.rows[0].result_path = `tmp/article-pipeline/${ids[0]}/content/final.json`;
   const originalHashes = await artifactHashes(content);
   const previousReview = { status: "completed", input_hashes: originalHashes, summary: "Original reviewer evidence" };
   await saveJson(reviewFile, previousReview);
@@ -103,7 +106,7 @@ for (const [before, after] of edits) test(`owner copy approval binds repaired by
   const state = await read(f.stateFile), review = await read(f.reviewFile);
   assert.equal(state.artifacts["final.json"], hash); assert.deepEqual(review.input_hashes, state.artifacts);
   assert.deepEqual(state.ownerApprovals[0].previousArtifacts, f.originalHashes); assert.deepEqual(state.ownerApprovals[0].previousReview, f.previousReview);
-  assert.equal(state.ownerApprovals[0].status, "completed"); assert.equal(state.history.slice(-1).pop().decision.delegatedToCi, true);
+  assert.equal(state.ownerApprovals[0].status, "completed"); assert.equal(state.history.slice(-1).pop().decision.delegatedToCi, undefined);
   assert.equal(await readFile(f.intentFile(), "utf8"), oldIntent);
   assert.equal(await resolveReleaseArtifactPath(f.finalPath, ids[0], "test", f.root), f.finalPath);
   state.ownerApprovals[0].status = "pending"; state.artifacts = f.originalHashes; await saveJson(f.stateFile, state);
@@ -140,4 +143,42 @@ test("owner CLI requires explicit apply, identity, reason and exact hash and rej
   assert.throws(() => parseOwnerArgs(["--queue-id", ids[0], "--apply"]), /operator/);
   assert.throws(() => parseOwnerArgs([...base, "--apply"], true), /expected-final-hash/);
   assert.equal(parseOwnerArgs([...base, "--apply", "--expected-final-hash", "a".repeat(64)], true).expectedHash, "a".repeat(64));
+});
+
+for (const blocked of [false, true]) test(`owner approval makes a non-exhausted ${blocked ? "copy-blocked" : "backed-off"} intent due without a budget reset`, async t => {
+  const f = await articleFixture(t, "Original copy.");
+  const intent = await read(f.intentFile());
+  intent.attempts = 2;
+  delete intent.exhaustionReportedAt;
+  if (blocked) intent.copyBlocked = { finalHash: f.originalHashes["final.json"], findings: ["Old copy finding"], reportedAt: new Date().toISOString() };
+  await saveJson(f.intentFile(), intent);
+  await saveJson(f.finalPath, { title: "Test", slug: "test", content_md: "Get fully clear." });
+  const hash = (await artifactHashes(f.content))["final.json"];
+  await approveOwnerArticleEdit(f.root, dev, ids[0], hash, "owner", "copy repair");
+  const updated = await read(f.intentFile());
+  assert.equal(updated.attempts, 2); assert.equal(updated.authorizedAt, intent.authorizedAt);
+  assert.equal(updated.copyBlocked, undefined); assert.equal(updated.error, undefined); assert.equal(updated.nextAttemptAt, undefined);
+  assert.equal(publicationDue(updated), true);
+  // A crash after saving approval but before clearing the intent can resume exactly.
+  await saveJson(f.intentFile(), intent);
+  await approveOwnerArticleEdit(f.root, dev, ids[0], hash, "owner", "copy repair");
+  assert.deepEqual(await read(f.intentFile()), updated);
+  assert.equal((await read(f.stateFile)).ownerApprovals.length, 1);
+});
+
+test("non-exhausted owner approval retains authorization, unpublished, dispatch and copy guards", async t => {
+  const f = await articleFixture(t, "Original copy.");
+  const base = { ...await read(f.intentFile()), attempts: 2 };
+  await saveJson(f.finalPath, { title: "Test", slug: "test", content_md: "Get fully clear." });
+  const hash = (await artifactHashes(f.content))["final.json"];
+  for (const patch of [{ publishedAt: new Date().toISOString() }, { dispatchHash: "a".repeat(64) }, { submittedAt: new Date().toISOString() }, { githubRunId: 1 }, { githubRunUrl: "https://github.com/run" }, { authorizedAt: "bad" }, { queueId: ids[1] }, { attempts: -1 }]) {
+    await saveJson(f.intentFile(), { ...base, ...patch });
+    await assert.rejects(approveOwnerArticleEdit(f.root, dev, ids[0], hash, "owner", "repair"));
+  }
+  await saveJson(f.intentFile(), base);
+  f.rows[0].production_url = "https://bloxodes.com/articles/test";
+  await assert.rejects(approveOwnerArticleEdit(f.root, dev, ids[0], hash, "owner", "repair"), /unpublished/);
+  f.rows[0].production_url = null;
+  f.rows[0].status = "published";
+  await assert.rejects(approveOwnerArticleEdit(f.root, dev, ids[0], hash, "owner", "repair"), /unpublished/);
 });

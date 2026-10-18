@@ -3,7 +3,7 @@ import test from "node:test";
 import { mkdtemp, readFile, mkdir, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { authorizePublication, acknowledgePublishedIntents, drainPublications, publicationDue } from "../article-publication-outbox";
+import { authorizePublication as authorizeIntent, acknowledgePublishedIntents, drainPublications, publicationDue } from "../article-publication-outbox";
 import { saveJson, runArticlePipeline, type Decision } from "../article-pipeline";
 import { applyLocalCorrections } from "../article-local-correction";
 import { normalizeImageAlt } from "../../content/article-image-readiness";
@@ -11,10 +11,14 @@ import { briefUniverseId, ensureArticleGameIdentity, resolveOfficialArticleGame 
 import { assertArticleUniverseReadback } from "../../content/article-final-readback";
 const dev = { url: "https://test.supabase.co", serviceRole: "test-placeholder" };
 const ids = ["11111111-1111-4111-8111-111111111111", "22222222-2222-4222-8222-222222222222"];
+async function authorizePublication(root: string, id: string) {
+  await authorizeIntent(root, id);
+  await saveJson(path.join(root, "tmp/content-workspace/final.json"), { title: "Test", slug: "test", content_md: "Collect the reward." });
+}
 test("failed publication survives restart, backs off, and does not block another completed article", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-"));
   const original = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed" }), { headers: { "Content-Type": "application/json" } });
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
   try {
     for (const id of ids) await authorizePublication(root, id);
     const attempted: string[] = [];
@@ -42,7 +46,7 @@ test("publication retries remain bounded even if the child dies before acknowled
 test("exhaustion alerts once across restarts while health retains every blocked intent", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-exhausted-"));
   const original = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed" }), { headers: { "Content-Type": "application/json" } });
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
   const file = (id: string) => path.join(root, "tmp/article-publication", `${id}.json`);
   const health = async () => JSON.parse(await readFile(path.join(root, "tmp/article-publication/health.json"), "utf8"));
   try {
@@ -73,7 +77,7 @@ test("exhaustion alerts once across restarts while health retains every blocked 
 test("the sixth synchronous failure surfaces once and does not block another publication", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "article-outbox-last-attempt-"));
   const original = globalThis.fetch;
-  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed" }), { headers: { "Content-Type": "application/json" } });
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
   try {
     for (const id of ids) await authorizePublication(root, id);
     const file = path.join(root, "tmp/article-publication", `${ids[0]}.json`);
@@ -100,7 +104,7 @@ test("recorded GitHub outcomes reconcile before exhaustion and new failures surf
   await mkdir(bin);
   await writeFile(path.join(bin, "gh"), `#!${process.execPath}\nprocess.stdout.write(require("node:fs").readFileSync(${JSON.stringify(response)}, "utf8"));\n`, { mode: 0o700 });
   process.env.PATH = `${bin}${path.delimiter}${originalPath}`;
-  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed" }), { headers: { "Content-Type": "application/json" } });
+  globalThis.fetch = async () => new Response(JSON.stringify({ status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" }), { headers: { "Content-Type": "application/json" } });
   try {
     await authorizePublication(root, ids[0]);
     const file = path.join(root, "tmp/article-publication", `${ids[0]}.json`);
@@ -296,8 +300,8 @@ test("persistent-state symlinks preserve approval checks and reject changed arti
   const run = path.join(stateRoot, "article-pipeline", ids[0]);
   const content = path.join(run, "content"); await mkdir(content, { recursive: true });
   for (const file of ["brief.md", "media.json", "final.json"]) await writeFile(path.join(content, file), "approved");
-  await saveJson(path.join(run, "state.json"), { status: "completed", stage: "done", job: { id: ids[0], slug: "test" }, artifacts: await artifactHashes(content), history: ["copy_check", "image_check", "import_verify", "browser_verify"].map(stage => ({ stage, decision: { status: "completed" } })) });
-  await saveJson(path.join(run, "editorial_review.json"), { status: "completed" });
+  await saveJson(path.join(run, "state.json"), { status: "completed", stage: "done", job: { id: ids[0], slug: "test" }, artifacts: await artifactHashes(content), history: ["copy_check", "image_check", "import_verify", "browser_verify"].map(stage => ({ stage, decision: { status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" } })) });
+  await saveJson(path.join(run, "editorial_review.json"), { status: "completed", result_slug: "test", result_path: "tmp/content-workspace/final.json" });
   const logical = path.join(root, "tmp/article-pipeline", ids[0], "content/final.json");
   assert.equal(await resolveReleaseArtifactPath(logical, ids[0], "test", root), path.join(content, "final.json"));
   await writeFile(path.join(content, "final.json"), "changed");
