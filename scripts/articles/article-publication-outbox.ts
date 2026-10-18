@@ -10,8 +10,11 @@ import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import {execFileSync} from 'node:child_process';
 import {matchingArticleRun,articleRunOutcome} from '../ci/article-publication-state.mjs';
 import { exactQueueIds, ownerEvidence, parseOwnerArgs } from './article-owner-actions';
+import { createHash } from "node:crypto";
+import { publicCopyFindings } from "../content/check-public-copy";
+import { resolveReleaseArtifactPath } from "./release-completed-articles";
 
-export type PublicationIntent = { version: 1; queueId: string; authorizedAt: string; attempts: number; nextAttemptAt?: string; publishedAt?: string; error?: string; exhaustionReportedAt?: string; dispatchHash?: string; submittedAt?: string; githubRunId?: number; githubRunUrl?: string; ownerRetries?: (ReturnType<typeof ownerEvidence> & { previous: Omit<PublicationIntent, "ownerRetries"> })[] };
+export type PublicationIntent = { version: 1; queueId: string; authorizedAt: string; attempts: number; nextAttemptAt?: string; publishedAt?: string; error?: string; exhaustionReportedAt?: string; copyBlocked?: { finalHash: string; findings: string[]; reportedAt: string }; dispatchHash?: string; submittedAt?: string; githubRunId?: number; githubRunUrl?: string; ownerRetries?: (ReturnType<typeof ownerEvidence> & { previous: Omit<PublicationIntent, "ownerRetries"> })[] };
 const directory = (root: string) => path.join(root, "tmp/article-publication");
 function intentPath(root: string, id: string) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error("Publication intent requires an exact queue UUID.");
@@ -24,7 +27,7 @@ export async function authorizePublication(root: string, id: string) {
   await saveJson(file, { version: 1, queueId: id, authorizedAt: new Date().toISOString(), attempts: 0 } satisfies PublicationIntent);
 }
 export function publicationDue(intent: PublicationIntent, now = Date.now()) {
-  return !intent.publishedAt && intent.attempts < 6 && (!intent.nextAttemptAt || Date.parse(intent.nextAttemptAt) <= now);
+  return !intent.publishedAt && !intent.copyBlocked && intent.attempts < 6 && (!intent.nextAttemptAt || Date.parse(intent.nextAttemptAt) <= now);
 }
 export async function acknowledgePublishedIntents(root: string, dev: { url: string; serviceRole: string }, ids: string[]) {
   if (!ids.length || ids.length > 20 || new Set(ids).size !== ids.length || ids.some(id => !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id))) throw new Error("Acknowledgement requires 1-20 exact unique queue UUIDs.");
@@ -78,7 +81,11 @@ export async function retryExhaustedIntents(root: string, dev: { url: string; se
   } finally { await unlock(); }
 }
 export function assertExhaustedUnpublishedIntent(intent: PublicationIntent, id: string, row?: { status: string; result_slug: string | null; production_url: string | null }) {
-  if (intent.version !== 1 || intent.queueId !== id || !Number.isFinite(Date.parse(intent.authorizedAt)) || !Number.isInteger(intent.attempts) || intent.attempts < 6) throw new Error(`${id}: intent must have an exhausted original authorization.`);
+  assertUnpublishedIntent(intent, id, row);
+  if (intent.attempts < 6) throw new Error(`${id}: intent must have an exhausted original authorization.`);
+}
+export function assertUnpublishedIntent(intent: PublicationIntent, id: string, row?: { status: string; result_slug: string | null; production_url: string | null }) {
+  if (intent.version !== 1 || intent.queueId !== id || !Number.isFinite(Date.parse(intent.authorizedAt)) || !Number.isInteger(intent.attempts) || intent.attempts < 0) throw new Error(`${id}: intent must have a valid original authorization.`);
   if (intent.publishedAt || row?.status !== "completed" || !row.result_slug || row.production_url) throw new Error(`${id}: queue and intent must be completed and unpublished.`);
   if (intent.dispatchHash || intent.submittedAt || intent.githubRunId || intent.githubRunUrl) throw new Error(`${id}: reconcile the recorded GitHub dispatch with the normal drain before owner recovery.`);
 }
@@ -94,9 +101,9 @@ export async function drainPublications(root: string, dev: { url: string; servic
       const file = path.join(directory(root), name);
       try {
         const intent = JSON.parse(await readFile(file, "utf8")) as PublicationIntent;
-        if (intent.version !== 1 || !Number.isInteger(intent.attempts) || intent.attempts < 0 || !Number.isFinite(Date.parse(intent.authorizedAt)) || (intent.nextAttemptAt && !Number.isFinite(Date.parse(intent.nextAttemptAt))) || (intent.exhaustionReportedAt !== undefined && !Number.isFinite(Date.parse(intent.exhaustionReportedAt))) || path.basename(intentPath(root, intent.queueId)) !== name) throw new Error(`Invalid publication intent ${name}`);
+        if (intent.version !== 1 || !Number.isInteger(intent.attempts) || intent.attempts < 0 || !Number.isFinite(Date.parse(intent.authorizedAt)) || (intent.nextAttemptAt && !Number.isFinite(Date.parse(intent.nextAttemptAt))) || (intent.exhaustionReportedAt !== undefined && !Number.isFinite(Date.parse(intent.exhaustionReportedAt))) || (intent.copyBlocked && (!/^[0-9a-f]{64}$/.test(intent.copyBlocked.finalHash) || !Array.isArray(intent.copyBlocked.findings) || !intent.copyBlocked.findings.length || intent.copyBlocked.findings.some(f => typeof f !== "string") || !Number.isFinite(Date.parse(intent.copyBlocked.reportedAt)))) || path.basename(intentPath(root, intent.queueId)) !== name) throw new Error(`Invalid publication intent ${name}`);
         if (intent.publishedAt) continue;
-        const { data: row, error } = await db.from("article_generation_queue").select("status,result_slug,production_url").eq("id", intent.queueId).eq("workflow_mode", "agent_runner").maybeSingle();
+        const { data: row, error } = await db.from("article_generation_queue").select("status,result_slug,result_path,production_url").eq("id", intent.queueId).eq("workflow_mode", "agent_runner").maybeSingle();
         if (error) throw new Error(error.message);
         // An exact guarded manual recovery may finish after the outbox exhausts.
         // Reconcile its verified queue acknowledgement without resetting attempts.
@@ -132,8 +139,27 @@ export async function drainPublications(root: string, dev: { url: string; servic
           }
           continue;
         }
-        if (!publicationDue(intent)) continue;
-        if (!row || !["completed", "published"].includes(row.status)) continue;
+        if (!intent.copyBlocked && !publicationDue(intent)) continue;
+        if (row?.status !== "completed") continue;
+        if (!row.result_path || path.isAbsolute(row.result_path) || !row.result_slug) throw new Error("Copy pre-check requires the completed article's stored relative result path and slug.");
+        const finalPath = await resolveReleaseArtifactPath(path.resolve(root, row.result_path), intent.queueId, row.result_slug, root);
+        const bytes = await readFile(finalPath);
+        const finalHash = createHash("sha256").update(bytes).digest("hex");
+        if (intent.copyBlocked?.finalHash !== finalHash) {
+          const findings = publicCopyFindings(JSON.parse(bytes.toString("utf8")), finalPath).map(f => `${f.field} :: ${f.rule}: ${f.excerpt}`);
+          if (findings.length) {
+            intent.copyBlocked = { finalHash, findings, reportedAt: new Date().toISOString() };
+            intent.error = `Copy pre-check blocked: ${findings.join("; ")}`;
+            await saveJson(file, intent);
+            reportFailure(`${intent.queueId}: ${intent.error}`);
+            continue;
+          }
+          if (intent.copyBlocked) {
+            delete intent.copyBlocked; delete intent.error; delete intent.nextAttemptAt;
+            await saveJson(file, intent);
+          }
+        }
+        if (intent.copyBlocked) { issues.push(`${intent.queueId}: ${intent.error}`); continue; }
         // Reserve retry durably before subprocess: process loss also consumes a bounded attempt.
         intent.attempts++;
         intent.nextAttemptAt = new Date(Date.now() + Math.min(360, 15 * 2 ** (intent.attempts - 1)) * 60_000).toISOString();

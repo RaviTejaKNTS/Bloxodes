@@ -1,5 +1,7 @@
 import fs from "node:fs/promises";
+import { realpathSync } from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { marked } from "marked";
 import { load } from "cheerio";
 import { publicProvenanceMatch } from "./public-provenance";
@@ -234,6 +236,10 @@ async function readJson(file: string): Promise<unknown> {
 async function scanFile(file: string): Promise<Finding[]> {
   const absolute = path.resolve(file);
   const parsed = await readJson(absolute);
+  return publicCopyFindings(parsed, file);
+}
+
+export function publicCopyFindings(parsed: unknown, file: string): Finding[] {
   const article = isRecord(parsed) && typeof parsed.content_md === "string" &&
     typeof parsed.title === "string" && typeof parsed.slug === "string";
   const strings = collectPublicStrings(parsed);
@@ -278,7 +284,7 @@ async function main() {
   process.exitCode = 1;
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
