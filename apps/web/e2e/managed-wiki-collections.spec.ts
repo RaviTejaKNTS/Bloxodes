@@ -3,6 +3,10 @@ import fs from 'node:fs';
 import {buildCollectionPagination} from '../src/components/game-collections/collection-pagination';
 import type {WikiQaCollection, WikiQaItem, WikiQaState} from '../../../scripts/ci/managed-wiki-qa-types';
 
+// This suite includes authenticated sessions. Worker-scoped recording options
+// belong at file scope, and session cookies must never enter traces or videos.
+test.use({trace: 'off', video: 'off'});
+
 const state: WikiQaState | null = process.env.MANAGED_WIKI_STATE
   ? JSON.parse(fs.readFileSync(process.env.MANAGED_WIKI_STATE, 'utf8')) : null;
 const canonicalOrigin = 'https://bloxodes.com';
@@ -206,8 +210,6 @@ for (const entry of state?.collections ?? []) {
     await page.screenshot({path: info.outputPath('collectible-local-reset.png'), fullPage: true});
   });
   test.describe(`${entry.path} temporary account`, () => {
-    // Session cookies must never enter uploaded traces or videos.
-    test.use({trace: 'off', video: 'off'});
     test('persists account ticks, filters and reset after local storage is cleared', async ({page, context}, info) => {
       test.setTimeout(120_000);
       const accounts: Array<{project: string; token: string}> = JSON.parse(fs.readFileSync(process.env.MANAGED_WIKI_AUTH!, 'utf8'));
