@@ -123,6 +123,8 @@ Wiki publication revalidates paginated index paths. The index carries `wiki-inde
 6. Review hub-to-collection navigation, item counts, cards/tables, images, metadata, structured data, search, sitemap, and revalidation behavior.
 7. Promote through a controlled idempotent seed/upsert or forward-only migration, then verify production.
 
+For additional selected Roblox wiki coverage, the optional PR selection contract binds the frozen bundle to a reviewed source SHA and an earlier successful managed QA run. `scripts/ci/managed-wiki-qa.ts` derives expectations from those inputs and compares full runtime fields, revision metadata and prepared media mappings before and after browser QA. The desktop/mobile suite checks selected search results, metadata, structured data, loaded images, HTML size, section navigation and actual pagination. A small collection checks the absent paginator and rejected continuation instead of inventing a second page. Collectible pages also exercise local ticks, reload, unticking, filters, reset and account progress after clearing local storage, with owned test-account cleanup. Any change to frozen content requires a new bundle, staging run and selected QA. See the deployment doc for the receipt and credential boundaries; these checks supplement the production release workflow.
+
 For GTA authoring, use `verify:gta-wiki-final`, `sync:gta-collection-runtime`, and `verify:gta-collection-final`. The verifiers remain managed-development-only. Reviewed production promotion uses `sync:gta-wiki-runtime`, `sync:gta-wiki-media`, and `sync:gta-collection-runtime`; each command is dry-run-first and requires `--apply --allow-prod` against the recognized production target.
 
 ### Homelab preview handoff
