@@ -283,6 +283,7 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 
 - `articles:runtime:prepare -- --sha <commit>` prepares an independent versioned runtime and npm install, copies existing article state once, links protected profiles/shared leases, and runs readiness. The sudo installer activates only a checked exact SHA while jobs are inactive.
 - `articles:publication:drain -- --apply` consumes durable, previously authorized exact queue IDs with bounded retry/backoff and production approval verification. It can mutate production only through the guarded publisher; never use it to authorize arbitrary manual completed work.
+- Exhausted intents persist `exhaustionReportedAt` and fail once, while every later `tmp/article-publication/health.json` retains their blocker. New failures and reconciliation errors remain non-zero. `scripts/ci/content-bundle.mjs` excludes hidden workspace entries before freezing and preserves visible symlink/path/size/duplicate guards.
 - `articles:automation:audit` reads managed queue and installed timer health, writes an ignored report, and exits nonzero for actionable findings.
 - `articles:inspect-image -- <url> <workspace>` captures a source in headless Chrome for model visual inspection; it writes only screenshots, grants no image/content approval, and needs no database credentials.
 # GTA checklist release support (2026-09-14)

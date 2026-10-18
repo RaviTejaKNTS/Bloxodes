@@ -265,6 +265,8 @@ Historical wiki controller only, retired October 15: the wiki readiness command 
 
 For an exact manual publication recovery, `articles:publication:drain -- --acknowledge-published --queue-id <UUID> [--queue-id <UUID>] --apply` only closes existing authorized intents whose queue rows already acknowledge matching canonical published URLs. It never launches a release, scans for other due publications, or resets attempts.
 
+The publication drain reports each exhausted intent once, persisting `exhaustionReportedAt` under its existing lock. Later drains retain the blocker in `tmp/article-publication/health.json` and still fail for new failures or reconciliation errors. This marker never resets attempts or grants publication/rejection. Frozen bundle collection skips hidden workspace entries, including model caches and credential directories; visible symlinks and unsafe bundle paths still fail.
+
 ## October 2 reliability controls
 
 Minecraft commands live under `scripts/minecraft`. Use `publish:minecraft-wiki` for the reviewed game/wiki pair, `sync:minecraft-collection-runtime` for explicit reviewed manifests, `verify:minecraft-collection-final` for database/readback/route checks and `publish:minecraft-tools` for exact tool metadata/rule files. The wrappers share existing franchise publishers and guards. Source-pack acquisition and authoring artifacts remain ignored; they must not become runtime filesystem dependencies. This implementation targets managed development, with no automatic production release.

@@ -26,6 +26,26 @@ async function freeze(folder, batch) {
   return decodeBundle(buffer, createHash("sha256").update(buffer).digest("hex"));
 }
 
+test("freezing skips hidden model state and credential directories while preserving authoring bytes", async t => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), "article-hidden-bundle-"));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  const final = '{"title":"Approved article"}\n';
+  await fs.mkdir(path.join(root, ".model-tmp/claude-1000"), { recursive: true });
+  await fs.mkdir(path.join(root, ".aws"));
+  await fs.mkdir(path.join(root, "media/.cache"), { recursive: true });
+  await fs.writeFile(path.join(root, "final.json"), final);
+  await fs.writeFile(path.join(root, ".model-tmp/claude-1000/cache-break-state.json"), "private state");
+  await fs.writeFile(path.join(root, ".aws/config.json"), "private config");
+  await fs.writeFile(path.join(root, ".hidden.json"), "private file");
+  await fs.writeFile(path.join(root, "media/.cache/index.json"), "nested private state");
+  await fs.writeFile(path.join(root, "media/approved.png"), "approved image");
+  const bundle = await freeze(root, {});
+  assert.deepEqual(bundle.files.map(file => file.path), ["collections/pets/final.json", "collections/pets/media/approved.png"]);
+  assert.equal(Buffer.from(bundle.files[0].base64, "base64").toString("utf8"), final);
+  await fs.symlink(path.join(root, "final.json"), path.join(root, "linked.json"));
+  await assert.rejects(folderInputs(root, "collections/pets"), /cannot contain symlinks/);
+});
+
 test("zero-image collections retain their declared media root through freeze and extraction", async t => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "wiki-empty-bundle-"));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
