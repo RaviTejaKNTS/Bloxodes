@@ -157,6 +157,13 @@ export const GOOGLE_INDEXABLE_GAMES = [
     quizSlugs: [],
     checklistSlugs: []
   },
+  {
+    game: "illegal-soccer",
+    wikiSlug: "illegal-soccer",
+    codesSlugs: [],
+    quizSlugs: [],
+    checklistSlugs: []
+  },
 ] as const satisfies readonly GoogleIndexableGame[];
 
 const gamePaths: readonly PublicPath[] = GOOGLE_INDEXABLE_GAMES.flatMap((game): PublicPath[] => [

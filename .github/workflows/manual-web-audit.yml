@@ -13,6 +13,7 @@ on:
           - full-sitemap-crawl
           - render
           - published-content
+          - wiki-collections
       site_url:
         description: "Site origin to inspect"
         required: true
@@ -31,6 +32,11 @@ on:
         required: false
         default: ""
         type: string
+      collection_paths:
+        description: "For wiki-collections: comma-separated /wiki/<game>/<collection> paths (1-10)"
+        required: false
+        default: ""
+        type: string
 
 concurrency:
   group: manual-web-audit
@@ -41,6 +47,7 @@ permissions:
 
 jobs:
   audit:
+    if: ${{ inputs.audit != 'wiki-collections' }}
     runs-on: ubuntu-latest
     environment: production
     timeout-minutes: 90
@@ -89,5 +96,67 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: manual-web-audit-${{ inputs.audit }}-${{ github.run_id }}
+          path: tmp/test-reports
+          if-no-files-found: ignore
+
+  wiki-collections:
+    if: ${{ inputs.audit == 'wiki-collections' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      TEST_BASE_URL: ${{ inputs.site_url }}
+      PLAYWRIGHT_SKIP_WEBSERVER: "1"
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Validate selected wiki collections
+        env:
+          COLLECTION_PATHS_INPUT: ${{ inputs.collection_paths }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const paths = process.env.COLLECTION_PATHS_INPUT.split(',').map(value => value.trim());
+          const valid = /^\/wiki\/[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
+          if (paths.length < 1 || paths.length > 10 || paths.some(value => !valid.test(value)) || new Set(paths).size !== paths.length) {
+            throw new Error('Select 1-10 distinct /wiki/<game>/<collection> paths, separated by commas. No query, fragment, or trailing slash.');
+          }
+          fs.appendFileSync(process.env.GITHUB_ENV, `WIKI_COLLECTION_AUDIT_PATHS=${paths.join(',')}\n`);
+          NODE
+      - name: Audit selected wiki collection pages
+        run: npm run test:render -- apps/web/e2e/wiki-collection-audit.spec.ts
+      - name: Measure selected collection HTML
+        if: success()
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const { spawnSync } = require('node:child_process');
+          const root = 'tmp/test-reports/playwright-results';
+          function reports(dir) {
+            return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+              const name = path.join(dir, entry.name);
+              return entry.isDirectory() ? reports(name) : entry.name === 'collection-report.json' ? [name] : [];
+            });
+          }
+          const files = reports(root);
+          if (!files.length) throw new Error('No collection browser reports were produced.');
+          const paths = [...new Set(files.flatMap(file => JSON.parse(fs.readFileSync(file, 'utf8')).pagePaths))];
+          const origin = new URL(process.env.TEST_BASE_URL).origin;
+          const args = ['run', 'audit:html-size', '--', ...paths.flatMap(value => ['--url', `${origin}${value}`]), '--concurrency', '2', '--output-dir', 'tmp/test-reports/wiki-collection-html-size', '--fail-on-limit'];
+          const result = spawnSync('npm', args, { stdio: 'inherit' });
+          process.exit(result.status ?? 1);
+          NODE
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: manual-web-audit-wiki-collections-${{ github.run_id }}
           path: tmp/test-reports
           if-no-files-found: ignore
