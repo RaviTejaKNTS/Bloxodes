@@ -9,8 +9,9 @@ import { resolveArticleDevCredentials } from "./article-queue-env";
 import { acquireAgentWorkLock } from "../shared/agent-work-lock";
 import {execFileSync} from 'node:child_process';
 import {matchingArticleRun,articleRunOutcome} from '../ci/article-publication-state.mjs';
+import { exactQueueIds, ownerEvidence, parseOwnerArgs } from './article-owner-actions';
 
-export type PublicationIntent = { version: 1; queueId: string; authorizedAt: string; attempts: number; nextAttemptAt?: string; publishedAt?: string; error?: string; dispatchHash?: string; submittedAt?: string; githubRunId?: number; githubRunUrl?: string };
+export type PublicationIntent = { version: 1; queueId: string; authorizedAt: string; attempts: number; nextAttemptAt?: string; publishedAt?: string; error?: string; exhaustionReportedAt?: string; dispatchHash?: string; submittedAt?: string; githubRunId?: number; githubRunUrl?: string; ownerRetries?: (ReturnType<typeof ownerEvidence> & { previous: Omit<PublicationIntent, "ownerRetries"> })[] };
 const directory = (root: string) => path.join(root, "tmp/article-publication");
 function intentPath(root: string, id: string) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error("Publication intent requires an exact queue UUID.");
@@ -48,17 +49,52 @@ export async function acknowledgePublishedIntents(root: string, dev: { url: stri
     }
   } finally { await unlock(); }
 }
+// Uses the same lock as dispatch; this operation never calls the publisher.
+export async function retryExhaustedIntents(root: string, dev: { url: string; serviceRole: string }, ids: string[], operator: string, reason: string) {
+  exactQueueIds(ids);
+  const evidence = ownerEvidence(operator, reason);
+  const unlock = await acquireAgentWorkLock(directory(root), "publication-owner-retry");
+  if (!unlock) throw new Error("Publication outbox is busy; retry after its owner finishes.");
+  try {
+    const db = createClient(dev.url, dev.serviceRole, { auth: { persistSession: false, autoRefreshToken: false } });
+    const { data: rows, error } = await db.from("article_generation_queue").select("id,status,result_slug,production_url").in("id", ids).eq("workflow_mode", "agent_runner");
+    if (error) throw new Error(error.message);
+    const intents: PublicationIntent[] = [];
+    // Validate the entire selection before changing any budget.
+    for (const id of ids) {
+      const row = rows?.find(row => row.id === id);
+      const intent = JSON.parse(await readFile(intentPath(root, id), "utf8")) as PublicationIntent;
+      assertExhaustedUnpublishedIntent(intent, id, row);
+      intents.push(intent);
+    }
+    for (const intent of intents) {
+      const { ownerRetries = [], ...previous } = intent;
+      intent.ownerRetries = [...ownerRetries, { ...evidence, previous }];
+      intent.attempts = 0;
+      delete intent.nextAttemptAt; delete intent.error; delete intent.exhaustionReportedAt;
+      await saveJson(intentPath(root, intent.queueId), intent);
+      console.log(`Reset publication budget for ${intent.queueId}; normal drain and all publication gates still apply.`);
+    }
+  } finally { await unlock(); }
+}
+export function assertExhaustedUnpublishedIntent(intent: PublicationIntent, id: string, row?: { status: string; result_slug: string | null; production_url: string | null }) {
+  if (intent.version !== 1 || intent.queueId !== id || !Number.isFinite(Date.parse(intent.authorizedAt)) || !Number.isInteger(intent.attempts) || intent.attempts < 6) throw new Error(`${id}: intent must have an exhausted original authorization.`);
+  if (intent.publishedAt || row?.status !== "completed" || !row.result_slug || row.production_url) throw new Error(`${id}: queue and intent must be completed and unpublished.`);
+  if (intent.dispatchHash || intent.submittedAt || intent.githubRunId || intent.githubRunUrl) throw new Error(`${id}: reconcile the recorded GitHub dispatch with the normal drain before owner recovery.`);
+}
 export async function drainPublications(root: string, dev: { url: string; serviceRole: string }, release?: (id: string) => Promise<void | { dispatched: true; hash: string }>) {
   const unlock = await acquireAgentWorkLock(directory(root), "publication-outbox");
   if (!unlock) return;
   const issues: string[] = [];
+  const failures: string[] = [];
+  const reportFailure = (message: string) => { issues.push(message); failures.push(message); };
   try {
     const db = createClient(dev.url, dev.serviceRole, { auth: { persistSession: false, autoRefreshToken: false } });
     for (const name of (await readdir(directory(root))).filter(n => /^[0-9a-f-]{36}\.json$/i.test(n))) {
       const file = path.join(directory(root), name);
       try {
         const intent = JSON.parse(await readFile(file, "utf8")) as PublicationIntent;
-        if (intent.version !== 1 || !Number.isInteger(intent.attempts) || intent.attempts < 0 || !Number.isFinite(Date.parse(intent.authorizedAt)) || (intent.nextAttemptAt && !Number.isFinite(Date.parse(intent.nextAttemptAt))) || path.basename(intentPath(root, intent.queueId)) !== name) throw new Error(`Invalid publication intent ${name}`);
+        if (intent.version !== 1 || !Number.isInteger(intent.attempts) || intent.attempts < 0 || !Number.isFinite(Date.parse(intent.authorizedAt)) || (intent.nextAttemptAt && !Number.isFinite(Date.parse(intent.nextAttemptAt))) || (intent.exhaustionReportedAt !== undefined && !Number.isFinite(Date.parse(intent.exhaustionReportedAt))) || path.basename(intentPath(root, intent.queueId)) !== name) throw new Error(`Invalid publication intent ${name}`);
         if (intent.publishedAt) continue;
         const { data: row, error } = await db.from("article_generation_queue").select("status,result_slug,production_url").eq("id", intent.queueId).eq("workflow_mode", "agent_runner").maybeSingle();
         if (error) throw new Error(error.message);
@@ -77,15 +113,25 @@ export async function drainPublications(root: string, dev: { url: string; servic
           if(run) {intent.githubRunId=run.id;intent.githubRunUrl=run.html_url;await saveJson(file,intent);}
           const outcome=articleRunOutcome(run);
           if(outcome==='pending') {
-            if(!run && Date.now()-Date.parse(intent.submittedAt!)>30*60_000) issues.push(`${intent.queueId}: recorded dispatch has no visible GitHub run. Inspect it before retrying.`);
+            if(!run && Date.now()-Date.parse(intent.submittedAt!)>30*60_000) reportFailure(`${intent.queueId}: recorded dispatch has no visible GitHub run. Inspect it before retrying.`);
             continue;
           }
-          if(outcome==='receipt-needed') {issues.push(`${intent.queueId}: GitHub succeeded but the queue has no publication receipt. Inspect ${intent.githubRunUrl}.`);continue;}
+          if(outcome==='receipt-needed') {reportFailure(`${intent.queueId}: GitHub succeeded but the queue has no publication receipt. Inspect ${intent.githubRunUrl}.`);continue;}
           intent.error=`GitHub publication ${intent.githubRunId} ended with ${run?.conclusion || 'unknown'}.`;
           delete intent.dispatchHash;delete intent.submittedAt;delete intent.githubRunId;delete intent.githubRunUrl;
           await saveJson(file,intent);
+          if (intent.attempts < 6) reportFailure(`${intent.queueId}: ${intent.error}`);
         }
-        if (intent.attempts >= 6) { issues.push(`${intent.queueId}: publication retries exhausted; ${intent.error}`); continue; }
+        if (intent.attempts >= 6) {
+          const issue = `${intent.queueId}: publication retries exhausted; ${intent.error}`;
+          issues.push(issue);
+          if (!intent.exhaustionReportedAt) {
+            intent.exhaustionReportedAt = new Date().toISOString();
+            await saveJson(file, intent);
+            failures.push(issue);
+          }
+          continue;
+        }
         if (!publicationDue(intent)) continue;
         if (!row || !["completed", "published"].includes(row.status)) continue;
         // Reserve retry durably before subprocess: process loss also consumes a bounded attempt.
@@ -98,16 +144,27 @@ export async function drainPublications(root: string, dev: { url: string; servic
           if(result?.dispatched && !intent.dispatchHash) await beforeDispatch(result.hash);
           if (!result?.dispatched) { intent.publishedAt = new Date().toISOString(); delete intent.nextAttemptAt; }
           delete intent.error;
-        } catch (error) { intent.error = error instanceof Error ? error.message : String(error); issues.push(`${intent.queueId}: ${intent.error}`); }
+        } catch (error) {
+          intent.error = error instanceof Error ? error.message : String(error);
+          reportFailure(`${intent.queueId}: ${intent.error}`);
+          // The sixth synchronous failure has already surfaced in this run.
+          // A recorded dispatch still needs its GitHub outcome reconciled.
+          if (intent.attempts >= 6 && !intent.dispatchHash) intent.exhaustionReportedAt = new Date().toISOString();
+        }
         await saveJson(file, intent);
-      } catch (error) { issues.push(`${name}: ${error instanceof Error ? error.message : error}`); }
+      } catch (error) { reportFailure(`${name}: ${error instanceof Error ? error.message : error}`); }
     }
     await saveJson(path.join(directory(root), "health.json"), { checkedAt: new Date().toISOString(), issues });
-    if (issues.length) throw new Error(`Article publication needs attention:\n${issues.join("\n")}`);
+    if (failures.length) throw new Error(`Article publication needs attention:\n${failures.join("\n")}`);
   } finally { await unlock(); }
 }
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] === "--retry-exhausted") {
+    const options = parseOwnerArgs(args.slice(1));
+    await retryExhaustedIntents(process.cwd(), resolveArticleDevCredentials(), options.ids, options.operator, options.reason);
+    return;
+  }
   if (args[0] === "--acknowledge-published") {
     if (args[args.length - 1] !== "--apply") throw new Error("Exact publication acknowledgement requires --apply.");
     const ids: string[] = [];
