@@ -29,6 +29,7 @@ You take completed, user-approved work to production: a PR into `production`, Gi
    - After fixes, request a fresh review with `gh workflow run codex-review.yml --ref production -f pull_request=<number>` and inspect its exact-head feedback. Don't expect every push to start a review.
 4. Let `Pull request checks` run. Fix failures through task commits. GitHub owns dependency installs, managed-development schema verification, tests, builds and browser screenshots. Guidance-only PRs skip heavy work.
 5. Use T3 `watch_pull_request` and end the turn while awaiting checks. A wake is evidence to inspect, not approval to merge. Require `Required PR checks` to pass and confirm the approved scope.
+   - T3 watches only pull requests. The production deploy after a merge and dispatched runs such as `Publish selected content` never wake you. Wait for them in the same turn with `gh run watch <run-id> --exit-status`, then do the readback.
 6. Merge with a merge commit so task ancestry stays available for cleanup. GitHub deletes the remote branch after merge.
 7. The production workflow applies schema before the dependent web deployment.
    - It uses the same migration bytes verified in managed development, production history proof, rollback planning, exact-SHA gates and ledger readback.
