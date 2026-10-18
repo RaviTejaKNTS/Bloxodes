@@ -1,7 +1,7 @@
 import {expect, test, type Page, type TestInfo, type Response} from '@playwright/test';
 import fs from 'node:fs';
 import {buildCollectionPagination} from '../src/components/game-collections/collection-pagination';
-import type {WikiQaCollection, WikiQaItem, WikiQaState} from '../../../scripts/ci/managed-wiki-qa';
+import type {WikiQaCollection, WikiQaItem, WikiQaState} from '../../../scripts/ci/managed-wiki-qa-types';
 
 const state: WikiQaState | null = process.env.MANAGED_WIKI_STATE
   ? JSON.parse(fs.readFileSync(process.env.MANAGED_WIKI_STATE, 'utf8')) : null;

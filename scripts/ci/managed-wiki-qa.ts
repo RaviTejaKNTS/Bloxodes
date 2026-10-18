@@ -8,34 +8,12 @@ import sharp from 'sharp';
 import { ownedPath, parseBatch } from './content-contract.mjs';
 import { contentDigest } from './managed-content-receipt.mjs';
 import { resolveWikiMediaUrl } from '../../apps/web/src/lib/wiki-media';
+import type { ExpectedMedia, WikiQaItem, WikiQaCollection, WikiQaState } from './managed-wiki-qa-types';
 
 // Optional committed contract: content/qa/wiki-selection.json
 // {"version":1,"bundleHash":"<64 lowercase hex>","reviewedSourceSha":"<40 lowercase hex>","managedQaRunId":"<successful predecessor run ID>"}
 // Absence skips the PR job. Never commit a placeholder selection or bundle.
 // This harness produces supplementary PR evidence, never a publication receipt.
-type ExpectedMedia = {
-  image_key: string | null; image_mime: string | null; image_width: number | null;
-  image_height: number | null; image_bytes: number | null; image_sha256: string | null;
-};
-export type WikiQaItem = {
-  id: string; name: string; section: string; sortOrder: number;
-  fields: Record<string, unknown>; hasImage: boolean; image: string | null;
-  media: ExpectedMedia;
-};
-export type WikiQaCollection = {
-  path: string; code: string; universeId: number; pageType: 'database' | 'collectible';
-  title: string; seoTitle: string; description: string; label: string;
-  sectionOrder: string[]; cardFields: string[]; items: WikiQaItem[];
-  metaJson: Record<string, unknown>; pageCopy: Record<string, unknown>; contentHash: string;
-  pageId?: string; datasetId?: string;
-};
-export type WikiQaState = {
-  version: 1; bundleHash: string; reviewedSourceSha: string; testHeadSha: string;
-  managedQaRunId: string; predecessorArtifactId?: string; predecessorVerified?: boolean;
-  runId: string; runAttempt: string; digest: string; batch: string;
-  hubs: Array<{slug: string; expected: Record<string, unknown>; pageId?: string}>;
-  urls: Array<{path: string; contains: string}>; collections: WikiQaCollection[];
-};
 type Account = {project: string; userId: string; sessionId: string; token: string};
 const target = 'https://bbtcaurrtyoukvjbxbbj.supabase.co';
 const slug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
