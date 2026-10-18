@@ -1,0 +1,32 @@
+{
+  "universe_id": 10155360168,
+  "wiki_slug": "illegal-soccer",
+  "collection_slug": "items",
+  "code": "illegal-soccer-items",
+  "display_name": "Items",
+  "title": "All {count} Known Items in Illegal Soccer",
+  "seo_title": "All {count} Known Items in Illegal Soccer: Effects, Roles and Roll Odds",
+  "meta_description": "Compare Illegal Soccer match items by role, effect, rarity and roll chance. See which gadgets reach the ball, knock rivals down or guard your goal.",
+  "intro_md": "Match items are gadgets you grab mid-game to reach the ball, knock a rival down or guard the space around your goal. Each one fits a different kind of play, and rarity says more about the roll than about the play.",
+  "description_md": "## How Illegal Soccer Item Rolls Work\n\nShop rolls unlock items. A single roll costs 1,000 Coins, and the odds decide what you get.\n\n| Rarity | Share of rolls | Chance per item |\n| --- | --- | --- |\n| Common | 50% | 12.5% |\n| Uncommon | 28% | 7.0% |\n| Rare | 14% | 3.5% |\n| Epic | 7% | 2.3% |\n| Mythic | 1% | 1.0% |\n\nThe share is how often a rarity turns up. The chance per item is the odds for each item at that rarity, so each Common comes up at 12.5% a roll and the Mythic at 1.0%.\n\nGuarantees cover the top end. An Epic is guaranteed within 7 rolls, and a Mythic within 19. The counters show in the shop, so you can see how close you are. If you count single rolls from zero, that's up to 7,000 Coins for an Epic and up to 19,000 Coins for a Mythic.\n\nPrices, odds and counters can change after an update. If a number doesn't match what the shop shows, trust the shop.\n\n## What a Question-Mark Block Gives You\n\nTouch a question-mark block during a match and you get one item from your equipped loadout. If there's an item you want available mid-match, equip it.\n\n## Reaching and Pulling the Ball\n\nJetpack is the pick when the ball is across the field and you're out of position, since it can reach the ball from almost anywhere. It's the Mythic tier at 1.0% a roll, so the 19-roll guarantee is your backstop if you're chasing it.\n\nGrappling Hook takes practice to aim, so try it before you need it in a close match.\n\nMagnet earns its slot in a scramble, where a loose ball is hard to reach by running.\n\nSave Supercharge for the run that matters, like beating a rival to a loose ball.\n\n## Which Item Disrupts Rivals\n\nWait until a rival is dribbling straight at you before you fire Shotgun. The blast needs accurate aim, so don't shoot at someone still far off.\n\nFlintlock is for a rival who's already close. It's the pick when a rival is pushing forward at you.\n\nRocket Punch is the pick when a rival is carrying the ball and you need it back.\n\nBazooka misses are costly, so wait for a clean line, and aim for the spot a rival is about to reach, not the one they've just left.\n\nFreeze Gun is especially useful near goal, where a frozen defender leaves you room to take the ball. The freeze is brief, so use that window.\n\nGrenade covers an area rather than one player, so aim it at the spot your rivals need to cross and allow for the bounce.\n\nSledgehammer is a crowd pick, since it reaches the rivals standing close around you.\n\n## Protecting Your Goal and Controlling Space\n\nBarricades only help where they stand, so placement is the real decision. Build them on the path a shot will take, because a wall off that line blocks nothing.\n\nForcefield is for the moment a rival lunges in, so hold it until contact is coming.\n\nDrop Oil Spill where rivals are about to run, not where they've already passed.\n\nLandmines need a rival to run into them, so place them on the path a rival is likely to take.\n\nIf you want the items ranked against each other, see the [Illegal Soccer items tier list](https://bloxodes.com/articles/roblox-illegal-soccer-items-tier-list).",
+  "how_it_works_md": "",
+  "description_json": {
+    "Mobility and Reaching the Ball": "Energy Drink is the outlier here, because its boost doesn't reach or pull the ball. Take it for the boost itself, not for reach."
+  },
+  "faq_json": [
+    {
+      "q": "How many walls does Barricades place?",
+      "a": "Up to three walls."
+    },
+    {
+      "q": "Does Forcefield help me score?",
+      "a": "Not directly. Forcefield has no scoring effect of its own. It briefly blocks tackles and attacks, so it's a protection pick."
+    },
+    {
+      "q": "Are jerseys and emotes match items?",
+      "a": "No. Jerseys, balls, emotes, goal effects, player cards and item skins are cosmetics, not match items. Match items are the gadgets you use during play."
+    }
+  ],
+  "wiki_md": "Rolls in the shop unlock match items, and a question-mark block in a match hands you one from your equipped loadout. A single roll costs 1,000 Coins, and half of all rolls come up Common while Mythic is 1%. Decide which job you need before you spend a roll.",
+  "is_published": true
+}

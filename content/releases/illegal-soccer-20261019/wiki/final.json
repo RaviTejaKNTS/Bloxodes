@@ -1,0 +1,22 @@
+{
+  "universe_id": 10155360168,
+  "slug": "illegal-soccer",
+  "title": "Illegal Soccer Wiki",
+  "seo_title": "Illegal Soccer Wiki: Controls, Match Tips, and Item Rolls",
+  "meta_description": "Play a timed 4v4 match in Illegal Soccer with no referee. Here's how a match runs, the PC controls, and how Coins turn into item rolls in the shop.",
+  "description_md": "Pick Red or Blue and play a timed 4v4 match around one ball, with no referee to stop the sabotage. Move into space, pass, dribble to dodge a challenge, and hold left mouse to charge a power shot. When the ball gets loose, tackle or use a gadget to win it back. Several default keys do more than one job, and you can change them in Settings > Keybinds.\n\nMatches usually end when the clock runs out, unless your team trails by one point. Then play continues until that team loses possession. If it scores in that stretch, the match goes to overtime. You earn Coins in matches and spend them on item rolls in the shop's Item Rolls tab. A roll unlocks an item, but you still need to equip it and grab a question-mark pickup during a match before you can use it.",
+  "tips_md": "- Try gadgets in practice before a live match. Shooting Practice and Goalkeeper Practice are separate lobby areas, and they're the place to test Rocket Punch or Forcefield without a defender punishing you right away.\n- Any player can take the keeper role by stepping into the rectangle in front of the net, but only one player holds it at a time. A straight shot at a centered keeper is an easy save, so aim for an upper corner or pass to change the angle.\n- Save Shotgun for a breakaway instead of firing it from midfield. Its range is short, so it's most useful up close, including against a player dribbling toward you.\n- Check the shop counter before you roll. A single roll costs 1,000 Coins, an Epic is guaranteed within 7 rolls, and a Mythic within 19. From zero Mythic progress, that's at most 19 rolls, or 19,000 Coins. Shop prices and counters can change, so trust the in-game numbers.",
+  "controls_json": [
+    { "action": "Move", "desktop": "W, A, S, D" },
+    { "action": "Sprint", "desktop": "Shift" },
+    { "action": "Kick", "desktop": "Left mouse" },
+    { "action": "Pass", "desktop": "Right mouse" },
+    { "action": "Dribble", "desktop": "Space" },
+    { "action": "Tackle", "desktop": "E or R" },
+    { "action": "Dive", "desktop": "Q or E" },
+    { "action": "Jump", "desktop": "Space" },
+    { "action": "Item slots", "desktop": "1 and 2" }
+  ],
+  "cover_image": null,
+  "is_published": true
+}

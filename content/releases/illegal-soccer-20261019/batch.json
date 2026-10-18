@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "operations": [
+    { "publisher": "roblox-wiki", "file": "wiki/final.json" },
+    { "publisher": "roblox-collection", "file": "collections/items/runtime-manifest.json" },
+    { "publisher": "roblox-collection", "file": "collections/cosmetics/runtime-manifest.json" }
+  ],
+  "urls": [
+    { "path": "/wiki/illegal-soccer", "contains": "Illegal Soccer Wiki" },
+    { "path": "/wiki/illegal-soccer/items", "contains": "All 16 Known Items in Illegal Soccer" },
+    { "path": "/wiki/illegal-soccer/cosmetics", "contains": "All 24 Known Cosmetics in Illegal Soccer" }
+  ],
+  "events": [
+    { "type": "wiki", "slug": "illegal-soccer" },
+    { "type": "wiki_collection", "slug": "illegal-soccer/items" },
+    { "type": "wiki_collection", "slug": "illegal-soccer/cosmetics" }
+  ]
+}
