@@ -328,7 +328,7 @@ export async function executeArticleStage(options: StageRuntimeOptions, stage: S
     assertWritingImageReadiness(checkArticleImageReadiness({ manifest: parseArticleImageManifest(await json(file("media.json"))), finalJson: await json(file("final.json")), env: options.env }));
     return done("image_check passed locally.");
   }
-  if (options.env.BLOXODES_CI_QA === '1' && ['copy_check','import_verify','browser_verify'].includes(stage)) {
+  if (options.env.BLOXODES_CI_QA === '1' && ['import_verify','browser_verify'].includes(stage)) {
     return {...done(`${stage} delegated to GitHub. Authoring is ready; technical QA is pending.`),delegatedToCi:true};
   }
   if (stage === "image_upload") await command("collect:article-images", ["--manifest", file("media.json"), "--apply"]);
