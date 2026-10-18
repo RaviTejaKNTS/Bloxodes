@@ -52,6 +52,24 @@ test("pipeline release requires matching approval, technical checks and unchange
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("article release refuses a workspace link into another checkout", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "article-release-local-"));
+  const root = path.join(directory, "task");
+  const outside = path.join(directory, "other/tmp/content-workspace");
+  try {
+    await mkdir(path.join(root, "tmp"), { recursive: true });
+    await mkdir(path.join(outside, "article"), { recursive: true });
+    await writeFile(path.join(outside, "article/final.json"), "outside");
+    await symlink(outside, path.join(root, "tmp/content-workspace"));
+    await assert.rejects(
+      resolveReleaseArtifactPath(path.join(root, "tmp/content-workspace/article/final.json"), QUEUE_ID, SLUG, root),
+      /outside an approved article workspace/,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 function manifest(): ArticleImageManifest {
   return {
     schema: 1,

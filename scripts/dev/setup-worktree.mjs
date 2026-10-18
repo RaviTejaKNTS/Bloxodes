@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { checkoutPaths, existing, inspectLink, privateEnvFiles, referenceFolders, sharedFolders, contains } from "./worktree-storage.mjs";
+import { checkoutPaths, existing, inspectLink, privateEnvFiles, contains } from "./worktree-storage.mjs";
 
 export async function setupWorktree({ cwd = process.cwd(), suppliedMain = process.env.T3CODE_PROJECT_ROOT } = {}) {
   const { root, main } = await checkoutPaths(cwd, suppliedMain);
@@ -16,39 +16,26 @@ export async function setupWorktree({ cwd = process.cwd(), suppliedMain = proces
     if ((await existing(path.join(root, name)))?.isSymbolicLink()) throw new Error(`${name} must belong to this checkout.`);
   }
   const tmp = path.join(root, "tmp");
-  const mainTmp = path.join(main, "tmp");
-  const history = path.join(mainTmp, "worktree-reference");
-  const claims = path.join(mainTmp, "content-claims");
   const links = [];
-  const collectLink = async (source, destination, options) => {
-    if (await inspectLink(source, destination, options)) links.push({ source, destination, options });
+  const collectLink = async (source, destination) => {
+    if (await inspectLink(source, destination)) links.push({ source, destination });
   };
   // Inspect every destination before creating directories or links.
   if (root !== main) {
     await collectLink(sourceEnv, path.join(root, ".envs"));
-    for (const name of sharedFolders) await collectLink(path.join(mainTmp, name), path.join(tmp, name));
-    await collectLink(history, path.join(tmp, "shared-history"));
-    await collectLink(claims, path.join(tmp, "content-claims"));
-  }
-  for (const name of referenceFolders) {
-    const source = path.join(mainTmp, name);
-    await collectLink(source, path.join(history, name), { optional: true });
   }
   for (const name of ["AGENTS.md", ".agents/skills", ".claude/skills", ".codex/environments/environment.toml", "t3.json"]) await fs.access(path.join(root, name));
   await fs.mkdir(tmp, { recursive: true });
   await fs.mkdir(path.join(tmp, "test-reports"), { recursive: true });
-  for (const name of sharedFolders) await fs.mkdir(path.join(mainTmp, name), { recursive: true });
-  await fs.mkdir(history, { recursive: true });
-  await fs.mkdir(claims, { recursive: true, mode: 0o700 });
-  for (const { source, destination, options } of links) {
+  for (const { source, destination } of links) {
     try { await fs.symlink(source, destination); }
     catch (error) {
       if (error.code !== "EEXIST") throw error;
-      await inspectLink(source, destination, options);
+      await inspectLink(source, destination);
     }
   }
-  console.log(`Worktree ready: ${root}. Shared private env files: ${files.length}.`);
-  console.log("Claim a game before editing shared drafts. Historical article artifacts are under tmp/shared-history/article-pipeline.");
+  console.log(`Worktree ready: ${root}. Linked private env files: ${files.length}.`);
+  console.log("tmp/ is private checkout scratch and is deleted with this worktree.");
   console.log("Dependencies, checks, builds and browser verification run on GitHub.");
   return { root, main, links: links.length };
 }

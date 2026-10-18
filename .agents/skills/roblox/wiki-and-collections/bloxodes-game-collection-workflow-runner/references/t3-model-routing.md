@@ -27,9 +27,9 @@ Read this when the owner runs the collection runner or the wiki runner inside T3
 
 ## Before you start
 
-1. Take the game's claim: `npm run claim:shared-content -- --game <game-slug>`. Release it with `--release` when the run ends, blocked or not.
+1. For a new wiki game, claim it in the Roblox Wiki Queue as root `AGENTS.md` describes.
 2. Confirm the game name, universe ID and editorial slug.
-3. Create the run folder inside the checkout. Don't use `tmp/content-workspace`: it's a symlink outside the checkout, and child agents can't write through it.
+3. Create the run folder inside the checkout.
 
 ```text
 tmp/wiki-runs/<run-id>/<game-slug>/
@@ -86,11 +86,11 @@ Run the hub after the collections, so it can link to the collections that passed
 - The exact folder and files to write, and the previous stage's files to read.
 - The skills to read in full first. Writing and editorial review always include `.agents/skills/bloxodes-voice/SKILL.md`.
 - Any findings to fix.
-- Boundaries: stay in the folder; read-only web research is fine; no database writes, Supabase or R2 uploads, imports, publishing, claim commands, GitHub actions, commits, edits to tracked repo files, builds, tests or previews; no sub-agents; never ask for permission escalation, and log anything blocked in `stage-log.md`.
+- Boundaries: stay in the folder; read-only web research is fine; no database writes, Supabase or R2 uploads, imports, publishing, Notion edits, GitHub actions, commits, edits to tracked repo files, builds, tests or previews; no sub-agents; never ask for permission escalation, and log anything blocked in `stage-log.md`.
 - What to return: the decision or output paths, a short summary and any problems.
 
 ## After the finals
 
 The run stops at approved `final.json` files with their datasets, manifests and media. Staging a `roblox-collection` or `roblox-wiki` batch, `Managed content QA` on GitHub, managed-development publishing and production release each need the owner's explicit go-ahead.
 
-Report per collection and for the hub: status, the stage reached, item and image counts, each review's main findings, and the folder path. Then release the claim.
+Report per collection and for the hub: status, the stage reached, item and image counts, each review's main findings, and the folder path. Then update or delete the queue row as root `AGENTS.md` describes.

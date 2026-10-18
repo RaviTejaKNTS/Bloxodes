@@ -33,7 +33,7 @@ The one-time `activate:minecraft-editions` command is removed. Preserve all unre
 
 ## Nightly wiki ownership
 
-The MacBook Pro T3 scheduler runs `scripts/wiki/nightly-t3-task.md` daily at 02:30 IST with `gpt-6-luna` at max effort. The prompt owns standing publication approval and further correction rounds; existing skills stay unchanged. Use ordinary T3 subagents and selected-content GitHub QA/publication, not the retired homelab queue/controller. `wiki:homelab:run` and wiki unit templates are removed. The wiki installer refuses activation; the shared installer manages only article units and preserves article state/env/timer ownership. Historical queue/publication helpers remain for compatibility and receipt inspection. See `dev-docs/pipelines/wiki-collections.md`.
+The MacBook Pro T3 schedule "Bloxodes nightly Roblox wiki" runs daily at 02:30 IST on Codex `gpt-6.1-sol` at high effort. Its short prompt lives in the T3 schedule; it picks the game, names the skills and gives the publishing go-ahead. Use ordinary T3 subagents and selected-content GitHub QA/publication, not the retired homelab queue/controller. `wiki:homelab:run` and wiki unit templates are removed. The wiki installer refuses activation; the shared installer manages only article units and preserves article state/env/timer ownership. Historical queue/publication helpers remain for compatibility and receipt inspection. See `dev-docs/pipelines/wiki-collections.md`.
 
 ## Content QA and runtime activation
 
@@ -55,9 +55,8 @@ Roblox collection finals leave `how_it_works_md` empty and explain game systems 
 Article bundle verification and pre-promotion release reads use the resolved managed-development media origin. Post-promotion reads use the production target and checkout staging root. Keep those checks separate without changing the process environment, approved bundle bytes, or canonical production image readback.
 
 - `dev/`: workstation development and worktree setup.
-  - `setup-worktree.sh` delegates to dependency-free `setup-worktree.mjs` for `npm run setup:worktree`. It checks the canonical main checkout, private env permissions and existing links before linking `.envs/`, shared draft folders and historical references. Missing or dangling optional reference sources and dangling reference links produce warnings and stay intact. Required links and live reference conflicts still stop setup. It enforces HDD paths on the homelab and keeps task scratch, queue state and build output separate. It never installs dependencies or runs checks.
-  - `claim-shared-content.mjs` powers `claim:shared-content -- --game <slug>`. An exclusive, private claim ties shared game drafts to one checkout until that checkout uses `--release`. It needs no env values or database access.
-  - `cleanup-task-worktree.mjs` accepts exact clean merged tasks under the T3 HDD or legacy task directory. Apply requires a prior T3 settled/no-active-run check and `--inactive-confirmed`. It refuses live content claims and archives private scratch files with SHA-256 readback before deleting the task branch/checkout. Detached runtimes and the current checkout remain intact.
+  - `setup-worktree.sh` delegates to dependency-free `setup-worktree.mjs` for `npm run setup:worktree`. It checks the canonical main checkout, private env permissions and existing links before linking `.envs/` and creating the checkout's own empty `tmp/`. A conflicting `.envs` path stops setup. It enforces HDD paths on the homelab. It never installs dependencies or runs checks.
+  - `cleanup-task-worktree.mjs` accepts exact clean merged tasks under the T3 HDD or legacy task directory. Apply requires a prior T3 settled/no-active-run check and `--inactive-confirmed`. It deletes the task branch and checkout, including its `tmp/`. Detached runtimes and the current checkout remain intact.
   - `start-managed-dev.ts` powers both `npm run dev` and `npm run dev:managed`. It loads `.envs/targets/managed-dev.env` and refuses targets outside HTTPS `*.supabase.co`.
   - `env-doctor.ts` owns workstation readiness and safety checks; `check-env-contract.ts` owns committed example coverage. The one-time legacy env migration commands are retired.
   - `check-migration-integrity.ts` validates migration filenames, version uniqueness, the convergence policy, seed retirement, and future `SECURITY DEFINER` search paths without connecting to a database.
@@ -133,7 +132,6 @@ Article bundle verification and pre-promotion release reads use the resolved man
   - `install-homelab-article-automation.sh` delegates to the exact-release shared installer. It activates only article units while workers are idle, preserves protected env values and restores the article timers' prior state. Activation is a separate authorized operator action, not an ordinary checkout synchronization.
 
 - `wiki/`: the nightly T3 task prompt and historical wiki queue/stage/publication helpers.
-  - `nightly-t3-task.md` is the saved MacBook Pro schedule prompt. See the nightly ownership section above.
   - `run-homelab-wiki-automation.ts`, `wiki-stage-*.ts`, readiness/sandbox helpers and queue-contract checks describe the retired homelab controller. Keep them for historical receipts and CI compatibility, not for scheduled authoring or recovery. Their old correction counts and permanent queue results do not govern T3.
   - `install-homelab-wiki-automation.sh` refuses activation. Wiki service/timer templates and the `wiki:homelab:run` alias are removed.
 - `content/`: local content QA helpers.

@@ -417,9 +417,9 @@ function isArticleFinal(value: unknown): value is ArticleFinal {
 export async function resolveReleaseArtifactPath(filePath: string, queueId: string, slug: string, worktree = process.cwd()): Promise<string> {
   const root = await realpath(worktree);
   const actual = await realpath(filePath);
-  const legacy = await realpath(path.join(root, "tmp", "content-workspace")).catch(() => path.join(root, "tmp", "content-workspace"));
-  if (actual.startsWith(`${legacy}${path.sep}`)) return actual;
-  const pipeline = await realpath(path.join(root, "tmp", "article-pipeline")).catch(() => path.join(root, "tmp", "article-pipeline"));
+  const workspace = path.join(root, "tmp", "content-workspace");
+  if (actual.startsWith(`${workspace}${path.sep}`)) return actual;
+  const pipeline = path.join(root, "tmp", "article-pipeline");
   if (!actual.startsWith(`${pipeline}${path.sep}`) || path.basename(path.dirname(actual)) !== "content") {
     throw new Error(`${filePath} resolves outside an approved article workspace.`);
   }
