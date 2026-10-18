@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Climb For Animals Eggs",
+    "gameSlug": "climb-for-animals-eggs",
+    "collection": "mutations",
+    "collectionLabel": "Mutations",
+    "itemFields": [
+      "name",
+      "acquisition",
+      "event",
+      "spawnChance",
+      "machineOutput",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "acquisition",
+      "event",
+      "spawnChance",
+      "machineOutput",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Acquisition",
+      "sectionOrder": [
+        "Random egg spawns",
+        "Event eggs"
+      ],
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "acquisition",
+        "event",
+        "spawnChance",
+        "machineOutput"
+      ],
+      "tableFields": [
+        "acquisition",
+        "event",
+        "spawnChance",
+        "machineOutput"
+      ],
+      "fieldPresentation": {
+        "acquisition": {
+          "kind": "normal",
+          "label": "Acquisition"
+        },
+        "event": {
+          "kind": "normal",
+          "label": "Event"
+        },
+        "spawnChance": {
+          "kind": "chip",
+          "label": "Spawn chance"
+        },
+        "machineOutput": {
+          "kind": "normal",
+          "label": "Mutate Machine can make this"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Diamond",
+        "acquisition": "Random egg spawn",
+        "event": null,
+        "spawnChance": null,
+        "machineOutput": "Yes",
+        "cardSummary": "Random map eggs can spawn Diamond mutations."
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Random egg spawns",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Golden",
+        "acquisition": "Random egg spawn",
+        "event": null,
+        "spawnChance": null,
+        "machineOutput": "Yes",
+        "cardSummary": "Random map eggs can spawn Golden mutations."
+      },
+      "system": {
+        "slug": "golden",
+        "section": "Random egg spawns",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "acquisition": "Random egg spawn",
+        "event": null,
+        "spawnChance": null,
+        "machineOutput": "Yes",
+        "cardSummary": "Random map eggs can spawn Rainbow mutations."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Random egg spawns",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy",
+        "acquisition": "Event egg",
+        "event": "Candy Event",
+        "spawnChance": "15% per 25-second check",
+        "machineOutput": "No",
+        "cardSummary": "Candy eggs appear during the Candy Event."
+      },
+      "system": {
+        "slug": "candy",
+        "section": "Event eggs",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hacker",
+        "acquisition": "Event egg",
+        "event": "Hacker Event",
+        "spawnChance": "10% per 25-second check",
+        "machineOutput": "No",
+        "cardSummary": "Hacker eggs appear during the Hacker Event."
+      },
+      "system": {
+        "slug": "hacker",
+        "section": "Event eggs",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lava",
+        "acquisition": "Event egg",
+        "event": "Lava Event",
+        "spawnChance": "12% per 25-second check",
+        "machineOutput": "No",
+        "cardSummary": "Lava eggs appear during the Lava Event."
+      },
+      "system": {
+        "slug": "lava",
+        "section": "Event eggs",
+        "sortOrder": 6,
+        "image": null
+      }
+    }
+  ]
+}

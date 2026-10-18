@@ -1,0 +1,24 @@
+{
+  "credit": "100% GRIND / VendoPlus, via AllThingsHow",
+  "license": "No separate reuse license found; parent accepted the reviewed gameplay stills for the authorized image workflow.",
+  "images": [
+    {
+      "file": "collections/animals/media/sail-fish.webp",
+      "item": "Sail Fish",
+      "page": "https://allthings.how/climb-for-animals-eggs-how-to-get-better-animals-pets-and-eggs/",
+      "url": "https://static.allthings.how/wp-content/uploads/2026/10/moment-F3YRxnV-BZE-146-hatching-equipping-better-pets.webp"
+    },
+    {
+      "file": "collections/zones/media/forest-winter-climb.webp",
+      "item": "Forest",
+      "page": "https://allthings.how/climb-for-animals-eggs-how-to-get-better-animals-pets-and-eggs/",
+      "url": "https://static.allthings.how/wp-content/uploads/2026/10/moment-F3YRxnV-BZE-56-climbing-to-forest-and-winter.webp"
+    },
+    {
+      "file": "collections/zones/media/winter-seal-egg.webp",
+      "item": "Winter",
+      "page": "https://allthings.how/climb-for-animals-eggs-how-to-get-better-animals-pets-and-eggs/",
+      "url": "https://static.allthings.how/wp-content/uploads/2026/10/moment-F3YRxnV-BZE-91-stealing-seal-egg-in-winter.webp"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Climb For Animals Eggs",
+    "gameSlug": "climb-for-animals-eggs",
+    "collection": "animals",
+    "collectionLabel": "Animals",
+    "sourceItemCount": 15,
+    "itemFields": [
+      "name",
+      "obtainedFrom",
+      "area",
+      "rarity",
+      "tier",
+      "cashRate",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "obtainedFrom",
+      "area",
+      "rarity",
+      "tier",
+      "cashRate",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Section",
+      "sectionOrder": ["Items"],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": ["obtainedFrom", "area", "rarity", "tier", "cashRate"],
+      "tableFields": ["obtainedFrom", "area", "rarity", "tier", "cashRate", "cardSummary"],
+      "fieldPresentation": {
+        "obtainedFrom": { "kind": "normal", "label": "Obtained from" },
+        "area": { "kind": "normal", "label": "Area" },
+        "rarity": { "kind": "chip", "label": "Rarity" },
+        "tier": { "kind": "chip", "label": "Tier" },
+        "cashRate": { "kind": "chip", "label": "Cash rate" },
+        "cardSummary": { "kind": "detail", "label": "Summary" }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Bear",
+        "obtainedFrom": "Event egg batch",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "Hatched from an event egg batch."
+      },
+      "system": { "slug": "bear", "section": "Items", "sortOrder": 1, "image": null }
+    },
+    {
+      "item": {
+        "name": "Common Chicken",
+        "obtainedFrom": null,
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": "$1/s",
+        "cardSummary": null
+      },
+      "system": { "slug": "common-chicken", "section": "Items", "sortOrder": 2, "image": null }
+    },
+    {
+      "item": {
+        "name": "Dinosaur",
+        "obtainedFrom": "Dinosaur Egg",
+        "area": "Dinosaur area",
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "Hatches from a Dinosaur Egg in the dinosaur area."
+      },
+      "system": { "slug": "dinosaur", "section": "Items", "sortOrder": 3, "image": null }
+    },
+    {
+      "item": {
+        "name": "Dog",
+        "obtainedFrom": null,
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": null
+      },
+      "system": { "slug": "dog", "section": "Items", "sortOrder": 4, "image": null }
+    },
+    {
+      "item": {
+        "name": "Fish",
+        "obtainedFrom": "Golden egg",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "A golden egg has hatched a Fish."
+      },
+      "system": { "slug": "fish", "section": "Items", "sortOrder": 5, "image": null }
+    },
+    {
+      "item": {
+        "name": "Fox",
+        "obtainedFrom": "Egg from a ledge with Eternal labels",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "An egg from a ledge with Eternal labels hatched a Fox."
+      },
+      "system": { "slug": "fox", "section": "Items", "sortOrder": 6, "image": null }
+    },
+    {
+      "item": {
+        "name": "Giraffe",
+        "obtainedFrom": "Event egg batch",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "Hatched from an event egg batch."
+      },
+      "system": { "slug": "giraffe", "section": "Items", "sortOrder": 7, "image": null }
+    },
+    {
+      "item": {
+        "name": "Goat",
+        "obtainedFrom": null,
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": null
+      },
+      "system": { "slug": "goat", "section": "Items", "sortOrder": 8, "image": null }
+    },
+    {
+      "item": {
+        "name": "Golden Dragon",
+        "obtainedFrom": "Demon Egg",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "A rare Demon Egg hatched a Golden Dragon."
+      },
+      "system": { "slug": "golden-dragon", "section": "Items", "sortOrder": 9, "image": null }
+    },
+    {
+      "item": {
+        "name": "Gorilla",
+        "obtainedFrom": "Large high-altitude egg",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "Hatched from a large egg found high on the climb."
+      },
+      "system": { "slug": "gorilla", "section": "Items", "sortOrder": 10, "image": null }
+    },
+    {
+      "item": {
+        "name": "Ice Phoenix",
+        "obtainedFrom": "Ice King Egg",
+        "area": null,
+        "rarity": "Royal",
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "The Ice King Egg can hatch an Ice Phoenix."
+      },
+      "system": { "slug": "ice-phoenix", "section": "Items", "sortOrder": 11, "image": null }
+    },
+    {
+      "item": {
+        "name": "Lava Dragon",
+        "obtainedFrom": "Dragon Egg",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "A Dragon Egg hatched a Lava Dragon."
+      },
+      "system": { "slug": "lava-dragon", "section": "Items", "sortOrder": 12, "image": null }
+    },
+    {
+      "item": {
+        "name": "Owl",
+        "obtainedFrom": "Event egg batch",
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": "Hatched from an event egg batch."
+      },
+      "system": { "slug": "owl", "section": "Items", "sortOrder": 13, "image": null }
+    },
+    {
+      "item": {
+        "name": "Pegasus",
+        "obtainedFrom": null,
+        "area": null,
+        "rarity": null,
+        "tier": null,
+        "cashRate": null,
+        "cardSummary": null
+      },
+      "system": { "slug": "pegasus", "section": "Items", "sortOrder": 14, "image": null }
+    },
+    {
+      "item": {
+        "name": "Sail Fish",
+        "obtainedFrom": null,
+        "area": null,
+        "rarity": null,
+        "tier": "Winter-tier",
+        "cashRate": "$680/s",
+        "cardSummary": null
+      },
+      "system": { "slug": "sail-fish", "section": "Items", "sortOrder": 15, "image": "/sail-fish.webp" }
+    }
+  ]
+}
