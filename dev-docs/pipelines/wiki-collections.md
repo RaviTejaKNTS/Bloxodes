@@ -21,7 +21,7 @@ Evidence: development checks and independent review, production backup hashes an
 
 Managed development and production use `games` and the shared `game_*` content tables. GTA, Red Dead and Minecraft no longer have separate content tables. Roblox stays separate. The October 6 production release deployed `49cbe765bb1a8f13b6967e6fcee800960534760a`. Earlier game-specific evidence below records the storage used before this release.
 
-The page-type extension is live in managed development and production. Use `bloxodes-game-plan` to choose useful page types for any non-Roblox title. Wiki and collection storage stays unchanged. Maps, quizzes, catalogs and shared standalone checklist routes are described in [content pipelines](content.md#shared-game-page-types). The October 6 release applied its eight migrations and preserved all nine GTA maps before deploying dependent code.
+The page-type extension is live in managed development and production. Use `bloxodes-franchise-plan` to choose useful page types for any non-Roblox title. Wiki and collection storage stays unchanged. Maps, quizzes, catalogs and shared standalone checklist routes are described in [content pipelines](content.md#shared-game-page-types). The October 6 release applied its eight migrations and preserved all nine GTA maps before deploying dependent code.
 
 `games.kind` is only `franchise` or `game`. `parent_id` groups child titles under a franchise. A standalone game has no parent. All rows have a `namespace`, which is the root URL slug. Existing game metadata, IDs and relationships remain stored. Roblox does not join this registry.
 
@@ -131,7 +131,7 @@ When the agent is running on `teja-homelab`, bind the managed-development previe
 
 For any supported non-Roblox franchise, use `sync:franchise-collection-runtime`, `verify:franchise-wiki-final`, and `verify:franchise-collection-final` with an explicit `--namespace`; these commands default to managed development. GTA compatibility commands remain available, and Red Dead production promotion is deliberately outside this workflow.
 
-Use `.agents/skills/bloxodes-gta-wiki-*/SKILL.md` for GTA hub work and `.agents/skills/bloxodes-gta-game-collection-*/SKILL.md` for GTA collection discovery, research, data, images, writing, managed-development verification, and later refreshes. The Roblox wiki and collection skills are not interchangeable with these because they assume Roblox universe identity, tables, routes, and publication commands.
+Use the `.agents/skills/bloxodes-franchise-wiki-*` and `bloxodes-franchise-game-collection-*` skills for GTA and every other non-Roblox title: hub work, collection discovery, research, data, images, writing, managed-development verification, and later refreshes. The Roblox wiki and collection skills are not interchangeable with these because they assume Roblox universe identity, tables, routes, and publication commands.
 
 Use the matching wiki and game-collection workflow skills. For existing datasets, `bloxodes-game-collection-refresh` is the maintenance path for one collection, one game, or the registered collection set.
 

@@ -23,8 +23,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-voice/SKILL.md`: the house voice for every public word we publish, with before/after examples for every page type. Read it before writing or reviewing any page copy.
-- `.agents/skills/bloxodes-game-plan/SKILL.md`: research and plan useful page types for any non-Roblox game.
-- `.agents/skills/bloxodes-games-reference-pages/SKILL.md`: shared maps, standalone checklists, quizzes and catalogs.
+- `.agents/skills/bloxodes-franchise-*/SKILL.md`: every non-Roblox title, single game or multi-game franchise, GTA included. Start a new title with `bloxodes-franchise-plan`; the rest cover wikis, collections, codes, tools, and maps, standalone checklists, quizzes and catalogs (`bloxodes-franchise-reference-pages`).
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
 - `.agents/skills/bloxodes-article-release-review/SKILL.md`: list completed automated articles, serve managed-dev previews, and publish or reject only explicit human selections.
 - `.agents/skills/bloxodes-article-images/SKILL.md`: run a separate collection-style image pass for location guides, routes, NPCs, puzzle steps, collectibles, and other visually dependent articles before writing.
@@ -32,8 +31,6 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-game-collection-data/SKILL.md`: game collection dataset, fields, sections, and renderer readiness.
 - `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
 - `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: quickly check existing collection datasets for verified data changes and missing item images, then update only affected collections.
-- `.agents/skills/bloxodes-gta-wiki-*/SKILL.md`: GTA-specific source, wiki suggestion, research, writing, and parent workflow rules for `/gta/wiki/<game-slug>`.
-- `.agents/skills/bloxodes-gta-game-collection-*/SKILL.md`: GTA-specific collection suggestion, research, data, image, writing, workflow, and refresh rules for `/gta/wiki/<game-slug>/<collection-slug>`; never substitute the Roblox collection skills.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Mediavine automatic in-content ad placement, including pagination and hydrated DOM verification.
@@ -122,7 +119,7 @@ Skills and docs follow the same spirit as public copy, because agents copy the t
 ### Game wiki and collection pages
 
 1. Use the matching `.agents/skills/bloxodes-*` skill directly. For new pages, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`. For source-backed maintenance of existing local collection datasets and their wiki pages, use `bloxodes-game-collection-refresh`.
-2. For GTA pages, use the corresponding `bloxodes-gta-wiki-*` or `bloxodes-gta-game-collection-*` skill. GTA skills own GTA source rules, workspace, routes, scripts, mode boundaries, and managed-development safety rules. Development and production storage use namespace-scoped shared `games`/`game_*` tables; do not use Roblox universe IDs or Roblox publication commands.
+2. For non-Roblox pages, GTA included, use the matching `bloxodes-franchise-*` skill, starting with `bloxodes-franchise-plan` for a new title. Never substitute the Roblox collection skills. Development and production storage use namespace-scoped shared `games`/`game_*` tables; do not use Roblox universe IDs or Roblox publication commands.
 3. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
 4. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
 5. Seed page copy and publish the immutable collection dataset/media revision in managed development before preview or production.

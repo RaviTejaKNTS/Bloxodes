@@ -46,7 +46,7 @@ Named reference pages use `/<namespace>/maps|quizzes|catalog|checklists/<slug>`.
 
 Development now has 16 shared tables and eight protected read views. RLS is enabled, with direct access limited to the service role. Published views check page, game and parent visibility. Public routes include canonical URLs, escaped JSON-LD, search, sitemap, feed and `game_content` invalidation. Private progress responses use `no-store`.
 
-Use `.agents/skills/bloxodes-game-plan/SKILL.md` to research a game and choose the page types that fit. Use `.agents/skills/bloxodes-games-reference-pages/SKILL.md` for maps, checklists, quizzes and catalogs. Existing wiki, collection, codes and tool skills remain the authoring entry points. Plans and source proof stay in ignored workspaces, not extra database fields.
+Use `.agents/skills/bloxodes-franchise-plan/SKILL.md` to research a game or franchise, decide whether it's a single game or a multi-game franchise, and choose the page types that fit. Use `.agents/skills/bloxodes-franchise-reference-pages/SKILL.md` for maps, checklists, quizzes and catalogs. The `bloxodes-franchise-*` wiki, collection, codes and tool skills remain the authoring entry points. Plans and source proof stay in ignored workspaces, not extra database fields.
 
 `npm run publish:game-pages -- --namespace <slug> --file <reviewed.json>` validates the whole batch and rolls it back. Add `--apply` for an authorized development publication. The batch serializes writes within a namespace, keeps page ownership permanent, rejects invalid data and requires checkable tasks after checklist page or task updates. Production still requires explicit authorization and its target guard.
 
