@@ -18,6 +18,7 @@ jobs:
       extension: ${{ steps.scope.outputs.extension }}
       admin: ${{ steps.scope.outputs.admin }}
       mobile: ${{ steps.scope.outputs.mobile }}
+      selected_wiki_qa: ${{ steps.wiki-selection.outputs.enabled }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -28,6 +29,14 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node scripts/ci/change-scope.mjs
+      - id: wiki-selection
+        name: Detect optional frozen wiki QA selection
+        run: |
+          if [ -f content/qa/wiki-selection.json ]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+          fi
       - name: Validate changed GitHub workflow syntax
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
@@ -132,9 +141,96 @@ jobs:
           path: tmp/test-reports/
           retention-days: 1
           if-no-files-found: ignore
+  selected-wiki-qa:
+    needs: [scope, managed-development]
+    if: needs.scope.outputs.selected_wiki_qa == 'true' && needs.managed-development.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    timeout-minutes: 45
+    # Share the existing managed-content lane with the completed staging run.
+    concurrency:
+      group: bloxodes-managed-content-qa
+      queue: max
+      cancel-in-progress: false
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      BLOXODES_MANAGED_QA: 'true'
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      SUPABASE_MEDIA_PUBLIC_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_MEDIA_BUCKET: media
+      ARTICLE_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      ARTICLE_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      SITE_URL: https://bloxodes.com
+      NEXT_PUBLIC_SITE_URL: https://bloxodes.com
+      TEST_CANONICAL_ORIGIN: https://bloxodes.com
+      TEST_BASE_URL: http://bloxodes.test:3000
+      BLOXODES_BUILD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - name: Allow only this repository's tasks
+        env:
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+        run: test "$HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm}
+      - run: npm ci --include=dev --no-audit --no-fund
+      - name: Set runner-owned temporary QA paths
+        run: |
+          echo "MANAGED_WIKI_STATE=$RUNNER_TEMP/managed-wiki-qa.json" >> "$GITHUB_ENV"
+          echo "MANAGED_WIKI_AUTH=$RUNNER_TEMP/managed-wiki-auth.json" >> "$GITHUB_ENV"
+      - name: Load exact reviewed selection and bind the test head
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts select
+      - name: Download the frozen data-only bundle
+        run: node --import tsx scripts/ci/download-content-bundle.ts
+      - name: Derive exact expectations from frozen inputs without publishing
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts prepare
+      - name: Require the successful production-branch managed QA predecessor
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts predecessor
+      - uses: actions/download-artifact@v4
+        with:
+          artifact-ids: ${{ env.MANAGED_QA_ARTIFACT_ID }}
+          run-id: ${{ env.MANAGED_QA_RUN_ID }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/selected-wiki-predecessor
+          merge-multiple: true
+      - name: Bind the predecessor receipt to the exact extracted bundle
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts receipt
+      - name: Compare selected published rows with frozen inputs
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts verify
+      - name: Create temporary per-browser app accounts
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts accounts
+      - run: npm run build:web
+      - run: npx playwright install --with-deps chromium
+      - name: Run selected HTTP and browser QA on this PR head
+        env:
+          RELEASE_SMOKE_BATCH: ${{ runner.temp }}/managed-smoke.json
+        run: npx playwright test apps/web/e2e/release-smoke.spec.ts apps/web/e2e/managed-wiki-collections.spec.ts
+      - name: Repeat exact selected readback after browser QA
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts verify
+      - name: Remove only this run's temporary accounts and progress
+        if: always()
+        run: node --import tsx scripts/ci/managed-wiki-qa.ts cleanup
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selected-wiki-qa-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
+          path: tmp/test-reports/
+          retention-days: 1
+          if-no-files-found: ignore
   required:
     name: Required PR checks
-    needs: [scope, managed-development, checks]
+    needs: [scope, managed-development, checks, selected-wiki-qa]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -143,9 +239,14 @@ jobs:
           DOCS_ONLY: ${{ needs.scope.outputs.checks == 'false' }}
           MANAGED: ${{ needs.managed-development.result }}
           CHECKS: ${{ needs.checks.result }}
+          SELECTED_WIKI: ${{ needs.scope.outputs.selected_wiki_qa }}
+          SELECTED_WIKI_RESULT: ${{ needs.selected-wiki-qa.result }}
         run: |
           test "$SCOPE" = success
           if [ "$DOCS_ONLY" != true ]; then
             test "$MANAGED" = success
             test "$CHECKS" = success
+          fi
+          if [ "$SELECTED_WIKI" = true ]; then
+            test "$SELECTED_WIKI_RESULT" = success
           fi

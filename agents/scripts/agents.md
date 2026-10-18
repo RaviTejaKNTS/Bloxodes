@@ -335,6 +335,7 @@ Minecraft collection publication shares identical prepared image bytes through f
 ## GitHub content QA and runtime packages
 
 - `scripts/ci/managed-checklists.ts` stages and compares isolated managed-development checklist boards, provisions runner-only QA sessions and cleans their rows.
+- `scripts/ci/managed-wiki-qa.ts` binds optional Roblox wiki PR QA to frozen inputs and a verified preceding managed QA receipt, compares staged runtime rows/media and owns temporary account/progress cleanup. It cannot publish content or replace the production receipt.
 - `scripts/ci/checklist-proof.mjs` compares full normalized inventories and preserves unchanged Roblox task IDs.
 - `scripts/ci/managed-content-receipt.mjs` binds successful development QA to selected bytes, source SHA and run ID.
 - `scripts/ci/checklist-qa-fixture.ts` creates development-only fixtures for the manual GitHub self-test.
