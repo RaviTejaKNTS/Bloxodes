@@ -23,7 +23,7 @@ Read this when the owner runs the collection runner or the wiki runner inside T3
 - If a model ID stops resolving, check `orchestrator_capabilities`. Never swap in another model on your own. Ask the owner.
 - Don't run a stage yourself, and don't hand two stages to one child. Each stage reads the previous stage's files.
 - Every handoff is a new `delegate_task` call with its own `clientRequestId` (like `<run-id>-<collection>-data-r1`), stable across retries of that call. Keep each `taskId`.
-- Children must not start sub-agents.
+- Children must not start sub-agents or leave background commands running. If a task seems stuck after the child reports, follow "When a child looks stuck" in `.agents/skills/bloxodes-model-routing/SKILL.md`.
 
 ## Before you start
 

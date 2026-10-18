@@ -67,7 +67,7 @@ Remind agents to run checks on GitHub, not locally, and not to commit, push or p
 
 ### Review loop
 
-1. Keep each returned `taskId`. Check progress with `task_status`.
+1. Keep each returned `taskId`. Check progress with `task_status`. A child that leaves a background command running keeps its task open, and its result never reaches you. Follow "When a child looks stuck" in `.agents/skills/bloxodes-model-routing/SKILL.md`.
 2. When an agent finishes, review its actual output: diff, files, data, previews and source proof. Don't rely on its summary alone.
 3. For corrections, start a new `delegate_task` round with the original brief, the previous findings, the agent's response and the open issues. Give each round its own `clientRequestId`.
 4. Report to the owner what finished, what you checked, what you changed, and anything that is still unresolved or failed.
