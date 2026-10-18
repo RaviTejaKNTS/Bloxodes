@@ -27,7 +27,7 @@ The saved T3 project uses `/srv/data/projects/Bloxodes`, defaults to worktree mo
 
 The homelab main checkout and Git history live at `/srv/data/projects/Bloxodes`. T3 project and thread registrations use canonical HDD paths; the home-project compatibility link has been removed. New T3 worktrees use `/srv/data/t3code/worktrees/Bloxodes/`. T3 owns task creation and thread binding; do not move an attached thread by creating a second branch or thread. Keep main on `production` and preserve edits in existing tasks when fetching production for new tasks.
 
-Setup links only `.envs/` from the main checkout and creates an empty, ignored `tmp/` that belongs to the worktree. Runs, drafts, reports, logs and preview state go there and are deleted with the worktree. Nothing under `tmp/` is linked or shared between checkouts, and none of it is copied into a code PR. Selected publication still needs its exact reviewed CI bundle and authorization. The setup script stops on a conflicting `.envs` path without replacing local files.
+Setup links only `.envs/` from the main checkout and creates an empty, ignored `tmp/` that belongs to the worktree. Runs, drafts, reports, logs and preview state go there and are deleted with the worktree. Nothing under `tmp/` is linked or shared between checkouts, and none of it is copied into a code PR. Selected publication still needs its exact reviewed CI bundle and authorization. Setup unlinks any shared-folder links an older setup left in `tmp/`, without touching their targets, and stops on a conflicting `.envs` path without replacing local files.
 
 Roblox wiki runs claim their game in the Notion Roblox Wiki Queue, as root `AGENTS.md` describes, so runs on any device skip a game another run is working on.
 

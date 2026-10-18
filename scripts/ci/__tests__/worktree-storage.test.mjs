@@ -66,12 +66,17 @@ test("setup links private env storage and creates only local scratch", async t =
   const mainTmp = path.join(main, "tmp");
   await fs.mkdir(mainTmp);
   await fs.writeFile(path.join(mainTmp, "keep.json"), "main scratch");
+  await fs.mkdir(path.join(mainTmp, "content-workspace"));
+  await fs.writeFile(path.join(mainTmp, "content-workspace/draft.json"), "shared draft");
+  await fs.mkdir(path.join(worktree, "tmp"));
+  await fs.symlink(path.join(mainTmp, "content-workspace"), path.join(worktree, "tmp/content-workspace"));
   for (let run = 0; run < 2; run++) {
     const result = await setupWorktree({ cwd: worktree, suppliedMain: main });
     assert.equal(result.links, run === 0 ? 1 : 0);
     assert.deepEqual(await fs.readdir(path.join(worktree, "tmp")), ["test-reports"]);
     assert.deepEqual(await fs.readdir(path.join(worktree, "tmp/test-reports")), []);
-    assert.deepEqual(await fs.readdir(mainTmp), ["keep.json"]);
+    assert.deepEqual((await fs.readdir(mainTmp)).sort(), ["content-workspace", "keep.json"]);
+    assert.equal(await fs.readFile(path.join(mainTmp, "content-workspace/draft.json"), "utf8"), "shared draft");
     assert.equal(await fs.readFile(path.join(mainTmp, "keep.json"), "utf8"), "main scratch");
   }
   assert.equal(await fs.realpath(path.join(worktree, ".envs")), path.join(main, ".envs"));

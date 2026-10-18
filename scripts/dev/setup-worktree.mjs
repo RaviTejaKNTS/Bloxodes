@@ -26,6 +26,10 @@ export async function setupWorktree({ cwd = process.cwd(), suppliedMain = proces
   }
   for (const name of ["AGENTS.md", ".agents/skills", ".claude/skills", ".codex/environments/environment.toml", "t3.json"]) await fs.access(path.join(root, name));
   await fs.mkdir(tmp, { recursive: true });
+  // Older setups linked shared folders into tmp/. Unlink them so this checkout's scratch stays private; their targets are untouched.
+  for (const entry of await fs.readdir(tmp, { withFileTypes: true })) {
+    if (entry.isSymbolicLink()) await fs.unlink(path.join(tmp, entry.name));
+  }
   await fs.mkdir(path.join(tmp, "test-reports"), { recursive: true });
   for (const { source, destination } of links) {
     try { await fs.symlink(source, destination); }
