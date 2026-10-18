@@ -119,7 +119,7 @@ test("owner approval rejects failing copy, changed evidence, missing QA and busy
   const stateBytes = await readFile(f.stateFile, "utf8"), reviewBytes = await readFile(f.reviewFile, "utf8");
   await saveJson(f.finalPath, { title: "Test", slug: "test", content_md: edits[0][0] });
   let hash = (await artifactHashes(f.content))["final.json"];
-  await assert.rejects(approveOwnerArticleEdit(f.root, dev, ids[0], hash, "owner", "repair"));
+  await assert.rejects(approveOwnerArticleEdit(f.root, dev, ids[0], hash, "owner", "repair"), /Command failed/);
   assert.equal(await readFile(f.stateFile, "utf8"), stateBytes); assert.equal(await readFile(f.reviewFile, "utf8"), reviewBytes);
   await saveJson(f.finalPath, { title: "Test", slug: "test", content_md: edits[0][1] }); hash = (await artifactHashes(f.content))["final.json"];
   await saveJson(path.join(f.content, "brief.md"), "changed evidence");

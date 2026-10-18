@@ -1,5 +1,6 @@
 import "../shared/load-env";
 import { execFileSync } from "node:child_process";
+import { createRequire } from "node:module";
 import { readFile, realpath } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -55,7 +56,7 @@ export async function approveOwnerArticleEdit(root: string, dev: { url: string; 
     const final = JSON.parse(await readFile(finalPath, "utf8"));
     if (final.slug !== state.job.slug || typeof final.title !== "string" || !final.title.trim() || typeof final.content_md !== "string" || !final.content_md.trim()) throw new Error("Edited final must retain its article identity and nonempty copy.");
     // Run the real gate on the new bytes. No model, import, dispatch or publication.
-    execFileSync(process.execPath, ["--import", import.meta.resolve("tsx"), path.join(root, "scripts/content/check-public-copy.ts"), finalPath], { cwd: root, stdio: "inherit", timeout: 60_000 });
+    execFileSync(process.execPath, ["--import", pathToFileURL(createRequire(import.meta.url).resolve("tsx")).href, path.join(root, "scripts/content/check-public-copy.ts"), finalPath], { cwd: root, stdio: "inherit", timeout: 60_000 });
     if (JSON.stringify(await artifactHashes(content)) !== JSON.stringify(hashes)) throw new Error("Article inputs changed during copy validation.");
     let approval = state.ownerApprovals?.slice(-1).pop();
     if (approval?.status === "pending") {
