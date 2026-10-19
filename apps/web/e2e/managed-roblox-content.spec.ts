@@ -138,9 +138,11 @@ for (const hub of selected.hubs) test(`${hub.path} official artwork, metadata an
   const headerImage = page.locator('main header img').first();
   await loadedImage(headerImage, hub.icon);
   for (const entry of selected.collections.filter(entry => entry.path.startsWith(`${hub.path}/`))) {
-    const cta = body(page).locator(`a[href="${entry.path}"]`);
+    const section = body(page).locator(`section[data-analytics-item-list-name="wiki_collection"][data-analytics-item-id="${entry.code}"]`);
+    await expect(section).toHaveCount(1);
+    // Inline tips can link to the same collection; its CTA is a direct section child.
+    const cta = section.locator(`:scope > a[href="${entry.path}"]`);
     await expect(cta).toHaveCount(1);
-    const section = cta.locator('..');
     await expect(section.locator('.article-content')).toContainText(/\S/);
     expect(await section.evaluate(element => {
       const copy = element.querySelector('.article-content'), link = element.querySelector(':scope > a');
