@@ -1,6 +1,9 @@
 import {expect, test, type Page, type TestInfo} from '@playwright/test';
 import fs from 'node:fs';
 
+// Cookie operations and authenticated requests must never enter traces.
+test.use({trace: 'off'});
+
 type Fact = {key: string; label: string; text: string; description: boolean};
 type RenderedValue = {text: string; parts: string[]};
 type RenderedField = RenderedValue & {label: string};
@@ -205,8 +208,6 @@ for (const entry of selected.collections) {
       await screenshot(page, info, 'local-reset');
     });
     test.describe(`${entry.path} authenticated fixture`, () => {
-      // Cookie operations and authenticated requests must never enter traces.
-      test.use({trace: 'off'});
       test('owned account persists after localStorage clear', async ({page, context}, info) => {
         const accounts: Array<{project: string; token: string}> = JSON.parse(fs.readFileSync(process.env.SELECTED_ROBLOX_AUTH!, 'utf8'));
         const account = accounts.find(candidate => candidate.project === info.project.name);
