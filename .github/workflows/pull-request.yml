@@ -4,6 +4,17 @@ on:
   pull_request:
     branches: [production]
   workflow_dispatch:
+    inputs:
+      selected_franchise_bundle_hash:
+        description: 'Optional approved immutable bundle SHA-256 for development-only franchise QA'
+        required: false
+        default: ''
+        type: string
+      selected_franchise_stage:
+        description: 'Also stage approved development content (image bundles require all four R2 secrets on this ref)'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -149,3 +160,81 @@ jobs:
             test "$MANAGED" = success
             test "$CHECKS" = success
           fi
+  selected-franchise-development-qa:
+    if: github.event_name == 'workflow_dispatch' && inputs.selected_franchise_bundle_hash != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: bloxodes-managed-content-qa
+      queue: max
+      cancel-in-progress: false
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      BLOXODES_MANAGED_QA: 'true'
+      BLOXODES_SELECTED_FRANCHISE_QA: 'true'
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      SUPABASE_MEDIA_PUBLIC_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_MEDIA_BUCKET: media
+      ARTICLE_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      ARTICLE_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      WIKI_R2_ENDPOINT: ${{ secrets.WIKI_R2_ENDPOINT }}
+      WIKI_R2_ACCESS_KEY_ID: ${{ secrets.WIKI_R2_ACCESS_KEY_ID }}
+      WIKI_R2_SECRET_ACCESS_KEY: ${{ secrets.WIKI_R2_SECRET_ACCESS_KEY }}
+      WIKI_R2_BUCKET: ${{ secrets.WIKI_R2_BUCKET }}
+      SITE_URL: https://bloxodes.com
+      NEXT_PUBLIC_SITE_URL: https://bloxodes.com
+      TEST_BASE_URL: http://bloxodes.test:3000
+      BLOXODES_BUILD_SHA: ${{ github.sha }}
+      BUNDLE_HASH: ${{ inputs.selected_franchise_bundle_hash }}
+      BLOXODES_SELECTED_FRANCHISE_STAGE: ${{ inputs.selected_franchise_stage && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v6
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - name: Require explicit development target before loading inputs
+        run: |
+          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$SUPABASE_URL" = https://bbtcaurrtyoukvjbxbbj.supabase.co
+          test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm}
+      - run: npm ci --include=dev --no-audit --no-fund
+      - run: npx tsc --project scripts/ci/tsconfig.json
+      - name: Selected franchise contract and review regression tests
+        run: node --test scripts/ci/__tests__/selected-franchise-qa.test.mjs
+      - name: Download the exact approved private bundle
+        run: node --import tsx scripts/ci/download-content-bundle.ts
+      - name: Audit, dryplan and compare selected development rows (optionally stage)
+        run: node --import tsx scripts/ci/selected-franchise-qa.ts prepare
+      - name: Create runner-only signing secret
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs'; import {randomBytes} from 'node:crypto';
+          const secret = randomBytes(32).toString('hex');
+          console.log(`::add-mask::${secret}`);
+          fs.appendFileSync(process.env.GITHUB_ENV, `AUTH_SESSION_SECRET=${secret}\n`);
+          JS
+      - run: node --import tsx scripts/ci/selected-franchise-qa.ts accounts
+      - run: npm run build:web
+      - run: npx playwright install --with-deps chromium
+      - name: Selected desktop and mobile evidence on the GitHub preview
+        env:
+          RELEASE_SMOKE_BATCH: ${{ runner.temp }}/managed-smoke.json
+          SELECTED_FRANCHISE_BROWSER: ${{ runner.temp }}/selected-franchise-browser.json
+          SELECTED_FRANCHISE_AUTH: ${{ runner.temp }}/selected-franchise-auth.json
+        run: npx playwright test apps/web/e2e/release-smoke.spec.ts apps/web/e2e/managed-franchise-content.spec.ts --timeout=120000
+      - name: Repeat exact readback and finish the development-only report
+        run: node --import tsx scripts/ci/selected-franchise-qa.ts complete
+      - name: Remove only accounts and progress created by this run
+        if: always()
+        run: node --import tsx scripts/ci/selected-franchise-qa.ts cleanup
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selected-franchise-development-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/test-reports/
+          retention-days: 1
+          if-no-files-found: ignore
