@@ -2,7 +2,7 @@
 
 Last verified: 2026-10-19
 
-Every recurring job, by where it runs. If you add, move or remove a schedule, update this file in the same change.
+Every recurring job, by where it runs. If you add, move or remove a schedule, update this file and its entry in [`monitoring.json`](monitoring.json) in the same change. See [monitoring](../operations/monitoring.md#automation-monitor).
 
 Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and GitHub cron use UTC.
 
@@ -64,11 +64,12 @@ The same crontab also has two non-Bloxodes entries (Basebuddy demo reset, a GitH
 
 ## Northflank
 
-| Job | Schedule (UTC) | Does |
-| --- | --- | --- |
-| `stats-hot-hourly` | :12 hourly | Universe HOT refresh. |
+| Job | Account | Schedule (UTC) | Does |
+| --- | --- | --- | --- |
+| `stats-hot-hourly` | stats account 1 (`northflank-stats.env`) | :12 hourly | Universe HOT refresh. |
+| `robloxgo-crawl` | RobloxGo (`northflank.env`) | :00 hourly | Collects RobloxGo place IDs into a Postgres staging database. |
 
-It's the only Northflank job. The env files keep tokens for accounts 1 to 5.
+The stats env file keeps tokens for accounts 1 to 5. Only account 1 has a project.
 
 ## GitHub Actions
 

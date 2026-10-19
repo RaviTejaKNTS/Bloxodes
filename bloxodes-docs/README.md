@@ -36,6 +36,7 @@ If you find the same fact in two places, keep it in its owner and replace the co
 **Automation**
 
 - [Schedules](automation/schedules.md): every recurring job on every machine, in one list.
+- [`monitoring.json`](automation/monitoring.json): the name and description of every job on the Automation Monitor dashboard.
 - [Notion queues](automation/notion-queues.md): Roblox Wiki Queue and Other Games Queue.
 
 **Content pipelines**
