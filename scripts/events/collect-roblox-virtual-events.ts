@@ -147,21 +147,23 @@ async function enqueueChangedUniverseRevalidation(universeIds: number[]) {
       .filter((wiki) => sidebarIds.includes(wiki.universe_id))
       .map((wiki) => wiki.slug).filter(Boolean);
     for (const inherited of [false, true]) {
-      if (inherited && !wikiSlugs.length) continue;
-      for (let offset = 0; ; offset += 1000) {
-        let query = sb.from("wiki_collection_pages").select("wiki_slug, collection_slug")
-          .eq("is_published", true).order("id").range(offset, offset + 999);
-        query = inherited
-          ? query.is("universe_id", null).in("wiki_slug", wikiSlugs)
-          : query.in("universe_id", sidebarIds);
-        const { data, error } = await query;
-        if (error) throw new Error(`Failed to look up event collection sidebars: ${error.message}`);
-        for (const page of data ?? []) {
-          if (page.wiki_slug && page.collection_slug) {
-            events.push({ type: "wiki_collection", slug: `${page.wiki_slug}/${page.collection_slug}` });
+      const filterChunks = inherited ? chunkArray(wikiSlugs, CHUNK_SIZE) : [sidebarIds];
+      for (const filterChunk of filterChunks) {
+        for (let offset = 0; ; offset += 1000) {
+          let query = sb.from("wiki_collection_pages").select("wiki_slug, collection_slug")
+            .eq("is_published", true).order("id").range(offset, offset + 999);
+          query = inherited
+            ? query.is("universe_id", null).in("wiki_slug", filterChunk)
+            : query.in("universe_id", filterChunk);
+          const { data, error } = await query;
+          if (error) throw new Error(`Failed to look up event collection sidebars: ${error.message}`);
+          for (const page of data ?? []) {
+            if (page.wiki_slug && page.collection_slug) {
+              events.push({ type: "wiki_collection", slug: `${page.wiki_slug}/${page.collection_slug}` });
+            }
           }
+          if (!data || data.length < 1000) break;
         }
-        if (!data || data.length < 1000) break;
       }
     }
   }
@@ -367,15 +369,28 @@ async function upsertEvents(rows: EventRow[]) {
   }
 }
 
-async function replaceChildRows<T extends CategoryRow | ThumbnailRow>(table: string, eventIds: string[], rows: T[]) {
+async function replaceChildRows<T extends CategoryRow | ThumbnailRow>(table: string, storedRows: T[], rows: T[]) {
   const sb = supabaseAdmin();
-  // Remove ranks that disappeared from Roblox as well as updating existing ones.
-  const { error: deleteError } = await sb.from(table).delete().in("event_id", eventIds);
-  if (deleteError) throw new Error(`Failed to replace ${table} rows: ${deleteError.message}`);
   for (const chunk of chunkArray(rows, CHUNK_SIZE)) {
     const { error } = await sb.from(table).upsert(chunk, { onConflict: "event_id,rank" });
     if (error) {
       throw new Error(`Failed to upsert ${table} rows: ${error.message}`);
+    }
+  }
+
+  // Only remove stored ranks that disappeared, after all upserts succeed.
+  const incomingKeys = new Set(rows.map((row) => JSON.stringify([row.event_id, row.rank])));
+  const staleRanks = new Map<string, number[]>();
+  for (const row of storedRows) {
+    if (incomingKeys.has(JSON.stringify([row.event_id, row.rank]))) continue;
+    const ranks = staleRanks.get(row.event_id) ?? [];
+    ranks.push(row.rank);
+    staleRanks.set(row.event_id, ranks);
+  }
+  for (const [eventId, ranks] of staleRanks) {
+    for (const chunk of chunkArray(ranks, CHUNK_SIZE)) {
+      const { error } = await sb.from(table).delete().eq("event_id", eventId).in("rank", chunk);
+      if (error) throw new Error(`Failed to delete stale ${table} rows: ${error.message}`);
     }
   }
 }
@@ -472,10 +487,14 @@ async function main() {
         const eventIds = chunk.map((row) => row.event_id);
         await stampFirstLiveAt(eventIds);
         await replaceChildRows(
-          "roblox_virtual_event_categories", eventIds, chunk.flatMap((row) => categories.get(row.event_id) ?? [])
+          "roblox_virtual_event_categories",
+          chunk.flatMap((row) => stored.get(row.event_id)?.categories ?? []),
+          chunk.flatMap((row) => categories.get(row.event_id) ?? [])
         );
         await replaceChildRows(
-          "roblox_virtual_event_thumbnails", eventIds, chunk.flatMap((row) => thumbnails.get(row.event_id) ?? [])
+          "roblox_virtual_event_thumbnails",
+          chunk.flatMap((row) => stored.get(row.event_id)?.thumbnails ?? []),
+          chunk.flatMap((row) => thumbnails.get(row.event_id) ?? [])
         );
       }
 
@@ -489,7 +508,24 @@ async function main() {
     await sleep(REQUEST_DELAY_MS);
   }
 
-  if (updatedUniverses.size) await enqueueChangedUniverseRevalidation(Array.from(updatedUniverses));
+  if (updatedUniverses.size) {
+    const changedUniverseIds = Array.from(updatedUniverses);
+    const maxAttempts = 3;
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      try {
+        await enqueueChangedUniverseRevalidation(changedUniverseIds);
+        break;
+      } catch (error) {
+        console.error(`Virtual event revalidation attempt ${attempt}/${maxAttempts} failed:`, (error as Error).message);
+        if (attempt === maxAttempts) {
+          console.error(`Virtual event revalidation was not queued for universe IDs: ${changedUniverseIds.join(", ")}`);
+          process.exitCode = 1;
+        } else {
+          await sleep(250 * attempt);
+        }
+      }
+    }
+  }
   console.log("Virtual events collection complete.");
 }
 
