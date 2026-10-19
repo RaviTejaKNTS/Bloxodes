@@ -17,6 +17,7 @@ async function layout(page: Page) {
 }
 async function screenshot(page: Page, info: TestInfo, name: string) {
   await layout(page);
+  await page.screenshot({path: info.outputPath(`${name}-viewport.png`)});
   await page.screenshot({path: info.outputPath(`${name}.png`), fullPage: true});
 }
 async function usefulFields(page: Page, entry: CollectionEntry, view: 'cards' | 'list') {
