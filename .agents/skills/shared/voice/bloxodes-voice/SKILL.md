@@ -1,6 +1,6 @@
 ---
 name: bloxodes-voice
-description: The Bloxodes house voice for every public word we publish. Read it before writing, editing or reviewing any page copy (articles, wiki hubs, collections, catalogs, codes, quizzes, checklists, events, tools, titles, meta descriptions, FAQs) and before writing a research brief a writer will use.
+description: The Bloxodes house voice for every public word we publish. Read it before writing, editing or reviewing any page copy (articles, wiki hubs, collections, catalogs, codes, quizzes, checklists, tools, titles, meta descriptions, FAQs) and before writing a research brief a writer will use.
 ---
 
 # Bloxodes Voice
@@ -46,7 +46,7 @@ Most game names, NPCs and numbers in this guide and its examples are made up. Tr
 | Self-reference | "Bloxodes", "this page", "this catalog", "this dataset", "our list", "use the cards below" | Talk about the game. (An article can say "this guide" once if it helps.) |
 | Process talk | sources, briefs, research, datasets, manifests, workflows, checks we ran | Keep it in the brief. Readers only see the game. |
 | Em dashes | "the boss — and its loot —" | Use a comma, colon, parentheses or two sentences. This applies to every field, including titles, FAQs and alt text. |
-| Freshness claims on evergreen pages | latest, current, fresh, new, updated daily, "this month" | Codes and events pages stay timeless. Scripts own the live data. |
+| Freshness claims on evergreen pages | latest, current, fresh, new, updated daily, "this month" | Codes pages stay timeless. Scripts own the live data. |
 | Repeats | intro, body and FAQ all saying the same thing | Give each fact one home. |
 
 A few game terms happen to use banned words (Dandy's World's Research, GTA's Source Cargo). Those are fine. The repo checker `scripts/content/check-public-copy.ts` also blocks "this catalog/page/dataset" wording, "Bloxodes" in copy, and "not just/not only".
@@ -188,7 +188,7 @@ Rules of thumb:
 - Opinions must follow from facts. "Bulk Pickup first, because every other upgrade waits on it" is fine. "This is the best game on Roblox" isn't.
 - First person ("I'd skip it early") is fine now and then for a quick opinion. Never use it to claim play time, tests or results that didn't happen. "We" never means Bloxodes.
 - Use American English. Dates look like "September 5, 2026." Times are 12-hour with Eastern first, Pacific when it helps: "2 p.m. ET (11 a.m. PT)." Convert with date-aware time zones, not fixed EST/PST offsets.
-- Codes and events pages stay evergreen: no code names, counts, dates or "latest" claims in prose.
+- Codes pages stay evergreen: no code names, counts, dates or "latest" claims in prose.
 
 ## Before you hand it in
 
@@ -206,6 +206,6 @@ Read the whole thing as a player who just searched the title. Then check:
 
 ## Page-type examples
 
-`.agents/skills/bloxodes-voice/references/examples.md` has before/after examples for every page type: article intros and sections, troubleshooting, tier lists, best-games picks, wiki hubs, collections, catalogs, codes, quizzes, checklists, events, tools and FAQs. Read the section for your page before drafting when you can open repo files. Script prompts embed this guide without the examples, and the rules above stand on their own. Learn the move, then write your own words. Don't reuse the example sentences.
+`.agents/skills/bloxodes-voice/references/examples.md` has before/after examples for every page type: article intros and sections, troubleshooting, tier lists, best-games picks, wiki hubs, collections, catalogs, codes, quizzes, checklists, tools and FAQs. Read the section for your page before drafting when you can open repo files. Script prompts embed this guide without the examples, and the rules above stand on their own. Learn the move, then write your own words. Don't reuse the example sentences.
 
 Each page-type writing skill still owns its fields, output shape and data rules. This guide owns how the words sound.

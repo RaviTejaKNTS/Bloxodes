@@ -48,7 +48,7 @@ See [machines](infrastructure/machines.md) for access and [schedules](automation
 | Franchise games | MacBook Pro | T3 schedule, 02:00 IST, from the Other Games Queue |
 | Universe and item stats, catalog items, music, decals, puzzles, promo rewards, free items | VPS | cron |
 | HOT universe stats | Northflank | hourly cron job |
-| Catalog, quizzes, checklists, events pages, tools, monthly reports | Any machine, by hand | owner request |
+| Catalog, quizzes, checklists, tools, monthly reports | Any machine, by hand | owner request |
 | Revalidation and cache warming | VPS | cron every minute |
 | Web deploys, schema, content publication | GitHub Actions | merge to `production` or dispatch |
 

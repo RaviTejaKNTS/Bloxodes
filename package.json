@@ -204,8 +204,6 @@
     "test:vps-boot-recovery": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts/ops/__tests__ -p 'test_vps_boot_recovery.py' -v",
     "test:items-pipeline": "tsx --test scripts/items/__tests__/*.test.ts",
     "backfill:interlinking": "tsx scripts/backfill/backfill-interlinking.ts",
-    "seed:events-pages": "tsx scripts/events/seed-events-pages.ts",
-    "seed:event-details": "tsx scripts/events/seed-event-details.ts",
     "trading:collect": "tsx scripts/trading/collect-all-limiteds.ts",
     "build:web": "npm run build -w @bloxodes/web",
     "build:extension": "npm run build -w @bloxodes/extension",

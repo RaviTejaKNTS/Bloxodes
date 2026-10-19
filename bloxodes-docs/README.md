@@ -46,7 +46,7 @@ If you find the same fact in two places, keep it in its owner and replace the co
 - [Roblox wiki and collections](content/roblox-wiki.md)
 - [Franchise games](content/franchise.md): GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and other non-Roblox titles.
 - [Catalog](content/catalog.md)
-- [Quizzes, checklists, events and tools](content/engagement.md)
+- [Quizzes, checklists, tools and events data](content/engagement.md)
 - [Data refreshes](content/data-refreshes.md): puzzles, music, decals, Marketplace items and item stats.
 - [Stats](content/stats.md): universe stats and monthly reports.
 - [Stats metrics](content/stats-metrics.md): what each stats metric means and how charts bucket it.

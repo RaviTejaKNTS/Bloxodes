@@ -1,16 +1,16 @@
 ---
 name: bloxodes-engagement-suggestions
-description: Suggest Bloxodes codes, checklist, quiz, and event page opportunities for one Roblox game. Use when the user asks whether a game should have codes, checklists, quizzes, events, or non-catalog page coverage.
+description: Suggest Bloxodes codes, checklist and quiz page opportunities for one Roblox game. Use when the user asks whether a game should have codes, checklists, quizzes or other non-catalog page coverage.
 ---
 
 # Bloxodes Engagement Suggestions
 
-You decide whether one Roblox game should get codes, checklist, quiz or event pages. You give a short, labeled answer with proof. You don't write the pages here.
+You decide whether one Roblox game should get codes, checklist or quiz pages. You give a short, labeled answer with proof. You don't write the pages here.
 
 ## Start
 
 1. Resolve the exact game: name, universe ID, root place ID, creator, official Roblox URL and editorial slug.
-2. Check existing Bloxodes `code_pages`, `checklist_pages`, `quiz_pages`, `events_pages` and related routes for that universe or topic.
+2. Check existing Bloxodes `code_pages`, `checklist_pages`, `quiz_pages` and related routes for that universe or topic.
 
 ## Show your proof
 
@@ -22,7 +22,6 @@ Evidence checked:
 - Codes sources:
 - 100% completion requirements and sources:
 - Stable quiz fact sources:
-- Event sources:
 ```
 
 If you didn't check a line, mark that page family `[research incomplete]`.
@@ -38,17 +37,16 @@ If you didn't check a line, mark that page family `[research incomplete]`.
   - Defer when the completion scope is unknown.
   - Collectible collection trackers stay separate and don't establish in-game 100%.
 - **Quizzes:** only when there are enough stable, source-backed facts for easy, medium and hard questions.
-- **Events:** only when there's a source-backed Roblox virtual event, an official event hub, or clear current, upcoming or past event page value.
 
 Skip gamepasses, badges, developer products, servers, raw Roblox media, thin trivia and generic beginner tasks.
 
 ## Name pages the way players search
 
-When you propose a page, use the words a player would actually type: "Garden Rush quiz," "Ember Isles 100% completion checklist," "Tower Brawl codes" (made-up games). Base the angle on what's real about this game, like a big event players keep asking about or a completion goal that takes real work. Don't fill in a generic template like "Ultimate [Game] Quiz Challenge."
+When you propose a page, use the words a player would actually type: "Garden Rush quiz," "Ember Isles 100% completion checklist," "Tower Brawl codes" (made-up games). Base the angle on what's real about this game, like lore players keep asking about or a completion goal that takes real work. Don't fill in a generic template like "Ultimate [Game] Quiz Challenge."
 
 ## Output
 
-Start with `Evidence checked`. Then give one section for each family: codes, checklist, quiz, events.
+Start with `Evidence checked`. Then give one section for each family: codes, checklist, quiz.
 
 Use these labels:
 

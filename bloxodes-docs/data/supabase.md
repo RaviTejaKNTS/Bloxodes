@@ -53,4 +53,4 @@ Generated types for the shared game tables live in `supabase/types/shared-games.
 
 - `supabase-meta` has its health check turned off on purpose (it used to leak processes). It's running fine.
 - `supabase/config.toml` still has the old local project ID `roblox-codes`. It's harmless.
-- `game_generation_queue`, `event_guide_generation_queue` and `article_generation_artifacts` have no code left. Drop them in a later migration.
+- `game_generation_queue` and `article_generation_artifacts` have no code left. Drop them in a later migration.

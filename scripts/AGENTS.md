@@ -168,7 +168,7 @@ Article bundle verification and pre-promotion release reads use the resolved man
   - `rerank-roblox-decal-ids.ts` recomputes active-row popularity, category, curation, and curated-rank fields without refetching Roblox.
   - `seed-decal-catalog-page.ts` upserts the local `catalog_pages` copy/FAQ row for `/catalog/roblox-decal-ids`.
   - `run-decal-id-refresh.ts` is the guarded refresh runner behind `npm run refresh:decal-ids`; it chains collect, import, verify, and rerank with a single-host lockfile.
-- `events/`: event ingestion, page seeding and event detail hydration.
+- `events/`: Roblox virtual event ingestion only (`collect-roblox-virtual-events.ts`). No event text or page generation.
 - `music/`: music ID collection, enrichment, verification and thumbnails.
 - `items/`: public `/stats/items` automation and read-model maintenance.
   - `assign-item-stats-tier.ts` classifies Roblox marketplace rows into the same four operational tiers used by the universe pipeline: `NEW`, `HOT`, `WARM`, or `COLD`; it is dry-run by default and writes only with `--apply`.
