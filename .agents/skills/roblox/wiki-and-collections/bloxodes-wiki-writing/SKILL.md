@@ -12,6 +12,7 @@ Use this after `bloxodes-wiki-research` and parent approval.
 ## Read first
 
 - The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`.
+- Page standards: `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images, layout).
 - The approved `brief.md`.
 
 ## Workflow

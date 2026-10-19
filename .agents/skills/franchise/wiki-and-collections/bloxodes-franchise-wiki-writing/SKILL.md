@@ -1,98 +1,91 @@
 ---
 name: bloxodes-franchise-wiki-writing
-description: Write one non-Roblox franchise game wiki hub from an approved brief. Use for game metadata, hub copy, tips, verified controls, and final JSON; do not publish production.
+description: Write one non-Roblox franchise or game wiki hub from an approved brief. Same hub, fields and rules as the Roblox wiki writing skill, with franchise identity, scope and required cover and thumbnail artwork. Use for game.json and final.json; don't publish production.
 ---
 
-# Bloxodes franchise wiki writing
+# Bloxodes Franchise Wiki Writing
 
-Use this after `bloxodes-franchise-wiki-research` has produced an approved brief. Write one title hub only. Do not publish production, change the dataset, or add future-page promises.
+A wiki hub is the front door to one game, or to a whole franchise. A new player should finish the description knowing what they actually do in the game, and the tips should feel like advice from someone who's already made the early mistakes.
 
-## Shared game storage
+This is the same job, the same page and the same rules as `bloxodes-wiki-writing` for Roblox. The only differences are listed under "Franchise differences" below.
 
-Managed development uses `games`, `game_wiki_pages`, `game_collection_pages`, `game_collection_datasets`, `game_collection_items`, `game_code_pages`, `game_codes` and `game_tool_pages`. Roblox stays separate. Scope every read and write by namespace. Use `gameDatabase(client, namespace)` for existing logical suffixes.
+Use this after `bloxodes-franchise-wiki-research` and parent approval. Write one hub per run.
 
-`games.kind` is only `franchise` or `game`. `parent_id` links a game to its franchise. Other mode and edition labels describe content without adding kinds. Read the wiki row's `canonical_path` before planning collection links. A standalone game's wiki is `/<namespace>/wiki`. A franchise has its own wiki hub and child game wikis. Preserve Minecraft's edition URLs.
+## Read first
 
-Use `publish:game-pages -- --namespace <slug> --file <reviewed.json>` for reviewed game, wiki, codes page and registered tool payloads. It is dry run by default; `--apply` writes only to development. Combined payloads need explicit IDs. Publish identity before wiki, then collections. Research stays in ignored workspaces.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`.
+- Page standards: `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images, layout).
+- The approved `brief.md`.
 
-Use `sync:shared-game-collection-runtime` with `--namespace` and the reviewed runtime manifest. Keep immutable dataset/media publication and pointer readback. Preserve drafts, revisions, sources, fields and media. Never edit published items. These workflows cover every non-Roblox title, GTA included. Game-specific scope comes from the approved plan.
+## Workflow
 
-## Context and workspace
+1. Read the approved brief.
+2. Create or update:
 
-Read the approved brief and an existing hub workspace from the same franchise when available. The parent must provide or resolve:
+   ```text
+   <workspace-root>/<game-slug>/wiki/<game-slug>/
+     brief.md
+     game.json
+     final.json
+   ```
 
-- franchise name and namespace
-- game slug, hub route, and target game/wiki schema
-- authoring workspace root
-- publisher/source and mode/edition boundaries
+3. Write `game.json` (identity and artwork) and `final.json` (hub copy).
+4. Parse both JSON files before returning.
 
-Create or update:
+## How the hub should read
 
-~~~text
-<workspace-root>/<game-slug>/wiki/<game-slug>/
-  brief.md
-  game.json
-  final.json
-~~~
+- **Start with what the player does.** The first sentence of `description_md` puts the reader in the game: what you do, what you're working toward, what makes this game its own thing. Not "X is a game where..."
+- **Explain the core loop like a friend would.** Earn this, spend it on that, unlock the next thing. Use the game's real names for places, currencies, modes and systems, and explain any odd term in a few words right where it shows up.
+- **Tips are the fun part.** Each one is a specific move with a reason: what to do first, what to skip, what trips people up. "Learn the drift" is a chore list. "Hold the drift through the whole S-bend on Moo Moo Meadows, because the purple boost you build there carries you past the item boxes first" is a tip.
+- **Use the brief's numbers.** When the brief gives a recommended value or range for something sources disagree on, use it.
+- **Talk about the game, never the page.** Don't describe what the wiki covers, and don't narrate how it was made. Follow the public copy rules in root `AGENTS.md`.
 
-Use the target franchise schema supplied by the context. Unless the target implementation says otherwise, use the common non-Roblox hub contract below, with no Roblox identifiers.
+## Rules
 
-## Voice
+- `tips_md` has 3 or 4 useful gameplay tips. Each one names something real (a mode, item, unlock, place or technique) and gives the reason. If the brief doesn't have enough specifics, send it back for research instead of writing vague tips. Any heading inside it follows page standards.
+- `description_md` stays short but never vague. Name the game's actual systems, modes and goals.
+- Fill `controls_json` only with verified controls. If you can't verify them, use `[]` and list the gap in `brief.md`. Never infer controls from supported-platform lists.
+- No generic beginner advice ("explore the map," "have fun with friends").
 
-Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Wiki hubs" section of `.agents/skills/bloxodes-voice/references/examples.md`. A hub is the front door to the game, so a new player should finish the description knowing what they actually do in it, and the tips should sound like advice from someone who's already made the early mistakes.
+## Fields
 
-- Open `description_md` on what the player does, not "X is a game where..."
-- Real game nouns, short paragraphs, "you" when it helps.
-- Never mention database rows, SEO or what the page plans to cover. Never say where a fact came from or how the page was made. Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
-- No franchise-specific visual instructions or eyebrow text. Use the existing Bloxodes design.
+### `final.json`
 
-## Writing rules
+- `game_slug` and `slug`: the approved editorial slug.
+- `title`: `<Short Game Name> Wiki`. For a franchise root, `<Franchise> Wiki`.
+- `seo_title`: close to the title and readable in search, 50 to 65 characters, naming what a player finds there (`ARC Raiders Wiki: Raids, Workshop Gear, Skill Tree and Feats`).
+- `meta_description`: what a player can figure out here, with a reason to click, roughly 140 to 160 characters. Lead with the game, never "Learn how" or "Learn everything." No completeness or freshness claims.
+- `description_md`: 1 or 2 short, link-free paragraphs about what the player does and how the core loop works.
+- `tips_md`: 3 or 4 concrete tips. Leave empty only for an announced or unreleased game with no real gameplay to advise on.
+- `controls_json`: `[]` or verified rows using the target renderer's control keys.
+- `cover_image`: `null`. Hub artwork lives in `game.json`.
 
-- Start description_md with what the player does and how the title progresses.
-- Keep the campaign, online service, expansion, and other scopes explicit. Do not blend inventories, progression, prices, ranks, or updates from separate scopes.
-- Preserve platform, edition, and release-generation boundaries from the brief.
-- For an announced or upcoming title, write only restrained, verified facts. Leave tips_md empty when real gameplay tips cannot be supported.
-- Fill controls_json only with verified bindings. Use [] when none are approved.
-- Use the control keys accepted by the target renderer. Do not invent a control schema or infer bindings from supported-platform flags.
-- Link approved collections through runtime data and the hub renderer. Do not hard-code future collection promises into description_md.
-- Keep artwork fields null unless the brief documents a reviewed exception. Game artwork belongs in the target game metadata file.
+### `game.json`
 
-## game.json
+- `slug`, `title`, `short_title`, `installment`, `developer`, `publisher`, `official_url`, `release_dates_json`, `platforms_json`: verified facts only. Leave unknowns empty.
+- `status`: `announced`, `upcoming` or `released`.
+- `description_md`: one short line for cards and the franchise directory.
+- `cover_image` **(required)**: a landscape 16:9 image for cards and social previews. Official key art, store art or a real gameplay screenshot. Never pad portrait box art into a wide frame.
+- `hero_image` **(required)**: a separate square-friendly image for the thumbnail beside the title. Never reuse the cover URL.
 
-Unless the target schema supplies another contract:
+Both images are served from Bloxodes media (`https://media.bloxodes.com/wiki/...`), never hotlinked. Stage them with `npm run sync:franchise-wiki-media -- --namespace <slug>` (GTA uses `sync:gta-wiki-media`, Minecraft `sync:minecraft-wiki-media`). A hub without both images isn't ready: don't hand it in, send it back to the image stage.
 
-~~~json
-{
-  "slug": "",
-  "title": "",
-  "short_title": "",
-  "installment": "",
-  "developer": "",
-  "publisher": "",
-  "description_md": "",
-  "cover_image": null,
-  "hero_image": null,
-  "official_url": "",
-  "release_dates_json": {},
-  "platforms_json": [],
-  "status": "released",
-  "is_published": true
-}
-~~~
+## Franchise differences
 
-Use only announced, upcoming, or released for status. Keep unknown dates, platforms, and fields empty or absent as the target schema requires. Do not use Roblox identifiers.
+These are the only places this skill differs from the Roblox one.
 
-Game artwork has two roles, and a released hub needs both:
+- **Identity:** no `universe_id` or any Roblox identifier. The hub belongs to a namespace and a `games` row. `games.kind` is `franchise` or `game`, and a child game sets `parent_id`. Routes are `/<namespace>/wiki` for a root and `/<namespace>/wiki/<game-slug>` for a child. See `bloxodes-docs/content/franchise.md`.
+- **Artwork:** Roblox hubs get images from the universe automatically. Franchise hubs, roots included, must supply `cover_image` and `hero_image` in `game.json`.
+- **Scope:** keep campaign, online service, expansion, mode, edition, platform and release-generation boundaries from the brief. Don't blend inventories, progression, prices or ranks from separate scopes.
+- **Unreleased games:** write only restrained, verified facts. Tips can be empty.
+- **Collection links:** approved collections link through runtime data and the hub renderer. Don't promise future collections in `description_md`.
+- **Publication:** `publish:game-pages -- --namespace <slug> --file <reviewed.json>` (identity before wiki, then collections), through the `game-pages` and `franchise-wiki` publishers.
 
-- `cover_image` is the wide card and social image.
-- `hero_image` is separate, square-friendly artwork for the thumbnail beside the wiki title. Never reuse the cover URL.
-- Both are served from Bloxodes media (`https://media.bloxodes.com/wiki/...`), never hotlinked from a wiki or publisher. GTA hubs stage them with `sync:gta-wiki-media`; Red Dead uses `sync:franchise-wiki-media -- --namespace red-dead`.
+## Output shape
 
-## final.json
+`final.json`:
 
-Unless the target schema supplies another contract:
-
-~~~json
+```json
 {
   "game_slug": "",
   "slug": "",
@@ -105,12 +98,35 @@ Unless the target schema supplies another contract:
   "cover_image": null,
   "is_published": true
 }
-~~~
+```
 
-- game_slug and slug use the approved editorial title slug.
-- title follows <Short Game Name> Wiki.
-- seo_title stays close to the title and names the real scope.
-- meta_description says what a player can understand or check without claiming completeness or freshness.
-- description_md uses one or two short, link-free paragraphs about the title's loop and scope.
+`game.json`:
 
-Parse both JSON files before returning. Return the workspace path, parse results, and any fact omitted because the evidence was not strong enough.
+```json
+{
+  "slug": "",
+  "title": "",
+  "short_title": "",
+  "installment": "",
+  "developer": "",
+  "publisher": "",
+  "description_md": "",
+  "cover_image": "https://media.bloxodes.com/wiki/...",
+  "hero_image": "https://media.bloxodes.com/wiki/...",
+  "official_url": "",
+  "release_dates_json": {},
+  "platforms_json": [],
+  "status": "released",
+  "is_published": true
+}
+```
+
+## Before you return
+
+- Both JSON files parse.
+- `cover_image` and `hero_image` are set, different, landscape and square respectively, and hosted on `media.bloxodes.com`.
+- Title, SEO title and any headings meet `bloxodes-docs/content/page-standards.md`.
+- Scope claims match the brief.
+- The voice guide's "Before you hand it in" check passes on the description and tips.
+
+Return the workspace path, the parse results and any fact you left out because the evidence wasn't strong enough.

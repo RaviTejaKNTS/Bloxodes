@@ -10,7 +10,7 @@ You take completed, user-approved work to production: a PR into `production`, Gi
 ## Ground rules
 
 - Stay in the T3-assigned task worktree.
-- Use `dev-docs/operations/deployment.md` for current job ownership and credentials.
+- Use `bloxodes-docs/operations/release.md` for current job ownership and credentials.
 - Don't run local installs, checks, tests, builds or browser QA.
 
 ## Authority

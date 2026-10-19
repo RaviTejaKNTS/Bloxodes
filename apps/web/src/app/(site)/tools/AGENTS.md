@@ -61,4 +61,3 @@ Prefer reusing these pieces over rebuilding the same layout in each tool page.
 5. Add `WebPage` and `WebApplication` JSON-LD.
 6. Set `revalidate` intentionally, usually `3600`.
 7. Add the tool to the tools hub / inventory if it is public.
-8. Update `agents/pages/agents.md` if the route surface changes.

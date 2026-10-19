@@ -1,6 +1,6 @@
 # Wiki and Collection Runs in T3 Code
 
-Read this when the owner runs the collection runner or the wiki runner inside T3 Code and you have the T3 `delegate_task` tool. You're the orchestrator. Each stage goes to a fresh child agent on the model below. Luna builds anything that's evidence or data. Haiku 5.5 checks Luna's work and writes. Luna checks Haiku's writing. The homelab wiki automation (`wiki:homelab:run`) doesn't use this page and keeps its own model settings.
+Read this when the owner runs the collection runner or the wiki runner inside T3 Code and you have the T3 `delegate_task` tool. You're the orchestrator. Each stage goes to a fresh child agent on the model below. Luna builds anything that's evidence or data. Haiku 5.5 checks Luna's work and writes. Luna checks Haiku's writing.
 
 ## Who runs each stage
 
@@ -93,4 +93,4 @@ Run the hub after the collections, so it can link to the collections that passed
 
 The run stops at approved `final.json` files with their datasets, manifests and media. Staging a `roblox-collection` or `roblox-wiki` batch, `Managed content QA` on GitHub, managed-development publishing and production release each need the owner's explicit go-ahead.
 
-Report per collection and for the hub: status, the stage reached, item and image counts, each review's main findings, and the folder path. Then update or delete the queue row as root `AGENTS.md` describes.
+Report per collection and for the hub: status, the stage reached, item and image counts, each review's main findings, and the folder path. Then update the queue row as root `AGENTS.md` describes.

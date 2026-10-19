@@ -1,0 +1,89 @@
+# Schedules
+
+Last verified: 2026-10-19
+
+Every recurring job, by where it runs. If you add, move or remove a schedule, update this file in the same change.
+
+Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and GitHub cron use UTC.
+
+## T3 schedules (MacBook Pro)
+
+Both run in a fresh worktree from `origin/production`, with Codex `gpt-6.1-sol` high as the parent. Both have standing permission to publish through `bloxodes-release-e2e`. Any extra code PR stays open for owner approval.
+
+| Schedule | Time | Does |
+| --- | --- | --- |
+| Bloxodes nightly other games | 02:00 IST | Takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md), builds its planned pages, publishes them. |
+| Bloxodes nightly Roblox wiki | 02:30 IST | Claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md), builds its collections and hub, publishes them, including the code PR that registers the collections. |
+
+The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skills to use and the publishing go-ahead.
+
+## Homelab (systemd)
+
+All units run from `/srv/data/bloxodes-automation-runtime/current` and read `/etc/bloxodes/article-automation.env`.
+
+| Unit | When | Does |
+| --- | --- | --- |
+| `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. On success starts the writer. |
+| `bloxodes-article-writer.service` | after discovery | `articles:writer:batch -- --apply --limit 6`, auto-publish on. |
+| `bloxodes-article-publication.timer` | every 15 minutes | `articles:publication:drain -- --apply`. Then runs the audit. |
+| `bloxodes-article-audit.service` | after publication | `articles:automation:audit`. |
+
+The runtime is a separate release from the repo. Merging code doesn't change it. See [articles](../content/articles.md#runtime-releases).
+
+## VPS (cron, user `ravitejaknts`)
+
+Jobs run in short-lived `bloxodes-stats-worker:production` containers through `bin/run-job.sh`, which handles locks, timeouts and logs. The checked-in copies are `scripts/ops/vps-universe-stats.crontab` and `scripts/ops/vps-scheduled-automation.crontab`.
+
+| Group | Schedule (UTC) |
+| --- | --- |
+| Revalidation and cache warming | every minute |
+| Worker image rebuild from the approved SHA | 00:05 daily |
+| Universe NEW | :07 every 2 hours |
+| Universe priority discovery | :22 hourly |
+| Universe WARM | :32 every 6 hours |
+| Universe COLD, then current index | :47 hourly |
+| Hourly playing ranks | :30 hourly |
+| Universe strict audit | :10 every 6 hours |
+| Daily rollup, prune, audit | 00:02 |
+| Worker ledger reconcile | 00:10 |
+| Platform aggregates | 01:05 |
+| Codes refresh | 00:00, 06:00, 12:00, 18:00 |
+| Events collect and details | 00:15 (see known issues) |
+| Puzzles | 04:10, 04:45, 05:00, 05:30, 07:10, 08:10, sweep 08:30, audit 08:45 |
+| Music IDs | 06:20 |
+| Decal IDs | 06:55 |
+| Free item candidates, then verification | 07:00, 07:30 |
+| Catalog item discovery | 03:05, 09:05, 15:05, 21:05 |
+| Catalog item enrichment | :42 in hours 02–05, 08–11, 14–17, 20–22 |
+| Item stats | tier 01:05; NEW :55 most hours; HOT :32; WARM 01:32/07:32/13:32/19:32; COLD 23:32; resale :17 every 3 hours |
+| Item index, rollup, audit | index :45 hourly; rollup 01:25; audit :55 every 6 hours |
+| Promo rewards | Wednesday 09:40 |
+| Boot recovery | `@reboot` |
+
+The same crontab also has two non-Bloxodes entries (Basebuddy demo reset, a GitHub analytics collector). Leave them alone.
+
+## Northflank
+
+| Job | Schedule (UTC) | Does |
+| --- | --- | --- |
+| `stats-hot-hourly` | :12 hourly | Universe HOT refresh. |
+
+It's the only Northflank job. The env files keep tokens for accounts 1 to 5.
+
+## GitHub Actions
+
+Scheduled:
+
+| Workflow | Schedule (UTC) | Does |
+| --- | --- | --- |
+| `discover-beebom-codes.yml` | :17 every 6 hours | Finds new codes pages from Beebom. |
+| `generate-queue.yml` (Draft Code Page Generation) | 10 times a day | Writes and publishes draft codes pages. |
+| `stats-health-monitor.yml` | every 5 minutes (GitHub runs it far less often) | Health check with Telegram alerts. |
+
+Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
+
+Manual only: `automation-runtime.yml` (packages the homelab runtime), `manual-web-audit.yml` and `google-indexing.yml` (Google Indexing is switched off).
+
+## Known issues
+
+- The VPS still runs the events job at 00:15, while the checked-in crontab has it commented out as disabled. It collects events, then fails on a missing `TAVILY_API_KEY`. The owner needs to choose: remove it or fix it.

@@ -25,13 +25,6 @@ function formatDuration(totalSeconds) {
   return parts.join(' ');
 }
 
-function formatPlatformStatus(platform) {
-  if (!platform) return '';
-  const icon = platform.status === 'success' ? '✅' : platform.status === 'skipped' ? '➖' : '❌';
-  const detail = platform.error ? ` (${platform.error})` : platform.status === 'skipped' ? ' (skipped)' : '';
-  return `${icon} ${platform.name}${detail}`;
-}
-
 function buildSummaryLines(summary) {
   if (!summary || typeof summary !== 'object') return [];
 
@@ -66,32 +59,6 @@ function buildSummaryLines(summary) {
         summary.failures.slice(0, 5).forEach((failure) => {
           lines.push(`   - ${failure.slug ?? failure.name ?? 'Unknown'}: ${failure.error ?? 'Unknown error'}`);
         });
-      }
-      break;
-    }
-    case 'post-online': {
-      const game = summary.game ?? {};
-      const stats = summary.stats ?? {};
-      lines.push('', 'Post Details:', `• Game: ${game.name ?? 'Unknown'} (${game.slug ?? 'n/a'})`, `• Codes queued: ${stats.codesTotal ?? 0}`);
-
-      if (Array.isArray(summary.platforms) && summary.platforms.length) {
-        const platformLine = summary.platforms.map(formatPlatformStatus).filter(Boolean).join('  ');
-        if (platformLine) {
-          lines.push(`• Platforms: ${platformLine}`);
-        }
-      }
-
-      if (Array.isArray(summary.codes) && summary.codes.length) {
-        const preview = summary.codes.slice(0, 5).join(', ');
-        const suffix = summary.codes.length > 5 ? `, … +${summary.codes.length - 5} more` : '';
-        lines.push(`• Codes snapshot: ${preview}${suffix}`);
-      }
-
-      const messages = summary.messages ?? {};
-      if (messages.telegram) {
-        const trimmed = String(messages.telegram).split('\n').slice(0, 3).join('\n');
-        lines.push('• Telegram body:');
-        trimmed.split('\n').forEach((line) => lines.push(`   ${line}`));
       }
       break;
     }

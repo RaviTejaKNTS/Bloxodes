@@ -10,8 +10,7 @@ You convert one Bloxodes page family at a time into a flat, valid, testable cont
 ## Background
 
 - Bloxodes moved from Mediavine Journey to full Mediavine on 2026-10-08. The in-content placement rules below still apply. "Journey" in class names, attributes and script names is historical.
-- Read `dev-docs/architecture.md#advertising` for the current ad setup.
-- Read `docs/analytics/journey-auto-ads-dom-refactor-2026-07-14.md` when you need historical implementation details, proven route coverage or release evidence.
+- Read `bloxodes-docs/operations/ads.md` for the current ad setup.
 
 ## Workflow
 

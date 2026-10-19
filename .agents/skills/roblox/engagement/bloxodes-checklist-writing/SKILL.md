@@ -7,7 +7,7 @@ description: Write one Bloxodes 100% completion checklist final.json after brief
 
 A checklist is a player's map to 100%. The tasks have to be exact and checkable, and the short page description should make the grind feel doable. Normally you only write source-verified 100% completion checklists for the exact game and edition or mode.
 
-Use this after `bloxodes-checklist-research` and parent approval. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`. Preparation lists, beginner milestones and routines need an explicit user exception in the brief.
+Use this after `bloxodes-checklist-research` and parent approval. Follow `bloxodes-docs/content/engagement.md#standalone-checklist-scope`. Preparation lists, beginner milestones and routines need an explicit user exception in the brief.
 
 ## Read first
 

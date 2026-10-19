@@ -14,6 +14,7 @@ Use this after `brief.md`, data readiness and image readiness are approved, for 
 ## Read first
 
 - The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`.
+- Page standards: `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images, layout).
 - The approved `brief.md`.
 
 ## Useful coverage
@@ -97,7 +98,7 @@ The main body. It covers what a player needs to use or finish this collection: s
 - Short paragraphs of about 2 or 3 sentences. Break up anything that turns into a wall.
 - Bullets for steps, tips, quick comparisons and short lists.
 - A Markdown table when you're comparing a few options on the same dimensions (like which item to pick for which situation). Only when it reads cleaner than prose.
-- A few clear, search-friendly headings that say what each section answers, using the game name where it reads naturally ("Which Garden Rush Pets to Hatch First"). A short body may need none. No vague, cute or sentence-like headings and no needless subsections.
+- Headings follow `bloxodes-docs/content/page-standards.md`: descriptive and search-friendly, with the game name where it reads naturally ("Which Garden Rush Pets to Hatch First"), so a reader skimming only the headings knows what each section covers. No vague or cute headings and no needless subsections.
 - Don't repeat the cards, intro or section notes. Only add what the rest of the page doesn't say.
 - No filler. If a section would only pad the page, cut it.
 - Stay concrete and specific to this game system, in plain English anyone can follow.

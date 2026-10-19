@@ -2,7 +2,7 @@
 
 ## GitHub task and release flow
 
-Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `bloxodes-docs/operations/release.md`. Preserve installed runtimes, env files and active jobs.
 
 Scope: everything under `apps/web/src/app/`.
 
@@ -53,4 +53,3 @@ Use this file for route-level work. For public content route specifics, also rea
 1. Put the route in the correct group: `(site)`, `(secure)`, `api`, `auth`, `feed.xml`, or `sitemaps`.
 2. Decide whether the route is static, ISR, or dynamic and make that explicit.
 3. If the route is public and canonical, make sure sitemap/feed/revalidation coverage stays correct.
-4. Update the matching inventory in `agents/pages/agents.md` or `agents/routes/agents.md`.

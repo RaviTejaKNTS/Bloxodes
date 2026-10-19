@@ -1,6 +1,6 @@
 # Bloxodes skill execution
 
-Follow root `AGENTS.md` and `dev-docs/operations/deployment.md` for task/release ownership. Stay in the T3-assigned worktree. Never create another task branch/worktree.
+Follow root `AGENTS.md` and `bloxodes-docs/operations/release.md` for task/release ownership. Stay in the T3-assigned worktree. Never create another task branch/worktree.
 
 Run skill validation, page verifiers, typechecks, tests, builds and browser QA on GitHub. Commands in individual skills describe the checks to run there, not permission to run them locally. Research and authoring files stay local; publication uses exact approved CI batches.
 

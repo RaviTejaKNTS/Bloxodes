@@ -77,14 +77,14 @@ Create one run folder per page inside the checkout before the first stage, at `t
 ## Sources and images
 
 - **Conflicting sources.** Keep the better-supported value, or a range for numbers. Record every competing value with its source in the brief. Leave a field empty only when no reliable source gives a value. The full rule is "Conflicting sources" in `.agents/skills/bloxodes-game-collection-data/SKILL.md`.
-- **Images are best effort.** They never block a page. Image reviews accept every reasonably searched miss, with the item and the reason.
+- **Required images block a page.** Every hub and page needs its cover and thumbnail, and every collection item that has an image in the game needs its exact image (`bloxodes-docs/content/page-standards.md#images`). Image reviews accept a miss only when a reasonable search found no clean exact image, recorded with the item and the reason. Extra in-body article images stay best effort.
 - If a child's shell can't reach an image host, Luna records the exact image URL and page with `download: blocked` and moves on. You download those files from the main shell before image review.
 
 ## What every child brief says
 
 - The stage, the page identity (game name, universe ID or namespace, slugs) and the runner it belongs to.
 - The exact folder, the files to write and the previous stage's files to read.
-- The skills to read in full first. Writing and editorial review always include `.agents/skills/bloxodes-voice/SKILL.md` and the matching section of `.agents/skills/bloxodes-voice/references/examples.md`.
+- The skills to read in full first. Writing and editorial review always include `.agents/skills/bloxodes-voice/SKILL.md`, `bloxodes-docs/content/page-standards.md` and the matching section of `.agents/skills/bloxodes-voice/references/examples.md`.
 - Any findings to fix.
 - Boundaries: stay in the folder; read-only web research is fine; no database writes, Supabase or R2 uploads, imports, publishing, queue commands, Notion edits, GitHub actions, commits, edits to tracked repo files, builds, tests, checks or previews; no sub-agents; never ask for permission escalation, and log anything blocked in `stage-log.md`.
 - Leave nothing running. Keep every command short enough to finish in the foreground, give each network call a timeout (`curl -m 30`), and split long loops into smaller commands. If a command still moves to the background, stop it before you report.
@@ -92,7 +92,7 @@ Create one run folder per page inside the checkout before the first stage, at `t
 
 ## Your review
 
-You own the content and SEO review in `CLAUDE.md`. After each stage, read the actual files, not just the child's summary. The runner's "Parent checks" (or its gates) are your checklist too. After the revision, review the final as an editor against the voice guide and the brief. Fix small prose issues yourself. Send a gap back only when it needs new research, data or images.
+You own the content and SEO review in `bloxodes-docs/agents/how-agents-work.md`, judged against `bloxodes-docs/content/page-standards.md`. After each stage, read the actual files, not just the child's summary. The runner's "Parent checks" (or its gates) are your checklist too. After the revision, review the final as an editor against the voice guide and the brief. Fix small prose issues yourself. Send a gap back only when it needs new research, data or images.
 
 ## After the finals
 
@@ -234,7 +234,7 @@ Before the first stage, resolve the runner's "Required context" record yourself.
 | 6 | Editorial review | Luna | `editorial-review.md` |
 | 7 | Revision | Haiku | `payload.json` |
 
-- **Research** follows the skill and `dev-docs/pipelines/content.md`: source proof, the roster, verified map coordinates and artwork attribution, sourced quiz facts, or the full completion scope for a checklist.
+- **Research** follows the skill and `bloxodes-docs/content/franchise.md`: source proof, the roster, verified map coordinates and artwork attribution, sourced quiz facts, or the full completion scope for a checklist.
 - **Data** builds `map_data` or `catalog_data` from the brief, following `references/payloads.md`. Coordinates come from verified map sources, never from prose. Keep stable IDs on updates.
 - **Data review** checks rows and markers against the brief's sources and the payload contract.
 - **Writing** builds the full payload: page copy for every type, plus questions for quizzes and sections and tasks for checklists. Map and catalog data is copied from `data.json` unchanged.

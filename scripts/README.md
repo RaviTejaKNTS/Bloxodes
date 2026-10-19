@@ -8,13 +8,12 @@ The `scripts/` folder is organized by task area so it's easier to find the right
 - `backfill/`: one-off cleanup and repair scripts for existing data
 - `catalog/`: Roblox catalog and avatar item ingestion/enrichment
 - `codes/`: code-page import, source repair, refresh, and code-article jobs. Code rows come from `scripts/codes/update-codes.ts` using `code_pages.source_url` for RobloxDen and `code_pages.source_url_2` for Beebom; do not seed codes manually.
-- `decal-ids/`: decal scraping and enrichment tooling
-- `events/`: event ingestion, event page seeding, and event article generation
-- `music/`: Roblox music ID collection, enrichment, verification, and imports
-- `posts/`: outbound posting and distribution scripts
+- `decal-ids/`: decal discovery, candidate imports, verification and ranking
+- `events/`: event ingestion, event page seeding and detail hydration
+- `music/`: Roblox music ID collection, enrichment and verification
 - `shared/`: shared helpers used by multiple scripts
 - `trading/`: trading-specific data collection
-- `universes/`: universe collection, enrichment, stats, slugs, and description jobs
+- `universes/`: universe collection, enrichment, stats and slug jobs
 
 Prefer the `package.json` scripts when available so command names stay stable even if file locations change again.
 
@@ -24,4 +23,4 @@ Development environment note:
 - workstation scripts load managed development by default; production preview is explicit, production/test are process-only, and process env always wins
 - Google Indexing loads `.envs/pipelines/indexing.env`; keep indexing secrets separate from analytics
 - production jobs can keep injecting `SUPABASE_*` and other env vars the same way they do today
-- see `dev-docs/environment.md` for profiles, overlays, examples, migration, and verification commands
+- see `bloxodes-docs/environment.md` for profiles, overlays, examples, migration, and verification commands

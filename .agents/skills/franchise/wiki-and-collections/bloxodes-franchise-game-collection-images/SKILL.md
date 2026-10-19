@@ -3,100 +3,89 @@ name: bloxodes-franchise-game-collection-images
 description: Gather, save, wire, and verify exact item images for one approved non-Roblox franchise collection after data approval. Do not write final.json or publish production.
 ---
 
-# Bloxodes franchise game collection images
+# Bloxodes Franchise Game Collection Images
 
-You run the image pass for one collection: find an exact image for each row, save it, wire it into the dataset and prove it's right. Done means the image checker passes and `brief.md` has an image readiness note the parent can approve.
+You're finding and wiring a clear image for every item in one approved game collection, so players can recognize what they're looking at. You're done when every verified match is saved and wired, every gap is recorded with a reason, required image coverage is complete, the GitHub checker has run, and `brief.md` has a filled-in `Image readiness` section.
 
-- Start only after `brief.md` records approved data readiness.
-- You own this one collection. Don't spawn other workers.
+> **You are a subagent. Do NOT spawn sub-agents or call other agents. Download images and edit dataset files directly using Bash and the Edit/Write tools.**
 
-## Shared game storage
+Use the game and collection names to find their suggestions and workspace in the inherited task context, or use the default workspace. Keep any supplied workspace override. This skill owns its stage. Return the stage artifacts when you're done.
 
-- **Tables:** managed development uses `games`, `game_wiki_pages`, `game_collection_pages`, `game_collection_datasets`, `game_collection_items`, `game_code_pages`, `game_codes` and `game_tool_pages`. Roblox stays separate.
-- **Namespace:** scope every read and write by namespace. Use `gameDatabase(client, namespace)` for existing logical suffixes.
-- **Kinds:** `games.kind` is only `franchise` or `game`. `parent_id` links a game to its franchise. Mode and edition labels describe content; they never add kinds.
-- **Routes:** read the wiki row's `canonical_path` before planning collection links. A standalone game's wiki is `/<namespace>/wiki`. A franchise has its own wiki hub plus child game wikis. Keep Minecraft's edition URLs as they are.
-- **Pages:** publish reviewed game, wiki, codes page and registered tool payloads with `publish:game-pages -- --namespace <slug> --file <reviewed.json>`. It's a dry run by default, and `--apply` writes only to development. Combined payloads need explicit IDs. Publish identity first, then the wiki, then collections.
-- **Collections:** publish with `sync:shared-game-collection-runtime`, passing `--namespace` and the reviewed runtime manifest. Keep immutable dataset/media publication and pointer readback. Preserve drafts, revisions, sources, fields and media. Never edit published items.
-- **Workspaces:** research stays in ignored workspaces.
-- **Who owns what:** these workflows cover every non-Roblox title: standalone games, multi-game franchises and GTA (`namespace = 'gta'`). Game-specific scope, such as modes, editions and preferred sources, comes from the approved plan and its sources.
+Run this after `brief.md` and data readiness are approved. Images get their own authoring pass before writing. Save staging media under the collection workspace. The parent verifier uploads and verifies immutable R2 media keys before the database-backed route can render them.
 
-## What the context gives you
+**Before you start:** read `bloxodes-docs/content/franchise.md` (identity, routes, tables and the rules every franchise page follows) and `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images and layout). Public copy and writer briefs follow `.agents/skills/bloxodes-voice/SKILL.md`.
 
-- game and collection slugs
-- collection workspace and media root
-- target image checker command
-- optional image-collection helper and manifest format
-- immutable media-key prefix used by the verifier
+## Useful coverage
 
-Work here:
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
 
-```text
-<workspace-root>/<game-slug>/collections/<collection-slug>/
-  brief.md
-  dataset.json
-  images.json
-  media/
-```
+A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile player-facing page.
 
-Keep authoring images out of repository runtime/public folders unless the target pipeline explicitly requires it. The verifier uploads reviewed files to immutable media keys under the configured namespace.
+## Steps
 
-## Image rules
+Checks below run on GitHub, never locally. Local work is research and authoring.
 
-1. Read the approved brief, dataset and item roster.
-2. Set a nonzero image target unless the parent approved a text-only exception.
-3. Prefer, in this order: official publisher/developer media, manuals or guides, stable dedicated game wiki/database images, and exact in-game captures from traceable sources.
-4. Each image must identify its exact row. No logos, page screenshots, generic game art, fan art, AI-generated substitutes, or images of a different title, mode, edition, platform, model or location.
-5. Baked-in item names are fine when the underlying image is clear and useful. Record the caveat.
-6. Save a normalized file in `media/` with a stable, item-based filename. Avoid needless upscaling and repeated recompression.
-7. Record the source page and direct image URL in `images.json` or the brief. Keep licensing, access limits and uncertain matches visible to the parent.
-8. Wire the relative media path to `items[].system.image`. Never add an image field to `items[].item`.
-9. A missing image is OK only when the parent approves that exact gap after you've recorded the sources you tried.
-10. Visually inspect any uncertain or easily confused image before approval.
+1. Read the approved `brief.md` and dataset.
+2. Confirm which items need images and which dataset field stores the image path.
+3. Find clear item images (see "What a good image looks like").
+4. Save images under `<workspace>/media/` for the game and collection.
+5. Update the dataset image field for each matched item.
+6. If an image is missing, record the exact item and why.
+7. Don't use `npm run collect:collection-images` for workspace collections. It's a legacy tool that only writes into `apps/web/public` and emits public-root paths, which this skill forbids. Save each image into `<workspace>/media/` yourself and set the dataset image field to its path relative to the runtime manifest's `mediaRoot` (like `first-rebirth.webp`). Updating the collector for workspaces is a separate code task.
+8. When this collection should have images, run the readiness check with images required:
 
-For collectible collections, prefer exact location, route, mission-step, quest or collectible images that help players recognize the goal. Record any text-only exception item by item and get parent approval.
+   ```bash
+   npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json --require-images
+   ```
 
-### Image helper
+9. Update `brief.md` with image readiness (see "Image Approval Notes").
 
-If the context provides one, run its dry plan first:
+Never save collection data or staging media under `data/` or `apps/web/public/`.
 
-```bash
-<image-helper-command> --manifest <workspace>/images.json --dataset <workspace>/dataset.json --dry-run
-```
+## What a good image looks like
 
-Review the plan, then run it without the dry-run flag. Don't let a helper rewrite public fields or change item scope.
+**Where to look**
 
-## Verify
+- Prefer official or game-wiki-style images when they exist.
+- Use official publisher/developer media, manuals, store art, real gameplay captures, Fandom, Game8, Pro Game Guides and dedicated game wikis when they have usable exact images. Record credit with the source page and direct image URL in `images.json`. Match the edition, platform, mode, release generation and exact item; never use generic game art as an item image.
+- Search beyond the roster source for exact-item images.
+- User- or parent-approved direct item-image sources are fine when their images clearly match the exact game. Keep source or licensing caveats in the brief instead of silently dropping usable coverage.
 
-Run the context-provided image checker:
+**Keep or reject**
 
-```bash
-<image-checker-command> --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json --require-images
-```
+- Keep images that clearly show the item.
+- Reject edited thumbnails, page screenshots, logos, fan art, AI-generated substitutes and anything that doesn't clearly show the item. Visually inspect ambiguous matches; record edition, platform, mode or model caveats in the brief.
+- A readable item name or other identifying text baked into an otherwise useful item image is fine. Never reject an image just because the item name appears on it. Still record its source URL in the manifest and brief.
 
-Then confirm:
+**Collectible pages**
 
-- every wired path exists and every image file opens
-- any duplicate files are intentional
-- the dataset count still matches the approved roster
+For `collectible` collections, prefer an exact location, route, quest step or collectible view that helps a player recognize the goal. Don't switch a collectible to text-only just because a generic item thumbnail is easier to find. Record the sources you tried and record any genuine no-image case. Missing required images block publication.
 
-Append this to `brief.md`:
+## Partial coverage is fine, skipping the pass isn't
+
+Partial coverage is fine while authoring. Required images must be complete before publication.
+
+- Save and wire every verified match, even when the set is incomplete. Never throw away available images because other rows lack them.
+- Record remaining gaps item by item and keep useful authoring work. Missing required images block publication; don't waive them or skip rows to hide the gap. A genuine no-image case needs a recorded reason.
+- The image pass still has to happen, every time.
+
+## Image Approval Notes
+
+Add this section to `brief.md`:
 
 ```text
 Image readiness:
-- Image target:
-- Page type: database or collectible
+- Image field:
+- Page type (`database` or `collectible`):
+- Expected image count:
 - Images found:
-- Exact-match coverage:
-- Images missing or accepted gaps:
-- Sources used:
-- Rejected image sources and reasons:
-- Workspace media path:
-- images.json path:
-- Dataset paths wired:
+- Images missing or genuine no-image cases:
+- Source page, direct image URL, credit and images.json path:
 - Visual spot-check result:
-- Checker command and result:
-- Ready for writing, yes/no:
+- Image sources used:
+- Workspace media path:
+- Dataset image paths updated: yes/no
+- Checker command:
+- Checker result:
+- Ready for writing: yes/no
 ```
-
-Stop when important images are wrong, ambiguous, inaccessible or missing. Public copy should never paper over weak image coverage.

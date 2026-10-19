@@ -1,185 +1,93 @@
-# Bloxodes Repo Guide
+# Bloxodes
 
-This repository now uses path-scoped `AGENTS.md` files as the main operating guide.
-When working in a folder, prefer the closest `AGENTS.md` over older reference docs in `agents/`.
+Bloxodes (https://bloxodes.com) is a gaming guide site. It covers Roblox (codes, wikis and item collections, catalog, stats, tools, quizzes, checklists, events, articles) and non-Roblox games such as GTA, Red Dead, Minecraft, ARC Raiders and Mario Kart.
 
-## Start Here
+This file holds only what every agent needs on every task. Everything else lives in `bloxodes-docs/` and the skills.
 
-- `dev-docs/README.md`: canonical last-verified architecture and operations index; prefer this over old `docs/` and `agents/` narratives for current-state understanding.
-- `dev-docs/architecture.md`: verified production request, data, and automation topology plus known degraded components.
-- `dev-docs/environment.md`: env profiles, overlays, ignored value storage, committed examples, runtime ownership, and safety rules.
-- `apps/extension/AGENTS.md`: Chrome MV3 extension packaging, Roblox injection, API use, and Chrome Web Store update rules.
-- `apps/admin-extension/AGENTS.md`: personal unpacked-only admin popup plus full-page editor for codes pages and articles through `/api/admin/*`.
-- `apps/mobile/AGENTS.md`: Expo React Native app scope, mobile API contract, and local testing commands.
-- `apps/web/src/app/AGENTS.md`: App Router, layouts, feeds, auth routes, and API conventions.
-- `apps/web/src/app/(site)/AGENTS.md`: public page families, page-data patterns, SEO, and content route expectations.
-- `apps/web/src/app/api/AGENTS.md`: JSON endpoints, mutation safety, session/progress flows, and revalidation behavior.
-- `apps/web/src/lib/AGENTS.md`: shared data access, caching, SEO helpers, auth/security utilities, and domain modules.
-- `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
-- `dev-docs/operations/deployment.md`: current production deployment flow and ownership.
-- `dev-docs/infrastructure/homelab.md`: current homelab article automation and health.
-- `dev-docs/pipelines/catalog.md`: global Roblox `/catalog` data, refresh, page, and release ownership.
-- `dev-docs/pipelines/wiki-collections.md`: game wiki hubs and their game-specific collection workflow/data ownership.
-- `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
-- `data/AGENTS.md`: local datasets and which routes/tools consume them.
-- `.agents/skills/bloxodes-voice/SKILL.md`: the house voice for every public word we publish, with before/after examples for every page type. Read it before writing or reviewing any page copy.
-- `.agents/skills/bloxodes-franchise-*/SKILL.md`: every non-Roblox title, single game or multi-game franchise, GTA included. Start a new title with `bloxodes-franchise-plan`; the rest cover wikis, collections, codes, tools, and maps, standalone checklists, quizzes and catalogs (`bloxodes-franchise-reference-pages`).
-- `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
-- `.agents/skills/bloxodes-article-release-review/SKILL.md`: list completed automated articles, serve managed-dev previews, and publish or reject only explicit human selections.
-- `.agents/skills/bloxodes-article-images/SKILL.md`: run a separate collection-style image pass for location guides, routes, NPCs, puzzle steps, collectibles, and other visually dependent articles before writing.
-- `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
-- `.agents/skills/bloxodes-game-collection-data/SKILL.md`: game collection dataset, fields, sections, and renderer readiness.
-- `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
-- `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: quickly check existing collection datasets for verified data changes and missing item images, then update only affected collections.
-- `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
-- `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
-- `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Mediavine automatic in-content ad placement, including pagination and hydrated DOM verification.
-- `dev-docs/architecture.md#advertising`: Mediavine ad script, ads.txt redirect, CSP, 300px sidebar rule, privacy policy block, and how to test ads with `?test=houseads`.
-- `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only publication through protected production PRs and GitHub content jobs, with exact-SHA verification and safe task cleanup.
-- `dev-docs/pipelines/indexing-distribution.md`: current indexing, analytics, and distribution ownership.
-- `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
+## Where things are
 
-## Architecture Snapshot
+- **How it all works:** [`bloxodes-docs/README.md`](bloxodes-docs/README.md). Start with the [overview](bloxodes-docs/overview.md). It's the only place system knowledge is kept, so read the owning doc before you change a system.
+- **How agents work:** [`bloxodes-docs/agents/how-agents-work.md`](bloxodes-docs/agents/how-agents-work.md). Delegation, briefs and review.
+- **Skills:** `.agents/skills/` (map: [`bloxodes-docs/agents/skills.md`](bloxodes-docs/agents/skills.md)).
+- **Path rules:** the closest `AGENTS.md` to the files you touch: `apps/web/src/app/`, `apps/web/src/app/(site)/`, `apps/web/src/app/api/`, `apps/web/src/lib/`, `apps/extension/`, `apps/admin-extension/`, `apps/mobile/`, `scripts/`, `supabase/`, `data/`.
+- **Design:** root `DESIGN.md`.
 
-- npm workspaces are enabled at the repo root. `npm run build` remains the production web build and delegates to `npm run build:web`.
-- Next.js App Router application in `apps/web`, with public content in `apps/web/src/app/(site)` and account/auth flows in `apps/web/src/app/(secure)` plus `apps/web/src/app/auth`.
-- Chrome extension source lives in `apps/extension`. It builds a Chrome MV3 upload package and calls Bloxodes web APIs; it is not part of Dokploy deployment.
-- Expo React Native mobile source lives in `apps/mobile`. The app is an expo-router client with native codes, catalog, wiki/collection, tools, events, quiz, checklist, and stats screens, all backed by `/api/mobile/*` web routes plus optional bearer-token Roblox login.
-- Supabase is the primary content and product data store. Production uses the self-hosted stack on the same Hostinger VPS as the web app, with API at `https://database.bloxodes.com`, Studio at `https://studio.bloxodes.com`, and public storage/media URLs at `https://media.bloxodes.com`. All workstation development and non-production content work use the separate managed HTTPS `*.supabase.co` development project. The local Supabase CLI database is retired and must not be used.
-- Local datasets in `data/` and `apps/web/src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
-- Operational work happens through root `scripts/` and Supabase edge functions in `supabase/functions/`.
-- Dokploy deploys the public web app from the root Dockerfile, which builds `@bloxodes/web` and runs `apps/web/server.js`.
-- Production web and database now share VPS CPU, memory, disk, and bandwidth. After deploys or infrastructure work, check both the app container and the Supabase stack instead of treating them as separate platforms.
-- Runtime freshness uses `revalidation_events` plus the VPS `revalidate` Edge Function. `/api/revalidate` applies Next revalidation and Cloudflare tag purge, then queues `cache_warm_events`; the VPS `cache-warm` Edge Function warms those URLs separately.
+| Task | Start with |
+| --- | --- |
+| Roblox wiki hub or collections | `bloxodes-wiki-workflow-runner`, `bloxodes-game-collection-workflow-runner` · [doc](bloxodes-docs/content/roblox-wiki.md) |
+| A new non-Roblox game | `bloxodes-franchise-plan` · [doc](bloxodes-docs/content/franchise.md) |
+| Article | `bloxodes-article-workflow-runner` · [doc](bloxodes-docs/content/articles.md) |
+| Codes page | `bloxodes-code-workflow-runner` · [doc](bloxodes-docs/content/codes.md) |
+| Catalog, quiz, checklist, events, tool | the matching `bloxodes-*-workflow-runner` · [catalog](bloxodes-docs/content/catalog.md), [engagement](bloxodes-docs/content/engagement.md) |
+| Any public page or copy | `bloxodes-voice` · [page standards](bloxodes-docs/content/page-standards.md) |
+| Content stages in T3 | `bloxodes-model-routing` |
+| Publishing anything | `bloxodes-release-e2e` · [release](bloxodes-docs/operations/release.md) |
+| Schedules and Notion queues | [schedules](bloxodes-docs/automation/schedules.md), [queues](bloxodes-docs/automation/notion-queues.md) |
 
-## Workspace and branches
+## Main agent
 
-- T3 assigns one worktree and branch to each task. Stay in the worktree bound to the current thread. Do not launch another thread or create extra branches/worktrees for the same task.
-- Keep `/srv/data/projects/Bloxodes` on `production` as the clean main checkout. T3 uses this canonical HDD path. T3 task checkouts use `/srv/data/t3code/worktrees/Bloxodes/`; all development source, Git history, env storage and drafts resolve to the HDD. Preserve detached article/automation release and rollback checkouts.
-- Use T3 worktree mode. Start a new task from a fresh `origin/production`; do not reset an existing task when production advances. Automatic setup waits before the first agent turn, links the main `.envs` and creates an empty `tmp/`. It does not install dependencies or run checks. Never share `node_modules`, build output, preview state or automation queue/lease files.
-- A checkout's `tmp/` is its own scratch space, deleted with the worktree. Nothing in it is shared with other checkouts or kept after the task. Published content lives in the databases and media storage; export it again when a later task needs it.
-- A Roblox wiki run claims its game in the Notion database [Roblox Wiki Queue](https://app.notion.com/p/b49555b7263b44939d71da109e0b2cfa) (data source `collection://9e104b46-a080-49de-905c-667111aa47eb`). This works the same on every device.
-  - Choose the highest-ranked game in the live top 100 that has no live wiki hub and no row there.
-  - Before any research, add its row: Game, Universe ID, Rank, Status `In progress`, Device, Worktree and Started. Then query again. If an earlier row has the same Universe ID, delete yours and take the next game.
-  - Delete the row once the hub and its collections are published and checked live. If the run stops first, keep the row as `Waiting for approval` or `Blocked` with a short Run report, so other runs skip it.
-- Run checks, tests, builds, content validation and browser verification on GitHub. Do not run them locally. Use the PR workflow's screenshots and reports for review. Local work is inspection, authoring and edits.
-- Commit only the current task's allowlist. Push its branch and open a PR targeting `production`. Link the PR to T3 immediately. Use T3's PR watcher while waiting for checks.
-- Before opening a code PR, use an independent Codex subagent to review the task diff. Address supported findings. Docs and skills-only changes use internal review without a paid GitHub review.
-- `Selective Codex review` reviews ready code PRs on opening, reopening or leaving draft. It skips docs, skills and content-only changes. Pushes cancel stale reviews without starting another paid review. After code fixes, run `gh workflow run codex-review.yml --ref production -f pull_request=<number>` when ready, and inspect the feedback for that exact head SHA. A review comment does not replace `Required PR checks` or authorize release.
-- Merge only after `Required PR checks` passes and the task has release authorization. Never push directly to `production`, force-push it, or bypass protection.
-- GitHub deletes the remote task branch after merge. Once the thread has stopped using its checkout, run `cleanup:task-worktree` from another checkout for that exact finished task. The helper requires clean, merged history, a T3 inactivity check and `--inactive-confirmed` on apply. Its `tmp/` is removed with it. Never delete the active thread's worktree or another unfinished task.
-- Fast-forward the clean main checkout to the released production SHA. Do not install dependencies there or change installed services, env files, timers or running jobs as part of a release.
+`CLAUDE.md` is a symlink to this file. **If you were started as a delegated sub-agent or child task, skip this section:** do the task in your brief and follow the rules below.
 
-## Working Defaults
+The main agent is Claude, the owner's always-available agent in T3. It plans and hands out work, reviews and fixes what comes back, and reports to the owner. Other models do the large work:
 
-- Treat canonical documentation maintenance as part of implementation. Any change to architecture, env ownership, infrastructure, deployment, data flow, or a pipeline must update its existing `dev-docs/` owner in the same change. Keep the stable filename, refresh `Last verified` only after rechecking evidence, and do not create parallel current-state docs. New rough notes belong in `docs/YYYY-MM-DD-topic.md`.
-- Use GitHub browser artifacts for task preview QA. The existing homelab preview is operator infrastructure, not a task build target. When the user explicitly requests that existing preview, bind Next to `0.0.0.0` and hand off Tailscale links. The verified homelab preview base is `http://teja-homelab.tail13b5bd.ts.net:3000` with `http://100.86.117.125:3000` as the direct-IP fallback; append the route under that base. Keep the public canonical URL as `https://bloxodes.com/...` and do not expose production credentials or publish to production for preview QA.
-- Keep pages server-first. Move repeated loaders and rendering helpers into route-family `page-data.tsx` files or `apps/web/src/lib/*`.
-- Prefer adding or extending typed helpers in `apps/web/src/lib/db.ts` instead of scattering raw Supabase queries across page files.
-- For public content changes, check all of: metadata, JSON-LD, pagination, sitemap coverage, feed coverage, and `/api/revalidate`.
-- For mutations, keep origin validation, rate limiting, and tag revalidation explicit.
-- Prefer `npm run ...` aliases over direct `tsx path/to/script.ts` when an alias already exists.
-- Treat `docs/`, `Writing plans/`, and legacy `agents/` narratives as notes, plans, reports, or historical evidence that can be outdated or unimplemented. Current architecture belongs in the existing owning `dev-docs/` file with a `Last verified` date.
-- Store real workstation env values only in ignored `.envs/`; committed contracts live in `env/examples/`. Development defaults to managed Supabase development, production/test use process-only, and production preview is explicit. See `dev-docs/environment.md`.
-- Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
-- Invoke `bloxodes-release-e2e` only for an explicit release request. It uses the assigned task branch and a PR targeting `production`. GitHub owns checks, schema application, build/deploy and selected content publication. A release request covers the current task's reviewed allowlist, not unrelated pages, env changes or service control. See `dev-docs/operations/deployment.md` for the release contract.
+- **Claude (main agent):** planning, agents, skills, docs, review, git and releases.
+- **Haiku 5.5:** writes every public page, and reviews research and images.
+- **Luna:** data-heavy work: research, data collection, scraping, images, fact and editorial review.
+- **Codex Sol:** code, technical research, code reviews and audits. Full detail: [how agents work](bloxodes-docs/agents/how-agents-work.md).
 
+**Do it yourself:** quick reads, status checks, lookups, one-file fixes and questions; content and SEO review of every page agents make, including fixing their prose; `AGENTS.md`, `bloxodes-docs/` and `.agents/skills/`; git, PRs, PR watching, merges and releases. If a skill keeps producing weak output, propose a specific change to the owner instead of rewriting it quietly.
 
-## Design Direction
+**Delegate the rest** with T3 `delegate_task` (check `orchestrator_capabilities` if a model ID stops resolving):
 
-- Follow root `DESIGN.md` for visual decisions.
-- Bloxodes should read as a public live database: plain, readable content plus clean shadcn-style UI components. The shell should take inspiration from Notion: narrow, quiet, low-friction navigation with subtle states.
-- Keep SEO-friendly page/article titles and comfortable body text. Do not shrink editorial content into an admin-dashboard density.
-- Use shadcn primitives for reusable interface surfaces such as sidebars, search inputs, nav items, buttons, cards, badges, tabs, sheets, dialogs, dropdowns, tooltips, loading states, and empty states.
-- Keep shadcn composition minimal. Match Bloxodes tokens and behavior without building heavy custom layouts inside primitives.
-- A right content sidebar must stay at least 300px wide at every viewport of 1200px and up, because Mediavine places sidebar ads there. Reuse the existing sidebar grid instead of a new column definition. Check ad placement with `?test=houseads` in an incognito window.
+| Work | Provider / model | Options |
+| --- | --- | --- |
+| Coding, bug fixes, code-heavy pipelines, code reviews | `codex` / `gpt-6.1-sol` | `reasoningEffort: high` |
+| Content runner stages (research, data, images, review, writing) | Luna (`codex` / `gpt-6-luna`) and Haiku 5.5 (`claudeAgent` / `claude-haiku-5-5`), per `bloxodes-model-routing` | `max` / `xhigh` |
+| Data collection and scraping | `codex` / `gpt-6-luna` | `reasoningEffort: max` |
+| Small read-only lookups | `opencode` / `opencode/muse-spark-1.3-contributor-free` | none |
+| Small self-contained tasks | `antigravity` / newest Gemini Flash, or `grok` / `grok-4.7` | `high` for Grok |
 
-## Public Copy
+- In T3, run content runners stage by stage yourself and give each stage to its routed model. Never write public copy with Codex Sol.
+- Every brief says it's for a sub-agent, and gives the goal, skills (`bloxodes-voice` for writing), game slug and queue row, file boundaries, what "done" means and what to report. Tell agents to run checks on GitHub and not to commit, push or publish unless the brief says so.
+- Review the real output (diff, files, data, screenshots, sources), not the summary. Corrections go in a new `delegate_task` round with its own `clientRequestId`.
+- Parallel agents never edit the same files or the same game. If a model hits a usage limit, move the task to Codex.
+- Non-Codex agents can wait on approval prompts only visible in their own thread. Check with `t3_thread_read` and tell the owner if one is waiting.
+- End every reply to the owner with one line, `Status: done.` or `Status: not done.`, naming what's still running or blocking.
 
-Every public word follows the house voice in `.agents/skills/bloxodes-voice/SKILL.md`. Short version: write like a player who knows the game and is explaining it to a friend. Answer first, use clean short sentences and real game nouns, and add a bit of fun where it fits. No templates, hype, filler or em dashes.
+## Rules for every task
 
-Never say where a fact came from or how the page was made. Sources, research notes, briefs, datasets, manifests and workflows stay out of visible copy. The one exception is credit that helps the reader: crediting the developer or an official announcement ("the developer confirmed a fix is coming"), and, in news and data reports, attributing company figures and allegations to whoever made them ("Roblox says...", "the lawsuit claims..."). See "Facts and honesty" in the voice guide.
+**Workspace**
 
-- Bad: "According to our sources, Research takes 3 minutes." Good: "Research takes 3 minutes."
-- Bad: "Our research shows the vault opens at night." Good: "The vault opens at night."
-- Bad: "This source-backed list covers every pet." Good: "There are 42 pets across five rarities."
+- Stay in the worktree T3 assigned to your thread. Don't create other branches, worktrees or threads for the same task.
+- Scratch work goes in the worktree's `tmp/`. It's yours alone and is deleted with the worktree.
+- Work on the machine where the task started. Ask the owner before moving work elsewhere.
 
-Game terms that use these words, such as Dandy's World's Research or GTA's Source Cargo, are fine. `scripts/content/check-public-copy.ts` blocks process-voice phrases. Bare `source` and `research` pass; `manifest` and `workflow` stay blocked.
+**Checks and releases**
 
-## Writing skills and docs
+- Run checks, tests, builds, content validation and browser QA on GitHub, never locally. Local work is reading, authoring and editing.
+- Commit, push or publish only when your task says so. Commit only your task's files.
+- Before a code PR, have an independent Codex agent review the diff.
+- Open PRs against `production` and link them to T3. Merge only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly or bypass protection.
+- Use `bloxodes-release-e2e` only when a release is explicitly requested.
 
-Skills and docs follow the same spirit as public copy, because agents copy the tone of what they read. Keep them clear, friendly, direct and easy to scan, with exact commands, paths and fields kept exact. See "How we write skills and docs" in `.agents/skills/README.md`.
+**Data and secrets**
 
-## Change Checklists
+- Never print, log or commit secrets. Env files are edited only on the homelab; Mac copies are read-only. See [environment](bloxodes-docs/environment.md).
+- Author against managed development. Production changes only through GitHub's release and publication jobs.
+- There is no local Supabase. Don't start one.
+- `roblox_universes.slug` is a stats slug. Never copy it into editorial slugs (`code_pages.slug`, `wiki_pages.slug`, `wiki_collection_pages.wiki_slug`, `quiz_pages.code` and the like).
+- Notion queue rows are never deleted. Set a status instead.
 
-### Public page or route family
+**Public copy**
 
-1. Add or update the route in `apps/web/src/app/(site)`.
-2. Keep data loading in `page-data.tsx` or `apps/web/src/lib/*` if the route family has multiple pages.
-3. Update metadata, canonical handling, and structured data.
-4. Update `apps/web/src/app/sitemap.xml/route.ts`, `apps/web/src/app/sitemaps/*`, `apps/web/src/app/feed.xml/route.ts`, or `apps/web/src/app/api/revalidate/route.ts` if the content is publishable.
-5. Refresh the relevant inventory doc in `agents/`.
+- Every page meets [page standards](bloxodes-docs/content/page-standards.md): readable titles with counts, headings that tell the reader what's in each section, full data, required cover and thumbnail images, and the same layout as the Roblox page of the same type.
+- Every public word follows `bloxodes-voice`: a player who knows the game explaining it to a friend. Answer first, short sentences, real game nouns, no hype, filler or em dashes.
+- Never say where a fact came from or how the page was made ("according to our research", "this source-backed list"). The only exception is credit that helps the reader, like "the developer confirmed a fix". `scripts/content/check-public-copy.ts` enforces this.
 
-### Game wiki and collection pages
+**Docs**
 
-1. Use the matching `.agents/skills/bloxodes-*` skill directly. For new pages, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`. For source-backed maintenance of existing local collection datasets and their wiki pages, use `bloxodes-game-collection-refresh`.
-2. For non-Roblox pages, GTA included, use the matching `bloxodes-franchise-*` skill, starting with `bloxodes-franchise-plan` for a new title. Never substitute the Roblox collection skills. Development and production storage use namespace-scoped shared `games`/`game_*` tables; do not use Roblox universe IDs or Roblox publication commands.
-3. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
-4. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
-5. Seed page copy and publish the immutable collection dataset/media revision in managed development before preview or production.
-6. Keep collection codes in `<game-slug>-<collection-slug>` format.
-7. Verify authoring data/media, database pointer and item-count readback, useful card fields, metadata, sitemaps, search, and revalidation before publishing. Runtime must not depend on local collection files.
-8. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
-
-### Standalone checklists
-
-1. Normally create only source-verified 100% completion checklists. Record the game, edition or mode and full completion requirements; defer the page when that scope cannot be verified.
-2. Normally keep one standalone checklist page per game, containing one board with sections for required activities. Reuse the game's existing checklist; extra pages for editions, modes, preparation, beginner milestones or routines need an explicit user exception.
-3. Keep collectible collection trackers separate. Completing an achievement or collectible roster does not establish in-game 100% completion. See `dev-docs/pipelines/content.md#standalone-checklist-scope`.
-
-### Codes pages
-
-1. Use the game slug only for `code_pages.slug`, for example `wizard-alchemy`; do not append `-codes` because the route is already `/codes/<slug>`.
-2. Do not use `roblox_universes.slug` for `code_pages.slug`; universe slugs are stats-only identifiers and can include universe IDs.
-3. Put the Roblox experience URL in `roblox_link`, not in any `source_url` field.
-4. Put the RobloxDen codes page in `source_url` and the Beebom codes page in `source_url_2`; `scripts/codes/update-codes.ts` reads those two fields for the refresh workflow.
-5. Keep `seo_title` empty or null unless the user explicitly asks for a custom title.
-6. Never manually enter active codes, expired codes, code names, rewards tied to current code names, or code dates. Insert or update the `code_pages` row, then run the codes refresh script to populate `codes`.
-7. Write code-page prose and metadata for long-term use. Do not include active code names, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
-
-### API or auth flow
-
-1. Validate inputs and request origin.
-2. Use shared auth/security helpers from `apps/web/src/lib/auth/*` and `apps/web/src/lib/security/*`.
-3. Revalidate tags or paths after successful writes.
-4. Document new endpoints in `agents/routes/agents.md`.
-
-### Chrome extension
-
-1. Work under `apps/extension` and follow `apps/extension/AGENTS.md`.
-2. Keep permissions minimal and use Bloxodes API routes instead of Supabase or edge functions directly.
-3. Keep injected UI scoped under `#bloxodes-codes-extension`; avoid generic global class names that can collide with older live extensions.
-4. GitHub CI runs `npm run typecheck:extension` and `npm run package:extension`.
-
-### Mobile app
-
-1. Work under `apps/mobile` and follow `apps/mobile/AGENTS.md`.
-2. Keep mobile data access behind `apps/web/src/app/api/mobile/*`.
-3. Keep progress features local-first with optional account sync through the mobile bearer-session routes; articles and puzzles stay web-only.
-4. GitHub CI runs `npm run typecheck:mobile`.
-
-### Database or content model
-
-1. Add a forward-only migration in `supabase/migrations/`.
-2. GitHub runs `supabase:migrations:check`, plans/applies against managed development, then proves and applies the approved merged SHA to production before dependent web deployment. Use forward migrations and separate destructive removals from the earlier compatibility release.
-3. Update the read layer in `apps/web/src/lib/*`.
-4. Wire publish/revalidation flows if the new data powers public content.
-5. Update the relevant existing `dev-docs/` owner, `AGENTS.md`, and `agents/data/agents.md`.
-
-### Script or automation
-
-1. Put the job in the correct `scripts/<area>/` folder.
-2. Add or update the `package.json` command if the script is part of the normal workflow.
-3. Keep shared helpers in `scripts/shared/`.
-4. GitHub runs `npm run env:doctor -- --ci` when env ownership or runtime loading changes.
-5. Document side effects, required env, and purpose in `scripts/AGENTS.md`, the existing owning `dev-docs/` file, and `agents/scripts/agents.md`.
+- Only the main agent (Claude) edits `AGENTS.md`, `bloxodes-docs/` and `.agents/skills/`. Any other agent that sees a doc or skill that's wrong or needs changing reports the exact change it proposes; it doesn't make it.
+- `bloxodes-docs/` is the source of truth. When a change touches architecture, env, infrastructure, schedules, deployment, data flow or a pipeline, the owning doc is updated in the same PR (the agent doing the work reports what changed; Claude writes it). Replace what's no longer true; don't append history.
+- Keep this file lean: only rules every agent needs every time, plus links. Detail belongs in `bloxodes-docs/` or a skill.
+- Don't commit plans, audits, reports or logs. Keep them in `tmp/` or Notion.
+- Write skills and docs the way `.agents/skills/README.md` describes: plain, scannable, exact where it matters.
