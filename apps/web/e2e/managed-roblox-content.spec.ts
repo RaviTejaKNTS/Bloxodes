@@ -34,7 +34,11 @@ async function html(page: Page, info: TestInfo, route: string, paginated = false
   if (bytes > 1_000_000) info.annotations.push({type: 'HTML size warning', description: `${route}: ${bytes} bytes`});
   await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', `https://bloxodes.com${route}`);
   if (paginated) await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /noindex.*follow/);
-  else expect(await page.locator('meta[name=robots]').getAttribute('content')).not.toContain('noindex');
+  else {
+    // Indexable pages may omit robots; read existing directives without waiting for a missing tag.
+    const directives = await page.locator('meta[name=robots]').evaluateAll(nodes => nodes.map(node => node.getAttribute('content') ?? ''));
+    expect(directives.join(','), `Indexable robots directives for ${route}`).not.toMatch(/\b(?:noindex|none)\b/i);
+  }
   await layout(page);
 }
 async function loadedImage(image: Locator, expected: string) {
