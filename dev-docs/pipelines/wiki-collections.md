@@ -133,6 +133,8 @@ For any supported non-Roblox franchise, use `sync:franchise-collection-runtime`,
 
 Use the `.agents/skills/bloxodes-franchise-wiki-*` and `bloxodes-franchise-game-collection-*` skills for GTA and every other non-Roblox title: hub work, collection discovery, research, data, images, writing, managed-development verification, and later refreshes. The Roblox wiki and collection skills are not interchangeable with these because they assume Roblox universe identity, tables, routes, and publication commands.
 
+For selected shared franchise pages, the focused GitHub development job in `pull-request.yml` independently runs the v2 dataset audit and data/final checker. Fully imaged collections use `--require-images`; a missing image needs an exact reviewed per-item accepted-gap record in the bundled `images.json`. Readback compares page copy, published pointers, revision ownership, every item and field, and prepared media bytes. Desktop/mobile checks cover the relevant database or collectible controls, anonymous and isolated account progress, hub links, quiz attempts and HTML size. Review the screenshots before approving visual readiness. This job verifies already-staged content by default and does not change the protected production publisher. New franchise roots must retain their explicit `kind: franchise` and parent ownership through the shared game-page publisher. See [managed-development content QA](../operations/deployment.md#managed-development-content-qa).
+
 Use the matching wiki and game-collection workflow skills. For existing datasets, `bloxodes-game-collection-refresh` is the maintenance path for one collection, one game, or the registered collection set.
 
 ## Nightly Roblox wiki task
