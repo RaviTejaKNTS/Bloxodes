@@ -11,12 +11,13 @@ import sharp from 'sharp';
 import {parseBatch, ownedPath} from './content-contract.mjs';
 import {decodeBundle, extractBundle} from './content-bundle.mjs';
 import {contentDigest} from './managed-content-receipt.mjs';
-import {bundleInput, collectionVisibleFacts, stable, MANAGED_TARGET} from './selected-franchise-qa-contract.mjs';
+import {bundleInput, collectionVisibleFacts, stable} from './selected-franchise-qa-contract.mjs';
+import {assertEnvironment, QaFailure} from './selected-roblox-qa-contract';
 import {getFieldLabel} from '../../apps/web/src/lib/game-collections';
 import {pickWikiThumbnail} from '../../apps/web/src/lib/wiki-images';
-import {markdownToPlainText} from '../../apps/web/src/lib/markdown';
 
-class QaFailure extends Error {}
+export {assertEnvironment, robloxMetadata} from './selected-roblox-qa-contract';
+
 const hash = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 const json = (file: string) => JSON.parse(fs.readFileSync(file, 'utf8'));
 const output = 'tmp/test-reports/selected-roblox';
@@ -25,12 +26,6 @@ const write = (name: string, value: unknown) => { fs.mkdirSync(output, {recursiv
 const same = (expected: unknown, actual: unknown, label: string) => {
   if (JSON.stringify(stable(expected)) !== JSON.stringify(stable(actual))) throw new QaFailure(`${label} differs from frozen inputs.`);
 };
-export function assertEnvironment(env: NodeJS.ProcessEnv, downloaded = true) {
-  if (env.GITHUB_ACTIONS !== 'true' || env.GITHUB_EVENT_NAME !== 'workflow_dispatch' || env.BLOXODES_MANAGED_QA !== 'true' || env.BLOXODES_SELECTED_ROBLOX_QA !== 'true' || env.BLOXODES_ENV_PROFILE !== 'process-only' || !env.RUNNER_TEMP || !env.GITHUB_RUN_ID || !env.GITHUB_RUN_ATTEMPT) throw new QaFailure('Selected Roblox QA requires explicit GitHub development dispatch.');
-  for (const key of ['SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_URL', 'ARTICLE_DEV_SUPABASE_URL', 'SUPABASE_MEDIA_PUBLIC_URL']) if (env[key] !== MANAGED_TARGET) throw new QaFailure(`Unexpected managed target: ${key}`);
-  if (env.TEST_BASE_URL !== 'http://bloxodes.test:3000' || env.NODE_ENV === 'production' || ['BLOXODES_CONTENT_RELEASE', 'BLOXODES_MANAGED_RECEIPT', 'BLOXODES_APPROVED_SHA', 'REVALIDATE_SECRET', 'BLOXODES_SELECTED_FRANCHISE_STAGE'].some(key => env[key])) throw new QaFailure('Production/staging inputs cannot enter selected Roblox QA.');
-  if (!/^[0-9a-f]{64}$/.test(env.BUNDLE_HASH ?? '') || downloaded && (env.BLOXODES_VERIFIED_BUNDLE !== env.BUNDLE_HASH || env.BATCH !== `content/releases/${env.BUNDLE_HASH}/batch.json`)) throw new QaFailure('Select the exact downloaded immutable bundle.');
-}
 const slug = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 export function selectedImageInput(base: string, mediaRoot: string, value: unknown) {
   if (typeof value !== 'string' || /^https?:\/\//i.test(value) || value.includes('\\')) throw new QaFailure('Selected images must be local bundle files.');
@@ -64,43 +59,6 @@ export function robloxCollectibleFacts(display: {cardFields?: string[] | null}, 
   return {cards: facts, list: facts};
 }
 
-// Mirror only the pure metadata values from apps/web/src/lib/seo.ts here.
-// Importing that module loads Next's global types into the scripts CI program.
-const QA_WIKI_DESCRIPTION = 'Roblox wiki hubs with live universe stats, codes, tools, catalog links, controls, tips, and gameplay notes.';
-function resolveQaSeoTitle(template?: string | null, now = new Date()): string | null {
-  if (!template) return null;
-  const trimmed = template.trim();
-  if (!trimmed) return null;
-  const month = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(now);
-  const year = String(now.getFullYear());
-  return trimmed.replace(/%([a-z]+)%/gi, (match, token) => {
-    switch (token.toLowerCase()) {
-      case 'month': return month;
-      case 'year': return year;
-      default: return match;
-    }
-  });
-}
-type MetadataInput = {title: string; seo_title?: string | null; meta_description?: string | null; description_md?: string | null};
-export function robloxMetadata(final: MetadataInput, route: string, kind: 'hub' | 'database' | 'collectible', currentPage = 1, now = new Date()) {
-  const normalizeDescription = (value?: string | null) => {
-    if (!value) return null;
-    const plain = markdownToPlainText(value).replace(/\s+/g, ' ').trim();
-    if (!plain) return null;
-    if (plain.length <= 180) return plain;
-    const slice = plain.slice(0, 177), lastSpace = slice.lastIndexOf(' ');
-    return `${lastSpace > 130 ? slice.slice(0, lastSpace) : slice}…`;
-  };
-  const title = resolveQaSeoTitle(final.seo_title, now) ?? final.title;
-  const description = kind === 'hub' ? normalizeDescription(final.meta_description) ?? normalizeDescription(final.description_md) ?? QA_WIKI_DESCRIPTION : final.meta_description ?? QA_WIKI_DESCRIPTION;
-  const paginated = kind === 'database' && currentPage > 1;
-  return {
-    title: paginated ? `${title} - Page ${currentPage}` : title,
-    heading: paginated ? `${final.title} - Page ${currentPage}` : final.title,
-    description: paginated ? `${description} Page ${currentPage}.` : description,
-    canonical: `https://bloxodes.com${route}${paginated ? `/page/${currentPage}` : ''}`
-  };
-}
 export function selectedPlan(base: string, input: unknown) {
   const batch: {operations: Array<{publisher: string; file: string}>; urls: Array<{path: string; contains: string}>; events: Array<{type: string; slug: string}>} = parseBatch(input);
   const collections: any[] = [], hubs: any[] = [];

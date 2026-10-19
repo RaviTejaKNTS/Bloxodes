@@ -1,6 +1,6 @@
 import {expect, test, type Page, type TestInfo, type Locator} from '@playwright/test';
 import fs from 'node:fs';
-import {assertEnvironment, robloxMetadata} from '../../../scripts/ci/selected-roblox-qa';
+import {assertEnvironment, robloxMetadata} from '../../../scripts/ci/selected-roblox-qa-contract';
 
 type Fact = {key: string; label: string; text: string; description: boolean};
 type Item = {item: {name: string; imageCreditUrl?: unknown}; system: {slug: string; section: string}; image: string | null; facts: Record<'cards' | 'list', Fact[]>};
