@@ -34,3 +34,4 @@ Keep this list current: add failures when you find them, remove them when fixed.
 - **Universe stats:** the daily rollup and platform refresh time out.
 - **Item stats:** WARM fails on a duplicate canonical key; NEW, HOT and COLD were skipped; the audit is partial.
 - **Health monitor:** runs far less often than configured.
+- **Paid Codex PR review:** the `OPENAI_API_KEY` is out of quota, so `codex-review.yml` fails. Its `scope` job also fails on very large PRs when GitHub's file list doesn't match `changed_files`. Neither blocks merging.

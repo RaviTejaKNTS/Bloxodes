@@ -11,9 +11,9 @@ How code and content reach production. GitHub does the checking, building, deplo
 3. **Open a PR to `production`** and link it to T3. Use T3's PR watcher while checks run.
 4. **`pull-request.yml`** sorts the diff. Docs and skills skip the heavy jobs. Code runs migration integrity, env contracts, script tests and the affected app checks. Web changes get a production build and desktop and mobile browser smoke tests with screenshots.
 5. **`Required PR checks`** is the single required check. Branch protection enforces it, including for admins, and blocks force pushes. No human approval is required by GitHub; release permission comes from the owner.
-6. **`codex-review.yml`** (Selective Codex review) runs a paid code review when a ready, same-repo code PR opens. Pushes cancel stale reviews but don't start new ones. After fixes: `gh workflow run codex-review.yml --ref production -f pull_request=<number>`. It doesn't replace the required checks.
+6. **`codex-review.yml`** (Selective Codex review) runs a paid code review when a ready, same-repo code PR opens. It isn't a required check. Pushes cancel stale reviews but don't start new ones. After fixes: `gh workflow run codex-review.yml --ref production -f pull_request=<number>`. It doesn't replace the required checks.
 7. **Merge** with a merge commit, only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly.
-8. **Clean up.** GitHub deletes the remote branch. Fast-forward the clean main checkout to the released SHA. Once the thread is finished in T3, run `cleanup:task-worktree` from another checkout with `--inactive-confirmed`.
+8. **Clean up.** GitHub deletes the remote branch. Fast-forward the clean main checkouts (homelab and Mac) to the released SHA. On the homelab, once the thread is finished in T3, run `cleanup:task-worktree` from another checkout with `--inactive-confirmed`. On the Mac, the hourly `com.ravitejaknts.t3-worktree-reaper` removes settled T3 worktrees; the helper doesn't accept Mac paths.
 
 Use `bloxodes-release-e2e` for the full release flow.
 
