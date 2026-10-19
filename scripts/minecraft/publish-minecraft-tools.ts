@@ -1,3 +1,4 @@
+import { validateFranchisePublicationImages } from "../shared/franchise-page-images";
 import { assertProductionPublication } from "../ci/publication-guard";
 import { gameDatabase } from "@/lib/game-content-db";
 import "../shared/load-env";
@@ -42,6 +43,7 @@ async function main() {
     plans.push({ ...plan, game_id: owner.data.id, slug, tool_key: data.tool_key ?? slug, is_published: data.is_published === true });
   }
   if (new Set(plans.map(row => row.slug)).size !== plans.length) throw new Error("Duplicate tool slugs in the exact publication batch.");
+  await validateFranchisePublicationImages(sb, "minecraft", { tools: plans });
   console.table(plans.map(row => ({ slug: row.slug, published: row.is_published, target: production ? "production" : "managed-development" })));
   if (!apply) return;
   for (const plan of plans) {

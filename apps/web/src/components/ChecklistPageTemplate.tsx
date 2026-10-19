@@ -43,10 +43,12 @@ export function checklistMetadata(data: ChecklistTemplateData | null, config: Ch
       description,
       siteName: SITE_NAME,
       publishedTime,
+      ...(config.progressNamespace && page.image ? { images: [page.image] } : {}),
       modifiedTime: updatedTime
     },
     twitter: {
-      card: "summary",
+      card: config.progressNamespace && page.image ? "summary_large_image" : "summary",
+      ...(config.progressNamespace && page.image ? { images: [page.image] } : {}),
       title: titleBase,
       description
     }

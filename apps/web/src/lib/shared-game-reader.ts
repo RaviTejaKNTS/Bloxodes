@@ -5,6 +5,7 @@ import { cache } from "react";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { resolveWikiMediaUrl } from "@/lib/wiki-media";
 import { supabaseAdmin } from "@/lib/supabase";
+import { resolveGameCoverImage, resolveGameThumbnailImage } from "./game-images";
 import { gameDatabase } from "./game-content-db";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
 
@@ -179,12 +180,12 @@ type SharedGameWikiImageFields = {
 
 /** The wide artwork used for Game cards, metadata, and structured data. */
 function resolveSharedGameWikiCoverImage(page: SharedGameWikiImageFields): string {
-  return page.cover_image?.trim() || page.game_cover_image?.trim() || page.game_hero_image?.trim() || "/Bloxodes.png";
+  return resolveGameCoverImage(page) || "";
 }
 
 /** The separate square-friendly artwork shown beside a Game wiki title. */
 function resolveSharedGameWikiThumbnailImage(page: SharedGameWikiImageFields): string {
-  return page.game_hero_image?.trim() || page.cover_image?.trim() || page.game_cover_image?.trim() || "/Bloxodes.png";
+  return resolveGameThumbnailImage(page) || "";
 }
 
 async function listPublishedSharedGameGames(): Promise<SharedGameGame[]> {
@@ -340,6 +341,7 @@ async function listPublishedSharedGameWikiCollectionImageUrls(
         .eq("dataset_id", page.published_dataset_id)
         .not("image_key", "is", null)
         .order("sort_order", { ascending: true })
+        .order("item_slug", { ascending: true })
         .limit(safeLimit);
       if (error) {
         console.error("Error fetching Game collection images", error);

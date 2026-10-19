@@ -1,3 +1,4 @@
+import { readGameArtwork } from "./game-artwork";
 import { gameDatabase } from "@/lib/game-content-db";
 import "server-only";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -24,7 +25,12 @@ export async function listPublishedGtaChecklists(page = 1, pageSize = 20) {
     .range(offset, offset + pageSize - 1);
   if (error?.code === "PGRST103") return { checklists: [], total: 0 };
   if (error) throw error;
-  return { checklists: (data ?? []) as GtaChecklistPage[], total };
+  const checklists = await Promise.all((data ?? []).map(async page => {
+    // Artwork can only be resolved when the row includes its owning game.
+    if (!page.game_id) return page;
+    return { ...page, image: (await readGameArtwork("gta", page.game_id))?.cover_image ?? null };
+  }));
+  return { checklists: checklists as GtaChecklistPage[], total };
 }
 export async function getGtaChecklistPageBySlug(slug: string) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null;
@@ -35,5 +41,5 @@ export async function getGtaChecklistPageBySlug(slug: string) {
   const { data: items, error: itemError } = await gameDatabase(supabaseAdmin(), "gta").from("checklist_items")
     .select("*").eq("page_id", page.id).order("section_code");
   if (itemError) throw itemError;
-  return { page: page as GtaChecklistPage, items: ((items ?? []) as ChecklistItem[]).sort((a, b) => a.section_code.localeCompare(b.section_code, "en", { numeric: true })) };
+  return { page: { ...page, image: (await readGameArtwork("gta", page.game_id))?.cover_image ?? null } as GtaChecklistPage, items: ((items ?? []) as ChecklistItem[]).sort((a, b) => a.section_code.localeCompare(b.section_code, "en", { numeric: true })) };
 }

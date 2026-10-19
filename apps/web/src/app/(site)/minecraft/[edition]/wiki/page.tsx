@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { parseMinecraftEdition } from "@/lib/minecraft-edition";
 import { minecraftWikiSlug } from "@/lib/minecraft-paths";
 import { getMinecraftWikiPageBySlug } from "@/lib/minecraft";
-import { gameWikiMetadata, renderGameWikiPage } from "@/components/games/GameWikiPage";
+import { gameWikiMetadata } from "@/components/games/GameWikiPage";
+import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 export const revalidate = 21600;
 type Props = { params: Promise<{ edition: string }> };
 async function load(params: Props["params"]) {

@@ -1,3 +1,4 @@
+import { validateFranchisePublicationImages } from "../shared/franchise-page-images";
 import "../shared/load-env";
 import { reservedGameNamespaces } from "../../apps/web/src/lib/game-route-names";
 import { parseGameMapData, parseGameQuizData, parseGameCatalogData } from "../../apps/web/src/lib/game-page-data";
@@ -76,7 +77,7 @@ async function main() {
    } else {
     if (!validId(row.game_id) || !validSlug(row.slug)) throw new Error(`${key} rows need game_id and a valid slug.`);
     if (typeof row.game_id !== "string" || typeof row.title !== "string" || !row.title.trim()) throw new Error(`${key} rows need game_id and title.`);
-    if (key === "codesPages" && row.faq_json != null && (!Array.isArray(row.faq_json) || row.faq_json.some(faq => !faq || typeof faq !== "object" || typeof faq.q !== "string" || !faq.q.trim() || typeof faq.a !== "string" || !faq.a.trim()))) throw new Error("Codes FAQs need an array of non-empty question/answer strings.");
+    if (["codesPages", "maps", "catalog"].includes(key) && row.faq_json != null && (!Array.isArray(row.faq_json) || row.faq_json.some(faq => !faq || typeof faq !== "object" || typeof faq.q !== "string" || !faq.q.trim() || typeof faq.a !== "string" || !faq.a.trim()))) throw new Error(`${key} FAQs need an array of non-empty question/answer strings.`);
     const stagedGame = payload.games?.find(game => game.id === row.game_id);
     if (!stagedGame) {
      const { data, error } = await sb.from("games").select("namespace").eq("id", row.game_id).single();
@@ -95,6 +96,7 @@ async function main() {
   console.log(`${namespace}: ${prepared.length} ${key} rows validated${argv.includes("--apply") ? ", checking atomic publication" : ", checking rollback-only publication"}`);
   validated.set(key, prepared);
  }
+ await validateFranchisePublicationImages(sb, namespace, Object.fromEntries(validated));
  // The database checks constraints and writes every group in one transaction.
  const { data, error } = await sb.rpc("publish_game_content_batch", { target_namespace: namespace, payload: Object.fromEntries(validated), apply_changes: argv.includes("--apply") });
  if (error) throw error;

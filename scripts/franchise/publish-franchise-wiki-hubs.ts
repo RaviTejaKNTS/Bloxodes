@@ -1,3 +1,5 @@
+import { franchiseImageUrl, requireFranchiseHubImages } from "../ci/franchise-image-contract.mjs";
+import { verifyFranchisePageImage, validateFranchisePublicationImages } from "../shared/franchise-page-images";
 import { assertProductionPublication } from "../ci/publication-guard";
 import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import "../shared/load-env";
@@ -29,21 +31,32 @@ async function main() {
   if (!production && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) throw new Error("Unrecognized database target.");
   if (apply && production && !allowProd) throw new Error("Production writes require --allow-prod.");
   if (allowProd && !production) throw new Error("--allow-prod requires the production target.");
-  const sb = gameDatabase(supabaseAdmin(), namespace);
+  const client = supabaseAdmin();
+  const sb = gameDatabase(client, namespace);
   const plans = [];
   for (const slug of [...new Set(slugs)]) {
     const dir = path.resolve(value("--workspace"), slug, "wiki", slug);
     const game = JSON.parse(await readFile(path.join(dir, "game.json"), "utf8"));
     const wiki = JSON.parse(await readFile(path.join(dir, "final.json"), "utf8"));
     if (game.slug !== slug || wiki.slug !== slug || wiki.game_slug !== slug || game.is_published !== true || wiki.is_published !== true) throw new Error(`Unapproved or mismatched hub ${slug}`);
-    if (!game.cover_image || !game.hero_image || game.cover_image === game.hero_image) throw new Error(`Separate hosted media required for ${slug}`);
-    for (const url of [game.cover_image, game.hero_image]) {
+    const images = requireFranchiseHubImages(game, slug);
+    for (const image of images) {
+      const { url } = image;
       if (!url.startsWith(`https://media.bloxodes.com/wiki/${namespace}/${namespace === "minecraft" ? "minecraft" : slug}/`)) throw new Error(`Unapproved media URL for ${slug}`);
-      const response = await fetch(url, { method: "HEAD", signal: AbortSignal.timeout(30000) });
-      if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) throw new Error(`Unavailable image for ${slug}`);
     }
     plans.push({ slug, game, wiki });
   }
+  const imageGames = await client.from("games").select("*").eq("namespace", namespace);
+  if (imageGames.error) throw imageGames.error;
+  const imagePayload = { games: plans.map(({ slug, game }) => {
+    const stored = imageGames.data.find(row => row.slug === slug && row.kind === "game");
+    return { ...stored, ...game, id: stored?.id || game.id || slug, namespace };
+  }) };
+  for (const { slug, wiki } of plans) {
+    if (wiki.cover_image != null && !franchiseImageUrl(wiki.cover_image)) throw new Error(`${slug}: wiki cover_image must be a hosted game image.`);
+    if (wiki.cover_image) await verifyFranchisePageImage({ url: wiki.cover_image, role: "cover", label: `${slug} wiki` });
+  }
+  await validateFranchisePublicationImages(client, namespace, imagePayload);
   if (args.includes("--stage") && (slugs.some(slug => namespace === "minecraft" && slug === "minecraft"))) throw new Error("Staging requires independent Minecraft edition hubs.");
   // Read all exact target rows before the first mutation.
   const existing = await sb.from("games").select("id,slug,is_published").in("slug", slugs);

@@ -973,8 +973,7 @@ export function renderGameCollectionPage({
   const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const normalizedRouteBase = routeBase === "/" ? "" : routeBase.replace(/\/+$/, "");
-  // Legacy help stays stored, but Roblox collections open directly on the items.
-  const howHtml = normalizedRouteBase !== "/wiki" && contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
+  const metadataImage = normalizedRouteBase === "/wiki" ? null : normalizeText(items.find(item => normalizeText(item.image))?.image);
   const useStream = streamOption ?? normalizedRouteBase === "/wiki";
   const basePath = collectionBasePath ?? `${normalizedRouteBase}/${config.gameSlug}/${config.slug}`;
   const gameWikiPath = wikiHomePath ?? `${normalizedRouteBase}/${config.gameSlug}`;
@@ -1051,7 +1050,6 @@ export function renderGameCollectionPage({
   ];
 
   const introNodes = introHtml ? renderPageContentNodes(introHtml, `${config.code}-intro`) : null;
-  const howNodes = howHtml ? renderPageContentNodes(howHtml, `${config.code}-how`) : null;
   const descriptionNodes = detailDescriptionHtml.flatMap((entry) =>
     renderPageContentNodes(entry.html, `${config.code}-description-${entry.key}`)
   );
@@ -1084,7 +1082,7 @@ export function renderGameCollectionPage({
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitleWithPage,
       description: pageDescriptionWithPage,
-      image: `${SITE_URL}${FALLBACK_IMAGE}`,
+      image: metadataImage ? resolveAbsoluteUrl(metadataImage) : `${SITE_URL}${FALLBACK_IMAGE}`,
       author: null,
       publishedAt: publishedIso,
       updatedAt: updatedIso
@@ -1102,12 +1100,6 @@ export function renderGameCollectionPage({
       <section className={useStream ? "min-w-0" : "article-content md-copy-scope copy-with-sidebar-space space-y-6"}>
         {!useStream ? (<>
         {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
-        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase !== "/gta/wiki" ? (
-          <section aria-labelledby="collection-how-to" className="max-w-3xl space-y-3">
-            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
-            {howNodes}
-          </section>
-        ) : null}
 
         <CatalogAdSlot />
 
@@ -1119,24 +1111,12 @@ export function renderGameCollectionPage({
           beforeToolbar={useStream ? (<>
 
         {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
-        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase !== "/gta/wiki" ? (
-          <>
-            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
-            {howNodes}
-          </>
-        ) : null}
 
         {finderEntries.length ? <CollectionItemFinder entries={finderEntries} /> : null}
 
           </>) : null}
           afterContent={useStream ? (<>
 
-        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase === "/gta/wiki" ? (
-          <>
-            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
-            {howNodes}
-          </>
-        ) : null}
 
         {hasDetails ? (
           <>
@@ -1178,12 +1158,6 @@ export function renderGameCollectionPage({
 
         <CatalogAdSlot />
 
-        {pagination.info.currentPage === 1 && howNodes && normalizedRouteBase === "/gta/wiki" ? (
-          <section aria-labelledby="collection-how-to" className="max-w-3xl space-y-3">
-            <h2 id="collection-how-to" className="text-xl font-semibold tracking-tight">How to use this collection</h2>
-            {howNodes}
-          </section>
-        ) : null}
 
         {hasDetails ? (
           <>

@@ -3,7 +3,7 @@ import { parseQuizData, type QuizData } from "./quiz-types";
 export type GameMapMarker = { id: string; title: string; x: number; y: number; category?: string; description?: string; href?: string };
 export type GameMapData = { image: string; width: number; height: number; attribution: string; markers: GameMapMarker[] };
 export type GameCatalogData = { columns: Array<{ key: string; label: string }>; items: Array<Record<string, string | number | boolean | null> & { id: string }> };
-export type GameExtendedPage = { id: string; namespace: string; game_id: string; slug: string; title: string; game_title: string; canonical_path: string; seo_title: string | null; meta_description: string | null; intro_md: string | null; description_md: string | null; sources_json: Array<{ title: string; url: string }>; published_at: string | null; created_at: string; updated_at: string; renderer_key?: string; map_data?: unknown; quiz_data?: unknown; catalog_data?: unknown };
+export type GameExtendedPage = { id: string; namespace: string; game_id: string; slug: string; title: string; game_title: string; image?: string | null; faq_json?: Array<{ q: string; a: string }> | null; canonical_path: string; seo_title: string | null; meta_description: string | null; intro_md: string | null; description_md: string | null; sources_json: Array<{ title: string; url: string }>; published_at: string | null; created_at: string; updated_at: string; renderer_key?: string; map_data?: unknown; quiz_data?: unknown; catalog_data?: unknown };
 
 function record(value: unknown): value is Record<string, unknown> { return !!value && typeof value === "object" && !Array.isArray(value); }
 function text(value: unknown): value is string { return typeof value === "string" && !!value.trim(); }

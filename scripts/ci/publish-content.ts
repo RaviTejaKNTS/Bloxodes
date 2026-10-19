@@ -55,6 +55,7 @@ function command(operation: any, write: boolean): string[] {
     case "events-final": return ["ci:events:publish", "--file", file, ...(write ? ["--apply"] : [])];
     case "roblox-codes-page": return ["upsert:code-page", "--file", file, ...(write ? [] : ["--dry-run"])];
     case "article-queue": return managed ? ["import:content-final", "--file", file, ...(write ? [] : ["--dry-run"])] : ["articles:release", "--queue-id", operation.queueId, ...(write ? ["--apply", "--allow-prod"] : [])];
+    // Shared franchise CLIs enforce image readiness in both preflight and write modes.
     case "game-pages": return ["publish:game-pages", "--namespace", operation.namespace, "--file", file, ...(write ? ["--apply", ...prod] : [])];
     case "content-final": return ["import:content-final", "--file", file, ...(write ? prod : ["--dry-run", ...(!managed ? ["--allow-prod"] : [])])];
     case "roblox-wiki": return ["sync:game-wiki-runtime", "--final-json", file, ...(write ? ["--apply", ...prod] : [])];
