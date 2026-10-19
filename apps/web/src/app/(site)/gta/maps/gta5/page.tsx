@@ -28,7 +28,7 @@ export default async function Gta5MapPage() {
   if (!page) notFound();
   const markers = await getGta5MapMarkers();
   const structuredData = [
-    webPageJsonLd({ siteUrl: SITE_URL, slug: GTA5_MAP_PATH.slice(1), title, description, image: page.image || "", author: null }),
+    webPageJsonLd({ siteUrl: SITE_URL, slug: GTA5_MAP_PATH.slice(1), title, description, image: page.image, author: null }),
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
       { name: "GTA", url: `${SITE_URL}/gta` },

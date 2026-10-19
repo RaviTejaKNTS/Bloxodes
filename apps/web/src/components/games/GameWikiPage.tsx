@@ -87,7 +87,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
 
   const structuredData = [
     {
-      ...webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image: coverImage, author: null, publishedAt: page.published_at, updatedAt }),
+      ...webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image: coverImage || undefined, author: null, publishedAt: page.published_at, updatedAt }),
       ...(collectionBlocks.length ? {
         "@type": "CollectionPage",
         mainEntity: {

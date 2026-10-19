@@ -1,13 +1,56 @@
 import sharp from "sharp";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { assertFranchisePageImages } from "../ci/franchise-image-contract.mjs";
+import { assertFranchisePageImages, franchiseImageUrl } from "../ci/franchise-image-contract.mjs";
+
+export const MAX_FRANCHISE_IMAGE_BYTES = 15 * 1024 * 1024;
+export const MAX_FRANCHISE_IMAGE_PIXELS = 16 * 1024 * 1024;
+
+async function readImageBody(response: Response): Promise<Buffer> {
+  if (Number(response.headers.get("content-length")) > MAX_FRANCHISE_IMAGE_BYTES) {
+    await response.body?.cancel();
+    throw new Error(`image exceeds ${MAX_FRANCHISE_IMAGE_BYTES} byte limit`);
+  }
+  if (!response.body) throw new Error("image response has no body");
+  const reader = response.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let size = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) return Buffer.concat(chunks, size);
+      size += value.byteLength;
+      if (size > MAX_FRANCHISE_IMAGE_BYTES) throw new Error(`image exceeds ${MAX_FRANCHISE_IMAGE_BYTES} byte limit`);
+      chunks.push(value);
+    }
+  } catch (error) {
+    await reader.cancel().catch(() => {});
+    throw error;
+  } finally {
+    reader.releaseLock();
+  }
+}
 
 export async function verifyFranchisePageImage({ url, role, label }: { url: string; role: string; label: string }) {
-  const response = await fetch(url, { signal: AbortSignal.timeout(30_000) }).catch(error => {
+  // Revalidate here even when the caller already checked its publication plan.
+  const allowedUrl = franchiseImageUrl(url);
+  if (!allowedUrl) throw new Error(`${label}: disallowed ${role} image URL ${url}`);
+  const response = await fetch(allowedUrl, { redirect: "manual", signal: AbortSignal.timeout(30_000) }).catch(error => {
     throw new Error(`${label}: unavailable ${role} image ${url}: ${String(error)}`);
   });
-  if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) throw new Error(`${label}: unavailable ${role} image ${url}`);
-  const metadata = await sharp(Buffer.from(await response.arrayBuffer())).metadata().catch(error => {
+  if (!response.ok || !response.headers.get("content-type")?.startsWith("image/")) {
+    await response.body?.cancel().catch(() => {});
+    throw new Error(`${label}: unavailable ${role} image ${url} (HTTP ${response.status}; redirects are not allowed)`);
+  }
+  const bytes = await readImageBody(response).catch(error => {
+    throw new Error(`${label}: unreadable ${role} image body ${url}: ${String(error)}`);
+  });
+  const metadata = await (async () => {
+    const decoder = sharp(bytes, { failOn: "warning", limitInputPixels: MAX_FRANCHISE_IMAGE_PIXELS });
+    const metadata = await decoder.metadata();
+    // Metadata alone can accept intact headers with damaged pixel data.
+    await decoder.timeout({ seconds: 10 }).raw().toBuffer();
+    return metadata;
+  })().catch(error => {
     throw new Error(`${label}: unreadable ${role} image ${url}: ${String(error)}`);
   });
   if (!metadata.width || !metadata.height) throw new Error(`${label}: ${role} has no readable image dimensions: ${url}`);

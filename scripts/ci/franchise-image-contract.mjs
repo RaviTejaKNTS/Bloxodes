@@ -1,11 +1,13 @@
 const pageGroups = ['wiki', 'codesPages', 'tools', 'maps', 'quizzes', 'catalog', 'checklists'];
 const published = (group, row) => row?.[group === 'checklists' ? 'is_public' : 'is_published'] === true;
+// Stored franchise media uses this origin; arbitrary Supabase projects are not trusted.
+const imageHosts = new Set(['media.bloxodes.com']);
 
 export function franchiseImageUrl(value) {
   if (typeof value !== 'string' || !value.trim() || /[\s\\]/.test(value)) return null;
   try {
     const url = new URL(value);
-    if (url.protocol !== 'https:' || url.username || url.password || /\/Bloxodes(?:-(?:dark|light))?\.(png|webp|svg)$/i.test(url.pathname)) return null;
+    if (url.protocol !== 'https:' || !imageHosts.has(url.hostname) || url.port || url.username || url.password || /\/Bloxodes(?:-(?:dark|light))?\.(png|webp|svg)$/i.test(url.pathname)) return null;
     return url.href;
   } catch { return null; }
 }
@@ -26,17 +28,21 @@ export async function assertFranchisePageImages({ namespace, payload, storedGame
   const games = new Map(storedGames.map(game => [game.id, game]));
   for (const row of payload.games ?? []) games.set(row.id, { ...games.get(row.id), ...row });
   const images = [];
+  let publishesRows = false;
   const root = [...games.values()].find(game => game.slug === namespace && !game.parent_id);
   if (!root) throw new Error(`${namespace}: image validation needs the owning namespace root.`);
-  if (root.is_published) images.push(...requireFranchiseHubImages(root, `${namespace} root`));
   for (const row of payload.games ?? []) {
     const game = games.get(row.id);
-    if (game.is_published) images.push(...requireFranchiseHubImages(game));
+    if (game.is_published) {
+      publishesRows = true;
+      images.push(...requireFranchiseHubImages(game));
+    }
   }
   for (const group of pageGroups) {
     for (const input of payload[group] ?? []) {
       const row = { ...await loadPage(group, input), ...input };
       if (!published(group, row)) continue;
+      publishesRows = true;
       const game = games.get(row.game_id);
       if (!game || game.namespace !== namespace && game.namespace !== undefined) throw new Error(`${group}/${row.slug}: missing owning game for image validation.`);
       const label = `${namespace}/${group}/${row.slug}`;
@@ -55,6 +61,7 @@ export async function assertFranchisePageImages({ namespace, payload, storedGame
       }
     }
   }
+  if (publishesRows && root.is_published) images.unshift(...requireFranchiseHubImages(root, `${namespace} root`));
   const seen = new Set();
   for (const image of images) {
     const key = `${image.role}:${image.url}`;

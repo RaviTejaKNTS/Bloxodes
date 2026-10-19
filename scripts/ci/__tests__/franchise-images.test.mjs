@@ -47,6 +47,26 @@ test('draft rows can retain image gaps, and unpublishing is allowed', async () =
   await validate({ games: [{ ...root, is_published: false, cover_image: null, hero_image: null }] });
 });
 
+test('a published root with no artwork does not block drafts or unpublishing', async () => {
+  const games = [ { ...root, cover_image: null, hero_image: null }, { ...game, cover_image: null, hero_image: null } ];
+  for (const payload of [
+    { games: [{ ...game, is_published: false }] },
+    { games: [{ id: root.id, is_published: false }] },
+    { games: [{ ...game, id: 'new-draft', is_published: false }] },
+    { quizzes: [{ ...page, is_published: false }] },
+    { checklists: [{ ...page, is_public: false }] },
+    { codes: [{ status: 'expired' }] }
+  ]) assert.deepEqual(await validate(payload, { games, stored: { quizzes: page, checklists: { ...page, is_public: true } } }), []);
+});
+
+test('publishing any effective row still requires the published root artwork', async () => {
+  const games = [{ ...root, cover_image: null, hero_image: null }, game];
+  for (const payload of [{ quizzes: [page] }, { games: [{ id: game.id, title: 'Updated published game' }] }, { games: [{ ...game, is_published: false }], quizzes: [page] }]) {
+    await assert.rejects(validate(payload, { games }), /example root.*hub\/root requires/);
+  }
+  await assert.rejects(validate({ quizzes: [{ game_id: game.id, slug: page.slug, title: 'Still published' }] }, { games, stored: { quizzes: page } }), /example root.*hub\/root requires/);
+});
+
 test('the complete image plan is rejected before any availability checks run', async () => {
   let requests = 0;
   await assert.rejects(assertFranchisePageImages({ namespace: 'example', payload: { quizzes: [page] }, storedGames: [root, { ...game, cover_image: null }], loadPage: async () => null, verifyImage: async () => { requests++; } }), /publishing requires a cover/);
@@ -54,8 +74,9 @@ test('the complete image plan is rejected before any availability checks run', a
 });
 
 test('image URLs reject placeholders, credentials and unsafe schemes', () => {
-  for (const image of [null, '', '/cover.webp', '//media.bloxodes.com/a.png', 'javascript:alert(1)', 'https://user:secret@example.com/a.png', 'https://bloxodes.com/Bloxodes.png?version=1', 'https://example.com/a\\b.png']) assert.equal(franchiseImageUrl(image), null);
+  for (const image of [null, '', '/cover.webp', '//media.bloxodes.com/a.png', 'javascript:alert(1)', 'https://user:secret@example.com/a.png', 'https://bloxodes.com/Bloxodes.png?version=1', 'https://example.com/a\\b.png', 'https://example.com/a.png', 'https://media.bloxodes.com:8443/a.png', 'https://media.bloxodes.com.evil.test/a.png', 'https://project.supabase.co/a.png', 'https://media.bloxodes.com./a.png']) assert.equal(franchiseImageUrl(image), null);
   assert.equal(franchiseImageUrl('https://media.bloxodes.com/a.webp'), 'https://media.bloxodes.com/a.webp');
+  assert.equal(franchiseImageUrl('https://media.bloxodes.com:443/a.webp'), 'https://media.bloxodes.com/a.webp');
 });
 
 test('collections require an item image even when individual image gaps are accepted', () => {

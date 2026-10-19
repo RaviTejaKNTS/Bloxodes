@@ -271,13 +271,14 @@ export function webPageJsonLd({
   slug: string;
   title: string;
   description: string;
-  image: string;
+  image?: string | null;
   author: { name: string; url?: string | null; description?: string | null; sameAs?: string[] | null } | null;
   publishedAt?: string | null;
   updatedAt?: string | null;
 }) {
   const canonical = `${siteUrl.replace(/\/$/, "")}/${slug.replace(/^\//, "")}`;
-  const imageUrl = image.startsWith("http") ? image : `${siteUrl.replace(/\/$/, "")}/${image.replace(/^\//, "")}`;
+  const artwork = image?.trim();
+  const imageUrl = artwork ? (artwork.startsWith("http") ? artwork : `${siteUrl.replace(/\/$/, "")}/${artwork.replace(/^\//, "")}`) : undefined;
 
   return {
     "@context": "https://schema.org",
@@ -286,7 +287,7 @@ export function webPageJsonLd({
     "name": title,
     "headline": title,
     "description": description,
-    "image": imageUrl,
+    ...(imageUrl ? { image: imageUrl } : {}),
     ...(publishedAt ? { datePublished: publishedAt } : {}),
     ...(updatedAt ? { dateModified: updatedAt } : {}),
     "publisher": {

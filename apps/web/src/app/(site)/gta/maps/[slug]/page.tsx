@@ -55,7 +55,7 @@ function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaIntera
         slug: config.route.slice(1),
         title: config.mapTitle,
         description: config.description,
-        image: image || "",
+        image,
         author: null
       }),
       breadcrumbJsonLd([
