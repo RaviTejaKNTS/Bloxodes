@@ -1,6 +1,6 @@
 ---
 name: bloxodes-model-routing
-description: How the T3 Code orchestrator splits a Bloxodes content run between two models. Luna builds evidence, data and facts and does the editorial and fact review. Haiku 5.5 reviews Luna's work, writes and does the one revision. Read it before running any bloxodes-*-workflow-runner stage by stage in T3 Code. Holds the shared rules and the stage tables for codes, quizzes, checklists, events, tools, catalog, franchise wiki hubs and collections, franchise reference, codes and tool pages, and the Roblox and franchise collection refreshes.
+description: How the T3 Code orchestrator splits a Bloxodes content run between two models. Luna builds evidence, data and facts and does the editorial and fact review. Haiku 5.5 reviews Luna's work, writes and does the one revision. Read it before running any bloxodes-*-workflow-runner stage by stage in T3 Code. Holds the shared rules and the stage tables for codes, quizzes, checklists, tools, catalog, franchise wiki hubs and collections, franchise reference, codes and tool pages, and the Roblox and franchise collection refreshes.
 ---
 
 # Bloxodes Model Routing
@@ -27,7 +27,6 @@ Luna builds anything that's evidence, data or facts. Haiku 5.5 checks Luna's wor
 | `bloxodes-code-workflow-runner` | [Codes](#codes) |
 | `bloxodes-quiz-workflow-runner` | [Quizzes](#quizzes) |
 | `bloxodes-checklist-workflow-runner` | [Checklists](#checklists) |
-| `bloxodes-events-workflow-runner` | [Events](#events) |
 | `bloxodes-tool-workflow-runner` | [Tools](#tools) |
 | `bloxodes-catalog-workflow-runner` | [Catalog](#catalog) |
 | `bloxodes-franchise-wiki-workflow-runner` | [Franchise wiki hubs](#franchise-wiki-hubs) |
@@ -147,15 +146,6 @@ Never write code rows. Children never run `upsert:code-page` or `refresh:codes`.
 - **Research review** checks the brief against step 3 of the runner's Workflow: full completion requirements or a recorded user exception, thresholds, exclusions, alternative paths as one `A or B` leaf, sections within one board, existing coverage and source proof.
 - **Writing** follows `.agents/skills/bloxodes-checklist-writing/SKILL.md` and the "Checklists" voice examples.
 - **Editorial review** fact-checks every task and threshold against the brief's sources, confirms nothing required for 100% is missing, and checks section codes and `A or B` leaves. Then the runner's "Parent checks".
-
-## Events
-
-`bloxodes-events-workflow-runner`. Folder: `tmp/events-runs/<run-id>/<game-slug>/`. The standard flow.
-
-- **Research** follows `.agents/skills/bloxodes-events-research/SKILL.md`.
-- **Research review** checks that the event data source is good enough and that nothing relies on manual timeline rows.
-- **Writing** follows `.agents/skills/bloxodes-events-writing/SKILL.md` and the "Events pages" voice examples.
-- **Editorial review** checks step 5 of the runner's Workflow: no stale dates, current-event claims or invented timeline facts, every fact matching the brief, and the voice checks.
 
 ## Tools
 

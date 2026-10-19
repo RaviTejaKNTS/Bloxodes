@@ -15,7 +15,7 @@ Skills are step-by-step playbooks agents load for a job. They live in `.agents/s
 | `roblox/wiki-and-collections` | Wiki hub and collection suggestions, research, data, images, writing, refresh and runners. |
 | `roblox/codes` | Codes page writing and runner. |
 | `roblox/catalog` | Catalog research, writing and runner. |
-| `roblox/engagement` | Quizzes, checklists and events (research, writing, runners) and engagement suggestions. |
+| `roblox/engagement` | Quizzes and checklists (research, writing, runners) and engagement suggestions. |
 | `roblox/tools` | Tool suggestions, research, writing and runner. |
 | `franchise/planning` | `bloxodes-franchise-plan`: start every new non-Roblox title here. |
 | `franchise/wiki-and-collections` | Franchise wiki and collection skills, the same stages as Roblox. |

@@ -18,7 +18,7 @@ This file holds only what every agent needs on every task. Everything else lives
 | A new non-Roblox game | `bloxodes-franchise-plan` · [doc](bloxodes-docs/content/franchise.md) |
 | Article | `bloxodes-article-workflow-runner` · [doc](bloxodes-docs/content/articles.md) |
 | Codes page | `bloxodes-code-workflow-runner` · [doc](bloxodes-docs/content/codes.md) |
-| Catalog, quiz, checklist, events, tool | the matching `bloxodes-*-workflow-runner` · [catalog](bloxodes-docs/content/catalog.md), [engagement](bloxodes-docs/content/engagement.md) |
+| Catalog, quiz, checklist, tool | the matching `bloxodes-*-workflow-runner` · [catalog](bloxodes-docs/content/catalog.md), [engagement](bloxodes-docs/content/engagement.md) |
 | Any public page or copy | `bloxodes-voice` · [page standards](bloxodes-docs/content/page-standards.md) |
 | Content stages in T3 | `bloxodes-model-routing` |
 | Publishing anything | `bloxodes-release-e2e` · [release](bloxodes-docs/operations/release.md) |
