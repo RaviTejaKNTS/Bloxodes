@@ -15,6 +15,16 @@ on:
         required: false
         default: false
         type: boolean
+      selected_roblox_bundle_hash:
+        description: 'Optional exact private immutable bundle SHA-256 for development-only Roblox wiki/collection QA'
+        required: false
+        default: ''
+        type: string
+      selected_roblox_stage:
+        description: 'Stage only selected Roblox development content first (collections require all four R2 secrets on this ref)'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -160,6 +170,86 @@ jobs:
             test "$MANAGED" = success
             test "$CHECKS" = success
           fi
+  selected-roblox-development-qa:
+    if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/production' && inputs.selected_roblox_bundle_hash != '' && inputs.selected_franchise_bundle_hash == ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: bloxodes-managed-content-qa
+      queue: max
+      cancel-in-progress: false
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      BLOXODES_MANAGED_QA: 'true'
+      BLOXODES_SELECTED_ROBLOX_QA: 'true'
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+      SUPABASE_MEDIA_PUBLIC_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_MEDIA_BUCKET: media
+      ARTICLE_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      ARTICLE_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      WIKI_R2_ENDPOINT: ${{ inputs.selected_roblox_stage && secrets.WIKI_R2_ENDPOINT || '' }}
+      WIKI_R2_ACCESS_KEY_ID: ${{ inputs.selected_roblox_stage && secrets.WIKI_R2_ACCESS_KEY_ID || '' }}
+      WIKI_R2_SECRET_ACCESS_KEY: ${{ inputs.selected_roblox_stage && secrets.WIKI_R2_SECRET_ACCESS_KEY || '' }}
+      WIKI_R2_BUCKET: ${{ inputs.selected_roblox_stage && secrets.WIKI_R2_BUCKET || '' }}
+      SITE_URL: https://bloxodes.com
+      NEXT_PUBLIC_SITE_URL: https://bloxodes.com
+      TEST_BASE_URL: http://bloxodes.test:3000
+      BLOXODES_BUILD_SHA: ${{ github.sha }}
+      BUNDLE_HASH: ${{ inputs.selected_roblox_bundle_hash }}
+      BLOXODES_SELECTED_ROBLOX_STAGE: ${{ inputs.selected_roblox_stage && 'true' || 'false' }}
+    steps:
+      - uses: actions/checkout@v6
+        with: {ref: '${{ github.sha }}', fetch-depth: 0}
+      - name: Require an explicit task-branch development dispatch
+        run: |
+          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$GITHUB_REF_TYPE" = branch
+          test "$GITHUB_REF_NAME" != production
+          test "$SUPABASE_URL" = https://bbtcaurrtyoukvjbxbbj.supabase.co
+          test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
+          [[ "$BUNDLE_HASH" =~ ^[0-9a-f]{64}$ ]]
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm}
+      - run: npm ci --include=dev --no-audit --no-fund
+      - run: npx tsc --project scripts/ci/tsconfig.json
+      - name: Selected Roblox safety and cleanup regression tests
+        run: node --test scripts/ci/__tests__/selected-roblox-qa.test.mjs
+      - name: Download the exact private immutable bundle
+        run: node --import tsx scripts/ci/download-content-bundle.ts
+      - name: Audit and compare exact selected development content (optionally stage)
+        run: node --import tsx scripts/ci/selected-roblox-qa.ts prepare
+      - name: Create runner-only signing secret
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs'; import {randomBytes} from 'node:crypto';
+          const secret = randomBytes(32).toString('hex');
+          console.log(`::add-mask::${secret}`);
+          fs.appendFileSync(process.env.GITHUB_ENV, `AUTH_SESSION_SECRET=${secret}\n`);
+          JS
+      - run: node --import tsx scripts/ci/selected-roblox-qa.ts accounts
+      - run: npm run build:web
+      - run: npx playwright install --with-deps chromium
+      - name: Selected desktop and mobile controls, facts, images and HTML evidence
+        env:
+          SELECTED_ROBLOX_BROWSER: ${{ runner.temp }}/selected-roblox-browser.json
+          SELECTED_ROBLOX_AUTH: ${{ runner.temp }}/selected-roblox-auth.json
+        run: npx playwright test apps/web/e2e/managed-roblox-content.spec.ts --timeout=120000
+      - name: Repeat immutable readback and finish development report
+        run: node --import tsx scripts/ci/selected-roblox-qa.ts complete
+      - name: Remove only this run's owned accounts, sessions and progress; read back absence
+        if: always()
+        run: node --import tsx scripts/ci/selected-roblox-qa.ts cleanup
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: selected-roblox-development-qa-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/test-reports/
+          retention-days: 1
+          if-no-files-found: ignore
   selected-franchise-development-qa:
     if: github.event_name == 'workflow_dispatch' && inputs.selected_franchise_bundle_hash != ''
     runs-on: ubuntu-latest
