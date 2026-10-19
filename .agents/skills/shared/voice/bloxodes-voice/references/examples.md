@@ -2,7 +2,7 @@
 
 Before/after examples for every page type. The games, NPCs and numbers are made up unless a real game is named for a heading pattern. Copy the move, never the sentence. If every page starts to sound like these examples, that's a template, and we don't want templates.
 
-Jump to: [Articles](#articles) · [Troubleshooting](#troubleshooting-articles) · [Tier lists](#tier-lists) · [Best-games lists](#best-games-lists) · [Wiki hubs](#wiki-hubs) · [Collections](#game-collections) · [Catalogs](#catalog-pages) · [Codes](#codes-pages) · [Quizzes](#quizzes) · [Checklists](#checklists) · [Events](#events-pages) · [Tools](#tool-pages) · [FAQs](#faqs) · [Meta descriptions](#meta-descriptions)
+Jump to: [Articles](#articles) · [Troubleshooting](#troubleshooting-articles) · [Tier lists](#tier-lists) · [Best-games lists](#best-games-lists) · [Wiki hubs](#wiki-hubs) · [Collections](#game-collections) · [Catalogs](#catalog-pages) · [Codes](#codes-pages) · [Quizzes](#quizzes) · [Checklists](#checklists) · [Tools](#tool-pages) · [FAQs](#faqs) · [Meta descriptions](#meta-descriptions)
 
 ## Articles
 
@@ -207,14 +207,6 @@ Task rows stay plain:
 > **Before:** Make sure you complete the very important task of obtaining the Ember Compass from Mara
 >
 > **After:** Craft the Ember Compass
-
-## Events pages
-
-Evergreen only: no live dates or "happening now."
-
-> **Before:** This page shows the latest events in Garden Rush. Check here for current and upcoming events.
->
-> **After:** Garden Rush events usually bring a limited egg and a seed that won't be back for months. Miss one and you wait for the rerun, so it pays to know what each event drops before it starts.
 
 ## Tool pages
 

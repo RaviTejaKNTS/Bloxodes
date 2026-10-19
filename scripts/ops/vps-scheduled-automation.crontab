@@ -9,8 +9,8 @@
 #
 # Required env lives in /home/ravitejaknts/bloxodes-stats-worker/env.stats-worker.
 # Active jobs use Supabase service-role env and their own required credentials.
-# Legacy event description generation used OpenAI/Tavily. Events and Google
-# Indexing remain owner-disabled; do not install their legacy schedule entries.
+# Virtual events are collected without generating event text or new pages.
+# Google Indexing remains owner-disabled; do not install its legacy schedule.
 
 # BLOXODES_SCHEDULED_AUTOMATION_START
 10 0 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh worker-ledger-reconciliation "npm run stats:worker:reconcile -- --apply"
@@ -21,8 +21,7 @@
 # Google Indexing remains owner-disabled. No scheduled no-op invocation.
 40 9 * * 3 JOB_LOCK_GROUP=roblox-api /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh promo-rewards-refresh "export ROBLOX_PROMO_RETIRE_AFTER_MISSES=2; npm run refresh:promo-rewards -- --apply --allow-prod"
 
-# Owner-disabled legacy entry, retained for reference only.
-# 15 0 * * * JOB_LOCK_GROUP=roblox-api /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh events-refresh "export ROBLOX_VIRTUAL_EVENTS_LIMIT=200; npm run collect:virtual-events && npm run seed:event-details -- --all"
+15 0 * * * JOB_LOCK_GROUP=roblox-api /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh events-refresh "export ROBLOX_VIRTUAL_EVENTS_LIMIT=200; npm run collect:virtual-events"
 
 10 4 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh puzzles-early-nyt "npm run sync:puzzles -- --group early-nyt --skip-linkedin-if-missing"
 45 4 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh puzzles-beebom-with-early "npm run sync:puzzles -- --group beebom-with-early --skip-linkedin-if-missing"

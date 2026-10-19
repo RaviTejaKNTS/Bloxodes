@@ -1,8 +1,8 @@
-# Quizzes, checklists, events and tools
+# Quizzes, checklists, tools and events data
 
 Last verified: 2026-10-19
 
-Roblox engagement pages. All of these are made by hand when the owner asks; none have a schedule. The non-Roblox versions are in [franchise games](franchise.md).
+Roblox engagement pages. Quizzes, checklists and tools are made by hand when the owner asks; none have a schedule. Events are collected data only. The non-Roblox versions are in [franchise games](franchise.md).
 
 Every page type follows the same path: runner skill → research → research review → writing → review, with stages routed by `bloxodes-model-routing`, then `bloxodes-release-e2e` to publish. Writing always uses `bloxodes-voice`.
 
@@ -36,8 +36,12 @@ This applies to Roblox and non-Roblox checklists.
 
 ## Events
 
-- **Evergreen pages:** `bloxodes-events-workflow-runner`, `bloxodes-events-research`, `bloxodes-events-writing` → `events_pages`, published with the `events-final` publisher (`scripts/ci/publish-events.ts`). 22 published pages.
-- **Timeline data:** collector-owned, not written by hand. VPS cron at 00:15 UTC runs `collect:virtual-events` (`scripts/events/collect-roblox-virtual-events.ts`), then `seed:event-details -- --all` (`seed-event-details.ts`). Data in `roblox_virtual_events` (8,005 rows).
+We collect Roblox virtual events because wiki hubs and other pages show them. We don't write event text or make new events pages.
+
+- **Collector:** VPS cron at 00:15 UTC runs `collect:virtual-events` (`scripts/events/collect-roblox-virtual-events.ts`). It writes only events that changed to `roblox_virtual_events` and its category and thumbnail tables.
+- **Where they show:** home, `/events`, `/wiki`, wiki hubs, `/stats/games/<slug>` chart notes, game sidebars and the mobile app.
+- **Page refresh:** for each changed game the collector queues `wiki`, `event`, `stats:games/<slug>`, `checklist`, `tool` and `wiki_collection` revalidations (source `virtual_events_vps`) through the normal [revalidation queue](../operations/cache.md).
+- **Existing events pages:** 22 published `events_pages` stay live. They have no skills; edit them through the `events-final` publisher (`scripts/ci/publish-events.ts`) only if one needs a fix.
 
 ## Tools
 
@@ -48,9 +52,4 @@ This applies to Roblox and non-Roblox checklists.
 
 ## Suggestions
 
-`bloxodes-engagement-suggestions` suggests which codes, quiz, checklist and events pages a Roblox game should get.
-
-## Known issues
-
-- The events cron is still installed even though the checked-in crontab disables it. Detail generation fails on a missing `TAVILY_API_KEY`, and direct event revalidation reports a missing endpoint and secret. See [schedules](../automation/schedules.md#known-issues).
-- The old `event_guide_generation_queue` table has no code left. Drop it in a later migration.
+`bloxodes-engagement-suggestions` suggests which codes, quiz and checklist pages a Roblox game should get.

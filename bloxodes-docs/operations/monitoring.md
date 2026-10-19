@@ -29,7 +29,6 @@ Last verified: 2026-10-19
 Keep this list current: add failures when you find them, remove them when fixed.
 
 - **New codes pages:** OpenAI credits exhausted, so no new pages since 2026-10-07. The workflow still shows green. See [codes](../content/codes.md#known-issues).
-- **Events:** the job runs though it's meant to be disabled, then fails on a missing `TAVILY_API_KEY`.
 - **Music IDs:** Roblox Creator Store returns HTTP 500.
 - **Universe stats:** the daily rollup and platform refresh time out.
 - **Item stats:** WARM fails on a duplicate canonical key; NEW, HOT and COLD were skipped; the audit is partial.

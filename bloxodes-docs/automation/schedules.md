@@ -48,7 +48,7 @@ Jobs run in short-lived `bloxodes-stats-worker:production` containers through `b
 | Worker ledger reconcile | 00:10 |
 | Platform aggregates | 01:05 |
 | Codes refresh | 00:00, 06:00, 12:00, 18:00 |
-| Events collect and details | 00:15 (see known issues) |
+| Roblox virtual events collect | 00:15 |
 | Puzzles | 04:10, 04:45, 05:00, 05:30, 07:10, 08:10, sweep 08:30, audit 08:45 |
 | Music IDs | 06:20 |
 | Decal IDs | 06:55 |
@@ -83,7 +83,3 @@ Scheduled:
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
 Manual only: `automation-runtime.yml` (packages the homelab runtime), `manual-web-audit.yml` and `google-indexing.yml` (Google Indexing is switched off).
-
-## Known issues
-
-- The VPS still runs the events job at 00:15, while the checked-in crontab has it commented out as disabled. It collects events, then fails on a missing `TAVILY_API_KEY`. The owner needs to choose: remove it or fix it.
