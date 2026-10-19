@@ -154,7 +154,10 @@ for (const entry of selected.collections) {
         await info.attach('targeted-image-inventory.json', {body: JSON.stringify({collection: entry.path, targets}), contentType: 'application/json'});
         for (const [index, name] of targets.entries()) {
           const preview = page.getByRole('button', {name: `Open larger image for ${name}`, exact: true});
-          await preview.scrollIntoViewIfNeeded();
+          await expect(async () => {
+            await preview.scrollIntoViewIfNeeded();
+            await expect(preview).toBeVisible();
+          }).toPass({timeout: 30_000});
           await expect.poll(() => preview.locator('img').evaluate(image => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0)).toBe(true);
           // Capture the card background as well as the enlarged image for contrast review.
           await page.screenshot({path: info.outputPath(`image-card-${index}.png`)});
@@ -266,7 +269,9 @@ for (const quiz of selected.pages.filter(page => page.kind === 'quiz')) {
     await page.goto(quiz.path);
     const question = page.getByText(/^Question \d+ of \d+$/);
     await expect(question).toBeVisible();
-    const total = Number((await question.innerText()).match(/of (\d+)/)![1]);
+    const progress = (await question.textContent())?.match(/of\s+(\d+)/i);
+    expect(progress).toBeTruthy();
+    const total = Number(progress![1]);
     expect(total).toBeGreaterThan(0); expect(total).toBeLessThanOrEqual(15);
     const endpoint = `/api/games/${selected.namespace}/quizzes/progress`;
     let savedResult: Promise<import('@playwright/test').Response> | null = null;
