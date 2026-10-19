@@ -1,107 +1,128 @@
 ---
 name: bloxodes-franchise-game-collection-writing
-description: Write one non-Roblox franchise collection final.json after approved research, data, and images. Use for metadata, player explanations, FAQs, hub copy, and page identity; do not alter dataset facts or publish production.
+description: Write one non-Roblox franchise collection final.json after approved research, data and images. Same page, fields and rules as the Roblox collection writing skill, with franchise identity, scope and storage. Use for titles, metadata, intro_md, description_md, description_json, faq_json and wiki_md; don't alter dataset facts or publish production.
 ---
 
-# Bloxodes franchise game collection writing
+# Bloxodes Franchise Game Collection Writing
 
-You own the writing pass for one approved collection in a non-Roblox game. The dataset carries the facts. Your copy explains the system around them so a player knows what matters and what to do next. Start only after the brief records approved data and image readiness. Follow the approved page type: database copy supports browsing and comparison; collectible copy supports route planning, access requirements, and completion.
+A collection page lets players compare everything in one in-game system: characters, vehicles, weapons, missions, collectibles. The cards carry the data. Your copy explains the system around them: what matters, what to pick first and what people get wrong. Write it like a player who's already figured the system out and is happy to save you the trial and error.
 
-## Shared game storage
+This is the same job, the same page and the same rules as `bloxodes-game-collection-writing` for Roblox. The only differences are listed under "Franchise differences" below. If you find yourself writing something the Roblox page wouldn't have, stop and check.
 
-Managed development uses `games`, `game_wiki_pages`, `game_collection_pages`, `game_collection_datasets`, `game_collection_items`, `game_code_pages`, `game_codes` and `game_tool_pages`. Roblox stays separate. Scope every read and write by namespace. Use `gameDatabase(client, namespace)` for existing logical suffixes.
+> **You are a subagent. Do NOT spawn sub-agents or call other agents. Write final.json directly.**
 
-`games.kind` is only `franchise` or `game`. `parent_id` links a game to its franchise. Other mode and edition labels describe content without adding kinds. Read the wiki row's `canonical_path` before planning collection links. A standalone game's wiki is `/<namespace>/wiki`. A franchise has its own wiki hub and child game wikis. Preserve Minecraft's edition URLs.
+Use this after `brief.md`, data readiness and image readiness are approved, for one collection in one non-Roblox game. Find the namespace, game slug, collection slug and workspace from the task context. Return the stage artifacts when you're done.
 
-Use `publish:game-pages -- --namespace <slug> --file <reviewed.json>` for reviewed game, wiki, codes page and registered tool payloads. It is dry run by default; `--apply` writes only to development. Combined payloads need explicit IDs. Publish identity before wiki, then collections. Research stays in ignored workspaces.
+## Read first
 
-Use `sync:shared-game-collection-runtime` with `--namespace` and the reviewed runtime manifest. Keep immutable dataset/media publication and pointer readback. Preserve drafts, revisions, sources, fields and media. Never edit published items. These workflows cover every non-Roblox title, GTA included. Game-specific scope comes from the approved plan.
+- The voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`.
+- Page standards: `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images, layout).
+- The approved `brief.md`.
 
-## Context and workspace
+## Useful coverage
 
-Read brief.md and dataset.json, then create or update:
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the page can improve later.
 
-~~~text
-<workspace-root>/<game-slug>/collections/<collection-slug>/final.json
-~~~
+An incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile page.
 
-The context supplies the franchise name, namespace, editorial game slug, collection slug, route, collection code pattern, and target final JSON schema. Unless it supplies another contract, use the common non-Roblox collection schema below with no Roblox identifiers.
+The brief owns the page type. `database` copy can focus on browsing and comparing the roster. `collectible` copy explains the route, unlocks, order or completion rules that help a player finish. Don't add a new final JSON shape or a page-specific table: `collection.pageType` stays in `runtime-manifest.json`, and the shared renderer picks the presentation.
 
-When updating an existing collection, preserve accurate copy and structure. Change only passages affected by approved facts or requested editorial work. Parse JSON before returning.
+## Workflow
 
-## Voice
+1. Read the approved `brief.md`.
+2. Confirm `Data readiness` says the dataset uses the v2 wrapped shape `{ meta, items[].item, items[].system }`, public game fields are separate from system fields, grouping metadata is ready when sections exist, and section labels, card/table field order, the field presentation map, highlight/chip/detail/plain fields, field consistency and renderer support are all ready.
+3. Confirm `Image readiness` is approved. Every item that has an image in the game needs one; text-only rows are allowed only when the brief records that no clean image exists.
+4. When updating an existing page, keep its copy, headings and structure unless the brief shows a passage is wrong, outdated or below page standards. Change only those passages.
+5. Create or update `<workspace-root>/<game-slug>/collections/<collection-slug>/final.json`.
+6. Parse the JSON before returning.
 
-Follow the voice guide: `.agents/skills/bloxodes-voice/SKILL.md`, plus the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`. Write like a player who has already figured this system out and is happy to save you the trial and error.
+## How the copy should read
 
-- Lead every prose field with the useful bit: what these things do, the choice that matters, the mistake to avoid.
-- Personality goes in `intro_md`, `description_md` and `wiki_md`. Card facts, table values, controls, mission names, platform sequences and directions stay plain.
-- Never mention databases, SEO, cards, pages or how the site works. Never say where a fact came from or how the page was made. Follow Public Copy in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
-- No franchise-specific visual instructions or eyebrow text.
+- **Explain the game system, not the page.** Never describe what the page is, how to use it, how to read a field, what a label or code means on the card, or "the cards below." Players already know how to read a list. Talk about the items and the choices players make.
+- **Lead with the useful bit.** Every field opens on the real thing: what these items do, the choice that matters, the mistake to avoid.
+- **Personality goes in the intro, description and wiki blurb.** Card values, table cells, controls, mission names, platform sequences and directions stay plain and exact.
+- **Use the dataset's values and the brief's recommended ranges.** Never leave a pick, price or stat out of the body because sources disagreed. A caveat goes in once, next to the advice, only when the difference changes what the player should do.
+- **Never narrate the research.** Follow the public copy rules in root `AGENTS.md`. Game terms like Research or Source Cargo are fine.
+- **Never write item counts in prose.** Don't say how many items the collection or a section has, and avoid "all X items," "over X" or "the full list of X." The only count allowed is the `{count}` token in `title` and `seo_title`, which publication fills from the live dataset.
 
-## Non-negotiable content rules
+## Field by field
 
-- Write to the campaign, online-service, expansion, mode, edition, and platform scope approved in the brief. Never blend separate scopes.
-- Preserve release-generation and platform differences. Do not call later-release content universal.
-- Do not invent statistics, rankings, handling claims, exact locations, unlock conditions, rewards, or dependencies.
-- Do not state the collection or section item count in prose. Counts become stale. The only allowed count is {count} in title and seo_title.
-- Do not promise completeness in prose. The verifier and dataset own the roster.
-- Do not repeat dataset rows as paragraphs. Explain rules, choices, progression, route, or mistakes the rows alone cannot answer.
+### `intro_md`
+
+One small paragraph that drops straight into the item system and gives the reader their bearings. It shouldn't repeat anything said elsewhere on the page. A strong intro names what every item does in the game, then the one choice that actually matters when picking.
+
+### Cards (from the dataset)
+
+Cards are the default view. They should feel complete, consistent and quick to scan:
+
+- The item name and its image.
+- One useful description line or short paragraph.
+- Easy-to-scan key-value facts.
+- A collection-specific field presentation contract. Don't rely on renderer word matching or value guessing.
+- At least one supported highlight-style field when the collection has a natural status, strength, availability, best-use or recommendation value.
+- Chip fields for prices, time, rarity, tier, levels, costs, stats and other short numbers.
+- Plain fields for comparable text like source, shop, role, mode or route name.
+- Detail fields for longer sentence facts like how to get it, behavior, weaknesses, route notes or strategy.
+- Include only fields that help players compare or understand real differences.
+
+Card rules:
+
+- Card details come from the dataset. Don't invent fields in `final.json`.
+- Cards and list view show the same public details.
+- Keep field names consistent across rows. Missing supported values stay empty or null so the renderer shows `-`.
+- Don't merge labels into values. The value is `Available`, not `Availability: Available`.
+- Detail fields are complete sentences. Arrays are only for real lists.
+- A field key renders the same way on every card.
+
+### `description_json`
+
+Optional section notes above each card group. Use one only when it adds context the cards don't. One small paragraph, never a repeat of card copy.
+
+- Keys must exactly match `items[].system.section` and `meta.display.sectionOrder`.
+- An empty object is fine when the labels say enough.
+- A good note gives one fact that changes how a player reads that group: where those items come from, or a rule that applies only to them.
+
+### `description_md`
+
+The main body. It covers what a player needs to use or finish this collection: strategy, progression, the key choices and trade-offs, common mistakes and any rules the cards don't make obvious. Cover what's genuinely useful, then stop.
+
+- Let the content decide the structure, but answer every player question in the brief.
+- Be complete. Cover the best early, mid and late picks with the real numbers behind them and the best-value options (when the collection has a progression or price), how the system unlocks or progresses, and the common mistakes. Match what the top-ranking guides cover. A location or route collection covers access and route logic instead.
+- Give answers, not chores. Instead of "check the requirements first," say which ones need what, and what the easiest good option is.
+- Short paragraphs of about 2 or 3 sentences. Bullets for steps, tips and quick comparisons. A Markdown table when comparing a few options on the same dimensions.
+- Headings follow page standards: descriptive, search-friendly, with the game name where it reads naturally, so a reader skimming only the headings knows what each section covers ("How to Unlock Every Mario Kart World Character", not "Opening racers"). No vague or cute headings and no needless subsections.
+- Don't repeat the cards, intro or section notes. No filler.
+
+### `wiki_md`
+
+The blurb next to this collection's link on the game's wiki hub.
+
+- Explain what this thing is in the game and how it works for a player, like you're explaining it to someone who just started.
+- Be specific: what the items do, how you get them, where they fit, or the choice a player makes between them.
+- Short, simple sentences. No hype like "ultimate" or "complete."
+- 2 to 4 sentences. No item counts, and never mention the page, the list or "this collection."
 
 ## Field jobs
 
-### display_name
+- `display_name`: the short reusable label for UI and wiki hub headings, like `Characters`, `Vehicles`, `Story Missions`. No counts, game names, colons or SEO phrasing.
+- `title`: `All {count} <Collection> in <Game>`, plus one short reader-focused angle when it makes the title clearer (`All {count} Characters in Mario Kart World and How to Unlock Them`). Add the mode or edition when it prevents confusion. Never replace `{count}` yourself. Aim for 50 to 65 characters once the count is filled.
+- `seo_title`: close to the title, natural for search, with the same `{count}` token.
+- `meta_description`: what the reader can compare, find, unlock or finish, plus a reason to click, in roughly 140 to 160 characters. No "latest" or "updated."
+- `how_it_works_md`: leave empty. Mechanics, stat meanings and trade-offs go in `description_md`. Never explain field scales, labels, codes or how to read the collection.
+- `faq_json`: useful follow-up questions not already answered. Every entry uses `q` and `a`. Never `question`/`answer`; the renderer reads `q`/`a`.
 
-Use the short reusable label shown in UI and hub headings, such as Vehicles, Story Missions, Characters, or Letter Scraps. Do not add the game name, count, colon, or SEO phrase.
+## Franchise differences
 
-### title and seo_title
+These are the only places this skill differs from the Roblox one.
 
-Use All {count} <Collection> in <Game> when it reads naturally. Add the mode or edition when it prevents confusion. Keep {count} unchanged so the target sync resolves it from the dataset.
-
-### meta_description
-
-Say what a player can compare, find, unlock, or finish. Avoid latest, updated, complete, and other freshness claims.
-
-### intro_md
-
-Write one short paragraph that starts with the in-game system. Explain why the entries matter without describing the site or repeating the title.
-
-### description_md
-
-Answer the remaining player questions with the fewest useful headings:
-
-- Be complete: use the dataset's real numbers to cover what players need to choose well, at least as well as the top-ranking guides. That means early, mid and late choices and best-value options when the collection has a progression or price, plus unlocks and common mistakes. A location or route collection covers access and route logic instead. Give answers, not "check the X" chores.
-
-- Explain unlocks, progression, tradeoffs, route choices, platform differences, edition limits, and common mistakes when relevant.
-- Use short paragraphs, bullets for steps or comparisons, and a small table only when it clarifies several shared options.
-- Do not repeat the intro, card descriptions, how_it_works_md, section notes, or FAQ answers.
-- For location collections, explain access requirements and route logic without rewriting every row.
-- For missions or choices, keep spoilers out of metadata and intro and label necessary spoilers clearly.
-
-### how_it_works_md
-
-Explain field scales, platform codes, map directions, availability labels, or other non-obvious row conventions. Keep it short or leave it empty.
-
-### description_json
-
-Add section notes only when they give context beyond the label and cards. Keys must exactly match items[].system.section and meta.display.sectionOrder. An empty object is valid.
-
-### faq_json
-
-Answer useful questions not already resolved above. Every row must use q and a keys:
-
-~~~json
-[{ "q": "", "a": "" }]
-~~~
-
-Do not use question and answer keys.
-
-### wiki_md
-
-Write two to four sentences for the game wiki hub. Explain what the system is, how a player reaches or uses it, and why it matters. Do not mention the collection, page, list, sources, or item count.
+- **Identity:** no `universe_id` or any Roblox identifier. The page belongs to a namespace (`gta`, `mario-kart`) and an editorial game slug from the `games` registry. Read the wiki row's `canonical_path` before planning links. Routes and tables are in `bloxodes-docs/content/franchise.md`.
+- **Scope:** write to the campaign, online service, expansion, mode, edition and platform the brief approves. Never blend scopes, and don't call later-release content universal.
+- **Spoilers:** keep story spoilers out of the title, meta description and intro. Label necessary spoilers clearly in the body.
+- **Publication:** `sync:shared-game-collection-runtime -- --namespace <slug>` with the reviewed runtime manifest, through the `franchise-collection` publisher. Keep immutable dataset and media revisions; never edit published items.
 
 ## Output shape
 
-~~~json
+```json
 {
   "wiki_slug": "",
   "collection_slug": "",
@@ -119,23 +140,19 @@ Write two to four sentences for the game wiki hub. Explain what the system is, h
   "wiki_sort_order": 100,
   "is_published": true
 }
-~~~
+```
 
-- wiki_slug is the editorial game slug.
-- collection_slug is the approved collection slug.
-- code follows the context's collection code pattern, normally <game-slug>-<collection-slug>.
-- Do not include universe_id or any Roblox identifier.
+- `wiki_slug` is the editorial game slug. `collection_slug` is the approved slug. `code` is normally `<game-slug>-<collection-slug>`.
 
-## Final self-check
+## Before you return
 
-- Data and image gates are approved.
-- JSON parses.
-- Identity matches the manifest and route.
-- {count} remains in titles and no prose count appears.
-- FAQ keys are q and a.
-- Section-note keys match the dataset exactly.
-- Public copy contains no source, workflow, page, database, or renderer language.
-- Mode, expansion, edition, platform, and release claims match the brief.
-- The copy passes the voice guide's "Before you hand it in" check: it sounds like a player explaining the game, not a publisher press release or a generic guide.
+- Data and image gates are approved, and every item with a game image has one.
+- JSON parses. Identity matches the manifest and route.
+- `{count}` stays in the titles; no prose count anywhere.
+- `how_it_works_md` is empty, and nothing explains how to use the page.
+- Headings and title meet `bloxodes-docs/content/page-standards.md`.
+- FAQ keys are `q` and `a`. Section-note keys match the dataset.
+- Mode, expansion, edition, platform and release claims match the brief.
+- The voice guide's "Before you hand it in" check passes on every prose field.
 
-Return the final path, parse result, and any approved fact that could not be expressed without overstating the evidence.
+Return the final path, the parse result and any approved fact you couldn't express without overstating the evidence.

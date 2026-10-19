@@ -80,7 +80,7 @@ export function envFilePath(relativeFile: string): string {
 export function readBloxodesEnvFile(relativeFile: string): Record<string, string> {
   const envPath = envFilePath(relativeFile);
   if (!fs.existsSync(envPath)) {
-    throw new Error(`Missing env file: ${envPath}. See dev-docs/environment.md.`);
+    throw new Error(`Missing env file: ${envPath}. See bloxodes-docs/environment.md.`);
   }
   return parse(fs.readFileSync(envPath));
 }

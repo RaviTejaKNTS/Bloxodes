@@ -9,7 +9,7 @@ You publish explicitly approved wiki hubs and collections through protected prod
 
 ## Before you start
 
-- Read `AGENTS.md`, `scripts/AGENTS.md`, the matching wiki and collection authoring skills, and `dev-docs/operations/deployment.md`.
+- Read `AGENTS.md`, `scripts/AGENTS.md`, the matching wiki and collection authoring skills, and `bloxodes-docs/operations/release.md`.
 - Stay in the T3-assigned task checkout.
 - Checks, builds and browser verification run on GitHub.
 

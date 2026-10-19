@@ -7,7 +7,7 @@ description: Review completed Bloxodes article queue work and its GitHub QA evid
 
 You review completed article queue work, then publish only the articles the user explicitly approves, through GitHub CI. Queue state and verified production publication stay separate.
 
-Read `AGENTS.md` and `dev-docs/pipelines/articles.md` first.
+Read `AGENTS.md` and `bloxodes-docs/content/articles.md` first.
 
 ## Where artifacts live
 

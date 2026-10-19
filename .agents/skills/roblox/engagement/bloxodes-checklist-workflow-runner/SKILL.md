@@ -11,7 +11,7 @@ You run one checklist from research to GitHub-verified QA. One subagent does the
 
 ## Scope
 
-Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`.
+Follow `bloxodes-docs/content/engagement.md#standalone-checklist-scope`.
 
 - Normally, keep one standalone, verified 100% completion checklist page per game. State the supported edition or mode, and put sections inside one board.
 - Check published pages and drafts, and reuse the game's existing checklist.
@@ -56,7 +56,7 @@ After you approve the brief, send the same subagent:
    - If QA fails, return the files and the actual failure.
    - Don't run checks locally, and don't call a dispatch published.
 
-For dispatch inputs, isolation, cleanup and receipt ownership, see `dev-docs/operations/deployment.md#managed-development-content-qa`.
+For dispatch inputs, isolation, cleanup and receipt ownership, see `bloxodes-docs/operations/release.md#managed-development-content-qa`.
 
 ## Parent checks
 

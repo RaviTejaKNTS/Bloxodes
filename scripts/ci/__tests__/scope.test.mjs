@@ -3,7 +3,7 @@ import test from "node:test";
 import { classify } from "../change-scope.mjs";
 
 test("guidance changes skip dependency installation and builds", () => {
-  const scope = classify(["AGENTS.md", "apps/web/src/lib/AGENTS.md", ".agents/skills/example/SKILL.md", "dev-docs/operations/deployment.md"]);
+  const scope = classify(["AGENTS.md", "apps/web/src/lib/AGENTS.md", ".agents/skills/example/SKILL.md", "bloxodes-docs/operations/release.md"]);
   assert.equal(scope.checks, false);
   assert.equal(scope.web, false);
 });

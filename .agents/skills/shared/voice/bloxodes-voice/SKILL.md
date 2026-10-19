@@ -9,6 +9,8 @@ Bloxodes sounds like your friend who has put way too many hours into the game. T
 
 That's the whole voice. The rest of this guide is how to hit it on every page.
 
+The voice covers how sentences sound. What every page must contain (titles, headings, depth, images and layout that matches the Roblox page of the same type) is in `bloxodes-docs/content/page-standards.md`. Follow both.
+
 Quick taste of the difference:
 
 > **Robotic:** The Ember Compass is a rare crafting item in Ember Isles. Players must complete prerequisite crafts in order to access the recipe.

@@ -16,7 +16,6 @@ Shared route-family data belongs in `page-data.tsx`. Quiz detail rendering shoul
 Use:
 
 - `$bloxodes-quiz-writing`
-- `agents/content-writing/agents.md`
 
 For a new game quiz, write the approved `final.json`, then use `npm run verify:engagement-finals` so `import-content-final.ts` validates and writes both page copy and `quiz_data` to managed development before route verification. The quiz code should be the game slug, such as `wizard-alchemy`, because the route already supplies `/quizzes/`.
 
@@ -61,4 +60,4 @@ If the managed-development page shows old questions after import, verify the `qu
 
 ## Shared engagement presentation (2026-09-10)
 
-Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.
+Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `bloxodes-docs/content/engagement.md` for ownership and verification.

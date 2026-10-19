@@ -2,7 +2,7 @@
 
 All page rows need `namespace`, `game_id`, `slug` and `title`. Use an explicit `id` when another group refers to the row. Named page URLs are `/<namespace>/<section>/<slug>`. The database derives `canonical_path`; omit it for a new page. Existing routes and owners are permanent.
 
-Maps, quizzes and catalogs accept `seo_title`, `meta_description`, `intro_md`, `description_md`, `sources_json`, `is_published` and `published_at`. Sources are an array of objects with a `title` and HTTPS `url`. Their game and parent must also be published to expose a page.
+Maps, quizzes and catalogs accept `seo_title`, `meta_description`, `intro_md`, `description_md`, `sources_json`, `is_published` and `published_at`. Maps, catalogs and checklists also accept `faq_json`. Cards and social previews use the owning game's art: `games.cover_image` (16:9) and `games.hero_image` (square). There's no per-page image field; make sure the game row has both. Publishing fails if they're missing, blank, the Bloxodes logo, unreachable or the wrong shape.
 
 ## Maps
 
@@ -10,23 +10,23 @@ Group `maps`, table `game_map_pages`, section `maps`. New maps use `renderer_key
 
 Each marker needs a unique `id`, `title`, and numeric `x` and `y` from 0 to 100, measured as percentages from the image's left and top edges. Optional fields are `category`, `description` and a safe `href`. Coordinates must come from verified map sources. Do not guess positions from prose.
 
-Images and links must be HTTPS or site-relative URLs. Preserve artwork credits. Existing GTA maps use their specialist `gta-layered` and `gta5` engines and the controlled `import:gta-shared-maps` command.
+Images and links must be HTTPS or site-relative URLs. Preserve artwork credits. Existing GTA maps use their specialist `gta-layered` and `gta5` engines and the controlled `import:gta-shared-maps` command. Their snapshots are frozen; changing one requires a reviewed migration, not an ordinary content edit.
 
 ## Quizzes
 
 Group `quizzes`, table `game_quiz_pages`, section `quizzes`. `quiz_data` follows the existing `QuizData` shape in `apps/web/src/lib/quiz-types.ts`.
 
-Provide nonempty `easy`, `medium` and `hard` question arrays. Questions need a unique `id`, `question`, exactly four `options` with unique `id` and `text`, and `correctOptionId` matching one option. An optional `image` must use a safe hosted URL. The player selects up to five questions per level. Keep IDs stable so saved history still refers to the same facts.
+Provide nonempty `easy`, `medium` and `hard` question arrays. Questions need a unique `id`, `question`, exactly four `options` with unique `id` and `text`, and `correctOptionId` matching one option. An optional `image` must use a safe hosted URL. Questions use only `id`, `question`, `options`, `correctOptionId` and optional `image`. Don't write `explanation` fields; the runtime drops them. The player selects up to five questions per level. Keep IDs stable so saved history still refers to the same facts.
 
 Account history is stored in `game_quiz_progress` and saved only through `/api/games/<namespace>/quizzes/progress`. The quiz code is `<namespace>:<slug>`. Do not use the Roblox progress table for new games.
 
 ## Checklists
 
-Normally keep one standalone checklist page row per game, owning one board and all its section/task rows. Reuse the game's existing checklist rather than adding pages by edition or mode. Its scope is verified 100% completion with the supported edition or mode stated. Additional pages or narrower scopes require an explicit user exception in the brief. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`; payload validity alone does not prove full game completion.
+Normally keep one standalone checklist page row per game, owning one board and all its section/task rows. Reuse the game's existing checklist rather than adding pages by edition or mode. Its scope is verified 100% completion with the supported edition or mode stated. Additional pages or narrower scopes require an explicit user exception in the brief. Follow `bloxodes-docs/content/engagement.md#standalone-checklist-scope`; payload validity alone does not prove full game completion.
 
 Group `checklists`, existing table `game_checklist_pages`, section `checklists`. Use `description_md`, `seo_title`, `seo_description`, `is_public` and `published_at`; a public checklist needs a valid publication date. Other page types use `is_published` instead.
 
-Group `checklistItems`, table `game_checklist_items`. Each row needs `page_id`, a stable `item_key`, `section_code`, `title`, optional `description` and `is_required`. Numeric codes have one part for a group, two for a section and three for a checkable task, such as `1`, `1.1`, `1.1.1`. Include the group and section rows needed by the board. Task IDs must survive content updates.
+Group `checklistItems`, table `game_checklist_items`. Each row needs `page_id`, a stable `item_key`, `section_code`, `title`, optional `description` and `is_required`. Numeric codes have one part for a group, two for a section and three for a checkable task, such as `1`, `1.1`, `1.1.1`. Include the group and section rows needed by the board. Task IDs must survive content updates. Every update includes the page's stable UUID and complete retained task inventory, with existing task UUIDs and keys preserved.
 
 The board counts all three-level leaves regardless of `is_required`. Use one required leaf with an explicit `A or B` title for interchangeable paths, and explain both verified options in its description. Do not split mutually exclusive alternatives into separate tasks or use `is_required: false` to hide optional tasks from progress. Keep optional tips in descriptions. Defer branching requirements that need unsupported alternative groups.
 

@@ -151,7 +151,7 @@ Before you approve any `final.json`, and before you call a collection done:
 - Source proof supports the collection and its important fields.
 - The page type is recorded and matches the manifest, page row and route renderer.
 - Item count and title count agree.
-- Image readiness is approved, or image gaps are fixed or accepted. Missing images never block a collection.
+- Image readiness is approved. Every item that has an image in the game has its exact image; a gap is accepted only when the brief records that no clean image exists. See `bloxodes-docs/content/page-standards.md#images`.
 - `description_json` keys match the actual rendered section labels.
 - Sections are useful and their labels are easy to understand.
 - Card fields help players compare items.

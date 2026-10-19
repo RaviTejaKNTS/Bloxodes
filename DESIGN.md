@@ -75,7 +75,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Main content starts with the same vertical rhythm across page families: `py-6 md:py-8 xl:py-10`.
 - Every section link stays in the server HTML. Top bar links that don't fit wrap out of view, and the More drawer (a right-side sheet on every screen size) lists them all. Keep the drawer compact and readable rather than full-screen.
 - Game and catalog pages can add a second bar under the header (`SiteGameTopBar`) with that game's or catalog's pages. Pages without contextual links show no second bar.
-- The homepage has no rail. From 1280px some of its blocks share a row in pairs; see Advertising in `dev-docs/architecture.md` for why each block stays a separate element.
+- The homepage has no rail. From 1280px some of its blocks share a row in pairs; see Advertising in `bloxodes-docs/overview.md` for why each block stays a separate element.
 
 ## Components
 
@@ -116,4 +116,4 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 
 ## Feature Thumbnails
 
-Small feature images should follow the [Bloxodes Single-Object Thumbnail System](docs/design/single-object-feature-thumbnails.md). The default is one immediately recognizable subject on a quiet background, composed for recognition at card size rather than detail at full resolution. Avoid miniature scenes, floating interface panels, explanatory diagrams, and decorative supporting objects.
+Small feature images should follow the [Bloxodes Single-Object Thumbnail System](bloxodes-docs/design/feature-thumbnails.md). The default is one immediately recognizable subject on a quiet background, composed for recognition at card size rather than detail at full resolution. Avoid miniature scenes, floating interface panels, explanatory diagrams, and decorative supporting objects.
