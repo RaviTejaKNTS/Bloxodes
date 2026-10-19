@@ -26,6 +26,7 @@ type DedicatedToolConfig = {
   canonicalPath?: string;
   breadcrumbItems?: Array<{ label: string; href?: string | null }>;
   relatedContent?: ReactNode;
+  sidebarContent?: ReactNode;
   commentEntityType?: ComponentProps<typeof CommentsSection>["entityType"];
 };
 
@@ -76,6 +77,7 @@ export async function DedicatedToolPage({
   canonicalPath,
   breadcrumbItems,
   relatedContent,
+  sidebarContent,
   commentEntityType = "tool",
   children
 }: DedicatedToolConfig & { children: ReactNode }) {
@@ -111,6 +113,7 @@ export async function DedicatedToolPage({
       {
         "@type": "WebPage",
         name: title,
+        ...(commentEntityType !== "tool" && tool?.thumb_url ? { image: tool.thumb_url } : {}),
         description,
         url: canonical,
         datePublished: publishedTime ? new Date(publishedTime).toISOString() : undefined,
@@ -133,7 +136,7 @@ export async function DedicatedToolPage({
   };
 
   return (
-    <ToolPageLayout toolCode={toolCode} title={title} canonicalPath={canonicalPath ?? `/tools/${toolCode}`}>
+    <ToolPageLayout toolCode={toolCode} title={title} canonicalPath={canonicalPath ?? `/tools/${toolCode}`} sidebarContent={sidebarContent}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <PageBreadcrumb
         className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"

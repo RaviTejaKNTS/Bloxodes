@@ -15,7 +15,8 @@ export async function gameCollectionMetadata(page: SharedGameWikiCollectionPage,
   if (!Number.isSafeInteger(currentPage) || currentPage < 1 || currentPage > prepared.totalPages || (page.page_type === "collectible" && currentPage !== 1)) notFound();
   const path = currentPage === 1 ? page.canonical_path : `${page.canonical_path}/page/${currentPage}`;
   const title = `${resolveSeoTitle(page.seo_title) ?? page.title}${currentPage === 1 ? "" : ` - Page ${currentPage}`}`;
-  return { title, description: page.meta_description, alternates: buildAlternates(`${SITE_URL}${path}`), robots: currentPage > 1 && page.namespace !== "gta" ? { index: false, follow: true } : undefined, openGraph: { title, description: page.meta_description, url: `${SITE_URL}${path}`, siteName: SITE_NAME } };
+  const image = runtime.document.items.find(item => item.system.image)?.system.image;
+  return { twitter: { card: "summary_large_image", images: image ? [image] : [] }, title, description: page.meta_description, alternates: buildAlternates(`${SITE_URL}${path}`), robots: currentPage > 1 && page.namespace !== "gta" ? { index: false, follow: true } : undefined, openGraph: { title, description: page.meta_description, url: `${SITE_URL}${path}`, siteName: SITE_NAME, images: image ? [image] : [] } };
 }
 export async function renderSharedGameCollection({ page, namespaceTitle, currentPage = 1 }: { page: SharedGameWikiCollectionPage; namespaceTitle: string; currentPage?: number }) {
   const reader = createGameReader(page.namespace);

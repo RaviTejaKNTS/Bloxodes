@@ -102,7 +102,6 @@ export function renderGameCollectibleCollectionPage({
   const introNodes = contentHtml?.introHtml ? renderPageContentNodes(contentHtml.introHtml, `${config.code}-intro`) : [];
   const detailEntries = contentHtml?.descriptionHtml?.filter((entry) => entry.key === DESCRIPTION_MD_KEY) ?? [];
   const detailNodes = detailEntries.flatMap((entry) => renderPageContentNodes(entry.html, `${config.code}-detail-${entry.key}`));
-  const howNodes = contentHtml?.howHtml ? renderPageContentNodes(contentHtml.howHtml, `${config.code}-how`) : [];
   const faqNodes = (contentHtml?.faqHtml ?? []).map((entry, index) => ({
     id: `${config.code}-faq-${index}`,
     question: entry.q,
@@ -142,7 +141,7 @@ export function renderGameCollectibleCollectionPage({
         ))}
         collectionOptions={collectionOptions}
         beforeToolbar={<>{introNodes}</>}
-        afterContent={<>{howNodes}{detailNodes}<CollectionFaq items={faqNodes} /></>}
+        afterContent={<>{detailNodes}<CollectionFaq items={faqNodes} /></>}
       />
 
       {contentHtml?.id ? <CommentsSection entityType={page.namespace === "gta" ? "gta_wiki_collection" : page.namespace === "red-dead" ? "red_dead_wiki_collection" : page.namespace === "minecraft" ? "minecraft_wiki_collection" : "game_collection"} entityId={contentHtml.id} /> : null}

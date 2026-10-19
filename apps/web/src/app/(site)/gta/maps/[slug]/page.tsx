@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaInteractiveMapPageData>>>) {
+function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaInteractiveMapPageData>>>, image: string | null | undefined) {
   const { config, layers, guides, hubTitle } = data;
   const canonical = SITE_URL + config.route;
   const listItems = [
@@ -55,7 +55,7 @@ function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaIntera
         slug: config.route.slice(1),
         title: config.mapTitle,
         description: config.description,
-        image: SITE_URL + (config.views[0]?.image ?? "/Bloxodes.png"),
+        image: image || "",
         author: null
       }),
       breadcrumbJsonLd([
@@ -87,7 +87,9 @@ export default async function GtaInteractiveMapPage({ params }: PageProps) {
     if(!page || page.renderer_key !== "image-pins") notFound();
     return <GameContentPage page={page}><GameMap data={parseGameMapData(page.map_data)} /></GameContentPage>;
   }
-  const jsonLd = structuredData(data);
+  const shared = await getGameExtendedPage("gta", data.config.route, "map");
+  if (!shared) notFound();
+  const jsonLd = structuredData(data, shared.image);
   const collectionLayers = data.layers.filter((layer) => layer.collectionCode && layer.guideUrl);
   const sourcePages = Array.from(new Map(
     data.layers.map((layer) => [layer.sourceUrl, { title: layer.sourceTitle, url: layer.sourceUrl }])
@@ -99,8 +101,7 @@ export default async function GtaInteractiveMapPage({ params }: PageProps) {
       <GtaInteractiveMap map={data} />
       <GtaMapGuide canonicalPath={data.config.route} title={data.config.mapTitle} heading={"About " + data.config.title}>
         <p>{data.config.description}</p>
-        <p>Select a layer to show its locations, zoom to a pin, and open the detail panel for item notes and its linked collection guide. Tracked locations use the same completion state as the Bloxodes guide: progress saves in this browser while signed out and syncs with your account while signed in.</p>
-        <p>This page contains {data.config.mappedPointCount.toLocaleString()} mapped points across {data.layers.length} layers. Collection pin numbers and locations are linked to published Bloxodes item rows where the guide has a one-to-one location. Other map markers remain useful place references and are not presented as collection progress.</p>
+        <p>{data.config.mappedPointCount.toLocaleString()} locations span {data.layers.length} map layers.</p>
 
         <h3>Collection guides</h3>
         {collectionLayers.length ? (

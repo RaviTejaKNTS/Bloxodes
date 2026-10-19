@@ -1,3 +1,4 @@
+import { GameRelatedLinks } from "./GameRelatedLinks";
 import { DedicatedToolPage, buildDedicatedToolMetadata } from "@/components/tools/DedicatedToolPage";
 import type { GameToolPage as ToolPage } from "@/lib/game-registry";
 import { ResourceCostTool } from "./ResourceCostTool";
@@ -13,5 +14,5 @@ export function GameToolPage({ tool, namespaceTitle }: { tool: ToolPage; namespa
   return <GameToolPageLayout tool={tool} namespaceTitle={namespaceTitle}><ResourceCostTool {...rules} /></GameToolPageLayout>;
 }
 export function GameToolPageLayout({ tool, namespaceTitle, children }: { tool: ToolPage; namespaceTitle: string; children: ReactNode }) {
-  return <DedicatedToolPage toolCode={tool.code} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={tool.canonical_path} commentEntityType="game_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: namespaceTitle, href: `/${tool.namespace}` }, { label: tool.title }]} relatedContent={null}>{children}</DedicatedToolPage>;
+  return <DedicatedToolPage toolCode={tool.code} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={tool.canonical_path} commentEntityType="game_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: namespaceTitle, href: `/${tool.namespace}` }, { label: "Tools", href: `/${tool.namespace}/tools` }, { label: tool.title }]} sidebarContent={<GameRelatedLinks namespace={tool.namespace} gameId={tool.game_id} canonicalPath={tool.canonical_path} />} relatedContent={null}>{children}</DedicatedToolPage>;
 }

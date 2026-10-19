@@ -1,3 +1,9 @@
+import { WikiControls } from "@/components/wiki/WikiControls";
+import { SocialShare } from "@/components/SocialShare";
+import { ContentCard } from "@/components/ContentCard";
+import { GameRelatedLinks } from "./GameRelatedLinks";
+import { getGameDirectoryPages } from "@/lib/game-registry";
+import { resolveGameCoverImage } from "@/lib/game-images";
 import { PageSidebar } from "@/components/PageSidebar";
 import { safeJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -20,8 +26,8 @@ export function gameWikiMetadata(page: SharedGameWikiPage): Metadata {
  const canonical = `${SITE_URL}${page.canonical_path}`;
  const title = resolveSeoTitle(page.seo_title) ?? page.title;
  const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);
- const image = page.cover_image || page.game_cover_image || page.game_hero_image || "/Bloxodes.png";
- return { title, description, alternates: buildAlternates(canonical), openGraph: { type: "article", title, description, url: canonical, siteName: SITE_NAME, images: [image] }, twitter: { card: "summary_large_image", title, description, images: [image] } };
+ const image = resolveGameCoverImage(page);
+ return { title, description, alternates: buildAlternates(canonical), openGraph: { type: "article", title, description, url: canonical, siteName: SITE_NAME, images: image ? [image] : [] }, twitter: { card: "summary_large_image", title, description, images: image ? [image] : [] } };
 }
 function summary(value: string | null | undefined, fallback: string): string {
   const plain = markdownToPlainText(value ?? "").replace(/\s+/g, " ").trim();
@@ -50,6 +56,9 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
   const reader = createGameReader(namespace);
 
   const collections = await reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.slug);
+  const directory = page.game_kind === "franchise" || page.canonical_path === `/${namespace}`
+    ? (await getGameDirectoryPages(namespace, page.game_kind === "franchise" ? undefined : page.game_id)).filter(link => link.href !== page.canonical_path && !(page.canonical_path === `/${namespace}` && link.href === `/${namespace}/wiki`) && !collections.some(collection => collection.canonical_path === link.href))
+    : [];
   const [descriptionHtml, tipsHtml] = await Promise.all([
     page.description_md ? renderMarkdown(page.description_md) : Promise.resolve(""),
     page.tips_md ? renderMarkdown(page.tips_md) : Promise.resolve("")
@@ -75,7 +84,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
     { key: "database" as const, label: isPrelaunch ? "Pre-launch coverage" : "Game data", entries: collectionBlocks.filter(({ collection }) => collection.page_type !== "collectible") },
     { key: "collectible" as const, label: "Collectibles", entries: collectionBlocks.filter(({ collection }) => collection.page_type === "collectible") }
   ].filter((group) => group.entries.length);
-  const controls = Array.isArray(page.controls_json) ? page.controls_json.filter((row): row is Record<string,string> => Boolean(row) && typeof row === "object" && typeof row.action === "string") : [];
+
   const structuredData = [
     {
       ...webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image: coverImage, author: null, publishedAt: page.published_at, updatedAt }),
@@ -93,8 +102,8 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
     },
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
-      { name: namespaceTitle, url: `${SITE_URL}/${namespace}` },
-      ...(canonicalPath === `/${namespace}/wiki` ? [] : [{ name: `${namespaceTitle} Wiki`, url: `${SITE_URL}/${namespace}/wiki` }]),
+      ...(canonicalPath === `/${namespace}` ? [] : [{ name: namespaceTitle, url: `${SITE_URL}/${namespace}` }]),
+      ...([`/${namespace}`, `/${namespace}/wiki`].includes(canonicalPath) ? [] : [{ name: `${namespaceTitle} Wiki`, url: `${SITE_URL}/${namespace}/wiki` }]),
       { name: page.title, url: canonicalUrl }
     ])
   ];
@@ -103,12 +112,12 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
     <div className="space-y-9">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": structuredData }) }} />
       <header className="space-y-6">
-        <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: namespaceTitle, href: `/${namespace}` }, ...(canonicalPath === `/${namespace}/wiki` ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }]), { label: page.game_short_title || page.game_title, href: null }]} />
+        <PageBreadcrumb items={[{ label: "Home", href: "/" }, ...(canonicalPath === `/${namespace}` ? [] : [{ label: namespaceTitle, href: `/${namespace}` }]), ...([`/${namespace}`, `/${namespace}/wiki`].includes(canonicalPath) ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }]), { label: page.game_short_title || page.game_title, href: null }]} />
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start">
-            <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-border/70 bg-surface-muted shadow-soft sm:h-28 sm:w-28">
+            {thumbnailImage ? <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-border/70 bg-surface-muted shadow-soft sm:h-28 sm:w-28">
               <Image src={thumbnailImage} alt={`${page.game_title} artwork`} fill className="object-cover" sizes="112px" priority />
-            </div>
+            </div> : null}
             <div className="min-w-0 max-w-3xl space-y-3">
               <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
               <UpdatedTimestamp value={updatedAt} className="inline-flex items-center gap-1.5 text-sm leading-5 text-muted" />
@@ -144,6 +153,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
             </section>
           ) : null}
 
+          {directory.map(link => <div key={link.href} data-journey-item><ContentCard type="wiki" variant="overlay" href={link.href} title={link.title} image={link.image ? { src: link.image, alt: link.title, ratio: "1200/675" } : undefined} /></div>)}
           {collectionGroups.map((group) => (
             <Fragment key={group.key}>
               <h2 id={`${namespace}-${group.key}-heading`} className="ads-content-section-heading ads-content-game-section-heading text-2xl font-semibold leading-tight text-foreground">{group.label}</h2>
@@ -165,7 +175,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
             </Fragment>
           ))}
 
-          {controls.length ? <section className="max-w-3xl space-y-4"><h2 className="text-2xl font-semibold">Controls</h2><dl className="space-y-3">{controls.map((row,i) => <div key={i} className="grid gap-1 sm:grid-cols-2"><dt className="font-medium">{row.action}</dt><dd>{Object.entries(row).filter(([key,value]) => key !== "action" && typeof value === "string" && value.trim()).map(([key,value]) => `${key}: ${value}`).join("; ")}</dd></div>)}</dl></section> : null}
+          <WikiControls value={page.controls_json} heading={`${page.game_short_title || page.game_title} Controls`} />
           {tipsHtml ? (
             <>
               <div className="ads-content-tips-heading article-content md-copy-scope game-copy min-w-0"><h2>{page.game_short_title || page.game_title} {isPrelaunch ? "pre-launch notes" : "gameplay tips"}</h2></div>
@@ -175,13 +185,15 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
         </article>
 
         <PageSidebar>
+          <SocialShare url={canonicalUrl} title={page.title} heading="Share this wiki" />
+          <GameRelatedLinks namespace={namespace} gameId={page.game_kind === "franchise" ? undefined : page.game_id} canonicalPath={canonicalPath} />
           {hasGameDetails ? <section aria-label="Game details" className="hidden lg:block">
             <GameDetails page={page} releases={releases} platforms={platforms} />
           </section> : null}
         </PageSidebar>
 
         <div className="min-w-0 lg:col-start-1">
-          <CommentsSection entityType={legacyWikiCommentType(namespace)} entityId={page.id} />
+          {page.id !== page.game_id ? <CommentsSection entityType={legacyWikiCommentType(namespace)} entityId={page.id} /> : null}
         </div>
       </div>
     </div>

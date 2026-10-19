@@ -1,4 +1,5 @@
 // Generated from managed development bbtcaurrtyoukvjbxbbj on 2026-10-06.
+// Includes additive reference FAQ fields from migration 20261019082427; regenerate after application.
 export type Json =
   | string
   | number
@@ -853,6 +854,7 @@ export type SharedGameDatabase = {
           renderer_key: string
           seo_title: string | null
           slug: string
+          faq_json: Json
           sources_json: Json
           title: string
           updated_at: string
@@ -872,6 +874,7 @@ export type SharedGameDatabase = {
           renderer_key?: string
           seo_title?: string | null
           slug: string
+          faq_json?: Json
           sources_json?: Json
           title: string
           updated_at?: string
@@ -891,6 +894,7 @@ export type SharedGameDatabase = {
           renderer_key?: string
           seo_title?: string | null
           slug?: string
+          faq_json?: Json
           sources_json?: Json
           title?: string
           updated_at?: string
@@ -985,6 +989,7 @@ export type SharedGameDatabase = {
           published_at: string | null
           seo_title: string | null
           slug: string
+          faq_json: Json
           sources_json: Json
           title: string
           updated_at: string
@@ -1003,6 +1008,7 @@ export type SharedGameDatabase = {
           published_at?: string | null
           seo_title?: string | null
           slug: string
+          faq_json?: Json
           sources_json?: Json
           title: string
           updated_at?: string
@@ -1021,6 +1027,7 @@ export type SharedGameDatabase = {
           published_at?: string | null
           seo_title?: string | null
           slug?: string
+          faq_json?: Json
           sources_json?: Json
           title?: string
           updated_at?: string
@@ -1351,6 +1358,7 @@ export type SharedGameDatabase = {
           renderer_key: string | null
           seo_title: string | null
           slug: string | null
+          faq_json: Json
           sources_json: Json | null
           title: string | null
           updated_at: string | null
@@ -1413,6 +1421,7 @@ export type SharedGameDatabase = {
           published_at: string | null
           seo_title: string | null
           slug: string | null
+          faq_json: Json
           sources_json: Json | null
           title: string | null
           updated_at: string | null

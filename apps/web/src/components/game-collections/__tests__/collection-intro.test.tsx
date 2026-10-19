@@ -31,10 +31,11 @@ describe("Roblox collection introductions", () => {
     expect(html.indexOf("Pets boost")).toBeLessThan(html.indexOf("Item roster"));
   });
 
-  it("preserves GTA help after the roster", () => {
+  it("gives GTA the same opening and removes old website instructions", () => {
     const html = renderToStaticMarkup(renderGameCollectionPage({ config, dataset, contentHtml, routeBase: "/gta/wiki", stream: true, collectionOptions: [], showMoreCollections: false }));
-    expect(html).toContain("Legacy page instructions.");
-    expect(html.indexOf("Item roster")).toBeLessThan(html.indexOf("Legacy page instructions."));
+    expect(html).not.toContain("Legacy page instructions.");
+    expect(html).toContain("Pets boost your harvest.");
+    expect(html).toContain("Equip a pet before harvesting.");
   });
 
   it("keeps collectible game advice without the old help field", () => {

@@ -24,10 +24,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Gta5MapPage() {
-  if(!await getGameExtendedPage("gta",GTA5_MAP_PATH,"map")) notFound();
+  const page = await getGameExtendedPage("gta",GTA5_MAP_PATH,"map");
+  if (!page) notFound();
   const markers = await getGta5MapMarkers();
   const structuredData = [
-    webPageJsonLd({ siteUrl: SITE_URL, slug: GTA5_MAP_PATH.slice(1), title, description, image: `${SITE_URL}/Bloxodes.png`, author: null }),
+    webPageJsonLd({ siteUrl: SITE_URL, slug: GTA5_MAP_PATH.slice(1), title, description, image: page.image || "", author: null }),
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
       { name: "GTA", url: `${SITE_URL}/gta` },

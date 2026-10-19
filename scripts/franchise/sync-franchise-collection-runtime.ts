@@ -1,3 +1,4 @@
+import { requireFranchiseCollectionImage } from "../ci/franchise-image-contract.mjs";
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 
@@ -453,6 +454,8 @@ async function main() {
 
   const plans: Plan[] = [];
   for (const manifestPath of manifestPaths) plans.push(await planManifest(namespaceValue, manifestPath));
+  // Dry plans are also publication preflights in selected-content CI.
+  for (const plan of plans) requireFranchiseCollectionImage(plan.items, plan.code);
   if (stage && plans.some(plan => plan.manifest.game.slug === "minecraft")) throw new Error("Staging requires independent edition identities.");
   console.table(plans.map((plan) => ({ namespace: plan.namespace, code: plan.code, pageType: plan.pageType, items: plan.items.length, images: plan.items.filter((item) => item.image_key).length, contentHash: plan.contentHash })));
   if (!apply) return;
