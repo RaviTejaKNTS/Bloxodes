@@ -1,14 +1,13 @@
 import { WikiControls } from "@/components/wiki/WikiControls";
 import { SocialShare } from "@/components/SocialShare";
 import { ContentCard } from "@/components/ContentCard";
-import { GameRelatedLinks } from "./GameRelatedLinks";
-import { getGameDirectoryPages } from "@/lib/game-registry";
+import type { GameDirectoryPage } from "@/lib/game-registry";
 import { resolveGameCoverImage } from "@/lib/game-images";
 import { PageSidebar } from "@/components/PageSidebar";
 import { safeJsonLd } from "@/lib/seo";
 import type { Metadata } from "next";
-import { Fragment } from "react";
-import { ContentCopyNodes } from "./GameContentPage";
+import { Fragment, type ReactNode } from "react";
+import { ContentCopyNodes } from "./ContentCopyNodes";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
@@ -52,12 +51,21 @@ function releaseLabels(value: Record<string, unknown> | null): string[] {
   });
 }
 
-export async function renderGameWikiPage({ page, namespace, namespaceTitle, extraLinks = [] }: { page: SharedGameWikiPage; namespace: string; namespaceTitle: string; extraLinks?: Array<{ href: string; title: string }> }) {
+export type GameWikiPageProps = {
+  page: SharedGameWikiPage;
+  namespace: string;
+  namespaceTitle: string;
+  extraLinks?: Array<{ href: string; title: string }>;
+  directoryPages?: GameDirectoryPage[];
+  sidebarContent?: ReactNode;
+};
+
+export async function renderGameWikiPage({ page, namespace, namespaceTitle, extraLinks = [], directoryPages = [], sidebarContent }: GameWikiPageProps) {
   const reader = createGameReader(namespace);
 
   const collections = await reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.slug);
   const directory = page.game_kind === "franchise" || page.canonical_path === `/${namespace}`
-    ? (await getGameDirectoryPages(namespace, page.game_kind === "franchise" ? undefined : page.game_id)).filter(link => link.href !== page.canonical_path && !(page.canonical_path === `/${namespace}` && link.href === `/${namespace}/wiki`) && !collections.some(collection => collection.canonical_path === link.href))
+    ? directoryPages.filter(link => link.href !== page.canonical_path && !(page.canonical_path === `/${namespace}` && link.href === `/${namespace}/wiki`) && !collections.some(collection => collection.canonical_path === link.href))
     : [];
   const [descriptionHtml, tipsHtml] = await Promise.all([
     page.description_md ? renderMarkdown(page.description_md) : Promise.resolve(""),
@@ -186,7 +194,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
 
         <PageSidebar>
           <SocialShare url={canonicalUrl} title={page.title} heading="Share this wiki" />
-          <GameRelatedLinks namespace={namespace} gameId={page.game_kind === "franchise" ? undefined : page.game_id} canonicalPath={canonicalPath} />
+          {sidebarContent}
           {hasGameDetails ? <section aria-label="Game details" className="hidden lg:block">
             <GameDetails page={page} releases={releases} platforms={platforms} />
           </section> : null}

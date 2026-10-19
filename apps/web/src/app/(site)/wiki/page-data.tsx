@@ -3,7 +3,7 @@ import { PageSidebar } from "@/components/PageSidebar";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
-import { ContentCopyNodes } from "@/components/games/GameContentPage";
+import { ContentCopyNodes } from "@/components/games/ContentCopyNodes";
 import type { IconType } from "react-icons";
 import {
   FiCalendar,

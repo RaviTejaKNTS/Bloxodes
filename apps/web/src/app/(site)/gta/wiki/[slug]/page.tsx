@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getGtaWikiPageBySlug } from "@/lib/gta";
-import { renderGameWikiPage, gameWikiMetadata } from "@/components/games/GameWikiPage";
+import { gameWikiMetadata } from "@/components/games/GameWikiPage";
+import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 import { getGtaChecklistPageBySlug } from "@/lib/gta-checklists";
 import { getGtaMapRouteForWikiSlug } from "@/lib/gta-interactive-map-registry";
 export const revalidate = 21600;

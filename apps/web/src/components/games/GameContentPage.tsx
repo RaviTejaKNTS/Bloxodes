@@ -1,5 +1,5 @@
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { Children, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { ContentFaq } from "@/components/ContentFaq";
@@ -14,15 +14,6 @@ import { PageSidebar } from "@/components/PageSidebar";
 import { SocialShare } from "@/components/SocialShare";
 import { GameRelatedLinks } from "./GameRelatedLinks";
 import { resolveGameCoverImage } from "@/lib/game-images";
-
-// Each copy block keeps its typography scope while exposing an ad boundary.
-export function ContentCopyNodes({ nodes, className = "", group = "copy" }: { nodes: ReactNode; className?: string; group?: string }) {
-  return Children.toArray(nodes).filter(node => typeof node !== "string" || node.trim()).map((node, index) => (
-    <div key={`${group}-${index}`} data-content-copy={group} className={`ads-content-copy article-content md-copy-scope ${className}`}>
-      {node}
-    </div>
-  ));
-}
 
 // Keep raw HTML copy's existing styles when splitting shared reference pages.
 function ContentHtmlBlocks({ html, group }: { html: string; group: string }) {

@@ -2,7 +2,7 @@ import { PageSidebar } from "@/components/PageSidebar";
 import { SocialShare } from "@/components/SocialShare";
 import { GameRelatedLinks } from "./GameRelatedLinks";
 import { Fragment } from "react";
-import { ContentCopyNodes } from "./GameContentPage";
+import { ContentCopyNodes } from "./ContentCopyNodes";
 import { safeJsonLd } from "@/lib/seo";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";

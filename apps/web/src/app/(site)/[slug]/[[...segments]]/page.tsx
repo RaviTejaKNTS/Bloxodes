@@ -8,7 +8,8 @@ import { parseGameMapData, parseGameCatalogData } from "@/lib/game-page-data";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGameDirectoryPages, getGameRoot, getGameWikiByPath, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath } from "@/lib/game-registry";
-import { gameWikiMetadata, renderGameWikiPage } from "@/components/games/GameWikiPage";
+import { gameWikiMetadata } from "@/components/games/GameWikiPage";
+import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 import { gameRootWikiPage } from "@/lib/game-root-page";
 import { GameRelatedLinks } from "@/components/games/GameRelatedLinks";
 import { gameCollectionMetadata, renderSharedGameCollection } from "@/components/games/GameCollectionPage";
@@ -53,7 +54,7 @@ export default async function SharedGamePage({ params }: Props) {
   if (ctx.wiki) return renderGameWikiPage({ page: ctx.wiki, namespace: ctx.root.namespace, namespaceTitle: ctx.root.title });
   if (ctx.collection) return renderSharedGameCollection({ page: ctx.collection, namespaceTitle: ctx.root.title, currentPage: ctx.currentPage });
   if (ctx.codes) return <GameCodePage page={ctx.codes} namespaceTitle={ctx.root.title} />;
-  if (ctx.tool) return <GameToolPage tool={ctx.tool} namespaceTitle={ctx.root.title} />;
+  if (ctx.tool) return <GameToolPage tool={ctx.tool} namespaceTitle={ctx.root.title} sidebarContent={<GameRelatedLinks namespace={ctx.root.namespace} gameId={ctx.tool.game_id} canonicalPath={ctx.tool.canonical_path} />} />;
   if (ctx.map) { if (ctx.map.renderer_key !== "image-pins") notFound(); return <GameContentPage page={ctx.map}><GameMap data={parseGameMapData(ctx.map.map_data)} /></GameContentPage>; }
   if (ctx.catalog) return <GameContentPage page={ctx.catalog}><GameCatalog data={parseGameCatalogData(ctx.catalog.catalog_data)} /></GameContentPage>;
   if (ctx.quiz) return <GameQuizPage page={ctx.quiz} />;

@@ -2,7 +2,8 @@ import "server-only";
 import { cache } from "react";
 import { supabaseAdmin } from "./supabase";
 import type { SharedGameGame, SharedGameWikiPage, SharedGameWikiCollectionPage } from "./shared-game-reader";
-import { gameImageUrl, resolveGameCoverImage } from "./game-images";
+import { resolveGameCoverImage } from "./game-images";
+import { readGameArtwork } from "./game-artwork";
 import { createGameReader } from "./shared-game-reader";
 import type { ToolContent } from "./tools";
 
@@ -39,14 +40,11 @@ export const getGameCodeByPath = cache(async (namespace: string, path: string): 
   return data ? { ...data, image: (await getGameArtwork(namespace, data.game_id))?.cover_image } as GameCodePage : null;
 });
 
-/** Page views without artwork columns still use the exact owning game, never a sibling. */
-export const getGameArtwork = cache(async (namespace: string, gameId: string) => {
-  const { data, error } = await supabaseAdmin().from("games").select("cover_image,hero_image").eq("namespace", namespace).eq("id", gameId).eq("is_published", true).maybeSingle();
-  if (error) throw new Error(`Game artwork read failed: ${error.message}`);
-  return data ? { cover_image: gameImageUrl(data.cover_image), hero_image: gameImageUrl(data.hero_image) } : null;
-});
+export const getGameArtwork = cache(readGameArtwork);
 
-export const getGameDirectoryPages = cache(async (namespace: string, gameId?: string) => {
+export type GameDirectoryPage = { kind: string; href: string; title: string; image: string | null };
+
+export const getGameDirectoryPages = cache(async (namespace: string, gameId?: string): Promise<GameDirectoryPage[]> => {
   const tables = ["game_wiki_pages_view", "game_collection_pages_view", "game_code_pages_view", "game_tool_pages_view", "game_map_pages_view", "game_quiz_pages_view", "game_catalog_pages_view", "game_checklist_pages_view"];
   const results = await Promise.all(tables.map(async table => {
     const fields = "id,game_id,title,canonical_path" + (table === "game_wiki_pages_view" ? ",cover_image" : table === "game_tool_pages_view" ? ",thumb_url" : table === "game_collection_pages_view" ? ",namespace,code,wiki_slug,collection_slug,published_dataset_id" : "");

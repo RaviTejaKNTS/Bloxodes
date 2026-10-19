@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
-import { ContentCopyNodes } from "@/components/games/GameContentPage";
+import { ContentCopyNodes } from "@/components/games/ContentCopyNodes";
 import { formatDistanceToNow } from "date-fns";
 import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
