@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "game": {
+    "slug": "illegal-soccer",
+    "name": "Illegal Soccer",
+    "universeId": 10155360168
+  },
+  "collection": {
+    "slug": "items",
+    "label": "Items",
+    "sortOrder": 0,
+    "pageType": "database"
+  },
+  "dataset": "dataset.json",
+  "finalJson": "final.json",
+  "mediaRoot": "media",
+  "sourceUrls": [
+    "https://www.roblox.com/games/126987974021910/Illegal-Soccer",
+    "https://allthings.how/illegal-soccer-s-new-weapons-and-reworked-shop-explained/",
+    "https://allthings.how/roblox-illegal-soccer-how-to-get-and-use-items/",
+    "https://beebom.com/illegal-soccer-tier-list/",
+    "https://bloxradar.app/g/illegal-soccer-10155360168"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "universe_id": 10155360168,
+  "wiki_slug": "illegal-soccer",
+  "collection_slug": "cosmetics",
+  "code": "illegal-soccer-cosmetics",
+  "display_name": "Cosmetics",
+  "title": "All {count} Known Cosmetics in Illegal Soccer",
+  "seo_title": "All {count} Known Illegal Soccer Cosmetics and Shop Prices",
+  "meta_description": "Illegal Soccer jerseys, balls, emotes, goal effects and Player Cards, with Daily Shop prices, how to use emotes with P and Standard vs Premium card odds.",
+  "intro_md": "Illegal Soccer cosmetics change how your kit, ball and goal look, and emotes add gestures you can use during a match. Jerseys, balls, emotes and goal effects can show up in the Daily Shop.",
+  "description_md": "## Daily Shop Prices for Illegal Soccer Looks\n\nDaily Shop offers can cost Robux or Coins. T-Pose has a 750-Coin offer.\n\n| Look | Type | Price |\n| --- | --- | --- |\n| Laugh | Emote | 49 Robux |\n| Blue Tiger | Jersey | 99 Robux |\n| 8-Ball | Ball | 249 Robux |\n| Crimson Flash | Goal effect | 349 Robux |\n| Implosion | Goal effect | 799 Robux |\n| T-Pose | Emote | 750 Coins |\n\nStock rotates, so an item you want may be gone the next time you check. Buy an item from the Daily Shop and it goes straight to its matching inventory tab. Some slots can show a 50% off Daily Deal banner, so check the amount before buying. If you're on a budget, Laugh costs less than the other Robux offers shown here.\n\nFor gameplay items, see the [Illegal Soccer items tier list](https://bloxodes.com/articles/roblox-illegal-soccer-items-tier-list).\n\n## How to Use Illegal Soccer Emotes\n\n1. Get the emote from the Daily Shop, or from your Emotes tab if you already own it.\n2. Assign it to one of the active slots, from 1 to 8.\n3. In a match, press `P` to open the radial wheel, then pick the emote.\n\n## Standard vs Premium Player Card Pools\n\nPlayer Cards come from a Standard pool or a Premium pool, and Premium shifts the odds toward higher tiers. Each pool has different odds for the rarity tiers.\n\n| Rarity tier | Standard pool | Premium pool |\n| --- | --- | --- |\n| Illegal | 0.01% | 0.06% |\n| Mythic | 0.25% | 1.75% |\n| Epic | 1.5% | 10% |\n| Rare | 21.5% | 88.19% |\n| Uncommon | 76.74% | Never |\n| Common | Never | Never |\n\nPremium has no Uncommon or Common pulls, and its Epic odds are 10%, against 1.5% in Standard. Tier odds don't tell you a single card's chance. Duplicates convert into Dust, and Dust can be spent on a specific card. A basic card costs 1,000 Coins.",
+  "how_it_works_md": "",
+  "description_json": {
+    "Player Cards": "Player Cards come from their own shop, separate from the Daily Shop."
+  },
+  "faq_json": [
+    {
+      "q": "Can a Player Card show on the scoring display?",
+      "a": "Yes. A Player Card can appear on the scoring display."
+    }
+  ],
+  "wiki_md": "Jerseys, balls, emotes and goal effects are the cosmetics you can equip in Illegal Soccer, and Player Cards are a separate pull system. Emotes go into active slots 1 to 8, and pressing P opens the wheel during a match. Duplicate Player Cards turn into Dust, which can be spent on a specific card.",
+  "is_published": true
+}

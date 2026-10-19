@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "itemFields": [
+      "name",
+      "rarity",
+      "matchRole",
+      "effect",
+      "printedRollChance"
+    ],
+    "columns": [
+      "name",
+      "rarity",
+      "matchRole",
+      "printedRollChance",
+      "effect"
+    ],
+    "display": {
+      "groupLabel": "Match role",
+      "sectionOrder": [
+        "Mobility and Reaching the Ball",
+        "Disrupt Opponents",
+        "Protect the Goal and Control Space"
+      ],
+      "tableFields": [
+        "rarity",
+        "matchRole",
+        "printedRollChance",
+        "effect"
+      ],
+      "cardFields": [
+        "rarity",
+        "matchRole",
+        "printedRollChance"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "matchRole"
+      ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "matchRole": {
+          "kind": "normal",
+          "label": "Role"
+        },
+        "printedRollChance": {
+          "kind": "chip",
+          "label": "Roll chance"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Energy Drink",
+        "rarity": "Common",
+        "matchRole": "Stat boost",
+        "effect": "Temporarily boosts your stats.",
+        "printedRollChance": "12.5%"
+      },
+      "system": {
+        "slug": "energy-drink",
+        "section": "Mobility and Reaching the Ball",
+        "sortOrder": 1,
+        "image": "/item-energy-drink.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Supercharge",
+        "rarity": "Common",
+        "matchRole": "Movement speed",
+        "effect": "Gives you a short burst of movement speed.",
+        "printedRollChance": "12.5%"
+      },
+      "system": {
+        "slug": "supercharge",
+        "section": "Mobility and Reaching the Ball",
+        "sortOrder": 2,
+        "image": "/item-supercharge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grappling Hook",
+        "rarity": "Uncommon",
+        "matchRole": "Reach and pull",
+        "effect": "Pulls you toward the ball or another player.",
+        "printedRollChance": "7.0%"
+      },
+      "system": {
+        "slug": "grappling-hook",
+        "section": "Mobility and Reaching the Ball",
+        "sortOrder": 3,
+        "image": "/item-grappling-hook.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnet",
+        "rarity": "Uncommon",
+        "matchRole": "Loose-ball pull",
+        "effect": "Pulls a loose ball toward you.",
+        "printedRollChance": "7.0%"
+      },
+      "system": {
+        "slug": "magnet",
+        "section": "Mobility and Reaching the Ball",
+        "sortOrder": 4,
+        "image": "/item-magnet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jetpack",
+        "rarity": "Mythic",
+        "matchRole": "Aerial mobility",
+        "effect": "Lets you fly across the field and reach the ball from new angles.",
+        "printedRollChance": "1.0%"
+      },
+      "system": {
+        "slug": "jetpack",
+        "section": "Mobility and Reaching the Ball",
+        "sortOrder": 5,
+        "image": "/item-jetpack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shotgun",
+        "rarity": "Uncommon",
+        "matchRole": "Close-range knockdown",
+        "effect": "Fires a close-range blast that knocks a player down for a few seconds.",
+        "printedRollChance": "7.0%"
+      },
+      "system": {
+        "slug": "shotgun",
+        "section": "Disrupt Opponents",
+        "sortOrder": 6,
+        "image": "/item-shotgun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flintlock",
+        "rarity": "Rare",
+        "matchRole": "Knockdown",
+        "effect": "A short-range single shot that knocks an opponent down and interrupts their attack.",
+        "printedRollChance": "3.5%"
+      },
+      "system": {
+        "slug": "flintlock",
+        "section": "Disrupt Opponents",
+        "sortOrder": 7,
+        "image": "/item-flintlock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grenade",
+        "rarity": "Rare",
+        "matchRole": "Area disruption",
+        "effect": "A thrown explosive that can bounce before bursting into smoke and flames.",
+        "printedRollChance": "3.5%"
+      },
+      "system": {
+        "slug": "grenade",
+        "section": "Disrupt Opponents",
+        "sortOrder": 8,
+        "image": "/item-grenade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rocket Punch",
+        "rarity": "Rare",
+        "matchRole": "Knockback",
+        "effect": "Launches a target away and can break possession.",
+        "printedRollChance": "3.5%"
+      },
+      "system": {
+        "slug": "rocket-punch",
+        "section": "Disrupt Opponents",
+        "sortOrder": 9,
+        "image": "/item-rocket-punch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bazooka",
+        "rarity": "Epic",
+        "matchRole": "Area knockback",
+        "effect": "Fires an explosive projectile that knocks back players near impact.",
+        "printedRollChance": "2.3%"
+      },
+      "system": {
+        "slug": "bazooka",
+        "section": "Disrupt Opponents",
+        "sortOrder": 10,
+        "image": "/item-bazooka.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Freeze Gun",
+        "rarity": "Epic",
+        "matchRole": "Freeze",
+        "effect": "Freezes a player in place.",
+        "printedRollChance": "2.3%"
+      },
+      "system": {
+        "slug": "freeze-gun",
+        "section": "Disrupt Opponents",
+        "sortOrder": 11,
+        "image": "/item-freeze-gun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sledgehammer",
+        "rarity": "Epic",
+        "matchRole": "Area knockdown",
+        "effect": "Jumps and slams the ground, ragdolling nearby players with a shockwave.",
+        "printedRollChance": "2.3%"
+      },
+      "system": {
+        "slug": "sledgehammer",
+        "section": "Disrupt Opponents",
+        "sortOrder": 12,
+        "image": "/item-sledgehammer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barricades",
+        "rarity": "Common",
+        "matchRole": "Goal defense",
+        "effect": "Placeable walls block shots and restrict movement.",
+        "printedRollChance": "12.5%"
+      },
+      "system": {
+        "slug": "barricades",
+        "section": "Protect the Goal and Control Space",
+        "sortOrder": 13,
+        "image": "/item-barricades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forcefield",
+        "rarity": "Common",
+        "matchRole": "Attack defense",
+        "effect": "Briefly blocks tackles and attacks.",
+        "printedRollChance": "12.5%"
+      },
+      "system": {
+        "slug": "forcefield",
+        "section": "Protect the Goal and Control Space",
+        "sortOrder": 14,
+        "image": "/item-forcefield.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oil Spill",
+        "rarity": "Uncommon",
+        "matchRole": "Movement disruption",
+        "effect": "Makes the ground slippery and disrupts movement.",
+        "printedRollChance": "7.0%"
+      },
+      "system": {
+        "slug": "oil-spill",
+        "section": "Protect the Goal and Control Space",
+        "sortOrder": 15,
+        "image": "/item-oil-spill.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Landmines",
+        "rarity": "Rare",
+        "matchRole": "Area trap",
+        "effect": "Explosive traps launch nearby players.",
+        "printedRollChance": "3.5%"
+      },
+      "system": {
+        "slug": "landmines",
+        "section": "Protect the Goal and Control Space",
+        "sortOrder": 16,
+        "image": "/item-landmines.png"
+      }
+    }
+  ]
+}
