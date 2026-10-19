@@ -15,7 +15,7 @@ vi.mock("@/components/gta/Gta5InteractiveMap", () => ({ Gta5InteractiveMap: () =
 vi.mock("@/components/gta/GtaInteractiveMap", () => ({ GtaInteractiveMap: () => null }));
 vi.mock("@/components/gta/GtaMapGuide", () => ({ GtaMapGuide: () => null }));
 vi.mock("@/lib/gta-interactive-maps", () => ({ getGtaInteractiveMapPageData: async () => ({
-  config: { route: "/gta/maps/gta-3", title: "GTA 3", mapTitle: "GTA 3 Map", description: "Liberty City locations.", mappedPointCount: 0 },
+  config: { route: "/gta/maps/gta-3", title: "GTA 3", mapTitle: "GTA 3 Map", description: "Liberty City locations.", mappedPointCount: 0, about: [], views: [] },
   layers: [], guides: [], hubTitle: "GTA 3 Wiki", hubPath: "/gta/wiki/gta-3"
 }) }));
 

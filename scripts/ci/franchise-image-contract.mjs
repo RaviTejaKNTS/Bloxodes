@@ -15,7 +15,7 @@ export function franchiseImageUrl(value) {
 export function requireFranchiseHubImages(game, label = game.slug) {
   const cover = franchiseImageUrl(game.cover_image);
   const thumbnail = franchiseImageUrl(game.hero_image);
-  if (!cover || !thumbnail || cover === thumbnail) throw new Error(`${label}: publishing a hub/root requires a hosted 16:9 cover_image and a separate square hero_image thumbnail. The Bloxodes logo is not game artwork.`);
+  if (!cover || !thumbnail || cover === thumbnail) throw new Error(`${label}: publishing a hub/root requires a hosted landscape cover_image (16:10 to 2:1, ideally 16:9) and a separate square hero_image thumbnail. The Bloxodes logo is not game artwork.`);
   return [{ url: cover, role: 'cover', label }, { url: thumbnail, role: 'thumbnail', label }];
 }
 
