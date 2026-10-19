@@ -72,6 +72,7 @@ import { chopAForestCollectionGroup } from "./chop-a-forest";
 import { climbForAnimalsEggsCollectionGroup } from "./climb-for-animals-eggs";
 import { illegalSoccerCollectionGroup } from "./illegal-soccer";
 import { catBattlesCollectionGroup } from "./cat-battles";
+import { tapSimulatorRebornCollectionGroup } from "./tap-simulator-reborn";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -148,5 +149,6 @@ export const GAME_COLLECTION_GROUPS = [
   chopAForestCollectionGroup,
   climbForAnimalsEggsCollectionGroup,
   illegalSoccerCollectionGroup,
-  catBattlesCollectionGroup
+  catBattlesCollectionGroup,
+  tapSimulatorRebornCollectionGroup
 ] satisfies GameCollectionGroup[];
