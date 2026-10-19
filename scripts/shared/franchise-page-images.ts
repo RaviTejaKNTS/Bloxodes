@@ -55,7 +55,7 @@ export async function verifyFranchisePageImage({ url, role, label }: { url: stri
   });
   if (!metadata.width || !metadata.height) throw new Error(`${label}: ${role} has no readable image dimensions: ${url}`);
   const ratio = metadata.width / metadata.height;
-  if (role === "cover" && Math.abs(ratio - 16 / 9) > 0.08) throw new Error(`${label}: cover_image must be 16:9 landscape artwork (${metadata.width}x${metadata.height}): ${url}`);
+  if (role === "cover" && (ratio < 1.6 || ratio > 2)) throw new Error(`${label}: cover_image must be landscape artwork between 16:10 and 2:1, ideally 16:9 (${metadata.width}x${metadata.height}): ${url}`);
   if (role === "thumbnail" && Math.abs(ratio - 1) > 0.05) throw new Error(`${label}: hero_image must be a square thumbnail (${metadata.width}x${metadata.height}): ${url}`);
 }
 

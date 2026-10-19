@@ -15,7 +15,11 @@ test("publication reads real image bytes and checks cover and thumbnail dimensio
   await assert.rejects(verifyFranchisePageImage({ ...target, role: "thumbnail" }), /square thumbnail/);
   bytes = await image(80, 80);
   await verifyFranchisePageImage({ ...target, role: "thumbnail" });
-  await assert.rejects(verifyFranchisePageImage(target), /16:9 landscape/);
+  await assert.rejects(verifyFranchisePageImage(target), /landscape artwork/);
+  bytes = await image(1200, 630);
+  await verifyFranchisePageImage(target);
+  bytes = await image(1000, 900);
+  await assert.rejects(verifyFranchisePageImage(target), /landscape artwork/);
 });
 
 test("missing, non-image and corrupt media cannot pass with a plausible URL", async t => {
