@@ -90,6 +90,6 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 ## Known issues
 
-- Namespace roots for ARC Raiders, Mario Kart, GTA, Red Dead and Minecraft have no cover or square art of their own, so `/arc-raiders`, `/gta` and the others share the Bloxodes logo. The ARC Raiders game row has no art either. These need backfilling before those namespaces can publish again.
+- Managed development has 25 `games` rows whose IDs differ from production (the GTA, Red Dead and Minecraft roots were aligned on 2026-10-19). `publish:game-pages` needs matching IDs, so the first update to one of those games fails in CI staging until its development ID is aligned.
 - `game_catalog_pages`, `game_code_pages` and `game_codes` have no production rows yet. The tables, skills and publishers exist, but nothing is published.
 - `apps/web/src/data/gta-maps/*.json` and `gta5-map-*.json` are only importer inputs and test fixtures now. The live maps read `game_map_pages`.
