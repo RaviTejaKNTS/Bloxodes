@@ -1,5 +1,5 @@
-const guidance = /^(?:docs\/|dev-docs\/|agents\/|\.agents\/|\.claude\/|\.codex\/|Writing plans\/)/;
-const runtime = /^(?:apps\/|scripts\/|one-off-scripts\/|workers\/|supabase\/|data\/|env\/|types\/|\.github\/|package(?:-lock)?\.json$|Dockerfile(?:\..*)?$|(?:docker-)?compose[^/]*\.ya?ml$|\.dockerignore$|\.npmrc$|\.nvmrc$|t3\.json$|tsconfig[^/]*\.json$|(?:eslint|next|postcss|tailwind|babel|jest|vitest|playwright)\.config\.)/;
+const guidance = /^(?:bloxodes-docs\/|\.agents\/|\.claude\/|\.codex\/)/;
+const runtime = /^(?:apps\/|scripts\/|workers\/|supabase\/|data\/|env\/|types\/|\.github\/|package(?:-lock)?\.json$|Dockerfile(?:\..*)?$|(?:docker-)?compose[^/]*\.ya?ml$|\.dockerignore$|\.npmrc$|\.nvmrc$|t3\.json$|tsconfig[^/]*\.json$|(?:eslint|next|postcss|tailwind|babel|jest|vitest|playwright)\.config\.)/;
 
 export function needsCodexReview(files) {
   return files.some(file => {

@@ -4,7 +4,6 @@ import fs from "node:fs/promises";
 import { URL } from "node:url";
 import { GAME_COLLECTION_GROUPS } from "@/lib/game-collections";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { repoPath } from "@/lib/paths";
 import { articleGameSlugFromUniverse, statsUniverseSlug } from "@/lib/slug";
 
 const DEFAULT_MIN_CCU = 15_000;
@@ -14,13 +13,12 @@ const PAGE_SIZE = 1_000;
 const SUPABASE_IN_CHUNK_SIZE = 500;
 const BASELINE_HOURS = 6;
 const BASELINE_TOLERANCE_MS = 90 * 60 * 1000;
-const PROGRESS_PATH = repoPath("Writing plans", "wiki-pages-progress.md");
 
 type Options = {
   minCcu: number;
   limit: number;
   maxPool: number;
-  progressPath: string;
+  progressPath: string | null;
   json: boolean;
 };
 
@@ -83,7 +81,7 @@ Options:
   --min-ccu <number>        Minimum current CCU. Default: ${DEFAULT_MIN_CCU}
   --limit <number>          Number of candidates to print. Default: ${DEFAULT_LIMIT}
   --max-pool <number>       Max games to scan after min-CCU filter. Default: ${DEFAULT_MAX_POOL}
-  --progress <path>         Progress ledger path. Default: Writing plans/wiki-pages-progress.md
+  --progress <path>         Optional progress ledger whose Universe IDs are skipped.
   --json                    Print JSON only
   --help                    Show this message
 `);
@@ -102,7 +100,7 @@ function parseArgs(argv: string[]): Options | null {
     minCcu: DEFAULT_MIN_CCU,
     limit: DEFAULT_LIMIT,
     maxPool: DEFAULT_MAX_POOL,
-    progressPath: PROGRESS_PATH,
+    progressPath: null,
     json: false
   };
 
@@ -146,8 +144,9 @@ function splitMarkdownRow(line: string) {
     .map((cell) => cell.trim());
 }
 
-async function readProgressState(progressPath: string): Promise<ProgressState> {
+async function readProgressState(progressPath: string | null): Promise<ProgressState> {
   const state: ProgressState = { universeIds: new Set() };
+  if (!progressPath) return state;
   let text = "";
   try {
     text = await fs.readFile(progressPath, "utf8");

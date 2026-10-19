@@ -2,11 +2,11 @@
 
 ## GitHub task and release flow
 
-Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `bloxodes-docs/operations/release.md`. Preserve installed runtimes, env files and active jobs.
 
 Scope: `supabase/`.
 
-Current verified managed-development and self-hosted-production topology, versions, health caveats, and upgrade watch items live in `dev-docs/data/supabase.md`. Treat older migration plans in `docs/` as historical evidence.
+Current verified managed-development and self-hosted-production topology, versions, health caveats, and upgrade watch items live in `bloxodes-docs/data/supabase.md`.
 
 Update that existing canonical document in the same change whenever the live topology, versions, env ownership, migration model, or Edge Function flow changes. Do not create a parallel current-state Supabase doc.
 
@@ -16,7 +16,7 @@ This folder defines the app's database contract and edge-function behavior.
 
 Managed development and production use `games` and `game_*` tables for non-Roblox content. Use the applied October 6 migrations and generated `types/shared-games.ts` for the shared contract. `schema.sql` is the native live production dump after the retirement. Never hand-edit it.
 
-Keep namespaces explicit in reads and writes. Roblox stays outside these tables. Preserve immutable revision guards, owner foreign keys, exact-count publication, reserved namespaces and route validation. New tables and views remain service-only. See `dev-docs/pipelines/wiki-collections.md` for the active publication and verification commands. The old Minecraft activation RPC is retired in development and production.
+Keep namespaces explicit in reads and writes. Roblox stays outside these tables. Preserve immutable revision guards, owner foreign keys, exact-count publication, reserved namespaces and route validation. New tables and views remain service-only. See `bloxodes-docs/content/roblox-wiki.md` for the active publication and verification commands. The old Minecraft activation RPC is retired in development and production.
 
 ## Layout
 
@@ -24,7 +24,6 @@ Keep namespaces explicit in reads and writes. Roblox stays outside these tables.
 - `migrations_archive/`: archived reference-only SQL files that are not part of the active migration chain.
 - `functions/revalidate/`: drains publish events and calls the app revalidation endpoint.
 - `functions/cache-warm/`: drains deferred Cloudflare warm paths from `cache_warm_events`.
-- `functions/roblox-codes/`: Supabase edge function related to Roblox code workflows.
 - `schema.sql`: native live production SQL dump from October 6.
 - `types/shared-games.ts`: live managed-development shared-game table/view types.
 
@@ -69,7 +68,6 @@ When adding a new table, view, or publishable content type:
 2. Update read/write helpers in `src/lib/*`.
 3. Update relevant routes in `src/app/(site)` or `src/app/api`.
 4. Wire revalidation through `src/app/api/revalidate/route.ts` and `supabase/functions/revalidate/index.ts` if the content is public. If public pages should be warmed after purge, enqueue through `cache_warm_events` and `supabase/functions/cache-warm/index.ts` instead of warming synchronously inside `/api/revalidate`.
-5. Refresh `agents/data/agents.md`.
 
 
 ## GTA standalone checklist support (2026-09-10)
@@ -84,4 +82,4 @@ Migration `20260920000032` clarifies that GTA Online contains selected tasks onl
 
 ## Shared page-type extension
 
-Managed development and production have `game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress`. The three new read views are service-only and filter publication. Use the atomic publisher for page/task batches and `save_game_quiz_progress` for account history. Do not replace registered GTA engine snapshots or renderer identity through ordinary edits. See `dev-docs/pipelines/content.md` for the shared page contract and verified production release.
+Managed development and production have `game_map_pages`, `game_quiz_pages`, `game_catalog_pages` and `game_quiz_progress`. The three new read views are service-only and filter publication. Use the atomic publisher for page/task batches and `save_game_quiz_progress` for account history. Do not replace registered GTA engine snapshots or renderer identity through ordinary edits. See `bloxodes-docs/content/franchise.md` for the shared page contract and verified production release.

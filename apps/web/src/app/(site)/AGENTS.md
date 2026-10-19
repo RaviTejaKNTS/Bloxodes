@@ -2,7 +2,7 @@
 
 ## GitHub task and release flow
 
-Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `bloxodes-docs/operations/release.md`. Preserve installed runtimes, env files and active jobs.
 
 Scope: `apps/web/src/app/(site)`.
 
@@ -53,7 +53,7 @@ Check metadata, structured data, pagination, shared search, comments, progress, 
 - Codes, articles, stats, checklists, quizzes, wiki pages, authors, puzzles, and much of catalog/tools content come from Supabase.
 - Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`.
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
-- Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `dev-docs/pipelines/catalog.md` and `dev-docs/pipelines/wiki-collections.md` respectively; a shared card/list renderer does not merge their data ownership.
+- Treat global `/catalog` and game-specific `/wiki/<game>/<collection>` as separate pipelines. Their canonical owners are `bloxodes-docs/content/catalog.md` and `bloxodes-docs/content/roblox-wiki.md` respectively; a shared card/list renderer does not merge their data ownership.
 - GTA wiki and collection pages reuse the same renderer contract but load shared storage through `apps/web/src/lib/gta.ts`; never attach GTA rows to Roblox universe or wiki tables.
 - Roblox wiki collections use the same `wiki_collection_pages` row with an explicit `page_type`: `database` keeps the existing paginated table/card renderer, while `collectible` uses the shared collectible renderer and local-first/account-synced progress. Keep the page-type decision in the runtime manifest and page row rather than creating a new table.
 
@@ -65,12 +65,11 @@ Check metadata, structured data, pagination, shared search, comments, progress, 
 2. Add sidecar `page-data.tsx` if the family has more than one page.
 3. Add metadata, canonical handling, and structured data.
 4. Update sitemap and revalidation coverage if the page is publishable or regenerated.
-5. Refresh `agents/pages/agents.md`.
 
 ### New catalog or tool
 
 1. Decide whether the long-form copy lives in Supabase, local data files, or both.
-2. For catalog pages, use `agents/content-writing/agents.md` and the matching catalog skill before shaping route fields.
+2. For catalog pages, use the matching catalog skill before shaping route fields.
 3. Update `apps/web/src/lib/catalog.ts`, `apps/web/src/lib/tools.ts`, `apps/web/src/lib/db.ts`, or the relevant dataset parser.
 4. Keep route slugs, API filtering, and revalidation behavior aligned.
 5. If the page is commentable, wire it through the existing comments flow instead of inventing a new one.
@@ -85,14 +84,14 @@ Publish the five Red Dead hubs from reviewed game/wiki files using `publish:fran
 
 ## GTA standalone checklist support (2026-09-10)
 
-GTA standalone completion checklists live under `/gta/checklists/<game-slug>` and reuse `ChecklistPageTemplate`, `ChecklistBoard` and the platform-neutral index renderer. Keep the UI shared; checklist data belongs to `game_checklist_pages` and `game_checklist_items` linked to `games` with the GTA namespace. Development and production publish GTA V, San Andreas, Vice City, and the dated GTA Online Career Progress snapshot. All checkable tasks require exactly three-part section codes. See `dev-docs/pipelines/content.md`.
+GTA standalone completion checklists live under `/gta/checklists/<game-slug>` and reuse `ChecklistPageTemplate`, `ChecklistBoard` and the platform-neutral index renderer. Keep the UI shared; checklist data belongs to `game_checklist_pages` and `game_checklist_items` linked to `games` with the GTA namespace. Development and production publish GTA V, San Andreas, Vice City, and the dated GTA Online Career Progress snapshot. All checkable tasks require exactly three-part section codes. See `bloxodes-docs/content/franchise.md`.
 
 ## Shared engagement presentation (2026-09-10)
 
-Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.
+Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `bloxodes-docs/content/franchise.md` for ownership and verification.
 
 
-Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `dev-docs/pipelines/wiki-collections.md`.
+Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `bloxodes-docs/content/roblox-wiki.md`.
 
 ## Shared game reference routes
 

@@ -11,7 +11,7 @@ If the user already supplied a plan, for example a Notion queue page, follow it 
 
 ## Check the game
 
-- Read `dev-docs/pipelines/wiki-collections.md` and the shared-game section of `dev-docs/pipelines/content.md`.
+- Read `bloxodes-docs/content/franchise.md` and the shared-game section of `bloxodes-docs/content/franchise.md`.
 - Check the shared `games` registry, published pages and saved routes in development and production before you propose anything, so you don't duplicate.
 - Roblox uses its own separate skills and tables.
 - Research official game, developer, manual and update sources first, then useful game databases and guides. Open every source you use for a decision.
@@ -49,7 +49,7 @@ Checklist rules:
 - Normally propose only one standalone, source-verified 100% completion checklist per game, with sections inside its single board.
 - State its supported edition or mode, and check the game's existing published pages and drafts before proposing one. Reuse an existing checklist.
 - Extra checklist pages, or beginner, preparation and routine lists, need an explicit user exception.
-- Verify the full requirements, and defer when that scope is unknown. Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`.
+- Verify the full requirements, and defer when that scope is unknown. Follow `bloxodes-docs/content/franchise.md`.
 - A collectible or achievement roster doesn't prove in-game 100% completion.
 
 Keep it lean:

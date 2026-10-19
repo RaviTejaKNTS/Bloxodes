@@ -30,7 +30,7 @@ If you didn't check a line, mark that page family `[research incomplete]`.
 ## When to recommend each page
 
 - **Codes:** only when the game has a real code system and usable code sources. Don't list active codes in suggestions.
-- **Checklists:** follow `dev-docs/pipelines/content.md#standalone-checklist-scope`.
+- **Checklists:** follow `bloxodes-docs/content/engagement.md#standalone-checklist-scope`.
   - Normally recommend one standalone, source-verified 100% completion checklist per game.
   - Check the game's published pages and drafts, and reuse its existing checklist.
   - State the supported edition or mode, and verify the full required activity set within one board with sections.

@@ -2,7 +2,7 @@
 
 Scope: `data/` plus related static data under `src/data/`.
 
-Environment boundaries and database-vs-dataset ownership are documented in `dev-docs/data/data-environments.md`. Global `/catalog` data belongs to `dev-docs/pipelines/catalog.md`; game wiki hubs and their game-specific collection datasets belong together in `dev-docs/pipelines/wiki-collections.md`.
+Environment boundaries and database-vs-dataset ownership are documented in `bloxodes-docs/data/supabase.md`. Global `/catalog` data belongs to `bloxodes-docs/content/catalog.md`; game wiki hubs and their game-specific collection datasets belong together in `bloxodes-docs/content/roblox-wiki.md`.
 
 When dataset ownership or a consuming pipeline changes, update that existing canonical file or the owning existing pipeline document in the same change. Do not create a replacement current-state doc.
 
@@ -24,8 +24,6 @@ When turning a game dataset into public wiki or collection pages, use the matchi
   - Preserve source URL, checked time, use type, and compatibility status. A source-listed row is not an in-game verification result.
 - `data/Color Codes/roblox-color-codes.json`
   - Color code catalog for the color-code pages.
-- `data/decal-ids/*`
-  - Decal ID datasets produced by the scrape/enrich scripts.
 - `data/roblox-errors/roblox-errors.json`
   - Roblox error reference data behind `/catalog/roblox-errors-and-fixes`.
   - Loaded by `apps/web/src/app/(site)/catalog/roblox-errors-and-fixes/page-data.tsx`. `articleSlug` links a card to its `/articles/<slug>` fix guide; `surface` must match a section in that route's `ERROR_SECTIONS`.
@@ -48,7 +46,6 @@ When turning a game dataset into public wiki or collection pages, use the matchi
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.
 - Before importing quiz data, validate the `QuizData` shape, difficulty counts, option IDs, and answer IDs. Then verify the saved `quiz_pages.quiz_data` readback and rendered `/quizzes/<slug>` page.
-- If a new dataset becomes long-lived, document it in `agents/data/agents.md`.
 - Do not store manual active-code lists, expired-code lists, code dates, or code rewards in `data/`. Code data belongs to the source-driven codes refresh workflow.
 
 - `data/roblox-emotes/commands.json`: reviewed emote command seed input with provenance, verification dates, and explicit publication state; import through `npm run seed:emote-commands -- --apply`. Runtime reads only published `roblox_emote_commands` rows. Marketplace names and prices remain in the existing item tables and are never converted into commands.

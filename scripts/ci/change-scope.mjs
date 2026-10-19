@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 
 export function classify(files) {
-  const code = files.filter(file => !file.endsWith("/AGENTS.md") && !/^(AGENTS\.md|DESIGN\.md|dev-docs\/|docs\/|agents\/|\.agents\/|\.claude\/|\.codex\/|Writing plans\/)/.test(file));
+  const code = files.filter(file => !file.endsWith("/AGENTS.md") && !/^(AGENTS\.md|DESIGN\.md|bloxodes-docs\/|\.agents\/|\.claude\/|\.codex\/)/.test(file));
   return {
     checks: code.length > 0,
     migrations: code.some(file => file.startsWith("supabase/migrations/")),

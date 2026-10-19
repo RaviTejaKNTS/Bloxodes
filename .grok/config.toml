@@ -1,4 +1,4 @@
-# Grok permissions for delegated Bloxodes tasks (see CLAUDE.md).
+# Grok permissions for delegated Bloxodes tasks (see bloxodes-docs/agents/how-agents-work.md).
 # T3 starts delegated agents in auto mode. These rules pre-approve routine work
 # so the agent does not stop on an approval prompt the main agent cannot see.
 # Deny rules win over allow rules. Sub-agent spawning cannot be pre-approved

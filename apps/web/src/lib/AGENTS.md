@@ -2,7 +2,7 @@
 
 ## GitHub task and release flow
 
-Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `dev-docs/operations/deployment.md`. Preserve installed runtimes, env files and active jobs.
+Stay in the T3-assigned task worktree. Use a PR targeting `production`. Checks, builds, tests, page validation and browser verification run on GitHub, including the commands listed below. Do not install dependencies or run local checks. Production schema/content writes use the CI jobs in `bloxodes-docs/operations/release.md`. Preserve installed runtimes, env files and active jobs.
 
 Scope: `apps/web/src/lib`.
 
@@ -70,7 +70,6 @@ The shared schema is applied in managed development and production. Roblox keeps
 1. Add shared typed helpers in `apps/web/src/lib/*`.
 2. Keep route files and UI components thin.
 3. If content is publishable, expose tags that `/api/revalidate` can target.
-4. Update the relevant doc in `agents/data/agents.md` or `agents/routes/agents.md`.
 
 ## Red Dead and collectible rollout (2026-09-07)
 
@@ -86,11 +85,11 @@ The current managed-development content covers `gta-5`, `gta-san-andreas`, `gta-
 
 ## Shared engagement presentation (2026-09-10)
 
-Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `dev-docs/pipelines/content.md` for ownership and verification.
+Checklist and quiz routes use neutral contracts/configuration in `lib/engagement`. Reuse `ChecklistIndexPage`, `ChecklistPageTemplate`, `QuizIndexPage` and `QuizPageTemplate` for presentation changes; keep platform reads and game identities in route data adapters. Quiz sidebar/related content are template slots. Preserve existing progress keys; new platforms need explicit namespaces and supported progress endpoints. See `bloxodes-docs/content/franchise.md` for ownership and verification.
 
 
-Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `dev-docs/pipelines/wiki-collections.md`.
+Minecraft edition ownership uses `minecraft-java` and `minecraft-bedrock`, permanent `/minecraft/<edition>/wiki` paths and independently published collection revisions. Public wiki pages use route-owned content and standard collection CTAs. Shared media keeps its existing immutable Minecraft prefix. New publication uses the shared namespace commands. The October 3 production cutover used a one-time activation command that is now retired. See `bloxodes-docs/content/roblox-wiki.md`.
 
 ## Shared game reference pages
 
-`game-page-data.ts` validates map pins, quiz pools and plain catalog fields. `game-extra-pages.ts` reads protected published reference views and checklist tasks; keep game/parent visibility in those views. `game-quiz-progress.ts` owns the namespaced account API and calls the atomic history RPC. GTA map readers load stored snapshots rather than authoring files. Preserve the internal Roblox `wiki-collection` progress namespace. See `dev-docs/pipelines/content.md` for the shared extension and production release.
+`game-page-data.ts` validates map pins, quiz pools and plain catalog fields. `game-extra-pages.ts` reads protected published reference views and checklist tasks; keep game/parent visibility in those views. `game-quiz-progress.ts` owns the namespaced account API and calls the atomic history RPC. GTA map readers load stored snapshots rather than authoring files. Preserve the internal Roblox `wiki-collection` progress namespace. See `bloxodes-docs/content/franchise.md` for the shared extension and production release.

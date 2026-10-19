@@ -3,185 +3,184 @@ name: bloxodes-franchise-game-collection-workflow-runner
 description: Run one or many approved non-Roblox franchise collections through research, data, images, writing, managed-development publication, verification, size checks, and Browser review. In T3 Code each stage goes to its assigned model (Luna for suggestions, research, data, images and editorial review; Haiku 5.5 for reviews and writing). Never publish production.
 ---
 
-# Bloxodes franchise game collection workflow runner
+# Bloxodes Franchise Game Collection Workflow Runner
 
-You're the parent for approved collections in one non-Roblox franchise namespace. Workers build one collection at a time through research, data, images and writing. You judge every gate, own final verification and decide when a collection is done. Workers never approve their own work.
+You're the parent for one collection or a list of collections. Subagents do the research, data, images and writing. You judge each gate. You're done when every collection has passed GitHub QA or is clearly blocked, and you've returned the paths, run links and page-type decisions.
 
-This workflow stops at managed development. It never touches production.
+You judge. You don't take over the writing voice unless the fix is tiny.
 
-**In T3 Code** (you have the `delegate_task` tool and the owner runs franchise collections here), follow the "Franchise collections" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the worker model and handoffs below. Luna does suggestions, research, data, images and the editorial review. Haiku 5.5 reviews the research, data and images and writes. Outside T3 Code, the flow below applies.
+**In T3 Code** (you have the `delegate_task` tool and the owner runs collections here), follow the "Franchise collections" stage table in `.agents/skills/bloxodes-model-routing/SKILL.md` instead of the subagent split below. Luna does suggestions, research, data, images and editorial review. Haiku 5.5 reviews research, data and images and writes. Outside T3 Code, follow the flow below.
 
-## Shared game storage
+**Before you start:** read `bloxodes-docs/content/franchise.md` (identity, routes, tables and the rules every franchise page follows) and `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images and layout). Public copy and writer briefs follow `.agents/skills/bloxodes-voice/SKILL.md`.
 
-- **Tables:** managed development uses `games`, `game_wiki_pages`, `game_collection_pages`, `game_collection_datasets`, `game_collection_items`, `game_code_pages`, `game_codes` and `game_tool_pages`. Roblox stays separate.
-- **Namespace:** scope every read and write by namespace. Use `gameDatabase(client, namespace)` for existing logical suffixes.
-- **Kinds:** `games.kind` is only `franchise` or `game`. `parent_id` links a game to its franchise. Mode and edition labels describe content; they never add kinds.
-- **Routes:** read the wiki row's `canonical_path` before planning collection links. A standalone game's wiki is `/<namespace>/wiki`. A franchise has its own wiki hub plus child game wikis. Keep Minecraft's edition URLs as they are.
-- **Pages:** publish reviewed game, wiki, codes page and registered tool payloads with `publish:game-pages -- --namespace <slug> --file <reviewed.json>`. It's a dry run by default, and `--apply` writes only to development. Combined payloads need explicit IDs. Publish identity first, then the wiki, then collections.
-- **Collections:** publish with `sync:shared-game-collection-runtime`, passing `--namespace` and the reviewed runtime manifest. Keep immutable dataset/media publication and pointer readback. Preserve drafts, revisions, sources, fields and media. Never edit published items.
-- **Workspaces:** research stays in ignored workspaces.
-- **Who owns what:** these workflows cover every non-Roblox title: standalone games, multi-game franchises and GTA (`namespace = 'gta'`). Game-specific scope, such as modes, editions and preferred sources, comes from the approved plan and its sources.
+## Useful coverage
 
-## Required context
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
 
-Keep one context record for the whole run:
+A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile player-facing page.
 
-- franchise name and namespace
-- approved title and collection allowlist
-- game and collection slugs, title kinds, parent titles and mode/content boundaries
-- hub and collection route patterns
-- collection workspace root and media root
-- game, wiki, collection, dataset, item and progress tables/views
-- official-source hierarchy and image policy
-- data audit, checker, runtime sync, final verifier, HTML-size and export commands
-- managed-development base URL and Browser route
-- sitemap, search, cache, revalidation and progress ownership
+## How the work splits
 
-Don't guess a route, table, command or source policy. If the target runtime isn't implemented, stop at the exact infrastructure blocker, or use only an explicitly authorized setup phase. Never quietly fall back to Roblox or another franchise's runtime.
+1. A **collection subagent** owns research, data and images for one collection, and waits at each gate.
+2. You approve, refine or block at the research, data and image gates.
+3. A **writing subagent** writes `final.json` after image readiness is approved.
+4. You review the final copy, GitHub verification and rendered screenshots.
 
-## Scope and safety
+- Give each collection subagent one collection only. If you have more collections than open slots, queue the rest.
+- Don't write collections from the parent seat.
+- If subagents aren't available, run the same gates yourself in order: research, then data, then images, then writing. Keep writing as its own pass.
 
-- Work only on the approved title and collection allowlist.
-- Keep campaign, online service, expansion, mode, edition, platform and release-generation scopes separate.
-- Use managed development for authoring and preview.
-- Never apply production migrations, write production rows, upload production media, deploy, merge, push or invoke a release skill from this workflow.
-- If application or schema work is needed, report it as a separate, explicitly authorized dependency. Don't change it silently.
+**Who fixes what**
 
-## Worker model
+- **You:** tiny non-content metadata or JSON issues (slug, code, IDs, null fields, broken JSON, wrong `faq_json` key names).
+- **Writing subagent:** anything about tone, body, structure, FAQ wording or real claims.
+- **Collection subagent:** data and image problems.
 
-When subagents are available and authorized:
+## Workspace
 
-1. Give one collection to one research/data/image worker.
-2. That worker can't spawn nested workers or run this parent skill.
-3. Require parent approval at the research, data and image gates.
-4. After image approval, use a new writing worker for `final.json`.
-5. Queue the remaining collections when worker slots are full.
+```text
+tmp/content-workspace/<namespace>/<game-slug>/collections/<collection-slug>/
+  brief.md
+  final.json
+```
 
-If subagents aren't available, run the same gates as separate passes. Never collapse research, data, images and writing into one unreviewed generation step.
+Keep any supplied workspace override. Resolve the exact owning wiki's stored `canonical_path`; don't construct a child route from a guessed pattern. This runner stops before production.
 
-## Handoffs
+## Subagent handoffs
 
-**Research worker**
+Keep handoffs short. The skills hold the stage instructions, and agents use the inherited workspace context and existing artifacts. Don't restate research requirements, add approval criteria, or send hurry-up or READY-or-BLOCKED checkpoint messages.
 
-- Read `.agents/skills/bloxodes-franchise-game-collection-research/SKILL.md` completely.
-- Write `brief.md` only, then wait.
+**Collection subagent.** Send the skill path, game name and collection name. Use the same subagent for each stage, one skill per handoff:
 
-**Data worker** (after research approval)
+- `.agents/skills/bloxodes-franchise-game-collection-research/SKILL.md`
+- `.agents/skills/bloxodes-franchise-game-collection-data/SKILL.md`
+- `.agents/skills/bloxodes-franchise-game-collection-images/SKILL.md`
 
-- Read `.agents/skills/bloxodes-franchise-game-collection-data/SKILL.md` completely.
-- Create or update `dataset.json` and `runtime-manifest.json`.
-- Append data readiness to `brief.md`, then wait.
+**Writing subagent.** After the image stage, start a new writing subagent. Send:
 
-**Image worker** (after data approval)
+- `.agents/skills/bloxodes-franchise-game-collection-writing/SKILL.md`
+- the voice guide, `.agents/skills/bloxodes-voice/SKILL.md`
+- the game name and collection name
 
-- Read `.agents/skills/bloxodes-franchise-game-collection-images/SKILL.md` completely.
-- Gather media, create or update `images.json`, wire dataset image paths, append image readiness, then wait.
-
-**Writing worker** (after image approval)
-
-- Read `.agents/skills/bloxodes-franchise-game-collection-writing/SKILL.md` completely.
-- Read `.agents/skills/bloxodes-voice/SKILL.md` and the "Game collections" section of `.agents/skills/bloxodes-voice/references/examples.md`. That's how the copy should sound.
-- Read the approved brief and dataset.
-- Write only `final.json`, parse it and return it for parent review.
+Record approval notes or specific corrections in the collection brief before sending the next skill handoff.
 
 ## Workflow
 
-1. If the user gave no approved title or collection list, run the franchise wiki and collection suggestions steps first. Get explicit parent allowlists before creating pages.
-2. Confirm each exact title, collection, slug, content scope, page type, order, and whether the work is new or an update.
-3. Check managed development and production for exact duplicates and route conflicts.
-4. Run the research gate for each collection.
-5. Review roster proof, cross-checks, exclusions, mode and edition boundaries, fields, sections, page type, pagination expectation and image feasibility.
-6. Approve, return for specific fixes, narrow with an explicit note, or block.
-7. Run the data gate.
-8. Review v2 shape, item counts, identity, public/system separation, sections, fields, display metadata, source URLs, runtime manifest `pageType`, audits and the runtime dry plan.
-9. Run the image gate.
-10. Review exact-match coverage, file quality, source records, dataset wiring, missing-image decisions and the image-required checker.
-11. Run the writing gate with a fresh writer.
-12. Review identity, title token, metadata, body, FAQs, hub blurb, section notes, voice, spoilers and scope separation (see "Writing gate").
-13. Stage the reviewed workspace and runtime manifest for CI in a selected batch under `content/releases/<batch>/` (operation kind `franchise-collection` with the franchise namespace), or in a reviewed immutable bundle. Don't start a local preview, or run the verifier or HTML-size gate locally.
-14. Run `Managed content QA` on GitHub with the exact committed batch or bundle. It publishes the immutable revision and page copy to managed development so the real route can render. It never authorizes production.
-15. Review the job's screenshots and reports at desktop and mobile widths, including the HTML-size result.
-16. For `database` collections, confirm the section dropdown, list/card switching, section navigation, pagination page 2, noindex/follow behavior and sitemap exclusion for paginated URLs.
-17. For `collectible` collections, confirm the clean collectible renderer, local-first anonymous progress, account-saved progress when supported, search/filter/reset behavior, no card/list database switch, and page 2 returning 404 with the base URL canonical.
-18. If the reports don't cover an interaction in steps 16 or 17, report it as an open QA gap instead of testing locally.
-19. Check the title hub after collection publication. Its collection copy must appear before the shared image CTA, and the CTA must use real collection images.
-20. Record the finished state in the approved roadmap or handoff doc when that doc is in scope.
+1. Read the supplied suggestions file and run every `[create]` collection for the game.
+2. Give each collection subagent exactly one collection.
+3. **Research gate:** the subagent returns `brief.md`.
+4. Review source proof, scope, coverage, whether the collection is worth publishing, and the approved `database` versus `collectible` page-type decision.
+5. Approve, refine or block.
+6. **Data gate:** the same subagent prepares the dataset and updates the brief notes.
+7. Review item count, missing items, v2 shape, sections, fields, image planning, route assumptions and `runtime-manifest.json` `collection.pageType`.
+8. **Image gate:** the same subagent gathers and wires images, then updates the brief notes.
+9. Review image coverage, quality, paths, dataset wiring and the GitHub checker result when available.
+10. **Writing gate:** spawn a writing subagent with `bloxodes-franchise-game-collection-writing` and `bloxodes-voice`.
+11. Review `final.json`. Send copy, tone, structure and FAQ fixes to the writing subagent. Send data and image gaps back to the collection subagent.
+12. Confirm the collection folder has `brief.md`, `dataset.json`, `media/`, `final.json` and `runtime-manifest.json`. Prepare the exact selected `franchise-collection` operations with the namespace and their immutable bundle. Include the approved hub when needed. Don't start local previews or run checks locally.
+13. Run `Managed content QA` on GitHub. It validates and publishes the selected development revisions and media, builds the runner preview and records the selected desktop and mobile routes.
+14. Review the dataset pointer/count readback, useful rendered fields, image coverage, metadata and screenshots. Page-specific pagination, HTML-size or collectible progress checks also run on GitHub when needed.
+    - **Database pages:** verify section navigation and paginated canonical/noindex behavior.
+    - **Collectible pages:** verify local and account progress, filters/reset, and that there's no pagination.
+15. Return artifact paths, the exact GitHub run and reports, blocked collections and supported page-type decisions. Don't claim a page-specific check passed unless its report exists. Installed CI-mode builders return authored artifacts for GitHub QA before production publication.
 
-## Research gate
+## Research checks
 
-Approve only when:
+When `brief.md` comes back, check that:
 
-- title, collection, mode, edition, platform and release boundaries are clear
-- one source supports the complete roster and another cross-checks it
-- disputed facts are marked and kept out of hard fields
-- the collection is durable and useful in the shared renderer
-- the page type matches the player task
-- fields answer real lookup or comparison needs
-- sections use game-native categories
-- image collection is feasible, or a text-only exception is justified
-- the writer notes give plain player-language facts, the reader's real question and any hooks, with source talk and doubts kept in the private evidence sections
+- Edition/platform/mode/release-generation and spoiler boundaries are explicit.
+- Sources support a useful collection, and unresolved coverage is recorded for later improvement.
+- The collection is durable, useful and source-backed.
+- Item fields help players compare items.
+- The section plan is clear and useful for players, and section labels aren't source-table noise.
+- The page type is explicit: finite player-completed goals use `collectible`, reference rosters use `database`. Preserve Minecraft edition identities and its `database` page-type restriction.
 
-## Data gate
+## Data checks
 
-Approve only when:
+When the brief's data notes come back, check that:
 
-- `meta.schemaVersion` is `2` and identity matches the manifest
-- every row has `item.name`, a system slug, a section, a sort order and a planned image
-- `items[].system` contains only `slug`, `section`, `sortOrder` and `image`
-- public rows contain no source, scrape, verification, debug or internal system keys
-- public values are short and exact, with no research wording like "reportedly" or "unconfirmed"
-- item count, inclusion, exclusion, names and section counts match the sources
-- field consistency, display metadata, field presentations, `sourceUrls` and `pageType` agree
-- the generic audit and checker pass
-- the context runtime-sync dry plan passes without an apply flag
+**Shape**
 
-## Image gate
+- The dataset uses the v2 wrapped `{ meta, items[].item, items[].system }`, not a bare array.
+- Public game fields live only in `items[].item`. System fields live only in `items[].system`.
+- No public item field is named `collectionSection`, `section`, `sortOrder`, `image`, `slug`, source/verification/raw text, or any other workflow or debug key.
+- Hidden, source and dev fields are absent from public item data and aren't exposed as card fields.
+- `runtime-manifest.json` declares the approved `collection.pageType`, or an existing manifest is explicitly treated as the `database` default.
 
-Approve only when:
+**Rows and sections**
 
-- images identify the exact item, location, character, mission or other row
-- images aren't logos, screenshots, unrelated thumbnails, fan art or AI substitutes
-- source URLs and caveats are recorded
-- files exist under the workspace media folder and paths are wired to `items[].system.image`
-- missing images are fixed or explicitly accepted item by item
-- the image-required checker passes
+- Data includes the supported rows and accurate available fields from the brief. Missing rows or values are documented, not treated as a completeness blocker.
+- If a real multi-section grouping exists, `items[].system.section`, `items[].system.sortOrder`, `meta.display.groupLabel` and `meta.display.sectionOrder` are present and match the actual rendered labels.
+- Section field, section counts and section order are recorded.
+- Every item lands in the right section.
 
-## Writing gate
+**Fields and presentation**
 
-Check accuracy and structure:
+- Card fields help players compare items.
+- Card summaries are there when the collection needs plain-English item context.
+- There's a natural source-backed highlight-style field when the collection supports one, like availability, status, strength, best use or recommendation.
+- Chip-style fields are used for prices, rarity, tier, duration, cooldown, chance, costs, levels or important short numbers.
+- Detail fields are complete prose when the value is a sentence. Semicolon prose isn't turned into fake lists.
+- Public fields are consistent across rows, with missing source-backed values left empty or null instead of dropping the field.
+- Values don't repeat their labels, like `Type: Standard boost` inside the `type` value.
+- Public values read plain per `bloxodes-voice`: short and exact, with no research wording like "reportedly" or "unconfirmed."
 
-- `display_name` is a short reusable label
-- the title uses `All {count} <Collection> in <Game>` when natural
-- no prose states a collection or section count
-- `description_json` keys match real section labels
-- FAQs use `q` and `a`
-- `wiki_md` is specific, useful and count-free
-- spoilers stay out of metadata and the intro
-- separate content scopes don't leak into each other
-- JSON parses and identity matches the runtime manifest
+**Readiness**
 
-Then read it as a player and check it against `bloxodes-voice`:
+- Image need and image field are recorded for the next step.
+- The route renderer/config can show the sections, fields, planned image field and item count.
+- GitHub data checks passed, or the remaining warning is accepted.
+- `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug> --file <workspace>/dataset.json` reports no blocking metadata issue.
 
-- **Answer first.** The intro opens on something the player came for, not on the game's popularity or what the page covers.
-- **Player voice.** It sounds like someone who plays, with real game nouns and an opinion the facts back. No manual or report tone.
-- **Complete, not just clean.** The body uses the dataset's real numbers to answer what players need to choose well: early, mid and late picks and best-value options when the collection has a progression or price, plus how the system unlocks and the common mistakes, at least as well as the top-ranking guides. A few short "check the cost" sections is a fail.
-- **No templates or research voice.** No "Welcome to", "In this guide", "according to sources", "reportedly" or hype words.
-- **Public copy explains the game system,** never the site, sources, workflow or database.
-- **No repeats.** Intro, section notes, FAQs and hub blurb each add something new.
+If the data isn't ready, send it back to the subagent for fixes.
+
+## Image checks
+
+When the brief's image notes come back, check that:
+
+- Required images are complete, exact and credited. Genuine no-image cases are documented. Missing required images block publication.
+- Images clearly show the item, and aren't thumbnails, logos, page screenshots or unrelated art.
+- Public image paths exist under the expected folder.
+- Dataset image fields are wired to the saved images.
+- GitHub image checks passed when images are required.
+
+If images aren't ready, send them back to the subagent for fixes before writing.
+
+## Final checks
+
+Before you approve any `final.json`, and before you call a collection done:
+
+**Facts and data**
+
+- The production duplicate check is recorded.
+- Source proof supports the collection and its important fields.
+- The page type is recorded and matches the manifest, page row and route renderer.
+- Item count and title count agree.
+- Image readiness is approved. Missing required images block publication; genuine no-image cases are documented item by item. The social image is drawn from the collection items.
+- `description_json` keys match the actual rendered section labels.
+- Sections are useful and their labels are easy to understand.
+- Card fields help players compare items.
+- Card and list details follow the presentation contract: a description, a highlight where natural, chip values for compact numbers, detail values for prose, and no label-stuffed values.
+
+**Title and labels**
+
+- The title follows `All {count} <Collection> in <Game>`.
+- `display_name` is present and is the short reusable collection label, like `Units`, `Food Items`, `NPCs` or `Cosmetics`. No counts, game names, colons or title/SEO phrasing.
+
+**Copy, checked against `.agents/skills/bloxodes-voice/SKILL.md`**
+
+- **Answer first.** `intro_md` opens on the item system and the choice that matters, not on what the page is.
+- `how_it_works_md` is empty. Reject instructions about cards, page fields, browsing or switching views in any public copy. Useful game rules belong in `description_md`, as the writing skill explains.
+- **Player voice.** Simple and easy for everyone to read, like a player explaining the system to a friend.
+- **Complete, not just clean.** The body uses the dataset's real numbers to say what to pick early, mid and late, the best-value options, how the system unlocks and the common mistakes, at least as well as the top-ranking guides. A few short "check the cost" sections is a fail.
+- **No templates or research voice.** No stock openings, no "reportedly" or "sources say." No public copy mentions research, datasets, workflow or page usage.
+- **No repeats.** Paragraphs add context beyond the cards, and each fact has one home across intro, description, section notes and FAQs.
 - **Headings** say what's under them in words a player would search, without one repeated pattern.
+- **No counts in prose.** No "all X items," "over X," section counts or totals. The only count allowed is the automated `{count}` token in `title` and `seo_title`.
+- `wiki_md` is specific and useful: it explains the in-game system in plain words, isn't a generic list blurb, and carries no item count.
 
-Fix small wording issues yourself. Send it back to the writer when the gaps are bigger.
+**Checks**
 
-## Finish
-
-Return:
-
-- collections completed, blocked and still queued
-- workspace paths and managed-development routes
-- source roster count, dataset count and image coverage for each collection
-- audit, checker, dry-plan, verifier, size-gate, pagination, collectible and Browser results
-- accepted image or source gaps
-- exact files changed outside ignored workspaces
-- a clear statement that production was untouched
-
-A collection isn't complete while any required gate is unresolved.
+- `final.json` parses.
+- Verifier, HTML size gate, pagination checks and the GitHub browser report pass.
+- For `collectible`, account/local progress and no-pagination route checks pass instead of database pagination checks.

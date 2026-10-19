@@ -3,103 +3,94 @@ name: bloxodes-franchise-game-collection-suggestions
 description: Suggest durable wiki collection pages for one non-Roblox game title in a configured franchise namespace. Use before collection research; do not write pages or datasets.
 ---
 
-# Bloxodes franchise game collection suggestions
+# Bloxodes Franchise Game Collection Suggestions
 
-You find the collections worth building for one non-Roblox game title and decide what belongs in the collection system. Done means a short evidence summary plus one clear decision per candidate collection.
+You're deciding which game collection pages Bloxodes should create for one non-Roblox game. You're done when every candidate has a clear call backed by linked source proof. Don't write the pages here.
 
-This skill doesn't research a final roster, write a brief, prepare data or write a page.
+**Before you start:** read `bloxodes-docs/content/franchise.md` (identity, routes, tables and the rules every franchise page follows) and `bloxodes-docs/content/page-standards.md` (titles, headings, depth, images and layout). Public copy and writer briefs follow `.agents/skills/bloxodes-voice/SKILL.md`.
 
-## Shared game storage
+## Useful coverage
 
-- **Tables:** managed development uses `games`, `game_wiki_pages`, `game_collection_pages`, `game_collection_datasets`, `game_collection_items`, `game_code_pages`, `game_codes` and `game_tool_pages`. Roblox stays separate.
-- **Namespace:** scope every read and write by namespace. Use `gameDatabase(client, namespace)` for existing logical suffixes.
-- **Kinds:** `games.kind` is only `franchise` or `game`. `parent_id` links a game to its franchise. Mode and edition labels describe content; they never add kinds.
-- **Routes:** read the wiki row's `canonical_path` before planning collection links. A standalone game's wiki is `/<namespace>/wiki`. A franchise has its own wiki hub plus child game wikis. Keep Minecraft's edition URLs as they are.
-- **Pages:** publish reviewed game, wiki, codes page and registered tool payloads with `publish:game-pages -- --namespace <slug> --file <reviewed.json>`. It's a dry run by default, and `--apply` writes only to development. Combined payloads need explicit IDs. Publish identity first, then the wiki, then collections.
-- **Collections:** publish with `sync:shared-game-collection-runtime`, passing `--namespace` and the reviewed runtime manifest. Keep immutable dataset/media publication and pointer readback. Preserve drafts, revisions, sources, fields and media. Never edit published items.
-- **Workspaces:** research stays in ignored workspaces.
-- **Who owns what:** these workflows cover every non-Roblox title: standalone games, multi-game franchises and GTA (`namespace = 'gta'`). Game-specific scope, such as modes, editions and preferred sources, comes from the approved plan and its sources.
+Build the most accurate, up-to-date collection the sources support. Combine rows across sources and merge duplicates. When sources disagree on a value, use the better-supported one or a range, as the data skill's "Conflicting sources" rule says. Leave a value empty or null only when no reliable source gives one. Record missing rows, conflicting claims and follow-ups in the brief so the collection can improve later.
 
-## Required context
-
-Resolve these before you decide anything:
-
-- Franchise name and namespace.
-- Exact game/title slug, title kind, parent title, official URL, release state and requested mode or content scope.
-- Collection route pattern, for example `<route-prefix>/wiki/<game-slug>/<collection-slug>`.
-- Game, wiki and collection tables/views, plus the managed-development and production environments.
-- Official-source groups and the allowed source hierarchy for this franchise.
-- The target collection verifier, data checker, image helper and runtime sync command, if they'll be needed later.
-
-Don't guess a route, table, source policy or mode boundary. If a required value is missing, return `[source discovery incomplete]` and name it.
+A source saying 97 items while listing 98, an incomplete roster, no official confirmation or uncertain update coverage aren't reasons to block on their own. Don't invent facts or claim complete live coverage. Block only when there truly isn't enough supported material for a worthwhile player-facing page.
 
 ## Start
 
-1. Resolve the exact game, editorial slug, title kind, release status, official URL and campaign/online/expansion/mode boundary.
-2. Check the configured collection table in managed development and production for the exact game and collection slug. Never recommend an existing or conflicting route.
-3. Check the title hub and approved roadmap so your ideas fit navigation and don't repeat a planned collection under another name.
-4. Keep collections separate by title, mode, edition, platform, release generation and live-service state.
+1. Resolve the exact game, namespace, registry UUID, editorial slug, title kind and parent title.
+2. Check that the identity belongs to the correct title, edition, platform and mode.
+3. Check existing Bloxodes `game_collection_pages` for that namespace and owning wiki. Don't recommend collection pages we already cover.
 
-## Source discovery
+This is how you avoid recommending collections that already exist for the game.
 
-- Search broadly and open the useful pages. Check the official source groups the context declares, a dedicated franchise or game wiki/database, and established guide sites. Record any configured source group that had no relevant result.
-- Use competitor coverage to learn what players want and ask, not as proof by itself. Confirm each proposed collection with stronger sources.
-- Search for likely player nouns: vehicles, weapons, characters, missions, locations, items, recipes, maps, quests, bosses, collectibles, achievements and other game-native systems.
-- Search snippets are leads, not final evidence. Don't copy competitor wording.
+## Source check
+
+Search broadly. Use the strongest sources you can find: game-specific Fandom or wiki pages, official publisher/developer pages, manuals, update logs, Beebom, TechWiser, Game8, Pro Game Guides and established guides for the exact title.
+
+Go past the first search result or homepage. Open relevant source pages and follow useful internal links until you understand the game's item systems.
+
+**Competitor wiki coverage.** Check these source groups explicitly before you decide:
+
+- **Beebom:** search for the game plus `wiki`, `items`, `units`, `weapons`, `pets` or the likely collection nouns. Open any relevant wiki or guide page and record which collections or item systems it covers.
+- **TechWiser:** search the same way. Open any relevant wiki or guide page and record what it covers.
+- **Dedicated game wiki/database and official guides:** search the same way. Open relevant roster and system pages and record what they cover.
+
+If a site has no relevant page, write `none found` and include the search query or result URL you checked. If it does have relevant wiki content, treat the collections it covers as strong evidence, and recommend `[create]` for any that fit Bloxodes criteria and aren't already covered.
 
 ## What counts
 
-Recommend stable player-facing databases where each row has useful comparison or lookup fields: reference rosters, systems, fixed missions, characters, vehicles, weapons, locations, maps, recipes, classes, bosses, achievements or collectible families.
+Recommend only useful, durable in-game collection pages: item or system collections such as pets, units, weapons, fruits, maps, areas, recipes, traits, mutations, currencies, classes, bosses, materials, vehicles, cosmetics, unlocks and similar player-facing systems.
 
-Pick the page type:
+Skip events, temporary reward tracks, storefront products, server directories and broad update summaries. Separate mode, expansion, edition, platform and release-generation rosters when their facts differ. Use spoiler-safe collection names.
 
-- `collectible` for finite player-completed goals: collectibles, locations, quests, badges, route steps, mission objectives and other completion tasks.
-- `database` for reference rosters players browse and compare.
-- Both types use the same collection table and runtime manifest.
+Mark `[create]` only when there's at least one decent public source and enough detail to make a useful page. For each `[create]`, recommend a page type:
 
-Skip:
+- `page type: collectible` when the player completes finite goals (collectibles, locations, quests, badges or route steps).
+- `page type: database` otherwise.
 
-- temporary rotations, bonuses, shops, events, reward tracks or update-only states, unless the context explicitly defines a durable live-service collection
-- news, tier lists, rankings, walkthrough prose, opinion pieces, calculators or trackers
-- collections that silently combine modes, editions, platforms, titles or release generations
-- broad pages with no useful row-level fields
-- padded trivia collections
+Both types use the existing collection table and runtime manifest.
 
-Size isn't the test. A small collection can qualify when it's central to the game, source-backed, useful and has real search demand.
+### Item count isn't a blocker
 
-Prefer separate routes for location-heavy collectible families. Several smaller, clear player goals beat one giant generic collectibles page.
+Don't skip a collection just because it has only a few items. A small collection is still worth `[create]` when all of these hold:
 
-## Name collections the way players search
+- It's a core, player-facing part of the game: something players actively look up, plan around or compare.
+- The data is good: source-backed, with useful per-item fields like rarity, cost, income, ability, source or stats.
+- There's real search demand: several guide or wiki sites cover it, or it shows up in searches as something players ask about.
 
-The collection label and slug become the page's title and URL, so use the words a player would actually type. (The examples below are made up. Learn the move, not the facts.)
+A focused 4 to 8 item collection that's core to the game and has good data beats a padded list of trivia. Judge by importance, data quality and search demand, not raw count.
 
-- Use the game's own noun: "Relay Towers", "Stunt Jumps", "Ember Shards". Not "Collectible Items" or "Objects".
-- Match real search phrasing. If players search "all stunt jump locations", the label is "Stunt Jumps", not "Aerial Challenge Points".
-- Give each idea its own angle. If your reasons all read "a useful reference for players," you haven't found the angle yet. Say what the player gets: "every relay tower locks after the finale, so players want the full map before they get there."
+Still skip it when the small count means it's truly thin: not a core system, no useful per-item fields, weak or single-source data, or already covered by a broader collection.
+
+### Name it the way players search
+
+Name each `[create]` collection the way players actually search for it, using the wording you saw in your keyword checks and competitor pages. "Garden Rush Pets" or "Tower Brawl Units" is right (made-up games, real pattern). A templated angle like "Complete Item Database" or "Ultimate Guide to Every X" isn't. Give a one-line reason a player would open the page, in their words.
 
 ## Output
 
-Start with:
+Start with `Evidence checked`:
 
 ```text
 Evidence checked:
-- Existing Bloxodes coverage:
-- Official primary sources:
-- Support/manual/news sources:
-- Dedicated game/franchise wiki or database:
-- Configured guide sources:
-- Other sources:
-- Keyword searches:
-- Game/mode/edition/platform boundary:
+- Bloxodes existing pages:
+- Official publisher/developer/manual pages:
+- Beebom wiki/guide pages:
+- TechWiser wiki/guide pages:
+- Game8:
+- Pro Game Guides:
+- Fandom/game wiki:
+- standalone wiki:
+- All other sources:
+- keyword searches:
 ```
 
-If a required source group wasn't checked, return `[source discovery incomplete]` and name the gap.
+If any source-check line wasn't actually checked, don't decide. Return `[source discovery incomplete]` with the missing checks. When you have checked, always link every page you checked.
 
-Then return only collection decisions:
+Then return only game collection recommendations:
 
-- `[create]` with a short reason, collection slug, mode/content scope, page type, useful fields and source proof.
-- `[we already have a page]` with the existing route.
-- `[skip]` with the concrete reason.
-- `[source discovery incomplete]` when the evidence doesn't support a decision.
+- `[create]` durable in-game item/system collection with enough source evidence
+- `[we already have a page]` production already covers it
+- `[skip]` weak, temporary, global-duplicate, or not a game collection page
+- `[source discovery incomplete]` required source checks were not completed
 
-Don't write a hub, brief, dataset, images, final JSON or a future-page promise here.
+Keep each recommendation short and include the source proof behind it.

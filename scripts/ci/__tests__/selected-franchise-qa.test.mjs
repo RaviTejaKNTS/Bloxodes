@@ -131,7 +131,7 @@ test('live-source proof rejects Tailwind, workspace package and new web build in
   for (const file of ['apps/web/tailwind.config.ts', 'apps/web/package.json', 'apps/web/new-build.config.mjs', 'apps/web/src/app/page.tsx', 'apps/web/public/map.png', 'apps/web/next.config.js', 'apps/web/postcss.config.js', 'apps/web/tsconfig.json', 'apps/mobile/package.json', 'types/shared.d.ts', 'data/example.json', 'package-lock.json', 'Dockerfile', '.dockerignore', 'scripts/ops/run-with-production-build-env.mjs']) {
     assert.throws(() => assertLiveSourceEquivalent([file]), /Preview runtime differs/, file);
   }
-  assert.deepEqual(assertLiveSourceEquivalent(['apps/web/e2e/managed-franchise-content.spec.ts', 'apps/web/vitest.config.ts', 'apps/web/src/app/AGENTS.md', 'scripts/ci/selected-franchise-qa.ts', '.github/workflows/pull-request.yml', 'dev-docs/operations/deployment.md']), []);
+  assert.deepEqual(assertLiveSourceEquivalent(['apps/web/e2e/managed-franchise-content.spec.ts', 'apps/web/vitest.config.ts', 'apps/web/src/app/AGENTS.md', 'scripts/ci/selected-franchise-qa.ts', '.github/workflows/pull-request.yml', 'bloxodes-docs/operations/release.md']), []);
 });
 
 test('cleanup attempts all owned deletes and absence reads after returned or thrown errors', async () => {

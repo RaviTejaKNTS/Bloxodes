@@ -65,7 +65,7 @@ const SELECT_COLUMNS =
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-/** Mirrors `estimateWordCount` in scripts/articles/generate-articles.ts so admin edits keep `word_count` consistent. */
+/** Estimate the word count from article text without Markdown formatting. */
 export function estimateArticleWordCount(markdown: string): number {
   const text = markdown
     .replace(/```[\s\S]*?```/g, " ")

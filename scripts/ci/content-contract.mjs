@@ -7,6 +7,15 @@ export function batchPath(input) {
   if (typeof input !== "string" || !/^content\/releases\/[a-z0-9-]+\/batch\.json$/.test(input)) throw new Error("Select an exact content/releases/<batch>/batch.json path.");
   return input;
 }
+/**
+ * @param {string[]} files
+ * @param {(directory: string) => boolean} directoryExists
+ */
+export function changedContentBatches(files, directoryExists) {
+  const batches = new Set(files.flatMap(file => file.match(/^content\/releases\/([a-z0-9-]+)\//) ? [`content/releases/${file.split("/")[2]}/batch.json`] : []));
+  // Keep malformed surviving batches visible to the verifier; skip only removed directories.
+  return [...batches].filter(batch => directoryExists(path.dirname(batch)));
+}
 export function ownedPath(base, input) {
   if (typeof input !== "string" || !input || path.isAbsolute(input) || input.includes("\\") || input.split("/").some(part => ["", ".", ".."].includes(part))) throw new Error("Unsafe batch file path.");
   return `${base}/${input}`;

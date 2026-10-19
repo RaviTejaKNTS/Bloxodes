@@ -111,7 +111,6 @@ Shared comments resolve their exact published canonical paths. Search accepts ge
 1. Decide whether it is public-read, session-scoped, or a mutation.
 2. Reuse existing data helpers from `apps/web/src/lib/*` where possible.
 3. Add cache invalidation if the endpoint mutates data consumed by cached pages or loaders.
-4. Document it in `agents/routes/agents.md`.
 
 ## Red Dead and collectible rollout (2026-09-07)
 

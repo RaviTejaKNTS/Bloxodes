@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { batchPath, ownedPath, parseBatch } from "../content-contract.mjs";
+import { batchPath, changedContentBatches, ownedPath, parseBatch } from "../content-contract.mjs";
 const batch = () => ({version: 1, operations: [{publisher: "game-pages", namespace: "sandustry", file: "pages.json"}], urls: [{path: "/sandustry/wiki", contains: "Sandustry"}], events: [{type: "game_content", slug: "sandustry/wiki"}]});
 test("publication rejects arbitrary commands and arguments", () => {
   assert.throws(() => parseBatch({...batch(), operations: [{publisher: "shell", file: "pages.json"}]}));
@@ -21,4 +21,13 @@ test("wiki receipts reject malformed tickets and unrelated publishers", () => {
   const wiki = {...batch(),operations: [{publisher: "roblox-wiki",file: "final.json"}],wikiReceipt: ticket};
   assert.equal(parseBatch(wiki).wikiReceipt.queueId,ticket.queueId);
   assert.throws(() => parseBatch({...wiki,wikiReceipt: {...ticket,requestId: "different-request"}}));
+});
+
+test("batch verification skips removed releases and keeps surviving batches with deleted files", () => {
+  const files = ["content/releases/removed/batch.json", "content/releases/removed/final.json", "content/releases/retained/removed-final.json", "content/releases/retained/batch.json", "scripts/ci/publish-content.ts"];
+  assert.deepEqual(changedContentBatches(files, directory => directory === "content/releases/retained"), ["content/releases/retained/batch.json"]);
+  assert.deepEqual(changedContentBatches(files.slice(0, 2), () => false), []);
+});
+test("a surviving release directory still requires verification when its batch manifest is removed", () => {
+  assert.deepEqual(changedContentBatches(["content/releases/incomplete/batch.json"], directory => directory === "content/releases/incomplete"), ["content/releases/incomplete/batch.json"]);
 });

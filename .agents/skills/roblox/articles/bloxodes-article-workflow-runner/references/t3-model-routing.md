@@ -67,7 +67,7 @@ A `blocked` decision at any stage stops that article. Report the stage and the e
 
 ## Your review
 
-You own the content and SEO review in `CLAUDE.md`. After each stage, read the actual files, not just the child's summary. After the revision, review `final.json` as an editor against the voice guide and the brief. Fix small prose issues yourself. Send a gap back only when it needs new research or images.
+You own the content and SEO review in `bloxodes-docs/agents/how-agents-work.md`, judged against `bloxodes-docs/content/page-standards.md`. After each stage, read the actual files, not just the child's summary. After the revision, review `final.json` as an editor against the voice guide and the brief. Fix small prose issues yourself. Send a gap back only when it needs new research or images.
 
 ## After the final
 

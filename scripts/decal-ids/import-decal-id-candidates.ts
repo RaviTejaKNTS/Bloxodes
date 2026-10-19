@@ -5,13 +5,9 @@ import path from "node:path";
 import * as cheerio from "cheerio";
 import { repoPath } from "@/lib/paths";
 import {
-  DECAL_ASSET_TYPE_ID,
   clampNumber,
   insertMissingDecalRows,
-  normalizeBoolean,
-  normalizeDate,
   normalizeNumber,
-  normalizeText,
   toBoolean,
   upsertSourceRows,
   type DecalSourceRow,
@@ -19,43 +15,20 @@ import {
 } from "./decal-id-utils";
 
 const USER_AGENT = "BloxodesDecalCandidateImporter/1.0";
-const OLD_JSON_PATH = repoPath("data", "decal-ids", "enriched-decal-ids.json");
 const DRY_RUN = toBoolean(process.env.ROBLOX_DECAL_IMPORT_DRY_RUN, false);
 const MAX_URL_IDS = clampNumber(process.env.ROBLOX_DECAL_IMPORT_MAX_URL_IDS, 2000, 1, 100000);
 
-type OldDecalRow = {
-  id?: string | number;
-  page?: number;
-  name?: string;
-  description?: string;
-  creator?: { id?: number; name?: string; type?: string };
-  assetType?: string | number;
-  created?: string;
-  updated?: string;
-  isForSale?: boolean;
-  priceInRobux?: number;
-  sales?: number;
-  isPublicDomain?: boolean;
-  thumbnail?: string;
-  error?: string;
-};
-
 type Args = {
-  oldJson: boolean;
   files: string[];
   urls: string[];
 };
 
 function parseArgs(): Args {
   const args = process.argv.slice(2);
-  const result: Args = { oldJson: true, files: [], urls: [] };
+  const result: Args = { files: [], urls: [] };
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
-    if (arg === "--no-old-json") {
-      result.oldJson = false;
-    } else if (arg === "--old-json") {
-      result.oldJson = true;
-    } else if (arg === "--file") {
+    if (arg === "--file") {
       const value = args[i + 1];
       if (value) result.files.push(value);
       i += 1;
@@ -72,55 +45,6 @@ function normalizeAssetId(value: unknown): number | null {
   const id = normalizeNumber(value);
   if (!id || id < 1000 || id > Number.MAX_SAFE_INTEGER) return null;
   return Math.floor(id);
-}
-
-function oldJsonToRows(rows: OldDecalRow[], seen: Set<number>) {
-  const decalRows: DecalUpsertRow[] = [];
-  const sourceRows: DecalSourceRow[] = [];
-  const now = new Date().toISOString();
-
-  rows.forEach((entry, index) => {
-    const assetId = normalizeAssetId(entry.id);
-    if (!assetId || seen.has(assetId)) return;
-    const assetType = normalizeNumber(entry.assetType ?? null);
-    if (assetType !== DECAL_ASSET_TYPE_ID) return;
-    seen.add(assetId);
-
-    decalRows.push({
-      asset_id: assetId,
-      name: normalizeText(entry.name) ?? `Roblox Decal ${assetId}`,
-      description: normalizeText(entry.description),
-      creator_id: normalizeNumber(entry.creator?.id ?? null),
-      creator_type: entry.creator?.type === "Group" ? "Group" : entry.creator?.type === "User" ? "User" : null,
-      creator_name: normalizeText(entry.creator?.name),
-      roblox_created_at: normalizeDate(entry.created),
-      roblox_updated_at: normalizeDate(entry.updated),
-      is_public_domain: normalizeBoolean(entry.isPublicDomain ?? null),
-      is_for_sale: normalizeBoolean(entry.isForSale ?? null),
-      price_in_robux: normalizeNumber(entry.priceInRobux ?? null),
-      sales: normalizeNumber(entry.sales ?? null),
-      thumbnail_url: normalizeText(entry.thumbnail),
-      thumbnail_state: entry.thumbnail ? "Imported" : null,
-      thumbnail_checked_at: entry.thumbnail ? now : null,
-      status: "pending",
-      status_reason: "imported_candidate_awaiting_verification",
-      source: "legacy_decal_json",
-      raw_payload: entry as Record<string, unknown>,
-      last_seen_at: now
-    });
-
-    sourceRows.push({
-      asset_id: assetId,
-      source_kind: "legacy_decal_json",
-      source_url: "data/decal-ids/enriched-decal-ids.json",
-      source_page: normalizeNumber(entry.page ?? null),
-      source_rank: index + 1,
-      raw_payload: entry as Record<string, unknown>,
-      last_seen_at: now
-    });
-  });
-
-  return { decalRows, sourceRows };
 }
 
 async function loadJsonFile(filePath: string): Promise<unknown> {
@@ -201,14 +125,6 @@ async function main() {
   const seen = new Set<number>();
   const allDecalRows: DecalUpsertRow[] = [];
   const allSourceRows: DecalSourceRow[] = [];
-
-  if (args.oldJson) {
-    const payload = (await loadJsonFile(OLD_JSON_PATH)) as OldDecalRow[];
-    const { decalRows, sourceRows } = oldJsonToRows(Array.isArray(payload) ? payload : [], seen);
-    allDecalRows.push(...decalRows);
-    allSourceRows.push(...sourceRows);
-    console.log(`Old JSON candidates: ${decalRows.length}`);
-  }
 
   for (const filePath of args.files) {
     const payload = await loadJsonFile(filePath);

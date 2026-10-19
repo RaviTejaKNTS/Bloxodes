@@ -40,7 +40,7 @@ Use this after `bloxodes-catalog-research` and parent approval. For one game's i
 
 - `title` is one keyword-first H1: a natural, stable phrase that names the collection. Don't pair exact synonyms like `codes` and `IDs` when they mean the same value. Use the clearest term once. Never lead the H1 with an item count, month, year or freshness claim.
 - Keep `seo_title` close to the H1. When a verified count or short synonym really helps search intent, put it after the main phrase in brackets, like `Roblox Music Codes [58K+ Audio/Song IDs]`. Skip the count if the source workflow doesn't maintain it.
-- `meta_description` says what the reader can find, compare, filter or copy. Include a verified count only when the same refresh workflow maintains it.
+- `meta_description` says what the reader can find, compare or copy. Include a verified count only when the same refresh workflow maintains it.
 - H2s describe the section fully on their own. Clear questions or tasks work well, like `What are Roblox Music Codes?` or `How to use Roblox Music Codes`. Avoid fragments like `Choosing a font`, `Overview`, `Details` and a generic `How it works`.
 - Use a topic-specific FAQ heading in the renderer, like `Roblox Font IDs FAQ`, instead of a bare `FAQ` when the route supports a custom title.
 - Don't add a visible `Browse all...` line, count line, eyebrow, badge or label just to create a heading level or repeat the H1. If repeated item names need headings and there's no useful parent heading, render item names as H2s. Use H3s only under a genuinely useful visible H2.
@@ -55,7 +55,7 @@ Use this after `bloxodes-catalog-research` and parent approval. For one game's i
 - `intro_md`: what the collection is and why players use it.
 - `description_md`: answers the main question in depth without repeating item cards.
 - `description_json`: short section notes only when they explain rendered groups.
-- `how_it_works_md`: fields, filters, IDs, values, limits or lookup behavior when needed.
+- `how_it_works_md`: what the IDs, values and limits mean in the game, when needed. Never explain the page's filters, search, sorting or copy buttons; players already know how to use them.
 - `faq_json`: useful follow-up questions not already answered. Every entry is `{ "q": "...", "a": "..." }`.
 - `wiki_md`: only when the catalog needs a short related-page blurb.
 

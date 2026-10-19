@@ -9,7 +9,7 @@ You're the parent for one wiki hub. One subagent researches the game, waits for 
 
 You own the judgment: approve the research, review the copy, and review GitHub verification and rendered screenshots.
 
-**In T3 Code** (you have the `delegate_task` tool and the owner runs the hub here), follow the "Wiki hub flow" in `.agents/skills/bloxodes-game-collection-workflow-runner/references/t3-model-routing.md` instead of the subagent handoff below. Luna researches and does the editorial review. Haiku 5.5 reviews the research and writes. The homelab automation keeps the flow below.
+**In T3 Code** (you have the `delegate_task` tool and the owner runs the hub here), follow the "Wiki hub flow" in `.agents/skills/bloxodes-game-collection-workflow-runner/references/t3-model-routing.md` instead of the subagent handoff below. Luna researches and does the editorial review. Haiku 5.5 reviews the research and writes. Outside T3 Code, follow the handoff below.
 
 ## Subagent handoff
 

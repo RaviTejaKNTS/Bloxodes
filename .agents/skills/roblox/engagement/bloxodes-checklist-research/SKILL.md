@@ -9,7 +9,7 @@ You're researching one approved checklist so the writer can build a board player
 
 ## Scope
 
-Follow `dev-docs/pipelines/content.md#standalone-checklist-scope`.
+Follow `bloxodes-docs/content/engagement.md#standalone-checklist-scope`.
 
 - Normally, each game gets one standalone, source-verified 100% completion checklist. State the supported edition or mode, and put sections inside one board.
 - Reuse the game's existing checklist.
