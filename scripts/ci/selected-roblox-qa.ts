@@ -15,7 +15,6 @@ import {bundleInput, collectionVisibleFacts, stable, MANAGED_TARGET} from './sel
 import {getFieldLabel} from '../../apps/web/src/lib/game-collections';
 import {pickWikiThumbnail} from '../../apps/web/src/lib/wiki-images';
 import {markdownToPlainText} from '../../apps/web/src/lib/markdown';
-import {resolveSeoTitle, WIKI_DESCRIPTION} from '../../apps/web/src/lib/seo';
 
 class QaFailure extends Error {}
 const hash = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
@@ -65,6 +64,23 @@ export function robloxCollectibleFacts(display: {cardFields?: string[] | null}, 
   return {cards: facts, list: facts};
 }
 
+// Mirror only the pure metadata values from apps/web/src/lib/seo.ts here.
+// Importing that module loads Next's global types into the scripts CI program.
+const QA_WIKI_DESCRIPTION = 'Roblox wiki hubs with live universe stats, codes, tools, catalog links, controls, tips, and gameplay notes.';
+function resolveQaSeoTitle(template?: string | null, now = new Date()): string | null {
+  if (!template) return null;
+  const trimmed = template.trim();
+  if (!trimmed) return null;
+  const month = new Intl.DateTimeFormat('en-US', {month: 'long'}).format(now);
+  const year = String(now.getFullYear());
+  return trimmed.replace(/%([a-z]+)%/gi, (match, token) => {
+    switch (token.toLowerCase()) {
+      case 'month': return month;
+      case 'year': return year;
+      default: return match;
+    }
+  });
+}
 type MetadataInput = {title: string; seo_title?: string | null; meta_description?: string | null; description_md?: string | null};
 export function robloxMetadata(final: MetadataInput, route: string, kind: 'hub' | 'database' | 'collectible', currentPage = 1, now = new Date()) {
   const normalizeDescription = (value?: string | null) => {
@@ -75,8 +91,8 @@ export function robloxMetadata(final: MetadataInput, route: string, kind: 'hub' 
     const slice = plain.slice(0, 177), lastSpace = slice.lastIndexOf(' ');
     return `${lastSpace > 130 ? slice.slice(0, lastSpace) : slice}…`;
   };
-  const title = resolveSeoTitle(final.seo_title, now) ?? final.title;
-  const description = kind === 'hub' ? normalizeDescription(final.meta_description) ?? normalizeDescription(final.description_md) ?? WIKI_DESCRIPTION : final.meta_description ?? WIKI_DESCRIPTION;
+  const title = resolveQaSeoTitle(final.seo_title, now) ?? final.title;
+  const description = kind === 'hub' ? normalizeDescription(final.meta_description) ?? normalizeDescription(final.description_md) ?? QA_WIKI_DESCRIPTION : final.meta_description ?? QA_WIKI_DESCRIPTION;
   const paginated = kind === 'database' && currentPage > 1;
   return {
     title: paginated ? `${title} - Page ${currentPage}` : title,
