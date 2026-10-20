@@ -20,12 +20,24 @@ on:
         required: false
         default: false
         type: boolean
+      franchise_artwork_bundle_hash:
+        description: 'Optional approved art-only bundle SHA-256; prepare cover and square hero without content publication'
+        required: false
+        default: ''
+        type: string
+      franchise_artwork_apply:
+        description: 'Host the prepared artwork in wiki R2 and verify public bytes (false only saves runner artifacts)'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
 
 jobs:
   scope:
+    # Artwork dispatch must not enter schema/content QA or any database job.
+    if: github.event_name != 'workflow_dispatch' || !(inputs.franchise_artwork_bundle_hash != '' || inputs.franchise_artwork_apply == true)
     runs-on: ubuntu-latest
     outputs:
       checks: ${{ steps.scope.outputs.checks }}
@@ -151,7 +163,7 @@ jobs:
   required:
     name: Required PR checks
     needs: [scope, managed-development, checks]
-    if: always()
+    if: always() && (github.event_name != 'workflow_dispatch' || !(inputs.franchise_artwork_bundle_hash != '' || inputs.franchise_artwork_apply == true))
     runs-on: ubuntu-latest
     steps:
       - env:
@@ -165,8 +177,64 @@ jobs:
             test "$MANAGED" = success
             test "$CHECKS" = success
           fi
+  franchise-hub-artwork:
+    if: github.event_name == 'workflow_dispatch' && (inputs.franchise_artwork_bundle_hash != '' || inputs.franchise_artwork_apply == true)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Configure this dedicated environment with only Wiki R2 secrets and an
+    # explicit approved-branch policy. Do not broaden the production environment.
+    environment: franchise-artwork
+    concurrency:
+      group: bloxodes-franchise-artwork
+      queue: max
+      cancel-in-progress: false
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      BLOXODES_FRANCHISE_ARTWORK: 'true'
+      ARTWORK_BUNDLE_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      ARTWORK_BUNDLE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      FRANCHISE_ARTWORK_BUNDLE_HASH: ${{ inputs.franchise_artwork_bundle_hash }}
+      FRANCHISE_ARTWORK_APPLY: ${{ inputs.franchise_artwork_apply && 'true' || 'false' }}
+      SELECTED_FRANCHISE_BUNDLE_HASH: ${{ inputs.selected_franchise_bundle_hash }}
+      SELECTED_ROBLOX_BUNDLE_HASH: ${{ inputs.selected_roblox_bundle_hash }}
+    steps:
+      - uses: actions/checkout@v6
+        with: {ref: '${{ github.sha }}', persist-credentials: false}
+      - name: Require explicit isolated artwork dispatch and managed bundle target
+        env:
+          SELECTED_FRANCHISE_STAGE: ${{ inputs.selected_franchise_stage && 'true' || 'false' }}
+        run: |
+          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$ARTWORK_BUNDLE_SUPABASE_URL" = https://bbtcaurrtyoukvjbxbbj.supabase.co
+          test "$GITHUB_SHA" = "$(git rev-parse HEAD)"
+          [[ "$FRANCHISE_ARTWORK_BUNDLE_HASH" =~ ^[a-f0-9]{64}$ ]]
+          test -z "$SELECTED_FRANCHISE_BUNDLE_HASH"
+          test -z "$SELECTED_ROBLOX_BUNDLE_HASH"
+          test "$SELECTED_FRANCHISE_STAGE" = false
+      - uses: actions/setup-node@v4
+        with: {node-version: '24', cache: npm}
+      - run: npm ci --include=dev --no-audit --no-fund
+      - run: npx tsc --project scripts/ci/tsconfig.json
+      - name: Artwork safety and pixel regression tests
+        run: node --test scripts/ci/__tests__/franchise-artwork.test.mjs
+      - name: Prepare approved artwork and optionally host immutable role assets
+        env:
+          # R2 credentials reach only this step, and only on explicit apply.
+          WIKI_R2_ENDPOINT: ${{ inputs.franchise_artwork_apply && secrets.WIKI_R2_ENDPOINT || '' }}
+          WIKI_R2_ACCESS_KEY_ID: ${{ inputs.franchise_artwork_apply && secrets.WIKI_R2_ACCESS_KEY_ID || '' }}
+          WIKI_R2_SECRET_ACCESS_KEY: ${{ inputs.franchise_artwork_apply && secrets.WIKI_R2_SECRET_ACCESS_KEY || '' }}
+          WIKI_R2_BUCKET: ${{ inputs.franchise_artwork_apply && secrets.WIKI_R2_BUCKET || '' }}
+        run: node --import tsx scripts/ci/prepare-franchise-artwork.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: franchise-artwork-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/test-reports/franchise-artwork/
+          retention-days: 3
+          if-no-files-found: ignore
+
   selected-franchise-development-qa:
-    if: github.event_name == 'workflow_dispatch' && inputs.selected_franchise_bundle_hash != ''
+    if: github.event_name == 'workflow_dispatch' && !(inputs.franchise_artwork_bundle_hash != '' || inputs.franchise_artwork_apply == true) && inputs.selected_franchise_bundle_hash != ''
     runs-on: ubuntu-latest
     timeout-minutes: 45
     concurrency:
@@ -245,7 +313,7 @@ jobs:
           if-no-files-found: ignore
 
   selected-roblox-development-qa:
-    if: github.event_name == 'workflow_dispatch' && inputs.selected_roblox_bundle_hash != ''
+    if: github.event_name == 'workflow_dispatch' && !(inputs.franchise_artwork_bundle_hash != '' || inputs.franchise_artwork_apply == true) && inputs.selected_roblox_bundle_hash != ''
     runs-on: ubuntu-latest
     timeout-minutes: 45
     concurrency:
