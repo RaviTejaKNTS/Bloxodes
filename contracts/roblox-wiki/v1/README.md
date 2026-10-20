@@ -42,7 +42,7 @@ game-bundle/
 
 Include a hub, collections, or both. Omitted collections remain registered. The service-only registry RPC merges registrations atomically and preserves concurrent additions. `game.sortOrder` is optional; new games append to the registry and existing games keep their order.
 
-A missing target `roblox_universes` row produces a dry-run note, `will import universe <id> on apply`. Apply imports that exact universe from Roblox through the stats enrichment API mapper and verifies its ID, root place, name and stats slug before writing pages. It preserves a row inserted concurrently by the stats pipeline or another publisher. Choose the editorial slug independently. A new slug cannot equal the stats slug or end in the universe ID. Existing editorial identities remain valid. The game name and aliases belong in `bundle.game`, never a TypeScript module.
+A missing target `roblox_universes` row produces a dry-run note, `will import universe <id> on apply`. Apply imports that exact universe from Roblox through the stats enrichment API mapper and verifies its ID, root place, name and stats slug before writing pages. It preserves a row inserted concurrently by the stats pipeline or another publisher. Choose the editorial slug independently. Use the game name in lowercase with hyphens. A new slug can match a plain stats slug, but it cannot end in the universe ID or another long trailing number (the shared `editorial-slugs.ts` rule). Existing editorial identities remain valid. The game name and aliases belong in `bundle.game`, never a TypeScript module.
 
 `runtime-manifest.json` keeps the existing workspace format. Paths are relative to its collection folder:
 
