@@ -281,12 +281,14 @@ export async function publishBundle(options: ContentOptions) {
     p_sort_order: bundle.game.sortOrder ?? null
   }).single();
   if (registered.error) throw registered.error;
-  equalFields(registered.data, {
+  const registryRow = registered.data as Record<string, unknown> | null;
+  if (!registryRow) throw new Error("Registry merge returned no row. Inspect roblox_wiki_registry and rerun.");
+  equalFields(registryRow, {
     game_slug: bundle.game.slug, game_name: bundle.game.name, universe_id: bundle.game.universeId,
     universe_names: bundle.game.universeNames,
     ...(bundle.game.sortOrder != null ? { sort_order: bundle.game.sortOrder } : {})
   }, "registry");
-  const storedRegistrations = registered.data.collections as typeof selectedRegistrations;
+  const storedRegistrations = (registryRow.collections ?? []) as typeof selectedRegistrations;
   for (const entry of selectedRegistrations) {
     const stored = storedRegistrations.find(row => row.slug === entry.slug);
     if (!stored) throw new Error(`Registry readback is missing ${entry.slug}.`);
