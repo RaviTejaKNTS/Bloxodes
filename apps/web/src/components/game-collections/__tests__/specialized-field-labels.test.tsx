@@ -5,6 +5,10 @@ import { getGrowGardenCollectionConfig, renderGrowGardenCollectionPage } from "@
 import { getTheForgeCollectionConfig, renderTheForgeCollectionPage } from "@/app/(site)/wiki/collections/games/the-forge";
 
 vi.mock("server-only", () => ({}));
+vi.mock("react", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react")>();
+  return { ...actual, cache: <T extends (...args: never[]) => unknown>(loader: T) => loader };
+});
 
 function renderedViewConfig(node: ReactNode): GameCollectionViewConfig | undefined {
   if (Array.isArray(node)) return node.map(renderedViewConfig).find(Boolean);

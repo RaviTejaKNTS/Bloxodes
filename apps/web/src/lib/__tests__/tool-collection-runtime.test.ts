@@ -9,6 +9,10 @@ const runtimeState = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
+vi.mock("react", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react")>();
+  return { ...actual, cache: <T extends (...args: never[]) => unknown>(loader: T) => loader };
+});
 vi.mock("@/lib/wiki-collection-runtime", () => ({
   getPublishedWikiCollectionRuntimeByCode: runtimeState.getByCode,
   shouldFallbackToLocalWikiCollectionData: vi.fn(() => false)

@@ -42,7 +42,7 @@ The code repo owns one versioned publish command and its contract, `contracts/ro
 | `npm run content:deployed-sha` | The live deployed SHA. |
 
 - **Production guard:** run from a clean checkout whose HEAD is the live deployed SHA (and on `origin/production`), with no pending production migrations. The command refuses otherwise.
-- **What an apply does:** imports the universe row if the target lacks it, uploads item images and the official hub cover to R2, writes the hub and an immutable revision per collection, merges the game into `roblox_wiki_registry`, reads everything back. Production also snapshots an overwritten hub to `tmp/publish-snapshots/`, revalidates and fetches each live URL.
+- **What an apply does:** imports the universe row if the target lacks it (the dry run previews it from the Roblox API and checks the editorial slug against its stats slug), uploads item images and the official hub cover to R2, writes the hub and an immutable revision per collection, merges the game into `roblox_wiki_registry`, reads everything back. Production also snapshots an overwritten hub to `tmp/publish-snapshots/`, revalidates and fetches each live URL.
 - **Not one transaction.** A late failure can leave some pages published. Rerun the same bundle; revision hashes make it safe.
 - The dry run is a scoped exception to "no checks locally". Builds, test suites and browser QA still run on GitHub.
 - The older path still works: `sync:game-wiki-runtime` and `sync:game-collection-runtime` behind the GitHub `roblox-wiki` and `roblox-collection` publishers, with selected Roblox QA ([release](../operations/release.md#managed-development-content-qa)).

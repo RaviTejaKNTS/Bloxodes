@@ -16,6 +16,11 @@ vi.mock("@/lib/collection-checklist-progress-client", () => ({
   dispatchCollectionChecklistProgress: vi.fn(), trackCollectionChecklistEvent: vi.fn()
 }));
 
+vi.stubGlobal("ResizeObserver", class {
+  observe() {}
+  disconnect() {}
+});
+
 const display = {
   groupLabel: "Rarity", sectionOrder: ["Rare"],
   tableFields: ["price", "availability"], cardFields: ["price", "availability"], detailFields: ["obtainment"],
