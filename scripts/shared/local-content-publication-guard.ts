@@ -2,6 +2,24 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
+
+export const PUBLICATION_RELEVANT_PATHS = [
+  "apps/web/",
+  "contracts/",
+  "scripts/content/",
+  "scripts/shared/",
+  "scripts/collections/",
+  "scripts/universes/",
+  "scripts/ops/",
+  "scripts/ci/",
+  "supabase/migrations/",
+  "supabase/migration-policy.json",
+  "env/config.json",
+  "tsconfig.json",
+  "package.json",
+  "package-lock.json"
+] as const;
+
 function git(...args: string[]) {
   try { return execFileSync("git", args, { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim(); }
   catch { throw new Error(`git ${args[0]} failed. Check repository access and the origin remote before retrying publication.`); }
@@ -9,16 +27,38 @@ function git(...args: string[]) {
 
 export function assertProductionAncestor(head: string, production: string, isAncestor: boolean) {
   if (!/^[a-f0-9]{40}$/.test(head) || !/^[a-f0-9]{40}$/.test(production) || !isAncestor) {
-    throw new Error(`HEAD must be an ancestor of origin/production after fetch. HEAD=${head}, origin/production=${production}.`);
+    throw new Error(`HEAD must be an ancestor of origin/production after fetch. HEAD=${head}, origin/production=${production}. Use a checkout on origin/production and pull before retrying publication.`);
   }
 }
 
-export function assertPublicationCheckout(head: string, production: string, deployed: string, dirty: string, isAncestor: boolean) {
-  if (dirty) throw new Error("Production publication requires a clean working tree. Commit or remove the changes before publishing.");
-  if (!/^[a-f0-9]{40}$/.test(head) || head !== deployed) {
-    throw new Error(`Production publication requires HEAD = healthy live deployed SHA. HEAD=${head}, deployed=${deployed}. Check out the SHA from content:deployed-sha.`);
+type PublicationCheckout = {
+  head: string;
+  production: string;
+  deployed: string;
+  trackedStatus: string;
+  headOnProduction: boolean;
+  deployedOnProduction: boolean;
+  changedFiles: readonly string[];
+  relationship: "equal" | "ahead" | "behind" | "diverged";
+};
+
+function assertPublicationHistory({ head, production, deployed, headOnProduction, deployedOnProduction }: Pick<PublicationCheckout, "head" | "production" | "deployed" | "headOnProduction" | "deployedOnProduction">) {
+  assertProductionAncestor(head, production, headOnProduction);
+  if (!/^[a-f0-9]{40}$/.test(deployed) || !deployedOnProduction) {
+    throw new Error(`The healthy deployed SHA must be an ancestor of origin/production after fetch. deployed=${deployed}, origin/production=${production}. Wait for a healthy deployment from origin/production before retrying publication.`);
   }
-  assertProductionAncestor(head, production, isAncestor);
+}
+
+export function assertPublicationCheckout(checkout: PublicationCheckout) {
+  const { head, deployed, trackedStatus, changedFiles, relationship } = checkout;
+  if (trackedStatus) throw new Error("Production publication requires no modified or staged tracked files. Commit or restore tracked changes before publishing. Untracked files are allowed.");
+  assertPublicationHistory(checkout);
+  const relevantFiles = changedFiles.filter(file => PUBLICATION_RELEVANT_PATHS.some(prefix => prefix.endsWith("/") ? file.startsWith(prefix) : file === prefix));
+  if (!relevantFiles.length) return;
+  const action = relationship === "ahead" ? "HEAD is ahead of the deployed SHA. Wait for the deploy before publishing."
+    : relationship === "behind" ? "HEAD is behind the deployed SHA. Pull origin/production before publishing."
+    : "HEAD and the deployed SHA have diverged. Pull origin/production and wait for the deploy before publishing.";
+  throw new Error(`Publish-relevant files differ between deployed=${deployed} and HEAD=${head}:\n${relevantFiles.join("\n")}\n${action}`);
 }
 
 export async function deployedContentSha(fetchImpl: typeof fetch = fetch) {
@@ -37,9 +77,21 @@ export async function assertLocalContentPublication() {
   const head = git("rev-parse", "HEAD");
   const remote = git("rev-parse", "origin/production");
   const deployed = await deployedContentSha();
-  let isAncestor = false;
-  try { git("merge-base", "--is-ancestor", head, remote); isAncestor = true; } catch { /* Fail closed below. */ }
-  assertPublicationCheckout(head, remote, deployed, git("status", "--porcelain", "--untracked-files=all"), isAncestor);
+  const isAncestor = (ancestor: string, descendant: string) => {
+    try { git("merge-base", "--is-ancestor", ancestor, descendant); return true; } catch { return false; }
+  };
+  const history = { head, production: remote, deployed, headOnProduction: isAncestor(head, remote), deployedOnProduction: isAncestor(deployed, remote) };
+  // Check ancestry before diffing so a missing deployed commit gets recovery guidance.
+  assertPublicationHistory(history);
+  const relationship = head === deployed ? "equal"
+    : isAncestor(deployed, head) ? "ahead"
+    : isAncestor(head, deployed) ? "behind" : "diverged";
+  // Disable rename detection so moving a relevant file elsewhere still blocks publication.
+  const changedFiles = git("diff", "--name-only", "--no-renames", "--no-ext-diff", "--no-textconv", "-z", deployed, head, "--").split("\0").filter(Boolean);
+  assertPublicationCheckout({
+    ...history,
+    trackedStatus: git("status", "--porcelain", "--untracked-files=no"), changedFiles, relationship
+  });
   // Read-only schema-release mode also checks historical ledger exceptions.
   // Studio credentials come from the production target. No SQL writes are allowed.
   try {

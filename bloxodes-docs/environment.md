@@ -55,7 +55,7 @@ Process variables always win over file values. Within files, the first file wins
 
 `content:publish`, `content:status` and `content:candidates` pick the `managed-dev` or `production-preview` profile from `--target` (default `managed-dev`) and fail if the loaded credentials don't match the target. Production adds the `vps` overlay for a read-only schema-ledger check. They use `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE` and the `WIKI_R2_*` names from `integrations/content.env`; production also needs `REVALIDATE_SECRET` and `VPS_SUPABASE_STUDIO_*`. No new names.
 
-The Content Factory has no env files. Its `bin/publisher` runs these commands from `/srv/data/projects/bloxodes-publisher`, whose `.envs` links to the homelab source above.
+The Content Factory has no env files. Its `bin/publisher` runs these commands from the device's main checkout (`/srv/data/projects/Bloxodes` or `~/projects/Bloxodes`), using that checkout's `.envs`.
 
 ## Rules
 

@@ -121,7 +121,8 @@ async function main() {
   const approvedSha = required("--approved-sha", value("--approved-sha"));
   if (!/^[0-9a-f]{40}$/.test(approvedSha)) throw new Error("--approved-sha must be a full 40-character Git SHA.");
   if (git("rev-parse", "HEAD") !== approvedSha) throw new Error("The current checkout does not match --approved-sha.");
-  if (git("status", "--porcelain")) throw new Error("The current checkout is dirty; refusing schema release.");
+  const status = checkLedger && !apply ? git("status", "--porcelain", "--untracked-files=no") : git("status", "--porcelain");
+  if (status) throw new Error("The current checkout is dirty; refusing schema release.");
   if (apply && value("--confirm") !== "APPLY production") {
     throw new Error('Production apply requires --confirm "APPLY production".');
   }
