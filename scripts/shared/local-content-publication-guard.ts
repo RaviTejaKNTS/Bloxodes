@@ -3,22 +3,25 @@ import path from "node:path";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 
+// Paths that ship in the production web image. Keep this in step with the
+// "Classify production change" step in dokploy-production-deploy.yml: only
+// changes that trigger a web deploy can be compared with the live SHA, or a
+// non-deploying merge would block publishing until the next deploy. Scripts,
+// contracts and migrations run from this checkout itself, and the schema
+// ledger check covers migrations.
 export const PUBLICATION_RELEVANT_PATHS = [
   "apps/web/",
-  "contracts/",
-  "scripts/content/",
-  "scripts/shared/",
-  "scripts/collections/",
-  "scripts/universes/",
-  "scripts/ops/",
-  "scripts/ci/",
-  "supabase/migrations/",
-  "supabase/migration-policy.json",
-  "env/config.json",
-  "tsconfig.json",
+  "data/",
+  "Dockerfile",
   "package.json",
-  "package-lock.json"
+  "package-lock.json",
+  ".github/workflows/dokploy-production-deploy.yml"
 ] as const;
+
+function isPublicationRelevant(file: string) {
+  if (file.startsWith("apps/web/") && file.endsWith("/AGENTS.md")) return false;
+  return PUBLICATION_RELEVANT_PATHS.some(prefix => prefix.endsWith("/") ? file.startsWith(prefix) : file === prefix);
+}
 
 function git(...args: string[]) {
   try { return execFileSync("git", args, { cwd: repoRoot, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }).trim(); }
@@ -53,7 +56,7 @@ export function assertPublicationCheckout(checkout: PublicationCheckout) {
   const { head, deployed, trackedStatus, changedFiles, relationship } = checkout;
   if (trackedStatus) throw new Error("Production publication requires no modified or staged tracked files. Commit or restore tracked changes before publishing. Untracked files are allowed.");
   assertPublicationHistory(checkout);
-  const relevantFiles = changedFiles.filter(file => PUBLICATION_RELEVANT_PATHS.some(prefix => prefix.endsWith("/") ? file.startsWith(prefix) : file === prefix));
+  const relevantFiles = changedFiles.filter(isPublicationRelevant);
   if (!relevantFiles.length) return;
   const action = relationship === "ahead" ? "HEAD is ahead of the deployed SHA. Wait for the deploy before publishing."
     : relationship === "behind" ? "HEAD is behind the deployed SHA. Pull origin/production before publishing."
