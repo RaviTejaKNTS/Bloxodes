@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { runtimeManifestSchema, type RobloxWikiBundle } from "../../contracts/roblox-wiki/v1/schema";
 import type { RegisteredGameCollectionGroup } from "../../apps/web/src/lib/game-collections/registry";
+import { isLikelyUniverseStatsSlug } from "./editorial-slugs";
 
 export async function bundlePath(root: string, input: string): Promise<string> {
   const realRoot = await fs.realpath(root);
@@ -11,10 +12,13 @@ export async function bundlePath(root: string, input: string): Promise<string> {
   return resolved;
 }
 
-export function assertEditorialSlug(slug: string, universeId: number, statsSlug: string | null, existingSlug?: string | null) {
+// Same rule as every other editorial slug (scripts/shared/editorial-slugs.ts): reject slugs that
+// carry the universe ID or another long trailing number. A plain game-name slug is fine even when
+// the stats slug happens to be the same words; most hubs already work that way.
+export function assertEditorialSlug(slug: string, universeId: number, _statsSlug: string | null, existingSlug?: string | null) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) throw new Error(`Invalid editorial slug ${slug}. Use lowercase words separated by hyphens.`);
-  // Existing editorial identities remain valid even if a stats slug happens to match.
-  if (slug !== existingSlug && (slug === statsSlug || slug.endsWith(`-${universeId}`))) {
+  // Existing editorial identities remain valid.
+  if (slug !== existingSlug && isLikelyUniverseStatsSlug(slug, universeId)) {
     throw new Error(`Editorial slug ${slug} copies the stats identity. Choose the game's readable editorial slug without its universe ID; never copy roblox_universes.slug.`);
   }
 }

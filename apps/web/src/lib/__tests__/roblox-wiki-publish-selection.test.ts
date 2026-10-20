@@ -183,19 +183,15 @@ describe("publisher page selection", () => {
     expect(state.events).toEqual([]);
   });
 
-  it.each([false, true])("rejects a new editorial slug equal to the previewed stats slug, apply=%s", async apply => {
+  it("accepts a new editorial slug equal to a clean previewed stats slug", async () => {
     state.groups.mockResolvedValue([]);
     state.previewUniverse.mockResolvedValue({ universe_id: 123, root_place_id: 456, name: "Example", slug: "example" });
-    const logged = vi.spyOn(console, "error").mockImplementation(() => {});
-    await expect(publishBundle({ command: "publish", target: "managed-dev", apply, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow("preflight check(s) failed");
-    expect(logged).toHaveBeenCalledWith(expect.stringContaining("stats identity"));
+    await publishBundle({ command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: root, only: ["pets"] });
     expect(state.previewUniverse).toHaveBeenCalledWith(123);
-    expect(state.universe).toHaveBeenCalledTimes(1);
     expect(state.events).toEqual([]);
   });
 
   it.each([
-    { universe_id: 123, root_place_id: 456, name: "Example", slug: "example" },
     { universe_id: 999, root_place_id: 456, name: "Example", slug: "example-stats" },
     { universe_id: 123, root_place_id: 999, name: "Example", slug: "example-stats" },
     { universe_id: 123, root_place_id: 456, name: "Example", slug: "" }

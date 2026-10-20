@@ -75,7 +75,8 @@ test("deployed-sha prints only the SHA without loading any target credentials", 
 test("editorial slugs reject new stats identities and preserve existing routes", () => {
   assert.doesNotThrow(() => assertEditorialSlug("example-game", 123, "example-game-123"));
   assert.throws(() => assertEditorialSlug("example-game-123", 123, "example-game-123"), /never copy roblox_universes.slug/);
-  assert.throws(() => assertEditorialSlug("example", 123, "example"), /stats identity/);
+  assert.doesNotThrow(() => assertEditorialSlug("example", 123, "example"));
+  assert.throws(() => assertEditorialSlug("example-9876543", 123, "example"), /stats identity/);
   assert.throws(() => assertEditorialSlug("different-123", 123, "example-game-123"));
   assert.doesNotThrow(() => assertEditorialSlug("example", 123, "example", "example"));
 });
