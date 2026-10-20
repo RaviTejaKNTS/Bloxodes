@@ -24,7 +24,7 @@ Manual runs use the same skills.
 3. **Data:** build the full, source-backed dataset with useful player fields. Approve rows and sections before images.
 4. **Images:** collect and wire images, then review them.
 5. **Write:** write the hub or collection `final.json` with the writing skill and `bloxodes-voice`.
-6. **QA and publish:** GitHub stages the exact content in managed development, checks it on desktop and mobile, then publishes with the `roblox-wiki` and `roblox-collection` publishers. See [release](../operations/release.md).
+6. **QA and publish:** GitHub stages the exact content in managed development, checks it on desktop and mobile, then publishes with the `roblox-wiki` and `roblox-collection` publishers. See [release](../operations/release.md). To check a hub and its collections in development before publishing, use selected Roblox QA ([release](../operations/release.md#managed-development-content-qa)); don't build a new QA job.
 
 Commands behind the publishers: `sync:game-wiki-runtime` (hub) and `sync:game-collection-runtime` (immutable collection revision). Don't run checks or validators locally.
 
