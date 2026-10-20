@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { auditDataset, type Issue } from "../../collections/audit-game-collection-datasets-v2";
 import { isAchievementReference, usefulCollectionItemFields } from "../collection-data-quality";
 
 const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));
@@ -100,6 +101,43 @@ test("system and identity fields never inflate the useful fact count while numer
   assert.deepEqual(usefulCollectionItemFields(["name", "damage", "range", "price", "sortOrder"]), ["damage", "range", "price"]);
 });
 
+test("audit accepts canonical powerSource and existing source as useful item and display fields", () => {
+  for (const field of ["powerSource", "source"]) {
+    const document = dataset(["weight", "price", field], [
+      {name: "Powered gear", weight: 2, price: 50, [field]: ["Battery", "High Capacity Battery"]},
+      {name: "Unpowered gear", weight: 1, price: 25, [field]: null}
+    ]);
+    const issues: Issue[] = [];
+    auditDataset("example-game-roster", "fixture.json", document, issues);
+    assert.deepEqual(issues, [], field);
+    assert.deepEqual(usefulCollectionItemFields(document.meta.itemFields), ["weight", "price", field]);
+  }
+
+  const thin = dataset(["weight", "powerSource"], [{name: "Powered gear", weight: 2, powerSource: ["Battery"]}]);
+  const issues: Issue[] = [];
+  auditDataset("example-game-roster", "fixture.json", thin, issues);
+  assert.equal(issues.length, 1);
+  assert.match(issues[0]!.message, /only 2 useful item field\(s\).*weight, powerSource/);
+});
+
+test("powerSource allowance keeps metadata, case variants and suffix near-misses forbidden in items and display", () => {
+  for (const field of [
+    "powerSourceUrl", "powerSourceImage", "powerSourcePage", "powerSourceEvidence",
+    "imageSource", "sourcePage", "evidenceSource", "rawPowerSource", "verificationPowerSource",
+    "powersource", "powerSOURCE", "PowerSource", "power_source", "powerSourceSource", "batterySource",
+    "source_page"
+  ]) {
+    const document = dataset(["weight", "price", field], [{name: "Gear", weight: 2, price: 50, [field]: "Internal value"}]);
+    const issues: Issue[] = [];
+    auditDataset("example-game-roster", "fixture.json", document, issues);
+    assert.ok(issues.some(issue => issue.message === `Item 1 has forbidden public item key "${field}".`), field);
+    assert.ok(issues.some(issue => issue.message === `Forbidden field "${field}" is listed for display.`), field);
+    if (field === "source_page") {
+      assert.ok(issues.some(issue => issue.message === 'Forbidden public label "Source Page" can render from display fields.'), field);
+    }
+  }
+});
+
 // Exercise both actual CLIs so the shared allowance cannot accidentally fix
 // only one gate. These file-only fixtures never import or stage content.
 test("audit and checker agree on achievement, thin, numbered-location and rich datasets", () => {
@@ -129,6 +167,10 @@ test("audit and checker agree on achievement, thin, numbered-location and rich d
     {label: "revealed hidden condition", document: revealedHidden, passes: false},
     {label: "unrelated two-field roster with numeric sortOrder", document: dataset(["damage", "price"], [{name: "Weapon", damage: 12, price: 50}]), passes: false},
     {label: "normal rich numeric roster", document: dataset(["damage", "range", "price"], [{name: "Weapon", damage: 12, range: 30, price: 50}]), passes: true},
+    {label: "powered gear gameplay field", document: dataset(["weight", "price", "powerSource"], [
+      {name: "Powered gear", weight: 2, price: 50, powerSource: ["Battery", "High Capacity Battery"]},
+      {name: "Unpowered gear", weight: 1, price: 25, powerSource: null}
+    ]), passes: true},
     {label: "image-backed numbered locations", document: locationGuide, passes: true},
     {label: "numbered locations missing one image", document: unpicturedGuide, passes: false},
     {label: "numbered locations below ten rows", document: shortGuide, passes: false},

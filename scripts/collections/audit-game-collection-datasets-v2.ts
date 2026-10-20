@@ -208,7 +208,7 @@ function isForbiddenItemKey(key: string) {
   ) {
     return true;
   }
-  if (lower.endsWith("source") && lower !== "source") return true;
+  if (lower.endsWith("source") && lower !== "source" && key !== "powerSource") return true;
   if (lower.includes("imageurl") || lower.includes("imagefile") || lower.includes("imagepath")) return true;
   if (lower.includes("imagecandidate")) return true;
   if (["wikilink", "wikipage", "article", "datastatus", "normalizationnotes"].includes(lower)) return true;
