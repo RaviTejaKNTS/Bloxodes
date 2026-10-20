@@ -12,7 +12,7 @@ Both run in a fresh worktree from `origin/production`, with Codex `gpt-6.1-sol` 
 
 | Schedule | Time | Does |
 | --- | --- | --- |
-| Bloxodes nightly other games | 02:00 IST | Takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md), builds its planned pages, publishes them. |
+| Bloxodes nightly other games | 02:00 IST | Takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md), builds every planned page and publishes them. One game at a time: it does nothing while a row is `In progress`. |
 | Bloxodes nightly Roblox wiki | 02:30 IST | Claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md), builds its collections and hub, publishes them, including the code PR that registers the collections. |
 
 The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skills to use and the publishing go-ahead.

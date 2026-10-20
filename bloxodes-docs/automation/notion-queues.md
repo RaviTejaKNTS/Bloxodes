@@ -34,7 +34,7 @@ This queue is a claim log, not a to-do list. It stops two runs from building the
 
 New non-Roblox games only. The owner updates games we already cover (like ARC Raiders) by hand.
 
-Each row's page holds the approved plan: pages, URLs, sources and per-page notes. Runs follow it as `bloxodes-franchise-plan` describes, without re-planning.
+One row per game. Its page holds the whole approved plan: pages, URLs, sources and per-page notes. Don't split a game into several rows. A run follows the plan as `bloxodes-franchise-plan` describes, without re-planning, and keeps going until every page is built or skipped by its gate, even if that takes days. Skipped pages and the reasons go in the Run report.
 
 | Status | Set by | Meaning |
 | --- | --- | --- |
