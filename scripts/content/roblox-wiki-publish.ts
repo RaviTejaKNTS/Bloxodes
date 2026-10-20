@@ -323,7 +323,7 @@ export async function contentStatus(options: ContentOptions) {
   const registry = (await readGameCollectionGroups(db)).find(group => group.gameSlug === options.game);
   const hub = await db.from("wiki_pages").select("id,slug,is_published").eq("slug", options.game!).maybeSingle();
   if (hub.error) throw hub.error;
-  const pages = [];
+  const pages: Array<{ code: string; collection_slug: string; is_published: boolean | null; item_count: number | null; published_dataset_id: string | null }> = [];
   for (let offset = 0; ; offset += 1000) {
     const result = await db.from("wiki_collection_pages").select("code,collection_slug,is_published,item_count,published_dataset_id").eq("wiki_slug", options.game!).order("collection_slug").range(offset, offset + 999);
     if (result.error) throw result.error;
