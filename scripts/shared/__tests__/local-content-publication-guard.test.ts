@@ -40,6 +40,12 @@ test("every publish-relevant directory and root package file blocks a SHA differ
   assert.doesNotThrow(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: ["apps/web-other/example.ts", "data-old/x.json", "package.json.bak", "nested/package.json", "apps/web/src/app/AGENTS.md"] }));
 });
 
+test("every path the deploy classifier ships blocks a SHA difference", () => {
+  for (const file of ["apps/web/src/app/page.tsx", "data/game/quiz.json", "Dockerfile", "package.json", "package-lock.json", ".github/workflows/dokploy-production-deploy.yml"]) {
+    assert.throws(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: [file] }), error => error instanceof Error && error.message.includes(file));
+  }
+});
+
 test("code that runs from the checkout itself doesn't block, because merges that only change it don't deploy", () => {
   const localOnly = ["scripts/content/roblox-wiki-publish.ts", "scripts/shared/local-content-publication-guard.ts", "scripts/ops/release-production-schema.ts", "scripts/ci/migration-transaction.mjs", "contracts/roblox-wiki/v1/schema.ts", "supabase/migrations/20261020133300_x.sql", "tsconfig.json", "env/config.json"];
   for (const relationship of ["ahead", "behind"] as const) {

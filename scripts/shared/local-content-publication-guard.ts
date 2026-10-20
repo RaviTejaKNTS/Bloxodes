@@ -14,7 +14,8 @@ export const PUBLICATION_RELEVANT_PATHS = [
   "data/",
   "Dockerfile",
   "package.json",
-  "package-lock.json"
+  "package-lock.json",
+  ".github/workflows/dokploy-production-deploy.yml"
 ] as const;
 
 function isPublicationRelevant(file: string) {
