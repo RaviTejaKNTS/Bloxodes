@@ -71,3 +71,24 @@ export function resolveCollectionOrders(
 export function assertCollectionFinalOrder(finalOrder: number | undefined, resolvedOrder: number) {
   if (finalOrder != null && finalOrder !== resolvedOrder) throw new Error(`final.json wiki_sort_order must equal the resolved collection sort order, ${resolvedOrder}. Omit it to use the assigned order.`);
 }
+
+export function assertCollectionMissingImages(
+  items: Array<{ item_slug: string; image_key?: string | null }>,
+  bundleDecisions: Array<{ slug: string; reason: string }> = [],
+  manifestDecisions: Array<{ slug: string; reason: string }> = []
+) {
+  const accepted = new Map<string, string>();
+  for (const [source, decisions] of [["bundle entry", bundleDecisions], ["runtime manifest", manifestDecisions]] as const) {
+    const seen = new Set<string>();
+    for (const { slug, reason } of decisions) {
+      if (seen.has(slug)) throw new Error(`Remove duplicate missingImages decisions for ${slug} in the ${source}.`);
+      seen.add(slug);
+      if (accepted.has(slug) && accepted.get(slug) !== reason) throw new Error(`Conflicting missingImages reasons for ${slug} in the bundle entry and runtime manifest. Use the same reason or keep the decision in one place.`);
+      accepted.set(slug, reason);
+    }
+  }
+  for (const item of items) {
+    if (!item.image_key && !accepted.delete(item.item_slug)) throw new Error(`${item.item_slug} has no image. Add a verified image or record {slug, reason} in this collection's runtime-manifest.json missingImages array or bundle entry.`);
+  }
+  if (accepted.size) throw new Error(`Remove stale missingImages decisions: ${[...accepted.keys()].join(", ")}.`);
+}

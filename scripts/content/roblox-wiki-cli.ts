@@ -67,7 +67,9 @@ npm run content:publish -- /abs/game-bundle --only hub --only pets --target prod
 npm run content:status -- --game <editorial-slug> [--target managed-dev|production]
 npm run content:candidates -- [--target managed-dev|production]
 npm run --silent content:deployed-sha
-Default target: managed-dev. Publication defaults to a read-only dry run.`);
+Default target: managed-dev. Publication defaults to a read-only dry run.
+Record missingImages [{slug, reason}] in each collection's runtime-manifest.json or bundle entry.
+Both arrays merge; conflicting reasons fail. --only uses the selected collection's decisions.`);
     return;
   }
   const options = parseContentOptions(process.argv.slice(2));

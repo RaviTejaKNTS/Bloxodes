@@ -34,14 +34,13 @@ game-bundle/
   "hub": { "finalJson": "wiki/final.json", "coverImage": "wiki/cover.png" },
   "collections": [
     {
-      "manifest": "collections/pets/runtime-manifest.json",
-      "missingImages": [{ "slug": "unpictured-pet", "reason": "No exact item image exists in the reviewed sources." }]
+      "manifest": "collections/pets/runtime-manifest.json"
     }
   ]
 }
 ```
 
-Include a hub, collections, or both. Omit `missingImages` when every item has an image. Each missing item needs one decision; stale decisions fail. Omitted collections remain registered. The service-only registry RPC merges registrations atomically and preserves concurrent additions. `game.sortOrder` is optional; new games append to the registry and existing games keep their order.
+Include a hub, collections, or both. Omitted collections remain registered. The service-only registry RPC merges registrations atomically and preserves concurrent additions. `game.sortOrder` is optional; new games append to the registry and existing games keep their order.
 
 A missing target `roblox_universes` row produces a dry-run note, `will import universe <id> on apply`. Apply imports that exact universe from Roblox through the stats enrichment API mapper and verifies its ID, root place, name and stats slug before writing pages. It preserves a row inserted concurrently by the stats pipeline or another publisher. Choose the editorial slug independently. A new slug cannot equal the stats slug or end in the universe ID. Existing editorial identities remain valid. The game name and aliases belong in `bundle.game`, never a TypeScript module.
 
@@ -55,9 +54,12 @@ A missing target `roblox_universes` row produces a dry-run note, `will import un
   "dataset": "dataset.json",
   "finalJson": "final.json",
   "mediaRoot": "media",
-  "sourceUrls": ["https://example.com/game/pets"]
+  "sourceUrls": ["https://example.com/game/pets"],
+  "missingImages": [{ "slug": "unpictured-pet", "reason": "No exact item image exists in the reviewed sources." }]
 }
 ```
+
+Keep each collection's `missingImages` decisions in its own manifest so parallel builders can work without editing `bundle.json`. The bundle collection entry still accepts the same optional array. Each decision requires an item slug and a non-empty reason. Omit the array when every item has an image. The publisher merges both arrays for that collection. A slug listed in both must have the same reason after trimming whitespace; conflicting reasons fail. Duplicate slugs within either array fail. Every imageless item needs one merged decision. Decisions for absent items or items that now have an image are stale and fail. `--only <collection-slug>` uses that collection's manifest and bundle-entry decisions; decisions in unselected manifests are not validated.
 
 Use `database` or `collectible` for `pageType`. Changing an existing renderer requires a separate reviewed migration. Every final's identity must match the manifest and bundle. Finals are the existing hub/collection payloads. Collection copy supports `{count}` tokens. Titles use `All {count} <Collection> in <Game>`; a literal count must match the dataset. `display_name` must match the manifest label. `collection.sortOrder` is optional. Omission keeps an existing registration's order. New collections append after the game's current last order, in the bundle's `collections` array order, with spacing of 10. An empty game starts at its game sort order plus 10. New games use the next registry game order, with spacing of 1000. Explicit orders remain supported. With `--only`, only the selected collections receive orders or registry changes. `wiki_sort_order` in a final is optional; when supplied, it must match the resolved order, including an automatically assigned order. Publication requires `is_published: true` or omission. Leave hub `cover_image` null and collection `how_it_works_md` empty. A collection `thumb_url` must be null or an exact planned R2 item URL; null selects the first item image.
 

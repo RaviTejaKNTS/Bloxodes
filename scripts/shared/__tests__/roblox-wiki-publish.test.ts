@@ -6,8 +6,8 @@ import { createHash, randomUUID } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { parseContentOptions } from "../../content/roblox-wiki-cli";
 import { assertPublicationCheckout, assertProductionAncestor, deployedContentSha } from "../local-content-publication-guard";
-import { assertEditorialSlug, bundlePath, resolveCollectionOrders, selectBundlePages, assertCollectionFinalOrder } from "../roblox-wiki-bundle";
-import { bundleSchema, runtimeManifestSchema, hubFinalSchema } from "../../../contracts/roblox-wiki/v1/schema";
+import { assertEditorialSlug, bundlePath, resolveCollectionOrders, selectBundlePages, assertCollectionFinalOrder, assertCollectionMissingImages } from "../roblox-wiki-bundle";
+import { bundleSchema, runtimeManifestSchema, runtimeManifestJsonSchema, hubFinalSchema } from "../../../contracts/roblox-wiki/v1/schema";
 
 const sha = "a".repeat(40);
 
@@ -76,6 +76,8 @@ test("deployed-sha prints only the SHA without loading any target credentials", 
   assert.equal(output, `${sha}\n`);
   const help = execFileSync(process.execPath, ["--import", "tsx", "scripts/content/roblox-wiki-cli.ts", "publish", "--help"], { encoding: "utf8" });
   assert.match(help, /npm run content:publish -- \/abs\/game-bundle --only pets/);
+  assert.match(help, /missingImages .*runtime-manifest\.json or bundle entry/);
+  assert.match(help, /conflicting reasons fail/);
 });
 
 test("editorial slugs reject new stats identities and preserve existing routes", () => {
@@ -110,6 +112,45 @@ const game = { slug: "example", name: "Example", universeId: 123, universeNames:
 function manifest(slug: string, sortOrder?: number) {
   return { schemaVersion: 1, game: { slug: game.slug, name: game.name, universeId: game.universeId }, collection: { slug, label: slug, sortOrder, pageType: "database" }, dataset: "dataset.json", finalJson: "final.json", mediaRoot: "media", sourceUrls: ["https://example.com/items"] };
 }
+
+test("manifest and bundle image decisions share the v1 shape and reason validation", () => {
+  const decisions = [{ slug: "pet", reason: "  No exact image available.  " }];
+  const parsed = runtimeManifestSchema.parse({ ...manifest("pets"), missingImages: decisions });
+  assert.deepEqual(parsed.missingImages, [{ slug: "pet", reason: "No exact image available." }]);
+  assert.ok(runtimeManifestJsonSchema.properties?.missingImages);
+  for (const missingImages of [[], decisions, [{ slug: "pet", reason: "No exact image available." }]]) {
+    assert.equal(runtimeManifestSchema.safeParse({ ...manifest("pets"), missingImages }).success, true);
+    assert.equal(bundleSchema.safeParse({ contract: "roblox-wiki@1", game, collections: [{ manifest: "pets.json", missingImages }] }).success, true);
+  }
+  for (const missingImages of [null, {}, [{ slug: "Pet", reason: "No image." }], [{ slug: "pet", reason: " " }], [{ slug: "pet" }], [{ slug: "pet", reason: "No image.", extra: true }]]) {
+    assert.equal(runtimeManifestSchema.safeParse({ ...manifest("pets"), missingImages }).success, false);
+    assert.equal(bundleSchema.safeParse({ contract: "roblox-wiki@1", game, collections: [{ manifest: "pets.json", missingImages }] }).success, false);
+  }
+});
+
+test("image decisions support either location, merge disjoint slugs and accept matching reasons", () => {
+  const items = [{ item_slug: "pet", image_key: null }, { item_slug: "boat", image_key: null }];
+  const pet = { slug: "pet", reason: "No exact pet image." };
+  const boat = { slug: "boat", reason: "No exact boat image." };
+  assert.doesNotThrow(() => assertCollectionMissingImages(items, [pet, boat]));
+  assert.doesNotThrow(() => assertCollectionMissingImages(items, undefined, [pet, boat]));
+  assert.doesNotThrow(() => assertCollectionMissingImages(items, [pet], [boat]));
+  assert.doesNotThrow(() => assertCollectionMissingImages(items, [pet], [pet, boat]));
+  assert.throws(() => assertCollectionMissingImages(items, [pet], [{ ...pet, reason: "Different decision." }, boat]), /Conflicting missingImages reasons for pet/);
+});
+
+test("image decisions reject duplicates within each array and missing or stale decisions", () => {
+  const pet = { slug: "pet", reason: "No exact pet image." };
+  const items = [{ item_slug: "pet", image_key: null }];
+  for (const duplicate of [pet, { ...pet, reason: "Different reason." }]) {
+    assert.throws(() => assertCollectionMissingImages(items, [pet, duplicate]), /duplicate missingImages.*bundle entry/);
+    assert.throws(() => assertCollectionMissingImages(items, undefined, [pet, duplicate]), /duplicate missingImages.*runtime manifest/);
+  }
+  assert.throws(() => assertCollectionMissingImages(items), /pet has no image.*runtime-manifest\.json/);
+  assert.throws(() => assertCollectionMissingImages([], undefined, [pet]), /stale missingImages decisions: pet/);
+  assert.throws(() => assertCollectionMissingImages([{ item_slug: "pet", image_key: "pet.png" }], [pet], [pet]), /stale missingImages decisions: pet/);
+  assert.doesNotThrow(() => assertCollectionMissingImages([{ item_slug: "pet", image_key: "pet.png" }]));
+});
 
 test("page selection ignores unfinished pages and preserves bundle collection order", async () => {
   const bundle = bundleSchema.parse({ contract: "roblox-wiki@1", game, hub: { finalJson: "unfinished-hub.json" }, collections: [{ manifest: "pets" }, { manifest: "missing" }, { manifest: "boats" }, { manifest: "partial" }] });

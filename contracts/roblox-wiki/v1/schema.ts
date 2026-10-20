@@ -3,6 +3,7 @@ import { z } from "zod";
 const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 const text = z.string().trim().min(1);
 const file = text;
+const missingImages = z.array(z.object({ slug, reason: text }).strict());
 const game = z.object({
   slug,
   name: text,
@@ -17,7 +18,7 @@ export const bundleSchema = z.object({
   hub: z.object({ finalJson: file, coverImage: file.optional() }).strict().optional(),
   collections: z.array(z.object({
     manifest: file,
-    missingImages: z.array(z.object({ slug, reason: text }).strict()).optional()
+    missingImages: missingImages.optional()
   }).strict()).optional()
 }).strict();
 
@@ -33,7 +34,8 @@ export const runtimeManifestSchema = z.object({
   dataset: file,
   finalJson: file,
   mediaRoot: file,
-  sourceUrls: z.array(z.string().url().startsWith("https://")).min(1)
+  sourceUrls: z.array(z.string().url().startsWith("https://")).min(1),
+  missingImages: missingImages.optional()
 }).strict();
 
 export const hubFinalSchema = z.object({

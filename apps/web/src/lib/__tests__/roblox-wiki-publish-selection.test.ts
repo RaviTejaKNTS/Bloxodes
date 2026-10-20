@@ -80,14 +80,15 @@ beforeEach(async () => {
   await fs.writeFile(path.join(root, "bundle.json"), JSON.stringify({
     contract: "roblox-wiki@1", game: { slug: "example", name: "Example", universeId: 123, universeNames: ["Example"] },
     hub: { finalJson: "unfinished-hub.json" }, collections: [
-      { manifest: "pets/manifest.json", missingImages: [{ slug: "pet", reason: "No exact image available." }] },
+      { manifest: "pets/manifest.json" },
       { manifest: "unfinished-boats.json" }, { manifest: "missing-manifest.json" }
     ]
   }));
-  await fs.writeFile(path.join(root, "unfinished-boats.json"), JSON.stringify({ collection: { slug: "boats" } }));
+  await fs.writeFile(path.join(root, "unfinished-boats.json"), JSON.stringify({ collection: { slug: "boats" }, missingImages: [{ slug: "boat", reason: "" }] }));
   await fs.writeFile(path.join(folder, "manifest.json"), JSON.stringify({
     schemaVersion: 1, game: { slug: "example", name: "Example", universeId: 123 }, collection: { slug: "pets", label: "Pets", pageType: "database" },
-    dataset: "dataset.json", finalJson: "final.json", mediaRoot: "media", sourceUrls: ["https://example.com/pets"]
+    dataset: "dataset.json", finalJson: "final.json", mediaRoot: "media", sourceUrls: ["https://example.com/pets"],
+    missingImages: [{ slug: "pet", reason: "No exact image available." }]
   }));
   await fs.writeFile(path.join(folder, "dataset.json"), JSON.stringify({ meta: { schemaVersion: 2 }, items: [] }));
   await fs.writeFile(path.join(folder, "final.json"), JSON.stringify({
@@ -97,7 +98,7 @@ beforeEach(async () => {
 afterEach(async () => { vi.restoreAllMocks(); await fs.rm(root, { recursive: true, force: true }); });
 
 describe("publisher page selection", () => {
-  it("dry-runs one ready page while the hub and other collections remain unfinished", async () => {
+  it("dry-runs with selected manifest image decisions while other pages and decisions remain unfinished", async () => {
     await publishBundle({ command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: root, only: ["pets"] });
     expect(state.universe).toHaveBeenCalledTimes(1);
     expect(state.universe.mock.calls[0][2]).toBe(false);
@@ -113,6 +114,41 @@ describe("publisher page selection", () => {
     expect(state.registry).toHaveBeenCalledWith("merge_roblox_wiki_registry", expect.objectContaining({
       p_collections: [{ slug: "pets", label: "Pets", sortOrder: 1020, pageType: "database" }]
     }));
+  });
+
+  it.each(["bundle only", "matching reasons"])("supports %s image decisions for --only", async mode => {
+    const bundlePath = path.join(root, "bundle.json");
+    const bundle = JSON.parse(await fs.readFile(bundlePath, "utf8"));
+    bundle.collections[0].missingImages = [{ slug: "pet", reason: "  No exact image available.  " }];
+    await fs.writeFile(bundlePath, JSON.stringify(bundle));
+    if (mode === "bundle only") {
+      const manifestPath = path.join(root, "pets/manifest.json");
+      const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
+      delete manifest.missingImages;
+      await fs.writeFile(manifestPath, JSON.stringify(manifest));
+    }
+    await publishBundle({ command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: root, only: ["pets"] });
+    expect(state.events).toEqual([]);
+  });
+
+  it.each([
+    { decisions: [{ slug: "pet", reason: "A conflicting reason." }], bundleDecision: true, error: /Conflicting missingImages reasons for pet/ },
+    { decisions: [{ slug: "pet", reason: "No exact image available." }, { slug: "absent", reason: "No image." }], bundleDecision: false, error: /stale missingImages decisions: absent/ },
+    { decisions: [], bundleDecision: false, error: /pet has no image/ }
+  ])("rejects invalid selected decisions before apply: $error", async ({ decisions, bundleDecision, error }) => {
+    const file = path.join(root, bundleDecision ? "bundle.json" : "pets/manifest.json");
+    const document = JSON.parse(await fs.readFile(file, "utf8"));
+    if (bundleDecision) document.collections[0].missingImages = decisions;
+    else document.missingImages = decisions;
+    await fs.writeFile(file, JSON.stringify(document));
+    const loggedError = vi.spyOn(console, "error").mockImplementation(() => {});
+    await expect(publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow("preflight check(s) failed");
+    expect(loggedError).toHaveBeenCalledWith(expect.stringMatching(error));
+    expect(state.events).toEqual([]);
+    expect(state.apply).not.toHaveBeenCalled();
+    expect(state.registry).not.toHaveBeenCalled();
+    expect(state.universe).toHaveBeenCalledTimes(1);
+    expect(state.universe.mock.calls[0][2]).toBe(false);
   });
 
   it("rejects unknown pages before any target reads or writes", async () => {

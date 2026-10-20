@@ -20,7 +20,7 @@ import { auditDataset, type Issue } from "../collections/audit-game-collection-d
 import { targetSources, planCollection, pageCopyFromFinal, uploadPlanMedia, verifyPlanMedia, applyPlan, type CollectionPlan } from "../collections/sync-game-collection-runtime";
 import { publicCopyFindings } from "./check-public-copy";
 import { assertRobloxCollectionCopy } from "./roblox-collection-copy";
-import { assertEditorialSlug, bundlePath, selectBundlePages, resolveCollectionOrders, assertCollectionFinalOrder } from "../shared/roblox-wiki-bundle";
+import { assertEditorialSlug, bundlePath, selectBundlePages, resolveCollectionOrders, assertCollectionFinalOrder, assertCollectionMissingImages } from "../shared/roblox-wiki-bundle";
 import { ensureContentUniverse } from "../shared/roblox-wiki-universe";
 import type { ContentOptions } from "./roblox-wiki-cli";
 
@@ -220,13 +220,10 @@ export async function publishBundle(options: ContentOptions) {
         throw new Error(`Use title: All {count} ${final.display_name} in ${bundle.game.name}. The title count must match all ${plan.items.length} rows.`);
       }
       if (Number(plan.validationJson.duplicateSlugCount) || Number(plan.validationJson.repairedSlugCount)) throw new Error("Fix duplicate or invalid system.slug values in dataset.json. The versioned publisher never repairs item identities.");
-      const accepted = new Map((entry.missingImages ?? []).map(row => [row.slug, row.reason]));
-      if (accepted.size !== (entry.missingImages?.length ?? 0)) throw new Error("Remove duplicate missingImages decisions.");
+      assertCollectionMissingImages(plan.items, entry.missingImages, manifest.missingImages);
       for (const item of plan.items) {
         checkCopy({ description_json: { name: item.item_name, ...item.fields_json } }, `${source.datasetPath}/${item.item_slug}`);
-        if (!item.image_key && !accepted.delete(item.item_slug)) throw new Error(`${item.item_slug} has no image. Add a verified image or record {slug, reason} in this collection's bundle missingImages array.`);
       }
-      if (accepted.size) throw new Error(`Remove stale missingImages decisions: ${[...accepted.keys()].join(", ")}.`);
       const imageUrls = plan.items.flatMap(item => item.image_key ? [resolveWikiMediaUrl(item.image_key)!] : []);
       if (final.thumb_url && !imageUrls.includes(final.thumb_url)) throw new Error("thumb_url must be null or an exact planned R2 item image URL.");
       if (!final.thumb_url && imageUrls.length) plan.finalJson!.thumb_url = imageUrls[0];
