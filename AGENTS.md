@@ -64,7 +64,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 
 **Checks and releases**
 
-- Run checks, tests, builds, content validation and browser QA on GitHub, never locally. Local work is reading, authoring and editing.
+- Run checks, tests, builds, content validation and browser QA on GitHub, never locally. Local work is reading, authoring and editing. One exception: the Roblox wiki publish command, `content:publish`, checks and publishes from a clean checkout at the live SHA ([doc](bloxodes-docs/content/roblox-wiki.md#publishing)).
 - Commit, push or publish only when your task says so. Commit only your task's files.
 - Before a code PR, have an independent Codex agent review the diff.
 - Open PRs against `production` and link them to T3. Merge only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly or bypass protection.
@@ -73,7 +73,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 **Data and secrets**
 
 - Never print, log or commit secrets. Env files are edited only on the homelab; Mac copies are read-only. See [environment](bloxodes-docs/environment.md).
-- Author against managed development. Production changes only through GitHub's release and publication jobs.
+- Author against managed development. Production changes only through GitHub's release and publication jobs, or `content:publish` for Roblox wiki bundles.
 - There is no local Supabase. Don't start one.
 - `roblox_universes.slug` is a stats slug. Never copy it into editorial slugs (`code_pages.slug`, `wiki_pages.slug`, `wiki_collection_pages.wiki_slug`, `quiz_pages.code` and the like).
 - Notion queue rows are never deleted. Set a status instead.

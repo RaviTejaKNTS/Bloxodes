@@ -1,3 +1,5 @@
+import { realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -17,7 +19,7 @@ type DatasetDocument = {
   data?: Record<string, unknown>[] | null;
 };
 
-type Issue = {
+export type Issue = {
   code: string;
   datasetPath: string;
   level: "error" | "warning";
@@ -235,7 +237,7 @@ async function auditLegacyOverrideMap(issues: Issue[], options: Options) {
   }
 }
 
-function auditDataset(code: string, datasetPath: string, document: DatasetDocument | Record<string, unknown>[], issues: Issue[]) {
+export function auditDataset(code: string, datasetPath: string, document: DatasetDocument | Record<string, unknown>[], issues: Issue[]) {
   if (Array.isArray(document)) {
     addIssue(issues, code, datasetPath, "Dataset still uses bare array shape.");
     return;
@@ -269,6 +271,20 @@ function auditDataset(code: string, datasetPath: string, document: DatasetDocume
   if (!tableFields.length) addIssue(issues, code, datasetPath, "meta.display.tableFields is required.");
   if (!cardFields.length) addIssue(issues, code, datasetPath, "meta.display.cardFields is required.");
   if (!sectionOrder.length) addIssue(issues, code, datasetPath, "meta.display.sectionOrder is required.");
+
+  if (display && Object.prototype.hasOwnProperty.call(display, "fieldLabels")) {
+    if (!isRecord(display.fieldLabels)) {
+      addIssue(issues, code, datasetPath, "meta.display.fieldLabels must be an object mapping item field keys to plain-text labels.");
+    } else {
+      for (const [key, label] of Object.entries(display.fieldLabels)) {
+        if (!itemFields.includes(key)) addIssue(issues, code, datasetPath, `Field label key "${key}" is not listed in meta.itemFields.`);
+        const hasControlCharacters = typeof label === "string" && [...label].some(character => character.charCodeAt(0) < 32 || character.charCodeAt(0) === 127);
+        if (typeof label !== "string" || !label.trim() || hasControlCharacters || /[<>`]|\[[^\]]*\]\(|\*\*|__|~~|(?:^|\s)[*_]\S.*?[*_](?:\s|$)|^#{1,6}\s|&(?:#\d+|#x[0-9a-f]+|[a-z]+);/i.test(label)) {
+          addIssue(issues, code, datasetPath, `Field label "${key}" must be non-empty plain text without HTML, Markdown or control characters.`);
+        }
+      }
+    }
+  }
 
   for (const field of allDisplayFields) {
     if (!itemFields.includes(field)) {
@@ -444,7 +460,7 @@ async function main() {
   }
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });

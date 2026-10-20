@@ -1,11 +1,12 @@
 import "../shared/load-env";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 
 import fs from "node:fs/promises";
 import path from "node:path";
 import { imageLocalPath } from "./local-image-path";
 import { publicProvenanceMatch } from "../content/public-provenance";
 
-import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
+import { readGameCollectionConfigByWikiPath } from "@/lib/game-collections/registry";
 
 type DatasetDocument = {
   meta?: Record<string, unknown> | null;
@@ -322,7 +323,7 @@ async function checkImages(rows: Record<string, unknown>[], datasetPath: string)
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const issues: CheckIssue[] = [];
-  const config = getGameCollectionConfigByWikiPath(options.game!, options.collection!);
+  const config = await readGameCollectionConfigByWikiPath(supabaseAdmin(), options.game!, options.collection!);
   const datasetPath = resolvePath(options.file!);
 
   if (!(await pathExists(datasetPath))) {

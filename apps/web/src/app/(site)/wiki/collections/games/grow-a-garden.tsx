@@ -1,4 +1,5 @@
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
@@ -8,7 +9,7 @@ import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
-import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/games/grow-a-garden";
+import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/grow-a-garden-view";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { toIsoContentDate } from "@/lib/content-dates";
 import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
@@ -494,7 +495,7 @@ export async function getPreparedGrowGardenCollectionPageCount(config: GrowGarde
   return (await loadPreparedGrowGardenCollection(config)).totalPages;
 }
 
-export function GrowGardenCollectionNav({
+export async function GrowGardenCollectionNav({
   activeSlug,
   className
 }: {
@@ -506,7 +507,7 @@ export function GrowGardenCollectionNav({
       label="Collection page"
       value={activeSlug}
       className={className}
-      options={GROW_GARDEN_COLLECTIONS.map((entry) => ({
+      options={(await listGameCollectionConfigs()).filter(entry => entry.gameSlug === "grow-a-garden").map((entry) => ({
         value: entry.slug,
         label: entry.label,
         href: buildGrowGardenCollectionPath(entry.slug)

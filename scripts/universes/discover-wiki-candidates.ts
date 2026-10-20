@@ -1,8 +1,9 @@
 import "../shared/load-env";
 
 import fs from "node:fs/promises";
-import { URL } from "node:url";
-import { GAME_COLLECTION_GROUPS } from "@/lib/game-collections";
+import { URL, pathToFileURL } from "node:url";
+import { realpathSync } from "node:fs";
+import { readGameCollectionGroups } from "@/lib/game-collections/registry";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { articleGameSlugFromUniverse, statsUniverseSlug } from "@/lib/slug";
 
@@ -404,7 +405,35 @@ function printMarkdown(candidates: Candidate[], options: Options, sourceHost: st
   }
 }
 
+// The nightly content factory chooses by live global rank, without a growth filter.
+export async function discoverTopWikiCandidates() {
+  const db = supabaseAdmin();
+  const ranked = await db.from("stats_game_current_index")
+    .select("universe_id,root_place_id,name,display_name,playing,global_playing_rank")
+    .gte("global_playing_rank", 1).lte("global_playing_rank", 100)
+    .order("global_playing_rank").limit(100);
+  if (ranked.error) throw ranked.error;
+  const ids = (ranked.data ?? []).map(row => row.universe_id);
+  if (!ids.length) return [];
+  const hubs = await db.from("wiki_pages").select("universe_id,slug").in("universe_id", ids);
+  if (hubs.error) throw hubs.error;
+  const covered = new Set((hubs.data ?? []).map(row => Number(row.universe_id)));
+  return (ranked.data ?? []).filter(row => !covered.has(Number(row.universe_id))).map(row => ({
+    rank: row.global_playing_rank,
+    universe_id: row.universe_id,
+    game: row.display_name || row.name,
+    suggested_wiki_slug: articleGameSlugFromUniverse(row),
+    playing: row.playing,
+    roblox_url: row.root_place_id ? `https://www.roblox.com/games/${row.root_place_id}` : null
+  }));
+}
+
 async function main() {
+  if (process.argv.includes("--next")) {
+    const candidates = await discoverTopWikiCandidates();
+    console.log(JSON.stringify({ next: candidates[0] ?? null, candidates }, null, 2));
+    return;
+  }
   const options = parseArgs(process.argv.slice(2));
   if (!options) return;
 
@@ -427,7 +456,7 @@ async function main() {
   for (const row of wikiCollectionPages) {
     if (typeof row.universe_id === "number") coveredUniverseIds.add(row.universe_id);
   }
-  for (const group of GAME_COLLECTION_GROUPS) {
+  for (const group of await readGameCollectionGroups(supabaseAdmin())) {
     if (typeof group.universeId === "number") coveredUniverseIds.add(group.universeId);
   }
 
@@ -467,7 +496,7 @@ async function main() {
   console.log(JSON.stringify(payload, null, 2));
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch((error) => {
   console.error(error instanceof Error ? error.message : String(error));
   process.exit(1);
 });

@@ -1,4 +1,5 @@
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
@@ -8,7 +9,7 @@ import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
-import { THE_FORGE_COLLECTIONS, type GameCollectionViewConfig } from "@/lib/game-collections/games/the-forge";
+import { THE_FORGE_COLLECTIONS, type GameCollectionViewConfig } from "@/lib/game-collections/the-forge-view";
 import { toIsoContentDate } from "@/lib/content-dates";
 import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
 
@@ -248,7 +249,7 @@ export async function getPreparedTheForgeCollectionPageCount(config: GameCollect
   return (await loadPreparedTheForgeCollection(config)).totalPages;
 }
 
-export function TheForgeCollectionNav({
+export async function TheForgeCollectionNav({
   activeSlug,
   className
 }: {
@@ -260,7 +261,7 @@ export function TheForgeCollectionNav({
       label="Collection page"
       value={activeSlug}
       className={className}
-      options={THE_FORGE_COLLECTIONS.map((entry) => ({
+      options={(await listGameCollectionConfigs()).filter(entry => entry.gameSlug === "the-forge").map((entry) => ({
         value: entry.slug,
         label: entry.label,
         href: buildTheForgeCollectionPath(entry.slug)

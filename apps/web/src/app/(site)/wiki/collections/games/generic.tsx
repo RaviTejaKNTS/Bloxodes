@@ -4,6 +4,7 @@ import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
+import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { GameCollectionView, type CollectionFieldKind, type CollectionFieldPresentation } from "@/components/game-collections/GameCollectionView";
 import { CollectionItemFinder, type CollectionFinderEntry } from "@/components/game-collections/CollectionItemFinder";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -14,7 +15,6 @@ import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { toIsoContentDate } from "@/lib/content-dates";
 import {
-  GAME_COLLECTIONS,
   getFieldLabel,
   type GameCollectionRenderConfig
 } from "@/lib/game-collections";
@@ -63,6 +63,7 @@ export type GameDatasetMeta = {
     cardFields?: string[] | null;
     detailFields?: string[] | null;
     tableFields?: string[] | null;
+    fieldLabels?: Record<string, string> | null;
     fieldPresentation?: Record<string, CollectionFieldPresentation | CollectionFieldKind> | null;
   } | null;
 };
@@ -85,6 +86,7 @@ type GenericViewConfig = {
   label: string;
   groupLabel: string;
   groupKey: string;
+  fieldLabels?: Record<string, string>;
   stats: Array<{ key: string; label: string }>;
   maxStats?: number;
   badgeKey?: string;
@@ -508,7 +510,7 @@ function buildExplicitViewConfig(config: GameCollectionRenderConfig, dataset: Ga
   );
   const stats = tableFields
     .filter((key) => key !== badgeKey && key !== descriptionKey && key !== cardDescriptionKey && !subtitleKeys.includes(key))
-    .map((key) => ({ key, label: getFieldLabel(key) }));
+    .map((key) => ({ key, label: getFieldLabel(key, display?.fieldLabels) }));
   const hasImages = dataset.items.some((item) => Boolean(normalizeText(item.image)));
   const fieldPresentation = display?.fieldPresentation ?? undefined;
 
@@ -517,6 +519,7 @@ function buildExplicitViewConfig(config: GameCollectionRenderConfig, dataset: Ga
     label: config.label,
     groupKey: SYSTEM_SECTION_KEY,
     groupLabel: normalizeText(display?.groupLabel) ?? "Group",
+    fieldLabels: display?.fieldLabels ?? undefined,
     badgeKey: badgeKey ?? undefined,
     subtitleKeys,
     descriptionKey: descriptionKey ?? undefined,
@@ -890,7 +893,7 @@ async function DatasetCollectionNav({
         label: entry.display_name?.trim() || entry.title,
         href: buildWikiCollectionPath(entry.wiki_slug, entry.collection_slug)
       }))
-    : GAME_COLLECTIONS.filter((entry) => entry.gameSlug === config.gameSlug).map((entry) => ({
+    : (await listGameCollectionConfigs()).filter((entry) => entry.gameSlug === config.gameSlug).map((entry) => ({
         value: entry.code,
         label: entry.label,
         href: buildWikiCollectionPath(entry.gameSlug, entry.slug)

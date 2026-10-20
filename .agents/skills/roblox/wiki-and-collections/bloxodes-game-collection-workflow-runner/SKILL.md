@@ -73,12 +73,10 @@ Record approval notes or specific corrections in the collection brief before sen
 9. Review image coverage, quality, paths, dataset wiring and the GitHub checker result when available.
 10. **Writing gate:** spawn a writing subagent with `bloxodes-game-collection-writing` and `bloxodes-voice`.
 11. Review `final.json`. Send copy, tone, structure and FAQ fixes to the writing subagent. Send data and image gaps back to the collection subagent.
-12. Confirm the collection folder has `brief.md`, `dataset.json`, `media/`, `final.json` and `runtime-manifest.json`. Prepare the exact selected `roblox-collection` operations with their immutable bundle. Include the approved hub when needed. Don't start local previews or run checks locally.
-13. Run `Managed content QA` on GitHub. It validates and publishes the selected development revisions and media, builds the runner preview and records the selected desktop and mobile routes.
-14. Review the dataset pointer/count readback, useful rendered fields, image coverage, metadata and screenshots. Page-specific pagination, HTML-size or collectible progress checks also run on GitHub when needed.
-    - **Database pages:** verify section navigation and paginated canonical/noindex behavior.
-    - **Collectible pages:** verify local and account progress, filters/reset, and that there's no pagination.
-15. Return artifact paths, the exact GitHub run and reports, blocked collections and supported page-type decisions. Don't claim a page-specific check passed unless its report exists. Installed CI-mode builders return authored artifacts for GitHub QA before production publication.
+12. Confirm the collection folder has `brief.md`, `dataset.json`, `media/`, `final.json` and `runtime-manifest.json` (label, `pageType`, sources, and `missingImages` for any item without an image). Add it to the game's `roblox-wiki@1` bundle (see `contracts/roblox-wiki/v1/README.md`), with the approved hub when needed. No registration file or code PR: publishing registers the collection in the database.
+13. Dry run with `npm run content:publish -- <abs-bundle> --only <collection-slug>` and send what it flags to the owning stage.
+14. With the go-ahead, stage with `--target managed-dev --apply` and review the readback: item count, fields, images, metadata. For screenshots or pagination and collectible-progress checks, use selected Roblox QA on GitHub.
+15. Return the bundle path, the publish report, blocked collections and page-type decisions. Production needs explicit authorization: `--target production --apply --allow-prod` from a clean checkout at the live SHA (`bloxodes-docs/content/roblox-wiki.md#publishing`). Don't claim browser QA you don't have a report for.
 
 ## Research checks
 
@@ -177,5 +175,5 @@ Before you approve any `final.json`, and before you call a collection done:
 **Checks**
 
 - `final.json` parses.
-- Verifier, HTML size gate, pagination checks and the GitHub browser report pass.
+- The `content:publish` dry run passes. HTML size, pagination and browser checks pass on GitHub when the task asks for them.
 - For `collectible`, account/local progress and no-pagination route checks pass instead of database pagination checks.

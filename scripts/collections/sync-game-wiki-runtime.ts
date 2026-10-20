@@ -1,6 +1,8 @@
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 
+import { realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -10,7 +12,7 @@ import { normalizeWikiCoverOverride } from "@/lib/wiki-images";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
 import { isManagedDevelopmentSupabaseUrl, isProductionSupabaseUrl } from "../shared/supabase-target";
 
-type WikiFinal = {
+export type WikiFinal = {
   universe_id: number;
   slug: string;
   title: string;
@@ -42,7 +44,7 @@ function requiredString(input: unknown, field: string, minimum = 1): string {
   return input.trim();
 }
 
-async function readFinal(file: string): Promise<WikiFinal> {
+export async function readFinal(file: string, coverOverride = allowCoverOverride): Promise<WikiFinal> {
   const parsed = JSON.parse(await fs.readFile(file, "utf8")) as Partial<WikiFinal>;
   if (!Number.isSafeInteger(parsed.universe_id) || Number(parsed.universe_id) <= 0) {
     throw new Error("wiki final universe_id must be a positive safe integer.");
@@ -60,7 +62,7 @@ async function readFinal(file: string): Promise<WikiFinal> {
     description_md: requiredString(parsed.description_md, "description_md", 200),
     tips_md: requiredString(parsed.tips_md, "tips_md", 80),
     controls_json: controls,
-    cover_image: normalizeWikiCoverOverride(parsed.cover_image, allowCoverOverride),
+    cover_image: normalizeWikiCoverOverride(parsed.cover_image, coverOverride),
     is_published: parsed.is_published !== false
   };
 }
@@ -156,7 +158,7 @@ async function main() {
   console.log(`Verified wiki_pages readback for ${final.slug}.`);
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch((error) => {
   console.error(error instanceof Error ? error.message : error);
   process.exit(1);
 });

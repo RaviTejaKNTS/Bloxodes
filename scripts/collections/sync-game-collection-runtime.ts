@@ -1,5 +1,7 @@
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
+import { realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -43,7 +45,7 @@ type PlannedItem = {
   media_was_normalized: boolean;
 };
 
-type CollectionPlan = {
+export type CollectionPlan = {
   config: GameCollectionConfig;
   pageType: "database" | "collectible";
   universeId: number;
@@ -57,7 +59,7 @@ type CollectionPlan = {
   finalJson: Record<string, unknown> | null;
 };
 
-type RuntimeManifest = {
+export type RuntimeManifest = {
   schemaVersion: 1;
   game: { slug: string; name: string; universeId: number };
   collection: { slug: string; label: string; sortOrder?: number; pageType?: "database" | "collectible" };
@@ -67,7 +69,7 @@ type RuntimeManifest = {
   sourceUrls: string[];
 };
 
-type CollectionSource = {
+export type CollectionSource = {
   config: GameCollectionConfig;
   pageType: "database" | "collectible";
   universeId: number;
@@ -183,8 +185,13 @@ async function resolveImageSource(
     throw new Error(`Image escapes the public root: ${value}`);
   }
   try {
-    await fs.access(absolute);
-    return { sourcePath: absolute, sourceGitPath: null, sourceUrl: null };
+    const realRoot = await fs.realpath(mediaRoot);
+    const realFile = await fs.realpath(absolute);
+    const realRelative = path.relative(realRoot, realFile);
+    if (!realRelative || realRelative.startsWith("..") || path.isAbsolute(realRelative)) {
+      throw new Error(`Image escapes mediaRoot through a symlink: ${value}`);
+    }
+    return { sourcePath: realFile, sourceGitPath: null, sourceUrl: null };
   } catch (error) {
     if (!options.allowGitFallback || (error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
     const gitPath = path.posix.join("apps/web/public", decoded.split(path.sep).join("/"));
@@ -252,11 +259,11 @@ async function prepareImageBytes(original: Buffer) {
   throw new Error("Could not normalize collection image within the R2 media policy.");
 }
 
-async function targetSources(): Promise<CollectionSource[]> {
-  if (!manifestPaths.length) {
+export async function targetSources(paths = manifestPaths): Promise<CollectionSource[]> {
+  if (!paths.length) {
     throw new Error("Repository collection datasets are retired. Pass one or more --manifest paths from a content workspace.");
   }
-  return Promise.all(manifestPaths.map(async (manifestPath) => {
+  return Promise.all(paths.map(async (manifestPath) => {
       const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8")) as RuntimeManifest;
       if (manifest.schemaVersion !== 1 || !manifest.game?.slug || !manifest.collection?.slug) {
         throw new Error(`Invalid wiki collection runtime manifest: ${manifestPath}`);
@@ -320,9 +327,9 @@ async function targetSources(): Promise<CollectionSource[]> {
     }));
 }
 
-async function planCollection(source: CollectionSource): Promise<CollectionPlan> {
+export async function planCollection(source: CollectionSource, documentOverride?: DatasetDocument): Promise<CollectionPlan> {
   const { config, datasetPath } = source;
-  const document = JSON.parse(await fs.readFile(datasetPath, "utf8")) as DatasetDocument;
+  const document = documentOverride ?? JSON.parse(await fs.readFile(datasetPath, "utf8")) as DatasetDocument;
   if (document.meta?.schemaVersion !== 2 || !Array.isArray(document.items)) {
     throw new Error(`${config.code} must be a schemaVersion 2 collection dataset.`);
   }
@@ -472,7 +479,7 @@ async function planCollection(source: CollectionSource): Promise<CollectionPlan>
   };
 }
 
-async function uploadPlanMedia(plan: CollectionPlan, client: R2Client) {
+export async function uploadPlanMedia(plan: CollectionPlan, client: R2Client) {
   await mapWithConcurrency(plan.items, 16, async (item) => {
     if (!item.image_key || !item.image_mime || !item.image_sha256) return;
     if (await client.hasObject(item.image_key)) return;
@@ -493,7 +500,7 @@ async function uploadPlanMedia(plan: CollectionPlan, client: R2Client) {
   });
 }
 
-async function verifyPlanMedia(plan: CollectionPlan, client: R2Client) {
+export async function verifyPlanMedia(plan: CollectionPlan, client: R2Client) {
   await mapWithConcurrency(plan.items, 32, async (item) => {
     if (item.image_key && !(await client.hasObject(item.image_key))) {
       throw new Error(`${plan.config.code} cannot publish: R2 object is missing for ${item.item_slug}.`);
@@ -525,7 +532,7 @@ function resolveCountTokens<T>(value: T, count: number): T {
   return value;
 }
 
-function pageCopyFromFinal(plan: CollectionPlan) {
+export function pageCopyFromFinal(plan: CollectionPlan) {
   if (!plan.finalJson) return null;
   const final = resolveCountTokens(plan.finalJson, plan.items.length);
   if (final.code !== plan.config.code) {
@@ -557,7 +564,7 @@ function pageCopyFromFinal(plan: CollectionPlan) {
   };
 }
 
-async function applyPlan(plan: CollectionPlan) {
+export async function applyPlan(plan: CollectionPlan, shouldPublish = publish) {
   const sb = supabaseAdmin();
   let { data: page, error: pageError } = await sb
     .from("wiki_collection_pages")
@@ -703,7 +710,7 @@ async function applyPlan(plan: CollectionPlan) {
     throw new Error(`${plan.config.code} revision verification failed: expected ${plan.items.length}, found ${count}.`);
   }
 
-  if (publish) {
+  if (shouldPublish) {
     if (!pageCopy && !page.is_published) {
       throw new Error(`${plan.config.code} is a draft and cannot publish without an approved finalJson.`);
     }
@@ -784,7 +791,7 @@ async function main() {
   }
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
