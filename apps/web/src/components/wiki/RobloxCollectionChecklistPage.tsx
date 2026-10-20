@@ -3,6 +3,7 @@ import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { RobloxCollectionChecklist, type RobloxCollectionChecklistSection } from "@/components/wiki/RobloxCollectionChecklist";
+import { getCollectionFieldLabels } from "@/lib/game-collections";
 import type { GameCollectionDataset } from "@/app/(site)/wiki/collections/games/generic";
 import type { WikiCollectionPageContent } from "@/lib/wiki-collections";
 import type { GameCollectionRenderConfig } from "@/lib/game-collections";
@@ -126,6 +127,7 @@ export function renderRobloxCollectionChecklistPage({
           collectionLabel={config.label}
           sections={sections}
           cardFields={dataset.meta?.display?.cardFields ?? null}
+          fieldLabels={dataset.meta?.display?.fieldLabels ? getCollectionFieldLabels(dataset.meta.display, dataset.meta.itemFields ?? []) : undefined}
           collectionOptions={collectionOptions}
         />
 

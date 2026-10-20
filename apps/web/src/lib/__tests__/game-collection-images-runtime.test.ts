@@ -4,9 +4,6 @@ vi.mock("server-only", () => ({}));
 vi.mock("@/lib/public-content-cache", () => ({
   publicContentCache: (loader: () => Promise<unknown>) => loader
 }));
-vi.mock("@/lib/game-collections", () => ({
-  getGameCollectionConfigByCode: vi.fn(() => null)
-}));
 vi.mock("@/lib/wiki-collections", () => ({
   getWikiCollectionPageByCode: vi.fn(async () => ({
     code: "example-items",

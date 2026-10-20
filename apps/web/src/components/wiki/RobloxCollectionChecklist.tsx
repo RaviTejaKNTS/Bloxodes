@@ -25,6 +25,7 @@ export function RobloxCollectionChecklist({
   collectionLabel,
   sections,
   cardFields,
+  fieldLabels,
   collectionOptions,
   beforeToolbar,
   afterContent
@@ -34,6 +35,7 @@ export function RobloxCollectionChecklist({
   collectionLabel: string;
   sections: RobloxCollectionChecklistSection[];
   cardFields?: string[] | null;
+  fieldLabels?: Record<string, string>;
   beforeToolbar?: ReactNode;
   afterContent?: ReactNode;
   collectionOptions: Array<{ value: string; label: string; href: string }>;
@@ -48,6 +50,7 @@ export function RobloxCollectionChecklist({
       collectionLabel={collectionLabel}
       sections={sections}
       cardFields={cardFields}
+      fieldLabels={fieldLabels}
       toolbar={
         <CatalogSelectNav
           label={`${gameName} collection`}

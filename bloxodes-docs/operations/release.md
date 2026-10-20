@@ -1,8 +1,8 @@
 # Release
 
-Last verified: 2026-10-19
+Last verified: 2026-10-20
 
-How code and content reach production. GitHub does the checking, building, deploying and publishing. Agents don't run checks or builds locally.
+How code and content reach production. GitHub does the checking, building and deploying, and publishes most content. Roblox wiki bundles publish with their own versioned command (below). Agents don't run checks or builds locally.
 
 ## Code: PR to production
 
@@ -40,9 +40,13 @@ Schema, deploy and content jobs share the `bloxodes-production` concurrency lane
 - **Development:** applies pending migrations to managed development over the Management API with a rollback plan first, checks the ledger and records a SHA-bound receipt.
 - **Production:** after merge, `release-production-schema.ts` connects over HTTPS Studio as `supabase_admin`. It needs a matching development receipt, plans with rollback, applies atomically and reads the ledger back.
 
+## Roblox wiki bundles
+
+Roblox wiki hubs and collections publish with `npm run content:publish`, which owns the `roblox-wiki@1` contract and every check. It runs from an up-to-date checkout with no local changes whose publish code matches what's live, refuses pending production migrations, and needs `--target production --apply --allow-prod` to write production. No PR, build or GitHub run is involved, and new games need no code change. The Content Factory runs it from each device's main checkout. Full detail: [Roblox wiki](../content/roblox-wiki.md#publishing).
+
 ## Content publication
 
-Database content goes out through `publish-content.yml` (Publish selected content), dispatched by `bloxodes-release-e2e` or an automation:
+Other database content, and existing Roblox CI batches, go out through `publish-content.yml` (Publish selected content), dispatched by `bloxodes-release-e2e` or an automation:
 
 1. **Input:** either a committed batch at `content/releases/<batch>/batch.json`, or a private bundle in the managed-development `ci-release-bundles` bucket, addressed by SHA-256.
 2. **Managed QA:** `managed-content-qa.yml` stages the exact content in managed development, builds a preview, runs desktop and mobile browser checks and writes a receipt bound to the SHA and input bytes.

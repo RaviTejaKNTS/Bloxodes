@@ -91,6 +91,6 @@ Run the hub after the collections, so it can link to the collections that passed
 
 ## After the finals
 
-The run stops at approved `final.json` files with their datasets, manifests and media. Staging a `roblox-collection` or `roblox-wiki` batch, `Managed content QA` on GitHub, managed-development publishing and production release each need the owner's explicit go-ahead.
+The run stops at approved `final.json` files with their datasets, manifests and media. Then put them in one `roblox-wiki@1` bundle and publish with `content:publish` (`bloxodes-docs/content/roblox-wiki.md#publishing`): dry run, managed development, then production. Each write step needs the owner's go-ahead, which a scheduled run's prompt can give. No code PR is needed for new games or collections.
 
 Report per collection and for the hub: status, the stage reached, item and image counts, each review's main findings, and the folder path. Then update the queue row as root `AGENTS.md` describes.

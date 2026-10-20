@@ -40,15 +40,9 @@ A source saying 97 items while listing 98, an incomplete roster, no official con
 7. Write descriptions in your own words. Never copy from sources. Make sure each one is accurate and matches the source information.
 8. Keep sourced stats and facts exact. Don't reword them just to sound nicer.
 9. Decide whether the collection should have images. Images go in `items[].system.image`, never in a public item field.
-10. Confirm `apps/web/src/lib/game-collections/index.ts` can render the collection, card fields, grouping, item count and planned image field.
+10. Confirm `meta.display` describes the grouping, card and table fields, labels (`fieldLabels`) and image field, so the shared renderer shows them. No per-game renderer or TypeScript registration.
 11. Confirm section labels are stable and useful enough for the shared renderer's section dropdown. Don't split, rename or reorder sections just for page size. The renderer handles pagination.
-12. If the collection is missing from `apps/web/src/lib/game-collections/index.ts`, register it with a dry run first:
-
-    ```bash
-    npm run register:game-collection -- --game <game-slug> --collection <collection-slug> --dry-run
-    ```
-
-    If the dry run looks right and the game group already exists, run it again without `--dry-run`.
+12. Registration happens on publish: `content:publish` adds the game and collection to the `roblox_wiki_registry` table from the bundle and `runtime-manifest.json`. There's nothing to register by hand.
 
 13. Audit and check the dataset:
 
@@ -63,7 +57,7 @@ A source saying 97 items while listing 98, an incomplete roster, no official con
     - `"collectible"` only for finite, player-completed goals.
     - `"database"` for reference rosters.
 
-    The page type changes the renderer and progress behavior, not the dataset table or the v2 row shape. Existing manifests may omit it and default to `database`, but new or refreshed work should state it explicitly.
+    The page type changes the renderer and progress behavior, not the dataset table or the v2 row shape. The `roblox-wiki@1` bundle requires it in every manifest.
 
     The full manifest shape that `sync:game-collection-runtime` reads. Paths are relative to the collection workspace:
 
@@ -71,7 +65,7 @@ A source saying 97 items while listing 98, an incomplete roster, no official con
     {
       "schemaVersion": 1,
       "game": { "slug": "<game-slug>", "name": "<Game Name>", "universeId": 1234567890 },
-      "collection": { "slug": "<collection-slug>", "label": "<Display Label>", "sortOrder": 0, "pageType": "database" },
+      "collection": { "slug": "<collection-slug>", "label": "<Display Label>", "pageType": "database" },
       "dataset": "dataset.json",
       "finalJson": "final.json",
       "mediaRoot": "media",

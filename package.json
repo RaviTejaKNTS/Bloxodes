@@ -9,6 +9,10 @@
     "react-native": "0.83.6"
   },
   "scripts": {
+    "content:publish": "tsx scripts/content/roblox-wiki-cli.ts publish",
+    "content:deployed-sha": "tsx scripts/content/roblox-wiki-cli.ts deployed-sha",
+    "content:status": "tsx scripts/content/roblox-wiki-cli.ts status",
+    "content:candidates": "tsx scripts/content/roblox-wiki-cli.ts candidates",
     "cleanup:task-worktree": "node scripts/dev/cleanup-task-worktree.mjs",
     "ci:events:publish": "node --import tsx scripts/ci/publish-events.ts",
     "setup:worktree": "bash scripts/dev/setup-worktree.sh",
@@ -155,7 +159,6 @@
     "export:gta-collection-workspace": "node --import tsx scripts/gta/export-gta-collection-workspace.ts --workspace",
     "check:game-collection-data": "node --import tsx scripts/collections/check-game-collection-data.ts",
     "audit:game-collection-datasets:v2": "node --import tsx scripts/collections/audit-game-collection-datasets-v2.ts",
-    "register:game-collection": "tsx scripts/collections/register-game-collection.ts",
     "sync:game-collection-runtime": "node --import tsx scripts/collections/sync-game-collection-runtime.ts",
     "sync:gta-collection-runtime": "node --import tsx scripts/gta/sync-gta-collection-runtime.ts",
     "verify:gta-collection-runtime": "node --import tsx scripts/gta/verify-gta-collection-runtime.ts",

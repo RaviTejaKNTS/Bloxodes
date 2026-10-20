@@ -40,8 +40,13 @@ export function pickWikiThumbnail(value: unknown): string | null {
   return null;
 }
 
+function publishedR2HubCover(page: WikiImageFields): string | null {
+  const cover = normalizeImage(page.cover_image);
+  return cover && /^https:\/\/media\.bloxodes\.com\/wiki\/\d+\/hubs\/cover-[a-f0-9]+\./.test(cover) ? cover : null;
+}
+
 export function resolveWikiCardImage(page: WikiImageFields): string | null {
-  return pickWikiThumbnail(page.thumbnail_urls) ?? normalizeImage(page.cover_image) ?? normalizeImage(page.icon_url);
+  return publishedR2HubCover(page) ?? pickWikiThumbnail(page.thumbnail_urls) ?? normalizeImage(page.cover_image) ?? normalizeImage(page.icon_url);
 }
 
 export function resolveWikiHeaderImage(page: WikiImageFields, media: WikiMediaImage[]): string | null {
@@ -58,7 +63,7 @@ export function resolveWikiHeaderImage(page: WikiImageFields, media: WikiMediaIm
 }
 
 export function resolveWikiMetadataImage(page: WikiImageFields): string | null {
-  return pickWikiThumbnail(page.thumbnail_urls) ?? normalizeImage(page.cover_image) ?? normalizeImage(page.icon_url);
+  return publishedR2HubCover(page) ?? pickWikiThumbnail(page.thumbnail_urls) ?? normalizeImage(page.cover_image) ?? normalizeImage(page.icon_url);
 }
 
 export function normalizeWikiCoverOverride(value: unknown, allowOverride: boolean): string | null {

@@ -47,11 +47,11 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 4. Send feedback or approve the research.
 5. Ask the same subagent to use `/bloxodes-wiki-writing` and create `final.json`.
 6. Review `final.json` for accuracy, voice, controls, tips, metadata and related-page assumptions (see the checks below).
-7. Keep the approved final and source proof in the ignored workspace. Prepare the exact selected `roblox-wiki` batch or immutable private bundle. Don't start a local preview or run checks locally.
-8. Run `Managed content QA` on GitHub to stage that exact hub in development, build its preview and capture desktop and mobile screenshots. Review headings, canonical/metadata, images and controls in the reports. A source review doesn't mean browser QA passed.
-9. Return paths and the successful GitHub run and artifact links, or the actual QA failure.
+7. Put the approved hub in the game's `roblox-wiki@1` bundle as `wiki/final.json` (see `contracts/roblox-wiki/v1/README.md`). Leave `cover_image` null; the publisher copies the official thumbnail to R2.
+8. Dry run with `npm run content:publish -- <abs-bundle> --only hub` and fix what it flags. With the go-ahead, stage with `--target managed-dev --apply`.
+9. Return the bundle path and the publish report, or the actual failure.
 
-Production needs explicit authorization and the selected-content workflow's matching development QA receipt. Installed builders may return authoring-ready artifacts and a durable publication request. GitHub then owns technical QA.
+Production needs explicit authorization: `--target production --apply --allow-prod` from an up-to-date checkout with no local changes. See `bloxodes-docs/content/roblox-wiki.md#publishing`. For browser screenshots, selected Roblox QA on GitHub still works.
 
 ## Parent checks
 
@@ -60,7 +60,7 @@ Facts and data:
 - Production coverage was checked for wiki, codes, catalogs, events, tools, articles, checklists and quizzes.
 - Game identity is exact.
 - Controls are verified or omitted. `controls_json` is `[]` when unknown, and non-empty rows include `action` plus only device keys with verified values.
-- GitHub publisher and rendered checks pass.
+- The `content:publish` dry run passes. A dry run isn't browser QA; don't claim screenshots you don't have.
 
 Copy, checked against `.agents/skills/bloxodes-voice/SKILL.md`:
 
