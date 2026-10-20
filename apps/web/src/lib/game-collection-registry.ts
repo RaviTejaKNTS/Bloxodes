@@ -5,7 +5,14 @@ import { supabaseAdmin } from "./supabase";
 import { readGameCollectionGroups } from "./game-collections/registry";
 
 export const listGameCollectionGroups = cache(publicContentCache(
-  () => readGameCollectionGroups(supabaseAdmin()),
+  async () => {
+    try {
+      return await readGameCollectionGroups(supabaseAdmin());
+    } catch (error) {
+      console.error("Collection navigation registry is unavailable; omitting registry navigation.", error);
+      return [];
+    }
+  },
   ["roblox-wiki-registry-v1"],
   { tags: ["wiki-index", "collection-index"] }
 ));

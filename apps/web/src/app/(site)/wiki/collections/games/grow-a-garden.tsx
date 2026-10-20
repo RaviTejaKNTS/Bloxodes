@@ -4,6 +4,7 @@ import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { GameCollectionView } from "@/components/game-collections/GameCollectionView";
+import { getCollectionFieldLabels } from "@/lib/game-collections";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
@@ -31,6 +32,7 @@ type GrowGardenDatasetMeta = {
   display?: {
     groupLabel?: string | null;
     sectionOrder?: string[] | null;
+    fieldLabels?: Record<string, string>;
   } | null;
 };
 
@@ -605,6 +607,8 @@ export function renderGrowGardenCollectionPage({
   prepared?: GrowGardenPreparedCollection;
 }) {
   const preparedCollection = prepared ?? buildGrowGardenPreparedCollection(config, dataset);
+  const fieldLabels = getCollectionFieldLabels(preparedCollection.dataset.meta?.display);
+  const viewConfig = Object.keys(fieldLabels).length ? { ...config, fieldLabels: { ...config.fieldLabels, ...fieldLabels } } : config;
   const items = preparedCollection.dataset.items;
   const itemCount = preparedCollection.itemCount;
   const pageTitle = `All ${itemCount.toLocaleString("en-US")} ${config.label} in Grow a Garden`;
@@ -724,7 +728,7 @@ export function renderGrowGardenCollectionPage({
             />
           </>
         ) : null}
-          </>} sections={pageSections} config={config} pagination={pagination.info} />
+          </>} sections={pageSections} config={viewConfig} pagination={pagination.info} />
       </section>
 
       {pagination.info.currentPage === 1 ? (

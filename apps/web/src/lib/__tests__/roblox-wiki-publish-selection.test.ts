@@ -5,23 +5,22 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { CollectionPlan, CollectionSource } from "../../../../../scripts/collections/sync-game-collection-runtime";
 import { publishBundle } from "../../../../../scripts/content/roblox-wiki-publish";
 
-const state = vi.hoisted(() => ({ plan: null as CollectionPlan | null, events: [] as string[], registry: vi.fn(), universe: vi.fn(), apply: vi.fn() }));
+const state = vi.hoisted(() => ({ plan: null as CollectionPlan | null, events: [] as string[], registry: vi.fn(), universe: vi.fn(), previewUniverse: vi.fn(), groups: vi.fn(), apply: vi.fn() }));
 const copy = (plan: CollectionPlan) => ({ title: "All 1 Pets in Example", seo_title: "All 1 Pets in Example", wiki_sort_order: plan.config.sortOrder });
 
 vi.mock("server-only", () => ({}));
 vi.mock("../../../../../scripts/shared/load-env", () => ({}));
 vi.mock("../../../../../scripts/shared/local-content-publication-guard", () => ({ assertLocalContentPublication: vi.fn() }));
-vi.mock("../../../../../scripts/shared/roblox-wiki-universe", () => ({ ensureContentUniverse: (...args: unknown[]) => state.universe(...args) }));
+vi.mock("../../../../../scripts/shared/roblox-wiki-universe", () => ({
+  ensureContentUniverse: (...args: unknown[]) => state.universe(...args),
+  previewContentUniverse: (...args: unknown[]) => state.previewUniverse(...args)
+}));
 vi.mock("../../../../../scripts/content/check-public-copy", () => ({ publicCopyFindings: () => [] }));
 vi.mock("../../../../../scripts/content/roblox-collection-copy", () => ({ assertRobloxCollectionCopy: () => {} }));
 vi.mock("../../../../../scripts/collections/audit-game-collection-datasets-v2", () => ({ auditDataset: () => {} }));
 vi.mock("../../../../../scripts/collections/sync-game-wiki-runtime", () => ({ readFinal: () => { throw new Error("Unselected hub was read"); } }));
 vi.mock("../../../../../scripts/shared/r2-client", () => ({ loadR2ClientConfig: () => ({ bucket: "bloxodes-wiki" }), R2Client: class {} }));
-vi.mock("@/lib/wiki-media", () => ({ resolveWikiMediaUrl: (key: string) => `https://media.bloxodes.com/wiki/${key}` }));
-vi.mock("@/lib/game-collections/registry", () => ({ readGameCollectionGroups: async () => [{
-  gameSlug: "example", gameName: "Example", universeId: 123, universeNames: ["Example"], sortOrder: 1000, collections: ["boats"],
-  collectionConfigs: [{ slug: "boats", sortOrder: 1010 }]
-}] }));
+vi.mock("@/lib/game-collections/registry", () => ({ readGameCollectionGroups: () => state.groups() }));
 vi.mock("../../../../../scripts/collections/sync-game-collection-runtime", () => ({
   targetSources: async ([file]: string[]) => [{
     config: { code: "example-pets", gameSlug: "example", gameName: "Example", slug: "pets", label: "Pets", sortOrder: 0, universeNames: ["Example"] },
@@ -68,9 +67,15 @@ beforeEach(async () => {
   vi.clearAllMocks();
   state.plan = null;
   state.events = [];
+  vi.stubEnv("WIKI_MEDIA_PUBLIC_BASE_URL", "");
+  state.groups.mockResolvedValue([{
+    gameSlug: "example", gameName: "Example", universeId: 123, universeNames: ["Example"], sortOrder: 1000, collections: ["boats"],
+    collectionConfigs: [{ slug: "boats", sortOrder: 1010 }]
+  }]);
+  state.previewUniverse.mockResolvedValue({ universe_id: 123, root_place_id: 456, name: "Example", slug: "example-stats" });
   state.universe.mockImplementation(async (_db: unknown, _id: number, apply: boolean) => {
     if (apply) state.events.push("import");
-    return apply ? { universe_id: 123 } : null;
+    return apply ? { universe_id: 123, root_place_id: 456, name: "Example", slug: "example-stats" } : null;
   });
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "table").mockImplementation(() => {});
@@ -95,7 +100,7 @@ beforeEach(async () => {
     universe_id: 123, wiki_slug: "example", collection_slug: "pets", code: "example-pets", title: "All {count} Pets in Example", display_name: "Pets", seo_title: "All {count} Pets in Example", meta_description: "Example pets.", intro_md: "Pets hatch from eggs.", description_md: "Choose a pet.", description_json: {}, faq_json: [], wiki_md: "Pets hatch from eggs."
   }));
 });
-afterEach(async () => { vi.restoreAllMocks(); await fs.rm(root, { recursive: true, force: true }); });
+afterEach(async () => { vi.restoreAllMocks(); vi.unstubAllEnvs(); await fs.rm(root, { recursive: true, force: true }); });
 
 describe("publisher page selection", () => {
   it("dry-runs with selected manifest image decisions while other pages and decisions remain unfinished", async () => {
@@ -156,5 +161,67 @@ describe("publisher page selection", () => {
     expect(state.universe).not.toHaveBeenCalled();
     expect(state.registry).not.toHaveBeenCalled();
     expect(state.events).toEqual([]);
+  });
+
+  it("keeps publisher registry reads strict", async () => {
+    state.groups.mockRejectedValueOnce(new Error("Registry unavailable"));
+    await expect(publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow("Registry unavailable");
+    expect(state.events).toEqual([]);
+  });
+
+  it.each(["https://media.bloxodes.com/wrong", "https://media.bloxodes.com", "https://media.bloxodes.com/wiki/nested", "https://media.bloxodes.com/wiki?x=1", "https://other.example/wiki"])("rejects the incorrect media base %s before writes", async base => {
+    vi.stubEnv("WIKI_MEDIA_PUBLIC_BASE_URL", base);
+    const logged = vi.spyOn(console, "error").mockImplementation(() => {});
+    await expect(publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow("preflight check(s) failed");
+    expect(logged).toHaveBeenCalledWith(expect.stringContaining("publication uses https://media.bloxodes.com/wiki"));
+    expect(state.events).toEqual([]);
+  });
+
+  it("accepts the normalized exact media base", async () => {
+    vi.stubEnv("WIKI_MEDIA_PUBLIC_BASE_URL", "  https://media.bloxodes.com/wiki///  ");
+    await publishBundle({ command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: root, only: ["pets"] });
+    expect(state.events).toEqual([]);
+  });
+
+  it.each([false, true])("rejects a new editorial slug equal to the previewed stats slug, apply=%s", async apply => {
+    state.groups.mockResolvedValue([]);
+    state.previewUniverse.mockResolvedValue({ universe_id: 123, root_place_id: 456, name: "Example", slug: "example" });
+    const logged = vi.spyOn(console, "error").mockImplementation(() => {});
+    await expect(publishBundle({ command: "publish", target: "managed-dev", apply, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow("preflight check(s) failed");
+    expect(logged).toHaveBeenCalledWith(expect.stringContaining("stats identity"));
+    expect(state.previewUniverse).toHaveBeenCalledWith(123);
+    expect(state.universe).toHaveBeenCalledTimes(1);
+    expect(state.events).toEqual([]);
+  });
+
+  it.each([
+    { universe_id: 123, root_place_id: 456, name: "Example", slug: "example" },
+    { universe_id: 999, root_place_id: 456, name: "Example", slug: "example-stats" },
+    { universe_id: 123, root_place_id: 999, name: "Example", slug: "example-stats" },
+    { universe_id: 123, root_place_id: 456, name: "Example", slug: "" }
+  ])("rechecks imported identity and stats slug before media or page writes: %j", async imported => {
+    state.groups.mockResolvedValue([]);
+    state.universe.mockImplementation(async (_db: unknown, _id: number, apply: boolean) => {
+      if (apply) state.events.push("import");
+      return apply ? imported : null;
+    });
+    await expect(publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow(/stats identity|Imported universe identity/);
+    expect(state.events).toEqual(["import"]);
+    expect(state.apply).not.toHaveBeenCalled();
+    expect(state.registry).not.toHaveBeenCalled();
+  });
+
+  it("uses the stored stats identity without previewing an existing universe", async () => {
+    state.universe.mockResolvedValue({ universe_id: 123, root_place_id: 456, name: "Example", slug: "example-stats" });
+    await publishBundle({ command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: root, only: ["pets"] });
+    expect(state.previewUniverse).not.toHaveBeenCalled();
+  });
+
+  it("stops before imports and publication when the read-only universe fetch fails", async () => {
+    state.previewUniverse.mockRejectedValueOnce(new Error("Roblox identity unavailable"));
+    await expect(publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow("Roblox identity unavailable");
+    expect(state.events).toEqual([]);
+    expect(state.apply).not.toHaveBeenCalled();
+    expect(state.registry).not.toHaveBeenCalled();
   });
 });

@@ -4,6 +4,7 @@ import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { GameCollectionView } from "@/components/game-collections/GameCollectionView";
+import { getCollectionFieldLabels } from "@/lib/game-collections";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
@@ -57,6 +58,7 @@ type ForgeDatasetMeta = {
   updatedAt?: string | null;
   sources?: ForgeDatasetSource[] | null;
   columns?: string[] | null;
+  display?: { fieldLabels?: Record<string, string> } | null;
 };
 
 export type GameCollectionItem = {
@@ -353,6 +355,8 @@ export function renderTheForgeCollectionPage({
   prepared?: TheForgePreparedCollection;
 }) {
   const preparedCollection = prepared ?? buildTheForgePreparedCollection(config, dataset);
+  const fieldLabels = getCollectionFieldLabels(preparedCollection.dataset.meta?.display);
+  const viewConfig = Object.keys(fieldLabels).length ? { ...config, fieldLabels: { ...config.fieldLabels, ...fieldLabels } } : config;
   const items = preparedCollection.dataset.items;
   const itemCount = preparedCollection.itemCount;
   const pageTitle = `All ${itemCount.toLocaleString("en-US")} ${config.label} in The Forge`;
@@ -468,7 +472,7 @@ export function renderTheForgeCollectionPage({
         ) : null}
           </>}
           sections={pageSections}
-          config={config}
+          config={viewConfig}
           pagination={pagination.info}
           toolbar={
             <>

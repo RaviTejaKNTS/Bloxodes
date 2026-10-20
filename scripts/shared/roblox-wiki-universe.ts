@@ -1,5 +1,10 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
+export async function previewContentUniverse(universeId: number) {
+  const { previewRobloxUniverse } = await import("../universes/enrich-roblox-universes");
+  return previewRobloxUniverse(universeId);
+}
+
 export async function ensureContentUniverse(
   db: SupabaseClient,
   universeId: number,

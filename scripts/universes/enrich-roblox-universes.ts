@@ -627,9 +627,8 @@ async function fetchGameDetails(universeIds: number[]): Promise<RobloxGameDetail
   return Array.isArray(data?.data) ? (data.data as RobloxGameDetail[]) : [];
 }
 
-// Content publication needs the same API mapping as stats, without batch jobs or attachments.
-export async function importRobloxUniverse(
-  supabase: ReturnType<typeof supabaseAdmin>,
+// Read-only publication preflight uses the same identity mapping as stats import.
+export async function previewRobloxUniverse(
   universeId: number,
   fetchDetails: typeof fetchGameDetails = fetchGameDetails
 ) {
@@ -641,12 +640,22 @@ export async function importRobloxUniverse(
   }
   const payload = mapGameDetail(detail, null)!;
   payload.last_light_enriched_at = nowIso();
+  return { ...payload, slug: String(payload.slug), name: String(payload.name) };
+}
+
+// Content publication needs the same API mapping as stats, without batch jobs or attachments.
+export async function importRobloxUniverse(
+  supabase: ReturnType<typeof supabaseAdmin>,
+  universeId: number,
+  fetchDetails: typeof fetchGameDetails = fetchGameDetails
+) {
+  const payload = await previewRobloxUniverse(universeId, fetchDetails);
   // Another publisher or stats job may have inserted it after preflight. Keep that row.
   const write = await supabase.from("roblox_universes").upsert(payload, { onConflict: "universe_id", ignoreDuplicates: true });
   if (write.error) throw new Error(`Universe ${universeId} import failed: ${write.error.message}`);
   const result = await supabase.from("roblox_universes").select("universe_id,root_place_id,name,slug").eq("universe_id", universeId).single();
   if (result.error) throw new Error(`Universe ${universeId} import readback failed: ${result.error.message}`);
-  if (!result.data || Number(result.data.universe_id) !== universeId || Number(result.data.root_place_id) !== detail.rootPlaceId || !result.data.name?.trim() || !result.data.slug?.trim()) {
+  if (!result.data || Number(result.data.universe_id) !== universeId || Number(result.data.root_place_id) !== payload.root_place_id || !result.data.name?.trim() || !result.data.slug?.trim()) {
     throw new Error(`Universe ${universeId} import readback did not match the Roblox identity.`);
   }
   return result.data;

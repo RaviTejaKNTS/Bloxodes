@@ -53,12 +53,18 @@ test("missing universes are notes in dry runs and import only on apply", async (
 test("universe import uses the stats API mapper, preserves concurrent inserts and verifies identity", async () => {
   // Import the job without invoking its standalone entrypoint or loading target credentials.
   process.env.BLOXODES_ENV_PROFILE = "process-only";
-  const { importRobloxUniverse } = await import("../../universes/enrich-roblox-universes");
+  const { importRobloxUniverse, previewRobloxUniverse } = await import("../../universes/enrich-roblox-universes");
   const details = async (ids: number[]) => {
     assert.deepEqual(ids, [123]);
     return [{ id: 123, name: "Example", rootPlaceId: 456, playing: 10, visits: 100, creator: { id: 789, name: "Creator", type: "Group" } }];
   };
   const db = database();
+  const preview = await previewRobloxUniverse(123, details);
+  assert.equal(preview.universe_id, 123);
+  assert.equal(preview.root_place_id, 456);
+  assert.equal(preview.slug, "example");
+  assert.deepEqual(db.writes, []);
+  await assert.rejects(previewRobloxUniverse(123, async () => [{ id: 999, rootPlaceId: 456, name: "Wrong" }]), /no complete game details/);
   const row = await importRobloxUniverse(db.client, 123, details);
   assert.equal(row.root_place_id, 456);
   assert.equal(db.writes[0].payload.creator_id, 789);

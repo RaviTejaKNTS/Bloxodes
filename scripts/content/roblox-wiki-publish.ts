@@ -9,7 +9,7 @@ import { THE_FORGE_COLLECTIONS } from "@/lib/game-collections/the-forge-view";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { readGameCollectionGroups } from "@/lib/game-collections/registry";
 import { resolveSeoTitle } from "@/lib/seo";
-import { resolveWikiMediaUrl } from "@/lib/wiki-media";
+import { resolveWikiMediaUrl, wikiMediaPublicBaseUrl } from "@/lib/wiki-media";
 import { fetchOfficialUniverseMedia, hasOfficialUniverseMedia, persistOfficialUniverseMedia } from "@/lib/roblox/universe-media";
 import { officialUniverseCover } from "../shared/official-universe-cover";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
@@ -21,7 +21,7 @@ import { targetSources, planCollection, pageCopyFromFinal, uploadPlanMedia, veri
 import { publicCopyFindings } from "./check-public-copy";
 import { assertRobloxCollectionCopy } from "./roblox-collection-copy";
 import { assertEditorialSlug, bundlePath, selectBundlePages, resolveCollectionOrders, assertCollectionFinalOrder, assertCollectionMissingImages } from "../shared/roblox-wiki-bundle";
-import { ensureContentUniverse } from "../shared/roblox-wiki-universe";
+import { ensureContentUniverse, previewContentUniverse } from "../shared/roblox-wiki-universe";
 import type { ContentOptions } from "./roblox-wiki-cli";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
@@ -161,13 +161,14 @@ export async function publishBundle(options: ContentOptions) {
   const registry = await readGameCollectionGroups(db);
   const existingGroup = registry.find(group => group.gameSlug === bundle.game.slug);
   const universe = await ensureContentUniverse(db, bundle.game.universeId, false);
+  const plannedUniverse = universe ?? await previewContentUniverse(bundle.game.universeId);
   const gameOrder = bundle.game.sortOrder ?? existingGroup?.sortOrder ?? Math.max(0, ...registry.map(group => group.sortOrder)) + 1000;
   const collectionOrders = resolveCollectionOrders(selected.collections.map(({ manifest }) => manifest.collection), existingGroup, gameOrder);
   const hubs = await db.from("wiki_pages").select("*").or(`slug.eq.${bundle.game.slug},universe_id.eq.${bundle.game.universeId}`);
   if (hubs.error) throw hubs.error;
   const existingHub = (hubs.data ?? []).find(row => row.slug === bundle.game.slug);
   await check("editorial slug and game ownership", async () => {
-    assertEditorialSlug(bundle.game.slug, bundle.game.universeId, universe?.slug ?? null, existingHub?.slug ?? existingGroup?.gameSlug);
+    assertEditorialSlug(bundle.game.slug, bundle.game.universeId, plannedUniverse.slug, existingHub?.slug ?? existingGroup?.gameSlug);
     if (registry.some(group => group.gameSlug !== bundle.game.slug && group.universeId === bundle.game.universeId) || (existingGroup?.universeId != null && existingGroup.universeId !== bundle.game.universeId)) throw new Error("Registry game/universe identity conflicts with another game. Keep the registered identity.");
     for (const row of hubs.data ?? []) if (row.slug !== bundle.game.slug || Number(row.universe_id) !== bundle.game.universeId) throw new Error("Hub game/universe identity conflicts with an existing row. Keep the stored editorial slug.");
   });
@@ -234,7 +235,7 @@ export async function publishBundle(options: ContentOptions) {
   }
   await check("R2 configuration", async () => {
     if (loadR2ClientConfig().bucket !== "bloxodes-wiki") throw new Error("WIKI_R2_BUCKET must be bloxodes-wiki.");
-    if (new URL(resolveWikiMediaUrl("readiness")!).origin !== "https://media.bloxodes.com") throw new Error("Remove WIKI_MEDIA_PUBLIC_BASE_URL override; publication uses https://media.bloxodes.com/wiki.");
+    if (wikiMediaPublicBaseUrl() !== "https://media.bloxodes.com/wiki") throw new Error("Remove WIKI_MEDIA_PUBLIC_BASE_URL override; publication uses https://media.bloxodes.com/wiki.");
   });
   if (options.target === "production" && !process.env.REVALIDATE_SECRET) failures.push("Set REVALIDATE_SECRET in the production target for immediate revalidation.");
   if (failures.length) throw new Error(`${failures.length} preflight check(s) failed. Fix the findings above and rerun the same bundle. No database or media writes were made.`);
@@ -242,7 +243,13 @@ export async function publishBundle(options: ContentOptions) {
   if (!options.apply) { console.log("PASS all checks. Dry run complete; no database or media writes. Add --apply to publish."); return; }
   // Repeat the production guard immediately before the first write.
   if (options.target === "production") await assertLocalContentPublication();
-  if (!universe) await ensureContentUniverse(db, bundle.game.universeId, true);
+  if (!universe) {
+    const imported = await ensureContentUniverse(db, bundle.game.universeId, true);
+    if (!imported || Number(imported.universe_id) !== bundle.game.universeId || Number(imported.root_place_id) !== Number(plannedUniverse.root_place_id) || !imported.name?.trim() || !imported.slug?.trim()) {
+      throw new Error("Imported universe identity differs from preflight. No content pages or media were written.");
+    }
+    assertEditorialSlug(bundle.game.slug, bundle.game.universeId, imported.slug, existingHub?.slug ?? existingGroup?.gameSlug);
+  }
   if (hub && existingHub && options.target === "production") {
     const directory = path.join(repoRoot, "tmp/publish-snapshots");
     await fs.mkdir(directory, { recursive: true, mode: 0o700 });
