@@ -28,8 +28,8 @@ test("HEAD behind the deployed SHA passes with harmless differences", () => {
   assert.doesNotThrow(() => assertPublicationCheckout({ ...checkout, relationship: "behind", changedFiles: ["README.md", ".agents/skills/example/SKILL.md"] }));
 });
 
-test("HEAD behind with contract differences names the files and requires a pull", () => {
-  assert.throws(() => assertPublicationCheckout({ ...checkout, relationship: "behind", changedFiles: ["contracts/roblox-wiki/v1/schema.ts"] }), /contracts\/roblox-wiki\/v1\/schema\.ts\nHEAD is behind.*Pull origin\/production/);
+test("HEAD behind with web differences names the files and requires a pull", () => {
+  assert.throws(() => assertPublicationCheckout({ ...checkout, relationship: "behind", changedFiles: ["apps/web/src/lib/wiki-images.ts"] }), /apps\/web\/src\/lib\/wiki-images\.ts\nHEAD is behind.*Pull origin\/production/);
 });
 
 test("every publish-relevant directory and root package file blocks a SHA difference", () => {
@@ -37,12 +37,13 @@ test("every publish-relevant directory and root package file blocks a SHA differ
     const file = prefix.endsWith("/") ? `${prefix}example.ts` : prefix;
     assert.throws(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: [file] }), error => error instanceof Error && error.message.includes(file));
   }
-  assert.doesNotThrow(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: ["apps/web-other/example.ts", "contracts-old/schema.ts", "package.json.bak", "nested/package.json"] }));
+  assert.doesNotThrow(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: ["apps/web-other/example.ts", "data-old/x.json", "package.json.bak", "nested/package.json", "apps/web/src/app/AGENTS.md"] }));
 });
 
-test("publisher dependencies outside the content scripts also block a SHA difference", () => {
-  for (const file of ["scripts/ops/release-production-schema.ts", "scripts/ops/studio-container-psql.mjs", "scripts/ci/migration-transaction.mjs", "tsconfig.json", "env/config.json", "supabase/migration-policy.json"]) {
-    assert.throws(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: [file] }), error => error instanceof Error && error.message.includes(file));
+test("code that runs from the checkout itself doesn't block, because merges that only change it don't deploy", () => {
+  const localOnly = ["scripts/content/roblox-wiki-publish.ts", "scripts/shared/local-content-publication-guard.ts", "scripts/ops/release-production-schema.ts", "scripts/ci/migration-transaction.mjs", "contracts/roblox-wiki/v1/schema.ts", "supabase/migrations/20261020133300_x.sql", "tsconfig.json", "env/config.json"];
+  for (const relationship of ["ahead", "behind"] as const) {
+    assert.doesNotThrow(() => assertPublicationCheckout({ ...checkout, relationship, changedFiles: localOnly }));
   }
 });
 
@@ -124,7 +125,7 @@ test("local guard ignores untracked files, fetches production, checks both ances
 });
 
 test("local guard fails before the ledger for tracked changes or relevant SHA differences", () => {
-  for (const options of [{ trackedStatus: " M README.md" }, { changedFiles: ["apps/web/page.tsx"] }, { changedFiles: ["contracts/schema.ts"], behind: true }]) {
+  for (const options of [{ trackedStatus: " M README.md" }, { changedFiles: ["apps/web/page.tsx"] }, { changedFiles: ["apps/web/src/lib/x.ts"], behind: true }]) {
     const result = runLocalGuard(options);
     assert.ok(result.error);
     assert.ok(result.calls.every(call => call[0] === "git"));
