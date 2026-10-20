@@ -1,5 +1,6 @@
 import {expect, test, type Page, type TestInfo} from '@playwright/test';
 import fs from 'node:fs';
+import {THEME_COOKIE, normalizeTheme, type Theme} from '../src/lib/theme';
 
 type VisibleFact = {key: string; label: string; text: string; description: boolean};
 type CollectionEntry = {path: string; hubPath: string; pageType: 'database' | 'collectible'; count: number; code: string; label: string; imageCount: number; reviewImages: string[]; display: Record<string, unknown>; visibleFacts: Record<'cards' | 'list', VisibleFact[]>; items: Array<{item: {name: string; [key: string]: unknown}; system: {section: string; slug: string}}>};
@@ -152,22 +153,48 @@ for (const entry of selected.collections) {
         await page.goto(entry.path);
         const targets = entry.reviewImages.length ? entry.reviewImages : [entry.items[0].item.name];
         await info.attach('targeted-image-inventory.json', {body: JSON.stringify({collection: entry.path, targets}), contentType: 'application/json'});
-        for (const [index, name] of targets.entries()) {
-          const preview = page.getByRole('button', {name: `Open larger image for ${name}`, exact: true});
-          await expect(async () => {
-            await preview.scrollIntoViewIfNeeded();
-            await expect(preview).toBeVisible();
-          }).toPass({timeout: 30_000});
-          await expect.poll(() => preview.locator('img').evaluate(image => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0)).toBe(true);
-          // Capture the card background as well as the enlarged image for contrast review.
-          await page.screenshot({path: info.outputPath(`image-card-${index}.png`)});
-          await preview.click();
-          const dialog = page.getByRole('dialog');
-          await expect(dialog).toBeVisible();
-          await expect.poll(() => dialog.locator('img').evaluate(image => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0)).toBe(true);
-          await page.screenshot({path: info.outputPath(`larger-image-${index}.png`)});
-          await page.getByRole('button', {name: 'Close', exact: true}).click();
-          await expect(dialog).toHaveCount(0);
+        const captureImages = async (theme?: Theme) => {
+          for (const [index, name] of targets.entries()) {
+            const suffix = theme ? `-${theme}` : '';
+            const preview = page.getByRole('button', {name: `Open larger image for ${name}`, exact: true});
+            await expect(async () => {
+              await preview.scrollIntoViewIfNeeded();
+              await expect(preview).toBeVisible();
+            }).toPass({timeout: 30_000});
+            await expect.poll(() => preview.locator('img').evaluate(image => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0)).toBe(true);
+            // Loaded images still need human contrast review against the card and dialog backgrounds.
+            await page.screenshot({path: info.outputPath(`image-card-${index}${suffix}.png`)});
+            await preview.click();
+            const dialog = page.getByRole('dialog');
+            await expect(dialog).toBeVisible();
+            await expect.poll(() => dialog.locator('img').evaluate(image => image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0)).toBe(true);
+            await page.screenshot({path: info.outputPath(`larger-image-${index}${suffix}.png`)});
+            await page.getByRole('button', {name: 'Close', exact: true}).click();
+            await expect(dialog).toHaveCount(0);
+          }
+        };
+        if (entry.reviewImages.length) {
+          const context = page.context();
+          const originalCookies = (await context.cookies(page.url())).filter(cookie => cookie.name === THEME_COOKIE);
+          const originalTheme = normalizeTheme(await page.locator('html').getAttribute('data-theme')) ?? 'dark';
+          try {
+            for (const theme of ['light', 'dark'] as const) {
+              // Use ThemeBootstrap's real cookie path without the toggle's preference-saving server action.
+              await context.addCookies([{name: THEME_COOKIE, value: theme, url: new URL(page.url()).origin}]);
+              await page.reload({waitUntil: 'load'});
+              await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+              if (theme === 'dark') await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+              else await expect(page.locator('html')).not.toHaveClass(/\bdark\b/);
+              await captureImages(theme);
+            }
+          } finally {
+            await context.clearCookies({name: THEME_COOKIE});
+            await context.addCookies(originalCookies);
+            await page.reload({waitUntil: 'load'});
+            await expect(page.locator('html')).toHaveAttribute('data-theme', originalTheme);
+          }
+        } else {
+          await captureImages();
         }
       }
       return;
