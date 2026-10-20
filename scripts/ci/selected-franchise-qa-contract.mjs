@@ -71,7 +71,7 @@ export function selectedFranchisePlan(base, input) {
     const datasetFile = resolve(manifest.dataset), finalFile = resolve(manifest.finalJson ?? 'final.json');
     const mediaRoot = resolve(manifest.mediaRoot, {directory: true, optional: true});
     const dataset = json(datasetFile), final = json(finalFile);
-    const route = `/${namespace}/wiki/${manifest.game.slug}/${manifest.collection.slug}`;
+    const route = `/${namespace}/wiki${manifest.game.slug === namespace ? '' : `/${manifest.game.slug}`}/${manifest.collection.slug}`;
     if (manifest.route !== route || dataset.meta?.schemaVersion !== 2 || dataset.meta.gameSlug !== manifest.game.slug || dataset.meta.collection !== manifest.collection.slug || !Array.isArray(dataset.items) || !dataset.items.length || dataset.items.length > 10000 || final.code !== `${manifest.game.slug}-${manifest.collection.slug}` || final.wiki_slug !== manifest.game.slug || final.collection_slug !== manifest.collection.slug) throw new Error('Selected dataset, final and route must match the manifest.');
     for (const row of dataset.items) if (row.system?.image) {
       const image = row.system.image.replace(/^media\//, '');

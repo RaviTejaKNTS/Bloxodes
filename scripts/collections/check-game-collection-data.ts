@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { imageLocalPath } from "./local-image-path";
 import { publicProvenanceMatch } from "../content/public-provenance";
+import { isAchievementReference, usefulCollectionItemFields } from "../shared/collection-data-quality";
 
 import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
 
@@ -407,7 +408,7 @@ async function main() {
     issues.push({ level: "error", message: "Display fields must not list \"name\"; the card title already renders item.name." });
   }
 
-  const usefulFieldKeys = columns.filter((key) => {
+  const usefulFieldKeys = usefulCollectionItemFields(columns).filter((key) => {
     if (HIDDEN_FIELD_KEYS.has(key)) return false;
     if (key === sectionField) return false;
     if (key === "cardSummary") return false;
@@ -422,7 +423,8 @@ async function main() {
     && rows.length >= 10
     && rows.every((row) => typeof row.guideNumber === "number" && Number.isInteger(row.guideNumber)
       && Boolean(stringValue(row.location)) && Boolean(stringValue(row.image)));
-  if (usefulFieldKeys.length <= 2 && !imageBackedLocationGuide) {
+  if (usefulFieldKeys.length <= 2 && !imageBackedLocationGuide
+    && !isAchievementReference(document, `${options.game}-${options.collection}`)) {
     issues.push({
       level: "error",
       message: `Collection has only ${usefulFieldKeys.length} useful field(s) beyond name/cardSummary (${usefulFieldKeys.join(", ") || "none"}). Enrich to GTABase parity before publishing.`

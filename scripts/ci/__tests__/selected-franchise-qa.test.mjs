@@ -46,6 +46,48 @@ test('selection binds publisher, namespace, payload groups and exact public path
   } finally { fs.rmSync(root, {recursive: true, force: true}); }
 });
 
+for (const game of ['example', 'child-game']) test(`collection selection binds the ${game === 'example' ? 'root' : 'child'} game route and identity`, () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'selected-collection-'));
+  const route = game === 'example' ? '/example/wiki/achievements' : '/example/wiki/child-game/achievements';
+  const wrongRoute = game === 'example' ? '/example/wiki/example/achievements' : '/example/wiki/achievements';
+  const manifest = {schemaVersion: 1, namespace: 'example', game: {slug: game}, collection: {slug: 'achievements', pageType: 'database'}, route, dataset: 'dataset.json', finalJson: 'final.json', mediaRoot: 'media'};
+  const dataset = {meta: {schemaVersion: 2, gameSlug: game, collection: 'achievements'}, items: [{item: {name: 'Hidden achievement'}, system: {slug: 'hidden-achievement', image: null}}]};
+  const final = {code: `${game}-achievements`, wiki_slug: game, collection_slug: 'achievements'};
+  const batch = {version: 1, operations: [{publisher: 'franchise-collection', namespace: 'example', file: 'collection/manifest.json'}], urls: [{path: route, contains: 'Achievements'}], events: [{type: 'game_content', slug: 'example'}]};
+  const write = (file, value) => fs.writeFileSync(path.join(root, 'collection', file), JSON.stringify(value));
+  try {
+    fs.mkdirSync(path.join(root, 'collection'));
+    write('manifest.json', manifest);
+    write('dataset.json', dataset);
+    write('final.json', final);
+    write('images.json', {acceptedGapCount: 1, acceptedGaps: [{systemSlug: 'hidden-achievement', status: 'text-only/accepted missing', decisionReason: 'Reviewed hidden row.'}]});
+    const [entry] = selectedFranchisePlan(root, batch).collections;
+    assert.equal(entry.path, route);
+    assert.deepEqual(entry.policy, {requireImages: false, acceptedMissing: ['hidden-achievement']});
+    assert.equal(entry.datasetFile, path.join(root, 'collection', 'dataset.json'));
+    assert.throws(() => selectedFranchisePlan(root, {...batch, urls: [{path: wrongRoute, contains: 'Wrong route'}]}), /exactly match/);
+    for (const replacement of [wrongRoute, '/other/wiki/achievements', `${route}/`]) {
+      write('manifest.json', {...manifest, route: replacement});
+      assert.throws(() => selectedFranchisePlan(root, batch), /must match the manifest/);
+      assert.throws(() => selectedFranchisePlan(root, {...batch, urls: [{path: replacement, contains: 'Wrong route'}]}), /must match the manifest/);
+    }
+    write('manifest.json', manifest);
+    write('dataset.json', {...dataset, meta: {...dataset.meta, gameSlug: 'unselected'}});
+    assert.throws(() => selectedFranchisePlan(root, batch), /must match the manifest/);
+    write('dataset.json', dataset);
+    write('final.json', {...final, wiki_slug: 'unselected'});
+    assert.throws(() => selectedFranchisePlan(root, batch), /must match the manifest/);
+    write('final.json', final);
+    for (const mutation of [{namespace: 'other'}, {dataset: '../dataset.json'}, {mediaRoot: '../media'}]) {
+      write('manifest.json', {...manifest, ...mutation});
+      assert.throws(() => selectedFranchisePlan(root, batch));
+    }
+    write('manifest.json', manifest);
+    write('images.json', {acceptedGapCount: 0, acceptedGaps: []});
+    assert.throws(() => selectedFranchisePlan(root, batch), /Every missing image/);
+  } finally { fs.rmSync(root, {recursive: true, force: true}); }
+});
+
 test('two selected pages require exactly one URL for each path, in either order', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'selected-inventory-'));
   const urls = [{path: '/example/wiki', contains: 'Example'}, {path: '/example/wiki/world', contains: 'World'}];

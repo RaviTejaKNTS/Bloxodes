@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { isAchievementReference, usefulCollectionItemFields } from "../shared/collection-data-quality";
 
 import { repoPath } from "@/lib/paths";
 
@@ -283,7 +284,7 @@ function auditDataset(code: string, datasetPath: string, document: DatasetDocume
     addIssue(issues, code, datasetPath, "Display fields must not list \"name\"; the card title already renders item.name.");
   }
 
-  const usefulItemFields = itemFields.filter((field) => !["name", "cardSummary", "slug"].includes(field));
+  const usefulItemFields = usefulCollectionItemFields(itemFields);
   const imageBackedLocationGuide = usefulItemFields.length === 2
     && usefulItemFields.includes("guideNumber")
     && usefulItemFields.includes("location")
@@ -295,7 +296,7 @@ function auditDataset(code: string, datasetPath: string, document: DatasetDocume
         && typeof item.location === "string" && Boolean(item.location.trim())
         && typeof system.image === "string" && Boolean(system.image.trim());
     });
-  if (usefulItemFields.length <= 2 && !imageBackedLocationGuide) {
+  if (usefulItemFields.length <= 2 && !imageBackedLocationGuide && !isAchievementReference(document, code)) {
     addIssue(
       issues,
       code,
