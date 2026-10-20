@@ -40,6 +40,12 @@ test("every publish-relevant directory and root package file blocks a SHA differ
   assert.doesNotThrow(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: ["apps/web-other/example.ts", "contracts-old/schema.ts", "package.json.bak", "nested/package.json"] }));
 });
 
+test("publisher dependencies outside the content scripts also block a SHA difference", () => {
+  for (const file of ["scripts/ops/release-production-schema.ts", "scripts/ops/studio-container-psql.mjs", "scripts/ci/migration-transaction.mjs", "tsconfig.json", "env/config.json", "supabase/migration-policy.json"]) {
+    assert.throws(() => assertPublicationCheckout({ ...checkout, relationship: "ahead", changedFiles: [file] }), error => error instanceof Error && error.message.includes(file));
+  }
+});
+
 test("modified and staged tracked files fail even with matching SHAs", () => {
   for (const trackedStatus of [" M README.md", "M  README.md", "A  draft.md", "D  package.json"]) {
     assert.throws(() => assertPublicationCheckout({ ...checkout, deployed: head, trackedStatus }), /Commit or restore tracked changes/);

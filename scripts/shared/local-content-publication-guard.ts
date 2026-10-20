@@ -10,7 +10,12 @@ export const PUBLICATION_RELEVANT_PATHS = [
   "scripts/shared/",
   "scripts/collections/",
   "scripts/universes/",
+  "scripts/ops/",
+  "scripts/ci/",
   "supabase/migrations/",
+  "supabase/migration-policy.json",
+  "env/config.json",
+  "tsconfig.json",
   "package.json",
   "package-lock.json"
 ] as const;
