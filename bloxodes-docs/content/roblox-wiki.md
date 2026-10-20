@@ -41,7 +41,7 @@ The code repo owns one versioned publish command and its contract, `contracts/ro
 | `npm run content:candidates -- --target production` | Top-100 games with no hub, highest rank first. Doesn't claim the queue row. |
 | `npm run content:deployed-sha` | The live deployed SHA. |
 
-- **Production guard:** run from a clean checkout whose HEAD is the live deployed SHA (and on `origin/production`), with no pending production migrations. The command refuses otherwise.
+- **Production guard:** the checkout must be on `origin/production` (or behind it) with no changed tracked files, and nothing between it and the live deployed SHA may touch publish code: `apps/web/`, `contracts/`, the content, shared, collection and universe scripts, migrations, or the package files. Docs-only differences are fine. Production must have no pending migrations. The command never moves the checkout; it refuses and says why.
 - **What an apply does:** imports the universe row if the target lacks it (the dry run previews it from the Roblox API and checks the editorial slug against its stats slug), uploads item images and the official hub cover to R2, writes the hub and an immutable revision per collection, merges the game into `roblox_wiki_registry`, reads everything back. Production also snapshots an overwritten hub to `tmp/publish-snapshots/`, revalidates and fetches each live URL.
 - **Not one transaction.** A late failure can leave some pages published. Rerun the same bundle; revision hashes make it safe.
 - The dry run is a scoped exception to "no checks locally". Builds, test suites and browser QA still run on GitHub.
@@ -53,7 +53,8 @@ The code repo owns one versioned publish command and its contract, `contracts/ro
 
 - **Roles:** the main agent is Codex `gpt-6.1-sol`. One Luna builder per page does research, data, images and a draft (`roblox-wiki-builder`). One Haiku 5.5 content manager per page rewrites the copy and cleans labels and SEO (`roblox-content-manager`). Only the main agent pushes.
 - **Content:** `content/roblox/<game-slug>/` holds the bundle. Everything except media is committed there, so git history is the edit history.
-- **Publishing:** `bin/publisher` runs `content:publish`, `content:status` and `content:candidates` from `/srv/data/projects/bloxodes-publisher`, a clean detached worktree of this repo kept at the live deployed SHA, with `.envs` linked to the homelab env. Never edit that worktree.
+- **Publishing:** `bin/publisher` runs `content:publish`, `content:status` and `content:candidates` from the device's main Bloxodes checkout (`/srv/data/projects/Bloxodes` on the homelab, `~/projects/Bloxodes` on the Macs), which T3 auto-pulls. It never moves that checkout.
+- **Repo and devices:** `github.com/RaviTejaKNTS/bloxodes-content-factory` (private, sync only). Checked out next to Bloxodes on each device.
 - **Contract changes:** when this repo ships `roblox-wiki@2`, update the Content Factory docs and skills in the same change, or the factory's pushes will be rejected.
 
 ## Data

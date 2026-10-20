@@ -76,7 +76,7 @@ Record approval notes or specific corrections in the collection brief before sen
 12. Confirm the collection folder has `brief.md`, `dataset.json`, `media/`, `final.json` and `runtime-manifest.json` (label, `pageType`, sources, and `missingImages` for any item without an image). Add it to the game's `roblox-wiki@1` bundle (see `contracts/roblox-wiki/v1/README.md`), with the approved hub when needed. No registration file or code PR: publishing registers the collection in the database.
 13. Dry run with `npm run content:publish -- <abs-bundle> --only <collection-slug>` and send what it flags to the owning stage.
 14. With the go-ahead, stage with `--target managed-dev --apply` and review the readback: item count, fields, images, metadata. For screenshots or pagination and collectible-progress checks, use selected Roblox QA on GitHub.
-15. Return the bundle path, the publish report, blocked collections and page-type decisions. Production needs explicit authorization: `--target production --apply --allow-prod` from a clean checkout at the live SHA (`bloxodes-docs/content/roblox-wiki.md#publishing`). Don't claim browser QA you don't have a report for.
+15. Return the bundle path, the publish report, blocked collections and page-type decisions. Production needs explicit authorization: `--target production --apply --allow-prod` from an up-to-date checkout with no local changes (`bloxodes-docs/content/roblox-wiki.md#publishing`). Don't claim browser QA you don't have a report for.
 
 ## Research checks
 

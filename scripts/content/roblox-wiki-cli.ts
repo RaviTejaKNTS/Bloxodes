@@ -61,6 +61,7 @@ export function parseContentOptions(argv: string[]): ContentOptions {
 
 async function main() {
   if (process.argv.includes("--help")) {
+    const { PUBLICATION_RELEVANT_PATHS } = await import("../shared/local-content-publication-guard");
     console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--target managed-dev|production] [--apply [--allow-prod]]
 npm run content:publish -- /abs/game-bundle --only pets
 npm run content:publish -- /abs/game-bundle --only hub --only pets --target production --apply --allow-prod
@@ -68,6 +69,12 @@ npm run content:status -- --game <editorial-slug> [--target managed-dev|producti
 npm run content:candidates -- [--target managed-dev|production]
 npm run --silent content:deployed-sha
 Default target: managed-dev. Publication defaults to a read-only dry run.
+Run from the device's normal main checkout of Bloxodes.
+Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.
+SHA differences are allowed only outside these publish-relevant paths: ${PUBLICATION_RELEVANT_PATHS.join(", ")}.
+For relevant differences, wait for the deploy if HEAD is ahead, or pull origin/production if HEAD is behind.
+Tracked files must have no modified or staged changes. Untracked files are allowed.
+The production migration ledger must be ready. The guard repeats immediately before writes; it never checks out, pulls or resets the checkout.
 Record missingImages [{slug, reason}] in each collection's runtime-manifest.json or bundle entry.
 Both arrays merge; conflicting reasons fail. --only uses the selected collection's decisions.`);
     return;

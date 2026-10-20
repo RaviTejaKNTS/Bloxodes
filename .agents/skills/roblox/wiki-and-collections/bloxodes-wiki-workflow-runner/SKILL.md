@@ -51,7 +51,7 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 8. Dry run with `npm run content:publish -- <abs-bundle> --only hub` and fix what it flags. With the go-ahead, stage with `--target managed-dev --apply`.
 9. Return the bundle path and the publish report, or the actual failure.
 
-Production needs explicit authorization: `--target production --apply --allow-prod` from a clean checkout at the live SHA. See `bloxodes-docs/content/roblox-wiki.md#publishing`. For browser screenshots, selected Roblox QA on GitHub still works.
+Production needs explicit authorization: `--target production --apply --allow-prod` from an up-to-date checkout with no local changes. See `bloxodes-docs/content/roblox-wiki.md#publishing`. For browser screenshots, selected Roblox QA on GitHub still works.
 
 ## Parent checks
 

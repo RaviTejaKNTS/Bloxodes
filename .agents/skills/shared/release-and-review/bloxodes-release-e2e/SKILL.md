@@ -42,8 +42,8 @@ You take completed, user-approved work to production: a PR into `production`, Gi
 Roblox wiki hubs and collections don't need a PR or a GitHub publish. New games and collections register in the database on publish.
 
 1. Put the approved hub and collections in a `roblox-wiki@1` bundle (`contracts/roblox-wiki/v1/README.md`).
-2. From a clean checkout at the live deployed SHA (`npm run content:deployed-sha`), dry run, then stage: `npm run content:publish -- <abs-bundle>` and `... --target managed-dev --apply`.
-3. Publish: `npm run content:publish -- <abs-bundle> --target production --apply --allow-prod`. It refuses a dirty or stale checkout and pending migrations.
+2. From an up-to-date checkout with no local changes (the command checks it matches live code), dry run, then stage: `npm run content:publish -- <abs-bundle>` and `... --target managed-dev --apply`.
+3. Publish: `npm run content:publish -- <abs-bundle> --target production --apply --allow-prod`. It refuses changed tracked files, publish code that differs from live, and pending migrations.
 4. It's done only when the command's readback, revalidation and live URL checks pass. Keep any printed hub snapshot path in the report.
 
 If the run also needs code, release that first through the repository flow above.

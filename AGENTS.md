@@ -64,7 +64,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 
 **Checks and releases**
 
-- Run checks, tests, builds, content validation and browser QA on GitHub, never locally. Local work is reading, authoring and editing. One exception: the Roblox wiki publish command, `content:publish`, checks and publishes from a clean checkout at the live SHA ([doc](bloxodes-docs/content/roblox-wiki.md#publishing)).
+- Run checks, tests, builds, content validation and browser QA on GitHub, never locally. Local work is reading, authoring and editing. One exception: the Roblox wiki publish command, `content:publish`, checks and publishes from an up-to-date main checkout ([doc](bloxodes-docs/content/roblox-wiki.md#publishing)).
 - Commit, push or publish only when your task says so. Commit only your task's files.
 - Before a code PR, have an independent Codex agent review the diff.
 - Open PRs against `production` and link them to T3. Merge only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly or bypass protection.

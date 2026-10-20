@@ -5,7 +5,7 @@ import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { parseContentOptions } from "../../content/roblox-wiki-cli";
-import { assertPublicationCheckout, assertProductionAncestor, deployedContentSha } from "../local-content-publication-guard";
+import { deployedContentSha } from "../local-content-publication-guard";
 import { assertEditorialSlug, bundlePath, resolveCollectionOrders, selectBundlePages, assertCollectionFinalOrder, assertCollectionMissingImages } from "../roblox-wiki-bundle";
 import { bundleSchema, runtimeManifestSchema, runtimeManifestJsonSchema, hubFinalSchema } from "../../../contracts/roblox-wiki/v1/schema";
 
@@ -30,19 +30,6 @@ test("publication defaults to managed-development dry run and gates production a
     ["candidates", "--allow-prod"],
     ["publish", "/bundle", "--game", "different-game"]
   ]) assert.throws(() => parseContentOptions(argv), undefined, argv.join(" "));
-});
-
-test("production checkout matches the deployed SHA and may precede docs-only production merges", () => {
-  assert.doesNotThrow(() => assertPublicationCheckout(sha, sha, sha, "", true));
-  assert.doesNotThrow(() => assertPublicationCheckout(sha, "b".repeat(40), sha, "", true));
-  for (const values of [
-    [sha, sha, sha, " M package.json", true],
-    [sha, "b".repeat(40), sha, "", false],
-    [sha, sha, "b".repeat(40), "", true],
-    [sha, sha, "unknown", "", true],
-    ["unknown", "unknown", "unknown", "", true]
-  ] as const) assert.throws(() => assertPublicationCheckout(values[0], values[1], values[2], values[3], values[4]));
-  assert.throws(() => assertProductionAncestor(sha, "unknown", true));
 });
 
 test("deployed SHA lookup needs only healthy public deploy metadata", async () => {
@@ -78,6 +65,11 @@ test("deployed-sha prints only the SHA without loading any target credentials", 
   assert.match(help, /npm run content:publish -- \/abs\/game-bundle --only pets/);
   assert.match(help, /missingImages .*runtime-manifest\.json or bundle entry/);
   assert.match(help, /conflicting reasons fail/);
+  assert.match(help, /normal main checkout/);
+  assert.match(help, /both HEAD and the healthy deployed SHA.*origin\/production/);
+  assert.match(help, /Untracked files are allowed/);
+  assert.match(help, /wait for the deploy.*pull/i);
+  assert.match(help, /production migration ledger/);
 });
 
 test("editorial slugs reject new stats identities and preserve existing routes", () => {

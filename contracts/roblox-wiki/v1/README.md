@@ -1,6 +1,6 @@
 # Roblox wiki bundle v1
 
-The code repo owns this contract. Content Factory produces a folder, then invokes the released code repo's publisher. Adding a game or collection requires no source registration or code PR.
+The code repo owns this contract. Content Factory produces a folder, then invokes the publisher from the device's normal Bloxodes main checkout. Adding a game or collection requires no source registration or code PR.
 
 `schema.ts` exports the Zod schemas and their JSON Schema equivalents: `bundleJsonSchema`, `hubFinalJsonSchema`, `runtimeManifestJsonSchema` and `collectionFinalJsonSchema`. Dataset v2 also passes `audit-game-collection-datasets-v2.ts`; hub controls pass `wiki-controls.ts`. These checks and the runtime publishers remain in this repo.
 
@@ -83,7 +83,7 @@ This is a metadata fragment. Keep the dataset's required columns, display fields
 
 All image uploads go to R2 bucket `bloxodes-wiki`. Item images retain `<universe-id>/<collection-slug>/<item-slug>-<hash>.<ext>`. Covers use `<universe-id>/hubs/cover-<hash>.<ext>` and serve at `https://media.bloxodes.com/wiki/`. If `hub.coverImage` is omitted, the publisher downloads the official Roblox thumbnail. A supplied cover must match the current official thumbnail bytes and be 768x432 under 1 MB. The square header retains the official Roblox icon. Missing official universe media is fetched and its metadata is stored on apply; no image uploads use Supabase Storage.
 
-Run these commands from the released Bloxodes code checkout, pointing to a bundle in Content Factory:
+Run these commands from the normal Bloxodes main checkout, `/srv/data/projects/Bloxodes` on the homelab or `~/projects/Bloxodes` on a Mac, pointing to a bundle in Content Factory:
 
 ```sh
 npm run content:publish -- /abs/game-bundle
@@ -101,7 +101,9 @@ npm run --silent content:deployed-sha
 
 The shared env loader selects `managed-dev` or `production-preview`; production adds the `vps` overlay for read-only Studio ledger access. Process variables retain precedence, and a target mismatch fails. `process-only` remains available for injected CI credentials. Required names are `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE` and the four `WIKI_R2_*` names. Production also needs `REVALIDATE_SECRET` and the existing `VPS_SUPABASE_STUDIO_*` credentials. No new secret names are introduced.
 
-Production dry runs and applies fetch `origin/production` and require a clean checkout whose HEAD equals the healthy deployed SHA and is an ancestor of `origin/production`. Docs-only merges may put the production branch ahead of the deployment. `npm run --silent content:deployed-sha` prints only that 40-character deployed SHA and a newline. It calls the public `/api/health?scope=deploy` endpoint and needs no credentials. The `--silent` option suppresses npm's own script banner. The read-only schema release helper checks that the production migration ledger has no pending migrations. CI publishers retain their existing CI guard.
+Production dry runs and applies fetch `origin/production`. Both HEAD and the healthy deployed SHA must be ancestors of that fetched branch. HEAD may be ahead of or behind the deployment when their file diff touches no publish-relevant paths. `PUBLICATION_RELEVANT_PATHS` in `scripts/shared/local-content-publication-guard.ts` owns that path list, also printed by `--help`. A relevant difference fails with the affected files and tells you to wait for the deploy if HEAD is ahead, or pull `origin/production` if HEAD is behind. If the commits are on separate histories already merged into production, a relevant difference requires both a pull and a deploy. Docs-only differences pass. Modified or staged tracked files block publication; untracked files are allowed. The guard repeats immediately before writes and never checks out, pulls or resets the checkout.
+
+`npm run --silent content:deployed-sha` still prints only the healthy 40-character deployed SHA and a newline. It calls the public `/api/health?scope=deploy` endpoint and needs no credentials. The `--silent` option suppresses npm's own script banner. The read-only schema release helper still checks that the production migration ledger has no pending migrations or unresolved history exceptions. Its ledger-only mode allows untracked files; schema release modes retain their existing clean-tree requirement. CI publishers retain their existing CI guard.
 
 An apply uploads and verifies media, writes the hub and immutable collection revisions, reads back their fields and every item, then merges the registry entry. Production saves an existing hub row under `tmp/publish-snapshots/` before overwriting it, revalidates exact wiki URLs, fetches each URL, checks HTTP 200 and titles, decodes its images and prints the URLs. Managed-development URLs are labelled as production canonical URLs for staged rows.
 
