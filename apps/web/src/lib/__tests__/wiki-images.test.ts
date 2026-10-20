@@ -14,6 +14,14 @@ const page = {
 };
 
 describe("wiki image roles", () => {
+  it("uses the published R2 hub cover for cards and metadata while retaining the square icon", () => {
+    const cover = "https://media.bloxodes.com/wiki/123/hubs/cover-0123456789abcdef.png";
+    const published = { ...page, cover_image: cover };
+    expect(resolveWikiCardImage(published)).toBe(cover);
+    expect(resolveWikiMetadataImage(published)).toBe(cover);
+    expect(resolveWikiHeaderImage(published, [])).toBe(page.icon_url);
+  });
+
   it("uses a landscape universe thumbnail for wiki cards", () => {
     expect(resolveWikiCardImage(page)).toBe("https://tr.rbxcdn.com/game-thumbnail.png");
   });

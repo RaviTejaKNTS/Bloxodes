@@ -33,7 +33,8 @@ import {
 } from "@/lib/wiki-collection-runtime";
 import { listUniverseEventTimeline } from "@/lib/events-summary";
 import { repoPath } from "@/lib/paths";
-import { GAME_COLLECTIONS, getFieldLabel, getGameCollectionConfigByCode } from "@/lib/game-collections";
+import { getCollectionFieldLabels, getFieldLabel } from "@/lib/game-collections";
+import { listGameCollectionConfigs, getGameCollectionConfigByCode } from "@/lib/game-collection-registry";
 import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -748,12 +749,11 @@ function normalizePresentationTone(value: unknown): MobileContentDetailFieldTone
   return value === "positive" || value === "negative" || value === "warning" || value === "neutral" ? value : null;
 }
 
-function collectionFieldPresentation(payload: unknown): Record<string, MobileFieldPresentation> {
+export function collectionFieldPresentation(payload: unknown): Record<string, MobileFieldPresentation> {
   const { meta, display } = collectionDisplayConfig(payload);
   const raw = getRecordProperty(display, "fieldPresentation") ?? getRecordProperty(meta, "fieldPresentation");
-  if (!isRecord(raw)) return {};
   const result: Record<string, MobileFieldPresentation> = {};
-  for (const [key, entry] of Object.entries(raw)) {
+  for (const [key, entry] of Object.entries(isRecord(raw) ? raw : {})) {
     if (typeof entry === "string") {
       const kind = normalizePresentationKind(entry);
       if (kind) result[key] = { kind };
@@ -765,6 +765,9 @@ function collectionFieldPresentation(payload: unknown): Record<string, MobileFie
       label: normalizeText(entry.label) ?? undefined,
       tone: normalizePresentationTone(entry.tone) ?? undefined
     };
+  }
+  for (const [key, label] of Object.entries(getCollectionFieldLabels({ fieldLabels: getRecordProperty(display, "fieldLabels") }))) {
+    result[key] = { ...result[key], label };
   }
   return result;
 }
@@ -805,7 +808,7 @@ function collectionDisplayKeys(payload: unknown, columns: string[]) {
   return { badgeKey, descriptionKey, fieldKeys, sectionOrder, subtitleKeys };
 }
 
-function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[], options: {
+export function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[], options: {
   badgeKey: string | null;
   descriptionKey: string | null;
   presentation?: Record<string, MobileFieldPresentation>;
@@ -864,9 +867,9 @@ async function collectionNavItemsForCode(code: string): Promise<MobileContentDet
     }
   }
 
-  const current = getGameCollectionConfigByCode(code);
+  const current = await getGameCollectionConfigByCode(code);
   if (!current) return [];
-  return GAME_COLLECTIONS.filter((entry) => entry.gameSlug === current.gameSlug).map((entry) =>
+  return (await listGameCollectionConfigs()).filter((entry) => entry.gameSlug === current.gameSlug).map((entry) =>
     detailItem(entry.code, entry.label, {
       badge: entry.code === code ? "Current" : null,
       subtitle: entry.gameName

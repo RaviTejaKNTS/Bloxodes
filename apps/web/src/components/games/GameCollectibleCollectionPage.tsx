@@ -6,7 +6,7 @@ import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { GameCollectibleChecklist, type GameCollectibleSection } from "@/components/games/GameCollectibleChecklist";
 import type { GameCollectionDataset } from "@/app/(site)/wiki/collections/games/generic";
 import type { SharedGameWikiCollectionPage } from "@/lib/shared-game-reader";
-import type { GameCollectionRenderConfig } from "@/lib/game-collections";
+import { getCollectionFieldLabels, type GameCollectionRenderConfig } from "@/lib/game-collections";
 import { renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 
@@ -136,9 +136,7 @@ export function renderGameCollectibleCollectionPage({
         collectionLabel={config.label}
         sections={sections}
         cardFields={cardFields}
-        fieldLabels={Object.fromEntries(Object.entries(dataset.meta?.display?.fieldPresentation ?? {}).flatMap(([key, value]) =>
-          typeof value === "object" && value?.label ? [[key, value.label]] : []
-        ))}
+        fieldLabels={getCollectionFieldLabels(dataset.meta?.display, dataset.meta?.itemFields ?? [])}
         collectionOptions={collectionOptions}
         beforeToolbar={<>{introNodes}</>}
         afterContent={<>{detailNodes}<CollectionFaq items={faqNodes} /></>}

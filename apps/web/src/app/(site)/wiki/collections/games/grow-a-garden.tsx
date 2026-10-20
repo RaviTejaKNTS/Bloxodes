@@ -1,14 +1,16 @@
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { listGameCollectionConfigs } from "@/lib/game-collection-registry";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { MoreWikiCollections } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { GameCollectionView } from "@/components/game-collections/GameCollectionView";
+import { getCollectionFieldLabels } from "@/lib/game-collections";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
-import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/games/grow-a-garden";
+import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/grow-a-garden-view";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { toIsoContentDate } from "@/lib/content-dates";
 import { getPublishedWikiCollectionRuntimeByCode } from "@/lib/wiki-collection-runtime";
@@ -30,6 +32,7 @@ type GrowGardenDatasetMeta = {
   display?: {
     groupLabel?: string | null;
     sectionOrder?: string[] | null;
+    fieldLabels?: Record<string, string>;
   } | null;
 };
 
@@ -494,7 +497,7 @@ export async function getPreparedGrowGardenCollectionPageCount(config: GrowGarde
   return (await loadPreparedGrowGardenCollection(config)).totalPages;
 }
 
-export function GrowGardenCollectionNav({
+export async function GrowGardenCollectionNav({
   activeSlug,
   className
 }: {
@@ -506,7 +509,7 @@ export function GrowGardenCollectionNav({
       label="Collection page"
       value={activeSlug}
       className={className}
-      options={GROW_GARDEN_COLLECTIONS.map((entry) => ({
+      options={(await listGameCollectionConfigs()).filter(entry => entry.gameSlug === "grow-a-garden").map((entry) => ({
         value: entry.slug,
         label: entry.label,
         href: buildGrowGardenCollectionPath(entry.slug)
@@ -604,6 +607,8 @@ export function renderGrowGardenCollectionPage({
   prepared?: GrowGardenPreparedCollection;
 }) {
   const preparedCollection = prepared ?? buildGrowGardenPreparedCollection(config, dataset);
+  const fieldLabels = getCollectionFieldLabels(preparedCollection.dataset.meta?.display);
+  const viewConfig = Object.keys(fieldLabels).length ? { ...config, fieldLabels: { ...config.fieldLabels, ...fieldLabels } } : config;
   const items = preparedCollection.dataset.items;
   const itemCount = preparedCollection.itemCount;
   const pageTitle = `All ${itemCount.toLocaleString("en-US")} ${config.label} in Grow a Garden`;
@@ -723,7 +728,7 @@ export function renderGrowGardenCollectionPage({
             />
           </>
         ) : null}
-          </>} sections={pageSections} config={config} pagination={pagination.info} />
+          </>} sections={pageSections} config={viewConfig} pagination={pagination.info} />
       </section>
 
       {pagination.info.currentPage === 1 ? (

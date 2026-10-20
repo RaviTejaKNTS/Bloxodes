@@ -1,11 +1,13 @@
 import "../shared/load-env";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 
 import fs from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { imageLocalPath } from "./local-image-path";
 import { publicProvenanceMatch } from "../content/public-provenance";
 
-import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
+import { readGameCollectionConfigByWikiPath } from "@/lib/game-collections/registry";
 
 type DatasetDocument = {
   meta?: Record<string, unknown> | null;
@@ -22,6 +24,8 @@ type CliOptions = {
   requireImages: boolean;
   requireCardSummary: boolean;
   json: boolean;
+  checkRegistry: boolean;
+  namespace: string;
 };
 
 type CheckIssue = {
@@ -92,6 +96,8 @@ Options:
   --require-images            Fail when items are missing images.
   --require-card-summary      Fail when items are missing cardSummary.
   --json                      Print machine-readable summary.
+  --check-registry            Include optional Roblox registration information.
+  --namespace <namespace>     Content namespace, defaults to roblox. Other namespaces skip the Roblox registry.
   -h, --help                  Show this help.
 `);
 }
@@ -105,7 +111,9 @@ function parseArgs(argv: string[]): CliOptions {
     sectionField: null,
     requireImages: false,
     requireCardSummary: false,
-    json: false
+    json: false,
+    checkRegistry: false,
+    namespace: "roblox"
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -144,6 +152,12 @@ function parseArgs(argv: string[]): CliOptions {
         break;
       case "--json":
         options.json = true;
+        break;
+      case "--check-registry":
+        options.checkRegistry = true;
+        break;
+      case "--namespace":
+        options.namespace = requireValue(argv, ++i, arg).toLowerCase();
         break;
       default:
         throw new Error(`Unknown option: ${arg}`);
@@ -319,10 +333,26 @@ async function checkImages(rows: Record<string, unknown>[], datasetPath: string)
   };
 }
 
+export async function optionalCollectionRegistration(
+  options: Pick<CliOptions, "game" | "collection" | "checkRegistry" | "namespace">,
+  lookup = () => readGameCollectionConfigByWikiPath(supabaseAdmin(), options.game!, options.collection!)
+): Promise<{ registered: boolean | null; note: string | null }> {
+  if (options.namespace !== "roblox") return { registered: null, note: "Roblox registry lookup skipped for franchise content." };
+  if (!options.checkRegistry) return { registered: null, note: "Registry lookup skipped. Add --check-registry for optional Roblox registration information." };
+  if (!process.env.SUPABASE_URL?.trim() || !process.env.SUPABASE_SERVICE_ROLE?.trim()) {
+    return { registered: null, note: "Registry lookup skipped because database credentials are absent." };
+  }
+  try {
+    return { registered: Boolean(await lookup()), note: null };
+  } catch {
+    return { registered: null, note: "Registry lookup skipped because the database read failed. File checks continue." };
+  }
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const issues: CheckIssue[] = [];
-  const config = getGameCollectionConfigByWikiPath(options.game!, options.collection!);
+  const registration = await optionalCollectionRegistration(options);
   const datasetPath = resolvePath(options.file!);
 
   if (!(await pathExists(datasetPath))) {
@@ -510,7 +540,8 @@ async function main() {
   const summary = {
     game: options.game,
     collection: options.collection,
-    registered: Boolean(config),
+    registered: registration.registered,
+    registryNote: registration.note,
     datasetPath,
     itemCount: rows.length,
     sectionField,
@@ -528,7 +559,8 @@ async function main() {
   } else {
     console.log(`Game collection data check: ${options.game}/${options.collection}`);
     console.log(`- Dataset: ${datasetPath}`);
-    console.log(`- Registered: ${config ? "yes" : "no"}`);
+    console.log(`- Registered: ${registration.registered === null ? "not checked" : registration.registered ? "yes" : "no"}`);
+    if (registration.note) console.log(`NOTE ${registration.note}`);
     console.log(`- Items: ${rows.length}`);
     console.log(`- Section field: ${sectionField ?? "(missing)"}`);
     sectionCounts.forEach((entry) => console.log(`  - ${entry.section}: ${entry.count}`));
@@ -546,7 +578,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}

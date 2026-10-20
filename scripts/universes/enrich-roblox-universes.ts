@@ -1,4 +1,6 @@
 import "../shared/load-env";
+import { realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
@@ -623,6 +625,40 @@ async function fetchGameDetails(universeIds: number[]): Promise<RobloxGameDetail
   params.set("universeIds", universeIds.join(","));
   const data = await fetchJson(`${GAME_DETAILS_API}?${params}`, "game details");
   return Array.isArray(data?.data) ? (data.data as RobloxGameDetail[]) : [];
+}
+
+// Read-only publication preflight uses the same identity mapping as stats import.
+export async function previewRobloxUniverse(
+  universeId: number,
+  fetchDetails: typeof fetchGameDetails = fetchGameDetails
+) {
+  if (!Number.isSafeInteger(universeId) || universeId <= 0) throw new Error("Universe import requires a positive safe integer ID.");
+  const details = await fetchDetails([universeId]);
+  const detail = details.find(entry => entry.id === universeId);
+  if (!detail || !Number.isSafeInteger(detail.rootPlaceId) || Number(detail.rootPlaceId) <= 0 || !detail.name?.trim()) {
+    throw new Error(`Roblox returned no complete game details for universe ${universeId}. Retry when its name and root place are available.`);
+  }
+  const payload = mapGameDetail(detail, null)!;
+  payload.last_light_enriched_at = nowIso();
+  return { ...payload, slug: String(payload.slug), name: String(payload.name) };
+}
+
+// Content publication needs the same API mapping as stats, without batch jobs or attachments.
+export async function importRobloxUniverse(
+  supabase: ReturnType<typeof supabaseAdmin>,
+  universeId: number,
+  fetchDetails: typeof fetchGameDetails = fetchGameDetails
+) {
+  const payload = await previewRobloxUniverse(universeId, fetchDetails);
+  // Another publisher or stats job may have inserted it after preflight. Keep that row.
+  const write = await supabase.from("roblox_universes").upsert(payload, { onConflict: "universe_id", ignoreDuplicates: true });
+  if (write.error) throw new Error(`Universe ${universeId} import failed: ${write.error.message}`);
+  const result = await supabase.from("roblox_universes").select("universe_id,root_place_id,name,slug").eq("universe_id", universeId).single();
+  if (result.error) throw new Error(`Universe ${universeId} import readback failed: ${result.error.message}`);
+  if (!result.data || Number(result.data.universe_id) !== universeId || Number(result.data.root_place_id) !== payload.root_place_id || !result.data.name?.trim() || !result.data.slug?.trim()) {
+    throw new Error(`Universe ${universeId} import readback did not match the Roblox identity.`);
+  }
+  return result.data;
 }
 
 async function fetchGameIcons(universeIds: number[]) {
@@ -1784,7 +1820,7 @@ async function main() {
   console.log(`✅ Finished enriching ${processed} universes.`);
 }
 
-main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch((error) => {
   console.error("❌ Universe enrichment failed:", error instanceof Error ? error.message : error);
   process.exit(1);
 });

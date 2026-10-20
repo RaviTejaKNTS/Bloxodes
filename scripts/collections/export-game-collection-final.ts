@@ -3,7 +3,7 @@ import "../shared/load-env";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
+import { readGameCollectionConfigByWikiPath } from "@/lib/game-collections/registry";
 import { repoPath } from "@/lib/paths";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
@@ -192,8 +192,6 @@ async function mapWithConcurrency<T>(values: T[], concurrency: number, work: (va
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const config = getGameCollectionConfigByWikiPath(options.game!, options.collection!);
-  if (!config) throw new Error(`No registered collection config for ${options.game}/${options.collection}`);
 
   const supabaseUrl = process.env.SUPABASE_URL;
   const serviceRole = process.env.SUPABASE_SERVICE_ROLE;
@@ -201,6 +199,9 @@ async function main() {
   if (!isManagedDevelopmentSupabaseUrl(supabaseUrl) && !options.allowRemoteRead) {
     throw new Error("Refusing a read outside managed development. Pass --allow-remote-read for an intentional remote export.");
   }
+
+  const config = await readGameCollectionConfigByWikiPath(supabaseAdmin(), options.game!, options.collection!);
+  if (!config) throw new Error(`No registered collection config for ${options.game}/${options.collection}`);
 
   const sb = supabaseAdmin();
   const { data, error } = await sb

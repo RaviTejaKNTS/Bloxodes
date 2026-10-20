@@ -7,6 +7,7 @@ import { migrationBody } from "../ci/migration-transaction.mjs";
 import { createHash } from "node:crypto";
 
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
+import { assertProductionAncestor } from "../shared/local-content-publication-guard";
 
 type MigrationPolicy = {
   convergence_version: string;
@@ -125,8 +126,14 @@ async function main() {
     throw new Error('Production apply requires --confirm "APPLY production".');
   }
   if (checkLedger && apply) throw new Error("--check-ledger cannot apply migrations.");
-  if ((apply || checkLedger) && git("rev-parse", "origin/production") !== approvedSha) {
+  if (apply && git("rev-parse", "origin/production") !== approvedSha) {
     throw new Error("Production apply requires origin/production to equal the approved SHA.");
+  }
+  if (checkLedger) {
+    const production = git("rev-parse", "origin/production");
+    let isAncestor = false;
+    try { git("merge-base", "--is-ancestor", approvedSha, production); isAncestor = true; } catch { /* Fail closed below. */ }
+    assertProductionAncestor(approvedSha, production, isAncestor);
   }
 
   const productionUrl = required("SUPABASE_URL", process.env.SUPABASE_URL);

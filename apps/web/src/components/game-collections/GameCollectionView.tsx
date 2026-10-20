@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { getFieldLabel } from "@/lib/game-collections";
 import { extractYouTubeVideoUrlId } from "@/lib/youtube-media";
 import { CollectionVideo } from "./CollectionVideo";
 import { Fragment, type ReactNode } from "react";
@@ -35,6 +36,7 @@ export type GameCollectionViewConfig = {
   cardFields?: string[];
   detailFields?: string[];
   fieldPresentation?: Record<string, CollectionFieldPresentation | CollectionFieldKind>;
+  fieldLabels?: Record<string, string>;
   hideImages?: boolean;
   hideMissingImagePlaceholders?: boolean;
 };
@@ -397,6 +399,10 @@ function getConfiguredFieldPresentation(config: GameCollectionViewConfig, key: s
   return normalizeFieldPresentation(config.fieldPresentation?.[key]);
 }
 
+function configuredFieldLabel(config: GameCollectionViewConfig, key: string, fallback?: string) {
+  return config.fieldLabels?.[key] ?? getConfiguredFieldPresentation(config, key)?.label ?? fallback ?? (config.fieldLabels ? getFieldLabel(key) : formatKeyLabel(key));
+}
+
 function addUniqueField(
   fields: CollectionPresentationFieldDefinition[],
   seen: Set<string>,
@@ -426,7 +432,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig, view: "cards" |
     config.badgeKey && config.badgeKey !== descriptionKey
       ? {
           key: config.badgeKey,
-          label: getConfiguredFieldPresentation(config, config.badgeKey)?.label ?? formatKeyLabel(config.badgeKey),
+          label: configuredFieldLabel(config, config.badgeKey),
           source: "badge",
           presentation: getConfiguredFieldPresentation(config, config.badgeKey)
         }
@@ -440,7 +446,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig, view: "cards" |
       key !== descriptionKey
         ? {
             key,
-            label: getConfiguredFieldPresentation(config, key)?.label ?? formatKeyLabel(key),
+            label: configuredFieldLabel(config, key),
             source: "subtitle",
             presentation: getConfiguredFieldPresentation(config, key)
           }
@@ -454,7 +460,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig, view: "cards" |
       fields,
       seen,
       key !== descriptionKey
-        ? { key, label: presentation?.label ?? statMap.get(key) ?? formatKeyLabel(key), source: "stat", presentation }
+        ? { key, label: configuredFieldLabel(config, key, statMap.get(key)), source: "stat", presentation }
         : null
     );
   }
@@ -465,7 +471,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig, view: "cards" |
       fields,
       seen,
       stat.key !== descriptionKey
-        ? { key: stat.key, label: presentation?.label ?? stat.label, source: "stat", presentation }
+        ? { key: stat.key, label: configuredFieldLabel(config, stat.key, stat.label), source: "stat", presentation }
         : null
     );
   }
@@ -474,7 +480,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig, view: "cards" |
     const presentation = getConfiguredFieldPresentation(config, config.descriptionKey);
     addUniqueField(fields, seen, {
       key: config.descriptionKey,
-      label: presentation?.label ?? getDescriptionLabel(config.descriptionKey),
+      label: configuredFieldLabel(config, config.descriptionKey, getDescriptionLabel(config.descriptionKey)),
       source: "description",
       presentation
     });
@@ -484,7 +490,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig, view: "cards" |
     const presentation = getConfiguredFieldPresentation(config, config.cardDescriptionKey);
     addUniqueField(fields, seen, {
       key: config.cardDescriptionKey,
-      label: presentation?.label ?? getDescriptionLabel(config.cardDescriptionKey),
+      label: configuredFieldLabel(config, config.cardDescriptionKey, getDescriptionLabel(config.cardDescriptionKey)),
       source: "description",
       presentation
     });
@@ -535,7 +541,8 @@ function classifyFieldKind(
 
 function buildPresentationField(
   definition: CollectionPresentationFieldDefinition,
-  item: GameCollectionItem
+  item: GameCollectionItem,
+  fieldLabels?: Record<string, string>
 ): CollectionPresentationField {
   const videoId = definition.presentation?.kind === "video" ? extractYouTubeVideoUrlId(item[definition.key]) : null;
   const displayStat: GameCollectionDisplayStat | null = definition.presentation?.kind === "video"
@@ -544,7 +551,7 @@ function buildPresentationField(
   const configured = Boolean(definition.presentation);
   return {
     key: definition.key,
-    label: definition.presentation?.label ?? displayStat?.label ?? definition.label,
+    label: fieldLabels?.[definition.key] ?? definition.presentation?.label ?? displayStat?.label ?? definition.label,
     value: displayStat?.value ?? null,
     parts: configured ? undefined : displayStat?.parts,
     tone: definition.presentation?.tone ?? displayStat?.tone,
@@ -577,9 +584,9 @@ function buildItemPresentation(
         ? videoId ? `https://www.youtube.com/watch?v=${videoId}` : null
         : normalizeValue(item[key]);
       if (!value) return [];
-      return [{ key, label: presentation?.label ?? formatKeyLabel(key), value, kind: presentation?.kind }];
+      return [{ key, label: configuredFieldLabel(config, key), value, kind: presentation?.kind }];
     }),
-    fields: fieldDefinitions.map((definition) => buildPresentationField(definition, item))
+    fields: fieldDefinitions.map((definition) => buildPresentationField(definition, item, config.fieldLabels))
   };
 }
 
@@ -993,7 +1000,7 @@ export function GameCollectionView({ sections, config, pagination, toolbar, stre
   const cardFieldDefinitions = buildFieldDefinitions(config, "cards");
   const tableFieldDefinitions = buildFieldDefinitions(config, "list");
   const descriptionKey = getPrimaryDescriptionKey(config);
-  const descriptionLabel = descriptionKey ? getDescriptionLabel(descriptionKey) : null;
+  const descriptionLabel = descriptionKey ? config.fieldLabels?.[descriptionKey] ?? getDescriptionLabel(descriptionKey) : null;
   const showImages = !config.hideImages && sections.some((section) => section.items.some((item) => Boolean(item.image)));
   const sectionPresentations = sections.map((section) => ({
     section,

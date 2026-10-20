@@ -2,12 +2,12 @@ import "../shared/load-env";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { GAME_COLLECTION_GROUPS, GAME_COLLECTIONS } from "@/lib/game-collections";
+import { readGameCollectionGroups, type RegisteredGameCollectionGroup } from "@/lib/game-collections/registry";
 import { repoPath } from "@/lib/paths";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
-type GameCollectionGroup = (typeof GAME_COLLECTION_GROUPS)[number];
+type GameCollectionGroup = RegisteredGameCollectionGroup;
 
 type WikiPageUpsert = {
   slug: string;
@@ -109,8 +109,8 @@ function collectSingleArgValue(argv: string[], names: string[]): string | null {
   return found;
 }
 
-function getTargetGroups() {
-  return GAME_COLLECTION_GROUPS.filter(
+async function getTargetGroups() {
+  return (await readGameCollectionGroups(supabaseAdmin())).filter(
     (group) => !targetGameSlugs.length || targetGameSlugs.includes(group.gameSlug)
   );
 }
@@ -186,7 +186,7 @@ async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWiki
 }
 
 function buildGeneratedWikiCopy(group: GameCollectionGroup): WikiCopy {
-  const collections = GAME_COLLECTIONS.filter((config) => config.gameSlug === group.gameSlug).sort(
+  const collections = group.collectionConfigs.filter((config) => config.gameSlug === group.gameSlug).sort(
     (a, b) => a.sortOrder - b.sortOrder
   );
   const labels = collections.map((config) => config.label);
@@ -856,7 +856,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
 async function loadExistingPublishedAt() {
   if (dryRun) return new Map<string, string | null>();
   const sb = supabaseAdmin();
-  const slugs = getTargetGroups().map((group) => group.gameSlug);
+  const slugs = (await getTargetGroups()).map((group) => group.gameSlug);
   const { data, error } = await sb.from("wiki_pages").select("slug, published_at").in("slug", slugs);
   if (error) throw error;
   return new Map(
@@ -868,7 +868,7 @@ async function loadExistingPublishedAt() {
 }
 
 async function loadUniverseIdsByGameSlug() {
-  const targetGroups = getTargetGroups();
+  const targetGroups = await getTargetGroups();
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     return new Map(targetGroups.map((group) => [group.gameSlug, group.universeId ?? null]));
   }
@@ -916,7 +916,7 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
   const now = new Date().toISOString();
   const rows: WikiPageUpsert[] = [];
 
-  for (const group of getTargetGroups()) {
+  for (const group of await getTargetGroups()) {
     const copy = await resolveWikiCopy(group);
     if (!copy) continue;
 
