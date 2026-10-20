@@ -59,6 +59,7 @@ Publishers: `events-final`, `roblox-codes-page`, `article-queue`, `game-pages`, 
 - Browser QA ticks, reloads and unticks checklist tasks with a runner-only account on desktop and mobile.
 - Article QA also checks that body images load and videos embed.
 - **Selected franchise QA:** for franchise hubs, collections and quizzes, dispatch `pull-request.yml` on the task branch with `selected_franchise_bundle_hash=<sha256>` (`scripts/ci/selected-franchise-qa.ts`). `selected_franchise_stage=false` is the default and verifies content already staged in development; set it to `true` to stage first. It audits datasets, compares rows and media, builds a preview, checks desktop and mobile with isolated accounts and cleans up its fixtures.
+- **Selected Roblox QA:** for Roblox wiki hubs and collections, dispatch `pull-request.yml` on the task branch with `selected_roblox_bundle_hash=<sha256>` (`scripts/ci/selected-roblox-qa.ts`). It only verifies content already staged in development; it stages nothing and uploads no media. It compares every stored row, revision hash, copy field and public media byte before and after the browser run, checks Cards/List fields, images, metadata, sitemap entries, pagination and saved progress on desktop and mobile with isolated accounts, then removes those accounts. Its report is development evidence, not a production receipt.
 - You can run `managed-content-qa.yml` on its own with the exact `approved_sha` and a `batch` or `bundle_hash`. It only writes development.
 
 ## Edge Functions
