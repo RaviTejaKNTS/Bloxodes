@@ -19,7 +19,7 @@ import { planManifest, pageCopy, applyPlan, type Plan } from "../franchise/sync-
 import { auditDataset, type Issue } from "../collections/audit-game-collection-datasets-v2";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
 import { checkCopy, equalFields, verifyLive } from "./roblox-wiki-publish";
-import type { ContentOptions } from "./roblox-wiki-cli";
+import type { ContentOptions } from "./wiki-content-options";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const json = async (file: string) => JSON.parse(await fs.readFile(file, "utf8"));

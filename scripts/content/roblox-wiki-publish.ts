@@ -22,7 +22,7 @@ import { publicCopyFindings } from "./check-public-copy";
 import { assertRobloxCollectionCopy } from "./roblox-collection-copy";
 import { assertEditorialSlug, bundlePath, selectBundlePages, resolveCollectionOrders, assertCollectionFinalOrder, assertCollectionMissingImages } from "../shared/roblox-wiki-bundle";
 import { ensureContentUniverse, previewContentUniverse } from "../shared/roblox-wiki-universe";
-import type { ContentOptions } from "./roblox-wiki-cli";
+import type { ContentOptions } from "./wiki-content-options";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const hash = (bytes: Uint8Array) => createHash("sha256").update(bytes).digest("hex");
