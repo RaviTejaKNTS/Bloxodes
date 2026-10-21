@@ -1,3 +1,4 @@
+import { mapPublishConcurrent, readPublishQuery, formatPublishError } from "../shared/publish-network.mjs";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -55,7 +56,7 @@ export async function planGameWikiImage(root: string, value: string, namespace: 
 async function rows(db: SupabaseClient, table: string, namespace: string) {
   const result: Array<Record<string, any>> = [];
   for (let offset = 0; ; offset += 500) {
-    const response = await db.from(table).select("*").eq("namespace", namespace).order("id").range(offset, offset + 499);
+    const response = await readPublishQuery(() => db.from(table).select("*").eq("namespace", namespace).order("id").range(offset, offset + 499));
     if (response.error) throw response.error;
     result.push(...response.data ?? []);
     if ((response.data?.length ?? 0) < 500) return result;
@@ -63,15 +64,15 @@ async function rows(db: SupabaseClient, table: string, namespace: string) {
 }
 
 async function verifyCollection(db: SupabaseClient, plan: Plan, wikiSlug: string, route: string) {
-  const page = await db.from("game_collection_pages").select("*").eq("namespace", plan.namespace).eq("wiki_slug", wikiSlug).eq("collection_slug", plan.manifest.collection.slug).single();
+  const page = await readPublishQuery(() => db.from("game_collection_pages").select("*").eq("namespace", plan.namespace).eq("wiki_slug", wikiSlug).eq("collection_slug", plan.manifest.collection.slug).single());
   if (page.error) throw page.error;
   equalFields(page.data, { ...pageCopy(plan), wiki_slug: wikiSlug, code: plan.code, canonical_path: route, page_type: plan.pageType, item_count: plan.items.length, is_published: true }, plan.code);
-  const revision = await db.from("game_collection_datasets").select("*").eq("namespace", plan.namespace).eq("id", page.data.published_dataset_id).single();
+  const revision = await readPublishQuery(() => db.from("game_collection_datasets").select("*").eq("namespace", plan.namespace).eq("id", page.data!.published_dataset_id).single());
   if (revision.error) throw revision.error;
   equalFields(revision.data, { collection_page_id: page.data.id, content_hash: plan.contentHash, item_count: plan.items.length, meta_json: plan.metaJson }, `${plan.code} revision`);
   const expected = new Map(plan.items.map(({ prepared_image: _bytes, ...item }) => [item.item_slug, item]));
-  for (let offset = 0; ; offset += 500) {
-    const response = await db.from("game_collection_items").select("*").eq("namespace", plan.namespace).eq("dataset_id", revision.data.id).order("item_slug").range(offset, offset + 499);
+  const pages = await mapPublishConcurrent(Array.from({ length: Math.floor(plan.items.length / 500) + 1 }, (_, index) => index * 500), offset => readPublishQuery(() => db.from("game_collection_items").select("*").eq("namespace", plan.namespace).eq("dataset_id", revision.data!.id).order("item_slug").range(offset, offset + 499)), { label: `${plan.code} readback pages` });
+  for (const response of pages) {
     if (response.error) throw response.error;
     for (const row of response.data ?? []) {
       const item = expected.get(row.item_slug);
@@ -79,7 +80,6 @@ async function verifyCollection(db: SupabaseClient, plan: Plan, wikiSlug: string
       equalFields(row, item, `${plan.code}/${row.item_slug}`);
       expected.delete(row.item_slug);
     }
-    if ((response.data?.length ?? 0) < 500) break;
   }
   if (expected.size) throw new Error(`${plan.code}: incomplete item readback.`);
 }
@@ -102,15 +102,14 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   const gameInput = gameSchema.parse(gameFile);
   if (gameInput.slug !== bundle.game.slug || gameInput.title !== bundle.game.name || gameInput.namespace != null && gameInput.namespace !== bundle.namespace || gameInput.kind != null && gameInput.kind !== bundle.game.kind || gameInput.parent_slug != null && gameInput.parent_slug !== bundle.game.parent) throw new Error("game.json identity must match bundle.namespace and bundle.game.");
   checkCopy({ ...gameInput, description_json: { title: gameInput.title, short_title: gameInput.short_title } }, "game.json");
-  const games = await rows(db, "games", bundle.namespace);
-  const hubs = await rows(db, "game_wiki_pages", bundle.namespace);
+  const [games, hubs] = await Promise.all([rows(db, "games", bundle.namespace), rows(db, "game_wiki_pages", bundle.namespace)]);
   const identity = resolveGameWikiIdentity(games, hubs, bundle.namespace, bundle.game);
   const wikiPath = identity.hub?.canonical_path ?? gameWikiPath(bundle.namespace, bundle.game.slug, bundle.game.parent);
   if (!wikiPath.startsWith(`/${bundle.namespace}/`) || /[?#]/.test(wikiPath)) throw new Error("Stored wiki route is outside its namespace.");
   const failures: string[] = [];
   async function check<T>(label: string, work: () => Promise<T>): Promise<T | undefined> {
     try { const result = await work(); console.log(`PASS ${label}`); return result; }
-    catch (error) { const message = error instanceof Error ? error.message : String(error); failures.push(`${label}: ${message}`); console.error(`FAIL ${label}: ${message}`); }
+    catch (error) { const message = formatPublishError(error); failures.push(`${label}: ${message}`); console.error(`FAIL ${label}: ${message}`); }
   }
   let hub: ReturnType<typeof hubFinalSchema.parse> | undefined;
   let artwork: Awaited<ReturnType<typeof planGameWikiImage>>[] = [];
@@ -126,7 +125,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
       return final;
     });
     await check("16:9 cover and separate square hero readiness", async () => {
-      artwork = [await planGameWikiImage(root, gameInput.cover_image, bundle.namespace, bundle.game.slug, "cover"), await planGameWikiImage(root, gameInput.hero_image, bundle.namespace, bundle.game.slug, "hero")];
+      artwork = await mapPublishConcurrent(["cover", "hero"] as const, role => planGameWikiImage(root, role === "cover" ? gameInput.cover_image : gameInput.hero_image, bundle.namespace, bundle.game.slug, role));
       if (artwork[0].hash === artwork[1].hash) throw new Error("Cover and hero must be separate artwork.");
       requireFranchiseHubImages({ cover_image: artwork[0].url, hero_image: artwork[1].url }, bundle.game.slug);
       if (hub?.cover_image && hub.cover_image !== gameInput.cover_image && hub.cover_image !== artwork[0].url) throw new Error("Hub cover_image must be null or the game's cover_image.");
@@ -136,12 +135,11 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   } else {
     await check("owning game artwork", async () => {
       requireFranchiseHubImages(identity.game, bundle.game.slug);
-      await planGameWikiImage(root, identity.game!.cover_image, bundle.namespace, bundle.game.slug, "cover");
-      await planGameWikiImage(root, identity.game!.hero_image, bundle.namespace, bundle.game.slug, "hero");
+      await mapPublishConcurrent(["cover", "hero"] as const, role => planGameWikiImage(root, identity.game![role === "cover" ? "cover_image" : "hero_image"], bundle.namespace, bundle.game.slug, role));
     });
   }
   if (bundle.game.parent) await check("published namespace root artwork", async () => {
-    for (const image of requireFranchiseHubImages(identity.root!, bundle.namespace)) await verifyFranchisePageImage(image);
+    await mapPublishConcurrent(requireFranchiseHubImages(identity.root!, bundle.namespace), verifyFranchisePageImage);
   });
   const existingCollections = await rows(db, "game_collection_pages", bundle.namespace);
   let maxCollectionOrder = Math.max(0, ...existingCollections.filter(row => identity.game && row.game_id === identity.game.id).map(row => Number(row.wiki_sort_order) || 0));
@@ -193,14 +191,14 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     ];
     if (new Set(expected.map(page => page.route)).size !== expected.length) throw new Error("Selected pages claim the same route.");
     if (!expected.length) return;
-    for (const table of ["game_wiki_pages", "game_collection_pages", "game_code_pages", "game_tool_pages", "game_checklist_pages", "game_map_pages", "game_quiz_pages", "game_catalog_pages"]) {
-      const result = await db.from(table).select("id,canonical_path").eq("namespace", bundle.namespace).in("canonical_path", expected.map(page => page.route));
+    await mapPublishConcurrent(["game_wiki_pages", "game_collection_pages", "game_code_pages", "game_tool_pages", "game_checklist_pages", "game_map_pages", "game_quiz_pages", "game_catalog_pages"], async table => {
+      const result = await readPublishQuery(() => db.from(table).select("id,canonical_path").eq("namespace", bundle.namespace).in("canonical_path", expected.map(page => page.route)));
       if (result.error) throw result.error;
       for (const row of result.data ?? []) {
         const page = expected.find(page => page.route === row.canonical_path)!;
         if (table !== page.table || row.id !== page.id) throw new Error(`${row.canonical_path} already belongs to another page. Preserve its UUID and ownership.`);
       }
-    }
+    });
   });
   await check("R2 configuration", async () => {
     if (loadR2ClientConfig().bucket !== "bloxodes-wiki") throw new Error("WIKI_R2_BUCKET must be bloxodes-wiki.");
@@ -219,10 +217,10 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     await fs.writeFile(path.join(directory, `${bundle.namespace}-${bundle.game.slug}-${Date.now()}.json`), JSON.stringify({ game: identity.game, hub: identity.hub }, null, 2), { mode: 0o600, flag: "wx" });
   }
   const r2 = new R2Client(loadR2ClientConfig());
-  for (const image of artwork) {
+  await mapPublishConcurrent(artwork, async image => {
     if (!await r2.hasObject(image.key)) await r2.putObject({ key: image.key, body: image.bytes, contentType: image.mime, metadata: { sha256: image.hash, width: image.width, height: image.height } });
     if (!await r2.hasObject(image.key)) throw new Error(`R2 readback failed: ${image.key}`);
-  }
+  });
   for (const plan of plans) { await uploadCollectionImages(plan.items, r2); await verifyCollectionImages(plan.items, r2, plan.code); }
   if (hub) {
     const payload = { ...pick(gameInput, gameFields), namespace: bundle.namespace, kind: bundle.game.kind, parent_id: identity.parentId, cover_image: artwork[0].url, hero_image: artwork[1].url, is_published: true };
@@ -236,12 +234,12 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
   }
   for (const plan of plans) {
     await applyPlan(plan, { stage: false, publish: true, includeRoots: true, gameKind: bundle.game.kind });
-    await verifyCollection(db, plan, identity.hubSlug, `${wikiPath}/${plan.manifest.collection.slug}`);
   }
+  await mapPublishConcurrent(plans, plan => verifyCollection(db, plan, identity.hubSlug, `${wikiPath}/${plan.manifest.collection.slug}`), { label: "verify collections" });
   if (options.target === "production") {
     const paths = [...new Set([`/${bundle.namespace}`, `/${bundle.namespace}/wiki`, wikiPath, ...urls.map(url => url.path)])];
-    for (let offset = 0; offset < paths.length; offset += 100) await revalidatePublishedContent(process.env, paths.slice(offset, offset + 100).map(route => ({ type: "game_content" as const, slug: route.slice(1) })));
-    for (const url of urls) await verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images);
+    await mapPublishConcurrent(Array.from({ length: Math.ceil(paths.length / 100) }, (_, index) => paths.slice(index * 100, index * 100 + 100)), batch => revalidatePublishedContent(process.env, batch.map(route => ({ type: "game_content" as const, slug: route.slice(1) }))), { label: "revalidate batches" });
+    await mapPublishConcurrent(urls, url => verifyLive(`https://bloxodes.com${url.path}`, url.title, url.seo, url.images), { label: "live pages" });
   }
   console.log(`PASS published ${urls.length} page(s) to ${options.target}.`);
 }

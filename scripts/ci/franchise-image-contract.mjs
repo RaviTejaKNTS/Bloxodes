@@ -1,3 +1,5 @@
+import { mapPublishConcurrent } from "../shared/publish-network.mjs";
+
 const pageGroups = ['wiki', 'codesPages', 'tools', 'maps', 'quizzes', 'catalog', 'checklists'];
 const published = (group, row) => row?.[group === 'checklists' ? 'is_public' : 'is_published'] === true;
 // Stored franchise media uses this origin; arbitrary Supabase projects are not trusted.
@@ -38,35 +40,38 @@ export async function assertFranchisePageImages({ namespace, payload, storedGame
       images.push(...requireFranchiseHubImages(game));
     }
   }
-  for (const group of pageGroups) {
-    for (const input of payload[group] ?? []) {
-      const row = { ...await loadPage(group, input), ...input };
-      if (!published(group, row)) continue;
-      publishesRows = true;
-      const game = games.get(row.game_id);
-      if (!game || game.namespace !== namespace && game.namespace !== undefined) throw new Error(`${group}/${row.slug}: missing owning game for image validation.`);
-      const label = `${namespace}/${group}/${row.slug}`;
-      if (group === 'wiki') {
-        images.push(...requireFranchiseHubImages(game, `${label} owning game`));
-        if (row.cover_image != null) {
-          const cover = franchiseImageUrl(row.cover_image);
-          if (!cover) throw new Error(`${label}: cover_image must be a hosted game image.`);
-          images.push({ url: cover, role: 'cover', label });
-        }
-      } else {
-        // These are the actual image columns: only tools have page-owned artwork.
-        const cover = (group === 'tools' && franchiseImageUrl(row.thumb_url)) || franchiseImageUrl(game.cover_image);
-        if (!cover) throw new Error(`${label}: publishing requires a cover. Add ${group === 'tools' ? 'thumb_url or ' : ''}cover_image on owning game ${game.slug}.`);
-        images.push({ url: cover, role: group === 'tools' && franchiseImageUrl(row.thumb_url) ? 'card' : 'cover', label });
+  const pages = pageGroups.flatMap(group => (payload[group] ?? []).map(input => ({ group, input })));
+  const storedPages = await mapPublishConcurrent(pages, ({ group, input }) => loadPage(group, input));
+  for (let index = 0; index < pages.length; index++) {
+    const { group, input } = pages[index];
+    const row = { ...storedPages[index], ...input };
+    if (!published(group, row)) continue;
+    publishesRows = true;
+    const game = games.get(row.game_id);
+    if (!game || game.namespace !== namespace && game.namespace !== undefined) throw new Error(`${group}/${row.slug}: missing owning game for image validation.`);
+    const label = `${namespace}/${group}/${row.slug}`;
+    if (group === 'wiki') {
+      images.push(...requireFranchiseHubImages(game, `${label} owning game`));
+      if (row.cover_image != null) {
+        const cover = franchiseImageUrl(row.cover_image);
+        if (!cover) throw new Error(`${label}: cover_image must be a hosted game image.`);
+        images.push({ url: cover, role: 'cover', label });
       }
+    } else {
+      // These are the actual image columns: only tools have page-owned artwork.
+      const cover = (group === 'tools' && franchiseImageUrl(row.thumb_url)) || franchiseImageUrl(game.cover_image);
+      if (!cover) throw new Error(`${label}: publishing requires a cover. Add ${group === 'tools' ? 'thumb_url or ' : ''}cover_image on owning game ${game.slug}.`);
+      images.push({ url: cover, role: group === 'tools' && franchiseImageUrl(row.thumb_url) ? 'card' : 'cover', label });
     }
   }
   if (publishesRows && root.is_published) images.unshift(...requireFranchiseHubImages(root, `${namespace} root`));
   const seen = new Set();
+  const unique = [];
   for (const image of images) {
     const key = `${image.role}:${image.url}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    await verifyImage(image);
+    unique.push(image);
   }
+  await mapPublishConcurrent(unique, verifyImage, { label: "page images" });
 }

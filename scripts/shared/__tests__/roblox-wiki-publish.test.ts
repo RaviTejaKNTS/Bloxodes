@@ -210,3 +210,46 @@ test("registry migration retains the complete ordered baseline and empty registr
   assert.match(sql, /enable row level security/);
   assert.match(sql, /revoke all .* from anon, authenticated/);
 });
+
+test("live verification retries transport failures, checks every image, and rejects bad titles immediately", async t => {
+  const previousFetch = globalThis.fetch;
+  const previousProfile = process.env.BLOXODES_ENV_PROFILE;
+  process.env.BLOXODES_ENV_PROFILE = "process-only";
+  t.after(() => {
+    globalThis.fetch = previousFetch;
+    if (previousProfile === undefined) delete process.env.BLOXODES_ENV_PROFILE;
+    else process.env.BLOXODES_ENV_PROFILE = previousProfile;
+  });
+  const { verifyLive } = await import("../../content/roblox-wiki-publish");
+  const { default: sharp } = await import("sharp");
+  const bytes = await sharp({ create: { width: 16, height: 16, channels: 3, background: "red" } }).png().toBuffer();
+  const url = "https://bloxodes.com/wiki/example/items";
+  let pageCalls = 0, active = 0, maximum = 0;
+  const images = new Map<string, number>();
+  let html = '<title>Example Items</title><h1>Example Items</h1><img src="/visible.png">';
+  globalThis.fetch = async input => {
+    const target = String(input);
+    if (target === url) {
+      pageCalls++;
+      if (pageCalls === 1) return new Response(null, { status: 503 });
+      const response = new Response(html);
+      Object.defineProperty(response, "url", { value: url });
+      return response;
+    }
+    const count = (images.get(target) ?? 0) + 1;
+    images.set(target, count);
+    if (target.endsWith("/0.png") && count === 1) throw new TypeError("fetch failed", { cause: { code: "ECONNRESET" } });
+    active++; maximum = Math.max(maximum, active);
+    await new Promise(resolve => setTimeout(resolve, 2)); active--;
+    return new Response(new Uint8Array(bytes), { headers: { "content-type": "image/png" } });
+  };
+  await verifyLive(url, "Example Items", "Example Items", Array.from({ length: 24 }, (_, index) => `https://media.bloxodes.com/${index}.png`));
+  assert.equal(pageCalls, 2);
+  assert.equal(images.size, 25);
+  assert.equal(images.get("https://media.bloxodes.com/0.png"), 2);
+  assert.ok(maximum > 1 && maximum <= 8);
+  html = '<title>Wrong</title><h1>Wrong</h1>';
+  pageCalls = 1;
+  await assert.rejects(verifyLive(url, "Example Items", "Example Items", []), /rendered title/);
+  assert.equal(pageCalls, 2);
+});

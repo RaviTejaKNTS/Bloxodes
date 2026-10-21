@@ -29,5 +29,5 @@ test("database registry exposes new games, custom labels, aliases, ordering and 
 test("registry reads paginate and never substitute a static list on database failure", async () => {
   const row = { game_slug: "game", game_name: "Game", universe_id: 1, universe_names: ["Game"], sort_order: 1, collections: [] };
   assert.equal((await readGameCollectionGroups(reader(Array.from({ length: 1001 }, () => row)))).length, 1001);
-  await assert.rejects(readGameCollectionGroups(reader([], { message: "missing relation" })), /Apply the registry migration first/);
+  await assert.rejects(readGameCollectionGroups(reader([], { message: "missing relation" })), /Roblox wiki registry read failed: missing relation\. If the table is missing, apply the registry migration\./);
 });

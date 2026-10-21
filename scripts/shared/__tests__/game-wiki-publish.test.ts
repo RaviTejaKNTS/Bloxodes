@@ -308,6 +308,11 @@ test("new collection orders append above all stored and planned explicit orders"
     const orders = Object.fromEntries(result.tables.game_collection_pages.map(row => [row.collection_slug, row.wiki_sort_order]));
     assert.deepEqual(orders, { items: 10, unselected: 100, other: 1000, "new-first": 110, "explicit-final": 250, "after-final": 260, "explicit-manifest": 500, "after-manifest": 510 });
     assert.equal(result.tables.game_collection_pages[0].id, pageId);
+    const mutations = result.calls.filter(call => ["POST", "PATCH", "DELETE"].includes(call.method));
+    assert.deepEqual(mutations.slice(0, 2).map(call => call.table), ["games", "game_wiki_pages"]);
+    const publishedPages = mutations.filter(call => call.table === "game_collection_pages" && call.method === "PATCH" && call.payload?.is_published);
+    const pageSlugs = new Map(result.tables.game_collection_pages.map(row => [row.id, row.collection_slug]));
+    assert.deepEqual(publishedPages.map(call => pageSlugs.get(call.query.id.slice(3))), ["items", ...extra.map(row => row.slug)]);
   } finally { await fs.rm(root, { recursive: true, force: true }); }
 });
 
@@ -488,4 +493,23 @@ test("status resolves root and original-game hubs by game ID and respects a miss
   const missing = run("solo", "game");
   assert.equal(missing[0].exists, false);
   assert.equal(missing.length, 1);
+});
+
+test("parallel media preparation preserves dataset order and content hash", async t => {
+  const profile = process.env.BLOXODES_ENV_PROFILE;
+  process.env.BLOXODES_ENV_PROFILE = "process-only";
+  t.after(() => { if (profile === undefined) delete process.env.BLOXODES_ENV_PROFILE; else process.env.BLOXODES_ENV_PROFILE = profile; });
+  const { root, write } = await fixture();
+  try {
+    const document = JSON.parse(await fs.readFile(path.join(root, "collections/items/dataset.json"), "utf8"));
+    document.items = Array.from({ length: 25 }, (_, index) => ({ item: { ...document.items[0].item, name: `Blade ${index}` }, system: { slug: `blade-${index}`, section: "Blades", image: "sword.webp" } }));
+    await write("collections/items/dataset.json", document);
+    const { planManifest } = await import("../../franchise/sync-franchise-collection-runtime");
+    const run = () => planManifest("example", path.join(root, "collections/items/runtime-manifest.json"), { wikiCanonicalPath: "/example/wiki", strictPaths: true });
+    const first = await run();
+    const second = await run();
+    assert.deepEqual(first.items.map(row => row.item_slug), document.items.map((row: { system: { slug: string } }) => row.system.slug));
+    assert.deepEqual(first.items.map(row => row.sort_order), Array.from({ length: 25 }, (_, index) => index + 1));
+    assert.equal(first.contentHash, second.contentHash);
+  } finally { await fs.rm(root, { recursive: true, force: true }); }
 });

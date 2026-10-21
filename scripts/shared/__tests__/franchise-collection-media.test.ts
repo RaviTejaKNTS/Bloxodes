@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import test from "node:test";
 import { collectionImageKey, uploadCollectionImages, verifyCollectionImages } from "../franchise-collection-media";
+import { R2Client } from "../r2-client";
 
 function item(slug: string, text: string, namespace = "minecraft") {
   const bytes = Buffer.from(text);
@@ -91,7 +92,52 @@ test("Minecraft retries a known transport closure and rechecks a possibly comple
   assert.equal(confirmed.size, 1);
 });
 
-test("Transport retries stop after three attempts; HTTP failures and legacy requests do not retry", async () => {
+test("Real R2 uploads recover a stored PUT after its response fails in every namespace", async () => {
+  for (const namespace of ["minecraft", "gta", "red-dead", "aion-2"]) {
+    const row = item("recipe", "exact immutable bytes", namespace);
+    const methods: string[] = [];
+    const delays: number[] = [];
+    let storedHeaders: Headers | undefined;
+    const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+      methods.push(init!.method!);
+      if (init!.method === "HEAD") return storedHeaders
+        ? new Response(null, { headers: storedHeaders })
+        : new Response(null, { status: 404 });
+      assert.equal(init!.method, "PUT");
+      assert.deepEqual(Buffer.from(init!.body as Uint8Array), row.prepared_image);
+      storedHeaders = new Headers(init!.headers);
+      storedHeaders.set("content-length", String(row.prepared_image.byteLength));
+      throw new TypeError("fetch failed", { cause: { code: "UND_ERR_SOCKET" } });
+    }, () => new Date(), async delay => { delays.push(delay); });
+    const confirmed = namespace === "minecraft" ? new Set<string>() : undefined;
+    await uploadCollectionImages([row], client, confirmed, 1);
+    assert.deepEqual(methods, ["HEAD", "PUT", "HEAD"], namespace);
+    assert.deepEqual(delays, [250]);
+    if (confirmed) assert.ok(confirmed.has(row.image_key));
+  }
+});
+
+test("Real R2 uploads share three attempts across HEAD and PUT failures", async () => {
+  const row = item("recipe", "icon");
+  for (const failRecoveryHead of [false, true]) {
+    const methods: string[] = [];
+    const delays: number[] = [];
+    const confirmed = new Set<string>();
+    const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+      methods.push(init!.method!);
+      if (init!.method === "HEAD" && (!failRecoveryHead || methods.length === 1)) return new Response(null, { status: 404 });
+      throw new TypeError("fetch failed", { cause: { code: "UND_ERR_SOCKET" } });
+    }, () => new Date(), async delay => { delays.push(delay); });
+    await assert.rejects(uploadCollectionImages([row], client, confirmed, 1), /fetch failed/);
+    assert.deepEqual(methods, failRecoveryHead
+      ? ["HEAD", "PUT", "HEAD", "HEAD"]
+      : ["HEAD", "PUT", "HEAD", "PUT", "HEAD", "PUT"]);
+    assert.deepEqual(delays, [250, 500]);
+    assert.equal(confirmed.size, 0);
+  }
+});
+
+test("Transport retries stop after three attempts across all namespaces; HTTP 403 fails immediately", async () => {
   const rows = [item("recipe", "icon")];
   let heads = 0;
   const transient = { hasObject: async () => { heads++; throw new Error("connect reset", { cause: { code: "ECONNRESET" } }); }, putObject: async () => {} };
@@ -104,11 +150,11 @@ test("Transport retries stop after three attempts; HTTP failures and legacy requ
   assert.equal(heads, 1);
   heads = 0;
   await assert.rejects(verifyCollectionImages(rows, transient, "gta-recipes"), /connect reset/);
-  assert.equal(heads, 1);
+  assert.equal(heads, 3);
 });
 
-test("An explicit HTTP status prevents retries even with a nested transport cause", async () => {
-  for (const status of [{ status: 503 }, { statusCode: 401 }, { $metadata: { httpStatusCode: 403 } }]) {
+test("An explicit client HTTP status prevents retries even with a nested transport cause", async () => {
+  for (const status of [{ status: 400 }, { statusCode: 401 }, { $metadata: { httpStatusCode: 403 } }]) {
     let heads = 0;
     const failure = Object.assign(new TypeError("fetch failed", { cause: { code: "UND_ERR_SOCKET" } }), status);
     const confirmed = new Set<string>();
@@ -118,4 +164,21 @@ test("An explicit HTTP status prevents retries even with a nested transport caus
     assert.equal(heads, 1);
     assert.equal(confirmed.size, 0);
   }
+});
+
+
+test("Non-Minecraft media uses eight workers and verifies every row", async () => {
+  const rows = Array.from({ length: 25 }, (_, index) => item(`row-${index}`, `icon-${index}`, "aion-2"));
+  let active = 0, maximum = 0;
+  const seen = new Set<string>();
+  await verifyCollectionImages(rows, {
+    hasObject: async key => {
+      active++; maximum = Math.max(maximum, active);
+      await new Promise(resolve => setTimeout(resolve, 2));
+      active--; seen.add(key); return true;
+    },
+    putObject: async () => { throw new Error("Verification cannot write"); }
+  }, "aion-2-items");
+  assert.equal(maximum, 8);
+  assert.equal(seen.size, rows.length);
 });
