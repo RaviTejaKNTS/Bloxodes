@@ -352,7 +352,7 @@ test("shared hub writer updates the existing target page UUID", async () => {
     calls.push(init?.method ?? "GET");
     if (init?.method === "PATCH") {
       assert.equal(url.searchParams.get("id"), `eq.${pageId}`);
-      assert.equal(url.searchParams.get("namespace"), "example");
+      assert.equal(url.searchParams.get("namespace"), "eq.example");
       const payload = JSON.parse(String(init.body));
       assert.equal(payload.game_id, gameId);
       assert.equal(payload.id, undefined);
