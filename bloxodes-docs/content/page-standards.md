@@ -70,7 +70,7 @@ Every page ships with its images. Never publish without them.
 | Article | A cover plus in-body images from the image pass. |
 
 - **Roblox:** the first official 768x432 universe thumbnail for the cover and the official 512x512 icon for the square.
-- **Non-Roblox:** official key art, store art or real gameplay screenshots, with credit, stored on the game row (`games.cover_image` 16:9, `games.hero_image` square). Quizzes, checklists, codes, catalogs and maps use their game's art; tools set `thumb_url`. A cover must be truly landscape; don't pad portrait box art. Publishing rejects missing, logo, broken or wrongly shaped images.
+- **Non-Roblox:** official key art, store art or real gameplay screenshots, stored on the game row (`games.cover_image` 16:9, `games.hero_image` square). Quizzes, checklists, codes, catalogs and maps use their game's art; tools set `thumb_url`. A cover must be truly landscape; don't pad portrait box art. Publishing rejects missing, logo, broken or wrongly shaped images.
 - Use exact images. No unrelated crops, edited art or generic game thumbnails standing in for a missing item. If an item truly has no clean image, record the gap in the dataset.
 - Check the page's `og:image` after publishing. If it shows the default Bloxodes logo, the page is missing its image.
 

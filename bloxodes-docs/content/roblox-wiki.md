@@ -35,6 +35,7 @@ The code repo owns one versioned publish command with two contracts: `contracts/
 - **Production guard:** the checkout must be on `origin/production` (ahead of or behind the live SHA is fine) with no changed tracked files, and nothing between it and the live deployed SHA may touch what ships in the web image: `apps/web/`, `data/`, `Dockerfile` or the package files (`PUBLICATION_RELEVANT_PATHS`, kept in step with the deploy's change classifier). Scripts, contracts and migrations run from the checkout itself, so merges that only change them don't block. Production must have no pending migrations. The command never moves the checkout; it refuses and says why.
 - **What an apply does:** imports the universe row if the target lacks it (the dry run previews it from the Roblox API and checks the editorial slug against its stats slug), uploads item images and the official hub cover to R2, writes the hub and an immutable revision per collection, merges the game into `roblox_wiki_registry`, reads everything back. Production also snapshots an overwritten hub to `tmp/publish-snapshots/`, revalidates and fetches each live URL.
 - **Not one transaction.** A late failure can leave some pages published. Rerun the same bundle; revision hashes make it safe.
+- **Speed and retries:** image checks, uploads, R2 readback, collection readback, revalidation and live checks run 8 at a time (`scripts/shared/publish-network.mjs`). Database writes stay one at a time, hub first. Network blips and HTTP 429/5xx on reads, R2 calls and live checks retry up to 3 times; validation failures and other 4xx never retry. Long phases print progress (`images 400/3326`), and errors show their real cause with credentials and URL queries removed.
 - The dry run is a scoped exception to "no checks locally". Builds, test suites and browser QA still run on GitHub.
 - The older path still works: `sync:game-wiki-runtime` and `sync:game-collection-runtime` behind the GitHub `roblox-wiki` and `roblox-collection` publishers, with selected Roblox QA ([release](../operations/release.md#managed-development-content-qa)).
 
@@ -70,7 +71,7 @@ The code repo owns one versioned publish command with two contracts: `contracts/
 - **Images:** use exact item images. Item names baked into a source image are fine. Never swap in unrelated crops, edited art or generic game thumbnails. Text-only rows are allowed only when no clean image exists, and the decision is recorded in the dataset.
 - **Hub images:** `/wiki` cards and social previews use the first official 768x432 universe thumbnail. Hubs published with `content:publish` store a copy in R2 as `wiki_pages.cover_image`; older hubs keep reading it from Roblox until republished. The square art next to the title uses the official 512x512 icon.
 - **Field labels:** cards and the list use `meta.display.fieldLabels` from the dataset first, then the code's generic field labels.
-- **Public copy:** no research notes, provenance or workflow language. `imageCreditUrl` and `walkthroughUrl` are intended public fields.
+- **Public copy:** no research notes, provenance, source or image credits, or workflow language. Leave `imageCreditUrl` unset. `walkthroughUrl` is an intended public field.
 
 Item media is served from R2 bucket `bloxodes-wiki` at `media.bloxodes.com/wiki/<key>`.
 
