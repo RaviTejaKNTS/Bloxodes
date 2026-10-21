@@ -22,7 +22,7 @@ export const gameFields = ["slug", "title", "short_title", "installment", "conte
 export const wikiFields = ["slug", "title", "seo_title", "meta_description", "description_md", "cover_image", "controls_json", "tips_md", "is_published"];
 export const pick = (row: Record<string, unknown>, fields: string[]) => Object.fromEntries(fields.filter(key => row[key] !== undefined).map(key => [key, row[key]]));
 
-async function main() {
+export async function runFranchiseWikiHubsCli() {
   if (args.includes("--help")) {
     console.log("Usage: npm run publish:franchise-wiki-hubs -- --namespace <red-dead|minecraft> --workspace <root> --game <slug> [--game <slug>] [--apply --allow-prod]");
     return;
@@ -98,11 +98,13 @@ export async function saveFranchiseWikiPage(client: SupabaseClient, namespaceVal
   const payload = { ...pick(wiki, wikiFields), is_published: !stagePage, game_id: gameId };
   const page = await sb.from("wiki_pages").select("id").eq("game_id", gameId).maybeSingle();
   if (page.error) throw page.error;
+  // Inserts need the validated route, including Minecraft edition paths.
+  // Updates leave the target's permanent canonical path unchanged.
   const result = page.data
     ? await sb.from("wiki_pages").update(payload).eq("id", page.data.id).select("*").single()
-    : await sb.from("wiki_pages").insert(payload).select("*").single();
+    : await sb.from("wiki_pages").insert({ ...payload, ...pick(wiki, ["canonical_path"]) }).select("*").single();
   if (result.error || result.data?.slug !== wiki.slug || result.data.is_published !== !stagePage) throw result.error ?? new Error(`Hub readback failed for ${wiki.slug}`);
   return result.data;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch(error => { console.error(error); process.exitCode = 1; });
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) runFranchiseWikiHubsCli().catch(error => { console.error(error); process.exitCode = 1; });

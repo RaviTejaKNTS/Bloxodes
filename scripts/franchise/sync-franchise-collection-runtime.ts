@@ -194,7 +194,11 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
   if (namespaceValue === "minecraft" && (!Array.isArray(manifest.sourceUrls) || !manifest.sourceUrls.length || manifest.sourceUrls.some(url => typeof url !== "string" || !url.startsWith("https://")))) throw new Error("Minecraft collections need verified HTTPS source URLs.");
   let wikiPath = context?.wikiCanonicalPath;
   if (!wikiPath) {
-    const { data: wikiIdentity, error: wikiError } = await gameDatabase(supabaseAdmin(), namespaceValue).from("wiki_pages").select("canonical_path").eq("slug", gameSlug).maybeSingle();
+    const sb = gameDatabase(supabaseAdmin(), namespaceValue);
+    const game = await sb.from("games").select("id").eq("slug", gameSlug).maybeSingle();
+    if (game.error) throw game.error;
+    if (!game.data) throw new Error(`Create the ${gameSlug} game before planning its collections.`);
+    const { data: wikiIdentity, error: wikiError } = await sb.from("wiki_pages").select("canonical_path").eq("game_id", game.data.id).maybeSingle();
     if (wikiError) throw wikiError;
     if (!wikiIdentity) throw new Error(`Create the ${gameSlug} wiki before planning its collections.`);
     wikiPath = wikiIdentity.canonical_path;
@@ -369,14 +373,14 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
   const game = await gameQuery.eq("slug", plan.manifest.game.slug).maybeSingle();
   if (game.error) throw game.error;
   if (!game.data || !stageRevision && !game.data.is_published) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} game row before its collection.`);
-  const wiki = await sb.from(wikiTable).select("id, game_id, slug, is_published, canonical_path").eq("slug", plan.manifest.game.slug).maybeSingle();
+  const wiki = await sb.from(wikiTable).select("id, game_id, slug, is_published, canonical_path").eq("game_id", game.data.id).maybeSingle();
   if (wiki.error) throw wiki.error;
   if (!wiki.data || !stageRevision && !wiki.data.is_published || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} wiki row before its collection.`);
   const copy = pageCopy(plan);
   let pageQuery = await sb
     .from(pagesTable)
     .select("id, game_id, wiki_page_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
-    .eq("wiki_slug", plan.manifest.game.slug)
+    .eq("wiki_slug", wiki.data.slug)
     .eq("collection_slug", plan.manifest.collection.slug)
     .maybeSingle();
   if (pageQuery.error) throw pageQuery.error;
@@ -387,7 +391,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
       ...copy,
       wiki_page_id: wiki.data.id,
       game_id: game.data.id,
-      wiki_slug: plan.manifest.game.slug,
+      wiki_slug: wiki.data.slug,
       collection_slug: plan.manifest.collection.slug,
       code: plan.code,
       page_type: plan.pageType,
@@ -456,7 +460,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
   }
 }
 
-async function main() {
+export async function runFranchiseCollectionRuntimeCli() {
   if (argv.includes("--help") || argv.includes("-h")) usage();
   if (!SAFE_SLUG.test(namespace) || namespace === "roblox") throw new Error("--namespace must be a non-Roblox game namespace.");
   if (argv.includes("--minecraft-media-concurrency") && namespace !== "minecraft") throw new Error("--minecraft-media-concurrency is only supported for Minecraft.");
@@ -494,7 +498,7 @@ async function main() {
   }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch((error) => {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) runFranchiseCollectionRuntimeCli().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });

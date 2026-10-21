@@ -69,10 +69,11 @@ export function resolveGameWikiIdentity(games: Array<Record<string, any>>, hubs:
   const parentId = identity.parent ? root!.id : null;
   if (game && (game.kind !== identity.kind || (game.parent_id ?? null) !== parentId)) throw new Error("Game kind or parent conflicts with permanent target identity. Use a reviewed migration.");
   if (!identity.parent && root && root.id !== game?.id) throw new Error("Namespace already has another root identity.");
-  const hubMatches = hubs.filter(row => row.slug === identity.slug || row.game_id === game?.id);
-  if (hubMatches.length > 1) throw new Error("Hub slug/game ownership conflicts with another page.");
+  const hubMatches = game ? hubs.filter(row => row.game_id === game.id) : [];
+  if (hubMatches.length > 1) throw new Error("Multiple hubs belong to the target game.");
   const hub = hubMatches[0];
-  if (hub && (!game || hub.game_id !== game.id || hub.slug !== identity.slug)) throw new Error("Hub belongs to a different game in this target.");
-  return { root, game, hub, parentId };
+  const hubSlug = hub?.slug ?? identity.slug;
+  if (hubs.some(row => row.slug === hubSlug && row.id !== hub?.id)) throw new Error("Hub slug belongs to a different game in this target.");
+  return { root, game, hub, hubSlug, parentId };
 }
 

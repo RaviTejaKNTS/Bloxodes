@@ -83,12 +83,13 @@ In a collection-only run, the publisher reads `game.json` for identity and copy 
 
 `wiki/final.json` has these required fields:
 
-- `game_slug`, `slug`: both equal `bundle.game.slug`.
+- `game_slug`: equals `bundle.game.slug`.
+- `slug`: equals the target game's existing hub slug. Existing franchise roots keep `red-dead-hub`, `gta-hub` or `minecraft-hub`; do not replace these with the game slug. For a new hub, including a new namespace root, use `bundle.game.slug`.
 - `title`, `seo_title`, `meta_description`, `description_md`: non-empty strings.
 - `tips_md`: string. Released games require non-empty tips; franchise roots and unreleased games may leave it empty.
 - `controls_json`: array of verified control objects. Each object needs `action` and at least one device-specific control such as `desktop`, `mobile` or `console`. Use `[]` when no controls are verified.
 
-Optional fields are `cover_image` (null or the game's cover path/URL), `is_published` (true), `namespace`, `canonical_path`, `id` and `game_id`. Artwork belongs in `game.json`; leave the hub cover null to use it. Explicit namespace and canonical path must match the target. UUID hints are ignored.
+Optional fields are `cover_image` (null or the game's cover path/URL), `is_published` (true), `namespace`, `canonical_path`, `id` and `game_id`. Artwork belongs in `game.json`; leave the hub cover null to use it. Explicit namespace and canonical path must match the target. The publisher resolves the hub by the target game's ID and preserves its slug, UUID and canonical path. New hubs receive the validated canonical path on insert, including Minecraft edition routes. UUID hints are ignored.
 
 ## Collection manifest
 
@@ -109,7 +110,7 @@ Optional fields are `cover_image` (null or the game's cover path/URL), `is_publi
 
 Required fields are `schemaVersion: 1`, `game` (slug/name), `collection` (slug/label/pageType), `dataset: "dataset.json"`, `finalJson: "final.json"`, `mediaRoot: "media"`, and a non-empty `sourceUrls` array of HTTPS URLs. Optional fields are `namespace`, `route`, `collection.sortOrder` (integer) and `missingImages`. Explicit namespace, route and game identity must match the bundle and target wiki. `pageType` is `database` or `collectible`. Minecraft only supports its existing edition identities and `database` collections.
 
-`sortOrder` uses the existing collection order when omitted, or appends in increments of 10 for new collections. A final's explicit `wiki_sort_order` remains supported; if the manifest also sets `sortOrder`, both must agree.
+`sortOrder` uses the existing collection order when omitted, or appends in increments of 10 above the target game's maximum existing and previously planned order for new collections. A final's explicit `wiki_sort_order` remains supported and contributes to that maximum; if the manifest also sets `sortOrder`, both must agree.
 
 Missing-image decisions merge between this manifest and its bundle entry. Every imageless item needs a reason. Duplicate decisions, conflicting reasons, absent item slugs and decisions for items that now have images fail. At least one exact item image is required for every collection, as in the existing franchise publisher. `notes.md` and `images.json` may preserve research and provenance in today's authoring formats; they cannot override these decisions or alter publication.
 
@@ -155,6 +156,8 @@ Required fields in `collections/<slug>/final.json`:
 - `faq_json`: array of `{ "q": "Question", "a": "Answer" }`; `[]` is valid.
 
 Optional fields are `how_it_works_md` (empty string or null), `wiki_sort_order` (integer), `thumb_url` (null or an exact planned item image URL), `schema_ld_json` (object or null), `is_published` (true), `namespace`, `canonical_path`, `id`, `game_id`, and `wiki_page_id`. Null or absent `thumb_url` uses the first item image. Publication expands `{count}` tokens in copy. Namespace and route must match the target; UUID hints are ignored. Existing page types and route ownership cannot change.
+
+Keep the game slug in the collection final's `wiki_slug` even when the owning hub has a different permanent slug. The publisher writes the owning hub's slug to the database collection row, as required by its ownership trigger. Collection codes continue to use the game slug.
 
 ## Commands and target guards
 

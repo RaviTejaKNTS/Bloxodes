@@ -62,10 +62,10 @@ async function rows(db: SupabaseClient, table: string, namespace: string) {
   }
 }
 
-async function verifyCollection(db: SupabaseClient, plan: Plan, route: string) {
-  const page = await db.from("game_collection_pages").select("*").eq("namespace", plan.namespace).eq("wiki_slug", plan.manifest.game.slug).eq("collection_slug", plan.manifest.collection.slug).single();
+async function verifyCollection(db: SupabaseClient, plan: Plan, wikiSlug: string, route: string) {
+  const page = await db.from("game_collection_pages").select("*").eq("namespace", plan.namespace).eq("wiki_slug", wikiSlug).eq("collection_slug", plan.manifest.collection.slug).single();
   if (page.error) throw page.error;
-  equalFields(page.data, { ...pageCopy(plan), code: plan.code, canonical_path: route, page_type: plan.pageType, item_count: plan.items.length, is_published: true }, plan.code);
+  equalFields(page.data, { ...pageCopy(plan), wiki_slug: wikiSlug, code: plan.code, canonical_path: route, page_type: plan.pageType, item_count: plan.items.length, is_published: true }, plan.code);
   const revision = await db.from("game_collection_datasets").select("*").eq("namespace", plan.namespace).eq("id", page.data.published_dataset_id).single();
   if (revision.error) throw revision.error;
   equalFields(revision.data, { collection_page_id: page.data.id, content_hash: plan.contentHash, item_count: plan.items.length, meta_json: plan.metaJson }, `${plan.code} revision`);
@@ -119,7 +119,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
       const file = await json(await bundlePath(root, selected.hub!.finalJson));
       assertNoRobloxIdentifiers(file, "wiki/final.json");
       const final = hubFinalSchema.parse(file);
-      if (final.slug !== bundle.game.slug || final.game_slug !== bundle.game.slug || final.namespace != null && final.namespace !== bundle.namespace || final.canonical_path != null && final.canonical_path !== wikiPath) throw new Error("Hub identity/route must match the target game.");
+      if (final.slug !== identity.hubSlug || final.game_slug !== bundle.game.slug || final.namespace != null && final.namespace !== bundle.namespace || final.canonical_path != null && final.canonical_path !== wikiPath) throw new Error("Hub identity/route must match the target game's permanent hub slug and route.");
       if (bundle.game.kind === "game" && gameInput.status === "released" && !final.tips_md.trim()) throw new Error("Released games require gameplay tips.");
       validateWikiControlsJson(final.controls_json, "wiki/final.json controls_json");
       checkCopy(final, "wiki/final.json");
@@ -144,6 +144,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     for (const image of requireFranchiseHubImages(identity.root!, bundle.namespace)) await verifyFranchisePageImage(image);
   });
   const existingCollections = await rows(db, "game_collection_pages", bundle.namespace);
+  let maxCollectionOrder = Math.max(0, ...existingCollections.filter(row => identity.game && row.game_id === identity.game.id).map(row => Number(row.wiki_sort_order) || 0));
   const plans: Plan[] = [];
   for (const { entry, manifest } of selected.collections) await check(`collection ${manifest.collection.slug}`, async () => {
     const slug = manifest.collection.slug;
@@ -166,9 +167,9 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     const sections = new Set(document.items?.map((row: { system?: { section?: string } }) => row.system?.section));
     if (Object.keys(final.description_json).some(section => !sections.has(section))) throw new Error("description_json keys must match dataset sections.");
     const plan = await planManifest(bundle.namespace, manifestPath, { wikiCanonicalPath: wikiPath, strictPaths: true });
-    const current = existingCollections.filter(row => row.code === plan.code || row.wiki_slug === bundle.game.slug && row.collection_slug === slug);
-    if (current.length > 1 || current.some(row => row.game_id !== identity.game?.id || row.wiki_page_id !== identity.hub?.id || row.wiki_slug !== bundle.game.slug || row.collection_slug !== slug || row.code !== plan.code || row.page_type !== plan.pageType || row.canonical_path !== `${wikiPath}/${slug}`)) throw new Error("Collection conflicts with a permanent target identity, route or page type.");
-    const order = manifest.collection.sortOrder ?? current[0]?.wiki_sort_order ?? (plans.at(-1)?.manifest.collection.sortOrder ?? Math.max(0, ...existingCollections.filter(row => row.wiki_slug === bundle.game.slug).map(row => Number(row.wiki_sort_order) || 0))) + 10;
+    const current = existingCollections.filter(row => row.code === plan.code || row.wiki_slug === identity.hubSlug && row.collection_slug === slug);
+    if (current.length > 1 || current.some(row => row.game_id !== identity.game?.id || row.wiki_page_id !== identity.hub?.id || row.wiki_slug !== identity.hubSlug || row.collection_slug !== slug || row.code !== plan.code || row.page_type !== plan.pageType || row.canonical_path !== `${wikiPath}/${slug}`)) throw new Error("Collection conflicts with a permanent target identity, route or page type.");
+    const order = manifest.collection.sortOrder ?? final.wiki_sort_order ?? current[0]?.wiki_sort_order ?? maxCollectionOrder + 10;
     if (final.wiki_sort_order != null && manifest.collection.sortOrder != null && final.wiki_sort_order !== order) throw new Error("final.json wiki_sort_order conflicts with manifest sortOrder.");
     plan.manifest.collection.sortOrder = order;
     plan.finalJson = final;
@@ -183,6 +184,7 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     plan.finalJson.thumb_url = final.thumb_url || imageUrls[0];
     pageCopy(plan);
     plans.push(plan);
+    maxCollectionOrder = Math.max(maxCollectionOrder, order);
   });
   await check("route ownership", async () => {
     const expected = [
@@ -228,13 +230,13 @@ export async function publishGameBundle(options: ContentOptions, db: SupabaseCli
     const result = await query.select("*").single();
     if (result.error) throw result.error;
     equalFields(result.data, payload, "game");
-    const hubPayload = { ...pick(hub, wikiFields), cover_image: hub.cover_image ? artwork[0].url : null, is_published: true };
+    const hubPayload = { ...pick(hub, wikiFields), canonical_path: wikiPath, cover_image: hub.cover_image ? artwork[0].url : null, is_published: true };
     const written = await saveFranchiseWikiPage(db, bundle.namespace, result.data.id, hubPayload);
     equalFields(written, { ...hubPayload, game_id: result.data.id, canonical_path: wikiPath }, "hub");
   }
   for (const plan of plans) {
     await applyPlan(plan, { stage: false, publish: true, includeRoots: true, gameKind: bundle.game.kind });
-    await verifyCollection(db, plan, `${wikiPath}/${plan.manifest.collection.slug}`);
+    await verifyCollection(db, plan, identity.hubSlug, `${wikiPath}/${plan.manifest.collection.slug}`);
   }
   if (options.target === "production") {
     const paths = [...new Set([`/${bundle.namespace}`, `/${bundle.namespace}/wiki`, wikiPath, ...urls.map(url => url.path)])];
@@ -251,8 +253,8 @@ export async function gameContentStatus(options: ContentOptions, db: SupabaseCli
   if (candidates.length > 1) throw new Error("Ambiguous game slug in target namespace.");
   const game = candidates[0];
   const hubs = await rows(db, "game_wiki_pages", namespace);
-  const hub = hubs.find(page => game ? page.game_id === game.id : page.slug === options.game);
-  const pages = (await rows(db, "game_collection_pages", namespace)).filter(page => game ? page.game_id === game.id : page.wiki_slug === options.game);
+  const hub = game ? hubs.find(page => page.game_id === game.id) : undefined;
+  const pages = (await rows(db, "game_collection_pages", namespace)).filter(page => game && page.game_id === game.id);
   const wikiPath = hub?.canonical_path ?? gameWikiPath(namespace, options.game!, game?.parent_id || options.game !== namespace ? namespace : undefined);
   const parentPublished = !game?.parent_id || Boolean(games.find(parent => parent.id === game.parent_id)?.is_published);
   const visible = Boolean(game?.is_published && parentPublished && hub?.is_published);
