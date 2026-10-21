@@ -43,9 +43,9 @@ export async function verifyFranchisePageImage({ url, role, label }: { url: stri
       throw new Error(`${label}: unavailable ${role} image ${allowedUrl} (not an image)`);
     }
     return readImageBody(response).catch(error => {
-      throw new Error(`${label}: unreadable ${role} image body ${formatPublishError(allowedUrl)}: ${formatPublishError(error)}`, { cause: error });
+      throw Object.assign(new Error(`${label}: unreadable ${role} image body ${formatPublishError(allowedUrl)}: ${formatPublishError(error)}`), { cause: error });
     });
-  }).catch(error => { throw new Error(`${label}: unreadable ${role} image ${formatPublishError(allowedUrl)}: ${formatPublishError(error)}`, { cause: error }); });
+  }).catch(error => { throw Object.assign(new Error(`${label}: unreadable ${role} image ${formatPublishError(allowedUrl)}: ${formatPublishError(error)}`), { cause: error }); });
   const metadata = await (async () => {
     const decoder = sharp(bytes, { failOn: "warning", limitInputPixels: MAX_FRANCHISE_IMAGE_PIXELS });
     const metadata = await decoder.metadata();

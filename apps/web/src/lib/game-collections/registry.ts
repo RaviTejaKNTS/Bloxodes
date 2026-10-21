@@ -13,7 +13,7 @@ export async function readGameCollectionGroups(client: SupabaseClient): Promise<
     const { data, error, status } = await client.from("roblox_wiki_registry")
       .select("game_slug,game_name,universe_id,universe_names,sort_order,collections")
       .order("sort_order").order("game_slug").range(offset, offset + 999);
-    if (error) throw new Error(`Roblox wiki registry read failed: ${error.message}. Apply the registry migration first.`, { cause: { ...error, status } });
+    if (error) throw Object.assign(new Error(`Roblox wiki registry read failed (HTTP ${status}): ${[error.message, error.details, error.hint].filter(Boolean).join(": ")}. If the table is missing, apply the registry migration.`), { cause: error, status });
     for (const row of data ?? []) {
       const collections = row.collections as Array<{ slug: string; label: string; sortOrder: number; pageType: "database" | "collectible" }>;
       groups.push({
