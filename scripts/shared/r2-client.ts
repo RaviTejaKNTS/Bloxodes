@@ -64,21 +64,44 @@ export class R2Client {
   ) {}
 
   async putObject(input: PutR2ObjectInput) {
-    return this.request("PUT", input.key, input.body, {
+    return this.writeObject(input, false);
+  }
+
+  // Own one retry budget for the complete existence check and upload.
+  async uploadObject(input: PutR2ObjectInput) {
+    return this.writeObject(input, true);
+  }
+
+  private async writeObject(input: PutR2ObjectInput, checkBeforeWrite: boolean) {
+    const contentHash = sha256(input.body);
+    const headers = {
       "cache-control": input.cacheControl || "public, max-age=31536000, immutable",
       "content-type": input.contentType,
       ...Object.fromEntries(
         Object.entries(input.metadata || {}).map(([key, value]) => [`x-amz-meta-${key.toLowerCase()}`, String(value)])
-      )
-    });
+      ),
+      "x-amz-meta-sha256": contentHash
+    };
+    return retryPublishNetwork(async () => {
+      if (checkBeforeWrite) {
+        const existing = await this.request("HEAD", input.key, new Uint8Array(), {}, [404]);
+        if (existing.ok
+          && existing.headers.get("x-amz-meta-sha256") === contentHash
+          && existing.headers.get("content-length") === String(input.body.byteLength)
+          && existing.headers.get("content-type") === input.contentType) return existing;
+      }
+      // A failed response can still leave the object stored. Check it before retrying PUT.
+      checkBeforeWrite = true;
+      return this.request("PUT", input.key, input.body, headers);
+    }, { sleep: this.sleep });
   }
 
   async headObject(key: string) {
-    return this.request("HEAD", key, new Uint8Array(), {});
+    return retryPublishNetwork(() => this.request("HEAD", key, new Uint8Array(), {}), { sleep: this.sleep });
   }
 
   async hasObject(key: string) {
-    const response = await this.request("HEAD", key, new Uint8Array(), {}, [404]);
+    const response = await retryPublishNetwork(() => this.request("HEAD", key, new Uint8Array(), {}, [404]), { sleep: this.sleep });
     return response.status !== 404;
   }
 
@@ -96,38 +119,36 @@ export class R2Client {
     url.pathname = canonicalPath;
 
     const payloadHash = sha256(body);
-    return retryPublishNetwork(async () => {
-      const timestamp = this.now().toISOString().replace(/[:-]|\.\d{3}/g, "");
-      const date = timestamp.slice(0, 8);
-      const headers: Record<string, string> = {
-        host: url.host,
-        "x-amz-content-sha256": payloadHash,
-        "x-amz-date": timestamp,
-        ...extraHeaders
-      };
-      const signedHeaderNames = Object.keys(headers).sort();
-      const canonicalHeaders = signedHeaderNames.map((name) => `${name}:${headers[name].trim()}\n`).join("");
-      const signedHeaders = signedHeaderNames.join(";");
-      const canonicalRequest = [method, canonicalPath, "", canonicalHeaders, signedHeaders, payloadHash].join("\n");
-      const scope = `${date}/auto/s3/aws4_request`;
-      const stringToSign = ["AWS4-HMAC-SHA256", timestamp, scope, sha256(canonicalRequest)].join("\n");
-      const dateKey = hmac(`AWS4${this.config.secretAccessKey}`, date);
-      const regionKey = hmac(dateKey, "auto");
-      const serviceKey = hmac(regionKey, "s3");
-      const signingKey = hmac(serviceKey, "aws4_request");
-      const signature = createHmac("sha256", signingKey).update(stringToSign).digest("hex");
-      headers.authorization = `AWS4-HMAC-SHA256 Credential=${this.config.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+    const timestamp = this.now().toISOString().replace(/[:-]|\.\d{3}/g, "");
+    const date = timestamp.slice(0, 8);
+    const headers: Record<string, string> = {
+      host: url.host,
+      "x-amz-content-sha256": payloadHash,
+      "x-amz-date": timestamp,
+      ...extraHeaders
+    };
+    const signedHeaderNames = Object.keys(headers).sort();
+    const canonicalHeaders = signedHeaderNames.map((name) => `${name}:${headers[name].trim()}\n`).join("");
+    const signedHeaders = signedHeaderNames.join(";");
+    const canonicalRequest = [method, canonicalPath, "", canonicalHeaders, signedHeaders, payloadHash].join("\n");
+    const scope = `${date}/auto/s3/aws4_request`;
+    const stringToSign = ["AWS4-HMAC-SHA256", timestamp, scope, sha256(canonicalRequest)].join("\n");
+    const dateKey = hmac(`AWS4${this.config.secretAccessKey}`, date);
+    const regionKey = hmac(dateKey, "auto");
+    const serviceKey = hmac(regionKey, "s3");
+    const signingKey = hmac(serviceKey, "aws4_request");
+    const signature = createHmac("sha256", signingKey).update(stringToSign).digest("hex");
+    headers.authorization = `AWS4-HMAC-SHA256 Credential=${this.config.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
 
-      const response = await this.fetchImpl(url, {
-        method,
-        headers,
-        body: method === "HEAD" ? undefined : Buffer.from(body),
-        signal: AbortSignal.timeout(30_000)
-      });
-      if (response.ok || acceptedStatuses.includes(response.status)) return response;
-      // Do not include an R2 error body, which may echo signed credentials.
-      return requirePublishResponse(response, `R2 ${method} ${key}`);
-    }, { sleep: this.sleep });
+    const response = await this.fetchImpl(url, {
+      method,
+      headers,
+      body: method === "HEAD" ? undefined : Buffer.from(body),
+      signal: AbortSignal.timeout(30_000)
+    });
+    if (response.ok || acceptedStatuses.includes(response.status)) return response;
+    // Do not include an R2 error body, which may echo signed credentials.
+    return requirePublishResponse(response, `R2 ${method} ${key}`);
   }
 }
 

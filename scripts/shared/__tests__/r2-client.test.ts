@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import test from "node:test";
 import { loadR2ClientConfig, R2Client, utf8Bytes } from "../r2-client";
 
@@ -61,7 +62,8 @@ test("retries transient R2 failures before succeeding", async () => {
       secretAccessKey: "example-secret",
       bucket: "bloxodes-wiki"
     },
-    async () => {
+    async (_input, init) => {
+      if (init?.method === "HEAD") return new Response(null, { status: 404 });
       attempts += 1;
       return attempts === 1
         ? new Response("temporary", { status: 500 })
@@ -88,6 +90,7 @@ test("R2 transport retries keep identical PUT bytes and use fresh timeout signal
   const bodies: Buffer[] = [];
   const signals: AbortSignal[] = [];
   const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+    if (init?.method === "HEAD") return new Response(null, { status: 404 });
     attempts++; bodies.push(Buffer.from(init!.body as Uint8Array)); signals.push(init!.signal!);
     if (attempts < 3) throw new TypeError("fetch failed", { cause: { code: "ECONNRESET" } });
     return new Response(null);
@@ -96,6 +99,61 @@ test("R2 transport retries keep identical PUT bytes and use fresh timeout signal
   assert.equal(attempts, 3);
   assert.ok(bodies.every(body => body.equals(Buffer.from("same bytes"))));
   assert.equal(new Set(signals).size, 3);
+});
+
+test("Direct R2 PUT recovers a lost response by checking the stored content", async () => {
+  const methods: string[] = [];
+  let storedHeaders: Headers;
+  const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+    methods.push(init!.method!);
+    if (init!.method === "HEAD") return new Response(null, { headers: storedHeaders });
+    storedHeaders = new Headers(init!.headers);
+    storedHeaders.set("content-length", String(Buffer.from(init!.body as Uint8Array).length));
+    throw new TypeError("fetch failed", { cause: { code: "ECONNRESET" } });
+  }, () => new Date(), async () => {});
+  await client.putObject({ key: "stored.webp", body: utf8Bytes("image"), contentType: "image/webp" });
+  assert.deepEqual(methods, ["PUT", "HEAD"]);
+});
+
+test("R2 recovery only accepts HEAD with the expected hash, length and content type", async () => {
+  const body = utf8Bytes("image");
+  const matching = {
+    "x-amz-meta-sha256": createHash("sha256").update(body).digest("hex"),
+    "content-length": String(body.byteLength),
+    "content-type": "image/webp"
+  };
+  const mismatches: Record<string, string>[] = [
+    { "x-amz-meta-sha256": "different hash" },
+    { "content-length": "999" },
+    { "content-type": "image/png" },
+    { "x-amz-meta-sha256": "" }
+  ];
+  for (const mismatch of mismatches) {
+    const methods: string[] = [];
+    const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+      methods.push(init!.method!);
+      if (init!.method === "HEAD") return new Response(null, { headers: { ...matching, ...mismatch } });
+      if (methods.length === 1) return new Response(null, { status: 503 });
+      return new Response(null);
+    }, () => new Date(), async () => {});
+    await client.putObject({ key: "mismatch.webp", body, contentType: "image/webp" });
+    assert.deepEqual(methods, ["PUT", "HEAD", "PUT"]);
+  }
+});
+
+test("R2 upload accepts an existing object only when its content matches", async () => {
+  const body = utf8Bytes("image");
+  const methods: string[] = [];
+  const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+    methods.push(init!.method!);
+    return new Response(null, { headers: {
+      "x-amz-meta-sha256": createHash("sha256").update(body).digest("hex"),
+      "content-length": String(body.byteLength),
+      "content-type": "image/webp"
+    } });
+  }, () => new Date(), async () => {});
+  await client.uploadObject({ key: "existing.webp", body, contentType: "image/webp" });
+  assert.deepEqual(methods, ["HEAD"]);
 });
 
 test("R2 checks accept 404 once, reject 403 once, and cap 503 retries at three", async () => {

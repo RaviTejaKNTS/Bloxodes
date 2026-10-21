@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import test from "node:test";
 import { collectionImageKey, uploadCollectionImages, verifyCollectionImages } from "../franchise-collection-media";
+import { R2Client } from "../r2-client";
 
 function item(slug: string, text: string, namespace = "minecraft") {
   const bytes = Buffer.from(text);
@@ -89,6 +90,51 @@ test("Minecraft retries a known transport closure and rechecks a possibly comple
   assert.equal(heads, 2);
   assert.equal(puts, 1);
   assert.equal(confirmed.size, 1);
+});
+
+test("Real R2 uploads recover a stored PUT after its response fails in every namespace", async () => {
+  for (const namespace of ["minecraft", "gta", "red-dead", "aion-2"]) {
+    const row = item("recipe", "exact immutable bytes", namespace);
+    const methods: string[] = [];
+    const delays: number[] = [];
+    let storedHeaders: Headers | undefined;
+    const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+      methods.push(init!.method!);
+      if (init!.method === "HEAD") return storedHeaders
+        ? new Response(null, { headers: storedHeaders })
+        : new Response(null, { status: 404 });
+      assert.equal(init!.method, "PUT");
+      assert.deepEqual(Buffer.from(init!.body as Uint8Array), row.prepared_image);
+      storedHeaders = new Headers(init!.headers);
+      storedHeaders.set("content-length", String(row.prepared_image.byteLength));
+      throw new TypeError("fetch failed", { cause: { code: "UND_ERR_SOCKET" } });
+    }, () => new Date(), async delay => { delays.push(delay); });
+    const confirmed = namespace === "minecraft" ? new Set<string>() : undefined;
+    await uploadCollectionImages([row], client, confirmed, 1);
+    assert.deepEqual(methods, ["HEAD", "PUT", "HEAD"], namespace);
+    assert.deepEqual(delays, [250]);
+    if (confirmed) assert.ok(confirmed.has(row.image_key));
+  }
+});
+
+test("Real R2 uploads share three attempts across HEAD and PUT failures", async () => {
+  const row = item("recipe", "icon");
+  for (const failRecoveryHead of [false, true]) {
+    const methods: string[] = [];
+    const delays: number[] = [];
+    const confirmed = new Set<string>();
+    const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+      methods.push(init!.method!);
+      if (init!.method === "HEAD" && (!failRecoveryHead || methods.length === 1)) return new Response(null, { status: 404 });
+      throw new TypeError("fetch failed", { cause: { code: "UND_ERR_SOCKET" } });
+    }, () => new Date(), async delay => { delays.push(delay); });
+    await assert.rejects(uploadCollectionImages([row], client, confirmed, 1), /fetch failed/);
+    assert.deepEqual(methods, failRecoveryHead
+      ? ["HEAD", "PUT", "HEAD", "HEAD"]
+      : ["HEAD", "PUT", "HEAD", "PUT", "HEAD", "PUT"]);
+    assert.deepEqual(delays, [250, 500]);
+    assert.equal(confirmed.size, 0);
+  }
 });
 
 test("Transport retries stop after three attempts across all namespaces; HTTP 403 fails immediately", async () => {
