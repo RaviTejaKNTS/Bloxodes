@@ -91,7 +91,7 @@ test("Minecraft retries a known transport closure and rechecks a possibly comple
   assert.equal(confirmed.size, 1);
 });
 
-test("Transport retries stop after three attempts; HTTP failures and legacy requests do not retry", async () => {
+test("Transport retries stop after three attempts across all namespaces; HTTP 403 fails immediately", async () => {
   const rows = [item("recipe", "icon")];
   let heads = 0;
   const transient = { hasObject: async () => { heads++; throw new Error("connect reset", { cause: { code: "ECONNRESET" } }); }, putObject: async () => {} };
@@ -104,11 +104,11 @@ test("Transport retries stop after three attempts; HTTP failures and legacy requ
   assert.equal(heads, 1);
   heads = 0;
   await assert.rejects(verifyCollectionImages(rows, transient, "gta-recipes"), /connect reset/);
-  assert.equal(heads, 1);
+  assert.equal(heads, 3);
 });
 
-test("An explicit HTTP status prevents retries even with a nested transport cause", async () => {
-  for (const status of [{ status: 503 }, { statusCode: 401 }, { $metadata: { httpStatusCode: 403 } }]) {
+test("An explicit client HTTP status prevents retries even with a nested transport cause", async () => {
+  for (const status of [{ status: 400 }, { statusCode: 401 }, { $metadata: { httpStatusCode: 403 } }]) {
     let heads = 0;
     const failure = Object.assign(new TypeError("fetch failed", { cause: { code: "UND_ERR_SOCKET" } }), status);
     const confirmed = new Set<string>();
@@ -118,4 +118,21 @@ test("An explicit HTTP status prevents retries even with a nested transport caus
     assert.equal(heads, 1);
     assert.equal(confirmed.size, 0);
   }
+});
+
+
+test("Non-Minecraft media uses eight workers and verifies every row", async () => {
+  const rows = Array.from({ length: 25 }, (_, index) => item(`row-${index}`, `icon-${index}`, "aion-2"));
+  let active = 0, maximum = 0;
+  const seen = new Set<string>();
+  await verifyCollectionImages(rows, {
+    hasObject: async key => {
+      active++; maximum = Math.max(maximum, active);
+      await new Promise(resolve => setTimeout(resolve, 2));
+      active--; seen.add(key); return true;
+    },
+    putObject: async () => { throw new Error("Verification cannot write"); }
+  }, "aion-2-items");
+  assert.equal(maximum, 8);
+  assert.equal(seen.size, rows.length);
 });

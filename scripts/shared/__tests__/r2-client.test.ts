@@ -82,3 +82,40 @@ test("retries transient R2 failures before succeeding", async () => {
   assert.equal(attempts, 2);
   assert.deepEqual(delays, [250]);
 });
+
+test("R2 transport retries keep identical PUT bytes and use fresh timeout signals", async () => {
+  let attempts = 0;
+  const bodies: Buffer[] = [];
+  const signals: AbortSignal[] = [];
+  const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async (_input, init) => {
+    attempts++; bodies.push(Buffer.from(init!.body as Uint8Array)); signals.push(init!.signal!);
+    if (attempts < 3) throw new TypeError("fetch failed", { cause: { code: "ECONNRESET" } });
+    return new Response(null);
+  }, () => new Date(), async () => {});
+  await client.putObject({ key: "same.webp", body: utf8Bytes("same bytes"), contentType: "image/webp" });
+  assert.equal(attempts, 3);
+  assert.ok(bodies.every(body => body.equals(Buffer.from("same bytes"))));
+  assert.equal(new Set(signals).size, 3);
+});
+
+test("R2 checks accept 404 once, reject 403 once, and cap 503 retries at three", async () => {
+  for (const [status, expected] of [[404, 1], [403, 1], [503, 3]]) {
+    let attempts = 0;
+    const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async () => {
+      attempts++; return new Response(null, { status });
+    }, () => new Date(), async () => {});
+    if (status === 404) assert.equal(await client.hasObject("missing.webp"), false);
+    else await assert.rejects(client.hasObject("item.webp"), new RegExp(`HTTP ${status}`));
+    assert.equal(attempts, expected);
+  }
+});
+
+test("franchise media does not multiply the R2 client's retry budget", async () => {
+  const { verifyCollectionImages } = await import("../franchise-collection-media");
+  let attempts = 0;
+  const client = new R2Client({ endpoint: "https://r2.example.com", accessKeyId: "key", secretAccessKey: "secret", bucket: "bloxodes-wiki" }, async () => {
+    attempts++; return new Response(null, { status: 503 });
+  }, () => new Date(), async () => {});
+  await assert.rejects(verifyCollectionImages([{ image_key: "example/item.webp", image_mime: "image/webp", image_sha256: "hash", image_width: 16, image_height: 16, prepared_image: null }], client, "example-items"), /HTTP 503/);
+  assert.equal(attempts, 3);
+});

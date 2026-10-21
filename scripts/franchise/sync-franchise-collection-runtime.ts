@@ -1,3 +1,4 @@
+import { mapPublishConcurrent, readPublishQuery } from "../shared/publish-network.mjs";
 import { requireFranchiseCollectionImage } from "../ci/franchise-image-contract.mjs";
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
@@ -195,10 +196,10 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
   let wikiPath = context?.wikiCanonicalPath;
   if (!wikiPath) {
     const sb = gameDatabase(supabaseAdmin(), namespaceValue);
-    const game = await sb.from("games").select("id").eq("slug", gameSlug).maybeSingle();
+    const game = await readPublishQuery(() => sb.from("games").select("id").eq("slug", gameSlug).maybeSingle());
     if (game.error) throw game.error;
     if (!game.data) throw new Error(`Create the ${gameSlug} game before planning its collections.`);
-    const { data: wikiIdentity, error: wikiError } = await sb.from("wiki_pages").select("canonical_path").eq("game_id", game.data.id).maybeSingle();
+    const { data: wikiIdentity, error: wikiError } = await readPublishQuery(() => sb.from("wiki_pages").select("canonical_path").eq("game_id", game.data!.id).maybeSingle());
     if (wikiError) throw wikiError;
     if (!wikiIdentity) throw new Error(`Create the ${gameSlug} wiki before planning its collections.`);
     wikiPath = wikiIdentity.canonical_path;
@@ -223,9 +224,7 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
   }
 
   const seen = new Set<string>();
-  const items: PlannedItem[] = [];
-  for (let index = 0; index < document.items.length; index += 1) {
-    const row = document.items[index];
+  const items = await mapPublishConcurrent(document.items, async (row, index): Promise<PlannedItem> => {
     const item = row.item ?? {};
     const system = row.system ?? {};
     const unexpectedSystem = Object.keys(system).filter((key) => !ALLOWED_SYSTEM_FIELDS.has(key));
@@ -270,15 +269,15 @@ export async function planManifest(namespaceValue: Namespace, manifestPath: stri
       };
     }
     const { name: _name, ...fieldsJson } = item;
-    items.push({
+    return {
       item_slug: itemSlug,
       item_name: itemName,
       section,
       sort_order: Number.isInteger(system.sortOrder) ? Number(system.sortOrder) : index + 1,
       fields_json: fieldsJson,
       ...image
-    });
-  }
+    };
+  }, { label: `${gameSlug + "-" + collectionSlug} plan images` });
 
   const metaJson = {
     ...document.meta,
@@ -367,22 +366,22 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
   const pagesTable = tableName(plan.config, "wiki_collection_pages");
   const datasetsTable = tableName(plan.config, "wiki_collection_datasets");
   const itemsTable = tableName(plan.config, "wiki_collection_items");
-  const gameQuery = options.includeRoots
+  const gameQuery = () => options.includeRoots
     ? supabaseAdmin().from("games").select("id, slug, is_published").eq("namespace", plan.namespace).eq("kind", options.gameKind ?? "game")
     : sb.from(gameTable).select("id, slug, is_published");
-  const game = await gameQuery.eq("slug", plan.manifest.game.slug).maybeSingle();
+  const game = await readPublishQuery(() => gameQuery().eq("slug", plan.manifest.game.slug).maybeSingle());
   if (game.error) throw game.error;
   if (!game.data || !stageRevision && !game.data.is_published) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} game row before its collection.`);
-  const wiki = await sb.from(wikiTable).select("id, game_id, slug, is_published, canonical_path").eq("game_id", game.data.id).maybeSingle();
+  const wiki = await readPublishQuery(() => sb.from(wikiTable).select("id, game_id, slug, is_published, canonical_path").eq("game_id", game.data!.id).maybeSingle());
   if (wiki.error) throw wiki.error;
   if (!wiki.data || !stageRevision && !wiki.data.is_published || wiki.data.game_id !== game.data.id) throw new Error(`Publish the ${plan.manifest.game.slug} ${plan.config.label} wiki row before its collection.`);
   const copy = pageCopy(plan);
-  let pageQuery = await sb
+  let pageQuery = await readPublishQuery(() => sb
     .from(pagesTable)
     .select("id, game_id, wiki_page_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
-    .eq("wiki_slug", wiki.data.slug)
+    .eq("wiki_slug", wiki.data!.slug)
     .eq("collection_slug", plan.manifest.collection.slug)
-    .maybeSingle();
+    .maybeSingle());
   if (pageQuery.error) throw pageQuery.error;
   let page = pageQuery.data;
   if (!page) {
@@ -403,7 +402,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
   }
   if (page.game_id !== game.data.id || page.wiki_page_id !== wiki.data.id || page.code !== plan.code) throw new Error(`${plan.code} page identity mismatch.`);
 
-  let dataset = await sb.from(datasetsTable).select("id, item_count").eq("collection_page_id", page.id).eq("content_hash", plan.contentHash).maybeSingle();
+  let dataset = await readPublishQuery(() => sb.from(datasetsTable).select("id, item_count").eq("collection_page_id", page!.id).eq("content_hash", plan.contentHash).maybeSingle());
   if (dataset.error) throw dataset.error;
   if (!dataset.data) {
     const inserted = await sb.from(datasetsTable).insert({
@@ -443,7 +442,7 @@ export async function applyPlan(plan: Plan, options: { stage: boolean; publish: 
   }
   if (!dataset.data) throw new Error(`${plan.code} dataset did not return a row.`);
   const publishedDataset = dataset.data;
-  const count = await sb.from(itemsTable).select("id", { count: "exact", head: true }).eq("dataset_id", publishedDataset.id);
+  const count = await readPublishQuery(() => sb.from(itemsTable).select("id", { count: "exact", head: true }).eq("dataset_id", publishedDataset.id));
   if (count.error) throw count.error;
   if (count.count !== plan.items.length || Number(publishedDataset.item_count) !== plan.items.length) throw new Error(`${plan.code} dataset count mismatch.`);
   if (publishRevision) {

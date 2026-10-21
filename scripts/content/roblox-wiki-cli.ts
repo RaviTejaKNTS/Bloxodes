@@ -1,3 +1,4 @@
+import { formatPublishError } from "../shared/publish-network.mjs";
 import { realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { loadBloxodesEnv } from "../shared/env-files";
@@ -63,11 +64,6 @@ Both arrays merge; conflicting reasons fail. --only uses the selected collection
 
 // Importing the parser in GitHub tests must not load credentials or run commands.
 if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) main().catch(error => {
-  let message = error instanceof Error ? error.message : String(error);
-  for (const key of ["SUPABASE_SERVICE_ROLE", "WIKI_R2_ACCESS_KEY_ID", "WIKI_R2_SECRET_ACCESS_KEY", "REVALIDATE_SECRET", "VPS_SUPABASE_STUDIO_PASSWORD"]) {
-    const secret = process.env[key];
-    if (secret) message = message.split(secret).join("[redacted]");
-  }
-  console.error(`FAIL: ${message}`);
+  console.error(`FAIL: ${formatPublishError(error)}`);
   process.exitCode = 1;
 });

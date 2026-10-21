@@ -1,3 +1,4 @@
+import { mapPublishConcurrent, readPublishQuery, retryPublishNetwork, requirePublishResponse, formatPublishError } from "../shared/publish-network.mjs";
 import { assertProductionPublication } from "../ci/publication-guard";
 import "../shared/load-env";
 import { realpathSync } from "node:fs";
@@ -207,11 +208,13 @@ async function readSourceBytes(source: {
   if (source.source_path) return fs.readFile(source.source_path);
   if (source.source_git_path) throw new Error("Repository image fallback is retired; use workspace media.");
   if (source.source_url) {
-    const response = await fetch(source.source_url, { redirect: "follow" });
-    if (!response.ok) throw new Error(`Could not fetch collection image ${source.source_url}: ${response.status}`);
-    const bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.byteLength > 20_000_000) throw new Error(`Remote collection image exceeds the 20 MB ingestion limit: ${source.source_url}`);
-    return bytes;
+    return retryPublishNetwork(async () => {
+      const response = await fetch(source.source_url!, { redirect: "follow", signal: AbortSignal.timeout(30_000) });
+      await requirePublishResponse(response, "Remote collection image");
+      const bytes = Buffer.from(await response.arrayBuffer());
+      if (bytes.byteLength > 20_000_000) throw new Error(`Remote collection image exceeds the 20 MB ingestion limit: ${formatPublishError(source.source_url)}`);
+      return bytes;
+    });
   }
   throw new Error("Collection image source is missing.");
 }
@@ -346,9 +349,7 @@ export async function planCollection(source: CollectionSource, documentOverride?
   let duplicateSlugCount = 0;
   let invalidLegacyImageCount = 0;
   let repairedSlugCount = 0;
-  const items: PlannedItem[] = [];
-  for (let index = 0; index < document.items.length; index += 1) {
-    const row = document.items[index];
+  const items = await mapPublishConcurrent(document.items, async (row, index): Promise<PlannedItem> => {
     const item = row.item || {};
     const system = row.system || {};
     const suppliedItemSlug = String(system.slug || "").trim();
@@ -413,23 +414,23 @@ export async function planCollection(source: CollectionSource, documentOverride?
         };
       } catch (error) {
         if (!normalizeLegacyMedia || resolved.sourceUrl) {
-          throw new Error(`${config.code}/${itemSlug} ${String(error)}`);
+          throw new Error(`${config.code}/${itemSlug} ${formatPublishError(error)}`);
         }
         invalidLegacyImageCount += 1;
-        console.error(`Skipping unreadable legacy image for ${config.code}/${itemSlug}: ${String(error)}`);
+        console.error(`Skipping unreadable legacy image for ${config.code}/${itemSlug}: ${formatPublishError(error)}`);
       }
     }
 
     const { name: _name, ...fieldsJson } = item;
-    items.push({
+    return {
       item_slug: itemSlug,
       item_name: itemName,
       section,
       sort_order: Number.isInteger(system.sortOrder) ? Number(system.sortOrder) : (index + 1) * 10,
       fields_json: fieldsJson,
       ...image
-    });
-  }
+    };
+  }, { label: `${config.code} plan images` });
 
   const metaJson = {
     ...document.meta,
@@ -480,7 +481,7 @@ export async function planCollection(source: CollectionSource, documentOverride?
 }
 
 export async function uploadPlanMedia(plan: CollectionPlan, client: R2Client) {
-  await mapWithConcurrency(plan.items, 16, async (item) => {
+  await mapPublishConcurrent(plan.items.filter(item => item.image_key), async (item) => {
     if (!item.image_key || !item.image_mime || !item.image_sha256) return;
     if (await client.hasObject(item.image_key)) return;
     const prepared = await prepareImageBytes(await readSourceBytes(item));
@@ -497,28 +498,15 @@ export async function uploadPlanMedia(plan: CollectionPlan, client: R2Client) {
         width: item.image_width || 0
       }
     });
-  });
+  }, { label: `${plan.config.code} upload images` });
 }
 
 export async function verifyPlanMedia(plan: CollectionPlan, client: R2Client) {
-  await mapWithConcurrency(plan.items, 32, async (item) => {
+  await mapPublishConcurrent(plan.items.filter(item => item.image_key), async (item) => {
     if (item.image_key && !(await client.hasObject(item.image_key))) {
       throw new Error(`${plan.config.code} cannot publish: R2 object is missing for ${item.item_slug}.`);
     }
-  });
-}
-
-async function mapWithConcurrency<T>(items: T[], concurrency: number, work: (item: T) => Promise<void>) {
-  let nextIndex = 0;
-  const workers = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
-    while (true) {
-      const index = nextIndex;
-      nextIndex += 1;
-      if (index >= items.length) return;
-      await work(items[index]);
-    }
-  });
-  await Promise.all(workers);
+  }, { label: `${plan.config.code} verify images` });
 }
 
 function resolveCountTokens<T>(value: T, count: number): T {
@@ -566,18 +554,18 @@ export function pageCopyFromFinal(plan: CollectionPlan) {
 
 export async function applyPlan(plan: CollectionPlan, shouldPublish = publish) {
   const sb = supabaseAdmin();
-  let { data: page, error: pageError } = await sb
+  let { data: page, error: pageError } = await readPublishQuery(() => sb
     .from("wiki_collection_pages")
     .select("id, universe_id, wiki_slug, collection_slug, code, page_type, is_published, published_dataset_id")
     .eq("wiki_slug", plan.config.gameSlug)
     .eq("collection_slug", plan.config.slug)
-    .maybeSingle();
+    .maybeSingle());
   if (pageError) throw pageError;
-  const codeOwner = await sb
+  const codeOwner = await readPublishQuery(() => sb
     .from("wiki_collection_pages")
     .select("id, universe_id, wiki_slug, collection_slug, code")
     .eq("code", plan.config.code)
-    .maybeSingle();
+    .maybeSingle());
   if (codeOwner.error) throw codeOwner.error;
   if (
     codeOwner.data &&
@@ -591,7 +579,7 @@ export async function applyPlan(plan: CollectionPlan, shouldPublish = publish) {
   }
   const pageCopy = pageCopyFromFinal(plan);
   if (!page && pageCopy) {
-    const wikiPageLookup = await sb.from("wiki_pages").select("id").eq("slug", plan.config.gameSlug).maybeSingle();
+    const wikiPageLookup = await readPublishQuery(() => sb.from("wiki_pages").select("id").eq("slug", plan.config.gameSlug).maybeSingle());
     if (wikiPageLookup.error) throw wikiPageLookup.error;
     const insertedPage = await sb
       .from("wiki_collection_pages")
@@ -615,7 +603,7 @@ export async function applyPlan(plan: CollectionPlan, shouldPublish = publish) {
     throw new Error(`Missing wiki_collection_pages row for ${plan.config.code}. Supply --manifest with an approved finalJson.`);
   }
   if (page.universe_id == null) {
-    const wikiPageLookup = await sb.from("wiki_pages").select("id").eq("slug", plan.config.gameSlug).maybeSingle();
+    const wikiPageLookup = await readPublishQuery(() => sb.from("wiki_pages").select("id").eq("slug", plan.config.gameSlug).maybeSingle());
     if (wikiPageLookup.error) throw wikiPageLookup.error;
     const linkedPage = await sb
       .from("wiki_collection_pages")
@@ -644,18 +632,18 @@ export async function applyPlan(plan: CollectionPlan, shouldPublish = publish) {
     throw new Error(`${plan.config.code} page identity does not match its runtime manifest.`);
   }
 
-  let { data: dataset, error: datasetError } = await sb
+  let { data: dataset, error: datasetError } = await readPublishQuery(() => sb
     .from("wiki_collection_datasets")
     .select("id, item_count")
-    .eq("collection_page_id", page.id)
+    .eq("collection_page_id", page!.id)
     .eq("content_hash", plan.contentHash)
-    .maybeSingle();
+    .maybeSingle());
   if (datasetError) throw datasetError;
   if (dataset) {
-    const existingCount = await sb
+    const existingCount = await readPublishQuery(() => sb
       .from("wiki_collection_items")
       .select("id", { count: "exact", head: true })
-      .eq("dataset_id", dataset.id);
+      .eq("dataset_id", dataset!.id));
     if (existingCount.error) throw existingCount.error;
     if (existingCount.count !== plan.items.length || Number(dataset.item_count) !== plan.items.length) {
       if (page.published_dataset_id === dataset.id) {
@@ -695,16 +683,16 @@ export async function applyPlan(plan: CollectionPlan, shouldPublish = publish) {
     } catch (itemError) {
       const cleanup = await sb.from("wiki_collection_datasets").delete().eq("id", dataset.id);
       if (cleanup.error) {
-        throw new Error(`${String(itemError)}; cleanup also failed: ${cleanup.error.message}`);
+        throw new Error(`${formatPublishError(itemError)}; cleanup also failed: ${cleanup.error.message}`);
       }
       throw itemError;
     }
   }
 
-  const { count, error: countError } = await sb
+  const { count, error: countError } = await readPublishQuery(() => sb
     .from("wiki_collection_items")
     .select("id", { count: "exact", head: true })
-    .eq("dataset_id", dataset.id);
+    .eq("dataset_id", dataset!.id));
   if (countError) throw countError;
   if (count !== plan.items.length || Number(dataset.item_count) !== plan.items.length) {
     throw new Error(`${plan.config.code} revision verification failed: expected ${plan.items.length}, found ${count}.`);

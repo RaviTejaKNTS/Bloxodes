@@ -1,3 +1,4 @@
+import { retryPublishNetwork, requirePublishResponse } from "./publish-network.mjs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 
@@ -65,9 +66,11 @@ export function assertPublicationCheckout(checkout: PublicationCheckout) {
 }
 
 export async function deployedContentSha(fetchImpl: typeof fetch = fetch) {
-  const response = await fetchImpl("https://bloxodes.com/api/health?scope=deploy", { cache: "no-store", signal: AbortSignal.timeout(30_000) });
-  if (!response.ok) throw new Error(`Deploy health returned HTTP ${response.status}. Wait for a healthy production deployment.`);
-  const health = await response.json() as { ok?: boolean; build?: { sha?: string } };
+  const health = await retryPublishNetwork(async () => {
+    const response = await fetchImpl("https://bloxodes.com/api/health?scope=deploy", { cache: "no-store", signal: AbortSignal.timeout(30_000) });
+    await requirePublishResponse(response, "Deploy health");
+    return response.json() as Promise<{ ok?: boolean; build?: { sha?: string } }>;
+  });
   if (health.ok !== true) throw new Error("Production deploy health is not healthy.");
   const sha = health.build?.sha;
   if (typeof sha !== "string" || !/^[a-f0-9]{40}$/.test(sha)) throw new Error("Production deploy health did not return a full 40-character build SHA.");

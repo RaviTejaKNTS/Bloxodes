@@ -83,3 +83,20 @@ test('collections require an item image even when individual image gaps are acce
   assert.throws(() => requireFranchiseCollectionImage([{ image_key: null }], 'child-items'), /at least one item image/);
   assert.doesNotThrow(() => requireFranchiseCollectionImage([{ image_key: null }, { image_key: 'wiki/example/item.webp' }], 'child-items'));
 });
+
+test('image contract uses bounded concurrent page reads and deduplicated image checks', async () => {
+  let reads = 0, maxReads = 0, checks = 0, maxChecks = 0;
+  const images = [];
+  const payload = { tools: Array.from({ length: 24 }, (_, index) => ({ ...page, slug: `tool-${index}`, thumb_url: `https://media.bloxodes.com/tool-${Math.floor(index / 2)}.webp` })) };
+  await assertFranchisePageImages({ namespace: 'example', payload, storedGames: [root, game], loadPage: async () => {
+    reads++; maxReads = Math.max(maxReads, reads);
+    await new Promise(resolve => setTimeout(resolve, 1)); reads--; return null;
+  }, verifyImage: async image => {
+    checks++; maxChecks = Math.max(maxChecks, checks);
+    await new Promise(resolve => setTimeout(resolve, 1)); checks--; images.push(image);
+  } });
+  assert.equal(maxReads, 8);
+  assert.equal(maxChecks, 8);
+  assert.equal(images.length, 14, '12 tool images and two root images');
+  assert.equal(new Set(images.map(image => `${image.role}:${image.url}`)).size, 14);
+});

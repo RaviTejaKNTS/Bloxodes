@@ -1,3 +1,4 @@
+import { retryPublishNetwork, requirePublishResponse } from "./publish-network.mjs";
 import { createHash, createHmac } from "node:crypto";
 
 export type R2ClientConfig = {
@@ -53,6 +54,7 @@ export function loadR2ClientConfig(
 }
 
 export class R2Client {
+  readonly handlesRetries = true;
   constructor(
     private readonly config: R2ClientConfig,
     private readonly fetchImpl: typeof fetch = fetch,
@@ -94,8 +96,7 @@ export class R2Client {
     url.pathname = canonicalPath;
 
     const payloadHash = sha256(body);
-    const maxAttempts = 5;
-    for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+    return retryPublishNetwork(async () => {
       const timestamp = this.now().toISOString().replace(/[:-]|\.\d{3}/g, "");
       const date = timestamp.slice(0, 8);
       const headers: Record<string, string> = {
@@ -120,17 +121,13 @@ export class R2Client {
       const response = await this.fetchImpl(url, {
         method,
         headers,
-        body: method === "HEAD" ? undefined : Buffer.from(body)
+        body: method === "HEAD" ? undefined : Buffer.from(body),
+        signal: AbortSignal.timeout(30_000)
       });
       if (response.ok || acceptedStatuses.includes(response.status)) return response;
-      const detail = method === "HEAD" ? "" : `: ${(await response.text()).slice(0, 500)}`;
-      const retryable = response.status === 408 || response.status === 425 || response.status === 429 || response.status >= 500;
-      if (!retryable || attempt === maxAttempts - 1) {
-        throw new Error(`R2 ${method} ${key} failed with ${response.status}${detail}`);
-      }
-      await this.sleep(Math.min(2_000, 250 * 2 ** attempt));
-    }
-    throw new Error(`R2 ${method} ${key} exhausted retries.`);
+      // Do not include an R2 error body, which may echo signed credentials.
+      return requirePublishResponse(response, `R2 ${method} ${key}`);
+    }, { sleep: this.sleep });
   }
 }
 

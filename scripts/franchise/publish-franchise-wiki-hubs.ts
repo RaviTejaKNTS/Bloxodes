@@ -1,3 +1,4 @@
+import { mapPublishConcurrent, readPublishQuery } from "../shared/publish-network.mjs";
 import { franchiseImageUrl, requireFranchiseHubImages } from "../ci/franchise-image-contract.mjs";
 import { verifyFranchisePageImage, validateFranchisePublicationImages } from "../shared/franchise-page-images";
 import { assertProductionPublication } from "../ci/publication-guard";
@@ -49,20 +50,20 @@ export async function runFranchiseWikiHubsCli() {
     }
     plans.push({ slug, game, wiki });
   }
-  const imageGames = await client.from("games").select("*").eq("namespace", namespace);
+  const imageGames = await readPublishQuery(() => client.from("games").select("*").eq("namespace", namespace));
   if (imageGames.error) throw imageGames.error;
   const imagePayload = { games: plans.map(({ slug, game }) => {
     const stored = imageGames.data.find(row => row.slug === slug && row.kind === "game");
     return { ...stored, ...game, id: stored?.id || game.id || slug, namespace };
   }) };
-  for (const { slug, wiki } of plans) {
+  await mapPublishConcurrent(plans, async ({ slug, wiki }) => {
     if (wiki.cover_image != null && !franchiseImageUrl(wiki.cover_image)) throw new Error(`${slug}: wiki cover_image must be a hosted game image.`);
     if (wiki.cover_image) await verifyFranchisePageImage({ url: wiki.cover_image, role: "cover", label: `${slug} wiki` });
-  }
+  });
   await validateFranchisePublicationImages(client, namespace, imagePayload);
   if (args.includes("--stage") && (slugs.some(slug => namespace === "minecraft" && slug === "minecraft"))) throw new Error("Staging requires independent Minecraft edition hubs.");
   // Read all exact target rows before the first mutation.
-  const existing = await sb.from("games").select("id,slug,is_published").in("slug", slugs);
+  const existing = await readPublishQuery(() => sb.from("games").select("id,slug,is_published").in("slug", slugs));
   if (existing.error) throw existing.error;
   console.log(`${apply ? "Apply" : "Dry run"}: ${plans.length} ${label} hubs; ${existing.data.length} existing games; target=${production ? "production" : "managed-development"}`);
   if (args.includes("--stage") && existing.data.some(row => row.is_published)) throw new Error("Staging cannot hide an already published hub.");
@@ -81,7 +82,7 @@ export async function runFranchiseWikiHubsCli() {
   for (const { slug, game, wiki } of plans) {
     const id = ids.get(slug)!;
     if (game.parent_slug) {
-      const parent = await sb.from("games").select("id").eq("slug", game.parent_slug).single();
+      const parent = await readPublishQuery(() => sb.from("games").select("id").eq("slug", game.parent_slug).single());
       if (parent.error) throw parent.error;
       const linked = await sb.from("games").update({ parent_game_id: parent.data.id }).eq("id", id);
       if (linked.error) throw linked.error;
@@ -96,7 +97,7 @@ export async function runFranchiseWikiHubsCli() {
 export async function saveFranchiseWikiPage(client: SupabaseClient, namespaceValue: string, gameId: string, wiki: Record<string, unknown>, stagePage = false) {
   const sb = gameDatabase(client, namespaceValue);
   const payload = { ...pick(wiki, wikiFields), is_published: !stagePage, game_id: gameId };
-  const page = await sb.from("wiki_pages").select("id").eq("game_id", gameId).maybeSingle();
+  const page = await readPublishQuery(() => sb.from("wiki_pages").select("id").eq("game_id", gameId).maybeSingle());
   if (page.error) throw page.error;
   // Inserts need the validated route, including Minecraft edition paths.
   // Updates leave the target's permanent canonical path unchanged.

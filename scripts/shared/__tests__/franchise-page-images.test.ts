@@ -125,3 +125,25 @@ test("pixel limits reject compressed images that would decode above the cap", as
   globalThis.fetch = async () => new Response(new Uint8Array(bytes), { headers: { "content-type": "image/png" } });
   await assert.rejects(verifyFranchisePageImage(target), /Example hub.*unreadable cover image.*pixel limit/i);
 });
+
+test("image checks retry transient status and body failures but never decode failures", async t => {
+  const original = globalThis.fetch;
+  t.after(() => { globalThis.fetch = original; });
+  const bytes = await image(160, 90);
+  let calls = 0;
+  const signals: AbortSignal[] = [];
+  globalThis.fetch = async (_input, init) => {
+    signals.push(init!.signal!);
+    calls++;
+    if (calls === 1) return new Response(null, { status: 503 });
+    if (calls === 2) return new Response(new ReadableStream({ pull(controller) { controller.error(new TypeError("fetch failed", { cause: { code: "ECONNRESET" } })); } }), { headers: { "content-type": "image/png" } });
+    return new Response(new Uint8Array(bytes), { headers: { "content-type": "image/png" } });
+  };
+  await verifyFranchisePageImage(target);
+  assert.equal(calls, 3);
+  assert.equal(new Set(signals).size, 3);
+  calls = 0;
+  globalThis.fetch = async () => { calls++; return new Response("bad pixels", { headers: { "content-type": "image/png" } }); };
+  await assert.rejects(verifyFranchisePageImage(target), /unreadable/);
+  assert.equal(calls, 1);
+});
