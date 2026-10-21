@@ -1,6 +1,6 @@
 # Schedules
 
-Last verified: 2026-10-19
+Last verified: 2026-10-21
 
 Every recurring job, by where it runs. If you add, move or remove a schedule, update this file in the same change.
 
@@ -8,14 +8,14 @@ Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and Gi
 
 ## T3 schedules (MacBook Pro)
 
-Both run in a fresh worktree from `origin/production`, with Codex `gpt-6.1-sol` high as the parent. Both have standing permission to publish through `bloxodes-release-e2e`. Any extra code PR stays open for owner approval.
+Both run in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro, with Codex `gpt-6.1-sol` high, full access, as the main agent. Both have standing permission to publish with `content:publish` and to commit and push the factory repo. Neither opens code PRs.
 
 | Schedule | Time | Does |
 | --- | --- | --- |
-| Bloxodes nightly other games | 02:00 IST | Takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md), builds every planned page and publishes them. One game at a time: it does nothing while a row is `In progress`. |
-| Bloxodes nightly Roblox wiki | 02:30 IST | Claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md), builds its collections and hub, and publishes them with `content:publish`. No code PR. |
+| Bloxodes nightly other games (Content Factory) | 02:00 IST | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and publishes its wiki hubs and collections. |
+| Bloxodes nightly Roblox wiki (Content Factory) | 02:30 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and publishes its hub and collections. |
 
-The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skills to use and the publishing go-ahead.
+The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skill and the publishing go-ahead. A T3 schedule copies its model, effort and runtime from the thread that creates it and can't change them later, so create these from a Codex `gpt-6.1-sol`, High, Full access thread. In a sandbox `content:publish` can't reach the database.
 
 ## Homelab (systemd)
 

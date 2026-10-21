@@ -1,23 +1,14 @@
 # Roblox wiki and collections
 
-Last verified: 2026-10-20
+Last verified: 2026-10-21
 
 Each Roblox game gets a wiki hub at `/wiki/<game-slug>` and item collections at `/wiki/<game-slug>/<collection-slug>` (pets, weapons, mutations, zones and so on). New games are added every night by a T3 schedule.
 
-Roblox wiki content is moving to the [Bloxodes Content Factory](#content-factory), a separate content-only repo. The nightly schedule still runs from this repo until it moves.
+Roblox wiki content is built in the [Bloxodes Content Factory](#content-factory), a separate content-only repo. The skills below still work here for manual runs.
 
 ## Nightly run (MacBook Pro, 02:30 IST)
 
-The T3 schedule "Bloxodes nightly Roblox wiki":
-
-1. Picks the highest-ranked game in the live top 100 with no hub and no [Roblox Wiki Queue](../automation/notion-queues.md) row, and claims it.
-2. Runs `bloxodes-game-collection-suggestions`, then `bloxodes-game-collection-workflow-runner` for the collections worth making.
-3. Runs `bloxodes-wiki-workflow-runner` for the hub.
-4. Routes each stage by `bloxodes-model-routing`.
-5. Publishes the hub and collections as one `roblox-wiki@1` bundle with `npm run content:publish` (see [publishing](#publishing)). New games and collections register themselves in the database, so no code PR is needed. A run that also needs a code change opens that PR separately for the owner.
-6. Sets the queue row to `Done` (or `Waiting for approval` / `Blocked`) with a Run report.
-
-Manual runs use the same skills.
+The T3 schedule "Bloxodes nightly Roblox wiki (Content Factory)" runs in the factory's root checkout with its `roblox-wiki-main` skill. It picks the highest-ranked game in the live top 100 with no hub and no [Roblox Wiki Queue](../automation/notion-queues.md) row, builds the hub and collections, and publishes them as one `roblox-wiki@1` bundle with `content:publish` (see [publishing](#publishing)). New games and collections register themselves in the database, so no code PR is needed. A game too thin to publish is marked `Blocked` and the run tries the next one, up to 3.
 
 ## Workflow
 
@@ -30,14 +21,14 @@ Manual runs use the same skills.
 
 ## Publishing
 
-The code repo owns one versioned publish command and its contract, `contracts/roblox-wiki/v1/` (`schema.ts` and a README with the folder layout). Whatever passes it is what the live site can render.
+The code repo owns one versioned publish command with two contracts: `contracts/roblox-wiki/v1/` for Roblox and `contracts/game-wiki/v1/` for franchise games ([franchise publishing](franchise.md#publishing)). Each has `schema.ts` and a README with the folder layout. The command picks the contract from `bundle.json`. Whatever passes it is what the live site can render.
 
 | Command | Does |
 | --- | --- |
 | `npm run content:publish -- <abs-bundle> [--only hub\|<collection-slug>]` | Dry run against managed development: schema, identity, slugs, dataset audit, copy checks, titles, image readiness. No writes. |
 | `... --target managed-dev --apply` | Writes the selected pages to managed development. |
 | `... --target production --apply --allow-prod` | Writes to production, then reads back, revalidates and checks every live URL. |
-| `npm run content:status -- --game <slug> [--target production]` | Hub and collection state, item counts, URLs. |
+| `npm run content:status -- --game <slug> [--target production]` | Hub and collection state, item counts, URLs. Franchise games add `--namespace <ns>` (and `--kind game` when the child shares the root's slug). |
 | `npm run content:candidates -- --target production` | Top-100 games with no hub, highest rank first. Doesn't claim the queue row. |
 | `npm run content:deployed-sha` | The live deployed SHA. |
 
@@ -49,13 +40,13 @@ The code repo owns one versioned publish command and its contract, `contracts/ro
 
 ## Content Factory
 
-`/srv/data/projects/bloxodes-content-factory` on the homelab (T3 project "Bloxodes Content Factory") holds only skills and docs for Roblox wiki hubs and collections. No site code.
+`/srv/data/projects/bloxodes-content-factory` on the homelab (T3 project "Bloxodes Content Factory") holds only skills, docs and content for Roblox and franchise wiki hubs and collections. No site code.
 
-- **Roles:** the main agent is Codex `gpt-6.1-sol`. One Luna builder per page does research, data, images and a draft (`roblox-wiki-builder`). One Haiku 5.5 content manager per page rewrites the copy and cleans labels and SEO (`roblox-content-manager`). Only the main agent pushes.
-- **Content:** `content/roblox/<game-slug>/` holds the bundle. Everything except media is committed there, so git history is the edit history.
+- **Roles:** the main agent is Codex `gpt-6.1-sol` (`roblox-wiki-main`, `franchise-wiki-main`). One Luna builder per page does research, data, images and a draft (`roblox-wiki-builder`, `franchise-wiki-builder`). One Haiku 5.5 content manager per page rewrites the copy and cleans labels and SEO (`roblox-wiki-content-manager`, `franchise-wiki-content-manager`). `bloxodes-voice` is shared. Only the main agent pushes.
+- **Content:** `content/roblox-wiki/<game-slug>/` and `content/franchise-wiki/<namespace>/<game-slug>/` hold the bundles. Everything except media is committed there, so git history is the edit history.
 - **Publishing:** `bin/publisher` runs `content:publish`, `content:status` and `content:candidates` from the device's main Bloxodes checkout (`/srv/data/projects/Bloxodes` on the homelab, `~/projects/Bloxodes` on the Macs), which T3 auto-pulls. It never moves that checkout.
 - **Repo and devices:** `github.com/RaviTejaKNTS/bloxodes-content-factory` (private, sync only). Checked out next to Bloxodes on each device.
-- **Contract changes:** when this repo ships `roblox-wiki@2`, update the Content Factory docs and skills in the same change, or the factory's pushes will be rejected.
+- **Contract changes:** when this repo ships `roblox-wiki@2` or `game-wiki@2`, update the Content Factory docs and skills in the same change, or the factory's pushes will be rejected.
 
 ## Data
 
