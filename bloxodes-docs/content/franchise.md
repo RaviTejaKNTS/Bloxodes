@@ -1,18 +1,19 @@
 # Franchise games
 
-Last verified: 2026-10-19
+Last verified: 2026-10-21
 
 Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever comes next. They share one set of `game_*` tables and one route system. Roblox content stays separate.
 
 ## Nightly run (MacBook Pro, 02:00 IST)
 
-The T3 schedule "Bloxodes nightly other games":
+The T3 schedule "Bloxodes nightly other games (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill:
 
-1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md). If none is Ready, it stops.
-2. Sets it to `In progress`. The row's page holds the approved plan and sources.
-3. Builds each planned page with the skill `bloxodes-franchise-plan` names for its type, routing stages by `bloxodes-model-routing`.
-4. Publishes with `bloxodes-release-e2e`. Code changes wait in a PR for the owner.
-5. Sets `Done` (or `Waiting for approval` if a PR is open), fills in Last run and Run report.
+1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md) and sets it to `In progress`. The row's page holds the approved plan.
+2. Builds the plan's wiki hubs and collections, one Luna builder and one Haiku content manager per page.
+3. Publishes each game as a `game-wiki@1` bundle with `content:publish`, managed development first, then production. No PR or GitHub run.
+4. Sets `Done`, or `Waiting for approval` when the plan has page types the factory doesn't build yet, and writes the Run report.
+
+The factory builds hubs and collections only. Maps, quizzes, checklists, catalogs, codes and tools, and anything that needs code, still use the skills below, by hand.
 
 Existing games (ARC Raiders and others) are updated by hand, not through the queue.
 
@@ -73,6 +74,7 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 ## Publishing
 
+- **Wiki bundles (hubs and collections):** `npm run content:publish -- <abs-bundle>` with a `game-wiki@1` bundle (`contracts/game-wiki/v1/README.md`). It dry-runs by default, writes with `--target managed-dev --apply` and `--target production --apply --allow-prod`, and uses the same production guard as Roblox ([publishing](roblox-wiki.md#publishing)). Each target resolves its own game and page rows by namespace and slug, so development and production IDs don't need to match, and existing page UUIDs are kept. Cover and hero art, and item images, upload to R2 through the command. New games in registry-backed namespaces need no code. `content:status -- --namespace <ns> --game <slug>` shows what exists.
 - `publish:game-pages` (`scripts/games/publish-game-pages.ts`) validates a whole typed batch and rolls it back unless `--apply`. It uses the `game-pages` publisher on GitHub.
 - Collections use `sync:shared-game-collection-runtime` (the `franchise-collection` publisher). Export an existing one with `npm run export:shared-game-collection-workspace`.
 - Hubs use the `franchise-wiki` publisher.
@@ -90,6 +92,6 @@ Live counts on 2026-10-19: 30 visible hubs and 405 visible collections (GTA 18/2
 
 ## Known issues
 
-- Managed development has 25 `games` rows whose IDs differ from production (the GTA, Red Dead and Minecraft roots were aligned on 2026-10-19). `publish:game-pages` needs matching IDs, so the first update to one of those games fails in CI staging until its development ID is aligned.
+- Managed development has 25 `games` rows whose IDs differ from production (the GTA, Red Dead and Minecraft roots were aligned on 2026-10-19). `publish:game-pages` on the GitHub path needs matching IDs, so the first update to one of those games fails in CI staging until its development ID is aligned. `content:publish` isn't affected.
 - `game_catalog_pages`, `game_code_pages` and `game_codes` have no production rows yet. The tables, skills and publishers exist, but nothing is published.
 - `apps/web/src/data/gta-maps/*.json` and `gta5-map-*.json` are only importer inputs and test fixtures now. The live maps read `game_map_pages`.

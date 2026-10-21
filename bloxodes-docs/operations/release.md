@@ -1,6 +1,6 @@
 # Release
 
-Last verified: 2026-10-20
+Last verified: 2026-10-21
 
 How code and content reach production. GitHub does the checking, building and deploying, and publishes most content. Roblox wiki bundles publish with their own versioned command (below). Agents don't run checks or builds locally.
 
@@ -40,9 +40,9 @@ Schema, deploy and content jobs share the `bloxodes-production` concurrency lane
 - **Development:** applies pending migrations to managed development over the Management API with a rollback plan first, checks the ledger and records a SHA-bound receipt.
 - **Production:** after merge, `release-production-schema.ts` connects over HTTPS Studio as `supabase_admin`. It needs a matching development receipt, plans with rollback, applies atomically and reads the ledger back.
 
-## Roblox wiki bundles
+## Wiki bundles
 
-Roblox wiki hubs and collections publish with `npm run content:publish`, which owns the `roblox-wiki@1` contract and every check. It runs from an up-to-date checkout with no local changes whose publish code matches what's live, refuses pending production migrations, and needs `--target production --apply --allow-prod` to write production. No PR, build or GitHub run is involved, and new games need no code change. The Content Factory runs it from each device's main checkout. Full detail: [Roblox wiki](../content/roblox-wiki.md#publishing).
+Roblox and franchise wiki hubs and collections publish with `npm run content:publish`, which owns the `roblox-wiki@1` and `game-wiki@1` contracts and every check. It runs from an up-to-date checkout with no local changes whose publish code matches what's live, refuses pending production migrations, and needs `--target production --apply --allow-prod` to write production. No PR, build or GitHub run is involved, and new games need no code change. The Content Factory runs it from each device's main checkout. Full detail: [Roblox wiki](../content/roblox-wiki.md#publishing), [franchise](../content/franchise.md#publishing).
 
 ## Content publication
 

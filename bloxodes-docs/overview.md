@@ -44,8 +44,8 @@ See [machines](infrastructure/machines.md) for access and [schedules](automation
 | Articles | Homelab | systemd timers, 4 times a day |
 | New codes pages | GitHub Actions | `discover-beebom-codes.yml` and `generate-queue.yml` schedules |
 | Codes updates | VPS | cron, 4 times a day |
-| Roblox wiki and collections | MacBook Pro | T3 schedule, 02:30 IST |
-| Franchise games | MacBook Pro | T3 schedule, 02:00 IST, from the Other Games Queue |
+| Roblox wiki and collections | MacBook Pro | Content Factory T3 schedule, 02:30 IST |
+| Franchise wiki and collections | MacBook Pro | Content Factory T3 schedule, 02:00 IST, from the Other Games Queue |
 | Universe and item stats, catalog items, music, decals, puzzles, promo rewards, free items | VPS | cron |
 | HOT universe stats | Northflank | hourly cron job |
 | Catalog, quizzes, checklists, tools, monthly reports | Any machine, by hand | owner request |

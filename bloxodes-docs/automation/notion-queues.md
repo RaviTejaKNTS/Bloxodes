@@ -30,11 +30,11 @@ This queue is a claim log, not a to-do list. It stops two runs from building the
 
 - Database: https://app.notion.com/p/5185dc698b5b47c698bc882dfdedb8d7
 - Data source: `collection://3f3e6551-1fe9-4bc0-9dfa-e2ad78c5de8b`
-- Used by: the nightly franchise run.
+- Used by: the Content Factory's nightly franchise run (`franchise-wiki-main`).
 
 New non-Roblox games only. The owner updates games we already cover (like ARC Raiders) by hand.
 
-One row per game. Its page holds the whole approved plan: pages, URLs, sources and per-page notes. Don't split a game into several rows. A run follows the plan as `bloxodes-franchise-plan` describes, without re-planning, and keeps going until every page is built or skipped by its gate, even if that takes days. Skipped pages and the reasons go in the Run report.
+One row per game. Its page holds the whole approved plan: pages, URLs, sources and per-page notes. Don't split a game into several rows. A run follows the plan without re-planning. It builds the plan's wiki hubs and collections; other page types in the plan are listed in the Run report for a manual run. Skipped pages and the reasons go in the Run report.
 
 | Status | Set by | Meaning |
 | --- | --- | --- |
@@ -42,7 +42,7 @@ One row per game. Its page holds the whole approved plan: pages, URLs, sources a
 | `Ready` | Owner | Plan is final. The run takes the `Ready` row with the lowest Priority. |
 | `In progress` | Run | Being built. |
 | `Done` | Run | Everything planned is published. |
-| `Waiting for approval` | Run | A code PR is open for the owner. |
+| `Waiting for approval` | Run | Hubs and collections are published, but the plan has other page types or code work left for the owner. |
 | `Blocked` | Run | Stopped on a problem. |
 
 The run also fills in Last run and a short Run report (thread, PRs, published URLs, open items).

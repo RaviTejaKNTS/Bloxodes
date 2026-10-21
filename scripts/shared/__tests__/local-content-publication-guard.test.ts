@@ -47,7 +47,7 @@ test("every path the deploy classifier ships blocks a SHA difference", () => {
 });
 
 test("code that runs from the checkout itself doesn't block, because merges that only change it don't deploy", () => {
-  const localOnly = ["scripts/content/roblox-wiki-publish.ts", "scripts/shared/local-content-publication-guard.ts", "scripts/ops/release-production-schema.ts", "scripts/ci/migration-transaction.mjs", "contracts/roblox-wiki/v1/schema.ts", "supabase/migrations/20261020133300_x.sql", "tsconfig.json", "env/config.json"];
+  const localOnly = ["scripts/content/roblox-wiki-publish.ts", "scripts/shared/local-content-publication-guard.ts", "scripts/ops/release-production-schema.ts", "scripts/ci/migration-transaction.mjs", "contracts/roblox-wiki/v1/schema.ts", "contracts/game-wiki/v1/schema.ts", "scripts/content/game-wiki-publish.ts", "scripts/shared/game-wiki-bundle.ts", "scripts/franchise/sync-franchise-collection-runtime.ts", "supabase/migrations/20261020133300_x.sql", "tsconfig.json", "env/config.json"];
   for (const relationship of ["ahead", "behind"] as const) {
     assert.doesNotThrow(() => assertPublicationCheckout({ ...checkout, relationship, changedFiles: localOnly }));
   }

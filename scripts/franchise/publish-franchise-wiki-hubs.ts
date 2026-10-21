@@ -3,6 +3,9 @@ import { verifyFranchisePageImage, validateFranchisePublicationImages } from "..
 import { assertProductionPublication } from "../ci/publication-guard";
 import { gameDatabase, type gameTables } from "@/lib/game-content-db";
 import "../shared/load-env";
+import { realpathSync } from "node:fs";
+import { pathToFileURL } from "node:url";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
@@ -15,11 +18,11 @@ const namespace = value("--namespace");
 const label = namespace === "minecraft" ? "Minecraft" : namespace === "red-dead" ? "Red Dead" : namespace;
 const allowProd = args.includes("--allow-prod");
 const slugs = args.flatMap((arg, i) => arg === "--game" ? [args[i + 1]] : []);
-const gameFields = ["slug", "title", "short_title", "installment", "content_kind", "developer", "publisher", "description_md", "cover_image", "hero_image", "official_url", "release_dates_json", "platforms_json", "status", "is_published"];
-const wikiFields = ["slug", "title", "seo_title", "meta_description", "description_md", "cover_image", "controls_json", "tips_md", "is_published"];
-const pick = (row: Record<string, unknown>, fields: string[]) => Object.fromEntries(fields.filter(key => row[key] !== undefined).map(key => [key, row[key]]));
+export const gameFields = ["slug", "title", "short_title", "installment", "content_kind", "developer", "publisher", "description_md", "cover_image", "hero_image", "official_url", "release_dates_json", "platforms_json", "status", "is_published"];
+export const wikiFields = ["slug", "title", "seo_title", "meta_description", "description_md", "cover_image", "controls_json", "tips_md", "is_published"];
+export const pick = (row: Record<string, unknown>, fields: string[]) => Object.fromEntries(fields.filter(key => row[key] !== undefined).map(key => [key, row[key]]));
 
-async function main() {
+export async function runFranchiseWikiHubsCli() {
   if (args.includes("--help")) {
     console.log("Usage: npm run publish:franchise-wiki-hubs -- --namespace <red-dead|minecraft> --workspace <root> --game <slug> [--game <slug>] [--apply --allow-prod]");
     return;
@@ -83,15 +86,25 @@ async function main() {
       const linked = await sb.from("games").update({ parent_game_id: parent.data.id }).eq("id", id);
       if (linked.error) throw linked.error;
     }
-    const payload = { ...pick(wiki, wikiFields), ...(args.includes("--stage") ? { is_published: false } : {}), game_id: id };
-    // Update existing hubs in place. An upsert inserts a new id first, which the route-identity trigger rejects.
-    const page = await sb.from("wiki_pages").select("id").eq("game_id", id).maybeSingle();
-    if (page.error) throw page.error;
-    const result = page.data
-      ? await sb.from("wiki_pages").update(payload).eq("id", page.data.id).select("slug,is_published").single()
-      : await sb.from("wiki_pages").insert(payload).select("slug,is_published").single();
-    if (result.error || result.data?.slug !== slug || result.data.is_published !== !args.includes("--stage")) throw result.error ?? new Error(`Hub readback failed for ${slug}`);
+    await saveFranchiseWikiPage(client, namespace, id, wiki, args.includes("--stage"));
     console.log(`${args.includes("--stage") ? "Staged" : "Published"} ${slug}`);
   }
 }
-main().catch(error => { console.error(error); process.exitCode = 1; });
+
+// Share in-place writes with content:publish; never upsert a new page UUID over
+// an existing route owner. Resolve game IDs in the caller's target database.
+export async function saveFranchiseWikiPage(client: SupabaseClient, namespaceValue: string, gameId: string, wiki: Record<string, unknown>, stagePage = false) {
+  const sb = gameDatabase(client, namespaceValue);
+  const payload = { ...pick(wiki, wikiFields), is_published: !stagePage, game_id: gameId };
+  const page = await sb.from("wiki_pages").select("id").eq("game_id", gameId).maybeSingle();
+  if (page.error) throw page.error;
+  // Inserts need the validated route, including Minecraft edition paths.
+  // Updates leave the target's permanent canonical path unchanged.
+  const result = page.data
+    ? await sb.from("wiki_pages").update(payload).eq("id", page.data.id).select("*").single()
+    : await sb.from("wiki_pages").insert({ ...payload, ...pick(wiki, ["canonical_path"]) }).select("*").single();
+  if (result.error || result.data?.slug !== wiki.slug || result.data.is_published !== !stagePage) throw result.error ?? new Error(`Hub readback failed for ${wiki.slug}`);
+  return result.data;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) runFranchiseWikiHubsCli().catch(error => { console.error(error); process.exitCode = 1; });

@@ -37,11 +37,11 @@ You take completed, user-approved work to production: a PR into `production`, Gi
    - Remove obsolete columns or tables in a later release, after the old app stops using them.
 8. For web changes, require the immutable merged SHA at `/api/health?scope=deploy` with a healthy database. Guidance, scripts and database content don't need a web build. Don't add a full crawl or purge.
 
-## Roblox wiki bundles
+## Wiki bundles
 
-Roblox wiki hubs and collections don't need a PR or a GitHub publish. New games and collections register in the database on publish.
+Roblox and franchise wiki hubs and collections don't need a PR or a GitHub publish. New games and collections register in the database on publish.
 
-1. Put the approved hub and collections in a `roblox-wiki@1` bundle (`contracts/roblox-wiki/v1/README.md`).
+1. Put the approved hub and collections in a `roblox-wiki@1` bundle (`contracts/roblox-wiki/v1/README.md`), or a `game-wiki@1` bundle for a franchise game (`contracts/game-wiki/v1/README.md`).
 2. From an up-to-date checkout with no local changes (the command checks it matches live code), dry run, then stage: `npm run content:publish -- <abs-bundle>` and `... --target managed-dev --apply`.
 3. Publish: `npm run content:publish -- <abs-bundle> --target production --apply --allow-prod`. It refuses changed tracked files, publish code that differs from live, and pending migrations.
 4. It's done only when the command's readback, revalidation and live URL checks pass. Keep any printed hub snapshot path in the report.
