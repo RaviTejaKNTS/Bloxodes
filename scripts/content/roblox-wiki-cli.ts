@@ -9,6 +9,8 @@ export type ContentOptions = {
   allowProd: boolean;
   bundle?: string;
   game?: string;
+  namespace?: string;
+  kind?: "game" | "franchise";
   only?: string[];
 };
 
@@ -35,7 +37,7 @@ export function parseContentOptions(argv: string[]): ContentOptions {
       else options.allowProd = true;
       continue;
     }
-    if (!["--target", "--bundle", "--game", "--only"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
+    if (!["--target", "--bundle", "--game", "--namespace", "--kind", "--only"].includes(flag)) throw new Error(`Unknown option: ${flag}`);
     const value = inline ?? argv[++index];
     if (!value || value.startsWith("--")) throw new Error(`${flag} needs a value.`);
     if (flag === "--only") {
@@ -47,6 +49,10 @@ export function parseContentOptions(argv: string[]): ContentOptions {
     } else if (flag === "--bundle") {
       if (options.bundle) throw new Error("Supply one bundle folder.");
       options.bundle = value;
+    } else if (flag === "--namespace") options.namespace = value;
+    else if (flag === "--kind") {
+      if (value !== "game" && value !== "franchise") throw new Error("--kind must be game or franchise.");
+      options.kind = value;
     } else options.game = value;
   }
   if (command === "publish" && !options.bundle) throw new Error("Supply a bundle folder, for example: npm run content:publish -- /path/to/game-bundle");
@@ -54,6 +60,9 @@ export function parseContentOptions(argv: string[]): ContentOptions {
   if (command === "deployed-sha" && seen.size) throw new Error("deployed-sha takes no options.");
   if (command === "status" && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.game ?? "")) throw new Error("status requires --game <editorial-slug>.");
   if (command !== "status" && options.game) throw new Error("--game is only valid for status. Publish identity belongs in bundle.json.");
+  if (options.namespace && (command !== "status" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(options.namespace))) throw new Error("--namespace requires status and a valid non-Roblox namespace.");
+  if (options.kind && (command !== "status" || !options.namespace)) throw new Error("--kind requires franchise status with --namespace.");
+  if (options.namespace === "roblox") throw new Error("Omit --namespace for Roblox status.");
   if (options.allowProd && (!options.apply || options.target !== "production")) throw new Error("--allow-prod requires --target production --apply.");
   if (options.apply && options.target === "production" && !options.allowProd) throw new Error("Production apply requires --allow-prod.");
   return options;
@@ -65,9 +74,10 @@ async function main() {
     console.log(`npm run content:publish -- <bundle-folder> [--only hub|<collection-slug>]... [--target managed-dev|production] [--apply [--allow-prod]]
 npm run content:publish -- /abs/game-bundle --only pets
 npm run content:publish -- /abs/game-bundle --only hub --only pets --target production --apply --allow-prod
-npm run content:status -- --game <editorial-slug> [--target managed-dev|production]
+npm run content:status -- [--namespace <namespace> [--kind game|franchise]] --game <editorial-slug> [--target managed-dev|production]
 npm run content:candidates -- [--target managed-dev|production]
 npm run --silent content:deployed-sha
+Supported contracts: roblox-wiki@1 and game-wiki@1. See contracts/<contract>/v1/.
 Default target: managed-dev. Publication defaults to a read-only dry run.
 Run from the device's normal main checkout of Bloxodes.
 Production dry runs and applies fetch origin/production; both HEAD and the healthy deployed SHA must be ancestors of origin/production.
@@ -101,8 +111,16 @@ Both arrays merge; conflicting reasons fail. --only uses the selected collection
   if (!matches(process.env.SUPABASE_URL)) throw new Error(`Loaded SUPABASE_URL does not match --target ${options.target}. Fix the selected target credentials.`);
   if (!process.env.SUPABASE_SERVICE_ROLE) throw new Error("Missing SUPABASE_SERVICE_ROLE for the selected target.");
   const { publishBundle, contentStatus, contentCandidates } = await import("./roblox-wiki-publish");
-  if (options.command === "publish") await publishBundle(options);
-  else if (options.command === "status") await contentStatus(options);
+  if (options.command === "publish") {
+    const { readWikiContract } = await import("../shared/wiki-publish-contract");
+    if (await readWikiContract(options.bundle!) === "game-wiki@1") {
+      const { publishGameBundle } = await import("./game-wiki-publish");
+      await publishGameBundle(options);
+    } else await publishBundle(options);
+  } else if (options.command === "status" && options.namespace) {
+    const { gameContentStatus } = await import("./game-wiki-publish");
+    await gameContentStatus(options);
+  } else if (options.command === "status") await contentStatus(options);
   else await contentCandidates();
 }
 

@@ -57,6 +57,7 @@ export async function verifyFranchisePageImage({ url, role, label }: { url: stri
   const ratio = metadata.width / metadata.height;
   if (role === "cover" && (ratio < 1.6 || ratio > 2)) throw new Error(`${label}: cover_image must be landscape artwork between 16:10 and 2:1, ideally 16:9 (${metadata.width}x${metadata.height}): ${url}`);
   if (role === "thumbnail" && Math.abs(ratio - 1) > 0.05) throw new Error(`${label}: hero_image must be a square thumbnail (${metadata.width}x${metadata.height}): ${url}`);
+  return { bytes, metadata };
 }
 
 const tables: Record<string, string> = { wiki: "game_wiki_pages", codesPages: "game_code_pages", tools: "game_tool_pages", maps: "game_map_pages", quizzes: "game_quiz_pages", catalog: "game_catalog_pages", checklists: "game_checklist_pages" };

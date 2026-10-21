@@ -33,7 +33,7 @@ function canonical(value: unknown): string {
   return JSON.stringify(value) ?? "undefined";
 }
 
-function equalFields(actual: Record<string, unknown>, expected: Record<string, unknown>, context: string) {
+export function equalFields(actual: Record<string, unknown>, expected: Record<string, unknown>, context: string) {
   for (const [key, value] of Object.entries(expected)) {
     if (canonical(actual[key]) !== canonical(value)) throw new Error(`${context}: readback mismatch in ${key}. Retry the same bundle after inspecting the stored row.`);
   }
@@ -41,7 +41,7 @@ function equalFields(actual: Record<string, unknown>, expected: Record<string, u
 
 async function json(file: string) { return JSON.parse(await fs.readFile(file, "utf8")); }
 
-function checkCopy(value: Record<string, unknown>, file: string) {
+export function checkCopy(value: Record<string, unknown>, file: string) {
   const findings = [
     ...publicCopyFindings(value, file),
     ...publicCopyFindings({ description_json: { title: value.title, seo_title: value.seo_title, display_name: value.display_name } }, file)
@@ -117,7 +117,7 @@ function collectionPageTitle(plan: CollectionPlan) {
     : String(pageCopyFromFinal(plan)!.title);
 }
 
-async function verifyLive(url: string, title: string, seoTitle: string, expectedImages: string[]) {
+export async function verifyLive(url: string, title: string, seoTitle: string, expectedImages: string[]) {
   const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(30_000) });
   if (response.status !== 200 || response.url.replace(/\/$/, "") !== url.replace(/\/$/, "")) throw new Error(`${url}: expected HTTP 200 at the exact URL; received ${response.status} at ${response.url}.`);
   const html = load(await response.text());
