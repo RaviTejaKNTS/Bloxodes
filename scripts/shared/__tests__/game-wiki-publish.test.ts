@@ -48,7 +48,9 @@ test("root, child, reserved namespace and Minecraft routes use registry identiti
   try {
     await assertGameWikiRoutes(bundle(), root);
     await assert.rejects(assertGameWikiRoutes({ ...bundle(), namespace: "dedicated", game: { ...game, slug: "dedicated" } }, root), /route code/);
-    await assert.rejects(assertGameWikiRoutes({ ...bundle(), namespace: "gta", game: { ...game, slug: "gta", kind: "franchise" } }, root), /root collections need route code/);
+    for (const namespace of ["gta", "red-dead", "minecraft"]) {
+      await assert.rejects(assertGameWikiRoutes({ ...bundle(), namespace, game: { ...game, slug: namespace, kind: "franchise" } }, root), /root collections need route code/);
+    }
   } finally { await fs.rm(root, { recursive: true, force: true }); }
 });
 
@@ -239,7 +241,7 @@ test("CLI apply keeps permanent root hub slugs and UUIDs beside same-slug child 
     try {
       await retargetFixture(root, namespace, namespace, "franchise");
       const input = JSON.parse(await fs.readFile(path.join(root, "bundle.json"), "utf8"));
-      if (namespace !== "minecraft") delete input.collections;
+      delete input.collections;
       await write("bundle.json", input);
       const hubFinal = JSON.parse(await fs.readFile(path.join(root, "wiki/final.json"), "utf8"));
       await write("wiki/final.json", { ...hubFinal, slug: `${namespace}-hub` });
@@ -254,12 +256,6 @@ test("CLI apply keeps permanent root hub slugs and UUIDs beside same-slug child 
       assert.equal(result.tables.game_wiki_pages[0].canonical_path, `/${namespace}/wiki`);
       assert.equal(result.tables.game_wiki_pages[1].id, childHubId);
       assert.equal(result.calls.filter(call => call.method === "PATCH" && call.table === "game_wiki_pages").length, 1);
-      if (namespace === "minecraft") {
-        assert.equal(result.tables.game_collection_pages[0].wiki_page_id, hubId);
-        assert.equal(result.tables.game_collection_pages[0].wiki_slug, "minecraft-hub");
-        assert.equal(result.tables.game_collection_pages[0].code, "minecraft-items");
-        assert.equal(result.tables.game_collection_pages[0].canonical_path, "/minecraft/wiki/items");
-      }
     } finally { await fs.rm(root, { recursive: true, force: true }); }
   }
 });

@@ -32,7 +32,7 @@ export async function assertGameWikiRoutes(bundle: GameWikiBundle, siteRoot: str
   if (entries.some(entry => entry.isDirectory() && entry.name === bundle.namespace) && !["gta", "red-dead", "minecraft"].includes(bundle.namespace)) {
     throw new Error(`Namespace ${bundle.namespace} has a dedicated route. It needs reviewed route code before game-wiki publication.`);
   }
-  if (!bundle.game.parent && ["gta", "red-dead"].includes(bundle.namespace) && bundle.collections?.length) throw new Error(`${bundle.namespace} root collections need route code; publish collections on a child game.`);
+  if (!bundle.game.parent && ["gta", "red-dead", "minecraft"].includes(bundle.namespace) && bundle.collections?.length) throw new Error(`${bundle.namespace} root collections need route code; publish collections on a child game.`);
 }
 
 export async function selectGameWikiPages(bundle: GameWikiBundle, only: string[] | undefined, readManifest: (file: string) => Promise<unknown>) {
