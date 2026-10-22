@@ -11,7 +11,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { readGameCollectionGroups } from "@/lib/game-collections/registry";
 import { resolveSeoTitle } from "@/lib/seo";
 import { resolveWikiMediaUrl, wikiMediaPublicBaseUrl } from "@/lib/wiki-media";
-import { fetchOfficialUniverseMedia, hasOfficialUniverseMedia, persistOfficialUniverseMedia } from "@/lib/roblox/universe-media";
+import { fetchOfficialUniverseMedia, persistOfficialUniverseMedia } from "@/lib/roblox/universe-media";
 import { officialUniverseCover } from "../shared/official-universe-cover";
 import { loadR2ClientConfig, R2Client } from "../shared/r2-client";
 import { assertLocalContentPublication } from "../shared/local-content-publication-guard";
@@ -65,6 +65,33 @@ async function planHubCover(universeId: number, localFile?: string, approvedSha2
   if (approvedSha256 !== undefined) console.log(`APPROVED hub cover: --approved-hub-cover-sha256=${cover.sha256}, universe=${universeId}`);
   const key = `${universeId}/hubs/cover-${cover.sha256.slice(0, 16)}.${cover.format === "jpeg" ? "jpg" : cover.format}`;
   return { bytes, key, mime: cover.mime, url: resolveWikiMediaUrl(key)! };
+}
+
+async function planOfficialMedia(universeId: number) {
+  // Stored CDN URLs can expire even when both role URLs are present.
+  const media = await fetchOfficialUniverseMedia(universeId, (input, init) =>
+    fetch(input, { ...init, signal: AbortSignal.timeout(30_000) }));
+  if (!media) throw new Error("Official 512x512 icon and 768x432 thumbnail are unavailable. Retry after Roblox supplies both images.");
+  const images = [
+    { url: media.iconUrl, width: 512, height: 512 },
+    ...media.thumbnails.map(({ url }) => ({ url, width: 768, height: 432 }))
+  ];
+  await mapPublishConcurrent(images, async ({ url, width, height }) => {
+    if (new URL(url).protocol !== "https:") throw new Error("Official universe media must use HTTPS.");
+    const bytes = await retryPublishNetwork(async () => {
+      const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
+      await requirePublishResponse(response, "Official universe media");
+      if (!response.headers.get("content-type")?.startsWith("image/")) {
+        await response.body?.cancel().catch(() => {});
+        throw new Error("Official universe media is not an image.");
+      }
+      return Buffer.from(await response.arrayBuffer());
+    });
+    const metadata = await sharp(bytes).metadata();
+    if (metadata.width !== width || metadata.height !== height) throw new Error(`Official universe media must decode to ${width}x${height}.`);
+    await sharp(bytes).raw().toBuffer();
+  });
+  return media;
 }
 
 async function collectionIdentity(plan: CollectionPlan) {
@@ -183,7 +210,7 @@ export async function publishBundle(options: ContentOptions) {
   });
   let hub: WikiFinal | undefined;
   let cover: Awaited<ReturnType<typeof planHubCover>> | undefined;
-  let officialMedia: Awaited<ReturnType<typeof fetchOfficialUniverseMedia>> = null;
+  const officialMedia = await check("official game icon and thumbnails", () => planOfficialMedia(bundle.game.universeId));
   if (selected.hub) {
     hub = await check("hub schema, copy and identity", async () => {
       const file = await bundlePath(root, selected.hub!.finalJson);
@@ -195,12 +222,6 @@ export async function publishBundle(options: ContentOptions) {
       return final;
     });
     cover = await check("hub cover image readiness", async () => planHubCover(bundle.game.universeId, selected.hub!.coverImage ? await bundlePath(root, selected.hub!.coverImage) : undefined, options.approvedHubCoverSha256));
-    await check("official hub icon and thumbnail", async () => {
-      if (!hasOfficialUniverseMedia(universe ?? {})) {
-        officialMedia = await fetchOfficialUniverseMedia(bundle.game.universeId);
-        if (!officialMedia) throw new Error("Official 512x512 icon and 768x432 thumbnail are unavailable. Retry after Roblox supplies both images.");
-      }
-    });
   }
   const plans: CollectionPlan[] = [];
   const slugs = new Set<string>();
@@ -272,8 +293,8 @@ export async function publishBundle(options: ContentOptions) {
     if (!await r2.hasObject(cover.key)) throw new Error("Hub cover R2 readback failed.");
   }
   for (const plan of plans) { await uploadPlanMedia(plan, r2); await verifyPlanMedia(plan, r2); }
+  await persistOfficialUniverseMedia(db, bundle.game.universeId, officialMedia!);
   if (hub) {
-    if (officialMedia) await persistOfficialUniverseMedia(db, bundle.game.universeId, officialMedia);
     const payload = { ...hub, cover_image: cover!.url, is_published: true };
     let mutation;
     if (existingHub) mutation = db.from("wiki_pages").update(payload).eq("id", existingHub.id).eq("updated_at", existingHub.updated_at);

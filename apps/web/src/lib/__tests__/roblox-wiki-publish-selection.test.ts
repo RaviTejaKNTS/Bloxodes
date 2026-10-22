@@ -1,12 +1,18 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
+import sharp from "sharp";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { OfficialUniverseMedia } from "@/lib/roblox/universe-media";
 import type { CollectionPlan, CollectionSource } from "../../../../../scripts/collections/sync-game-collection-runtime";
 import { publishBundle } from "../../../../../scripts/content/roblox-wiki-publish";
 
-const state = vi.hoisted(() => ({ plan: null as CollectionPlan | null, events: [] as string[], registry: vi.fn(), universe: vi.fn(), previewUniverse: vi.fn(), groups: vi.fn(), apply: vi.fn() }));
+const state = vi.hoisted(() => ({ plan: null as CollectionPlan | null, events: [] as string[], registry: vi.fn(), universe: vi.fn(), previewUniverse: vi.fn(), groups: vi.fn(), apply: vi.fn(), officialMedia: vi.fn(), persistMedia: vi.fn(), imageFetch: vi.fn() }));
 const copy = (plan: CollectionPlan) => ({ title: "All 1 Pets in Example", seo_title: "All 1 Pets in Example", wiki_sort_order: plan.config.sortOrder });
+const officialMedia: OfficialUniverseMedia = {
+  iconUrl: "https://tr.rbxcdn.com/example-current-icon/512/512/Image/Png/noFilter",
+  thumbnails: [{ url: "https://tr.rbxcdn.com/example-current-thumbnail/768/432/Image/Png/noFilter", state: "Completed", type: "Image" }]
+};
 
 vi.mock("server-only", () => ({}));
 vi.mock("../../../../../scripts/shared/load-env", () => ({}));
@@ -21,6 +27,10 @@ vi.mock("../../../../../scripts/collections/audit-game-collection-datasets-v2", 
 vi.mock("../../../../../scripts/collections/sync-game-wiki-runtime", () => ({ readFinal: () => { throw new Error("Unselected hub was read"); } }));
 vi.mock("../../../../../scripts/shared/r2-client", () => ({ loadR2ClientConfig: () => ({ bucket: "bloxodes-wiki" }), R2Client: class {} }));
 vi.mock("@/lib/game-collections/registry", () => ({ readGameCollectionGroups: () => state.groups() }));
+vi.mock("@/lib/roblox/universe-media", () => ({
+  fetchOfficialUniverseMedia: (...args: unknown[]) => state.officialMedia(...args),
+  persistOfficialUniverseMedia: (...args: unknown[]) => state.persistMedia(...args)
+}));
 vi.mock("../../../../../scripts/collections/sync-game-collection-runtime", () => ({
   targetSources: async ([file]: string[]) => [{
     config: { code: "example-pets", gameSlug: "example", gameName: "Example", slug: "pets", label: "Pets", sortOrder: 0, universeNames: ["Example"] },
@@ -68,6 +78,22 @@ beforeEach(async () => {
   state.plan = null;
   state.events = [];
   vi.stubEnv("WIKI_MEDIA_PUBLIC_BASE_URL", "");
+  const [icon, thumbnail] = await Promise.all([
+    sharp({ create: { width: 512, height: 512, channels: 3, background: "red" } }).png().toBuffer(),
+    sharp({ create: { width: 768, height: 432, channels: 3, background: "blue" } }).png().toBuffer()
+  ]);
+  const images = new Map([[officialMedia.iconUrl, icon], [officialMedia.thumbnails[0].url, thumbnail]]);
+  state.officialMedia.mockResolvedValue(officialMedia);
+  state.persistMedia.mockImplementation(async (_db: unknown, universeId: number) => {
+    state.events.push(`media:${universeId}`);
+  });
+  state.imageFetch.mockImplementation(async (input: string | URL | Request) => {
+    const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
+    const bytes = images.get(url);
+    if (!bytes) throw new Error(`Unexpected media fetch: ${url}`);
+    return new Response(new Uint8Array(bytes), { headers: { "content-type": "image/png" } });
+  });
+  vi.stubGlobal("fetch", state.imageFetch);
   state.groups.mockResolvedValue([{
     gameSlug: "example", gameName: "Example", universeId: 123, universeNames: ["Example"], sortOrder: 1000, collections: ["boats"],
     collectionConfigs: [{ slug: "boats", sortOrder: 1010 }]
@@ -100,21 +126,32 @@ beforeEach(async () => {
     universe_id: 123, wiki_slug: "example", collection_slug: "pets", code: "example-pets", title: "All {count} Pets in Example", display_name: "Pets", seo_title: "All {count} Pets in Example", meta_description: "Example pets.", intro_md: "Pets hatch from eggs.", description_md: "Choose a pet.", description_json: {}, faq_json: [], wiki_md: "Pets hatch from eggs."
   }));
 });
-afterEach(async () => { vi.restoreAllMocks(); vi.unstubAllEnvs(); await fs.rm(root, { recursive: true, force: true }); });
+afterEach(async () => { vi.restoreAllMocks(); vi.unstubAllGlobals(); vi.unstubAllEnvs(); await fs.rm(root, { recursive: true, force: true }); });
 
 describe("publisher page selection", () => {
   it("dry-runs with selected manifest image decisions while other pages and decisions remain unfinished", async () => {
     await publishBundle({ command: "publish", target: "managed-dev", apply: false, allowProd: false, bundle: root, only: ["pets"] });
     expect(state.universe).toHaveBeenCalledTimes(1);
     expect(state.universe.mock.calls[0][2]).toBe(false);
+    expect(state.officialMedia).toHaveBeenCalledTimes(1);
+    expect(state.officialMedia).toHaveBeenCalledWith(123, expect.any(Function));
+    expect(state.imageFetch).toHaveBeenCalledTimes(2);
+    for (const url of [officialMedia.iconUrl, officialMedia.thumbnails[0].url]) {
+      expect(state.imageFetch).toHaveBeenCalledWith(url, expect.objectContaining({ signal: expect.any(AbortSignal) }));
+    }
+    expect(state.persistMedia).not.toHaveBeenCalled();
     expect(state.events).toEqual([]);
     expect(state.apply).not.toHaveBeenCalled();
     expect(state.registry).not.toHaveBeenCalled();
   });
 
-  it("imports before writes and applies and registers only the selected collection", async () => {
+  it("imports before media persistence and applies and registers only the selected collection", async () => {
     await publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] });
-    expect(state.events).toEqual(["import", "upload:pets", "apply:pets"]);
+    expect(state.events).toEqual(["import", "upload:pets", "media:123", "apply:pets"]);
+    expect(state.officialMedia).toHaveBeenCalledTimes(1);
+    expect(state.officialMedia).toHaveBeenCalledWith(123, expect.any(Function));
+    expect(state.persistMedia).toHaveBeenCalledTimes(1);
+    expect(state.persistMedia).toHaveBeenCalledWith(expect.any(Object), 123, officialMedia);
     expect(state.apply).toHaveBeenCalledTimes(1);
     expect(state.registry).toHaveBeenCalledWith("merge_roblox_wiki_registry", expect.objectContaining({
       p_collections: [{ slug: "pets", label: "Pets", sortOrder: 1020, pageType: "database" }]
@@ -203,6 +240,7 @@ describe("publisher page selection", () => {
     });
     await expect(publishBundle({ command: "publish", target: "managed-dev", apply: true, allowProd: false, bundle: root, only: ["pets"] })).rejects.toThrow(/stats identity|Imported universe identity/);
     expect(state.events).toEqual(["import"]);
+    expect(state.persistMedia).not.toHaveBeenCalled();
     expect(state.apply).not.toHaveBeenCalled();
     expect(state.registry).not.toHaveBeenCalled();
   });
