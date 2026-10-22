@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { parseContentOptions } from "../../content/roblox-wiki-cli";
 import { deployedContentSha } from "../local-content-publication-guard";
 import { assertEditorialSlug, bundlePath, resolveCollectionOrders, selectBundlePages, assertCollectionFinalOrder, assertCollectionMissingImages } from "../roblox-wiki-bundle";
@@ -252,4 +252,176 @@ test("live verification retries transport failures, checks every image, and reje
   pageCalls = 1;
   await assert.rejects(verifyLive(url, "Example Items", "Example Items", []), /rendered title/);
   assert.equal(pageCalls, 2);
+});
+
+const mediaUniverseId = 4730278139;
+const staleIcon = "https://tr.rbxcdn.com/stale/512/512/Image/Png/noFilter";
+const staleThumbnail = "https://tr.rbxcdn.com/stale/768/432/Image/Png/noFilter";
+const currentIcon = "https://tr.rbxcdn.com/current/512/512/Image/Png/noFilter";
+const currentThumbnail = "https://tr.rbxcdn.com/current/768/432/Image/Png/noFilter";
+
+async function collectionMediaFixture() {
+  const root = path.resolve("tmp", `roblox-wiki-media-${randomUUID()}`);
+  await fs.mkdir(path.join(root, "media"), { recursive: true });
+  const write = (file: string, value: unknown) => fs.writeFile(path.join(root, file), JSON.stringify(value));
+  await write("bundle.json", {
+    contract: "roblox-wiki@1", game: { ...game, universeId: mediaUniverseId },
+    collections: [{ manifest: "runtime-manifest.json", missingImages: [{ slug: "iron-blade", reason: "No exact artwork exists." }] }]
+  });
+  await write("runtime-manifest.json", { ...manifest("items"), game: { slug: game.slug, name: game.name, universeId: mediaUniverseId } });
+  await write("final.json", {
+    universe_id: mediaUniverseId, wiki_slug: "example", collection_slug: "items", code: "example-items",
+    display_name: "items", title: "All {count} items in Example", seo_title: "All {count} items in Example",
+    meta_description: "Compare blade damage and crafting costs.", intro_md: "Iron blades deal physical damage.",
+    description_md: "Upgrade iron blades at the forge.", description_json: {}, how_it_works_md: "",
+    faq_json: [], wiki_md: "Blades deal physical damage to monsters."
+  });
+  await write("dataset.json", {
+    meta: { schemaVersion: 2, gameSlug: "example", collection: "items", itemFields: ["name", "damage", "cost", "obtainment"], columns: ["name", "damage", "cost", "obtainment"], display: { groupLabel: "Type", sectionOrder: ["Blades"], tableFields: ["damage", "cost", "obtainment"], cardFields: ["damage", "cost", "obtainment"] } },
+    items: [{ item: { name: "Iron Blade", damage: 12, cost: 50, obtainment: "Forge" }, system: { slug: "iron-blade", section: "Blades", sortOrder: 10, image: null } }]
+  });
+  const { default: sharp } = await import("sharp");
+  const icon = await sharp({ create: { width: 512, height: 512, channels: 3, background: "red" } }).png().toBuffer();
+  const thumbnail = await sharp({ create: { width: 768, height: 432, channels: 3, background: "blue" } }).png().toBuffer();
+  await fs.writeFile(path.join(root, "icon.png"), icon);
+  await fs.writeFile(path.join(root, "thumbnail.png"), thumbnail);
+  return root;
+}
+
+// Exercise the real publisher and persistence helper through a closed HTTP fake.
+// No credentials, DB connection, R2 request or live Roblox request is needed.
+async function runCollectionMediaFixture(root: string, apply: boolean, scenario = "ready") {
+  const report = path.join(root, "media-report.json");
+  const preload = `
+    import fs from 'node:fs';
+    import { randomUUID } from 'node:crypto';
+    const root = ${JSON.stringify(root)}, scenario = ${JSON.stringify(scenario)};
+    const universeId = ${mediaUniverseId}, icon = ${JSON.stringify(currentIcon)}, thumbnail = ${JSON.stringify(currentThumbnail)};
+    const calls = [];
+    const tables = {
+      roblox_universes: [{ universe_id: universeId, root_place_id: 123, name: 'Example', slug: 'example-4730278139', icon_url: ${JSON.stringify(staleIcon)}, thumbnail_urls: [{ url: ${JSON.stringify(staleThumbnail)}, state: 'Completed', type: null }] },
+        { universe_id: 999, icon_url: 'untouched-icon', thumbnail_urls: [] }],
+      wiki_pages: [{ id: 'hub-id', slug: 'example', universe_id: universeId, title: 'Keep hub copy', cover_image: 'https://media.bloxodes.com/wiki/keep-cover.webp' }],
+      roblox_universe_media: [{ universe_id: universeId, media_type: 'icon', image_url: ${JSON.stringify(staleIcon)}, is_primary: true },
+        { universe_id: 999, media_type: 'icon', image_url: 'untouched-icon', is_primary: true }]
+    };
+    process.on('exit', () => fs.writeFileSync(${JSON.stringify(report)}, JSON.stringify({ tables, calls })));
+    globalThis.fetch = async (input, init) => {
+      const url = new URL(typeof input === 'string' ? input : input.url ?? input.href);
+      const method = init?.method ?? input.method ?? 'GET';
+      const payload = init?.body ? JSON.parse(init.body) : undefined;
+      const table = url.pathname.split('/').pop();
+      calls.push({ url: url.href, method, table, payload, query: Object.fromEntries(url.searchParams) });
+      const json = data => new Response(JSON.stringify(data), { headers: { 'content-type': 'application/json' } });
+      if (url.hostname === 'thumbnails.roblox.com') {
+        if (method !== 'GET' || url.searchParams.get('universeIds') !== String(universeId)) throw new Error('Wrong official media identity');
+        if (scenario === 'api-failure') return new Response(null, { status: 503 });
+        const isIcon = table === 'icons';
+        if (url.searchParams.get('size') !== (isIcon ? '512x512' : '768x432')) throw new Error('Wrong official media size');
+        const ready = scenario === 'pending' ? 'Pending' : 'Completed';
+        return json({ data: isIcon
+          ? [{ targetId: 999, state: 'Completed', imageUrl: icon.replace('current', 'wrong-game') }, { targetId: universeId, state: ready, imageUrl: icon }]
+          : [{ universeId: 999, thumbnails: [{ state: 'Completed', imageUrl: thumbnail.replace('current', 'wrong-game') }] }, { universeId, thumbnails: [{ state: 'Pending', imageUrl: thumbnail.replace('current', 'pending') }, { state: 'Completed', imageUrl: thumbnail }] }]
+        });
+      }
+      if (url.href === icon || url.href === thumbnail) {
+        if (method !== 'GET') throw new Error('Official media must be read-only');
+        if (scenario === 'icon-404' && url.href === icon) return new Response(null, { status: 404 });
+        if (scenario === 'icon-transient' && url.href === icon && calls.filter(call => call.url === icon).length === 1) return new Response(null, { status: 503 });
+        const bytes = fs.readFileSync(root + (url.href === icon && scenario !== 'wrong-dimensions' ? '/icon.png' : '/thumbnail.png'));
+        return new Response(scenario === 'corrupt-thumbnail' && url.href === thumbnail ? bytes.subarray(0, Math.floor(bytes.length / 2)) : bytes, { headers: { 'content-type': 'image/png' } });
+      }
+      if (url.hostname !== 'bbtcaurrtyoukvjbxbbj.supabase.co' || !url.pathname.startsWith('/rest/v1/')) throw new Error('Unexpected network request: ' + method + ' ' + url.href);
+      if (!${apply} && method !== 'GET') throw new Error('Dry run attempted a write');
+      if (table === 'merge_roblox_wiki_registry') {
+        if (method !== 'POST') throw new Error('Unexpected registry request');
+        const row = { game_slug: payload.p_game_slug, game_name: payload.p_game_name, universe_id: payload.p_universe_id, universe_names: payload.p_universe_names, collections: payload.p_collections, sort_order: 1000 };
+        tables.roblox_wiki_registry = [row];
+        return json(row);
+      }
+      const source = tables[table] ??= [];
+      const matching = source.filter(row => [...url.searchParams].every(([key, value]) => {
+        if (value.startsWith('eq.')) return String(row[key]) === value.slice(3);
+        if (value.startsWith('in.')) return value.slice(4, -1).split(',').includes(String(row[key]));
+        return true;
+      }));
+      let result = matching;
+      if (method === 'PATCH') {
+        for (const row of matching) Object.assign(row, payload);
+      } else if (method === 'POST') {
+        result = (Array.isArray(payload) ? payload : [payload]).map(row => ({ id: randomUUID(), ...row }));
+        source.push(...result);
+      } else if (!['GET', 'HEAD'].includes(method)) throw new Error('Unexpected mutation ' + method);
+      const headers = { 'content-type': 'application/json', 'content-range': '0-0/' + matching.length };
+      if (method === 'HEAD') return new Response(null, { headers });
+      const accept = new Headers(init?.headers).get('accept') ?? '';
+      return new Response(JSON.stringify(accept.includes('vnd.pgrst.object') ? result[0] : result), { headers });
+    };
+  `;
+  const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, ...(apply ? ["--apply"] : [])], {
+    encoding: "utf8", timeout: 30_000,
+    env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://media.bloxodes.com/wiki" }
+  });
+  assert.ifError(result.error);
+  const stored = JSON.parse(await fs.readFile(report, "utf8")) as {
+    tables: Record<string, Array<Record<string, any>>>;
+    calls: Array<{ url: string; method: string; table: string; payload?: Record<string, any>; query: Record<string, string> }>;
+  };
+  return { ...result, ...stored };
+}
+
+test("collection-only apply replaces stale cached official media with the exact preflighted pair", async () => {
+  const root = await collectionMediaFixture();
+  try {
+    const result = await runCollectionMediaFixture(root, true, "icon-transient");
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /PASS published 1 page\(s\) to managed-dev/);
+    const officialReads = result.calls.filter(call => call.url.startsWith("https://thumbnails.roblox.com/"));
+    assert.equal(officialReads.length, 2, "apply must use the pair from preflight without refetching");
+    assert.deepEqual(result.calls.filter(call => call.url.startsWith("https://tr.rbxcdn.com/")).map(call => call.url).sort(), [currentIcon, currentIcon, currentThumbnail].sort(), "transient CDN reads retain retries");
+    assert.equal(result.tables.roblox_universes[0].icon_url, currentIcon);
+    assert.deepEqual(result.tables.roblox_universes[0].thumbnail_urls, [{ url: currentThumbnail, state: "Completed", type: null }]);
+    assert.equal(result.tables.roblox_universes[1].icon_url, "untouched-icon");
+    assert.equal(result.tables.roblox_universe_media.find(row => row.image_url === staleIcon)?.is_primary, false);
+    assert.equal(result.tables.roblox_universe_media.find(row => row.image_url === "untouched-icon")?.is_primary, true);
+    assert.deepEqual(result.tables.roblox_universe_media.filter(row => row.universe_id === mediaUniverseId && row.is_primary).map(row => row.image_url).sort(), [currentIcon, currentThumbnail].sort());
+    const mediaWrite = result.calls.find(call => call.method === "PATCH" && call.table === "roblox_universes")!;
+    assert.equal(mediaWrite.query.universe_id, `eq.${mediaUniverseId}`);
+    assert.ok(result.calls.findIndex(call => call === mediaWrite) > result.calls.findIndex(call => call.url === currentThumbnail));
+    assert.equal(result.calls.filter(call => call.table === "wiki_pages" && call.method !== "GET").length, 0);
+    assert.equal(result.tables.wiki_pages[0].title, "Keep hub copy");
+    assert.equal(result.tables.wiki_pages[0].cover_image, "https://media.bloxodes.com/wiki/keep-cover.webp");
+  } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+test("collection-only dry run resolves readable current media while preserving all stored rows", async () => {
+  const root = await collectionMediaFixture();
+  try {
+    const result = await runCollectionMediaFixture(root, false);
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /Dry run complete; no database or media writes/);
+    assert.equal(result.calls.filter(call => call.url.startsWith("https://thumbnails.roblox.com/")).length, 2);
+    assert.equal(result.calls.filter(call => call.url === currentIcon || call.url === currentThumbnail).length, 2);
+    assert.ok(result.calls.every(call => call.method === "GET"));
+    assert.equal(result.tables.roblox_universes[0].icon_url, staleIcon);
+    assert.deepEqual(result.tables.roblox_universes[0].thumbnail_urls, [{ url: staleThumbnail, state: "Completed", type: null }]);
+    assert.equal(result.tables.roblox_universe_media.length, 2);
+    assert.equal(result.tables.roblox_universe_media[0].is_primary, true);
+  } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+test("collection-only apply blocks before writes when current official media fails preflight", async () => {
+  const root = await collectionMediaFixture();
+  try {
+    for (const scenario of ["api-failure", "pending", "icon-404", "corrupt-thumbnail", "wrong-dimensions"]) {
+      const result = await runCollectionMediaFixture(root, true, scenario);
+      assert.equal(result.status, 1, scenario + ": " + result.stderr);
+      assert.match(result.stderr, /official game icon and thumbnails/);
+      assert.match(result.stderr, /No database or media writes were made/);
+      assert.ok(result.calls.every(call => call.method === "GET"), scenario);
+      assert.equal(result.tables.roblox_universes[0].icon_url, staleIcon);
+      if (scenario === "icon-404") assert.equal(result.calls.filter(call => call.url === currentIcon).length, 1, "permanent image failures must not retry");
+      if (scenario === "api-failure" || scenario === "pending") assert.equal(result.calls.filter(call => call.url.startsWith("https://thumbnails.roblox.com/")).length, 6, "retain the existing three API attempts");
+    }
+  } finally { await fs.rm(root, { recursive: true, force: true }); }
 });
