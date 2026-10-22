@@ -18,9 +18,10 @@ vi.mock("@/app/(site)/catalog/roblox-music-ids/MusicIdsBrowser", () => ({ MusicI
 vi.mock("@/app/(site)/catalog/roblox-decal-ids/DecalIdsBrowser", () => ({ DecalIdsBrowser: () => null }));
 
 function mockQuery(result: { data: unknown; count?: number | null; error: unknown }, reject = false) {
-  const query: any = new Proxy({}, {
+  const query: object = new Proxy({}, {
     get: (_target, key) => key === "then"
-      ? (resolve: any, onReject: any) => (reject ? Promise.reject(result.error) : Promise.resolve(result)).then(resolve, onReject)
+      ? (resolve: (value: typeof result) => unknown, onReject: (reason: unknown) => unknown) =>
+        (reject ? Promise.reject(result.error) : Promise.resolve(result)).then(resolve, onReject)
       : () => query
   });
   const from = vi.fn(() => query);
