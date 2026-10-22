@@ -27,6 +27,7 @@ import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-spec
 import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 const PAGE_SIZE = DECAL_IDS_PAGE_SIZE;
+// Builds must not depend on live data, so load failures fall back to empty only while building.
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
 const DECAL_SOURCE_TABLE = "roblox_decal_ids";
 const BASE_SELECT_FIELDS =
@@ -295,6 +296,7 @@ export async function loadRobloxDecalIdsPageData(
     return { decals: normalizeBaseDecalRows(data), total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load Roblox decal IDs", error);
+    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -347,6 +349,7 @@ export async function loadGameDecalIdsPageData(
     }
   } catch (error) {
     reportLoadError(`Failed to load mapped decal IDs for ${gameSlug}`, error);
+    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
     throw error;
   }
 
@@ -397,6 +400,7 @@ export async function loadGameDecalIdsPageData(
     return { decals: normalizeBaseDecalRows(data), total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
   } catch (error) {
     reportLoadError(`Failed to load texture IDs for ${gameSlug}`, error);
+    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -432,6 +436,7 @@ export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
     return rows.filter((row) => row.count > 0);
   } catch (error) {
     reportLoadError("Failed to load Roblox decal categories", error);
+    if (IS_BUILD) return [];
     throw error;
   }
 }

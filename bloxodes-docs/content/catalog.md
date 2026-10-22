@@ -12,7 +12,7 @@ Global Roblox reference pages at `/catalog/<slug>`: item IDs, music IDs, decals,
 
 Each page's loader combines its copy with live database data or a small committed reference file.
 
-- **Music and decal IDs fail closed.** Their loaders throw on a database error, and the unfiltered main lists and daily top 500 also throw when they come back empty. ISR then keeps serving the last good page instead of caching an empty 200 or a 404. Their browser APIs return 503 with `Cache-Control: no-store`. Empty filtered searches and unknown genre or artist slugs behave as before. Avatar marketplace, free items and mesh IDs still return empty data on errors.
+- **Music and decal IDs fail closed.** Their loaders throw on a database error, and the unfiltered main lists and daily top 500 also throw when they come back empty. ISR then keeps serving the last good page instead of caching an empty 200 or a 404. During `next build` they still fall back to empty so a build never depends on live data. Their browser APIs return 503 with `Cache-Control: no-store`. Empty filtered searches and unknown genre or artist slugs behave as before. Avatar marketplace, free items and mesh IDs still return empty data on errors.
 - **Publication dates stay put.** `seed:catalog-pages` keeps the existing `published_at` for rows that are already published, so a copy fix doesn't move `datePublished`.
 - The catalog sitemap keeps the database `lastmod` for the core catalog paths.
 

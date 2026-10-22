@@ -24,6 +24,7 @@ import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
 
 const PAGE_SIZE = MUSIC_IDS_PAGE_SIZE;
 const OPTION_PAGE_SIZE = 24;
+// Builds must not depend on live data, so load failures fall back to empty only while building.
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
 const TOP_SONGS_TRENDING_LIMIT = 500;
 
@@ -262,6 +263,7 @@ async function loadOptionPage(
     return { options, total, totalPages };
   } catch (error) {
     reportLoadError(`Failed to load ${view} options`, error);
+    if (IS_BUILD) return { options: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -290,6 +292,7 @@ async function loadOptionBySlug(
     };
   } catch (error) {
     reportLoadError(`Failed to load ${view} option`, error);
+    if (IS_BUILD) return null;
     throw error;
   }
 }
@@ -405,6 +408,7 @@ async function loadMusicIdsPage(
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load Roblox music IDs", error);
+    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -437,6 +441,7 @@ async function loadDailyTop500MusicIdsPage(pageNumber: number): Promise<PageData
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load daily top Roblox music IDs", error);
+    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -466,6 +471,7 @@ async function loadSourceChartMusicIdsPage(pageNumber: number, source: string): 
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError(`Failed to load ${source} Roblox music IDs`, error);
+    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 }
@@ -522,6 +528,7 @@ export async function loadGameMusicIdsPageData(
     }
   } catch (error) {
     reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
+    if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
 
