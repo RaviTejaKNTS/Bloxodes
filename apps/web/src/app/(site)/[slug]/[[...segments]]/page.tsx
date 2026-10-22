@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import { getGameDirectoryPages, getGameRoot, getGameWikiByPath, getGameCollectionByPath, getGameCodeByPath, getGameToolByPath } from "@/lib/game-registry";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
+import { getGameLandingForLinks } from "@/lib/game-landing";
 import { gameRootWikiPage } from "@/lib/game-root-page";
 import { GameRelatedLinks } from "@/components/games/GameRelatedLinks";
 import { gameCollectionMetadata, renderSharedGameCollection } from "@/components/games/GameCollectionPage";
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (ctx.quiz) return gameQuizMetadata(ctx.quiz);
   if (ctx.map || ctx.catalog) return gameContentMetadata((ctx.map || ctx.catalog)!);
   if (ctx.checklist) return checklistMetadata(ctx.checklist,checklistConfig(ctx.root.namespace));
-  if (!ctx.segments.length) return gameWikiMetadata(gameRootWikiPage(ctx.root, ctx.rootWiki));
+  if (!ctx.segments.length && !ctx.codes) return gameWikiMetadata(gameRootWikiPage(ctx.root, ctx.rootWiki));
   const image = ctx.codes ? ctx.codes.image : ctx.root.cover_image;
   return { openGraph: { title: ctx.codes?.title || ctx.root.title, url: SITE_URL + ctx.path, images: image ? [image] : [] }, twitter: { card: "summary_large_image", images: image ? [image] : [] }, title: ctx.codes?.seo_title || ctx.codes?.title || ctx.root.title, description: ctx.codes?.meta_description ?? undefined, alternates: buildAlternates(`${SITE_URL}${ctx.path}`) };
 }
@@ -64,7 +65,8 @@ export default async function SharedGamePage({ params }: Props) {
     const pages = (await getGameDirectoryPages(ctx.root.namespace)).filter(page => page.href.startsWith(`${ctx.path}/`));
     if (!pages.length) notFound();
     const title = `${ctx.root.title} ${ctx.segments[0]}`;
-    return <div className="grid gap-8 content-sidebar-grid"><div className="min-w-0 space-y-8"><PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: ctx.root.title, href: `/${ctx.root.namespace}` }, { label: ctx.segments[0] }]} /><h1 className="text-4xl font-semibold">{title}</h1><article id="article-body" className="journey-content-stream journey-content-stream--index space-y-6">{pages.map(page => <div key={page.href} data-journey-item><ContentCard href={page.href} title={page.title} image={page.image ? { src: page.image, alt: page.title, ratio: "1200/675" } : undefined} /></div>)}</article></div><PageSidebar><GameRelatedLinks namespace={ctx.root.namespace} canonicalPath={ctx.path} /></PageSidebar></div>;
+    const landing = await getGameLandingForLinks(ctx.root.namespace);
+    return <div className="grid gap-8 content-sidebar-grid"><div className="min-w-0 space-y-8"><PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: ctx.root.title, href: landing.path }, { label: ctx.segments[0] }]} /><h1 className="text-4xl font-semibold">{title}</h1><article id="article-body" className="journey-content-stream journey-content-stream--index space-y-6">{pages.map(page => <div key={page.href} data-journey-item><ContentCard href={page.href} title={page.title} image={page.image ? { src: page.image, alt: page.title, ratio: "1200/675" } : undefined} /></div>)}</article></div><PageSidebar><GameRelatedLinks namespace={ctx.root.namespace} canonicalPath={ctx.path} /></PageSidebar></div>;
   }
   notFound();
 }

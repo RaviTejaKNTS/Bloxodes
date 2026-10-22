@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
-import { getGameRoot, getGameWikiByPath } from "@/lib/game-registry";
+import { getGameLanding } from "@/lib/game-landing";
 import { gameRootWikiPage } from "@/lib/game-root-page";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 
 export const revalidate = 21600;
 async function load() {
-  const game = await getGameRoot("minecraft");
+  const { root: game, wiki, hasIndependentRoot } = await getGameLanding("minecraft");
   if (!game) notFound();
-  return gameRootWikiPage(game, await getGameWikiByPath("minecraft", "/minecraft/wiki"));
+  return gameRootWikiPage(game, wiki, hasIndependentRoot);
 }
 export async function generateMetadata() { return gameWikiMetadata(await load()); }
 export default async function Page() {

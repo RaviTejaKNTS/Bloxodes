@@ -1,4 +1,5 @@
 import "server-only";
+import { getGameLandingForLinks } from "@/lib/game-landing";
 import { formatDistanceToNowStrict } from "date-fns";
 import { supabaseAdmin } from "@/lib/supabase";
 import {
@@ -227,7 +228,7 @@ async function latestActiveCodes(page: CodePageWithCounts, limit: number) {
 }
 
 export async function loadHomePageData() {
-  const [statsHome, recentCodePages, wikiPages, eventsPayload, quizzes, tools, counts, articles, checklists, puzzles, catalogPages, minecraft] =
+  const [statsHome, recentCodePages, wikiPages, eventsPayload, quizzes, tools, counts, articles, checklists, puzzles, catalogPages, minecraft, gtaLanding, redDeadLanding, minecraftLanding] =
     await Promise.all([
       load("stats home", () => getStatsHome()),
       loadOptional("recent code pages", () => loadRecentCodePages(8), []),
@@ -240,7 +241,10 @@ export async function loadHomePageData() {
       loadOptional("checklists", () => listPublishedChecklists(200), []),
       loadOptional("puzzles", () => listPublishedPuzzlePages(), []),
       loadOptional("catalog pages", () => listPublishedTopLevelCatalogPages(), []),
-      loadOptional("minecraft hub", () => getMinecraftWikiPageBySlug("minecraft-java"), null)
+      loadOptional("minecraft hub", () => getMinecraftWikiPageBySlug("minecraft-java"), null),
+      loadOptional("GTA landing", async () => ({ path: (await getGameLandingForLinks("gta")).path }), { path: "/gta" }),
+      loadOptional("Red Dead landing", async () => ({ path: (await getGameLandingForLinks("red-dead")).path }), { path: "/red-dead" }),
+      loadOptional("Minecraft landing", async () => ({ path: (await getGameLandingForLinks("minecraft")).path }), { path: "/minecraft" })
     ]);
 
   // Lookups by Roblox universe, used to join every page type to its game.
@@ -453,11 +457,11 @@ export async function loadHomePageData() {
   );
 
   const franchiseList: Array<HomeFranchise | null> = [
-    { href: "/gta", name: "Grand Theft Auto", image: "/images/games/gta.webp", links: GTA_LINKS.slice(0, 3).map(toLink), hubLabel: "GTA hub" },
-    { href: "/red-dead", name: "Red Dead", image: "/images/games/red-dead.webp", links: RED_DEAD_LINKS.slice(0, 3).map(toLink), hubLabel: "Red Dead hub" },
+    { href: gtaLanding.path, name: "Grand Theft Auto", image: "/images/games/gta.webp", links: GTA_LINKS.slice(0, 3).map(toLink), hubLabel: "GTA hub" },
+    { href: redDeadLanding.path, name: "Red Dead", image: "/images/games/red-dead.webp", links: RED_DEAD_LINKS.slice(0, 3).map(toLink), hubLabel: "Red Dead hub" },
     minecraft
       ? {
-          href: "/minecraft",
+          href: minecraftLanding.path,
           name: "Minecraft",
           image: resolveMinecraftWikiCoverImage(minecraft),
           links: MINECRAFT_LINKS.slice(2, 5).map(toLink),
@@ -516,9 +520,9 @@ export async function loadHomePageData() {
       links: topWikis.map((wiki) => ({ href: `/wiki/${wiki.slug}`, label: wiki.title })),
       more: { href: "/wiki", label: `All ${counts.wiki.toLocaleString("en-US")} wikis` }
     },
-    { title: "GTA", icon: "map", links: GTA_LINKS.slice(0, 4).map(toLink), more: { href: "/gta", label: "GTA hub" } },
-    { title: "Red Dead", icon: "wiki", links: RED_DEAD_LINKS.slice(0, 4).map(toLink), more: { href: "/red-dead", label: "Red Dead hub" } },
-    { title: "Minecraft", icon: "wiki", links: MINECRAFT_LINKS.slice(2, 6).map(toLink), more: { href: "/minecraft", label: "Minecraft hub" } }
+    { title: "GTA", icon: "map", links: GTA_LINKS.slice(0, 4).map(toLink), more: { href: gtaLanding.path, label: "GTA hub" } },
+    { title: "Red Dead", icon: "wiki", links: RED_DEAD_LINKS.slice(0, 4).map(toLink), more: { href: redDeadLanding.path, label: "Red Dead hub" } },
+    { title: "Minecraft", icon: "wiki", links: MINECRAFT_LINKS.slice(2, 6).map(toLink), more: { href: minecraftLanding.path, label: "Minecraft hub" } }
   ];
 
   return {

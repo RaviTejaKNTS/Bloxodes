@@ -5,6 +5,7 @@ import type { GameDirectoryPage } from "@/lib/game-registry";
 import { resolveGameCoverImage } from "@/lib/game-images";
 import { PageSidebar } from "@/components/PageSidebar";
 import { safeJsonLd } from "@/lib/seo";
+import { gameBreadcrumbs, gameWikiCanonicalPath, type GameWikiPresentationPage } from "@/lib/game-root-page";
 import type { Metadata } from "next";
 import { Fragment, type ReactNode } from "react";
 import { ContentCopyNodes } from "./ContentCopyNodes";
@@ -21,8 +22,8 @@ import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { breadcrumbJsonLd, buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
 export function legacyWikiCommentType(namespace: string): "gta_wiki" | "red_dead_wiki" | "minecraft_wiki" | "game_wiki" { return namespace === "gta" ? "gta_wiki" : namespace === "red-dead" ? "red_dead_wiki" : namespace === "minecraft" ? "minecraft_wiki" : "game_wiki"; }
-export function gameWikiMetadata(page: SharedGameWikiPage): Metadata {
- const canonical = `${SITE_URL}${page.canonical_path}`;
+export function gameWikiMetadata(page: GameWikiPresentationPage): Metadata {
+ const canonical = `${SITE_URL}${gameWikiCanonicalPath(page)}`;
  const title = resolveSeoTitle(page.seo_title) ?? page.title;
  const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);
  const image = resolveGameCoverImage(page);
@@ -52,20 +53,25 @@ function releaseLabels(value: Record<string, unknown> | null): string[] {
 }
 
 export type GameWikiPageProps = {
-  page: SharedGameWikiPage;
+  page: GameWikiPresentationPage;
   namespace: string;
   namespaceTitle: string;
   extraLinks?: Array<{ href: string; title: string }>;
   directoryPages?: GameDirectoryPage[];
   sidebarContent?: ReactNode;
+  landingPath?: string;
 };
 
-export async function renderGameWikiPage({ page, namespace, namespaceTitle, extraLinks = [], directoryPages = [], sidebarContent }: GameWikiPageProps) {
+export async function renderGameWikiPage({ page, namespace, namespaceTitle, extraLinks = [], directoryPages = [], sidebarContent, landingPath = `/${namespace}` }: GameWikiPageProps) {
   const reader = createGameReader(namespace);
 
-  const collections = await reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.slug);
-  const directory = page.game_kind === "franchise" || page.canonical_path === `/${namespace}`
-    ? directoryPages.filter(link => link.href !== page.canonical_path && !(page.canonical_path === `/${namespace}` && link.href === `/${namespace}/wiki`) && !collections.some(collection => collection.canonical_path === link.href))
+  const isFranchiseHub = page.game_kind === "franchise";
+  const collections = isFranchiseHub ? [] : await reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.slug);
+  const directory = isFranchiseHub || page.canonical_path === `/${namespace}`
+    ? directoryPages.filter(link => link.href !== page.canonical_path
+      && (!isFranchiseHub || (link.kind === "game_wiki_pages_view" && link.href !== `/${namespace}` && link.href !== `/${namespace}/wiki`))
+      && !(page.canonical_path === `/${namespace}` && link.href === `/${namespace}/wiki`)
+      && !collections.some(collection => collection.canonical_path === link.href))
     : [];
   const [descriptionHtml, tipsHtml] = await Promise.all([
     page.description_md ? renderMarkdown(page.description_md) : Promise.resolve(""),
@@ -77,8 +83,14 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
   const releases = releaseLabels(page.game_release_dates_json);
   const isPrelaunch = page.game_status === "upcoming" || page.game_status === "announced";
   const hasGameDetails = isPrelaunch || releases.length || platforms.length || page.game_developer || page.game_publisher;
-  const canonicalPath = page.canonical_path;
+  const canonicalPath = gameWikiCanonicalPath(page);
   const canonicalUrl = `${SITE_URL}${canonicalPath}`;
+  const breadcrumbs = gameBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: namespaceTitle, href: landingPath },
+    ...([`/${namespace}`, `/${namespace}/wiki`].includes(page.canonical_path) ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }]),
+    { label: page.game_short_title || page.game_title, href: null }
+  ], canonicalPath);
   const description = summary(page.meta_description ?? page.description_md, `Learn how ${page.game_title} works.`);
   const updatedAt = page.content_updated_at || page.updated_at || page.published_at;
   const collectionBlocks = await Promise.all(collections.map(async (collection) => {
@@ -92,35 +104,34 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
     { key: "database" as const, label: isPrelaunch ? "Pre-launch coverage" : "Game data", entries: collectionBlocks.filter(({ collection }) => collection.page_type !== "collectible") },
     { key: "collectible" as const, label: "Collectibles", entries: collectionBlocks.filter(({ collection }) => collection.page_type === "collectible") }
   ].filter((group) => group.entries.length);
+  const listedPages = [
+    ...directory.map(link => ({ name: link.title, path: link.href })),
+    ...collectionGroups.flatMap(group => group.entries.map(({ collection }) => ({ name: collection.display_name, path: collection.canonical_path })))
+  ];
 
   const structuredData = [
     {
       ...webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title: page.title, description, image: coverImage || undefined, author: null, publishedAt: page.published_at, updatedAt }),
-      ...(collectionBlocks.length ? {
+      ...(isFranchiseHub || listedPages.length ? {
         "@type": "CollectionPage",
         mainEntity: {
           "@type": "ItemList",
-          name: `${page.game_title} collections`,
-          numberOfItems: collectionBlocks.length,
-          itemListElement: collectionBlocks.map(({ collection }, index) => ({
-            "@type": "ListItem", position: index + 1, name: collection.display_name, url: `${SITE_URL}${collection.canonical_path}`
+          name: isFranchiseHub || directory.length ? page.title : `${page.game_title} collections`,
+          numberOfItems: listedPages.length,
+          itemListElement: listedPages.map((entry, index) => ({
+            "@type": "ListItem", position: index + 1, name: entry.name, url: `${SITE_URL}${entry.path}`
           }))
         }
       } : {})
     },
-    breadcrumbJsonLd([
-      { name: "Home", url: SITE_URL },
-      ...(canonicalPath === `/${namespace}` ? [] : [{ name: namespaceTitle, url: `${SITE_URL}/${namespace}` }]),
-      ...([`/${namespace}`, `/${namespace}/wiki`].includes(canonicalPath) ? [] : [{ name: `${namespaceTitle} Wiki`, url: `${SITE_URL}/${namespace}/wiki` }]),
-      { name: page.title, url: canonicalUrl }
-    ])
+    breadcrumbJsonLd(breadcrumbs.map(item => ({ name: item.label, url: item.href === "/" ? SITE_URL : `${SITE_URL}${item.href || canonicalPath}` })))
   ];
 
   return (
     <div className="space-y-9">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": structuredData }) }} />
       <header className="space-y-6">
-        <PageBreadcrumb items={[{ label: "Home", href: "/" }, ...(canonicalPath === `/${namespace}` ? [] : [{ label: namespaceTitle, href: `/${namespace}` }]), ...([`/${namespace}`, `/${namespace}/wiki`].includes(canonicalPath) ? [] : [{ label: "Wiki", href: `/${namespace}/wiki` }]), { label: page.game_short_title || page.game_title, href: null }]} />
+        <PageBreadcrumb items={breadcrumbs} />
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start">
             {thumbnailImage ? <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-border/70 bg-surface-muted shadow-soft sm:h-28 sm:w-28">
@@ -150,7 +161,7 @@ export async function renderGameWikiPage({ page, namespace, namespaceTitle, extr
 
       {extraLinks.map(link => <p key={link.href}><Link href={link.href} className="text-accent underline underline-offset-4">{link.title}</Link></p>)}
       <div className="grid gap-8 content-sidebar-grid">
-        <article id="article-body" itemProp="articleBody" className="min-w-0 space-y-9 journey-content-stream journey-content-stream--prose">
+        <article id="article-body" itemProp="articleBody" className={`min-w-0 journey-content-stream ${isFranchiseHub ? "content-start gap-5 sm:grid-cols-2 lg:grid-cols-3" : "space-y-9 journey-content-stream--prose"}`}>
           {descriptionHtml ? (
             <ContentCopyNodes nodes={renderPageContentNodes(descriptionHtml, `${page.slug}-description`)} group="game-wiki-intro" className="game-copy max-w-3xl min-w-0 text-foreground" />
           ) : null}
