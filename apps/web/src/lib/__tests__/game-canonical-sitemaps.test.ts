@@ -3,6 +3,7 @@ import { load } from "cheerio";
 
 const state = vi.hoisted(() => ({ wikiPublished: true, wrongOwner: false, independent: false, failedRead: "" }));
 vi.mock("server-only", () => ({}));
+vi.mock("react", async importOriginal => ({ ...await importOriginal<typeof import("react")>(), cache: (loader: unknown) => loader }));
 vi.mock("@/lib/game-registry", () => ({
   getGameRoot: async (namespace: string) => {
     if (state.failedRead === "root") throw new Error("Root unavailable");

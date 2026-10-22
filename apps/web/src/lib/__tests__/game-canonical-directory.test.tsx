@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 
 const state = vi.hoisted(() => ({ publishedWiki: true, failedRead: "" }));
 vi.mock("server-only", () => ({}));
+vi.mock("react", async importOriginal => ({ ...await importOriginal<typeof import("react")>(), cache: (loader: unknown) => loader }));
 vi.mock("@/lib/game-registry", () => ({
   getGameRoot: async (namespace: string) => {
     if (state.failedRead === "root") throw new Error("Root unavailable");

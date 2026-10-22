@@ -4,6 +4,7 @@ import type { SharedGameGame, SharedGameWikiPage } from "../shared-game-reader";
 
 const db = vi.hoisted(() => ({ root: vi.fn(), wiki: vi.fn(), failedView: "", rejectProbe: false, exactRoots: new Set<string>(), queries: [] as Array<{ table: string; filters: Record<string, unknown> }> }));
 vi.mock("server-only", () => ({}));
+vi.mock("react", async importOriginal => ({ ...await importOriginal<typeof import("react")>(), cache: (loader: unknown) => loader }));
 vi.mock("@/lib/game-registry", () => ({ getGameRoot: db.root, getGameWikiByPath: db.wiki }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: (table: string) => {
   const filters: Record<string, unknown> = {};
