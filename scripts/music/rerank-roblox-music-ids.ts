@@ -243,20 +243,6 @@ async function writeUpdates(updates: ScoreUpdate[]) {
   }
 }
 
-async function updateCatalogTimestamp() {
-  if (DRY_RUN) return false;
-  const sb = supabaseAdmin();
-  const { error } = await sb
-    .from("catalog_pages")
-    .update({ updated_at: new Date().toISOString() })
-    .eq("code", "roblox-music-ids");
-  if (error) {
-    console.warn(`Catalog timestamp update failed: ${error.message}`);
-    return false;
-  }
-  return true;
-}
-
 async function writeAutomationSummary(summary: AutomationSummary) {
   const summaryPath = process.env.AUTOMATION_SUMMARY_PATH;
   if (!summaryPath) return;
@@ -290,7 +276,6 @@ async function run() {
     });
 
   await writeUpdates(updates);
-  const catalogTimestampUpdated = await updateCatalogTimestamp();
   const topPreview = scored
     .slice()
     .sort((a, b) => b.score - a.score || a.row.asset_id - b.row.asset_id)
@@ -305,9 +290,6 @@ async function run() {
   console.log(
     `Rerank complete. Scanned ${rows.length}, ${DRY_RUN ? "would update" : "updated"} ${updates.length}.`
   );
-  if (catalogTimestampUpdated) {
-    console.log("Catalog page timestamp updated.");
-  }
   console.table(topPreview);
 
   await writeAutomationSummary({

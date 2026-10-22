@@ -53,6 +53,7 @@ export async function GET() {
     }
 
     for (const path of CORE_CATALOG_PATHS) {
+      if (pageMap.has(path)) continue;
       pageMap.set(path, {
         loc: withSiteUrl(path),
         changefreq: "weekly",

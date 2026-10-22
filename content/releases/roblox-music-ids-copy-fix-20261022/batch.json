@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "operations": [
+    { "publisher": "catalog", "file": "catalog/final.json" }
+  ],
+  "urls": [
+    { "path": "/catalog/roblox-music-ids", "contains": "If a Code does not play" }
+  ],
+  "events": [
+    { "type": "catalog", "slug": "roblox-music-ids" }
+  ]
+}

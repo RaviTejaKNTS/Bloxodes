@@ -1,6 +1,7 @@
 import "../shared/load-env";
 import { writeFile } from "node:fs/promises";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getExistingMusicAssetIds, updateMusicCatalogTimestamp } from "../shared/music-catalog-freshness";
 
 const TOP_SONGS_API = "https://apis.roblox.com/music-discovery/v1/top-songs";
 const PRODUCTINFO_API = (assetId: number) => `https://api.roblox.com/marketplace/productinfo?assetId=${assetId}`;
@@ -174,41 +175,35 @@ function buildMusicRows(songs: RobloxTopSong[], fetchedAt: string): MusicRow[] {
     return rows;
 }
 
-async function clearAllRanks() {
-    console.log("Clearing all existing ranks...");
+async function clearStaleRanks(currentAssetIds: number[]) {
+    console.log("Clearing ranks for songs that left the top list...");
     const sb = supabaseAdmin();
 
-    const { error } = await sb
+    let query = sb
         .from("roblox_music_ids")
         .update({ rank: null })
         .not("rank", "is", null);
+    if (currentAssetIds.length) {
+        query = query.not("asset_id", "in", `(${currentAssetIds.join(",")})`);
+    }
+    const { error } = await query;
 
     if (error) {
-        throw new Error(`Failed to clear ranks: ${error.message}`);
+        throw new Error(`Failed to clear stale ranks: ${error.message}`);
     }
 
-    console.log("✅ All existing ranks cleared.");
+    console.log("✅ Stale ranks cleared.");
 }
 
-async function upsertTopSongs(rows: MusicRow[]) {
-    if (!rows.length) return;
+async function upsertTopSongs(rows: MusicRow[], existingAssetIds: Set<number>): Promise<number> {
+    let addedSongs = 0;
+    if (!rows.length) return addedSongs;
 
     console.log(`Upserting ${rows.length} top songs with ranks...`);
     const sb = supabaseAdmin();
 
-    // For each song, we need to:
-    // 1. Check if it exists
-    // 2. If exists: update only rank, last_seen_at, and raw_payload
-    // 3. If new: insert all data
-
     for (const row of rows) {
-        const { data: existing } = await sb
-            .from("roblox_music_ids")
-            .select("asset_id")
-            .eq("asset_id", row.asset_id)
-            .single();
-
-        if (existing) {
+        if (existingAssetIds.has(row.asset_id)) {
             // Update existing song - only update rank, last_seen_at, raw_payload, source
             const { error } = await sb
                 .from("roblox_music_ids")
@@ -231,11 +226,15 @@ async function upsertTopSongs(rows: MusicRow[]) {
 
             if (error) {
                 console.error(`Failed to insert asset ${row.asset_id}: ${error.message}`);
+            } else {
+                existingAssetIds.add(row.asset_id);
+                addedSongs += 1;
             }
         }
     }
 
     console.log("✅ Top songs upserted with ranks.");
+    return addedSongs;
 }
 
 async function fetchWithRetry(url: string, init?: RequestInit): Promise<Response> {
@@ -458,24 +457,6 @@ async function enrichTopSongs(assetIds: number[], ranks: Map<number, number>): P
     }
 }
 
-async function updateCatalogPageTimestamp(): Promise<boolean> {
-    console.log("\nUpdating catalog page timestamp...");
-    const sb = supabaseAdmin();
-
-    const { error } = await sb
-        .from("catalog_pages")
-        .update({ updated_at: new Date().toISOString() })
-        .eq("code", "roblox-music-ids");
-
-    if (error) {
-        console.error(`⚠️  Failed to update catalog page timestamp: ${error.message}`);
-        return false;
-    } else {
-        console.log("✅ Catalog page timestamp updated.");
-        return true;
-    }
-}
-
 async function writeAutomationSummary(summary: AutomationSummary) {
     const summaryPath = process.env.AUTOMATION_SUMMARY_PATH;
     if (!summaryPath) return;
@@ -505,19 +486,21 @@ async function run() {
     const rows = buildMusicRows(songs, fetchedAt);
     console.log(`📊 Prepared ${rows.length} music rows with ranks 1-${rows.length}.\n`);
 
-    // Step 3: Clear old ranks only after the replacement list is ready.
-    await clearAllRanks();
+    const existingAssetIds = await getExistingMusicAssetIds(supabaseAdmin(), rows.map(row => row.asset_id));
 
-    // Step 4: Upsert songs (keeping existing data for old IDs, updating ranks)
-    await upsertTopSongs(rows);
+    // Step 3: Upsert songs (keeping existing data for old IDs, updating ranks)
+    const addedSongs = await upsertTopSongs(rows, existingAssetIds);
+
+    // Step 4: Clear old ranks after the new list is written, so the trending list is never empty mid-run.
+    await clearStaleRanks(rows.map(row => row.asset_id));
 
     // Step 5: Enrich all top songs with metadata
     const assetIds = rows.map(row => row.asset_id);
     const ranks = new Map(rows.map(row => [row.asset_id, row.rank]));
     const enrichedCount = await enrichTopSongs(assetIds, ranks);
 
-    // Step 6: Update catalog page timestamp
-    const catalogTimestampUpdated = await updateCatalogPageTimestamp();
+    // Step 6: Update freshness only for roster changes at least seven days apart.
+    const catalogTimestampUpdated = await updateMusicCatalogTimestamp(supabaseAdmin(), { addedSongs });
 
     await writeAutomationSummary({
         type: "music-ids",
@@ -536,7 +519,7 @@ async function run() {
     console.log(`   - New songs: Inserted with full data and rank`);
     console.log(`   - All songs: Enriched with metadata, thumbnails, and scores`);
     console.log(`   - All other songs: Rank cleared (set to NULL)`);
-    console.log(`   - Catalog page: Updated timestamp`);
+    console.log(`   - Catalog page timestamp updated: ${catalogTimestampUpdated}`);
 }
 
 run().catch((error) => {

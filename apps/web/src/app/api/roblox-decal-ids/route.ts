@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
 import { normalizeCategorySlug } from "@/lib/decal-id-categories";
 import { normalizeSearchQuery, normalizeSortKey, type DecalSortKey } from "@/lib/decal-ids-search";
 import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
@@ -76,7 +77,7 @@ function normalizeBaseRows(rows: unknown[] | null) {
   });
 }
 
-export async function GET(request: Request) {
+async function loadResponse(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = normalizePage(searchParams.get("page"));
   const search = normalizeSearchQuery(searchParams.get("q"));
@@ -155,7 +156,7 @@ export async function GET(request: Request) {
 
   // Game mappings are authoritative when present. The preset fallback lets a
   // newly configured local page render while its source allowlist is prepared.
-  if (game && (error || (count ?? data?.length ?? 0) === 0)) {
+  if (!error && game && (count ?? data?.length ?? 0) === 0) {
     let fallback = supabase
       .from(DECAL_SOURCE_TABLE)
       .select(BASE_SELECT_FIELDS, { count: "exact" })
@@ -200,11 +201,16 @@ export async function GET(request: Request) {
     count = resolvedFallback.count;
   }
 
-  if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (isCatalogPageOutOfRange(error, offset)) {
+    return NextResponse.json({ ok: true, decals: [], total: 0, totalPages: 1 });
   }
+  if (error) throw error;
 
   const total = count ?? data?.length ?? 0;
+  if (!search && !game && !preset && !category && section !== "curated" &&
+      (total === 0 || (!data?.length && offset < total))) {
+    throw new Error("Roblox decal catalog unexpectedly empty");
+  }
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return NextResponse.json({
@@ -213,4 +219,16 @@ export async function GET(request: Request) {
     total,
     totalPages
   });
+}
+
+export async function GET(request: Request) {
+  try {
+    return await loadResponse(request);
+  } catch (error) {
+    console.error("Failed to load Roblox decal IDs API", error);
+    return NextResponse.json(
+      { ok: false, error: "Unable to load decal IDs right now." },
+      { status: 503, headers: { "Cache-Control": "no-store" } }
+    );
+  }
 }

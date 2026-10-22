@@ -20,6 +20,7 @@ import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } fr
 import { MusicIdsBrowser } from "./MusicIdsBrowser";
 import type { MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
 import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
 
 const PAGE_SIZE = MUSIC_IDS_PAGE_SIZE;
 const OPTION_PAGE_SIZE = 24;
@@ -248,10 +249,8 @@ async function loadOptionPage(
       .order("label", { ascending: true })
       .range(offset, offset + pageSize - 1);
 
-    if (error) {
-      reportLoadError(`Failed to load ${view} options`, error);
-      return { options: [], total: 0, totalPages: 1 };
-    }
+    if (isCatalogPageOutOfRange(error, offset)) return { options: [], total: 0, totalPages: 1 };
+    if (error) throw error;
 
     const options = (data ?? []).map((row) => ({
       slug: row.slug,
@@ -263,7 +262,7 @@ async function loadOptionPage(
     return { options, total, totalPages };
   } catch (error) {
     reportLoadError(`Failed to load ${view} options`, error);
-    return { options: [], total: 0, totalPages: 1 };
+    throw error;
   }
 }
 
@@ -281,10 +280,7 @@ async function loadOptionBySlug(
       .eq("slug", normalized)
       .maybeSingle();
 
-    if (error) {
-      reportLoadError(`Failed to load ${view} option`, error);
-      return null;
-    }
+    if (error) throw error;
 
     if (!data) return null;
     return {
@@ -294,7 +290,7 @@ async function loadOptionBySlug(
     };
   } catch (error) {
     reportLoadError(`Failed to load ${view} option`, error);
-    return null;
+    throw error;
   }
 }
 
@@ -397,17 +393,19 @@ async function loadMusicIdsPage(
 
     const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
 
-    if (error) {
-      reportLoadError("Failed to load Roblox music IDs", error);
-      return { songs: [], total: 0, totalPages: 1 };
-    }
+    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    if (error) throw error;
 
     const total = count ?? data?.length ?? 0;
+    if (!searchTerm && !options?.genre && !options?.artist && !options?.preset &&
+        (total === 0 || (!data?.length && offset < total))) {
+      throw new Error("Roblox music catalog unexpectedly empty");
+    }
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load Roblox music IDs", error);
-    return { songs: [], total: 0, totalPages: 1 };
+    throw error;
   }
 }
 
@@ -428,17 +426,18 @@ async function loadDailyTop500MusicIdsPage(pageNumber: number): Promise<PageData
       .order("asset_id", { ascending: true })
       .range(offset, offset + PAGE_SIZE - 1);
 
-    if (error) {
-      reportLoadError("Failed to load daily top Roblox music IDs", error);
-      return { songs: [], total: 0, totalPages: 1 };
-    }
+    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    if (error) throw error;
 
     const total = Math.min(count ?? data?.length ?? 0, TOP_SONGS_TRENDING_LIMIT);
+    if (total === 0 || (!data?.length && offset < total)) {
+      throw new Error("Daily top Roblox music catalog unexpectedly empty");
+    }
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError("Failed to load daily top Roblox music IDs", error);
-    return { songs: [], total: 0, totalPages: 1 };
+    throw error;
   }
 }
 
@@ -459,17 +458,15 @@ async function loadSourceChartMusicIdsPage(pageNumber: number, source: string): 
       .order("asset_id", { ascending: true })
       .range(offset, offset + PAGE_SIZE - 1);
 
-    if (error) {
-      reportLoadError(`Failed to load ${source} Roblox music IDs`, error);
-      return { songs: [], total: 0, totalPages: 1 };
-    }
+    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    if (error) throw error;
 
     const total = count ?? data?.length ?? 0;
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
     return { songs: (data ?? []) as MusicRow[], total, totalPages };
   } catch (error) {
     reportLoadError(`Failed to load ${source} Roblox music IDs`, error);
-    return { songs: [], total: 0, totalPages: 1 };
+    throw error;
   }
 }
 
@@ -517,13 +514,15 @@ export async function loadGameMusicIdsPageData(
     else query = query.order("game_sort_order", { ascending: true }).order("popularity_score", { ascending: false, nullsFirst: false });
 
     const { data, error, count } = await query.order("asset_id", { ascending: true }).range(offset, offset + PAGE_SIZE - 1);
-    if (!error && (count ?? 0) > 0) {
+    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    if (error) throw error;
+    if ((count ?? data?.length ?? 0) > 0) {
       const total = count ?? data?.length ?? 0;
       return { songs: (data ?? []) as MusicRow[], total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
     }
-    if (error) reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
   } catch (error) {
     reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
+    throw error;
   }
 
   return loadMusicIdsPage(page, { preset, search: options?.search, sort: options?.sort });

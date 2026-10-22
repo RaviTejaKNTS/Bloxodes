@@ -3,6 +3,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { normalizeSearchQuery, normalizeSortKey, type MusicSortKey } from "@/lib/music-ids-search";
 import { getMusicGameIdPage, type MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
 import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -63,7 +64,7 @@ function applySort<T extends OrderableQuery<T>>(query: T, sort: MusicSortKey): T
   }
 }
 
-export async function GET(request: Request) {
+async function loadResponse(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = normalizePage(searchParams.get("page"));
   const search = normalizeSearchQuery(searchParams.get("q"));
@@ -110,7 +111,7 @@ export async function GET(request: Request) {
 
   // Keep newly configured game pages usable before their association rows are
   // imported. Once mappings exist, the game view remains the authoritative set.
-  if (game && (error || (count ?? data?.length ?? 0) === 0)) {
+  if (!error && game && (count ?? data?.length ?? 0) === 0) {
     let fallback = supabase
       .from(MUSIC_SOURCE_VIEW)
       .select(SELECT_FIELDS, { count: "exact" })
@@ -138,11 +139,16 @@ export async function GET(request: Request) {
     count = fallbackResult.count;
   }
 
-  if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (isCatalogPageOutOfRange(error, offset)) {
+    return NextResponse.json({ ok: true, songs: [], total: 0, totalPages: 1 });
   }
+  if (error) throw error;
 
   const total = count ?? data?.length ?? 0;
+  if (!search && !game && !preset &&
+      (total === 0 || (!data?.length && offset < total))) {
+    throw new Error("Roblox music catalog unexpectedly empty");
+  }
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return NextResponse.json({
@@ -151,4 +157,16 @@ export async function GET(request: Request) {
     total,
     totalPages
   });
+}
+
+export async function GET(request: Request) {
+  try {
+    return await loadResponse(request);
+  } catch (error) {
+    console.error("Failed to load Roblox music IDs API", error);
+    return NextResponse.json(
+      { ok: false, error: "Unable to load music IDs right now." },
+      { status: 503, headers: { "Cache-Control": "no-store" } }
+    );
+  }
 }
