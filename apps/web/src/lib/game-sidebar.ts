@@ -191,7 +191,8 @@ export async function getGameSidebarData(universeId: number): Promise<GameSideba
     fallback = { articles: generalArticles, catalogs: globalCatalogs };
   }
 
-  const universeIcon = stats?.iconUrl ?? wiki?.iconUrl ?? checklist?.coverImage ?? codes?.coverImage ?? null;
+  // Wiki media joins the current universe row; the stats index can predate a media refresh.
+  const universeIcon = wiki?.iconUrl ?? stats?.iconUrl ?? checklist?.coverImage ?? codes?.coverImage ?? null;
 
   return { universeIcon, wiki, catalogs, stats, event, codes, checklist, quiz, tools, articles, fallback };
 }
