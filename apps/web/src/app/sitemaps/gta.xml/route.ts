@@ -1,3 +1,4 @@
+import { getGameLandingForLinks, gameLandingSitemapEntries } from "@/lib/game-landing";
 import { listPublishedGtaChecklists } from "@/lib/gta-checklists";
 import { listGameMapPages } from "@/lib/game-extra-pages";
 import { NextResponse } from "next/server";
@@ -15,18 +16,18 @@ export const fetchCache = "force-no-store";
 
 export async function GET() {
   try {
-    const [wikiPages, collections, checklistData, maps] = await Promise.all([
+    const [wikiPages, collections, checklistData, maps, landing] = await Promise.all([
       listPublishedGtaWikiPages(),
       listPublishedGtaWikiCollections(),
       listPublishedGtaChecklists(1, 1000),
-      listGameMapPages("gta")
+      listGameMapPages("gta"),
+      getGameLandingForLinks("gta")
     ]);
     const mapRoutes = maps.map(page => ({ loc: withSiteUrl(page.canonical_path),
       changefreq: "monthly" as const, priority: "0.9", lastmod: toIsoDate(page.updated_at) }));
     const pages: SitemapUrlSetEntry[] = [
       { loc: withSiteUrl("/games"), changefreq: "weekly", priority: "0.8" },
-      { loc: withSiteUrl("/gta"), changefreq: "weekly", priority: "0.9" },
-      { loc: withSiteUrl("/gta/wiki"), changefreq: "weekly", priority: "0.9" },
+      ...gameLandingSitemapEntries(landing),
       ...(mapRoutes.length ? [{ loc: withSiteUrl("/gta/maps"), changefreq: "monthly" as const, priority: "0.8" }] : []),
       ...mapRoutes,
       ...(checklistData.total ? [{ loc: withSiteUrl("/gta/checklists"), changefreq: "weekly" as const, priority: "0.9" }] : []),
@@ -44,7 +45,7 @@ export async function GET() {
         lastmod: toIsoDate(page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at)
       }))
     ];
-    return new NextResponse(buildSitemapUrlSetXml(pages), { headers: { "content-type": "application/xml" } });
+    return new NextResponse(buildSitemapUrlSetXml([...new Map(pages.map(page => [page.loc, page])).values()]), { headers: { "content-type": "application/xml" } });
   } catch (error) {
     console.error("Failed to build GTA sitemap", error);
     return new NextResponse(buildSitemapUrlSetXml([]), { headers: { "content-type": "application/xml" } });

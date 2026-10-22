@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { GameCodePage } from "./GameCodePage";
 import type { GameCodePage as CodePage } from "@/lib/game-registry";
 
+vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
 vi.mock("server-only", () => ({}));
 vi.mock("./GameRelatedLinks", () => ({ GameRelatedLinks: () => <a href="/example/wiki/child">Child wiki</a> }));
 vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: () => null }));
@@ -27,3 +28,4 @@ describe("franchise codes layout", () => {
     expect(graph[1]["@type"]).toBe("FAQPage");
   });
 });
+

@@ -1,3 +1,4 @@
+import { getGameLandingForLinks } from "@/lib/game-landing";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DedicatedToolPage, buildDedicatedToolMetadata } from "@/components/tools/DedicatedToolPage";
@@ -19,7 +20,8 @@ export default async function MinecraftToolPage({ params }: Props) {
   const tool = await loadMinecraftTool(slug);
   if (!tool || !isMinecraftToolSlug(slug)) notFound();
   const rules = toolRules(tool);
-  return <DedicatedToolPage toolCode={slug} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={`/minecraft/tools/${slug}`} commentEntityType="minecraft_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: "Minecraft", href: "/minecraft" }, { label: "Tools", href: "/minecraft/tools" }, { label: tool.title }]} relatedContent={<><RelatedMinecraftCollections tool={slug} /><RelatedMinecraftTools exclude={slug} /></>}>
+  const landing = await getGameLandingForLinks("minecraft");
+  return <DedicatedToolPage toolCode={slug} content={tool} fallbackTitle={tool.title} fallbackDescription={tool.meta_description} canonicalPath={`/minecraft/tools/${slug}`} commentEntityType="minecraft_tool" breadcrumbItems={[{ label: "Home", href: "/" }, { label: "Minecraft", href: landing.path }, { label: "Tools", href: "/minecraft/tools" }, { label: tool.title }]} relatedContent={<><RelatedMinecraftCollections tool={slug} /><RelatedMinecraftTools exclude={slug} /></>}>
     <MinecraftToolClient slug={slug} rules={rules} />
   </DedicatedToolPage>;
 }

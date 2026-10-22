@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getGameLandingForLinks } from "@/lib/game-landing";
 import { notFound } from "next/navigation";
 import { prepareGameCollectionDocument, renderGameCollectionPage } from "@/app/(site)/wiki/collections/games/generic";
 import { createGameReader, type SharedGameWikiCollectionPage } from "@/lib/shared-game-reader";
@@ -27,8 +28,9 @@ export async function renderSharedGameCollection({ page, namespaceTitle, current
   const [contentHtml, collections, wiki] = await Promise.all([buildPageContentHtml(page), reader.listPublishedSharedGameWikiCollectionsByWikiSlug(page.wiki_slug), supabaseAdmin().from("game_wiki_pages_view").select("canonical_path").eq("id", page.wiki_page_id).eq("is_published", true).single()]);
   if (wiki.error || !wiki.data) throw new Error("Published collection wiki is missing.");
   const collectionOptions = collections.map(p => ({ value: p.code, label: p.display_name, href: p.canonical_path, pageType: p.page_type }));
+  const landing = page.page_type === "collectible" ? await getGameLandingForLinks(page.namespace) : null;
   const rendered = page.page_type === "collectible"
-    ? renderGameCollectibleCollectionPage({ page, namespaceTitle, wikiPath: wiki.data.canonical_path, config: runtime.config, dataset: prepared.dataset, groupedSections: prepared.groupedSections, contentHtml, collectionOptions })
+    ? renderGameCollectibleCollectionPage({ page, namespaceTitle, wikiPath: wiki.data.canonical_path, config: runtime.config, dataset: prepared.dataset, groupedSections: prepared.groupedSections, contentHtml, collectionOptions, landingPath: landing?.path })
     : renderGameCollectionPage({ config: runtime.config, dataset: prepared.dataset, contentHtml, currentPage, prepared, collectionBasePath: page.canonical_path, routeBase: `/${page.namespace}/wiki`, wikiHomePath: wiki.data.canonical_path, wikiLabel: `${namespaceTitle} Wiki`, collectionOptions, commentsEntityType: page.namespace === "gta" ? "gta_wiki_collection" : page.namespace === "red-dead" ? "red_dead_wiki_collection" : page.namespace === "minecraft" ? "minecraft_wiki_collection" : "game_collection", showMoreCollections: false, enableItemFinder: true, stream: true });
   return <GameCollectionSidebarLayout canonicalPath={page.canonical_path} title={page.title} code={page.code} gameName={page.game_short_title || page.game_title} wikiPath={wiki.data.canonical_path} collectionOptions={collections.map(p => ({ value: p.code, label: p.display_name, href: p.canonical_path, description: p.meta_description }))}>{rendered}</GameCollectionSidebarLayout>;
 }

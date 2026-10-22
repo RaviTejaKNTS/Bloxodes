@@ -1,4 +1,5 @@
 import { safeJsonLd } from "@/lib/seo";
+import { gameBreadcrumbs } from "@/lib/game-root-page";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CollectionFaq } from "@/components/game-collections/CollectionFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -76,7 +77,8 @@ export function renderGameCollectibleCollectionPage({
   dataset,
   groupedSections,
   contentHtml,
-  collectionOptions
+  collectionOptions,
+  landingPath = `/${page.namespace}`
 }: {
   page: SharedGameWikiCollectionPage;
   namespaceTitle: string;
@@ -86,6 +88,7 @@ export function renderGameCollectibleCollectionPage({
   groupedSections: Array<{ id: string; label: string; items: Array<Record<string, unknown>> }>;
   contentHtml: PageContentHtml | null;
   collectionOptions: Array<{ value: string; label: string; href: string; pageType?: "database" | "collectible" }>;
+  landingPath?: string;
 }) {
   const sections = buildSections(groupedSections, page.description_json);
   const configuredCardFields = dataset.meta?.display?.cardFields ?? [];
@@ -98,6 +101,13 @@ export function renderGameCollectibleCollectionPage({
   const description = page.meta_description || `${config.gameName} ${config.label.toLowerCase()} collectibles with locations, access notes, and progress tracking.`;
   const canonicalPath = page.canonical_path;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
+  const breadcrumbs = gameBreadcrumbs([
+    { label: "Home", href: "/" },
+    { label: namespaceTitle, href: landingPath },
+    { label: "Wiki", href: `/${page.namespace}/wiki` },
+    { label: config.gameName, href: wikiPath },
+    { label: config.label, href: null }
+  ], canonicalPath);
   const updatedAt = contentHtml?.updatedAt ?? page.content_updated_at ?? page.updated_at ?? page.published_at;
   const introNodes = contentHtml?.introHtml ? renderPageContentNodes(contentHtml.introHtml, `${config.code}-intro`) : [];
   const detailEntries = contentHtml?.descriptionHtml?.filter((entry) => entry.key === DESCRIPTION_MD_KEY) ?? [];
@@ -110,13 +120,7 @@ export function renderGameCollectibleCollectionPage({
   const image = sections.flatMap((section) => section.items).find((item) => item.image)?.image ?? page.thumb_url ?? page.game_cover_image;
   const schema = [
     webPageJsonLd({ siteUrl: SITE_URL, slug: canonicalPath.slice(1), title, description, image: resolveAbsoluteUrl(image), author: null, publishedAt: contentHtml?.publishedAt ?? page.published_at, updatedAt }),
-    breadcrumbJsonLd([
-      { name: "Home", url: SITE_URL },
-      { name: namespaceTitle, url: `${SITE_URL}/${page.namespace}` },
-      { name: `${namespaceTitle} Wiki`, url: `${SITE_URL}/${page.namespace}/wiki` },
-      { name: config.gameName, url: `${SITE_URL}${wikiPath}` },
-      { name: config.label, url: canonicalUrl }
-    ]),
+    breadcrumbJsonLd(breadcrumbs.map(item => ({ name: item.label, url: item.href === "/" ? SITE_URL : `${SITE_URL}${item.href || canonicalPath}` }))),
     buildItemListSchema({ title, description, url: canonicalUrl, sections, total: itemCount })
   ];
 
@@ -124,7 +128,7 @@ export function renderGameCollectibleCollectionPage({
     <div className="catalog-surface space-y-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": schema }) }} />
       <header className="space-y-4">
-        <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: namespaceTitle, href: `/${page.namespace}` }, { label: "Wiki", href: `/${page.namespace}/wiki` }, { label: config.gameName, href: wikiPath }, { label: config.label, href: null }]} />
+        <PageBreadcrumb items={breadcrumbs} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
