@@ -4,10 +4,12 @@ import * as decals from "@/app/(site)/catalog/roblox-decal-ids/page-data";
 import { GET as musicApi } from "@/app/api/roblox-music-ids/route";
 import { GET as decalApi } from "@/app/api/roblox-decal-ids/route";
 import MusicIdsPaginatedPage from "@/app/(site)/catalog/roblox-music-ids/page/[page]/page";
+import DecalIdsPaginatedPage from "@/app/(site)/catalog/roblox-decal-ids/page/[page]/page";
 
 vi.mock("server-only", () => ({}));
 
-const mocks = vi.hoisted(() => ({ admin: vi.fn(), notFound: vi.fn() }));
+const mocks = vi.hoisted(() => ({ admin: vi.fn(), notFound: vi.fn(), mappings: vi.fn() }));
+vi.mock("@/lib/catalog-game-source", () => ({ hasCatalogGameMappings: mocks.mappings }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: mocks.admin }));
 vi.mock("next/navigation", () => ({ notFound: mocks.notFound }));
 vi.mock("@/lib/catalog", () => ({ getCatalogPageContentByCodes: vi.fn().mockResolvedValue(null) }));
@@ -72,6 +74,7 @@ const rangeError = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mocks.mappings.mockResolvedValue(true);
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
 afterEach(() => vi.restoreAllMocks());
@@ -112,7 +115,7 @@ describe("catalog loader failure propagation", () => {
   it.each(paginatedLoaders)("$name accepts a high-offset PGRST103 as out of range", async ({ load, rows }) => {
     const from = mockQuery({ data: null, count: null, error: rangeError });
     const result = await load(99999);
-    expect(result).toEqual({ [rows]: [], total: 0, totalPages: 1 });
+    expect(result).toEqual({ [rows]: [], total: 1, totalPages: 1 });
     expect(99999).toBeGreaterThan(result.totalPages);
     expect(from).toHaveBeenCalledTimes(1);
   });
@@ -135,6 +138,14 @@ describe("catalog loader failure propagation", () => {
     mocks.notFound.mockImplementation(() => { throw notFound; });
     await expect(MusicIdsPaginatedPage({ params: Promise.resolve({ page: "99999" }) })).rejects.toBe(notFound);
     expect(mocks.notFound).toHaveBeenCalledOnce();
+  });
+
+  it.each(["0", "1", "-1", "2junk", "9007199254740992", "99999"])("returns main decal HTML 404 for page %s", async page => {
+    const from = mockQuery({ data: null, count: null, error: rangeError });
+    const notFound = new Error("NEXT_NOT_FOUND");
+    mocks.notFound.mockImplementation(() => { throw notFound; });
+    await expect(DecalIdsPaginatedPage({ params: Promise.resolve({ page }) })).rejects.toBe(notFound);
+    if (page !== "99999") expect(from).not.toHaveBeenCalled();
   });
 
   it("allows empty search, genre, artist, preset and curated results", async () => {
@@ -160,13 +171,11 @@ describe("catalog loader failure propagation", () => {
     () => decals.loadGameDecalIdsPageData(1, "test-game", "faces"),
     () => decals.loadGameDecalIdsPageData(1, "shindo-life", "faces")
   ])("propagates errors from a preset fallback after an empty mapping", async load => {
-    const empty = mockQuery({ data: [], count: 0, error: null });
+    mocks.mappings.mockResolvedValue(false);
     const error = new Error("fallback timeout");
-    const failed = mockQuery({ data: null, error });
-    const from = vi.fn().mockImplementationOnce(empty).mockImplementationOnce(failed);
-    mocks.admin.mockReturnValue({ from });
+    const from = mockQuery({ data: null, error });
     await expect(load()).rejects.toBe(error);
-    expect(from).toHaveBeenCalledTimes(2);
+    expect(from).toHaveBeenCalledTimes(1);
   });
 
   it.each([
@@ -174,12 +183,10 @@ describe("catalog loader failure propagation", () => {
     { rows: "decals", load: (page: number) => decals.loadGameDecalIdsPageData(page, "test-game", "faces") },
     { rows: "decals", load: (page: number) => decals.loadGameDecalIdsPageData(page, "shindo-life", "faces") }
   ])("handles range errors from a preset fallback ($rows)", async ({ load, rows }) => {
-    const empty = mockQuery({ data: [], count: 0, error: null });
-    const failed = mockQuery({ data: null, count: null, error: rangeError });
-    const from = vi.fn().mockImplementationOnce(empty).mockImplementationOnce(failed);
-    mocks.admin.mockReturnValue({ from });
-    await expect(load(99999)).resolves.toEqual({ [rows]: [], total: 0, totalPages: 1 });
-    expect(from).toHaveBeenCalledTimes(2);
+    mocks.mappings.mockResolvedValue(false);
+    const from = mockQuery({ data: null, count: null, error: rangeError });
+    await expect(load(99999)).resolves.toEqual({ [rows]: [], total: 1, totalPages: 1 });
+    expect(from).toHaveBeenCalledTimes(1);
   });
 
   it("preserves true not-found option lookups", async () => {
@@ -226,19 +233,17 @@ describe.each([
     const from = mockQuery({ data: null, count: null, error: rangeError });
     const response = await get(request(query));
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ ok: true, [name === "music" ? "songs" : "decals"]: [], total: 0, totalPages: 1 });
+    expect(await response.json()).toEqual({ ok: true, [name === "music" ? "songs" : "decals"]: [], total: 1, totalPages: 1 });
     expect(from).toHaveBeenCalledTimes(1);
   });
 
   it("returns an empty page for PGRST103 from a game fallback", async () => {
-    const empty = mockQuery({ data: [], count: 0, error: null });
-    const failed = mockQuery({ data: null, count: null, error: rangeError });
-    const from = vi.fn().mockImplementationOnce(empty).mockImplementationOnce(failed);
-    mocks.admin.mockReturnValue({ from });
+    mocks.mappings.mockResolvedValue(false);
+    const from = mockQuery({ data: null, count: null, error: rangeError });
     const response = await get(request(`?page=99999&game=${game}`));
     expect(response.status).toBe(200);
-    expect(await response.json()).toMatchObject({ ok: true, total: 0, totalPages: 1 });
-    expect(from).toHaveBeenCalledTimes(2);
+    expect(await response.json()).toMatchObject({ ok: true, total: 1, totalPages: 1 });
+    expect(from).toHaveBeenCalledTimes(1);
   });
 
   it.each([

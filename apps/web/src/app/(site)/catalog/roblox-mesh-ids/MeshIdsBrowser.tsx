@@ -5,7 +5,7 @@ import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 import Image from "next/image";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { PagePagination } from "@/components/PagePagination";
 import {
@@ -132,7 +132,6 @@ function MeshIdsBrowserContent({
   urlQuery,
   urlSort
 }: Props & { urlQuery: string; urlSort: MeshSortKey }) {
-  const router = useRouter();
   const [queryInput, setQueryInput] = useState(urlQuery);
   const [sortInput, setSortInput] = useState<MeshSortKey>(urlSort);
   const [meshes, setMeshes] = useState(initialMeshes);
@@ -180,19 +179,32 @@ function MeshIdsBrowserContent({
     return () => controller.abort();
   }, [currentPage, hasFilters, initialMeshes, initialTotalPages, urlQuery, urlSort]);
 
+  function navigateToFirstPage(params = "") {
+    const target = params ? `${basePath}?${params}` : basePath;
+    if (window.location.pathname === basePath) {
+      // Filters are client API state. Next's History API integration updates
+      // useSearchParams without reusing an ISR route's cached canonical URL.
+      window.history.pushState(null, "", target);
+    } else {
+      // A numbered page needs page one's server props. Next 16.2 can reuse
+      // a cached canonical URL with old filters, so load the document.
+      window.location.assign(target);
+    }
+  }
+
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextQuery = buildMeshQueryString({
       query: normalizeMeshSearch(queryInput),
       sort: sortInput
     });
-    router.push(nextQuery ? `${basePath}?${nextQuery}` : basePath);
+    navigateToFirstPage(nextQuery);
   }
 
   function clear() {
     setQueryInput("");
     setSortInput(DEFAULT_MESH_SORT);
-    router.push(basePath);
+    navigateToFirstPage();
   }
 
   return (
@@ -249,6 +261,7 @@ function MeshIdsBrowserContent({
         currentPage={currentPage}
         totalPages={totalPages}
         query={queryString || undefined}
+        firstPageDocumentNavigation
       /></div>
     </>
   );

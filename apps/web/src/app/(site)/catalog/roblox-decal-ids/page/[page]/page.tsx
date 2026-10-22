@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+import { isCatalogPageRangeValid } from "@/lib/catalog-pagination";
 import "@/styles/article-content.css";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import {
@@ -23,8 +26,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { page } = await params;
-    const pageNumber = Number.parseInt(page, 10);
-    const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+    if (!/^\d+$/.test(page)) notFound();
+    const safePageNumber = Number(page);
+    if (safePageNumber < 2 || !isCatalogPageRangeValid(safePageNumber, DECAL_IDS_PAGE_SIZE)) notFound();
 
     const title = `${DECAL_SEO_TITLE} - Page ${safePageNumber}`;
     const description = CATALOG_DESCRIPTION;
@@ -64,9 +68,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function RobloxDecalIdsPaginatedPage({ params }: PageProps) {
     const { page } = await params;
-    const pageNumber = Number.parseInt(page, 10);
-    const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+    if (!/^\d+$/.test(page)) notFound();
+    const safePageNumber = Number(page);
+    if (safePageNumber < 2 || !isCatalogPageRangeValid(safePageNumber, DECAL_IDS_PAGE_SIZE)) notFound();
     const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber);
+    if (safePageNumber > totalPages) notFound();
 
     return renderRobloxDecalIdsPage({
         decals,

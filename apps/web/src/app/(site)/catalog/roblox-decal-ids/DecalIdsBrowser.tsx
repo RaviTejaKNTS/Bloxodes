@@ -4,7 +4,7 @@ import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
 import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 import { Suspense, useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { BadgeCheck } from "lucide-react";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { PagePagination } from "@/components/PagePagination";
@@ -228,7 +228,6 @@ function DecalIdsBrowserContent({
   urlQuery,
   urlSort
 }: ContentProps) {
-  const router = useRouter();
   const [queryInput, setQueryInput] = useState("");
   const [sortInput, setSortInput] = useState<DecalSortKey>(DEFAULT_SORT);
   const [decals, setDecals] = useState<DecalRow[]>(initialDecals);
@@ -296,18 +295,31 @@ function DecalIdsBrowserContent({
     return () => controller.abort();
   }, [category, currentPage, gameSlug, hasFilters, initialDecals, initialTotalPages, preset, section, urlQuery, urlSort]);
 
+  function navigateToFirstPage(params = "") {
+    const target = params ? `${basePath}?${params}` : basePath;
+    if (window.location.pathname === basePath) {
+      // Filters are client API state. Next's History API integration updates
+      // useSearchParams without reusing an ISR route's cached canonical URL.
+      window.history.pushState(null, "", target);
+    } else {
+      // A numbered page needs page one's server props. Next 16.2 can reuse
+      // a cached canonical URL with old filters, so load the document.
+      window.location.assign(target);
+    }
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextQuery = normalizeSearchQuery(queryInput);
     const nextSort = sortInput;
     const nextParams = buildSearchQueryString({ query: nextQuery, sort: nextSort });
-    router.push(nextParams ? `${basePath}?${nextParams}` : basePath);
+    navigateToFirstPage(nextParams);
   }
 
   function handleClear() {
     setQueryInput("");
     setSortInput(DEFAULT_SORT);
-    router.push(basePath);
+    navigateToFirstPage();
   }
 
   return (
@@ -388,6 +400,7 @@ function DecalIdsBrowserContent({
         currentPage={currentPage}
         totalPages={totalPages}
         query={searchQueryString || undefined}
+        firstPageDocumentNavigation
       /></div>
     </>
   );

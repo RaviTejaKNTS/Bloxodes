@@ -4,7 +4,7 @@ import { CatalogStableItems } from "@/components/catalog/CatalogStableItems";
 import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 import { Suspense, useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { MusicIdCard } from "@/components/catalog/MusicIdCard";
 import { PagePagination } from "@/components/PagePagination";
 import {
@@ -121,7 +121,6 @@ function MusicIdsBrowserContent({
   urlQuery,
   urlSort
 }: ContentProps) {
-  const router = useRouter();
   const [queryInput, setQueryInput] = useState("");
   const [sortInput, setSortInput] = useState<MusicSortKey>(DEFAULT_SORT);
   const [songs, setSongs] = useState<MusicRow[]>(initialSongs);
@@ -187,18 +186,31 @@ function MusicIdsBrowserContent({
     return () => controller.abort();
   }, [currentPage, gameSlug, hasFilters, initialSongs, initialTotalPages, preset, urlQuery, urlSort]);
 
+  function navigateToFirstPage(params = "") {
+    const target = params ? `${basePath}?${params}` : basePath;
+    if (window.location.pathname === basePath) {
+      // Filters are client API state. Next's History API integration updates
+      // useSearchParams without reusing an ISR route's cached canonical URL.
+      window.history.pushState(null, "", target);
+    } else {
+      // A numbered page needs page one's server props. Next 16.2 can reuse
+      // a cached canonical URL with old filters, so load the document.
+      window.location.assign(target);
+    }
+  }
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextQuery = normalizeSearchQuery(queryInput);
     const nextSort = sortInput;
     const nextParams = buildSearchQueryString({ query: nextQuery, sort: nextSort });
-    router.push(nextParams ? `${basePath}?${nextParams}` : basePath);
+    navigateToFirstPage(nextParams);
   }
 
   function handleClear() {
     setQueryInput("");
     setSortInput(DEFAULT_SORT);
-    router.push(basePath);
+    navigateToFirstPage();
   }
 
   return (
@@ -286,6 +298,7 @@ function MusicIdsBrowserContent({
         currentPage={currentPage}
         totalPages={totalPages}
         query={searchQueryString || undefined}
+        firstPageDocumentNavigation
       /></div>
     </>
   );

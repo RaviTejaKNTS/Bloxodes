@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+import { isCatalogPageRangeValid } from "@/lib/catalog-pagination";
 import "@/styles/article-content.css";
 import { loadRobloxMeshIdsPageData } from "@/lib/roblox-mesh-ids";
-import { normalizeMeshSearch, normalizeMeshSort } from "@/lib/roblox-mesh-ids-search";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import {
   BASE_PATH,
@@ -15,7 +16,6 @@ export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ page: string }>;
-  searchParams: Promise<{ q?: string; sort?: string }>;
 };
 
 export async function generateStaticParams() {
@@ -37,16 +37,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxMeshIdsPaginatedPage({ params, searchParams }: PageProps) {
+export default async function RobloxMeshIdsPaginatedPage({ params }: PageProps) {
   const rawPage = (await params).page;
   if (!/^\d+$/.test(rawPage)) notFound();
   const page = Number.parseInt(rawPage, 10);
-  if (page < 2) notFound();
-  const filters = await searchParams;
-  const pageData = await loadRobloxMeshIdsPageData(page, {
-    query: normalizeMeshSearch(filters.q),
-    sort: normalizeMeshSort(filters.sort)
-  });
+  if (page < 2 || !isCatalogPageRangeValid(page, MESH_IDS_PAGE_SIZE)) notFound();
+  const pageData = await loadRobloxMeshIdsPageData(page);
   if (page > pageData.totalPages) notFound();
   return renderMeshIdsPage({ ...pageData, currentPage: page, contentHtml: null });
 }

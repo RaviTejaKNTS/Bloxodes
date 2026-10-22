@@ -2,6 +2,12 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const CACHEABLE_CATALOG_ROUTES = [
+  ...["roblox-music-ids", "roblox-decal-ids"].flatMap(family => [
+    new URL(`../../app/(site)/catalog/${family}/games/[game]/page.tsx`, import.meta.url),
+    new URL(`../../app/(site)/catalog/${family}/games/[game]/page/[page]/page.tsx`, import.meta.url)
+  ]),
+  new URL("../../app/(site)/catalog/roblox-mesh-ids/page.tsx", import.meta.url),
+  new URL("../../app/(site)/catalog/roblox-mesh-ids/page/[page]/page.tsx", import.meta.url),
   new URL("../../app/(site)/catalog/roblox-music-ids/page.tsx", import.meta.url),
   new URL("../../app/(site)/catalog/roblox-music-ids/page/[page]/page.tsx", import.meta.url),
   new URL("../../app/(site)/catalog/roblox-decal-ids/page.tsx", import.meta.url),
@@ -26,7 +32,7 @@ const CLIENT_BROWSERS = [
   }
 ];
 
-const ON_DEMAND_ISR_ROUTES = CACHEABLE_CATALOG_ROUTES.filter((path) => path.pathname.includes("["));
+const ON_DEMAND_ISR_ROUTES = CACHEABLE_CATALOG_ROUTES.filter((path) => path.pathname.includes("[") && !path.pathname.endsWith("games/[game]/page.tsx"));
 
 describe("catalog edge-cache contracts", () => {
   it.each(CACHEABLE_CATALOG_ROUTES)("%s stays eligible for public ISR caching", (path) => {
