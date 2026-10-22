@@ -1,6 +1,6 @@
 # Catalog
 
-Last verified: 2026-10-22
+Last verified: 2026-10-23
 
 Global Roblox reference pages at `/catalog/<slug>`: item IDs, music IDs, decals, emotes, admin commands, color codes, error codes, the Roblox dictionary and more. Game-specific item lists are wiki collections, not catalog pages.
 
@@ -14,6 +14,7 @@ Each page's loader combines its copy with live database data or a small committe
 
 - **Music, decal and mesh IDs fail closed.** Runtime database failures propagate instead of becoming empty 200s or false 404s. The unfiltered main lists and daily top 500 also reject unexpectedly empty data. Failed ISR regeneration preserves an existing good page; cold renders can still fail. Music/decal loaders retain their build-only empty fallback; mesh build reads must succeed. Their browser APIs return 503 with `Cache-Control: no-store`. Proven positive-offset exhaustion preserves the exact total, and paginated HTML returns 404 beyond its last page. Empty filtered searches remain valid. Avatar marketplace and free items still return empty data on errors.
 - **Catalog HTML is keyed by path.** Music/decal game pages and mesh pages keep six-hour ISR and seed the default list. Their Suspense client browsers apply URL search and sorting through the APIs. Game mapping presence is checked before search, eligibility and pagination; only a successful empty mapping lookup selects the preset fallback. Texture eligibility and deterministic sort order stay aligned between HTML and APIs.
+- **Catalog filters and page-one navigation.** Music, decal and mesh browsers update base-path Apply/Clear filters through Next's native History API integration. From numbered pages, those controls load the first-page document to refresh server props. Their Prev and numbered 1 links also load the document whenever the destination is page one, preserving query and sort; links to pages two and above retain Next Link. These document boundaries avoid Next 16.2 reusing a cached first-page canonical URL with prior filters. Query-only history does not invalidate that cache entry. Returning to page one remounts the page shell and ads. Other pagination consumers retain their existing navigation.
 - **Publication dates stay put.** `seed:catalog-pages` keeps the existing `published_at` for rows that are already published, so a copy fix doesn't move `datePublished`.
 - The catalog sitemap keeps the database `lastmod` for the core catalog paths.
 

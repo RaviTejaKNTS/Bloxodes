@@ -135,78 +135,146 @@ try {
   browserContext = await browser.newContext();
   // Standalone scripts do not inherit the test runner's retain-on-failure trace.
   await browserContext.tracing.start({ screenshots: true, snapshots: true });
-  const page = await browserContext.newPage();
-  page.setDefaultTimeout(requestTimeout);
-  await page.route("**/*", route => new URL(route.request().url()).origin === base ? route.continue() : route.abort());
   // Test hydrated URL filters independently of the static HTML seed. Every
   // initial payload has many cards; the filtered browser must show one.
   for (const [index, family] of families.entries()) {
-    const query = family.key === "songs" ? "1000" : family.key === "meshes" ? "5000" : "3001";
-    const sort = family.key === "meshes" ? "name" : "popular";
-    const defaultSort = family.key === "meshes" ? "featured" : "recommended";
-    const firstId = family.key === "songs" ? 1000 : family.key === "decals" ? 3000 : 5000;
-    const defaultIds = Array.from({ length: family.size }, (_, index) => firstId + index);
-    const waitForFilteredApi = (number, q, sortKey) => page.waitForResponse(response => {
-      const actual = new URL(response.url());
-      const expected = new URL(family.api, base);
-      return actual.origin === base && actual.pathname === expected.pathname
-        && actual.searchParams.get("game") === expected.searchParams.get("game")
-        && actual.searchParams.get("page") === String(number)
-        && actual.searchParams.get("q") === q && actual.searchParams.get("sort") === sortKey;
-    }, { timeout: requestTimeout });
-    const apiPromise = waitForFilteredApi(1, query, sort);
-    const response = await page.goto(`${base}${family.path}?q=${query}&sort=${sort}`, { waitUntil: "domcontentloaded" });
-    assert.equal(response?.status(), 200);
-    assert.equal((await apiPromise).status(), 200);
-    const cards = page.locator('#article-body [data-journey-item]:not([hidden])').filter({ has: page.locator("article") });
-    const renderedIds = async () => (await cards.locator("h2").allTextContents()).map(title => Number(title.trim().match(/(\d+)$/)?.[1]));
-    await expect(cards).toHaveCount(1);
-    await expect(cards.first()).toContainText(query);
-    await expect(page.locator('#article-body input[type="search"]')).toHaveValue(query);
-    await expect(page.locator("#article-body select")).toHaveValue(sort);
-    // Clear must commit the bare URL and restore the actual default results,
-    // not just reset the local form fields while navigation is still pending.
-    // A remounted unfiltered browser may use its HTML seed without an API call.
-    await page.getByRole("button", { name: "Clear", exact: true }).click();
-    await expect(page).toHaveURL(`${base}${family.path}`);
-    await expect(page.locator('#article-body input[type="search"]')).toHaveValue("");
-    await expect(page.locator("#article-body select")).toHaveValue(defaultSort);
-    await expect(page.getByRole("button", { name: "Clear", exact: true })).toHaveCount(0);
-    await expect(cards).toHaveCount(family.size);
-    await expect.poll(renderedIds).toEqual(defaultIds);
-    // A multi-page subset with alphabetic ordering reverses default membership,
-    // making stale page-1 cards visible.
-    const subsetQuery = "Subset";
-    const subsetSort = family.key === "songs" ? "title_asc" : family.key === "decals" ? "name_asc" : "name";
-    const subsetTotal = family.key === "meshes" ? 60 : 32;
-    const orderedIds = Array.from({ length: subsetTotal }, (_, index) => firstId + subsetTotal - 1 - index);
-    await page.locator('#article-body input[type="search"]').fill(subsetQuery);
-    await page.locator("#article-body select").selectOption(subsetSort);
-    const firstPageApi = waitForFilteredApi(1, subsetQuery, subsetSort);
-    await page.getByRole("button", { name: "Apply", exact: true }).click();
-    assert.equal((await firstPageApi).status(), 200);
-    await expect(page).toHaveURL(`${base}${family.path}?q=${subsetQuery}&sort=${subsetSort}`);
-    await expect.poll(renderedIds, { timeout: requestTimeout }).toEqual(orderedIds.slice(0, family.size));
-    // Register the exact family/game/page/q/sort response before Next Link.
-    const secondPageApi = waitForFilteredApi(2, subsetQuery, subsetSort);
-    await page.getByRole("navigation", { name: "Pagination", exact: true }).getByRole("link", { name: "Next", exact: true }).click();
-    const secondResponse = await secondPageApi;
-    assert.equal(secondResponse.status(), 200);
-    const secondPayload = await withDeadline(secondResponse.json(), requestTimeout, "Filtered page-2 API body");
-    const expectedIds = orderedIds.slice(family.size);
-    assert.equal(secondPayload.ok, true);
-    assert.equal(secondPayload.total, subsetTotal);
-    assert.equal(secondPayload.totalPages, 2);
-    assert.deepEqual(secondPayload[family.key].map(row => row.asset_id), expectedIds);
-    await expect(page).toHaveURL(`${base}${family.path}/page/2?q=${subsetQuery}&sort=${subsetSort}`);
-    await expect(cards).toHaveCount(expectedIds.length);
-    await expect.poll(renderedIds, { timeout: requestTimeout }).toEqual(expectedIds);
-    await expect(page.locator('#article-body input[type="search"]')).toHaveValue(subsetQuery);
-    await expect(page.locator("#article-body select")).toHaveValue(subsetSort);
-    report.browser.push({ path: family.path, filter: query, sort, pagination: true,
-      clear: { sort: defaultSort, expectedIds: defaultIds },
-      page2: { query: subsetQuery, sort: subsetSort, total: subsetTotal, expectedIds } });
-    if (index === 0) await page.screenshot({ path: "tmp/test-reports/catalog-page-2.png", fullPage: true });
+    const unfilteredReturns = [];
+    // Each scenario needs its own filtered landing and client route cache.
+    // A successful document return would otherwise heal the poisoned entry
+    // before the next return link or the original filter/history flow.
+    for (const scenario of ["Prev", "1", "filters"]) {
+      const page = await browserContext.newPage();
+      page.setDefaultTimeout(requestTimeout);
+      let documentRequests = 0;
+      page.on("request", request => {
+        if (request.isNavigationRequest() && request.frame() === page.mainFrame()) documentRequests++;
+      });
+      await page.route("**/*", route => new URL(route.request().url()).origin === base ? route.continue() : route.abort());
+      const query = family.key === "songs" ? "1000" : family.key === "meshes" ? "5000" : "3001";
+      const sort = family.key === "meshes" ? "name" : "popular";
+      const defaultSort = family.key === "meshes" ? "featured" : "recommended";
+      const firstId = family.key === "songs" ? 1000 : family.key === "decals" ? 3000 : 5000;
+      const defaultIds = Array.from({ length: family.size }, (_, index) => firstId + index);
+      const defaultPage2Ids = Array.from({ length: family.size }, (_, index) => firstId + family.size + index);
+      const waitForFilteredApi = (number, q, sortKey) => page.waitForResponse(response => {
+        const actual = new URL(response.url());
+        const expected = new URL(family.api, base);
+        return actual.origin === base && actual.pathname === expected.pathname
+          && actual.searchParams.get("game") === expected.searchParams.get("game")
+          && actual.searchParams.get("page") === String(number)
+          && actual.searchParams.get("q") === q && actual.searchParams.get("sort") === sortKey;
+      }, { timeout: requestTimeout });
+      const apiPromise = waitForFilteredApi(1, query, sort);
+      const response = await page.goto(`${base}${family.path}?q=${query}&sort=${sort}`, { waitUntil: "domcontentloaded" });
+      assert.equal(response?.status(), 200);
+      assert.equal((await apiPromise).status(), 200);
+      const cards = page.locator('#article-body [data-journey-item]:not([hidden])').filter({ has: page.locator("article") });
+      const renderedIds = async () => (await cards.locator("h2").allTextContents()).map(title => Number(title.trim().match(/(\d+)$/)?.[1]));
+      const pagination = page.getByRole("navigation", { name: "Pagination", exact: true });
+      const expectDefaultResults = async (number = 1) => {
+        await expect(page).toHaveURL(`${base}${family.path}${number === 1 ? "" : `/page/${number}`}`);
+        await expect(page.locator('#article-body input[type="search"]')).toHaveValue("");
+        await expect(page.locator("#article-body select")).toHaveValue(defaultSort);
+        await expect(page.getByRole("button", { name: "Clear", exact: true })).toHaveCount(0);
+        await expect(cards).toHaveCount(family.size);
+        await expect.poll(renderedIds).toEqual(number === 1 ? defaultIds : defaultPage2Ids);
+        await expect(pagination.getByRole("link", { name: String(number), exact: true })).toHaveAttribute("aria-current", "page");
+        await expect(pagination.getByRole("link", { name: "Prev", exact: true })).toHaveAttribute("aria-disabled", String(number === 1));
+        await expect(pagination.getByRole("link", { name: "Next", exact: true })).toHaveAttribute("href", `${family.path}/page/${number + 1}`);
+      };
+      await expect(cards).toHaveCount(1);
+      await expect(cards.first()).toContainText(query);
+      await expect(page.locator('#article-body input[type="search"]')).toHaveValue(query);
+      await expect(page.locator("#article-body select")).toHaveValue(sort);
+      // Clear must commit the bare URL and restore the actual default results,
+      // not just reset the local form fields while navigation is still pending.
+      // A remounted unfiltered browser may use its HTML seed without an API call.
+      const initialDocuments = documentRequests;
+      await page.getByRole("button", { name: "Clear", exact: true }).click();
+      await expectDefaultResults();
+      assert.equal(documentRequests, initialDocuments, "Query-only Clear must preserve the document");
+      if (scenario !== "filters") {
+        // Follow the real unfiltered Next link, then the requested first-page
+        // link. Do not replace either click with a harness navigation.
+        await pagination.getByRole("link", { name: "Next", exact: true }).click();
+        await expectDefaultResults(2);
+        const returnLink = pagination.getByRole("link", { name: scenario, exact: true });
+        await expect(returnLink).toHaveAttribute("href", family.path);
+        const documentsBeforeReturn = documentRequests;
+        await returnLink.click();
+        await expectDefaultResults();
+        assert.equal(documentRequests, documentsBeforeReturn + 1, `${scenario} must load the first-page document`);
+        unfilteredReturns.push({ link: scenario, page2Ids: defaultPage2Ids, page1Ids: defaultIds, documentNavigation: true });
+        await withDeadline(page.close(), 10_000, "Return scenario page close");
+        continue;
+      }
+      // A multi-page subset with alphabetic ordering reverses default membership,
+      // making stale page-1 cards visible.
+      const subsetQuery = "Subset";
+      const subsetSort = family.key === "songs" ? "title_asc" : family.key === "decals" ? "name_asc" : "name";
+      const subsetTotal = family.key === "meshes" ? 60 : 32;
+      const orderedIds = Array.from({ length: subsetTotal }, (_, index) => firstId + subsetTotal - 1 - index);
+      await page.locator('#article-body input[type="search"]').fill(subsetQuery);
+      await page.locator("#article-body select").selectOption(subsetSort);
+      const firstPageApi = waitForFilteredApi(1, subsetQuery, subsetSort);
+      await page.getByRole("button", { name: "Apply", exact: true }).click();
+      assert.equal((await firstPageApi).status(), 200);
+      await expect(page).toHaveURL(`${base}${family.path}?q=${subsetQuery}&sort=${subsetSort}`);
+      await expect.poll(renderedIds, { timeout: requestTimeout }).toEqual(orderedIds.slice(0, family.size));
+      assert.equal(documentRequests, initialDocuments, "Query-only Apply must preserve the document");
+      // Query-only history entries must restore URL-driven results and controls.
+      await page.goBack();
+      await expectDefaultResults();
+      await page.goForward();
+      await expect(page).toHaveURL(`${base}${family.path}?q=${subsetQuery}&sort=${subsetSort}`);
+      await expect.poll(renderedIds).toEqual(orderedIds.slice(0, family.size));
+      await expect(page.locator('#article-body input[type="search"]')).toHaveValue(subsetQuery);
+      await expect(page.locator("#article-body select")).toHaveValue(subsetSort);
+      assert.equal(documentRequests, initialDocuments, "Query-only history must preserve the document");
+      // Register the exact family/game/page/q/sort response before Next Link.
+      const secondPageApi = waitForFilteredApi(2, subsetQuery, subsetSort);
+      await page.getByRole("navigation", { name: "Pagination", exact: true }).getByRole("link", { name: "Next", exact: true }).click();
+      const secondResponse = await secondPageApi;
+      assert.equal(secondResponse.status(), 200);
+      const secondPayload = await withDeadline(secondResponse.json(), requestTimeout, "Filtered page-2 API body");
+      const expectedIds = orderedIds.slice(family.size);
+      assert.equal(secondPayload.ok, true);
+      assert.equal(secondPayload.total, subsetTotal);
+      assert.equal(secondPayload.totalPages, 2);
+      assert.deepEqual(secondPayload[family.key].map(row => row.asset_id), expectedIds);
+      await expect(page).toHaveURL(`${base}${family.path}/page/2?q=${subsetQuery}&sort=${subsetSort}`);
+      await expect(cards).toHaveCount(expectedIds.length);
+      await expect.poll(renderedIds, { timeout: requestTimeout }).toEqual(expectedIds);
+      await expect(page.locator('#article-body input[type="search"]')).toHaveValue(subsetQuery);
+      await expect(page.locator("#article-body select")).toHaveValue(subsetSort);
+      for (const name of ["Prev", "1"]) {
+        await expect(pagination.getByRole("link", { name, exact: true })).toHaveAttribute("href", `${family.path}?q=${subsetQuery}&sort=${subsetSort}`);
+      }
+      // Apply/Clear from a numbered page must load page one's props, not leave
+      // page-two offsets behind after changing the URL. Use the real controls.
+      const resetPageApi = waitForFilteredApi(1, subsetQuery, subsetSort);
+      await page.getByRole("button", { name: "Apply", exact: true }).click();
+      assert.equal((await resetPageApi).status(), 200);
+      await expect(page).toHaveURL(`${base}${family.path}?q=${subsetQuery}&sort=${subsetSort}`);
+      await expect(cards).toHaveCount(family.size);
+      await expect.poll(renderedIds).toEqual(orderedIds.slice(0, family.size));
+      await expect(page.locator('#article-body input[type="search"]')).toHaveValue(subsetQuery);
+      await expect(page.locator("#article-body select")).toHaveValue(subsetSort);
+      const repeatedNextApi = waitForFilteredApi(2, subsetQuery, subsetSort);
+      await page.getByRole("navigation", { name: "Pagination", exact: true }).getByRole("link", { name: "Next", exact: true }).click();
+      assert.equal((await repeatedNextApi).status(), 200);
+      await expect(page).toHaveURL(`${base}${family.path}/page/2?q=${subsetQuery}&sort=${subsetSort}`);
+      await expect(cards).toHaveCount(expectedIds.length);
+      await expect.poll(renderedIds).toEqual(expectedIds);
+      if (index === 0) await page.screenshot({ path: "tmp/test-reports/catalog-page-2.png", fullPage: true });
+      await page.getByRole("button", { name: "Clear", exact: true }).click();
+      await expectDefaultResults();
+      report.browser.push({ path: family.path, filter: query, sort, pagination: true,
+        clear: { sort: defaultSort, expectedIds: defaultIds },
+        queryOnlyNavigation: true, history: true, unfilteredReturns,
+        page2: { query: subsetQuery, sort: subsetSort, total: subsetTotal, expectedIds, apply: true, clear: true } });
+      await withDeadline(page.close(), 10_000, "Filter scenario page close");
+    }
   }
   await withDeadline(browserContext.tracing.stop(), 10_000, "Trace stop"); browserContext = undefined;
   await withDeadline(browser.close(), 10_000, "Browser close"); browser = undefined;

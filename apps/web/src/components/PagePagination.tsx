@@ -29,36 +29,46 @@ export function PagePagination({
   currentPage,
   totalPages,
   className,
-  query
+  query,
+  firstPageDocumentNavigation = false
 }: {
   basePath: string;
   currentPage: number;
   totalPages: number;
   className?: string;
   query?: string;
+  // Path-keyed catalog ISR can seed a stale first-page canonical URL in
+  // Next's route cache. Those callers load page one's document instead.
+  firstPageDocumentNavigation?: boolean;
 }) {
   if (totalPages <= 1) return null;
   const sequence = buildPagination(totalPages, currentPage);
   const suffix = query ? (query.startsWith("?") ? query : `?${query}`) : "";
   const pageHref = (page: number) => (page === 1 ? `${basePath}${suffix}` : `${basePath}/page/${page}${suffix}`);
+  const previousPage = Math.max(1, currentPage - 1);
+  const PreviousLink = firstPageDocumentNavigation && previousPage === 1 ? "a" : Link;
 
   return (
     <nav className={className ? className : "flex flex-wrap items-center gap-2"} aria-label="Pagination">
-      <Link
-        href={pageHref(Math.max(1, currentPage - 1))}
+      <PreviousLink
+        href={pageHref(previousPage)}
         rel="prev"
         className="rounded-lg border border-border/60 px-3 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
         aria-disabled={currentPage === 1}
       >
         Prev
-      </Link>
-      {sequence.map((item, idx) =>
-        item === "ellipsis" ? (
-          <span key={`ellipsis-${idx}`} className="px-2 text-sm text-muted">
-            …
-          </span>
-        ) : (
-          <Link
+      </PreviousLink>
+      {sequence.map((item, idx) => {
+        if (item === "ellipsis") {
+          return (
+            <span key={`ellipsis-${idx}`} className="px-2 text-sm text-muted">
+              …
+            </span>
+          );
+        }
+        const PageLink = firstPageDocumentNavigation && item === 1 ? "a" : Link;
+        return (
+          <PageLink
             key={item}
             href={pageHref(item)}
             className={`rounded-lg border px-3 py-2 text-sm font-semibold transition ${
@@ -69,9 +79,9 @@ export function PagePagination({
             aria-current={item === currentPage ? "page" : undefined}
           >
             {item}
-          </Link>
-        )
-      )}
+          </PageLink>
+        );
+      })}
       <Link
         href={pageHref(Math.min(totalPages, currentPage + 1))}
         rel="next"
