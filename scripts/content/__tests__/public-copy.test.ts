@@ -4,6 +4,7 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { publicProvenanceMatch } from "../public-provenance";
 
 function checkCopy(value: unknown) {
   const dir = mkdtempSync(path.join(os.tmpdir(), "bloxodes-public-copy-"));
@@ -74,6 +75,83 @@ test("public copy rejects provenance and workflow language", () => {
   ]) {
     const result = checkCopy({ title: "Vehicles", intro_md });
     assert.equal(result.status, 1);
+  }
+});
+
+test("canonical Manifest game titles, objectives and prerequisites pass", () => {
+  for (const copy of [
+    { description_json: { name: "Cargo Manifest" } },
+    { description_json: { name: "Courier Manifest" } },
+    { description_json: { acquisition: "Extract the Courier Manifest from workshop #2 in the Factory raid or its variants" } },
+    { description_json: { prerequisites: ["Cargo Manifest"] } },
+    { intro_md: "Complete Cargo Manifest and extract the Courier Manifest." }
+  ]) {
+    const result = checkCopy({ title: "Active Matter", ...copy });
+    assert.equal(result.status, 0, result.stderr);
+  }
+});
+
+test("canonical titles never hide another manifest in the same value", () => {
+  for (const intro_md of [
+    "Complete Cargo Manifest. Missing images are recorded in the pipeline manifest.",
+    "The pipeline manifest includes Cargo Manifest and Courier Manifest.",
+    "Cargo Manifest and Courier Manifest. Check the pipeline Manifest."
+  ]) {
+    const match = publicProvenanceMatch(intro_md);
+    assert.ok(match, intro_md);
+    assert.equal(match[0].toLowerCase(), "manifest");
+    assert.equal(match.index, intro_md.toLowerCase().indexOf("pipeline manifest") + "pipeline ".length);
+    assert.equal(match.input, intro_md);
+    const result = checkCopy({ title: "Active Matter", intro_md });
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /public provenance or workflow reference/);
+  }
+});
+
+test("canonical titles never hide other provenance or workflow wording", () => {
+  for (const [intro_md, expected] of [
+    ["Cargo Manifest is complete; our sources confirm the reward.", "our sources"],
+    ["Our research covers Cargo Manifest.", "Our research"],
+    ["Courier Manifest is part of the publication workflow.", "workflow"]
+  ]) {
+    const match = publicProvenanceMatch(intro_md);
+    assert.ok(match, intro_md);
+    assert.equal(match[0], expected);
+    assert.equal(match.index, intro_md.indexOf(expected));
+    assert.equal(match.input, intro_md);
+    const result = checkCopy({ title: "Active Matter", intro_md });
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, /public provenance or workflow reference/);
+  }
+});
+
+test("manifest exceptions require case-exact complete title words", () => {
+  for (const intro_md of [
+    "cargo Manifest",
+    "Cargo manifest",
+    "COURIER MANIFEST",
+    "SuperCargo Manifest",
+    "Courierish Manifest",
+    "Cargo  Manifest"
+  ]) {
+    const result = checkCopy({ title: "Active Matter", intro_md });
+    assert.equal(result.status, 1, intro_md + "\n" + result.stderr);
+    assert.match(result.stderr, /public provenance or workflow reference/);
+  }
+  const result = checkCopy({ title: "Active Matter", intro_md: "Manifestation and Cargo Manifesto are different words." });
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test("bare manifest and ordinary process wording remain rejected", () => {
+  for (const intro_md of [
+    "manifest",
+    "The image manifest records missing images.",
+    "The publication workflow records every step.",
+    "Cargo Manifest. A separate cargo manifest records the images."
+  ]) {
+    const result = checkCopy({ title: "Active Matter", intro_md });
+    assert.equal(result.status, 1, intro_md + "\n" + result.stderr);
+    assert.match(result.stderr, /public provenance or workflow reference/);
   }
 });
 

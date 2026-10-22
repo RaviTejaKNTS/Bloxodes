@@ -23,7 +23,8 @@ import { publicCopyFindings } from "./check-public-copy";
 import { assertRobloxCollectionCopy } from "./roblox-collection-copy";
 import { assertEditorialSlug, bundlePath, selectBundlePages, resolveCollectionOrders, assertCollectionFinalOrder, assertCollectionMissingImages } from "../shared/roblox-wiki-bundle";
 import { ensureContentUniverse, previewContentUniverse } from "../shared/roblox-wiki-universe";
-import type { ContentOptions } from "./wiki-content-options";
+import { assertApprovedHubCoverScope, type ContentOptions } from "./wiki-content-options";
+import { validateRobloxHubCover } from "../shared/roblox-hub-cover";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const limitLiveImage = createPublishLimiter();
@@ -51,7 +52,7 @@ export function checkCopy(value: Record<string, unknown>, file: string) {
   if (findings.length) throw new Error(findings.map(row => `${row.field}: ${row.rule}. Rewrite: ${row.excerpt}`).join("\n"));
 }
 
-async function planHubCover(universeId: number, localFile?: string) {
+async function planHubCover(universeId: number, localFile?: string, approvedSha256?: string) {
   const url = await officialUniverseCover(universeId);
   if (!url) throw new Error("Official hub cover is unavailable. Retry after Roblox supplies the 768x432 thumbnail.");
   const officialBytes = await retryPublishNetwork(async () => {
@@ -60,14 +61,10 @@ async function planHubCover(universeId: number, localFile?: string) {
     return Buffer.from(await response.arrayBuffer());
   });
   const bytes = localFile ? await fs.readFile(localFile) : officialBytes;
-  if (hash(bytes) !== hash(officialBytes)) throw new Error("hub.coverImage differs from the current official thumbnail. Download it again or omit coverImage to use the official image.");
-  const metadata = await sharp(bytes).metadata();
-  const types: Record<string, string> = { png: "image/png", jpeg: "image/jpeg", webp: "image/webp", avif: "image/avif" };
-  if (!metadata.format || !types[metadata.format] || metadata.width !== 768 || metadata.height !== 432 || bytes.length > 1_000_000) {
-    throw new Error("Hub cover must be a readable official 768x432 PNG, JPEG, WebP or AVIF under 1 MB. Replace hub.coverImage.");
-  }
-  const key = `${universeId}/hubs/cover-${hash(bytes).slice(0, 16)}.${metadata.format === "jpeg" ? "jpg" : metadata.format}`;
-  return { bytes, key, mime: types[metadata.format], url: resolveWikiMediaUrl(key)! };
+  const cover = await validateRobloxHubCover(bytes, officialBytes, approvedSha256);
+  if (approvedSha256 !== undefined) console.log(`APPROVED hub cover: --approved-hub-cover-sha256=${cover.sha256}, universe=${universeId}`);
+  const key = `${universeId}/hubs/cover-${cover.sha256.slice(0, 16)}.${cover.format === "jpeg" ? "jpg" : cover.format}`;
+  return { bytes, key, mime: cover.mime, url: resolveWikiMediaUrl(key)! };
 }
 
 async function collectionIdentity(plan: CollectionPlan) {
@@ -161,6 +158,7 @@ export async function publishBundle(options: ContentOptions) {
   const bundle = bundleSchema.parse(raw);
   if (!bundle.hub && !bundle.collections?.length) throw new Error("bundle.json must include a hub and/or at least one collection.");
   const selected = await selectBundlePages(bundle, options.only, async file => json(await bundlePath(root, file)));
+  assertApprovedHubCoverScope(options, bundle.contract, selected.hub);
   const db = supabaseAdmin();
   const failures: string[] = [];
   async function check<T>(label: string, work: () => Promise<T>): Promise<T | undefined> {
@@ -196,7 +194,7 @@ export async function publishBundle(options: ContentOptions) {
       checkCopy(final as unknown as Record<string, unknown>, file);
       return final;
     });
-    cover = await check("hub cover image readiness", async () => planHubCover(bundle.game.universeId, selected.hub!.coverImage ? await bundlePath(root, selected.hub!.coverImage) : undefined));
+    cover = await check("hub cover image readiness", async () => planHubCover(bundle.game.universeId, selected.hub!.coverImage ? await bundlePath(root, selected.hub!.coverImage) : undefined, options.approvedHubCoverSha256));
     await check("official hub icon and thumbnail", async () => {
       if (!hasOfficialUniverseMedia(universe ?? {})) {
         officialMedia = await fetchOfficialUniverseMedia(bundle.game.universeId);

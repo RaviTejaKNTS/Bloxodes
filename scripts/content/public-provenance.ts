@@ -1,5 +1,7 @@
 // Public copy must not talk about where facts came from or how the page was made.
 // Match process-voice phrases, not bare words: games use "Research" and "Source" as real terms.
+const MANIFEST_PATTERN = /\bmanifest\b/i;
+
 const PUBLIC_PROVENANCE_PATTERNS = [
   /\b(?:our|my|cited|approved|trusted|reliable|verified)\s+sources?\b/i,
   /\baccording\s+to\s+(?:the\s+|our\s+|my\s+|available\s+|community\s+|official\s+)?sources?\b/i,
@@ -10,14 +12,21 @@ const PUBLIC_PROVENANCE_PATTERNS = [
   /\bresearch\s+(?:shows|showed|suggests|suggested|found|finds|confirms|confirmed|indicates|indicated|notes)\b/i,
   /\bbased\s+on\s+(?:our\s+|my\s+)?research\b/i,
   /\bwe\s+(?:have\s+)?(?:researched|verified|cross-checked|sourced)\b/i,
-  /\bmanifest\b/i,
+  MANIFEST_PATTERN,
   /\bworkflow\b/i
 ];
 
 export function publicProvenanceMatch(value: string): RegExpExecArray | null {
   for (const pattern of PUBLIC_PROVENANCE_PATTERNS) {
-    const match = pattern.exec(value);
-    if (match) return match;
+    // Mask only case-exact game titles for the manifest check, preserving diagnostic offsets.
+    const candidate = pattern === MANIFEST_PATTERN
+      ? value.replace(/\b(?:Cargo|Courier) Manifest\b/g, title => " ".repeat(title.length))
+      : value;
+    const match = pattern.exec(candidate);
+    if (match) {
+      match.input = value;
+      return match;
+    }
   }
   return null;
 }
