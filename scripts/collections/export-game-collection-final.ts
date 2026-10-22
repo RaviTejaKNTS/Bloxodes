@@ -8,6 +8,9 @@ import { repoPath } from "@/lib/paths";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
+// Supabase returns at most 1,000 rows per request, so large collections are read in pages.
+const ITEM_PAGE_SIZE = 1000;
+
 type CliOptions = {
   game: string | null;
   collection: string | null;
@@ -273,14 +276,20 @@ async function main() {
   if (datasetError) throw new Error(`Failed to read collection dataset: ${datasetError.message}`);
   if (!datasetData) throw new Error(`Published dataset ${row.published_dataset_id} is missing.`);
   const dataset = datasetData as CollectionDatasetRow;
-  const { data: itemData, error: itemError } = await sb
-    .from("wiki_collection_items")
-    .select("item_slug,item_name,section,sort_order,image_key,fields_json")
-    .eq("dataset_id", dataset.id)
-    .order("sort_order")
-    .order("item_slug");
-  if (itemError) throw new Error(`Failed to read collection items: ${itemError.message}`);
-  const items = (itemData ?? []) as CollectionItemRow[];
+  const items: CollectionItemRow[] = [];
+  for (let from = 0; ; from += ITEM_PAGE_SIZE) {
+    const { data: itemData, error: itemError } = await sb
+      .from("wiki_collection_items")
+      .select("item_slug,item_name,section,sort_order,image_key,fields_json")
+      .eq("dataset_id", dataset.id)
+      .order("sort_order")
+      .order("item_slug")
+      .range(from, from + ITEM_PAGE_SIZE - 1);
+    if (itemError) throw new Error(`Failed to read collection items: ${itemError.message}`);
+    const page = (itemData ?? []) as CollectionItemRow[];
+    items.push(...page);
+    if (page.length < ITEM_PAGE_SIZE) break;
+  }
   if (items.length !== Number(dataset.item_count) || items.length !== Number(row.item_count)) {
     throw new Error(`${row.code} item count mismatch: page=${row.item_count} dataset=${dataset.item_count} rows=${items.length}.`);
   }
