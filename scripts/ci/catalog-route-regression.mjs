@@ -4,7 +4,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { setTimeout as pause } from "node:timers/promises";
 import { load } from "cheerio";
-import { chromium, expect } from "@playwright/test";
+import { chromium, expect as playwrightExpect } from "@playwright/test";
 
 if (process.env.GITHUB_ACTIONS !== "true") throw new Error("Built catalog regression runs only on GitHub.");
 if (process.platform === "win32") throw new Error("Catalog regression requires POSIX process groups.");
@@ -16,6 +16,9 @@ fs.mkdirSync(path.dirname(stateFile), { recursive: true });
 fs.writeFileSync(stateFile, "{}");
 const report = { sha: process.env.BLOXODES_BUILD_SHA, routes: [], browser: [], failures: [], passed: false };
 const requestTimeout = 60_000;
+// This script runs directly in Node, outside the Playwright test runner.
+// page.setDefaultTimeout does not change expect's separate five-second default.
+const expect = playwrightExpect.configure({ timeout: requestTimeout });
 function withDeadline(promise, milliseconds, label) {
   let timer;
   return Promise.race([promise, new Promise((_, reject) => {
@@ -25,6 +28,7 @@ function withDeadline(promise, milliseconds, label) {
 const fetchLocal = (target, options = {}) => fetch(`${base}${target}`, { ...options, signal: AbortSignal.timeout(requestTimeout) });
 let logs = "";
 let browser;
+let browserContext;
 const server = spawn(process.execPath, ["scripts/ci/start-web.mjs"], {
   env: { ...process.env, TEST_BASE_URL: base, CATALOG_ROUTE_FIXTURES: "1", CATALOG_FIXTURE_STATE: stateFile,
     NODE_OPTIONS: `--import=${path.join(root, "scripts/ci/catalog-fetch-fixture.mjs")}` },
@@ -128,7 +132,10 @@ try {
     assert.equal((await fetchPage(path)).status, 404, path);
   }
   browser = await chromium.launch({ headless: true });
-  const page = await browser.newPage();
+  browserContext = await browser.newContext();
+  // Standalone scripts do not inherit the test runner's retain-on-failure trace.
+  await browserContext.tracing.start({ screenshots: true, snapshots: true });
+  const page = await browserContext.newPage();
   page.setDefaultTimeout(requestTimeout);
   await page.route("**/*", route => new URL(route.request().url()).origin === base ? route.continue() : route.abort());
   // Test hydrated URL filters independently of the static HTML seed. Every
@@ -136,6 +143,9 @@ try {
   for (const [index, family] of families.entries()) {
     const query = family.key === "songs" ? "1000" : family.key === "meshes" ? "5000" : "3001";
     const sort = family.key === "meshes" ? "name" : "popular";
+    const defaultSort = family.key === "meshes" ? "featured" : "recommended";
+    const firstId = family.key === "songs" ? 1000 : family.key === "decals" ? 3000 : 5000;
+    const defaultIds = Array.from({ length: family.size }, (_, index) => firstId + index);
     const waitForFilteredApi = (number, q, sortKey) => page.waitForResponse(response => {
       const actual = new URL(response.url());
       const expected = new URL(family.api, base);
@@ -149,21 +159,27 @@ try {
     assert.equal(response?.status(), 200);
     assert.equal((await apiPromise).status(), 200);
     const cards = page.locator('#article-body [data-journey-item]:not([hidden])').filter({ has: page.locator("article") });
+    const renderedIds = async () => (await cards.locator("h2").allTextContents()).map(title => Number(title.trim().match(/(\d+)$/)?.[1]));
     await expect(cards).toHaveCount(1);
     await expect(cards.first()).toContainText(query);
     await expect(page.locator('#article-body input[type="search"]')).toHaveValue(query);
     await expect(page.locator("#article-body select")).toHaveValue(sort);
-    // Clearing restores unfiltered cards. A multi-page subset with alphabetic
-    // ordering reverses default membership, making stale page-1 cards visible.
+    // Clear must commit the bare URL and restore the actual default results,
+    // not just reset the local form fields while navigation is still pending.
+    // A remounted unfiltered browser may use its HTML seed without an API call.
     await page.getByRole("button", { name: "Clear", exact: true }).click();
     await expect(page).toHaveURL(`${base}${family.path}`);
+    await expect(page.locator('#article-body input[type="search"]')).toHaveValue("");
+    await expect(page.locator("#article-body select")).toHaveValue(defaultSort);
+    await expect(page.getByRole("button", { name: "Clear", exact: true })).toHaveCount(0);
     await expect(cards).toHaveCount(family.size);
+    await expect.poll(renderedIds).toEqual(defaultIds);
+    // A multi-page subset with alphabetic ordering reverses default membership,
+    // making stale page-1 cards visible.
     const subsetQuery = "Subset";
     const subsetSort = family.key === "songs" ? "title_asc" : family.key === "decals" ? "name_asc" : "name";
     const subsetTotal = family.key === "meshes" ? 60 : 32;
-    const firstId = family.key === "songs" ? 1000 : family.key === "decals" ? 3000 : 5000;
     const orderedIds = Array.from({ length: subsetTotal }, (_, index) => firstId + subsetTotal - 1 - index);
-    const renderedIds = async () => (await cards.locator("h2").allTextContents()).map(title => Number(title.trim().match(/(\d+)$/)?.[1]));
     await page.locator('#article-body input[type="search"]').fill(subsetQuery);
     await page.locator("#article-body select").selectOption(subsetSort);
     const firstPageApi = waitForFilteredApi(1, subsetQuery, subsetSort);
@@ -188,9 +204,11 @@ try {
     await expect(page.locator('#article-body input[type="search"]')).toHaveValue(subsetQuery);
     await expect(page.locator("#article-body select")).toHaveValue(subsetSort);
     report.browser.push({ path: family.path, filter: query, sort, pagination: true,
+      clear: { sort: defaultSort, expectedIds: defaultIds },
       page2: { query: subsetQuery, sort: subsetSort, total: subsetTotal, expectedIds } });
     if (index === 0) await page.screenshot({ path: "tmp/test-reports/catalog-page-2.png", fullPage: true });
   }
+  await withDeadline(browserContext.tracing.stop(), 10_000, "Trace stop"); browserContext = undefined;
   await withDeadline(browser.close(), 10_000, "Browser close"); browser = undefined;
   for (const failure of ["PGRST003", "57014", "transport", "PGRST103"]) {
     fs.writeFileSync(stateFile, JSON.stringify({ failure }));
@@ -217,7 +235,13 @@ try {
   throw error;
 } finally {
   try {
-    if (browser) await withDeadline(browser.close(), 10_000, "Browser close");
+    try {
+      if (browserContext) await withDeadline(browserContext.tracing.stop({
+        path: "tmp/test-reports/catalog-route-regression-trace.zip"
+      }), 10_000, "Failure trace");
+    } finally {
+      if (browser) await withDeadline(browser.close(), 10_000, "Browser close");
+    }
   } catch (error) {
     report.passed = false; report.cleanupError = error.message; throw error;
   } finally {
