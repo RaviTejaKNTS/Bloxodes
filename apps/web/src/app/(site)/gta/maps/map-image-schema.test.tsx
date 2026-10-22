@@ -6,6 +6,7 @@ import Gta5MapPage from "./gta5/page";
 import GtaInteractiveMapPage from "./[slug]/page";
 import type { GameExtendedPage } from "@/lib/game-page-data";
 
+vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/components/games/GameRelatedLinks", () => ({ GameRelatedLinks: () => null }));
 vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: () => null }));
@@ -31,3 +32,4 @@ describe("GTA map image schema", () => {
     }
   });
 });
+

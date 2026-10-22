@@ -4,6 +4,7 @@ import { DedicatedToolPage, buildDedicatedToolMetadata } from "../DedicatedToolP
 import { GameToolPageLayout } from "../../games/GameToolPage";
 import type { ToolContent } from "@/lib/tools";
 const { readTool } = vi.hoisted(() => ({ readTool: vi.fn() }));
+vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
 vi.mock("@/lib/tools", () => ({ getToolContentWithDevFallback: readTool }));
 vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: ({ entityType }: { entityType: string }) => <span data-comment-type={entityType}>Comments</span> }));
 vi.mock("@/components/more-content", () => ({ MoreTools: () => <span>Roblox related tools</span> }));
@@ -62,3 +63,4 @@ describe("shared dedicated tool contract", () => {
  });
 
 });
+

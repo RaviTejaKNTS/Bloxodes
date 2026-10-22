@@ -1,3 +1,4 @@
+import { getGameLandingForLinks } from "@/lib/game-landing";
 import { supabaseAdmin } from "@/lib/supabase";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -54,11 +55,15 @@ const platforms = [
 export default async function GamesPage() {
   const minecraft = await getMinecraftWikiPageBySlug("minecraft-java");
   const publishedPlatforms = minecraft
-    ? [...platforms.slice(0, 1), { href: "/minecraft", label: "Minecraft", image: resolveMinecraftWikiCoverImage(minecraft) }, ...platforms.slice(1)]
-    : platforms;
+    ? [...platforms.slice(0, 1).map(platform => ({ ...platform })), { href: "/minecraft", label: "Minecraft", image: resolveMinecraftWikiCoverImage(minecraft) }, ...platforms.slice(1).map(platform => ({ ...platform }))]
+    : platforms.map(platform => ({ ...platform }));
   const { data: extraGames, error } = await supabaseAdmin().from("games").select("namespace,title,cover_image,hero_image").is("parent_id", null).eq("is_published",true).not("namespace","in","(gta,red-dead,minecraft)").order("title");
   if (error) throw new Error(`Games directory read failed: ${error.message}`);
   publishedPlatforms.push(...(extraGames ?? []).map(game => ({ href: `/${game.namespace}`, label: game.title, image: game.cover_image || game.hero_image || "/Bloxodes.png" })));
+  const landingPaths = new Map(await Promise.all(publishedPlatforms
+    .filter(platform => !["/wiki", "/puzzles"].includes(platform.href))
+    .map(async platform => [platform.href, (await getGameLandingForLinks(platform.href.slice(1))).path] as const)));
+  for (const platform of publishedPlatforms) platform.href = landingPaths.get(platform.href) ?? platform.href;
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [

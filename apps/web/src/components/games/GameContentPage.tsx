@@ -1,4 +1,6 @@
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { getGameLandingForLinks } from "@/lib/game-landing";
+import { gameBreadcrumbs } from "@/lib/game-root-page";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -35,7 +37,8 @@ export async function GameContentPage({ page, children }: { page: GameExtendedPa
   const image = resolveGameCoverImage(page);
   const validFaqs = (page.faq_json ?? []).filter(faq => faq?.q?.trim() && faq?.a?.trim());
   const faqs = await Promise.all(validFaqs.map(async (faq, index) => ({ id: `${page.id}-faq-${index}`, question: faq.q, answer: renderPageContentNodes(await renderMarkdown(faq.a), `${page.id}-answer-${index}`) })));
-  const breadcrumbs = [{ label: "Home", href: "/" }, { label: page.namespace.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" "), href: `/${page.namespace}` }, { label: page.title }];
+  const landing = await getGameLandingForLinks(page.namespace);
+  const breadcrumbs = gameBreadcrumbs([{ label: "Home", href: "/" }, { label: page.namespace.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" "), href: landing.path }, { label: page.title }], page.canonical_path);
   const graph = [
     { "@type": "WebPage", name: page.title, url: SITE_URL + page.canonical_path, description: page.meta_description, dateModified: page.updated_at, image: image || undefined },
     breadcrumbJsonLd(breadcrumbs.map(item => ({ name: item.label, url: SITE_URL + (item.href || page.canonical_path) }))),

@@ -1,3 +1,4 @@
+import { getGameLandingForLinks } from "@/lib/game-landing";
 import { listPublishedGtaChecklists } from "@/lib/gta-checklists";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 import { ChecklistIndexPage } from "@/components/checklists/ChecklistIndexPage";
@@ -9,8 +10,9 @@ const RELATED_LINKS = [
   { href: "/checklists", title: "Roblox checklists" }
 ];
 export async function loadGtaChecklistsPage(page: number) {
-  const { checklists, total } = await listPublishedGtaChecklists(page);
-  return { cards: checklists.map(row => ({
+  const [{ checklists, total }, landing] = await Promise.all([listPublishedGtaChecklists(page), getGameLandingForLinks("gta")]);
+  const relatedLinks = RELATED_LINKS.map(link => link.href === "/gta" ? { ...link, href: landing.path } : link).filter((link, index, links) => links.findIndex(other => other.href === link.href) === index);
+  return { relatedLinks, cards: checklists.map(row => ({
     id: row.id, slug: engagementProgressKey(GTA_CHECKLISTS.progressNamespace, row.slug), href: `/gta/checklists/${row.slug}`, title: row.title,
     summary: row.seo_description ?? "", gameName: row.game_title, coverImage: row.image ?? null,
     updatedAt: row.content_updated_at ?? row.updated_at,
@@ -18,5 +20,5 @@ export async function loadGtaChecklistsPage(page: number) {
   })), total, totalPages: Math.max(1, Math.ceil(total / 20)) };
 }
 export function renderGtaChecklistsPage(props: Awaited<ReturnType<typeof loadGtaChecklistsPage>> & { currentPage: number }) {
-  return <ChecklistIndexPage {...props} showHero={props.currentPage === 1} config={GTA_CHECKLISTS} relatedLinks={RELATED_LINKS} />;
+  return <ChecklistIndexPage {...props} showHero={props.currentPage === 1} config={GTA_CHECKLISTS} relatedLinks={props.relatedLinks} />;
 }

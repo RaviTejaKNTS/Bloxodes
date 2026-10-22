@@ -1,3 +1,5 @@
+import { getGameLandingForLinks } from "@/lib/game-landing";
+import { gameBreadcrumbs } from "@/lib/game-root-page";
 import { getGameExtendedPage } from "@/lib/game-extra-pages";
 import { gameContentMetadata, GameContentPage } from "@/components/games/GameContentPage";
 import { GameMap } from "@/components/games/GameMap";
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaInteractiveMapPageData>>>, image: string | null | undefined) {
+function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaInteractiveMapPageData>>>, image: string | null | undefined, landingPath: string) {
   const { config, layers, guides, hubTitle } = data;
   const canonical = SITE_URL + config.route;
   const listItems = [
@@ -58,12 +60,12 @@ function structuredData(data: NonNullable<Awaited<ReturnType<typeof getGtaIntera
         image,
         author: null
       }),
-      breadcrumbJsonLd([
-        { name: "Home", url: SITE_URL },
-        { name: "GTA", url: SITE_URL + "/gta" },
-        { name: hubTitle, url: SITE_URL + data.hubPath },
-        { name: "Interactive map", url: canonical }
-      ]),
+      breadcrumbJsonLd(gameBreadcrumbs([
+        { label: "Home", href: "/" },
+        { label: "GTA", href: landingPath },
+        { label: hubTitle, href: data.hubPath },
+        { label: "Interactive map" }
+      ], config.route).map(item => ({ name: item.label, url: item.href === "/" ? SITE_URL : SITE_URL + (item.href || config.route) }))),
       {
         "@type": "ItemList",
         name: config.title + " map guides",
@@ -89,7 +91,8 @@ export default async function GtaInteractiveMapPage({ params }: PageProps) {
   }
   const shared = await getGameExtendedPage("gta", data.config.route, "map");
   if (!shared) notFound();
-  const jsonLd = structuredData(data, shared.image);
+  const landing = await getGameLandingForLinks("gta");
+  const jsonLd = structuredData(data, shared.image, landing.path);
   const collectionLayers = data.layers.filter((layer) => layer.collectionCode && layer.guideUrl);
   const sourcePages = Array.from(new Map(
     data.layers.map((layer) => [layer.sourceUrl, { title: layer.sourceTitle, url: layer.sourceUrl }])

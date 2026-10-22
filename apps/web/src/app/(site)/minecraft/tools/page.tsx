@@ -1,3 +1,4 @@
+import { getGameLandingForLinks } from "@/lib/game-landing";
 import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { IndexPageStats } from "@/components/IndexPageStats";
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default async function MinecraftToolsPage() {
+  const landing = await getGameLandingForLinks("minecraft");
   const tools = (await listMinecraftTools()).filter(tool => isMinecraftToolSlug(tool.slug));
   const latestUpdatedAt = tools.reduce<string | null>((latest, tool) => {
     const candidate = resolveModifiedAt(tool);
@@ -51,7 +53,7 @@ export default async function MinecraftToolsPage() {
     <ToolPageLayout title="Minecraft tools and calculators" canonicalPath="/minecraft/tools">
     <div className="space-y-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
-      <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Minecraft", href: "/minecraft" }, { label: "Tools" }]} />
+      <PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Minecraft", href: landing.path }, { label: "Tools" }]} />
       <header className="space-y-4">
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Minecraft tools and calculators</h1>
         <UpdatedTimestamp value={latestUpdatedAt} />

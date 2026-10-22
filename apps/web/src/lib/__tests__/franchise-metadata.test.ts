@@ -6,6 +6,7 @@ import { gameRootWikiPage } from "../game-root-page";
 import { ROBLOX_CHECKLISTS, GTA_CHECKLISTS } from "../engagement/config";
 import type { SharedGameGame, SharedGameWikiPage, SharedGameWikiCollectionPage } from "../shared-game-reader";
 
+vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/shared-game-reader", () => ({ createGameReader: () => ({ getPublishedSharedGameWikiCollectionRuntime: async () => ({ document: { items: [{ system: { image: null } }, { system: { image: "https://media.bloxodes.com/item.webp" } }] }, config: {} }) }) }));
 vi.mock("@/app/(site)/wiki/collections/games/generic", () => ({ prepareGameCollectionDocument: () => ({ totalPages: 2 }), renderGameCollectionPage: vi.fn() }));
@@ -23,11 +24,12 @@ describe("franchise social image adapters", () => {
     }
   });
   it("uses the root's artwork and identity for a namespace landing page", () => {
-    const game = { id: "root", namespace: "example", slug: "example", title: "Example", kind: "franchise", cover_image: "https://media.bloxodes.com/root-cover.webp", hero_image: "https://media.bloxodes.com/root-square.webp", description_md: "Example games.", updated_at: "2026-01-01" } as SharedGameGame;
+    const game = { id: "root", namespace: "example", slug: "example", title: "Example", kind: "franchise", parent_id: null, is_published: true, cover_image: "https://media.bloxodes.com/root-cover.webp", hero_image: "https://media.bloxodes.com/root-square.webp", description_md: "Example games.", updated_at: "2026-01-01" } as SharedGameGame;
     const page = gameRootWikiPage(game);
     expect(page).toMatchObject({ game_id: "root", canonical_path: "/example", game_kind: "franchise", game_hero_image: game.hero_image });
     expect(gameWikiMetadata(page).openGraph).toMatchObject({ images: [game.cover_image], url: "https://bloxodes.com/example" });
     const wiki = { ...page, id: "wiki", canonical_path: "/example/wiki", description_md: "Full wiki copy.", tips_md: "Gameplay tips." };
+    expect(gameWikiMetadata(gameRootWikiPage(game, wiki)).alternates?.canonical).toBe("https://bloxodes.com/example/wiki");
     expect(gameRootWikiPage(game, wiki)).toMatchObject({ id: "wiki", canonical_path: "/example", description_md: wiki.description_md, tips_md: wiki.tips_md });
     expect(gameRootWikiPage(game, { ...wiki, game_id: "sibling" } as SharedGameWikiPage).description_md).toBe(game.description_md);
   });
@@ -38,3 +40,4 @@ describe("franchise social image adapters", () => {
     expect(checklistMetadata(data, ROBLOX_CHECKLISTS).twitter).toMatchObject({ card: "summary" });
   });
 });
+

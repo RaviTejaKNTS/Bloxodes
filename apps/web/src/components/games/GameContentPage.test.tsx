@@ -5,6 +5,7 @@ import { GameContentPage, gameContentMetadata } from "./GameContentPage";
 import { GameCatalog } from "./GameCatalog";
 import type { GameExtendedPage } from "@/lib/game-page-data";
 
+vi.mock("@/lib/game-landing", () => ({ getGameLandingForLinks: async (namespace: string) => ({ path: `/${namespace}/wiki` }) }));
 vi.mock("server-only", () => ({}));
 vi.mock("./GameRelatedLinks", () => ({ GameRelatedLinks: () => <a href="/example/wiki/child">Child wiki</a> }));
 vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: () => null }));
@@ -26,3 +27,4 @@ describe("franchise reference page structure", () => {
     expect(gameContentMetadata(page).openGraph).toMatchObject({ images: [page.image] });
   });
 });
+

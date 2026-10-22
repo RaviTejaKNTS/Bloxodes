@@ -1,3 +1,4 @@
+import { getGameLandingForLinks, gameLandingSitemapEntries } from "@/lib/game-landing";
 import { NextResponse } from "next/server";
 import { buildMinecraftWikiPath, buildMinecraftCollectionPath, listPublishedMinecraftWikiPages, listPublishedMinecraftCollections, listPublishedMinecraftTools } from "@/lib/minecraft";
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
@@ -12,19 +13,16 @@ function rowLastmod(row: { content_updated_at?: string | null; updated_at?: stri
 
 export async function GET() {
   try {
-    const [wikis, collections, tools] = await Promise.all([
-      listPublishedMinecraftWikiPages(), listPublishedMinecraftCollections(), listPublishedMinecraftTools()
+    const [wikis, collections, tools, landing] = await Promise.all([
+      listPublishedMinecraftWikiPages(), listPublishedMinecraftCollections(), listPublishedMinecraftTools(), getGameLandingForLinks("minecraft")
     ]);
     const pages: SitemapUrlSetEntry[] = [];
-    pages.push(
-      { loc: withSiteUrl("/minecraft"), changefreq: "weekly", priority: "0.9", lastmod: rowLastmod(wikis[0] ?? {}) },
-      { loc: withSiteUrl("/minecraft/wiki"), changefreq: "weekly", priority: "0.9", lastmod: rowLastmod(wikis[0] ?? {}) }
-    );
+    pages.push(...gameLandingSitemapEntries(landing));
     for (const wiki of wikis.filter(page => page.slug !== "minecraft")) pages.push({ loc: withSiteUrl(buildMinecraftWikiPath(wiki.slug)), changefreq: "weekly", priority: "0.9", lastmod: rowLastmod(wiki) });
     if (tools.length) pages.push({ loc: withSiteUrl("/minecraft/tools"), changefreq: "weekly", priority: "0.8" });
     for (const page of collections) pages.push({ loc: withSiteUrl(buildMinecraftCollectionPath(page.wiki_slug, page.collection_slug)), changefreq: "weekly", priority: "0.8", lastmod: rowLastmod(page) });
     for (const page of tools) pages.push({ loc: withSiteUrl(`/minecraft/tools/${page.slug}`), changefreq: "weekly", priority: "0.8", lastmod: rowLastmod(page) });
-    return new NextResponse(buildSitemapUrlSetXml(pages), { headers: { "content-type": "application/xml" } });
+    return new NextResponse(buildSitemapUrlSetXml([...new Map(pages.map(page => [page.loc, page])).values()]), { headers: { "content-type": "application/xml" } });
   } catch (error) {
     console.error("Failed to build Minecraft sitemap", error);
     return new NextResponse("Minecraft sitemap temporarily unavailable", { status: 503, headers: { "Retry-After": "60" } });

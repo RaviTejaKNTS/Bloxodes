@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
-import { getGameRoot, getGameWikiByPath } from "@/lib/game-registry";
+import { getGameLanding } from "@/lib/game-landing";
 import { gameRootWikiPage } from "@/lib/game-root-page";
 import { gameWikiMetadata } from "@/components/games/GameWikiPage";
 import { renderGameWikiPage } from "@/components/games/GameWikiPage.server";
 
 export const revalidate = 21600;
 async function load() {
-  const game = await getGameRoot("red-dead");
+  const { root: game, wiki, hasIndependentRoot } = await getGameLanding("red-dead");
   if (!game) notFound();
-  return gameRootWikiPage(game, await getGameWikiByPath("red-dead", "/red-dead/wiki"));
+  return gameRootWikiPage(game, wiki, hasIndependentRoot);
 }
 export async function generateMetadata() { return gameWikiMetadata(await load()); }
 export default async function Page() {

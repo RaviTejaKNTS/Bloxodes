@@ -1,4 +1,6 @@
 import { PageSidebar } from "@/components/PageSidebar";
+import { getGameLandingForLinks } from "@/lib/game-landing";
+import { gameBreadcrumbs } from "@/lib/game-root-page";
 import { SocialShare } from "@/components/SocialShare";
 import { GameRelatedLinks } from "./GameRelatedLinks";
 import { Fragment } from "react";
@@ -16,6 +18,8 @@ import { SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { CopyGameCode } from "./CopyGameCode";
 
 export async function GameCodePage({ page, namespaceTitle }: { page: CodePage; namespaceTitle: string }) {
+  const landing = await getGameLandingForLinks(page.namespace);
+  const breadcrumbs = gameBreadcrumbs([{ label: "Home", href: "/" }, { label: namespaceTitle, href: landing.path }, { label: "Codes", href: `/${page.namespace}/codes` }, { label: page.title }], page.canonical_path);
   const { data: codes, error } = await supabaseAdmin().from("game_codes").select("code,rewards_text,status").eq("code_page_id", page.id).order("verified_at", { ascending: false, nullsFirst: false });
   if (error) throw new Error(`Game codes read failed: ${error.message}`);
   const sections = [["", page.intro_md], ["How to redeem", page.redeem_md], ["Rewards", page.rewards_md], ["Troubleshooting", page.troubleshoot_md], ["Where to find codes", page.find_codes_md]] as const;
@@ -41,7 +45,7 @@ export async function GameCodePage({ page, namespaceTitle }: { page: CodePage; n
   }
   return <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose"><div className="min-w-0 space-y-8">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": [webPageJsonLd({ siteUrl: SITE_URL, slug: page.canonical_path.slice(1), title: page.title, description: page.meta_description ?? "", image: page.image, author: null, publishedAt: page.published_at, updatedAt: page.updated_at }), ...(validFaqs.length ? [{ "@type": "FAQPage", mainEntity: validFaqs.map(faq => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }] : [])] }) }} />
-    <header className="space-y-4"><PageBreadcrumb items={[{ label: "Home", href: "/" }, { label: namespaceTitle, href: `/${page.namespace}` }, { label: "Codes", href: `/${page.namespace}/codes` }, { label: page.title }]} /><h1 className="text-4xl font-semibold md:text-5xl">{page.title}</h1><UpdatedTimestamp value={page.updated_at} /></header>
+    <header className="space-y-4"><PageBreadcrumb items={breadcrumbs} /><h1 className="text-4xl font-semibold md:text-5xl">{page.title}</h1><UpdatedTimestamp value={page.updated_at} /></header>
     <article id="article-body" className="journey-content-stream journey-content-stream--prose space-y-8">
       <ContentCopyNodes nodes={copy[0].nodes} group="game-codes-intro" className="max-w-3xl" />
       {codeRows("active")}

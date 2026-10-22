@@ -1,3 +1,4 @@
+import { getGameLandingForLinks, gameLandingSitemapEntries } from "@/lib/game-landing";
 import { NextResponse } from "next/server";
 import {
   buildRedDeadCollectionPath,
@@ -19,15 +20,15 @@ function rowLastmod(row: { content_updated_at?: string | null; updated_at?: stri
 
 export async function GET() {
   try {
-    const [wikiPages, collections] = await Promise.all([
+    const [wikiPages, collections, landing] = await Promise.all([
       listPublishedRedDeadWikiPages(),
-      listPublishedRedDeadWikiCollections()
+      listPublishedRedDeadWikiCollections(),
+      getGameLandingForLinks("red-dead")
     ]);
 
     const pages: SitemapUrlSetEntry[] = [
       { loc: withSiteUrl("/games"), changefreq: "weekly", priority: "0.8" },
-      { loc: withSiteUrl("/red-dead"), changefreq: "weekly", priority: "0.9" },
-      { loc: withSiteUrl("/red-dead/wiki"), changefreq: "weekly", priority: "0.9" },
+      ...gameLandingSitemapEntries(landing),
       ...wikiPages.map((page) => ({
         loc: withSiteUrl(buildRedDeadWikiPath(page.slug)),
         changefreq: "weekly" as const,
@@ -42,7 +43,7 @@ export async function GET() {
       }))
     ];
 
-    return new NextResponse(buildSitemapUrlSetXml(pages), { headers: { "content-type": "application/xml" } });
+    return new NextResponse(buildSitemapUrlSetXml([...new Map(pages.map(page => [page.loc, page])).values()]), { headers: { "content-type": "application/xml" } });
   } catch (error) {
     console.error("Failed to build Red Dead sitemap", error);
     return new NextResponse(buildSitemapUrlSetXml([]), { headers: { "content-type": "application/xml" } });
