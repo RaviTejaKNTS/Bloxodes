@@ -21,11 +21,13 @@ import {
 import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { supabaseAdmin } from "@/lib/supabase";
+import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
 import { DecalIdsBrowser } from "./DecalIdsBrowser";
 import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
 import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
 const PAGE_SIZE = DECAL_IDS_PAGE_SIZE;
+// Builds must not depend on live data, so load failures fall back to empty only while building.
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
 const DECAL_SOURCE_TABLE = "roblox_decal_ids";
 const BASE_SELECT_FIELDS =
@@ -225,70 +227,78 @@ export async function loadRobloxDecalIdsPageData(
   search: DecalResolvedSearch = { search: "", sort: DEFAULT_SORT },
   options: DecalListOptions = {}
 ): Promise<PageData> {
-  const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
-  const offset = (safePage - 1) * PAGE_SIZE;
-  const supabase = supabaseAdmin();
-  let query = supabase.from(DECAL_SOURCE_TABLE).select(BASE_SELECT_FIELDS, { count: "exact" });
+  try {
+    const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+    const offset = (safePage - 1) * PAGE_SIZE;
+    const supabase = supabaseAdmin();
+    let query = supabase.from(DECAL_SOURCE_TABLE).select(BASE_SELECT_FIELDS, { count: "exact" });
 
-  query = query
-    .eq("status", "active")
-    .eq("thumbnail_state", "Completed")
-    .not("thumbnail_url", "is", null)
-    .not("thumbnail_url", "ilike", "%/UnknownImage/%");
-
-  if (options.curated) {
-    query = query.not("curated_rank", "is", null);
-  }
-
-  if (options.preset === "crosshairs") {
-    query = query.ilike("name", "%crosshair%");
-  } else if (options.preset === "faces") {
-    query = query.overlaps("categories", ["faces"]);
-  } else if (options.preset === "decor") {
-    query = query.overlaps("categories", ["posters", "aesthetic", "textures"]);
-  } else if (options.preset === "jjs-images") {
-    query = query.overlaps("categories", ["anime", "memes", "characters", "posters"]);
-  } else if (options.preset === "spray-paint") {
-    query = query.not("curated_rank", "is", null);
-  }
-
-  const categorySlug = options.category ? normalizeCategorySlug(options.category) : null;
-  if (categorySlug) {
-    query = query.contains("categories", [categorySlug]);
-  }
-
-  if (search.search) {
-    const pattern = buildLoosePattern(search.search);
-    const orParts = [
-      `name.ilike.${pattern}`,
-      `description.ilike.${pattern}`,
-      `creator_name.ilike.${pattern}`
-    ];
-    if (/^\d+$/.test(search.search)) {
-      orParts.unshift(`asset_id.eq.${search.search}`, `texture_id.eq.${search.search}`);
-    }
-    query = query.or(orParts.join(","));
-  }
-
-  if (options.curated && search.sort === DEFAULT_SORT) {
     query = query
-      .order("curated_rank", { ascending: true, nullsFirst: false })
-      .order("curated_score", { ascending: false, nullsFirst: false })
-      .order("popularity_score", { ascending: false, nullsFirst: false });
-  } else {
-    query = applySort(query, search.sort);
-  }
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null)
+      .not("thumbnail_url", "ilike", "%/UnknownImage/%");
 
-  const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
-  if (error) {
+    if (options.curated) {
+      query = query.not("curated_rank", "is", null);
+    }
+
+    if (options.preset === "crosshairs") {
+      query = query.ilike("name", "%crosshair%");
+    } else if (options.preset === "faces") {
+      query = query.overlaps("categories", ["faces"]);
+    } else if (options.preset === "decor") {
+      query = query.overlaps("categories", ["posters", "aesthetic", "textures"]);
+    } else if (options.preset === "jjs-images") {
+      query = query.overlaps("categories", ["anime", "memes", "characters", "posters"]);
+    } else if (options.preset === "spray-paint") {
+      query = query.not("curated_rank", "is", null);
+    }
+
+    const categorySlug = options.category ? normalizeCategorySlug(options.category) : null;
+    if (categorySlug) {
+      query = query.contains("categories", [categorySlug]);
+    }
+
+    if (search.search) {
+      const pattern = buildLoosePattern(search.search);
+      const orParts = [
+        `name.ilike.${pattern}`,
+        `description.ilike.${pattern}`,
+        `creator_name.ilike.${pattern}`
+      ];
+      if (/^\d+$/.test(search.search)) {
+        orParts.unshift(`asset_id.eq.${search.search}`, `texture_id.eq.${search.search}`);
+      }
+      query = query.or(orParts.join(","));
+    }
+
+    if (options.curated && search.sort === DEFAULT_SORT) {
+      query = query
+        .order("curated_rank", { ascending: true, nullsFirst: false })
+        .order("curated_score", { ascending: false, nullsFirst: false })
+        .order("popularity_score", { ascending: false, nullsFirst: false });
+    } else {
+      query = applySort(query, search.sort);
+    }
+
+    const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
+    if (isCatalogPageOutOfRange(error, offset)) return { decals: [], total: 0, totalPages: 1 };
+    if (error) throw error;
+
+    const total = count ?? data?.length ?? 0;
+    if (!search.search && !categorySlug && !options.curated && !options.preset &&
+        (total === 0 || (!data?.length && offset < total))) {
+      throw new Error("Roblox decal catalog unexpectedly empty");
+    }
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+    return { decals: normalizeBaseDecalRows(data), total, totalPages };
+  } catch (error) {
     reportLoadError("Failed to load Roblox decal IDs", error);
-    return { decals: [], total: 0, totalPages: 1 };
+    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
+    throw error;
   }
-
-  const total = count ?? data?.length ?? 0;
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-
-  return { decals: normalizeBaseDecalRows(data), total, totalPages };
 }
 
 export async function loadGameDecalIdsPageData(
@@ -331,61 +341,68 @@ export async function loadGameDecalIdsPageData(
     }
 
     const { data, error, count } = await query.order("asset_id", { ascending: true }).range(offset, offset + PAGE_SIZE - 1);
-    if (!error && (count ?? 0) > 0) {
+    if (isCatalogPageOutOfRange(error, offset)) return { decals: [], total: 0, totalPages: 1 };
+    if (error) throw error;
+    if ((count ?? data?.length ?? 0) > 0) {
       const total = count ?? data?.length ?? 0;
       return { decals: normalizeBaseDecalRows(data), total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
     }
-    if (error) reportLoadError(`Failed to load mapped decal IDs for ${gameSlug}`, error);
   } catch (error) {
     reportLoadError(`Failed to load mapped decal IDs for ${gameSlug}`, error);
+    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
+    throw error;
   }
 
   if (!requiresTextureId) return loadRobloxDecalIdsPageData(page, search, { preset });
 
-  const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
-  const offset = (safePage - 1) * PAGE_SIZE;
-  const supabase = supabaseAdmin();
-  let fallback = supabase
-    .from(DECAL_SOURCE_TABLE)
-    .select(BASE_SELECT_FIELDS, { count: "exact" })
-    .eq("status", "active")
-    .eq("thumbnail_state", "Completed")
-    .not("thumbnail_url", "is", null)
-    .not("thumbnail_url", "ilike", "%/UnknownImage/%")
-    .not("texture_id", "is", null)
-    .gt("texture_id", 0);
+  try {
+    const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+    const offset = (safePage - 1) * PAGE_SIZE;
+    const supabase = supabaseAdmin();
+    let fallback = supabase
+      .from(DECAL_SOURCE_TABLE)
+      .select(BASE_SELECT_FIELDS, { count: "exact" })
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null)
+      .not("thumbnail_url", "ilike", "%/UnknownImage/%")
+      .not("texture_id", "is", null)
+      .gt("texture_id", 0);
 
-  if (preset === "crosshairs") {
-    fallback = fallback.ilike("name", "%crosshair%");
-  } else if (preset === "faces") {
-    fallback = fallback.overlaps("categories", ["faces"]);
-  } else if (preset === "decor") {
-    fallback = fallback.overlaps("categories", ["posters", "aesthetic", "textures"]);
-  } else if (preset === "jjs-images") {
-    fallback = fallback.overlaps("categories", ["anime", "memes", "characters", "posters"]);
-  } else if (preset === "spray-paint") {
-    fallback = fallback.not("curated_rank", "is", null);
-  }
+    if (preset === "crosshairs") {
+      fallback = fallback.ilike("name", "%crosshair%");
+    } else if (preset === "faces") {
+      fallback = fallback.overlaps("categories", ["faces"]);
+    } else if (preset === "decor") {
+      fallback = fallback.overlaps("categories", ["posters", "aesthetic", "textures"]);
+    } else if (preset === "jjs-images") {
+      fallback = fallback.overlaps("categories", ["anime", "memes", "characters", "posters"]);
+    } else if (preset === "spray-paint") {
+      fallback = fallback.not("curated_rank", "is", null);
+    }
 
-  if (search.search) {
-    const pattern = buildLoosePattern(search.search);
-    const orParts = [
-      `name.ilike.${pattern}`,
-      `description.ilike.${pattern}`,
-      `creator_name.ilike.${pattern}`
-    ];
-    if (/^\d+$/.test(search.search)) orParts.unshift(`asset_id.eq.${search.search}`, `texture_id.eq.${search.search}`);
-    fallback = fallback.or(orParts.join(","));
-  }
+    if (search.search) {
+      const pattern = buildLoosePattern(search.search);
+      const orParts = [
+        `name.ilike.${pattern}`,
+        `description.ilike.${pattern}`,
+        `creator_name.ilike.${pattern}`
+      ];
+      if (/^\d+$/.test(search.search)) orParts.unshift(`asset_id.eq.${search.search}`, `texture_id.eq.${search.search}`);
+      fallback = fallback.or(orParts.join(","));
+    }
 
-  fallback = applySort(fallback, search.sort);
-  const { data, error, count } = await fallback.range(offset, offset + PAGE_SIZE - 1);
-  if (error) {
+    fallback = applySort(fallback, search.sort);
+    const { data, error, count } = await fallback.range(offset, offset + PAGE_SIZE - 1);
+    if (isCatalogPageOutOfRange(error, offset)) return { decals: [], total: 0, totalPages: 1 };
+    if (error) throw error;
+    const total = count ?? data?.length ?? 0;
+    return { decals: normalizeBaseDecalRows(data), total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
+  } catch (error) {
     reportLoadError(`Failed to load texture IDs for ${gameSlug}`, error);
-    return { decals: [], total: 0, totalPages: 1 };
+    if (IS_BUILD) return { decals: [], total: 0, totalPages: 1 };
+    throw error;
   }
-  const total = count ?? data?.length ?? 0;
-  return { decals: normalizeBaseDecalRows(data), total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
 }
 
 export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
@@ -403,6 +420,7 @@ export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
           .contains("categories", [category.slug]);
         if (error) {
           reportLoadError(`Failed to load Roblox decal category ${category.slug}`, error);
+          throw error;
         }
         return {
           slug: category.slug,
@@ -418,7 +436,8 @@ export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
     return rows.filter((row) => row.count > 0);
   } catch (error) {
     reportLoadError("Failed to load Roblox decal categories", error);
-    return [];
+    if (IS_BUILD) return [];
+    throw error;
   }
 }
 

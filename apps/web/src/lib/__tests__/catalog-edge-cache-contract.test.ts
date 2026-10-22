@@ -56,6 +56,34 @@ describe("catalog edge-cache contracts", () => {
     expect(source).toContain("<CatalogStableItems slots={");
   });
 
+  it("keeps failed API requests from replacing the current cards", () => {
+    for (const { path } of CLIENT_BROWSERS) {
+      const source = readFileSync(path, "utf8");
+      expect(source).toContain("if (!res.ok)");
+      expect(source).toContain("if (!payload.ok)");
+      const catchBlock = source.slice(source.indexOf(".catch((err: Error)"), source.indexOf(".finally("));
+      expect(catchBlock).toContain("setError(");
+      expect(catchBlock).not.toContain("setSongs(");
+      expect(catchBlock).not.toContain("setDecals(");
+    }
+  });
+
+  it("keeps the seeder and both collectors wired to their guarded date helpers", () => {
+    const scripts = new URL("../../../../../scripts/", import.meta.url);
+    const seeder = readFileSync(new URL("catalog/seed-catalog-pages.ts", scripts), "utf8");
+    expect(seeder).toContain("await preserveCatalogPublicationDates(sb, rows)");
+    expect(seeder).toContain('.upsert(publicationRows, { onConflict: "code" })');
+    expect(seeder).not.toContain("published_at: options.draft ? null : new Date()");
+    for (const file of ["music/collect-top-100-songs.ts", "music/collect-curated-roblox-music-ids.ts"]) {
+      const source = readFileSync(new URL(file, scripts), "utf8");
+      expect(source).toContain("await getExistingMusicAssetIds(");
+      expect(source).toContain("await updateMusicCatalogTimestamp(");
+    }
+    const reranker = readFileSync(new URL("music/rerank-roblox-music-ids.ts", scripts), "utf8");
+    expect(reranker).not.toContain('from("catalog_pages")');
+    expect(reranker).not.toContain("updateCatalogTimestamp");
+  });
+
   it("keeps catalog card slots as Journey items", () => {
     const source = readFileSync(
       new URL("../../components/catalog/CatalogStableItems.tsx", import.meta.url),

@@ -2,6 +2,7 @@ import "../shared/load-env";
 import { writeFile } from "node:fs/promises";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getExistingMusicAssetIds, updateMusicCatalogTimestamp } from "../shared/music-catalog-freshness";
 
 const TOP_SONGS_API = "https://apis.roblox.com/music-discovery/v1/top-songs";
 const TOOLBOX_SEARCH_API = "https://apis.roblox.com/toolbox-service/v2/assets:search";
@@ -108,6 +109,7 @@ type AutomationSummary = {
     topSongsIncluded: boolean;
     chartTypes: string[];
     trendingIncluded: boolean;
+    catalogTimestampUpdated: boolean;
   };
 };
 
@@ -228,16 +230,20 @@ async function fetchToolboxMusicPage(pageToken: string | null, pass: ChartPass):
   }
 }
 
-async function upsertRows(rows: MusicRow[]) {
-  if (!rows.length) return;
+async function upsertRows(rows: MusicRow[]): Promise<number> {
+  let addedSongs = 0;
+  if (!rows.length) return addedSongs;
   const sb = supabaseAdmin();
   for (let i = 0; i < rows.length; i += UPSERT_CHUNK_SIZE) {
     const chunk = rows.slice(i, i + UPSERT_CHUNK_SIZE);
+    const existing = await getExistingMusicAssetIds(sb, chunk.map(row => row.asset_id));
     const { error } = await sb.from("roblox_music_ids").upsert(chunk, { onConflict: "asset_id" });
     if (error) {
       throw new Error(`Failed to upsert music IDs: ${error.message}`);
     }
+    addedSongs += chunk.filter(row => !existing.has(row.asset_id)).length;
   }
+  return addedSongs;
 }
 
 function buildTopSongRows(songs: RobloxTopSong[], fetchedAt: string, rankOffset: number): MusicRow[] {
@@ -305,7 +311,7 @@ function buildToolboxRows(
   return rows;
 }
 
-async function collectTopSongs(seen: Set<number>, maxAssets: number | null): Promise<number> {
+async function collectTopSongs(seen: Set<number>, maxAssets: number | null, changes: { addedSongs: number }): Promise<number> {
   if (!INCLUDE_TOP_SONGS) {
     console.log("Skipping curated top songs pass.");
     return 0;
@@ -344,7 +350,7 @@ async function collectTopSongs(seen: Set<number>, maxAssets: number | null): Pro
 
     const slice = remaining < rows.length ? rows.slice(0, remaining) : rows;
     if (slice.length) {
-      await upsertRows(slice);
+      changes.addedSongs += await upsertRows(slice);
       totalUpserts += slice.length;
     }
 
@@ -372,7 +378,7 @@ async function writeAutomationSummary(summary: AutomationSummary) {
   await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`, "utf8");
 }
 
-async function collectCreatorStoreCharts(seen: Set<number>, maxAssets: number | null): Promise<number> {
+async function collectCreatorStoreCharts(seen: Set<number>, maxAssets: number | null, changes: { addedSongs: number }): Promise<number> {
   const fetchedAt = new Date().toISOString();
   let totalUpserts = 0;
 
@@ -432,7 +438,7 @@ async function collectCreatorStoreCharts(seen: Set<number>, maxAssets: number | 
 
       const slice = remainingInPass < rows.length ? rows.slice(0, remainingInPass) : rows;
       if (slice.length) {
-        await upsertRows(slice);
+        changes.addedSongs += await upsertRows(slice);
         totalUpserts += slice.length;
       }
 
@@ -462,9 +468,11 @@ async function run() {
   const maxAssets = MAX_ASSETS > 0 ? MAX_ASSETS : null;
   const seenAssetIds = new Set<number>();
 
-  const topSongsCount = await collectTopSongs(seenAssetIds, maxAssets);
+  const changes = { addedSongs: 0 };
+  const topSongsCount = await collectTopSongs(seenAssetIds, maxAssets, changes);
   const remaining = maxAssets === null ? null : Math.max(0, maxAssets - topSongsCount);
-  const chartCount = await collectCreatorStoreCharts(seenAssetIds, remaining);
+  const chartCount = await collectCreatorStoreCharts(seenAssetIds, remaining, changes);
+  const catalogTimestampUpdated = await updateMusicCatalogTimestamp(supabaseAdmin(), changes);
 
   console.log(`Done. Top songs: ${topSongsCount}. Creator Store charts: ${chartCount}.`);
   await writeAutomationSummary({
@@ -474,7 +482,8 @@ async function run() {
       creatorStoreCharts: chartCount,
       topSongsIncluded: INCLUDE_TOP_SONGS,
       chartTypes: TOOLBOX_CHART_TYPES,
-      trendingIncluded: TOOLBOX_INCLUDE_TRENDING
+      trendingIncluded: TOOLBOX_INCLUDE_TRENDING,
+      catalogTimestampUpdated
     }
   });
 }

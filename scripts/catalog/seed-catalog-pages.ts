@@ -5,6 +5,7 @@ import "../shared/load-env";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { preserveCatalogPublicationDates } from "../shared/catalog-publication";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
@@ -151,7 +152,7 @@ function buildRow(finalRow: CatalogPageFinal, options: CliOptions): CatalogPageR
     wiki_md: normalizeText(finalRow.wiki_md),
     wiki_sort_order: typeof finalRow.wiki_sort_order === "number" ? finalRow.wiki_sort_order : null,
     is_published: !options.draft,
-    published_at: options.draft ? null : new Date().toISOString()
+    published_at: null
   };
 }
 
@@ -195,7 +196,8 @@ async function main() {
   }
 
   const sb = supabaseAdmin();
-  const { error } = await sb.from("catalog_pages").upsert(rows, { onConflict: "code" });
+  const publicationRows = await preserveCatalogPublicationDates(sb, rows);
+  const { error } = await sb.from("catalog_pages").upsert(publicationRows, { onConflict: "code" });
   if (error) throw error;
 
   console.log(`Upserted ${rows.length} ${options.draft ? "draft" : "published"} catalog_pages rows.`);

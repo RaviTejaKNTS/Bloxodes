@@ -1,6 +1,6 @@
 # Data refreshes
 
-Last verified: 2026-10-19
+Last verified: 2026-10-22
 
 Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all run on the VPS through the stats worker (see [stats](stats.md#the-stats-worker)) and write production directly. Times are UTC.
 
@@ -15,6 +15,8 @@ Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all
 
 - **Schedule:** 06:20 daily: `collect:top-songs` → `collect:music-ids-curated` → `rerank:music-ids`.
 - **Data:** `roblox_music_ids` and its views. 60,144 rows.
+- **Page date:** the collectors set `catalog_pages.updated_at` for `roblox-music-ids` only when a run adds new songs (exact asset-ID lookup before writing) and the current date is at least seven days old (`scripts/shared/music-catalog-freshness.ts`). Reranking and chart-order changes never touch it, so the visible "Updated on" date and `dateModified` don't move daily.
+- `collect:top-songs` writes the new ranks first, then clears ranks for songs that left the list, so the trending list is never empty mid-run.
 - Game-specific music and decal usage is by hand: `sync:game-specific-id-sources` writes `data/game-specific-ids/source-backed.json`, then `seed:game-specific-id-usage` loads `roblox_music_id_game_usage` and `roblox_decal_id_game_usage`.
 
 ## Decal IDs
