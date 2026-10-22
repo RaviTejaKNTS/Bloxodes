@@ -34,7 +34,23 @@ vi.mock("@/components/tools/DedicatedToolPage", () => ({ DedicatedToolPage: ({ c
 import MinecraftToolsPage from "@/app/(site)/minecraft/tools/page";
 import { GameToolPage } from "@/components/games/GameToolPage";
 
-const tool = { id: "tool", namespace: "minecraft", game_id: "minecraft", code: "resource-cost", title: "Resource cost", canonical_path: "/minecraft/tools/resource-cost", tool_key: "resource-cost", rules_json: { unitCost: 2, resourceLabel: "Iron" } } as ToolPage;
+const tool: ToolPage = {
+  id: "tool",
+  namespace: "minecraft",
+  game_id: "minecraft",
+  code: "resource-cost",
+  title: "Resource cost",
+  seo_title: "Resource cost",
+  meta_description: "Calculate resource costs.",
+  intro_md: "",
+  how_it_works_md: "",
+  description_json: {},
+  faq_json: [],
+  is_published: true,
+  canonical_path: "/minecraft/tools/resource-cost",
+  tool_key: "resource-cost",
+  rules_json: { unitCost: 2, resourceLabel: "Iron" }
+};
 
 beforeEach(() => {
   state.failedRead = "";

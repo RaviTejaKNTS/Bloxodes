@@ -47,7 +47,7 @@ describe("wiki route navigation adapter", () => {
     for (const canonical_path of [`/${namespace}`, `/${namespace}/wiki`]) {
       const page = { id: "root-wiki", game_kind: "franchise", canonical_path, game_id: "root" } as SharedGameWikiPage;
       await renderGameWikiPage({ page, namespace, namespaceTitle: "Example" });
-      const props = mocks.render.mock.calls.at(-1)![0];
+      const props = mocks.render.mock.calls[mocks.render.mock.calls.length - 1]![0];
       expect(mocks.reader).toHaveBeenLastCalledWith(namespace);
       expect(props.directoryPages).toEqual(children.map(child => ({
         href: child.canonical_path, title: child.title, kind: "game_wiki_pages_view", image: child.cover_image || child.game_cover_image
