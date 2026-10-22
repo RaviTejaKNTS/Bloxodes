@@ -1,5 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { MESH_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
+import { catalogRangeTotal } from "@/lib/catalog-pagination";
 import {
   DEFAULT_MESH_SORT,
   normalizeMeshSearch,
@@ -98,11 +99,13 @@ export async function loadRobloxMeshIdsPageData(
     offset,
     offset + MESH_IDS_PAGE_SIZE - 1
   );
-  if (error) {
-    console.error("Failed to load Roblox mesh IDs", error);
-    return { meshes: [], total: 0, totalPages: 1 };
-  }
+  const rangeTotal = catalogRangeTotal(error, offset, count);
+  if (rangeTotal !== null) return { meshes: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / MESH_IDS_PAGE_SIZE)) };
+  if (error) throw error;
   const total = count ?? data?.length ?? 0;
+  if (!normalizedQuery && (total === 0 || (!data?.length && offset < total))) {
+    throw new Error("Roblox mesh catalog unexpectedly empty");
+  }
   return {
     meshes: (data ?? []) as RobloxMeshId[],
     total,

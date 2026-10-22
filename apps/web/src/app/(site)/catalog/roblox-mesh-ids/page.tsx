@@ -3,7 +3,6 @@ import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { buildPageContentHtml } from "@/lib/page-content";
 import { loadRobloxMeshIdsPageData } from "@/lib/roblox-mesh-ids";
-import { normalizeMeshSearch, normalizeMeshSort } from "@/lib/roblox-mesh-ids-search";
 import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL } from "@/lib/seo";
 import {
   CANONICAL,
@@ -14,10 +13,6 @@ import {
 } from "./page-data";
 
 export const revalidate = 21600;
-
-type PageProps = {
-  searchParams: Promise<{ q?: string; sort?: string }>;
-};
 
 export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes([CATALOG_CODE]);
@@ -33,13 +28,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RobloxMeshIdsPage({ searchParams }: PageProps) {
-  const params = await searchParams;
-  const query = normalizeMeshSearch(params.q);
-  const sort = normalizeMeshSort(params.sort);
+export default async function RobloxMeshIdsPage() {
   const [catalog, pageData] = await Promise.all([
     getCatalogPageContentByCodes([CATALOG_CODE]),
-    loadRobloxMeshIdsPageData(1, { query, sort })
+    loadRobloxMeshIdsPageData(1)
   ]);
   const contentHtml = await buildPageContentHtml(catalog);
   return renderMeshIdsPage({

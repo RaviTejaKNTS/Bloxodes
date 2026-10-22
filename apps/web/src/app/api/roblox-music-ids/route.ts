@@ -1,9 +1,11 @@
+import { applyMusicSort } from "@/lib/catalog-id-sorts";
+import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
-import { normalizeSearchQuery, normalizeSortKey, type MusicSortKey } from "@/lib/music-ids-search";
+import { normalizeSearchQuery, normalizeSortKey } from "@/lib/music-ids-search";
 import { getMusicGameIdPage, type MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
 import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
-import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
+import { catalogRangeTotal } from "@/lib/catalog-pagination";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -12,10 +14,6 @@ const PAGE_SIZE = MUSIC_IDS_PAGE_SIZE;
 const MUSIC_SOURCE_VIEW = "roblox_music_ids_ranked_view";
 const SELECT_FIELDS =
   "asset_id, title, artist, album, genre, duration_seconds, album_art_asset_id, thumbnail_url, rank, source, last_seen_at, popularity_score";
-
-type OrderableQuery<T> = {
-  order: (...args: any[]) => T;
-};
 
 function buildLoosePattern(value: string): string {
   const cleaned = value.replace(/[%_]/g, " ").trim();
@@ -33,37 +31,6 @@ function normalizePreset(value: string | null): MusicGameDatasetPreset | null {
   return value === "short-sounds" || value === "music" ? value : null;
 }
 
-function applySort<T extends OrderableQuery<T>>(query: T, sort: MusicSortKey): T {
-  switch (sort) {
-    case "popular":
-      return query
-        .order("popularity_score", { ascending: false, nullsFirst: false })
-        .order("last_seen_at", { ascending: false, nullsFirst: false });
-    case "newest":
-      return query.order("last_seen_at", { ascending: false, nullsFirst: false });
-    case "duration_desc":
-      return query
-        .order("duration_seconds", { ascending: false, nullsFirst: false })
-        .order("popularity_score", { ascending: false, nullsFirst: false });
-    case "duration_asc":
-      return query
-        .order("duration_seconds", { ascending: true, nullsFirst: false })
-        .order("popularity_score", { ascending: false, nullsFirst: false });
-    case "title_asc":
-      return query.order("title", { ascending: true, nullsFirst: false });
-    case "artist_asc":
-      return query.order("artist", { ascending: true, nullsFirst: false });
-    case "recommended":
-    default:
-      return query
-        .order("popularity_score", { ascending: false, nullsFirst: false })
-        .order("last_seen_at", { ascending: false, nullsFirst: false })
-        .order("duration_bucket", { ascending: true, nullsFirst: false })
-        .order("duration_seconds", { ascending: false, nullsFirst: false })
-        .order("rank", { ascending: true, nullsFirst: false });
-  }
-}
-
 async function loadResponse(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = normalizePage(searchParams.get("page"));
@@ -73,19 +40,20 @@ async function loadResponse(request: Request) {
   const preset = normalizePreset(searchParams.get("preset")) ?? game?.datasetPreset ?? null;
   const offset = (page - 1) * PAGE_SIZE;
 
+  const mapped = game ? await hasCatalogGameMappings("roblox_music_ids_game_view", game.slug) : false;
   const supabase = supabaseAdmin();
   let query = supabase
-    .from(game ? "roblox_music_ids_game_view" : MUSIC_SOURCE_VIEW)
+    .from(mapped ? "roblox_music_ids_game_view" : MUSIC_SOURCE_VIEW)
     .select(SELECT_FIELDS, { count: "exact" });
 
-  if (game) query = query.eq("game_slug", game.slug);
+  if (mapped && game) query = query.eq("game_slug", game.slug);
 
   // Filter out songs without duration
-  if (!game) query = query.not("duration_seconds", "is", null).gt("duration_seconds", 0);
+  if (!mapped) query = query.not("duration_seconds", "is", null).gt("duration_seconds", 0);
 
-  if (!game && preset === "short-sounds") {
+  if (!mapped && preset === "short-sounds") {
     query = query.lte("duration_seconds", 20);
-  } else if (!game && preset === "music") {
+  } else if (!mapped && preset === "music") {
     query = query.gte("duration_seconds", 30).lte("duration_seconds", 600);
   }
 
@@ -103,44 +71,12 @@ async function loadResponse(request: Request) {
     query = query.or(orParts.join(","));
   }
 
-  query = game && sort === "recommended"
-    ? query.order("game_sort_order", { ascending: true }).order("popularity_score", { ascending: false, nullsFirst: false })
-    : applySort(query, sort);
+  query = applyMusicSort(query, sort, mapped);
+  const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
 
-  let { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
-
-  // Keep newly configured game pages usable before their association rows are
-  // imported. Once mappings exist, the game view remains the authoritative set.
-  if (!error && game && (count ?? data?.length ?? 0) === 0) {
-    let fallback = supabase
-      .from(MUSIC_SOURCE_VIEW)
-      .select(SELECT_FIELDS, { count: "exact" })
-      .not("duration_seconds", "is", null)
-      .gt("duration_seconds", 0);
-    if (preset === "short-sounds") {
-      fallback = fallback.lte("duration_seconds", 20);
-    } else if (preset === "music") {
-      fallback = fallback.gte("duration_seconds", 30).lte("duration_seconds", 600);
-    }
-    if (search) {
-      const pattern = buildLoosePattern(search);
-      const orParts = [
-        `title.ilike.${pattern}`,
-        `artist.ilike.${pattern}`,
-        `album.ilike.${pattern}`,
-        `genre.ilike.${pattern}`
-      ];
-      if (/^\d+$/.test(search)) orParts.unshift(`asset_id.eq.${search}`);
-      fallback = fallback.or(orParts.join(","));
-    }
-    const fallbackResult = await applySort(fallback, sort).range(offset, offset + PAGE_SIZE - 1);
-    data = fallbackResult.data;
-    error = fallbackResult.error;
-    count = fallbackResult.count;
-  }
-
-  if (isCatalogPageOutOfRange(error, offset)) {
-    return NextResponse.json({ ok: true, songs: [], total: 0, totalPages: 1 });
+  const rangeTotal = catalogRangeTotal(error, offset, count);
+  if (rangeTotal !== null) {
+    return NextResponse.json({ ok: true, songs: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / PAGE_SIZE)) });
   }
   if (error) throw error;
 

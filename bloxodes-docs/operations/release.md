@@ -1,6 +1,6 @@
 # Release
 
-Last verified: 2026-10-21
+Last verified: 2026-10-22
 
 How code and content reach production. GitHub does the checking, building and deploying, and publishes most content. Roblox wiki bundles publish with their own versioned command (below). Agents don't run checks or builds locally.
 
@@ -9,7 +9,7 @@ How code and content reach production. GitHub does the checking, building and de
 1. **Work in the T3 worktree.** T3 gives each task one worktree and branch from fresh `origin/production`. Setup links `.envs` and creates an empty `tmp/`; it installs nothing.
 2. **Independent review.** Before opening a code PR, an independent Codex agent reviews the diff.
 3. **Open a PR to `production`** and link it to T3. Use T3's PR watcher while checks run.
-4. **`pull-request.yml`** sorts the diff. Docs and skills skip the heavy jobs. Code runs migration integrity, env contracts, script tests and the affected app checks. Web changes get a production build and desktop and mobile browser smoke tests with screenshots.
+4. **`pull-request.yml`** sorts the diff. Docs and skills skip the heavy jobs. Code runs migration integrity, env contracts, script tests and the affected app checks. Web changes get a production build, cold/warm catalog pagination and filter/failure regression, and desktop and mobile browser smoke tests with screenshots. The PR build uses a GitHub-only read fixture for music, decal and mesh REST queries; other content still reads managed development. Catalog regression writes no database rows and saves its SHA-bound report under `tmp/test-reports/`. Production image builds do not load this fixture.
 5. **`Required PR checks`** is the single required check. Branch protection enforces it, including for admins, and blocks force pushes. No human approval is required by GitHub; release permission comes from the owner.
 6. **`codex-review.yml`** (Selective Codex review) runs a paid code review when a ready, same-repo code PR opens. It isn't a required check. Pushes cancel stale reviews but don't start new ones. After fixes: `gh workflow run codex-review.yml --ref production -f pull_request=<number>`. It doesn't replace the required checks.
 7. **Merge** with a merge commit, only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly.

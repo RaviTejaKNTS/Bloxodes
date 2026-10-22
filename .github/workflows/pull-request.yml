@@ -136,9 +136,17 @@ jobs:
       - if: needs.scope.outputs.mobile == 'true'
         run: npm run typecheck:mobile
       - if: needs.scope.outputs.web == 'true'
-        run: npm run lint && npm run test:unit:web && npm run build:web && npm run typecheck:web
+        run: npm run lint && npm run test:unit:web
+      - name: Build production routes with isolated catalog read fixtures
+        if: needs.scope.outputs.web == 'true'
+        run: |
+          CATALOG_ROUTE_FIXTURES=1 NODE_OPTIONS="--import=$PWD/scripts/ci/catalog-fetch-fixture.mjs" npm run build:web
+          npm run typecheck:web
       - if: needs.scope.outputs.web == 'true'
         run: npx playwright install --with-deps chromium
+      - name: Verify cold catalog pagination, filters and failure behavior
+        if: needs.scope.outputs.web == 'true'
+        run: node scripts/ci/catalog-route-regression.mjs
       - if: needs.scope.outputs.web == 'true'
         run: npx playwright test apps/web/e2e/release-smoke.spec.ts
       - uses: actions/upload-artifact@v4

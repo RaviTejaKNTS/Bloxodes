@@ -1,8 +1,10 @@
+import { applyDecalSort } from "@/lib/catalog-id-sorts";
+import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
-import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
+import { catalogRangeTotal } from "@/lib/catalog-pagination";
 import { normalizeCategorySlug } from "@/lib/decal-id-categories";
-import { normalizeSearchQuery, normalizeSortKey, type DecalSortKey } from "@/lib/decal-ids-search";
+import { normalizeSearchQuery, normalizeSortKey } from "@/lib/decal-ids-search";
 import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
 import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
 
@@ -13,10 +15,6 @@ const PAGE_SIZE = DECAL_IDS_PAGE_SIZE;
 const DECAL_SOURCE_TABLE = "roblox_decal_ids";
 const BASE_SELECT_FIELDS =
   "asset_id, texture_id, name, description, creator_id, creator_type, creator_name, creator_verified, roblox_created_at, roblox_updated_at, is_public_domain, is_for_sale, price_in_robux, sales, purchasable, vote_count, upvote_percent, thumbnail_url, thumbnail_state, thumbnail_checked_at, source, first_seen_at, last_seen_at, verified_at, popularity_score, categories, primary_category, curated_score, curated_rank, curated_tier, curated_reason";
-
-type OrderableQuery<T> = {
-  order: (...args: any[]) => T;
-};
 
 function buildLoosePattern(value: string): string {
   const cleaned = value.replace(/[%_]/g, " ").trim();
@@ -38,31 +36,6 @@ function normalizePreset(value: string | null): DecalGameDatasetPreset | null {
     value === "spray-paint"
     ? value
     : null;
-}
-
-function applySort<T extends OrderableQuery<T>>(query: T, sort: DecalSortKey): T {
-  switch (sort) {
-    case "popular":
-      return query
-        .order("vote_count", { ascending: false, nullsFirst: false })
-        .order("popularity_score", { ascending: false, nullsFirst: false })
-        .order("last_seen_at", { ascending: false, nullsFirst: false });
-    case "newest":
-      return query.order("roblox_created_at", { ascending: false, nullsFirst: false });
-    case "oldest":
-      return query.order("roblox_created_at", { ascending: true, nullsFirst: false });
-    case "name_asc":
-      return query.order("name", { ascending: true, nullsFirst: false });
-    case "creator_asc":
-      return query.order("creator_name", { ascending: true, nullsFirst: false });
-    case "recommended":
-    default:
-      return query
-        .order("curated_rank", { ascending: true, nullsFirst: false })
-        .order("curated_score", { ascending: false, nullsFirst: false })
-        .order("popularity_score", { ascending: false, nullsFirst: false })
-        .order("last_seen_at", { ascending: false, nullsFirst: false });
-  }
 }
 
 function normalizeBaseRows(rows: unknown[] | null) {
@@ -88,22 +61,17 @@ async function loadResponse(request: Request) {
   const preset = normalizePreset(searchParams.get("preset")) ?? game?.datasetPreset ?? null;
   const offset = (page - 1) * PAGE_SIZE;
 
+  const mapped = game ? await hasCatalogGameMappings("roblox_decal_ids_game_view", game.slug) : false;
   const supabase = supabaseAdmin();
   let query = supabase
-    .from(game ? "roblox_decal_ids_game_view" : DECAL_SOURCE_TABLE)
+    .from(mapped ? "roblox_decal_ids_game_view" : DECAL_SOURCE_TABLE)
     .select(BASE_SELECT_FIELDS, { count: "exact" });
 
-  if (game) {
-    query = query.eq("game_slug", game.slug);
-    if (game.copyTextureId) {
-      query = query.not("texture_id", "is", null).gt("texture_id", 0);
-    }
-  } else {
-    query = query
-      .eq("status", "active")
-      .eq("thumbnail_state", "Completed")
-      .not("thumbnail_url", "is", null)
-      .not("thumbnail_url", "ilike", "%/UnknownImage/%");
+  if (mapped && game) query = query.eq("game_slug", game.slug);
+  if (game?.copyTextureId) query = query.not("texture_id", "is", null).gt("texture_id", 0);
+  if (!mapped) {
+    query = query.eq("status", "active").eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null).not("thumbnail_url", "ilike", "%/UnknownImage/%");
   }
 
   if (!game && section === "curated") {
@@ -114,15 +82,15 @@ async function loadResponse(request: Request) {
     query = query.contains("categories", [category]);
   }
 
-  if (!game && preset === "crosshairs") {
+  if (!mapped && preset === "crosshairs") {
     query = query.ilike("name", "%crosshair%");
-  } else if (!game && preset === "faces") {
+  } else if (!mapped && preset === "faces") {
     query = query.overlaps("categories", ["faces"]);
-  } else if (!game && preset === "decor") {
+  } else if (!mapped && preset === "decor") {
     query = query.overlaps("categories", ["posters", "aesthetic", "textures"]);
-  } else if (!game && preset === "jjs-images") {
+  } else if (!mapped && preset === "jjs-images") {
     query = query.overlaps("categories", ["anime", "memes", "characters", "posters"]);
-  } else if (!game && preset === "spray-paint") {
+  } else if (!mapped && preset === "spray-paint") {
     query = query.not("curated_rank", "is", null);
   }
 
@@ -139,70 +107,12 @@ async function loadResponse(request: Request) {
     query = query.or(orParts.join(","));
   }
 
-  if (game && sort === "recommended") {
-    query = query
-      .order("game_sort_order", { ascending: true })
-      .order("popularity_score", { ascending: false, nullsFirst: false });
-  } else if ((section === "curated" || preset === "spray-paint") && sort === "recommended") {
-    query = query
-      .order("curated_rank", { ascending: true, nullsFirst: false })
-      .order("curated_score", { ascending: false, nullsFirst: false })
-      .order("popularity_score", { ascending: false, nullsFirst: false });
-  } else {
-    query = applySort(query, sort);
-  }
+  query = applyDecalSort(query, sort, mapped);
+  const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
 
-  let { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
-
-  // Game mappings are authoritative when present. The preset fallback lets a
-  // newly configured local page render while its source allowlist is prepared.
-  if (!error && game && (count ?? data?.length ?? 0) === 0) {
-    let fallback = supabase
-      .from(DECAL_SOURCE_TABLE)
-      .select(BASE_SELECT_FIELDS, { count: "exact" })
-      .eq("status", "active")
-      .eq("thumbnail_state", "Completed")
-      .not("thumbnail_url", "is", null)
-      .not("thumbnail_url", "ilike", "%/UnknownImage/%");
-    if (game.copyTextureId) {
-      fallback = fallback.not("texture_id", "is", null).gt("texture_id", 0);
-    }
-    if (preset === "crosshairs") {
-      fallback = fallback.ilike("name", "%crosshair%");
-    } else if (preset === "faces") {
-      fallback = fallback.overlaps("categories", ["faces"]);
-    } else if (preset === "decor") {
-      fallback = fallback.overlaps("categories", ["posters", "aesthetic", "textures"]);
-    } else if (preset === "jjs-images") {
-      fallback = fallback.overlaps("categories", ["anime", "memes", "characters", "posters"]);
-    } else if (preset === "spray-paint") {
-      fallback = fallback.not("curated_rank", "is", null);
-    }
-    if (search) {
-      const pattern = buildLoosePattern(search);
-      const orParts = [
-        `name.ilike.${pattern}`,
-        `description.ilike.${pattern}`,
-        `creator_name.ilike.${pattern}`
-      ];
-      if (/^\d+$/.test(search)) orParts.unshift(`asset_id.eq.${search}`, `texture_id.eq.${search}`);
-      fallback = fallback.or(orParts.join(","));
-    }
-    const fallbackResult = ((preset === "spray-paint" && sort === "recommended")
-      ? fallback
-          .order("curated_rank", { ascending: true, nullsFirst: false })
-          .order("curated_score", { ascending: false, nullsFirst: false })
-          .order("popularity_score", { ascending: false, nullsFirst: false })
-      : applySort(fallback, sort)
-    ).range(offset, offset + PAGE_SIZE - 1);
-    const resolvedFallback = await fallbackResult;
-    data = resolvedFallback.data;
-    error = resolvedFallback.error;
-    count = resolvedFallback.count;
-  }
-
-  if (isCatalogPageOutOfRange(error, offset)) {
-    return NextResponse.json({ ok: true, decals: [], total: 0, totalPages: 1 });
+  const rangeTotal = catalogRangeTotal(error, offset, count);
+  if (rangeTotal !== null) {
+    return NextResponse.json({ ok: true, decals: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / PAGE_SIZE)) });
   }
   if (error) throw error;
 

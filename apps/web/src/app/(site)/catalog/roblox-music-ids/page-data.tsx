@@ -1,3 +1,5 @@
+import { applyMusicSort } from "@/lib/catalog-id-sorts";
+import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
 import Link from "next/link";
 import { MusicIdCard, type MusicIdCardSong } from "@/components/catalog/MusicIdCard";
 import { PagePagination } from "@/components/PagePagination";
@@ -20,7 +22,7 @@ import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } fr
 import { MusicIdsBrowser } from "./MusicIdsBrowser";
 import type { MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
 import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
-import { isCatalogPageOutOfRange } from "@/lib/catalog-pagination";
+import { catalogRangeTotal } from "@/lib/catalog-pagination";
 
 const PAGE_SIZE = MUSIC_IDS_PAGE_SIZE;
 const OPTION_PAGE_SIZE = 24;
@@ -186,7 +188,6 @@ function reportLoadError(context: string, error: unknown) {
   console.error(context, formatLoadError(error));
 }
 
-
 function formatDuration(seconds: number | null): string | null {
   if (!seconds || seconds <= 0) return null;
   const minutes = Math.floor(seconds / 60);
@@ -250,7 +251,8 @@ async function loadOptionPage(
       .order("label", { ascending: true })
       .range(offset, offset + pageSize - 1);
 
-    if (isCatalogPageOutOfRange(error, offset)) return { options: [], total: 0, totalPages: 1 };
+    const rangeTotal = catalogRangeTotal(error, offset, count);
+    if (rangeTotal !== null) return { options: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / pageSize)) };
     if (error) throw error;
 
     const options = (data ?? []).map((row) => ({
@@ -355,48 +357,15 @@ async function loadMusicIdsPage(
     if (options?.trending) {
       query = query.not("rank", "is", null).order("rank", { ascending: true, nullsFirst: false });
     } else {
-      const sort = options?.sort ?? DEFAULT_SORT;
-      switch (sort) {
-        case "popular":
-          query = query
-            .order("popularity_score", { ascending: false, nullsFirst: false })
-            .order("last_seen_at", { ascending: false, nullsFirst: false });
-          break;
-        case "newest":
-          query = query.order("last_seen_at", { ascending: false, nullsFirst: false });
-          break;
-        case "duration_desc":
-          query = query
-            .order("duration_seconds", { ascending: false, nullsFirst: false })
-            .order("popularity_score", { ascending: false, nullsFirst: false });
-          break;
-        case "duration_asc":
-          query = query
-            .order("duration_seconds", { ascending: true, nullsFirst: false })
-            .order("popularity_score", { ascending: false, nullsFirst: false });
-          break;
-        case "title_asc":
-          query = query.order("title", { ascending: true, nullsFirst: false });
-          break;
-        case "artist_asc":
-          query = query.order("artist", { ascending: true, nullsFirst: false });
-          break;
-        case "recommended":
-        default:
-          query = query
-            .order("popularity_score", { ascending: false, nullsFirst: false })
-            .order("last_seen_at", { ascending: false, nullsFirst: false })
-            .order("duration_bucket", { ascending: true, nullsFirst: false })
-            .order("duration_seconds", { ascending: false, nullsFirst: false })
-            .order("rank", { ascending: true, nullsFirst: false });
-      }
+      query = applyMusicSort(query, options?.sort ?? DEFAULT_SORT);
     }
-
-    query = query.order("asset_id", { ascending: true });
+    // Trending uses rank order; every sort needs a unique boundary key.
+    if (options?.trending) query = query.order("asset_id", { ascending: true });
 
     const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
 
-    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    const rangeTotal = catalogRangeTotal(error, offset, count);
+    if (rangeTotal !== null) return { songs: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / PAGE_SIZE)) };
     if (error) throw error;
 
     const total = count ?? data?.length ?? 0;
@@ -430,7 +399,11 @@ async function loadDailyTop500MusicIdsPage(pageNumber: number): Promise<PageData
       .order("asset_id", { ascending: true })
       .range(offset, offset + PAGE_SIZE - 1);
 
-    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    const rangeTotal = catalogRangeTotal(error, offset, count);
+    if (rangeTotal !== null) {
+      const total = Math.min(rangeTotal, TOP_SONGS_TRENDING_LIMIT);
+      return { songs: [], total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
+    }
     if (error) throw error;
 
     const total = Math.min(count ?? data?.length ?? 0, TOP_SONGS_TRENDING_LIMIT);
@@ -463,7 +436,8 @@ async function loadSourceChartMusicIdsPage(pageNumber: number, source: string): 
       .order("asset_id", { ascending: true })
       .range(offset, offset + PAGE_SIZE - 1);
 
-    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    const rangeTotal = catalogRangeTotal(error, offset, count);
+    if (rangeTotal !== null) return { songs: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / PAGE_SIZE)) };
     if (error) throw error;
 
     const total = count ?? data?.length ?? 0;
@@ -490,6 +464,9 @@ export async function loadGameMusicIdsPageData(
   options?: { search?: string; sort?: MusicSortKey }
 ): Promise<PageData> {
   try {
+    if (!await hasCatalogGameMappings("roblox_music_ids_game_view", gameSlug)) {
+      return await loadMusicIdsPage(page, { preset, search: options?.search, sort: options?.sort });
+    }
     const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
     const offset = (safePage - 1) * PAGE_SIZE;
     const supabase = supabaseAdmin();
@@ -511,28 +488,18 @@ export async function loadGameMusicIdsPageData(
       query = query.or(orParts.join(","));
     }
 
-    const sort = options?.sort ?? DEFAULT_SORT;
-    if (sort === "newest") query = query.order("last_seen_at", { ascending: false, nullsFirst: false });
-    else if (sort === "duration_desc") query = query.order("duration_seconds", { ascending: false, nullsFirst: false });
-    else if (sort === "duration_asc") query = query.order("duration_seconds", { ascending: true, nullsFirst: false });
-    else if (sort === "title_asc") query = query.order("title", { ascending: true, nullsFirst: false });
-    else if (sort === "artist_asc") query = query.order("artist", { ascending: true, nullsFirst: false });
-    else query = query.order("game_sort_order", { ascending: true }).order("popularity_score", { ascending: false, nullsFirst: false });
-
-    const { data, error, count } = await query.order("asset_id", { ascending: true }).range(offset, offset + PAGE_SIZE - 1);
-    if (isCatalogPageOutOfRange(error, offset)) return { songs: [], total: 0, totalPages: 1 };
+    query = applyMusicSort(query, options?.sort ?? DEFAULT_SORT, true);
+    const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
+    const rangeTotal = catalogRangeTotal(error, offset, count);
+    if (rangeTotal !== null) return { songs: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / PAGE_SIZE)) };
     if (error) throw error;
-    if ((count ?? data?.length ?? 0) > 0) {
-      const total = count ?? data?.length ?? 0;
-      return { songs: (data ?? []) as MusicRow[], total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
-    }
+    const total = count ?? data?.length ?? 0;
+    return { songs: (data ?? []) as MusicRow[], total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
   } catch (error) {
     reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
     if (IS_BUILD) return { songs: [], total: 0, totalPages: 1 };
     throw error;
   }
-
-  return loadMusicIdsPage(page, { preset, search: options?.search, sort: options?.sort });
 }
 
 export async function loadTrendingMusicIdsPageData(page: number): Promise<PageData> {

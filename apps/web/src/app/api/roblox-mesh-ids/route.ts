@@ -17,12 +17,20 @@ export async function GET(request: Request) {
   if (page < 1 || page > 1_000) {
     return NextResponse.json({ ok: false, error: "Invalid page" }, { status: 400 });
   }
-  const pageData = await loadRobloxMeshIdsPageData(page, {
-    query: normalizeMeshSearch(searchParams.get("q")),
-    sort: normalizeMeshSort(searchParams.get("sort"))
-  });
-  return NextResponse.json(
-    { ok: true, ...pageData },
-    { headers: { "Cache-Control": "public, max-age=60, s-maxage=3600, stale-while-revalidate=86400" } }
-  );
+  try {
+    const pageData = await loadRobloxMeshIdsPageData(page, {
+      query: normalizeMeshSearch(searchParams.get("q")),
+      sort: normalizeMeshSort(searchParams.get("sort"))
+    });
+    return NextResponse.json(
+      { ok: true, ...pageData },
+      { headers: { "Cache-Control": "public, max-age=60, s-maxage=3600, stale-while-revalidate=86400" } }
+    );
+  } catch (error) {
+    console.error("Failed to load Roblox mesh IDs API", error);
+    return NextResponse.json(
+      { ok: false, error: "Unable to load mesh IDs right now." },
+      { status: 503, headers: { "Cache-Control": "no-store" } }
+    );
+  }
 }
