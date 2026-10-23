@@ -6,6 +6,11 @@ import { randomUUID, createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { performance } from 'node:perf_hooks';
+import { validatePreparedSelection } from './stats-prepared-selection.mjs';
+import { READER_DIAGNOSTIC_MIGRATIONS } from './stats-prepared-reader-diagnostic.mjs';
+import { runReaderDiagnostic, createReaderDiagnosticRest,
+  READER_DIAGNOSTIC_PHASES } from './stats-prepared-reader-runner.mjs';
 
 const PROJECT = 'bbtcaurrtyoukvjbxbbj';
 const MANAGED_URL = `https://${PROJECT}.supabase.co`;
@@ -34,7 +39,9 @@ const SQL_PHASES = new Set(['source-clone', 'migration-install', 'alias-read', '
   'alias-acl-timeout', 'claim-diagnostic-install', 'claim-diagnostic', 'fixture-drive-install',
   'fixture-drive', 'fixture-checks', 'cleanup', 'source-preflight', 'source-storage',
   'source-universes', 'source-current-index', 'source-daily', 'source-hourly-history',
-  'source-hourly', 'source-counts', 'source-analyze']);
+  'source-hourly', 'source-counts', 'source-analyze', 'daily-diagnostic-install',
+  'daily-diagnostic-reach', 'daily-diagnostic-probe', 'daily-diagnostic-state',
+  ...READER_DIAGNOSTIC_PHASES]);
 const PG_STATE_CLASSES = Object.freeze({ '53100': 'disk-full', '25006': 'read-only-transaction' });
 const sqlstate = value => typeof value === 'string' && /^[A-Z0-9]{5}$/.test(value) ? value : null;
 const rpcErrorCode = value => sqlstate(value) ??
@@ -231,6 +238,71 @@ export function qaReceiptWithPhases(identity, phases) {
   return { ...identity, phases: [...(identity.phases ?? []), ...phases] };
 }
 
+export function validateQaReaderSelection(eventName, event) {
+  assert.equal(eventName, 'workflow_dispatch', 'manual reader diagnostic only');
+  assert.equal(validatePreparedSelection(eventName, event).purpose,
+    'stats_prepared_reader_diagnostic', 'explicit reader diagnostic selection required');
+}
+
+/** Adapt only the existing fully received Management transport; never retry. */
+export function qaReaderSqlAdapter(sql, phases) {
+  return async (query, phase) => {
+    assert.ok(READER_DIAGNOSTIC_PHASES.includes(phase), 'unknown reader SQL phase');
+    const before = phases.length;
+    try {
+      const rows = await sql(query, phase);
+      const evidence = phases.length === before + 1 ? phases.at(-1) : null;
+      if (evidence?.kind === 'sql' && evidence.phase === phase && evidence.ok === true &&
+        Number.isInteger(evidence.status) && evidence.status >= 200 && evidence.status < 300 && Array.isArray(rows)) {
+        return { ok: true, status: evidence.status, rows, requestComplete: true };
+      }
+    } catch { /* Provider/assertion details remain in the existing sanitized seam. */ }
+    const evidence = phases.length === before + 1 && phases.at(-1)?.phase === phase ? phases.at(-1) : null;
+    return { ok: false, status: Number.isInteger(evidence?.status) && evidence.status >= 100 && evidence.status <= 599
+      ? evidence.status : null, failure: { sqlstate: sqlstate(evidence?.sqlstate) ?? 'unknown',
+      errorClass: ['statement-timeout', 'user-cancel'].includes(evidence?.errorClass) ? evidence.errorClass : 'unknown' } };
+  };
+}
+
+export function qaInterruptReaderDiagnostic(snapshot) {
+  if (!snapshot) return;
+  let interrupted = false;
+  for (const attempt of snapshot.attempts ?? []) {
+    if (attempt.status === 'pending') {
+      interrupted = true;
+      attempt.status = 'interrupted';
+      // Cleanup proves owned-object removal, never the interrupted session's rollback.
+      attempt.isolation = 'unknown';
+    }
+  }
+  snapshot.completed = false; snapshot.acceptance = false;
+  if (interrupted && snapshot.diagnostic?.status !== 'profiled') snapshot.diagnostic.status = 'interrupted';
+}
+
+export function qaReaderDefinitionProof(rows, migrations, schema, privateSchema) {
+  fixtureMigrationSql('', schema, privateSchema);
+  const prefix = `qa_${schema.slice(9)}_`;
+  const expected = [...new Set(migrations.flatMap(({ sql }) => [...sql.matchAll(
+    /create (?:or replace )?function ([a-z0-9_]+)[.]([a-z0-9_]+)[(]/g)].map(m => `${m[1]}.${m[2]}`)))];
+  const aliases = RPC_NAMES.map(name => `public.${prefix}${name.replace('_stats_prepared_', '_sp_')}`);
+  assert.deepEqual(rows.map(r => `${r.schema}.${r.name}`).sort(), [...expected, ...aliases].sort(),
+    'reader-installed-function-inventory');
+  for (const row of rows) {
+    assert.ok(row.owner === 'postgres' && row.service_execute === true && row.anon_execute === false &&
+      row.authenticated_execute === false && row.public_execute === false, 'reader-installed-function-acl');
+    assert.equal(typeof row.definition, 'string', 'reader-installed-function-definition');
+  }
+  for (const name of RPC_NAMES) {
+    const original = rows.find(r => r.schema === schema && r.name === name);
+    const exposed = rows.find(r => r.schema === 'public' && r.name === prefix + name.replace('_stats_prepared_', '_sp_'));
+    assert.equal(exposed.definition, original.definition.replace(`FUNCTION ${schema}.${name}(`,
+      `FUNCTION public.${exposed.name}(`), 'reader-alias-definition-settings');
+  }
+  return rows.map(row => ({ schema: row.schema, name: row.name,
+    definitionSha256: createHash('sha256').update(row.definition).digest('hex'), owner: row.owner,
+    serviceOnly: true, aliasDefinitionSettingsVerified: row.schema === 'public' }));
+}
+
 export async function writeQaReceipt(receiptPath, receipt) {
   // Atomic replacement preserves the previous durable evidence on interruption.
   const pending = `${receiptPath}.pending`;
@@ -307,6 +379,460 @@ export function qaAdvanceStateSql(schema) {
     'visitBuild',g.id,'visitAfter',g.after_id::text,'visitTotalsDone',g.totals_done)
     from ${schema}.stats_prepared_control c left join ${schema}.stats_prepared_generations g
       on g.product='visit' and g.status='building' where c.id`;
+}
+
+export const DAILY_DIAGNOSTIC_PROBES = Object.freeze(['whole-advance', 'daily-helper', 'daily-cte',
+  'shared-cleanup', 'cleanup-generation-candidate', 'cleanup-version-candidate']);
+const DAILY_STATE_TABLES = Object.freeze({
+  stats_prepared_control: 'id', stats_prepared_members: 'universe_id', stats_prepared_dirty: 'kind,bucket',
+  stats_prepared_versions: 'id', stats_prepared_buckets: 'kind,bucket', stats_prepared_visits: 'version,universe_id',
+  stats_prepared_generations: 'id', stats_prepared_visit_universes: 'universe_id',
+  stats_prepared_visit_totals: 'generation,universe_id', stats_prepared_visit_ranges: 'generation,days',
+  stats_prepared_receipts: 'step_id', revalidation_events: 'entity_type,slug',
+});
+const DAILY_SOURCE_TABLES = Object.freeze({ roblox_universes: 'universe_id', stats_game_current_index: 'universe_id',
+  roblox_universe_stats_hourly: 'universe_id,hour_start', roblox_universe_stats_daily: 'universe_id,stat_date' });
+export const DAILY_LEASE_BUDGET = Object.freeze({ requestMs: MANAGEMENT_REQUEST_MS, controlMs: 12_000,
+  stateMs: 12_000, marginMs: 5_000, totalMs: DRIVE_BUDGET_MS });
+const DAILY_PLAN_RELATIONS = new Set([...Object.keys(DAILY_STATE_TABLES), 'roblox_universes',
+  'stats_game_current_index', 'roblox_universe_stats_hourly', 'roblox_universe_stats_daily']);
+const DAILY_PLAN_NODES = new Set(['Result', 'ProjectSet', 'ModifyTable', 'Append', 'Merge Append', 'Recursive Union',
+  'BitmapAnd', 'BitmapOr', 'Seq Scan', 'Sample Scan', 'Gather', 'Gather Merge', 'Index Scan', 'Index Only Scan',
+  'Bitmap Index Scan', 'Bitmap Heap Scan', 'Tid Scan', 'Tid Range Scan', 'Subquery Scan', 'Function Scan',
+  'Table Function Scan', 'Values Scan', 'CTE Scan', 'Named Tuplestore Scan', 'WorkTable Scan', 'Foreign Scan',
+  'Custom Scan', 'Nested Loop', 'Merge Join', 'Hash Join', 'Materialize', 'Memoize', 'Sort', 'Incremental Sort',
+  'Group', 'Aggregate', 'WindowAgg', 'Unique', 'SetOp', 'LockRows', 'Limit', 'Hash']);
+const DAILY_PLAN_NUMBERS = ['Startup Cost', 'Total Cost', 'Plan Rows', 'Plan Width', 'Actual Startup Time',
+  'Actual Total Time', 'Actual Rows', 'Actual Loops', 'Rows Removed by Filter', 'Rows Removed by Join Filter',
+  'Rows Removed by Index Recheck', 'Heap Fetches', 'Shared Hit Blocks', 'Shared Read Blocks', 'Shared Dirtied Blocks',
+  'Shared Written Blocks', 'Local Hit Blocks', 'Local Read Blocks', 'Local Dirtied Blocks', 'Local Written Blocks',
+  'Temp Read Blocks', 'Temp Written Blocks', 'I/O Read Time', 'I/O Write Time', 'Shared I/O Read Time',
+  'Shared I/O Write Time', 'Local I/O Read Time', 'Local I/O Write Time', 'Temp I/O Read Time', 'Temp I/O Write Time',
+  'WAL Records', 'WAL FPI', 'WAL Bytes', 'Sort Space Used', 'Hash Buckets', 'Original Hash Buckets',
+  'Hash Batches', 'Original Hash Batches', 'Peak Memory Usage', 'Disk Usage', 'HashAgg Batches',
+  'Planned Partitions', 'Tuples Inserted', 'Conflicting Tuples', 'Workers Planned', 'Workers Launched'];
+
+// Positive field projection: plans can contain source values, SQL, arbitrary
+// expressions, function arguments, settings paths and provider strings. None of
+// those are receipt fields. Unknown labels become fixed tags, never copied text.
+export function qaDailyPlanSummary(plan, schema) {
+  fixtureMigrationSql('', schema, `${schema}_p`);
+  assert.ok(Array.isArray(plan) && plan.length === 1 && plan[0]?.Plan, 'invalid-daily-plan');
+  assert.ok(['Execution Time'].every(key => Number.isFinite(plan[0][key]) && plan[0][key] >= 0) &&
+    ['Actual Rows', 'Actual Loops', 'Actual Total Time'].every(key =>
+      Number.isFinite(plan[0].Plan[key]) && plan[0].Plan[key] >= 0), 'daily-plan-missing-analyze');
+  let count = 0;
+  const numbers = (input, fields) => Object.fromEntries(fields.filter(key =>
+    typeof input?.[key] === 'number' && Number.isFinite(input[key]) && input[key] >= 0).map(key => [key, input[key]]));
+  const relation = value => DAILY_PLAN_RELATIONS.has(value) ? value : 'other';
+  const node = (input, depth = 0) => {
+    assert.ok(input && typeof input === 'object' && !Array.isArray(input) && depth <= 64 && ++count <= 512, 'daily-plan-too-large');
+    const output = { node: DAILY_PLAN_NODES.has(input['Node Type']) ? input['Node Type'] : 'other',
+      ...numbers(input, DAILY_PLAN_NUMBERS) };
+    if (input['Relation Name'] !== undefined) output.relation = relation(input['Relation Name']);
+    if (input['Schema'] !== undefined) output.schema = input.Schema === schema ? 'owned' : 'other';
+    if (input['Index Name'] !== undefined) {
+      // Only fixed names on the known prepared tables and cloned source tables.
+      const known = [...DAILY_PLAN_RELATIONS].flatMap(name => [name + '_pkey', name + '_universe_id_stat_date_idx',
+        name + '_universe_id_stat_date_key']);
+      known.push('stats_prepared_versions_scan', 'stats_prepared_one_build', 'stats_prepared_receipts_time');
+      output.index = known.includes(input['Index Name']) ? input['Index Name'] : 'other';
+    }
+    for (const key of ['CTE Name', 'Subplan Name']) {
+      const labels = ['source', 'contributions', 'universe_registry', 'sums'];
+      const label = key === 'Subplan Name' && typeof input[key] === 'string' ? input[key].replace(/^CTE /, '') : input[key];
+      if (input[key] !== undefined) output[key] = labels.includes(label) ? label : 'other';
+    }
+    for (const [key, values] of Object.entries({ 'Parent Relationship': ['Outer', 'Inner', 'SubPlan', 'InitPlan', 'Member'],
+      'Join Type': ['Inner', 'Left', 'Right', 'Full', 'Semi', 'Anti'], 'Strategy': ['Plain', 'Sorted', 'Hashed', 'Mixed'],
+      'Operation': ['Insert', 'Update', 'Delete', 'Merge'], 'Sort Method': ['quicksort', 'top-N heapsort', 'external merge', 'external sort'],
+      'Sort Space Type': ['Memory', 'Disk'] })) {
+      if (input[key] !== undefined) output[key] = values.includes(input[key]) ? input[key] : 'other';
+    }
+    if (Array.isArray(input.Plans)) output.plans = input.Plans.map(child => node(child, depth + 1));
+    if (Array.isArray(input.Workers)) {
+      assert.ok(input.Workers.length <= 32, 'daily-plan-too-many-workers');
+      output.workers = input.Workers.map(worker => numbers(worker, ['Worker Number', ...DAILY_PLAN_NUMBERS]));
+    }
+    return output;
+  };
+  const root = plan[0];
+  const summary = { ...numbers(root, ['Planning Time', 'Execution Time']), plan: node(root.Plan),
+    triggers: [], settings: {} };
+  if (root.Planning) summary.planning = numbers(root.Planning, DAILY_PLAN_NUMBERS);
+  if (root.JIT) {
+    summary.jit = { ...numbers(root.JIT, ['Functions']),
+      timing: numbers(root.JIT.Timing, ['Generation', 'Inlining', 'Optimization', 'Emission', 'Total']), options: {} };
+    for (const key of ['Inlining', 'Optimization', 'Expressions', 'Deforming']) {
+      if (typeof root.JIT.Options?.[key] === 'boolean') summary.jit.options[key] = root.JIT.Options[key];
+    }
+  }
+  assert.ok(!root.Triggers || Array.isArray(root.Triggers) && root.Triggers.length <= 64, 'invalid-daily-triggers');
+  for (const trigger of root.Triggers ?? []) summary.triggers.push({ relation: relation(trigger.Relation),
+    kind: /^RI_ConstraintTrigger_[ac]_[0-9]+$/.test(trigger['Trigger Name'] ?? '') ? 'foreign-key' : 'other',
+    ...numbers(trigger, ['Time', 'Calls']) });
+  // Numeric/unit settings only. No raw Settings map, search_path or plan text.
+  for (const key of ['work_mem', 'hash_mem_multiplier', 'effective_cache_size', 'random_page_cost',
+    'seq_page_cost', 'max_parallel_workers_per_gather', 'jit', 'track_io_timing', 'plan_cache_mode']) {
+    const value = root.Settings?.[key];
+    if (typeof value === 'string' && /^(?:[0-9]+(?:[.][0-9]+)?(?:kB|MB|GB)?|on|off|auto|force_generic_plan|force_custom_plan)$/.test(value)) summary.settings[key] = value;
+  }
+  return summary;
+}
+
+export function fixtureDailyDiagnosticSql(bytes, schema, privateSchema) {
+  fixtureMigrationSql('', schema, privateSchema);
+  assert.ok(Buffer.isBuffer(bytes));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), ORIGINAL_MIGRATION_SHA256,
+    'daily diagnostic requires exact immutable source');
+  const source = bytes.toString('utf8');
+  const body = name => {
+    const start = source.indexOf(`create function stats_prepared_private.stats_prepared_${name}_v1()`);
+    assert.ok(start >= 0);
+    const end = source.indexOf('end $$;', start);
+    assert.ok(end > start);
+    return source.slice(start, end + 'end $$;'.length);
+  };
+  const daily = body('daily'), cleanup = body('cleanup');
+  const cteStart = daily.indexOf(' with source as materialized ('), cteEnd = daily.indexOf(' from sums s where v.id=s.version;');
+  assert.ok(cteStart > 0 && cteEnd > cteStart);
+  const exactCte = daily.slice(cteStart, cteEnd + ' from sums s where v.id=s.version;'.length);
+  const candidate = (first, last) => {
+    const start = cleanup.indexOf(first), end = cleanup.indexOf(last, start);
+    assert.ok(start > 0 && end > start);
+    return cleanup.slice(start, end + last.length);
+  };
+  const generation = candidate(' select id into gid from', ' order by created_at limit 1;').replace('select id into gid', 'select id');
+  const version = candidate(' select v.id into vid from', ' order by v.created_at limit 1;').replace('select v.id into vid', 'select v.id');
+  const parameterize = query => fixtureMigrationSql(query, schema, privateSchema)
+    .replace(/\bc[.]daily_scan\b/g, '$4').replace(/\bc[.]active_platform\b/g, '$5')
+    .replace(/\bc[.]previous_platform\b/g, '$6').replace(/\bc[.]active_visit\b/g, '$7')
+    .replace(/\bc[.]previous_visit\b/g, '$8').replace(/\bids\b/g, '$1')
+    .replace(/\blow_date\b/g, '$2').replace(/\bhigh_date\b/g, '$3');
+  const queries = [
+    `select ${schema}.run_stats_prepared_step_v1($9,$10,$11,'{"kind":"advance"}'::jsonb)`,
+    `select ${privateSchema}.stats_prepared_daily_v1()`, parameterize(exactCte),
+    `select ${privateSchema}.stats_prepared_cleanup_v1()`, parameterize(generation), parameterize(version),
+  ];
+  const snapshot = `select jsonb_build_object('utcHour',extract(epoch from date_trunc('hour',now())),
+    'tables',jsonb_build_object(${Object.entries(DAILY_STATE_TABLES).map(([table, keys]) => `${literal(table)},
+      (select jsonb_build_object('rows',count(*),'digest',md5(coalesce(string_agg(md5(to_jsonb(t)::text),'' order by ${keys}),'')))
+       from ${schema}.${table} t)`).join(',\n')}))`;
+  // NONACCEPTANCE diagnostic only. The CTE and candidate SELECTs are extracted
+  // byte-for-byte from the frozen migration, then schema-qualified and bound to
+  // typed USING parameters. EXECUTE replans with current values (custom-plan
+  // behavior); this does not establish a cached/generic PL/pgSQL plan or HTTP SLA.
+  return { cteSha256: createHash('sha256').update(exactCte).digest('hex'),
+    install: `begin;
+create function ${privateSchema}.qa_daily_state_v1() returns jsonb language sql volatile security invoker
+set search_path='' set timezone='UTC' as $qa_state$ ${snapshot} $qa_state$;
+create function ${privateSchema}.qa_daily_probe_v1(p_probe text,p_after bigint,p_token uuid,p_epoch bigint,p_step uuid)
+returns jsonb language plpgsql volatile security invoker set search_path='' set timezone='UTC' as $qa_probe$
+declare before_state jsonb; after_state jsonb; c ${schema}.stats_prepared_control;
+  ids bigint[]; low_date date; high_date date; query text; plan jsonb; error_state text; error_message text;
+begin
+  if p_probe not in (${DAILY_DIAGNOSTIC_PROBES.map(literal)}) or p_probe is null
+    or p_after not in (0,256) or p_after is null or p_step is null then
+    raise exception 'invalid-daily-probe' using errcode='22023';
+  end if;
+  select * into c from ${schema}.stats_prepared_control where id for update;
+  if c.daily_scan is null or c.daily_after<>p_after or c.lease_token is distinct from p_token
+    or c.lease_epoch is distinct from p_epoch or c.lease_until<=clock_timestamp() then
+    raise exception 'daily-probe-wrong-state' using errcode='55000';
+  end if;
+  select array_agg(universe_id order by universe_id) into ids from
+    (select universe_id from ${schema}.roblox_universes where universe_id>c.daily_after order by universe_id limit 256) u;
+  if cardinality(ids) is distinct from 256 then raise exception 'daily-probe-wrong-chunk' using errcode='55000'; end if;
+  select min(bucket)::date,max(bucket)::date into low_date,high_date
+    from ${schema}.stats_prepared_versions where scan=c.daily_scan and status='building';
+  if low_date is null or high_date is null then raise exception 'daily-probe-no-building-dates' using errcode='55000'; end if;
+  query:=case p_probe ${DAILY_DIAGNOSTIC_PROBES.map((probe, i) => `when ${literal(probe)} then ${literal(queries[i])}`).join('\n')} end;
+  before_state:=${privateSchema}.qa_daily_state_v1();
+  begin
+    execute 'EXPLAIN (ANALYZE,BUFFERS,WAL,SETTINGS,FORMAT JSON) '||query into plan
+      using ids,low_date,high_date,c.daily_scan,c.active_platform,c.previous_platform,c.active_visit,c.previous_visit,p_token,p_epoch,p_step;
+    if p_probe='whole-advance' and (select outcome->>'phase' from ${schema}.stats_prepared_receipts where step_id=p_step)
+      is distinct from 'daily-batch' then raise exception 'daily-probe-wrong-phase' using errcode='55000'; end if;
+    if p_probe in ('whole-advance','daily-helper') and (select daily_after from ${schema}.stats_prepared_control where id)
+      is distinct from ids[256] then raise exception 'daily-probe-wrong-cursor' using errcode='55000'; end if;
+    raise exception using errcode='PZ002',message='daily-probe-rollback';
+  exception when query_canceled or others then
+    get stacked diagnostics error_state=returned_sqlstate,error_message=message_text;
+    if error_state='PZ002' and error_message='daily-probe-rollback' then error_state:=null;
+    else plan:=null; end if;
+  end;
+  after_state:=${privateSchema}.qa_daily_state_v1();
+  if before_state is distinct from after_state then raise exception 'daily-probe-state-changed' using errcode='55000'; end if;
+  return jsonb_build_object('plan',plan,'sqlstate',error_state,'rollbackVerified',true,'beforeState',before_state,
+    'dailyAfter',c.daily_after::text,'chunkIds',cardinality(ids),'ioTimingEnabled',current_setting('track_io_timing')='on');
+end $qa_probe$;
+revoke all on function ${privateSchema}.qa_daily_state_v1() from public,anon,authenticated;
+revoke all on function ${privateSchema}.qa_daily_probe_v1(text,bigint,uuid,bigint,uuid) from public,anon,authenticated;
+grant execute on function ${privateSchema}.qa_daily_state_v1() to service_role;
+grant execute on function ${privateSchema}.qa_daily_probe_v1(text,bigint,uuid,bigint,uuid) to service_role;
+commit;`,
+    // Restored subtransaction is verified before returning, outer ROLLBACK also
+    // covers locks and any future helper changes. Only the helper returns data.
+    probe: (probe, after, token, epoch, step) => {
+      assert.ok(DAILY_DIAGNOSTIC_PROBES.includes(probe) && [0, 256].includes(after));
+      assert.match(token, UUID); assert.match(step, UUID); assert.match(String(epoch), /^[1-9][0-9]{0,18}$/);
+      return `begin; set local statement_timeout='100s'; set local lock_timeout='500ms'; set local role service_role;
+select ${privateSchema}.qa_daily_probe_v1(${literal(probe)},${after},${literal(token)},${literal(epoch)},${literal(step)}) as result;
+rollback;`;
+    },
+    // A new full baseline per lease. Only normal finish/claim deltas may differ
+    // across it; source rows and every other prepared row remain fingerprinted.
+    boundary: (finished = null) => {
+      if (finished) { assert.match(finished.leaseToken, UUID); assert.match(String(finished.epoch), /^[1-9][0-9]{0,18}$/); }
+      const token = finished ? `${literal(finished.leaseToken)}::uuid` : 'null::uuid';
+      const epoch = finished ? `${literal(finished.epoch)}::bigint` : 'null::bigint';
+      return `select jsonb_build_object('full',(${snapshot}),
+        'dbNow',clock_timestamp(),'source',jsonb_build_object(${Object.entries(DAILY_SOURCE_TABLES).map(([table, keys]) => `${literal(table)},
+          (select jsonb_build_object('rows',count(*),'digest',md5(coalesce(string_agg(md5(to_jsonb(t)::text),'' order by ${keys}),'')))
+           from ${schema}.${table} t)`).join(',\n')}),
+        'fixedControl',md5((to_jsonb(c)-array['lease_token','lease_epoch','lease_until','lease_request','worker_id',
+          'checked_at','success_at','error_code','failures','retry_at'])::text),
+        'leaseToken',c.lease_token,'epoch',c.lease_epoch::text,'expiresAt',c.lease_until,'requestId',c.lease_request,
+        'worker',c.worker_id,'checkedAt',c.checked_at,'successAt',c.success_at,
+        'failures',c.failures,'errorCode',c.error_code,'retryAt',c.retry_at,
+        'dailyScan',c.daily_scan,'dailyAfter',c.daily_after::text,'steps',c.steps,
+        'dueHour',exists(select 1 from ${schema}.stats_prepared_dirty where kind='h' and bucket>=now()-interval '48 hours'),
+        'chunk',(select jsonb_build_object('rows',count(*),'digest',md5(coalesce(string_agg(universe_id::text,',' order by universe_id),'')))
+          from (select universe_id from ${schema}.roblox_universes where universe_id>c.daily_after order by universe_id limit 256) u),
+        'retainedReceipts',(select jsonb_build_object('rows',count(*),'digest',md5(coalesce(string_agg(md5(to_jsonb(r)::text),'' order by step_id),'')))
+          from ${schema}.stats_prepared_receipts r where step_id is distinct from ${token}),
+        'expectedFinish',exists(select 1 from ${schema}.stats_prepared_receipts r where r.step_id=${token}
+          and r.lease_token=${token} and r.epoch=${epoch} and r.outcome=jsonb_build_object('status','yielded','code',null,
+            'remainingBuckets',(select count(*) from ${schema}.stats_prepared_dirty),'dailyScan',c.daily_scan,
+            'dailyAfter',c.daily_after::text,'steps',c.steps,
+            'visitStage',(select id from ${schema}.stats_prepared_generations where product='visit' and status='building')))) as result
+        from ${schema}.stats_prepared_control c where c.id;`;
+    } };
+}
+
+export function qaDailyProbeResult(result, schema, after) {
+  const invalid = () => { throw new Error('invalid-daily-probe-result'); };
+  if (![0, 256].includes(after) || result?.rollbackVerified !== true || result.dailyAfter !== String(after) ||
+    result.chunkIds !== 256 || typeof result.ioTimingEnabled !== 'boolean') invalid();
+  const beforeState = { utcHour: result.beforeState?.utcHour, tables: {} };
+  if (!Number.isSafeInteger(beforeState.utcHour) || beforeState.utcHour <= 0) invalid();
+  for (const table of Object.keys(DAILY_STATE_TABLES)) {
+    const row = result.beforeState?.tables?.[table];
+    if (!Number.isSafeInteger(row?.rows) || row.rows < 0 || typeof row.digest !== 'string' || !/^[a-f0-9]{32}$/.test(row.digest)) invalid();
+    beforeState.tables[table] = { rows: row.rows, digest: row.digest };
+  }
+  const code = result.sqlstate === null ? null : sqlstate(result.sqlstate);
+  if (result.sqlstate !== null && !code) invalid();
+  return { rollbackVerified: true, dailyAfter: String(after), chunkIds: 256, beforeState,
+    ioTimingEnabled: result.ioTimingEnabled, sqlstate: code,
+    ...(code === null ? { summary: qaDailyPlanSummary(result.plan, schema) } : {}) };
+}
+
+export function qaDailyBoundaryResult(value) {
+  const valid = ok => assert.ok(ok, 'invalid-daily-boundary');
+  const fingerprint = row => {
+    valid(Number.isSafeInteger(row?.rows) && row.rows >= 0 && typeof row.digest === 'string' && /^[a-f0-9]{32}$/.test(row.digest));
+    return { rows: row.rows, digest: row.digest };
+  };
+  valid(Number.isSafeInteger(value?.full?.utcHour) && value.full.utcHour > 0);
+  const full = { utcHour: value.full.utcHour, tables: {} }, source = {};
+  for (const table of Object.keys(DAILY_STATE_TABLES)) full.tables[table] = fingerprint(value.full.tables?.[table]);
+  for (const table of Object.keys(DAILY_SOURCE_TABLES)) source[table] = fingerprint(value.source?.[table]);
+  valid(typeof value.fixedControl === 'string' && /^[a-f0-9]{32}$/.test(value.fixedControl));
+  for (const key of ['leaseToken', 'requestId']) valid(UUID.test(value[key] ?? ''));
+  valid(value.dailyScan === null || UUID.test(value.dailyScan ?? ''));
+  valid(typeof value.epoch === 'string' && /^[1-9][0-9]{0,18}$/.test(value.epoch) &&
+    typeof value.dailyAfter === 'string' && /^(0|[1-9][0-9]{0,18})$/.test(value.dailyAfter));
+  for (const key of ['dbNow', 'expiresAt', 'checkedAt']) valid(typeof value[key] === 'string' && Number.isFinite(Date.parse(value[key])));
+  valid(value.successAt === null || typeof value.successAt === 'string' && Number.isFinite(Date.parse(value.successAt)));
+  valid(value.worker === 'github-fixture' && value.failures === 0 && value.errorCode === null && value.retryAt === null);
+  valid(Number.isSafeInteger(value.steps) && value.steps >= 0 && typeof value.dueHour === 'boolean' && typeof value.expectedFinish === 'boolean');
+  return { full, source, fixedControl: value.fixedControl, leaseToken: value.leaseToken, epoch: value.epoch,
+    expiresAt: value.expiresAt, requestId: value.requestId, worker: value.worker, checkedAt: value.checkedAt,
+    successAt: value.successAt, dbNow: value.dbNow, dailyScan: value.dailyScan, dailyAfter: value.dailyAfter,
+    steps: value.steps, dueHour: value.dueHour, chunk: fingerprint(value.chunk),
+    retainedReceipts: fingerprint(value.retainedReceipts), expectedFinish: value.expectedFinish };
+}
+
+export function qaInterruptDailyDiagnostic(diagnostic) {
+  if (!diagnostic) return;
+  if (diagnostic.pending?.status === 'pending') {
+    diagnostic.pending.status = 'interrupted';
+    for (const attempt of diagnostic.requests ?? []) {
+      if (attempt.requestId === diagnostic.pending.requestId) attempt.status = 'interrupted';
+    }
+    for (const attempt of [...(diagnostic.probes ?? []), ...(diagnostic.advances ?? [])]) {
+      if (diagnostic.pending.stepId && attempt.stepId === diagnostic.pending.stepId && attempt.status === 'pending') attempt.status = 'interrupted';
+    }
+  }
+  if (['pending', 'running'].includes(diagnostic.status)) diagnostic.status = 'interrupted';
+}
+
+/** Pure orchestration seam: the CLI supplies bounded real requests; tests supply clocks/control stubs. */
+export async function qaRunDailyDiagnostic({ diagnostic, requests, save, uuid = randomUUID,
+  clock = { mono: () => performance.now(), wall: () => Date.now() } }) {
+  const limits = DAILY_LEASE_BUDGET, started = clock.mono(), wallStarted = clock.wall();
+  let previousMono = started, claim, deadline, current, sourceBaseline, hourBaseline, membersBaseline;
+  Object.assign(diagnostic, { status: 'running', acceptance: false, requests: [], probes: [], advances: [], leases: [],
+    comparison: 'new-full-baseline-per-lease-only-verified-finish-claim-deltas',
+    leaseSchedule: 'one-probe-per-fresh-normal-claim', limits });
+  const now = () => {
+    const mono = clock.mono(), wall = clock.wall();
+    assert.ok(Number.isFinite(mono) && mono >= previousMono && Number.isFinite(wall) &&
+      Math.abs((wall - wallStarted) - (mono - started)) <= 1000, 'daily-diagnostic-clock-drift');
+    previousMono = mono; return mono;
+  };
+  const admission = reserve => assert.ok(now() - started + reserve <= limits.totalMs, 'bounded-daily-diagnostic-incomplete');
+  const call = async (kind, cap, body, metadata = {}) => {
+    admission(cap);
+    const attempt = { requestId: uuid(), kind, status: 'pending', startedMs: now() - started, ...metadata };
+    diagnostic.requests.push(attempt); diagnostic.pending = attempt;
+    await save(); admission(['probe', 'advance'].includes(kind) ? workReserve : cap);
+    if (['probe', 'advance'].includes(kind)) leaseReserve(workReserve);
+    if (kind === 'finish') leaseReserve(limits.controlMs + limits.marginMs);
+    if (kind === 'state') leaseReserve(limits.stateMs + limits.controlMs + limits.marginMs);
+    const sent = now();
+    try {
+      const result = await body(attempt);
+      attempt.ms = now() - sent;
+      assert.ok(attempt.ms <= cap, 'daily-diagnostic-request-budget');
+      attempt.status = 'completed'; delete diagnostic.pending; await save(); return result;
+    } catch (error) {
+      attempt.status = 'failed'; attempt.failure = 'daily-diagnostic-request-failed';
+      diagnostic.pending = attempt; await save(); throw error;
+    }
+  };
+  const leaseReserve = reserve => assert.ok(deadline - now() >= reserve, 'daily-diagnostic-lease-reserve');
+  const setLease = value => {
+    assert.ok(value?.claimed === true && UUID.test(value.leaseToken ?? '') &&
+      /^[1-9][0-9]{0,18}$/.test(value.epoch) && Number.isFinite(Date.parse(value.expiresAt)), 'daily-diagnostic-claim-invalid');
+    // Actual returned expiry, conservatively mapped onto the monotonic clock.
+    assert.ok(Date.parse(value.expiresAt) - clock.wall() <= 240_000 + limits.marginMs, 'daily-diagnostic-claim-clock-drift');
+    claim = { leaseToken: value.leaseToken, epoch: value.epoch, expiresAt: value.expiresAt, requestId: value.requestId };
+    deadline = now() + Date.parse(claim.expiresAt) - clock.wall() - limits.marginMs;
+  };
+  const claimFresh = async () => {
+    const value = await call('claim', limits.controlMs, async attempt => ({ ...await requests.claim(attempt.requestId), requestId: attempt.requestId }));
+    setLease(value);
+  };
+  const checkState = value => {
+    assert.ok(Math.abs(Date.parse(value.dbNow) - clock.wall()) <= limits.stateMs + limits.marginMs, 'daily-diagnostic-server-clock-drift');
+    assert.equal(value.full.utcHour, Math.floor(clock.wall() / 3_600_000) * 3600, 'daily-diagnostic-hour-drift');
+    hourBaseline ??= value.full.utcHour; sourceBaseline ??= value.source; membersBaseline ??= value.full.tables.stats_prepared_members;
+    assert.equal(value.full.utcHour, hourBaseline, 'daily-diagnostic-hour-drift');
+    assert.deepEqual(value.source, sourceBaseline, 'daily-diagnostic-source-drift');
+    assert.deepEqual(value.full.tables.stats_prepared_members, membersBaseline, 'daily-diagnostic-members-drift');
+    for (const [table, count] of Object.entries({ roblox_universes: 1105, stats_game_current_index: 2,
+      roblox_universe_stats_daily: 100555, roblox_universe_stats_hourly: 8640 })) assert.equal(value.source[table].rows, count, 'daily-diagnostic-source-count');
+    assert.equal(value.full.tables.stats_prepared_members.rows, 2, 'daily-diagnostic-members-count');
+    assert.equal(value.leaseToken, claim.leaseToken, 'daily-diagnostic-lease-drift');
+    assert.equal(value.epoch, claim.epoch, 'daily-diagnostic-epoch-drift');
+    assert.equal(value.requestId, claim.requestId, 'daily-diagnostic-request-drift');
+    assert.equal(Date.parse(value.expiresAt), Date.parse(claim.expiresAt), 'daily-diagnostic-expiry-drift');
+    assert.ok(Date.parse(value.checkedAt) <= Date.parse(value.dbNow), 'daily-diagnostic-control-time-drift');
+    return value;
+  };
+  const readState = async (finished = null) => checkState(await call('state', limits.stateMs,
+    () => requests.state(finished), { lease: { ...claim } }));
+  const finish = async () => {
+    leaseReserve(limits.controlMs + limits.marginMs);
+    const old = { ...claim };
+    const result = await call('finish', limits.controlMs, () => requests.finish(old), { lease: old, outcome: 'yielded' });
+    assert.equal(result?.status, 'yielded', 'daily-diagnostic-finish-invalid');
+    assert.equal(result.dailyScan, current.dailyScan, 'daily-diagnostic-finish-scan-drift');
+    assert.equal(result.dailyAfter, current.dailyAfter, 'daily-diagnostic-finish-cursor-drift');
+    assert.equal(result.steps, current.steps, 'daily-diagnostic-finish-steps-drift');
+    return old;
+  };
+  const rotate = async () => {
+    // Reserve the entire control/state sequence before releasing the live lease.
+    admission(2 * limits.controlMs + limits.stateMs);
+    const before = current, old = await finish();
+    await claimFresh(); const after = await readState(old);
+    assert.notEqual(claim.leaseToken, old.leaseToken, 'daily-diagnostic-claim-replayed');
+    assert.equal(BigInt(claim.epoch), BigInt(old.epoch) + 1n, 'daily-diagnostic-epoch-drift');
+    assert.equal(after.fixedControl, before.fixedControl, 'daily-diagnostic-control-drift');
+    assert.equal(after.dailyScan, before.dailyScan, 'daily-diagnostic-scan-drift');
+    assert.equal(after.dailyAfter, before.dailyAfter, 'daily-diagnostic-cursor-drift');
+    assert.deepEqual(after.chunk, before.chunk, 'daily-diagnostic-chunk-drift');
+    for (const table of Object.keys(DAILY_STATE_TABLES).filter(table => !['stats_prepared_control', 'stats_prepared_receipts'].includes(table))) {
+      assert.deepEqual(after.full.tables[table], before.full.tables[table], 'daily-diagnostic-prepared-drift');
+    }
+    assert.equal(after.expectedFinish, true, 'daily-diagnostic-finish-receipt-invalid');
+    assert.deepEqual(after.retainedReceipts, before.full.tables.stats_prepared_receipts, 'daily-diagnostic-existing-receipts-drift');
+    assert.equal(after.full.tables.stats_prepared_receipts.rows, before.full.tables.stats_prepared_receipts.rows + 1, 'daily-diagnostic-receipt-count-drift');
+    assert.ok(Date.parse(after.successAt) >= Date.parse(before.dbNow) && Date.parse(after.successAt) <= Date.parse(after.dbNow) &&
+      Date.parse(after.checkedAt) >= Date.parse(after.successAt) && Date.parse(after.checkedAt) <= Date.parse(after.dbNow), 'daily-diagnostic-control-time-drift');
+    current = after;
+    diagnostic.leases.push({ ...claim, baseline: after.full, source: after.source, fixedControl: after.fixedControl,
+      expectedDeltas: { control: 'normal-yielded-finish-and-new-claim', receipt: old.leaseToken },
+      crossLeasePreparedAndSourceVerified: true });
+    await save();
+  };
+  const workReserve = limits.requestMs + limits.stateMs + limits.controlMs + limits.marginMs;
+  const advance = async () => {
+    assert.ok(diagnostic.advances.length < DRIVE_MAX_STEPS, 'bounded-daily-diagnostic-incomplete');
+    if (deadline - now() < workReserve) await rotate();
+    leaseReserve(workReserve); admission(workReserve);
+    const attempt = { stepId: uuid(), status: 'pending', dailyAfter: current.dailyAfter };
+    diagnostic.advances.push(attempt); await save();
+    const result = await call('advance', limits.requestMs, () => requests.advance(claim, attempt.stepId), { stepId: attempt.stepId, lease: { ...claim } });
+    Object.assign(attempt, { status: 'completed', outcome: result });
+    // Committed advances legitimately renew the lease. Read its actual expiry;
+    // never infer a new 240-second lease from completion time.
+    const updated = await call('state', limits.stateMs, () => requests.state());
+    setLease({ claimed: true, ...claim, expiresAt: updated.expiresAt });
+    current = checkState(updated);
+    await save(); return result;
+  };
+  try {
+    await save(); await claimFresh(); current = await readState();
+    let outcome;
+    do { outcome = await advance(); assert.equal(outcome.more, true, 'daily-start-not-reached'); }
+    while (outcome.phase !== 'daily-start');
+    for (const after of [0, 256]) {
+      assert.ok(current.dailyScan && current.dailyAfter === String(after), 'daily-diagnostic-cursor-drift');
+      assert.ok(current.steps < 24, 'daily-diagnostic-unexpected-publication-turn');
+      if (current.steps % 4 === 0 && current.dueHour) {
+        const scan = current.dailyScan;
+        assert.equal((await advance()).phase, 'hour');
+        assert.equal(current.dailyAfter, String(after)); assert.equal(current.dailyScan, scan);
+      }
+      const groupBaseline = current;
+      for (const probe of DAILY_DIAGNOSTIC_PROBES) {
+        await rotate(); leaseReserve(workReserve); admission(workReserve);
+        assert.equal(current.fixedControl, groupBaseline.fixedControl, 'daily-diagnostic-control-drift');
+        const baseline = current.full;
+        const attempt = { probe, dailyAfter: String(after), stepId: uuid(), status: 'pending', lease: { ...claim },
+          baseline: 'new-full-baseline-for-this-lease', leaseIndex: diagnostic.leases.length - 1 };
+        diagnostic.probes.push(attempt); await save();
+        const evidence = await call('probe', limits.requestMs, () => requests.probe(probe, after, claim, attempt.stepId),
+          { probe, dailyAfter: String(after), stepId: attempt.stepId, lease: { ...claim } });
+        Object.assign(attempt, evidence);
+        assert.deepEqual(evidence.beforeState, baseline, 'daily-probe-prestate-drift');
+        assert.equal(evidence.rollbackVerified, true, 'daily-probe-rollback-unverified');
+        assert.equal(evidence.sqlstate, null, 'daily-probe-failed-see-receipt');
+        const next = await readState();
+        assert.deepEqual(next.full, baseline, 'daily-probe-poststate-drift');
+        assert.equal(next.fixedControl, current.fixedControl, 'daily-diagnostic-control-drift');
+        current = next; attempt.status = 'profiled'; attempt.leaseBaselineVerified = true; await save();
+      }
+      if (after === 0) {
+        const scan = current.dailyScan;
+        assert.equal((await advance()).phase, 'daily-batch'); assert.equal(current.dailyAfter, '256');
+        assert.equal(current.dailyScan, scan, 'daily-diagnostic-scan-drift');
+      }
+    }
+    await finish();
+    assert.equal(new Set(diagnostic.probes.map(item => `${item.dailyAfter}:${item.probe}`)).size, 12);
+    diagnostic.status = 'profiled'; diagnostic.ms = now() - started; await save();
+  } catch (error) {
+    for (const attempt of [...diagnostic.probes, ...diagnostic.advances]) {
+      if (attempt.status === 'pending') { attempt.status = 'failed'; attempt.failure = 'daily-diagnostic-incomplete'; }
+    }
+    diagnostic.status = 'failed'; diagnostic.failure = 'daily-diagnostic-incomplete';
+    diagnostic.ms = clock.mono() - started; await save(); throw error;
+  }
 }
 
 const invalidTiming = () => { throw new Error('fixture-drive-invalid-response'); };
@@ -508,7 +1034,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     options[argv[i]] = argv[i + 1]; assert.ok(options[argv[i]]);
   }
   const mode = options['--mode'] ?? 'fixture';
-  assert.ok(['fixture', 'benchmark', 'cleanup'].includes(mode));
+  assert.ok(['fixture', 'benchmark', 'cleanup', 'daily-diagnostic', 'reader-diagnostic'].includes(mode));
   assert.equal(env.GITHUB_ACTIONS, 'true', 'GitHub execution only');
   assert.equal(env.GITHUB_REPOSITORY, 'RaviTejaKNTS/Bloxodes');
   assert.match(options['--expected-sha'] ?? '', /^[a-f0-9]{40}$/);
@@ -516,9 +1042,13 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const event = JSON.parse(await readFile(env.GITHUB_EVENT_PATH, 'utf8'));
   validateQaCheckout({ expectedSha: options['--expected-sha'], checkoutSha,
     eventName: env.GITHUB_EVENT_NAME, event, githubSha: env.GITHUB_SHA });
+  if (mode === 'daily-diagnostic') assert.equal(env.GITHUB_EVENT_NAME, 'workflow_dispatch', 'manual diagnostic only');
+  if (mode === 'reader-diagnostic') validateQaReaderSelection(env.GITHUB_EVENT_NAME, event);
   if (mode !== 'cleanup') {
     assert.equal(execFileSync('git', ['status', '--porcelain', '--untracked-files=all', '--',
       ...PREPARED_QA_MIGRATION_PATHS, 'scripts/ci/stats-prepared-db-qa.mjs',
+      'scripts/ci/stats-prepared-reader-diagnostic.mjs', 'scripts/ci/stats-prepared-reader-runner.mjs',
+      'scripts/ci/stats-prepared-selection.mjs',
       'scripts/ci/fixtures/stats-prepared-source.sql', 'scripts/shared/prepared-charts-*.mjs',
       'scripts/universes/refresh-prepared-charts.mjs', 'scripts/universes/__tests__/prepared-charts*.test.mjs',
       'types/stats-prepared.ts'], { encoding: 'utf8' }).trim(), '', 'QA source files must match checkout SHA');
@@ -530,7 +1060,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const receiptPath = options['--receipt'] ?? path.join(env.RUNNER_TEMP, 'stats-prepared-db-qa.json');
   const phases = []; let identity; let claimLocation; let advanceContext; let advanceAttempt = 0;
   const saveReceipt = () => writeQaReceipt(receiptPath, qaReceiptWithPhases(identity, phases));
-  async function sql(query, phase = 'fixture-checks') {
+  async function sql(query, phase = 'fixture-checks', { requestMs = MANAGEMENT_REQUEST_MS } = {}) {
     assert.ok(SQL_PHASES.has(phase), 'unknown QA SQL phase');
     const started = Date.now();
     const submittedQuery = `set statement_timeout='110s'; set lock_timeout='2s'; set timezone='UTC';\n${query}`;
@@ -539,7 +1069,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       response = await fetch(`https://api.supabase.com/v1/projects/${PROJECT}/database/query`, {
         method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: submittedQuery }),
-        signal: AbortSignal.timeout(MANAGEMENT_REQUEST_MS), redirect: 'error',
+        signal: AbortSignal.timeout(requestMs), redirect: 'error',
       });
     } catch { failureKind = 'request-error'; }
     if (response) {
@@ -627,6 +1157,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     assert.match(identity.schema, /^qa_stats_[a-f0-9]{12}$/);
     assert.ok(identity.privateSchema === `${identity.schema}_p` && identity.prefix === `qa_${identity.schema.slice(9)}_`);
     assert.equal(identity.project, PROJECT); assert.equal(identity.sha, checkoutSha);
+    assert.ok(['fixture', 'benchmark', 'daily-diagnostic', 'reader-diagnostic'].includes(identity.mode));
     assert.deepEqual(identity.functions, [...RPC_NAMES.map(name => identity.prefix + name.replace('_stats_prepared_', '_sp_')), identity.prefix + 'timeout']);
     for (const run of identity.drives ?? []) {
       if (run.status === 'running') qaDriveFailure(run, { interrupted: true });
@@ -635,6 +1166,8 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       identity.pendingAdvance.status = 'interrupted';
       identity.pendingAdvance.failure = { kind: 'interrupted', code: 'unknown', status: null, ms: null };
     }
+    qaInterruptDailyDiagnostic(identity.dailyDiagnostic);
+    qaInterruptReaderDiagnostic(identity.readerDiagnostic);
     identity.cleaned = false;
     if (identity.fixtureCreationStarted === false) {
       const rows = await sql(`select not exists(select 1 from pg_namespace where nspname in
@@ -654,6 +1187,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const alias = name => ident(prefix + name.replace('_stats_prepared_', '_sp_'));
   identity = { project: PROJECT, sha: checkoutSha, mode, schema, privateSchema, prefix,
     functions: [...RPC_NAMES.map(alias), prefix + 'timeout'], cleaned: false, completed: false, fixtureCreationStarted: false };
+  if (mode === 'reader-diagnostic') identity.acceptance = false;
   await saveReceipt();
   const games = mode === 'benchmark' ? 100_000 : 1105;
   let claim; let sourceRows; let maximumStepMs = 0;
@@ -694,9 +1228,12 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     }
     assert.ok(preflight.defaultReadOnly === 'off' && preflight.transactionReadOnly === 'off',
       'fixture-source-preflight-read-only');
-    const migrations = fixtureMigrationPlan(await Promise.all(PREPARED_QA_MIGRATION_PATHS.map(async migrationPath => ({
+    const migrationSources = await Promise.all(PREPARED_QA_MIGRATION_PATHS.map(async migrationPath => ({
       path: migrationPath, bytes: await readFile(new URL(`../../${migrationPath}`, import.meta.url)),
-    }))), schema, privateSchema);
+    })));
+    const migrations = fixtureMigrationPlan(migrationSources, schema, privateSchema);
+    if (mode === 'reader-diagnostic') assert.deepEqual(migrations.map(({ sql, ...receipt }) => receipt),
+      READER_DIAGNOSTIC_MIGRATIONS, 'exact frozen reader migrations required');
     identity.migrations = migrations.map(({ sql, ...receipt }) => receipt);
     // Compatibility only: final proof is the complete ordered two-file receipt.
     identity.migrationSha256 = identity.migrations[0].sha256;
@@ -751,6 +1288,53 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     // catalog DO rather than assuming grant-all can address overloaded routines.
     await sql(`do $qa$ declare f record; begin for f in select oid::regprocedure sig from pg_proc where pronamespace='public'::regnamespace and proname like ${literal(prefix + '%')} loop execute 'revoke all on function '||f.sig||' from public,anon,authenticated'; execute 'grant execute on function '||f.sig||' to service_role'; end loop; end $qa$;` +
       `create function public.${prefix}timeout() returns void language sql volatile security invoker set search_path='' set statement_timeout='100ms' as 'select pg_catalog.pg_sleep(1)'; revoke all on function public.${prefix}timeout() from public,anon,authenticated; grant execute on function public.${prefix}timeout() to service_role; notify pgrst,'reload schema';`, 'alias-acl-timeout');
+    if (mode === 'reader-diagnostic') {
+      try {
+        const definitions = await sql(`select n.nspname as schema,p.proname as name,
+          pg_get_functiondef(p.oid) as definition,pg_get_userbyid(p.proowner) as owner,
+          has_function_privilege('service_role',p.oid,'EXECUTE') service_execute,
+          has_function_privilege('anon',p.oid,'EXECUTE') anon_execute,
+          has_function_privilege('authenticated',p.oid,'EXECUTE') authenticated_execute,
+          exists(select 1 from aclexplode(coalesce(p.proacl,acldefault('f',p.proowner))) a
+            where a.grantee=0 and a.privilege_type='EXECUTE') public_execute
+          from pg_proc p join pg_namespace n on n.oid=p.pronamespace
+          where n.nspname in (${literal(schema)},${literal(privateSchema)}) or
+            (n.nspname='public' and p.proname in (${RPC_NAMES.map(name => literal(alias(name))).join(',')}));`, 'alias-read');
+        identity.readerInstallation = { functions: qaReaderDefinitionProof(definitions, migrations, schema, privateSchema),
+          schemaCacheVisible: false };
+        await saveReceipt();
+        // Discover aliases in the service-role OpenAPI document before measured
+        // requests. No reader/health/timeout RPC is used as an installation probe.
+        const started = Date.now(); let response; let visible = false;
+        try {
+          response = await fetch(`${MANAGED_URL}/rest/v1/`, { headers: { apikey: service,
+            Authorization: `Bearer ${service}`, Accept: 'application/openapi+json' },
+            signal: AbortSignal.timeout(12_000), redirect: 'error' });
+          const document = await response.json();
+          visible = response.ok && RPC_NAMES.every(name =>
+            Object.hasOwn(document?.paths ?? {}, `/rpc/${alias(name)}`));
+        } catch { /* Only fixed installation evidence is retained. */ }
+        phases.push({ kind: 'schema-cache', phase: 'alias-install',
+          status: response?.status ?? null, ms: Date.now() - started, visible });
+        identity.readerInstallation.schemaCacheVisible = visible;
+        await saveReceipt();
+        assert.equal(identity.readerInstallation.schemaCacheVisible, true, 'reader-schema-cache-not-ready');
+        const result = await runReaderDiagnostic({ schema, privateSchema, migrationSources,
+          sql: qaReaderSqlAdapter(sql, phases),
+          rest: createReaderDiagnosticRest({ managedUrl: MANAGED_URL, serviceKey: service, schema }),
+          persist: async snapshot => {
+            identity.completed = false; identity.acceptance = false;
+            identity.readerDiagnostic = snapshot;
+            await saveReceipt();
+          } });
+        if (result.diagnostic.status !== 'profiled') throw new Error('reader-diagnostic-incomplete');
+      } catch {
+        identity.readerFailure ??= 'reader-diagnostic-incomplete'; await saveReceipt();
+        throw new Error('reader-diagnostic-incomplete');
+      }
+      console.log(JSON.stringify({ status: 'reader-diagnostic-profiled', acceptance: false, mode, receipt: receiptPath }));
+      return;
+    }
     await transport(alias('get_stats_prepared_health_v1'), {}, { retrySchema: true });
     await transport(prefix + 'timeout', {}, { expectedError: '57014', retrySchema: true });
     const cold = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('90d','hourly',true)`);
@@ -787,18 +1371,59 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     // Only this run's isolated source copies are analyzed. No real managed-
     // development/production source maintenance is performed.
     await sql(`analyze ${schema}.roblox_universes; analyze ${schema}.roblox_universe_stats_hourly; analyze ${schema}.roblox_universe_stats_daily;`, 'source-analyze');
-    identity.sourceIndexes = await sql(`select tablename,indexname,indexdef from pg_indexes where schemaname=${literal(schema)}
-      and tablename in ('roblox_universe_stats_hourly','roblox_universe_stats_daily','stats_prepared_visits','stats_prepared_visit_totals') order by tablename,indexname;`);
-    identity.dailySourcePlan = await sql(`explain (format json,settings true) select d.* from
-      (select universe_id from ${schema}.roblox_universes order by universe_id limit 256) u cross join lateral
-      (select * from ${schema}.roblox_universe_stats_daily s where s.universe_id=u.universe_id
-        and s.stat_date between current_date-180 and current_date offset 0) d;`);
+    if (mode !== 'daily-diagnostic') {
+      identity.sourceIndexes = await sql(`select tablename,indexname,indexdef from pg_indexes where schemaname=${literal(schema)}
+        and tablename in ('roblox_universe_stats_hourly','roblox_universe_stats_daily','stats_prepared_visits','stats_prepared_visit_totals') order by tablename,indexname;`);
+      identity.dailySourcePlan = await sql(`explain (format json,settings true) select d.* from
+        (select universe_id from ${schema}.roblox_universes order by universe_id limit 256) u cross join lateral
+        (select * from ${schema}.roblox_universe_stats_daily s where s.universe_id=u.universe_id
+          and s.stat_date between current_date-180 and current_date offset 0) d;`);
+    }
     const bootstrapStarted = Date.now();
     identity.bootstrapStartedAt = new Date(bootstrapStarted).toISOString();
     const observe = result => {
       if (result?.platformGeneration && identity.firstPlatformObservedMs == null) identity.firstPlatformObservedMs = Date.now() - bootstrapStarted;
       if (result?.visitGeneration && identity.firstVisitObservedMs == null) identity.firstVisitObservedMs = Date.now() - bootstrapStarted;
     };
+    if (mode === 'daily-diagnostic') {
+      const diagnostic = identity.dailyDiagnostic = { status: 'pending', acceptance: false,
+        scope: 'initial-fixture-chunks-0-and-256',
+        planBinding: 'typed-execute-using-custom-values-not-cached-plpgsql' };
+      await saveReceipt();
+      assert.deepEqual(sourceRows, { hourly: '8640', daily: '100555' }, 'daily-diagnostic-source-population');
+      const queries = fixtureDailyDiagnosticSql(await readFile(new URL(`../../${PREPARED_QA_MIGRATION_PATHS[0]}`, import.meta.url)), schema, privateSchema);
+      diagnostic.cteSha256 = queries.cteSha256;
+      await sql(queries.install, 'daily-diagnostic-install');
+      await qaRunDailyDiagnostic({ diagnostic, save: saveReceipt, requests: {
+        claim: requestId => transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'github-fixture', p_request_id: requestId }),
+        finish: lease => transport(alias('finish_stats_prepared_work_v1'), { p_lease_token: lease.leaseToken,
+          p_epoch: lease.epoch, p_outcome: { status: 'yielded' } }),
+        state: async finished => {
+          const rows = await sql(`begin; set local statement_timeout='10s'; set local lock_timeout='500ms';
+set local role service_role;
+${queries.boundary(finished)}
+rollback;`, 'daily-diagnostic-state', { requestMs: DAILY_LEASE_BUDGET.stateMs });
+          assert.equal(rows.length, 1, 'invalid-daily-boundary-response');
+          return qaDailyBoundaryResult(rows[0]?.result);
+        },
+        advance: async (lease, stepId) => {
+          const rows = await sql(`begin; set local statement_timeout='60s'; set local lock_timeout='500ms';
+set local role service_role;
+select ${schema}.run_stats_prepared_step_v1(${literal(lease.leaseToken)},${literal(lease.epoch)},${literal(stepId)},'{"kind":"advance"}'::jsonb) as result;
+commit;`, 'daily-diagnostic-reach');
+          return qaAdvanceOutcome(rows[0]?.result, stepId);
+        },
+        probe: async (probe, after, lease, stepId) => {
+          const rows = await sql(queries.probe(probe, after, lease.leaseToken, lease.epoch, stepId), 'daily-diagnostic-probe');
+          assert.equal(rows.length, 1, 'invalid-daily-probe-response');
+          return qaDailyProbeResult(rows[0]?.result, schema, after);
+        },
+      } });
+      // A successful diagnostic keeps completed=false; it is not acceptance.
+      await saveReceipt();
+      console.log(JSON.stringify({ status: 'diagnostic-profiled', acceptance: false, mode, receipt: receiptPath }));
+      return;
+    }
     const requestId = randomUUID();
     let diagnosticInstalled = false;
     async function probeClaim() {

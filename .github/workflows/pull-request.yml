@@ -5,6 +5,16 @@ on:
     branches: [production]
   workflow_dispatch:
     inputs:
+      stats_prepared_reader_diagnostic:
+        description: 'Profile eight fixed synthetic chart-reader cases; no source population or acceptance'
+        required: false
+        default: false
+        type: boolean
+      stats_prepared_daily_diagnostic:
+        description: 'Profile two small-fixture daily chunks with rollback; not acceptance or scale QA'
+        required: false
+        default: false
+        type: boolean
       stats_prepared_capacity_probe:
         description: 'Record disposable runner capacity only; no database connections or population'
         required: false
@@ -46,6 +56,7 @@ permissions:
 
 jobs:
   prepared-chart-capacity:
+    needs: scope
     if: github.event_name == 'workflow_dispatch' && inputs.stats_prepared_capacity_probe
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -96,6 +107,12 @@ jobs:
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verify manual selection guards
+        run: node --test scripts/ci/__tests__/stats-prepared-selection.test.mjs
+      - name: Validate manual workflow selections before selected actions
+        run: node scripts/ci/stats-prepared-selection.mjs
       - id: scope
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}
@@ -282,6 +299,7 @@ jobs:
           retention-days: 30
           if-no-files-found: error
   code-lookups-recovery:
+    needs: scope
     if: github.event_name == 'workflow_dispatch' && inputs.code_lookups_recovery != ''
     runs-on: ubuntu-latest
     timeout-minutes: 8
@@ -314,6 +332,7 @@ jobs:
           retention-days: 30
           if-no-files-found: error
   prepared-chart-recovery:
+    needs: scope
     if: github.event_name == 'workflow_dispatch' && inputs.stats_prepared_recovery != ''
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -367,9 +386,10 @@ jobs:
     needs: [scope, managed-development]
     if: >-
       always() && !cancelled() &&
+      needs.scope.result == 'success' &&
       !(github.event_name == 'workflow_dispatch' && inputs.stats_prepared_recovery != '') &&
       !(github.event_name == 'workflow_dispatch' && inputs.stats_prepared_capacity_probe) &&
-      (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) &&
+      (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && (inputs.stats_prepared_benchmark || inputs.stats_prepared_daily_diagnostic || inputs.stats_prepared_reader_diagnostic))) &&
       (needs.scope.outputs.migrations != 'true' || needs.managed-development.result == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -383,13 +403,27 @@ jobs:
       SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
       MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
       EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-      QA_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark && 'benchmark' || 'fixture' }}
+      QA_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.stats_prepared_reader_diagnostic && 'reader-diagnostic' || github.event_name == 'workflow_dispatch' && inputs.stats_prepared_daily_diagnostic && 'daily-diagnostic' || github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark && 'benchmark' || 'fixture' }}
     steps:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
+      - name: Verify daily diagnostic extraction and plan sanitation
+        if: github.event_name == 'workflow_dispatch' && inputs.stats_prepared_daily_diagnostic
+        env:
+          SUPABASE_URL: ''
+          SUPABASE_SERVICE_ROLE: ''
+          MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ''
+        run: node --test scripts/universes/__tests__/prepared-charts-parity.test.mjs
+      - name: Verify fixed reader cases, rollback envelopes and total REST deadlines
+        if: github.event_name == 'workflow_dispatch' && inputs.stats_prepared_reader_diagnostic
+        env:
+          SUPABASE_URL: ''
+          SUPABASE_SERVICE_ROLE: ''
+          MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ''
+        run: node --test scripts/universes/__tests__/prepared-charts-parity.test.mjs scripts/universes/__tests__/prepared-charts-reader-diagnostic.test.mjs scripts/universes/__tests__/prepared-charts-reader-runner.test.mjs
       - name: Verify isolated SQL semantics, ACLs, bootstrap and real API deadlines
         # Leave time inside the job for cleanup and its receipt after a killed benchmark.
         timeout-minutes: 35
@@ -424,7 +458,7 @@ jobs:
           CHECKS: ${{ needs.checks.result }}
           CHART_RUNTIME: ${{ needs.prepared-chart-runtime.result }}
           CHART_DATABASE: ${{ needs.prepared-chart-database.result }}
-          CHART_DATABASE_REQUIRED: ${{ !(github.event_name == 'workflow_dispatch' && (inputs.stats_prepared_recovery != '' || inputs.stats_prepared_capacity_probe)) && (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) }}
+          CHART_DATABASE_REQUIRED: ${{ !(github.event_name == 'workflow_dispatch' && (inputs.stats_prepared_recovery != '' || inputs.stats_prepared_capacity_probe)) && (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && (inputs.stats_prepared_benchmark || inputs.stats_prepared_daily_diagnostic || inputs.stats_prepared_reader_diagnostic))) }}
         run: |
           test "$SCOPE" = success
           if [ "$DOCS_ONLY" != true ]; then
@@ -436,6 +470,7 @@ jobs:
             test "$CHART_DATABASE" = success
           fi
   selected-franchise-development-qa:
+    needs: scope
     if: github.event_name == 'workflow_dispatch' && inputs.selected_franchise_bundle_hash != ''
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -515,6 +550,7 @@ jobs:
           if-no-files-found: ignore
 
   selected-roblox-development-qa:
+    needs: scope
     if: github.event_name == 'workflow_dispatch' && inputs.selected_roblox_bundle_hash != ''
     runs-on: ubuntu-latest
     timeout-minutes: 45
