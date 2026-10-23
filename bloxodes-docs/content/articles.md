@@ -6,7 +6,7 @@ Articles are guides, explainers and tier lists at `/articles/<slug>`. Topics are
 
 ## Automatic articles (Content Factory)
 
-Four times a day (01:00, 07:00, 13:00, 19:00 IST) the T3 schedule "Bloxodes articles (Content Factory)" runs the factory's `article-main` skill on the MacBook Pro:
+Four times a day (01:00, 07:00, 13:00, 19:00 IST) the T3 schedules "Bloxodes articles <time> (Content Factory)" run the factory's `article-main` skill on the MacBook Pro:
 
 1. The main agent (Codex `gpt-6.1-sol`) takes up to 3 `pending` rows from `article_generation_queue` and claims them (`processing`).
 2. A Luna builder researches each topic into `brief.md` and gathers its images into `media.json`, uploaded to managed-dev Storage with `collect:article-images`.
