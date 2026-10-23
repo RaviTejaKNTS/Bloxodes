@@ -6,7 +6,7 @@ export function classify(files) {
   return {
     checks: code.length > 0,
     migrations: code.some(file => file.startsWith("supabase/migrations/")),
-    codeLookups: code.some(file => ["apps/web/src/lib/db.ts", "apps/web/src/lib/extension-codes.ts",
+    codeLookups: code.some(file => file.startsWith("scripts/ci/code-lookups-") || ["apps/web/src/lib/db.ts", "apps/web/src/lib/extension-codes.ts",
       "apps/web/src/lib/__tests__/code-lookups.test.ts", "scripts/ci/code-lookups-qa.mjs",
       ".github/workflows/pull-request.yml"].includes(file)),
     statsPrepared: code.some(file => /(?:stats-prepared|prepared-charts|stats-chart)/.test(file)

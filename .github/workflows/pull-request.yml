@@ -171,7 +171,7 @@ jobs:
     needs: scope
     if: needs.scope.outputs.checks == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     env:
       BLOXODES_ENV_PROFILE: process-only
     steps:
@@ -182,19 +182,36 @@ jobs:
         with: {node-version: '22'}
       - name: Verify chart worker and immutable runtime on the host Node version
         run: node --experimental-vm-modules --test scripts/universes/__tests__/prepared-charts*.test.mjs scripts/ops/__tests__/stats-chart*.test.mjs
+      - name: Verify code lookup fixture identity and SQL boundaries
+        if: needs.scope.outputs.codeLookups == 'true'
+        run: node --test scripts/ci/code-lookups-fixture.test.mjs
       - name: Verify selected-page code reads against the managed database
         if: needs.scope.outputs.codeLookups == 'true'
+        timeout-minutes: 3
         env:
           CODE_LOOKUPS_QA: '1'
           MANAGED_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
           MANAGED_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+          MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
+          MANAGED_DEV_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
           QA_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node scripts/ci/code-lookups-qa.mjs --expected-sha "$QA_EXPECTED_SHA"
+      - name: Remove only this run's code lookup fixtures
+        if: always() && needs.scope.outputs.codeLookups == 'true'
+        timeout-minutes: 1
+        env:
+          CODE_LOOKUPS_QA: '1'
+          MANAGED_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+          MANAGED_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+          MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
+          MANAGED_DEV_SUPABASE_ANON_KEY: ${{ secrets.MANAGED_DEV_SUPABASE_ANON_KEY }}
+          QA_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/ci/code-lookups-qa.mjs --mode cleanup --expected-sha "$QA_EXPECTED_SHA"
       - uses: actions/upload-artifact@v4
         if: always() && needs.scope.outputs.codeLookups == 'true'
         with:
           name: code-lookups-backend-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
-          path: tmp/test-reports/code-lookups/backend.json
+          path: tmp/test-reports/code-lookups/
           retention-days: 30
           if-no-files-found: error
   prepared-chart-database:

@@ -17,6 +17,10 @@ How code and content reach production. GitHub does the checking, building and de
 
 Use `bloxodes-release-e2e` for the full release flow.
 
+Selected-page code-lookup changes also require a GitHub-only managed-development PostgREST probe. It creates run-owned, service-only public table clones and the canonical old aggregate view, verifies complete results and pagination, then removes only its four owned relations. Actual editorial rows and publication triggers are untouched. Finally cleanup and an independent always-run cleanup step retain a SHA/run identity and sanitized backend receipt together; failed or unfinished verification and failed cleanup block the required check. Whole-job cancellation can prevent cleanup, so retain the exact identity for any needed reconciliation.
+
+Missing cleanup identity fails when backend evidence exists and preserves that evidence. When both files are absent, cleanup reports an explicit not-started no-op. Saved passing verification requires an exact fixture identity match, including nonce and relation allowlist, and the completed compatibility check. Mismatched verification remains failed and is retained as history while cleanup uses only the independently validated durable identity.
+
 ## Deploy
 
 On push to `production`, `dokploy-production-deploy.yml`:

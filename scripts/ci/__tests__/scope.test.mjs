@@ -31,6 +31,7 @@ test("prepared chart readers, worker, runtime and schema receive database verifi
 test("selected-page code reads require the bounded backend compatibility probe", () => {
   for (const file of ["apps/web/src/lib/db.ts", "apps/web/src/lib/extension-codes.ts",
     "apps/web/src/lib/__tests__/code-lookups.test.ts", "scripts/ci/code-lookups-qa.mjs",
+    "scripts/ci/code-lookups-fixture.mjs", "scripts/ci/code-lookups-fixture.test.mjs",
     ".github/workflows/pull-request.yml"]) {
     assert.equal(classify([file]).codeLookups, true, file);
   }

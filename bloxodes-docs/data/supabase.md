@@ -56,6 +56,8 @@ Prepared storage includes contribution rows and indexes, beyond the chart JSON s
 
 ## Rules
 
+Code-lookup GitHub QA temporarily creates only `public.qa_cl_<run-derived-suffix>_{pages,codes,universes,oracle}`. The tables use RLS and service-only SELECT grants, with explicit foreign keys between owned clones. The oracle copies the canonical old view against those clones. Finally and independent always-run cleanup verify ownership and remove the finite allowlist; this is not a schema-exposure change, migration, content import or production contract.
+
 - Migrations are immutable once committed. CI rejects edits and deletions.
 - A new migration must work with the currently running app. Drop old tables or columns only in a later migration, after the app stops using them.
 - Never expose the service role or `sb_secret_*` keys to the browser, mobile app or extension.
