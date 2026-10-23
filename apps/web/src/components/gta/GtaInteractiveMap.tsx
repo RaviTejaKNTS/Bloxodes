@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { SiteLogo } from "@/components/SiteLogo";
-import { MAP_GUIDE_ID, scrollToMapGuide, useShellInertUnderMap } from "@/components/gta/map-guide";
+import { MAP_GUIDE_ID, scrollToMapGuide } from "@/components/gta/map-guide";
+import { MapGestureHint, useLeafletMapGestures } from "@/components/maps/useLeafletMapGestures";
 import { ArrowLeft, ArrowUpRight, Check, Crosshair, Info, Layers3, Link2, Minus, Plus, Search, X } from "lucide-react";
 import type * as Leaflet from "leaflet";
 import { useCollectionChecklistProgress } from "@/lib/collection-checklist-progress-client";
@@ -149,6 +150,7 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
   const [progressByCode, setProgressByCode] = useState<Map<string, ProgressValue>>(() => new Map());
   const mapElement = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Leaflet.Map | null>(null);
+  const gestureHint = useLeafletMapGestures(mapRef, mapReady);
   const selectedViewRef = useRef(selectedView);
   const overlayViewRef = useRef<string | null>(null);
   const pendingFocusRef = useRef<string | null>(null);
@@ -205,7 +207,7 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
     return progressByCode.get(code)?.checked.has(id) ?? false;
   }).length;
 
-  const selectPoint = useCallback((id: string | null, writeUrl = true) => {
+  const selectPoint = useCallback((id: string | null) => {
     setSelectedId(id);
     setCopyStatus("");
     if (id && window.matchMedia("(max-width: 800px)").matches) setListOpen(false);
@@ -222,12 +224,6 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
       if (point.edition) setSelectedEdition(point.edition);
       if (point.variant) setSelectedVariant(point.variant);
     }
-    if (writeUrl) {
-      const url = new URL(window.location.href);
-      if (id) url.searchParams.set("point", id);
-      else url.searchParams.delete("point");
-      window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
-    }
     if (point && mapRef.current && !changedView) {
       const view = viewBySlug.get(point.view);
       const zoom = Math.max(mapRef.current.getZoom(), view ? -1 : 0);
@@ -235,7 +231,6 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
     }
   }, [markers, layers, viewBySlug]);
 
-  useShellInertUnderMap(mapElement);
 
   useEffect(() => {
     if (!mapElement.current || mapRef.current) return;
@@ -259,7 +254,10 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
         attributionControl: true,
         maxBounds: L.latLngBounds(bounds).pad(0.22),
         maxBoundsViscosity: 1,
-        preferCanvas: true
+        preferCanvas: true,
+        scrollWheelZoom: false,
+        touchZoom: true,
+        dragging: !window.matchMedia("(any-pointer: coarse)").matches
       });
       mapRef.current = mapInstance;
       mapInstance.attributionControl.setPrefix(false);
@@ -398,7 +396,7 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
     const fromUrl = () => {
       const id = new URLSearchParams(window.location.search).get("point");
       const marker = markers.find((point) => point.id === id);
-      if (marker) selectPoint(marker.id, false);
+      if (marker) selectPoint(marker.id);
       else setSelectedId(null);
     };
     fromUrl();
@@ -430,6 +428,12 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
     return () => window.clearTimeout(timeout);
   }, [query, activeMarkers, mapReady, selectedView]);
 
+  useEffect(() => {
+    if (!mapReady || !mapElement.current) return;
+    const observer = new ResizeObserver(() => mapRef.current?.invalidateSize());
+    observer.observe(mapElement.current);
+    return () => observer.disconnect();
+  }, [mapReady]);
   const toggleLayer = (slug: string) => setActiveLayers((previous) => {
     const next = new Set(previous);
     if (next.has(slug)) next.delete(slug);
@@ -452,7 +456,7 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
       await navigator.clipboard.writeText(url.toString());
       setCopyStatus("Link copied");
     } catch {
-      setCopyStatus("Copy from address bar");
+      setCopyStatus("Could not copy link");
     }
   };
 
@@ -464,6 +468,7 @@ export function GtaInteractiveMap({ map }: { map: GtaMapPageData }) {
   return (
     <section className="gta-map-app gta-interactive-map" aria-label={config.mapTitle}>
       <div ref={mapElement} className="gta-map-canvas" role="application" aria-label={"Zoomable " + config.title + " map with selectable location pins"} />
+      <MapGestureHint hint={gestureHint} />
       {mapImageStatus === "loading" ? <div className="gta-map-image-status" role="status" aria-live="polite">Loading map artwork…</div> : null}
       {mapImageStatus === "error" ? <div className="gta-map-image-status is-error" role="alert">Map artwork didn’t load. Refresh the page to retry.</div> : null}
       <header className="gta-map-topbar">

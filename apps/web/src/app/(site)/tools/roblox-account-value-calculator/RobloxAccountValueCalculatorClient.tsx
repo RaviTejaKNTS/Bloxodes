@@ -142,9 +142,6 @@ export function RobloxAccountValueCalculatorClient() {
       }
 
       setResult(payload);
-      const url = new URL(window.location.href);
-      url.searchParams.set("username", payload.profile.username);
-      window.history.replaceState(null, "", url.toString());
       if (scroll) {
         requestAnimationFrame(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
       }
@@ -183,9 +180,6 @@ export function RobloxAccountValueCalculatorClient() {
     setSuggestions([]);
     setError(null);
     setUsername("");
-    const url = new URL(window.location.href);
-    url.searchParams.delete("username");
-    window.history.replaceState(null, "", url.toString());
   }
 
   return (

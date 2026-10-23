@@ -1,3 +1,4 @@
+import { MapViewport } from "@/components/maps/MapViewport";
 import { notFound } from "next/navigation";
 import { getGameLandingForLinks } from "@/lib/game-landing";
 import { getGameExtendedPage } from "@/lib/game-extra-pages";
@@ -52,8 +53,7 @@ export default async function Gta5MapPage() {
   return (
     <div className="gta-map-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": structuredData }) }} />
-      <Gta5InteractiveMap markers={markers} />
-      <GtaMapGuide canonicalPath={GTA5_MAP_PATH} title={title} heading="About this map">
+      <GtaMapGuide map={<MapViewport><Gta5InteractiveMap markers={markers} /></MapViewport>} canonicalPath={GTA5_MAP_PATH} title={title} heading="About this map">
         <p>Choose a collection to plan a route, or search by item, location, or landmark. Select a pin for its location details and linked guide. The map covers GTA V Story Mode; GTA Online locations and later updates are outside this map.</p>
         <p>Completed locations use the same progress as the collection guides. Progress saves in this browser when signed out and syncs to your Bloxodes account when signed in. A stunt jump or flight still requires the right approach and the game’s completion message.</p>
         <p>For 100% Story Mode completion, you need all 50 spaceship parts and letter scraps, but only 25 of 50 stunt jumps, 25 of 50 Under the Bridge flights, and 8 of 15 knife flights. You can use the map to finish every challenge.</p>

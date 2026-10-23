@@ -4,7 +4,6 @@ import type { ComponentProps, ReactNode } from "react";
 
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ToolFaq } from "@/components/tools/ToolFaq";
-import { ContentSlot } from "@/components/ContentSlot";
 import { MoreTools } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -14,7 +13,6 @@ import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL } from "@/lib/seo
 import { getToolContentWithDevFallback, type ToolContent } from "@/lib/tools";
 import "@/styles/article-content.css";
 
-const TOOL_AD_SLOT = "3529946151";
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 type DedicatedToolConfig = {
@@ -158,14 +156,11 @@ export async function DedicatedToolPage({
         className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6 journey-content-stream journey-content-stream--interactive"
       >
         {introNodes}
-        <ContentSlot slot={TOOL_AD_SLOT} className="my-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
         <div className="ads-tools-widget">{children}</div>
         {howNodes}
-        <ContentSlot slot={TOOL_AD_SLOT} className="my-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
         {faqNodes.length ? (
           <>
-            <ContentSlot slot={TOOL_AD_SLOT} className="w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
             <ToolFaq
               items={faqNodes.map((faq, index) => ({
                 id: `${faq.q}-${index}`,
@@ -182,8 +177,6 @@ export async function DedicatedToolPage({
           <CommentsSection entityType={commentEntityType} entityId={tool.id} />
         </div>
       ) : null}
-
-      <ContentSlot slot={TOOL_AD_SLOT} className="mt-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
       {relatedContent === undefined ? <MoreTools excludeCode={toolCode} /> : relatedContent}
     </ToolPageLayout>
   );

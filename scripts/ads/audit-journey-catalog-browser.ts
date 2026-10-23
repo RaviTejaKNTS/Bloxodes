@@ -37,6 +37,10 @@ const ROUTES = [
   "/checklists",
   "/quizzes",
   "/tools",
+  "/tools/roblox-username-generator",
+  "/gta/maps",
+  "/gta/maps/gta5",
+  "/minecraft/tools",
   "/events",
   "/authors",
   "/wiki",
@@ -105,6 +109,8 @@ const DISCOVERY_ROOTS = [
     route: "/tools",
     prefixes: ["/tools/"]
   },
+  { route: "/gta/maps", prefixes: ["/gta/maps/"] },
+  { route: "/minecraft/tools", prefixes: ["/minecraft/tools/"] },
   {
     route: "/authors",
     prefixes: ["/authors/"]
@@ -321,11 +327,33 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(250);
 
-  return page.evaluate(() => {
+  const snapshot = await page.evaluate(() => {
     const selectors = document.querySelectorAll<HTMLElement>("#article-body");
     if (selectors.length !== 1) throw new Error(`expected one #article-body, found ${selectors.length}`);
 
     const content = selectors[0];
+    const widgets = document.querySelectorAll<HTMLElement>(".ads-tools-widget");
+    if (widgets.length || /^\/(?:tools|gta\/maps|minecraft\/tools)(?:\/|$)/.test(window.location.pathname)) {
+      const rails = document.querySelectorAll<HTMLElement>("aside.space-y-4");
+      if (rails.length !== 1 || !rails[0].matches("aside#sidebar") || document.querySelectorAll("aside#sidebar").length !== 1 || !rails[0].parentElement?.classList.contains("content-sidebar-grid") || content.contains(rails[0])) {
+        throw new Error("map/tool sidebar must be one direct grid child outside the article body");
+      }
+      if (window.innerWidth >= 1200 && rails[0].getBoundingClientRect().width < 300) {
+        throw new Error("map/tool sidebar is too narrow for a 300px ad");
+      }
+      if (content.querySelector(".gta-map-app, [aria-label='Interactive map']")) {
+        throw new Error("interactive map state is inside the article ad stream");
+      }
+      if (widgets.length && (widgets.length !== 1 || widgets[0].tagName !== "DIV" || widgets[0].parentElement !== content)) {
+        throw new Error("live tool must use one stable div directly inside article-body");
+      }
+      for (const frame of document.querySelectorAll<HTMLElement>(".map-viewport-space")) {
+        const expected = window.innerWidth > 800 ? 600 : 420;
+        if (Math.abs(frame.getBoundingClientRect().height - expected) > 1) {
+          throw new Error("embedded map does not have its fixed pixel height");
+        }
+      }
+    }
     const allItems = [...content.querySelectorAll<HTMLElement>("[data-journey-item]")];
     const directItems = [...content.querySelectorAll<HTMLElement>(":scope > [data-journey-item]:not([hidden]), :scope > [data-catalog-row-group]:not([hidden])")];
     const invalidItems = allItems.filter(item => item.parentElement !== content && !(item.parentElement?.matches(".catalog-section-grid") && item.parentElement.parentElement?.matches("[data-catalog-row-group]") && item.parentElement.parentElement.parentElement === content));
@@ -570,6 +598,61 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
       selectorTag: content.tagName.toLowerCase()
     };
   });
+  if (new URL(page.url()).pathname === "/tools/roblox-username-generator") {
+    await auditToolClientUpdate(page);
+  }
+  return snapshot;
+}
+
+async function auditToolClientUpdate(page: Page) {
+  const boundary = await page.evaluateHandle(() => {
+    const content = document.querySelector("#article-body")!;
+    const widget = content.querySelector(":scope > div.ads-tools-widget");
+    if (!widget) throw new Error("username tool has no stable direct-child wrapper");
+    return { content, widget, children: [...content.children] };
+  });
+  const apiPattern = "**/api/roblox-username-generator";
+  // Exercise the real UI without relying on live Roblox availability or rate limits.
+  await page.route(apiPattern, route => route.fulfill({
+    json: {
+      ok: true,
+      results: Array.from({ length: 12 }, (_, index) => ({
+        username: `JourneyAudit${index + 1}`,
+        status: "available",
+        message: "Available",
+        checkedAt: "2026-01-01T00:00:00.000Z",
+        length: `JourneyAudit${index + 1}`.length,
+        tags: []
+      })),
+      attempted: 12,
+      exhausted: false,
+      warnings: []
+    }
+  }));
+  const assertBoundary = () => page.evaluate(saved => {
+    const content = document.querySelector("#article-body");
+    if (!content || content !== saved.content || content.children.length !== saved.children.length ||
+        saved.children.some((child, index) => content.children[index] !== child) ||
+        saved.widget.parentElement !== content) {
+      throw new Error("tool interaction changed article-body direct children");
+    }
+    if (document.querySelectorAll("#article-body").length !== 1 || document.querySelectorAll("aside#sidebar").length !== 1) {
+      throw new Error("tool interaction changed article/sidebar ownership");
+    }
+  }, boundary);
+  try {
+    await page.getByRole("button", { name: "Generate usernames", exact: true }).click();
+    await page.getByText("JourneyAudit12", { exact: true }).waitFor();
+    await page.getByRole("button", { name: "Generate more", exact: true }).waitFor();
+    await assertBoundary();
+    await page.getByRole("button", { name: "Clear", exact: true }).click();
+    await page.getByText("JourneyAudit12", { exact: true }).waitFor({ state: "hidden" });
+    await page.getByRole("button", { name: "Generate usernames", exact: true }).waitFor();
+    await assertBoundary();
+  } finally {
+    await page.unroute(apiPattern);
+    await boundary.dispose();
+  }
 }
 
 async function auditDecalClientUpdate(page: Page, baseUrl: string) {
