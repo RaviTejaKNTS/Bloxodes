@@ -25,6 +25,8 @@ Failed code-fixture SQL retains only a fixed phase, validated SQLSTATE, fixed er
 
 Historical code-fixture reconciliation is a separate manual `pull-request.yml` job. Its optional `code_lookups_recovery` input must equal `reconcile-39955744530-39956105978-39957597153-39958648149`. The runner pins those four failed runs and artifact IDs/digests, validates every original identity before database access, and uses the same guarded four-name cleanup for each. It accepts no arbitrary SQL, target or artifact list. The job receives only development Management credentials and an Actions-read GitHub token. Original failure bytes remain immutable; a separate recovery receipt needs all four absence proofs. Dispatch only after the runner, its helper correction and the final SHA have passed review and GitHub verification. Normal PR checks run its tests without enabling reconciliation.
 
+Historical revisions must match the pinned top-level workflow-run SHA and artifact workflow-run SHA. Nested pull-request head SHAs can advance after a run. Validate their full SHA shape and exact PR number, head/base refs and same-repository IDs as association metadata; do not require that nested SHA to equal the historical or execution SHA.
+
 ## Deploy
 
 On push to `production`, `dokploy-production-deploy.yml`:

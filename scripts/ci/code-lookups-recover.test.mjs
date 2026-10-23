@@ -142,7 +142,7 @@ describe('fixed artifact reconciliation (GitHub Node 22 only)', { skip: process.
         p => { p.run.head_repository.id++; }, p => { p.run.head_branch = 'other'; }, p => { p.run.workflow_id++; },
         p => { p.run.path = 'other.yml'; }, p => { p.workflow.path = 'other.yml'; },
         p => { p.run.pull_requests = []; }, p => { p.run.pull_requests[0].number++; },
-        p => { p.run.pull_requests[0].head.repo.id++; }, p => { p.run.pull_requests[0].head.sha = '0'.repeat(40); },
+        p => { p.run.pull_requests[0].head.repo.id++; }, p => { p.run.pull_requests[0].head.sha = 'g'.repeat(40); },
         p => { p.run.pull_requests[0].head.ref = 'other'; }, p => { p.run.pull_requests[0].base.repo.id++; },
         p => { p.run.pull_requests[0].base.ref = 'main'; }, p => { p.artifact.id++; },
         p => { p.artifact.name += '-other'; }, p => { p.artifact.expired = true; }, p => { p.artifact.size_in_bytes++; },
@@ -153,6 +153,50 @@ describe('fixed artifact reconciliation (GitHub Node 22 only)', { skip: process.
       ];
       for (const change of changes) { const p = structuredClone(good); change(p);
         assert.throws(() => validateProvenance(source, p.run, p.artifact, p.workflow)); }
+    }
+  });
+
+  it('accepts historical run and artifact SHAs when the associated PR head has advanced', () => {
+    // Retained run 39955744530 has head_sha 8c3048af..., while its nested PR
+    // head now reports 665a622a... . Later pushes must not invalidate the run.
+    const currentPrHead = '665a622a588bc81fb9c773baa51213505a138aa4';
+    for (const source of SELECTION) {
+      for (const associatedHead of [currentPrHead, 'e'.repeat(40), '0'.repeat(40)]) {
+        const p = provenance(source);
+        p.run.pull_requests[0].head.sha = associatedHead;
+        assert.notEqual(associatedHead, source.sha);
+        assert.equal(p.run.head_sha, source.sha);
+        assert.equal(p.artifact.workflow_run.head_sha, source.sha);
+        assert.doesNotThrow(() => validateProvenance(source, p.run, p.artifact, p.workflow));
+        for (const change of [
+          value => { value.run.head_sha = associatedHead; },
+          value => { value.artifact.workflow_run.head_sha = associatedHead; }
+        ]) {
+          const invalid = structuredClone(p); change(invalid);
+          assert.throws(() => validateProvenance(source, invalid.run, invalid.artifact, invalid.workflow),
+            /source_(?:run|artifact)_mismatch/);
+        }
+      }
+    }
+  });
+
+  it('requires a full SHA-shaped nested PR head and the exact PR number, refs and repositories', () => {
+    const source = SELECTION[0], good = provenance(source);
+    good.run.pull_requests[0].head.sha = '665a622a588bc81fb9c773baa51213505a138aa4';
+    for (const invalidSha of [undefined, null, 123, {}, ['a'.repeat(40)], '', 'a'.repeat(39),
+      'a'.repeat(41), 'g'.repeat(40), 'a'.repeat(40) + '\n']) {
+      const p = structuredClone(good); p.run.pull_requests[0].head.sha = invalidSha;
+      assert.throws(() => validateProvenance(source, p.run, p.artifact, p.workflow), /source_pr_mismatch/);
+    }
+    for (const change of [
+      p => { p.run.pull_requests[0].number = 114; },
+      p => { p.run.pull_requests[0].head.ref = 'other'; },
+      p => { p.run.pull_requests[0].base.ref = 'main'; },
+      p => { p.run.pull_requests[0].head.repo.id++; },
+      p => { p.run.pull_requests[0].base.repo.id++; }
+    ]) {
+      const p = structuredClone(good); change(p);
+      assert.throws(() => validateProvenance(source, p.run, p.artifact, p.workflow), /source_pr_mismatch/);
     }
   });
 
@@ -218,6 +262,7 @@ describe('fixed artifact reconciliation (GitHub Node 22 only)', { skip: process.
 
   it('uses only API artifact IDs and never sends the GitHub token to the signed download host', async () => {
     const source = SELECTION[0], p = provenance(source), calls = [];
+    p.run.pull_requests[0].head.sha = '665a622a588bc81fb9c773baa51213505a138aa4';
     const acquire = githubSourceLoader('SYNTHETIC_GITHUB_SECRET', async (url, options) => {
       calls.push({ url, options });
       if (url.endsWith('/actions/workflows/pull-request.yml')) return jsonResponse(p.workflow);

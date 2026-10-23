@@ -89,8 +89,11 @@ export function validateProvenance(source, run, artifact, workflow) {
     run.repository?.id === REPO_ID && run.repository?.full_name === REPO &&
     run.head_repository?.id === REPO_ID && run.head_repository?.full_name === REPO,
   'source_run_mismatch');
+  // The nested PR head can advance after this run. Only run.head_sha and the
+  // artifact's workflow_run.head_sha bind the historical source revision.
   requireThat(Array.isArray(run.pull_requests) && run.pull_requests.length === 1 &&
-    run.pull_requests[0].number === 113 && run.pull_requests[0].head?.sha === source.sha &&
+    run.pull_requests[0].number === 113 && typeof run.pull_requests[0].head?.sha === 'string' &&
+    run.pull_requests[0].head.sha.length === 40 && /^[a-f0-9]{40}$/.test(run.pull_requests[0].head.sha) &&
     run.pull_requests[0].head?.ref === BRANCH && run.pull_requests[0].head?.repo?.id === REPO_ID &&
     run.pull_requests[0].base?.repo?.id === REPO_ID && run.pull_requests[0].base?.ref === 'production',
   'source_pr_mismatch');
