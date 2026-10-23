@@ -6,13 +6,55 @@ import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigr
   qaSqlFailureDiagnostic, qaReceiptWithPhases, qaRpcFailureDiagnostic, qaClaimProbeDiagnostic,
   fixtureClaimDiagnosticSql, qaRpcErrorEnvelope, PREPARED_QA_MIGRATION_PATHS,
   fixtureMigrationPlan, replayFixtureMigrations, fixtureDriveBatchSql,
-  qaFixtureBatchPlan, qaFixtureBatchResult } from '../../ci/stats-prepared-db-qa.mjs';
+  qaFixtureBatchPlan, qaFixtureBatchResult, qaSourceProgress, qaStorageCheckpoint } from '../../ci/stats-prepared-db-qa.mjs';
 
 const claimLocation = { alias: 'qa_012345abcdef_claim_sp_work_v1', maxLine: 60 };
 const schema = 'qa_stats_012345abcdef', privateSchema = `${schema}_p`;
 const migrationSources = () => Promise.all(PREPARED_QA_MIGRATION_PATHS.map(async path => ({
   path, bytes: await readFile(new URL(`../../../${path}`, import.meta.url)),
 })));
+
+test('disk and read-only diagnostics use SQLSTATE without copying messages or guessing quota causes', () => {
+  for (const [code, errorClass] of [['53100', 'disk-full'], ['25006', 'read-only-transaction']]) {
+    for (const result of [{ code, message: 'SECRET_DISK_PATH' },
+      { error: { code, message: 'SECRET_QUERY' } },
+      { message: `Failed to run sql query: ERROR:  ${code}: SECRET` }]) {
+      const diagnostic = qaSqlFailureDiagnostic({ phase: 'source-daily', status: 400, result, query: 'select 1;' });
+      assert.deepEqual(diagnostic, { phase: 'source-daily', status: 400, sqlstate: code, errorClass });
+      assert.doesNotMatch(JSON.stringify(diagnostic), /SECRET|quota|free|WAL/);
+    }
+  }
+  assert.deepEqual(qaSqlFailureDiagnostic({ phase: 'cleanup', status: 400,
+    result: { message: 'provider SECRET read only disk full' }, query: '' }),
+  { phase: 'cleanup', status: 400, sqlstate: 'unknown' });
+});
+
+test('source batch progress distinguishes daily and hourly insertion without claiming actual row readback', () => {
+  assert.deepEqual(qaSourceProgress('source-daily', 7001, 8000, 91), {
+    phase: 'source-daily', firstUniverse: 7001, lastUniverse: 8000, expectedRows: 91000 });
+  assert.equal(qaSourceProgress('source-hourly', 99003, 100000, 160).expectedRows, 159680);
+  for (const args of [['fixture-checks', 1, 2, 91], ['source-daily', 0, 1, 91],
+    ['source-daily', 2, 1, 91], ['source-daily', 1, 100001, 91], ['source-hourly', 1, 2, Infinity]]) {
+    assert.throws(() => qaSourceProgress(...args));
+  }
+  const pending = qaSourceProgress('source-daily', 8001, 9000, 91);
+  const saved = qaReceiptWithPhases({ completed: false, sourceProgress: { completedBatches: 10, pending } }, []);
+  const cleaned = qaReceiptWithPhases({ ...saved, cleaned: true }, [{ phase: 'cleanup', ok: true }]);
+  assert.deepEqual(cleaned.sourceProgress.pending, pending); assert.equal(cleaned.completed, false);
+});
+
+test('storage checkpoints allow only numeric counters and read-only flags, never infer physical free disk', () => {
+  const row = { databaseBytes: '842624147', sourceBytes: '511934464', sourceIndexBytes: '100',
+    preparedBytes: '40960', tempBytes: '10000000000', tempFiles: '10',
+    defaultReadOnly: 'on', transactionReadOnly: 'on', providerMessage: 'SECRET' };
+  const checkpoint = qaStorageCheckpoint([row]);
+  assert.equal(checkpoint.databaseBytes, '842624147'); assert.equal(checkpoint.defaultReadOnly, 'on');
+  assert.doesNotMatch(JSON.stringify(checkpoint), /SECRET|provider|freeDisk/);
+  for (const invalid of [[], [row, row], [{ ...row, databaseBytes: '-1' }],
+    [{ ...row, tempBytes: 'SECRET' }], [{ ...row, defaultReadOnly: 'SECRET' }]]) {
+    assert.throws(() => qaStorageCheckpoint(invalid));
+  }
+});
 
 test('fixture batches preserve the 6000-step and 20-minute drive bounds, reserving the existing request deadline', () => {
   assert.deepEqual(qaFixtureBatchPlan(0, 0), { limit: 256, workBudgetMs: 40_000 });

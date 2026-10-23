@@ -5,6 +5,11 @@ on:
     branches: [production]
   workflow_dispatch:
     inputs:
+      stats_prepared_recovery:
+        description: 'Optional exact failed prepared-chart benchmark artifact recovery'
+        required: false
+        default: ''
+        type: string
       code_lookups_recovery:
         description: 'Optional exact reviewed failed-artifact reconciliation selection'
         required: false
@@ -180,6 +185,17 @@ jobs:
     timeout-minutes: 8
     env:
       BLOXODES_ENV_PROFILE: process-only
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: ci-only
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v6
         with:
@@ -188,6 +204,11 @@ jobs:
         with: {node-version: '22'}
       - name: Verify chart worker and immutable runtime on the host Node version
         run: node --experimental-vm-modules --test scripts/universes/__tests__/prepared-charts*.test.mjs scripts/ops/__tests__/stats-chart*.test.mjs
+      - name: Verify exact prepared-chart artifact recovery boundaries
+        env:
+          STATS_PREPARED_RECOVERY_CONTRACT: '1'
+          CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
+        run: node --test scripts/ci/stats-prepared-recover.test.mjs
       - name: Verify code lookup fixture identity and SQL boundaries
         if: needs.scope.outputs.codeLookups == 'true'
         run: node --test scripts/ci/code-lookups-fixture.test.mjs scripts/ci/code-lookups-recover.test.mjs
@@ -252,10 +273,61 @@ jobs:
           path: tmp/test-reports/code-lookups-recovery/
           retention-days: 30
           if-no-files-found: error
+  prepared-chart-recovery:
+    if: github.event_name == 'workflow_dispatch' && inputs.stats_prepared_recovery != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    concurrency:
+      group: bloxodes-managed-stats-qa
+      queue: max
+      cancel-in-progress: false
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: ci-only
+        ports: [5432:5432]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verify exact-artifact recovery boundaries
+        env:
+          STATS_PREPARED_RECOVERY_CONTRACT: '1'
+          CI_TRANSACTION_DATABASE_URL: postgresql://postgres:ci-only@localhost:5432/postgres
+        run: node --test scripts/ci/stats-prepared-recover.test.mjs
+      - name: Recover only the selected failed development benchmark
+        env:
+          STATS_PREPARED_RECOVERY: '1'
+          GITHUB_TOKEN: ${{ github.token }}
+          MANAGED_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+          MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
+          RECOVERY_EXPECTED_SHA: ${{ github.sha }}
+          RECOVERY_SELECTION: ${{ inputs.stats_prepared_recovery }}
+        run: node scripts/ci/stats-prepared-recover.mjs --expected-sha "$RECOVERY_EXPECTED_SHA" --apply-selection "$RECOVERY_SELECTION"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stats-prepared-recovery-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/test-reports/stats-prepared-recovery/
+          retention-days: 30
+          if-no-files-found: error
   prepared-chart-database:
     needs: [scope, managed-development]
     if: >-
       always() && !cancelled() &&
+      !(github.event_name == 'workflow_dispatch' && inputs.stats_prepared_recovery != '') &&
       (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) &&
       (needs.scope.outputs.migrations != 'true' || needs.managed-development.result == 'success')
     runs-on: ubuntu-latest
@@ -311,7 +383,7 @@ jobs:
           CHECKS: ${{ needs.checks.result }}
           CHART_RUNTIME: ${{ needs.prepared-chart-runtime.result }}
           CHART_DATABASE: ${{ needs.prepared-chart-database.result }}
-          CHART_DATABASE_REQUIRED: ${{ needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark) }}
+          CHART_DATABASE_REQUIRED: ${{ !(github.event_name == 'workflow_dispatch' && inputs.stats_prepared_recovery != '') && (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) }}
         run: |
           test "$SCOPE" = success
           if [ "$DOCS_ONLY" != true ]; then

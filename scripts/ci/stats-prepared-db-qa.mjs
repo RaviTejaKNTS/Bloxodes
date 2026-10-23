@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** GitHub-only managed-development fixtures. No dotenv, production or local DB. */
 import assert from 'node:assert/strict';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, open, rename } from 'node:fs/promises';
 import { randomUUID, createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
@@ -30,7 +30,10 @@ const STEP_PHASES = new Set(['platform-publish', 'hour', 'daily-start', 'daily-c
   ...[1, 7, 14, 30, 90].map(days => `visit-range-${days}`), 'visit-publish', 'hour-backfill', 'unchanged', 'cleanup']);
 const SQL_PHASES = new Set(['source-clone', 'migration-install', 'alias-read', 'alias-install',
   'alias-acl-timeout', 'claim-diagnostic-install', 'claim-diagnostic', 'fixture-drive-install',
-  'fixture-drive', 'fixture-checks', 'cleanup']);
+  'fixture-drive', 'fixture-checks', 'cleanup', 'source-preflight', 'source-storage',
+  'source-universes', 'source-current-index', 'source-daily', 'source-hourly-history',
+  'source-hourly', 'source-counts', 'source-analyze']);
+const PG_STATE_CLASSES = Object.freeze({ '53100': 'disk-full', '25006': 'read-only-transaction' });
 const sqlstate = value => typeof value === 'string' && /^[A-Z0-9]{5}$/.test(value) ? value : null;
 const rpcErrorCode = value => sqlstate(value) ??
   (typeof value === 'string' && /^PGRST[0-9]{3}$/.test(value) ? value : 'unknown');
@@ -73,7 +76,7 @@ export function qaRpcFailureDiagnostic({ result, claimLocation }) {
       if (code === match[1]) primaryMessages.push(match[2]);
     } else primaryMessages.push(message);
   }
-  const diagnostic = { sqlstate: code, errorClass: PG_ERROR_CLASSES.find(([state, message]) =>
+  const diagnostic = { sqlstate: code, errorClass: PG_STATE_CLASSES[code] ?? PG_ERROR_CLASSES.find(([state, message]) =>
     state === code && primaryMessages.includes(message))?.[2] ?? 'unknown' };
   if (claimLocation) {
     validateClaimLocation(claimLocation);
@@ -96,7 +99,8 @@ export function qaClaimProbeDiagnostic(result, location) {
   validateClaimLocation(location);
   const success = result?.errorClass === 'rolled-back-success' && result?.sqlstate === null;
   const code = sqlstate(result?.sqlstate);
-  const known = PG_ERROR_CLASSES.some(([state, , name]) => state === code && name === result?.errorClass);
+  const known = PG_STATE_CLASSES[code] === result?.errorClass ||
+    PG_ERROR_CLASSES.some(([state, , name]) => state === code && name === result?.errorClass);
   if (result?.rollbackVerified !== true || (!success && (!code || (!known && result?.errorClass !== 'unknown')))) {
     throw new Error('fixture-claim-diagnostic-invalid');
   }
@@ -140,6 +144,7 @@ begin
       diagnostic:=jsonb_build_object('sqlstate',null,'errorClass','rolled-back-success');
     else
       diagnostic:=jsonb_build_object('sqlstate',error_state,'errorClass',case
+        ${Object.entries(PG_STATE_CLASSES).map(([state, name]) => `when error_state=${literal(state)} then ${literal(name)}`).join('\n        ')}
         ${PG_ERROR_CLASSES.map(([state, message, name]) => `when error_state=${literal(state)} and error_message=${literal(message)} then ${literal(name)}`).join('\n        ')}
         else 'unknown' end);
       frame:=regexp_match(error_context,${literal(framePattern)});
@@ -222,6 +227,33 @@ export function qaReceiptWithPhases(identity, phases) {
   // Explicit cleanup is another process. Retain the original failure/timings
   // instead of replacing them with the cleanup request's single success.
   return { ...identity, phases: [...(identity.phases ?? []), ...phases] };
+}
+
+export async function writeQaReceipt(receiptPath, receipt) {
+  // Atomic replacement preserves the previous durable evidence on interruption.
+  const pending = `${receiptPath}.pending`;
+  const handle = await open(pending, 'w', 0o600);
+  try { await handle.writeFile(JSON.stringify(receipt, null, 2)); await handle.sync(); }
+  finally { await handle.close(); }
+  await rename(pending, receiptPath);
+}
+
+export function qaSourceProgress(phase, first, last, rowsPerGame) {
+  assert.ok(['source-universes', 'source-current-index', 'source-daily', 'source-hourly-history', 'source-hourly'].includes(phase));
+  assert.ok([first, last, rowsPerGame].every(Number.isSafeInteger) && first > 0 && last >= first && rowsPerGame > 0);
+  assert.ok(last <= 100_000 && rowsPerGame <= 4320, 'invalid source batch bounds');
+  return { phase, firstUniverse: first, lastUniverse: last, expectedRows: (last - first + 1) * rowsPerGame };
+}
+
+export function qaStorageCheckpoint(rows) {
+  assert.ok(Array.isArray(rows) && rows.length === 1, 'invalid source storage checkpoint');
+  const row = rows[0];
+  assert.ok(['on', 'off'].includes(row.defaultReadOnly) && ['on', 'off'].includes(row.transactionReadOnly));
+  const result = { defaultReadOnly: row.defaultReadOnly, transactionReadOnly: row.transactionReadOnly };
+  for (const key of ['databaseBytes', 'sourceBytes', 'sourceIndexBytes', 'preparedBytes', 'tempBytes', 'tempFiles']) {
+    assert.match(row[key] ?? '', /^[0-9]{1,20}$/, 'invalid source storage byte counter'); result[key] = row[key];
+  }
+  return result;
 }
 
 export function fixtureDriveBatchSql(schema, privateSchema) {
@@ -369,7 +401,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   assert.ok(token && service, 'Management API and managed-development service credentials required');
   const receiptPath = options['--receipt'] ?? path.join(env.RUNNER_TEMP, 'stats-prepared-db-qa.json');
   const phases = []; let identity; let claimLocation;
-  const saveReceipt = () => writeFile(receiptPath, JSON.stringify(qaReceiptWithPhases(identity, phases), null, 2));
+  const saveReceipt = () => writeQaReceipt(receiptPath, qaReceiptWithPhases(identity, phases));
   async function sql(query, phase = 'fixture-checks') {
     assert.ok(SQL_PHASES.has(phase), 'unknown QA SQL phase');
     const started = Date.now();
@@ -430,6 +462,13 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     assert.equal(identity.project, PROJECT); assert.equal(identity.sha, checkoutSha);
     assert.deepEqual(identity.functions, [...RPC_NAMES.map(name => identity.prefix + name.replace('_stats_prepared_', '_sp_')), identity.prefix + 'timeout']);
     identity.cleaned = false;
+    if (identity.fixtureCreationStarted === false) {
+      const rows = await sql(`select not exists(select 1 from pg_namespace where nspname in
+        (${literal(identity.schema)},${literal(identity.privateSchema)})) and not exists(select 1 from pg_proc
+        where pronamespace='public'::regnamespace and proname in (${identity.functions.map(literal)})) as absent;`, 'cleanup');
+      assert.equal(rows[0]?.absent, true, 'fixture-preflight-absence-not-proven');
+      identity.cleaned = true; identity.cleanupNotNeeded = true; await saveReceipt(); return;
+    }
     await sql(identity.functions.map(name => `drop function if exists public.${ident(name)} cascade;`).join('\n') +
       `\ndrop schema if exists ${identity.schema} cascade; drop schema if exists ${identity.privateSchema} cascade; notify pgrst,'reload schema';`, 'cleanup');
     identity.cleaned = true;
@@ -440,11 +479,47 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const schema = ident(`qa_stats_${suffix}`); const privateSchema = ident(`${schema}_p`); const prefix = ident(`qa_${suffix}_`);
   const alias = name => ident(prefix + name.replace('_stats_prepared_', '_sp_'));
   identity = { project: PROJECT, sha: checkoutSha, mode, schema, privateSchema, prefix,
-    functions: [...RPC_NAMES.map(alias), prefix + 'timeout'], cleaned: false, completed: false };
-  await writeFile(receiptPath, JSON.stringify(identity, null, 2));
+    functions: [...RPC_NAMES.map(alias), prefix + 'timeout'], cleaned: false, completed: false, fixtureCreationStarted: false };
+  await saveReceipt();
   const games = mode === 'benchmark' ? 100_000 : 1105;
   let claim; let sourceRows; let maximumStepMs = 0;
+  async function storageCheckpoint(phase) {
+    const rows = await sql(`select pg_database_size(current_database())::text "databaseBytes",
+      current_setting('default_transaction_read_only') "defaultReadOnly",
+      current_setting('transaction_read_only') "transactionReadOnly",
+      coalesce((select sum(pg_total_relation_size(c.oid)) from pg_class c
+        where c.relnamespace=to_regnamespace(${literal(schema)}) and c.relkind='r'
+          and c.relname in ('roblox_universes','stats_game_current_index','roblox_universe_stats_hourly','roblox_universe_stats_daily','revalidation_events')),0)::text "sourceBytes",
+      coalesce((select sum(pg_indexes_size(c.oid)) from pg_class c
+        where c.relnamespace=to_regnamespace(${literal(schema)}) and c.relkind='r'
+          and c.relname in ('roblox_universes','stats_game_current_index','roblox_universe_stats_hourly','roblox_universe_stats_daily','revalidation_events')),0)::text "sourceIndexBytes",
+      coalesce((select sum(pg_total_relation_size(c.oid)) from pg_class c
+        where c.relnamespace=to_regnamespace(${literal(schema)}) and c.relkind='r'
+          and c.relname like 'stats_prepared_%'),0)::text "preparedBytes",
+      coalesce((select temp_bytes from pg_stat_database where datname=current_database()),0)::text "tempBytes",
+      coalesce((select temp_files from pg_stat_database where datname=current_database()),0)::text "tempFiles";`, phase);
+    const checkpoint = { ...qaStorageCheckpoint(rows), completedSourceBatches: identity.sourceProgress?.completedBatches ?? 0 };
+    (identity.storageCheckpoints ??= []).push(checkpoint); await saveReceipt();
+    return checkpoint;
+  }
+  async function sourceInsert(query, phase, first, last, rowsPerGame) {
+    const progress = identity.sourceProgress ??= { completedBatches: 0, expectedRowsCommitted: {} };
+    progress.pending = qaSourceProgress(phase, first, last, rowsPerGame); await saveReceipt();
+    await sql(query, phase);
+    progress.lastCompleted = progress.pending;
+    progress.expectedRowsCommitted[phase] = (progress.expectedRowsCommitted[phase] ?? 0) + progress.pending.expectedRows;
+    progress.completedBatches++; delete progress.pending; await saveReceipt();
+    if (progress.completedBatches % 10 === 0) await storageCheckpoint('source-storage');
+  }
   try {
+    const preflight = await storageCheckpoint('source-preflight');
+    // This is a read-only-state guard, not proof of disk, WAL or plan headroom.
+    // Representative benchmark capacity still requires operator review.
+    if (preflight.defaultReadOnly !== 'off' || preflight.transactionReadOnly !== 'off') {
+      identity.preflightBlocked = 'read-only'; await saveReceipt();
+    }
+    assert.ok(preflight.defaultReadOnly === 'off' && preflight.transactionReadOnly === 'off',
+      'fixture-source-preflight-read-only');
     const migrations = fixtureMigrationPlan(await Promise.all(PREPARED_QA_MIGRATION_PATHS.map(async migrationPath => ({
       path: migrationPath, bytes: await readFile(new URL(`../../${migrationPath}`, import.meta.url)),
     }))), schema, privateSchema);
@@ -453,6 +528,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     identity.migrationSha256 = identity.migrations[0].sha256;
     identity.installedMigrations = [];
     await saveReceipt();
+    identity.fixtureCreationStarted = true; await saveReceipt();
     await sql(`create schema ${schema}; grant usage on schema ${schema} to service_role;\n` +
       ['roblox_universes', 'stats_game_current_index', 'roblox_universe_stats_hourly', 'roblox_universe_stats_daily', 'revalidation_events']
         .map(table => `create table ${schema}.${table} (like public.${table} including all); grant select,insert,update,delete on ${schema}.${table} to service_role;`).join('\n'), 'source-clone');
@@ -511,26 +587,32 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     assert.equal(await scalar(`not exists(select 1 from pg_tables where schemaname=${literal(schema)} and tablename like 'stats_prepared_%' and not rowsecurity)`), true);
     const fixture = await readFile(new URL('./fixtures/stats-prepared-source.sql', import.meta.url), 'utf8');
     const universesPart = fixture.slice(0, fixture.indexOf('insert into __SCHEMA__.roblox_universe_stats_daily'));
-    await sql(universesPart.replaceAll('__SCHEMA__', schema).replaceAll('__GAMES__', String(games)));
-    if (mode === 'benchmark') await sql(`insert into ${schema}.stats_game_current_index(universe_id,slug,name)
-      select n,'fixture-'||n,'Fixture '||n from generate_series(3,${games}) n;`);
+    await sourceInsert(universesPart.replaceAll('__SCHEMA__', schema).replaceAll('__GAMES__', String(games)),
+      'source-universes', 1, games, 1);
+    if (mode === 'benchmark') await sourceInsert(`insert into ${schema}.stats_game_current_index(universe_id,slug,name)
+      select n,'fixture-'||n,'Fixture '||n from generate_series(3,${games}) n;`, 'source-current-index', 3, games, 1);
     const dailyPart = fixture.slice(fixture.indexOf('insert into __SCHEMA__.roblox_universe_stats_daily'), fixture.indexOf('-- Raw history'));
     for (let first = 1; first <= games; first += 1000) {
-      await sql(dailyPart.replaceAll('__SCHEMA__', schema).replaceAll('__GAMES__', String(games))
-        .replaceAll('__START_ID__', String(first)).replaceAll('__END_ID__', String(Math.min(games, first + 999))));
+      await sourceInsert(dailyPart.replaceAll('__SCHEMA__', schema).replaceAll('__GAMES__', String(games))
+        .replaceAll('__START_ID__', String(first)).replaceAll('__END_ID__', String(Math.min(games, first + 999))),
+      'source-daily', first, Math.min(games, first + 999), 91);
     }
-    await sql(fixture.slice(fixture.indexOf('-- Raw history')).replaceAll('__SCHEMA__', schema));
+    await storageCheckpoint('source-storage');
+    await sourceInsert(fixture.slice(fixture.indexOf('-- Raw history')).replaceAll('__SCHEMA__', schema),
+      'source-hourly-history', 1, 2, 4320);
     if (mode === 'benchmark') {
       // 16 million representative hourly rows, 9.1 million daily rows. Batches
       // bound setup writes too. Index creation happened on empty fixture tables.
-      for (let first = 3; first <= games; first += 1000) await sql(`insert into ${schema}.roblox_universe_stats_hourly(universe_id,hour_start,playing,avg_playing,peak_playing,sample_count,first_sampled_at,last_sampled_at)
-        select n,h,2,2,3,1,h,h from generate_series(${first},${Math.min(games, first + 999)}) n cross join generate_series(date_trunc('hour',now())-interval '160 hours',date_trunc('hour',now())-interval '1 hour',interval '1 hour') h;`);
+      for (let first = 3; first <= games; first += 1000) await sourceInsert(`insert into ${schema}.roblox_universe_stats_hourly(universe_id,hour_start,playing,avg_playing,peak_playing,sample_count,first_sampled_at,last_sampled_at)
+        select n,h,2,2,3,1,h,h from generate_series(${first},${Math.min(games, first + 999)}) n cross join generate_series(date_trunc('hour',now())-interval '160 hours',date_trunc('hour',now())-interval '1 hour',interval '1 hour') h;`,
+      'source-hourly', first, Math.min(games, first + 999), 160);
     }
-    sourceRows = (await sql(`select (select count(*) from ${schema}.roblox_universe_stats_hourly)::text hourly,(select count(*) from ${schema}.roblox_universe_stats_daily)::text daily;`))[0];
+    await storageCheckpoint('source-storage');
+    sourceRows = (await sql(`select (select count(*) from ${schema}.roblox_universe_stats_hourly)::text hourly,(select count(*) from ${schema}.roblox_universe_stats_daily)::text daily;`, 'source-counts'))[0];
     identity.sourceRows = sourceRows;
     // Only this run's isolated source copies are analyzed. No real managed-
     // development/production source maintenance is performed.
-    await sql(`analyze ${schema}.roblox_universes; analyze ${schema}.roblox_universe_stats_hourly; analyze ${schema}.roblox_universe_stats_daily;`);
+    await sql(`analyze ${schema}.roblox_universes; analyze ${schema}.roblox_universe_stats_hourly; analyze ${schema}.roblox_universe_stats_daily;`, 'source-analyze');
     identity.sourceIndexes = await sql(`select tablename,indexname,indexdef from pg_indexes where schemaname=${literal(schema)}
       and tablename in ('roblox_universe_stats_hourly','roblox_universe_stats_daily','stats_prepared_visits','stats_prepared_visit_totals') order by tablename,indexname;`);
     identity.dailySourcePlan = await sql(`explain (format json,settings true) select d.* from

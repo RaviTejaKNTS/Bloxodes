@@ -56,6 +56,8 @@ Hourly TRUNCATE capture invalidates through the current UTC hour; daily capture 
 
 Prepared storage includes contribution rows and indexes, beyond the chart JSON size limits. Measure bootstrap, membership rebuilds and cleanup with the isolated managed-development benchmark before activation. Deploy schema and the fixed worker first; verify actual chart coverage before switching public readers. See [stats](../content/stats.md) and the [runtime release contract](../operations/release.md#prepared-chart-runtime).
 
+Managed development's organization is on the Free plan. Its 500 MB database billing quota differs from the fixed 2 GB project disk. Supabase's disk safeguard switches to read-only at 95% disk usage; WAL and other system files consume disk beyond `pg_database_size`. A database size below 2 GB therefore does not establish write headroom. Full chart-scale fixtures need an approved capacity solution before population; never disable read-only globally or change spending as a cleanup shortcut. See [Supabase's disk documentation](https://supabase.com/docs/guides/platform/database-size#free-plan-behavior).
+
 ## Rules
 
 Code-lookup GitHub QA temporarily creates only `public.qa_cl_<run-derived-suffix>_{pages,codes,universes,oracle}`. The tables use RLS and service-only SELECT grants, with explicit foreign keys between owned clones. The oracle copies the canonical old view against those clones. Finally and independent always-run cleanup verify ownership and remove the finite allowlist; this is not a schema-exposure change, migration, content import or production contract.
