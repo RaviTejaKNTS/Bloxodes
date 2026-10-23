@@ -70,6 +70,63 @@ export function cleanupRecovery({ identityFile, backendFile, context }) {
 const marker = identity => `code-lookups-qa@1:${identity.sha}:${identity.runId}:${identity.attempt}:${identity.nonce}`;
 const relations = identity => Object.values(identity.names).map(name => `public.${name}`);
 
+const SQL_PHASES = new Set(['create_and_seed_owned_fixture', 'inspect_fixture_security_and_storage',
+  'cleanup_exact_owned_relations']);
+const SQL_CLASSES = Object.freeze({ '42601': 'syntax_error', '42501': 'insufficient_privilege',
+  '2BP01': 'dependent_objects', '42P01': 'undefined_relation', '42809': 'wrong_object_type',
+  '55P03': 'lock_unavailable', '57014': 'query_canceled', '40P01': 'deadlock', '25P02': 'transaction_aborted' });
+// Management errors may wrap PostgreSQL's prefix in message/error objects or JSON
+// strings. Inspect only bounded, known envelope fields; emit no source text.
+export function sqlFailureDiagnostic({ phase, result, query }) {
+  need(SQL_PHASES.has(phase) && typeof query === 'string', 'sql_diagnostic_inputs');
+  const diagnostic = { phase, sqlstate: 'unknown', errorClass: 'unknown' };
+  const states = new Set(), primaries = [], texts = [], positions = [];
+  const state = value => { if (typeof value === 'string' && /^[A-Z0-9]{5}$/.test(value)) states.add(value); };
+  const queue = [{ value: result, depth: 0 }];
+  for (let i = 0; i < queue.length && i < 16; i++) {
+    const { value, depth } = queue[i];
+    if (typeof value === 'string') {
+      if (value.length > 65536) continue;
+      texts.push(value);
+      const prefix = /^(?:Failed to run sql query: )?ERROR:[ \t]+([A-Z0-9]{5}):[ \t]*([^\r\n]*)/.exec(value);
+      if (prefix) { state(prefix[1]); primaries.push(prefix[2]); }
+      else primaries.push(value);
+      if (depth < 3 && /^[\s]*[{"]/.test(value)) {
+        try { queue.push({ value: JSON.parse(value), depth: depth + 1 }); } catch { /* unknown envelope */ }
+      }
+    } else if (value && typeof value === 'object' && !Array.isArray(value)) {
+      state(value.code); state(value.sqlstate);
+      positions.push(value.position);
+      // Context is inspected only for an anonymous block's bounded line number.
+      for (const key of ['context', 'where']) if (typeof value[key] === 'string' && value[key].length <= 65536) texts.push(value[key]);
+      if (depth < 3) for (const key of ['error', 'message', 'data']) queue.push({ value: value[key], depth: depth + 1 });
+    }
+  }
+  // Conflicting envelopes must not misattribute a state or its message class.
+  if (states.size !== 1) return diagnostic;
+  diagnostic.sqlstate = [...states][0];
+  diagnostic.errorClass = SQL_CLASSES[diagnostic.sqlstate] ?? 'unknown';
+  if (diagnostic.sqlstate === 'P0001') {
+    for (const message of ['fixture_cleanup_ownership_mismatch', 'fixture_name_collision']) {
+      if (primaries.includes(message)) diagnostic.errorClass = message;
+    }
+  }
+  const maxLine = query.split('\n').length;
+  for (const text of texts) {
+    const line = /^LINE ([1-9][0-9]{0,5}):/m.exec(text);
+    if (line && Number(line[1]) <= maxLine) diagnostic.reportedLine ??= Number(line[1]);
+    const frame = /^(?:CONTEXT:[ \t]*)?PL\/pgSQL function inline_code_block line ([1-9][0-9]{0,5}) at [^\r\n]+$/m.exec(text);
+    if (frame && Number(frame[1]) <= maxLine) diagnostic.blockLine ??= Number(frame[1]);
+  }
+  for (const position of positions) {
+    if ((typeof position === 'string' || Number.isSafeInteger(position)) &&
+      /^[1-9][0-9]{0,8}$/.test(String(position)) && Number(position) <= query.length) {
+      diagnostic.position = Number(position); break;
+    }
+  }
+  return diagnostic;
+}
+
 export function oracleDefinition(source, identity) {
   const start = 'create or replace view public.code_pages_view with (security_invoker = true) as\n';
   const end = '\ncreate or replace view public.code_page_code_stats';

@@ -4,7 +4,7 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promi
 import { execFileSync, spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { TARGET, MIGRATION, CASES, PAGES, fixtureIdentity, validateIdentity, cleanupRecovery, oracleDefinition,
+import { TARGET, MIGRATION, CASES, PAGES, fixtureIdentity, validateIdentity, cleanupRecovery, sqlFailureDiagnostic, oracleDefinition,
   setupSql, cleanupSql } from './code-lookups-fixture.mjs';
 
 const context = { sha: 'a'.repeat(40), runId: '39949100107', attempt: '1' };
@@ -208,10 +208,59 @@ test('a durable identity permits guarded cleanup after missing or unreadable ver
   }
 });
 
+test('SQL diagnostics recognize Management envelopes without retaining PostgreSQL text', () => {
+  const phase = 'cleanup_exact_owned_relations', query = 'select 1;\nselect 2;';
+  const primary = 'Failed to run sql query: ERROR: 42601: syntax error at or near "PRIVATE_SQL"\nLINE 2: PRIVATE_SQL';
+  for (const result of [{ code: '42601', message: primary }, { error: { message: primary } },
+    { error: primary }, { data: { error: { message: primary } } }, primary,
+    { error: JSON.stringify({ message: primary }) }, JSON.stringify({ error: { code: '42601', message: primary } })]) {
+    assert.deepEqual(sqlFailureDiagnostic({ phase, query, result }),
+      { phase, sqlstate: '42601', errorClass: 'syntax_error', reportedLine: 2 });
+  }
+  for (const [code, errorClass] of [['42501', 'insufficient_privilege'], ['2BP01', 'dependent_objects'],
+    ['42P01', 'undefined_relation'], ['42809', 'wrong_object_type'], ['55P03', 'lock_unavailable'],
+    ['57014', 'query_canceled'], ['40P01', 'deadlock'], ['25P02', 'transaction_aborted']]) {
+    assert.deepEqual(sqlFailureDiagnostic({ phase, query, result: { error: { code, message: 'PRIVATE_SQL' } } }),
+      { phase, sqlstate: code, errorClass });
+  }
+  assert.throws(() => sqlFailureDiagnostic({ phase: 'PRIVATE_PHASE', query, result: {} }), /sql_diagnostic_inputs/);
+});
+
+test('SQL diagnostics fail closed for conflicting states, malformed envelopes and unsafe locations', () => {
+  const phase = 'cleanup_exact_owned_relations', query = 'select 1;\nselect 2;';
+  for (const result of [null, [], '{invalid JSON', { code: '42501\nSECRET', message: 'SECRET' },
+    { code: '42501', error: { code: '42601' } }, { code: '42501', message: 'ERROR: 42601: SECRET' },
+    { message: 'ERROR: 42601: ' + 'S'.repeat(65536) }]) {
+    assert.deepEqual(sqlFailureDiagnostic({ phase, query, result }), { phase, sqlstate: 'unknown', errorClass: 'unknown' });
+  }
+  for (const position of [-1, 0, 1.5, true, '1e1', '01', '2\nSECRET', '9999999999', query.length + 1]) {
+    assert.deepEqual(sqlFailureDiagnostic({ phase, query, result: { code: '42601', position,
+      message: 'ERROR: 42601: SECRET\nLINE 999999: SECRET',
+      context: 'PL/pgSQL function inline_code_block line 999999 at SECRET' } }),
+    { phase, sqlstate: '42601', errorClass: 'syntax_error' });
+  }
+  assert.deepEqual(sqlFailureDiagnostic({ phase, query, result: { error: { code: '42601', position: '9' } } }),
+    { phase, sqlstate: '42601', errorClass: 'syntax_error', position: 9 });
+});
+
+test('SQL diagnostics classify only exact fixture guards and bound anonymous block locations', () => {
+  const phase = 'cleanup_exact_owned_relations', query = 'begin;\ndo $qa$ begin\nend $qa$;\ncommit;';
+  const message = 'Failed to run sql query: ERROR: P0001: fixture_cleanup_ownership_mismatch\n' +
+    'CONTEXT: PL/pgSQL function inline_code_block line 3 at RAISE\nPRIVATE_SQL credentials=SECRET';
+  assert.deepEqual(sqlFailureDiagnostic({ phase, query, result: { error: { message } } }),
+    { phase, sqlstate: 'P0001', errorClass: 'fixture_cleanup_ownership_mismatch', blockLine: 3 });
+  assert.deepEqual(sqlFailureDiagnostic({ phase, query, result: { code: 'P0001', message: 'fixture_cleanup_ownership_mismatch SECRET',
+    context: 'PL/pgSQL function secret_function line 3 at RAISE' } }),
+    { phase, sqlstate: 'P0001', errorClass: 'unknown' });
+  assert.deepEqual(sqlFailureDiagnostic({ phase: 'create_and_seed_owned_fixture', query,
+    result: { error: { code: 'P0001', message: 'fixture_name_collision' } } }),
+    { phase: 'create_and_seed_owned_fixture', sqlstate: 'P0001', errorClass: 'fixture_name_collision' });
+});
+
 // GitHub-only subprocess regressions use the unchanged CLI, real Git guards, real
 // filesystem writes and finalization. The throwaway checkout has no remote and
 // receives only synthetic credentials. Never use the real receipt directory.
-async function cliFixture(t) {
+async function cliFixture(t, managementFailure = null) {
   assert.equal(process.versions.node.split('.')[0], '22', 'CLI regressions require GitHub Node 22');
   const scratch = fileURLToPath(new URL('../../tmp/', import.meta.url));
   await mkdir(scratch, { recursive: true });
@@ -252,7 +301,15 @@ import net from 'node:net';
 import tls from 'node:tls';
 const attempts = [];
 const deny = () => { attempts.push('blocked'); throw new Error('test_network_forbidden'); };
-globalThis.fetch = deny;
+const managementFailure = ${JSON.stringify(managementFailure)};
+globalThis.fetch = (url, options) => {
+  if (managementFailure !== null && url === 'https://api.supabase.com/v1/projects/bbtcaurrtyoukvjbxbbj/database/query' &&
+    options?.method === 'POST' && options.redirect === 'error') {
+    attempts.push('synthetic_management_failure');
+    return Promise.resolve(new Response(JSON.stringify(managementFailure), { status: 400 }));
+  }
+  return deny();
+};
 http.request = http.get = https.request = https.get = deny;
 net.connect = net.createConnection = net.Socket.prototype.connect = tls.connect = deny;
 syncBuiltinESMExports();
@@ -293,7 +350,35 @@ process.on('exit', () => writeFileSync(new URL('./network-attempts.json', import
     assert.deepEqual(await readFile(identityPath), before[0], 'durable identity bytes preserved');
     assert.deepEqual(await readFile(backendPath), before[1], 'complete prior backend bytes preserved');
   }
-  return { evidence, expectPreserved };
+  async function expectCleanupFailure() {
+    const identityBytes = Buffer.from(JSON.stringify(owned, null, 3) + '\n\n');
+    await writeFile(identityPath, identityBytes);
+    await writeFile(backendPath, JSON.stringify(failed, null, 3) + '\n\n');
+    const result = spawnSync(process.execPath, ['--import', preloadPath, join(root, 'scripts/ci/code-lookups-qa.mjs'),
+      '--mode', 'cleanup', '--expected-sha', cliContext.sha], { cwd: root, env,
+      encoding: 'utf8', timeout: 10000, maxBuffer: 64 * 1024 });
+    assert.equal(result.error, undefined); assert.equal(result.signal, null); assert.equal(result.status, 1);
+    assert.equal(result.stderr, 'code-lookups QA fixture_cleanup_failed\n');
+    assert.equal(result.stdout, 'code-lookups backend QA cleanup: fail\n');
+    assert.deepEqual(JSON.parse(await readFile(networkPath, 'utf8')), Array(3).fill('synthetic_management_failure'));
+    assert.deepEqual(await readFile(identityPath), identityBytes);
+    const saved = JSON.parse(await readFile(backendPath, 'utf8'));
+    assert.equal(saved.status, 'fail'); assert.deepEqual(saved.fixture, owned);
+    assert.deepEqual(saved.requests, failed.requests);
+    assert.deepEqual(saved.checks, [...failed.checks, { name: 'fixture_cleanup_failed', status: 'fail' }]);
+    assert.deepEqual(saved.sql.slice(0, failed.sql.length), failed.sql);
+    assert.equal(saved.sql.length, failed.sql.length + 3);
+    for (const entry of saved.sql.slice(failed.sql.length)) {
+      assert.equal(entry.name, 'cleanup_exact_owned_relations'); assert.equal(entry.httpCode, 400);
+      assert.equal(entry.phase, 'cleanup_exact_owned_relations'); assert.equal(entry.sqlstate, '42601');
+      assert.equal(entry.errorClass, 'syntax_error'); assert.equal(entry.reportedLine, 2);
+      assert.ok(Number.isSafeInteger(entry.durationMs) && entry.durationMs >= 0);
+      assert.deepEqual(Object.keys(entry).sort(), ['durationMs', 'errorClass', 'httpCode', 'name', 'phase', 'reportedLine', 'sqlstate']);
+    }
+    assert.deepEqual(saved.cleanup, { status: 'failed', attempts: 3 });
+    assert.doesNotMatch(JSON.stringify(saved), /PRIVATE_SQL|SECRET|Failed to run sql query|ERROR:|LINE 2:/);
+  }
+  return { evidence, expectPreserved, expectCleanupFailure };
 }
 
 test('actual CLI credential-guard failures preserve both files before recovery in either mode',
@@ -315,4 +400,11 @@ test('actual CLI second verify refuses exclusive identity creation without trunc
     const fixture = await cliFixture(t);
     for (const [state, bytes] of fixture.evidence) await t.test(state, () =>
       fixture.expectPreserved('verify', bytes, {}, 'fixture_identity_already_exists'));
+  });
+
+test('actual CLI appends sanitized wrapped SQL failures while retaining failed cleanup history',
+  { skip: process.env.GITHUB_ACTIONS !== 'true' }, async t => {
+    const fixture = await cliFixture(t, { error: { message:
+      'Failed to run sql query: ERROR: 42601: syntax error at or near "PRIVATE_SQL"\nLINE 2: SECRET' } });
+    await fixture.expectCleanupFailure();
   });

@@ -21,6 +21,8 @@ Selected-page code-lookup changes also require a GitHub-only managed-development
 
 Missing cleanup identity fails when backend evidence exists and preserves that evidence. When both files are absent, cleanup reports an explicit not-started no-op. Saved passing verification requires an exact fixture identity match, including nonce and relation allowlist, and the completed compatibility check. Mismatched verification remains failed and is retained as history while cleanup uses only the independently validated durable identity.
 
+Failed code-fixture SQL retains only a fixed phase, validated SQLSTATE, fixed error class and bounded numeric locations, including wrapped Management API failures. A successful new fixture does not establish removal of an older run's retained objects. Keep the older durable identity and failure evidence until separate reconciliation proves those exact objects absent.
+
 ## Deploy
 
 On push to `production`, `dokploy-production-deploy.yml`:
@@ -93,6 +95,8 @@ Before the first activation, required PR database QA must prove the migrated SQL
 Isolated QA receipts retain fixed setup/cleanup phase labels, successful and failed request timings, validated SQLSTATE codes and bounded numeric locations. Raw Management API errors and SQL excerpts are never logged. Explicit cleanup appends its evidence without replacing the original failure or timing history. A cleaned fixture with `completed=false` is still a failed QA run.
 
 A claim cardinality failure retains the original REST status, validated SQLSTATE, fixed error class and bounded claim line when available. One separate service-role SQL probe rolls back both successful and failed claim work and returns only sanitized diagnostics. Probe success never replaces the failed API result; `completed=false` remains failed QA after cleanup.
+
+Claim diagnostics distinguish exact pg-safeupdate UPDATE/DELETE guard messages from other cardinality errors. Failure receipts retain only fixed error classes and field-type tags. Observe the HTTP guard rejection before authoring a forward migration; successful SQL probe rollback does not establish a successful HTTP request.
 
 Deploy schema/producer/runtime before the prepared-only public reader. Empty prepared tables have no legacy aggregate seed. Keep the existing public reader live until bootstrap has produced usable outputs for every intended range/resolution, with honest current/previous coverage. Check source age separately from generation age before reader cutover.
 

@@ -6,7 +6,7 @@ import { randomBytes } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { PROJECT, TARGET, MIGRATION, PAGES, QaFailure, need, fixtureIdentity, validateIdentity,
-  cleanupRecovery, oracleDefinition, setupSql, inspectSql, cleanupSql } from './code-lookups-fixture.mjs';
+  cleanupRecovery, sqlFailureDiagnostic, oracleDefinition, setupSql, inspectSql, cleanupSql } from './code-lookups-fixture.mjs';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const DIRECTORY = new URL('../../tmp/test-reports/code-lookups/', import.meta.url);
@@ -68,16 +68,20 @@ async function json(response) {
 async function sql(name, query, deadline = started + WALL_MS) {
   need(++sqlCalls <= MAX_SQL && Date.now() < deadline, 'sql_request_or_wall_budget');
   const entry = { name, httpCode: 0, durationMs: 0 }; receipt.sql.push(entry); const begin = Date.now();
+  const statement = `set statement_timeout='8s'; set lock_timeout='2s'; set timezone='UTC';\n${query}`;
+  let data;
   try {
     const response = await fetch(`https://api.supabase.com/v1/projects/${PROJECT}/database/query`, {
       method: 'POST', redirect: 'error', headers: { Authorization: `Bearer ${process.env.MANAGED_DEV_SUPABASE_ACCESS_TOKEN}`,
         'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: `set statement_timeout='8s'; set lock_timeout='2s'; set timezone='UTC';\n${query}` }),
+      body: JSON.stringify({ query: statement }),
       signal: AbortSignal.timeout(Math.max(1, Math.min(12000, deadline - begin))) });
     entry.httpCode = response.status;
-    const data = await json(response);
-    if (/^[A-Z0-9]{5}$/.test(data?.code ?? '')) entry.sqlstate = data.code;
+    data = await json(response);
     need(response.ok && Array.isArray(data), 'fixture_sql_failure'); return data;
+  } catch (error) {
+    Object.assign(entry, sqlFailureDiagnostic({ phase: name, result: data, query: statement }));
+    throw error;
   } finally { entry.durationMs = Date.now() - begin; }
 }
 async function query(name, table, params, { key = process.env.MANAGED_DEV_SUPABASE_SERVICE_ROLE,

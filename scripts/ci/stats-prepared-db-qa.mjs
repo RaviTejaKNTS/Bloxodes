@@ -26,8 +26,23 @@ const rpcErrorCode = value => sqlstate(value) ??
 const PG_ERROR_CLASSES = [
   ['21000', 'ON CONFLICT DO UPDATE command cannot affect row a second time', 'on-conflict-double-target'],
   ['21000', 'more than one row returned by a subquery used as an expression', 'scalar-subquery-many-rows'],
+  // PostgREST also uses 21000/HTTP 400 for pg-safeupdate. This is not proof
+  // of duplicate rows; require the complete primary message before naming it.
+  ['21000', 'DELETE requires a WHERE clause', 'safeupdate-delete-without-where'],
+  ['21000', 'UPDATE requires a WHERE clause', 'safeupdate-update-without-where'],
   ['P0003', 'query returned more than one row', 'plpgsql-too-many-rows'],
 ];
+
+export function qaRpcErrorEnvelope(result) {
+  // Inspect only known slots. Never copy values, arbitrary keys, lengths or
+  // response headers into the receipt, even when the primary class is unknown.
+  const shape = value => value === undefined ? 'absent' : value === null ? 'null' :
+    Array.isArray(value) ? 'array' : ['string', 'object'].includes(typeof value) ? typeof value : 'other';
+  return { root: shape(result), code: shape(result?.code), message: shape(result?.message),
+    details: shape(result?.details), hint: shape(result?.hint), context: shape(result?.context),
+    error: shape(result?.error), nestedCode: shape(result?.error?.code),
+    nestedMessage: shape(result?.error?.message) };
+}
 
 function validateClaimLocation(location) {
   assert.match(location?.alias ?? '', /^qa_[a-f0-9]{12}_claim_sp_work_v1$/);
@@ -295,8 +310,9 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       result = await response.json();
       const code = rpcErrorCode(result?.code);
       const phase = { kind: 'rest', rpc: name, ms: Date.now() - started, status: response.status, code,
-        ...(!response.ok ? qaRpcFailureDiagnostic({ result,
-          claimLocation: name === claimLocation?.alias ? claimLocation : undefined }) : {}) };
+        ...(!response.ok ? { ...qaRpcFailureDiagnostic({ result,
+          claimLocation: name === claimLocation?.alias ? claimLocation : undefined }),
+          errorEnvelope: qaRpcErrorEnvelope(result) } : {}) };
       phases.push(phase);
       if (retrySchema && result?.code === 'PGRST202') { await pause(500); continue; }
       if (expectedError) { assert.equal(code, expectedError); return result; }

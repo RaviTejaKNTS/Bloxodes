@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigrationSql,
   qaSqlFailureDiagnostic, qaReceiptWithPhases, qaRpcFailureDiagnostic, qaClaimProbeDiagnostic,
-  fixtureClaimDiagnosticSql } from '../../ci/stats-prepared-db-qa.mjs';
+  fixtureClaimDiagnosticSql, qaRpcErrorEnvelope } from '../../ci/stats-prepared-db-qa.mjs';
 
 const claimLocation = { alias: 'qa_012345abcdef_claim_sp_work_v1', maxLine: 60 };
 
@@ -11,6 +11,8 @@ test('cardinality classification requires an exact known primary message and its
   const cases = [
     ['21000', 'ON CONFLICT DO UPDATE command cannot affect row a second time', 'on-conflict-double-target'],
     ['21000', 'more than one row returned by a subquery used as an expression', 'scalar-subquery-many-rows'],
+    ['21000', 'DELETE requires a WHERE clause', 'safeupdate-delete-without-where'],
+    ['21000', 'UPDATE requires a WHERE clause', 'safeupdate-update-without-where'],
     ['P0003', 'query returned more than one row', 'plpgsql-too-many-rows'],
   ];
   for (const [code, message, errorClass] of cases) {
@@ -18,7 +20,7 @@ test('cardinality classification requires an exact known primary message and its
       { message: `Failed to run sql query: ERROR:  ${code}: ${message}\nDETAIL: SECRET_DETAIL` }]) {
       assert.deepEqual(qaRpcFailureDiagnostic({ result }), { sqlstate: code, errorClass });
     }
-    for (const result of [{ code, message: `${message} SECRET_SQL` }, { code, details: message },
+    for (const result of [{ code, message: `${message} SECRET_SQL` }, { code, details: message }, { code, hint: message },
       { code: 'XX000', message }, { code, message: `SECRET_PREFIX ${message}` }]) {
       assert.equal(qaRpcFailureDiagnostic({ result }).errorClass, 'unknown');
     }
@@ -28,6 +30,20 @@ test('cardinality classification requires an exact known primary message and its
   assert.deepEqual(qaSqlFailureDiagnostic({ phase: 'claim-diagnostic', status: 400, query: 'select 1;',
     result: { message: 'ERROR:  21000: more than one row returned by a subquery used as an expression' } }),
     { phase: 'claim-diagnostic', status: 400, sqlstate: '21000', errorClass: 'scalar-subquery-many-rows' });
+});
+
+test('HTTP error envelope diagnostics retain only fixed slot shapes, including unsupported responses', () => {
+  const result = { code: '21000', message: 'SECRET_SQL', details: null, hint: null,
+    context: 'SECRET_CONTEXT', error: { code: 'SECRET_CODE', message: { SECRET_KEY: 'SECRET_VALUE' } },
+    SECRET_HEADER: 'SECRET_TOKEN', body: 'SECRET_BODY' };
+  assert.deepEqual(qaRpcErrorEnvelope(result), { root: 'object', code: 'string', message: 'string',
+    details: 'null', hint: 'null', context: 'string', error: 'object', nestedCode: 'string', nestedMessage: 'object' });
+  assert.doesNotMatch(JSON.stringify(qaRpcErrorEnvelope(result)), /SECRET|body|header/i);
+  for (const [input, root] of [[null, 'null'], [[], 'array'], ['SECRET_BODY', 'string'], [42, 'other'],
+    [undefined, 'absent'], [{}, 'object']]) {
+    assert.deepEqual(qaRpcErrorEnvelope(input), { root, code: 'absent', message: 'absent', details: 'absent',
+      hint: 'absent', context: 'absent', error: 'absent', nestedCode: 'absent', nestedMessage: 'absent' });
+  }
 });
 
 test('RPC diagnostics retain only a bounded line from this exact claim alias frame', () => {
@@ -176,7 +192,8 @@ test('explicit cleanup retains setup failure and prior phases across repeated re
   assert.deepEqual(failedCleanup.cleanupSqlFailure, cleanupFailure);
   assert.deepEqual(failedCleanup.phases, [clone, failure, cleanup, cleanup, cleanupFailure]);
   assert.equal(failedCleanup.cleaned, false);
-  const rpcFailure = { kind: 'rest', status: 400, code: '21000', sqlstate: '21000', errorClass: 'unknown' };
+  const rpcFailure = { kind: 'rest', status: 400, code: '21000', sqlstate: '21000', errorClass: 'unknown',
+    errorEnvelope: qaRpcErrorEnvelope({ code: '21000', message: 'SECRET_SQL', details: null, hint: null }) };
   const claimDiagnostic = { sqlstate: '21000', errorClass: 'scalar-subquery-many-rows',
     functionLine: 37, rollbackVerified: true };
   const claimCleanup = qaReceiptWithPhases({ completed: false, cleaned: true,
