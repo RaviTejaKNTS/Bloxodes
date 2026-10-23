@@ -2,16 +2,28 @@
 
 Last verified: 2026-10-19
 
-Articles are guides, explainers and tier lists at `/articles/<slug>`. Most are written automatically on the homelab. The owner can also ask for one by hand.
+Articles are guides, explainers and tier lists at `/articles/<slug>`. Topics are found and curated on the homelab; the articles are written and published by the Content Factory's T3 article run. The owner can also ask for one by hand.
 
-## Automatic articles (homelab)
+## Automatic articles (Content Factory)
+
+Four times a day (01:00, 07:00, 13:00, 19:00 IST) the T3 schedules "Bloxodes articles <time> (Content Factory)" run the factory's `article-main` skill on the MacBook Pro:
+
+1. The main agent (Codex `gpt-6.1-sol`) takes up to 3 `pending` rows from `article_generation_queue` and claims them (`processing`). If fewer than 3 are good, it finds its own topics: questions players ask about games whose Bloxodes wiki pages were added or updated in the last 7 days (from the `wiki` and `games` sitemaps), that no article, wiki or collection page already answers. It adds each one, already claimed, with `articles:queue:add` (`scripts/articles/add-article-queue-item.ts`), which refuses topics already in the queue or in the production article inventory (same title match as curation: topic key, idempotency key, or title similarity of 0.8 or more). It exits 0 when it adds a row, 3 for a duplicate and 1 for an error. Without `--apply` it only shows the row it would add.
+2. A Luna builder researches each topic into `brief.md` and gathers its images into `media.json`, uploaded to managed-dev Storage with `collect:article-images`.
+3. A Haiku 5.5 writer, run headless through the factory's `bin/haiku-write` from an empty folder in safe mode, writes the article from `prompts/haiku-article.md`.
+4. The main agent builds `final.json`, checks Haiku's facts against the brief, places the images, and runs `content:check-copy` and `check:article-image-readiness`.
+5. `bin/article publish` copies the article into the MacBook Pro checkout's `tmp/content-workspace/content-factory/<slug>/`, marks the row `completed`, writes the publication intent and runs `articles:publication:drain`, which dispatches `publish-content.yml` as below.
+
+The factory's article content lives in its `content/articles/<slug>/`.
+
+## Topic discovery (homelab)
 
 Four times a day (00:00, 06:00, 12:00, 18:00 IST) the homelab runs:
 
 1. **Discover:** `articles:discover` (`scripts/articles/discover-article-topics.ts`) collects dated Roblox editorial leads.
 2. **Curate:** `articles:curate` (`curate-article-topics.ts`) uses Groq to accept `guide`, `tier_list` and `explainer` topics and reject overlaps with existing pages.
-3. **Write:** `articles:writer:batch -- --apply --limit 6` (`run-homelab-article-batch.ts`) takes up to six curated topics through the stage pipeline below.
-4. **Publish:** every 15 minutes `articles:publication:drain -- --apply` sends finished articles to GitHub for publication.
+3. **Write (paused):** `articles:writer:batch -- --apply --limit 6` (`run-homelab-article-batch.ts`) used to take up to six curated topics through the stage pipeline below. Discovery no longer starts it; see [schedules](../automation/schedules.md#homelab-systemd).
+4. **Publish:** every 15 minutes `articles:publication:drain -- --apply` sends finished homelab articles to GitHub for publication. The drain is per checkout: it only sees intents in its own `tmp/article-publication/`.
 5. **Audit:** `articles:automation:audit` reports blocked jobs and schedule problems.
 
 Queue and curation rows live in managed development (`article_discovery_candidates`, `article_curation_runs`, `article_generation_queue`). Run state lives in the runtime's `tmp/article-pipeline/` and `tmp/article-publication/`.
