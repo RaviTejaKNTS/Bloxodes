@@ -67,16 +67,16 @@ async function planHubCover(universeId: number, localFile?: string, approvedSha2
   return { bytes, key, mime: cover.mime, url: resolveWikiMediaUrl(key)! };
 }
 
-async function planOfficialMedia(universeId: number) {
+async function planOfficialMedia(universeId: number, approvedHubCover = false) {
   // Stored CDN URLs can expire even when both role URLs are present.
   const media = await fetchOfficialUniverseMedia(universeId, (input, init) =>
     fetch(input, { ...init, signal: AbortSignal.timeout(30_000) }));
   if (!media) throw new Error("Official 512x512 icon and 768x432 thumbnail are unavailable. Retry after Roblox supplies both images.");
   const images = [
-    { url: media.iconUrl, width: 512, height: 512 },
-    ...media.thumbnails.map(({ url }) => ({ url, width: 768, height: 432 }))
+    { url: media.iconUrl, width: 512, height: 512, allowLandscape: false },
+    ...media.thumbnails.map(({ url }, index) => ({ url, width: 768, height: 432, allowLandscape: approvedHubCover && index === 0 }))
   ];
-  await mapPublishConcurrent(images, async ({ url, width, height }) => {
+  await mapPublishConcurrent(images, async ({ url, width, height, allowLandscape }) => {
     if (new URL(url).protocol !== "https:") throw new Error("Official universe media must use HTTPS.");
     const bytes = await retryPublishNetwork(async () => {
       const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
@@ -88,7 +88,9 @@ async function planOfficialMedia(universeId: number) {
       return Buffer.from(await response.arrayBuffer());
     });
     const metadata = await sharp(bytes).metadata();
-    if (metadata.width !== width || metadata.height !== height) throw new Error(`Official universe media must decode to ${width}x${height}.`);
+    if (allowLandscape) {
+      if (!metadata.width || !metadata.height || metadata.width <= metadata.height) throw new Error("Official first thumbnail must decode to a landscape image for an approved hub cover.");
+    } else if (metadata.width !== width || metadata.height !== height) throw new Error(`Official universe media must decode to ${width}x${height}.`);
     await sharp(bytes).raw().toBuffer();
   });
   return media;
@@ -210,7 +212,6 @@ export async function publishBundle(options: ContentOptions) {
   });
   let hub: WikiFinal | undefined;
   let cover: Awaited<ReturnType<typeof planHubCover>> | undefined;
-  const officialMedia = await check("official game icon and thumbnails", () => planOfficialMedia(bundle.game.universeId));
   if (selected.hub) {
     hub = await check("hub schema, copy and identity", async () => {
       const file = await bundlePath(root, selected.hub!.finalJson);
@@ -223,6 +224,8 @@ export async function publishBundle(options: ContentOptions) {
     });
     cover = await check("hub cover image readiness", async () => planHubCover(bundle.game.universeId, selected.hub!.coverImage ? await bundlePath(root, selected.hub!.coverImage) : undefined, options.approvedHubCoverSha256));
   }
+  // Only a successfully validated exact-hash local cover can relax the first thumbnail size.
+  const officialMedia = await check("official game icon and thumbnails", () => planOfficialMedia(bundle.game.universeId, cover !== undefined && options.approvedHubCoverSha256 !== undefined));
   const plans: CollectionPlan[] = [];
   const slugs = new Set<string>();
   for (const { entry, manifest } of selected.collections) {
