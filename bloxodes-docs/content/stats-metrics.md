@@ -4,6 +4,18 @@ Last verified: not rechecked since the move from `docs/stats/`. Check the chart 
 
 What each public stats metric means and how chart periods and resolutions shape it.
 
+## Prepared platform and visit-share semantics
+
+Platform preparation preserves the existing successful aggregate formulas. Current-index membership defines platform totals; hourly and daily accumulators preserve sample weighting, peak maxima, cumulative endpoints and rating calculations. Weekly and monthly conversion retains the existing exact timestamp bounds and range-relative buckets. Inclusive hourly bounds can produce 2,161 points for 90 days. Inclusive UTC date windows can include both boundary dates; the approximate point counts below are not strict row limits.
+
+Visit share uses every game with positive visit growth in the selected period, including games outside the current index and games without a public slug. A stored zero or negative delta takes precedence over an endpoint-derived delta. Whole-period totals determine ranks, with universe ID breaking ties. Eight games appear individually, ranks 9–100 and 101–1,000 form groups, and all remaining positive games contribute to the final group. Each day's denominator includes all positive contributions that day.
+
+Prepared metadata distinguishes the saved window, source observation, generation, publication and last successful check. `checkedAt` does not mean new Roblox data arrived. Missing dates, unfinished daily input and unavailable older hourly history remain explicit coverage gaps. A failed refresh retains the previous complete result and its original dates. The five-minute preparation schedule does not change the separate source collection or daily rollup schedule.
+
+Hourly finalization uses the saved generation's `asOf` hour for both current and previous periods. Closing an hour does not invent a new source observation, change an earlier ready generation or leave that hour permanently provisional in later generations. Daily finalization still follows the saved source information.
+
+Both public platform views currently use area charts. They retain previous-period response values and show previous coverage, but the area branch draws only the current series. A visible previous-period comparison line is not part of this performance repair.
+
 ## Base Rules
 
 - Do not show a separate latest card inside the chart. The chart is for selected metric and selected period only.

@@ -1,0 +1,28 @@
+[Unit]
+Description=Refresh GitHub-released Bloxodes prepared charts
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+WorkingDirectory=/srv/data/bloxodes-stats-chart-runtime
+Environment=HOME=/home/teja
+ExecStart=/bin/bash /srv/data/bloxodes-stats-chart-runtime/current/scripts/ops/run-stats-chart-refresh.sh --apply --allow-prod --expected-sha @SHA@ run
+ExecStopPost=/usr/bin/node /srv/data/bloxodes-stats-chart-runtime/current/scripts/ops/stats-chart-runtime.mjs finalize --expected-sha @SHA@
+TimeoutStartSec=250s
+TimeoutStopSec=10s
+KillMode=control-group
+Restart=no
+SuccessExitStatus=75
+UMask=0077
+NoNewPrivileges=true
+Nice=10
+CPUWeight=20
+CPUQuota=50%
+MemoryHigh=192M
+MemoryMax=256M
+TasksMax=64
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

@@ -1,6 +1,6 @@
 import { publicContentCache } from "@/lib/public-content-cache";
 import { cleanRewardsText, isCodeNew, sortCodesByFirstSeenDesc } from "@/lib/code-utils";
-import type { Code, CodePage } from "@/lib/db";
+import { listCodesForCodePage, type Code, type CodePage } from "@/lib/db";
 import {
   extractPlaceIdFromRobloxUrl,
   normalizeExtensionLimit,
@@ -15,12 +15,9 @@ import { supabaseAdmin } from "@/lib/supabase";
 
 type MatchSource = "place-id" | "roblox-link" | "game-name";
 
-type CodePageRow = CodePage & {
-  codes?: Code[] | null;
-  active_code_count?: number | null;
-  latest_code_first_seen_at?: string | null;
-  content_updated_at?: string | null;
-};
+type CodePageRow = Pick<CodePage, "id" | "name" | "slug" | "roblox_link" | "cover_image" | "universe_id" | "updated_at">;
+
+const CODE_PAGE_MATCH_FIELDS = "id,name,slug,roblox_link,cover_image,universe_id,updated_at";
 
 export type ExtensionCode = {
   code: string;
@@ -69,8 +66,7 @@ function getFullListUrl(slug: string) {
   return `${getCodesHubUrl()}/${slug}`;
 }
 
-function getActiveCodes(row: CodePageRow): Code[] {
-  const codes = Array.isArray(row.codes) ? row.codes : [];
+function getActiveCodes(codes: Code[]): Code[] {
   return sortCodesByFirstSeenDesc(codes.filter((code) => code.status === "active"));
 }
 
@@ -87,8 +83,8 @@ function formatExtensionCode(code: Code, referenceMs: number): ExtensionCode {
 async function fetchCodePageByUniverseId(universeId: number): Promise<CodePageRow | null> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("code_pages_view")
-    .select("id,name,slug,roblox_link,cover_image,universe_id,updated_at,content_updated_at,codes,active_code_count,latest_code_first_seen_at")
+    .from("code_pages")
+    .select(CODE_PAGE_MATCH_FIELDS)
     .eq("is_published", true)
     .eq("universe_id", universeId)
     .maybeSingle();
@@ -113,8 +109,8 @@ async function fetchUniverseIdByRootPlaceId(placeId: number): Promise<number | n
 async function fetchCodePageByRobloxLink(placeId: number): Promise<CodePageRow | null> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("code_pages_view")
-    .select("id,name,slug,roblox_link,cover_image,universe_id,updated_at,content_updated_at,codes,active_code_count,latest_code_first_seen_at")
+    .from("code_pages")
+    .select(CODE_PAGE_MATCH_FIELDS)
     .eq("is_published", true)
     .ilike("roblox_link", `%${placeId}%`)
     .limit(1);
@@ -130,8 +126,8 @@ async function fetchCodePageByGameName(gameName: string): Promise<CodePageRow | 
   const nameSlug = slugify(normalizedName);
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("code_pages_view")
-    .select("id,name,slug,roblox_link,cover_image,universe_id,updated_at,content_updated_at,codes,active_code_count,latest_code_first_seen_at")
+    .from("code_pages")
+    .select(CODE_PAGE_MATCH_FIELDS)
     .eq("is_published", true)
     .ilike("name", normalizedName)
     .limit(5);
@@ -207,11 +203,19 @@ async function uncachedGetExtensionCodes(params: {
     };
   }
 
-  const activeCodes = getActiveCodes(resolved.row);
+  // Resolve metadata first so name candidates never each load their codes.
+  const activeCodes = getActiveCodes(await listCodesForCodePage(resolved.row.id));
   const nowMs = Date.now();
   const codes = activeCodes.slice(0, params.limit).map((code) => formatExtensionCode(code, nowMs));
-  const totalActive = activeCodes.length || Number(resolved.row.active_code_count ?? 0);
+  const totalActive = activeCodes.length;
   const fullListUrl = getFullListUrl(resolved.row.slug);
+  // Match the view's greatest(updated_at, latest active first_seen_at).
+  const contentUpdatedAt = activeCodes.reduce<string | null>((latest, code) => {
+    if (!code.first_seen_at) return latest;
+    return !latest || new Date(code.first_seen_at).getTime() > new Date(latest).getTime()
+      ? code.first_seen_at
+      : latest;
+  }, resolved.row.updated_at ?? null);
 
   return {
     ok: true,
@@ -231,7 +235,7 @@ async function uncachedGetExtensionCodes(params: {
     lastCheckedAt: activeCodes.reduce<string | null>((latest, code) => {
       if (!latest) return code.last_seen_at;
       return latest > code.last_seen_at ? latest : code.last_seen_at;
-    }, resolved.row.content_updated_at ?? resolved.row.updated_at ?? null),
+    }, contentUpdatedAt),
     fullListUrl,
     codesHubUrl
   };

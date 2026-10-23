@@ -1,0 +1,66 @@
+name: Release dedicated stats chart runtime
+
+on:
+  workflow_dispatch:
+    inputs:
+      approved_sha:
+        description: Exact 40-character released production SHA
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+# Share the web/schema release lane. Already-installed packages stay pinned afterwards.
+concurrency:
+  group: bloxodes-production
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 10
+    env:
+      APPROVED_SHA: ${{ inputs.approved_sha }}
+      BLOXODES_ENV_PROFILE: process-only
+      BLOXODES_ENV_OVERLAYS: ''
+    steps:
+      - name: Require exact production dispatch
+        shell: bash
+        run: |
+          test "$GITHUB_REF" = refs/heads/production
+          [[ "$APPROVED_SHA" =~ ^[a-f0-9]{40}$ ]]
+          test "$APPROVED_SHA" = "$GITHUB_SHA"
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.approved_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Prove production source ancestry
+        run: |
+          test "$(git rev-parse HEAD)" = "$APPROVED_SHA"
+          git merge-base --is-ancestor "$APPROVED_SHA" origin/production
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify packaging and activation guards without dependencies
+        run: node --experimental-vm-modules --test scripts/ops/__tests__/stats-chart-runtime.test.mjs
+      - name: Verify worker unit behavior and rejection before database access
+        # Real SQL/bootstrap evidence belongs to the required PR database job.
+        run: node --test scripts/universes/__tests__/prepared-charts-worker.test.mjs
+      - name: Verify deployed SHA and private schema contract, then authorize fixed package
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: >-
+          node --experimental-vm-modules scripts/ops/package-stats-chart-runtime.mjs
+          --sha "$APPROVED_SHA" --out "$RUNNER_TEMP/stats-chart-runtime"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stats-chart-runtime-${{ inputs.approved_sha }}
+          path: ${{ runner.temp }}/stats-chart-runtime/
+          if-no-files-found: error
+          overwrite: false
+          retention-days: 30

@@ -42,6 +42,18 @@ Two Supabase databases: production (self-hosted on the VPS) and managed developm
 
 Generated types for the shared game tables live in `supabase/types/shared-games.ts`. `supabase/schema.sql` is a dump of the production public schema.
 
+## Prepared chart storage
+
+The `stats_prepared_*` tables hold platform and visit-share chart generations, frozen source buckets, positive visit contributions, pending changes and worker receipts. All use RLS and service-only grants. Internal helpers live in the unexposed `stats_prepared_private` schema; the chart RPCs return one JSON value so long hourly series are not truncated at the REST row limit. The wire contract is `types/stats-prepared.ts`.
+
+Ready generations are immutable. Publication changes the active pointer only after a complete result passes validation. Failed work preserves the last ready generation. Source triggers record changes without rebuilding charts in the ingestion transaction. Existing source and legacy aggregate tables retain their own writers.
+
+Changed empty platform payloads replace an existing active generation through that same atomic publication path. The former generation keeps its original payload and dates under normal retained-pointer protection and cleanup. Processed-empty buckets describe missing coverage, not public zero observations.
+
+Hourly TRUNCATE capture invalidates through the current UTC hour; daily capture through the current UTC day. Hourly truncation also marks retained coverage outside the reconstructible horizon uncertain. Rebuild enumeration stays finite and ordered. This describes invalidation behavior, not an instruction to truncate production history.
+
+Prepared storage includes contribution rows and indexes, beyond the chart JSON size limits. Measure bootstrap, membership rebuilds and cleanup with the isolated managed-development benchmark before activation. Deploy schema and the fixed worker first; verify actual chart coverage before switching public readers. See [stats](../content/stats.md) and the [runtime release contract](../operations/release.md#prepared-chart-runtime).
+
 ## Rules
 
 - Migrations are immutable once committed. CI rejects edits and deletions.

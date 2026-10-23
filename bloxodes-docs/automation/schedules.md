@@ -19,7 +19,7 @@ The prompts live in the T3 scheduler, not the repo. Keep them short: the selecti
 
 ## Homelab (systemd)
 
-All units run from `/srv/data/bloxodes-automation-runtime/current` and read `/etc/bloxodes/article-automation.env`.
+Article units run from `/srv/data/bloxodes-automation-runtime/current` and read `/etc/bloxodes/article-automation.env`.
 
 | Unit | When | Does |
 | --- | --- | --- |
@@ -29,6 +29,10 @@ All units run from `/srv/data/bloxodes-automation-runtime/current` and read `/et
 | `bloxodes-article-audit.service` | after publication | `articles:automation:audit`. |
 
 The runtime is a separate release from the repo. Merging code doesn't change it. See [articles](../content/articles.md#runtime-releases).
+
+`bloxodes-stats-chart-refresh.timer` is a separate **user** timer for `teja`. It starts at second 20 every five minutes, with persistent catch-up and no jitter. Its oneshot service runs the pinned package under `/srv/data/bloxodes-stats-chart-runtime/current`; it reads only the existing production HTTP database credentials. It does not use article runtime state or env. GitHub packages and authorizes each release; installation does not follow moving branch HEAD. See [release](../operations/release.md#prepared-chart-runtime).
+
+The chart job checks for work, advances bounded preparation and records outcomes. A timer firing is not proof of a completed generation. Local locking, database coordination and deadlines prevent overlapping chart runs. Inspect runtime receipts and SQL health during bootstrap; the private web heartbeat monitor ships with the separate public-reader cutover. New deterministic chart processing runs on homelab. Existing VPS, Northflank and T3 schedules below are legacy owners, not permission to create more schedules there.
 
 ## VPS (cron, user `ravitejaknts`)
 
@@ -82,4 +86,4 @@ Scheduled:
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
-Manual only: `automation-runtime.yml` (packages the homelab runtime), `manual-web-audit.yml` and `google-indexing.yml` (Google Indexing is switched off).
+Manual only: `automation-runtime.yml` (packages the article runtime), `stats-chart-runtime.yml` (releases the dedicated prepared-chart runtime), `manual-web-audit.yml` and `google-indexing.yml` (Google Indexing is switched off).

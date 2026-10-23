@@ -1346,15 +1346,29 @@ export async function getRobloxUniverseById(universeId: number): Promise<RobloxU
 const cachedListCodesForCodePage = publicContentCache(
   async (codePageId: string) => {
     const sb = supabaseAdmin();
-    const { data, error } = await sb
-      .from("code_pages_view")
-      .select("codes")
-      .eq("id", codePageId)
-      .maybeSingle();
-    if (error) throw error;
-    const codes = (data as { codes?: unknown })?.codes;
-    if (!Array.isArray(codes)) return [];
-    return codes as Code[];
+    const codes: Code[] = [];
+    // The view's JSON aggregate was not subject to the API's 1,000-row cap.
+    // Page only this game's codes, keeping the view's status/last-seen order.
+    const batchSize = 1000;
+    for (let offset = 0; ; offset += batchSize) {
+      const { data, error, status } = await sb
+        .from("codes")
+        .select("*,code_page:code_pages!inner(is_published)")
+        .eq("code_page_id", codePageId)
+        .eq("code_page.is_published", true)
+        .order("status", { ascending: true })
+        .order("last_seen_at", { ascending: false })
+        .order("id", { ascending: true })
+        .range(offset, offset + batchSize - 1);
+      if (error) {
+        if (offset > 0 && isOutOfRangePaginationFailure(status, error)) break;
+        throw error;
+      }
+      const rows = (data ?? []) as (Code & { code_page: { is_published: boolean } })[];
+      for (const { code_page: _codePage, ...code } of rows) codes.push(code);
+      if (rows.length < batchSize) break;
+    }
+    return codes;
   },
   ["listCodesForCodePage"],
   {

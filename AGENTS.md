@@ -73,7 +73,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 **Data and secrets**
 
 - Never print, log or commit secrets. Env files are edited only on the homelab; Mac copies are read-only. See [environment](bloxodes-docs/environment.md).
-- Author against managed development. Production changes only through GitHub's release and publication jobs, or `content:publish` for Roblox and franchise wiki bundles.
+- Author against managed development. Production changes only through GitHub's release and publication jobs, or `content:publish` for Roblox and franchise wiki bundles. The owner-approved, GitHub-released homelab prepared-chart runtime may execute only its fixed recurring pipeline; see [its release contract](bloxodes-docs/operations/release.md#prepared-chart-runtime).
 - There is no local Supabase. Don't start one.
 - `roblox_universes.slug` is a stats slug. Never copy it into editorial slugs (`code_pages.slug`, `wiki_pages.slug`, `wiki_collection_pages.wiki_slug`, `quiz_pages.code` and the like).
 - Notion queue rows are never deleted. Set a status instead.

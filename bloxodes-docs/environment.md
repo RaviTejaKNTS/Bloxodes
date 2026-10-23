@@ -59,6 +59,8 @@ The Content Factory has no env files. Its `bin/publisher` runs these commands fr
 
 ## Rules
 
+The dedicated homelab prepared-chart runtime reads `/srv/data/projects/Bloxodes/.envs/targets/production.env` in place. Its parser selects only `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE`, validates the production URL, and requires a private file owned by `teja`. It creates no env copy and loads no application, article or infrastructure overlays. The child receives a fixed environment with `process-only`, an empty overlay list and release-generated SHA/authorization metadata. `env/examples/pipelines/stats-chart.env.example` documents that metadata; it is not a new profile or an editable secret store.
+
 - A profile is not permission. Scripts that can write production also need their own `--allow-prod` or `--apply` flags.
 - `NEXT_PUBLIC_*` and Expo public variables reach the browser. Never put service-role keys or `sb_secret_*` there.
 - There is no local Supabase. Don't start one or create a `local.env`.

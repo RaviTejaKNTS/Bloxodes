@@ -75,7 +75,26 @@ Edge Function code isn't shipped with the web image. `scripts/ops/release-produc
 These don't change when code merges:
 
 - **Homelab article runtime:** package with `automation-runtime.yml`, then prepare and install. See [articles](../content/articles.md#runtime-releases).
+- **Homelab prepared-chart runtime:** release with `stats-chart-runtime.yml` at an approved, deployed production SHA. Activate its dedicated user timer only after the package, schema and worker checks pass. See below.
 - **Stats worker:** build an approved SHA on the VPS, and Northflank rebuilds on worker paths. See [stats](../content/stats.md#the-stats-worker).
+
+### Prepared-chart runtime
+
+This is a GitHub-released operational data pipeline. An owner-approved runtime release authorizes its fixed recurring chart-preparation RPCs on production; it does not authorize arbitrary SQL, content publication or other runtime changes. Schema still ships through the protected schema job. The worker requires `--apply --allow-prod --expected-sha`, an installed release authorization and matching schema/RPC contracts. Its service-role key remains broad; the fixed RPC list is enforced by the reviewed runtime, not a restricted database credential.
+
+Dispatch `stats-chart-runtime.yml` on `production` with `approved_sha`. GitHub checks the deployed SHA, database compatibility, Node 22 worker guards and package tests, then publishes `stats-chart-runtime-<sha>` for 30 days. The package contains only its fixed Node entrypoint, built-in-only imports, operating helpers and two user units. No dependencies are installed on homelab.
+
+Before the first activation, required PR database QA must prove the migrated SQL, service-only permissions, worker bootstrap and real API deadlines in isolated managed-development schemas. Dispatch `pull-request.yml` on the reviewed task SHA with `stats_prepared_benchmark=true` for the representative all-game bootstrap, late-change and membership-rebuild benchmark. Inspect its timing, prepared-table storage and cleanup receipt; a failed budget is a failed release gate. Mock worker tests in the packaging workflow do not replace these database results.
+
+Deploy schema/producer/runtime before the prepared-only public reader. Empty prepared tables have no legacy aggregate seed. Keep the existing public reader live until bootstrap has produced usable outputs for every intended range/resolution, with honest current/previous coverage. Check source age separately from generation age before reader cutover.
+
+On homelab, `scripts/ops/stats-chart-runtime.mjs inspect` and `install --apply --allow-prod --expected-sha <sha> --run-id <id> --artifact-id <id>` fetch the exact successful GitHub artifact and verify its digest, source/run identity and complete file manifest. Installation uses `/srv/data/bloxodes-stats-chart-runtime`, an atomic `current` pointer and only the two `bloxodes-stats-chart-refresh` user units. It reads existing production HTTP credentials in place. Article units, env sources, VPS image pins and Northflank are separate releases.
+
+Installation and invocations share a nonblocking lock. The worker has a bounded deadline and a database lease; a busy install must not stop a running job. A later web deployment may descend from the pinned runtime SHA without moving that pin. Rollback requires the recorded previous package, `--from-sha`, the expected previous SHA and compatible live schema. It changes only this runtime and its units, never schema.
+
+The installer's 260-second internal budget reserves 65 seconds for recovery inside a 270-second hard deadline. It refuses activation without enough remaining time. Before changing units, pointer or retained state, it durably saves `state/activation-pending.json`. TERM/INT routes through bounded restoration of files, pointer and all three chart timer controls. Hard interruption may leave only that snapshot. Its presence blocks further activation and recurring runs until an operator reconciles the recorded state; do not delete it merely to retry.
+
+Completion requires actual timer-run receipts, prepared generation/source timestamps, public chart readbacks and external heartbeat monitoring. A successful installer or schema-compatible health response does not prove charts are ready. Failed bootstrap retains last-good results or an explicit unavailable state. Preserve both packages. On interrupted activation, inspect `activation-pending.json` and `activation-failure.json`, including `restoredFiles`, `restoredSystemd`, `needsReconciliation` and each restoration attempt. An old successful `activation.json` alone does not prove the current state is reconciled.
 
 ## CI credentials
 

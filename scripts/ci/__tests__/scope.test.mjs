@@ -17,4 +17,23 @@ test("mobile-only changes avoid web and extension builds", () => {
   assert.equal(scope.mobile, true);
   assert.equal(scope.web, false);
   assert.equal(scope.extension, false);
+  assert.equal(scope.statsPrepared, false);
+});
+test("prepared chart readers, worker, runtime and schema receive database verification", () => {
+  for (const file of ["apps/web/src/lib/stats.ts", "scripts/shared/prepared-charts-worker.mjs",
+    "scripts/ops/stats-chart-runtime.mjs", "supabase/migrations/20261023100441_stats_prepared_charts_v1.sql",
+    ".github/workflows/pull-request.yml", "apps/web/src/app/api/revalidate/route.ts"]) {
+    assert.equal(classify([file]).statsPrepared, true, file);
+  }
+  assert.equal(classify(["apps/web/src/lib/catalog.ts"]).statsPrepared, false);
+  assert.equal(classify(["bloxodes-docs/content/stats.md"]).statsPrepared, false);
+});
+test("selected-page code reads require the bounded backend compatibility probe", () => {
+  for (const file of ["apps/web/src/lib/db.ts", "apps/web/src/lib/extension-codes.ts",
+    "apps/web/src/lib/__tests__/code-lookups.test.ts", "scripts/ci/code-lookups-qa.mjs",
+    ".github/workflows/pull-request.yml"]) {
+    assert.equal(classify([file]).codeLookups, true, file);
+  }
+  assert.equal(classify(["apps/web/src/lib/catalog.ts"]).codeLookups, false);
+  assert.equal(classify(["bloxodes-docs/content/codes.md"]).codeLookups, false);
 });

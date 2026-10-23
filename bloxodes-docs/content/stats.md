@@ -4,6 +4,22 @@ Last verified: 2026-10-20
 
 Live Roblox game stats at `/stats` (players, visits, ranks, risers, genres, creators) and the monthly Roblox reports. Metric meanings and chart rules are in [stats metrics](stats-metrics.md).
 
+## Prepared platform and visit-share charts
+
+The service-only `stats-prepared@1` store and dedicated runtime prepare platform and visit-share answers. The first release adds this producer while existing public chart readers continue to run. Switch public readers in a separate release only after the benchmark and actual bootstrap prove usable data for every intended selection. Empty prepared tables have no legacy seed.
+
+Once activated, the dedicated homelab worker checks every five minutes, advances bounded source/backfill work and publishes ready generations. The platform SQL reader supports all five periods, four resolutions and previous-period rows in one RPC. Visit share publishes the five ranges together, preserving whole-period ranking and all positive games in the denominator. JSON wraps the complete result, avoiding the REST 1,000-row limit. Missing source history stays explicit; daily inputs still depend on the separate daily producer. This job does not collect new Roblox samples every five minutes.
+
+`types/stats-prepared.ts` defines the SQL wire contract. The fixed Node 22 entrypoint is `scripts/universes/refresh-prepared-charts.mjs`. The worker uses a fenced database lease, durable step receipts and staged publication. Failed preparation leaves the active result intact. Source observation, generation, publication and successful check times have separate meanings; a new check cannot make old source data fresh.
+
+One monotonic 210-second invocation budget includes claim, advance ambiguity recovery and durable finish recovery. Every HTTP call is limited by the remaining budget and its 10-second advance or 8-second control ceiling. Starting another advance requires 53 seconds remaining for receipt lookup, identical replay and finish recovery. HTTP cancellation does not prove SQL rollback; SQL retains separate statement and lock deadlines.
+
+SQL result states are ready, partial, last-good, verified empty and unavailable. A useful last-good result keeps its original dates. `get_stats_prepared_health_v1` reports schema compatibility separately from operational state. A compatible response or non-null generation ID alone does not prove usable chart coverage. The public API/UI cutover, private authenticated web health route, removal of chart API warming and external prepared-heartbeat monitor belong to the reader release; they are not active from this producer release alone.
+
+Successfully removing the final source observation publishes an immutable missing-source generation. Selected rows then return unavailable. Cold empty work and unchanged checks do not refresh generation or publication dates. Processed-empty buckets describe missing coverage; they are not public zero observations.
+
+Package/activation, timer ownership, limits, rollback and credentials are in [release](../operations/release.md#prepared-chart-runtime), [schedules](../automation/schedules.md#homelab-systemd) and [environment](../environment.md). Merging web code does not activate this runtime or move existing VPS/Northflank pins. Existing platform aggregate tables/functions remain for compatibility; their legacy nightly schedule is separate from the new prepared generation pipeline.
+
 ## Universe stats
 
 ```text

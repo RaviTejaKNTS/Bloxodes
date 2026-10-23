@@ -5,6 +5,11 @@ on:
     branches: [production]
   workflow_dispatch:
     inputs:
+      stats_prepared_benchmark:
+        description: 'Run the isolated managed-development prepared-chart scale benchmark'
+        required: false
+        default: false
+        type: boolean
       selected_roblox_bundle_hash:
         description: 'Optional immutable Roblox bundle SHA-256; verify already-staged managed development only'
         required: false
@@ -30,6 +35,8 @@ jobs:
     outputs:
       checks: ${{ steps.scope.outputs.checks }}
       migrations: ${{ steps.scope.outputs.migrations }}
+      statsPrepared: ${{ steps.scope.outputs.statsPrepared }}
+      codeLookups: ${{ steps.scope.outputs.codeLookups }}
       web: ${{ steps.scope.outputs.web }}
       extension: ${{ steps.scope.outputs.extension }}
       admin: ${{ steps.scope.outputs.admin }}
@@ -147,6 +154,10 @@ jobs:
       - name: Verify cold catalog pagination, filters and failure behavior
         if: needs.scope.outputs.web == 'true'
         run: node scripts/ci/catalog-route-regression.mjs
+      - name: Verify prepared chart routes, selectors, dates and failures
+        # Producer-only rollout can precede this reader module without cutting over public charts.
+        if: needs.scope.outputs.web == 'true' && hashFiles('apps/web/src/lib/stats-prepared.ts') != ''
+        run: node scripts/ci/stats-prepared-route-qa.mjs
       - if: needs.scope.outputs.web == 'true'
         run: npx playwright test apps/web/e2e/release-smoke.spec.ts
       - uses: actions/upload-artifact@v4
@@ -156,9 +167,85 @@ jobs:
           path: tmp/test-reports/
           retention-days: 1
           if-no-files-found: ignore
+  prepared-chart-runtime:
+    needs: scope
+    if: needs.scope.outputs.checks == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verify chart worker and immutable runtime on the host Node version
+        run: node --experimental-vm-modules --test scripts/universes/__tests__/prepared-charts*.test.mjs scripts/ops/__tests__/stats-chart*.test.mjs
+      - name: Verify selected-page code reads against the managed database
+        if: needs.scope.outputs.codeLookups == 'true'
+        env:
+          CODE_LOOKUPS_QA: '1'
+          MANAGED_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+          MANAGED_DEV_SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+          QA_EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/ci/code-lookups-qa.mjs --expected-sha "$QA_EXPECTED_SHA"
+      - uses: actions/upload-artifact@v4
+        if: always() && needs.scope.outputs.codeLookups == 'true'
+        with:
+          name: code-lookups-backend-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
+          path: tmp/test-reports/code-lookups/backend.json
+          retention-days: 30
+          if-no-files-found: error
+  prepared-chart-database:
+    needs: [scope, managed-development]
+    if: >-
+      always() && !cancelled() &&
+      (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) &&
+      (needs.scope.outputs.migrations != 'true' || needs.managed-development.result == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: bloxodes-managed-stats-qa
+      queue: max
+      cancel-in-progress: false
+    env:
+      BLOXODES_ENV_PROFILE: process-only
+      SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.MANAGED_DEV_SUPABASE_SERVICE_ROLE }}
+      MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
+      EXPECTED_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      QA_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark && 'benchmark' || 'fixture' }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verify isolated SQL semantics, ACLs, bootstrap and real API deadlines
+        # Leave time inside the job for cleanup and its receipt after a killed benchmark.
+        timeout-minutes: 35
+        run: >-
+          node scripts/ci/stats-prepared-db-qa.mjs --mode "$QA_MODE"
+          --expected-sha "$EXPECTED_SHA" --receipt "$RUNNER_TEMP/stats-prepared-db-qa.json"
+      - name: Remove only this run's isolated database fixtures
+        if: always()
+        timeout-minutes: 5
+        run: |
+          if [ -f "$RUNNER_TEMP/stats-prepared-db-qa.json" ]; then
+            node scripts/ci/stats-prepared-db-qa.mjs --mode cleanup \
+              --expected-sha "$EXPECTED_SHA" --receipt "$RUNNER_TEMP/stats-prepared-db-qa.json"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stats-prepared-database-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/stats-prepared-db-qa.json
+          retention-days: 30
+          if-no-files-found: ignore
   required:
     name: Required PR checks
-    needs: [scope, managed-development, checks]
+    needs: [scope, managed-development, checks, prepared-chart-runtime, prepared-chart-database]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -167,11 +254,18 @@ jobs:
           DOCS_ONLY: ${{ needs.scope.outputs.checks == 'false' }}
           MANAGED: ${{ needs.managed-development.result }}
           CHECKS: ${{ needs.checks.result }}
+          CHART_RUNTIME: ${{ needs.prepared-chart-runtime.result }}
+          CHART_DATABASE: ${{ needs.prepared-chart-database.result }}
+          CHART_DATABASE_REQUIRED: ${{ needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark) }}
         run: |
           test "$SCOPE" = success
           if [ "$DOCS_ONLY" != true ]; then
             test "$MANAGED" = success
             test "$CHECKS" = success
+            test "$CHART_RUNTIME" = success
+          fi
+          if [ "$CHART_DATABASE_REQUIRED" = true ]; then
+            test "$CHART_DATABASE" = success
           fi
   selected-franchise-development-qa:
     if: github.event_name == 'workflow_dispatch' && inputs.selected_franchise_bundle_hash != ''

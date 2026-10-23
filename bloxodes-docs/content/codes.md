@@ -32,6 +32,8 @@ Use `bloxodes-code-workflow-runner` and `bloxodes-code-writing`, then publish wi
 
 `code_pages` (4,062 rows, 2,310 published) and `codes` (69,035 rows) on 2026-10-19. Website, extension and mobile all read through shared web helpers.
 
+Extension matching reads published `code_pages` metadata, then loads codes only for the selected page. `listCodesForCodePage` reads that page's `codes` directly, enforces publication in each batch and pages through the API's 1,000-row limit. It preserves status/last-seen ordering, with an ID tie-break for pagination. The extension derives active counts and freshness from this complete selected-page list instead of `code_pages_view`. These reads introduce no persistent origin cache.
+
 ## Known issues
 
 - **New page writing is down.** The OpenAI key used by `generate-code-page-copy.ts` has no credits left (HTTP 429). The workflow still shows green because per-page errors don't fail the run. The last new page was published on 2026-10-07.
