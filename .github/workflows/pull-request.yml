@@ -5,6 +5,11 @@ on:
     branches: [production]
   workflow_dispatch:
     inputs:
+      stats_prepared_capacity_probe:
+        description: 'Record disposable runner capacity only; no database connections or population'
+        required: false
+        default: false
+        type: boolean
       stats_prepared_recovery:
         description: 'Optional exact failed prepared-chart benchmark artifact recovery'
         required: false
@@ -40,6 +45,41 @@ permissions:
   contents: read
 
 jobs:
+  prepared-chart-capacity:
+    if: github.event_name == 'workflow_dispatch' && inputs.stats_prepared_capacity_probe
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Record filesystem and Docker capacity without creating a database
+        env:
+          PROBE_DIRECTORY: ${{ runner.temp }}/stats-prepared-capacity
+        run: |
+          mkdir -p "$PROBE_DIRECTORY"
+          df -PB1 "$RUNNER_TEMP" "$GITHUB_WORKSPACE" > "$PROBE_DIRECTORY/filesystem.txt"
+          df -Pi "$RUNNER_TEMP" "$GITHUB_WORKSPACE" > "$PROBE_DIRECTORY/inodes.txt"
+          docker_root="$(docker info --format '{{.DockerRootDir}}')"
+          sudo df -PB1 "$docker_root" > "$PROBE_DIRECTORY/docker-filesystem.txt"
+          docker system df > "$PROBE_DIRECTORY/docker-usage.txt"
+          docker version --format '{{json .}}' > "$PROBE_DIRECTORY/docker-version.json"
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          fields = ('GITHUB_SHA', 'GITHUB_RUN_ID', 'GITHUB_RUN_ATTEMPT',
+                    'RUNNER_OS', 'RUNNER_ARCH', 'ImageOS', 'ImageVersion')
+          Path(os.environ['PROBE_DIRECTORY'], 'identity.json').write_text(
+              json.dumps({key: os.environ.get(key) for key in fields}, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stats-prepared-capacity-${{ github.sha }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/stats-prepared-capacity/
+          retention-days: 30
+          if-no-files-found: error
   scope:
     runs-on: ubuntu-latest
     outputs:
@@ -328,6 +368,7 @@ jobs:
     if: >-
       always() && !cancelled() &&
       !(github.event_name == 'workflow_dispatch' && inputs.stats_prepared_recovery != '') &&
+      !(github.event_name == 'workflow_dispatch' && inputs.stats_prepared_capacity_probe) &&
       (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) &&
       (needs.scope.outputs.migrations != 'true' || needs.managed-development.result == 'success')
     runs-on: ubuntu-latest
@@ -383,7 +424,7 @@ jobs:
           CHECKS: ${{ needs.checks.result }}
           CHART_RUNTIME: ${{ needs.prepared-chart-runtime.result }}
           CHART_DATABASE: ${{ needs.prepared-chart-database.result }}
-          CHART_DATABASE_REQUIRED: ${{ !(github.event_name == 'workflow_dispatch' && inputs.stats_prepared_recovery != '') && (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) }}
+          CHART_DATABASE_REQUIRED: ${{ !(github.event_name == 'workflow_dispatch' && (inputs.stats_prepared_recovery != '' || inputs.stats_prepared_capacity_probe)) && (needs.scope.outputs.statsPrepared == 'true' || (github.event_name == 'workflow_dispatch' && inputs.stats_prepared_benchmark)) }}
         run: |
           test "$SCOPE" = success
           if [ "$DOCS_ONLY" != true ]; then
