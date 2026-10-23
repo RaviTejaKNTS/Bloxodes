@@ -24,7 +24,8 @@ rank snapshots -> current read indexes
 | Hourly playing ranks | VPS | :30 hourly |
 | Strict audit | VPS | :10 every 6 hours |
 | Daily rollup, hourly prune, audit | VPS | 00:02 |
-| Platform aggregates | VPS | 01:05 |
+| Platform hourly summary | VPS | every 5 minutes |
+| Platform daily summary | VPS | 01:05 |
 | Worker ledger reconcile | VPS | 00:10 |
 | Wiki game passes | VPS | 03:18 daily |
 
@@ -35,6 +36,8 @@ Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:ne
 **Single-game import:** `enrich-roblox-universes.ts` also exports `previewRobloxUniverse` (fetch and map, no write) and `importRobloxUniverse`, which `content:publish` uses to add one missing `roblox_universes` row before publishing a wiki. Both reuse the enrichment fetcher and mapper; the import never overwrites an existing row.
 
 **Reads:** `apps/web/src/lib/stats.ts`. Public pages hide player values older than 24 hours, so a fresh index alone doesn't mean fresh data.
+
+**Platform charts:** the platform player chart reads `roblox_platform_stats_hourly` / `_daily`. The every-5-minute job refreshes the last 3 hours of the hourly summary, so the 24-hour chart is a few minutes old; the 01:05 job also refreshes the last 2 days of the daily summary. Only the 24-hour view may fall back to the live `get_stats_platform_ccu_trend` call, and only when the stored summary has no rows. The visit-share chart always uses `get_stats_visit_share_chart`, which ranks every tracked game; there is no smaller-population fallback. Both charts keep one result per range in the web process for 5 minutes (`stats-chart-cache.ts`), share one query between concurrent requests, and keep serving the last good result when a refresh fails. With no good result yet, the panel says the chart didn't load and the browser retries once.
 
 ## Wiki game passes
 
@@ -70,6 +73,6 @@ A worker change is done only when the Northflank build succeeds, one HOT run suc
 
 ## Known issues
 
-- Daily universe rollup (00:02) and platform refresh (01:05) are timing out, so the chained prune and audit may not run.
+- Daily universe rollup (00:02) is timing out, so the chained prune and audit may not run. The 01:05 daily platform summary scans `roblox_universe_stats_daily` without a date-first index and can still fail; when it does, daily-resolution charts end a day early.
 - `stats-health-monitor.yml` is set to every 5 minutes but GitHub runs it only every couple of hours.
 - The August 2026 report is live but missing from the stats sitemap and feed.

@@ -56,6 +56,7 @@ type ChartData = {
   previousPoints?: ChartPoint[];
   comparisons?: ChartComparison[];
   annotations?: ChartAnnotation[];
+  unavailable?: boolean;
 };
 
 type ChartAnnotation = {
@@ -270,7 +271,10 @@ export function StatsChartPanel({
   const [compareResults, setCompareResults] = useState<SearchResult[]>([]);
   const [compareLoading, setCompareLoading] = useState(false);
   const [chartCache, setChartCache] = useState<Record<string, ChartData>>(() =>
-    initialChart ? { [chartCacheKey(initialChart.range, initialChart.requestedResolution, false, [])]: initialChart } : {}
+    // A server render that couldn't load the chart retries once from the browser.
+    initialChart && !initialChart.unavailable
+      ? { [chartCacheKey(initialChart.range, initialChart.requestedResolution, false, [])]: initialChart }
+      : {}
   );
   const [lastRenderedChart, setLastRenderedChart] = useState<ChartData | undefined>(initialChart);
   const [loadingKey, setLoadingKey] = useState<string | null>(null);
@@ -459,8 +463,15 @@ export function StatsChartPanel({
           <div className={cn("flex items-center justify-center rounded-lg border border-dashed border-border/70 bg-background/35 text-center", compact ? "h-[190px]" : "h-[300px]")}>
             <div className="max-w-sm px-6">
               <Activity className="mx-auto h-5 w-5 text-muted" aria-hidden />
-              <p className="mt-3 text-sm font-semibold text-foreground">{isLoading ? "Loading chart" : "Not enough history yet"}</p>
-              <p className="mt-1 text-xs text-muted">{loadError ?? "This chart needs a few history samples before it can render cleanly."}</p>
+              <p className="mt-3 text-sm font-semibold text-foreground">
+                {isLoading ? "Loading chart" : displayChart?.unavailable ? "Chart didn't load" : "Not enough history yet"}
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                {loadError ??
+                  (displayChart?.unavailable
+                    ? "Player numbers are taking too long right now. Try again in a few minutes."
+                    : "This chart needs a few history samples before it can render cleanly.")}
+              </p>
             </div>
           </div>
         ) : (

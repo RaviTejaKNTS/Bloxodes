@@ -29,6 +29,8 @@ Revalidation and warming are separate on purpose, so a big stats purge doesn't w
 
 The Edge Function forwards event types it doesn't know, so new content types only need mapping in the web app.
 
+Stats chart APIs are the one origin exception: the platform player and visit-share charts keep each result in the web process for 5 minutes and share one query between concurrent requests (`apps/web/src/lib/stats-chart-cache.ts`). See [stats](../content/stats.md). Don't add `unstable_cache` for other public reads.
+
 ## Runtime variables
 
 - Edge Function: `REVALIDATE_ENDPOINT`, `REVALIDATE_SECRET`, batch and delay controls, service role.
