@@ -47,6 +47,7 @@ Jobs run in short-lived `bloxodes-stats-worker:production` containers through `b
 | Daily rollup, prune, audit | 00:02 |
 | Worker ledger reconcile | 00:10 |
 | Platform aggregates | 01:05 |
+| Wiki game passes (`refresh:wiki-game-passes`; lock `roblox-universe-discovery`, 300 s lock wait, 600 s timeout) | 03:18 |
 | Codes refresh | 00:00, 06:00, 12:00, 18:00 |
 | Roblox virtual events collect | 00:15 |
 | Puzzles | 04:10, 04:45, 05:00, 05:30, 07:10, 08:10, sweep 08:30, audit 08:45 |

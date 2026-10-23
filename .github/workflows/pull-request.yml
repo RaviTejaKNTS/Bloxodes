@@ -129,6 +129,7 @@ jobs:
       - run: npm run env:doctor -- --ci
       - run: npm run env:check
       - run: npm run test:article-queue && npm run test:wiki-runtime && npm run test:public-copy
+      - run: npm run test:universe-stats-pipeline
       - if: needs.scope.outputs.extension == 'true'
         run: npm run typecheck:extension && npm run package:extension
       - if: needs.scope.outputs.admin == 'true'
