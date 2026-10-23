@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
 import { SiteLogo } from "@/components/SiteLogo";
-import { MAP_GUIDE_ID, scrollToMapGuide, useShellInertUnderMap } from "@/components/gta/map-guide";
+import { MAP_GUIDE_ID, scrollToMapGuide } from "@/components/gta/map-guide";
+import { MapGestureHint, useLeafletMapGestures } from "@/components/maps/useLeafletMapGestures";
 import { ArrowLeft, ArrowUpRight, Check, Crosshair, Info, Layers3, Link2, Map as MapIcon, Minus, Plus, Search, X } from "lucide-react";
 import type * as Leaflet from "leaflet";
 import { useCollectionChecklistProgress } from "@/lib/collection-checklist-progress-client";
@@ -95,6 +96,7 @@ export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
   const [listOpen, setListOpen] = useState(false);
   const mapElement = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Leaflet.Map | null>(null);
+  const gestureHint = useLeafletMapGestures(mapRef, mapReady);
   const leafletRef = useRef<typeof Leaflet | null>(null);
   const tilesRef = useRef<Leaflet.TileLayer | null>(null);
   const clusterRef = useRef<Leaflet.MarkerClusterGroup | null>(null);
@@ -116,7 +118,6 @@ export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
       })));
   }, [markers, activeLayers, onlyRemaining, query, isChecked]);
 
-  useShellInertUnderMap(mapElement);
   useEffect(() => {
     if (!mapReady || query.trim().length < 2 || !filtered.length) return;
     const timeout = window.setTimeout(() => {
@@ -128,23 +129,17 @@ export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
     }, 260);
     return () => window.clearTimeout(timeout);
   }, [query, filtered, mapReady]);
-  const selectPoint = useCallback((id: string | null, writeUrl = true) => {
+  const selectPoint = useCallback((id: string | null) => {
     setSelectedId(id);
     setCopyStatus("");
     if (id && window.matchMedia("(max-width: 800px)").matches) setListOpen(false);
-    if (writeUrl) {
-      const url = new URL(window.location.href);
-      if (id) url.searchParams.set("point", id);
-      else url.searchParams.delete("point");
-      window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
-    }
     const marker = markers.find((item) => item.id === id);
     if (marker && mapRef.current) mapRef.current.flyTo(gameToMap(marker), Math.max(mapRef.current.getZoom(), 4), { duration: 0.45 });
   }, [markers]);
   useEffect(() => {
     const fromUrl = () => {
       const id = new URLSearchParams(window.location.search).get("point");
-      if (id && markers.some((marker) => marker.id === id)) selectPoint(id, false);
+      if (id && markers.some((marker) => marker.id === id)) selectPoint(id);
       else setSelectedId(null);
     };
     fromUrl();
@@ -168,7 +163,9 @@ export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
       leafletRef.current = L;
       const map = L.map(mapElement.current, {
         crs: L.CRS.Simple, minZoom: 0, maxZoom: 7, zoomSnap: 0.25, zoomControl: false,
-        attributionControl: true, maxBounds: MAP_LIMITS, maxBoundsViscosity: 1, preferCanvas: true
+        attributionControl: true, maxBounds: MAP_LIMITS, maxBoundsViscosity: 1, preferCanvas: true,
+        scrollWheelZoom: false, touchZoom: true,
+        dragging: !window.matchMedia("(any-pointer: coarse)").matches
       });
       mapRef.current = map;
       tilesRef.current = L.tileLayer("/gta/maps/gta5/roadmap/{z}/{z},{y},{x}.jpg", {
@@ -247,6 +244,12 @@ export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
     }
     clusters.addLayers(visiblePins);
   }, [filtered, markers, selectedId, isChecked, mapReady]);
+  useEffect(() => {
+    if (!mapReady || !mapElement.current) return;
+    const observer = new ResizeObserver(() => mapRef.current?.invalidateSize());
+    observer.observe(mapElement.current);
+    return () => observer.disconnect();
+  }, [mapReady]);
   const toggleLayer = (slug: Gta5MapLayerSlug) => setActiveLayers((previous) => {
     const next = new Set(previous);
     if (next.has(slug)) next.delete(slug); else next.add(slug);
@@ -257,10 +260,11 @@ export function Gta5InteractiveMap({ markers }: { markers: Gta5MapMarker[] }) {
     const url = new URL(window.location.href);
     url.searchParams.set("point", selected.id);
     try { await navigator.clipboard.writeText(url.toString()); setCopyStatus("Link copied"); }
-    catch { setCopyStatus("Copy from address bar"); }
+    catch { setCopyStatus("Could not copy link"); }
   };
   return <section className="gta-map-app" aria-label="GTA 5 interactive map">
     <div ref={mapElement} className="gta-map-canvas" role="application" aria-label="Zoomable GTA 5 map with selectable location pins" />
+    <MapGestureHint hint={gestureHint} />
     <header className="gta-map-topbar">
       <Link href="/gta/wiki/gta-5" className="gta-map-back" aria-label="Back to GTA 5 wiki"><ArrowLeft size={17} /></Link>
       <div className="gta-map-title"><SiteLogo className="h-6" /><span className="gta-map-title__separator" aria-hidden="true">.</span><h1>GTA 5 Story Mode interactive map</h1></div>

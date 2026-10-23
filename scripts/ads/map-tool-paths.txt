@@ -1,0 +1,53 @@
+# Every registered GTA map engine, the map hub, and the shared image-pin template.
+/gta/maps
+/gta/maps/gta5
+/gta/maps/gta-san-andreas
+/gta/maps/gta-vice-city
+/gta/maps/gta-iii
+/gta/maps/gta-4
+/gta/maps/gta-liberty-city-stories
+/gta/maps/gta-vice-city-stories
+/gta/maps/gta-chinatown-wars
+/gta/maps/gta-online
+# Confirm publication before auditing this shared image-pin example.
+/wiki/sarab/maps
+# Roblox tool indexes and every bespoke/shared-template calculator.
+/tools
+/tools/page/2
+/tools/roblox-id-extractor
+/tools/robux-to-usd-calculator
+/tools/roblox-devex-calculator
+/tools/roblox-username-generator
+/tools/roblox-profile-checker
+/tools/roblox-account-value-calculator
+/tools/the-forge-crafting-calculator
+/tools/the-forge-inventory-optimizer
+/tools/grow-a-garden-crop-value-calculator
+/tools/grow-a-garden-2-crop-mutation-calculator
+/tools/wizard-alchemy-potion-planner
+/tools/wizard-alchemy-race-reroll-calculator
+/tools/sell-lemons-offline-income-calculator
+/tools/roblox-badge-cost-quota-planner
+/tools/roblox-creator-rewards-estimator
+/tools/roblox-datastore-budget-calculator
+/tools/roblox-experience-launch-readiness-planner
+/tools/roblox-gamepass-price-calculator
+/tools/roblox-group-payout-splitter
+/tools/roblox-icon-thumbnail-checker
+/tools/roblox-marketplace-fee-calculator
+/tools/roblox-server-memory-capacity-planner
+# Minecraft uses DedicatedToolPage for every calculator.
+/minecraft/tools
+/minecraft/tools/nether-coordinate-converter
+/minecraft/tools/stack-and-storage-calculator
+/minecraft/tools/furnace-fuel-calculator
+/minecraft/tools/pixel-circle-generator
+/minecraft/tools/anvil-enchantment-planner
+/minecraft/tools/crafting-materials-planner
+/minecraft/tools/brewing-planner
+/minecraft/tools/xp-calculator
+/minecraft/tools/beacon-materials-calculator
+/minecraft/tools/building-materials-estimator
+/minecraft/tools/gear-comparison
+/minecraft/tools/command-generator
+/minecraft/tools/stronghold-triangulation

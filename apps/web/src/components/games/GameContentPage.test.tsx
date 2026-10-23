@@ -11,6 +11,17 @@ vi.mock("./GameRelatedLinks", () => ({ GameRelatedLinks: () => <a href="/example
 vi.mock("@/components/comments/CommentsSection", () => ({ CommentsSection: () => null }));
 
 describe("franchise reference page structure", () => {
+  it("places generic franchise map engines outside the stable article stream", async () => {
+    const page = { id: "map", namespace: "example", game_id: "child", canonical_path: "/example/maps/locations", title: "Locations", intro_md: "Find the locations.", description_md: "Choose a pin.", faq_json: [] } as unknown as GameExtendedPage;
+    const $ = load(renderToStaticMarkup(await GameContentPage({ page, children: <div data-map-engine /> })));
+    expect($("#article-body")).toHaveLength(1);
+    expect($(".content-sidebar-grid > aside#sidebar.space-y-4")).toHaveLength(1);
+    expect($("#article-body [data-map-engine]")).toHaveLength(0);
+    expect($("[data-map-engine]").next().attr("id")).toBe("article-body");
+    expect($("#article-body > .ads-content-game-intro")).toHaveLength(1);
+    expect($("#article-body > .ads-content-game-description")).toHaveLength(1);
+  });
+
   it("keeps intro, catalog groups and FAQ in one flat stream alongside a single rail", async () => {
     const page = { id: "catalog", namespace: "example", game_id: "child", game_title: "Child", canonical_path: "/example/catalog/items", title: "Child Items", image: "https://media.bloxodes.com/child-cover.webp", intro_md: "Every item in Child.", description_md: "Craft the sturdy items first.", faq_json: [{ q: "Can you craft items?", a: "Yes, at the Workshop." }], sources_json: [{ title: "Internal evidence", url: "https://example.com/evidence" }] } as GameExtendedPage;
     const catalog = { columns: [{ key: "name", label: "Item" }], items: Array.from({ length: 25 }, (_, i) => ({ id: String(i), name: `Item ${i}` })) };

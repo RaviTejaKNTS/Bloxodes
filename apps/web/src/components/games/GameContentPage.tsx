@@ -44,18 +44,20 @@ export async function GameContentPage({ page, children }: { page: GameExtendedPa
     breadcrumbJsonLd(breadcrumbs.map(item => ({ name: item.label, url: SITE_URL + (item.href || page.canonical_path) }))),
     ...(validFaqs.length ? [{ "@type": "FAQPage", mainEntity: validFaqs.map(faq => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })) }] : [])
   ];
+  const isMap = page.renderer_key === "image-pins" || page.canonical_path.includes("/maps/");
   return <div className="grid gap-8 content-sidebar-grid content-sidebar-grid--prose">
     <div className="min-w-0 space-y-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd({ "@context": "https://schema.org", "@graph": graph }) }} />
       <PageBreadcrumb items={breadcrumbs} />
       <header className="space-y-4"><h1 className="text-4xl font-semibold">{page.title}</h1></header>
-      <article id="article-body" className="journey-content-stream space-y-8">
+      {isMap ? children : null}
+      <article id="article-body" className={`journey-content-stream space-y-8${isMap ? " journey-content-stream--prose" : ""}`}>
         <ContentHtmlBlocks html={intro} group="intro" />
-        {children}
+        {isMap ? null : children}
         <ContentHtmlBlocks html={description} group="description" />
         <ContentFaq items={faqs} />
       </article>
-      <CommentsSection entityType={page.canonical_path.includes("/maps/") ? "game_map" : "game_catalog"} entityId={page.id} />
+      <CommentsSection entityType={isMap ? "game_map" : "game_catalog"} entityId={page.id} />
     </div>
     <PageSidebar>
       <SocialShare url={SITE_URL + page.canonical_path} title={page.title} heading="Share this page" />
