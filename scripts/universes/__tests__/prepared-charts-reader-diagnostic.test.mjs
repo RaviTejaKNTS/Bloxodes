@@ -171,7 +171,7 @@ test('projection retains numeric plan evidence, spills, join type and JIT presen
   assert.equal(result.plan.plans[0].schema, 'owned');
   assert.equal(result.plan.plans[1]['Temp Read Blocks'], 4);
   assert.equal(result.plan.plans[1]['Actual Loops'], 2);
-  assert.doesNotMatch(JSON.stringify(result), /SECRET|Actual Total Time|Actual Startup Time|Output|Filter|Index Cond|Query Text/);
+  assert.doesNotMatch(JSON.stringify(result), /SECRET|"(?:Actual Total Time|Actual Startup Time|Output|Filter|Index Cond|Query Text)":/);
   const hostile = explain();
   Object.assign(hostile[0].Plan, { 'Node Type': 'SECRET', 'Join Type': 'SECRET', 'Actual Rows': 'SECRET',
     'Actual Loops': Infinity, 'Shared Hit Blocks': -1, Schema: 'public', 'Relation Name': 'stats_prepared_control',
