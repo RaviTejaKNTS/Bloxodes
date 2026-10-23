@@ -1,8 +1,8 @@
 # Notion queues
 
-Last verified: 2026-10-19
+Last verified: 2026-10-24
 
-Two Notion databases coordinate the nightly content runs. Agents read and update them through the Notion connector, which can't delete rows. So agents never delete rows; they set a status instead.
+Two Notion databases coordinate the Content Factory's wiki runs. Agents read and update them through the Notion connector, which can't delete rows. So agents never delete rows; they set a status instead.
 
 ## Roblox Wiki Queue
 
@@ -15,13 +15,14 @@ This queue is a claim log, not a to-do list. It stops two runs from building the
 1. Pick the highest-ranked game in the live top 100 (`/api/stats/games?sort=playing`) that has no live wiki hub and no row here. Any row, whatever its status, means skip that game.
 2. Before any research, add a row: Game, Universe ID, Rank, Status `In progress`, Device, Worktree, Started.
 3. Query again. If an earlier row has the same Universe ID, set yours to `Duplicate` and take the next game.
-4. When the hub and its collections are published and checked live, set `Done` with a short Run report, even if an extra code PR is still waiting for approval.
+4. When the hub and its collections are published and checked live, set `Done` with a short Run report, even if an extra code PR is still waiting for approval. In dev-only mode, set `In dev` once they're published and checked in managed development.
 5. If the run stops early, set `Waiting for approval` or `Blocked` with a short Run report.
 
 | Status | Meaning |
 | --- | --- |
 | `In progress` | A run is working on it. |
 | `Done` | Published and checked live. |
+| `In dev` | Published and checked in managed development, waiting for production. |
 | `Waiting for approval` | Stopped, waiting on the owner. |
 | `Blocked` | Stopped on a problem. The Run report says what. |
 | `Duplicate` | Another run claimed the same game first. |
@@ -30,7 +31,7 @@ This queue is a claim log, not a to-do list. It stops two runs from building the
 
 - Database: https://app.notion.com/p/5185dc698b5b47c698bc882dfdedb8d7
 - Data source: `collection://3f3e6551-1fe9-4bc0-9dfa-e2ad78c5de8b`
-- Used by: the Content Factory's nightly franchise run (`franchise-wiki-main`).
+- Used by: the Content Factory's Other Games loop (`franchise-wiki-main`).
 
 New non-Roblox games only. The owner updates games we already cover (like ARC Raiders) by hand.
 
@@ -42,6 +43,7 @@ One row per game. Its page holds the whole approved plan: pages, URLs, sources a
 | `Ready` | Owner | Plan is final. The run takes the `Ready` row with the lowest Priority. |
 | `In progress` | Run | Being built. |
 | `Done` | Run | Everything planned is published. |
+| `In dev` | Run | Hubs and collections are in managed development (dev-only mode), waiting for production. |
 | `Waiting for approval` | Run | Hubs and collections are published, but the plan has other page types or code work left for the owner. |
 | `Blocked` | Run | Stopped on a problem. |
 

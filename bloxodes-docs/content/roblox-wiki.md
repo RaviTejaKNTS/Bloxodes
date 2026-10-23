@@ -1,6 +1,6 @@
 # Roblox wiki and collections
 
-Last verified: 2026-10-21
+Last verified: 2026-10-24
 
 Each Roblox game gets a wiki hub at `/wiki/<game-slug>` and item collections at `/wiki/<game-slug>/<collection-slug>` (pets, weapons, mutations, zones and so on). New games are added every night by a T3 schedule.
 
@@ -8,7 +8,7 @@ Roblox wiki content is built in the [Bloxodes Content Factory](#content-factory)
 
 ## Nightly run (MacBook Pro, 02:30 IST)
 
-The T3 schedule "Bloxodes nightly Roblox wiki (Content Factory)" runs in the factory's root checkout with its `roblox-wiki-main` skill. It picks the highest-ranked game in the live top 100 with no hub and no [Roblox Wiki Queue](../automation/notion-queues.md) row, builds the hub and collections, and publishes them as one `roblox-wiki@1` bundle with `content:publish` (see [publishing](#publishing)). New games and collections register themselves in the database, so no code PR is needed. A game too thin to publish is marked `Blocked` and the run tries the next one, up to 3.
+The T3 schedule "Bloxodes nightly Roblox wiki (Content Factory)" runs in the factory's root checkout with its `roblox-wiki-main` skill. It picks the highest-ranked game in the live top 100 with no hub and no [Roblox Wiki Queue](../automation/notion-queues.md) row, builds the hub and collections, and publishes them as one `roblox-wiki@1` bundle with `content:publish` (see [publishing](#publishing)). New games and collections register themselves in the database, so no code PR is needed. In dev-only mode (on while the owner is away) it publishes to managed development only and closes the row as `In dev`. A game too thin to publish is marked `Blocked` and the run tries the next one, up to 3.
 
 ## Workflow
 
