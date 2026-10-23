@@ -190,7 +190,8 @@ test('promotion and SHA-aware reversal preserve previous verified package and ev
   await activate(root, old, OLD, units, control); await activate(root, next, SHA, units, control);
   assert.equal(resolvePointer(root, 'current'), next);
   assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'state/previous.json'))).sha, OLD);
-  assert.throws(() => verifyInstalled(old, SHA), /package-pin-mismatch/);
+  // An intact old release fails the requested SHA at provenance, before its manifest.
+  assert.throws(() => verifyInstalled(old, SHA), /^Error: untrusted-github-run$/);
   assert.throws(() => rollbackCandidate(root, OLD, OLD), /rollback-current-sha-mismatch/);
   assert.throws(() => rollbackCandidate(root, SHA, SHA), /rollback-target-mismatch/);
   await activate(root, rollbackCandidate(root, OLD, SHA), OLD, units, control);
@@ -225,14 +226,60 @@ test('shared flock excludes promotion while a chart invocation holds the lock', 
   holder.stdout.destroy(); try { process.kill(-holder.pid, 'SIGTERM'); } catch {}
 });
 
-test('deadline kills a stuck worker and does not include private child output', async t => {
-  const root = temporary(t), worker = path.join(root, 'hang.mjs');
-  fs.writeFileSync(worker, `console.error(${JSON.stringify(SECRET)});setInterval(()=>{},1000);`);
-  const start = Date.now(), result = await runChild(worker, [], {}, 100);
+test('installed manifest pin mismatch is rejected after matching GitHub provenance', t => {
+  const root = runtimeRoot(t), directory = stagePackage(root, bundle(t));
+  assert.equal(verifyInstalled(directory, SHA).manifest.sha, SHA);
+  const file = path.join(directory, 'manifest.json'), manifest = JSON.parse(fs.readFileSync(file));
+  fs.chmodSync(file, 0o644);
+  fs.writeFileSync(file, JSON.stringify({ ...manifest, sha: OLD }));
+  assert.throws(() => verifyInstalled(directory, SHA), /^Error: package-pin-mismatch$/);
+});
+
+test('deadline kills a started stuck worker and does not include private child output', { timeout: 10_000 }, async t => {
+  const root = temporary(t), worker = path.join(root, 'hang.mjs'), ready = path.join(root, 'ready.json');
+  fs.writeFileSync(worker, `
+    import fs from 'node:fs';
+    fs.writeSync(1, ${JSON.stringify(SECRET)});
+    fs.writeSync(2, ${JSON.stringify(SECRET)});
+    fs.writeFileSync(${JSON.stringify(ready)}, JSON.stringify({ pid: process.pid, node: process.versions.node }));
+    setInterval(() => {}, 1000);
+  `);
+  const env = workerEnv({ SUPABASE_URL: TARGET, SUPABASE_SERVICE_ROLE: SECRET }, SHA, '/fixture/authorization.json');
+  const args = ['--apply', '--allow-prod', '--expected-sha', SHA];
+  let child;
+  t.after(() => { try { process.kill(-child.pid, 'SIGKILL'); } catch {} });
+  const start = Date.now(), result = await runChild(worker, args, env, 1500, (binary, argv, options) => {
+    assert.equal(binary, '/usr/bin/node');
+    assert.deepEqual(argv, [worker, ...args]);
+    assert.equal(options.cwd, root); assert.equal(options.env, env);
+    assert.equal(options.detached, true); assert.equal(options.stdio, 'ignore');
+    // setup-node's selected Node 22 need not exist at the production host path.
+    assert.equal(process.versions.node.split('.')[0], '22');
+    child = spawn(process.execPath, argv, options);
+    assert.equal(child.stdout, null); assert.equal(child.stderr, null);
+    return child;
+  });
+  const started = JSON.parse(fs.readFileSync(ready));
+  assert.equal(started.pid, child.pid); assert.equal(started.node, process.versions.node);
   assert.equal(result.outcome, 'error'); assert.equal(result.code, 'deadline-exceeded');
+  assert.equal(result.signal, 'SIGTERM'); assert.equal(result.exitStatus, null);
+  assert.throws(() => process.kill(started.pid, 0), error => error.code === 'ESRCH');
+  assert.ok(Date.now() - start >= 1000);
   assert.ok(Date.now() - start < 7000); assert.ok(!JSON.stringify(result).includes(SECRET));
   assert.ok(DEADLINE_MS < 240000);
-  assert.throws(() => runChild(worker, [], {}, 300000), /invalid-worker-deadline/);
+  for (const timeout of [0, -1, NaN, Infinity, 300000]) {
+    assert.throws(() => runChild(worker, [], {}, timeout, () => assert.fail('invalid deadline spawned a worker')), /invalid-worker-deadline/);
+  }
+});
+
+test('worker spawn failure stays distinct from a deadline and suppresses private error text', { timeout: 10_000 }, async t => {
+  const root = temporary(t), worker = path.join(root, 'unused.mjs');
+  const result = await runChild(worker, [], {}, 1500, (binary, argv, options) => {
+    assert.equal(binary, '/usr/bin/node'); assert.equal(options.stdio, 'ignore');
+    return spawn(path.join(root, SECRET, 'missing-node'), argv, options);
+  });
+  assert.deepEqual(result, { outcome: 'error', code: 'worker-start-failed' });
+  assert.ok(!JSON.stringify(result).includes(SECRET));
 });
 
 test('success, error and skipped receipts remain separate and retain attempts', t => {

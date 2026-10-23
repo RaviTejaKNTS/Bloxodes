@@ -8,7 +8,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const PROJECT = 'bbtcaurrtyoukvjbxbbj';
-const URL = `https://${PROJECT}.supabase.co`;
+const MANAGED_URL = `https://${PROJECT}.supabase.co`;
 const MIGRATION = new URL('../../supabase/migrations/20261023100441_stats_prepared_charts_v1.sql', import.meta.url);
 const RPC_NAMES = ['get_stats_prepared_health_v1', 'get_stats_prepared_platform_chart_v1',
   'get_stats_prepared_visit_share_v1', 'claim_stats_prepared_work_v1', 'run_stats_prepared_step_v1',
@@ -87,7 +87,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const event = JSON.parse(await readFile(env.GITHUB_EVENT_PATH, 'utf8'));
   validateQaCheckout({ expectedSha: options['--expected-sha'], checkoutSha,
     eventName: env.GITHUB_EVENT_NAME, event, githubSha: env.GITHUB_SHA });
-  assert.equal(env.SUPABASE_URL ?? env.MANAGED_DEV_SUPABASE_URL, URL);
+  assert.equal(env.SUPABASE_URL ?? env.MANAGED_DEV_SUPABASE_URL, MANAGED_URL);
   const token = env.MANAGED_DEV_SUPABASE_ACCESS_TOKEN;
   const service = env.MANAGED_DEV_SUPABASE_SERVICE_ROLE ?? env.SUPABASE_SERVICE_ROLE;
   assert.ok(token && service, 'Management API and managed-development service credentials required');
@@ -113,7 +113,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     let result;
     for (let attempt = 0; attempt < (retrySchema ? 12 : 1); attempt++) {
       const started = Date.now();
-      const response = await fetch(`${URL}/rest/v1/rpc/${ident(name)}`, { method: 'POST', redirect: 'error',
+      const response = await fetch(`${MANAGED_URL}/rest/v1/rpc/${ident(name)}`, { method: 'POST', redirect: 'error',
         headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
         body: JSON.stringify(body), signal: AbortSignal.timeout(12_000) });
       result = await response.json();

@@ -294,10 +294,12 @@ export function recordReceipt(root, receipt) {
   }
   console.log(JSON.stringify(record)); // Contains codes, timestamps, SHA and exit status only.
 }
-export function runChild(entrypoint, args, env, timeoutMs = DEADLINE_MS) {
+export function runChild(entrypoint, args, env, timeoutMs = DEADLINE_MS, spawnWorker = spawn) {
   demand(timeoutMs > 0 && timeoutMs <= DEADLINE_MS, 'invalid-worker-deadline');
   return new Promise(resolve => {
-    const child = spawn('/usr/bin/node', [entrypoint, ...args], { cwd: path.dirname(entrypoint), env,
+    // Only module callers can substitute this process boundary. CLI/env input never
+    // selects a binary; production always uses the fixed trusted host Node path.
+    const child = spawnWorker('/usr/bin/node', [entrypoint, ...args], { cwd: path.dirname(entrypoint), env,
       detached: true, stdio: 'ignore' }); // Never echo credential-bearing worker errors.
     let expired = false, kill;
     const signalGroup = signal => { try { process.kill(-child.pid, signal); } catch {} };
