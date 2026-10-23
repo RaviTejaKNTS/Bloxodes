@@ -98,11 +98,11 @@ describe("all Roblox tool page wrappers", () => {
         const tag = opening.tagName.getText(source);
         if (tag === "ToolPageLayout" || tag === "DedicatedToolPage") templates++;
         if (/Client$/.test(tag)) {
-          const parent = ancestors.at(-1)!.openingElement;
+          const parent = ancestors[ancestors.length - 1].openingElement;
           if (parent.tagName.getText(source) !== "DedicatedToolPage") {
             expect(parent.tagName.getText(source)).toBe("div");
             expect(attribute(parent, "className")?.split(/\s+/)).toContain("ads-tools-widget");
-            expect(attribute(ancestors.at(-2)!.openingElement, "id")).toBe("article-body");
+            expect(attribute(ancestors[ancestors.length - 2].openingElement, "id")).toBe("article-body");
           }
         }
       }
