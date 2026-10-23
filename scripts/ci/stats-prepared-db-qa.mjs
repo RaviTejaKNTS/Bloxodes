@@ -19,10 +19,126 @@ const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 const bigint = value => BigInt(String(value));
 const percentage = (part, total) => total === 0n ? 0 : Math.round(Number(part) / Number(total) * 10000) / 100;
 const SQL_PHASES = new Set(['source-clone', 'migration-install', 'alias-read', 'alias-install',
-  'alias-acl-timeout', 'fixture-checks', 'cleanup']);
+  'alias-acl-timeout', 'claim-diagnostic-install', 'claim-diagnostic', 'fixture-checks', 'cleanup']);
 const sqlstate = value => typeof value === 'string' && /^[A-Z0-9]{5}$/.test(value) ? value : null;
 const rpcErrorCode = value => sqlstate(value) ??
   (typeof value === 'string' && /^PGRST[0-9]{3}$/.test(value) ? value : 'unknown');
+const PG_ERROR_CLASSES = [
+  ['21000', 'ON CONFLICT DO UPDATE command cannot affect row a second time', 'on-conflict-double-target'],
+  ['21000', 'more than one row returned by a subquery used as an expression', 'scalar-subquery-many-rows'],
+  ['P0003', 'query returned more than one row', 'plpgsql-too-many-rows'],
+];
+
+function validateClaimLocation(location) {
+  assert.match(location?.alias ?? '', /^qa_[a-f0-9]{12}_claim_sp_work_v1$/);
+  assert.ok(Number.isSafeInteger(location.maxLine) && location.maxLine > 0 && location.maxLine <= 10000,
+    'invalid claim definition line bound');
+}
+
+export function qaRpcFailureDiagnostic({ result, claimLocation }) {
+  let code = sqlstate(result?.code) ?? sqlstate(result?.error?.code) ?? 'unknown';
+  const messages = [result?.message, result?.error?.message, result?.error, result];
+  const primaryMessages = [];
+  for (const message of messages) {
+    if (typeof message !== 'string') continue;
+    const match = /^(?:Failed to run sql query: )?ERROR:\s+([A-Z0-9]{5}):[ \t]*([^\r\n]*)/.exec(message);
+    if (match) {
+      if (code === 'unknown') code = match[1];
+      if (code === match[1]) primaryMessages.push(match[2]);
+    } else primaryMessages.push(message);
+  }
+  const diagnostic = { sqlstate: code, errorClass: PG_ERROR_CLASSES.find(([state, message]) =>
+    state === code && primaryMessages.includes(message))?.[2] ?? 'unknown' };
+  if (claimLocation) {
+    validateClaimLocation(claimLocation);
+    // Only an exact frame for this run's known claim alias may supply a line.
+    // Never retain a function name, statement text or the rest of CONTEXT.
+    const frame = new RegExp(`^PL/pgSQL function (?:public[.])?${claimLocation.alias}[(]text,uuid[)] line ([1-9][0-9]{0,5}) at [^\\r\\n]+$`, 'm');
+    for (const context of [result?.context, result?.details, result?.error?.context,
+      result?.error?.details, ...messages]) {
+      if (typeof context !== 'string') continue;
+      const match = frame.exec(context);
+      if (match && Number(match[1]) <= claimLocation.maxLine) {
+        diagnostic.functionLine = Number(match[1]); break;
+      }
+    }
+  }
+  return diagnostic;
+}
+
+export function qaClaimProbeDiagnostic(result, location) {
+  validateClaimLocation(location);
+  const success = result?.errorClass === 'rolled-back-success' && result?.sqlstate === null;
+  const code = sqlstate(result?.sqlstate);
+  const known = PG_ERROR_CLASSES.some(([state, , name]) => state === code && name === result?.errorClass);
+  if (result?.rollbackVerified !== true || (!success && (!code || (!known && result?.errorClass !== 'unknown')))) {
+    throw new Error('fixture-claim-diagnostic-invalid');
+  }
+  const diagnostic = { sqlstate: success ? null : code, errorClass: result.errorClass, rollbackVerified: true };
+  if (Number.isSafeInteger(result.functionLine) && result.functionLine > 0 && result.functionLine <= location.maxLine) {
+    diagnostic.functionLine = result.functionLine;
+  }
+  return diagnostic;
+}
+
+export function fixtureClaimDiagnosticSql(schema, privateSchema, location, requestId) {
+  fixtureMigrationSql('', schema, privateSchema); validateClaimLocation(location);
+  assert.equal(location.alias, `qa_${schema.slice(9)}_claim_sp_work_v1`);
+  assert.match(requestId, /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/);
+  // Claim can modify only these three owned tables. Compare their full values,
+  // including revisions, timestamps and lease fields, across the subtransaction.
+  const snapshot = `select jsonb_build_object(
+    'control',(select jsonb_agg(to_jsonb(c) order by id) from ${schema}.stats_prepared_control c),
+    'members',(select jsonb_agg(to_jsonb(m) order by universe_id) from ${schema}.stats_prepared_members m),
+    'dirty',(select jsonb_agg(to_jsonb(d) order by kind,bucket) from ${schema}.stats_prepared_dirty d))`;
+  const framePattern = `(?n)^PL/pgSQL function (?:public[.])?${location.alias}[(]text,uuid[)] line ([1-9][0-9]{0,5}) at [^\r\n]+$`;
+  return {
+    install: `begin;
+create function ${privateSchema}.qa_claim_diagnostic_v1() returns jsonb
+language plpgsql volatile security invoker set search_path='' set timezone='UTC'
+set statement_timeout='5s' set lock_timeout='500ms' as $qa_claim$
+declare before_state jsonb; after_state jsonb; diagnostic jsonb; claim_result jsonb;
+  error_state text; error_message text; error_context text; frame text[];
+begin
+  ${snapshot} into before_state;
+  begin
+    claim_result:=public.${location.alias}('github-fixture',${literal(requestId)}::uuid);
+    if claim_result->>'claimed' is distinct from 'true' then
+      raise exception 'qa-claim-probe-unclaimed' using errcode='55000';
+    end if;
+    -- Force successful calls to roll back as well. This result is never a lease.
+    raise exception using errcode='PZ001',message='qa-claim-probe-rollback';
+  exception when others then
+    get stacked diagnostics error_state=returned_sqlstate,error_message=message_text,error_context=pg_exception_context;
+    if error_state='PZ001' and error_message='qa-claim-probe-rollback' then
+      diagnostic:=jsonb_build_object('sqlstate',null,'errorClass','rolled-back-success');
+    else
+      diagnostic:=jsonb_build_object('sqlstate',error_state,'errorClass',case
+        ${PG_ERROR_CLASSES.map(([state, message, name]) => `when error_state=${literal(state)} and error_message=${literal(message)} then ${literal(name)}`).join('\n        ')}
+        else 'unknown' end);
+      frame:=regexp_match(error_context,${literal(framePattern)});
+      if frame[1] is not null and frame[1]::integer<=${location.maxLine} then
+        diagnostic:=diagnostic||jsonb_build_object('functionLine',frame[1]::integer);
+      end if;
+    end if;
+  end;
+  ${snapshot} into after_state;
+  if before_state is distinct from after_state then
+    raise exception 'qa-claim-probe-state-changed' using errcode='55000';
+  end if;
+  return diagnostic||jsonb_build_object('rollbackVerified',true);
+end $qa_claim$;
+revoke all on function ${privateSchema}.qa_claim_diagnostic_v1() from public,anon,authenticated;
+grant execute on function ${privateSchema}.qa_claim_diagnostic_v1() to service_role;
+commit;`,
+    // Real API failure remains the primary evidence. This separate SQL probe
+    // uses the same alias and role, but is not another API success/timeout proof.
+    probe: `begin; set local statement_timeout='5s'; set local lock_timeout='500ms';
+set local role service_role;
+select ${privateSchema}.qa_claim_diagnostic_v1() as result;
+rollback;`,
+  };
+}
 
 export function fixtureMigrationSql(bytes, schema, privateSchema) {
   assert.match(schema, /^qa_stats_[a-f0-9]{12}$/);
@@ -53,6 +169,8 @@ export function qaSqlFailureDiagnostic({ phase, status, result, query }) {
   const position = result?.position ?? result?.error?.position;
   if ((typeof position === 'string' || Number.isSafeInteger(position)) && /^[1-9][0-9]{0,8}$/.test(String(position)) &&
     Number(position) <= query.length) diagnostic.position = Number(position);
+  const { errorClass } = qaRpcFailureDiagnostic({ result });
+  if (errorClass !== 'unknown') diagnostic.errorClass = errorClass;
   return diagnostic;
 }
 
@@ -135,7 +253,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const service = env.MANAGED_DEV_SUPABASE_SERVICE_ROLE ?? env.SUPABASE_SERVICE_ROLE;
   assert.ok(token && service, 'Management API and managed-development service credentials required');
   const receiptPath = options['--receipt'] ?? path.join(env.RUNNER_TEMP, 'stats-prepared-db-qa.json');
-  const phases = []; let identity;
+  const phases = []; let identity; let claimLocation;
   const saveReceipt = () => writeFile(receiptPath, JSON.stringify(qaReceiptWithPhases(identity, phases), null, 2));
   async function sql(query, phase = 'fixture-checks') {
     assert.ok(SQL_PHASES.has(phase), 'unknown QA SQL phase');
@@ -176,9 +294,13 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         body: JSON.stringify(body), signal: AbortSignal.timeout(12_000) });
       result = await response.json();
       const code = rpcErrorCode(result?.code);
-      phases.push({ kind: 'rest', rpc: name, ms: Date.now() - started, status: response.status, code });
+      const phase = { kind: 'rest', rpc: name, ms: Date.now() - started, status: response.status, code,
+        ...(!response.ok ? qaRpcFailureDiagnostic({ result,
+          claimLocation: name === claimLocation?.alias ? claimLocation : undefined }) : {}) };
+      phases.push(phase);
       if (retrySchema && result?.code === 'PGRST202') { await pause(500); continue; }
       if (expectedError) { assert.equal(code, expectedError); return result; }
+      if (!response.ok) { identity.rpcFailure ??= phase; await saveReceipt(); }
       assert.equal(response.ok, true, `fixture-rpc-failed-${response.status}-${code}`);
       return result;
     }
@@ -218,6 +340,10 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     // service-only aliases. All table/helper references still point at fixtures.
     for (const name of RPC_NAMES) {
       const row = (await sql(`select pg_get_functiondef(oid) as definition,pg_get_function_identity_arguments(oid) as args from pg_proc where pronamespace=${literal(schema)}::regnamespace and proname=${literal(name)};`, 'alias-read'))[0];
+      if (name === 'claim_stats_prepared_work_v1') {
+        claimLocation = { alias: alias(name), maxLine: row.definition.split('\n').length };
+        validateClaimLocation(claimLocation);
+      }
       await sql('begin;\n' + row.definition.replace(`FUNCTION ${schema}.${name}(`, `FUNCTION public.${alias(name)}(`) +
         `;\nrevoke all on function public.${alias(name)}(${row.args}) from public,anon,authenticated; grant execute on function public.${alias(name)}(${row.args}) to service_role; commit;`, 'alias-install');
     }
@@ -267,7 +393,27 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       if (result?.visitGeneration && identity.firstVisitObservedMs == null) identity.firstVisitObservedMs = Date.now() - bootstrapStarted;
     };
     const requestId = randomUUID();
-    claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'github-fixture', p_request_id: requestId });
+    let diagnosticInstalled = false;
+    async function probeClaim() {
+      const queries = fixtureClaimDiagnosticSql(schema, privateSchema, claimLocation, requestId);
+      if (!diagnosticInstalled) {
+        await sql(queries.install, 'claim-diagnostic-install'); diagnosticInstalled = true;
+      }
+      const rows = await sql(queries.probe, 'claim-diagnostic');
+      return qaClaimProbeDiagnostic(rows[0]?.result, claimLocation);
+    }
+    try {
+      claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'github-fixture', p_request_id: requestId });
+    } catch (error) {
+      // One rollback-only probe, only after an actual SQL cardinality response.
+      // Never convert this failed REST path into a successful bootstrap.
+      if (identity.rpcFailure?.rpc === claimLocation.alias && identity.rpcFailure.sqlstate === '21000') {
+        try { identity.claimDiagnostic = await probeClaim(); }
+        catch { identity.claimDiagnosticFailed = true; }
+        await saveReceipt();
+      }
+      throw error;
+    }
     assert.ok(claim.claimed);
     identity.hourlySourcePlan = await sql(`explain (format json,settings true) select sum(coalesce(h.avg_playing,h.playing::numeric))
       from ${schema}.roblox_universe_stats_hourly h join ${schema}.stats_prepared_members m using(universe_id)
@@ -349,6 +495,17 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     assert.equal(failed.operational.lastReceipt.outcome.code, 'sql-timeout');
     assert.equal((await scalar(`${schema}.get_stats_prepared_platform_chart_v1('1d','hourly',false)`)).meta.state, 'last-good');
     await sql(`update ${schema}.stats_prepared_control set retry_at=null where id;`);
+    if (mode === 'fixture') {
+      // With no lease/backoff, claim really writes checked_at and a new lease.
+      // The probe must roll all of it back and compare full owned state, leaving
+      // the following replacement claim and stale-owner test untouched.
+      assert.equal(await scalar(`(select lease_token is null and lease_until is null and retry_at is null
+        from ${schema}.stats_prepared_control where id)`), true);
+      identity.claimDiagnosticRollback = await probeClaim();
+      assert.deepEqual(identity.claimDiagnosticRollback,
+        { sqlstate: null, errorClass: 'rolled-back-success', rollbackVerified: true });
+      await saveReceipt();
+    }
     const oldClaim = claim;
     claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'replacement', p_request_id: randomUUID() });
     await transport(alias('run_stats_prepared_step_v1'), { ...stepArgs(randomUUID()), p_lease_token: oldClaim.leaseToken, p_epoch: oldClaim.epoch }, { expectedError: '55000' });

@@ -92,6 +92,8 @@ Before the first activation, required PR database QA must prove the migrated SQL
 
 Isolated QA receipts retain fixed setup/cleanup phase labels, successful and failed request timings, validated SQLSTATE codes and bounded numeric locations. Raw Management API errors and SQL excerpts are never logged. Explicit cleanup appends its evidence without replacing the original failure or timing history. A cleaned fixture with `completed=false` is still a failed QA run.
 
+A claim cardinality failure retains the original REST status, validated SQLSTATE, fixed error class and bounded claim line when available. One separate service-role SQL probe rolls back both successful and failed claim work and returns only sanitized diagnostics. Probe success never replaces the failed API result; `completed=false` remains failed QA after cleanup.
+
 Deploy schema/producer/runtime before the prepared-only public reader. Empty prepared tables have no legacy aggregate seed. Keep the existing public reader live until bootstrap has produced usable outputs for every intended range/resolution, with honest current/previous coverage. Check source age separately from generation age before reader cutover.
 
 On homelab, `scripts/ops/stats-chart-runtime.mjs inspect` and `install --apply --allow-prod --expected-sha <sha> --run-id <id> --artifact-id <id>` fetch the exact successful GitHub artifact and verify its digest, source/run identity and complete file manifest. Installation uses `/srv/data/bloxodes-stats-chart-runtime`, an atomic `current` pointer and only the two `bloxodes-stats-chart-refresh` user units. It reads existing production HTTP credentials in place. Article units, env sources, VPS image pins and Northflank are separate releases.

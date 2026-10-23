@@ -2,7 +2,94 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigrationSql,
-  qaSqlFailureDiagnostic, qaReceiptWithPhases } from '../../ci/stats-prepared-db-qa.mjs';
+  qaSqlFailureDiagnostic, qaReceiptWithPhases, qaRpcFailureDiagnostic, qaClaimProbeDiagnostic,
+  fixtureClaimDiagnosticSql } from '../../ci/stats-prepared-db-qa.mjs';
+
+const claimLocation = { alias: 'qa_012345abcdef_claim_sp_work_v1', maxLine: 60 };
+
+test('cardinality classification requires an exact known primary message and its matching SQLSTATE', () => {
+  const cases = [
+    ['21000', 'ON CONFLICT DO UPDATE command cannot affect row a second time', 'on-conflict-double-target'],
+    ['21000', 'more than one row returned by a subquery used as an expression', 'scalar-subquery-many-rows'],
+    ['P0003', 'query returned more than one row', 'plpgsql-too-many-rows'],
+  ];
+  for (const [code, message, errorClass] of cases) {
+    for (const result of [{ code, message }, { error: { code, message } },
+      { message: `Failed to run sql query: ERROR:  ${code}: ${message}\nDETAIL: SECRET_DETAIL` }]) {
+      assert.deepEqual(qaRpcFailureDiagnostic({ result }), { sqlstate: code, errorClass });
+    }
+    for (const result of [{ code, message: `${message} SECRET_SQL` }, { code, details: message },
+      { code: 'XX000', message }, { code, message: `SECRET_PREFIX ${message}` }]) {
+      assert.equal(qaRpcFailureDiagnostic({ result }).errorClass, 'unknown');
+    }
+  }
+  assert.deepEqual(qaRpcFailureDiagnostic({ result: { code: '21000' } }),
+    { sqlstate: '21000', errorClass: 'unknown' });
+  assert.deepEqual(qaSqlFailureDiagnostic({ phase: 'claim-diagnostic', status: 400, query: 'select 1;',
+    result: { message: 'ERROR:  21000: more than one row returned by a subquery used as an expression' } }),
+    { phase: 'claim-diagnostic', status: 400, sqlstate: '21000', errorClass: 'scalar-subquery-many-rows' });
+});
+
+test('RPC diagnostics retain only a bounded line from this exact claim alias frame', () => {
+  for (const qualifier of ['', 'public.']) {
+    const diagnostic = qaRpcFailureDiagnostic({ claimLocation, result: {
+      code: '21000', message: 'more than one row returned by a subquery used as an expression',
+      details: `SECRET_SQL\nPL/pgSQL function ${qualifier}${claimLocation.alias}(text,uuid) line 37 at SQL statement\nSECRET_KEY`,
+      hint: 'SECRET_HINT', context: 'SECRET_CONTEXT', body: 'SECRET_BODY', api_key: 'SECRET_KEY' } });
+    assert.deepEqual(diagnostic,
+      { sqlstate: '21000', errorClass: 'scalar-subquery-many-rows', functionLine: 37 });
+    assert.doesNotMatch(JSON.stringify(diagnostic), /SECRET|qa_|SQL|statement|text|uuid/);
+  }
+  // Other function frames, even with a valid line, cannot locate this claim.
+  for (const context of [
+    `PL/pgSQL function public.qa_abcdef012345_claim_sp_work_v1(text,uuid) line 3 at SQL statement`,
+    `PL/pgSQL function private.${claimLocation.alias}(text,uuid) line 3 at SQL statement`,
+    `PL/pgSQL function public.${claimLocation.alias}(text,uuid) line 61 at SQL statement`,
+    `PL/pgSQL function public.${claimLocation.alias}(text,uuid) line 0 at SQL statement`,
+    `PL/pgSQL function public.${claimLocation.alias}(text,uuid) line 1;SECRET at SQL statement`,
+    `SECRET PL/pgSQL function public.${claimLocation.alias}(text,uuid) line 3 at SQL statement`,
+  ]) assert.deepEqual(qaRpcFailureDiagnostic({ claimLocation, result: { code: '21000', context } }),
+    { sqlstate: '21000', errorClass: 'unknown' });
+  assert.deepEqual(qaRpcFailureDiagnostic({ result: { code: 'SECRET_CODE', message: 'SECRET_SQL' } }),
+    { sqlstate: 'unknown', errorClass: 'unknown' });
+});
+
+test('claim probe receipts discard extra data and refuse invalid classes, states and rollback results', () => {
+  const input = { sqlstate: '21000', errorClass: 'on-conflict-double-target', rollbackVerified: true,
+    functionLine: 24, message: 'SECRET_MESSAGE', context: 'SECRET_CONTEXT', query: 'SECRET_SQL' };
+  const diagnostic = qaClaimProbeDiagnostic(input, claimLocation);
+  assert.deepEqual(diagnostic, { sqlstate: '21000', errorClass: 'on-conflict-double-target',
+    rollbackVerified: true, functionLine: 24 });
+  assert.doesNotMatch(JSON.stringify(diagnostic), /SECRET|context|query|message/);
+  for (const changed of [{ sqlstate: 'SECRET' }, { errorClass: 'SECRET' }, { sqlstate: 'P0003' },
+    { rollbackVerified: false }, { rollbackVerified: 'true' }, { errorClass: 'rolled-back-success' }]) {
+    assert.throws(() => qaClaimProbeDiagnostic({ ...input, ...changed }, claimLocation),
+      /fixture-claim-diagnostic-invalid/);
+  }
+  for (const functionLine of ['24', 61, 0, -1, 2.5, Number.MAX_SAFE_INTEGER]) {
+    assert.equal('functionLine' in qaClaimProbeDiagnostic({ ...input, functionLine }, claimLocation), false);
+  }
+  assert.deepEqual(qaClaimProbeDiagnostic({ sqlstate: null, errorClass: 'rolled-back-success',
+    rollbackVerified: true }, claimLocation),
+    { sqlstate: null, errorClass: 'rolled-back-success', rollbackVerified: true });
+  assert.deepEqual(qaClaimProbeDiagnostic({ sqlstate: 'XX000', errorClass: 'unknown',
+    rollbackVerified: true }, claimLocation),
+    { sqlstate: 'XX000', errorClass: 'unknown', rollbackVerified: true });
+});
+
+test('claim diagnostic SQL authoring refuses any namespace, alias, line bound or UUID outside this fixture', () => {
+  const schema = 'qa_stats_012345abcdef', privateSchema = `${schema}_p`;
+  const requestId = '00000000-0000-4000-8000-000000000001';
+  for (const [s, p, location, id] of [
+    ['public', privateSchema, claimLocation, requestId],
+    [schema, 'stats_prepared_private', claimLocation, requestId],
+    [schema, privateSchema, { ...claimLocation, alias: 'claim_stats_prepared_work_v1' }, requestId],
+    [schema, privateSchema, { ...claimLocation, alias: 'qa_abcdef012345_claim_sp_work_v1' }, requestId],
+    [schema, privateSchema, { ...claimLocation, maxLine: 0 }, requestId],
+    [schema, privateSchema, { ...claimLocation, maxLine: 10001 }, requestId],
+    [schema, privateSchema, claimLocation, "'SECRET_SQL"],
+  ]) assert.throws(() => fixtureClaimDiagnosticSql(s, p, location, id));
+});
 
 test('isolated migration moves schema references while retaining PUBLIC revocations and exact function bodies', async () => {
   const source = await readFile(new URL('../../../supabase/migrations/20261023100441_stats_prepared_charts_v1.sql', import.meta.url), 'utf8');
@@ -89,6 +176,15 @@ test('explicit cleanup retains setup failure and prior phases across repeated re
   assert.deepEqual(failedCleanup.cleanupSqlFailure, cleanupFailure);
   assert.deepEqual(failedCleanup.phases, [clone, failure, cleanup, cleanup, cleanupFailure]);
   assert.equal(failedCleanup.cleaned, false);
+  const rpcFailure = { kind: 'rest', status: 400, code: '21000', sqlstate: '21000', errorClass: 'unknown' };
+  const claimDiagnostic = { sqlstate: '21000', errorClass: 'scalar-subquery-many-rows',
+    functionLine: 37, rollbackVerified: true };
+  const claimCleanup = qaReceiptWithPhases({ completed: false, cleaned: true,
+    rpcFailure, claimDiagnostic, phases: [clone, rpcFailure] }, [cleanup]);
+  assert.deepEqual(claimCleanup.rpcFailure, rpcFailure);
+  assert.deepEqual(claimCleanup.claimDiagnostic, claimDiagnostic);
+  assert.deepEqual(claimCleanup.phases, [clone, rpcFailure, cleanup]);
+  assert.equal(claimCleanup.completed, false);
 });
 
 const row = (date, key, visits, denominator, games, rank, universe = null) => ({ stat_date: date,
