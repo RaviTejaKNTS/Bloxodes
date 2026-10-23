@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { act } from "react";
+import { act } from "react-dom/test-utils";
 import { createRoot, hydrateRoot, type Root } from "react-dom/client";
 import { renderToString } from "react-dom/server";
 import { RemoteIcon } from "./RemoteIcon";
