@@ -17,7 +17,7 @@ import { groupingSimilarity, sameSearchIntent } from "./article-curation-intent"
 import { resolveArticleDevCredentials } from "./article-queue-env";
 import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
 
-import { ARTICLE_TOPIC_DEDUPE_STATUSES } from "./article-queue-status";
+import { findExistingQueueRow } from "./article-queue-dedupe";
 
 type Options = {
   apply: boolean;
@@ -434,43 +434,6 @@ function queueSourceItem(candidate: CandidateRow): QueueSourceItem {
     source_description: candidate.source_description,
     source_evidence: candidate.source_evidence
   };
-}
-
-async function findExistingQueueRow(
-  supabase: SupabaseClient,
-  topicKey: string,
-  title: string
-): Promise<Record<string, unknown> | null> {
-  for (const [column, value] of [
-    ["topic_key", topicKey],
-    ["idempotency_key", `global:${slugify(title)}`]
-  ] as const) {
-    const { data, error } = await supabase
-      .from("article_generation_queue")
-      .select("id, source_urls, source_items, source_metadata, status")
-      .eq("workflow_mode", "agent_runner")
-      .eq(column, value)
-      .in("status", ARTICLE_TOPIC_DEDUPE_STATUSES)
-      .maybeSingle();
-    if (error) throw new Error(`Could not check existing queue ${column}: ${error.message}`);
-    if (data) return data as Record<string, unknown>;
-  }
-
-  const { data: queueRows, error: queueError } = await supabase
-    .from("article_generation_queue")
-    .select("id, article_title, topic_key, source_urls, source_items, source_metadata, status")
-    .eq("workflow_mode", "agent_runner")
-    .in("status", ARTICLE_TOPIC_DEDUPE_STATUSES)
-    .limit(1000);
-  if (queueError) throw new Error(`Could not check semantically similar queue topics: ${queueError.message}`);
-  for (const row of queueRows ?? []) {
-    const existingTitle = typeof row.article_title === "string" ? row.article_title : "";
-    const existingKey = typeof row.topic_key === "string" ? row.topic_key : "";
-    if (existingKey && existingKey === topicKey) return row as Record<string, unknown>;
-    const similarity = groupingSimilarity(title, existingTitle);
-    if (similarity.jaccard >= 0.8) return row as Record<string, unknown>;
-  }
-  return null;
 }
 
 function mergeJsonRows<T extends object>(existing: unknown, incoming: T[], key: keyof T): Record<string, unknown>[] {

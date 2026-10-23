@@ -8,7 +8,7 @@ Articles are guides, explainers and tier lists at `/articles/<slug>`. Topics are
 
 Four times a day (01:00, 07:00, 13:00, 19:00 IST) the T3 schedules "Bloxodes articles <time> (Content Factory)" run the factory's `article-main` skill on the MacBook Pro:
 
-1. The main agent (Codex `gpt-6.1-sol`) takes up to 3 `pending` rows from `article_generation_queue` and claims them (`processing`).
+1. The main agent (Codex `gpt-6.1-sol`) takes up to 3 `pending` rows from `article_generation_queue` and claims them (`processing`). If fewer than 3 are good, it finds its own topics: questions players ask about games whose Bloxodes wiki pages were added or updated in the last 7 days (from the `wiki` and `games` sitemaps), that no article, wiki or collection page already answers. It adds each one, already claimed, with `articles:queue:add` (`scripts/articles/add-article-queue-item.ts`), which refuses topics already in the queue or in the production article inventory (same title match as curation: topic key, idempotency key, or title similarity of 0.8 or more). It exits 0 when it adds a row, 3 for a duplicate and 1 for an error. Without `--apply` it only shows the row it would add.
 2. A Luna builder researches each topic into `brief.md` and gathers its images into `media.json`, uploaded to managed-dev Storage with `collect:article-images`.
 3. A Haiku 5.5 writer, run headless through the factory's `bin/haiku-write` from an empty folder in safe mode, writes the article from `prompts/haiku-article.md`.
 4. The main agent builds `final.json`, checks Haiku's facts against the brief, places the images, and runs `content:check-copy` and `check:article-image-readiness`.

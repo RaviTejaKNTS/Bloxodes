@@ -69,6 +69,7 @@
     "articles:curate": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/curate-article-topics.ts",
     "articles:inventory:production": "tsx scripts/articles/list-production-editorial-inventory.ts",
     "articles:queue:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-queue.ts",
+    "articles:queue:add": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/add-article-queue-item.ts",
     "articles:queue:update": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/update-article-queue-item.ts",
     "articles:review:list": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/list-article-release-review.ts",
     "articles:release": "BLOXODES_ENV_OVERLAYS=articles tsx scripts/articles/release-completed-articles.ts",
