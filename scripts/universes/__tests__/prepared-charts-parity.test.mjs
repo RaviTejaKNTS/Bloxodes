@@ -5,13 +5,82 @@ import { createHash } from 'node:crypto';
 import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigrationSql,
   qaSqlFailureDiagnostic, qaReceiptWithPhases, qaRpcFailureDiagnostic, qaClaimProbeDiagnostic,
   fixtureClaimDiagnosticSql, qaRpcErrorEnvelope, PREPARED_QA_MIGRATION_PATHS,
-  fixtureMigrationPlan, replayFixtureMigrations } from '../../ci/stats-prepared-db-qa.mjs';
+  fixtureMigrationPlan, replayFixtureMigrations, fixtureDriveBatchSql,
+  qaFixtureBatchPlan, qaFixtureBatchResult } from '../../ci/stats-prepared-db-qa.mjs';
 
 const claimLocation = { alias: 'qa_012345abcdef_claim_sp_work_v1', maxLine: 60 };
 const schema = 'qa_stats_012345abcdef', privateSchema = `${schema}_p`;
 const migrationSources = () => Promise.all(PREPARED_QA_MIGRATION_PATHS.map(async path => ({
   path, bytes: await readFile(new URL(`../../../${path}`, import.meta.url)),
 })));
+
+test('fixture batches preserve the 6000-step and 20-minute drive bounds, reserving the existing request deadline', () => {
+  assert.deepEqual(qaFixtureBatchPlan(0, 0), { limit: 256, workBudgetMs: 40_000 });
+  assert.deepEqual(qaFixtureBatchPlan(5888, 1_080_000), { limit: 112, workBudgetMs: 40_000 });
+  assert.deepEqual(qaFixtureBatchPlan(5999, 1_080_000), { limit: 1, workBudgetMs: 40_000 });
+  assert.equal(qaFixtureBatchPlan(6000, 0), null);
+  assert.equal(qaFixtureBatchPlan(0, 1_080_001), null);
+  assert.equal(qaFixtureBatchPlan(0, 1_200_000), null);
+  for (const args of [[-1, 0], [6001, 0], [0.5, 0], [0, -1], [0, NaN], [0, Infinity]]) {
+    assert.throws(() => qaFixtureBatchPlan(...args));
+  }
+});
+
+test('fixture batch SQL refuses foreign namespaces and adds only a private orchestration helper', () => {
+  for (const args of [['public', privateSchema], [schema, 'stats_prepared_private'],
+    [schema, 'qa_stats_abcdef012345_p'], [schema + ';select 1', privateSchema]]) {
+    assert.throws(() => fixtureDriveBatchSql(...args));
+  }
+  const sql = fixtureDriveBatchSql(schema, privateSchema);
+  assert.match(sql, /security invoker set search_path=''/);
+  assert.match(sql, /revoke all on function qa_stats_012345abcdef_p\.qa_drive_batch_v1\(uuid,bigint,integer,integer\) from public,anon,authenticated/);
+  assert.match(sql, /qa_stats_012345abcdef\.run_stats_prepared_step_v1\(p_token,p_epoch,pg_catalog\.gen_random_uuid\(\)/);
+  assert.doesNotMatch(sql, /create (?:or replace )?function public\.|create or replace|\b(?:insert|update|delete|truncate)\b|qa_now\(/i);
+});
+
+const batchOutcome = (phase = 'hour-backfill', more = true) => ({ phase, more,
+  platformGeneration: '00000000-0000-4000-8000-000000000001', visitGeneration: null });
+const batchRows = results => [{ result: { results, sqlMs: 123.5, maximumSqlStepMs: 80 } }];
+
+test('one Management result retains every bounded outcome and a final more=false, stripping unknown fields', () => {
+  const outcomes = [batchOutcome('daily-batch'), batchOutcome('platform-publish'), batchOutcome('unchanged', false)];
+  const rows = batchRows(outcomes.map(r => ({ ...r, SECRET_FIELD: 'SECRET_VALUE' })));
+  rows[0].result.SECRET_BODY = 'SECRET_SQL';
+  const result = qaFixtureBatchResult(rows, 256);
+  assert.deepEqual(result, { results: outcomes, sqlMs: 123.5, maximumSqlStepMs: 80 });
+  assert.doesNotMatch(JSON.stringify(result), /SECRET/);
+  assert.equal(qaFixtureBatchResult(batchRows([batchOutcome()]), 1).results[0].more, true);
+});
+
+test('missing, split, oversized, prematurely finished or malformed batch results fail closed', () => {
+  const valid = batchRows([batchOutcome()]);
+  for (const [rows, limit] of [[null, 1], [[], 1], [[...valid, ...valid], 2],
+    [[{ result: {} }], 1], [batchRows([]), 1], [batchRows([batchOutcome(), batchOutcome()]), 1],
+    [batchRows([batchOutcome('unchanged', false), batchOutcome()]), 2], [valid, 0], [valid, 257],
+    [batchRows([null]), 1], [batchRows([batchOutcome('SECRET_PHASE')]), 1],
+    [batchRows([{ ...batchOutcome(), more: 'false' }]), 1],
+    [batchRows([{ ...batchOutcome(), platformGeneration: 'SECRET_TOKEN' }]), 1],
+    [batchRows([{ phase: 'hour', more: true }]), 1]]) {
+    assert.throws(() => qaFixtureBatchResult(rows, limit), /^Error: fixture-drive-invalid-response$/);
+  }
+  for (const patch of [{ sqlMs: -1 }, { sqlMs: '1' }, { sqlMs: NaN }, { sqlMs: 60_001 },
+    { maximumSqlStepMs: -1 }, { maximumSqlStepMs: 124 }, { maximumSqlStepMs: Infinity }]) {
+    assert.throws(() => qaFixtureBatchResult([{ result: { ...valid[0].result, ...patch } }], 1),
+      /^Error: fixture-drive-invalid-response$/);
+  }
+});
+
+test('cleanup preserves the started scenario and pending batch without manufacturing drive completion', () => {
+  const drive = { scenario: 'late-source-repair', status: 'running', steps: 512, sqlMs: 350,
+    requestOverheadMs: 6000, phaseCounts: { 'hour-backfill': 512 },
+    pendingBatch: { transport: 'sql', steps: 256, workBudgetMs: 40_000, startedAt: '2026-10-23T14:06:50Z' } };
+  const saved = qaReceiptWithPhases({ completed: false, cleaned: false, drives: [drive] }, []);
+  const cleanup = { kind: 'sql', phase: 'cleanup', ms: 100, status: 201, ok: true };
+  const cleaned = qaReceiptWithPhases({ ...saved, cleaned: true }, [cleanup]);
+  assert.deepEqual(cleaned.drives, [drive]);
+  assert.equal(cleaned.completed, false); assert.equal(cleaned.cleaned, true);
+  assert.deepEqual(cleaned.phases, [cleanup]);
+});
 
 test('forward claim changes only the full membership DELETE predicate and preserves frozen applied bytes', async () => {
   const [original, correction] = await migrationSources();

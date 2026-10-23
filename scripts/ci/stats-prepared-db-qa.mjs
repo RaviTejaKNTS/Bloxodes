@@ -22,8 +22,15 @@ const ident = value => { assert.match(value, /^[a-z][a-z0-9_]{0,62}$/); return v
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 const bigint = value => BigInt(String(value));
 const percentage = (part, total) => total === 0n ? 0 : Math.round(Number(part) / Number(total) * 10000) / 100;
+const DRIVE_MAX_STEPS = 6000, DRIVE_BUDGET_MS = 1_200_000;
+const FIXTURE_BATCH_MAX_STEPS = 256, FIXTURE_BATCH_WORK_MS = 40_000, FIXTURE_BATCH_OUTER_MS = 60_000;
+const MANAGEMENT_REQUEST_MS = 120_000;
+const STEP_PHASES = new Set(['platform-publish', 'hour', 'daily-start', 'daily-cleanup-wait',
+  'daily-membership-restart', 'daily-complete', 'daily-batch', 'visit-totals',
+  ...[1, 7, 14, 30, 90].map(days => `visit-range-${days}`), 'visit-publish', 'hour-backfill', 'unchanged', 'cleanup']);
 const SQL_PHASES = new Set(['source-clone', 'migration-install', 'alias-read', 'alias-install',
-  'alias-acl-timeout', 'claim-diagnostic-install', 'claim-diagnostic', 'fixture-checks', 'cleanup']);
+  'alias-acl-timeout', 'claim-diagnostic-install', 'claim-diagnostic', 'fixture-drive-install',
+  'fixture-drive', 'fixture-checks', 'cleanup']);
 const sqlstate = value => typeof value === 'string' && /^[A-Z0-9]{5}$/.test(value) ? value : null;
 const rpcErrorCode = value => sqlstate(value) ??
   (typeof value === 'string' && /^PGRST[0-9]{3}$/.test(value) ? value : 'unknown');
@@ -217,6 +224,70 @@ export function qaReceiptWithPhases(identity, phases) {
   return { ...identity, phases: [...(identity.phases ?? []), ...phases] };
 }
 
+export function fixtureDriveBatchSql(schema, privateSchema) {
+  fixtureMigrationSql('', schema, privateSchema);
+  // Fixture orchestration only: call the installed, unmodified advance function
+  // with a fresh receipt UUID each time. Never write pending work or skip buckets.
+  // One SELECT returns the entire batch; do not depend on Management API handling
+  // of multiple SELECT result sets. The existing outer 60s deadline still wins.
+  return `begin;
+create function ${privateSchema}.qa_drive_batch_v1(p_token uuid,p_epoch bigint,p_steps integer,p_budget_ms integer)
+returns jsonb language plpgsql volatile security invoker set search_path='' set timezone='UTC' as $qa_drive$
+declare started timestamptz:=clock_timestamp(); began timestamptz; outcome jsonb;
+  outcomes jsonb:='[]'; maximum_ms numeric:=0; step_ms numeric; n integer;
+begin
+  if p_steps is null or p_steps not between 1 and ${FIXTURE_BATCH_MAX_STEPS}
+    or p_budget_ms is null or p_budget_ms not between 1 and ${FIXTURE_BATCH_WORK_MS} then
+    raise exception 'invalid-fixture-batch' using errcode='22023';
+  end if;
+  for n in 1..p_steps loop
+    -- Leave room for another step using this batch's observed maximum and a
+    -- 6s floor. The real outer deadline still cancels an unexpectedly slow call.
+    exit when n>1 and extract(epoch from (clock_timestamp()-started))*1000
+      +greatest(maximum_ms,6000)>=p_budget_ms;
+    began:=clock_timestamp();
+    outcome:=${schema}.run_stats_prepared_step_v1(p_token,p_epoch,pg_catalog.gen_random_uuid(),'{"kind":"advance"}'::jsonb);
+    step_ms:=extract(epoch from (clock_timestamp()-began))*1000;
+    maximum_ms:=greatest(maximum_ms,step_ms);
+    outcomes:=outcomes||jsonb_build_array(outcome);
+    exit when outcome->'more'='false'::jsonb;
+  end loop;
+  return jsonb_build_object('results',outcomes,'sqlMs',extract(epoch from (clock_timestamp()-started))*1000,
+    'maximumSqlStepMs',maximum_ms);
+end $qa_drive$;
+revoke all on function ${privateSchema}.qa_drive_batch_v1(uuid,bigint,integer,integer) from public,anon,authenticated;
+grant execute on function ${privateSchema}.qa_drive_batch_v1(uuid,bigint,integer,integer) to service_role;
+commit;`;
+}
+
+export function qaFixtureBatchPlan(steps, elapsedMs) {
+  assert.ok(Number.isSafeInteger(steps) && steps >= 0 && steps <= DRIVE_MAX_STEPS);
+  assert.ok(Number.isFinite(elapsedMs) && elapsedMs >= 0);
+  if (steps === DRIVE_MAX_STEPS || DRIVE_BUDGET_MS - elapsedMs < MANAGEMENT_REQUEST_MS) return null;
+  return { limit: Math.min(FIXTURE_BATCH_MAX_STEPS, DRIVE_MAX_STEPS - steps), workBudgetMs: FIXTURE_BATCH_WORK_MS };
+}
+
+export function qaFixtureBatchResult(rows, limit) {
+  const invalid = () => { throw new Error('fixture-drive-invalid-response'); };
+  if (!Number.isSafeInteger(limit) || limit < 1 || limit > FIXTURE_BATCH_MAX_STEPS ||
+    !Array.isArray(rows) || rows.length !== 1) invalid();
+  const batch = rows[0]?.result;
+  if (!Array.isArray(batch?.results) || batch.results.length < 1 || batch.results.length > limit ||
+    !Number.isFinite(batch.sqlMs) || batch.sqlMs < 0 || batch.sqlMs > FIXTURE_BATCH_OUTER_MS ||
+    !Number.isFinite(batch.maximumSqlStepMs) || batch.maximumSqlStepMs < 0 ||
+    batch.maximumSqlStepMs > batch.sqlMs) invalid();
+  const results = batch.results.map((r, index) => {
+    if (!STEP_PHASES.has(r?.phase) || typeof r.more !== 'boolean' ||
+      (r.more === false && index !== batch.results.length - 1)) invalid();
+    for (const key of ['platformGeneration', 'visitGeneration']) {
+      if (r[key] !== null && (typeof r[key] !== 'string' ||
+        !/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(r[key]))) invalid();
+    }
+    return { phase: r.phase, more: r.more, platformGeneration: r.platformGeneration, visitGeneration: r.visitGeneration };
+  });
+  return { results, sqlMs: batch.sqlMs, maximumSqlStepMs: batch.maximumSqlStepMs };
+}
+
 export function validateQaCheckout({ expectedSha, checkoutSha, eventName, event, githubSha }) {
   assert.match(expectedSha ?? '', /^[a-f0-9]{40}$/);
   assert.equal(checkoutSha, expectedSha, 'exact checkout SHA required');
@@ -308,7 +379,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       response = await fetch(`https://api.supabase.com/v1/projects/${PROJECT}/database/query`, {
         method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: submittedQuery }),
-        signal: AbortSignal.timeout(120_000), redirect: 'error',
+        signal: AbortSignal.timeout(MANAGEMENT_REQUEST_MS), redirect: 'error',
       });
     } catch { failureKind = 'request-error'; }
     if (response) {
@@ -414,6 +485,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     });
     assert.deepEqual(identity.installedMigrations, identity.migrations);
     assert.equal(identity.claimReplacementPreserved, true);
+    if (mode === 'fixture') await sql(fixtureDriveBatchSql(schema, privateSchema), 'fixture-drive-install');
     // Execute exact function bodies/settings through real PostgREST using unique
     // service-only aliases. All table/helper references still point at fixtures.
     for (const name of RPC_NAMES) {
@@ -455,6 +527,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         select n,h,2,2,3,1,h,h from generate_series(${first},${Math.min(games, first + 999)}) n cross join generate_series(date_trunc('hour',now())-interval '160 hours',date_trunc('hour',now())-interval '1 hour',interval '1 hour') h;`);
     }
     sourceRows = (await sql(`select (select count(*) from ${schema}.roblox_universe_stats_hourly)::text hourly,(select count(*) from ${schema}.roblox_universe_stats_daily)::text daily;`))[0];
+    identity.sourceRows = sourceRows;
     // Only this run's isolated source copies are analyzed. No real managed-
     // development/production source maintenance is performed.
     await sql(`analyze ${schema}.roblox_universes; analyze ${schema}.roblox_universe_stats_hourly; analyze ${schema}.roblox_universe_stats_daily;`);
@@ -504,34 +577,77 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     observe(firstResult);
     assert.deepEqual(await transport(alias('run_stats_prepared_step_v1'), firstStep), firstResult);
     assert.equal((await transport(alias('get_stats_prepared_receipt_v1'), { p_step_id: firstStep.p_step_id })).found, true);
-    async function drive() {
+    async function drive(scenario) {
+      assert.match(scenario, /^[a-z][a-z0-9-]{0,79}$/);
       const started = Date.now(); let done = false; let total = 0;
-      // Management API batches reduce HTTP overhead; exact RPC transport and
-      // pre-execution timeouts are separately proved above and below. Each SQL
-      // transaction contains 8 bounded calls and has a 60-second outer deadline.
-      while (!done && total < 6000 && Date.now() - started < 1_200_000) {
-        if (mode === 'benchmark') {
+      const run = { scenario, status: 'running', startedAt: new Date(started).toISOString(), steps: 0,
+        transport: mode === 'benchmark' ? 'rest' : 'sql', ms: 0,
+        ...(mode === 'fixture' ? { batches: 0, sqlMs: 0, requestOverheadMs: 0,
+          maximumSqlStepMs: 0, phaseCounts: {} } : {}) };
+      (identity.drives ??= []).push(run);
+      await saveReceipt();
+      console.log(JSON.stringify({ phase: 'drive-start', scenario, mode }));
+      try {
+        while (!done && total < DRIVE_MAX_STEPS && Date.now() - started < DRIVE_BUDGET_MS) {
+          if (mode === 'benchmark') {
+            run.pendingBatch = { transport: 'rest', steps: 1, startedAt: new Date().toISOString() };
+            // Keep benchmark receipt I/O at the existing 128-step progress cadence.
+            if (total % 128 === 0) await saveReceipt();
+            const began = Date.now();
+            const result = await transport(alias('run_stats_prepared_step_v1'), stepArgs(randomUUID()));
+            observe(result);
+            maximumStepMs = Math.max(maximumStepMs, Date.now() - began);
+            total++; done = !result.more;
+            run.steps = total; run.ms = Date.now() - started; run.lastPhase = result.phase;
+            delete run.pendingBatch;
+            if (done || total % 128 === 0) await saveReceipt();
+            if (total % 128 === 0) console.log(JSON.stringify({ scenario, phase: result.phase, steps: total, elapsedMs: run.ms }));
+            continue;
+          }
+          // Reserve a whole existing Management request deadline inside this drive's
+          // unchanged 20-minute budget. Each batch stops itself after 40s of work
+          // (plus its in-flight step), or 256 real calls, or the first more=false.
+          // Actual REST bootstrap/idempotency/fencing/claims remain above/below.
+          const plan = qaFixtureBatchPlan(total, Date.now() - started);
+          if (!plan) break;
+          const { limit, workBudgetMs } = plan;
+          run.pendingBatch = { transport: 'sql', steps: limit, workBudgetMs, startedAt: new Date().toISOString() };
+          await saveReceipt();
           const began = Date.now();
-          const result = await transport(alias('run_stats_prepared_step_v1'), stepArgs(randomUUID()));
-          observe(result);
-          maximumStepMs = Math.max(maximumStepMs, Date.now() - began);
-          total++; done = !result.more;
-          if (total % 128 === 0) console.log(JSON.stringify({ phase: result.phase, steps: total, elapsedMs: Date.now() - started }));
-          continue;
+          const batch = qaFixtureBatchResult(await sql(`set statement_timeout='60s';
+            select ${privateSchema}.qa_drive_batch_v1(${literal(claim.leaseToken)},${literal(claim.epoch)},${limit},${workBudgetMs}) as result;`,
+          'fixture-drive'), limit);
+          const requestMs = Date.now() - began;
+          for (const result of batch.results) {
+            observe(result);
+            run.phaseCounts[result.phase] = (run.phaseCounts[result.phase] ?? 0) + 1;
+          }
+          total += batch.results.length; done = batch.results.at(-1).more === false;
+          run.steps = total; run.ms = Date.now() - started; run.batches++;
+          run.sqlMs += batch.sqlMs;
+          // Residual includes API/queue/serialization/round-trip work; it is not
+          // a claim to have measured network latency independently.
+          run.requestOverheadMs += Math.max(0, requestMs - batch.sqlMs);
+          run.maximumSqlStepMs = Math.max(run.maximumSqlStepMs, batch.maximumSqlStepMs);
+          run.lastPhase = batch.results.at(-1).phase;
+          delete run.pendingBatch;
+          await saveReceipt();
+          console.log(JSON.stringify({ phase: 'fixture-drive', scenario, steps: total, elapsedMs: run.ms,
+            lastPhase: run.lastPhase, batchSteps: batch.results.length, requestMs,
+            sqlMs: batch.sqlMs, requestOverheadMs: Math.max(0, requestMs - batch.sqlMs),
+            maximumSqlStepMs: batch.maximumSqlStepMs }));
         }
-        const batch = Array.from({ length: 8 }, () => randomUUID());
-        const expressions = batch.map(id => `${schema}.run_stats_prepared_step_v1(${literal(claim.leaseToken)},${literal(claim.epoch)},${literal(id)},'{"kind":"advance"}')`);
-        const results = await sql(`set statement_timeout='60s';\n` + expressions.map(e => `select ${e} as result;`).join('\n'));
-        for (const r of results) observe(r.result);
-        total += 8; done = results.some(r => r.result?.more === false);
-        if (total % 256 === 0) console.log(JSON.stringify({ phase: 'fixture-bootstrap', steps: total, elapsedMs: Date.now() - started }));
-      }
-      assert.ok(done, 'bounded-bootstrap-incomplete');
-      const receipt = { steps: total, ms: Date.now() - started };
-      identity.bootstrap ??= receipt;
-      (identity.bootstrapRuns ??= []).push(receipt);
+        assert.ok(done, 'bounded-bootstrap-incomplete');
+        run.status = 'completed'; run.ms = Date.now() - started;
+        const receipt = { steps: total, ms: Date.now() - started };
+        identity.bootstrap ??= receipt;
+        (identity.bootstrapRuns ??= []).push(receipt);
+      } catch (error) {
+        run.status = 'failed'; run.ms = Date.now() - started;
+        throw error;
+      } finally { await saveReceipt(); }
     }
-    await drive();
+    await drive('initial-bootstrap');
     const platform = await transport(alias('get_stats_prepared_platform_chart_v1'), { p_range: '90d', p_resolution: 'hourly', p_include_previous: true });
     assert.ok(platform.currentRows.length > 1000, 'scalar JSON must exceed REST row cap');
     assert.equal(platform.meta.previous.reason, 'retention-gap');
@@ -587,7 +703,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     const oldClaim = claim;
     claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'replacement', p_request_id: randomUUID() });
     await transport(alias('run_stats_prepared_step_v1'), { ...stepArgs(randomUUID()), p_lease_token: oldClaim.leaseToken, p_epoch: oldClaim.epoch }, { expectedError: '55000' });
-    await drive();
+    await drive('late-source-repair');
     assert.notEqual((await scalar(`${schema}.get_stats_prepared_health_v1()`)).operational.platformGeneration, lastGood);
     const repaired = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('1d','hourly',false)`);
     const repairedHour = (await sql(`select hour_start::text t from ${schema}.roblox_universe_stats_hourly where universe_id=1 and avg_playing=99.25 limit 1;`))[0].t;
@@ -602,20 +718,20 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     if (mode === 'fixture') {
       await sql(`update ${schema}.roblox_universe_stats_daily set visit_delta=0 where stat_date>=current_date-1;`);
       claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'zero-positive', p_request_id: randomUUID() });
-      await drive();
+      await drive('zero-positive');
       const empty = await scalar(`${schema}.get_stats_prepared_visit_share_v1('1d')`);
       assert.equal(empty.meta.state, 'empty'); assert.equal(empty.meta.current.reason, 'zero-denominator');
       assert.deepEqual(empty.chart.series, []); assert.deepEqual(empty.chart.points, []);
       await transport(alias('finish_stats_prepared_work_v1'), { p_lease_token: claim.leaseToken, p_epoch: claim.epoch, p_outcome: { status: 'completed' } });
       await sql(`delete from ${schema}.roblox_universe_stats_daily where stat_date=current_date;`);
       claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'missing-current-day', p_request_id: randomUUID() });
-      await drive();
+      await drive('missing-current-day');
       const missing = await scalar(`${schema}.get_stats_prepared_visit_share_v1('1d')`);
       assert.equal(missing.meta.state, 'partial'); assert.equal(missing.meta.current.reason, 'producer-behind');
       await transport(alias('finish_stats_prepared_work_v1'), { p_lease_token: claim.leaseToken, p_epoch: claim.epoch, p_outcome: { status: 'completed' } });
       await sql(`update ${schema}.roblox_universe_stats_hourly set visits_end=9007199254740993 where universe_id=1 and hour_start=(select max(hour_start) from ${schema}.roblox_universe_stats_hourly);`);
       claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'large-counter', p_request_id: randomUUID() });
-      await drive();
+      await drive('large-counter');
       const large = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('1d','hourly',false)`);
       assert.equal(large.currentRows.at(-1).visits, '9007199254741993');
       await transport(alias('finish_stats_prepared_work_v1'), { p_lease_token: claim.leaseToken, p_epoch: claim.epoch, p_outcome: { status: 'completed' } });
@@ -630,13 +746,13 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       await sql(`update ${schema}.roblox_universe_stats_hourly set avg_playing=23.5 where universe_id=1 and hour_start=(select max(hour_start) from ${schema}.roblox_universe_stats_hourly);
         update ${schema}.stats_prepared_control set retry_at=null where id;`);
       claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'valid-source-restored', p_request_id: randomUUID() });
-      await drive();
+      await drive('valid-source-restored');
       await transport(alias('finish_stats_prepared_work_v1'), { p_lease_token: claim.leaseToken, p_epoch: claim.epoch, p_outcome: { status: 'completed' } });
     }
     const visitBeforeMembership = (await scalar(`${schema}.get_stats_prepared_health_v1()`)).operational.visitGeneration;
     await sql(`delete from ${schema}.stats_game_current_index where universe_id=2;`);
     claim = await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'membership', p_request_id: randomUUID() });
-    await drive();
+    await drive('membership');
     const changed = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('90d','hourly',true)`);
     assert.equal(changed.currentRows.at(-1).playing, mode === 'benchmark' ? '200020' : '24');
     assert.equal(changed.meta.previous.reason, 'retention-gap');
@@ -694,7 +810,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       assert.equal(await scalar(`exists(select 1 from ${schema}.stats_prepared_dirty where kind='d'
         and bucket=(current_date-1)::timestamptz and revision>${Number(scan.revision)})`), true);
       assert.equal(await scalar(`exists(select 1 from ${schema}.stats_prepared_buckets b join ${schema}.stats_prepared_versions v on v.id=b.version where v.scan=${literal(scan.daily_scan)})`), false);
-      await drive();
+      await drive('mid-scan-change');
       assert.equal(await scalar(`(select visits::text from ${schema}.stats_prepared_visits where version=${literal(await dayVersion())} and universe_id=1)`), '124');
       await finishRun();
 
@@ -706,7 +822,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         ['provenance-only', `update ${schema}.roblox_universe_stats_daily set snapshot=jsonb_build_object('source','qa-unknown') where universe_id=3 and stat_date=current_date-2;`],
         ['metadata-only', `update ${schema}.roblox_universes set display_name='QA renamed fixture 3' where universe_id=3;`],
       ]) {
-        await sql(change); await beginRun(worker); await drive();
+        await sql(change); await beginRun(worker); await drive(worker);
         const nextVisit = await scalar(`${schema}.get_stats_prepared_visit_share_v1('7d')`);
         assert.notEqual(nextVisit.meta.generationId, previousVisit.meta.generationId, worker);
         assert.notEqual(nextVisit.meta.sourceRevision, previousVisit.meta.sourceRevision, worker);
@@ -755,7 +871,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       await scalar(`${privateSchema}.stats_prepared_cleanup_v1()`);
       assert.equal(await scalar(`exists(select 1 from ${schema}.stats_prepared_versions where id=${literal(orphan)})`), false);
       assert.equal(await scalar(`(select count(*) from ${schema}.stats_prepared_versions where id in (select jsonb_array_elements_text(${literal(JSON.stringify(protectedVersions))}::jsonb)::uuid))`), protectedVersions.length);
-      await beginRun('cleanup-cap-recovery'); await drive(); await finishRun();
+      await beginRun('cleanup-cap-recovery'); await drive('cleanup-cap-recovery'); await finishRun();
 
       // Freeze ONLY the isolated functions' clock. Retain their real bodies,
       // grants, statement limits and RPC transport; never change a public source
@@ -783,7 +899,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       await sql(`insert into ${schema}.roblox_universe_stats_hourly(universe_id,hour_start,playing,avg_playing,peak_playing,visits_end,favorites_end,rating_percent,sample_count,first_sampled_at,last_sampled_at)
         select 1,h,24,23.5,27,1000,50,90.15,2,h,h+interval '1 minute'
         from generate_series((select max(hour_start)+interval '1 hour' from ${schema}.roblox_universe_stats_hourly),date_trunc('hour',${clockNow}),interval '1 hour') h;`);
-      await beginRun('observed-open-hour'); await drive();
+      await beginRun('observed-open-hour'); await drive('observed-open-hour');
       const open = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('1d','hourly',true)`);
       assert.equal(open.meta.current.provisional, true);
       const openHour = open.currentRows.at(-1);
@@ -813,7 +929,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       const frozenCoverage = await scalar(`(select ${privateSchema}.stats_prepared_period_v1(g.payload->'hourly',
         ${literal(open.meta.windowStart)},g.as_of,true,g.as_of) from ${schema}.stats_prepared_generations g where g.id=${literal(open.meta.generationId)})`);
       assert.deepEqual(frozenCoverage.coverage, open.meta.current, 'old generation coverage stays frozen after wall-clock advance');
-      await drive();
+      await drive('close-hour-without-source-write');
       await finishRun();
 
       // Hourly TRUNCATE must invalidate today's 01:00, 02:00 and open 03:00,
@@ -826,7 +942,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       assert.equal(await scalar(`exists(select 1 from ${schema}.stats_prepared_dirty where kind='h' and bucket=date_trunc('hour',${clockNow}))`), true);
       assert.equal(await scalar(`not exists(select 1 from ${schema}.stats_prepared_dirty where kind='h' and
         (bucket<date_trunc('day',${clockNow})-interval '90 days' or bucket>date_trunc('hour',${clockNow})))`), true);
-      await beginRun('hourly-truncate'); await drive();
+      await beginRun('hourly-truncate'); await drive('hourly-truncate');
       const truncated = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('1d','hourly',true)`);
       assert.deepEqual(truncated.currentRows, []); assert.equal(truncated.meta.current.observedBuckets, 0);
       const retained = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('90d','hourly',true)`);
@@ -893,7 +1009,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         assert.deepEqual(await platformStamp(), stamp);
         await assertUnavailable(stamp.active);
       };
-      await beginRun('cold-empty-platform'); await drive(); await finishEmptyRun();
+      await beginRun('cold-empty-platform'); await drive('cold-empty-platform'); await finishEmptyRun();
       const coldEmptyStamp = await platformStamp();
       assert.equal(coldEmptyStamp.active, null); assert.equal(coldEmptyStamp.previous, null);
       assert.equal(coldEmptyStamp.generationCount, 0);
@@ -921,7 +1037,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
             values(1,(${clockNow} at time zone 'UTC')::date-1,24,23.5,27,1000,50,90.15,2,7,993,1000,
               date_trunc('day',${clockNow})-interval '12 hours',true,'{"source":"roblox_universe_stats_hourly"}');`);
         }
-        await beginRun(`${scenario}-seed`); await drive();
+        await beginRun(`${scenario}-seed`); await drive(`${scenario}-seed`);
         const useful = await transport(alias('get_stats_prepared_platform_chart_v1'), {
           p_range: '1d', p_resolution: kind === 'h' ? 'hourly' : 'daily', p_include_previous: true });
         assert.ok(['ready', 'partial'].includes(useful.meta.state), scenario);
@@ -963,7 +1079,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         assert.deepEqual(await scalar(`(select to_jsonb(g) from ${schema}.stats_prepared_generations g
           where g.id=${literal(useful.meta.generationId)})`), usefulGeneration);
         await assertUnavailable(replacement.platformGeneration);
-        await drive(); await finishEmptyRun();
+        await drive(scenario); await finishEmptyRun();
         const emptyStamp = await platformStamp();
         assert.notEqual(emptyStamp.active, useful.meta.generationId);
         assert.notEqual(emptyStamp.signature, useful.meta.sourceRevision);
