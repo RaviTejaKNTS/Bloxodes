@@ -48,6 +48,8 @@ The `stats_prepared_*` tables hold platform and visit-share chart generations, f
 
 Ready generations are immutable. Publication changes the active pointer only after a complete result passes validation. Failed work preserves the last ready generation. Source triggers record changes without rebuilding charts in the ingestion transaction. Existing source and legacy aggregate tables retain their own writers.
 
+The claim's membership replacement uses an explicit `universe_id is not null` predicate, matching its non-null primary key, so pg-safeupdate accepts the full replacement through PostgREST. Its forward correction preserves invoker security, grants and deadlines. Isolated QA installs the original migration followed by its correction and records each file's exact path and hash before creating test RPC aliases.
+
 Changed empty platform payloads replace an existing active generation through that same atomic publication path. The former generation keeps its original payload and dates under normal retained-pointer protection and cleanup. Processed-empty buckets describe missing coverage, not public zero observations.
 
 Hourly TRUNCATE capture invalidates through the current UTC hour; daily capture through the current UTC day. Hourly truncation also marks retained coverage outside the reconstructible horizon uncertain. Rebuild enumeration stays finite and ordered. This describes invalidation behavior, not an instruction to truncate production history.
@@ -57,6 +59,8 @@ Prepared storage includes contribution rows and indexes, beyond the chart JSON s
 ## Rules
 
 Code-lookup GitHub QA temporarily creates only `public.qa_cl_<run-derived-suffix>_{pages,codes,universes,oracle}`. The tables use RLS and service-only SELECT grants, with explicit foreign keys between owned clones. The oracle copies the canonical old view against those clones. Finally and independent always-run cleanup verify ownership and remove the finite allowlist; this is not a schema-exposure change, migration, content import or production contract.
+
+The separately dispatched [historical reconciliation job](../operations/release.md) targets only four pinned failed-run artifacts and their exact sixteen possible relations. It verifies artifact provenance and all identities before applying the existing cleanup guards, then records absence separately from the unchanged historical failures.
 
 - Migrations are immutable once committed. CI rejects edits and deletions.
 - A new migration must work with the currently running app. Drop old tables or columns only in a later migration, after the app stops using them.

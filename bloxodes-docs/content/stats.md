@@ -12,6 +12,8 @@ Once activated, the dedicated homelab worker checks every five minutes, advances
 
 `types/stats-prepared.ts` defines the SQL wire contract. The fixed Node 22 entrypoint is `scripts/universes/refresh-prepared-charts.mjs`. The worker uses a fenced database lease, durable step receipts and staged publication. Failed preparation leaves the active result intact. Source observation, generation, publication and successful check times have separate meanings; a new check cannot make old source data fresh.
 
+Membership replacement deletes rows with an explicit non-null primary-key predicate before inserting the frozen ID set. This preserves a complete replacement while allowing the operation through API sessions that enforce pg-safeupdate. The worker does not disable that safeguard.
+
 One monotonic 210-second invocation budget includes claim, advance ambiguity recovery and durable finish recovery. Every HTTP call is limited by the remaining budget and its 10-second advance or 8-second control ceiling. Starting another advance requires 53 seconds remaining for receipt lookup, identical replay and finish recovery. HTTP cancellation does not prove SQL rollback; SQL retains separate statement and lock deadlines.
 
 SQL result states are ready, partial, last-good, verified empty and unavailable. A useful last-good result keeps its original dates. `get_stats_prepared_health_v1` reports schema compatibility separately from operational state. A compatible response or non-null generation ID alone does not prove usable chart coverage. The public API/UI cutover, private authenticated web health route, removal of chart API warming and external prepared-heartbeat monitor belong to the reader release; they are not active from this producer release alone.

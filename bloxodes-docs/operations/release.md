@@ -23,6 +23,8 @@ Missing cleanup identity fails when backend evidence exists and preserves that e
 
 Failed code-fixture SQL retains only a fixed phase, validated SQLSTATE, fixed error class and bounded numeric locations, including wrapped Management API failures. A successful new fixture does not establish removal of an older run's retained objects. Keep the older durable identity and failure evidence until separate reconciliation proves those exact objects absent.
 
+Historical code-fixture reconciliation is a separate manual `pull-request.yml` job. Its optional `code_lookups_recovery` input must equal `reconcile-39955744530-39956105978-39957597153-39958648149`. The runner pins those four failed runs and artifact IDs/digests, validates every original identity before database access, and uses the same guarded four-name cleanup for each. It accepts no arbitrary SQL, target or artifact list. The job receives only development Management credentials and an Actions-read GitHub token. Original failure bytes remain immutable; a separate recovery receipt needs all four absence proofs. Dispatch only after the runner, its helper correction and the final SHA have passed review and GitHub verification. Normal PR checks run its tests without enabling reconciliation.
+
 ## Deploy
 
 On push to `production`, `dokploy-production-deploy.yml`:
@@ -97,6 +99,8 @@ Isolated QA receipts retain fixed setup/cleanup phase labels, successful and fai
 A claim cardinality failure retains the original REST status, validated SQLSTATE, fixed error class and bounded claim line when available. One separate service-role SQL probe rolls back both successful and failed claim work and returns only sanitized diagnostics. Probe success never replaces the failed API result; `completed=false` remains failed QA after cleanup.
 
 Claim diagnostics distinguish exact pg-safeupdate UPDATE/DELETE guard messages from other cardinality errors. Failure receipts retain only fixed error classes and field-type tags. Observe the HTTP guard rejection before authoring a forward migration; successful SQL probe rollback does not establish a successful HTTP request.
+
+Prepared claim QA replays the frozen original migration followed by its membership-delete correction from exact checkout bytes. The receipt records each ordered path, SHA-256 and byte count, successful installs and preserved claim identity, owner, permissions and settings. The legacy single migration hash alone is insufficient. Build aliases only after both migrations succeed; require the real HTTP pipeline, representative benchmark and cleanup before release.
 
 Deploy schema/producer/runtime before the prepared-only public reader. Empty prepared tables have no legacy aggregate seed. Keep the existing public reader live until bootstrap has produced usable outputs for every intended range/resolution, with honest current/previous coverage. Check source age separately from generation age before reader cutover.
 

@@ -1,11 +1,108 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigrationSql,
   qaSqlFailureDiagnostic, qaReceiptWithPhases, qaRpcFailureDiagnostic, qaClaimProbeDiagnostic,
-  fixtureClaimDiagnosticSql, qaRpcErrorEnvelope } from '../../ci/stats-prepared-db-qa.mjs';
+  fixtureClaimDiagnosticSql, qaRpcErrorEnvelope, PREPARED_QA_MIGRATION_PATHS,
+  fixtureMigrationPlan, replayFixtureMigrations } from '../../ci/stats-prepared-db-qa.mjs';
 
 const claimLocation = { alias: 'qa_012345abcdef_claim_sp_work_v1', maxLine: 60 };
+const schema = 'qa_stats_012345abcdef', privateSchema = `${schema}_p`;
+const migrationSources = () => Promise.all(PREPARED_QA_MIGRATION_PATHS.map(async path => ({
+  path, bytes: await readFile(new URL(`../../../${path}`, import.meta.url)),
+})));
+
+test('forward claim changes only the full membership DELETE predicate and preserves frozen applied bytes', async () => {
+  const [original, correction] = await migrationSources();
+  assert.equal(createHash('sha256').update(original.bytes).digest('hex'),
+    '286252e4620d906b21c2472a36773b45dbf3d6c42c6b5c44063e71ee65228fbd');
+  const originalSql = original.bytes.toString('utf8');
+  assert.match(originalSql, /create table public\.stats_prepared_members \(universe_id bigint primary key\);/);
+  const claim = originalSql.match(/^create function public\.claim_stats_prepared_work_v1\(p_worker_id text,p_request_id uuid\) returns jsonb\n[\s\S]*?^end \$\$;/m)?.[0];
+  assert.ok(claim);
+  assert.equal(correction.bytes.toString('utf8').replace(/^(?:--[^\n]*\n)*/, ''),
+    claim.replace('create function ', 'create or replace function ')
+      .replace('delete from public.stats_prepared_members;',
+        'delete from public.stats_prepared_members where universe_id is not null;') + '\n');
+});
+
+test('migration plan requires both exact ordered files and records each raw byte hash and size', async () => {
+  const sources = await migrationSources();
+  assert.deepEqual(PREPARED_QA_MIGRATION_PATHS, [
+    'supabase/migrations/20261023100441_stats_prepared_charts_v1.sql',
+    'supabase/migrations/20261023131347_stats_prepared_claim_membership_delete_predicate.sql',
+  ]);
+  const plan = fixtureMigrationPlan(sources, schema, privateSchema);
+  for (let i = 0; i < sources.length; i++) {
+    const { path, bytes } = sources[i];
+    assert.deepEqual(plan[i], { path, bytes: bytes.length,
+      sha256: createHash('sha256').update(bytes).digest('hex'),
+      sql: fixtureMigrationSql(bytes.toString('utf8'), schema, privateSchema) });
+    assert.equal(plan[i].sql.replaceAll(privateSchema, 'stats_prepared_private')
+      .replaceAll(`${schema}.`, 'public.').replaceAll(`'${schema}'`, "'public'"), bytes.toString('utf8'));
+    assert.doesNotMatch(plan[i].sql, /\bpublic\.|stats_prepared_private|'public'/);
+  }
+  assert.match(plan[0].sql, /delete from qa_stats_012345abcdef\.stats_prepared_members;/);
+  assert.match(plan[1].sql, /create or replace function qa_stats_012345abcdef\.claim_stats_prepared_work_v1/);
+  assert.match(plan[1].sql, /delete from qa_stats_012345abcdef\.stats_prepared_members where universe_id is not null;/);
+  for (const invalid of [sources.slice(0, 1), sources.slice(1), [...sources].reverse(),
+    [sources[0], sources[0]], [...sources, sources[1]],
+    [{ ...sources[0], bytes: Buffer.concat([sources[0].bytes, Buffer.from('\n')]) }, sources[1]],
+    [sources[0], { ...sources[1], bytes: sources[1].bytes.toString('utf8') }]]) {
+    assert.throws(() => fixtureMigrationPlan(invalid, schema, privateSchema));
+  }
+});
+
+test('migration replay awaits the original before correction and cannot complete after either install fails', async () => {
+  const plan = fixtureMigrationPlan(await migrationSources(), schema, privateSchema);
+  const started = [], installed = [];
+  let releaseOriginal;
+  const originalGate = new Promise(resolve => { releaseOriginal = resolve; });
+  const replay = replayFixtureMigrations(plan, async (sql, receipt) => {
+    started.push(receipt.path);
+    assert.equal(sql, plan[started.length - 1].sql);
+    assert.deepEqual(Object.keys(receipt).sort(), ['bytes', 'path', 'sha256']);
+    if (started.length === 1) await originalGate;
+    installed.push(receipt);
+  });
+  assert.deepEqual(started, [PREPARED_QA_MIGRATION_PATHS[0]]);
+  assert.deepEqual(installed, []);
+  releaseOriginal(); await replay;
+  assert.deepEqual(started, PREPARED_QA_MIGRATION_PATHS);
+  assert.deepEqual(installed, plan.map(({ sql, ...receipt }) => receipt));
+  for (const failedPath of PREPARED_QA_MIGRATION_PATHS) {
+    const attempts = []; let completed = false;
+    await assert.rejects(async () => {
+      await replayFixtureMigrations(plan, async (sql, receipt) => {
+        attempts.push(receipt.path);
+        if (receipt.path === failedPath) throw new Error('migration-install-failed');
+      });
+      completed = true;
+    }, /migration-install-failed/);
+    assert.equal(completed, false);
+    assert.deepEqual(attempts, PREPARED_QA_MIGRATION_PATHS.slice(0,
+      PREPARED_QA_MIGRATION_PATHS.indexOf(failedPath) + 1));
+  }
+});
+
+test('ordered migration receipts survive cleanup with legacy original hash and partial installs intact', async () => {
+  const migrations = fixtureMigrationPlan(await migrationSources(), schema, privateSchema)
+    .map(({ sql, ...receipt }) => receipt);
+  const cleanup = { kind: 'sql', phase: 'cleanup', status: 201, ok: true, ms: 1 };
+  for (const installedMigrations of [migrations.slice(0, 1), migrations]) {
+    const identity = { migrations, installedMigrations, migrationSha256: migrations[0].sha256,
+      completed: false, cleaned: false };
+    const saved = qaReceiptWithPhases(identity, []);
+    const cleaned = qaReceiptWithPhases({ ...saved, cleaned: true }, [cleanup]);
+    assert.deepEqual(cleaned.migrations, migrations);
+    assert.deepEqual(cleaned.installedMigrations, installedMigrations);
+    assert.equal(cleaned.migrationSha256, migrations[0].sha256);
+    assert.equal(cleaned.completed, false); assert.equal(cleaned.cleaned, true);
+    assert.deepEqual(cleaned.phases, [cleanup]);
+    assert.doesNotMatch(JSON.stringify(cleaned), /create or replace|delete from|"sql"\s*:/i);
+  }
+});
 
 test('cardinality classification requires an exact known primary message and its matching SQLSTATE', () => {
   const cases = [

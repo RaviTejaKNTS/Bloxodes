@@ -5,6 +5,11 @@ on:
     branches: [production]
   workflow_dispatch:
     inputs:
+      code_lookups_recovery:
+        description: 'Optional exact reviewed failed-artifact reconciliation selection'
+        required: false
+        default: ''
+        type: string
       stats_prepared_benchmark:
         description: 'Run the isolated managed-development prepared-chart scale benchmark'
         required: false
@@ -185,7 +190,7 @@ jobs:
         run: node --experimental-vm-modules --test scripts/universes/__tests__/prepared-charts*.test.mjs scripts/ops/__tests__/stats-chart*.test.mjs
       - name: Verify code lookup fixture identity and SQL boundaries
         if: needs.scope.outputs.codeLookups == 'true'
-        run: node --test scripts/ci/code-lookups-fixture.test.mjs
+        run: node --test scripts/ci/code-lookups-fixture.test.mjs scripts/ci/code-lookups-recover.test.mjs
       - name: Verify selected-page code reads against the managed database
         if: needs.scope.outputs.codeLookups == 'true'
         timeout-minutes: 3
@@ -213,6 +218,38 @@ jobs:
         with:
           name: code-lookups-backend-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: tmp/test-reports/code-lookups/
+          retention-days: 30
+          if-no-files-found: error
+  code-lookups-recovery:
+    if: github.event_name == 'workflow_dispatch' && inputs.code_lookups_recovery != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Verify exact-artifact recovery boundaries
+        run: node --test scripts/ci/code-lookups-recover.test.mjs
+      - name: Reconcile only four selected managed-development identities
+        env:
+          CODE_LOOKUPS_RECOVERY: '1'
+          GITHUB_TOKEN: ${{ github.token }}
+          MANAGED_DEV_SUPABASE_URL: ${{ secrets.MANAGED_DEV_SUPABASE_URL }}
+          MANAGED_DEV_SUPABASE_ACCESS_TOKEN: ${{ secrets.MANAGED_DEV_SUPABASE_ACCESS_TOKEN }}
+          RECOVERY_EXPECTED_SHA: ${{ github.sha }}
+          RECOVERY_SELECTION: ${{ inputs.code_lookups_recovery }}
+        run: node scripts/ci/code-lookups-recover.mjs --expected-sha "$RECOVERY_EXPECTED_SHA" --apply-selection "$RECOVERY_SELECTION"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: code-lookups-recovery-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tmp/test-reports/code-lookups-recovery/
           retention-days: 30
           if-no-files-found: error
   prepared-chart-database:

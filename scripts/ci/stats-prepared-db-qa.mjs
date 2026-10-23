@@ -9,7 +9,11 @@ import { execFileSync } from 'node:child_process';
 
 const PROJECT = 'bbtcaurrtyoukvjbxbbj';
 const MANAGED_URL = `https://${PROJECT}.supabase.co`;
-const MIGRATION = new URL('../../supabase/migrations/20261023100441_stats_prepared_charts_v1.sql', import.meta.url);
+export const PREPARED_QA_MIGRATION_PATHS = Object.freeze([
+  'supabase/migrations/20261023100441_stats_prepared_charts_v1.sql',
+  'supabase/migrations/20261023131347_stats_prepared_claim_membership_delete_predicate.sql',
+]);
+const ORIGINAL_MIGRATION_SHA256 = '286252e4620d906b21c2472a36773b45dbf3d6c42c6b5c44063e71ee65228fbd';
 const RPC_NAMES = ['get_stats_prepared_health_v1', 'get_stats_prepared_platform_chart_v1',
   'get_stats_prepared_visit_share_v1', 'claim_stats_prepared_work_v1', 'run_stats_prepared_step_v1',
   'get_stats_prepared_receipt_v1', 'finish_stats_prepared_work_v1'];
@@ -164,6 +168,24 @@ export function fixtureMigrationSql(bytes, schema, privateSchema) {
     .replaceAll('public.', `${schema}.`).replaceAll("'public'", literal(schema));
 }
 
+export function fixtureMigrationPlan(sources, schema, privateSchema) {
+  assert.deepEqual(sources.map(source => source.path), PREPARED_QA_MIGRATION_PATHS,
+    'exact ordered prepared migrations required');
+  return sources.map(({ path, bytes }, index) => {
+    assert.ok(Buffer.isBuffer(bytes), 'raw migration bytes required');
+    const sha256 = createHash('sha256').update(bytes).digest('hex');
+    if (index === 0) assert.equal(sha256, ORIGINAL_MIGRATION_SHA256, 'applied migration bytes must remain frozen');
+    return { path, sha256, bytes: bytes.length,
+      sql: fixtureMigrationSql(bytes.toString('utf8'), schema, privateSchema) };
+  });
+}
+
+export async function replayFixtureMigrations(plan, install) {
+  // Await each installation. Aliases may be read only after this whole replay
+  // succeeds; a correction failure must never expose the original claim as QA.
+  for (const { sql, ...receipt } of plan) await install(sql, receipt);
+}
+
 export function qaSqlFailureDiagnostic({ phase, status, result, query }) {
   assert.ok(SQL_PHASES.has(phase), 'unknown QA SQL phase');
   const diagnostic = { phase, status: Number.isInteger(status) && status >= 100 && status <= 599 ? status : null,
@@ -263,6 +285,13 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const event = JSON.parse(await readFile(env.GITHUB_EVENT_PATH, 'utf8'));
   validateQaCheckout({ expectedSha: options['--expected-sha'], checkoutSha,
     eventName: env.GITHUB_EVENT_NAME, event, githubSha: env.GITHUB_SHA });
+  if (mode !== 'cleanup') {
+    assert.equal(execFileSync('git', ['status', '--porcelain', '--untracked-files=all', '--',
+      ...PREPARED_QA_MIGRATION_PATHS, 'scripts/ci/stats-prepared-db-qa.mjs',
+      'scripts/ci/fixtures/stats-prepared-source.sql', 'scripts/shared/prepared-charts-*.mjs',
+      'scripts/universes/refresh-prepared-charts.mjs', 'scripts/universes/__tests__/prepared-charts*.test.mjs',
+      'types/stats-prepared.ts'], { encoding: 'utf8' }).trim(), '', 'QA source files must match checkout SHA');
+  }
   assert.equal(env.SUPABASE_URL ?? env.MANAGED_DEV_SUPABASE_URL, MANAGED_URL);
   const token = env.MANAGED_DEV_SUPABASE_ACCESS_TOKEN;
   const service = env.MANAGED_DEV_SUPABASE_SERVICE_ROLE ?? env.SUPABASE_SERVICE_ROLE;
@@ -345,13 +374,46 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const games = mode === 'benchmark' ? 100_000 : 1105;
   let claim; let sourceRows; let maximumStepMs = 0;
   try {
+    const migrations = fixtureMigrationPlan(await Promise.all(PREPARED_QA_MIGRATION_PATHS.map(async migrationPath => ({
+      path: migrationPath, bytes: await readFile(new URL(`../../${migrationPath}`, import.meta.url)),
+    }))), schema, privateSchema);
+    identity.migrations = migrations.map(({ sql, ...receipt }) => receipt);
+    // Compatibility only: final proof is the complete ordered two-file receipt.
+    identity.migrationSha256 = identity.migrations[0].sha256;
+    identity.installedMigrations = [];
+    await saveReceipt();
     await sql(`create schema ${schema}; grant usage on schema ${schema} to service_role;\n` +
       ['roblox_universes', 'stats_game_current_index', 'roblox_universe_stats_hourly', 'roblox_universe_stats_daily', 'revalidation_events']
         .map(table => `create table ${schema}.${table} (like public.${table} including all); grant select,insert,update,delete on ${schema}.${table} to service_role;`).join('\n'), 'source-clone');
-    const migrationBytes = await readFile(MIGRATION, 'utf8');
-    identity.migrationSha256 = createHash('sha256').update(migrationBytes).digest('hex');
-    const migration = fixtureMigrationSql(migrationBytes, schema, privateSchema);
-    await sql(migration, 'migration-install');
+    let originalClaim;
+    await replayFixtureMigrations(migrations, async (migration, receipt) => {
+      await sql(migration, 'migration-install');
+      identity.installedMigrations.push(receipt);
+      await saveReceipt();
+      const rows = await sql(`select p.oid::text oid,p.proowner::text owner,p.proacl::text acl,
+        p.prosecdef security_definer,p.provolatile volatility,p.proconfig settings,
+        pg_get_function_identity_arguments(p.oid) args,pg_get_function_result(p.oid) result,
+        has_function_privilege('service_role',p.oid,'EXECUTE') service_execute,
+        has_function_privilege('anon',p.oid,'EXECUTE') anon_execute,
+        has_function_privilege('authenticated',p.oid,'EXECUTE') authenticated_execute,
+        exists(select 1 from aclexplode(coalesce(p.proacl,acldefault('f',p.proowner))) a
+          where a.grantee=0 and a.privilege_type='EXECUTE') public_execute
+        from pg_proc p where p.oid=${literal(`${schema}.claim_stats_prepared_work_v1(text,uuid)`)}::regprocedure;`);
+      assert.equal(rows.length, 1);
+      const row = rows[0];
+      assert.equal(row.security_definer, false); assert.equal(row.volatility, 'v');
+      assert.equal(row.result, 'jsonb'); assert.equal(row.service_execute, true);
+      assert.equal(row.anon_execute, false); assert.equal(row.authenticated_execute, false);
+      assert.equal(row.public_execute, false);
+      if (!originalClaim) originalClaim = row;
+      else {
+        assert.deepEqual(row, originalClaim, 'claim replacement must preserve identity, owner, ACL, signature and settings');
+        identity.claimReplacementPreserved = true;
+        await saveReceipt();
+      }
+    });
+    assert.deepEqual(identity.installedMigrations, identity.migrations);
+    assert.equal(identity.claimReplacementPreserved, true);
     // Execute exact function bodies/settings through real PostgREST using unique
     // service-only aliases. All table/helper references still point at fixtures.
     for (const name of RPC_NAMES) {

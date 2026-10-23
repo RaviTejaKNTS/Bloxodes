@@ -228,7 +228,7 @@ export function cleanupSql(identity) {
         (${Object.values(identity.names).map(literal).join(',')}) loop
         if r.owner_marker is distinct from ${literal(marker(identity))}
           or r.relowner <> (select oid from pg_roles where rolname=current_user)
-          or r.relkind <> case when r.relname=${literal(oracle)} then 'v'::"char" else 'r'::"char" end
+          or r.relkind <> (case when r.relname=${literal(oracle)} then 'v'::"char" else 'r'::"char" end)
         then raise exception 'fixture_cleanup_ownership_mismatch'; end if;
       end loop;
     end $qa$;
