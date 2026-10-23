@@ -2,7 +2,6 @@ import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ToolFaq } from "@/components/tools/ToolFaq";
-import { ContentSlot } from "@/components/ContentSlot";
 import { MoreTools } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -18,7 +17,6 @@ export const revalidate = 3600;
 const TOOL_CODE = "roblox-username-generator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/${TOOL_CODE}`;
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
-const TOOL_AD_SLOT = "3529946151";
 
 export async function generateMetadata(): Promise<Metadata> {
   const tool = await getToolContentWithDevFallback(TOOL_CODE);
@@ -136,17 +134,10 @@ export default async function RobloxUsernameGeneratorPage() {
         className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6 journey-content-stream journey-content-stream--interactive"
       >
         {introNodes}
-        <div className="not-prose mt-8">
+        <div className="ads-tools-widget not-prose mt-8">
           <RobloxUsernameGeneratorClient />
         </div>
         {howNodes}
-        <ContentSlot
-          slot={TOOL_AD_SLOT}
-          className="my-8 w-full"
-          adLayout={null}
-          adFormat="auto"
-          fullWidthResponsive
-        />
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
         {faqNodes.length ? (
           <ToolFaq
@@ -164,14 +155,6 @@ export default async function RobloxUsernameGeneratorPage() {
           <CommentsSection entityType="tool" entityId={tool.id} />
         </div>
       ) : null}
-
-      <ContentSlot
-        slot={TOOL_AD_SLOT}
-        className="mt-8 w-full"
-        adLayout={null}
-        adFormat="auto"
-        fullWidthResponsive
-      />
       <MoreTools excludeCode={TOOL_CODE} />
     </ToolPageLayout>
   );

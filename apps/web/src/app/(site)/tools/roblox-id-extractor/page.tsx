@@ -4,7 +4,6 @@ import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
 import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { getToolContentWithDevFallback } from "@/lib/tools";
-import { ContentSlot } from "@/components/ContentSlot";
 import { RobloxIdExtractorClient } from "./RobloxIdExtractorClient";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
@@ -18,7 +17,6 @@ export const revalidate = 21600;
 const TOOL_CODE = "roblox-id-extractor";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/${TOOL_CODE}`;
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
-const TOOL_AD_SLOT = "3529946151";
 
 export async function generateMetadata(): Promise<Metadata> {
   const tool = await getToolContentWithDevFallback(TOOL_CODE);
@@ -144,37 +142,16 @@ export default async function RobloxIdExtractorPage() {
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6 journey-content-stream journey-content-stream--interactive">
         {introNodes ? introNodes : null}
-        <ContentSlot
-          slot={TOOL_AD_SLOT}
-          className="mt-8 w-full"
-          adLayout={null}
-          adFormat="auto"
-          fullWidthResponsive
-        />
-        <div className="mt-8">
+        <div className="ads-tools-widget mt-8">
           <RobloxIdExtractorClient />
         </div>
         {howNodes ? howNodes : null}
-        <ContentSlot
-          slot={TOOL_AD_SLOT}
-          className="my-8 w-full"
-          adLayout={null}
-          adFormat="auto"
-          fullWidthResponsive
-        />
         {(descriptionNodes.length || faqNodes.length) ? (
           <>
           {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
 
           {faqNodes.length ? (
             <>
-              <ContentSlot
-                slot={TOOL_AD_SLOT}
-                className="w-full"
-                adLayout={null}
-                adFormat="auto"
-                fullWidthResponsive
-              />
               <ToolFaq
                 items={faqNodes.map((faq, idx) => ({
                   id: `${faq.q}-${idx}`,
@@ -193,14 +170,6 @@ export default async function RobloxIdExtractorPage() {
           <CommentsSection entityType="tool" entityId={tool.id} />
         </div>
       ) : null}
-
-      <ContentSlot
-        slot={TOOL_AD_SLOT}
-        className="mt-8 w-full"
-        adLayout={null}
-        adFormat="auto"
-        fullWidthResponsive
-      />
       <MoreTools excludeCode="roblox-id-extractor" />
     </ToolPageLayout>
   );

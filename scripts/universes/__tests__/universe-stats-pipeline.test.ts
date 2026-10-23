@@ -360,3 +360,15 @@ test("VPS worker promotion is exact-SHA, smoke-gated, and recoverable", () => {
   assert.match(runner, /production image failed smoke/);
   assert.match(runner, /restored last-known-good worker image/);
 });
+
+test("wiki passes have a daily worker refresh independent of stats tier freshness", () => {
+  const cron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
+  const lines = cron.split("\n").filter(line => line.includes(" wiki-game-passes-refresh "));
+  assert.equal(lines.length, 1);
+  assert.match(lines[0], /^18 3 \* \* \*/);
+  assert.match(lines[0], /JOB_LOCK_GROUP=roblox-universe-discovery/);
+  assert.match(lines[0], /JOB_TIMEOUT_SECONDS=600/);
+  assert.match(lines[0], /JOB_LOCK_WAIT_SECONDS=300/);
+  assert.match(lines[0], /refresh:wiki-game-passes -- --allow-live/);
+  assert.doesNotMatch(lines[0], /roblox-universe-refresh|enrich:universes:deep/);
+});

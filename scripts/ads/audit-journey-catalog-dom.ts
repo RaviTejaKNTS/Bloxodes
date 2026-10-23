@@ -158,11 +158,18 @@ function auditPage(snapshot: PageSnapshot) {
     failures.push("manual Mediavine content hints are present and would disable automatic placement");
   }
 
-  if (new URL(snapshot.responseUrl).pathname.startsWith("/catalog")) {
+  const widgets = $(".ads-tools-widget");
+  if (widgets.length || /^\/(?:catalog|tools|gta\/maps|minecraft\/tools)(?:\/|$)/.test(new URL(snapshot.responseUrl).pathname)) {
     const sidebar = $("aside.space-y-4");
-    if (sidebar.length !== 1 || !sidebar.parent().hasClass("content-sidebar-grid") || sidebar.parents("#article-body").length) {
-      failures.push("catalog sidebar must be one direct grid child outside the article body");
+    if (sidebar.length !== 1 || !sidebar.is("aside#sidebar") || $("aside#sidebar").length !== 1 || !sidebar.parent().hasClass("content-sidebar-grid") || sidebar.parents("#article-body").length) {
+      failures.push("sidebar must be one direct grid child outside the article body");
     }
+  }
+  if (content.find(".gta-map-app, [aria-label='Interactive map']").length) {
+    failures.push("interactive map state is inside the article ad stream");
+  }
+  if (widgets.length && (widgets.length !== 1 || !widgets.is("div") || !widgets.parent().is("#article-body"))) {
+    failures.push("live tool must use one stable div directly inside article-body");
   }
 
   const title = $("head title").text().trim();
@@ -322,6 +329,10 @@ async function main() {
     "/checklists",
     "/quizzes",
     "/tools",
+    "/tools/roblox-username-generator",
+    "/gta/maps",
+    "/gta/maps/gta5",
+    "/minecraft/tools",
     "/events",
     "/authors",
     "/wiki",
@@ -385,6 +396,8 @@ async function main() {
     { root: "/wiki", prefix: "/wiki/" },
     { root: "/puzzles", prefix: "/puzzles/" },
     { root: "/tools", prefix: "/tools/" },
+    { root: "/gta/maps", prefix: "/gta/maps/" },
+    { root: "/minecraft/tools", prefix: "/minecraft/tools/" },
     { root: "/authors", prefix: "/authors/" },
     { root: "/stats/reports", prefix: "/stats/reports/" },
     { root: "/codes", prefix: "/codes/" },

@@ -1,3 +1,4 @@
+import { MapViewport } from "@/components/maps/MapViewport";
 import { getGameLandingForLinks } from "@/lib/game-landing";
 import { gameBreadcrumbs } from "@/lib/game-root-page";
 import { getGameExtendedPage } from "@/lib/game-extra-pages";
@@ -101,8 +102,7 @@ export default async function GtaInteractiveMapPage({ params }: PageProps) {
   return (
     <div className="gta-map-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <GtaInteractiveMap map={data} />
-      <GtaMapGuide canonicalPath={data.config.route} title={data.config.mapTitle} heading={"About " + data.config.title}>
+      <GtaMapGuide map={<MapViewport><GtaInteractiveMap map={data} /></MapViewport>} canonicalPath={data.config.route} title={data.config.mapTitle} heading={"About " + data.config.title}>
         <p>{data.config.description}</p>
         <p>{data.config.mappedPointCount.toLocaleString()} locations span {data.layers.length} map layers.</p>
 

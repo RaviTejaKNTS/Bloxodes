@@ -1,6 +1,6 @@
 # Stats
 
-Last verified: 2026-10-20
+Last verified: 2026-10-23
 
 Live Roblox game stats at `/stats` (players, visits, ranks, risers, genres, creators) and the monthly Roblox reports. Metric meanings and chart rules are in [stats metrics](stats-metrics.md).
 
@@ -26,6 +26,7 @@ rank snapshots -> current read indexes
 | Daily rollup, hourly prune, audit | VPS | 00:02 |
 | Platform aggregates | VPS | 01:05 |
 | Worker ledger reconcile | VPS | 00:10 |
+| Wiki game passes | VPS | 03:18 daily |
 
 Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:new|hot|warm|cold` (`update-universe-hourly-stats.ts`), `discover:universes:priority`, `stats:rank:hourly`, `stats:index:refresh`, `stats:rollup-daily`, `stats:platform:refresh`, `stats:prune-hourly` and `stats:audit`. Every run is recorded in `stats_job_runs`.
 
@@ -34,6 +35,18 @@ Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:ne
 **Single-game import:** `enrich-roblox-universes.ts` also exports `previewRobloxUniverse` (fetch and map, no write) and `importRobloxUniverse`, which `content:publish` uses to add one missing `roblox_universes` row before publishing a wiki. Both reuse the enrichment fetcher and mapper; the import never overwrites an existing row.
 
 **Reads:** `apps/web/src/lib/stats.ts`. Public pages hide player values older than 24 hours, so a fresh index alone doesn't mean fresh data.
+
+## Wiki game passes
+
+The Game Passes section on wiki hubs (and the mobile API) reads `roblox_universe_gamepasses`. The NEW/HOT/WARM/COLD tiers don't touch it.
+
+- **Daily refresh:** `refresh:wiki-game-passes` (`scripts/universes/refresh-wiki-game-passes.ts`) covers every published wiki hub's universe, whatever its tier. It reads the full pass list (`passView=Full`, which includes prices) and fetches icons 100 at a time. No other enrichment runs.
+- **Light on purpose:** one Roblox request start per second, two pass lists at a time, 15-second attempts, at most 3 attempts per request, an 8-minute run deadline. Work left when the deadline hits is recorded as deferred, not retried. About 140 requests for 130 hubs.
+- **Safe writes:** upsert by `pass_id`, then remove passes Roblox no longer lists, only after a complete successful fetch for that universe. A failed or partial fetch keeps the stored rows. An unchanged icon keeps its stored URL when Roblox hasn't finished the new thumbnail; price and sale status still update.
+- **Ledger:** each run is a `wiki_game_passes_refresh` row in `stats_job_runs` with refreshed, failed and deferred universe IDs. A partial run exits nonzero. Existing wiki revalidation triggers refresh the pages.
+- **Pages:** only on-sale passes show, with their price, and the section hides when none are on sale. Remote icons (passes, badges, developer and stats game icons) swap to a neutral placeholder when the image fails, including before hydration.
+- **Related games:** developer games and stats "similar games" need at least 1 current player or 100,000 visits, so dead places stay out.
+- **Deep enrichment** (`enrich:universes:deep`) uses the same pass refresh. A failed stage (passes, badges, servers, social links, groups) no longer stops the others; the run fails once at the end, and `last_deep_enriched_at` moves only for universes whose stages all succeeded.
 
 ## The stats worker
 
@@ -44,7 +57,7 @@ All VPS stats and data jobs run in short-lived `bloxodes-stats-worker:production
 - `bin/run-job.sh` (`scripts/ops/vps-run-job.sh`) repeats the smoke before every job and falls back to `last-known-good` if needed. It also handles locks, timeouts, state files and logs under `/home/ravitejaknts/bloxodes-stats-worker/logs`.
 - Northflank rebuilds only when worker runtime paths change (Dockerfile, package manifests, `scripts/`, needed web source, `types/`, `data/`, `env/config.json`).
 
-The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is `2d78a083dbac97402f666bb99e14afd5930fc223`.
+The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is `ebc851d06a647985e502a203117ede9e0c12c9a1` (promoted 2026-10-23).
 
 A worker change is done only when the Northflank build succeeds, one HOT run succeeds, the VPS image is promoted, and a VPS job plus index rebuild move production health forward.
 

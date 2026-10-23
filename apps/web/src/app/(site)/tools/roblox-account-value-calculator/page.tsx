@@ -2,7 +2,6 @@ import { ToolPageLayout } from "@/components/tools/ToolPageLayout";
 import type { Metadata } from "next";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ToolFaq } from "@/components/tools/ToolFaq";
-import { ContentSlot } from "@/components/ContentSlot";
 import { MoreTools } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -18,7 +17,6 @@ export const revalidate = 3600;
 const TOOL_CODE = "roblox-account-value-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/${TOOL_CODE}`;
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
-const TOOL_AD_SLOT = "3529946151";
 const FALLBACK_TITLE = "Roblox Account Value & Inventory Calculator";
 const FALLBACK_DESCRIPTION =
   "Check a Roblox username's public collectible RAP, then add optional self-entered Robux. Clear profile value, never an account sale price.";
@@ -111,16 +109,16 @@ export default async function RobloxAccountValueCalculatorPage() {
       </header>
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6 journey-content-stream journey-content-stream--interactive">
         {introNodes}
-        <div className="not-prose mt-8"><RobloxAccountValueCalculatorClient /></div>
+        <div className="ads-tools-widget not-prose mt-8">
+          <RobloxAccountValueCalculatorClient />
+        </div>
         {howNodes}
-        <ContentSlot slot={TOOL_AD_SLOT} className="my-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
         {faqNodes.length ? (
           <ToolFaq items={faqNodes.map((faq, index) => ({ id: `${faq.q}-${index}`, question: faq.q, answer: faq.nodes }))} />
         ) : null}
       </section>
       {tool?.id ? <div className="mt-10"><CommentsSection entityType="tool" entityId={tool.id} /></div> : null}
-      <ContentSlot slot={TOOL_AD_SLOT} className="mt-8 w-full" adLayout={null} adFormat="auto" fullWidthResponsive />
       <MoreTools excludeCode={TOOL_CODE} />
     </ToolPageLayout>
   );

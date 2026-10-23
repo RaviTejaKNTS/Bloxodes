@@ -48,7 +48,6 @@ export function CatalogSelectNav({
           behavior: "smooth",
           block: "start"
         });
-        window.history.replaceState(null, "", option.href ?? `#${option.targetId}`);
         event.currentTarget.value = "";
         return;
       }
