@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { RemoteIcon } from "@/components/RemoteIcon";
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
 import {
@@ -92,23 +93,11 @@ export function StatsPageShell({ children }: { children: ReactNode }) {
 }
 
 function gameImage(game: Pick<StatsGame, "iconUrl" | "name">, size = 44, loading: "eager" | "lazy" = "lazy") {
-  if (!game.iconUrl) {
-    return (
-      <span className="flex shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-sm font-semibold text-muted" style={{ width: size, height: size }}>
-        {game.name.charAt(0)}
-      </span>
-    );
-  }
   return (
-    <Image
-      src={game.iconUrl}
-      alt={`${game.name} icon`}
-      width={size}
-      height={size}
-      loading={loading}
-      className="shrink-0 rounded-md border border-border/70 object-cover"
-      style={{ width: size, height: size }}
-    />
+    <span className="flex shrink-0 items-center justify-center overflow-hidden rounded-md border border-border/70 bg-background text-sm font-semibold text-muted" style={{ width: size, height: size }}>
+      <RemoteIcon src={game.iconUrl} alt={`${game.name} icon`} size={size} loading={loading}
+        className="h-full w-full object-cover" fallback={game.name.charAt(0)} />
+    </span>
   );
 }
 

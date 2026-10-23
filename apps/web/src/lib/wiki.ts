@@ -22,6 +22,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import type { QuizListEntry } from "@/lib/quizzes";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
+import { isUsefulRelatedRobloxGame } from "@/lib/roblox-related-games";
 import { currentPlayingValue } from "@/lib/stats-freshness";
 
 const WIKI_REVALIDATE_SECONDS = 3600;
@@ -448,7 +449,7 @@ async function listWikiGamePassesByUniverseId(universeId: number, limit = 8): Pr
         .from("roblox_universe_gamepasses")
         .select("pass_id, name, description, price, is_for_sale, sales, icon_image_url")
         .eq("universe_id", universeId)
-        .order("is_for_sale", { ascending: false, nullsFirst: false })
+        .eq("is_for_sale", true)
         .order("price", { ascending: true, nullsFirst: false })
         .limit(limit);
 
@@ -503,6 +504,7 @@ async function listOtherWikiDeveloperGames(
         .select("universe_id, root_place_id, name, display_name, slug, icon_url, playing, visits, last_playing_refreshed_at")
         .eq("creator_id", creatorId)
         .neq("universe_id", universeId)
+        .or("playing.gte.1,visits.gte.100000")
         .order("visits", { ascending: false, nullsFirst: false })
         .limit(limit);
 
@@ -510,7 +512,7 @@ async function listOtherWikiDeveloperGames(
       return ((data ?? []) as WikiDeveloperGame[]).map((game) => ({
         ...game,
         playing: currentPlayingValue(game.playing, game.last_playing_refreshed_at)
-      }));
+      })).filter(game => isUsefulRelatedRobloxGame(game.playing, game.visits));
     },
     [`wiki-developer-games:${universeId}:${creatorId}:${limit}`],
     {
