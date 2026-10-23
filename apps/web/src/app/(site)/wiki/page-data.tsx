@@ -1,4 +1,5 @@
 import { getControlDeviceColumns, parseControls, WikiControlsTable } from "@/components/wiki/WikiControls";
+import { RemoteIcon } from "@/components/RemoteIcon";
 import { PageSidebar } from "@/components/PageSidebar";
 import Image from "next/image";
 import Link from "next/link";
@@ -838,7 +839,7 @@ function WikiSidebarImage({ image, fallback }: { image?: string | null; fallback
   return (
     <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-border/60 bg-surface-muted text-muted">
       {imageSrc ? (
-        <Image src={imageSrc} alt="" fill sizes="40px" className="object-cover" />
+        <RemoteIcon src={imageSrc} alt="" size={40} className="h-full w-full object-cover" fallback={fallback} />
       ) : (
         fallback
       )}
@@ -1034,13 +1035,12 @@ function DeveloperGameCards({
             >
               <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border/60 bg-surface-muted">
                 {imageSrc ? (
-                  <Image
+                  <RemoteIcon
                     src={imageSrc}
                     alt={`${title} icon`}
-                    fill
-                    sizes="64px"
-                    className="object-cover transition duration-200 group-hover:scale-[1.03]"
-                    unoptimized
+                    size={64}
+                    className="h-full w-full object-cover transition duration-200 group-hover:scale-[1.03]"
+                    fallback={<span className="text-lg font-semibold text-muted">{title.charAt(0).toUpperCase() || "G"}</span>}
                   />
                 ) : (
                   <span className="text-lg font-semibold text-muted">{title.charAt(0).toUpperCase() || "G"}</span>

@@ -68,7 +68,7 @@ const families = [
 ] as const;
 
 beforeEach(() => { vi.clearAllMocks(); vi.spyOn(console, "error").mockImplementation(() => {}); });
-afterEach(() => vi.restoreAllMocks());
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllEnvs(); });
 
 describe.each([
   { name: "main decals", size: DECAL_IDS_PAGE_SIZE, render: (page: string) => DecalPage({ params: Promise.resolve({ page }) }) },
@@ -215,6 +215,22 @@ describe("mesh failure and pagination behavior", () => {
     database({ roblox_mesh_ids: [] });
     await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("unexpectedly empty");
     expect(await loadRobloxMeshIdsPageData(1, { query: "missing" })).toEqual({ meshes: [], total: 0, totalPages: 1 });
+  });
+  it("allows an empty mesh catalog only during the production build", async () => {
+    database({ roblox_mesh_ids: [] });
+    vi.stubEnv("NEXT_PHASE", "phase-production-build");
+    expect(await loadRobloxMeshIdsPageData(1)).toEqual({ meshes: [], total: 0, totalPages: 1 });
+    vi.stubEnv("NEXT_PHASE", "phase-production-server");
+    await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("unexpectedly empty");
+  });
+  it("contains mesh database/client failures only during the production build", async () => {
+    vi.stubEnv("NEXT_PHASE", "phase-production-build");
+    database({}, new Error("database unavailable"));
+    expect(await loadRobloxMeshIdsPageData(1)).toEqual({ meshes: [], total: 0, totalPages: 1 });
+    mocks.admin.mockImplementation(() => { throw new Error("client unavailable"); });
+    expect(await loadRobloxMeshIdsPageData(1)).toEqual({ meshes: [], total: 0, totalPages: 1 });
+    vi.stubEnv("NEXT_PHASE", "phase-production-server");
+    await expect(loadRobloxMeshIdsPageData(1)).rejects.toThrow("client unavailable");
   });
   it("rejects PGRST103 at offset zero and catches client creation failures", async () => {
     const failure = { code: "PGRST103", details: "An offset of 0 was requested, but there are only 0 rows." };

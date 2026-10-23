@@ -11,6 +11,9 @@ const requiredRuntimeFiles = [
   "scripts/shared/env-files.ts",
   "scripts/shared/load-env.ts",
   "scripts/universes/update-universe-hourly-stats.ts",
+  "scripts/universes/refresh-wiki-game-passes.ts",
+  "scripts/universes/game-passes.ts",
+  "scripts/universes/game-pass-http.ts",
   "scripts/universes/audit-universe-stats-workflow.ts",
   "scripts/codes/update-codes.ts",
   "scripts/catalog/enrich-roblox-catalog-items.ts",
@@ -44,6 +47,7 @@ async function checkRuntimeModules() {
   // Load helpers without invoking side-effectful script entrypoints.
   await Promise.all([
     import("../items/catalog-refresh-ack"),
+    import("../universes/refresh-wiki-game-passes"),
     import("../../apps/web/src/lib/scraper"),
     import("marked"),
   ]);

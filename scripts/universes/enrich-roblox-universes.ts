@@ -6,11 +6,11 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
 import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
 import { isStatsTier, type StatsTier } from "./stats-tier";
+import { refreshGamePasses } from "./game-passes";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
 const GAME_ICONS_API = "https://thumbnails.roblox.com/v1/games/icons";
 const GAME_THUMBS_API = "https://thumbnails.roblox.com/v1/games/multiget/thumbnails";
-const GAME_PASSES_API = (universeId: number) => `https://apis.roblox.com/game-passes/v1/universes/${universeId}/game-passes`;
 const BADGES_API = (universeId: number) => `https://badges.roblox.com/v1/universes/${universeId}/badges`;
 const PLACE_SERVERS_API = (placeId: number) => `https://games.roblox.com/v1/games/${placeId}/servers/Public`;
 const ASSET_THUMBNAILS_API = "https://thumbnails.roblox.com/v1/assets";
@@ -120,24 +120,6 @@ type ThumbnailResponse = {
       [key: string]: unknown;
     }>;
   }>;
-};
-
-type GamePass = {
-  id: number;
-  productId?: number;
-  name?: string;
-  displayName?: string;
-  description?: string;
-  displayDescription?: string;
-  price?: number;
-  isForSale?: boolean;
-  sales?: number;
-  created?: string;
-  updated?: string;
-  iconImageId?: number;
-  displayIconImageId?: number;
-  displayIconImageAssetId?: number;
-  [key: string]: unknown;
 };
 
 type Badge = {
@@ -482,9 +464,7 @@ async function syncGroups(
     return 0;
   }
   const rows = await fetchGroupRows(groupIds);
-  if (!rows.length) {
-    return 0;
-  }
+  if (rows.length !== groupIds.length) throw new Error("Incomplete required group details");
   const { error } = await supabase.from("roblox_groups").upsert(rows, { onConflict: "group_id" });
   if (error) throw error;
   return rows.length;
@@ -692,7 +672,7 @@ function chunkArray<T>(items: T[], size: number): T[][] {
   return chunks;
 }
 
-async function fetchAssetThumbnails(assetIds: number[]): Promise<Map<number, string>> {
+async function fetchAssetThumbnails(assetIds: number[], fetcher = fetchJson): Promise<Map<number, string>> {
   const uniqueIds = Array.from(new Set(assetIds.filter((id) => Number.isSafeInteger(id) && id > 0)));
   const thumbnails = new Map<number, string>();
   for (const chunk of chunkArray(uniqueIds, 100)) {
@@ -703,79 +683,45 @@ async function fetchAssetThumbnails(assetIds: number[]): Promise<Map<number, str
       isCircular: "false"
     });
     try {
-      const data = await fetchJson(`${ASSET_THUMBNAILS_API}?${params}`, "asset thumbnails");
-      if (!Array.isArray(data?.data)) continue;
+      const data = await fetcher(`${ASSET_THUMBNAILS_API}?${params}`, "asset thumbnails");
+      if (!Array.isArray(data?.data)) throw new Error("Malformed badge thumbnails");
       for (const entry of data.data as Array<{ targetId?: number; imageUrl?: string; state?: string }>) {
         if (typeof entry.targetId === "number" && typeof entry.imageUrl === "string" && entry.imageUrl) {
           thumbnails.set(entry.targetId, entry.imageUrl);
         }
       }
     } catch (error) {
-      console.warn(`⚠️ Asset thumbnails failed for ${chunk.length} ids:`, (error as Error).message);
+      throw new Error(`Badge thumbnails failed for ${chunk.length} ids: ${String(error)}`);
     }
   }
   return thumbnails;
 }
 
-async function fetchGamePasses(universeId: number): Promise<GamePass[]> {
-  const results: GamePass[] = [];
-  let pageToken: string | null = null;
-  try {
-    do {
-      const params = new URLSearchParams({ limit: "100" });
-      if (pageToken) params.set("pageToken", pageToken);
-      const data = await fetchJson(`${GAME_PASSES_API(universeId)}?${params}`, "game passes");
-      if (Array.isArray(data?.gamePasses)) {
-        results.push(...(data.gamePasses as GamePass[]));
-      } else if (Array.isArray(data?.data)) {
-        results.push(...(data.data as GamePass[]));
-      }
-      pageToken =
-        typeof data?.nextPageToken === "string" && data.nextPageToken.length > 0
-          ? data.nextPageToken
-          : typeof data?.nextPageCursor === "string" && data.nextPageCursor.length > 0
-            ? data.nextPageCursor
-            : null;
-      if (pageToken) await sleep(200);
-    } while (pageToken);
-  } catch (error) {
-    console.warn(`⚠️ Game passes failed for ${universeId}:`, (error as Error).message);
-  }
-  return results;
-}
-
-async function fetchBadges(universeId: number): Promise<Badge[]> {
+async function fetchBadges(universeId: number, fetcher = fetchJson): Promise<Badge[]> {
   const results: Badge[] = [];
   let cursor: string | null = null;
-  try {
-    do {
-      const params = new URLSearchParams({ limit: "100" });
-      if (cursor) params.set("cursor", cursor);
-      const data = await fetchJson(`${BADGES_API(universeId)}?${params}`, "badges");
-      if (Array.isArray(data?.data)) {
-        results.push(...(data.data as Badge[]));
-      }
-      cursor = typeof data?.nextPageCursor === "string" && data.nextPageCursor.length > 0 ? data.nextPageCursor : null;
-      if (cursor) await sleep(200);
-    } while (cursor);
-  } catch (error) {
-    console.warn(`⚠️ Badges failed for ${universeId}:`, (error as Error).message);
-  }
+  const seen = new Set<string>();
+  do {
+    const params = new URLSearchParams({ limit: "100" });
+    if (cursor) params.set("cursor", cursor);
+    const data = await fetcher(`${BADGES_API(universeId)}?${params}`, "badges");
+    if (!Array.isArray(data?.data)) throw new Error(`Malformed badges for ${universeId}`);
+    results.push(...(data.data as Badge[]));
+    cursor = typeof data.nextPageCursor === "string" && data.nextPageCursor.length > 0 ? data.nextPageCursor : null;
+    if (cursor) {
+      if (seen.has(cursor)) throw new Error(`Repeated badge cursor for ${universeId}`);
+      seen.add(cursor);
+      await sleep(200);
+    }
+  } while (cursor);
   return results;
 }
 
-async function fetchPublicServers(placeId: number): Promise<PublicServer[]> {
-  try {
-    const params = new URLSearchParams({
-      limit: "10",
-      sortOrder: "Desc"
-    });
-    const data = await fetchJson(`${PLACE_SERVERS_API(placeId)}?${params}`, "public servers");
-    return Array.isArray(data?.data) ? (data.data as PublicServer[]) : [];
-  } catch (error) {
-    console.warn(`⚠️ Public servers failed for place ${placeId}:`, (error as Error).message);
-    return [];
-  }
+async function fetchPublicServers(placeId: number, fetcher = fetchJson): Promise<PublicServer[]> {
+  const params = new URLSearchParams({ limit: "10", sortOrder: "Desc" });
+  const data = await fetcher(`${PLACE_SERVERS_API(placeId)}?${params}`, "public servers");
+  if (!Array.isArray(data?.data)) throw new Error(`Malformed public servers for ${placeId}`);
+  return data.data as PublicServer[];
 }
 
 async function fetchGroupDetail(groupId: number): Promise<GroupRow | null> {
@@ -1265,32 +1211,43 @@ type AttachmentTarget = {
   rootPlaceId: number | null;
 };
 
-function getGamePassIconId(pass: GamePass): number | null {
-  return pass.iconImageId ?? pass.displayIconImageId ?? pass.displayIconImageAssetId ?? null;
-}
-
 function getBadgeIconId(badge: Badge): number | null {
   return badge.iconImageId ?? badge.displayIconImageId ?? null;
 }
 
-async function processAttachments(supabase: ReturnType<typeof supabaseAdmin>, targets: AttachmentTarget[]) {
+export type DeepStageFailure = { universeId: number; stage: string; error: unknown };
+
+async function collectDeepStage<T>(failures: DeepStageFailure[], ids: number[], stage: string, work: () => Promise<T>, fallback: T): Promise<T> {
+  try { return await work(); }
+  catch (error) {
+    failures.push(...ids.map(universeId => ({ universeId, stage, error })));
+    console.warn(`Deep ${stage} failed for ${ids.join(",")}:`, error);
+    return fallback;
+  }
+}
+
+export function throwDeepEnrichmentFailures(failures: DeepStageFailure[]) {
+  if (failures.length) {
+    throw new AggregateError(failures.map(failure => failure.error),
+      `Deep enrichment failed for ${[...new Set(failures.map(failure => failure.universeId))].join(",")}: ${failures.map(failure => `${failure.universeId}/${failure.stage}`).join(",")}`);
+  }
+}
+
+export async function processAttachments(supabase: ReturnType<typeof supabaseAdmin>, targets: AttachmentTarget[], fetcher = fetchJson) {
+  const failures: DeepStageFailure[] = [];
   if (!targets.length) {
-    return { passesCount: 0, badgesCount: 0, serversCount: 0 };
+    return { passesCount: 0, badgesCount: 0, serversCount: 0, failures };
   }
 
-  const passesByUniverse = new Map<number, GamePass[]>();
+  const passes = await refreshGamePasses(supabase, targets.map(target => target.universeId), fetcher);
+  failures.push(...[...passes.failed, ...passes.deferred].map(universeId => ({
+    universeId, stage: "passes", error: new Error(`Game pass refresh failed for ${universeId}`)
+  })));
   const badgesByUniverse = new Map<number, Badge[]>();
   const serversByUniverse = new Map<number, { placeId: number; servers: PublicServer[] }>();
 
   await promisePool(targets, ATTACHMENT_CONCURRENCY, async (target) => {
-    const [passes, badges] = await Promise.all([
-      fetchGamePasses(target.universeId),
-      fetchBadges(target.universeId)
-    ]);
-
-    if (passes?.length) {
-      passesByUniverse.set(target.universeId, passes);
-    }
+    const badges = await collectDeepStage<Badge[] | null>(failures, [target.universeId], "badges", () => fetchBadges(target.universeId, fetcher), null);
 
     if (badges?.length) {
       badgesByUniverse.set(target.universeId, badges);
@@ -1299,75 +1256,21 @@ async function processAttachments(supabase: ReturnType<typeof supabaseAdmin>, ta
 
   await promisePool(targets, SERVER_CONCURRENCY, async (target) => {
     if (!target.rootPlaceId) return;
-    const servers = await fetchPublicServers(target.rootPlaceId);
+    const servers = await collectDeepStage<PublicServer[] | null>(failures, [target.universeId], "servers", () => fetchPublicServers(target.rootPlaceId!, fetcher), null);
     if (target.rootPlaceId && servers?.length) {
       serversByUniverse.set(target.universeId, { placeId: target.rootPlaceId, servers });
     }
   });
 
   const assetIds: number[] = [];
-  for (const passes of passesByUniverse.values()) {
-    for (const pass of passes) {
-      const iconId = getGamePassIconId(pass);
-      if (iconId) assetIds.push(iconId);
-    }
-  }
   for (const badges of badgesByUniverse.values()) {
     for (const badge of badges) {
       const iconId = getBadgeIconId(badge);
       if (iconId) assetIds.push(iconId);
     }
   }
-  const assetThumbnails = await fetchAssetThumbnails(assetIds);
-
-  const passDeletes = Array.from(passesByUniverse.keys());
-  if (passDeletes.length) {
-    await supabase.from("roblox_universe_gamepasses").delete().in("universe_id", passDeletes);
-  }
-  const passRows: Array<{
-    pass_id: number;
-    universe_id: number;
-    product_id: number | null;
-    name: string | null;
-    description: string | null;
-    price: number | null;
-    is_for_sale: boolean | null;
-    sales: number | null;
-    icon_image_id: number | null;
-    icon_image_url: string | null;
-    created_at_api: string | null;
-    updated_at_api: string | null;
-    raw_payload: unknown;
-  }> = [];
-  for (const [universeId, passes] of passesByUniverse.entries()) {
-    for (const pass of passes) {
-      const iconId = getGamePassIconId(pass);
-      passRows.push({
-        pass_id: pass.id,
-        universe_id: universeId,
-        product_id: pass.productId ?? null,
-        name: pass.displayName ?? pass.name ?? null,
-        description: pass.displayDescription ?? pass.description ?? null,
-        price: pass.price ?? null,
-        is_for_sale: typeof pass.isForSale === "boolean" ? pass.isForSale : null,
-        sales: pass.sales ?? null,
-        icon_image_id: iconId,
-        icon_image_url: iconId ? assetThumbnails.get(iconId) ?? null : null,
-        created_at_api: pass.created ?? null,
-        updated_at_api: pass.updated ?? null,
-        raw_payload: pass
-      });
-    }
-  }
-  if (passRows.length) {
-    const { error } = await supabase.from("roblox_universe_gamepasses").insert(passRows);
-    if (error) throw error;
-  }
-
-  const badgeDeletes = Array.from(badgesByUniverse.keys());
-  if (badgeDeletes.length) {
-    await supabase.from("roblox_universe_badges").delete().in("universe_id", badgeDeletes);
-  }
+  const badgeIconUniverses = [...badgesByUniverse].filter(([, badges]) => badges.some(badge => getBadgeIconId(badge))).map(([id]) => id);
+  const assetThumbnails = await collectDeepStage(failures, badgeIconUniverses, "badge thumbnails", () => fetchAssetThumbnails(assetIds, fetcher), new Map<number, string>());
   const badgeRows: Array<{
     badge_id: number;
     universe_id: number;
@@ -1410,14 +1313,17 @@ async function processAttachments(supabase: ReturnType<typeof supabaseAdmin>, ta
       });
     }
   }
-  if (badgeRows.length) {
-    const { error } = await supabase.from("roblox_universe_badges").insert(badgeRows);
-    if (error) throw error;
-  }
-
-  const serverUniverseIds = Array.from(serversByUniverse.keys());
-  if (serverUniverseIds.length) {
-    await supabase.from("roblox_universe_place_servers").delete().in("universe_id", serverUniverseIds);
+  let badgesCount = 0;
+  for (const universeId of badgesByUniverse.keys()) {
+    if (failures.some(failure => failure.universeId === universeId && failure.stage === "badge thumbnails")) continue;
+    badgesCount += await collectDeepStage(failures, [universeId], "badge save", async () => {
+      const { error: deleteError } = await supabase.from("roblox_universe_badges").delete().eq("universe_id", universeId);
+      if (deleteError) throw deleteError;
+      const rows = badgeRows.filter(row => row.universe_id === universeId);
+      const { error } = await supabase.from("roblox_universe_badges").insert(rows);
+      if (error) throw error;
+      return rows.length;
+    }, 0);
   }
   const fetchedAt = nowIso();
   const serverRows: Array<{
@@ -1449,22 +1355,31 @@ async function processAttachments(supabase: ReturnType<typeof supabaseAdmin>, ta
       });
     }
   }
-  if (serverRows.length) {
-    const { error } = await supabase.from("roblox_universe_place_servers").insert(serverRows);
-    if (error) throw error;
+  let serversCount = 0;
+  for (const universeId of serversByUniverse.keys()) {
+    serversCount += await collectDeepStage(failures, [universeId], "server save", async () => {
+      const { error: deleteError } = await supabase.from("roblox_universe_place_servers").delete().eq("universe_id", universeId);
+      if (deleteError) throw deleteError;
+      const rows = serverRows.filter(row => row.universe_id === universeId);
+      const { error } = await supabase.from("roblox_universe_place_servers").insert(rows);
+      if (error) throw error;
+      return rows.length;
+    }, 0);
   }
 
   return {
-    passesCount: passRows.length,
-    badgesCount: badgeRows.length,
-    serversCount: serverRows.length
+    passesCount: passes.passesCount,
+    badgesCount,
+    serversCount,
+    failures
   };
 }
 
-async function processBatch(
+export async function processBatch(
   supabase: ReturnType<typeof supabaseAdmin>,
   universes: UniverseRow[],
-  mode: EnrichmentMode
+  mode: EnrichmentMode,
+  deps = { fetchUniverseMetadata, fetchGameDetails, fetchGameIcons, fetchGameThumbnails, upsertMedia, processAttachments, syncSocialLinks, syncGroups }
 ): Promise<{
   updatedGames: number;
   mediaRows: number;
@@ -1473,7 +1388,9 @@ async function processBatch(
   serversCount: number;
   socialLinksCount: number;
   groupsSynced: number;
+  failures: DeepStageFailure[];
 }> {
+  const failures: DeepStageFailure[] = [];
   if (!universes.length) {
     return {
       updatedGames: 0,
@@ -1482,18 +1399,20 @@ async function processBatch(
       badgesCount: 0,
       serversCount: 0,
       socialLinksCount: 0,
-      groupsSynced: 0
+      groupsSynced: 0,
+      failures
     };
   }
 
   const universeIds = universes.map((u) => u.universe_id);
   const [metadataMap, details] = await Promise.all([
-    mode === "deep" ? fetchUniverseMetadata(universeIds) : Promise.resolve(new Map<number, UniverseMetadata>()),
-    fetchGameDetails(universeIds)
+    mode === "deep" ? deps.fetchUniverseMetadata(universeIds) : Promise.resolve(new Map<number, UniverseMetadata>()),
+    deps.fetchGameDetails(universeIds)
   ]);
   const validDetails = details.filter((detail) => Number.isSafeInteger(detail.id) && detail.id > 0);
   const returnedIds = new Set(validDetails.map((detail) => detail.id));
   const missingIds = universeIds.filter((universeId) => !returnedIds.has(universeId));
+  if (mode === "deep") failures.push(...missingIds.map(universeId => ({ universeId, stage: "details", error: new Error(`Missing game details for ${universeId}`) })));
   if (missingIds.length) {
     const { error } = await supabase
       .from("roblox_universes")
@@ -1546,13 +1465,11 @@ async function processBatch(
       const mapped = mapGameDetail(detail, fallbackRoot, metadata);
       if (mapped) {
         mapped.last_light_enriched_at = enrichedAt;
-        if (mode === "deep") {
-          mapped.last_deep_enriched_at = enrichedAt;
-        }
       }
       return mapped;
     })
     .filter((value): value is NonNullable<typeof value> => value != null);
+  if (mode === "deep") failures.push(...missingRootIds.map(universeId => ({ universeId, stage: "root place", error: new Error(`Missing root place for ${universeId}`) })));
   const skipped = validDetails.length - upsertPayload.length;
   if (skipped > 0) {
     console.warn(
@@ -1568,20 +1485,23 @@ async function processBatch(
       .select("*")
       .in("universe_id", ids);
     if (existingError) throw existingError;
-  const existingArray = (existingRows as UniverseDbRow[] | null) ?? [];
-  existingMap = new Map(existingArray.map((row) => [row.universe_id, row]));
-}
+    const existingArray = (existingRows as UniverseDbRow[] | null) ?? [];
+    existingMap = new Map(existingArray.map((row) => [row.universe_id, row]));
+  }
 
-const mergedPayload = upsertPayload.map((payload) =>
-  mergeWithExistingValues(payload, existingMap.get(payload.universe_id))
-);
+  const mergedPayload = upsertPayload.map((payload) => {
+    const merged = mergeWithExistingValues(payload, existingMap.get(payload.universe_id));
+    // Freshness belongs to the final success update, including in light mode.
+    delete merged.last_deep_enriched_at;
+    return merged;
+  });
 
-if (mergedPayload.length) {
-  const { error } = await supabase.from("roblox_universes").upsert(mergedPayload, { onConflict: "universe_id" });
-  if (error) throw error;
-}
+  if (mergedPayload.length) {
+    const { error } = await supabase.from("roblox_universes").upsert(mergedPayload, { onConflict: "universe_id" });
+    if (error) throw error;
+  }
 
-const processedUniverseIds = mergedPayload.map((payload) => payload.universe_id);
+  const processedUniverseIds = mergedPayload.map((payload) => payload.universe_id);
 
   // Legacy escape hatch only. Daily public stats now come from hourly rollups.
   if (WRITE_LEGACY_DAILY_STATS && mergedPayload.length) {
@@ -1631,22 +1551,22 @@ const processedUniverseIds = mergedPayload.map((payload) => payload.universe_id)
     }
   }
 
-const [icons, thumbs] = await Promise.all([
-  fetchGameIcons(processedUniverseIds),
-  fetchGameThumbnails(processedUniverseIds)
-]);
-  const mediaStats = await upsertMedia(supabase, processedUniverseIds, icons, thumbs);
+  const [icons, thumbs] = await Promise.all([
+    deps.fetchGameIcons(processedUniverseIds),
+    deps.fetchGameThumbnails(processedUniverseIds)
+  ]);
+  const mediaStats = await deps.upsertMedia(supabase, processedUniverseIds, icons, thumbs);
 
   const attachments =
     mode === "deep"
-      ? await processAttachments(
+      ? await deps.processAttachments(
           supabase,
           mergedPayload.map((payload) => ({
             universeId: payload.universe_id,
             rootPlaceId: typeof payload.root_place_id === "number" ? payload.root_place_id : null
           }))
         )
-      : { passesCount: 0, badgesCount: 0, serversCount: 0 };
+      : { passesCount: 0, badgesCount: 0, serversCount: 0, failures: [] };
 
   const metadataUniverseIds = processedUniverseIds.filter((id) => metadataMap.has(id));
   const metadataSubset = new Map<number, UniverseMetadata>();
@@ -1657,8 +1577,21 @@ const [icons, thumbs] = await Promise.all([
     }
   }
 
-  const socialLinksCount = mode === "deep" ? await syncSocialLinks(supabase, metadataUniverseIds, metadataMap) : 0;
-  const groupsSynced = mode === "deep" ? await syncGroups(supabase, metadataSubset) : 0;
+  failures.push(...attachments.failures);
+  if (mode === "deep") {
+    for (const universeId of processedUniverseIds.filter(id => !metadataMap.has(id))) {
+      failures.push({ universeId, stage: "metadata", error: new Error(`Missing required Open Cloud metadata for ${universeId}`) });
+    }
+  }
+  const socialLinksCount = mode === "deep" ? await collectDeepStage(failures, metadataUniverseIds, "social links", () => deps.syncSocialLinks(supabase, metadataUniverseIds, metadataMap), 0) : 0;
+  const groupsSynced = mode === "deep" ? await collectDeepStage(failures, metadataUniverseIds, "groups", () => deps.syncGroups(supabase, metadataSubset), 0) : 0;
+  if (mode === "deep") {
+    const succeeded = processedUniverseIds.filter(id => !failures.some(failure => failure.universeId === id));
+    if (succeeded.length) await collectDeepStage(failures, succeeded, "freshness marker", async () => {
+      const { error } = await supabase.from("roblox_universes").update({ last_deep_enriched_at: nowIso() }).in("universe_id", succeeded);
+      if (error) throw error;
+    }, undefined);
+  }
 
   return {
     updatedGames: upsertPayload.length,
@@ -1667,8 +1600,27 @@ const [icons, thumbs] = await Promise.all([
     badgesCount: attachments.badgesCount,
     serversCount: attachments.serversCount,
     socialLinksCount,
-    groupsSynced
+    groupsSynced,
+    failures
   };
+}
+
+// Return partial stage failures so the caller can finish every page before
+// reporting one failing outcome. A pass failure never short-circuits a batch.
+export async function processEnrichmentBatches(
+  supabase: ReturnType<typeof supabaseAdmin>, universes: UniverseRow[], mode: EnrichmentMode, batchSize: number,
+  onBatch: (stats: Awaited<ReturnType<typeof processBatch>>, chunk: UniverseRow[], index: number) => void = () => {},
+  deps = { processBatch, pause: () => sleep(BATCH_DELAY_MS) }
+) {
+  const failures: DeepStageFailure[] = [];
+  for (let i = 0; i < universes.length; i += batchSize) {
+    const chunk = universes.slice(i, i + batchSize);
+    const stats = await deps.processBatch(supabase, chunk, mode);
+    failures.push(...stats.failures);
+    onBatch(stats, chunk, Math.floor(i / batchSize));
+    await deps.pause();
+  }
+  return failures;
 }
 
 function parseArgs() {
@@ -1774,6 +1726,7 @@ async function main() {
   let processed = 0;
   let pageOffset = 0;
   let pageIndex = 0;
+  const failures: DeepStageFailure[] = [];
 
   while (true) {
     const remaining = totalLimit > 0 ? Math.max(totalLimit - processed, 0) : SUPABASE_PAGE_LIMIT;
@@ -1788,18 +1741,13 @@ async function main() {
     const page = await fetchUniversePage(pageOffset, fetchSize, mode, tier, universeIds);
     if (!page.length) break;
 
-    for (let i = 0; i < page.length; i += batchSize) {
-      const chunk = page.slice(i, i + batchSize);
-      const stats = await processBatch(supabase, chunk, mode);
+    const selected = totalLimit > 0 ? page.slice(0, remaining) : page;
+    failures.push(...await processEnrichmentBatches(supabase, selected, mode, batchSize, (stats, chunk, batchIndex) => {
       processed += chunk.length;
       console.log(
-        ` • Page ${pageIndex + 1}, batch ${Math.floor(i / batchSize) + 1} — universes: ${chunk.length}, updated: ${stats.updatedGames}, media rows: ${stats.mediaRows}, passes: ${stats.passesCount}, badges: ${stats.badgesCount}, servers: ${stats.serversCount}, social: ${stats.socialLinksCount}, groups: ${stats.groupsSynced}`
+        ` • Page ${pageIndex + 1}, batch ${batchIndex + 1} — universes: ${chunk.length}, updated: ${stats.updatedGames}, media rows: ${stats.mediaRows}, passes: ${stats.passesCount}, badges: ${stats.badgesCount}, servers: ${stats.serversCount}, social: ${stats.socialLinksCount}, groups: ${stats.groupsSynced}, failed stages: ${stats.failures.length}`
       );
-      await sleep(BATCH_DELAY_MS);
-      if (totalLimit > 0 && processed >= totalLimit) {
-        break;
-      }
-    }
+    }));
 
     pageOffset += page.length;
     pageIndex += 1;
@@ -1817,6 +1765,7 @@ async function main() {
     return;
   }
 
+  throwDeepEnrichmentFailures(failures);
   console.log(`✅ Finished enriching ${processed} universes.`);
 }
 

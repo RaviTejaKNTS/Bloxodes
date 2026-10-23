@@ -68,47 +68,55 @@ export async function loadRobloxMeshIdsPageData(
   page: number,
   { query = "", sort = DEFAULT_MESH_SORT }: { query?: string; sort?: MeshSortKey } = {}
 ): Promise<MeshIdsPageData> {
-  const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
-  const normalizedQuery = normalizeMeshSearch(query);
-  const normalizedSort = normalizeMeshSort(sort);
-  const offset = (safePage - 1) * MESH_IDS_PAGE_SIZE;
-  const supabase = supabaseAdmin();
-  let request = supabase
-    .from("roblox_mesh_ids")
-    .select(SELECT_FIELDS, { count: "exact" })
-    .eq("status", "active")
-    .eq("thumbnail_state", "Completed")
-    .not("thumbnail_url", "is", null);
+  try {
+    const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+    const normalizedQuery = normalizeMeshSearch(query);
+    const normalizedSort = normalizeMeshSort(sort);
+    const offset = (safePage - 1) * MESH_IDS_PAGE_SIZE;
+    const supabase = supabaseAdmin();
+    let request = supabase
+      .from("roblox_mesh_ids")
+      .select(SELECT_FIELDS, { count: "exact" })
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null);
 
-  if (normalizedQuery) {
-    const filters = [
-      `name.ilike.${buildLoosePattern(normalizedQuery)}`,
-      `creator_name.ilike.${buildLoosePattern(normalizedQuery)}`
-    ];
-    if (/^\d+$/.test(normalizedQuery)) {
-      filters.unshift(
-        `asset_id.eq.${normalizedQuery}`,
-        `mesh_id.eq.${normalizedQuery}`,
-        `texture_id.eq.${normalizedQuery}`
-      );
+    if (normalizedQuery) {
+      const filters = [
+        `name.ilike.${buildLoosePattern(normalizedQuery)}`,
+        `creator_name.ilike.${buildLoosePattern(normalizedQuery)}`
+      ];
+      if (/^\d+$/.test(normalizedQuery)) {
+        filters.unshift(
+          `asset_id.eq.${normalizedQuery}`,
+          `mesh_id.eq.${normalizedQuery}`,
+          `texture_id.eq.${normalizedQuery}`
+        );
+      }
+      request = request.or(filters.join(","));
     }
-    request = request.or(filters.join(","));
-  }
 
-  const { data, error, count } = await applySort(request, normalizedSort).range(
-    offset,
-    offset + MESH_IDS_PAGE_SIZE - 1
-  );
-  const rangeTotal = catalogRangeTotal(error, offset, count);
-  if (rangeTotal !== null) return { meshes: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / MESH_IDS_PAGE_SIZE)) };
-  if (error) throw error;
-  const total = count ?? data?.length ?? 0;
-  if (!normalizedQuery && (total === 0 || (!data?.length && offset < total))) {
-    throw new Error("Roblox mesh catalog unexpectedly empty");
+    const { data, error, count } = await applySort(request, normalizedSort).range(
+      offset,
+      offset + MESH_IDS_PAGE_SIZE - 1
+    );
+    const rangeTotal = catalogRangeTotal(error, offset, count);
+    if (rangeTotal !== null) return { meshes: [], total: rangeTotal, totalPages: Math.max(1, Math.ceil(rangeTotal / MESH_IDS_PAGE_SIZE)) };
+    if (error) throw error;
+    const total = count ?? data?.length ?? 0;
+    if (!normalizedQuery && (total === 0 || (!data?.length && offset < total))) {
+      throw new Error("Roblox mesh catalog unexpectedly empty");
+    }
+    return {
+      meshes: (data ?? []) as RobloxMeshId[],
+      total,
+      totalPages: Math.max(1, Math.ceil(total / MESH_IDS_PAGE_SIZE))
+    };
+  } catch (error) {
+    if (process.env.NEXT_PHASE === "phase-production-build") {
+      console.error("Failed to load Roblox mesh IDs during build", error);
+      return { meshes: [], total: 0, totalPages: 1 };
+    }
+    throw error;
   }
-  return {
-    meshes: (data ?? []) as RobloxMeshId[],
-    total,
-    totalPages: Math.max(1, Math.ceil(total / MESH_IDS_PAGE_SIZE))
-  };
 }

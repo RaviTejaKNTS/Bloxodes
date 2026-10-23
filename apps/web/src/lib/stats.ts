@@ -1,4 +1,5 @@
 import "server-only";
+import { isUsefulRelatedRobloxGame } from "@/lib/roblox-related-games";
 import { formatAgeRating } from "@/lib/age-rating";
 import { supabaseAdmin } from "@/lib/supabase";
 import { slugify, statsUniverseSlug } from "@/lib/slug";
@@ -3843,12 +3844,12 @@ async function loadRelatedLinks(universeId: number, game: StatsGame): Promise<St
 async function loadSameCreatorGames(game: StatsGame): Promise<StatsGame[]> {
   if (!game.creatorId) return [];
   const { rows } = await listBaseGames({ limit: 6, sort: "playing" });
-  return attachGrowth(rows.filter((row) => row.creatorId === game.creatorId && row.universeId !== game.universeId).slice(0, 4));
+  return attachGrowth(rows.filter((row) => row.creatorId === game.creatorId && row.universeId !== game.universeId && isUsefulRelatedRobloxGame(row.playing, row.visits)).slice(0, 4));
 }
 
 async function loadSimilarGames(game: StatsGame): Promise<StatsGame[]> {
   const { rows } = await listBaseGames({ limit: 20, sort: "playing", genre: game.genre ?? undefined });
-  return attachGrowth(rows.filter((row) => row.universeId !== game.universeId).slice(0, 6));
+  return attachGrowth(rows.filter((row) => row.universeId !== game.universeId && isUsefulRelatedRobloxGame(row.playing, row.visits)).slice(0, 6));
 }
 
 export async function loadLatestRank(universeId: number): Promise<number | null> {
