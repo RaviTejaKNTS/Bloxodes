@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { load } from "cheerio";
 import { readFileSync, readdirSync } from "node:fs";
-import { fileURLToPath, URL } from "node:url";
+import { resolve } from "node:path";
 import ts from "typescript";
 import ProfilePage from "@/app/(site)/tools/roblox-profile-checker/page";
 import AccountValuePage from "@/app/(site)/tools/roblox-account-value-calculator/page";
@@ -81,7 +81,7 @@ it.each([1, 2])("keeps tool index page %i ad boundaries and a single rail", page
 
 // Cover every bespoke wrapper as well as the rendered shared-template tests.
 // Each client lives inside one stable direct-child div, or uses DedicatedToolPage.
-const toolsDir = fileURLToPath(new URL("../../../app/(site)/tools/", import.meta.url));
+const toolsDir = resolve(process.cwd(), "src/app/(site)/tools");
 const pages = readdirSync(toolsDir, { withFileTypes: true }).filter(entry => entry.isDirectory() && entry.name !== "page");
 describe("all Roblox tool page wrappers", () => {
   it.each(pages.map(entry => entry.name))("keeps %s client state inside a stable direct-child tool wrapper", directory => {
