@@ -1,6 +1,95 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { legacyVisitExpected, assertVisitParity, validateQaCheckout } from '../../ci/stats-prepared-db-qa.mjs';
+import { readFile } from 'node:fs/promises';
+import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigrationSql,
+  qaSqlFailureDiagnostic, qaReceiptWithPhases } from '../../ci/stats-prepared-db-qa.mjs';
+
+test('isolated migration moves schema references while retaining PUBLIC revocations and exact function bodies', async () => {
+  const source = await readFile(new URL('../../../supabase/migrations/20261023100441_stats_prepared_charts_v1.sql', import.meta.url), 'utf8');
+  const schema = 'qa_stats_012345abcdef', privateSchema = `${schema}_p`;
+  const isolated = fixtureMigrationSql(source, schema, privateSchema);
+  assert.ok(source.includes('from public,anon,authenticated'));
+  assert.equal(isolated.match(/from public,anon,authenticated/g).length,
+    source.match(/from public,anon,authenticated/g).length);
+  assert.ok(isolated.includes(`create schema ${privateSchema};`));
+  assert.ok(isolated.includes(`grant usage on schema ${privateSchema} to service_role;`));
+  assert.ok(isolated.includes(`create table ${schema}.stats_prepared_control (`));
+  assert.ok(isolated.includes(`after insert on ${schema}.roblox_universe_stats_hourly`));
+  assert.ok(isolated.includes(`execute function ${privateSchema}.stats_prepared_capture_v1('h')`));
+  assert.ok(isolated.includes(`schemaname='${schema}'`));
+  assert.ok(isolated.includes(`n.nspname in ('${schema}','${privateSchema}')`));
+  assert.ok(isolated.includes(`format('revoke all on table ${schema}.%I from public,anon,authenticated'`));
+  assert.doesNotMatch(isolated, /\bpublic\.|stats_prepared_private|'public'/);
+  // Namespace substitution is reversible; settings, algorithms and ACL roles
+  // must not acquire any other change in the isolated copy.
+  assert.equal(isolated.replaceAll(privateSchema, 'stats_prepared_private')
+    .replaceAll(`${schema}.`, 'public.').replaceAll(`'${schema}'`, "'public'"), source);
+});
+
+test('migration isolation refuses public, malformed and mismatched fixture namespaces', () => {
+  for (const [schema, privateSchema] of [['public', 'public'], ['qa_stats_012345ABCDEf', 'qa_stats_012345ABCDEf_p'],
+    ['qa_stats_012345abcdef;drop schema public', 'qa_stats_012345abcdef_p'],
+    ['qa_stats_012345abcdef', 'qa_stats_abcdef012345_p']]) {
+    assert.throws(() => fixtureMigrationSql('select 1;', schema, privateSchema));
+  }
+});
+
+test('SQL diagnostics retain only code, fixed phase, status and bounded numeric positions', () => {
+  const diagnostic = qaSqlFailureDiagnostic({ phase: 'migration-install', status: 400,
+    query: 'select 1;\nselect 2;\nselect 3;',
+    result: { code: '42703', position: '12', message: 'SQL with SECRET_VALUE',
+      details: 'SECRET_DETAILS', hint: 'SECRET_HINT', context: 'SECRET_CONTEXT', api_key: 'SECRET_KEY' } });
+  assert.deepEqual(diagnostic, { phase: 'migration-install', status: 400, sqlstate: '42703', position: 12 });
+  assert.doesNotMatch(JSON.stringify(diagnostic), /SECRET|select/);
+});
+
+test('Management API message-only and nested errors expose SQLSTATE without SQL or object names', () => {
+  const query = 'select 1;\nselect 2;\nselect 3;';
+  const message = 'Failed to run sql query: ERROR:  42P07: relation "SECRET_RELATION" already exists\nLINE 2: SECRET_SQL\nDETAIL: SECRET_VALUE';
+  for (const result of [{ message }, { message: message.replace('Failed to run sql query: ', '') },
+    { error: { message } }, { error: message }, message]) {
+    const diagnostic = qaSqlFailureDiagnostic({ phase: 'migration-install', status: 400, result, query });
+    assert.deepEqual(diagnostic, { phase: 'migration-install', status: 400, sqlstate: '42P07', reportedLine: 2 });
+    assert.doesNotMatch(JSON.stringify(diagnostic), /SECRET|relation|ERROR|select/);
+  }
+  assert.deepEqual(qaSqlFailureDiagnostic({ phase: 'source-clone', status: 400, query,
+    result: { error: { code: '42501', position: 2 } } }),
+    { phase: 'source-clone', status: 400, sqlstate: '42501', position: 2 });
+});
+
+test('SQL diagnostics discard unrecognized messages, malformed codes and out-of-query positions', () => {
+  for (const result of [null, [], { code: 'SECRET_TOKEN', position: '1; SECRET_SQL' },
+    { code: 'PGRST202', error: { message: 'SECRET ERROR: 42501: not a known envelope' } },
+    { message: 'Failed to run sql query: ERROR:  42601: SECRET_SQL\nLINE 999999: SECRET_SQL', position: '999999999' }]) {
+    const diagnostic = qaSqlFailureDiagnostic({ phase: 'migration-install', status: 400, result, query: 'select 1;' });
+    assert.deepEqual(diagnostic, { phase: 'migration-install', status: 400,
+      sqlstate: result?.message ? '42601' : 'unknown' });
+  }
+  assert.deepEqual(qaSqlFailureDiagnostic({ phase: 'cleanup', status: 'SECRET_STATUS', query: 'select 1;' }),
+    { phase: 'cleanup', status: null, sqlstate: 'unknown' });
+  assert.throws(() => qaSqlFailureDiagnostic({ phase: 'SECRET_PHASE', status: 400, query: '' }),
+    /unknown QA SQL phase/);
+});
+
+test('explicit cleanup retains setup failure and prior phases across repeated receipt writes', () => {
+  const clone = { kind: 'sql', phase: 'source-clone', ms: 10, ok: true, status: 200 };
+  const failure = { kind: 'sql', phase: 'migration-install', ms: 20, ok: false, status: 400, sqlstate: '42703' };
+  const cleanup = { kind: 'sql', phase: 'cleanup', ms: 5, ok: true, status: 200 };
+  const first = qaReceiptWithPhases({ completed: false, cleaned: true, sqlFailure: failure }, [clone, failure, cleanup]);
+  const explicit = qaReceiptWithPhases(first, [cleanup]);
+  const retried = qaReceiptWithPhases(explicit, [cleanup]);
+  assert.deepEqual(first.phases, [clone, failure, cleanup]);
+  assert.deepEqual(explicit.phases, [clone, failure, cleanup, cleanup]);
+  assert.deepEqual(retried.phases, [clone, failure, cleanup, cleanup, cleanup]);
+  assert.deepEqual(retried.sqlFailure, failure);
+  assert.equal(retried.completed, false); assert.equal(retried.cleaned, true);
+  const cleanupFailure = { ...failure, phase: 'cleanup', sqlstate: '55P03' };
+  const failedCleanup = qaReceiptWithPhases({ ...explicit, cleaned: false, cleanupSqlFailure: cleanupFailure }, [cleanupFailure]);
+  assert.deepEqual(failedCleanup.sqlFailure, failure);
+  assert.deepEqual(failedCleanup.cleanupSqlFailure, cleanupFailure);
+  assert.deepEqual(failedCleanup.phases, [clone, failure, cleanup, cleanup, cleanupFailure]);
+  assert.equal(failedCleanup.cleaned, false);
+});
 
 const row = (date, key, visits, denominator, games, rank, universe = null) => ({ stat_date: date,
   bucket_key: key, visit_delta: String(visits), denominator_visit_delta: String(denominator),

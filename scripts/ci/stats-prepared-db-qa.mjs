@@ -18,6 +18,49 @@ const ident = value => { assert.match(value, /^[a-z][a-z0-9_]{0,62}$/); return v
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 const bigint = value => BigInt(String(value));
 const percentage = (part, total) => total === 0n ? 0 : Math.round(Number(part) / Number(total) * 10000) / 100;
+const SQL_PHASES = new Set(['source-clone', 'migration-install', 'alias-read', 'alias-install',
+  'alias-acl-timeout', 'fixture-checks', 'cleanup']);
+const sqlstate = value => typeof value === 'string' && /^[A-Z0-9]{5}$/.test(value) ? value : null;
+const rpcErrorCode = value => sqlstate(value) ??
+  (typeof value === 'string' && /^PGRST[0-9]{3}$/.test(value) ? value : 'unknown');
+
+export function fixtureMigrationSql(bytes, schema, privateSchema) {
+  assert.match(schema, /^qa_stats_[a-f0-9]{12}$/);
+  assert.equal(privateSchema, `${schema}_p`);
+  // Schema qualifiers/catalog literals move; the unquoted PUBLIC pseudorole
+  // in REVOKE statements must retain its PostgreSQL meaning.
+  return bytes.replaceAll('stats_prepared_private', privateSchema)
+    .replaceAll('public.', `${schema}.`).replaceAll("'public'", literal(schema));
+}
+
+export function qaSqlFailureDiagnostic({ phase, status, result, query }) {
+  assert.ok(SQL_PHASES.has(phase), 'unknown QA SQL phase');
+  const diagnostic = { phase, status: Number.isInteger(status) && status >= 100 && status <= 599 ? status : null,
+    sqlstate: sqlstate(result?.code) ?? sqlstate(result?.error?.code) ?? 'unknown' };
+  // Management API errors can carry PostgreSQL's code only in a message.
+  // Read only the fixed error prefix and numeric location; never retain text,
+  // SQL excerpts, detail, hint, context, headers or the response body.
+  const messages = [result?.message, result?.error?.message, result?.error, result];
+  for (const message of messages) {
+    if (typeof message !== 'string') continue;
+    const match = /^(?:Failed to run sql query: )?ERROR:\s+([A-Z0-9]{5}):(?:\s|$)/.exec(message);
+    if (!match) continue;
+    if (diagnostic.sqlstate === 'unknown') diagnostic.sqlstate = match[1];
+    const line = /\nLINE ([1-9][0-9]{0,5}):/.exec(message);
+    if (line && Number(line[1]) <= query.split('\n').length) diagnostic.reportedLine = Number(line[1]);
+    break;
+  }
+  const position = result?.position ?? result?.error?.position;
+  if ((typeof position === 'string' || Number.isSafeInteger(position)) && /^[1-9][0-9]{0,8}$/.test(String(position)) &&
+    Number(position) <= query.length) diagnostic.position = Number(position);
+  return diagnostic;
+}
+
+export function qaReceiptWithPhases(identity, phases) {
+  // Explicit cleanup is another process. Retain the original failure/timings
+  // instead of replacing them with the cleanup request's single success.
+  return { ...identity, phases: [...(identity.phases ?? []), ...phases] };
+}
 
 export function validateQaCheckout({ expectedSha, checkoutSha, eventName, event, githubSha }) {
   assert.match(expectedSha ?? '', /^[a-f0-9]{40}$/);
@@ -93,19 +136,34 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   assert.ok(token && service, 'Management API and managed-development service credentials required');
   const receiptPath = options['--receipt'] ?? path.join(env.RUNNER_TEMP, 'stats-prepared-db-qa.json');
   const phases = []; let identity;
-  async function sql(query, timeout = 120_000) {
+  const saveReceipt = () => writeFile(receiptPath, JSON.stringify(qaReceiptWithPhases(identity, phases), null, 2));
+  async function sql(query, phase = 'fixture-checks') {
+    assert.ok(SQL_PHASES.has(phase), 'unknown QA SQL phase');
     const started = Date.now();
-    const response = await fetch(`https://api.supabase.com/v1/projects/${PROJECT}/database/query`, {
-      method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: `set statement_timeout='110s'; set lock_timeout='2s'; set timezone='UTC';\n${query}` }),
-      signal: AbortSignal.timeout(timeout), redirect: 'error',
-    });
-    const result = await response.json();
-    if (!response.ok || !Array.isArray(result)) {
-      // Only SQLSTATE is retained. Management error text may contain SQL/values.
-      throw new Error(`fixture-sql-failed-${response.status}-${/^[A-Z0-9]{5}$/.test(result?.code ?? '') ? result.code : 'unknown'}`);
+    const submittedQuery = `set statement_timeout='110s'; set lock_timeout='2s'; set timezone='UTC';\n${query}`;
+    let response; let result; let failureKind;
+    try {
+      response = await fetch(`https://api.supabase.com/v1/projects/${PROJECT}/database/query`, {
+        method: 'POST', headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: submittedQuery }),
+        signal: AbortSignal.timeout(120_000), redirect: 'error',
+      });
+    } catch { failureKind = 'request-error'; }
+    if (response) {
+      try { result = await response.json(); } catch { failureKind = 'invalid-json'; }
+      if (!failureKind && (!response.ok || !Array.isArray(result))) failureKind = 'sql-response-error';
     }
-    phases.push({ kind: 'sql', ms: Date.now() - started });
+    if (failureKind) {
+      const failure = { kind: 'sql', ...qaSqlFailureDiagnostic({ phase, status: response?.status,
+        result, query: submittedQuery }), ms: Date.now() - started, ok: false, failureKind };
+      phases.push(failure);
+      // Save before finally cleanup or a runner interruption can obscure it.
+      if (phase === 'cleanup') identity.cleanupSqlFailure = failure;
+      else identity.sqlFailure ??= failure;
+      await saveReceipt();
+      throw new Error(`fixture-sql-failed-${phase}-${failure.status ?? 'no-response'}-${failure.sqlstate}`);
+    }
+    phases.push({ kind: 'sql', phase, ms: Date.now() - started, status: response.status, ok: true });
     return result;
   }
   const scalar = async expression => (await sql(`select ${expression} as result;`))[0].result;
@@ -117,10 +175,11 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
         body: JSON.stringify(body), signal: AbortSignal.timeout(12_000) });
       result = await response.json();
-      phases.push({ kind: 'rest', rpc: name, ms: Date.now() - started, status: response.status, code: result?.code });
+      const code = rpcErrorCode(result?.code);
+      phases.push({ kind: 'rest', rpc: name, ms: Date.now() - started, status: response.status, code });
       if (retrySchema && result?.code === 'PGRST202') { await pause(500); continue; }
-      if (expectedError) { assert.equal(result.code, expectedError); return result; }
-      assert.equal(response.ok, true, `fixture-rpc-failed-${response.status}-${result?.code ?? 'unknown'}`);
+      if (expectedError) { assert.equal(code, expectedError); return result; }
+      assert.equal(response.ok, true, `fixture-rpc-failed-${response.status}-${code}`);
       return result;
     }
     throw new Error('fixture-schema-cache-not-ready');
@@ -132,10 +191,11 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     assert.ok(identity.privateSchema === `${identity.schema}_p` && identity.prefix === `qa_${identity.schema.slice(9)}_`);
     assert.equal(identity.project, PROJECT); assert.equal(identity.sha, checkoutSha);
     assert.deepEqual(identity.functions, [...RPC_NAMES.map(name => identity.prefix + name.replace('_stats_prepared_', '_sp_')), identity.prefix + 'timeout']);
+    identity.cleaned = false;
     await sql(identity.functions.map(name => `drop function if exists public.${ident(name)} cascade;`).join('\n') +
-      `\ndrop schema if exists ${identity.schema} cascade; drop schema if exists ${identity.privateSchema} cascade; notify pgrst,'reload schema';`);
+      `\ndrop schema if exists ${identity.schema} cascade; drop schema if exists ${identity.privateSchema} cascade; notify pgrst,'reload schema';`, 'cleanup');
     identity.cleaned = true;
-    await writeFile(receiptPath, JSON.stringify({ ...identity, phases }, null, 2));
+    await saveReceipt();
   }
   if (mode === 'cleanup') { identity = JSON.parse(await readFile(receiptPath, 'utf8')); await cleanup(); return; }
   const suffix = createHash('sha256').update(`${env.GITHUB_RUN_ID}:${env.GITHUB_RUN_ATTEMPT}:${randomUUID()}`).digest('hex').slice(0, 12);
@@ -149,23 +209,22 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   try {
     await sql(`create schema ${schema}; grant usage on schema ${schema} to service_role;\n` +
       ['roblox_universes', 'stats_game_current_index', 'roblox_universe_stats_hourly', 'roblox_universe_stats_daily', 'revalidation_events']
-        .map(table => `create table ${schema}.${table} (like public.${table} including all); grant select,insert,update,delete on ${schema}.${table} to service_role;`).join('\n'));
+        .map(table => `create table ${schema}.${table} (like public.${table} including all); grant select,insert,update,delete on ${schema}.${table} to service_role;`).join('\n'), 'source-clone');
     const migrationBytes = await readFile(MIGRATION, 'utf8');
     identity.migrationSha256 = createHash('sha256').update(migrationBytes).digest('hex');
-    const migration = migrationBytes.replaceAll('stats_prepared_private', privateSchema)
-      .replaceAll('public.', `${schema}.`).replaceAll("'public'", literal(schema));
-    await sql(migration);
+    const migration = fixtureMigrationSql(migrationBytes, schema, privateSchema);
+    await sql(migration, 'migration-install');
     // Execute exact function bodies/settings through real PostgREST using unique
     // service-only aliases. All table/helper references still point at fixtures.
     for (const name of RPC_NAMES) {
-      const row = (await sql(`select pg_get_functiondef(oid) as definition,pg_get_function_identity_arguments(oid) as args from pg_proc where pronamespace=${literal(schema)}::regnamespace and proname=${literal(name)};`))[0];
+      const row = (await sql(`select pg_get_functiondef(oid) as definition,pg_get_function_identity_arguments(oid) as args from pg_proc where pronamespace=${literal(schema)}::regnamespace and proname=${literal(name)};`, 'alias-read'))[0];
       await sql('begin;\n' + row.definition.replace(`FUNCTION ${schema}.${name}(`, `FUNCTION public.${alias(name)}(`) +
-        `\nrevoke all on function public.${alias(name)}(${row.args}) from public,anon,authenticated; grant execute on function public.${alias(name)}(${row.args}) to service_role; commit;`);
+        `\nrevoke all on function public.${alias(name)}(${row.args}) from public,anon,authenticated; grant execute on function public.${alias(name)}(${row.args}) to service_role; commit;`, 'alias-install');
     }
     // Function-specific ACL statements need identity argument types: use a
     // catalog DO rather than assuming grant-all can address overloaded routines.
     await sql(`do $qa$ declare f record; begin for f in select oid::regprocedure sig from pg_proc where pronamespace='public'::regnamespace and proname like ${literal(prefix + '%')} loop execute 'revoke all on function '||f.sig||' from public,anon,authenticated'; execute 'grant execute on function '||f.sig||' to service_role'; end loop; end $qa$;` +
-      `create function public.${prefix}timeout() returns void language sql volatile security invoker set search_path='' set statement_timeout='100ms' as 'select pg_catalog.pg_sleep(1)'; revoke all on function public.${prefix}timeout() from public,anon,authenticated; grant execute on function public.${prefix}timeout() to service_role; notify pgrst,'reload schema';`);
+      `create function public.${prefix}timeout() returns void language sql volatile security invoker set search_path='' set statement_timeout='100ms' as 'select pg_catalog.pg_sleep(1)'; revoke all on function public.${prefix}timeout() from public,anon,authenticated; grant execute on function public.${prefix}timeout() to service_role; notify pgrst,'reload schema';`, 'alias-acl-timeout');
     await transport(alias('get_stats_prepared_health_v1'), {}, { retrySchema: true });
     await transport(prefix + 'timeout', {}, { expectedError: '57014', retrySchema: true });
     const cold = await scalar(`${schema}.get_stats_prepared_platform_chart_v1('90d','hourly',true)`);
@@ -700,7 +759,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     identity.transportTimeoutProved = true; identity.semanticParity = 'all-five-ranges';
     console.log(JSON.stringify({ status: 'passed', mode, sourceRows, maximumStepMs, receipt: receiptPath }));
   } finally {
-    try { await cleanup(); } catch { identity.cleanupFailed = true; await writeFile(receiptPath, JSON.stringify({ ...identity, phases }, null, 2)); throw new Error('fixture-cleanup-failed-see-receipt'); }
+    try { await cleanup(); } catch { identity.cleanupFailed = true; await saveReceipt(); throw new Error('fixture-cleanup-failed-see-receipt'); }
   }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch(error => {
