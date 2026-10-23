@@ -259,6 +259,7 @@ const staleIcon = "https://tr.rbxcdn.com/stale/512/512/Image/Png/noFilter";
 const staleThumbnail = "https://tr.rbxcdn.com/stale/768/432/Image/Png/noFilter";
 const currentIcon = "https://tr.rbxcdn.com/current/512/512/Image/Png/noFilter";
 const currentThumbnail = "https://tr.rbxcdn.com/current/768/432/Image/Png/noFilter";
+const additionalThumbnail = "https://tr.rbxcdn.com/additional/768/432/Image/Png/noFilter";
 
 async function collectionMediaFixture() {
   const root = path.resolve("tmp", `roblox-wiki-media-${randomUUID()}`);
@@ -290,13 +291,13 @@ async function collectionMediaFixture() {
 
 // Exercise the real publisher and persistence helper through a closed HTTP fake.
 // No credentials, DB connection, R2 request or live Roblox request is needed.
-async function runCollectionMediaFixture(root: string, apply: boolean, scenario = "ready") {
+async function runCollectionMediaFixture(root: string, apply: boolean, scenario = "ready", extraArgs: string[] = []) {
   const report = path.join(root, "media-report.json");
   const preload = `
     import fs from 'node:fs';
     import { randomUUID } from 'node:crypto';
     const root = ${JSON.stringify(root)}, scenario = ${JSON.stringify(scenario)};
-    const universeId = ${mediaUniverseId}, icon = ${JSON.stringify(currentIcon)}, thumbnail = ${JSON.stringify(currentThumbnail)};
+    const universeId = ${mediaUniverseId}, icon = ${JSON.stringify(currentIcon)}, thumbnail = ${JSON.stringify(currentThumbnail)}, additional = ${JSON.stringify(additionalThumbnail)};
     const calls = [];
     const tables = {
       roblox_universes: [{ universe_id: universeId, root_place_id: 123, name: 'Example', slug: 'example-4730278139', icon_url: ${JSON.stringify(staleIcon)}, thumbnail_urls: [{ url: ${JSON.stringify(staleThumbnail)}, state: 'Completed', type: null }] },
@@ -321,14 +322,14 @@ async function runCollectionMediaFixture(root: string, apply: boolean, scenario 
         const ready = scenario === 'pending' ? 'Pending' : 'Completed';
         return json({ data: isIcon
           ? [{ targetId: 999, state: 'Completed', imageUrl: icon.replace('current', 'wrong-game') }, { targetId: universeId, state: ready, imageUrl: icon }]
-          : [{ universeId: 999, thumbnails: [{ state: 'Completed', imageUrl: thumbnail.replace('current', 'wrong-game') }] }, { universeId, thumbnails: [{ state: 'Pending', imageUrl: thumbnail.replace('current', 'pending') }, { state: 'Completed', imageUrl: thumbnail }] }]
+          : [{ universeId: 999, thumbnails: [{ state: 'Completed', imageUrl: thumbnail.replace('current', 'wrong-game') }] }, { universeId, thumbnails: [{ state: 'Pending', imageUrl: thumbnail.replace('current', 'pending') }, { state: 'Completed', imageUrl: thumbnail }, ...(scenario === 'additional-thumbnail' ? [{ state: 'Completed', imageUrl: additional }] : [])] }]
         });
       }
-      if (url.href === icon || url.href === thumbnail) {
+      if (url.href === icon || url.href === thumbnail || url.href === additional) {
         if (method !== 'GET') throw new Error('Official media must be read-only');
         if (scenario === 'icon-404' && url.href === icon) return new Response(null, { status: 404 });
         if (scenario === 'icon-transient' && url.href === icon && calls.filter(call => call.url === icon).length === 1) return new Response(null, { status: 503 });
-        const bytes = fs.readFileSync(root + (url.href === icon && scenario !== 'wrong-dimensions' ? '/icon.png' : '/thumbnail.png'));
+        const bytes = fs.readFileSync(root + (url.href === additional ? '/additional.png' : url.href === icon && scenario !== 'wrong-dimensions' ? '/icon.png' : '/thumbnail.png'));
         return new Response(scenario === 'corrupt-thumbnail' && url.href === thumbnail ? bytes.subarray(0, Math.floor(bytes.length / 2)) : bytes, { headers: { 'content-type': 'image/png' } });
       }
       if (url.hostname !== 'bbtcaurrtyoukvjbxbbj.supabase.co' || !url.pathname.startsWith('/rest/v1/')) throw new Error('Unexpected network request: ' + method + ' ' + url.href);
@@ -358,7 +359,7 @@ async function runCollectionMediaFixture(root: string, apply: boolean, scenario 
       return new Response(JSON.stringify(accept.includes('vnd.pgrst.object') ? result[0] : result), { headers });
     };
   `;
-  const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, ...(apply ? ["--apply"] : [])], {
+  const result = spawnSync(process.execPath, ["--import", "tsx", "--import", `data:text/javascript,${encodeURIComponent(preload)}`, "scripts/content/roblox-wiki-cli.ts", "publish", root, ...(apply ? ["--apply"] : []), ...extraArgs], {
     encoding: "utf8", timeout: 30_000,
     env: { ...process.env, BLOXODES_ENV_PROFILE: "process-only", SUPABASE_URL: "https://bbtcaurrtyoukvjbxbbj.supabase.co", SUPABASE_SERVICE_ROLE: "test-only-service-role", WIKI_R2_ENDPOINT: "https://r2.example.com", WIKI_R2_ACCESS_KEY_ID: "test-access", WIKI_R2_SECRET_ACCESS_KEY: "test-secret", WIKI_R2_BUCKET: "bloxodes-wiki", WIKI_MEDIA_PUBLIC_BASE_URL: "https://media.bloxodes.com/wiki" }
   });
@@ -424,4 +425,110 @@ test("collection-only apply blocks before writes when current official media fai
       if (scenario === "api-failure" || scenario === "pending") assert.equal(result.calls.filter(call => call.url.startsWith("https://thumbnails.roblox.com/")).length, 6, "retain the existing three API attempts");
     }
   } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+
+async function hubMediaFixture(width = 767, height = 432) {
+  const root = await collectionMediaFixture();
+  const bundle = JSON.parse(await fs.readFile(path.join(root, "bundle.json"), "utf8"));
+  bundle.hub = { finalJson: "hub.json", coverImage: "cover.png" };
+  await fs.writeFile(path.join(root, "bundle.json"), JSON.stringify(bundle));
+  await fs.writeFile(path.join(root, "hub.json"), JSON.stringify({
+    universe_id: mediaUniverseId, slug: game.slug, title: "Example Wiki", seo_title: "Example Wiki",
+    meta_description: "Compare blade damage, crafting costs and upgrades before fighting monsters.",
+    description_md: "Iron blades deal physical damage to monsters. ".repeat(6),
+    tips_md: "Upgrade iron blades at the forge before fighting stronger monsters. ".repeat(2),
+    controls_json: []
+  }));
+  const cover = await fs.readFile(path.join(root, "thumbnail.png"));
+  await fs.writeFile(path.join(root, "cover.png"), cover);
+  const { default: sharp } = await import("sharp");
+  await fs.writeFile(path.join(root, "thumbnail.png"), await sharp({ create: { width, height, channels: 3, background: "blue" } }).png().toBuffer());
+  return { root, approval: createHash("sha256").update(cover).digest("hex") };
+}
+
+function assertMediaPreflightBlocked(result: Awaited<ReturnType<typeof runCollectionMediaFixture>>) {
+  assert.equal(result.status, 1, result.stderr);
+  assert.match(result.stderr, /official game icon and thumbnails/);
+  assert.match(result.stderr, /No database or media writes were made/);
+  assert.ok(result.calls.every(call => call.method === "GET"));
+  assert.equal(result.tables.roblox_universes[0].icon_url, staleIcon);
+}
+
+test("nonstandard first official thumbnail stays strict without exact-hash approval, including collection-only", async () => {
+  const { root } = await hubMediaFixture();
+  try {
+    for (const selection of ["hub", "items"]) {
+      const result = await runCollectionMediaFixture(root, true, "ready", ["--only", selection]);
+      assertMediaPreflightBlocked(result);
+      assert.match(result.stderr, /Official universe media must decode to 768x432/);
+    }
+  } finally { await fs.rm(root, { recursive: true, force: true }); }
+});
+
+test("validated exact-hash hub cover permits readable 767x432 and 646x432 first official thumbnails", async () => {
+  for (const width of [767, 646]) {
+    const { root, approval } = await hubMediaFixture(width);
+    try {
+      const result = await runCollectionMediaFixture(root, false, "ready", ["--only", "hub", "--approved-hub-cover-sha256", approval]);
+      assert.equal(result.status, 0, result.stderr);
+      assert.match(result.stdout, /PASS hub cover image readiness/);
+      assert.match(result.stdout, /PASS official game icon and thumbnails/);
+      assert.match(result.stdout, /Dry run complete; no database or media writes/);
+      assert.ok(result.stdout.indexOf("PASS hub cover image readiness") < result.stdout.indexOf("PASS official game icon and thumbnails"));
+      assert.ok(result.calls.every(call => call.method === "GET"));
+      assert.ok(result.calls.some(call => call.url === currentIcon));
+      assert.ok(result.calls.some(call => call.url === currentThumbnail));
+    } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
+});
+
+test("invalid, missing or hash-mismatched approved cover never relaxes official media preflight", async () => {
+  for (const scenario of ["hash-mismatch", "invalid-size", "corrupt-cover", "missing-cover"]) {
+    const { root, approval } = await hubMediaFixture();
+    try {
+      const coverPath = path.join(root, "cover.png");
+      let approved = approval;
+      if (scenario === "hash-mismatch") approved = "0".repeat(64);
+      if (scenario === "invalid-size") await fs.copyFile(path.join(root, "thumbnail.png"), coverPath);
+      if (scenario === "corrupt-cover") {
+        const bytes = await fs.readFile(coverPath);
+        await fs.writeFile(coverPath, bytes.subarray(0, Math.floor(bytes.length / 2)));
+      }
+      if (scenario === "invalid-size" || scenario === "corrupt-cover") approved = createHash("sha256").update(await fs.readFile(coverPath)).digest("hex");
+      if (scenario === "missing-cover") await fs.rm(coverPath);
+      const result = await runCollectionMediaFixture(root, true, "ready", ["--only", "hub", "--approved-hub-cover-sha256", approved]);
+      assertMediaPreflightBlocked(result);
+      assert.match(result.stderr, /FAIL hub cover image readiness/);
+      assert.match(result.stderr, /Official universe media must decode to 768x432/);
+      assert.doesNotMatch(result.stdout, /APPROVED hub cover/);
+      if (scenario === "hash-mismatch") assert.match(result.stderr, /does not match --approved-hub-cover-sha256/);
+      if (scenario === "invalid-size" || scenario === "corrupt-cover") assert.match(result.stderr, /Hub cover must be a readable 768x432/);
+      if (scenario === "missing-cover") assert.match(result.stderr, /ENOENT/);
+    } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
+});
+
+test("approved hub cover retains full original decoding, landscape shape, icon size and additional thumbnail size", async () => {
+  for (const scenario of ["corrupt-thumbnail", "portrait", "square", "wrong-dimensions", "additional-thumbnail"]) {
+    const { root, approval } = await hubMediaFixture(scenario === "portrait" || scenario === "square" ? 432 : 767, scenario === "portrait" ? 768 : 432);
+    try {
+      const original = await fs.readFile(path.join(root, "thumbnail.png"));
+      if (scenario === "corrupt-thumbnail") {
+        const { default: sharp } = await import("sharp");
+        const truncated = original.subarray(0, Math.floor(original.length / 2));
+        assert.equal((await sharp(truncated).metadata()).width, 767, "metadata alone must not admit a corrupt original");
+      }
+      if (scenario === "additional-thumbnail") await fs.writeFile(path.join(root, "additional.png"), original);
+      const result = await runCollectionMediaFixture(root, true, scenario, ["--only", "hub", "--approved-hub-cover-sha256", approval]);
+      assertMediaPreflightBlocked(result);
+      assert.match(result.stdout, /PASS hub cover image readiness/);
+      if (scenario === "portrait" || scenario === "square") assert.match(result.stderr, /Official first thumbnail must decode to a landscape image/);
+      if (scenario === "wrong-dimensions") assert.match(result.stderr, /Official universe media must decode to 512x512/);
+      if (scenario === "additional-thumbnail") {
+        assert.match(result.stderr, /Official universe media must decode to 768x432/);
+        assert.ok(result.calls.some(call => call.url === additionalThumbnail));
+      }
+    } finally { await fs.rm(root, { recursive: true, force: true }); }
+  }
 });
