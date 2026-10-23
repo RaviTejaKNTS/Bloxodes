@@ -11,7 +11,7 @@ on:
         default: false
         type: boolean
       stats_prepared_daily_diagnostic:
-        description: 'Profile two small-fixture daily chunks with rollback; not acceptance or scale QA'
+        description: 'Compare six rollback-only daily planner policies; not acceptance or scale QA'
         required: false
         default: false
         type: boolean

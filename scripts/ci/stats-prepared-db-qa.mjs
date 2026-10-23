@@ -381,8 +381,11 @@ export function qaAdvanceStateSql(schema) {
       on g.product='visit' and g.status='building' where c.id`;
 }
 
-export const DAILY_DIAGNOSTIC_PROBES = Object.freeze(['whole-advance', 'daily-helper', 'daily-cte',
-  'shared-cleanup', 'cleanup-generation-candidate', 'cleanup-version-candidate']);
+export const DAILY_DIAGNOSTIC_PROBES = Object.freeze([
+  ['A', 'auto', 0], ['B', 'force_custom_plan', 0], ['B', 'force_custom_plan', 0], ['A', 'auto', 0],
+  ['B', 'force_custom_plan', 256], ['A', 'auto', 256],
+].map(([arm, policy, after], index) => Object.freeze({ order: index + 1, arm, policy, after })));
+const DAILY_PLAN_POLICIES = ['auto', 'force_custom_plan', 'force_generic_plan'];
 const DAILY_STATE_TABLES = Object.freeze({
   stats_prepared_control: 'id', stats_prepared_members: 'universe_id', stats_prepared_dirty: 'kind,bucket',
   stats_prepared_versions: 'id', stats_prepared_buckets: 'kind,bucket', stats_prepared_visits: 'version,universe_id',
@@ -493,45 +496,36 @@ export function fixtureDailyDiagnosticSql(bytes, schema, privateSchema) {
     assert.ok(end > start);
     return source.slice(start, end + 'end $$;'.length);
   };
-  const daily = body('daily'), cleanup = body('cleanup');
+  const daily = body('daily');
   const cteStart = daily.indexOf(' with source as materialized ('), cteEnd = daily.indexOf(' from sums s where v.id=s.version;');
   assert.ok(cteStart > 0 && cteEnd > cteStart);
+  // Historical identity only. The old extracted-statement sweep is not installed
+  // or executed by this whole-advance policy experiment.
   const exactCte = daily.slice(cteStart, cteEnd + ' from sums s where v.id=s.version;'.length);
-  const candidate = (first, last) => {
-    const start = cleanup.indexOf(first), end = cleanup.indexOf(last, start);
-    assert.ok(start > 0 && end > start);
-    return cleanup.slice(start, end + last.length);
-  };
-  const generation = candidate(' select id into gid from', ' order by created_at limit 1;').replace('select id into gid', 'select id');
-  const version = candidate(' select v.id into vid from', ' order by v.created_at limit 1;').replace('select v.id into vid', 'select v.id');
-  const parameterize = query => fixtureMigrationSql(query, schema, privateSchema)
-    .replace(/\bc[.]daily_scan\b/g, '$4').replace(/\bc[.]active_platform\b/g, '$5')
-    .replace(/\bc[.]previous_platform\b/g, '$6').replace(/\bc[.]active_visit\b/g, '$7')
-    .replace(/\bc[.]previous_visit\b/g, '$8').replace(/\bids\b/g, '$1')
-    .replace(/\blow_date\b/g, '$2').replace(/\bhigh_date\b/g, '$3');
-  const queries = [
-    `select ${schema}.run_stats_prepared_step_v1($9,$10,$11,'{"kind":"advance"}'::jsonb)`,
-    `select ${privateSchema}.stats_prepared_daily_v1()`, parameterize(exactCte),
-    `select ${privateSchema}.stats_prepared_cleanup_v1()`, parameterize(generation), parameterize(version),
-  ];
+  const catalog = `(select jsonb_build_object('oid',p.oid::text,'ownerOid',p.proowner::text,
+    'ownerIsPostgres',pg_get_userbyid(p.proowner)='postgres','securityInvoker',not p.prosecdef,
+    'definitionMd5',md5(pg_get_functiondef(p.oid)),'bodyMd5',md5(p.prosrc),
+    'aclMd5',md5(coalesce(p.proacl::text,'null')),'proconfig',to_jsonb(p.proconfig))
+    from pg_proc p where p.oid=${literal(`${privateSchema}.stats_prepared_daily_v1()`)}::regprocedure)`;
+  const backend = `jsonb_build_object('pid',pg_backend_pid(),'serverVersionNum',current_setting('server_version_num'),
+    'role',current_user,'callerPlanCacheMode',current_setting('plan_cache_mode'))`;
   const snapshot = `select jsonb_build_object('utcHour',extract(epoch from date_trunc('hour',now())),
     'tables',jsonb_build_object(${Object.entries(DAILY_STATE_TABLES).map(([table, keys]) => `${literal(table)},
       (select jsonb_build_object('rows',count(*),'digest',md5(coalesce(string_agg(md5(to_jsonb(t)::text),'' order by ${keys}),'')))
        from ${schema}.${table} t)`).join(',\n')}))`;
-  // NONACCEPTANCE diagnostic only. The CTE and candidate SELECTs are extracted
-  // byte-for-byte from the frozen migration, then schema-qualified and bound to
-  // typed USING parameters. EXECUTE replans with current values (custom-plan
-  // behavior); this does not establish a cached/generic PL/pgSQL plan or HTTP SLA.
+  // Matched ALTER invalidates plans in BOTH arms. This cannot reproduce
+  // uninterrupted cached-function history, and caller policy is not an inside-
+  // helper observation. Whole advance retains all normal guards and cleanup.
   return { cteSha256: createHash('sha256').update(exactCte).digest('hex'),
     install: `begin;
 create function ${privateSchema}.qa_daily_state_v1() returns jsonb language sql volatile security invoker
 set search_path='' set timezone='UTC' as $qa_state$ ${snapshot} $qa_state$;
-create function ${privateSchema}.qa_daily_probe_v1(p_probe text,p_after bigint,p_token uuid,p_epoch bigint,p_step uuid)
+create function ${privateSchema}.qa_daily_probe_v1(p_policy text,p_after bigint,p_token uuid,p_epoch bigint,p_step uuid)
 returns jsonb language plpgsql volatile security invoker set search_path='' set timezone='UTC' as $qa_probe$
 declare before_state jsonb; after_state jsonb; c ${schema}.stats_prepared_control;
-  ids bigint[]; low_date date; high_date date; query text; plan jsonb; error_state text; error_message text;
+  ids bigint[]; plan jsonb; error_state text; error_message text;
 begin
-  if p_probe not in (${DAILY_DIAGNOSTIC_PROBES.map(literal)}) or p_probe is null
+  if p_policy not in ('auto','force_custom_plan') or p_policy is null
     or p_after not in (0,256) or p_after is null or p_step is null then
     raise exception 'invalid-daily-probe' using errcode='22023';
   end if;
@@ -543,17 +537,19 @@ begin
   select array_agg(universe_id order by universe_id) into ids from
     (select universe_id from ${schema}.roblox_universes where universe_id>c.daily_after order by universe_id limit 256) u;
   if cardinality(ids) is distinct from 256 then raise exception 'daily-probe-wrong-chunk' using errcode='55000'; end if;
-  select min(bucket)::date,max(bucket)::date into low_date,high_date
-    from ${schema}.stats_prepared_versions where scan=c.daily_scan and status='building';
-  if low_date is null or high_date is null then raise exception 'daily-probe-no-building-dates' using errcode='55000'; end if;
-  query:=case p_probe ${DAILY_DIAGNOSTIC_PROBES.map((probe, i) => `when ${literal(probe)} then ${literal(queries[i])}`).join('\n')} end;
+  if not exists(select 1 from pg_proc p where p.oid=${literal(`${privateSchema}.stats_prepared_daily_v1()`)}::regprocedure
+    and ('plan_cache_mode='||p_policy)=any(p.proconfig)) or current_user<>'service_role' then
+    raise exception 'daily-probe-policy-role' using errcode='55000';
+  end if;
   before_state:=${privateSchema}.qa_daily_state_v1();
   begin
-    execute 'EXPLAIN (ANALYZE,BUFFERS,WAL,SETTINGS,FORMAT JSON) '||query into plan
-      using ids,low_date,high_date,c.daily_scan,c.active_platform,c.previous_platform,c.active_visit,c.previous_visit,p_token,p_epoch,p_step;
-    if p_probe='whole-advance' and (select outcome->>'phase' from ${schema}.stats_prepared_receipts where step_id=p_step)
-      is distinct from 'daily-batch' then raise exception 'daily-probe-wrong-phase' using errcode='55000'; end if;
-    if p_probe in ('whole-advance','daily-helper') and (select daily_after from ${schema}.stats_prepared_control where id)
+    execute ${literal(`EXPLAIN (ANALYZE,BUFFERS,WAL,SETTINGS,FORMAT JSON) select ${schema}.run_stats_prepared_step_v1($1,$2,$3,'{"kind":"advance"}'::jsonb)`)}
+      into plan using p_token,p_epoch,p_step;
+    if not exists(select 1 from ${schema}.stats_prepared_receipts where step_id=p_step
+      and lease_token=p_token and epoch=p_epoch and outcome->>'phase'='daily-batch'
+      and outcome->'more'='true'::jsonb) then
+      raise exception 'daily-probe-wrong-phase' using errcode='55000'; end if;
+    if (select daily_after from ${schema}.stats_prepared_control where id)
       is distinct from ids[256] then raise exception 'daily-probe-wrong-cursor' using errcode='55000'; end if;
     raise exception using errcode='PZ002',message='daily-probe-rollback';
   exception when query_canceled or others then
@@ -564,21 +560,39 @@ begin
   after_state:=${privateSchema}.qa_daily_state_v1();
   if before_state is distinct from after_state then raise exception 'daily-probe-state-changed' using errcode='55000'; end if;
   return jsonb_build_object('plan',plan,'sqlstate',error_state,'rollbackVerified',true,'beforeState',before_state,
-    'dailyAfter',c.daily_after::text,'chunkIds',cardinality(ids),'ioTimingEnabled',current_setting('track_io_timing')='on');
+    'dailyAfter',c.daily_after::text,'chunkIds',cardinality(ids),'ioTimingEnabled',current_setting('track_io_timing')='on',
+    'backend',${backend},'helperCatalog',${catalog});
 end $qa_probe$;
 revoke all on function ${privateSchema}.qa_daily_state_v1() from public,anon,authenticated;
 revoke all on function ${privateSchema}.qa_daily_probe_v1(text,bigint,uuid,bigint,uuid) from public,anon,authenticated;
 grant execute on function ${privateSchema}.qa_daily_state_v1() to service_role;
 grant execute on function ${privateSchema}.qa_daily_probe_v1(text,bigint,uuid,bigint,uuid) to service_role;
 commit;`,
-    // Restored subtransaction is verified before returning, outer ROLLBACK also
-    // covers locks and any future helper changes. Only the helper returns data.
-    probe: (probe, after, token, epoch, step) => {
-      assert.ok(DAILY_DIAGNOSTIC_PROBES.includes(probe) && [0, 256].includes(after));
+    // Owner DDL and service-role measurement share this ONE request/transaction.
+    // The caller must await its complete response (including terminal ROLLBACK),
+    // then verify original catalog + logical state in the next bounded read.
+    probe: (order, token, epoch, step, originalCatalog) => {
+      const entry = DAILY_DIAGNOSTIC_PROBES.find(item => item.order === order);
+      assert.ok(entry, 'invalid-daily-policy-order');
       assert.match(token, UUID); assert.match(step, UUID); assert.match(String(epoch), /^[1-9][0-9]{0,18}$/);
-      return `begin; set local statement_timeout='100s'; set local lock_timeout='500ms'; set local role service_role;
-select ${privateSchema}.qa_daily_probe_v1(${literal(probe)},${after},${literal(token)},${literal(epoch)},${literal(step)}) as result;
+      const original = qaDailyCatalogResult(originalCatalog);
+      assert.ok(!original.proconfig.some(value => value.startsWith('plan_cache_mode=')), 'daily-original-policy-changed');
+      return `begin; set local statement_timeout='100s'; set local lock_timeout='500ms';
+do $qa_owner$ begin
+  if current_user<>'postgres' or ${catalog} is distinct from ${literal(JSON.stringify(original))}::jsonb then
+    raise exception 'daily-probe-original-catalog-drift' using errcode='55000'; end if;
+end $qa_owner$;
+alter function ${privateSchema}.stats_prepared_daily_v1() set plan_cache_mode = ${entry.policy};
+set local role service_role;
+select ${privateSchema}.qa_daily_probe_v1(${literal(entry.policy)},${entry.after},${literal(token)},${literal(epoch)},${literal(step)}) as result;
 rollback;`;
+    },
+    advance: (token, epoch, step) => {
+      assert.match(token, UUID); assert.match(step, UUID); assert.match(String(epoch), /^[1-9][0-9]{0,18}$/);
+      return `begin; set local statement_timeout='60s'; set local lock_timeout='500ms'; set local role service_role;
+select jsonb_build_object('outcome',${schema}.run_stats_prepared_step_v1(${literal(token)},${literal(epoch)},${literal(step)},'{"kind":"advance"}'::jsonb),
+  'backend',${backend}) as result;
+commit;`;
     },
     // A new full baseline per lease. Only normal finish/claim deltas may differ
     // across it; source rows and every other prepared row remain fingerprinted.
@@ -586,7 +600,7 @@ rollback;`;
       if (finished) { assert.match(finished.leaseToken, UUID); assert.match(String(finished.epoch), /^[1-9][0-9]{0,18}$/); }
       const token = finished ? `${literal(finished.leaseToken)}::uuid` : 'null::uuid';
       const epoch = finished ? `${literal(finished.epoch)}::bigint` : 'null::bigint';
-      return `select jsonb_build_object('full',(${snapshot}),
+      return `select jsonb_build_object('full',(${snapshot}),'backend',${backend},'helperCatalog',${catalog},
         'dbNow',clock_timestamp(),'source',jsonb_build_object(${Object.entries(DAILY_SOURCE_TABLES).map(([table, keys]) => `${literal(table)},
           (select jsonb_build_object('rows',count(*),'digest',md5(coalesce(string_agg(md5(to_jsonb(t)::text),'' order by ${keys}),'')))
            from ${schema}.${table} t)`).join(',\n')}),
@@ -610,6 +624,42 @@ rollback;`;
     } };
 }
 
+// Catalog strings are a finite allowlist. Definitions/ACLs stay in PostgreSQL;
+// only their digests and numeric identities enter durable evidence.
+export function qaDailyCatalogResult(value) {
+  const valid = ok => assert.ok(ok, 'invalid-daily-helper-catalog');
+  for (const key of ['oid', 'ownerOid']) valid(typeof value?.[key] === 'string' && /^[1-9][0-9]{0,9}$/.test(value[key]));
+  valid(value.ownerIsPostgres === true && value.securityInvoker === true);
+  for (const key of ['definitionMd5', 'bodyMd5', 'aclMd5']) valid(typeof value[key] === 'string' && /^[a-f0-9]{32}$/.test(value[key]));
+  valid(Array.isArray(value.proconfig) && [2, 3].includes(value.proconfig.length));
+  valid(value.proconfig.every(item => typeof item === 'string' &&
+    /^(?:search_path=""|(?:TimeZone|timezone)=UTC|plan_cache_mode=(?:auto|force_custom_plan))$/.test(item)));
+  valid(value.proconfig.filter(item => item === 'search_path=""').length === 1 &&
+    value.proconfig.filter(item => /^(?:TimeZone|timezone)=UTC$/.test(item)).length === 1 &&
+    value.proconfig.filter(item => item.startsWith('plan_cache_mode=')).length === value.proconfig.length - 2);
+  return { oid: value.oid, ownerOid: value.ownerOid, ownerIsPostgres: true, securityInvoker: true,
+    definitionMd5: value.definitionMd5, bodyMd5: value.bodyMd5, aclMd5: value.aclMd5, proconfig: [...value.proconfig] };
+}
+
+export function qaDailyBackendResult(value) {
+  assert.ok(Number.isSafeInteger(value?.pid) && value.pid > 0 && value.pid <= 2147483647 &&
+    typeof value.serverVersionNum === 'string' && /^[1-9][0-9]{4,7}$/.test(value.serverVersionNum) &&
+    value.role === 'service_role' && DAILY_PLAN_POLICIES.includes(value.callerPlanCacheMode), 'invalid-daily-backend');
+  return { pid: value.pid, serverVersionNum: value.serverVersionNum, role: 'service_role', callerPlanCacheMode: value.callerPlanCacheMode };
+}
+
+/** Completion belongs to this exact request, never a fresh pooled ROLLBACK. */
+export async function qaDailyProbeRequest({ sql, phases, query, schema, after }) {
+  const before = phases.length;
+  const rows = await sql(query, 'daily-diagnostic-probe');
+  const phase = phases.length === before + 1 ? phases.at(-1) : null;
+  assert.ok(phase?.kind === 'sql' && phase.phase === 'daily-diagnostic-probe' && phase.ok === true &&
+    Number.isInteger(phase.status) && phase.status >= 200 && phase.status < 300 && Array.isArray(rows) && rows.length === 1,
+  'daily-probe-request-incomplete');
+  return { ...qaDailyProbeResult(rows[0]?.result, schema, after), requestComplete: true,
+    outerRollbackRequestComplete: true, httpStatus: phase.status };
+}
+
 export function qaDailyProbeResult(result, schema, after) {
   const invalid = () => { throw new Error('invalid-daily-probe-result'); };
   if (![0, 256].includes(after) || result?.rollbackVerified !== true || result.dailyAfter !== String(after) ||
@@ -624,6 +674,7 @@ export function qaDailyProbeResult(result, schema, after) {
   const code = result.sqlstate === null ? null : sqlstate(result.sqlstate);
   if (result.sqlstate !== null && !code) invalid();
   return { rollbackVerified: true, dailyAfter: String(after), chunkIds: 256, beforeState,
+    backend: qaDailyBackendResult(result.backend), helperCatalog: qaDailyCatalogResult(result.helperCatalog),
     ioTimingEnabled: result.ioTimingEnabled, sqlstate: code,
     ...(code === null ? { summary: qaDailyPlanSummary(result.plan, schema) } : {}) };
 }
@@ -647,7 +698,8 @@ export function qaDailyBoundaryResult(value) {
   valid(value.successAt === null || typeof value.successAt === 'string' && Number.isFinite(Date.parse(value.successAt)));
   valid(value.worker === 'github-fixture' && value.failures === 0 && value.errorCode === null && value.retryAt === null);
   valid(Number.isSafeInteger(value.steps) && value.steps >= 0 && typeof value.dueHour === 'boolean' && typeof value.expectedFinish === 'boolean');
-  return { full, source, fixedControl: value.fixedControl, leaseToken: value.leaseToken, epoch: value.epoch,
+  return { full, source, backend: qaDailyBackendResult(value.backend), helperCatalog: qaDailyCatalogResult(value.helperCatalog),
+    fixedControl: value.fixedControl, leaseToken: value.leaseToken, epoch: value.epoch,
     expiresAt: value.expiresAt, requestId: value.requestId, worker: value.worker, checkedAt: value.checkedAt,
     successAt: value.successAt, dbNow: value.dbNow, dailyScan: value.dailyScan, dailyAfter: value.dailyAfter,
     steps: value.steps, dueHour: value.dueHour, chunk: fingerprint(value.chunk),
@@ -661,9 +713,12 @@ export function qaInterruptDailyDiagnostic(diagnostic) {
     for (const attempt of diagnostic.requests ?? []) {
       if (attempt.requestId === diagnostic.pending.requestId) attempt.status = 'interrupted';
     }
-    for (const attempt of [...(diagnostic.probes ?? []), ...(diagnostic.advances ?? [])]) {
-      if (diagnostic.pending.stepId && attempt.stepId === diagnostic.pending.stepId && attempt.status === 'pending') attempt.status = 'interrupted';
-    }
+  }
+  // A completed measurement can still be awaiting its catalog/state read. An
+  // interrupted read must leave that probe unverified even without a stepId on
+  // the pending state request. Cleanup never supplies isolation proof.
+  for (const attempt of [...(diagnostic.probes ?? []), ...(diagnostic.advances ?? [])]) {
+    if (attempt.status === 'pending') attempt.status = 'interrupted';
   }
   if (['pending', 'running'].includes(diagnostic.status)) diagnostic.status = 'interrupted';
 }
@@ -672,10 +727,15 @@ export function qaInterruptDailyDiagnostic(diagnostic) {
 export async function qaRunDailyDiagnostic({ diagnostic, requests, save, uuid = randomUUID,
   clock = { mono: () => performance.now(), wall: () => Date.now() } }) {
   const limits = DAILY_LEASE_BUDGET, started = clock.mono(), wallStarted = clock.wall();
-  let previousMono = started, claim, deadline, current, sourceBaseline, hourBaseline, membersBaseline;
+  let previousMono = started, claim, deadline, current, sourceBaseline, hourBaseline, membersBaseline, originalCatalog;
   Object.assign(diagnostic, { status: 'running', acceptance: false, requests: [], probes: [], advances: [], leases: [],
     comparison: 'new-full-baseline-per-lease-only-verified-finish-claim-deltas',
-    leaseSchedule: 'one-probe-per-fresh-normal-claim', limits });
+    leaseSchedule: 'one-probe-per-fresh-normal-claim', limits, schedule: DAILY_DIAGNOSTIC_PROBES,
+    experiment: 'matched-helper-function-local-alter-whole-advance',
+    planHistory: 'matched-DDL-invalidates-plans-not-uninterrupted-cache-history',
+    backendHistory: 'observed-pids-and-known-requests-only-no-session-affinity-or-cache-counts', backendCalls: [],
+    interpretation: 'A-must-reproduce-slow-high-hit-path-B-speed-alone-cannot-prove-generic',
+    conclusion: 'inconclusive-no-causal-verdict', genericPlanProven: false, workerAcceptance: false });
   const now = () => {
     const mono = clock.mono(), wall = clock.wall();
     assert.ok(Number.isFinite(mono) && mono >= previousMono && Number.isFinite(wall) &&
@@ -696,6 +756,16 @@ export async function qaRunDailyDiagnostic({ diagnostic, requests, save, uuid = 
       const result = await body(attempt);
       attempt.ms = now() - sent;
       assert.ok(attempt.ms <= cap, 'daily-diagnostic-request-budget');
+      if (result?.backend) {
+        const backend = qaDailyBackendResult(result.backend);
+        attempt.backend = backend;
+        // Same observed PID is evidence only of these recorded requests. It does
+        // not inventory SPI statements, pre-run activity or session cache state.
+        attempt.priorKnownCallsAtObservedPid = diagnostic.backendCalls.filter(row => row.backend.pid === backend.pid).map(row => row.index);
+        diagnostic.backendCalls.push({ index: diagnostic.backendCalls.length, requestId: attempt.requestId,
+          kind, backend, ...(metadata.stepId ? { stepId: metadata.stepId } : {}) });
+      }
+      if (result?.helperCatalog) attempt.helperCatalog = qaDailyCatalogResult(result.helperCatalog);
       attempt.status = 'completed'; delete diagnostic.pending; await save(); return result;
     } catch (error) {
       attempt.status = 'failed'; attempt.failure = 'daily-diagnostic-request-failed';
@@ -722,6 +792,11 @@ export async function qaRunDailyDiagnostic({ diagnostic, requests, save, uuid = 
     assert.equal(value.full.utcHour, hourBaseline, 'daily-diagnostic-hour-drift');
     assert.deepEqual(value.source, sourceBaseline, 'daily-diagnostic-source-drift');
     assert.deepEqual(value.full.tables.stats_prepared_members, membersBaseline, 'daily-diagnostic-members-drift');
+    const catalog = qaDailyCatalogResult(value.helperCatalog);
+    assert.ok(!catalog.proconfig.some(item => item.startsWith('plan_cache_mode=')), 'daily-original-policy-changed');
+    originalCatalog ??= catalog;
+    assert.deepEqual(catalog, originalCatalog, 'daily-helper-catalog-not-restored');
+    diagnostic.originalHelperCatalog ??= catalog;
     for (const [table, count] of Object.entries({ roblox_universes: 1105, stats_game_current_index: 2,
       roblox_universe_stats_daily: 100555, roblox_universe_stats_hourly: 8640 })) assert.equal(value.source[table].rows, count, 'daily-diagnostic-source-count');
     assert.equal(value.full.tables.stats_prepared_members.rows, 2, 'daily-diagnostic-members-count');
@@ -777,13 +852,13 @@ export async function qaRunDailyDiagnostic({ diagnostic, requests, save, uuid = 
     const attempt = { stepId: uuid(), status: 'pending', dailyAfter: current.dailyAfter };
     diagnostic.advances.push(attempt); await save();
     const result = await call('advance', limits.requestMs, () => requests.advance(claim, attempt.stepId), { stepId: attempt.stepId, lease: { ...claim } });
-    Object.assign(attempt, { status: 'completed', outcome: result });
+    Object.assign(attempt, { status: 'completed', outcome: result.outcome, backend: result.backend });
     // Committed advances legitimately renew the lease. Read its actual expiry;
     // never infer a new 240-second lease from completion time.
     const updated = await call('state', limits.stateMs, () => requests.state());
     setLease({ claimed: true, ...claim, expiresAt: updated.expiresAt });
     current = checkState(updated);
-    await save(); return result;
+    await save(); return result.outcome;
   };
   try {
     await save(); await claimFresh(); current = await readState();
@@ -799,23 +874,39 @@ export async function qaRunDailyDiagnostic({ diagnostic, requests, save, uuid = 
         assert.equal(current.dailyAfter, String(after)); assert.equal(current.dailyScan, scan);
       }
       const groupBaseline = current;
-      for (const probe of DAILY_DIAGNOSTIC_PROBES) {
+      for (const entry of DAILY_DIAGNOSTIC_PROBES.filter(item => item.after === after)) {
         await rotate(); leaseReserve(workReserve); admission(workReserve);
         assert.equal(current.fixedControl, groupBaseline.fixedControl, 'daily-diagnostic-control-drift');
         const baseline = current.full;
-        const attempt = { probe, dailyAfter: String(after), stepId: uuid(), status: 'pending', lease: { ...claim },
+        const attempt = { ...entry, probe: 'whole-advance', dailyAfter: String(after), stepId: uuid(), status: 'pending',
+          isolation: 'unknown', lease: { ...claim },
           baseline: 'new-full-baseline-for-this-lease', leaseIndex: diagnostic.leases.length - 1 };
         diagnostic.probes.push(attempt); await save();
-        const evidence = await call('probe', limits.requestMs, () => requests.probe(probe, after, claim, attempt.stepId),
-          { probe, dailyAfter: String(after), stepId: attempt.stepId, lease: { ...claim } });
-        Object.assign(attempt, evidence);
+        const evidence = await call('probe', limits.requestMs, () => requests.probe(entry, claim, attempt.stepId, originalCatalog),
+          { ...entry, probe: 'whole-advance', dailyAfter: String(after), stepId: attempt.stepId, lease: { ...claim } });
+        Object.assign(attempt, evidence, { requestId: diagnostic.requests.at(-1).requestId,
+          priorKnownCallsAtObservedPid: diagnostic.requests.at(-1).priorKnownCallsAtObservedPid });
+        await save();
         assert.deepEqual(evidence.beforeState, baseline, 'daily-probe-prestate-drift');
         assert.equal(evidence.rollbackVerified, true, 'daily-probe-rollback-unverified');
-        assert.equal(evidence.sqlstate, null, 'daily-probe-failed-see-receipt');
+        assert.equal(evidence.requestComplete, true, 'daily-probe-request-incomplete');
+        assert.equal(evidence.outerRollbackRequestComplete, true, 'daily-probe-request-incomplete');
+        const applied = qaDailyCatalogResult(evidence.helperCatalog);
+        for (const key of ['oid', 'ownerOid', 'ownerIsPostgres', 'securityInvoker', 'bodyMd5', 'aclMd5']) {
+          assert.deepEqual(applied[key], originalCatalog[key], 'daily-helper-identity-drift');
+        }
+        assert.deepEqual(applied.proconfig, [...originalCatalog.proconfig, `plan_cache_mode=${entry.policy}`], 'daily-helper-policy-drift');
+        // This next request can use another pooled backend. It corroborates the
+        // restored catalog; it cannot close an unknown preceding HTTP request.
         const next = await readState();
         assert.deepEqual(next.full, baseline, 'daily-probe-poststate-drift');
         assert.equal(next.fixedControl, current.fixedControl, 'daily-diagnostic-control-drift');
-        current = next; attempt.status = 'profiled'; attempt.leaseBaselineVerified = true; await save();
+        current = next;
+        Object.assign(attempt, { catalogRestoredVerified: true, restoredHelperCatalog: next.helperCatalog,
+          restorationBackend: next.backend, isolation: 'verified-logical-rollback-and-catalog-restored', leaseBaselineVerified: true });
+        await save();
+        assert.equal(evidence.sqlstate, null, 'daily-probe-failed-see-receipt');
+        attempt.status = 'profiled'; await save();
       }
       if (after === 0) {
         const scan = current.dailyScan;
@@ -824,7 +915,8 @@ export async function qaRunDailyDiagnostic({ diagnostic, requests, save, uuid = 
       }
     }
     await finish();
-    assert.equal(new Set(diagnostic.probes.map(item => `${item.dailyAfter}:${item.probe}`)).size, 12);
+    assert.deepEqual(diagnostic.probes.map(({ order, arm, policy, dailyAfter }) => ({ order, arm, policy, after: Number(dailyAfter) })), DAILY_DIAGNOSTIC_PROBES);
+    assert.ok(diagnostic.probes.every(item => item.catalogRestoredVerified && item.leaseBaselineVerified && item.rollbackVerified));
     diagnostic.status = 'profiled'; diagnostic.ms = now() - started; await save();
   } catch (error) {
     for (const attempt of [...diagnostic.probes, ...diagnostic.advances]) {
@@ -1388,7 +1480,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     if (mode === 'daily-diagnostic') {
       const diagnostic = identity.dailyDiagnostic = { status: 'pending', acceptance: false,
         scope: 'initial-fixture-chunks-0-and-256',
-        planBinding: 'typed-execute-using-custom-values-not-cached-plpgsql' };
+        planBinding: 'whole-advance-matched-function-local-policy-DDL-not-uninterrupted-cache-history' };
       await saveReceipt();
       assert.deepEqual(sourceRows, { hourly: '8640', daily: '100555' }, 'daily-diagnostic-source-population');
       const queries = fixtureDailyDiagnosticSql(await readFile(new URL(`../../${PREPARED_QA_MIGRATION_PATHS[0]}`, import.meta.url)), schema, privateSchema);
@@ -1407,17 +1499,13 @@ rollback;`, 'daily-diagnostic-state', { requestMs: DAILY_LEASE_BUDGET.stateMs })
           return qaDailyBoundaryResult(rows[0]?.result);
         },
         advance: async (lease, stepId) => {
-          const rows = await sql(`begin; set local statement_timeout='60s'; set local lock_timeout='500ms';
-set local role service_role;
-select ${schema}.run_stats_prepared_step_v1(${literal(lease.leaseToken)},${literal(lease.epoch)},${literal(stepId)},'{"kind":"advance"}'::jsonb) as result;
-commit;`, 'daily-diagnostic-reach');
-          return qaAdvanceOutcome(rows[0]?.result, stepId);
+          const rows = await sql(queries.advance(lease.leaseToken, lease.epoch, stepId), 'daily-diagnostic-reach');
+          assert.equal(rows.length, 1, 'invalid-daily-advance-response');
+          return { outcome: qaAdvanceOutcome(rows[0]?.result?.outcome, stepId),
+            backend: qaDailyBackendResult(rows[0]?.result?.backend) };
         },
-        probe: async (probe, after, lease, stepId) => {
-          const rows = await sql(queries.probe(probe, after, lease.leaseToken, lease.epoch, stepId), 'daily-diagnostic-probe');
-          assert.equal(rows.length, 1, 'invalid-daily-probe-response');
-          return qaDailyProbeResult(rows[0]?.result, schema, after);
-        },
+        probe: async (entry, lease, stepId, originalCatalog) => qaDailyProbeRequest({ sql, phases,
+          query: queries.probe(entry.order, lease.leaseToken, lease.epoch, stepId, originalCatalog), schema, after: entry.after }),
       } });
       // A successful diagnostic keeps completed=false; it is not acceptance.
       await saveReceipt();

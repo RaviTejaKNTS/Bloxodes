@@ -10,6 +10,7 @@ import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigr
   qaAdvanceStateSql, qaAdvanceState, qaAdvanceOutcome, qaTimingSummary, qaBeginDriveAttempt,
   qaRecordFixtureBatch, qaDriveFailure, DAILY_DIAGNOSTIC_PROBES, fixtureDailyDiagnosticSql,
   qaDailyPlanSummary, qaDailyProbeResult, qaDailyBoundaryResult, qaRunDailyDiagnostic,
+  qaDailyCatalogResult, qaDailyBackendResult, qaDailyProbeRequest,
   qaInterruptDailyDiagnostic, DAILY_LEASE_BUDGET, validateQaReaderSelection,
   qaReaderSqlAdapter, qaInterruptReaderDiagnostic, qaReaderDefinitionProof } from '../../ci/stats-prepared-db-qa.mjs';
 import { READER_DIAGNOSTIC_PHASES } from '../../ci/stats-prepared-reader-runner.mjs';
@@ -169,7 +170,7 @@ test('main reader branch follows installation proof and returns before ordinary 
   assert.match(main, /finally \{\s+try \{ await cleanup\(\);/);
 });
 
-test('daily inner diagnostic derives its complete modifying CTE from immutable bytes and refuses foreign targets', async () => {
+test('six whole-call policy probes retain frozen source identity and use matched owner DDL before service measurement', async () => {
   const [{ bytes }] = await migrationSources();
   const diagnostic = fixtureDailyDiagnosticSql(bytes, schema, privateSchema);
   for (const args of [[bytes, 'public', privateSchema], [bytes, schema, 'stats_prepared_private'],
@@ -180,27 +181,43 @@ test('daily inner diagnostic derives its complete modifying CTE from immutable b
   const start = original.indexOf(' with source as materialized (');
   const cte = original.slice(start, original.indexOf(' from sums s where v.id=s.version;', start) + ' from sums s where v.id=s.version;'.length);
   assert.equal(diagnostic.cteSha256, createHash('sha256').update(cte).digest('hex'));
-  const embedded = /when 'daily-cte' then '((?:''|[^'])*)'/.exec(diagnostic.install)?.[1].replaceAll("''", "'");
-  assert.equal(embedded?.replaceAll(schema + '.', 'public.').replaceAll('$1', 'ids')
-    .replaceAll('$2', 'low_date').replaceAll('$3', 'high_date').replaceAll('$4', 'c.daily_scan'), cte);
-  assert.match(diagnostic.install, /insert into qa_stats_012345abcdef[.]stats_prepared_visits/);
-  assert.match(diagnostic.install, /insert into qa_stats_012345abcdef[.]stats_prepared_visit_universes/);
-  assert.match(diagnostic.install, /EXPLAIN \(ANALYZE,BUFFERS,WAL,SETTINGS,FORMAT JSON\)/);
+  assert.deepEqual(DAILY_DIAGNOSTIC_PROBES.map(({ arm, policy, after }) => [arm, policy, after]), [
+    ['A', 'auto', 0], ['B', 'force_custom_plan', 0], ['B', 'force_custom_plan', 0], ['A', 'auto', 0],
+    ['B', 'force_custom_plan', 256], ['A', 'auto', 256],
+  ]);
+  assert.ok(Object.isFrozen(DAILY_DIAGNOSTIC_PROBES) && DAILY_DIAGNOSTIC_PROBES.every(Object.isFrozen));
+  assert.match(diagnostic.install, /EXPLAIN \(ANALYZE,BUFFERS,WAL,SETTINGS,FORMAT JSON\) select qa_stats_012345abcdef[.]run_stats_prepared_step_v1/);
   assert.match(diagnostic.install, /exception when query_canceled or others then/);
   assert.match(diagnostic.install, /before_state is distinct from after_state/);
   assert.match(diagnostic.install, /daily-probe-wrong-phase/);
+  assert.match(diagnostic.install, /lease_token=p_token and epoch=p_epoch/);
   assert.match(diagnostic.install, /daily-probe-wrong-cursor/);
-  assert.doesNotMatch(diagnostic.install, /create or replace|disable trigger|session_replication_role|drop index|drop constraint/i);
+  assert.match(diagnostic.install, /current_user<>'service_role'/);
+  assert.match(diagnostic.install, /pg_backend_pid\(\)/);
+  assert.match(diagnostic.install, /'callerPlanCacheMode',current_setting\('plan_cache_mode'\)/);
+  assert.doesNotMatch(diagnostic.install, /daily-cte|daily-helper|shared-cleanup|cleanup-generation-candidate|with source as materialized/);
+  assert.doesNotMatch(diagnostic.install, /create or replace|security definer|disable trigger|session_replication_role|drop index|drop constraint|pg_stat_statements/i);
   const identities = ['00000000-0000-4000-8000-000000000001', '00000000-0000-4000-8000-000000000002'];
-  for (const probe of DAILY_DIAGNOSTIC_PROBES) for (const after of [0, 256]) {
-    const request = diagnostic.probe(probe, after, identities[0], '1', identities[1]);
-    assert.match(request, /^begin; set local statement_timeout='100s'; set local lock_timeout='500ms'; set local role service_role;/);
+  for (const { order, policy, after } of DAILY_DIAGNOSTIC_PROBES) {
+    const request = diagnostic.probe(order, identities[0], '1', identities[1], diagnosticCatalog());
+    assert.match(request, /^begin; set local statement_timeout='100s'; set local lock_timeout='500ms';/);
+    assert.match(request, /current_user<>'postgres'/);
+    assert.match(request, /original-catalog-drift/);
+    const ddl = `alter function ${privateSchema}.stats_prepared_daily_v1() set plan_cache_mode = ${policy};`;
+    assert.equal(request.split('alter function ').length - 1, 1);
+    assert.ok(request.indexOf(ddl) > request.indexOf('do $qa_owner$'));
+    assert.ok(request.indexOf(ddl) < request.indexOf('set local role service_role;'));
+    assert.ok(request.includes(`qa_daily_probe_v1('${policy}',${after},`));
     assert.match(request, /rollback;$/);
-    assert.doesNotMatch(request, /commit;/);
+    assert.doesNotMatch(request, /commit;|(?:^|;\s*)set (?:local )?plan_cache_mode|alter (?:database|role)|grant|security definer|insert into|delete from|update .*lease_until/i);
   }
-  for (const args of [['SECRET', 0, identities[0], '1', identities[1]],
-    ['daily-cte', 512, identities[0], '1', identities[1]], ['daily-cte', 0, 'SECRET', '1', identities[1]],
-    ['daily-cte', 0, identities[0], '1;select 1', identities[1]]]) assert.throws(() => diagnostic.probe(...args));
+  for (const args of [['SECRET', identities[0], '1', identities[1], diagnosticCatalog()],
+    [0, identities[0], '1', identities[1], diagnosticCatalog()], [7, identities[0], '1', identities[1], diagnosticCatalog()],
+    [1, 'SECRET', '1', identities[1], diagnosticCatalog()], [1, identities[0], '1;select 1', identities[1], diagnosticCatalog()],
+    [1, identities[0], '1', identities[1], diagnosticCatalog('auto')]]) assert.throws(() => diagnostic.probe(...args));
+  const advance = diagnostic.advance(identities[0], '1', identities[1]);
+  assert.match(advance, /statement_timeout='60s'/); assert.match(advance, /commit;$/);
+  assert.doesNotMatch(advance, /alter function|qa_daily_probe/);
 });
 
 const diagnosticPlan = () => [{ 'Planning Time': 1.5, 'Execution Time': 40000, 'Query Text': 'SECRET SQL',
@@ -245,7 +262,13 @@ test('daily plan receipts retain rows, loops, materialization, spills, buffers, 
   assert.throws(() => qaDailyPlanSummary(oversized, schema), /daily-plan-too-large/);
 });
 
+const diagnosticCatalog = policy => ({ oid: '12345', ownerOid: '10', ownerIsPostgres: true, securityInvoker: true,
+  definitionMd5: (policy ? 'b' : 'a').repeat(32), bodyMd5: 'c'.repeat(32), aclMd5: 'd'.repeat(32),
+  proconfig: ['search_path=""', 'TimeZone=UTC', ...(policy ? [`plan_cache_mode=${policy}`] : [])] });
+const diagnosticBackend = (pid = 101) => ({ pid, serverVersionNum: '170006', role: 'service_role', callerPlanCacheMode: 'auto' });
+
 const diagnosticResult = () => ({ rollbackVerified: true, dailyAfter: '0', chunkIds: 256,
+  backend: diagnosticBackend(), helperCatalog: diagnosticCatalog('auto'),
   ioTimingEnabled: false, sqlstate: null, plan: diagnosticPlan(), beforeState: { utcHour: 1792771200,
     tables: Object.fromEntries(['stats_prepared_control', 'stats_prepared_members', 'stats_prepared_dirty',
       'stats_prepared_versions', 'stats_prepared_buckets', 'stats_prepared_visits', 'stats_prepared_generations',
@@ -269,6 +292,41 @@ test('daily probe accepts only full state proof; SQLSTATE failure cannot become 
   for (const patch of [{ rows: -1 }, { rows: 'SECRET' }, { digest: 'SECRET' }]) {
     const invalid = diagnosticResult(); Object.assign(invalid.beforeState.tables.stats_prepared_visits, patch);
     assert.throws(() => qaDailyProbeResult(invalid, schema, 0), /^Error: invalid-daily-probe-result$/);
+  }
+});
+
+test('catalog and backend projection reject arbitrary metadata without exposing definitions or provider strings', () => {
+  const catalog = { ...diagnosticCatalog('force_custom_plan'), SECRET: 'SECRET SQL', prosrc: 'SECRET SQL' };
+  const backend = { ...diagnosticBackend(), SECRET: 'SECRET SQL' };
+  assert.deepEqual(qaDailyCatalogResult(catalog), diagnosticCatalog('force_custom_plan'));
+  assert.deepEqual(qaDailyBackendResult(backend), diagnosticBackend());
+  assert.doesNotMatch(JSON.stringify(qaDailyProbeResult({ ...diagnosticResult(), backend, helperCatalog: catalog }, schema, 0)), /SECRET|prosrc/);
+  for (const patch of [{ proconfig: ['SECRET'] }, { proconfig: ['search_path=""', 'TimeZone=UTC', 'SECRET=SECRET'] },
+    { ownerOid: 'SECRET' }, { ownerIsPostgres: false }, { securityInvoker: false }, { definitionMd5: 'SECRET' }, { aclMd5: 'SECRET' }]) {
+    assert.throws(() => qaDailyCatalogResult({ ...catalog, ...patch }), /invalid-daily-helper-catalog/);
+  }
+  for (const patch of [{ pid: -1 }, { pid: '101' }, { serverVersionNum: 'SECRET' }, { role: 'postgres' }, { callerPlanCacheMode: 'SECRET' }]) {
+    assert.throws(() => qaDailyBackendResult({ ...backend, ...patch }), /invalid-daily-backend/);
+  }
+});
+
+test('only the completed exact Management probe request may establish outer rollback completion', async () => {
+  const validPhase = { kind: 'sql', phase: 'daily-diagnostic-probe', status: 200, ok: true };
+  const phases = [];
+  const result = await qaDailyProbeRequest({ phases, schema, after: 0, query: 'fixed-query', sql: async (query, phase) => {
+    assert.equal(query, 'fixed-query'); assert.equal(phase, 'daily-diagnostic-probe');
+    phases.push(validPhase); return [{ result: diagnosticResult() }];
+  } });
+  assert.equal(result.outerRollbackRequestComplete, true); assert.equal(result.requestComplete, true);
+  for (const variant of ['stale', 'wrong-phase', 'failed', 'nonarray', 'multiple', 'throw']) {
+    const history = [validPhase];
+    await assert.rejects(qaDailyProbeRequest({ phases: history, schema, after: 0, query: 'fixed-query', sql: async () => {
+      if (variant === 'throw') throw new Error('transport-unknown');
+      if (variant !== 'stale') history.push({ ...validPhase,
+        ...(variant === 'wrong-phase' ? { phase: 'daily-diagnostic-state' } : {}),
+        ...(variant === 'failed' ? { ok: false, status: 500 } : {}) });
+      return variant === 'nonarray' ? {} : variant === 'multiple' ? [{ result: diagnosticResult() }, {}] : [{ result: diagnosticResult() }];
+    } }));
   }
 });
 
@@ -296,6 +354,7 @@ function dailyHarness(options = {}) {
     const source = Object.fromEntries(Object.entries({ roblox_universes: 1105, stats_game_current_index: 2,
       roblox_universe_stats_daily: 100555, roblox_universe_stats_hourly: 8640 }).map(([key, count]) => [key, fp(key, count)]));
     const value = { full: { utcHour: Math.floor(clock.wall() / 3_600_000) * 3600, tables }, source,
+      backend: diagnosticBackend(202), helperCatalog: diagnosticCatalog(),
       fixedControl: digest({ scan, after, steps }), ...lease, dbNow: iso(), successAt, checkedAt,
       worker: 'github-fixture', failures: 0, retryAt: null, errorCode: null,
       dailyScan: scan, dailyAfter: after, steps, dueHour: false, chunk: fp(after, 256),
@@ -320,25 +379,34 @@ function dailyHarness(options = {}) {
     state: async finished => { tick('state'); return qaDailyBoundaryResult(makeState(finished)); },
     advance: async (old, stepId) => {
       lease.expiresAt = iso(clock.wall() + 240_000); tick('advance'); steps++;
-      const phase = scan ? 'daily-batch' : 'daily-start';
-      if (scan) after = '256'; else scan = uuid();
+      const phase = options.neverDailyStart ? 'hour' : scan ? 'daily-batch' : 'daily-start';
+      if (phase === 'daily-batch') after = '256'; else if (phase === 'daily-start') scan = uuid();
       receipts.push({ stepId, kind: phase });
-      return { phase, more: true };
+      return { outcome: { phase, more: true }, backend: diagnosticBackend(101) };
     },
-    probe: async (probe, cursor, old, stepId) => {
-      assert.equal(String(cursor), after); assert.equal(old.leaseToken, lease.leaseToken);
+    probe: async (entry, old, stepId, originalCatalog) => {
+      assert.deepEqual(originalCatalog, diagnosticCatalog());
+      assert.equal(String(entry.after), after); assert.equal(old.leaseToken, lease.leaseToken);
       assert.ok(Date.parse(old.expiresAt) - clock.wall() >= DAILY_LEASE_BUDGET.requestMs +
         DAILY_LEASE_BUDGET.stateMs + DAILY_LEASE_BUDGET.controlMs + DAILY_LEASE_BUDGET.marginMs);
       const boundary = makeState(); probeCount++;
       tick('probe');
       if (options.failProbe) throw new Error('SECRET TRANSPORT BODY');
       if (options.clockDrift) wallDrift += 5000;
-      return { rollbackVerified: true, beforeState: boundary.full, dailyAfter: after, chunkIds: 256,
-        sqlstate: null, summary: { plan: {} }, stepId, probe };
+      const result = { rollbackVerified: true, beforeState: boundary.full, dailyAfter: after, chunkIds: 256,
+        backend: diagnosticBackend(probeCount % 2 ? 303 : 304), helperCatalog: diagnosticCatalog(entry.policy),
+        requestComplete: true, outerRollbackRequestComplete: true, httpStatus: 200,
+        sqlstate: options.probeSqlstate ?? null,
+        ...(options.probeSqlstate ? {} : { summary: { 'Execution Time': 850, plan: { 'Shared Hit Blocks': 213144 } } }) };
+      options.patchProbe?.(result, entry);
+      return result;
     },
   };
   const save = async () => {
     saved.push(structuredClone(diagnostic));
+    if (options.interruptAfterProbe && probeCount > 0 && diagnostic.pending?.kind === 'state' && diagnostic.pending.status === 'pending') {
+      throw new Error('simulated-post-probe-interruption');
+    }
     if (options.interruptKind && diagnostic.pending?.kind === options.interruptKind && diagnostic.pending.status === 'pending') {
       options.interruptKind = null; throw new Error('simulated-runner-interruption');
     }
@@ -346,30 +414,44 @@ function dailyHarness(options = {}) {
   return { diagnostic, events, saved, run: () => qaRunDailyDiagnostic({ diagnostic, requests, save, clock, uuid }) };
 }
 
-test('twelve successful slow probes each use a fresh normal lease across the old lease boundary', async () => {
+test('six successful slow whole probes use fresh leases, exact A-B-B-A / B-A order and restored catalogs', async () => {
   const harness = dailyHarness(); await harness.run();
   const { diagnostic, events } = harness;
   assert.equal(diagnostic.status, 'profiled'); assert.equal(diagnostic.acceptance, false);
-  assert.equal(diagnostic.probes.length, 12);
-  assert.equal(new Set(diagnostic.probes.map(row => `${row.dailyAfter}:${row.probe}`)).size, 12);
-  assert.equal(new Set(diagnostic.probes.map(row => row.lease.leaseToken)).size, 12);
+  assert.equal(diagnostic.probes.length, 6);
+  assert.deepEqual(diagnostic.probes.map(({ order, arm, policy, dailyAfter }) => ({ order, arm, policy, after: Number(dailyAfter) })), DAILY_DIAGNOSTIC_PROBES);
+  assert.equal(new Set(diagnostic.probes.map(row => row.lease.leaseToken)).size, 6);
   assert.equal(new Set(diagnostic.requests.map(row => row.requestId)).size, diagnostic.requests.length);
-  assert.equal(new Set(diagnostic.probes.map(row => row.stepId)).size, 12);
+  assert.equal(new Set(diagnostic.probes.map(row => row.stepId)).size, 6);
   assert.ok(diagnostic.ms > 240_000 && diagnostic.ms < 1_200_000);
   assert.deepEqual(diagnostic.advances.map(row => row.outcome.phase), ['daily-start', 'daily-batch']);
-  assert.equal(events.filter(row => row.kind === 'finish').length, 13);
+  assert.deepEqual(events.filter(row => ['advance', 'probe'].includes(row.kind)).map(row => row.kind),
+    ['advance', 'probe', 'probe', 'probe', 'probe', 'advance', 'probe', 'probe']);
+  assert.equal(events.filter(row => row.kind === 'finish').length, 7);
   assert.ok(diagnostic.leases.every(row => row.crossLeasePreparedAndSourceVerified));
-  assert.ok(diagnostic.probes.every(row => row.leaseBaselineVerified && row.rollbackVerified));
+  assert.ok(diagnostic.probes.every(row => row.leaseBaselineVerified && row.rollbackVerified && row.catalogRestoredVerified &&
+    row.outerRollbackRequestComplete && row.isolation === 'verified-logical-rollback-and-catalog-restored'));
+  assert.equal(diagnostic.conclusion, 'inconclusive-no-causal-verdict');
+  assert.equal(diagnostic.genericPlanProven, false); assert.equal(diagnostic.workerAcceptance, false);
+  assert.match(diagnostic.planHistory, /matched-DDL-invalidates-plans-not-uninterrupted-cache-history/);
+  assert.ok(diagnostic.backendCalls.some(row => row.kind === 'advance'));
+  const probeRequests = diagnostic.requests.filter(row => row.kind === 'probe');
+  assert.deepEqual(probeRequests[0].priorKnownCallsAtObservedPid, []);
+  assert.equal(probeRequests[2].priorKnownCallsAtObservedPid.length, 1);
+  for (const row of probeRequests) for (const index of row.priorKnownCallsAtObservedPid) {
+    assert.equal(diagnostic.backendCalls[index].backend.pid, row.backend.pid);
+  }
+  assert.ok(diagnostic.probes.every(row => row.backend.pid !== row.restorationBackend.pid));
 });
 
 test('renew before insufficient full probe reserve; never advance just to renew', async () => {
-  const harness = dailyHarness({ duration: (kind, count) => kind === 'probe' ? count === 6 ? 100_000 : 75_000 : kind === 'advance' ? 23_000 : 1000 });
+  const harness = dailyHarness({ duration: (kind, count) => kind === 'probe' ? count === 4 ? 100_000 : 75_000 : kind === 'advance' ? 23_000 : 1000 });
   await harness.run();
-  const sixth = harness.events.filter(row => row.kind === 'probe')[5];
+  const fourth = harness.events.filter(row => row.kind === 'probe')[3];
   const bridge = harness.events.filter(row => row.kind === 'advance')[1];
-  assert.ok(bridge.epoch > sixth.epoch);
+  assert.ok(bridge.epoch > fourth.epoch);
   assert.equal(harness.diagnostic.advances.length, 2);
-  assert.equal(harness.diagnostic.probes.length, 12);
+  assert.equal(harness.diagnostic.probes.length, 6);
 });
 
 test('reject cursor, scan, chunk, source, member, hour and unauthorized control/receipt drift across claims', async () => {
@@ -386,12 +468,12 @@ test('reject cursor, scan, chunk, source, member, hour and unauthorized control/
 });
 
 test('clock drift and cumulative total budget fail closed with durable request evidence', async () => {
-  for (const options of [{ clockDrift: true }, { duration: kind => kind === 'probe' ? 100_000 : kind === 'advance' ? 23_000 : 1000 }]) {
+  for (const options of [{ clockDrift: true }, { neverDailyStart: true }]) {
     const harness = dailyHarness(options);
     await assert.rejects(harness.run(), /daily-diagnostic-clock-drift|bounded-daily-diagnostic-incomplete/);
     assert.equal(harness.diagnostic.status, 'failed');
     assert.ok(harness.saved.some(row => row.pending?.status === 'pending'));
-    assert.ok(harness.diagnostic.probes.length < 12);
+    assert.ok(harness.diagnostic.probes.length < 6);
   }
 });
 
@@ -410,6 +492,11 @@ test('failed requests and runner interruption retain pending identities through 
   await assert.rejects(failed.run());
   assert.equal(failed.diagnostic.pending.kind, 'probe'); assert.equal(failed.diagnostic.pending.status, 'failed');
   assert.equal(failed.diagnostic.probes[0].status, 'failed');
+  assert.equal(failed.events.at(-1).kind, 'probe'); // No subsequent state or retry.
+  assert.equal(failed.diagnostic.probes[0].isolation, 'unknown');
+  const retained = structuredClone(failed.diagnostic);
+  qaInterruptDailyDiagnostic(failed.diagnostic); // Successful owned cleanup is not closure proof.
+  assert.deepEqual(failed.diagnostic, retained);
   assert.doesNotMatch(JSON.stringify(failed.diagnostic), /SECRET/);
   const interrupted = dailyHarness({ interruptKind: 'claim' });
   await assert.rejects(interrupted.run(), /simulated-runner-interruption/);
@@ -418,6 +505,96 @@ test('failed requests and runner interruption retain pending identities through 
   qaInterruptDailyDiagnostic(durable);
   assert.equal(durable.pending.status, 'interrupted'); assert.equal(durable.requests[0].status, 'interrupted');
   assert.ok(durable.pending.requestId); assert.equal(durable.acceptance, false);
+});
+
+test('each of the six probes fails closed on un-restored table state, before a later probe can run', async () => {
+  for (let order = 1; order <= 6; order++) {
+    const harness = dailyHarness({ patchState: (value, context) => {
+      if (context.probeCount === order) value.full.tables.stats_prepared_versions.digest = 'b'.repeat(32);
+    } });
+    await assert.rejects(harness.run(), /daily-probe-poststate-drift/);
+    assert.equal(harness.diagnostic.probes.length, order);
+    assert.equal(harness.diagnostic.probes.at(-1).status, 'failed');
+    assert.equal(harness.diagnostic.probes.at(-1).isolation, 'unknown');
+    assert.equal(harness.diagnostic.probes.at(-1).catalogRestoredVerified, undefined);
+    assert.equal(harness.diagnostic.acceptance, false);
+  }
+});
+
+test('restored catalog must match original proconfig, definition, body, owner, ACL and identity', async () => {
+  const patches = [catalog => { catalog.proconfig.push('plan_cache_mode=auto'); },
+    ...['definitionMd5', 'bodyMd5', 'aclMd5'].map(key => catalog => { catalog[key] = 'e'.repeat(32); }),
+    ...['oid', 'ownerOid'].map(key => catalog => { catalog[key] = '999'; })];
+  for (const patch of patches) {
+    const harness = dailyHarness({ patchState: (value, context) => {
+      if (context.probeCount > 0) patch(value.helperCatalog);
+    } });
+    await assert.rejects(harness.run(), /daily-helper-catalog-not-restored|daily-original-policy-changed/);
+    assert.equal(harness.diagnostic.probes.length, 1);
+    assert.equal(harness.diagnostic.probes[0].outerRollbackRequestComplete, true);
+    assert.equal(harness.diagnostic.probes[0].isolation, 'unknown');
+    assert.equal(harness.diagnostic.probes[0].catalogRestoredVerified, undefined);
+  }
+});
+
+test('applied policy is catalog evidence; caller policy is separate and never an inside-helper observation', async () => {
+  const patches = [row => { row.helperCatalog = diagnosticCatalog('force_custom_plan'); },
+    row => { row.helperCatalog.bodyMd5 = 'e'.repeat(32); }, row => { row.requestComplete = false; },
+    row => { row.outerRollbackRequestComplete = false; }];
+  for (const patchProbe of patches) {
+    const harness = dailyHarness({ patchProbe });
+    await assert.rejects(harness.run(), /daily-helper-policy-drift|daily-helper-identity-drift|daily-probe-request-incomplete/);
+    assert.equal(harness.diagnostic.probes.length, 1);
+    assert.equal(harness.diagnostic.probes[0].isolation, 'unknown');
+  }
+  const harness = dailyHarness(); await harness.run();
+  const custom = harness.diagnostic.probes.find(row => row.arm === 'B');
+  assert.equal(custom.backend.callerPlanCacheMode, 'auto');
+  assert.ok(custom.helperCatalog.proconfig.includes('plan_cache_mode=force_custom_plan'));
+  assert.equal(custom.insideHelperPolicy, undefined);
+});
+
+test('all-fast A, first-only slow A and repeated slow A with fast B never manufacture a generic-plan verdict', async () => {
+  for (const pattern of ['all-fast', 'first-A-slow', 'all-A-slow']) {
+    const harness = dailyHarness({ patchProbe: (row, entry) => {
+      const slow = pattern === 'all-A-slow' && entry.arm === 'A' || pattern === 'first-A-slow' && entry.order === 1;
+      row.summary = { 'Execution Time': slow ? 25241.653 : 850.627,
+        plan: { 'Shared Hit Blocks': slow ? 4572573 : 213144 } };
+    } });
+    await harness.run();
+    assert.equal(harness.diagnostic.probes.length, 6);
+    assert.equal(harness.diagnostic.status, 'profiled');
+    assert.equal(harness.diagnostic.conclusion, 'inconclusive-no-causal-verdict');
+    assert.equal(harness.diagnostic.genericPlanProven, false);
+    assert.equal(harness.diagnostic.acceptance, false);
+    assert.equal(harness.diagnostic.workerAcceptance, false);
+    assert.match(harness.diagnostic.interpretation, /A-must-reproduce-slow-high-hit-path-B-speed-alone-cannot-prove-generic/);
+  }
+});
+
+test('caught SQL failure may prove restored state but cannot profile successfully or continue', async () => {
+  const harness = dailyHarness({ probeSqlstate: '57014' });
+  await assert.rejects(harness.run(), /daily-probe-failed-see-receipt/);
+  assert.equal(harness.diagnostic.probes.length, 1);
+  const probe = harness.diagnostic.probes[0];
+  assert.equal(probe.status, 'failed'); assert.equal(probe.catalogRestoredVerified, true);
+  assert.equal(probe.sqlstate, '57014'); assert.equal(probe.summary, undefined);
+  assert.equal(harness.diagnostic.acceptance, false);
+});
+
+test('interruption after received probe preserves plan and leaves catalog/isolation unknown through cleanup', async () => {
+  const harness = dailyHarness({ interruptAfterProbe: true });
+  await assert.rejects(harness.run(), /simulated-post-probe-interruption/);
+  const durable = harness.saved.find(row => row.pending?.kind === 'state' && row.probes[0]?.outerRollbackRequestComplete);
+  assert.ok(durable);
+  qaInterruptDailyDiagnostic(durable);
+  assert.equal(durable.pending.status, 'interrupted');
+  assert.equal(durable.probes[0].status, 'interrupted');
+  assert.equal(durable.probes[0].isolation, 'unknown');
+  assert.equal(durable.probes[0].catalogRestoredVerified, undefined);
+  assert.equal(durable.probes[0].summary['Execution Time'], 850);
+  assert.equal(durable.probes[0].outerRollbackRequestComplete, true);
+  assert.equal(durable.acceptance, false);
 });
 
 test('boundary SQL separately hashes source and retained receipts; no direct lease or cursor writes', async () => {
