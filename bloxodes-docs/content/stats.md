@@ -16,6 +16,8 @@ Membership replacement deletes rows with an explicit non-null primary-key predic
 
 One monotonic 210-second invocation budget includes claim, advance ambiguity recovery and durable finish recovery. Every HTTP call is limited by the remaining budget and its 10-second advance or 8-second control ceiling. Starting another advance requires 53 seconds remaining for receipt lookup, identical replay and finish recovery. HTTP cancellation does not prove SQL rollback; SQL retains separate statement and lock deadlines.
 
+The small correctness fixture records outer advance phases, timings and bounded cursor context. Shared cleanup runs on every advance and remains unattributed within that timing. A grouped SQL success does not prove the real SQL or HTTP deadline. Representative managed-development and actual worker-loop evidence remain separate requirements.
+
 SQL result states are ready, partial, last-good, verified empty and unavailable. A useful last-good result keeps its original dates. `get_stats_prepared_health_v1` reports schema compatibility separately from operational state. A compatible response or non-null generation ID alone does not prove usable chart coverage. The public API/UI cutover, private authenticated web health route, removal of chart API warming and external prepared-heartbeat monitor belong to the reader release; they are not active from this producer release alone.
 
 Successfully removing the final source observation publishes an immutable missing-source generation. Selected rows then return unavailable. Cold empty work and unchanged checks do not refresh generation or publication dates. Processed-empty buckets describe missing coverage; they are not public zero observations.

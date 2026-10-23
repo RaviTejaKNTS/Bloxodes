@@ -25,6 +25,8 @@ const percentage = (part, total) => total === 0n ? 0 : Math.round(Number(part) /
 const DRIVE_MAX_STEPS = 6000, DRIVE_BUDGET_MS = 1_200_000;
 const FIXTURE_BATCH_MAX_STEPS = 256, FIXTURE_BATCH_WORK_MS = 40_000, FIXTURE_BATCH_OUTER_MS = 60_000;
 const MANAGEMENT_REQUEST_MS = 120_000;
+const SLOW_CALL_MS = 1000, SLOW_CALL_LIMIT = 8;
+const UUID = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/;
 const STEP_PHASES = new Set(['platform-publish', 'hour', 'daily-start', 'daily-cleanup-wait',
   'daily-membership-restart', 'daily-complete', 'daily-batch', 'visit-totals',
   ...[1, 7, 14, 30, 90].map(days => `visit-range-${days}`), 'visit-publish', 'hour-backfill', 'unchanged', 'cleanup']);
@@ -263,13 +265,13 @@ export function fixtureDriveBatchSql(schema, privateSchema) {
   // One SELECT returns the entire batch; do not depend on Management API handling
   // of multiple SELECT result sets. The existing outer 60s deadline still wins.
   return `begin;
-create function ${privateSchema}.qa_drive_batch_v1(p_token uuid,p_epoch bigint,p_steps integer,p_budget_ms integer)
+create function ${privateSchema}.qa_drive_batch_v1(p_token uuid,p_epoch bigint,p_steps integer,p_budget_ms integer,p_first_step uuid)
 returns jsonb language plpgsql volatile security invoker set search_path='' set timezone='UTC' as $qa_drive$
 declare started timestamptz:=clock_timestamp(); began timestamptz; outcome jsonb;
-  outcomes jsonb:='[]'; maximum_ms numeric:=0; step_ms numeric; n integer;
+  outcomes jsonb:='[]'; maximum_ms numeric:=0; step_ms numeric; n integer; step_id uuid; pre_state jsonb;
 begin
   if p_steps is null or p_steps not between 1 and ${FIXTURE_BATCH_MAX_STEPS}
-    or p_budget_ms is null or p_budget_ms not between 1 and ${FIXTURE_BATCH_WORK_MS} then
+    or p_budget_ms is null or p_budget_ms not between 1 and ${FIXTURE_BATCH_WORK_MS} or p_first_step is null then
     raise exception 'invalid-fixture-batch' using errcode='22023';
   end if;
   for n in 1..p_steps loop
@@ -277,19 +279,143 @@ begin
     -- 6s floor. The real outer deadline still cancels an unexpectedly slow call.
     exit when n>1 and extract(epoch from (clock_timestamp()-started))*1000
       +greatest(maximum_ms,6000)>=p_budget_ms;
+    step_id:=case when n=1 then p_first_step else pg_catalog.gen_random_uuid() end;
+    ${qaAdvanceStateSql(schema)} into pre_state;
     began:=clock_timestamp();
-    outcome:=${schema}.run_stats_prepared_step_v1(p_token,p_epoch,pg_catalog.gen_random_uuid(),'{"kind":"advance"}'::jsonb);
+    outcome:=${schema}.run_stats_prepared_step_v1(p_token,p_epoch,step_id,'{"kind":"advance"}'::jsonb);
     step_ms:=extract(epoch from (clock_timestamp()-began))*1000;
     maximum_ms:=greatest(maximum_ms,step_ms);
-    outcomes:=outcomes||jsonb_build_array(outcome);
+    outcomes:=outcomes||jsonb_build_array(outcome||jsonb_build_object('stepId',step_id,'sqlMs',step_ms,'preState',pre_state));
     exit when outcome->'more'='false'::jsonb;
   end loop;
+  ${qaAdvanceStateSql(schema)} into pre_state;
   return jsonb_build_object('results',outcomes,'sqlMs',extract(epoch from (clock_timestamp()-started))*1000,
-    'maximumSqlStepMs',maximum_ms);
+    'maximumSqlStepMs',maximum_ms,'finalState',pre_state);
 end $qa_drive$;
-revoke all on function ${privateSchema}.qa_drive_batch_v1(uuid,bigint,integer,integer) from public,anon,authenticated;
-grant execute on function ${privateSchema}.qa_drive_batch_v1(uuid,bigint,integer,integer) to service_role;
+revoke all on function ${privateSchema}.qa_drive_batch_v1(uuid,bigint,integer,integer,uuid) from public,anon,authenticated;
+grant execute on function ${privateSchema}.qa_drive_batch_v1(uuid,bigint,integer,integer,uuid) to service_role;
 commit;`;
+}
+
+// Only a singleton control row and the unique building visit generation. No
+// source scans/counts or payloads. This is context, not a prediction of which
+// branch will run (publication probes and shared cleanup can also do work).
+export function qaAdvanceStateSql(schema) {
+  fixtureMigrationSql('', schema, `${schema}_p`);
+  return `select jsonb_build_object('dailyScan',c.daily_scan,'dailyAfter',c.daily_after::text,
+    'controlSteps',c.steps,'platformGeneration',c.active_platform,'visitGeneration',c.active_visit,
+    'visitBuild',g.id,'visitAfter',g.after_id::text,'visitTotalsDone',g.totals_done)
+    from ${schema}.stats_prepared_control c left join ${schema}.stats_prepared_generations g
+      on g.product='visit' and g.status='building' where c.id`;
+}
+
+const invalidTiming = () => { throw new Error('fixture-drive-invalid-response'); };
+export function qaAdvanceState(value) {
+  const state = {};
+  for (const key of ['dailyScan', 'platformGeneration', 'visitGeneration', 'visitBuild']) {
+    if (value?.[key] !== null && (typeof value?.[key] !== 'string' || !UUID.test(value[key]))) invalidTiming();
+    state[key] = value[key];
+  }
+  for (const key of ['dailyAfter', 'visitAfter']) {
+    const n = value?.[key];
+    if (!(key === 'visitAfter' && n === null) &&
+      (typeof n !== 'string' || !/^(0|[1-9][0-9]{0,18})$/.test(n) || BigInt(n) > 9223372036854775807n)) invalidTiming();
+    state[key] = n;
+  }
+  if (!Number.isSafeInteger(value?.controlSteps) || value.controlSteps < 0 || value.controlSteps > 2147483647 ||
+    ![true, false, null].includes(value?.visitTotalsDone) ||
+    ((state.visitBuild === null) !== (state.visitAfter === null)) ||
+    ((state.visitBuild === null) !== (value.visitTotalsDone === null))) invalidTiming();
+  return { ...state, controlSteps: value.controlSteps, visitTotalsDone: value.visitTotalsDone };
+}
+
+export function qaAdvanceOutcome(value, stepId) {
+  if (typeof stepId !== 'string' || !UUID.test(stepId) || !STEP_PHASES.has(value?.phase) || typeof value.more !== 'boolean') invalidTiming();
+  for (const key of ['platformGeneration', 'visitGeneration']) {
+    if (value[key] !== null && (typeof value[key] !== 'string' || !UUID.test(value[key]))) invalidTiming();
+  }
+  return { stepId, phase: value.phase, more: value.more,
+    platformGeneration: value.platformGeneration, visitGeneration: value.visitGeneration };
+}
+
+export function qaTimingSummary(calls) {
+  if (!Array.isArray(calls) || calls.length < 1 || calls.length > FIXTURE_BATCH_MAX_STEPS) invalidTiming();
+  const phaseStats = {}; let maximum = null; const slowCalls = [];
+  for (const call of calls) {
+    const timing = { ...qaAdvanceOutcome(call, call.stepId), sqlMs: call.sqlMs, preState: qaAdvanceState(call.preState) };
+    if (!Number.isFinite(timing.sqlMs) || timing.sqlMs < 0 || timing.sqlMs > FIXTURE_BATCH_OUTER_MS) invalidTiming();
+    const stats = phaseStats[timing.phase] ??= { calls: 0, sqlMs: 0, maximumSqlStepMs: 0 };
+    stats.calls++; stats.sqlMs += timing.sqlMs; stats.maximumSqlStepMs = Math.max(stats.maximumSqlStepMs, timing.sqlMs);
+    // First call wins ties, including across batches. Never infer the maximum
+    // from the final result, phase counts or the last observed cursor.
+    if (!maximum || timing.sqlMs > maximum.sqlMs) maximum = timing;
+    if (timing.sqlMs >= SLOW_CALL_MS) {
+      slowCalls.push(timing); slowCalls.sort((a, b) => b.sqlMs - a.sqlMs); slowCalls.length = Math.min(slowCalls.length, SLOW_CALL_LIMIT);
+    }
+  }
+  return { calls: calls.length, phaseStats, maximum, slowCalls,
+    timingScope: 'outer-advance-including-shared-cleanup', sharedCleanup: 'unattributed' };
+}
+
+export function qaDriveFailure(run, failure = {}) {
+  if (!run.failure) run.status = failure.interrupted ? 'interrupted' : 'failed';
+  const code = sqlstate(failure.sqlstate) ?? rpcErrorCode(failure.code);
+  const detail = { code, status: Number.isInteger(failure.status) && failure.status >= 100 && failure.status <= 599 ? failure.status : null,
+    ms: Number.isFinite(failure.ms) && failure.ms >= 0 && failure.ms <= DRIVE_BUDGET_MS ? failure.ms : null,
+    kind: failure.interrupted ? 'interrupted' : 'dispatch-or-response-failure' };
+  if (run.pendingBatch) {
+    // Keep the original attempt and UUID after failure and explicit cleanup.
+    run.pendingBatch.status = run.status;
+    run.pendingBatch.failure ??= detail;
+    // JSON readback does not retain the in-memory alias between these fields.
+    const savedAttempt = run.batchReceipts?.at(-1);
+    if (savedAttempt && savedAttempt.attempt === run.pendingBatch.attempt && savedAttempt.firstStepId === run.pendingBatch.firstStepId) {
+      savedAttempt.status = run.pendingBatch.status; savedAttempt.failure ??= run.pendingBatch.failure;
+    }
+  }
+  run.failure ??= detail;
+}
+
+export function qaBeginDriveAttempt(run, { transport, steps, workBudgetMs, firstStepId, state }) {
+  assert.match(run.scenario, /^[a-z][a-z0-9-]{0,79}$/);
+  assert.ok(['sql', 'rest'].includes(transport) && typeof firstStepId === 'string' && UUID.test(firstStepId));
+  assert.ok(Number.isSafeInteger(steps) && steps >= 1 && steps <= FIXTURE_BATCH_MAX_STEPS);
+  assert.ok(transport === 'sql' ? Number.isSafeInteger(workBudgetMs) && workBudgetMs >= 1 && workBudgetMs <= FIXTURE_BATCH_WORK_MS : steps === 1);
+  assert.ok(!run.pendingBatch, 'fixture-attempt-already-pending');
+  const attempts = run.batchReceipts ??= [];
+  assert.ok(attempts.length < DRIVE_MAX_STEPS);
+  const attempt = { scenario: run.scenario, batchNumber: (run.batches ?? run.steps) + 1,
+    attempt: attempts.length + 1, transport, steps, ...(transport === 'sql' ? { workBudgetMs } : {}),
+    firstStepId, stepIdentityScope: transport === 'sql' ? 'first-call-only' : 'exact-call',
+    attemptedPhase: null, preState: qaAdvanceState(state), status: 'pending', startedAt: new Date().toISOString() };
+  attempts.push(attempt); run.pendingBatch = attempt;
+  return attempt;
+}
+
+export function qaRecordFixtureBatch(run, batch, requestMs) {
+  const attempt = run.pendingBatch;
+  assert.ok(attempt?.transport === 'sql' && attempt.status === 'pending');
+  assert.equal(batch.results[0].stepId, attempt.firstStepId, 'fixture-first-step-identity-mismatch');
+  assert.ok(Number.isFinite(requestMs) && requestMs >= 0 && requestMs <= MANAGEMENT_REQUEST_MS);
+  Object.assign(attempt, { status: 'completed', actualCalls: batch.calls, requestMs, sqlMs: batch.sqlMs,
+    requestOverheadMs: Math.max(0, requestMs - batch.sqlMs), maximum: batch.maximum,
+    phaseStats: batch.phaseStats, slowCalls: batch.slowCalls,
+    timingScope: batch.timingScope, sharedCleanup: batch.sharedCleanup });
+  run.steps += batch.calls; run.batches++;
+  run.sqlMs += batch.sqlMs; run.requestOverheadMs += attempt.requestOverheadMs;
+  run.maximumSqlStepMs = Math.max(run.maximumSqlStepMs, batch.maximumSqlStepMs);
+  const withBatch = call => ({ ...call, batchNumber: attempt.batchNumber, attempt: attempt.attempt });
+  if (!run.maximum || batch.maximum.sqlMs > run.maximum.sqlMs) run.maximum = withBatch(batch.maximum);
+  run.slowCalls = [...(run.slowCalls ?? []), ...batch.slowCalls.map(withBatch)]
+    .sort((a, b) => b.sqlMs - a.sqlMs).slice(0, SLOW_CALL_LIMIT);
+  for (const [phase, stats] of Object.entries(batch.phaseStats)) {
+    run.phaseCounts[phase] = (run.phaseCounts[phase] ?? 0) + stats.calls;
+    const sum = (run.phaseStats ??= {})[phase] ??= { calls: 0, sqlMs: 0, maximumSqlStepMs: 0 };
+    sum.calls += stats.calls; sum.sqlMs += stats.sqlMs;
+    sum.maximumSqlStepMs = Math.max(sum.maximumSqlStepMs, stats.maximumSqlStepMs);
+  }
+  run.lastPhase = batch.results.at(-1).phase;
+  delete run.pendingBatch;
 }
 
 export function qaFixtureBatchPlan(steps, elapsedMs) {
@@ -308,16 +434,18 @@ export function qaFixtureBatchResult(rows, limit) {
     !Number.isFinite(batch.sqlMs) || batch.sqlMs < 0 || batch.sqlMs > FIXTURE_BATCH_OUTER_MS ||
     !Number.isFinite(batch.maximumSqlStepMs) || batch.maximumSqlStepMs < 0 ||
     batch.maximumSqlStepMs > batch.sqlMs) invalid();
+  const ids = new Set();
   const results = batch.results.map((r, index) => {
-    if (!STEP_PHASES.has(r?.phase) || typeof r.more !== 'boolean' ||
-      (r.more === false && index !== batch.results.length - 1)) invalid();
-    for (const key of ['platformGeneration', 'visitGeneration']) {
-      if (r[key] !== null && (typeof r[key] !== 'string' ||
-        !/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/.test(r[key]))) invalid();
-    }
-    return { phase: r.phase, more: r.more, platformGeneration: r.platformGeneration, visitGeneration: r.visitGeneration };
+    const outcome = qaAdvanceOutcome(r, r?.stepId);
+    if ((outcome.more === false && index !== batch.results.length - 1) || ids.has(outcome.stepId)) invalid();
+    ids.add(outcome.stepId);
+    return { ...outcome, sqlMs: r.sqlMs, preState: qaAdvanceState(r.preState) };
   });
-  return { results, sqlMs: batch.sqlMs, maximumSqlStepMs: batch.maximumSqlStepMs };
+  const summary = qaTimingSummary(results);
+  if (summary.maximum.sqlMs !== batch.maximumSqlStepMs ||
+    results.reduce((sum, r) => sum + r.sqlMs, 0) > batch.sqlMs + 0.001) invalid();
+  return { results, sqlMs: batch.sqlMs, maximumSqlStepMs: batch.maximumSqlStepMs,
+    finalState: qaAdvanceState(batch.finalState), ...summary };
 }
 
 export function validateQaCheckout({ expectedSha, checkoutSha, eventName, event, githubSha }) {
@@ -400,7 +528,7 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   const service = env.MANAGED_DEV_SUPABASE_SERVICE_ROLE ?? env.SUPABASE_SERVICE_ROLE;
   assert.ok(token && service, 'Management API and managed-development service credentials required');
   const receiptPath = options['--receipt'] ?? path.join(env.RUNNER_TEMP, 'stats-prepared-db-qa.json');
-  const phases = []; let identity; let claimLocation;
+  const phases = []; let identity; let claimLocation; let advanceContext; let advanceAttempt = 0;
   const saveReceipt = () => writeQaReceipt(receiptPath, qaReceiptWithPhases(identity, phases));
   async function sql(query, phase = 'fixture-checks') {
     assert.ok(SQL_PHASES.has(phase), 'unknown QA SQL phase');
@@ -435,20 +563,59 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
   async function transport(name, body = {}, { expectedError, retrySchema = false, key = service } = {}) {
     let result;
     for (let attempt = 0; attempt < (retrySchema ? 12 : 1); attempt++) {
+      result = undefined;
+      const isAdvance = name.endsWith('_run_sp_step_v1');
+      if (isAdvance) {
+        assert.match(body.p_step_id ?? '', UUID);
+        identity.pendingAdvance = { stepId: body.p_step_id, attempt: ++advanceAttempt,
+          scenario: advanceContext?.scenario ?? null, attemptedPhase: null,
+          ...(advanceContext ? { snapshot: advanceContext } : {}), status: 'pending', startedAt: new Date().toISOString() };
+        // File-only evidence, no extra HTTP/SQL per advance. Preserve the exact
+        // pending UUID even when fetch aborts or the job is interrupted.
+        await saveReceipt();
+      }
       const started = Date.now();
-      const response = await fetch(`${MANAGED_URL}/rest/v1/rpc/${ident(name)}`, { method: 'POST', redirect: 'error',
-        headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify(body), signal: AbortSignal.timeout(12_000) });
-      result = await response.json();
+      let response; let failureKind;
+      try {
+        response = await fetch(`${MANAGED_URL}/rest/v1/rpc/${ident(name)}`, { method: 'POST', redirect: 'error',
+          headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify(body), signal: AbortSignal.timeout(12_000) });
+      } catch { failureKind = 'request-error'; }
+      if (response) {
+        try { result = await response.json(); } catch { failureKind = 'invalid-json'; }
+      }
       const code = rpcErrorCode(result?.code);
-      const phase = { kind: 'rest', rpc: name, ms: Date.now() - started, status: response.status, code,
-        ...(!response.ok ? { ...qaRpcFailureDiagnostic({ result,
+      let outcome;
+      if (isAdvance && response?.ok && !failureKind) {
+        try { outcome = qaAdvanceOutcome(result, body.p_step_id); }
+        catch { failureKind = 'invalid-advance-metadata'; }
+      }
+      const failed = Boolean(failureKind || !response?.ok);
+      const phase = { kind: 'rest', rpc: name, ms: Date.now() - started, status: response?.status ?? null, code,
+        ...(isAdvance ? { stepId: body.p_step_id, attempt: advanceAttempt, attemptedPhase: null,
+          ...(advanceContext ? { snapshot: advanceContext } : {}),
+          ...(outcome ? { outcome, phase: outcome.phase,
+            timingScope: 'outer-advance-including-shared-cleanup', sharedCleanup: 'unattributed' } : {}) } : {}),
+        ...(failureKind ? { failureKind } : {}),
+        ...(failed ? { ...qaRpcFailureDiagnostic({ result,
           claimLocation: name === claimLocation?.alias ? claimLocation : undefined }),
           errorEnvelope: qaRpcErrorEnvelope(result) } : {}) };
       phases.push(phase);
+      if (isAdvance) {
+        if (failed) Object.assign(identity.pendingAdvance, { status: 'failed', failure: phase });
+        else {
+          delete identity.pendingAdvance;
+          if (advanceContext) advanceContext = { ...advanceContext,
+            successfulCallsSinceSnapshot: advanceContext.successfulCallsSinceSnapshot + 1, previousOutcome: outcome };
+        }
+      }
+      if (failureKind) {
+        identity.rpcFailure ??= phase; await saveReceipt();
+        throw new Error(`fixture-rpc-failed-${phase.status ?? 'no-response'}-${failureKind}`);
+      }
       if (retrySchema && result?.code === 'PGRST202') { await pause(500); continue; }
-      if (expectedError) { assert.equal(code, expectedError); return result; }
-      if (!response.ok) { identity.rpcFailure ??= phase; await saveReceipt(); }
+      if (expectedError) { await saveReceipt(); assert.equal(code, expectedError); return result; }
+      if (failed) { identity.rpcFailure ??= phase; await saveReceipt(); }
       assert.equal(response.ok, true, `fixture-rpc-failed-${response.status}-${code}`);
       return result;
     }
@@ -461,6 +628,13 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     assert.ok(identity.privateSchema === `${identity.schema}_p` && identity.prefix === `qa_${identity.schema.slice(9)}_`);
     assert.equal(identity.project, PROJECT); assert.equal(identity.sha, checkoutSha);
     assert.deepEqual(identity.functions, [...RPC_NAMES.map(name => identity.prefix + name.replace('_stats_prepared_', '_sp_')), identity.prefix + 'timeout']);
+    for (const run of identity.drives ?? []) {
+      if (run.status === 'running') qaDriveFailure(run, { interrupted: true });
+    }
+    if (identity.pendingAdvance?.status === 'pending') {
+      identity.pendingAdvance.status = 'interrupted';
+      identity.pendingAdvance.failure = { kind: 'interrupted', code: 'unknown', status: null, ms: null };
+    }
     identity.cleaned = false;
     if (identity.fixtureCreationStarted === false) {
       const rows = await sql(`select not exists(select 1 from pg_namespace where nspname in
@@ -654,6 +828,10 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
     assert.equal((await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'other', p_request_id: randomUUID() })).claimed, false);
     assert.equal((await transport(alias('claim_stats_prepared_work_v1'), { p_worker_id: 'github-fixture', p_request_id: requestId })).leaseToken, claim.leaseToken);
     const stepArgs = stepId => ({ p_lease_token: claim.leaseToken, p_epoch: claim.epoch, p_step_id: stepId, p_work: { kind: 'advance' } });
+    const readAdvanceContext = async scenario => ({ scenario,
+      state: qaAdvanceState(await scalar(`(${qaAdvanceStateSql(schema)})`)),
+      observedAt: new Date().toISOString(), successfulCallsSinceSnapshot: 0 });
+    advanceContext = await readAdvanceContext(null);
     const firstStep = stepArgs(randomUUID());
     const firstResult = await transport(alias('run_stats_prepared_step_v1'), firstStep);
     observe(firstResult);
@@ -670,17 +848,25 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
       await saveReceipt();
       console.log(JSON.stringify({ phase: 'drive-start', scenario, mode }));
       try {
+        // One bounded owned-state read per drive, never one REST/SQL read per
+        // REST advance. Later attempts label the snapshot's age in calls.
+        advanceContext = await readAdvanceContext(scenario);
+        let nextState = advanceContext.state;
         while (!done && total < DRIVE_MAX_STEPS && Date.now() - started < DRIVE_BUDGET_MS) {
           if (mode === 'benchmark') {
-            run.pendingBatch = { transport: 'rest', steps: 1, startedAt: new Date().toISOString() };
-            // Keep benchmark receipt I/O at the existing 128-step progress cadence.
-            if (total % 128 === 0) await saveReceipt();
+            const args = stepArgs(randomUUID());
+            const attempt = qaBeginDriveAttempt(run, { transport: 'rest', steps: 1,
+              firstStepId: args.p_step_id, state: advanceContext.state });
+            attempt.successfulCallsSinceSnapshot = advanceContext.successfulCallsSinceSnapshot;
+            // transport persists this attempt and the exact UUID before dispatch.
             const began = Date.now();
-            const result = await transport(alias('run_stats_prepared_step_v1'), stepArgs(randomUUID()));
+            const result = await transport(alias('run_stats_prepared_step_v1'), args);
             observe(result);
             maximumStepMs = Math.max(maximumStepMs, Date.now() - began);
             total++; done = !result.more;
             run.steps = total; run.ms = Date.now() - started; run.lastPhase = result.phase;
+            Object.assign(attempt, { status: 'completed', actualCalls: 1, requestMs: Date.now() - began,
+              outcome: qaAdvanceOutcome(result, args.p_step_id) });
             delete run.pendingBatch;
             if (done || total % 128 === 0) await saveReceipt();
             if (total % 128 === 0) console.log(JSON.stringify({ scenario, phase: result.phase, steps: total, elapsedMs: run.ms }));
@@ -693,31 +879,28 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
           const plan = qaFixtureBatchPlan(total, Date.now() - started);
           if (!plan) break;
           const { limit, workBudgetMs } = plan;
-          run.pendingBatch = { transport: 'sql', steps: limit, workBudgetMs, startedAt: new Date().toISOString() };
+          const attempt = qaBeginDriveAttempt(run, { transport: 'sql', steps: limit, workBudgetMs,
+            firstStepId: randomUUID(), state: nextState });
           await saveReceipt();
           const began = Date.now();
           const batch = qaFixtureBatchResult(await sql(`set statement_timeout='60s';
-            select ${privateSchema}.qa_drive_batch_v1(${literal(claim.leaseToken)},${literal(claim.epoch)},${limit},${workBudgetMs}) as result;`,
+            select ${privateSchema}.qa_drive_batch_v1(${literal(claim.leaseToken)},${literal(claim.epoch)},${limit},${workBudgetMs},${literal(attempt.firstStepId)}) as result;`,
           'fixture-drive'), limit);
           const requestMs = Date.now() - began;
-          for (const result of batch.results) {
-            observe(result);
-            run.phaseCounts[result.phase] = (run.phaseCounts[result.phase] ?? 0) + 1;
-          }
+          for (const result of batch.results) observe(result);
           total += batch.results.length; done = batch.results.at(-1).more === false;
-          run.steps = total; run.ms = Date.now() - started; run.batches++;
-          run.sqlMs += batch.sqlMs;
           // Residual includes API/queue/serialization/round-trip work; it is not
           // a claim to have measured network latency independently.
-          run.requestOverheadMs += Math.max(0, requestMs - batch.sqlMs);
-          run.maximumSqlStepMs = Math.max(run.maximumSqlStepMs, batch.maximumSqlStepMs);
-          run.lastPhase = batch.results.at(-1).phase;
-          delete run.pendingBatch;
+          qaRecordFixtureBatch(run, batch, requestMs);
+          run.ms = Date.now() - started; nextState = batch.finalState;
+          advanceContext = { scenario, state: nextState, observedAt: new Date().toISOString(), successfulCallsSinceSnapshot: 0,
+            previousOutcome: qaAdvanceOutcome(batch.results.at(-1), batch.results.at(-1).stepId) };
           await saveReceipt();
           console.log(JSON.stringify({ phase: 'fixture-drive', scenario, steps: total, elapsedMs: run.ms,
             lastPhase: run.lastPhase, batchSteps: batch.results.length, requestMs,
             sqlMs: batch.sqlMs, requestOverheadMs: Math.max(0, requestMs - batch.sqlMs),
-            maximumSqlStepMs: batch.maximumSqlStepMs }));
+            maximumSqlStepMs: batch.maximumSqlStepMs, maximum: batch.maximum,
+            timingScope: batch.timingScope, sharedCleanup: batch.sharedCleanup }));
         }
         assert.ok(done, 'bounded-bootstrap-incomplete');
         run.status = 'completed'; run.ms = Date.now() - started;
@@ -725,9 +908,14 @@ export async function main(argv = process.argv.slice(2), env = process.env) {
         identity.bootstrap ??= receipt;
         (identity.bootstrapRuns ??= []).push(receipt);
       } catch (error) {
-        run.status = 'failed'; run.ms = Date.now() - started;
+        const failure = phases.at(-1);
+        qaDriveFailure(run, run.pendingBatch || failure?.ok === false ? failure : {});
+        run.ms = Date.now() - started;
         throw error;
-      } finally { await saveReceipt(); }
+      } finally {
+        if (advanceContext) advanceContext = { ...advanceContext, scenario: null };
+        await saveReceipt();
+      }
     }
     await drive('initial-bootstrap');
     const platform = await transport(alias('get_stats_prepared_platform_chart_v1'), { p_range: '90d', p_resolution: 'hourly', p_include_previous: true });

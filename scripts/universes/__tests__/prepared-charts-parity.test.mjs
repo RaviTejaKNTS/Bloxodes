@@ -6,7 +6,9 @@ import { legacyVisitExpected, assertVisitParity, validateQaCheckout, fixtureMigr
   qaSqlFailureDiagnostic, qaReceiptWithPhases, qaRpcFailureDiagnostic, qaClaimProbeDiagnostic,
   fixtureClaimDiagnosticSql, qaRpcErrorEnvelope, PREPARED_QA_MIGRATION_PATHS,
   fixtureMigrationPlan, replayFixtureMigrations, fixtureDriveBatchSql,
-  qaFixtureBatchPlan, qaFixtureBatchResult, qaSourceProgress, qaStorageCheckpoint } from '../../ci/stats-prepared-db-qa.mjs';
+  qaFixtureBatchPlan, qaFixtureBatchResult, qaSourceProgress, qaStorageCheckpoint,
+  qaAdvanceStateSql, qaAdvanceState, qaAdvanceOutcome, qaTimingSummary, qaBeginDriveAttempt,
+  qaRecordFixtureBatch, qaDriveFailure } from '../../ci/stats-prepared-db-qa.mjs';
 
 const claimLocation = { alias: 'qa_012345abcdef_claim_sp_work_v1', maxLine: 60 };
 const schema = 'qa_stats_012345abcdef', privateSchema = `${schema}_p`;
@@ -75,21 +77,31 @@ test('fixture batch SQL refuses foreign namespaces and adds only a private orche
   }
   const sql = fixtureDriveBatchSql(schema, privateSchema);
   assert.match(sql, /security invoker set search_path=''/);
-  assert.match(sql, /revoke all on function qa_stats_012345abcdef_p\.qa_drive_batch_v1\(uuid,bigint,integer,integer\) from public,anon,authenticated/);
-  assert.match(sql, /qa_stats_012345abcdef\.run_stats_prepared_step_v1\(p_token,p_epoch,pg_catalog\.gen_random_uuid\(\)/);
+  assert.match(sql, /revoke all on function qa_stats_012345abcdef_p\.qa_drive_batch_v1\(uuid,bigint,integer,integer,uuid\) from public,anon,authenticated/);
+  assert.match(sql, /step_id:=case when n=1 then p_first_step else pg_catalog\.gen_random_uuid\(\) end/);
+  assert.match(sql, /qa_stats_012345abcdef\.run_stats_prepared_step_v1\(p_token,p_epoch,step_id/);
   assert.doesNotMatch(sql, /create (?:or replace )?function public\.|create or replace|\b(?:insert|update|delete|truncate)\b|qa_now\(/i);
 });
 
 const batchOutcome = (phase = 'hour-backfill', more = true) => ({ phase, more,
   platformGeneration: '00000000-0000-4000-8000-000000000001', visitGeneration: null });
-const batchRows = results => [{ result: { results, sqlMs: 123.5, maximumSqlStepMs: 80 } }];
+const stepUuid = n => `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
+const advanceState = (patch = {}) => ({ dailyScan: null, dailyAfter: '0', controlSteps: 0,
+  platformGeneration: null, visitGeneration: null, visitBuild: null, visitAfter: null, visitTotalsDone: null, ...patch });
+const batchRows = results => {
+  const calls = results.map((r, i) => r === null ? null : ({ stepId: stepUuid(i + 1),
+    sqlMs: i === 0 ? 80 : 10, preState: advanceState(), ...r }));
+  return [{ result: { results: calls, sqlMs: 123.5, maximumSqlStepMs: 80, finalState: advanceState() } }];
+};
 
 test('one Management result retains every bounded outcome and a final more=false, stripping unknown fields', () => {
   const outcomes = [batchOutcome('daily-batch'), batchOutcome('platform-publish'), batchOutcome('unchanged', false)];
   const rows = batchRows(outcomes.map(r => ({ ...r, SECRET_FIELD: 'SECRET_VALUE' })));
   rows[0].result.SECRET_BODY = 'SECRET_SQL';
   const result = qaFixtureBatchResult(rows, 256);
-  assert.deepEqual(result, { results: outcomes, sqlMs: 123.5, maximumSqlStepMs: 80 });
+  assert.deepEqual(result.results, rows[0].result.results.map(({ SECRET_FIELD, ...r }) => r));
+  assert.equal(result.calls, 3); assert.equal(result.sqlMs, 123.5); assert.equal(result.maximumSqlStepMs, 80);
+  assert.equal(result.maximum.phase, 'daily-batch'); assert.equal(result.maximum.stepId, stepUuid(1));
   assert.doesNotMatch(JSON.stringify(result), /SECRET/);
   assert.equal(qaFixtureBatchResult(batchRows([batchOutcome()]), 1).results[0].more, true);
 });
@@ -106,10 +118,136 @@ test('missing, split, oversized, prematurely finished or malformed batch results
     assert.throws(() => qaFixtureBatchResult(rows, limit), /^Error: fixture-drive-invalid-response$/);
   }
   for (const patch of [{ sqlMs: -1 }, { sqlMs: '1' }, { sqlMs: NaN }, { sqlMs: 60_001 },
-    { maximumSqlStepMs: -1 }, { maximumSqlStepMs: 124 }, { maximumSqlStepMs: Infinity }]) {
+    { maximumSqlStepMs: -1 }, { maximumSqlStepMs: 124 }, { maximumSqlStepMs: Infinity },
+    { maximumSqlStepMs: 79 }, { finalState: {} }]) {
     assert.throws(() => qaFixtureBatchResult([{ result: { ...valid[0].result, ...patch } }], 1),
       /^Error: fixture-drive-invalid-response$/);
   }
+});
+
+test('maximum timing retains exact phase, UUID and pre-cursor when the slowest call is not last', () => {
+  const rows = batchRows([batchOutcome('hour'), batchOutcome('daily-batch'), batchOutcome('platform-publish')]);
+  const calls = rows[0].result.results;
+  calls[1].sqlMs = 24_105.820;
+  calls[1].preState = advanceState({ dailyScan: stepUuid(90), dailyAfter: '9007199254740993', controlSteps: 7 });
+  Object.assign(rows[0].result, { maximumSqlStepMs: 24_105.820, sqlMs: 24_200 });
+  const batch = qaFixtureBatchResult(rows, 3);
+  assert.equal(batch.maximum.phase, 'daily-batch'); assert.equal(batch.maximum.stepId, stepUuid(2));
+  assert.equal(batch.maximum.preState.dailyAfter, '9007199254740993');
+  assert.equal(batch.maximum.preState.dailyScan, stepUuid(90));
+  assert.deepEqual(batch.phaseStats['daily-batch'], { calls: 1, sqlMs: 24_105.820, maximumSqlStepMs: 24_105.820 });
+  assert.equal(batch.slowCalls.length, 1); assert.deepEqual(batch.slowCalls[0], batch.maximum);
+  assert.equal(batch.timingScope, 'outer-advance-including-shared-cleanup');
+  assert.equal(batch.sharedCleanup, 'unattributed');
+});
+
+test('slow receipts have a fixed eight-call bound, retain inclusive threshold and deterministic ties', () => {
+  const calls = Array.from({ length: 256 }, (_, i) => ({ ...batchOutcome(i % 2 ? 'hour' : 'daily-batch'),
+    stepId: stepUuid(i + 1), sqlMs: i < 20 ? 1000 : 0.5, preState: advanceState() }));
+  const summary = qaTimingSummary(calls);
+  assert.equal(summary.calls, 256); assert.equal(summary.slowCalls.length, 8);
+  assert.deepEqual(summary.slowCalls.map(r => r.stepId), Array.from({ length: 8 }, (_, i) => stepUuid(i + 1)));
+  assert.equal(summary.maximum.stepId, stepUuid(1));
+  assert.deepEqual(summary.phaseStats.hour, { calls: 128, sqlMs: 10059, maximumSqlStepMs: 1000 });
+  assert.deepEqual(summary.phaseStats['daily-batch'], summary.phaseStats.hour);
+  assert.equal(qaTimingSummary([{ ...calls[0], sqlMs: 999.999 }]).slowCalls.length, 0);
+  assert.throws(() => qaTimingSummary([...calls, calls[0]]), /invalid-response/);
+});
+
+test('batch parsing rejects malformed timing, UUID, cursors, duplicate IDs and inconsistent totals', () => {
+  for (const patch of [{ stepId: 'SECRET_UUID' }, { stepId: null }, { stepId: 1 }, { sqlMs: -1 },
+    { sqlMs: '80' }, { sqlMs: Infinity }, { sqlMs: 60001 }, { preState: null },
+    { preState: advanceState({ dailyAfter: '9223372036854775808' }) },
+    { preState: advanceState({ dailyAfter: '00' }) }, { preState: advanceState({ dailyAfter: '-1' }) },
+    { preState: advanceState({ dailyScan: 'SECRET' }) }, { preState: advanceState({ controlSteps: 0.5 }) },
+    { preState: advanceState({ controlSteps: 2147483648 }) },
+    { preState: advanceState({ visitBuild: stepUuid(99) }) },
+    { preState: advanceState({ visitAfter: '1', visitTotalsDone: false }) }]) {
+    const rows = batchRows([{ ...batchOutcome(), ...patch }]);
+    assert.throws(() => qaFixtureBatchResult(rows, 1), /^Error: fixture-drive-invalid-response$/);
+  }
+  const duplicate = batchRows([batchOutcome(), { ...batchOutcome(), stepId: stepUuid(1) }]);
+  assert.throws(() => qaFixtureBatchResult(duplicate, 2), /invalid-response/);
+  const impossible = batchRows([batchOutcome(), batchOutcome()]);
+  impossible[0].result.sqlMs = 85;
+  assert.throws(() => qaFixtureBatchResult(impossible, 2), /invalid-response/);
+  const state = qaAdvanceState(advanceState({ SECRET_FIELD: 'SECRET' }));
+  assert.doesNotMatch(JSON.stringify(state), /SECRET/);
+  assert.equal(qaAdvanceState(advanceState({ dailyAfter: '9223372036854775807',
+    visitBuild: stepUuid(9), visitAfter: '9223372036854775807', visitTotalsDone: true })).visitAfter, '9223372036854775807');
+});
+
+const fixtureRun = () => ({ scenario: 'initial-bootstrap', status: 'running', steps: 0, batches: 0,
+  sqlMs: 0, requestOverheadMs: 0, maximumSqlStepMs: 0, phaseCounts: {} });
+
+test('saved per-batch and per-drive maxima correlate exactly across batches while every call is counted', () => {
+  const run = fixtureRun();
+  for (let batchNumber = 1; batchNumber <= 2; batchNumber++) {
+    const calls = Array.from({ length: 256 }, (_, i) => ({ ...batchOutcome(i === 1 ? 'daily-batch' : 'hour'),
+      stepId: stepUuid((batchNumber - 1) * 256 + i + 1), sqlMs: i < 20 ? 1000 : 0.5,
+      preState: advanceState({ dailyAfter: String(batchNumber) }) }));
+    calls[1].sqlMs = 2000;
+    const batch = qaFixtureBatchResult([{ result: { results: calls, sqlMs: 22_000,
+      maximumSqlStepMs: 2000, finalState: advanceState() } }], 256);
+    qaBeginDriveAttempt(run, { transport: 'sql', steps: 256, workBudgetMs: 40000,
+      firstStepId: calls[0].stepId, state: advanceState() });
+    qaRecordFixtureBatch(run, batch, 23_000);
+  }
+  assert.equal(run.steps, 512); assert.equal(run.batches, 2); assert.equal(run.batchReceipts.length, 2);
+  assert.equal(run.maximumSqlStepMs, 2000); assert.equal(run.maximum.stepId, stepUuid(2));
+  assert.equal(run.maximum.phase, 'daily-batch'); assert.equal(run.maximum.batchNumber, 1);
+  assert.equal(run.maximum.preState.dailyAfter, '1');
+  assert.equal(run.slowCalls.length, 8); assert.equal(run.slowCalls[1].stepId, stepUuid(258));
+  assert.equal(run.slowCalls[1].batchNumber, 2);
+  assert.equal(run.phaseCounts.hour, 510); assert.equal(run.phaseCounts['daily-batch'], 2);
+  assert.equal(run.phaseStats.hour.sqlMs, 38_236); assert.equal(run.phaseStats['daily-batch'].sqlMs, 4000);
+  assert.equal(run.sqlMs, 44_000); assert.equal(run.requestOverheadMs, 2000);
+  assert.equal(run.pendingBatch, undefined);
+  for (const receipt of run.batchReceipts) {
+    assert.equal(receipt.slowCalls.length, 8); assert.equal(receipt.actualCalls, 256);
+    assert.equal(receipt.status, 'completed'); assert.equal(receipt.sharedCleanup, 'unattributed');
+    assert.equal(receipt.results, undefined);
+  }
+});
+
+test('pending attempts survive serialization, SQL failure, interruption and repeated cleanup without raw errors', () => {
+  const run = fixtureRun();
+  qaBeginDriveAttempt(run, { transport: 'sql', steps: 256, workBudgetMs: 40000,
+    firstStepId: stepUuid(1), state: advanceState({ dailyAfter: '512' }) });
+  const saved = JSON.parse(JSON.stringify(run));
+  assert.equal(saved.pendingBatch.status, 'pending'); assert.equal(saved.pendingBatch.attempt, 1);
+  assert.equal(saved.pendingBatch.batchNumber, 1); assert.equal(saved.pendingBatch.scenario, 'initial-bootstrap');
+  assert.equal(saved.pendingBatch.attemptedPhase, null);
+  assert.equal(saved.pendingBatch.stepIdentityScope, 'first-call-only');
+  qaDriveFailure(saved, { sqlstate: '57014', status: 400, ms: 60005, message: 'SECRET_SQL', details: 'SECRET' });
+  assert.deepEqual(saved.failure, { code: '57014', status: 400, ms: 60005, kind: 'dispatch-or-response-failure' });
+  assert.equal(saved.batchReceipts[0].status, 'failed'); assert.equal(saved.pendingBatch.firstStepId, stepUuid(1));
+  const interrupted = JSON.parse(JSON.stringify(run));
+  qaDriveFailure(interrupted, { interrupted: true });
+  assert.equal(interrupted.status, 'interrupted'); assert.equal(interrupted.batchReceipts[0].failure.kind, 'interrupted');
+  const before = qaReceiptWithPhases({ completed: false, drives: [saved, interrupted],
+    pendingAdvance: { stepId: stepUuid(77), status: 'failed', failure: saved.failure } }, []);
+  const after = qaReceiptWithPhases({ ...before, cleaned: true }, [{ phase: 'cleanup', ok: true }]);
+  assert.deepEqual(after.drives, before.drives); assert.deepEqual(after.pendingAdvance, before.pendingAdvance);
+  assert.equal(after.completed, false); assert.equal(saved.steps, 0); assert.equal(saved.maximum, undefined);
+  assert.doesNotMatch(JSON.stringify(after), /SECRET/);
+  qaDriveFailure(interrupted, { code: 'SECRET', status: 'SECRET', ms: Infinity });
+  assert.equal(interrupted.failure.kind, 'interrupted'); assert.equal(interrupted.status, 'interrupted');
+  const legacy = { status: 'running', pendingBatch: { transport: 'sql', steps: 256 } };
+  qaDriveFailure(legacy, { interrupted: true });
+  assert.equal(legacy.pendingBatch.status, 'interrupted');
+});
+
+test('REST success metadata strips arbitrary fields and rejects invalid phases and step identity', () => {
+  assert.deepEqual(qaAdvanceOutcome({ ...batchOutcome('visit-totals'), SECRET: 'SECRET' }, stepUuid(7)),
+    { ...batchOutcome('visit-totals'), stepId: stepUuid(7) });
+  for (const [value, stepId] of [[batchOutcome('SECRET'), stepUuid(1)], [batchOutcome(), 'SECRET'],
+    [{ ...batchOutcome(), more: 1 }, stepUuid(1)], [{ ...batchOutcome(), visitGeneration: 'SECRET' }, stepUuid(1)]]) {
+    assert.throws(() => qaAdvanceOutcome(value, stepId), /invalid-response/);
+  }
+  const stateSql = qaAdvanceStateSql(schema);
+  assert.doesNotMatch(stateSql, /public\.|roblox_|\b(?:count|insert|update|delete)\b/i);
+  assert.throws(() => qaAdvanceStateSql('public'));
 });
 
 test('cleanup preserves the started scenario and pending batch without manufacturing drive completion', () => {
