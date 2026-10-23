@@ -8,12 +8,13 @@ Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and Gi
 
 ## T3 schedules (MacBook Pro)
 
-Both run in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro, with Codex `gpt-6.1-sol` high, full access, as the main agent. Both have standing permission to publish with `content:publish` and to commit and push the factory repo. Neither opens code PRs.
+All run in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro, with Codex `gpt-6.1-sol` high, full access, as the main agent. They have standing permission to publish (wikis with `content:publish`, articles through the publication drain) and to commit and push the factory repo. None opens code PRs.
 
 | Schedule | Time | Does |
 | --- | --- | --- |
 | Bloxodes nightly other games (Content Factory) | 02:00 IST | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and publishes its wiki hubs and collections. |
 | Bloxodes nightly Roblox wiki (Content Factory) | 02:30 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and publishes its hub and collections. |
+| Bloxodes articles (Content Factory) | 01:00, 07:00, 13:00, 19:00 IST | `article-main`: takes 3 curated topics from `article_generation_queue`, has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (the publication drain on the MacBook Pro's Bloxodes checkout). |
 
 The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skill and the publishing go-ahead. A T3 schedule copies its model, effort and runtime from the thread that creates it and can't change them later, so create these from a Codex `gpt-6.1-sol`, High, Full access thread. In a sandbox `content:publish` can't reach the database.
 
@@ -23,9 +24,9 @@ All units run from `/srv/data/bloxodes-automation-runtime/current` and read `/et
 
 | Unit | When | Does |
 | --- | --- | --- |
-| `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. On success starts the writer. |
-| `bloxodes-article-writer.service` | after discovery | `articles:writer:batch -- --apply --limit 6`, auto-publish on. |
-| `bloxodes-article-publication.timer` | every 15 minutes | `articles:publication:drain -- --apply`. Then runs the audit. |
+| `bloxodes-article-discovery.timer` | 00:00, 06:00, 12:00, 18:00 IST | `articles:discover`, then `articles:curate`. Fills the queue the T3 article run writes from. |
+| `bloxodes-article-writer.service` | paused | `articles:writer:batch -- --apply --limit 6`. Writing moved to the T3 article run. Discovery still triggers it, but the drop-in `/etc/systemd/system/bloxodes-article-writer.service.d/paused.conf` (`ConditionPathExists=/etc/bloxodes/article-writer.enabled`) skips it cleanly. `sudo touch /etc/bloxodes/article-writer.enabled` brings it back. |
+| `bloxodes-article-publication.timer` | every 15 minutes | `articles:publication:drain -- --apply` for articles the homelab wrote. Then runs the audit. |
 | `bloxodes-article-audit.service` | after publication | `articles:automation:audit`. |
 
 The runtime is a separate release from the repo. Merging code doesn't change it. See [articles](../content/articles.md#runtime-releases).
