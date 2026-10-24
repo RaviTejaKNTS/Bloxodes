@@ -25,3 +25,20 @@ test("verified stats settle only unclaimed catalog work older than the observati
   assert.equal((tasks[0] as any).last_success_at,observed);
   for(const task of tasks.slice(1)) assert.equal((task as any).last_success_at,undefined);
 });
+
+test("large batches are acknowledged in chunks short enough for a URL", async () => {
+  const observed = "2026-10-02T10:00:00.000Z";
+  const sizes: number[] = [];
+  const client = { from() {
+    const builder: any = {
+      update() { return builder; },
+      in(key: string, values: any[]) { if (key === "asset_id") sizes.push(values.length); return builder; },
+      or() { return builder; },
+      then(resolve: any) { return Promise.resolve({ error: null }).then(resolve); }
+    }; return builder;
+  }};
+  const rows = Array.from({ length: 1000 }, (_, index) => ({ asset_id: index + 1, last_metadata_verified_at: observed,
+    last_thumbnail_verified_at: observed, next_item_stats_refresh_at: "2026-10-23T10:00:00.000Z" }));
+  await acknowledgeCatalogRefreshFromStats(client as any, rows);
+  assert.deepEqual(sizes, [200, 200, 200, 200, 200]);
+});
