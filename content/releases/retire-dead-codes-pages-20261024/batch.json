@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/mining-simulator-2.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/pls-donate-but-infinite-robux.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/codes",
+      "contains": "Codes"
+    }
+  ],
+  "events": [
+    {
+      "type": "code",
+      "slug": "mining-simulator-2"
+    },
+    {
+      "type": "code",
+      "slug": "pls-donate-but-infinite-robux"
+    }
+  ]
+}
