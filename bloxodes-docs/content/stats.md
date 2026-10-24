@@ -24,7 +24,8 @@ rank snapshots -> current read indexes
 | Hourly playing ranks | VPS | :30 hourly |
 | Strict audit | VPS | :10 every 6 hours |
 | Daily rollup, hourly prune, audit | VPS | 00:02 |
-| Platform aggregates | VPS | 01:05 |
+| Platform hourly summary | VPS | every 5 minutes |
+| Platform daily summary | VPS | 01:05 |
 | Worker ledger reconcile | VPS | 00:10 |
 | Wiki game passes | VPS | 03:18 daily |
 
@@ -34,7 +35,9 @@ Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:ne
 
 **Single-game import:** `enrich-roblox-universes.ts` also exports `previewRobloxUniverse` (fetch and map, no write) and `importRobloxUniverse`, which `content:publish` uses to add one missing `roblox_universes` row before publishing a wiki. Both reuse the enrichment fetcher and mapper; the import never overwrites an existing row.
 
-**Reads:** `apps/web/src/lib/stats.ts`. Public pages hide player values older than 24 hours, so a fresh index alone doesn't mean fresh data.
+**Reads:** `apps/web/src/lib/stats.ts`. Public pages hide player values older than 24 hours, so a fresh index alone doesn't mean fresh data. A games-list page past the last row (PostgREST `PGRST103`) is an empty page with the real total, not an error; `/stats/games` returns 404 for it.
+
+**Platform charts:** the platform player chart reads `roblox_platform_stats_hourly` / `_daily`. The every-5-minute job refreshes the last 3 hours of the hourly summary, so the 24-hour chart is a few minutes old; the 01:05 job also refreshes the last 2 days of the daily summary. Only the 24-hour view may fall back to the live `get_stats_platform_ccu_trend` call, and only when the stored summary has no rows. The visit-share chart always uses `get_stats_visit_share_chart`, which ranks every tracked game; there is no smaller-population fallback. Both charts keep one result per range in the web process for 5 minutes (`stats-chart-cache.ts`), share one query between concurrent requests, and keep serving the last good result when a refresh fails. With no good result yet, the panel says the chart didn't load and the browser retries once.
 
 ## Wiki game passes
 
@@ -57,7 +60,7 @@ All VPS stats and data jobs run in short-lived `bloxodes-stats-worker:production
 - `bin/run-job.sh` (`scripts/ops/vps-run-job.sh`) repeats the smoke before every job and falls back to `last-known-good` if needed. It also handles locks, timeouts, state files and logs under `/home/ravitejaknts/bloxodes-stats-worker/logs`.
 - Northflank rebuilds only when worker runtime paths change (Dockerfile, package manifests, `scripts/`, needed web source, `types/`, `data/`, `env/config.json`).
 
-The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is `ebc851d06a647985e502a203117ede9e0c12c9a1` (promoted 2026-10-23).
+The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is `814feb20538e2431ee27b1d35121e59e5eecb411` (promoted 2026-10-23).
 
 A worker change is done only when the Northflank build succeeds, one HOT run succeeds, the VPS image is promoted, and a VPS job plus index rebuild move production health forward.
 
@@ -70,6 +73,7 @@ A worker change is done only when the Northflank build succeeds, one HOT run suc
 
 ## Known issues
 
-- Daily universe rollup (00:02) and platform refresh (01:05) are timing out, so the chained prune and audit may not run.
+- The 00:02 daily rollup's single full pass times out, then succeeds in universe chunks. Until 2026-10-24 the chained hourly prune timed out on most nights, so hourly history reached back to June 20 instead of 90 days. The prune now uses 2,000-row batches, halves the batch after a timeout, records `partial` with the rows it deleted after three timeouts, and the two hourly history tables vacuum at 1% churn. The 01:05 daily platform summary scans `roblox_universe_stats_daily` without a date-first index and can still fail; when it does, daily-resolution charts end a day early.
+- The hourly platform summary adds up only the games sampled in each hour. HOT games land in alternate hours, so the 24-hour player chart zig-zags between about 10K and 13M. Daily views are not affected.
 - `stats-health-monitor.yml` is set to every 5 minutes but GitHub runs it only every couple of hours.
 - The August 2026 report is live but missing from the stats sitemap and feed.

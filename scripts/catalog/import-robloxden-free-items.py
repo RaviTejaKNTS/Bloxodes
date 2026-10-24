@@ -726,6 +726,24 @@ def fetch_existing_asset_rows(env: Dict[str, str], asset_ids: List[int]) -> Dict
     return rows_by_id
 
 
+def fetch_live_legacy_bundle_ids(env: Dict[str, str], bundle_ids: List[int]) -> set:
+    """Older bundles still live at their positive Roblox ID with no negative
+    canonical row. Writing -id for them collides on the live canonical key."""
+    live: set = set()
+    for batch in chunked(sorted({bundle_id for bundle_id in bundle_ids if bundle_id > 0}), SUPABASE_BATCH_SIZE):
+        params = {
+            "select": "asset_id",
+            "asset_id": f"in.({','.join(str(bundle_id) for bundle_id in batch)})",
+            "item_type": "eq.Bundle",
+            "is_deleted": "eq.false",
+        }
+        for row in supabase_request(env, "/rest/v1/roblox_catalog_items", params=params) or []:
+            asset_id = normalize_int(row.get("asset_id"))
+            if asset_id is not None:
+                live.add(asset_id)
+    return live
+
+
 def upsert_rows(env: Dict[str, str], table_path: str, rows: List[Dict[str, Any]], conflict: str) -> None:
     for batch in chunked(rows, SUPABASE_BATCH_SIZE):
         supabase_request(
@@ -792,6 +810,10 @@ def main() -> int:
     representative_asset_ids = [entry["source_representative_asset_id"] for entry in entries]
     asset_entry_ids = [entry["external_id"] for entry in entries if entry["entry_kind"] == "asset"]
     bundle_ids = [entry["external_id"] for entry in entries if entry["entry_kind"] == "bundle"]
+    live_legacy_bundle_ids = fetch_live_legacy_bundle_ids(env, bundle_ids)
+    for entry in entries:
+        if entry["entry_kind"] == "bundle" and entry["external_id"] in live_legacy_bundle_ids:
+            entry["internal_id"] = entry["external_id"]
 
     existing_asset_rows = fetch_existing_asset_rows(env, sorted(set(asset_entry_ids + representative_asset_ids)))
     missing_asset_entry_ids = sorted({asset_id for asset_id in asset_entry_ids if asset_id not in existing_asset_rows})

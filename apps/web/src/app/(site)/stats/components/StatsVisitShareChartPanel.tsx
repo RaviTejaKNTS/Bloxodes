@@ -163,7 +163,10 @@ function SeriesLegendItem({ series }: { series: StatsVisitShareSeries }) {
 export function StatsVisitShareChartPanel({ initialChart }: { initialChart: StatsVisitShareChartData }) {
   const initialRange = rangeOptions.some((option) => option.value === initialChart.range) ? (initialChart.range as VisitShareRange) : "30d";
   const [range, setRange] = useState<VisitShareRange>(initialRange);
-  const [chartCache, setChartCache] = useState<Record<string, StatsVisitShareChartData>>({ [visitShareCacheKey(initialRange)]: initialChart });
+  // A server render that couldn't load the chart retries once from the browser.
+  const [chartCache, setChartCache] = useState<Record<string, StatsVisitShareChartData>>(() =>
+    initialChart.unavailable ? {} : { [visitShareCacheKey(initialRange)]: initialChart }
+  );
   const [lastRenderedChart, setLastRenderedChart] = useState<StatsVisitShareChartData>(initialChart);
   const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -235,8 +238,15 @@ export function StatsVisitShareChartPanel({ initialChart }: { initialChart: Stat
           <div className="flex h-[300px] items-center justify-center rounded-lg border border-dashed border-border/70 bg-background/35 text-center">
             <div className="max-w-sm px-6">
               <Activity className="mx-auto h-5 w-5 text-muted" aria-hidden />
-              <p className="mt-3 text-sm font-semibold text-foreground">{isLoading ? "Loading chart" : "Not enough visit history yet"}</p>
-              <p className="mt-1 text-xs text-muted">{loadError ?? "This chart needs daily visit-delta rows before it can compare game share."}</p>
+              <p className="mt-3 text-sm font-semibold text-foreground">
+                {isLoading ? "Loading chart" : displayChart.unavailable ? "Chart didn't load" : "Not enough visit history yet"}
+              </p>
+              <p className="mt-1 text-xs text-muted">
+                {loadError ??
+                  (displayChart.unavailable
+                    ? "Visit numbers are taking too long right now. Try again in a few minutes."
+                    : "This chart needs daily visit-delta rows before it can compare game share.")}
+              </p>
             </div>
           </div>
         ) : (

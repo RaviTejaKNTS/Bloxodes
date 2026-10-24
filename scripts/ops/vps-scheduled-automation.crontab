@@ -15,7 +15,10 @@
 # BLOXODES_SCHEDULED_AUTOMATION_START
 10 0 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh worker-ledger-reconciliation "npm run stats:worker:reconcile -- --apply"
 2 0 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit -- --strict"
-5 1 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-platform-refresh "npm run stats:platform:refresh -- --hourly-days 2 --daily-days 2"
+# Platform chart summaries: hourly every 5 minutes over a short window (keeps the
+# 24-hour chart current and each call well under the API timeout), daily at 01:05.
+*/5 * * * * JOB_TIMEOUT_SECONDS=240 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-platform-hourly-refresh "npm run stats:platform:refresh -- --hourly-hours 3 --skip-daily"
+5 1 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-platform-refresh "npm run stats:platform:refresh -- --hourly-hours 3 --daily-days 2"
 
 0 */6 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh codes-refresh "export REFRESH_CONCURRENCY=6 REFRESH_BATCH_DELAY_MS=750; npm run refresh:codes"
 # Google Indexing remains owner-disabled. No scheduled no-op invocation.

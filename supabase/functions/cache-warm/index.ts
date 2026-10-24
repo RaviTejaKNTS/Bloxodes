@@ -120,6 +120,25 @@ async function finishWorkerRun(
   }
 }
 
+// A run the platform stops mid-batch never records a result. Close those after
+// an hour so the ledger shows them as failed instead of running forever.
+async function closeAbandonedWorkerRuns() {
+  try {
+    const { error } = await supabase
+      .from("cache_warm_worker_runs")
+      .update({
+        status: "failed",
+        finished_at: new Date().toISOString(),
+        error: "Abandoned: the worker stopped before recording a result."
+      })
+      .eq("status", "running")
+      .lt("created_at", new Date(Date.now() - 60 * 60 * 1000).toISOString());
+    if (error) throw error;
+  } catch (error) {
+    logError("Failed to close abandoned cache warm worker runs", { error: String(error) });
+  }
+}
+
 async function fetchWarmEvents(): Promise<WarmEventRow[]> {
   const { data, error } = await supabase
     .from("cache_warm_events")
@@ -165,6 +184,17 @@ async function warmPath(path: string) {
   }
 }
 
+// Dropped paths are gone from the queue, so keep their path and reason here.
+function warmRunError(retrying: number, dropped: Array<{ path: string; reason: string }>) {
+  const parts: string[] = [];
+  if (retrying) parts.push(`${retrying} warm requests failed and will retry`);
+  if (dropped.length) {
+    const sample = dropped.slice(0, 20).map((entry) => `${entry.path} (${entry.reason})`).join(", ");
+    parts.push(`dropped ${dropped.length}: ${sample}${dropped.length > 20 ? ", ..." : ""}`);
+  }
+  return parts.length ? parts.join("; ").slice(0, 2000) : undefined;
+}
+
 serve(async (req) => {
   if (!isAuthorized(req)) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
@@ -175,6 +205,7 @@ serve(async (req) => {
 
   const startedAt = Date.now();
   const runId = await startWorkerRun(batchSize);
+  await closeAbandonedWorkerRuns();
 
   try {
     const events = await fetchWarmEvents();
@@ -236,7 +267,7 @@ serve(async (req) => {
       droppedCount,
       durationMs: Date.now() - startedAt,
       paths: events.map((event) => event.path),
-      error: failedCount ? `${failedCount} warm requests failed and will retry` : undefined
+      error: warmRunError(failedCount, droppedFailures.map((entry) => ({ path: entry.result.path, reason: entry.result.error ?? "unknown" })))
     });
 
     logInfo("Cache warm batch result", {

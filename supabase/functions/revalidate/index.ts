@@ -180,6 +180,25 @@ async function finishWorkerRun(
   }
 }
 
+// A run the platform stops mid-batch never records a result. Close those after
+// an hour so the ledger shows them as failed instead of running forever.
+async function closeAbandonedWorkerRuns() {
+  try {
+    const { error } = await supabase
+      .from("revalidation_worker_runs")
+      .update({
+        status: "failed",
+        finished_at: new Date().toISOString(),
+        error: "Abandoned: the worker stopped before recording a result."
+      })
+      .eq("status", "running")
+      .lt("started_at", new Date(Date.now() - 60 * 60 * 1000).toISOString());
+    if (error) throw error;
+  } catch (error) {
+    logError("Failed to close abandoned revalidation worker runs", { error: String(error) });
+  }
+}
+
 serve(async (req) => {
   if (!revalidateEndpoint || !revalidateSecret) {
     logError("Missing REVALIDATE env vars");
@@ -192,6 +211,7 @@ serve(async (req) => {
   const startedAt = Date.now();
   const effectiveBatchSize = Math.max(1, batchSize);
   const runId = await startWorkerRun(effectiveBatchSize);
+  await closeAbandonedWorkerRuns();
 
   try {
     const events = await fetchEvents(100);

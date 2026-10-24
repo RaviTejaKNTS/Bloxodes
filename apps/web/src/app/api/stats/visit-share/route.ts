@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     const chart = await getStatsVisitShareChart(range);
     return NextResponse.json(chart, {
       headers: {
-        "cache-control": "public, max-age=300, stale-while-revalidate=1800"
+        "cache-control": chart.unavailable ? "no-store" : "public, max-age=300, stale-while-revalidate=1800"
       }
     });
   } catch (error) {

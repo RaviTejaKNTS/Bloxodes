@@ -1,6 +1,7 @@
 import "server-only";
 import { supabaseAdmin } from "@/lib/supabase";
 import { statsUniverseSlug } from "@/lib/slug";
+import { cachedStatsChart } from "@/lib/stats-chart-cache";
 
 export type StatsVisitShareRange = "1d" | "7d" | "14d" | "30d" | "90d";
 
@@ -36,31 +37,8 @@ export type StatsVisitShareChartData = {
   visibleGameCount: number;
   totalVisits: number;
   generatedAt: string;
-};
-
-type VisitShareGameRow = {
-  universe_id: number;
-  name: string;
-  display_name: string | null;
-  slug: string | null;
-  icon_url: string | null;
-  visits: number | string | null;
-};
-
-type DailyVisitShareRow = {
-  universe_id: number;
-  stat_date: string;
-  visit_delta: number | string | null;
-  visits_start: number | string | null;
-  visits_end: number | string | null;
-};
-
-type VisitShareGame = {
-  universeId: number;
-  name: string;
-  slug: string;
-  iconUrl: string | null;
-  visits: number | null;
+  /** True when no good result could be loaded; the page shows a short notice. */
+  unavailable?: boolean;
 };
 
 type VisitShareRpcRow = {
@@ -90,12 +68,9 @@ type VisitShareBucket = {
   isOther: boolean;
 };
 
-const TOP_GAME_LIMIT = 1000;
 const INDIVIDUAL_GAME_LIMIT = 8;
 const TOP_GROUP_LIMIT = 100;
 const WIDE_GROUP_LIMIT = 1000;
-const REST_TOP_100_KEY = "rank_9_100";
-const REST_TOP_1000_KEY = "rank_101_1000";
 const OTHER_TRACKED_KEY = "other_tracked";
 const RANGE_DAYS: Record<StatsVisitShareRange, number> = {
   "1d": 1,
@@ -153,94 +128,8 @@ function formatChartDate(date: Date, withYear = false) {
   });
 }
 
-function visitShareSeriesKey(universeId: number) {
-  return `g${universeId}`;
-}
-
-function groupBucketKey(rankStart: number, rankEnd: number) {
-  return `rank_${rankStart}_${rankEnd}`;
-}
-
 function roundVisitShare(value: number) {
   return Math.round(value * 100) / 100;
-}
-
-function getDailyVisitDelta(row: DailyVisitShareRow) {
-  const directDelta = toFiniteNumber(row.visit_delta);
-  if (directDelta != null && directDelta > 0) return directDelta;
-  const visitsStart = toFiniteNumber(row.visits_start);
-  const visitsEnd = toFiniteNumber(row.visits_end);
-  if (visitsStart == null || visitsEnd == null) return 0;
-  return Math.max(0, visitsEnd - visitsStart);
-}
-
-async function listVisitShareGames(limit = TOP_GAME_LIMIT): Promise<VisitShareGame[]> {
-  const { data, error } = await supabaseAdmin()
-    .from("roblox_universes")
-    .select("universe_id, name, display_name, slug, icon_url, visits")
-    .not("slug", "is", null)
-    .not("visits", "is", null)
-    .order("visits", { ascending: false, nullsFirst: false })
-    .order("universe_id", { ascending: true })
-    .limit(limit);
-
-  if (error) {
-    console.warn("Failed to load visit-share games", error.message);
-    return [];
-  }
-
-  return ((data ?? []) as VisitShareGameRow[]).map((game) => ({
-    universeId: game.universe_id,
-    name: game.display_name || game.name,
-    slug: statsUniverseSlug(game.slug?.trim() || game.name || "roblox-game", game.universe_id),
-    iconUrl: game.icon_url,
-    visits: toFiniteNumber(game.visits)
-  }));
-}
-
-async function listDailyVisitShareRows(
-  universeIds: number[],
-  range: StatsVisitShareRange,
-  window = chartWindow(range)
-): Promise<DailyVisitShareRow[]> {
-  if (!universeIds.length) return [];
-  const rows: DailyVisitShareRow[] = [];
-  const pageSize = 1000;
-  const idPageSize = 100;
-  const startDate = window.start.toISOString().slice(0, 10);
-  const endDate = window.end.toISOString().slice(0, 10);
-  const sb = supabaseAdmin();
-
-  for (let idOffset = 0; idOffset < universeIds.length; idOffset += idPageSize) {
-    const idChunk = universeIds.slice(idOffset, idOffset + idPageSize);
-    let offset = 0;
-
-    while (true) {
-      const { data, error } = await sb
-        .from("roblox_universe_stats_daily")
-        .select("universe_id, stat_date, visit_delta, visits_start, visits_end")
-        .in("universe_id", idChunk)
-        .gte("stat_date", startDate)
-        .lte("stat_date", endDate)
-        .order("stat_date", { ascending: true })
-        .order("universe_id", { ascending: true })
-        .range(offset, offset + pageSize - 1);
-
-      if (error) {
-        if (error.code !== "42P01") {
-          console.warn("Failed to load visit-share stats", error.message);
-        }
-        return [];
-      }
-
-      const chunk = (data ?? []) as DailyVisitShareRow[];
-      rows.push(...chunk);
-      if (chunk.length < pageSize) break;
-      offset += pageSize;
-    }
-  }
-
-  return rows;
 }
 
 function buildVisitShareChart({
@@ -326,14 +215,11 @@ async function getVisitShareChartFromRpc(range: StatsVisitShareRange, window = c
   });
 
   if (error) {
-    if (error.code !== "PGRST202" && error.code !== "42883") {
-      console.warn("Failed to load visit-share chart RPC", error.message);
-    }
+    console.warn("Failed to load visit-share chart RPC", error.message);
     return null;
   }
 
   const rows = (data ?? []) as VisitShareRpcRow[];
-  if (!rows.length) return null;
 
   const bucketMap = new Map<string, VisitShareBucket>();
   const bucketTotals = new Map<string, number>();
@@ -383,108 +269,23 @@ async function getVisitShareChartFromRpc(range: StatsVisitShareRange, window = c
   });
 }
 
-async function getVisitShareChartFallback(range: StatsVisitShareRange): Promise<StatsVisitShareChartData> {
-  const games = await listVisitShareGames(TOP_GAME_LIMIT);
-  const universeIds = games.map((game) => game.universeId);
-  const dailyRows = await listDailyVisitShareRows(universeIds, range);
-  const gameTotals = new Map<number, number>();
-  const gameRowsByDate = new Map<string, Map<number, number>>();
-
-  for (const row of dailyRows) {
-    const delta = getDailyVisitDelta(row);
-    if (delta <= 0) continue;
-    gameTotals.set(row.universe_id, (gameTotals.get(row.universe_id) ?? 0) + delta);
-    const dateTotals = gameRowsByDate.get(row.stat_date) ?? new Map<number, number>();
-    dateTotals.set(row.universe_id, (dateTotals.get(row.universe_id) ?? 0) + delta);
-    gameRowsByDate.set(row.stat_date, dateTotals);
-  }
-
-  const rankedGames = games
-    .filter((game) => (gameTotals.get(game.universeId) ?? 0) > 0)
-    .sort((a, b) => (gameTotals.get(b.universeId) ?? 0) - (gameTotals.get(a.universeId) ?? 0));
-  const buckets: VisitShareBucket[] = rankedGames.slice(0, INDIVIDUAL_GAME_LIMIT).map((game, index) => ({
-    key: visitShareSeriesKey(game.universeId),
-    name: game.name,
-    universeId: game.universeId,
-    slug: game.slug,
-    iconUrl: game.iconUrl,
-    rankStart: index + 1,
-    rankEnd: index + 1,
-    isGroup: false,
-    isOther: false
-  }));
-
-  if (rankedGames.length > INDIVIDUAL_GAME_LIMIT) {
-    buckets.push({
-      key: REST_TOP_100_KEY,
-      name: `Ranks ${INDIVIDUAL_GAME_LIMIT + 1}-${Math.min(TOP_GROUP_LIMIT, rankedGames.length)}`,
-      universeId: null,
-      slug: null,
-      iconUrl: null,
-      rankStart: INDIVIDUAL_GAME_LIMIT + 1,
-      rankEnd: Math.min(TOP_GROUP_LIMIT, rankedGames.length),
-      isGroup: true,
-      isOther: false
-    });
-  }
-
-  if (rankedGames.length > TOP_GROUP_LIMIT) {
-    buckets.push({
-      key: REST_TOP_1000_KEY,
-      name: `Ranks ${TOP_GROUP_LIMIT + 1}-${Math.min(WIDE_GROUP_LIMIT, rankedGames.length)}`,
-      universeId: null,
-      slug: null,
-      iconUrl: null,
-      rankStart: TOP_GROUP_LIMIT + 1,
-      rankEnd: Math.min(WIDE_GROUP_LIMIT, rankedGames.length),
-      isGroup: true,
-      isOther: false
-    });
-  }
-
-  const rankByUniverseId = new Map(rankedGames.map((game, index) => [game.universeId, index + 1]));
-  const bucketKeyByUniverseId = new Map<number, string>();
-  for (const game of rankedGames) {
-    const rank = rankByUniverseId.get(game.universeId) ?? Infinity;
-    if (rank <= INDIVIDUAL_GAME_LIMIT) {
-      bucketKeyByUniverseId.set(game.universeId, visitShareSeriesKey(game.universeId));
-    } else if (rank <= TOP_GROUP_LIMIT) {
-      bucketKeyByUniverseId.set(game.universeId, REST_TOP_100_KEY);
-    } else if (rank <= WIDE_GROUP_LIMIT) {
-      bucketKeyByUniverseId.set(game.universeId, REST_TOP_1000_KEY);
-    }
-  }
-
-  const bucketTotals = new Map<string, number>();
-  const byDate = new Map<string, Map<string, number>>();
-  const dateTotals = new Map<string, number>();
-
-  for (const [date, dateGameTotals] of gameRowsByDate.entries()) {
-    const dateBuckets = new Map<string, number>();
-    let dateTotal = 0;
-    for (const [universeId, visits] of dateGameTotals.entries()) {
-      const key = bucketKeyByUniverseId.get(universeId);
-      if (!key) continue;
-      dateTotal += visits;
-      bucketTotals.set(key, (bucketTotals.get(key) ?? 0) + visits);
-      dateBuckets.set(key, (dateBuckets.get(key) ?? 0) + visits);
-    }
-    if (dateTotal > 0) {
-      dateTotals.set(date, dateTotal);
-      byDate.set(date, dateBuckets);
-    }
-  }
-
-  return buildVisitShareChart({
+function unavailableVisitShareChart(range: StatsVisitShareRange): StatsVisitShareChartData {
+  return {
     range,
-    buckets,
-    bucketTotals,
-    byDate,
-    dateTotals,
-    denominatorGameCount: rankedGames.length
-  });
+    points: [],
+    series: [],
+    denominatorGameCount: 0,
+    visibleGameCount: 0,
+    totalVisits: 0,
+    generatedAt: new Date().toISOString(),
+    unavailable: true
+  };
 }
 
+// The RPC ranks every tracked game, so it is the only correct source for these
+// percentages. When it fails, serve the last good answer instead of rebuilding
+// the chart from a smaller set of games.
 export async function getStatsVisitShareChart(range: StatsVisitShareRange = "30d"): Promise<StatsVisitShareChartData> {
-  return (await getVisitShareChartFromRpc(range)) ?? getVisitShareChartFallback(range);
+  const chart = await cachedStatsChart(`visit-share:${range}`, () => getVisitShareChartFromRpc(range));
+  return chart ?? unavailableVisitShareChart(range);
 }

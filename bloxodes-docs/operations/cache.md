@@ -16,7 +16,7 @@ content or data write
   -> Edge Function `cache-warm` fetches the public URLs
 ```
 
-Revalidation and warming are separate on purpose, so a big stats purge doesn't wait on hundreds of page fetches. Successful rows are removed from both queues; worker runs are logged in `revalidation_worker_runs` and `cache_warm_worker_runs`.
+Revalidation and warming are separate on purpose, so a big stats purge doesn't wait on hundreds of page fetches. Successful rows are removed from both queues; worker runs are logged in `revalidation_worker_runs` and `cache_warm_worker_runs`. Each worker run marks runs still `running` after an hour as `failed` ("Abandoned: ..."), since a run stopped mid-batch never records its result. A cache-warm run with dropped paths (404, or out of retries) lists up to 20 of them with their reason in `error`, even when the run's status is `success`; watch `dropped_count`, not just status.
 
 ## Where things live
 
@@ -28,6 +28,8 @@ Revalidation and warming are separate on purpose, so a big stats purge doesn't w
 | Scheduler | `ravitejaknts` crontab on the VPS |
 
 The Edge Function forwards event types it doesn't know, so new content types only need mapping in the web app.
+
+Stats chart APIs are the one origin exception: the platform player and visit-share charts keep each result in the web process for 5 minutes and share one query between concurrent requests (`apps/web/src/lib/stats-chart-cache.ts`). See [stats](../content/stats.md). Don't add `unstable_cache` for other public reads.
 
 ## Runtime variables
 

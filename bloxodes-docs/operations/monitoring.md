@@ -30,7 +30,7 @@ Keep this list current: add failures when you find them, remove them when fixed.
 
 - **New codes pages:** OpenAI credits exhausted, so no new pages since 2026-10-07. The workflow still shows green. See [codes](../content/codes.md#known-issues).
 - **Music IDs:** Roblox Creator Store returns HTTP 500.
-- **Universe stats:** the daily rollup and platform refresh time out.
-- **Item stats:** WARM fails on a duplicate canonical key; NEW, HOT and COLD were skipped; the audit is partial.
+- **Universe stats:** the daily rollup falls back to universe chunks after its full pass times out. The hourly prune was fixed on 2026-10-24; watch for `partial` runs. See [stats](../content/stats.md#known-issues).
+- **Item stats:** recovering from the bundle-key failures fixed on 2026-10-24; the audit is partial until overdue items drop under 5%. See [data refreshes](../content/data-refreshes.md#known-issues-2026-10-19).
 - **Health monitor:** runs far less often than configured.
 - **Paid Codex PR review:** the `OPENAI_API_KEY` is out of quota, so `codex-review.yml` fails. Its `scope` job also fails on very large PRs when GitHub's file list doesn't match `changed_files`. Neither blocks merging.
