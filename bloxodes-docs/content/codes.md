@@ -17,7 +17,7 @@ VPS cron runs `refresh:codes` (`scripts/codes/update-codes.ts`) at 00:00, 06:00,
 
 ## Manual page setup
 
-Use `bloxodes-code-workflow-runner` and `bloxodes-code-writing`, then publish with `bloxodes-release-e2e` (the `roblox-codes-page` publisher). It sets page copy and source fields only. The refresh worker owns the code rows.
+Use `bloxodes-code-workflow-runner` and `bloxodes-code-writing`, then publish with `bloxodes-release-e2e` (the `roblox-codes-page` publisher). It sets page copy and source fields only. The refresh worker owns the code rows. To retire a page, publish a payload with `"publish": false` and the page's current copy unchanged (the publisher overwrites every field); the page then returns 404 and leaves the sitemap. Example: `content/releases/retire-dead-codes-pages-20261024`.
 
 ## Rules
 
