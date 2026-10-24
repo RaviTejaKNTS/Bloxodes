@@ -1,5 +1,5 @@
-name: Selective Codex review
-run-name: Codex review for PR ${{ github.event.pull_request.number || inputs.pull_request }}
+name: Selective Claude review
+run-name: Claude review for PR ${{ github.event.pull_request.number || inputs.pull_request }}
 
 on:
   pull_request:
@@ -70,7 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     outputs:
-      result: ${{ steps.codex.outputs.final-message }}
+      result: ${{ steps.claude.outputs.final-message }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -80,22 +80,67 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      # Claude Haiku 5.5 through the Claude Code CLI with no tools. The diff and
+      # review guide are prepared here and piped in; the CLI runs in an empty
+      # directory so PR-controlled settings and files can't reach the token.
+      - name: Install Claude Code CLI
+        run: npm install --global @anthropic-ai/claude-code@2.1.310
+      - name: Prepare the diff
+        env:
+          REVIEW_HEAD: ${{ needs.scope.outputs.head }}
+          REVIEW_BASE: ${{ needs.scope.outputs.base }}
+        run: |
+          git diff --no-ext-diff --no-color "${REVIEW_BASE}...${REVIEW_HEAD}" > "$RUNNER_TEMP/review.diff"
+          bytes=$(wc -c < "$RUNNER_TEMP/review.diff")
+          if (( bytes > 400000 )); then
+            head -c 400000 "$RUNNER_TEMP/review.diff" > "$RUNNER_TEMP/review.diff.cut"
+            printf '\n\n[Diff truncated at 400,000 of %s bytes.]\n' "$bytes" >> "$RUNNER_TEMP/review.diff.cut"
+            mv "$RUNNER_TEMP/review.diff.cut" "$RUNNER_TEMP/review.diff"
+          fi
+          cp .github/codex/review.md "$RUNNER_TEMP/review-guide.md"
+          mkdir -p "$RUNNER_TEMP/claude-empty"
       - name: Review the selected code diff
-        id: codex
-        uses: openai/codex-action@bdf19a4a223ec2549a3e2274a0cf61556bc07675 # v1
-        with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          permission-profile: ':read-only'
-          safety-strategy: drop-sudo
-          effort: medium
-          codex-args: '["--ephemeral"]'
-          prompt: |
-            Review PR #${{ needs.scope.outputs.number }} at head ${{ needs.scope.outputs.head }}.
-            The base commit is ${{ needs.scope.outputs.base }}.
-            Use git diff ${{ needs.scope.outputs.base }}...${{ needs.scope.outputs.head }} to inspect this PR.
-            Follow .github/codex/review.md. Do not run checks, edit files or perform external actions.
-          output-schema: |
-            {"type":"object","additionalProperties":false,"required":["summary","findings"],"properties":{"summary":{"type":"string"},"findings":{"type":"array","maxItems":8,"items":{"type":"object","additionalProperties":false,"required":["priority","title","body","path","startLine","endLine"],"properties":{"priority":{"type":"string","enum":["P0","P1","P2"]},"title":{"type":"string"},"body":{"type":"string"},"path":{"type":"string"},"startLine":{"type":"integer","minimum":1},"endLine":{"type":"integer","minimum":1}}}}}}
+        id: claude
+        working-directory: ${{ runner.temp }}/claude-empty
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          PR_NUMBER: ${{ needs.scope.outputs.number }}
+          REVIEW_HEAD: ${{ needs.scope.outputs.head }}
+          REVIEW_BASE: ${{ needs.scope.outputs.base }}
+        run: |
+          if [[ -z "${ANTHROPIC_API_KEY//[[:space:]]/}" && -z "${CLAUDE_CODE_OAUTH_TOKEN//[[:space:]]/}" ]]; then
+            echo "::error::Set ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN as a repository secret."
+            exit 1
+          fi
+          {
+            printf 'Review PR #%s, base %s, head %s. The full diff is below; you have no tools.\n\n' "$PR_NUMBER" "$REVIEW_BASE" "$REVIEW_HEAD"
+            cat "$RUNNER_TEMP/review-guide.md"
+            printf '\nReply with only one JSON object, no prose and no code fence:\n'
+            printf '{"summary": string, "findings": [{"priority": "P0"|"P1"|"P2", "title": string, "body": string, "path": string, "startLine": integer, "endLine": integer}]}\n'
+            printf 'Use at most 8 findings. Paths are repository-relative as shown in the diff headers.\n\n<diff>\n'
+            cat "$RUNNER_TEMP/review.diff"
+            printf '\n</diff>\n'
+          } > "$RUNNER_TEMP/review-prompt.txt"
+          env -i PATH="$PATH" HOME="$RUNNER_TEMP/claude-empty" \
+            ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" CLAUDE_CODE_OAUTH_TOKEN="$CLAUDE_CODE_OAUTH_TOKEN" \
+            claude -p --model claude-haiku-5-5 --output-format json --max-turns 1 \
+            --no-session-persistence --strict-mcp-config --mcp-config '{"mcpServers":{}}' \
+            --permission-mode dontAsk --tools "" --settings '{"disableAllHooks":true}' \
+            < "$RUNNER_TEMP/review-prompt.txt" > "$RUNNER_TEMP/claude-review.json"
+          node -e '
+            const fs = require("fs");
+            const body = JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP + "/claude-review.json", "utf8"));
+            if (body.type !== "result" || body.subtype !== "success" || typeof body.result !== "string") {
+              throw new Error(`Claude review did not finish (type=${body.type}, subtype=${body.subtype}).`);
+            }
+            const text = body.result.trim();
+            const json = text.match(/^```(?:json)?\s*\n([\s\S]*?)\n```$/i)?.[1] ?? text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1);
+            const result = JSON.parse(json);
+            if (typeof result.summary !== "string" || !Array.isArray(result.findings)) throw new Error("Claude review JSON is missing summary or findings.");
+            const delimiter = "REVIEW_" + require("crypto").randomUUID();
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `final-message<<${delimiter}\n${JSON.stringify(result)}\n${delimiter}\n`);
+          '
 
   feedback:
     needs: [scope, review]
@@ -126,7 +171,7 @@ jobs:
             }
             const result = JSON.parse(process.env.REVIEW_RESULT);
             if (typeof result.summary !== 'string' || !Array.isArray(result.findings) || result.findings.length > 8) {
-              throw new Error('Codex did not return a bounded structured review.');
+              throw new Error('The reviewer did not return a bounded structured review.');
             }
             const entries = await github.paginate(github.rest.pulls.listFiles, { ...params, per_page: 100 });
             const changed = new Map(entries.map(file => [file.filename, file.status]));
@@ -145,7 +190,7 @@ jobs:
               return `- **${finding.priority}: ${finding.title}**\n\n  ${finding.body}\n\n  [${filename}:${finding.startLine}](${url})`;
             });
             const marker = '<!-- bloxodes-selective-codex-review -->';
-            const body = `${marker}\nReviewed commit: \`${head}\`\n\n${result.summary}\n\n${findings.join('\n\n') || 'No actionable findings.'}\n\nCode review feedback. Required PR checks still apply. Request a fresh review after fixes through Actions > Selective Codex review.`;
+            const body = `${marker}\nReviewed commit: \`${head}\`\n\n${result.summary}\n\n${findings.join('\n\n') || 'No actionable findings.'}\n\nCode review feedback. Required PR checks still apply. Request a fresh review after fixes through Actions > Selective Claude review.`;
             if (body.length > 60000) throw new Error('Review feedback exceeds the comment limit.');
             const issue = { ...context.repo, issue_number: number };
             const comments = await github.paginate(github.rest.issues.listComments, { ...issue, per_page: 100 });
