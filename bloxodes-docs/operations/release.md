@@ -11,7 +11,7 @@ How code and content reach production. GitHub does the checking, building and de
 3. **Open a PR to `production`** and link it to T3. Use T3's PR watcher while checks run.
 4. **`pull-request.yml`** sorts the diff. Docs and skills skip the heavy jobs. Code runs migration integrity, env contracts, script tests and the affected app checks. Web changes get a production build, cold/warm catalog pagination and filter/failure regression, and desktop and mobile browser smoke tests with screenshots. The PR build uses a GitHub-only read fixture for music, decal and mesh REST queries; other content still reads managed development. Catalog regression writes no database rows and saves its SHA-bound report under `tmp/test-reports/`. Production image builds do not load this fixture.
 5. **`Required PR checks`** is the single required check. Branch protection enforces it, including for admins, and blocks force pushes. No human approval is required by GitHub; release permission comes from the owner.
-6. **`codex-review.yml`** (Selective Codex review) runs a paid code review when a ready, same-repo code PR opens. It isn't a required check. Pushes cancel stale reviews but don't start new ones. After fixes: `gh workflow run codex-review.yml --ref production -f pull_request=<number>`. It doesn't replace the required checks.
+6. **`codex-review.yml`** (Selective Claude review) runs a read-only Claude Haiku 5.5 code review through the Claude Code CLI when a ready, same-repo code PR opens. It may only read files and run `git diff/show/log`. It isn't a required check. Pushes cancel stale reviews but don't start new ones. After fixes: `gh workflow run codex-review.yml --ref production -f pull_request=<number>`. It doesn't replace the required checks.
 7. **Merge** with a merge commit, only after `Required PR checks` passes and the owner has approved the release. Never push to `production` directly.
 8. **Clean up.** GitHub deletes the remote branch. Fast-forward the clean main checkouts (homelab and Mac) to the released SHA. On the homelab, once the thread is finished in T3, run `cleanup:task-worktree` from another checkout with `--inactive-confirmed`. On the Mac, the hourly `com.ravitejaknts.t3-worktree-reaper` removes settled T3 worktrees; the helper doesn't accept Mac paths.
 
@@ -82,5 +82,5 @@ These don't change when code merges:
 - All CI runs with `BLOXODES_ENV_PROFILE=process-only`.
 - PR jobs use `MANAGED_DEV_SUPABASE_URL`, `_ANON_KEY`, `_SERVICE_ROLE` and `_ACCESS_TOKEN`.
 - The `production` GitHub environment (only the `production` branch can use it) holds Studio credentials and the four `WIKI_R2_*` keys. Database, media, revalidation, Dokploy and GHCR secrets are repository secrets.
-- `codex-review.yml` gets `OPENAI_API_KEY` only in its review job, with no database or deploy credentials.
+- `codex-review.yml` gets `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` only in its review job, with no database or deploy credentials. `generate-queue.yml` and `discover-beebom-codes.yml` use the same secret for page copy.
 - `env/examples/ci.env.example` lists CI-only names.

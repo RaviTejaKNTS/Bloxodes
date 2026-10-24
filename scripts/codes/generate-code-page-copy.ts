@@ -1,7 +1,5 @@
 import "../shared/load-env";
 
-import OpenAI from "openai";
-
 import { createClient } from "@supabase/supabase-js";
 import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
@@ -12,8 +10,11 @@ import { scrapeRobloxGameMetadata } from "@/lib/roblox/game-metadata";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { scrapeSocialLinksFromSources, type SocialLinks as ScrapedSocialLinks } from "@/lib/social-links";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
+import { ClaudePrintInterrupted, runClaudePrint, stripJsonFence } from "../shared/claude-print-runner";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
+const generateCopy = (prompt: string, systemPrompt?: string) => runClaudePrint({
+  prompt, systemPrompt, model: "claude-haiku-5-5", effort: "xhigh", timeoutMs: 5 * 60_000
+});
 const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE!
@@ -355,15 +356,7 @@ async function generateInterlinkCopy(context: InterlinkPromptContext): Promise<s
     genre_picks: genreLinks
   };
 
-  const completion = await openai.responses.create({
-    model: "gpt-4.1-mini",
-    input: [
-      { role: "system", content: system },
-      { role: "user", content: JSON.stringify(user) }
-    ]
-  });
-
-  const text = (completion.output_text ?? "").trim();
+  const text = await generateCopy(JSON.stringify(user), system);
   if (!text) return null;
   return text;
 }
@@ -864,20 +857,12 @@ async function processDraftCodePage(game: ExistingCodePageRecord): Promise<void>
   const socialLinks = await collectSocialLinksFromExistingSources(game);
   const metadata = await collectRobloxMetadata(socialLinks.roblox_link?.url ?? game.roblox_link);
 
-  console.log("🧠 Writing detailed article using GPT-4.1-mini...");
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
-    temperature: 0.3,
-    max_tokens: 5000,
-    response_format: { type: "json_object" },
-    messages: [{ role: "user", content: buildArticlePrompt(game.name, combinedSources) }],
-  });
-
-  const raw = completion.choices[0].message?.content ?? "";
+  console.log("🧠 Writing detailed article using Claude Haiku 5.5...");
+  const raw = await generateCopy(buildArticlePrompt(game.name, combinedSources));
 
   let parsed: unknown;
   try {
-    parsed = JSON.parse(raw);
+    parsed = JSON.parse(stripJsonFence(raw));
   } catch (error) {
     console.error("⚠️ Could not parse JSON. Raw output:\n", raw);
     throw new Error((error as Error).message || "Model returned invalid JSON.");
@@ -1064,12 +1049,16 @@ async function main() {
       await processDraftCodePage(game);
       completed += 1;
     } catch (error) {
+      if (error instanceof ClaudePrintInterrupted) throw error;
       failed += 1;
       console.error(`❌ Failed to generate ${game.slug}:`, error instanceof Error ? error.message : error);
     }
   }
 
   console.log(`✅ Draft generation complete: ${completed} completed, ${failed} failed.`);
+  if (completed === 0 && failed > 0) {
+    throw new Error(`All ${failed} selected code pages failed generation; no pages completed.`);
+  }
 }
 
 main().catch((error) => {
