@@ -14,7 +14,7 @@ The two wiki schedules run in **dev-only mode** while the owner is away: pages g
 
 | Schedule | Time | Does |
 | --- | --- | --- |
-| Bloxodes other games loop (Content Factory) | every 4 hours on Claude Opus 5.5, and each run tries to start the next | `franchise-wiki-main` in dev-only and loop mode: builds the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md). The factory's `bin/games-loop` keeps it to one run at a time and starts the next run only while `Ready` rows remain. A tick that finds a run active or nothing `Ready` ends at once. |
+| Bloxodes other games loop (Content Factory) | every 4 hours on Claude Opus 5.5, and each run launches the next run's thread and settles its own | `franchise-wiki-main` in dev-only and loop mode: builds the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md). The factory's `bin/games-loop` keeps it to one run at a time and starts the next run only while `Ready` rows remain. A tick that finds a run active or nothing `Ready` ends at once. |
 | Bloxodes nightly Roblox wiki (Content Factory) | 02:30 IST | `roblox-wiki-main` in dev-only mode: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds its hub and collections. |
 | Bloxodes articles every 6 hours (Content Factory) | every 6 hours | `article-main`: takes 3 curated topics from `article_generation_queue`, has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (the publication drain on the MacBook Pro's Bloxodes checkout). |
 
