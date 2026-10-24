@@ -1,6 +1,8 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { runDataApiOperation } from "../shared/data-api-retry";
 
+const ACK_CHUNK_SIZE = 200;
+
 // Only completed metadata/thumbnail observations can settle unclaimed work.
 export async function acknowledgeCatalogRefreshFromStats(db: SupabaseClient, rows: Record<string, unknown>[]) {
   const groups = new Map<string, { observedAt: string; nextRunAt: string; ids: number[] }>();
@@ -13,10 +15,14 @@ export async function acknowledgeCatalogRefreshFromStats(db: SupabaseClient, row
     group.ids.push(row.asset_id); groups.set(key, group);
   }
   for (const { observedAt, nextRunAt, ids } of groups.values()) {
-    await runDataApiOperation("Acknowledge verified catalog work", () => db.from("roblox_catalog_refresh_queue").update({
-      status: "pending", attempts: 0, last_success_at: observedAt,
-      next_run_at: nextRunAt, last_error: null, last_error_code: null, last_error_kind: null
-    }).in("asset_id", ids).in("status", ["pending", "retry"])
-      .or(`last_attempt_at.is.null,last_attempt_at.lte.${observedAt}`));
+    // The IDs go in the query string; a 1,000-row WARM batch returned HTTP 414.
+    for (let index = 0; index < ids.length; index += ACK_CHUNK_SIZE) {
+      const chunk = ids.slice(index, index + ACK_CHUNK_SIZE);
+      await runDataApiOperation("Acknowledge verified catalog work", () => db.from("roblox_catalog_refresh_queue").update({
+        status: "pending", attempts: 0, last_success_at: observedAt,
+        next_run_at: nextRunAt, last_error: null, last_error_code: null, last_error_kind: null
+      }).in("asset_id", chunk).in("status", ["pending", "retry"])
+        .or(`last_attempt_at.is.null,last_attempt_at.lte.${observedAt}`));
+    }
   }
 }
