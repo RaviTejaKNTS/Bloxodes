@@ -30,8 +30,16 @@ function configuredInteger(raw: string | undefined, fallback: number, minimum: n
   return Number.isInteger(value) && value >= minimum && value <= maximum ? value : fallback;
 }
 
-const MAX_RETRIES = configuredInteger(process.env.ROBLOX_PROMO_MAX_RETRIES, 3, 1, 10);
-const CONCURRENCY = configuredInteger(process.env.ROBLOX_PROMO_CONCURRENCY, 6, 1, 10);
+// Roblox's economy details API rate-limits hard: at 6 parallel requests with
+// short backoff, 38 of 72 items ran out of retries on HTTP 429.
+const MAX_RETRIES = configuredInteger(process.env.ROBLOX_PROMO_MAX_RETRIES, 5, 1, 10);
+const CONCURRENCY = configuredInteger(process.env.ROBLOX_PROMO_CONCURRENCY, 2, 1, 10);
+const MAX_RATE_LIMIT_WAIT_MS = 60_000;
+// All retry waits in one run stop after this budget, so a long 429 streak ends
+// as recorded transient failures well inside the 7,200 s job timeout instead
+// of being killed before the refresh is written.
+const RETRY_BUDGET_MS = 20 * 60_000;
+const RETRY_DEADLINE = Date.now() + RETRY_BUDGET_MS;
 
 type CliOptions = {
   apply: boolean;
@@ -173,9 +181,16 @@ function isTransientStatus(status: number): boolean {
   return status === 408 || status === 425 || status === 429 || status >= 500;
 }
 
+function retryDelayMs(attempt: number, retryAfter: string | null): number {
+  const seconds = Number(retryAfter);
+  if (retryAfter && Number.isFinite(seconds) && seconds >= 0) return Math.min(MAX_RATE_LIMIT_WAIT_MS, seconds * 1000);
+  return Math.min(30_000, 2_000 * 2 ** attempt);
+}
+
 async function fetchWithRetry(url: string, accept: string): Promise<Response> {
   let lastError: unknown;
   for (let attempt = 0; attempt < MAX_RETRIES; attempt += 1) {
+    let retryAfter: string | null = null;
     try {
       const response = await fetch(url, {
         headers: { accept, "user-agent": USER_AGENT },
@@ -186,13 +201,16 @@ async function fetchWithRetry(url: string, accept: string): Promise<Response> {
       if (!isTransientStatus(response.status) || attempt === MAX_RETRIES - 1) {
         throw new HttpError(`Request returned HTTP ${response.status}: ${url}`, response.status);
       }
+      retryAfter = response.headers.get("retry-after");
       lastError = new HttpError(`Request returned HTTP ${response.status}: ${url}`, response.status);
     } catch (error) {
       if (error instanceof HttpError && !isTransientStatus(error.status)) throw error;
       lastError = error;
       if (attempt === MAX_RETRIES - 1) throw error;
     }
-    await sleep(Math.min(8_000, 500 * 2 ** attempt));
+    const delay = retryDelayMs(attempt, retryAfter);
+    if (Date.now() + delay > RETRY_DEADLINE) throw lastError;
+    await sleep(delay);
   }
   throw lastError;
 }

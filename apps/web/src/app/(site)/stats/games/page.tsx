@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { StatsGamesView, StatsPageShell } from "../components/StatsViews";
 import { getStatsGamesSeoState, getStatsGamesSeoTaxonomy, listStatsGames, parseStatsSearchParams } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -45,6 +46,7 @@ export default async function StatsGamesPage({ searchParams }: PageProps) {
     minPlayers: parsed.minPlaying,
     columns: parsed.columns
   });
+  if (!data.games.length && data.page > data.totalPages) notFound();
   const seo = getStatsGamesSeoState(parsed, { genres: data.validGenres, subgenres: data.subgenres });
   const canonical = `${SITE_URL}${seo.canonicalPath}`;
   return (
