@@ -81,7 +81,9 @@ function runLocalGuard(options: { changedFiles?: string[]; trackedStatus?: strin
   const script = `
     import childProcess from "node:child_process";
     import { syncBuiltinESMExports } from "node:module";
-    const { assertLocalContentPublication } = await import("./scripts/shared/local-content-publication-guard.ts");
+    // tsx may load the guard as CommonJS, which puts its exports under default.
+    const guard = await import("./scripts/shared/local-content-publication-guard.ts");
+    const assertLocalContentPublication = guard.assertLocalContentPublication ?? guard.default?.assertLocalContentPublication;
     const fixture = ${JSON.stringify(fixture)};
     const calls = [];
     childProcess.execFileSync = (command, args) => {
