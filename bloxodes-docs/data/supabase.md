@@ -8,6 +8,7 @@ Two Supabase databases: production (self-hosted on the VPS) and managed developm
 
 - **API:** `https://database.bloxodes.com`. Studio at `https://studio.bloxodes.com` (basic auth). Media at `https://media.bloxodes.com`.
 - **Stack:** Compose project in `/home/ravitejaknts/bloxodes-supabase` on the VPS. Postgres 17.6, PostgREST 14.12 (behind the `supabase-rest-proxy` socat bridge), Kong 3.9.1, GoTrue 2.189, Storage 1.60.4 (file backend, public bucket `bloxodes-media`), Realtime, Supavisor, Edge Runtime 1.74, Studio, postgres-meta, imgproxy.
+- **Database shared memory:** `shm_size: 1gb` on the `db` service in `docker-compose.pg17.yml` (raised from Docker's 64 MB default on 2026-10-24 after SQLSTATE 53100 errors). The running container was created from `/home/codex-admin/bloxodes-supabase`, a symlink to the same folder; run Compose from that path so the config hash matches and only intended changes recreate a container.
 - **Edge Functions:** `revalidate` and `cache-warm` are ours. `main` and `hello` are vendor defaults.
 - **Extensions:** `pg_net` and `supabase_vault`. No `pg_cron`; the minute workers are called from VPS cron.
 - Postgres stays private inside the VPS. Schema changes reach it only through GitHub over HTTPS Studio.

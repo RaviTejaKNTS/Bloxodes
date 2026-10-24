@@ -20,7 +20,7 @@ The prompts live in the T3 scheduler, not the repo. Keep them short: the selecti
 
 ## Homelab (systemd)
 
-All units run from `/srv/data/bloxodes-automation-runtime/current` and read `/etc/bloxodes/article-automation.env`.
+All units run from `/srv/data/bloxodes-automation-runtime/current`. The article units read `/etc/bloxodes/article-automation.env`.
 
 | Unit | When | Does |
 | --- | --- | --- |
@@ -28,6 +28,7 @@ All units run from `/srv/data/bloxodes-automation-runtime/current` and read `/et
 | `bloxodes-article-writer.service` | paused | `articles:writer:batch -- --apply --limit 6`. Writing moved to the T3 article run. Discovery still triggers it, but the drop-in `/etc/systemd/system/bloxodes-article-writer.service.d/paused.conf` (`ConditionPathExists=/etc/bloxodes/article-writer.enabled`) skips it cleanly. `sudo touch /etc/bloxodes/article-writer.enabled` brings it back. |
 | `bloxodes-article-publication.timer` | every 15 minutes | `articles:publication:drain -- --apply` for articles the homelab wrote. Then runs the audit. |
 | `bloxodes-article-audit.service` | after publication | `articles:automation:audit`. |
+| `bloxodes-site-health.timer` | every 5 minutes | `node scripts/ops/site-health-monitor.mjs`: opens a `[site-health]` GitHub issue after two failed `/api/health` checks and closes it on recovery. Needs no env file; uses the `teja` `gh` login. The installer installs it but, like any new timer, it must be enabled once with `sudo systemctl enable --now bloxodes-site-health.timer`. |
 
 The runtime is a separate release from the repo. Merging code doesn't change it. See [articles](../content/articles.md#runtime-releases).
 
@@ -81,7 +82,6 @@ Scheduled:
 | --- | --- | --- |
 | `discover-beebom-codes.yml` | :17 every 6 hours | Finds new codes pages from Beebom. |
 | `generate-queue.yml` (Draft Code Page Generation) | 10 times a day | Writes and publishes draft codes pages. |
-| `stats-health-monitor.yml` | every 5 minutes (GitHub runs it far less often) | Health check with Telegram alerts. |
 
 Event-driven: `pull-request.yml`, `codex-review.yml`, `dokploy-production-deploy.yml`, `schema-release.yml` (called by the others), `managed-content-qa.yml`, `publish-content.yml`. See [release](../operations/release.md).
 
