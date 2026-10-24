@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { classifyFreeItemEligibility, type FreeItemEligibilityInput } from "@/lib/free-items-eligibility";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
+import { loadLiveLegacyBundleIds } from "./catalog-discovery-db";
 import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const CATEGORIES_API = "https://catalog.roblox.com/v1/categories";
@@ -758,6 +759,13 @@ async function main() {
   try {
 
   const { candidates, complete: discoveryComplete } = await discoverCandidates(options);
+  // Older bundles still live at their positive ID; write to that row, not -id.
+  const liveLegacyBundleIds = await loadLiveLegacyBundleIds(
+    candidates.filter((candidate) => candidate.itemType === "Bundle").map((candidate) => candidate.externalId)
+  );
+  for (const candidate of candidates) {
+    if (candidate.itemType === "Bundle" && liveLegacyBundleIds.has(candidate.externalId)) candidate.internalId = candidate.externalId;
+  }
   let complete = discoveryComplete;
   const verifiedAt = new Date().toISOString();
   const rows: PreparedRow[] = [];

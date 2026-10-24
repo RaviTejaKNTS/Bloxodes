@@ -4,8 +4,12 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
 const DEFAULT_DAYS = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_RETENTION_DAYS", 90);
-const DEFAULT_BATCH_SIZE = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_BATCH_SIZE", 5000);
-const DEFAULT_MAX_BATCHES = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_MAX_BATCHES", 100);
+const DEFAULT_BATCH_SIZE = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_BATCH_SIZE", 2000);
+const DEFAULT_MAX_BATCHES = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_MAX_BATCHES", 250);
+// A batch that hits the API statement timeout is retried at half size. Stop
+// after this many timeouts and keep what earlier batches already deleted.
+const MAX_TIMEOUTS = 3;
+const MIN_BATCH_SIZE = 250;
 
 type Options = {
   days: number;
@@ -89,6 +93,10 @@ async function countOldRows(table: string, column: string, cutoff: string) {
   return count ?? 0;
 }
 
+function isStatementTimeout(error: unknown) {
+  return typeof error === "object" && error !== null && (error as { code?: unknown }).code === "57014";
+}
+
 async function pruneBatch(cutoff: string, batchSize: number): Promise<PruneResult> {
   const { data, error } = await supabaseAdmin().rpc("prune_roblox_universe_hourly_history", {
     p_cutoff: cutoff,
@@ -133,29 +141,61 @@ async function main() {
     let totalStatsDeleted = 0;
     let totalRankDeleted = 0;
     let batchesRun = 0;
-    for (let batch = 1; batch <= options.maxBatches; batch += 1) {
-      const result = await pruneBatch(cutoff, options.batchSize);
+    let batchSize = options.batchSize;
+    let lastTimeout: unknown = null;
+    let timeouts = 0;
+    let finished = false;
+    // Timed-out attempts don't count toward maxBatches; the same batch is retried smaller.
+    while (batchesRun < options.maxBatches) {
+      let result: PruneResult;
+      try {
+        result = await pruneBatch(cutoff, batchSize);
+      } catch (error) {
+        if (!isStatementTimeout(error)) throw error;
+        lastTimeout = error;
+        timeouts += 1;
+        console.warn(`Batch ${batchesRun + 1} timed out at size ${batchSize} (timeout ${timeouts}/${MAX_TIMEOUTS}).`);
+        if (timeouts >= MAX_TIMEOUTS) break;
+        batchSize = Math.min(batchSize, Math.max(MIN_BATCH_SIZE, Math.floor(batchSize / 2)));
+        continue;
+      }
+      batchesRun += 1;
       const statsDeleted = result.stats_deleted ?? 0;
       const rankDeleted = result.rank_deleted ?? 0;
       totalStatsDeleted += statsDeleted;
       totalRankDeleted += rankDeleted;
-      batchesRun = batch;
-      console.log(`Batch ${batch}: deleted stats=${statsDeleted}, ranks=${rankDeleted}`);
-      if (statsDeleted < options.batchSize && rankDeleted < options.batchSize) break;
+      console.log(`Batch ${batchesRun}: deleted stats=${statsDeleted}, ranks=${rankDeleted}`);
+      if (statsDeleted < batchSize && rankDeleted < batchSize) {
+        finished = true;
+        break;
+      }
     }
 
+    const deleted = totalStatsDeleted + totalRankDeleted;
+    const metadata = {
+      cutoff,
+      stats_deleted: totalStatsDeleted,
+      rank_deleted: totalRankDeleted,
+      batches_run: batchesRun,
+      final_batch_size: batchSize,
+      timeouts,
+      reached_cutoff: finished
+    };
+    if (timeouts >= MAX_TIMEOUTS && deleted === 0) {
+      await finishStatsJobRun(run, { status: "failed", error: lastTimeout, metadata });
+      console.error(lastTimeout);
+      process.exitCode = 1;
+      return;
+    }
+    // Partial: stopped on timeouts after deleting rows. The next night continues.
     await finishStatsJobRun(run, {
-      status: "success",
-      rowsClaimed: totalStatsDeleted + totalRankDeleted,
-      rowsSucceeded: totalStatsDeleted + totalRankDeleted,
-      metadata: {
-        cutoff,
-        stats_deleted: totalStatsDeleted,
-        rank_deleted: totalRankDeleted,
-        batches_run: batchesRun
-      }
+      status: timeouts >= MAX_TIMEOUTS ? "partial" : "success",
+      rowsClaimed: deleted,
+      rowsSucceeded: deleted,
+      error: timeouts >= MAX_TIMEOUTS ? lastTimeout : undefined,
+      metadata
     });
-    console.log(`Done. Cutoff=${cutoff}, deleted stats=${totalStatsDeleted}, ranks=${totalRankDeleted}`);
+    console.log(`Done. Cutoff=${cutoff}, deleted stats=${totalStatsDeleted}, ranks=${totalRankDeleted}, timeouts=${timeouts}`);
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", error, metadata: { cutoff } });
     throw error;
