@@ -88,6 +88,7 @@ The main agent is Claude, the owner's always-available agent in T3. It plans and
 
 - Only the main agent (Claude) edits `AGENTS.md`, `bloxodes-docs/` and `.agents/skills/`. Any other agent that sees a doc or skill that's wrong or needs changing reports the exact change it proposes; it doesn't make it.
 - `bloxodes-docs/` is the source of truth. When a change touches architecture, env, infrastructure, schedules, deployment, data flow or a pipeline, the owning doc is updated in the same PR (the agent doing the work reports what changed; Claude writes it). Replace what's no longer true; don't append history.
+- Adding, moving, renaming or removing any scheduled job, workflow or service also updates its entry in `bloxodes-docs/automation/monitoring.json`, so the [Automation Monitor](bloxodes-docs/operations/monitoring.md#automation-monitor) explains it.
 - Keep this file lean: only rules every agent needs every time, plus links. Detail belongs in `bloxodes-docs/` or a skill.
 - Don't commit plans, audits, reports or logs. Keep them in `tmp/` or Notion.
 - Write skills and docs the way `.agents/skills/README.md` describes: plain, scannable, exact where it matters.
