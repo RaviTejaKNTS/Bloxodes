@@ -14,7 +14,7 @@ All run in the "Bloxodes Content Factory" project's root checkout on the MacBook
 | --- | --- | --- |
 | Bloxodes nightly other games (Content Factory) | 02:00 IST | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and publishes its wiki hubs and collections. |
 | Bloxodes nightly Roblox wiki (Content Factory) | 02:30 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and publishes its hub and collections. |
-| Bloxodes articles 01:00, 07:00, 13:00 and 19:00 (Content Factory), four tasks with the same prompt | 01:00, 07:00, 13:00, 19:00 IST | `article-main`: takes 3 curated topics from `article_generation_queue`, has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (the publication drain on the MacBook Pro's Bloxodes checkout). |
+| Bloxodes articles every 6 hours (Content Factory) | Every 6 hours, about 00:00, 06:00, 12:00, 18:00 IST | `article-main`: takes 3 curated topics from `article_generation_queue` (or finds its own when fewer than 3 are good), has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (the publication drain on the MacBook Pro's Bloxodes checkout). |
 
 The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skill and the publishing go-ahead. A T3 schedule copies its model, effort and runtime from the thread that creates it and can't change them later, so create these from a Codex `gpt-6.1-sol`, High, Full access thread. In a sandbox `content:publish` can't reach the database.
 
