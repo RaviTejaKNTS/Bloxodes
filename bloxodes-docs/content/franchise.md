@@ -6,7 +6,7 @@ Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever
 
 ## Other Games loop (MacBook Pro)
 
-The T3 schedule "Bloxodes other games loop (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill. One run builds one row; it ticks every hour and each run starts the next while `Ready` rows remain ([schedules](../automation/schedules.md#t3-schedules-macbook-pro)):
+The T3 schedule "Bloxodes other games loop (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill. One run builds one row; it ticks every 4 hours on Claude Opus 5.5 and each run starts the next while `Ready` rows remain ([schedules](../automation/schedules.md#t3-schedules-macbook-pro)):
 
 1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md) and sets it to `In progress`. The row's page holds the approved plan.
 2. Builds the plan's wiki hubs and collections: a Luna builder gathers each page's data and images, a Haiku writer, run headless from an empty folder through the factory's `bin/haiku-write`, writes the copy from its prompt files, and the main agent builds the page.
