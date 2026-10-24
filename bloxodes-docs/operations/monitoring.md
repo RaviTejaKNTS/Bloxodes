@@ -11,7 +11,10 @@ Last verified: 2026-10-19
 
 ## Alerts
 
-- `stats-health-monitor.yml` checks operational health and sends Telegram alerts when the state changes. It's set to every 5 minutes, but GitHub runs it every couple of hours.
+Automation reports problems as GitHub issues labeled `incident`, not Telegram. Telegram reporting is retired.
+
+- `bloxodes-site-health.timer` on the homelab checks `/api/health` every 5 minutes. After two failed checks in a row it opens one `[site-health]` issue (later failures don't add comments), and it closes that issue with a "Recovered" comment on the next healthy check.
+- Jobs report through `scripts/ops/github-incident.mjs`: `openIncident({ key, title, body })` opens or comments on the one open `[key]` issue, and `resolveIncident({ key, body })` closes it. It uses the homelab `gh` login (user `teja`), so no token is stored. Hosts without that login need a GitHub token with issue write access before they can report.
 - The homelab article audit service reports blocked article jobs.
 
 ## Where to look
@@ -32,5 +35,4 @@ Keep this list current: add failures when you find them, remove them when fixed.
 - **Music IDs:** Roblox Creator Store returns HTTP 500.
 - **Universe stats:** the daily rollup falls back to universe chunks after its full pass times out. The hourly prune was fixed on 2026-10-24; watch for `partial` runs. See [stats](../content/stats.md#known-issues).
 - **Item stats:** recovering from the bundle-key failures fixed on 2026-10-24; the audit is partial until overdue items drop under 5%. See [data refreshes](../content/data-refreshes.md#known-issues-2026-10-19).
-- **Health monitor:** runs far less often than configured.
 - **Paid Codex PR review:** the `OPENAI_API_KEY` is out of quota, so `codex-review.yml` fails. Its `scope` job also fails on very large PRs when GitHub's file list doesn't match `changed_files`. Neither blocks merging.

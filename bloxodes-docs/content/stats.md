@@ -75,5 +75,4 @@ A worker change is done only when the Northflank build succeeds, one HOT run suc
 
 - The 00:02 daily rollup's single full pass times out, then succeeds in universe chunks. Until 2026-10-24 the chained hourly prune timed out on most nights, so hourly history reached back to June 20 instead of 90 days. The prune now uses 2,000-row batches, halves the batch after a timeout, records `partial` with the rows it deleted after three timeouts, and the two hourly history tables vacuum at 1% churn. The 01:05 daily platform summary scans `roblox_universe_stats_daily` without a date-first index and can still fail; when it does, daily-resolution charts end a day early.
 - The hourly platform summary adds up only the games sampled in each hour. HOT games land in alternate hours, so the 24-hour player chart zig-zags between about 10K and 13M. Daily views are not affected.
-- `stats-health-monitor.yml` is set to every 5 minutes but GitHub runs it only every couple of hours.
 - The August 2026 report is live but missing from the stats sitemap and feed.

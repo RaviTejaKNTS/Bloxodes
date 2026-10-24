@@ -1,0 +1,13 @@
+[Unit]
+Description=Check Bloxodes operational health and keep a GitHub issue open while it fails
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=teja
+Group=teja
+WorkingDirectory=/srv/data/bloxodes-automation-runtime/current
+StateDirectory=bloxodes-site-health
+ExecStart=/usr/bin/node scripts/ops/site-health-monitor.mjs
+TimeoutStartSec=2min

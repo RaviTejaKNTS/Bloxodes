@@ -14,8 +14,8 @@ flock -n 9 || { echo 'Another activation is running.' >&2; exit 1; }
 [[ "$(git -C "$RELEASE" rev-parse HEAD)" == "$SHA" ]]
 [[ -z "$(git -C "$RELEASE" status --porcelain)" ]]
 [[ -r /etc/bloxodes/article-automation.env ]]
-SERVICES=(bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service)
-TIMERS=(bloxodes-article-discovery.timer bloxodes-article-publication.timer)
+SERVICES=(bloxodes-article-discovery.service bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service bloxodes-site-health.service)
+TIMERS=(bloxodes-article-discovery.timer bloxodes-article-publication.timer bloxodes-site-health.timer)
 idle() {
   local service state pid
   for service in "${SERVICES[@]}"; do
