@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { internalCatalogItemId, robloxCatalogSortParams } from "../../catalog/catalog-discovery-db";
+import { internalCatalogItemId, robloxCatalogSortParams, useLiveLegacyBundleIds } from "../../catalog/catalog-discovery-db";
 import {
   assignItemStatsTier,
   fetchCatalogItemDetailsBatch,
@@ -16,6 +16,16 @@ test("canonical item identity keeps asset IDs positive and bundle IDs negative",
   assert.equal(internalCatalogItemId(123, "Asset"), 123);
   assert.equal(internalCatalogItemId(123, "Bundle"), -123);
   assert.equal(robloxTargetId({ asset_id: -123, item_type: "Bundle" }), 123);
+});
+
+test("discovery writes to a live legacy bundle row instead of a new canonical row", () => {
+  const rows = [
+    { asset_id: -365520, item_type: "Bundle" },
+    { asset_id: -777, item_type: "Bundle" },
+    { asset_id: 365520, item_type: "Asset" }
+  ];
+  useLiveLegacyBundleIds(rows, new Set([365520]));
+  assert.deepEqual(rows.map((row) => row.asset_id), [365520, -777, 365520]);
 });
 
 test("catalog discovery maps friendly sort labels to Roblox's numeric API enum", () => {

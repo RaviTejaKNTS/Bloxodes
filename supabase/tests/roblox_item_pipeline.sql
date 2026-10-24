@@ -112,4 +112,26 @@ begin
 end;
 $$;
 
+-- A live legacy bundle row (positive id, no canonical row) must take upserts of
+-- its own id instead of colliding on the live canonical key.
+insert into public.roblox_catalog_items (asset_id, item_type, name, first_seen_at, last_seen_at)
+values (910000000003, 'Asset', 'Legacy Bundle', now(), now());
+update public.roblox_catalog_items set item_type = 'Bundle' where asset_id = 910000000003;
+
+select public.upsert_roblox_catalog_discovery_items(jsonb_build_array(jsonb_build_object(
+  'asset_id', 910000000003,
+  'item_type', 'Bundle',
+  'favorite_count', 42,
+  'last_seen_at', now()
+)));
+
+do $$
+begin
+  if (select favorite_count from public.roblox_catalog_items where asset_id = 910000000003) <> 42
+    or exists (select 1 from public.roblox_catalog_items where asset_id = -910000000003) then
+    raise exception 'legacy bundle upsert did not update its own row';
+  end if;
+end;
+$$;
+
 rollback;

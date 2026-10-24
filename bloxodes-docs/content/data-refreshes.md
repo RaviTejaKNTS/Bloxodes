@@ -35,6 +35,7 @@ Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all
 - **Schedule:** tier 01:05; NEW :55 most hours; HOT :32; WARM 01:32, 07:32, 13:32, 19:32; COLD 23:32; resale :17 every 3 hours; index :45 hourly; rollup 01:25; audit :55 every 6 hours.
 - **Commands:** `stats:items:*` in `scripts/items/`.
 - **Data:** `roblox_catalog_item_stats_hourly` / `_daily`, resale points, `stats_item_current_index`, price-mover index.
+- **Bundle identity:** new bundles get a negative canonical `asset_id`. About 5,000 older bundles still live at their positive ID with no canonical row, and writes keep going to that row: the `set_roblox_catalog_item_identity` trigger keeps a positive bundle ID when a live row holds it, and writers that build negative IDs (catalog discovery and both free-item importers) switch to the stored positive row before writing the item, hits, queue rows or thumbnails. Only one live row may hold a `catalog_item_key` (`idx_roblox_catalog_live_canonical_key`).
 
 ## Free items
 
@@ -51,6 +52,4 @@ A wrapper "success" can hide a skipped or partial job. Check `stats_job_runs` fo
 ## Known issues (2026-10-19)
 
 - **Music:** Roblox Creator Store returns HTTP 500, so the job fails before reranking. Last full success 2026-10-14.
-- **Item WARM:** fails on a duplicate live canonical key. The item audit reports partial.
-- **Item NEW, HOT, COLD:** latest runs were skipped.
-- **Catalog enrichment:** partial (219 succeeded, 81 failed on the last run).
+- **Item stats backlog:** until 2026-10-24, WARM, HOT, discovery and enrichment batches failed whenever they held an older positive-ID bundle (23505 on the live canonical key). About 70% of active items were overdue. The normal schedules work the backlog down; the item audit stays partial until overdue items drop under 5%.
