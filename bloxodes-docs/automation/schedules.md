@@ -1,6 +1,6 @@
 # Schedules
 
-Last verified: 2026-10-21
+Last verified: 2026-10-24
 
 Every recurring job, by where it runs. If you add, move or remove a schedule, update this file in the same change.
 
@@ -8,13 +8,17 @@ Time zones: homelab timers and T3 schedules use IST. VPS cron, Northflank and Gi
 
 ## T3 schedules (MacBook Pro)
 
-All run in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro, with Codex `gpt-6.1-sol` high, full access, as the main agent. They have standing permission to publish (wikis with `content:publish`, articles through the publication drain) and to commit and push the factory repo. None opens code PRs.
+All run in the "Bloxodes Content Factory" project's root checkout on the MacBook Pro, with Codex `gpt-6.1-sol` high as the main agent. They have standing permission to commit and push the factory repo. None opens code PRs.
+
+The two wiki schedules run in **dev-only mode** while the owner is away: pages go to managed development only and queue rows close as `In dev`. Articles still publish to production. When the owner asks, the `In dev` games move to production in one release (factory `docs/publishing.md`, "Moving In dev games to production") and the prompts drop dev-only mode.
 
 | Schedule | Time | Does |
 | --- | --- | --- |
-| Bloxodes nightly other games (Content Factory) | 02:00 IST | `franchise-wiki-main`: takes the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md) and publishes its wiki hubs and collections. |
-| Bloxodes nightly Roblox wiki (Content Factory) | 02:30 IST | `roblox-wiki-main`: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and publishes its hub and collections. |
-| Bloxodes articles 01:00, 07:00, 13:00 and 19:00 (Content Factory), four tasks with the same prompt | 01:00, 07:00, 13:00, 19:00 IST | `article-main`: takes 3 curated topics from `article_generation_queue`, has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (the publication drain on the MacBook Pro's Bloxodes checkout). |
+| Bloxodes other games loop (Content Factory) | every 4 hours on Claude Opus 5.5, and each run launches the next run's thread and settles its own | `franchise-wiki-main` in dev-only and loop mode: builds the lowest-Priority `Ready` row from the [Other Games Queue](notion-queues.md). The factory's `bin/games-loop` keeps it to one run at a time and starts the next run only while `Ready` rows remain. A tick that finds a run active or nothing `Ready` ends at once. |
+| Bloxodes nightly Roblox wiki (Content Factory) | 02:30 IST | `roblox-wiki-main` in dev-only mode: claims the top-ranked uncovered Roblox game in the [Roblox Wiki Queue](notion-queues.md) and builds its hub and collections. |
+| Bloxodes articles every 6 hours (Content Factory) | every 6 hours | `article-main`: takes 3 curated topics from `article_generation_queue`, has Luna research them and Haiku write them, and publishes them through the factory's `bin/article publish` (the publication drain on the MacBook Pro's Bloxodes checkout). |
+
+The loop's details (lock, stop switch, run hand-off) are in the factory's `docs/environment.md`, "Other Games loop". To stop it, run `bin/games-loop stop` in the factory checkout or turn the schedule off in T3.
 
 The prompts live in the T3 scheduler, not the repo. Keep them short: the selection rule, the skill and the publishing go-ahead. A T3 schedule copies its model, effort and runtime from the thread that creates it and can't change them later, so create these from a Codex `gpt-6.1-sol`, High, Full access thread. In a sandbox `content:publish` can't reach the database.
 

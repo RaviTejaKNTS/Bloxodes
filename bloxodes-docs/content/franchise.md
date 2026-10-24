@@ -1,17 +1,17 @@
 # Franchise games
 
-Last verified: 2026-10-21
+Last verified: 2026-10-24
 
 Non-Roblox games: GTA, Red Dead, Minecraft, ARC Raiders, Mario Kart and whatever comes next. They share one set of `game_*` tables and one route system. Roblox content stays separate.
 
-## Nightly run (MacBook Pro, 02:00 IST)
+## Other Games loop (MacBook Pro)
 
-The T3 schedule "Bloxodes nightly other games (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill:
+The T3 schedule "Bloxodes other games loop (Content Factory)" runs in the [Content Factory](roblox-wiki.md#content-factory) with its `franchise-wiki-main` skill. One run builds one row; it ticks every 4 hours on Claude Opus 5.5 and each run starts the next while `Ready` rows remain ([schedules](../automation/schedules.md#t3-schedules-macbook-pro)):
 
 1. Takes the lowest-Priority `Ready` row from the [Other Games Queue](../automation/notion-queues.md) and sets it to `In progress`. The row's page holds the approved plan.
 2. Builds the plan's wiki hubs and collections: a Luna builder gathers each page's data and images, a Haiku writer, run headless from an empty folder through the factory's `bin/haiku-write`, writes the copy from its prompt files, and the main agent builds the page.
-3. Publishes each game as a `game-wiki@1` bundle with `content:publish`, managed development first, then production. No PR or GitHub run.
-4. Sets `Done`, or `Waiting for approval` when the plan has page types the factory doesn't build yet, and writes the Run report.
+3. Publishes each game as a `game-wiki@1` bundle with `content:publish`, managed development first, then production. No PR or GitHub run. In dev-only mode (on while the owner is away) it stops at managed development.
+4. Sets `Done`, or `Waiting for approval` when the plan has page types the factory doesn't build yet, or `In dev` in dev-only mode, and writes the Run report.
 
 The factory builds hubs and collections only. Maps, quizzes, checklists, catalogs, codes and tools, and anything that needs code, still use the skills below, by hand.
 
