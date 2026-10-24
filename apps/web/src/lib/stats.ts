@@ -14,6 +14,7 @@ import {
 } from "@/lib/stats-freshness";
 import { getStatsVisitShareChart, type StatsVisitShareChartData } from "@/lib/stats-visit-share";
 import { cachedStatsChart } from "@/lib/stats-chart-cache";
+import { catalogRangeTotal } from "@/lib/catalog-pagination";
 import {
   closestStatsGrowthRow,
   statsGrowthBaselineToleranceMs,
@@ -1676,6 +1677,10 @@ async function listBaseGames(options: {
     .range(options.offset ?? 0, (options.offset ?? 0) + options.limit - 1);
 
   const indexResult = await indexQuery;
+  // A page past the last row is an empty page, not a failure (and not a reason
+  // to rerun the query against roblox_universes).
+  const indexRangeTotal = catalogRangeTotal(indexResult.error, options.offset ?? 0, indexResult.count ?? null);
+  if (indexRangeTotal !== null) return { rows: [], total: indexRangeTotal };
   if (!indexResult.error) {
     const indexRows = (indexResult.data ?? []) as StatsGameIndexRow[];
     if (indexRows.length > 0 || (await isStatsIndexAvailable())) {
@@ -1743,6 +1748,8 @@ async function listBaseGames(options: {
   query = query.order("universe_id", { ascending: true }).range(options.offset ?? 0, (options.offset ?? 0) + options.limit - 1);
 
   const { data, error, count } = await query;
+  const rangeTotal = catalogRangeTotal(error, options.offset ?? 0, count ?? null);
+  if (rangeTotal !== null) return { rows: [], total: rangeTotal };
   if (error) throw error;
 
   return {
