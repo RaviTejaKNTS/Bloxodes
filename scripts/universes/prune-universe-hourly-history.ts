@@ -4,8 +4,11 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
 const DEFAULT_DAYS = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_RETENTION_DAYS", 90);
-const DEFAULT_BATCH_SIZE = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_BATCH_SIZE", 2000);
-const DEFAULT_MAX_BATCHES = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_MAX_BATCHES", 250);
+// The rank table gains about 1.6M rows a day, so one run must be able to delete
+// more than that per table. 10,000 x 600 allows 6M, which also clears older
+// backlog over a few nights.
+const DEFAULT_BATCH_SIZE = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_BATCH_SIZE", 10000);
+const DEFAULT_MAX_BATCHES = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_MAX_BATCHES", 600);
 // A batch that hits the API statement timeout is retried at half size. Stop
 // after this many timeouts and keep what earlier batches already deleted.
 const MAX_TIMEOUTS = 3;
