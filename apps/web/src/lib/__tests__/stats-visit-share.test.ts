@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 const mocks = vi.hoisted(() => ({ rpc: vi.fn(), from: vi.fn() }));
+const page = (value: unknown) => ({ range: vi.fn().mockResolvedValue(value) });
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => mocks }));
 
 const rows = [
@@ -47,7 +48,7 @@ describe("prepared visit-share results", () => {
     ["90d", "2026-07-27"]
   ] as const)("loads %s with the same RPC arguments and complete denominator", async (range, since) => {
     const { getStatsVisitShareChart } = await import("@/lib/stats-visit-share");
-    mocks.rpc.mockResolvedValue({ data: rows, error: null });
+    mocks.rpc.mockReturnValue(page({ data: rows, error: null }));
     const [chart, concurrent] = await Promise.all([getStatsVisitShareChart(range), getStatsVisitShareChart(range)]);
     expect(concurrent).toBe(chart);
     expect(mocks.rpc).toHaveBeenCalledExactlyOnceWith("get_stats_visit_share_chart", {
@@ -70,15 +71,28 @@ describe("prepared visit-share results", () => {
   it("treats an unwarmed summary as unavailable and preserves a later last-good result", async () => {
     const { getStatsVisitShareChart } = await import("@/lib/stats-visit-share");
     const notReady = { code: "55000", message: "Visit-share summary is not ready" };
-    mocks.rpc.mockResolvedValueOnce({ data: null, error: notReady });
+    mocks.rpc.mockReturnValueOnce(page({ data: null, error: notReady }));
     await expect(getStatsVisitShareChart("90d")).resolves.toMatchObject({ unavailable: true, points: [] });
-    mocks.rpc.mockResolvedValueOnce({ data: rows, error: null });
+    mocks.rpc.mockReturnValueOnce(page({ data: rows, error: null }));
     const good = await getStatsVisitShareChart("90d");
     expect(good.unavailable).toBeUndefined();
     vi.setSystemTime(new Date("2026-10-25T01:36:00Z"));
-    mocks.rpc.mockResolvedValue({ data: null, error: notReady });
+    mocks.rpc.mockReturnValue(page({ data: null, error: notReady }));
     await expect(getStatsVisitShareChart("90d")).resolves.toBe(good);
     await vi.waitFor(() => expect(mocks.rpc).toHaveBeenCalledTimes(3));
     expect(mocks.from).not.toHaveBeenCalled();
+  });
+
+  it("pages past the 1,000-row Data API cap", async () => {
+    const { getStatsVisitShareChart } = await import("@/lib/stats-visit-share");
+    const first = Array.from({ length: 1000 }, () => rows[0]);
+    const firstPage = page({ data: first, error: null });
+    const secondPage = page({ data: [rows[3]], error: null });
+    mocks.rpc.mockReturnValueOnce(firstPage).mockReturnValueOnce(secondPage);
+    const chart = await getStatsVisitShareChart("90d");
+    expect(mocks.rpc).toHaveBeenCalledTimes(2);
+    expect(firstPage.range).toHaveBeenCalledWith(0, 999);
+    expect(secondPage.range).toHaveBeenCalledWith(1000, 1999);
+    expect(chart.points[0].visits.other_tracked).toBe(100);
   });
 });
