@@ -13,6 +13,8 @@
 47 * * * * JOB_LOCK_GROUP=roblox-universe-refresh JOB_LOCK_WAIT_SECONDS=1800 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-cold-refresh "npm run stats:refresh:cold -- --limit 7000 --skip-index-refresh && npm run stats:index:refresh && npm run enqueue:revalidation -- --source stats_cold_vps --event stats:stats --event stats:games"
 30 * * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-hourly-ranks "npm run stats:rank:hourly && npm run enqueue:revalidation -- --source stats_hourly_ranks_vps --event stats:games"
 10 */6 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-audit "npm run stats:audit -- --strict"
-# Small daily wiki-only pass/thumbnail refresh; separate from the stats freshness lock.
-18 3 * * * JOB_LOCK_GROUP=roblox-universe-discovery JOB_TIMEOUT_SECONDS=600 JOB_LOCK_WAIT_SECONDS=300 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh wiki-game-passes-refresh "npm run refresh:wiki-game-passes -- --allow-live"
+# Daily published-wiki + top-100-HOT attachment refreshes; separate freshness lock.
+# Each has a 400-request cap, 1 request start/second and an eight-minute deadline.
+18 3 * * * JOB_LOCK_GROUP=roblox-universe-discovery JOB_TIMEOUT_SECONDS=600 JOB_LOCK_WAIT_SECONDS=300 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh wiki-game-passes-refresh "npm run refresh:wiki-game-passes -- --allow-live --include-hot"
+38 3 * * * JOB_LOCK_GROUP=roblox-universe-discovery JOB_TIMEOUT_SECONDS=600 JOB_LOCK_WAIT_SECONDS=300 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-badges-refresh "npm run refresh:stats-badges -- --allow-live"
 # BLOXODES_STATS_WORKER_END

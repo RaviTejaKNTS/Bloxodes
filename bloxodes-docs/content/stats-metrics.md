@@ -245,3 +245,22 @@ Needed improvements:
 - Keep hourly `stats:rank -- --all --granularity hourly --rank-set playing --snapshot-scope relevant` running after HOT refresh so global, genre, and subgenre rank history stays fresh without storing every game every hour.
 - Keep daily `stats:rank -- --all --granularity daily --rank-set all --snapshot-scope all` running so every tracked game gets complete long-term rank history.
 - Prune only hourly history older than 90 days. Keep daily stats and daily ranks for longer history.
+
+## Page sections
+
+Rules for the game page and `/stats` cards built in `apps/web/src/lib/stats-insights.ts`. A card hides when it has too little data; it never shows an empty state.
+
+| Card | Source | Rule |
+| --- | --- | --- |
+| Players by month | `roblox_universe_stats_daily` | "Last 30 days" first, compared with the 30 days before it. Then up to 12 completed UTC months, newest first; the current month is left out. Average = mean of daily `avg_playing ?? playing`; peak = max `peak_playing`. A period needs 7 distinct days of data. |
+| Milestones | daily stats, `roblox_universe_rank_snapshots_daily` | New tracked player peaks that beat the previous peak by at least 100 players and 5%; first `global_playing` #1 and top 10; visit and favorite crossings at 1/2/5 × 10ⁿ up to 1B, then every 1B to 10B, 5B to 100B, 10B above. Six items, newest first, at most 2 visit and 2 favorite items. Counter milestones hide when the 1,000-row daily history is cut off. |
+| How updates did | `roblox_universe_update_events`, hourly stats, `roblox_virtual_events` | The last 5 updates between 89 days and 48 hours ago. Before = average players over the 24 hours before; after = over the 48 hours after. Each side needs at least half of its complete hourly buckets, so alternate-hour HOT sampling passes. A virtual event starting within 12 hours names the row. Under 5% change shows a grey pill. |
+| Votes per day | daily `like_delta`, `dislike_delta` | Last 21 completed days. |
+| Estimated session length | daily `avg_playing`, `visit_delta` | `avg_playing × 1440 ÷ visit_delta` minutes, finalized days with at least 12 samples, kept between 0.1 and 720 minutes. Rejoins count as visits, so it is an estimate and the card says so. Needs 5 usable days. |
+| Genre scatter | `stats_game_current_index`, `stats_genre_current_index` | Up to 300 same-genre games with 1,000+ fresh players and a rating; y is players on a log scale. Genre count comes from `stats_genre_current_index.games`. Needs 10 peers. |
+| Badge rarity | `roblox_universe_badges` | Up to 6 enabled badges spread from most common to rarest. `rarity_percent` holds Roblox's `winRatePercentage` as a fraction (×100 for display), the same number Roblox shows as rarity. Its denominator isn't documented, so don't call it a share of players. Only rows the badge job stamped in the last 7 days count. |
+| Game pass prices | `roblox_universe_gamepasses` | On-sale passes with a price above 0 on a log Robux axis that grows to the next round tick past the highest price. |
+| Biggest moves this week | `stats_game_current_index.growth_7d_percent` | The top 1,000 games by players with 5,000+ fresh players and a 7-day baseline of 1,000+; top 4 up and top 4 down. Bars cap at ±100%; labels show the real change. It compares player snapshots, not weekly averages. |
+| Players by day | `roblox_platform_stats_daily.playing` | 13 Sunday-first weeks of daily average players. Never use `peak_players` here: it adds up each game's own peak. Missing days stay empty. |
+
+Every read has a 3-second deadline and a five-minute last-good cache per key, so a slow or failed read hides only its own card.

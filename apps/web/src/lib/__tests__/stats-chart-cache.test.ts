@@ -67,3 +67,12 @@ describe("cachedStatsChart", () => {
     });
   });
 });
+
+
+it("bounds variable per-game keys and reloads an evicted answer", async () => {
+  const load = vi.fn(async () => "first");
+  await cachedStatsChart("eviction-first", load);
+  for (let i = 0; i < 2048; i++) await cachedStatsChart(`eviction:${i}`, async () => i);
+  await cachedStatsChart("eviction-first", load);
+  expect(load).toHaveBeenCalledTimes(2);
+});

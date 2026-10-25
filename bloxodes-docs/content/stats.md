@@ -27,7 +27,8 @@ rank snapshots -> current read indexes
 | Platform hourly summary | VPS | every 5 minutes |
 | Platform daily and visit-share summaries | VPS | 01:05 |
 | Worker ledger reconcile | VPS | 00:10 |
-| Wiki game passes | VPS | 03:18 daily |
+| Game passes (wiki hubs and top 100 HOT) | VPS | 03:18 daily |
+| Badges (wiki hubs and top 100 HOT) | VPS | 03:38 daily |
 
 Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:new|hot|warm|cold` (`update-universe-hourly-stats.ts`), `discover:universes:priority`, `stats:rank:hourly`, `stats:index:refresh`, `stats:rollup-daily`, `stats:platform:refresh`, `stats:prune-hourly` and `stats:audit`. Every run is recorded in `stats_job_runs`.
 
@@ -39,17 +40,27 @@ Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:ne
 
 **Platform charts:** the platform player chart reads `roblox_platform_stats_hourly` / `_daily`. The every-5-minute job refreshes the last 3 hours of the hourly summary, so the 24-hour chart is a few minutes old; the 01:05 job also refreshes the last 2 days of the daily summary. Only the 24-hour view may fall back to the live `get_stats_platform_ccu_trend` call, and only when the stored summary has no rows. The visit-share chart calls `get_stats_visit_share_chart`, which reads the stored result for the standard 1d, 7d, 14d, 30d and 90d windows from `stats_visit_share_summaries`. The 01:05 job builds them: it reads every universe in batches of 250, ranks each window over every tracked game, and replaces all five windows for today and tomorrow in one transaction (`npm run stats:platform:refresh -- --visit-share-only` rebuilds them alone). Names, slugs and icons come from `roblox_universes` at read time. Other bucket sizes or past windows use the original live calculation. A missing current summary raises `55000`, so the web keeps its last good result. Daily rows that change after 01:05 show up after the next run. There is no smaller-population fallback. Both charts keep one result per range in the web process for 5 minutes (`stats-chart-cache.ts`), share one query between concurrent requests, and keep serving the last good result when a refresh fails. With no good result yet, the panel says the chart didn't load and the browser retries once.
 
-## Wiki game passes
+## Game passes and badges
 
-The Game Passes section on wiki hubs (and the mobile API) reads `roblox_universe_gamepasses`. The NEW/HOT/WARM/COLD tiers don't touch it.
+The Game Passes section on wiki hubs (and the mobile API) and the stats game page read `roblox_universe_gamepasses`; the stats game page's badge card reads `roblox_universe_badges`. The NEW/HOT/WARM/COLD tiers don't touch either table.
 
-- **Daily refresh:** `refresh:wiki-game-passes` (`scripts/universes/refresh-wiki-game-passes.ts`) covers every published wiki hub's universe, whatever its tier. It reads the full pass list (`passView=Full`, which includes prices) and fetches icons 100 at a time. No other enrichment runs.
-- **Light on purpose:** one Roblox request start per second, two pass lists at a time, 15-second attempts, at most 3 attempts per request, an 8-minute run deadline. Work left when the deadline hits is recorded as deferred, not retried. About 140 requests for 130 hubs.
-- **Safe writes:** upsert by `pass_id`, then remove passes Roblox no longer lists, only after a complete successful fetch for that universe. A failed or partial fetch keeps the stored rows. An unchanged icon keeps its stored URL when Roblox hasn't finished the new thumbnail; price and sale status still update.
-- **Ledger:** each run is a `wiki_game_passes_refresh` row in `stats_job_runs` with refreshed, failed and deferred universe IDs. A partial run exits nonzero. Existing wiki revalidation triggers refresh the pages.
-- **Pages:** only on-sale passes show, with their price, and the section hides when none are on sale. Remote icons (passes, badges, developer and stats game icons) swap to a neutral placeholder when the image fails, including before hydration.
+- **Scope:** both daily jobs cover every published wiki hub's universe first, then the top 100 HOT universes by current players (`scripts/universes/attachment-refresh-scope.ts`). The wiki list isn't capped; when it uses the budget, HOT universes are deferred and listed in the ledger.
+- **Game passes (03:18 UTC):** `refresh:wiki-game-passes -- --include-hot` (`npm run refresh:stats-game-passes` is the same). Without the flag it covers wiki hubs only. It reads the full pass list (`passView=Full`, which includes prices) and fetches icons 100 at a time.
+- **Badges (03:38 UTC):** `refresh:stats-badges` (`scripts/universes/refresh-stats-badges.ts`) reads up to ten 100-row badge pages per universe, stores Roblox's raw `winRatePercentage` in `rarity_percent` (a fraction, so 0.066 shows as 6.6%) and sets `stats_updated_at`. It fetches no icons and keeps stored icon fields. Missing fields never overwrite stored values.
+- **Light on purpose:** one Roblox request start per second, two universes at a time, 15-second attempts, at most 3 attempts per request, an 8-minute run deadline and at most 400 request starts per run, retries included. Work left at the deadline or cap is recorded as deferred, not retried.
+- **Safe writes:** upsert by ID, then remove rows Roblox no longer lists, only after a complete successful fetch for that universe. A failed or partial fetch keeps the stored rows. An unchanged pass icon keeps its stored URL when Roblox hasn't finished the new thumbnail; price and sale status still update.
+- **Ledger:** passes write `wiki_game_passes_refresh` rows and badges write `stats_badges_refresh` rows in `stats_job_runs`, with scope, counts, request use and deferred IDs. A partial run exits nonzero. Both queue `stats:games` revalidation after any successful write; pass writes also trigger wiki revalidation.
+- **Pages:** wiki hubs show only on-sale passes, with their price, and hide the section when none are on sale. Remote icons (passes, badges, developer and stats game icons) swap to a neutral placeholder when the image fails, including before hydration.
 - **Related games:** developer games and stats "similar games" need at least 1 current player or 100,000 visits, so dead places stay out.
-- **Deep enrichment** (`enrich:universes:deep`) uses the same pass refresh. A failed stage (passes, badges, servers, social links, groups) no longer stops the others; the run fails once at the end, and `last_deep_enriched_at` moves only for universes whose stages all succeeded.
+- **Deep enrichment** (`enrich:universes:deep`) uses the same pass refresh. A failed stage (passes, badges, servers, social links, groups) no longer stops the others; the run fails once at the end, and `last_deep_enriched_at` moves only for universes whose stages all succeeded. Its badge rows have no `stats_updated_at`, so the stats badge card ignores them.
+
+## Stats page sections
+
+`apps/web/src/lib/stats-insights.ts` holds the pure calculations; `StatsInsightCards.tsx` and `StatsInsightCharts.tsx` render them. Metric rules are in [stats metrics](stats-metrics.md#page-sections).
+
+- **Game page**, after the main chart: Players by month and Milestones; after rank history: How updates did and Votes per day; then Estimated session length and the genre scatter; then Badge rarity and Game pass prices. Cards sit two to a row from `md` up and stack on phones.
+- **`/stats`:** Biggest moves this week after Fastest risers; Players by day (13-week calendar) after the Platform CCU trend.
+- **Reads:** existing tables and indexes only, each with a short abort deadline and its own five-minute last-good cache in `stats-chart-cache.ts` (capped at 2,048 keys). A slow or failed read hides only its own card. A card with too little data hides instead of showing an empty state.
 
 ## The stats worker
 
@@ -75,4 +86,6 @@ A worker change is done only when the Northflank build succeeds, one HOT run suc
 
 - The 00:02 daily rollup's single full pass times out, then succeeds in universe chunks. The rank hourly table gains about 1.6M rows a day. The chained hourly prune deletes the oldest rows first in 10,000-row batches, up to 6M rows per table a night, halves the batch after a timeout and records `partial` with the rows it deleted after three timeouts. Both hourly history tables become eligible for autovacuum after 200,000 dead rows and autoanalyze after 1M changed rows; check `pg_stat_user_tables` dead-row counts after large prunes. Hourly history reached back to June 20 in October 2026 and clears to 90 days over the following nights. The 01:05 daily platform summary scans `roblox_universe_stats_daily` without a date-first index and can still fail; when it does, daily-resolution charts end a day early.
 - The hourly platform summary adds up only the games sampled in each hour. HOT games land in alternate hours, so the 24-hour player chart zig-zags between about 10K and 13M. Daily views are not affected.
+- `peak_players` in `roblox_platform_stats_hourly` / `_daily` adds up each game's own peak, and games peak at different times, so it overstates the real concurrent peak (33.9M against about 16M real in October 2026). Don't show it as "peak players"; the Players by day calendar uses daily average players.
+- Daily rank snapshots aren't scheduled, so the Milestones card can miss recent "#1" and "top 10" entries.
 - The August 2026 report is live but missing from the stats sitemap and feed.

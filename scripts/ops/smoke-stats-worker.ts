@@ -13,6 +13,9 @@ const requiredRuntimeFiles = [
   "scripts/universes/update-universe-hourly-stats.ts",
   "scripts/universes/refresh-wiki-game-passes.ts",
   "scripts/universes/game-passes.ts",
+  "scripts/universes/refresh-stats-badges.ts",
+  "scripts/universes/badges.ts",
+  "scripts/universes/attachment-refresh-scope.ts",
   "scripts/universes/game-pass-http.ts",
   "scripts/universes/audit-universe-stats-workflow.ts",
   "scripts/codes/update-codes.ts",
@@ -48,6 +51,7 @@ async function checkRuntimeModules() {
   await Promise.all([
     import("../items/catalog-refresh-ack"),
     import("../universes/refresh-wiki-game-passes"),
+    import("../universes/refresh-stats-badges"),
     import("../../apps/web/src/lib/scraper"),
     import("marked"),
   ]);

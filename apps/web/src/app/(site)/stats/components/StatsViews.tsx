@@ -1,4 +1,17 @@
 import Image from "next/image";
+import {
+  InsightPair,
+  MonthlyPlayersCard,
+  MilestonesCard,
+  UpdateImpactsCard,
+  VotesCard,
+  SessionsCard,
+  GenreScatterCard,
+  BadgesCard,
+  PassPricesCard,
+  WeeklyMoversCard,
+  PlayersCalendarCard
+} from "./StatsInsightCards";
 import { RemoteIcon } from "@/components/RemoteIcon";
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
@@ -673,6 +686,8 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         <GameListPanel title="Fastest risers" subtitle="Ranked by 24h momentum across active games with meaningful gains." games={data.risers} metric="playing" href="/stats/games?sort=growth_24h" />
       </Fragment>
 
+      <WeeklyMoversCard movers={data.weeklyMovers} />
+
       <div id="platform-ccu-trend" className="scroll-mt-24">
         <StatsChartPanel
           title="Platform CCU trend"
@@ -686,6 +701,8 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           area
         />
       </div>
+
+      <PlayersCalendarCard weeks={data.playersCalendar} />
 
       <StatsVisitShareChartPanel initialChart={data.visitShareChart} />
 
@@ -1816,11 +1833,31 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
         defaultMetric="players"
       />
 
+      <InsightPair>
+        {data.insights.trackedSince && data.insights.months.length >= 2 && data.insights.months[0].month === "last30" ? (
+          <MonthlyPlayersCard data={data.insights} />
+        ) : null}
+        {data.insights.milestones.length ? <MilestonesCard data={data.insights} /> : null}
+      </InsightPair>
+
       <StatsRankChartPanel
         title={`${game.name} rank history`}
         universeId={game.universeId}
         initialChart={data.initialRankChart}
       />
+
+      <InsightPair>
+        {data.insights.updates.length ? <UpdateImpactsCard data={data.insights} /> : null}
+        {data.insights.votes.length ? <VotesCard data={data.insights} /> : null}
+      </InsightPair>
+      <InsightPair>
+        {data.insights.sessions.filter(p => p.minutes !== null).length >= 5 ? <SessionsCard data={data.insights} /> : null}
+        {data.insights.scatter ? <GenreScatterCard data={data.insights.scatter} /> : null}
+      </InsightPair>
+      <InsightPair>
+        {data.insights.badges.length >= 2 ? <BadgesCard data={data.insights} /> : null}
+        {data.insights.passes.length ? <PassPricesCard data={data.insights} /> : null}
+      </InsightPair>
 
       <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
         <CardHeader className="border-b border-border/60 p-4">

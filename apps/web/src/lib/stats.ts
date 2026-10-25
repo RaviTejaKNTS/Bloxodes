@@ -1,4 +1,6 @@
 import "server-only";
+import type { StatsGameInsights, Mover, CalendarDay } from "@/lib/stats-insights";
+import { loadStatsGameInsights, loadWeeklyMovers, loadPlayersCalendar } from "@/lib/stats-insight-loaders";
 import { isUsefulRelatedRobloxGame } from "@/lib/roblox-related-games";
 import { formatAgeRating } from "@/lib/age-rating";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -308,6 +310,8 @@ export type StatsItem = {
 };
 
 export type StatsHomeData = {
+  weeklyMovers: Mover[];
+  playersCalendar: CalendarDay[][];
   totals: {
     trackedGames: number;
     featuredGames: number;
@@ -419,6 +423,7 @@ export type StatsSubgenreOption = {
 };
 
 export type StatsGameDetailData = {
+  insights: StatsGameInsights;
   game: StatsGame;
   initialChart: StatsGameChartData;
   initialRankChart: StatsGameRankChartData;
@@ -1985,14 +1990,16 @@ function mapPlatformTrendRow(row: PlatformTrendRow): StatsChartPoint {
 }
 
 export async function getStatsHome(): Promise<StatsHomeData> {
-  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres, riserBase, platformTotals, visitShareChart] = await Promise.all([
+  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres, riserBase, platformTotals, visitShareChart, weeklyMovers, calendar] = await Promise.all([
     listBaseGames({ limit: STATS_HOME_TOP_GAMES_LIMIT, sort: "playing" }),
     listBaseGames({ limit: 10, sort: "visits" }),
     listBaseGames({ limit: 1, sort: "playing", count: "exact" }),
     listStatsGenres(STATS_HOME_GENRES_LIMIT),
     listCurrentRisers(STATS_HOME_RISERS_LIMIT),
     getStatsPlatformTotals(),
-    getStatsVisitShareChart("30d")
+    getStatsVisitShareChart("30d"),
+    loadWeeklyMovers(),
+    loadPlayersCalendar()
   ]);
   const [topGames, mostVisited, activeRisers] = await Promise.all([
     Promise.resolve(topBase),
@@ -2046,7 +2053,9 @@ export async function getStatsHome(): Promise<StatsHomeData> {
           resolution: "hourly",
           points: platformTrend
         },
-    visitShareChart
+    visitShareChart,
+    weeklyMovers,
+    playersCalendar: calendar
   };
 }
 
@@ -3567,19 +3576,21 @@ async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promi
     "indexed_at" in row
       ? mapIndexedGame(row)
       : (await attachGrowth([mapUniverse(row)]))[0];
-  const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, globalRank] = await Promise.all([
+  const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, globalRank, insights] = await Promise.all([
     getStatsGameChart(baseGame.universeId, DEFAULT_STATS_CHART_RANGE, DEFAULT_STATS_CHART_RESOLUTION, { includeAnnotations: true }),
     getStatsGameRankChart(baseGame, DEFAULT_STATS_CHART_RANGE, DEFAULT_STATS_CHART_RESOLUTION, { includeAnnotations: true }),
     loadRelatedLinks(baseGame.universeId, baseGame),
     loadSameCreatorGames(baseGame),
     loadSimilarGames(baseGame),
-    loadLatestRank(baseGame.universeId)
+    loadLatestRank(baseGame.universeId),
+    loadStatsGameInsights(baseGame)
   ]);
 
   return {
     game: { ...baseGame, rank: globalRank ?? baseGame.rank, links: relatedLinks },
     initialChart,
     initialRankChart,
+    insights,
     relatedLinks,
     sameCreator,
     similarGames

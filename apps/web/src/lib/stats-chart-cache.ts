@@ -1,6 +1,6 @@
 import "server-only";
 
-// Platform-wide chart answers are the same for every visitor and may be a few
+// Shared chart and optional insight answers are the same for every visitor and may be a few
 // minutes old. Keep one copy per key in this web process so a traffic burst
 // (or a slow database) costs one query instead of one query per request.
 export const STATS_CHART_CACHE_MS = 5 * 60 * 1000;
@@ -29,7 +29,12 @@ export async function cachedStatsChart<T>(
   if (!request) {
     request = load()
       .then((value) => {
-        if (value != null) values.set(key, { value, storedAt: now() });
+        if (value != null) {
+          // Per-game insights add variable keys; bound process memory while
+          // keeping the same last-good/stale-while-revalidate contract.
+          if (!values.has(key) && values.size >= 2048) values.delete(values.keys().next().value!);
+          values.set(key, { value, storedAt: now() });
+        }
         return value;
       })
       .catch((error: unknown) => {

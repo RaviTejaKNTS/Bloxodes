@@ -50,7 +50,8 @@ Jobs run in short-lived `bloxodes-stats-worker:production` containers through `b
 | Worker ledger reconcile | 00:10 |
 | Platform hourly summary (3-hour window) | every 5 minutes |
 | Platform daily summary | 01:05 |
-| Wiki game passes (`refresh:wiki-game-passes`; lock `roblox-universe-discovery`, 300 s lock wait, 600 s timeout) | 03:18 |
+| Game passes for wiki hubs and the top 100 HOT games (`refresh:wiki-game-passes -- --include-hot`; lock `roblox-universe-discovery`, 300 s lock wait, 600 s timeout) | 03:18 |
+| Badges for wiki hubs and the top 100 HOT games (`refresh:stats-badges`; same lock, wait and timeout) | 03:38 |
 | Codes refresh | 00:00, 06:00, 12:00, 18:00 |
 | Roblox virtual events collect | 00:15 |
 | Puzzles | 04:10, 04:45, 05:00, 05:30, 07:10, 08:10, sweep 08:30, audit 08:45 |
