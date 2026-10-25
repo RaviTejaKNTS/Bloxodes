@@ -7,7 +7,7 @@ const mocks = vi.hoisted(() => ({ from: vi.fn() }));
 vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: mocks.from }) }));
 
 type Query = { table: string; calls: Array<{ method: string; args: unknown[] }>; signal?: AbortSignal };
-type Result = { data: any; error: unknown };
+type Result = { data: unknown; error: unknown };
 const queries: Query[] = [];
 const now = Date.parse("2026-10-25T12:00:00Z");
 const game = (extra: Partial<StatsGame> = {}) => ({
