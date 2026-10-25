@@ -25,19 +25,19 @@ rank snapshots -> current read indexes
 | Strict audit | VPS | :10 every 6 hours |
 | Daily rollup, hourly prune, audit | VPS | 00:02 |
 | Platform hourly summary | VPS | every 5 minutes |
-| Platform daily summary | VPS | 01:05 |
+| Platform daily and visit-share summaries | VPS | 01:05 |
 | Worker ledger reconcile | VPS | 00:10 |
 | Wiki game passes | VPS | 03:18 daily |
 
 Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:new|hot|warm|cold` (`update-universe-hourly-stats.ts`), `discover:universes:priority`, `stats:rank:hourly`, `stats:index:refresh`, `stats:rollup-daily`, `stats:platform:refresh`, `stats:prune-hourly` and `stats:audit`. Every run is recorded in `stats_job_runs`.
 
-**Tables:** `roblox_universes`, `roblox_universe_stats_hourly` / `_daily`, `roblox_universe_rank_snapshots*`, `roblox_platform_stats_hourly` / `_daily`, `stats_game_current_index` (101,029 games on 2026-10-19), genre, creator and riser indexes, `roblox_universe_update_events`.
+**Tables:** `roblox_universes`, `roblox_universe_stats_hourly` / `_daily`, `roblox_universe_rank_snapshots*`, `roblox_platform_stats_hourly` / `_daily`, `stats_visit_share_summaries`, `stats_game_current_index` (101,029 games on 2026-10-19), genre, creator and riser indexes, `roblox_universe_update_events`.
 
 **Single-game import:** `enrich-roblox-universes.ts` also exports `previewRobloxUniverse` (fetch and map, no write) and `importRobloxUniverse`, which `content:publish` uses to add one missing `roblox_universes` row before publishing a wiki. Both reuse the enrichment fetcher and mapper; the import never overwrites an existing row.
 
 **Reads:** `apps/web/src/lib/stats.ts`. Public pages hide player values older than 24 hours, so a fresh index alone doesn't mean fresh data. A games-list page past the last row (PostgREST `PGRST103`) is an empty page with the real total, not an error; `/stats/games` returns 404 for it.
 
-**Platform charts:** the platform player chart reads `roblox_platform_stats_hourly` / `_daily`. The every-5-minute job refreshes the last 3 hours of the hourly summary, so the 24-hour chart is a few minutes old; the 01:05 job also refreshes the last 2 days of the daily summary. Only the 24-hour view may fall back to the live `get_stats_platform_ccu_trend` call, and only when the stored summary has no rows. The visit-share chart always uses `get_stats_visit_share_chart`, which ranks every tracked game; there is no smaller-population fallback. Both charts keep one result per range in the web process for 5 minutes (`stats-chart-cache.ts`), share one query between concurrent requests, and keep serving the last good result when a refresh fails. With no good result yet, the panel says the chart didn't load and the browser retries once.
+**Platform charts:** the platform player chart reads `roblox_platform_stats_hourly` / `_daily`. The every-5-minute job refreshes the last 3 hours of the hourly summary, so the 24-hour chart is a few minutes old; the 01:05 job also refreshes the last 2 days of the daily summary. Only the 24-hour view may fall back to the live `get_stats_platform_ccu_trend` call, and only when the stored summary has no rows. The visit-share chart calls `get_stats_visit_share_chart`, which reads the stored result for the standard 1d, 7d, 14d, 30d and 90d windows from `stats_visit_share_summaries`. The 01:05 job builds them: it reads every universe in batches of 250, ranks each window over every tracked game, and replaces all five windows for today and tomorrow in one transaction (`npm run stats:platform:refresh -- --visit-share-only` rebuilds them alone). Names, slugs and icons come from `roblox_universes` at read time. Other bucket sizes or past windows use the original live calculation. A missing current summary raises `55000`, so the web keeps its last good result. Daily rows that change after 01:05 show up after the next run. There is no smaller-population fallback. Both charts keep one result per range in the web process for 5 minutes (`stats-chart-cache.ts`), share one query between concurrent requests, and keep serving the last good result when a refresh fails. With no good result yet, the panel says the chart didn't load and the browser retries once.
 
 ## Wiki game passes
 

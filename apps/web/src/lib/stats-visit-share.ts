@@ -203,23 +203,36 @@ function buildVisitShareChart({
   };
 }
 
+const RPC_PAGE_SIZE = 1000;
+const RPC_MAX_PAGES = 5;
+
 async function getVisitShareChartFromRpc(range: StatsVisitShareRange, window = chartWindow(range)): Promise<StatsVisitShareChartData | null> {
   const startDate = window.start.toISOString().slice(0, 10);
   const endDate = window.end.toISOString().slice(0, 10);
-  const { data, error } = await supabaseAdmin().rpc("get_stats_visit_share_chart", {
-    p_since: startDate,
-    p_until: endDate,
-    p_top_games: INDIVIDUAL_GAME_LIMIT,
-    p_top_group: TOP_GROUP_LIMIT,
-    p_wide_group: WIDE_GROUP_LIMIT
-  });
+  // The Data API returns at most 1,000 rows per request, and a 90-day result
+  // has up to 91 days x 11 buckets = 1,001. Page until a short page arrives.
+  const rows: VisitShareRpcRow[] = [];
+  for (let page = 0; page < RPC_MAX_PAGES; page += 1) {
+    const from = page * RPC_PAGE_SIZE;
+    const { data, error } = await supabaseAdmin()
+      .rpc("get_stats_visit_share_chart", {
+        p_since: startDate,
+        p_until: endDate,
+        p_top_games: INDIVIDUAL_GAME_LIMIT,
+        p_top_group: TOP_GROUP_LIMIT,
+        p_wide_group: WIDE_GROUP_LIMIT
+      })
+      .range(from, from + RPC_PAGE_SIZE - 1);
 
-  if (error) {
-    console.warn("Failed to load visit-share chart RPC", error.message);
-    return null;
+    if (error) {
+      console.warn("Failed to load visit-share chart RPC", error.message);
+      return null;
+    }
+
+    const pageRows = (data ?? []) as VisitShareRpcRow[];
+    rows.push(...pageRows);
+    if (pageRows.length < RPC_PAGE_SIZE) break;
   }
-
-  const rows = (data ?? []) as VisitShareRpcRow[];
 
   const bucketMap = new Map<string, VisitShareBucket>();
   const bucketTotals = new Map<string, number>();
@@ -282,8 +295,8 @@ function unavailableVisitShareChart(range: StatsVisitShareRange): StatsVisitShar
   };
 }
 
-// The RPC ranks every tracked game, so it is the only correct source for these
-// percentages. When it fails, serve the last good answer instead of rebuilding
+// The RPC reads summaries ranked over every tracked game. When a summary is
+// missing or the read fails, retain the last good answer instead of rebuilding
 // the chart from a smaller set of games.
 export async function getStatsVisitShareChart(range: StatsVisitShareRange = "30d"): Promise<StatsVisitShareChartData> {
   const chart = await cachedStatsChart(`visit-share:${range}`, () => getVisitShareChartFromRpc(range));
