@@ -23,13 +23,17 @@ export function parseClaudePrintResult(stdout: string): string {
 // print/JSON invocation and process-group timeout, with all tools disabled.
 export async function runClaudePrint(options: {
   prompt: string; systemPrompt?: string; model: string; effort: ClaudeEffort;
-  timeoutMs: number; env?: NodeJS.ProcessEnv; bin?: string;
+  timeoutMs: number; maxOutputTokens?: number; env?: NodeJS.ProcessEnv; bin?: string;
 }): Promise<string> {
   const env = options.env ?? process.env;
   if (!env.ANTHROPIC_API_KEY?.trim() && !env.CLAUDE_CODE_OAUTH_TOKEN?.trim()) {
     throw new Error("Claude CLI requires ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN.");
   }
   if (!Number.isFinite(options.timeoutMs) || options.timeoutMs <= 0) throw new Error("Claude CLI timeout must be positive.");
+  // Thinking counts toward this cap. At xhigh effort a full codes page JSON
+  // needs far more than the CLI's small default, so 5,000 failed every page.
+  const maxOutputTokens = options.maxOutputTokens ?? 32_000;
+  if (!Number.isInteger(maxOutputTokens) || maxOutputTokens <= 0) throw new Error("Claude CLI output limit must be a positive integer.");
   // Keep authentication, but never pass database, storage or publication secrets.
   const allowed = ["PATH", "HOME", "USER", "LOGNAME", "SHELL", "LANG", "LC_ALL", "TMPDIR", "TZ",
     "XDG_CONFIG_HOME", "XDG_CACHE_HOME", "HTTPS_PROXY", "HTTP_PROXY", "NO_PROXY", "NODE_EXTRA_CA_CERTS",
@@ -47,7 +51,7 @@ export async function runClaudePrint(options: {
 
   return new Promise((resolve, reject) => {
     const child = spawn(options.bin ?? "claude", args, {
-      env: { ...workerEnv, CLAUDE_CODE_MAX_OUTPUT_TOKENS: "5000" },
+      env: { ...workerEnv, CLAUDE_CODE_MAX_OUTPUT_TOKENS: String(maxOutputTokens) },
       detached: process.platform !== "win32", stdio: ["pipe", "pipe", "pipe"]
     });
     let stdout = "", stderr = "", failure = "", finished = false, interrupted = false;

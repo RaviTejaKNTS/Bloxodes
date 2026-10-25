@@ -13,7 +13,7 @@ import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { ClaudePrintInterrupted, runClaudePrint, stripJsonFence } from "../shared/claude-print-runner";
 
 const generateCopy = (prompt: string, systemPrompt?: string) => runClaudePrint({
-  prompt, systemPrompt, model: "claude-haiku-5-5", effort: "xhigh", timeoutMs: 5 * 60_000
+  prompt, systemPrompt, model: "claude-haiku-5-5", effort: "xhigh", timeoutMs: 10 * 60_000
 });
 const supabase = createClient(
   process.env.SUPABASE_URL!,
