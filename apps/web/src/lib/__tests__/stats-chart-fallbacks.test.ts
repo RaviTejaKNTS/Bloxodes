@@ -45,6 +45,9 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+// The visit-share read pages with .range() past the Data API row cap.
+const paged = (value: unknown) => ({ range: vi.fn().mockResolvedValue(value) });
+
 describe("platform chart", () => {
   it("does not fan out to per-game history when the stored summary fails", async () => {
     mocks.from.mockImplementation(() => query({ data: null, error: timeout }));
@@ -76,7 +79,7 @@ describe("platform chart", () => {
 
 describe("visit-share chart", () => {
   it("never rebuilds the chart from a smaller set of games", async () => {
-    mocks.rpc.mockResolvedValue({ data: null, error: timeout });
+    mocks.rpc.mockReturnValue(paged({ data: null, error: timeout }));
     const chart = await getStatsVisitShareChart("90d");
     expect(chart).toMatchObject({ range: "90d", points: [], series: [], unavailable: true });
     expect(mocks.rpc).toHaveBeenCalledTimes(1);
@@ -86,7 +89,7 @@ describe("visit-share chart", () => {
   it("serves the last good chart when a later calculation times out", async () => {
     vi.useFakeTimers({ toFake: ["Date"] });
     vi.setSystemTime(new Date("2026-10-24T00:00:00Z"));
-    mocks.rpc.mockResolvedValueOnce({
+    mocks.rpc.mockReturnValueOnce(paged({
       data: [
         visitShareRow("2026-10-22", "g1", 400),
         visitShareRow("2026-10-22", "rank_2_100", 300),
@@ -94,14 +97,14 @@ describe("visit-share chart", () => {
         visitShareRow("2026-10-23", "rank_2_100", 200)
       ],
       error: null
-    });
+    }));
     const good = await getStatsVisitShareChart("7d");
     expect(good.unavailable).toBeUndefined();
     expect(good.points).toHaveLength(2);
     expect(good.denominatorGameCount).toBe(500);
 
     vi.setSystemTime(new Date("2026-10-24T00:06:00Z"));
-    mocks.rpc.mockResolvedValue({ data: null, error: timeout });
+    mocks.rpc.mockReturnValue(paged({ data: null, error: timeout }));
     await expect(getStatsVisitShareChart("7d")).resolves.toBe(good);
     await vi.waitFor(() => expect(mocks.rpc).toHaveBeenCalledTimes(2));
     await expect(getStatsVisitShareChart("7d")).resolves.toBe(good);
