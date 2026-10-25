@@ -12,8 +12,10 @@ import { scrapeSocialLinksFromSources, type SocialLinks as ScrapedSocialLinks } 
 import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { ClaudePrintInterrupted, runClaudePrint, stripJsonFence } from "../shared/claude-print-runner";
 
-const generateCopy = (prompt: string, systemPrompt?: string) => runClaudePrint({
-  prompt, systemPrompt, model: "claude-haiku-5-5", effort: "xhigh", timeoutMs: 10 * 60_000
+// The full page gets 10 minutes and the short interlink text 3, so a 10-page
+// run stays inside the workflows' 180-minute job limit even at worst case.
+const generateCopy = (prompt: string, systemPrompt?: string, timeoutMs = 10 * 60_000) => runClaudePrint({
+  prompt, systemPrompt, model: "claude-haiku-5-5", effort: "xhigh", timeoutMs
 });
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -356,7 +358,7 @@ async function generateInterlinkCopy(context: InterlinkPromptContext): Promise<s
     genre_picks: genreLinks
   };
 
-  const text = await generateCopy(JSON.stringify(user), system);
+  const text = await generateCopy(JSON.stringify(user), system, 3 * 60_000);
   if (!text) return null;
   return text;
 }
