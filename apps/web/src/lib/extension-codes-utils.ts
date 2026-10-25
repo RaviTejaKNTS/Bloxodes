@@ -50,3 +50,21 @@ export function extractPlaceIdFromRobloxUrl(value: string | null | undefined): n
 export function normalizeGameNameSlug(value: string | null | undefined): string {
   return slugify(normalizeRobloxGameName(value) ?? "none");
 }
+
+type UniverseCodePageCandidate = {
+  roblox_link?: string | null;
+  active_code_count?: number | null;
+};
+
+// Several published codes pages can share one universe (sequels and renamed
+// games, such as the Murder Mystery pages). Prefer the page whose Roblox link is
+// the requested place, then the one with the most active codes. Rows arrive
+// newest first, so ties keep the most recently updated page.
+export function pickUniverseCodePage<T extends UniverseCodePageCandidate>(rows: T[], placeId: number | null): T | null {
+  if (!rows.length) return null;
+  if (placeId) {
+    const linked = rows.find((row) => extractPlaceIdFromRobloxUrl(row.roblox_link) === placeId);
+    if (linked) return linked;
+  }
+  return rows.reduce((best, row) => (Number(row.active_code_count ?? 0) > Number(best.active_code_count ?? 0) ? row : best));
+}
