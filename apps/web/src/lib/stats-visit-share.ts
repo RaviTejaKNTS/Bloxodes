@@ -282,8 +282,8 @@ function unavailableVisitShareChart(range: StatsVisitShareRange): StatsVisitShar
   };
 }
 
-// The RPC ranks every tracked game, so it is the only correct source for these
-// percentages. When it fails, serve the last good answer instead of rebuilding
+// The RPC reads summaries ranked over every tracked game. When a summary is
+// missing or the read fails, retain the last good answer instead of rebuilding
 // the chart from a smaller set of games.
 export async function getStatsVisitShareChart(range: StatsVisitShareRange = "30d"): Promise<StatsVisitShareChartData> {
   const chart = await cachedStatsChart(`visit-share:${range}`, () => getVisitShareChartFromRpc(range));

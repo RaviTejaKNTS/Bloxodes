@@ -17,6 +17,8 @@
 2 0 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit -- --strict"
 # Platform chart summaries: hourly every 5 minutes over a short window (keeps the
 # 24-hour chart current and each call well under the API timeout), daily at 01:05.
+# The daily run also prepares every visit-share range for today and tomorrow,
+# reading the full population in bounded batches after the 00:02 daily rollup.
 */5 * * * * JOB_TIMEOUT_SECONDS=240 /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-platform-hourly-refresh "npm run stats:platform:refresh -- --hourly-hours 3 --skip-daily"
 5 1 * * * /home/ravitejaknts/bloxodes-stats-worker/bin/run-job.sh stats-platform-refresh "npm run stats:platform:refresh -- --hourly-hours 3 --daily-days 2"
 
