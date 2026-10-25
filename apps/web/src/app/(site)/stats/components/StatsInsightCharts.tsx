@@ -12,6 +12,8 @@ import {
 } from "@/lib/stats-insights";
 import { chartTabsListClass, chartTabsTriggerClass } from "./stats-chart-styles";
 
+type ChartTooltipProps = { active?: boolean; payload?: Array<{ payload?: unknown }> };
+
 const dateLabel = (date: string) => new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
 const plotClass = "aspect-auto h-[220px] w-full";
 const axis = { tickLine: false, axisLine: false, tick: { fill: "rgb(var(--color-muted))", fontSize: 10 } };
@@ -58,7 +60,7 @@ export function VotesChart({ points, asOf }: { points: VotePoint[]; asOf: string
         />
         <YAxis {...axis} width={44} tickFormatter={value => formatCompactNumber(Math.abs(value))} />
         <ReferenceLine y={0} stroke="rgb(var(--color-border))" />
-        <ChartTooltip content={({ active, payload }) => {
+        <ChartTooltip content={({ active, payload }: ChartTooltipProps) => {
           const point = payload?.[0]?.payload as VotePoint | undefined;
           return active && point ? <VotesTooltip point={point} /> : null;
         }} />
@@ -113,7 +115,7 @@ export function SessionChart({ points, markers, asOf }: { points: SessionPoint[]
             tickFormatter={value => dateLabel(new Date(value).toISOString())} minTickGap={32}
           />
           <YAxis {...axis} width={40} tickFormatter={value => `${value}m`} />
-          <ChartTooltip content={({ active, payload }) => {
+          <ChartTooltip content={({ active, payload }: ChartTooltipProps) => {
             const point = payload?.[0]?.payload as SessionPoint | undefined;
             return active && point?.minutes != null ? <SessionTooltip point={point} /> : null;
           }} />
@@ -176,7 +178,7 @@ export function GenreScatterChart({ data }: { data: GenreScatter }) {
           tickFormatter={value => formatCompactNumber(value)} width={48} allowDataOverflow
         />
         <ZAxis range={[35, 35]} />
-        <ChartTooltip content={({ active, payload }) => {
+        <ChartTooltip content={({ active, payload }: ChartTooltipProps) => {
           const point = payload?.[0]?.payload as GenreScatter['current'] | undefined;
           return active && point ? <ScatterTooltip point={point} /> : null;
         }} />
@@ -218,7 +220,7 @@ export function PassPriceChart({ passes }: { passes: PassInsight[] }) {
         />
         <YAxis hide dataKey="row" type="number" domain={[-2.5, 2.5]} />
         <ZAxis range={[60, 60]} />
-        <ChartTooltip content={({ active, payload }) => {
+        <ChartTooltip content={({ active, payload }: ChartTooltipProps) => {
           const point = payload?.[0]?.payload as PassInsight | undefined;
           return active && point ? <PassTooltip pass={point} passes={passes} /> : null;
         }} />
