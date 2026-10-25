@@ -43,7 +43,8 @@ test("print runner passes both auth methods, strips DB secrets and disables all 
     process.stdin.on("data", chunk => prompt += chunk);
     process.stdin.on("end", () => console.log(JSON.stringify({ type: "result", subtype: "success", result: JSON.stringify({
       args: process.argv.slice(2), prompt, api: Boolean(process.env.ANTHROPIC_API_KEY),
-      oauth: Boolean(process.env.CLAUDE_CODE_OAUTH_TOKEN), db: process.env.SUPABASE_SERVICE_ROLE
+      oauth: Boolean(process.env.CLAUDE_CODE_OAUTH_TOKEN), db: process.env.SUPABASE_SERVICE_ROLE,
+      maxOutput: process.env.CLAUDE_CODE_MAX_OUTPUT_TOKENS
     }) })));
   `, async bin => {
     for (const auth of [{ ANTHROPIC_API_KEY: "test-api" }, { CLAUDE_CODE_OAUTH_TOKEN: "test-oauth" }]) {
@@ -51,6 +52,7 @@ test("print runner passes both auth methods, strips DB secrets and disables all 
       assert.equal(result.prompt, options.prompt);
       assert.equal(result.db, undefined);
       assert.ok(result.api || result.oauth);
+      assert.equal(result.maxOutput, "32000");
       for (const [flag, value] of [["--model", options.model], ["--effort", "xhigh"], ["--output-format", "json"], ["--max-turns", "1"], ["--tools", ""], ["--mcp-config", '{"mcpServers":{}}'], ["--system-prompt", options.systemPrompt]]) {
         assert.equal(result.args[result.args.indexOf(flag) + 1], value);
       }
@@ -58,6 +60,9 @@ test("print runner passes both auth methods, strips DB secrets and disables all 
       assert.ok(result.args.includes("--strict-mcp-config"));
       assert.ok(!result.args.includes("--bare"));
     }
+    const limited = JSON.parse(await runClaudePrint({ ...options, bin, maxOutputTokens: 8000, env: { PATH: process.env.PATH, ANTHROPIC_API_KEY: "test-api" } }));
+    assert.equal(limited.maxOutput, "8000");
+    await assert.rejects(runClaudePrint({ ...options, bin, maxOutputTokens: 0, env: { PATH: process.env.PATH, ANTHROPIC_API_KEY: "test-api" } }), /output limit must be a positive integer/);
   });
 });
 

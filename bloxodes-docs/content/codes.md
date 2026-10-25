@@ -7,9 +7,9 @@ Roblox codes pages at `/codes/<game-slug>`. Two separate jobs: GitHub creates ne
 ## New pages (GitHub Actions)
 
 1. **Discover:** `discover-beebom-codes.yml` runs at :17 every 6 hours UTC. `discover:beebom-codes` (`scripts/codes/discover-beebom-code-pages.ts`) reads Beebom's Roblox codes tag, checks for overlaps and inserts unpublished `code_pages` rows.
-2. **Write and publish:** `generate-queue.yml` (Draft Code Page Generation) runs 10 times a day. `npm run generate` (`scripts/codes/generate-code-page-copy.ts`) picks up draft `code_pages`, fetches sources, writes copy with Claude Haiku 5.5 (`claude-haiku-5-5`) through the Claude Code CLI (`scripts/shared/claude-print-runner.ts`: one turn, no tools, 5-minute limit per call), links the Roblox universe, refreshes codes, adds media and interlinks. It publishes a page only after the universe resolves and the source refresh is clean. Otherwise the page stays a draft.
+2. **Write and publish:** `generate-queue.yml` (Draft Code Page Generation) runs 10 times a day. `npm run generate` (`scripts/codes/generate-code-page-copy.ts`) picks up draft `code_pages`, fetches sources, writes copy with Claude Haiku 5.5 (`claude-haiku-5-5`) through the Claude Code CLI (`scripts/shared/claude-print-runner.ts`: one turn, no tools, 32,000 output tokens per call with thinking included, 10 minutes for the page and 3 for interlink text), links the Roblox universe, refreshes codes, adds media and interlinks. It publishes a page only after the universe resolves and the source refresh is clean. Otherwise the page stays a draft.
 
-Both write production directly. Database triggers handle cache refresh. Both workflows (discovery also writes copy for the drafts it inserts) need one GitHub secret, `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN`, and stop at the first step if neither is set. A run whose selected pages all fail ends red.
+Both write production directly. Database triggers handle cache refresh. Both workflows (discovery also writes copy for the drafts it inserts) need one GitHub secret, `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN`, and stop at the first step if neither is set. `ANTHROPIC_API_KEY` is set; its source is homelab `.envs/shared/application.env`, so copy it to GitHub again when it changes there. A run whose selected pages all fail ends red.
 
 ## Code updates (VPS)
 
@@ -34,5 +34,4 @@ Use `bloxodes-code-workflow-runner` and `bloxodes-code-writing`, then publish wi
 
 ## Known issues
 
-- **New page writing waits on a Claude credential.** It moved from OpenAI (no credits since early October; last new page 2026-10-07) to Claude Haiku on 2026-10-24, and runs fail until `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` is added to GitHub.
 - The old `game_generation_queue` table (107 stale rows) has no code left. Drop it in a later migration.

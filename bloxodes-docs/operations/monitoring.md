@@ -31,7 +31,6 @@ Automation reports problems as GitHub issues labeled `incident`, not Telegram. T
 
 Keep this list current: add failures when you find them, remove them when fixed.
 
-- **New codes pages and PR review:** moved from OpenAI to Claude Haiku on 2026-10-24; both fail until `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` is added to GitHub. See [codes](../content/codes.md#known-issues).
 - **Music IDs:** Roblox Creator Store returns HTTP 500.
 - **Universe stats:** the daily rollup falls back to universe chunks after its full pass times out. The hourly prune was fixed on 2026-10-24; watch for `partial` runs. See [stats](../content/stats.md#known-issues).
 - **Item stats:** recovering from the bundle-key failures fixed on 2026-10-24; the audit is partial until overdue items drop under 5%. See [data refreshes](../content/data-refreshes.md#known-issues-2026-10-19).
