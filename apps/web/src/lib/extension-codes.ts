@@ -7,7 +7,8 @@ import {
   normalizeGameNameSlug,
   normalizeRobloxGameName,
   normalizeRobloxGameUrl,
-  normalizeRobloxPlaceId
+  normalizeRobloxPlaceId,
+  pickUniverseCodePage
 } from "@/lib/extension-codes-utils";
 import { SITE_URL } from "@/lib/site-config";
 import { slugify } from "@/lib/slug";
@@ -84,17 +85,18 @@ function formatExtensionCode(code: Code, referenceMs: number): ExtensionCode {
   };
 }
 
-async function fetchCodePageByUniverseId(universeId: number): Promise<CodePageRow | null> {
+async function fetchCodePageByUniverseId(universeId: number, placeId: number): Promise<CodePageRow | null> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("code_pages_view")
     .select("id,name,slug,roblox_link,cover_image,universe_id,updated_at,content_updated_at,codes,active_code_count,latest_code_first_seen_at")
     .eq("is_published", true)
     .eq("universe_id", universeId)
-    .maybeSingle();
+    .order("content_updated_at", { ascending: false, nullsFirst: false })
+    .limit(10);
 
   if (error) throw error;
-  return (data as CodePageRow | null) ?? null;
+  return pickUniverseCodePage((data ?? []) as CodePageRow[], placeId);
 }
 
 async function fetchUniverseIdByRootPlaceId(placeId: number): Promise<number | null> {
@@ -154,7 +156,7 @@ async function resolveCodePage(params: {
   if (params.placeId) {
     const universeId = await fetchUniverseIdByRootPlaceId(params.placeId);
     if (universeId) {
-      const row = await fetchCodePageByUniverseId(universeId);
+      const row = await fetchCodePageByUniverseId(universeId, params.placeId);
       if (row) return { row, source: "place-id" };
     }
 
