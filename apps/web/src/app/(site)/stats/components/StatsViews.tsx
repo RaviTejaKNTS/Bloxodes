@@ -1851,7 +1851,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
         {data.insights.votes.length ? <VotesCard data={data.insights} /> : null}
       </InsightPair>
       <InsightPair>
-        {data.insights.sessions.filter(p => p.minutes !== null).length >= 5 ? <SessionsCard data={data.insights} /> : null}
+        {data.insights.sessions.slice(-30).filter(p => p.minutes !== null).length >= 5 ? <SessionsCard data={data.insights} /> : null}
         {data.insights.scatter ? <GenreScatterCard data={data.insights.scatter} /> : null}
       </InsightPair>
       <InsightPair>
