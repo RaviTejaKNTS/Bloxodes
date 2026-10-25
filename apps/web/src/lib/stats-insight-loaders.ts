@@ -63,16 +63,17 @@ export async function loadPlayersCalendar(): Promise<CalendarDay[][]> {
 }
 
 async function loadGenreScatter(game: StatsGame): Promise<GenreScatter | null> {
-  if (!game.genre || !game.playing || !isPlayingTimestampFresh(game.lastPlayingRefreshedAt)) return null;
+  const genre = game.genre;
+  if (!genre || !game.playing || !isPlayingTimestampFresh(game.lastPlayingRefreshedAt)) return null;
   return (await insightRead<{ data: GenreScatter | null }>(`scatter:${game.universeId}`, async (signal) => {
     const db = supabaseAdmin();
     const [peers, total, current] = await Promise.all([
       db.from("stats_game_current_index").select("universe_id,name,display_name,playing,rating_percent").abortSignal(signal)
-        .eq("genre_l1", game.genre).gte("playing", 1000).not("rating_percent", "is", null)
+        .eq("genre_l1", genre).gte("playing", 1000).not("rating_percent", "is", null)
         .gte("last_playing_refreshed_at", new Date(Date.now() - STATS_PLAYING_FRESHNESS_MS).toISOString())
         .order("playing", { ascending: false, nullsFirst: false }).order("universe_id").limit(300),
       db.from("stats_genre_current_index").select("games").abortSignal(signal)
-        .eq("genre_slug", slugify(game.genre)).limit(1).maybeSingle(),
+        .eq("genre_slug", slugify(genre)).limit(1).maybeSingle(),
       db.from("stats_game_current_index").select("genre_playing_rank,rating_percent,playing,name,display_name").abortSignal(signal)
         .eq("universe_id", game.universeId).limit(1).maybeSingle()
     ]);
@@ -82,7 +83,7 @@ async function loadGenreScatter(game: StatsGame): Promise<GenreScatter | null> {
       .map(r => ({ universeId: Number(r.universe_id), name: r.display_name || r.name, rating: Number(r.rating_percent), players: Number(r.playing) }));
     const row = current.data;
     if (points.filter(r => r.universeId !== game.universeId).length < 10 || !row?.genre_playing_rank || row.rating_percent == null || !(row.playing > 0)) return { data: null };
-    return { data: { genre: game.genre!, points, count: total.data.games, rank: row.genre_playing_rank,
+    return { data: { genre, points, count: total.data.games, rank: row.genre_playing_rank,
       current: { universeId: game.universeId, name: row.display_name || row.name, rating: Number(row.rating_percent), players: Number(row.playing) } } };
   }))?.data ?? null;
 }
