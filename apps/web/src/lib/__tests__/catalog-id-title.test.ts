@@ -29,15 +29,26 @@ describe("music and decal catalog title dates", () => {
     "Roblox Music IDs",
     "Roblox Music IDs (January 2024)",
     "Roblox Music IDs [January 2024]",
-    "Roblox Music IDs January 2024",
-    "Roblox Music IDs - January 2024",
     "Roblox Music IDs (%month% %year%)",
+    "Roblox Music IDs [%month% %year%]",
     "Roblox Music IDs %MONTH% %YEAR%",
+    "Roblox Music IDs - %month% %year%",
     "Roblox Music IDs (January 2024) (February 2025)"
   ])("keeps one current date for %s", title => {
     const result = catalogIdTitle(title, october);
     expect(result).toBe("Roblox Music IDs (October 2026)");
     expect(catalogIdTitle(result, october)).toBe(result);
+  });
+
+  it.each([
+    "Example Game May 2025",
+    "Show Name - June 2024"
+  ])("preserves a bare month and year in the real name %s", title => {
+    const result = catalogIdTitle(title, october);
+    expect(result).toBe(`${title} (October 2026)`);
+    expect(catalogIdTitle(result, october)).toBe(result);
+    expect(catalogIdTitle(`${title} - Page 2 | Bloxodes`, october))
+      .toBe(`${title} (October 2026) - Page 2 | Bloxodes`);
   });
 
   it.each([

@@ -4,8 +4,9 @@ const monthYearFormatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC"
 });
 const monthNames = "January|February|March|April|May|June|July|August|September|October|November|December";
+const dateLabel = `(?:${monthNames}|%month%) (?:\\d{4}|%year%)`;
 const dateSuffix = new RegExp(
-  `\\s*(?:\\((?:${monthNames}) \\d{4}\\)|\\[(?:${monthNames}) \\d{4}\\]|(?:[-–—|]\\s*)?(?:${monthNames}) \\d{4})$`,
+  `\\s*(?:\\(${dateLabel}\\)|\\[${dateLabel}\\]|(?:[-–—|]\\s*)?%month%\\s+%year%)$`,
   "i"
 );
 
@@ -13,7 +14,7 @@ const dateSuffix = new RegExp(
 export function catalogIdTitle(title: string, now: Date = new Date()): string {
   const monthYear = monthYearFormatter.format(now);
   const month = new Intl.DateTimeFormat("en-US", { month: "long", timeZone: "UTC" }).format(now);
-  let base = title.trim().replace(/%month%/gi, month).replace(/%year%/gi, String(now.getUTCFullYear()));
+  let base = title.trim();
   let brand = "";
   let page = "";
 
@@ -39,5 +40,6 @@ export function catalogIdTitle(title: string, now: Date = new Date()): string {
     break;
   }
 
+  base = base.replace(/%month%/gi, month).replace(/%year%/gi, String(now.getUTCFullYear()));
   return `${base} (${monthYear})${page}${brand}`;
 }
