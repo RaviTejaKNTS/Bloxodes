@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { GameIdCard } from "../../GameIdCard";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
@@ -44,7 +45,7 @@ export function renderDecalGamesHub({ contentHtml }: { contentHtml: PageContentH
   const pageSchema = serializeJsonLd(webPageJsonLd({
     siteUrl: SITE_URL,
     slug: DECAL_GAMES_PATH.replace(/^\//, ""),
-    title,
+    title: catalogIdTitle(title),
     description,
     image: `${SITE_URL}/Bloxodes.png`,
     author: null,
@@ -61,7 +62,7 @@ export function renderDecalGamesHub({ contentHtml }: { contentHtml: PageContentH
           { label: "Roblox Decal IDs", href: BASE_PATH },
           { label: title, href: null }
         ]} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(title)}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--game-ids">
@@ -127,7 +128,7 @@ export function renderDecalGamePage({
   const pageSchema = serializeJsonLd(webPageJsonLd({
     siteUrl: SITE_URL,
     slug: path.replace(/^\//, ""),
-    title,
+    title: catalogIdTitle(title),
     description: game.description,
     image: decals[0]?.thumbnail_url || `${SITE_URL}/Bloxodes.png`,
     author: null,
@@ -152,7 +153,7 @@ export function renderDecalGamePage({
           { label: "Game Specific", href: DECAL_GAMES_PATH },
           { label: title, href: null }
         ]} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(title)}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space catalog-stream journey-content-stream journey-content-stream--decals">
@@ -182,7 +183,7 @@ export function renderDecalGamePage({
       {currentPage === 1 && contentHtml?.id ? <CommentsSection entityType="catalog" entityId={contentHtml.id} /> : null}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       {decals.length ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: buildDecalItemListSchema({
-        title,
+        title: catalogIdTitle(title),
         description: game.description,
         url: canonical,
         decals,

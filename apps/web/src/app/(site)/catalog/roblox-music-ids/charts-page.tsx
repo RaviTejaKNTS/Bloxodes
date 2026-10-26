@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
@@ -55,7 +56,7 @@ export function buildMusicChartsMetadata(pageNumber?: number): Metadata {
   const path = pageNumber && pageNumber > 1 ? `${BASE_PATH}/charts/page/${pageNumber}` : `${BASE_PATH}/charts`;
 
   return {
-    title,
+    title: catalogIdTitle(title),
     description: "Switch between weekly, monthly, and yearly Roblox Creator Store music charts.",
     robots: { index: false, follow: true },
     alternates: buildAlternates(path)
@@ -91,7 +92,7 @@ export async function MusicChartsPage({
   const period = periodLabel(range, latest);
   const canonicalPath = pageNumber > 1 ? `${BASE_PATH}/charts/page/${pageNumber}` : `${BASE_PATH}/charts`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}?range=${range}`;
-  const pageTitle = pageNumber > 1 ? `${config.title} - Page ${pageNumber}` : config.title;
+  const pageTitle = catalogIdTitle(pageNumber > 1 ? `${config.title} - Page ${pageNumber}` : config.title);
   const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -135,7 +136,7 @@ export async function MusicChartsPage({
       <header className={pageNumber > 1 ? "space-y-2" : "space-y-4"}>
         <MusicBreadcrumb items={breadcrumbNavItems} />
         <h1 className={pageNumber > 1 ? "text-3xl font-semibold text-foreground" : "text-4xl font-semibold leading-tight text-foreground md:text-5xl"}>
-          Roblox music ID charts
+          {catalogIdTitle("Roblox music ID charts")}
         </h1>
         {pageNumber === 1 ? (
           <p className="max-w-2xl text-base text-muted md:text-lg">

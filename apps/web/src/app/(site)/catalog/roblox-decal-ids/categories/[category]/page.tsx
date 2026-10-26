@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
@@ -27,13 +28,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category: categorySlug } = await params;
   const category = await loadDecalCategoryBySlug(categorySlug);
   if (!category) {
-    return { title: `Roblox Decal IDs | ${SITE_NAME}` };
+    return { title: catalogIdTitle(`Roblox Decal IDs | ${SITE_NAME}`) };
   }
-  const title = `${category.label} Roblox Decal IDs [Image Codes]`;
+  const title = catalogIdTitle(`${category.label} Roblox Decal IDs [Image Codes]`);
   const description = buildCategorySeoDescription(category.label);
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCategoryPath(category.slug)}`;
   return {
-    title: `${title} | ${SITE_NAME}`,
+    title: catalogIdTitle(`${title} | ${SITE_NAME}`),
     description,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical),

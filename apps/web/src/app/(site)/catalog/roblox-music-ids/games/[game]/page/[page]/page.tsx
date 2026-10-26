@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MUSIC_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
@@ -20,10 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const game = getMusicGameIdPage(values.game);
   const page = Number.parseInt(values.page, 10);
   if (!game || !Number.isFinite(page) || page < 2) return {};
-  const title = `${game.title} - Page ${page}`;
+  const title = catalogIdTitle(`${game.title} - Page ${page}`);
   const canonical = `${SITE_URL.replace(/\/$/, "")}${MUSIC_GAMES_PATH}/${game.slug}/page/${page}`;
   return {
-    title: `${title} | ${SITE_NAME}`,
+    title: catalogIdTitle(`${title} | ${SITE_NAME}`),
     description: game.description,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical)

@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCuratedPath()}/page/${safePageNumber}`;
   return {
-    title: `${TITLE} - Page ${safePageNumber} | ${SITE_NAME}`,
+    title: catalogIdTitle(`${TITLE} - Page ${safePageNumber} | ${SITE_NAME}`),
     description: DESCRIPTION,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical)

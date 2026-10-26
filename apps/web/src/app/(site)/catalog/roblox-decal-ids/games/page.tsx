@@ -1,7 +1,8 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
-import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { buildDecalGameContentHtml, DECAL_GAMES_PATH, renderDecalGamesHub } from "./page-data";
 
 export const revalidate = 86400;
@@ -11,7 +12,7 @@ const FALLBACK_DESCRIPTION = "Choose a Roblox game and find image IDs for crossh
 
 export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes([CATALOG_CODE]);
-  const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? `${FALLBACK_TITLE} | ${SITE_NAME}`;
+  const title = catalogIdTitle((catalog?.seo_title?.trim() || null) ?? catalog?.title ?? `${FALLBACK_TITLE} | ${SITE_NAME}`);
   const description = catalog?.meta_description ?? FALLBACK_DESCRIPTION;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${DECAL_GAMES_PATH}`;
   return {

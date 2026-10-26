@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
@@ -27,7 +28,7 @@ export function buildMusicChartMetadata(key: MusicChartKey, pageNumber?: number)
   const path = pageNumber && pageNumber > 1 ? `${config.path}/page/${pageNumber}` : config.path;
 
   return {
-    title,
+    title: catalogIdTitle(title),
     description: config.description,
     robots: { index: isIndexableTrendingPage, follow: true },
     alternates: buildAlternates(path)
@@ -55,7 +56,7 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
   const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
   const canonicalPath = pageNumber > 1 ? `${config.path}/page/${pageNumber}` : config.path;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = pageNumber > 1 ? `${config.title} - Page ${pageNumber}` : config.title;
+  const pageTitle = catalogIdTitle(pageNumber > 1 ? `${config.title} - Page ${pageNumber}` : config.title);
   const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -99,7 +100,7 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
       <header className={pageNumber > 1 ? "space-y-2" : "space-y-4"}>
         <MusicBreadcrumb items={breadcrumbNavItems} />
         <h1 className={pageNumber > 1 ? "text-3xl font-semibold text-foreground" : "text-4xl font-semibold leading-tight text-foreground md:text-5xl"}>
-          {config.heading}
+          {catalogIdTitle(config.heading)}
         </h1>
         {pageNumber === 1 ? (
           <p className="max-w-2xl text-base text-muted md:text-lg">{config.description}</p>
