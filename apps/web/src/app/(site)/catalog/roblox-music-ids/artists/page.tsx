@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
@@ -13,19 +14,21 @@ import {
 
 export const revalidate = 21600;
 
-export const metadata: Metadata = {
-  title: `Music ID Artists | ${SITE_NAME}`,
-  description: "Browse Roblox music IDs organized by artist.",
-  robots: { index: false, follow: true },
-  alternates: buildAlternates("/catalog/roblox-music-ids/artists")
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: catalogIdTitle(`Music ID Artists | ${SITE_NAME}`),
+    description: "Browse Roblox music IDs organized by artist.",
+    robots: { index: false, follow: true },
+    alternates: buildAlternates("/catalog/roblox-music-ids/artists")
+  };
+}
 
 export default async function MusicIdArtistsPage() {
   const { options: artists, total, totalPages } = await loadPagedArtistOptions(1);
   const description = "Browse Roblox music IDs organized by artist.";
   const canonicalPath = `${BASE_PATH}/artists`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = "Roblox music ID artists";
+  const pageTitle = catalogIdTitle("Roblox music ID artists");
   const updatedIso = null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -68,7 +71,7 @@ export default async function MusicIdArtistsPage() {
     <div className="space-y-10">
       <header className="space-y-4">
         <MusicBreadcrumb items={breadcrumbNavItems} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Roblox music ID artists</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle("Roblox music ID artists")}</h1>
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Explore every artist name in our catalog and pull their Roblox music IDs.
         </p>

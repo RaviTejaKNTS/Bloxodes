@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IndexPageStats } from "@/components/IndexPageStats";
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageNumber = Number(page);
   if (!Number.isFinite(pageNumber) || pageNumber < 1) return {};
   return {
-    title: `Music ID Genres - Page ${pageNumber} | ${SITE_NAME}`,
+    title: catalogIdTitle(`Music ID Genres - Page ${pageNumber} | ${SITE_NAME}`),
     robots: { index: false, follow: true },
     alternates: buildAlternates(`${BASE_PATH}/genres/page/${pageNumber}`)
   };
@@ -50,7 +51,7 @@ export default async function MusicIdGenresPaginatedPage({ params }: PageProps) 
   const description = "Browse Roblox music IDs organized by genre.";
   const canonicalPath = `${BASE_PATH}/genres/page/${pageNumber}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = `Roblox music ID genres - Page ${pageNumber}`;
+  const pageTitle = catalogIdTitle(`Roblox music ID genres - Page ${pageNumber}`);
   const updatedIso = null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -95,7 +96,7 @@ export default async function MusicIdGenresPaginatedPage({ params }: PageProps) 
     <div className="space-y-10">
       <header className="space-y-2">
         <MusicBreadcrumb items={breadcrumbNavItems} />
-        <h1 className="text-3xl font-semibold text-foreground">Roblox music ID genres</h1>
+        <h1 className="text-3xl font-semibold text-foreground">{catalogIdTitle("Roblox music ID genres")}</h1>
         <IndexPageStats
           items={[
             { label: `${total.toLocaleString("en-US")} genres tracked`, icon: "music", tone: "accent" },

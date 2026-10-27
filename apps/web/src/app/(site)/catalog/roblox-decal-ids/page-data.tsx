@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { applyDecalSort } from "@/lib/catalog-id-sorts";
 import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
 import Link from "next/link";
@@ -457,7 +458,7 @@ export function renderRobloxDecalCategoriesPage({
     webPageJsonLd({
       siteUrl: SITE_URL,
       slug: canonicalPath.replace(/^\//, ""),
-      title: baseTitle,
+      title: catalogIdTitle(baseTitle),
       description,
       image,
       author: null
@@ -468,7 +469,7 @@ export function renderRobloxDecalCategoriesPage({
     <div className="catalog-surface space-y-10">
       <header className="space-y-4">
         <DecalBreadcrumb items={breadcrumbNavItems} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(baseTitle)}</h1>
         <p className="max-w-3xl text-base leading-7 text-muted">{description}</p>
       </header>
 
@@ -554,7 +555,7 @@ export function buildDecalItemListSchema({
   return JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: title,
+    name: catalogIdTitle(title),
     description,
     url,
     numberOfItems: total,
@@ -607,7 +608,7 @@ export function renderRobloxDecalIdsPage({
         BASE_PATH;
   const canonicalPath = currentPage > 1 ? `${basePath}/page/${currentPage}` : basePath;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
+  const pageTitle = catalogIdTitle(currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle);
   const description = pageDescription ?? CATALOG_DESCRIPTION;
   const image = `${SITE_URL}/Bloxodes.png`;
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : undefined;
@@ -684,14 +685,14 @@ export function renderRobloxDecalIdsPage({
       {showHero ? (
         <header className="space-y-4">
           <DecalBreadcrumb items={breadcrumbNavItems} />
-          <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
+          <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(baseTitle)}</h1>
           {pageDescription ? <p className="max-w-3xl text-base leading-7 text-muted">{pageDescription}</p> : null}
           <UpdatedTimestamp value={updatedDate} />
         </header>
       ) : (
         <header className="space-y-2">
           <DecalBreadcrumb items={breadcrumbNavItems} />
-          <h1 className="text-3xl font-semibold text-foreground">{baseTitle}</h1>
+          <h1 className="text-3xl font-semibold text-foreground">{catalogIdTitle(baseTitle)}</h1>
           <UpdatedTimestamp value={updatedDate} />
           <p className="text-sm text-muted">
             {refreshedLabel ? `Fresh data ${refreshedLabel} · ` : ""}Page {currentPage} of {totalPages}

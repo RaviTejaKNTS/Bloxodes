@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -17,14 +18,14 @@ const DESCRIPTION =
 export async function generateMetadata(): Promise<Metadata> {
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCategoriesPath()}`;
   return {
-    title: `${SEO_TITLE} | ${SITE_NAME}`,
+    title: catalogIdTitle(`${SEO_TITLE} | ${SITE_NAME}`),
     description: DESCRIPTION,
     robots: { index: false, follow: true },
     alternates: buildAlternates(canonical),
     openGraph: {
       type: "website",
       url: canonical,
-      title: SEO_TITLE,
+      title: catalogIdTitle(SEO_TITLE),
       description: DESCRIPTION,
       siteName: SITE_NAME,
       images: [`${SITE_URL}/Bloxodes.png`]

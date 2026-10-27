@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DECAL_IDS_PAGE_SIZE } from "@/lib/catalog-page-sizes";
@@ -30,13 +31,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const safePageNumber = Number(page);
     if (safePageNumber < 2 || !isCatalogPageRangeValid(safePageNumber, DECAL_IDS_PAGE_SIZE)) notFound();
 
-    const title = `${DECAL_SEO_TITLE} - Page ${safePageNumber}`;
+    const title = catalogIdTitle(`${DECAL_SEO_TITLE} - Page ${safePageNumber}`);
     const description = CATALOG_DESCRIPTION;
     const image = FALLBACK_IMAGE;
     const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}/page/${safePageNumber}`;
 
     return {
-        title: `${title} | ${SITE_NAME}`,
+        title: catalogIdTitle(`${title} | ${SITE_NAME}`),
         description,
         // Paginated pages: noindex, follow
         robots: {

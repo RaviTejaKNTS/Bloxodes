@@ -1,6 +1,7 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
-import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
+import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import {
   buildRobloxMusicCatalogContentHtml,
@@ -20,13 +21,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
   if (!catalog) {
     return {
-      title: `Roblox Music IDs | ${SITE_NAME}`,
+      title: catalogIdTitle(`Roblox Music IDs | ${SITE_NAME}`),
       description: FALLBACK_DESCRIPTION,
       alternates: buildAlternates(CANONICAL)
     };
   }
 
-  const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Music IDs | ${SITE_NAME}`;
+  const title = catalogIdTitle((catalog.seo_title?.trim() || null) ?? catalog.title ?? `Roblox Music IDs | ${SITE_NAME}`);
   const description = catalog.meta_description?.trim() && catalog.meta_description.trim() !== CATALOG_DESCRIPTION
     ? catalog.meta_description.trim()
     : FALLBACK_DESCRIPTION;

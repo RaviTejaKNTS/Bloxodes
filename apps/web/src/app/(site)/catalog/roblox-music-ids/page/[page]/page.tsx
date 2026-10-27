@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { page } = await params;
   const pageNumber = Number(page);
   if (!Number.isFinite(pageNumber) || pageNumber < 1) return {};
-  const title = pageNumber > 1 ? `Roblox Music IDs - Page ${pageNumber}` : "Roblox Music IDs";
+  const title = catalogIdTitle(pageNumber > 1 ? `Roblox Music IDs - Page ${pageNumber}` : "Roblox Music IDs");
   return {
     title,
     description: CATALOG_DESCRIPTION,

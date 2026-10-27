@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
@@ -21,9 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     getCatalogPageContentByCodes([musicGameCatalogCode(game.slug)]),
     loadGameMusicIdsPageData(1, game.slug, game.datasetPreset)
   ]);
-  const title = pageData.total > 0
+  const title = catalogIdTitle(pageData.total > 0
     ? `${game.title} [${pageData.total.toLocaleString("en-US")} ${game.seoCountLabel}]`
-    : game.title;
+    : game.title);
   const description = catalog?.meta_description ?? game.description;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${MUSIC_GAMES_PATH}/${game.slug}`;
   return {

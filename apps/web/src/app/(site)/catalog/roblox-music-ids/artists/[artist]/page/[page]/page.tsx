@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageNumber = Number(page);
   if (!Number.isFinite(pageNumber) || pageNumber < 1) return {};
   return {
-    title: `Artist Music IDs - Page ${pageNumber} | ${SITE_NAME}`,
+    title: catalogIdTitle(`Artist Music IDs - Page ${pageNumber} | ${SITE_NAME}`),
     robots: { index: false, follow: true },
     alternates: buildAlternates(`${BASE_PATH}/artists/${artist}/page/${pageNumber}`)
   };
@@ -62,7 +63,7 @@ export default async function ArtistMusicIdsPaginatedPage({ params }: PageProps)
   const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
   const canonicalPath = `${BASE_PATH}/artists/${artist.slug}/page/${pageNumber}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = `${artist.label} Roblox music IDs - Page ${pageNumber}`;
+  const pageTitle = catalogIdTitle(`${artist.label} Roblox music IDs - Page ${pageNumber}`);
   const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -107,7 +108,7 @@ export default async function ArtistMusicIdsPaginatedPage({ params }: PageProps)
     <div className="space-y-10">
       <header className="space-y-2">
         <MusicBreadcrumb items={breadcrumbNavItems} />
-        <h1 className="text-3xl font-semibold text-foreground">{artist.label} Roblox music IDs</h1>
+        <h1 className="text-3xl font-semibold text-foreground">{catalogIdTitle(`${artist.label} Roblox music IDs`)}</h1>
         <IndexPageStats
           items={[
             { label: `${total.toLocaleString("en-US")} songs`, icon: "music", tone: "accent" },
