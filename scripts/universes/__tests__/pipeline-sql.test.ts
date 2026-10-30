@@ -36,7 +36,11 @@ const universeSchema = `
 
 function runFixture(name: string, schema: string): void {
   const databaseUrl = process.env.CI_TRANSACTION_DATABASE_URL!;
-  assert.ok(["localhost", "127.0.0.1"].includes(new URL(databaseUrl).hostname));
+  // A query string (hostaddr=, host=) or PG* env vars could reroute psql away
+  // from the checked host, so allow neither.
+  const url = new URL(databaseUrl);
+  assert.ok(["localhost", "127.0.0.1"].includes(url.hostname) && url.search === "");
+  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith("PG")));
   const fixture = readFileSync(new URL(`../../../supabase/tests/${name}.sql`, import.meta.url), "utf8");
   // These standalone psql fixtures own BEGIN/ROLLBACK. Use a savepoint so their
   // rollback cannot leave the harness's schema/roles committed in the service.
@@ -58,7 +62,7 @@ function runFixture(name: string, schema: string): void {
       ${transactionalFixture}
       rollback;
     `,
-    encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], timeout: 30_000
+    encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], timeout: 30_000, env
   });
 }
 
