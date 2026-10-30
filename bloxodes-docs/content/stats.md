@@ -31,6 +31,8 @@ rank snapshots -> current read indexes
 
 Daily rank writes are deliberately not scheduled. Commands are `stats:refresh:new|hot|warm|cold` (`update-universe-hourly-stats.ts`), `discover:universes:priority`, `stats:rank:hourly`, `stats:index:refresh`, `stats:rollup-daily`, `stats:platform:refresh`, `stats:prune-hourly` and `stats:audit`. Every run is recorded in `stats_job_runs`.
 
+WARM runs every 6 hours, and a successful sample schedules the next one 12 hours later. That due time lands just after a cron run starts, so `claim_roblox_universe_stats_rows` also claims healthy WARM rows (0 attempts, no error, not unavailable) that are due within the next hour. Without that, WARM games refreshed about every 18 hours. Retries, leases and the 500-row claim cap are unchanged, and the other tiers claim only rows that are due now.
+
 **Tables:** `roblox_universes`, `roblox_universe_stats_hourly` / `_daily`, `roblox_universe_rank_snapshots*`, `roblox_platform_stats_hourly` / `_daily`, `stats_visit_share_summaries`, `stats_game_current_index` (101,029 games on 2026-10-19), genre, creator and riser indexes, `roblox_universe_update_events`.
 
 **Single-game import:** `enrich-roblox-universes.ts` also exports `previewRobloxUniverse` (fetch and map, no write) and `importRobloxUniverse`, which `content:publish` uses to add one missing `roblox_universes` row before publishing a wiki. Both reuse the enrichment fetcher and mapper; the import never overwrites an existing row.
