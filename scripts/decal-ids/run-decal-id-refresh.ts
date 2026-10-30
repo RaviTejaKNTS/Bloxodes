@@ -6,6 +6,9 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawn } from "node:child_process";
+import { supabaseAdmin } from "@/lib/supabase-admin";
+import { startStatsJobRun, finishStatsJobRun } from "../shared/stats-job-run";
+import { decalDiscoveryHealth, parseDecalStepCounts } from "../shared/decal-discovery";
 
 type Step = {
   name: string;
@@ -50,7 +53,7 @@ async function releaseLock() {
 }
 
 function runStep(step: Step) {
-  return new Promise<void>((resolve, reject) => {
+  return new Promise<Record<string, number>>((resolve, reject) => {
     const startedAt = Date.now();
     console.log(`\n==> ${step.name}`);
     const child = spawn(NODE_BIN, [TSX_CLI, step.script], {
@@ -59,15 +62,20 @@ function runStep(step: Step) {
         ...process.env,
         ...(step.env ?? {})
       },
-      stdio: "inherit"
+      stdio: ["inherit", "pipe", "inherit"]
     });
 
+    let output = "";
+    child.stdout!.on("data", (chunk: Buffer) => {
+      process.stdout.write(chunk);
+      output = (output + chunk.toString()).slice(-8192);
+    });
     child.on("error", reject);
-    child.on("exit", (code, signal) => {
+    child.on("close", (code, signal) => {
       const seconds = ((Date.now() - startedAt) / 1000).toFixed(1);
       if (code === 0) {
         console.log(`<== ${step.name} finished in ${seconds}s`);
-        resolve();
+        resolve(parseDecalStepCounts(output));
         return;
       }
       reject(new Error(`${step.name} failed with ${signal ? `signal ${signal}` : `exit code ${code}`}`));
@@ -92,17 +100,45 @@ async function main() {
     throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE must be set.");
   }
 
-  await acquireLock();
-  const startedAt = Date.now();
-
+  const run = await startStatsJobRun({ jobName: "decal_ids_refresh" });
+  const stepResults: Array<{ name: string; status: string; duration_ms: number } & Record<string, unknown>> = [];
+  let locked = false;
   try {
+    await acquireLock();
+    locked = true;
     console.log(`Starting decal ID refresh with ${steps.length} step(s). Lock: ${LOCK_DIR}`);
     for (const step of steps) {
-      await runStep(step);
+      const startedAt = Date.now();
+      try {
+        const counts = await runStep(step);
+        stepResults.push({ name: step.name, status: "success", ...counts, duration_ms: Date.now() - startedAt });
+      } catch (error) {
+        stepResults.push({ name: step.name, status: "failed", duration_ms: Date.now() - startedAt });
+        throw error;
+      }
     }
-    console.log(`\nDecal ID refresh finished in ${((Date.now() - startedAt) / 1000).toFixed(1)}s.`);
+    const { data, error } = await supabaseAdmin().from("roblox_decal_ids")
+      .select("first_seen_at").order("first_seen_at", { ascending: false }).limit(1);
+    if (error) throw new Error(`Failed to read decal discovery health: ${error.message}`);
+    const latestSeenAt = data?.[0]?.first_seen_at ?? null;
+    const healthError = decalDiscoveryHealth(latestSeenAt);
+    await finishStatsJobRun(run, {
+      status: healthError ? "partial" : "success",
+      rowsClaimed: stepResults.reduce((sum, step) => sum + Number(step.candidates ?? 0), 0),
+      rowsSucceeded: stepResults.reduce((sum, step) => sum + Number(step.inserted ?? 0), 0),
+      error: healthError,
+      metadata: { steps: stepResults, latest_first_seen_at: latestSeenAt, discovery_stall_days: 7 }
+    });
+    if (healthError) {
+      console.error(healthError);
+      process.exitCode = 1;
+    }
+    console.log(`Decal ID refresh finished. Outcome: ${healthError ? "partial" : "success"}.`);
+  } catch (error) {
+    await finishStatsJobRun(run, { status: "failed", error, metadata: { steps: stepResults } });
+    throw error;
   } finally {
-    await releaseLock();
+    if (locked) await releaseLock();
   }
 }
 
