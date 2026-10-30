@@ -1,6 +1,6 @@
 # Quizzes, checklists, tools and events data
 
-Last verified: 2026-10-19
+Last verified: 2026-10-30
 
 Roblox engagement pages. Quizzes, checklists and tools are made by hand when the owner asks; none have a schedule. Events are collected data only. The non-Roblox versions are in [franchise games](franchise.md).
 
@@ -12,7 +12,7 @@ Every page type follows the same path: runner skill → research → research re
 - **Data:** `quiz_pages.quiz_data` (JSONB) plus page copy. Account history in `user_quiz_progress`.
 - **Runtime:** database only. Each attempt draws five easy, five medium and five hard questions (`apps/web/src/lib/quizzes.ts`).
 - **Publish:** `import:content-final` (`scripts/content/import-content-final.ts`), the `content-final` publisher.
-- **Live:** 13 published quizzes, last changed 2026-08-29.
+- **Live:** 44 published quizzes, last changed 2026-10-30.
 
 ## Standalone checklists
 
@@ -25,7 +25,8 @@ Every page type follows the same path: runner skill → research → research re
 
 This applies to Roblox and non-Roblox checklists.
 
-- **One job:** a checklist is a source-verified 100% completion list for one named game, edition or mode. Verify every required activity, threshold, exclusion and alternative path first. If sources don't prove the full scope, don't make the page. Beginner lists, prep lists and routines need an explicit owner exception, recorded in the plan and brief.
+- **Only where it makes sense:** make a checklist only for a game with enough to track (items, quests, badges, areas) for a board on the scale of the live ones, which run 82 to 543 tasks. Otherwise the game gets a quiz and no checklist. Never shrink the goal to one quest, match or unlock to force a page.
+- **One job:** a checklist covers one named game, edition or mode, with everything a player would track there. It doesn't have to prove 100% completion, because games update often, but verify every task, threshold, exclusion and alternative path before writing. Beginner lists, prep lists, routines and single-goal boards aren't checklists.
 - **One page per game:** check published pages and drafts first, and reuse the existing checklist. No extra pages per edition, mode or milestone without an owner exception.
 - **Layout:** each section is a heading with its done/total count, and tasks are checkbox rows in groups of up to 12 so ads can sit between groups.
 - **Progress:** the percentage counts checked tasks. It doesn't reproduce a game's weighted completion meter, and `is_required` doesn't exclude anything.
