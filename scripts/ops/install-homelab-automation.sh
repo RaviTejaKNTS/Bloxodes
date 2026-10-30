@@ -20,6 +20,9 @@ TIMERS=(bloxodes-article-discovery.timer bloxodes-site-health.timer)
 # Keep these names only for removal and failure rollback, never installation.
 RETIRED=(bloxodes-article-publication.timer bloxodes-article-writer.service bloxodes-article-publication.service bloxodes-article-audit.service)
 WRITER_DROPIN=/etc/systemd/system/bloxodes-article-writer.service.d
+# /run/systemd/system can be absent; find fails on a missing path under set -e.
+UNIT_DIRS=(/etc/systemd/system)
+if [[ -d /run/systemd/system ]]; then UNIT_DIRS+=(/run/systemd/system); fi
 idle() {
   local service state pid
   for service in "${SERVICES[@]}"; do
@@ -44,7 +47,7 @@ fi
 for unit in "${RETIRED[@]}"; do
   while IFS= read -r -d '' link; do
     cp -a --parents "$link" "$BACKUP/enablement/"
-  done < <(find /etc/systemd/system /run/systemd/system -mindepth 2 -type l -name "$unit" -print0)
+  done < <(find "${UNIT_DIRS[@]}" -mindepth 2 -type l -name "$unit" -print0)
 done
 RETIRED_ACTIVE=()
 for unit in "${RETIRED[@]}"; do
@@ -76,7 +79,7 @@ finish() {
       cp -a "$BACKUP/writer-dropin" "$WRITER_DROPIN"
     fi
     for unit in "${RETIRED[@]}"; do
-      find /etc/systemd/system /run/systemd/system -mindepth 2 -type l -name "$unit" -delete
+      find "${UNIT_DIRS[@]}" -mindepth 2 -type l -name "$unit" -delete
     done
     while IFS= read -r -d '' link; do
       target="${link#"$BACKUP/enablement"}"
@@ -115,7 +118,7 @@ for unit in "${RETIRED[@]}"; do
     # Static units have no enablement links; disable also handles enabled units.
     systemctl disable "$unit"
   fi
-  find /etc/systemd/system /run/systemd/system -mindepth 2 -type l -name "$unit" -delete
+  find "${UNIT_DIRS[@]}" -mindepth 2 -type l -name "$unit" -delete
   rm -f "/etc/systemd/system/$unit"
 done
 rm -rf "$WRITER_DROPIN"

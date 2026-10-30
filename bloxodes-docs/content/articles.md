@@ -22,13 +22,14 @@ Four times a day (00:00, 06:00, 12:00, 18:00 IST) the homelab runs:
 
 1. **Discover:** `articles:discover` (`scripts/articles/discover-article-topics.ts`) collects dated Roblox editorial leads.
 2. **Curate:** `articles:curate` (`curate-article-topics.ts`) uses Groq to accept `guide`, `tier_list` and `explainer` topics and reject overlaps with existing pages.
-3. **Write (paused):** `articles:writer:batch -- --apply --limit 6` (`run-homelab-article-batch.ts`) used to take up to six curated topics through the stage pipeline below. Discovery no longer starts it; see [schedules](../automation/schedules.md#homelab-systemd).
-4. **Publish:** every 15 minutes `articles:publication:drain -- --apply` sends finished homelab articles to GitHub for publication. The drain is per checkout: it only sees intents in its own `tmp/article-publication/`.
-5. **Audit:** `articles:automation:audit` reports blocked jobs and schedule problems.
+That's all the homelab does for articles. The Content Factory writes and publishes them (above). Its `bin/article publish` runs `articles:publication:drain` from the MacBook Pro checkout, and the drain only sees intents in that checkout's `tmp/article-publication/`. The homelab writer, publication and audit units were removed on 2026-10-30. `articles:automation:audit` still works by hand.
 
-Queue and curation rows live in managed development (`article_discovery_candidates`, `article_curation_runs`, `article_generation_queue`). Run state lives in the runtime's `tmp/article-pipeline/` and `tmp/article-publication/`.
+Queue and curation rows live in managed development (`article_discovery_candidates`, `article_curation_runs`, `article_generation_queue`).
 
 ### Stages
+
+This code-controlled pipeline still works for manual runs (`articles:writer:local`). Nothing schedules it.
+
 
 `scripts/articles/article-pipeline.ts` runs each topic through:
 
@@ -58,7 +59,7 @@ Neither publishes by itself. The next normal drain does.
 
 ### Runtime releases
 
-The homelab runs a packaged release at `/srv/data/bloxodes-automation-runtime/current`, not the repo checkout. Merging code doesn't change it. To ship article code to the homelab: run `automation-runtime.yml` on GitHub to package dependencies, then the reviewed prepare and install scripts select the new release. Don't touch the installed env, timers or running jobs while doing it.
+The homelab runs discovery and site health from a packaged release at `/srv/data/bloxodes-automation-runtime/current`, not the repo checkout. Merging code doesn't change it. To ship code there: run `automation-runtime.yml` on GitHub to package dependencies, then the reviewed prepare and install scripts select the new release. Don't touch the installed env, timers or running jobs while doing it.
 
 ## Manual articles
 
@@ -74,7 +75,7 @@ Publish with `bloxodes-release-e2e`.
 
 - Voice: `bloxodes-voice`.
 - Article rules: `.agents/skills/roblox/articles/bloxodes-article-writing/references/editorial-standard.md`.
-- `scripts/shared/article-editorial-standard.ts` feeds both into automated prompts, so the homelab runtime needs those skill files.
+- `scripts/shared/article-editorial-standard.ts` feeds both into automated prompts, so any checkout that runs the code pipeline needs those skill files.
 
 Before a finished article is frozen for publication, the drain re-checks its copy. Bad copy stays blocked and is reported once per final hash, without spending a publication attempt.
 
@@ -86,4 +87,4 @@ Production `articles` (909 rows, 883 published on 2026-10-19), plus authors and 
 
 ## Known issues
 
-- The audit service exits with status 1 because some jobs are blocked at editorial, research or image stages. That's a "needs attention" signal, not a broken schedule.
+- Queue row `223c7ae8-9eda-45f0-ab66-d04995fb3e4f` in `article_generation_queue` is stuck in `processing` from the retired homelab writer. Nothing picks it up.
