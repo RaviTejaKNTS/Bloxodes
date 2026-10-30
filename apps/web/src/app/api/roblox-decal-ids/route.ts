@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { applyDecalSort } from "@/lib/catalog-id-sorts";
 import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
 import { NextResponse } from "next/server";
@@ -95,7 +96,7 @@ async function loadResponse(request: Request) {
   }
 
   if (search) {
-    const pattern = buildLoosePattern(search);
+    const pattern = quotePostgrestPattern(buildLoosePattern(search));
     const orParts = [
       `name.ilike.${pattern}`,
       `description.ilike.${pattern}`,

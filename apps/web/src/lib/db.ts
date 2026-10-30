@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -1505,7 +1506,7 @@ function applyFreeItemsFilters(query: any, filters: FreeItemsFilters = {}) {
 
   const searchTerm = (filters.search ?? "").trim();
   if (searchTerm) {
-    const pattern = buildFreeItemsSearchPattern(searchTerm);
+    const pattern = quotePostgrestPattern(buildFreeItemsSearchPattern(searchTerm));
     const orParts = [
       `name.ilike.${pattern}`,
       `description.ilike.${pattern}`,
@@ -1774,7 +1775,7 @@ export async function getFreeItemsCount(filters: FreeItemsFilters = {}): Promise
 
       const searchTerm = (filters.search ?? "").trim();
       if (searchTerm) {
-        const pattern = buildFreeItemsSearchPattern(searchTerm);
+        const pattern = quotePostgrestPattern(buildFreeItemsSearchPattern(searchTerm));
         const orParts = [
           `name.ilike.${pattern}`,
           `description.ilike.${pattern}`,

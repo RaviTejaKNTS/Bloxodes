@@ -7,11 +7,14 @@ vi.mock("@/lib/supabase", () => ({ supabaseAdmin: () => ({ from: mocks.from, rpc
 
 import { listStatsGames } from "@/lib/stats";
 
-function query(result: { data: unknown; error: unknown; count?: number | null }) {
+function query(result: { data: unknown; error: unknown; count?: number | null }, onOr?: (filter: string) => void) {
   const builder: object = new Proxy({}, {
     get: (_target, key) => key === "then"
       ? (resolve: (value: typeof result) => unknown) => Promise.resolve(result).then(resolve)
-      : () => builder
+      : (...args: unknown[]) => {
+        if (key === "or") onOr?.(args[0] as string);
+        return builder;
+      }
   });
   return builder;
 }
@@ -49,5 +52,23 @@ describe("stats games pagination", () => {
     );
     vi.spyOn(console, "warn").mockImplementation(() => undefined);
     await expect(listStatsGames({ page: 2 })).rejects.toMatchObject({ code: "57014" });
+  });
+});
+
+describe("stats games search quoting", () => {
+  it.each([false, true])("protects scanner text in the index and fallback (fallback=%s)", async (fallback) => {
+    const filters: string[] = [];
+    let indexCalls = 0;
+    mocks.from.mockImplementation((table: string) => query(
+      table === "stats_game_current_index" && fallback
+        ? { data: null, error: { code: "42P01", message: "missing index" } }
+        : { data: table === "stats_game_current_index" && ++indexCalls > 1 ? [{ universe_id: 1 }] : [], error: null, count: 0 },
+      (filter) => filters.push(filter)
+    ));
+    const data = await listStatsGames({ q: "1' UNION ALL SELECT (1,2)-- fd4nou" });
+    expect(data.games).toEqual([]);
+    const quoted = '"%1\' UNION ALL SELECT (1,2)-- fd4nou%"';
+    const expected = `name.ilike.${quoted},display_name.ilike.${quoted},creator_name.ilike.${quoted}`;
+    expect(filters).toEqual(fallback ? [expected, expected] : [expected]);
   });
 });

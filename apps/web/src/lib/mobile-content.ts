@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import fs from "node:fs/promises";
 import {
   getArticleBySlug,
@@ -1170,7 +1171,7 @@ async function loadMusicCatalogSections(searchParams?: URLSearchParams): Promise
     .gt("duration_seconds", 0);
 
   if (query) {
-    const pattern = `%${query.replace(/[%_]/g, " ").trim().replace(/[^a-z0-9]+/gi, "%")}%`;
+    const pattern = quotePostgrestPattern(`%${query.replace(/[%_]/g, " ").trim().replace(/[^a-z0-9]+/gi, "%")}%`);
     const orParts = [`title.ilike.${pattern}`, `artist.ilike.${pattern}`, `album.ilike.${pattern}`, `genre.ilike.${pattern}`];
     if (/^\d+$/.test(query)) {
       orParts.unshift(`asset_id.eq.${query}`);
@@ -1256,7 +1257,7 @@ async function loadDecalCatalogSections(searchParams?: URLSearchParams): Promise
     .eq("thumbnail_ready", true);
 
   if (query) {
-    const pattern = `%${query.replace(/[%_]/g, " ").replace(/[^a-z0-9]+/gi, "%").replace(/%{2,}/g, "%")}%`;
+    const pattern = quotePostgrestPattern(`%${query.replace(/[%_]/g, " ").replace(/[^a-z0-9]+/gi, "%").replace(/%{2,}/g, "%")}%`);
     const orParts = [`name.ilike.${pattern}`, `description.ilike.${pattern}`, `creator_name.ilike.${pattern}`];
     if (/^\d+$/.test(query)) {
       orParts.unshift(`asset_id.eq.${query}`, `texture_id.eq.${query}`);

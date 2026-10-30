@@ -19,12 +19,15 @@ vi.mock("@/lib/page-content", () => ({ buildPageContentHtml: vi.fn(), renderPage
 vi.mock("@/app/(site)/catalog/roblox-music-ids/MusicIdsBrowser", () => ({ MusicIdsBrowser: () => null }));
 vi.mock("@/app/(site)/catalog/roblox-decal-ids/DecalIdsBrowser", () => ({ DecalIdsBrowser: () => null }));
 
-function mockQuery(result: { data: unknown; count?: number | null; error: unknown }, reject = false) {
+function mockQuery(result: { data: unknown; count?: number | null; error: unknown }, reject = false, onOr?: (filter: string) => void) {
   const query: object = new Proxy({}, {
     get: (_target, key) => key === "then"
       ? (resolve: (value: typeof result) => unknown, onReject: (reason: unknown) => unknown) =>
         (reject ? Promise.reject(result.error) : Promise.resolve(result)).then(resolve, onReject)
-      : () => query
+      : (...args: unknown[]) => {
+        if (key === "or") onOr?.(args[0] as string);
+        return query;
+      }
   });
   const from = vi.fn(() => query);
   mocks.admin.mockReturnValue({ from });
@@ -271,5 +274,22 @@ describe.each([
     const filtered = await get(request("?q=missing"));
     expect(filtered.status).toBe(200);
     expect(await filtered.json()).toMatchObject({ ok: true, total: 0 });
+  });
+});
+
+describe("catalog search logic-tree values", () => {
+  it.each([
+    { name: "music", get: musicApi, fields: ["title", "artist", "album", "genre"], ids: ["asset_id"] },
+    { name: "decals", get: decalApi, fields: ["name", "description", "creator_name"], ids: ["asset_id", "texture_id"] }
+  ])("$name keeps loose matching and numeric shortcuts", async ({ get, fields, ids }) => {
+    for (const [input, pattern] of [["red,blue (test)", "%red%blue%test%%"], ["123", "%123%"]]) {
+      const filters: string[] = [];
+      mockQuery({ data: [], count: 0, error: null }, false, (filter) => filters.push(filter));
+      const response = await get(new Request(`https://bloxodes.com/api/catalog?q=${encodeURIComponent(input)}`));
+      expect(response.status).toBe(200);
+      const expected = fields.map((field) => `${field}.ilike."${pattern}"`);
+      if (input === "123") expected.unshift(...ids.map((field) => `${field}.eq.123`));
+      expect(filters).toEqual([expected.join(",")]);
+    }
   });
 });
