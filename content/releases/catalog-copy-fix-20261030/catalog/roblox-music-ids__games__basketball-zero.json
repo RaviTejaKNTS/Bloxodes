@@ -1,0 +1,40 @@
+{
+  "code": "roblox-music-ids/games/basketball-zero",
+  "title": "Basketball Zero Music IDs",
+  "seo_title": "Basketball Zero Music IDs [64 Boombox Songs]",
+  "meta_description": "Find 64 Basketball Zero music IDs for the lobby Boombox. Learn where to enter a number and why a song may stay silent.",
+  "intro_md": "Basketball Zero music IDs are numbers for Roblox audio tracks listed for the game. There are 64 songs, and each one has its own number.\n\nPaste a number only where the lobby's music input accepts one. The lobby has its own music controls, and some of them need a pass.",
+  "description_md": "## What a Basketball Zero music ID is\n\nA Basketball Zero music ID is the number for a Roblox audio asset. Players also call these numbers Boombox codes or song codes. They don't redeem cash, spins, styles or basketball abilities.\n\nEach song can show its title, artist, album, length and cover art when those details exist. Find the track by name or artist, then copy the plain number.\n\nBeing tied to Basketball: Zero doesn't make a song an official track. It also doesn't prove the song has played in a live lobby.\n\n## Enter a song ID in the Basketball Zero lobby\n\n1. Join [Basketball: Zero on Roblox](https://www.roblox.com/games/130739873848552/Basketball-Zero).\n2. Check the shop for the Boombox or Radio access your server shows.\n3. In the lobby, equip or open the Boombox music control.\n4. Paste a matching numeric ID into the visible input and confirm the song.\n5. Use the volume and mute controls if the track is too quiet or silent.\n\nPass names, prices and platform buttons can change, so follow the menu in your own lobby.",
+  "how_it_works_md": "## Why a Basketball Zero song may stay silent\n\n- **The Boombox control changed.** Use the menu and input field shown in the current lobby.\n- **Boombox access is missing.** Check the shop and your current access.\n- **Roblox restricted the audio.** Privacy settings, moderation, rights and creator settings can change whether a song plays.\n- **The ID was copied incorrectly.** Paste only the digits.\n- **A mute setting is active.** Check your own music, other players' music, Roblox volume and device output.\n- **An update can change things.** Not every ID is guaranteed to play after an audio or game update.\n\nTry another song and a built-in lobby track. If the built-in track plays but several IDs fail, the asset permissions or the custom-input rule are the likely cause.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "No. A pass may be required, Roblox can restrict an audio asset, and the current lobby controls may not accept typed IDs.",
+      "q": "Are these guaranteed working Basketball Zero Boombox codes?"
+    },
+    {
+      "a": "Open the Boombox control in the lobby and use its visible ID or search field. Paste plain digits only when the control accepts them.",
+      "q": "Where do I enter a Basketball Zero Music ID?"
+    },
+    {
+      "a": "Some lobby music needs a pass. Check the current shop, because pass names, prices and availability can change.",
+      "q": "Do I need a Boombox or Radio pass?"
+    },
+    {
+      "a": "The asset may be restricted, the pass may be missing, the input rules may have changed, or a mute setting may be active. Try a built-in lobby track and another song.",
+      "q": "Why does a Basketball Zero song not play?"
+    },
+    {
+      "a": "Not necessarily. Not every song is an official Basketball: Zero track, and a listed song isn't guaranteed to be in the current lobby playlist.",
+      "q": "Are these official Basketball Zero soundtrack songs?"
+    },
+    {
+      "a": "Not always. A song in Basketball: Zero doesn't guarantee it works in another Roblox game.",
+      "q": "Can I use these IDs in other Roblox games?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": "Basketball Zero combines fast 5v5 play with a lobby Boombox feature for players who want custom audio around matches. For the full sports experience, see [Basketball: Zero on Roblox](https://www.roblox.com/games/130739873848552/Basketball-Zero).",
+  "wiki_sort_order": null
+}

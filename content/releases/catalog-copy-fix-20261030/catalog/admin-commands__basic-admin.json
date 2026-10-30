@@ -1,0 +1,36 @@
+{
+  "code": "admin-commands/basic-admin",
+  "title": "100 Roblox Basic Admin Essentials (BAE) Commands List",
+  "seo_title": "100 Roblox Basic Admin Essentials (BAE) Commands List",
+  "meta_description": "Browse 100 Basic Admin Essentials (BAE) commands by permission level, with the required : or ! prefix, usage arguments, and copy-ready syntax.",
+  "intro_md": "Basic Admin Essentials, usually shortened to BAE, is a compact Roblox admin pack. BAE 2.0 has 100 commands, organized by permission level from public commands up to game-owner tools.\n\nBAE uses two prefixes: `:` for standard commands like `:kick` and `!` for action commands like `!rejoin`. The prefix column in the list shows which one each command needs.\n\nComing from a different admin system? The [Roblox admin commands hub](https://bloxodes.com/catalog/admin-commands) covers all four major systems.",
+  "description_md": "## What is Basic Admin Essentials?\n\nBasic Admin Essentials 2.0 is a compact admin module organized around 100 commands, a simple GUI, and five permission-level sections.\n\n## BAE permission levels\n\nEvery BAE command requires a permission level, and the command list is grouped by those levels:\n\n- **Level 0 (Public):** commands anyone can use, such as `!rejoin`, `!clean`, and `:cmds`.\n- **Level 1 (Moderator):** day-to-day moderation like `:kick`, `:bring`, `:ff`, hints, and logs.\n- **Level 2 (Admin):** bans, server controls, and admin utilities.\n- **Level 3 (Super Admin):** powerful actions like server crash tools and script inserts.\n- **Level 4 (Game Owner):** debug and owner-only utilities.\n\nCommand access depends on the permission level and configuration used by the experience. Individual games may run a modified version or map access differently.\n\n## How to use BAE commands\n\n1. Check the **prefix column** in the list: standard commands use `:` and action commands use `!`.\n2. Type the command in chat with its arguments, for example `:bring PlayerName` or `:countdown 10`.\n3. The **usage column** shows arguments in angle brackets, such as `<User(s)>` or `<Number>`. Replace them with real values.\n4. Replace placeholders such as `User(s)`, `Number`, or `ID` with values accepted by the version running in that experience.\n\nCommon moderation flow in BAE games: `:h` for a hint announcement, `:bring` and `:ff` while helping a player, `:kick` with a reason for rule breakers, and `:chatlogs` or `:joinlogs` to review what happened.\n\n## BAE in your own game\n\nBasic Admin Essentials has multiple versions in circulation, and the original linked module has had availability problems. Check which version you're installing, and review its configuration before adding any version to an experience. If you outgrow it and want deeper customization, logging, or automation, look at [Adonis](https://bloxodes.com/catalog/admin-commands/adonis-admin). If you want a GUI-first system with a rank ladder, look at [HD Admin](https://bloxodes.com/catalog/admin-commands/hd-admin).",
+  "how_it_works_md": null,
+  "description_json": {},
+  "faq_json": [
+    {
+      "a": "Basic Admin Essentials uses : for standard commands, such as :kick or :bring, and ! for action commands, such as !rejoin or !clean. The prefix column in the command list shows which prefix each command needs.",
+      "q": "What are the BAE prefixes?"
+    },
+    {
+      "a": "There are five: Level 0 public commands, Level 1 moderator, Level 2 admin, Level 3 super admin, and Level 4 game owner. A command only runs if your level is at or above its requirement.",
+      "q": "What are the BAE permission levels?"
+    },
+    {
+      "a": "The experience owner controls BAE access through that game's configuration. Some games may connect permission levels to group ranks, but the setup varies by experience and version.",
+      "q": "How do I get a BAE rank in a cafe or restaurant game?"
+    },
+    {
+      "a": "Check the command's permission section, the required : or ! prefix, and each usage placeholder. The experience may also use different settings or a modified BAE version.",
+      "q": "Why does a BAE command not run for me?"
+    },
+    {
+      "a": "BAE has free community and legacy packages in circulation, but the original linked module has had availability problems. Check the version before installing it.",
+      "q": "Is Basic Admin Essentials free?"
+    }
+  ],
+  "schema_ld_json": null,
+  "thumb_url": null,
+  "wiki_md": null,
+  "wiki_sort_order": null
+}
