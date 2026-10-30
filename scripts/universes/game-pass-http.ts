@@ -20,6 +20,8 @@ export function createGamePassHttp(options: {
   attemptTimeoutMs?: number;
   intervalMs?: number;
   retryLimit?: number;
+  maxRequests?: number;
+  userAgent?: string;
 } = {}) {
   const now = options.now ?? Date.now;
   const sleep = options.sleep ?? ((ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms)));
@@ -29,7 +31,9 @@ export function createGamePassHttp(options: {
   let retryAfterAt = 0;
   let queue = Promise.resolve();
   let stoppedReason: string | null = null;
+  let requestCount = 0;
   const shouldStop = () => {
+    if (requestCount >= (options.maxRequests ?? Infinity)) stoppedReason ??= "request_budget";
     if (now() >= deadline) stoppedReason ??= "run_deadline";
     return stoppedReason !== null;
   };
@@ -53,6 +57,7 @@ export function createGamePassHttp(options: {
         await sleep(delay);
         // Another worker may receive Retry-After while this slot is waiting.
       }
+      requestCount++;
       nextRequestAt = now() + (options.intervalMs ?? 1000);
     } finally { release(); }
   }
@@ -68,7 +73,7 @@ export function createGamePassHttp(options: {
       let failure: unknown;
       try {
         const res = await fetcher(url, {
-          headers: { "user-agent": "BloxodesWikiGamePassRefresh/1.0" }, signal: controller.signal
+          headers: { "user-agent": options.userAgent ?? "BloxodesWikiGamePassRefresh/1.0" }, signal: controller.signal
         });
         if (res.ok) return await res.json(); // Keep the timeout through body parsing.
         const value = res.headers.get("retry-after");
@@ -95,5 +100,5 @@ export function createGamePassHttp(options: {
     }
     throw new Error(`Failed to fetch ${label}`);
   }
-  return { fetchJson, shouldStop, get stoppedReason() { shouldStop(); return stoppedReason; } };
+  return { fetchJson, shouldStop, get requestCount() { return requestCount; }, get stoppedReason() { shouldStop(); return stoppedReason; } };
 }

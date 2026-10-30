@@ -161,3 +161,21 @@ test("a queued worker rechecks Retry-After received while it was waiting for spa
   await results;
   assert.deepEqual(starts, [0, 5000, 6000]);
 });
+
+test("hard request budget counts retries and concurrent starts", async () => {
+  const clock = fakeClock();
+  let starts = 0;
+  const http = createGamePassHttp({ ...clock, maxRequests: 3, fetch: async () => {
+    starts++;
+    return json({ ok: true });
+  } });
+  const result = await Promise.allSettled(Array.from({ length: 6 }, () => http.fetchJson('https://api.test', 'attachments')));
+  assert.equal(starts, 3);
+  assert.equal(http.requestCount, 3);
+  assert.equal(http.stoppedReason, 'request_budget');
+  assert.equal(result.filter(r => r.status === 'fulfilled').length, 3);
+  assert.equal(result.filter(r => r.status === 'rejected').length, 3);
+  const retry = createGamePassHttp({ ...fakeClock(), maxRequests: 2, fetch: async () => new Response('retry', { status: 500 }) });
+  await assert.rejects(retry.fetchJson('https://api.test', 'attachments'), PassRefreshDeferredError);
+  assert.equal(retry.requestCount, 2);
+});
