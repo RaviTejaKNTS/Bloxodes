@@ -1,28 +1,11 @@
 import "../shared/load-env";
 
-import { accessSync, constants as fsConstants } from "node:fs";
-import { spawnSync } from "node:child_process";
-import path from "node:path";
-
 import { createClient } from "@supabase/supabase-js";
 
 import { resolveArticleDevCredentials, supabaseTarget } from "../articles/article-queue-env";
-import { articleClaudeBin, articleStageConfig } from "../articles/article-stage-config";
-import { isModelStage, STAGES } from "../articles/article-pipeline";
-import { workerEnvironment } from "../articles/article-stage-runtime";
-import { readProductionCredentials } from "../articles/release-completed-articles";
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
-import { runArticleBrowserSmokeTest } from "../content/article-browser";
 
-type Component = "all" | "discovery" | "writer";
-
-function autoPublishEnabled(): boolean {
-  const value = process.env.ARTICLE_AUTO_PUBLISH?.trim().toLowerCase();
-  if (!value) return true;
-  if (["1", "true", "yes", "on"].includes(value)) return true;
-  if (["0", "false", "no", "off"].includes(value)) return false;
-  throw new Error("ARTICLE_AUTO_PUBLISH must be true or false.");
-}
+type Component = "all" | "discovery";
 
 function parseComponent(argv: string[]): Component {
   let component: Component = "all";
@@ -30,41 +13,24 @@ function parseComponent(argv: string[]): Component {
     const arg = argv[index];
     if (arg === "--component" || arg.startsWith("--component=")) {
       const value = arg.includes("=") ? arg.slice(arg.indexOf("=") + 1) : argv[++index];
-      if (!value || !["all", "discovery", "writer"].includes(value)) {
-        throw new Error("--component must be all, discovery, or writer.");
+      if (!value || !["all", "discovery"].includes(value)) {
+        throw new Error("--component must be all or discovery.");
       }
       component = value as Component;
     } else if (arg === "--help" || arg === "-h") {
-      console.log("Usage: npm run articles:homelab:check -- [--component all|discovery|writer]");
+      console.log("Usage: npm run articles:homelab:check -- [--component all|discovery]");
       process.exit(0);
     } else throw new Error(`Unknown option: ${arg}`);
   }
   return component;
 }
 
-function findExecutable(candidates: string[]): string | null {
-  for (const candidate of candidates) {
-    if (candidate.includes("/")) {
-      try {
-        accessSync(candidate, fsConstants.X_OK);
-        return candidate;
-      } catch {
-        continue;
-      }
-    }
-    const result = spawnSync("which", [candidate], { encoding: "utf8" });
-    if (result.status === 0 && result.stdout.trim()) return result.stdout.trim();
-  }
-  return null;
-}
-
-async function checkDevDatabase(component: Component) {
+async function checkDevDatabase() {
   const dev = resolveArticleDevCredentials();
   const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
-  const tables = ["article_generation_queue", "articles"];
-  if (component !== "writer") tables.push("article_discovery_candidates", "article_curation_runs");
+  const tables = ["article_generation_queue", "articles", "article_discovery_candidates", "article_curation_runs"];
   for (const table of tables) {
     const { error } = await supabase.from(table).select("*", { head: true, count: "exact" }).limit(1);
     if (error) throw new Error(`Managed dev table ${table} is not ready: ${error.message}`);
@@ -74,71 +40,14 @@ async function checkDevDatabase(component: Component) {
 
 async function main() {
   const component = parseComponent(process.argv.slice(2));
-  await checkDevDatabase(component);
+  await checkDevDatabase();
 
   const inventory = await fetchProductionEditorialInventory();
   if (!inventory.items.length) throw new Error("Production editorial inventory is empty.");
   console.log(`Production inventory: ${inventory.items.length} published page(s)`);
 
-  if (component !== "writer") {
-    if (!process.env.GROQ_API_KEY?.trim()) throw new Error("GROQ_API_KEY is required for discovery curation.");
-    console.log("Groq curation key: configured");
-  }
-
-  if (component !== "discovery") {
-    if (!process.env.SUPABASE_MEDIA_BUCKET?.trim()) throw new Error("SUPABASE_MEDIA_BUCKET is required for article media.");
-    if (autoPublishEnabled()) {
-      const productionEnvFile = path.resolve(
-        process.env.ARTICLE_RELEASE_PRODUCTION_ENV_FILE?.trim() || ".envs/targets/production.env"
-      );
-      const production = await readProductionCredentials(productionEnvFile);
-      if (!production.revalidateSecret) throw new Error("Production target requires REVALIDATE_SECRET for verified article publication.");
-      console.log(`Production release target: ${productionEnvFile} (validated)`);
-    } else {
-      console.log("Production release: disabled for manual review");
-    }
-    const codexConfigured = process.env.ARTICLE_WRITER_CODEX_BIN?.trim();
-    const codex = findExecutable(
-      [codexConfigured || "", `${process.env.HOME ?? ""}/.local/bin/codex`, "codex"].filter(Boolean)
-    );
-    if (!codex) throw new Error("Codex CLI is not installed or ARTICLE_WRITER_CODEX_BIN is incorrect.");
-    const codexVersion = spawnSync(codex, ["--version"], { encoding: "utf8" });
-    if (codexVersion.status !== 0) throw new Error(`Codex CLI failed its version check: ${codexVersion.stderr.trim()}`);
-    const codexLogin = spawnSync(codex, ["login", "status"], { encoding: "utf8" });
-    if (codexLogin.status !== 0) {
-      throw new Error(`Codex CLI authentication is not ready: ${codexLogin.stderr.trim() || codexLogin.stdout.trim()}`);
-    }
-    console.log(`Codex CLI: ${codexVersion.stdout.trim()}`);
-    const stageConfigs = STAGES.filter(isModelStage).map(stage => ({ stage, ...articleStageConfig(stage, process.env) }));
-    console.log(`Article stage routing: ${JSON.stringify(stageConfigs)}`);
-    if (stageConfigs.some(config => config.provider === "claude")) {
-      const claude = findExecutable([articleClaudeBin(process.env)]);
-      if (!claude) console.warn("Claude CLI is missing; configured Claude stages will fall back to Codex gpt-6-luna.");
-      else {
-        const auth = spawnSync(claude, ["auth", "status"], { encoding: "utf8", env: workerEnvironment(process.env), timeout: 30_000 });
-        let loggedIn = false;
-        try { loggedIn = auth.status === 0 && JSON.parse(auth.stdout).loggedIn === true; } catch { /* CLI diagnosis stays private. */ }
-        if (!loggedIn) console.warn("Claude OAuth is not ready; provider authentication failures will fall back to Codex gpt-6-luna.");
-        else console.log("Claude OAuth: ready. Bare mode is disabled.");
-      }
-    }
-    const features = spawnSync(codex, ["--config", "features.multi_agent=false", "--config", "features.multi_agent_v2=false", "features", "list"], { encoding: "utf8" });
-    if (features.status !== 0 || !/^multi_agent\s+\S+\s+false$/m.test(features.stdout)) throw new Error("Codex cannot confirm disabled worker-management tools for article stages.");
-    for (const file of ["scripts/articles/article-pipeline.ts", "scripts/articles/article-stage-runtime.ts", ".agents/skills/bloxodes-article-workflow-runner/references/code-controlled-stages.md"]) accessSync(path.resolve(file), fsConstants.R_OK);
-    console.log("Article execution: code-controlled stages; native multi-agent tools disabled");
-
-    const grokConfigured = process.env.ARTICLE_WRITER_GROK_BIN?.trim();
-    const grok = findExecutable([grokConfigured || "", `${process.env.HOME ?? ""}/.grok/bin/grok`, "grok"].filter(Boolean));
-    if (!/^(false|0|no|off)$/i.test(process.env.ARTICLE_WRITER_GROK_FALLBACK ?? "true")) {
-      if (!grok) throw new Error("Grok CLI is not installed or ARTICLE_WRITER_GROK_BIN is incorrect.");
-      const grokHelp = spawnSync(grok, ["--help"], { encoding: "utf8" });
-      if (grokHelp.status !== 0 || !grokHelp.stdout.includes("--no-subagents") || !grokHelp.stdout.includes("--json-schema")) throw new Error("Grok fallback requires --no-subagents and structured stage results.");
-      console.log("Grok fallback: single-stage, subagent spawning disabled");
-    }
-
-    const browser = await runArticleBrowserSmokeTest();
-    console.log(`Headless browser: ${browser} (Playwright smoke test passed)`);
-  }
+  if (!process.env.GROQ_API_KEY?.trim()) throw new Error("GROQ_API_KEY is required for discovery curation.");
+  console.log("Groq curation key: configured");
 
   console.log(`Homelab article automation readiness passed (${component}).`);
 }
