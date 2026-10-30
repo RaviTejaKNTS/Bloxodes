@@ -1,3 +1,4 @@
+import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const EDITORIAL_INVENTORY_VERSION = 1;
@@ -65,6 +66,7 @@ async function fetchInventoryFamily(
         : typeof rawUniverseId === "string" && /^\d+$/.test(rawUniverseId)
           ? Number(rawUniverseId)
           : null;
+      if (config.family === "catalog" && isRetiredMusicGameCatalogCode(key)) continue;
       if (title && key) rows.push({ family: config.family, title, key, universe_id: universeId });
     }
     if (page.length < pageSize) break;

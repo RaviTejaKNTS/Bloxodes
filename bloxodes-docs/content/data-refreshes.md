@@ -18,6 +18,7 @@ Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all
 - **Page date:** the collectors set `catalog_pages.updated_at` for `roblox-music-ids` only when a run adds new songs (exact asset-ID lookup before writing) and the current date is at least seven days old (`scripts/shared/music-catalog-freshness.ts`). Reranking and chart-order changes never touch it, so the visible "Updated on" date and `dateModified` don't move daily.
 - `collect:top-songs` writes the new ranks first, then clears ranks for songs that left the list, so the trending list is never empty mid-run.
 - Game-specific music and decal usage is by hand: `sync:game-specific-id-sources` writes `data/game-specific-ids/source-backed.json`, then `seed:game-specific-id-usage` loads `roblox_music_id_game_usage` and `roblox_decal_id_game_usage`.
+- Hand-checked community songs live in `data/game-specific-ids/community-music.json` (A Dusty Trip's 30 car radio songs). Both full and `--only-music-game` syncs merge them in; a live row with the same game, asset and use type wins. To load one game into production, seed a file holding only that game's rows (`{"music":[...],"decals":[]}`) without `--replace-source-rows`, which only upserts those rows. Run it against managed development first (default profile, `--dry-run`, then for real), check the page, then repeat with `BLOXODES_ENV_PROFILE=production-preview`: `--dry-run`, then `--allow-prod`.
 
 ## Decal IDs
 

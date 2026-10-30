@@ -1,4 +1,5 @@
 import "server-only";
+import { isRetiredMusicGameCatalogCode } from "@/lib/game-specific-id-pages";
 import type { StatsGameInsights, Mover, CalendarDay } from "@/lib/stats-insights";
 import { loadStatsGameInsights, loadWeeklyMovers, loadPlayersCalendar } from "@/lib/stats-insight-loaders";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
@@ -3652,7 +3653,7 @@ async function loadRelatedLinks(universeId: number, game: StatsGame): Promise<St
   if (game.rootPlaceId) links.push({ label: "Roblox", href: `https://www.roblox.com/games/${game.rootPlaceId}`, type: "roblox" });
   for (const row of (codes.data ?? []) as Array<{ slug: string | null }>) if (row.slug) links.push({ label: "Codes", href: `/codes/${row.slug}`, type: "codes" });
   for (const row of (wiki.data ?? []) as Array<{ slug: string | null }>) if (row.slug) links.push({ label: "Wiki", href: `/wiki/${row.slug}`, type: "wiki" });
-  for (const row of (catalogs.data ?? []) as Array<{ code: string | null; title: string | null }>) if (row.code) links.push({ label: row.title ?? "Catalog", href: `/catalog/${row.code}`, type: "catalog" });
+  for (const row of (catalogs.data ?? []) as Array<{ code: string | null; title: string | null }>) if (row.code && !isRetiredMusicGameCatalogCode(row.code)) links.push({ label: row.title ?? "Catalog", href: `/catalog/${row.code}`, type: "catalog" });
   for (const row of (events.data ?? []) as Array<{ slug: string | null }>) if (row.slug) links.push({ label: "Events", href: `/events/${row.slug}`, type: "event" });
   for (const row of (tools.data ?? []) as Array<{ code: string | null; title: string | null }>) if (row.code) links.push({ label: row.title ?? "Tool", href: `/tools/${row.code}`, type: "tool" });
   for (const row of (quizzes.data ?? []) as Array<{ code: string | null; title: string | null }>) if (row.code) links.push({ label: row.title ?? "Quiz", href: `/quizzes/${row.code}`, type: "quiz" });
