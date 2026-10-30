@@ -22,14 +22,14 @@ do $$
 declare row_record public.roblox_catalog_items;
 begin
   select * into row_record from public.roblox_catalog_items where asset_id = 910000000001;
-  if row_record.name <> 'Pipeline Asset' or row_record.favorite_count <> 1200 then
+  if row_record.name is distinct from 'Pipeline Asset' or row_record.favorite_count is distinct from 1200 then
     raise exception 'null-safe discovery upsert failed';
   end if;
-  if row_record.catalog_item_key <> 'Asset:910000000001' then
+  if row_record.catalog_item_key is distinct from 'Asset:910000000001' then
     raise exception 'asset canonical identity failed';
   end if;
   select * into row_record from public.roblox_catalog_items where asset_id = -910000000001;
-  if row_record.catalog_item_key <> 'Bundle:910000000001' or row_record.roblox_item_id <> 910000000001 then
+  if row_record.catalog_item_key is distinct from 'Bundle:910000000001' or row_record.roblox_item_id is distinct from 910000000001 then
     raise exception 'bundle canonical identity failed';
   end if;
 end;
@@ -103,10 +103,10 @@ do $$
 declare index_row public.stats_item_current_index;
 begin
   select * into index_row from public.stats_item_current_index where asset_id = 910000000001;
-  if index_row.thumbnail_url <> 'https://example.com/item.png' then
+  if index_row.thumbnail_url is distinct from 'https://example.com/item.png' then
     raise exception 'fast index did not select the preferred thumbnail';
   end if;
-  if index_row.price_change_24h <> 10 or index_row.favorite_change_7d <> 300 then
+  if index_row.price_change_24h is distinct from 10 or index_row.favorite_change_7d is distinct from 300 then
     raise exception 'fast index did not calculate durable daily deltas';
   end if;
 end;
@@ -127,7 +127,7 @@ select public.upsert_roblox_catalog_discovery_items(jsonb_build_array(jsonb_buil
 
 do $$
 begin
-  if (select favorite_count from public.roblox_catalog_items where asset_id = 910000000003) <> 42
+  if (select favorite_count from public.roblox_catalog_items where asset_id = 910000000003) is distinct from 42
     or exists (select 1 from public.roblox_catalog_items where asset_id = -910000000003) then
     raise exception 'legacy bundle upsert did not update its own row';
   end if;
