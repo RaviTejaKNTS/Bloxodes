@@ -1,6 +1,6 @@
 # Data refreshes
 
-Last verified: 2026-10-22
+Last verified: 2026-10-30
 
 Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all run on the VPS through the stats worker (see [stats](stats.md#the-stats-worker)) and write production directly. Times are UTC.
 
@@ -21,8 +21,10 @@ Recurring data collectors that keep catalog, puzzle and ID pages fresh. They all
 
 ## Decal IDs
 
-- **Schedule:** 06:55 daily: `refresh:decal-ids` (`scripts/decal-ids/run-decal-id-refresh.ts`) collects, verifies and reranks.
-- **Data:** `roblox_decal_ids` and its views. 38,573 rows.
+- **Schedule:** 06:55 daily: `refresh:decal-ids` (`scripts/decal-ids/run-decal-id-refresh.ts`) collects, imports candidates, verifies and reranks.
+- **Data:** `roblox_decal_ids` and its views. 38,574 rows.
+- **Discovery:** Roblox Toolbox search ignores the requested sort and returns the same old decals for the evergreen queries, so the collector searches the current year (for example `2026`) first. `ROBLOX_DECAL_COLLECT_MAX_ASSETS` (3,000 on the worker) limits **new inserts**; already-known candidates don't count, so later queries still run. Expect only a small number of new decals per day.
+- **Health:** each run writes a `decal_ids_refresh` row to `stats_job_runs` with per-step counts in `metadata.steps` and `latest_first_seen_at`. If no decal has been inserted for 7 days, the run finishes every step, records `partial` and exits nonzero, so the wrapper logs a failure.
 
 ## Marketplace items
 
