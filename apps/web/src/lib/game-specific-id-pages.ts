@@ -225,8 +225,11 @@ export function decalGameCatalogCode(slug: string): string {
   return `roblox-decal-ids/games/${slug}`;
 }
 
+// Retired pages keep a published catalog_pages row; readers filter them out.
+export const RETIRED_MUSIC_GAME_CATALOG_CODES = ["roblox-music-ids/games/work-at-a-pizza-place"] as const;
+
 export function isRetiredMusicGameCatalogCode(code: string): boolean {
-  return code.trim() === "roblox-music-ids/games/work-at-a-pizza-place";
+  return (RETIRED_MUSIC_GAME_CATALOG_CODES as readonly string[]).includes(code.trim());
 }
 
 // Search rows carry absolute or relative URLs; match the retired page and anything under it.
@@ -235,5 +238,5 @@ export function isRetiredMusicGameCatalogUrl(url: string | null | undefined): bo
   const path = url.trim().replace(/^https?:\/\/[^/]+/i, "").split(/[?#]/)[0].replace(/\/+$/, "");
   if (!path.startsWith("/catalog/")) return false;
   const code = path.slice("/catalog/".length);
-  return isRetiredMusicGameCatalogCode(code) || code.startsWith("roblox-music-ids/games/work-at-a-pizza-place/");
+  return RETIRED_MUSIC_GAME_CATALOG_CODES.some((retired) => code === retired || code.startsWith(`${retired}/`));
 }
