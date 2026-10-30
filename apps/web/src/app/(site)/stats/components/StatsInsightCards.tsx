@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Children, type ReactNode } from "react";
-import { Activity, ArrowDownRight, ArrowUpRight, BarChart3, CalendarDays, Clock3, ExternalLink, Medal, ShoppingBag, Trophy, Users } from "lucide-react";
+import { Activity, ArrowDownRight, ArrowUpRight, BarChart3, CalendarDays, Clock3, ExternalLink, Medal, ShoppingBag, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatCompactNumber, formatFullNumber, formatPercent, formatDeltaPercent } from "@/lib/stats-format";
-import type { BadgeInsight, CalendarDay, Milestone, Mover, StatsGameInsights } from "@/lib/stats-insights";
+import type { BadgeInsight, CalendarDay, Mover, StatsGameInsights } from "@/lib/stats-insights";
 import { cn } from "@/lib/utils";
 import { GenreScatterChart, InsightTip, PassPriceChart, SessionChart, VotesChart } from "./StatsInsightCharts";
 
@@ -84,29 +84,6 @@ export function MonthlyPlayersCard({ data }: { data: StatsGameInsights }) {
         </TableBody>
       </Table>
       {data.trackedSince ? <p className="mt-3 text-xs text-muted">Tracked since {date(data.trackedSince, { month: "long", year: "numeric" })}.</p> : null}
-    </InsightCard>
-  );
-}
-
-function milestoneLabel(item: Milestone) {
-  if (item.kind === "peak") return `New player peak: ${formatCompactNumber(item.value)}`;
-  if (item.kind === "top1") return "Reached #1 in all tracked games";
-  if (item.kind === "top10") return "Entered the top 10 of all tracked games";
-  return `Passed ${formatCompactNumber(item.value)} ${item.kind}`;
-}
-
-export function MilestonesCard({ data }: { data: StatsGameInsights }) {
-  return (
-    <InsightCard title="Milestones" subtitle="Newest first" icon={Trophy}>
-      <ol className="m-0 space-y-4 border-l border-border pl-4">
-        {data.milestones.map(item => (
-          <li key={`${item.date}:${item.kind}`} className="relative text-sm">
-            <span className="absolute -left-[1.3rem] top-1.5 h-2 w-2 rounded-full bg-accent" />
-            <div className="font-medium">{milestoneLabel(item)}</div>
-            <time className="text-xs text-muted" dateTime={item.date}>{date(item.date, { month: "short", day: "numeric", year: "numeric" })}</time>
-          </li>
-        ))}
-      </ol>
     </InsightCard>
   );
 }

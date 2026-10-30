@@ -34,7 +34,7 @@ vi.mock("@/components/ui/chart", async () => {
   };
 });
 
-import { BadgesCard, MilestonesCard, PlayersCalendarCard } from "./StatsInsightCards";
+import { BadgesCard, PlayersCalendarCard } from "./StatsInsightCards";
 import { PassPriceChart, SessionChart } from "./StatsInsightCharts";
 import { chartTabsListClass, chartTabsTriggerClass } from "./stats-chart-styles";
 
@@ -103,19 +103,12 @@ it("renders average-player calendar copy and puts weekday labels in matching fix
   expect(document.body.textContent).toContain("Sat, Oct 24, 2026 · 16,000,000 players");
 });
 
-it("preserves the main agent's milestone and badge wording", async () => {
+it("preserves the badge rarity wording", async () => {
   const data = {
-    milestones: [
-      { date: "2026-10-24", kind: "peak", value: 1000 },
-      { date: "2026-10-23", kind: "top1", value: 1 },
-      { date: "2026-10-22", kind: "top10", value: 10 },
-      { date: "2026-10-21", kind: "visits", value: 30e9 },
-      { date: "2026-10-20", kind: "favorites", value: 1000 }
-    ],
     badges: [{ badge_id: 1, name: "Winner", enabled: true, rarity_percent: .1, stats_updated_at: "2026-10-24T00:00:00Z" }]
   } as StatsGameInsights;
-  await act(async () => root.render(<><MilestonesCard data={data} /><BadgesCard data={data} /></>));
-  for (const text of ["New player peak: 1K", "Reached #1 in all tracked games", "Entered the top 10 of all tracked games", "Passed 30B visits", "Passed 1K favorites", "Badge rarity", "Most common to rarest. A lower % is a rarer badge."]) {
+  await act(async () => root.render(<BadgesCard data={data} />));
+  for (const text of ["Badge rarity", "Most common to rarest. A lower % is a rarer badge."]) {
     expect(container.textContent).toContain(text);
   }
   await act(async () => { container.querySelector<HTMLElement>('[tabindex="0"]')!.focus(); });

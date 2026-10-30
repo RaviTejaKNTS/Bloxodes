@@ -63,7 +63,7 @@ describe("optional insight deadlines", () => {
     const result = await request;
     expect(result).toMatchObject({ months: [], trackedSince: null, updates: [], scatter: null, badges: [] });
     expect(result.passes).toEqual([{ pass_id: 1, name: "VIP", price: 99 }]);
-    expect(queries.length).toBeGreaterThan(8);
+    expect(queries.length).toBe(9);
     expect(queries.every(query => query.signal instanceof AbortSignal && query.signal.aborted)).toBe(true);
   });
 

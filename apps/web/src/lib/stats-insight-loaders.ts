@@ -5,7 +5,7 @@ import { slugify } from "@/lib/slug";
 import { isPlayingTimestampFresh, STATS_PLAYING_FRESHNESS_MS } from "@/lib/stats-freshness";
 import type { StatsGame } from "@/lib/stats";
 import {
-  DAY_MS, HOUR_MS, utcDay, monthlyPlayers, detectMilestones, updateImpact,
+  DAY_MS, HOUR_MS, utcDay, monthlyPlayers, updateImpact,
   sessionEstimates, selectBadges, selectMovers, playersCalendar,
   type DailyInsightRow, type HourlyInsightRow, type BadgeInsight, type PassInsight,
   type StatsGameInsights, type GenreScatter, type Mover, type CalendarDay, type UpdateImpact
@@ -119,10 +119,10 @@ async function loadUpdateImpacts(universeId: number): Promise<UpdateImpact[]> {
 export async function loadStatsGameInsights(game: StatsGame): Promise<StatsGameInsights> {
   const id = game.universeId;
   const db = supabaseAdmin();
-  const [daily, first, ranks, updates, markers, scatter, badges, passes] = await Promise.all([
+  const [daily, first, updates, markers, scatter, badges, passes] = await Promise.all([
     insightRead(`daily:${id}`, async (signal) => {
       const { data, error } = await db.from("roblox_universe_stats_daily")
-        .select("stat_date,playing,avg_playing,peak_playing,visits,favorites,visit_delta,visits_start,visits_end,like_delta,dislike_delta,sample_count,is_finalized").abortSignal(signal)
+        .select("stat_date,playing,avg_playing,peak_playing,visits,visit_delta,visits_start,visits_end,like_delta,dislike_delta,sample_count,is_finalized").abortSignal(signal)
         .eq("universe_id", id).lt("stat_date", utcDay(Date.now())).order("stat_date", { ascending: false }).limit(1000);
       if (error) throw error;
       return (data ?? []) as DailyInsightRow[];
@@ -132,12 +132,6 @@ export async function loadStatsGameInsights(game: StatsGame): Promise<StatsGameI
         .eq("universe_id", id).order("stat_date").limit(1).maybeSingle();
       if (error) throw error;
       return { date: data?.stat_date ?? null };
-    }),
-    insightRead(`rank-firsts:${id}`, async (signal) => {
-      const rows = await Promise.all([1, 10].map(rank => db.from("roblox_universe_rank_snapshots_daily").select("stat_date").abortSignal(signal)
-        .eq("universe_id", id).eq("rank_type", "global_playing").lte("rank_value", rank).order("stat_date").limit(1).maybeSingle()));
-      for (const row of rows) if (row.error) throw row.error;
-      return rows.map(r => r.data?.stat_date ?? null);
     }),
     loadUpdateImpacts(id),
     insightRead(`session-markers:${id}`, async (signal) => {
@@ -164,10 +158,8 @@ export async function loadStatsGameInsights(game: StatsGame): Promise<StatsGameI
   ]);
   const rows = daily ?? [];
   const firstDate = first?.date ?? null;
-  const completeHistory = firstDate !== null && rows.some(r => r.stat_date === firstDate);
-  const milestones = detectMilestones(completeHistory ? rows : [], ranks?.[0], ranks?.[1]);
   const votes = rows.filter(r => r.stat_date >= utcDay(Date.now() - 21 * DAY_MS) && r.like_delta != null && r.dislike_delta != null && r.like_delta >= 0 && r.dislike_delta >= 0)
     .sort((a, b) => a.stat_date.localeCompare(b.stat_date)).map(r => ({ date: r.stat_date, likes: r.like_delta!, dislikes: r.dislike_delta! }));
-  return { months: monthlyPlayers(rows), trackedSince: firstDate, milestones, updates, votes, sessions: sessionEstimates(rows),
+  return { months: monthlyPlayers(rows), trackedSince: firstDate, updates, votes, sessions: sessionEstimates(rows),
     markers: markers ?? [], scatter, badges: selectBadges(badges ?? []), passes: passes ?? [], asOf: new Date().toISOString() };
 }

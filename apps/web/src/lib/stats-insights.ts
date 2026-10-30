@@ -3,12 +3,11 @@ export const DAY_MS = 86_400_000;
 export const HOUR_MS = 3_600_000;
 export type DailyInsightRow = {
   stat_date: string; playing: number | null; avg_playing: number | null; peak_playing: number | null;
-  visits: number | null; favorites: number | null; visit_delta: number | null;
+  visits: number | null; visit_delta: number | null;
   visits_start: number | null; visits_end: number | null; like_delta: number | null;
   dislike_delta: number | null; sample_count: number | null; is_finalized: boolean;
 };
 export type MonthlyPlayers = { month: string; average: number; peak: number | null; change: number | null; days: number };
-export type Milestone = { date: string; kind: 'peak' | 'visits' | 'favorites' | 'top1' | 'top10'; value: number };
 export type SessionPoint = { date: string; minutes: number | null };
 export type VotePoint = { date: string; likes: number; dislikes: number };
 export type UpdateMarker = { date: string; label: string };
@@ -21,7 +20,7 @@ export type GenreScatter = { genre: string; points: ScatterPoint[]; current: Sca
 export type Mover = { universe_id: number; slug: string; name: string; playing: number | null; baseline_playing_7d: number | null; growth_7d_percent: number | null };
 export type CalendarDay = { date: string; players: number | null; level: number; future: boolean };
 export type StatsGameInsights = {
-  months: MonthlyPlayers[]; trackedSince: string | null; milestones: Milestone[]; updates: UpdateImpact[];
+  months: MonthlyPlayers[]; trackedSince: string | null; updates: UpdateImpact[];
   votes: VotePoint[]; sessions: SessionPoint[]; markers: UpdateMarker[]; scatter: GenreScatter | null;
   badges: BadgeInsight[]; passes: PassInsight[]; asOf: string;
 };
@@ -73,50 +72,6 @@ export function monthlyPlayers(rows: DailyInsightRow[], now = Date.now()): Month
       return change(row, months.get(previous.toISOString().slice(0, 7)));
     });
   return [...(last30 ? [change(last30, previous30)] : []), ...calendar];
-}
-
-function highestThreshold(value: number): number | null {
-  if (value < 1000) return null;
-  if (value >= 1e9) {
-    const step = value < 1e10 ? 1e9 : value < 1e11 ? 5e9 : 1e10;
-    return Math.floor(value / step) * step;
-  }
-  const power = 10 ** Math.floor(Math.log10(value));
-  return [5, 2, 1].map(n => n * power).find(n => n <= value) ?? null;
-}
-export function detectMilestones(rows: DailyInsightRow[], firstTop1?: string | null, firstTop10?: string | null): Milestone[] {
-  const sorted = [...rows].sort((a, b) => a.stat_date.localeCompare(b.stat_date));
-  const items: Milestone[] = [];
-  let peak = 0;
-  let visits: number | null = null;
-  let favorites: number | null = null;
-  sorted.forEach((r, index) => {
-    // The first observation establishes a baseline, never a crossing.
-    if (finite(r.peak_playing) && r.peak_playing > peak) {
-      if (index > 0 && peak > 0 && r.peak_playing >= peak + Math.max(100, peak * .05)) {
-        items.push({ date: r.stat_date, kind: 'peak', value: r.peak_playing });
-      }
-      peak = r.peak_playing;
-    }
-    for (const kind of ['visits', 'favorites'] as const) {
-      const current = r[kind];
-      const previous = kind === 'visits' ? visits : favorites;
-      if (finite(current)) {
-        const threshold = highestThreshold(current);
-        if (previous !== null && threshold !== null && previous < threshold) items.push({ date: r.stat_date, kind, value: threshold });
-        // High water marks prevent repeat crossings after counter corrections.
-        if (kind === 'visits') visits = Math.max(visits ?? 0, current);
-        else favorites = Math.max(favorites ?? 0, current);
-      }
-    }
-  });
-  if (firstTop1) items.push({ date: firstTop1, kind: 'top1', value: 1 });
-  if (firstTop10) items.push({ date: firstTop10, kind: 'top10', value: 10 });
-  const counts = { visits: 0, favorites: 0 };
-  return items.sort((a, b) => b.date.localeCompare(a.date)).filter(item => {
-    if (item.kind !== 'visits' && item.kind !== 'favorites') return true;
-    return ++counts[item.kind] <= 2;
-  }).slice(0, 6);
 }
 
 export function updateImpact(date: string, rows: HourlyInsightRow[], now = Date.now()): Omit<UpdateImpact, 'title'> | null {

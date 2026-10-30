@@ -58,7 +58,7 @@ The Game Passes section on wiki hubs (and the mobile API) and the stats game pag
 
 `apps/web/src/lib/stats-insights.ts` holds the pure calculations; `StatsInsightCards.tsx` and `StatsInsightCharts.tsx` render them. Metric rules are in [stats metrics](stats-metrics.md#page-sections).
 
-- **Game page**, after the main chart: Players by month and Milestones; after rank history: How updates did and Votes per day; then Estimated session length and the genre scatter; then Badge rarity and Game pass prices. Cards sit two to a row from `md` up and stack on phones.
+- **Game page**, after the main chart: Players by month at full width; after rank history: How updates did and Votes per day; then Estimated session length and the genre scatter; then Badge rarity and Game pass prices. Paired cards sit two to a row from `md` up and stack on phones.
 - **`/stats`:** Biggest moves this week after Fastest risers; Players by day (13-week calendar) after the Platform CCU trend.
 - **Reads:** existing tables and indexes only, each with a short abort deadline and its own five-minute last-good cache in `stats-chart-cache.ts` (capped at 2,048 keys). A slow or failed read hides only its own card. A card with too little data hides instead of showing an empty state.
 
@@ -87,5 +87,5 @@ A worker change is done only when the Northflank build succeeds, one HOT run suc
 - The 00:02 daily rollup's single full pass times out, then succeeds in universe chunks. The rank hourly table gains about 1.6M rows a day. The chained hourly prune deletes the oldest rows first in 10,000-row batches, up to 6M rows per table a night, halves the batch after a timeout and records `partial` with the rows it deleted after three timeouts. Both hourly history tables become eligible for autovacuum after 200,000 dead rows and autoanalyze after 1M changed rows; check `pg_stat_user_tables` dead-row counts after large prunes. Hourly history reached back to June 20 in October 2026 and clears to 90 days over the following nights. The 01:05 daily platform summary scans `roblox_universe_stats_daily` without a date-first index and can still fail; when it does, daily-resolution charts end a day early.
 - The hourly platform summary adds up only the games sampled in each hour. HOT games land in alternate hours, so the 24-hour player chart zig-zags between about 10K and 13M. Daily views are not affected.
 - `peak_players` in `roblox_platform_stats_hourly` / `_daily` adds up each game's own peak, and games peak at different times, so it overstates the real concurrent peak (33.9M against about 16M real in October 2026). Don't show it as "peak players"; the Players by day calendar uses daily average players.
-- Daily rank snapshots aren't scheduled, so the Milestones card can miss recent "#1" and "top 10" entries.
+- Daily rank snapshots aren't scheduled. `roblox_universe_rank_snapshots_daily` has no rows after 2026-08-09, so no page section should read it until the job is scheduled again.
 - The August 2026 report is live but missing from the stats sitemap and feed.

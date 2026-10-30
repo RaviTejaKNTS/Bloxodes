@@ -2,7 +2,6 @@ import Image from "next/image";
 import {
   InsightPair,
   MonthlyPlayersCard,
-  MilestonesCard,
   UpdateImpactsCard,
   VotesCard,
   SessionsCard,
@@ -1833,12 +1832,9 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
         defaultMetric="players"
       />
 
-      <InsightPair>
-        {data.insights.trackedSince && data.insights.months.length >= 2 && data.insights.months[0].month === "last30" ? (
-          <MonthlyPlayersCard data={data.insights} />
-        ) : null}
-        {data.insights.milestones.length ? <MilestonesCard data={data.insights} /> : null}
-      </InsightPair>
+      {data.insights.trackedSince && data.insights.months.length >= 2 && data.insights.months[0].month === "last30" ? (
+        <MonthlyPlayersCard data={data.insights} />
+      ) : null}
 
       <StatsRankChartPanel
         title={`${game.name} rank history`}

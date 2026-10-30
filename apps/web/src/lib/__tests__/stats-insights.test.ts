@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { DAY_MS, HOUR_MS, detectMilestones, monthlyPlayers, playersCalendar, passPriceAxis, scatterLabels, selectBadges, selectMovers, sessionEstimates, updateImpact, type DailyInsightRow, type HourlyInsightRow, type GenreScatter } from "../stats-insights";
+import { DAY_MS, HOUR_MS, monthlyPlayers, playersCalendar, passPriceAxis, scatterLabels, selectBadges, selectMovers, sessionEstimates, updateImpact, type DailyInsightRow, type HourlyInsightRow, type GenreScatter } from "../stats-insights";
 
 const now = Date.parse("2026-10-25T12:00:00Z");
 const daily = (date: string, extra: Partial<DailyInsightRow> = {}): DailyInsightRow => ({
-  stat_date: date, playing: 100, avg_playing: 100, peak_playing: 150, visits: 1e7, favorites: 1000,
+  stat_date: date, playing: 100, avg_playing: 100, peak_playing: 150, visits: 1e7,
   visit_delta: 14400, visits_start: 100000, visits_end: 114400, like_delta: 100, dislike_delta: 5,
   sample_count: 12, is_finalized: true, ...extra
 });
@@ -44,53 +44,6 @@ describe("monthly player history", () => {
     expect(result).toHaveLength(13);
     expect(result[1].month).toBe("2026-09");
     expect(result[result.length - 1]?.change).toBe(0);
-  });
-});
-
-describe("tracked milestones", () => {
-  it("does not invent crossings on first observation or repeat corrected counters", () => {
-    const rows = [daily("2026-10-01", { peak_playing: 1000, visits: 1900, favorites: 900 }),
-      daily("2026-10-02", { peak_playing: 1040, visits: 2100, favorites: 1001 }),
-      daily("2026-10-03", { peak_playing: 1200, visits: 1800, favorites: 900 }),
-      daily("2026-10-04", { peak_playing: 1210, visits: 2200, favorites: 1010 })];
-    const result = detectMilestones(rows);
-    expect(result).toHaveLength(3);
-    expect(result).toContainEqual({ date: "2026-10-03", kind: "peak", value: 1200 });
-    expect(result).toContainEqual({ date: "2026-10-02", kind: "visits", value: 2000 });
-    expect(result.every(r => r.date !== "2026-10-01")).toBe(true);
-  });
-  it.each([
-    [1.9e8, 2.1e8, 2e8], [4.9e8, 5.1e8, 5e8], [9e8, 1.1e9, 1e9], [1.9e9, 2.1e9, 2e9], [9.9e9, 10.1e9, 1e10],
-    [14.9e9, 15.1e9, 15e9], [99.9e9, 100.1e9, 1e11], [109.9e9, 110.1e9, 110e9]
-  ])("uses the wider visit threshold from %s to %s", (before, after, threshold) => {
-    const result = detectMilestones([daily("2026-10-01", { visits: before }), daily("2026-10-02", { visits: after })]);
-    expect(result).toEqual([{ date: "2026-10-02", kind: "visits", value: threshold }]);
-  });
-  it("ignores half-billion crossings and includes first daily rank achievements", () => {
-    const result = detectMilestones([daily("2026-10-01", { visits: 1.4e9 }), daily("2026-10-02", { visits: 1.6e9 })], "2026-10-04", "2026-10-03");
-    expect(result.map(row => row.kind)).toEqual(["top1", "top10"]);
-  });
-  it("does not fill MM2's timeline with 29.5B–31.8B half-billion steps", () => {
-    const rows = [29.5, 30, 30.5, 31, 31.5, 31.8].map((visits, index) =>
-      daily(`2026-10-${String(index + 1).padStart(2, '0')}`, { visits: visits * 1e9 }));
-    expect(detectMilestones(rows)).toEqual([{ date: "2026-10-02", kind: "visits", value: 30e9 }]);
-  });
-  it("keeps at most two visits and two favorites without crowding out ranks or player peaks", () => {
-    const rows = Array.from({ length: 7 }, (_, index) => daily(`2026-10-${String(index + 1).padStart(2, '0')}`, {
-      visits: (index + 1) * 5e9, favorites: (index + 1) * 1e9, peak_playing: index === 6 ? 2000 : 1000
-    }));
-    const result = detectMilestones(rows, "2026-10-05", "2026-10-04");
-    expect(result).toHaveLength(6);
-    expect(result.filter(row => row.kind === "visits").map(row => row.value)).toEqual([35e9, 30e9]);
-    expect(result.filter(row => row.kind === "favorites")).toHaveLength(2);
-    expect(result.some(row => row.kind === "peak")).toBe(true);
-    expect(result.some(row => row.kind === "top1")).toBe(true);
-    expect(result.map(row => row.date)).toEqual(result.map(row => row.date).sort().reverse());
-  });
-  it("keeps at most six, newest first", () => {
-    const rows = Array.from({ length: 10 }, (_, i) => daily(`2026-10-${String(i + 1).padStart(2, '0')}`, { peak_playing: 1000 * (i + 1) }));
-    expect(detectMilestones(rows)).toHaveLength(6);
-    expect(detectMilestones(rows)[0].date).toBe("2026-10-10");
   });
 });
 
