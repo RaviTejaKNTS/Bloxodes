@@ -1,0 +1,341 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/1-blade-slayer.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/1-unlimited-world-infinite-city.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/anime-evolution-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/battle-pets-td.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/brookhaven-rp.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/color-block-but-lava.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/demon-blade-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/dropper-incremental-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/elemental-dungeon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/fire-force-online.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/fish-and-fight.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/flying-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/goal-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/heroes-online.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/heroes-online-2.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/hit-hoop-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/horror-rng.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/horse-race-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/huzz-rng.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/ice-factory-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/murder-mystery-3.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/murder-mystery-4.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/murder-mystery-x.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/nft-paradise.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/oh-my-pet.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/oil-warfare-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/plane-race.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/pogo-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/power-simulator-2.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/punch-wall-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/reborn-as-swordman.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/ro-ghoul-codes-for-april-2026-free-yen-masks.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/sandwich-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/skateboard-race-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/squid-game-o.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/squid-game-season-2.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/super-power-grinding-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/super-treehouse-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/sword-fighters-2-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/volleyball-zero.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/weak-legacy.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/codes",
+      "contains": "Codes"
+    }
+  ],
+  "events": [
+    {
+      "type": "code",
+      "slug": "1-blade-slayer"
+    },
+    {
+      "type": "code",
+      "slug": "1-unlimited-world-infinite-city"
+    },
+    {
+      "type": "code",
+      "slug": "anime-evolution-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "battle-pets-td"
+    },
+    {
+      "type": "code",
+      "slug": "brookhaven-rp"
+    },
+    {
+      "type": "code",
+      "slug": "color-block-but-lava"
+    },
+    {
+      "type": "code",
+      "slug": "demon-blade-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "dropper-incremental-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "elemental-dungeon"
+    },
+    {
+      "type": "code",
+      "slug": "fire-force-online"
+    },
+    {
+      "type": "code",
+      "slug": "fish-and-fight"
+    },
+    {
+      "type": "code",
+      "slug": "flying-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "goal-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "heroes-online"
+    },
+    {
+      "type": "code",
+      "slug": "heroes-online-2"
+    },
+    {
+      "type": "code",
+      "slug": "hit-hoop-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "horror-rng"
+    },
+    {
+      "type": "code",
+      "slug": "horse-race-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "huzz-rng"
+    },
+    {
+      "type": "code",
+      "slug": "ice-factory-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "murder-mystery-3"
+    },
+    {
+      "type": "code",
+      "slug": "murder-mystery-4"
+    },
+    {
+      "type": "code",
+      "slug": "murder-mystery-x"
+    },
+    {
+      "type": "code",
+      "slug": "nft-paradise"
+    },
+    {
+      "type": "code",
+      "slug": "oh-my-pet"
+    },
+    {
+      "type": "code",
+      "slug": "oil-warfare-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "plane-race"
+    },
+    {
+      "type": "code",
+      "slug": "pogo-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "power-simulator-2"
+    },
+    {
+      "type": "code",
+      "slug": "punch-wall-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "reborn-as-swordman"
+    },
+    {
+      "type": "code",
+      "slug": "ro-ghoul-codes-for-april-2026-free-yen-masks"
+    },
+    {
+      "type": "code",
+      "slug": "sandwich-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "skateboard-race-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "squid-game-o"
+    },
+    {
+      "type": "code",
+      "slug": "squid-game-season-2"
+    },
+    {
+      "type": "code",
+      "slug": "super-power-grinding-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "super-treehouse-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "sword-fighters-2-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "volleyball-zero"
+    },
+    {
+      "type": "code",
+      "slug": "weak-legacy"
+    }
+  ]
+}
