@@ -29,7 +29,7 @@ Bloxodes is a gaming guide site at https://bloxodes.com. It started with Roblox 
 | Machine | Role |
 | --- | --- |
 | Hostinger VPS | Production: website, self-hosted Supabase, stats worker and most data refresh cron jobs. |
-| Homelab (Linux) | Article automation (systemd timers). Sole source of env files. Main checkout. |
+| Homelab (Linux) | Article topic discovery and site-health monitor (systemd timers). Sole source of env files. Main checkout. |
 | MacBook Pro | T3 Code. Runs the nightly Roblox wiki and other-games schedules. |
 | MacBook Air | Owner's laptop. Has the only Cockpit checkout (device administration). |
 | GitHub Actions | PR checks, web deploys, schema releases, content publication, new codes pages. |
@@ -41,7 +41,7 @@ See [machines](infrastructure/machines.md) for access and [schedules](automation
 
 | Work | Runs on | Trigger |
 | --- | --- | --- |
-| Articles | Homelab | systemd timers, 4 times a day |
+| Articles | MacBook Pro (Content Factory); topics from homelab | T3 schedule every 6 hours; homelab discovery 4 times a day |
 | New codes pages | GitHub Actions | `discover-beebom-codes.yml` and `generate-queue.yml` schedules |
 | Codes updates | VPS | cron, 4 times a day |
 | Roblox wiki and collections | MacBook Pro | Content Factory T3 schedule, 02:30 IST |

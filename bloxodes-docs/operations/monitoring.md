@@ -7,7 +7,7 @@ Last verified: 2026-10-19
 | Endpoint | Checks |
 | --- | --- |
 | `/api/health?scope=deploy` | Live build SHA and database. Used by the Docker health check and deploys. Light and fast. |
-| `/api/health` | Full operational health, including stats freshness (for example WARM refresh outcomes and overdue ratios). Can be unhealthy while the site is fine. |
+| `/api/health` | Full operational health, including stats freshness (for example WARM refresh outcomes and overdue ratios). Can be unhealthy while the site is fine. `warm_refresh_outcome_6h` looks back 7 hours, because WARM runs every 6 hours and can wait 30 minutes for its lock; COLD looks back 6 hours. |
 
 ## Alerts
 
@@ -23,7 +23,7 @@ Automation reports problems as GitHub issues labeled `incident`, not Telegram. T
 | --- | --- |
 | Did a VPS job really work? | `stats_job_runs` in production. Wrapper state files under the worker's `state/` can say "success" for a skipped job. |
 | Is the cache draining? | `revalidation_events`, `cache_warm_events` and their `*_worker_runs` tables. |
-| Did an article publish? | The homelab `tmp/article-publication/health.json` and the queue row in managed development. |
+| Did an article publish? | The MacBook Pro checkout's `tmp/article-publication/health.json` and the queue row in managed development. |
 | What's deployed? | `/api/health?scope=deploy`, or the Dokploy service image. |
 | Is a nightly T3 run done? | The T3 scheduler and the Notion queue row's status and Run report. |
 
@@ -31,7 +31,6 @@ Automation reports problems as GitHub issues labeled `incident`, not Telegram. T
 
 Keep this list current: add failures when you find them, remove them when fixed.
 
-- **New codes pages and PR review:** moved from OpenAI to Claude Haiku on 2026-10-24; both fail until `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN` is added to GitHub. See [codes](../content/codes.md#known-issues).
 - **Music IDs:** Roblox Creator Store returns HTTP 500.
 - **Universe stats:** the daily rollup falls back to universe chunks after its full pass times out. The hourly prune was fixed on 2026-10-24; watch for `partial` runs. See [stats](../content/stats.md#known-issues).
 - **Item stats:** recovering from the bundle-key failures fixed on 2026-10-24; the audit is partial until overdue items drop under 5%. See [data refreshes](../content/data-refreshes.md#known-issues-2026-10-19).

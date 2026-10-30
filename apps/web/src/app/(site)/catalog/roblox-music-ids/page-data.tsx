@@ -1,3 +1,5 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { applyMusicSort } from "@/lib/catalog-id-sorts";
 import { hasCatalogGameMappings } from "@/lib/catalog-game-source";
 import Link from "next/link";
@@ -341,7 +343,7 @@ async function loadMusicIdsPage(
 
     const searchTerm = normalizeSearchQuery(options?.search);
     if (searchTerm) {
-      const pattern = buildLoosePattern(searchTerm);
+      const pattern = quotePostgrestPattern(buildLoosePattern(searchTerm));
       const orParts = [
         `title.ilike.${pattern}`,
         `artist.ilike.${pattern}`,
@@ -477,7 +479,7 @@ export async function loadGameMusicIdsPageData(
 
     const searchTerm = normalizeSearchQuery(options?.search);
     if (searchTerm) {
-      const pattern = buildLoosePattern(searchTerm);
+      const pattern = quotePostgrestPattern(buildLoosePattern(searchTerm));
       const orParts = [
         `title.ilike.${pattern}`,
         `artist.ilike.${pattern}`,
@@ -624,7 +626,7 @@ export function buildMusicItemListSchema({
   return JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: title,
+    name: catalogIdTitle(title),
     description,
     url,
     numberOfItems: total,
@@ -658,7 +660,7 @@ export function buildSimpleItemListSchema({
   return JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: title,
+    name: catalogIdTitle(title),
     description,
     url,
     numberOfItems: items.length,
@@ -759,7 +761,7 @@ export function renderRobloxMusicIdsPage({
   const updatedRelativeLabel = formatRelativeDate(updatedDate);
   const canonicalPath = currentPage > 1 ? `${BASE_PATH}/page/${currentPage}` : BASE_PATH;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
+  const pageTitle = catalogIdTitle(currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle);
   const description = CATALOG_DESCRIPTION;
   const image = `${SITE_URL}/Bloxodes.png`;
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
@@ -826,13 +828,13 @@ export function renderRobloxMusicIdsPage({
       {showHero ? (
         <header className="space-y-4">
           <MusicBreadcrumb items={breadcrumbNavItems} />
-          <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
+          <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(baseTitle)}</h1>
           <UpdatedTimestamp value={updatedDate} />
         </header>
       ) : (
         <header className="space-y-2">
           <MusicBreadcrumb items={breadcrumbNavItems} />
-          <h1 className="text-3xl font-semibold text-foreground">{baseTitle}</h1>
+          <h1 className="text-3xl font-semibold text-foreground">{catalogIdTitle(baseTitle)}</h1>
           <p className="text-sm text-muted">Page {currentPage} of {totalPages}</p>
         </header>
       )}

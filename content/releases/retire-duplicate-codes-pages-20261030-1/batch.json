@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/1-blade-slayer.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/1-unlimited-world-infinite-city.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/anime-evolution-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/battle-pets-td.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/brookhaven-rp.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/color-block-but-lava.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/demon-blade-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/dropper-incremental-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/elemental-dungeon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/fire-force-online.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/fish-and-fight.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/flying-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/goal-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/heroes-online.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/codes",
+      "contains": "Codes"
+    }
+  ],
+  "events": [
+    {
+      "type": "code",
+      "slug": "1-blade-slayer"
+    },
+    {
+      "type": "code",
+      "slug": "1-unlimited-world-infinite-city"
+    },
+    {
+      "type": "code",
+      "slug": "anime-evolution-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "battle-pets-td"
+    },
+    {
+      "type": "code",
+      "slug": "brookhaven-rp"
+    },
+    {
+      "type": "code",
+      "slug": "color-block-but-lava"
+    },
+    {
+      "type": "code",
+      "slug": "demon-blade-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "dropper-incremental-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "elemental-dungeon"
+    },
+    {
+      "type": "code",
+      "slug": "fire-force-online"
+    },
+    {
+      "type": "code",
+      "slug": "fish-and-fight"
+    },
+    {
+      "type": "code",
+      "slug": "flying-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "goal-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "heroes-online"
+    }
+  ]
+}

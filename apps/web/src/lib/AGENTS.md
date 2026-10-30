@@ -53,6 +53,7 @@ The shared schema is applied in managed development and production. Roblox keeps
 ## Shared Utility Rules
 
 - Keep normalization, slug handling, and search parsing centralized.
+- User search text inside a PostgREST `.or()` string must go through `quotePostgrestPattern()` (`postgrest-search.ts`) after the LIKE pattern is built. Raw commas, brackets or quotes break the filter and return 500. Plain `.ilike()` calls don't need it.
 - Keep cross-client rules centralized. If the website, extension, and mobile app all show the same concept, add one helper here and make all clients use it.
 - Avoid duplicating canonical URL logic or SEO text assembly in page files.
 - Security and auth helpers should stay composable so API routes and auth routes can share them.

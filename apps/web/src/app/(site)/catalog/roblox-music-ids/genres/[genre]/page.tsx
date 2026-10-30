@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
@@ -16,11 +17,13 @@ import {
 
 export const revalidate = 21600;
 
-export const metadata: Metadata = {
-  title: `Genre Music IDs | ${SITE_NAME}`,
-  description: "Roblox music IDs filtered by genre.",
-  robots: { index: false, follow: true }
-};
+export function generateMetadata(): Metadata {
+  return {
+    title: catalogIdTitle(`Genre Music IDs | ${SITE_NAME}`),
+    description: "Roblox music IDs filtered by genre.",
+    robots: { index: false, follow: true }
+  };
+}
 
 type PageProps = {
   params: Promise<{ genre: string }>;
@@ -48,7 +51,7 @@ export default async function GenreMusicIdsPage({ params }: PageProps) {
   const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
   const canonicalPath = `${BASE_PATH}/genres/${genre.slug}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = `${genre.label} Roblox music IDs`;
+  const pageTitle = catalogIdTitle(`${genre.label} Roblox music IDs`);
   const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -92,7 +95,7 @@ export default async function GenreMusicIdsPage({ params }: PageProps) {
       <header className="space-y-4">
         <MusicBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-          {genre.label} Roblox music IDs
+          {catalogIdTitle(`${genre.label} Roblox music IDs`)}
         </h1>
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Every music ID tagged with {genre.label}, ready for quick copy and play.

@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "operations": [
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/power-simulator-2.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/punch-wall-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/reborn-as-swordman.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/ro-ghoul-codes-for-april-2026-free-yen-masks.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/sandwich-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/skateboard-race-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/squid-game-o.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/squid-game-season-2.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/super-power-grinding-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/super-treehouse-tycoon.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/sword-fighters-2-simulator.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/volleyball-zero.json"
+    },
+    {
+      "publisher": "roblox-codes-page",
+      "file": "codes/weak-legacy.json"
+    }
+  ],
+  "urls": [
+    {
+      "path": "/codes",
+      "contains": "Codes"
+    }
+  ],
+  "events": [
+    {
+      "type": "code",
+      "slug": "power-simulator-2"
+    },
+    {
+      "type": "code",
+      "slug": "punch-wall-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "reborn-as-swordman"
+    },
+    {
+      "type": "code",
+      "slug": "ro-ghoul-codes-for-april-2026-free-yen-masks"
+    },
+    {
+      "type": "code",
+      "slug": "sandwich-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "skateboard-race-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "squid-game-o"
+    },
+    {
+      "type": "code",
+      "slug": "squid-game-season-2"
+    },
+    {
+      "type": "code",
+      "slug": "super-power-grinding-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "super-treehouse-tycoon"
+    },
+    {
+      "type": "code",
+      "slug": "sword-fighters-2-simulator"
+    },
+    {
+      "type": "code",
+      "slug": "volleyball-zero"
+    },
+    {
+      "type": "code",
+      "slug": "weak-legacy"
+    }
+  ]
+}

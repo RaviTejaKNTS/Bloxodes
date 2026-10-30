@@ -1,3 +1,4 @@
+import { catalogIdTitle } from "@/lib/catalog-id-title";
 import { GameIdCard } from "../../GameIdCard";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
@@ -49,7 +50,7 @@ export function renderMusicGamesHub({ contentHtml }: { contentHtml: PageContentH
   const pageSchema = serializeJsonLd(webPageJsonLd({
     siteUrl: SITE_URL,
     slug: MUSIC_GAMES_PATH.replace(/^\//, ""),
-    title,
+    title: catalogIdTitle(title),
     description,
     image: `${SITE_URL}/Bloxodes.png`,
     author: null,
@@ -72,7 +73,7 @@ export function renderMusicGamesHub({ contentHtml }: { contentHtml: PageContentH
           { label: "Roblox Music IDs", href: BASE_PATH },
           { label: title, href: null }
         ]} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(title)}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
 
@@ -135,7 +136,7 @@ export function renderMusicGamePage({
   const pageSchema = serializeJsonLd(webPageJsonLd({
     siteUrl: SITE_URL,
     slug: path.replace(/^\//, ""),
-    title,
+    title: catalogIdTitle(title),
     description: game.description,
     image: songs[0]?.thumbnail_url || `${SITE_URL}/Bloxodes.png`,
     author: null,
@@ -160,7 +161,7 @@ export function renderMusicGamePage({
           { label: "Game Specific", href: MUSIC_GAMES_PATH },
           { label: title, href: null }
         ]} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{title}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{catalogIdTitle(title)}</h1>
         <UpdatedTimestamp value={updatedAt} />
       </header>
 
@@ -191,7 +192,7 @@ export function renderMusicGamePage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       {songs.length ? <script type="application/ld+json" dangerouslySetInnerHTML={{
         __html: buildMusicItemListSchema({
-          title,
+          title: catalogIdTitle(title),
           description: game.description,
           url: canonical,
           songs,

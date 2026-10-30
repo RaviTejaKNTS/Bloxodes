@@ -38,6 +38,22 @@ export function defaultCatalogTables() {
   };
 }
 
+// Split a PostgREST logic tree on top-level commas. A double-quoted value may
+// hold commas and brackets; PostgREST drops the quotes and one backslash layer.
+function logicTerms(expression) {
+  const terms = [];
+  let term = "", quoted = false;
+  for (let i = 0; i < expression.length; i += 1) {
+    const char = expression[i];
+    if (quoted && char === "\\") term += expression[++i] ?? "";
+    else if (char === '"') quoted = !quoted;
+    else if (char === "," && !quoted) { terms.push(term); term = ""; }
+    else term += char;
+  }
+  terms.push(term);
+  return terms;
+}
+
 function matches(row, column, expression) {
   const dot = expression.indexOf(".");
   const operator = expression.slice(0, dot);
@@ -51,8 +67,16 @@ function matches(row, column, expression) {
     case "gte": return actual != null && Number(actual) >= Number(value);
     case "lte": return actual != null && Number(actual) <= Number(value);
     case "ilike": {
-      const pattern = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/%/g, ".*").replace(/_/g, ".");
-      return new RegExp(`^${pattern}$`, "i").test(String(actual ?? ""));
+      // LIKE semantics: % and _ are wildcards, a backslash makes the next character literal.
+      let pattern = "";
+      for (let i = 0; i < value.length; i += 1) {
+        const char = value[i];
+        if (char === "\\" && i + 1 < value.length) pattern += value[++i].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        else if (char === "%") pattern += ".*";
+        else if (char === "_") pattern += ".";
+        else pattern += char.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      }
+      return new RegExp(`^${pattern}$`, "is").test(String(actual ?? ""));
     }
     case "ov": return value.replace(/[{}]/g, "").split(",").some(item => actual?.includes(item));
     case "cs": return value.replace(/[{}]/g, "").split(",").every(item => actual?.includes(item));
@@ -65,7 +89,7 @@ export function queryCatalog(tableRows, params) {
   for (const [column, expression] of params) {
     if (["select", "order", "limit", "offset"].includes(column)) continue;
     if (column === "or") {
-      const terms = expression.replace(/^\(|\)$/g, "").split(",");
+      const terms = logicTerms(expression.replace(/^\(|\)$/g, ""));
       rows = rows.filter(row => terms.some(term => {
         const dot = term.indexOf(".");
         return matches(row, term.slice(0, dot), term.slice(dot + 1));

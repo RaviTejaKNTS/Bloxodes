@@ -48,3 +48,25 @@ describe("evaluateStatsPipelineHealth", () => {
     expect(evaluateStatsPipelineHealth(value, now).status).toBe("unhealthy");
   });
 });
+
+describe("WARM refresh grace window", () => {
+  it("keeps the existing check key and explains the seven-hour window", () => {
+    const result = evaluateStatsPipelineHealth(snapshot(), now);
+    expect(result.checks.find((entry) => entry.name === "warm_refresh_outcome_6h")).toMatchObject({
+      status: "pass",
+      expectation: expect.stringContaining("in 7 hours")
+    });
+  });
+
+  it.each([
+    {},
+    { started: 0, rows_succeeded: 0 },
+    { started: 1, rows_succeeded: 0 },
+    { started: 0, rows_succeeded: 10 }
+  ])("fails without both a start and successful rows in the RPC window: %j", (warm) => {
+    const value = snapshot();
+    value.recent_refresh_runs.stats_refresh_warm = warm;
+    const result = evaluateStatsPipelineHealth(value, now);
+    expect(result.failures.map((entry) => entry.name)).toContain("warm_refresh_outcome_6h");
+  });
+});

@@ -1,6 +1,7 @@
 import "server-only";
 import type { StatsGameInsights, Mover, CalendarDay } from "@/lib/stats-insights";
 import { loadStatsGameInsights, loadWeeklyMovers, loadPlayersCalendar } from "@/lib/stats-insight-loaders";
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { isUsefulRelatedRobloxGame } from "@/lib/roblox-related-games";
 import { formatAgeRating } from "@/lib/age-rating";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -1639,7 +1640,7 @@ async function listBaseGames(options: {
     .not("slug", "is", null);
 
   if (options.q?.trim()) {
-    const pattern = `%${options.q.trim().replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+    const pattern = quotePostgrestPattern(`%${options.q.trim().replace(/[\\%_]/g, (char) => `\\${char}`)}%`);
     indexQuery = indexQuery.or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`);
   }
 
@@ -1717,7 +1718,7 @@ async function listBaseGames(options: {
   }
 
   if (options.q?.trim()) {
-    const pattern = `%${options.q.trim().replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+    const pattern = quotePostgrestPattern(`%${options.q.trim().replace(/[\\%_]/g, (char) => `\\${char}`)}%`);
     query = query.or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`);
   }
 
@@ -2192,7 +2193,7 @@ export async function listStatsItems(input: {
   }
 
   if (q) {
-    const pattern = `%${q.replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+    const pattern = quotePostgrestPattern(`%${q.replace(/[\\%_]/g, (char) => `\\${char}`)}%`);
     const orParts = [
       `name.ilike.${pattern}`,
       `description.ilike.${pattern}`,
@@ -2489,7 +2490,7 @@ export async function listStatsCreators(input: {
     .select(selectColumns, { count: "exact" });
 
   if (q) {
-    const pattern = `%${q.replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+    const pattern = quotePostgrestPattern(`%${q.replace(/[\\%_]/g, (char) => `\\${char}`)}%`);
     query = query.or(`creator_name.ilike.${pattern},top_name.ilike.${pattern},top_display_name.ilike.${pattern}`);
   }
 

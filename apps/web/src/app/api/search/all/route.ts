@@ -1,3 +1,4 @@
+import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { statsUniverseSlug } from "@/lib/slug";
@@ -139,7 +140,7 @@ async function searchSiteFallback(query: string, limit: number, entityTypes: str
 async function searchStatsGames(query: string, limit: number, entityTypes: string[] | null): Promise<SearchRow[]> {
   if (entityTypes?.length && !entityTypes.includes("stats_game")) return [];
   const sb = supabaseAdmin();
-  const pattern = `%${escapeLike(query)}%`;
+  const pattern = quotePostgrestPattern(`%${escapeLike(query)}%`);
   const { data, error } = await sb
     .from("stats_game_current_index")
     .select("universe_id, slug, name, display_name, creator_name, genre_l1, genre, indexed_at, last_stats_refreshed_at, playing")
