@@ -67,3 +67,37 @@ describe("cachedStatsChart", () => {
     });
   });
 });
+
+
+it("bounds variable per-game keys and reloads an evicted answer", async () => {
+  const load = vi.fn(async () => "first");
+  await cachedStatsChart("eviction-first", load);
+  for (let i = 0; i < 2048; i++) await cachedStatsChart(`eviction:${i}`, async () => i);
+  await cachedStatsChart("eviction-first", load);
+  expect(load).toHaveBeenCalledTimes(2);
+});
+
+it("keeps a regularly refreshed key when newer keys fill the cache", async () => {
+  const time = clock();
+  const load = vi.fn(async () => "hot");
+  await cachedStatsChart("refreshed-hot", load, 1000, time.now);
+  for (let i = 0; i < 1000; i++) await cachedStatsChart(`refresh-before:${i}`, async () => i);
+  time.advance(5000);
+  // Expired: serves the stale value and refreshes it in the background.
+  await cachedStatsChart("refreshed-hot", load, 1000, time.now);
+  await new Promise(resolve => setTimeout(resolve, 0));
+  for (let i = 0; i < 1500; i++) await cachedStatsChart(`refresh-after:${i}`, async () => i);
+  await expect(cachedStatsChart("refreshed-hot", load, 1000, time.now)).resolves.toBe("hot");
+  expect(load).toHaveBeenCalledTimes(2);
+});
+
+it("keeps a key that is read often while newer keys fill the cache", async () => {
+  const time = clock();
+  const load = vi.fn(async () => "read");
+  await cachedStatsChart("read-often", load, 60_000, time.now);
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 1000; j++) await cachedStatsChart(`read-filler:${i}:${j}`, async () => j);
+    await cachedStatsChart("read-often", load, 60_000, time.now);
+  }
+  expect(load).toHaveBeenCalledTimes(1);
+});

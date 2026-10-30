@@ -372,3 +372,14 @@ test("wiki passes have a daily worker refresh independent of stats tier freshnes
   assert.match(lines[0], /refresh:wiki-game-passes -- --allow-live/);
   assert.doesNotMatch(lines[0], /roblox-universe-refresh|enrich:universes:deep/);
 });
+
+test("daily badge and pass attachment refreshes share discovery capacity and explicit caps", () => {
+  const cron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
+  const badges = cron.split('\n').filter(line => line.includes(' stats-badges-refresh '));
+  assert.equal(badges.length, 1);
+  assert.match(badges[0], /^38 3 \* \* \*/);
+  assert.match(badges[0], /JOB_LOCK_GROUP=roblox-universe-discovery/);
+  assert.match(badges[0], /JOB_TIMEOUT_SECONDS=600/);
+  assert.match(badges[0], /refresh:stats-badges -- --allow-live/);
+  assert.match(cron.split('\n').find(line => line.includes(' wiki-game-passes-refresh '))!, /--include-hot/);
+});
