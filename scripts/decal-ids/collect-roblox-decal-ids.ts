@@ -86,6 +86,12 @@ function parseSeeds() {
   return defaultDecalQuerySeeds(parseCsv(process.env.ROBLOX_DECAL_QUERY_SEEDS, DEFAULT_QUERY_SEEDS));
 }
 
+class ToolboxSearchError extends Error {
+  constructor(readonly status: number, message: string) {
+    super(message);
+  }
+}
+
 async function fetchToolboxDecalPage(pageToken: string | null, config: CollectConfig): Promise<ToolboxResponse> {
   const params = new URLSearchParams({
     searchCategoryType: "Decal",
@@ -106,7 +112,7 @@ async function fetchToolboxDecalPage(pageToken: string | null, config: CollectCo
 
   if (!res.ok) {
     const body = await res.text().catch(() => "");
-    throw new Error(`Toolbox decal search failed (${res.status}): ${body.slice(0, 300)}`);
+    throw new ToolboxSearchError(res.status, `Toolbox decal search failed (${res.status}): ${body.slice(0, 300)}`);
   }
 
   return (await res.json()) as ToolboxResponse;
@@ -127,6 +133,7 @@ async function collect() {
   let totalInserted = 0;
   let totalAlreadyKnown = 0;
   let totalConfigs = 0;
+  let stoppedEarly: string | null = null;
 
   console.log(
     `Roblox decal discovery starting (${queries.length} queries, ${sortCategories.length} sort categories, max ${
@@ -134,11 +141,11 @@ async function collect() {
     } new assets)...`
   );
 
-  for (const sortDirection of sortDirections) {
+  discovery: for (const sortDirection of sortDirections) {
     for (const sortCategory of sortCategories) {
       for (const rawQuery of queries) {
         // Known candidates must not prevent later queries from finding new assets.
-        if (totalInserted >= maxAssets) break;
+        if (totalInserted >= maxAssets) break discovery;
         const query = rawQuery.trim();
         totalConfigs += 1;
         const label = query || "(empty)";
@@ -152,11 +159,22 @@ async function collect() {
           if (pageToken && seenTokens.has(pageToken)) break;
           if (pageToken) seenTokens.add(pageToken);
 
-          const payload = await fetchToolboxDecalPage(pageToken, {
-            query: query || null,
-            sortCategory,
-            sortDirection
-          });
+          let payload: ToolboxResponse;
+          try {
+            payload = await fetchToolboxDecalPage(pageToken, {
+              query: query || null,
+              sortCategory,
+              sortDirection
+            });
+          } catch (error) {
+            // Keep what was inserted and let verify and rerank run; the next day continues discovery.
+            if (error instanceof ToolboxSearchError && error.status === 429) {
+              stoppedEarly = "Roblox rate limited Toolbox search (429)";
+              console.warn(`  ${stoppedEarly}; stopping discovery early.`);
+              break discovery;
+            }
+            throw error;
+          }
           const assets = Array.isArray(payload.creatorStoreAssets) ? payload.creatorStoreAssets : [];
           if (!assets.length) break;
 
@@ -187,6 +205,8 @@ async function collect() {
           const skippedIds = new Set(insertResult.skippedAssetIds);
           await upsertSourceRows(sources.filter((source) => !skippedIds.has(source.asset_id)), { dryRun: DRY_RUN });
           totalDiscovered += rows.length;
+          // Roblox ignores the sort order, so a page with nothing unseen means later pages and sorts repeat it.
+          const exhausted = rows.length === 0;
           totalInserted += insertResult.inserted;
           totalAlreadyKnown += insertResult.existing;
           pageNumber += 1;
@@ -197,7 +217,7 @@ async function collect() {
           );
 
           pageToken = payload.nextPageToken ?? null;
-          if (!pageToken) break;
+          if (!pageToken || exhausted) break;
           await sleep(DELAY_MS);
         }
       }
@@ -205,7 +225,9 @@ async function collect() {
   }
 
   console.log(
-    `Done. Configs: ${totalConfigs}. Unique candidates this run: ${totalDiscovered}. Inserted: ${totalInserted}. Already known: ${totalAlreadyKnown}.`
+    `Done. Configs: ${totalConfigs}. Unique candidates this run: ${totalDiscovered}. Inserted: ${totalInserted}. Already known: ${totalAlreadyKnown}.${
+      stoppedEarly ? ` Stopped early: ${stoppedEarly}.` : ""
+    }`
   );
 }
 
