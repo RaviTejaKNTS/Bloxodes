@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { defaultDecalQuerySeeds } from "../shared/decal-discovery";
 
 import {
   TOOLBOX_SEARCH_API,
@@ -66,7 +67,7 @@ const DEFAULT_QUERY_SEEDS = [
   "green"
 ];
 
-const DEFAULT_SORT_CATEGORIES = ["Top", "Trending", "Ratings", "UpdatedTime", "CreateTime"];
+const DEFAULT_SORT_CATEGORIES = ["CreateTime", "Top", "Trending", "Ratings", "UpdatedTime"];
 const DEFAULT_SORT_DIRECTIONS = ["Descending"];
 
 type ToolboxResponse = {
@@ -82,7 +83,7 @@ type CollectConfig = {
 };
 
 function parseSeeds() {
-  return parseCsv(process.env.ROBLOX_DECAL_QUERY_SEEDS, DEFAULT_QUERY_SEEDS);
+  return defaultDecalQuerySeeds(parseCsv(process.env.ROBLOX_DECAL_QUERY_SEEDS, DEFAULT_QUERY_SEEDS));
 }
 
 async function fetchToolboxDecalPage(pageToken: string | null, config: CollectConfig): Promise<ToolboxResponse> {
@@ -130,13 +131,14 @@ async function collect() {
   console.log(
     `Roblox decal discovery starting (${queries.length} queries, ${sortCategories.length} sort categories, max ${
       Number.isFinite(maxAssets) ? maxAssets : "unlimited"
-    } assets)...`
+    } new assets)...`
   );
 
   for (const sortDirection of sortDirections) {
     for (const sortCategory of sortCategories) {
       for (const rawQuery of queries) {
-        if (totalDiscovered >= maxAssets) break;
+        // Known candidates must not prevent later queries from finding new assets.
+        if (totalInserted >= maxAssets) break;
         const query = rawQuery.trim();
         totalConfigs += 1;
         const label = query || "(empty)";
@@ -146,7 +148,7 @@ async function collect() {
         let pageNumber = 0;
         const seenTokens = new Set<string>();
 
-        while (pageNumber < MAX_PAGES_PER_QUERY && totalDiscovered < maxAssets) {
+        while (pageNumber < MAX_PAGES_PER_QUERY && totalInserted < maxAssets) {
           if (pageToken && seenTokens.has(pageToken)) break;
           if (pageToken) seenTokens.add(pageToken);
 
@@ -165,8 +167,7 @@ async function collect() {
               if (seenAssetIds.has(row.asset_id)) return false;
               seenAssetIds.add(row.asset_id);
               return true;
-            })
-            .slice(0, Math.max(0, maxAssets - totalDiscovered));
+            });
 
           const sources: DecalSourceRow[] = rows.map((row, index) => ({
             asset_id: row.asset_id,
@@ -182,8 +183,9 @@ async function collect() {
             last_seen_at: fetchedAt
           }));
 
-          const insertResult = await insertMissingDecalRows(rows, { dryRun: DRY_RUN });
-          await upsertSourceRows(sources, { dryRun: DRY_RUN });
+          const insertResult = await insertMissingDecalRows(rows, { dryRun: DRY_RUN, maxInserts: maxAssets - totalInserted });
+          const skippedIds = new Set(insertResult.skippedAssetIds);
+          await upsertSourceRows(sources.filter((source) => !skippedIds.has(source.asset_id)), { dryRun: DRY_RUN });
           totalDiscovered += rows.length;
           totalInserted += insertResult.inserted;
           totalAlreadyKnown += insertResult.existing;
