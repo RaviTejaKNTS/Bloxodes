@@ -73,7 +73,7 @@ All VPS stats and data jobs run in short-lived `bloxodes-stats-worker:production
 - `bin/run-job.sh` (`scripts/ops/vps-run-job.sh`) repeats the smoke before every job and falls back to `last-known-good` if needed. It also handles locks, timeouts, state files and logs under `/home/ravitejaknts/bloxodes-stats-worker/logs`.
 - Northflank rebuilds only when worker runtime paths change (Dockerfile, package manifests, `scripts/`, needed web source, `types/`, `data/`, `env/config.json`).
 
-The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is `814feb20538e2431ee27b1d35121e59e5eecb411` (promoted 2026-10-23).
+The worker runs separately from the website. Merging code doesn't update it until a new SHA is approved and built. The current pin is in `/home/ravitejaknts/bloxodes-stats-worker/approved-worker-sha` on the VPS, and the promoted image carries the same SHA in its `com.bloxodes.source-sha` label. Before changing the crontab, save a copy with `crontab -l` in `/home/ravitejaknts/bloxodes-stats-worker/crontab-backups/`.
 
 A worker change is done only when the Northflank build succeeds, one HOT run succeeds, the VPS image is promoted, and a VPS job plus index rebuild move production health forward.
 
