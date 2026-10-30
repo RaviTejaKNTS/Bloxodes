@@ -1,3 +1,4 @@
+import { isRetiredMusicGameCatalogUrl } from "@/lib/game-specific-id-pages";
 import { quotePostgrestPattern } from "@/lib/postgrest-search";
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -235,6 +236,7 @@ function mergeAndRankRows(query: string, rows: SearchRow[], entityTypes: string[
 
   for (const row of rows) {
     if (entityTypes?.length && !entityTypes.includes(row.entity_type)) continue;
+    if (isRetiredMusicGameCatalogUrl(row.url)) continue;
     const key = rowKey(row);
     const current = merged.get(key);
     if (!current || rankSearchRow(row, query) < rankSearchRow(current, query)) {

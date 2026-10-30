@@ -228,3 +228,12 @@ export function decalGameCatalogCode(slug: string): string {
 export function isRetiredMusicGameCatalogCode(code: string): boolean {
   return code.trim() === "roblox-music-ids/games/work-at-a-pizza-place";
 }
+
+// Search rows carry absolute or relative URLs; match the retired page and anything under it.
+export function isRetiredMusicGameCatalogUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  const path = url.trim().replace(/^https?:\/\/[^/]+/i, "").split(/[?#]/)[0].replace(/\/+$/, "");
+  if (!path.startsWith("/catalog/")) return false;
+  const code = path.slice("/catalog/".length);
+  return isRetiredMusicGameCatalogCode(code) || code.startsWith("roblox-music-ids/games/work-at-a-pizza-place/");
+}

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { createRequire } from "node:module";
-import { getMusicGameIdPage, isRetiredMusicGameCatalogCode, MUSIC_GAME_ID_PAGES } from "../game-specific-id-pages";
+import { getMusicGameIdPage, isRetiredMusicGameCatalogCode, isRetiredMusicGameCatalogUrl, MUSIC_GAME_ID_PAGES } from "../game-specific-id-pages";
 
 vi.mock("@/lib/public-content-cache", () => ({ publicContentCache: (fn: unknown) => fn }));
 const mocks = vi.hoisted(() => ({ admin: vi.fn() }));
@@ -15,6 +15,14 @@ describe("retired music game", () => {
     expect(MUSIC_GAME_ID_PAGES.some(page => page.slug === "work-at-a-pizza-place")).toBe(false);
     expect(isRetiredMusicGameCatalogCode(retiredCode)).toBe(true);
     expect(isRetiredMusicGameCatalogCode("roblox-music-ids/games/a-dusty-trip")).toBe(false);
+  });
+
+  it("drops the retired page from search results by URL", () => {
+    expect(isRetiredMusicGameCatalogUrl("/catalog/roblox-music-ids/games/work-at-a-pizza-place")).toBe(true);
+    expect(isRetiredMusicGameCatalogUrl("https://bloxodes.com/catalog/roblox-music-ids/games/work-at-a-pizza-place/?q=1")).toBe(true);
+    expect(isRetiredMusicGameCatalogUrl("/catalog/roblox-music-ids/games/work-at-a-pizza-place/page/2")).toBe(true);
+    expect(isRetiredMusicGameCatalogUrl("/catalog/roblox-music-ids/games/a-dusty-trip")).toBe(false);
+    expect(isRetiredMusicGameCatalogUrl("/codes/work-at-a-pizza-place")).toBe(false);
   });
 
   it("permanently redirects the old page and its descendants", async () => {
